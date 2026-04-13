@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison JF | Desde 1994</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dourado: #C9A227;
+            --esmeralda: #0A4D3C;
+            --marfim: #F5F1E8;
+            --preto: #0A0A0A;
+            --dourado-claro: #E8D5A3;
+            --vermelho-urgencia: #8B2635;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--marfim);
+            color: var(--preto);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .aura-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .aura {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .aura-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--dourado) 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+        }
+
+        .aura-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--esmeralda) 0%, transparent 70%);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -12s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, -15px) scale(1.05); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .top-bar {
+            background: var(--esmeralda);
+            color: var(--marfim);
+            text-align: center;
+            padding: 12px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin: 30px 0 40px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: var(--esmeralda);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding-bottom: 4px;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--dourado);
+            border-bottom-color: var(--dourado);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .since-badge {
+            display: inline-block;
+            border: 1px solid var(--dourado);
+            padding: 8px 20px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--dourado);
+            margin-bottom: 24px;
+        }
+
+        .symbolo {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 24px;
+            border: 1px solid var(--dourado);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        .symbolo::before {
+            content: '✦';
+            font-size: 36px;
+            color: var(--dourado);
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(201, 162, 39, 0.4); }
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--esmeralda);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .credentials {
+            font-size: 0.85rem;
+            color: rgba(10, 10, 10, 0.7);
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .stars {
+            color: var(--dourado);
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
+        }
+
+        .section {
+            margin-bottom: 70px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--dourado);
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: rgba(10, 10, 10, 0.6);
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .story-section {
+            background: white;
+            padding: 50px 40px;
+            margin: 50px 0;
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            position: relative;
+        }
+
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--dourado), var(--esmeralda));
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .story-text h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--esmeralda);
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .story-text p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: rgba(10, 10, 10, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .story-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--dourado);
+            line-height: 1.5;
+            padding: 24px;
+            border-left: 2px solid var(--dourado);
+            margin: 30px 0;
+            background: rgba(201, 162, 39, 0.03);
+        }
+
+        .imperfection-note {
+            font-size: 0.85rem;
+            color: rgba(10, 10, 10, 0.6);
+            font-style: italic;
+            margin-top: 20px;
+            padding: 16px;
+            border: 1px dashed rgba(201, 162, 39, 0.3);
+            background: rgba(245, 241, 232, 0.5);
+        }
+
+        .experience-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--preto);
+            color: var(--marfim);
+            padding: 16px 28px;
+            margin-top: 20px;
+        }
+
+        .experience-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--dourado);
+            line-height: 1;
+        }
+
+        .experience-text {
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            padding: 28px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(10, 10, 10, 0.1);
+        }
+
+        .badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 6px 12px;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .badge-limited {
+            background: var(--vermelho-urgencia);
+            color: white;
+        }
+
+        .badge-bestseller {
+            background: var(--dourado);
+            color: var(--preto);
+        }
+
+        .badge-fresh {
+            background: var(--esmeralda);
+            color: white;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #f5f1e8 0%, #ebe5d8 100%);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            opacity: 0.6;
+        }
+
+        .product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .product-details {
+            font-size: 0.8rem;
+            color: var(--esmeralda);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: rgba(10, 10, 10, 0.7);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .lot-info {
+            font-size: 0.75rem;
+            color: rgba(10, 10, 10, 0.5);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .mini-testimonial {
+            background: rgba(201, 162, 39, 0.05);
+            border-left: 2px solid var(--dourado);
+            padding: 12px 16px;
+            margin: 16px 0;
+            font-size: 0.8rem;
+            font-style: italic;
+            color: rgba(10,10,10,0.8);
+            line-height: 1.4;
+        }
+
+        .mini-testimonial-author {
+            font-size: 0.75rem;
+            color: var(--esmeralda);
+            margin-top: 6px;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            color: var(--preto);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .price-note {
+            font-size: 0.8rem;
+            color: rgba(10, 10, 10, 0.5);
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .btn-order {
+            width: 100%;
+            padding: 14px;
+            background: var(--dourado);
+            border: none;
+            color: var(--preto);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-order:hover {
+            background: var(--esmeralda);
+            color: white;
+        }
+
+        .services-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .service-card {
+            background: white;
+            border-left: 3px solid var(--dourado);
+            padding: 28px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            background: rgba(245, 241, 232, 0.5);
+            padding-left: 32px;
+        }
+
+        .service-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .service-time {
+            font-size: 0.8rem;
+            color: var(--esmeralda);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .next-slot {
+            font-size: 0.75rem;
+            color: var(--vermelho-urgencia);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            color: rgba(10, 10, 10, 0.7);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .service-testimonial {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: rgba(10,10,10,0.7);
+            padding-left: 16px;
+            border-left: 2px solid rgba(201,162,39,0.3);
+        }
+
+        .service-price {
+            text-align: right;
+        }
+
+        .btn-service {
+            padding: 12px 28px;
+            background: var(--esmeralda);
+            color: white;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-service:hover {
+            background: var(--dourado);
+            color: var(--preto);
+        }
+
+        .sos-section {
+            background: var(--preto);
+            color: var(--marfim);
+            padding: 50px 40px;
+            margin: 50px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .sos-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(201, 162, 39, 0.1) 0%, transparent 70%);
+        }
+
+        .sos-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .sos-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .sos-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+            color: var(--dourado);
+            letter-spacing: 2px;
+        }
+
+        .sos-section p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto 24px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .sos-testimonial {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            margin: 24px auto;
+            max-width: 450px;
+            font-style: italic;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-left: 2px solid var(--dourado);
+        }
+
+        .sos-price {
+            font-size: 1.5rem;
+            color: var(--dourado);
+            margin-bottom: 24px;
+        }
+
+        .testimonials-page {
+            background: white;
+            padding: 50px 40px;
+            margin: 40px 0;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: var(--marfim);
+            padding: 28px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            color: var(--dourado);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .testimonial-stars {
+            color: var(--dourado);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--preto);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .testimonial-product {
+            font-size: 0.75rem;
+            color: var(--esmeralda);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--dourado), var(--esmeralda));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .author-info h4 {
+            font-size: 0.9rem;
+            color: var(--preto);
+            margin-bottom: 2px;
+        }
+
+        .author-info p {
+            font-size: 0.75rem;
+            color: rgba(10,10,10,0.5);
+        }
+
+        .verified-badge {
+            color: var(--esmeralda);
+            font-size: 0.8rem;
+            margin-left: 4px;
+        }
+
+        .newsletter {
+            background: linear-gradient(135deg, #f0ebe3 0%, var(--marfim) 100%);
+            padding: 50px 32px;
+            text-align: center;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .newsletter h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .newsletter p {
+            font-size: 0.9rem;
+            color: rgba(10, 10, 10, 0.7);
+            margin-bottom: 24px;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 16px 24px;
+            border: 1px solid rgba(10, 77, 60, 0.2);
+            background: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .btn-member {
+            padding: 16px 32px;
+            background: var(--esmeralda);
+            color: white;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-member:hover {
+            background: var(--dourado);
+            color: var(--preto);
+        }
+
+        .footer {
+            text-align: center;
+            padding-top: 50px;
+            border-top: 1px solid rgba(201, 162, 39, 0.2);
+            margin-top: 60px;
+        }
+
+        .personal-touch {
+            background: white;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .personal-touch p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(10, 10, 10, 0.8);
+            font-style: italic;
+        }
+
+        .personal-touch .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--dourado);
+            margin-top: 16px;
+            letter-spacing: 2px;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            text-align: center;
+            font-size: 0.75rem;
+            color: rgba(10,10,10,0.6);
+        }
+
+        .trust-icon {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .contact-info {
+            margin-bottom: 24px;
+        }
+
+        .contact-info p {
+            font-size: 0.9rem;
+            color: rgba(10, 10, 10, 0.7);
+            margin-bottom: 8px;
+        }
+
+        .contact-info a {
+            color: var(--esmeralda);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 24px;
+        }
+
+        .social-links a {
+            color: var(--esmeralda);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--dourado);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; letter-spacing: 4px; }
+            .story-grid { grid-template-columns: 1fr; gap: 30px; }
+            .service-card { grid-template-columns: 1fr; text-align: center; }
+            .service-price { text-align: center; }
+            .newsletter-form { flex-direction: column; }
+            .testimonials-page { padding: 30px 20px; }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        Envio grátis em compras acima de €50 • Embalagens de oferta disponíveis
+    </div>
+
+    <div class="aura-container">
+        <div class="aura aura-1"></div>
+        <div class="aura aura-2"></div>
+    </div>
+
+    <div class="container">
+        <nav class="nav fade-in">
+            <a href="#historia">A Maison</a>
+            <a href="#produtos">Produtos</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#testemunhos">Testemunhos</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+
+        <div class="hero fade-in">
+            <div class="since-badge">Desde 1994</div>
+            <div class="symbolo"></div>
+            <h1>Maison JF</h1>
+            <p class="tagline">A ponte entre o sensorial e o humano</p>
+            
+            <div class="stars">★★★★★</div>
+            <p class="credentials">
+                32 anos de dedicação • Milhares de histórias ouvidas • Feito à mão, de pessoa para pessoa
+            </p>
+        </div>
+
+        <section id="historia" class="story-section fade-in">
+            <div class="section-header" style="margin-bottom: 30px;">
+                <h2 class="section-title">A Nossa História</h2>
+            </div>
+
+            <div class="story-grid">
+                <div class="story-text">
+                    <h3>O início</h3>
+                    <p>
+                        Comecei em 1994. Tinha um baralho de tarot e a certeza de que queria 
+                        ajudar pessoas a entenderem-se melhor. Não fazia ideia de onde isto 
+                        me ia levar.
+                    </p>
+                    <p>
+                        Durante 32 anos, atendi milhares de pessoas. Ouvi milhares de histórias. 
+                        Trabalhei numa casa abrigo para vítimas de violência doméstica. 
+                        Vi de perto o que significa reconstruir a partir do nada. Isso mudou-me para sempre.
+                    </p>
+                    <p>
+                        Cada pessoa que encontrei deixou algo em mim — uma lição, 
+                        uma forma de ver o mundo, uma razão para continuar.
+                    </p>
+
+                    <div class="experience-badge">
+                        <div class="experience-number">32</div>
+                        <div class="experience-text">
+                            ANOS A<br>
+                            CONSTRUIR PONTES
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-text">
+                    <h3>A ponte</h3>
+                    <div class="story-quote">
+                        "Queria criar algo que tocasse as pessoas de duas formas: 
+                        pelo cheiro, pela pele, pelo ritual — e pela conversa, 
+                        pelo acompanhamento, pela presença."
+                    </div>
+                    <p>
+                        A Maison JF é essa ponte. De um lado, os produtos que faço à mão — 
+                        velas, óleos, aromas. Do outro, as consultas, o tarot, o aconselhamento. 
+                        Tudo se conecta.
+                    </p>
+                    <p>
+                        Os produtos não são apenas produtos. São ferramentas de ritual, 
+                        de pausa, de cuidado. E as consultas não são apenas leituras. 
+                        São espaços de escuta, construídos em 32 anos de prática.
+                    </p>
+
+                    <div class="imperfection-note">
+                        ✋ Ainda queimo as mãos de vez em quando ao fazer velas. 
+                        Cada peça que sai daqui passou pelas minhas mãos — literalmente.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="produtos" class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">A Nossa Loja</h2>
+                <p class="section-subtitle">Feito à mão, em pequenos lotes, com intenção</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <span class="badge badge-bestseller">Mais Vendida</span>
+                    <div class="product-image">🕯️</div>
+                    <h3 class="product-name">Vela Aromática</h3>
+                    <p class="product-details">150g • Cera de coco + soja</p>
+                    <p class="product-desc">Queima limpa de 35 horas. Lavanda & Cedro, Laranja & Canela, ou Jasmim Noturno.</p>
+                    <p class="lot-info">Lote atual feito em abril de 2026</p>
+                    
+                    <div class="mini-testimonial">
+                        "Cheira a casa de quem se cuida. A minha favorita é a de lavanda, dura imenso."
+                        <div class="mini-testimonial-author">— Catarina, Lisboa</div>
+                    </div>
+                    
+                    <div class="price">€XX</div>
+                    <span class="price-note">ou 3 por €XX (envio grátis)</span>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Vela Aromática 150g" class="btn-order" target="_blank">Encomendar</a>
+                </div>
+
+                <div class="product-card">
+                    <span class="badge badge-limited">Só 4 restantes</span>
+                    <div class="product-image">🕯️</div>
+                    <h3 class="product-name">Vela de Massagem</h3>
+                    <p class="product-details">Manteiga karité • Óleo • Essências • Vitamina E</p>
+                    <p class="product-desc">Derrete em óleo quente para massagem. Nutre a pele como nenhum creme.</p>
+                    <p class="lot-info">Lote de março 2026 — próximo só em junho</p>
+                    
+                    <div class="mini-testimonial">
+                        "Comprei para o Dia dos Namorados e agora é ritual nosso. A pele fica incrível."
+                        <div class="mini-testimonial-author">— Inês & Miguel, Porto</div>
+                    </div>
+                    
+                    <div class="price">€XX</div>
+                    <span class="price-note">Últimas 4 unidades deste lote</span>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Vela de Massagem (urgente!)" class="btn-order" target="_blank">Encomendar</a>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">💧</div>
+                    <h3 class="product-name">Parfum d'Ambience</h3>
+                    <p class="product-details">20ml • Spray ambiente</p>
+                    <p class="product-desc">Perfuma instantaneamente. Frasco de bolsa para casa ou viagem.</p>
+                    <p class="lot-info">Fresco — feito esta semana</p>
+                    
+                    <div class="mini-testimonial">
+                        "Uso no carro, no escritório, na gaveta. É vício."
+                        <div class="mini-testimonial-author">— Sofia, 34 anos</div>
+                    </div>
+                    
+                    <div class="price">€XX</div>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Parfum d'Ambience 20ml" class="btn-order" target="_blank">Encomendar</a>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌿</div>
+                    <h3 class="product-name">Mikados</h3>
+                    <p class="product-details">50ml / 100ml / 250ml • Difusor de varetas</p>
+                    <p class="product-desc">Difusão contínua por 4-8 semanas. Ideal para casa de banho ou entrada.</p>
+                    <p class="lot-info">Encomenda sob demanda — faço fresco para ti</p>
+                    
+                    <div class="mini-testimonial">
+                        "O de 250ml na entrada dura meses. Toda a gente pergunta onde comprei."
+                        <div class="mini-testimonial-author">— Ana Rita, Cascais</div>
+                    </div>
+                    
+                    <div class="price">Desde €XX</div>
+                    <span class="price-note">50ml: €XX | 100ml: €XX | 250ml: €XX</span>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero saber preços dos Mikados" class="btn-order" target="_blank">Ver Preços</a>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">👜</div>
+                    <h3 class="product-name">Sachets Perfumados</h3>
+                    <p class="product-details">20g • Gavetas e guarda-roupas</p>
+                    <p class="product-desc">Roupa que cheira bem sem perfume. Ideal para malas de viagem e lingerie.</p>
+                    <p class="lot-info">Lote de abril 2026</p>
+                    
+                    <div class="mini-testimonial">
+                        "Pus na mala do meu marido quando viaja. Diz que cheira a casa."
+                        <div class="mini-testimonial-author">— Mariana, Aveiro</div>
+                    </div>
+                    
+                    <div class="price">€XX</div>
+                    <span class="price-note">ou pack 3 por €XX</span>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Sachets Perfumados" class="btn-order" target="_blank">Encomendar</a>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">✋</div>
+                    <h3 class="product-name">Óleo de Massagem</h3>
+                    <p class="product-details">60ml • Corporal</p>
+                    <p class="product-desc">Absorção média, não fica gorduroso. Pode usar-se também como óleo de banho.</p>
+                    <p class="lot-info">Fresco — validade 6 meses</p>
+                    
+                    <div class="mini-testimonial">
+                        "Uso nas pernas cansadas depois do ginásio. Melhor que qualquer creme de farmácia."
+                        <div class="mini-testimonial-author">— Joana, 29 anos</div>
+                    </div>
+                    
+                    <div class="price">€XX</div>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Óleo de Massagem 60ml" class="btn-order" target="_blank">Encomendar</a>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🦶</div>
+                    <h3 class="product-name">Escalda Pés</h3>
+                    <p class="product-details">150g • Sais minerais + ervas</p>
+                    <p class="product-desc">Para dias longos. Com hortelã-pimenta e eucalipto para circulação.</p>
+                    <p class="lot-info">Lote de abril 2026</p>
+                    
+                    <div class="mini-testimonial">
+                        "Domingo à noite é ritual sagrado. Netflix, chá e escalda pés da Maison."
+                        <div class="mini-testimonial-author">— Beatriz, Coimbra</div>
+                    </div>
+                    
+                    <div class="price">€XX</div>
+                    <span class="price-note">dá para 5-6 utilizações</span>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Escalda Pés 150g" class="btn-order" target="_blank">Encomendar</a>
+                </div>
+
+                <div class="product-card" style="opacity: 0.7;">
+                    <div class="product-image">✨</div>
+                    <h3 class="product-name">Cristais & Rituais</h3>
+                    <p class="product-details">Em preparação</p>
+                    <p class="product-desc">Kits de cristais limpos e programados, com guia de uso.</p>
+                    <p class="lot-info">Brevemente — em testes finais</p>
+                    <div class="price">—</div>
+                    <a href="#newsletter" class="btn-order" style="background: transparent; border: 1px solid var(--dourado);">Avia-me Quando Chegar</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicos" class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Consultas & Terapias</h2>
+                <p class="section-subtitle">32 anos de experiência ao teu serviço</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Tarot Expresso</h3>
+                        <p class="service-time">Até 17 minutos • Videochamada</p>
+                        <p class="next-slot">Próximas vagas: esta semana</p>
+                        <p class="service-desc">Uma pergunta, uma resposta direta. Ideal para decisões imediatas.</p>
+                        <div class="service-testimonial">
+                            "17 minutos e ficou tudo claro. Mais útil que horas a pensar em círculo."
+                        </div>
+                    </div>
+                    <div class="service-price">
+                        <div class="price">€XX</div>
+                        <a href="https://wa.me/351923318289?text=Olá! Quero marcar Tarot Expresso (17min)" class="btn-service" target="_blank">Marcar</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Tarot Integrativo</h3>
+                        <p class="service-time">Até 62 minutos • Videochamada</p>
+                        <p class="next-slot">Próximas vagas: próxima semana</p>
+                        <p class="service-desc">Panorama completo: amor, trabalho, espiritualidade. Vemos como as áreas se conectam.</p>
+                        <div class="service-testimonial">
+                            "Saí com um mapa. Já não me sinto perdida, sei por onde começar."
+                        </div>
+                    </div>
+                    <div class="service-price">
+                        <div class="price">€XX</div>
+                        <a href="https://wa.me/351923318289?text=Olá! Quero marcar Tarot Integrativo (62min)" class="btn-service" target="_blank">Marcar</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Tarot Terapêutico</h3>
+                        <p class="service-time">Até 62 minutos • Videochamada</p>
+                        <p class="next-slot">Marcação com 3-5 dias de antecedência</p>
+                        <p class="service-desc">Foco em cura emocional e padrões. Para entender o "porquê" das repetições.</p>
+                        <div class="service-testimonial">
+                            "Foi como terapia, mas mais direto. O JF tem uma forma de dizer as coisas que abre os olhos."
+                        </div>
+                    </div>
+                    <div class="service-price">
+                        <div class="price">€XX</div>
+                        <a href="https://wa.me/351923318289?text=Olá! Quero marcar Tarot Terapêutico (62min)" class="btn-service" target="_blank">Marcar</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Aconselhamento Holístico</h3>
+                        <p class="service-time">45-60 minutos • Sem cartas</p>
+                        <p class="next-slot">Horários flexíveis</p>
+                        <p class="service-desc">Conversa orientada sobre equilíbrio de vida, propósito, decisões maiores.</p>
+                        <div class="service-testimonial">
+                            "Precisava de alguém fora da minha vida para me espelhar. Foi exatamente isso."
+                        </div>
+                    </div>
+                    <div class="service-price">
+                        <div class="price">€XX</div>
+                        <a href="https://wa.me/351923318289?text=Olá! Quero saber mais sobre Aconselhamento Holístico" class="btn-service" target="_blank">Saber Mais</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Acompanhamento Permanente</h3>
+                        <p class="service-time">Programa mensal • Vagas limitadas</p>
+                        <p class="next-slot">Só 2 vagas disponíveis</p>
+                        <p class="service-desc">Sessões semanais, contacto entre consultas, rituais personalizados. Para mudança real.</p>
+                        <div class="service-testimonial">
+                            "Não é só consulta, é ter alguém no teu corner durante o mês inteiro."
+                        </div>
+                    </div>
+                    <div class="service-price">
+                        <div class="price">€XX<span style="font-size:0.8rem">/mês</span></div>
+                        <a href="https://wa.me/351923318289?text=Olá! Quero saber sobre Acompanhamento Permanente" class="btn-service" target="_blank">Ver Disponibilidade</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Mentoria Espiritual</h3>
+                        <p class="service-time">Programa 3 ou 6 meses</p>
+                        <p class="next-slot">Inscrições abertas para junho</p>
+                        <p class="service-desc">Para aprofundar prática esotérica, desenvolver intuição, integrar espiritualidade no dia-a-dia.</p>
+                        <div class="service-testimonial">
+                            "Da teoria à prática real. Finalmente sinto que isto faz parte de mim."
+                        </div>
+                    </div>
+                    <div class="service-price">
+                        <div class="price">€XX</div>
+                        <a href="https://wa.me/351923318289?text=Olá! Quero informações sobre Mentoria Espiritual" class="btn-service" target="_blank">Pedir Info</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sos" class="sos-section fade-in">
+            <div class="sos-content">
+                <div class="sos-icon">🆘</div>
+                <h3>Precisas de Ajuda Agora?</h3>
+                <p>
+                    Para momentos de crise, decisões urgentes ou quando a cabeça não para. 
+                    Resposta prioritária em menos de 2 horas.
+                </p>
+                
+                <div class="sos-testimonial">
+                    "Liguei às 11h em prantos com uma decisão de trabalho. Às 11h45 já sabia o que fazer. Não tem preço."
+                    <div style="margin-top: 10px; font-size: 0.8rem; color: var(--dourado);">— Ana Rita, Cascais</div>
+                </div>
+                
+                <div class="sos-price">€XX por consulta urgente</div>
+                <a href="https://wa.me/351923318289?text=🆘 Olá! Preciso de uma consulta SOS urgente" class="btn-service" target="_blank" style="background: var(--dourado); color: var(--preto); padding: 16px 40px; font-size: 0.9rem;">
+                    Pedir Ajuda Agora
+                </a>
+                <p style="margin-top: 16px; font-size: 0.8rem; opacity: 0.7;">Disponível todos os dias 9h-21h</p>
+            </div>
+        </section>
+
+        <section id="testemunhos" class="testimonials-page fade-in">
+            <div class="section-header" style="margin-bottom: 20px;">
+                <h2 class="section-title">O Que Dizem Quem Me Conhece</h2>
+                <div class="stars" style="margin-top: 12px;">★★★★★</div>
+                <p class="section-subtitle" style="margin-top: 8px;">Dedicação reconhecida • Esforço validado</p>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Conheço o JF há mais de 10 anos. Já fui cliente de tarot, agora sou cliente dos produtos. 
+                        É raro encontrar alguém que combine tanta sensibilidade com tanta praticidade."
+                    </p>
+                    <p class="testimonial-product">Cliente de longa data</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C</div>
+                        <div class="author-info">
+                            <h4>Catarina M. <span class="verified-badge">✓</span></h4>
+                            <p>Lisboa • 10+ anos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "A consulta de tarot não foi o que eu esperava. Era melhor. Não me disse o que queria ouvir, 
+                        disse o que precisava. E acertou em tudo."
+                    </p>
+                    <p class="testimonial-product">Tarot Integrativo</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">I</div>
+                        <div class="author-info">
+                            <h4>Inês R. <span class="verified-badge">✓</span></h4>
+                            <p>Porto • 3 consultas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "A vela de massagem parecia um luxo desnecessário até experimentar. Agora é o nosso ritual de domingo. 
+                        A pele fica incrível e o cheiro na casa..."
+                    </p>
+                    <p class="testimonial-product">Vela de Massagem</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div class="author-info">
+                            <h4>Sofia & Tiago <span class="verified-badge">✓</span></h4>
+                            <p>Braga • Compradores recorrentes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "O acompanhamento mensal mudou a minha forma de estar no mundo. Não é terapia, é mais prático. 
+                        É ter alguém que te lembra do teu poder quando tu esqueces."
+                    </p>
+                    <p class="testimonial-product">Acompanhamento Permanente</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h4>Mariana S. <span class="verified-badge">✓</span></h4>
+                            <p>Aveiro • 8 meses</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Comprei o escalda pés num impulso e agora não vivo sem. É o meu ritual de domingo. 
+                        O JF devia chamar-lhe 'terapia em saqueta'."
+                    </p>
+                    <p class="testimonial-product">Escalda Pés</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">B</div>
+                        <div class="author-info">
+                            <h4>Beatriz L. <span class="verified-badge">✓</span></h4>
+                            <p>Coimbra • Cliente desde 2025</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "O SOS salvou-me. Estava em pânico com uma decisão de trabalho e em 30 minutos o JF 
+                        ajudou-me a organizar a confusão. Não sei como agradeço."
+                    </p>
+                    <p class="testimonial-product">Consulta SOS</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">A</div>
+                        <div class="author-info">
+                            <h4>Ana Rita F. <span class="verified-badge">✓</span></h4>
+                            <p>Cascais • Usou SOS 2x</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="newsletter" class="newsletter fade-in">
+            <h3>A Folha da Maison</h3>
+            <p>
+                Rituais da estação, fases da lua, novidades em primeira mão. 
+                Uma vez por semana, diretamente na tua caixa de entrada.
+            </p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Bem-vinda à Maison! ✨');">
+                <input type="email" placeholder="O teu email mais sagrado" required>
+                <button type="submit" class="btn-member">Quero Receber</button>
+            </form>
+        </section>
+
+        <div class="personal-touch fade-in">
+            <p>
+                "Não sou uma marca grande. Sou eu, num atelier, a fazer o que sei fazer há 32 anos. 
+                Se tiveres uma dúvida, manda mensagem — respondo eu próprio. 
+                Se demorar um dia, é porque estou a fazer velas ou a atender alguém. 
+                Mas respondo, prometo."
+            </p>
+            <div class="signature">— JF</div>
+        </div>
+
+        <footer id="contacto" class="footer fade-in">
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <span class="trust-icon">🌿</span>
+                    100% Natural
+                </div>
+                <div class="trust-badge">
+                    <span class="trust-icon">🇵🇹</span>
+                    Feito em Portugal
+                </div>
+                <div class="trust-badge">
+                    <span class="trust-icon">♻️</span>
+                    Embalagens Sustentáveis
+                </div>
+                <div class="trust-badge">
+                    <span class="trust-icon">✋</span>
+                    Artesanal
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <p>WhatsApp: <a href="https://wa.me/351923318289" target="_blank">+351 923 318 289</a></p>
+                <p>Instagram: <a href="https://instagram.com/maisonjfatelier" target="_blank">@maisonjfatelier</a></p>
+                <p style="margin-top: 12px; font-size: 0.8rem;">Respondo eu próprio • Até 24h • Obrigado pela paciência</p>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://instagram.com/maisonjfatelier" target="_blank">Instagram</a>
+                <a href="https://wa.me/351923318289" target="_blank">WhatsApp</a>
+                <a href="#historia">A Maison</a>
+            </div>
+            
+            <p style="font-size: 0.75rem; color: rgba(10, 10, 10, 0.5);">
+                © 2026 Maison JF • 32 anos de dedicação<br>
+                <em>Feito com intenção em Portugal</em>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
