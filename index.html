@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison JF | Desde 1994</title>
+    <title>Maison JF™ | Cá da Terra • Desde 1994 • Árvore, Vila do Conde</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -78,8 +78,44 @@
             padding: 40px 24px;
         }
 
+        /* BADGE PRÉMIO */
+        .premio-banner {
+            background: linear-gradient(135deg, var(--esmeralda) 0%, #0d3d30 100%);
+            color: var(--marfim);
+            text-align: center;
+            padding: 16px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premio-banner::before {
+            content: '✦';
+            position: absolute;
+            left: 20px;
+            animation: pulse 2s infinite;
+            color: var(--dourado);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .premio-text {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .premio-highlight {
+            color: var(--dourado);
+            font-weight: 600;
+        }
+
         .top-bar {
-            background: var(--esmeralda);
+            background: var(--preto);
             color: var(--marfim);
             text-align: center;
             padding: 12px;
@@ -114,6 +150,12 @@
         .hero {
             text-align: center;
             margin-bottom: 60px;
+        }
+
+        .tm-badge {
+            font-size: 0.6rem;
+            vertical-align: super;
+            color: var(--dourado);
         }
 
         .since-badge {
@@ -168,6 +210,13 @@
             margin-bottom: 20px;
         }
 
+        .location-tag {
+            font-size: 0.85rem;
+            color: rgba(10, 10, 10, 0.6);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
         .credentials {
             font-size: 0.85rem;
             color: rgba(10, 10, 10, 0.7);
@@ -205,6 +254,82 @@
             color: rgba(10, 10, 10, 0.6);
             font-weight: 300;
             font-style: italic;
+        }
+
+        /* CÁ DA TERRA DESTAQUE */
+        .cada-terra-section {
+            background: linear-gradient(135deg, var(--esmeralda) 0%, #0d3d30 100%);
+            color: var(--marfim);
+            padding: 50px 40px;
+            margin: 50px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cada-terra-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(201, 162, 39, 0.1) 0%, transparent 70%);
+        }
+
+        .cada-terra-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cada-terra-label {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--dourado);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .cada-terra-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .cada-terra-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 24px;
+            opacity: 0.9;
+        }
+
+        .cada-terra-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .cada-stat {
+            text-align: center;
+        }
+
+        .cada-stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--dourado);
+            display: block;
+        }
+
+        .cada-stat-label {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
         }
 
         .story-section {
@@ -820,6 +945,7 @@
             .service-price { text-align: center; }
             .newsletter-form { flex-direction: column; }
             .testimonials-page { padding: 30px 20px; }
+            .cada-terra-stats { gap: 24px; }
         }
 
         .fade-in {
@@ -834,6 +960,13 @@
     </style>
 </head>
 <body>
+    <div class="premio-banner fade-in">
+        <div class="premio-text">
+            <span class="premio-highlight">Candidato</span> Prémio Intermarché Produção Nacional 2026
+        </div>
+        <div style="font-size: 0.75rem; margin-top: 6px; opacity: 0.9;">Categoria Cá da Terra • Árvore, Vila do Conde</div>
+    </div>
+
     <div class="top-bar">
         Envio grátis em compras acima de €50 • Embalagens de oferta disponíveis
     </div>
@@ -846,6 +979,7 @@
     <div class="container">
         <nav class="nav fade-in">
             <a href="#historia">A Maison</a>
+            <a href="#cada-terra">Cá da Terra</a>
             <a href="#produtos">Produtos</a>
             <a href="#servicos">Serviços</a>
             <a href="#testemunhos">Testemunhos</a>
@@ -855,14 +989,42 @@
         <div class="hero fade-in">
             <div class="since-badge">Desde 1994</div>
             <div class="symbolo"></div>
-            <h1>Maison JF</h1>
+            <h1>Maison JF<span class="tm-badge">™</span></h1>
             <p class="tagline">A ponte entre o sensorial e o humano</p>
+            <p class="location-tag">Árvore, Vila do Conde • Portugal</p>
             
             <div class="stars">★★★★★</div>
             <p class="credentials">
-                32 anos de dedicação • Milhares de histórias ouvidas • Feito à mão, de pessoa para pessoa
+                32 anos de dedicação • Marca registada • Produção artesanal nacional
             </p>
         </div>
+
+        <section id="cada-terra" class="cada-terra-section fade-in">
+            <div class="cada-terra-content">
+                <span class="cada-terra-label">Candidato Prémio Intermarché 2026</span>
+                <h2 class="cada-terra-title">Cá da Terra</h2>
+                <p class="cada-terra-text">
+                    A Maison JF nasce em Árvore, Vila do Conde, onde cada vela, cada óleo e cada consulta 
+                    é feita à mão, com matérias-primas portuguesas ou cuidadosamente selecionadas. 
+                    32 anos de saber-fazer que preserva tradições e cria pontes entre o território, 
+                    o sensorial e o humano.
+                </p>
+                <div class="cada-terra-stats">
+                    <div class="cada-stat">
+                        <span class="cada-stat-number">100%</span>
+                        <span class="cada-stat-label">Produção Nacional</span>
+                    </div>
+                    <div class="cada-stat">
+                        <span class="cada-stat-number">32</span>
+                        <span class="cada-stat-label">Anos de Saber-Fazer</span>
+                    </div>
+                    <div class="cada-stat">
+                        <span class="cada-stat-number">™</span>
+                        <span class="cada-stat-label">Marca Registada</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="historia" class="story-section fade-in">
             <div class="section-header" style="margin-bottom: 30px;">
@@ -904,7 +1066,7 @@
                         pelo acompanhamento, pela presença."
                     </div>
                     <p>
-                        A Maison JF é essa ponte. De um lado, os produtos que faço à mão — 
+                        A Maison JF™ é essa ponte. De um lado, os produtos que faço à mão — 
                         velas, óleos, aromas. Do outro, as consultas, o tarot, o aconselhamento. 
                         Tudo se conecta.
                     </p>
@@ -932,10 +1094,10 @@
                 <div class="product-card">
                     <span class="badge badge-bestseller">Mais Vendida</span>
                     <div class="product-image">🕯️</div>
-                    <h3 class="product-name">Vela Aromática</h3>
+                    <h3 class="product-name">Vela Ritual de Serenidade</h3>
                     <p class="product-details">150g • Cera de coco + soja</p>
                     <p class="product-desc">Queima limpa de 35 horas. Lavanda & Cedro, Laranja & Canela, ou Jasmim Noturno.</p>
-                    <p class="lot-info">Lote atual feito em abril de 2026</p>
+                    <p class="lot-info">Lote atual feito em abril de 2026 • Árvore, Vila do Conde</p>
                     
                     <div class="mini-testimonial">
                         "Cheira a casa de quem se cuida. A minha favorita é a de lavanda, dura imenso."
@@ -944,16 +1106,16 @@
                     
                     <div class="price">€XX</div>
                     <span class="price-note">ou 3 por €XX (envio grátis)</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Vela Aromática 150g" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Vela Ritual de Serenidade 150g" class="btn-order" target="_blank">Encomendar</a>
                 </div>
 
                 <div class="product-card">
                     <span class="badge badge-limited">Só 4 restantes</span>
                     <div class="product-image">🕯️</div>
-                    <h3 class="product-name">Vela de Massagem</h3>
+                    <h3 class="product-name">Vela Óleo de Toque Sagrado</h3>
                     <p class="product-details">Manteiga karité • Óleo • Essências • Vitamina E</p>
                     <p class="product-desc">Derrete em óleo quente para massagem. Nutre a pele como nenhum creme.</p>
-                    <p class="lot-info">Lote de março 2026 — próximo só em junho</p>
+                    <p class="lot-info">Lote de março 2026 • Próximo só em junho</p>
                     
                     <div class="mini-testimonial">
                         "Comprei para o Dia dos Namorados e agora é ritual nosso. A pele fica incrível."
@@ -962,15 +1124,15 @@
                     
                     <div class="price">€XX</div>
                     <span class="price-note">Últimas 4 unidades deste lote</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Vela de Massagem (urgente!)" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Vela Óleo de Toque Sagrado (urgente!)" class="btn-order" target="_blank">Encomendar</a>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">💧</div>
-                    <h3 class="product-name">Parfum d'Ambience</h3>
+                    <h3 class="product-name">Bruma do Espaço Sagrado</h3>
                     <p class="product-details">20ml • Spray ambiente</p>
                     <p class="product-desc">Perfuma instantaneamente. Frasco de bolsa para casa ou viagem.</p>
-                    <p class="lot-info">Fresco — feito esta semana</p>
+                    <p class="lot-info">Fresco — feito esta semana em Árvore</p>
                     
                     <div class="mini-testimonial">
                         "Uso no carro, no escritório, na gaveta. É vício."
@@ -978,15 +1140,15 @@
                     </div>
                     
                     <div class="price">€XX</div>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Parfum d'Ambience 20ml" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Bruma do Espaço Sagrado 20ml" class="btn-order" target="_blank">Encomendar</a>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">🌿</div>
-                    <h3 class="product-name">Mikados</h3>
+                    <h3 class="product-name">Mikados da Presença</h3>
                     <p class="product-details">50ml / 100ml / 250ml • Difusor de varetas</p>
                     <p class="product-desc">Difusão contínua por 4-8 semanas. Ideal para casa de banho ou entrada.</p>
-                    <p class="lot-info">Encomenda sob demanda — faço fresco para ti</p>
+                    <p class="lot-info">Encomenda sob demanda — faço fresco para ti em Árvore</p>
                     
                     <div class="mini-testimonial">
                         "O de 250ml na entrada dura meses. Toda a gente pergunta onde comprei."
@@ -995,15 +1157,15 @@
                     
                     <div class="price">Desde €XX</div>
                     <span class="price-note">50ml: €XX | 100ml: €XX | 250ml: €XX</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero saber preços dos Mikados" class="btn-order" target="_blank">Ver Preços</a>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero saber preços dos Mikados da Presença" class="btn-order" target="_blank">Ver Preços</a>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">👜</div>
-                    <h3 class="product-name">Sachets Perfumados</h3>
+                    <h3 class="product-name">Sachets da Lembrança Suave</h3>
                     <p class="product-details">20g • Gavetas e guarda-roupas</p>
                     <p class="product-desc">Roupa que cheira bem sem perfume. Ideal para malas de viagem e lingerie.</p>
-                    <p class="lot-info">Lote de abril 2026</p>
+                    <p class="lot-info">Lote de abril 2026 • Árvore</p>
                     
                     <div class="mini-testimonial">
                         "Pus na mala do meu marido quando viaja. Diz que cheira a casa."
@@ -1012,15 +1174,15 @@
                     
                     <div class="price">€XX</div>
                     <span class="price-note">ou pack 3 por €XX</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Sachets Perfumados" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Sachets da Lembrança Suave" class="btn-order" target="_blank">Encomendar</a>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">✋</div>
-                    <h3 class="product-name">Óleo de Massagem</h3>
+                    <h3 class="product-name">Óleo de Cuidado Corporal</h3>
                     <p class="product-details">60ml • Corporal</p>
                     <p class="product-desc">Absorção média, não fica gorduroso. Pode usar-se também como óleo de banho.</p>
-                    <p class="lot-info">Fresco — validade 6 meses</p>
+                    <p class="lot-info">Fresco — validade 6 meses • Feito em Árvore</p>
                     
                     <div class="mini-testimonial">
                         "Uso nas pernas cansadas depois do ginásio. Melhor que qualquer creme de farmácia."
@@ -1028,24 +1190,24 @@
                     </div>
                     
                     <div class="price">€XX</div>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Óleo de Massagem 60ml" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Óleo de Cuidado Corporal 60ml" class="btn-order" target="_blank">Encomendar</a>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">🦶</div>
-                    <h3 class="product-name">Escalda Pés</h3>
+                    <h3 class="product-name">Ritual de Ancoragem</h3>
                     <p class="product-details">150g • Sais minerais + ervas</p>
                     <p class="product-desc">Para dias longos. Com hortelã-pimenta e eucalipto para circulação.</p>
-                    <p class="lot-info">Lote de abril 2026</p>
+                    <p class="lot-info">Lote de abril 2026 • Árvore, Vila do Conde</p>
                     
                     <div class="mini-testimonial">
-                        "Domingo à noite é ritual sagrado. Netflix, chá e escalda pés da Maison."
+                        "Domingo à noite é ritual sagrado. Netflix, chá e Ritual de Ancoragem da Maison."
                         <div class="mini-testimonial-author">— Beatriz, Coimbra</div>
                     </div>
                     
                     <div class="price">€XX</div>
                     <span class="price-note">dá para 5-6 utilizações</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Escalda Pés 150g" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Ritual de Ancoragem 150g" class="btn-order" target="_blank">Encomendar</a>
                 </div>
 
                 <div class="product-card" style="opacity: 0.7;">
@@ -1053,7 +1215,7 @@
                     <h3 class="product-name">Cristais & Rituais</h3>
                     <p class="product-details">Em preparação</p>
                     <p class="product-desc">Kits de cristais limpos e programados, com guia de uso.</p>
-                    <p class="lot-info">Brevemente — em testes finais</p>
+                    <p class="lot-info">Brevemente — em testes finais em Árvore</p>
                     <div class="price">—</div>
                     <a href="#newsletter" class="btn-order" style="background: transparent; border: 1px solid var(--dourado);">Avia-me Quando Chegar</a>
                 </div>
@@ -1233,7 +1395,7 @@
                         "A vela de massagem parecia um luxo desnecessário até experimentar. Agora é o nosso ritual de domingo. 
                         A pele fica incrível e o cheiro na casa..."
                     </p>
-                    <p class="testimonial-product">Vela de Massagem</p>
+                    <p class="testimonial-product">Vela Óleo de Toque Sagrado</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">S</div>
                         <div class="author-info">
@@ -1265,7 +1427,7 @@
                         "Comprei o escalda pés num impulso e agora não vivo sem. É o meu ritual de domingo. 
                         O JF devia chamar-lhe 'terapia em saqueta'."
                     </p>
-                    <p class="testimonial-product">Escalda Pés</p>
+                    <p class="testimonial-product">Ritual de Ancoragem</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">B</div>
                         <div class="author-info">
@@ -1307,10 +1469,10 @@
 
         <div class="personal-touch fade-in">
             <p>
-                "Não sou uma marca grande. Sou eu, num atelier, a fazer o que sei fazer há 32 anos. 
-                Se tiveres uma dúvida, manda mensagem — respondo eu próprio. 
-                Se demorar um dia, é porque estou a fazer velas ou a atender alguém. 
-                Mas respondo, prometo."
+                "Não sou uma marca grande. Sou eu, num atelier em Árvore, Vila do Conde, 
+                a fazer o que sei fazer há 32 anos. Se tiveres uma dúvida, manda mensagem — 
+                respondo eu próprio. Se demorar um dia, é porque estou a fazer velas ou a 
+                atender alguém. Mas respondo, prometo."
             </p>
             <div class="signature">— JF</div>
         </div>
@@ -1327,18 +1489,18 @@
                 </div>
                 <div class="trust-badge">
                     <span class="trust-icon">♻️</span>
-                    Embalagens Sustentáveis
+                    Cera de Soja & Coco
                 </div>
                 <div class="trust-badge">
-                    <span class="trust-icon">✋</span>
-                    Artesanal
+                    <span class="trust-icon">™</span>
+                    Marca Registada
                 </div>
             </div>
 
             <div class="contact-info">
                 <p>WhatsApp: <a href="https://wa.me/351923318289" target="_blank">+351 923 318 289</a></p>
                 <p>Instagram: <a href="https://instagram.com/maisonjfatelier" target="_blank">@maisonjfatelier</a></p>
-                <p style="margin-top: 12px; font-size: 0.8rem;">Respondo eu próprio • Até 24h • Obrigado pela paciência</p>
+                <p style="margin-top: 12px; font-size: 0.8rem;">Árvore, Vila do Conde • Respondo eu próprio • Até 24h</p>
             </div>
             
             <div class="social-links">
@@ -1348,8 +1510,8 @@
             </div>
             
             <p style="font-size: 0.75rem; color: rgba(10, 10, 10, 0.5);">
-                © 2026 Maison JF • 32 anos de dedicação<br>
-                <em>Feito com intenção em Portugal</em>
+                © 2026 Maison JF™ • 32 anos de dedicação • Árvore, Vila do Conde<br>
+                <em>Candidato Prémio Intermarché Produção Nacional 2026 — Categoria Cá da Terra</em>
             </p>
         </footer>
     </div>
