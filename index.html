@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison JF™ | Cá da Terra • Desde 1994 • Árvore, Vila do Conde</title>
+    <title>Maison JF™ | Rituais sensoriais • Tarot • Árvore, Vila do Conde</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --dourado: #C9A227;
-            --esmeralda: #0A4D3C;
+            --esmeralda: #004D40;
             --marfim: #F5F1E8;
             --preto: #0A0A0A;
             --dourado-claro: #E8D5A3;
+            --esmeralda-profundo: #00382F;
             --vermelho-urgencia: #8B2635;
+            --vermelho-dior: #6F1D2D;
         }
         body {
             font-family: 'Montserrat', sans-serif;
@@ -21,6 +23,7 @@
             color: var(--preto);
             min-height: 100vh;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         .aura-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
         .aura { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.2; animation: float 25s infinite ease-in-out; }
@@ -29,7 +32,7 @@
         @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(20px, -15px) scale(1.05); } }
         .container { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
         .premio-banner {
-            background: linear-gradient(135deg, var(--esmeralda) 0%, #0d3d30 100%);
+            background: linear-gradient(135deg, var(--esmeralda) 0%, var(--esmeralda-profundo) 100%);
             color: var(--marfim); text-align: center; padding: 16px; margin-bottom: 30px;
             border: 1px solid rgba(201, 162, 39, 0.3); position: relative; overflow: hidden;
         }
@@ -39,24 +42,102 @@
         .premio-highlight { color: var(--dourado); font-weight: 600; }
         .top-bar { background: var(--preto); color: var(--marfim); text-align: center; padding: 12px; font-size: 0.8rem; letter-spacing: 1px; }
         .nav { display: flex; justify-content: center; gap: 32px; margin: 30px 0 40px; flex-wrap: wrap; }
-        .nav a { color: var(--esmeralda); text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: all 0.3s ease; }
+        .nav a { color: var(--vermelho-dior); text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: all 0.3s ease; font-weight: 700; }
         .nav a:hover { color: var(--dourado); border-bottom-color: var(--dourado); }
         .hero { text-align: center; margin-bottom: 60px; }
         .tm-badge { font-size: 0.6rem; vertical-align: super; color: var(--dourado); }
         .since-badge { display: inline-block; border: 1px solid var(--dourado); padding: 8px 20px; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--dourado); margin-bottom: 24px; }
-        .symbolo { width: 90px; height: 90px; margin: 0 auto 24px; border: 1px solid var(--dourado); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: glow 3s ease-in-out infinite; }
-        .symbolo::before { content: '✦'; font-size: 36px; color: var(--dourado); }
+        
         @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.2); } 50% { box-shadow: 0 0 40px rgba(201, 162, 39, 0.4); } }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 12px; }
-        .tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: var(--esmeralda); letter-spacing: 2px; margin-bottom: 20px; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 400; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 12px; }
+        .tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.25rem; color: var(--esmeralda); letter-spacing: 1px; margin: 0 auto 18px; max-width: 760px; line-height: 1.4; }
+        .hero-copy { max-width: 720px; margin: 0 auto 24px; font-size: 0.95rem; line-height: 1.8; color: rgba(10,10,10,0.72); }
         .location-tag { font-size: 0.85rem; color: rgba(10, 10, 10, 0.6); letter-spacing: 2px; margin-bottom: 20px; }
         .credentials { font-size: 0.85rem; color: rgba(10, 10, 10, 0.7); letter-spacing: 1px; margin-top: 20px; }
         .stars { color: var(--dourado); font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 8px; }
-        .section { margin-bottom: 70px; }
+        .hero-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin: 26px auto 0; max-width: 620px; }
+        .hero-actions a { min-width: 190px; }
+        .section { margin-bottom: 70px; scroll-margin-top: 24px; }
+        section, footer { scroll-margin-top: 90px; }
+        .nav a.active { color: var(--dourado); border-bottom-color: var(--dourado); }
+        .emerald-section,
+        .emerald-panel,
+        .story-section.emerald-story,
+        .testimonials-page.emerald-panel {
+            background: linear-gradient(135deg, var(--esmeralda) 0%, var(--esmeralda-profundo) 100%);
+            color: var(--marfim);
+            border: 1px solid rgba(201, 162, 39, 0.28);
+            position: relative;
+            overflow: hidden;
+        }
+        .emerald-section { padding: 46px 34px; }
+        .emerald-section::before,
+        .emerald-panel::before,
+        .story-section.emerald-story::before,
+        .testimonials-page.emerald-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(201, 162, 39, 0.12) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .emerald-section > *,
+        .emerald-panel > *,
+        .story-section.emerald-story > *,
+        .testimonials-page.emerald-panel > * { position: relative; z-index: 1; }
+        .emerald-section .section-title,
+        .emerald-panel .section-title,
+        .story-section.emerald-story .section-title,
+        .testimonials-page.emerald-panel .section-title { color: var(--dourado); }
+        .emerald-section .section-subtitle,
+        .emerald-panel .section-subtitle,
+        .story-section.emerald-story .section-subtitle,
+        .testimonials-page.emerald-panel .section-subtitle { color: var(--dourado-claro); opacity: 0.95; }
+        .emerald-section .intro-strip,
+        .emerald-section .story-section,
+        .emerald-panel .experiences-section { background: rgba(255,255,255,0.96); }
+        .emerald-section .intro-strip p,
+        .emerald-section .story-section p { color: rgba(10,10,10,0.78); }
+        .emerald-section .intro-strip strong,
+        .emerald-section .story-section strong { color: var(--vermelho-dior); }
+        .emerald-section .product-card,
+        .emerald-section .service-card { background: rgba(255,255,255,0.98); color: var(--preto); }
+        .emerald-section .product-name,
+        .emerald-section .service-info h3 { color: var(--preto); }
+        .emerald-section .product-details { color: var(--vermelho-dior); }
+        .emerald-section .service-time { color: var(--esmeralda); }
+        .emerald-section .product-desc,
+        .emerald-section .service-desc { color: rgba(10,10,10,0.74); }
+        .emerald-section .price { color: var(--preto); }
+        .emerald-section .price-note { color: rgba(10,10,10,0.55); }
+        .emerald-section .next-slot { color: var(--vermelho-urgencia); }
+        .emerald-panel { padding: 42px 34px; text-align: center; }
+        .emerald-panel p { color: rgba(245, 241, 232, 0.9); }
+        .emerald-panel strong { color: var(--dourado-claro); }
+        .emerald-panel .btn-order { background: var(--dourado); color: var(--preto); }
+        .story-section.emerald-story .story-text h3 { color: var(--dourado); }
+        .story-section.emerald-story .story-text p { color: rgba(245, 241, 232, 0.9); }
+        .story-section.emerald-story .story-text strong { color: var(--dourado-claro); }
+        .story-section.emerald-story .story-quote { background: rgba(255,255,255,0.06); }
+        .story-section.emerald-story .imperfection-note { background: rgba(255,255,255,0.07); color: rgba(245,241,232,0.84); }
+        .testimonials-page.emerald-panel .testimonial-card { background: var(--marfim); color: var(--preto); }
+        .testimonials-page.emerald-panel .testimonial-text { color: var(--preto); }
+        .testimonials-page.emerald-panel .testimonial-product { color: var(--esmeralda); }
+        .testimonials-page.emerald-panel .author-info h4 { color: var(--preto); }
+        .testimonials-page.emerald-panel .author-info p { color: rgba(10,10,10,0.55); }
+        .testimonials-page.emerald-panel .section-subtitle { color: var(--dourado-claro) !important; }
+        .experience-badge.emerald-badge { background: linear-gradient(135deg, var(--esmeralda) 0%, var(--esmeralda-profundo) 100%); border: 1px solid rgba(201,162,39,0.35); }
         .section-header { text-align: center; margin-bottom: 40px; }
         .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; letter-spacing: 4px; text-transform: uppercase; color: var(--dourado); margin-bottom: 12px; }
         .section-subtitle { font-size: 0.95rem; color: rgba(10, 10, 10, 0.6); font-weight: 300; font-style: italic; }
-        .cada-terra-section { background: linear-gradient(135deg, var(--esmeralda) 0%, #0d3d30 100%); color: var(--marfim); padding: 50px 40px; margin: 50px 0; text-align: center; position: relative; overflow: hidden; }
+        .intro-strip { background: white; border: 1px solid rgba(201,162,39,0.15); padding: 34px; margin: 0 0 34px; text-align: center; }
+        .intro-strip p { max-width: 760px; margin: 0 auto 12px; font-size: 0.95rem; line-height: 1.75; color: rgba(10,10,10,0.78); }
+        .order-flow { border-color: rgba(111, 29, 45, 0.24); background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(245,241,232,0.96) 100%); }
+        .order-flow h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--dourado); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+        .order-flow p { margin-bottom: 8px; }
+        .order-flow strong { color: var(--vermelho-dior); }
+        .intro-strip strong { color: var(--vermelho-dior); }
+        .cada-terra-section { background: linear-gradient(135deg, var(--esmeralda) 0%, var(--esmeralda-profundo) 100%); color: var(--marfim); padding: 50px 40px; margin: 50px 0; text-align: center; position: relative; overflow: hidden; }
         .cada-terra-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(201, 162, 39, 0.1) 0%, transparent 70%); }
         .cada-terra-content { position: relative; z-index: 1; }
         .cada-terra-label { font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; color: var(--dourado); margin-bottom: 16px; display: block; }
@@ -65,6 +146,7 @@
         .cada-terra-stats { display: flex; justify-content: center; gap: 40px; margin-top: 30px; flex-wrap: wrap; }
         .cada-stat { text-align: center; }
         .cada-stat-number { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--dourado); display: block; }
+        .cada-stat-number.pt-small { font-size: 1.25rem; letter-spacing: 2px; padding-top: 8px; }
         .cada-stat-label { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; }
         .story-section { background: white; padding: 50px 40px; margin: 50px 0; border: 1px solid rgba(201, 162, 39, 0.15); position: relative; }
         .story-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--dourado), var(--esmeralda)); }
@@ -84,33 +166,49 @@
         .badge-bestseller { background: var(--dourado); color: var(--preto); }
         .badge-fresh { background: var(--esmeralda); color: white; }
         .product-image { width: 100%; height: 180px; background: linear-gradient(135deg, #f5f1e8 0%, #ebe5d8 100%); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; font-size: 3rem; opacity: 0.6; }
-        .product-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 6px; letter-spacing: 1px; }
-        .product-details { font-size: 0.8rem; color: var(--esmeralda); margin-bottom: 10px; font-weight: 500; }
+        .product-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 6px; letter-spacing: 1px; font-weight: 700; }
+        .product-name strong,
+        .service-info h3 strong { font-weight: 700; }
+        .product-details { font-size: 0.8rem; color: var(--vermelho-dior); margin-bottom: 10px; font-weight: 600; }
         .product-desc { font-size: 0.85rem; color: rgba(10, 10, 10, 0.7); line-height: 1.5; margin-bottom: 12px; }
         .lot-info { font-size: 0.75rem; color: rgba(10, 10, 10, 0.5); margin-bottom: 12px; font-style: italic; }
         .mini-testimonial { background: rgba(201, 162, 39, 0.05); border-left: 2px solid var(--dourado); padding: 12px 16px; margin: 16px 0; font-size: 0.8rem; font-style: italic; color: rgba(10,10,10,0.8); line-height: 1.4; }
         .mini-testimonial-author { font-size: 0.75rem; color: var(--esmeralda); margin-top: 6px; font-style: normal; font-weight: 500; }
         .price { font-size: 1.4rem; color: var(--preto); font-weight: 500; margin-bottom: 4px; }
         .price-note { font-size: 0.8rem; color: rgba(10, 10, 10, 0.5); display: block; margin-bottom: 16px; }
-        .btn-order { width: 100%; padding: 14px; background: var(--dourado); border: none; color: var(--preto); font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: block; text-align: center; transition: all 0.3s ease; font-weight: 500; }
-        .btn-order:hover { background: var(--esmeralda); color: white; }
+        .btn-order { width: 100%; padding: 14px; background: var(--dourado); border: none; color: var(--preto); font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: block; text-align: center; transition: all 0.3s ease; font-weight: 500; position: relative; z-index: 50; pointer-events: auto; }
+        .btn-order:hover { background: var(--vermelho-dior); color: var(--marfim); }
         .services-grid { display: flex; flex-direction: column; gap: 20px; }
         .service-card { background: white; border-left: 3px solid var(--dourado); padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; transition: all 0.3s ease; }
         .service-card:hover { background: rgba(245, 241, 232, 0.5); padding-left: 32px; }
-        .service-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; margin-bottom: 6px; letter-spacing: 1px; }
+        #servicos .service-card { border-left-color: var(--dourado); }
+        #servicos .service-card:hover { border-left-color: var(--vermelho-dior); box-shadow: 0 18px 34px rgba(111, 29, 45, 0.10); }
+        #servicos .next-slot { color: var(--vermelho-dior) !important; }
+        #servicos .btn-service:hover { background: var(--dourado); color: var(--preto); }
+        .sos-cta { background: var(--dourado); color: var(--preto); padding: 16px 40px; font-size: 0.9rem; position: relative; z-index: 10; display: inline-block; pointer-events: auto; }
+        .sos-cta:hover { background: var(--vermelho-dior) !important; color: var(--marfim) !important; transform: translateY(-2px); }
+        #servicos .service-info h3,
+        #servicos .service-card .service-info h3 {
+            color: var(--dourado) !important;
+            font-weight: 800 !important;
+            text-shadow: 0 0 0 currentColor;
+        }
+        .service-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; margin-bottom: 8px; letter-spacing: 1px; font-weight: 800; line-height: 1.2; }
         .service-time { font-size: 0.8rem; color: var(--esmeralda); margin-bottom: 10px; font-weight: 500; }
         .next-slot { font-size: 0.75rem; color: var(--vermelho-urgencia); margin-bottom: 10px; font-weight: 500; }
         .service-desc { font-size: 0.85rem; color: rgba(10, 10, 10, 0.7); line-height: 1.5; margin-bottom: 12px; }
         .service-testimonial { font-size: 0.8rem; font-style: italic; color: rgba(10,10,10,0.7); padding-left: 16px; border-left: 2px solid rgba(201,162,39,0.3); }
         .service-price { text-align: right; }
-        .btn-service { padding: 12px 28px; background: var(--esmeralda); color: white; border: none; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
+        .btn-service { padding: 12px 28px; background: var(--vermelho-dior); color: var(--marfim); border: none; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s ease; position: relative; z-index: 50; pointer-events: auto; }
         .btn-service:hover { background: var(--dourado); color: var(--preto); }
         .sos-section { background: var(--preto); color: var(--marfim); padding: 50px 40px; margin: 50px 0; text-align: center; position: relative; }
-        .sos-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(201, 162, 39, 0.1) 0%, transparent 70%); }
-        .sos-content { position: relative; z-index: 1; }
+        .sos-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(201, 162, 39, 0.1) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+        .sos-content { position: relative; z-index: 2; }
         .sos-icon { font-size: 3rem; margin-bottom: 16px; }
         .sos-section h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 16px; color: var(--dourado); letter-spacing: 2px; }
         .sos-section p { font-size: 0.95rem; opacity: 0.9; max-width: 600px; margin: 0 auto 24px; line-height: 1.7; font-weight: 300; }
+        .sos-section .whatsapp-fallback { margin-top: 14px; margin-bottom: 0; font-size: 0.78rem; opacity: 0.78; }
+        .sos-section .whatsapp-fallback strong { color: var(--dourado-claro); }
         .sos-testimonial { background: rgba(255,255,255,0.05); padding: 20px; margin: 24px auto; max-width: 450px; font-style: italic; font-size: 0.9rem; line-height: 1.5; border-left: 2px solid var(--dourado); }
         .sos-price { font-size: 1.5rem; color: var(--dourado); margin-bottom: 24px; }
         .sos-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 28px auto; max-width: 850px; }
@@ -118,7 +216,13 @@
         .sos-option h4 { color: var(--dourado); font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 8px; }
         .sos-option .price { color: var(--marfim); font-size: 1.25rem; }
         .experiences-section { background: white; padding: 42px 34px; border: 1px solid rgba(201,162,39,0.15); text-align: center; }
+        .dior-panel { background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(245,241,232,0.96) 100%); border: 1px solid rgba(201,162,39,0.24); box-shadow: 0 18px 40px rgba(10,10,10,0.045); }
+        .dior-panel .section-title { color: var(--dourado); }
+        .dior-panel p { color: rgba(10,10,10,0.76); }
+        .dior-panel strong { color: var(--vermelho-dior); }
         .experiences-section p { max-width: 650px; margin: 0 auto 16px; line-height: 1.7; color: rgba(10,10,10,0.75); font-size: 0.95rem; }
+        .experiences-section.emerald-panel p { color: rgba(245,241,232,0.9); }
+        .experiences-section.emerald-panel strong { color: var(--dourado-claro); }
         .testimonials-page { background: white; padding: 50px 40px; margin: 40px 0; border: 1px solid rgba(201, 162, 39, 0.2); }
         .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-top: 40px; }
         .testimonial-card { background: var(--marfim); padding: 28px; position: relative; }
@@ -132,13 +236,15 @@
         .author-info p { font-size: 0.75rem; color: rgba(10,10,10,0.5); }
         .verified-badge { color: var(--esmeralda); font-size: 0.8rem; margin-left: 4px; }
         .newsletter { background: linear-gradient(135deg, #f0ebe3 0%, var(--marfim) 100%); padding: 50px 32px; text-align: center; border: 1px solid rgba(201, 162, 39, 0.2); }
-        .newsletter h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 12px; }
-        .newsletter p { font-size: 0.9rem; color: rgba(10, 10, 10, 0.7); margin-bottom: 24px; max-width: 450px; margin-left: auto; margin-right: auto; }
-        .newsletter-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; }
+        .newsletter h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 12px; letter-spacing: 2px; }
+        .newsletter p { font-size: 0.9rem; color: rgba(10, 10, 10, 0.7); margin-bottom: 14px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+        .newsletter-note { color: rgba(10, 10, 10, 0.78) !important; }
+        .newsletter-small { font-size: 0.75rem !important; color: rgba(10, 10, 10, 0.5) !important; margin-top: 14px !important; margin-bottom: 0 !important; }
+        .newsletter-form { display: flex; gap: 12px; max-width: 480px; margin: 22px auto 0; }
         .newsletter input { flex: 1; padding: 16px 24px; border: 1px solid rgba(10, 77, 60, 0.2); background: white; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; }
-        .btn-member { padding: 16px 32px; background: var(--esmeralda); color: white; border: none; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+        .btn-member { padding: 16px 32px; background: var(--vermelho-dior); color: var(--marfim); border: none; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
         .btn-member:hover { background: var(--dourado); color: var(--preto); }
-        .footer { text-align: center; padding: 50px 30px 0; border-top: 1px solid rgba(201, 162, 39, 0.25); margin-top: 60px; background: linear-gradient(135deg, var(--esmeralda) 0%, #0d3d30 100%); color: var(--marfim); }
+        .footer { text-align: center; padding: 50px 30px 0; border-top: 1px solid rgba(201, 162, 39, 0.25); margin-top: 60px; background: linear-gradient(135deg, var(--esmeralda) 0%, var(--esmeralda-profundo) 100%); color: var(--marfim); }
         .footer .section-title { color: var(--dourado); }
         .footer .tagline { color: var(--marfim); opacity: 0.9; }
         .footer .trust-badge { color: rgba(245, 241, 232, 0.82); }
@@ -152,12 +258,64 @@
         .trust-badges { display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; flex-wrap: wrap; }
         .trust-badge { text-align: center; font-size: 0.75rem; color: rgba(10,10,10,0.6); }
         .trust-icon { font-size: 1.5rem; margin-bottom: 6px; display: block; }
+        .trust-icon.pt-small { font-size: 1rem; letter-spacing: 2px; font-weight: 600; color: var(--dourado); }
         .contact-info { margin-bottom: 24px; }
         .contact-info p { font-size: 0.9rem; color: rgba(10, 10, 10, 0.7); margin-bottom: 8px; }
         .contact-info a { color: var(--esmeralda); text-decoration: none; font-weight: 500; }
         .social-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; }
         .social-links a { color: var(--esmeralda); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: color 0.3s; }
         .social-links a:hover { color: var(--dourado); }
+        .emerald-section .intro-strip,
+        .emerald-section .product-card,
+        .emerald-section .service-card,
+        .emerald-section .story-section,
+        .testimonials-page.emerald-panel .testimonial-card {
+            background: rgba(255, 255, 255, 0.98) !important;
+            color: var(--preto) !important;
+        }
+        .emerald-section .intro-strip p,
+        .emerald-section .intro-strip h3,
+        .emerald-section .product-card p,
+        .emerald-section .product-card h3,
+        .emerald-section .service-card p,
+        .emerald-section .service-card h3,
+        .emerald-section .story-section p,
+        .emerald-section .story-section h3,
+        .testimonials-page.emerald-panel .testimonial-card p,
+        .testimonials-page.emerald-panel .testimonial-card h4 {
+            color: var(--preto) !important;
+        }
+        .emerald-section .intro-strip strong,
+        .emerald-section .service-time,
+        .testimonials-page.emerald-panel .testimonial-product {
+            color: var(--esmeralda) !important;
+        }
+        .emerald-section .product-details {
+            color: var(--vermelho-dior) !important;
+        }
+        .emerald-section .price,
+        .emerald-section .product-name,
+        .emerald-section .service-info h3,
+        .testimonials-page.emerald-panel .testimonial-text {
+            color: var(--preto) !important;
+        }
+        #servicos .service-info h3,
+        #servicos .service-card .service-info h3 {
+            color: var(--dourado) !important;
+        }
+        .emerald-section .price-note,
+        .testimonials-page.emerald-panel .author-info p {
+            color: rgba(10, 10, 10, 0.55) !important;
+        }
+        .emerald-section .next-slot {
+            color: var(--vermelho-urgencia) !important;
+        }
+        .product-card .product-details,
+        .emerald-section .product-card .product-details,
+        .emerald-section .product-card p.product-details {
+            color: var(--vermelho-dior) !important;
+            font-weight: 700 !important;
+        }
         @media (max-width: 768px) {
             h1 { font-size: 2rem; letter-spacing: 4px; }
             .story-grid { grid-template-columns: 1fr; gap: 30px; }
@@ -181,7 +339,7 @@
     </div>
 
     <div class="top-bar">
-        Envio grátis em compras acima de €50 • Embalagens de oferta disponíveis
+        Produção artesanal em pequenos lotes • Portes grátis a partir de 60€ • Embalagens de oferta disponíveis
     </div>
 
     <div class="aura-container">
@@ -191,113 +349,49 @@
 
     <div class="container">
         <nav class="nav fade-in">
-            <a href="#historia">A Maison</a>
-            <a href="#cada-terra">Cá da Terra</a>
-            <a href="#produtos">Produtos</a>
-            <a href="#servicos">Serviços</a>
-            <a href="#sos">SOS</a>
-            <a href="#testemunhos">Testemunhos</a>
-            <a href="#contacto">Contacto</a>
+            <a href="#produtos" data-target="produtos">Produtos</a>
+            <a href="#edicao-mae" data-target="edicao-mae">Edição Especial</a>
+            <a href="#servicos" data-target="servicos">Consultas</a>
+            <a href="#sos" data-target="sos">SOS</a>
+            <a href="#cada-terra" data-target="cada-terra">Cá da Terra</a>
+            <a href="#historia" data-target="historia">A Maison</a>
+            <a href="#testemunhos" data-target="testemunhos">Testemunhos</a>
+            <a href="#contacto" data-target="contacto">Contacto</a>
         </nav>
 
         <div class="hero fade-in">
             <div class="since-badge">Desde 1994</div>
-            <div class="symbolo"></div>
             <h1>Maison JF<span class="tm-badge">™</span></h1>
-            <p class="tagline">A ponte entre o sensorial e o humano</p>
+            <p class="tagline">Rituais que se sentem. Clareza que muda tudo.</p>
+            <p class="hero-copy">Para a casa, para o corpo e para aqueles momentos em que já não dá para fingir que está tudo bem. <strong>Produtos artesanais feitos à mão, tarot e acompanhamento individual</strong> criados em Árvore, Vila do Conde.</p>
             <p class="location-tag">Árvore, Vila do Conde • Portugal</p>
             <div class="stars">★★★★★</div>
             <p class="credentials">
                 32 anos de dedicação • Marca em processo de registo • Produção artesanal nacional
             </p>
+            <div class="hero-actions">
+                <a href="#produtos" class="btn-order">Ver Produtos</a>
+                <a href="#servicos" class="btn-service">Marcar Consulta</a>
+            </div>
         </div>
 
-        <section id="cada-terra" class="cada-terra-section fade-in">
-            <div class="cada-terra-content">
-                <span class="cada-terra-label">Candidato Prémio Intermarché 2026</span>
-                <h2 class="cada-terra-title">Cá da Terra</h2>
-                <p class="cada-terra-text">
-                    A Maison JF™ nasce em Árvore, Vila do Conde, com produção artesanal em pequenos lotes e uma ligação direta ao cuidado, à presença e à criação local.
-                    Um projeto português que une produtos sensoriais, acompanhamento individual e uma narrativa construída ao longo de mais de 30 anos.
-                </p>
-                <div class="cada-terra-stats">
-                    <div class="cada-stat">
-                        <span class="cada-stat-number">PT</span>
-                        <span class="cada-stat-label">Produção em Portugal</span>
-                    </div>
-                    <div class="cada-stat">
-                        <span class="cada-stat-number">32</span>
-                        <span class="cada-stat-label">Anos de percurso</span>
-                    </div>
-                    <div class="cada-stat">
-                        <span class="cada-stat-number">™</span>
-                        <span class="cada-stat-label">Marca em processo</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="historia" class="story-section fade-in">
-            <div class="section-header" style="margin-bottom: 30px;">
-                <h2 class="section-title">A Nossa História</h2>
-                <p class="section-subtitle">Uma marca portuguesa nascida de um percurso profundamente humano</p>
-            </div>
-
-            <div class="story-grid">
-                <div class="story-text">
-                    <h3>O percurso</h3>
-                    <p>A Maison JF™ nasce da necessidade de criar pausas num mundo que não pára. E de um percurso profundamente humano.</p>
-                    <p>Comecei ainda na adolescência, com um baralho de tarot e o contacto com práticas intuitivas como a leitura de mãos. Não sabia onde isso me ia levar. Sabia apenas que queria ajudar pessoas a compreenderem-se melhor.</p>
-                    <p>Ao longo de mais de 30 anos, essa intenção manteve-se. O que mudou foi a profundidade.</p>
-                    <p>Este caminho começou com o envolvimento em projetos de voluntariado através do Instituto Português da Juventude (IPJ), hoje Instituto Português do Desporto e da Juventude (IPDJ). Entre outros projetos, trabalhei no MADI e na Santa Casa da Misericórdia de Azurara.</p>
-                    <p>Mais tarde, já em adulto, esse percurso estendeu-se ao trabalho com populações vulneráveis: imigrantes, pessoas em situação de sem-abrigo e população idosa.</p>
-                    <p>Este percurso levou-me à intervenção direta enquanto Técnico Psicossocial e Técnico de Apoio à Vítima, incluindo trabalho em Casa-Abrigo para vítimas de violência doméstica.</p>
-
-                    <div class="experience-badge">
-                        <div class="experience-number">32</div>
-                        <div class="experience-text">
-                            ANOS A<br>
-                            CONSTRUIR PONTES
-                        </div>
-                    </div>
-                </div>
-
-                <div class="story-text">
-                    <h3>A ligação</h3>
-                    <div class="story-quote">
-                        "Parar. Sentir. Cuidar."
-                    </div>
-                    <p>Foi nesse contexto que tudo se tornou mais claro.</p>
-                    <p>A importância de criar espaços seguros.<br>A importância de escutar sem julgamento.<br>A importância de parar.</p>
-                    <p>A Maison JF nasce dessa consciência.</p>
-                    <p>Hoje, esse percurso traduz-se em duas formas de cuidado: os produtos, criados manualmente, e o acompanhamento individual.</p>
-                    <p>Duas formas diferentes de fazer o mesmo: ajudar cada pessoa a voltar a si.</p>
-                    <p>A Maison JF™ é a ligação entre duas formas de cuidado. De um lado, os produtos feitos à mão: velas, óleos, sprays, mikados e outros gestos sensoriais. Do outro, o acompanhamento: o tarot, a escuta, a orientação.</p>
-                    <p>Aqui, o sensorial não é um detalhe. É uma forma de voltar ao corpo, ao espaço e ao tempo.</p>
-                    <p>Desenvolvida em Portugal, com produção artesanal, a marca valoriza a criação local e traduz um percurso humano em experiências reais de bem-estar e equilíbrio.</p>
-
-                    <div class="imperfection-note">
-                        ✋ Ainda queimo as mãos de vez em quando ao fazer velas. Cada peça que sai daqui passou pelas minhas mãos. Mesmo.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="produtos" class="section fade-in">
+        <section id="produtos" class="section emerald-section fade-in">
             <div class="section-header">
                 <h2 class="section-title">Produtos</h2>
-                <p class="section-subtitle">Clair Obscur • Entre Nous</p>
+                <p class="section-subtitle">Clair Obscur • Entre Nous — Rituais sensoriais feitos à mão em Árvore, Vila do Conde</p>
             </div>
 
-            <div class="story-section" style="margin-top: 0;">
-                <div class="story-text">
-                    <h3>Clair Obscur • Entre Nous</h3>
-                    <p><strong>Feito à mão em pequenos lotes em Árvore, Vila do Conde.</strong></p>
-                    <p>Clair Obscur nasce do contraste entre luz e sombra. Entre o exterior e o interior. Entre o ritmo do mundo e o silêncio necessário para voltar a si.</p>
-                    <p>Entre Nous, “entre nós”, é a expressão mais íntima desta coleção. Foi criada para momentos de regresso. Chegar a casa, desacelerar, criar um espaço de acolhimento e presença.</p>
-                    <p>Um momento teu.<br>Entre Nous.<br>De ti, para ti.</p>
-                    <p>Cada peça desta coleção é pensada como um gesto simples que transforma o ambiente e convida ao cuidado.</p>
-                </div>
+            <div class="intro-strip">
+                <p><strong>Produto em destaque</strong></p>
+                <p><strong>Clair Obscur • Entre Nous</strong> é o primeiro universo sensorial da Maison JF™. Criado em Árvore, Vila do Conde, reúne produtos feitos à mão em pequenos lotes para casa, corpo e rituais de pausa.</p>
+                <p>Velas, sprays, difusores, óleos, sachets e wax melts criados com uma intenção simples: transformar o cuidado num gesto acessível, português e feito com presença.</p>
+            </div>
+
+            <div class="intro-strip">
+                <p><strong>Clair Obscur</strong> não é uma colecção única. É um universo.</p>
+                <p>Cada fase da marca traz uma sub-colecção diferente. Agora estás a ver a <strong>Clair Obscur • Entre Nous</strong> — íntima, próxima, pensada para o dia a dia.</p>
+                <p><strong>E sim… já estou a preparar a próxima.</strong> Limitada. Mais intensa. Para quem sente tudo mais fundo.</p>
+                <p><strong>Se alguma coisa aqui te chama, não ignores.</strong> Normalmente… não é por acaso.</p>
             </div>
 
             <div class="products-grid">
@@ -305,117 +399,105 @@
                     <span class="badge badge-bestseller">Mais Vendido</span>
                     <div class="product-image">💧</div>
                     <h3 class="product-name">Clair Obscur • Entre Nous • Parfum d'Ambience</h3>
-                    <p class="product-details">Spray perfumado para ambiente • 20ml • Álcool de Perfumista + Essências</p>
-                    <p class="product-desc">Um gesto imediato que transforma o espaço. Cria uma atmosfera envolvente, íntima e acolhedora. Perfuma instantaneamente. Formato prático para casa ou em viagem.</p>
-                    <div class="mini-testimonial">
-                        “Uso no carro, no escritório, na gaveta. É super agradável.”
-                        <div class="mini-testimonial-author">— Sofia, Porto</div>
-                    </div>
+                    <p class="product-details">Spray perfumado para ambiente • 20ml • Álcool de perfumista + essências</p>
+                    <p class="product-desc">Um gesto rápido para mudar o ambiente. No carro, na gaveta, no escritório ou na mala. Um perfume discreto que fica contigo.</p>
                     <div class="price">6,50€</div>
                     <span class="price-note">ou 3 por 18€</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Clair Obscur • Entre Nous • Parfum d'Ambience" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="#contacto" class="btn-order contact-link">Quero Este Produto</a>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">🌿</div>
                     <h3 class="product-name">Clair Obscur • Entre Nous • Diffuseur à Bâtonnets</h3>
-                    <p class="product-details">Difusor de ambiente com varetas • 50ml / 100ml / 200ml / 300ml • Augeo + Essências</p>
-                    <p class="product-desc">Difusão contínua e subtil que mantém o espaço perfumado ao longo do tempo. Ideal para entrada, casa de banho ou zonas de passagem.</p>
-                    <div class="mini-testimonial">
-                        “O de 300ml na entrada dura meses. Toda a gente me pergunta onde comprei.”
-                        <div class="mini-testimonial-author">— Ana, Cascais</div>
-                    </div>
+                    <p class="product-details">Difusor de ambiente com varetas • 50ml / 100ml / 200ml / 300ml • Augeo + essências</p>
+                    <p class="product-desc">Aroma contínuo, elegante e sem esforço. Para a entrada, a casa de banho, o quarto ou aquele canto que precisa de presença.</p>
                     <div class="price">A partir de 14€</div>
                     <span class="price-note">50ml: 14€ | 100ml: 20€ | 200ml: 26€ | 300ml: 34€</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Clair Obscur • Entre Nous • Diffuseur à Bâtonnets" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="#contacto" class="btn-order contact-link">Quero Este Produto</a>
                 </div>
 
                 <div class="product-card">
                     <span class="badge badge-bestseller">Mais Vendido</span>
                     <div class="product-image">🕯️</div>
                     <h3 class="product-name">Clair Obscur • Entre Nous • Bougie Parfumée</h3>
-                    <p class="product-details">Vela perfumada artesanal • 150g • Cera de Soja • Cera de Coco • Essências</p>
-                    <p class="product-desc">Luz suave e aroma envolvente que convidam à pausa e criam um ambiente de conforto e presença. Queima limpa de mais de 35 horas.</p>
-                    <div class="mini-testimonial">
-                        “Cheira a casa de quem se cuida. Das várias velas que já comprei ao João, é uma das minhas preferidas. Dura imenso.”
-                        <div class="mini-testimonial-author">— Fábio, Matosinhos</div>
-                    </div>
+                    <p class="product-details">Vela perfumada artesanal • 150g • Cera de soja • Cera de coco • Essências</p>
+                    <p class="product-desc">Luz baixa. Aroma quente. Um fim de dia com mais corpo e menos ruído. Para acender quando precisas de voltar a ti.</p>
                     <div class="price">13,50€</div>
                     <span class="price-note">ou 3 por 35€</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Clair Obscur • Entre Nous • Bougie Parfumée" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="#contacto" class="btn-order contact-link">Quero Este Produto</a>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">👜</div>
                     <h3 class="product-name">Clair Obscur • Entre Nous • Sachet Parfumé Linge & Armoire</h3>
                     <p class="product-details">Sachet aromático • 20g • Kaolin • Fragrâncias</p>
-                    <p class="product-desc">Pequenos detalhes que permanecem no tempo e trazem delicadeza ao quotidiano. Roupa que cheira bem, sem perfume direto.</p>
-                    <div class="mini-testimonial">
-                        “Pus na mala do meu marido quando viaja. Ele diz que cheira a casa.”
-                        <div class="mini-testimonial-author">— Mariana, Aveiro</div>
-                    </div>
+                    <p class="product-desc">Para gavetas, malas, armários e pequenos espaços. A roupa ganha cheiro de cuidado sem perfume directo. Simples, bonito e útil.</p>
                     <div class="price">2,80€</div>
-                    <span class="price-note">ou pack 3 por 7,50€</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Clair Obscur • Entre Nous • Sachet Parfumé" class="btn-order" target="_blank">Encomendar</a>
+                    <span class="price-note">ou 3 por 7,50€</span>
+                    <a href="#contacto" class="btn-order contact-link">Quero Este Produto</a>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">✋</div>
                     <h3 class="product-name">Clair Obscur • Entre Nous • Huile de Massage</h3>
-                    <p class="product-details">Óleo de massagem corporal • 60ml • Óleo de Jojoba • Óleo de Semente de Uva • Fragrâncias • Vitamina E</p>
-                    <p class="lot-info">Uso corporal e sensorial</p>
-                    <p class="product-desc">Nutre a pele e promove relaxamento. Um cuidado que convida à reconexão com o corpo. Absorção média. Não fica gorduroso. Pode ser usado também como óleo de banho.</p>
-                    <div class="mini-testimonial">
-                        “Depois de um dia de trabalho e stress… recomendo a todas as pessoas. É mesmo muito bom.”
-                        <div class="mini-testimonial-author">— Rosa, Vila do Conde</div>
-                    </div>
+                    <p class="product-details">Óleo de massagem corporal • 60ml • Óleo de jojoba • Óleo de semente de uva • Fragrâncias • Vitamina E</p>
+                    <p class="product-desc">Para massajar, hidratar e abrandar. Um óleo leve, sensorial, pensado para devolver presença ao corpo.</p>
                     <div class="price">14€</div>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Clair Obscur • Entre Nous • Huile de Massage" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="#contacto" class="btn-order contact-link">Quero Este Produto</a>
                 </div>
 
                 <div class="product-card">
                     <span class="badge badge-limited">Stock Limitado</span>
                     <div class="product-image">🕯️</div>
                     <h3 class="product-name">Clair Obscur • Entre Nous • Bougie de Massage</h3>
-                    <p class="product-details">Vela de massagem • 90g • Manteiga de Karité • Óleo de Semente de Uva • Essências • Vitamina E</p>
-                    <p class="product-desc">Formulada com manteigas e óleos selecionados para contacto direto com a pele. Formato pensado para várias utilizações, mantendo a intensidade da experiência.</p>
-                    <p class="product-desc">A cera transforma-se em óleo quente ao toque, criando uma experiência sensorial de cuidado e proximidade. Nutre a pele e prolonga o momento.</p>
-                    <div class="mini-testimonial">
-                        “Agora é um ritual nosso. A pele fica incrível.”
-                        <div class="mini-testimonial-author">— Vera & Miguel, Porto</div>
-                    </div>
+                    <p class="product-details">Vela de massagem • 90g • Manteiga de karité • Óleo de semente de uva • Essências • Vitamina E</p>
+                    <p class="product-desc">A vela aquece, derrete e transforma-se em óleo de massagem. Para cuidar do corpo com tempo, toque e intenção.</p>
                     <div class="price">12€</div>
                     <span class="price-note">Últimas unidades deste lote</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Clair Obscur • Entre Nous • Bougie de Massage" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="#contacto" class="btn-order contact-link">Quero Este Produto</a>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">🦶</div>
                     <h3 class="product-name">Clair Obscur • Entre Nous • Bain de Pieds</h3>
-                    <p class="product-details">Ritual de escalda-pés • 180g • Sal • Sal de Epsom • Fragrâncias • SLSA</p>
-                    <p class="lot-info">Embalado em saco de papel, pensado para reduzir desperdício e manter a leveza do ritual.</p>
-                    <p class="product-desc">Um momento de pausa para o final do dia. Ajuda a libertar tensões e a acalmar a mente.</p>
-                    <div class="mini-testimonial">
-                        “Domingo à noite é ritual sagrado.”
-                        <div class="mini-testimonial-author">— Beatriz, Coimbra</div>
-                    </div>
+                    <p class="product-details">Ritual de escalda-pés • 180g / 280g • Sal • Sal de Epsom • Fragrâncias • SLSA</p>
+                    <p class="product-desc">Para dias pesados, pés cansados e cabeça cheia. Um banho de pés que chama o corpo de volta ao descanso.</p>
                     <div class="price">A partir de 6€</div>
                     <span class="price-note">180g: 6€ | 280g: 11€</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Clair Obscur • Entre Nous • Bain de Pieds" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="#contacto" class="btn-order contact-link">Quero Este Produto</a>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">✨</div>
                     <h3 class="product-name">Perguntas d’Ouro</h3>
-                    <p class="product-details">Cartas intuitivas colecionáveis</p>
-                    <p class="product-desc">Um convite à introspeção e à escuta interior. Cada carta apresenta uma pergunta que desperta consciência e promove reflexão.</p>
+                    <p class="product-details">Cartas intuitivas coleccionáveis</p>
+                    <p class="product-desc">Uma pergunta por carta. Uma porta para dentro. Para oferecer, guardar na bolsa ou abrir quando a confusão bater à porta.</p>
                     <div class="price">2,80€</div>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Perguntas d’Ouro" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="#contacto" class="btn-order contact-link">Quero Este Produto</a>
                 </div>
+            </div>
+
+            <div class="intro-strip order-flow">
+                <h3>Como encomendar</h3>
+                <p><strong>1.</strong> Escolhe o produto que te chama.</p>
+                <p><strong>2.</strong> Clica em “Quero Este Produto” e vais directamente para os contactos.</p>
+                <p><strong>3.</strong> Confirmo disponibilidade, opções de embalagem e forma de entrega.</p>
+                <p><strong>Portes grátis a partir de 60€.</strong> Também posso ajudar-te a escolher o produto mais adequado para ti ou para oferecer.</p>
+                <a href="#contacto" class="btn-order contact-link" style="max-width: 320px; margin: 22px auto 0;">Ver Contactos</a>
             </div>
         </section>
 
-        <section id="edicao-mae" class="section fade-in">
+        <section id="produtos-consultas" class="section fade-in">
+            <div class="experiences-section dior-panel">
+                <h2 class="section-title">Produtos e Consultas</h2>
+                <p><strong>Há produtos que cuidam do espaço.</strong></p>
+                <p><strong>Há consultas que ajudam a reorganizar a vida.</strong></p>
+                <p>Na Maison JF™, os dois caminhos encontram-se no mesmo lugar: voltar a ti.</p>
+                <p>Um ritual pode começar numa vela, num aroma ou numa consulta. O importante é não continuares a ignorar o que já está a pedir atenção.</p>
+            </div>
+        </section>
+
+        <section id="edicao-mae" class="section fade-in" data-anchor-fix="true">
             <div class="section-header">
                 <h2 class="section-title">Edição Especial</h2>
                 <p class="section-subtitle">Clair Obscur • Éclosion Mère • Edição Especial Dia da Mãe</p>
@@ -426,9 +508,9 @@
                     <div class="product-image">🌸</div>
                     <h3 class="product-name">Clair Obscur • Éclosion Mère • Mémoire Parfumée</h3>
                     <p class="product-details">Placa perfumada artesanal em cera vegetal</p>
-                    <p class="product-desc">Peça moldada manualmente, com elementos florais naturais. Liberta aroma de forma gradual e subtil. Cada unidade é única.</p>
+                    <p class="product-desc">Moldada manualmente com elementos florais naturais. Cada peça é única. Aroma subtil, como uma memória que fica.</p>
                     <div class="price">9€</div>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Mémoire Parfumée" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="#contacto" class="btn-order contact-link">Quero Este Produto</a>
                 </div>
 
                 <div class="product-card">
@@ -436,10 +518,10 @@
                     <div class="product-image">💛</div>
                     <h3 class="product-name">Clair Obscur • Éclosion Mère • Cœur Intime</h3>
                     <p class="product-details">Wax melts artesanais em forma de coração • 10 pequenos corações perfumados</p>
-                    <p class="product-desc">Derretem lentamente, libertando um aroma envolvente e acolhedor. Edição limitada com inclusão de folha de ouro.</p>
+                    <p class="product-desc">Derretem lentamente e perfumam o espaço com delicadeza. Pequenos corações para criar calma, beleza e presença.</p>
                     <div class="price">6€</div>
                     <span class="price-note">stock limitado</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Cœur Intime" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="#contacto" class="btn-order contact-link">Quero Este Produto</a>
                 </div>
 
                 <div class="product-card">
@@ -447,28 +529,32 @@
                     <div class="product-image">🌿</div>
                     <h3 class="product-name">Clair Obscur • Éclosion Mère • Capsule Volta a Ti</h3>
                     <p class="product-details">Cápsula sensorial artesanal</p>
-                    <p class="product-desc">Objeto íntimo concebido como convite à pausa e reconexão. Contém pétalas de jasmim, uma pedra semipreciosa e uma mensagem escrita.</p>
-                    <p class="product-desc">Cada cápsula é preparada manualmente. Pensada para oferecer ou guardar como gesto pessoal.</p>
+                    <p class="product-desc">Pétalas, pedra semipreciosa e uma mensagem escrita. Um objeto íntimo para oferecer ou guardar. Um convite à pausa.</p>
                     <div class="price">6€</div>
                     <span class="price-note">stock limitado</span>
-                    <a href="https://wa.me/351923318289?text=Olá! Quero encomendar Capsule Volta a Ti" class="btn-order" target="_blank">Encomendar</a>
+                    <a href="#contacto" class="btn-order contact-link">Quero Este Produto</a>
                 </div>
             </div>
         </section>
 
-        <section id="servicos" class="section fade-in">
+        <section id="servicos" class="section emerald-section fade-in">
             <div class="section-header">
-                <h2 class="section-title">Consultas, Leituras e Práticas</h2>
-                <p class="section-subtitle">Diferentes práticas utilizadas como ferramentas de escuta, reflexão e orientação</p>
+                <h2 class="section-title">Consultas</h2>
+                <p class="section-subtitle">Para quando precisas de clareza, direcção e uma verdade dita com cuidado</p>
             </div>
 
-            <div class="story-section" style="margin-top: 0;">
-                <div class="story-text">
-                    <p><strong>Disponíveis em:</strong></p>
-                    <p>Presencial<br>Online (videochamada)<br>Chamada de áudio<br>Resposta escrita (email, WhatsApp ou Telegram)</p>
-                    <p>As respostas escritas são preparadas com tempo e cuidado, sendo enviadas até 3 dias após confirmação de pagamento.</p>
-                    <p>As consultas são confirmadas após pagamento. Cada consulta é adaptada ao momento e à necessidade de cada pessoa.</p>
-                </div>
+            <div class="intro-strip">
+                <p><strong>Não é para te dizer o que queres ouvir.</strong> É para te ajudar a ver melhor.</p>
+                <p>Presencial em Árvore, Vila do Conde. Online por videochamada, chamada de áudio ou resposta escrita.</p>
+            </div>
+
+            <div class="intro-strip order-flow">
+                <h3>Como marcar</h3>
+                <p><strong>1.</strong> Escolhe a consulta que faz sentido para o teu momento.</p>
+                <p><strong>2.</strong> Clica no botão e vais directamente para os contactos.</p>
+                <p><strong>3.</strong> Definimos formato, horário e pagamento.</p>
+                <p><strong>A tua marcação fica confirmada após pagamento.</strong> Se tiveres dúvidas, explico-te qual é a opção mais indicada.</p>
+                <a href="#contacto" class="btn-service contact-link" style="margin-top: 22px;">Ver Contactos</a>
             </div>
 
             <div class="services-grid">
@@ -477,15 +563,11 @@
                         <h3>Tarot Expresso</h3>
                         <p class="service-time">Até 17 minutos</p>
                         <p class="next-slot">Presencial • Online • Marcação prévia</p>
-                        <p class="service-desc">Questões concretas. Respostas diretas. Ideal para decisões imediatas ou momentos de dúvida pontual. Leitura clara, objetiva e focada no essencial.</p>
-                        <div class="service-testimonial">
-                            “17 minutos e ficou tudo claro. Mais útil do que passar horas a pensar em círculo.”
-                            <div class="mini-testimonial-author">— Lucas, Rio Tinto</div>
-                        </div>
+                        <p class="service-desc">Uma questão concreta. Uma resposta directa. Ideal quando precisas de decidir e a cabeça não pára de rodar.</p>
                     </div>
                     <div class="service-price">
                         <div class="price">17€</div>
-                        <a href="https://wa.me/351923318289?text=Olá! Quero marcar Tarot Expresso" class="btn-service" target="_blank">Marcar</a>
+                        <a href="#contacto" class="btn-service contact-link">Quero Resposta</a>
                     </div>
                 </div>
 
@@ -494,15 +576,11 @@
                         <h3>Tarot Integrativo</h3>
                         <p class="service-time">Até 62 minutos</p>
                         <p class="next-slot">Presencial • Online • Marcação prévia</p>
-                        <p class="service-desc">Panorama completo: amor, trabalho, direção pessoal. Leitura abrangente que permite compreender diferentes áreas da vida e a forma como se interligam.</p>
-                        <div class="service-testimonial">
-                            “Saí com um mapa. Já não me sinto perdida, sei por onde começar.”
-                            <div class="mini-testimonial-author">— Adriana, Póvoa de Varzim</div>
-                        </div>
+                        <p class="service-desc">Amor, trabalho, direcção e escolhas. Vês o panorama completo e percebes onde estás a repetir, evitar ou forçar.</p>
                     </div>
                     <div class="service-price">
                         <div class="price">35€</div>
-                        <a href="https://wa.me/351923318289?text=Olá! Quero marcar Tarot Integrativo" class="btn-service" target="_blank">Marcar</a>
+                        <a href="#contacto" class="btn-service contact-link">Quero Clareza</a>
                     </div>
                 </div>
 
@@ -511,32 +589,24 @@
                         <h3>Tarot Terapêutico</h3>
                         <p class="service-time">Até 62 minutos</p>
                         <p class="next-slot">Presencial • Online • Marcação prévia</p>
-                        <p class="service-desc">Foco em padrões emocionais e ciclos repetitivos. Para quem procura aprofundar processos internos e compreender repetições na vida.</p>
-                        <div class="service-testimonial">
-                            “Foi como terapia, mas mais direto. O JF tem uma forma de dizer as coisas que abre os olhos.”
-                            <div class="mini-testimonial-author">— Tiago, Vila Nova de Gaia</div>
-                        </div>
+                        <p class="service-desc">Para quem está cansado de repetir os mesmos padrões. Menos ruído, mais consciência. Vês o ciclo e decides o que fazer com ele.</p>
                     </div>
                     <div class="service-price">
                         <div class="price">44€</div>
-                        <a href="https://wa.me/351923318289?text=Olá! Quero marcar Tarot Terapêutico" class="btn-service" target="_blank">Marcar</a>
+                        <a href="#contacto" class="btn-service contact-link">Quero Desbloquear</a>
                     </div>
                 </div>
 
                 <div class="service-card">
                     <div class="service-info">
-                        <h3>Aconselhamento Holístico</h3>
+                        <h3>Escuta Orientada</h3>
                         <p class="service-time">Entre 35 e 62 minutos</p>
-                        <p class="next-slot">Sem cartas • Presencial • Online • Marcação prévia • Vagas limitadas</p>
-                        <p class="service-desc">Conversa orientada para equilíbrio pessoal. Sessão focada em decisões, clareza e alinhamento interno, sem utilização de cartas.</p>
-                        <div class="service-testimonial">
-                            “Precisava de alguém fora da minha vida para me espelhar. Foi exatamente isso.”
-                            <div class="mini-testimonial-author">Daniela, Ericeira</div>
-                        </div>
+                        <p class="next-slot">Sem cartas • Presencial • Online • Marcação prévia</p>
+                        <p class="service-desc">Sem cartas. Só conversa, escuta profunda e orientação clara. Para decisões importantes, transições e momentos em que precisas de te ouvir sem fugir. Uma sessão humana, directa e feita à medida do teu momento.</p>
                     </div>
                     <div class="service-price">
-                        <div class="price">45€</div>
-                        <a href="https://wa.me/351923318289?text=Olá! Quero saber mais sobre Aconselhamento Holístico" class="btn-service" target="_blank">Saber Mais</a>
+                        <div class="price">60€</div>
+                        <a href="#contacto" class="btn-service contact-link">Quero Perceber Melhor</a>
                     </div>
                 </div>
 
@@ -545,15 +615,11 @@
                         <h3>Acompanhamento Permanente</h3>
                         <p class="service-time">Programa contínuo com sessões semanais</p>
                         <p class="next-slot">Presencial • Online • Programas de 1, 3, 6, 9 ou 12 meses</p>
-                        <p class="service-desc">Suporte contínuo, com acompanhamento entre consultas e orientação ajustada ao momento. Pensado para quem quer trabalhar processos com consistência e continuidade.</p>
-                        <div class="service-testimonial">
-                            “Não é só consulta, é ter alguém do teu lado durante o mês inteiro.”
-                            <div class="mini-testimonial-author">— Enric, Salvador</div>
-                        </div>
+                        <p class="service-desc">Para quem quer consistência, não apenas uma conversa. Sessões regulares e acompanhamento ajustado ao teu processo.</p>
                     </div>
                     <div class="service-price">
                         <div class="price">Sob consulta</div>
-                        <a href="https://wa.me/351923318289?text=Olá! Quero saber sobre Acompanhamento Permanente" class="btn-service" target="_blank">Ver Disponibilidade</a>
+                        <a href="#contacto" class="btn-service contact-link">Quero Acompanhamento</a>
                     </div>
                 </div>
 
@@ -561,16 +627,12 @@
                     <div class="service-info">
                         <h3>Mentoria Espiritual</h3>
                         <p class="service-time">Percurso estruturado</p>
-                        <p class="next-slot">Online • Vagas limitadas • Programas de 1, 3, 6, 9 ou 12 meses</p>
-                        <p class="service-desc">Desenvolvimento da intuição e integração da espiritualidade no dia-a-dia. Programa orientado para quem deseja aprofundar prática e consciência pessoal.</p>
-                        <div class="service-testimonial">
-                            “Da teoria à prática real. Finalmente sinto que isto faz parte de mim.”
-                            <div class="mini-testimonial-author">— Maria de Fátima, Pernambuco</div>
-                        </div>
+                        <p class="next-slot">Online • Programas de 1, 3, 6, 9 ou 12 meses</p>
+                        <p class="service-desc">Para desenvolver intuição, prática espiritual e presença no dia a dia. Menos fantasia. Mais integração real.</p>
                     </div>
                     <div class="service-price">
                         <div class="price">Sob consulta</div>
-                        <a href="https://wa.me/351923318289?text=Olá! Quero informações sobre Mentoria Espiritual" class="btn-service" target="_blank">Pedir Info</a>
+                        <a href="#contacto" class="btn-service contact-link">Quero Desenvolver</a>
                     </div>
                 </div>
             </div>
@@ -579,6 +641,8 @@
                 <div class="story-text">
                     <h3>Nota Importante</h3>
                     <p>Todas as práticas são orientadas para o bem-estar e desenvolvimento pessoal, não substituindo acompanhamento médico ou psicológico.</p>
+                    <p>As respostas escritas são preparadas com tempo e cuidado, sendo enviadas até 3 dias após confirmação de pagamento.</p>
+                    <p>As consultas são confirmadas após pagamento. Cada consulta é adaptada ao momento e à necessidade de cada pessoa.</p>
                 </div>
             </div>
         </section>
@@ -586,10 +650,9 @@
         <section id="sos" class="sos-section fade-in">
             <div class="sos-content">
                 <div class="sos-icon">🆘</div>
-                <h3>Precisas de Ajuda Agora?</h3>
-                <p>Para momentos de crise, decisões urgentes ou quando a cabeça não para.</p>
-                <p>Disponibilidade limitada para garantir qualidade e presença em cada acompanhamento. Esta modalidade oferece suporte de curta duração para situações específicas que exigem clareza, presença e orientação imediata.</p>
-                <p>Indicada para momentos de instabilidade emocional, decisões urgentes ou fases de maior intensidade.</p>
+                <h3>Quando Não Dá Para Adiar</h3>
+                <p>Para momentos de crise, decisões urgentes ou quando a cabeça não pára.</p>
+                <p>Suporte pontual e intensivo para organizar o que está a pesar agora. Com presença, clareza e orientação ajustada ao teu momento.</p>
 
                 <div class="sos-options">
                     <div class="sos-option">
@@ -617,35 +680,120 @@
                 <p><strong>Como funciona</strong></p>
                 <p>Contacto diário breve por mensagem<br>Chamadas pontuais nos dias definidos<br>Orientação ajustada ao momento</p>
 
-                <div class="sos-testimonial">
-                    “Liguei às 11h em prantos com uma decisão de trabalho. Às 11h45 já sabia o que fazer. Não tem preço.”
-                    <div style="margin-top: 10px; font-size: 0.8rem; color: var(--dourado);">— Ana Rita, Cascais</div>
+                <p>O acompanhamento SOS é uma modalidade pontual e intensiva. Não substitui sessões completas nem programas de acompanhamento contínuo.</p>
+                <a href="#contacto" class="btn-service contact-link sos-cta">
+                    Pedir Apoio SOS
+                </a>
+                <p class="whatsapp-fallback">WhatsApp directo: <strong>+351 923 318 289</strong></p>
+            </div>
+        </section>
+
+        <section id="cada-terra" class="cada-terra-section fade-in">
+            <div class="cada-terra-content">
+                <span class="cada-terra-label">Candidato Prémio Intermarché 2026</span>
+                <h2 class="cada-terra-title">Cá da Terra</h2>
+                <p class="cada-terra-text">
+                    A Maison JF™ representa uma proposta portuguesa de <strong>produção artesanal contemporânea</strong>, criada em Árvore, Vila do Conde. Aqui, cuidado, identidade local e criação manual encontram-se em produtos sensoriais feitos em pequenos lotes. Cada peça é preparada com tempo. Cada consulta é feita à medida. <strong>Nada aqui é linha de montagem.</strong>
+                </p>
+                <p class="cada-terra-text">
+                    <strong>Porque é Cá da Terra:</strong><br>
+                    feito em Árvore, Vila do Conde • produção artesanal em pequenos lotes • criação manual, sem linha industrial • marca portuguesa com identidade sensorial, cuidado humano e potencial de crescimento.
+                </p>
+                <div class="cada-terra-stats">
+                    <div class="cada-stat">
+                        <span class="cada-stat-number pt-small">PT</span>
+                        <span class="cada-stat-label">Feito em Portugal</span>
+                    </div>
+                    <div class="cada-stat">
+                        <span class="cada-stat-number">32</span>
+                        <span class="cada-stat-label">Anos de percurso</span>
+                    </div>
+                    <div class="cada-stat">
+                        <span class="cada-stat-number">™</span>
+                        <span class="cada-stat-label">Marca em processo</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proximo-passo" class="section fade-in">
+            <div class="experiences-section dior-panel">
+                <h2 class="section-title">O Próximo Passo</h2>
+                <p><strong>A Maison JF™ prepara-se para crescer com estrutura.</strong></p>
+                <p>O próximo passo passa por reforçar stock, melhorar embalagens, investir em fotografia profissional, aumentar presença em feiras, fortalecer a loja online e desenvolver novas colecções sensoriais feitas em Portugal.</p>
+                <p>Crescer, sim. Mas sem perder aquilo que torna a Maison reconhecível: cuidado, presença, produção manual e uma ligação real com quem compra ou procura orientação.</p>
+            </div>
+        </section>
+
+        <section id="historia" class="story-section emerald-story fade-in">
+            <div class="section-header" style="margin-bottom: 30px;">
+                <h2 class="section-title">A Maison</h2>
+                <p class="section-subtitle">Um percurso real. Um cuidado que se sente.</p>
+            </div>
+
+            <div class="story-grid">
+                <div class="story-text">
+                    <h3>De onde venho</h3>
+
+                    <p>A Maison JF™ nasce da necessidade de criar pausas num mundo que não pára. E nasce, também, de um percurso profundamente humano.</p>
+                    <p>Comecei ainda na adolescência, com um baralho de tarot e o contacto com práticas intuitivas como a leitura de mãos. Na altura, não sabia onde isso me ia levar. Sabia apenas que queria ajudar pessoas a compreenderem-se melhor.</p>
+                    <p>Ao longo de mais de 30 anos, essa intenção manteve-se. O que mudou foi a profundidade.</p>
+                    <p>O caminho passou pelo voluntariado, através do Instituto Português da Juventude, hoje IPDJ, e por projectos como o MADI e a Santa Casa da Misericórdia de Azurara.</p>
+                    <p>Mais tarde, esse percurso estendeu-se ao trabalho com populações vulneráveis: imigrantes, pessoas em situação de sem-abrigo, população idosa e vítimas de violência doméstica.</p>
+                    <p>Eu sou Técnico Psicossocial. Sou Técnico de Apoio à Vítima. Trabalhei numa Casa-Abrigo para vítimas de Violência Doméstica.</p>
+                    <p>Já estive ao lado de pessoas em momentos em que tudo parecia desmoronar. Medo. Dúvida. Culpa. Silêncio.</p>
+                    <p>Já escutei histórias que não se contam facilmente. Histórias que ficam no corpo. Histórias que pedem cuidado… e não julgamento.</p>
+                    <p>Houve momentos em que foi preciso decidir rápido. Respirar fundo. E simplesmente… estar.</p>
+                    <p>Porque antes de qualquer resposta, há uma coisa que todas as pessoas precisam: um lugar seguro para existir.</p>
+
+                    <div class="experience-badge emerald-badge">
+                        <div class="experience-number">32</div>
+                        <div class="experience-text">
+                            ANOS DE ESCUTA,<br>
+                            PRESENÇA E CUIDADO
+                        </div>
+                    </div>
                 </div>
 
-                <p>O acompanhamento SOS é uma modalidade pontual e intensiva. Não substitui sessões completas nem programas de acompanhamento contínuo.</p>
-                <a href="https://wa.me/351923318289?text=🆘 Olá, preciso de acompanhamento SOS. Podemos falar?" class="btn-service" target="_blank" style="background: var(--dourado); color: var(--preto); padding: 16px 40px; font-size: 0.9rem;">
-                    Pedir Ajuda Agora
-                </a>
-                <p style="margin-top: 16px; font-size: 0.8rem; opacity: 0.7;">Disponível todos os dias, das 9h às 21h<br>Resposta em menos de 2 horas</p>
+                <div class="story-text">
+                    <h3>O que crio hoje</h3>
+
+                    <div class="story-quote">
+                        "Parar. Sentir. Cuidar."
+                    </div>
+
+                    <p><strong>Foi desse lugar que nasceu a Maison JF.</strong></p>
+                    <p>Não como uma marca pensada apenas para vender. Mas como uma <strong>extensão natural do cuidado</strong> que já fazia.</p>
+                    <p>Com o tempo, percebi que nem tudo se resolve na conversa. Há coisas que o corpo precisa de sentir.</p>
+                    <p>Um cheiro que acalma. Um gesto que abranda. Um momento em que finalmente páras.</p>
+                    <p>Foi aí que começaram a nascer as primeiras peças. Velas. Óleos. Pequenos rituais.</p>
+                    <p>Não como decoração. Como ferramentas.</p>
+                    <p>Hoje, a Maison JF vive nesse equilíbrio. Entre a palavra e o silêncio. Entre a escuta… e o toque.</p>
+                    <p><strong>O que acontece numa consulta pode continuar em casa.</strong></p>
+                    <p><strong>Cuidar não é só perceber. É integrar.</strong></p>
+
+                    <div class="imperfection-note">
+                        ✋ Ainda queimo as mãos de vez em quando ao fazer velas. Cada peça que sai daqui passou pelas minhas mãos. Mesmo.
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="experiencias" class="section fade-in">
-            <div class="experiences-section">
+            <div class="experiences-section dior-panel">
                 <h2 class="section-title">Experiências Completas</h2>
                 <p><strong>Nem tudo precisa de estar exposto.</strong></p>
                 <p>Algumas experiências da Maison JF™ são criadas de forma mais íntima, combinando produtos e acompanhamento de acordo com o momento de cada pessoa.</p>
-                <p>São propostas pensadas para quem procura mais do que um produto ou uma consulta isolada. A Maison JF™ é um espaço de cuidado contínuo, presença e reconexão.</p>
-                <p>Disponíveis mediante pedido.</p>
-                <a href="https://wa.me/351923318289?text=Olá, gostava de saber mais sobre as experiências completas da Maison JF." class="btn-order" target="_blank" style="max-width: 320px; margin: 20px auto 0;">Descobrir Experiências</a>
+                <p>Para quem procura mais do que um produto ou uma consulta isolada. Disponíveis mediante pedido.</p>
+                <a href="#contacto" class="btn-order contact-link" style="max-width: 320px; margin: 20px auto 0;">Descobrir Experiências</a>
             </div>
         </section>
 
-        <section id="testemunhos" class="testimonials-page fade-in">
+        <section id="testemunhos" class="testimonials-page emerald-panel fade-in">
             <div class="section-header" style="margin-bottom: 20px;">
-                <h2 class="section-title">O Que Dizem Quem Já Me Conhece</h2>
+                <h2 class="section-title">O Que Dizem Quem Experimentou</h2>
                 <div class="stars" style="margin-top: 12px;">★★★★★</div>
-                <p class="section-subtitle" style="margin-top: 8px;">Histórias de quem já se cruzou com a Maison JF</p>
+                <p class="section-subtitle" style="margin-top: 8px;">De quem já passou por aqui</p>
             </div>
 
             <div class="testimonial-grid">
@@ -731,32 +879,38 @@
 
         <section id="newsletter" class="newsletter fade-in">
             <h3>A Folha da Maison</h3>
-            <p>Rituais da estação, fases da lua e novidades em primeira mão</p>
-            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Bem-vinda à Maison! ✨');">
-                <input type="email" placeholder="O teu email" required>
-                <button type="submit" class="btn-member">Subscrever</button>
+            <p><strong>Rituais, ciclos e sinais… para quem sente que algo está a mudar.</strong></p>
+            <p>Recebe novidades, fases da lua, lançamentos, bastidores da Maison JF™ e pequenos convites para parar, sentir e voltar a ti.</p>
+            <p class="newsletter-note">Entra na lista e acompanha primeiro o que está a nascer: novas colecções, edições limitadas e textos que não vão para as redes.</p>
+            <form class="newsletter-form" action="https://maisonjf.substack.com/subscribe" method="get" target="_blank">
+                <input type="email" name="email" placeholder="O teu email" required>
+                <button type="submit" class="btn-member">Quero Receber</button>
             </form>
+            <p class="newsletter-small">Sem spam. Só presença, novidades e aquilo que vale mesmo a pena abrir.</p>
         </section>
 
         <div class="personal-touch fade-in">
             <p>
-                “Não sou uma marca grande.<br>
-                Sou eu, num atelier em Árvore, Vila do Conde, a fazer o que sei fazer há 32 anos.<br><br>
-                Se tiveres uma dúvida, manda mensagem. Respondo eu próprio.<br>
-                Se demorar um bocadinho, é porque estou a fazer velas, a criar algum produto ou a atender alguém.<br><br>
-                Mas respondo.<br><br>
-                Obrigado por estares desse lado. A sério. Faz diferença.”
+                “A Maison JF™ nasce num atelier em Árvore, Vila do Conde.<br>
+                <strong>Não há fábrica. Não há atendimento automático. Não há produção sem rosto.</strong><br><br>
+                Cada produto passa pelas minhas mãos.<br>
+                Cada mensagem é lida por mim.<br>
+                Cada escolha é feita com presença.<br><br>
+                <strong>Se não sabes que produto escolher, pergunta.</strong><br>
+                <strong>Se sentes que precisas de orientação, marca.</strong><br>
+                Se algo te chamou aqui… talvez não seja para ignorar.<br><br>
+                O cuidado ainda pode ser directo, humano e feito à tua medida.”
             </p>
             <div class="signature">— JF</div>
         </div>
 
         <footer id="contacto" class="footer fade-in">
             <h2 class="section-title">Maison JF™</h2>
-            <p class="tagline">A ponte entre o sensorial e o humano</p>
+            <p class="tagline">Rituais que se sentem. Clareza que muda tudo.</p>
 
             <div class="trust-badges">
                 <div class="trust-badge">
-                    <span class="trust-icon">🇵🇹</span>
+                    <span class="trust-icon pt-small">PT</span>
                     Feito em Portugal
                 </div>
                 <div class="trust-badge">
@@ -765,7 +919,7 @@
                 </div>
                 <div class="trust-badge">
                     <span class="trust-icon">♻️</span>
-                    Cera de soja & coco<br>Matérias-primas selecionadas
+                    Cera de soja & coco<br>Matérias-primas seleccionadas
                 </div>
                 <div class="trust-badge">
                     <span class="trust-icon">™</span>
@@ -774,18 +928,22 @@
             </div>
 
             <div class="contact-info">
-                <p>WhatsApp: <a href="https://wa.me/351923318289" target="_blank">+351 923 318 289</a></p>
-                <p>Instagram: <a href="https://instagram.com/maisonjfatelier" target="_blank">@maisonjfatelier</a></p>
+                <p>WhatsApp: <a href="#contacto" class="contact-link">+351 923 318 289</a></p>
+                <p>Instagram: <a href="https://instagram.com/maisonjfatelier" target="_blank" rel="noopener noreferrer">@maisonjfatelier</a></p>
                 <p style="margin-top: 12px; font-size: 0.8rem;">Árvore, Vila do Conde • Respondo eu próprio • Até 24h</p>
             </div>
 
             <div class="social-links">
-                <a href="https://instagram.com/maisonjfatelier" target="_blank">Instagram</a>
-                <a href="https://wa.me/351923318289" target="_blank">WhatsApp</a>
+                <a href="https://instagram.com/maisonjfatelier" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="#contacto" class="contact-link">WhatsApp</a>
                 <a href="#newsletter">Newsletter</a>
             </div>
 
-            <p style="font-size: 0.75rem; color: rgba(10, 10, 10, 0.5);">
+            <p style="font-size: 0.72rem; color: rgba(245, 241, 232, 0.62); margin-bottom: 14px;">
+                A Maison JF™ escreve segundo o Antigo Acordo Ortográfico, por escolha do seu fundador.
+            </p>
+
+            <p style="font-size: 0.75rem; color: rgba(245, 241, 232, 0.65);">
                 © 2026 Maison JF™ • 32 anos de dedicação • Árvore, Vila do Conde • Portugal<br><br>
                 <em>Candidato Prémio Intermarché Produção Nacional 2026 • Categoria “Cá da Terra”</em>
             </p>
@@ -808,6 +966,15 @@
                 el.style.transform = 'translateY(20px)';
                 el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(el);
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (!target) return;
+                    event.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
             });
         });
     </script>
