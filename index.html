@@ -161,8 +161,11 @@
         .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
         .product-card { background: white; border: 1px solid rgba(201, 162, 39, 0.15); padding: 28px; position: relative; transition: all 0.4s ease; display: flex; flex-direction: column; height: 100%; }
         .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(10, 10, 10, 0.1); }
+        .product-card.sold-out { opacity: 0.84; }
+        .product-card.sold-out:hover { opacity: 0.96; }
         .badge { position: absolute; top: 16px; right: 16px; padding: 6px 12px; font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
         .badge-limited { background: var(--vermelho-urgencia); color: white; }
+        .badge-soldout { background: var(--preto); color: var(--dourado-claro); border: 1px solid rgba(201,162,39,0.45); }
         .badge-bestseller { background: var(--dourado); color: var(--preto); }
         .badge-fresh { background: var(--esmeralda); color: white; }
         .product-image { width: 100%; height: 180px; background: linear-gradient(135deg, #f5f1e8 0%, #ebe5d8 100%); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; font-size: 3rem; opacity: 0.6; }
@@ -263,7 +266,7 @@
         .contact-info p { font-size: 0.9rem; color: rgba(10, 10, 10, 0.7); margin-bottom: 8px; }
         .contact-info a { color: var(--dourado-claro); text-decoration: none; font-weight: 600; }
         .contact-info a:hover { color: var(--dourado); }
-        .social-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; }
+        .social-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; flex-wrap: wrap; }
         .social-links a { color: var(--dourado-claro); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: color 0.3s; font-weight: 600; }
         .social-links a:hover { color: var(--dourado); }
         .emerald-section .intro-strip,
@@ -391,8 +394,11 @@
             <div class="intro-strip">
                 <p><strong>Clair Obscur</strong> não é uma colecção única. É um universo.</p>
                 <p>Cada fase da marca traz uma sub-colecção diferente. Agora estás a ver a <strong>Clair Obscur • Entre Nous</strong> — íntima, próxima, pensada para o dia a dia.</p>
-                <p><strong>E sim… já estou a preparar a próxima.</strong> Limitada. Mais intensa. Para quem sente tudo mais fundo.</p>
-                <p><strong>Se alguma coisa aqui te chama, não ignores.</strong> Normalmente… não é por acaso.</p>
+                <p><strong>Nova Edição Limitada em Pré-Venda.</strong></p>
+                <p>As edições Maison JF™ são criadas em pequenas quantidades. Algumas regressam. Outras vivem apenas uma vez.</p>
+                <p>Depois da edição especial do Dia da Mãe e dos sachets perfumados, estou a preparar uma nova colecção sensorial, com aromas, formas e detalhes pensados para trazer mais presença, beleza e intenção ao quotidiano.</p>
+                <p><strong>As pré-vendas já estão abertas para quem quiser reservar antes do lançamento oficial.</strong></p>
+                <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-order whatsapp-link" target="_blank" rel="noopener noreferrer" style="max-width: 340px; margin: 22px auto 0;">Quero reservar a minha unidade</a>
             </div>
 
             <div class="products-grid">
@@ -428,14 +434,15 @@
                     <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-order whatsapp-link" target="_blank" rel="noopener noreferrer">Pedir Este Produto</a>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card sold-out">
+                    <span class="badge badge-soldout">Esgotado</span>
                     <div class="product-image">👜</div>
                     <h3 class="product-name">Clair Obscur • Entre Nous • Sachet Parfumé Linge & Armoire</h3>
                     <p class="product-details">Sachet aromático • 20g • Kaolin • Fragrâncias</p>
-                    <p class="product-desc">Para gavetas, malas, armários e pequenos espaços. A roupa ganha cheiro de cuidado sem perfume directo. Simples, bonito e útil.</p>
-                    <div class="price">2,80€</div>
-                    <span class="price-note">ou 3 por 7,50€</span>
-                    <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-order whatsapp-link" target="_blank" rel="noopener noreferrer">Pedir Este Produto</a>
+                    <p class="product-desc">Os sachets perfumados Maison JF™ encontram-se temporariamente esgotados. Estou a preparar uma nova versão, mais cuidada, mais bonita e mais alinhada com o universo sensorial da Maison JF™.</p>
+                    <div class="price">Esgotado</div>
+                    <span class="price-note">Nova versão em preparação</span>
+                    <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-order whatsapp-link" target="_blank" rel="noopener noreferrer">Avisar-me quando voltar</a>
                 </div>
 
                 <div class="product-card">
@@ -504,36 +511,45 @@
                 <p class="section-subtitle">Clair Obscur • Éclosion Mère • Edição Especial Dia da Mãe</p>
             </div>
 
+            <div class="intro-strip">
+                <p><strong>Edição esgotada.</strong></p>
+                <p>Esta edição especial esteve disponível em quantidade limitada e encontra-se esgotada. Novas criações sazonais Maison JF™ estão a caminho.</p>
+                <p><strong>Se quiseres chegar antes do lançamento, já podes reservar a próxima edição limitada.</strong></p>
+                <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-order whatsapp-link" target="_blank" rel="noopener noreferrer" style="max-width: 340px; margin: 22px auto 0;">Ver nova edição em pré-venda</a>
+            </div>
+
             <div class="products-grid">
-                <div class="product-card">
+                <div class="product-card sold-out">
+                    <span class="badge badge-soldout">Esgotado</span>
                     <div class="product-image">🌸</div>
                     <h3 class="product-name">Clair Obscur • Éclosion Mère • Mémoire Parfumée</h3>
                     <p class="product-details">Placa perfumada artesanal em cera vegetal</p>
                     <p class="product-desc">Moldada manualmente com elementos florais naturais. Cada peça é única. Aroma subtil, como uma memória que fica.</p>
-                    <div class="price">9€</div>
-                    <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-order whatsapp-link" target="_blank" rel="noopener noreferrer">Pedir Este Produto</a>
+                    <div class="price">Esgotado</div>
+                    <span class="price-note">Edição especial encerrada</span>
+                    <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-order whatsapp-link" target="_blank" rel="noopener noreferrer">Pedir nova edição</a>
                 </div>
 
-                <div class="product-card">
-                    <span class="badge badge-limited">Stock Limitado</span>
+                <div class="product-card sold-out">
+                    <span class="badge badge-soldout">Esgotado</span>
                     <div class="product-image">💛</div>
                     <h3 class="product-name">Clair Obscur • Éclosion Mère • Cœur Intime</h3>
                     <p class="product-details">Wax melts artesanais em forma de coração • 10 pequenos corações perfumados</p>
                     <p class="product-desc">Derretem lentamente e perfumam o espaço com delicadeza. Pequenos corações para criar calma, beleza e presença.</p>
-                    <div class="price">6€</div>
-                    <span class="price-note">stock limitado</span>
-                    <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-order whatsapp-link" target="_blank" rel="noopener noreferrer">Pedir Este Produto</a>
+                    <div class="price">Esgotado</div>
+                    <span class="price-note">Edição especial encerrada</span>
+                    <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-order whatsapp-link" target="_blank" rel="noopener noreferrer">Pedir nova edição</a>
                 </div>
 
-                <div class="product-card">
-                    <span class="badge badge-limited">Stock Limitado</span>
+                <div class="product-card sold-out">
+                    <span class="badge badge-soldout">Esgotado</span>
                     <div class="product-image">🌿</div>
                     <h3 class="product-name">Clair Obscur • Éclosion Mère • Capsule Volta a Ti</h3>
                     <p class="product-details">Cápsula sensorial artesanal</p>
-                    <p class="product-desc">Pétalas, pedra semipreciosa e uma mensagem escrita. Um objeto íntimo para oferecer ou guardar. Um convite à pausa.</p>
-                    <div class="price">6€</div>
-                    <span class="price-note">stock limitado</span>
-                    <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-order whatsapp-link" target="_blank" rel="noopener noreferrer">Pedir Este Produto</a>
+                    <p class="product-desc">Pétalas, pedra semipreciosa e uma mensagem escrita. Um objecto íntimo para oferecer ou guardar. Um convite à pausa.</p>
+                    <div class="price">Esgotado</div>
+                    <span class="price-note">Edição especial encerrada</span>
+                    <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-order whatsapp-link" target="_blank" rel="noopener noreferrer">Pedir nova edição</a>
                 </div>
             </div>
         </section>
@@ -590,10 +606,10 @@
                         <h3>Tarot Terapêutico</h3>
                         <p class="service-time">Até 62 minutos</p>
                         <p class="next-slot">Presencial • Online • Marcação prévia</p>
-                        <p class="service-desc">Para quem está cansado de repetir os mesmos padrões. Menos ruído, mais consciência. Vês o ciclo e decides o que fazer com ele.</p>
+                        <p class="service-desc">Uma abordagem mais intensa e reflexiva, unindo tarot, escuta e orientação emocional de forma mais profunda.</p>
                     </div>
                     <div class="service-price">
-                        <div class="price">44€</div>
+                        <div class="price">62€</div>
                         <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-service whatsapp-link" target="_blank" rel="noopener noreferrer">Quero Desbloquear</a>
                     </div>
                 </div>
@@ -603,11 +619,37 @@
                         <h3>Escuta Orientada</h3>
                         <p class="service-time">Entre 35 e 62 minutos</p>
                         <p class="next-slot">Sem cartas • Presencial • Online • Marcação prévia</p>
-                        <p class="service-desc">Sem cartas. Só conversa, escuta profunda e orientação clara. Para decisões importantes, transições e momentos em que precisas de te ouvir sem fugir. Uma sessão humana, directa e feita à medida do teu momento.</p>
+                        <p class="service-desc">Sessão sem tarot, focada na escuta, clareza emocional, aconselhamento e acompanhamento humano.</p>
                     </div>
                     <div class="service-price">
                         <div class="price">60€</div>
                         <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-service whatsapp-link" target="_blank" rel="noopener noreferrer">Quero Perceber Melhor</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Consulta Escrita Breve</h3>
+                        <p class="service-time">Resposta por escrito</p>
+                        <p class="next-slot">WhatsApp • Email • Telegram</p>
+                        <p class="service-desc">Resposta mais directa e focada numa questão específica. Ideal quando precisas de orientação, mas preferes receber tudo por escrito.</p>
+                    </div>
+                    <div class="service-price">
+                        <div class="price">22€</div>
+                        <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-service whatsapp-link" target="_blank" rel="noopener noreferrer">Quero Por Escrito</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Consulta Escrita Aprofundada</h3>
+                        <p class="service-time">Leitura desenvolvida por escrito</p>
+                        <p class="next-slot">WhatsApp • Email • Telegram</p>
+                        <p class="service-desc">Leitura mais detalhada e desenvolvida, com espaço para contexto, reflexão e orientação. Preparada com tempo e enviada por escrito.</p>
+                    </div>
+                    <div class="service-price">
+                        <div class="price">44€</div>
+                        <a href="https://api.whatsapp.com/send?phone=351923318289" class="btn-service whatsapp-link" target="_blank" rel="noopener noreferrer">Quero Aprofundar</a>
                     </div>
                 </div>
 
@@ -642,7 +684,7 @@
                 <div class="story-text">
                     <h3>Nota Importante</h3>
                     <p>Todas as práticas são orientadas para o bem-estar e desenvolvimento pessoal, não substituindo acompanhamento médico ou psicológico.</p>
-                    <p>As respostas escritas são preparadas com tempo e cuidado, sendo enviadas até 3 dias após confirmação de pagamento.</p>
+                    <p>As consultas por escrito são preparadas com tempo e cuidado, sendo enviadas até 3 dias após confirmação de pagamento.</p>
                     <p>As consultas são confirmadas após pagamento. Cada consulta é adaptada ao momento e à necessidade de cada pessoa.</p>
                 </div>
             </div>
@@ -668,12 +710,12 @@
                     </div>
                     <div class="sos-option">
                         <h4>SOS 14 dias</h4>
-                        <div class="price">125€</div>
+                        <div class="price">170€</div>
                         <p>Suporte contínuo em fase de transição ou decisão.</p>
                     </div>
                     <div class="sos-option">
                         <h4>SOS 21 dias</h4>
-                        <div class="price">260€</div>
+                        <div class="price">280€</div>
                         <p>Acompanhamento intensivo para processos mais exigentes.</p>
                     </div>
                 </div>
@@ -686,6 +728,15 @@
                     Pedir Apoio SOS
                 </a>
                 <p class="whatsapp-fallback">WhatsApp directo: <strong>+351 923 318 289</strong></p>
+            </div>
+        </section>
+
+        <section id="youtube" class="section fade-in">
+            <div class="experiences-section dior-panel">
+                <h2 class="section-title">Maison JF no YouTube</h2>
+                <p><strong>Reflexões, tarot, relações, espiritualidade e universo sensorial Maison JF™.</strong></p>
+                <p>Um espaço para acompanhar conteúdos com mais presença, mais contexto e mais profundidade. Para quem quer sentir a Maison para além dos produtos e das consultas.</p>
+                <a href="https://www.youtube.com/@maisonjf" class="btn-order" target="_blank" rel="noopener noreferrer" style="max-width: 320px; margin: 20px auto 0;">Ver canal no YouTube</a>
             </div>
         </section>
 
@@ -931,11 +982,13 @@
             <div class="contact-info">
                 <p>WhatsApp: <a href="https://api.whatsapp.com/send?phone=351923318289" class="whatsapp-link" target="_blank" rel="noopener noreferrer">+351 923 318 289</a></p>
                 <p>Instagram: <a href="https://instagram.com/maisonjfatelier" target="_blank" rel="noopener noreferrer">@maisonjfatelier</a></p>
+                <p>YouTube: <a href="https://www.youtube.com/@maisonjf" target="_blank" rel="noopener noreferrer">@maisonjf</a></p>
                 <p style="margin-top: 12px; font-size: 0.8rem;">Árvore, Vila do Conde • Respondo eu próprio • Até 24h</p>
             </div>
 
             <div class="social-links">
                 <a href="https://instagram.com/maisonjfatelier" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.youtube.com/@maisonjf" target="_blank" rel="noopener noreferrer">YouTube</a>
                 <a href="https://api.whatsapp.com/send?phone=351923318289" class="whatsapp-link" target="_blank" rel="noopener noreferrer">WhatsApp</a>
                 <a href="#newsletter">Newsletter</a>
             </div>
