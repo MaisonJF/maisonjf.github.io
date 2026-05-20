@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Maison JF™ | Rituais artesanais, tarot e escuta em Vila do Conde</title>
-  <meta name="description" content="Maison JF™ em Árvore, Vila do Conde. Rituais artesanais para casa e corpo, tarot, escuta orientada, consultas escritas, apoio SOS e acompanhamento individual com presença real.">
-  <meta name="keywords" content="Maison JF, rituais artesanais, velas artesanais, tarot Portugal, consultas de tarot, escuta orientada, Vila do Conde, produtos artesanais portugueses">
-  <meta name="author" content="Maison JF">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0A0A0A">
-  <link rel="canonical" href="https://maisonjf.github.io/">
+  <meta name="description" content="Maison JF™ em Árvore, Vila do Conde. Rituais artesanais para casa e corpo, tarot, escuta orientada, consultas escritas, apoio SOS e acompanhamento individual com presença real." />
+  <meta name="keywords" content="Maison JF, rituais artesanais, velas artesanais, tarot Portugal, consultas de tarot, escuta orientada, Vila do Conde, produtos artesanais portugueses" />
+  <meta name="author" content="Maison JF" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="canonical" href="https://maisonjf.github.io/" />
 
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Maison JF™ | Rituais artesanais, tarot e escuta">
-  <meta property="og:description" content="Produtos artesanais, tarot, escuta orientada e acompanhamento individual em Árvore, Vila do Conde. Luxo emocional acessível, feito em Portugal.">
-  <meta property="og:url" content="https://maisonjf.github.io/">
-  <meta property="og:image" content="https://maisonjf.github.io/assets/og-maison-jf.jpg">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Maison JF™ | Rituais artesanais, tarot e escuta" />
+  <meta property="og:description" content="Produtos artesanais, tarot, escuta orientada e acompanhamento individual em Árvore, Vila do Conde. Luxo emocional acessível, feito em Portugal." />
+  <meta property="og:url" content="https://maisonjf.github.io/" />
+  <meta property="og:image" content="https://maisonjf.github.io/assets/og-maison-jf.jpg" />
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Maison JF™ | Rituais artesanais, tarot e escuta">
-  <meta name="twitter:description" content="Rituais sensoriais, produtos artesanais e consultas com presença real.">
-  <meta name="twitter:image" content="https://maisonjf.github.io/assets/og-maison-jf.jpg">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Maison JF™ | Rituais artesanais, tarot e escuta" />
+  <meta name="twitter:description" content="Rituais sensoriais, produtos artesanais e consultas com presença real." />
+  <meta name="twitter:image" content="https://maisonjf.github.io/assets/og-maison-jf.jpg" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -95,6 +95,22 @@
 
     .prize-strip strong { color: var(--dourado-claro); }
 
+    .award-strip {
+      background: rgba(245,241,232,0.98);
+      color: var(--esmeralda);
+      text-align: center;
+      padding: 11px 16px;
+      border-bottom: 1px solid rgba(201,162,39,0.20);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.25px;
+      text-transform: uppercase;
+    }
+
+    .award-strip strong {
+      color: var(--bordo);
+    }
+
     .site-header {
       position: sticky;
       top: 0;
@@ -161,11 +177,11 @@
 
     section { padding: 82px 0; scroll-margin-top: 110px; }
 
-    .hero { padding: 90px 0 74px; }
+    .hero { padding: 84px 0 70px; }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.12fr 0.88fr;
+      grid-template-columns: 1.05fr 0.95fr;
       gap: 38px;
       align-items: center;
     }
@@ -199,9 +215,9 @@
     }
 
     h1 {
-      font-size: clamp(2.85rem, 6vw, 5.2rem);
+      font-size: clamp(2.75rem, 5.35vw, 4.75rem);
       line-height: 0.98;
-      max-width: 10.8ch;
+      max-width: 11ch;
       margin-bottom: 18px;
     }
 
@@ -286,11 +302,30 @@
 
     .dark-panel > * { position: relative; z-index: 1; }
 
-    .hero-card { padding: 34px; }
+    .hero-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-image-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(201,162,39,0.28);
+      box-shadow: var(--sombra);
+      background: var(--preto);
+    }
+
+    .hero-image-card img {
+      width: 100%;
+      aspect-ratio: 1200 / 630;
+      object-fit: cover;
+    }
+
+    .hero-card { padding: 30px; }
 
     .hero-card h2 {
       color: var(--dourado-claro);
-      font-size: 2.05rem;
+      font-size: 1.88rem;
       line-height: 1.08;
       margin-bottom: 14px;
     }
@@ -412,6 +447,28 @@
 
     .product-card, .consult-card { display: flex; flex-direction: column; }
 
+    .consult-card {
+      color: var(--preto);
+      border-color: rgba(201,162,39,0.34);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .consult-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--dourado), transparent);
+      opacity: 0.95;
+    }
+
+    .consult-card h3 {
+      color: var(--bordo);
+    }
+
     .product-badge {
       align-self: flex-start;
       padding: 6px 12px;
@@ -453,7 +510,7 @@
     .consult-section .section-subtitle, .sos-section .section-subtitle { color: rgba(245,241,232,0.86); }
 
     .consult-label {
-      color: var(--esmeralda);
+      color: var(--dourado);
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 1.4px;
@@ -462,7 +519,7 @@
     }
 
     .consult-price {
-      color: var(--bordo);
+      color: var(--dourado);
       font-weight: 700;
       font-size: 1.1rem;
       margin-top: auto;
@@ -513,6 +570,31 @@
       margin-top: 12px;
     }
 
+    .youtube-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 34px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(201,162,39,0.22);
+      background: linear-gradient(135deg, var(--preto), var(--grafite));
+      color: var(--marfim);
+      box-shadow: var(--sombra);
+    }
+
+    .youtube-card h2 {
+      color: var(--dourado-claro);
+      font-size: 2.1rem;
+      line-height: 1.08;
+      margin-bottom: 12px;
+    }
+
+    .youtube-card p {
+      color: rgba(245,241,232,0.84);
+      margin-bottom: 18px;
+    }
+
     .newsletter-card, .final-card {
       padding: 36px;
       max-width: 980px;
@@ -546,12 +628,12 @@
     @media (max-width: 1080px) {
       .grid-4 { grid-template-columns: repeat(2, 1fr); }
       .grid-3 { grid-template-columns: repeat(2, 1fr); }
-      .hero-grid, .about-grid { grid-template-columns: 1fr; }
+      .hero-grid, .about-grid, .youtube-card { grid-template-columns: 1fr; }
       h1 { max-width: 100%; }
     }
 
     @media (max-width: 760px) {
-      .top-strip, .prize-strip { font-size: 0.68rem; letter-spacing: 1px; }
+      .top-strip, .prize-strip, .award-strip { font-size: 0.68rem; letter-spacing: 1px; }
 
       .header-inner {
         flex-direction: column;
@@ -571,7 +653,7 @@
       .actions { flex-direction: column; align-items: stretch; }
       .btn { width: 100%; }
 
-      .hero-card, .newsletter-card, .final-card, .path-card, .product-card, .consult-card, .faq-card, .about-card, .mini-card, .testimonial-card, .proof-card, .sos-card {
+      .hero-card, .newsletter-card, .final-card, .path-card, .product-card, .consult-card, .faq-card, .about-card, .mini-card, .testimonial-card, .proof-card, .sos-card, .youtube-card {
         padding: 22px;
       }
     }
@@ -678,6 +760,7 @@
 
 <body>
   <div class="top-strip">Produção artesanal em Portugal • Árvore, Vila do Conde • Desde 1994</div>
+  <div class="award-strip"><strong>Candidato ao Prémio Intermarché Produção Nacional 2026</strong> • Categoria Cá da Terra</div>
   <div class="prize-strip"><strong>Raspadinha premiada</strong> em todas as compras • para usar numa próxima compra ou consulta</div>
 
   <header class="site-header">
@@ -691,6 +774,7 @@
         <a href="#loja">Loja</a>
         <a href="#consultas">Consultas</a>
         <a href="#sos">SOS</a>
+        <a href="#youtube">YouTube</a>
         <a href="#maison">A Maison</a>
         <a href="#faq">FAQ</a>
         <a class="nav-cta" href="https://maison-jf.myshopify.com/collections/all">Entrar na loja</a>
@@ -723,19 +807,25 @@
           </div>
         </div>
 
-        <aside class="dark-panel hero-card">
-          <h2>Se não sabes por onde começar, começa pelo que precisas hoje.</h2>
-          <p>Queres um ritual para casa, corpo ou presente? Entra na loja.</p>
-          <p>Precisas de clareza, orientação emocional ou acompanhamento? Escolhe a consulta certa.</p>
-          <p>Estás num momento urgente, com dúvida intensa ou decisão importante? Vê o apoio SOS.</p>
+        <div class="hero-side">
+          <figure class="hero-image-card">
+            <img src="assets/og-maison-jf.jpg" alt="Maison JF, rituais artesanais, tarot e escuta" />
+          </figure>
 
-          <div class="actions">
-            <a class="btn btn-primary" href="#favoritos">Começar pelos favoritos</a>
-            <a class="btn btn-outline" href="#sos" style="color: var(--marfim); border-color: var(--dourado-claro);">Ver apoio SOS</a>
-          </div>
+          <aside class="dark-panel hero-card">
+            <h2>Se não sabes por onde começar, começa pelo que precisas hoje.</h2>
+            <p>Queres um ritual para casa, corpo ou presente? Entra na loja.</p>
+            <p>Precisas de clareza, orientação emocional ou acompanhamento? Escolhe a consulta certa.</p>
+            <p>Estás num momento urgente, com dúvida intensa ou decisão importante? Vê o apoio SOS.</p>
 
-          <p class="hero-note">Todas as compras recebem uma raspadinha premiada para usar numa próxima compra ou consulta, nas condições indicadas pela Maison JF.</p>
-        </aside>
+            <div class="actions">
+              <a class="btn btn-primary" href="#favoritos">Começar pelos favoritos</a>
+              <a class="btn btn-outline" href="#sos" style="color: var(--marfim); border-color: var(--dourado-claro);">Ver apoio SOS</a>
+            </div>
+
+            <p class="hero-note">Todas as compras recebem uma raspadinha premiada para usar numa próxima compra ou consulta, nas condições indicadas pela Maison JF.</p>
+          </aside>
+        </div>
       </div>
     </section>
 
@@ -754,8 +844,8 @@
           <span>Produtos, tarot, escuta e acompanhamento no mesmo universo.</span>
         </div>
         <div class="panel proof-card">
-          <strong>Prémio</strong>
-          <span>Raspadinha em todas as compras para próxima experiência.</span>
+          <strong>Candidato 2026</strong>
+          <span>Prémio Intermarché Produção Nacional • Categoria Cá da Terra.</span>
         </div>
       </div>
     </section>
@@ -930,7 +1020,7 @@
 
           <article class="consult-card">
             <div class="consult-label">Por escrito</div>
-            <h3>Consulta Escrita Aprofundada</h3>
+            <h3>Consulta Escrita Profunda</h3>
             <p>Uma leitura mais desenvolvida para quem quer profundidade, direcção e uma resposta para revisitar.</p>
             <div class="consult-price">45€</div>
             <a class="btn btn-secondary" href="https://wa.me/351923318289">Pedir consulta</a>
@@ -940,7 +1030,7 @@
             <div class="consult-label">Percurso continuado</div>
             <h3>Acompanhamento Permanente</h3>
             <p>Para quem não quer apenas uma conversa isolada, mas consistência, suporte e continuidade.</p>
-            <div class="consult-price">170€</div>
+            <div class="consult-price">A partir de 170€</div>
             <a class="btn btn-secondary" href="https://wa.me/351923318289">Ver detalhes</a>
           </article>
 
@@ -948,7 +1038,7 @@
             <div class="consult-label">Desenvolvimento</div>
             <h3>Mentoria Espiritual</h3>
             <p>Para integrar intuição, prática espiritual e presença no dia a dia com mais realidade e menos fantasia.</p>
-            <div class="consult-price">280€</div>
+            <div class="consult-price">A partir de 280€</div>
             <a class="btn btn-secondary" href="https://wa.me/351923318289">Ver detalhes</a>
           </article>
         </div>
@@ -984,13 +1074,13 @@
 
           <article class="sos-card">
             <h3>SOS 14 dias</h3>
-            <div class="price">170€</div>
+            <div class="price">A partir de 170€</div>
             <p>Suporte contínuo em fase de transição ou decisão.</p>
           </article>
 
           <article class="sos-card">
             <h3>SOS 21 dias</h3>
-            <div class="price">280€</div>
+            <div class="price">A partir de 280€</div>
             <p>Acompanhamento intensivo para processos mais exigentes.</p>
           </article>
         </div>
@@ -998,6 +1088,26 @@
         <div class="actions center-actions" style="margin-top: 28px;">
           <a class="btn btn-primary" href="https://wa.me/351923318289">Pedir apoio SOS</a>
         </div>
+      </div>
+    </section>
+
+    <section id="youtube">
+      <div class="container">
+        <article class="youtube-card">
+          <div>
+            <span class="kicker" style="color: var(--dourado-claro);">YouTube Maison JF</span>
+            <h2>Reflexões, tarot, espiritualidade e relações para ver com presença.</h2>
+            <p>
+              O canal da Maison JF reúne leituras, conversas e sinais do momento para quem procura clareza,
+              consciência emocional e uma espiritualidade com pés no chão.
+            </p>
+            <a class="btn btn-primary" href="https://www.youtube.com/@MaisonJF">Ver canal no YouTube</a>
+          </div>
+
+          <div class="hero-image-card">
+            <img src="assets/og-maison-jf.jpg" alt="Imagem Maison JF para YouTube e partilhas" />
+          </div>
+        </article>
       </div>
     </section>
 
@@ -1068,6 +1178,24 @@
             <div class="stars">★★★★★</div>
             <p>“A vela de massagem parecia um luxo desnecessário até experimentar. Agora é o nosso ritual de domingo.”</p>
             <div class="testimonial-name">Sofia &amp; Tiago • Braga</div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>“Senti-me ouvida sem julgamento. Saí da consulta com mais calma e com uma direcção clara.”</p>
+            <div class="testimonial-name">Cátia M. • Vila Nova de Gaia</div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>“Os produtos têm uma presença diferente. Não parecem apenas aromas, parecem pequenos rituais.”</p>
+            <div class="testimonial-name">Fábio N. • Bahia</div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>“A leitura escrita foi profunda, directa e muito respeitosa. Voltei a ela várias vezes.”</p>
+            <div class="testimonial-name">Jhonata S. • São Paulo</div>
           </article>
         </div>
       </div>
