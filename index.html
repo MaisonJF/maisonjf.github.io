@@ -5,17 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Maison JF™ | Rituais artesanais, tarot e escuta em Vila do Conde</title>
+
   <meta
     name="description"
-    content="Maison JF™ em Árvore, Vila do Conde. Rituais artesanais portugueses, velas, brumas, difusores, wax melts, óleos, tarot, escuta orientada, apoio SOS e consultas online ou presenciais."
+    content="Maison JF™ em Árvore, Vila do Conde. Rituais artesanais portugueses para casa e corpo, velas, brumas, difusores, wax melts, óleos, tarot, escuta orientada, apoio SOS e consultas online ou presenciais."
   />
   <meta
     name="keywords"
-    content="Maison JF, rituais artesanais, velas artesanais Portugal, tarot Vila do Conde, consulta de tarot, escuta orientada, wax melts Portugal, brumas, difusores, produtos artesanais portugueses, amor próprio, abrir caminhos, apoio SOS, Maison JF YouTube"
+    content="Maison JF, Maison JF Portugal, rituais artesanais, rituais portugueses, velas artesanais Portugal, brumas artesanais, difusores artesanais, wax melts Portugal, tarot Vila do Conde, consulta de tarot online, escuta orientada, apoio SOS, amor próprio, abrir caminhos, produtos artesanais portugueses, Árvore Vila do Conde"
   />
   <meta name="author" content="Maison JF" />
+  <meta name="publisher" content="Maison JF" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="theme-color" content="#0B0B0B" />
+  <meta name="language" content="pt-PT" />
+  <meta name="geo.region" content="PT-13" />
+  <meta name="geo.placename" content="Árvore, Vila do Conde, Portugal" />
+
   <link rel="canonical" href="https://maisonjf.github.io/" />
 
   <meta property="og:type" content="website" />
@@ -28,6 +35,7 @@
   />
   <meta property="og:url" content="https://maisonjf.github.io/" />
   <meta property="og:image" content="https://maisonjf.github.io/assets/og-maison-jf.jpg" />
+  <meta property="og:image:alt" content="Maison JF, marca portuguesa de rituais artesanais, tarot e escuta" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Maison JF™ | Rituais artesanais, tarot e escuta" />
@@ -49,17 +57,34 @@
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "Person",
+        "@id": "https://maisonjf.github.io/#jf",
+        "name": "JF",
+        "description": "Percurso iniciado em 1994 entre tarot, trabalho psicossocial, escuta humana, cuidado terapêutico e criação artesanal.",
+        "knowsAbout": [
+          "tarot",
+          "escuta humana",
+          "trabalho psicossocial",
+          "cuidado terapêutico",
+          "criação artesanal",
+          "rituais artesanais",
+          "desenvolvimento pessoal"
+        ],
+        "worksFor": {
+          "@id": "https://maisonjf.github.io/#organization"
+        }
+      },
+      {
         "@type": "Organization",
         "@id": "https://maisonjf.github.io/#organization",
         "name": "Maison JF",
+        "alternateName": "Maison JF™",
         "url": "https://maisonjf.github.io/",
         "logo": "https://maisonjf.github.io/assets/brand-logo.png",
         "image": "https://maisonjf.github.io/assets/og-maison-jf.jpg",
-        "description": "Maison JF é uma marca portuguesa de rituais artesanais para casa e corpo, tarot, escuta orientada, consultas escritas, apoio SOS e acompanhamento individual. Criada por JF, a partir de um percurso iniciado em 1994 entre tarot, trabalho psicossocial, escuta humana, cuidado terapêutico e criação artesanal.",
+        "description": "Maison JF é uma marca portuguesa de rituais artesanais para casa e corpo, tarot, escuta orientada, consultas escritas, apoio SOS, mentoria espiritual e acompanhamento individual. Criada por JF, a partir de um percurso iniciado em 1994 entre tarot, trabalho psicossocial, escuta humana, cuidado terapêutico e criação artesanal.",
         "founder": {
-          "@type": "Person",
-          "name": "JF",
-          "description": "Percurso iniciado em 1994 entre tarot, trabalho psicossocial, escuta humana, cuidado terapêutico e criação artesanal."
+          "@id": "https://maisonjf.github.io/#jf"
         },
         "sameAs": [
           "https://maison-jf.myshopify.com/collections/all",
@@ -72,12 +97,16 @@
           "contactType": "customer support",
           "areaServed": "PT",
           "availableLanguage": ["pt-PT", "pt-BR"]
+        },
+        "hasOfferCatalog": {
+          "@id": "https://maisonjf.github.io/#offers"
         }
       },
       {
         "@type": "LocalBusiness",
         "@id": "https://maisonjf.github.io/#localbusiness",
         "name": "Maison JF",
+        "alternateName": "Maison JF™",
         "url": "https://maisonjf.github.io/",
         "image": "https://maisonjf.github.io/assets/og-maison-jf.jpg",
         "telephone": "+351923318289",
@@ -87,14 +116,44 @@
           "addressRegion": "Vila do Conde",
           "addressCountry": "PT"
         },
-        "areaServed": ["Vila do Conde", "Portugal", "Online"],
-        "priceRange": "€€"
+        "areaServed": [
+          "Árvore",
+          "Vila do Conde",
+          "Porto",
+          "Portugal",
+          "Online"
+        ],
+        "priceRange": "€€",
+        "parentOrganization": {
+          "@id": "https://maisonjf.github.io/#organization"
+        }
       },
       {
         "@type": "WebSite",
         "@id": "https://maisonjf.github.io/#website",
         "url": "https://maisonjf.github.io/",
         "name": "Maison JF",
+        "inLanguage": "pt-PT",
+        "publisher": {
+          "@id": "https://maisonjf.github.io/#organization"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://maisonjf.github.io/#webpage",
+        "url": "https://maisonjf.github.io/",
+        "name": "Maison JF™ | Rituais artesanais, tarot e escuta em Vila do Conde",
+        "description": "Maison JF em Árvore, Vila do Conde. Rituais artesanais para casa e corpo, tarot, escuta orientada, apoio SOS e consultas online ou presenciais.",
+        "isPartOf": {
+          "@id": "https://maisonjf.github.io/#website"
+        },
+        "about": {
+          "@id": "https://maisonjf.github.io/#organization"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://maisonjf.github.io/assets/og-maison-jf.jpg"
+        },
         "inLanguage": "pt-PT"
       },
       {
@@ -102,27 +161,147 @@
         "@id": "https://maisonjf.github.io/#offers",
         "name": "Serviços e rituais Maison JF",
         "itemListElement": [
-          { "@type": "Offer", "name": "Tarot Expresso", "price": "17", "priceCurrency": "EUR" },
-          { "@type": "Offer", "name": "Consulta Escrita Breve", "price": "25", "priceCurrency": "EUR" },
-          { "@type": "Offer", "name": "Consulta de Tarot", "price": "35", "priceCurrency": "EUR" },
-          { "@type": "Offer", "name": "Consulta Escrita Profunda", "price": "45", "priceCurrency": "EUR" },
-          { "@type": "Offer", "name": "Escuta Orientada", "price": "60", "priceCurrency": "EUR" },
-          { "@type": "Offer", "name": "Apoio SOS", "priceSpecification": { "@type": "PriceSpecification", "priceCurrency": "EUR", "minPrice": "35" } },
-          { "@type": "Offer", "name": "Acompanhamento Permanente", "priceSpecification": { "@type": "PriceSpecification", "priceCurrency": "EUR", "minPrice": "170" } },
-          { "@type": "Offer", "name": "Mentoria Espiritual", "priceSpecification": { "@type": "PriceSpecification", "priceCurrency": "EUR", "minPrice": "280" } }
+          {
+            "@type": "Offer",
+            "name": "Tarot Expresso",
+            "price": "17",
+            "priceCurrency": "EUR",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Tarot Expresso",
+              "description": "Uma pergunta concreta e uma resposta directa para decidir com menos ansiedade."
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Consulta Escrita Breve",
+            "price": "25",
+            "priceCurrency": "EUR",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Consulta Escrita Breve",
+              "description": "Consulta escrita para uma dúvida pontual, com resposta clara e fácil de reler."
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Consulta de Tarot",
+            "price": "35",
+            "priceCurrency": "EUR",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Consulta de Tarot",
+              "description": "Consulta de tarot para relações, escolhas, padrões, bloqueios e próximos passos."
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Consulta Escrita Profunda",
+            "price": "45",
+            "priceCurrency": "EUR",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Consulta Escrita Profunda",
+              "description": "Leitura escrita desenvolvida, com contexto, direcção e texto para revisitar."
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Escuta Orientada",
+            "price": "60",
+            "priceCurrency": "EUR",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Escuta Orientada",
+              "description": "Conversa directa, sem cartas, para organizar o que sente e perceber o que fazer a seguir."
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Apoio SOS",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "EUR",
+              "minPrice": "35"
+            },
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Apoio SOS",
+              "description": "Apoio breve e focado para crise, decisão difícil ou dúvida intensa."
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Acompanhamento Permanente",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "EUR",
+              "minPrice": "170"
+            },
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Acompanhamento Permanente",
+              "description": "Acompanhamento para quem precisa de continuidade e não apenas de uma resposta isolada."
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Mentoria Espiritual",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "priceCurrency": "EUR",
+              "minPrice": "280"
+            },
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Mentoria Espiritual",
+              "description": "Mentoria para desenvolver intuição, prática espiritual e direcção pessoal com estrutura."
+            }
+          }
         ]
       },
       {
         "@type": "ItemList",
         "@id": "https://maisonjf.github.io/#rituais-populares",
         "name": "Rituais populares Maison JF",
+        "description": "Rituais artesanais Maison JF com nomes directos, produção artesanal e apresentação Maison.",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Chega de Migalhas!" },
-          { "@type": "ListItem", "position": 2, "name": "Rebenta Com Isto!" },
-          { "@type": "ListItem", "position": 3, "name": "Tu Mereces Mais!" },
-          { "@type": "ListItem", "position": 4, "name": "Hoje Vou Dormir!" },
-          { "@type": "ListItem", "position": 5, "name": "Xô Tristeza!" },
-          { "@type": "ListItem", "position": 6, "name": "Pára de Te Sabotar!" }
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Chega de Migalhas!",
+            "description": "Ritual de amor-próprio, limite e regresso a si."
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Rebenta Com Isto!",
+            "description": "Ritual de corte, impulso e abertura de caminho."
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Tu Mereces Mais!",
+            "description": "Ritual de cuidado, valorização pessoal e escolha de si."
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Hoje Vou Dormir!",
+            "description": "Ritual de descanso, silêncio interior e preparação para a noite."
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Xô Tristeza!",
+            "description": "Ritual de leveza, renovação emocional e ambiente mais vivo."
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "name": "Pára de Te Sabotar!",
+            "description": "Ritual de decisão, foco e saída do adiamento."
+          }
         ]
       },
       {
@@ -139,6 +318,14 @@
           },
           {
             "@type": "Question",
+            "name": "Posso pedir ajuda para escolher?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim. Se não souber que aroma, produto, ritual, presente, consulta ou mentoria faz mais sentido, pode falar com a Maison JF por WhatsApp."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "As consultas são online ou presenciais?",
             "acceptedAnswer": {
               "@type": "Answer",
@@ -147,10 +334,10 @@
           },
           {
             "@type": "Question",
-            "name": "Como escolher entre produto, ritual ou consulta?",
+            "name": "Como funciona o pagamento das consultas?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Se houver dúvidas entre produto, aroma, ritual, presente ou consulta, é possível pedir orientação directa por WhatsApp."
+              "text": "A marcação fica confirmada após pagamento. Os detalhes são combinados directamente por WhatsApp."
             }
           },
           {
@@ -238,9 +425,7 @@
       text-transform: uppercase;
     }
 
-    .prize-strip strong {
-      color: var(--dourado-claro);
-    }
+    .prize-strip strong { color: var(--dourado-claro); }
 
     .site-header {
       position: sticky;
@@ -286,16 +471,16 @@
     .nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 16px;
       justify-content: flex-end;
       align-items: center;
     }
 
     .nav a {
       color: var(--bordo);
-      font-size: 0.72rem;
+      font-size: 0.70rem;
       font-weight: 800;
-      letter-spacing: 1.45px;
+      letter-spacing: 1.35px;
       text-transform: uppercase;
       border-bottom: 1px solid transparent;
       padding-bottom: 4px;
@@ -323,6 +508,10 @@
     .hero {
       padding-top: clamp(4.2rem, 7vw, 6rem);
       padding-bottom: clamp(4rem, 6vw, 5.6rem);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(184,150,86,0.16), transparent 30%),
+        radial-gradient(circle at 88% 8%, rgba(14,75,67,0.12), transparent 34%),
+        linear-gradient(135deg, #F6F0E5 0%, #EDE3D3 100%);
     }
 
     .hero-grid {
@@ -600,8 +789,9 @@
 
     .paths-section {
       background:
-        radial-gradient(circle at 12% 10%, rgba(184,150,86,0.10), transparent 28%),
-        linear-gradient(180deg, rgba(14,75,67,0.04), rgba(246,240,229,0.55));
+        radial-gradient(circle at 0% 0%, rgba(184,150,86,0.16), transparent 28%),
+        radial-gradient(circle at 100% 10%, rgba(91,31,45,0.10), transparent 30%),
+        linear-gradient(180deg, #F1E7D8 0%, #F6F0E5 100%);
     }
 
     .path-card.dark {
@@ -652,8 +842,22 @@
 
     .shop-section {
       background:
-        radial-gradient(circle at 100% 0%, rgba(91,31,45,0.07), transparent 28%),
-        var(--marfim);
+        radial-gradient(circle at 100% 0%, rgba(91,31,45,0.12), transparent 32%),
+        radial-gradient(circle at 0% 100%, rgba(14,75,67,0.10), transparent 34%),
+        linear-gradient(180deg, #F6F0E5 0%, #EDE3D3 100%);
+    }
+
+    .product-card {
+      background:
+        linear-gradient(180deg, rgba(255,252,247,0.98), rgba(246,240,229,0.94));
+      border-color: rgba(184,150,86,0.30);
+    }
+
+    .product-card:nth-child(2),
+    .product-card:nth-child(4) {
+      background:
+        radial-gradient(circle at top right, rgba(184,150,86,0.12), transparent 34%),
+        linear-gradient(180deg, rgba(255,252,247,0.98), rgba(237,227,211,0.96));
     }
 
     .product-badge,
@@ -680,9 +884,10 @@
 
     .popular-section {
       background:
-        radial-gradient(circle at 0% 0%, rgba(184,150,86,0.12), transparent 30%),
-        radial-gradient(circle at 100% 0%, rgba(91,31,45,0.16), transparent 34%),
-        linear-gradient(135deg, var(--preto), var(--grafite));
+        radial-gradient(circle at 0% 0%, rgba(184,150,86,0.18), transparent 32%),
+        radial-gradient(circle at 100% 0%, rgba(91,31,45,0.22), transparent 36%),
+        radial-gradient(circle at 50% 100%, rgba(14,75,67,0.20), transparent 42%),
+        linear-gradient(135deg, #0B0B0B 0%, #171717 58%, #431621 100%);
       color: var(--marfim);
     }
 
@@ -885,14 +1090,28 @@
 
     .journal-section {
       background:
-        radial-gradient(circle at 0% 0%, rgba(91,31,45,0.10), transparent 28%),
-        linear-gradient(180deg, rgba(91,31,45,0.06), rgba(246,240,229,0.70));
+        radial-gradient(circle at 0% 0%, rgba(91,31,45,0.14), transparent 30%),
+        radial-gradient(circle at 100% 100%, rgba(184,150,86,0.14), transparent 34%),
+        linear-gradient(135deg, #EDE3D3 0%, #F6F0E5 100%);
+    }
+
+    .journal-card {
+      background:
+        linear-gradient(180deg, rgba(255,252,247,0.98), rgba(237,227,211,0.94));
+      border-color: rgba(91,31,45,0.18);
     }
 
     .about-section {
       background:
-        radial-gradient(circle at 100% 0%, rgba(14,75,67,0.08), transparent 30%),
-        var(--marfim);
+        radial-gradient(circle at 100% 0%, rgba(14,75,67,0.12), transparent 34%),
+        radial-gradient(circle at 0% 100%, rgba(184,150,86,0.12), transparent 34%),
+        linear-gradient(180deg, #F6F0E5 0%, #EDE3D3 100%);
+    }
+
+    #sobre {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(184,150,86,0.13), transparent 30%),
+        linear-gradient(180deg, #EDE3D3 0%, #F6F0E5 100%);
     }
 
     .about-grid {
@@ -925,6 +1144,12 @@
       margin-bottom: 5px;
     }
 
+    .testimonial-card {
+      background:
+        linear-gradient(180deg, rgba(255,252,247,0.98), rgba(237,227,211,0.96));
+      border-color: rgba(184,150,86,0.28);
+    }
+
     .stars {
       color: var(--dourado);
       letter-spacing: 2px;
@@ -942,8 +1167,9 @@
 
     .faq-section {
       background:
-        radial-gradient(circle at 0% 100%, rgba(184,150,86,0.08), transparent 30%),
-        var(--marfim);
+        radial-gradient(circle at 0% 100%, rgba(91,31,45,0.10), transparent 32%),
+        radial-gradient(circle at 100% 0%, rgba(14,75,67,0.10), transparent 32%),
+        linear-gradient(180deg, #F6F0E5 0%, #EDE3D3 100%);
     }
 
     .faq-list {
@@ -954,8 +1180,9 @@
     }
 
     .faq-list details {
-      background: rgba(255,255,255,0.98);
-      border: 1px solid var(--borda);
+      background:
+        linear-gradient(180deg, rgba(255,252,247,0.98), rgba(237,227,211,0.95));
+      border: 1px solid rgba(184,150,86,0.28);
       border-radius: 18px;
       box-shadow: var(--sombra);
       padding: 18px 20px;
@@ -979,7 +1206,10 @@
     }
 
     .signature-section {
-      background: linear-gradient(135deg, var(--esmeralda), var(--esmeralda-profundo));
+      background:
+        radial-gradient(circle at 0% 0%, rgba(184,150,86,0.18), transparent 34%),
+        radial-gradient(circle at 100% 100%, rgba(91,31,45,0.18), transparent 34%),
+        linear-gradient(135deg, #0E4B43 0%, #08352F 62%, #0B0B0B 100%);
       position: relative;
       overflow: hidden;
     }
@@ -1031,18 +1261,6 @@
     .footer-links a {
       color: var(--bordo);
       font-weight: 800;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      white-space: nowrap;
-      border: 0;
     }
 
     @media (max-width: 1024px) {
@@ -1110,6 +1328,7 @@
         <a href="#sobre">Sobre</a>
         <a href="#faq">FAQ</a>
         <a href="https://www.youtube.com/@maisonjf" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener" class="nav-cta">Comprar</a>
         <a href="https://wa.me/351923318289" class="nav-cta">WhatsApp</a>
       </nav>
     </div>
@@ -1133,7 +1352,7 @@
           </p>
 
           <div class="actions">
-            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all">Comprar rituais</a>
+            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Comprar rituais</a>
             <a class="btn btn-secondary" href="https://wa.me/351923318289">Agendar consulta</a>
             <a class="btn btn-outline" href="#ajuda">Não sei o que escolher</a>
           </div>
@@ -1189,7 +1408,7 @@
             <p>
               Para mudar o ambiente, cuidar do corpo ou oferecer algo que não pareça comprado à pressa.
             </p>
-            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all">Entrar na loja</a>
+            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Entrar na loja</a>
           </article>
 
           <article class="path-card">
@@ -1229,7 +1448,7 @@
             <h3>Velas, brumas e difusores</h3>
             <p>Para quando a casa parece fria, pesada ou sem presença. Acenda, borrife, respire.</p>
             <div class="price">Na loja</div>
-            <a class="btn btn-outline" href="https://maison-jf.myshopify.com/collections/all">Ver aromas</a>
+            <a class="btn btn-outline" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver aromas</a>
           </article>
 
           <article class="product-card">
@@ -1237,7 +1456,7 @@
             <h3>Óleos e velas de massagem</h3>
             <p>Para quando o corpo pede toque, pausa e cuidado. Sozinho ou a dois.</p>
             <div class="price">A partir de 12€</div>
-            <a class="btn btn-outline" href="https://maison-jf.myshopify.com/collections/all">Ver rituais</a>
+            <a class="btn btn-outline" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver rituais</a>
           </article>
 
           <article class="product-card">
@@ -1245,7 +1464,7 @@
             <h3>Wax melts e escalda-pés</h3>
             <p>Para mudar o ambiente sem complicar. Preço acessível, uso simples, efeito rápido.</p>
             <div class="price">A partir de 5€</div>
-            <a class="btn btn-outline" href="https://maison-jf.myshopify.com/collections/all">Ver produtos</a>
+            <a class="btn btn-outline" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver produtos</a>
           </article>
 
           <article class="product-card">
@@ -1253,7 +1472,7 @@
             <h3>Escolhas com intenção</h3>
             <p>Para não oferecer mais uma coisa sem alma. Um presente pequeno, bonito e com intenção.</p>
             <div class="price">Na loja</div>
-            <a class="btn btn-outline" href="https://maison-jf.myshopify.com/collections/all">Comprar agora</a>
+            <a class="btn btn-outline" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Comprar agora</a>
           </article>
         </div>
       </div>
@@ -1276,7 +1495,7 @@
             <p>Porque tu mereces mais e melhor.</p>
             <p class="premium-line">Ritual de amor-próprio, limite e regresso a ti.</p>
             <div class="price">Ritual na loja</div>
-            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all">Ver ritual</a>
+            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver ritual</a>
           </article>
 
           <article class="kit-card">
@@ -1285,7 +1504,7 @@
             <p>Para destravar bloqueios e movimentar o que está parado.</p>
             <p class="premium-line">Ritual de corte, impulso e abertura de caminho.</p>
             <div class="price">Ritual na loja</div>
-            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all">Ver ritual</a>
+            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver ritual</a>
           </article>
 
           <article class="kit-card">
@@ -1294,7 +1513,7 @@
             <p>Para cuidares de ti. Amor-próprio é tudo.</p>
             <p class="premium-line">Ritual de cuidado, valorização pessoal e escolha de si.</p>
             <div class="price">Ritual na loja</div>
-            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all">Ver ritual</a>
+            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver ritual</a>
           </article>
 
           <article class="kit-card">
@@ -1303,7 +1522,7 @@
             <p>Vamos acalmar essa cabeça.</p>
             <p class="premium-line">Ritual de descanso, silêncio interior e preparação para a noite.</p>
             <div class="price">Ritual na loja</div>
-            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all">Ver ritual</a>
+            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver ritual</a>
           </article>
 
           <article class="kit-card">
@@ -1312,7 +1531,7 @@
             <p>Vamos mudar esse astral.</p>
             <p class="premium-line">Ritual de leveza, renovação emocional e ambiente mais vivo.</p>
             <div class="price">Ritual na loja</div>
-            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all">Ver ritual</a>
+            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver ritual</a>
           </article>
 
           <article class="kit-card">
@@ -1321,7 +1540,7 @@
             <p>Hoje é o dia.</p>
             <p class="premium-line">Ritual de decisão, foco e saída do adiamento.</p>
             <div class="price">Ritual na loja</div>
-            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all">Ver ritual</a>
+            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver ritual</a>
           </article>
         </div>
       </div>
@@ -1641,20 +1860,12 @@
           </p>
 
           <div class="actions" style="justify-content:center; margin-top:26px;">
-            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all">Entrar na loja</a>
+            <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Entrar na loja</a>
             <a class="btn btn-secondary" href="https://wa.me/351923318289">Agendar agora</a>
             <a class="btn btn-outline" href="https://www.youtube.com/@maisonjf" target="_blank" rel="noopener">Ver YouTube</a>
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="sr-only" aria-label="Informação estruturada Maison JF">
-      <h2>Maison JF</h2>
-      <p>Maison JF é uma marca portuguesa de rituais artesanais para casa e corpo, tarot, escuta orientada, apoio SOS, consultas escritas, mentoria espiritual e acompanhamento individual.</p>
-      <p>Base em Árvore, Vila do Conde, Portugal. Loja online Shopify. Atendimento online e presencial. YouTube Maison JF.</p>
-      <p>Criada por JF, a partir de um percurso iniciado em 1994 entre tarot, trabalho psicossocial, escuta humana, cuidado terapêutico e criação artesanal.</p>
-      <p>Rituais populares: Chega de Migalhas, Rebenta Com Isto, Tu Mereces Mais, Hoje Vou Dormir, Xô Tristeza, Pára de Te Sabotar.</p>
     </section>
 
   </main>
@@ -1669,7 +1880,7 @@
       </div>
 
       <div class="footer-links">
-        <a href="https://maison-jf.myshopify.com/collections/all">Loja online</a>
+        <a href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Loja online</a>
         <a href="https://wa.me/351923318289">WhatsApp</a>
         <a href="https://www.youtube.com/@maisonjf" target="_blank" rel="noopener">YouTube</a>
         <a href="#consultas">Consultas</a>
