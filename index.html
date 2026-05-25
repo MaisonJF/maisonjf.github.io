@@ -12,7 +12,7 @@
   />
   <meta
     name="keywords"
-    content="Maison JF, Maison JF Portugal, rituais artesanais, rituais portugueses, velas artesanais Portugal, brumas artesanais, difusores artesanais, wax melts Portugal, tarot Vila do Conde, consulta de tarot online, escuta orientada, apoio SOS, amor próprio, abrir caminhos, produtos artesanais portugueses, Árvore Vila do Conde"
+    content="Maison JF, Maison JF Portugal, rituais artesanais, rituais portugueses, velas artesanais Portugal, brumas artesanais, difusores artesanais, wax melts Portugal, tarot Vila do Conde, consulta de tarot online, escuta orientada, apoio SOS, Maison Todo o Mês, cuidado mensal, rituais mensais, amor próprio, abrir caminhos, produtos artesanais portugueses, Árvore Vila do Conde"
   />
   <meta name="author" content="Maison JF" />
   <meta name="publisher" content="Maison JF" />
@@ -275,8 +275,8 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Rebenta Com Isto!",
-            "description": "Ritual de corte, impulso e abertura de caminho."
+            "name": "Sai de Mim, Coisa Ruim!",
+            "description": "Ritual de limpeza simbólica, leveza e ambiente mais vivo."
           },
           {
             "@type": "ListItem",
@@ -287,7 +287,7 @@
           {
             "@type": "ListItem",
             "position": 4,
-            "name": "Hoje Vou Dormir!",
+            "name": "Hoje Dormes!",
             "description": "Ritual de descanso, silêncio interior e preparação para a noite."
           },
           {
@@ -958,6 +958,151 @@
       margin-top: auto;
     }
 
+
+
+    .todo-mes-section {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(184,150,86,0.16), transparent 30%),
+        radial-gradient(circle at 100% 10%, rgba(14,75,67,0.14), transparent 34%),
+        linear-gradient(180deg, #F6F0E5 0%, #EDE3D3 100%);
+    }
+    .todo-intro {
+      max-width: 840px;
+      margin: -12px auto 28px;
+      padding: 22px 26px;
+      text-align: center;
+    }
+    .todo-intro p {
+      color: var(--texto-suave);
+      font-size: 0.96rem;
+      margin-bottom: 6px;
+    }
+    .todo-intro strong {
+      color: var(--bordo);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .todo-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 28px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(184,150,86,0.30);
+      background:
+        linear-gradient(180deg, rgba(255,252,247,0.98), rgba(246,240,229,0.95));
+      box-shadow: var(--sombra);
+      position: relative;
+      overflow: hidden;
+    }
+    .todo-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--dourado), transparent);
+      opacity: 0.9;
+    }
+    .todo-featured {
+      background:
+        radial-gradient(circle at top right, rgba(184,150,86,0.17), transparent 36%),
+        linear-gradient(180deg, rgba(255,252,247,0.98), rgba(237,227,211,0.98));
+      border-color: rgba(184,150,86,0.48);
+      box-shadow: var(--sombra-forte);
+    }
+    .todo-card h3 {
+      color: var(--bordo);
+      font-size: 1.72rem;
+      line-height: 1.08;
+      margin-bottom: 10px;
+    }
+    .todo-card p {
+      color: var(--texto-suave);
+      font-size: 0.92rem;
+      margin-bottom: 14px;
+    }
+    .todo-list {
+      margin: 2px 0 16px;
+      padding-left: 18px;
+      color: var(--texto);
+      font-size: 0.9rem;
+    }
+    .todo-list li { margin-bottom: 7px; }
+    .todo-small {
+      font-size: 0.84rem !important;
+      color: rgba(17,17,17,0.62) !important;
+    }
+    .todo-price {
+      margin-top: auto;
+      margin-bottom: 14px;
+      color: var(--preto);
+      font-weight: 800;
+      font-size: 1.18rem;
+    }
+    .gold-question-panel,
+    .payment-panel,
+    .premium-panel {
+      margin-top: 22px;
+      padding: 28px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(184,150,86,0.32);
+      box-shadow: var(--sombra);
+    }
+    .gold-question-panel {
+      background:
+        radial-gradient(circle at top right, rgba(184,150,86,0.17), transparent 34%),
+        linear-gradient(135deg, var(--preto), var(--grafite));
+      color: var(--marfim);
+    }
+    .gold-question-panel h3,
+    .payment-panel h3,
+    .premium-panel h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    .gold-question-panel h3 { color: var(--dourado-claro); }
+    .gold-question-panel p {
+      color: rgba(246,240,229,0.84);
+      font-size: 0.94rem;
+      max-width: 880px;
+    }
+    .gold-question-line {
+      color: var(--dourado-claro) !important;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.16rem !important;
+      font-style: italic;
+      margin-top: 12px;
+    }
+    .payment-panel {
+      background:
+        linear-gradient(180deg, rgba(255,252,247,0.98), rgba(237,227,211,0.96));
+    }
+    .payment-panel h3 { color: var(--bordo); }
+    .payment-panel p {
+      color: var(--texto-suave);
+      max-width: 900px;
+      font-size: 0.94rem;
+    }
+    .premium-panel {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      background:
+        radial-gradient(circle at top right, rgba(184,150,86,0.14), transparent 34%),
+        linear-gradient(135deg, var(--esmeralda), var(--esmeralda-profundo));
+      color: var(--marfim);
+    }
+    .premium-panel h3 { color: var(--dourado-claro); }
+    .premium-panel p {
+      color: rgba(246,240,229,0.84);
+      font-size: 0.94rem;
+      max-width: 760px;
+    }
+
     .consult-section {
       background: linear-gradient(135deg, var(--esmeralda), var(--esmeralda-profundo));
       color: var(--marfim);
@@ -1378,8 +1523,8 @@
                 <strong>Brumas desde 6,50€</strong>
               </div>
               <div class="price-box">
-                <small>Corpo</small>
-                <strong>Óleos desde 12€</strong>
+                <small>Cuidado mensal</small>
+                <strong>Maison Todo o Mês</strong>
               </div>
               <div class="price-box">
                 <small>Clareza</small>
@@ -1499,10 +1644,10 @@
           </article>
 
           <article class="kit-card">
-            <span class="product-badge">Destravar</span>
-            <h3>Rebenta Com Isto!</h3>
-            <p>Para destravar bloqueios e movimentar o que está parado.</p>
-            <p class="premium-line">Ritual de corte, impulso e abertura de caminho.</p>
+            <span class="product-badge">Limpeza e leveza</span>
+            <h3>Sai de Mim, Coisa Ruim!</h3>
+            <p>Para limpar o peso do dia e mudar a energia da casa.</p>
+            <p class="premium-line">Ritual de limpeza simbólica, leveza e ambiente mais vivo.</p>
             <div class="price">Ritual na loja</div>
             <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver ritual</a>
           </article>
@@ -1518,8 +1663,8 @@
 
           <article class="kit-card">
             <span class="product-badge">Descanso</span>
-            <h3>Hoje Vou Dormir!</h3>
-            <p>Vamos acalmar essa cabeça.</p>
+            <h3>Hoje Dormes!</h3>
+            <p>Para chegares ao fim do dia e desligares.</p>
             <p class="premium-line">Ritual de descanso, silêncio interior e preparação para a noite.</p>
             <div class="price">Ritual na loja</div>
             <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver ritual</a>
@@ -1542,6 +1687,102 @@
             <div class="price">Ritual na loja</div>
             <a class="btn btn-primary" href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Ver ritual</a>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="todo-mes-section" id="maison-todo-o-mes" aria-labelledby="maison-todo-o-mes-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="kicker">Maison Todo o Mês</span>
+          <h2 class="section-title" id="maison-todo-o-mes-title">Não compres cuidado só quando já estás mal.</h2>
+          <p class="section-subtitle">
+            Mantém-no activo todos os meses. Rituais mensais Maison JF para manter a casa mais leve,
+            a cabeça mais clara e o corpo com mais chão.
+          </p>
+        </div>
+
+        <div class="todo-intro panel">
+          <p>Escolhes o nível. A Maison prepara o cuidado. Recebes todos os meses.</p>
+          <strong>Começa por um mês. Continua se fizer sentido.</strong>
+        </div>
+
+        <div class="grid-3">
+          <article class="todo-card">
+            <span class="product-badge">Casa</span>
+            <h3>A Tua Casa Outra Vez</h3>
+            <p>Para manter a casa cuidada, perfumada e mais habitável por dentro.</p>
+            <ul class="todo-list">
+              <li>2 elementos físicos Maison JF</li>
+              <li>1 mensagem personalizada para o teu mês</li>
+              <li>1 Pergunta d’Ouro Maison JF</li>
+            </ul>
+            <p class="todo-small">Mini ritual mensal para a casa. A composição é confirmada antes do envio.</p>
+            <div class="todo-price">Desde 19€/mês</div>
+            <a class="btn btn-primary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20saber%20mais%20sobre%20A%20Tua%20Casa%20Outra%20Vez.">Quero a minha casa cuidada</a>
+          </article>
+
+          <article class="todo-card todo-featured">
+            <span class="product-badge">Mais completo</span>
+            <h3>Quando Tudo Fica Demais</h3>
+            <p>Para quem só se lembra de cuidar de si quando já chegou ao limite.</p>
+            <ul class="todo-list">
+              <li>1 produto principal Maison JF</li>
+              <li>1 complemento sensorial</li>
+              <li>1 orientação personalizada curta</li>
+              <li>1 Pergunta d’Ouro Maison JF</li>
+            </ul>
+            <p class="todo-small">Ritual mensal para aliviar peso, cansaço e sobrecarga, sem teres de escolher tudo do zero.</p>
+            <div class="todo-price">Desde 39€/mês</div>
+            <a class="btn btn-primary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20saber%20mais%20sobre%20Quando%20Tudo%20Fica%20Demais.">Quero aliviar o peso</a>
+          </article>
+
+          <article class="todo-card">
+            <span class="product-badge">Ritual + clareza</span>
+            <h3>Hoje Não Enfrentas Isso Sozinho</h3>
+            <p>Para quem quer ritual físico mensal e uma resposta concreta quando precisa de clareza.</p>
+            <ul class="todo-list">
+              <li>1 Ritual Físico Maison JF</li>
+              <li>1 mensagem personalizada para o teu mês</li>
+              <li>1 Pergunta d’Ouro Maison JF</li>
+              <li>1 Consulta Escrita Breve incluída</li>
+              <li>Prioridade em marcações</li>
+            </ul>
+            <p class="todo-small">A Consulta Escrita Breve responde a uma pergunta concreta, por escrito, com tarot e síntese prática.</p>
+            <div class="todo-price">Desde 59€/mês</div>
+            <a class="btn btn-primary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20saber%20mais%20sobre%20Hoje%20Não%20Enfrentas%20Isso%20Sozinho.">Quero apoio mensal</a>
+          </article>
+        </div>
+
+        <div class="gold-question-panel">
+          <span class="label">Incluído em todos os planos</span>
+          <h3>A Pergunta d’Ouro</h3>
+          <p>
+            Um cartão físico, numerado e de edição limitada, criado para coleccionar,
+            guardar ou usar no teu ritual pessoal.
+          </p>
+          <p class="gold-question-line">Porque às vezes a pergunta certa mexe mais do que uma resposta apressada.</p>
+        </div>
+
+        <div class="payment-panel">
+          <span class="label">Pagamento simples</span>
+          <h3>Primeiro mês garantido. Sem fidelização.</h3>
+          <p>
+            Pagas o primeiro mês, recebes o teu ritual Maison JF e decides se queres manter no mês seguinte.
+            Se fizer sentido, continuas. Se precisares parar, paras.
+          </p>
+        </div>
+
+        <div class="premium-panel">
+          <div>
+            <span class="label">Acompanhamento premium</span>
+            <h3>Vamos Organizar a Tua Vida</h3>
+            <p>
+              Para quem precisa de apoio contínuo, sessões regulares e reorganização emocional mais próxima.
+              Disponível por contacto directo e com vagas limitadas.
+            </p>
+          </div>
+          <a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20saber%20mais%20sobre%20Vamos%20Organizar%20a%20Tua%20Vida.">Pedir informação</a>
         </div>
       </div>
     </section>
@@ -1840,6 +2081,17 @@
             <p>A marcação fica confirmada após pagamento. Os detalhes são combinados directamente comigo.</p>
           </details>
 
+
+          <details>
+            <summary>Como funciona o Maison Todo o Mês?</summary>
+            <p>Começa por um mês. Pagas o primeiro mês, recebes o teu ritual Maison JF e decides se queres manter no mês seguinte. Sem fidelização.</p>
+          </details>
+
+          <details>
+            <summary>O que é a Pergunta d’Ouro?</summary>
+            <p>É um cartão físico, numerado e de edição limitada, incluído nos planos mensais Maison Todo o Mês. Pode ser coleccionado, guardado ou usado como ponto de reflexão no ritual pessoal.</p>
+          </details>
+
           <details>
             <summary>As consultas substituem apoio médico ou psicológico?</summary>
             <p>Não. As práticas Maison JF são orientadas para bem-estar, reflexão e desenvolvimento pessoal. Não substituem acompanhamento médico, psicológico, jurídico ou financeiro.</p>
@@ -1881,6 +2133,7 @@
 
       <div class="footer-links">
         <a href="https://maison-jf.myshopify.com/collections/all" target="_blank" rel="noopener">Loja online</a>
+        <a href="#maison-todo-o-mes">Maison Todo o Mês</a>
         <a href="https://wa.me/351923318289">WhatsApp</a>
         <a href="https://www.youtube.com/@maisonjf" target="_blank" rel="noopener">YouTube</a>
         <a href="#consultas">Consultas</a>
