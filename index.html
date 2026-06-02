@@ -326,7 +326,99 @@
     .signature-section { background: radial-gradient(circle at 0% 0%, rgba(201,162,39,0.18), transparent 34%), radial-gradient(circle at 100% 100%, rgba(0,77,64,0.20), transparent 36%), linear-gradient(135deg, var(--preto) 0%, var(--grafite) 58%, var(--bordo-profundo) 100%); color: var(--marfim); text-align: center; }
     .signature-section .section-title { color: var(--dourado-claro); }
     .signature-section p { color: rgba(245,241,232,0.84); max-width: 760px; margin: 0 auto 24px; }
-        @media (max-width: 1024px) { .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+    
+    .about-section {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(201,162,39,0.16), transparent 34%),
+        radial-gradient(circle at 100% 100%, rgba(111,29,45,0.34), transparent 38%),
+        linear-gradient(135deg, var(--preto) 0%, var(--grafite) 58%, var(--bordo-profundo) 100%);
+      color: var(--marfim);
+    }
+    .about-section .about-card {
+      background:
+        radial-gradient(circle at top right, rgba(201,162,39,0.12), transparent 32%),
+        linear-gradient(180deg, rgba(245,241,232,0.96), rgba(232,221,200,0.92));
+      color: var(--preto);
+    }
+
+    .faq-section {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(201,162,39,0.12), transparent 32%),
+        linear-gradient(135deg, var(--esmeralda) 0%, var(--esmeralda-profundo) 100%);
+      color: var(--marfim);
+    }
+    .faq-section .kicker,
+    .faq-section .section-title {
+      color: var(--dourado-claro);
+    }
+    .faq-section .faq-list details {
+      background:
+        radial-gradient(circle at top right, rgba(201,162,39,0.10), transparent 32%),
+        linear-gradient(180deg, rgba(255,252,247,0.98), rgba(245,241,232,0.95));
+      color: var(--preto);
+    }
+
+    .journal-section {
+      background:
+        radial-gradient(circle at 12% 12%, rgba(111,29,45,0.10), transparent 30%),
+        radial-gradient(circle at 88% 10%, rgba(0,77,64,0.08), transparent 34%),
+        linear-gradient(135deg, var(--marfim) 0%, var(--marfim-forte) 100%);
+    }
+
+    .shop-section {
+      background:
+        radial-gradient(circle at 20% 0%, rgba(201,162,39,0.16), transparent 28%),
+        radial-gradient(circle at 90% 10%, rgba(111,29,45,0.08), transparent 30%),
+        linear-gradient(135deg, var(--marfim) 0%, var(--marfim-forte) 100%);
+    }
+
+    @media (max-width: 1024px) { .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+
+    .about-section {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(201,162,39,0.16), transparent 34%),
+        radial-gradient(circle at 100% 100%, rgba(111,29,45,0.34), transparent 38%),
+        linear-gradient(135deg, var(--preto) 0%, var(--grafite) 58%, var(--bordo-profundo) 100%);
+      color: var(--marfim);
+    }
+    .about-section .about-card {
+      background:
+        radial-gradient(circle at top right, rgba(201,162,39,0.12), transparent 32%),
+        linear-gradient(180deg, rgba(245,241,232,0.96), rgba(232,221,200,0.92));
+      color: var(--preto);
+    }
+
+    .faq-section {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(201,162,39,0.12), transparent 32%),
+        linear-gradient(135deg, var(--esmeralda) 0%, var(--esmeralda-profundo) 100%);
+      color: var(--marfim);
+    }
+    .faq-section .kicker,
+    .faq-section .section-title {
+      color: var(--dourado-claro);
+    }
+    .faq-section .faq-list details {
+      background:
+        radial-gradient(circle at top right, rgba(201,162,39,0.10), transparent 32%),
+        linear-gradient(180deg, rgba(255,252,247,0.98), rgba(245,241,232,0.95));
+      color: var(--preto);
+    }
+
+    .journal-section {
+      background:
+        radial-gradient(circle at 12% 12%, rgba(111,29,45,0.10), transparent 30%),
+        radial-gradient(circle at 88% 10%, rgba(0,77,64,0.08), transparent 34%),
+        linear-gradient(135deg, var(--marfim) 0%, var(--marfim-forte) 100%);
+    }
+
+    .shop-section {
+      background:
+        radial-gradient(circle at 20% 0%, rgba(201,162,39,0.16), transparent 28%),
+        radial-gradient(circle at 90% 10%, rgba(111,29,45,0.08), transparent 30%),
+        linear-gradient(135deg, var(--marfim) 0%, var(--marfim-forte) 100%);
+    }
+
     @media (max-width: 1024px) { .trust-grid, .portal-grid { grid-template-columns: repeat(2, 1fr); } .trust-item:nth-child(2n) { border-right: 0; } }
     @media (max-width: 640px) { section { padding: 72px 0; } .header-inner { min-height: 74px; padding: 16px 0; } .brand-name { font-size: 1.55rem; letter-spacing: 4px; } .btn { width: 100%; } .nav { gap: 12px; } .hero-banner img { height: 58vh; min-height: 430px; object-position: center top; } .trust-grid, .portal-grid { grid-template-columns: 1fr; } .trust-item { border-right: 0; border-bottom: 1px solid rgba(10,10,10,0.10); } .trust-item:last-child { border-bottom: 0; } }
   </style>
@@ -415,7 +507,7 @@
           <article class="consult-card"><h3>Consulta Escrita Completa</h3><p><strong>Há demasiado para explicar numa única pergunta.</strong></p><a class="btn btn-secondary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver na Loja</a></article>
           <article class="consult-card"><h3>Tarot Integrativo</h3><p><strong>A mesma situação continua a repetir-se e não percebes porquê.</strong></p><a class="btn btn-secondary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver na Loja</a></article>
           <article class="consult-card"><h3>Escuta Orientada</h3><p><strong>Precisas de organizar a tua vida antes que ela te organize a ti.</strong></p><a class="btn btn-secondary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver na Loja</a></article>
-          <article class="consult-card"><h3>Quando Não Dá Para Adiar</h3><p><strong>Estás no limite e precisas de apoio por alguns dias, não só de uma resposta rápida.</strong></p><p>Acompanhamento SOS Maison JF por mensagem, com opções de 3, 7, 14, 21 ou 28 dias.</p><a class="btn btn-third" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Pedir Apoio SOS</a></article>
+          <article class="consult-card"><h3>Quando Não Dá Para Adiar</h3><p><strong>Estás no limite e precisas de apoio agora?</strong></p><a class="btn btn-third" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Pedir Apoio SOS</a></article>
         </div>
       </div>
     </section>
