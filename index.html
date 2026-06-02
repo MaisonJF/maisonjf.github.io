@@ -195,6 +195,10 @@
     .nav .nav-cta { border: 1px solid rgba(201,162,39,0.58); color: var(--preto); padding: 10px 16px; border-radius: 999px; background: rgba(245,241,232,0.68); }
     section { padding: 88px 0; scroll-margin-top: 135px; }
     .hero { padding-top: clamp(4.2rem, 7vw, 6rem); padding-bottom: clamp(4rem, 6vw, 5.6rem); text-align: center; }
+    .hero-image { padding: 0 0 38px; background: var(--preto); }
+    .hero-banner { width: 100%; background: var(--preto); overflow: hidden; }
+    .hero-banner img { display: block; width: 100%; height: auto; }
+    .hero-actions { padding-top: 26px; }
     .eyebrow, .kicker { display: inline-flex; border: 1px solid rgba(201,162,39,0.42); color: var(--dourado); background: rgba(255,255,255,0.45); padding: 8px 16px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 22px; }
     .kicker { margin-bottom: 10px; color: var(--esmeralda); }
     h1, h2, h3 { font-family: "Cormorant Garamond", serif; font-weight: 600; line-height: 1; }
@@ -249,7 +253,7 @@
     .footer-links { display: grid; gap: 8px; justify-content: end; text-align: right; }
     .footer-links a { color: var(--dourado); font-weight: 800; }
     @media (max-width: 1024px) { .grid-4, .grid-3, .grid-2, .about-grid, .footer-grid { grid-template-columns: 1fr; } .footer-links { justify-content: start; text-align: left; } }
-    @media (max-width: 640px) { section { padding: 72px 0; } .header-inner { min-height: 74px; } .brand-name { font-size: 1.65rem; letter-spacing: 4px; } .btn { width: 100%; } .nav { gap: 12px; } }
+    @media (max-width: 640px) { section { padding: 72px 0; } .header-inner { min-height: 74px; } .brand-name { font-size: 1.65rem; letter-spacing: 4px; } .btn { width: 100%; } .nav { gap: 12px; } .hero-image { padding-bottom: 28px; } }
   </style>
 </head>
 <body>
@@ -277,12 +281,11 @@
   </header>
 
   <main id="top">
-    <section class="hero">
-      <div class="container">
-        <div class="eyebrow">Maison JF™</div>
-        <h1>Confuso? Cansado? No limite?</h1>
-        <div class="hero-subtitle">Há mais de 30 anos que ajudo pessoas a encontrar clareza, direcção e um lugar onde recomeçar.</div>
-        <p class="hero-copy">Hoje essa casa chama-se <strong>Maison JF</strong>. Consultas e rituais artesanais para quando a casa pesa, a cabeça não desliga ou a vida pede uma nova direcção.</p>
+    <section class="hero hero-image" aria-label="Maison JF — Pára de ignorar. Volta para casa.">
+      <div class="hero-banner">
+        <img src="maison-jf-hero-site.png" alt="Maison JF — Pára de ignorar. Volta para casa." />
+      </div>
+      <div class="container hero-actions">
         <div class="actions">
           <a class="btn btn-primary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Comprar Rituais</a>
           <a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20marcar%20uma%20consulta." target="_blank" rel="noopener">Marcar Consulta</a>
@@ -328,42 +331,12 @@
           <p class="section-subtitle">Nem sempre precisas de mudar tudo. Às vezes só tens de parar, olhar para o que te está a acontecer e perceber qual é o próximo passo. Não prometo milagres. Ajudo-te a organizar o que está confuso.</p>
         </div>
         <div class="grid-3">
-          <article class="consult-card">
-            <h3>Tarot Expresso</h3>
-            <p>Para uma dúvida directa, uma decisão rápida ou aquele assunto que não sai da cabeça.</p>
-            <div class="consult-price">17€</div>
-            <a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20marcar%20um%20Tarot%20Expresso." target="_blank" rel="noopener">Marcar</a>
-          </article>
-          <article class="consult-card">
-            <h3>Consulta Escrita Breve</h3>
-            <p>Para uma pergunta clara, respondida por escrito, com objectividade e cuidado.</p>
-            <div class="consult-price">25€</div>
-            <a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20uma%20Consulta%20Escrita%20Breve." target="_blank" rel="noopener">Pedir</a>
-          </article>
-          <article class="consult-card">
-            <h3>Consulta Escrita Completa</h3>
-            <p>Para situações que precisam de mais contexto, mais leitura e uma orientação mais completa por escrito.</p>
-            <div class="consult-price">45€</div>
-            <a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20uma%20Consulta%20Escrita%20Completa." target="_blank" rel="noopener">Pedir</a>
-          </article>
-          <article class="consult-card">
-            <h3>Tarot Integrativo</h3>
-            <p>Para relações, decisões, bloqueios e padrões que precisam de mais tempo, contexto e clareza.</p>
-            <div class="consult-price">35€</div>
-            <a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20marcar%20um%20Tarot%20Integrativo." target="_blank" rel="noopener">Marcar</a>
-          </article>
-          <article class="consult-card">
-            <h3>Escuta Orientada</h3>
-            <p>Sem Tarot. Uma conversa clara, humana e estruturada para ajudar-te a organizar pensamentos, emoções e próximos passos.</p>
-            <div class="consult-price">60€</div>
-            <a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20marcar%20Escuta%20Orientada." target="_blank" rel="noopener">Marcar</a>
-          </article>
-          <article class="consult-card">
-            <h3>Não sabes qual escolher?</h3>
-            <p>Explica-me o que está a pesar. Eu digo-te qual é o caminho mais simples para começar.</p>
-            <div class="consult-price">Mensagem directa</div>
-            <a class="btn btn-third" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Tenho%20uma%20dúvida%20e%20não%20sei%20qual%20consulta%20escolher." target="_blank" rel="noopener">Tenho uma dúvida</a>
-          </article>
+          <article class="consult-card"><h3>Tarot Expresso</h3><p>Para uma dúvida directa, uma decisão rápida ou aquele assunto que não sai da cabeça.</p><div class="consult-price">17€</div><a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20marcar%20um%20Tarot%20Expresso." target="_blank" rel="noopener">Marcar</a></article>
+          <article class="consult-card"><h3>Consulta Escrita Breve</h3><p>Para uma pergunta clara, respondida por escrito, com objectividade e cuidado.</p><div class="consult-price">25€</div><a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20uma%20Consulta%20Escrita%20Breve." target="_blank" rel="noopener">Pedir</a></article>
+          <article class="consult-card"><h3>Consulta Escrita Completa</h3><p>Para situações que precisam de mais contexto, mais leitura e uma orientação mais completa por escrito.</p><div class="consult-price">45€</div><a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20uma%20Consulta%20Escrita%20Completa." target="_blank" rel="noopener">Pedir</a></article>
+          <article class="consult-card"><h3>Tarot Integrativo</h3><p>Para relações, decisões, bloqueios e padrões que precisam de mais tempo, contexto e clareza.</p><div class="consult-price">35€</div><a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20marcar%20um%20Tarot%20Integrativo." target="_blank" rel="noopener">Marcar</a></article>
+          <article class="consult-card"><h3>Escuta Orientada</h3><p>Sem Tarot. Uma conversa clara, humana e estruturada para ajudar-te a organizar pensamentos, emoções e próximos passos.</p><div class="consult-price">60€</div><a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20marcar%20Escuta%20Orientada." target="_blank" rel="noopener">Marcar</a></article>
+          <article class="consult-card"><h3>Não sabes qual escolher?</h3><p>Explica-me o que está a pesar. Eu digo-te qual é o caminho mais simples para começar.</p><div class="consult-price">Mensagem directa</div><a class="btn btn-third" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Tenho%20uma%20dúvida%20e%20não%20sei%20qual%20consulta%20escolher." target="_blank" rel="noopener">Tenho uma dúvida</a></article>
         </div>
       </div>
     </section>
