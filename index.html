@@ -185,9 +185,9 @@
     .prize-strip { background: linear-gradient(135deg, var(--esmeralda), var(--esmeralda-profundo)); color: var(--marfim); text-align: center; padding: 13px 16px; border-bottom: 1px solid rgba(201,162,39,0.28); font-size: 0.74rem; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; }
     .prize-strip strong { color: var(--dourado-claro); }
     .site-header { position: sticky; top: 0; z-index: 60; backdrop-filter: blur(14px); background: rgba(245,241,232,0.94); border-bottom: 1px solid rgba(201,162,39,0.12); }
-    .header-inner { min-height: 118px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 18px; text-align: center; padding: 22px 0; }
+    .header-inner { min-height: 96px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; text-align: center; padding: 18px 0; }
     .brand { display: flex; flex-direction: column; gap: 4px; align-items: center; }
-    .brand-name { font-family: "Cormorant Garamond", serif; font-size: 2rem; letter-spacing: 7px; line-height: 1; text-transform: uppercase; color: var(--dourado); font-weight: 800; text-shadow: 0 10px 24px rgba(201,162,39,0.14); }
+    .brand-name { font-family: "Cormorant Garamond", serif; font-size: 1.85rem; letter-spacing: 7px; line-height: 1; text-transform: uppercase; color: var(--dourado); font-weight: 800; text-shadow: 0 10px 24px rgba(201,162,39,0.14); }
     .brand-tagline { font-size: 0.66rem; color: rgba(10,10,10,0.62); letter-spacing: 1.15px; text-transform: uppercase; font-weight: 800; }
     .nav { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; align-items: center; }
     .nav a { color: var(--bordo); font-size: 0.70rem; font-weight: 800; letter-spacing: 1.22px; text-transform: uppercase; border-bottom: 1px solid transparent; padding-bottom: 4px; transition: var(--ease); }
@@ -195,10 +195,90 @@
     .nav .nav-cta { border: 1px solid rgba(201,162,39,0.58); color: var(--preto); padding: 10px 16px; border-radius: 999px; background: rgba(245,241,232,0.68); }
     section { padding: 88px 0; scroll-margin-top: 135px; }
     .hero { padding-top: clamp(4.2rem, 7vw, 6rem); padding-bottom: clamp(4rem, 6vw, 5.6rem); text-align: center; }
-    .hero-image { padding: 0 0 38px; background: var(--preto); }
+    .hero-image { padding: 0; background: var(--preto); }
     .hero-banner { width: 100%; background: var(--preto); overflow: hidden; }
-    .hero-banner img { display: block; width: 100%; height: auto; }
-    .hero-actions { padding-top: 26px; }
+    .hero-banner img { display: block; width: 100%; height: min(68vh, 620px); object-fit: cover; object-position: center top; }
+    .hero-actions { padding: 24px 0 34px; background: var(--preto); }
+    .hero-actions .btn { min-width: 210px; }
+
+    .trust-bar {
+      background: var(--marfim);
+      border-top: 1px solid rgba(201,162,39,0.18);
+      border-bottom: 1px solid rgba(201,162,39,0.18);
+      padding: 22px 0;
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      align-items: stretch;
+    }
+    .trust-item {
+      text-align: center;
+      padding: 8px 18px;
+      border-right: 1px solid rgba(10,10,10,0.10);
+      color: rgba(10,10,10,0.78);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+    .trust-item:last-child { border-right: 0; }
+    .trust-item strong {
+      display: block;
+      color: var(--bordo);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.25px;
+      margin-bottom: 5px;
+    }
+
+    .portal-section {
+      padding: 58px 0 72px;
+      background: linear-gradient(135deg, var(--marfim) 0%, var(--marfim-forte) 100%);
+    }
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .portal-card {
+      min-height: 255px;
+      border-radius: 0;
+      padding: 30px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      color: var(--marfim);
+      background:
+        linear-gradient(135deg, rgba(10,10,10,0.76), rgba(10,10,10,0.38)),
+        radial-gradient(circle at 100% 0%, rgba(201,162,39,0.22), transparent 34%),
+        var(--preto);
+      border: 1px solid rgba(201,162,39,0.28);
+      box-shadow: var(--sombra);
+    }
+    .portal-card h3 {
+      color: var(--dourado-claro);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 1.34rem;
+    }
+    .portal-card p {
+      color: rgba(245,241,232,0.84);
+      font-size: 0.9rem;
+      line-height: 1.58;
+      margin-bottom: 18px;
+    }
+    .portal-card .portal-arrow {
+      color: var(--dourado);
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+    .portal-card.consultas { background: linear-gradient(135deg, rgba(111,29,45,0.86), rgba(10,10,10,0.58)), var(--bordo); }
+    .portal-card.rituais { background: linear-gradient(135deg, rgba(0,77,64,0.90), rgba(10,10,10,0.56)), var(--esmeralda); }
+    .portal-card.conhece { background: linear-gradient(135deg, rgba(245,241,232,0.84), rgba(111,29,45,0.52)), var(--marfim); color: var(--preto); }
+    .portal-card.conhece h3 { color: var(--bordo); }
+    .portal-card.conhece p { color: rgba(10,10,10,0.72); }
     .eyebrow, .kicker { display: inline-flex; border: 1px solid rgba(201,162,39,0.42); color: var(--dourado); background: rgba(255,255,255,0.45); padding: 8px 16px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 22px; }
     .kicker { margin-bottom: 10px; color: var(--esmeralda); }
     h1, h2, h3 { font-family: "Cormorant Garamond", serif; font-weight: 600; line-height: 1; }
@@ -232,7 +312,7 @@
     .consult-card::before, .product-card::before, .journal-card::before { content: ""; display: block; height: 3px; width: calc(100% - 48px); margin: -26px auto 22px; background: linear-gradient(90deg, transparent, var(--dourado), transparent); opacity: .95; }
     .consult-price, .price { color: var(--dourado); font-weight: 800; font-size: 1.15rem; margin-top: auto; margin-bottom: 14px; }
     .product-badge, .journal-badge, .label { align-self: center; display: inline-block; padding: 6px 12px; border-radius: 999px; background: rgba(201,162,39,0.12); border: 1px solid rgba(201,162,39,0.22); color: var(--bordo); font-size: 0.66rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
-    .about-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 22px; align-items: stretch; }
+    .about-grid { display: block; max-width: 980px; }
     .mini-grid { display: grid; gap: 14px; }
     .mini-card { padding: 22px; border-radius: var(--radius-sm); border: 1px solid var(--borda); background: rgba(255,252,247,0.72); box-shadow: var(--sombra); text-align: center; }
     .mini-card strong { display: block; color: var(--bordo); font-size: 0.82rem; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 5px; }
@@ -246,20 +326,12 @@
     .signature-section { background: radial-gradient(circle at 0% 0%, rgba(201,162,39,0.18), transparent 34%), radial-gradient(circle at 100% 100%, rgba(0,77,64,0.20), transparent 36%), linear-gradient(135deg, var(--preto) 0%, var(--grafite) 58%, var(--bordo-profundo) 100%); color: var(--marfim); text-align: center; }
     .signature-section .section-title { color: var(--dourado-claro); }
     .signature-section p { color: rgba(245,241,232,0.84); max-width: 760px; margin: 0 auto 24px; }
-    .footer { padding: 42px 0 58px; background: var(--preto); color: var(--marfim); }
-    .footer-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 22px; align-items: start; }
-    .footer-brand { font-family: "Cormorant Garamond", serif; font-size: 2rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; color: var(--dourado); }
-    .footer-copy { color: rgba(245,241,232,0.78); max-width: 700px; }
-    .footer-links { display: grid; gap: 8px; justify-content: end; text-align: right; }
-    .footer-links a { color: var(--dourado); font-weight: 800; }
-    @media (max-width: 1024px) { .grid-4, .grid-3, .grid-2, .about-grid, .footer-grid { grid-template-columns: 1fr; } .footer-links { justify-content: start; text-align: left; } }
-    @media (max-width: 640px) { section { padding: 72px 0; } .header-inner { min-height: 74px; } .brand-name { font-size: 1.65rem; letter-spacing: 4px; } .btn { width: 100%; } .nav { gap: 12px; } .hero-image { padding-bottom: 28px; } }
+        @media (max-width: 1024px) { .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+    @media (max-width: 1024px) { .trust-grid, .portal-grid { grid-template-columns: repeat(2, 1fr); } .trust-item:nth-child(2n) { border-right: 0; } }
+    @media (max-width: 640px) { section { padding: 72px 0; } .header-inner { min-height: 74px; padding: 16px 0; } .brand-name { font-size: 1.55rem; letter-spacing: 4px; } .btn { width: 100%; } .nav { gap: 12px; } .hero-banner img { height: 58vh; min-height: 430px; object-position: center top; } .trust-grid, .portal-grid { grid-template-columns: 1fr; } .trust-item { border-right: 0; border-bottom: 1px solid rgba(10,10,10,0.10); } .trust-item:last-child { border-bottom: 0; } }
   </style>
 </head>
 <body>
-  <div class="top-strip">Portes gratuitos a partir de 50€ • Raspadinha premiada em todas as compras</div>
-  <div class="prize-strip">Candidato 2026 · <strong>Prémio Intermarché Produção Nacional</strong> · Categoria Cá da Terra</div>
-
   <header class="site-header">
     <div class="container header-inner">
       <a href="#top" class="brand" aria-label="Maison JF">
@@ -267,10 +339,9 @@
         <span class="brand-tagline">Rituais artesanais • Tarot • Escuta</span>
       </a>
       <nav class="nav" aria-label="Navegação principal">
-        <a href="#escolha">Começar</a>
         <a href="#consultas">Consultas</a>
         <a href="#rituais">Rituais</a>
-        <a href="#sobre">Sobre</a>
+        <a href="#sobre">Sobre JF</a>
         <a href="#imprensa">Imprensa</a>
         <a href="#faq">FAQ</a>
         <a href="https://www.youtube.com/@maisonjf" target="_blank" rel="noopener">YouTube</a>
@@ -287,38 +358,46 @@
       </div>
       <div class="container hero-actions">
         <div class="actions">
-          <a class="btn btn-primary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Comprar Rituais</a>
+          <a class="btn btn-primary" href="#portais">Abrir a Porta</a>
           <a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20marcar%20uma%20consulta." target="_blank" rel="noopener">Marcar Consulta</a>
-          <a class="btn btn-third" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Não%20sei%20o%20que%20escolher.%20Podes%20ajudar-me%3F" target="_blank" rel="noopener">Ajuda-me a Escolher</a>
+          <a class="btn btn-third" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Comprar Rituais</a>
         </div>
       </div>
     </section>
 
-    <section class="paths-section" id="escolha" aria-labelledby="escolha-title">
+    <section class="trust-bar" aria-label="Confiança Maison JF">
+      <div class="container trust-grid">
+        <div class="trust-item"><strong>Portugal</strong>Feito à mão em Portugal</div>
+        <div class="trust-item"><strong>Pequenos lotes</strong>Produção artesanal e cuidada</div>
+        <div class="trust-item"><strong>Portes</strong>Grátis em Portugal acima de 50€</div>
+        <div class="trust-item"><strong>Envios</strong>Portugal, Europa e resto do mundo</div>
+        <div class="trust-item"><strong>Pagamento</strong>Pagamentos seguros e protegidos</div>
+      </div>
+    </section>
+
+    <section class="portal-section" id="portais" aria-labelledby="portais-title">
       <div class="container">
-        <div class="section-header">
-          <span class="kicker">Escolha rápida</span>
-          <h2 class="section-title" id="escolha-title">Escolhe pelo que precisas agora.</h2>
-        </div>
-        <div class="grid-3">
-          <article class="path-card">
-            <span class="label">Cabeça</span>
-            <h3>A minha cabeça não pára.</h3>
-            <p>Marca uma consulta.</p>
-            <a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20A%20minha%20cabeça%20não%20pára%20e%20quero%20marcar%20consulta." target="_blank" rel="noopener">Marcar Consulta</a>
-          </article>
-          <article class="path-card">
-            <span class="label">Casa</span>
-            <h3>A minha casa está pesada.</h3>
-            <p>Escolhe um ritual artesanal.</p>
-            <a class="btn btn-primary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Comprar Rituais</a>
-          </article>
-          <article class="path-card">
-            <span class="label">Direcção</span>
-            <h3>Estou perdido e não sei por onde começar.</h3>
-            <p>Envia mensagem. Eu ajudo-te a escolher.</p>
-            <a class="btn btn-third" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Estou%20perdido%20e%20não%20sei%20por%20onde%20começar." target="_blank" rel="noopener">Ajuda-me a Escolher</a>
-          </article>
+        <div class="portal-grid">
+          <a class="portal-card produtos" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">
+            <h3>Produtos Sensoriais</h3>
+            <p>Aromas, velas e detalhes para mudar a energia da casa sem complicar.</p>
+            <span class="portal-arrow">→</span>
+          </a>
+          <a class="portal-card consultas" href="#consultas">
+            <h3>Consultas</h3>
+            <p>Tarot, escuta e direcção para quando a cabeça não pára.</p>
+            <span class="portal-arrow">→</span>
+          </a>
+          <a class="portal-card rituais" href="#rituais">
+            <h3>Rituais Artesanais</h3>
+            <p>Gestos simples, feitos à mão, para a casa, o corpo e os dias pesados.</p>
+            <span class="portal-arrow">→</span>
+          </a>
+          <a class="portal-card conhece" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20ajuda%20para%20me%20conhecer%20melhor%20e%20perceber%20o%20próximo%20passo." target="_blank" rel="noopener">
+            <h3>Conhece-te a Ti</h3>
+            <p>Leituras, perguntas e orientação para perceber o que te move.</p>
+            <span class="portal-arrow">→</span>
+          </a>
         </div>
       </div>
     </section>
@@ -328,15 +407,15 @@
         <div class="section-header">
           <span class="kicker">Consultas Maison JF</span>
           <h2 class="section-title" id="consultas-title">Quando precisas de clareza, não de mais confusão.</h2>
-          <p class="section-subtitle">Nem sempre precisas de mudar tudo. Às vezes só tens de parar, olhar para o que te está a acontecer e perceber qual é o próximo passo. Não prometo milagres. Ajudo-te a organizar o que está confuso.</p>
+          <p class="section-subtitle">Escolhe pelo problema que estás a viver. A loja mostra os formatos disponíveis, valores e condições.</p>
         </div>
         <div class="grid-3">
-          <article class="consult-card"><h3>Tarot Expresso</h3><p>Para uma dúvida directa, uma decisão rápida ou aquele assunto que não sai da cabeça.</p><div class="consult-price">17€</div><a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20marcar%20um%20Tarot%20Expresso." target="_blank" rel="noopener">Marcar</a></article>
-          <article class="consult-card"><h3>Consulta Escrita Breve</h3><p>Para uma pergunta clara, respondida por escrito, com objectividade e cuidado.</p><div class="consult-price">25€</div><a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20uma%20Consulta%20Escrita%20Breve." target="_blank" rel="noopener">Pedir</a></article>
-          <article class="consult-card"><h3>Consulta Escrita Completa</h3><p>Para situações que precisam de mais contexto, mais leitura e uma orientação mais completa por escrito.</p><div class="consult-price">45€</div><a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20uma%20Consulta%20Escrita%20Completa." target="_blank" rel="noopener">Pedir</a></article>
-          <article class="consult-card"><h3>Tarot Integrativo</h3><p>Para relações, decisões, bloqueios e padrões que precisam de mais tempo, contexto e clareza.</p><div class="consult-price">35€</div><a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20marcar%20um%20Tarot%20Integrativo." target="_blank" rel="noopener">Marcar</a></article>
-          <article class="consult-card"><h3>Escuta Orientada</h3><p>Sem Tarot. Uma conversa clara, humana e estruturada para ajudar-te a organizar pensamentos, emoções e próximos passos.</p><div class="consult-price">60€</div><a class="btn btn-secondary" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20marcar%20Escuta%20Orientada." target="_blank" rel="noopener">Marcar</a></article>
-          <article class="consult-card"><h3>Não sabes qual escolher?</h3><p>Explica-me o que está a pesar. Eu digo-te qual é o caminho mais simples para começar.</p><div class="consult-price">Mensagem directa</div><a class="btn btn-third" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Tenho%20uma%20dúvida%20e%20não%20sei%20qual%20consulta%20escolher." target="_blank" rel="noopener">Tenho uma dúvida</a></article>
+          <article class="consult-card"><h3>Tarot Expresso</h3><p><strong>Tens uma dúvida e não queres andar mais uma semana às voltas.</strong></p><a class="btn btn-secondary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver na Loja</a></article>
+          <article class="consult-card"><h3>Consulta Escrita Breve</h3><p><strong>Queres uma resposta clara para uma pergunta específica.</strong></p><a class="btn btn-secondary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver na Loja</a></article>
+          <article class="consult-card"><h3>Consulta Escrita Completa</h3><p><strong>Há demasiado para explicar numa única pergunta.</strong></p><a class="btn btn-secondary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver na Loja</a></article>
+          <article class="consult-card"><h3>Tarot Integrativo</h3><p><strong>A mesma situação continua a repetir-se e não percebes porquê.</strong></p><a class="btn btn-secondary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver na Loja</a></article>
+          <article class="consult-card"><h3>Escuta Orientada</h3><p><strong>Precisas de organizar a tua vida antes que ela te organize a ti.</strong></p><a class="btn btn-secondary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver na Loja</a></article>
+          <article class="consult-card"><h3>Quando Não Dá Para Adiar</h3><p><strong>Estás no limite e precisas de apoio por alguns dias, não só de uma resposta rápida.</strong></p><p>Acompanhamento SOS Maison JF por mensagem, com opções de 3, 7, 14, 21 ou 28 dias.</p><a class="btn btn-third" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Pedir Apoio SOS</a></article>
         </div>
       </div>
     </section>
@@ -345,66 +424,46 @@
       <div class="container">
         <div class="section-header">
           <span class="kicker">Rituais Artesanais</span>
-          <h2 class="section-title" id="rituais-title">Muda o ambiente. Volta a ti.</h2>
-          <p class="section-subtitle">Rituais artesanais feitos em Portugal para cuidar da casa, do corpo e dos dias em que já chega.</p>
+          <h2 class="section-title" id="rituais-title">PÁRA DE IGNORAR.</h2>
+          <p class="section-subtitle">A casa pesa. O corpo acusa. O dia arrasta-se. Começa por um ritual simples.</p>
         </div>
         <div class="grid-3">
-          <article class="product-card"><span class="product-badge">Casa</span><h3>Velas, brumes e difusores</h3><p>Para perfumar o ambiente, mudar a sensação da casa e criar presença.</p><div class="price">Na loja</div><a class="btn btn-primary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Comprar</a></article>
-          <article class="product-card"><span class="product-badge">Pequenos rituais</span><h3>Wax melts e escalda-pés</h3><p>Para começar pequeno, sem complicar, com um gesto simples e sensorial.</p><div class="price">A partir de 5€</div><a class="btn btn-primary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Começar</a></article>
-          <article class="product-card"><span class="product-badge">Corpo</span><h3>Óleos e velas de massagem</h3><p>Para o corpo cansado, tenso ou a pedir pausa, sozinho ou a dois.</p><div class="price">A partir de 12€</div><a class="btn btn-primary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver rituais</a></article>
+          <article class="product-card"><span class="product-badge">Casa</span><h3>Velas, brumes e difusores</h3><p><strong>A tua casa anda pesada? Começa pelo aroma.</strong></p><a class="btn btn-primary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver na Loja</a></article>
+          <article class="product-card"><span class="product-badge">Pequenos rituais</span><h3>Wax melts e escalda-pés</h3><p><strong>Tens cinco minutos? Então tens tempo para começar.</strong></p><a class="btn btn-primary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver na Loja</a></article>
+          <article class="product-card"><span class="product-badge">Corpo</span><h3>Óleos e velas de massagem</h3><p><strong>O teu corpo está a pedir atenção há mais tempo do que admites.</strong></p><a class="btn btn-primary" href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Ver na Loja</a></article>
         </div>
-        <div class="actions" style="margin-top: 26px;"><a class="btn btn-third" href="https://wa.me/351923318289?text=Olá%20Maison%20JF.%20Quero%20ajuda%20para%20escolher%20um%20ritual." target="_blank" rel="noopener">Ajuda-me a Escolher</a></div>
       </div>
     </section>
 
     <section class="about-section" id="sobre" aria-labelledby="sobre-title">
       <div class="container about-grid">
         <article class="about-card">
-          <span class="kicker">Sobre</span>
-          <h2 class="section-title" id="sobre-title">A Maison JF não nasceu ontem.</h2>
-          <p>Antes da marca, houve escrita, comunidades, apoio psicossocial, apoio à vítima, tarot, escuta e anos a acompanhar pessoas em momentos de mudança.</p>
-          <p>A Maison JF nasce desse percurso.</p>
-          <p>Da vontade de criar uma casa onde as pessoas possam encontrar clareza, direcção e um lugar onde recomeçar.</p>
-          <p>Hoje, essa casa vive em duas formas: consultas para quando a vida pesa por dentro, e rituais artesanais para quando a casa, o corpo ou o dia precisam de cuidado.</p>
-          <p><strong>Feito em Portugal, em pequenos lotes, por JF.</strong></p>
+          <span class="kicker">Sobre JF</span>
+          <h2 class="section-title" id="sobre-title">Antes da Maison JF, houve uma vida inteira a ouvir pessoas.</h2>
+          <p>JF é escritor, tarólogo, criador e orientador. Há mais de 30 anos acompanha histórias, dúvidas, relações, perdas, bloqueios, decisões e recomeços.</p>
+          <p>Depois de trabalhar numa Casa Abrigo para vítimas de violência doméstica, onde conheceu pessoas que, de um momento para o outro, perderam casa, segurança, rotina e chão, JF percebeu algo que nunca mais esqueceu:</p>
+          <p><strong>ninguém devia esperar pelo colapso para procurar clareza, apoio e cuidado.</strong></p>
+          <p>A Maison JF nasce também daí.</p>
+          <p>Não para falar só com quem passou por violência.</p>
+          <p><strong>Mas para qualquer pessoa que sente que a cabeça não pára, que a casa pesa, que o corpo acusa cansaço ou que a vida está a pedir uma decisão.</strong></p>
+          <p>Aqui não há promessas fáceis.</p>
+          <p>Há escuta, tarot, orientação e rituais artesanais para quando precisas de clareza, não de mais ruído.</p>
+          <p><strong>Pára de ignorar. Volta para ti.</strong></p>
         </article>
-        <div class="mini-grid">
-          <div class="mini-card"><strong>Clareza</strong><span>Consultas para quando pensar sozinho já não chega.</span></div>
-          <div class="mini-card"><strong>Casa</strong><span>Rituais para ambiente, corpo e momentos de pausa.</span></div>
-          <div class="mini-card"><strong>Percurso</strong><span>Mais de 30 anos a acompanhar pessoas, histórias e recomeços.</span></div>
-        </div>
       </div>
     </section>
 
     <section class="journal-section" id="imprensa" aria-labelledby="imprensa-title">
       <div class="container">
         <div class="section-header">
-          <span class="kicker">Imprensa / Percurso</span>
-          <h2 class="section-title" id="imprensa-title">O percurso não começou aqui.</h2>
-          <p class="section-subtitle">Antes da Maison JF, já havia um percurso reconhecido internacionalmente: escrita, orientação, criação e entrevistas em publicações dos Estados Unidos e do Brasil.</p>
+          <span class="kicker">Prova externa</span>
+          <h2 class="section-title" id="imprensa-title">JF na imprensa.</h2>
+          <p class="section-subtitle">Entrevistas e publicações onde o percurso criativo e humano de JF já foi reconhecido.</p>
         </div>
         <div class="grid-3">
           <article class="journal-card"><span class="journal-badge">EUA</span><h3>VoyagePhoenix</h3><p>Véu Encantado e percurso criativo.</p><a class="btn btn-outline" href="https://voyagephoenix.com/interview/inspiring-conversations-with-joao-fadario-of-veu-encantado-encanted-veil/" target="_blank" rel="noopener">Ler entrevista</a></article>
           <article class="journal-card"><span class="journal-badge">Brasil</span><h3>Revista Conexão Literatura</h3><p>Escrita, novelas e legado literário.</p><a class="btn btn-outline" href="https://revistaconexaoliteratura.com.br/entrevista-com-jao-fadario-escritor-portugues-e-autor-de-varias-novelas/" target="_blank" rel="noopener">Ler entrevista</a></article>
           <article class="journal-card"><span class="journal-badge">EUA</span><h3>Bold Journey</h3><p>Empatia, escrita e impacto humano.</p><a class="btn btn-outline" href="https://boldjourney.com/meet-jao-fadario/" target="_blank" rel="noopener">Ler entrevista</a></article>
-        </div>
-        <div class="actions" style="margin-top: 26px;"><a class="btn btn-third" href="https://www.instagram.com/maisonjfatelier" target="_blank" rel="noopener">Ver mais no Instagram</a></div>
-      </div>
-    </section>
-
-    <section aria-labelledby="testemunhos-title">
-      <div class="container">
-        <div class="section-header">
-          <span class="kicker">Testemunhos</span>
-          <h2 class="section-title" id="testemunhos-title">Pessoas que já passaram pela Maison.</h2>
-        </div>
-        <div class="grid-3">
-          <article class="testimonial-card"><div class="stars">★★★★★</div><p>“Cheguei confusa e saí com outra clareza.”</p><div class="testimonial-name">Inês · Consulta Maison JF</div></article>
-          <article class="testimonial-card"><div class="stars">★★★★★</div><p>“Não me prometeu milagres. Ajudou-me a olhar para o que eu andava a evitar.”</p><div class="testimonial-name">Jhonata · Tarot Integrativo</div></article>
-          <article class="testimonial-card"><div class="stars">★★★★★</div><p>“Eu precisava de falar com alguém que me escutasse sem me julgar.”</p><div class="testimonial-name">Fábio · Escuta Orientada</div></article>
-          <article class="testimonial-card"><div class="stars">★★★★★</div><p>“Acendi, parei um bocado e senti que o dia finalmente abrandou.”</p><div class="testimonial-name">Irene · Ritual Artesanal</div></article>
-          <article class="testimonial-card"><div class="stars">★★★★★</div><p>“Senti-me ouvida. Naquele momento, era mesmo isso que eu precisava.”</p><div class="testimonial-name">Cristina · Consulta Escrita</div></article>
-          <article class="testimonial-card"><div class="stars">★★★★★</div><p>“Não resolveu a minha vida toda. Mas ajudou-me a perceber o próximo passo.”</p><div class="testimonial-name">Enric · Tarot • Escuta • Direcção</div></article>
         </div>
       </div>
     </section>
@@ -416,12 +475,10 @@
           <h2 class="section-title" id="faq-title">Perguntas antes de começares.</h2>
         </div>
         <div class="faq-list">
-          <details><summary>Como sei se preciso de uma consulta ou de um ritual?</summary><p>Se o peso está na cabeça, numa relação, numa dúvida ou numa decisão, começa por uma consulta. Se o peso está no ambiente, no corpo ou na sensação da casa, começa por um ritual artesanal. Se não sabes por onde começar, envia mensagem. Eu ajudo-te a escolher.</p></details>
-          <details><summary>As consultas substituem terapia?</summary><p>Não. As consultas Maison JF ajudam-te a ganhar clareza, organizar pensamentos e olhar para o que está a pesar. Não substituem acompanhamento médico, psicológico ou psiquiátrico.</p></details>
-          <details><summary>O Tarot dá respostas definitivas?</summary><p>Não vendo certezas absolutas. Uso o Tarot como ferramenta de leitura, escuta e orientação. O objectivo é ajudar-te a ver melhor a situação e perceber o próximo passo.</p></details>
-          <details><summary>Os rituais artesanais são feitos por ti?</summary><p>Sim. São criados e preparados por mim, em pequenos lotes, em Portugal. Cada produto é pensado, testado e afinado antes de chegar à Maison, com atenção ao aroma, ao uso, ao acabamento e à segurança.</p></details>
-          <details><summary>Quanto tempo demora o envio?</summary><p>Os envios são preparados em pequenos lotes. O prazo pode variar conforme stock, produção e altura do ano. Se tiveres urgência, envia mensagem antes de encomendar.</p></details>
-          <details><summary>Posso pedir ajuda antes de comprar?</summary><p>Sim. Se estás indeciso entre consulta, ritual ou produto, envia mensagem. Eu ajudo-te a perceber o que faz mais sentido para o teu momento.</p></details>
+          <details><summary>Isto é para mim se eu estiver confuso, cansado ou sem saber o que fazer?</summary><p>Sim. Se estás preso numa decisão, relação, padrão repetido ou simplesmente sentes que a cabeça não pára, este pode ser um bom lugar para começar.</p></details>
+          <details><summary>Tenho de acreditar em Tarot para marcar?</summary><p>Não. O Tarot é uma das ferramentas da Maison JF, mas também existem consultas sem Tarot, focadas em escuta orientada, aconselhamento terapêutico e organização emocional.</p><p>Não precisas de acreditar em tudo. Precisas de estar disponível para olhar para o que está a acontecer e perceber o próximo passo.</p></details>
+          <details><summary>As consultas substituem terapia?</summary><p>Não. As consultas Maison JF ajudam-te a ganhar clareza, organizar pensamentos e compreender melhor a situação que estás a viver.</p><p>Não substituem acompanhamento médico, psicológico ou psiquiátrico.</p></details>
+          <details><summary>E se eu estiver mesmo no limite?</summary><p>Envia mensagem.</p><p>Se eu puder ajudar, ajudo-te a ganhar clareza e a perceber o próximo passo.</p><p>Se perceber que precisas de outro tipo de apoio, digo-te com honestidade e, se necessário, encaminho-te para a ajuda mais adequada.</p></details>
         </div>
       </div>
     </section>
@@ -440,20 +497,5 @@
       </div>
     </section>
   </main>
-
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <div class="footer-brand">Maison JF</div>
-        <p class="footer-copy">Casa portuguesa de tarot, escuta e rituais artesanais. Feito em Portugal, em pequenos lotes, por JF.</p>
-      </div>
-      <div class="footer-links">
-        <a href="https://maison-jf.myshopify.com" target="_blank" rel="noopener">Loja Shopify</a>
-        <a href="https://wa.me/351923318289" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://www.youtube.com/@maisonjf" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://www.instagram.com/maisonjfatelier" target="_blank" rel="noopener">Instagram</a>
-      </div>
-    </div>
-  </footer>
 </body>
 </html>
