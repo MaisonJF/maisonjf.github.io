@@ -34,10 +34,12 @@
 
 ## Companhia
 - https://maisonjf.github.io/companhia.html
-- Dois formatos: Rent a Friend para Companhia social sem romance; Rent a BoyFriend para Companhia com proximidade afectiva e romance leve.
-- Rent a BoyFriend pode incluir dar a mão, abraços, carinho leve e beijos leves previamente combinados. Não inclui sexo, nudez, contacto sexual ou Serviços Sexuais.
+- Dois formatos: Friend4Rent para Companhia sem romance; Boyfriend4Rent para Companhia com proximidade afectiva e romance leve.
+- Boyfriend4Rent pode incluir dar a mão, abraços, carinho leve e beijos leves previamente combinados. Não inclui sexo, nudez, contacto sexual ou Serviços Sexuais.
 - Reserva mínima: 2 horas. Pagamento antecipado. Quem contrata suporta as despesas relacionadas com o encontro e a deslocação de ida e regresso de quem presta o Serviço.
+- Friend4Rent e Boyfriend4Rent são distintos do Acompanhamento Permanente, Escuta Orientada, Mentoria e restantes Serviços de Acompanhamento. Em qualquer dos dois formatos pode ser acrescentado um Serviço de Acompanhamento disponível, mediante combinação prévia e ajuste de valor.
 - Ambos os formatos podem ser contratados por pessoas adultas de qualquer género.
+- O Serviço de Companhia é distinto de Escuta Orientada, Acompanhamento Permanente, Mentoria e formatos SOS. No formato social, um Serviço adicional de Escuta Orientada ou Acompanhamento pode ser combinado previamente, com ajuste de valor.
 
 ## Maison Todo o Mês
 - https://maisonjf.github.io/maison-todo-o-mes.html
