@@ -1,10 +1,10 @@
 /* ============================================
-   MAISON JF® — Design System v2
+   MAISON JF® | Design System v2
    ============================================ */
 
 /* ── CSS Variables ───────────────────────── */
 :root {
-  /* Cores Couture — profundas, ricas, materiais */
+  /* Cores Couture | profundas, ricas, materiais */
   --noite: #080808;
   --noite-suave: #0f0f0f;
   --noite-media: #141414;
@@ -297,7 +297,7 @@ ul, ol {
   z-index: var(--z-base);
 }
 
-/* Placeholder fotográfico cinematográfico — substituir por hero.jpg */
+/* Placeholder fotográfico cinematográfico | substituir por hero.jpg */
 .hero__bg-image {
   position: absolute;
   inset: 0;
@@ -1544,10 +1544,10 @@ ul, ol {
 
 
 /* ==========================================================
-   MAISON JF® — acabamento final do hero e profissionais
+   MAISON JF® | acabamento final do hero e profissionais
    ========================================================== */
 
-/* HERO — fotografia limpa, sem texto incorporado.
+/* HERO | fotografia limpa, sem texto incorporado.
    A zona esquerda fica reservada ao lettering HTML. */
 .hero__bg-image {
   background-color: #080808;
@@ -1596,7 +1596,7 @@ ul, ol {
   }
 }
 
-/* FAROL — sem fotografia com cartões/texto incorporados. */
+/* FAROL | sem fotografia com cartões/texto incorporados. */
 .farol {
   background-image:
     radial-gradient(circle at 50% 18%, rgba(196,162,101,.055), transparent 34%),
@@ -1605,7 +1605,7 @@ ul, ol {
   background-position: center;
 }
 
-/* PROFISSIONAIS — imagem editorial de espaço, sem pessoas. */
+/* PROFISSIONAIS | imagem editorial de espaço, sem pessoas. */
 .profissionais__visual-photo {
   background-image:
     linear-gradient(rgba(10,8,6,.10), rgba(10,8,6,.28)),
@@ -1658,5 +1658,53 @@ ul, ol {
 
   .profissionais__visual-photo {
     background-position: center;
+  }
+}
+
+/* ==========================================================
+   MAISON JF® | revisão comercial e editorial
+   ========================================================== */
+
+/* A área de companhia social não deve sugerir casal ou intimidade.
+   Até existir uma fotografia platónica aprovada, usamos um ambiente
+   neutro já presente no projeto. */
+.transformacao-card__visual--bordeaux {
+  background-image:
+    linear-gradient(rgba(8,7,6,.12), rgba(8,7,6,.34)),
+    url('profissionais.jpg');
+  background-size: cover;
+  background-position: center 58%;
+}
+
+/* Destinos diretos do Farol dentro de Explorar. */
+#produtos,
+#orientacao,
+#continuidade,
+#especializados {
+  scroll-margin-top: 7rem;
+}
+
+/* O fecho é uma decisão, não uma secção decorativa. */
+.fecho__inner {
+  max-width: 760px;
+}
+
+.fecho__text {
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* A proposta profissional deve respirar sem repetir a credencial EUIPO. */
+.profissionais__text {
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  #produtos,
+  #orientacao,
+  #continuidade,
+  #especializados {
+    scroll-margin-top: 5.5rem;
   }
 }
