@@ -5,7 +5,7 @@
 ## O Farol
 - https://maisonjf.github.io/farol.html
 - O ponto de orientação da MAISON JF® para quem sabe o que está a incomodar, mas ainda não sabe que Produto ou Serviço procurar.
-- Começa por situações reais: decisão difícil, alguém que não sai da cabeça, cansaço, dificuldade em desligar em casa, vontade de aprender, falta de companhia para sair ou procura de um presente.
+- Começa por situações reais: decisão difícil, alguém que não sai da cabeça, cansaço, dificuldade em desligar em casa, vontade de aprender, falta de companhia para sair, vontade de proximidade afectiva ou procura de um presente.
 - Encaminha para Produtos, Serviços, Companhia e outras propostas da Maison sem exigir que a pessoa conheça previamente as categorias.
 
 ## Página Principal
@@ -34,7 +34,10 @@
 
 ## Companhia
 - https://maisonjf.github.io/companhia.html
-- Serviço social e platónico para Eventos, Jantares, Cinema, Passeios, Actividades Culturais e outros compromissos.
+- Dois formatos: Rent a Friend para Companhia social sem romance; Rent a BoyFriend para Companhia com proximidade afectiva e romance leve.
+- Rent a BoyFriend pode incluir dar a mão, abraços, carinho leve e beijos leves previamente combinados. Não inclui sexo, nudez, contacto sexual ou Serviços Sexuais.
+- Reserva mínima: 2 horas. Pagamento antecipado. Quem contrata suporta as despesas relacionadas com o encontro e a deslocação de ida e regresso de quem presta o Serviço.
+- Ambos os formatos podem ser contratados por pessoas adultas de qualquer género.
 
 ## Maison Todo o Mês
 - https://maisonjf.github.io/maison-todo-o-mes.html
