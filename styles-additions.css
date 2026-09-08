@@ -196,3 +196,203 @@
   .catalogue-card__pain { min-height: 0; }
   .continuity__plans { grid-template-columns: 1fr; }
 }
+
+
+/* ==========================================================
+   MAISON JF® | páginas de detalhe e catálogo actual
+   ========================================================== */
+
+.catalogue-card--text {
+  min-height: 100%;
+  display: flex;
+}
+.catalogue-card--text .catalogue-card__body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.catalogue-card--text .btn { margin-top: auto; }
+
+.offer-status {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: .2rem 0 1.15rem;
+  padding: .42rem .7rem;
+  border: 1px solid var(--borda-media);
+  color: var(--marfim-escuro);
+  font-size: .66rem;
+  line-height: 1;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.offer-status--active {
+  color: var(--ambre);
+  border-color: rgba(196,162,101,.34);
+}
+.section-bridge {
+  width: min(900px, calc(100% - 3rem));
+  margin: clamp(2rem,4vw,4rem) auto 0;
+  padding-top: 1.5rem;
+  text-align: center;
+  color: var(--texto-terciario);
+  border-top: 1px solid var(--borda-subtil);
+}
+.section-bridge p { margin: 0 auto 1rem; max-width: 760px; line-height: 1.7; }
+
+.detail-page {
+  background: var(--fundo-primario);
+}
+.detail-page .header {
+  background: rgba(8,8,8,.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+.detail-hero {
+  padding: clamp(9rem,15vw,13rem) 1.5rem clamp(5rem,8vw,8rem);
+  background:
+    radial-gradient(circle at 70% 15%, rgba(196,162,101,.08), transparent 32%),
+    linear-gradient(180deg,#0d0b09 0%,#080808 100%);
+  border-bottom: 1px solid var(--borda-subtil);
+}
+.detail-hero__inner {
+  width: min(1050px,100%);
+  margin: 0 auto;
+}
+.detail-back {
+  display: inline-block;
+  margin-bottom: 2.4rem;
+  color: var(--marfim-dim);
+  font-size: .74rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.detail-back:hover { color: var(--ambre); }
+.detail-eyebrow,
+.detail-kicker {
+  margin: 0 0 .8rem;
+  color: var(--ambre);
+  font-size: .66rem;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.detail-title {
+  max-width: 900px;
+  margin: 0 0 1.3rem;
+  color: var(--marfim);
+  font-family: var(--fonte-editorial);
+  font-size: clamp(3rem,7vw,6.8rem);
+  font-weight: 300;
+  line-height: .95;
+}
+.detail-lead {
+  max-width: 760px;
+  color: var(--texto-terciario);
+  font-size: clamp(1rem,1.7vw,1.15rem);
+  line-height: 1.75;
+}
+.detail-section {
+  padding: clamp(5.5rem,9vw,9rem) 1.5rem;
+  background: var(--fundo-primario);
+}
+.detail-section--alt { background: var(--fundo-secundario); }
+.detail-section--quiet {
+  background: var(--noite-suave);
+  border-top: 1px solid var(--borda-subtil);
+}
+.detail-section__inner {
+  width: min(1180px,100%);
+  margin: 0 auto;
+}
+.detail-narrow { max-width: 800px; }
+.detail-section__title {
+  max-width: 880px;
+  margin: 0 0 1.5rem;
+  color: var(--marfim);
+  font-family: var(--fonte-editorial);
+  font-size: clamp(2.3rem,5vw,4.4rem);
+  font-weight: 300;
+  line-height: 1;
+}
+.detail-copy {
+  max-width: 800px;
+  margin: 0 0 2rem;
+  color: var(--texto-terciario);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: clamp(1rem,2vw,1.5rem);
+  margin-top: 2.25rem;
+}
+.detail-grid--products,
+.detail-grid--plans { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.offer-card {
+  padding: clamp(1.6rem,2.5vw,2.4rem);
+  background: var(--fundo-terciario);
+  border: 1px solid var(--borda-subtil);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.offer-card h3 {
+  margin: 0 0 .9rem;
+  color: var(--marfim);
+  font-family: var(--fonte-editorial);
+  font-size: clamp(1.55rem,2.4vw,2.2rem);
+  font-weight: 300;
+  line-height: 1.05;
+}
+.offer-card p {
+  color: var(--texto-terciario);
+  font-size: .9rem;
+  line-height: 1.7;
+}
+.offer-card .btn { margin-top: auto; }
+.offer-price {
+  margin: 1rem 0 1.25rem !important;
+  color: var(--marfim) !important;
+  font-family: var(--fonte-editorial);
+  font-size: 1.7rem !important;
+}
+.offer-list {
+  display: grid;
+  gap: .7rem;
+  margin: .4rem 0 1.3rem;
+  color: var(--texto-terciario);
+  font-size: .86rem;
+}
+.offer-list li {
+  padding-bottom: .65rem;
+  border-bottom: 1px solid var(--borda-subtil);
+}
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.detail-note {
+  max-width: 820px;
+  margin-top: 2.5rem;
+  color: var(--marfim-dim);
+  font-size: .78rem;
+  line-height: 1.6;
+  border-top: 1px solid var(--borda-subtil);
+  padding-top: 1.2rem;
+}
+
+@media (max-width: 1024px) {
+  .detail-grid--products,
+  .detail-grid--plans { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 768px) {
+  .detail-grid,
+  .detail-grid--products,
+  .detail-grid--plans { grid-template-columns: 1fr; }
+  .detail-title { font-size: clamp(2.8rem,14vw,4.4rem); }
+  .detail-section { padding-left: 1rem; padding-right: 1rem; }
+}
