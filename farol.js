@@ -81,36 +81,36 @@
 
     results: {
       decisao_voltas: result('Já fizeste listas. Continuas no mesmo sítio.', 'Já tens informação. O que não tens é descanso. Uma Consulta pode ajudar-te a olhar para o que estás a evitar e para o que realmente queres, sem decidir por ti.', 'servicos.html#tarot', 'Ver Tarot e Consultas'),
-      decisao_medo: result('No fundo já escolheste. O medo é teres de viver com a escolha.', 'Quando imaginas todas as maneiras de a escolha correr mal, ficar parado parece mais seguro. Podemos olhar para cenários, receios e aquilo que estás a evitar, sem escolher por ti.', 'servicos.html#tarot', 'Ver Orientação'),
+      decisao_medo: result('No fundo já escolheste. O medo é teres de viver com a escolha.', 'Quando imaginas todas as maneiras de a escolha correr mal, não avançar pode parecer mais seguro. Podemos olhar para cenários, receios e aquilo que estás a evitar, sem escolher por ti.', 'servicos.html#tarot', 'Ver Orientação'),
       decisao_urgente: result('Não queres pensar nisto mais uma semana.', 'Se a questão é concreta e urgente, o Tarot Expresso foi pensado para perguntas pontuais. Se precisares de mais contexto, há formatos mais completos.', 'servicos.html#tarot', 'Ver Consultas'),
 
-      relacao_cabeca: result('Dizes que já passou. Depois vais outra vez ver se escreveu.', 'Relees mensagens, refazes conversas e imaginas respostas que talvez nunca venham. Uma Consulta pode ajudar a perceber o que te prende ali; se isto já se arrasta, há Acompanhamento.', 'servicos.html#tarot', 'Ver Orientação', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
-      relacao_decidir: result('O pior é não saber se esperas ou vais embora.', 'Se qualquer escolha te parece perigosa, vais continuar parado. Uma Consulta ajuda-te a olhar para o que existe de facto, para o que temes e para o que queres, sem decidir por ti.', 'servicos.html#tarot', 'Ver Consultas'),
+      relacao_cabeca: result('Dizes que já passou. Depois vais outra vez ver se escreveu.', 'Relês mensagens, refazes conversas e imaginas respostas que talvez nunca venham. Uma Consulta pode ajudar a perceber o que te prende ali; se isto já se arrasta, há Acompanhamento.', 'servicos.html#tarot', 'Ver Orientação', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
+      relacao_decidir: result('O pior é não saber se esperas ou vais embora.', 'Se qualquer escolha te parece perigosa, vais continuar sem avançar. Uma Consulta ajuda-te a olhar para o que existe de facto, para o que temes e para o que queres, sem decidir por ti.', 'servicos.html#tarot', 'Ver Consultas'),
       relacao_entender: result('Estás cansado(a) de tentar perceber o que isto significa.', 'Começa por uma Consulta focada na situação. Se o assunto já se arrasta e uma resposta isolada não chega, há Acompanhamento.', 'servicos.html#tarot', 'Ver Consultas', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
 
       cansaco_corpo: result('Até cuidar de ti parece mais uma tarefa.', 'Quando até descansar parece esforço, não precisas de transformar a vida toda hoje. Podes começar com um Escalda-Pés, Óleo de Massagem ou, sob consulta, um Banho de Ervas.', 'produtos.html#escalda-pes', 'Ver Produtos para o Corpo'),
       cansaco_cabeca: result('Deitaste o corpo. A cabeça continua em pé.', 'Se ainda estás a responder mentalmente à conversa, ao trabalho ou ao problema, a noite nunca começou verdadeiramente. Aroma, luz e ambiente podem ajudar a marcar esse corte.', 'produtos.html#brumas', 'Ver Produtos'),
-      cansaco_demais: result('Acordas cansado(a) antes de o dia começar.', 'Se acordas cansado antes de o dia começar, isto já não é só o cansaço de hoje. Podes começar por uma conversa e perceber se precisas de continuidade.', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
+      cansaco_demais: result('Acordas cansado(a) antes de o dia começar.', 'Se acordas cansado(a) antes de o dia começar, isto já não é só o cansaço de hoje. Podes começar por uma conversa e perceber se precisas de continuidade.', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
 
       casa_cheiro: result('Queres entrar e sentir logo outro ar.', 'Bruma para mudar o ar depressa, água de lençóis para o quarto ou, em breve, uma nova Vela Aromática de Outono. Escolhe pelo uso, não pelo nome mais bonito.', 'produtos.html', 'Ver Produtos'),
       casa_parar: result('Queres que a casa te diga: acabou por hoje.', 'Uma bruma, uma água de lençóis ou um Escalda-Pés podem ajudar a criar esse marco. E as novas Velas Aromáticas chegam com a edição de Outono.', 'produtos.html', 'Ver Produtos'),
       casa_mudar: result('Não queres obras. Queres sentir a casa diferente.', 'Começa pelo que muda mais depressa: cheiro, luz e a forma como usas o espaço. A Maison tem opções para isso.', 'produtos.html', 'Ver Produtos'),
 
       aprender_tarot: result('Queres aprender Tarot. A sério.', 'Então não te vou mandar para três frases num ebook. A Mentoria existe para aprendizagem estruturada e acompanhamento.', 'servicos.html#acompanhamento', 'Ver Mentoria'),
-      aprender_astrologia: result('Queres perceber o mapa, não decorar signos.', 'Há Relatórios, Análises e Trabalho de Astrologia para aprofundar uma questão concreta ou um mapa maior.', 'servicos.html', 'Ver Serviços'),
+      aprender_astrologia: result('Queres perceber o mapa, não decorar signos.', 'As Análises e os Relatórios de Astrologia são preparados sob encomenda. Também há Numerologia e outras Terapias Complementares sob consulta, conforme o que pretendes aprofundar.', 'servicos.html#astrologia', 'Ver Astrologia'),
       aprender_outra: result('Queres começar. Ainda não sabes por onde.', 'Vê os serviços e, se nada encaixar, fala com a Maison. Primeiro percebemos o que procuras. Depois vemos se existe uma solução real.', 'servicos.html', 'Explorar Serviços'),
 
-      companhia_evento: result('Já tens o convite. O problema é chegares sozinho(a).', 'O Friend4Rent existe precisamente para isso: Eventos, Jantares e outros Compromissos Sociais em que queres ter alguém contigo, sem dimensão romântica.', 'companhia.html#friend4rent', 'Ver Friend4Rent'),
-      companhia_sair: result('Queres fazer o plano. Sozinho(a), sabes que vais desistir.', 'Se o plano continua a apetecer-te e o que te trava é ires sozinho(a), o Friend4Rent pode ser a companhia que falta para saíres pela porta.', 'companhia.html#friend4rent', 'Ver Friend4Rent'),
-      companhia_falar: result('Queres conversa e presença. Não um encontro.', 'Se procuras Companhia sem romance, o Friend4Rent pode ser exactamente isso: tempo partilhado, conversa e uma actividade combinada.', 'companhia.html#friend4rent', 'Ver Friend4Rent'),
-      companhia_afecto: result('Hoje querias alguém perto. Com carinho e um pouco de romance.', 'Se procuras uma presença mais próxima, calorosa e romântica, o Boyfriend4Rent pode incluir dar a mão, abraços, carinho leve e beijos leves previamente combinados. Sem sexo nem Serviços Sexuais.', 'companhia.html#boyfriend4rent', 'Ver Boyfriend4Rent'),
+      companhia_evento: result('Já tens o convite. O problema é chegares sozinho(a).', 'O Rent a Friend existe precisamente para isso: Eventos, Jantares e outros Compromissos Sociais em que queres ter alguém contigo, sem dimensão romântica.', 'companhia.html#rent-a-friend', 'Ver Rent a Friend'),
+      companhia_sair: result('Queres fazer o plano. Sozinho(a), sabes que vais desistir.', 'Se o plano continua a apetecer-te e o que te trava é ires sozinho(a), o Rent a Friend pode ser a companhia que falta para saíres pela porta.', 'companhia.html#rent-a-friend', 'Ver Rent a Friend'),
+      companhia_falar: result('Queres conversa e presença. Não um encontro.', 'Se procuras Companhia sem romance, o Rent a Friend pode ser exactamente isso: tempo partilhado, conversa e uma actividade combinada.', 'companhia.html#rent-a-friend', 'Ver Rent a Friend'),
+      companhia_afecto: result('Hoje querias alguém perto. Com carinho e um pouco de romance.', 'Se procuras uma presença mais próxima, calorosa e romântica, o Rent a BoyFriend pode incluir dar a mão, abraços, carinho leve e beijos leves previamente combinados. Sem sexo nem Serviços Sexuais.', 'companhia.html#rent-a-boyfriend', 'Ver Rent a BoyFriend'),
 
       presente_qualquer: result('Não queres entregar uma coisa que parece comprada cinco minutos antes.', 'Escolhe pelo que a pessoa vai usar: casa, corpo, aroma ou pausa. Se não souberes, diz-nos para quem é e ajudamos-te a reduzir as opções.', 'produtos.html', 'Ver Produtos'),
       presente_casa: result('Queres que a pessoa use e se lembre de quem ofereceu.', 'Bruma, água de lençóis, uma peça decorativa em jesmonite sob consulta ou, em breve, uma vela da edição de Outono. Escolhe pelo tipo de uso e pelo orçamento.', 'produtos.html', 'Ver Produtos'),
       presente_corpo: result('Queres oferecer um momento em que a pessoa pare.', 'Escalda-Pés, Óleo de Massagem ou um Banho de Ervas sob consulta são opções simples e concretas.', 'produtos.html', 'Ver Produtos'),
 
-      outro_ver: result('Sem problema. Vai directo ao que existe.', 'Produtos, Serviços, Acompanhamento e Companhia estão reunidos no site. Começa pelo que te chama a atenção e vê se resolve alguma coisa real.', 'produtos.html', 'Explorar a Maison'),
-      outro_falar: result('Às vezes é mais fácil explicar do que escolher.', 'Fala connosco. Diz o que se passa em português normal e vemos contigo se a Maison tem alguma coisa que faça sentido.', 'https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Prefiro%20explicar%20o%20que%20se%20passa%20e%20pedir%20ajuda%20a%20escolher.', 'Falar com a Maison')
+      outro_ver: result('Sem problema. Vai directo ao que existe.', 'Produtos, Serviços, Acompanhamento e Companhia estão reunidos no site. Começa pelo que te chama a atenção e vê se resolve alguma coisa real.', 'index.html#explorar', 'Explorar a Maison'),
+      outro_falar: result('Às vezes é mais fácil explicar do que escolher.', 'Fala connosco. Diz o que se passa em português normal e vemos contigo se a Maison tem alguma coisa que faça sentido.', 'https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Prefiro%20explicar%20o%20que%20se%20passa%20e%20pedir%20ajuda%20a%20escolher.', 'Falar no WhatsApp')
     }
   };
 
@@ -165,7 +165,7 @@
     step2Choice = step2Key;
     const selected = FAROL_DATA.results[`${step1Choice}_${step2Key}`];
     if (!selected) {
-      showResult(result('Não te vou inventar uma resposta.', 'Fala com a Maison e explica o que procuras. Se houver uma solução real, dizemos-te qual. Se não houver, também.', 'https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Preciso%20de%20ajuda%20a%20encontrar%20a%20op%C3%A7%C3%A3o%20certa.', 'Falar com a Maison'));
+      showResult(result('Não te vou inventar uma resposta.', 'Fala com a Maison e explica o que procuras. Se houver uma solução real, dizemos-te qual. Se não houver, também.', 'https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Preciso%20de%20ajuda%20a%20encontrar%20a%20op%C3%A7%C3%A3o%20certa.', 'Falar no WhatsApp'));
       return;
     }
     showResult(selected);
