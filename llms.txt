@@ -39,7 +39,6 @@
 - Reserva mínima: 2 horas. Pagamento antecipado. Quem contrata suporta as despesas relacionadas com o encontro e a deslocação de ida e regresso de quem presta o Serviço.
 - Friend4Rent e Boyfriend4Rent são distintos do Acompanhamento Permanente, Escuta Orientada, Mentoria e restantes Serviços de Acompanhamento. Em qualquer dos dois formatos pode ser acrescentado um Serviço de Acompanhamento disponível, mediante combinação prévia e ajuste de valor.
 - Ambos os formatos podem ser contratados por pessoas adultas de qualquer género.
-- O Serviço de Companhia é distinto de Escuta Orientada, Acompanhamento Permanente, Mentoria e formatos SOS. No formato social, um Serviço adicional de Escuta Orientada ou Acompanhamento pode ser combinado previamente, com ajuste de valor.
 
 ## Maison Todo o Mês
 - https://maisonjf.github.io/maison-todo-o-mes.html
@@ -55,3 +54,12 @@
 MAISON JF® é uma marca registada na União Europeia.
 Idioma principal: Português de Portugal.
 Área principal: Portugal, com presença em Vila do Conde e Porto.
+
+## Pagamentos
+- Pagamentos online directamente no site: brevemente.
+- Até lá, pedidos e instruções de pagamento são tratados directamente com a MAISON JF®.
+
+## Condições B2B
+- Clientes profissionais têm condições próprias de revenda.
+- Os Preços Profissionais aplicam-se mediante o valor mínimo de encomenda definido para cada proposta, tendo em conta selecção, quantidades e disponibilidade.
+- Antes da confirmação, a MAISON JF® apresenta Produtos, quantidades mínimas, preços, prazos, despesas aplicáveis e condições de pagamento.
