@@ -1,0 +1,23 @@
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify-indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for GitHub Pages deployment
+        run: sleep 90
+      - name: Notify IndexNow
+        shell: bash
+        run: |
+          curl --fail-with-body --retry 3 --retry-delay 10 \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{"host":"maisonjf.github.io","key":"2e7132dc5767b64308add20a2790e2b6","keyLocation":"https://maisonjf.github.io/2e7132dc5767b64308add20a2790e2b6.txt","urlList":["https://maisonjf.github.io/", "https://maisonjf.github.io/produtos.html", "https://maisonjf.github.io/servicos.html", "https://maisonjf.github.io/companhia.html", "https://maisonjf.github.io/maison-todo-o-mes.html", "https://maisonjf.github.io/editions.html", "https://maisonjf.github.io/profissionais.html","https://maisonjf.github.io/farol.html"]}' \
+            https://api.indexnow.org/indexnow
