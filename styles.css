@@ -320,7 +320,7 @@ ul, ol {
 /* .hero__bg-image {
   background: 
     radial-gradient(ellipse at 50% 50%, transparent 20%, rgba(8,8,8,0.8) 100%),
-    url('../assets/images/hero.jpg');
+    url('hero.jpg');
   background-size: cover;
   background-position: center 30%;
 } */
@@ -1483,7 +1483,7 @@ ul, ol {
 
 /* ── MAISON JF® · acabamento da base Kimi ─────────────────── */
 .hero__bg-image {
-  background-image: url('../assets/images/hero.jpg');
+  background-image: url('hero.jpg');
   background-size: cover;
   background-position: center 38%;
   filter: saturate(.82) contrast(1.04) brightness(.82);
@@ -1494,15 +1494,15 @@ ul, ol {
 .farol {
   background-image:
     linear-gradient(rgba(10,9,8,.90), rgba(10,9,8,.95)),
-    url('../assets/images/ambient.jpg');
+    url('ambient.jpg');
   background-size: cover;
   background-position: center;
 }
 
-.transformacao-card__visual--escuro { background-image: linear-gradient(rgba(8,7,6,.12),rgba(8,7,6,.36)), url('../assets/images/resolver.jpg'); }
-.transformacao-card__visual--ambre { background-image: linear-gradient(rgba(8,7,6,.08),rgba(8,7,6,.25)), url('../assets/images/cansado.jpg'); }
-.transformacao-card__visual--esmeralda { background-image: linear-gradient(rgba(8,7,6,.08),rgba(8,7,6,.28)), url('../assets/images/espaco.jpg'); }
-.transformacao-card__visual--bordeaux { background-image: linear-gradient(rgba(8,7,6,.08),rgba(8,7,6,.28)), url('../assets/images/relacao.jpg'); }
+.transformacao-card__visual--escuro { background-image: linear-gradient(rgba(8,7,6,.12),rgba(8,7,6,.36)), url('resolver.jpg'); }
+.transformacao-card__visual--ambre { background-image: linear-gradient(rgba(8,7,6,.08),rgba(8,7,6,.25)), url('cansado.jpg'); }
+.transformacao-card__visual--esmeralda { background-image: linear-gradient(rgba(8,7,6,.08),rgba(8,7,6,.28)), url('espaco.jpg'); }
+.transformacao-card__visual--bordeaux { background-image: linear-gradient(rgba(8,7,6,.08),rgba(8,7,6,.28)), url('relacao.jpg'); }
 .transformacao-card__visual { background-size: cover; background-position: center; }
 
 .joao__visual-monogram {
@@ -1520,7 +1520,7 @@ ul, ol {
 .profissionais__visual-photo {
   background-image:
     linear-gradient(rgba(10,8,6,.12), rgba(10,8,6,.28)),
-    url('../assets/images/ambient.jpg');
+    url('ambient.jpg');
   background-size: cover; background-position: center;
 }
 .profissionais__credibilidade {
