@@ -2,6 +2,12 @@
 
 > MAISON JF® é uma marca portuguesa com Produtos para Casa e Corpo, Tarot, Escuta Orientada, Acompanhamento, Companhia, Ebooks e propostas para Profissionais.
 
+## O Farol
+- https://maisonjf.github.io/farol.html
+- O ponto de orientação da MAISON JF® para quem sabe o que está a incomodar, mas ainda não sabe que Produto ou Serviço procurar.
+- Começa por situações reais: decisão difícil, alguém que não sai da cabeça, cansaço, dificuldade em desligar em casa, vontade de aprender, falta de companhia para sair ou procura de um presente.
+- Encaminha para Produtos, Serviços, Companhia e outras propostas da Maison sem exigir que a pessoa conheça previamente as categorias.
+
 ## Página Principal
 - https://maisonjf.github.io/
 
