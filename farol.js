@@ -1,174 +1,115 @@
 /**
- * MAISON JF® | O Farol v3
- * Sistema de orientação interativo
- * Máximo de 3 passos, client-side, dados editáveis.
+ * MAISON JF® | O Farol
+ * Dor -> dor humana -> acolhimento -> solução Maison
  */
-
 (function() {
   'use strict';
 
-  const result = (text, primaryHref, primaryText, secondaryHref = null, secondaryText = null) => ({
-    title: 'Há mais do que uma possibilidade para aquilo que procuras.',
+  const result = (title, text, primaryHref, primaryText, secondaryHref = null, secondaryText = null) => ({
+    title,
     text,
     cta: { text: primaryText, href: primaryHref, style: 'primary' },
-    cta2: secondaryHref && secondaryText
-      ? { text: secondaryText, href: secondaryHref, style: 'secondary' }
-      : null
+    cta2: secondaryHref && secondaryText ? { text: secondaryText, href: secondaryHref, style: 'secondary' } : null
   });
 
   const FAROL_DATA = {
     step1: {
-      resolver: {
-        label: 'Há alguma coisa na minha vida que preciso de resolver.',
-        question: 'O que está a prender isto?',
+      decisao: {
+        question: 'O que te irrita mais nisto?',
         options: [
-          { key: 'decisao', label: 'Preciso de tomar uma decisão.' },
-          { key: 'direcao', label: 'Não sei o que fazer a seguir.' },
-          { key: 'bloqueio', label: 'Já sei que preciso de mexer nisto, mas continuo parado.' }
+          { key: 'voltas', label: 'Dou voltas e volto sempre ao mesmo ponto.' },
+          { key: 'medo', label: 'Sei o que quero, mas tenho medo de escolher mal.' },
+          { key: 'urgente', label: 'Preciso de uma resposta e não quero ficar nisto mais uma semana.' }
         ]
       },
       relacao: {
-        label: 'Há alguém ou alguma relação que continua a mexer comigo.',
-        question: 'O que está a acontecer?',
+        question: 'O que é que esta pessoa ainda te está a fazer?',
         options: [
-          { key: 'compreensao', label: 'Quero perceber melhor o que se passa.' },
-          { key: 'desligar', label: 'Não consigo desligar desta pessoa.' },
-          { key: 'incerteza', label: 'Não sei se fico, se saio ou se espero.' }
+          { key: 'cabeca', label: 'Ocupa-me a cabeça mais do que eu queria admitir.' },
+          { key: 'decidir', label: 'Não sei se fico, se saio ou se espero.' },
+          { key: 'entender', label: 'Só quero perceber o que raio se está a passar.' }
         ]
       },
-      cansado: {
-        label: 'Estou cansado e preciso de me sentir melhor.',
-        question: 'O que precisas mais neste momento?',
+      cansaco: {
+        question: 'Cansado de quê?',
         options: [
-          { key: 'parar', label: 'Preciso de parar e descansar.' },
-          { key: 'desligar', label: 'Quero deixar o dia do lado de fora por um bocado.' },
-          { key: 'continuidade', label: 'Isto já não é só um dia mau. Preciso de acompanhamento.' }
+          { key: 'corpo', label: 'O corpo está a pedir pausa.' },
+          { key: 'cabeca', label: 'A cabeça não desliga nem quando o dia acaba.' },
+          { key: 'demais', label: 'Isto já não é só cansaço de hoje. Anda a acumular.' }
         ]
       },
-      espaco: {
-        label: 'Quero mudar a forma como me sinto no meu espaço.',
-        question: 'O que queres mudar primeiro?',
+      casa: {
+        question: 'O que queres sentir quando fechas a porta?',
         options: [
-          { key: 'cheiro', label: 'Quero que a casa cheire melhor.' },
-          { key: 'atmosfera', label: 'Quero criar outra atmosfera.' },
-          { key: 'momento', label: 'Quero tornar um momento da casa mais especial.' }
+          { key: 'cheiro', label: 'Quero que cheire bem. Sem complicar.' },
+          { key: 'parar', label: 'Quero entrar e sentir que posso finalmente parar.' },
+          { key: 'mudar', label: 'Quero mudar o ambiente sem mudar a casa inteira.' }
         ]
       },
       aprender: {
-        label: 'Quero aprender, perceber ou desenvolver alguma coisa.',
-        question: 'O que queres aprender ou perceber?',
+        question: 'O que queres levar daqui?',
         options: [
           { key: 'tarot', label: 'Quero aprender Tarot a sério.' },
-          { key: 'astrologia', label: 'Quero perceber melhor astrologia.' },
-          { key: 'outra', label: 'É outra coisa.' }
+          { key: 'astrologia', label: 'Quero perceber melhor Astrologia.' },
+          { key: 'outra', label: 'É outra coisa. Ainda estou a tentar perceber qual.' }
+        ]
+      },
+      companhia: {
+        question: 'O que te faria sair de casa?',
+        options: [
+          { key: 'evento', label: 'Tenho um evento ou compromisso e não quero ir sozinho.' },
+          { key: 'sair', label: 'Apetece-me sair, mas sozinho perco logo a vontade.' },
+          { key: 'falar', label: 'Quero companhia e conversa. Só isso.' }
         ]
       },
       presente: {
-        label: 'Quero alguma coisa para mim ou para alguém.',
-        question: 'Para quem é?',
+        question: 'Que tipo de presente queres evitar?',
         options: [
-          { key: 'para_mim', label: 'É para mim.' },
-          { key: 'para_outro', label: 'É para oferecer.' },
-          { key: 'para_ambos', label: 'Quero alguma coisa para partilhar.' }
+          { key: 'qualquer', label: 'Uma coisa qualquer comprada só para cumprir.' },
+          { key: 'casa', label: 'Quero oferecer algo bonito para a casa.' },
+          { key: 'corpo', label: 'Quero oferecer uma pausa ou um momento de cuidado.' }
         ]
       },
       outro: {
-        label: 'É outra coisa.',
-        question: 'Qual destas opções se aproxima mais?',
+        question: 'Então vamos simplificar.',
         options: [
-          { key: 'explorar', label: 'Quero ver o que a Maison tem.' },
-          { key: 'nao_sei', label: 'Ainda não sei bem como explicar.' }
+          { key: 'ver', label: 'Mostra-me o que a Maison tem.' },
+          { key: 'falar', label: 'Prefiro explicar a uma pessoa.' }
         ]
       }
     },
 
     results: {
-      resolver_decisao: result(
-        'Se procuras uma forma de olhar para a decisão com mais informação e estrutura, começa pela área de orientação. A Maison não decide por ti.',
-        '#orientacao', 'Ver orientação'
-      ),
-      resolver_direcao: result(
-        'Quando não sabes o que fazer a seguir, vale a pena perceber primeiro que tipo de ajuda procuras. Tarot, relatórios e análises estão na área de orientação.',
-        '#orientacao', 'Ver orientação'
-      ),
-      resolver_bloqueio: result(
-        'Se precisas de continuidade em vez de uma resposta isolada, vê os acompanhamentos, mentorias e formatos SOS disponíveis na Maison.',
-        '#continuidade', 'Ver continuidade', '#orientacao', 'Ver orientação'
-      ),
+      decisao_voltas: result('Já pensaste nisto o suficiente sozinho.', 'Percebo. Quando a mesma pergunta volta sempre, mais pensamento nem sempre ajuda. Começa por uma consulta que te dê estrutura e outras perguntas, sem decidir por ti.', '#orientacao', 'Ver Tarot e consultas'),
+      decisao_medo: result('O problema não é falta de opções. É o peso de escolher.', 'Não te vou dizer o que tens de fazer. Podemos olhar para cenários, receios e aquilo que estás a evitar para a decisão deixar de parecer um salto no escuro.', '#orientacao', 'Ver orientação'),
+      decisao_urgente: result('Não queres uma tese. Queres desbloquear isto.', 'Se a questão é concreta e urgente, o Tarot Expresso foi pensado para perguntas pontuais. Se precisares de mais contexto, há formatos mais completos.', '#orientacao', 'Ver consultas'),
 
-      relacao_compreensao: result(
-        'Para questões de relação, a Maison tem consultas de Tarot, relatórios e análises. Começa por ver os formatos de orientação que já existem.',
-        '#orientacao', 'Ver orientação'
-      ),
-      relacao_desligar: result(
-        'Se esta pessoa continua a ocupar demasiado espaço na tua cabeça, não te vamos empurrar uma solução ao acaso. Vê orientação e continuidade e escolhe o formato que faz sentido para ti.',
-        '#orientacao', 'Ver orientação', '#continuidade', 'Ver continuidade'
-      ),
-      relacao_incerteza: result(
-        'Ficar, sair ou esperar são decisões diferentes. Se queres olhar para a situação antes de agir, começa pelas opções de orientação da Maison.',
-        '#orientacao', 'Ver orientação'
-      ),
+      relacao_cabeca: result('Essa pessoa já ocupa espaço suficiente sem pagar renda.', 'Se continuas a voltar à mesma conversa, mensagem ou hipótese, podemos começar por perceber o que te prende ali. Depois escolhes se precisas de uma consulta ou de acompanhamento.', '#orientacao', 'Ver orientação', '#continuidade', 'Ver acompanhamento'),
+      relacao_decidir: result('Ficar, sair ou esperar não são a mesma decisão.', 'Vamos separar o que sentes, o que sabes e o que estás a imaginar. A Maison pode ajudar-te a olhar para a situação com mais estrutura, sem escolher por ti.', '#orientacao', 'Ver consultas'),
+      relacao_entender: result('Às vezes o que mais cansa é não perceber.', 'Começa por uma consulta focada na situação. Se o assunto já se arrasta e uma resposta isolada não chega, há acompanhamento.', '#orientacao', 'Ver consultas', '#continuidade', 'Ver acompanhamento'),
 
-      cansado_parar: result(
-        'Se o que precisas é uma pausa concreta, começa pelo corpo. Escalda-pés, sais de banho, óleo de massagem e velas de massagem são algumas das opções reais da Maison.',
-        '#produtos', 'Ver produtos'
-      ),
-      cansado_desligar: result(
-        'Às vezes não é preciso resolver a vida inteira. É preciso criar um intervalo. Vê os produtos para corpo e ambiente e escolhe o que cabe no teu momento.',
-        '#produtos', 'Ver produtos'
-      ),
-      cansado_continuidade: result(
-        'Se procuras continuidade, vê os acompanhamentos personalizados e os formatos SOS. Escolhe apenas o que corresponde ao tipo de apoio que procuras.',
-        '#continuidade', 'Ver continuidade'
-      ),
+      cansaco_corpo: result('O corpo já te avisou. Não esperes que grite.', 'Começa pequeno e concreto. Escalda-pés, óleo ou vela de massagem. Não resolvem tudo, mas criam uma pausa real hoje.', '#explorar', 'Ver produtos para o corpo'),
+      cansaco_cabeca: result('O dia acabou. A tua cabeça ainda não.', 'Muda o primeiro pedaço da noite. Aroma, luz e um gesto simples podem ajudar a marcar a passagem entre estar em modo de fazer e estar em casa.', '#explorar', 'Ver produtos'),
+      cansaco_demais: result('Se isto já vem de trás, uma pausa pode não chegar.', 'Podemos começar por perceber o que está a acumular e se precisas de acompanhamento continuado. Não tens de comprar um programa inteiro para fazer a primeira pergunta.', '#continuidade', 'Ver acompanhamento'),
 
-      espaco_cheiro: result(
-        'Se queres começar pelo cheiro, vê velas aromáticas, brumas, mikados e outras opções de ambiente já existentes na Maison.',
-        '#produtos', 'Ver produtos'
-      ),
-      espaco_atmosfera: result(
-        'Mudar a atmosfera não exige mudar a casa inteira. Começa por luz, aroma e pelos produtos que fazem diferença no uso real do espaço.',
-        '#produtos', 'Ver produtos'
-      ),
-      espaco_momento: result(
-        'Se queres tornar um momento da casa mais especial, começa pelos produtos de ambiente e corpo que já fazem parte da Maison.',
-        '#produtos', 'Ver produtos'
-      ),
+      casa_cheiro: result('Óptimo. Então não compliquemos.', 'Bruma para mudar o ar depressa, difusor para manter o aroma ou vela para juntar cheiro e ambiente. Escolhe pelo uso, não pelo nome mais bonito.', '#explorar', 'Ver produtos'),
+      casa_parar: result('Queres que a casa te diga: acabou por hoje.', 'Uma vela, um difusor, wax melts ou um escalda-pés podem ajudar a criar esse marco. O objectivo é simples: entrares e mudares de ritmo.', '#explorar', 'Ver produtos'),
+      casa_mudar: result('Não precisas de redecorar a sala toda.', 'Começa pelo que muda mais depressa: cheiro, luz e a forma como usas o espaço. A Maison tem opções para isso.', '#explorar', 'Ver produtos'),
 
-      aprender_tarot: result(
-        'Se queres aprender Tarot a sério, vê a área de continuidade. A mentoria é uma das ofertas reais da Maison.',
-        '#continuidade', 'Ver mentorias'
-      ),
-      aprender_astrologia: result(
-        'Se queres perceber melhor astrologia, começa pelos relatórios e análises disponíveis na área de orientação.',
-        '#orientacao', 'Ver relatórios e análises'
-      ),
-      aprender_outra: result(
-        'Ainda não há informação suficiente para te indicar uma oferta específica sem inventar. Explora as áreas reais da Maison e vê se alguma corresponde ao que procuras.',
-        '#explorar', 'Explorar a Maison'
-      ),
+      aprender_tarot: result('Queres aprender Tarot. A sério.', 'Então não te vou mandar para três frases num ebook. A mentoria existe para aprendizagem estruturada e acompanhamento.', '#continuidade', 'Ver mentoria'),
+      aprender_astrologia: result('Queres perceber o mapa, não decorar signos.', 'Há relatórios, análises e trabalho de Astrologia para aprofundar uma questão concreta ou um mapa maior.', '#servicos', 'Ver serviços'),
+      aprender_outra: result('Ainda não tens de saber dar-lhe um nome.', 'Vê os serviços e, se nada encaixar, fala com a Maison. Primeiro percebemos o que procuras. Depois vemos se existe uma solução real.', '#servicos', 'Explorar serviços'),
 
-      presente_para_mim: result(
-        'Se é para ti, não precisas de justificar a compra. Vê os produtos da Maison e escolhe pelo uso que lhes queres dar.',
-        '#produtos', 'Ver produtos'
-      ),
-      presente_para_outro: result(
-        'Não tens de oferecer qualquer coisa só para não aparecer de mãos vazias. Vê os produtos disponíveis e escolhe algo que a pessoa vá mesmo querer usar.',
-        '#produtos', 'Ver produtos'
-      ),
-      presente_para_ambos: result(
-        'Se é para partilhar, começa pelos produtos de ambiente, banho e corpo. Não vamos inventar um kit que ainda não existe.',
-        '#produtos', 'Ver produtos'
-      ),
+      companhia_evento: result('Tens onde ir. Falta-te não ir sozinho.', 'A Companhia da Maison pode acompanhar-te em eventos, jantares e outros compromissos sociais. É companhia social, sem romance nem ambiguidades.', '#companhia', 'Ver Companhia'),
+      companhia_sair: result('Às vezes o difícil é mesmo sair pela porta.', 'Se sozinho perdes a vontade, a Companhia da Maison existe para passeios, cinema, refeições e outras actividades simples.', '#companhia', 'Ver Companhia'),
+      companhia_falar: result('Queres presença. Não uma história complicada.', 'Companhia, conversa e uma actividade combinada. Sem transformar isso noutra coisa.', '#companhia', 'Ver Companhia'),
 
-      outro_explorar: result(
-        'Perfeito. Vai direto às áreas da Maison e vê apenas aquilo que existe neste momento.',
-        '#explorar', 'Explorar a Maison'
-      ),
-      outro_nao_sei: result(
-        'Não te vamos empurrar uma resposta só para fechar o Farol. Explora a Maison ou recomeça e escolhe a opção que ficar mais perto do que estás a viver.',
-        '#explorar', 'Explorar a Maison'
-      )
+      presente_qualquer: result('Então não ofereças uma coisa qualquer.', 'Escolhe pelo que a pessoa vai usar: casa, corpo, aroma ou pausa. Se não souberes, diz-nos para quem é e ajudamos-te a reduzir as opções.', '#explorar', 'Ver produtos'),
+      presente_casa: result('Queres oferecer algo que fique na casa e seja usado.', 'Vela, bruma, difusor ou wax melts. Escolhe pelo tipo de uso e pelo orçamento.', '#explorar', 'Ver produtos'),
+      presente_corpo: result('Queres oferecer uma desculpa para a pessoa parar.', 'Escalda-pés, óleo ou vela de massagem são opções simples e concretas.', '#explorar', 'Ver produtos'),
+
+      outro_ver: result('Sem problema. Vai directo ao que existe.', 'Produtos, serviços, acompanhamento e Companhia estão reunidos no site. Começa pelo que te chama a atenção e vê se resolve alguma coisa real.', '#explorar', 'Explorar a Maison'),
+      outro_falar: result('Às vezes é mais fácil explicar do que escolher.', 'Fala connosco. Diz o que se passa em português normal e vemos contigo se a Maison tem alguma coisa que faça sentido.', 'https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Prefiro%20explicar%20o%20que%20se%20passa%20e%20pedir%20ajuda%20a%20escolher.', 'Falar com a Maison')
     }
   };
 
@@ -190,15 +131,11 @@
   const back3 = document.getElementById('farolBack3');
 
   function updateProgress(step) {
-    progressDots.forEach((dot, index) => {
-      dot.classList.toggle('farol__progress-dot--active', index < step);
-    });
+    progressDots.forEach((dot, index) => dot.classList.toggle('farol__progress-dot--active', index < step));
   }
 
   function showStep(stepNumber) {
-    Object.values(steps).forEach(el => {
-      if (el) el.classList.remove('farol__step--active');
-    });
+    Object.values(steps).forEach(el => { if (el) el.classList.remove('farol__step--active'); });
     if (!steps[stepNumber]) return;
     steps[stepNumber].classList.add('farol__step--active');
     currentStep = stepNumber;
@@ -208,7 +145,6 @@
   function buildStep2(step1Key) {
     const data = FAROL_DATA.step1[step1Key];
     if (!data || !step2Question || !step2Options) return;
-
     step1Choice = step1Key;
     step2Question.textContent = data.question;
     step2Options.innerHTML = '';
@@ -217,54 +153,29 @@
       const btn = document.createElement('button');
       btn.className = 'farol__option';
       btn.type = 'button';
-      btn.setAttribute('data-step2', opt.key);
-      btn.innerHTML = `
-        <span class="farol__option-text">${opt.label}</span>
-        <svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/>
-          <polyline points="12 5 19 12 12 19"/>
-        </svg>
-      `;
+      btn.innerHTML = `<span class="farol__option-text">${opt.label}</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
       btn.addEventListener('click', () => handleStep2Choice(opt.key));
       step2Options.appendChild(btn);
     });
-
     showStep(2);
   }
 
   function handleStep2Choice(step2Key) {
     step2Choice = step2Key;
-    const resultKey = `${step1Choice}_${step2Key}`;
-    const selected = FAROL_DATA.results[resultKey];
-
+    const selected = FAROL_DATA.results[`${step1Choice}_${step2Key}`];
     if (!selected) {
-      showResult(result(
-        'Ainda não há informação suficiente para te indicar uma solução específica sem inventar. Vê o que existe na Maison neste momento.',
-        '#explorar', 'Explorar a Maison'
-      ));
+      showResult(result('Não te vou inventar uma resposta.', 'Fala com a Maison e explica o que procuras. Se houver uma solução real, dizemos-te qual. Se não houver, também.', 'https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Preciso%20de%20ajuda%20a%20encontrar%20a%20op%C3%A7%C3%A3o%20certa.', 'Falar com a Maison'));
       return;
     }
-
     showResult(selected);
   }
 
   function showResult(selected) {
     if (!step3Result) return;
-
     const ctaClass = selected.cta.style === 'primary' ? 'btn btn--primary' : 'btn btn--secondary';
-    const secondary = selected.cta2
-      ? `<a href="${selected.cta2.href}" class="${selected.cta2.style === 'primary' ? 'btn btn--primary' : 'btn btn--secondary'}">${selected.cta2.text}</a>`
-      : '';
-
-    step3Result.innerHTML = `
-      <h3 class="farol__result-title">${selected.title}</h3>
-      <p class="farol__result-text">${selected.text}</p>
-      <div class="farol__result-actions">
-        <a href="${selected.cta.href}" class="${ctaClass}">${selected.cta.text}</a>
-        ${secondary}
-      </div>
-    `;
-
+    const primaryExternal = selected.cta.href.startsWith('http') ? ' target="_blank" rel="noopener"' : '';
+    const secondary = selected.cta2 ? `<a href="${selected.cta2.href}" class="${selected.cta2.style === 'primary' ? 'btn btn--primary' : 'btn btn--secondary'}">${selected.cta2.text}</a>` : '';
+    step3Result.innerHTML = `<h3 class="farol__result-title">${selected.title}</h3><p class="farol__result-text">${selected.text}</p><div class="farol__result-actions"><a href="${selected.cta.href}" class="${ctaClass}"${primaryExternal}>${selected.cta.text}</a>${secondary}</div>`;
     showStep(3);
   }
 
@@ -275,26 +186,12 @@
   }
 
   if (steps[1]) {
-    const step1Options = steps[1].querySelectorAll('.farol__option');
-    step1Options.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const key = btn.getAttribute('data-farol');
-        buildStep2(key);
-      });
+    steps[1].querySelectorAll('[data-farol]').forEach(btn => {
+      btn.addEventListener('click', () => buildStep2(btn.getAttribute('data-farol')));
     });
-
-    const outroBtn = steps[1].querySelector('[data-farol="outro"]');
-    if (outroBtn) {
-      outroBtn.addEventListener('click', () => buildStep2('outro'));
-    }
   }
-
   if (back2) back2.addEventListener('click', () => showStep(1));
   if (back3) back3.addEventListener('click', resetFarol);
 
-  window.Farol = {
-    data: FAROL_DATA,
-    reset: resetFarol,
-    getState: () => ({ step: currentStep, step1: step1Choice, step2: step2Choice })
-  };
+  window.Farol = { data: FAROL_DATA, reset: resetFarol, getState: () => ({ step: currentStep, step1: step1Choice, step2: step2Choice }) };
 })();

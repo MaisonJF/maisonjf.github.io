@@ -4,139 +4,72 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-  <!-- SEO -->
   <title>MAISON JF® | Pára de Ignorar. Volta Para Casa.</title>
-  <meta name="description" content="A MAISON JF® cria produtos, experiências e serviços orientados para transformação. Segue o Farol ou explora diretamente a Maison.">
+  <meta name="description" content="Produtos, orientação, acompanhamento e experiências para aquilo que já não queres continuar a ignorar.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://maison-jf.com/">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://maison-jf.com/">
   <meta property="og:title" content="MAISON JF® | Pára de Ignorar. Volta Para Casa.">
-  <meta property="og:description" content="A MAISON JF® cria produtos, experiências e serviços orientados para transformação. Segue o Farol ou explora diretamente a Maison.">
+  <meta property="og:description" content="Diz-nos o que te incomoda. A Maison ajuda-te a encontrar uma forma concreta de começar.">
   <meta property="og:image" content="https://maison-jf.com/og-image.jpg">
   <meta property="og:locale" content="pt_PT">
   <meta property="og:site_name" content="MAISON JF®">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://maison-jf.com/">
-  <meta name="twitter:title" content="MAISON JF® | Pára de Ignorar. Volta Para Casa.">
-  <meta name="twitter:description" content="A MAISON JF® cria produtos, experiências e serviços orientados para transformação. Segue o Farol ou explora diretamente a Maison.">
-  <meta name="twitter:image" content="https://maison-jf.com/og-image.jpg">
-
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="apple-touch-icon.svg">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
-
-  <!-- Schema.org -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://maison-jf.com/#organization",
-        "name": "MAISON JF®",
-        "url": "https://maison-jf.com/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://maison-jf.com/favicon.svg"
-        },
-        "description": "A MAISON JF® cria produtos, experiências e serviços orientados para transformação."
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://maison-jf.com/#website",
-        "url": "https://maison-jf.com/",
-        "name": "MAISON JF®",
-        "publisher": {
-          "@id": "https://maison-jf.com/#organization"
-        }
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://maison-jf.com/#webpage",
-        "url": "https://maison-jf.com/",
-        "name": "MAISON JF® | Pára de Ignorar. Volta Para Casa.",
-        "isPartOf": {
-          "@id": "https://maison-jf.com/#website"
-        },
-        "about": {
-          "@id": "https://maison-jf.com/#organization"
-        },
-        "description": "A MAISON JF® cria produtos, experiências e serviços orientados para transformação. Segue o Farol ou explora diretamente a Maison."
-      }
-    ]
-  }
-  </script>
+  <link rel="stylesheet" href="styles-additions.css">
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="header" id="header">
     <div class="header__inner">
-      <a href="/" class="header__logo" aria-label="MAISON JF®: Página inicial">
-        MAISON JF<sup>®</sup>
-      </a>
-
+      <a href="/" class="header__logo" aria-label="MAISON JF®: Página inicial">MAISON JF<sup>®</sup></a>
       <nav class="header__nav" aria-label="Navegação principal">
         <ul class="header__nav-list">
           <li><a href="#farol" class="header__nav-link">O Farol</a></li>
           <li><a href="#explorar" class="header__nav-link">Explorar</a></li>
+          <li><a href="#servicos" class="header__nav-link">Serviços</a></li>
           <li><a href="#profissionais" class="header__nav-link">Profissionais</a></li>
           <li><a href="#joao" class="header__nav-link">Sobre</a></li>
         </ul>
       </nav>
-
       <button class="header__menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <button class="mobile-menu__close" id="menuClose" aria-label="Fechar menu">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <line x1="18" y1="6" x2="6" y2="18"/>
-        <line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <a href="#farol" class="mobile-menu__link">O Farol</a>
     <a href="#explorar" class="mobile-menu__link">Explorar</a>
+    <a href="#servicos" class="mobile-menu__link">Serviços</a>
     <a href="#profissionais" class="mobile-menu__link">Profissionais</a>
     <a href="#joao" class="mobile-menu__link">Sobre</a>
   </div>
 
-  <!-- HERO -->
   <section class="hero" id="hero" aria-label="Página inicial">
     <div class="hero__bg" aria-hidden="true">
       <div class="hero__bg-image"></div>
       <div class="hero__beam"></div>
       <div class="hero__vignette"></div>
     </div>
-
     <div class="hero__content">
       <h1 class="hero__title">
         <span class="hero__title--primary">PÁRA DE<br>IGNORAR!</span>
         <span class="hero__title--secondary">Volta Para Casa.</span>
       </h1>
-
       <p class="hero__question">O que continuas a ignorar?</p>
-
       <div class="hero__ctas">
         <a href="#farol" class="btn btn--primary">Seguir o Farol</a>
         <a href="#explorar" class="btn btn--ghost">Já sabes o que procuras? Explora a Maison →</a>
@@ -144,14 +77,12 @@
     </div>
   </section>
 
-  <!-- FAROL -->
   <section class="farol" id="farol" aria-label="O Farol: orientação personalizada">
     <div class="farol__header">
       <p class="farol__label">O Farol</p>
-      <h2 class="farol__title">O que te trouxe até aqui?</h2>
-      <p class="farol__subtitle">Escolhe o que mais se aproxima do que está a acontecer. O Farol leva-te até três passos.</p>
+      <h2 class="farol__title">O que te está mesmo a incomodar?</h2>
+      <p class="farol__subtitle">Não escolhas uma categoria. Escolhe aquilo que mais se parece com o que estás a viver.</p>
     </div>
-
     <div class="farol__container">
       <div class="farol__progress" id="farolProgress" aria-hidden="true">
         <span class="farol__progress-dot farol__progress-dot--active"></span>
@@ -159,194 +90,185 @@
         <span class="farol__progress-dot"></span>
       </div>
 
-      <!-- Step 1 -->
       <div class="farol__step farol__step--active" id="farolStep1" data-step="1">
         <div class="farol__options" role="group" aria-label="Escolhe a tua situação">
-          <button class="farol__option" data-farol="resolver" type="button">
-            <span class="farol__option-text">Há alguma coisa na minha vida que preciso de resolver.</span>
-            <svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </button>
-
-          <button class="farol__option" data-farol="relacao" type="button">
-            <span class="farol__option-text">Há alguém ou alguma relação que continua a mexer comigo.</span>
-            <svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </button>
-
-          <button class="farol__option" data-farol="cansado" type="button">
-            <span class="farol__option-text">Estou cansado e preciso de me sentir melhor.</span>
-            <svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </button>
-
-          <button class="farol__option" data-farol="espaco" type="button">
-            <span class="farol__option-text">Quero mudar a forma como me sinto no meu espaço.</span>
-            <svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </button>
-
-          <button class="farol__option" data-farol="aprender" type="button">
-            <span class="farol__option-text">Quero aprender, perceber ou desenvolver alguma coisa.</span>
-            <svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </button>
-
-          <button class="farol__option" data-farol="presente" type="button">
-            <span class="farol__option-text">Quero alguma coisa para mim ou para alguém.</span>
-            <svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </button>
-
-          <div class="farol__other">
-            <button class="btn btn--secondary" data-farol="outro" type="button">
-              É outra coisa →
-            </button>
-          </div>
+          <button class="farol__option" data-farol="decisao" type="button"><span class="farol__option-text">Tenho uma decisão que não me larga.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="relacao" type="button"><span class="farol__option-text">Há alguém que me continua a ocupar a cabeça.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="cansaco" type="button"><span class="farol__option-text">Estou cansado. Mesmo cansado.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="casa" type="button"><span class="farol__option-text">Entro em casa e não consigo desligar.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="aprender" type="button"><span class="farol__option-text">Quero aprender ou perceber melhor alguma coisa.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="companhia" type="button"><span class="farol__option-text">Quero fazer qualquer coisa, mas custa-me ir sozinho.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="presente" type="button"><span class="farol__option-text">Quero oferecer alguma coisa que não pareça escolhida à pressa.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <div class="farol__other"><button class="btn btn--secondary" data-farol="outro" type="button">É outra coisa →</button></div>
         </div>
       </div>
 
-      <!-- Step 2 -->
       <div class="farol__step" id="farolStep2" data-step="2">
-        <h3 class="farol__question" id="farolStep2Question">Vamos por partes.</h3>
+        <h3 class="farol__question" id="farolStep2Question">Vamos perceber melhor.</h3>
         <div class="farol__options" id="farolStep2Options" role="group"></div>
-        <button class="farol__back" id="farolBack2" type="button">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <line x1="19" y1="12" x2="5" y2="12"/>
-            <polyline points="12 19 5 12 12 5"/>
-          </svg>
-          Voltar
-        </button>
+        <button class="farol__back" id="farolBack2" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Voltar</button>
       </div>
 
-      <!-- Step 3 -->
       <div class="farol__step" id="farolStep3" data-step="3">
         <div class="farol__result" id="farolResult"></div>
-        <button class="farol__back" id="farolBack3" type="button">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <line x1="19" y1="12" x2="5" y2="12"/>
-            <polyline points="12 19 5 12 12 5"/>
-          </svg>
-          Recomeçar
-        </button>
+        <button class="farol__back" id="farolBack3" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Recomeçar</button>
       </div>
     </div>
   </section>
 
-  <!-- TRANSFORMAÇÕES -->
   <section class="transformacoes" id="transformacoes" aria-label="Transformações">
     <div class="transformacoes__header reveal">
-      <p class="transformacoes__label">Transformações</p>
-      <h2 class="transformacoes__title">Onde queres chegar?</h2>
-      <p class="transformacoes__subtitle">Começa pelo que queres mudar. O resto vem depois.</p>
+      <p class="transformacoes__label">Começa pela dor</p>
+      <h2 class="transformacoes__title">Qual destas te soa demasiado familiar?</h2>
+      <p class="transformacoes__subtitle">Não precisamos de tornar tudo profundo. Precisamos de perceber o que te está a chatear e começar por aí.</p>
     </div>
-
     <div class="transformacoes__grid">
       <article class="transformacao-card reveal">
         <div class="transformacao-card__visual transformacao-card__visual--escuro" aria-hidden="true"></div>
         <div class="transformacao-card__content">
           <span class="transformacao-card__tag">Decisão</span>
-          <h3 class="transformacao-card__title">De adiar para decidir</h3>
-          <p class="transformacao-card__desc">Se continuas a voltar à mesma pergunta, talvez seja altura de a olhar de outra forma. A Maison ajuda-te a organizar as opções sem decidir por ti.</p>
+          <h3 class="transformacao-card__title">Há uma decisão que te anda a moer?</h3>
+          <p class="transformacao-card__desc">Dás voltas, perguntas a toda a gente e acabas no mesmo sítio. Primeiro percebemos o que te está a prender. Depois escolhemos a forma certa de olhar para isso.</p>
         </div>
       </article>
-
       <article class="transformacao-card reveal">
         <div class="transformacao-card__visual transformacao-card__visual--ambre" aria-hidden="true"></div>
         <div class="transformacao-card__content">
-          <span class="transformacao-card__tag">Pausa</span>
-          <h3 class="transformacao-card__title">De chegar ao limite para conseguir parar</h3>
-          <p class="transformacao-card__desc">Há dias que acabam e continuam dentro de nós. Encontra produtos e soluções para criar uma pausa concreta.</p>
+          <span class="transformacao-card__tag">Corpo</span>
+          <h3 class="transformacao-card__title">Estás cansado de estar sempre cansado?</h3>
+          <p class="transformacao-card__desc">Se até descansar dá trabalho, talvez esteja na hora de parar de adiar a pausa. Não resolvemos a tua vida numa vela. Mas podemos ajudar-te a começar a cuidar de ti hoje.</p>
         </div>
       </article>
-
       <article class="transformacao-card reveal">
         <div class="transformacao-card__visual transformacao-card__visual--esmeralda" aria-hidden="true"></div>
         <div class="transformacao-card__content">
-          <span class="transformacao-card__tag">Espaço</span>
-          <h3 class="transformacao-card__title">De entrar em casa para querer ficar</h3>
-          <p class="transformacao-card__desc">Cheiro, luz e atmosfera mudam a forma como um espaço é vivido. Começa pelo que sentes quando abres a porta.</p>
+          <span class="transformacao-card__tag">Casa</span>
+          <h3 class="transformacao-card__title">Entras em casa e parece que o dia entrou contigo?</h3>
+          <p class="transformacao-card__desc">Cheiro, luz e ambiente não resolvem tudo. Mas mudam o primeiro minuto depois de fechares a porta. E às vezes é exactamente por aí que se começa.</p>
         </div>
       </article>
-
       <article class="transformacao-card reveal">
         <div class="transformacao-card__visual transformacao-card__visual--bordeaux" aria-hidden="true"></div>
         <div class="transformacao-card__content">
-          <span class="transformacao-card__tag">Companhia social</span>
-          <h3 class="transformacao-card__title">De querer ir para poder ir</h3>
-          <p class="transformacao-card__desc">Há coisas que apetece fazer, mas não sozinho. A companhia social platónica está em estudo como serviço especializado da Maison.</p>
+          <span class="transformacao-card__tag">Companhia</span>
+          <h3 class="transformacao-card__title">Queres ir. Só não queres ir sozinho.</h3>
+          <p class="transformacao-card__desc">Jantar, passeio, evento, cinema ou simplesmente sair de casa. Há coisas que custam menos quando temos alguém ao lado. A companhia da Maison já está disponível.</p>
         </div>
       </article>
     </div>
   </section>
 
-  <!-- EXPLORAR -->
-  <section class="explorar" id="explorar" aria-label="Explorar a Maison">
+  <section class="explorar catalogue" id="explorar" aria-label="Produtos Maison JF">
     <div class="explorar__header reveal">
-      <p class="explorar__label">Explorar a Maison</p>
-      <h2 class="explorar__title">Já sabes o que procuras?</h2>
-      <p class="explorar__subtitle">Se já sabes o que queres, não precisas do Farol.</p>
+      <p class="explorar__label">Produtos</p>
+      <h2 class="explorar__title">Não compres ao acaso.</h2>
+      <p class="explorar__subtitle">Escolhe pelo que queres mudar agora. Os produtos abaixo existem e estão disponíveis neste momento.</p>
     </div>
 
-    <div class="explorar__grid">
-      <article class="explorar-card reveal" id="produtos">
-        <h3 class="explorar-card__title">Produtos</h3>
-        <div class="explorar-card__items">
-          <span class="explorar-card__item">Velas aromáticas · 14 €</span>
-          <span class="explorar-card__item">Velas de massagem · 12 €</span>
-          <span class="explorar-card__item">Escalda-pés · 9,50 €</span>
-          <span class="explorar-card__item">Wax melts · 5 €</span>
-          <span class="explorar-card__item">Óleos · Sais de banho · Brumas · Mikados</span>
-        </div>
-        <a class="btn btn--secondary" href="#farol">Preciso de ajuda a escolher</a>
+    <div class="catalogue__grid">
+      <article class="catalogue-card reveal">
+        <img class="catalogue-card__image" src="https://cdn.shopify.com/s/files/1/0942/8208/8833/files/velaaromatica.jpg?v=1778412775" alt="Vela aromática Maison JF" loading="lazy">
+        <div class="catalogue-card__body"><p class="catalogue-card__eyebrow">Casa</p><h3 class="catalogue-card__title">Vela Aromática</h3><p class="catalogue-card__pain">Queres entrar em casa e sentir logo que o dia acabou?</p><p class="catalogue-card__price">14 €</p><a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Quero%20a%20Vela%20Arom%C3%A1tica%20de%2014%20%E2%82%AC." target="_blank" rel="noopener">Quero esta</a></div>
       </article>
-
-      <article class="explorar-card reveal" id="orientacao">
-        <h3 class="explorar-card__title">Orientação</h3>
-        <div class="explorar-card__items">
-          <span class="explorar-card__item">Consulta de Tarot · 35 €</span>
-          <span class="explorar-card__item">Relatórios e análises</span>
-          <span class="explorar-card__item">Astrologia</span>
-          <span class="explorar-card__item">Ebooks</span>
-        </div>
-        <a class="btn btn--secondary" href="#farol">Preciso de ajuda a escolher</a>
+      <article class="catalogue-card reveal">
+        <img class="catalogue-card__image" src="https://cdn.shopify.com/s/files/1/0942/8208/8833/files/spray.jpg?v=1778412797" alt="Bruma de ambiente Maison JF" loading="lazy">
+        <div class="catalogue-card__body"><p class="catalogue-card__eyebrow">Casa</p><h3 class="catalogue-card__title">Bruma de Ambiente</h3><p class="catalogue-card__pain">A casa está pesada? Borrifa. Muda o ar. Segue.</p><p class="catalogue-card__price">6,50 €</p><a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Quero%20a%20Bruma%20de%20Ambiente%20de%206%2C50%20%E2%82%AC." target="_blank" rel="noopener">Quero esta</a></div>
       </article>
-
-      <article class="explorar-card reveal" id="continuidade">
-        <h3 class="explorar-card__title">Continuidade</h3>
-        <div class="explorar-card__items">
-          <span class="explorar-card__item">Mentorias</span>
-          <span class="explorar-card__item">Acompanhamentos personalizados</span>
-          <span class="explorar-card__item">SOS 3 · SOS 7 · SOS 14</span>
-          <span class="explorar-card__item">SOS 21 · SOS 28</span>
-        </div>
-        <a class="btn btn--secondary" href="#farol">Ajuda-me a escolher</a>
+      <article class="catalogue-card reveal">
+        <img class="catalogue-card__image" src="https://cdn.shopify.com/s/files/1/0942/8208/8833/files/mikado.jpg?v=1778412855" alt="Difusor Maison JF" loading="lazy">
+        <div class="catalogue-card__body"><p class="catalogue-card__eyebrow">Casa</p><h3 class="catalogue-card__title">Difusor</h3><p class="catalogue-card__pain">Queres a casa perfumada sem ter de te lembrar de acender nada?</p><p class="catalogue-card__price">a partir de 14 €</p><a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Quero%20saber%20as%20op%C3%A7%C3%B5es%20de%20Difusor." target="_blank" rel="noopener">Ver opções</a></div>
       </article>
-
-      <article class="explorar-card reveal" id="especializados">
-        <h3 class="explorar-card__title">Serviços Especializados</h3>
-        <div class="explorar-card__items">
-          <span class="explorar-card__item">Companhia social platónica · em estudo</span>
-          <span class="explorar-card__item">Projetos para profissionais</span>
-        </div>
-        <a class="btn btn--secondary" href="#profissionais">Ver área profissional</a>
+      <article class="catalogue-card reveal">
+        <img class="catalogue-card__image" src="https://cdn.shopify.com/s/files/1/0942/8208/8833/files/escalda-pes.jpg?v=1778412824" alt="Escalda-pés Maison JF" loading="lazy">
+        <div class="catalogue-card__body"><p class="catalogue-card__eyebrow">Corpo</p><h3 class="catalogue-card__title">Escalda-pés</h3><p class="catalogue-card__pain">Os pés já chegaram a casa. A cabeça ainda não?</p><p class="catalogue-card__price">6,50 € a 9,50 €</p><a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Quero%20um%20Escalda-p%C3%A9s." target="_blank" rel="noopener">Quero este</a></div>
+      </article>
+      <article class="catalogue-card reveal">
+        <img class="catalogue-card__image" src="https://cdn.shopify.com/s/files/1/0942/8208/8833/files/oleomassagem.jpg?v=1778412891" alt="Óleo de massagem Maison JF" loading="lazy">
+        <div class="catalogue-card__body"><p class="catalogue-card__eyebrow">Corpo</p><h3 class="catalogue-card__title">Óleo de Massagem</h3><p class="catalogue-card__pain">O corpo está tenso? Pára de fingir que não sentes.</p><p class="catalogue-card__price">12 €</p><a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Quero%20o%20%C3%93leo%20de%20Massagem%20de%2012%20%E2%82%AC." target="_blank" rel="noopener">Quero este</a></div>
+      </article>
+      <article class="catalogue-card reveal">
+        <img class="catalogue-card__image" src="https://cdn.shopify.com/s/files/1/0942/8208/8833/files/velamassagem.jpg?v=1778413050" alt="Vela de massagem Maison JF" loading="lazy">
+        <div class="catalogue-card__body"><p class="catalogue-card__eyebrow">Corpo</p><h3 class="catalogue-card__title">Vela de Massagem</h3><p class="catalogue-card__pain">Calor, toque e uma desculpa legítima para parares uns minutos.</p><p class="catalogue-card__price">12 €</p><a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Quero%20a%20Vela%20de%20Massagem%20de%2012%20%E2%82%AC." target="_blank" rel="noopener">Quero esta</a></div>
+      </article>
+      <article class="catalogue-card reveal">
+        <img class="catalogue-card__image" src="https://cdn.shopify.com/s/files/1/0942/8208/8833/files/waxmelts.jpg?v=1778412926" alt="Wax melts Maison JF" loading="lazy">
+        <div class="catalogue-card__body"><p class="catalogue-card__eyebrow">Casa</p><h3 class="catalogue-card__title">Wax Melts</h3><p class="catalogue-card__pain">Queres mudar o cheiro da divisão sem acender uma vela inteira?</p><p class="catalogue-card__price">5 €</p><a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Quero%20os%20Wax%20Melts%20de%205%20%E2%82%AC." target="_blank" rel="noopener">Quero estes</a></div>
       </article>
     </div>
   </section>
 
-  <!-- JOÃO -->
+  <section class="explorar services" id="servicos" aria-label="Serviços Maison JF">
+    <div class="explorar__header reveal">
+      <p class="explorar__label">Serviços</p>
+      <h2 class="explorar__title">Nem tudo se resolve com uma vela.</h2>
+      <p class="explorar__subtitle">Às vezes precisas de uma resposta. Outras vezes precisas de falar, de acompanhamento ou simplesmente de não ir sozinho.</p>
+    </div>
+
+    <div class="services__grid">
+      <article class="service-card reveal" id="orientacao">
+        <p class="service-card__eyebrow">Quero uma resposta</p>
+        <h3 class="service-card__title">Tarot e consultas</h3>
+        <p class="service-card__lead">Quando a pergunta não te larga, escolhe o tamanho da resposta que precisas.</p>
+        <ul class="service-card__list">
+          <li>Tarot Expresso <strong>17 €</strong></li>
+          <li>Tarot Integrativo <strong>35 €</strong></li>
+          <li>Tarot Terapêutico <strong>70 €</strong></li>
+          <li>Consulta Escrita Breve <strong>25 €</strong></li>
+          <li>Consulta Escrita Aprofundada <strong>45 €</strong></li>
+        </ul>
+        <a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Preciso%20de%20orienta%C3%A7%C3%A3o%20e%20quero%20saber%20qual%20consulta%20faz%20mais%20sentido%20para%20mim." target="_blank" rel="noopener">Ajuda-me a escolher</a>
+      </article>
+
+      <article class="service-card reveal">
+        <p class="service-card__eyebrow">Preciso de falar</p>
+        <h3 class="service-card__title">Escuta Orientada</h3>
+        <p class="service-card__lead">Não queres Tarot. Queres falar, pôr as coisas por ordem e não ouvir respostas feitas.</p>
+        <p class="service-card__price">60 €</p>
+        <a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Quero%20saber%20mais%20sobre%20a%20Escuta%20Orientada." target="_blank" rel="noopener">Quero saber mais</a>
+      </article>
+
+      <article class="service-card reveal" id="continuidade">
+        <p class="service-card__eyebrow">Isto já pede continuidade</p>
+        <h3 class="service-card__title">Acompanhamento</h3>
+        <p class="service-card__lead">Há coisas que não se arrumam numa hora. Se precisas de presença continuada, há formatos para isso.</p>
+        <ul class="service-card__list">
+          <li>Acompanhamento Permanente <strong>a partir de 170 €</strong></li>
+          <li>Mentoria <strong>a partir de 280 €</strong></li>
+          <li>SOS 3 · SOS 7 · SOS 14 · SOS 21 · SOS 28</li>
+        </ul>
+        <a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Preciso%20de%20acompanhamento%20e%20quero%20perceber%20qual%20formato%20se%20adequa%20ao%20que%20estou%20a%20viver." target="_blank" rel="noopener">Falar sobre o meu caso</a>
+      </article>
+
+      <article class="service-card reveal" id="companhia">
+        <p class="service-card__eyebrow">Não quero ir sozinho</p>
+        <h3 class="service-card__title">Companhia</h3>
+        <p class="service-card__lead">Jantares, eventos, passeios, cinema ou outras actividades. É companhia social, ponto. Sem romance, sem confusão.</p>
+        <a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Quero%20saber%20como%20funciona%20o%20servi%C3%A7o%20de%20Companhia." target="_blank" rel="noopener">Como funciona?</a>
+      </article>
+
+      <article class="service-card reveal">
+        <p class="service-card__eyebrow">Quero perceber o mapa maior</p>
+        <h3 class="service-card__title">Astrologia, relatórios e análises</h3>
+        <p class="service-card__lead">Quando uma pergunta precisa de mais contexto do que uma resposta rápida, podemos aprofundar.</p>
+        <a class="btn btn--secondary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Quero%20saber%20que%20relat%C3%B3rios%2C%20an%C3%A1lises%20ou%20servi%C3%A7os%20de%20Astrologia%20est%C3%A3o%20dispon%C3%ADveis." target="_blank" rel="noopener">Ver possibilidades</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="continuity" id="repeticao" aria-label="Maison Todo o Mês">
+    <div class="continuity__inner reveal">
+      <p class="explorar__label">Repetição e fidelização</p>
+      <h2 class="continuity__title">Se resulta, não voltes ao zero.</h2>
+      <p class="continuity__text">A Maison Todo o Mês existe para não deixares o cuidado para o momento em que já estás no limite. Começas por um mês. Se fizer sentido, continuas.</p>
+      <div class="continuity__plans">
+        <div><strong>19 €</strong><span>A Tua Casa Outra Vez</span></div>
+        <div><strong>39 €</strong><span>Quando Tudo Fica Demais</span></div>
+        <div><strong>59 €</strong><span>Hoje Não Enfrentas Isso Sozinho</span></div>
+      </div>
+      <a class="btn btn--primary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Quero%20saber%20qual%20op%C3%A7%C3%A3o%20da%20Maison%20Todo%20o%20M%C3%AAs%20faz%20mais%20sentido%20para%20mim." target="_blank" rel="noopener">Quero perceber qual é a minha</a>
+    </div>
+  </section>
+
   <section class="joao" id="joao" aria-label="Sobre">
     <div class="joao__inner">
       <div class="joao__visual reveal">
@@ -355,64 +277,65 @@
           <span class="joao__visual-label">MAISON JF®</span>
         </div>
       </div>
-
       <div class="joao__content reveal">
-        <p class="joao__label">Quem orienta</p>
+        <p class="joao__label">Quem te recebe primeiro</p>
         <h2 class="joao__title">João</h2>
         <p class="joao__role">Fundador da Maison JF®</p>
-        <p class="joao__text">A experiência humana por detrás da orientação da Maison.</p>
+        <p class="joao__text">Antes de haver uma solução, há alguém a explicar o que se passa. É aí que começa o meu trabalho: perceber o que estás a tentar resolver e ajudar-te a encontrar a opção certa dentro da Maison, sem te empurrar uma coisa só porque está à venda.</p>
       </div>
     </div>
   </section>
 
-  <!-- PROFISSIONAIS -->
   <section class="profissionais" id="profissionais" aria-label="Para Profissionais">
     <div class="profissionais__inner">
       <div class="profissionais__content reveal">
         <p class="profissionais__label">Para Profissionais</p>
-        <h2 class="profissionais__title">A Maison nos teus espaços.</h2>
-        <p class="profissionais__text">Estamos a selecionar novos pontos de venda e parceiros profissionais para a Maison JF®. Pequenas séries, produção própria e relação direta com cada parceiro.</p>
-        <a class="btn btn--primary" href="#explorar">Ver o que a Maison oferece</a>
+        <h2 class="profissionais__title">Queres a Maison no teu espaço?</h2>
+        <p class="profissionais__text">Lojas, spas, gabinetes e outros espaços podem trabalhar connosco através de selecção de produtos, pequenas séries e projectos adequados ao contexto profissional. Falamos directamente contigo e percebemos primeiro se faz sentido para os dois lados.</p>
+        <a class="btn btn--primary" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Tenho%20um%20espa%C3%A7o%20profissional%20e%20quero%20falar%20sobre%20uma%20poss%C3%ADvel%20parceria." target="_blank" rel="noopener">Falar de parceria</a>
       </div>
-
-      <div class="profissionais__visual reveal">
-        <div class="profissionais__visual-placeholder profissionais__visual-photo" aria-hidden="true"></div>
-      </div>
+      <div class="profissionais__visual reveal"><div class="profissionais__visual-placeholder profissionais__visual-photo" aria-hidden="true"></div></div>
     </div>
   </section>
 
-  <!-- FECHO -->
   <section class="fecho" id="fecho" aria-label="Próximo passo">
     <div class="fecho__inner reveal">
-      <h2 class="fecho__title">Agora escolhe o próximo passo.</h2>
-      <p class="fecho__text">Se já sabes o que queres, vai direto à Maison. Se ainda estás a tentar perceber, o Farol começa pela situação que estás a viver e leva-te até três passos.</p>
+      <h2 class="fecho__title">Já chegaste até aqui. Não voltes a ignorar.</h2>
+      <p class="fecho__text">Se já sabes o que queres, escolhe. Se ainda não sabes, usa o Farol. E se nenhuma opção encaixa no que estás a viver, fala connosco. A Maison existe para encontrar a solução certa, não para te vender a errada.</p>
       <div class="fecho__ctas">
         <a href="#farol" class="btn btn--primary">Seguir o Farol</a>
-        <a href="#explorar" class="btn btn--secondary">Explorar a Maison</a>
+        <a href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Cheguei%20ao%20fim%20do%20site%20e%20ainda%20n%C3%A3o%20sei%20qual%20%C3%A9%20a%20melhor%20op%C3%A7%C3%A3o%20para%20mim." class="btn btn--secondary" target="_blank" rel="noopener">Falar com a Maison</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <section class="share" aria-label="Partilhar a Maison">
+    <div class="share__inner reveal">
+      <p class="explorar__label">Divulgação</p>
+      <h2 class="share__title">A Maison fez sentido para ti?</h2>
+      <p class="share__text">Então provavelmente conheces alguém que anda a ignorar qualquer coisa também.</p>
+      <a class="btn btn--secondary" href="https://wa.me/?text=Olha%20isto.%20Acho%20que%20a%20MAISON%20JF%C2%AE%20te%20pode%20interessar%3A%20https%3A%2F%2Fmaison-jf.com%2F" target="_blank" rel="noopener">Partilhar no WhatsApp</a>
+    </div>
+  </section>
+
   <footer class="footer" role="contentinfo">
     <div class="footer__inner">
       <div class="footer__top">
         <div class="footer__brand">
           <p class="footer__logo">MAISON JF<sup>®</sup></p>
-          <p class="footer__tagline">Casa · Corpo · Cabeça. Produtos, orientação e serviços para o que queres mudar.</p>
+          <p class="footer__tagline">Casa · Corpo · Cabeça. Produtos, orientação e serviços para aquilo que queres mudar.</p>
           <p class="footer__registration">Marca registada da União Europeia · EUIPO.</p>
         </div>
-
         <div class="footer__column">
           <p class="footer__column-title">Navegar</p>
           <ul class="footer__links">
             <li><a href="#farol" class="footer__link">O Farol</a></li>
-            <li><a href="#explorar" class="footer__link">Explorar</a></li>
-            <li><a href="#profissionais" class="footer__link">Para Profissionais</a></li>
+            <li><a href="#explorar" class="footer__link">Produtos</a></li>
+            <li><a href="#servicos" class="footer__link">Serviços</a></li>
+            <li><a href="#profissionais" class="footer__link">Profissionais</a></li>
             <li><a href="#joao" class="footer__link">Sobre</a></li>
           </ul>
         </div>
-
         <div class="footer__column">
           <p class="footer__column-title">Legal</p>
           <ul class="footer__links">
@@ -420,48 +343,20 @@
             <li><span class="footer__link footer__link--pending">Termos e Condições</span></li>
           </ul>
         </div>
-
         <div class="footer__column">
           <p class="footer__column-title">Contacto</p>
           <ul class="footer__links">
-            <li><a href="#farol" class="footer__link">Seguir o Farol</a></li>
+            <li><a href="https://wa.me/351923318289" class="footer__link" target="_blank" rel="noopener">WhatsApp</a></li>
             <li><a href="#profissionais" class="footer__link">Parcerias profissionais</a></li>
           </ul>
         </div>
       </div>
-
       <div class="footer__bottom">
         <p class="footer__copyright">© 2026 MAISON JF®. Todos os direitos reservados.</p>
-        <div class="footer__socials">
-          <span class="footer__social footer__social--pending" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-            </svg>
-          </span>
-          <span class="footer__social footer__social--pending" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-            </svg>
-          </span>
-          <span class="footer__social footer__social--pending" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.35z"/>
-              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
-            </svg>
-          </span>
-          <span class="footer__social footer__social--pending" aria-label="TikTok">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
-            </svg>
-          </span>
-        </div>
       </div>
     </div>
   </footer>
 
-  <!-- SCRIPTS -->
   <script src="farol.js"></script>
   <script src="main.js"></script>
 </body>
