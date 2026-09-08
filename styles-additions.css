@@ -396,3 +396,11 @@
   .detail-title { font-size: clamp(2.8rem,14vw,4.4rem); }
   .detail-section { padding-left: 1rem; padding-right: 1rem; }
 }
+
+/* CTA nas Transformações: o reconhecimento precisa de saída concreta. */
+.transformacao-card__cta {
+  margin-top: 1.35rem;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}

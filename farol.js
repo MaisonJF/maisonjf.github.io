@@ -1,6 +1,5 @@
 /**
  * MAISON JF® | O Farol
- * Dor -> dor humana -> acolhimento -> solução Maison
  */
 (function() {
   'use strict';
@@ -80,17 +79,17 @@
     },
 
     results: {
-      decisao_voltas: result('Já não é só uma decisão. É começares a desconfiar de ti.', 'Percebo. Quando a mesma pergunta volta sempre, o que começa a doer é já não confiares na tua própria escolha. Uma Consulta pode ajudar a separar aquilo que sabes, aquilo que temes e aquilo que realmente queres, sem decidir por ti.', 'servicos.html#tarot', 'Ver Tarot e Consultas'),
-      decisao_medo: result('O que pesa já não são as opções. É o medo de seres tu a escolher.', 'Percebo. Quando qualquer escolha parece poder tornar-se num arrependimento, é fácil ficar parado. Podemos olhar para cenários, receios e aquilo que estás a evitar, sem escolher por ti.', 'servicos.html#tarot', 'Ver Orientação'),
+      decisao_voltas: result('Já fizeste a lista dos prós e contras. Continuas sem conseguir escolher.', 'Já tens informação. O que não tens é descanso. Uma Consulta pode ajudar-te a olhar para o que estás a evitar e para o que realmente queres, sem decidir por ti.', 'servicos.html#tarot', 'Ver Tarot e Consultas'),
+      decisao_medo: result('Sabes o que queres. O que te assusta é seres tu a carregar a consequência.', 'Quando imaginas todas as maneiras de a escolha correr mal, ficar parado parece mais seguro. Podemos olhar para cenários, receios e aquilo que estás a evitar, sem escolher por ti.', 'servicos.html#tarot', 'Ver Orientação'),
       decisao_urgente: result('Não queres uma tese. Queres desbloquear isto.', 'Se a questão é concreta e urgente, o Tarot Expresso foi pensado para perguntas pontuais. Se precisares de mais contexto, há formatos mais completos.', 'servicos.html#tarot', 'Ver Consultas'),
 
-      relacao_cabeca: result('Essa pessoa já não está só na tua vida. Está a ocupar-te por dentro.', 'Percebo. O pior às vezes nem é a pessoa: é não conseguires recuperar o espaço mental que ela continua a ocupar. Primeiro percebemos o que te prende ali. Depois vemos se precisas de uma Consulta ou de Acompanhamento.', 'servicos.html#tarot', 'Ver Orientação', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
-      relacao_decidir: result('Ficar, sair ou esperar não são a mesma decisão.', 'Vamos separar o que sentes, o que sabes e o que estás a imaginar. A Maison pode ajudar-te a olhar para a situação com mais estrutura, sem escolher por ti.', 'servicos.html#tarot', 'Ver Consultas'),
+      relacao_cabeca: result('Já não falas com essa pessoa o tempo todo. Mas falas com ela na tua cabeça.', 'Relees mensagens, refazes conversas e imaginas respostas que talvez nunca venham. Uma Consulta pode ajudar a perceber o que te prende ali; se isto já se arrasta, há Acompanhamento.', 'servicos.html#tarot', 'Ver Orientação', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
+      relacao_decidir: result('Ficar, sair ou esperar não são a mesma decisão.', 'Se qualquer escolha te parece perigosa, vais continuar parado. Uma Consulta ajuda-te a olhar para o que existe de facto, para o que temes e para o que queres, sem decidir por ti.', 'servicos.html#tarot', 'Ver Consultas'),
       relacao_entender: result('Às vezes o que mais cansa é não perceber.', 'Começa por uma Consulta focada na situação. Se o assunto já se arrasta e uma resposta isolada não chega, há Acompanhamento.', 'servicos.html#tarot', 'Ver Consultas', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
 
-      cansaco_corpo: result('O cansaço não é só físico quando já não sobra nada para ti.', 'Percebo. Passares o dia a dar e chegares ao fim sem energia sequer para ti começa a roubar mais do que descanso. Não tens de resolver tudo hoje. Podes começar com um Escalda-Pés, Óleo de Massagem ou, sob consulta, um Banho de Ervas.', 'produtos.html#corpo', 'Ver Produtos para o Corpo'),
-      cansaco_cabeca: result('Chegaste a casa. A tua cabeça ficou presa no dia.', 'Percebo. Quando não consegues sentir a passagem entre obrigação e descanso, a noite deixa de parecer tua. Uma mudança de aroma, luz ou ambiente pode ser o primeiro sinal de que acabou por hoje.', 'produtos.html', 'Ver Produtos'),
-      cansaco_demais: result('Se isto já vem de trás, uma pausa pode não chegar.', 'Podemos começar por perceber o que está a acumular e se precisas de acompanhamento continuado. Não tens de comprar um programa inteiro para fazer a primeira pergunta.', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
+      cansaco_corpo: result('Chegas ao fim do dia e já não tens nada para ti.', 'Quando até descansar parece esforço, não precisas de transformar a vida toda hoje. Podes começar com um Escalda-Pés, Óleo de Massagem ou, sob consulta, um Banho de Ervas.', 'produtos.html#escalda-pes', 'Ver Produtos para o Corpo'),
+      cansaco_cabeca: result('O corpo chegou a casa. A cabeça ainda está lá.', 'Se ainda estás a responder mentalmente à conversa, ao trabalho ou ao problema, a noite nunca começou verdadeiramente. Aroma, luz e ambiente podem ajudar a marcar esse corte.', 'produtos.html#brumas', 'Ver Produtos'),
+      cansaco_demais: result('Se isto já vem de trás, uma pausa pode não chegar.', 'Se acordas cansado antes de o dia começar, isto já não é só o cansaço de hoje. Podes começar por uma conversa e perceber se precisas de continuidade.', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
 
       casa_cheiro: result('Óptimo. Então não compliquemos.', 'Bruma para mudar o ar depressa, água de lençóis para o quarto ou, em breve, uma nova Vela Aromática de Outono. Escolhe pelo uso, não pelo nome mais bonito.', 'produtos.html', 'Ver Produtos'),
       casa_parar: result('Queres que a casa te diga: acabou por hoje.', 'Uma bruma, uma água de lençóis ou um Escalda-Pés podem ajudar a criar esse marco. E as novas Velas Aromáticas chegam com a edição de Outono.', 'produtos.html', 'Ver Produtos'),
@@ -100,8 +99,8 @@
       aprender_astrologia: result('Queres perceber o mapa, não decorar signos.', 'Há Relatórios, Análises e Trabalho de Astrologia para aprofundar uma questão concreta ou um mapa maior.', 'servicos.html', 'Ver Serviços'),
       aprender_outra: result('Ainda não tens de saber dar-lhe um nome.', 'Vê os serviços e, se nada encaixar, fala com a Maison. Primeiro percebemos o que procuras. Depois vemos se existe uma solução real.', 'servicos.html', 'Explorar Serviços'),
 
-      companhia_evento: result('Não é falta de vontade. É estares cansado de desistir por não teres com quem ir.', 'Percebo. Quando começas a perder experiências que querias viver só porque não tens companhia, a tua vida fica mais pequena. A Companhia pode acompanhar-te em eventos, jantares e outros compromissos sociais, sem romance nem ambiguidades.', 'companhia.html', 'Ver Companhia'),
-      companhia_sair: result('Queres sair. O que dói é perderes a vontade quando percebes que vais sozinho.', 'Percebo. Não tens de transformar isso numa relação para ter alguém ao lado. A Companhia existe para passeios, cinema, refeições e outras actividades simples.', 'companhia.html', 'Ver Companhia'),
+      companhia_evento: result('Já tens o convite. O que ainda não tens é vontade de chegar sozinho.', 'Se já pensaste em inventar uma desculpa só para não aparecer sozinho, a Companhia pode acompanhar-te em Eventos, Jantares e outros Compromissos Sociais, sem romance nem ambiguidades.', 'companhia.html', 'Ver Companhia'),
+      companhia_sair: result('Queres ir. Mas já estás a inventar razões para ficar em casa.', 'Não tens de transformar companhia numa relação para ter alguém ao lado. A Companhia existe para Passeios, Cinema, Refeições e outras Actividades simples.', 'companhia.html', 'Ver Companhia'),
       companhia_falar: result('Queres presença. Não uma história complicada.', 'Companhia, conversa e uma actividade combinada. Sem transformar isso noutra coisa.', 'companhia.html', 'Ver Companhia'),
 
       presente_qualquer: result('Então não ofereças uma coisa qualquer.', 'Escolhe pelo que a pessoa vai usar: casa, corpo, aroma ou pausa. Se não souberes, diz-nos para quem é e ajudamos-te a reduzir as opções.', 'produtos.html', 'Ver Produtos'),
