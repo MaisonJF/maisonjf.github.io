@@ -138,7 +138,7 @@
   // ============================================================
   const maisonMark = document.querySelector('.joao__visual-monogram');
   if (maisonMark) {
-    maisonMark.style.backgroundImage = "url('maison-jf-farol.jpg')";
+    maisonMark.style.backgroundImage = "url('maison-jf-mark.svg')";
     maisonMark.style.backgroundSize = 'contain';
     maisonMark.style.backgroundPosition = 'center';
     maisonMark.style.backgroundRepeat = 'no-repeat';
