@@ -22,6 +22,9 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
+User-agent: Applebot-Extended
+Allow: /
+
 User-agent: DuckDuckBot
 Allow: /
 
