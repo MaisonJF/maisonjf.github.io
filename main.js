@@ -129,6 +129,22 @@
   }
 
   // ============================================================
+  // IDENTIDADE VISUAL | SÍMBOLO JF + FAROL NA SECÇÃO SOBRE
+  // ============================================================
+  const maisonMark = document.querySelector('.joao__visual-monogram');
+  if (maisonMark) {
+    maisonMark.style.backgroundImage = "url('maison-jf-farol.jpg')";
+    maisonMark.style.backgroundSize = 'cover';
+    maisonMark.style.backgroundPosition = 'center';
+    maisonMark.style.backgroundRepeat = 'no-repeat';
+    maisonMark.style.border = '1px solid rgba(196,162,101,.24)';
+
+    maisonMark.querySelectorAll('.joao__visual-initials, .joao__visual-label').forEach(el => {
+      el.style.display = 'none';
+    });
+  }
+
+  // ============================================================
   // CONSOLE
   // ============================================================
   console.log('%cMAISON JF®', 'font-family: Cormorant Garamond, serif; font-size: 22px; color: #c4a265;');
