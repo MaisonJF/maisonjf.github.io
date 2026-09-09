@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">MAISON JF®</title>
+  <desc id="desc">Monograma JF dourado com farol sobre fundo preto.</desc>
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5d889"/>
+      <stop offset=".32" stop-color="#c99b38"/>
+      <stop offset=".6" stop-color="#fff0b5"/>
+      <stop offset="1" stop-color="#a87818"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="42%">
+      <stop offset="0" stop-color="#e5b64d" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#e5b64d" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="640" height="640" rx="72" fill="#050505"/>
+  <rect x="48" y="48" width="544" height="544" rx="62" fill="none" stroke="url(#gold)" stroke-width="4"/>
+  <ellipse cx="320" cy="250" rx="220" ry="155" fill="url(#glow)"/>
+  <g fill="url(#gold)" font-family="Georgia, 'Times New Roman', serif" font-weight="400">
+    <text x="106" y="478" font-size="430" font-style="italic">J</text>
+    <text x="300" y="370" font-size="310">F</text>
+  </g>
+  <g stroke="url(#gold)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M320 204 L292 430 M320 204 L348 430" stroke-width="7"/>
+    <path d="M289 430 H351" stroke-width="8"/>
+    <path d="M298 274 H342" stroke-width="6"/>
+    <rect x="299" y="222" width="42" height="42" rx="3" stroke-width="6"/>
+    <path d="M296 222 H344 L320 202 Z" fill="url(#gold)" stroke-width="4"/>
+    <path d="M320 191 V203" stroke-width="5"/>
+    <path d="M310 240 H330" stroke-width="4"/>
+  </g>
+  <g fill="#ddb14f" opacity=".22" filter="url(#soft)">
+    <path d="M299 235 L92 178 L299 254 Z"/>
+    <path d="M341 235 L548 178 L341 254 Z"/>
+  </g>
+  <g fill="#e8bd5a" opacity=".38">
+    <path d="M301 238 L102 194 L301 250 Z"/>
+    <path d="M339 238 L538 194 L339 250 Z"/>
+  </g>
+</svg>
