@@ -228,6 +228,8 @@
     root.querySelectorAll('a[href*="wa.me/"]').forEach(link => {
       link.dataset.conversion = 'whatsapp';
       link.setAttribute('aria-label', `${link.textContent.trim()} — abre o WhatsApp`);
+      if (link.dataset.conversionBound === '1') return;
+      link.dataset.conversionBound = '1';
       link.addEventListener('click', () => rememberIntent('whatsapp'), { once: true });
     });
   }
@@ -251,6 +253,16 @@
       whatsapp.textContent = 'Prefiro falar com a Maison no WhatsApp →';
       whatsapp.addEventListener('click', () => rememberIntent('farol-whatsapp'));
       actions.insertAdjacentElement('afterend', whatsapp);
+      resultBox.dataset.conversionEnhanced = '1';
+
+      if (isTouchDevice) {
+        window.setTimeout(() => {
+          resultBox.scrollIntoView({
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            block: 'center'
+          });
+        }, 80);
+      }
     });
   }
 
