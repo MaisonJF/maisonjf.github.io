@@ -12,12 +12,36 @@ jobs:
   notify-indexnow:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Wait for Cloudflare Pages deployment
         run: sleep 90
-      - name: Notify IndexNow
+      - name: Notify IndexNow from sitemap
         shell: bash
         run: |
-          curl --fail-with-body --retry 3 --retry-delay 10 \
-            -H "Content-Type: application/json; charset=utf-8" \
-            -d '{"host":"maison-jf.com","key":"2e7132dc5767b64308add20a2790e2b6","keyLocation":"https://maison-jf.com/2e7132dc5767b64308add20a2790e2b6.txt","urlList":["https://maison-jf.com/", "https://maison-jf.com/produtos.html", "https://maison-jf.com/servicos.html", "https://maison-jf.com/companhia.html", "https://maison-jf.com/maison-todo-o-mes.html", "https://maison-jf.com/editions.html", "https://maison-jf.com/profissionais.html", "https://maison-jf.com/farol.html"]}' \
-            https://api.indexnow.org/indexnow
+          python3 - <<'PY'
+          import json
+          import urllib.request
+          import xml.etree.ElementTree as ET
+
+          root = ET.parse('sitemap.xml').getroot()
+          ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+          urls = [el.text.strip() for el in root.findall('sm:url/sm:loc', ns) if el.text]
+
+          payload = {
+              'host': 'maison-jf.com',
+              'key': '2e7132dc5767b64308add20a2790e2b6',
+              'keyLocation': 'https://maison-jf.com/2e7132dc5767b64308add20a2790e2b6.txt',
+              'urlList': urls,
+          }
+          data = json.dumps(payload).encode('utf-8')
+          req = urllib.request.Request(
+              'https://api.indexnow.org/indexnow',
+              data=data,
+              headers={'Content-Type': 'application/json; charset=utf-8'},
+              method='POST',
+          )
+          with urllib.request.urlopen(req, timeout=30) as response:
+              print('IndexNow status:', response.status)
+              print('URLs submitted:', len(urls))
+          PY
