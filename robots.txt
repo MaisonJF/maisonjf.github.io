@@ -25,4 +25,4 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-Sitemap: https://maisonjf.github.io/sitemap.xml
+Sitemap: https://maison-jf.com/sitemap.xml
