@@ -3,16 +3,16 @@
 > MAISON JF® é uma marca portuguesa com Produtos para Casa e Corpo, Tarot, Escuta Orientada, Acompanhamento, Companhia, Ebooks e propostas para Profissionais.
 
 ## O Farol
-- https://maisonjf.github.io/farol.html
+- https://maison-jf.com/farol.html
 - O ponto de orientação da MAISON JF® para quem sabe o que está a incomodar, mas ainda não sabe que Produto ou Serviço procurar.
 - Começa por situações reais: decisão difícil, alguém que não sai da cabeça, cansaço, dificuldade em desligar em casa, vontade de aprender, falta de companhia para sair, vontade de proximidade afectiva ou procura de um presente.
 - Encaminha para Produtos, Serviços, Companhia e outras propostas da Maison sem exigir que a pessoa conheça previamente as categorias.
 
 ## Página Principal
-- https://maisonjf.github.io/
+- https://maison-jf.com/
 
 ## Produtos
-- https://maisonjf.github.io/produtos.html
+- https://maison-jf.com/produtos.html
 - Brumas de Ambiente
 - Escalda-Pés
 - Óleo de Massagem
@@ -21,7 +21,7 @@
 - Peças Decorativas em Jesmonite, Cristais e Pulseiras sob consulta
 
 ## Serviços
-- https://maisonjf.github.io/servicos.html
+- https://maison-jf.com/servicos.html
 - Tarot e Consultas
 - Escuta Orientada
 - Acompanhamento Permanente
@@ -36,7 +36,7 @@
 - Banho de Ervas
 
 ## Companhia
-- https://maisonjf.github.io/companhia.html
+- https://maison-jf.com/companhia.html
 - Dois formatos: Friend4Rent para Companhia sem romance; Boyfriend4Rent para Companhia com proximidade afectiva e romance leve.
 - Boyfriend4Rent pode incluir dar a mão, abraços, carinho leve e beijos leves previamente combinados. Não inclui sexo, nudez, contacto sexual ou Serviços Sexuais.
 - Reserva mínima: 2 horas. Pagamento antecipado. Quem contrata suporta as despesas relacionadas com o encontro e a deslocação de ida e regresso de quem presta o Serviço.
@@ -44,13 +44,13 @@
 - Ambos os formatos podem ser contratados por pessoas adultas de qualquer género.
 
 ## Maison Todo o Mês
-- https://maisonjf.github.io/maison-todo-o-mes.html
+- https://maison-jf.com/maison-todo-o-mes.html
 
 ## Ebooks
-- https://maisonjf.github.io/editions.html
+- https://maison-jf.com/editions.html
 
 ## Profissionais
-- https://maisonjf.github.io/profissionais.html
+- https://maison-jf.com/profissionais.html
 - Parcerias B2B para Lojas, Spas e Profissionais.
 
 ## Marca
