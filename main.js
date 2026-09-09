@@ -139,10 +139,14 @@
   const maisonMark = document.querySelector('.joao__visual-monogram');
   if (maisonMark) {
     maisonMark.style.backgroundImage = "url('maison-jf-farol.jpg')";
-    maisonMark.style.backgroundSize = 'cover';
+    maisonMark.style.backgroundSize = 'contain';
     maisonMark.style.backgroundPosition = 'center';
     maisonMark.style.backgroundRepeat = 'no-repeat';
+    maisonMark.style.backgroundColor = '#080808';
     maisonMark.style.border = '1px solid rgba(196,162,101,.24)';
+    maisonMark.removeAttribute('aria-hidden');
+    maisonMark.setAttribute('role', 'img');
+    maisonMark.setAttribute('aria-label', 'Símbolo MAISON JF® — monograma JF com Farol');
 
     maisonMark.querySelectorAll('.joao__visual-initials, .joao__visual-label').forEach(el => {
       el.style.display = 'none';
@@ -303,9 +307,9 @@
       trust.setAttribute('aria-label', 'Confiança MAISON JF');
       trust.innerHTML = `
         <div class="conversion-trust__inner">
-          <span class="conversion-trust__item">Marca registada na União Europeia</span>
-          <span class="conversion-trust__item">Contacto direto com a Maison</span>
-          <span class="conversion-trust__item">O Farol ajuda-te a escolher</span>
+          <a class="conversion-trust__item" href="index.html#joao" style="color:inherit;text-decoration:none">Marca registada na União Europeia</a>
+          <a class="conversion-trust__item" href="${waUrl('Olá Maison JF. Vim do site e quero falar diretamente com a Maison.')}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">Contacto direto com a Maison</a>
+          <a class="conversion-trust__item" href="farol.html" style="color:inherit;text-decoration:none">O Farol ajuda-te a escolher</a>
         </div>`;
       hero.insertAdjacentElement('afterend', trust);
     }
