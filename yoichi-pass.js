@@ -145,7 +145,7 @@
 
       const bio = joaoContent.querySelector('.joao__text');
       if (bio) {
-        bio.innerHTML = 'Há coisas que não se aprendem a decorar. Aprendem-se quando alguém se senta à tua frente e a vida está a cair-lhe em cima.<br><br>Há 32 anos que trabalho com Tarot e atendimento de pessoas. Sou <strong>Técnico Psicossocial</strong> e <strong>Técnico de Apoio à Vítima</strong>, e trabalhei numa casa de abrigo com vítimas de violência doméstica — um contexto onde ouvir mal, julgar depressa ou ignorar um sinal pode ter consequências reais.<br><br>É daí que vem a forma como trabalho na Maison: não te encaixo numa fórmula e não te vendo a primeira solução que tenho à mão. Primeiro percebo o que está mesmo a acontecer. Depois vemos o que faz sentido fazer.';
+        bio.innerHTML = 'Há coisas que não se aprendem a decorar. Aprendem-se quando alguém se senta à tua frente e a vida está a cair-lhe em cima.<br><br>Há 32 anos que trabalho com Tarot e atendimento de pessoas. Sou <strong>Técnico Psicossocial</strong> e <strong>Técnico de Apoio à Vítima</strong>. Trabalhei numa <strong>Casa Abrigo para Vítimas de Violência Doméstica</strong>. Eu sei bem o que é receber alguém quando está por um fio, no limite — quando ouvir mal, julgar depressa ou ignorar um sinal pode ter consequências reais.<br><br>É daí que vem a forma como trabalho na Maison. Não te encaixo numa fórmula e não te vendo a primeira solução que tenho à mão. <strong>Primeiro percebo o que está mesmo a acontecer. Depois vemos o que faz sentido fazer.</strong>';
       }
 
       const proof = joaoContent.querySelector('.yoichi-founder-proof');
