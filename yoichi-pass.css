@@ -89,7 +89,10 @@
     padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
   }
 
-  .hero,
+  .hero {
+    min-height: 88svh;
+  }
+
   .detail-hero {
     min-height: auto;
   }
@@ -109,6 +112,11 @@
   .footer__inner {
     padding-left: 1.15rem;
     padding-right: 1.15rem;
+  }
+
+  .hero__content {
+    padding-top: 7rem;
+    padding-bottom: 4.5rem;
   }
 
   .detail-hero {
