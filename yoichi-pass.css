@@ -1,26 +1,17 @@
-/* MAISON JF® — Yoichi conversion & architecture pass · 2026-09-10 */
+/* MAISON JF® | passe final de ritmo e mobile | 2026-09-10 */
 
-/* O nudge competia com o Farol, com os CTAs das páginas e com o botão flutuante. */
 .conversion-nudge {
   display: none !important;
 }
 
-/* Seis entradas no menu, sem perder o ar editorial da Maison. */
-@media (min-width: 981px) {
-  .header__nav-list {
-    gap: clamp(1.35rem, 2.4vw, 3rem);
-  }
-
-  .header__nav-link {
-    white-space: nowrap;
-  }
-}
-
 .yoichi-practical-note {
-  margin-top: 1.5rem;
-  max-width: 58rem;
+  margin-top: 1.25rem;
+  max-width: 62rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(196, 162, 101, 0.18);
+  color: var(--marfim-dim, #b8aa98);
+  font-size: 0.88rem;
+  line-height: 1.65;
 }
 
 .yoichi-secondary-services .detail-section__title {
@@ -28,84 +19,310 @@
 }
 
 .yoichi-secondary-services .offer-card {
-  opacity: 0.94;
+  opacity: 0.96;
 }
 
-/* B2B: o CTA deve parecer uma porta de entrada, não um pedido de orçamento pesado. */
-body[data-yoichi-page="profissionais.html"] .yoichi-b2b-cta {
-  margin-top: 1.5rem;
+.footer__link:not(a) {
+  cursor: default;
 }
 
-/* Ajuda o segundo bloco da homepage a ser percebido como mapa da Maison, não outro teste. */
-body[data-yoichi-page="index.html"] #transformacoes .transformacoes__header {
-  max-width: 920px;
-  margin-left: auto;
-  margin-right: auto;
+@media (min-width: 981px) {
+  .header__nav-list {
+    gap: clamp(1.25rem, 2.1vw, 2.6rem);
+  }
+
+  .header__nav-link {
+    white-space: nowrap;
+  }
 }
 
-body[data-yoichi-page="index.html"] #transformacoes .transformacoes__subtitle {
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Ritmo editorial: nas capturas desktop havia demasiado vazio entre ideia e acção. */
 @media (min-width: 769px) {
   body[data-yoichi-page="index.html"] #farol {
-    padding-top: clamp(6rem, 8vw, 8rem);
-    padding-bottom: clamp(6rem, 8vw, 8rem);
+    padding-top: clamp(5.5rem, 7vw, 7.5rem);
+    padding-bottom: clamp(5.5rem, 7vw, 7.5rem);
   }
 
   body[data-yoichi-page="index.html"] #farol .farol__header {
-    margin-bottom: clamp(3rem, 4vw, 4.5rem);
+    margin-bottom: clamp(2.5rem, 3.5vw, 3.75rem);
   }
 
-  body[data-yoichi-page="index.html"] #farol .farol__progress {
-    margin-bottom: clamp(2.25rem, 3vw, 3.25rem);
-  }
-
-  body[data-yoichi-page="index.html"] #transformacoes {
-    padding-top: clamp(7rem, 8vw, 9rem);
-    padding-bottom: clamp(7rem, 8vw, 9rem);
+  body[data-yoichi-page="index.html"] #transformacoes,
+  body[data-yoichi-page="index.html"] #servicos,
+  body[data-yoichi-page="index.html"] #joao {
+    padding-top: clamp(6rem, 7vw, 8rem);
+    padding-bottom: clamp(6rem, 7vw, 8rem);
   }
 
   body[data-yoichi-page="index.html"] #transformacoes .transformacoes__header {
-    margin-bottom: clamp(4rem, 5vw, 5.5rem);
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: clamp(3rem, 4vw, 4.5rem);
   }
 
-  body[data-yoichi-page="index.html"] #servicos {
-    padding-top: clamp(7rem, 8vw, 9rem);
-    padding-bottom: clamp(7rem, 8vw, 9rem);
-  }
-
-  body[data-yoichi-page="index.html"] #joao {
-    padding-top: clamp(7rem, 8vw, 9rem);
-    padding-bottom: clamp(7rem, 8vw, 9rem);
+  body[data-yoichi-page="index.html"] #transformacoes .transformacoes__subtitle {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   body[data-yoichi-page="index.html"] #joao .joao__inner {
     max-width: 1080px;
-    gap: clamp(4rem, 6vw, 7rem);
+    gap: clamp(3.5rem, 5vw, 6rem);
   }
 
   body[data-yoichi-page="index.html"] #joao .joao__visual {
     width: 100%;
-    max-width: 420px;
+    max-width: 400px;
     justify-self: end;
   }
 }
 
-/* A credibilidade do fundador deve ler-se como assinatura, não como outro cartão comercial. */
-.yoichi-founder-proof {
-  margin-top: 1.5rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid rgba(196, 162, 101, 0.18);
-  color: var(--marfim-dim);
-  font-size: 0.82rem;
-  line-height: 1.7;
+/* Mobile: menos texto por ecrã, mais ar, acções fáceis de tocar. */
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  body.has-conversion-bar {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .hero,
+  .detail-hero {
+    min-height: auto;
+  }
+
+  .hero__content,
+  .detail-hero__inner,
+  .detail-section__inner,
+  .farol__header,
+  .farol__container,
+  .transformacoes__header,
+  .transformacoes__grid,
+  .services__inner,
+  .explorar__inner,
+  .continuity__inner,
+  .joao__inner,
+  .profissionais__inner,
+  .footer__inner {
+    padding-left: 1.15rem;
+    padding-right: 1.15rem;
+  }
+
+  .detail-hero {
+    padding-top: 7rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .detail-title {
+    font-size: clamp(2.45rem, 11.5vw, 3.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .detail-lead {
+    max-width: 34rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .detail-section {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .detail-section__title {
+    font-size: clamp(2rem, 9vw, 3rem);
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  .detail-copy,
+  .offer-card p,
+  .service-card__lead,
+  .catalogue-card__pain,
+  .transformacao-card__desc,
+  .joao__text {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .detail-grid,
+  .services__grid,
+  .transformacoes__grid {
+    gap: 1rem;
+  }
+
+  .offer-card,
+  .service-card,
+  .catalogue-card {
+    padding: 1.35rem;
+  }
+
+  .detail-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .detail-actions .btn,
+  .offer-card .btn,
+  .service-card .btn,
+  .catalogue-card .btn,
+  .profissionais__inner .btn {
+    width: 100%;
+    min-height: 3.1rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .conversion-trust__inner {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    padding: 0 !important;
+  }
+
+  .conversion-trust__item {
+    display: block;
+    padding: 0.72rem 1.15rem !important;
+    text-align: left;
+    border-right: 0 !important;
+    border-bottom: 1px solid rgba(196, 162, 101, 0.12);
+  }
+
+  .conversion-float {
+    display: none !important;
+  }
+
+  .conversion-bar {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .conversion-bar__link {
+    min-height: 3.25rem;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    padding: 0.8rem 0.65rem;
+  }
+
+  .farol {
+    padding-top: 4.75rem;
+    padding-bottom: 4.75rem;
+  }
+
+  .farol__header {
+    margin-bottom: 2rem;
+  }
+
+  .farol__title {
+    font-size: clamp(2rem, 9.5vw, 3rem);
+    line-height: 1.02;
+  }
+
+  .farol__subtitle {
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .farol__option {
+    min-height: 4.25rem;
+    padding: 1rem 0;
+  }
+
+  .farol__option-text {
+    font-size: 0.98rem;
+    line-height: 1.4;
+    padding-right: 0.75rem;
+  }
+
+  .transformacoes,
+  .services,
+  .explorar,
+  .continuity,
+  .joao,
+  .profissionais {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .transformacoes__header,
+  .services__header,
+  .explorar__header {
+    margin-bottom: 2.5rem;
+  }
+
+  .transformacao-card__content {
+    padding: 1.35rem;
+  }
+
+  .joao__inner {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+
+  .joao__visual {
+    max-width: 300px !important;
+    margin: 0 auto;
+  }
+
+  .joao__text br + br {
+    display: block;
+    content: "";
+    margin-top: 0.35rem;
+  }
+
+  .footer__top {
+    gap: 2.5rem;
+  }
 }
 
-.yoichi-founder-proof strong {
-  color: var(--marfim-escuro);
-  font-weight: 400;
+@media (max-width: 430px) {
+  .hero__content {
+    padding-top: 7rem;
+    padding-bottom: 4rem;
+  }
+
+  .hero__title--primary {
+    font-size: clamp(3rem, 16vw, 4.8rem);
+    line-height: 0.86;
+  }
+
+  .hero__title--secondary {
+    font-size: clamp(1.85rem, 9.5vw, 2.7rem);
+  }
+
+  .hero__question {
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .hero__ctas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .hero__ctas .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .detail-title,
+  .detail-section__title,
+  .farol__title {
+    overflow-wrap: anywhere;
+  }
+
+  .offer-card,
+  .service-card,
+  .catalogue-card,
+  .transformacao-card__content {
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+  }
 }
