@@ -204,6 +204,11 @@
       rewriteCard(servicesGrid, 'Astrologia, Numerologia e Outras Terapias Complementares', 'Há perguntas que pedem outra lente. Primeiro percebemos a questão. Depois escolhemos a ferramenta.');
       rewriteCard(servicesGrid, 'Defumações, Limpeza Energética e Abertura de Caminhos', 'Há momentos em que queres marcar uma mudança de forma simbólica. Fazemo-lo sem promessas impossíveis.');
 
+      const astroCard = cardByTitle(servicesGrid, 'Astrologia, Numerologia e Outras Terapias Complementares');
+      if (astroCard) setText('.service-card__title', 'Astrologia e Numerologia', astroCard);
+      const spiritualCard = cardByTitle(servicesGrid, 'Defumações, Limpeza Energética e Abertura de Caminhos');
+      if (spiritualCard) setText('.service-card__title', 'Trabalhos Espirituais', spiritualCard);
+
       $$('.service-card', servicesGrid).forEach(card => {
         const title = $('.service-card__title', card)?.textContent.trim() || '';
         if (title === 'Companhia') setText('.service-card__eyebrow', 'Não quero desistir do plano', card);
@@ -236,6 +241,18 @@
       const cta = $('.btn', b2b);
       if (cta) cta.textContent = 'Ver condições profissionais';
     }
+
+    const close = $('.fecho');
+    if (close) {
+      setText('.fecho__title', 'Chegaste até aqui. O que te trouxe ainda está à espera de resposta.', close);
+      setText('.fecho__text', 'Se já sabes o que queres, escolhe. Se não sabes, usa o Farol. Se nada encaixar, fala connosco.', close);
+    }
+
+    const share = $('.share');
+    if (share) {
+      setText('.share__title', 'Conheces alguém que anda a adiar a mesma coisa?', share);
+      setText('.share__text', 'Manda-lhe a Maison. O resto é com essa pessoa.', share);
+    }
   }
 
   /* FAROL */
@@ -247,6 +264,9 @@
 
     const companhiaOption = $('#farolStep1 [data-farol="companhia"] .farol__option-text');
     if (companhiaOption) companhiaOption.textContent = 'Quero ir. Só não quero ir sem companhia.';
+
+    const repeatedSituations = document.getElementById('quando-seguir');
+    if (repeatedSituations) repeatedSituations.remove();
 
     const about = document.getElementById('sobre-o-farol');
     if (about) {
@@ -316,6 +336,9 @@
       setText('.detail-kicker', 'Outras lentes', astrologia);
       setText('.detail-section__title', 'Nem toda a pergunta precisa de caber no Tarot.', astrologia);
       setText('.detail-copy', 'Primeiro percebemos a questão. Se outra abordagem fizer mais sentido, usamos essa.', astrologia);
+      rewriteCard(astrologia, 'Análises e Relatórios de Astrologia', 'Queres aprofundar um mapa ou uma questão concreta. O trabalho é preparado para esse pedido.');
+      rewriteCard(astrologia, 'Numerologia', 'Uma análise focada no tema que queres perceber.');
+      rewriteCard(astrologia, 'Outras Terapias Complementares', 'Só propomos outra abordagem quando houver uma opção real dentro da Maison.');
     }
 
     const espiritual = document.getElementById('espiritual');
@@ -323,6 +346,10 @@
       espiritual.classList.add('yoichi-secondary-services');
       setText('.detail-section__title', 'Há alturas em que queres marcar uma mudança.', espiritual);
       setText('.detail-copy', 'Os trabalhos espirituais da Maison são simbólicos e rituais. Ouvimos o pedido primeiro. Sem promessas de resultado.', espiritual);
+      rewriteCard(espiritual, 'Defumações', 'Quando queres marcar um espaço ou momento com um ritual mais forte do que apenas perfumar.');
+      rewriteCard(espiritual, 'Limpeza Energética', 'Trabalho simbólico para casa, espaço ou situação.');
+      rewriteCard(espiritual, 'Abertura de Caminhos', 'Intenção, mudança e movimento. Sem promessa de resultado.');
+      rewriteCard(espiritual, 'Banho de Ervas', 'Preparação ritual sob consulta, conforme o objectivo.');
     }
 
     const especiais = document.getElementById('sob-consulta');
@@ -370,7 +397,14 @@
     }
 
     const limites = document.getElementById('limites');
-    if (limites) setText('.detail-section__title', 'Proximidade não significa ambiguidade.', limites);
+    if (limites) {
+      setText('.detail-section__title', 'Proximidade não significa ambiguidade.', limites);
+      rewriteCard(limites, 'Friend4Rent', 'Companhia sem romance. Sem componente sexual.');
+      rewriteCard(limites, 'Boyfriend4Rent', 'Proximidade e romance leve dentro do que ficou combinado. Sem sexo, nudez ou contacto sexual.');
+      rewriteCard(limites, 'Não é Acompanhamento Permanente', 'É presença social ou afectiva. Não substitui cuidados psicológicos, médicos ou sociais especializados.');
+      rewriteCard(limites, 'Queres Juntar Acompanhamento?', 'Podes juntar Escuta ou Acompanhamento se ficar combinado antes, com valor separado.');
+      rewriteCard(limites, 'O Âmbito Não Muda Durante a Reserva', 'Nada de extras sexuais ou mudanças de âmbito durante o encontro.');
+    }
 
     const reserve = $$('.detail-section').find(section =>
       $('.detail-kicker', section)?.textContent.trim() === 'Reserva'
