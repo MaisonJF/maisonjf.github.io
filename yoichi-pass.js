@@ -138,11 +138,11 @@
       });
     }
 
-    /* Fundador: mostrar autoridade real, não uma versão genérica do percurso. */
+    /* Fundador: autoridade factual, experiência longa e contacto real com pessoas em crise. */
     const joaoContent = document.querySelector('#joao .joao__content');
     if (joaoContent) {
       setText('.joao__role', 'Fundador da Maison JF® · Tarólogo · Técnico Psicossocial · Técnico de Apoio à Vítima', joaoContent);
-      setText('.joao__text', 'Há 32 anos que trabalho com Tarot e com pessoas. Antes de existir um serviço, existe alguém com uma dúvida, uma mudança, uma crise, uma decisão ou simplesmente alguma coisa que já ocupa espaço demais. Na Maison, junto essa experiência à escuta e ao acompanhamento para perceber primeiro — e só depois propor.', joaoContent);
+      setText('.joao__text', 'Há 32 anos que trabalho com Tarot e com pessoas — não apenas em consulta, mas também em contextos onde não há espaço para respostas vazias. Trabalhei em casa de abrigo com vítimas de violência doméstica, acompanhando pessoas em momentos de crise, ruptura, medo e reconstrução. Essa experiência ensinou-me a ouvir com atenção, a perceber contexto, risco e limites, e a distinguir quando alguém precisa de orientação, presença ou encaminhamento. É essa exigência que trago para a Maison.', joaoContent);
 
       let proof = joaoContent.querySelector('.yoichi-founder-proof');
       if (!proof) {
@@ -150,7 +150,7 @@
         proof.className = 'yoichi-founder-proof';
         joaoContent.appendChild(proof);
       }
-      proof.innerHTML = '<strong>32 anos de experiência com Tarot e atendimento de pessoas.</strong><br>Técnico Psicossocial · Técnico de Apoio à Vítima.<br>Experiência em acompanhamento residencial, comunitário e individual.';
+      proof.innerHTML = '<strong>32 anos de experiência com Tarot e atendimento de pessoas.</strong><br>Técnico Psicossocial · Técnico de Apoio à Vítima.<br>Experiência em casa de abrigo para vítimas de violência doméstica e no acompanhamento de pessoas em situações de crise e elevada vulnerabilidade.';
     }
   }
 
