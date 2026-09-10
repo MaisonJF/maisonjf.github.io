@@ -9,16 +9,28 @@
   const statusEl = document.getElementById('cart-status');
   const checkoutButton = document.getElementById('checkout-button');
 
+  const normaliseCart = value => {
+    const cart = {};
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return cart;
+    for (const [id, rawQty] of Object.entries(value)) {
+      if (!PRODUCTS[id]) continue;
+      const qty = Number(rawQty);
+      if (!Number.isInteger(qty) || qty < 1) continue;
+      cart[id] = Math.min(10, qty);
+    }
+    return cart;
+  };
+
   const read = () => {
-    try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
+    try { return normaliseCart(JSON.parse(localStorage.getItem(KEY)) || {}); }
     catch { return {}; }
   };
-  const write = cart => localStorage.setItem(KEY, JSON.stringify(cart));
+  const write = cart => localStorage.setItem(KEY, JSON.stringify(normaliseCart(cart)));
   const money = cents => new Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'EUR' }).format(cents / 100);
 
   function render() {
     const cart = read();
-    const entries = Object.entries(cart).filter(([id, qty]) => PRODUCTS[id] && qty > 0);
+    const entries = Object.entries(cart);
     itemsEl.innerHTML = '';
     let total = 0;
 
@@ -44,6 +56,7 @@
   }
 
   function change(id, delta) {
+    if (!PRODUCTS[id]) return;
     const cart = read();
     const next = Math.max(0, Math.min(10, (cart[id] || 0) + delta));
     if (next === 0) delete cart[id]; else cart[id] = next;
@@ -55,8 +68,10 @@
     const add = e.target.closest('[data-add]');
     if (add) {
       const id = add.dataset.add;
+      if (!PRODUCTS[id]) return;
       const qtyInput = document.getElementById(`qty-${id}`);
-      const qty = Math.max(1, Math.min(10, Number(qtyInput?.value || 1)));
+      const parsed = Number(qtyInput?.value || 1);
+      const qty = Number.isInteger(parsed) ? Math.max(1, Math.min(10, parsed)) : 1;
       change(id, qty);
       statusEl.textContent = 'Adicionado ao carrinho.';
       return;
@@ -75,9 +90,7 @@
 
   checkoutButton.addEventListener('click', async () => {
     const cart = read();
-    const items = Object.entries(cart)
-      .filter(([id, qty]) => PRODUCTS[id] && qty > 0)
-      .map(([id, quantity]) => ({ id, quantity }));
+    const items = Object.entries(cart).map(([id, quantity]) => ({ id, quantity }));
     if (!items.length) return;
 
     checkoutButton.disabled = true;
@@ -88,9 +101,10 @@
       const response = await fetch('/api/create-checkout-test', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
         body: JSON.stringify({ items })
       });
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.url) throw new Error(data.error || 'Não foi possível abrir o checkout.');
       window.location.href = data.url;
     } catch (error) {
@@ -99,6 +113,12 @@
       checkoutButton.textContent = 'Finalizar no Stripe';
     }
   });
+
+  const query = new URLSearchParams(window.location.search);
+  if (query.get('cancelado') === '1') {
+    statusEl.textContent = 'Checkout cancelado. O carrinho ficou guardado.';
+    history.replaceState({}, '', window.location.pathname);
+  }
 
   render();
 })();
