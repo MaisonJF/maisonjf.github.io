@@ -22,6 +22,12 @@
       list.appendChild(legalItem);
     }
 
+    if (!footer.querySelector('a[href="devolucoes.html"]')) {
+      const returnsItem = document.createElement('li');
+      returnsItem.innerHTML = '<a href="devolucoes.html" class="footer__link">Devoluções</a>';
+      list.appendChild(returnsItem);
+    }
+
     if (!footer.querySelector('a[href*="livroreclamacoes.pt"]')) {
       const complaintsItem = document.createElement('li');
       complaintsItem.innerHTML = '<a href="https://www.livroreclamacoes.pt/Inicio/" class="footer__link" target="_blank" rel="noopener">Livro de Reclamações</a>';
