@@ -514,9 +514,12 @@
   function cleanText(text) {
     return text
       .replace(/\s+[—–]\s+/g, ', ')
-      .replace(/sozinho\(a\)/gi, 'sem companhia')
-      .replace(/acompanhado\(a\)/gi, 'com companhia')
-      .replace(/cansado\(a\)/gi, 'sem energia');
+      .replace(/Sozinho\(a\)/g, 'Sem companhia')
+      .replace(/sozinho\(a\)/g, 'sem companhia')
+      .replace(/Acompanhado\(a\)/g, 'Com companhia')
+      .replace(/acompanhado\(a\)/g, 'com companhia')
+      .replace(/Cansado\(a\)/g, 'Sem energia')
+      .replace(/cansado\(a\)/g, 'sem energia');
   }
 
   function cleanNode(root) {
