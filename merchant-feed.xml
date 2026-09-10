@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+  <channel>
+    <title>MAISON JF®</title>
+    <link>https://maison-jf.com/</link>
+    <description>Produtos físicos MAISON JF® para Google Merchant Center.</description>
+
+    <item>
+      <g:id>maisonjf-bruma-ambiente</g:id>
+      <g:title>Brumas de Ambiente MAISON JF®</g:title>
+      <g:description>Bruma de ambiente MAISON JF® para perfumar o espaço e marcar a passagem do dia para o tempo em casa.</g:description>
+      <g:link>https://maison-jf.com/produto-bruma-ambiente.html</g:link>
+      <g:image_link>https://maison-jf.com/og-image.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>6.50 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:brand>MAISON JF®</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+    </item>
+
+    <item>
+      <g:id>maisonjf-oleo-massagem</g:id>
+      <g:title>Óleo de Massagem MAISON JF®</g:title>
+      <g:description>Óleo de massagem MAISON JF® para momentos de massagem, calor, toque e pausa.</g:description>
+      <g:link>https://maison-jf.com/produto-oleo-massagem.html</g:link>
+      <g:image_link>https://maison-jf.com/og-image.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>12.00 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:brand>MAISON JF®</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+    </item>
+  </channel>
+</rss>
