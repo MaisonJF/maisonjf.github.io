@@ -1,4 +1,4 @@
-/* MAISON JF® — Yoichi conversion & architecture pass · 2026-09-10 */
+/* MAISON JF® | passe final de voz, confiança e conversão | 2026-09-10 */
 (function () {
   'use strict';
 
@@ -8,7 +8,7 @@
   if (!document.querySelector('link[href^="yoichi-pass.css"]')) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = 'yoichi-pass.css?v=20260910-3';
+    link.href = 'yoichi-pass.css?v=20260910-final';
     document.head.appendChild(link);
   }
 
@@ -30,7 +30,7 @@
 
   const mobileMenu = document.getElementById('mobileMenu');
   if (mobileMenu) {
-    mobileMenu.querySelectorAll('.mobile-menu__link').forEach((link) => link.remove());
+    mobileMenu.querySelectorAll('.mobile-menu__link').forEach(link => link.remove());
     navItems.forEach(([href, label]) => {
       const link = document.createElement('a');
       link.href = href;
@@ -47,82 +47,120 @@
     });
   }
 
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
   function setText(selector, text, root = document) {
-    const el = root.querySelector(selector);
+    const el = $(selector, root);
     if (el) el.textContent = text;
     return el;
   }
 
   function setHTML(selector, html, root = document) {
-    const el = root.querySelector(selector);
+    const el = $(selector, root);
     if (el) el.innerHTML = html;
     return el;
   }
 
-  function addPracticalNote(afterElement, text) {
-    if (!afterElement || afterElement.parentElement.querySelector('.yoichi-practical-note')) return;
-    const p = document.createElement('p');
-    p.className = 'detail-note yoichi-practical-note';
-    p.textContent = text;
-    afterElement.insertAdjacentElement('afterend', p);
-  }
-
   function cardByTitle(root, title) {
-    return Array.from(root.querySelectorAll('.offer-card, .service-card, .catalogue-card')).find((card) => {
-      const heading = card.querySelector('h3, .service-card__title, .catalogue-card__title');
+    return $$('.offer-card, .service-card, .catalogue-card', root).find(card => {
+      const heading = $('h3, .service-card__title, .catalogue-card__title', card);
       return heading && heading.textContent.trim() === title;
     });
   }
 
   function rewriteCard(root, title, copy) {
     const card = cardByTitle(root, title);
-    if (!card) return;
-    const p = card.querySelector('.service-card__lead, .catalogue-card__pain, p:not(.detail-kicker):not(.offer-price)');
+    if (!card) return null;
+    const p = $('.service-card__lead, .catalogue-card__pain, p:not(.detail-kicker):not(.offer-price):not(.offer-status)', card);
     if (p) p.textContent = copy;
+    return card;
   }
 
-  /* HOME — dor primeiro, solução depois; luxo sem distância. */
+  function practicalNote(anchor, text) {
+    if (!anchor) return;
+    const parent = anchor.parentElement;
+    let note = parent ? $('.yoichi-practical-note', parent) : null;
+    if (!note) {
+      note = document.createElement('p');
+      note.className = 'detail-note yoichi-practical-note';
+      anchor.insertAdjacentElement('afterend', note);
+    }
+    note.textContent = text;
+  }
+
+  function updateTrust() {
+    $$('.conversion-nudge').forEach(el => el.remove());
+
+    const trust = $('.conversion-trust');
+    if (trust) {
+      const inner = $('.conversion-trust__inner', trust);
+      if (inner) {
+        inner.innerHTML = `
+          <span class="conversion-trust__item">Marca registada na União Europeia</span>
+          <span class="conversion-trust__item">Condições claras antes de pagar</span>
+          <a class="conversion-trust__item" href="https://wa.me/351923318289" target="_blank" rel="noopener">Contacto directo com a Maison</a>`;
+      }
+    }
+
+    const registrations = $$('.footer__registration');
+    if (registrations[0]) registrations[0].textContent = 'MAISON JF® · Marca registada na União Europeia · EUIPO.';
+    if (registrations[1]) registrations[1].textContent = 'Compras e reservas são confirmadas por escrito antes de qualquer pagamento.';
+
+    $$('.footer__column').forEach(column => {
+      const title = $('.footer__column-title', column);
+      if (!title || title.textContent.trim() !== 'Legal') return;
+      title.textContent = 'Confiança';
+      const list = $('.footer__links', column);
+      if (list) {
+        list.innerHTML = `
+          <li><span class="footer__link">Preço final antes de pagar</span></li>
+          <li><span class="footer__link">Condições confirmadas por escrito</span></li>`;
+      }
+    });
+  }
+
+  /* HOME: dor, reconhecimento, confiança, solução, acção */
   if (page === 'index.html') {
     setText('#farol .farol__title', 'O que não te deixa em paz?');
-    setText('#farol .farol__subtitle', 'Não precisas de saber o nome do que procuras. Começa pelo que está a acontecer.');
+    setText('#farol .farol__subtitle', 'Começa pelo que está a acontecer. O nome da solução vem depois.');
 
-    const companhiaOption = document.querySelector('#farolStep1 [data-farol="companhia"] .farol__option-text');
+    const companhiaOption = $('#farolStep1 [data-farol="companhia"] .farol__option-text');
     if (companhiaOption) companhiaOption.textContent = 'Quero ir. Só não quero ir sem companhia.';
 
-    const section = document.getElementById('transformacoes');
-    if (section) {
-      section.setAttribute('aria-label', 'Explorar a Maison');
-      setText('.transformacoes__label', 'Explora a Maison', section);
-      setText('.transformacoes__title', 'O que está a pesar mais hoje?', section);
-      setText('.transformacoes__subtitle', 'Não precisas de escolher um serviço. Começa pela parte da tua vida que está a pedir espaço.', section);
+    const map = document.getElementById('transformacoes');
+    if (map) {
+      setText('.transformacoes__label', 'Explora a Maison', map);
+      setText('.transformacoes__title', 'O que está a pesar mais hoje?', map);
+      setText('.transformacoes__subtitle', 'Escolhe a parte da tua vida que está a pedir atenção.', map);
 
-      const cards = section.querySelectorAll('.transformacao-card');
+      const cards = $$('.transformacao-card', map);
       const content = [
         {
           tag: 'Cabeça',
           title: '“Já perguntei a toda a gente. Continuo sem saber o que fazer.”',
-          desc: 'Mais uma opinião provavelmente não vai resolver. Quando uma decisão, uma relação ou uma conversa ocupa espaço demais, talvez precises de olhar para o que estás a evitar ver.',
+          desc: 'Já tens opiniões. O que te falta é clareza. Começa por aquilo que não consegues parar de pensar.',
           cta: 'Quero organizar isto',
           href: 'servicos.html'
         },
         {
           tag: 'Corpo',
           title: '“Ainda nem acabou o dia e eu já não tenho mais nada para dar.”',
-          desc: 'Quando até descansar parece trabalho, não precisas de transformar a vida toda. Precisas de um primeiro gesto que diga ao corpo: por hoje, chega.',
+          desc: 'Quando até descansar dá trabalho, começa pequeno. Um gesto que diga ao corpo: por hoje chega.',
           cta: 'Quero começar por mim',
           href: 'produtos.html#escalda-pes'
         },
         {
           tag: 'Casa',
           title: '“Fecho a porta. O dia entra comigo na mesma.”',
-          desc: 'O trabalho, a discussão e o ruído não ficam automaticamente do lado de fora. Às vezes mudar o cheiro, a luz ou o ritual de chegada é o primeiro corte.',
+          desc: 'Fechaste a porta, mas o dia veio atrás. Muda primeiro o ambiente que te recebe.',
           cta: 'Quero mudar o ambiente',
           href: 'produtos.html#brumas'
         },
         {
           tag: 'Companhia',
           title: '“Quantas vezes mais vou desistir só porque não tenho com quem ir?”',
-          desc: 'Jantar, cinema, concerto, passeio ou simplesmente sair. O plano continua a ser teu. O que não precisa é de morrer por falta de companhia.',
+          desc: 'O plano continua a apetecer-te. Só não queres vivê-lo sem ninguém ao lado.',
           cta: 'Quero conhecer a Companhia',
           href: 'companhia.html'
         }
@@ -134,7 +172,7 @@
         setText('.transformacao-card__tag', item.tag, card);
         setText('.transformacao-card__title', item.title, card);
         setText('.transformacao-card__desc', item.desc, card);
-        const cta = card.querySelector('.transformacao-card__cta');
+        const cta = $('.transformacao-card__cta', card);
         if (cta) {
           cta.textContent = item.cta;
           cta.href = item.href;
@@ -144,277 +182,313 @@
 
     const products = document.getElementById('explorar');
     if (products) {
-      setText('.explorar__title', 'Não compres pelo nome bonito. Compra pelo que queres sentir diferente.', products);
-      setText('.explorar__subtitle', 'Casa, corpo, aroma, pausa. Começa pelo efeito que procuras — depois escolhes o produto.', products);
-      rewriteCard(products, 'Brumas de Ambiente', 'Entraste em casa, mas o dia veio atrás. Algumas borrifadelas não resolvem a tua vida — mas podem marcar o momento em que ela deixa de estar lá fora e volta a ser tua.');
-      rewriteCard(products, 'Escalda-Pés', 'Se até tomar conta de ti parece mais uma tarefa, começa por vinte minutos em que não tens de produzir absolutamente nada.');
-      rewriteCard(products, 'Óleo de Massagem', 'Há dias em que o corpo não pede mais disciplina. Pede toque, calor e alguém — nem que sejas tu — a tratá-lo como se importasse.');
-      rewriteCard(products, 'Águas de Lençóis', 'Deitar o corpo não chega quando a cabeça continua de pé. Muda o quarto antes de pedires ao cérebro que perceba que o dia acabou.');
+      setText('.explorar__title', 'A casa pesa. O corpo sente. Começa pelo que queres mudar.', products);
+      setText('.explorar__subtitle', 'Escolhe pelo efeito que procuras. O produto vem depois.', products);
+      rewriteCard(products, 'Brumas de Ambiente', 'Entraste em casa e o dia veio atrás. Muda o ar. Marca o corte.');
+      rewriteCard(products, 'Escalda-Pés', 'Quando cuidar de ti parece mais uma tarefa, começa por vinte minutos sem teres de fazer nada.');
+      rewriteCard(products, 'Óleo de Massagem', 'O corpo está tenso. Nem tudo precisa de conversa. Às vezes precisa de mãos, calor e pausa.');
+      rewriteCard(products, 'Águas de Lençóis', 'Deitaste o corpo. A cabeça não. Muda o quarto antes de pedir ao cérebro que desligue.');
     }
 
-    const servicesGrid = document.querySelector('#servicos .services__grid');
+    const servicesGrid = $('#servicos .services__grid');
     if (servicesGrid) {
-      servicesGrid.querySelectorAll('.service-card').forEach((card) => {
-        const title = card.querySelector('.service-card__title')?.textContent.trim() || '';
+      $$('.service-card', servicesGrid).forEach(card => {
+        const title = $('.service-card__title', card)?.textContent.trim() || '';
         if (title.includes('Cristais, Pulseiras e Peças Decorativas')) card.remove();
       });
 
-      rewriteCard(servicesGrid, 'Tarot e Consultas', 'Já perguntaste a toda a gente. Agora tens cinco opiniões e continuas no mesmo sítio. O Tarot não decide por ti; ajuda-te a ver aquilo para onde talvez não estejas a olhar.');
-      rewriteCard(servicesGrid, 'Escuta Orientada', 'Há dias em que já contaste a mesma história a três pessoas e continuas exactamente no mesmo sítio. Aqui não tens de a contar bonita. Começas a falar. Organizamos a partir daí.');
-      rewriteCard(servicesGrid, 'Acompanhamento', 'Há assuntos que não acabam quando desligas a chamada. Se amanhã o problema ainda estiver contigo, talvez uma sessão isolada já não seja suficiente.');
-      rewriteCard(servicesGrid, 'Companhia', 'Queres jantar, ir ao cinema, a um concerto ou simplesmente sair de casa. O plano existe. Falta-te alguém ao lado — e isso não devia obrigar-te a desistir outra vez.');
-      rewriteCard(servicesGrid, 'Astrologia, Numerologia e Outras Terapias Complementares', 'Nem tudo precisa de caber no Tarot. Quando a pergunta pede outra lente, vemos primeiro o que queres perceber e só depois escolhemos a ferramenta.');
-      rewriteCard(servicesGrid, 'Defumações, Limpeza Energética e Abertura de Caminhos', 'Às vezes não queres analisar mais. Queres marcar uma mudança. Os trabalhos espirituais da Maison são preparados com intenção clara e sem promessas mágicas de resultado.');
+      rewriteCard(servicesGrid, 'Tarot e Consultas', 'A pergunta continua a voltar. O Tarot não decide por ti. Ajuda-te a ver o que estás a evitar.');
+      rewriteCard(servicesGrid, 'Escuta Orientada', 'Já contaste isto. Continuas no mesmo sítio. Aqui podes dizer tudo e pôr ordem no que está misturado.');
+      rewriteCard(servicesGrid, 'Acompanhamento', 'Uma sessão acabou. O problema não. Há fases que pedem continuidade.');
+      rewriteCard(servicesGrid, 'Companhia', 'O plano existe. Falta-te alguém ao lado. Isso não devia decidir por ti.');
+      rewriteCard(servicesGrid, 'Astrologia, Numerologia e Outras Terapias Complementares', 'Há perguntas que pedem outra lente. Primeiro percebemos a questão. Depois escolhemos a ferramenta.');
+      rewriteCard(servicesGrid, 'Defumações, Limpeza Energética e Abertura de Caminhos', 'Há momentos em que queres marcar uma mudança de forma simbólica. Fazemo-lo sem promessas impossíveis.');
 
-      servicesGrid.querySelectorAll('.service-card').forEach((card) => {
-        const title = card.querySelector('.service-card__title')?.textContent.trim() || '';
+      $$('.service-card', servicesGrid).forEach(card => {
+        const title = $('.service-card__title', card)?.textContent.trim() || '';
         if (title === 'Companhia') setText('.service-card__eyebrow', 'Não quero desistir do plano', card);
       });
     }
 
     const continuity = document.getElementById('repeticao');
     if (continuity) {
-      setText('.continuity__title', 'Se só te lembras de ti quando rebentas, há qualquer coisa a mudar.', continuity);
-      setText('.continuity__text', 'A Maison Todo o Mês não existe para te prender a uma subscrição. Existe para não voltares sempre ao mesmo ponto: esperar pelo limite para finalmente fazeres alguma coisa por ti.', continuity);
+      setText('.continuity__title', 'Só te lembras de ti quando já estás no limite?', continuity);
+      setText('.continuity__text', 'A Maison Todo o Mês existe para quebrar esse ciclo. Um mês de cada vez. Sem te prender.', continuity);
     }
 
-    const joaoContent = document.querySelector('#joao .joao__content');
-    if (joaoContent) {
-      setText('.joao__role', 'Fundador da Maison JF®', joaoContent);
-      setHTML('.joao__text', 'Há coisas que não se aprendem a decorar. Aprendem-se quando alguém se senta à tua frente e a vida está a cair-lhe em cima.<br><br>Há 32 anos que trabalho com Tarot e atendimento de pessoas. Sou <strong>Técnico Psicossocial</strong> e <strong>Técnico de Apoio à Vítima</strong>. Trabalhei numa <strong>Casa Abrigo para Vítimas de Violência Doméstica</strong>. Eu sei bem o que é receber alguém quando está por um fio, no limite — quando ouvir mal, julgar depressa ou ignorar um sinal pode ter consequências reais.<br><br>É daí que vem a forma como trabalho na Maison. Não te encaixo numa fórmula e não te vendo a primeira solução que tenho à mão. <strong>Primeiro percebo o que está mesmo a acontecer. Depois vemos o que faz sentido fazer.</strong>', joaoContent);
-      const proof = joaoContent.querySelector('.yoichi-founder-proof');
+    const joao = $('#joao .joao__content');
+    if (joao) {
+      setText('.joao__role', 'Fundador da Maison JF®', joao);
+      setHTML('.joao__text',
+        'Há coisas que não se aprendem a decorar. Aprendem-se quando alguém se senta à tua frente e a vida está a cair-lhe em cima.<br><br>' +
+        'Há 32 anos que trabalho com Tarot e atendimento de pessoas. Sou <strong>Técnico Psicossocial</strong> e <strong>Técnico de Apoio à Vítima</strong>. Trabalhei numa <strong>Casa Abrigo para Vítimas de Violência Doméstica</strong>. Eu sei bem o que é receber alguém quando está por um fio, no limite. Aí não há espaço para ouvir pela metade ou julgar depressa.<br><br>' +
+        'É assim que trabalho na Maison. <strong>Primeiro percebo o que está mesmo a acontecer. Depois vemos o que faz sentido fazer.</strong>',
+        joao
+      );
+      const proof = $('.yoichi-founder-proof', joao);
       if (proof) proof.remove();
     }
 
-    const professionalHome = document.getElementById('profissionais');
-    if (professionalHome) {
-      setText('.profissionais__title', 'Não precisa de encher uma prateleira para descobrir se a Maison funciona no seu espaço.', professionalHome);
-      setText('.profissionais__text', 'Começamos com uma selecção que faça sentido para os seus clientes, para o seu orçamento e para a realidade do negócio. Testa. Vê o que roda. Crescemos a partir daí.', professionalHome);
-      const cta = professionalHome.querySelector('.btn');
+    const b2b = document.getElementById('profissionais');
+    if (b2b) {
+      setText('.profissionais__title', 'Stock parado ocupa espaço e dinheiro.', b2b);
+      setText('.profissionais__text', 'Começamos pequeno. Escolhemos o que faz sentido para o seu público. Vemos o que roda. Depois crescemos.', b2b);
+      const cta = $('.btn', b2b);
       if (cta) cta.textContent = 'Ver condições profissionais';
     }
   }
 
-  /* O FAROL — sem teste de personalidade; só uma boa pergunta de cada vez. */
+  /* FAROL */
   if (page === 'farol.html') {
-    setText('.detail-hero .detail-title', 'Não tens de saber o que procuras. Basta saber o que não te larga.');
-    setText('.detail-hero .detail-lead', 'Começa pela frase que te acerta. O Farol não te põe numa caixa e não te obriga a comprar nada. Só reduz o ruído até aparecer uma próxima porta que faça sentido.');
+    setText('.detail-hero .detail-title', 'Há uma coisa que não te larga. Começa por aí.');
+    setText('.detail-hero .detail-lead', 'Não precisas de saber o nome do serviço. Escolhe a frase mais próxima do que estás a viver.');
     setText('#farol .farol__title', 'O que não te deixa em paz?');
-    setText('#farol .farol__subtitle', 'Escolhe a frase mais próxima do que estás a viver. O nome da solução vem depois.');
-    const companhiaOption = document.querySelector('#farolStep1 [data-farol="companhia"] .farol__option-text');
+    setText('#farol .farol__subtitle', 'Escolhe a frase que mais se aproxima. O resto vem depois.');
+
+    const companhiaOption = $('#farolStep1 [data-farol="companhia"] .farol__option-text');
     if (companhiaOption) companhiaOption.textContent = 'Quero ir. Só não quero ir sem companhia.';
 
     const about = document.getElementById('sobre-o-farol');
     if (about) {
-      setText('.detail-section__title', 'Não é um teste. É uma maneira de não começares pela prateleira errada.', about);
-      setText('.detail-copy', 'Tu sabes o que está a acontecer contigo; só podes não saber se isso pede um produto, uma consulta, uma conversa, acompanhamento ou simplesmente companhia. O Farol começa na tua situação e reduz as opções. Se já sabes exactamente o que queres, ignora-o e segue directo.', about);
+      setText('.detail-section__title', 'Não é um teste. É só uma maneira de cortar o ruído.', about);
+      setText('.detail-copy', 'Começamos na tua situação e reduzimos as opções. Se já sabes o que queres, segue directo.', about);
     }
   }
 
-  /* PRODUTOS — o produto entra depois da sensação que a pessoa quer mudar. */
+  /* PRODUTOS */
   if (page === 'produtos.html') {
-    setText('.detail-hero .detail-title', 'A tua casa não precisa de parecer nova. Precisa de voltar a saber a tua.');
-    setText('.detail-hero .detail-lead', 'E o teu corpo não precisa de mais uma obrigação de autocuidado. Começa pelo que queres sentir diferente quando fechas a porta, tiras os sapatos ou finalmente te deitas.');
+    setText('.detail-hero .detail-title', 'A casa pesa. O corpo sente. Começa pelo que queres mudar.');
+    setText('.detail-hero .detail-lead', 'Cheiro, pausa, toque, descanso. Escolhe pelo efeito que procuras.');
 
-    const root = document;
-    rewriteCard(root, 'Brumas de Ambiente', 'Entraste em casa, mas o trabalho, a rua ou a discussão entraram contigo. Borrifa. Muda o ar. Cria um corte simples entre o que aconteceu lá fora e o que queres deixar ficar cá dentro.');
-    rewriteCard(root, 'Escalda-Pés', 'Quando até tomar conta de ti parece trabalho, não te vou pedir uma rotina de doze passos. Água, tempo, pés lá dentro. Por agora chega.');
-    rewriteCard(root, 'Óleo de Massagem', 'Há tensão que não precisa de mais análise naquele momento. Precisa de mãos, calor e alguns minutos em que o corpo não tenha de aguentar mais nada.');
-    rewriteCard(root, 'Águas de Lençóis', 'Deitaste-te. A cabeça não. Mudar o cheiro do quarto pode ajudar a marcar uma coisa simples que às vezes esquecemos: o dia acabou.');
-    rewriteCard(root, 'Peças Decorativas em Jesmonite', 'Nem toda a mudança da casa precisa de obras. Às vezes basta um objecto certo no sítio certo para o espaço deixar de parecer provisório.');
-    rewriteCard(root, 'Cristais e Pulseiras', 'Se procuras uma pedra, uma intenção ou uma peça específica, diz-nos o que tens em mente. Se existir uma opção que faça sentido, mostramos-ta. Se não, não inventamos.');
+    rewriteCard(document, 'Brumas de Ambiente', 'O dia entrou contigo. Muda o ar e marca o momento em que a casa volta a ser tua.');
+    rewriteCard(document, 'Escalda-Pés', 'Quando até cuidar de ti dá trabalho, começa simples. Água, tempo e pés lá dentro.');
+    rewriteCard(document, 'Óleo de Massagem', 'O corpo está tenso. Dá-lhe calor, toque e alguns minutos sem exigir mais nada.');
+    rewriteCard(document, 'Águas de Lençóis', 'Deitaste-te. A cabeça ainda está no dia. Muda o ambiente do quarto antes de dormir.');
+    rewriteCard(document, 'Peças Decorativas em Jesmonite', 'Não precisas de mudar a casa toda para ela deixar de parecer provisória.');
+    rewriteCard(document, 'Cristais e Pulseiras', 'Diz-nos o que procuras. Se tivermos uma opção que faça sentido, mostramos.');
 
-    const productGrid = document.querySelector('.detail-grid--products');
-    addPracticalNote(productGrid, 'Antes de confirmares, sabes o que está disponível, o valor final e a forma de entrega. O WhatsApp serve para fechar a escolha — não para te obrigar a descobrir às cegas o que estás a comprar.');
+    const grid = $('.detail-grid--products');
+    practicalNote(grid, 'Antes de pagar, confirmamos referência, disponibilidade, preço final e forma de entrega.');
 
     const autumn = document.getElementById('outono');
     if (autumn) {
-      setText('.detail-section__title', 'O Outono chega. A casa também muda de estação.', autumn);
-      setText('.detail-copy', 'A próxima edição de Velas Aromáticas será limitada. Não porque gostamos da palavra “exclusivo”, mas porque pequenas séries permitem fazer melhor e não produzir só para encher stock.', autumn);
+      setText('.detail-section__title', 'O Outono muda a casa antes de mudar o calendário.', autumn);
+      setText('.detail-copy', 'A próxima série de velas será pequena. Fazemos menos para fazer melhor.', autumn);
     }
   }
 
-  /* SERVIÇOS — reconhecimento, autoridade e decisão. */
+  /* SERVIÇOS */
   if (page === 'servicos.html') {
-    setText('.detail-hero .detail-title', 'Se já contaste isto a toda a gente e continuas no mesmo sítio, talvez não precises de mais uma opinião.');
-    setText('.detail-hero .detail-lead', 'Uma mensagem. Uma decisão. Uma relação. Uma conversa que adias. Ou uma fase em que já não sabes o que pensar primeiro. Não tens de escolher o nome do serviço sozinho. Começa pelo que está mesmo a acontecer.');
+    setText('.detail-hero .detail-title', 'A pergunta não te larga. A conversa não resolveu.');
+    setText('.detail-hero .detail-lead', 'Então começa pelo que está mesmo a acontecer. Depois escolhemos o formato.');
 
-    document.querySelectorAll('.offer-card h3').forEach((heading) => {
+    $$('h3').forEach(heading => {
       if (heading.textContent.trim() === 'Tarot Terapêutico') heading.textContent = 'Tarot de Aprofundamento';
     });
 
-    rewriteCard(document, 'Tarot Expresso', 'Tens uma pergunta concreta e queres parar de a mastigar pela vigésima vez. Vamos ao assunto sem transformar uma pergunta simples numa novela.');
-    rewriteCard(document, 'Tarot Integrativo', 'A pergunta parece ser uma. Por baixo estão medo, desejo, padrões, outra pessoa e aquilo que ainda não disseste nem a ti próprio. Aqui olhamos para o conjunto.');
-    rewriteCard(document, 'Tarot de Aprofundamento', 'Quando uma resposta curta seria quase insultuosa porque o assunto tem história, repetição e demasiadas peças ligadas umas às outras.');
-    rewriteCard(document, 'Consulta Escrita Breve', 'Queres uma resposta concreta, por escrito, para poderes voltar a ela depois — sem precisares de marcar uma conversa.');
-    rewriteCard(document, 'Consulta Escrita Aprofundada', 'Quando sabes que vais precisar de reler. Não porque o texto é complicado, mas porque a situação é.');
+    rewriteCard(document, 'Tarot Expresso', 'Uma pergunta concreta. Sem rodeios. Para parares de a mastigar pela vigésima vez.');
+    rewriteCard(document, 'Tarot Integrativo', 'A pergunta parece simples. Por baixo há medo, desejo, padrões e outra pessoa no meio.');
+    rewriteCard(document, 'Tarot de Aprofundamento', 'O assunto tem história e uma resposta curta não chega.');
+    rewriteCard(document, 'Consulta Escrita Breve', 'Queres uma resposta concreta por escrito e voltar a ela depois.');
+    rewriteCard(document, 'Consulta Escrita Aprofundada', 'A situação tem camadas. Queres tempo para ler, reler e pensar.');
+
+    const tarotGrid = $('#tarot .detail-grid');
+    practicalNote(tarotGrid, 'Antes de marcar, confirmamos formato, duração, o que está incluído e quando recebes a resposta.');
 
     const escuta = document.getElementById('escuta');
     if (escuta) {
-      setText('.detail-section__title', 'Há dias em que não precisas de cartas. Precisas de conseguir dizer tudo.', escuta);
-      setText('.detail-copy', 'Sem editar para parecer forte. Sem resumir para não incomodar. Sem ouvir “eu no teu lugar...” ao fim de três minutos. Falas. Organizamos o que está misturado e procuramos um próximo passo que caiba na realidade.', escuta);
+      setText('.detail-section__title', 'Já falaste. Ainda tens tudo cá dentro.', escuta);
+      setText('.detail-copy', 'Aqui podes dizer o que não conseguiste dizer direito. Depois pomos ordem no que está misturado e vemos o próximo passo.', escuta);
     }
 
     const acompanhamento = document.getElementById('acompanhamento');
     if (acompanhamento) {
-      setText('.detail-section__title', 'Se amanhã isto ainda estiver contigo, uma sessão pode não chegar.', acompanhamento);
-      rewriteCard(acompanhamento, 'Acompanhamento Permanente', 'Há fases em que o problema muda de forma todas as semanas. Não recomeças a história do zero de cada vez; seguimos o fio contigo enquanto houver trabalho real a fazer.');
-      rewriteCard(acompanhamento, 'Mentoria', 'Não queres consumir mais conteúdo solto. Queres aprender com estrutura, ser corrigido, praticar e chegar ao ponto em que já não precisas de alguém a segurar-te a mão.');
-      rewriteCard(acompanhamento, 'SOS', 'Há períodos em que “falamos para a semana” é tempo demais. O SOS existe para fases curtas que pedem presença mais próxima e um enquadramento definido logo à partida.');
-      addPracticalNote(acompanhamento.querySelector('.detail-grid'), 'Antes de começares, definimos contigo o formato, o âmbito, a duração e o que está — e não está — incluído. Proximidade não significa ausência de limites.');
+      setText('.detail-section__title', 'A sessão acabou. O problema não.', acompanhamento);
+      rewriteCard(acompanhamento, 'Acompanhamento Permanente', 'Há fases que mudam de semana para semana. Não tens de recomeçar a história do zero todas as vezes.');
+      rewriteCard(acompanhamento, 'Mentoria', 'Tens informação. Falta-te estrutura, prática e alguém que te corrija quando for preciso.');
+      rewriteCard(acompanhamento, 'SOS', 'Esperar uma semana é tempo demais para esta fase. Definimos um período curto e limites claros.');
+      practicalNote($('.detail-grid', acompanhamento), 'Nos valores “a partir de”, recebes antes do pagamento o período, o contacto previsto, o que inclui e os limites. Em situação de risco imediato, procura apoio de emergência ou especializado.');
     }
 
     const astrologia = document.getElementById('astrologia');
     if (astrologia) {
       astrologia.classList.add('yoichi-secondary-services');
-      setText('.detail-kicker', 'Outras lentes · sob encomenda', astrologia);
+      setText('.detail-kicker', 'Outras lentes', astrologia);
       setText('.detail-section__title', 'Nem toda a pergunta precisa de caber no Tarot.', astrologia);
-      setText('.detail-copy', 'Há situações em que Astrologia, Numerologia ou outra abordagem faz mais sentido. Primeiro percebemos a pergunta. Só depois escolhemos a ferramenta — e não o contrário.', astrologia);
+      setText('.detail-copy', 'Primeiro percebemos a questão. Se outra abordagem fizer mais sentido, usamos essa.', astrologia);
     }
 
     const espiritual = document.getElementById('espiritual');
     if (espiritual) {
       espiritual.classList.add('yoichi-secondary-services');
-      setText('.detail-kicker', 'Trabalho espiritual · sob consulta', espiritual);
-      setText('.detail-section__title', 'Há alturas em que não queres pensar mais. Queres marcar uma mudança.', espiritual);
-      setText('.detail-copy', 'Defumações, limpezas energéticas, abertura de caminhos e outras práticas são tratadas como trabalho simbólico e ritual. O pedido é ouvido primeiro; a proposta vem depois. Sem garantias mágicas e sem promessas que ninguém pode fazer honestamente.', espiritual);
+      setText('.detail-section__title', 'Há alturas em que queres marcar uma mudança.', espiritual);
+      setText('.detail-copy', 'Os trabalhos espirituais da Maison são simbólicos e rituais. Ouvimos o pedido primeiro. Sem promessas de resultado.', espiritual);
     }
 
     const especiais = document.getElementById('sob-consulta');
-    if (especiais) especiais.classList.add('yoichi-secondary-services');
+    if (especiais) especiais.remove();
+
+    const companhiaSection = $$('.detail-section').find(section =>
+      $('.detail-section__title', section)?.textContent.trim() === 'Também prestamos Companhia'
+    );
+    if (companhiaSection) {
+      setText('.detail-section__title', 'O que te falta não é orientação. É alguém contigo.', companhiaSection);
+      setText('.detail-copy', 'Se queres presença para um jantar, passeio, evento ou outro plano, vê os formatos de Companhia.', companhiaSection);
+    }
   }
 
-  /* COMPANHIA — tratar a necessidade sem vergonha, mantendo limites muito claros. */
+  /* COMPANHIA */
   if (page === 'companhia.html') {
-    setText('.detail-hero .detail-title', 'O plano existe. O que te falta é alguém ao lado.');
-    setText('.detail-hero .detail-lead', 'Já deixaste passar um jantar, um concerto, um passeio ou uma noite porque não querias ir sozinho. Não há nada de ridículo nisso. A Companhia da Maison existe para que a falta de alguém disponível não decida sempre por ti.');
+    setText('.detail-hero .detail-title', 'Já deixaste de ir porque não tinhas com quem.');
+    setText('.detail-hero .detail-lead', 'O plano continua a apetecer-te. A falta de companhia não tem de decidir por ti.');
 
     const formatos = document.getElementById('formatos');
-    if (formatos) setText('.detail-section__title', 'Não tens de fingir que procuras uma relação quando só queres companhia.', formatos);
+    if (formatos) setText('.detail-section__title', 'Escolhe o tipo de presença que queres.', formatos);
 
     const friend = document.getElementById('friend4rent');
     if (friend) {
-      const paragraphs = friend.querySelectorAll('p:not(.detail-kicker)');
-      if (paragraphs[0]) paragraphs[0].textContent = 'Jantar. Cinema. Concerto. Evento. Passeio. Exposição. Compras. Conversa. Ou só sair de casa e ter alguém com quem dividir o momento. Sem romance e sem fazer de conta que é um encontro.';
-      if (paragraphs[1]) paragraphs[1].textContent = 'Escolhes o plano. Combinamos os limites. Depois vais com companhia.';
+      const ps = $$('p:not(.detail-kicker)', friend);
+      if (ps[0]) ps[0].textContent = 'Jantar, cinema, concerto, passeio, compras ou conversa. Companhia sem romance.';
+      if (ps[1]) ps[1].textContent = 'Escolhes o plano. Combinamos tudo antes. Depois vais com companhia.';
     }
 
     const boyfriend = document.getElementById('boyfriend4rent');
     if (boyfriend) {
-      const ps = boyfriend.querySelectorAll('p:not(.detail-kicker)');
-      if (ps[0]) ps[0].innerHTML = '<strong>Não queres necessariamente uma relação. Mas hoje gostavas de sentir proximidade.</strong>';
-      if (ps[1]) ps[1].textContent = 'Pode existir mão dada, abraço, conversa íntima, carinho leve e beijos leves quando isso tiver sido combinado antes. É presença afectiva com limites claros — não um contrato para fingir uma vida inteira.';
+      const ps = $$('p:not(.detail-kicker)', boyfriend);
+      if (ps[0]) ps[0].innerHTML = '<strong>Não queres necessariamente uma relação. Hoje só gostavas de sentir proximidade.</strong>';
+      if (ps[1]) ps[1].textContent = 'Pode incluir mão dada, abraço, conversa íntima, carinho leve e beijos leves quando isso tiver sido combinado antes.';
     }
 
     const how = document.getElementById('como-funciona');
-    if (how) setText('.detail-section__title', 'Tudo combinado antes. Nada negociado à pressão durante o encontro.', how);
+    if (how) {
+      setText('.detail-section__title', 'Tudo combinado antes. Nada decidido à pressão no encontro.', how);
+      rewriteCard(how, 'Mínimo de 2 horas', 'A reserva mínima é de 2 horas. A duração total fica fechada antes.');
+      rewriteCard(how, 'Pagamento Antecipado', 'A reserva só fica confirmada depois do pagamento.');
+      rewriteCard(how, 'Despesas a Cargo de Quem Contrata', 'Deslocação, refeições, bilhetes e outras despesas ficam definidas ou estimadas antes.');
+      rewriteCard(how, 'Tudo Definido Antes', 'Data, horário, local, actividade, limites e despesas ficam combinados antes.');
+      practicalNote($('.detail-grid', how), 'Antes de pagar, recebes o valor total da reserva e as despesas previsíveis.');
+    }
 
     const limites = document.getElementById('limites');
     if (limites) setText('.detail-section__title', 'Proximidade não significa ambiguidade.', limites);
 
-    const reserveSections = Array.from(document.querySelectorAll('.detail-section'));
-    const reserve = reserveSections.find((section) => section.querySelector('.detail-kicker')?.textContent.trim() === 'Reserva');
+    const reserve = $$('.detail-section').find(section =>
+      $('.detail-kicker', section)?.textContent.trim() === 'Reserva'
+    );
     if (reserve) {
-      setText('.detail-section__title', 'Diz-me o plano. O resto tratamos antes de saíres de casa.', reserve);
-      setText('.detail-copy', 'Data, local, duração aproximada e o tipo de presença que procuras. Confirmamos disponibilidade, valor, despesas previsíveis e limites antes de qualquer pagamento. Sem surpresas depois.', reserve);
+      setText('.detail-section__title', 'Diz-me o plano. O resto fica fechado antes de saíres de casa.', reserve);
+      setText('.detail-copy', 'Envia data, local, duração e o tipo de companhia que procuras. Confirmamos disponibilidade, valor e limites antes do pagamento.', reserve);
     }
   }
 
-  /* MAISON TODO O MÊS — recorrência sem prisão. */
+  /* MAISON TODO O MÊS */
   if (page === 'maison-todo-o-mes.html') {
-    setText('.detail-hero .detail-title', 'Se só te lembras de ti quando já estás no limite, não é falta de produtos. É falta de continuidade.');
-    setText('.detail-hero .detail-lead', 'A Maison Todo o Mês existe para quebrar esse ciclo. Um mês de cada vez, sem fidelização obrigatória e sem a conversa de “transforma a tua vida em 30 dias”. Só uma estrutura para não voltares sempre ao zero.');
+    setText('.detail-hero .detail-title', 'Só te lembras de ti quando já estás no limite?');
+    setText('.detail-hero .detail-lead', 'A Maison Todo o Mês existe para quebrar esse ciclo. Um mês de cada vez. Sem fidelização obrigatória.');
 
-    const first = document.querySelector('main > .detail-section');
+    const first = $('main > .detail-section');
     if (first) {
-      setText('.detail-kicker', 'Escolhe pelo apoio que queres', first);
-      setText('.detail-section__title', 'Três níveis. Um mês de cada vez.', first);
-      const cards = first.querySelectorAll('.offer-card');
+      setText('.detail-section__title', 'Três níveis. Escolhe o apoio que queres este mês.', first);
+      const cards = $$('.offer-card', first);
       if (cards[0]) {
-        const last = cards[0].querySelector('p:last-child');
-        if (last) last.textContent = 'Para começares pequeno: alguma coisa física, uma mensagem pensada para aquele mês e um motivo para não voltares a esquecer-te de ti.';
+        const last = $('p:last-child', cards[0]);
+        if (last) last.textContent = 'Para começares pequeno e não voltares a esquecer-te de ti.';
       }
       if (cards[1]) {
-        const last = cards[1].querySelector('p:last-child');
-        if (last) last.textContent = 'Para quando sabes que “eu depois cuido de mim” já te levou vezes suficientes ao mesmo sítio.';
+        const last = $('p:last-child', cards[1]);
+        if (last) last.textContent = 'Para quando “depois cuido de mim” já te levou vezes suficientes ao mesmo sítio.';
       }
       if (cards[2]) {
         setText('h3', 'Hoje Não Enfrentas Isso Sem Apoio', cards[2]);
-        const last = cards[2].querySelector('p:last-child');
-        if (last) last.textContent = 'Produto e orientação escrita no mesmo mês, para quando precisas de cuidar do ambiente e também pôr uma questão concreta em cima da mesa.';
+        const last = $('p:last-child', cards[2]);
+        if (last) last.textContent = 'Cuidado físico e uma resposta escrita no mesmo mês.';
       }
+      practicalNote($('.detail-grid', first), 'Antes de aderires, confirmamos a composição exacta do mês e o que entra no nível escolhido.');
     }
 
-    const rule = document.querySelector('.detail-section--alt');
+    const rule = $('.detail-section--alt');
     if (rule) {
-      setText('.detail-section__title', 'Se deixar de fazer sentido, paras. Simples.', rule);
-      setText('.detail-copy', 'Pagas um mês e recebes o que corresponde ao nível escolhido. Depois decides se queres outro. Continuidade deve ajudar-te — não prender-te.', rule);
+      setText('.detail-section__title', 'Se deixar de fazer sentido, paras.', rule);
+      setText('.detail-copy', 'Pagas um mês. Recebes esse mês. Depois decides se queres continuar.', rule);
     }
   }
 
-  /* ÉDITIONS — editorial, não catálogo burocrático. */
+  /* ÉDITIONS */
   if (page === 'editions.html') {
-    setText('.detail-hero .detail-title', 'A Maison também se lê. E nem tudo o que fica contigo cabe num frasco.');
-    setText('.detail-hero .detail-lead', 'Ficção própria, desejo, perda, mistério, Tarot, relações e aqueles desvios da vida que começam pequenos e acabam por mudar tudo.');
+    setText('.detail-hero .detail-title', 'Há histórias que ficam a mexer contigo depois de fechares o livro.');
+    setText('.detail-hero .detail-lead', 'Ficção própria da Maison. Desejo, perda, Tarot, relações e recomeços.');
 
-    const first = document.querySelector('main > .detail-section');
+    const first = $('main > .detail-section');
     if (first) {
       setText('.detail-section__title', 'Escolhe a história que queres levar contigo.', first);
-      rewriteCard(first, 'Vírgulas do Destino: O Turista', 'Um encontro que parecia passageiro. Desejo, destino e perguntas que continuam abertas quando a viagem devia ter acabado.');
-      rewriteCard(first, 'Vírgulas do Destino: Meandros da Vida', 'Perda, desejo, Tarot e recomeço. Caim chega a Portugal depois de uma tragédia e encontra precisamente aquilo para que não vinha preparado.');
+      rewriteCard(first, 'Vírgulas do Destino: O Turista', 'Um encontro que devia ter sido passageiro. Não foi.');
+      rewriteCard(first, 'Vírgulas do Destino: Meandros da Vida', 'Caim chega a Portugal depois de uma perda. Encontra mais do que vinha procurar.');
     }
 
-    const alt = document.querySelector('.detail-section--alt');
+    const alt = $('.detail-section--alt');
     if (alt) {
-      setText('.detail-section__title', 'Há coisas que uma vela não consegue contar.', alt);
-      setText('.detail-copy', 'É para isso que existem as Éditions. Histórias próprias da Maison, feitas para te acompanhar para lá do último parágrafo.', alt);
+      setText('.detail-section__title', 'Nem tudo o que fica contigo cabe num frasco.', alt);
+      setText('.detail-copy', 'As Éditions são a parte da Maison que continua contigo depois da última página.', alt);
     }
   }
 
-  /* B2B — baixa o risco percebido e mostra lógica comercial. */
+  /* PROFISSIONAIS */
   if (page === 'profissionais.html') {
-    setText('.detail-hero .detail-title', 'Não precisa de comprar uma prateleira inteira para descobrir se os seus clientes querem a Maison.');
-    setText('.detail-hero .detail-lead', 'Lojas, spas, gabinetes e outros espaços podem começar com uma selecção pequena, coerente e pensada para o público real que entra pela porta. Testamos o que faz sentido. Crescemos com o que roda.');
+    setText('.detail-hero .detail-title', 'Stock parado custa espaço e dinheiro.');
+    setText('.detail-hero .detail-lead', 'Não precisa de comprar uma prateleira inteira para testar a Maison. Começamos com o que faz sentido para o seu público.');
 
-    const mainSections = document.querySelectorAll('.detail-section');
-    const offer = mainSections[0];
+    const sections = $$('.detail-section');
+    const offer = sections[0];
     if (offer) {
-      setText('.detail-section__title', 'O seu espaço não precisa de mais stock parado.', offer);
-      rewriteCard(offer, 'Selecção de Produtos', 'Em vez de lhe enviarmos tudo o que fazemos, escolhemos referências que façam sentido para o seu público, posicionamento e faixa de preço.');
-      rewriteCard(offer, 'Pequenas Séries', 'Começar pequeno permite testar procura sem transformar a primeira encomenda numa aposta desnecessária. Quantidades e capacidade são definidas antes.');
-      rewriteCard(offer, 'Edições Sazonais', 'Séries limitadas dão-lhe novidade e uma razão real para voltar a falar com o cliente — sem precisar de manter a mesma prateleira o ano inteiro.');
-      rewriteCard(offer, 'Peças em Jesmonite', 'Peças para integrar produto e espaço com a mesma linguagem visual. Faz sentido quando acrescenta apresentação; se for só decoração por decoração, dizemos-lhe.');
+      setText('.detail-section__title', 'Não precisa de mais produto. Precisa de produto que rode.', offer);
+      rewriteCard(offer, 'Selecção de Produtos', 'Escolhemos referências pela realidade do seu público, posicionamento e faixa de preço.');
+      rewriteCard(offer, 'Pequenas Séries', 'Testa procura sem transformar a primeira encomenda numa aposta grande.');
+      rewriteCard(offer, 'Edições Sazonais', 'Novidade em pequenas séries, sem obrigar a manter a mesma prateleira o ano inteiro.');
+      rewriteCard(offer, 'Peças em Jesmonite', 'Peças para integrar produto e espaço quando isso melhora a apresentação.');
     }
 
-    const how = Array.from(mainSections).find((section) => section.querySelector('.detail-kicker')?.textContent.trim() === 'Como começamos');
+    const how = sections.find(section => $('.detail-kicker', section)?.textContent.trim() === 'Como começamos');
     if (how) {
-      setText('.detail-section__title', 'Primeiro percebemos se vale a pena para os dois lados.', how);
-      setText('.detail-copy', 'Diga-nos que espaço tem, quem compra consigo e quanto quer testar. A partir daí sugerimos produtos, quantidades e condições. Sem obrigar a uma encomenda grande só para desbloquear uma conversa.', how);
-      rewriteCard(how, 'Condições Profissionais', 'Existe preço profissional e existem mínimos quando fazem sentido. Mas a proposta nasce da selecção e das quantidades reais — não de uma tabela que ignora o seu negócio.');
-      rewriteCard(how, 'Proposta Antes de Confirmar', 'Produtos, quantidades, preços, prazos, despesas e pagamento ficam todos escritos antes de confirmar. O objectivo é simples: saber exactamente onde está a pôr o dinheiro.');
+      setText('.detail-section__title', 'Primeiro vemos se vale a pena para os dois lados.', how);
+      setText('.detail-copy', 'Diga-nos o espaço, o tipo de cliente e quanto quer testar. Depois sugerimos produtos, quantidades e condições.', how);
+      rewriteCard(how, 'Condições Profissionais', 'Preço profissional e mínimos são definidos pela selecção e pelas quantidades reais.');
+      rewriteCard(how, 'Proposta Antes de Confirmar', 'Produtos, quantidades, preços, prazos, despesas e pagamento ficam escritos antes de confirmar.');
 
-      const cta = how.querySelector('.btn--primary');
+      const cta = $('.btn--primary', how);
       if (cta) {
-        cta.classList.add('yoichi-b2b-cta');
-        cta.textContent = 'Receber catálogo + condições profissionais';
-        cta.href = 'https://wa.me/351923318289?text=' + encodeURIComponent('Olá Maison JF. Tenho um espaço e quero receber o catálogo e as condições profissionais para perceber se faz sentido testar a Maison.');
+        cta.textContent = 'Receber catálogo + condições';
+        cta.href = 'https://wa.me/351923318289?text=' + encodeURIComponent('Olá Maison JF. Tenho um espaço e quero receber o catálogo e as condições profissionais.');
       }
     }
 
-    const convergence = document.querySelector('.farol-convergence');
+    const convergence = $('.farol-convergence');
     if (convergence) {
       setText('.detail-kicker', 'Procura outra coisa?', convergence);
-      setText('.detail-section__title', 'Se a solução não está aqui, diga-nos o que precisa de pôr na prateleira.', convergence);
-      setText('.detail-copy', 'Explique o contexto, o público e a ideia. Respondemos com o que conseguimos realmente fazer — não com uma promessa bonita só para ganhar a encomenda.', convergence);
-      const action = convergence.querySelector('.btn--primary');
+      setText('.detail-section__title', 'Diga-nos o que precisa de pôr na prateleira.', convergence);
+      setText('.detail-copy', 'Se conseguirmos fazer bem, dizemos como. Se não, também dizemos.', convergence);
+      const action = $('.btn--primary', convergence);
       if (action) {
         action.textContent = 'Falar com a Maison';
-        action.href = 'https://wa.me/351923318289?text=' + encodeURIComponent('Olá Maison JF. Estou na área profissional e procuro uma solução diferente para o meu espaço. O que tenho em mente é: ');
-        action.target = '_blank';
-        action.rel = 'noopener';
+        action.href = 'https://wa.me/351923318289?text=' + encodeURIComponent('Olá Maison JF. Procuro uma solução diferente para o meu espaço: ');
       }
     }
   }
 
-  document.querySelectorAll('.conversion-nudge').forEach((nudge) => nudge.remove());
+  updateTrust();
+
+  /* Limpeza final de marcas de texto demasiado mecânico no conteúdo visível. */
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+  textNodes.forEach(node => {
+    const parent = node.parentElement;
+    if (!parent || ['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(parent.tagName)) return;
+    let text = node.nodeValue;
+    text = text.replace(/\s+[—–]\s+/g, ', ');
+    text = text.replace(/sozinho\(a\)/gi, 'sem companhia');
+    text = text.replace(/acompanhado\(a\)/gi, 'com companhia');
+    text = text.replace(/cansado\(a\)/gi, 'sem energia');
+    node.nodeValue = text;
+  });
 })();
