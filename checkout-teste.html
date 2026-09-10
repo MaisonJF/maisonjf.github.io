@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout de teste | MAISON JF®</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles-additions.css">
+  <style>
+    .checkout-lab{padding:clamp(8rem,12vw,11rem) 1.25rem 5rem;background:var(--fundo-primario);min-height:100vh}
+    .checkout-lab__inner{width:min(1180px,100%);margin:0 auto}
+    .checkout-lab__grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,.8fr);gap:1.5rem;align-items:start}
+    .checkout-lab__products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+    .checkout-lab__card,.checkout-cart{background:var(--fundo-terciario);border:1px solid var(--borda-subtil);padding:1.5rem}
+    .checkout-lab__card h2,.checkout-cart h2{font-family:var(--fonte-editorial);font-weight:300;color:var(--marfim);margin:0 0 .7rem}
+    .checkout-lab__card p,.checkout-cart p{color:var(--texto-terciario);line-height:1.65}
+    .checkout-lab__price{font-family:var(--fonte-editorial);font-size:1.8rem;color:var(--marfim)!important;margin:1rem 0}
+    .checkout-lab__actions{display:flex;gap:.75rem;align-items:center;margin-top:1rem}
+    .checkout-lab__actions input{width:74px;background:#111;color:var(--marfim);border:1px solid var(--borda-media);padding:.75rem}
+    .checkout-cart{position:sticky;top:6.5rem}
+    .checkout-cart__items{display:grid;gap:.8rem;margin:1.2rem 0}
+    .checkout-cart__item{display:grid;grid-template-columns:1fr auto;gap:.75rem;padding-bottom:.8rem;border-bottom:1px solid var(--borda-subtil)}
+    .checkout-cart__item strong{color:var(--marfim);font-weight:400}
+    .checkout-cart__controls{display:flex;gap:.45rem;align-items:center;justify-content:flex-end}
+    .checkout-cart__controls button{background:transparent;color:var(--marfim);border:1px solid var(--borda-media);width:30px;height:30px;cursor:pointer}
+    .checkout-cart__total{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--borda-media);color:var(--marfim);font-family:var(--fonte-editorial);font-size:1.5rem}
+    .checkout-cart__note{font-size:.78rem!important;color:var(--marfim-dim)!important}
+    .checkout-cart__status{min-height:1.4em;font-size:.82rem!important;color:var(--ambre)!important}
+    .checkout-cart .btn{width:100%;margin-top:1rem}
+    @media(max-width:850px){.checkout-lab__grid{grid-template-columns:1fr}.checkout-cart{position:static}.checkout-lab__products{grid-template-columns:1fr}}
+  </style>
+</head>
+<body class="detail-page">
+  <header class="header header--scrolled">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">MAISON JF<sup>®</sup></a>
+      <nav class="header__nav" aria-label="Navegação principal"><ul class="header__nav-list"><li><a href="produtos.html" class="header__nav-link">Produtos</a></li><li><a href="farol.html" class="header__nav-link">O Farol</a></li></ul></nav>
+    </div>
+  </header>
+  <main class="checkout-lab">
+    <div class="checkout-lab__inner">
+      <p class="detail-kicker">Laboratório privado</p>
+      <h1 class="detail-section__title">Carrinho e checkout da Maison</h1>
+      <p class="detail-copy">Ambiente de teste. Escolhe o que queres colocar no carrinho e segue para o checkout seguro da Stripe. Não há dinheiro real.</p>
+      <div class="checkout-lab__grid">
+        <section class="checkout-lab__products" aria-label="Produtos de teste">
+          <article class="checkout-lab__card">
+            <p class="detail-kicker">Casa</p>
+            <h2>Brumas de Ambiente MAISON JF®</h2>
+            <p>Muda o ar. Marca o corte entre o dia lá fora e o tempo em casa.</p>
+            <p class="checkout-lab__price">6,50 €</p>
+            <div class="checkout-lab__actions">
+              <label>Qtd. <input id="qty-bruma" type="number" min="1" max="10" value="1"></label>
+              <button class="btn btn--primary" data-add="bruma">Adicionar</button>
+            </div>
+          </article>
+          <article class="checkout-lab__card">
+            <p class="detail-kicker">Corpo</p>
+            <h2>Óleo de Massagem MAISON JF®</h2>
+            <p>Calor, toque e pausa para quando o corpo já está a pedir menos.</p>
+            <p class="checkout-lab__price">12 €</p>
+            <div class="checkout-lab__actions">
+              <label>Qtd. <input id="qty-oleo" type="number" min="1" max="10" value="1"></label>
+              <button class="btn btn--primary" data-add="oleo">Adicionar</button>
+            </div>
+          </article>
+        </section>
+        <aside class="checkout-cart" aria-label="Carrinho">
+          <p class="detail-kicker">Carrinho</p>
+          <h2>O que escolheste</h2>
+          <div id="cart-items" class="checkout-cart__items"></div>
+          <div class="checkout-cart__total"><span>Total</span><strong id="cart-total">0,00 €</strong></div>
+          <p class="checkout-cart__note">Os portes ainda não estão incluídos neste teste. A entrega está limitada a Portugal enquanto afinamos a configuração.</p>
+          <p id="cart-status" class="checkout-cart__status" aria-live="polite"></p>
+          <button id="checkout-button" class="btn btn--primary" disabled>Finalizar no Stripe</button>
+          <button id="clear-cart" class="btn btn--secondary" type="button">Limpar carrinho</button>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <script src="checkout-test.js"></script>
+</body>
+</html>
