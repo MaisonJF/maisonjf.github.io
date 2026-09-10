@@ -1,22 +1,22 @@
-/* MAISON JF® | carregador do passe editorial e legal */
+/* MAISON JF® | carregador dos passes editorial, legal e comercial */
 (function () {
   'use strict';
 
-  function loadLegalPass() {
-    if (document.querySelector('script[src^="legal-pass.js"]')) return;
-    const legal = document.createElement('script');
-    legal.src = 'legal-pass.js?v=20260910';
-    document.body.appendChild(legal);
+  function loadScript(src, marker) {
+    return new Promise(resolve => {
+      if (document.querySelector(`script[src^="${marker}"]`)) {
+        resolve();
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = resolve;
+      script.onerror = resolve;
+      document.body.appendChild(script);
+    });
   }
 
-  if (document.querySelector('script[src^="yoichi-pass-core.js"]')) {
-    loadLegalPass();
-    return;
-  }
-
-  const core = document.createElement('script');
-  core.src = 'yoichi-pass-core.js?v=20260910-final';
-  core.onload = loadLegalPass;
-  core.onerror = loadLegalPass;
-  document.body.appendChild(core);
+  loadScript('yoichi-pass-core.js?v=20260910-final', 'yoichi-pass-core.js')
+    .then(() => loadScript('legal-pass.js?v=20260910-2', 'legal-pass.js'))
+    .then(() => loadScript('commerce-pass.js?v=20260910', 'commerce-pass.js'));
 })();
