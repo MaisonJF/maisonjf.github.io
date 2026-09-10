@@ -138,13 +138,19 @@
       });
     }
 
-    /* Mais confiança sem transformar o fundador num CV ambulante. */
+    /* Fundador: mostrar autoridade real, não uma versão genérica do percurso. */
     const joaoContent = document.querySelector('#joao .joao__content');
-    if (joaoContent && !joaoContent.querySelector('.yoichi-founder-proof')) {
-      const proof = document.createElement('p');
-      proof.className = 'yoichi-founder-proof';
-      proof.innerHTML = '<strong>Formação em Apoio Psicossocial e Apoio à Vítima.</strong><br>Experiência de acompanhamento em contexto residencial e comunitário. Na Maison, a regra é simples: perceber primeiro, propor depois.';
-      joaoContent.appendChild(proof);
+    if (joaoContent) {
+      setText('.joao__role', 'Fundador da Maison JF® · Tarólogo · Técnico Psicossocial · Técnico de Apoio à Vítima', joaoContent);
+      setText('.joao__text', 'Há 32 anos que trabalho com Tarot e com pessoas. Antes de existir um serviço, existe alguém com uma dúvida, uma mudança, uma crise, uma decisão ou simplesmente alguma coisa que já ocupa espaço demais. Na Maison, junto essa experiência à escuta e ao acompanhamento para perceber primeiro — e só depois propor.', joaoContent);
+
+      let proof = joaoContent.querySelector('.yoichi-founder-proof');
+      if (!proof) {
+        proof = document.createElement('p');
+        proof.className = 'yoichi-founder-proof';
+        joaoContent.appendChild(proof);
+      }
+      proof.innerHTML = '<strong>32 anos de experiência com Tarot e atendimento de pessoas.</strong><br>Técnico Psicossocial · Técnico de Apoio à Vítima.<br>Experiência em acompanhamento residencial, comunitário e individual.';
     }
   }
 
