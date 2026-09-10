@@ -9,16 +9,25 @@ export async function onRequestPost({ request, env }) {
       return json({ error: 'Falta configurar a chave Stripe do ambiente de teste no Cloudflare.' }, 503);
     }
 
-    const body = await request.json();
-    const requested = Array.isArray(body?.items) ? body.items : [];
-    const items = requested
-      .map(item => ({
-        id: String(item?.id || ''),
-        quantity: Math.max(1, Math.min(10, Number(item?.quantity || 1)))
-      }))
-      .filter(item => PRODUCTS[item.id]);
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return json({ error: 'Pedido inválido.' }, 400);
+    }
 
-    if (!items.length) return json({ error: 'O carrinho está vazio.' }, 400);
+    const requested = Array.isArray(body?.items) ? body.items.slice(0, 20) : [];
+    const quantities = new Map();
+
+    for (const item of requested) {
+      const id = String(item?.id || '');
+      const quantity = Number(item?.quantity);
+      if (!PRODUCTS[id] || !Number.isInteger(quantity) || quantity < 1 || quantity > 10) continue;
+      quantities.set(id, Math.min(10, (quantities.get(id) || 0) + quantity));
+    }
+
+    const items = [...quantities.entries()].map(([id, quantity]) => ({ id, quantity }));
+    if (!items.length) return json({ error: 'O carrinho está vazio ou contém dados inválidos.' }, 400);
 
     const origin = new URL(request.url).origin;
     const params = new URLSearchParams();
@@ -52,13 +61,17 @@ export async function onRequestPost({ request, env }) {
       body: params
     });
 
-    const session = await stripeResponse.json();
+    const session = await stripeResponse.json().catch(() => ({}));
     if (!stripeResponse.ok) {
       return json({ error: session?.error?.message || 'A Stripe recusou a criação do checkout.' }, stripeResponse.status);
     }
 
+    if (!session?.url) {
+      return json({ error: 'A Stripe criou a sessão sem devolver um endereço de checkout.' }, 502);
+    }
+
     return json({ url: session.url });
-  } catch (error) {
+  } catch {
     return json({ error: 'Não foi possível preparar o checkout de teste.' }, 500);
   }
 }
@@ -68,7 +81,8 @@ function json(payload, status = 200) {
     status,
     headers: {
       'content-type': 'application/json; charset=utf-8',
-      'cache-control': 'no-store'
+      'cache-control': 'no-store',
+      'x-content-type-options': 'nosniff'
     }
   });
 }
