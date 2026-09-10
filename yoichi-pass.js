@@ -138,19 +138,18 @@
       });
     }
 
-    /* Fundador: autoridade factual, experiência longa e contacto real com pessoas em crise. */
+    /* Fundador: autoridade em forma de história, não de currículo. */
     const joaoContent = document.querySelector('#joao .joao__content');
     if (joaoContent) {
-      setText('.joao__role', 'Fundador da Maison JF® · Tarólogo · Técnico Psicossocial · Técnico de Apoio à Vítima', joaoContent);
-      setText('.joao__text', 'Há 32 anos que trabalho com Tarot e com pessoas — não apenas em consulta, mas também em contextos onde não há espaço para respostas vazias. Trabalhei em casa de abrigo com vítimas de violência doméstica, acompanhando pessoas em momentos de crise, ruptura, medo e reconstrução. Essa experiência ensinou-me a ouvir com atenção, a perceber contexto, risco e limites, e a distinguir quando alguém precisa de orientação, presença ou encaminhamento. É essa exigência que trago para a Maison.', joaoContent);
+      setText('.joao__role', 'Fundador da Maison JF®', joaoContent);
 
-      let proof = joaoContent.querySelector('.yoichi-founder-proof');
-      if (!proof) {
-        proof = document.createElement('p');
-        proof.className = 'yoichi-founder-proof';
-        joaoContent.appendChild(proof);
+      const bio = joaoContent.querySelector('.joao__text');
+      if (bio) {
+        bio.innerHTML = 'Há coisas que não se aprendem a decorar. Aprendem-se quando alguém se senta à tua frente e a vida está a cair-lhe em cima.<br><br>Há 32 anos que trabalho com Tarot e atendimento de pessoas. Sou <strong>Técnico Psicossocial</strong> e <strong>Técnico de Apoio à Vítima</strong>, e trabalhei numa casa de abrigo com vítimas de violência doméstica — um contexto onde ouvir mal, julgar depressa ou ignorar um sinal pode ter consequências reais.<br><br>É daí que vem a forma como trabalho na Maison: não te encaixo numa fórmula e não te vendo a primeira solução que tenho à mão. Primeiro percebo o que está mesmo a acontecer. Depois vemos o que faz sentido fazer.';
       }
-      proof.innerHTML = '<strong>32 anos de experiência com Tarot e atendimento de pessoas.</strong><br>Técnico Psicossocial · Técnico de Apoio à Vítima.<br>Experiência em casa de abrigo para vítimas de violência doméstica e no acompanhamento de pessoas em situações de crise e elevada vulnerabilidade.';
+
+      const proof = joaoContent.querySelector('.yoichi-founder-proof');
+      if (proof) proof.remove();
     }
   }
 
