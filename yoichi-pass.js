@@ -476,19 +476,41 @@
 
   updateTrust();
 
-  /* Limpeza final de marcas de texto demasiado mecânico no conteúdo visível. */
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  const textNodes = [];
-  while (walker.nextNode()) textNodes.push(walker.currentNode);
+  /* Limpeza final, também para resultados do Farol criados depois do carregamento. */
+  function cleanText(text) {
+    return text
+      .replace(/\s+[—–]\s+/g, ', ')
+      .replace(/sozinho\(a\)/gi, 'sem companhia')
+      .replace(/acompanhado\(a\)/gi, 'com companhia')
+      .replace(/cansado\(a\)/gi, 'sem energia');
+  }
 
-  textNodes.forEach(node => {
-    const parent = node.parentElement;
-    if (!parent || ['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(parent.tagName)) return;
-    let text = node.nodeValue;
-    text = text.replace(/\s+[—–]\s+/g, ', ');
-    text = text.replace(/sozinho\(a\)/gi, 'sem companhia');
-    text = text.replace(/acompanhado\(a\)/gi, 'com companhia');
-    text = text.replace(/cansado\(a\)/gi, 'sem energia');
-    node.nodeValue = text;
+  function cleanNode(root) {
+    if (!root) return;
+    if (root.nodeType === Node.TEXT_NODE) {
+      const parent = root.parentElement;
+      if (parent && !['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(parent.tagName)) {
+        root.nodeValue = cleanText(root.nodeValue);
+      }
+      return;
+    }
+    if (root.nodeType !== Node.ELEMENT_NODE) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+      const parent = node.parentElement;
+      if (!parent || ['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(parent.tagName)) return;
+      node.nodeValue = cleanText(node.nodeValue);
+    });
+  }
+
+  cleanNode(document.body);
+
+  const cleanupObserver = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      mutation.addedNodes.forEach(cleanNode);
+    });
   });
+  cleanupObserver.observe(document.body, { childList: true, subtree: true });
 })();
