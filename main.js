@@ -389,3 +389,11 @@
   console.log('%cPára de Ignorar. Volta Para Casa.', 'font-family: Inter, sans-serif; font-size: 11px; color: #7a6e5e;');
 
 })();
+
+// Passe editorial/conversão adicional. Mantido separado para ser fácil rever ou reverter.
+(function loadYoichiPass() {
+  if (document.querySelector('script[src^="yoichi-pass.js"]')) return;
+  const script = document.createElement('script');
+  script.src = 'yoichi-pass.js?v=20260910';
+  document.body.appendChild(script);
+})();

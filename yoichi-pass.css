@@ -1,0 +1,48 @@
+/* MAISON JF® — Yoichi conversion & architecture pass · 2026-09-10 */
+
+/* O nudge competia com o Farol, com os CTAs das páginas e com o botão flutuante. */
+.conversion-nudge {
+  display: none !important;
+}
+
+/* Seis entradas no menu, sem perder o ar editorial da Maison. */
+@media (min-width: 981px) {
+  .header__nav-list {
+    gap: clamp(1.35rem, 2.4vw, 3rem);
+  }
+
+  .header__nav-link {
+    white-space: nowrap;
+  }
+}
+
+.yoichi-practical-note {
+  margin-top: 1.5rem;
+  max-width: 58rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(196, 162, 101, 0.18);
+}
+
+.yoichi-secondary-services .detail-section__title {
+  max-width: 760px;
+}
+
+.yoichi-secondary-services .offer-card {
+  opacity: 0.94;
+}
+
+/* B2B: o CTA deve parecer uma porta de entrada, não um pedido de orçamento pesado. */
+body[data-yoichi-page="profissionais.html"] .yoichi-b2b-cta {
+  margin-top: 1.5rem;
+}
+
+/* Ajuda o segundo bloco da homepage a ser percebido como mapa da Maison, não outro teste. */
+body[data-yoichi-page="index.html"] #transformacoes .transformacoes__header {
+  max-width: 920px;
+}
+
+body[data-yoichi-page="index.html"] #transformacoes .transformacoes__subtitle {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
