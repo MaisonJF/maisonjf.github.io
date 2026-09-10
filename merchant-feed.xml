@@ -16,6 +16,8 @@
       <g:condition>new</g:condition>
       <g:brand>MAISON JF®</g:brand>
       <g:identifier_exists>no</g:identifier_exists>
+      <g:unit_pricing_measure>20ml</g:unit_pricing_measure>
+      <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
     </item>
 
     <item>
@@ -29,6 +31,8 @@
       <g:condition>new</g:condition>
       <g:brand>MAISON JF®</g:brand>
       <g:identifier_exists>no</g:identifier_exists>
+      <g:unit_pricing_measure>60ml</g:unit_pricing_measure>
+      <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
     </item>
   </channel>
 </rss>
