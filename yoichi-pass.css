@@ -39,10 +39,73 @@ body[data-yoichi-page="profissionais.html"] .yoichi-b2b-cta {
 /* Ajuda o segundo bloco da homepage a ser percebido como mapa da Maison, não outro teste. */
 body[data-yoichi-page="index.html"] #transformacoes .transformacoes__header {
   max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body[data-yoichi-page="index.html"] #transformacoes .transformacoes__subtitle {
   max-width: 760px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Ritmo editorial: nas capturas desktop havia demasiado vazio entre ideia e acção. */
+@media (min-width: 769px) {
+  body[data-yoichi-page="index.html"] #farol {
+    padding-top: clamp(6rem, 8vw, 8rem);
+    padding-bottom: clamp(6rem, 8vw, 8rem);
+  }
+
+  body[data-yoichi-page="index.html"] #farol .farol__header {
+    margin-bottom: clamp(3rem, 4vw, 4.5rem);
+  }
+
+  body[data-yoichi-page="index.html"] #farol .farol__progress {
+    margin-bottom: clamp(2.25rem, 3vw, 3.25rem);
+  }
+
+  body[data-yoichi-page="index.html"] #transformacoes {
+    padding-top: clamp(7rem, 8vw, 9rem);
+    padding-bottom: clamp(7rem, 8vw, 9rem);
+  }
+
+  body[data-yoichi-page="index.html"] #transformacoes .transformacoes__header {
+    margin-bottom: clamp(4rem, 5vw, 5.5rem);
+  }
+
+  body[data-yoichi-page="index.html"] #servicos {
+    padding-top: clamp(7rem, 8vw, 9rem);
+    padding-bottom: clamp(7rem, 8vw, 9rem);
+  }
+
+  body[data-yoichi-page="index.html"] #joao {
+    padding-top: clamp(7rem, 8vw, 9rem);
+    padding-bottom: clamp(7rem, 8vw, 9rem);
+  }
+
+  body[data-yoichi-page="index.html"] #joao .joao__inner {
+    max-width: 1080px;
+    gap: clamp(4rem, 6vw, 7rem);
+  }
+
+  body[data-yoichi-page="index.html"] #joao .joao__visual {
+    width: 100%;
+    max-width: 420px;
+    justify-self: end;
+  }
+}
+
+/* A credibilidade do fundador deve ler-se como assinatura, não como outro cartão comercial. */
+.yoichi-founder-proof {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(196, 162, 101, 0.18);
+  color: var(--marfim-dim);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.yoichi-founder-proof strong {
+  color: var(--marfim-escuro);
+  font-weight: 400;
 }

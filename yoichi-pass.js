@@ -5,10 +5,10 @@
   const page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
   document.body.dataset.yoichiPage = page;
 
-  if (!document.querySelector('link[href="yoichi-pass.css"]')) {
+  if (!document.querySelector('link[href^="yoichi-pass.css"]')) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = 'yoichi-pass.css?v=20260910';
+    link.href = 'yoichi-pass.css?v=20260910-2';
     document.head.appendChild(link);
   }
 
@@ -120,6 +120,31 @@
           cta.href = item.href;
         }
       });
+    }
+
+    /* Homepage: seis serviços cabem numa grelha limpa. Produtos especiais regressam à área Produtos. */
+    const servicesGrid = document.querySelector('#servicos .services__grid');
+    if (servicesGrid) {
+      servicesGrid.querySelectorAll('.service-card').forEach((card) => {
+        const title = card.querySelector('.service-card__title')?.textContent.trim() || '';
+        if (title.includes('Cristais, Pulseiras e Peças Decorativas')) card.remove();
+      });
+
+      servicesGrid.querySelectorAll('.service-card').forEach((card) => {
+        const title = card.querySelector('.service-card__title')?.textContent.trim() || '';
+        if (title === 'Companhia') {
+          setText('.service-card__eyebrow', 'Não quero ir sem companhia', card);
+        }
+      });
+    }
+
+    /* Mais confiança sem transformar o fundador num CV ambulante. */
+    const joaoContent = document.querySelector('#joao .joao__content');
+    if (joaoContent && !joaoContent.querySelector('.yoichi-founder-proof')) {
+      const proof = document.createElement('p');
+      proof.className = 'yoichi-founder-proof';
+      proof.innerHTML = '<strong>Formação em Apoio Psicossocial e Apoio à Vítima.</strong><br>Experiência de acompanhamento em contexto residencial e comunitário. Na Maison, a regra é simples: perceber primeiro, propor depois.';
+      joaoContent.appendChild(proof);
     }
   }
 
