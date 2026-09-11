@@ -45,9 +45,15 @@ Examples include relationships, decisions, loneliness, self-care, fatigue, spiri
 
 Each Ocean contains clusters and many natural-language searches. Related searches should converge on strong useful pages rather than generating hundreds of thin near-duplicates.
 
-**Ocean / human need → useful Maison page → recognition and value → relevant solution → customer → experience → return → recommendation → new customers.**
+**Ocean / human need → useful Maison page → immediate recognition → relevant offer → customer.**
 
-Traffic alone is not success. The Oceans exist to create qualified discovery that can become trust, enquiries, bookings, purchases and relationships with customers.
+After first contact, a second system begins:
+
+**customer → Maison experience → return → deeper relationship → voluntary recommendation → new customers.**
+
+In the current growth phase, **short-term cash conversion has priority over optimising acquisition for future loyalty**. Loyalty cannot happen before first contact. Acquisition should therefore prioritise situations with a credible path to an immediate booking, purchase or enquiry. Once the person becomes a customer, the Maison experience earns retention and advocacy.
+
+Traffic alone is not success. The Oceans exist to bring the right people into contact with MAISON JF® and create revenue, while remaining genuinely useful.
 
 The visitor does not need to understand the architecture. Complexity belongs behind the scenes.
 
@@ -80,7 +86,79 @@ over generic category-first language such as:
 
 Categories can be useful for structure; pain, desire and lived experience are usually stronger entrances.
 
-## 6. Yoichi Feral
+## 6. Mine the question before the product keyword
+
+MAISON JF® should not depend primarily on winning crowded generic commercial terms such as “Tarot online”, “velas aromáticas” or “presentes originais”. Those terms can still be targeted where useful, but they are not the strategic advantage.
+
+The strategic advantage is to reach the person **one step before they name the Maison's product or service**: when they are searching for the situation, question, fear, desire, contradiction or decision itself.
+
+Do not ask only:
+
+**“What do people search when they already want Tarot?”**
+
+Ask:
+
+**“What are people searching when a legitimate Maison offer could help them now?”**
+
+Examples:
+- “Ele pediu espaço. Devo esperar?”
+- “Ele diz que gosta de mim mas não quer namorar.”
+- “Não sei se devo acabar a relação.”
+- “Tenho medo de tomar a decisão errada.”
+- “Não quero ir sozinho a um evento.”
+- “Como deixar a casa cheirosa o dia todo?”
+
+The situation is the entrance. The appropriate Maison offer is the destination.
+
+Mine real language from search suggestions and related questions, forums and Reddit, YouTube/TikTok language, competitors, current cultural/psychological discourse and other observable sources. Use PT-PT first; include PT-BR or other variants when they reflect language that people in the relevant market actually use.
+
+Do not copy distinctive wording from individual users or creators. Extract patterns, needs, questions and mechanisms.
+
+## 7. Conversion-first Ocean scoring
+
+In the short-term growth phase, rank candidate questions/pages by factors such as:
+
+- evidence of real demand or repeated formulation;
+- intensity of pain, desire or curiosity;
+- urgency;
+- proximity to a decision;
+- value of a personalised answer or solution;
+- natural fit with an existing Maison offer;
+- probability of immediate enquiry, booking or purchase;
+- achievable competition / ability to create a differentiated answer;
+- time and cost required to publish and serve the offer.
+
+Do not invent false numerical precision. Evidence and qualitative scoring are acceptable where reliable volume data is unavailable.
+
+A high-volume informational query with weak commercial relevance can rank below a smaller but intense question that naturally supports an immediate paid solution.
+
+Retention potential may be recorded, but **must not outweigh immediate conversion in acquisition prioritisation during a cash-priority phase**.
+
+## 8. Immediate conversion architecture — Hormozi principle, Maison execution
+
+Do not hide the commercial solution at the bottom of a long article.
+
+For high-intent emotional or practical questions, design the page to work at two speeds:
+
+**Fast visitor:** question/pain → precise recognition → concrete desired outcome → relevant offer visible early → clear CTA.
+
+**Trust-building visitor:** question/pain → precise recognition → early offer → genuinely useful content → reframing/clarity → repeated contextual CTA.
+
+Canonical pattern:
+
+**Human question → “this is me” recognition → useful truth/insight → desired outcome → appropriate Maison offer → reduced friction/uncertainty → CTA.**
+
+The visitor should not need to become interested in Tarot, learn Maison philosophy or read the entire page before discovering that help is available.
+
+Sell the legitimate **desired result**, not merely the mechanism.
+
+For example, the person may not want “60 minutes with Tarot cards”. They may want to stop going in circles, understand what they are ignoring, organise a confusing situation or make a decision with greater clarity. Tarot/consultation can be the vehicle without pretending to guarantee another person's thoughts or the future.
+
+The CTA should be contextual to the situation rather than generic wherever practical: “Quero olhar para o meu caso”, “Preciso de clareza”, “Quero perceber o que fazer”, etc.
+
+Immediate conversion does **not** mean manipulation. The person remains the decision-maker. MAISON JF® creates a clear path and makes the offer easy to understand and choose.
+
+## 9. Yoichi Feral
 
 “Yoichi Feral” is the Maison's internal shorthand for copy with teeth: direct, recognisable, emotionally precise, occasionally provocative and impossible to confuse with generic wellness language.
 
@@ -98,7 +176,7 @@ Stronger: “Tu queres mesmo saber se ele gosta de ti — ou só precisas de uma
 
 Use force where force improves recognition. Use tenderness where tenderness is stronger. Do not make every sentence shout.
 
-## 7. The hidden question
+## 10. The hidden question
 
 For search and content, distinguish:
 
@@ -108,9 +186,11 @@ Example:
 
 “Ele vai voltar?” → “Consigo avançar sem saber se ainda existe esperança?” → reflection/consultation may help organise the person's own choices and experience.
 
+The hidden question should improve relevance and conversion, not create an unnecessarily long therapeutic journey before presenting the offer.
+
 Do not promise knowledge of another person's mind or guaranteed future events merely to increase conversion.
 
-## 8. Relationship content
+## 11. Relationship content
 
 Relationships are a major acquisition Ocean, not the entire Maison.
 
@@ -120,7 +200,7 @@ Do not make LGBT people a token subsection of every page. Include specific exper
 
 Potential clusters include distance, attention, reciprocity, ambiguity, attachment, jealousy, desire, intimacy, sex, trust, betrayal, staying/leaving, ghosting, reconciliation, separation/divorce, ex-partners, loneliness within a relationship and rebuilding afterwards.
 
-## 9. Self-care is structural
+## 12. Self-care is structural
 
 Self-care is not a decorative add-on to the Maison.
 
@@ -134,7 +214,7 @@ A relationship page can therefore lead naturally to a consultation and/or a conc
 
 Never use emotional pain as a cheap excuse for irrelevant product placement.
 
-## 10. Products and services are destinations, not starting assumptions
+## 13. Products and services are destinations, not starting assumptions
 
 Start with what the person needs. Then choose the appropriate destination.
 
@@ -156,7 +236,7 @@ Bad logic: “Está triste → vender vela.”
 
 Better logic: “Está emocionalmente consumido → useful reflection → create a deliberate pause for oneself → if relevant, a sensory product can support that pause.”
 
-## 11. Companionship
+## 14. Companionship
 
 Friend4Rent and Boyfriend4Rent are adult social/affective companionship formats within the limits stated on the official service page.
 
@@ -164,7 +244,7 @@ They are not sexual services and must not be described as guaranteed friendship,
 
 Possible human entrances include loneliness, not wanting to attend an event alone, wanting company for a meal/walk/experience, or wanting agreed affectionate companionship within the defined service boundaries.
 
-## 12. Viral mechanics without becoming viral rubbish
+## 15. Viral mechanics without becoming viral rubbish
 
 Learn mechanisms from excellent psychology, psychotherapy, education, creators and marketing — do not copy their identity or wording.
 
@@ -187,7 +267,7 @@ Avoid:
 - empty inspirational language;
 - keyword stuffing.
 
-## 13. Search and AI discovery
+## 16. Search and AI discovery
 
 Create for humans first, while making meaning explicit enough for search engines and AI systems to retrieve and understand accurately.
 
@@ -197,15 +277,16 @@ For each important topic consider:
 3. psychological tension/paradox;
 4. hidden question;
 5. useful answer;
-6. appropriate Maison destination;
-7. internal links to genuinely related pages;
-8. clear metadata and structured information where appropriate.
+6. desired result;
+7. appropriate Maison offer visible without unnecessary delay;
+8. internal links to genuinely related pages;
+9. clear metadata and structured information where appropriate.
 
 Do not create one page per trivial keyword variation. Cluster equivalent intentions into authoritative pages.
 
-Public-facing pages should be useful even if the visitor never buys anything.
+Public-facing pages should be useful even if the visitor never buys anything. Being useful and converting are not opposites.
 
-## 14. One idea, many channels
+## 17. One idea, many channels
 
 The website is the priority persistent infrastructure. Social platforms amplify it when time and resources allow.
 
@@ -218,7 +299,7 @@ A strong topic can become:
 
 Do not copy-paste mechanically. Adapt the same underlying insight to the behaviour of each channel.
 
-## 15. Voice
+## 18. Voice
 
 Primary language: European Portuguese.
 
@@ -228,7 +309,7 @@ Desired reaction when appropriate: **“Foda-se. É isto.”**
 
 But provocation is a tool, not the brand's entire personality. Premium restraint matters. Think sharp recognition inside an elegant Maison, not permanent shouting.
 
-## 16. Luxury without intimidation
+## 19. Luxury without intimidation
 
 MAISON JF® has a long-term ambition to mature into a respected European luxury Maison. This is a direction to build towards, not a status to claim prematurely.
 
@@ -242,7 +323,7 @@ A low-priced entry product or service should still receive dignity and care. The
 
 The door can be beautiful and still be open.
 
-## 17. School of creators, founders and great Houses
+## 20. School of creators, founders and great Houses
 
 The Maison learns continuously from excellence. It does not define itself against the great Houses and does not imitate them.
 
@@ -262,7 +343,7 @@ The ambition is not to become “a Portuguese Dior”, Saint Laurent or Tom Ford
 
 **First learn from the best. Then grow beside the best. Eventually, build something from which others may also learn.**
 
-## 18. Work worthy of respect
+## 21. Work worthy of respect
 
 MAISON JF® does not expect a place among respected European Maisons merely because it sells expensive objects or uses luxury aesthetics.
 
@@ -274,25 +355,31 @@ The Maison may sell very different things from fashion Houses. The category of t
 
 Respect is not declared. It is made increasingly difficult to deny through the quality and consistency of the work.
 
-## 19. Commercial principle: discovery → loyalty → advocacy
+## 22. Commercial principle: cash first, experience next, loyalty earned
 
-Attention is not the final KPI. Acquisition without retention creates a leaking bucket.
+Attention is not the final KPI.
 
-The Maison's commercial flywheel is:
+In a cash-priority growth phase, the sequence is:
 
-**Oceans/search/social/AI/referral → discovery → trust → first purchase or booking → excellent experience → repeat purchase/booking → deeper relationship with the Maison → voluntary recommendation → new discovery.**
+**qualified discovery → immediate conversion opportunity → first purchase/booking → revenue.**
 
-A new customer is valuable. A satisfied returning customer is more valuable. A returning customer who voluntarily brings another person compounds growth.
+Only after first contact can the retention flywheel operate:
 
-Therefore acquisition pages must not be optimised in isolation from what happens after conversion. Promise, checkout/contact, fulfilment, consultation, packaging, communication, aftercare and the next relevant Maison experience must tell the same story.
+**excellent Maison experience → repeat purchase/booking → deeper relationship → voluntary recommendation → new discovery.**
 
-Never manufacture advocacy, pressure customers to recruit others or confuse loyalty with dependence. Earn recommendation through a memorable, useful and consistent experience.
+Do not optimise a pre-purchase acquisition page primarily for hypothetical future loyalty at the expense of present conversion.
 
-Measure impressions and AI retrieval/citations where available, but also clicks, enquiries, bookings, purchases, repeat rate, returning-customer revenue, referrals, relevant cross-sell and customer feedback.
+At the same time, never damage long-term trust for a short-term sale. Immediate conversion must be earned through relevance, clarity, a strong offer and low friction — not false urgency, invented scarcity or manipulation.
 
-**North Star: not merely more traffic, but more right people becoming customers, returning because the experience deserved it, and bringing others because they genuinely want to.**
+Promise, contact/checkout, fulfilment, consultation, packaging, communication and aftercare must eventually tell the same Maison story.
 
-## 20. Guardrails
+Measure impressions and AI retrieval/citations where available, but in a cash-priority phase give particular attention to clicks into offers, enquiries, bookings, purchases, conversion rate, revenue and time-to-revenue. After customer volume exists, expand emphasis on repeat rate, returning-customer revenue, referrals, relevant cross-sell and customer feedback.
+
+**Short-term North Star: more right people reaching a relevant Maison offer and becoming paying customers.**
+
+**Long-term North Star: those customers returning because the experience deserved it and bringing others because they genuinely want to.**
+
+## 23. Guardrails
 
 - Do not present Tarot as guaranteed prediction or mind-reading.
 - Do not replace medical, psychological, psychiatric, legal or other professional care when needed.
@@ -302,17 +389,17 @@ Measure impressions and AI retrieval/citations where available, but also clicks,
 - Do not confuse direct language with cruelty.
 - Do not claim luxury recognition, heritage or status that has not been earned.
 
-## 21. Decision test
+## 24. Decision test
 
 When deciding whether a future product, service, page or campaign belongs to MAISON JF®, ask:
 
 **Does this have a credible place in somebody's journey of Voltar Para Casa — through Casa, Corpo or Cabeça?**
 
-Then ask:
+For acquisition, then ask:
 
-**Does it help the right person discover us, trust us, buy/book appropriately, return, or recommend us?**
+**Is there a real human question or situation here, and can the Maison present a useful paid solution quickly and honestly?**
 
-If yes, find the simplest honest connection.
+If yes, make the path to that solution simple and visible.
 If the connection must be forced, it probably does not belong.
 
 ---
@@ -321,4 +408,4 @@ If the connection must be forced, it probably does not belong.
 
 **PÁRA DE IGNORAR. Volta Para Casa.**
 
-**Complexidade por baixo. Simplicidade à superfície. Aquisição que conduz a relação. Relação que merece regresso. Regresso que pode gerar recomendação.**
+**Complexidade por baixo. Simplicidade à superfície. Pergunta humana à entrada. Oferta clara no momento certo. Experiência que merece regresso.**
