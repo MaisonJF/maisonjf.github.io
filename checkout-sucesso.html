@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout concluído | MAISON JF®</title>
+  <title>Confirmação do checkout | MAISON JF®</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="styles-additions.css">
@@ -16,8 +16,10 @@
     <section class="detail-hero">
       <div class="detail-hero__inner">
         <p class="detail-eyebrow">MAISON JF®</p>
-        <h1 class="detail-title">Chegaste ao outro lado do checkout.</h1>
-        <p class="detail-lead">Este é o ecrã de confirmação do ambiente de teste. Nenhum dinheiro real foi movimentado.</p>
+        <h1 class="detail-title" id="checkout-title">A confirmar o checkout…</h1>
+        <p class="detail-lead" id="checkout-message">Estamos a confirmar o estado directamente na Stripe.</p>
+        <p class="detail-copy" id="checkout-details"></p>
+        <p class="detail-copy">Em produção, o recibo de pagamento da Stripe pode seguir automaticamente por email. A fatura fiscal da MAISON JF® é emitida separadamente e enviada pelo canal definido para a encomenda.</p>
         <div class="detail-actions">
           <a class="btn btn--primary" href="checkout-teste.html">Voltar ao laboratório</a>
           <a class="btn btn--secondary" href="produtos.html">Ver produtos</a>
@@ -25,6 +27,54 @@
       </div>
     </section>
   </main>
-  <script>localStorage.removeItem('maisonCartTest');</script>
+  <script>
+    (() => {
+      const title = document.getElementById('checkout-title');
+      const message = document.getElementById('checkout-message');
+      const details = document.getElementById('checkout-details');
+      const sessionId = new URLSearchParams(location.search).get('session_id');
+      const money = (amount, currency = 'eur') =>
+        new Intl.NumberFormat('pt-PT', { style: 'currency', currency: currency.toUpperCase() }).format(amount / 100);
+
+      if (!sessionId) {
+        title.textContent = 'Não encontrei uma sessão de checkout.';
+        message.textContent = 'Volta ao carrinho e inicia o checkout novamente.';
+        return;
+      }
+
+      fetch('/api/checkout-session-test?session_id=' + encodeURIComponent(sessionId), {
+        credentials: 'same-origin',
+        cache: 'no-store'
+      })
+        .then(async response => {
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data.error || 'Não foi possível confirmar o checkout.');
+          return data;
+        })
+        .then(data => {
+          const suffix = data.environment === 'test' ? ' Este foi um pagamento de teste: nenhum dinheiro real foi movimentado.' : '';
+          if (data.payment_status === 'paid') {
+            title.textContent = 'Pagamento confirmado.';
+            message.textContent = 'A Stripe confirmou o pagamento.' + suffix;
+            localStorage.removeItem('maisonCartTest');
+          } else if (data.status === 'complete') {
+            title.textContent = 'Checkout concluído. Pagamento a confirmar.';
+            message.textContent = 'A sessão foi concluída, mas o pagamento ainda não aparece como confirmado.' + suffix;
+          } else {
+            title.textContent = 'Checkout ainda não concluído.';
+            message.textContent = 'O estado da sessão ainda não permite confirmar o pagamento.' + suffix;
+          }
+
+          const parts = [];
+          if (Number.isInteger(data.amount_total)) parts.push('Total: ' + money(data.amount_total, data.currency));
+          if (data.email) parts.push('Email: ' + data.email);
+          details.textContent = parts.join(' · ');
+        })
+        .catch(error => {
+          title.textContent = 'Não foi possível confirmar automaticamente.';
+          message.textContent = error.message;
+        });
+    })();
+  </script>
 </body>
 </html>
