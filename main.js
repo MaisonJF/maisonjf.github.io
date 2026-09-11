@@ -394,6 +394,6 @@
 (function loadYoichiPass() {
   if (document.querySelector('script[src^="yoichi-pass.js"]')) return;
   const script = document.createElement('script');
-  script.src = 'yoichi-pass.js?v=20260910';
+  script.src = 'yoichi-pass.js?v=20260911-envios';
   document.body.appendChild(script);
 })();
