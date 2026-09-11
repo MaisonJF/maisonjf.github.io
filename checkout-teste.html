@@ -30,6 +30,11 @@
     .checkout-cart__controls{display:flex;gap:.45rem;align-items:center;justify-content:flex-end}
     .checkout-cart__controls button{background:transparent;color:var(--marfim);border:1px solid var(--borda-media);width:30px;height:30px;cursor:pointer}
     .checkout-cart__total{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--borda-media);color:var(--marfim);font-family:var(--fonte-editorial);font-size:1.5rem}
+    .checkout-shipping{margin:1rem 0;padding:1rem;border:1px solid var(--borda-subtil);background:#111}
+    .checkout-shipping[hidden]{display:none}
+    .checkout-shipping label{display:grid;gap:.35rem;margin:.75rem 0;color:var(--texto-terciario);font-size:.82rem}
+    .checkout-shipping select,.checkout-shipping input{width:100%;background:#0b0b0b;color:var(--marfim);border:1px solid var(--borda-media);padding:.75rem}
+    .checkout-shipping__quote{margin:.8rem 0 0!important;color:var(--ambre)!important;font-size:.82rem!important}
     .checkout-cart__note{font-size:.78rem!important;color:var(--marfim-dim)!important}
     .checkout-cart__status{min-height:1.4em;font-size:.82rem!important;color:var(--ambre)!important}
     .checkout-cart .btn{width:100%;margin-top:1rem}
@@ -115,7 +120,34 @@
           <p class="detail-kicker">Carrinho</p>
           <h2>O que escolheste</h2>
           <div id="cart-items" class="checkout-cart__items"></div>
-          <div class="checkout-cart__total"><span>Total</span><strong id="cart-total">0,00 €</strong></div>
+          <div class="checkout-cart__total"><span>Produtos</span><strong id="cart-total">0,00 €</strong></div>
+          <div id="shipping-panel" class="checkout-shipping" hidden>
+            <p class="detail-kicker">Simulador de portes</p>
+            <label>Destino
+              <select id="shipping-region">
+                <option value="">Escolhe o destino</option>
+                <option value="pt">Portugal</option>
+                <option value="eu">União Europeia</option>
+                <option value="world">Resto do mundo</option>
+              </select>
+            </label>
+            <label id="shipping-postal-wrap" hidden>Código postal português
+              <input id="shipping-postal" inputmode="numeric" autocomplete="postal-code" placeholder="4480-110" maxlength="8">
+            </label>
+            <label>Peso embalado simulado
+              <select id="shipping-weight">
+                <option value="500">até 0,5 kg</option>
+                <option value="1000" selected>até 1 kg</option>
+                <option value="2000">até 2 kg</option>
+                <option value="5000">até 5 kg</option>
+                <option value="10000">até 10 kg</option>
+              </select>
+            </label>
+            <p class="checkout-cart__note">Só no laboratório: este peso serve para testar o motor sem inventar o peso real das embalagens. Em produção, o peso será calculado pelos produtos efectivamente comprados.</p>
+            <p id="shipping-quote" class="checkout-shipping__quote" aria-live="polite">Escolhe o destino para calcular.</p>
+          </div>
+          <div id="shipping-summary" class="checkout-cart__total" hidden><span>Portes</span><strong id="shipping-total">—</strong></div>
+          <div class="checkout-cart__total"><span>Total</span><strong id="grand-total">0,00 €</strong></div>
           <p class="checkout-cart__note">Produtos físicos pedem morada de entrega e seguem sempre com tracking. A política de portes está definida: Continente grátis a partir de 49 €, Açores e Madeira a partir de 79 €, União Europeia desde 99 € e resto do mundo desde 149 €, com cálculo por peso e destino. O motor de cálculo fica em teste até introduzirmos os pesos reais de transporte. Compras apenas de ebooks não pedem morada de entrega nem têm portes. O NIF e a morada de faturação permanecem opcionais, salvo dados estritamente exigidos pelo método de pagamento.</p>
           <p id="cart-status" class="checkout-cart__status" aria-live="polite"></p>
           <button id="checkout-button" class="btn btn--primary" disabled>Finalizar no Stripe</button>
