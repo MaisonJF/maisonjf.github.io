@@ -8,6 +8,9 @@
     meandros: { name: 'Ebook · Vírgulas do Destino: Meandros da Vida', price: 499, kind: 'digital', max: 1 }
   };
 
+  const EU_COUNTRIES = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','RO','SK','SI','ES','SE'];
+  const WORLD_COUNTRIES = ['AD','AL','AM','AO','AR','AU','AZ','BA','BR','CA','CH','CL','CN','CO','CR','EC','EG','GE','GB','HK','ID','IL','IN','IS','JP','JO','KZ','KR','LI','MA','MC','MD','ME','MX','MK','MY','NO','NZ','PA','PE','PH','QA','RS','SG','TH','TN','TR','TW','UA','AE','US','UY','VN','ZA'];
+
   const KEY = 'maisonCartTest';
   const itemsEl = document.getElementById('cart-items');
   const totalEl = document.getElementById('cart-total');
@@ -16,6 +19,8 @@
   const checkoutButton = document.getElementById('checkout-button');
   const shippingPanel = document.getElementById('shipping-panel');
   const shippingRegion = document.getElementById('shipping-region');
+  const shippingCountryWrap = document.getElementById('shipping-country-wrap');
+  const shippingCountry = document.getElementById('shipping-country');
   const shippingPostalWrap = document.getElementById('shipping-postal-wrap');
   const shippingPostal = document.getElementById('shipping-postal');
   const shippingWeight = document.getElementById('shipping-weight');
@@ -50,9 +55,24 @@
   const itemsFromCart = cart => Object.entries(cart).map(([id, quantity]) => ({ id, quantity }));
   const hasPhysical = cart => Object.keys(cart).some(id => PRODUCTS[id]?.kind === 'physical');
 
+  const regionNames = (() => {
+    try { return new Intl.DisplayNames(['pt-PT'], { type: 'region' }); }
+    catch { return null; }
+  })();
+
+  function fillCountries(region) {
+    const codes = region === 'eu' ? EU_COUNTRIES : region === 'world' ? WORLD_COUNTRIES : [];
+    const options = codes
+      .map(code => ({ code, name: regionNames?.of(code) || code }))
+      .sort((a, b) => a.name.localeCompare(b.name, 'pt-PT'));
+    shippingCountry.innerHTML = '<option value="">Escolhe o país</option>' +
+      options.map(item => `<option value="${item.code}">${item.name}</option>`).join('');
+  }
+
   function shippingPayload() {
     return {
       region: shippingRegion.value,
+      countryCode: shippingCountry.value,
       postalCode: shippingPostal.value.trim(),
       testWeightG: Number(shippingWeight.value)
     };
@@ -90,6 +110,7 @@
     shippingPanel.hidden = false;
     shippingSummary.hidden = false;
     shippingPostalWrap.hidden = shippingRegion.value !== 'pt';
+    shippingCountryWrap.hidden = !['eu', 'world'].includes(shippingRegion.value);
 
     if (!shippingRegion.value) {
       shippingReady = false;
@@ -104,6 +125,15 @@
       shippingReady = false;
       shippingCents = 0;
       shippingQuoteEl.textContent = 'Indica o código postal para distinguir Continente de ilhas.';
+      updateTotals();
+      updateCheckoutState(cart);
+      return;
+    }
+
+    if (['eu', 'world'].includes(shippingRegion.value) && !shippingCountry.value) {
+      shippingReady = false;
+      shippingCents = 0;
+      shippingQuoteEl.textContent = 'Escolhe o país para calcular a distância e os portes.';
       updateTotals();
       updateCheckoutState(cart);
       return;
@@ -132,10 +162,15 @@
       shippingCents = Number(data.shippingCents) || 0;
       const threshold = Number(data.freeThresholdCents) || 0;
 
+      const countryName = data.countryCode && data.countryCode !== 'PT'
+        ? (regionNames?.of(data.countryCode) || data.countryCode)
+        : '';
+      const label = countryName ? `${data.zoneLabel} · ${countryName}` : data.zoneLabel;
+
       if (data.freeShipping) {
-        shippingQuoteEl.textContent = `${data.zoneLabel}: portes grátis nesta encomenda. Patamar aplicado: ${money(threshold)}.`;
+        shippingQuoteEl.textContent = `${label}: portes grátis nesta encomenda. Patamar aplicado: ${money(threshold)}.`;
       } else {
-        shippingQuoteEl.textContent = `${data.zoneLabel}: ${money(shippingCents)} de portes rastreáveis. Portes grátis a partir de ${money(threshold)} neste cenário.`;
+        shippingQuoteEl.textContent = `${label}: ${money(shippingCents)} de portes rastreáveis. Portes grátis a partir de ${money(threshold)} neste cenário.`;
       }
     } catch (error) {
       if (serial !== quoteSerial) return;
@@ -212,9 +247,14 @@
   });
 
   shippingRegion.addEventListener('change', () => {
+    const isInternational = ['eu', 'world'].includes(shippingRegion.value);
     shippingPostalWrap.hidden = shippingRegion.value !== 'pt';
+    shippingCountryWrap.hidden = !isInternational;
+    if (isInternational) fillCountries(shippingRegion.value);
+    else shippingCountry.innerHTML = '<option value="">Escolhe o país</option>';
     refreshShippingQuote();
   });
+  shippingCountry.addEventListener('change', refreshShippingQuote);
   shippingPostal.addEventListener('input', refreshShippingQuote);
   shippingWeight.addEventListener('change', refreshShippingQuote);
 
