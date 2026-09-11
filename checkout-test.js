@@ -1,9 +1,11 @@
 (() => {
   const PRODUCTS = {
-    bruma: { name: 'Brumas de Ambiente MAISON JF®', price: 650 },
-    oleo: { name: 'Óleo de Massagem MAISON JF®', price: 1200 },
-    escalda: { name: 'Escalda-Pés MAISON JF® · 280 g', price: 950 },
-    vela: { name: 'Vela Aromática MAISON JF® · 170 g', price: 1400 }
+    bruma: { name: 'Brumas de Ambiente MAISON JF®', price: 650, kind: 'physical', max: 10 },
+    oleo: { name: 'Óleo de Massagem MAISON JF®', price: 1200, kind: 'physical', max: 10 },
+    escalda: { name: 'Escalda-Pés MAISON JF® · 280 g', price: 950, kind: 'physical', max: 10 },
+    vela: { name: 'Vela Aromática MAISON JF® · 170 g', price: 1400, kind: 'physical', max: 10 },
+    turista: { name: 'Ebook · Vírgulas do Destino: O Turista', price: 299, kind: 'digital', max: 1 },
+    meandros: { name: 'Ebook · Vírgulas do Destino: Meandros da Vida', price: 499, kind: 'digital', max: 1 }
   };
   const KEY = 'maisonCartTest';
   const itemsEl = document.getElementById('cart-items');
@@ -18,7 +20,7 @@
       if (!PRODUCTS[id]) continue;
       const qty = Number(rawQty);
       if (!Number.isInteger(qty) || qty < 1) continue;
-      cart[id] = Math.min(10, qty);
+      cart[id] = Math.min(PRODUCTS[id].max, qty);
     }
     return cart;
   };
@@ -44,11 +46,14 @@
         total += PRODUCTS[id].price * qty;
         const row = document.createElement('div');
         row.className = 'checkout-cart__item';
+        const plus = qty < PRODUCTS[id].max
+          ? `<button type="button" data-inc="${id}" aria-label="Adicionar uma unidade">+</button>`
+          : '';
         row.innerHTML = `<div><strong>${PRODUCTS[id].name}</strong><p>${money(PRODUCTS[id].price)} cada</p></div>
           <div class="checkout-cart__controls">
             <button type="button" data-dec="${id}" aria-label="Retirar uma unidade">−</button>
             <span>${qty}</span>
-            <button type="button" data-inc="${id}" aria-label="Adicionar uma unidade">+</button>
+            ${plus}
           </div>`;
         itemsEl.appendChild(row);
       }
@@ -60,7 +65,7 @@
   function change(id, delta) {
     if (!PRODUCTS[id]) return;
     const cart = read();
-    const next = Math.max(0, Math.min(10, (cart[id] || 0) + delta));
+    const next = Math.max(0, Math.min(PRODUCTS[id].max, (cart[id] || 0) + delta));
     if (next === 0) delete cart[id]; else cart[id] = next;
     write(cart);
     render();
@@ -73,7 +78,7 @@
       if (!PRODUCTS[id]) return;
       const qtyInput = document.getElementById(`qty-${id}`);
       const parsed = Number(qtyInput?.value || 1);
-      const qty = Number.isInteger(parsed) ? Math.max(1, Math.min(10, parsed)) : 1;
+      const qty = Number.isInteger(parsed) ? Math.max(1, Math.min(PRODUCTS[id].max, parsed)) : 1;
       change(id, qty);
       statusEl.textContent = 'Adicionado ao carrinho.';
       return;
