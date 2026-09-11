@@ -95,6 +95,12 @@
 
           const parts = [];
           if (Number.isInteger(data.amount_total)) parts.push('Total: ' + money(data.amount_total, data.currency));
+          if (data.has_physical && data.shipping_zone_label) {
+            const shippingText = Number.isInteger(data.shipping_cents) && data.shipping_cents === 0
+              ? 'portes grátis'
+              : (Number.isInteger(data.shipping_cents) ? money(data.shipping_cents, data.currency) : 'portes calculados');
+            parts.push('Envio: ' + data.shipping_zone_label + ' · ' + shippingText);
+          }
           if (data.email) parts.push('Email: ' + data.email);
           details.textContent = parts.join(' · ');
         })
