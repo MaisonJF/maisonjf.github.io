@@ -12,8 +12,12 @@ const PRODUCTS = {
 const DELIVERY = {
   mainland: { min: 2, max: 4 },
   islands: { min: 4, max: 15 },
-  eu: { min: 4, max: 10 },
-  world: { min: 5, max: 20 }
+  eu_near: { min: 3, max: 7 },
+  eu_west: { min: 4, max: 8 },
+  eu_far: { min: 4, max: 10 },
+  world_near: { min: 4, max: 10 },
+  world_mid: { min: 5, max: 15 },
+  world_far: { min: 7, max: 20 }
 };
 
 export async function onRequestPost({ request, env }) {
@@ -51,6 +55,7 @@ export async function onRequestPost({ request, env }) {
     if (hasPhysical) {
       shipping = calculateShipping({
         region: String(body?.shipping?.region || ''),
+        countryCode: String(body?.shipping?.countryCode || ''),
         postalCode: String(body?.shipping?.postalCode || ''),
         weightG: Number(body?.shipping?.testWeightG),
         subtotalCents,
@@ -105,6 +110,7 @@ export async function onRequestPost({ request, env }) {
 
       params.set('metadata[shipping_zone]', shipping.zone);
       params.set('metadata[shipping_zone_label]', shipping.zoneLabel);
+      params.set('metadata[shipping_country_code]', shipping.countryCode || '');
       params.set('metadata[shipping_weight_g]', String(shipping.weightG));
       params.set('metadata[shipping_cents]', String(shipping.shippingCents));
       params.set('metadata[shipping_free_threshold_cents]', String(shipping.freeThresholdCents));
