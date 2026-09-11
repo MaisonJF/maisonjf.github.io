@@ -39,6 +39,14 @@ export async function onRequestGet({ request, env }) {
       name: session.customer_details?.name || null,
       nif: nifField?.numeric?.value || nifField?.text?.value || null,
       has_physical: session.metadata?.has_physical === '1',
+      shipping_zone: session.metadata?.shipping_zone || null,
+      shipping_zone_label: session.metadata?.shipping_zone_label || null,
+      shipping_cents: /^\d+$/.test(String(session.metadata?.shipping_cents || ''))
+        ? Number(session.metadata.shipping_cents)
+        : null,
+      shipping_weight_g: /^\d+$/.test(String(session.metadata?.shipping_weight_g || ''))
+        ? Number(session.metadata.shipping_weight_g)
+        : null,
       ebook_ids: session.payment_status === 'paid' ? ebookIds : [],
       environment: session.livemode ? 'live' : 'test'
     });
