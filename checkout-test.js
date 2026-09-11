@@ -1,7 +1,9 @@
 (() => {
   const PRODUCTS = {
     bruma: { name: 'Brumas de Ambiente MAISON JF®', price: 650 },
-    oleo: { name: 'Óleo de Massagem MAISON JF®', price: 1200 }
+    oleo: { name: 'Óleo de Massagem MAISON JF®', price: 1200 },
+    escalda: { name: 'Escalda-Pés MAISON JF® · 280 g', price: 950 },
+    vela: { name: 'Vela Aromática MAISON JF® · 170 g', price: 1400 }
   };
   const KEY = 'maisonCartTest';
   const itemsEl = document.getElementById('cart-items');
