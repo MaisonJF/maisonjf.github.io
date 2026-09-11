@@ -1,8 +1,10 @@
 const PRODUCTS = {
-  bruma: 'price_1UECuk5O4m7iPegSqgyaIVvN',
-  oleo: 'price_1UECv65O4m7iPegSVGK8qedO',
-  escalda: 'price_1UEQLo5O4m7iPegS8BOzlT0P',
-  vela: 'price_1UEQLr5O4m7iPegSWWLhiNWP'
+  bruma: { price: 'price_1UECuk5O4m7iPegSqgyaIVvN', kind: 'physical', max: 10 },
+  oleo: { price: 'price_1UECv65O4m7iPegSVGK8qedO', kind: 'physical', max: 10 },
+  escalda: { price: 'price_1UEQLo5O4m7iPegS8BOzlT0P', kind: 'physical', max: 10 },
+  vela: { price: 'price_1UEQLr5O4m7iPegSWWLhiNWP', kind: 'physical', max: 10 },
+  turista: { price: 'price_1UERKm5O4m7iPegSn9DuUULs', kind: 'digital', max: 1 },
+  meandros: { price: 'price_1UERKp5O4m7iPegSCC05H2Kq', kind: 'digital', max: 1 }
 };
 
 export async function onRequestPost({ request, env }) {
@@ -24,12 +26,16 @@ export async function onRequestPost({ request, env }) {
     for (const item of requested) {
       const id = String(item?.id || '');
       const quantity = Number(item?.quantity);
-      if (!PRODUCTS[id] || !Number.isInteger(quantity) || quantity < 1 || quantity > 10) continue;
-      quantities.set(id, Math.min(10, (quantities.get(id) || 0) + quantity));
+      const product = PRODUCTS[id];
+      if (!product || !Number.isInteger(quantity) || quantity < 1 || quantity > product.max) continue;
+      quantities.set(id, Math.min(product.max, (quantities.get(id) || 0) + quantity));
     }
 
     const items = [...quantities.entries()].map(([id, quantity]) => ({ id, quantity }));
     if (!items.length) return json({ error: 'O carrinho está vazio ou contém dados inválidos.' }, 400);
+
+    const hasPhysical = items.some(item => PRODUCTS[item.id].kind === 'physical');
+    const ebookIds = items.filter(item => PRODUCTS[item.id].kind === 'digital').map(item => item.id);
 
     const origin = new URL(request.url).origin;
     const params = new URLSearchParams();
@@ -38,7 +44,6 @@ export async function onRequestPost({ request, env }) {
     params.set('cancel_url', origin + '/checkout-teste.html?cancelado=1');
     params.set('customer_creation', 'always');
     params.set('billing_address_collection', 'auto');
-    params.set('phone_number_collection[enabled]', 'true');
     params.set('locale', 'pt');
     params.set('custom_fields[0][key]', 'nif');
     params.set('custom_fields[0][label][type]', 'custom');
@@ -48,19 +53,27 @@ export async function onRequestPost({ request, env }) {
     params.set('custom_fields[0][numeric][minimum_length]', '9');
     params.set('custom_fields[0][numeric][maximum_length]', '9');
     params.set('custom_text[submit][message]', 'Ao pagar, confirmas a compra e aceitas as [condições da MAISON JF®](https://maison-jf.com/informacao-legal.html) e a [política de devoluções](https://maison-jf.com/devolucoes.html). A fatura fiscal é emitida pela MAISON JF® separadamente.');
-    params.set('shipping_address_collection[allowed_countries][0]', 'PT');
     params.set('payment_method_types[0]', 'card');
     params.set('payment_method_types[1]', 'mb_way');
     params.set('submit_type', 'pay');
     params.set('metadata[environment]', 'maison-jf-sandbox');
     params.set('metadata[source]', 'site-cart-test');
+    params.set('metadata[has_physical]', hasPhysical ? '1' : '0');
+    params.set('metadata[ebook_ids]', ebookIds.join(','));
+
+    if (hasPhysical) {
+      params.set('shipping_address_collection[allowed_countries][0]', 'PT');
+    }
 
     items.forEach((item, index) => {
-      params.set(`line_items[${index}][price]`, PRODUCTS[item.id]);
+      const product = PRODUCTS[item.id];
+      params.set(`line_items[${index}][price]`, product.price);
       params.set(`line_items[${index}][quantity]`, String(item.quantity));
-      params.set(`line_items[${index}][adjustable_quantity][enabled]`, 'true');
-      params.set(`line_items[${index}][adjustable_quantity][minimum]`, '1');
-      params.set(`line_items[${index}][adjustable_quantity][maximum]`, '10');
+      if (product.max > 1) {
+        params.set(`line_items[${index}][adjustable_quantity][enabled]`, 'true');
+        params.set(`line_items[${index}][adjustable_quantity][minimum]`, '1');
+        params.set(`line_items[${index}][adjustable_quantity][maximum]`, String(product.max));
+      }
     });
 
     const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {

@@ -19,6 +19,8 @@
         <h1 class="detail-title" id="checkout-title">A confirmar o checkout…</h1>
         <p class="detail-lead" id="checkout-message">Estamos a confirmar o estado directamente na Stripe.</p>
         <p class="detail-copy" id="checkout-details"></p>
+        <div id="ebook-downloads" class="detail-actions" hidden></div>
+        <p class="detail-copy" id="ebook-note" hidden>Os ebooks ficam disponíveis nesta compra durante 7 dias. Se o acesso expirar ou houver algum problema, contacta a MAISON JF® para receberes novo acesso.</p>
         <p class="detail-copy">Depois de um pagamento confirmado, o checkout prepara o recibo Stripe para o email usado na compra. Em ambiente de teste a Stripe não envia automaticamente esse email. A fatura fiscal da MAISON JF® é emitida separadamente através do Portal das Finanças.</p>
         <div class="detail-actions">
           <a class="btn btn--primary" href="checkout-teste.html">Voltar ao laboratório</a>
@@ -32,7 +34,13 @@
       const title = document.getElementById('checkout-title');
       const message = document.getElementById('checkout-message');
       const details = document.getElementById('checkout-details');
+      const downloads = document.getElementById('ebook-downloads');
+      const ebookNote = document.getElementById('ebook-note');
       const sessionId = new URLSearchParams(location.search).get('session_id');
+      const ebookNames = {
+        turista: 'Descarregar O Turista',
+        meandros: 'Descarregar Meandros da Vida'
+      };
       const money = (amount, currency = 'eur') =>
         new Intl.NumberFormat('pt-PT', { style: 'currency', currency: currency.toUpperCase() }).format(amount / 100);
 
@@ -57,6 +65,20 @@
             title.textContent = 'Pagamento confirmado.';
             message.textContent = 'A Stripe confirmou o pagamento.' + suffix;
             localStorage.removeItem('maisonCartTest');
+
+            if (Array.isArray(data.ebook_ids) && data.ebook_ids.length) {
+              downloads.hidden = false;
+              ebookNote.hidden = false;
+              data.ebook_ids.forEach(id => {
+                if (!ebookNames[id]) return;
+                const link = document.createElement('a');
+                link.className = 'btn btn--primary';
+                link.href = '/api/ebook-download-test?session_id=' + encodeURIComponent(sessionId) + '&ebook=' + encodeURIComponent(id);
+                link.textContent = ebookNames[id];
+                downloads.appendChild(link);
+              });
+            }
+
             fetch('/api/checkout-receipt-test', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
