@@ -28,6 +28,12 @@
       list.appendChild(returnsItem);
     }
 
+    if (!footer.querySelector('a[href="envios.html"]')) {
+      const shippingItem = document.createElement('li');
+      shippingItem.innerHTML = '<a href="envios.html" class="footer__link">Envios e portes</a>';
+      list.appendChild(shippingItem);
+    }
+
     if (!footer.querySelector('a[href*="livroreclamacoes.pt"]')) {
       const complaintsItem = document.createElement('li');
       complaintsItem.innerHTML = '<a href="https://www.livroreclamacoes.pt/Inicio/" class="footer__link" target="_blank" rel="noopener">Livro de Reclamações</a>';
