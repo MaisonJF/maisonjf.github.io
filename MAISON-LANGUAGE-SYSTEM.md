@@ -35,7 +35,7 @@ Possible expressions: candles, room mists, linen/perfumed waters, home fragrance
 
 Casa, Corpo and Cabeça may overlap. A relationship consultation can lead to self-care; a self-care ritual can involve the body and the physical home; a home product can support a personal ritual.
 
-## 3. The Oceans
+## 3. The Oceans — acquisition is the North
 
 “Oceans” is primarily an **internal acquisition and content architecture**, not necessarily a visible menu or public section.
 
@@ -45,7 +45,9 @@ Examples include relationships, decisions, loneliness, self-care, fatigue, spiri
 
 Each Ocean contains clusters and many natural-language searches. Related searches should converge on strong useful pages rather than generating hundreds of thin near-duplicates.
 
-**Ocean / human need → useful Maison page → recognition and value → relevant solution → Volta Para Casa.**
+**Ocean / human need → useful Maison page → recognition and value → relevant solution → customer → experience → return → recommendation → new customers.**
+
+Traffic alone is not success. The Oceans exist to create qualified discovery that can become trust, enquiries, bookings, purchases and relationships with customers.
 
 The visitor does not need to understand the architecture. Complexity belongs behind the scenes.
 
@@ -226,15 +228,71 @@ Desired reaction when appropriate: **“Foda-se. É isto.”**
 
 But provocation is a tool, not the brand's entire personality. Premium restraint matters. Think sharp recognition inside an elegant Maison, not permanent shouting.
 
-## 16. Commercial principle
+## 16. Luxury without intimidation
 
-Attention is not the final KPI. The infrastructure should ultimately help produce appropriate actions: enquiries, consultations, reservations, purchases, repeat customers, professional leads and brand trust.
+MAISON JF® has a long-term ambition to mature into a respected European luxury Maison. This is a direction to build towards, not a status to claim prematurely.
 
-Measure impressions, retrieval/citations where available, clicks, enquiries, bookings, purchases and conversion paths. Improve what demonstrates demand.
+Luxury must not make the person feel that the Maison is “not for people like me”. The desired experience is elevated but welcoming.
 
-Do not promise traffic, rankings, AI recommendations or revenue.
+**Luxo sem distância. Desejo sem intimidação. Elegância sem frieza.**
 
-## 17. Guardrails
+Luxury is not simply high prices, gold, serif typography or visual minimalism. It is expressed through editing, coherence, detail, materials, language, photography, packaging, service, restraint, consistency, memory and the quality of the complete experience.
+
+A low-priced entry product or service should still receive dignity and care. The customer should not be made to feel lesser because of the value of their purchase.
+
+The door can be beautiful and still be open.
+
+## 17. School of creators, founders and great Houses
+
+The Maison learns continuously from excellence. It does not define itself against the great Houses and does not imitate them.
+
+Study founders, creators, creative leaders and Houses to understand transferable principles: how identity is built, how codes become recognisable, how desire is created, how quality is protected, how a universe remains coherent, how service becomes ritual, how a founder's vision can become culture and how relevance is renewed without destroying identity.
+
+Important schools of study include **Christian Dior and the House of Dior; Yves Saint Laurent and Saint Laurent; Tom Ford and his work as a creator and brand builder**, alongside other relevant founders, creators and Houses as the research develops.
+
+Do not reduce these references to clichés or copy their visual signatures. For every reference use this method:
+
+**What did the creator/House actually do? → Why did it work or fail? → What transferable principle sits underneath? → Does it serve MAISON JF®? → How can it be transformed into something recognisably ours? → Did the result improve the customer experience or business?**
+
+Learn from failures as well as successes: dilution, overextension, loss of codes, poor service, excessive accessibility or exclusivity, failed reinventions and moments when a House lost relevance can be valuable lessons.
+
+The school of excellence is not restricted to fashion. Learn where useful from perfumery, hospitality, architecture, interior design, gastronomy, technology, psychology, behavioural science, sales, storytelling, art, culture, retail and service.
+
+The ambition is not to become “a Portuguese Dior”, Saint Laurent or Tom Ford. It is to learn from the standards that made great creators and Houses references, then evolve those lessons through MAISON JF®'s own identity.
+
+**First learn from the best. Then grow beside the best. Eventually, build something from which others may also learn.**
+
+## 18. Work worthy of respect
+
+MAISON JF® does not expect a place among respected European Maisons merely because it sells expensive objects or uses luxury aesthetics.
+
+The long-term aim is to build enough identity, quality, culture, service, consistency, customer trust and meaningful work that respect becomes a consequence of the work itself.
+
+The Maison may sell very different things from fashion Houses. The category of the object is not the basis of the ambition.
+
+**The objective is not to look like a great Maison. It is to become a Maison that great Maisons could respect.**
+
+Respect is not declared. It is made increasingly difficult to deny through the quality and consistency of the work.
+
+## 19. Commercial principle: discovery → loyalty → advocacy
+
+Attention is not the final KPI. Acquisition without retention creates a leaking bucket.
+
+The Maison's commercial flywheel is:
+
+**Oceans/search/social/AI/referral → discovery → trust → first purchase or booking → excellent experience → repeat purchase/booking → deeper relationship with the Maison → voluntary recommendation → new discovery.**
+
+A new customer is valuable. A satisfied returning customer is more valuable. A returning customer who voluntarily brings another person compounds growth.
+
+Therefore acquisition pages must not be optimised in isolation from what happens after conversion. Promise, checkout/contact, fulfilment, consultation, packaging, communication, aftercare and the next relevant Maison experience must tell the same story.
+
+Never manufacture advocacy, pressure customers to recruit others or confuse loyalty with dependence. Earn recommendation through a memorable, useful and consistent experience.
+
+Measure impressions and AI retrieval/citations where available, but also clicks, enquiries, bookings, purchases, repeat rate, returning-customer revenue, referrals, relevant cross-sell and customer feedback.
+
+**North Star: not merely more traffic, but more right people becoming customers, returning because the experience deserved it, and bringing others because they genuinely want to.**
+
+## 20. Guardrails
 
 - Do not present Tarot as guaranteed prediction or mind-reading.
 - Do not replace medical, psychological, psychiatric, legal or other professional care when needed.
@@ -242,12 +300,17 @@ Do not promise traffic, rankings, AI recommendations or revenue.
 - Do not invent demand, scarcity, testimonials, credentials or results.
 - Do not turn spiritual beliefs into factual diagnoses.
 - Do not confuse direct language with cruelty.
+- Do not claim luxury recognition, heritage or status that has not been earned.
 
-## 18. Decision test
+## 21. Decision test
 
 When deciding whether a future product, service, page or campaign belongs to MAISON JF®, ask:
 
 **Does this have a credible place in somebody's journey of Voltar Para Casa — through Casa, Corpo or Cabeça?**
+
+Then ask:
+
+**Does it help the right person discover us, trust us, buy/book appropriately, return, or recommend us?**
 
 If yes, find the simplest honest connection.
 If the connection must be forced, it probably does not belong.
@@ -258,4 +321,4 @@ If the connection must be forced, it probably does not belong.
 
 **PÁRA DE IGNORAR. Volta Para Casa.**
 
-Complexidade por baixo. Simplicidade à superfície.
+**Complexidade por baixo. Simplicidade à superfície. Aquisição que conduz a relação. Relação que merece regresso. Regresso que pode gerar recomendação.**
