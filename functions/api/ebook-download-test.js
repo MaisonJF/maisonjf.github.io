@@ -1,3 +1,4 @@
+// R2 binding: EBOOKS
 const EBOOKS = {
   turista: {
     key: 'ebooks/virgulas-do-destino-o-turista.pdf',
