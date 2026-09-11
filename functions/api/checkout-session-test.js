@@ -12,9 +12,7 @@ export async function onRequestGet({ request, env }) {
 
     const response = await fetch(
       'https://api.stripe.com/v1/checkout/sessions/' + encodeURIComponent(sessionId),
-      {
-        headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}` }
-      }
+      { headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}` } }
     );
 
     const session = await response.json().catch(() => ({}));
@@ -26,6 +24,11 @@ export async function onRequestGet({ request, env }) {
       ? session.custom_fields.find(field => field?.key === 'nif')
       : null;
 
+    const ebookIds = String(session.metadata?.ebook_ids || '')
+      .split(',')
+      .map(value => value.trim())
+      .filter(value => value === 'turista' || value === 'meandros');
+
     return json({
       id: session.id,
       status: session.status || null,
@@ -35,6 +38,8 @@ export async function onRequestGet({ request, env }) {
       email: session.customer_details?.email || null,
       name: session.customer_details?.name || null,
       nif: nifField?.numeric?.value || nifField?.text?.value || null,
+      has_physical: session.metadata?.has_physical === '1',
+      ebook_ids: session.payment_status === 'paid' ? ebookIds : [],
       environment: session.livemode ? 'live' : 'test'
     });
   } catch {
@@ -48,7 +53,7 @@ function json(payload, status = 200) {
     headers: {
       'content-type': 'application/json; charset=utf-8',
       'cache-control': 'no-store',
-      'x-content-type-options': 'nosniff'
+      'x-content-type-options': 'nosn'
     }
   });
 }
