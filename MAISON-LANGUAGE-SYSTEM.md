@@ -343,7 +343,82 @@ The ambition is not to become “a Portuguese Dior”, Saint Laurent or Tom Ford
 
 **First learn from the best. Then grow beside the best. Eventually, build something from which others may also learn.**
 
-## 21. Work worthy of respect
+## 21. MAISON JF® Institutional Learning System
+
+This document is not an archive of past decisions. It is an **operating manual and institutional memory** for João, collaborators and AI systems working on MAISON JF®.
+
+Before substantial strategy, copy, SEO, conversion, product, service, design or customer-experience work, use this system as canonical context. Do not reinvent already-settled Maison principles merely because a new conversation, person, model or tool begins.
+
+### The learning loop
+
+**Learn → document → execute → measure → challenge → refine → document again.**
+
+The Bible is authoritative but not infallible. When evidence contradicts a rule, do not protect the rule for sentimental reasons. Determine whether the execution was poor, the evidence is weak, or the rule itself should evolve. Then update the canonical system deliberately.
+
+### The source-to-Maison method
+
+For every external school, creator, framework, trend or new discovery, ask:
+
+**Source → What did we actually learn? → Where is it useful? → Where is it dangerous or inappropriate? → How does it become recognisably MAISON JF®? → What result should improve? → What did the evidence show?**
+
+Never copy a source's identity. Extract the mechanism, test its relevance and translate it through the Maison.
+
+### Current schools and their jobs
+
+**João / Oceans** — foundational Maison acquisition vision. Start from the person's real question, need, pain, desire, contradiction or moment rather than waiting for explicit product intent. Use it to decide where the Maison should be discoverable. Do not reduce Oceans to a conventional keyword list or expose the internal architecture unnecessarily to visitors.
+
+**Alex Hormozi / offer and conversion mechanics** — learn from specificity of pain/desire, desired outcome, value perception, friction reduction, risk reduction, offer clarity and decisive calls to action. Use it to turn relevant attention into action without burying the offer. Do not copy Hormozi's persona, aesthetics, hyperbole or turn MAISON JF® into an aggressive internet-marketing brand. The mechanism serves the Maison; the Maison does not become Hormozi.
+
+**Esther Perel / contradiction and the hidden relational question** — learn to notice paradox, ambivalence, desire, identity and the deeper question underneath the literal relationship question. Use it to create recognition and depth. Do not imitate her language, present her frameworks as Maison inventions, or use relational complexity to manufacture certainty about another person's motives.
+
+**The Gottman tradition / observable relational behaviour** — learn from patterns, bids for connection, responses, repair and repeated behaviour rather than overinterpreting isolated signals. Use it to ground relationship content in what can actually be observed. Do not turn research concepts into diagnoses or pretend a checklist can decide a person's relationship for them.
+
+**Psychology and psychotherapy of excellence / depth and human pattern recognition** — learn rigorous concepts, nuance, human contradictions and language that helps people recognise experience. Use them to improve understanding and avoid shallow wellness content. Do not practise psychotherapy without the relevant role/credentials, diagnose visitors, replace professional care or exploit vulnerability commercially.
+
+**Viral communication / recognition and transmission** — learn why certain formulations travel: specificity, memorable simplicity, contradiction, curiosity, private behaviours and emotional recognition. Use it to make useful ideas easier to notice, remember and share. Do not use fearbait, false certainty, fake diagnoses, empty outrage or engagement bait merely because it performs.
+
+**Yoichi Feral / Maison impact layer** — translate insight into direct, alive, emotionally precise Maison language with teeth. Use when sharpness creates recognition or movement. Do not make every sentence aggressive, vulgar or theatrical. Yoichi is a blade, not the entire cutlery drawer.
+
+**KISS / experience simplification** — hide backstage complexity and reduce unnecessary choices, explanation and friction for the visitor. Use across navigation, pages, offers, checkout/contact and communication. Do not confuse simplicity with shallowness: the infrastructure may be extremely sophisticated.
+
+**Christian Dior, Yves Saint Laurent, Tom Ford and the School of great creators/Houses / identity, desire and excellence** — study codes, editing, discipline, cultural relevance, presentation, service, experience, founder vision and the construction of a coherent universe. Use these lessons to raise standards. Do not imitate products, visual signatures, campaigns or heritage. MAISON JF® must become more itself, not a costume of another House.
+
+**Search, AI discovery and platform evidence / distribution and retrieval** — learn how people actually discover, phrase, retrieve and cite information across search engines, AI systems and platforms. Use evidence to improve discoverability, structure and distribution. Do not chase every algorithm rumour or sacrifice human usefulness to machine-facing tricks.
+
+### Separation of responsibilities
+
+No single school controls the Maison.
+
+A useful working sequence is:
+
+**Ocean / João finds the human entrance → psychology/Perel/Gottman helps expose the real tension → viral mechanics finds a recognisable formulation → Yoichi gives it Maison teeth → Hormozi makes the useful offer easy to choose now → KISS removes friction → the School of great Maisons elevates presentation and experience → MAISON JF® integrates everything into Casa · Corpo · Cabeça and Volta Para Casa.**
+
+This is a map, not a compulsory assembly line. Use only the layers that improve the work.
+
+### AI operating rule
+
+An AI working for MAISON JF® should treat this document as **canonical project context**, not as optional inspiration. When a new instruction or discovery conflicts with it, the AI should identify the conflict rather than silently overwrite Maison doctrine.
+
+An AI must distinguish:
+- **established Maison principle**;
+- **current hypothesis to test**;
+- **external evidence**;
+- **creative proposal**;
+- **measured result**.
+
+Do not present a hypothesis as settled doctrine merely because it sounds clever. Do not present an external framework as Maison identity. Do not preserve doctrine when strong evidence shows it should change.
+
+When a durable lesson is learned, it should be added or reconciled here so future humans and AI systems do not need João to explain the same principle repeatedly.
+
+### Institutional memory rule
+
+The purpose is continuity without stagnation.
+
+**João teaches the Maison → the Maison documents → humans and AI systems execute → the market and customers respond → evidence is interpreted → the Maison learns → the canonical system evolves.**
+
+The desired outcome is not obedience to an old document. It is cumulative intelligence: MAISON JF® should become more coherent, more useful, more distinctive and commercially stronger because it remembers what it has learned.
+
+## 22. Work worthy of respect
 
 MAISON JF® does not expect a place among respected European Maisons merely because it sells expensive objects or uses luxury aesthetics.
 
@@ -355,7 +430,7 @@ The Maison may sell very different things from fashion Houses. The category of t
 
 Respect is not declared. It is made increasingly difficult to deny through the quality and consistency of the work.
 
-## 22. Commercial principle: cash first, experience next, loyalty earned
+## 23. Commercial principle: cash first, experience next, loyalty earned
 
 Attention is not the final KPI.
 
@@ -379,7 +454,7 @@ Measure impressions and AI retrieval/citations where available, but in a cash-pr
 
 **Long-term North Star: those customers returning because the experience deserved it and bringing others because they genuinely want to.**
 
-## 23. Guardrails
+## 24. Guardrails
 
 - Do not present Tarot as guaranteed prediction or mind-reading.
 - Do not replace medical, psychological, psychiatric, legal or other professional care when needed.
@@ -389,7 +464,7 @@ Measure impressions and AI retrieval/citations where available, but in a cash-pr
 - Do not confuse direct language with cruelty.
 - Do not claim luxury recognition, heritage or status that has not been earned.
 
-## 24. Decision test
+## 25. Decision test
 
 When deciding whether a future product, service, page or campaign belongs to MAISON JF®, ask:
 
@@ -399,7 +474,11 @@ For acquisition, then ask:
 
 **Is there a real human question or situation here, and can the Maison present a useful paid solution quickly and honestly?**
 
-If yes, make the path to that solution simple and visible.
+For a new external idea or framework, also ask:
+
+**What are we learning from it, where does it belong, where does it not belong, and does translating it into Maison improve a measurable result without weakening our identity?**
+
+If yes, make the path simple and visible.
 If the connection must be forced, it probably does not belong.
 
 ---
@@ -408,4 +487,4 @@ If the connection must be forced, it probably does not belong.
 
 **PÁRA DE IGNORAR. Volta Para Casa.**
 
-**Complexidade por baixo. Simplicidade à superfície. Pergunta humana à entrada. Oferta clara no momento certo. Experiência que merece regresso.**
+**Complexidade por baixo. Simplicidade à superfície. Pergunta humana à entrada. Oferta clara no momento certo. Aprendizagem que fica. Experiência que merece regresso.**
