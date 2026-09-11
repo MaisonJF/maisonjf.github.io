@@ -33,6 +33,7 @@ export async function onRequestPost({ request }) {
 
     const quote = calculateShipping({
       region: String(body?.shipping?.region || ''),
+      countryCode: String(body?.shipping?.countryCode || ''),
       postalCode: String(body?.shipping?.postalCode || ''),
       weightG: Number(body?.shipping?.testWeightG),
       subtotalCents,
