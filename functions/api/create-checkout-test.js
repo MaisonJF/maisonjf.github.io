@@ -37,7 +37,7 @@ export async function onRequestPost({ request, env }) {
     params.set('success_url', origin + '/checkout-sucesso.html?session_id={CHECKOUT_SESSION_ID}');
     params.set('cancel_url', origin + '/checkout-teste.html?cancelado=1');
     params.set('customer_creation', 'always');
-    params.set('billing_address_collection', 'required');
+    params.set('billing_address_collection', 'auto');
     params.set('phone_number_collection[enabled]', 'true');
     params.set('locale', 'pt');
     params.set('custom_fields[0][key]', 'nif');
