@@ -90,13 +90,33 @@
               <button class="btn btn--primary" data-add="vela">Adicionar</button>
             </div>
           </article>
+          <article class="checkout-lab__card">
+            <p class="detail-kicker">Éditions Maison JF</p>
+            <h2>Vírgulas do Destino: O Turista</h2>
+            <p>Ebook digital. Entrega automática e privada depois de o pagamento ser confirmado.</p>
+            <p class="checkout-lab__price">2,99 €</p>
+            <div class="checkout-lab__actions">
+              <input id="qty-turista" type="hidden" value="1">
+              <button class="btn btn--primary" data-add="turista">Adicionar</button>
+            </div>
+          </article>
+          <article class="checkout-lab__card">
+            <p class="detail-kicker">Éditions Maison JF</p>
+            <h2>Vírgulas do Destino: Meandros da Vida</h2>
+            <p>Ebook digital. Entrega automática e privada depois de o pagamento ser confirmado.</p>
+            <p class="checkout-lab__price">4,99 €</p>
+            <div class="checkout-lab__actions">
+              <input id="qty-meandros" type="hidden" value="1">
+              <button class="btn btn--primary" data-add="meandros">Adicionar</button>
+            </div>
+          </article>
         </section>
         <aside class="checkout-cart" aria-label="Carrinho">
           <p class="detail-kicker">Carrinho</p>
           <h2>O que escolheste</h2>
           <div id="cart-items" class="checkout-cart__items"></div>
           <div class="checkout-cart__total"><span>Total</span><strong id="cart-total">0,00 €</strong></div>
-          <p class="checkout-cart__note">Os portes ainda não estão incluídos neste teste. Quando houver envio por correio ou transportadora, a MAISON JF® usa sempre uma modalidade rastreável, com código de acompanhamento. A morada de entrega só será necessária quando o cliente escolher envio para uma morada. O NIF e a morada de faturação permanecem opcionais, salvo dados estritamente exigidos pelo método de pagamento.</p>
+          <p class="checkout-cart__note">Os portes ainda não estão incluídos neste teste. Produtos físicos pedem morada de entrega e seguem sempre com tracking. Compras apenas de ebooks não pedem morada de entrega nem têm portes. O NIF e a morada de faturação permanecem opcionais, salvo dados estritamente exigidos pelo método de pagamento.</p>
           <p id="cart-status" class="checkout-cart__status" aria-live="polite"></p>
           <button id="checkout-button" class="btn btn--primary" disabled>Finalizar no Stripe</button>
           <button id="clear-cart" class="btn btn--secondary" type="button">Limpar carrinho</button>
