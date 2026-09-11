@@ -70,13 +70,33 @@
               <button class="btn btn--primary" data-add="oleo">Adicionar</button>
             </div>
           </article>
+          <article class="checkout-lab__card">
+            <p class="detail-kicker">Corpo</p>
+            <h2>Escalda-Pés MAISON JF® · 280 g</h2>
+            <p>Uma pausa concreta para quando o corpo já não quer mais tarefas.</p>
+            <p class="checkout-lab__price">9,50 €</p>
+            <div class="checkout-lab__actions">
+              <label>Qtd. <input id="qty-escalda" type="number" min="1" max="10" value="1"></label>
+              <button class="btn btn--primary" data-add="escalda">Adicionar</button>
+            </div>
+          </article>
+          <article class="checkout-lab__card">
+            <p class="detail-kicker">Casa</p>
+            <h2>Vela Aromática MAISON JF® · 170 g</h2>
+            <p>Luz e aroma para marcar a passagem do dia para o tempo em casa.</p>
+            <p class="checkout-lab__price">14 €</p>
+            <div class="checkout-lab__actions">
+              <label>Qtd. <input id="qty-vela" type="number" min="1" max="10" value="1"></label>
+              <button class="btn btn--primary" data-add="vela">Adicionar</button>
+            </div>
+          </article>
         </section>
         <aside class="checkout-cart" aria-label="Carrinho">
           <p class="detail-kicker">Carrinho</p>
           <h2>O que escolheste</h2>
           <div id="cart-items" class="checkout-cart__items"></div>
           <div class="checkout-cart__total"><span>Total</span><strong id="cart-total">0,00 €</strong></div>
-          <p class="checkout-cart__note">Os portes ainda não estão incluídos neste teste. A entrega está limitada a Portugal enquanto afinamos a configuração.</p>
+          <p class="checkout-cart__note">Os portes ainda não estão incluídos neste teste. A entrega está limitada a Portugal enquanto afinamos a configuração. O checkout recolhe os dados do cliente necessários para preparar a faturação.</p>
           <p id="cart-status" class="checkout-cart__status" aria-live="polite"></p>
           <button id="checkout-button" class="btn btn--primary" disabled>Finalizar no Stripe</button>
           <button id="clear-cart" class="btn btn--secondary" type="button">Limpar carrinho</button>

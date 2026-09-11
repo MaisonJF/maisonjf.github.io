@@ -1,6 +1,8 @@
 const PRODUCTS = {
   bruma: 'price_1UECuk5O4m7iPegSqgyaIVvN',
-  oleo: 'price_1UECv65O4m7iPegSVGK8qedO'
+  oleo: 'price_1UECv65O4m7iPegSVGK8qedO',
+  escalda: 'price_1UEQLo5O4m7iPegS8BOzlT0P',
+  vela: 'price_1UEQLr5O4m7iPegSWWLhiNWP'
 };
 
 export async function onRequestPost({ request, env }) {
@@ -37,6 +39,7 @@ export async function onRequestPost({ request, env }) {
     params.set('customer_creation', 'always');
     params.set('billing_address_collection', 'auto');
     params.set('phone_number_collection[enabled]', 'true');
+    params.set('tax_id_collection[enabled]', 'true');
     params.set('shipping_address_collection[allowed_countries][0]', 'PT');
     params.set('payment_method_types[0]', 'card');
     params.set('payment_method_types[1]', 'mb_way');
