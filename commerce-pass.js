@@ -8,7 +8,8 @@
     'brumas': { href: 'produto-bruma-ambiente.html', label: 'Ver Bruma', name: 'Brumas de Ambiente MAISON JF®' },
     'escalda-pes': { href: 'produto-escalda-pes.html', label: 'Ver Escalda-Pés', name: 'Escalda-Pés MAISON JF®' },
     'oleo': { href: 'produto-oleo-massagem.html', label: 'Ver Óleo de Massagem', name: 'Óleo de Massagem MAISON JF®' },
-    'aguas-lencois': { href: 'produto-aguas-lencois.html', label: 'Ver Águas de Lençóis', name: 'Águas de Lençóis MAISON JF®' }
+    'aguas-lencois': { href: 'produto-aguas-lencois.html', label: 'Ver Águas de Lençóis', name: 'Águas de Lençóis MAISON JF®' },
+    'velas': { href: 'produto-vela-aromatica.html', label: 'Ver Vela Aromática', name: 'Velas Aromáticas MAISON JF®' }
   };
 
   function connectProductCards() {
@@ -29,7 +30,8 @@
       'Brumas de Ambiente': 'produto-bruma-ambiente.html',
       'Escalda-Pés': 'produto-escalda-pes.html',
       'Óleo de Massagem': 'produto-oleo-massagem.html',
-      'Águas de Lençóis': 'produto-aguas-lencois.html'
+      'Águas de Lençóis': 'produto-aguas-lencois.html',
+      'Velas Aromáticas': 'produto-vela-aromatica.html'
     };
 
     document.querySelectorAll('#explorar .catalogue-card').forEach(card => {
