@@ -17,6 +17,6 @@
   }
 
   loadScript('yoichi-pass-core.js?v=20260910-final', 'yoichi-pass-core.js')
-    .then(() => loadScript('legal-pass.js?v=20260910-2', 'legal-pass.js'))
+    .then(() => loadScript('legal-pass.js?v=20260911-envios', 'legal-pass.js'))
     .then(() => loadScript('commerce-pass.js?v=20260910', 'commerce-pass.js'));
 })();
