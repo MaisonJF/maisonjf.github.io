@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="analytics.js" defer></script>
 </head>
 <body class="detail-page">
   <main>
@@ -63,6 +64,12 @@
         })
         .then(data => {
           if (data.payment_status === 'paid') {
+            window.maisonAnalytics?.track('purchase', {
+              transaction_id: sessionId,
+              value: Number.isInteger(data.amount_total) ? data.amount_total / 100 : undefined,
+              currency: (data.currency || 'EUR').toUpperCase(),
+              items: Array.isArray(data.ebook_ids) ? data.ebook_ids.map(id => ({ item_id: id, item_name: ebookNames[id] || id })) : []
+            });
             title.textContent = 'Pagamento confirmado.';
             message.textContent = 'A tua compra está concluída. Podes descarregar abaixo o que compraste.';
 
