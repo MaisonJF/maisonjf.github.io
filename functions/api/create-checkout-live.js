@@ -53,7 +53,7 @@ export async function onRequestPost({ request, env }) {
     params.set('custom_fields[0][optional]', 'true');
     params.set('custom_fields[0][numeric][minimum_length]', '9');
     params.set('custom_fields[0][numeric][maximum_length]', '9');
-    params.set('custom_text[submit][message]', 'Ao pagar, confirmas a compra e aceitas as condições da MAISON JF®: https://maison-jf.com/informacao-legal.html e https://maison-jf.com/devolucoes.html. A fatura fiscal é emitida pela MAISON JF® separadamente.');
+    params.set('custom_text[submit][message]', 'Ao pagar, confirmas a compra e aceitas as condições da MAISON JF®: https://maison-jf.com/informacao-legal.html. O download fica disponível após confirmação do pagamento. A fatura fiscal é emitida pela MAISON JF® separadamente.');
     params.set('submit_type', 'pay');
     params.set('metadata[environment]', 'maison-jf-live');
     params.set('metadata[source]', 'editions-live');
