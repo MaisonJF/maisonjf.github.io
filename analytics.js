@@ -66,12 +66,10 @@
   function showConsent() {
     const banner = document.createElement('aside');
     banner.className = 'maison-consent';
-    banner.setAttribute('aria-label', 'Preferências de medição');
+    banner.setAttribute('aria-label', 'Cookies');
     banner.innerHTML = `
       <div class="maison-consent__copy">
-        <strong>Cookies</strong>
-        <span>Utilizamos cookies para analisar a utilização do site e melhorar a sua experiência.</span>
-        <a href="/informacao-legal.html#privacidade">Política de privacidade</a>
+        <span>Usamos cookies para melhorar a experiência.</span>
       </div>
       <div class="maison-consent__actions">
         <button type="button" data-consent="denied">Recusar</button>
