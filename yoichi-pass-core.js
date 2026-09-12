@@ -147,15 +147,15 @@
           tag: 'Corpo',
           title: '“Ainda nem acabou o dia e eu já não tenho mais nada para dar.”',
           desc: 'Quando até descansar dá trabalho, começa pequeno. Um gesto que diga ao corpo: por hoje chega.',
-          cta: 'Quero começar por mim',
-          href: 'produtos.html#escalda-pes'
+          cta: 'Quero criar a minha pausa',
+          href: 'produto-escalda-pes.html'
         },
         {
           tag: 'Casa',
           title: '“Fecho a porta. O dia entra comigo na mesma.”',
           desc: 'Fechaste a porta, mas o dia veio atrás. Muda primeiro o ambiente que te recebe.',
           cta: 'Quero mudar o ambiente',
-          href: 'produtos.html#brumas'
+          href: 'produto-bruma-ambiente.html'
         },
         {
           tag: 'Companhia',
@@ -184,8 +184,8 @@
     if (products) {
       setText('.explorar__title', 'A casa pesa. O corpo sente. Começa pelo que queres mudar.', products);
       setText('.explorar__subtitle', 'Escolhe pelo efeito que procuras. O produto vem depois.', products);
-      rewriteCard(products, 'Brumas de Ambiente', 'Entraste em casa e o dia veio atrás. Muda o ar. Marca o corte.');
-      rewriteCard(products, 'Escalda-Pés', 'Quando cuidar de ti parece mais uma tarefa, começa por vinte minutos sem teres de fazer nada.');
+      rewriteCard(products, 'Névoa de Ambiente', 'Entraste em casa e o dia veio atrás. Muda o ar. Marca o corte.');
+      rewriteCard(products, 'Escalda-Pés', 'Não é apenas sal: sais, agente saponificante, aroma e espuma suave transformam água morna numa pausa concreta.');
       rewriteCard(products, 'Óleo de Massagem', 'O corpo está tenso. Nem tudo precisa de conversa. Às vezes precisa de mãos, calor e pausa.');
       rewriteCard(products, 'Águas de Lençóis', 'Deitaste o corpo. A cabeça não. Muda o quarto antes de pedir ao cérebro que desligue.');
     }
@@ -280,8 +280,8 @@
     setText('.detail-hero .detail-title', 'A casa pesa. O corpo sente. Começa pelo que queres mudar.');
     setText('.detail-hero .detail-lead', 'Cheiro, pausa, toque, descanso. Escolhe pelo efeito que procuras.');
 
-    rewriteCard(document, 'Brumas de Ambiente', 'O dia entrou contigo. Muda o ar e marca o momento em que a casa volta a ser tua.');
-    rewriteCard(document, 'Escalda-Pés', 'Quando até cuidar de ti dá trabalho, começa simples. Água, tempo e pés lá dentro.');
+    rewriteCard(document, 'Névoa de Ambiente', 'O dia entrou contigo. Muda o ar e marca o momento em que a casa volta a ser tua.');
+    rewriteCard(document, 'Escalda-Pés', 'Não é apenas sal: sais, agente saponificante, aroma e espuma suave transformam água morna numa pausa concreta.');
     rewriteCard(document, 'Óleo de Massagem', 'O corpo está tenso. Dá-lhe calor, toque e alguns minutos sem exigir mais nada.');
     rewriteCard(document, 'Águas de Lençóis', 'Deitaste-te. A cabeça ainda está no dia. Muda o ambiente do quarto antes de dormir.');
     rewriteCard(document, 'Peças Decorativas em Jesmonite', 'Não precisas de mudar a casa toda para ela deixar de parecer provisória.');

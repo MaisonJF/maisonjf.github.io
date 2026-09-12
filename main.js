@@ -179,6 +179,36 @@
       secondHref: 'farol.html',
       secondText: 'Usar o Farol'
     },
+    'produto-bruma-ambiente.html': {
+      label: 'Pedir Névoa · 6,50 €',
+      message: 'Olá Maison JF. Quero pedir uma Névoa de Ambiente de 20 mL por 6,50 €. Que opções estão disponíveis?',
+      secondHref: 'produtos.html',
+      secondText: 'Ver Produtos'
+    },
+    'produto-escalda-pes.html': {
+      label: 'Pedir Escalda-Pés · 9,50 €',
+      message: 'Olá Maison JF. Quero pedir um Escalda-Pés de 280 g por 9,50 €. Que referências estão disponíveis?',
+      secondHref: 'produtos.html',
+      secondText: 'Ver Produtos'
+    },
+    'produto-oleo-massagem.html': {
+      label: 'Pedir Óleo · 12 €',
+      message: 'Olá Maison JF. Quero pedir o Óleo de Massagem de 60 mL por 12 €. Está disponível?',
+      secondHref: 'produtos.html',
+      secondText: 'Ver Produtos'
+    },
+    'produto-aguas-lencois.html': {
+      label: 'Ver disponibilidade',
+      message: 'Olá Maison JF. Quero saber que Águas de Lençóis estão disponíveis e qual é o preço.',
+      secondHref: 'produtos.html',
+      secondText: 'Ver Produtos'
+    },
+    'produto-vela-aromatica.html': {
+      label: 'Pedir Vela · 14 €',
+      message: 'Olá Maison JF. Quero pedir uma Vela Aromática de 170 g por 14 €. Que referências estão disponíveis?',
+      secondHref: 'produtos.html',
+      secondText: 'Ver Produtos'
+    },
     'servicos.html': {
       label: 'Marcar ou perguntar',
       message: 'Olá Maison JF. Estou a ver os Serviços e quero ajuda para perceber qual faz mais sentido para mim.',
@@ -394,6 +424,6 @@
 (function loadYoichiPass() {
   if (document.querySelector('script[src^="yoichi-pass.js"]')) return;
   const script = document.createElement('script');
-  script.src = 'yoichi-pass.js?v=20260911-envios';
+  script.src = 'yoichi-pass.js?v=20260912-products';
   document.body.appendChild(script);
 })();

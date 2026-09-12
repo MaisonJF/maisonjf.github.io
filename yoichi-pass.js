@@ -16,7 +16,7 @@
     });
   }
 
-  loadScript('yoichi-pass-core.js?v=20260910-final', 'yoichi-pass-core.js')
+  loadScript('yoichi-pass-core.js?v=20260912-products', 'yoichi-pass-core.js')
     .then(() => loadScript('legal-pass.js?v=20260911-envios', 'legal-pass.js'))
-    .then(() => loadScript('commerce-pass.js?v=20260910', 'commerce-pass.js'));
+    .then(() => loadScript('commerce-pass.js?v=20260912-products', 'commerce-pass.js'));
 })();

@@ -5,10 +5,11 @@
   const page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
 
   const products = {
-    'brumas': { href: 'produto-bruma-ambiente.html', label: 'Ver Bruma', name: 'Brumas de Ambiente MAISON JF®' },
+    'brumas': { href: 'produto-bruma-ambiente.html', label: 'Ver Névoa de Ambiente', name: 'Névoa de Ambiente MAISON JF®' },
     'escalda-pes': { href: 'produto-escalda-pes.html', label: 'Ver Escalda-Pés', name: 'Escalda-Pés MAISON JF®' },
     'oleo': { href: 'produto-oleo-massagem.html', label: 'Ver Óleo de Massagem', name: 'Óleo de Massagem MAISON JF®' },
-    'aguas-lencois': { href: 'produto-aguas-lencois.html', label: 'Ver Águas de Lençóis', name: 'Águas de Lençóis MAISON JF®' }
+    'aguas-lencois': { href: 'produto-aguas-lencois.html', label: 'Ver Águas de Lençóis', name: 'Águas de Lençóis MAISON JF®' },
+    'velas-aromaticas': { href: 'produto-vela-aromatica.html', label: 'Ver Vela Aromática', name: 'Vela Aromática MAISON JF®' }
   };
 
   function connectProductCards() {
@@ -26,7 +27,8 @@
 
   function connectHomeCards() {
     const map = {
-      'Brumas de Ambiente': 'produto-bruma-ambiente.html',
+      'Névoa de Ambiente': 'produto-bruma-ambiente.html',
+      'Velas Aromáticas': 'produto-vela-aromatica.html',
       'Escalda-Pés': 'produto-escalda-pes.html',
       'Óleo de Massagem': 'produto-oleo-massagem.html',
       'Águas de Lençóis': 'produto-aguas-lencois.html'
@@ -38,7 +40,6 @@
       const action = card.querySelector('a.btn');
       if (!action) return;
       action.href = map[title];
-      action.textContent = 'Ver produto';
     });
   }
 
