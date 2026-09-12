@@ -171,8 +171,9 @@ Idioma principal: Português de Portugal.
 Área principal: Portugal, com presença em Vila do Conde e Porto.
 
 ## Pagamentos
-- Pagamentos online directamente no site: brevemente.
-- Até lá, compras, reservas e instruções de pagamento são tratadas pelo WhatsApp oficial da MAISON JF®.
+- Os ebooks disponíveis em Éditions podem ser comprados online directamente no site através de checkout seguro da Stripe.
+- O download dos ebooks comprados online é disponibilizado após confirmação do pagamento.
+- Outros Produtos, reservas e Serviços seguem o meio de compra ou contacto indicado na respectiva página, incluindo WhatsApp quando aplicável.
 
 ## Condições B2B
 - Clientes profissionais têm condições próprias de revenda.
