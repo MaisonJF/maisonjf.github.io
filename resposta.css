@@ -1,0 +1,122 @@
+.resposta-page {
+  background: var(--fundo-primario);
+  color: var(--texto-primario);
+}
+
+.resposta {
+  width: min(920px, calc(100% - 3rem));
+  margin: 0 auto;
+  padding: clamp(7rem, 12vw, 10rem) 0 5rem;
+}
+
+.resposta__brand {
+  color: var(--marfim);
+  font-family: var(--fonte-editorial);
+  font-size: 1.1rem;
+  letter-spacing: .08em;
+  text-decoration: none;
+}
+
+.resposta__eyebrow {
+  margin: 3.5rem 0 1rem;
+  color: var(--ambre);
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.resposta h1,
+.resposta h2 {
+  color: var(--marfim);
+  font-family: var(--fonte-editorial);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.resposta h1 {
+  max-width: 850px;
+  margin: 0 0 2rem;
+  font-size: clamp(3.2rem, 8vw, 6.5rem);
+}
+
+.resposta h2 {
+  max-width: 780px;
+  margin: 0 0 1.4rem;
+  font-size: clamp(2.2rem, 5vw, 3.7rem);
+}
+
+.resposta p,
+.resposta li {
+  color: var(--texto-secundario);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.resposta p { max-width: 760px; margin: 0 0 1.1rem; }
+.resposta strong { color: var(--marfim); font-weight: 500; }
+
+.resposta__lead {
+  max-width: 790px !important;
+  font-size: clamp(1.15rem, 2vw, 1.35rem) !important;
+}
+
+.resposta__offer {
+  max-width: 780px;
+  margin: 3rem 0 1rem;
+  padding: clamp(1.5rem, 4vw, 2.2rem);
+  border: 1px solid var(--ambre);
+  background: linear-gradient(145deg, rgba(196,162,101,.08), rgba(8,8,8,.15));
+}
+
+.resposta__offer .resposta__eyebrow { margin-top: 0; }
+.resposta__offer h2 { font-size: clamp(2rem, 4vw, 3rem); }
+.resposta__price { margin-top: 1.4rem !important; font-size: 1.18rem !important; }
+
+.resposta__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 50px;
+  margin: .8rem .8rem 0 0;
+  padding: .9rem 1.25rem;
+  border: 1px solid var(--ambre);
+  color: var(--marfim);
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background .25s ease, color .25s ease;
+}
+
+.resposta__cta:hover,
+.resposta__cta:focus-visible { background: var(--ambre); color: #080808; }
+.resposta__cta--quiet { border-color: var(--borda-media); }
+
+.resposta section {
+  padding: clamp(3rem, 7vw, 5rem) 0;
+  border-top: 1px solid var(--borda-media);
+}
+
+.resposta__checks { max-width: 760px; margin: 1.5rem 0 0; padding-left: 1.25rem; }
+.resposta__checks li { margin-bottom: .8rem; }
+
+.resposta__related a {
+  display: block;
+  width: fit-content;
+  margin: .75rem 0;
+  color: var(--marfim);
+  text-underline-offset: .25em;
+}
+
+.resposta__note {
+  padding: 1rem 1.2rem;
+  border-left: 2px solid var(--ambre);
+  font-size: .92rem !important;
+}
+
+@media (max-width: 640px) {
+  .resposta { width: min(100% - 2rem, 920px); padding-top: 5.5rem; }
+  .resposta__eyebrow { margin-top: 2.5rem; }
+  .resposta__cta { width: 100%; justify-content: center; margin-right: 0; text-align: center; }
+}
