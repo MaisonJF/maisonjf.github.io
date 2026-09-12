@@ -34,5 +34,35 @@
       <g:unit_pricing_measure>60ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
     </item>
+    <item>
+      <g:id>maisonjf-escalda-pes</g:id>
+      <g:title>Escalda-Pés MAISON JF® 280 g</g:title>
+      <g:description>Escalda-Pés MAISON JF® de 280 g com sais, agente saponificante e fragrância para uma pausa com água morna, aroma e espuma suave.</g:description>
+      <g:link>https://maison-jf.com/produto-escalda-pes.html</g:link>
+      <g:image_link>https://maison-jf.com/og-image.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>9.50 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:brand>MAISON JF®</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:unit_pricing_measure>280g</g:unit_pricing_measure>
+      <g:unit_pricing_base_measure>100g</g:unit_pricing_base_measure>
+    </item>
+
+    <item>
+      <g:id>maisonjf-vela-aromatica</g:id>
+      <g:title>Vela Aromática MAISON JF® 170 g</g:title>
+      <g:description>Vela Aromática artesanal MAISON JF® de 170 g, produzida em Portugal com cera vegetal de soja e coco.</g:description>
+      <g:link>https://maison-jf.com/produto-vela-aromatica.html</g:link>
+      <g:image_link>https://maison-jf.com/og-image.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>14.00 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:brand>MAISON JF®</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:unit_pricing_measure>170g</g:unit_pricing_measure>
+      <g:unit_pricing_base_measure>100g</g:unit_pricing_base_measure>
+    </item>
+
   </channel>
 </rss>
