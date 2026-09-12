@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const MEASUREMENT_ID = 'G-21DQLKBVF4';
+  const MEASUREMENT_ID = 'G-3W8B4L5QWP';
   const CONSENT_KEY = 'maison_analytics_consent_v1';
   let googleLoaded = false;
 
