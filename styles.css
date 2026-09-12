@@ -1736,10 +1736,22 @@ ul, ol {
 .maison-consent__actions { display: flex; flex: 0 0 auto; gap: .65rem; }
 .maison-consent button { min-height: 42px; padding: .65rem 1rem; border: 1px solid #c4a265; background: transparent; color: #f4efe5; cursor: pointer; font: 500 .75rem Inter, sans-serif; letter-spacing: .04em; text-transform: uppercase; }
 .maison-consent button[data-consent="granted"] { background: #c4a265; color: #080808; }
-.maison-consent-settings { position: fixed; z-index: 9999; right: .75rem; bottom: .75rem; padding: .35rem .55rem; border: 1px solid rgba(196,162,101,.4); background: rgba(8,8,8,.88); color: rgba(244,239,229,.72); cursor: pointer; font: 500 .65rem Inter, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+.maison-consent-settings { margin-left: auto; padding: 0; border: 0; background: transparent; color: rgba(244,239,229,.58); cursor: pointer; font: 400 .68rem Inter, sans-serif; text-decoration: underline; text-underline-offset: .2em; }
 
 @media (max-width: 760px) {
-  .maison-consent { align-items: stretch; flex-direction: column; gap: 1rem; }
+  .maison-consent {
+    right: .75rem;
+    bottom: calc(5.4rem + env(safe-area-inset-bottom, 0px));
+    left: .75rem;
+    align-items: stretch;
+    flex-direction: column;
+    gap: .8rem;
+    padding: .95rem 1rem;
+  }
+  .maison-consent__copy { gap: .25rem; }
+  .maison-consent__copy strong { font-size: 1.12rem; }
+  .maison-consent__copy span { font-size: .8rem; line-height: 1.42; }
   .maison-consent__actions { width: 100%; }
-  .maison-consent button { flex: 1; }
+  .maison-consent button { flex: 1; min-height: 40px; padding: .55rem .65rem; font-size: .66rem; }
+  .maison-consent-settings { margin: .6rem 0 0; }
 }

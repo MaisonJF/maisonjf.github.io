@@ -158,6 +158,11 @@
     line-height: 1.65;
   }
 
+  .service-card__lead,
+  .catalogue-card__pain {
+    color: rgba(244, 239, 229, 0.74);
+  }
+
   .detail-grid,
   .services__grid,
   .transformacoes__grid {

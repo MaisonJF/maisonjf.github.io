@@ -72,7 +72,9 @@
   function rewriteCard(root, title, copy) {
     const card = cardByTitle(root, title);
     if (!card) return null;
-    const p = $('.service-card__lead, .catalogue-card__pain, p:not(.detail-kicker):not(.offer-price):not(.offer-status)', card);
+    const p = $('.service-card__lead', card)
+      || $('.catalogue-card__pain', card)
+      || $('p:not(.detail-kicker):not(.offer-price):not(.offer-status):not(.service-card__eyebrow):not(.catalogue-card__eyebrow)', card);
     if (p) p.textContent = copy;
     return card;
   }
@@ -184,10 +186,10 @@
     if (products) {
       setText('.explorar__title', 'A casa pesa. O corpo sente. Começa pelo que queres mudar.', products);
       setText('.explorar__subtitle', 'Escolhe pelo efeito que procuras. O produto vem depois.', products);
-      rewriteCard(products, 'Névoa de Ambiente', 'Entraste em casa e o dia veio atrás. Muda o ar. Marca o corte.');
-      rewriteCard(products, 'Escalda-Pés', 'Não é apenas sal: sais, agente saponificante, aroma e espuma suave transformam água morna numa pausa concreta.');
-      rewriteCard(products, 'Óleo de Massagem', 'O corpo está tenso. Nem tudo precisa de conversa. Às vezes precisa de mãos, calor e pausa.');
-      rewriteCard(products, 'Águas de Lençóis', 'Deitaste o corpo. A cabeça não. Muda o quarto antes de pedir ao cérebro que desligue.');
+      rewriteCard(products, 'Névoa de Ambiente', 'Uma forma simples de renovar o ambiente quando chegas a casa.');
+      rewriteCard(products, 'Escalda-Pés', 'Sais, agente saponificante, aroma e espuma suave para transformar água morna numa pausa completa.');
+      rewriteCard(products, 'Óleo de Massagem', 'Para cuidar do corpo através do toque, do calor e de uma massagem sem pressa.');
+      rewriteCard(products, 'Águas de Lençóis', 'Uma forma leve de renovar os têxteis e preparar o ambiente do quarto antes de dormir.');
     }
 
     const servicesGrid = $('#servicos .services__grid');
@@ -197,12 +199,12 @@
         if (title.includes('Cristais, Pulseiras e Peças Decorativas')) card.remove();
       });
 
-      rewriteCard(servicesGrid, 'Tarot e Consultas', 'A pergunta continua a voltar. O Tarot não decide por ti. Ajuda-te a ver o que estás a evitar.');
-      rewriteCard(servicesGrid, 'Escuta Orientada', 'Já contaste isto. Continuas no mesmo sítio. Aqui podes dizer tudo e pôr ordem no que está misturado.');
-      rewriteCard(servicesGrid, 'Acompanhamento', 'Uma sessão acabou. O problema não. Há fases que pedem continuidade.');
-      rewriteCard(servicesGrid, 'Companhia', 'O plano existe. Falta-te alguém ao lado. Isso não devia decidir por ti.');
-      rewriteCard(servicesGrid, 'Astrologia, Numerologia e Outras Terapias Complementares', 'Há perguntas que pedem outra lente. Primeiro percebemos a questão. Depois escolhemos a ferramenta.');
-      rewriteCard(servicesGrid, 'Defumações, Limpeza Energética e Abertura de Caminhos', 'Há momentos em que queres marcar uma mudança de forma simbólica. Fazemo-lo sem promessas impossíveis.');
+      rewriteCard(servicesGrid, 'Tarot e Consultas', 'Para olhar de outro ângulo para uma pergunta que continua sem resposta.');
+      rewriteCard(servicesGrid, 'Escuta Orientada', 'Um espaço para falar, organizar o que está misturado e encontrar o próximo passo.');
+      rewriteCard(servicesGrid, 'Acompanhamento', 'Continuidade para fases que não ficam resolvidas numa única sessão, incluindo os formatos SOS.');
+      rewriteCard(servicesGrid, 'Companhia', 'Companhia para sair, conversar ou partilhar um plano que não queres fazer a sós.');
+      rewriteCard(servicesGrid, 'Astrologia, Numerologia e Outras Terapias Complementares', 'Análises preparadas de acordo com a questão, o âmbito e a disponibilidade.');
+      rewriteCard(servicesGrid, 'Defumações, Limpeza Energética e Abertura de Caminhos', 'Trabalhos simbólicos preparados sob consulta, de acordo com o pedido.');
 
       const astroCard = cardByTitle(servicesGrid, 'Astrologia, Numerologia e Outras Terapias Complementares');
       if (astroCard) setText('.service-card__title', 'Astrologia e Numerologia', astroCard);
@@ -280,10 +282,10 @@
     setText('.detail-hero .detail-title', 'A casa pesa. O corpo sente. Começa pelo que queres mudar.');
     setText('.detail-hero .detail-lead', 'Cheiro, pausa, toque, descanso. Escolhe pelo efeito que procuras.');
 
-    rewriteCard(document, 'Névoa de Ambiente', 'O dia entrou contigo. Muda o ar e marca o momento em que a casa volta a ser tua.');
-    rewriteCard(document, 'Escalda-Pés', 'Não é apenas sal: sais, agente saponificante, aroma e espuma suave transformam água morna numa pausa concreta.');
-    rewriteCard(document, 'Óleo de Massagem', 'O corpo está tenso. Dá-lhe calor, toque e alguns minutos sem exigir mais nada.');
-    rewriteCard(document, 'Águas de Lençóis', 'Deitaste-te. A cabeça ainda está no dia. Muda o ambiente do quarto antes de dormir.');
+    rewriteCard(document, 'Névoa de Ambiente', 'Renova o ambiente em segundos e ajuda a marcar a passagem entre o dia lá fora e o regresso a casa.');
+    rewriteCard(document, 'Escalda-Pés', 'Sais, agente saponificante, aroma e espuma suave numa experiência que vai além de um simples banho de pés.');
+    rewriteCard(document, 'Óleo de Massagem', 'Óleo para massagem e toque consciente, quando o corpo pede menos pressa.');
+    rewriteCard(document, 'Águas de Lençóis', 'Renova os têxteis e o ambiente do quarto com um gesto leve antes de dormir.');
     rewriteCard(document, 'Peças Decorativas em Jesmonite', 'Não precisas de mudar a casa toda para ela deixar de parecer provisória.');
     rewriteCard(document, 'Cristais e Pulseiras', 'Diz-nos o que procuras. Se tivermos uma opção que faça sentido, mostramos.');
 

@@ -52,14 +52,15 @@
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'maison-consent-settings';
-    button.textContent = 'Medição';
-    button.setAttribute('aria-label', 'Alterar preferência de medição');
+    button.textContent = 'Gerir cookies';
+    button.setAttribute('aria-label', 'Alterar preferências de cookies');
     button.addEventListener('click', () => {
       localStorage.removeItem(CONSENT_KEY);
       button.remove();
       showConsent();
     });
-    document.body.appendChild(button);
+    const footer = document.querySelector('.footer__bottom');
+    (footer || document.body).appendChild(button);
   }
 
   function showConsent() {
@@ -68,13 +69,13 @@
     banner.setAttribute('aria-label', 'Preferências de medição');
     banner.innerHTML = `
       <div class="maison-consent__copy">
-        <strong>Tu decides o que fica registado.</strong>
-        <span>Usamos medição opcional para perceber que páginas ajudam e que caminhos levam a contacto ou compra. Sem publicidade personalizada.</span>
-        <a href="/informacao-legal.html#privacidade">Saber mais</a>
+        <strong>Cookies</strong>
+        <span>Utilizamos cookies para analisar a utilização do site e melhorar a sua experiência.</span>
+        <a href="/informacao-legal.html#privacidade">Política de privacidade</a>
       </div>
       <div class="maison-consent__actions">
         <button type="button" data-consent="denied">Recusar</button>
-        <button type="button" data-consent="granted">Aceitar medição</button>
+        <button type="button" data-consent="granted">Aceitar</button>
       </div>`;
     banner.addEventListener('click', event => {
       const button = event.target.closest('[data-consent]');
