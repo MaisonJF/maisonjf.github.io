@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  const page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const page = (window.location.pathname.split('/').pop() || 'index').toLowerCase();
   document.body.dataset.yoichiPage = page;
 
   if (!document.querySelector('link[href^="yoichi-pass.css"]')) {
@@ -13,12 +13,12 @@
   }
 
   const navItems = [
-    ['farol.html', 'O Farol'],
-    ['produtos.html', 'Produtos'],
-    ['servicos.html', 'Serviços'],
-    ['companhia.html', 'Companhia'],
-    ['profissionais.html', 'Profissionais'],
-    ['index.html#joao', 'Sobre']
+    ['farol', 'O Farol'],
+    ['produtos', 'Produtos'],
+    ['servicos', 'Serviços'],
+    ['companhia', 'Companhia'],
+    ['profissionais', 'Profissionais'],
+    ['index#joao', 'Sobre']
   ];
 
   const desktopNav = document.querySelector('.header__nav-list');
@@ -123,7 +123,7 @@
   }
 
   /* HOME: dor, reconhecimento, confiança, solução, acção */
-  if (page === 'index.html') {
+  if (page === 'index') {
     setText('#farol .farol__title', 'O que não te deixa em paz?');
     setText('#farol .farol__subtitle', 'Começa pelo que está a acontecer. O nome da solução vem depois.');
 
@@ -143,28 +143,28 @@
           title: '“Já perguntei a toda a gente. Continuo sem saber o que fazer.”',
           desc: 'Já tens opiniões. O que te falta é clareza. Começa por aquilo que não consegues parar de pensar.',
           cta: 'Quero organizar isto',
-          href: 'servicos.html'
+          href: 'servicos'
         },
         {
           tag: 'Corpo',
           title: '“Ainda nem acabou o dia e eu já não tenho mais nada para dar.”',
           desc: 'Quando até descansar dá trabalho, começa pequeno. Um gesto que diga ao corpo: por hoje chega.',
           cta: 'Quero criar a minha pausa',
-          href: 'produto-escalda-pes.html'
+          href: 'produto-escalda-pes'
         },
         {
           tag: 'Casa',
           title: '“Fecho a porta. O dia entra comigo na mesma.”',
           desc: 'Fechaste a porta, mas o dia veio atrás. Muda primeiro o ambiente que te recebe.',
           cta: 'Quero mudar o ambiente',
-          href: 'produto-bruma-ambiente.html'
+          href: 'produto-bruma-ambiente'
         },
         {
           tag: 'Companhia',
           title: '“Quantas vezes mais vou desistir só porque não tenho com quem ir?”',
           desc: 'O plano continua a apetecer-te. Só não queres vivê-lo sem ninguém ao lado.',
           cta: 'Quero conhecer a Companhia',
-          href: 'companhia.html'
+          href: 'companhia'
         }
       ];
 
@@ -258,7 +258,7 @@
   }
 
   /* FAROL */
-  if (page === 'farol.html') {
+  if (page === 'farol') {
     setText('.detail-hero .detail-title', 'Há uma coisa que não te larga. Começa por aí.');
     setText('.detail-hero .detail-lead', 'Não precisas de saber o nome do serviço. Escolhe a frase mais próxima do que estás a viver.');
     setText('#farol .farol__title', 'O que não te deixa em paz?');
@@ -278,7 +278,7 @@
   }
 
   /* PRODUTOS */
-  if (page === 'produtos.html') {
+  if (page === 'produtos') {
     setText('.detail-hero .detail-title', 'A casa pesa. O corpo sente. Começa pelo que queres mudar.');
     setText('.detail-hero .detail-lead', 'Cheiro, pausa, toque, descanso. Escolhe pelo efeito que procuras.');
 
@@ -300,7 +300,7 @@
   }
 
   /* SERVIÇOS */
-  if (page === 'servicos.html') {
+  if (page === 'servicos') {
     setText('.detail-hero .detail-title', 'A pergunta não te larga. A conversa não resolveu.');
     setText('.detail-hero .detail-lead', 'Então começa pelo que está mesmo a acontecer. Depois escolhemos o formato.');
 
@@ -367,7 +367,7 @@
   }
 
   /* COMPANHIA */
-  if (page === 'companhia.html') {
+  if (page === 'companhia') {
     setText('.detail-hero .detail-title', 'Já deixaste de ir porque não tinhas com quem.');
     setText('.detail-hero .detail-lead', 'O plano continua a apetecer-te. A falta de companhia não tem de decidir por ti.');
 
@@ -418,7 +418,7 @@
   }
 
   /* MAISON TODO O MÊS */
-  if (page === 'maison-todo-o-mes.html') {
+  if (page === 'maison-todo-o-mes') {
     setText('.detail-hero .detail-title', 'Só te lembras de ti quando já estás no limite?');
     setText('.detail-hero .detail-lead', 'A Maison Todo o Mês existe para quebrar esse ciclo. Um mês de cada vez. Sem fidelização obrigatória.');
 
@@ -450,7 +450,7 @@
   }
 
   /* ÉDITIONS */
-  if (page === 'editions.html') {
+  if (page === 'editions') {
     setText('.detail-hero .detail-title', 'Há histórias que ficam a mexer contigo depois de fechares o livro.');
     setText('.detail-hero .detail-lead', 'Ficção própria da Maison. Desejo, perda, Tarot, relações e recomeços.');
 
@@ -469,7 +469,7 @@
   }
 
   /* PROFISSIONAIS */
-  if (page === 'profissionais.html') {
+  if (page === 'profissionais') {
     setText('.detail-hero .detail-title', 'Stock parado custa espaço e dinheiro.');
     setText('.detail-hero .detail-lead', 'Não precisa de comprar uma prateleira inteira para testar a Maison. Começamos com o que faz sentido para o seu público.');
 
