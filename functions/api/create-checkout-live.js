@@ -41,8 +41,8 @@ export async function onRequestPost({ request, env }) {
     const params = new URLSearchParams();
 
     params.set('mode', 'payment');
-    params.set('success_url', origin + '/checkout-sucesso-live.html?session_id={CHECKOUT_SESSION_ID}');
-    params.set('cancel_url', origin + '/editions.html?checkout_cancelado=1');
+    params.set('success_url', origin + '/checkout-sucesso-live?session_id={CHECKOUT_SESSION_ID}');
+    params.set('cancel_url', origin + '/editions?checkout_cancelado=1');
     params.set('customer_creation', 'always');
     params.set('billing_address_collection', 'auto');
     params.set('locale', 'pt');
@@ -53,7 +53,7 @@ export async function onRequestPost({ request, env }) {
     params.set('custom_fields[0][optional]', 'true');
     params.set('custom_fields[0][numeric][minimum_length]', '9');
     params.set('custom_fields[0][numeric][maximum_length]', '9');
-    params.set('custom_text[submit][message]', 'Ao pagar, confirmas a compra e aceitas as condições da MAISON JF®: https://maison-jf.com/informacao-legal.html. O download fica disponível após confirmação do pagamento. A fatura fiscal é emitida pela MAISON JF® separadamente.');
+    params.set('custom_text[submit][message]', 'Ao pagar, confirmas a compra e aceitas as condições da MAISON JF®: https://maison-jf.com/informacao-legal. O download fica disponível após confirmação do pagamento. A fatura fiscal é emitida pela MAISON JF® separadamente.');
     params.set('submit_type', 'pay');
     params.set('metadata[environment]', 'maison-jf-live');
     params.set('metadata[source]', 'editions-live');
