@@ -16,21 +16,21 @@
     const list = contact.querySelector('.footer__links');
     if (!list) return;
 
-    if (!footer.querySelector('a[href="informacao-legal.html"]')) {
+    if (!footer.querySelector('a[href="informacao-legal"]')) {
       const legalItem = document.createElement('li');
-      legalItem.innerHTML = '<a href="informacao-legal.html" class="footer__link">Informação legal</a>';
+      legalItem.innerHTML = '<a href="informacao-legal" class="footer__link">Informação legal</a>';
       list.appendChild(legalItem);
     }
 
-    if (!footer.querySelector('a[href="devolucoes.html"]')) {
+    if (!footer.querySelector('a[href="devolucoes"]')) {
       const returnsItem = document.createElement('li');
-      returnsItem.innerHTML = '<a href="devolucoes.html" class="footer__link">Devoluções</a>';
+      returnsItem.innerHTML = '<a href="devolucoes" class="footer__link">Devoluções</a>';
       list.appendChild(returnsItem);
     }
 
-    if (!footer.querySelector('a[href="envios.html"]')) {
+    if (!footer.querySelector('a[href="envios"]')) {
       const shippingItem = document.createElement('li');
-      shippingItem.innerHTML = '<a href="envios.html" class="footer__link">Envios e portes</a>';
+      shippingItem.innerHTML = '<a href="envios" class="footer__link">Envios e portes</a>';
       list.appendChild(shippingItem);
     }
 
