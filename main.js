@@ -164,84 +164,84 @@
   // ============================================================
   // CAMADA DE CONVERSÃO
   // ============================================================
-  const fileName = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const fileName = (window.location.pathname.split('/').pop() || 'index').toLowerCase();
 
   const pageConfig = {
-    'index.html': {
+    'index': {
       label: 'Falar com a Maison',
       message: 'Olá Maison JF. Vim do site e quero ajuda a escolher a opção certa.',
-      secondHref: 'farol.html',
+      secondHref: 'farol',
       secondText: 'Seguir o Farol'
     },
-    'produtos.html': {
+    'produtos': {
       label: 'Ajuda a escolher',
       message: 'Olá Maison JF. Estou a ver os Produtos e quero ajuda a escolher o mais indicado para mim.',
-      secondHref: 'farol.html',
+      secondHref: 'farol',
       secondText: 'Usar o Farol'
     },
-    'produto-bruma-ambiente.html': {
+    'produto-bruma-ambiente': {
       label: 'Pedir Névoa · 6,50 €',
       message: 'Olá Maison JF. Quero pedir uma Névoa de Ambiente de 20 mL por 6,50 €. Que opções estão disponíveis?',
-      secondHref: 'produtos.html',
+      secondHref: 'produtos',
       secondText: 'Ver Produtos'
     },
-    'produto-escalda-pes.html': {
+    'produto-escalda-pes': {
       label: 'Pedir Escalda-Pés · 5 €',
       message: 'Olá Maison JF. Quero pedir um Escalda-Pés de 150 g por 5 €. Que referências estão disponíveis?',
-      secondHref: 'produtos.html',
+      secondHref: 'produtos',
       secondText: 'Ver Produtos'
     },
-    'produto-oleo-massagem.html': {
+    'produto-oleo-massagem': {
       label: 'Pedir Óleo · 12 €',
       message: 'Olá Maison JF. Quero pedir o Óleo de Massagem de 60 mL por 12 €. Está disponível?',
-      secondHref: 'produtos.html',
+      secondHref: 'produtos',
       secondText: 'Ver Produtos'
     },
-    'produto-aguas-lencois.html': {
+    'produto-aguas-lencois': {
       label: 'Ver disponibilidade',
       message: 'Olá Maison JF. Quero saber que Águas de Lençóis estão disponíveis e qual é o preço.',
-      secondHref: 'produtos.html',
+      secondHref: 'produtos',
       secondText: 'Ver Produtos'
     },
-    'produto-vela-aromatica.html': {
+    'produto-vela-aromatica': {
       label: 'Pedir Vela · 14 €',
       message: 'Olá Maison JF. Quero pedir uma Vela Aromática de 170 g por 14 €. Que referências estão disponíveis?',
-      secondHref: 'produtos.html',
+      secondHref: 'produtos',
       secondText: 'Ver Produtos'
     },
-    'servicos.html': {
+    'servicos': {
       label: 'Marcar ou perguntar',
       message: 'Olá Maison JF. Estou a ver os Serviços e quero ajuda para perceber qual faz mais sentido para mim.',
-      secondHref: 'farol.html',
+      secondHref: 'farol',
       secondText: 'Usar o Farol'
     },
-    'companhia.html': {
+    'companhia': {
       label: 'Ver disponibilidade',
       message: 'Olá Maison JF. Estou a ver a área de Companhia e quero saber qual opção faz mais sentido e a disponibilidade.',
-      secondHref: 'farol.html',
+      secondHref: 'farol',
       secondText: 'Usar o Farol'
     },
-    'profissionais.html': {
+    'profissionais': {
       label: 'Falar de parceria',
       message: 'Olá Maison JF. Estou na área Profissional e quero falar sobre revenda, parceria ou fornecimento.',
-      secondHref: 'produtos.html',
+      secondHref: 'produtos',
       secondText: 'Ver Produtos'
     },
-    'maison-todo-o-mes.html': {
+    'maison-todo-o-mes': {
       label: 'Escolher a minha opção',
       message: 'Olá Maison JF. Estou a ver a Maison Todo o Mês e quero ajuda a escolher a opção certa.',
-      secondHref: 'farol.html',
+      secondHref: 'farol',
       secondText: 'Usar o Farol'
     },
-    'editions.html': {
+    'editions': {
       label: 'Pedir uma edição',
       message: 'Olá Maison JF. Estou a ver as Edições e quero saber o que está disponível.',
-      secondHref: 'index.html#explorar',
+      secondHref: 'index#explorar',
       secondText: 'Explorar a Maison'
     }
   };
 
-  const currentConfig = pageConfig[fileName] || pageConfig['index.html'];
+  const currentConfig = pageConfig[fileName] || pageConfig['index'];
   const waUrl = (message) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
 
   function rememberIntent(type) {
@@ -329,7 +329,7 @@
   });
 
   // Trust perto da decisão, não só no rodapé.
-  if (fileName !== 'farol.html' && !document.querySelector('.conversion-trust')) {
+  if (fileName !== 'farol' && !document.querySelector('.conversion-trust')) {
     const hero = document.querySelector('.detail-hero, .hero');
     if (hero) {
       const trust = document.createElement('div');
@@ -337,16 +337,16 @@
       trust.setAttribute('aria-label', 'Confiança MAISON JF');
       trust.innerHTML = `
         <div class="conversion-trust__inner">
-          <a class="conversion-trust__item" href="index.html#joao" style="color:inherit;text-decoration:none">Marca registada na União Europeia</a>
+          <a class="conversion-trust__item" href="index#joao" style="color:inherit;text-decoration:none">Marca registada na União Europeia</a>
           <a class="conversion-trust__item" href="${waUrl('Olá Maison JF. Vim do site e quero falar diretamente com a Maison.')}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">Contacto direto com a Maison</a>
-          <a class="conversion-trust__item" href="farol.html" style="color:inherit;text-decoration:none">O Farol ajuda-te a escolher</a>
+          <a class="conversion-trust__item" href="farol" style="color:inherit;text-decoration:none">O Farol ajuda-te a escolher</a>
         </div>`;
       hero.insertAdjacentElement('afterend', trust);
     }
   }
 
   // Farol já é o próprio funil; não colocamos distrações fixas nessa página.
-  if (fileName !== 'farol.html') {
+  if (fileName !== 'farol') {
     const stickyMessage = `${currentConfig.message} Vim da página ${document.title}.`;
 
     const desktopFloat = document.createElement('a');
@@ -383,7 +383,7 @@
       <p class="conversion-nudge__text">Diz em uma frase o que se passa. A Maison ajuda-te a reduzir as opções.</p>
       <div class="conversion-nudge__actions">
         <a class="btn btn--primary" href="${waUrl(stickyMessage)}" target="_blank" rel="noopener noreferrer">Explicar no WhatsApp</a>
-        <a class="btn btn--secondary" href="farol.html">Seguir o Farol</a>
+        <a class="btn btn--secondary" href="farol">Seguir o Farol</a>
       </div>`;
     document.body.appendChild(nudge);
 
