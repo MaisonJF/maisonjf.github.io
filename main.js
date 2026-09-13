@@ -186,8 +186,8 @@
       secondText: 'Ver Produtos'
     },
     'produto-escalda-pes.html': {
-      label: 'Pedir Escalda-Pés · 9,50 €',
-      message: 'Olá Maison JF. Quero pedir um Escalda-Pés de 280 g por 9,50 €. Que referências estão disponíveis?',
+      label: 'Pedir Escalda-Pés · 5 €',
+      message: 'Olá Maison JF. Quero pedir um Escalda-Pés de 150 g por 5 €. Que referências estão disponíveis?',
       secondHref: 'produtos.html',
       secondText: 'Ver Produtos'
     },
