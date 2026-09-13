@@ -4,6 +4,12 @@
 (function() {
   'use strict';
 
+  function trackFarol(name, parameters = {}) {
+    if (window.maisonAnalytics && typeof window.maisonAnalytics.track === 'function') {
+      window.maisonAnalytics.track(name, parameters);
+    }
+  }
+
   const result = (title, text, primaryHref, primaryText, secondaryHref = null, secondaryText = null) => ({
     title,
     text,
@@ -147,6 +153,7 @@
     const data = FAROL_DATA.step1[step1Key];
     if (!data || !step2Question || !step2Options) return;
     step1Choice = step1Key;
+    trackFarol('farol_start', { theme: step1Key, page_path: window.location.pathname });
     step2Question.textContent = data.question;
     step2Options.innerHTML = '';
 
@@ -163,6 +170,7 @@
 
   function handleStep2Choice(step2Key) {
     step2Choice = step2Key;
+    trackFarol('farol_refine', { theme: step1Choice, choice: step2Key, page_path: window.location.pathname });
     const selected = FAROL_DATA.results[`${step1Choice}_${step2Key}`];
     if (!selected) {
       showResult(result('Não te vou inventar uma resposta.', 'Fala com a Maison e explica o que procuras. Se houver uma solução real, dizemos-te qual. Se não houver, também.', 'https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Preciso%20de%20ajuda%20a%20encontrar%20a%20op%C3%A7%C3%A3o%20certa.', 'Falar no WhatsApp'));
@@ -176,11 +184,13 @@
     const ctaClass = selected.cta.style === 'primary' ? 'btn btn--primary' : 'btn btn--secondary';
     const primaryExternal = selected.cta.href.startsWith('http') ? ' target="_blank" rel="noopener"' : '';
     const secondary = selected.cta2 ? `<a href="${selected.cta2.href}" class="${selected.cta2.style === 'primary' ? 'btn btn--primary' : 'btn btn--secondary'}">${selected.cta2.text}</a>` : '';
-    step3Result.innerHTML = `<h3 class="farol__result-title">${selected.title}</h3><p class="farol__result-text">${selected.text}</p><div class="farol__result-actions"><a href="${selected.cta.href}" class="${ctaClass}"${primaryExternal}>${selected.cta.text}</a>${secondary}</div>`;
+    step3Result.innerHTML = `<h3 class="farol__result-title">${selected.title}</h3><p class="farol__result-text">${selected.text}</p><div class="farol__result-actions"><a href="${selected.cta.href}" class="${ctaClass}"${primaryExternal} data-farol-cta="primary">${selected.cta.text}</a>${selected.cta2 ? `<a href="${selected.cta2.href}" class="${selected.cta2.style === 'primary' ? 'btn btn--primary' : 'btn btn--secondary'}" data-farol-cta="secondary">${selected.cta2.text}</a>` : ''}</div>`;
+    trackFarol('farol_result', { theme: step1Choice || 'unknown', choice: step2Choice || 'unknown', destination: selected.cta.href, page_path: window.location.pathname });
     showStep(3);
   }
 
   function resetFarol() {
+    trackFarol('farol_restart', { page_path: window.location.pathname });
     step1Choice = null;
     step2Choice = null;
     showStep(1);
@@ -191,7 +201,24 @@
       btn.addEventListener('click', () => buildStep2(btn.getAttribute('data-farol')));
     });
   }
-  if (back2) back2.addEventListener('click', () => showStep(1));
+  if (step3Result) {
+    step3Result.addEventListener('click', event => {
+      const link = event.target.closest('[data-farol-cta]');
+      if (!link) return;
+      trackFarol('farol_cta_click', {
+        theme: step1Choice || 'unknown',
+        choice: step2Choice || 'unknown',
+        cta_position: link.getAttribute('data-farol-cta') || 'primary',
+        destination: link.getAttribute('href') || '',
+        page_path: window.location.pathname
+      });
+    });
+  }
+
+  if (back2) back2.addEventListener('click', () => {
+    trackFarol('farol_back', { from_step: 2, page_path: window.location.pathname });
+    showStep(1);
+  });
   if (back3) back3.addEventListener('click', resetFarol);
 
   window.Farol = { data: FAROL_DATA, reset: resetFarol, getState: () => ({ step: currentStep, step1: step1Choice, step2: step2Choice }) };
