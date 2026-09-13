@@ -1,38 +1,38 @@
-@import url('yoichi-pass-base.css');
+@import url('yoichi-pass-base.css?v=20260913-2308');
 
-/* MAISON JF® | imagens editoriais da raiz · 2026-09-13 */
+/* MAISON JF® | imagens editoriais da raiz · cache-bust 2026-09-13 23:08 */
 body[data-yoichi-page="index.html"] .hero__bg-image {
   background:
     linear-gradient(180deg, rgba(8,8,8,.10) 0%, rgba(8,8,8,.06) 42%, rgba(8,8,8,.68) 100%),
-    url('images/root/hero-maison.webp') center 42% / cover no-repeat;
+    url('/images/root/hero-maison.webp?v=20260913-2308') center 42% / cover no-repeat !important;
 }
 
 body[data-yoichi-page="index.html"] .hero__beam {
-  display: none;
+  display: none !important;
 }
 
 body[data-yoichi-page="index.html"] .transformacao-card__visual--ambre {
   background-image:
     linear-gradient(180deg, rgba(8,7,6,.03), rgba(8,7,6,.25)),
-    url('images/root/corpo-escalda-pes.webp');
-  background-size: cover;
-  background-position: center 56%;
+    url('/images/root/corpo-escalda-pes.webp?v=20260913-2308') !important;
+  background-size: cover !important;
+  background-position: center 56% !important;
 }
 
 body[data-yoichi-page="index.html"] .transformacao-card__visual--esmeralda {
   background-image:
     linear-gradient(180deg, rgba(8,7,6,.03), rgba(8,7,6,.24)),
-    url('images/root/casa-ambiente.webp');
-  background-size: cover;
-  background-position: center 58%;
+    url('/images/root/casa-ambiente.webp?v=20260913-2308') !important;
+  background-size: cover !important;
+  background-position: center 58% !important;
 }
 
 body[data-yoichi-page="index.html"] .transformacao-card__visual--bordeaux {
   background-image:
     linear-gradient(180deg, rgba(8,7,6,.03), rgba(8,7,6,.22)),
-    url('images/root/companhia-cafe.webp');
-  background-size: cover;
-  background-position: center 55%;
+    url('/images/root/companhia-cafe.webp?v=20260913-2308') !important;
+  background-size: cover !important;
+  background-position: center 55% !important;
 }
 
 /* Só o Óleo ganha imagem no catálogo da raiz; os restantes cartões continuam a respirar. */
@@ -49,13 +49,13 @@ body[data-yoichi-page="index.html"] #explorar .catalogue-card:has(a[href="produt
   aspect-ratio: 4 / 5;
   background:
     linear-gradient(180deg, rgba(8,7,6,.02), rgba(8,7,6,.20)),
-    url('images/root/oleo-massagem.webp') center 54% / cover no-repeat;
+    url('/images/root/oleo-massagem.webp?v=20260913-2308') center 54% / cover no-repeat !important;
   border-bottom: 1px solid var(--borda-subtil);
 }
 
 @media (max-width: 768px) {
-  body[data-yoichi-page="index.html"] .hero__bg-image { background-position: center 45%; }
-  body[data-yoichi-page="index.html"] .transformacao-card__visual--ambre { background-position: center 54%; }
-  body[data-yoichi-page="index.html"] .transformacao-card__visual--esmeralda { background-position: center 56%; }
-  body[data-yoichi-page="index.html"] .transformacao-card__visual--bordeaux { background-position: center 52%; }
+  body[data-yoichi-page="index.html"] .hero__bg-image { background-position: center 45% !important; }
+  body[data-yoichi-page="index.html"] .transformacao-card__visual--ambre { background-position: center 54% !important; }
+  body[data-yoichi-page="index.html"] .transformacao-card__visual--esmeralda { background-position: center 56% !important; }
+  body[data-yoichi-page="index.html"] .transformacao-card__visual--bordeaux { background-position: center 52% !important; }
 }
