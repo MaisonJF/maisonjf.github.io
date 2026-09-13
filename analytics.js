@@ -95,10 +95,10 @@
       track('generate_lead', { method: 'whatsapp', service });
     }
     if (/checkout/i.test(href) && !/sucesso/i.test(href)) track('begin_checkout', { link_text: text });
-    if (/produto-|produtos\.html/i.test(href)) track('product_interest', { link_url: href.split('?')[0], link_text: text });
-    if (/servicos\.html#escuta/i.test(href)) track('escuta_interest', { link_text: text });
-    if (/servicos\.html#acompanhamento/i.test(href) || /\bSOS\b/i.test(text)) track('sos_interest', { link_text: text });
-    if (/servicos\.html#tarot/i.test(href)) track('tarot_interest', { link_text: text });
+    if (/produto-|produtos\/i.test(href)) track('product_interest', { link_url: href.split('?')[0], link_text: text });
+    if (/servicos\#escuta/i.test(href)) track('escuta_interest', { link_text: text });
+    if (/servicos\#acompanhamento/i.test(href) || /\bSOS\b/i.test(text)) track('sos_interest', { link_text: text });
+    if (/servicos\#tarot/i.test(href)) track('tarot_interest', { link_text: text });
   }
 
   document.addEventListener('DOMContentLoaded', () => {
