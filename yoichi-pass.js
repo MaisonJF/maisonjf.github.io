@@ -16,6 +16,15 @@
     });
   }
 
+  function loadUnifiedEditorialPass() {
+    document.querySelectorAll('link[href^="yoichi-pass.css"]').forEach(link => link.remove());
+    const link = document.createElement('link');
+    link.id = 'maison-yoichi-unified';
+    link.rel = 'stylesheet';
+    link.href = 'yoichi-pass.css?v=20260914-unified-2238';
+    document.head.appendChild(link);
+  }
+
   function loadFinalImageAuthority() {
     const old = document.getElementById('maison-home-images-final');
     if (old) old.remove();
@@ -23,7 +32,7 @@
     const link = document.createElement('link');
     link.id = 'maison-home-images-final';
     link.rel = 'stylesheet';
-    link.href = 'home-images.css?v=20260914-final-authority-2122';
+    link.href = 'home-images.css?v=20260914-final-authority-2238';
     document.head.appendChild(link);
   }
 
@@ -49,7 +58,9 @@
     }
   }
 
-  loadScript('yoichi-pass-core.js?v=20260914-final-authority-2122', 'yoichi-pass-core.js')
+  loadUnifiedEditorialPass();
+
+  loadScript('yoichi-pass-core.js?v=20260914-unified-2238', 'yoichi-pass-core.js')
     .then(() => {
       loadFinalImageAuthority();
       ensureOracleEntry();
