@@ -16,6 +16,17 @@
     });
   }
 
+  function loadFinalImageAuthority() {
+    const old = document.getElementById('maison-home-images-final');
+    if (old) old.remove();
+
+    const link = document.createElement('link');
+    link.id = 'maison-home-images-final';
+    link.rel = 'stylesheet';
+    link.href = 'home-images.css?v=20260914-final-authority-2122';
+    document.head.appendChild(link);
+  }
+
   function ensureOracleEntry() {
     const onHome = location.pathname === '/' || location.pathname.endsWith('/index.html');
     if (!onHome) return;
@@ -38,8 +49,9 @@
     }
   }
 
-  loadScript('yoichi-pass-core.js?v=20260914-clean-images-3', 'yoichi-pass-core.js')
+  loadScript('yoichi-pass-core.js?v=20260914-final-authority-2122', 'yoichi-pass-core.js')
     .then(() => {
+      loadFinalImageAuthority();
       ensureOracleEntry();
       return loadScript('legal-pass.js?v=20260911-envios', 'legal-pass.js');
     })
