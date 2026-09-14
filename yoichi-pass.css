@@ -1,7 +1,6 @@
-@import url('yoichi-pass-base.css?v=20260914-clean-images');
-@import url('home-images.css?v=20260914-clean-images');
+@import url('yoichi-pass-base.css?v=20260914-clean-images-final');
 
-/* MAISON JF® — passe editorial sem referências directas de imagem. */
+/* MAISON JF® — passe editorial. As imagens da homepage vivem apenas em home-images.css. */
 body[data-yoichi-page="index.html"] { background:#090807; }
 body[data-yoichi-page="index.html"] .header { border-bottom-color:rgba(244,239,229,.06); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); }
 body[data-yoichi-page="index.html"] #hero { min-height:100svh; isolation:isolate; }
