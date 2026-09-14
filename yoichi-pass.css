@@ -46,3 +46,279 @@
     url('/images/root/oleo-massagem.webp?v=20260914-home-final') center 54% / cover no-repeat !important;
   border-bottom: 1px solid var(--borda-subtil);
 }
+
+/* ==========================================================
+   MAISON JF® — passe editorial final da raiz | 2026-09-14
+   Menos grelha de catálogo. Mais campanha, pausa e desejo.
+   ========================================================== */
+
+body[data-yoichi-page="index.html"] {
+  background: #090807;
+}
+
+body[data-yoichi-page="index.html"] .header {
+  border-bottom-color: rgba(244,239,229,.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* HERO — a imagem é o mundo da marca, não um fundo decorativo. */
+body[data-yoichi-page="index.html"] #hero {
+  min-height: 100svh;
+  isolation: isolate;
+}
+
+body[data-yoichi-page="index.html"] #hero .hero__bg-image {
+  transform: scale(1.015);
+  filter: saturate(.92) contrast(1.04);
+}
+
+body[data-yoichi-page="index.html"] #hero .hero__vignette {
+  background:
+    linear-gradient(90deg, rgba(4,4,4,.78) 0%, rgba(4,4,4,.46) 36%, rgba(4,4,4,.08) 67%, rgba(4,4,4,.28) 100%),
+    linear-gradient(180deg, rgba(4,4,4,.18) 0%, rgba(4,4,4,.02) 52%, rgba(4,4,4,.72) 100%) !important;
+}
+
+body[data-yoichi-page="index.html"] #hero .hero__content {
+  max-width: 1420px;
+  margin: 0 auto;
+}
+
+body[data-yoichi-page="index.html"] #hero .hero__title--primary {
+  letter-spacing: -.045em;
+  text-shadow: 0 2px 24px rgba(0,0,0,.18);
+}
+
+body[data-yoichi-page="index.html"] #hero .hero__title--secondary {
+  letter-spacing: -.02em;
+}
+
+body[data-yoichi-page="index.html"] #hero .hero__question {
+  max-width: 34rem;
+  color: rgba(244,239,229,.78);
+}
+
+body[data-yoichi-page="index.html"] #hero .btn--primary {
+  box-shadow: 0 14px 44px rgba(0,0,0,.22);
+}
+
+/* FAROL — silêncio visual entre campanha e escolha. */
+body[data-yoichi-page="index.html"] #farol {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(183,154,98,.065), transparent 36%),
+    #090807;
+}
+
+body[data-yoichi-page="index.html"] #farol::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(76vw, 980px);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(183,154,98,.42), transparent);
+}
+
+body[data-yoichi-page="index.html"] #farol .farol__label,
+body[data-yoichi-page="index.html"] #transformacoes .transformacoes__label,
+body[data-yoichi-page="index.html"] #explorar .explorar__label,
+body[data-yoichi-page="index.html"] #servicos .services__label {
+  letter-spacing: .2em;
+}
+
+body[data-yoichi-page="index.html"] #farol .farol__title,
+body[data-yoichi-page="index.html"] #transformacoes .transformacoes__title,
+body[data-yoichi-page="index.html"] #explorar .explorar__title,
+body[data-yoichi-page="index.html"] #servicos .services__title {
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+/* TRANSFORMAÇÕES — fotografias verticais, como páginas de campanha. */
+body[data-yoichi-page="index.html"] #transformacoes {
+  background:
+    linear-gradient(180deg, #090807 0%, #0c0a08 46%, #090807 100%);
+}
+
+body[data-yoichi-page="index.html"] #transformacoes .transformacoes__grid {
+  align-items: start;
+}
+
+body[data-yoichi-page="index.html"] #transformacoes .transformacao-card {
+  overflow: hidden;
+  background: rgba(255,255,255,.012);
+  border-color: rgba(244,239,229,.09);
+  box-shadow: none;
+  transition: transform .55s cubic-bezier(.2,.7,.2,1), border-color .35s ease;
+}
+
+body[data-yoichi-page="index.html"] #transformacoes .transformacao-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(183,154,98,.28);
+}
+
+body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__visual {
+  height: auto;
+  aspect-ratio: 4 / 5;
+  min-height: 320px;
+  filter: saturate(.88) contrast(1.035);
+  transition: transform 1s cubic-bezier(.2,.7,.2,1), filter .5s ease;
+}
+
+body[data-yoichi-page="index.html"] #transformacoes .transformacao-card:hover .transformacao-card__visual {
+  transform: scale(1.018);
+  filter: saturate(.96) contrast(1.04);
+}
+
+body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__visual::after {
+  background: linear-gradient(180deg, transparent 62%, rgba(7,6,5,.32) 100%);
+}
+
+body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__content {
+  padding: clamp(1.35rem, 2.1vw, 2rem);
+}
+
+body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__tag {
+  letter-spacing: .16em;
+  opacity: .82;
+}
+
+body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__title {
+  line-height: 1.04;
+  letter-spacing: -.018em;
+}
+
+body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__desc {
+  color: rgba(244,239,229,.68);
+}
+
+/* EXPLORAR — o produto fotografado funciona como editorial dentro do catálogo. */
+body[data-yoichi-page="index.html"] #explorar {
+  background:
+    radial-gradient(circle at 82% 15%, rgba(95,115,88,.06), transparent 30%),
+    #0a0908;
+}
+
+body[data-yoichi-page="index.html"] #explorar .catalogue-card {
+  border-color: rgba(244,239,229,.085);
+  background: rgba(255,255,255,.012);
+  box-shadow: none;
+}
+
+body[data-yoichi-page="index.html"] #explorar .catalogue-card:has(a[href="produto-oleo-massagem.html"]) {
+  overflow: hidden;
+  border-color: rgba(183,154,98,.24);
+}
+
+body[data-yoichi-page="index.html"] #explorar .catalogue-card:has(a[href="produto-oleo-massagem.html"])::before {
+  aspect-ratio: 16 / 10;
+  min-height: 300px;
+  filter: saturate(.9) contrast(1.04);
+}
+
+body[data-yoichi-page="index.html"] #explorar .catalogue-card:has(a[href="produto-oleo-massagem.html"]) .catalogue-card__body {
+  padding: clamp(1.5rem, 2.4vw, 2.25rem);
+}
+
+body[data-yoichi-page="index.html"] #explorar .catalogue-card__eyebrow {
+  letter-spacing: .15em;
+}
+
+body[data-yoichi-page="index.html"] #explorar .catalogue-card__title {
+  letter-spacing: -.015em;
+}
+
+body[data-yoichi-page="index.html"] #explorar .catalogue-card__pain {
+  color: rgba(244,239,229,.67);
+}
+
+/* SERVIÇOS / SOBRE — baixar o ruído para as imagens anteriores continuarem na memória. */
+body[data-yoichi-page="index.html"] #servicos,
+body[data-yoichi-page="index.html"] #joao,
+body[data-yoichi-page="index.html"] #profissionais {
+  border-top-color: rgba(244,239,229,.055);
+}
+
+body[data-yoichi-page="index.html"] #servicos .service-card {
+  background: rgba(255,255,255,.01);
+  border-color: rgba(244,239,229,.08);
+  box-shadow: none;
+}
+
+body[data-yoichi-page="index.html"] #servicos .service-card:hover {
+  border-color: rgba(183,154,98,.25);
+}
+
+body[data-yoichi-page="index.html"] #joao .joao__text {
+  color: rgba(244,239,229,.72);
+}
+
+body[data-yoichi-page="index.html"] .btn {
+  letter-spacing: .035em;
+}
+
+@media (min-width: 980px) {
+  body[data-yoichi-page="index.html"] #hero .hero__content {
+    padding-left: clamp(3rem, 7vw, 8rem);
+    padding-right: clamp(3rem, 7vw, 8rem);
+    padding-bottom: clamp(5rem, 9vh, 8rem);
+  }
+
+  body[data-yoichi-page="index.html"] #transformacoes .transformacoes__grid {
+    gap: clamp(1rem, 1.65vw, 1.75rem);
+  }
+
+  body[data-yoichi-page="index.html"] #transformacoes .transformacao-card:nth-child(even) {
+    margin-top: clamp(2.75rem, 5vw, 5.5rem);
+  }
+
+  body[data-yoichi-page="index.html"] #explorar .catalogue-card:has(a[href="produto-oleo-massagem.html"]) {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 979px) {
+  body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__visual {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  body[data-yoichi-page="index.html"] #hero {
+    min-height: 92svh;
+  }
+
+  body[data-yoichi-page="index.html"] #hero .hero__bg-image {
+    background-position: 58% center !important;
+    transform: scale(1.01);
+  }
+
+  body[data-yoichi-page="index.html"] #hero .hero__vignette {
+    background:
+      linear-gradient(180deg, rgba(4,4,4,.25) 0%, rgba(4,4,4,.12) 34%, rgba(4,4,4,.82) 100%),
+      linear-gradient(90deg, rgba(4,4,4,.35), rgba(4,4,4,.05)) !important;
+  }
+
+  body[data-yoichi-page="index.html"] #transformacoes .transformacoes__grid {
+    gap: 1.4rem;
+  }
+
+  body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__visual {
+    aspect-ratio: 4 / 4.6;
+    min-height: 0;
+  }
+
+  body[data-yoichi-page="index.html"] #explorar .catalogue-card:has(a[href="produto-oleo-massagem.html"])::before {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-yoichi-page="index.html"] #transformacoes .transformacao-card,
+  body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__visual {
+    transition: none;
+  }
+}
