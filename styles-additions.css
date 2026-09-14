@@ -1,3 +1,5 @@
+@import url('home-images.css?v=20260914-clean-images-final');
+
 /* MAISON JF® | camada comercial. Mantém o tema existente. */
 
 #servicos, #repeticao, #companhia, #orientacao, #continuidade { scroll-margin-top: 7rem; }
@@ -197,7 +199,6 @@
   .continuity__plans { grid-template-columns: 1fr; }
 }
 
-
 /* ==========================================================
    MAISON JF® | páginas de detalhe e catálogo actual
    ========================================================== */
@@ -240,9 +241,7 @@
 }
 .section-bridge p { margin: 0 auto 1rem; max-width: 760px; line-height: 1.7; }
 
-.detail-page {
-  background: var(--fundo-primario);
-}
+.detail-page { background: var(--fundo-primario); }
 .detail-page .header {
   background: rgba(8,8,8,.92);
   backdrop-filter: blur(24px);
@@ -255,10 +254,7 @@
     linear-gradient(180deg,#0d0b09 0%,#080808 100%);
   border-bottom: 1px solid var(--borda-subtil);
 }
-.detail-hero__inner {
-  width: min(1050px,100%);
-  margin: 0 auto;
-}
+.detail-hero__inner { width: min(1050px,100%); margin: 0 auto; }
 .detail-back {
   display: inline-block;
   margin-bottom: 2.4rem;
@@ -301,10 +297,7 @@
   background: var(--noite-suave);
   border-top: 1px solid var(--borda-subtil);
 }
-.detail-section__inner {
-  width: min(1180px,100%);
-  margin: 0 auto;
-}
+.detail-section__inner { width: min(1180px,100%); margin: 0 auto; }
 .detail-narrow { max-width: 800px; }
 .detail-section__title {
   max-width: 880px;
@@ -395,6 +388,29 @@
   .detail-grid--plans { grid-template-columns: 1fr; }
   .detail-title { font-size: clamp(2.8rem,14vw,4.4rem); }
   .detail-section { padding-left: 1rem; padding-right: 1rem; }
+
+  .maison-consent {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)) !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: .85rem !important;
+    gap: .7rem !important;
+    transform: none !important;
+  }
+  .maison-consent__copy { font-size: .88rem !important; line-height: 1.35 !important; }
+  .maison-consent__actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: .55rem !important;
+    width: 100% !important;
+  }
+  .maison-consent__actions button {
+    min-height: 2.8rem !important;
+    padding: .65rem .7rem !important;
+    font-size: .78rem !important;
+  }
 }
 
 /* CTA nas Transformações: o reconhecimento precisa de saída concreta. */
