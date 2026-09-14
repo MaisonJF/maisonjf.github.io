@@ -417,6 +417,6 @@
 (function loadYoichiPass() {
   if (document.querySelector('script[src^="yoichi-pass.js"]')) return;
   const script = document.createElement('script');
-  script.src = 'yoichi-pass.js?v=20260914-clean-images-final';
+  script.src = 'yoichi-pass.js?v=20260915-unified-live';
   document.body.appendChild(script);
 })();
