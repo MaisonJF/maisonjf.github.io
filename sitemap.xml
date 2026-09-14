@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://maison-jf.com/</loc><lastmod>2026-09-12</lastmod><priority>1.0</priority></url>
   <url><loc>https://maison-jf.com/farol.html</loc><lastmod>2026-09-12</lastmod><priority>1.0</priority></url>
-  <url><loc>https://maison-jf.com/respostas.html</loc><lastmod>2026-09-12</lastmod><priority>1.0</priority></url>
+  <url><loc>https://maison-jf.com/respostas.html</loc><lastmod>2026-09-14</lastmod><priority>1.0</priority></url>
   <url><loc>https://maison-jf.com/produtos.html</loc><lastmod>2026-09-13</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/produto-bruma-ambiente.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/produto-escalda-pes.html</loc><lastmod>2026-09-13</lastmod><priority>0.9</priority></url>
@@ -36,6 +36,18 @@
   <url><loc>https://maison-jf.com/relacoes/sinto-me-sozinho-dentro-da-relacao.html</loc><lastmod>2026-09-13</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/relacoes/tenho-ciumes-do-ex-do-meu-parceiro.html</loc><lastmod>2026-09-13</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/relacoes/tenho-medo-que-me-deixe.html</loc><lastmod>2026-09-13</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/porque-fico-inquieto-quando-demora-a-responder.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/porque-perco-o-interesse-quando-alguem-gosta-de-mim.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/porque-faco-sempre-demais-nas-relacoes.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/porque-me-prendo-mais-quando-se-afastam.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/tenho-medo-de-pedir-o-que-preciso-numa-relacao.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/age-como-namorado-mas-nao-quer-assumir.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/tenho-medo-de-me-mostrar-como-sou-numa-relacao.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/estamos-juntos-mas-nao-me-sinto-escolhido.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/nao-consigo-sair-de-uma-relacao-que-me-faz-mal.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/porque-confundo-intensidade-com-amor.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/comparo-a-minha-relacao-com-a-dos-outros.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/relacoes/tenho-saudades-mas-sei-que-nao-quero-voltar.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/decisoes/tenho-medo-de-tomar-a-decisao-errada.html</loc><lastmod>2026-09-11</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/casa/como-deixar-a-casa-cheirosa.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/corpo/estou-cansado-e-nao-consigo-desligar.html</loc><lastmod>2026-09-13</lastmod><priority>0.9</priority></url>
@@ -59,15 +71,18 @@
   <url><loc>https://maison-jf.com/corpo/como-desligar-do-trabalho-quando-chego-a-casa.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/corpo/preciso-de-um-momento-para-mim.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/casa/como-escolher-aroma-para-casa.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/casa/como-tirar-cheiro-a-comida-de-casa.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/presentes/presente-para-casa-nova.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/presentes/presente-para-amiga-cansada.html</loc><lastmod>2026-09-13</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/tarot/tarot-amor-o-que-perguntar.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/tarot/tarot-para-tomar-uma-decisao.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/tarot/como-fazer-uma-pergunta-de-tarot-sobre-uma-relacao.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/companhia/nao-quero-ir-sozinho-a-um-evento.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/companhia/preciso-de-companhia-para-sair.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/profissionais/produtos-para-revenda-em-spa.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/profissionais/velas-aromaticas-para-revenda.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/decisoes/devo-aceitar-esta-proposta-de-trabalho.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/decisoes/devo-aceitar-um-trabalho-que-paga-mais-mas-me-tira-qualidade-de-vida.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/corpo/como-fazer-um-escalda-pes-em-casa.html</loc><lastmod>2026-09-13</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/companhia/companhia-para-jantar.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/profissionais/produtos-para-revenda-em-loja.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
@@ -78,6 +93,7 @@
   <url><loc>https://maison-jf.com/companhia/sinto-me-sozinho-e-quero-sair-de-casa.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/profissionais/aromas-para-espacos-de-bem-estar.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/profissionais/o-que-posso-oferecer-de-diferente-aos-meus-clientes.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
+  <url><loc>https://maison-jf.com/profissionais/como-escolher-produtos-para-um-spa-ou-gabinete.html</loc><lastmod>2026-09-14</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/tarot/preciso-de-clareza-sobre-uma-situacao.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/decisoes/quero-sair-do-trabalho-mas-tenho-medo.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/casa/como-perfumar-a-casa-sem-acender-velas.html</loc><lastmod>2026-09-12</lastmod><priority>0.9</priority></url>
