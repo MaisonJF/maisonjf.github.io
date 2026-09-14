@@ -11,6 +11,45 @@
   const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 
   // ============================================================
+  // HOME CRITICAL VISUAL FIX | mobile + cache-safe
+  // ============================================================
+  const isHome = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
+  if (isHome) {
+    const criticalCss = document.createElement('link');
+    criticalCss.rel = 'stylesheet';
+    criticalCss.href = 'yoichi-pass.css?v=20260914-mobilefix-2038';
+    criticalCss.dataset.maisonCritical = '1';
+    document.head.appendChild(criticalCss);
+
+    const heroCritical = document.querySelector('#hero .hero__bg-image');
+    if (heroCritical) {
+      heroCritical.style.setProperty('background', "linear-gradient(180deg,rgba(8,8,8,.08) 0%,rgba(8,8,8,.04) 44%,rgba(8,8,8,.58) 100%),url('/images/root/hero-maison.webp?v=20260914-mobilefix-2038') center 45% / cover no-repeat", 'important');
+      heroCritical.style.setProperty('opacity', '1', 'important');
+      heroCritical.style.setProperty('visibility', 'visible', 'important');
+    }
+
+    const companhiaCritical = document.querySelector('#transformacoes .transformacao-card__visual--bordeaux');
+    if (companhiaCritical) {
+      companhiaCritical.style.setProperty('background', "linear-gradient(180deg,rgba(8,7,6,.02),rgba(8,7,6,.18)),url('/images/root/companhia-cafe.webp?v=20260914-mobilefix-2038') center 52% / cover no-repeat", 'important');
+      companhiaCritical.style.setProperty('opacity', '1', 'important');
+      companhiaCritical.style.setProperty('visibility', 'visible', 'important');
+    }
+
+    const mobileFix = document.createElement('style');
+    mobileFix.textContent = `
+      @media (max-width:768px){
+        #hero .hero__bg-image{background-position:58% center!important;opacity:1!important;visibility:visible!important}
+        #transformacoes .transformacao-card__visual--bordeaux{background-position:center 52%!important;opacity:1!important;visibility:visible!important}
+        .maison-consent{left:12px!important;right:12px!important;bottom:calc(4.75rem + env(safe-area-inset-bottom,0px))!important;width:auto!important;max-width:none!important;padding:.85rem!important;gap:.7rem!important;transform:none!important}
+        .maison-consent__copy{font-size:.88rem!important;line-height:1.35!important}
+        .maison-consent__actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:.55rem!important;width:100%!important}
+        .maison-consent__actions button{min-height:2.8rem!important;padding:.65rem .7rem!important;font-size:.78rem!important}
+      }
+    `;
+    document.head.appendChild(mobileFix);
+  }
+
+  // ============================================================
   // CONVERSION CSS
   // ============================================================
   if (!document.querySelector('link[href="conversion.css"]')) {
@@ -424,6 +463,6 @@
 (function loadYoichiPass() {
   if (document.querySelector('script[src^="yoichi-pass.js"]')) return;
   const script = document.createElement('script');
-  script.src = 'yoichi-pass.js?v=20260912-products';
+  script.src = 'yoichi-pass.js?v=20260914-mobilefix-2038';
   document.body.appendChild(script);
 })();
