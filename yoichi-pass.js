@@ -38,7 +38,7 @@
     }
   }
 
-  loadScript('yoichi-pass-core.js?v=20260914-home-final', 'yoichi-pass-core.js')
+  loadScript('yoichi-pass-core.js?v=20260914-clean-images', 'yoichi-pass-core.js')
     .then(() => {
       ensureOracleEntry();
       return loadScript('legal-pass.js?v=20260911-envios', 'legal-pass.js');
