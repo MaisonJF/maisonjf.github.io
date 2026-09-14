@@ -8,7 +8,7 @@
   if (!document.querySelector('link[href^="yoichi-pass.css"]')) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = 'yoichi-pass.css?v=20260910-final';
+    link.href = 'yoichi-pass.css?v=20260914-1008';
     document.head.appendChild(link);
   }
 
@@ -496,7 +496,6 @@
         cta.href = 'https://wa.me/351923318289?text=' + encodeURIComponent('Olá Maison JF. Tenho um espaço e quero receber o catálogo e as condições profissionais.');
       }
     }
-
     const convergence = $('.farol-convergence');
     if (convergence) {
       setText('.detail-kicker', 'Procura outra coisa?', convergence);
