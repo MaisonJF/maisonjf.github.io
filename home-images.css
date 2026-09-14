@@ -1,11 +1,16 @@
 /* MAISON JF® — única fonte de imagens da homepage */
 
 #hero .hero__bg-image {
-  background:
-    linear-gradient(180deg, rgba(8,8,8,.08) 0%, rgba(8,8,8,.04) 44%, rgba(8,8,8,.58) 100%),
-    url('/images/root/hero-maison.webp?v=20260914-clean-images') center 45% / cover no-repeat !important;
+  background: url('/images/root/hero-maison.webp?v=20260914-lightfix') center 45% / cover no-repeat !important;
   opacity: 1 !important;
   visibility: visible !important;
+  filter: brightness(1.65) contrast(.92) saturate(1.04) !important;
+}
+
+#hero .hero__vignette {
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(196,162,101,.025) 0%, transparent 52%),
+    linear-gradient(180deg, rgba(8,8,8,.05) 0%, transparent 28%, transparent 68%, rgba(8,8,8,.42) 100%) !important;
 }
 
 #transformacoes .transformacao-card__visual--ambre {
@@ -21,11 +26,10 @@
 }
 
 #transformacoes .transformacao-card__visual--bordeaux {
-  background:
-    linear-gradient(180deg, rgba(8,7,6,.02), rgba(8,7,6,.18)),
-    url('/images/root/companhia-cafe.webp?v=20260914-clean-images') center 52% / cover no-repeat !important;
+  background: url('/images/root/companhia-cafe.webp?v=20260914-lightfix') center 52% / cover no-repeat !important;
   opacity: 1 !important;
   visibility: visible !important;
+  filter: brightness(1.7) contrast(.9) saturate(1.08) !important;
 }
 
 #explorar .catalogue-card:has(a[href="produto-oleo-massagem.html"]) {
@@ -47,8 +51,20 @@
 }
 
 @media (max-width: 768px) {
-  #hero .hero__bg-image { background-position: 58% center !important; }
-  #transformacoes .transformacao-card__visual--bordeaux { background-position: center 52% !important; }
+  #hero .hero__bg-image {
+    background-position: 58% center !important;
+    filter: brightness(1.85) contrast(.9) saturate(1.05) !important;
+  }
+
+  #hero .hero__vignette {
+    background: linear-gradient(180deg, rgba(8,8,8,.02) 0%, transparent 36%, transparent 72%, rgba(8,8,8,.32) 100%) !important;
+  }
+
+  #transformacoes .transformacao-card__visual--bordeaux {
+    background-position: center 52% !important;
+    filter: brightness(1.9) contrast(.88) saturate(1.08) !important;
+  }
+
   #explorar .catalogue-card:has(a[href="produto-oleo-massagem.html"])::before {
     aspect-ratio: 4 / 3;
     min-height: 0;
