@@ -18,6 +18,21 @@
   }
 
   document.title=`${p.name} | MAISON JF®`;
+  const canonical=document.querySelector('link[rel="canonical"]');
+  const productUrl='https://maison-jf.com/produtos/'+encodeURIComponent(p.slug)+'/';
+  if(canonical)canonical.href=productUrl;
+  const schema=document.createElement('script');
+  schema.type='application/ld+json';
+  schema.textContent=JSON.stringify({
+    '@context':'https://schema.org',
+    '@type':'Product',
+    name:p.name+(p.size?' '+p.size:''),
+    description:p.description,
+    url:productUrl,
+    brand:{'@type':'Brand',name:'MAISON JF®'},
+    offers:p.price!=null?{'@type':'Offer',price:Number(p.price).toFixed(2),priceCurrency:p.currency||'EUR',url:productUrl}:undefined
+  });
+  document.head.appendChild(schema);
   const media=p.media||[];
   const root=location.pathname.includes('/produtos/'+p.slug+'/')?'../../':'../';
   const fallback=p.category==='Casa'

@@ -7,7 +7,10 @@
 /produto-aguas-lencois.html /produtos/ 301
 /servicos.html /servicos/ 301
 /companhia.html /portas/companhia.html 301
-/maison-todo-o-mes.html /servicos/ 301
+/maison-todo-o-mes.html /servicos/#maison-todo-o-mes 301
 /editions.html /ebooks/ 301
 /profissionais.html /profissionais/ 301
 /devolucoes.html /informacao-legal.html#livre-resolucao 301
+/oraculo/decisao.html /oraculo/ 301
+/oraculo/silencio.html /oraculo/ 301
+/oraculo/ignorar.html /oraculo/ 301

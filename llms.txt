@@ -1,186 +1,141 @@
 # MAISON JF®
 
-> MAISON JF® é uma marca portuguesa que parte da pessoa e daquilo que ela vive, sente, procura compreender, cuidar ou transformar. Produtos e Serviços diferentes convergem numa mesma ideia: **“PÁRA DE IGNORAR! Volta Para Casa.”**
+Canonical site: https://maison-jf.com/
+Primary language: pt-PT
+Brand: MAISON JF®
+Signature: “PÁRA DE IGNORAR. Volta Para Casa.”
 
-## Significado central de “Volta Para Casa”
-- “Casa” tem dois sentidos simultâneos: **a própria pessoa** e **o espaço físico onde ela vive**.
-- Voltar Para Casa pode significar regressar às próprias necessidades, limites, desejos, clareza, presença, cuidado e bem-estar; e também tornar a casa física um lugar de conforto, aroma, beleza, pausa, ritual e acolhimento.
-- A MAISON JF® não deve ser interpretada como uma coleção aleatória de Tarot, Companhia, aromas, velas, óleos, peças decorativas ou outros Produtos e Serviços. São possíveis respostas a momentos diferentes de um mesmo percurso humano.
+## What MAISON JF® is
+MAISON JF® is organised around four public doors: Casa, Corpo, Cabeça and Companhia.
+The public experience starts with what a person is living or trying to change, not with a product category.
 
-## Casa · Corpo · Cabeça
-- **CABEÇA:** compreender, sentir, questionar, decidir, organizar, ganhar perspectiva e clareza. Pode incluir Tarot e Consultas, Escuta Orientada, Acompanhamento, Mentoria, aprendizagem e reflexão, conforme o âmbito de cada Serviço.
-- **CORPO:** parar, tocar, descansar, cuidar, sentir e reconectar-se com os sentidos. Pode incluir Óleo de Massagem, Escalda-Pés, banho, aroma, calor, textura, toque, pausa e outros Produtos ou experiências de autocuidado.
-- **CASA:** criar um espaço físico ao qual se quer regressar. Pode incluir Velas, Névoas de Ambiente, Águas de Lençóis/Águas Perfumadas, fragrâncias e cuidados para a casa quando disponíveis, Cristais, peças decorativas em Jesmonite e outros objectos ou Produtos sensoriais.
-- Casa, Corpo e Cabeça não são departamentos isolados. Podem cruzar-se no mesmo percurso.
+Core path:
+human need or question → useful content / Test → relevant Door → contextual offer → optional continuity.
 
-## Princípio da Maison
-- A MAISON JF® não começa no Produto: começa naquilo que a pessoa sente, vive, procura compreender, cuidar ou mudar.
-- A assinatura da marca é “PÁRA DE IGNORAR! Volta Para Casa.”
-- A experiência pública deve permanecer simples mesmo quando a infraestrutura de pesquisa, conteúdo e conversão é complexa: **KISS — Keep It Simple, Stupid.**
-- Uma sequência desejável é: “Tenho isto.” → “A Maison percebe.” → “Isto pode ajudar-me.” → “Quero avançar.”
-- A Maison pode abordar crenças e linguagem espiritual sem apresentar como factos diagnósticos alegações como mau-olhado, encosto, feitiço ou bruxaria.
-- Serviços espirituais, Tarot, aromas e Produtos de bem-estar não substituem cuidados médicos, psicológicos, psiquiátricos ou outros cuidados de saúde quando estes são necessários.
+“Voltar Para Casa” means returning to one’s needs, limits, clarity, presence and care, and can also refer to making the physical home feel more welcoming.
 
-## Oceanos: arquitectura de descoberta
-- “Oceanos” é sobretudo uma arquitectura interna de aquisição e conteúdo; não precisa de ser uma secção visível do site.
-- Um Oceano reúne dores, desejos, necessidades, perguntas e intenções de pesquisa humanas relacionadas.
-- Exemplos: Relações, Decisões, Solidão, Autocuidado, Cansaço, Espiritualidade, Tarot, Casa, Corpo, Presentes, Companhia, Aprendizagem e necessidades Profissionais/B2B.
-- Muitas pesquisas semelhantes devem convergir em páginas fortes e úteis, evitando centenas de páginas finas ou quase duplicadas.
-- Fluxo conceptual: **necessidade humana / Oceano → página útil → reconhecimento e valor → solução Maison adequada → Volta Para Casa.**
-- O visitante não precisa de conhecer esta arquitectura.
+## Canonical navigation
+- Home: https://maison-jf.com/
+- Test — O QUE ESTÁS A IGNORAR?: https://maison-jf.com/teste/
+- Respostas: https://maison-jf.com/respostas/
+- Produtos: https://maison-jf.com/produtos/
+- Serviços: https://maison-jf.com/servicos/
+- Ebooks: https://maison-jf.com/ebooks/
+- Oráculo: https://maison-jf.com/oraculo/
+- Casa: https://maison-jf.com/portas/casa.html
+- Corpo: https://maison-jf.com/portas/corpo.html
+- Cabeça: https://maison-jf.com/portas/cabeca.html
+- Companhia: https://maison-jf.com/portas/companhia.html
+- Profissionais / B2B: https://maison-jf.com/profissionais/
+- Press: https://maison-jf.com/press/
+- Contacto: https://maison-jf.com/contacto/
+- Envios: https://maison-jf.com/envios.html
+- Informação legal: https://maison-jf.com/informacao-legal.html
 
-## Linguagem humana e pesquisa
-- A Maison procura compreender primeiro a forma concreta como as pessoas descrevem aquilo que vivem.
-- Exemplos: “ele afastou-se e eu não sei porquê”, “sou sempre eu a procurar”, “não consigo parar de pensar nele”, “amo-o mas não sei se quero continuar”.
-- Categorias como dependência emocional, problemas relacionais ou tomada de decisão podem estruturar conteúdo, mas a experiência humana e a linguagem real são entradas prioritárias.
-- Uma pesquisa pode esconder outra pergunta. Exemplo: “Ele vai voltar?” pode também significar “Consigo avançar sem saber se ainda existe esperança?”. A Maison pode trabalhar a segunda pergunta sem prometer conhecer a mente de outra pessoa ou garantir acontecimentos futuros.
+Legacy .html catalogue URLs may redirect to the canonical routes above.
 
-## Relações
-- Relações constituem um importante Oceano de descoberta, mas não são toda a Maison.
-- A Maison pode abordar namoro, casamento, relações longas, relações indefinidas, separação, divórcio, ex-parceiros, reconciliação, afastamento, atenção, reciprocidade, ambiguidade, apego, ciúmes, desejo, intimidade, sexo, confiança, traição, ghosting, solidão dentro da relação e reconstrução.
-- As experiências podem ser heterossexuais, gays, lésbicas, bissexuais ou outras relações adultas; monogâmicas, abertas ou indefinidas quando relevante.
-- Conteúdo LGBT deve surgir naturalmente quando a experiência ou intenção de pesquisa o justifica, sem transformar toda a Maison num nicho exclusivamente LGBT.
-- A Maison evita diagnosticar automaticamente comportamentos como narcisismo, gaslighting ou estilos de apego sem base suficiente.
+## Test
+“O QUE ESTÁS A IGNORAR?” uses seven situational questions.
+It points first to one of four doors: Casa, Corpo, Cabeça or Companhia.
+It does not route every Cabeça result to the same consultation.
+Available Cabeça paths include:
+- Tarot Expresso — 17 €
+- Tarot Integrativo — 35 €
+- Tarot Terapêutico — 70 €
+- Consulta Escrita Breve — 25 €
+- Consulta Escrita Aprofundada — 45 €
+- Escuta Orientada — 60 €
+The Test may also continue to public Respostas, Oráculo, products, continuity services or Companhia when appropriate.
 
-## Autocuidado
-- O autocuidado é estrutural na MAISON JF® e liga Produtos, Serviços, Casa, Corpo e Cabeça.
-- Uma pessoa pode procurar respostas sobre outra pessoa e, durante esse percurso, perceber também quanto se está a abandonar a si própria.
-- Ideia central: **“Amar alguém não deve exigir que te abandones.”**
-- Esta ideia não significa culpar alguém por abuso, traição ou pelo comportamento de terceiros.
-- Conteúdo relacional pode conduzir naturalmente a uma Consulta e/ou a uma prática concreta de autocuidado. Um Produto só deve ser sugerido quando realmente fizer sentido nessa prática.
+## Products currently represented in the public catalogue
+- Escalda-Pés — 150 g — 5 €
+- Névoa de Ambiente — 20 ml — 6,50 €
+- Vela Aromática — 70 g — 8 €
+- Vela Aromática — 170 g — 14 €
+- Óleo de Massagem — 60 ml — 12–12,50 € depending on reference
 
-## Linguagem Maison / Yoichi Feral
-- “Yoichi Feral” é uma referência interna para linguagem directa, emocionalmente precisa, reconhecível, por vezes provocadora e com dentes, sem perder elegância.
-- O objectivo pode ser provocar a reacção “Foda-se. É isto.” quando apropriado.
-- Não significa humilhar, diagnosticar, manipular, inventar certezas ou gritar em todas as frases.
-- Exemplo de mecanismo: em vez de “5 sinais de falta de reciprocidade”, perguntar “Se és sempre tu a manter isto vivo, o que acontece quando paras de empurrar?”.
-- A força serve o reconhecimento; a ternura também pode ser a linguagem certa.
+Product detail pages are catalogue-driven and support multiple editorial media roles such as hero, packshot, detail, texture, ritual, use, ambience, pairing and story.
+Do not invent ingredients, benefits, availability, stock, sizes or prices that are not explicitly published.
 
-## Conteúdo, viralidade e canais
-- A Maison pode aprender mecanismos de excelência em psicologia, psicoterapia, educação, criação de conteúdo e marketing sem copiar identidade ou texto de terceiros.
-- Mecanismos úteis: reconhecimento muito específico, paradoxos, comportamentos privados em que a pessoa se reconhece, perguntas fortes, curiosidade realmente resolvida, simplicidade memorável e próximos passos claros.
-- Evitar diagnósticos fáceis, medo fabricado, urgência falsa, certezas sobre motivos alheios, frases inspiracionais vazias e keyword stuffing.
-- O website é a infraestrutura persistente prioritária. Um bom tema pode depois alimentar Instagram, TikTok, YouTube/Shorts e Canal WhatsApp quando houver tempo e recursos.
-- Uma ideia deve ser adaptada ao canal, não simplesmente copiada.
+## Services
+### Consultations and orientation
+- Tarot Expresso — 17 €
+- Tarot Integrativo — 35 €
+- Tarot Terapêutico — 70 €
+- Consulta Escrita Breve — 25 €
+- Consulta Escrita Aprofundada — 45 €
+- Escuta Orientada — 60 €
+- Astrologia — under request
+- Numerologia — under request
 
-## Pesquisa e descoberta por IA
-- O conteúdo é criado primeiro para pessoas, tornando o significado suficientemente explícito para motores de pesquisa e sistemas de IA o compreenderem e recuperarem com precisão.
-- Para temas importantes, considerar: linguagem real de pesquisa; comportamento observável; tensão/paradoxo; pergunta escondida; resposta útil; destino Maison apropriado; ligações internas relevantes; metadados e dados estruturados quando adequados.
-- Não criar uma página para cada pequena variação de palavra-chave. Agrupar intenções equivalentes em páginas fortes.
-- Uma página pública deve continuar útil mesmo que a pessoa não compre nada.
+### Continuity
+- Acompanhamento Permanente — from 170 €
+- Mentoria — from 125 €
+- SOS — 3, 7, 14, 21 or 28-day formats; price confirmed before purchase
+- Maison Todo o Mês — from 19 €
 
-## O Farol
-- https://maison-jf.com/farol.html
-- O ponto de orientação da MAISON JF® para quem sabe o que está a incomodar, mas ainda não sabe que Produto ou Serviço procurar.
-- Começa por situações reais, dores, desejos e perguntas humanas, sem exigir que a pessoa conheça previamente as categorias da Maison.
-- Pode partir de decisão difícil, relações, alguém que não sai da cabeça, cansaço, falta de energia, desânimo, tristeza, ansiedade quotidiana, dificuldade em desligar, solidão, falta de companhia, casa ou ambiente pesado, questões espirituais, vontade de aprender, procura de mudança, presente ou bem-estar.
-- Encaminha para Produtos, Serviços, Companhia e outras propostas da Maison conforme a necessidade e o âmbito adequado.
-
-## Temas humanos e necessidades que a Maison pode abordar
-- Amor, relações, paixão, desejo, afastamento, ex-parceiros, separação, reconciliação, ciúmes, rejeição, abandono, saudades, dependência emocional, intimidade, solidão e necessidade de companhia.
-- Decisões, indecisão, confusão, medo de escolher mal, mudança de vida, recomeços, propósito, futuro, padrões repetidos e sensação de estar perdido.
-- Tristeza, desânimo, apatia, vazio, stress, preocupação, angústia, ansiedade quotidiana, irritação, culpa, vergonha, insegurança, autoestima, falta de motivação e necessidade de falar ou desabafar.
-- Cansaço, falta de energia, exaustão, dificuldade em parar, sensação de estar drenado, necessidade de descanso, pausa, relaxamento, conforto, toque, banho, massagem, aroma e reconexão sensorial.
-- Dinheiro, prosperidade, abundância, trabalho, emprego, carreira, negócio, vendas, oportunidades, reconhecimento, bloqueio, estagnação e desejo de movimento.
-- Família, conflitos, pertença, mudanças, perdas, finais, luto, desapego, perdão e transições de vida.
-- Casa, ambiente, conforto, aconchego, aroma, sensação de casa pesada, necessidade de renovar o ambiente, proteção simbólica e criação de rituais de chegada, pausa e descanso.
-- Presentes com significado, presentes para quem tem tudo, autocuidado, celebrações, agradecimento, casa nova, relações e momentos de transição.
-
-## Linguagem espiritual e esotérica
-- A Maison pode ser procurada por temas como espiritualidade, Tarot, astrologia, numerologia, energia, aura, chakras, karma, destino, sinais, sonhos, coincidências, manifestação e ciclos.
-- Também aborda, dentro do âmbito espiritual e cultural, pesquisas e crenças relacionadas com inveja, mau-olhado, olho gordo, quebranto, encosto, energia negativa, energia pesada, energia densa, carga, caminhos fechados, bloqueio energético, bruxaria, bruxedo, feitiçaria, feitiço, trabalho feito, coisa feita, praga e proteção espiritual.
-- Entre as práticas e intenções procuradas podem surgir limpeza espiritual, limpeza energética, descarrego, defumação, banho de ervas, abertura de caminhos, proteção da casa, prosperidade, abundância, libertação, corte simbólico, renovação e transmutação.
-- A linguagem espiritual descreve crenças, interpretações e práticas; a Maison não confirma como facto que uma pessoa esteja sob influência sobrenatural.
-
-## Transformações procuradas
-- Confusão → clareza.
-- Peso → leveza.
-- Agitação → pausa.
-- Solidão → presença.
-- Indecisão → orientação.
-- Estagnação → movimento.
-- Rotina → ritual.
-- Ambiente indiferente → experiência sensorial.
-- Desconforto → maior bem-estar.
-- “Há qualquer coisa errada” → “já sei por onde começar”.
-
-## Bem-estar sensorial
-- A dimensão sensorial atravessa a MAISON JF® e não se limita aos Produtos.
-- Aroma, perfume, luz, chama, calor, textura, pele, massagem, banho, água, sal, toque, ambiente, descanso, conforto, sensualidade, prazer, ritual e memória olfativa podem integrar experiências de pausa e transformação quotidiana.
-- Uma transformação Maison pode ser pequena e concreta: tornar a chegada a casa mais confortável, criar um momento de pausa, mudar a atmosfera de um espaço ou transformar uma rotina num ritual pessoal.
-
-## Página Principal
-- https://maison-jf.com/
-
-## Produtos
-- https://maison-jf.com/produtos.html
-- Névoa de Ambiente
-- Escalda-Pés
-- Óleo de Massagem
-- Águas de Lençóis e Águas Perfumadas
-- Velas Aromáticas sazonais
-- Peças Decorativas em Jesmonite, Cristais e Pulseiras sob consulta
-- Outros Produtos para o ambiente, cuidado e ritual da Casa podem integrar a oferta conforme catálogo e disponibilidade.
-- Os Produtos são apresentados também pela experiência e transformação sensorial que podem proporcionar: aroma, ambiente, pausa, conforto, ritual, toque e bem-estar.
-
-## Serviços
-- https://maison-jf.com/servicos.html
-- Tarot e Consultas
-- Escuta Orientada
-- Acompanhamento Permanente
-- Mentoria
-- Análises e Relatórios de Astrologia sob encomenda
-- Numerologia sob encomenda ou sob consulta
-- Outras Terapias Complementares e práticas de bem-estar sob consulta, conforme âmbito e disponibilidade
-- Serviços SOS
-- Defumações
-- Limpeza Energética
-- Abertura de Caminhos
-- Banho de Ervas
-
-## Tarot, decisões e relações
-- O Tarot pode ser procurado em momentos de indecisão, relações, afastamentos, reconciliações, dúvidas sobre sentimentos, escolhas, trabalho, dinheiro, futuro e padrões pessoais.
-- A abordagem da Maison procura organizar perguntas, possibilidades e reflexão; não apresenta uma leitura como garantia absoluta de acontecimentos futuros.
+### Other requests
+The public service catalogue also contains complementary therapies and ritual/spiritual requests under consultation, including Defumações, Limpeza Energética, Abertura de Caminhos, Banho de Ervas and special requests. These are presented without guaranteed supernatural outcomes.
 
 ## Companhia
-- https://maison-jf.com/companhia.html
-- Dois formatos: Friend4Rent para Companhia sem romance; Boyfriend4Rent para Companhia com proximidade afectiva e romance leve.
-- Boyfriend4Rent pode incluir dar a mão, abraços, carinho leve e beijos leves previamente combinados. Não inclui sexo, nudez, contacto sexual ou Serviços Sexuais.
-- Reserva mínima: 2 horas. Pagamento antecipado. Quem contrata suporta as despesas relacionadas com o encontro e a deslocação de ida e regresso de quem presta o Serviço.
-- Friend4Rent e Boyfriend4Rent são distintos do Acompanhamento Permanente, Escuta Orientada, Mentoria e restantes Serviços de Acompanhamento. Em qualquer dos dois formatos pode ser acrescentado um Serviço de Acompanhamento disponível, mediante combinação prévia e ajuste de valor.
-- Ambos os formatos podem ser contratados por pessoas adultas de qualquer género.
-- Companhia pode responder a situações como não querer ir sozinho a um evento, jantar, passeio ou experiência, falta de companhia social ou desejo de presença combinada dentro dos limites do Serviço.
+Companhia is a distinct adult presence service, not therapy and not a sexual service.
+Two formats are presented:
+- Friend4Rent
+- Boyfriend4Rent
+Minimum booking shown publicly: 2 hours.
+The plan, duration, location, expenses and boundaries are agreed before the booking.
 
-## Maison Todo o Mês
-- https://maison-jf.com/maison-todo-o-mes.html
+## Oráculo
+Canonical hub: https://maison-jf.com/oraculo/
+Current territory architecture:
+- Amor & Relações — active
+- Trabalho & Caminho — in preparation
+- Dinheiro & Segurança — in preparation
+- Família & Laços — in preparation
+- Escolhas & Mudança — in preparation
+- Eu & Padrões — in preparation
+
+Amor & Relações currently contains 20 long symbolic readings on the server.
+One paid opening costs 2 € and returns one reading after Stripe payment confirmation.
+The Oráculo is symbolic: it does not read minds, guarantee future events or make decisions for the user.
 
 ## Ebooks
-- https://maison-jf.com/editions.html
+Canonical library: https://maison-jf.com/ebooks/
+The library is catalogue-driven and has no fixed visual slot limit.
 
-## Aprendizagem e Mentoria
-- A Maison pode responder a pesquisas de pessoas que querem aprender Tarot, começar do zero, compreender o Rider-Waite, interpretar cartas, desenvolver leituras e aprofundar prática através de formação ou Mentoria disponível.
+Published:
+- Vírgulas do Destino: O Turista — 2,99 €
+- Vírgulas do Destino: Meandros da Vida — 4,99 €
 
-## Profissionais
-- https://maison-jf.com/profissionais.html
-- Parcerias B2B para Lojas, Spas e Profissionais.
-- A área profissional pode responder a procura por Produtos para revenda, velas e aromas para espaços profissionais, soluções para lojas, spas, terapeutas, massagistas e outros profissionais, conforme catálogo, stock e condições em vigor.
+Announced:
+- Vírgulas do Destino: A Vingança!
+- Vírgulas do Destino: Prisioneiros do Amor
 
-## Marca
-MAISON JF® é uma marca registada na União Europeia.
-Idioma principal: Português de Portugal.
-Área principal: Portugal, com presença em Vila do Conde e Porto.
+Published ebooks use Stripe checkout and authenticated post-payment download access.
+Each book can support a cover and an expandable editorial media collection.
 
-## Pagamentos
-- Os ebooks disponíveis em Éditions podem ser comprados online directamente no site através de checkout seguro da Stripe.
-- O download dos ebooks comprados online é disponibilizado após confirmação do pagamento.
-- Outros Produtos, reservas e Serviços seguem o meio de compra ou contacto indicado na respectiva página, incluindo WhatsApp quando aplicável.
+## Respostas and discovery content
+Respostas and the wider discovery pages answer human questions first and then offer relevant Maison destinations.
+Important fields include relationships, decisions, body/self-care, home/aroma, spirituality, Tarot, gifts, companionship and professional/B2B needs.
+Pages should remain useful even if the reader buys nothing.
 
-## Condições B2B
-- Clientes profissionais têm condições próprias de revenda.
-- Os Preços Profissionais aplicam-se mediante o valor mínimo de encomenda definido para cada proposta, tendo em conta selecção, quantidades e disponibilidade.
-- Antes da confirmação, a MAISON JF® apresenta Produtos, quantidades mínimas, preços, prazos, despesas aplicáveis e condições de pagamento.
+## Editorial language
+The visual/editorial rhythm is:
+world → sensation → detail → object → desire → discovery → purchase.
+References such as Dior, Saint Laurent and Tom Ford are used only as benchmarks for editorial restraint, pacing and desire; MAISON JF® keeps its own identity.
 
-## Referência canónica de linguagem
-- O repositório oficial inclui `MAISON-LANGUAGE-SYSTEM.md`, documento de referência para humanos e sistemas de IA que criem, revejam ou interpretem conteúdo MAISON JF®.
-- Princípio de decisão para novas ofertas: **“Isto tem um lugar credível no percurso de alguém de Voltar Para Casa — através de Casa, Corpo ou Cabeça?”**
-- Complexidade por baixo. Simplicidade à superfície.
+## Search / GEO
+Public pages should use:
+- unique title and description
+- canonical URL
+- semantic headings
+- crawlable internal links
+- truthful structured data
+- stable URLs
+- sitemap inclusion only for indexable public pages
+- concise answer-first passages where appropriate
+Do not use hidden keyword blocks, doorway pages, fake reviews, fake FAQs or schema spam.
+
+## Safety and scope
+Tarot, spiritual practices, sensory products and wellbeing services do not replace medical, psychological, psychiatric or other professional healthcare when needed.
+MAISON JF® may discuss spiritual language and beliefs without presenting supernatural claims as diagnosed facts.
