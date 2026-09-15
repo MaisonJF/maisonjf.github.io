@@ -10,9 +10,10 @@
     .then(async response=>{const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||'Não foi possível confirmar a compra.');return data})
     .then(data=>{
       if(data.payment_status==='paid'){
-        track('purchase',{transaction_id:sessionId,value:Number.isInteger(data.amount_total)?data.amount_total/100:undefined,currency:(data.currency||'EUR').toUpperCase(),items:Array.isArray(data.ebook_ids)?data.ebook_ids.map(id=>({item_id:id,item_name:ebookNames[id]||id})):[]});
+        const purchased=Array.isArray(data.ebooks)&&data.ebooks.length?data.ebooks:(Array.isArray(data.ebook_ids)?data.ebook_ids.map(id=>({id,title:(ebookNames[id]||id).replace(/^Descarregar /,'')})):[]);
+        track('purchase',{transaction_id:sessionId,value:Number.isInteger(data.amount_total)?data.amount_total/100:undefined,currency:(data.currency||'EUR').toUpperCase(),items:purchased.map(book=>({item_id:book.id,item_name:book.title}))});
         title.textContent='Pagamento confirmado.';message.textContent='A tua compra está concluída. Podes descarregar abaixo o que compraste.';
-        if(Array.isArray(data.ebook_ids)&&data.ebook_ids.length){downloads.hidden=false;ebookNote.hidden=false;data.ebook_ids.forEach(id=>{if(!ebookNames[id])return;const link=document.createElement('a');link.className='button button--light';link.href='/api/ebook-download-live?session_id='+encodeURIComponent(sessionId)+'&ebook='+encodeURIComponent(id);link.textContent=ebookNames[id];downloads.appendChild(link)})}
+        if(purchased.length){downloads.hidden=false;ebookNote.hidden=false;purchased.forEach(book=>{const link=document.createElement('a');link.className='button button--light';link.href='/api/ebook-download-live?session_id='+encodeURIComponent(sessionId)+'&ebook='+encodeURIComponent(book.id);link.textContent='Descarregar '+book.title;downloads.appendChild(link)})}
         fetch('/api/checkout-receipt-live',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({session_id:sessionId})}).catch(()=>{});
       }else if(data.status==='complete'){title.textContent='Compra concluída. Pagamento a confirmar.';message.textContent='A Stripe ainda está a confirmar o pagamento. Actualiza esta página dentro de alguns instantes.'}
       else{title.textContent='Pagamento ainda não concluído.';message.textContent='A compra ainda não aparece como paga.'}
