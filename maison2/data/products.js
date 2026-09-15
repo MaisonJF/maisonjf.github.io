@@ -1,3 +1,10 @@
+/*
+MAISON PRODUCT CATALOGUE
+To add a future product, add one object to MAISON_PRODUCTS. Required: slug, name, category, price, currency, description, cta.
+Optional: size, priceNote, media, ritual, related, status. Stable public route convention: /maison2/produtos/<slug>/.
+Media roles supported by the Maison system: hero, packshot, detail, texture, ritual, use, ambience, pairing, story.
+Keep commercial facts here. Layout and behaviour belong in produtos/detail.js.
+*/
 window.MAISON_PRODUCTS=[
 {slug:'escalda-pes',name:'Escalda-Pés',size:'150 g',category:'Corpo',price:5,currency:'EUR',description:'Um gesto simples para parar, aquecer e criar um momento para os pés.',media:[],cta:'Quero criar este momento'},
 {slug:'vela-vidro',name:'Vela em Vidro',category:'Casa',price:14,currency:'EUR',description:'Luz, aroma e atmosfera para mudar o ritmo de um espaço.',media:[],cta:'Quero levar para casa'},
@@ -8,3 +15,4 @@ window.MAISON_PRODUCTS=[
 {slug:'wax-melts',name:'Wax Melts',category:'Casa',price:5,currency:'EUR',description:'Aroma para criar ambiente em casa.',media:[],cta:'Quero escolher'},
 {slug:'mikado',name:'Mikado',category:'Casa',price:14.5,currency:'EUR',priceNote:'a partir de 14,50 €',description:'Perfume contínuo para integrar o aroma no espaço.',media:[],cta:'Quero escolher'}
 ];
+window.MAISON_PRODUCT_BY_SLUG=Object.fromEntries(window.MAISON_PRODUCTS.map(product=>[product.slug,product]));
