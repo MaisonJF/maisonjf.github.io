@@ -35,16 +35,12 @@
   const complementary={Corpo:['vela-vidro','nevoa'],Casa:['escalda-pes','oleo-massagem']}[p.category]||[];
   const related=(p.related||complementary).map(s=>all.find(x=>x.slug===s)).filter(Boolean).slice(0,3);
 
-  const facts=[];
-  if(p.usage){
-    facts.push(`<div><p class="eyebrow">Como usar</p><h2>Usa sem complicar.</h2><p>${p.usage}</p></div>`);
-  }
-  if(p.ingredients){
-    facts.push(`<div><p class="eyebrow">Formulação</p><h2>O que está no produto.</h2><p><strong>Ingredientes (INCI):</strong> ${p.ingredients}</p>${p.nominal?`<p>Conteúdo nominal: ${p.nominal}.${p.pao?' PAO: '+p.pao+'.':''}</p>`:''}</div>`);
-  }
-  if(p.production||p.safety){
-    facts.push(`<div><p class="eyebrow">Antes de usar</p>${p.production?`<p>${p.production}</p>`:''}${p.safety?`<p>${p.safety}</p>`:''}</div>`);
-  }
+  const detailBlocks=[];
+  if(p.usage) detailBlocks.push(`<div><h3>Como usar</h3><p>${p.usage}</p></div>`);
+  if(p.production) detailBlocks.push(`<div><h3>Produção</h3><p>${p.production}</p></div>`);
+  if(p.safety) detailBlocks.push(`<div><h3>Cuidados</h3><p>${p.safety}</p></div>`);
+  if(p.ingredients) detailBlocks.push(`<div><h3>Ingredientes</h3><p>${p.ingredients}</p></div>`);
+  if(p.nominal||p.pao) detailBlocks.push(`<div><h3>Informação</h3><p>${[p.nominal?'Conteúdo nominal: '+p.nominal:null,p.pao?'PAO: '+p.pao:null].filter(Boolean).join(' · ')}</p></div>`);
 
   page.innerHTML=`
     <section class="product-hero">
@@ -58,22 +54,20 @@
           <a class="button button--light" data-buy href="${contact}">${p.cta}</a>
           <a class="text-link" href="${root}teste/">Não sei se é isto</a>
         </div>
-        <div class="product-next">
-          Podes começar por este produto e ficar por aqui.
-          <a href="${root}envios.html">Consulta envios e portes</a> ou
-          <a href="${root}informacao-legal.html">as condições da Maison</a>.
-          Se o momento te mostrar que há mais qualquer coisa a pedir atenção,
-          <a href="${root}servicos/#acompanhamento">continua em Acompanhamento</a>.
+        <div class="product-meta-links">
+          ${detailBlocks.length?'<a href="#detalhes">Detalhes do produto</a>':''}
+          <a href="${root}envios.html">Envios</a>
+          <a href="${root}informacao-legal.html">Condições</a>
         </div>
       </div>
     </section>
     ${rest.length?`<section class="gallery">${rest.map(m=>`<div class="media-slot"><img src="${root}${m.src.replace(/^\.\.\//,'')}" alt="${m.alt}" loading="lazy"></div>`).join('')}</section>`:''}
-    ${facts.length?`<section class="ritual">${facts.join('')}</section>`:''}
     <section class="ritual">
       <div><p class="eyebrow">Leva-o contigo</p><h2>${ritual[0]}</h2><p>${ritual[1]}</p></div>
       <div><p class="eyebrow">Se isto for só a entrada</p><h2>O próximo passo não tem de ser outro produto.</h2><p>Uma pausa pode chegar. Também pode abrir uma pergunta. Se quiseres olhar para o que está por trás com continuidade, vê os Acompanhamentos; se ainda não sabes o que precisas, faz o teste.</p><a class="text-link" href="${root}servicos/#acompanhamento">Ver Acompanhamentos</a><br><a class="text-link" href="${root}teste/">Fazer O QUE ESTÁS A IGNORAR?</a></div>
     </section>
     ${related.length?`<section class="related"><p class="eyebrow">Pode fazer sentido contigo</p><h2>Continua o ritual.</h2><div class="related-grid">${related.map(r=>`<a class="related-card" data-related="${r.slug}" href="${root}produtos/${r.slug}/"><small>${r.category}</small><strong>${r.name}${r.size?` · ${r.size}`:''}</strong><span>${r.priceNote||money(r.price)} · Ver</span></a>`).join('')}</div></section>`:''}
+    ${detailBlocks.length?`<details class="product-facts" id="detalhes"><summary>Detalhes do produto</summary><div class="product-facts__grid">${detailBlocks.join('')}</div></details>`:''}
   `;
 
   track('maison_product_view',{product:p.slug,price:p.price,page_path:location.pathname});
