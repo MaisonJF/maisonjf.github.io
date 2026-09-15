@@ -3,11 +3,12 @@
 'use strict';
 function track(name,parameters={}){if(window.maisonAnalytics&&typeof window.maisonAnalytics.track==='function')window.maisonAnalytics.track(name,parameters);}
 const result=(title,text,href,label,href2=null,label2=null)=>({title,text,cta:{href,text:label},cta2:href2&&label2?{href:href2,text:label2}:null});
-const product=slug=>`maison2/produtos/produto.html?slug=${encodeURIComponent(slug)}`;
-const products='maison2/produtos/';
-const services='maison2/servicos/';
-const answers='maison2/respostas/';
-const test='maison2/teste/';
+const product=slug=>`/maison2/produtos/produto.html?slug=${encodeURIComponent(slug)}`;
+const products='/maison2/produtos/';
+const services='/maison2/servicos/';
+const answers='/maison2/respostas/';
+const test='/maison2/teste/';
+const contact='/contactos.html';
 const data={
  step1:{
   decisao:{question:'O que é que te mantém no mesmo sítio?',options:[{key:'voltas',label:'Já pensei em tudo. Continuo sem conseguir decidir.'},{key:'medo',label:'No fundo eu sei o que quero. Tenho medo de me arrepender.'},{key:'urgente',label:'Preciso de decidir isto antes que me consuma outra semana.'}]},
@@ -20,20 +21,20 @@ const data={
   outro:{question:'O que é mais fácil agora?',options:[{key:'ver',label:'Mostra-me o que existe.'},{key:'falar',label:'Prefiro explicar o que se passa a uma pessoa.'}]}
  },
  results:{
-  decisao_voltas:result('Já fizeste listas. Continuas no mesmo sítio.','Se queres sair do círculo agora, começa por uma Consulta de Tarot: 35 € para olhar para a tua pergunta concreta sem decidir por ti. Se ainda não queres avançar para uma consulta, começa pelas Respostas.',services,'Quero olhar para o meu caso · 35 €','../../decisoes/','Começar pelas Respostas'),
-  decisao_medo:result('Saber o que queres não apaga o medo de te arrependeres.','A Consulta de Tarot pode ajudar-te a organizar a decisão, os receios e aquilo que estás a evitar. O objectivo não é prever a escolha certa; é saíres com mais clareza sobre a tua.',services,'Preciso de clareza · 35 €','../../decisoes/','Ler primeiro'),
+  decisao_voltas:result('Já fizeste listas. Continuas no mesmo sítio.','Se queres sair do círculo agora, começa por uma Consulta de Tarot: 35 € para olhar para a tua pergunta concreta sem decidir por ti. Se ainda não queres avançar para uma consulta, começa pelas Respostas.',services,'Quero olhar para o meu caso · 35 €','/decisoes/','Começar pelas Respostas'),
+  decisao_medo:result('Saber o que queres não apaga o medo de te arrependeres.','A Consulta de Tarot pode ajudar-te a organizar a decisão, os receios e aquilo que estás a evitar. O objectivo não é prever a escolha certa; é saíres com mais clareza sobre a tua.',services,'Preciso de clareza · 35 €','/decisoes/','Ler primeiro'),
   decisao_urgente:result('Não queres levar isto contigo para outra semana.','Quando a resposta depende do teu contexto, traz a pergunta concreta. A Consulta de Tarot custa 35 € e serve precisamente para olhar para aquilo que uma resposta genérica não consegue conhecer.',services,'Quero olhar para isto · 35 €'),
-  relacao_cabeca:result('Dizes que já passou. Depois vais outra vez ver se escreveu.','Podes começar por uma resposta gratuita ou ir directamente ao teu caso. Se esta história depende de detalhes que só tu conheces, a Consulta custa 35 €.',services,'Olhar para o meu caso · 35 €','../../relacoes/','Ler Relações'),
-  relacao_decidir:result('O pior é não saber se esperas ou vais embora.','Não vou inventar uma regra universal. Se queres trabalhar a tua situação concreta, a Consulta de Tarot custa 35 €. Se preferes começar sozinho, tens as Respostas de Relações.',services,'Quero perceber o que fazer · 35 €','../../relacoes/','Começar pelas Respostas'),
-  relacao_entender:result('Estás cansado(a) de tentar perceber o que isto significa.','Em vez de adivinhar a cabeça da outra pessoa, podemos olhar para comportamentos, padrões, limites e para aquilo que esta situação está a fazer contigo.',services,'Quero olhar para o meu caso · 35 €','../../relacoes/','Ler primeiro'),
+  relacao_cabeca:result('Dizes que já passou. Depois vais outra vez ver se escreveu.','Podes começar por uma resposta gratuita ou ir directamente ao teu caso. Se esta história depende de detalhes que só tu conheces, a Consulta custa 35 €.',services,'Olhar para o meu caso · 35 €','/relacoes/','Ler Relações'),
+  relacao_decidir:result('O pior é não saber se esperas ou vais embora.','Não vou inventar uma regra universal. Se queres trabalhar a tua situação concreta, a Consulta de Tarot custa 35 €. Se preferes começar sozinho, tens as Respostas de Relações.',services,'Quero perceber o que fazer · 35 €','/relacoes/','Começar pelas Respostas'),
+  relacao_entender:result('Estás cansado(a) de tentar perceber o que isto significa.','Em vez de adivinhar a cabeça da outra pessoa, podemos olhar para comportamentos, padrões, limites e para aquilo que esta situação está a fazer contigo.',services,'Quero olhar para o meu caso · 35 €','/relacoes/','Ler primeiro'),
   cansaco_corpo:result('Até cuidar de ti parece mais uma tarefa.','Então não compliques. Começa pequeno: Escalda-Pés MAISON JF®, 150 g, 5 €. Água morna, alguns minutos e um gesto concreto que marca a pausa. Se depois perceberes que precisas de mais do que um ritual, tens Acompanhamento.',product('escalda-pes'),'Quero o Escalda-Pés · 5 €',services,'Ver Acompanhamento'),
   cansaco_cabeca:result('Deitaste o corpo. A cabeça continua em pé.','Muda primeiro o momento. Uma Vela em Vidro, 14 €, pode marcar a passagem entre o dia e a noite com luz e aroma. Se o que continua ligado é maior do que o ritual, o passo seguinte pode ser Acompanhamento.',product('vela-vidro'),'Quero marcar o fim do dia · 14 €',services,'Ver Acompanhamento'),
   cansaco_demais:result('Já não parece ser só o cansaço de hoje.','Podes começar por uma pausa concreta sem transformar isso numa promessa de cura: Escalda-Pés, 5 €. E se o que estás a carregar pede continuidade, vê os Acompanhamentos da Maison.',product('escalda-pes'),'Começar por mim · 5 €',services,'Preciso de mais acompanhamento'),
   casa_cheiro:result('Queres entrar e sentir logo outro ar.','A Névoa / Bruma muda o aroma do espaço de forma imediata. Está no catálogo actual por 6,50 €.',product('nevoa-bruma'),'Quero mudar o ar · 6,50 €',products,'Comparar Produtos'),
   casa_parar:result('Queres que a casa te diga: acabou por hoje.','Cria um marcador simples. A Vela em Vidro custa 14 € e junta luz, aroma e atmosfera; se quiseres levar a pausa para o corpo, o Escalda-Pés custa 5 €.',product('vela-vidro'),'Quero a Vela · 14 €',product('escalda-pes'),'Juntar Escalda-Pés · 5 €'),
-  casa_mudar:result('Não queres obras. Queres sentir a casa diferente.','Começa pelo que muda depressa: aroma. Névoa / Bruma desde 6,50 €, Mikado a partir de 14,50 €, ou escolhe no catálogo aquilo que combina com a divisão.',products,'Escolher aroma para a casa','../../casa/','Ver ideias para Casa'),
+  casa_mudar:result('Não queres obras. Queres sentir a casa diferente.','Começa pelo que muda depressa: aroma. Névoa / Bruma desde 6,50 €, Mikado a partir de 14,50 €, ou escolhe no catálogo aquilo que combina com a divisão.',products,'Escolher aroma para a casa','/casa/','Ver ideias para Casa'),
   aprender_tarot:result('Queres aprender Tarot a sério.','Então a próxima etapa não é mais uma frase solta: pergunta pelos formatos de Acompanhamento e aprendizagem disponíveis na Maison.',services,'Quero saber como aprender'),
-  aprender_astrologia:result('Queres perceber Astrologia sem decorar frases feitas.','Diz-nos o que queres aprender ou receber. Confirmamos o formato realmente disponível antes de te vender alguma coisa.','contactos.html','Perguntar à Maison'),
+  aprender_astrologia:result('Queres perceber Astrologia sem decorar frases feitas.','Diz-nos o que queres aprender ou receber. Confirmamos o formato realmente disponível antes de te vender alguma coisa.',contact,'Perguntar à Maison'),
   aprender_outra:result('Queres começar. Ainda não sabes por onde.','O teste “O QUE ESTÁS A IGNORAR?” pode ajudar a perceber qual Porta está a pedir atenção primeiro.',test,'Fazer o teste'),
   companhia_evento:result('Já tens o convite. O que pesa é chegares sozinho(a).','A Companhia pode ser combinada para um café, passeio, evento ou outro momento acordado. Vê o serviço e pergunta disponibilidade.',services,'Quero Companhia'),
   companhia_sair:result('Queres fazer o plano. Sozinho(a), sabes que podes desistir.','Se o plano continua a apetecer-te e o que falta é presença, começa pela Companhia e combina previamente o formato e os limites.',services,'Perguntar disponibilidade'),
@@ -43,7 +44,7 @@ const data={
   presente_casa:result('Queres algo bonito para a casa que a pessoa use mesmo.','A Vela em Vidro custa 14 €. Se preferires aroma contínuo, o Mikado começa nos 14,50 €; para algo mais imediato, Névoa / Bruma 6,50 €.',products,'Escolher presente para a casa'),
   presente_corpo:result('Queres oferecer uma pausa, não mais uma coisa.','Começa pelo Escalda-Pés, 150 g, 5 €. Se a pessoa gosta de toque e massagem, o Óleo de Massagem começa nos 12 €.',product('escalda-pes'),'Quero oferecer a pausa · 5 €',product('oleo-massagem'),'Prefiro Óleo de Massagem'),
   outro_ver:result('Sem problema. Vai directo ao que existe.','Se ainda não sabes qual Porta abrir, o teste faz essa triagem. Se já sabes o que queres comprar, vai directo aos Produtos.',test,'Fazer “O QUE ESTÁS A IGNORAR?”',products,'Ver Produtos'),
-  outro_falar:result('Às vezes é mais fácil explicar do que escolher.','Fala connosco em português normal. Se a Maison tiver uma opção que faça sentido, mostramos-ta; se não tiver, não inventamos.','contactos.html','Falar com a Maison')
+  outro_falar:result('Às vezes é mais fácil explicar do que escolher.','Fala connosco em português normal. Se a Maison tiver uma opção que faça sentido, mostramos-ta; se não tiver, não inventamos.',contact,'Falar com a Maison')
  }
 };
 let currentStep=1,step1Choice=null,step2Choice=null;
@@ -52,7 +53,7 @@ const dots=document.querySelectorAll('.farol__progress-dot'),q=document.getEleme
 function progress(step){dots.forEach((dot,i)=>dot.classList.toggle('farol__progress-dot--active',i<step));}
 function show(step){Object.values(steps).forEach(el=>el&&el.classList.remove('farol__step--active'));if(!steps[step])return;steps[step].classList.add('farol__step--active');currentStep=step;progress(step);}
 function build(key){const d=data.step1[key];if(!d||!q||!opts)return;step1Choice=key;track('farol_start',{theme:key,page_path:location.pathname});q.textContent=d.question;opts.innerHTML='';d.options.forEach(o=>{const b=document.createElement('button');b.className='farol__option';b.type='button';b.innerHTML=`<span class="farol__option-text">${o.label}</span><span aria-hidden="true">→</span>`;b.addEventListener('click',()=>choose(o.key));opts.appendChild(b);});show(2);}
-function choose(key){step2Choice=key;track('farol_refine',{theme:step1Choice,choice:key,page_path:location.pathname});const selected=data.results[`${step1Choice}_${key}`]||result('Não te vou inventar uma resposta.','Explica-nos o que procuras. Se houver uma solução real, dizemos-te qual.','contactos.html','Falar com a Maison');render(selected);}
+function choose(key){step2Choice=key;track('farol_refine',{theme:step1Choice,choice:key,page_path:location.pathname});const selected=data.results[`${step1Choice}_${key}`]||result('Não te vou inventar uma resposta.','Explica-nos o que procuras. Se houver uma solução real, dizemos-te qual.',contact,'Falar com a Maison');render(selected);}
 function render(r){if(!out)return;const external=h=>/^https?:/.test(h)?' target="_blank" rel="noopener"':'';out.innerHTML=`<h3 class="farol__result-title">${r.title}</h3><p class="farol__result-text">${r.text}</p><div class="farol__result-actions"><a href="${r.cta.href}" class="btn btn--primary"${external(r.cta.href)} data-farol-cta="primary">${r.cta.text}</a>${r.cta2?`<a href="${r.cta2.href}" class="btn btn--secondary"${external(r.cta2.href)} data-farol-cta="secondary">${r.cta2.text}</a>`:''}</div>`;track('farol_result',{theme:step1Choice||'unknown',choice:step2Choice||'unknown',destination:r.cta.href,page_path:location.pathname});show(3);}
 function reset(){track('farol_restart',{page_path:location.pathname});step1Choice=null;step2Choice=null;show(1);}
 if(steps[1])steps[1].querySelectorAll('[data-farol]').forEach(b=>b.addEventListener('click',()=>build(b.getAttribute('data-farol'))));
