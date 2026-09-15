@@ -10,8 +10,8 @@ export async function onRequestPost({ request, env }) {
     const origin = new URL(request.url).origin;
     const params = new URLSearchParams();
     params.set('mode', 'payment');
-    params.set('success_url', origin + '/maison2/oraculo/amor-leitura.html?session_id={CHECKOUT_SESSION_ID}');
-    params.set('cancel_url', origin + '/maison2/oraculo/amor.html?checkout_cancelado=1');
+    params.set('success_url', origin + '/oraculo/amor-leitura.html?session_id={CHECKOUT_SESSION_ID}');
+    params.set('cancel_url', origin + '/oraculo/amor.html?checkout_cancelado=1');
     params.set('locale', 'pt');
     params.set('customer_creation', 'always');
     params.set('billing_address_collection', 'auto');
