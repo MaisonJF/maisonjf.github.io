@@ -2,7 +2,7 @@
 MAISON PRODUCT CATALOGUE
 CURRENT contains only products actually sold now. FUTURE is planning data and must never render as available stock until status changes deliberately.
 To add a current product, add one object to MAISON_PRODUCTS. Required: slug, name, category, price, currency, description, cta.
-Optional: size, priceNote, media, ritual, related, status. Stable public route convention: /maison2/produtos/<slug>/.
+Optional: size, priceNote, media, ritual, related, status. Stable public route convention: /produtos/<slug>/.
 Media roles supported by the Maison system: hero, packshot, detail, texture, ritual, use, ambience, pairing, story.
 Keep commercial facts here. Layout and behaviour belong in produtos/detail.js.
 */
