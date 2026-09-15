@@ -1,113 +1,23 @@
-<!DOCTYPE html>
-<html lang="pt-PT">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Compra confirmada | MAISON JF®</title>
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="apple-touch-icon" href="apple-touch-icon.svg">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="styles-additions.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <script src="analytics.js" defer></script>
-  <script src="data/ebooks.js"></script>
-</head>
-<body class="detail-page">
-  <main>
-    <section class="detail-hero">
-      <div class="detail-hero__inner">
-        <p class="detail-eyebrow">Éditions Maison JF</p>
-        <h1 class="detail-title" id="checkout-title">A confirmar a compra…</h1>
-        <p class="detail-lead" id="checkout-message">Estamos a confirmar o pagamento directamente na Stripe.</p>
-        <p class="detail-copy" id="checkout-details"></p>
-        <div id="ebook-downloads" class="detail-actions" hidden></div>
-        <p class="detail-copy" id="ebook-note" hidden>O acesso automático aos ebooks desta compra fica disponível durante 7 dias. Se expirar ou houver algum problema, contacta a MAISON JF®.</p>
-        <p class="detail-copy">A fatura fiscal da MAISON JF® é emitida separadamente através do Portal das Finanças.</p>
-        <div class="detail-actions">
-          <a class="btn btn--primary" href="ebooks/">Voltar aos Ebooks</a>
-          <a class="btn btn--secondary" href="index.html">Voltar à Maison</a>
-        </div>
-      </div>
-    </section>
-  </main>
-  <script>
-    (() => {
-      const title = document.getElementById('checkout-title');
-      const message = document.getElementById('checkout-message');
-      const details = document.getElementById('checkout-details');
-      const downloads = document.getElementById('ebook-downloads');
-      const ebookNote = document.getElementById('ebook-note');
-      const sessionId = new URLSearchParams(location.search).get('session_id');
-      const ebookNames = Object.fromEntries((window.MAISON_EBOOKS || []).filter(book => book.checkoutId).map(book => [book.checkoutId, 'Descarregar ' + book.title]));
-      const money = (amount, currency = 'eur') =>
-        new Intl.NumberFormat('pt-PT', { style: 'currency', currency: currency.toUpperCase() }).format(amount / 100);
-
-      if (!sessionId) {
-        title.textContent = 'Não encontrei a compra.';
-        message.textContent = 'Volta aos Ebooks e inicia o pagamento novamente.';
-        return;
-      }
-
-      fetch('/api/checkout-session-live?session_id=' + encodeURIComponent(sessionId), {
-        credentials: 'same-origin',
-        cache: 'no-store'
-      })
-        .then(async response => {
-          const data = await response.json().catch(() => ({}));
-          if (!response.ok) throw new Error(data.error || 'Não foi possível confirmar a compra.');
-          return data;
-        })
-        .then(data => {
-          if (data.payment_status === 'paid') {
-            window.maisonAnalytics?.track('purchase', {
-              transaction_id: sessionId,
-              value: Number.isInteger(data.amount_total) ? data.amount_total / 100 : undefined,
-              currency: (data.currency || 'EUR').toUpperCase(),
-              items: Array.isArray(data.ebook_ids) ? data.ebook_ids.map(id => ({ item_id: id, item_name: ebookNames[id] || id })) : []
-            });
-            title.textContent = 'Pagamento confirmado.';
-            message.textContent = 'A tua compra está concluída. Podes descarregar abaixo o que compraste.';
-
-            if (Array.isArray(data.ebook_ids) && data.ebook_ids.length) {
-              downloads.hidden = false;
-              ebookNote.hidden = false;
-              data.ebook_ids.forEach(id => {
-                if (!ebookNames[id]) return;
-                const link = document.createElement('a');
-                link.className = 'btn btn--primary';
-                link.href = '/api/ebook-download-live?session_id=' + encodeURIComponent(sessionId) + '&ebook=' + encodeURIComponent(id);
-                link.textContent = ebookNames[id];
-                downloads.appendChild(link);
-              });
-            }
-
-            fetch('/api/checkout-receipt-live', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              credentials: 'same-origin',
-              body: JSON.stringify({ session_id: sessionId })
-            }).catch(() => {});
-          } else if (data.status === 'complete') {
-            title.textContent = 'Compra concluída. Pagamento a confirmar.';
-            message.textContent = 'A Stripe ainda está a confirmar o pagamento. Actualiza esta página dentro de alguns instantes.';
-          } else {
-            title.textContent = 'Pagamento ainda não concluído.';
-            message.textContent = 'A compra ainda não aparece como paga.';
-          }
-
-          const parts = [];
-          if (Number.isInteger(data.amount_total)) parts.push('Total: ' + money(data.amount_total, data.currency));
-          if (data.email) parts.push('Email: ' + data.email);
-          details.textContent = parts.join(' · ');
-        })
-        .catch(error => {
-          title.textContent = 'Não foi possível confirmar automaticamente.';
-          message.textContent = error.message;
-        });
-    })();
-  </script>
-</body>
-</html>
+<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Compra confirmada | MAISON JF®</title><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="./maison.css"><script src="./analytics.js" defer></script><script src="./data/ebooks.js"></script><style>.receipt{min-height:100svh;padding:150px 0 100px;display:grid;place-items:center}.receipt__card{width:min(780px,100%);border:1px solid var(--line);background:#10100f;padding:clamp(30px,6vw,70px)}.receipt h1{font:400 clamp(48px,7vw,86px)/.94 var(--serif);margin:.2em 0}.receipt p{color:#aaa39a}.receipt__details{color:#e9e2d8!important}.receipt__downloads{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}.receipt__actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:34px;align-items:center}.receipt__note{font-size:.9rem}</style></head><body><header class="site-header"><a class="brand" href="./">MAISON JF®</a><nav><a href="./ebooks/">Ebooks</a><a href="./produtos/">Produtos</a><a href="./servicos/">Serviços</a></nav></header><main class="receipt shell"><section class="receipt__card"><p class="eyebrow">Ebooks MAISON JF®</p><h1 id="checkout-title">A confirmar a compra…</h1><p id="checkout-message">Estamos a confirmar o pagamento directamente na Stripe.</p><p class="receipt__details" id="checkout-details"></p><div id="ebook-downloads" class="receipt__downloads" hidden></div><p class="receipt__note" id="ebook-note" hidden>O acesso automático aos ebooks desta compra fica disponível durante 7 dias. Se expirar ou houver algum problema, contacta a MAISON JF®.</p><p class="receipt__note">A fatura fiscal da MAISON JF® é emitida separadamente através do Portal das Finanças.</p><div class="receipt__actions"><a class="button button--light" href="./ebooks/">Voltar aos Ebooks</a><a class="text-link" href="./">Voltar à Maison</a></div></section></main><script>
+(() => {
+  const title=document.getElementById('checkout-title'),message=document.getElementById('checkout-message'),details=document.getElementById('checkout-details'),downloads=document.getElementById('ebook-downloads'),ebookNote=document.getElementById('ebook-note');
+  const sessionId=new URLSearchParams(location.search).get('session_id');
+  const ebookNames=Object.fromEntries((window.MAISON_EBOOKS||[]).filter(book=>book.checkoutId).map(book=>[book.checkoutId,'Descarregar '+book.title]));
+  const money=(amount,currency='eur')=>new Intl.NumberFormat('pt-PT',{style:'currency',currency:currency.toUpperCase()}).format(amount/100);
+  const track=(name,data)=>window.maisonAnalytics?.track?window.maisonAnalytics.track(name,data):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([name,data]);
+  if(!sessionId){title.textContent='Não encontrei a compra.';message.textContent='Volta aos Ebooks e inicia o pagamento novamente.';return}
+  fetch('/api/checkout-session-live?session_id='+encodeURIComponent(sessionId),{credentials:'same-origin',cache:'no-store'})
+    .then(async response=>{const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||'Não foi possível confirmar a compra.');return data})
+    .then(data=>{
+      if(data.payment_status==='paid'){
+        track('purchase',{transaction_id:sessionId,value:Number.isInteger(data.amount_total)?data.amount_total/100:undefined,currency:(data.currency||'EUR').toUpperCase(),items:Array.isArray(data.ebook_ids)?data.ebook_ids.map(id=>({item_id:id,item_name:ebookNames[id]||id})):[]});
+        title.textContent='Pagamento confirmado.';message.textContent='A tua compra está concluída. Podes descarregar abaixo o que compraste.';
+        if(Array.isArray(data.ebook_ids)&&data.ebook_ids.length){downloads.hidden=false;ebookNote.hidden=false;data.ebook_ids.forEach(id=>{if(!ebookNames[id])return;const link=document.createElement('a');link.className='button button--light';link.href='/api/ebook-download-live?session_id='+encodeURIComponent(sessionId)+'&ebook='+encodeURIComponent(id);link.textContent=ebookNames[id];downloads.appendChild(link)})}
+        fetch('/api/checkout-receipt-live',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({session_id:sessionId})}).catch(()=>{});
+      }else if(data.status==='complete'){title.textContent='Compra concluída. Pagamento a confirmar.';message.textContent='A Stripe ainda está a confirmar o pagamento. Actualiza esta página dentro de alguns instantes.'}
+      else{title.textContent='Pagamento ainda não concluído.';message.textContent='A compra ainda não aparece como paga.'}
+      const parts=[];if(Number.isInteger(data.amount_total))parts.push('Total: '+money(data.amount_total,data.currency));if(data.email)parts.push('Email: '+data.email);details.textContent=parts.join(' · ');
+    })
+    .catch(error=>{title.textContent='Não foi possível confirmar automaticamente.';message.textContent=error.message});
+})();
+</script></body></html>
