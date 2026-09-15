@@ -18,6 +18,9 @@
     if (!idPattern.test(id)) return;
     setBusy(button, true);
     if (status) status.textContent = '';
+    if (window.maisonAnalytics && window.maisonAnalytics.track) {
+      window.maisonAnalytics.track('begin_checkout', { item_id: id, item_type: 'ebook', page_path: location.pathname });
+    }
     try {
       const response = await fetch('/api/create-checkout-live', {
         method: 'POST',

@@ -98,6 +98,11 @@
     if (lowerHref.includes('/servicos/#escuta') || lowerHref.includes('servicos.html#escuta')) track('escuta_interest', { link_text: text });
     if (lowerHref.includes('/servicos/#acompanhamento') || lowerHref.includes('servicos.html#acompanhamento') || lowerText.includes('sos')) track('sos_interest', { link_text: text });
     if (lowerHref.includes('/servicos/#tarot') || lowerHref.includes('servicos.html#tarot')) track('tarot_interest', { link_text: text });
+    if (lowerHref.includes('/contacto/?interesse=')) {
+      const match = href.match(/[?&]interesse=([^&#]+)/i);
+      const interest = match ? decodeURIComponent(match[1]) : 'general';
+      track('service_interest', { service: interest, link_text: text });
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
