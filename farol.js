@@ -1,225 +1,60 @@
-/**
- * MAISON JF® | O Farol
- */
-(function() {
-  'use strict';
-
-  function trackFarol(name, parameters = {}) {
-    if (window.maisonAnalytics && typeof window.maisonAnalytics.track === 'function') {
-      window.maisonAnalytics.track(name, parameters);
-    }
-  }
-
-  const result = (title, text, primaryHref, primaryText, secondaryHref = null, secondaryText = null) => ({
-    title,
-    text,
-    cta: { text: primaryText, href: primaryHref, style: 'primary' },
-    cta2: secondaryHref && secondaryText ? { text: secondaryText, href: secondaryHref, style: 'secondary' } : null
-  });
-
-  const FAROL_DATA = {
-    step1: {
-      decisao: {
-        question: 'O que é que te mantém no mesmo sítio?',
-        options: [
-          { key: 'voltas', label: 'Já pensei em tudo. Continuo sem conseguir decidir.' },
-          { key: 'medo', label: 'No fundo eu sei o que quero. Tenho medo de me arrepender.' },
-          { key: 'urgente', label: 'Preciso de decidir isto antes que me consuma outra semana.' }
-        ]
-      },
-      relacao: {
-        question: 'Quando essa pessoa te volta à cabeça, o que acontece?',
-        options: [
-          { key: 'cabeca', label: 'Vou outra vez às mensagens, às redes ou à conversa que tivemos.' },
-          { key: 'decidir', label: 'Não sei se insisto, desisto ou espero.' },
-          { key: 'entender', label: 'Quero perceber se estou a ver isto como é ou como queria que fosse.' }
-        ]
-      },
-      cansaco: {
-        question: 'Onde é que já não estás a conseguir?',
-        options: [
-          { key: 'corpo', label: 'Chego ao fim do dia e até cuidar de mim dá trabalho.' },
-          { key: 'cabeca', label: 'Deito-me e a cabeça continua a trabalhar.' },
-          { key: 'demais', label: 'Acordo cansado(a). Isto já não é de hoje.' }
-        ]
-      },
-      casa: {
-        question: 'Quando entras em casa, o que gostavas que mudasse primeiro?',
-        options: [
-          { key: 'cheiro', label: 'Quero entrar e sentir logo outro ar.' },
-          { key: 'parar', label: 'Quero entrar e sentir logo: acabou por hoje.' },
-          { key: 'mudar', label: 'Quero sentir a casa diferente sem mexer na casa toda.' }
-        ]
-      },
-      aprender: {
-        question: 'O que estás cansado(a) de adiar?',
-        options: [
-          { key: 'tarot', label: 'Quero aprender Tarot a sério.' },
-          { key: 'astrologia', label: 'Quero perceber Astrologia sem decorar frases feitas.' },
-          { key: 'outra', label: 'Quero aprender outra coisa, mas ainda nem sei por onde começar.' }
-        ]
-      },
-      companhia: {
-        question: 'O que te está a faltar nesse plano?',
-        options: [
-          { key: 'evento', label: 'Tenho um convite. O que me custa é chegar sozinho(a).' },
-          { key: 'sair', label: 'Quero fazer o plano. Sozinho(a), sei que vou desistir.' },
-          { key: 'falar', label: 'Quero sair, conversar e ter alguém ali comigo. Sem romance.' },
-          { key: 'afecto', label: 'Hoje queria proximidade, carinho e um pouco de romance.' }
-        ]
-      },
-      presente: {
-        question: 'O que não queres que a prenda pareça?',
-        options: [
-          { key: 'qualquer', label: 'Uma coisa qualquer comprada no caminho.' },
-          { key: 'casa', label: 'Quero algo bonito para a casa que a pessoa use mesmo.' },
-          { key: 'corpo', label: 'Quero oferecer uma pausa, não mais uma coisa.' }
-        ]
-      },
-      outro: {
-        question: 'O que é mais fácil agora?',
-        options: [
-          { key: 'ver', label: 'Mostra-me o que existe.' },
-          { key: 'falar', label: 'Prefiro explicar o que se passa a uma pessoa.' }
-        ]
-      }
-    },
-
-    results: {
-      decisao_voltas: result('Já fizeste listas. Continuas no mesmo sítio.', 'Já tens informação. O que não tens é descanso. Uma Consulta pode ajudar-te a olhar para o que estás a evitar e para o que realmente queres, sem decidir por ti.', 'servicos.html#tarot', 'Ver Tarot e Consultas'),
-      decisao_medo: result('No fundo já escolheste. O medo é teres de viver com a escolha.', 'Quando imaginas todas as maneiras de a escolha correr mal, não avançar pode parecer mais seguro. Podemos olhar para cenários, receios e aquilo que estás a evitar, sem escolher por ti.', 'servicos.html#tarot', 'Ver Orientação'),
-      decisao_urgente: result('Não queres pensar nisto mais uma semana.', 'Se a questão é concreta e urgente, o Tarot Expresso foi pensado para perguntas pontuais. Se precisares de mais contexto, há formatos mais completos.', 'servicos.html#tarot', 'Ver Consultas'),
-
-      relacao_cabeca: result('Dizes que já passou. Depois vais outra vez ver se escreveu.', 'Relês mensagens, refazes conversas e imaginas respostas que talvez nunca venham. Uma Consulta pode ajudar a perceber o que te prende ali; se isto já se arrasta, há Acompanhamento.', 'servicos.html#tarot', 'Ver Orientação', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
-      relacao_decidir: result('O pior é não saber se esperas ou vais embora.', 'Se qualquer escolha te parece perigosa, vais continuar sem avançar. Uma Consulta ajuda-te a olhar para o que existe de facto, para o que temes e para o que queres, sem decidir por ti.', 'servicos.html#tarot', 'Ver Consultas'),
-      relacao_entender: result('Estás cansado(a) de tentar perceber o que isto significa.', 'Começa por uma Consulta focada na situação. Se o assunto já se arrasta e uma resposta isolada não chega, há Acompanhamento.', 'servicos.html#tarot', 'Ver Consultas', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
-
-      cansaco_corpo: result('Até cuidar de ti parece mais uma tarefa.', 'Não precisas de transformar a vida toda hoje. O Escalda-Pés começa com água morna, aroma, espuma suave e dez a vinte minutos em que não tens de produzir nada.', 'produto-escalda-pes.html', 'Quero criar a minha pausa', 'produto-oleo-massagem.html', 'Prefiro toque e massagem'),
-      cansaco_cabeca: result('Deitaste o corpo. A cabeça continua em pé.', 'Se ainda estás a responder mentalmente à conversa, ao trabalho ou ao problema, muda primeiro o ambiente do quarto e marca a passagem para a noite.', 'produto-aguas-lencois.html', 'Quero mudar o quarto', 'produto-vela-aromatica.html', 'Prefiro luz e aroma'),
-      cansaco_demais: result('Acordas cansado(a) antes de o dia começar.', 'Se acordas cansado(a) antes de o dia começar, isto já não é só o cansaço de hoje. Podes começar por uma conversa e perceber se precisas de continuidade.', 'servicos.html#acompanhamento', 'Ver Acompanhamento'),
-
-      casa_cheiro: result('Queres entrar e sentir logo outro ar.', 'A Névoa de Ambiente muda o cheiro do espaço em segundos e pode marcar o momento em que o dia fica do lado de fora.', 'produto-bruma-ambiente.html', 'Quero mudar o ar', 'produtos.html', 'Comparar todos os produtos'),
-      casa_parar: result('Queres que a casa te diga: acabou por hoje.', 'Luz e aroma criam uma fronteira simples entre o dia e a noite. Acende a vela e deixa a divisão mudar de ritmo.', 'produto-vela-aromatica.html', 'Quero marcar o fim do dia', 'produto-escalda-pes.html', 'Prefiro uma pausa para o corpo'),
-      casa_mudar: result('Não queres obras. Queres sentir a casa diferente.', 'Começa pelo que muda mais depressa: o ar. A Névoa de Ambiente cria uma diferença perceptível sem mexeres na casa toda.', 'produto-bruma-ambiente.html', 'Quero sentir outro ambiente', 'produtos.html', 'Ver todas as opções'),
-
-      aprender_tarot: result('Queres aprender Tarot. A sério.', 'Então não te vou mandar para três frases num ebook. A Mentoria existe para aprendizagem estruturada e acompanhamento.', 'servicos.html#acompanhamento', 'Ver Mentoria'),
-      aprender_astrologia: result('Queres perceber o mapa, não decorar signos.', 'As Análises e os Relatórios de Astrologia são preparados sob encomenda. Também há Numerologia e outras Terapias Complementares sob consulta, conforme o que pretendes aprofundar.', 'servicos.html#astrologia', 'Ver Astrologia'),
-      aprender_outra: result('Queres começar. Ainda não sabes por onde.', 'Vê os serviços e, se nada encaixar, fala com a Maison. Primeiro percebemos o que procuras. Depois vemos se existe uma solução real.', 'servicos.html', 'Explorar Serviços'),
-
-      companhia_evento: result('Já tens o convite. O problema é chegares sozinho(a).', 'O Friend4Rent existe precisamente para isso: Eventos, Jantares e outros Compromissos Sociais em que queres ter alguém contigo, sem dimensão romântica.', 'companhia.html#friend4rent', 'Ver Friend4Rent'),
-      companhia_sair: result('Queres fazer o plano. Sozinho(a), sabes que vais desistir.', 'Se o plano continua a apetecer-te e o que te trava é ires sozinho(a), o Friend4Rent pode ser a companhia que falta para saíres pela porta.', 'companhia.html#friend4rent', 'Ver Friend4Rent'),
-      companhia_falar: result('Queres conversa e presença. Não um encontro.', 'Se procuras Companhia sem romance, o Friend4Rent pode ser exactamente isso: tempo partilhado, conversa e uma actividade combinada.', 'companhia.html#friend4rent', 'Ver Friend4Rent'),
-      companhia_afecto: result('Hoje querias alguém perto. Com carinho e um pouco de romance.', 'Se procuras uma presença mais próxima, calorosa e romântica, o Boyfriend4Rent pode incluir dar a mão, abraços, carinho leve e beijos leves previamente combinados. Sem sexo nem Serviços Sexuais.', 'companhia.html#boyfriend4rent', 'Ver Boyfriend4Rent'),
-
-      presente_qualquer: result('Não queres entregar uma coisa que parece comprada cinco minutos antes.', 'Escolhe pelo que a pessoa vai usar: casa, corpo, aroma ou pausa. Se não souberes, diz-nos para quem é e ajudamos-te a reduzir as opções.', 'produtos.html', 'Ver Produtos'),
-      presente_casa: result('Queres que a pessoa use e se lembre de quem ofereceu.', 'Uma Vela Aromática cria luz, aroma e presença no espaço. Se quiseres comparar com Névoa ou Águas de Lençóis, também tens todas as opções reunidas.', 'produto-vela-aromatica.html', 'Quero ver a Vela', 'produtos.html', 'Comparar presentes para a casa'),
-      presente_corpo: result('Queres oferecer um momento em que a pessoa pare.', 'O Escalda-Pés oferece uma pausa concreta, sem exigir uma rotina complicada. Se a pessoa prefere toque, tens também o Óleo de Massagem.', 'produto-escalda-pes.html', 'Quero oferecer uma pausa', 'produto-oleo-massagem.html', 'Ver Óleo de Massagem'),
-
-      outro_ver: result('Sem problema. Vai directo ao que existe.', 'Produtos, Serviços, Acompanhamento e Companhia estão reunidos no site. Começa pelo que te chama a atenção e vê se resolve alguma coisa real.', 'index.html#explorar', 'Explorar a Maison'),
-      outro_falar: result('Às vezes é mais fácil explicar do que escolher.', 'Fala connosco. Diz o que se passa em português normal e vemos contigo se a Maison tem alguma coisa que faça sentido.', 'https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Prefiro%20explicar%20o%20que%20se%20passa%20e%20pedir%20ajuda%20a%20escolher.', 'Falar no WhatsApp')
-    }
-  };
-
-  let currentStep = 1;
-  let step1Choice = null;
-  let step2Choice = null;
-
-  const steps = {
-    1: document.getElementById('farolStep1'),
-    2: document.getElementById('farolStep2'),
-    3: document.getElementById('farolStep3')
-  };
-
-  const progressDots = document.querySelectorAll('.farol__progress-dot');
-  const step2Question = document.getElementById('farolStep2Question');
-  const step2Options = document.getElementById('farolStep2Options');
-  const step3Result = document.getElementById('farolResult');
-  const back2 = document.getElementById('farolBack2');
-  const back3 = document.getElementById('farolBack3');
-
-  function updateProgress(step) {
-    progressDots.forEach((dot, index) => dot.classList.toggle('farol__progress-dot--active', index < step));
-  }
-
-  function showStep(stepNumber) {
-    Object.values(steps).forEach(el => { if (el) el.classList.remove('farol__step--active'); });
-    if (!steps[stepNumber]) return;
-    steps[stepNumber].classList.add('farol__step--active');
-    currentStep = stepNumber;
-    updateProgress(stepNumber);
-  }
-
-  function buildStep2(step1Key) {
-    const data = FAROL_DATA.step1[step1Key];
-    if (!data || !step2Question || !step2Options) return;
-    step1Choice = step1Key;
-    trackFarol('farol_start', { theme: step1Key, page_path: window.location.pathname });
-    step2Question.textContent = data.question;
-    step2Options.innerHTML = '';
-
-    data.options.forEach(opt => {
-      const btn = document.createElement('button');
-      btn.className = 'farol__option';
-      btn.type = 'button';
-      btn.innerHTML = `<span class="farol__option-text">${opt.label}</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
-      btn.addEventListener('click', () => handleStep2Choice(opt.key));
-      step2Options.appendChild(btn);
-    });
-    showStep(2);
-  }
-
-  function handleStep2Choice(step2Key) {
-    step2Choice = step2Key;
-    trackFarol('farol_refine', { theme: step1Choice, choice: step2Key, page_path: window.location.pathname });
-    const selected = FAROL_DATA.results[`${step1Choice}_${step2Key}`];
-    if (!selected) {
-      showResult(result('Não te vou inventar uma resposta.', 'Fala com a Maison e explica o que procuras. Se houver uma solução real, dizemos-te qual. Se não houver, também.', 'https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Preciso%20de%20ajuda%20a%20encontrar%20a%20op%C3%A7%C3%A3o%20certa.', 'Falar no WhatsApp'));
-      return;
-    }
-    showResult(selected);
-  }
-
-  function showResult(selected) {
-    if (!step3Result) return;
-    const ctaClass = selected.cta.style === 'primary' ? 'btn btn--primary' : 'btn btn--secondary';
-    const primaryExternal = selected.cta.href.startsWith('http') ? ' target="_blank" rel="noopener"' : '';
-    const secondary = selected.cta2 ? `<a href="${selected.cta2.href}" class="${selected.cta2.style === 'primary' ? 'btn btn--primary' : 'btn btn--secondary'}">${selected.cta2.text}</a>` : '';
-    step3Result.innerHTML = `<h3 class="farol__result-title">${selected.title}</h3><p class="farol__result-text">${selected.text}</p><div class="farol__result-actions"><a href="${selected.cta.href}" class="${ctaClass}"${primaryExternal} data-farol-cta="primary">${selected.cta.text}</a>${selected.cta2 ? `<a href="${selected.cta2.href}" class="${selected.cta2.style === 'primary' ? 'btn btn--primary' : 'btn btn--secondary'}" data-farol-cta="secondary">${selected.cta2.text}</a>` : ''}</div>`;
-    trackFarol('farol_result', { theme: step1Choice || 'unknown', choice: step2Choice || 'unknown', destination: selected.cta.href, page_path: window.location.pathname });
-    showStep(3);
-  }
-
-  function resetFarol() {
-    trackFarol('farol_restart', { page_path: window.location.pathname });
-    step1Choice = null;
-    step2Choice = null;
-    showStep(1);
-  }
-
-  if (steps[1]) {
-    steps[1].querySelectorAll('[data-farol]').forEach(btn => {
-      btn.addEventListener('click', () => buildStep2(btn.getAttribute('data-farol')));
-    });
-  }
-  if (step3Result) {
-    step3Result.addEventListener('click', event => {
-      const link = event.target.closest('[data-farol-cta]');
-      if (!link) return;
-      trackFarol('farol_cta_click', {
-        theme: step1Choice || 'unknown',
-        choice: step2Choice || 'unknown',
-        cta_position: link.getAttribute('data-farol-cta') || 'primary',
-        destination: link.getAttribute('href') || '',
-        page_path: window.location.pathname
-      });
-    });
-  }
-
-  if (back2) back2.addEventListener('click', () => {
-    trackFarol('farol_back', { from_step: 2, page_path: window.location.pathname });
-    showStep(1);
-  });
-  if (back3) back3.addEventListener('click', resetFarol);
-
-  window.Farol = { data: FAROL_DATA, reset: resetFarol, getState: () => ({ step: currentStep, step1: step1Choice, step2: step2Choice }) };
+/** MAISON JF® | O Farol — Maison 2 candidate */
+(function(){
+'use strict';
+function track(name,parameters={}){if(window.maisonAnalytics&&typeof window.maisonAnalytics.track==='function')window.maisonAnalytics.track(name,parameters);}
+const result=(title,text,href,label,href2=null,label2=null)=>({title,text,cta:{href,text:label},cta2:href2&&label2?{href:href2,text:label2}:null});
+const product=slug=>`maison2/produtos/produto.html?slug=${encodeURIComponent(slug)}`;
+const services='maison2/servicos/';
+const answers='maison2/respostas/';
+const data={
+ step1:{
+  decisao:{question:'O que é que te mantém no mesmo sítio?',options:[{key:'voltas',label:'Já pensei em tudo. Continuo sem conseguir decidir.'},{key:'medo',label:'No fundo eu sei o que quero. Tenho medo de me arrepender.'},{key:'urgente',label:'Preciso de decidir isto antes que me consuma outra semana.'}]},
+  relacao:{question:'Quando essa pessoa te volta à cabeça, o que acontece?',options:[{key:'cabeca',label:'Vou outra vez às mensagens, às redes ou à conversa que tivemos.'},{key:'decidir',label:'Não sei se insisto, desisto ou espero.'},{key:'entender',label:'Quero perceber se estou a ver isto como é ou como queria que fosse.'}]},
+  cansaco:{question:'Onde é que já não estás a conseguir?',options:[{key:'corpo',label:'Chego ao fim do dia e até cuidar de mim dá trabalho.'},{key:'cabeca',label:'Deito-me e a cabeça continua a trabalhar.'},{key:'demais',label:'Acordo cansado(a). Isto já não é de hoje.'}]},
+  casa:{question:'Quando entras em casa, o que gostavas que mudasse primeiro?',options:[{key:'cheiro',label:'Quero entrar e sentir logo outro ar.'},{key:'parar',label:'Quero entrar e sentir logo: acabou por hoje.'},{key:'mudar',label:'Quero sentir a casa diferente sem mexer na casa toda.'}]},
+  aprender:{question:'O que estás cansado(a) de adiar?',options:[{key:'tarot',label:'Quero aprender Tarot a sério.'},{key:'astrologia',label:'Quero perceber Astrologia sem decorar frases feitas.'},{key:'outra',label:'Quero aprender outra coisa, mas ainda nem sei por onde começar.'}]},
+  companhia:{question:'O que te está a faltar nesse plano?',options:[{key:'evento',label:'Tenho um convite. O que me custa é chegar sozinho(a).'},{key:'sair',label:'Quero fazer o plano. Sozinho(a), sei que vou desistir.'},{key:'falar',label:'Quero sair, conversar e ter alguém ali comigo. Sem romance.'},{key:'afecto',label:'Hoje queria proximidade, carinho e um pouco de romance.'}]},
+  presente:{question:'O que não queres que a prenda pareça?',options:[{key:'qualquer',label:'Uma coisa qualquer comprada no caminho.'},{key:'casa',label:'Quero algo bonito para a casa que a pessoa use mesmo.'},{key:'corpo',label:'Quero oferecer uma pausa, não mais uma coisa.'}]},
+  outro:{question:'O que é mais fácil agora?',options:[{key:'ver',label:'Mostra-me o que existe.'},{key:'falar',label:'Prefiro explicar o que se passa a uma pessoa.'}]}
+ },
+ results:{
+  decisao_voltas:result('Já fizeste listas. Continuas no mesmo sítio.','Talvez já não te falte informação. Pode faltar separar aquilo que queres daquilo que receias. Começa pelas Respostas; se a tua história concreta fizer diferença, a Consulta de Tarot custa 35 € e não decide por ti.',answers,'Começar pelas Respostas',services,'Ver Consulta de Tarot'),
+  decisao_medo:result('Saber o que queres não apaga o medo de te arrependeres.','Olha primeiro para o custo de avançar e para o custo de não avançar. A Maison pode ajudar a organizar a pergunta sem prometer a escolha certa.', '../../decisoes/','Ler sobre decisões',services,'Ver Serviços'),
+  decisao_urgente:result('Não queres levar isto contigo para outra semana.','Uma resposta genérica pode não chegar quando a decisão depende do teu contexto. Uma Consulta pode ajudar a olhar para a pergunta concreta, sem prever o futuro nem escolher por ti.',services,'Ver Consulta de Tarot'),
+  relacao_cabeca:result('Dizes que já passou. Depois vais outra vez ver se escreveu.','Quando voltas às mensagens, às redes ou à conversa, pode ser mais útil perceber o que procuras ali do que tentar proibir-te de olhar. Há respostas para começares por ti.', '../../relacoes/','Explorar Relações',services,'Olhar para o meu caso'),
+  relacao_decidir:result('O pior é não saber se esperas ou vais embora.','Não há uma resposta universal para isso. Começa pelo que a relação faz, pelo que precisas e pelo que tens vindo a aceitar. Se o contexto mudar a resposta, traz o caso concreto.', '../../relacoes/','Explorar Relações',services,'Ver Consulta'),
+  relacao_entender:result('Estás cansado(a) de tentar perceber o que isto significa.','Em vez de adivinhar pensamentos de outra pessoa, olha para comportamentos, consistência, limites e para aquilo que esta situação te está a pedir.', '../../relacoes/','Ler Respostas',services,'Ver Serviços'),
+  cansaco_corpo:result('Até cuidar de ti parece mais uma tarefa.','Não precisas de criar uma rotina perfeita. Água morna e alguns minutos podem ser suficientes para marcar uma pausa.',product('escalda-pes'),'Ver Escalda-Pés',product('oleo-massagem'),'Ver Óleo de Massagem'),
+  cansaco_cabeca:result('Deitaste o corpo. A cabeça continua em pé.','Antes de acrescentares mais uma técnica, tenta criar uma transição simples entre o dia e a noite. Se quiseres usar aroma, escolhe apenas o formato que faça sentido para o teu espaço.', '../../corpo/','Ler sobre descanso', '../maison2/produtos/','Ver Produtos'),
+  cansaco_demais:result('Acordas cansado(a) antes de o dia começar.','Se isto é persistente, não vou fingir que um produto explica ou resolve a causa. Podes começar por reduzir exigência e, se necessário, procurar avaliação adequada. A Maison fica no campo do autocuidado e da orientação não clínica.', '../../corpo/','Ler Corpo & autocuidado'),
+  casa_cheiro:result('Queres entrar e sentir logo outro ar.','Uma Névoa / Bruma é a opção mais imediata do catálogo actual para mudar o aroma do espaço.',product('nevoa-bruma'),'Ver Névoa / Bruma', '../maison2/produtos/','Comparar Produtos'),
+  casa_parar:result('Queres que a casa te diga: acabou por hoje.','Luz e aroma podem funcionar como um pequeno marcador de transição. Não precisam de fazer mais do que isso.',product('vela-vidro'),'Ver Vela em Vidro',product('escalda-pes'),'Prefiro uma pausa para o corpo'),
+  casa_mudar:result('Não queres obras. Queres sentir a casa diferente.','Começa por uma mudança pequena e perceptível: aroma, luz ou um ponto da divisão. Depois vê se precisas de mais.', '../../casa/','Ver ideias para Casa', '../maison2/produtos/','Ver Produtos'),
+  aprender_tarot:result('Queres aprender Tarot a sério.','A aprendizagem precisa de estrutura, prática e espaço para perguntas. A Maison tem formatos de acompanhamento; confirma connosco o formato disponível antes de avançar.',services,'Ver Acompanhamentos'),
+  aprender_astrologia:result('Queres perceber Astrologia sem decorar frases feitas.','Não vou inventar um produto ou uma formação que não esteja publicada. Explica-nos o que procuras e confirmamos se existe um formato adequado.', 'contactos.html','Perguntar à Maison'),
+  aprender_outra:result('Queres começar. Ainda não sabes por onde.','Primeiro percebe o que queres conseguir aprender. Depois vemos se existe uma proposta real da Maison que encaixe — e se não existir, dizemos-te.', 'contactos.html','Falar com a Maison'),
+  companhia_evento:result('Já tens o convite. O que pesa é chegares sozinho(a).','A Companhia pode ser combinada para um café, passeio, evento ou outro momento acordado, dentro dos limites definidos pelo serviço.',services,'Ver Companhia'),
+  companhia_sair:result('Queres fazer o plano. Sozinho(a), sabes que podes desistir.','Se o plano continua a apetecer-te e o que falta é presença, vê as condições de Companhia e pergunta disponibilidade.',services,'Ver Companhia'),
+  companhia_falar:result('Queres conversa e presença. Não um encontro.','A Companhia pode ser isso mesmo: tempo partilhado dentro do que for previamente combinado. Não é terapia nem promessa de amizade ou romance.',services,'Ver Companhia'),
+  companhia_afecto:result('Queres proximidade. É importante dizer exactamente o que isso significa.','Os limites de qualquer formato de Companhia são combinados antes. Não é um serviço sexual nem uma promessa de relação. Pergunta o que está disponível e decide só depois de conhecer as condições.',services,'Ver Companhia'),
+  presente_qualquer:result('Não queres entregar uma coisa que parece comprada cinco minutos antes.','Escolhe pelo uso: aroma para a casa, um ponto de luz ou uma pausa para o corpo. Não precisas de transformar a prenda numa mensagem complicada.', '../maison2/produtos/','Ver Produtos'),
+  presente_casa:result('Queres algo para a casa que a pessoa use mesmo.','Uma Vela em Vidro é uma opção simples de luz, aroma e ambiente. Se não souberes se é o formato certo, compara com Mikado ou Névoa / Bruma.',product('vela-vidro'),'Ver Vela em Vidro', '../maison2/produtos/','Comparar Produtos'),
+  presente_corpo:result('Queres oferecer uma pausa, não mais uma coisa.','O Escalda-Pés é um gesto simples para os pés; o Óleo de Massagem faz mais sentido quando a pessoa gosta de toque e massagem.',product('escalda-pes'),'Ver Escalda-Pés',product('oleo-massagem'),'Ver Óleo de Massagem'),
+  outro_ver:result('Sem problema. Vai directo ao que existe.','Produtos, Serviços, Respostas, Oráculo e Companhia têm destinos próprios. Escolhe a porta que faz sentido agora.', '../maison2/','Explorar a Maison 2'),
+  outro_falar:result('Às vezes é mais fácil explicar do que escolher.','Fala connosco em português normal. Se a Maison tiver uma opção que faça sentido, mostramos-ta; se não tiver, não inventamos.', 'contactos.html','Falar com a Maison')
+ }
+};
+let currentStep=1,step1Choice=null,step2Choice=null;
+const steps={1:document.getElementById('farolStep1'),2:document.getElementById('farolStep2'),3:document.getElementById('farolStep3')};
+const dots=document.querySelectorAll('.farol__progress-dot'),q=document.getElementById('farolStep2Question'),opts=document.getElementById('farolStep2Options'),out=document.getElementById('farolResult'),back2=document.getElementById('farolBack2'),back3=document.getElementById('farolBack3');
+function progress(step){dots.forEach((dot,i)=>dot.classList.toggle('farol__progress-dot--active',i<step));}
+function show(step){Object.values(steps).forEach(el=>el&&el.classList.remove('farol__step--active'));if(!steps[step])return;steps[step].classList.add('farol__step--active');currentStep=step;progress(step);}
+function build(key){const d=data.step1[key];if(!d||!q||!opts)return;step1Choice=key;track('farol_start',{theme:key,page_path:location.pathname});q.textContent=d.question;opts.innerHTML='';d.options.forEach(o=>{const b=document.createElement('button');b.className='farol__option';b.type='button';b.innerHTML=`<span class="farol__option-text">${o.label}</span><span aria-hidden="true">→</span>`;b.addEventListener('click',()=>choose(o.key));opts.appendChild(b);});show(2);}
+function choose(key){step2Choice=key;track('farol_refine',{theme:step1Choice,choice:key,page_path:location.pathname});const selected=data.results[`${step1Choice}_${key}`]||result('Não te vou inventar uma resposta.','Explica-nos o que procuras. Se houver uma solução real, dizemos-te qual.','contactos.html','Falar com a Maison');render(selected);}
+function render(r){if(!out)return;const external=h=>/^https?:/.test(h)?' target="_blank" rel="noopener"':'';out.innerHTML=`<h3 class="farol__result-title">${r.title}</h3><p class="farol__result-text">${r.text}</p><div class="farol__result-actions"><a href="${r.cta.href}" class="btn btn--primary"${external(r.cta.href)} data-farol-cta="primary">${r.cta.text}</a>${r.cta2?`<a href="${r.cta2.href}" class="btn btn--secondary"${external(r.cta2.href)} data-farol-cta="secondary">${r.cta2.text}</a>`:''}</div>`;track('farol_result',{theme:step1Choice||'unknown',choice:step2Choice||'unknown',destination:r.cta.href,page_path:location.pathname});show(3);}
+function reset(){track('farol_restart',{page_path:location.pathname});step1Choice=null;step2Choice=null;show(1);}
+if(steps[1])steps[1].querySelectorAll('[data-farol]').forEach(b=>b.addEventListener('click',()=>build(b.getAttribute('data-farol'))));
+if(out)out.addEventListener('click',e=>{const a=e.target.closest('[data-farol-cta]');if(a)track('farol_cta_click',{theme:step1Choice||'unknown',choice:step2Choice||'unknown',cta_position:a.dataset.farolCta||'primary',destination:a.getAttribute('href')||'',page_path:location.pathname});});
+if(back2)back2.addEventListener('click',()=>show(1));if(back3)back3.addEventListener('click',reset);
+window.Farol={data,reset,getState:()=>({step:currentStep,step1:step1Choice,step2:step2Choice})};
 })();
