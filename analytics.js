@@ -21,7 +21,7 @@
     googleLoaded = true;
     const script = document.createElement('script');
     script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + MEASUREMENT_ID;
     document.head.appendChild(script);
     window.gtag('consent', 'update', { analytics_storage: 'granted' });
     window.gtag('js', new Date());
@@ -61,7 +61,7 @@
       button.remove();
       showConsent();
     });
-    const footer = document.querySelector('.footer__bottom');
+    const footer = document.querySelector('.footer__bottom, footer');
     (footer || document.body).appendChild(button);
   }
 
@@ -69,14 +69,7 @@
     const banner = document.createElement('aside');
     banner.className = 'maison-consent';
     banner.setAttribute('aria-label', 'Cookies');
-    banner.innerHTML = `
-      <div class="maison-consent__copy">
-        <span>Usamos cookies de medição apenas com a tua autorização.</span>
-      </div>
-      <div class="maison-consent__actions">
-        <button type="button" data-consent="denied">Recusar</button>
-        <button type="button" data-consent="granted">Aceitar</button>
-      </div>`;
+    banner.innerHTML = '<div class="maison-consent__copy"><span>Usamos cookies de medição apenas com a tua autorização. <a href="/informacao-legal.html#privacidade">Privacidade</a></span></div><div class="maison-consent__actions"><button type="button" data-consent="denied">Recusar</button><button type="button" data-consent="granted">Aceitar</button></div>';
     banner.addEventListener('click', event => {
       const button = event.target.closest('[data-consent]');
       if (button) saveConsent(button.dataset.consent);
@@ -86,21 +79,25 @@
 
   function classify(link) {
     const href = link.getAttribute('href') || '';
+    const lowerHref = href.toLowerCase();
     const text = (link.textContent || '').trim().slice(0, 100);
-    if (/wa\.me\//i.test(href)) {
+    const lowerText = text.toLowerCase();
+
+    if (lowerHref.includes('wa.me/')) {
       let service = 'general';
-      if (/sos/i.test(href + text)) service = 'sos';
-      else if (/escuta/i.test(href + text)) service = 'escuta';
-      else if (/tarot|consulta/i.test(href + text)) service = 'tarot';
-      else if (/produto|vela|névoa|nevoa|escalda|óleo|oleo/i.test(href + text)) service = 'product';
+      if (lowerHref.includes('sos') || lowerText.includes('sos')) service = 'sos';
+      else if (lowerHref.includes('escuta') || lowerText.includes('escuta')) service = 'escuta';
+      else if (lowerHref.includes('tarot') || lowerText.includes('tarot') || lowerText.includes('consulta')) service = 'tarot';
+      else if (lowerHref.includes('produto') || lowerText.includes('vela') || lowerText.includes('névoa') || lowerText.includes('nevoa') || lowerText.includes('escalda') || lowerText.includes('óleo') || lowerText.includes('oleo')) service = 'product';
       track('whatsapp_click', { service, link_text: text });
       track('generate_lead', { method: 'whatsapp', service });
     }
-    if (/checkout/i.test(href) && !/sucesso/i.test(href)) track('begin_checkout', { link_text: text });
-    if (/produto-|produtos\.html/i.test(href)) track('product_interest', { link_url: href.split('?')[0], link_text: text });
-    if (/servicos\.html#escuta/i.test(href)) track('escuta_interest', { link_text: text });
-    if (/servicos\.html#acompanhamento/i.test(href) || /\bSOS\b/i.test(text)) track('sos_interest', { link_text: text });
-    if (/servicos\.html#tarot/i.test(href)) track('tarot_interest', { link_text: text });
+
+    if (lowerHref.includes('checkout') && !lowerHref.includes('sucesso')) track('begin_checkout', { link_text: text });
+    if (lowerHref.includes('/produtos/') || lowerHref.includes('produto-') || lowerHref.includes('produtos.html')) track('product_interest', { link_url: href.split('?')[0], link_text: text });
+    if (lowerHref.includes('/servicos/#escuta') || lowerHref.includes('servicos.html#escuta')) track('escuta_interest', { link_text: text });
+    if (lowerHref.includes('/servicos/#acompanhamento') || lowerHref.includes('servicos.html#acompanhamento') || lowerText.includes('sos')) track('sos_interest', { link_text: text });
+    if (lowerHref.includes('/servicos/#tarot') || lowerHref.includes('servicos.html#tarot')) track('tarot_interest', { link_text: text });
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -108,6 +105,7 @@
     if (consent === 'granted') loadGoogle();
     else if (consent !== 'denied') showConsent();
     if (consent === 'granted' || consent === 'denied') showPreferencesControl();
+
     document.addEventListener('click', event => {
       const link = event.target.closest('a[href]');
       if (link) classify(link);
