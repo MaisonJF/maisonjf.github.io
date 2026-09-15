@@ -4,6 +4,7 @@
   const MEASUREMENT_ID = 'G-3W8B4L5QWP';
   const CONSENT_KEY = 'maison_analytics_consent_v1';
   let googleLoaded = false;
+  const queuedEvents = Array.isArray(window.__maisonAnalyticsQueue) ? window.__maisonAnalyticsQueue.splice(0) : [];
 
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
@@ -38,6 +39,7 @@
   }
 
   window.maisonAnalytics = { track };
+  queuedEvents.forEach(([name, parameters]) => track(name, parameters));
 
   function saveConsent(value) {
     localStorage.setItem(CONSENT_KEY, value);
@@ -90,7 +92,7 @@
       if (/sos/i.test(href + text)) service = 'sos';
       else if (/escuta/i.test(href + text)) service = 'escuta';
       else if (/tarot|consulta/i.test(href + text)) service = 'tarot';
-      else if (/produto|vela|bruma|escalda|óleo|oleo|wax|mikado/i.test(href + text)) service = 'product';
+      else if (/produto|vela|névoa|nevoa|escalda|óleo|oleo/i.test(href + text)) service = 'product';
       track('whatsapp_click', { service, link_text: text });
       track('generate_lead', { method: 'whatsapp', service });
     }
