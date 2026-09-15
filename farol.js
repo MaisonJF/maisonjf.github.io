@@ -3,11 +3,11 @@
 'use strict';
 function track(name,parameters={}){if(window.maisonAnalytics&&typeof window.maisonAnalytics.track==='function')window.maisonAnalytics.track(name,parameters);}
 const result=(title,text,href,label,href2=null,label2=null)=>({title,text,cta:{href,text:label},cta2:href2&&label2?{href:href2,text:label2}:null});
-const product=slug=>`/maison2/produtos/${encodeURIComponent(slug)}/`;
-const products='/maison2/produtos/';
-const services='/maison2/servicos/';
-const test='/maison2/teste/';
-const contact='/maison2/contacto/';
+const product=slug=>`/produtos/${encodeURIComponent(slug)}/`;
+const products='/produtos/';
+const services='/servicos/';
+const test='/teste/';
+const contact='/contacto/';
 const data={step1:{
  decisao:{question:'O que é que te mantém no mesmo sítio?',options:[{key:'voltas',label:'Já pensei em tudo. Continuo sem conseguir decidir.'},{key:'medo',label:'No fundo eu sei o que quero. Tenho medo de me arrepender.'},{key:'urgente',label:'Preciso de decidir isto antes que me consuma outra semana.'}]},
  relacao:{question:'Quando essa pessoa te volta à cabeça, o que acontece?',options:[{key:'cabeca',label:'Vou outra vez às mensagens, às redes ou à conversa que tivemos.'},{key:'decidir',label:'Não sei se insisto, desisto ou espero.'},{key:'entender',label:'Quero perceber se estou a ver isto como é ou como queria que fosse.'}]},
