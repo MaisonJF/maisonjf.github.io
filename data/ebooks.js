@@ -9,6 +9,7 @@ window.MAISON_EBOOKS=[
     title:'Vírgulas do Destino: O Turista',
     collection:'Vírgulas do Destino',
     language:'pt-PT',format:'ebook',status:'published',
+    description:'O primeiro livro da saga Vírgulas do Destino. Desejo, destino, mistério e um encontro que continua a fazer perguntas depois da última página.',
     price:2.99,currency:'EUR',cover:null,purchaseUrl:null,featured:true
   },
   {
@@ -17,6 +18,7 @@ window.MAISON_EBOOKS=[
     title:'Vírgulas do Destino: Meandros da Vida',
     collection:'Vírgulas do Destino',
     language:'pt-PT',format:'ebook',status:'published',
+    description:'Tarot, perda, desejo e recomeço. Caim viaja para Portugal depois de uma tragédia pessoal e encontra mais do que estava à procura.',
     price:4.99,currency:'EUR',cover:null,purchaseUrl:null,featured:true
   },
   {
