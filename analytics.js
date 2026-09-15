@@ -71,7 +71,7 @@
     banner.setAttribute('aria-label', 'Cookies');
     banner.innerHTML = `
       <div class="maison-consent__copy">
-        <span>Usamos cookies para melhorar a experiência.</span>
+        <span>Usamos cookies de medição apenas com a tua autorização.</span>
       </div>
       <div class="maison-consent__actions">
         <button type="button" data-consent="denied">Recusar</button>
