@@ -1,13 +1,4 @@
-const EBOOKS = {
-  turista: {
-    key: 'ebooks/virgulas-do-destino-o-turista.pdf',
-    filename: 'Virgulas-do-Destino-O-Turista.pdf'
-  },
-  meandros: {
-    key: 'ebooks/virgulas-do-destino-meandros-da-vida.pdf',
-    filename: 'Virgulas-do-Destino-Meandros-da-Vida.pdf'
-  }
-};
+import { EBOOKS, isEbookId } from '../_lib/ebooks-live.js';
 
 const ACCESS_SECONDS = 7 * 24 * 60 * 60;
 
@@ -23,7 +14,7 @@ export async function onRequestGet({ request, env }) {
     const url = new URL(request.url);
     const sessionId = String(url.searchParams.get('session_id') || '');
     const ebookId = String(url.searchParams.get('ebook') || '');
-    const ebook = EBOOKS[ebookId];
+    const ebook = isEbookId(ebookId) ? EBOOKS[ebookId] : null;
 
     if (!/^cs_live_[A-Za-z0-9]+$/.test(sessionId) || !ebook) {
       return json({ error: 'Pedido de download inválido.' }, 400);
