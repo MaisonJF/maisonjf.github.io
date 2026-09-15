@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="analytics.js" defer></script>
+  <script src="data/ebooks.js"></script>
 </head>
 <body class="detail-page">
   <main>
@@ -26,7 +27,7 @@
         <p class="detail-copy" id="ebook-note" hidden>O acesso automático aos ebooks desta compra fica disponível durante 7 dias. Se expirar ou houver algum problema, contacta a MAISON JF®.</p>
         <p class="detail-copy">A fatura fiscal da MAISON JF® é emitida separadamente através do Portal das Finanças.</p>
         <div class="detail-actions">
-          <a class="btn btn--primary" href="editions.html">Voltar às Éditions</a>
+          <a class="btn btn--primary" href="ebooks/">Voltar aos Ebooks</a>
           <a class="btn btn--secondary" href="index.html">Voltar à Maison</a>
         </div>
       </div>
@@ -40,16 +41,13 @@
       const downloads = document.getElementById('ebook-downloads');
       const ebookNote = document.getElementById('ebook-note');
       const sessionId = new URLSearchParams(location.search).get('session_id');
-      const ebookNames = {
-        turista: 'Descarregar O Turista',
-        meandros: 'Descarregar Meandros da Vida'
-      };
+      const ebookNames = Object.fromEntries((window.MAISON_EBOOKS || []).filter(book => book.checkoutId).map(book => [book.checkoutId, 'Descarregar ' + book.title]));
       const money = (amount, currency = 'eur') =>
         new Intl.NumberFormat('pt-PT', { style: 'currency', currency: currency.toUpperCase() }).format(amount / 100);
 
       if (!sessionId) {
         title.textContent = 'Não encontrei a compra.';
-        message.textContent = 'Volta às Éditions e inicia o pagamento novamente.';
+        message.textContent = 'Volta aos Ebooks e inicia o pagamento novamente.';
         return;
       }
 
