@@ -11,7 +11,11 @@
  const buy=host.querySelector('[data-buy]');
  if(title)title.textContent=book.title;
  if(description)description.textContent=book.description||'';
- if(price){price.textContent=book.price==null?'':Number(book.price).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'}
- if(buy){if(book.purchaseUrl){buy.href=book.purchaseUrl}else{buy.hidden=true}}
+ if(price)price.textContent=book.price==null?'':Number(book.price).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+ if(buy&&book.checkoutId&&book.price!=null){
+   buy.hidden=false;
+   buy.dataset.buyEbook=book.checkoutId;
+   buy.textContent='Comprar agora · '+Number(book.price).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+ }else if(buy){buy.hidden=true}
  document.title=book.title+' | MAISON JF®';
 })();
