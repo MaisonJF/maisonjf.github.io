@@ -1,40 +1,42 @@
 (() => {
   const status = document.getElementById('edition-checkout-status');
-  const buttons = [...document.querySelectorAll('[data-buy-ebook]')];
+  const idPattern = /^[a-z0-9][a-z0-9-]{0,79}$/;
+
+  function buttons() {
+    return [...document.querySelectorAll('[data-buy-ebook]')];
+  }
 
   function setBusy(activeButton, busy) {
-    buttons.forEach(button => {
+    buttons().forEach(button => {
       button.disabled = busy;
-      if (button === activeButton) {
-        button.textContent = busy ? 'A abrir pagamento…' : button.dataset.label;
-      }
+      if (!button.dataset.label) button.dataset.label = button.textContent;
+      if (button === activeButton) button.textContent = busy ? 'A abrir pagamento…' : button.dataset.label;
     });
   }
 
-  buttons.forEach(button => {
-    button.dataset.label = button.textContent;
-    button.addEventListener('click', async () => {
-      const id = button.dataset.buyEbook;
-      if (id !== 'turista' && id !== 'meandros') return;
+  document.addEventListener('click', async event => {
+    const button = event.target.closest('[data-buy-ebook]');
+    if (!button) return;
+    const id = String(button.dataset.buyEbook || '');
+    if (!idPattern.test(id)) return;
 
-      setBusy(button, true);
-      if (status) status.textContent = '';
+    setBusy(button, true);
+    if (status) status.textContent = '';
 
-      try {
-        const response = await fetch('/api/create-checkout-live', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify({ items: [{ id, quantity: 1 }] })
-        });
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok || !data.url) throw new Error(data.error || 'Não foi possível abrir o pagamento.');
-        location.href = data.url;
-      } catch (error) {
-        if (status) status.textContent = error.message || 'Não foi possível abrir o pagamento.';
-        setBusy(button, false);
-      }
-    });
+    try {
+      const response = await fetch('/api/create-checkout-live', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ items: [{ id, quantity: 1 }] })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.url) throw new Error(data.error || 'Não foi possível abrir o pagamento.');
+      location.href = data.url;
+    } catch (error) {
+      if (status) status.textContent = error.message || 'Não foi possível abrir o pagamento.';
+      setBusy(button, false);
+    }
   });
 
   const query = new URLSearchParams(location.search);
