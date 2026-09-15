@@ -8,7 +8,7 @@ const products='/maison2/produtos/';
 const services='/maison2/servicos/';
 const answers='/maison2/respostas/';
 const test='/maison2/teste/';
-const contact='/contactos.html';
+const contact='/maison2/contacto/';
 const data={
  step1:{
   decisao:{question:'O que é que te mantém no mesmo sítio?',options:[{key:'voltas',label:'Já pensei em tudo. Continuo sem conseguir decidir.'},{key:'medo',label:'No fundo eu sei o que quero. Tenho medo de me arrepender.'},{key:'urgente',label:'Preciso de decidir isto antes que me consuma outra semana.'}]},
