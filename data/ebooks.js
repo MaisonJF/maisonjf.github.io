@@ -1,20 +1,23 @@
 /* MAISON EBOOK CATALOGUE
-   Prepared for hundreds of titles. Published titles render publicly.
-   Announced titles may render as coming soon. Internal planned titles stay hidden. */
+   Catalogue-driven architecture: add a book here, not in the layout.
+   Published titles render publicly; announced titles may render as coming soon;
+   internal planned titles stay hidden. The library has no fixed visual slot limit. */
 window.MAISON_EBOOKS=[
   {
     slug:'virgulas-do-destino-o-turista',
+    checkoutId:'turista',
     title:'Vírgulas do Destino: O Turista',
     collection:'Vírgulas do Destino',
     language:'pt-PT',format:'ebook',status:'published',
-    price:null,currency:'EUR',cover:null,purchaseUrl:null,featured:true
+    price:2.99,currency:'EUR',cover:null,purchaseUrl:null,featured:true
   },
   {
     slug:'virgulas-do-destino-meandros-da-vida',
+    checkoutId:'meandros',
     title:'Vírgulas do Destino: Meandros da Vida',
     collection:'Vírgulas do Destino',
     language:'pt-PT',format:'ebook',status:'published',
-    price:null,currency:'EUR',cover:null,purchaseUrl:null,featured:true
+    price:4.99,currency:'EUR',cover:null,purchaseUrl:null,featured:true
   },
   {
     slug:'virgulas-do-destino-a-vinganca',
