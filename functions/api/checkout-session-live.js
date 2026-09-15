@@ -1,3 +1,5 @@
+import { isEbookId } from '../_lib/ebooks-live.js';
+
 export async function onRequestGet({ request, env }) {
   try {
     if (!env.STRIPE_LIVE_SECRET_KEY) {
@@ -31,7 +33,7 @@ export async function onRequestGet({ request, env }) {
     const ebookIds = String(session.metadata?.ebook_ids || '')
       .split(',')
       .map(value => value.trim())
-      .filter(value => value === 'turista' || value === 'meandros');
+      .filter(isEbookId);
 
     return json({
       id: session.id,
