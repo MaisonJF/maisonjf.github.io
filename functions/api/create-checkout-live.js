@@ -1,7 +1,4 @@
-const PRODUCTS = {
-  turista: { price: 'price_1UEoZP5H3wYRPmPVLTG7nmwl', max: 1, unitCents: 299 },
-  meandros: { price: 'price_1UEoWC5H3wYRPmPVFiVh4xT8', max: 1, unitCents: 499 }
-};
+import { EBOOKS, isEbookId } from '../_lib/ebooks-live.js';
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -22,14 +19,13 @@ export async function onRequestPost({ request, env }) {
       return json({ error: 'Pedido inválido.' }, 400);
     }
 
-    const requested = Array.isArray(body?.items) ? body.items.slice(0, 2) : [];
+    const requested = Array.isArray(body?.items) ? body.items.slice(0, 20) : [];
     const quantities = new Map();
 
     for (const item of requested) {
       const id = String(item?.id || '');
       const quantity = Number(item?.quantity);
-      const product = PRODUCTS[id];
-      if (!product || !Number.isInteger(quantity) || quantity < 1 || quantity > product.max) continue;
+      if (!isEbookId(id) || !Number.isInteger(quantity) || quantity !== 1) continue;
       quantities.set(id, 1);
     }
 
@@ -42,7 +38,7 @@ export async function onRequestPost({ request, env }) {
 
     params.set('mode', 'payment');
     params.set('success_url', origin + '/checkout-sucesso-live.html?session_id={CHECKOUT_SESSION_ID}');
-    params.set('cancel_url', origin + '/editions.html?checkout_cancelado=1');
+    params.set('cancel_url', origin + '/ebooks/?checkout_cancelado=1');
     params.set('customer_creation', 'always');
     params.set('billing_address_collection', 'auto');
     params.set('locale', 'pt');
@@ -56,12 +52,12 @@ export async function onRequestPost({ request, env }) {
     params.set('custom_text[submit][message]', 'Ao pagar, confirmas a compra e aceitas as condições da MAISON JF®: https://maison-jf.com/informacao-legal.html. O download fica disponível após confirmação do pagamento. A fatura fiscal é emitida pela MAISON JF® separadamente.');
     params.set('submit_type', 'pay');
     params.set('metadata[environment]', 'maison-jf-live');
-    params.set('metadata[source]', 'editions-live');
+    params.set('metadata[source]', 'ebooks-live');
     params.set('metadata[has_physical]', '0');
     params.set('metadata[ebook_ids]', ebookIds.join(','));
 
     items.forEach((item, index) => {
-      params.set('line_items[' + index + '][price]', PRODUCTS[item.id].price);
+      params.set('line_items[' + index + '][price]', EBOOKS[item.id].priceId);
       params.set('line_items[' + index + '][quantity]', String(item.quantity));
     });
 
