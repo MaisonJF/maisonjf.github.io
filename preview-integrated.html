@@ -87,6 +87,18 @@
 }
   </script>
   <style>
+    .oracle-home{position:relative;overflow:hidden;padding:clamp(6rem,9vw,10rem) 0;background:radial-gradient(circle at 78% 22%,rgba(61,13,31,.32),transparent 30%),radial-gradient(circle at 20% 70%,rgba(196,162,101,.08),transparent 28%),#090807;border-top:1px solid rgba(240,235,227,.055);border-bottom:1px solid rgba(240,235,227,.055)}
+    .oracle-home__inner{width:min(1180px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:clamp(3rem,7vw,8rem);align-items:center}
+    .oracle-home__title{font-family:"Cormorant Garamond",serif;font-size:clamp(3.5rem,7vw,7rem);font-weight:300;line-height:.92;letter-spacing:-.035em;margin:.2em 0 .28em;color:#f0ebe3}
+    .oracle-home__text{max-width:42rem;color:rgba(240,235,227,.7);font-size:clamp(1rem,1.45vw,1.2rem);line-height:1.75}
+    .oracle-home__meta{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin:2rem 0;color:#c4a265;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
+    .oracle-home__actions{display:flex;gap:.8rem;flex-wrap:wrap}
+    .oracle-home__note{margin-top:1.5rem;max-width:34rem;color:rgba(240,235,227,.42);font-size:.76rem;line-height:1.6}
+    .oracle-home__mark{aspect-ratio:1;max-width:420px;width:100%;justify-self:end;border:1px solid rgba(196,162,101,.28);border-radius:50%;display:grid;place-items:center;align-content:center;gap:.9rem;background:radial-gradient(circle,rgba(196,162,101,.09),transparent 62%);color:rgba(240,235,227,.62);text-align:center;letter-spacing:.2em;font-size:.67rem}
+    .oracle-home__mark strong{font-family:"Cormorant Garamond",serif;font-size:clamp(5rem,11vw,9rem);font-weight:300;line-height:.8;color:#f0ebe3;letter-spacing:0}
+    @media(max-width:780px){.oracle-home__inner{grid-template-columns:1fr}.oracle-home__mark{justify-self:center;max-width:290px}.oracle-home__title{font-size:clamp(3.3rem,16vw,5.8rem)}}
+  </style>
+<style>
 /* styles.css */
 /* ============================================
    MAISON JF® | Design System v2
@@ -2641,7 +2653,6 @@ body[data-yoichi-page="index.html"] .btn { letter-spacing:.035em; }
 @media (max-width:768px){body[data-yoichi-page="index.html"] #hero{min-height:92svh}body[data-yoichi-page="index.html"] #transformacoes .transformacoes__grid{gap:1.4rem}body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__visual{aspect-ratio:4/4.6;min-height:0}}
 
 
-/* Preview isolation: show real images and disable historical image pseudo-layers. */
 #hero .hero__bg{position:absolute;inset:0;overflow:hidden}
 #hero .preview-hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% center;display:block;z-index:0;filter:brightness(.9) contrast(1.03) saturate(.96)}
 #hero .hero__vignette{z-index:1}
@@ -2742,7 +2753,32 @@ body[data-yoichi-page="index.html"] .btn { letter-spacing:.035em; }
     </div>
   </section>
 
-  <section class="transformacoes" id="transformacoes" aria-label="Transformações">
+  
+  <section class="oracle-home" id="oraculo" aria-label="Oráculo Maison JF">
+    <div class="oracle-home__inner reveal">
+      <div class="oracle-home__copy">
+        <p class="explorar__label">ORÁCULO MAISON JF®</p>
+        <h2 class="oracle-home__title">Pensa naquilo<br>que te trouxe aqui.</h2>
+        <p class="oracle-home__text">Não precisas de contar a ninguém. Guarda a pergunta contigo. Escolhe apenas o território onde ela vive e abre o Oráculo.</p>
+        <div class="oracle-home__meta">
+          <span>Amor &amp; Relações · disponível</span>
+          <span>Uma abertura · uma leitura · 2 €</span>
+        </div>
+        <div class="oracle-home__actions">
+          <a class="btn btn--primary" href="oraculo/">Abrir o Oráculo</a>
+          <a class="btn btn--secondary" href="oraculo/amor.html">Ir para Amor &amp; Relações</a>
+        </div>
+        <p class="oracle-home__note">Uma experiência simbólica. O Oráculo não precisa de conhecer a tua pergunta para te devolver uma mensagem.</p>
+      </div>
+      <div class="oracle-home__mark" aria-hidden="true">
+        <span>UMA PERGUNTA</span>
+        <strong>?</strong>
+        <span>UMA ABERTURA</span>
+      </div>
+    </div>
+  </section>
+
+<section class="transformacoes" id="transformacoes" aria-label="Transformações">
     <div class="transformacoes__header reveal">
       <p class="transformacoes__label">Começa Pelo Que Não Te Deixa Em Paz</p>
       <h2 class="transformacoes__title">Em qual destas frases te reconheces?</h2>
