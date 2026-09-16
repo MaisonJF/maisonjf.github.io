@@ -10,7 +10,7 @@ MAISON JF® is organised around four public doors: Casa, Corpo, Cabeça and Comp
 The public experience starts with what a person is living or trying to change, not with a product category.
 
 Core path:
-human need or question → free Test → internal Oceans routing → relevant paid offer → optional continuity.
+human need or question → one public pillar answer or free Test → internal Oceans routing → relevant paid offer → optional continuity.
 
 “Voltar Para Casa” means returning to one’s needs, limits, clarity, presence and care, and can also refer to making the physical home feel more welcoming.
 
@@ -34,17 +34,17 @@ human need or question → free Test → internal Oceans routing → relevant pa
 Legacy .html catalogue URLs may redirect to the canonical routes above.
 
 ## Test
-“O QUE ESTÁS A IGNORAR?” uses seven situational questions.
-It points first to one of four doors: Casa, Corpo, Cabeça or Companhia.
-It does not route every Cabeça result to the same consultation.
-Available Cabeça paths include:
-- Tarot Expresso — 17 €
-- Tarot Integrativo — 35 €
-- Tarot Terapêutico — 70 €
-- Consulta Escrita Breve — 25 €
-- Consulta Escrita Aprofundada — 45 €
-- Escuta Orientada — 60 €
-The Test may also continue to public Respostas, Oráculo, products, continuity services or Companhia when appropriate.
+“O QUE ESTÁS A IGNORAR?” uses eight situational questions and a dynamic eighth recognition question.
+It routes by pain, pattern, duration, need, blocker, preferred format and the person’s final recognition choice.
+The result shows at most three commercial paths: a primary recommendation, a lower-barrier option when useful and a deeper option.
+Gift intent can route directly to relevant products.
+
+## Public pillar answers
+Canonical hub: https://maison-jf.com/respostas/
+MAISON JF® maintains exactly one public, indexable answer page per Oráculo territory (100 total at this stage).
+These pages are short, genuinely useful search entry points. They do not expose the full Oceans library.
+The mobile-first hub never displays all 100 at once: it shows eight featured answers or at most eight search matches.
+All remaining Oceans pages stay internal/noindex and support routing and offer selection.
 
 ## Products currently represented in the public catalogue
 - Escalda-Pés — 150 g — 5 €
@@ -109,8 +109,8 @@ Each book can support a cover and an expandable editorial media collection.
 
 ## Oceans and routing
 Oceans is an internal intent and pain-language engine used to understand what a visitor may need and to route towards paid MAISON JF® offers.
-Oceans is not a public free-answer library.
-The only free diagnostic experience is the Test at https://maison-jf.com/teste/.
+Oceans is not a public free-answer library. Only one selected public pillar page per territory is exposed for organic discovery; the rest remains internal.
+The Test at https://maison-jf.com/teste/ remains the free diagnostic experience.
 Public paid destinations include the Oráculo, products, services, ebooks and Companhia.
 
 ## Editorial language
