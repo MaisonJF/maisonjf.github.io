@@ -18,15 +18,18 @@
  }else if(buy){buy.hidden=true}
  document.title=book.title+' | MAISON JF®';
 
- const media=book.media||[];
+ const media=(book.media&&book.media.length)?book.media:(book.cover?[{role:'cover',src:book.cover,alt:'Capa de '+book.title,aspect:'book'}]:[]);
  if(media.length){
    const section=document.createElement('section');section.className='editorial-essay library-essay';
    const grid=document.createElement('div');grid.className='essay-grid';
    media.forEach(function(m,i){
      const fig=document.createElement('figure');
      const aspect=m.aspect||((i%3===0)?'wide':'portrait');
-     fig.className='essay-shot essay-shot--'+aspect;
+     const isCover=m.role==='cover'||aspect==='book';
+     fig.className='essay-shot essay-shot--'+(isCover?'portrait':aspect);
+     if(isCover){fig.style.aspectRatio='2 / 3';fig.style.maxWidth='360px'}
      const img=document.createElement('img');img.src=m.src;img.alt=m.alt||book.title;img.loading='lazy';
+     if(isCover){img.style.objectFit='contain';img.style.aspectRatio='2 / 3'}
      fig.appendChild(img);
      if(m.caption){const cap=document.createElement('figcaption');cap.className='media-caption';cap.textContent=m.caption;fig.appendChild(cap)}
      grid.appendChild(fig);
