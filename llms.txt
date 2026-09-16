@@ -89,14 +89,14 @@ The plan, duration, location, expenses and boundaries are agreed before the book
 Canonical hub: https://maison-jf.com/oraculo/
 Current territory architecture:
 - Amor & Relações — active
-- Trabalho & Caminho — in preparation
-- Dinheiro & Segurança — in preparation
-- Família & Laços — in preparation
-- Escolhas & Mudança — in preparation
-- Eu & Padrões — in preparation
+- Trabalho & Caminho — active
+- Dinheiro & Segurança — active
+- Família & Laços — active
+- Escolhas & Mudança — active
+- Eu & Padrões — active
 
-Amor & Relações currently contains 20 long symbolic readings on the server.
-One paid opening costs 2 € and returns one reading after Stripe payment confirmation.
+Each territory contains 20 symbolic readings on the server, for 120 possible readings across the Oráculo.
+One paid opening costs 2 € and returns one reading from the selected territory after Stripe payment confirmation.
 The Oráculo is symbolic: it does not read minds, guarantee future events or make decisions for the user.
 
 ## Ebooks

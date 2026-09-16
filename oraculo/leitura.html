@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>A tua leitura | Oráculo MAISON JF®</title><link rel="stylesheet" href="../maison.css"><script src="../analytics.js" defer></script>
+<style>.reading{min-height:100vh;padding:110px 20px 70px;background:radial-gradient(circle at 50% 8%,#27231d,#0a0908 30%,#050505 65%)}.box{width:min(720px,100%);margin:auto}.title{text-align:center;font:400 clamp(42px,7vw,72px)/1.04 var(--serif);margin:18px 0 42px}.status{margin:0 auto 35px;padding:12px 18px;border:1px solid rgba(183,154,98,.3);max-width:600px;text-align:center;color:#9c9284;font-size:12px}.message{border-block:1px solid rgba(183,154,98,.38);padding:38px 2px}.message h2{font:400 clamp(28px,4vw,38px)/1.15 var(--serif);color:#e4d9c5;margin:0 0 25px}.message p{white-space:pre-line;font:18px/1.75 var(--serif);color:#d0c8bc}.close{text-align:center;padding:38px 0 15px;color:#9b9387;font:italic 17px/1.6 var(--serif)}.continue{border-top:1px solid rgba(183,154,98,.22);margin-top:20px;padding:42px 0;text-align:center}.continue h3{font:400 27px/1.2 var(--serif);margin:8px 0 12px}.continue p{max-width:560px;margin:0 auto 24px;color:#aaa195}.paths{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}.paths a{padding:12px 16px;border:1px solid rgba(183,154,98,.35);text-decoration:none;font-size:13px}.again{display:block;margin-top:28px;font-size:12px;color:#8d857a;text-decoration:none}.small{font:11px/1.55 Arial;color:#706a62;margin-top:28px}.hidden{display:none}.retry{display:inline-block;margin-top:20px;padding:12px 18px;border:1px solid rgba(183,154,98,.35);text-decoration:none}</style>
+</head>
+<body><main class="reading"><div class="box">
+<p class="eyebrow" id="eyebrow" style="text-align:center">MAISON JF® · ORÁCULO</p>
+<h1 class="title">Isto foi o que<br>veio para ti.</h1>
+<div class="status" id="status">A confirmar a tua abertura...</div>
+<article class="message hidden" id="message" aria-live="polite"><h2 id="oracle-title"></h2><p id="oracle-text"></p></article>
+<p class="close hidden" id="close">Não precisas de fazer nada com isto agora. Leva apenas aquilo que reconheceste.</p>
+<section class="continue hidden" id="continue"><p class="eyebrow">SE QUISERES CONTINUAR</p><h3>A Maison fica por aqui.</h3><p>A leitura termina aqui. Se abriu alguma coisa que queiras explorar, podes seguir por outro caminho. Também podes simplesmente voltar quando precisares de outra abertura.</p><div class="paths"><a href="../produtos/">Produtos</a><a href="../servicos/">Serviços &amp; Consultas</a><a href="../respostas/">Ler Respostas</a></div><a class="again" href="./">Voltar ao Oráculo</a><p class="small">O Oráculo é uma experiência simbólica. Não conhece a pergunta que guardaste contigo e não determina acontecimentos futuros.</p></section>
+</div></main>
+<script>
+window.addEventListener('DOMContentLoaded',async()=>{
+ const labels={amor:'Amor & Relações',trabalho:'Trabalho & Caminho',dinheiro:'Dinheiro & Segurança',familia:'Família & Laços',escolhas:'Escolhas & Mudança',padroes:'Eu & Padrões'};
+ const track=(name,data)=>window.maisonAnalytics?.track?window.maisonAnalytics.track(name,data):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([name,data]);
+ const status=document.getElementById('status'),message=document.getElementById('message'),close=document.getElementById('close'),continuation=document.getElementById('continue'),params=new URLSearchParams(location.search),sessionId=params.get('session_id'),theme=params.get('theme');
+ const back=theme&&labels[theme]?'./'+theme+'.html':'./';
+ function fail(text){status.innerHTML=text+'<br><a class="retry" href="'+back+'">Voltar ao Oráculo</a>';track('oracle_unlock_failed',{theme:theme||'unknown',reason:text,page_path:location.pathname})}
+ if(!theme||!labels[theme]){fail('Não encontrei o território desta abertura.');return}
+ document.getElementById('eyebrow').textContent='MAISON JF® · ORÁCULO · '+labels[theme].toUpperCase();
+ if(!sessionId||!/^cs_live_[A-Za-z0-9]+$/.test(sessionId)){fail('Não encontrei uma abertura paga válida para esta leitura.');return}
+ let payload;
+ try{
+  const response=await fetch('/api/oracle-reading-live?theme='+encodeURIComponent(theme)+'&session_id='+encodeURIComponent(sessionId),{headers:{Accept:'application/json'},cache:'no-store'});
+  payload=await response.json().catch(()=>({}));
+  if(!response.ok||!payload?.paid||payload?.theme!==theme||!payload?.reading)throw new Error(payload?.error||'Pagamento não confirmado.');
+ }catch(error){fail(error?.message||'Não foi possível confirmar o pagamento. Tenta novamente dentro de momentos.');return}
+ const reading=payload.reading;
+ status.textContent='Pagamento confirmado · abertura concluída';message.classList.remove('hidden');close.classList.remove('hidden');continuation.classList.remove('hidden');
+ document.getElementById('oracle-title').textContent=reading.title;document.getElementById('oracle-text').textContent=reading.text;
+ track('oracle_reading_view',{theme,reading_id:reading.id,paid:true,amount:payload.amount_total,page_path:location.pathname});
+ document.querySelectorAll('.paths a').forEach(a=>a.addEventListener('click',()=>track('oracle_continuation_click',{theme,reading_id:reading.id,destination:a.textContent.trim(),page_path:location.pathname})));
+});
+</script></body></html>

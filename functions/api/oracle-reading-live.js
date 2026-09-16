@@ -1,4 +1,18 @@
 import { ORACLE_AMOR_READINGS } from '../_lib/oracle-amor.js';
+import { ORACLE_TRABALHO_READINGS } from '../_lib/oracle-trabalho.js';
+import { ORACLE_DINHEIRO_READINGS } from '../_lib/oracle-dinheiro.js';
+import { ORACLE_FAMILIA_READINGS } from '../_lib/oracle-familia.js';
+import { ORACLE_ESCOLHAS_READINGS } from '../_lib/oracle-escolhas.js';
+import { ORACLE_PADROES_READINGS } from '../_lib/oracle-padroes.js';
+
+const THEMES={
+  amor:ORACLE_AMOR_READINGS,
+  trabalho:ORACLE_TRABALHO_READINGS,
+  dinheiro:ORACLE_DINHEIRO_READINGS,
+  familia:ORACLE_FAMILIA_READINGS,
+  escolhas:ORACLE_ESCOLHAS_READINGS,
+  padroes:ORACLE_PADROES_READINGS
+};
 
 export async function onRequestGet({ request, env }) {
   try {
@@ -27,12 +41,19 @@ export async function onRequestGet({ request, env }) {
       return json({ error:'Não foi possível confirmar esta sessão.' },stripeResponse.status);
     }
 
+    const sessionTheme = String(session.metadata?.oracle_theme || '');
+    const requestedTheme = String(url.searchParams.get('theme') || '');
+    const theme = requestedTheme || sessionTheme;
+    const readings = THEMES[theme];
+
     const valid =
+      !!readings &&
       session.livemode === true &&
       session.payment_status === 'paid' &&
       session.metadata?.environment === 'maison-jf-live' &&
       session.metadata?.source === 'oracle-live' &&
-      session.metadata?.oracle_theme === 'amor' &&
+      sessionTheme === theme &&
+      (!requestedTheme || requestedTheme === sessionTheme) &&
       session.metadata?.oracle_access === 'single-reading' &&
       session.amount_total === 200 &&
       session.currency === 'eur';
@@ -41,18 +62,18 @@ export async function onRequestGet({ request, env }) {
       return json({ error:'Esta sessão não dá acesso a esta abertura.' },403);
     }
 
-    if (!ORACLE_AMOR_READINGS.length) {
+    if (!readings.length) {
       return json({ error:'O Oráculo ficou temporariamente em silêncio.' },503);
     }
 
-    const index = await readingIndex(sessionId, ORACLE_AMOR_READINGS.length);
-    const reading = ORACLE_AMOR_READINGS[index];
+    const index = await readingIndex(theme, sessionId, readings.length);
+    const selected = readings[index];
 
     return json({
       paid:true,
-      theme:'amor',
+      theme,
       session_id:session.id,
-      reading:{ id:reading.id, title:reading.title, text:reading.text },
+      reading:{ id:selected.id, title:selected.title, text:selected.text },
       amount_total:200,
       currency:'eur'
     });
@@ -61,8 +82,8 @@ export async function onRequestGet({ request, env }) {
   }
 }
 
-async function readingIndex(sessionId,length) {
-  const input = new TextEncoder().encode('maison-jf-oracle-amor-v1|' + sessionId);
+async function readingIndex(theme,sessionId,length) {
+  const input = new TextEncoder().encode('maison-jf-oracle-' + theme + '-v1|' + sessionId);
   const digest = new Uint8Array(await crypto.subtle.digest('SHA-256',input));
   const value = (
     ((digest[0] << 24) >>> 0) |
