@@ -45,7 +45,7 @@ const businesses=[
  ['loja','Loja ou espaço de retalho.'],['spa','Spa, centro de estética ou espaço de bem-estar.'],['terapeuta','Massagista, terapeuta ou gabinete individual.'],['alojamento','Alojamento local, hotel ou espaço de hospitalidade.'],['servico','Outro negócio de serviços com clientes presenciais.'],['outro','Outro tipo de negócio ou projecto.']
 ];
 const goals=[
- ['ticket','Aumentar o valor médio que cada cliente deixa.'],['recompra','Criar razões para o cliente voltar a comprar.'],['diferenciar','Tornar a experiência mais memorável.'],['continuar','Prolongar a experiência para depois da visita.'],['boasvindas','Melhorar boas-vindas, oferta ou detalhe de chegada.'],['testar','Testar uma nova linha sem começar demasiado grande.']
+ ['ticket','Aumentar o valor médio que cada cliente deixa.'],['recompra','Criar razões para o cliente voltar a comprar.'],['diferenciar','Tornar a experiência mais memorável.'],['continuar','Prolongar a experiência para depois da visita.'],['boasvindas','Melhorar boas-vindas, oferta ou detalhe de chegada.'],['testar','Testar uma nova linha sem começar demasiado grande.'],['presentear','Criar presentes para clientes, hóspedes, equipa, parceiros ou ocasiões.']
 ];
 const gaps=[
  ['fim','A experiência termina quando o cliente sai.'],['extra','Os clientes compram o principal, mas quase nada complementar.'],['assinatura','O espaço funciona, mas falta-lhe uma assinatura sensorial própria.'],['escolha','Não sei que produtos fariam realmente sentido para os meus clientes.'],['stock','Tenho receio de comprar stock que fique parado.'],['historia','Tenho produtos ou serviços bons, mas a história comercial ainda não está clara.']
@@ -54,13 +54,19 @@ const clients=[
  ['recorrente','Clientes recorrentes que já confiam em nós.'],['ocasional','Clientes ocasionais, mas com alguma repetição.'],['turista','Muitos clientes são de passagem ou fazem uma compra única.'],['presente','Existe procura por presentes e ocasiões.'],['misto','Temos vários perfis; não existe um só comportamento dominante.']
 ];
 const models=[
- ['revenda','Quero vender produtos ao cliente.'],['uso','Quero usar produtos dentro do serviço/experiência.'],['ambos','Quero usar e também vender para levar para casa.'],['boasvindas','Quero oferecer como detalhe, boas-vindas ou cortesia.'],['especial','Quero estudar uma pequena série ou projecto especial.']
+ ['revenda','Quero vender produtos ao cliente.'],['uso','Quero usar produtos dentro do serviço/experiência.'],['ambos','Quero usar e também vender para levar para casa.'],['boasvindas','Quero oferecer como detalhe, boas-vindas ou cortesia.'],['especial','Quero estudar uma pequena série ou projecto especial.'],['presente','Quero usar como presente, agradecimento, cortesia ou gesto de marca.']
 ];
 const scales=[
  ['pequeno','Quero começar pequeno e validar.'],['regular','Consigo testar uma selecção com alguma variedade.'],['recorrente','Procuro algo que possa repor regularmente.'],['projeto','Tenho um projecto específico e quero discutir quantidades e condições.']
 ];
 const starts=[
  ['curadoria','Quero que me recomendem um ponto de partida.'],['categoria','Já tenho uma categoria de produto em mente.'],['proposta','Quero receber uma proposta adaptada ao meu espaço.'],['conversa','Prefiro falar primeiro e perceber se existe encaixe.']
+];
+const giftConfessions=[
+ ['cliente','“Quero oferecer alguma coisa aos clientes que pareça pensada, não promocional.”'],
+ ['equipa','“Quero agradecer à equipa sem cair no presente corporativo genérico.”'],
+ ['hospede','“Quero que hóspedes ou convidados levem uma memória física do espaço.”'],
+ ['parceiro','“Quero um presente para parceiros ou ocasiões que também diga alguma coisa sobre a nossa marca.”']
 ];
 const confessions={
  loja:[
@@ -109,6 +115,7 @@ function questionFor(n){
  if(n===4)return ['Como imaginas os produtos MAISON JF® dentro do teu negócio?',models,'model'];
  if(n===5)return ['Como preferes começar?',scales,'scale'];
  if(n===6)return ['O que seria mais útil receber agora?',starts,'start'];
+ if(state.goal==='presentear'||state.model==='presente'||state.client==='presente')return ['Que tipo de presente estás realmente a tentar criar?',giftConfessions,'confession'];
  return ['Qual destas frases te custa mais admitir?',confessions[state.business]||confessions.outro,'confession'];
 }
 function section(id){document.querySelectorAll('.step').forEach(x=>x.classList.remove('on'));$(id).classList.add('on')}
@@ -117,6 +124,7 @@ function render(){const [q,opts,key]=questionFor(state.step);$('progress').textC
 function answer(key,value){state[key]=value;track('maison_b2b_test_answer',{step:state.step+1,key,choice:value});state.step++;state.step<8?render():finish()}
 
 function resultType(){
+ if(state.goal==='presentear'||state.model==='presente'||state.client==='presente')return ['UM PRESENTE QUE TAMBÉM TRABALHA PELA MARCA','Há espaço para transformar presente, agradecimento ou cortesia numa extensão coerente da experiência e da memória do teu negócio.','gifting'];
  if(state.model==='boasvindas'||state.business==='alojamento'||state.goal==='boasvindas')return ['BOAS-VINDAS QUE FICAM','Existe margem para transformar chegada, ambiente ou cortesia numa parte reconhecível da experiência.','welcome'];
  if(state.model==='ambos'||state.goal==='continuar'||state.gap==='fim')return ['A EXPERIÊNCIA TERMINA CEDO','Há uma oportunidade para prolongar o que o cliente vive no espaço e criar continuidade para casa.','continuity'];
  if(state.goal==='ticket'||state.gap==='extra')return ['TICKET MÉDIO SUBAPROVEITADO','Já existe confiança no serviço ou produto principal. O próximo ganho pode estar numa compra complementar que faça sentido — não em vender por vender.','ticket'];
@@ -128,7 +136,10 @@ function resultType(){
 function offer(href,label,role){return {href,label,role}}
 function offers(type){
  let main,second;
- if(type==='welcome')main=offer('../produtos-de-boas-vindas-para-alojamento-local.html','Boas-vindas & hospitalidade','recomendado');
+ if(type==='gifting'){
+   main=offer('../../contacto/?interesse=b2b-presentes&origem=teste-profissional','Criar proposta de presentes B2B','recomendado');
+   second=offer('../../produtos/','Explorar produtos MAISON JF®','explorar');
+ }else if(type==='welcome')main=offer('../produtos-de-boas-vindas-para-alojamento-local.html','Boas-vindas & hospitalidade','recomendado');
  else if(state.business==='spa'||state.business==='terapeuta'||type==='continuity')main=offer('../produtos-para-revenda-em-spa.html','Revenda para spa ou gabinete','recomendado');
  else if(state.business==='loja'||type==='resale')main=offer('../produtos-para-revenda-em-loja.html','Revenda em loja','recomendado');
  else if(type==='signature')main=offer('../aromas-para-espacos-de-bem-estar.html','Aromas para espaços profissionais','recomendado');
@@ -137,7 +148,7 @@ function offers(type){
  else if(state.business==='spa'||state.business==='terapeuta')second=offer('../como-escolher-produtos-para-um-spa-ou-gabinete.html','Escolher produtos para o espaço','explorar');
  else if(state.business==='alojamento')second=offer('../como-criar-um-ritual-de-boas-vindas-para-clientes.html','Criar um ritual de boas-vindas','explorar');
  else second=offer('../o-que-posso-oferecer-de-diferente-aos-meus-clientes.html','Explorar diferenciação','explorar');
- const contact=offer('../../contacto/?interesse=b2b&origem=teste-profissional','Abrir conversa B2B','conversa');
+ const contact=offer('../../contacto/?interesse='+(type==='gifting'?'b2b-presentes':'b2b')+'&origem=teste-profissional','Abrir conversa B2B','conversa');
  return [main,second,contact].filter((x,i,a)=>a.findIndex(y=>y.href===x.href)===i).slice(0,3);
 }
 function finish(){

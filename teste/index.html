@@ -114,7 +114,8 @@ const needs=[
  ['acalmar','Parar, respirar e baixar o ruído.'],
  ['agir','Saber o que dizer ou fazer concretamente.'],
  ['presenca','Não atravessar isto sozinho.'],
- ['ambiente','Mudar alguma coisa física à minha volta.']
+ ['ambiente','Mudar alguma coisa física à minha volta.'],
+ ['presente','Encontrar um presente que diga alguma coisa sem ser só “mais uma coisa”.']
 ];
 
 const blockers=[
@@ -133,6 +134,13 @@ const formats=[
  ['profundo','Quero perceber as camadas e o padrão por baixo disto.'],
  ['falar','Quero falar com alguém e organizar o que se passa.'],
  ['pratico','Quero fazer alguma coisa física ou prática agora.']
+];
+
+const giftConfessions=[
+ ['gift-pause','“Quero oferecer a alguém uma desculpa para parar um bocadinho.”'],
+ ['gift-home','“Quero oferecer alguma coisa que mude a sensação da casa.”'],
+ ['gift-thanks','“Quero agradecer sem oferecer uma coisa impessoal.”'],
+ ['gift-beautiful','“Quero uma coisa bonita, fácil de oferecer e que pareça escolhida.”']
 ];
 
 const confessions={
@@ -193,6 +201,7 @@ function questionFor(step){
  if(step===4)return ['O que seria mais útil para ti hoje?',needs,'need'];
  if(step===5)return ['O que mais te impede de avançar?',blockers,'blocker'];
  if(step===6)return ['Como gostarias de começar?',formats,'format'];
+ if(state.need==='presente'||origin.startsWith('presentes/'))return ['Que tipo de presente estás realmente a tentar encontrar?',giftConfessions,'confession'];
  return ['Qual destas frases te custa mais admitir?',confessions[state.domain]||confessions.mente,'confession'];
 }
 
@@ -227,7 +236,13 @@ function chooseOffers(){
  const low=offer(oracleHref(),state.territoryLabel+' · Oráculo','2 €','entrada');
  let primary,deep;
 
- if(state.domain==='casa'){
+ if(state.need==='presente'||origin.startsWith('presentes/')){
+   if(state.confession==='gift-pause') primary=offer('../produtos/escalda-pes/','Escalda-Pés','5 €','presente recomendado');
+   else if(state.confession==='gift-home') primary=offer('../produtos/vela-vidro/','Vela Aromática · 170 g','14 €','presente recomendado');
+   else if(state.confession==='gift-thanks') primary=offer('../produtos/nevoa/','Névoa de Ambiente','6,50 €','presente recomendado');
+   else primary=offer('../produtos/vela-pequena/','Vela Aromática · 70 g','8 €','presente recomendado');
+   deep=offer('../produtos/','Ver todos os produtos MAISON JF®','vários valores','mais escolhas');
+ }else if(state.domain==='casa'){
    if(state.pain==='atmosfera'||state.need==='ambiente') primary=offer('../produtos/nevoa/','Névoa de Ambiente','6,50 €','recomendada');
    else primary=offer('../produtos/vela-pequena/','Vela Aromática','8 €','recomendada');
    deep=offer('../produtos/vela-vidro/','Vela Aromática · 170 g','14 €','mais completa');
@@ -275,9 +290,10 @@ function recognition(){
 function finish(){
  inferTerritory();
  const offers=chooseOffers();
- $('resultTitle').textContent=state.territoryLabel;
- $('resultText').textContent=recognition();
- $('resultMeta').innerHTML='<span>'+state.door+'</span><span>'+state.territoryLabel+'</span><span>'+(state.duration==='recorrente'?'Padrão recorrente':'Momento actual')+'</span>';
+ const isGift=state.need==='presente'||origin.startsWith('presentes/');
+ $('resultTitle').textContent=isGift?'UM PRESENTE COM INTENÇÃO':state.territoryLabel;
+ $('resultText').textContent=isGift?'Não estás simplesmente à procura de um objecto. Estás a tentar escolher um gesto que diga alguma coisa sobre a pessoa ou sobre aquilo que queres oferecer-lhe.':recognition();
+ $('resultMeta').innerHTML=isGift?'<span>PRESENTE</span><span>'+state.door+'</span><span>Escolha orientada</span>':'<span>'+state.door+'</span><span>'+state.territoryLabel+'</span><span>'+(state.duration==='recorrente'?'Padrão recorrente':'Momento actual')+'</span>';
  const primary=offers[0];
  $('offerTitle').textContent=primary.label+' · '+primary.price;
  $('offerText').textContent=primary.role==='entrada'
@@ -287,7 +303,7 @@ function finish(){
  $('offerOptions').innerHTML='';
  offers.slice(1).forEach(o=>{const a=document.createElement('a');a.href=o.href;a.dataset.offerAlt='1';a.innerHTML='<small>'+o.role+'</small><strong>'+o.label+'</strong><br><span>'+o.price+'</span>';$('offerOptions').appendChild(a)});
  section('result');$('resultTitle').focus();
- track('maison_test_result',{door:state.door,domain:state.domain,pain:state.pain,territory:state.territory,pattern:state.pattern,duration:state.duration,need:state.need,blocker:state.blocker,format:state.format,confession:state.confession,primary_offer:primary.label,primary_href:primary.href});
+ track('maison_test_result',{door:state.door,domain:state.domain,pain:state.pain,territory:state.territory,pattern:state.pattern,duration:state.duration,need:state.need,blocker:state.blocker,format:state.format,confession:state.confession,gift:isGift,primary_offer:primary.label,primary_href:primary.href});
 }
 function restart(){Object.assign(state,{step:0,domain:'',pain:'',pattern:'',duration:'',need:'',blocker:'',format:'',confession:'',door:'',territory:''});section('intro');$('start').focus();track('maison_test_restart')}
 $('start').onclick=show;$('restart').onclick=restart;

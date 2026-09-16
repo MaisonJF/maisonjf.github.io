@@ -12,9 +12,10 @@ export const MAISON_OFFER_BRAIN={
     clarity:['Oráculo · 2 €','Tarot Expresso · 17 €','Consulta Escrita · 25–45 €','Tarot Integrativo · 35 €','Escuta · 60 €','Tarot Terapêutico · 70 €','Continuidade'],
     body:['Escalda-Pés · 5 €','Óleo de Massagem · 12–12,50 €','Serviços'],
     home:['Névoa · 6,50 €','Vela Aromática · 8 €','Vela Aromática · 14 €'],
-    company:['Oráculo · 2 €','Companhia','Escuta / Continuidade']
+    company:['Oráculo · 2 €','Companhia','Escuta / Continuidade'],
+    gifts:['Escalda-Pés · 5 €','Névoa · 6,50 €','Vela · 8–14 €']
   },
-  dimensions:['origin','domain','pain','pattern','duration','need','blocker','format','confession'],
+  dimensions:['origin','domain','pain','pattern','duration','need','blocker','format','confession','giftIntent'],
   originRules:[
     {prefix:'relacoes/',territory:'amor',destination:'/oraculo/amor.html'},
     {prefix:'decisoes/',territory:'escolhas',destination:'/oraculo/escolhas.html'},
