@@ -24,7 +24,7 @@ jobs:
           import sys
           import xml.etree.ElementTree as ET
 
-          OCEAN_DIRS=('relacoes/','cabeca/','decisoes/','casa/','corpo/','companhia/','presentes/','tarot/','espiritualidade/','trabalho/')
+          OCEAN_DIRS=('relacoes/','cabeca/','decisoes/','casa/','corpo/','companhia/','presentes/','tarot/','espiritualidade/','trabalho/','dinheiro/')
           root=pathlib.Path('.')
 
           source=(root/'functions/_lib/seo-pillars-2026.js').read_text(encoding='utf-8')
