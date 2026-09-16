@@ -14,34 +14,63 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Wait for Cloudflare Pages deployment
+      - name: Wait for Pages deployment
         run: sleep 90
-      - name: Notify IndexNow from sitemap
+      - name: Notify IndexNow from public sitemaps
         shell: bash
         run: |
           python3 - <<'PY'
           import json
+          import pathlib
           import urllib.request
           import xml.etree.ElementTree as ET
 
-          root = ET.parse('sitemap.xml').getroot()
-          ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
-          urls = [el.text.strip() for el in root.findall('sm:url/sm:loc', ns) if el.text]
+          NS = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
 
-          payload = {
-              'host': 'maison-jf.com',
-              'key': '2e7132dc5767b64308add20a2790e2b6',
-              'keyLocation': 'https://maison-jf.com/2e7132dc5767b64308add20a2790e2b6.txt',
-              'urlList': urls,
+          def local_path_from_url(url):
+              prefix='https://maison-jf.com/'
+              if not url.startswith(prefix):
+                  return None
+              rel=url[len(prefix):]
+              return pathlib.Path(rel or 'sitemap.xml')
+
+          def read_sitemap(path, seen=None):
+              seen=seen or set()
+              path=pathlib.Path(path)
+              if path in seen or not path.exists():
+                  return []
+              seen.add(path)
+              root=ET.parse(path).getroot()
+              tag=root.tag.rsplit('}',1)[-1]
+              if tag=='urlset':
+                  return [el.text.strip() for el in root.findall('sm:url/sm:loc',NS) if el.text]
+              if tag=='sitemapindex':
+                  urls=[]
+                  for el in root.findall('sm:sitemap/sm:loc',NS):
+                      if not el.text: continue
+                      child=local_path_from_url(el.text.strip())
+                      if child: urls.extend(read_sitemap(child,seen))
+                  return urls
+              return []
+
+          urls=sorted(set(read_sitemap('sitemap.xml')))
+          if not urls:
+              raise SystemExit('No public URLs found in sitemap chain; refusing to send empty IndexNow payload.')
+
+          payload={
+              'host':'maison-jf.com',
+              'key':'2e7132dc5767b64308add20a2790e2b6',
+              'keyLocation':'https://maison-jf.com/2e7132dc5767b64308add20a2790e2b6.txt',
+              'urlList':urls,
           }
-          data = json.dumps(payload).encode('utf-8')
-          req = urllib.request.Request(
+          data=json.dumps(payload).encode('utf-8')
+          req=urllib.request.Request(
               'https://api.indexnow.org/indexnow',
               data=data,
-              headers={'Content-Type': 'application/json; charset=utf-8'},
+              headers={'Content-Type':'application/json; charset=utf-8'},
               method='POST',
           )
-          with urllib.request.urlopen(req, timeout=30) as response:
-              print('IndexNow status:', response.status)
-              print('URLs submitted:', len(urls))
+          with urllib.request.urlopen(req,timeout=30) as response:
+              print('IndexNow status:',response.status)
+              print('Public URLs submitted:',len(urls))
           PY
