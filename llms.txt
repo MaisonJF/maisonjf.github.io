@@ -109,7 +109,11 @@ Each book can support a cover and an expandable editorial media collection.
 
 ## Oceans and routing
 Oceans is an internal intent and pain-language engine used to understand what a visitor may need and to route towards paid MAISON JF® offers.
-Oceans is not a public free-answer library. Only one selected public pillar page per territory is exposed for organic discovery; the rest remains internal.
+Oceans is designed to keep growing without a fixed upper limit. New pain-language pages, variants, questions and patterns belong to the internal engine by default.
+A new Ocean must default to noindex and must not be added to the public sitemap or visible browse lists.
+Only a deliberate promotion into the SEO pillar registry may make an Ocean publicly indexable.
+At this stage there is one selected public pillar page per Oráculo territory for organic discovery; all other Oceans remain internal.
+The public Respostas hub stays mobile-first and never expands into a full library: it shows eight featured answers or at most eight search matches.
 The Test at https://maison-jf.com/teste/ remains the free diagnostic experience.
 Public paid destinations include the Oráculo, products, services, ebooks and Companhia.
 
