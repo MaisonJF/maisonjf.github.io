@@ -21,15 +21,15 @@ human need or question → one public pillar answer or free Test → internal Oc
 - Serviços: https://maison-jf.com/servicos/
 - Ebooks: https://maison-jf.com/ebooks/
 - Oráculo: https://maison-jf.com/oraculo/
-- Casa: https://maison-jf.com/portas/casa.html
-- Corpo: https://maison-jf.com/portas/corpo.html
-- Cabeça: https://maison-jf.com/portas/cabeca.html
-- Companhia: https://maison-jf.com/portas/companhia.html
+- Casa: https://maison-jf.com/portas/casa
+- Corpo: https://maison-jf.com/portas/corpo
+- Cabeça: https://maison-jf.com/portas/cabeca
+- Companhia: https://maison-jf.com/portas/companhia
 - Profissionais / B2B: https://maison-jf.com/profissionais/
 - Press: https://maison-jf.com/press/
 - Contacto: https://maison-jf.com/contacto/
-- Envios: https://maison-jf.com/envios.html
-- Informação legal: https://maison-jf.com/informacao-legal.html
+- Envios: https://maison-jf.com/envios
+- Informação legal: https://maison-jf.com/informacao-legal
 
 Legacy .html catalogue URLs may redirect to the canonical routes above.
 

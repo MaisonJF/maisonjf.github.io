@@ -8,7 +8,7 @@ export const OCEAN_DISCOVERY_BRIDGE={
     products:'/produtos/',
     services:'/servicos/',
     oracle:'/oraculo/',
-    company:'/portas/companhia.html',
+    company:'/portas/companhia',
     professionals:'/profissionais/'
   },
   futureOcean:{
