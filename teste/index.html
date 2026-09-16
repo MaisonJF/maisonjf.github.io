@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>O QUE ESTÁS A IGNORAR? | MAISON JF®</title>
-<meta name="description" content="Sete perguntas para perceber onde estás a gastar mais de ti e encontrar um primeiro passo MAISON JF® sem reduzir tudo à mesma solução.">
+<meta name="description" content="Oito perguntas para perceber onde a vida está a apertar e encontrar o próximo passo MAISON JF® mais adequado.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://maison-jf.com/teste/">
 <link rel="stylesheet" href="../maison.css">
@@ -15,93 +15,284 @@
 .progress{font:600 9px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:#8f887d;margin-bottom:26px}
 .progressbar{height:1px;background:#2f2a24;margin:-13px 0 46px;overflow:hidden}.progressbar span{display:block;height:100%;background:#c3a66d;transition:width .28s ease}
 .title{font:400 clamp(54px,9vw,106px)/.9 var(--serif);letter-spacing:-.035em;margin:.16em 0 .34em}
-#intro>p:not(.eyebrow){max-width:610px;font:400 clamp(18px,2.2vw,23px)/1.55 var(--serif);color:#bcb4a9;margin-bottom:32px}
+#intro>p:not(.eyebrow){max-width:650px;font:400 clamp(18px,2.2vw,23px)/1.55 var(--serif);color:#bcb4a9;margin-bottom:32px}
 .q{font:400 clamp(31px,4.6vw,52px)/1.08 var(--serif);letter-spacing:-.02em;margin:28px 0 38px;max-width:850px}
 .choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .choices button{min-height:108px;padding:22px 24px;text-align:left;border:1px solid var(--line);background:rgba(15,15,14,.72);color:#eee9df;font:400 18px/1.38 var(--serif);cursor:pointer;transition:background .2s ease,border-color .2s ease,transform .2s ease}
 .choices button:hover,.choices button:focus-visible{background:#171512;border-color:#8b7650;outline:none;transform:translateY(-2px)}
 #result>p:not(.eyebrow){max-width:700px;font:400 19px/1.6 var(--serif);color:#bcb4a9}
+.result-meta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 0}.result-meta span{border:1px solid var(--line);padding:8px 10px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#938c82}
 .offer{margin:42px 0;padding:34px;border:1px solid rgba(183,154,98,.38);background:linear-gradient(145deg,rgba(183,154,98,.08),rgba(255,255,255,.015))}
-.offer h2{font:400 clamp(30px,4vw,43px)/1.02 var(--serif);margin:.2em 0 .35em}.offer-options{display:flex;flex-wrap:wrap;gap:12px 18px;margin-top:18px}.offer-options:empty{display:none}.offer-options a{font-size:13px}
-.next{color:#bdb6aa;max-width:690px}.restart{border:0;background:none;color:#8e877d;text-decoration:underline;cursor:pointer;margin-top:32px}
-.route-chooser{margin-top:34px}.route-chooser p{color:#aaa39a}.route-chooser h3{font-size:29px;margin-bottom:10px}.route-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.route-options a{padding:18px;background:rgba(0,0,0,.18)}.route-options a strong{display:block;font:400 20px/1.1 var(--serif);margin-bottom:6px}.route-options a span{color:#9b9489;font-size:12px}
-@media(max-width:700px){.test{padding:108px 18px 60px;align-items:start}.title{font-size:54px}.q{font-size:32px;margin-bottom:28px}.choices,.route-options{grid-template-columns:1fr}.choices button{min-height:86px}.offer{padding:24px}}
+.offer h2{font:400 clamp(30px,4vw,43px)/1.02 var(--serif);margin:.2em 0 .35em}.offer>p{max-width:650px;color:#aaa39a}
+.offer-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.offer-options:empty{display:none}
+.offer-options a{border:1px solid var(--line);padding:15px 16px;text-decoration:none;font-size:13px}.offer-options small{display:block;color:#837c72;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
+.next{color:#8e877d;font-size:12px;max-width:690px}.restart{border:0;background:none;color:#8e877d;text-decoration:underline;cursor:pointer;margin-top:32px}
+@media(max-width:700px){.test{padding:108px 18px 60px;align-items:start}.title{font-size:54px}.q{font-size:32px;margin-bottom:28px}.choices,.offer-options{grid-template-columns:1fr}.choices button{min-height:86px}.offer{padding:24px}}
 </style>
 </head>
 <body>
 <header class="site-header"><a class="brand" href="../">MAISON JF®</a><nav><a href="../oraculo/">Oráculo</a><a href="../produtos/">Produtos</a><a href="../servicos/">Serviços</a></nav></header>
 <main class="test"><div class="box">
-<section id="intro" class="step on"><p class="eyebrow">≈ 2 minutos · 7 perguntas</p><h1 class="title">O QUE ESTÁS<br>A IGNORAR?</h1><p>Sete situações para perceber onde estás a gastar mais de ti. No fim, encontras uma Porta e vários primeiros passos possíveis — não uma resposta única para toda a gente.</p><button class="button button--light" id="start">Começar</button></section>
+<section id="intro" class="step on"><p class="eyebrow">≈ 2 minutos · 8 perguntas</p><h1 class="title">O QUE ESTÁS<br>A IGNORAR?</h1><p>Não procuramos adivinhar a tua vida. Procuramos reconhecer onde está a apertar, o que tens feito com isso e qual é o próximo passo que faz mais sentido agora.</p><button class="button button--light" id="start">Começar</button></section>
 <section id="questions" class="step"><div class="progress" id="progress" aria-live="polite"></div><div class="progressbar" aria-hidden="true"><span id="bar"></span></div><div class="q" id="question" tabindex="-1"></div><div class="choices" id="choices"></div></section>
-<section id="result" class="step"><p class="eyebrow">A Porta que está a chamar mais alto</p><h1 class="title" id="resultTitle" tabindex="-1"></h1><p id="resultText"></p>
-<div class="offer"><p class="eyebrow">Primeiro gesto</p><h2 id="offerTitle"></h2><p id="offerText"></p><a class="button button--light" id="offerCta"></a><div class="offer-options" id="offerOptions"></div><div id="routeChooser"></div></div>
-<p class="next" id="nextText"></p><a class="text-link" id="nextCta"></a><br><button class="restart" id="restart">Refazer o teste</button></section>
+<section id="result" class="step"><p class="eyebrow">O que está a chamar mais alto</p><h1 class="title" id="resultTitle" tabindex="-1"></h1><p id="resultText"></p><div class="result-meta" id="resultMeta"></div>
+<div class="offer"><p class="eyebrow">O próximo passo que faz mais sentido</p><h2 id="offerTitle"></h2><p id="offerText"></p><a class="button button--light" id="offerCta"></a><div class="offer-options" id="offerOptions"></div></div>
+<p class="next">O Teste orienta; não diagnostica, não lê pensamentos e não substitui ajuda profissional quando ela é necessária.</p><button class="restart" id="restart">Refazer o teste</button></section>
 </div></main>
 <script>
-const qs=[
- ['Quando tens finalmente um momento livre, o que acontece primeiro?',[['corpo','Percebo o cansaço que andei a empurrar.'],['cabeca','A cabeça começa logo a rever problemas e decisões.'],['casa','Olho à volta e sinto que nem o espaço me ajuda a desligar.'],['companhia','Sinto sobretudo falta de ter alguém comigo.']]],
- ['Qual destas frases te apanha mais depressa?',[['cabeca','“Eu sei que estou às voltas, mas não consigo parar de pensar nisto.”'],['corpo','“Até descansar me parece mais uma coisa para fazer.”'],['companhia','“Eu fazia isto se não tivesse de ir sozinho.”'],['casa','“Queria entrar em casa e sentir outra coisa.”']]],
- ['Quando uma relação ou situação te mexe muito, o que fazes?',[['cabeca','Procuro sinais, respostas e explicações.'],['corpo','Fico tenso, cansado ou sem conseguir realmente parar.'],['companhia','Procuro alguém com quem estar ou falar.'],['casa','Fecho-me no meu espaço e tento criar algum conforto.']]],
- ['O que te faria sentir uma diferença ainda hoje?',[['corpo','Um banho, calor, toque ou um ritual físico.'],['casa','Mudar o aroma ou a atmosfera à minha volta.'],['cabeca','Conseguir finalmente organizar uma pergunta.'],['companhia','Ter um plano com outra pessoa em vez de ficar sozinho.']]],
- ['O que tens adiado mais?',[['cabeca','Uma decisão ou conversa que continua pendente.'],['corpo','Cuidar de mim sem ser à pressa.'],['casa','Tornar a casa mais minha e mais agradável.'],['companhia','Sair, viver alguma coisa ou pedir presença.']]],
- ['Se a Maison te pudesse dar uma coisa agora, qual escolherias?',[['cabeca','Clareza.'],['corpo','Pausa.'],['casa','Atmosfera.'],['companhia','Presença.']]],
- ['E se esse primeiro gesto não chegasse, o que aceitarias fazer depois?',[['servico','Falar do meu caso e aprofundar.'],['produto','Experimentar um produto ou ritual.'],['oraculo','Receber uma primeira orientação simbólica.'],['companhia','Ter alguém comigo num momento concreto.']]]
-];
-let i=0,scores={casa:0,corpo:0,cabeca:0,companhia:0},depth='',answers=[];
-const tieOrder=['cabeca','corpo','casa','companhia'];
 const $=id=>document.getElementById(id);
-const origin=new URLSearchParams(location.search).get('origem')||'';const track=(event,data={})=>window.maisonAnalytics?.track?window.maisonAnalytics.track(event,{...data,origin,page_path:location.pathname}):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([event,{...data,origin,page_path:location.pathname}]);
-function section(id){document.querySelectorAll('.step').forEach(x=>x.classList.remove('on'));$(id).classList.add('on')}
-function show(){i=0;section('questions');track('maison_test_start');render()}
-function render(){const q=qs[i];$('progress').textContent=(i+1)+' / '+qs.length;$('bar').style.width=(((i+1)/qs.length)*100)+'%';$('question').textContent=q[0];$('choices').innerHTML='';q[1].forEach(pair=>{const b=document.createElement('button');b.type='button';b.textContent=pair[1];b.onclick=()=>answer(pair[0]);$('choices').appendChild(b)});$('question').focus()}
-function answer(key){track('maison_test_answer',{step:i+1,choice:key});answers.push(key);if(i===qs.length-1)depth=key;else scores[key]=(scores[key]||0)+1;i++;if(i<qs.length)render();else finish()}
-function winner(){const max=Math.max(...Object.values(scores));const tied=tieOrder.filter(k=>scores[k]===max);if(tied.length===1)return tied[0];for(let a=answers.length-2;a>=0;a--){if(tied.includes(answers[a]))return answers[a]}return tied[0]}
-const routes={
- corpo:{title:'CORPO',text:'Há uma parte tua a pedir uma coisa menos abstracta do que “organiza a vida”: parar no corpo.',offer:'Escalda-Pés · 150 g · 5 €',offerText:'Água morna, aroma e um momento que não precisa de produzir nada.',href:'../produtos/escalda-pes/',cta:'Ver Escalda-Pés · 5 €',alternatives:[['../produtos/oleo-massagem/','Óleo de Massagem · 12–12,50 €'],['../oraculo/','Oráculo · 2 €']]},
- casa:{title:'CASA',text:'O espaço à tua volta está a pesar mais do que parece. Talvez não precises de mudar a casa toda; precisas de mudar a forma como ela te recebe.',offer:'Escolhe como queres mudar o ambiente.',offerText:'Mudança imediata de aroma, ou aroma com luz e ritual.',href:'../produtos/nevoa/',cta:'Névoa de Ambiente · 20 ml · 6,50 €',alternatives:[['../produtos/vela-pequena/','Vela Aromática · 70 g · 8 €'],['../produtos/vela-vidro/','Vela Aromática · 170 g · 14 €']]},
- cabeca:{title:'CABEÇA',text:'Estás a gastar energia a tentar chegar sozinho a uma resposta que continua a fugir ou a mudar de forma.',offer:'Não há uma única consulta para todas as perguntas.',offerText:'Escolhe pelo tipo de ajuda e profundidade de que precisas agora.',href:'../servicos/#consultas',cta:'Ver todas as opções de Cabeça'},
- companhia:{title:'COMPANHIA',text:'O que te falta não parece ser mais uma coisa para fazer. Parece ser presença enquanto fazes ou atravessas alguma coisa.',offer:'Companhia combinada',offerText:'Café, passeio, evento ou outro momento acordado, dentro dos limites definidos pelo serviço.',href:'../portas/companhia.html',cta:'Ver Friend4Rent e Boyfriend4Rent'}
-};
-const headOptions=[
- ['tarot-expresso','Tarot Expresso','17 € · uma pergunta directa'],
- ['tarot','Tarot Integrativo','35 € · olhar para o caso inteiro'],
- ['tarot-terapeutico','Tarot Terapêutico','70 € · aprofundar padrões e várias camadas'],
- ['consulta-escrita-breve','Consulta Escrita Breve','25 € · resposta concreta por escrito'],
- ['consulta-escrita-aprofundada','Consulta Escrita Aprofundada','45 € · análise escrita com mais profundidade'],
- ['escuta','Escuta Orientada','60 € · falar e organizar sem Tarot']
+const origin=new URLSearchParams(location.search).get('origem')||'';
+const track=(event,data={})=>window.maisonAnalytics?.track?window.maisonAnalytics.track(event,{...data,origin,page_path:location.pathname}):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([event,{...data,origin,page_path:location.pathname}]);
+
+const state={step:0,domain:'',pain:'',pattern:'',duration:'',need:'',blocker:'',format:'',confession:'',door:'',territory:''};
+
+const domains=[
+ ['relacao','Há alguém, uma relação ou uma ausência a mexer demasiado comigo.'],
+ ['mente','A minha cabeça não pára: penso, revejo, antecipo.'],
+ ['corpo','O meu corpo está cansado, tenso ou a pedir pausa.'],
+ ['pratico','Trabalho, dinheiro ou uma decisão prática está a pesar.'],
+ ['casa','A casa ou a rotina à minha volta já não me ajuda.'],
+ ['companhia','O que me pesa mais é estar a atravessar isto sozinho.']
 ];
-function headChooser(){
- const wrap=document.createElement('div');wrap.className='route-chooser';
- const h=document.createElement('h3');h.textContent='Como queres receber esta ajuda?';wrap.appendChild(h);
- const p=document.createElement('p');p.textContent='As opções existem porque perguntas diferentes não precisam do mesmo formato.';wrap.appendChild(p);
- const grid=document.createElement('div');grid.className='route-options';
- headOptions.forEach(o=>{const a=document.createElement('a');a.href='../contacto/?interesse='+encodeURIComponent(o[0]);a.dataset.route=o[0];const strong=document.createElement('strong');strong.textContent=o[1];const span=document.createElement('span');span.textContent=o[2];a.append(strong,span);grid.appendChild(a)});
- wrap.appendChild(grid);
- if(depth==='oraculo'){const o=document.createElement('a');o.className='text-link';o.href='../oraculo/';o.textContent='Começar pelo Oráculo · 2 € →';wrap.appendChild(o)}
- if(depth==='produto'){const note=document.createElement('p');note.textContent='Disseste que aceitarias experimentar um produto. Nesta Porta não te vamos forçar um objecto só para vender: se o que precisas é clareza, começa pelo Oráculo ou por uma das formas de consulta acima.';wrap.appendChild(note)}
- return wrap;
+
+const pains={
+ relacao:[
+  ['indefinida','Há uma ligação que existe, mas nunca fica clara.'],
+  ['abandono','Tenho medo de perder, ser deixado ou não ser escolhido.'],
+  ['conflito','Há uma conversa, conflito ou limite que não consigo resolver.'],
+  ['fim','Há um fim, ausência ou saudade que continua activa.']
+ ],
+ mente:[
+  ['ansiedade','Passo demasiado tempo a antecipar o que pode acontecer.'],
+  ['ruminacao','Volto à mesma pergunta vezes sem conta.'],
+  ['validacao','Uma crítica ou opinião dos outros muda demasiado o que penso de mim.'],
+  ['padrao','Sinto que volto sempre ao mesmo padrão.']
+ ],
+ corpo:[
+  ['cansaco','Estou cansado e continuo a empurrar.'],
+  ['descanso','Parar dá-me culpa ou parece impossível.'],
+  ['corpo-imagem','Estou desconfortável com o meu corpo ou com a forma como está a mudar.'],
+  ['ritmo','A minha vida está num ritmo que já não consigo sustentar.']
+ ],
+ pratico:[
+  ['trabalho','O trabalho, emprego ou carreira está a pesar.'],
+  ['dinheiro','Dinheiro, dívida ou segurança financeira está a ocupar a cabeça.'],
+  ['decisao','Tenho uma decisão importante e medo de escolher mal.'],
+  ['projeto','Há um projecto ou negócio parado e não sei se insisto.']
+ ],
+ casa:[
+  ['refugio','Entro em casa e não sinto descanso nem acolhimento.'],
+  ['desordem','A desarrumação e o excesso estão a pesar.'],
+  ['mudanca-casa','A casa está a mudar, ou eu preciso que mude.'],
+  ['atmosfera','Quero que o espaço me faça sentir outra coisa.']
+ ],
+ companhia:[
+  ['solidao','Sinto-me sozinho mesmo quando existem pessoas à volta.'],
+  ['presenca','Tenho um momento concreto que não queria atravessar sozinho.'],
+  ['amizade','Sinto falta de reciprocidade ou presença numa amizade.'],
+  ['pertenca','Sinto que não encaixo verdadeiramente em lado nenhum.']
+ ]
+};
+
+const patterns=[
+ ['ruminar','Penso, revejo sinais e tento chegar a uma certeza.'],
+ ['evitar','Adio, distraio-me ou tento não tocar no assunto.'],
+ ['validar','Procuro confirmação de outras pessoas antes de confiar em mim.'],
+ ['excesso','Faço mais, resolvo mais ou tento controlar tudo sozinho.']
+];
+
+const durations=[
+ ['agora','Isto aconteceu agora ou há poucos dias.'],
+ ['semanas','Anda comigo há algumas semanas.'],
+ ['meses','Já dura há meses.'],
+ ['recorrente','Isto repete-se há muito tempo, mesmo mudando as circunstâncias.']
+];
+
+const needs=[
+ ['entender','Perceber melhor o que se está a passar.'],
+ ['decidir','Tomar uma decisão ou escolher um próximo passo.'],
+ ['acalmar','Parar, respirar e baixar o ruído.'],
+ ['agir','Saber o que dizer ou fazer concretamente.'],
+ ['presenca','Não atravessar isto sozinho.'],
+ ['ambiente','Mudar alguma coisa física à minha volta.']
+];
+
+const blockers=[
+ ['incerteza','Não sei o que é verdade e o que estou a imaginar.'],
+ ['erro','Tenho medo de escolher mal e arrepender-me.'],
+ ['perda','Tenho medo de perder alguém ou alguma coisa importante.'],
+ ['culpa','Sinto culpa só de pensar em escolher por mim.'],
+ ['energia','Não tenho energia para lidar com isto.'],
+ ['dinheiro','O dinheiro ou a falta de segurança limita o que consigo fazer.'],
+ ['reacao','Tenho medo da reacção dos outros.']
+];
+
+const formats=[
+ ['pequeno','Quero começar pequeno e com pouco compromisso.'],
+ ['concreto','Quero uma resposta concreta para esta situação.'],
+ ['profundo','Quero perceber as camadas e o padrão por baixo disto.'],
+ ['falar','Quero falar com alguém e organizar o que se passa.'],
+ ['pratico','Quero fazer alguma coisa física ou prática agora.']
+];
+
+const confessions={
+ relacao:[
+  ['espera','“Estou à espera de uma resposta que talvez já tenha recebido.”'],
+  ['procura','“Tenho medo de deixar de procurar e descobrir que a pessoa não vem atrás.”'],
+  ['escolhido','“Não sei se quero esta pessoa ou se quero sentir-me escolhido.”'],
+  ['potencial','“Sei que isto me custa, mas ainda não quero perder o que pode acontecer.”']
+ ],
+ mente:[
+  ['certeza','“Estou a tentar pensar até encontrar uma certeza que talvez não exista.”'],
+  ['critica','“Uma frase de alguém consegue fazer-me duvidar de tudo.”'],
+  ['controlo','“Se eu não controlar, sinto que alguma coisa vai correr mal.”'],
+  ['repeticao','“Já sei que faço isto — e volto a fazê-lo na mesma.”']
+ ],
+ corpo:[
+  ['parar','“Eu só queria conseguir desligar sem sentir que estou a falhar.”'],
+  ['limite','“O meu corpo já está a pedir uma coisa que eu continuo a ignorar.”'],
+  ['prazer','“Até cuidar de mim parece uma tarefa que tenho de merecer.”'],
+  ['ritmo','“Se continuar assim, sei que o meu corpo vai cobrar.”']
+ ],
+ pratico:[
+  ['decidir','“Eu sei que preciso de decidir; só queria uma garantia antes.”'],
+  ['dinheiro','“O dinheiro está a decidir partes da minha vida que eu queria poder escolher.”'],
+  ['trabalho','“Tenho medo de mudar e tenho medo de continuar exactamente assim.”'],
+  ['fracasso','“Parte de mim continua só para não ter de admitir que isto pode ter acabado.”']
+ ],
+ casa:[
+  ['refugio','“Queria entrar em casa e sentir que cheguei a algum lado seguro.”'],
+  ['peso','“A casa não é o problema inteiro, mas está a acrescentar peso.”'],
+  ['mudanca','“Preciso de mudar alguma coisa à minha volta para conseguir respirar melhor.”'],
+  ['meu','“A casa é minha, mas já não parece verdadeiramente minha.”']
+ ],
+ companhia:[
+  ['sozinho','“Eu consigo fazer isto sozinho; só já não quero ter de fazer tudo sozinho.”'],
+  ['presenca','“O que eu queria agora era presença, não mais um conselho.”'],
+  ['utilidade','“Às vezes sinto que as pessoas aparecem mais pelo que faço por elas.”'],
+  ['pertenca','“Há pessoas à minha volta e, mesmo assim, sinto que não pertenço.”']
+ ]
+};
+
+const territoryMap={
+ indefinida:['relacoes-indefinidas','Relações Indefinidas'],abandono:['rejeicao-abandono','Rejeição & Abandono'],conflito:['comunicacao-conflito','Comunicação & Conflito'],fim:['separacao-fim','Separação & Fim'],
+ ansiedade:['ansiedade-antecipacao','Ansiedade & Antecipação'],ruminacao:['ruminacao-pensar-demais','Ruminação & Pensar Demais'],validacao:['necessidade-aprovacao','Aprovação & Validação'],padrao:['padroes','Eu & Padrões'],
+ cansaco:['energia-cansaco','Energia & Cansaço'],descanso:['descanso-culpa','Descanso & Culpa'],'corpo-imagem':['corpo-imagem','Corpo & Imagem'],ritmo:['ritmo-sobrecarga','Ritmo & Sobrecarga'],
+ trabalho:['trabalho','Trabalho & Caminho'],dinheiro:['dinheiro','Dinheiro & Segurança'],decisao:['escolhas','Escolhas & Mudança'],projeto:['negocio-parado','Negócio Parado'],
+ refugio:['casa-refugio','Casa & Refúgio'],desordem:['desarrumacao-desapego','Desarrumação & Desapego'],'mudanca-casa':['mudanca-de-casa','Mudança de Casa'],atmosfera:['casa-refugio','Casa & Refúgio'],
+ solidao:['solidao-companhia','Solidão & Companhia'],presenca:['solidao-companhia','Solidão & Companhia'],amizade:['amizade-reciprocidade','Amizade & Reciprocidade'],pertenca:['pertenca-grupo','Pertença & Grupo']
+};
+
+const doorMap={relacao:'CABEÇA',mente:'CABEÇA',corpo:'CORPO',pratico:'CABEÇA',casa:'CASA',companhia:'COMPANHIA'};
+
+function questionFor(step){
+ if(step===0)return ['Onde sentes primeiro que alguma coisa não está bem?',domains,'domain'];
+ if(step===1)return ['O que mais se parece com aquilo que estás a viver?',pains[state.domain]||pains.mente,'pain'];
+ if(step===2)return ['Quando isto aperta, o que costumas fazer?',patterns,'pattern'];
+ if(step===3)return ['Há quanto tempo isto está contigo?',durations,'duration'];
+ if(step===4)return ['O que seria mais útil para ti hoje?',needs,'need'];
+ if(step===5)return ['O que mais te impede de avançar?',blockers,'blocker'];
+ if(step===6)return ['Como gostarias de começar?',formats,'format'];
+ return ['Qual destas frases te custa mais admitir?',confessions[state.domain]||confessions.mente,'confession'];
 }
+
+function section(id){document.querySelectorAll('.step').forEach(x=>x.classList.remove('on'));$(id).classList.add('on')}
+function show(){state.step=0;section('questions');track('maison_test_start');render()}
+function render(){
+ const [text,opts,key]=questionFor(state.step);
+ $('progress').textContent=(state.step+1)+' / 8';
+ $('bar').style.width=(((state.step+1)/8)*100)+'%';
+ $('question').textContent=text;$('choices').innerHTML='';
+ opts.forEach(([value,label])=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=()=>answer(key,value,label);$('choices').appendChild(b)});
+ $('question').focus();
+}
+function answer(key,value,label){
+ state[key]=value;
+ track('maison_test_answer',{step:state.step+1,key,choice:value});
+ state.step++;
+ if(state.step<8)render();else finish();
+}
+
+function inferTerritory(){
+ const direct=territoryMap[state.pain]||['padroes','Eu & Padrões'];
+ state.territory=direct[0];
+ state.territoryLabel=direct[1];
+ state.door=doorMap[state.domain]||'CABEÇA';
+ return direct;
+}
+function oracleHref(){return '../oraculo/'+state.territory+'.html'}
+function offer(href,label,price,role){return {href,label,price,role}}
+
+function chooseOffers(){
+ const low=offer(oracleHref(),state.territoryLabel+' · Oráculo','2 €','entrada');
+ let primary,deep;
+
+ if(state.domain==='casa'){
+   if(state.pain==='atmosfera'||state.need==='ambiente') primary=offer('../produtos/nevoa/','Névoa de Ambiente','6,50 €','recomendada');
+   else primary=offer('../produtos/vela-pequena/','Vela Aromática','8 €','recomendada');
+   deep=offer('../produtos/vela-vidro/','Vela Aromática · 170 g','14 €','mais completa');
+ }else if(state.domain==='corpo'){
+   primary=state.need==='acalmar'||state.pain==='descanso'
+     ? offer('../produtos/escalda-pes/','Escalda-Pés','5 €','recomendada')
+     : offer('../produtos/oleo-massagem/','Óleo de Massagem','12–12,50 €','recomendada');
+   deep=offer('../servicos/','Serviços MAISON JF®','ver opções','aprofundar');
+ }else if(state.domain==='companhia'&&state.need==='presenca'){
+   primary=offer('../portas/companhia.html','Companhia MAISON JF®','mín. 2 h','recomendada');
+   deep=offer('../servicos/#continuidade','Escuta / Continuidade','desde 60 €','aprofundar');
+ }else{
+   if(state.format==='pequeno') primary=low;
+   else if(state.format==='concreto'||state.need==='agir'||state.need==='decidir') primary=offer('../contacto/?interesse=tarot-expresso','Tarot Expresso','17 €','recomendada');
+   else if(state.format==='falar') primary=offer('../contacto/?interesse=escuta','Escuta Orientada','60 €','recomendada');
+   else if(state.format==='profundo'||state.duration==='recorrente') primary=offer('../contacto/?interesse=tarot','Tarot Integrativo','35 €','recomendada');
+   else primary=low;
+   deep=state.duration==='recorrente'||state.format==='profundo'
+     ? offer('../contacto/?interesse=tarot-terapeutico','Tarot Terapêutico','70 €','aprofundar')
+     : offer('../contacto/?interesse=consulta-escrita-aprofundada','Consulta Escrita Aprofundada','45 €','aprofundar');
+ }
+ const items=[primary];
+ if(primary.href!==low.href)items.push(low);
+ if(deep&&deep.href!==primary.href&&items.length<3)items.push(deep);
+ return items.slice(0,3);
+}
+
+function recognition(){
+ const c={
+  relacao:'Há uma relação, ausência ou ligação a consumir mais espaço do que a informação real que tens.',
+  mente:'A tua cabeça está a tentar produzir segurança através de pensamento, controlo ou confirmação.',
+  corpo:'O corpo está a carregar uma parte daquilo que tens continuado a empurrar.',
+  pratico:'Há uma decisão prática a pedir critérios, não mais nevoeiro.',
+  casa:'O espaço à tua volta está a participar na forma como te sentes.',
+  companhia:'O que está a faltar não é necessariamente uma solução. Pode ser presença.'
+ };
+ let second='';
+ if(state.pattern==='ruminar')second=' Estás a tentar pensar até chegar a uma certeza.';
+ if(state.pattern==='evitar')second=' Tens adiado o contacto directo com aquilo que te pesa.';
+ if(state.pattern==='validar')second=' A opinião externa está a ganhar demasiado peso na tua própria leitura.';
+ if(state.pattern==='excesso')second=' Tens tentado compensar a incerteza fazendo ou controlando mais.';
+ return (c[state.domain]||c.mente)+second;
+}
+
 function finish(){
- const key=winner(),r=routes[key];
- $('resultTitle').textContent=r.title;$('resultText').textContent=r.text;$('offerTitle').textContent=r.offer;$('offerText').textContent=r.offerText;
- $('offerCta').href=r.href;$('offerCta').textContent=r.cta;
+ inferTerritory();
+ const offers=chooseOffers();
+ $('resultTitle').textContent=state.territoryLabel;
+ $('resultText').textContent=recognition();
+ $('resultMeta').innerHTML='<span>'+state.door+'</span><span>'+state.territoryLabel+'</span><span>'+(state.duration==='recorrente'?'Padrão recorrente':'Momento actual')+'</span>';
+ const primary=offers[0];
+ $('offerTitle').textContent=primary.label+' · '+primary.price;
+ $('offerText').textContent=primary.role==='entrada'
+   ? 'Queres começar pequeno. Esta é a entrada paga mais leve para o território que escolheste.'
+   : 'Pelo que escolheste nas oito perguntas, esta é a opção que melhor corresponde à forma como queres começar agora.';
+ $('offerCta').href=primary.href;$('offerCta').textContent='Começar por aqui · '+primary.price;
  $('offerOptions').innerHTML='';
- (r.alternatives||[]).forEach(pair=>{const a=document.createElement('a');a.className='text-link';a.dataset.offerAlt='1';a.href=pair[0];a.textContent=pair[1];$('offerOptions').appendChild(a)});
- $('routeChooser').innerHTML='';
- if(key==='cabeca')$('routeChooser').appendChild(headChooser());
- const deeper=depth==='servico';
- if(key==='companhia'&&depth==='servico'){$('nextText').textContent='Se o que procuras não é presença num plano, mas continuidade para trabalhar uma situação, Companhia e Acompanhamento são coisas diferentes.';$('nextCta').href='../servicos/#continuidade';$('nextCta').textContent='Ver Acompanhamentos →'}
- else if(depth==='oraculo'){$('nextText').textContent='Queres uma primeira orientação antes de aprofundar.';$('nextCta').href='../oraculo/';$('nextCta').textContent='Abrir o Oráculo · 2 € →'}
- else if(deeper){$('nextText').textContent='Se uma intervenção pontual não chega, existem formatos de continuidade.';$('nextCta').href='../servicos/#continuidade';$('nextCta').textContent='Ver Continuidade →'}
- else {$('nextText').textContent='O primeiro passo não tem de ser o último. Se queres começar pequeno, o Oráculo é a entrada paga mais leve.';$('nextCta').href='../oraculo/';$('nextCta').textContent='Abrir o Oráculo · 2 € →'}
- section('result');$('resultTitle').focus();track('maison_test_result',{door:key,depth,score:scores[key],tie:Object.values(scores).filter(v=>v===scores[key]).length>1});
+ offers.slice(1).forEach(o=>{const a=document.createElement('a');a.href=o.href;a.dataset.offerAlt='1';a.innerHTML='<small>'+o.role+'</small><strong>'+o.label+'</strong><br><span>'+o.price+'</span>';$('offerOptions').appendChild(a)});
+ section('result');$('resultTitle').focus();
+ track('maison_test_result',{door:state.door,domain:state.domain,pain:state.pain,territory:state.territory,pattern:state.pattern,duration:state.duration,need:state.need,blocker:state.blocker,format:state.format,confession:state.confession,primary_offer:primary.label,primary_href:primary.href});
 }
-function restart(){i=0;scores={casa:0,corpo:0,cabeca:0,companhia:0};depth='';answers=[];section('intro');$('start').focus();track('maison_test_restart')}
+function restart(){Object.assign(state,{step:0,domain:'',pain:'',pattern:'',duration:'',need:'',blocker:'',format:'',confession:'',door:'',territory:''});section('intro');$('start').focus();track('maison_test_restart')}
 $('start').onclick=show;$('restart').onclick=restart;
-$('offerCta').onclick=()=>track('maison_test_offer_click',{destination:$('offerCta').getAttribute('href')});
-$('offerOptions').onclick=e=>{const a=e.target.closest('a');if(a)track('maison_test_offer_click',{destination:a.getAttribute('href'),alternative:true})};
-$('routeChooser').onclick=e=>{const a=e.target.closest('[data-route]');if(a)track('maison_test_head_route',{route:a.dataset.route})};
-$('nextCta').onclick=()=>track('maison_test_next_click',{destination:$('nextCta').getAttribute('href')});
+$('offerCta').onclick=()=>track('maison_test_offer_click',{primary:true,destination:$('offerCta').getAttribute('href'),territory:state.territory});
+$('offerOptions').onclick=e=>{const a=e.target.closest('a');if(a)track('maison_test_offer_click',{primary:false,destination:a.getAttribute('href'),territory:state.territory})};
 </script>
 </body>
 </html>

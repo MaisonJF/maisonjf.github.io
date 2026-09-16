@@ -1,27 +1,44 @@
 export const MAISON_OFFER_BRAIN={
-  version:'2026-09-16',
+  version:'2026-09-16-v2',
   freeOnly:'/teste/',
-  entryPaid:{oracle:'/oraculo/',services:'/servicos/',products:'/produtos/',ebooks:'/ebooks/',company:'/portas/companhia.html'},
+  maxOffers:3,
+  principles:{
+    primary:'Mostra primeiro a opção que corresponde à necessidade e formato escolhidos.',
+    lowerBarrier:'Quando a recomendação principal custa mais de 2 €, pode existir uma entrada Oráculo de 2 € no mesmo território.',
+    deeper:'A terceira opção, quando existe, aprofunda; não duplica a recomendação principal.',
+    noDarkPatterns:'Não inventar urgência, escassez, diagnóstico, medo ou promessa de resultado para provocar compra.'
+  },
+  ladders:{
+    clarity:['Oráculo · 2 €','Tarot Expresso · 17 €','Consulta Escrita · 25–45 €','Tarot Integrativo · 35 €','Escuta · 60 €','Tarot Terapêutico · 70 €','Continuidade'],
+    body:['Escalda-Pés · 5 €','Óleo de Massagem · 12–12,50 €','Serviços'],
+    home:['Névoa · 6,50 €','Vela Aromática · 8 €','Vela Aromática · 14 €'],
+    company:['Oráculo · 2 €','Companhia','Escuta / Continuidade']
+  },
+  dimensions:['origin','domain','pain','pattern','duration','need','blocker','format','confession'],
   originRules:[
-    {prefix:'relacoes/',destination:'/oraculo/amor.html',label:'Oráculo · Amor & Relações · 2 €'},
-    {prefix:'decisoes/',destination:'/oraculo/escolhas.html',label:'Oráculo · Escolhas & Mudança · 2 €'},
-    {prefix:'cabeca/',destination:'/oraculo/padroes.html',label:'Oráculo · Eu & Padrões · 2 €'},
-    {prefix:'trabalho/',destination:'/oraculo/trabalho.html',label:'Oráculo · Trabalho & Caminho · 2 €'},
-    {prefix:'tarot/',destination:'/servicos/#consultas',label:'Consultas MAISON JF®'},
-    {prefix:'espiritualidade/',destination:'/oraculo/',label:'Escolher território do Oráculo · 2 €'},
-    {prefix:'casa/',destination:'/produtos/',label:'Produtos · Casa'},
-    {prefix:'corpo/',destination:'/produtos/',label:'Produtos · Corpo'},
-    {prefix:'companhia/',destination:'/portas/companhia.html',label:'Companhia'},
-    {prefix:'presentes/',destination:'/produtos/',label:'Produtos MAISON JF®'},
-    {prefix:'profissionais/',destination:'/profissionais/',label:'Espaço Profissional'}
+    {prefix:'relacoes/',territory:'amor',destination:'/oraculo/amor.html'},
+    {prefix:'decisoes/',territory:'escolhas',destination:'/oraculo/escolhas.html'},
+    {prefix:'cabeca/',territory:'padroes',destination:'/oraculo/padroes.html'},
+    {prefix:'trabalho/',territory:'trabalho',destination:'/oraculo/trabalho.html'},
+    {prefix:'casa/',destination:'/produtos/'},
+    {prefix:'corpo/',destination:'/produtos/'},
+    {prefix:'companhia/',destination:'/portas/companhia.html'},
+    {prefix:'tarot/',destination:'/servicos/#consultas'},
+    {prefix:'espiritualidade/',destination:'/oraculo/'},
+    {prefix:'presentes/',destination:'/produtos/'},
+    {prefix:'profissionais/',destination:'/profissionais/'}
   ]
 };
-export function routeMaisonOffer({origin='',door='',depth=''}={}){
+export function routeMaisonOffer(signal={}){
+  const {origin='',domain='',format='',duration='',territory=''}=signal;
   const byOrigin=MAISON_OFFER_BRAIN.originRules.find(r=>origin.startsWith(r.prefix));
-  if(byOrigin)return byOrigin;
-  if(depth==='oraculo')return {destination:'/oraculo/',label:'Oráculo · 2 €'};
-  if(depth==='servico')return {destination:'/servicos/',label:'Serviços MAISON JF®'};
-  if(door==='casa'||door==='corpo'||depth==='produto')return {destination:'/produtos/',label:'Produtos MAISON JF®'};
-  if(door==='companhia')return {destination:'/portas/companhia.html',label:'Companhia'};
-  return {destination:'/oraculo/',label:'Oráculo · 2 €'};
+  if(byOrigin&&domain==='')return byOrigin;
+  if(domain==='casa')return {destination:'/produtos/',ladder:'home'};
+  if(domain==='corpo')return {destination:'/produtos/',ladder:'body'};
+  if(domain==='companhia')return {destination:'/portas/companhia.html',ladder:'company'};
+  if(format==='pequeno')return {destination:'/oraculo/'+(territory||'')+'.html',ladder:'clarity'};
+  if(format==='concreto')return {destination:'/contacto/?interesse=tarot-expresso',ladder:'clarity'};
+  if(format==='falar')return {destination:'/contacto/?interesse=escuta',ladder:'clarity'};
+  if(format==='profundo'||duration==='recorrente')return {destination:'/contacto/?interesse=tarot',ladder:'clarity'};
+  return {destination:'/oraculo/'+(territory||'')+'.html',ladder:'clarity'};
 }
