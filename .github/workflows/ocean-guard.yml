@@ -21,11 +21,22 @@ jobs:
           import json
           import pathlib
           import re
-          import sys
-          import xml.etree.ElementTree as ET
+          from urllib.parse import urlparse
 
           OCEAN_DIRS=('relacoes/','cabeca/','decisoes/','casa/','corpo/','companhia/','presentes/','tarot/','espiritualidade/','trabalho/','dinheiro/')
           root=pathlib.Path('.')
+          domain='https://maison-jf.com'
+
+          def public_path(file_path):
+              return re.sub(r'\.html$','',file_path)
+
+          def backing_file(loc):
+              path=urlparse(loc).path
+              if path=='/':
+                  return root/'index.html'
+              if path.endswith('/'):
+                  return root/path.lstrip('/')/'index.html'
+              return root/(path.lstrip('/')+'.html')
 
           source=(root/'functions/_lib/seo-pillars-2026.js').read_text(encoding='utf-8')
           match=re.search(r'export const SEO_PILLARS_2026=(\[.*?\]);\n\nexport const',source,re.S)
@@ -35,12 +46,20 @@ jobs:
           pillar_paths={p['path'] for p in pillars}
 
           redirect_sources=set()
+          redirect_targets=[]
           for raw in (root/'_redirects').read_text(encoding='utf-8').splitlines():
               line=raw.strip()
               if not line or line.startswith('#'): continue
               parts=line.split()
               if len(parts)>=3 and parts[-1]=='301':
-                  redirect_sources.add(parts[0].lstrip('/'))
+                  src=parts[0].lstrip('/')
+                  redirect_sources.add(public_path(src))
+                  redirect_targets.append(parts[1])
+          bad_targets=[t for t in redirect_targets if re.match(r'^[^?#]*\.html(?:[?#]|$)',t)]
+          if bad_targets:
+              print('REDIRECT TARGETS STILL USE .html:')
+              for t in bad_targets: print(' -',t)
+              raise SystemExit(1)
 
           oceans=[]
           for d in OCEAN_DIRS:
@@ -51,13 +70,13 @@ jobs:
                   if rel.endswith('/index.html'): continue
                   oceans.append(rel)
 
-          orphaned=sorted(p for p in oceans if p not in pillar_paths and p not in redirect_sources)
+          orphaned=sorted(p for p in oceans if p not in pillar_paths and public_path(p) not in redirect_sources)
           if orphaned:
               print('OCEANS WITHOUT A PUBLIC SINK:')
               for p in orphaned: print(' -',p)
               raise SystemExit(1)
 
-          # Public pillars must remain indexable and in public sitemap.
+          # Public pillars must remain indexable, self-canonical and in the public sitemap.
           sitemap=(root/'sitemap-maison.xml').read_text(encoding='utf-8')
           broken=[]
           for p in pillars:
@@ -65,14 +84,80 @@ jobs:
               if not path.exists():
                   broken.append((p['path'],'missing file')); continue
               html=path.read_text(encoding='utf-8')
-              if 'index,follow' not in html:
-                  broken.append((p['path'],'not index,follow'))
-              url='https://maison-jf.com/'+p['path']
+              robots=''.join(re.findall(r'<meta\b[^>]*name=["\']robots["\'][^>]*>',html,re.I))
+              if 'noindex' in robots.lower():
+                  broken.append((p['path'],'noindex'))
+              url=domain+'/'+public_path(p['path'])
               if url not in sitemap:
-                  broken.append((p['path'],'missing from public sitemap'))
+                  broken.append((p['path'],'missing clean URL from public sitemap'))
+              links=re.findall(r'<link\b[^>]*>',html,re.I)
+              canonical_tags=[tag for tag in links if re.search(r'\brel=["\']canonical["\']',tag,re.I)]
+              href=''
+              if canonical_tags:
+                  hm=re.search(r'\bhref=["\']([^"\']+)',canonical_tags[0],re.I)
+                  href=hm.group(1) if hm else ''
+              if href!=url:
+                  broken.append((p['path'],'canonical is not the clean public URL'))
+
+          # Sitemap index must reference existing public URL sets only.
+          index=(root/'sitemap.xml').read_text(encoding='utf-8')
+          child_urls=re.findall(r'<loc>(https://maison-jf\.com/[^<]+\.xml)</loc>',index)
+          if not child_urls:
+              broken.append(('sitemap.xml','contains no child sitemaps'))
+
+          public_locs=[]
+          for child in child_urls:
+              name=child.rsplit('/',1)[-1]
+              f=root/name
+              if not f.exists():
+                  broken.append((name,'referenced by sitemap.xml but missing'))
+                  continue
+              stext=f.read_text(encoding='utf-8')
+              if '<urlset' not in stext:
+                  broken.append((name,'is not a URL-set sitemap'))
+                  continue
+              public_locs.extend(re.findall(r'<loc>(.*?)</loc>',stext))
+
+          seen=set()
+          for loc in public_locs:
+              if loc in seen:
+                  broken.append((loc,'duplicate public sitemap URL'))
+                  continue
+              seen.add(loc)
+              if not loc.startswith(domain+'/') and loc!=domain+'/':
+                  broken.append((loc,'wrong host'))
+                  continue
+              if loc.endswith('.html'):
+                  broken.append((loc,'public sitemap URL still ends in .html'))
+                  continue
+              pth=urlparse(loc).path.lstrip('/')
+              if pth in redirect_sources:
+                  broken.append((loc,'public sitemap exposes a redirect source'))
+                  continue
+              file=backing_file(loc)
+              if not file.exists():
+                  broken.append((loc,'missing backing file '+file.as_posix()))
+                  continue
+              html=file.read_text(encoding='utf-8')
+              robots_tags=re.findall(r'<meta\b[^>]*name=["\']robots["\'][^>]*>',html,re.I)
+              if robots_tags:
+                  cm=re.search(r'\bcontent=["\']([^"\']+)',robots_tags[0],re.I)
+                  if cm and 'noindex' in cm.group(1).lower().replace(' ',''):
+                      broken.append((loc,'noindex URL exposed by public sitemap'))
+              links=re.findall(r'<link\b[^>]*>',html,re.I)
+              canonical_tags=[tag for tag in links if re.search(r'\brel=["\']canonical["\']',tag,re.I)]
+              if not canonical_tags:
+                  broken.append((loc,'missing canonical'))
+              else:
+                  hm=re.search(r'\bhref=["\']([^"\']+)',canonical_tags[0],re.I)
+                  href=hm.group(1) if hm else ''
+                  if href!=loc:
+                      broken.append((loc,'canonical mismatch: '+href))
+
           if broken:
-              print('BROKEN PUBLIC PILLARS:')
-              for p,why in broken: print(' -',p,why)
+              print('BROKEN PUBLIC URL CONTRACT:')
+              for p,why in broken:
+                  print(' -',p,why)
               raise SystemExit(1)
 
           # Mobile hub contract: never more than 8 returned search results.
@@ -83,5 +168,6 @@ jobs:
           print('Oceans:',len(oceans))
           print('Public pillars:',len(pillar_paths))
           print('Redirected/internal Oceans:',len(oceans)-len(pillar_paths))
-          print('All Oceans flow into a public MAISON JF® sink.')
+          print('Public sitemap URLs:',len(public_locs))
+          print('All Oceans flow into a public MAISON JF® sink with clean canonical URLs.')
           PY
