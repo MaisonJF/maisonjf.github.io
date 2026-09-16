@@ -1,0 +1,87 @@
+name: Oceans Guard
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-oceans:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Ensure every Ocean flows somewhere public
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import pathlib
+          import re
+          import sys
+          import xml.etree.ElementTree as ET
+
+          OCEAN_DIRS=('relacoes/','cabeca/','decisoes/','casa/','corpo/','companhia/','presentes/','tarot/','espiritualidade/','trabalho/')
+          root=pathlib.Path('.')
+
+          source=(root/'functions/_lib/seo-pillars-2026.js').read_text(encoding='utf-8')
+          match=re.search(r'export const SEO_PILLARS_2026=(\[.*?\]);\n\nexport const',source,re.S)
+          if not match:
+              raise SystemExit('Could not parse SEO pillar registry')
+          pillars=json.loads(match.group(1))
+          pillar_paths={p['path'] for p in pillars}
+
+          redirect_sources=set()
+          for raw in (root/'_redirects').read_text(encoding='utf-8').splitlines():
+              line=raw.strip()
+              if not line or line.startswith('#'): continue
+              parts=line.split()
+              if len(parts)>=3 and parts[-1]=='301':
+                  redirect_sources.add(parts[0].lstrip('/'))
+
+          oceans=[]
+          for d in OCEAN_DIRS:
+              folder=root/d
+              if not folder.exists(): continue
+              for path in folder.rglob('*.html'):
+                  rel=path.as_posix()
+                  if rel.endswith('/index.html'): continue
+                  oceans.append(rel)
+
+          orphaned=sorted(p for p in oceans if p not in pillar_paths and p not in redirect_sources)
+          if orphaned:
+              print('OCEANS WITHOUT A PUBLIC SINK:')
+              for p in orphaned: print(' -',p)
+              raise SystemExit(1)
+
+          # Public pillars must remain indexable and in public sitemap.
+          sitemap=(root/'sitemap-maison.xml').read_text(encoding='utf-8')
+          broken=[]
+          for p in pillars:
+              path=root/p['path']
+              if not path.exists():
+                  broken.append((p['path'],'missing file')); continue
+              html=path.read_text(encoding='utf-8')
+              if 'index,follow' not in html:
+                  broken.append((p['path'],'not index,follow'))
+              url='https://maison-jf.com/'+p['path']
+              if url not in sitemap:
+                  broken.append((p['path'],'missing from public sitemap'))
+          if broken:
+              print('BROKEN PUBLIC PILLARS:')
+              for p,why in broken: print(' -',p,why)
+              raise SystemExit(1)
+
+          # Mobile hub contract: never more than 8 returned search results.
+          hub=(root/'respostas/index.html').read_text(encoding='utf-8')
+          if '.slice(0,8)' not in hub:
+              raise SystemExit('Respostas hub lost the max-8 search-results contract')
+
+          print('Oceans:',len(oceans))
+          print('Public pillars:',len(pillar_paths))
+          print('Redirected/internal Oceans:',len(oceans)-len(pillar_paths))
+          print('All Oceans flow into a public MAISON JF® sink.')
+          PY
