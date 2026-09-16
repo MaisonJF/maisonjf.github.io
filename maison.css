@@ -568,3 +568,18 @@
     aspect-ratio:4/3;
   }
 }
+
+
+/* Product media visibility 2026-09-16 */
+.product-hero--no-media{
+  grid-template-columns:minmax(0,760px);
+  justify-content:start;
+}
+.product-hero--no-media .product-hero__copy{
+  max-width:760px;
+}
+@media(max-width:900px){
+  .product-hero--no-media{
+    grid-template-columns:1fr;
+  }
+}
