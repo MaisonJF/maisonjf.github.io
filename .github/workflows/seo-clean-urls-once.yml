@@ -23,7 +23,7 @@ jobs:
         run: |
           git config user.name "Maison JF SEO Repair"
           git config user.email "maisonjf@proton.me"
-          git rm .github/workflows/seo-clean-urls-once.yml scripts/seo_clean_urls_once.py
+          git rm scripts/seo_clean_urls_once.py
           git add -A
           git diff --cached --check
           git commit -m "SEO: normalize Cloudflare clean URLs and canonical discovery"
