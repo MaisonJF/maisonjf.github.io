@@ -10,14 +10,13 @@ MAISON JF® is organised around four public doors: Casa, Corpo, Cabeça and Comp
 The public experience starts with what a person is living or trying to change, not with a product category.
 
 Core path:
-human need or question → useful content / Test → relevant Door → contextual offer → optional continuity.
+human need or question → free Test → internal Oceans routing → relevant paid offer → optional continuity.
 
 “Voltar Para Casa” means returning to one’s needs, limits, clarity, presence and care, and can also refer to making the physical home feel more welcoming.
 
 ## Canonical navigation
 - Home: https://maison-jf.com/
 - Test — O QUE ESTÁS A IGNORAR?: https://maison-jf.com/teste/
-- Respostas: https://maison-jf.com/respostas/
 - Produtos: https://maison-jf.com/produtos/
 - Serviços: https://maison-jf.com/servicos/
 - Ebooks: https://maison-jf.com/ebooks/
@@ -108,10 +107,11 @@ Announced:
 Published ebooks use Stripe checkout and authenticated post-payment download access.
 Each book can support a cover and an expandable editorial media collection.
 
-## Respostas and discovery content
-Respostas and the wider discovery pages answer human questions first and then offer relevant Maison destinations.
-Important fields include relationships, decisions, body/self-care, home/aroma, spirituality, Tarot, gifts, companionship and professional/B2B needs.
-Pages should remain useful even if the reader buys nothing.
+## Oceans and routing
+Oceans is an internal intent and pain-language engine used to understand what a visitor may need and to route towards paid MAISON JF® offers.
+Oceans is not a public free-answer library.
+The only free diagnostic experience is the Test at https://maison-jf.com/teste/.
+Public paid destinations include the Oráculo, products, services, ebooks and Companhia.
 
 ## Editorial language
 The visual/editorial rhythm is:
