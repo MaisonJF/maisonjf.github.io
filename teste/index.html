@@ -10,25 +10,30 @@
 <link rel="stylesheet" href="../maison.css">
 <script src="../analytics.js" defer></script>
 <style>
-.test{min-height:100svh;padding:120px 20px 70px;background:radial-gradient(circle at 50% 12%,#28221c,#0b0a09 36%,#050505 72%)}
-.box{width:min(800px,100%);margin:auto}.step{display:none}.step.on{display:block}
-.progress{font:10px Arial;letter-spacing:.18em;text-transform:uppercase;color:#8f887d;margin-bottom:26px}
-.progressbar{height:2px;background:#292621;margin:-14px 0 34px;overflow:hidden}.progressbar span{display:block;height:100%;background:#b79a62;transition:width .25s ease}
-.title{font:400 clamp(48px,8vw,88px)/.95 var(--serif);margin:.2em 0}.q{font:400 clamp(27px,4vw,40px)/1.2 var(--serif);margin:25px 0}
-.choices{display:grid;gap:10px}.choices button{padding:17px 18px;text-align:left;border:1px solid var(--line);background:#0e0e0e;color:#eee9df;font:17px/1.4 var(--serif);cursor:pointer}
-.choices button:hover,.choices button:focus-visible{background:#171512;border-color:#7d6a48;outline:none}
-.result{border-top:1px solid var(--line);padding-top:30px}.offer{margin:34px 0;padding:28px;border:1px solid rgba(183,154,98,.38);background:rgba(183,154,98,.06)}
-.offer h2{font:400 32px/1.05 var(--serif);margin:.2em 0}.offer-options{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.offer-options:empty{display:none}.offer-options a{font-size:13px}
-.next{color:#bdb6aa}.restart{border:0;background:none;color:#999;text-decoration:underline;cursor:pointer;margin-top:25px}
-.route-chooser p{color:#aaa39a}.route-options a strong{display:block;font:400 18px/1.1 var(--serif);margin-bottom:5px}.route-options a span{color:#9b9489;font-size:12px}
+.test{min-height:100svh;padding:132px 22px 86px;background:radial-gradient(circle at 50% 0,#2a2118 0,#11100e 34%,#070707 72%);display:grid;align-items:center}
+.box{width:min(900px,100%);margin:auto}.step{display:none}.step.on{display:block}
+.progress{font:600 9px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:#8f887d;margin-bottom:26px}
+.progressbar{height:1px;background:#2f2a24;margin:-13px 0 46px;overflow:hidden}.progressbar span{display:block;height:100%;background:#c3a66d;transition:width .28s ease}
+.title{font:400 clamp(54px,9vw,106px)/.9 var(--serif);letter-spacing:-.035em;margin:.16em 0 .34em}
+#intro>p:not(.eyebrow){max-width:610px;font:400 clamp(18px,2.2vw,23px)/1.55 var(--serif);color:#bcb4a9;margin-bottom:32px}
+.q{font:400 clamp(31px,4.6vw,52px)/1.08 var(--serif);letter-spacing:-.02em;margin:28px 0 38px;max-width:850px}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.choices button{min-height:108px;padding:22px 24px;text-align:left;border:1px solid var(--line);background:rgba(15,15,14,.72);color:#eee9df;font:400 18px/1.38 var(--serif);cursor:pointer;transition:background .2s ease,border-color .2s ease,transform .2s ease}
+.choices button:hover,.choices button:focus-visible{background:#171512;border-color:#8b7650;outline:none;transform:translateY(-2px)}
+#result>p:not(.eyebrow){max-width:700px;font:400 19px/1.6 var(--serif);color:#bcb4a9}
+.offer{margin:42px 0;padding:34px;border:1px solid rgba(183,154,98,.38);background:linear-gradient(145deg,rgba(183,154,98,.08),rgba(255,255,255,.015))}
+.offer h2{font:400 clamp(30px,4vw,43px)/1.02 var(--serif);margin:.2em 0 .35em}.offer-options{display:flex;flex-wrap:wrap;gap:12px 18px;margin-top:18px}.offer-options:empty{display:none}.offer-options a{font-size:13px}
+.next{color:#bdb6aa;max-width:690px}.restart{border:0;background:none;color:#8e877d;text-decoration:underline;cursor:pointer;margin-top:32px}
+.route-chooser{margin-top:34px}.route-chooser p{color:#aaa39a}.route-chooser h3{font-size:29px;margin-bottom:10px}.route-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.route-options a{padding:18px;background:rgba(0,0,0,.18)}.route-options a strong{display:block;font:400 20px/1.1 var(--serif);margin-bottom:6px}.route-options a span{color:#9b9489;font-size:12px}
+@media(max-width:700px){.test{padding:108px 18px 60px;align-items:start}.title{font-size:54px}.q{font-size:32px;margin-bottom:28px}.choices,.route-options{grid-template-columns:1fr}.choices button{min-height:86px}.offer{padding:24px}}
 </style>
 </head>
 <body>
 <header class="site-header"><a class="brand" href="../">MAISON JF®</a><nav><a href="../respostas/">Respostas</a><a href="../oraculo/">Oráculo</a><a href="../produtos/">Produtos</a><a href="../servicos/">Serviços</a></nav></header>
 <main class="test"><div class="box">
-<section id="intro" class="step on"><p class="eyebrow">≈ 2 minutos · sem resposta certa</p><h1 class="title">O QUE ESTÁS<br>A IGNORAR?</h1><p>Não é um diagnóstico nem uma máquina de te empurrar para a oferta mais cara. É uma triagem breve para perceber por onde pode fazer sentido começar.</p><button class="button button--light" id="start">Começar</button></section>
+<section id="intro" class="step on"><p class="eyebrow">≈ 2 minutos · 7 perguntas</p><h1 class="title">O QUE ESTÁS<br>A IGNORAR?</h1><p>Sete situações para perceber onde estás a gastar mais de ti. No fim, encontras uma Porta e vários primeiros passos possíveis — não uma resposta única para toda a gente.</p><button class="button button--light" id="start">Começar</button></section>
 <section id="questions" class="step"><div class="progress" id="progress" aria-live="polite"></div><div class="progressbar" aria-hidden="true"><span id="bar"></span></div><div class="q" id="question" tabindex="-1"></div><div class="choices" id="choices"></div></section>
-<section id="result" class="step"><p class="eyebrow">O teu ponto de entrada</p><h1 class="title" id="resultTitle" tabindex="-1"></h1><p id="resultText"></p>
+<section id="result" class="step"><p class="eyebrow">A Porta que está a chamar mais alto</p><h1 class="title" id="resultTitle" tabindex="-1"></h1><p id="resultText"></p>
 <div class="offer"><p class="eyebrow">Primeiro gesto</p><h2 id="offerTitle"></h2><p id="offerText"></p><a class="button button--light" id="offerCta"></a><div class="offer-options" id="offerOptions"></div><div id="routeChooser"></div></div>
 <p class="next" id="nextText"></p><a class="text-link" id="nextCta"></a><br><button class="restart" id="restart">Refazer o teste</button></section>
 </div></main>
