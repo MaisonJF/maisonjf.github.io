@@ -35,11 +35,8 @@
   document.head.appendChild(schema);
   const media=p.media||[];
   const root=location.pathname.includes('/produtos/'+p.slug+'/')?'../../':'../';
-  const fallback=p.category==='Casa'
-    ? {role:'ambience',src:'../images/root/casa-ambiente.webp',alt:'Atmosfera de casa MAISON JF',aspect:'portrait',editorial:true}
-    : {role:'ambience',src:'../resolver.jpg',alt:'Atmosfera editorial MAISON JF',aspect:'portrait',editorial:true};
-  const hero=media.find(m=>m.role==='hero')||media[0]||fallback;
-  const rest=media.filter(m=>m!==hero);
+  const hero=media.find(m=>m.role==='hero')||media[0]||null;
+  const rest=hero?media.filter(m=>m!==hero):media;
   const contact=`${root}contacto/?produto=${encodeURIComponent(p.slug)}&preco=${encodeURIComponent(p.priceNote||money(p.price))}`;
   const ritual=p.ritual||{title:'Leva o ritual para casa.',text:'Um gesto pequeno pode mudar a forma como o momento se sente.'};
   const complementary={Corpo:['vela-vidro','nevoa'],Casa:['escalda-pes','oleo-massagem']}[p.category]||[];
@@ -51,10 +48,10 @@
     </section>`: '';
 
   page.innerHTML=`
-    <section class="product-hero">
-      <div class="media-slot media-slot--portrait product-hero__media ${hero.editorial?'product-hero__media--editorial':''}">
+    <section class="product-hero ${hero?'':'product-hero--no-media'}">
+      ${hero?`<div class="media-slot media-slot--portrait product-hero__media ${hero.editorial?'product-hero__media--editorial':''}">
         <img src="${root}${hero.src.replace(/^\.\.\//,'')}" alt="${hero.alt||p.name}">
-      </div>
+      </div>`:''}
       <div class="product-hero__copy">
         <p class="eyebrow">${p.category} · MAISON JF®</p>
         <h1>${p.name}${p.size?` <span style="font-size:.35em">${p.size}</span>`:''}</h1>
