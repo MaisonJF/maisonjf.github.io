@@ -1502,7 +1502,7 @@ ul, ol {
 .transformacao-card__visual--escuro { background-image: linear-gradient(rgba(8,7,6,.12),rgba(8,7,6,.36)), url('resolver.jpg'); }
 .transformacao-card__visual--ambre { background-image: linear-gradient(rgba(8,7,6,.08),rgba(8,7,6,.25)), url('cansado.jpg'); }
 .transformacao-card__visual--esmeralda { background-image: linear-gradient(rgba(8,7,6,.08),rgba(8,7,6,.28)), url('espaco.jpg'); }
-.transformacao-card__visual--bordeaux { background-image: linear-gradient(rgba(8,7,6,.08),rgba(8,7,6,.28)), url('/images/root/companhia-cafe.webp'); }
+.transformacao-card__visual--bordeaux { background-image: linear-gradient(rgba(8,7,6,.08),rgba(8,7,6,.28)), url('/images/root/companhia-cafe.webp?v=20260916-1445'); }
 .transformacao-card__visual { background-size: cover; background-position: center; }
 
 .joao__visual-monogram {
