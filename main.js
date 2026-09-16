@@ -182,31 +182,25 @@
     'produto-bruma-ambiente.html': {
       label: 'Pedir Névoa · 6,50 €',
       message: 'Olá Maison JF. Quero pedir uma Névoa de Ambiente de 20 mL por 6,50 €. Que opções estão disponíveis?',
-      secondHref: 'produtos.html',
+      secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
     'produto-escalda-pes.html': {
       label: 'Pedir Escalda-Pés · 5 €',
       message: 'Olá Maison JF. Quero pedir um Escalda-Pés de 150 g por 5 €. Que referências estão disponíveis?',
-      secondHref: 'produtos.html',
+      secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
     'produto-oleo-massagem.html': {
       label: 'Pedir Óleo · 12 €',
       message: 'Olá Maison JF. Quero pedir o Óleo de Massagem de 60 mL por 12 €. Está disponível?',
-      secondHref: 'produtos.html',
-      secondText: 'Ver Produtos'
-    },
-    'produto-aguas-lencois.html': {
-      label: 'Ver disponibilidade',
-      message: 'Olá Maison JF. Quero saber que Águas de Lençóis estão disponíveis e qual é o preço.',
-      secondHref: 'produtos.html',
+      secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
     'produto-vela-aromatica.html': {
       label: 'Pedir Vela · 14 €',
       message: 'Olá Maison JF. Quero pedir uma Vela Aromática de 170 g por 14 €. Que referências estão disponíveis?',
-      secondHref: 'produtos.html',
+      secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
     'servicos.html': {
@@ -224,7 +218,7 @@
     'profissionais.html': {
       label: 'Falar de parceria',
       message: 'Olá Maison JF. Estou na área Profissional e quero falar sobre revenda, parceria ou fornecimento.',
-      secondHref: 'produtos.html',
+      secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
     'maison-todo-o-mes.html': {

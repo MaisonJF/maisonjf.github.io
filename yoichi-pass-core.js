@@ -14,7 +14,7 @@
 
   const navItems = [
     ['farol.html', 'O Farol'],
-    ['produtos.html', 'Produtos'],
+    ['/produtos/', 'Produtos'],
     ['servicos.html', 'Serviços'],
     ['companhia.html', 'Companhia'],
     ['profissionais.html', 'Profissionais'],
@@ -150,21 +150,21 @@
           title: '“Ainda nem acabou o dia e eu já não tenho mais nada para dar.”',
           desc: 'Quando até descansar dá trabalho, começa pequeno. Um gesto que diga ao corpo: por hoje chega.',
           cta: 'Quero criar a minha pausa',
-          href: 'produto-escalda-pes.html'
+          href: '/produtos/escalda-pes/'
         },
         {
           tag: 'Casa',
           title: '“Fecho a porta. O dia entra comigo na mesma.”',
           desc: 'Fechaste a porta, mas o dia veio atrás. Muda primeiro o ambiente que te recebe.',
           cta: 'Quero mudar o ambiente',
-          href: 'produto-bruma-ambiente.html'
+          href: '/produtos/nevoa/'
         },
         {
           tag: 'Companhia',
           title: '“Quantas vezes mais vou desistir só porque não tenho com quem ir?”',
           desc: 'O plano continua a apetecer-te. Só não queres vivê-lo sem ninguém ao lado.',
           cta: 'Quero conhecer a Companhia',
-          href: 'companhia.html'
+          href: '/portas/companhia.html'
         }
       ];
 
@@ -189,7 +189,7 @@
       rewriteCard(products, 'Névoa de Ambiente', 'Uma forma simples de renovar o ambiente quando chegas a casa.');
       rewriteCard(products, 'Escalda-Pés', 'Sais, agente saponificante, aroma e espuma suave para transformar água morna numa pausa completa.');
       rewriteCard(products, 'Óleo de Massagem', 'Para cuidar do corpo através do toque, do calor e de uma massagem sem pressa.');
-      rewriteCard(products, 'Águas de Lençóis', 'Uma forma leve de renovar os têxteis e preparar o ambiente do quarto antes de dormir.');
+      const legacyLinenCard = cardByTitle(products, 'Águas de Lençóis'); if (legacyLinenCard) legacyLinenCard.remove();
     }
 
     const servicesGrid = $('#servicos .services__grid');
@@ -278,14 +278,14 @@
   }
 
   /* PRODUTOS */
-  if (page === 'produtos.html') {
+  if (page === '/produtos/') {
     setText('.detail-hero .detail-title', 'A casa pesa. O corpo sente. Começa pelo que queres mudar.');
     setText('.detail-hero .detail-lead', 'Cheiro, pausa, toque, descanso. Escolhe pelo efeito que procuras.');
 
     rewriteCard(document, 'Névoa de Ambiente', 'Renova o ambiente em segundos e ajuda a marcar a passagem entre o dia lá fora e o regresso a casa.');
     rewriteCard(document, 'Escalda-Pés', 'Sais, agente saponificante, aroma e espuma suave numa experiência que vai além de um simples banho de pés.');
     rewriteCard(document, 'Óleo de Massagem', 'Óleo para massagem e toque consciente, quando o corpo pede menos pressa.');
-    rewriteCard(document, 'Águas de Lençóis', 'Renova os têxteis e o ambiente do quarto com um gesto leve antes de dormir.');
+    const legacyLinenDetail = cardByTitle(document, 'Águas de Lençóis'); if (legacyLinenDetail) legacyLinenDetail.remove();
     rewriteCard(document, 'Peças Decorativas em Jesmonite', 'Não precisas de mudar a casa toda para ela deixar de parecer provisória.');
     rewriteCard(document, 'Cristais e Pulseiras', 'Diz-nos o que procuras. Se tivermos uma opção que faça sentido, mostramos.');
 

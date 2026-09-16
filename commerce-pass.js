@@ -1,15 +1,13 @@
-/* MAISON JF® | páginas individuais de produto e caminho comercial */
+/* MAISON JF® | compatibilidade das páginas editoriais antigas com o catálogo canónico */
 (function () {
   'use strict';
 
   const page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-
   const products = {
-    'brumas': { href: 'produto-bruma-ambiente.html', label: 'Ver Névoa de Ambiente', name: 'Névoa de Ambiente MAISON JF®' },
-    'escalda-pes': { href: 'produto-escalda-pes.html', label: 'Ver Escalda-Pés', name: 'Escalda-Pés MAISON JF®' },
-    'oleo': { href: 'produto-oleo-massagem.html', label: 'Ver Óleo de Massagem', name: 'Óleo de Massagem MAISON JF®' },
-    'aguas-lencois': { href: 'produto-aguas-lencois.html', label: 'Ver Águas de Lençóis', name: 'Águas de Lençóis MAISON JF®' },
-    'velas-aromaticas': { href: 'produto-vela-aromatica.html', label: 'Ver Vela Aromática', name: 'Vela Aromática MAISON JF®' }
+    'brumas': { href: '/produtos/nevoa/', label: 'Ver Névoa de Ambiente', name: 'Névoa de Ambiente MAISON JF®' },
+    'escalda-pes': { href: '/produtos/escalda-pes/', label: 'Ver Escalda-Pés', name: 'Escalda-Pés MAISON JF®' },
+    'oleo': { href: '/produtos/oleo-massagem/', label: 'Ver Óleo de Massagem', name: 'Óleo de Massagem MAISON JF®' },
+    'velas-aromaticas': { href: '/produtos/', label: 'Ver Velas Aromáticas', name: 'Velas Aromáticas MAISON JF®' }
   };
 
   function connectProductCards() {
@@ -23,23 +21,23 @@
       action.removeAttribute('target');
       action.removeAttribute('rel');
     });
+    const obsolete = document.getElementById('aguas-lencois');
+    if (obsolete) obsolete.remove();
   }
 
   function connectHomeCards() {
     const map = {
-      'Névoa de Ambiente': 'produto-bruma-ambiente.html',
-      'Velas Aromáticas': 'produto-vela-aromatica.html',
-      'Escalda-Pés': 'produto-escalda-pes.html',
-      'Óleo de Massagem': 'produto-oleo-massagem.html',
-      'Águas de Lençóis': 'produto-aguas-lencois.html'
+      'Névoa de Ambiente': '/produtos/nevoa/',
+      'Velas Aromáticas': '/produtos/',
+      'Escalda-Pés': '/produtos/escalda-pes/',
+      'Óleo de Massagem': '/produtos/oleo-massagem/'
     };
-
     document.querySelectorAll('#explorar .catalogue-card').forEach(card => {
       const title = card.querySelector('.catalogue-card__title')?.textContent.trim();
+      if (title === 'Águas de Lençóis') { card.remove(); return; }
       if (!title || !map[title]) return;
       const action = card.querySelector('a.btn');
-      if (!action) return;
-      action.href = map[title];
+      if (action) action.href = map[title];
     });
   }
 
@@ -56,7 +54,7 @@
         '@type': 'ListItem',
         position: index + 1,
         name: item.name,
-        url: `https://maison-jf.com/${item.href}`
+        url: 'https://maison-jf.com' + item.href
       }))
     });
     document.head.appendChild(schema);
@@ -73,7 +71,7 @@
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'MAISON JF®', item: 'https://maison-jf.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Produtos', item: 'https://maison-jf.com/produtos.html' },
+        { '@type': 'ListItem', position: 2, name: 'Produtos', item: 'https://maison-jf.com/produtos/' },
         { '@type': 'ListItem', position: 3, name: productName, item: window.location.href.split('#')[0] }
       ]
     });
