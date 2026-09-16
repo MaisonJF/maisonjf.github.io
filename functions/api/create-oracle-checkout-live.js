@@ -1,4 +1,6 @@
-const THEMES={
+import { ORACLE_GENERATED_TERRITORIES } from '../_lib/oracle-generated.js';
+
+const CORE={
   amor:{label:'Amor & Relações',page:'amor.html',legacyReading:true},
   trabalho:{label:'Trabalho & Caminho',page:'trabalho.html'},
   dinheiro:{label:'Dinheiro & Segurança',page:'dinheiro.html'},
@@ -6,6 +8,8 @@ const THEMES={
   escolhas:{label:'Escolhas & Mudança',page:'escolhas.html'},
   padroes:{label:'Eu & Padrões',page:'padroes.html'}
 };
+const GENERATED=Object.fromEntries(ORACLE_GENERATED_TERRITORIES.map(t=>[t.slug,{label:t.label,page:t.slug+'.html'}]));
+const THEMES={...CORE,...GENERATED};
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -13,12 +17,10 @@ export async function onRequestPost({ request, env }) {
     const requestOrigin = new URL(request.url).origin;
     const originHeader = request.headers.get('Origin');
     if (originHeader && new URL(originHeader).origin !== requestOrigin) return json({ error: 'Origem inválida.' }, 403);
-
     let body = {};
     try { body = await request.json(); } catch { return json({ error: 'Pedido inválido.' }, 400); }
-
-    const theme = String(body?.theme || '');
-    const territory = THEMES[theme];
+    const theme=String(body?.theme||'');
+    const territory=THEMES[theme];
     if (!territory) return json({ error: 'Este território ainda não está disponível.' }, 400);
 
     const origin = new URL(request.url).origin;
@@ -51,10 +53,8 @@ export async function onRequestPost({ request, env }) {
       body:params
     });
     const session = await stripeResponse.json().catch(()=>({}));
-
     if (!stripeResponse.ok) return json({ error: session?.error?.message || 'Não foi possível abrir o checkout.' }, stripeResponse.status);
     if (!session?.livemode || !session?.url) return json({ error: 'A sessão de pagamento não ficou disponível em produção.' }, 502);
-
     return json({ url: session.url });
   } catch {
     return json({ error: 'Não foi possível preparar o checkout.' }, 500);
