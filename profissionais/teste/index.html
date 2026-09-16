@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<title>O QUE O TEU NEGÓCIO ESTÁ A IGNORAR? | MAISON JF®</title>
+<meta name="description" content="Diagnóstico profissional MAISON JF®: oito perguntas para identificar oportunidades de revenda, experiência, continuidade e diferenciação.">
+<link rel="canonical" href="https://maison-jf.com/profissionais/teste/">
+<link rel="stylesheet" href="../../maison.css">
+<script src="../../analytics.js" defer></script>
+<style>
+.b2b-test{min-height:100svh;padding:132px 22px 86px;background:radial-gradient(circle at 50% 0,#292117 0,#11100e 34%,#070707 72%);display:grid;align-items:center}
+.box{width:min(940px,100%);margin:auto}.step{display:none}.step.on{display:block}
+.progress{font:600 9px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:#8f887d;margin-bottom:26px}
+.progressbar{height:1px;background:#2f2a24;margin:-13px 0 46px;overflow:hidden}.progressbar span{display:block;height:100%;background:#c3a66d;transition:width .28s ease}
+.title{font:400 clamp(50px,8vw,96px)/.91 var(--serif);letter-spacing:-.035em;margin:.16em 0 .34em}
+#intro>p:not(.eyebrow){max-width:700px;font:400 clamp(18px,2.2vw,23px)/1.55 var(--serif);color:#bcb4a9;margin-bottom:32px}
+.q{font:400 clamp(31px,4.5vw,50px)/1.08 var(--serif);letter-spacing:-.02em;margin:28px 0 38px;max-width:880px}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.choices button{min-height:108px;padding:22px 24px;text-align:left;border:1px solid var(--line);background:rgba(15,15,14,.72);color:#eee9df;font:400 18px/1.38 var(--serif);cursor:pointer}
+.choices button:hover,.choices button:focus-visible{background:#171512;border-color:#8b7650;outline:none}
+.result-copy{max-width:720px;color:#bcb4a9;font:400 19px/1.6 var(--serif)}
+.result-meta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 0}.result-meta span{border:1px solid var(--line);padding:8px 10px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#938c82}
+.offer{margin:42px 0;padding:34px;border:1px solid rgba(183,154,98,.38);background:linear-gradient(145deg,rgba(183,154,98,.08),rgba(255,255,255,.015))}
+.offer h2{font:400 clamp(30px,4vw,43px)/1.02 var(--serif);margin:.2em 0 .35em}.offer p{max-width:650px;color:#aaa39a}
+.offer-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.offer-options a{border:1px solid var(--line);padding:15px 16px;text-decoration:none}.offer-options small{display:block;color:#837c72;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}.offer-options strong{font:400 21px/1.1 var(--serif)}
+.restart{border:0;background:none;color:#8e877d;text-decoration:underline;cursor:pointer;margin-top:32px}
+@media(max-width:700px){.b2b-test{padding:108px 18px 60px;align-items:start}.title{font-size:49px}.q{font-size:31px}.choices,.offer-options{grid-template-columns:1fr}.choices button{min-height:86px}.offer{padding:24px}}
+</style>
+</head>
+<body>
+<header class="site-header"><a class="brand" href="../">MAISON JF® · PROFISSIONAIS</a><nav><a href="../">Profissionais</a><a href="../../contacto/?interesse=b2b">Contacto B2B</a></nav></header>
+<main class="b2b-test"><div class="box">
+<section id="intro" class="step on"><p class="eyebrow">≈ 2 minutos · 8 perguntas · gratuito</p><h1 class="title">O QUE O TEU NEGÓCIO<br>ESTÁ A IGNORAR?</h1><p>Talvez haja dinheiro escondido numa parte da experiência que hoje parece apenas rotina. Este diagnóstico não promete receitas mágicas: ajuda-nos a perceber onde existe uma oportunidade comercial que vale a pena explorar.</p><button class="button button--light" id="start">Começar</button></section>
+<section id="questions" class="step"><div class="progress" id="progress"></div><div class="progressbar"><span id="bar"></span></div><div class="q" id="question" tabindex="-1"></div><div class="choices" id="choices"></div></section>
+<section id="result" class="step"><p class="eyebrow">Oportunidade detectada</p><h1 class="title" id="resultTitle" tabindex="-1"></h1><p class="result-copy" id="resultText"></p><div class="result-meta" id="resultMeta"></div><div class="offer"><p class="eyebrow">Próximo passo</p><h2 id="offerTitle"></h2><p id="offerText"></p><a class="button button--light" id="offerCta"></a><div class="offer-options" id="offerOptions"></div></div><button class="restart" id="restart">Refazer o diagnóstico</button></section>
+</div></main>
+<script>
+const $=id=>document.getElementById(id);
+const state={step:0,business:'',goal:'',gap:'',client:'',model:'',scale:'',start:'',confession:''};
+const track=(event,data={})=>window.maisonAnalytics?.track?window.maisonAnalytics.track(event,{...data,page_path:location.pathname}):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([event,{...data,page_path:location.pathname}]);
+
+const businesses=[
+ ['loja','Loja ou espaço de retalho.'],['spa','Spa, centro de estética ou espaço de bem-estar.'],['terapeuta','Massagista, terapeuta ou gabinete individual.'],['alojamento','Alojamento local, hotel ou espaço de hospitalidade.'],['servico','Outro negócio de serviços com clientes presenciais.'],['outro','Outro tipo de negócio ou projecto.']
+];
+const goals=[
+ ['ticket','Aumentar o valor médio que cada cliente deixa.'],['recompra','Criar razões para o cliente voltar a comprar.'],['diferenciar','Tornar a experiência mais memorável.'],['continuar','Prolongar a experiência para depois da visita.'],['boasvindas','Melhorar boas-vindas, oferta ou detalhe de chegada.'],['testar','Testar uma nova linha sem começar demasiado grande.']
+];
+const gaps=[
+ ['fim','A experiência termina quando o cliente sai.'],['extra','Os clientes compram o principal, mas quase nada complementar.'],['assinatura','O espaço funciona, mas falta-lhe uma assinatura sensorial própria.'],['escolha','Não sei que produtos fariam realmente sentido para os meus clientes.'],['stock','Tenho receio de comprar stock que fique parado.'],['historia','Tenho produtos ou serviços bons, mas a história comercial ainda não está clara.']
+];
+const clients=[
+ ['recorrente','Clientes recorrentes que já confiam em nós.'],['ocasional','Clientes ocasionais, mas com alguma repetição.'],['turista','Muitos clientes são de passagem ou fazem uma compra única.'],['presente','Existe procura por presentes e ocasiões.'],['misto','Temos vários perfis; não existe um só comportamento dominante.']
+];
+const models=[
+ ['revenda','Quero vender produtos ao cliente.'],['uso','Quero usar produtos dentro do serviço/experiência.'],['ambos','Quero usar e também vender para levar para casa.'],['boasvindas','Quero oferecer como detalhe, boas-vindas ou cortesia.'],['especial','Quero estudar uma pequena série ou projecto especial.']
+];
+const scales=[
+ ['pequeno','Quero começar pequeno e validar.'],['regular','Consigo testar uma selecção com alguma variedade.'],['recorrente','Procuro algo que possa repor regularmente.'],['projeto','Tenho um projecto específico e quero discutir quantidades e condições.']
+];
+const starts=[
+ ['curadoria','Quero que me recomendem um ponto de partida.'],['categoria','Já tenho uma categoria de produto em mente.'],['proposta','Quero receber uma proposta adaptada ao meu espaço.'],['conversa','Prefiro falar primeiro e perceber se existe encaixe.']
+];
+const confessions={
+ loja:[
+  ['voltar','“Tenho produtos, mas poucos dão ao cliente uma razão clara para voltar.”'],
+  ['historia','“Vendo coisas bonitas, mas nem sempre sei explicar porque devem ser compradas agora.”'],
+  ['ticket','“Podia aumentar o ticket médio sem precisar de muito mais tráfego.”'],
+  ['stock','“Tenho medo de testar coisas novas e ficar com stock parado.”']
+ ],
+ spa:[
+  ['fim','“O cliente gosta do tratamento, mas a experiência acaba quando sai.”'],
+  ['venda','“Podíamos vender mais sem transformar a equipa em vendedores agressivos.”'],
+  ['ritual','“Os tratamentos são bons, mas ainda não temos um ritual que o cliente reconheça como nosso.”'],
+  ['casa','“Há cuidados que podiam continuar em casa — e hoje não captamos esse valor.”']
+ ],
+ terapeuta:[
+  ['sessao','“A sessão termina e eu deixo dinheiro e continuidade à porta.”'],
+  ['recomenda','“Recomendo cuidados, mas não ganho nada com aquilo que o cliente compra depois noutro lado.”'],
+  ['ritual','“Podia tornar a experiência mais completa sem complicar o atendimento.”'],
+  ['stock','“Quero vender alguma coisa, mas não quero transformar o gabinete numa loja.”']
+ ],
+ alojamento:[
+  ['chegada','“O espaço está cuidado, mas a chegada ainda não tem uma assinatura memorável.”'],
+  ['presente','“Podia existir um detalhe que o hóspede quisesse levar consigo.”'],
+  ['memoria','“Quero que o aroma e a sensação do espaço fiquem na memória.”'],
+  ['custo','“Quero acrescentar valor percebido sem tornar cada estadia muito mais cara.”']
+ ],
+ servico:[
+  ['fim','“A relação comercial termina cedo demais depois do serviço principal.”'],
+  ['extra','“Tenho clientes satisfeitos, mas poucas vendas complementares.”'],
+  ['marca','“A experiência ainda não tem um detalhe que seja claramente nosso.”'],
+  ['recompra','“Podia existir uma razão mais concreta para o cliente voltar.”']
+ ],
+ outro:[
+  ['clareza','“Sei que há uma oportunidade aqui, mas ainda não consegui dar-lhe forma.”'],
+  ['teste','“Quero experimentar sem transformar isto num investimento enorme.”'],
+  ['diferenca','“Preciso de uma proposta que não pareça igual ao que toda a gente já vende.”'],
+  ['margem','“Quero perceber onde pode existir valor adicional antes de comprar stock.”']
+ ]
+};
+
+function questionFor(n){
+ if(n===0)return ['Que tipo de negócio tens?',businesses,'business'];
+ if(n===1)return ['O que gostarias que mudasse comercialmente?',goals,'goal'];
+ if(n===2)return ['Onde sentes que existe hoje a maior oportunidade perdida?',gaps,'gap'];
+ if(n===3)return ['Como são, sobretudo, os teus clientes?',clients,'client'];
+ if(n===4)return ['Como imaginas os produtos MAISON JF® dentro do teu negócio?',models,'model'];
+ if(n===5)return ['Como preferes começar?',scales,'scale'];
+ if(n===6)return ['O que seria mais útil receber agora?',starts,'start'];
+ return ['Qual destas frases te custa mais admitir?',confessions[state.business]||confessions.outro,'confession'];
+}
+function section(id){document.querySelectorAll('.step').forEach(x=>x.classList.remove('on'));$(id).classList.add('on')}
+function show(){state.step=0;section('questions');track('maison_b2b_test_start');render()}
+function render(){const [q,opts,key]=questionFor(state.step);$('progress').textContent=(state.step+1)+' / 8';$('bar').style.width=(((state.step+1)/8)*100)+'%';$('question').textContent=q;$('choices').innerHTML='';opts.forEach(([v,l])=>{const b=document.createElement('button');b.type='button';b.textContent=l;b.onclick=()=>answer(key,v);$('choices').appendChild(b)});$('question').focus()}
+function answer(key,value){state[key]=value;track('maison_b2b_test_answer',{step:state.step+1,key,choice:value});state.step++;state.step<8?render():finish()}
+
+function resultType(){
+ if(state.model==='boasvindas'||state.business==='alojamento'||state.goal==='boasvindas')return ['BOAS-VINDAS QUE FICAM','Existe margem para transformar chegada, ambiente ou cortesia numa parte reconhecível da experiência.','welcome'];
+ if(state.model==='ambos'||state.goal==='continuar'||state.gap==='fim')return ['A EXPERIÊNCIA TERMINA CEDO','Há uma oportunidade para prolongar o que o cliente vive no espaço e criar continuidade para casa.','continuity'];
+ if(state.goal==='ticket'||state.gap==='extra')return ['TICKET MÉDIO SUBAPROVEITADO','Já existe confiança no serviço ou produto principal. O próximo ganho pode estar numa compra complementar que faça sentido — não em vender por vender.','ticket'];
+ if(state.goal==='diferenciar'||state.gap==='assinatura')return ['ASSINATURA SENSORIAL','O teu negócio pode ganhar uma memória própria através de aroma, ritual, apresentação ou detalhe de uso.','signature'];
+ if(state.model==='revenda'||state.goal==='recompra')return ['REVENDA COM CONTINUIDADE','Existe espaço para escolher poucas referências que possam gerar recompra em vez de encher prateleiras.','resale'];
+ if(state.scale==='pequeno'||state.goal==='testar'||state.gap==='stock')return ['TESTAR SEM ENCHER O ARMAZÉM','O ponto de entrada deve ser pequeno, legível e fácil de avaliar antes de aumentar quantidades.','pilot'];
+ return ['UMA OPORTUNIDADE POR ORGANIZAR','Há interesse comercial, mas o valor está em escolher o formato certo antes de escolher produtos ao acaso.','proposal'];
+}
+function offer(href,label,role){return {href,label,role}}
+function offers(type){
+ let main,second;
+ if(type==='welcome')main=offer('../produtos-de-boas-vindas-para-alojamento-local.html','Boas-vindas & hospitalidade','recomendado');
+ else if(state.business==='spa'||state.business==='terapeuta'||type==='continuity')main=offer('../produtos-para-revenda-em-spa.html','Revenda para spa ou gabinete','recomendado');
+ else if(state.business==='loja'||type==='resale')main=offer('../produtos-para-revenda-em-loja.html','Revenda em loja','recomendado');
+ else if(type==='signature')main=offer('../aromas-para-espacos-de-bem-estar.html','Aromas para espaços profissionais','recomendado');
+ else main=offer('../../contacto/?interesse=b2b','Proposta B2B adaptada','recomendado');
+ if(state.business==='loja')second=offer('../velas-aromaticas-para-revenda.html','Explorar Velas Aromáticas','categoria');
+ else if(state.business==='spa'||state.business==='terapeuta')second=offer('../como-escolher-produtos-para-um-spa-ou-gabinete.html','Escolher produtos para o espaço','explorar');
+ else if(state.business==='alojamento')second=offer('../como-criar-um-ritual-de-boas-vindas-para-clientes.html','Criar um ritual de boas-vindas','explorar');
+ else second=offer('../o-que-posso-oferecer-de-diferente-aos-meus-clientes.html','Explorar diferenciação','explorar');
+ const contact=offer('../../contacto/?interesse=b2b&origem=teste-profissional','Abrir conversa B2B','conversa');
+ return [main,second,contact].filter((x,i,a)=>a.findIndex(y=>y.href===x.href)===i).slice(0,3);
+}
+function finish(){
+ const [title,text,type]=resultType(),items=offers(type),primary=items[0];
+ $('resultTitle').textContent=title;$('resultText').textContent=text;
+ $('resultMeta').innerHTML='<span>'+state.business+'</span><span>'+state.model+'</span><span>'+state.scale+'</span>';
+ $('offerTitle').textContent=primary.label;
+ $('offerText').textContent=state.scale==='pequeno'?'Pelo que escolheste, faz sentido começar com uma proposta pequena e validável antes de aumentar stock ou complexidade.':'Este é o caminho que melhor corresponde ao teu negócio e ao objectivo que escolheste.';
+ $('offerCta').href=primary.href;$('offerCta').textContent='Ver este caminho';
+ $('offerOptions').innerHTML='';
+ items.slice(1).forEach(o=>{const a=document.createElement('a');a.href=o.href;a.dataset.b2bAlt='1';a.innerHTML='<small>'+o.role+'</small><strong>'+o.label+'</strong>';$('offerOptions').appendChild(a)});
+ section('result');$('resultTitle').focus();
+ track('maison_b2b_test_result',{business:state.business,goal:state.goal,gap:state.gap,client:state.client,model:state.model,scale:state.scale,start:state.start,confession:state.confession,result_type:type,primary_offer:primary.label,primary_href:primary.href});
+}
+function restart(){Object.assign(state,{step:0,business:'',goal:'',gap:'',client:'',model:'',scale:'',start:'',confession:''});section('intro');$('start').focus();track('maison_b2b_test_restart')}
+$('start').onclick=show;$('restart').onclick=restart;
+$('offerCta').onclick=()=>track('maison_b2b_offer_click',{primary:true,destination:$('offerCta').getAttribute('href')});
+$('offerOptions').onclick=e=>{const a=e.target.closest('a');if(a)track('maison_b2b_offer_click',{primary:false,destination:a.getAttribute('href')})};
+</script>
+</body></html>
