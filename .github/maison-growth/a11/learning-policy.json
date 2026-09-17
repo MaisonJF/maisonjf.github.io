@@ -1,0 +1,59 @@
+{
+  "policy_version": "A11.1",
+  "mode": "analysis_only",
+  "economic_priority": true,
+  "minimum_observation_count": 3,
+  "minimum_economic_observation_count": 1,
+  "neutral_band_basis_points": 500,
+  "confidence_delta_limits": {
+    "max_increase": 15,
+    "max_decrease": 20
+  },
+  "pattern_detection": {
+    "min_repetitions": 3,
+    "causal_claims": false,
+    "label": "correlation_only"
+  },
+  "protected_domains": [
+    "hard_gates",
+    "permissions",
+    "security_policy",
+    "pricing",
+    "discounts",
+    "checkout",
+    "catalogue",
+    "paid_content",
+    "legal_policy",
+    "commercial_promises",
+    "protected_architecture",
+    "public_authorization"
+  ],
+  "sensitive_proposal_execution_authorized": false,
+  "feedback_actions": [
+    "increase_confidence",
+    "decrease_confidence",
+    "hold_confidence",
+    "observe",
+    "review"
+  ],
+  "signal_classes": [
+    "positive",
+    "negative",
+    "neutral",
+    "insufficient"
+  ],
+  "reason_codes": [
+    "ECONOMIC_OUTCOME_ABOVE_EXPECTATION",
+    "ECONOMIC_OUTCOME_BELOW_EXPECTATION",
+    "ECONOMIC_OUTCOME_WITHIN_NEUTRAL_BAND",
+    "INSUFFICIENT_OBSERVATIONS",
+    "INSUFFICIENT_ECONOMIC_DATA",
+    "CTR_POSITIVE_ECONOMIC_NEGATIVE",
+    "CTR_NEGATIVE_ECONOMIC_POSITIVE",
+    "CONTRADICTORY_SIGNALS",
+    "REPEATED_CORRELATED_PATTERN",
+    "EXPECTED_OBSERVED_MATCH",
+    "EXPECTED_OBSERVED_DIVERGENCE",
+    "SENSITIVE_RULE_CHANGE_REQUIRES_HUMAN"
+  ]
+}
