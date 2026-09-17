@@ -1,0 +1,31 @@
+{
+  "policy_version": "brain_v1",
+  "default": "deny",
+  "semantic": {
+    "equivalent_threshold": 82,
+    "alias_threshold": 88,
+    "ambiguous_min_distinctive_tokens": 2,
+    "max_phrase_length": 500,
+    "stopwords": ["a","ao","aos","as","com","como","da","das","de","do","dos","e","ela","ele","em","eu","me","meu","minha","na","nas","no","nos","o","os","ou","para","por","que","se","sem","um","uma"],
+    "synonyms": {
+      "namorado": "partner", "namorada": "partner", "parceiro": "partner", "parceira": "partner",
+      "relacao": "relationship", "relacionamento": "relationship",
+      "falar": "talk", "conversa": "talk", "conversar": "talk", "dialogo": "talk",
+      "retomar": "resume", "voltar": "resume", "recomecar": "resume",
+      "pergunta": "question", "perguntas": "question", "questao": "question", "questoes": "question",
+      "conhecer": "know", "conhecermos": "know", "melhor": "deeper", "profundo": "deeper", "profunda": "deeper",
+      "distante": "distance", "distancia": "distance", "afastado": "distance", "afastamento": "distance", "silencio": "silence"
+    }
+  },
+  "coverage": {
+    "sufficient_strength": 80,
+    "partial_min_strength": 1,
+    "redundant_strong_asset_count": 2,
+    "multiple_solution_strong_count": 2
+  },
+  "confidence": {
+    "conflict_penalty": 25,
+    "ambiguous_cap": 49,
+    "minimum_actionable": 60
+  }
+}
