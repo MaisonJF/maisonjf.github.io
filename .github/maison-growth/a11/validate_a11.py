@@ -57,6 +57,12 @@ def sql_validation():
           VALUES (?,?,?,?,?,?,?)""",("lsl_"+"9"*36,lru,"experiment",dec,dec,"2"*64,"2026-09-17T00:00:01Z"))
     except sqlite3.IntegrityError: pass
     else: raise AssertionError("source-kind compatibility guard failed")
+    lrn="lrn_"+"7"*36
+    db.execute("""INSERT INTO learning_records(learning_record_id,learning_run_id,learning_source_link_id,source_kind,source_id,subject_type,subject_id,signal_class,expected_json,observed_json,economic_value_minor,ctr_bps,confidence_before,confidence_after,confidence_delta,reason_codes_json,evidence_refs_json,correlation_only,causal_claim,rule_version_id,model_version_id,input_hash,created_at)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",(lrn,lru,lsl,"decision",dec,"decision",dec,"positive","{}","{}",1000,500,50,60,10,'["ECONOMIC_OUTCOME_ABOVE_EXPECTATION"]','["ev1"]',1,0,rul,None,"7"*64,"2026-09-17T00:00:02Z"))
+    try: db.execute("UPDATE learning_records SET confidence_after=70 WHERE learning_record_id=?",(lrn,))
+    except sqlite3.DatabaseError: pass
+    else: raise AssertionError("learning history was mutable")
     try: db.execute("UPDATE learning_runs SET input_count=2 WHERE learning_run_id=?",(lru,))
     except sqlite3.DatabaseError: pass
     else: raise AssertionError("learning run update was allowed")
