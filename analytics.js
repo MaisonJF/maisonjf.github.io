@@ -16,6 +16,27 @@
     wait_for_update: 500
   });
 
+  function cleanInternalHref(rawHref) {
+    if (!rawHref || rawHref.startsWith('#') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:') || rawHref.startsWith('javascript:')) return rawHref;
+    try {
+      const url = new URL(rawHref, window.location.href);
+      if (url.origin !== window.location.origin) return rawHref;
+      if (!url.pathname.endsWith('.html')) return rawHref;
+      url.pathname = url.pathname.replace(/\.html$/, '');
+      return url.pathname + url.search + url.hash;
+    } catch (_) {
+      return rawHref;
+    }
+  }
+
+  function normalizeInternalLinks(root = document) {
+    root.querySelectorAll?.('a[href]').forEach(link => {
+      const current = link.getAttribute('href');
+      const clean = cleanInternalHref(current);
+      if (clean && clean !== current) link.setAttribute('href', clean);
+    });
+  }
+
   function loadGoogle() {
     if (googleLoaded) return;
     googleLoaded = true;
@@ -69,7 +90,7 @@
     const banner = document.createElement('aside');
     banner.className = 'maison-consent';
     banner.setAttribute('aria-label', 'Cookies');
-    banner.innerHTML = '<div class="maison-consent__copy"><span>Usamos cookies de medição apenas com a tua autorização. <a href="/informacao-legal.html#privacidade">Privacidade</a></span></div><div class="maison-consent__actions"><button type="button" data-consent="denied">Recusar</button><button type="button" data-consent="granted">Aceitar</button></div>';
+    banner.innerHTML = '<div class="maison-consent__copy"><span>Usamos cookies de medição apenas com a tua autorização. <a href="/informacao-legal#privacidade">Privacidade</a></span></div><div class="maison-consent__actions"><button type="button" data-consent="denied">Recusar</button><button type="button" data-consent="granted">Aceitar</button></div>';
     banner.addEventListener('click', event => {
       const button = event.target.closest('[data-consent]');
       if (button) saveConsent(button.dataset.consent);
@@ -106,6 +127,21 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    normalizeInternalLinks();
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => mutation.addedNodes.forEach(node => {
+        if (node.nodeType === 1) {
+          if (node.matches?.('a[href]')) {
+            const current = node.getAttribute('href');
+            const clean = cleanInternalHref(current);
+            if (clean && clean !== current) node.setAttribute('href', clean);
+          }
+          normalizeInternalLinks(node);
+        }
+      }));
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+
     const consent = localStorage.getItem(CONSENT_KEY);
     if (consent === 'granted') loadGoogle();
     else if (consent !== 'denied') showConsent();
@@ -113,7 +149,12 @@
 
     document.addEventListener('click', event => {
       const link = event.target.closest('a[href]');
-      if (link) classify(link);
+      if (link) {
+        const current = link.getAttribute('href');
+        const clean = cleanInternalHref(current);
+        if (clean && clean !== current) link.setAttribute('href', clean);
+        classify(link);
+      }
     }, { capture: true });
   });
 })();
