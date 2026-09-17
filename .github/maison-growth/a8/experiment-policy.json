@@ -1,0 +1,76 @@
+{
+  "policy_version": "experiment_policy_1",
+  "default": "deny",
+  "allowed_change_classes": [
+    "cta_route_existing_solution"
+  ],
+  "allowed_variant_fields": [
+    "destination_solution_id"
+  ],
+  "protected_fields": [
+    "price",
+    "price_minor",
+    "discount",
+    "discount_code",
+    "checkout",
+    "checkout_url",
+    "product_definition",
+    "service_definition",
+    "paid_content",
+    "oracle_content",
+    "commercial_promise",
+    "policy",
+    "legal_terms",
+    "launch",
+    "new_product",
+    "new_service"
+  ],
+  "assignment": {
+    "bucket_count": 10000,
+    "default_split": {
+      "control": 8000,
+      "variant": 2000
+    }
+  },
+  "metrics": {
+    "allowed": [
+      "eligible_session",
+      "cta_click",
+      "conversion",
+      "economic_value_minor",
+      "technical_error",
+      "abandonment"
+    ],
+    "default_primary": "economic_value_per_eligible_session",
+    "ctr_metric": "cta_click_rate"
+  },
+  "evaluation": {
+    "min_exposures_default": 100,
+    "neutral_band_bps": 200,
+    "worse_guardrail_bps": 1000,
+    "require_min_sample_for_performance_stop": true
+  },
+  "state_transitions": {
+    "draft": [
+      "ready"
+    ],
+    "ready": [
+      "running",
+      "stopped"
+    ],
+    "running": [
+      "paused",
+      "stopped",
+      "completed",
+      "reverted"
+    ],
+    "paused": [
+      "running",
+      "stopped",
+      "reverted"
+    ],
+    "stopped": [],
+    "completed": [],
+    "reverted": []
+  }
+}
