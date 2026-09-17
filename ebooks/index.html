@@ -3,48 +3,27 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ebooks | MAISON JF®</title>
-<meta name="description" content="Ebooks MAISON JF® para perguntas que precisam de mais tempo, mais espaço e uma leitura feita ao teu ritmo.">
+<meta name="description" content="Biblioteca MAISON JF®: histórias para perguntas que ficam, com os primeiros volumes de Vírgulas do Destino já disponíveis.">
 <meta name="robots" content="index,follow"><link rel="canonical" href="https://maison-jf.com/ebooks/">
 <link rel="stylesheet" href="../maison.css"><script src="../analytics.js" defer></script>
 <style>
-.ebooks{padding:145px 0 100px}.ebooks h1{font:400 clamp(58px,9vw,112px)/.9 var(--serif);margin:.18em 0 .35em}.lead{max-width:700px;color:#aaa39a}
-.library-note{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:70px;padding-top:40px;border-top:1px solid var(--line)}.library-note h2{font:400 38px/1 var(--serif);margin:.2em 0}.library-note p{color:#aaa39a}
-.section-title{margin-top:70px;padding-top:25px;border-top:1px solid var(--line);font:400 32px/1 var(--serif)}
-.ebook-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:34px 18px;margin-top:30px}.ebook-card{display:block;color:inherit;text-decoration:none}.cover{aspect-ratio:2/3;background:#111;border:1px solid var(--line);overflow:hidden;display:grid;place-items:center;padding:18px;text-align:center}.cover img{width:100%;height:100%;object-fit:cover}.cover span{font:400 20px/1.08 var(--serif);color:#8e877c}.ebook-card h2{font:400 25px/1.05 var(--serif);margin:14px 0 5px}.meta{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8e877c}.buy{margin-top:10px}.soon{opacity:.7}.soon .cover{border-style:dashed}.status{min-height:1.5em;margin-top:30px;color:#aaa39a}
-@media(max-width:650px){.ebook-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 12px}.ebooks{padding-top:115px}.ebook-card h2{font-size:21px}.library-note{grid-template-columns:1fr;gap:10px}}
+.ebooks{padding:145px 0 110px}.ebooks h1{font:400 clamp(58px,9vw,112px)/.9 var(--serif);margin:.18em 0 .35em}.lead{max-width:660px;color:#aaa39a;font-size:1.02rem}
+.section-title{margin-top:68px;padding-top:26px;border-top:1px solid var(--line);font:400 32px/1 var(--serif)}
+.ebook-grid{display:grid;grid-template-columns:repeat(2,minmax(0,260px));gap:38px 22px;margin-top:32px}.ebook-card{display:block;color:inherit;text-decoration:none}.cover{aspect-ratio:2/3;background:#111;border:1px solid var(--line);overflow:hidden}.cover img{width:100%;height:100%;object-fit:cover;display:block}.ebook-card h2{font:400 25px/1.05 var(--serif);margin:14px 0 5px}.meta{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8e877c}.buy{margin-top:10px}.status{min-height:1.5em;margin-top:30px;color:#aaa39a}
+.saga-teaser{margin-top:100px;padding-top:70px;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,.9fr) minmax(280px,.65fr);gap:70px;align-items:center}.saga-teaser__copy h2{font:400 clamp(44px,6vw,76px)/.94 var(--serif);margin:.18em 0}.saga-teaser__poster{margin:0;justify-self:end;width:min(100%,720px);background:#0a0a0a}.saga-teaser__poster img{display:block;width:100%;height:auto}
+@media(max-width:760px){.ebooks{padding-top:115px}.ebook-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 12px}.ebook-card h2{font-size:21px}.saga-teaser{grid-template-columns:1fr;gap:28px;margin-top:76px;padding-top:58px}.saga-teaser__poster{justify-self:center;width:min(100%,620px)}}
+@media(max-width:440px){.ebook-grid{grid-template-columns:1fr}.ebook-card{max-width:320px}.saga-teaser__copy h2{font-size:44px}}
 </style>
 </head>
 <body>
 <header class="site-header"><a class="brand" href="../">MAISON JF®</a><nav><a href="../produtos/">Produtos</a><a href="../servicos/">Serviços</a><a href="../oraculo/">Oráculo</a></nav></header>
 <main class="ebooks shell">
-<p class="eyebrow">Biblioteca digital</p><h1>Ebooks.</h1>
-<p class="lead">Há coisas que não cabem num post.</p>
-<section><h2 class="section-title">Já publicados</h2><div class="ebook-grid" id="publishedGrid"></div><p class="status" id="edition-checkout-status" aria-live="polite"></p></section>
-<section id="soonSection"><h2 class="section-title">Brevemente</h2><div class="ebook-grid" id="soonGrid"></div></section>
+<p class="eyebrow">Éditions Maison JF</p><h1>Biblioteca.</h1>
+<p class="lead">Há histórias que continuam a mexer em ti depois da última página.</p>
+<section aria-labelledby="published-title"><h2 class="section-title" id="published-title">Já publicados</h2><div class="ebook-grid" id="publishedGrid"></div><p class="status" id="edition-checkout-status" aria-live="polite"></p></section>
+<section class="saga-teaser" aria-labelledby="saga-title"><div class="saga-teaser__copy"><p class="eyebrow">Vírgulas do Destino</p><h2 id="saga-title">A história ainda não acabou.</h2></div><figure class="saga-teaser__poster"><img src="../images/ebooks/virgulas-do-destino-saga-poster.webp" alt="Poster oficial da saga Vírgulas do Destino, das Éditions Maison JF" loading="lazy"></figure></section>
 </main>
 <script src="../data/ebooks.js"></script>
-<script>
-(function(){
- const all=window.MAISON_EBOOKS||[],published=all.filter(b=>b.status==='published'),soon=all.filter(b=>b.status==='coming-soon');
- function card(book,isSoon){
-  const el=document.createElement('article');el.className='ebook-card'+(isSoon?' soon':'');
-  const link=document.createElement(isSoon?'div':'a');if(!isSoon)link.href='./'+encodeURIComponent(book.slug)+'/';
-  const cover=document.createElement('div');cover.className='cover';
-  const coverMedia=(book.media||[]).find(m=>m.role==='cover')||(book.media||[])[0];
-  const coverSrc=book.cover||(coverMedia&&coverMedia.src);
-  if(coverSrc){const img=document.createElement('img');img.src=coverSrc;img.alt=(coverMedia&&coverMedia.alt)||('Capa de '+book.title);img.loading='lazy';cover.appendChild(img)}
-  else{const mark=document.createElement('span');mark.textContent=isSoon?'Brevemente':book.collection||'MAISON JF®';cover.appendChild(mark)}
-  link.appendChild(cover);
-  const title=document.createElement('h2');title.textContent=book.title;
-  const meta=document.createElement('p');meta.className='meta';meta.textContent=isSoon?'Brevemente':[book.collection,book.price!=null?Number(book.price).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':null].filter(Boolean).join(' · ');
-  el.append(link,title,meta);
-  if(!isSoon&&book.checkoutId){const buy=document.createElement('button');buy.type='button';buy.className='button buy';buy.dataset.buyEbook=book.checkoutId;buy.textContent='Comprar agora · '+Number(book.price).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';el.appendChild(buy)}
-  return el;
- }
- published.forEach(b=>document.getElementById('publishedGrid').appendChild(card(b,false)));
- soon.forEach(b=>document.getElementById('soonGrid').appendChild(card(b,true)));
- if(!soon.length)document.getElementById('soonSection').hidden=true;
-})();
-</script>
+<script>(function(){const published=(window.MAISON_EBOOKS||[]).filter(b=>b.status==='published');function card(book){const el=document.createElement('article');el.className='ebook-card';const link=document.createElement('a');link.href='./'+encodeURIComponent(book.slug)+'/';const cover=document.createElement('div');cover.className='cover';const coverMedia=(book.media||[]).find(m=>m.role==='cover')||(book.media||[])[0];const coverSrc=book.cover||(coverMedia&&coverMedia.src);if(coverSrc){const img=document.createElement('img');img.src=coverSrc;img.alt=(coverMedia&&coverMedia.alt)||('Capa de '+book.title);img.loading='lazy';cover.appendChild(img)}link.appendChild(cover);const title=document.createElement('h2');title.textContent=book.title;const meta=document.createElement('p');meta.className='meta';meta.textContent=[book.collection,book.price!=null?Number(book.price).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':null].filter(Boolean).join(' · ');el.append(link,title,meta);if(book.checkoutId){const buy=document.createElement('button');buy.type='button';buy.className='button buy';buy.dataset.buyEbook=book.checkoutId;buy.textContent='Comprar agora · '+Number(book.price).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';el.appendChild(buy)}return el}published.forEach(b=>document.getElementById('publishedGrid').appendChild(card(b)))})();</script>
 <script src="../checkout-ebook-live.js"></script>
 </body></html>
