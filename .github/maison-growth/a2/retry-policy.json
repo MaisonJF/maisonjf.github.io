@@ -1,0 +1,51 @@
+{
+  "contract_version": "A2.1",
+  "default": "no_retry",
+  "categories": {
+    "validation_error": {
+      "retry": false,
+      "dead_letter": "sanitized_fingerprint_only"
+    },
+    "privacy_violation": {
+      "retry": false,
+      "dead_letter": "sanitized_fingerprint_only"
+    },
+    "unsupported_contract_version": {
+      "retry": false,
+      "dead_letter": "sanitized_fingerprint_only"
+    },
+    "unknown_source": {
+      "retry": false,
+      "dead_letter": "sanitized_fingerprint_only"
+    },
+    "idempotency_conflict": {
+      "retry": false,
+      "dead_letter": "sanitized_fingerprint_only"
+    },
+    "transient_storage_error": {
+      "retry": true,
+      "delays_seconds": [
+        5,
+        30,
+        120,
+        600,
+        3600
+      ],
+      "max_attempts": 5,
+      "after_exhaustion": "dead_letter_validated_event"
+    },
+    "transient_transport_error": {
+      "retry": true,
+      "delays_seconds": [
+        5,
+        30,
+        120,
+        600,
+        3600
+      ],
+      "max_attempts": 5,
+      "after_exhaustion": "dead_letter_validated_event"
+    }
+  },
+  "privacy_rule": "Raw invalid payloads are never placed on a dead-letter queue. Only validated, PII-free normalized events may be dead-lettered after transient failures."
+}

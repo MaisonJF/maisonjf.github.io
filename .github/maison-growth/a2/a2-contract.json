@@ -1,0 +1,39 @@
+{
+  "contract_version": "A2.1",
+  "module": "event_collector",
+  "depends_on": [
+    "A0",
+    "A1.1"
+  ],
+  "runtime_isolation": {
+    "public_site_dependency": false,
+    "public_site_write": false,
+    "cloudflare_worker_required_now": false,
+    "queue_required_now": false,
+    "d1_required_now": false,
+    "adapters": "storage and retry transport are ports; local SQLite/memory adapters validate behavior before Cloudflare activation"
+  },
+  "ingestion": {
+    "accepted_contract_versions": [
+      1
+    ],
+    "normalized_event_schema_version": 2,
+    "unknown_source": "reject",
+    "unknown_field": "reject",
+    "idempotency_scope": "source + idempotency_key",
+    "same_key_same_payload": "return original event as duplicate",
+    "same_key_different_payload": "reject idempotency_conflict"
+  },
+  "privacy": {
+    "deny_by_default": true,
+    "direct_pii": false,
+    "commercial_pii_in_analytics": false,
+    "oracle_paid_text": false,
+    "raw_rejected_payload_persistence": false
+  },
+  "completion": {
+    "repository_complete_when": "collector, contracts, adapters, tests and validator pass locally and PR checks pass",
+    "cloudflare_activation_deferred": true,
+    "a3_must_not_start_implicitly": true
+  }
+}
