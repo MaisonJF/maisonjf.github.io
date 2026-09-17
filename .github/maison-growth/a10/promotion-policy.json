@@ -1,0 +1,76 @@
+{
+  "policy_version": "A10.1",
+  "mode": "dry_run_only",
+  "min_independent_evidence_sources": 2,
+  "hard_gates": [
+    "source_candidate_valid",
+    "semantic_distinction",
+    "standalone_utility",
+    "evidence_independence",
+    "coverage_gap",
+    "cannibalization_safe",
+    "commercial_adjacency",
+    "paid_oracle_safe",
+    "safety_quality",
+    "architecture_compatible"
+  ],
+  "promotion_score": {
+    "weights": {
+      "semantic_distinction": 20,
+      "demand_evidence": 20,
+      "coverage_gap": 15,
+      "standalone_utility": 15,
+      "commercial_adjacency": 10,
+      "evidence_confidence": 10,
+      "strategic_value": 5,
+      "interlinking_value": 5
+    },
+    "eligible_min": 85,
+    "observe_min": 70,
+    "requires_all_hard_gates": true
+  },
+  "state_machine": {
+    "internal_candidate": ["promotion_candidate", "rejected", "archived", "reinforced", "alias"],
+    "promotion_candidate": ["promotion_eligible", "rejected", "archived", "reinforced", "alias"],
+    "promotion_eligible": ["draft_isolated", "rejected", "archived"],
+    "draft_isolated": ["validated", "rejected", "archived"],
+    "validated": ["publisher_validated", "rejected", "archived"],
+    "publisher_validated": ["guard_passed", "rejected"],
+    "guard_passed": ["publication_ready", "rejected"],
+    "publication_ready": [],
+    "rejected": [],
+    "archived": [],
+    "reinforced": [],
+    "alias": []
+  },
+  "public_transition_in_a10": false,
+  "draft_forbidden_fields": [
+    "public_url",
+    "canonical_url",
+    "sitemap_entry",
+    "indexnow_submission",
+    "navigation_link",
+    "robots_index",
+    "paid_answer_text",
+    "paid_reading_body",
+    "oracle_paid_content"
+  ],
+  "publisher_action": "ocean_promotion",
+  "required_prepublication_validations": ["snapshot_match", "content_contract", "link_validation"],
+  "requires_oceans_guard": true,
+  "protected_oracle_content": true,
+  "allowed_content_roots": [
+    "relacoes/",
+    "cabeca/",
+    "decisoes/",
+    "casa/",
+    "corpo/",
+    "companhia/",
+    "presentes/",
+    "tarot/",
+    "espiritualidade/",
+    "trabalho/",
+    "dinheiro/",
+    "respostas/"
+  ]
+}
