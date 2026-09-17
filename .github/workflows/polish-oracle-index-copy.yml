@@ -1,0 +1,35 @@
+name: Polish Oracle index copy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/polish-oracle-index-copy.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove duplicated Oracle hub sentence
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('oraculo/index.html')
+          text = path.read_text(encoding='utf-8')
+          old = 'Não precisas de contar a ninguém. Guarda a pergunta contigo. Escolhe apenas o território onde ela vive. Escolhe apenas o território que mais se aproxima daquilo que pesa hoje.'
+          new = 'Não precisas de contar a ninguém. Guarda a pergunta contigo. Escolhe o território que mais se aproxima daquilo que pesa hoje.'
+          if old not in text:
+              raise SystemExit('Expected duplicated hub copy was not found; refusing unrelated edit.')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+          git diff --check
+          git add oraculo/index.html
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Polish Oracle hub copy after count cleanup'
+          git push
