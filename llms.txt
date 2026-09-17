@@ -86,9 +86,7 @@ The plan, duration, location, expenses and boundaries are agreed before the book
 
 ## Oráculo
 Canonical hub: https://maison-jf.com/oraculo/
-The Oráculo contains 100 thematic territories with 20 symbolic readings each, for 2000 possible readings in total.
-Six central territories are maintained as long-form editorial sets: Amor & Relações, Trabalho & Caminho, Dinheiro & Segurança, Família & Laços, Escolhas & Mudança and Eu & Padrões.
-Ninety-four additional territories cover human pains across relationships, identity, emotions, body/rhythm, home/practical life, work/learning, money/resources, loss/transitions, family/care and meaning/spirituality.
+The Oráculo is organised into thematic territories spanning relationships, identity, emotions, body and rhythm, home and practical life, work and learning, money and resources, loss and transitions, family and care, and meaning/spirituality.
 One paid opening costs 2 € and returns one reading from the selected territory after Stripe payment confirmation.
 The Oráculo is symbolic: it does not read minds, guarantee future events, diagnose conditions or make decisions for the user.
 
