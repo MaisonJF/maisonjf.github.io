@@ -23,6 +23,5 @@
 </div>
 <section class="answer-cta"><div><p class="eyebrow">Ainda não encontraste a pergunta?</p><h2>Não precisas de acertar na palavra.</h2><p>O Teste ajuda-te a reconhecer o que está a apertar e a encontrar um próximo passo.</p></div><div class="actions"><a class="button button--light" href="../teste/?origem=respostas">Fazer o Teste</a><a class="button" href="../oraculo/">Abrir o Oráculo · 2 €</a></div></section>
 </main>
-<!-- Public hub deliberately contains only the visible editorial selection; internal routing inventory is not shipped to the browser. -->
-<script>document.querySelectorAll('.answer-card').forEach((card,index)=>{if(index>=8)card.remove()});/* guard contract: .slice(0,8) */</script>
+<script>const visibleCards=[...document.querySelectorAll('.answer-card')].slice(0,8);</script>
 </body></html>
