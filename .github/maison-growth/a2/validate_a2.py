@@ -67,7 +67,7 @@ assert retry["categories"]["idempotency_conflict"]["retry"] is False
 assert retry["categories"]["transient_storage_error"]["retry"] is True
 assert retry["categories"]["transient_storage_error"]["after_exhaustion"] == "dead_letter_validated_event"
 
-assert a0_paths["default"] == "deny"
+assert a0_paths["default_repo_write"] == "deny"
 
 required = [
     "collector.py", "ingestion-contract-v1.json", "source-registry.json",
