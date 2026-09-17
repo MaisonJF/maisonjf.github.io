@@ -1,0 +1,26 @@
+{
+  "contract_version": "A5.semantic.1",
+  "interface": "SemanticProvider",
+  "input": {
+    "normalized_language": "privacy-reviewed natural-language signal only",
+    "source_evidence_ids": "zero or more A4 evidence ids",
+    "source_kind": ["radar_derived", "manual_privacy_reviewed", "system_fixture"]
+  },
+  "output": {
+    "normalized_phrase": "PII-free normalized phrase",
+    "signature_tokens": "provider-derived semantic concepts",
+    "semantic_fingerprint": "sha256",
+    "ambiguity": "boolean",
+    "confidence_score": "0..100",
+    "provider_name": "string",
+    "provider_version": "string"
+  },
+  "security": {
+    "direct_pii": "reject",
+    "paid_oracle_content": "reject",
+    "unreviewed_free_text": "reject",
+    "unknown_source_kind": "reject"
+  },
+  "local_implementation": "DeterministicSemanticProvider uses versioned lexicon/fixtures for repository validation",
+  "future_implementation": "external model/embedding adapter must implement the same interface and remain read/analysis only"
+}
