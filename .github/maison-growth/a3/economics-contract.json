@@ -1,0 +1,32 @@
+{
+  "contract_version": "A3.1",
+  "calculation_version": "economics-v1",
+  "currency_unit": "minor currency units",
+  "formulae": {
+    "immediate_contribution_minor": "revenue_minor - variable_cost_minor - human_effort_cost_minor",
+    "expected_total_value_minor": "immediate_contribution_minor + continuation_expected_value_minor when continuation estimate exists; otherwise null"
+  },
+  "principles": {
+    "reference_price_is_not_realised_revenue": true,
+    "human_effort_minutes_is_reported_separately": true,
+    "scalability_is_not_converted_to_money_automatically": true,
+    "capacity_is_not_converted_to_money_automatically": true,
+    "unknown_is_not_zero": true,
+    "continuation_value_must_be_explicitly_versioned": true,
+    "confidence_must_be_carried_with_estimates": true
+  },
+  "confidence_classes": [
+    "low",
+    "medium",
+    "high",
+    "observed"
+  ],
+  "repeatability_classes": [
+    "none",
+    "low",
+    "medium",
+    "high",
+    "recurring",
+    "unknown"
+  ]
+}

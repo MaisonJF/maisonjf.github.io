@@ -1,0 +1,54 @@
+{
+  "contract_version": "A3.1",
+  "module": "journeys_economics",
+  "depends_on": [
+    "A0",
+    "A1.1",
+    "A2.1"
+  ],
+  "runtime_isolation": {
+    "public_site_dependency": false,
+    "public_site_write": false,
+    "cloudflare_worker_required_now": false,
+    "queue_required_now": false,
+    "d1_required_now": false,
+    "repository_only_completion": true
+  },
+  "journeys": {
+    "journey_id": "opaque prefixed UUIDv7 (jrn_), never derived from PII",
+    "missing_journey_id": "leave unresolved; never infer from email/payment/name or semantic similarity",
+    "ordering": "occurred_at UTC then event_id",
+    "duplicates": "same event_id/same fingerprint collapses; conflicting duplicate rejects",
+    "late_events": "new immutable rebuild run/snapshot",
+    "attribution": "first / assisted / last; single pre-conversion touch is first_last"
+  },
+  "economics": {
+    "price_is_not_value": true,
+    "realised_revenue_source": "conversion event only",
+    "components": [
+      "revenue_minor",
+      "variable_cost_minor",
+      "human_effort_minutes",
+      "human_effort_cost_minor",
+      "immediate_contribution_minor",
+      "continuation_expected_value_minor",
+      "expected_total_value_minor",
+      "scalability_score",
+      "repeatability_class",
+      "confidence_class"
+    ],
+    "unknown_values": "remain null/unknown; never silently inferred"
+  },
+  "privacy": {
+    "deny_by_default": true,
+    "direct_pii": false,
+    "commercial_pii_in_analytics": false,
+    "oracle_paid_text": false,
+    "pseudonymous_ids_only": true
+  },
+  "completion": {
+    "repository_complete_when": "migration, deterministic journey/economics engine, repository adapter, tests and validator pass and PR checks pass",
+    "cloudflare_activation_deferred": true,
+    "a4_must_not_start_implicitly": true
+  }
+}

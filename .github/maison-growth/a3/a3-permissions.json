@@ -1,0 +1,87 @@
+{
+  "contract_version": "A3.1",
+  "default": "deny",
+  "inherits": [
+    "../a1/data-permissions.json",
+    "../a2/collector-permissions.json"
+  ],
+  "public_site_write": false,
+  "public_runtime_dependency": false,
+  "cloudflare_resources_provisioned": false,
+  "roles": {
+    "journey_builder": {
+      "allowed": [
+        "events.read",
+        "journey_rebuild_runs.insert",
+        "journey_snapshots.insert",
+        "journey_snapshot_events.insert",
+        "unresolved_journey_events.insert",
+        "conversions.insert",
+        "conversion_attribution.insert"
+      ],
+      "forbidden": [
+        "events.update",
+        "events.delete",
+        "commercial_pii.read",
+        "oracle.content.read",
+        "public_site.write",
+        "repository.write",
+        "checkout.write",
+        "pricing.write"
+      ]
+    },
+    "economics_reader": {
+      "allowed": [
+        "solutions.read",
+        "solution_economics_versions.read",
+        "conversions.read"
+      ],
+      "forbidden": [
+        "solutions.write",
+        "solution_economics_versions.write",
+        "commercial_pii.read",
+        "oracle.content.read",
+        "public_site.write",
+        "repository.write"
+      ]
+    },
+    "economics_assessor": {
+      "allowed": [
+        "conversion_economic_assessments.insert"
+      ],
+      "forbidden": [
+        "conversion_economic_assessments.update",
+        "conversion_economic_assessments.delete",
+        "pricing.write",
+        "checkout.write",
+        "commercial_pii.read",
+        "oracle.content.read",
+        "public_site.write",
+        "repository.write"
+      ]
+    },
+    "solution_registrar": {
+      "allowed": [
+        "solutions.insert",
+        "solution_economics_versions.insert"
+      ],
+      "forbidden": [
+        "solutions.update",
+        "solutions.delete",
+        "solution_economics_versions.update",
+        "solution_economics_versions.delete",
+        "pricing.autonomous_change",
+        "public_site.write",
+        "checkout.write",
+        "oracle.content.read"
+      ],
+      "interactive_or_deployment_only": true
+    }
+  },
+  "separation": {
+    "commercial_identity_store": "outside Growth Engine",
+    "analytics": "pseudonymous or aggregated IDs only",
+    "oracle_paid_content": "never available",
+    "solution_reference_price": "descriptive only; never substituted for observed conversion revenue"
+  }
+}

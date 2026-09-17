@@ -1,0 +1,11 @@
+{
+  "contract_version": "A3.1",
+  "depends_on_schema": "A1.1",
+  "migrations": [
+    {
+      "version": "0002",
+      "file": "migrations/0002_journeys_economics.sql",
+      "sha256": "ab7f734d89746c244008c069f85c116bec8a56d529fa94fe3d7e7e5c93bd9154"
+    }
+  ]
+}
