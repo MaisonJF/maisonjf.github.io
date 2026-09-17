@@ -1,0 +1,7 @@
+{
+  "schema_version": "A5.1",
+  "depends_on": ["A1.1", "A3.1", "A4.1"],
+  "migrations": [
+    {"order": 4, "path": "migrations/0004_brain.sql", "runtime": "D1/SQLite"}
+  ]
+}
