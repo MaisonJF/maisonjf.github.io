@@ -17,8 +17,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cat .tmp-poster/512/chunk-* | tr -d '\n\r' | base64 --decode > images/ebooks/virgulas-do-destino-saga-poster-512.webp
           cat .tmp-poster/1024/chunk-* | tr -d '\n\r' | base64 --decode > images/ebooks/virgulas-do-destino-saga-poster.webp
+          python3 -m pip install --quiet Pillow
+          python3 - <<'PY'
+          from PIL import Image
+          source = Image.open('images/ebooks/virgulas-do-destino-saga-poster.webp').convert('RGB')
+          if source.size != (1024, 1536):
+              raise SystemExit(f'unexpected poster size: {source.size}')
+          source.resize((512, 768), Image.Resampling.LANCZOS).save(
+              'images/ebooks/virgulas-do-destino-saga-poster-512.webp',
+              'WEBP', quality=88, method=6
+          )
+          PY
           test -s images/ebooks/virgulas-do-destino-saga-poster-512.webp
           test -s images/ebooks/virgulas-do-destino-saga-poster.webp
           file images/ebooks/virgulas-do-destino-saga-poster-512.webp
