@@ -1,0 +1,24 @@
+{
+  "contract_version": "A1.1",
+  "strategy": "prefixed_uuidv7",
+  "generation": "application_side_only",
+  "normalization": "lowercase",
+  "format": "<prefix>_<uuidv7>",
+  "uuid_standard": "RFC 9562 UUID version 7",
+  "rules": {
+    "never_reuse_id": true,
+    "never_derive_id_from_pii": true,
+    "external_source_ids_are_not_primary_keys": true,
+    "source_retries_use_idempotency_key": true
+  },
+  "prefixes": {
+    "event": "evt",
+    "audit": "aud",
+    "rule_version": "rul",
+    "model_version": "mdl",
+    "journey_future": "jrn",
+    "asset_future": "ast",
+    "need_future": "ned",
+    "solution_future": "sol"
+  }
+}
