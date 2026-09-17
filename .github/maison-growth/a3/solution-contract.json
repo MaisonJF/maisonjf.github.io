@@ -1,0 +1,72 @@
+{
+  "contract_version": "A3.1",
+  "solution_types": {
+    "oracle": {
+      "conversion_event_types": [
+        "oracle.purchase"
+      ],
+      "future_source": "oracle"
+    },
+    "physical_product": {
+      "conversion_event_types": [
+        "product.purchase",
+        "commerce.purchase"
+      ],
+      "future_source": "commerce"
+    },
+    "service": {
+      "conversion_event_types": [
+        "service.booking",
+        "service.contact"
+      ],
+      "future_source": "commerce"
+    },
+    "ebook": {
+      "conversion_event_types": [
+        "product.purchase",
+        "commerce.purchase"
+      ],
+      "future_source": "commerce"
+    },
+    "b2b": {
+      "conversion_event_types": [
+        "b2b.order",
+        "b2b.lead"
+      ],
+      "future_source": "commerce"
+    },
+    "company": {
+      "conversion_event_types": [
+        "company.contact"
+      ],
+      "future_source": "commerce"
+    },
+    "digital_collection": {
+      "conversion_event_types": [
+        "product.purchase",
+        "commerce.purchase"
+      ],
+      "future_source": "commerce",
+      "notes": "Reserved for future MAISON JF® · PÁRA DE IGNORAR! collections; A3 does not build or launch them."
+    },
+    "future_product": {
+      "conversion_event_types": [
+        "product.purchase",
+        "commerce.purchase"
+      ],
+      "future_source": "commerce"
+    }
+  },
+  "conversion_kinds": [
+    "purchase",
+    "booking",
+    "order",
+    "lead"
+  ],
+  "rules": {
+    "solution_id_required_for_conversion": true,
+    "monetary_conversion_requires_observed_value_and_currency_for_economic_assessment": true,
+    "lead_may_be_non_monetary": true,
+    "commercial_pii_allowed": false
+  }
+}
