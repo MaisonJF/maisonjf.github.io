@@ -1,0 +1,9 @@
+{
+  "stage": "A9",
+  "schema_version": "A9.1",
+  "migration": "migrations/0007_publisher_gateway.sql",
+  "depends_on": ["A1.1", "A5.1", "A7.1", "A8.1"],
+  "runtime_required": false,
+  "production_write_enabled": false,
+  "public_site_dependency": false
+}
