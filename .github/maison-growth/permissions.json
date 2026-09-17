@@ -1,0 +1,64 @@
+{
+  "permissions_version": "A0.1",
+  "principle": "least_privilege",
+  "components": {
+    "radar": {
+      "reads": ["approved_signal_sources"],
+      "writes": ["growth.events"],
+      "repo_write": false
+    },
+    "brain": {
+      "reads": ["growth.events", "growth.map", "approved_asset_metadata"],
+      "writes": ["growth.derived", "growth.map"],
+      "repo_write": false
+    },
+    "decider": {
+      "reads": ["growth.map", "growth.economics", "growth.rules"],
+      "writes": ["growth.decisions"],
+      "repo_write": false
+    },
+    "experiment_manager": {
+      "reads": ["growth.assets", "growth.metrics", "approved_solution_catalog"],
+      "writes": ["growth.experiments", "growth.snapshots"],
+      "repo_write": false,
+      "public_change_via": "publisher_gateway"
+    },
+    "commercial_discovery": {
+      "reads": ["growth.map", "growth.economics", "aggregated_oracle_analytics"],
+      "writes": ["growth.commercial_candidates"],
+      "repo_write": false,
+      "may_launch_product": false
+    },
+    "publisher_gateway": {
+      "reads": ["growth.approved_decisions", "growth.path_policy"],
+      "writes": ["allowlisted_repository_paths", "growth.publish_runs", "growth.audit_log"],
+      "repo_write": true,
+      "default": "deny"
+    },
+    "audit": {
+      "reads": ["growth.*"],
+      "writes": ["growth.audit_log"],
+      "append_only": true,
+      "repo_write": false
+    }
+  },
+  "oracle_separation": {
+    "growth_permission": "oracle.analytics.read",
+    "forbidden_permission": "oracle.content.read",
+    "allowed_fields": [
+      "territory_id",
+      "class_id",
+      "usage_event",
+      "timestamp",
+      "journey_reference",
+      "entry_source",
+      "conversion_event",
+      "repeat_usage"
+    ],
+    "forbidden_data": [
+      "paid_reading_body",
+      "paid_answer_text",
+      "generation_corpus_export"
+    ]
+  }
+}
