@@ -1,0 +1,41 @@
+{
+  "contract_version": "A4.1",
+  "default": "deny",
+  "sources": {
+    "gsc": {
+      "status": "adapter_contract_only",
+      "a2_source": "gsc",
+      "accepted_event_prefixes": ["discovery."],
+      "facts_allowed": ["query_hash","page_path","impressions","clicks","position_bucket","country_code","device_class"],
+      "raw_query_text": false
+    },
+    "site": {
+      "status": "adapter_contract_only",
+      "a2_source": "site",
+      "accepted_event_prefixes": ["page.","cta.","navigation."],
+      "facts_allowed": ["path","referrer_host","cta_id","campaign_id","surface"]
+    },
+    "test": {
+      "status": "adapter_contract_only",
+      "a2_source": "test",
+      "accepted_event_prefixes": ["test."],
+      "facts_allowed": ["test_id","result_id","territory_id","surface"]
+    },
+    "oracle": {
+      "status": "adapter_contract_only",
+      "a2_source": "oracle",
+      "accepted_event_prefixes": ["oracle."],
+      "facts_allowed": ["territory_id","class_id","entry_source","repeat_usage","conversion_stage","reading_id_hash"],
+      "paid_answer_text": false,
+      "direct_identity": false
+    },
+    "commerce": {
+      "status": "adapter_contract_only",
+      "a2_source": "commerce",
+      "accepted_event_prefixes": ["commerce.","product.","service.","b2b.","company."],
+      "facts_allowed": ["product_id","category_id","order_ref_hash","payment_status","channel"],
+      "direct_identity": false
+    }
+  },
+  "runtime_note": "A4 does not fetch any source. Future runtime adapters authenticate externally, transform to A2, then A4 consumes normalized events."
+}

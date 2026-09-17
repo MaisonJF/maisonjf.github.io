@@ -1,0 +1,26 @@
+{
+  "policy_version": "coverage_v1",
+  "deterministic": true,
+  "public_asset": {
+    "none": "no active supporting relation",
+    "partial": "at least one active relation and no relation strength >= 80",
+    "sufficient": "at least one active relation strength >= 80"
+  },
+  "solution": {
+    "none": "no active solution relation",
+    "partial": "at least one active relation and no relation strength >= 80",
+    "sufficient": "at least one active relation strength >= 80"
+  },
+  "overall": {
+    "covered": "public=sufficient AND solution=sufficient",
+    "gap": "public=none AND solution=none",
+    "partial": "all other combinations",
+    "future_candidate": "never inferred automatically in A4; explicit internal review state only"
+  },
+  "limits": [
+    "Coverage is a structured map assessment, not a claim that a page is objectively complete.",
+    "Strength is supplied by evidence/rules; A4 does not invent it from prose.",
+    "Economic value never upgrades public coverage automatically.",
+    "A4 never publishes or edits public content."
+  ]
+}

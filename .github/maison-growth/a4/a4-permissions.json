@@ -1,0 +1,32 @@
+{
+  "contract_version": "A4.1",
+  "default": "deny",
+  "inherits": ["../a1/data-permissions.json", "../a2/collector-permissions.json"],
+  "public_site_write": false,
+  "repository_write": false,
+  "public_runtime_dependency": false,
+  "roles": {
+    "map_reader": {
+      "allowed": ["needs.read","intents.read","assets.read","solutions.read","relations.read","coverage.read","evidence.read","radar_signals.read","journeys.read","economics.read"],
+      "forbidden": ["*.public_write","repository.write","oracle.content.read","commercial_pii.read"]
+    },
+    "map_writer": {
+      "allowed": ["needs.insert","intents.insert","assets.insert","relations.insert","coverage_assessments.insert","gaps.insert"],
+      "forbidden": ["public_site.write","repository.write","cta.write","catalog.write","checkout.write","oracle.content.read","commercial_pii.read"]
+    },
+    "radar_writer": {
+      "allowed": ["evidence.insert","radar_signals.insert"],
+      "forbidden": ["public_site.write","repository.write","cta.write","catalog.write","oracle.content.read","commercial_pii.read"]
+    },
+    "solution_linker": {
+      "allowed": ["solutions.read","need_solution_relations.insert","intent_solution_relations.insert"],
+      "forbidden": ["solutions.insert","solutions.update","pricing.write","catalog.write","oracle.content.read"]
+    }
+  },
+  "separation": {
+    "oracle_growth_access": "aggregated_or_pseudonymous_analytics_only",
+    "commercial_identity": "outside_growth_engine",
+    "publication": "not_available_in_A4",
+    "cta_experiments": "not_available_in_A4"
+  }
+}
