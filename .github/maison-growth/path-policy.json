@@ -1,0 +1,88 @@
+{
+  "policy_version": "A0.1",
+  "default_repo_write": "deny",
+  "precedence": "deny_overrides_allow",
+  "protected_paths": [
+    ".github/workflows/**",
+    "_redirects",
+    "functions/api/**",
+    "functions/_lib/**",
+    "checkout*.html",
+    "checkout-*.html",
+    "informacao-legal.html",
+    "robots.txt",
+    "CNAME",
+    "2e7132dc5767b64308add20a2790e2b6.txt"
+  ],
+  "protected_capabilities": [
+    "price_change",
+    "discount_change",
+    "checkout_change",
+    "payment_logic_change",
+    "commercial_promise_change",
+    "paid_content_publication",
+    "legal_policy_change",
+    "infrastructure_change"
+  ],
+  "actions": {
+    "internal_analysis": {
+      "repo_write": false,
+      "allowed_paths": []
+    },
+    "internal_candidate_create": {
+      "repo_write": false,
+      "allowed_paths": []
+    },
+    "commercial_candidate_create": {
+      "repo_write": false,
+      "allowed_paths": []
+    },
+    "cta_experiment": {
+      "repo_write": "publisher_gateway_only",
+      "requires_explicit_target_asset": true,
+      "requires_snapshot": true,
+      "requires_rollback_plan": true,
+      "may_change": [
+        "approved_cta_destination_reference"
+      ],
+      "may_not_change": [
+        "price",
+        "discount",
+        "checkout",
+        "product_definition",
+        "commercial_promise",
+        "paid_content",
+        "legal_content"
+      ]
+    },
+    "ocean_promotion": {
+      "repo_write": "publisher_gateway_only",
+      "create_only_content_roots": [
+        "relacoes/",
+        "cabeca/",
+        "decisoes/",
+        "casa/",
+        "corpo/",
+        "companhia/",
+        "presentes/",
+        "tarot/",
+        "espiritualidade/",
+        "trabalho/",
+        "dinheiro/",
+        "respostas/"
+      ],
+      "may_create": [
+        "<approved-content-root>/<new-slug>.html",
+        "sitemap-oceans-*.xml"
+      ],
+      "may_update": [
+        "sitemap.xml"
+      ],
+      "may_not_modify_existing_content": true,
+      "requires_new_path": true,
+      "requires_hard_gates_pass": true,
+      "requires_evidence_sources_min": 2,
+      "requires_oceans_guard_pass": true
+    }
+  }
+}

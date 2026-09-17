@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "maison-growth-event-v1",
+  "title": "Maison Growth Event Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event_id", "occurred_at", "event_type", "source"],
+  "properties": {
+    "event_id": {"type": "string", "minLength": 8},
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "event_type": {"type": "string", "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"},
+    "source": {"type": "string", "minLength": 1},
+    "journey_id": {"type": ["string", "null"]},
+    "asset_id": {"type": ["string", "null"]},
+    "need_id": {"type": ["string", "null"]},
+    "solution_id": {"type": ["string", "null"]},
+    "value": {"type": ["number", "null"]},
+    "currency": {"type": ["string", "null"], "pattern": "^[A-Z]{3}$"},
+    "metadata": {"type": "object"}
+  },
+  "privacy_contract": {
+    "direct_pii_in_event_envelope": false,
+    "commercial_pii_separate_from_analytics": true,
+    "prefer_pseudonymous_ids": true,
+    "paid_oracle_text_allowed": false
+  }
+}
