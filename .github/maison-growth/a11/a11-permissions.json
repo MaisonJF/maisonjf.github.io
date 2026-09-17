@@ -1,0 +1,41 @@
+{
+  "default": "deny",
+  "mode": "analysis_only",
+  "allow": [
+    "growth.learning.read_inputs",
+    "growth.learning.write_internal",
+    "growth.learning.feedback.append_internal",
+    "growth.learning.proposals.append_internal",
+    "growth.audit.append_internal",
+    "growth.journeys.read",
+    "growth.economics.read",
+    "growth.decisions.read",
+    "growth.experiments.read",
+    "growth.promotions.read"
+  ],
+  "deny": [
+    "repository.write",
+    "public_site.write",
+    "ocean.publish",
+    "cta.write",
+    "catalogue.write",
+    "checkout.write",
+    "payments.write",
+    "price.write",
+    "discount.write",
+    "oracle.content.read",
+    "paid_content.read",
+    "paid_content.write",
+    "policy.write",
+    "legal.write",
+    "permissions.write",
+    "hard_gates.write",
+    "architecture.write",
+    "public_authorization.write",
+    "commercial_promise.write",
+    "product.create",
+    "product.launch",
+    "service.create"
+  ],
+  "public_write_authorized": false
+}
