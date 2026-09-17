@@ -1,0 +1,6 @@
+{
+  "default": "deny",
+  "component": "maison_growth_decisor_a7",
+  "allow": ["growth.a3.journeys.read", "growth.a3.economics.read", "growth.a4.map.read", "growth.a4.evidence.read", "growth.a5.brain.read", "growth.a7.decisions.write_internal", "growth.a7.commercial_candidates.write_internal", "growth.audit.append", "growth.dashboard.read_projection"],
+  "deny": ["repository.write", "public_site.write", "public_page.create", "ocean.publish", "sitemap.write", "indexnow.submit", "navigation.write", "cta.write", "catalogue.write", "checkout.write", "price.write", "discount.write", "commercial_promise.write", "product.create", "service.create", "commercial_pii.read", "oracle.content.read"]
+}

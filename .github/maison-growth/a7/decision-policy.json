@@ -1,0 +1,13 @@
+{
+  "policy_version": "a7_decision_policy_v1",
+  "default": "deny",
+  "core_hard_gates": ["privacy_ok", "architecture_compatible", "paid_value_protected", "no_forbidden_mutation"],
+  "promotion_hard_gates": ["semantic_distinct", "coverage_not_sufficient", "no_material_cannibalization", "editorial_risk_acceptable", "maison_adjacency", "evidence_sufficient"],
+  "minimum_independent_evidence_sources": 2,
+  "promotion_score_threshold": 85,
+  "discovery_weights": {"semantic_distinction": 20, "demand_evidence": 20, "coverage_gap": 15, "public_utility": 15, "commercial_adjacency": 10, "evidence_confidence": 10, "strategic_value": 5, "interlink_capacity": 5},
+  "commercial_weights": {"recurring_demand": 20, "real_gap": 20, "action_willingness": 15, "economic_potential": 15, "repeatability": 10, "differentiation": 10, "maison_fit": 5, "viability": 5},
+  "conflict_confidence_cap": 59,
+  "allowed_decisions": ["observe", "alias", "reinforce", "interlink", "test_cta", "create_internal_candidate", "propose_promotion", "recommend_solution", "commercial_gap", "reject"],
+  "forbidden_automatic_actions": ["publish_ocean", "write_public_site", "change_cta", "create_product", "create_service", "change_price", "create_discount", "change_commercial_promise", "change_checkout", "change_paid_content"]
+}

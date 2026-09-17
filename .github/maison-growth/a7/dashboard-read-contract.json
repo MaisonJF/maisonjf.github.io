@@ -1,0 +1,10 @@
+{
+  "contract_version": 1,
+  "consumer": "A6 Dashboard v1 or successor",
+  "mode": "read_only",
+  "resources": ["decision_runs", "decision_gate_results", "decision_records", "decision_alternatives", "commercial_gap_assessments", "commercial_candidates"],
+  "required_fields": ["reason_codes", "evidence_refs", "confidence_score", "rule_version_id", "model_version_id", "created_at"],
+  "write_back": false,
+  "approval_controls": false,
+  "public_execution_controls": false
+}
