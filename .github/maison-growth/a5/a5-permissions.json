@@ -1,0 +1,25 @@
+{
+  "contract_version": "A5.1",
+  "default": "deny",
+  "component": "brain",
+  "allow": {
+    "read": [
+      "a4.needs", "a4.intents", "a4.assets", "a4.map_evidence", "a4.relations",
+      "a4.coverage", "a4.gaps", "a4.radar_signals",
+      "a3.journey_analytics", "a3.economic_assessments",
+      "a1.rule_versions", "a1.model_versions"
+    ],
+    "write": [
+      "a5.brain_runs", "a5.semantic_observations", "a5.semantic_clusters",
+      "a5.semantic_cluster_members", "a5.semantic_aliases", "a5.coverage_resolutions",
+      "a5.brain_conclusions", "a5.internal_candidates"
+    ]
+  },
+  "deny": [
+    "repository.write", "public_site.write", "pages.write", "redirects.write",
+    "sitemaps.write", "workflows.write", "checkout.write", "public_functions.write",
+    "indexnow.write", "navigation.write", "cta.write", "catalogue.write",
+    "oracle.content.read", "oracle.paid_text.read", "commercial_pii.read",
+    "cloudflare.resources.create", "cloudflare.bindings.write"
+  ]
+}
