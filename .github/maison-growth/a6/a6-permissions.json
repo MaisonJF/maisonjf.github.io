@@ -1,0 +1,23 @@
+{
+  "version": "A6.1",
+  "default": "deny",
+  "component": "dashboard_v1",
+  "allow": [
+    "growth.read.needs", "growth.read.intents", "growth.read.assets", "growth.read.solutions",
+    "growth.read.coverage", "growth.read.evidence", "growth.read.journeys", "growth.read.economics",
+    "growth.read.radar_aggregates", "growth.read.brain", "growth.read.rule_versions", "growth.read.model_versions",
+    "oracle.analytics.aggregate.read"
+  ],
+  "deny": [
+    "public_site.write", "repository.write", "content.write", "catalog.write", "cta.write",
+    "checkout.write", "candidate.approve", "candidate.publish", "oracle.content.read",
+    "oracle.paid_text.read", "commercial_pii.read", "identity.read", "secrets.read"
+  ],
+  "future_runtime": {
+    "authentication_required": true,
+    "authorization_required": true,
+    "role": "growth_dashboard_reader",
+    "public_access": false,
+    "write_methods": false
+  }
+}
