@@ -1,0 +1,49 @@
+{
+  "contract_version": "A5.1",
+  "module": "brain",
+  "depends_on": ["A1.1", "A2.1", "A3.1", "A4.1"],
+  "mode": "analysis_only",
+  "runtime_isolation": {
+    "public_site_dependency": false,
+    "public_site_write": false,
+    "cloudflare_runtime_required_now": false,
+    "external_semantic_model_required_now": false,
+    "repository_only_completion": true
+  },
+  "capabilities": {
+    "semantic_normalization": true,
+    "clustering": true,
+    "aliases": true,
+    "deduplication": true,
+    "coverage_resolution": true,
+    "gap_detection": true,
+    "internal_candidates_as_data_only": true,
+    "publishing": false,
+    "cta_changes": false,
+    "catalogue_changes": false
+  },
+  "states": [
+    "observe", "covered", "gap", "alias_candidate", "reinforcement_candidate",
+    "internal_candidate", "rejected", "archived"
+  ],
+  "coverage_classes": ["none", "partial", "sufficient", "redundant"],
+  "explainability": {
+    "reason_codes_required": true,
+    "evidence_refs_required_when_available": true,
+    "confidence_separate_from_state": true,
+    "rule_version_required": true,
+    "model_version_required_when_model_used": true,
+    "input_hash_required": true
+  },
+  "privacy": {
+    "deny_by_default": true,
+    "direct_pii": false,
+    "commercial_pii": false,
+    "oracle_paid_content": false,
+    "semantic_inputs_must_be_privacy_reviewed": true
+  },
+  "completion": {
+    "repository_complete_when": "contracts, migration, deterministic semantic provider, brain logic, tests and validator pass and PR checks pass",
+    "a6_must_not_start_implicitly": true
+  }
+}
