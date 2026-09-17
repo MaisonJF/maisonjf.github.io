@@ -2,6 +2,6 @@
   "migration": "0003_living_map_radar.sql",
   "contract_version": "A4.1",
   "depends_on": ["A1 schema/migration 0001", "A3 migration 0002_journeys_economics.sql"],
-  "sha256": "82ab28ef975f625ad135e4547d0bab390ec1c2b95dce1613c1baa444dcf3a238",
+  "sha256": "9b5950212e31755ede93943f8bbd6340824e380a7a12827cf847115182c308f2",
   "runtime": "D1/SQLite compatible; not applied to any Cloudflare resource in A4"
 }
