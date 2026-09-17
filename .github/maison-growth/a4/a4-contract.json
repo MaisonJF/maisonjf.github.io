@@ -1,0 +1,47 @@
+{
+  "contract_version": "A4.1",
+  "module": "living_map_core_radar",
+  "depends_on": [
+    "A0",
+    "A1.1",
+    "A2.1",
+    "A3.1"
+  ],
+  "mode": "analysis_only",
+  "runtime_isolation": {
+    "public_site_dependency": false,
+    "public_site_write": false,
+    "repository_write": false,
+    "publisher_available": false,
+    "cta_mutation": false,
+    "commercial_catalog_mutation": false,
+    "cloudflare_runtime_required_now": false,
+    "external_credentials_required_now": false
+  },
+  "map": {
+    "entities": ["needs", "intents", "assets", "solutions"],
+    "coverage_states": ["none", "partial", "sufficient"],
+    "internal_states": ["observe", "covered", "partial", "gap", "future_candidate", "archived"],
+    "future_candidate_is_internal_only": true,
+    "automatic_publication": false
+  },
+  "radar": {
+    "consumes": "A2 normalized events and A3 pseudonymous journey/conversion/economics facts",
+    "sources": ["gsc", "site", "test", "oracle", "commerce"],
+    "unknown_sources": "reject",
+    "raw_external_fetching_now": false,
+    "oracle_paid_content": false
+  },
+  "privacy": {
+    "deny_by_default": true,
+    "direct_pii": false,
+    "commercial_pii_in_analytics": false,
+    "paid_oracle_text": false,
+    "pseudonymous_ids_only": true
+  },
+  "completion": {
+    "repository_complete_when": "migration, map/radar engine, repository adapter, contracts, tests and validator pass and PR checks pass",
+    "runtime_activation_deferred": true,
+    "a5_must_not_start_implicitly": true
+  }
+}
