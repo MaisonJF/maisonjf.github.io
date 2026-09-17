@@ -11,6 +11,11 @@
 <link rel="stylesheet" href="./maison.css">
 <script src="./analytics.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://maison-jf.com/#organization","name":"MAISON JF®","url":"https://maison-jf.com/","logo":"https://maison-jf.com/maison-jf-mark.svg"},{"@type":"WebSite","@id":"https://maison-jf.com/#website","url":"https://maison-jf.com/","name":"MAISON JF®","publisher":{"@id":"https://maison-jf.com/#organization"},"inLanguage":"pt-PT"}]}</script>
+<style>
+.home-feature--ebooks .home-feature__media{aspect-ratio:2/3;max-height:680px;background:#060606}
+.home-feature--ebooks .home-feature__media img{object-fit:contain;background:#060606}
+@media(max-width:900px){.home-page--final .home-feature--ebooks .home-feature__media{aspect-ratio:2/3;max-width:620px;margin-inline:auto}}
+</style>
 </head>
 <body class="home-page home-page--final">
 <header class="site-header site-header--home">
@@ -31,9 +36,7 @@
       <img src="./images/cinematic/cabeca.avif" fetchpriority="high" alt="Homem em reflexão num interior costeiro ao entardecer">
     </div>
     <div class="hero__copy hero__copy--final">
-      <div class="hero__identity">
-        <p class="eyebrow">MAISON JF®</p>
-      </div>
+      <div class="hero__identity"><p class="eyebrow">MAISON JF®</p></div>
       <h1 class="hero__headline">PÁRA DE IGNORAR!</h1>
       <p class="hero__tagline">Volta Para Casa.</p>
       <div class="hero__actions">
@@ -45,7 +48,7 @@
 
   <section class="home-section-head shell" id="portas">
     <p class="eyebrow">As quatro portas</p>
-    <h2>Não tens de saber o nome da solução.</h2>
+    <h2>Não precisas de saber o nome do que te falta.</h2>
   </section>
 
   <section class="doors doors--editorial shell" aria-label="As quatro portas da Maison">
@@ -70,22 +73,15 @@
   <section class="home-feature home-feature--text shell" id="teste">
     <div class="home-feature__copy">
       <p class="eyebrow">Teste · ~2 min</p>
-      <h2>Talvez já saibas onde aperta. Talvez só ainda não lhe tenhas dado nome.</h2>
-      <p>Responde sem pensar demasiado. Vê qual Porta aparece primeiro.</p>
+      <h2>Há qualquer coisa a apertar. Talvez só ainda não lhe tenhas dado nome.</h2>
       <a class="button button--light" href="./teste/">FAZER O TESTE</a>
     </div>
   </section>
 
   <section class="home-services shell" id="servicos">
     <div class="home-services__head">
-      <div>
-        <p class="eyebrow">Serviços</p>
-        <h2>Há coisas que pedem mais do que um gesto pequeno.</h2>
-      </div>
-      <div>
-        <p>Uma pergunta, uma conversa ou continuidade. Escolhe só o nível de presença de que precisas agora.</p>
-        <a class="button" href="./servicos/">VER SERVIÇOS</a>
-      </div>
+      <div><p class="eyebrow">Serviços</p><h2>Nem tudo se resolve com a mesma profundidade.</h2></div>
+      <div><p>Uma pergunta, uma conversa ou continuidade. Escolhe o nível de presença de que precisas agora.</p><a class="button" href="./servicos/">VER SERVIÇOS</a></div>
     </div>
     <div class="home-services__grid">
       <a href="./servicos/"><span>Tarot & Respostas</span><b>Quero uma resposta. →</b></a>
@@ -98,16 +94,13 @@
   <section class="home-feature home-feature--text shell home-feature--oraculo" id="oraculo">
     <div class="home-feature__copy">
       <p class="eyebrow">Oráculo</p>
-      <h2>Quando uma pergunta não te larga.</h2>
-      <p>Leva-a contigo. Escolhe o território onde ela vive e abre outra perspectiva.</p>
+      <h2>Há perguntas que não pedem conselho. Pedem outra perspectiva.</h2>
       <a class="button" href="./oraculo/">ABRIR O ORÁCULO</a>
     </div>
   </section>
 
   <section class="home-feature home-feature--reverse shell" id="produtos">
-    <div class="home-feature__media">
-      <img src="./images/cinematic/ritual.avif" alt="Ritual sensorial de corpo e ambiente">
-    </div>
+    <div class="home-feature__media"><img src="./images/cinematic/ritual.avif" alt="Ritual sensorial de corpo e ambiente"></div>
     <div class="home-feature__copy">
       <p class="eyebrow">Produtos</p>
       <h2>Muda uma coisa antes de tentares mudar tudo.</h2>
@@ -116,35 +109,33 @@
     </div>
   </section>
 
-  <section class="home-feature home-feature--text shell" id="ebooks">
+  <section class="home-feature shell home-feature--ebooks" id="ebooks">
+    <div class="home-feature__media">
+      <img src="./images/ebooks/virgulas-do-destino-saga-poster.webp" alt="Poster oficial da saga Vírgulas do Destino" loading="lazy">
+    </div>
     <div class="home-feature__copy">
-      <p class="eyebrow">Ebooks</p>
-      <h2>Há perguntas que pedem mais tempo.</h2>
-      <p>Leituras para ficares um pouco mais com aquilo que ainda não fechou.</p>
+      <p class="eyebrow">Biblioteca · Éditions Maison JF</p>
+      <h2>Há histórias que te apanham antes de perceberes porquê.</h2>
+      <p>Os primeiros volumes de <em>Vírgulas do Destino</em> já estão na Biblioteca. A história continua.</p>
       <a class="button" href="./ebooks/">ABRIR A BIBLIOTECA</a>
     </div>
   </section>
 
-  <section class="home-feature shell" id="companhia">
-    <div class="home-feature__media">
-      <img src="./images/cinematic/companhia.avif" alt="Espaço preparado para partilhar tempo e presença">
-    </div>
+  <section class="home-feature home-feature--reverse shell" id="companhia">
+    <div class="home-feature__media"><img src="./images/cinematic/companhia.avif" alt="Espaço preparado para partilhar tempo e presença"></div>
     <div class="home-feature__copy">
       <p class="eyebrow">Companhia</p>
-      <h2>Há coisas que pesam menos a dois.</h2>
-      <p>Quando o plano já existe e só não queres atravessá-lo sozinho.</p>
+      <h2>Não adies o plano só porque falta alguém ao lado.</h2>
       <a class="button" href="./portas/companhia">ENTRAR NA COMPANHIA</a>
     </div>
   </section>
 
   <section class="home-feature shell home-feature--professionals" id="profissionais">
-    <div class="home-feature__media">
-      <img src="./profissionais.jpg" alt="Espaço reservado a profissionais e parceiros MAISON JF">
-    </div>
+    <div class="home-feature__media"><img src="./profissionais.jpg" alt="Espaço reservado a profissionais e parceiros MAISON JF"></div>
     <div class="home-feature__copy">
-      <p class="eyebrow">Profissionais</p>
-      <h2>O teu espaço também pode estar a pedir outra coisa.</h2>
-      <p>Para lojas, spas e outros espaços que querem criar uma experiência com intenção.</p>
+      <p class="eyebrow">Profissionais · B2B</p>
+      <h2>Antes da compra, já existe uma experiência.</h2>
+      <p>Revenda, pequenas séries e propostas pensadas para o teu espaço e para o teu cliente.</p>
       <a class="button" href="./profissionais/">ENTRAR NO ESPAÇO PROFISSIONAL</a>
     </div>
   </section>
@@ -152,18 +143,9 @@
 
 <footer class="home-footer">
   <div class="shell home-footer__grid">
-    <div class="home-footer__brand">
-      <strong>MAISON JF®</strong>
-      <p>PÁRA DE IGNORAR.<br>Volta Para Casa.</p>
-    </div>
-    <div class="home-footer__group">
-      <span>Explorar</span>
-      <nav aria-label="Explorar"><a href="./teste/">Teste</a><a href="./produtos/">Produtos</a><a href="./servicos/">Serviços</a><a href="./oraculo/">Oráculo</a><a href="./ebooks/">Ebooks</a></nav>
-    </div>
-    <div class="home-footer__group">
-      <span>Maison</span>
-      <nav aria-label="Maison"><a href="./profissionais/">Profissionais</a><a href="./press/">Press</a><a href="./contacto/">Contacto</a><a href="./envios">Envios</a><a href="./informacao-legal">Legal & Privacidade</a></nav>
-    </div>
+    <div class="home-footer__brand"><strong>MAISON JF®</strong><p>PÁRA DE IGNORAR.<br>Volta Para Casa.</p></div>
+    <div class="home-footer__group"><span>Explorar</span><nav aria-label="Explorar"><a href="./teste/">Teste</a><a href="./produtos/">Produtos</a><a href="./servicos/">Serviços</a><a href="./oraculo/">Oráculo</a><a href="./ebooks/">Ebooks</a></nav></div>
+    <div class="home-footer__group"><span>Maison</span><nav aria-label="Maison"><a href="./profissionais/">Profissionais</a><a href="./press/">Press</a><a href="./contacto/">Contacto</a><a href="./envios">Envios</a><a href="./informacao-legal">Legal & Privacidade</a></nav></div>
     <p class="home-footer__legal">Marca registada na União Europeia · Certificação PME pelo IAPMEI.</p>
   </div>
 </footer>
