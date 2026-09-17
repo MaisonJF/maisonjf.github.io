@@ -1,0 +1,41 @@
+{
+  "contract_version": "A1.1",
+  "module": "Data Foundation",
+  "depends_on": [
+    "A0"
+  ],
+  "runtime_isolation": {
+    "public_site_dependency": false,
+    "public_site_write": false,
+    "public_http_surface": false,
+    "cloudflare_resource_provisioning_in_repo_step": false
+  },
+  "database": {
+    "target": "Cloudflare D1",
+    "provisioned": false,
+    "canonical_schema": "schema.sql",
+    "migration_manifest": "migration-manifest.json"
+  },
+  "required_tables": [
+    "rule_versions",
+    "model_versions",
+    "events",
+    "audit_log",
+    "idempotency_registry",
+    "schema_state"
+  ],
+  "immutability": [
+    "events",
+    "audit_log",
+    "rule_versions",
+    "model_versions",
+    "idempotency_registry"
+  ],
+  "event_contract": "event-contract-v2.json",
+  "completion": {
+    "repository_contract_complete": true,
+    "local_sql_validation_required": true,
+    "remote_d1_provisioning_required_for_runtime": true,
+    "a2_must_not_start_implicitly": true
+  }
+}

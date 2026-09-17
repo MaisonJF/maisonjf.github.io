@@ -1,0 +1,15 @@
+{
+  "manifest_version": "A1.1",
+  "database_kind": "Cloudflare D1 / SQLite",
+  "provisioned": false,
+  "binding_created": false,
+  "migrations": [
+    {
+      "version": 1,
+      "file": "migrations/0001_data_foundation.sql",
+      "sha256": "43267bc71e647c934077bafd82c76cd39c5b521e90a7e0167b77f0c1eef98724"
+    }
+  ],
+  "canonical_schema_file": "schema.sql",
+  "canonical_schema_sha256": "43267bc71e647c934077bafd82c76cd39c5b521e90a7e0167b77f0c1eef98724"
+}
