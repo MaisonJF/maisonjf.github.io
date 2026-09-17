@@ -1,0 +1,37 @@
+{
+  "default": "deny",
+  "identity": "maison-growth-publisher",
+  "mode": "dry_run_only",
+  "allow": [
+    "growth.approved_decisions.read",
+    "growth.internal_candidates.read",
+    "growth.experiments.read",
+    "growth.publish_runs.write_internal",
+    "growth.audit.append_internal",
+    "repository.diff.simulate",
+    "repository.rollback.simulate"
+  ],
+  "future_only_after_explicit_activation": [
+    "repository.allowlisted.write_via_publisher_gateway",
+    "repository.branch.create_via_publisher_gateway",
+    "repository.pull_request.create_via_publisher_gateway"
+  ],
+  "deny": [
+    "repository.production.write",
+    "repository.direct_main.write",
+    "repository.workflow.write",
+    "public_site.autonomous_write",
+    "checkout.write",
+    "payments.write",
+    "price.write",
+    "discount.write",
+    "legal.write",
+    "secrets.read",
+    "oracle.content.read",
+    "paid_content.write",
+    "product.create",
+    "product.launch",
+    "service.create",
+    "commercial_promise.write"
+  ]
+}
