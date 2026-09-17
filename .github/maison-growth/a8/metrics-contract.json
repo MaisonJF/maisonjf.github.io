@@ -1,0 +1,18 @@
+{
+  "version": "A8.metrics.1",
+  "unit_of_eligibility": "eligible_session",
+  "primary_metric_recommendation": "economic_value_per_eligible_session",
+  "secondary_examples": [
+    "cta_click_rate",
+    "conversion_rate",
+    "abandonment_rate",
+    "technical_error_rate"
+  ],
+  "rules": [
+    "CTR must never be substituted for economic value.",
+    "Economic value uses structured A3 assessments when available.",
+    "Missing economics remains missing; it is not inferred from price.",
+    "An exposure without conversion contributes zero observed economic value, not missing value.",
+    "Performance conclusions require the configured minimum eligible sample unless a technical stop rule fires."
+  ]
+}
