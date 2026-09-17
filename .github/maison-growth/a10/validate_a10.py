@@ -45,7 +45,8 @@ def validate_sql():
     else: raise AssertionError('immutable run was updateable')
 
 def main():
-    validate_contracts(); validate_sql(); proc=subprocess.run([sys.executable,str(ROOT/'test_a10.py')],cwd=str(ROOT),capture_output=True,text=True)
+    validate_contracts(); validate_sql()
+    proc=subprocess.run([sys.executable,'-m','unittest','discover','-s',str(ROOT),'-p','test_a10*.py'],cwd=str(ROOT),capture_output=True,text=True)
     if proc.returncode: print(proc.stdout); print(proc.stderr,file=sys.stderr); raise SystemExit(proc.returncode)
     print(proc.stderr,end=''); print('A10 contract: OK')
 
