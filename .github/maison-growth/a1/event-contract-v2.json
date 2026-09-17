@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "maison-growth-event-v2",
+  "title": "Maison Growth Event Envelope v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "idempotency_key",
+    "occurred_at",
+    "event_type",
+    "source",
+    "schema_version",
+    "privacy_class",
+    "payload_hash"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt_[0-9a-f-]{36}$"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 200
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "event_type": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 2
+    },
+    "journey_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^jrn_[0-9a-f-]{36}$"
+    },
+    "asset_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^ast_[0-9a-f-]{36}$"
+    },
+    "need_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^ned_[0-9a-f-]{36}$"
+    },
+    "solution_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^sol_[0-9a-f-]{36}$"
+    },
+    "value_minor": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "currency": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z]{3}$"
+    },
+    "privacy_class": {
+      "type": "string",
+      "enum": [
+        "anonymous",
+        "pseudonymous",
+        "aggregated",
+        "system"
+      ]
+    },
+    "payload_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "rule_version_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^rul_[0-9a-f-]{36}$"
+    },
+    "model_version_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^mdl_[0-9a-f-]{36}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "value_minor": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "value_minor"
+        ]
+      },
+      "then": {
+        "required": [
+          "currency"
+        ]
+      }
+    }
+  ],
+  "privacy_contract": {
+    "direct_pii_in_event_envelope": false,
+    "commercial_pii_separate_from_analytics": true,
+    "prefer_pseudonymous_ids": true,
+    "paid_oracle_text_allowed": false
+  }
+}
