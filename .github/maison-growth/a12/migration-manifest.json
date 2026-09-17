@@ -1,0 +1,12 @@
+{
+  "contract_version": "A12.1",
+  "migrations": [
+    {
+      "order": 10,
+      "path": "migrations/0010_gradual_autonomy_dashboard_v2.sql",
+      "sha256": "7d3d6cda5aca8adedf160e9e8f938e6419ae4b11be99082d9547f538f86cab96",
+      "runtime_required_now": false
+    }
+  ],
+  "provision_external_runtime": false
+}
