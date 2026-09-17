@@ -1,0 +1,18 @@
+{
+  "version": "A6.dashboard-data.v1",
+  "required_top_level": [
+    "meta", "needs", "intents", "assets", "solutions", "coverage", "journeys", "economics",
+    "oracle_aggregates", "clusters", "aliases", "gaps", "candidates", "conclusions", "evidence"
+  ],
+  "meta": {
+    "required": ["generated_at", "data_status", "source_label"],
+    "data_status": ["observed", "inferred", "missing", "fixture"]
+  },
+  "oracle_aggregates": {
+    "allowed_fields": ["territory_key", "class_key", "usage_count", "purchase_count", "conversion_count", "period_start", "period_end", "data_status"],
+    "forbidden_fields": ["answer", "answer_text", "question_text", "reading", "reading_text", "response_text", "customer_email", "email", "name"]
+  },
+  "why": {
+    "required_for_conclusions": ["reason_codes", "evidence_refs", "confidence_score", "rule_version", "model_version", "data_status"]
+  }
+}

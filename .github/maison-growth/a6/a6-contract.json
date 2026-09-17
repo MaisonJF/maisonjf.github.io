@@ -1,0 +1,39 @@
+{
+  "contract_version": "A6.1",
+  "module": "dashboard_v1",
+  "depends_on": ["A1.1", "A3.1", "A4.1", "A5.1"],
+  "mode": "read_only_internal",
+  "runtime_isolation": {
+    "public_site_dependency": false,
+    "public_site_write": false,
+    "cloudflare_runtime_required_now": false,
+    "repository_only_completion": true,
+    "local_preview_loopback_only": true
+  },
+  "capabilities": {
+    "living_map": true,
+    "coverage_states": ["none", "partial", "sufficient", "redundant"],
+    "journeys": true,
+    "economics": true,
+    "oracle_aggregates_only": true,
+    "brain_clusters_aliases_gaps_candidates": true,
+    "why_explainability": true,
+    "minimal_filters": ["territory", "coverage", "state", "source", "data_status"],
+    "provenance_labels": ["observed", "inferred", "missing", "fixture"]
+  },
+  "forbidden": [
+    "public_site.write", "repository.write", "publish", "catalog.write", "cta.write",
+    "checkout.write", "candidate.approve", "oracle.content.read", "commercial_pii.read"
+  ],
+  "privacy": {
+    "direct_pii": false,
+    "commercial_pii": false,
+    "oracle_paid_text": false,
+    "pseudonymous_or_aggregated_only": true
+  },
+  "completion": {
+    "repository_complete_when": "read-only dashboard model, local preview renderer, fixture/empty states, permissions and automatic tests pass; PR checks pass",
+    "cloudflare_activation_deferred": true,
+    "a7_must_not_start_implicitly": true
+  }
+}
