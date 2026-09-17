@@ -1,0 +1,63 @@
+{
+  "contract_version": "A2.1",
+  "default": "deny",
+  "inherits": "../a1/data-permissions.json",
+  "public_site_write": false,
+  "public_runtime_dependency": false,
+  "public_http_endpoint_provisioned": false,
+  "cloudflare_resources_provisioned": false,
+  "roles": {
+    "collector_ingest": {
+      "allowed": [
+        "ingestion.validate",
+        "ingestion.normalize",
+        "source_registry.read",
+        "event_contract.read"
+      ],
+      "forbidden": [
+        "checkout.write",
+        "commercial_pii.read",
+        "oracle.content.read",
+        "pricing.write",
+        "public_site.write",
+        "repository.write"
+      ]
+    },
+    "collector_event_writer": {
+      "allowed": [
+        "events.insert",
+        "idempotency_registry.insert"
+      ],
+      "forbidden": [
+        "audit_log.write",
+        "commercial_pii.read",
+        "events.delete",
+        "events.update",
+        "model_versions.write",
+        "oracle.content.read",
+        "public_site.write",
+        "repository.write",
+        "rule_versions.write"
+      ]
+    },
+    "collector_failure_handler": {
+      "allowed": [
+        "retry.plan",
+        "dead_letter.prepare_sanitized"
+      ],
+      "forbidden": [
+        "commercial_pii.read",
+        "dead_letter.store_raw_rejected_payload",
+        "oracle.content.read",
+        "public_site.write",
+        "repository.write"
+      ]
+    }
+  },
+  "separation": {
+    "analytics_store": "A1 events / idempotency registry only",
+    "commercial_identifiable_store": "outside Growth Engine",
+    "oracle_paid_content": "never available to collector",
+    "rejected_payloads": "never persisted raw when validation/privacy fails"
+  }
+}
