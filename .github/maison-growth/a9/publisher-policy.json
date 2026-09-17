@@ -1,0 +1,70 @@
+{
+  "policy_version": "A9.1",
+  "default": "deny",
+  "mode": "dry_run_only",
+  "branch_prefix": "growth/publish/",
+  "protected_paths": [
+    ".github/workflows/**",
+    "_redirects",
+    "functions/api/**",
+    "functions/_lib/**",
+    "checkout*.html",
+    "checkout-*.html",
+    "informacao-legal.html",
+    "legal/**",
+    "termos*.html",
+    "politica*.html",
+    "robots.txt",
+    "CNAME",
+    "2e7132dc5767b64308add20a2790e2b6.txt",
+    ".env",
+    ".env.*",
+    "*secret*",
+    "**/*secret*",
+    "*payment*",
+    "**/*payment*",
+    "*price*",
+    "**/*price*"
+  ],
+  "protected_capabilities": [
+    "price_change",
+    "discount_change",
+    "checkout_change",
+    "payment_logic_change",
+    "commercial_promise_change",
+    "paid_content_publication",
+    "legal_policy_change",
+    "infrastructure_change",
+    "workflow_change",
+    "secret_change",
+    "product_launch"
+  ],
+  "actions": {
+    "ocean_promotion": {
+      "requires": ["decision_id", "candidate_id", "baseline_commit_sha", "snapshot_hash"],
+      "create_content_roots": ["relacoes/", "cabeca/", "decisoes/", "casa/", "corpo/", "companhia/", "presentes/", "tarot/", "espiritualidade/", "trabalho/", "dinheiro/", "respostas/"],
+      "may_create_patterns": ["<content-root>/<new-slug>.html", "sitemap-oceans-*.xml"],
+      "may_update_exact": ["sitemap.xml"],
+      "may_delete": false,
+      "may_modify_existing_content": false,
+      "required_validations": ["diff_allowlist", "snapshot_match", "content_contract", "link_validation", "ocean_guard"],
+      "ocean_guard_required": true
+    },
+    "cta_experiment": {
+      "requires": ["decision_id", "experiment_id", "baseline_commit_sha", "snapshot_hash", "target_asset_path"],
+      "may_update_exact_from_request": "target_asset_path",
+      "allowed_mutation_capabilities": ["approved_cta_destination_reference"],
+      "may_create": false,
+      "may_delete": false,
+      "required_validations": ["diff_allowlist", "snapshot_match", "experiment_snapshot_match", "link_validation", "ocean_guard"],
+      "ocean_guard_required": true
+    },
+    "rollback": {
+      "requires": ["decision_id", "baseline_commit_sha", "rollback_of_publish_run_id", "snapshot_hash"],
+      "exact_original_file_set_only": true,
+      "exact_previous_hashes_only": true,
+      "required_validations": ["rollback_exactness", "diff_allowlist", "ocean_guard"],
+      "ocean_guard_required": true
+    }
+  }
+}

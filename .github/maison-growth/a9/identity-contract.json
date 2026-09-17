@@ -1,0 +1,21 @@
+{
+  "identity_version": "A9.1",
+  "publisher_principal": "maison-growth-publisher",
+  "credential_kind_future": "github_app_or_equivalent_bot",
+  "credential_state": "not_provisioned",
+  "credential_storage": "external_secret_store_only",
+  "repository_secret_storage_allowed": false,
+  "shared_with_other_growth_modules": false,
+  "production_write_enabled": false,
+  "required_runtime_scopes_future": [
+    "contents:write_allowlisted_via_gateway",
+    "pull_requests:write_gateway_only",
+    "checks:read"
+  ],
+  "forbidden_scopes": [
+    "administration",
+    "secrets:read",
+    "workflows:write",
+    "actions:write"
+  ]
+}
