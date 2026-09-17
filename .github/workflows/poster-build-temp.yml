@@ -1,0 +1,31 @@
+name: Temporary poster asset build
+on:
+  push:
+    branches: [poster-quality-fix-2026-09-17]
+    paths:
+      - '.poster-build-ready'
+permissions:
+  contents: write
+jobs:
+  build-poster:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Rebuild responsive poster assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .tmp-poster/512/chunk-* | tr -d '\n\r' | base64 --decode > images/ebooks/virgulas-do-destino-saga-poster-512.webp
+          cat .tmp-poster/1024/chunk-* | tr -d '\n\r' | base64 --decode > images/ebooks/virgulas-do-destino-saga-poster.webp
+          test -s images/ebooks/virgulas-do-destino-saga-poster-512.webp
+          test -s images/ebooks/virgulas-do-destino-saga-poster.webp
+          file images/ebooks/virgulas-do-destino-saga-poster-512.webp
+          file images/ebooks/virgulas-do-destino-saga-poster.webp
+          rm -rf .tmp-poster .poster-build-ready .github/workflows/poster-build-temp.yml
+          git config user.name 'Maison JF automation'
+          git config user.email 'maisonjf@users.noreply.github.com'
+          git add -A
+          git commit -m 'Fix poster image quality'
+          git push origin HEAD:${GITHUB_REF_NAME}
