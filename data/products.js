@@ -21,10 +21,9 @@ window.MAISON_PRODUCTS=[
  cta:'Quero levar para casa'
 },
 {
- slug:'oleo-massagem',name:'Óleo de Massagem',size:'60 ml',category:'Corpo',price:12,currency:'EUR',
- priceNote:'12–12,50 € consoante a referência',
+ slug:'oleo-massagem',name:'Óleo de Massagem',size:'60 ml',category:'Corpo',price:12.5,currency:'EUR',
  description:'Toque e pausa num ritual simples de massagem.',
- media:[{role:'hero',src:'../images/root/oleo-massagem.webp',alt:'Óleo de massagem MAISON JF em ambiente editorial',aspect:'portrait'}],
+ media:[{role:'hero',src:'../images/cinematic/ritual.avif',alt:'Atmosfera editorial MAISON JF de toque e pausa',aspect:'portrait',editorial:true}],
  ritual:{title:'O corpo percebe o toque antes da explicação.',text:'Alguns minutos de massagem podem ser uma forma simples de devolver presença ao corpo.'},
  cta:'Quero saber mais'
 },
@@ -38,7 +37,7 @@ window.MAISON_PRODUCTS=[
 {
  slug:'escalda-pes',name:'Escalda-Pés',size:'150 g',category:'Corpo',price:5,currency:'EUR',
  description:'Um gesto simples para parar, aquecer e criar um momento para os pés.',
- media:[{role:'hero',src:'../images/root/corpo-escalda-pes.webp',alt:'Escalda-pés MAISON JF num momento de cuidado corporal',aspect:'portrait'}],
+ media:[{role:'hero',src:'../ambient.jpg',alt:'Atmosfera editorial MAISON JF para uma pausa de cuidado corporal',aspect:'portrait',editorial:true}],
  ritual:{title:'Não compliques a pausa.',text:'Água morna, aroma e alguns minutos em que ninguém te pede nada.'},
  cta:'Quero criar este momento'
 }
