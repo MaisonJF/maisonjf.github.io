@@ -1,0 +1,112 @@
+{
+  "contract_version": "A2.1",
+  "default": "deny",
+  "unknown_sources": "reject",
+  "sources": {
+    "site": {
+      "status": "planned",
+      "privacy_class": ["anonymous", "pseudonymous"],
+      "allowed_event_prefixes": ["page.", "cta.", "navigation."],
+      "metadata": {
+        "path": {"type": "public_path", "maxLength": 500},
+        "referrer_host": {"type": "hostname", "maxLength": 255},
+        "cta_id": {"type": "token", "maxLength": 120},
+        "campaign_id": {"type": "token", "maxLength": 120},
+        "surface": {"type": "token", "maxLength": 80}
+      }
+    },
+    "internal_search": {
+      "status": "planned",
+      "privacy_class": ["anonymous", "pseudonymous", "aggregated"],
+      "allowed_event_prefixes": ["internal_search."],
+      "metadata": {
+        "query_hash": {"type": "sha256"},
+        "query_classification": {"type": "token", "maxLength": 120},
+        "result_count": {"type": "integer", "minimum": 0},
+        "had_results": {"type": "boolean"},
+        "surface": {"type": "token", "maxLength": 80}
+      },
+      "notes": ["Raw search text is not accepted by A2. A future privacy-aware adapter must transform it before ingestion."]
+    },
+    "test": {
+      "status": "planned",
+      "privacy_class": ["anonymous", "pseudonymous", "aggregated"],
+      "allowed_event_prefixes": ["test."],
+      "metadata": {
+        "test_id": {"type": "token", "maxLength": 120},
+        "result_id": {"type": "token", "maxLength": 120},
+        "territory_id": {"type": "token", "maxLength": 120},
+        "surface": {"type": "token", "maxLength": 80}
+      }
+    },
+    "oracle": {
+      "status": "planned",
+      "privacy_class": ["pseudonymous", "aggregated"],
+      "allowed_event_prefixes": ["oracle."],
+      "metadata": {
+        "territory_id": {"type": "token", "maxLength": 120},
+        "class_id": {"type": "token", "maxLength": 120},
+        "entry_source": {"type": "token", "maxLength": 120},
+        "repeat_usage": {"type": "boolean"},
+        "conversion_stage": {"type": "token", "maxLength": 80},
+        "reading_id_hash": {"type": "sha256"}
+      },
+      "notes": [
+        "Paid Oracle text is never accepted.",
+        "Only aggregate or pseudonymous analytics may cross into the Growth Engine."
+      ]
+    },
+    "commerce": {
+      "status": "planned",
+      "privacy_class": ["pseudonymous", "aggregated"],
+      "allowed_event_prefixes": ["commerce.", "product.", "service.", "b2b.", "company."],
+      "metadata": {
+        "product_id": {"type": "token", "maxLength": 160},
+        "category_id": {"type": "token", "maxLength": 120},
+        "order_ref_hash": {"type": "sha256"},
+        "payment_status": {"type": "token", "maxLength": 80},
+        "channel": {"type": "token", "maxLength": 80}
+      },
+      "notes": ["Email, customer name, postal data, Stripe customer IDs and other commercial PII remain outside Growth analytics."]
+    },
+    "gsc": {
+      "status": "planned",
+      "privacy_class": ["aggregated"],
+      "allowed_event_prefixes": ["discovery."],
+      "metadata": {
+        "query_hash": {"type": "sha256"},
+        "page_path": {"type": "public_path", "maxLength": 500},
+        "impressions": {"type": "integer", "minimum": 0},
+        "clicks": {"type": "integer", "minimum": 0},
+        "position_bucket": {"type": "token", "maxLength": 40},
+        "country_code": {"type": "country_code"},
+        "device_class": {"type": "token", "maxLength": 40}
+      },
+      "notes": ["Raw search query text is not accepted by A2; future adapters may emit privacy-reviewed derived language signals."]
+    },
+    "bing": {
+      "status": "planned",
+      "privacy_class": ["aggregated"],
+      "allowed_event_prefixes": ["discovery."],
+      "metadata": {
+        "query_hash": {"type": "sha256"},
+        "page_path": {"type": "public_path", "maxLength": 500},
+        "impressions": {"type": "integer", "minimum": 0},
+        "clicks": {"type": "integer", "minimum": 0},
+        "position_bucket": {"type": "token", "maxLength": 40},
+        "country_code": {"type": "country_code"},
+        "device_class": {"type": "token", "maxLength": 40}
+      }
+    },
+    "system": {
+      "status": "planned",
+      "privacy_class": ["system"],
+      "allowed_event_prefixes": ["collector.", "system."],
+      "metadata": {
+        "component": {"type": "token", "maxLength": 120},
+        "code": {"type": "token", "maxLength": 120},
+        "attempt": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}
