@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import html, json
-from typing import Any, Mapping
+from typing import Any, Mapping, Iterable
 from engine import prioritized_inbox
 
 def why(action:Mapping[str,Any])->dict[str,Any]:
