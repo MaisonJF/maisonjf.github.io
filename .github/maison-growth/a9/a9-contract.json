@@ -1,0 +1,24 @@
+{
+  "contract_version": "A9.1",
+  "mode": "dry_run_only",
+  "role": "sole_future_public_writer",
+  "decides_what_to_publish": false,
+  "production_credentials_present": false,
+  "principles": {
+    "default": "deny",
+    "deny_overrides_allow": true,
+    "branch_per_publish_run": true,
+    "validate_diff_before_write": true,
+    "snapshot_before_change": true,
+    "exact_rollback": true,
+    "audit_every_step": true,
+    "public_side_effects_enabled": false
+  },
+  "required_links": {
+    "all_actions": ["publish_run_id", "decision_id", "baseline_commit_sha"],
+    "ocean_promotion": ["candidate_id"],
+    "cta_experiment": ["experiment_id"],
+    "rollback": ["rollback_of_publish_run_id"]
+  },
+  "a10_started": false
+}
