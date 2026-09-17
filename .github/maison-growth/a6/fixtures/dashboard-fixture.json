@@ -1,0 +1,53 @@
+{
+  "meta": {"generated_at": "2026-09-17T11:30:00Z", "data_status": "fixture", "source_label": "A6 representative fixture"},
+  "needs": [
+    {"need_id":"ned_01994f34-0000-7000-8000-000000000001","canonical_label":"Reconexão e conversa entre duas pessoas","territory_key":"relacoes","internal_state":"covered","data_status":"fixture"},
+    {"need_id":"ned_01994f34-0000-7000-8000-000000000002","canonical_label":"Sentir que não sou ouvido","territory_key":"cabeca","internal_state":"gap","data_status":"fixture"}
+  ],
+  "intents": [
+    {"intent_id":"int_01994f34-0000-7000-8000-000000000003","need_id":"ned_01994f34-0000-7000-8000-000000000001","canonical_label":"perguntas para conversas mais profundas","internal_state":"covered","data_status":"fixture"},
+    {"intent_id":"int_01994f34-0000-7000-8000-000000000004","need_id":"ned_01994f34-0000-7000-8000-000000000002","canonical_label":"porque ninguém me escuta","internal_state":"gap","data_status":"fixture"}
+  ],
+  "assets": [
+    {"asset_id":"ast_01994f34-0000-7000-8000-000000000005","asset_key":"ocean-reconexao","asset_type":"ocean","status":"active","data_status":"fixture"}
+  ],
+  "solutions": [
+    {"solution_id":"sol_01994f34-0000-7000-8000-000000000006","solution_key":"oracle","solution_type":"oracle","status":"active","data_status":"fixture"},
+    {"solution_id":"sol_01994f34-0000-7000-8000-000000000007","solution_key":"consultation","solution_type":"service","status":"active","data_status":"fixture"}
+  ],
+  "coverage": [
+    {"target_id":"int_01994f34-0000-7000-8000-000000000003","public_coverage":"sufficient","solution_coverage":"multiple","conclusion_state":"covered","confidence_score":91,"data_status":"fixture"},
+    {"target_id":"int_01994f34-0000-7000-8000-000000000004","public_coverage":"none","solution_coverage":"partial","conclusion_state":"internal_candidate","confidence_score":74,"data_status":"fixture"},
+    {"target_id":"ned_01994f34-0000-7000-8000-000000000001","public_coverage":"redundant","solution_coverage":"multiple","conclusion_state":"covered","confidence_score":88,"data_status":"fixture"}
+  ],
+  "journeys": [
+    {"journey_id":"jrn_01994f34-0000-7000-8000-000000000008","first_touch":"gsc:ocean","last_touch":"oracle:purchase","conversion_count":1,"data_status":"fixture"}
+  ],
+  "economics": [
+    {"solution_id":"sol_01994f34-0000-7000-8000-000000000006","revenue_minor":200,"immediate_contribution_minor":190,"human_effort_minutes":0,"scalability_score":98,"confidence_class":"medium","data_status":"fixture"},
+    {"solution_id":"sol_01994f34-0000-7000-8000-000000000007","revenue_minor":3500,"immediate_contribution_minor":2200,"human_effort_minutes":60,"scalability_score":35,"confidence_class":"low","data_status":"fixture"}
+  ],
+  "oracle_aggregates": [
+    {"territory_key":"relacoes","class_key":"conexao","usage_count":42,"purchase_count":11,"conversion_count":11,"period_start":"2026-09-01","period_end":"2026-09-17","data_status":"fixture"}
+  ],
+  "clusters": [
+    {"semantic_cluster_id":"clu_01994f34-0000-7000-8000-000000000009","canonical_signature":"deep conversation prompts between two people","internal_state":"covered","confidence_score":93,"data_status":"fixture"},
+    {"semantic_cluster_id":"clu_01994f34-0000-7000-8000-000000000010","canonical_signature":"feeling unheard","internal_state":"internal_candidate","confidence_score":74,"data_status":"fixture"}
+  ],
+  "aliases": [
+    {"alias_id":"als_01994f34-0000-7000-8000-000000000011","normalized_alias":"o que perguntar ao meu parceiro","status":"accepted_internal","confidence_score":92,"data_status":"fixture"}
+  ],
+  "gaps": [
+    {"gap_id":"gap_01994f34-0000-7000-8000-000000000012","gap_type":"content","status":"confirmed","confidence_class":"medium","data_status":"fixture"}
+  ],
+  "candidates": [
+    {"internal_candidate_id":"can_01994f34-0000-7000-8000-000000000013","candidate_kind":"content_intent","state":"internal_candidate","confidence_score":74,"data_status":"fixture"}
+  ],
+  "conclusions": [
+    {"brain_conclusion_id":"bcn_01994f34-0000-7000-8000-000000000014","subject_type":"intent","subject_id":"int_01994f34-0000-7000-8000-000000000004","conclusion_state":"internal_candidate","confidence_score":74,"reason_codes":["PUBLIC_COVERAGE_NONE","SOLUTION_COVERAGE_PARTIAL","MULTI_SOURCE_DEMAND"],"evidence_refs":["evd_01994f34-0000-7000-8000-000000000015","evd_01994f34-0000-7000-8000-000000000016"],"rule_version":"brain_v1","model_version":"deterministic_semantic_v1","data_status":"fixture"}
+  ],
+  "evidence": [
+    {"evidence_id":"evd_01994f34-0000-7000-8000-000000000015","source":"gsc","evidence_kind":"demand","strength":70,"confidence_class":"observed","data_status":"fixture"},
+    {"evidence_id":"evd_01994f34-0000-7000-8000-000000000016","source":"site","evidence_kind":"demand","strength":62,"confidence_class":"observed","data_status":"fixture"}
+  ]
+}
