@@ -1,0 +1,78 @@
+{
+  "contract_version": "A1.1",
+  "default": "deny",
+  "public_database_access": false,
+  "public_http_binding_required": false,
+  "runtime_dependency_from_public_site": false,
+  "roles": {
+    "data_migrator": {
+      "purpose": "Apply reviewed A1+ migrations to the dedicated Growth D1 only.",
+      "allowed": [
+        "schema.read",
+        "schema.migrate"
+      ],
+      "forbidden": [
+        "public_site.write",
+        "repository.write",
+        "oracle.content.read"
+      ],
+      "interactive_or_deployment_only": true
+    },
+    "event_writer": {
+      "allowed": [
+        "events.insert",
+        "idempotency_registry.insert"
+      ],
+      "forbidden": [
+        "events.update",
+        "events.delete",
+        "audit_log.update",
+        "audit_log.delete",
+        "rule_versions.write",
+        "model_versions.write",
+        "oracle.content.read"
+      ]
+    },
+    "audit_writer": {
+      "allowed": [
+        "audit_log.insert"
+      ],
+      "forbidden": [
+        "audit_log.update",
+        "audit_log.delete",
+        "events.update",
+        "events.delete"
+      ]
+    },
+    "version_registrar": {
+      "allowed": [
+        "rule_versions.insert",
+        "model_versions.insert"
+      ],
+      "forbidden": [
+        "rule_versions.update",
+        "rule_versions.delete",
+        "model_versions.update",
+        "model_versions.delete"
+      ]
+    },
+    "growth_reader": {
+      "allowed": [
+        "events.read",
+        "audit_log.read",
+        "rule_versions.read",
+        "model_versions.read",
+        "schema_state.read"
+      ],
+      "forbidden": [
+        "*.write",
+        "oracle.content.read"
+      ]
+    }
+  },
+  "separation": {
+    "commercial_pii": "outside_growth_analytics_store",
+    "oracle_paid_content": "not_permitted",
+    "oracle_growth_access": "aggregated_or_pseudonymous_analytics_only"
+  }
+}
