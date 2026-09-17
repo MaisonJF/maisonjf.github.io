@@ -1,0 +1,32 @@
+{
+  "default": "deny",
+  "allow": [
+    "growth.experiment.read",
+    "growth.experiment.simulate",
+    "growth.experiment.evaluate",
+    "growth.journeys.read",
+    "growth.economics.read",
+    "growth.decisions.read",
+    "growth.dashboard.read",
+    "growth.audit.append_internal"
+  ],
+  "deny": [
+    "repository.write",
+    "public_site.write",
+    "ocean.publish",
+    "cta.write",
+    "catalogue.write",
+    "checkout.write",
+    "price.write",
+    "discount.write",
+    "product.create",
+    "product.launch",
+    "service.create",
+    "commercial_promise.write",
+    "policy.write",
+    "legal_terms.write",
+    "oracle.content.read",
+    "paid_content.write",
+    "commercial_pii.read"
+  ]
+}
