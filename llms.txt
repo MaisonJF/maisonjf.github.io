@@ -6,17 +6,13 @@ Brand: MAISON JF®
 Signature: “PÁRA DE IGNORAR. Volta Para Casa.”
 
 ## What MAISON JF® is
-MAISON JF® is organised around four public doors: Casa, Corpo, Cabeça and Companhia.
-The public experience starts with what a person is living or trying to change, not with a product category.
+MAISON JF® starts with what a person is living, feeling or trying to change. Its public experience is organised around Casa, Corpo, Cabeça and Companhia, with products, services, readings, ebooks and professional proposals connected to those needs.
 
-Core path:
-human need or question → one public pillar answer or free Test → internal Oceans routing → relevant paid offer → optional continuity.
-
-“Voltar Para Casa” means returning to one’s needs, limits, clarity, presence and care, and can also refer to making the physical home feel more welcoming.
+“Voltar Para Casa” can mean returning to one’s needs, limits, clarity, presence and care, and can also refer to making the physical home feel more welcoming.
 
 ## Canonical navigation
 - Home: https://maison-jf.com/
-- Test — O QUE ESTÁS A IGNORAR?: https://maison-jf.com/teste/
+- Teste — O QUE ESTÁS A IGNORAR?: https://maison-jf.com/teste/
 - Produtos: https://maison-jf.com/produtos/
 - Serviços: https://maison-jf.com/servicos/
 - Ebooks: https://maison-jf.com/ebooks/
@@ -31,107 +27,57 @@ human need or question → one public pillar answer or free Test → internal Oc
 - Envios: https://maison-jf.com/envios
 - Informação legal: https://maison-jf.com/informacao-legal
 
-Legacy .html catalogue URLs may redirect to the canonical routes above.
+## Teste
+“O QUE ESTÁS A IGNORAR?” é uma experiência gratuita que ajuda a pessoa a reconhecer o que está a pesar e a encontrar um próximo passo público da MAISON JF®.
 
-## Test
-“O QUE ESTÁS A IGNORAR?” uses eight situational questions and a dynamic eighth recognition question.
-It routes by pain, pattern, duration, need, blocker, preferred format and the person’s final recognition choice.
-The result shows at most three commercial paths: a primary recommendation, a lower-barrier option when useful and a deeper option.
-Gift intent can route directly to relevant products.
-
-## Public pillar answers
-Canonical hub: https://maison-jf.com/respostas/
-MAISON JF® maintains exactly one public, indexable answer page per Oráculo territory (100 total at this stage).
-These pages are short, genuinely useful search entry points. They do not expose the full Oceans library.
-The mobile-first hub never displays all 100 at once: it shows eight featured answers or at most eight search matches.
-All remaining Oceans pages stay internal/noindex and support routing and offer selection.
-
-## Products currently represented in the public catalogue
+## Produtos
+Produtos actualmente apresentados no catálogo público incluem:
 - Escalda-Pés — 150 g — 5 €
 - Névoa de Ambiente — 20 ml — 6,50 €
 - Vela Aromática — 70 g — 8 €
 - Vela Aromática — 170 g — 14 €
-- Óleo de Massagem — 60 ml — 12–12,50 € depending on reference
+- Óleo de Massagem — 60 ml — 12–12,50 €, conforme a referência
 
-Product detail pages are catalogue-driven and support multiple editorial media roles such as hero, packshot, detail, texture, ritual, use, ambience, pairing and story.
-Do not invent ingredients, benefits, availability, stock, sizes or prices that are not explicitly published.
+Não devem ser inventados ingredientes, benefícios, disponibilidade, stock, tamanhos ou preços que não estejam publicados.
 
-## Services
-### Consultations and orientation
+## Serviços
+Consultas e orientação:
 - Tarot Expresso — 17 €
 - Tarot Integrativo — 35 €
 - Tarot Terapêutico — 70 €
 - Consulta Escrita Breve — 25 €
 - Consulta Escrita Aprofundada — 45 €
 - Escuta Orientada — 60 €
-- Astrologia — under request
-- Numerologia — under request
+- Astrologia — sob consulta
+- Numerologia — sob consulta
 
-### Continuity
-- Acompanhamento Permanente — from 170 €
-- Mentoria — from 125 €
-- SOS — 3, 7, 14, 21 or 28-day formats; price confirmed before purchase
-- Maison Todo o Mês — from 19 €
+Continuidade:
+- Acompanhamento Permanente — desde 170 €
+- Mentoria — desde 125 €
+- SOS — formatos de 3, 7, 14, 21 ou 28 dias; preço confirmado antes da compra
+- Maison Todo o Mês — desde 19 €
 
-### Other requests
-The public service catalogue also contains complementary therapies and ritual/spiritual requests under consultation, including Defumações, Limpeza Energética, Abertura de Caminhos, Banho de Ervas and special requests. These are presented without guaranteed supernatural outcomes.
+O catálogo público também apresenta pedidos complementares e rituais sob consulta. Não são garantidos resultados sobrenaturais.
 
 ## Companhia
-Companhia is a distinct adult presence service, not therapy and not a sexual service.
-Two formats are presented:
-- Friend4Rent
-- Boyfriend4Rent
-Minimum booking shown publicly: 2 hours.
-The plan, duration, location, expenses and boundaries are agreed before the booking.
+Companhia é um serviço adulto de presença. Não é terapia e não é um serviço sexual.
+São apresentados os formatos Friend4Rent e Boyfriend4Rent.
+A reserva pública indica um mínimo de 2 horas. Plano, duração, localização, despesas e limites são combinados antes da reserva.
 
 ## Oráculo
-Canonical hub: https://maison-jf.com/oraculo/
-The Oráculo is organised into thematic territories spanning relationships, identity, emotions, body and rhythm, home and practical life, work and learning, money and resources, loss and transitions, family and care, and meaning/spirituality.
-One paid opening costs 2 € and returns one reading from the selected territory after Stripe payment confirmation.
-The Oráculo is symbolic: it does not read minds, guarantee future events, diagnose conditions or make decisions for the user.
+Uma abertura custa 2 €.
+A leitura é simbólica: não lê a mente, não garante acontecimentos futuros, não diagnostica condições e não toma decisões pela pessoa.
 
 ## Ebooks
-Canonical library: https://maison-jf.com/ebooks/
-The library is catalogue-driven and has no fixed visual slot limit.
-
-Published:
+A Biblioteca MAISON JF® apresenta:
 - Vírgulas do Destino: O Turista — 2,99 €
 - Vírgulas do Destino: Meandros da Vida — 4,99 €
 
-Announced:
-- Vírgulas do Destino: A Vingança!
-- Vírgulas do Destino: Prisioneiros do Amor
+A Biblioteca também apresenta o poster editorial oficial da saga Vírgulas do Destino como teaser da continuação.
 
-Published ebooks use Stripe checkout and authenticated post-payment download access.
-Each book can support a cover and an expandable editorial media collection.
-
-## Oceans and routing
-Oceans is an internal intent and pain-language engine used to understand what a visitor may need and to route towards paid MAISON JF® offers.
-Oceans is designed to keep growing without a fixed upper limit. New pain-language pages, variants, questions and patterns belong to the internal engine by default.
-A new Ocean must default to noindex and must not be added to the public sitemap or visible browse lists.
-Only a deliberate promotion into the SEO pillar registry may make an Ocean publicly indexable.
-At this stage there is one selected public pillar page per Oráculo territory for organic discovery; all other Oceans remain internal.
-The public Respostas hub stays mobile-first and never expands into a full library: it shows eight featured answers or at most eight search matches.
-The Test at https://maison-jf.com/teste/ remains the free diagnostic experience.
-Public paid destinations include the Oráculo, products, services, ebooks and Companhia.
-
-## Editorial language
-The visual/editorial rhythm is:
-world → sensation → detail → object → desire → discovery → purchase.
-References such as Dior, Saint Laurent and Tom Ford are used only as benchmarks for editorial restraint, pacing and desire; MAISON JF® keeps its own identity.
-
-## Search / GEO
-Public pages should use:
-- unique title and description
-- canonical URL
-- semantic headings
-- crawlable internal links
-- truthful structured data
-- stable URLs
-- sitemap inclusion only for indexable public pages
-- concise answer-first passages where appropriate
-Do not use hidden keyword blocks, doorway pages, fake reviews, fake FAQs or schema spam.
+## Profissionais / B2B
+A área profissional recebe pedidos de revenda, pequenas séries e propostas para lojas, spas, gabinetes, alojamentos e outros espaços independentes. Quantidades, preços, prazos e condições são confirmados antes de qualquer compromisso.
 
 ## Safety and scope
-Tarot, spiritual practices, sensory products and wellbeing services do not replace medical, psychological, psychiatric or other professional healthcare when needed.
-MAISON JF® may discuss spiritual language and beliefs without presenting supernatural claims as diagnosed facts.
+Tarot, práticas espirituais, produtos sensoriais e serviços de bem-estar não substituem cuidados médicos, psicológicos, psiquiátricos ou outros cuidados profissionais quando necessários.
+MAISON JF® pode usar linguagem espiritual e simbólica sem apresentar crenças ou resultados sobrenaturais como factos diagnosticados.
