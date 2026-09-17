@@ -89,7 +89,9 @@ for value in sample.values():
 
 ha, hb = "a" * 64, "b" * 64
 con.execute(
-    "INSERT INTO rule_versions VALUES (?,?,?,?,?,?,?)",
+    """INSERT INTO rule_versions
+       (rule_version_id,family,version_label,definition_hash,definition_json,created_at,created_by)
+       VALUES (?,?,?,?,?,?,?)""",
     (sample["rule"], "ocean-promotion", "2026.1", ha, '{"threshold":85}',
      "2026-09-17T03:00:00Z", "validator"),
 )
