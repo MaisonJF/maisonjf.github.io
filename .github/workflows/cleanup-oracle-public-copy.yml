@@ -1,0 +1,118 @@
+name: Cleanup Oracle public copy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cleanup-oracle-public-copy.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Remove internal Oracle quantities from public copy
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          public_forbidden = (
+              '20 leituras',
+              'leituras possíveis',
+              '100 territórios',
+              '2000 leituras',
+              '2.000 leituras',
+          )
+
+          for path in sorted(Path('oraculo').glob('*.html')):
+              text = path.read_text(encoding='utf-8')
+              original = text
+
+              # Territory pages: keep transaction copy/price, remove catalogue-size disclosure.
+              text = text.replace(
+                  ' Vinte leituras possíveis, uma leitura por abertura.',
+                  ' Uma leitura simbólica por abertura.'
+              )
+              text = text.replace(
+                  'Vinte leituras possíveis, uma leitura por abertura.',
+                  'Uma leitura simbólica por abertura.'
+              )
+              text = re.sub(
+                  r'\s*<div class="counter"><div><strong>20</strong><span>leituras possíveis</span></div><div><strong>1</strong><span>leitura por abertura</span></div></div>\s*',
+                  '\n',
+                  text,
+              )
+
+              # Hub: remove total catalogue size, per-territory pool size and group counts.
+              text = text.replace(
+                  'Oráculo MAISON JF®: 100 territórios simbólicos e 2000 leituras possíveis. Escolhe apenas onde a pergunta vive.',
+                  'Oráculo MAISON JF®: territórios simbólicos de reflexão. Escolhe apenas onde a pergunta vive.'
+              )
+              text = text.replace(
+                  'Existem 100 territórios e 2000 leituras possíveis.',
+                  'Escolhe apenas o território que mais se aproxima daquilo que pesa hoje.'
+              )
+              text = text.replace('100 territórios disponíveis', 'Territórios disponíveis')
+              text = text.replace('<small>20 leituras · 2 €</small>', '<small>Abertura · 2 €</small>')
+              text = re.sub(r'(<summary>.*?)\s*<span>\d+</span>(</summary>)', r'\1\2', text)
+
+              # Search filtering must not reveal the number of matching territories.
+              text = text.replace(
+                  "const search=document.getElementById('oracle-search'),count=document.getElementById('oracle-count');",
+                  "const search=document.getElementById('oracle-search'),count=document.getElementById('oracle-count');"
+              )
+              text = text.replace(
+                  " const q=norm(search.value.trim());let visible=0;",
+                  " const q=norm(search.value.trim());"
+              )
+              text = text.replace(
+                  " cards.forEach(card=>{const show=!q||norm(card.dataset.search+' '+card.textContent).includes(q);card.hidden=!show;if(show)visible++});",
+                  " cards.forEach(card=>{const show=!q||norm(card.dataset.search+' '+card.textContent).includes(q);card.hidden=!show});"
+              )
+              text = text.replace(
+                  " count.textContent=visible+' território'+(visible===1?'':'s')+' disponível'+(visible===1?'':'eis');",
+                  " count.textContent=q?'Resultados filtrados':'Territórios disponíveis';"
+              )
+
+              if text != original:
+                  path.write_text(text, encoding='utf-8')
+
+          llms = Path('llms.txt')
+          text = llms.read_text(encoding='utf-8')
+          text = text.replace(
+              'The Oráculo contains 100 thematic territories with 20 symbolic readings each, for 2000 possible readings in total.\n'
+              'Six central territories are maintained as long-form editorial sets: Amor & Relações, Trabalho & Caminho, Dinheiro & Segurança, Família & Laços, Escolhas & Mudança and Eu & Padrões.\n'
+              'Ninety-four additional territories cover human pains across relationships, identity, emotions, body/rhythm, home/practical life, work/learning, money/resources, loss/transitions, family/care and meaning/spirituality.\n',
+              'The Oráculo is organised into thematic territories spanning relationships, identity, emotions, body and rhythm, home and practical life, work and learning, money and resources, loss and transitions, family and care, and meaning/spirituality.\n'
+          )
+          llms.write_text(text, encoding='utf-8')
+
+          # Guard only public surfaces. Functional/internal data is intentionally untouched.
+          failures = []
+          for path in [Path('llms.txt'), *sorted(Path('oraculo').glob('*.html'))]:
+              lower = path.read_text(encoding='utf-8').lower()
+              for needle in public_forbidden:
+                  if needle.lower() in lower:
+                      failures.append(f'{path}: {needle}')
+          if failures:
+              raise SystemExit('Public Oracle quantity leak remains:\n' + '\n'.join(failures))
+          PY
+
+          git diff --check
+          git status --short
+          git add oraculo llms.txt
+          if git diff --cached --quiet; then
+            echo 'No public-copy changes required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Remove internal Oracle counts from public copy'
+          git push
