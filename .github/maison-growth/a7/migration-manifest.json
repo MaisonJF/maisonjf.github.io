@@ -1,0 +1,8 @@
+{
+  "stage": "A7",
+  "schema_version": "A7.1",
+  "migration": "migrations/0005_decisor_commercial_discovery.sql",
+  "depends_on": ["A1.1", "A3.1", "A4.1", "A5.1"],
+  "runtime_required": false,
+  "public_site_dependency": false
+}

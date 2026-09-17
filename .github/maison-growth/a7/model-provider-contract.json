@@ -1,0 +1,11 @@
+{
+  "contract_version": 1,
+  "purpose": "optional future reasoning/semantic provider",
+  "required_inputs": ["structured_facts", "evidence_refs", "rule_version"],
+  "required_outputs": ["reason_codes", "confidence", "structured_suggestion"],
+  "forbidden_inputs": ["direct_pii", "paid_oracle_content", "checkout_secrets"],
+  "authority": "advisory_only",
+  "may_override_hard_gates": false,
+  "may_execute_public_changes": false,
+  "repository_default_provider": "deterministic_rules_v1"
+}

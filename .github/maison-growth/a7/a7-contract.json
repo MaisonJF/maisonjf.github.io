@@ -1,0 +1,10 @@
+{
+  "stage": "A7",
+  "name": "Decisor + Commercial Discovery",
+  "mode": "analysis_only",
+  "depends_on": ["A1.1", "A3.1", "A4.1", "A5.1", "A6-repository-contract"],
+  "principles": {"hard_gates_before_scoring": true, "score_never_overrides_gate": true, "discovery_value_separate_from_commercial_value": true, "commercial_candidates_are_internal_proposals_only": true, "human_decision_required_for_new_commercial_offer": true, "dashboard_integration": "read_only", "public_side_effects": false},
+  "allowed_decisions": ["observe", "alias", "reinforce", "interlink", "test_cta", "create_internal_candidate", "propose_promotion", "recommend_solution", "commercial_gap", "reject"],
+  "gap_types": ["content", "journey", "product", "positioning"],
+  "prohibited": ["html_write", "url_create", "sitemap_write", "indexnow_submit", "navigation_write", "cta_write", "catalogue_write", "checkout_write", "price_write", "discount_write", "paid_oracle_content_read", "commercial_pii_read", "public_site_write"]
+}
