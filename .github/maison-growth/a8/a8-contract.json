@@ -1,0 +1,35 @@
+{
+  "contract_version": "A8.1",
+  "mode": "simulation_only",
+  "depends_on": [
+    "A1.1",
+    "A3.1",
+    "A4.1",
+    "A7.1"
+  ],
+  "principles": {
+    "public_side_effects": false,
+    "publisher_gateway_required_for_public_execution": true,
+    "exact_snapshot_before_ready": true,
+    "deterministic_assignment": true,
+    "deterministic_rollback_plan": true,
+    "pseudonymous_analytics_only": true,
+    "ctr_is_not_economic_value": true,
+    "incompatible_concurrent_experiments_forbidden": true
+  },
+  "states": [
+    "draft",
+    "ready",
+    "running",
+    "paused",
+    "stopped",
+    "completed",
+    "reverted"
+  ],
+  "outcomes": [
+    "success",
+    "neutral",
+    "worse",
+    "insufficient"
+  ]
+}
