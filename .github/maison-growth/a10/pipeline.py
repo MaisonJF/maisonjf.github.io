@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import json
 import re
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable, Mapping
@@ -166,7 +167,7 @@ def _load_a9_gateway():
     if not path.exists(): raise PublisherCompatibilityError("A9 gateway.py not found")
     spec=importlib.util.spec_from_file_location("maison_a9_gateway",path)
     if spec is None or spec.loader is None: raise PublisherCompatibilityError("cannot load A9 gateway")
-    module=importlib.util.module_from_spec(spec); spec.loader.exec_module(module); return module
+    module=importlib.util.module_from_spec(spec); sys.modules[spec.name]=module; spec.loader.exec_module(module); return module
 
 def build_a9_dry_run(assessment: PromotionAssessment, draft: Mapping[str,Any], validated: Mapping[str,Any], *, sitemap_ocean_path: str, sitemap_ocean_before: str|None, sitemap_ocean_after: str, sitemap_index_before: str, sitemap_index_after: str, snapshot_hash: str, guard_result: Mapping[str,Any], active_runs: Iterable[Mapping[str,Any]]=()) -> dict[str,Any]:
     if assessment.state!="promotion_eligible" or validated.get("state")!="validated": raise StateError("publisher dry-run requires eligible validated draft")
