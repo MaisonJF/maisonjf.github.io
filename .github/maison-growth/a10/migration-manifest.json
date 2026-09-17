@@ -1,0 +1,19 @@
+{
+  "manifest_version": "A10.1",
+  "migrations": [
+    {
+      "sequence": 8,
+      "file": "migrations/0008_ocean_promotion.sql",
+      "schema_key": "maison_growth_a10_schema_version",
+      "schema_value": "A10.1"
+    }
+  ],
+  "depends_on": [
+    "A1.1",
+    "A3.1",
+    "A4.1",
+    "A5.1",
+    "A7.1",
+    "A9.1"
+  ]
+}

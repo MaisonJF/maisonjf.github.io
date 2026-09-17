@@ -1,0 +1,38 @@
+{
+  "contract_version": "A10.1",
+  "component": "ocean_promotion",
+  "mode": "dry_run_only",
+  "purpose": "Promote only validated internal candidates through a gated, auditable pipeline without public writes in A10.",
+  "conceptual_pipeline": [
+    "internal_candidate",
+    "promotion_candidate",
+    "hard_gates",
+    "promotion_eligible",
+    "draft_isolated",
+    "validation",
+    "publisher_gateway",
+    "oceans_guard",
+    "public"
+  ],
+  "repository_terminal_state": "publication_ready",
+  "public_state_requires_future_explicit_runtime_authorization": true,
+  "evidence_sources_min_default": 2,
+  "score_after_hard_gates_only": true,
+  "draft_plane": "intelligence_only",
+  "draft_public_artifacts_forbidden": [
+    "public_url",
+    "sitemap_entry",
+    "indexnow_submission",
+    "navigation_link",
+    "indexing_directive"
+  ],
+  "non_publish_outcomes": [
+    "rejected",
+    "archived",
+    "reinforced",
+    "alias"
+  ],
+  "publisher_gateway_version": "A9.1",
+  "public_side_effects": false,
+  "a11_started": false
+}
