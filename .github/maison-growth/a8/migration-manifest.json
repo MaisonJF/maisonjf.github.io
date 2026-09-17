@@ -1,0 +1,12 @@
+{
+  "version": "A8.1",
+  "migration": "migrations/0006_experiment_manager.sql",
+  "depends_on": [
+    "0001_data_foundation",
+    "0002_journeys_economics",
+    "0003_living_map_radar",
+    "0005_decisor_commercial_discovery"
+  ],
+  "runtime_required": false,
+  "public_site_dependency": false
+}
