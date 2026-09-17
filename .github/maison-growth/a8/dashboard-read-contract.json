@@ -1,0 +1,31 @@
+{
+  "version": "A8.dashboard.1",
+  "mode": "read_only",
+  "tables": [
+    "experiments",
+    "experiment_versions",
+    "experiment_variants",
+    "experiment_snapshots",
+    "experiment_state_events",
+    "experiment_exposures",
+    "experiment_metric_observations",
+    "experiment_results",
+    "experiment_rollbacks",
+    "experiment_compatibility_claims"
+  ],
+  "explainability_fields": [
+    "hypothesis",
+    "eligible_population_json",
+    "primary_metric_key",
+    "secondary_metrics_json",
+    "stop_rules_json",
+    "success_criteria_json",
+    "split_json",
+    "decision_id",
+    "reason_codes_json",
+    "evidence_refs_json",
+    "policy_version"
+  ],
+  "write_back": false,
+  "approval_controls": false
+}
