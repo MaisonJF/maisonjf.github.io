@@ -2,27 +2,263 @@
 <html lang="pt-PT">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Volta Para Casa | Testes MAISON JF®</title>
-<meta name="description" content="Volta Para Casa: testes de autoconhecimento MAISON JF® sobre apego, afecto, vínculos e aquilo que continuas a repetir sem perceber porquê.">
+<title>Volta Para Casa | MAISON JF®</title>
+<meta name="description" content="Volta Para Casa é a experiência gratuita MAISON JF® para reconhecer aquilo que está a pedir mais atenção e encontrar a porta certa para continuar.">
 <meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://maison-jf.com/teste/">
 <link rel="stylesheet" href="../maison.css"><link rel="stylesheet" href="./volta.css"><script src="../analytics.js" defer></script>
 </head>
 <body class="vpc-page">
 <header class="site-header"><a class="brand" href="../">MAISON JF®</a><nav><a href="../farol">O Farol</a><a href="../produtos/">Produtos</a><a href="../servicos/">Serviços</a><a href="../ebooks/">Biblioteca</a></nav></header>
-<main>
-<section class="vpc-hero vpc-shell">
-<p class="eyebrow">VOLTA PARA CASA</p>
-<h1>Há coisas que só vês<br>quando deixas de fugir delas.</h1>
-<p class="lead">Não são diagnósticos. São espelhos. Escolhe a pergunta que te deixou um segundo mais quieto.</p>
-<p class="micro">Gratuito · sem conta · resultado imediato</p>
+<main class="vpc-test vpc-shell">
+<section class="vpc-stage" id="intro">
+<p class="vpc-kicker">VOLTA PARA CASA</p>
+<h1 class="vpc-title">Há qualquer coisa<br>a pedir a tua atenção.</h1>
+<div class="vpc-actions"><button class="button button--light" id="start">Começar</button></div>
+<p class="vpc-note">Gratuito · sem conta · autoconhecimento, não diagnóstico.</p>
 </section>
-<section class="vpc-grid vpc-shell" aria-label="Testes Volta Para Casa">
-<a class="vpc-card" href="./apego/">
-<div><small>Teste 01 · vínculos</small><h2>Qual é o teu estilo de apego?</h2><p>Quando alguém se aproxima, se afasta ou fica em silêncio, o que acontece dentro de ti?</p></div><b>ENTRAR →</b>
-</a>
-<a class="vpc-card" href="./nunca-chega/">
-<div><small>Teste 02</small><h2>Porque é que nunca chega?</h2></div><b>ENTRAR →</b>
-</a>
+
+<section class="vpc-stage" id="quiz" hidden>
+<div class="vpc-progress"><div class="vpc-progress__meta"><span id="count"></span><span>Volta Para Casa</span></div><div class="vpc-progress__bar"><span id="bar"></span></div></div>
+<h2 class="vpc-question" id="question" tabindex="-1"></h2>
+<div class="vpc-choices" id="choices"></div>
+</section>
+
+<section class="vpc-stage vpc-result" id="result" hidden>
+<p class="vpc-result__label" id="resultLabel"></p>
+<h1 id="resultTitle"></h1>
+<p class="vpc-result__lead" id="resultLead"></p>
+<blockquote class="vpc-result__quote" id="shareLine"></blockquote>
+<div class="vpc-result__signal" id="selfSignal" hidden><p class="vpc-kicker">Há outra coisa a aparecer.</p><p>Em várias respostas, foste tu quem ficou para depois.</p></div>
+<p class="vpc-secondary" id="tieNote"></p>
+
+<div class="vpc-convert">
+<p class="vpc-kicker">E agora?</p>
+<h2>Não precisas de perceber tudo aqui.</h2>
+<p>Escolhe onde queres continuar.</p>
+<div class="vpc-convert__links" id="nextLinks"></div>
+</div>
+
+<div class="vpc-share"><button id="share" type="button">Partilhar resultado</button><button id="restart" type="button">Refazer</button></div>
+<p class="vpc-note">O resultado mostra apenas o padrão que apareceu mais nas tuas respostas hoje. Não é uma avaliação clínica.</p>
 </section>
 </main>
-</body></html>
+
+<script>
+const QUESTIONS=[
+["Quando alguma coisa começa a pesar, qual destas te apanha primeiro?",[
+["seen","Faço tanto e parece que ninguém repara realmente."],
+["attachment","Basta alguém ficar diferente para eu começar a perguntar-me o que mudou."],
+["self","Dou conta dos outros antes de perceber que me deixei para trás."],
+["control","A minha cabeça começa a fazer cenários até encontrar uma explicação."]
+]],
+["Qual destas frases podia ser tua num dia normal?",[
+["belong","Há pessoas à minha volta e, mesmo assim, às vezes sinto-me sozinho."],
+["load","Descanso, mas continuo cansado como se não tivesse parado."],
+["direction","Continuo a fazer coisas, mas já não sei se alguma delas me leva para onde quero."],
+["security","Mesmo quando hoje está tudo controlado, penso no que pode faltar amanhã."]
+]],
+["Quando estás pior, o que te custa mais não receber?",[
+["seen","Que reconheçam o que estou a carregar ou a fazer."],
+["belong","Presença verdadeira, não só alguém por perto."],
+["attachment","Um sinal claro de que a ligação continua segura."],
+["load","Espaço para parar sem mais uma coisa a pedir-me alguma coisa."]
+]],
+["Quando tens de escolher alguma coisa importante…",[
+["self","Penso primeiro no impacto que vai ter nos outros."],
+["direction","Fico preso entre versões diferentes da vida que podia ter."],
+["control","Quero informação suficiente para eliminar o risco de me arrepender."],
+["security","A escolha parece mais perigosa se puder mexer com a minha estabilidade."]
+]],
+["O que te acerta mais?",[
+["seen","Uma crítica consegue apagar dez coisas que correram bem."],
+["load","Parar dá-me culpa antes de me dar descanso."],
+["self","É mais fácil cuidar de alguém do que perguntar do que eu preciso."],
+["security","Quando ganho algum chão, começo logo a pensar em como o posso perder."]
+]],
+["Quando alguma coisa fica em silêncio ou suspensa…",[
+["attachment","Sinto vontade de garantir que a relação está bem."],
+["belong","O silêncio lembra-me rapidamente que posso estar sozinho nisto."],
+["control","Volto ao assunto vezes sem conta à procura da peça que falta."],
+["direction","Pergunto-me se estou a insistir numa vida que já deixou de ser minha."]
+]],
+["Qual destas mexe mais contigo?",[
+["seen","A opinião de alguém consegue mudar a forma como vejo o meu próprio valor."],
+["direction","Tenho medo de descobrir tarde demais que escolhi o caminho errado."],
+["attachment","Quando alguém se afasta, fico mais preso à ligação."],
+["security","A ideia de perder estabilidade ocupa-me mais do que gostaria."]
+]],
+["Quando estás no limite…",[
+["self","Continuo a dizer sim porque não quero desiludir ninguém."],
+["belong","Quero companhia, mas não qualquer companhia."],
+["control","Tento controlar mais coisas porque isso me dá alguma sensação de segurança."],
+["load","O corpo pede pausa e eu continuo a negociar com ele."]
+]],
+["O que te incomoda mais admitir?",[
+["seen","Preciso mais do que queria de sentir que sou visto e valorizado."],
+["control","Fico inquieto quando não tenho resposta para alguma coisa."],
+["belong","Às vezes não quero um conselho. Quero sentir que pertenço a algum lado."],
+["security","Há decisões que tomo mais pelo medo de perder segurança do que pelo que quero."]
+]],
+["O que acontece mais facilmente contigo?",[
+["attachment","Quando está tudo bem, uma parte de mim fica à espera que alguma coisa mude."],
+["self","Peço desculpa por precisar, ocupar espaço ou dizer não."],
+["load","Vou aguentando até já não ter margem."],
+["direction","Cumpro papéis tão bem que às vezes não sei quem sou fora deles."]
+]],
+["Qual destas perguntas te deixa mais desconfortável?",[
+["seen","Se ninguém reconhecer o que fiz, continuo a achar que valeu?"],
+["self","O que é que eu queria se não tivesse de agradar a ninguém?"],
+["belong","Com quem posso estar sem ter de representar?"],
+["direction","Se deixasse de fazer o que esperam de mim, para onde iria?"]
+]],
+["Quando pensas nos próximos meses…",[
+["attachment","Preocupa-me perder alguém ou sentir uma ligação mudar."],
+["control","Quero prever o suficiente para não ser apanhado desprevenido."],
+["load","Só de pensar no que tenho de manter já fico cansado."],
+["security","Preocupa-me ficar sem margem, dinheiro, apoio ou chão."]
+]]
+];
+
+const RESULTS={
+seen:{
+ label:"Valorização",
+ title:"Não queres aplausos. Queres deixar de desaparecer quando ninguém confirma o teu valor.",
+ lead:"Nas tuas respostas, ser visto e reconhecido pesa mais do que parece. Quando isso falta, uma opinião ou um silêncio pode valer demasiado.",
+ share:"Não quero aplausos. Quero deixar de perder o meu valor quando ninguém o confirma.",
+ links:[
+  ["Quero olhar para isto com espaço","Explorar Consultas →","../servicos/#consultas"],
+  ["Quero outra perspectiva","Abrir o Oráculo →","../oraculo/autoestima-valor"],
+  ["Isto repete-se demasiado","Ver Acompanhamento →","../servicos/#acompanhamento"]
+ ]
+},
+attachment:{
+ label:"Segurança relacional",
+ title:"Um pequeno afastamento consegue ocupar-te muito espaço.",
+ lead:"Nas tuas respostas, mudanças na proximidade parecem activar rapidamente a necessidade de perceber se a ligação continua segura.",
+ share:"Às vezes não me falta uma resposta. Falta-me sentir que a ligação continua lá.",
+ links:[
+  ["Quero olhar para esta ligação","Explorar Consultas →","../servicos/#consultas"],
+  ["Quero outra perspectiva","Abrir o Oráculo →","../oraculo/rejeicao-abandono"],
+  ["Isto repete-se nas minhas relações","Ver Acompanhamento →","../servicos/#acompanhamento"]
+ ]
+},
+self:{
+ label:"Autoabandono",
+ title:"Tens jeito para ficar ao lado dos outros. Nem sempre ficas ao teu.",
+ lead:"Em várias respostas, as necessidades dos outros chegaram primeiro. O custo pode aparecer mais tarde: cansaço, ressentimento ou a sensação de já não saberes bem o que queres.",
+ share:"Sou rápido a ficar ao lado dos outros. Estou a aprender a não sair do meu.",
+ links:[
+  ["Quero trabalhar isto com continuidade","Ver Acompanhamento →","../servicos/#acompanhamento"],
+  ["Quero começar por uma conversa","Explorar Consultas →","../servicos/#consultas"],
+  ["Quero outra perspectiva","Abrir o Oráculo →","../oraculo/autoabandono"]
+ ]
+},
+control:{
+ label:"Controlo",
+ title:"Pensar mais dá-te a sensação de que vais sofrer menos.",
+ lead:"Nas tuas respostas, incerteza e falta de resposta puxam-te para mais análise, mais cenários e mais tentativa de prever.",
+ share:"Às vezes penso mais não para perceber melhor — mas para tentar não ser apanhado desprevenido.",
+ links:[
+  ["Quero pôr isto por ordem","Explorar Consultas →","../servicos/#consultas"],
+  ["Quero outra perspectiva","Abrir o Oráculo →","../oraculo/controlo-incerteza"],
+  ["Isto acompanha-me há demasiado tempo","Ver Acompanhamento →","../servicos/#acompanhamento"]
+ ]
+},
+belong:{
+ label:"Pertença",
+ title:"Não te falta necessariamente gente. Falta-te sentir que tens lugar.",
+ lead:"Nas tuas respostas, presença, ligação e a sensação de poderes existir sem representar apareceram com força.",
+ share:"Posso estar acompanhado e continuar a sentir falta de um lugar onde não precise de representar.",
+ links:[
+  ["Não quero fazer tudo sozinho","Descobrir Companhia →","../portas/companhia"],
+  ["Quero outra perspectiva","Abrir o Oráculo →","../oraculo/solidao-companhia"],
+  ["Quero olhar para isto com espaço","Explorar Consultas →","../servicos/#consultas"]
+ ]
+},
+load:{
+ label:"Sobrecarga",
+ title:"O corpo já pediu pausa. Tu continuaste a negociar.",
+ lead:"Nas tuas respostas, parar parece difícil mesmo quando já não há muita margem. Descansar e sentir descanso nem sempre são a mesma coisa.",
+ share:"O meu corpo pede pausa antes de eu me autorizar a parar.",
+ links:[
+  ["Quero começar por um gesto","Explorar Produtos →","../produtos/"],
+  ["Quero perceber o que estou a carregar","Explorar Consultas →","../servicos/#consultas"],
+  ["Quero continuidade","Maison Todo o Mês →","../servicos/#maison-todo-o-mes"]
+ ]
+},
+direction:{
+ label:"Direcção",
+ title:"Talvez não te faltem opções. Talvez te esteja a faltar reconhecer qual delas é tua.",
+ lead:"Nas tuas respostas, caminho, identidade e expectativa dos outros aparecem demasiado misturados para uma escolha parecer simples.",
+ share:"Talvez eu não esteja perdido. Talvez tenha demasiadas vozes dentro da mesma decisão.",
+ links:[
+  ["Quero olhar para a decisão","Explorar Consultas →","../servicos/#consultas"],
+  ["Quero outra perspectiva","Abrir o Oráculo →","../oraculo/escolhas"],
+  ["Quero mudar de ritmo","Entrar na Biblioteca →","../ebooks/"]
+ ]
+},
+security:{
+ label:"Segurança",
+ title:"Mesmo quando hoje está tudo bem, uma parte tua continua a preparar-se para perder chão.",
+ lead:"Nas tuas respostas, estabilidade e margem pesam muito nas decisões. O medo de perder segurança pode continuar presente mesmo antes de existir uma perda real.",
+ share:"Às vezes preparo-me para perder o chão mesmo quando ainda estou de pé.",
+ links:[
+  ["Quero pôr isto em perspectiva","Explorar Consultas →","../servicos/#consultas"],
+  ["Quero outra perspectiva","Abrir o Oráculo →","../oraculo/dinheiro"],
+  ["Preciso de continuidade","Ver Acompanhamento →","../servicos/#acompanhamento"]
+ ]
+}
+};
+
+const scores={seen:0,attachment:0,self:0,control:0,belong:0,load:0,direction:0,security:0};
+let i=0;
+const $=id=>document.getElementById(id);
+const track=(name,data={})=>window.maisonAnalytics?.track?.(name,{...data,page_path:location.pathname});
+
+function show(id){["intro","quiz","result"].forEach(x=>$(x).hidden=x!==id)}
+function render(){
+ const q=QUESTIONS[i];
+ $("count").textContent=(i+1)+" / "+QUESTIONS.length;
+ $("bar").style.width=((i+1)/QUESTIONS.length*100)+"%";
+ $("question").textContent=q[0];
+ $("choices").innerHTML="";
+ q[1].forEach(opt=>{
+   const b=document.createElement("button");
+   b.type="button";b.className="vpc-choice";b.textContent=opt[1];
+   b.addEventListener("click",()=>{
+     scores[opt[0]]++;
+     track("vpc_core_answer",{step:i+1,choice:opt[0]});
+     i++;
+     if(i<QUESTIONS.length)render();else finish();
+   });
+   $("choices").appendChild(b);
+ });
+ $("question").focus();
+}
+function finish(){
+ const ranked=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+ const key=ranked[0][0],r=RESULTS[key];
+ show("result");
+ $("resultLabel").textContent="O que está a pedir mais atenção · "+r.label;
+ $("resultTitle").textContent=r.title;
+ $("resultLead").textContent=r.lead;
+ $("shareLine").textContent="“"+r.share+"”";
+ $("tieNote").textContent=ranked[1][1]===ranked[0][1]?"Mais do que uma coisa ficou muito próxima. Começa por esta.":"";
+ const selfSignal=scores.self>=3&&key!=="self";
+ $("selfSignal").hidden=!selfSignal;
+ $("nextLinks").innerHTML=r.links.map(([small,strong,href])=>'<a data-vpc-cta href="'+href+'"><small>'+small+'</small><strong>'+strong+'</strong></a>').join("");
+ track("vpc_core_result",{result:key,scores,self_signal:selfSignal});
+}
+$("start").addEventListener("click",()=>{show("quiz");track("vpc_core_start");render()});
+$("restart").addEventListener("click",()=>location.reload());
+$("nextLinks").addEventListener("click",e=>{const a=e.target.closest("[data-vpc-cta]");if(a)track("vpc_core_cta",{href:a.getAttribute("href"),result:$("resultLabel").textContent})});
+$("share").addEventListener("click",async()=>{
+ const text=$("resultLabel").textContent+" — "+$("shareLine").textContent.replace(/[“”]/g,"");
+ if(navigator.share){
+   try{await navigator.share({title:"Volta Para Casa · MAISON JF®",text,url:location.href});track("vpc_core_share",{method:"native"});return}catch(e){}
+ }
+ try{await navigator.clipboard.writeText(text+" "+location.href);$("share").textContent="Copiado";track("vpc_core_share",{method:"clipboard"})}catch(e){}
+});
+</script>
+</body>
+</html>
