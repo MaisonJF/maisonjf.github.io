@@ -4,9 +4,9 @@ import { ORACLE_DINHEIRO_READINGS } from '../_lib/oracle-dinheiro.js';
 import { ORACLE_FAMILIA_READINGS } from '../_lib/oracle-familia.js';
 import { ORACLE_ESCOLHAS_READINGS } from '../_lib/oracle-escolhas.js';
 import { ORACLE_PADROES_READINGS } from '../_lib/oracle-padroes.js';
-import { ORACLE_GENERATED_TERRITORIES, ORACLE_CORE_TERRITORIES, buildGeneratedReadings } from '../_lib/oracle-generated.js';
+import { ORACLE_TERRITORIES, buildTerritoryReadings } from '../_lib/oracle-territories.js';
 
-const STATIC={
+const AUTHORED_READINGS={
   amor:ORACLE_AMOR_READINGS,
   trabalho:ORACLE_TRABALHO_READINGS,
   dinheiro:ORACLE_DINHEIRO_READINGS,
@@ -14,16 +14,15 @@ const STATIC={
   escolhas:ORACLE_ESCOLHAS_READINGS,
   padroes:ORACLE_PADROES_READINGS
 };
-const GENERATED=Object.fromEntries(ORACLE_GENERATED_TERRITORIES.map(t=>[t.slug,t]));
+const TERRITORIES=Object.fromEntries(ORACLE_TERRITORIES.map(t=>[t.slug,t]));
 
 function readingsFor(theme){
-  if(STATIC[theme]){
-    const core=ORACLE_CORE_TERRITORIES[theme];
-    const expansion=core?buildGeneratedReadings(core).slice(20,28):[];
-    return STATIC[theme].concat(expansion);
-  }
-  const t=GENERATED[theme];
-  return t?buildGeneratedReadings(t):null;
+  const territory=TERRITORIES[theme];
+  if(!territory)return null;
+  const readings=buildTerritoryReadings(territory);
+  const authored=AUTHORED_READINGS[theme];
+  if(!authored)return readings;
+  return authored.concat(readings.slice(authored.length,28));
 }
 
 export async function onRequestGet({ request, env }) {
