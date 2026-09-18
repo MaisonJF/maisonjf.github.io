@@ -1,9 +1,10 @@
 export const OCEAN_DISCOVERY_BRIDGE={
-  version:'2026-09-16',
-  principle:'Every Ocean must flow into MAISON JF® through a deliberate public sink.',
+  version:'2026-09-18',
+  principle:'Oceans enrich the Maison internally; only deliberate canonical surfaces become public.',
   publicSinks:{
     pillars:'functions/_lib/seo-pillars-2026.js',
-    answers:'/respostas/',
+    farol:'/farol',
+    voltaParaCasa:'/teste/',
     gifts:'/presentes/',
     products:'/produtos/',
     services:'/servicos/',
@@ -15,13 +16,14 @@ export const OCEAN_DISCOVERY_BRIDGE={
     default:'internal',
     robots:'noindex,nofollow',
     sitemap:false,
-    requiredFields:['painLanguage','territory','intent','commercialAdjacency'],
-    rule:'Attach to an existing public pillar/sink. If it represents a genuinely distinct search intent or a new territory, deliberately create/promote one canonical public page; never publish variants automatically.'
+    requiredFields:['painLanguage','territory','intent','commercialAdjacency','evidence'],
+    rule:'Keep the candidate internal. If it later represents a genuinely distinct search intent, Oracle territory or commercial opportunity, propose one deliberate canonical surface for human approval; never publish variants automatically.'
   },
   discovery:{
-    google:'robots.txt + sitemap.xml/sitemap-maison.xml + crawlable public pillar links',
-    bingAndIndexNowParticipants:'IndexNow workflow submits every public sitemap URL after main deploy',
-    aiSearch:'OAI-SearchBot, PerplexityBot, Claude-SearchBot, Applebot and standard crawlers are allowed; llms.txt describes canonical structure',
-    userExperience:'Respostas shows at most 8 items at a time on mobile-first search.'
+    internal:'Scheduled enrichment may add or refine candidates every six hours when evidence justifies it.',
+    google:'Only deliberate canonical public surfaces belong in public sitemaps.',
+    bingAndIndexNowParticipants:'IndexNow submits public sitemap URLs only.',
+    aiSearch:'Public canonical surfaces may be crawled; the internal Ocean candidate store is not a public-content surface.',
+    userExperience:'Visitors never browse an Ocean catalogue. They encounter Farol, Volta Para Casa, Oráculo, products, services and other deliberate Maison surfaces.'
   }
 };
