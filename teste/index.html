@@ -229,7 +229,7 @@ function inferTerritory(){
  state.door=doorMap[state.domain]||'CABEÇA';
  return direct;
 }
-function oracleHref(){return '../oraculo/'+state.territory+'.html'}
+function oracleHref(){return '../oraculo/'+state.territory}
 function offer(href,label,price,role){return {href,label,price,role}}
 
 function chooseOffers(){
@@ -252,7 +252,7 @@ function chooseOffers(){
      : offer('../produtos/oleo-massagem/','Óleo de Massagem','12,50 €','recomendada');
    deep=offer('../servicos/','Serviços MAISON JF®','ver opções','aprofundar');
  }else if(state.domain==='companhia'&&state.need==='presenca'){
-   primary=offer('../portas/companhia.html','Companhia MAISON JF®','mín. 2 h','recomendada');
+   primary=offer('../portas/companhia','Companhia MAISON JF®','mín. 2 h','recomendada');
    deep=offer('../servicos/#continuidade','Escuta / Continuidade','desde 60 €','aprofundar');
  }else{
    if(state.format==='pequeno') primary=low;
