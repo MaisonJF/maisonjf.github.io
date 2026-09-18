@@ -186,7 +186,7 @@ function render(){
   });$('choices').appendChild(b);
  });$('question').focus();
 }
-function rankedAxes(){return Object.keys(AXES).map(k=>({key:k,primary:primaryScores[k],secondary:secondaryScores[k],total:primaryScores[k]*10+secondaryScores[k]})).sort((a,b)=>b.total-a.total)}
+function rankedAxes(){const exposure=Object.fromEntries(Object.keys(AXES).map(k=>[k,0]));QUESTIONS.forEach(q=>q.a.forEach(a=>exposure[a.s]++));return Object.keys(AXES).map(k=>{const secondaryRate=exposure[k]?secondaryScores[k]/exposure[k]:0;return {key:k,primary:primaryScores[k],secondary:secondaryScores[k],secondaryRate:secondaryRate,total:primaryScores[k]*100+Math.round(secondaryRate*99)}}).sort((a,b)=>(b.primary-a.primary)||(b.secondaryRate-a.secondaryRate))}
 function routeMode(){const ranked=Object.entries(routeScores).sort((a,b)=>b[1]-a[1]);return ranked[0][1]===ranked[1][1]?'default':ranked[0][0]}
 function offerMarkup(id,index){const o=OFFERS[id];return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+id+'" href="'+o.href+'"><small>'+(index===0?'Primeira porta':'Outra possibilidade')+'</small><strong>'+o.title+' →</strong><span>'+o.text+'</span></a>'}
 function saveProfile(result,ranked,mode){const profile={version:2,result:result,ranked:ranked.map(x=>({key:x.key,score:x.total})),route:mode,createdAt:Date.now()};try{localStorage.setItem('maison_vpc_profile_v2',JSON.stringify(profile))}catch(e){}}
