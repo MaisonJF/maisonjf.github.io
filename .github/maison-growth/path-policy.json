@@ -1,5 +1,5 @@
 {
-  "policy_version": "A0.1",
+  "policy_version": "A0.2",
   "default_repo_write": "deny",
   "precedence": "deny_overrides_allow",
   "protected_paths": [
@@ -30,8 +30,19 @@
       "allowed_paths": []
     },
     "internal_candidate_create": {
-      "repo_write": false,
-      "allowed_paths": []
+      "repo_write": "scheduled_internal_queue_only",
+      "allowed_paths": [
+        ".github/maison-growth/oceans/candidates.json"
+      ],
+      "constraints": [
+        "no_public_page_creation",
+        "no_sitemap_or_navigation_change",
+        "no_personal_or_sensitive_data",
+        "no_private_conversation_content",
+        "no_paid_oracle_content",
+        "deduplicate_before_write",
+        "minimum_independent_evidence_sources_2"
+      ]
     },
     "commercial_candidate_create": {
       "repo_write": false,
