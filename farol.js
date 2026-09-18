@@ -358,15 +358,12 @@ const data={
     },
     "relacao_historia": {
       "title": "Se a tua cabeça insiste numa história, dá-lhe outra.",
-      "text": "Meandros da Vida entra por perda, desejo, Tarot e recomeço. Não resolve a tua vida. Pode tirar-te dela durante umas páginas.",
+      "text": "A Biblioteca reúne as histórias disponíveis na Maison. Entra sem saber ainda qual te vai prender primeiro.",
       "cta": {
-        "href": "/ebooks/virgulas-do-destino-meandros-da-vida/",
-        "text": "Ler Meandros da Vida · 4,99 €"
-      },
-      "cta2": {
         "href": "/ebooks/",
         "text": "Entrar na Biblioteca"
-      }
+      },
+      "cta2": null
     },
     "relacao_presenca": {
       "title": "Talvez hoje não precises de interpretar nada.",
@@ -415,15 +412,12 @@ const data={
     },
     "cansaco_historia": {
       "title": "Talvez descansar hoje seja deixar outra vida ocupar a tua cabeça.",
-      "text": "O Turista foi feito para abrir uma porta e levar-te atrás dela. Às vezes é exactamente isso que uma noite precisa.",
+      "text": "Há noites em que descansar é sair da tua própria história por umas páginas. A Biblioteca está aí para isso.",
       "cta": {
-        "href": "/ebooks/virgulas-do-destino-o-turista/",
-        "text": "Ler O Turista · 2,99 €"
-      },
-      "cta2": {
         "href": "/ebooks/",
         "text": "Abrir a Biblioteca"
-      }
+      },
+      "cta2": null
     },
     "cansaco_continua": {
       "title": "Quando o cansaço deixa de ser só de hoje, um ritual pode não chegar.",
@@ -535,8 +529,8 @@ const data={
         "text": "Vela Aromática · 14 €"
       },
       "cta2": {
-        "href": "/ebooks/virgulas-do-destino-o-turista/",
-        "text": "Prefiro desaparecer num livro · 2,99 €"
+        "href": "/ebooks/",
+        "text": "Prefiro desaparecer num livro"
       }
     },
     "dinheiro_emocao": {
@@ -568,10 +562,10 @@ const data={
     },
     "dinheiro_parar": {
       "title": "Hoje não precisas de resolver a vida às onze da noite.",
-      "text": "O Turista dá-te outro lugar onde pôr a cabeça por umas horas. Amanhã os números continuam lá; hoje podes fechar a folha.",
+      "text": "Amanhã os números continuam lá. Hoje podes fechar a folha e deixar outra história ocupar a cabeça durante umas páginas.",
       "cta": {
-        "href": "/ebooks/virgulas-do-destino-o-turista/",
-        "text": "Ler O Turista · 2,99 €"
+        "href": "/ebooks/",
+        "text": "Entrar na Biblioteca"
       },
       "cta2": {
         "href": "/produtos/vela-vidro/",
@@ -598,8 +592,8 @@ const data={
         "text": "Comparação & Inveja · 2 €"
       },
       "cta2": {
-        "href": "/ebooks/virgulas-do-destino-o-turista/",
-        "text": "Prefiro ler · 2,99 €"
+        "href": "/ebooks/",
+        "text": "Prefiro entrar noutra história"
       }
     },
     "eu_padrao": {
@@ -628,15 +622,12 @@ const data={
     },
     "desligar_livro": {
       "title": "Então vai. A tua cabeça fica cá; tu vais atrás da história.",
-      "text": "Começa por O Turista. Se quiseres uma história com perda, desejo e recomeço, entra depois em Meandros da Vida.",
+      "text": "Não te vou escolher o livro antes de o veres. Entra na Biblioteca e deixa uma capa, uma frase ou uma história fazer o resto.",
       "cta": {
-        "href": "/ebooks/virgulas-do-destino-o-turista/",
-        "text": "O Turista · 2,99 €"
+        "href": "/ebooks/",
+        "text": "Entrar na Biblioteca"
       },
-      "cta2": {
-        "href": "/ebooks/virgulas-do-destino-meandros-da-vida/",
-        "text": "Meandros da Vida · 4,99 €"
-      }
+      "cta2": null
     },
     "desligar_luz": {
       "title": "Baixa a luz antes de pedires à cabeça para baixar o volume.",
@@ -778,15 +769,12 @@ const data={
     },
     "presente_historia": {
       "title": "Há presentes que continuam depois de serem abertos.",
-      "text": "Escolhe uma história. O Turista é a primeira porta da saga; Meandros da Vida vai por perda, desejo e recomeço.",
+      "text": "Escolhe uma história que diga qualquer coisa sobre quem vai recebê-la. A Biblioteca cresce; deixa o livro certo aparecer lá dentro.",
       "cta": {
-        "href": "/ebooks/virgulas-do-destino-o-turista/",
-        "text": "O Turista · 2,99 €"
+        "href": "/ebooks/",
+        "text": "Escolher na Biblioteca"
       },
-      "cta2": {
-        "href": "/ebooks/virgulas-do-destino-meandros-da-vida/",
-        "text": "Meandros da Vida · 4,99 €"
-      }
+      "cta2": null
     },
     "presente_especial": {
       "title": "Então não escolhas da prateleira.",
