@@ -40,7 +40,7 @@
   const contact=`${root}contacto/?produto=${encodeURIComponent(p.slug)}&preco=${encodeURIComponent(p.priceNote||money(p.price))}`;
   const ritual=p.ritual||{title:'Leva o ritual para casa.',text:'Um gesto pequeno pode mudar a forma como o momento se sente.'};
   const complementary={Corpo:['vela-vidro','nevoa'],Casa:['escalda-pes','oleo-massagem']}[p.category]||[];
-  const related=(p.related||complementary).map(s=>all.find(x=>x.slug===s)).filter(Boolean).slice(0,3);
+  const related=(p.related||complementary).map(s=>all.find(x=>x.slug===s)).filter(Boolean).slice(0,2);
 
   const mediaMarkup=rest.length?`
     <section class="product-gallery" aria-label="Imagens editoriais de ${p.name}">
@@ -59,7 +59,7 @@
         <div class="product-price">${p.priceNote||money(p.price)}</div>
         <div class="product-actions">
           <a class="button button--light" data-buy href="${contact}">${p.cta}</a>
-          <a class="text-link" href="${root}teste/">Não sei se é isto</a>
+          <a class="text-link" href="${root}farol#farol">Ainda não sei se é isto</a>
         </div>
         <div class="product-meta-links">
           <a href="${root}envios.html">Envios</a>
@@ -77,11 +77,10 @@
         <p>${ritual.text}</p>
       </div>
       <div>
-        <p class="eyebrow">Se isto for só a entrada</p>
-        <h2>O próximo passo não tem de ser outro produto.</h2>
-        <p>Uma pausa pode chegar. Também pode abrir uma pergunta. Se quiseres continuar, a Maison continua contigo.</p>
-        <a class="text-link" href="${root}servicos/#acompanhamento">Ver Acompanhamentos</a><br>
-        <a class="text-link" href="${root}teste/">Fazer O QUE ESTÁS A IGNORAR?</a>
+        <p class="eyebrow">Ainda a pensar?</p>
+        <h2>Não forces a escolha.</h2>
+        <p>Se ainda não sabes se é isto, entra pelo que queres sentir.</p>
+        <a class="text-link" href="${root}farol#farol">Seguir o Farol →</a>
       </div>
     </section>
 
