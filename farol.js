@@ -1,60 +1,929 @@
-/** MAISON JF® | O Farol — Maison 2 candidate */
+/** MAISON JF® | O Farol — curadoria por momento humano */
 (function(){
 'use strict';
-function track(name,parameters={}){if(window.maisonAnalytics&&typeof window.maisonAnalytics.track==='function')window.maisonAnalytics.track(name,parameters);}
-const result=(title,text,href,label,href2=null,label2=null)=>({title,text,cta:{href,text:label},cta2:href2&&label2?{href:href2,text:label2}:null});
-const product=slug=>`/produtos/${encodeURIComponent(slug)}/`;
-const products='/produtos/';
-const services='/servicos/';
-const test='/teste/';
-const contact='/contacto/';
-const data={step1:{
- decisao:{question:'O que é que te mantém no mesmo sítio?',options:[{key:'voltas',label:'Já pensei em tudo. Continuo sem conseguir decidir.'},{key:'medo',label:'No fundo eu sei o que quero. Tenho medo de me arrepender.'},{key:'urgente',label:'Preciso de decidir isto antes que me consuma outra semana.'}]},
- relacao:{question:'Quando essa pessoa te volta à cabeça, o que acontece?',options:[{key:'cabeca',label:'Vou outra vez às mensagens, às redes ou à conversa que tivemos.'},{key:'decidir',label:'Não sei se insisto, desisto ou espero.'},{key:'entender',label:'Quero perceber se estou a ver isto como é ou como queria que fosse.'}]},
- cansaco:{question:'Onde é que já não estás a conseguir?',options:[{key:'corpo',label:'Chego ao fim do dia e até cuidar de mim dá trabalho.'},{key:'cabeca',label:'Deito-me e a cabeça continua a trabalhar.'},{key:'demais',label:'Acordo cansado(a). Isto já não é de hoje.'}]},
- casa:{question:'Quando entras em casa, o que gostavas que mudasse primeiro?',options:[{key:'cheiro',label:'Quero entrar e sentir logo outro ar.'},{key:'parar',label:'Quero entrar e sentir logo: acabou por hoje.'},{key:'mudar',label:'Quero sentir a casa diferente sem mexer na casa toda.'}]},
- trabalho:{question:'O que está a pesar mais?',options:[{key:'mudar',label:'Quero mudar, mas tenho medo de trocar o certo pelo errado.'},{key:'peso',label:'O trabalho acaba. O peso vem comigo.'},{key:'projeto',label:'Há um projecto meu parado e não sei se insisto ou largo.'}]},
- dinheiro:{question:'O que é que o dinheiro está a fazer contigo?',options:[{key:'medo',label:'Mesmo quando não estou a fazer contas, continuo a fazê-las por dentro.'},{key:'decisao',label:'Tenho uma decisão financeira e não consigo parar de dar voltas.'},{key:'travao',label:'Tudo o que quero fazer começa por “quando tiver dinheiro…”.'}]},
- eu:{question:'Onde é que a dúvida entra?',options:[{key:'aprovacao',label:'Só descanso quando alguém confirma que fiz bem.'},{key:'comparacao',label:'Basta olhar para outra pessoa e já parece que estou atrasado(a).'},{key:'padrao',label:'Mudo o cenário. Acabo outra vez no mesmo sítio.'}]},
- aprender:{question:'O que estás cansado(a) de adiar?',options:[{key:'tarot',label:'Quero aprender Tarot a sério.'},{key:'astrologia',label:'Quero perceber Astrologia sem decorar frases feitas.'},{key:'outra',label:'Quero aprender outra coisa, mas ainda nem sei por onde começar.'}]},
- companhia:{question:'O que te está a faltar nesse plano?',options:[{key:'evento',label:'Tenho um convite. O que me custa é chegar sozinho(a).'},{key:'sair',label:'Quero fazer o plano. Sozinho(a), sei que vou desistir.'},{key:'falar',label:'Quero sair, conversar e ter alguém ali comigo. Sem romance.'},{key:'afecto',label:'Hoje queria proximidade, carinho e um pouco de romance.'}]},
- presente:{question:'O que não queres que a prenda pareça?',options:[{key:'qualquer',label:'Uma coisa qualquer comprada no caminho.'},{key:'casa',label:'Quero algo bonito para a casa que a pessoa use mesmo.'},{key:'corpo',label:'Quero oferecer uma pausa, não mais uma coisa.'}]},
- outro:{question:'O que é mais fácil agora?',options:[{key:'ver',label:'Mostra-me o que existe.'},{key:'falar',label:'Prefiro explicar o que se passa a uma pessoa.'}]}
-},results:{
- decisao_voltas:result('Já fizeste listas. Continuas no mesmo sítio.','Se queres começar pequeno, abre Escolhas & Mudança por 2 €. Se a decisão precisa do teu contexto, leva-a a uma Consulta de Tarot.', '/oraculo/escolhas','Abrir Escolhas · 2 €','/contacto/?interesse=tarot','Levar à Consulta · 35 €'),
- decisao_medo:result('Saber o que queres não apaga o medo de te arrependeres.','Uma abertura simbólica em Escolhas & Mudança custa 2 €. Se precisares de trabalhar a tua situação concreta, a Consulta de Tarot custa 35 €.', '/oraculo/escolhas','Abrir Escolhas · 2 €','/contacto/?interesse=tarot','Quero olhar para o meu caso · 35 €'),
- decisao_urgente:result('Não queres levar isto contigo para outra semana.','Quando a resposta depende do teu contexto, traz a pergunta concreta. A Consulta de Tarot custa 35 € e serve precisamente para olhar para aquilo que uma resposta genérica não consegue conhecer.',services,'Quero olhar para isto · 35 €'),
- relacao_cabeca:result('Dizes que já passou. Depois vais outra vez ver se escreveu.','Se queres começar sem contar a história toda, abre Amor & Relações por 2 €. Se isto depende dos detalhes que só tu conheces, leva o caso a Consulta.', '/oraculo/amor','Abrir Amor & Relações · 2 €','/contacto/?interesse=tarot','Olhar para o meu caso · 35 €'),
- relacao_decidir:result('O pior é não saber se esperas ou vais embora.','Começa por Relações Indefinidas, uma abertura de 2 €. Se precisares de trabalhar a tua situação concreta, leva-a a Consulta.', '/oraculo/relacoes-indefinidas','Abrir Relações Indefinidas · 2 €','/contacto/?interesse=tarot','Quero perceber o que fazer · 35 €'),
- relacao_entender:result('Estás cansado(a) de tentar perceber o que isto significa.','Em vez de adivinhar a cabeça da outra pessoa, começa pelo que esta ligação está a fazer contigo. Podes abrir Amor & Relações por 2 € ou trazer o caso completo para Consulta.', '/oraculo/amor','Abrir Amor & Relações · 2 €','/contacto/?interesse=tarot','Levar o caso à Consulta · 35 €'),
- cansaco_corpo:result('Até cuidar de ti parece mais uma tarefa.','Então não compliques. Começa pequeno: Escalda-Pés MAISON JF®, 150 g, 5 €. Água morna, alguns minutos e um gesto concreto que marca a pausa. Se depois perceberes que precisas de mais do que um ritual, tens Acompanhamento.',product('escalda-pes'),'Quero o Escalda-Pés · 5 €',services,'Ver Acompanhamento'),
- cansaco_cabeca:result('Deitaste o corpo. A cabeça continua em pé.','Muda primeiro o momento. Uma Vela Aromática, tamanho maior, 14 €, pode marcar a passagem entre o dia e a noite com luz e aroma. Se o que continua ligado é maior do que o ritual, o passo seguinte pode ser Acompanhamento.',product('vela-vidro'),'Quero marcar o fim do dia · 14 €',services,'Ver Acompanhamento'),
- cansaco_demais:result('Já não parece ser só o cansaço de hoje.','Podes começar por uma pausa concreta sem transformar isso numa promessa de cura: Escalda-Pés, 5 €. E se o que estás a carregar pede continuidade, vê os Acompanhamentos da Maison.',product('escalda-pes'),'Começar por mim · 5 €',services,'Preciso de mais acompanhamento'),
- casa_cheiro:result('Queres entrar e sentir logo outro ar.','A Névoa muda o aroma do espaço de forma imediata. Está no catálogo actual por 6,50 €.',product('nevoa'),'Quero mudar o ar · 6,50 €',products,'Comparar Produtos'),
- casa_parar:result('Queres que a casa te diga: acabou por hoje.','Cria um marcador simples. A Vela Aromática maior custa 14 € e junta luz, aroma e atmosfera; se quiseres levar a pausa para o corpo, o Escalda-Pés custa 5 €.',product('vela-vidro'),'Quero a Vela · 14 €',product('escalda-pes'),'Juntar Escalda-Pés · 5 €'),
- casa_mudar:result('Não queres obras. Queres sentir a casa diferente.','Começa pelo que muda depressa: aroma. A Névoa custa 6,50 €. Se preferires luz e aroma, as Velas Aromáticas existem em dois tamanhos, 8 € e 14 €.',product('nevoa'),'Quero a Névoa · 6,50 €',products,'Ver Produtos'),
- trabalho_mudar:result('Já percebeste que ficar também é uma escolha.','Começa por Trabalho & Caminho: uma abertura simbólica custa 2 €. Se precisares de olhar para a tua situação concreta, o Tarot Expresso custa 17 €.', '/oraculo/trabalho','Abrir Trabalho & Caminho · 2 €','/contacto/?interesse=tarot-expresso','Tarot Expresso · 17 €'),
- trabalho_peso:result('O trabalho acaba no relógio. O peso não.','Abre Trabalho & Caminho por 2 €. Se o que precisas é dizer tudo e pôr por ordem sem Tarot, a Escuta Orientada custa 60 €.', '/oraculo/trabalho','Abrir Trabalho & Caminho · 2 €','/contacto/?interesse=escuta','Escuta Orientada · 60 €'),
- trabalho_projeto:result('Há um projecto parado e uma decisão por tomar.','Podes começar por Trabalho & Caminho por 2 €. Se queres estrutura para sair do ponto morto, a Mentoria começa nos 125 €.', '/oraculo/trabalho','Abrir Trabalho & Caminho · 2 €','/contacto/?interesse=mentoria','Perguntar pela Mentoria'),
- dinheiro_medo:result('Mesmo quando não estás a fazer contas, continuas a fazê-las por dentro.','Dinheiro & Segurança é uma abertura simbólica de 2 €. Não é aconselhamento financeiro; serve para olhar para a forma como estás a viver a questão.', '/oraculo/dinheiro','Abrir Dinheiro & Segurança · 2 €'),
- dinheiro_decisao:result('Uma decisão financeira não fica mais fácil só porque pensas nela pela centésima vez.','Os factos vêm primeiro. Se queres outra perspectiva simbólica sem a confundir com aconselhamento financeiro, abre Dinheiro & Segurança por 2 €.', '/oraculo/dinheiro','Abrir Dinheiro & Segurança · 2 €'),
- dinheiro_travao:result('Tudo começa por “quando tiver dinheiro…”.','Abre Dinheiro & Segurança por 2 €. Se o bloqueio está ligado a um projecto e precisas de estrutura para avançar, pergunta pela Mentoria.', '/oraculo/dinheiro','Abrir Dinheiro & Segurança · 2 €','/contacto/?interesse=mentoria','Perguntar pela Mentoria'),
- eu_aprovacao:result('Só fica certo depois de alguém dizer que está certo.','Aprovação & Validação é uma abertura de 2 €. Se esta dúvida precisa do teu contexto, o Tarot Expresso custa 17 €.', '/oraculo/necessidade-aprovacao','Abrir Aprovação & Validação · 2 €','/contacto/?interesse=tarot-expresso','Tarot Expresso · 17 €'),
- eu_comparacao:result('A vida dos outros parece sempre estar a acontecer mais depressa.','Abre Comparação & Inveja por 2 € e olha para aquilo que a comparação está a mexer em ti, sem transformar a vida de outra pessoa numa medida da tua.', '/oraculo/comparacao-inveja','Abrir Comparação & Inveja · 2 €'),
- eu_padrao:result('Mudam as pessoas. Muda o cenário. A sensação volta.','Eu & Padrões é uma abertura de 2 €. Se queres trabalhar o teu caso com mais contexto, podes levá-lo a Consulta.', '/oraculo/padroes','Abrir Eu & Padrões · 2 €','/contacto/?interesse=tarot','Levar à Consulta · 35 €'),
- aprender_tarot:result('Queres aprender Tarot a sério.','Então a próxima etapa não é mais uma frase solta: pergunta pelos formatos de Acompanhamento e aprendizagem disponíveis na Maison.',services,'Quero saber como aprender'),
- aprender_astrologia:result('Queres perceber Astrologia sem decorar frases feitas.','Diz-nos o que queres aprender ou receber. Confirmamos o formato realmente disponível antes de te vender alguma coisa.',contact,'Perguntar à Maison'),
- aprender_outra:result('Queres começar. Ainda não sabes por onde.','Não precisas de escolher um curso às cegas. Diz-nos o que queres aprender e vemos se existe um formato de Mentoria que faça sentido.', '/contacto/?interesse=mentoria','Perguntar pela Mentoria'),
- companhia_evento:result('Já tens o convite. O que pesa é chegares sozinho(a).','A Companhia pode ser combinada para um café, passeio, evento ou outro momento acordado. Vê o serviço e pergunta disponibilidade.',services,'Quero Companhia'),
- companhia_sair:result('Queres fazer o plano. Sozinho(a), sabes que podes desistir.','Se o plano continua a apetecer-te e o que falta é presença, começa pela Companhia e combina previamente o formato e os limites.',services,'Perguntar disponibilidade'),
- companhia_falar:result('Queres conversa e presença. Não um encontro.','A Companhia pode ser tempo partilhado, conversa e uma actividade combinada. Não precisa de fingir outra coisa para ter valor.',services,'Quero Companhia'),
- companhia_afecto:result('Queres proximidade. Então os limites têm de estar claros.','Vê os formatos de Companhia disponíveis e combina previamente o que faz parte do serviço. Não é um serviço sexual nem uma promessa de relação.',services,'Ver Companhia'),
- presente_qualquer:result('Não queres entregar uma coisa comprada só para cumprir.','Escolhe pelo momento que queres oferecer: casa, aroma, luz ou pausa. O catálogo começa nos 5 €.',products,'Encontrar um presente'),
- presente_casa:result('Queres algo bonito para a casa que a pessoa use mesmo.','Podes escolher uma Vela Aromática, 8 € ou 14 €, ou a Névoa, 6,50 €, para uma mudança de aroma imediata.',products,'Escolher presente para a casa'),
- presente_corpo:result('Queres oferecer uma pausa, não mais uma coisa.','Começa pelo Escalda-Pés, 150 g, 5 €. Se a pessoa gosta de toque e massagem, o Óleo de Massagem começa nos 12 €.',product('escalda-pes'),'Quero oferecer a pausa · 5 €',product('oleo-massagem'),'Prefiro Óleo de Massagem'),
- outro_ver:result('Sem problema. Vai directo ao que existe.','Se já sabes o tipo de coisa que procuras, explora a Maison. Se queres uma experiência simbólica curta, o Oráculo começa nos 2 €.', '/#explorar-maison','Explorar a Maison','/oraculo/','Abrir o Oráculo · 2 €'),
- outro_falar:result('Às vezes é mais fácil explicar do que escolher.','Fala connosco em português normal. Se a Maison tiver uma opção que faça sentido, mostramos-ta; se não tiver, não inventamos.',contact,'Falar com a Maison')
-}};
-let currentStep=1,step1Choice=null,step2Choice=null;const steps={1:document.getElementById('farolStep1'),2:document.getElementById('farolStep2'),3:document.getElementById('farolStep3')};const dots=document.querySelectorAll('.farol__progress-dot'),q=document.getElementById('farolStep2Question'),opts=document.getElementById('farolStep2Options'),out=document.getElementById('farolResult'),back2=document.getElementById('farolBack2'),back3=document.getElementById('farolBack3');
-function progress(step){dots.forEach((dot,i)=>dot.classList.toggle('farol__progress-dot--active',i<step));}function show(step){Object.values(steps).forEach(el=>el&&el.classList.remove('farol__step--active'));if(!steps[step])return;steps[step].classList.add('farol__step--active');currentStep=step;progress(step);}function build(key){const d=data.step1[key];if(!d||!q||!opts)return;step1Choice=key;track('farol_start',{theme:key,page_path:location.pathname});q.textContent=d.question;opts.innerHTML='';d.options.forEach(o=>{const b=document.createElement('button');b.className='farol__option';b.type='button';b.innerHTML=`<span class="farol__option-text">${o.label}</span><span aria-hidden="true">→</span>`;b.addEventListener('click',()=>choose(o.key));opts.appendChild(b);});show(2);}function choose(key){step2Choice=key;track('farol_refine',{theme:step1Choice,choice:key,page_path:location.pathname});render(data.results[`${step1Choice}_${key}`]||result('Não te vou inventar uma resposta.','Explica-nos o que procuras. Se houver uma solução real, dizemos-te qual.',contact,'Falar com a Maison'));}function render(r){if(!out)return;const external=h=>/^https?:/.test(h)?' target="_blank" rel="noopener"':'';out.innerHTML=`<h3 class="farol__result-title">${r.title}</h3><p class="farol__result-text">${r.text}</p><div class="farol__result-actions"><a href="${r.cta.href}" class="btn btn--primary"${external(r.cta.href)} data-farol-cta="primary">${r.cta.text}</a>${r.cta2?`<a href="${r.cta2.href}" class="btn btn--secondary"${external(r.cta2.href)} data-farol-cta="secondary">${r.cta2.text}</a>`:''}</div>`;track('farol_result',{theme:step1Choice||'unknown',choice:step2Choice||'unknown',destination:r.cta.href,page_path:location.pathname});show(3);}function reset(){track('farol_restart',{page_path:location.pathname});step1Choice=null;step2Choice=null;show(1);}if(steps[1])steps[1].querySelectorAll('[data-farol]').forEach(b=>b.addEventListener('click',()=>build(b.getAttribute('data-farol'))));if(out)out.addEventListener('click',e=>{const a=e.target.closest('[data-farol-cta]');if(a)track('farol_cta_click',{theme:step1Choice||'unknown',choice:step2Choice||'unknown',cta_position:a.dataset.farolCta||'primary',destination:a.getAttribute('href')||'',page_path:location.pathname});});if(back2)back2.addEventListener('click',()=>show(1));if(back3)back3.addEventListener('click',reset);window.Farol={data,reset,getState:()=>({step:currentStep,step1:step1Choice,step2:step2Choice})};
+
+function track(name,parameters={}){
+  if(window.maisonAnalytics&&typeof window.maisonAnalytics.track==='function'){
+    window.maisonAnalytics.track(name,parameters);
+  }
+}
+
+const data={
+  "step1": {
+    "decisao": {
+      "question": "O que te faria sair daqui diferente?",
+      "options": [
+        {
+          "key": "perspectiva",
+          "label": "Ver isto de um ângulo que ainda não vi."
+        },
+        {
+          "key": "falar",
+          "label": "Dizer o caso todo sem receber mais uma opinião solta."
+        },
+        {
+          "key": "reler",
+          "label": "Receber algo por escrito e voltar quando a cabeça recomeçar."
+        },
+        {
+          "key": "padrao",
+          "label": "Perceber porque volto sempre ao mesmo ponto."
+        }
+      ]
+    },
+    "relacao": {
+      "question": "O que queres mesmo desta noite?",
+      "options": [
+        {
+          "key": "resposta",
+          "label": "Uma resposta à pergunta que não me larga."
+        },
+        {
+          "key": "fundo",
+          "label": "Perceber o que esta história está a fazer comigo."
+        },
+        {
+          "key": "cortar",
+          "label": "Parar de ir às mensagens, às redes, à mesma conversa."
+        },
+        {
+          "key": "historia",
+          "label": "Entrar noutra história por umas horas."
+        },
+        {
+          "key": "presenca",
+          "label": "Não quero analisar. Queria presença."
+        }
+      ]
+    },
+    "cansaco": {
+      "question": "O que o teu corpo te está a pedir sem palavras?",
+      "options": [
+        {
+          "key": "agua",
+          "label": "Calor. Água. Dez minutos em que ninguém me pede nada."
+        },
+        {
+          "key": "toque",
+          "label": "Toque. Quero sentir o corpo aqui, não só a cabeça."
+        },
+        {
+          "key": "luz",
+          "label": "Que a casa baixe o tom comigo."
+        },
+        {
+          "key": "historia",
+          "label": "Que a cabeça vá viver outra história por um bocado."
+        },
+        {
+          "key": "continua",
+          "label": "Isto já não é só hoje. Preciso de continuidade."
+        }
+      ]
+    },
+    "casa": {
+      "question": "O que devia mudar primeiro quando entras?",
+      "options": [
+        {
+          "key": "ar",
+          "label": "O ar. Quero sentir a diferença antes de pensar nela."
+        },
+        {
+          "key": "luz",
+          "label": "A luz e o ritmo. Quero que a casa diga: acabou por hoje."
+        },
+        {
+          "key": "corpo",
+          "label": "O corpo. Quero um ritual que me obrigue a parar."
+        },
+        {
+          "key": "ritual",
+          "label": "A atmosfera toda. Quero algo mais ritual do que perfumar."
+        }
+      ]
+    },
+    "trabalho": {
+      "question": "O que está realmente a pedir movimento?",
+      "options": [
+        {
+          "key": "escolher",
+          "label": "Tenho uma decisão que já não cabe em mais uma lista."
+        },
+        {
+          "key": "descarregar",
+          "label": "Preciso de dizer tudo sem receber mais uma opinião."
+        },
+        {
+          "key": "aprofundar",
+          "label": "Isto tem história. Não é só “mudar ou ficar”."
+        },
+        {
+          "key": "projeto",
+          "label": "Quero tirar um projecto do ponto morto."
+        },
+        {
+          "key": "desligar",
+          "label": "Hoje só quero que o trabalho fique do lado de fora."
+        }
+      ]
+    },
+    "dinheiro": {
+      "question": "O que está a pesar mais: os números ou o que eles fazem contigo?",
+      "options": [
+        {
+          "key": "emocao",
+          "label": "Quero perceber o medo e o ruído que isto me está a criar."
+        },
+        {
+          "key": "simbolico",
+          "label": "Os factos eu trato. Queria outra perspectiva sobre o que isto desperta em mim."
+        },
+        {
+          "key": "projeto",
+          "label": "O dinheiro está a travar um projecto que quero pôr de pé."
+        },
+        {
+          "key": "parar",
+          "label": "Hoje só queria parar de fazer contas por dentro."
+        }
+      ]
+    },
+    "eu": {
+      "question": "Onde é que te perdes primeiro?",
+      "options": [
+        {
+          "key": "aprovacao",
+          "label": "Só descanso quando alguém confirma que fiz bem."
+        },
+        {
+          "key": "comparacao",
+          "label": "Olho para outra pessoa e parece logo que estou atrasado(a)."
+        },
+        {
+          "key": "padrao",
+          "label": "Muda o cenário. Eu acabo outra vez no mesmo sítio."
+        },
+        {
+          "key": "corpo",
+          "label": "Hoje não quero analisar-me. Quero fazer alguma coisa por mim."
+        }
+      ]
+    },
+    "desligar": {
+      "question": "Como queres desaparecer daqui sem fugir de ti?",
+      "options": [
+        {
+          "key": "livro",
+          "label": "Quero uma história que me leve para outro sítio."
+        },
+        {
+          "key": "luz",
+          "label": "Quero baixar a luz e o ruído."
+        },
+        {
+          "key": "ar",
+          "label": "Quero mudar a atmosfera num gesto."
+        },
+        {
+          "key": "toque",
+          "label": "Quero trocar pensamento por sensação."
+        },
+        {
+          "key": "presenca",
+          "label": "Quero alguém comigo."
+        }
+      ]
+    },
+    "aprender": {
+      "question": "O que queres conseguir dizer daqui a uns meses?",
+      "options": [
+        {
+          "key": "tarot",
+          "label": "“Eu sei ler Tarot.” Não apenas decorar significados."
+        },
+        {
+          "key": "astrologia",
+          "label": "“Eu percebo um mapa.” Não apenas frases soltas."
+        },
+        {
+          "key": "numerologia",
+          "label": "“Eu consigo ler os números com estrutura.”"
+        },
+        {
+          "key": "outra",
+          "label": "“Finalmente comecei.” Seja qual for a área."
+        }
+      ]
+    },
+    "companhia": {
+      "question": "O que te faria dizer “ainda bem que fui”?",
+      "options": [
+        {
+          "key": "evento",
+          "label": "Ter alguém comigo num evento ou plano concreto."
+        },
+        {
+          "key": "conversa",
+          "label": "Sair, conversar e não ter de representar nada."
+        },
+        {
+          "key": "afecto",
+          "label": "Proximidade, carinho e um pouco de romance, com limites claros."
+        },
+        {
+          "key": "continua",
+          "label": "Perceber que o que me pesa não é só este plano. É a falta de presença."
+        }
+      ]
+    },
+    "presente": {
+      "question": "O que queres que a pessoa sinta antes de saber quanto custou?",
+      "options": [
+        {
+          "key": "casa",
+          "label": "“Pensei na tua casa.”"
+        },
+        {
+          "key": "corpo",
+          "label": "“Quero que pares um bocadinho.”"
+        },
+        {
+          "key": "historia",
+          "label": "“Vi esta história e pensei em ti.”"
+        },
+        {
+          "key": "especial",
+          "label": "“Isto não podia vir de uma prateleira qualquer.”"
+        }
+      ]
+    },
+    "outro": {
+      "question": "O que é mais fácil agora?",
+      "options": [
+        {
+          "key": "ver",
+          "label": "Mostra-me a Maison sem me explicar tudo."
+        },
+        {
+          "key": "falar",
+          "label": "Prefiro dizer o que se passa em português normal."
+        }
+      ]
+    }
+  },
+  "results": {
+    "decisao_perspectiva": {
+      "title": "Não precisas de pensar mais. Precisas de mudar o ângulo.",
+      "text": "Tarot Expresso: uma pergunta concreta, directo ao ponto. Sem transformar a tua decisão numa sentença.",
+      "cta": {
+        "href": "/contacto/?interesse=tarot-expresso",
+        "text": "Tarot Expresso · 17 €"
+      },
+      "cta2": {
+        "href": "/oraculo/escolhas",
+        "text": "Escolhas & Mudança · 2 €"
+      }
+    },
+    "decisao_falar": {
+      "title": "Já tens opiniões suficientes.",
+      "text": "Escuta Orientada dá-te espaço para dizer o caso inteiro, pôr as peças por ordem e ouvir o que sobra quando o ruído baixa.",
+      "cta": {
+        "href": "/contacto/?interesse=escuta",
+        "text": "Escuta Orientada · 60 €"
+      },
+      "cta2": {
+        "href": "/contacto/?interesse=tarot",
+        "text": "Tarot Integrativo · 35 €"
+      }
+    },
+    "decisao_reler": {
+      "title": "Há coisas que só ficam claras quando podes voltar a elas.",
+      "text": "A Consulta Escrita Aprofundada deixa a reflexão contigo depois da primeira leitura. Para reler sem recomeçar do zero.",
+      "cta": {
+        "href": "/contacto/?interesse=consulta-escrita-aprofundada",
+        "text": "Consulta Escrita · 45 €"
+      },
+      "cta2": {
+        "href": "/contacto/?interesse=consulta-escrita-breve",
+        "text": "Versão breve · 25 €"
+      }
+    },
+    "decisao_padrao": {
+      "title": "Talvez a decisão mude. O padrão continua.",
+      "text": "Quando a questão já tem história, o Tarot Terapêutico dá-lhe mais espaço. Se isto continua a reaparecer na tua vida, o passo seguinte pode ser continuidade.",
+      "cta": {
+        "href": "/contacto/?interesse=tarot-terapeutico",
+        "text": "Tarot Terapêutico · 70 €"
+      },
+      "cta2": {
+        "href": "/contacto/?interesse=acompanhamento",
+        "text": "Acompanhamento · desde 170 €"
+      }
+    },
+    "relacao_resposta": {
+      "title": "Há uma pergunta a mandar no resto da história.",
+      "text": "Leva essa pergunta ao Tarot Expresso. Uma pergunta. Um foco. Sem fingir saber o que a outra pessoa pensa.",
+      "cta": {
+        "href": "/contacto/?interesse=tarot-expresso",
+        "text": "Tarot Expresso · 17 €"
+      },
+      "cta2": {
+        "href": "/oraculo/amor",
+        "text": "Amor & Relações · 2 €"
+      }
+    },
+    "relacao_fundo": {
+      "title": "Não é só sobre essa pessoa. É sobre o lugar onde isto te deixou.",
+      "text": "O Tarot Integrativo é para quando a pergunta simples traz medo, repetição, limites e coisas que não cabem numa frase.",
+      "cta": {
+        "href": "/contacto/?interesse=tarot",
+        "text": "Tarot Integrativo · 35 €"
+      },
+      "cta2": {
+        "href": "/contacto/?interesse=tarot-terapeutico",
+        "text": "Aprofundar · 70 €"
+      }
+    },
+    "relacao_cortar": {
+      "title": "Hoje não precisas de outra conversa com alguém que nem está aqui.",
+      "text": "Acende a Vela. Baixa a luz. Marca fisicamente o fim desta noite antes de voltares às mensagens outra vez.",
+      "cta": {
+        "href": "/produtos/vela-vidro/",
+        "text": "Vela Aromática · 14 €"
+      },
+      "cta2": {
+        "href": "/produtos/nevoa/",
+        "text": "Mudar também o ar · 6,50 €"
+      }
+    },
+    "relacao_historia": {
+      "title": "Se a tua cabeça insiste numa história, dá-lhe outra.",
+      "text": "Meandros da Vida entra por perda, desejo, Tarot e recomeço. Não resolve a tua vida. Pode tirar-te dela durante umas páginas.",
+      "cta": {
+        "href": "/ebooks/virgulas-do-destino-meandros-da-vida/",
+        "text": "Ler Meandros da Vida · 4,99 €"
+      },
+      "cta2": {
+        "href": "/ebooks/",
+        "text": "Entrar na Biblioteca"
+      }
+    },
+    "relacao_presenca": {
+      "title": "Talvez hoje não precises de interpretar nada.",
+      "text": "Se o que te falta é alguém contigo num café, passeio, evento ou momento combinado, entra pela Companhia. Os limites são definidos antes.",
+      "cta": {
+        "href": "/portas/companhia",
+        "text": "Descobrir Companhia"
+      },
+      "cta2": null
+    },
+    "cansaco_agua": {
+      "title": "O teu corpo não pediu uma teoria.",
+      "text": "Água morna. Escalda-Pés. Alguns minutos em que o dia deixa de ter acesso a ti.",
+      "cta": {
+        "href": "/produtos/escalda-pes/",
+        "text": "Escalda-Pés · 5 €"
+      },
+      "cta2": {
+        "href": "/produtos/oleo-massagem/",
+        "text": "Prefiro toque · 12,50 €"
+      }
+    },
+    "cansaco_toque": {
+      "title": "Há dias em que o corpo precisa de ser lembrado de que existe.",
+      "text": "O Óleo de Massagem transforma toque em pausa. Sem performance. Sem teres de perceber nada primeiro.",
+      "cta": {
+        "href": "/produtos/oleo-massagem/",
+        "text": "Óleo de Massagem · 12,50 €"
+      },
+      "cta2": {
+        "href": "/produtos/escalda-pes/",
+        "text": "Prefiro água e calor · 5 €"
+      }
+    },
+    "cansaco_luz": {
+      "title": "Não tentes descansar no mesmo cenário que te manteve ligado(a).",
+      "text": "A Vela muda luz, aroma e ritmo num único gesto. A casa percebe a transição antes da cabeça.",
+      "cta": {
+        "href": "/produtos/vela-vidro/",
+        "text": "Vela Aromática · 14 €"
+      },
+      "cta2": {
+        "href": "/produtos/nevoa/",
+        "text": "Quero mudar o ar · 6,50 €"
+      }
+    },
+    "cansaco_historia": {
+      "title": "Talvez descansar hoje seja deixar outra vida ocupar a tua cabeça.",
+      "text": "O Turista foi feito para abrir uma porta e levar-te atrás dela. Às vezes é exactamente isso que uma noite precisa.",
+      "cta": {
+        "href": "/ebooks/virgulas-do-destino-o-turista/",
+        "text": "Ler O Turista · 2,99 €"
+      },
+      "cta2": {
+        "href": "/ebooks/",
+        "text": "Abrir a Biblioteca"
+      }
+    },
+    "cansaco_continua": {
+      "title": "Quando o cansaço deixa de ser só de hoje, um ritual pode não chegar.",
+      "text": "O Acompanhamento existe para aquilo que continua entre uma decisão e a seguinte. O âmbito é combinado antes.",
+      "cta": {
+        "href": "/contacto/?interesse=acompanhamento",
+        "text": "Acompanhamento · desde 170 €"
+      },
+      "cta2": {
+        "href": "/servicos/#maison-todo-o-mes",
+        "text": "Maison Todo o Mês · desde 19 €"
+      }
+    },
+    "casa_ar": {
+      "title": "Não queres mudar a casa toda. Queres sentir que entraste noutro lugar.",
+      "text": "A Névoa muda o ar num gesto. É a diferença mais rápida entre o que veio da rua e o que fica cá dentro.",
+      "cta": {
+        "href": "/produtos/nevoa/",
+        "text": "Névoa de Ambiente · 6,50 €"
+      },
+      "cta2": {
+        "href": "/produtos/vela-vidro/",
+        "text": "Quero também luz · 14 €"
+      }
+    },
+    "casa_luz": {
+      "title": "A casa também pode dizer: por hoje chega.",
+      "text": "A Vela Aromática cria esse marcador com luz e aroma. Um pequeno ritual para fechar uma porta que não se vê.",
+      "cta": {
+        "href": "/produtos/vela-vidro/",
+        "text": "Vela Aromática · 14 €"
+      },
+      "cta2": {
+        "href": "/produtos/vela-pequena/",
+        "text": "Formato pequeno · 8 €"
+      }
+    },
+    "casa_corpo": {
+      "title": "Talvez o primeiro quarto a acalmar seja o teu corpo.",
+      "text": "Começa pelos pés: água, calor e um gesto que te impede de continuar a correr enquanto estás parado(a).",
+      "cta": {
+        "href": "/produtos/escalda-pes/",
+        "text": "Escalda-Pés · 5 €"
+      },
+      "cta2": {
+        "href": "/produtos/oleo-massagem/",
+        "text": "Levar a pausa ao toque · 12,50 €"
+      }
+    },
+    "casa_ritual": {
+      "title": "Não procuras perfume. Procuras uma mudança de atmosfera.",
+      "text": "Há pedidos que pedem ritual: defumação, limpeza energética ou outra preparação definida para o contexto. Primeiro percebemos o que queres criar.",
+      "cta": {
+        "href": "/contacto/?interesse=defumacoes",
+        "text": "Falar sobre um ritual"
+      },
+      "cta2": {
+        "href": "/contacto/?interesse=limpeza-energetica",
+        "text": "Explorar limpeza energética"
+      }
+    },
+    "trabalho_escolher": {
+      "title": "Mais uma lista não vai fazer a escolha por ti.",
+      "text": "Uma Consulta Escrita Breve dá-te uma resposta concreta por escrito para voltares a ela sem acrescentar mais vozes à mesa.",
+      "cta": {
+        "href": "/contacto/?interesse=consulta-escrita-breve",
+        "text": "Consulta Escrita · 25 €"
+      },
+      "cta2": {
+        "href": "/contacto/?interesse=tarot-expresso",
+        "text": "Tarot Expresso · 17 €"
+      }
+    },
+    "trabalho_descarregar": {
+      "title": "O que precisas pode não ser conselho. Pode ser espaço.",
+      "text": "Escuta Orientada: dizes tudo sem editar, organizamos o que está misturado e procuramos o próximo passo sem Tarot.",
+      "cta": {
+        "href": "/contacto/?interesse=escuta",
+        "text": "Escuta Orientada · 60 €"
+      },
+      "cta2": null
+    },
+    "trabalho_aprofundar": {
+      "title": "Se isto já tem história, não o trates como uma pergunta curta.",
+      "text": "O Tarot Terapêutico dá mais espaço às repetições, aos medos e às várias peças que estão a acontecer ao mesmo tempo.",
+      "cta": {
+        "href": "/contacto/?interesse=tarot-terapeutico",
+        "text": "Tarot Terapêutico · 70 €"
+      },
+      "cta2": {
+        "href": "/contacto/?interesse=acompanhamento",
+        "text": "Quero continuidade · desde 170 €"
+      }
+    },
+    "trabalho_projeto": {
+      "title": "O projecto não precisa de mais uma pasta chamada “um dia”.",
+      "text": "A Mentoria serve para aprender, estruturar e avançar com objectivos e acompanhamento durante um período definido.",
+      "cta": {
+        "href": "/contacto/?interesse=mentoria",
+        "text": "Mentoria · desde 125 €"
+      },
+      "cta2": null
+    },
+    "trabalho_desligar": {
+      "title": "O trabalho já acabou. Falta o teu corpo acreditar.",
+      "text": "Acende a Vela quando fechas o computador. Um marcador simples: daqui para a frente, o dia já não manda.",
+      "cta": {
+        "href": "/produtos/vela-vidro/",
+        "text": "Vela Aromática · 14 €"
+      },
+      "cta2": {
+        "href": "/ebooks/virgulas-do-destino-o-turista/",
+        "text": "Prefiro desaparecer num livro · 2,99 €"
+      }
+    },
+    "dinheiro_emocao": {
+      "title": "Os números são uma coisa. O que eles estão a fazer contigo é outra.",
+      "text": "A Escuta Orientada não substitui aconselhamento financeiro. Dá-te espaço para pôr por ordem o medo, a culpa e o ruído à volta da questão.",
+      "cta": {
+        "href": "/contacto/?interesse=escuta",
+        "text": "Escuta Orientada · 60 €"
+      },
+      "cta2": null
+    },
+    "dinheiro_simbolico": {
+      "title": "Os factos vêm primeiro. O símbolo pode vir depois.",
+      "text": "Dinheiro & Segurança é uma abertura simbólica sobre a forma como estás a viver esta questão — não uma indicação sobre onde investir, gastar ou escolher.",
+      "cta": {
+        "href": "/oraculo/dinheiro",
+        "text": "Dinheiro & Segurança · 2 €"
+      },
+      "cta2": null
+    },
+    "dinheiro_projeto": {
+      "title": "Talvez o problema não seja só dinheiro. Talvez o projecto ainda não tenha estrutura.",
+      "text": "Se o que queres é organizar uma ideia, objectivos e próximos passos, pergunta pela Mentoria. Não é aconselhamento financeiro.",
+      "cta": {
+        "href": "/contacto/?interesse=mentoria",
+        "text": "Mentoria · desde 125 €"
+      },
+      "cta2": null
+    },
+    "dinheiro_parar": {
+      "title": "Hoje não precisas de resolver a vida às onze da noite.",
+      "text": "O Turista dá-te outro lugar onde pôr a cabeça por umas horas. Amanhã os números continuam lá; hoje podes fechar a folha.",
+      "cta": {
+        "href": "/ebooks/virgulas-do-destino-o-turista/",
+        "text": "Ler O Turista · 2,99 €"
+      },
+      "cta2": {
+        "href": "/produtos/vela-vidro/",
+        "text": "Ou marcar o fim do dia · 14 €"
+      }
+    },
+    "eu_aprovacao": {
+      "title": "Se só fica certo depois de alguém confirmar, a dúvida já está a cobrar renda.",
+      "text": "Aprovação & Validação é uma abertura simbólica para olhar para esse lugar sem fingir que uma carta te conhece melhor do que tu.",
+      "cta": {
+        "href": "/oraculo/necessidade-aprovacao",
+        "text": "Aprovação & Validação · 2 €"
+      },
+      "cta2": {
+        "href": "/contacto/?interesse=tarot-expresso",
+        "text": "Quero uma pergunta concreta · 17 €"
+      }
+    },
+    "eu_comparacao": {
+      "title": "A vida dos outros parece sempre estar a acontecer mais depressa quando olhas de fora.",
+      "text": "Comparação & Inveja abre esse desconforto sem moralismo. Se hoje preferes sair da comparação em vez de a analisar, entra numa história.",
+      "cta": {
+        "href": "/oraculo/comparacao-inveja",
+        "text": "Comparação & Inveja · 2 €"
+      },
+      "cta2": {
+        "href": "/ebooks/virgulas-do-destino-o-turista/",
+        "text": "Prefiro ler · 2,99 €"
+      }
+    },
+    "eu_padrao": {
+      "title": "Mudam as pessoas. Muda o cenário. Tu reconheces a sensação.",
+      "text": "Se queres ir além da pergunta do dia, o Tarot Terapêutico dá espaço ao padrão. Se ele continua entre sessões e decisões, existe Acompanhamento.",
+      "cta": {
+        "href": "/contacto/?interesse=tarot-terapeutico",
+        "text": "Tarot Terapêutico · 70 €"
+      },
+      "cta2": {
+        "href": "/contacto/?interesse=acompanhamento",
+        "text": "Acompanhamento · desde 170 €"
+      }
+    },
+    "eu_corpo": {
+      "title": "Nem tudo precisa de virar análise.",
+      "text": "Óleo, toque, alguns minutos e nenhum relatório sobre o que sentiste. Fazer alguma coisa por ti também pode ser só isto.",
+      "cta": {
+        "href": "/produtos/oleo-massagem/",
+        "text": "Óleo de Massagem · 12,50 €"
+      },
+      "cta2": {
+        "href": "/produtos/escalda-pes/",
+        "text": "Prefiro água e calor · 5 €"
+      }
+    },
+    "desligar_livro": {
+      "title": "Então vai. A tua cabeça fica cá; tu vais atrás da história.",
+      "text": "Começa por O Turista. Se quiseres uma história com perda, desejo e recomeço, entra depois em Meandros da Vida.",
+      "cta": {
+        "href": "/ebooks/virgulas-do-destino-o-turista/",
+        "text": "O Turista · 2,99 €"
+      },
+      "cta2": {
+        "href": "/ebooks/virgulas-do-destino-meandros-da-vida/",
+        "text": "Meandros da Vida · 4,99 €"
+      }
+    },
+    "desligar_luz": {
+      "title": "Baixa a luz antes de pedires à cabeça para baixar o volume.",
+      "text": "A Vela Aromática muda o ritmo visual e o aroma do espaço. Não resolve nada. Talvez seja exactamente essa a ideia.",
+      "cta": {
+        "href": "/produtos/vela-vidro/",
+        "text": "Vela Aromática · 14 €"
+      },
+      "cta2": null
+    },
+    "desligar_ar": {
+      "title": "Muda o ar. O resto pode esperar cinco minutos.",
+      "text": "A Névoa de Ambiente é imediata: um gesto, outro aroma, outra entrada no mesmo espaço.",
+      "cta": {
+        "href": "/produtos/nevoa/",
+        "text": "Névoa de Ambiente · 6,50 €"
+      },
+      "cta2": null
+    },
+    "desligar_toque": {
+      "title": "Troca pensamento por sensação.",
+      "text": "O Óleo de Massagem dá-te um ritual simples de toque e presença corporal. Sem teres de chegar a conclusão nenhuma.",
+      "cta": {
+        "href": "/produtos/oleo-massagem/",
+        "text": "Óleo de Massagem · 12,50 €"
+      },
+      "cta2": {
+        "href": "/produtos/escalda-pes/",
+        "text": "Prefiro água e calor · 5 €"
+      }
+    },
+    "desligar_presenca": {
+      "title": "Há noites em que distração não chega. Queres alguém ali.",
+      "text": "A Companhia é presença adulta combinada antes: café, passeio, evento ou outro momento acordado, com formato e limites claros.",
+      "cta": {
+        "href": "/portas/companhia",
+        "text": "Descobrir Companhia"
+      },
+      "cta2": null
+    },
+    "aprender_tarot": {
+      "title": "Não queres decorar 78 cartas. Queres conseguir lê-las.",
+      "text": "A Mentoria dá estrutura, prática e acompanhamento para aprender Tarot a sério, com objectivos definidos antes de começar.",
+      "cta": {
+        "href": "/contacto/?interesse=mentoria",
+        "text": "Mentoria · desde 125 €"
+      },
+      "cta2": null
+    },
+    "aprender_astrologia": {
+      "title": "Queres perceber um mapa, não coleccionar frases feitas.",
+      "text": "As análises e formatos de Astrologia são preparados sob encomenda. Diz-nos o que queres aprender e confirmamos o formato disponível.",
+      "cta": {
+        "href": "/contacto/?interesse=astrologia",
+        "text": "Perguntar sobre Astrologia"
+      },
+      "cta2": null
+    },
+    "aprender_numerologia": {
+      "title": "Os números só ficam interessantes quando deixam de ser decoração.",
+      "text": "Os trabalhos de Numerologia são definidos conforme a questão ou objectivo. Primeiro percebemos o que queres aprender ou aprofundar.",
+      "cta": {
+        "href": "/contacto/?interesse=numerologia",
+        "text": "Perguntar sobre Numerologia"
+      },
+      "cta2": null
+    },
+    "aprender_outra": {
+      "title": "O primeiro luxo é não ter de aprender sozinho(a).",
+      "text": "Diz-nos a área e o objectivo. Se houver enquadramento na Maison, a Mentoria pode ser desenhada com estrutura e acompanhamento.",
+      "cta": {
+        "href": "/contacto/?interesse=mentoria",
+        "text": "Perguntar pela Mentoria · desde 125 €"
+      },
+      "cta2": null
+    },
+    "companhia_evento": {
+      "title": "O convite já existe. Falta não chegares sozinho(a).",
+      "text": "A Companhia pode acompanhar um evento ou plano previamente combinado. Formato, duração, despesas e limites ficam claros antes.",
+      "cta": {
+        "href": "/portas/companhia",
+        "text": "Quero Companhia"
+      },
+      "cta2": null
+    },
+    "companhia_conversa": {
+      "title": "Não queres entretenimento. Queres presença sem performance.",
+      "text": "Um café, passeio ou tempo partilhado pode ser exactamente isso. Entra na Companhia e vê os formatos.",
+      "cta": {
+        "href": "/portas/companhia",
+        "text": "Descobrir Companhia"
+      },
+      "cta2": null
+    },
+    "companhia_afecto": {
+      "title": "Queres proximidade. Então os limites precisam de ser ainda mais claros.",
+      "text": "Vê o formato Boyfriend4Rent dentro da Companhia. É presença adulta combinada; não é serviço sexual nem promessa de relação.",
+      "cta": {
+        "href": "/portas/companhia",
+        "text": "Ver Companhia"
+      },
+      "cta2": null
+    },
+    "companhia_continua": {
+      "title": "Talvez não seja sobre este sábado.",
+      "text": "Se o que pesa é continuar a atravessar tudo sozinho(a), o Acompanhamento pode fazer mais sentido do que preencher apenas um plano.",
+      "cta": {
+        "href": "/contacto/?interesse=acompanhamento",
+        "text": "Acompanhamento · desde 170 €"
+      },
+      "cta2": {
+        "href": "/portas/companhia",
+        "text": "Hoje quero Companhia"
+      }
+    },
+    "presente_casa": {
+      "title": "Queres que a pessoa pense em ti quando entrar em casa.",
+      "text": "A Vela Aromática maior é luz, aroma e presença. Se queres algo mais imediato e discreto, a Névoa muda o ar num gesto.",
+      "cta": {
+        "href": "/produtos/vela-vidro/",
+        "text": "Vela Aromática · 14 €"
+      },
+      "cta2": {
+        "href": "/produtos/nevoa/",
+        "text": "Névoa · 6,50 €"
+      }
+    },
+    "presente_corpo": {
+      "title": "A mensagem é simples: pára um bocadinho.",
+      "text": "O Óleo de Massagem oferece toque e pausa. Se queres um ritual de água e calor, escolhe o Escalda-Pés.",
+      "cta": {
+        "href": "/produtos/oleo-massagem/",
+        "text": "Óleo de Massagem · 12,50 €"
+      },
+      "cta2": {
+        "href": "/produtos/escalda-pes/",
+        "text": "Escalda-Pés · 5 €"
+      }
+    },
+    "presente_historia": {
+      "title": "Há presentes que continuam depois de serem abertos.",
+      "text": "Escolhe uma história. O Turista é a primeira porta da saga; Meandros da Vida vai por perda, desejo e recomeço.",
+      "cta": {
+        "href": "/ebooks/virgulas-do-destino-o-turista/",
+        "text": "O Turista · 2,99 €"
+      },
+      "cta2": {
+        "href": "/ebooks/virgulas-do-destino-meandros-da-vida/",
+        "text": "Meandros da Vida · 4,99 €"
+      }
+    },
+    "presente_especial": {
+      "title": "Então não escolhas da prateleira.",
+      "text": "Explica-nos para quem é, o momento e o que queres que a pessoa sinta. Vemos se existe um pedido especial que a Maison consiga fazer sem inventar promessas.",
+      "cta": {
+        "href": "/contacto/?interesse=pedidos-especiais",
+        "text": "Criar um pedido especial"
+      },
+      "cta2": null
+    },
+    "outro_ver": {
+      "title": "Sem mapa. Só as portas.",
+      "text": "Entra na Maison pelo que já sabes que queres: objecto, experiência, leitura ou serviço.",
+      "cta": {
+        "href": "/#explorar-maison",
+        "text": "Explorar a Maison"
+      },
+      "cta2": null
+    },
+    "outro_falar": {
+      "title": "Às vezes escolher começa por dizer a frase inteira.",
+      "text": "Conta-nos o que se passa. Se a Maison tiver um caminho que faça sentido, mostramos-to. Se não tiver, não inventamos.",
+      "cta": {
+        "href": "/contacto/",
+        "text": "Falar com a Maison"
+      },
+      "cta2": null
+    }
+  }
+};
+
+let currentStep=1;
+let step1Choice=null;
+let step2Choice=null;
+const steps={
+  1:document.getElementById('farolStep1'),
+  2:document.getElementById('farolStep2'),
+  3:document.getElementById('farolStep3')
+};
+const dots=document.querySelectorAll('.farol__progress-dot');
+const q=document.getElementById('farolStep2Question');
+const opts=document.getElementById('farolStep2Options');
+const out=document.getElementById('farolResult');
+const back2=document.getElementById('farolBack2');
+const back3=document.getElementById('farolBack3');
+
+function progress(step){
+  dots.forEach((dot,i)=>dot.classList.toggle('farol__progress-dot--active',i<step));
+}
+
+function show(step){
+  Object.values(steps).forEach(el=>el&&el.classList.remove('farol__step--active'));
+  if(!steps[step])return;
+  steps[step].classList.add('farol__step--active');
+  currentStep=step;
+  progress(step);
+}
+
+function build(key){
+  const d=data.step1[key];
+  if(!d||!q||!opts)return;
+  step1Choice=key;
+  track('farol_start',{theme:key,page_path:location.pathname});
+  q.textContent=d.question;
+  opts.innerHTML='';
+  d.options.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='farol__option';
+    b.type='button';
+    b.innerHTML=`<span class="farol__option-text">${o.label}</span><span aria-hidden="true">→</span>`;
+    b.addEventListener('click',()=>choose(o.key));
+    opts.appendChild(b);
+  });
+  show(2);
+}
+
+function choose(key){
+  step2Choice=key;
+  track('farol_refine',{theme:step1Choice,choice:key,page_path:location.pathname});
+  const r=data.results[`${step1Choice}_${key}`];
+  if(!r){
+    render({
+      title:'Não te vou inventar uma resposta.',
+      text:'Explica-nos o que procuras. Se houver uma solução real, dizemos-te qual.',
+      cta:{href:'/contacto/',text:'Falar com a Maison'},
+      cta2:null
+    });
+    return;
+  }
+  render(r);
+}
+
+function render(r){
+  if(!out)return;
+  const external=h=>/^https?:/.test(h)?' target="_blank" rel="noopener"':'';
+  out.innerHTML=`<h3 class="farol__result-title">${r.title}</h3><p class="farol__result-text">${r.text}</p><div class="farol__result-actions"><a href="${r.cta.href}" class="btn btn--primary"${external(r.cta.href)} data-farol-cta="primary">${r.cta.text}</a>${r.cta2?`<a href="${r.cta2.href}" class="btn btn--secondary"${external(r.cta2.href)} data-farol-cta="secondary">${r.cta2.text}</a>`:''}</div>`;
+  track('farol_result',{
+    theme:step1Choice||'unknown',
+    choice:step2Choice||'unknown',
+    destination:r.cta.href,
+    page_path:location.pathname
+  });
+  show(3);
+}
+
+function reset(){
+  track('farol_restart',{page_path:location.pathname});
+  step1Choice=null;
+  step2Choice=null;
+  show(1);
+}
+
+if(steps[1]){
+  steps[1].querySelectorAll('[data-farol]').forEach(b=>{
+    b.addEventListener('click',()=>build(b.getAttribute('data-farol')));
+  });
+}
+if(out){
+  out.addEventListener('click',e=>{
+    const a=e.target.closest('[data-farol-cta]');
+    if(a){
+      track('farol_cta_click',{
+        theme:step1Choice||'unknown',
+        choice:step2Choice||'unknown',
+        cta_position:a.dataset.farolCta||'primary',
+        destination:a.getAttribute('href')||'',
+        page_path:location.pathname
+      });
+    }
+  });
+}
+if(back2)back2.addEventListener('click',()=>show(1));
+if(back3)back3.addEventListener('click',reset);
+
+window.Farol={
+  data,
+  reset,
+  getState:()=>({step:currentStep,step1:step1Choice,step2:step2Choice})
+};
 })();
