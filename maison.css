@@ -594,4 +594,9 @@
 .home-page--final .home-section-head{text-align:center}
 .home-page--final .home-section-head .eyebrow{margin-inline:auto}
 .home-page--final .home-section-head h2{margin:.18em auto .35em}
-@media(max-width:700px){.home-page--final .button--farol img{width:21px;height:27px}.home-page--final .hero__direct{font-size:11px}}
+@media(max-width:700px){
+  .home-page--final .hero__copy--final{padding:52px 0 64px}
+  .home-page--final .hero__actions{margin-top:30px}
+  .home-page--final .button--farol img{width:18px;height:31px}
+  .home-page--final .hero__direct{margin-top:26px;font-size:11px}
+}
