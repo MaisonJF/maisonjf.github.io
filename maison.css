@@ -600,3 +600,40 @@
   .home-page--final .button--farol img{width:18px;height:31px}
   .home-page--final .hero__direct{margin-top:26px;font-size:11px}
 }
+
+
+/* Homepage — compact rational exploration 2026-09-18 */
+.home-page--final .home-explore{
+  padding:96px 0 110px;
+  border-top:1px solid var(--line);
+}
+.home-page--final .home-explore h2{
+  margin:.18em 0 .55em;
+  font:400 clamp(40px,5.5vw,70px)/.96 var(--serif);
+}
+.home-page--final .home-explore__links{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--line);
+}
+.home-page--final .home-explore__links a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:86px;
+  padding:20px 18px;
+  border-bottom:1px solid var(--line);
+  text-decoration:none;
+  font:400 22px/1.05 var(--serif);
+}
+.home-page--final .home-explore__links a+a{border-left:1px solid var(--line)}
+.home-page--final .home-explore__links span{font:400 18px/1 var(--sans)}
+@media(max-width:900px){
+  .home-page--final .home-explore__links{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .home-page--final .home-explore__links a:nth-child(3){border-left:0}
+}
+@media(max-width:700px){
+  .home-page--final .home-explore{padding:72px 0 80px}
+  .home-page--final .home-explore__links{grid-template-columns:1fr}
+  .home-page--final .home-explore__links a{min-height:78px;padding:18px 4px;font-size:24px;border-left:0!important}
+}
