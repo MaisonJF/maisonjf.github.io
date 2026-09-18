@@ -36,15 +36,15 @@
 </div>
 
 <section class="vpc-convert" aria-labelledby="nextTitle">
-<p class="vpc-kicker">Se quiseres fazer alguma coisa com isto</p>
-<h2 id="nextTitle">O próximo passo não tem de ser igual para toda a gente.</h2>
+<p class="vpc-kicker">Se quiseres continuar</p>
+<h2 id="nextTitle">Escolhe o que te fizer sentido.</h2>
 <div class="vpc-offers" id="nextLinks"></div>
 </section>
 
 <section class="vpc-report" aria-labelledby="reportTitle">
 <p class="vpc-kicker">Viste uma parte.</p>
 <h2 id="reportTitle">Queres perceber o quadro inteiro?</h2>
-<p>O resultado gratuito mostra o sinal que apareceu primeiro. O relatório cruza o resto das tuas respostas, os sinais que ficaram por baixo e a forma como eles se encontram.</p>
+<p>O resultado gratuito mostrou-te uma parte. O relatório vai mais fundo e devolve-te uma leitura mais completa do que apareceu nas tuas respostas.</p>
 <a class="button" id="reportLink" href="./relatorio/">Ver o meu relatório completo →</a>
 </section>
 
@@ -129,16 +129,16 @@ const QUESTIONS=[
 ];
 
 const ROUTE_QUESTIONS=[
-{q:'Quando queres sair de uma coisa que se repete, o que costuma ajudar mais?',a:[
-{t:'Ter uma conversa que me ajude a pôr o que está misturado por ordem.',r:'talk'},
-{t:'Ter continuidade para não voltar ao mesmo logo a seguir.',r:'continuity'},
-{t:'Fazer uma mudança concreta no meu dia, corpo ou espaço.',r:'gesture'},
-{t:'Ter algo que possa ler, pensar e revisitar ao meu ritmo.',r:'selfpaced'}]},
-{q:'O que te faz sentir que uma tentativa valeu mesmo a pena?',a:[
-{t:'Sair com mais clareza sobre o que fazer a seguir.',r:'talk'},
-{t:'Não ficar sozinho a tentar manter a mudança.',r:'continuity'},
-{t:'Sentir uma diferença concreta no ambiente ou no corpo.',r:'gesture'},
-{t:'Poder voltar ao que descobri e perceber melhor com tempo.',r:'selfpaced'}]}
+{q:'Quando alguma coisa se repete, o que costuma ajudar-te mais a sair do mesmo lugar?',a:[
+{t:'Falar até conseguir ver melhor o que estava misturado.',r:'talk'},
+{t:'Ter continuidade para não depender só da força daquele dia.',r:'continuity'},
+{t:'Fazer uma mudança concreta no corpo, no espaço ou na rotina.',r:'gesture'},
+{t:'Ter algo a que possa voltar e pensar ao meu ritmo.',r:'selfpaced'}]},
+{q:'Quando sentes que alguma coisa te fez mesmo bem, o que costuma ter acontecido?',a:[
+{t:'Saí com mais clareza sobre o que fazer a seguir.',r:'talk'},
+{t:'Não tive de tentar manter tudo sozinho.',r:'continuity'},
+{t:'Senti uma diferença concreta no corpo, no ambiente ou no dia.',r:'gesture'},
+{t:'Fiquei com algo que pude revisitar depois.',r:'selfpaced'}]}
 ];
 
 const OFFERS={
@@ -164,14 +164,21 @@ security:{default:['consult','acomp'],talk:['consult','acomp'],continuity:['acom
 const primaryScores=Object.fromEntries(Object.keys(AXES).map(k=>[k,0]));
 const secondaryScores=Object.fromEntries(Object.keys(AXES).map(k=>[k,0]));
 const routeScores={talk:0,continuity:0,gesture:0,selfpaced:0};
+const FLOW=[
+{type:'axis',index:0},{type:'axis',index:1},{type:'axis',index:2},{type:'axis',index:3},
+{type:'route',index:0},
+{type:'axis',index:4},{type:'axis',index:5},{type:'axis',index:6},{type:'axis',index:7},{type:'axis',index:8},
+{type:'route',index:1},
+{type:'axis',index:9},{type:'axis',index:10},{type:'axis',index:11}
+];
 let step=0;
-const TOTAL=QUESTIONS.length+ROUTE_QUESTIONS.length;
+const TOTAL=FLOW.length;
 const $=id=>document.getElementById(id);
 const track=(name,data={})=>window.maisonAnalytics?.track?.(name,{...data,page_path:location.pathname});
 
 function shuffle(items){const a=items.slice();for(let x=a.length-1;x>0;x--){const y=Math.floor(Math.random()*(x+1)),t=a[x];a[x]=a[y];a[y]=t}return a}
 function show(id){['intro','quiz','result'].forEach(x=>$(x).hidden=x!==id)}
-function currentQuestion(){return step<QUESTIONS.length?{type:'axis',data:QUESTIONS[step]}:{type:'route',data:ROUTE_QUESTIONS[step-QUESTIONS.length]}}
+function currentQuestion(){const item=FLOW[step];return {type:item.type,data:item.type==='axis'?QUESTIONS[item.index]:ROUTE_QUESTIONS[item.index]}}
 function render(){
  const current=currentQuestion(),q=current.data;
  $('count').textContent=(step+1)+' / '+TOTAL;
