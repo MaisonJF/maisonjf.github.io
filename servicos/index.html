@@ -12,7 +12,7 @@
 .service-section{margin-top:95px}.service-section__head{display:grid;grid-template-columns:1fr minmax(260px,.7fr);gap:50px;align-items:end;padding-bottom:26px;border-bottom:1px solid var(--line)}
 .service-section__head h2{font:400 clamp(38px,5vw,68px)/.95 var(--serif);margin:.2em 0}.service-section__head p{color:#8f887e;margin:0}
 .service-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 44px}.service-card{padding:30px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:24px}
-.service-card small{display:block;color:#8f887e;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}.service-card h3{font:400 31px/1 var(--serif);margin:0 0 10px}.service-card p{color:#aaa39a;margin:0;max-width:540px}.service-card__limits{font-size:12px!important;color:#777!important;margin-top:12px!important}
+.service-card small{display:block;color:#8f887e;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}.service-card h3{font:400 31px/1 var(--serif);margin:0 0 10px}.service-card p{color:#aaa39a;margin:0;max-width:540px}.service-card__limits{margin-top:12px;color:#777;font-size:12px}.service-card__limits summary{cursor:pointer;color:#8f887e;text-decoration:underline}.service-card__limits p{margin:8px 0 0!important;color:#777!important;font-size:12px!important}
 .service-card__side{text-align:right;min-width:135px}.service-card__price{font:400 19px var(--serif);color:#e8dfd2}.service-card__side .text-link{margin-top:10px}
 .special-service{margin-top:110px;display:grid;grid-template-columns:1.08fr .92fr;background:#111}.special-service__media{min-height:620px}.special-service__media img{width:100%;height:100%;object-fit:cover;display:block}.special-service__copy{padding:clamp(38px,7vw,86px);display:flex;flex-direction:column;justify-content:center}.special-service__copy h2{font:400 clamp(48px,6vw,82px)/.92 var(--serif);margin:.2em 0}.special-service__copy p{color:#aaa39a}.special-service__formats{font:400 24px/1 var(--serif);margin:16px 0 2px!important;color:#eee6da!important}
 .professional{margin-top:100px;padding:70px;border:1px solid var(--line);display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:end}.professional h2{font:400 clamp(38px,5vw,62px)/1 var(--serif);margin:.2em 0}.professional p{color:#aaa39a}
@@ -53,7 +53,7 @@
    const h=document.createElement('h3');h.textContent=s.name;
    const p=document.createElement('p');p.textContent=s.description;
    main.append(small,h,p);
-   if(s.limits){const lim=document.createElement('p');lim.className='service-card__limits';lim.textContent=s.limits;main.appendChild(lim)}
+   if(s.limits){const details=document.createElement('details');details.className='service-card__limits';const summary=document.createElement('summary');summary.textContent='Antes de marcar';const lim=document.createElement('p');lim.textContent=s.limits;details.append(summary,lim);main.appendChild(details)}
    const side=document.createElement('div');side.className='service-card__side';
    const price=document.createElement('div');price.className='service-card__price';price.textContent=s.price||'Sob consulta';
    const a=document.createElement('a');a.className='text-link';a.dataset.service=s.slug;a.href=contact+'?interesse='+encodeURIComponent(s.slug);a.textContent=s.cta;
