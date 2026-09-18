@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Relatório Volta Para Casa | MAISON JF®</title>
+<meta name="description" content="Relatório individualizado Volta Para Casa: uma leitura mais profunda do perfil revelado pelas tuas respostas.">
+<meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://maison-jf.com/teste/relatorio/">
+<link rel="stylesheet" href="../../maison.css"><link rel="stylesheet" href="../volta.css"><script src="../../analytics.js" defer></script>
+</head>
+<body class="vpc-page">
+<header class="site-header"><a class="brand" href="../../">MAISON JF®</a><nav><a href="../">Volta Para Casa</a><a href="../../servicos/">Serviços</a><a href="../../produtos/">Produtos</a></nav></header>
+<main class="vpc-test vpc-shell">
+<a class="vpc-back" href="../">← Volta Para Casa</a>
+<section class="vpc-stage vpc-result">
+<p class="vpc-kicker">RELATÓRIO VOLTA PARA CASA</p>
+<h1>Viste a ponta.<br>Agora podes ver o mapa.</h1>
+<p class="vpc-result__lead" id="personalLead">O resultado gratuito mostra o sinal mais forte. O relatório cruza o que ficou por baixo para construir uma leitura mais individualizada.</p>
+<section class="vpc-report">
+<p class="vpc-kicker">O que aprofunda</p>
+<h2>Não é outro teste.</h2>
+<p>É uma leitura paga construída a partir do teu perfil: resultado dominante, sinais secundários, cruzamentos entre dimensões, tensões internas, padrões que se repetem e a forma como preferes avançar.</p>
+<p>O objectivo não é pôr-te numa caixa. É mostrar mais do mapa que o resultado gratuito deixou de fora.</p>
+<a class="button button--light" id="requestReport" href="#">Quero o meu relatório →</a>
+</section>
+<p class="vpc-note">O âmbito, valor e formato final são confirmados antes de avançares. O relatório é de autoconhecimento e não constitui diagnóstico ou avaliação clínica.</p>
+</section>
+</main>
+<script>
+(function(){
+ const labels={seen:'Valorização',attachment:'Vínculo',self:'Autoabandono',control:'Controlo',belong:'Pertença',load:'Sobrecarga',direction:'Direcção',security:'Segurança'};
+ let profile=null;try{profile=JSON.parse(localStorage.getItem('maison_vpc_profile_v2')||'null')}catch(e){}
+ const q=new URLSearchParams(location.search),result=(profile&&profile.result)||q.get('resultado');
+ if(result&&labels[result])document.getElementById('personalLead').textContent='No teu resultado gratuito apareceu '+labels[result]+'. O relatório cruza esse sinal com o que ficou por baixo das restantes respostas para construir uma leitura mais individualizada.';
+ let message='Olá, Maison JF. Quero pedir o meu Relatório Volta Para Casa.';
+ if(result&&labels[result])message+=' O meu resultado gratuito foi '+labels[result]+'.';
+ if(profile&&Array.isArray(profile.ranked))message+=' Perfil do teste: '+profile.ranked.map(x=>x.key+':'+x.score).join(', ')+'.';
+ const a=document.getElementById('requestReport');a.href='https://wa.me/351923318289?text='+encodeURIComponent(message);a.target='_blank';a.rel='noopener';
+ a.addEventListener('click',()=>window.maisonAnalytics?.track?.('vpc_report_request',{result:result||'',page_path:location.pathname}));
+})();
+</script>
+</body></html>
