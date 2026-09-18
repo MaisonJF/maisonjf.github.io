@@ -638,14 +638,24 @@
   .home-page--final .home-explore__links a{min-height:78px;padding:18px 4px;font-size:24px;border-left:0!important}
 }
 
-/* Homepage hero · Farol + Volta Para Casa */
-.home-page--final .hero__actions--dual{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:620px}
-.home-page--final .hero__actions--dual .button{min-height:58px;display:flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap}
-.home-page--final .button--vpc{border-color:rgba(255,255,255,.42);background:transparent;color:#f3efe7}
-.home-page--final .button--vpc b{font-size:18px;font-weight:400}
+/* Homepage hero · three clear entrances */
+.home-page--final .hero__choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 10px;max-width:620px;margin-top:30px}
+.home-page--final .hero__choice{min-width:0}
+.home-page--final .hero__choice .button{width:100%;min-height:58px;display:flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap}
+.home-page--final .hero__choice small{display:block;margin-top:8px;color:rgba(255,255,255,.67);font-size:10px;line-height:1.35}
+.home-page--final .hero__choice--explore{grid-column:1/-1}
+.home-page--final .button--farol{display:flex;align-items:center;gap:12px}
+.home-page--final .button--farol img{width:22px;height:30px;display:block;object-fit:contain}
+.home-page--final .button--farol b,.home-page--final .button--vpc b,.home-page--final .button--explore b{font-size:18px;font-weight:400;margin-left:4px}
+.home-page--final .button--vpc{border-color:rgba(255,255,255,.42);background:rgba(8,8,8,.16);color:#f3efe7}
+.home-page--final .button--vpc img{width:23px;height:23px;display:block;object-fit:contain}
+.home-page--final .button--explore{min-height:48px!important;border-color:rgba(255,255,255,.2);background:rgba(8,8,8,.08);color:rgba(243,239,231,.86)}
 @media(max-width:560px){
-  .home-page--final .hero__actions--dual{gap:8px}
-  .home-page--final .hero__actions--dual .button{padding:12px 10px;font-size:9px;letter-spacing:.1em}
-  .home-page--final .hero__actions--dual .button--farol img{width:15px;height:26px}
-  .home-page--final .hero__actions--dual .button b{font-size:14px}
+  .home-page--final .hero__choices{gap:12px 8px;margin-top:28px}
+  .home-page--final .hero__choice .button{min-height:54px;padding:11px 8px;font-size:8.8px;letter-spacing:.09em}
+  .home-page--final .hero__choice small{font-size:9px;min-height:26px}
+  .home-page--final .hero__choice .button--farol img{width:16px;height:27px}
+  .home-page--final .hero__choice .button--vpc img{width:19px;height:19px}
+  .home-page--final .hero__choice .button b{font-size:13px;margin-left:1px}
+  .home-page--final .button--explore{min-height:46px!important}
 }
