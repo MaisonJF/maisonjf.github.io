@@ -75,3 +75,6 @@
 .vpc-affinity summary{cursor:pointer;text-decoration:underline}
 .vpc-affinity details p{max-width:680px;line-height:1.6}
 @media(max-width:560px){.vpc-scope__options{display:grid;grid-template-columns:1fr}.vpc-affinity__row{grid-template-columns:78px 1fr 38px}}
+
+.vpc-result__signal{margin-top:34px;padding:22px 24px;border-left:1px solid rgba(183,154,98,.52);background:rgba(183,154,98,.05);max-width:760px}
+.vpc-result__signal p:last-child{margin:8px 0 0;color:#b7afa4;font:400 20px/1.45 var(--serif)}
