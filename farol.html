@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>O Farol | Encontra o próximo passo | MAISON JF®</title>
-  <meta name="description" content="Não sabes o que precisas? Começa pelo que não te deixa em paz. O Farol orienta-te entre Produtos e Serviços da MAISON JF® a partir da situação que estás a viver.">
+  <meta name="description" content="Não sabes o que precisas? Começa pelo que não te deixa em paz. O Farol parte daquilo que estás a viver e orienta-te para o objecto, leitura, experiência ou serviço MAISON JF® que pode fazer sentido agora.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="bingbot" content="index, follow">
@@ -21,7 +21,7 @@
   <meta property="og:locale" content="pt_PT">
   <meta property="og:site_name" content="MAISON JF®">
   <meta property="og:title" content="O Farol | MAISON JF®">
-  <meta property="og:description" content="Começa pelo que não te deixa em paz. O Farol orienta-te para a próxima porta da MAISON JF®.">
+  <meta property="og:description" content="Começa pelo que não te deixa em paz. O Farol não adivinha o produto: encontra o próximo passo.">
   <meta property="og:url" content="https://maison-jf.com/farol">
   <meta property="og:image" content="https://maison-jf.com/og-image.jpg">
   <meta property="og:image:alt" content="MAISON JF®">
@@ -74,7 +74,7 @@
       "@id": "https://maison-jf.com/farol#page",
       "url": "https://maison-jf.com/farol",
       "name": "O Farol | MAISON JF®",
-      "description": "Não sabes o que precisas? Começa pelo que não te deixa em paz. O Farol orienta-te entre Produtos e Serviços da MAISON JF® a partir da situação que estás a viver.",
+      "description": "O Farol parte daquilo que estás a viver e orienta-te para o objecto, leitura, experiência ou serviço MAISON JF® que pode fazer sentido agora.",
       "inLanguage": "pt-PT",
       "isPartOf": {
         "@id": "https://maison-jf.com/#website"
@@ -94,32 +94,32 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "E se eu escolher mal e depois já não der para voltar atrás?"
+          "name": "Já pensei nisto tanto que já não sei se estou a decidir ou só a adiar."
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Porque é que estou outra vez a pensar nesta pessoa?"
+          "name": "Porque é que esta pessoa consegue ocupar tanto espaço sem estar aqui?"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Como é que amanhã começa outra vez se eu já não tenho energia para hoje?"
+          "name": "Estou cansado(a) de descansar e continuar cansado(a)."
         },
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Porque é que chego a casa e parece que o dia ainda não acabou?"
+          "name": "Fecho a porta de casa. O dia entra comigo na mesma."
         },
         {
           "@type": "ListItem",
           "position": 5,
-          "name": "Quanto tempo mais vou chamar a isto uma fase se já sei que não está a passar?"
+          "name": "Quanto tempo mais vou chamar a isto “uma fase” se já sei que não está a passar?"
         },
         {
           "@type": "ListItem",
           "position": 6,
-          "name": "Porque é que o dinheiro me ocupa a cabeça mesmo quando não quero pensar nele?"
+          "name": "Porque é que o dinheiro me ocupa a cabeça mesmo quando não estou a fazer contas?"
         },
         {
           "@type": "ListItem",
@@ -129,16 +129,21 @@
         {
           "@type": "ListItem",
           "position": 8,
-          "name": "Quero aprender isto a sério. Mas por onde raio começo?"
+          "name": "Hoje não quero resolver nada. Só quero sair da minha cabeça por umas horas."
         },
         {
           "@type": "ListItem",
           "position": 9,
-          "name": "Quero ir. Só não quero chegar sozinho(a)."
+          "name": "Quero aprender isto a sério. Mas por onde raio começo?"
         },
         {
           "@type": "ListItem",
           "position": 10,
+          "name": "Quero ir. Só não quero chegar sozinho(a)."
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
           "name": "Não quero oferecer outra coisa comprada só para cumprir."
         }
       ]
@@ -214,7 +219,7 @@
     <div class="farol__header">
       <p class="farol__label">O Farol</p>
       <h2 class="farol__title">Qual destas frases podia ser tua?</h2>
-      <p class="farol__subtitle">Escolhe a que te bateu primeiro.</p>
+      <p class="farol__subtitle">Não procures a resposta certa. Escolhe a que te apanhou.</p>
     </div>
     <div class="farol__container">
       <div class="farol__progress" id="farolProgress" aria-hidden="true">
@@ -225,13 +230,14 @@
 
       <div class="farol__step farol__step--active" id="farolStep1" data-step="1">
         <div class="farol__options" role="group" aria-label="Escolhe a tua situação">
-          <button class="farol__option" data-farol="decisao" type="button"><span class="farol__option-text">E se eu escolher mal e depois já não der para voltar atrás?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-          <button class="farol__option" data-farol="relacao" type="button"><span class="farol__option-text">Porque é que estou outra vez a pensar nesta pessoa?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-          <button class="farol__option" data-farol="cansaco" type="button"><span class="farol__option-text">Como é que amanhã começa outra vez se eu já não tenho energia para hoje?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-          <button class="farol__option" data-farol="casa" type="button"><span class="farol__option-text">Porque é que chego a casa e parece que o dia ainda não acabou?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="decisao" type="button"><span class="farol__option-text">Já pensei nisto tanto que já não sei se estou a decidir ou só a adiar.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="relacao" type="button"><span class="farol__option-text">Porque é que esta pessoa consegue ocupar tanto espaço sem estar aqui?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="cansaco" type="button"><span class="farol__option-text">Estou cansado(a) de descansar e continuar cansado(a).</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="casa" type="button"><span class="farol__option-text">Fecho a porta de casa. O dia entra comigo na mesma.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <button class="farol__option" data-farol="trabalho" type="button"><span class="farol__option-text">Quanto tempo mais vou chamar a isto “uma fase” se já sei que não está a passar?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-          <button class="farol__option" data-farol="dinheiro" type="button"><span class="farol__option-text">Porque é que o dinheiro me ocupa a cabeça mesmo quando não quero pensar nele?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="dinheiro" type="button"><span class="farol__option-text">Porque é que o dinheiro me ocupa a cabeça mesmo quando não estou a fazer contas?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <button class="farol__option" data-farol="eu" type="button"><span class="farol__option-text">Porque é que basta uma opinião dos outros para eu começar a duvidar de mim?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="desligar" type="button"><span class="farol__option-text">Hoje não quero resolver nada. Só quero sair da minha cabeça por umas horas.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <button class="farol__option" data-farol="aprender" type="button"><span class="farol__option-text">Quero aprender isto a sério. Mas por onde raio começo?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <button class="farol__option" data-farol="companhia" type="button"><span class="farol__option-text">Quero ir. Só não quero chegar sozinho(a).</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <button class="farol__option" data-farol="presente" type="button"><span class="farol__option-text">Não quero oferecer outra coisa comprada só para cumprir.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
