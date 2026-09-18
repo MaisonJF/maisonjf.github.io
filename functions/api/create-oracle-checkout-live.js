@@ -1,15 +1,8 @@
-import { ORACLE_GENERATED_TERRITORIES } from '../_lib/oracle-generated.js';
+import { ORACLE_TERRITORIES } from '../_lib/oracle-territories.js';
 
-const CORE={
-  amor:{label:'Amor & Relações',page:'amor.html',legacyReading:true},
-  trabalho:{label:'Trabalho & Caminho',page:'trabalho.html'},
-  dinheiro:{label:'Dinheiro & Segurança',page:'dinheiro.html'},
-  familia:{label:'Família & Laços',page:'familia.html'},
-  escolhas:{label:'Escolhas & Mudança',page:'escolhas.html'},
-  padroes:{label:'Eu & Padrões',page:'padroes.html'}
-};
-const GENERATED=Object.fromEntries(ORACLE_GENERATED_TERRITORIES.map(t=>[t.slug,{label:t.label,page:t.slug+'.html'}]));
-const THEMES={...CORE,...GENERATED};
+const TERRITORIES=Object.fromEntries(
+  ORACLE_TERRITORIES.map(t=>[t.slug,{label:t.label,page:t.slug+'.html'}])
+);
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -20,13 +13,11 @@ export async function onRequestPost({ request, env }) {
     let body = {};
     try { body = await request.json(); } catch { return json({ error: 'Pedido inválido.' }, 400); }
     const theme=String(body?.theme||'');
-    const territory=THEMES[theme];
+    const territory=TERRITORIES[theme];
     if (!territory) return json({ error: 'Este território ainda não está disponível.' }, 400);
 
     const origin = new URL(request.url).origin;
-    const successUrl = territory.legacyReading
-      ? origin + '/oraculo/amor-leitura.html?session_id={CHECKOUT_SESSION_ID}'
-      : origin + '/oraculo/leitura.html?theme=' + encodeURIComponent(theme) + '&session_id={CHECKOUT_SESSION_ID}';
+    const successUrl = origin + '/oraculo/leitura.html?theme=' + encodeURIComponent(theme) + '&session_id={CHECKOUT_SESSION_ID}';
 
     const params = new URLSearchParams();
     params.set('mode', 'payment');
