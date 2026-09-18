@@ -273,76 +273,67 @@ const data={
   },
   "results": {
     "decisao_perspectiva": {
-      "title": "Não precisas de pensar mais. Precisas de mudar o ângulo.",
-      "text": "Tarot Expresso: uma pergunta concreta, directo ao ponto. Sem transformar a tua decisão numa sentença.",
+      "title": "Talvez não precises de pensar mais. Precises de outro espaço para olhar.",
+      "text": "Uma consulta pode fazer sentido aqui. Dentro de Consultas, escolhes o formato que te serve melhor.",
       "cta": {
-        "href": "/contacto/?interesse=tarot-expresso",
-        "text": "Tarot Expresso · 17 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       },
       "cta2": {
         "href": "/oraculo/escolhas",
-        "text": "Escolhas & Mudança · 2 €"
+        "text": "Ou abrir Escolhas & Mudança"
       }
     },
     "decisao_falar": {
       "title": "Já tens opiniões suficientes.",
-      "text": "Escuta Orientada dá-te espaço para dizer o caso inteiro, pôr as peças por ordem e ouvir o que sobra quando o ruído baixa.",
+      "text": "Talvez precises de um espaço onde possas trazer o caso como ele é. Em Consultas, escolhes como queres fazê-lo.",
       "cta": {
-        "href": "/contacto/?interesse=escuta",
-        "text": "Escuta Orientada · 60 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       },
-      "cta2": {
-        "href": "/contacto/?interesse=tarot",
-        "text": "Tarot Integrativo · 35 €"
-      }
+      "cta2": null
     },
     "decisao_reler": {
       "title": "Há coisas que só ficam claras quando podes voltar a elas.",
-      "text": "A Consulta Escrita Aprofundada deixa a reflexão contigo depois da primeira leitura. Para reler sem recomeçar do zero.",
+      "text": "Uma consulta pode fazer sentido. Falado, escrito, com Tarot ou sem Tarot: a escolha fica contigo.",
       "cta": {
-        "href": "/contacto/?interesse=consulta-escrita-aprofundada",
-        "text": "Consulta Escrita · 45 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       },
-      "cta2": {
-        "href": "/contacto/?interesse=consulta-escrita-breve",
-        "text": "Versão breve · 25 €"
-      }
+      "cta2": null
     },
     "decisao_padrao": {
       "title": "Talvez a decisão mude. O padrão continua.",
-      "text": "Quando a questão já tem história, o Tarot Terapêutico dá-lhe mais espaço. Se isto continua a reaparecer na tua vida, o passo seguinte pode ser continuidade.",
+      "text": "Uma consulta pode ajudar-te a olhar para o que se repete. Se sentires que isto pede continuidade, tens também Acompanhamento.",
       "cta": {
-        "href": "/contacto/?interesse=tarot-terapeutico",
-        "text": "Tarot Terapêutico · 70 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       },
       "cta2": {
         "href": "/contacto/?interesse=acompanhamento",
-        "text": "Acompanhamento · desde 170 €"
+        "text": "Ver Acompanhamento"
       }
     },
     "relacao_resposta": {
       "title": "Há uma pergunta a mandar no resto da história.",
-      "text": "Leva essa pergunta ao Tarot Expresso. Uma pergunta. Um foco. Sem fingir saber o que a outra pessoa pensa.",
+      "text": "Uma consulta pode ser o espaço certo para levares essa pergunta sem o Farol escolher o formato por ti.",
       "cta": {
-        "href": "/contacto/?interesse=tarot-expresso",
-        "text": "Tarot Expresso · 17 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       },
       "cta2": {
         "href": "/oraculo/amor",
-        "text": "Amor & Relações · 2 €"
+        "text": "Ou abrir Amor & Relações"
       }
     },
     "relacao_fundo": {
       "title": "Não é só sobre essa pessoa. É sobre o lugar onde isto te deixou.",
-      "text": "O Tarot Integrativo é para quando a pergunta simples traz medo, repetição, limites e coisas que não cabem numa frase.",
+      "text": "Se queres olhar para esta história com mais contexto, entra em Consultas e escolhe a forma que te serve.",
       "cta": {
-        "href": "/contacto/?interesse=tarot",
-        "text": "Tarot Integrativo · 35 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       },
-      "cta2": {
-        "href": "/contacto/?interesse=tarot-terapeutico",
-        "text": "Aprofundar · 70 €"
-      }
+      "cta2": null
     },
     "relacao_cortar": {
       "title": "Hoje não precisas de outra conversa com alguém que nem está aqui.",
@@ -480,36 +471,33 @@ const data={
       }
     },
     "trabalho_escolher": {
-      "title": "Mais uma lista não vai fazer a escolha por ti.",
-      "text": "Uma Consulta Escrita Breve dá-te uma resposta concreta por escrito para voltares a ela sem acrescentar mais vozes à mesa.",
+      "title": "Mais uma lista talvez não seja o que falta.",
+      "text": "Uma consulta pode ajudar-te a olhar para a decisão de outra maneira. Dentro de Consultas, a escolha do formato é tua.",
       "cta": {
-        "href": "/contacto/?interesse=consulta-escrita-breve",
-        "text": "Consulta Escrita · 25 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       },
-      "cta2": {
-        "href": "/contacto/?interesse=tarot-expresso",
-        "text": "Tarot Expresso · 17 €"
-      }
+      "cta2": null
     },
     "trabalho_descarregar": {
       "title": "O que precisas pode não ser conselho. Pode ser espaço.",
-      "text": "Escuta Orientada: dizes tudo sem editar, organizamos o que está misturado e procuramos o próximo passo sem Tarot.",
+      "text": "Uma consulta pode dar-te esse espaço. O Farol não precisa de decidir se queres falar, escrever, usar Tarot ou não.",
       "cta": {
-        "href": "/contacto/?interesse=escuta",
-        "text": "Escuta Orientada · 60 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       },
       "cta2": null
     },
     "trabalho_aprofundar": {
       "title": "Se isto já tem história, não o trates como uma pergunta curta.",
-      "text": "O Tarot Terapêutico dá mais espaço às repetições, aos medos e às várias peças que estão a acontecer ao mesmo tempo.",
+      "text": "Uma consulta pode ser o próximo passo. Se depois sentires que uma sessão não chega, tens continuidade.",
       "cta": {
-        "href": "/contacto/?interesse=tarot-terapeutico",
-        "text": "Tarot Terapêutico · 70 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       },
       "cta2": {
         "href": "/contacto/?interesse=acompanhamento",
-        "text": "Quero continuidade · desde 170 €"
+        "text": "Ver Acompanhamento"
       }
     },
     "trabalho_projeto": {
@@ -535,10 +523,10 @@ const data={
     },
     "dinheiro_emocao": {
       "title": "Os números são uma coisa. O que eles estão a fazer contigo é outra.",
-      "text": "A Escuta Orientada não substitui aconselhamento financeiro. Dá-te espaço para pôr por ordem o medo, a culpa e o ruído à volta da questão.",
+      "text": "Uma consulta pode ajudar-te a pôr por ordem o medo e o ruído à volta da questão. Não substitui aconselhamento financeiro; o formato escolhes tu.",
       "cta": {
-        "href": "/contacto/?interesse=escuta",
-        "text": "Escuta Orientada · 60 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       },
       "cta2": null
     },
@@ -574,14 +562,14 @@ const data={
     },
     "eu_aprovacao": {
       "title": "Se só fica certo depois de alguém confirmar, a dúvida já está a cobrar renda.",
-      "text": "Aprovação & Validação é uma abertura simbólica para olhar para esse lugar sem fingir que uma carta te conhece melhor do que tu.",
+      "text": "Podes começar pela abertura simbólica. Se preferires levar a questão para um espaço mais teu, entra em Consultas e escolhe o formato.",
       "cta": {
         "href": "/oraculo/necessidade-aprovacao",
         "text": "Aprovação & Validação · 2 €"
       },
       "cta2": {
-        "href": "/contacto/?interesse=tarot-expresso",
-        "text": "Quero uma pergunta concreta · 17 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       }
     },
     "eu_comparacao": {
@@ -598,14 +586,14 @@ const data={
     },
     "eu_padrao": {
       "title": "Mudam as pessoas. Muda o cenário. Tu reconheces a sensação.",
-      "text": "Se queres ir além da pergunta do dia, o Tarot Terapêutico dá espaço ao padrão. Se ele continua entre sessões e decisões, existe Acompanhamento.",
+      "text": "Uma consulta pode ajudar-te a olhar para o padrão sem escolher por ti como o queres trabalhar. Se isto pede continuidade, tens também Acompanhamento.",
       "cta": {
-        "href": "/contacto/?interesse=tarot-terapeutico",
-        "text": "Tarot Terapêutico · 70 €"
+        "href": "/servicos/#consultas",
+        "text": "Explorar Consultas"
       },
       "cta2": {
         "href": "/contacto/?interesse=acompanhamento",
-        "text": "Acompanhamento · desde 170 €"
+        "text": "Ver Acompanhamento"
       }
     },
     "eu_corpo": {
