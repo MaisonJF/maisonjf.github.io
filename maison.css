@@ -583,3 +583,15 @@
     grid-template-columns:1fr;
   }
 }
+
+
+/* Farol CTA + reduced-copy navigation 2026-09-18 */
+.home-page--final .button--farol{display:inline-flex;align-items:center;gap:12px}
+.home-page--final .button--farol img{width:24px;height:30px;display:block;object-fit:contain}
+.home-page--final .button--farol b{font-size:18px;font-weight:400;margin-left:4px}
+.home-page--final .hero__direct{margin:12px 0 0;font-size:12px;color:#b8b0a6}
+.home-page--final .hero__direct a{color:inherit;text-underline-offset:4px}
+.home-page--final .home-section-head{text-align:center}
+.home-page--final .home-section-head .eyebrow{margin-inline:auto}
+.home-page--final .home-section-head h2{margin:.18em auto .35em}
+@media(max-width:700px){.home-page--final .button--farol img{width:21px;height:27px}.home-page--final .hero__direct{font-size:11px}}
