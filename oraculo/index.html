@@ -27,10 +27,10 @@
 <main class="oracle"><div class="oracle__inner">
 <p class="eyebrow">ORÁCULO MAISON JF®</p>
 <h1>Não digas a pergunta.<br>Pensa nela.</h1>
-<p class="oracle__lead">Agora escolhe onde ela vive.</p>
+<p class="oracle__lead">Agora escreve uma palavra.</p>
 <p class="oracle__price">Uma abertura. Uma leitura. 2 €.</p>
-<input class="oracle__search" id="oracle-search" type="search" placeholder="Procurar uma dor, tema ou território…" autocomplete="off" aria-label="Procurar território">
-<p class="oracle__count" id="oracle-count">Territórios disponíveis</p>
+<input class="oracle__search" id="oracle-search" type="search" placeholder="amor, trabalho, dinheiro, saudade…" autocomplete="off" aria-label="Procurar território">
+<p class="oracle__count" id="oracle-count">Escreve uma palavra.</p>
 <section id="oracle-groups"><details class="oracle-group" open><summary>Amor, Trabalho &amp; Vida Prática</summary><div class="territory-grid"><a class="territory oracle-card" href="./amor" data-theme="amor" data-search="Amor &amp; Relações"><strong>Amor &amp; Relações</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./trabalho" data-theme="trabalho" data-search="Trabalho &amp; Caminho"><strong>Trabalho &amp; Caminho</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./dinheiro" data-theme="dinheiro" data-search="Dinheiro &amp; Segurança"><strong>Dinheiro &amp; Segurança</strong><small>Abertura · 2 €</small></a>
@@ -140,11 +140,14 @@ const search=document.getElementById('oracle-search'),count=document.getElementB
 const cards=[...document.querySelectorAll('.oracle-card')],groups=[...document.querySelectorAll('.oracle-group')];
 function filter(){
  const q=norm(search.value.trim());
- cards.forEach(card=>{const show=!q||norm(card.dataset.search+' '+card.textContent).includes(q);card.hidden=!show});
- groups.forEach(group=>{const any=[...group.querySelectorAll('.oracle-card')].some(c=>!c.hidden);group.hidden=!any;if(q&&any)group.open=true});
- count.textContent=q?'Resultados filtrados':'Territórios disponíveis';
+ if(!q){cards.forEach(card=>card.hidden=true);groups.forEach(group=>group.hidden=true);count.textContent='Escreve uma palavra.';return}
+ cards.forEach(card=>{card.hidden=!norm(card.dataset.search+' '+card.textContent).includes(q)});
+ groups.forEach(group=>{const any=[...group.querySelectorAll('.oracle-card')].some(c=>!c.hidden);group.hidden=!any;if(any)group.open=true});
+ const visible=cards.filter(card=>!card.hidden).length;
+ count.textContent=visible?visible+' caminho'+(visible===1?'':'s')+' encontrado'+(visible===1?'':'s'):'Experimenta outra palavra.';
 }
 search.addEventListener('input',filter);
+filter();
 document.querySelectorAll('[data-theme]').forEach(a=>a.addEventListener('click',()=>window.maisonAnalytics?.track?.('oracle_theme_select',{theme:a.dataset.theme,page_path:location.pathname})));
 </script>
 </body></html>
