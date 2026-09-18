@@ -78,3 +78,20 @@
 
 .vpc-result__signal{margin-top:34px;padding:22px 24px;border-left:1px solid rgba(183,154,98,.52);background:rgba(183,154,98,.05);max-width:760px}
 .vpc-result__signal p:last-child{margin:8px 0 0;color:#b7afa4;font:400 20px/1.45 var(--serif)}
+
+/* Volta Para Casa · conversão v2 */
+.vpc-share--primary{align-items:center;margin-top:34px}
+.vpc-share--primary .button{text-decoration:none}
+.vpc-share__status{font-size:12px;color:#817a70}
+.vpc-offers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:24px}
+.vpc-offer{min-height:154px;padding:22px;border:1px solid var(--line);display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:border-color .18s ease,transform .18s ease,background .18s ease}
+.vpc-offer:hover,.vpc-offer:focus-visible{border-color:rgba(183,154,98,.68);transform:translateY(-2px);outline:none}
+.vpc-offer--primary{background:linear-gradient(145deg,rgba(183,154,98,.1),rgba(255,255,255,.015));border-color:rgba(183,154,98,.42)}
+.vpc-offer small{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#817a70}
+.vpc-offer strong{font:400 clamp(25px,3vw,34px)/1.05 var(--serif);margin:12px 0;color:#eee9df}
+.vpc-offer span{margin-top:auto;color:#928b82;font-size:13px;line-height:1.55}
+.vpc-report{margin-top:34px;padding:34px;border-top:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.16)}
+.vpc-report h2{font:400 clamp(34px,4.5vw,54px)/1 var(--serif);margin:.18em 0 .3em}
+.vpc-report>p:not(.vpc-kicker){max-width:700px;color:#9e978e}
+.vpc-report .button{margin-top:18px}
+@media(max-width:760px){.vpc-offers{grid-template-columns:1fr}.vpc-report{padding:28px 0}}
