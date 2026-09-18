@@ -98,6 +98,35 @@
     document.body.appendChild(banner);
   }
 
+  function modernizeLegacyAnswerPage() {
+    const answer = document.querySelector('main.answer');
+    if (!answer) return;
+
+    const nav = document.querySelector('header.site-header nav');
+    if (nav) {
+      nav.innerHTML = '<a href="/farol">O Farol</a><a href="/teste/">Volta Para Casa</a><a href="/produtos/">Produtos</a><a href="/servicos/">Serviços</a><a href="/oraculo/">Oráculo</a>';
+    }
+
+    const section = [...answer.querySelectorAll('section')].find(node => node.querySelector('.answer-actions'));
+    if (!section) return;
+
+    const heading = section.querySelector('h2');
+    if (heading) heading.textContent = 'Se queres continuar.';
+
+    const intro = section.querySelector(':scope > p');
+    if (intro) {
+      intro.textContent = 'Se queres perceber o que está a pedir mais atenção, entra no Volta Para Casa. Se já sabes que queres avançar, entra directamente nos Serviços.';
+    }
+
+    const actions = section.querySelector('.answer-actions');
+    if (actions) {
+      const origin = location.pathname.replace(/^\/+|\/+$/g, '');
+      actions.innerHTML =
+        '<a href="/teste/?origem=' + encodeURIComponent(origin) + '"><span>Gratuito · resultado imediato</span><strong>VOLTA PARA CASA</strong></a>' +
+        '<a class="paid" href="/servicos/"><span>Quero avançar</span><strong>Explorar Serviços</strong></a>';
+    }
+  }
+
   function classify(link) {
     const href = link.getAttribute('href') || '';
     const lowerHref = href.toLowerCase();
@@ -127,6 +156,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    modernizeLegacyAnswerPage();
     normalizeInternalLinks();
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => mutation.addedNodes.forEach(node => {
