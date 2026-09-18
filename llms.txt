@@ -12,10 +12,11 @@ MAISON JF® starts with what a person is living, feeling or trying to change. It
 
 ## Canonical navigation
 - Home: https://maison-jf.com/
-- Teste — O QUE ESTÁS A IGNORAR?: https://maison-jf.com/teste/
+- O Farol: https://maison-jf.com/farol
+- Volta Para Casa: https://maison-jf.com/teste/
 - Produtos: https://maison-jf.com/produtos/
 - Serviços: https://maison-jf.com/servicos/
-- Ebooks: https://maison-jf.com/ebooks/
+- Biblioteca: https://maison-jf.com/ebooks/
 - Oráculo: https://maison-jf.com/oraculo/
 - Casa: https://maison-jf.com/portas/casa
 - Corpo: https://maison-jf.com/portas/corpo
@@ -27,8 +28,8 @@ MAISON JF® starts with what a person is living, feeling or trying to change. It
 - Envios: https://maison-jf.com/envios
 - Informação legal: https://maison-jf.com/informacao-legal
 
-## Teste
-“O QUE ESTÁS A IGNORAR?” é uma experiência gratuita que ajuda a pessoa a reconhecer o que está a pesar e a encontrar um próximo passo público da MAISON JF®.
+## Volta Para Casa
+Volta Para Casa é uma experiência gratuita de reconhecimento pessoal. Ajuda a pessoa a identificar o que está a pedir mais atenção e abre caminhos públicos da MAISON JF® sem constituir diagnóstico.
 
 ## Produtos
 Produtos actualmente apresentados no catálogo público incluem:
