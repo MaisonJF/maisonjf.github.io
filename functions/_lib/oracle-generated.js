@@ -1035,6 +1035,63 @@ export const ORACLE_GENERATED_TERRITORIES=[
   }
 ];
 
+export const ORACLE_CORE_TERRITORIES={
+  amor:{
+    slug:'amor',
+    focus:'uma pergunta sobre amor, vínculo, distância ou reciprocidade',
+    signal:'aquilo que a outra pessoa faz ou deixa de fazer começa facilmente a ganhar mais peso do que aquilo que tu próprio sabes',
+    hidden:'perder uma ligação importante ou reconhecer que ela não está no lugar que desejavas',
+    anchor:'Amor pode ser profundo sem transformar incerteza em certeza nem ausência em promessa.',
+    move:'Volta ao que existe entre vocês hoje e separa desejo, comportamento e possibilidade.',
+    question:'Que verdade sobre esta ligação consegues reconhecer sem precisares de prever o futuro?'
+  },
+  trabalho:{
+    slug:'trabalho',
+    focus:'uma dúvida sobre trabalho, caminho, esforço ou mudança profissional',
+    signal:'o medo de escolher mal pode fazer o conhecido parecer automaticamente mais seguro',
+    hidden:'perder estabilidade, desperdiçar esforço ou descobrir que escolheste o caminho errado',
+    anchor:'Uma decisão profissional não precisa de garantir o futuro inteiro para ser responsável.',
+    move:'Compara custos, margem, aprendizagem e qualidade de vida usando o contexto que tens agora.',
+    question:'Qual é o próximo passo profissional que te daria informação real em vez de apenas mais pensamento?'
+  },
+  dinheiro:{
+    slug:'dinheiro',
+    focus:'uma questão de dinheiro, segurança, gasto, dívida ou margem',
+    signal:'números e emoções podem misturar-se até uma decisão financeira parecer também um julgamento sobre o teu valor',
+    hidden:'ficar sem chão, perder controlo ou não conseguir responder quando alguma coisa mudar',
+    anchor:'Dinheiro é informação, recurso e limite; não precisa de escrever a tua biografia.',
+    move:'Separa primeiro os números reais do medo e decide depois o que precisa de protecção, mudança ou tempo.',
+    question:'Que parte desta preocupação é um problema financeiro concreto e que parte é o medo a aumentar-lhe o tamanho?'
+  },
+  familia:{
+    slug:'familia',
+    focus:'uma questão familiar onde carinho, história, dever e limites ficaram misturados',
+    signal:'uma opinião, pedido ou conflito pesa mais porque vem de pessoas a quem pertences',
+    hidden:'desiludir, perder pertença ou ser visto como egoísta por escolher diferente',
+    anchor:'Pertencer a uma família não exige que todas as escolhas sejam colectivas.',
+    move:'Distingue afecto de obrigação e escolhe uma fronteira que consigas sustentar sem transformar ninguém em inimigo.',
+    question:'O que continuarias a escolher se pudesses amar estas pessoas sem ter de obedecer a todas as expectativas delas?'
+  },
+  escolhas:{
+    slug:'escolhas',
+    focus:'uma decisão onde várias opções têm valor e nenhuma vem com garantia',
+    signal:'quanto mais tentas eliminar todo o risco, mais a decisão parece impossível',
+    hidden:'arrepender-te, perder uma possibilidade ou ter de assumir que escolheste sem certeza',
+    anchor:'Escolher bem não é prever perfeitamente; é responder com honestidade à informação disponível.',
+    move:'Reduz a decisão ao horizonte que realmente precisa de ser escolhido agora.',
+    question:'Que opção continua a fazer sentido quando deixas de exigir que ela prove já que será perfeita?'
+  },
+  padroes:{
+    slug:'padroes',
+    focus:'um comportamento ou dinâmica que reconheces, mas continuas a repetir',
+    signal:'o padrão parece acontecer depressa demais para existir escolha, sobretudo quando a emoção sobe',
+    hidden:'descobrir que mudar exige desconforto, perda de uma protecção antiga ou responsabilidade nova',
+    anchor:'Reconhecer um padrão não é condenar-te a ele; é encontrar mais cedo o ponto onde ainda existe escolha.',
+    move:'Procura o primeiro sinal da sequência e experimenta mudar apenas esse segundo inicial.',
+    question:'Onde começa realmente este padrão, antes de chegares à parte que já conheces tão bem?'
+  }
+};
+
 function make(t,n,title,paragraphs){
   return {
     id:'g-'+t.slug+'-'+String(n).padStart(2,'0'),
@@ -1182,6 +1239,62 @@ export function buildGeneratedReadings(t){
       'Em '+t.focus+', regressa ao que existe hoje. '+t.signal+'.',
       t.anchor,
       'O presente pode não ter a resposta completa. Tem, porém, os únicos dados com que podes realmente escolher agora. '+t.move,
+      t.question
+    ]),
+    make(t,21,'O que mudou desde o início?',[
+      'Há situações que continuamos a olhar com a fotografia do primeiro dia, mesmo quando a realidade já se mexeu.',
+      'Em '+t.focus+', compara o início com agora. '+t.signal+'. O que aumentou? O que diminuiu? O que deixou de acontecer? O que apareceu entretanto?',
+      t.anchor,
+      'Mudança pequena também é informação. Não uses a memória daquilo que foi para corrigir aquilo que está diante de ti.',
+      t.question
+    ]),
+    make(t,22,'Se isto não fosse urgente',[
+      'A urgência estreita o campo de visão. Faz parecer que tens de responder, decidir, corrigir ou compreender tudo antes de voltares a respirar.',
+      'Em '+t.focus+', o medo de '+t.hidden+' pode estar a transformar desconforto em emergência.',
+      t.anchor,
+      'Imagina que tinhas vinte e quatro horas sem obrigação de decidir. O que deixaria de parecer tão absoluto? '+t.move,
+      t.question
+    ]),
+    make(t,23,'O que precisas realmente de confirmar?',[
+      'Às vezes procuramos mais sinais quando, na verdade, já sabemos qual é a pergunta que gostaríamos que alguém respondesse por nós.',
+      'Em '+t.focus+', '+t.signal+'. Repara se estás a recolher informação nova ou apenas a procurar confirmação para uma conclusão desejada.',
+      t.anchor,
+      'Nomeia a confirmação que procuras. Depois pergunta se ela pode vir de factos, de uma conversa, de tempo — ou se é uma garantia que ninguém consegue dar.',
+      t.question
+    ]),
+    make(t,24,'Há uma resposta que não depende de ninguém',[
+      'Nem todas as respostas estão nas mãos das outras pessoas, das circunstâncias ou do futuro.',
+      'Em '+t.focus+', talvez não controles o desfecho, mas ainda podes decidir aquilo que aceitas, o que pedes, onde paras e como queres participar.',
+      t.anchor,
+      'Recuperar agência não significa fingir que tudo depende de ti. Significa não entregar também a parte que ainda é tua. '+t.move,
+      t.question
+    ]),
+    make(t,25,'Talvez estejas a juntar duas coisas diferentes',[
+      'Quando uma situação pesa, conceitos diferentes começam a parecer a mesma coisa: medo e intuição, carinho e obrigação, desejo e compatibilidade, prudência e paralisia.',
+      'Em '+t.focus+', experimenta separar aquilo que tens tratado como uma única pergunta.',
+      t.anchor,
+      'Dá um nome a cada parte. Muitas decisões ficam menos confusas quando deixas de exigir que uma única resposta resolva problemas diferentes.',
+      t.question
+    ]),
+    make(t,26,'Experimenta antes de concluir',[
+      'Nem todas as dúvidas precisam de ser resolvidas apenas a pensar. Algumas respondem melhor a uma experiência pequena e reversível.',
+      'Em '+t.focus+', escolhe um gesto que produza informação sem te obrigar a decidir tudo. '+t.move,
+      t.anchor,
+      'Depois observa o que acontece na realidade, não apenas o que imaginavas que aconteceria. Usa esse resultado como dado novo.',
+      t.question
+    ]),
+    make(t,27,'A pergunta por baixo da pergunta',[
+      'Às vezes chegamos com uma pergunta concreta e passamos muito tempo a tentar respondê-la sem reparar no que ela está realmente a proteger.',
+      'Em '+t.focus+', talvez a pergunta visível esteja ligada ao medo de '+t.hidden+'.',
+      t.anchor,
+      'Pergunta-te o que mudaria dentro de ti se recebesses exactamente a resposta que desejas. A necessidade escondida costuma aparecer aí.',
+      'Se a resposta exterior nunca chegasse, que necessidade interior continuaria a merecer atenção?'
+    ]),
+    make(t,28,'O que merece continuar contigo?',[
+      'Nem tudo o que aprendeste nesta situação precisa de desaparecer quando ela mudar. Há coisas que podem tornar-se critério, limite ou conhecimento sobre ti.',
+      'Em '+t.focus+', '+t.signal+'. Em vez de procurares apenas uma saída, pergunta também o que queres levar desta experiência.',
+      t.anchor,
+      'Escolhe uma coisa para deixar para trás e uma coisa para conservar como aprendizagem. '+t.move,
       t.question
     ])
   ];
