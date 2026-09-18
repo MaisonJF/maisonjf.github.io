@@ -21,12 +21,10 @@
 <header class="site-header site-header--home">
   <a class="brand" href="./">MAISON JF®</a>
   <nav aria-label="Principal">
-    <a href="#portas">O Farol</a>
-    <a href="./teste/">Teste</a>
+    <a href="./farol">O Farol</a>
+    <a href="./produtos/">Produtos</a>
     <a href="./servicos/">Serviços</a>
     <a href="./oraculo/">Oráculo</a>
-    <a href="./produtos/">Produtos</a>
-    <a href="./ebooks/">Ebooks</a>
   </nav>
 </header>
 
@@ -40,7 +38,7 @@
       <h1 class="hero__headline">PÁRA DE IGNORAR!</h1>
       <p class="hero__tagline">Volta Para Casa.</p>
       <div class="hero__actions">
-        <a class="button button--light button--farol" href="#portas"><img src="./farol-icon.svg" alt="" aria-hidden="true"> <span>SEGUIR O FAROL</span> <b aria-hidden="true">→</b></a>
+        <a class="button button--light button--farol" href="./farol#farol"><img src="./farol-icon.svg" alt="" aria-hidden="true"> <span>SEGUIR O FAROL</span> <b aria-hidden="true">→</b></a>
       </div>
       <p class="hero__direct">Já sabes o que procuras? <a href="#explorar-maison">Explora a Maison →</a></p>
     </div>
@@ -70,82 +68,22 @@
     </a>
   </section>
 
-  <div id="explorar-maison"></div>
-  <section class="home-feature home-feature--text shell" id="teste">
-    <div class="home-feature__copy">
-      <p class="eyebrow">Teste · ~2 min</p>
-      <h2>Há qualquer coisa a apertar. Talvez só ainda não lhe tenhas dado nome.</h2>
-      <a class="button button--light" href="./teste/">FAZER O TESTE</a>
-    </div>
-  </section>
-
-  <section class="home-services shell" id="servicos">
-    <div class="home-services__head">
-      <div><p class="eyebrow">Serviços</p><h2>Nem tudo se resolve com a mesma profundidade.</h2></div>
-      <div><p>Uma pergunta, uma conversa ou continuidade. Escolhe o nível de presença de que precisas agora.</p><a class="button" href="./servicos/">VER SERVIÇOS</a></div>
-    </div>
-    <div class="home-services__grid">
-      <a href="./servicos/"><span>Tarot & Respostas</span><b>Quero uma resposta. →</b></a>
-      <a href="./servicos/"><span>Consultas</span><b>Quero olhar para isto com mais espaço. →</b></a>
-      <a href="./servicos/"><span>Escuta & Acompanhamento</span><b>Preciso de falar e pôr isto por ordem. →</b></a>
-      <a href="./servicos/"><span>Mentoria & SOS</span><b>Preciso de continuidade. →</b></a>
-    </div>
-  </section>
-
-  <section class="home-feature home-feature--text shell home-feature--oraculo" id="oraculo">
-    <div class="home-feature__copy">
-      <p class="eyebrow">Oráculo</p>
-      <h2>Há perguntas que não pedem conselho. Pedem outra perspectiva.</h2>
-      <a class="button" href="./oraculo/">ABRIR O ORÁCULO</a>
-    </div>
-  </section>
-
-  <section class="home-feature home-feature--reverse shell" id="produtos">
-    <div class="home-feature__media"><img src="./images/cinematic/ritual.avif" alt="Ritual sensorial de corpo e ambiente"></div>
-    <div class="home-feature__copy">
-      <p class="eyebrow">Produtos</p>
-      <h2>Muda uma coisa antes de tentares mudar tudo.</h2>
-      <p>Objetos para alterar o ambiente, o corpo e o ritmo de um momento.</p>
-      <a class="button" href="./produtos/">VER PRODUTOS</a>
-    </div>
-  </section>
-
-  <section class="home-feature shell home-feature--ebooks" id="ebooks">
-    <div class="home-feature__media">
-      <img src="./images/ebooks/vírgulas-do-destino-saga-poster.png" width="1024" height="1536" alt="Poster oficial da saga Vírgulas do Destino" loading="lazy" decoding="async">
-    </div>
-    <div class="home-feature__copy">
-      <p class="eyebrow">Biblioteca · Éditions Maison JF</p>
-      <h2>Há histórias que te apanham antes de perceberes porquê.</h2>
-      <p>Os primeiros volumes de <em>Vírgulas do Destino</em> já estão na Biblioteca. A história continua.</p>
-      <a class="button" href="./ebooks/">ABRIR A BIBLIOTECA</a>
-    </div>
-  </section>
-
-  <section class="home-feature home-feature--reverse shell" id="companhia">
-    <div class="home-feature__media"><img src="./images/cinematic/editorial.avif" width="1448" height="1086" alt="Duas chávenas num ambiente costeiro ao entardecer, como imagem de companhia" loading="lazy" decoding="async"></div>
-    <div class="home-feature__copy">
-      <p class="eyebrow">Companhia</p>
-      <h2>Não adies o plano só porque falta alguém ao lado.</h2>
-      <a class="button" href="./portas/companhia">ENTRAR NA COMPANHIA</a>
-    </div>
-  </section>
-
-  <section class="home-feature shell home-feature--professionals" id="profissionais">
-    <div class="home-feature__media"><img src="./profissionais.jpg" alt="Espaço reservado a profissionais e parceiros MAISON JF"></div>
-    <div class="home-feature__copy">
-      <p class="eyebrow">Profissionais · B2B</p>
-      <h2>Antes da compra, já existe uma experiência.</h2>
-      <p>Revenda, pequenas séries e propostas pensadas para o teu espaço e para o teu cliente.</p>
-      <a class="button" href="./profissionais/">ENTRAR NO ESPAÇO PROFISSIONAL</a>
-    </div>
+  <section class="home-explore shell" id="explorar-maison">
+    <p class="eyebrow">Explora a Maison</p>
+    <h2>Já sabes o que procuras?</h2>
+    <nav class="home-explore__links" aria-label="Explorar a Maison">
+      <a href="./produtos/">Produtos <span aria-hidden="true">→</span></a>
+      <a href="./servicos/">Serviços <span aria-hidden="true">→</span></a>
+      <a href="./oraculo/">Oráculo <span aria-hidden="true">→</span></a>
+      <a href="./ebooks/">Biblioteca <span aria-hidden="true">→</span></a>
+    </nav>
   </section>
 </main>
 
 <footer class="home-footer">
   <div class="shell home-footer__grid">
     <div class="home-footer__brand"><strong>MAISON JF®</strong><p>PÁRA DE IGNORAR.<br>Volta Para Casa.</p></div>
-    <div class="home-footer__group"><span>Explorar</span><nav aria-label="Explorar"><a href="./teste/">Teste</a><a href="./produtos/">Produtos</a><a href="./servicos/">Serviços</a><a href="./oraculo/">Oráculo</a><a href="./ebooks/">Ebooks</a></nav></div>
+    <div class="home-footer__group"><span>Explorar</span><nav aria-label="Explorar"><a href="./farol">O Farol</a><a href="./produtos/">Produtos</a><a href="./servicos/">Serviços</a><a href="./oraculo/">Oráculo</a><a href="./ebooks/">Ebooks</a></nav></div>
     <div class="home-footer__group"><span>Maison</span><nav aria-label="Maison"><a href="./profissionais/">Profissionais</a><a href="./press/">Press</a><a href="./contacto/">Contacto</a><a href="./envios">Envios</a><a href="./informacao-legal">Legal & Privacidade</a></nav></div>
     <p class="home-footer__legal">Marca registada na União Europeia · Certificação PME pelo IAPMEI.</p>
   </div>
