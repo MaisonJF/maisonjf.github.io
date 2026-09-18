@@ -637,3 +637,15 @@
   .home-page--final .home-explore__links{grid-template-columns:1fr}
   .home-page--final .home-explore__links a{min-height:78px;padding:18px 4px;font-size:24px;border-left:0!important}
 }
+
+/* Homepage hero · Farol + Volta Para Casa */
+.home-page--final .hero__actions--dual{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:620px}
+.home-page--final .hero__actions--dual .button{min-height:58px;display:flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap}
+.home-page--final .button--vpc{border-color:rgba(255,255,255,.42);background:transparent;color:#f3efe7}
+.home-page--final .button--vpc b{font-size:18px;font-weight:400}
+@media(max-width:560px){
+  .home-page--final .hero__actions--dual{gap:8px}
+  .home-page--final .hero__actions--dual .button{padding:12px 10px;font-size:9px;letter-spacing:.1em}
+  .home-page--final .hero__actions--dual .button--farol img{width:15px;height:26px}
+  .home-page--final .hero__actions--dual .button b{font-size:14px}
+}
