@@ -54,3 +54,5 @@
   .vpc-convert{padding:24px}
   .vpc-convert__links{grid-template-columns:1fr}
 }
+
+.vpc-result__quote{margin:34px 0 0;padding:26px 0 4px;border-top:1px solid var(--line);max-width:760px;font:italic 400 clamp(25px,3.4vw,40px)/1.18 var(--serif);color:#ddd4c7}
