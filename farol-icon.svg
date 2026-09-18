@@ -1,13 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 48" fill="none" aria-hidden="true">
-  <g stroke="#17130e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M9.5 44h13"/>
-    <path d="M11 42.5h10L19.3 20h-6.6L11 42.5z"/>
-    <path d="M12.2 20h7.6"/>
-    <rect x="10.8" y="15.2" width="10.4" height="4.8" rx=".7"/>
-    <path d="M13 15.2v-3.8h6v3.8"/>
-    <path d="M13.7 11.4c0-2.5 1.2-4.3 2.3-5.1 1.2.8 2.3 2.6 2.3 5.1"/>
-    <path d="M16 6.3V4.2"/>
-    <path d="M13.6 29.8l4.8-4.5"/>
-    <path d="M13.2 35.2l5.8-5.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 48" fill="none" aria-hidden="true">
+  <g stroke="#0b0b0c" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6.8 44.5h10.4"/>
+    <path d="M8.2 43.2L10 17.4h4l1.8 25.8"/>
+    <path d="M9.3 17.4h5.4"/>
+    <path d="M8.5 16.2h7"/>
+    <rect x="9" y="9.4" width="6" height="6.8" rx=".35"/>
+    <path d="M8.6 9.4h6.8L12 6.4z"/>
+    <path d="M12 4.2v2.2"/>
+    <path d="M10.5 12.4h3"/>
   </g>
 </svg>
