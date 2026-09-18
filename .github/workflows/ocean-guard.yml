@@ -160,10 +160,14 @@ jobs:
                   print(' -',p,why)
               raise SystemExit(1)
 
-          # Mobile hub contract: never more than 8 returned search results.
+          # Respostas stay under the hood: the public hub must not expose a catalogue.
           hub=(root/'respostas/index.html').read_text(encoding='utf-8')
-          if '.slice(0,8)' not in hub:
-              raise SystemExit('Respostas hub lost the max-8 search-results contract')
+          if 'noindex' not in hub.lower():
+              raise SystemExit('Respostas hub must remain noindex')
+          if '/farol' not in hub:
+              raise SystemExit('Respostas hub must route visitors back to the Farol')
+          if 'answer-grid' in hub or 'answer-card' in hub:
+              raise SystemExit('Respostas hub must not expose a public catalogue')
 
           print('Oceans:',len(oceans))
           print('Public pillars:',len(pillar_paths))
