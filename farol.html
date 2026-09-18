@@ -114,52 +114,32 @@
         {
           "@type": "ListItem",
           "position": 5,
-          "name": "Quero aprender isto a sério. Mas por onde raio começo?"
+          "name": "Quanto tempo mais vou chamar a isto uma fase se já sei que não está a passar?"
         },
         {
           "@type": "ListItem",
           "position": 6,
-          "name": "Quero ir. Só não quero chegar sozinho(a)."
+          "name": "Porque é que o dinheiro me ocupa a cabeça mesmo quando não quero pensar nele?"
         },
         {
           "@type": "ListItem",
           "position": 7,
-          "name": "Há dias, e noites, em que só gostava de sentir que tinha alguém comigo."
+          "name": "Porque é que basta uma opinião dos outros para eu começar a duvidar de mim?"
         },
         {
           "@type": "ListItem",
           "position": 8,
+          "name": "Quero aprender isto a sério. Mas por onde raio começo?"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "name": "Quero ir. Só não quero chegar sozinho(a)."
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
           "name": "Não quero oferecer outra coisa comprada só para cumprir."
-        }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://maison-jf.com/farol#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "O que é o Farol?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "É uma orientação interactiva que começa pela situação que estás a viver e encaminha para Produtos ou Serviços da MAISON JF® que podem fazer sentido."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Tenho de saber que Produto ou Serviço procuro?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Não. O Farol existe precisamente para quem sabe o que está a incomodar, mas ainda não sabe o que procurar."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "O Farol substitui cuidados médicos, psicológicos, legais ou financeiros?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Não. O Farol organiza opções dentro da MAISON JF® e não substitui cuidados profissionais quando estes são necessários."
-          }
         }
       ]
     },
@@ -222,10 +202,10 @@
         <a href="./" class="detail-back">← Voltar à MAISON JF®</a>
         <p class="detail-eyebrow">O Farol</p>
         <h1 class="detail-title">Não tens de saber o que procuras. Basta saber o que não te larga.</h1>
-        <p class="detail-lead">Escolhe a frase que já podia ter passado pela tua cabeça. O nome do Produto ou Serviço vem depois. O Farol leva-te à próxima porta.</p>
+        <p class="detail-lead">Escolhe a frase que já te passou pela cabeça. O resto vem depois.</p>
         <div class="detail-actions">
           <a href="#farol" class="btn btn--primary">Seguir o Farol</a>
-          <a href="./#portas" class="btn btn--ghost">Já sei o que procuro →</a>
+          <a href="./#explorar-maison" class="btn btn--ghost">Já sei o que procuro →</a>
         </div>
       </div>
     </section>
@@ -234,7 +214,7 @@
     <div class="farol__header">
       <p class="farol__label">O Farol</p>
       <h2 class="farol__title">Qual destas frases podia ser tua?</h2>
-      <p class="farol__subtitle">Escolhe a que já te passou pela cabeça. O nome do Serviço vem depois.</p>
+      <p class="farol__subtitle">Escolhe a que te bateu primeiro.</p>
     </div>
     <div class="farol__container">
       <div class="farol__progress" id="farolProgress" aria-hidden="true">
@@ -249,6 +229,9 @@
           <button class="farol__option" data-farol="relacao" type="button"><span class="farol__option-text">Porque é que estou outra vez a pensar nesta pessoa?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <button class="farol__option" data-farol="cansaco" type="button"><span class="farol__option-text">Como é que amanhã começa outra vez se eu já não tenho energia para hoje?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <button class="farol__option" data-farol="casa" type="button"><span class="farol__option-text">Porque é que chego a casa e parece que o dia ainda não acabou?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="trabalho" type="button"><span class="farol__option-text">Quanto tempo mais vou chamar a isto “uma fase” se já sei que não está a passar?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="dinheiro" type="button"><span class="farol__option-text">Porque é que o dinheiro me ocupa a cabeça mesmo quando não quero pensar nele?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="farol__option" data-farol="eu" type="button"><span class="farol__option-text">Porque é que basta uma opinião dos outros para eu começar a duvidar de mim?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <button class="farol__option" data-farol="aprender" type="button"><span class="farol__option-text">Quero aprender isto a sério. Mas por onde raio começo?</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <button class="farol__option" data-farol="companhia" type="button"><span class="farol__option-text">Quero ir. Só não quero chegar sozinho(a).</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <button class="farol__option" data-farol="presente" type="button"><span class="farol__option-text">Não quero oferecer outra coisa comprada só para cumprir.</span><svg class="farol__option-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
@@ -267,51 +250,9 @@
         <button class="farol__back" id="farolBack3" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Recomeçar</button>
       </div>
     </div>
+    <p class="detail-note">O Farol orienta; não diagnostica e não substitui cuidados médicos, psicológicos, legais ou financeiros quando são necessários.</p>
   </section>
 
-    <section class="detail-section detail-section--alt" id="quando-seguir">
-      <div class="detail-section__inner">
-        <p class="detail-kicker">Começa pela frase que é tua</p>
-        <h2 class="detail-section__title">O Farol existe para estes momentos.</h2>
-        <div class="detail-grid detail-grid--products">
-          <article class="offer-card"><h3>“E se eu escolher mal e me arrepender depois?”</h3><p>Quando uma decisão te ocupa mais espaço do que devia e nenhuma opinião te dá a garantia que procuras.</p><a class="btn btn--secondary" href="#farol">Começar daqui</a></article>
-          <article class="offer-card"><h3>“Porque é que ainda estou a pensar nesta pessoa?”</h3><p>Quando uma mensagem, uma ausência, uma conversa ou uma hipótese continua a voltar à cabeça.</p><a class="btn btn--secondary" href="#farol">Começar daqui</a></article>
-          <article class="offer-card"><h3>“Estou tão cansado(a) que até descansar dá trabalho.”</h3><p>Quando chegas ao fim do dia sem nada para ti e até aquilo que te faria bem parece exigir demasiado.</p><a class="btn btn--secondary" href="#farol">Começar daqui</a></article>
-          <article class="offer-card"><h3>“Fecho a porta de casa e o dia entra comigo.”</h3><p>Quando mudaste de lugar, mas o trabalho, a discussão e o que ficou por resolver ainda estão sentados contigo.</p><a class="btn btn--secondary" href="#farol">Começar daqui</a></article>
-          <article class="offer-card"><h3>“Queria perceber isto a sério.”</h3><p>Quando não procuras mais conteúdo solto. Queres aprender, organizar o que sabes e conseguir avançar.</p><a class="btn btn--secondary" href="#farol">Começar daqui</a></article>
-          <article class="offer-card"><h3>“Quantas vezes mais vou ficar em casa só porque não tenho com quem ir?”</h3><p>Quando queres viver o plano, mas a ideia de ir sozinho(a) acaba por ganhar.</p><a class="btn btn--secondary" href="#farol">Começar daqui</a></article>
-          <article class="offer-card"><h3>“Há dias, e noites, em que só gostava de sentir que tinha alguém comigo.”</h3><p>Quando não procuras necessariamente uma relação, mas queres proximidade, carinho e uma presença mais romântica naquele momento.</p><a class="btn btn--secondary" href="#farol">Começar daqui</a></article>
-          <article class="offer-card"><h3>“Quero oferecer alguma coisa que pareça escolhida para esta pessoa.”</h3><p>Quando não queres comprar só para cumprir. Queres que a escolha diga qualquer coisa.</p><a class="btn btn--secondary" href="#farol">Começar daqui</a></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="detail-section" id="sobre-o-farol">
-      <div class="detail-section__inner detail-narrow">
-        <p class="detail-kicker">O que é isto?</p>
-        <h2 class="detail-section__title">Uma entrada para a Maison. Não um teste para te pôr numa caixa.</h2>
-        <p class="detail-copy">O Farol começa pela situação que estás a viver e mostra-te uma próxima opção dentro da MAISON JF®. Pode encaminhar para Produtos, Consultas, Escuta Orientada, Acompanhamento, Companhia, Mentoria ou outras propostas existentes. Se já sabes exactamente o que procuras, não precisas do Farol.</p>
-        <div class="detail-actions">
-          <a href="#farol" class="btn btn--primary">Começar agora</a>
-          <a href="./produtos/" class="btn btn--ghost">Ver Produtos</a>
-          <a href="./servicos/" class="btn btn--ghost">Ver Serviços</a>
-        </div>
-        <p class="detail-note">O Farol não substitui cuidados médicos, psicológicos, legais ou financeiros quando estes são necessários.</p>
-      </div>
-    </section>
-
-    <section class="detail-section detail-section--quiet" id="faq">
-      <div class="detail-section__inner detail-narrow">
-        <p class="detail-kicker">Perguntas rápidas</p>
-        <h2 class="detail-section__title">Antes de começares.</h2>
-        <div class="detail-grid">
-          <article class="offer-card"><h3>Tenho de saber que Serviço preciso?</h3><p>Não. É precisamente para isso que o Farol existe. Escolhe a situação, não a categoria.</p></article>
-          <article class="offer-card"><h3>O resultado obriga-me a comprar alguma coisa?</h3><p>Não. O Farol mostra uma direcção. Tu decides se queres avançar.</p></article>
-          <article class="offer-card"><h3>Posso recomeçar?</h3><p>Sim. Podes voltar ao início e experimentar outro caminho sempre que quiseres.</p></article>
-          <article class="offer-card"><h3>Já sei o que quero. E agora?</h3><p>Vai directamente a Produtos ou Serviços. O Farol não precisa de ficar entre ti e uma decisão que já tomaste.</p></article>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="footer" role="contentinfo">
