@@ -14,8 +14,8 @@ export const OCEANS_POLICY={
     'Respostas is not a public Ocean catalogue.',
     'An Ocean becomes public only by deliberate human-approved promotion into a canonical public surface.',
     'Internal Oceans may grow independently of the number of public pages or Oracle territories.',
-    'Oceans feed Volta Para Casa routing, the Farol, Offer Brain, Oráculo territory design and future commercial offers without exposing the full knowledge base.',
-    'No personal data, private conversation content or paid Oracle reading body may be stored as an Ocean candidate.'
+    'Oceans feed Volta Para Casa routing, the Farol, Offer Brain, PÁRA DE IGNORAR! question candidates, Oráculo territory/reading candidates and future commercial offers without exposing the full knowledge base.',
+    'No personal data, private conversation content, paid PÁRA DE IGNORAR! question body or paid Oracle reading body may be stored as an Ocean candidate.'
   ]
 };
 
