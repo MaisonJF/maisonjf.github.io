@@ -98,3 +98,15 @@ No answer text is requested or stored.
 - Oceans can propose candidates and needs only; they cannot write directly into live paid tables.
 - Metrics may alter distribution weights, but do not automatically redefine taxonomy or editorial truth.
 - Quality failures are invisible to customers; the Composer retries or the legacy safe fallback is used.
+
+
+## Production runtime guardrails (2026-09-19)
+
+- Production D1 has been reconciled from the early partial vault and upgraded to `vault_v2`.
+- PÁRA DE IGNORAR! uses the v2 question reader when the schema is ready; its paid checkout remains fixed at EUR 5.00 and the API verifies amount + currency.
+- PDI interaction signals record only product events/IDs (served, advanced, passed, completed, repurchased). Answer text and private conversation content are never sent to the signal endpoint.
+- Signal/gap-learning writes are fail-open: analytics or learning failures must never block a paid experience.
+- Oracle composition starts only when a territory has active/live coverage for all seven editorial roles. Untouched or incomplete territories stay on the authored legacy reading system.
+- `global` Oracle blocks may support an already-developed territory, but cannot by themselves switch an untouched territory to composition.
+- Territory-specific Oracle blocks take precedence over global fallback blocks.
+- Coverage gaps are written idempotently to `vault_content_needs`; they are evidence for Brain/Oceans, never automatic paid publication.
