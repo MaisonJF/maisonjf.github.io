@@ -2,6 +2,16 @@ import { composeOracleReading } from '../../../functions/_lib/oracle-composer.js
 
 const roles=['opening','recognition','tension','counterpoint','reframe','movement','close'];
 
+const TEST_TEXT={
+  opening:'Abre a situação pelo presente concreto e deixa a conclusão em suspenso.',
+  recognition:'Reconhece o padrão observado sem transformar sinais pequenos em certezas.',
+  tension:'Mostra a fricção principal e distingue desejo, medo e comportamento.',
+  counterpoint:'Introduz uma leitura alternativa que reduz conclusões automáticas.',
+  reframe:'Reorganiza a pergunta para devolver clareza e margem de escolha.',
+  movement:'Propõe um próximo passo observável, pequeno e proporcional ao contexto.',
+  close:'Fecha com uma pergunta simples que devolve a decisão à pessoa.'
+};
+
 function block({id,territory,role,intensity=2}){
   return {
     id,
@@ -9,7 +19,7 @@ function block({id,territory,role,intensity=2}){
     territory,
     role,
     intensity,
-    text:`Texto editorial ${id} com clareza suficiente para teste.`,
+    text:TEST_TEXT[role],
     title:role==='opening'?'Teste':undefined,
     status:'active',
     lifecycleState:'live',
