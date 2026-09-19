@@ -1,5 +1,5 @@
 const PRODUCTS={
-  relacoes:{name:'PÁRA DE IGNORAR! · Relações',currency:'EUR',envKey:'PDI_RELACOES_PRICE_CENTS'}
+  relacoes:{name:'PÁRA DE IGNORAR! · Relações',currency:'EUR',amount:599}
 };
 
 export async function onRequestGet({ request, env }) {
@@ -8,8 +8,8 @@ export async function onRequestGet({ request, env }) {
   const product=PRODUCTS[theme];
   if(!product)return json({available:false},404);
 
-  const amount=Number.parseInt(String(env?.[product.envKey]||''),10);
-  const available=Number.isInteger(amount)&&amount>=100&&amount<=50000;
+  const amount=product.amount;
+  const available=true;
 
   return json({
     theme,
