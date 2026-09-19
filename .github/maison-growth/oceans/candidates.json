@@ -1,7 +1,25 @@
 {
-  "version": "2026-09-18",
-  "visibility": "internal-site",
-  "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": null,
-  "candidates": []
+  "version":"2026-09-18",
+  "visibility":"internal-site",
+  "note":"Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
+  "last_enriched_at":"2026-09-19T02:09:33+01:00",
+  "candidates":[
+    {
+      "painLanguage":"Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
+      "territory":"evitamento-financeiro-sob-escassez",
+      "intent":"compreender e interromper o ciclo entre sensação de escassez, sobrecarga cognitiva e evitamento de decisões financeiras",
+      "commercialAdjacency":"Oráculo Dinheiro & Segurança; experiências reflexivas de decisão e clareza financeira sem aconselhamento financeiro personalizado",
+      "evidence":[
+        "Journal of Economic Psychology (longitudinal, 2021): financial scarcity predicted later financial avoidance, and avoidance predicted later scarcity — https://doi.org/10.1016/j.joep.2021.102459",
+        "Journal of Economic Psychology (meta-analysis, 2024): across 29 datasets/111,852 respondents, financial scarcity showed a detrimental association with cognitive performance — https://doi.org/10.1016/j.joep.2024.102702",
+        "Frontiers in Psychology (2026): economic insecurity was studied as anticipated vulnerability linked to decision fatigue and lower wellbeing in digitally mediated financial decisions — https://doi.org/10.3389/fpsyg.2026.1858489"
+      ],
+      "questionPotential":true,
+      "questionThemeCandidates":["evitamento financeiro","escassez e atenção","adiamento de decisões","curto prazo vs futuro","dinheiro e carga mental"],
+      "oraclePotential":true,
+      "status":"internal_candidate",
+      "firstSeenAt":"2026-09-19T02:09:33+01:00",
+      "lastSeenAt":"2026-09-19T02:09:33+01:00"
+    }
+  ]
 }
