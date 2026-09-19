@@ -210,7 +210,7 @@ export async function recordExperienceSignal(db,{
     signalId,product,eventType,contentType,contentId,buyerKey,territory,
     JSON.stringify(metadata||{})
   ).run();
-  return {signalId,inserted:Number(result?.meta?.changes||0)>0};
+  return {signalId,inserted:Number(result?.meta?.changes??result?.changes??0)>0};
 }
 
 export async function recordQuestionSessionServedV2(db,{gameSessionId,buyerKey,theme,questionIds=[]}={}){
