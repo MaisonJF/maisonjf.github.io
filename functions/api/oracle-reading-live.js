@@ -118,6 +118,12 @@ async function tryComposedReading({env,session,theme}){
   ]);
   if(blocks.length<5)return null;
 
+  // A global backbone may support an already-developed territory, but it must
+  // never switch an untouched territory away from its authored legacy reading.
+  const requiredRoles=['opening','recognition','tension','counterpoint','reframe','movement','close'];
+  const specificRoles=new Set(blocks.filter(block=>block.territory===theme).map(block=>block.role));
+  if(!requiredRoles.every(role=>specificRoles.has(role)))return null;
+
   const seed=await stableSeed('maison-jf-oracle-v3|'+theme+'|'+session.id);
   const composed=composeOracleReading({territory:theme,seed,blocks,seenIds});
   const oracleSessionId='orc_'+crypto.randomUUID().replace(/-/g,'');
