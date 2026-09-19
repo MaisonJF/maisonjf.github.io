@@ -14,8 +14,10 @@ import {
   findOracleSessionByStripe,
   createOracleSession,
   readOracleSession,
-  recordOracleSessionReopenedV2
+  recordOracleSessionReopenedV2,
+  upsertContentNeed
 } from '../_lib/maison-vault-v2.js';
+import { detectOracleContentNeeds } from '../_lib/content-gap-detector.js';
 
 const AUTHORED_READINGS={
   amor:ORACLE_AMOR_READINGS,
@@ -122,6 +124,10 @@ async function tryComposedReading({env,session,theme}){
     listActiveOracleBlocks(db,theme),
     listSeenOracleBlockIds(db,buyerKey,theme)
   ]);
+
+  const needs=detectOracleContentNeeds({territory:theme,blocks});
+  for(const need of needs)await upsertContentNeed(db,need);
+
   if(blocks.length<5)return null;
 
   // A global backbone may support an already-developed territory, but it must
