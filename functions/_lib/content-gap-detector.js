@@ -27,12 +27,20 @@ const QUESTION_STAGE_FLOORS={
 
 export function detectOracleContentNeeds({territory,blocks=[],floors=ORACLE_FLOORS}={}){
   if(!territory)throw new Error('territory_required');
+  // Healthy coverage is measured on territory-specific editorial depth.
+  // Global blocks are runtime support and must not hide a local content gap.
   const active=blocks.filter(x=>
-    (x.territory===territory||x.territory==='global')&&
+    x.territory===territory&&
+    x.status==='active'&&
+    !['review','retired'].includes(x.rotationState||'normal')
+  );
+  const globalSupport=blocks.filter(x=>
+    x.territory==='global'&&
     x.status==='active'&&
     !['review','retired'].includes(x.rotationState||'normal')
   );
   const counts=countBy(active,'role');
+  const globalCounts=countBy(globalSupport,'role');
   const needs=[];
   for(const [role,floor] of Object.entries(floors)){
     const have=counts[role]||0;
@@ -44,7 +52,7 @@ export function detectOracleContentNeeds({territory,blocks=[],floors=ORACLE_FLOO
       stageOrRole:role,
       reasonCode:'coverage_gap',
       priority:priority(missing,floor),
-      metadata:{have,minimumHealthy:floor,missing,gapVersion:CONTENT_GAP_VERSION}
+      metadata:{have,minimumHealthy:floor,missing,globalSupport:globalCounts[role]||0,gapVersion:CONTENT_GAP_VERSION}
     });
   }
   return needs.sort((a,b)=>b.priority-a.priority);
