@@ -2,18 +2,14 @@
   "version":"2026-09-18",
   "visibility":"internal-site",
   "note":"Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at":"2026-09-19T08:12:55+01:00",
+  "last_enriched_at":"2026-09-19T14:12:38+01:00",
   "candidates":[
     {
       "painLanguage":"Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
       "territory":"evitamento-financeiro-sob-escassez",
       "intent":"compreender e interromper o ciclo entre sensação de escassez, sobrecarga cognitiva e evitamento de decisões financeiras",
       "commercialAdjacency":"Oráculo Dinheiro & Segurança; experiências reflexivas de decisão e clareza financeira sem aconselhamento financeiro personalizado",
-      "evidence":[
-        "Journal of Economic Psychology (longitudinal, 2021): financial scarcity predicted later financial avoidance, and avoidance predicted later scarcity — https://doi.org/10.1016/j.joep.2021.102459",
-        "Journal of Economic Psychology (meta-analysis, 2024): across 29 datasets/111,852 respondents, financial scarcity showed a detrimental association with cognitive performance — https://doi.org/10.1016/j.joep.2024.102702",
-        "Frontiers in Psychology (2026): economic insecurity was studied as anticipated vulnerability linked to decision fatigue and lower wellbeing in digitally mediated financial decisions — https://doi.org/10.3389/fpsyg.2026.1858489"
-      ],
+      "evidence":["Journal of Economic Psychology (longitudinal, 2021): financial scarcity predicted later financial avoidance, and avoidance predicted later scarcity — https://doi.org/10.1016/j.joep.2021.102459","Journal of Economic Psychology (meta-analysis, 2024): across 29 datasets/111,852 respondents, financial scarcity showed a detrimental association with cognitive performance — https://doi.org/10.1016/j.joep.2024.102702","Frontiers in Psychology (2026): economic insecurity was studied as anticipated vulnerability linked to decision fatigue and lower wellbeing in digitally mediated financial decisions — https://doi.org/10.3389/fpsyg.2026.1858489"],
       "questionPotential":true,
       "questionThemeCandidates":["evitamento financeiro","escassez e atenção","adiamento de decisões","curto prazo vs futuro","dinheiro e carga mental"],
       "oraclePotential":true,
@@ -26,16 +22,26 @@
       "territory":"perda-ambigua-sem-fecho-claro",
       "intent":"reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
       "commercialAdjacency":"Oráculo Luto & Perda, Separação & Fim e transições; experiências reflexivas sobre ausência, mudança de vínculo e reconstrução de significado, sem substituir apoio clínico",
-      "evidence":[
-        "American Psychological Association (2024): descreve a perda ambígua como particularmente difícil quando alguém permanece fisicamente presente mas psicologicamente/cognitivamente ausente, salientando ausência de resolução, ambivalência, culpa e raiva — https://www.apa.org/monitor/2024/10/alzheimers-dementia-grief",
-        "Psychological Trauma (2025; PMID 39347732): estudo mixed-methods sobre perda ambígua encontrou incerteza e ambivalência como temas centrais e associação entre respostas à perda ambígua e sintomas de stress pós-traumático — https://pubmed.ncbi.nlm.nih.gov/39347732/"
-      ],
+      "evidence":["American Psychological Association (2024): descreve a perda ambígua como particularmente difícil quando alguém permanece fisicamente presente mas psicologicamente/cognitivamente ausente, salientando ausência de resolução, ambivalência, culpa e raiva — https://www.apa.org/monitor/2024/10/alzheimers-dementia-grief","Psychological Trauma (2025; PMID 39347732): estudo mixed-methods sobre perda ambígua encontrou incerteza e ambivalência como temas centrais e associação entre respostas à perda ambígua e sintomas de stress pós-traumático — https://pubmed.ncbi.nlm.nih.gov/39347732/"],
       "questionPotential":true,
       "questionThemeCandidates":["perda sem resolução","presença e ausência ao mesmo tempo","espera por certeza","vínculo que mudou sem desaparecer","continuar sem fecho"],
       "oraclePotential":true,
       "status":"internal_candidate",
       "firstSeenAt":"2026-09-19T08:12:55+01:00",
       "lastSeenAt":"2026-09-19T08:12:55+01:00"
+    },
+    {
+      "painLanguage":"É possível falar com pessoas, trocar mensagens e até ter relações por perto e, ainda assim, sentir que falta ligação real: quantidade de contacto não garante apoio, intimidade nem a sensação de ser visto.",
+      "territory":"solidao-com-contacto-sem-conexao-de-qualidade",
+      "intent":"distinguir presença social de conexão sentida e reconhecer quando o problema não é falta de contacto, mas falta de qualidade, apoio ou reciprocidade nos vínculos",
+      "commercialAdjacency":"Oráculo Companhia & Solidão e Relações; experiências reflexivas sobre pertença, reciprocidade, intimidade e qualidade dos vínculos, sem substituir apoio clínico",
+      "evidence":["WHO Commission on Social Connection (2025): define solidão como a experiência dolorosa de uma diferença entre as conexões sociais existentes e as desejadas/necessárias, distinguindo-a de isolamento social objectivo — https://www.who.int/news-room/questions-and-answers/item/social-connection","OECD, Social Connections and Loneliness in OECD Countries (2025): frequência de interacções e qualidade percebida das relações têm correlações apenas fracas; contacto frequente não garante relações de alta qualidade ou apoio — https://doi.org/10.1787/6df2d6a0-en"],
+      "questionPotential":true,
+      "questionThemeCandidates":["companhia sem conexão","qualidade vs quantidade de contacto","sentir-se visto","apoio e reciprocidade","intimidade emocional"],
+      "oraclePotential":true,
+      "status":"internal_candidate",
+      "firstSeenAt":"2026-09-19T14:12:38+01:00",
+      "lastSeenAt":"2026-09-19T14:12:38+01:00"
     }
   ]
 }
