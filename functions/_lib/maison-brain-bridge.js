@@ -7,6 +7,20 @@ editorial candidates. It never creates paid content or public pages.
 export function contentCandidatesFromSignal(signal={}){
   const safe=normalizeSignal(signal);
   const out=[];
+  if(safe.themePotential===true){
+    out.push({
+      type:'theme_candidate',
+      status:'candidate',
+      source:'maison-brain',
+      themeCandidates:safe.questionThemeCandidates,
+      painLanguage:safe.painLanguage,
+      territory:safe.territory,
+      intent:safe.intent,
+      evidence:safe.evidence,
+      publicSideEffects:false,
+      automaticActivation:false
+    });
+  }
   if(safe.questionPotential===true){
     out.push({
       type:'question_candidate',
@@ -42,6 +56,7 @@ function normalizeSignal(signal){
     painLanguage:text(signal.painLanguage),
     territory:text(signal.territory),
     intent:text(signal.intent),
+    themePotential:signal.themePotential===true,
     questionPotential:signal.questionPotential===true,
     oraclePotential:signal.oraclePotential===true,
     questionThemeCandidates:list(signal.questionThemeCandidates),
