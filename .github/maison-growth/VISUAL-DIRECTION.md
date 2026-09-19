@@ -50,3 +50,17 @@ MAISON JF visual grade: dark cinematic quiet luxury, charcoal blacks, restrained
 - **Relationship imagery:** use only when the page or story explicitly requires it. Do not make heterosexual or same-gender couples the site's recurring shorthand for intimacy, belonging, or care.
 - **Group imagery:** when useful, show mixed groups and moments of friendship, hospitality, ease, conversation, and laughter.
 - The aim is inclusion without turning the site into a catalogue of identity signals; the emotional situation should lead, and representation should remain broad across the whole experience.
+
+
+## Typography
+- Display/editorial typography uses Bodoni Moda as the canonical web face, with Didot/Bodoni fallbacks.
+- Functional UI, navigation, buttons, labels and body copy use Inter.
+- Do not use Times New Roman as a visible Maison typography choice.
+- Headlines should feel fashion-editorial: high contrast, elegant, restrained, with generous negative space.
+- Avoid decorative excess; typography should carry luxury through proportion, rhythm and hierarchy rather than ornament.
+
+## Lighthouse placements
+- The lighthouse can recur across key journeys as a Maison signature, but not after every section.
+- Use it strategically on major transition or closing surfaces such as Services, Products, Oracle and B2B.
+- Copy over lighthouse imagery must always be live HTML/CSS, never baked into the image.
+- The preferred mood is nocturnal, misty or low-light and cinematic; avoid making every lighthouse treatment another orange sunset.
