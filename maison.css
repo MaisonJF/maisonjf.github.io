@@ -730,3 +730,113 @@
     text-align:center;
   }
 }
+
+
+/* B2B signature · pillars + lighthouse 2026-09-19 */
+.home-page--final #profissionais .b2b-pillars{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;
+  margin-top:34px;
+  padding-top:26px;
+  border-top:1px solid var(--line);
+}
+.home-page--final #profissionais .b2b-pillar{
+  min-width:0;
+  padding:0 18px;
+  text-align:center;
+}
+.home-page--final #profissionais .b2b-pillar:first-child{padding-left:0}
+.home-page--final #profissionais .b2b-pillar:last-child{padding-right:0}
+.home-page--final #profissionais .b2b-pillar svg{
+  width:28px;
+  height:28px;
+  margin:0 auto 12px;
+  fill:none;
+  stroke:#b9a47b;
+  stroke-width:1.25;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  opacity:.92;
+}
+.home-page--final #profissionais .b2b-pillar span{
+  display:block;
+  color:#c3bbb1;
+  font-size:10px;
+  line-height:1.45;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.home-page--final #profissionais .b2b-lighthouse{
+  position:relative;
+  overflow:hidden;
+  margin:34px 0 0;
+  aspect-ratio:16/8;
+  background:#090909;
+}
+.home-page--final #profissionais .b2b-lighthouse:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(4,4,4,.14),rgba(4,4,4,.38) 44%,rgba(4,4,4,.83));
+}
+.home-page--final #profissionais .b2b-lighthouse img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 58%;
+  display:block;
+  filter:saturate(.88) contrast(1.04) brightness(.82);
+}
+.home-page--final #profissionais .b2b-lighthouse figcaption{
+  position:absolute;
+  z-index:2;
+  inset:auto 22px 22px;
+  text-align:center;
+}
+.home-page--final #profissionais .b2b-lighthouse blockquote{
+  margin:0;
+  font:italic 400 clamp(25px,3vw,38px)/1.06 var(--serif);
+  letter-spacing:-.02em;
+  color:#efe8dc;
+}
+.home-page--final #profissionais .b2b-lighthouse small{
+  display:block;
+  margin-top:12px;
+  color:#c0b7ab;
+  font-size:9px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+@media(max-width:700px){
+  .home-page--final #profissionais .b2b-pillars{
+    gap:6px;
+    margin-top:30px;
+    padding-top:24px;
+  }
+  .home-page--final #profissionais .b2b-pillar{
+    padding:0 6px;
+  }
+  .home-page--final #profissionais .b2b-pillar svg{
+    width:25px;
+    height:25px;
+    margin-bottom:10px;
+  }
+  .home-page--final #profissionais .b2b-pillar span{
+    font-size:8.5px;
+    letter-spacing:.09em;
+  }
+  .home-page--final #profissionais .b2b-lighthouse{
+    margin-top:28px;
+    aspect-ratio:4/3;
+  }
+  .home-page--final #profissionais .b2b-lighthouse img{
+    object-position:center 54%;
+  }
+  .home-page--final #profissionais .b2b-lighthouse figcaption{
+    inset:auto 18px 20px;
+  }
+  .home-page--final #profissionais .b2b-lighthouse blockquote{
+    font-size:clamp(27px,8vw,36px);
+  }
+}
