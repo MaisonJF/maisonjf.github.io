@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>PÁRA DE IGNORAR! | MAISON JF®</title>
+<link rel="stylesheet" href="../maison.css">
+<script src="../analytics.js" defer></script>
+<style>
+:root{color-scheme:dark}
+html,body{margin:0;min-height:100%;background:#050505}
+body{overflow-x:hidden}
+.pdi{min-height:100svh;display:flex;flex-direction:column;background:
+radial-gradient(circle at 50% -10%,rgba(183,154,98,.12),transparent 36%),
+linear-gradient(#080807,#030303);color:#eee9df}
+.pdi__top{display:flex;align-items:center;justify-content:space-between;padding:max(18px,env(safe-area-inset-top)) 20px 12px;gap:16px}
+.pdi__brand{font:600 11px/1.1 Arial,sans-serif;letter-spacing:.16em;color:#cfc7bb}
+.pdi__theme{font:500 10px/1.1 Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#786f64}
+.pdi__main{flex:1;display:grid;place-items:center;padding:18px 20px 28px}
+.pdi__frame{width:min(720px,100%);min-height:min(68svh,720px);display:flex;flex-direction:column;justify-content:center}
+.screen{display:none;text-align:center}
+.screen.is-active{display:block}
+.intro__mark{font:500 10px/1 Arial,sans-serif;letter-spacing:.22em;color:#9a8c78;margin:0 0 24px}
+.intro h1,.swap h1,.finish h1{font:400 clamp(46px,11vw,88px)/.95 var(--serif);letter-spacing:-.03em;margin:0;color:#eee8dc}
+.intro p,.swap p,.finish p{font:400 16px/1.65 var(--serif);color:#aaa196;max-width:480px;margin:28px auto 0}
+.rule{font:500 10px/1.55 Arial,sans-serif!important;letter-spacing:.1em;text-transform:uppercase!important;color:#766e64!important}
+.action{appearance:none;border:1px solid rgba(220,206,181,.35);background:transparent;color:#eee7db;padding:15px 22px;margin-top:34px;font:600 11px/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;min-width:160px;cursor:pointer}
+.action:active{transform:translateY(1px)}
+.action--solid{background:#ece5d8;color:#111;border-color:#ece5d8}
+.card{text-align:left}
+.card__meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:42px;font:500 10px/1 Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#766f66}
+.card__question{font:400 clamp(34px,8vw,66px)/1.08 var(--serif);letter-spacing:-.025em;color:#eee8dd;margin:0;max-width:690px}
+.card__controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:52px}
+.next{appearance:none;border:0;background:none;color:#ded6ca;font:600 11px/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:12px 0;cursor:pointer}
+.pass{appearance:none;border:0;background:none;color:#716b63;font:500 10px/1 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:12px 0;cursor:pointer}
+.swap h1{font-style:italic}
+.finish__small{font:500 10px/1.5 Arial,sans-serif!important;letter-spacing:.11em;text-transform:uppercase;color:#766f66!important}
+.error{max-width:520px;margin:auto;text-align:center;color:#b8afa3;font:16px/1.6 var(--serif)}
+.error a{display:inline-block;margin-top:24px;color:#ddd3c4;text-decoration:none;border-bottom:1px solid #756b5d;padding-bottom:3px}
+@media(max-width:520px){
+ .pdi__top{padding-inline:16px}
+ .pdi__main{padding-inline:16px}
+ .pdi__frame{min-height:72svh}
+ .card__meta{margin-bottom:34px}
+ .card__controls{margin-top:44px}
+}
+</style>
+</head>
+<body>
+<main class="pdi">
+  <header class="pdi__top">
+    <div class="pdi__brand">MAISON JF®</div>
+    <div class="pdi__theme" id="theme-label">PÁRA DE IGNORAR!</div>
+  </header>
+
+  <section class="pdi__main">
+    <div class="pdi__frame">
+      <div class="screen is-active" id="loading"><p class="intro__mark">PÁRA DE IGNORAR!</p><p class="rule">A abrir a tua sessão.</p></div>
+
+      <div class="screen intro" id="intro">
+        <p class="intro__mark">PÁRA DE IGNORAR! · <span id="intro-theme">RELAÇÕES</span></p>
+        <h1>28 perguntas.<br>Duas pessoas.</h1>
+        <p>Uma pergunta de cada vez.</p>
+        <p class="rule">Podem passar. Sem explicar.</p>
+        <button class="action action--solid" id="start" type="button">Começar</button>
+      </div>
+
+      <div class="screen card" id="card" aria-live="polite">
+        <div class="card__meta"><span id="pack-label">PACK A</span><span id="counter">1 / 14</span></div>
+        <p class="card__question" id="question"></p>
+        <div class="card__controls">
+          <button class="pass" id="pass" type="button">Passar</button>
+          <button class="next" id="next" type="button">Seguinte →</button>
+        </div>
+      </div>
+
+      <div class="screen swap" id="swap">
+        <p class="intro__mark">14 / 28</p>
+        <h1>TROQUEM.</h1>
+        <p>Agora pergunta a outra pessoa.</p>
+        <button class="action action--solid" id="continue" type="button">Continuar</button>
+      </div>
+
+      <div class="screen finish" id="finish">
+        <p class="intro__mark">PÁRA DE IGNORAR!</p>
+        <h1>Fica entre vocês.</h1>
+        <p>Não precisamos de saber o que disseram.</p>
+        <p class="finish__small">A sessão fica guardada nesta compra.</p>
+      </div>
+
+      <div class="screen error" id="error"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+window.addEventListener('DOMContentLoaded',async()=>{
+ const params=new URLSearchParams(location.search);
+ const sessionId=params.get('session_id')||'';
+ const theme=params.get('theme')||'';
+ const track=(name,data)=>window.maisonAnalytics?.track?window.maisonAnalytics.track(name,data):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([name,data]);
+ const screens=[...document.querySelectorAll('.screen')];
+ const show=id=>{screens.forEach(x=>x.classList.toggle('is-active',x.id===id));window.scrollTo({top:0,behavior:'instant'})};
+ const fail=message=>{document.getElementById('error').innerHTML='<p>'+escapeHtml(message)+'</p><a href="../">Voltar à Maison</a>';show('error')};
+ const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+
+ if(!/^cs_live_[A-Za-z0-9]+$/.test(sessionId)){fail('Não encontrei uma sessão paga válida.');return}
+
+ let payload;
+ try{
+   const url='/api/pdi-session-live?session_id='+encodeURIComponent(sessionId)+(theme?'&theme='+encodeURIComponent(theme):'');
+   const response=await fetch(url,{headers:{Accept:'application/json'},cache:'no-store'});
+   payload=await response.json().catch(()=>({}));
+   if(!response.ok||!payload?.paid||!payload?.packs?.A||!payload?.packs?.B)throw new Error(payload?.error||'Não foi possível abrir esta sessão.');
+ }catch(error){fail(error?.message||'Não foi possível abrir esta sessão.');return}
+
+ const label=String(payload.label||'Relações');
+ document.getElementById('theme-label').textContent='PÁRA DE IGNORAR! · '+label.toUpperCase();
+ document.getElementById('intro-theme').textContent=label.toUpperCase();
+
+ const packs={A:payload.packs.A,B:payload.packs.B};
+ const storageKey='maison_pdi_progress_'+sessionId;
+ let state={pack:'A',index:0,started:false,swapped:false,finished:false};
+ try{
+   const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
+   if(saved&&['A','B'].includes(saved.pack)&&Number.isInteger(saved.index))state={...state,...saved};
+ }catch{}
+
+ function save(){try{localStorage.setItem(storageKey,JSON.stringify(state))}catch{}}
+ function renderCard(){
+   const cards=packs[state.pack];
+   const card=cards[state.index];
+   if(!card){finish();return}
+   document.getElementById('pack-label').textContent='PACK '+state.pack;
+   document.getElementById('counter').textContent=(state.index+1)+' / 14';
+   document.getElementById('question').textContent=card.text;
+   show('card');
+   track('pdi_card_view',{theme:payload.theme,pack:state.pack,position:state.index+1,page_path:location.pathname});
+ }
+ function advance(kind){
+   const wasLast=state.index>=13;
+   track(kind==='pass'?'pdi_card_pass':'pdi_card_advance',{theme:payload.theme,pack:state.pack,position:state.index+1,page_path:location.pathname});
+   if(!wasLast){state.index+=1;save();renderCard();return}
+   if(state.pack==='A'){state.swapped=true;save();show('swap');track('pdi_swap_reached',{theme:payload.theme,page_path:location.pathname});return}
+   finish();
+ }
+ function finish(){
+   state.finished=true;state.pack='B';state.index=13;save();show('finish');
+   track('pdi_session_complete',{theme:payload.theme,page_path:location.pathname});
+ }
+
+ document.getElementById('start').addEventListener('click',()=>{
+   state.started=true;save();renderCard();track('pdi_session_start',{theme:payload.theme,page_path:location.pathname});
+ });
+ document.getElementById('next').addEventListener('click',()=>advance('next'));
+ document.getElementById('pass').addEventListener('click',()=>advance('pass'));
+ document.getElementById('continue').addEventListener('click',()=>{
+   state.pack='B';state.index=0;state.swapped=false;save();renderCard();
+ });
+
+ if(state.finished){show('finish')}
+ else if(state.started&&state.pack==='B'){renderCard()}
+ else if(state.started&&state.swapped){show('swap')}
+ else if(state.started){renderCard()}
+ else show('intro');
+});
+</script>
+</body>
+</html>
