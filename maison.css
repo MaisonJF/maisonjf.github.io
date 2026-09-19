@@ -2179,3 +2179,89 @@ footer a:hover{
     transform:none!important;
   }
 }
+
+
+/* MAISON JF® · APPLE + KISS · extended surfaces */
+.gift-card,
+.cover,
+.vpc-card,
+.vpc-choice,
+.vpc-convert,
+.vpc-offer,
+.vpc-report,
+.saga-teaser__poster,
+.special-service,
+.professional,
+.ebook-card{
+  border-radius:var(--ak-radius)!important;
+}
+
+.gift-card,
+.vpc-card,
+.vpc-choice,
+.vpc-convert,
+.vpc-offer,
+.vpc-report{
+  border:1px solid var(--ak-line)!important;
+  background:var(--ak-surface)!important;
+  box-shadow:none!important;
+  transition:transform var(--ak-ease),background-color var(--ak-ease),border-color var(--ak-ease)!important;
+}
+
+.gift-card:hover,
+.vpc-card:hover,
+.vpc-choice:hover,
+.vpc-offer:hover{
+  transform:translateY(-2px)!important;
+  border-color:rgba(199,170,115,.28)!important;
+  background:var(--ak-surface-hover)!important;
+}
+
+.vpc-page{
+  background:var(--ak-bg)!important;
+}
+
+.vpc-progress__bar{
+  height:3px!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.08)!important;
+}
+
+.vpc-progress__bar span,
+.vpc-affinity__row i{
+  background:var(--ak-accent)!important;
+  border-radius:999px!important;
+}
+
+.vpc-scope__options button{
+  min-height:44px!important;
+  border-radius:999px!important;
+  border:1px solid var(--ak-line-strong)!important;
+  padding:.72rem 1rem!important;
+}
+
+.vpc-scope__options button.on{
+  background:var(--ak-text)!important;
+  color:#0a0a0a!important;
+  border-color:var(--ak-text)!important;
+}
+
+.ebook-card{
+  overflow:hidden;
+}
+
+.cover{
+  border-color:var(--ak-line)!important;
+  background:var(--ak-surface)!important;
+}
+
+.gift-card strong,
+.ebook-card h2{
+  letter-spacing:-.018em!important;
+}
+
+.special-service,
+.professional{
+  overflow:hidden;
+  border-color:var(--ak-line)!important;
+}
