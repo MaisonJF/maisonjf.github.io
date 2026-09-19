@@ -27,6 +27,7 @@ jobs:
           node --check functions/_lib/experience-director.js
           node --check functions/_lib/experience-quality.js
           node --check functions/_lib/oracle-composer.js
+          node .github/maison-growth/vault/validate_oracle_composer.mjs
           node --check functions/_lib/maison-vault-v2.js
           node --check functions/_lib/taxonomy-gate.js
           node --check functions/_lib/content-gap-detector.js
