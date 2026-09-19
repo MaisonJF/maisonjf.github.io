@@ -1610,7 +1610,7 @@ ul, ol {
 .profissionais__visual-photo {
   background-image:
     linear-gradient(rgba(10,8,6,.10), rgba(10,8,6,.28)),
-    url('images/maison-jf-b2b-office-hq.jpg');
+    url('https://raw.githubusercontent.com/MaisonJF/maisonjf.github.io/main/images/maison-jf-b2b-office-hq.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -1670,7 +1670,7 @@ ul, ol {
 .transformacao-card__visual--bordeaux {
   background-image:
     linear-gradient(rgba(8,7,6,.12), rgba(8,7,6,.34)),
-    url('images/maison-jf-companhia-hq.jpg');
+    url('https://raw.githubusercontent.com/MaisonJF/maisonjf.github.io/main/images/maison-jf-companhia-hq.jpg');
   background-size: cover;
   background-position: center 58%;
 }
