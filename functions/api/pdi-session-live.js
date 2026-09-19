@@ -39,6 +39,8 @@ export async function onRequestGet({ request, env }) {
       stripeSession.metadata?.environment==='maison-jf-live' &&
       stripeSession.metadata?.source==='para-de-ignorar-live' &&
       stripeSession.metadata?.pdi_access==='single-session' &&
+      stripeSession.amount_total===500 &&
+      stripeSession.currency==='eur' &&
       (!requestedTheme || requestedTheme===theme);
 
     if(!valid){
