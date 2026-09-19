@@ -18,6 +18,7 @@ jobs:
         shell: bash
         run: |
           python3 .github/maison-growth/vault/validate_vault.py
+          python3 .github/maison-growth/vault/validate_partial_reconcile.py
 
       - name: Check experience engine JavaScript syntax
         shell: bash
