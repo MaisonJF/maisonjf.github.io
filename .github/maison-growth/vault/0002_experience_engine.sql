@@ -18,6 +18,38 @@ ALTER TABLE vault_questions ADD COLUMN rotation_state TEXT NOT NULL DEFAULT 'nor
 ALTER TABLE vault_questions ADD COLUMN source_ocean_id TEXT NULL;
 ALTER TABLE vault_questions ADD COLUMN quality_version TEXT NULL;
 
+-- Preserve material that was already live before v2.
+UPDATE vault_questions
+   SET lifecycle_state='live', rotation_state='normal'
+ WHERE status='active' AND exposure='paid';
+
+DROP TRIGGER IF EXISTS trg_vault_questions_immutable_content;
+CREATE TRIGGER trg_vault_questions_immutable_content
+BEFORE UPDATE ON vault_questions
+WHEN
+  OLD.question_id <> NEW.question_id OR
+  OLD.canonical_key <> NEW.canonical_key OR
+  OLD.theme <> NEW.theme OR
+  OLD.text <> NEW.text OR
+  OLD.subthemes_json <> NEW.subthemes_json OR
+  OLD.class <> NEW.class OR
+  OLD.stage <> NEW.stage OR
+  OLD.intensity <> NEW.intensity OR
+  coalesce(OLD.direction,'') <> coalesce(NEW.direction,'') OR
+  coalesce(OLD.time_scope,'') <> coalesce(NEW.time_scope,'') OR
+  coalesce(OLD.pain_family,'') <> coalesce(NEW.pain_family,'') OR
+  coalesce(OLD.subterritory,'') <> coalesce(NEW.subterritory,'') OR
+  coalesce(OLD.target,'') <> coalesce(NEW.target,'') OR
+  coalesce(OLD.emotional_function,'') <> coalesce(NEW.emotional_function,'') OR
+  coalesce(OLD.cognitive_load,-1) <> coalesce(NEW.cognitive_load,-1) OR
+  coalesce(OLD.vulnerability,-1) <> coalesce(NEW.vulnerability,-1) OR
+  coalesce(OLD.conflict_potential,-1) <> coalesce(NEW.conflict_potential,-1) OR
+  coalesce(OLD.playfulness,-1) <> coalesce(NEW.playfulness,-1) OR
+  coalesce(OLD.semantic_fingerprint,'') <> coalesce(NEW.semantic_fingerprint,'')
+BEGIN
+  SELECT RAISE(ABORT,'vault question content is immutable; insert a new version');
+END;
+
 CREATE INDEX IF NOT EXISTS idx_vault_questions_semantic
   ON vault_questions(semantic_fingerprint);
 CREATE INDEX IF NOT EXISTS idx_vault_questions_lifecycle
@@ -36,6 +68,10 @@ ALTER TABLE vault_oracle_blocks ADD COLUMN rotation_state TEXT NOT NULL DEFAULT 
 ALTER TABLE vault_oracle_blocks ADD COLUMN rarity TEXT NOT NULL DEFAULT 'common' CHECK (rarity IN ('common','uncommon','rare'));
 ALTER TABLE vault_oracle_blocks ADD COLUMN source_ocean_id TEXT NULL;
 ALTER TABLE vault_oracle_blocks ADD COLUMN quality_version TEXT NULL;
+
+UPDATE vault_oracle_blocks
+   SET lifecycle_state='live', rotation_state='normal'
+ WHERE status='active';
 
 CREATE INDEX IF NOT EXISTS idx_vault_oracle_semantic
   ON vault_oracle_blocks(semantic_fingerprint);
