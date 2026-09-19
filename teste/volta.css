@@ -95,3 +95,21 @@
 .vpc-report>p:not(.vpc-kicker){max-width:700px;color:#9e978e}
 .vpc-report .button{margin-top:18px}
 @media(max-width:760px){.vpc-offers{grid-template-columns:1fr}.vpc-report{padding:28px 0}}
+
+
+/* MAISON JF® · APPLE + KISS · Volta Para Casa */
+.vpc-page{background:#080808!important}
+.vpc-card,.vpc-choice,.vpc-convert,.vpc-offer,.vpc-report{
+  border-radius:18px!important;
+  border-color:rgba(255,255,255,.10)!important;
+  background:rgba(255,255,255,.035)!important;
+  box-shadow:none!important;
+}
+.vpc-card:hover,.vpc-choice:hover,.vpc-offer:hover{
+  transform:translateY(-2px)!important;
+  border-color:rgba(199,170,115,.28)!important;
+  background:rgba(255,255,255,.055)!important;
+}
+.vpc-progress__bar,.vpc-affinity__row>div{border-radius:999px!important}
+.vpc-progress__bar span,.vpc-affinity__row i{border-radius:999px!important;background:#c7aa73!important}
+.vpc-scope__options button{border-radius:999px!important;min-height:44px!important}
