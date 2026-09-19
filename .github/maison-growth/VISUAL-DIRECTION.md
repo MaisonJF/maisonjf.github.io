@@ -35,3 +35,13 @@
 
 ## Prompt shorthand
 MAISON JF visual grade: dark cinematic quiet luxury, charcoal blacks, restrained warm amber highlights, deep contrast, low saturation, architectural composition, directional light, tactile premium materials, negative space, emotionally charged but uncluttered, no baked-in text, no generic stock look, no excessive gold, no repeated sunset unless narratively essential.
+
+
+## Human representation
+- Human imagery across public editorial surfaces should aim for an approximately 50/50 balance between men and women over the site as a whole.
+- Men must appear as full participants in care, intimacy, home, body, reflection, spirituality, relationships, gifting, and wellbeing — not only in business or neutral roles.
+- Avoid defaulting emotional or self-care imagery to women.
+- When creating or replacing a human-led visual, check the recent surrounding pages/sections and use the underrepresented gender where the concept allows.
+- Do not make gender balance feel mechanical: preserve narrative fit, but keep the aggregate visual system balanced.
+- Masculine imagery should feel warm, attractive, vulnerable, elegant, contemporary, and premium rather than stereotypically macho.
+- Mixed-gender and same-gender pairings can be used where the story calls for relationship, care, companionship, or intimacy.
