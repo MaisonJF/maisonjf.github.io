@@ -8,6 +8,8 @@ import {
   createGameSession,
   readGameSession
 } from './maison-vault.js';
+import { vaultExperienceEngineReady } from './maison-vault-v2.js';
+import { listActivePaidQuestionsV2 } from './question-vault-v2.js';
 
 /*
 Creates one stable 28-card paid session.
@@ -30,12 +32,13 @@ export async function getOrCreateQuestionSession({env,stripeSession,theme}={}){
     env,email,stripeSessionId:stripeSession.id
   });
 
+  const useV2=await vaultExperienceEngineReady(db);
   const [questions,seenIds]=await Promise.all([
-    listActivePaidQuestions(db,theme),
+    useV2?listActivePaidQuestionsV2(db,theme):listActivePaidQuestions(db,theme),
     listSeenQuestionIds(db,buyerKey,theme)
   ]);
 
-  const seed=await stableSeed('pdi-v1|'+theme+'|'+stripeSession.id);
+  const seed=await stableSeed('pdi-v2|'+theme+'|'+stripeSession.id);
   const composed=composeQuestionSession({
     theme,
     seed,
