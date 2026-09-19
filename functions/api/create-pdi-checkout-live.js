@@ -2,7 +2,7 @@ const PRODUCT={
   slug:'relacoes',
   name:'PÁRA DE IGNORAR! · Relações',
   currency:'eur',
-  amount:599
+  amount:500
 };
 
 export async function onRequestPost({ request, env }) {
