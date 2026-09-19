@@ -35,6 +35,7 @@ jobs:
           node --check functions/_lib/question-composer.js
           node --check functions/_lib/para-de-ignorar-session.js
           node --check functions/api/oracle-reading-live.js
+          node --check functions/api/pdi-event-live.js
 
       - name: Ensure every Ocean flows somewhere public
         shell: bash
