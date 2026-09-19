@@ -8,7 +8,7 @@ import {
   createGameSession,
   readGameSession
 } from './maison-vault.js';
-import { vaultExperienceEngineReady, recordQuestionSessionServedV2, upsertContentNeed } from './maison-vault-v2.js';
+import { vaultExperienceEngineReady, recordQuestionSessionServedV2, recordExperienceSignal, upsertContentNeed } from './maison-vault-v2.js';
 import { detectQuestionContentNeeds } from './content-gap-detector.js';
 import { listActivePaidQuestionsV2 } from './question-vault-v2.js';
 
@@ -70,6 +70,17 @@ export async function getOrCreateQuestionSession({env,stripeSession,theme}={}){
       theme,
       questionIds:composed.ids
     });
+    if(seenIds.length){
+      await recordExperienceSignal(db,{
+        product:'para_de_ignorar',
+        eventType:'repurchased',
+        contentType:'session',
+        contentId:gameSessionId,
+        buyerKey,
+        territory:theme,
+        signalKey:['pdi','repurchased',gameSessionId].join('|')
+      });
+    }
   }
   return await readGameSession(db,gameSessionId);
 }
