@@ -840,3 +840,57 @@
     font-size:clamp(27px,8vw,36px);
   }
 }
+
+
+/* MAISON JF® · Visual Grade v1 · 2026-09-19 */
+:root{
+  --maison-grade-saturate:.88;
+  --maison-grade-contrast:1.06;
+  --maison-grade-brightness:.90;
+  --maison-grade-sepia:.05;
+}
+.media-slot img,
+.essay-shot img,
+.service-visual img,
+.service-card__media img,
+.home-feature__media img,
+.pro-hero__media img,
+.pro-signature__lighthouse img,
+.b2b-lighthouse img,
+.door--editorial .media-slot img{
+  filter:saturate(var(--maison-grade-saturate))
+         contrast(var(--maison-grade-contrast))
+         brightness(var(--maison-grade-brightness))
+         sepia(var(--maison-grade-sepia));
+}
+.media-slot,
+.essay-shot,
+.service-visual,
+.service-card__media,
+.home-feature__media,
+.pro-hero__media,
+.pro-signature__lighthouse,
+.b2b-lighthouse{
+  position:relative;
+}
+.media-slot:after,
+.essay-shot:after,
+.service-visual:after,
+.service-card__media:after,
+.home-feature__media:after,
+.pro-hero__media:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.09) 64%,rgba(0,0,0,.22)),
+    radial-gradient(circle at 50% 42%,rgba(196,162,101,.035),transparent 58%);
+}
+.product-hero__media img,
+.product-gallery__item img,
+.gallery img,
+[data-product-image],
+.product-card img{
+  filter:none!important;
+}
