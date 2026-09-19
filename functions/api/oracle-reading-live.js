@@ -126,8 +126,10 @@ async function tryComposedReading({env,session,theme}){
     listSeenOracleBlockIds(db,buyerKey,theme)
   ]);
 
-  const needs=detectOracleContentNeeds({territory:theme,blocks});
-  for(const need of needs)await upsertContentNeed(db,need);
+  try{
+    const needs=detectOracleContentNeeds({territory:theme,blocks});
+    for(const need of needs)await upsertContentNeed(db,need);
+  }catch{}
 
   if(blocks.length<5)return null;
 
@@ -155,7 +157,7 @@ async function tryComposedReading({env,session,theme}){
       buyerKey,
       territory:theme,
       signalKey:['oracle','repurchased',oracleSessionId].join('|')
-    });
+    }).catch(()=>{});
   }
   return await readOracleSession(db,oracleSessionId);
 }
