@@ -14,9 +14,12 @@
 .oracle__search:focus{outline:1px solid rgba(183,154,98,.65);outline-offset:2px}
 .oracle__count{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8e877c;margin-bottom:28px}
 .oracle-group{border-top:1px solid var(--line);text-align:left}
-.oracle-group summary{list-style:none;cursor:default;padding:24px 2px;font:400 30px/1.1 var(--serif);display:flex;justify-content:space-between;align-items:center}
-.oracle-group summary::-webkit-details-marker{display:none}.oracle-group summary span{font:11px var(--sans);letter-spacing:.13em;color:#817a71}
-.oracle-group[open] summary{color:#e8dfd2}.oracle-group .territory-grid{padding:0 0 30px}
+.oracle-group summary{list-style:none;cursor:pointer;padding:24px 2px;font:400 30px/1.1 var(--serif);display:flex;justify-content:space-between;align-items:center;gap:20px}
+.oracle-group summary::-webkit-details-marker{display:none}
+.oracle-group summary::after{content:"+";font:300 26px/1 var(--sans);color:#817a71;flex:0 0 auto;transition:transform .2s ease,color .2s ease}
+.oracle-group[open] summary{color:#e8dfd2}
+.oracle-group[open] summary::after{content:"−";color:#c7aa73}
+.oracle-group .territory-grid{padding:0 0 30px}
 .oracle__history{margin:52px auto 0;padding-top:40px;border-top:1px solid var(--line);max-width:760px;text-align:left}.oracle__history h2{font:400 35px/1.05 var(--serif)}.oracle__history p{color:#999}
 .oracle-card[hidden]{display:none!important}
 @media(max-width:700px){.oracle{padding:115px 14px 70px}.oracle-group summary{font-size:25px;padding:20px 2px}}
@@ -31,13 +34,13 @@
 <p class="oracle__price">Uma abertura. Uma leitura. 2 €.</p><div class="oracle__actions"><a class="button button--light" href="#oracle-groups">Escolher uma abertura · 2 €</a><small>Escolhes o território primeiro. O pagamento seguro pela Stripe acontece antes da leitura.</small></div>
 <input class="oracle__search" id="oracle-search" type="search" placeholder="amor, trabalho, dinheiro, saudade…" autocomplete="off" aria-label="Procurar território">
 <p class="oracle__count" id="oracle-count">Escolhe um território ou escreve uma palavra.</p>
-<section id="oracle-groups"><details class="oracle-group" open><summary>Amor, Trabalho &amp; Vida Prática</summary><div class="territory-grid"><a class="territory oracle-card" href="./amor" data-theme="amor" data-search="Amor &amp; Relações"><strong>Amor &amp; Relações</strong><small>Abertura · 2 €</small></a>
+<section id="oracle-groups"><details class="oracle-group"><summary>Amor, Trabalho &amp; Vida Prática</summary><div class="territory-grid"><a class="territory oracle-card" href="./amor" data-theme="amor" data-search="Amor &amp; Relações"><strong>Amor &amp; Relações</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./trabalho" data-theme="trabalho" data-search="Trabalho &amp; Caminho"><strong>Trabalho &amp; Caminho</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./dinheiro" data-theme="dinheiro" data-search="Dinheiro &amp; Segurança"><strong>Dinheiro &amp; Segurança</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./familia" data-theme="familia" data-search="Família &amp; Laços"><strong>Família &amp; Laços</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./escolhas" data-theme="escolhas" data-search="Escolhas &amp; Mudança"><strong>Escolhas &amp; Mudança</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./padroes" data-theme="padroes" data-search="Eu &amp; Padrões"><strong>Eu &amp; Padrões</strong><small>Abertura · 2 €</small></a></div></details>
-<details class="oracle-group" open><summary>Relações &amp; Vínculos</summary><div class="territory-grid"><a class="territory oracle-card" href="./amizade-reciprocidade" data-theme="amizade-reciprocidade" data-search="Amizade &amp; Reciprocidade uma amizade em que dás mais do que recebes"><strong>Amizade &amp; Reciprocidade</strong><small>Abertura · 2 €</small></a>
+<details class="oracle-group"><summary>Relações &amp; Vínculos</summary><div class="territory-grid"><a class="territory oracle-card" href="./amizade-reciprocidade" data-theme="amizade-reciprocidade" data-search="Amizade &amp; Reciprocidade uma amizade em que dás mais do que recebes"><strong>Amizade &amp; Reciprocidade</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./solidao-companhia" data-theme="solidao-companhia" data-search="Solidão &amp; Companhia a sensação de estares sozinho mesmo quando há pessoas à volta"><strong>Solidão &amp; Companhia</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./separacao-fim" data-theme="separacao-fim" data-search="Separação &amp; Fim um fim que ainda não encontraste maneira de pousar"><strong>Separação &amp; Fim</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./saudade-ausencia" data-theme="saudade-ausencia" data-search="Saudade &amp; Ausência uma ausência que ficou maior do que esperavas"><strong>Saudade &amp; Ausência</strong><small>Abertura · 2 €</small></a>
@@ -55,7 +58,7 @@
 <a class="territory oracle-card" href="./convivencia-espaco" data-theme="convivencia-espaco" data-search="Convivência &amp; Espaço a dificuldade de partilhar casa, rotina ou espaço sem te perderes"><strong>Convivência &amp; Espaço</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./rejeicao-abandono" data-theme="rejeicao-abandono" data-search="Rejeição &amp; Abandono o medo de seres deixado, escolhido em segundo lugar ou rejeitado"><strong>Rejeição &amp; Abandono</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./pertenca-grupo" data-theme="pertenca-grupo" data-search="Pertença &amp; Grupo a sensação de não encaixares num grupo, comunidade ou círculo"><strong>Pertença &amp; Grupo</strong><small>Abertura · 2 €</small></a></div></details>
-<details class="oracle-group" open><summary>Eu &amp; Identidade</summary><div class="territory-grid"><a class="territory oracle-card" href="./autoestima-valor" data-theme="autoestima-valor" data-search="Autoestima &amp; Valor a sensação de valer menos do que devias ou de nunca chegar"><strong>Autoestima &amp; Valor</strong><small>Abertura · 2 €</small></a>
+<details class="oracle-group"><summary>Eu &amp; Identidade</summary><div class="territory-grid"><a class="territory oracle-card" href="./autoestima-valor" data-theme="autoestima-valor" data-search="Autoestima &amp; Valor a sensação de valer menos do que devias ou de nunca chegar"><strong>Autoestima &amp; Valor</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./vergonha-exposicao" data-theme="vergonha-exposicao" data-search="Vergonha &amp; Exposição algo em ti que preferias que ninguém visse"><strong>Vergonha &amp; Exposição</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./culpa-responsabilidade" data-theme="culpa-responsabilidade" data-search="Culpa &amp; Responsabilidade uma culpa que continua mesmo depois de já teres pensado no assunto"><strong>Culpa &amp; Responsabilidade</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./perfeccionismo" data-theme="perfeccionismo" data-search="Perfeccionismo &amp; Exigência a sensação de que só vale a pena fazer se ficar impecável"><strong>Perfeccionismo &amp; Exigência</strong><small>Abertura · 2 €</small></a>
@@ -69,7 +72,7 @@
 <a class="territory oracle-card" href="./confianca-em-si" data-theme="confianca-em-si" data-search="Confiança em Ti a dificuldade de confiar no teu julgamento sem confirmação externa"><strong>Confiança em Ti</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./sentir-se-fraude" data-theme="sentir-se-fraude" data-search="Sentir-te Fraude a sensação de que os outros sobrestimam aquilo que sabes ou consegues"><strong>Sentir-te Fraude</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./criatividade-bloqueio" data-theme="criatividade-bloqueio" data-search="Criatividade &amp; Bloqueio uma vontade de criar que ficou presa entre exigência e medo"><strong>Criatividade &amp; Bloqueio</strong><small>Abertura · 2 €</small></a></div></details>
-<details class="oracle-group" open><summary>Emoções &amp; Mente</summary><div class="territory-grid"><a class="territory oracle-card" href="./procrastinacao-adiamento" data-theme="procrastinacao-adiamento" data-search="Procrastinação &amp; Adiamento uma coisa que continuas a adiar apesar de saberes que importa"><strong>Procrastinação &amp; Adiamento</strong><small>Abertura · 2 €</small></a>
+<details class="oracle-group"><summary>Emoções &amp; Mente</summary><div class="territory-grid"><a class="territory oracle-card" href="./procrastinacao-adiamento" data-theme="procrastinacao-adiamento" data-search="Procrastinação &amp; Adiamento uma coisa que continuas a adiar apesar de saberes que importa"><strong>Procrastinação &amp; Adiamento</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./controlo-incerteza" data-theme="controlo-incerteza" data-search="Controlo &amp; Incerteza a necessidade de prever, organizar ou controlar antes de conseguires respirar"><strong>Controlo &amp; Incerteza</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./ansiedade-antecipacao" data-theme="ansiedade-antecipacao" data-search="Ansiedade &amp; Antecipação a cabeça a viver um problema antes de ele acontecer"><strong>Ansiedade &amp; Antecipação</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./ruminacao-pensar-demais" data-theme="ruminacao-pensar-demais" data-search="Pensar Demais &amp; Ruminação um pensamento que volta mesmo depois de já o teres analisado"><strong>Pensar Demais &amp; Ruminação</strong><small>Abertura · 2 €</small></a>
@@ -81,7 +84,7 @@
 <a class="territory oracle-card" href="./arrependimento" data-theme="arrependimento" data-search="Arrependimento &amp; E Se um 'e se' que mantém outra versão da vida aberta na tua cabeça"><strong>Arrependimento &amp; E Se</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./foco-dispersao" data-theme="foco-dispersao" data-search="Foco &amp; Dispersão a sensação de teres demasiadas coisas abertas ao mesmo tempo"><strong>Foco &amp; Dispersão</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./telemovel-distracao" data-theme="telemovel-distracao" data-search="Telemóvel &amp; Distração o impulso de pegar no telemóvel sempre que aparece silêncio, tédio ou desconforto"><strong>Telemóvel &amp; Distração</strong><small>Abertura · 2 €</small></a></div></details>
-<details class="oracle-group" open><summary>Corpo &amp; Ritmo</summary><div class="territory-grid"><a class="territory oracle-card" href="./descanso-culpa" data-theme="descanso-culpa" data-search="Descanso &amp; Culpa a dificuldade de parar sem sentir que devias estar a produzir"><strong>Descanso &amp; Culpa</strong><small>Abertura · 2 €</small></a>
+<details class="oracle-group"><summary>Corpo &amp; Ritmo</summary><div class="territory-grid"><a class="territory oracle-card" href="./descanso-culpa" data-theme="descanso-culpa" data-search="Descanso &amp; Culpa a dificuldade de parar sem sentir que devias estar a produzir"><strong>Descanso &amp; Culpa</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./energia-cansaco" data-theme="energia-cansaco" data-search="Energia &amp; Cansaço um cansaço que começa a organizar demasiado a tua vida"><strong>Energia &amp; Cansaço</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./sono-mente-ligada" data-theme="sono-mente-ligada" data-search="Sono &amp; Mente Ligada o corpo cansado com a cabeça ainda em serviço"><strong>Sono &amp; Mente Ligada</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./corpo-imagem" data-theme="corpo-imagem" data-search="Corpo &amp; Imagem uma relação difícil com a forma como vês ou avalias o teu corpo"><strong>Corpo &amp; Imagem</strong><small>Abertura · 2 €</small></a>
@@ -91,7 +94,7 @@
 <a class="territory oracle-card" href="./prazer-permissao" data-theme="prazer-permissao" data-search="Prazer &amp; Permissão a dificuldade de fazer alguma coisa só porque sabe bem"><strong>Prazer &amp; Permissão</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./envelhecimento-corpo" data-theme="envelhecimento-corpo" data-search="Envelhecimento &amp; Corpo mudanças no corpo, energia ou aparência com o passar do tempo"><strong>Envelhecimento &amp; Corpo</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./pausa-recuperacao" data-theme="pausa-recuperacao" data-search="Pausa &amp; Recuperação a necessidade de recuperar sem saber bem como parar"><strong>Pausa &amp; Recuperação</strong><small>Abertura · 2 €</small></a></div></details>
-<details class="oracle-group" open><summary>Vida Prática &amp; Casa</summary><div class="territory-grid"><a class="territory oracle-card" href="./rotina-caos" data-theme="rotina-caos" data-search="Rotina &amp; Caos dias que parecem começar já atrasados e terminar sem sensação de conclusão"><strong>Rotina &amp; Caos</strong><small>Abertura · 2 €</small></a>
+<details class="oracle-group"><summary>Vida Prática &amp; Casa</summary><div class="territory-grid"><a class="territory oracle-card" href="./rotina-caos" data-theme="rotina-caos" data-search="Rotina &amp; Caos dias que parecem começar já atrasados e terminar sem sensação de conclusão"><strong>Rotina &amp; Caos</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./tempo-prioridades" data-theme="tempo-prioridades" data-search="Tempo &amp; Prioridades a sensação de nunca haver tempo suficiente para o que importa"><strong>Tempo &amp; Prioridades</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./casa-refugio" data-theme="casa-refugio" data-search="Casa &amp; Refúgio uma casa que ainda não te devolve sensação de descanso ou pertença"><strong>Casa &amp; Refúgio</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./desarrumacao-desapego" data-theme="desarrumacao-desapego" data-search="Desarrumação &amp; Desapego coisas acumuladas que já pesam mais do que servem"><strong>Desarrumação &amp; Desapego</strong><small>Abertura · 2 €</small></a>
@@ -99,7 +102,7 @@
 <a class="territory oracle-card" href="./viver-sozinho" data-theme="viver-sozinho" data-search="Viver Sozinho a experiência de viver sozinho, desejada ou não, e tudo o que ela revela"><strong>Viver Sozinho</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./casa-partilhada" data-theme="casa-partilhada" data-search="Casa Partilhada a dificuldade de dividir espaço, tarefas e privacidade com outras pessoas"><strong>Casa Partilhada</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./organizacao-sobrecarga" data-theme="organizacao-sobrecarga" data-search="Organização &amp; Sobrecarga a sensação de teres demasiadas pequenas coisas para lembrar, gerir e acompanhar"><strong>Organização &amp; Sobrecarga</strong><small>Abertura · 2 €</small></a></div></details>
-<details class="oracle-group" open><summary>Trabalho &amp; Aprendizagem</summary><div class="territory-grid"><a class="territory oracle-card" href="./equipa-colaboracao" data-theme="equipa-colaboracao" data-search="Equipa &amp; Colaboração uma equipa onde colaboração, reconhecimento ou carga parecem desequilibrados"><strong>Equipa &amp; Colaboração</strong><small>Abertura · 2 €</small></a>
+<details class="oracle-group"><summary>Trabalho &amp; Aprendizagem</summary><div class="territory-grid"><a class="territory oracle-card" href="./equipa-colaboracao" data-theme="equipa-colaboracao" data-search="Equipa &amp; Colaboração uma equipa onde colaboração, reconhecimento ou carga parecem desequilibrados"><strong>Equipa &amp; Colaboração</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./chefia-autoridade" data-theme="chefia-autoridade" data-search="Chefia &amp; Autoridade uma relação difícil com chefia, autoridade ou avaliação profissional"><strong>Chefia &amp; Autoridade</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./conflito-profissional" data-theme="conflito-profissional" data-search="Conflito Profissional uma tensão no trabalho que já está a ocupar demasiado espaço fora dele"><strong>Conflito Profissional</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./desemprego-incerteza" data-theme="desemprego-incerteza" data-search="Desemprego &amp; Incerteza uma fase sem trabalho ou rendimento profissional estável"><strong>Desemprego &amp; Incerteza</strong><small>Abertura · 2 €</small></a>
@@ -109,7 +112,7 @@
 <a class="territory oracle-card" href="./empreendedorismo-risco" data-theme="empreendedorismo-risco" data-search="Empreender &amp; Arriscar um projecto próprio entre entusiasmo, dinheiro e incerteza"><strong>Empreender &amp; Arriscar</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./negocio-parado" data-theme="negocio-parado" data-search="Negócio Parado um negócio, projecto ou oferta que deixou de ganhar movimento"><strong>Negócio Parado</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./estudo-aprendizagem" data-theme="estudo-aprendizagem" data-search="Estudo &amp; Aprendizagem a pressão de aprender, estudar ou provar competência num campo novo"><strong>Estudo &amp; Aprendizagem</strong><small>Abertura · 2 €</small></a></div></details>
-<details class="oracle-group" open><summary>Dinheiro &amp; Recursos</summary><div class="territory-grid"><a class="territory oracle-card" href="./dividas-pressao" data-theme="dividas-pressao" data-search="Dívidas &amp; Pressão dívidas ou pagamentos que transformaram dinheiro em peso constante"><strong>Dívidas &amp; Pressão</strong><small>Abertura · 2 €</small></a>
+<details class="oracle-group"><summary>Dinheiro &amp; Recursos</summary><div class="territory-grid"><a class="territory oracle-card" href="./dividas-pressao" data-theme="dividas-pressao" data-search="Dívidas &amp; Pressão dívidas ou pagamentos que transformaram dinheiro em peso constante"><strong>Dívidas &amp; Pressão</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./gastos-impulso" data-theme="gastos-impulso" data-search="Gastos &amp; Impulso compras que chegam antes de perceberes bem o que estavas a tentar sentir"><strong>Gastos &amp; Impulso</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./poupanca-seguranca" data-theme="poupanca-seguranca" data-search="Poupança &amp; Segurança a necessidade de guardar dinheiro até finalmente te sentires seguro"><strong>Poupança &amp; Segurança</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./dinheiro-e-ajuda" data-theme="dinheiro-e-ajuda" data-search="Dinheiro &amp; Ajudar Outros pedidos de dinheiro, empréstimos ou ajuda financeira dentro dos teus vínculos"><strong>Dinheiro &amp; Ajudar Outros</strong><small>Abertura · 2 €</small></a>
@@ -117,18 +120,18 @@
 <a class="territory oracle-card" href="./escassez-medo" data-theme="escassez-medo" data-search="Escassez &amp; Medo o medo de faltar mesmo quando os números actuais já não são os mesmos de antes"><strong>Escassez &amp; Medo</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./consumo-status" data-theme="consumo-status" data-search="Consumo &amp; Estatuto compras ligadas a imagem, pertença ou à sensação de ter chegado a algum lugar"><strong>Consumo &amp; Estatuto</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./heranca-dinheiro-familia" data-theme="heranca-dinheiro-familia" data-search="Herança &amp; Dinheiro na Família dinheiro familiar misturado com lealdade, herança, ajuda ou expectativas"><strong>Herança &amp; Dinheiro na Família</strong><small>Abertura · 2 €</small></a></div></details>
-<details class="oracle-group" open><summary>Perda &amp; Transições</summary><div class="territory-grid"><a class="territory oracle-card" href="./luto-perda" data-theme="luto-perda" data-search="Luto &amp; Perda uma perda que mudou a forma como o mundo parecia organizado"><strong>Luto &amp; Perda</strong><small>Abertura · 2 €</small></a>
+<details class="oracle-group"><summary>Perda &amp; Transições</summary><div class="territory-grid"><a class="territory oracle-card" href="./luto-perda" data-theme="luto-perda" data-search="Luto &amp; Perda uma perda que mudou a forma como o mundo parecia organizado"><strong>Luto &amp; Perda</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./finitude-mortalidade" data-theme="finitude-mortalidade" data-search="Finitude &amp; Mortalidade a consciência de que o tempo, a vida e as pessoas não são infinitos"><strong>Finitude &amp; Mortalidade</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./fim-de-ciclo" data-theme="fim-de-ciclo" data-search="Fim de Ciclo uma fase que acabou antes de teres outra identidade pronta"><strong>Fim de Ciclo</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./mudanca-de-cidade" data-theme="mudanca-de-cidade" data-search="Mudança de Cidade uma mudança de cidade que mexe com pertença, rotina e identidade"><strong>Mudança de Cidade</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./emigracao-saudade" data-theme="emigracao-saudade" data-search="Emigração &amp; Saudade a vida entre o lugar onde estás e o lugar que continua a chamar casa"><strong>Emigração &amp; Saudade</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./recomeco-depois-da-perda" data-theme="recomeco-depois-da-perda" data-search="Recomeçar Depois da Perda a culpa ou estranheza de voltar a desejar depois de perder alguma coisa importante"><strong>Recomeçar Depois da Perda</strong><small>Abertura · 2 €</small></a></div></details>
-<details class="oracle-group" open><summary>Família &amp; Cuidado</summary><div class="territory-grid"><a class="territory oracle-card" href="./cuidar-de-alguem" data-theme="cuidar-de-alguem" data-search="Cuidar de Alguém a responsabilidade de cuidar de alguém sem desaparecer no cuidado"><strong>Cuidar de Alguém</strong><small>Abertura · 2 €</small></a>
+<details class="oracle-group"><summary>Família &amp; Cuidado</summary><div class="territory-grid"><a class="territory oracle-card" href="./cuidar-de-alguem" data-theme="cuidar-de-alguem" data-search="Cuidar de Alguém a responsabilidade de cuidar de alguém sem desaparecer no cuidado"><strong>Cuidar de Alguém</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./pais-a-envelhecer" data-theme="pais-a-envelhecer" data-search="Pais a Envelhecer ver os teus pais envelhecerem e a relação mudar de forma"><strong>Pais a Envelhecer</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./irmaos-rivalidade" data-theme="irmaos-rivalidade" data-search="Irmãos &amp; Rivalidade comparações, ressentimentos ou papéis antigos entre irmãos"><strong>Irmãos &amp; Rivalidade</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./familia-expectativas" data-theme="familia-expectativas" data-search="Família &amp; Expectativas expectativas familiares sobre quem deverias ser, escolher ou construir"><strong>Família &amp; Expectativas</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./parentalidade-escolha" data-theme="parentalidade-escolha" data-search="Parentalidade &amp; Escolha dúvidas, desejos ou pressão em torno de ter ou não ter filhos"><strong>Parentalidade &amp; Escolha</strong><small>Abertura · 2 €</small></a></div></details>
-<details class="oracle-group" open><summary>Sentido &amp; Espiritualidade</summary><div class="territory-grid"><a class="territory oracle-card" href="./proposito-sentido" data-theme="proposito-sentido" data-search="Propósito &amp; Sentido a pergunta sobre para que serve a tua vida ou para onde estás a ir"><strong>Propósito &amp; Sentido</strong><small>Abertura · 2 €</small></a>
+<details class="oracle-group"><summary>Sentido &amp; Espiritualidade</summary><div class="territory-grid"><a class="territory oracle-card" href="./proposito-sentido" data-theme="proposito-sentido" data-search="Propósito &amp; Sentido a pergunta sobre para que serve a tua vida ou para onde estás a ir"><strong>Propósito &amp; Sentido</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./fe-duvida" data-theme="fe-duvida" data-search="Fé &amp; Dúvida uma fé que mudou, enfraqueceu ou deixou de responder como antes"><strong>Fé &amp; Dúvida</strong><small>Abertura · 2 €</small></a>
 <a class="territory oracle-card" href="./intuicao-sinais" data-theme="intuicao-sinais" data-search="Intuição &amp; Sinais a dúvida sobre se estás a sentir intuição, medo, desejo ou apenas a procurar sinais"><strong>Intuição &amp; Sinais</strong><small>Abertura · 2 €</small></a></div></details></section>
 <p class="oracle__note">A leitura é simbólica. O Oráculo não determina o futuro, não garante acontecimentos e não substitui cuidados profissionais quando são necessários.</p>
@@ -140,12 +143,26 @@ const search=document.getElementById('oracle-search'),count=document.getElementB
 const cards=[...document.querySelectorAll('.oracle-card')],groups=[...document.querySelectorAll('.oracle-group')];
 function filter(){
  const q=norm(search.value.trim());
- if(!q){cards.forEach(card=>card.hidden=false);groups.forEach((group,i)=>{group.hidden=false;group.open=i===0});count.textContent='Escolhe um território ou escreve uma palavra.';return}
+ if(!q){
+  cards.forEach(card=>card.hidden=false);
+  groups.forEach(group=>{group.hidden=false;group.open=false});
+  count.textContent='Escolhe um território ou escreve uma palavra.';
+  return;
+ }
  cards.forEach(card=>{card.hidden=!norm(card.dataset.search+' '+card.textContent).includes(q)});
- groups.forEach(group=>{const any=[...group.querySelectorAll('.oracle-card')].some(c=>!c.hidden);group.hidden=!any;if(any)group.open=true});
+ groups.forEach(group=>{
+  const any=[...group.querySelectorAll('.oracle-card')].some(c=>!c.hidden);
+  group.hidden=!any;
+  group.open=any;
+ });
  const visible=cards.filter(card=>!card.hidden).length;
  count.textContent=visible?visible+' caminho'+(visible===1?'':'s')+' encontrado'+(visible===1?'':'s'):'Experimenta outra palavra.';
 }
+groups.forEach(group=>group.addEventListener('toggle',()=>{
+ if(group.open && !search.value.trim()){
+  groups.forEach(other=>{if(other!==group)other.open=false});
+ }
+}));
 search.addEventListener('input',filter);
 filter();
 document.querySelectorAll('[data-theme]').forEach(a=>a.addEventListener('click',()=>window.maisonAnalytics?.track?.('oracle_theme_select',{theme:a.dataset.theme,page_path:location.pathname})));
