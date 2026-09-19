@@ -1481,3 +1481,27 @@ h1,h2,h3,blockquote,.questions a,.product-price,.price{
     margin:0!important;
   }
 }
+
+
+/* MAISON JF® · B2B lighthouse focal-point correction · 2026-09-19 */
+@media(min-width:701px){
+  .home-page--final #profissionais>figure.b2b-lighthouse{
+    aspect-ratio:16 / 6.4!important;
+    min-height:0!important;
+    max-height:none!important;
+  }
+  .home-page--final #profissionais>figure.b2b-lighthouse img{
+    object-fit:cover!important;
+    object-position:right top!important;
+  }
+  .home-page--final #profissionais>figure.b2b-lighthouse figcaption{
+    left:clamp(34px,5vw,74px)!important;
+    bottom:clamp(32px,4vw,56px)!important;
+    width:min(680px,50%)!important;
+  }
+}
+@media(max-width:700px){
+  .home-page--final #profissionais>figure.b2b-lighthouse img{
+    object-position:76% top!important;
+  }
+}
