@@ -40,8 +40,10 @@ export async function getOrCreateQuestionSession({env,stripeSession,theme}={}){
   ]);
 
   if(useV2){
-    const needs=detectQuestionContentNeeds({theme,questions});
-    for(const need of needs)await upsertContentNeed(db,need);
+    try{
+      const needs=detectQuestionContentNeeds({theme,questions});
+      for(const need of needs)await upsertContentNeed(db,need);
+    }catch{}
   }
 
   const seed=await stableSeed('pdi-v2|'+theme+'|'+stripeSession.id);
@@ -64,23 +66,25 @@ export async function getOrCreateQuestionSession({env,stripeSession,theme}={}){
     packB:composed.packB
   });
   if(useV2){
-    await recordQuestionSessionServedV2(db,{
-      gameSessionId,
-      buyerKey,
-      theme,
-      questionIds:composed.ids
-    });
-    if(seenIds.length){
-      await recordExperienceSignal(db,{
-        product:'para_de_ignorar',
-        eventType:'repurchased',
-        contentType:'session',
-        contentId:gameSessionId,
+    try{
+      await recordQuestionSessionServedV2(db,{
+        gameSessionId,
         buyerKey,
-        territory:theme,
-        signalKey:['pdi','repurchased',gameSessionId].join('|')
+        theme,
+        questionIds:composed.ids
       });
-    }
+      if(seenIds.length){
+        await recordExperienceSignal(db,{
+          product:'para_de_ignorar',
+          eventType:'repurchased',
+          contentType:'session',
+          contentId:gameSessionId,
+          buyerKey,
+          territory:theme,
+          signalKey:['pdi','repurchased',gameSessionId].join('|')
+        });
+      }
+    }catch{}
   }
   return await readGameSession(db,gameSessionId);
 }
