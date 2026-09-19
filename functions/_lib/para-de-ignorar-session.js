@@ -8,7 +8,7 @@ import {
   createGameSession,
   readGameSession
 } from './maison-vault.js';
-import { vaultExperienceEngineReady } from './maison-vault-v2.js';
+import { vaultExperienceEngineReady, recordQuestionSessionServedV2 } from './maison-vault-v2.js';
 import { listActivePaidQuestionsV2 } from './question-vault-v2.js';
 
 /*
@@ -57,6 +57,14 @@ export async function getOrCreateQuestionSession({env,stripeSession,theme}={}){
     packA:composed.packA,
     packB:composed.packB
   });
+  if(useV2){
+    await recordQuestionSessionServedV2(db,{
+      gameSessionId,
+      buyerKey,
+      theme,
+      questionIds:composed.ids
+    });
+  }
   return await readGameSession(db,gameSessionId);
 }
 
