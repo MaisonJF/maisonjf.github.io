@@ -15,6 +15,7 @@ import {
   createOracleSession,
   readOracleSession,
   recordOracleSessionReopenedV2,
+  recordExperienceSignal,
   upsertContentNeed
 } from '../_lib/maison-vault-v2.js';
 import { detectOracleContentNeeds } from '../_lib/content-gap-detector.js';
@@ -145,6 +146,17 @@ async function tryComposedReading({env,session,theme}){
     buyerKey,
     composed
   });
+  if(seenIds.length){
+    await recordExperienceSignal(db,{
+      product:'oracle',
+      eventType:'repurchased',
+      contentType:'session',
+      contentId:oracleSessionId,
+      buyerKey,
+      territory:theme,
+      signalKey:['oracle','repurchased',oracleSessionId].join('|')
+    });
+  }
   return await readOracleSession(db,oracleSessionId);
 }
 
