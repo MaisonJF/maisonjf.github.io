@@ -112,26 +112,28 @@ export async function createOracleSession(db,{oracleSessionId,stripeSessionId,bu
     );
   });
   await db.batch(statements);
-  await recordExperienceSignal(db,{
-    product:'oracle',
-    eventType:'served',
-    contentType:'session',
-    contentId:oracleSessionId,
-    buyerKey,
-    territory:composed.territory,
-    signalKey:['oracle','served','session',oracleSessionId].join('|')
-  });
-  for(const block of composed.blocks){
+  try{
     await recordExperienceSignal(db,{
       product:'oracle',
       eventType:'served',
-      contentType:'oracle_block',
-      contentId:block.id,
+      contentType:'session',
+      contentId:oracleSessionId,
       buyerKey,
       territory:composed.territory,
-      signalKey:['oracle','served',oracleSessionId,block.id].join('|')
+      signalKey:['oracle','served','session',oracleSessionId].join('|')
     });
-  }
+    for(const block of composed.blocks){
+      await recordExperienceSignal(db,{
+        product:'oracle',
+        eventType:'served',
+        contentType:'oracle_block',
+        contentId:block.id,
+        buyerKey,
+        territory:composed.territory,
+        signalKey:['oracle','served',oracleSessionId,block.id].join('|')
+      });
+    }
+  }catch{}
   return oracleSessionId;
 }
 
