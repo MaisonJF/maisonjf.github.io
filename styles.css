@@ -1666,13 +1666,11 @@ ul, ol {
    MAISON JF® | revisão comercial e editorial
    ========================================================== */
 
-/* A área de companhia social não deve sugerir casal ou intimidade.
-   Até existir uma fotografia platónica aprovada, usamos um ambiente
-   neutro já presente no projeto. */
+/* Companhia: presença sem codificar género ou casal. */
 .transformacao-card__visual--bordeaux {
   background-image:
     linear-gradient(rgba(8,7,6,.12), rgba(8,7,6,.34)),
-    url('images/generated/b2b-office-20260919.jpg?v=1');
+    url('images/generated/companhia-night-20260919.jpg?v=1');
   background-size: cover;
   background-position: center 58%;
 }
