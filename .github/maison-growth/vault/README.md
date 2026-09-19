@@ -1,51 +1,100 @@
 # MAISON JF® · Private Brain Vault
 
-This directory contains only the **public schema and operating contract** for the private Maison content vault.
-
-## Purpose
-
-Paid content bodies must never be committed to the public GitHub repository.
-
-The private vault is designed to hold:
-
-- PÁRA DE IGNORAR! paid question bodies and editorial metadata;
-- future private Oráculo composition blocks;
-- generated paid game sessions;
-- pseudonymous anti-repetition history;
-- aggregate interaction counters;
-- private rewards such as Carta 29 / mini-packs.
-
-It must **never** store players' answer text or private conversation content.
+This directory contains only the **public schema and operating contract** for the private Maison content vault. Paid question bodies and paid Oráculo blocks remain in Cloudflare D1 and must never be committed to this public repository.
 
 ## Runtime
 
-Cloudflare Pages Functions access a D1 database through the binding:
+Cloudflare Pages Functions use the D1 binding:
 
 `MAISON_BRAIN_DB`
 
-A secret environment variable is also required:
+Buyer identity for anti-repetition is HMAC-pseudonymised server-side with:
 
 `MAISON_VAULT_PEPPER`
 
-The pepper is used to HMAC-normalize buyer identity for anti-repetition without storing raw email addresses.
+Raw email addresses, answer text and private conversation content are not part of the vault contract.
 
-## Provisioning
+## Migrations
 
-1. Create a D1 database in Cloudflare, suggested name: `maison-brain-vault`.
-2. Apply `0001_private_content_vault.sql`.
-3. Bind the database to the Pages project as `MAISON_BRAIN_DB` in Production and Preview as appropriate.
-4. Add a strong secret `MAISON_VAULT_PEPPER` to the Pages environment.
-5. Redeploy the Pages project.
+Apply migrations in order:
 
-No paid bodies are included in this repository migration.
+1. `0001_private_content_vault.sql`
+2. `0002_experience_engine.sql`
+
+Migration v2 changes `vault_meta.schema_version` to `vault_v2`. Runtime code checks this marker before using v2-only columns or tables.
+
+The production Oráculo is deliberately backward-compatible: if v2 is not present, if there are not enough approved live blocks, or if the compositional engine cannot produce a valid reading, the existing authored 28-reading system remains available.
+
+## Architecture
+
+The operating loop is:
+
+`OCEANS → BRAIN → TAXONOMY GATE → EDITORIAL GATE → D1 → EXPERIENCE DIRECTOR → COMPOSER → QUALITY GATE → PRODUCT → SIGNALS → LEARNING → BRAIN`
+
+Responsibilities are separated:
+
+- **Oceans** discover human pain patterns and internal gaps. They never publish paid content.
+- **Brain** clusters, deduplicates, classifies and proposes.
+- **Taxonomy Gate** routes a candidate to new territory, subterritory or additional depth.
+- **Editorial Gate** controls admission to the vault.
+- **D1** stores approved private editorial intelligence and pseudonymous exposure history.
+- **Experience Director** chooses the emotional trajectory before text is selected.
+- **Composer** assembles compatible blocks/questions.
+- **Quality Gate** rejects incoherent combinations before delivery.
+- **Signals/Learning** inform distribution and gap detection without redefining editorial truth from engagement alone.
+
+## Lifecycle
+
+Content uses two independent axes.
+
+Editorial lifecycle:
+
+`candidate → lab → vault → live → review → retired`
+
+Rotation state:
+
+`new → limited → normal → review → retired`
+
+New material therefore enters slowly. A block can be editorially approved while still having deliberately limited serving weight.
+
+## Oráculo v2
+
+Private blocks use the roles:
+
+`opening → recognition → tension → counterpoint → reframe → movement → close`
+
+A reading does not have to contain every role. The Experience Director selects one of a small number of coherent trajectories first; the Composer then selects compatible blocks for that route.
+
+Selection considers quality, compatibility, trajectory fit, freshness, anti-repetition, rotation state and silent rarity. The browser receives only the final reading, never the private repertoire or scoring metadata.
+
+## PÁRA DE IGNORAR!
+
+A paid session remains:
+
+**28 perguntas. Duas pessoas.**
+
+The server composes two stable 14-card packs and now validates the full 28-question experience before returning it. V2 metadata can express target, emotional function, cognitive/emotional load, semantic fingerprint, compatibility and lifecycle state.
+
+No answer text is requested or stored.
+
+## Taxonomy and gap growth
+
+`taxonomy-gate.js` prevents every wording variation from becoming a new territory. Candidates are routed to:
+
+- `new_territory`
+- `subterritory`
+- `depth`
+
+`content-gap-detector.js` detects minimum healthy coverage by role/stage. These values are **floors, never catalogue caps**. The purpose is to tell the Brain/Oceans where depth is missing instead of endlessly generating more of what is already abundant.
 
 ## Safety contract
 
-- GitHub holds code and schema, not paid bodies.
-- Browser clients never receive the full repertoire.
-- One paid session receives only its selected 28 questions.
-- Question text is immutable once inserted; edits create a new question ID/version.
-- Sessions keep question IDs, making reloads stable.
+- GitHub stores code/schema, not paid bodies.
+- Browser clients never receive full repertoires.
+- Question and Oracle bodies are versioned by inserting new IDs rather than silently rewriting historical content.
+- Paid sessions keep selected content IDs so reloads remain stable.
 - Buyer identity is pseudonymous and derived server-side.
-- Answer text is never requested or stored.
-- Oceans may propose abstract candidates only; they never write directly into paid tables.
+- Answer text and private conversation text are never stored.
+- Oceans can propose candidates and needs only; they cannot write directly into live paid tables.
+- Metrics may alter distribution weights, but do not automatically redefine taxonomy or editorial truth.
+- Quality failures are invisible to customers; the Composer retries or the legacy safe fallback is used.
