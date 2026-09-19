@@ -25,7 +25,7 @@ export function composeOracleReading({territory,seed,blocks,seenIds=[],requested
     const attemptSeed=String(seed)+'|attempt:'+attempt;
     const plan=directOracleExperience({territory,seed:attemptSeed,requestedTone,requestedIntensity});
     try{
-      const picked=pickForPlan({plan,valid,seen,seed:attemptSeed});
+      const picked=pickForPlan({territory,plan,valid,seen,seed:attemptSeed});
       const quality=qualityCheckOracle({blocks:picked,plan});
       const candidate={plan,blocks:picked,quality};
       if(!best||quality.score>best.quality.score)best=candidate;
@@ -36,7 +36,7 @@ export function composeOracleReading({territory,seed,blocks,seenIds=[],requested
   throw new Error('oracle_quality_gate_failed');
 }
 
-function pickForPlan({plan,valid,seen,seed}){
+function pickForPlan({territory,plan,valid,seen,seed}){
   const rng=mulberry32(hashSeed(seed+'|composer-v1'));
   const used=[];
   for(let i=0;i<plan.roles.length;i++){
