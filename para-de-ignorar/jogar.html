@@ -119,6 +119,21 @@ window.addEventListener('DOMContentLoaded',async()=>{
  document.getElementById('intro-theme').textContent=label.toUpperCase();
 
  const packs={A:payload.packs.A,B:payload.packs.B};
+ const sendEvent=(event,questionId='')=>{
+   const body={
+     session_id:sessionId,
+     game_session_id:String(payload.game_session_id||''),
+     event
+   };
+   if(questionId)body.question_id=questionId;
+   fetch('/api/pdi-event-live',{
+     method:'POST',
+     headers:{'content-type':'application/json'},
+     body:JSON.stringify(body),
+     keepalive:true,
+     cache:'no-store'
+   }).catch(()=>{});
+ };
  const storageKey='maison_pdi_progress_'+sessionId;
  let state={pack:'A',index:0,started:false,swapped:false,finished:false};
  try{
@@ -139,7 +154,9 @@ window.addEventListener('DOMContentLoaded',async()=>{
  }
  function advance(kind){
    const wasLast=state.index>=13;
+   const currentCard=packs[state.pack]?.[state.index];
    track(kind==='pass'?'pdi_card_pass':'pdi_card_advance',{theme:payload.theme,pack:state.pack,position:state.index+1,page_path:location.pathname});
+   if(currentCard?.id)sendEvent(kind==='pass'?'passed':'advanced',currentCard.id);
    if(!wasLast){state.index+=1;save();renderCard();return}
    if(state.pack==='A'){state.swapped=true;save();show('swap');track('pdi_swap_reached',{theme:payload.theme,page_path:location.pathname});return}
    finish();
@@ -147,6 +164,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
  function finish(){
    state.finished=true;state.pack='B';state.index=13;save();show('finish');
    track('pdi_session_complete',{theme:payload.theme,page_path:location.pathname});
+   sendEvent('completed');
  }
 
  document.getElementById('start').addEventListener('click',()=>{
