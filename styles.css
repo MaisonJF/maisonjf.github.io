@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Inter:wght@300;400;500;600&display=swap');
 /* ============================================
    MAISON JF® | Design System v2
    ============================================ */
@@ -46,7 +47,7 @@
   --borda-destaque: rgba(196, 162, 101, 0.25);
 
   /* Tipografia */
-  --fonte-editorial: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
+  --fonte-editorial: 'Bodoni Moda', 'Didot', 'Bodoni 72', 'Bodoni MT', serif;
   --fonte-funcional: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Espaçamento */
