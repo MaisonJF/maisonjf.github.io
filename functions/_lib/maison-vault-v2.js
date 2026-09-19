@@ -165,14 +165,30 @@ export async function readOracleSession(db,oracleSessionId){
 }
 
 export async function upsertContentNeed(db,need){
-  const id=need.needId||('need_'+crypto.randomUUID().replace(/-/g,''));
+  const key=[
+    need.targetType||'',
+    need.territory||'',
+    need.subterritory||'',
+    need.stageOrRole||'',
+    need.tone||'',
+    need.intensityMin??'',
+    need.intensityMax??'',
+    need.reasonCode||'',
+    need.metadata?.target||''
+  ].join('|');
+  const id=need.needId||('need_'+(await digestHex(key)).slice(0,40));
   await db.prepare(
     `INSERT INTO vault_content_needs
      (need_id,target_type,territory,subterritory,stage_or_role,tone,intensity_min,intensity_max,reason_code,priority,status,metadata_json)
-     VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,'open',?11)`
+     VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,'open',?11)
+     ON CONFLICT(need_id) DO UPDATE SET
+       priority=excluded.priority,
+       metadata_json=excluded.metadata_json,
+       status=CASE WHEN vault_content_needs.status='dismissed' THEN 'dismissed' ELSE 'open' END,
+       resolved_at=NULL`
   ).bind(
     id,need.targetType,need.territory||null,need.subterritory||null,need.stageOrRole||null,
-    need.tone||null,need.intensityMin||null,need.intensityMax||null,need.reasonCode,
+    need.tone||null,need.intensityMin??null,need.intensityMax??null,need.reasonCode,
     Number(need.priority??50),JSON.stringify(need.metadata||{})
   ).run();
   return id;
