@@ -124,7 +124,7 @@
 .conversion-nudge__title {
   margin: 0 1.5rem .6rem 0;
   color: var(--marfim, #f0ebe3);
-  font-family: var(--fonte-editorial, Georgia, serif);
+  font-family: var(--fonte-editorial, 'Bodoni Moda', Didot, serif);
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.05;
