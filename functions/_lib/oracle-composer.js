@@ -42,14 +42,21 @@ function pickForPlan({plan,valid,seen,seed}){
   for(let i=0;i<plan.roles.length;i++){
     const role=plan.roles[i];
     const targetIntensity=plan.roleIntensity[i]||plan.intensity;
-    const eligible=valid.filter(block=>
+    const eligibleAll=valid.filter(block=>
       block.role===role&&
       !used.some(x=>x.id===block.id)&&
       compatibleWithPlan(block,plan)&&
       compatibleWithPicked(block,used)&&
       Math.abs(Number(block.intensity||targetIntensity)-targetIntensity)<=2
     );
+    if(!eligibleAll.length)throw new Error('insufficient_oracle_candidates_'+role);
+
+    // Territory-specific editorial material always wins when it can fill this role.
+    // Global blocks are a backbone/fallback for uncovered territories, not a dilution layer.
+    const specific=eligibleAll.filter(block=>block.territory===territory);
+    const eligible=specific.length?specific:eligibleAll.filter(block=>block.territory==='global');
     if(!eligible.length)throw new Error('insufficient_oracle_candidates_'+role);
+
     const unseen=eligible.filter(x=>!seen.has(x.id));
     const candidates=unseen.length?unseen:eligible;
     used.push(weightedPick(candidates,rng,block=>blockWeight(block,{seen,targetIntensity,plan})));
