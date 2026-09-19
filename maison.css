@@ -895,3 +895,70 @@
 .product-card img{
   filter:none!important;
 }
+
+
+/* MAISON JF® · Lighthouse signature system · 2026-09-19 */
+.maison-beacon{
+  position:relative;
+  overflow:hidden;
+  margin-top:88px;
+  min-height:clamp(330px,42vw,560px);
+  background:#050505;
+  border-top:1px solid rgba(255,255,255,.10);
+  border-bottom:1px solid rgba(255,255,255,.10);
+}
+.maison-beacon>img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 52%;
+  filter:saturate(.68) contrast(1.14) brightness(.56);
+}
+.maison-beacon:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(3,3,3,.86) 0%,rgba(3,3,3,.52) 48%,rgba(3,3,3,.22) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.24) 56%,rgba(0,0,0,.72));
+}
+.maison-beacon__copy{
+  position:relative;
+  z-index:2;
+  min-height:inherit;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  width:min(calc(100% - 48px),900px);
+  padding:58px 0;
+}
+.maison-beacon__copy .eyebrow{color:#c8b990}
+.maison-beacon__copy h2{
+  max-width:820px;
+  margin:.18em 0 .22em;
+  font:400 clamp(42px,6.5vw,84px)/.94 var(--serif);
+  letter-spacing:-.038em;
+}
+.maison-beacon__copy p:not(.eyebrow){
+  max-width:580px;
+  margin:0;
+  color:#c6beb3;
+  font-size:15px;
+}
+.maison-beacon__copy .text-link{margin-top:24px}
+@media(max-width:700px){
+  .maison-beacon{margin-top:66px;min-height:440px}
+  .maison-beacon>img{object-position:62% center}
+  .maison-beacon:after{
+    background:
+      linear-gradient(180deg,rgba(3,3,3,.18),rgba(3,3,3,.52) 42%,rgba(3,3,3,.90) 82%),
+      linear-gradient(90deg,rgba(3,3,3,.30),rgba(3,3,3,.10));
+  }
+  .maison-beacon__copy{
+    width:calc(100% - 36px);
+    padding:40px 0;
+  }
+  .maison-beacon__copy h2{font-size:clamp(40px,12vw,58px)}
+}
