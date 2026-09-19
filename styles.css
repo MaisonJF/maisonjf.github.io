@@ -1777,3 +1777,512 @@ ul, ol {
     line-height: 1;
   }
 }
+
+
+/* ==========================================================
+   MAISON JF® · APPLE + KISS SYSTEM · 2026-09-19
+   Quiet luxury, fewer visual decisions, clearer hierarchy.
+   ========================================================== */
+:root{
+  --ak-bg:#080808;
+  --ak-bg-2:#0d0d0e;
+  --ak-surface:rgba(255,255,255,.035);
+  --ak-surface-hover:rgba(255,255,255,.055);
+  --ak-text:#f5f1e9;
+  --ak-muted:#aaa39a;
+  --ak-muted-2:#827b72;
+  --ak-accent:#c7aa73;
+  --ak-accent-soft:rgba(199,170,115,.16);
+  --ak-line:rgba(255,255,255,.105);
+  --ak-line-strong:rgba(255,255,255,.18);
+  --ak-radius:18px;
+  --ak-radius-sm:12px;
+  --ak-pill:999px;
+  --ak-shadow:0 18px 55px rgba(0,0,0,.22);
+  --ak-ease:180ms cubic-bezier(.2,.7,.2,1);
+}
+
+html{
+  background:var(--ak-bg);
+  color-scheme:dark;
+}
+
+body{
+  background:var(--ak-bg)!important;
+  color:var(--ak-text)!important;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+
+::selection{
+  background:rgba(199,170,115,.28);
+  color:#fff;
+}
+
+a,button,input,select,textarea,summary{
+  -webkit-tap-highlight-color:transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible{
+  outline:2px solid var(--ak-accent)!important;
+  outline-offset:3px!important;
+}
+
+/* Navigation: calm glass, less visual noise. */
+.site-header,
+.header{
+  background:rgba(8,8,8,.78)!important;
+  border-bottom:1px solid var(--ak-line)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(135%);
+  backdrop-filter:blur(24px) saturate(135%);
+}
+
+.brand,
+.header__logo{
+  color:var(--ak-text)!important;
+  letter-spacing:.16em!important;
+}
+
+.site-header nav a,
+.header__nav-link{
+  color:rgba(245,241,233,.76)!important;
+  letter-spacing:.075em!important;
+  transition:color var(--ak-ease),opacity var(--ak-ease)!important;
+}
+
+.site-header nav a:hover,
+.header__nav-link:hover,
+.site-header nav a:focus-visible,
+.header__nav-link:focus-visible{
+  color:#fff!important;
+}
+
+/* Buttons: one simple family, large touch target, pill geometry. */
+.button,
+.btn,
+.resposta__cta,
+.filters button,
+.conversion-bar__link,
+.conversion-float,
+.maison-consent button{
+  min-height:44px!important;
+  border-radius:var(--ak-pill)!important;
+  padding:.78rem 1.25rem!important;
+  border:1px solid var(--ak-line-strong)!important;
+  box-shadow:none!important;
+  font-weight:600!important;
+  letter-spacing:.045em!important;
+  text-transform:none!important;
+  transition:
+    transform var(--ak-ease),
+    background-color var(--ak-ease),
+    border-color var(--ak-ease),
+    color var(--ak-ease),
+    opacity var(--ak-ease)!important;
+}
+
+.button:hover,
+.btn:hover:not(:disabled),
+.resposta__cta:hover,
+.filters button:hover,
+.conversion-bar__link:hover,
+.conversion-float:hover{
+  transform:translateY(-1px)!important;
+}
+
+.button--light,
+.btn--primary,
+.filters button.on,
+.maison-consent button[data-consent="granted"],
+.conversion-bar__link--primary{
+  background:var(--ak-text)!important;
+  border-color:var(--ak-text)!important;
+  color:#0a0a0a!important;
+}
+
+.button:not(.button--light),
+.btn--secondary,
+.resposta__cta--quiet{
+  background:rgba(255,255,255,.025)!important;
+  color:var(--ak-text)!important;
+  border-color:var(--ak-line-strong)!important;
+}
+
+.button:not(.button--light):hover,
+.btn--secondary:hover:not(:disabled),
+.resposta__cta--quiet:hover{
+  background:rgba(255,255,255,.065)!important;
+  border-color:rgba(255,255,255,.28)!important;
+}
+
+.btn--ghost,
+.text-link{
+  border-radius:0!important;
+  background:transparent!important;
+  color:rgba(245,241,233,.82)!important;
+  text-decoration:none!important;
+  text-underline-offset:.2em;
+}
+
+.text-link:hover,
+.btn--ghost:hover{
+  color:#fff!important;
+}
+
+/* Editorial hierarchy: retain Maison Bodoni, simplify everything around it. */
+.eyebrow,
+.detail-eyebrow,
+.catalogue-card__eyebrow,
+.service-card__eyebrow,
+.oracle__count,
+.footer__column-title,
+.home-footer__group span{
+  color:var(--ak-accent)!important;
+  letter-spacing:.16em!important;
+  font-weight:600!important;
+}
+
+.hero h1,
+.detail-title,
+.product-hero h1,
+.catalogue h1,
+.services-hero h1,
+.ebooks h1,
+.oracle__inner>h1,
+.manifesto blockquote,
+.resposta h1,
+.resposta h2{
+  text-wrap:balance;
+  font-kerning:normal;
+  letter-spacing:-.028em!important;
+}
+
+.lede,
+.detail-lead,
+.catalogue__intro,
+.services__lead,
+.product-hero__copy>p,
+.ritual p,
+.oracle__lead,
+.oracle__history p,
+.resposta p,
+.resposta li{
+  color:rgba(245,241,233,.68)!important;
+}
+
+/* Cards: quiet surfaces, soft corners, no heavy boxiness. */
+.door,
+.journey-card,
+.offer-card,
+.related-card,
+.product,
+.company-format,
+.catalogue-card,
+.service-card,
+.transformacao-card,
+.farol__option,
+.farol__result,
+.context,
+.resposta__offer,
+.continuity__plans div{
+  border-radius:var(--ak-radius)!important;
+  border:1px solid var(--ak-line)!important;
+  background:var(--ak-surface)!important;
+  box-shadow:none!important;
+  overflow:hidden;
+  transition:
+    transform var(--ak-ease),
+    background-color var(--ak-ease),
+    border-color var(--ak-ease)!important;
+}
+
+.door:hover,
+.journey-card:hover,
+.offer-card:hover,
+.related-card:hover,
+.product:hover,
+.company-format:hover,
+.catalogue-card:hover,
+.service-card:hover,
+.transformacao-card:hover,
+.farol__option:hover{
+  transform:translateY(-2px)!important;
+  background:var(--ak-surface-hover)!important;
+  border-color:rgba(199,170,115,.28)!important;
+  box-shadow:var(--ak-shadow)!important;
+}
+
+.media-slot:not(.media-slot--hero),
+.product__media,
+.product-gallery__item,
+.essay-shot,
+.service-visual,
+.service-card__media,
+.home-feature__media,
+.b2b-lighthouse{
+  border-radius:var(--ak-radius)!important;
+}
+
+.media-slot img,
+.product__media img,
+.product-gallery__item img,
+.essay-shot img,
+.service-visual img,
+.service-card__media img{
+  transition:transform 550ms cubic-bezier(.2,.7,.2,1),filter 300ms ease!important;
+}
+
+.door:hover img,
+.product:hover img,
+.catalogue-card:hover img,
+.service-card:hover img{
+  transform:scale(1.012)!important;
+}
+
+/* Forms: one field language everywhere. */
+input,
+select,
+textarea,
+.oracle__search{
+  min-height:48px!important;
+  border-radius:var(--ak-radius-sm)!important;
+  border:1px solid var(--ak-line)!important;
+  background:rgba(255,255,255,.035)!important;
+  color:var(--ak-text)!important;
+  padding:.85rem 1rem!important;
+  box-shadow:none!important;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:rgba(245,241,233,.36)!important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.oracle__search:focus{
+  border-color:rgba(199,170,115,.68)!important;
+  outline:none!important;
+  box-shadow:0 0 0 3px rgba(199,170,115,.10)!important;
+}
+
+/* Farol: fewer boxes, more readable choices. */
+.farol__container{
+  max-width:980px!important;
+}
+
+.farol__options{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+
+.farol__option{
+  min-height:118px!important;
+  padding:1.2rem 1.25rem!important;
+  justify-content:space-between!important;
+}
+
+.farol__option-text{
+  color:rgba(245,241,233,.84)!important;
+  font-size:.94rem!important;
+  line-height:1.55!important;
+}
+
+.farol__option-arrow{
+  opacity:.62;
+}
+
+.farol__result{
+  max-width:720px!important;
+  padding:clamp(1.5rem,4vw,2.75rem)!important;
+}
+
+/* Oracle: true cascade/accordion; every territory has equal status. */
+.oracle-group{
+  border-top:1px solid var(--ak-line)!important;
+}
+
+.oracle-group:last-child{
+  border-bottom:1px solid var(--ak-line)!important;
+}
+
+.oracle-group summary{
+  cursor:pointer!important;
+  padding:25px 4px!important;
+  color:rgba(245,241,233,.92)!important;
+  font-size:clamp(28px,3.1vw,43px)!important;
+  line-height:1.08!important;
+  letter-spacing:-.018em!important;
+}
+
+.oracle-group summary::after{
+  content:"+"!important;
+  color:var(--ak-accent)!important;
+  font:300 29px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  opacity:.82!important;
+  transform:none!important;
+}
+
+.oracle-group[open] summary::after{
+  content:"−"!important;
+  opacity:1!important;
+}
+
+.oracle-group .territory-grid,
+.territory-grid{
+  grid-template-columns:1fr!important;
+  gap:0!important;
+  margin-top:0!important;
+  padding:0 0 28px!important;
+}
+
+.oracle-card,
+.territory.oracle-card{
+  min-height:0!important;
+  border:0!important;
+  border-top:1px solid rgba(255,255,255,.07)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding:17px 4px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:18px!important;
+}
+
+.oracle-card:hover,
+.territory.oracle-card:hover{
+  transform:none!important;
+  background:rgba(255,255,255,.025)!important;
+  border-color:rgba(255,255,255,.09)!important;
+  box-shadow:none!important;
+}
+
+.oracle-card strong{
+  font-size:clamp(20px,2.2vw,28px)!important;
+  line-height:1.12!important;
+}
+
+.oracle-card small{
+  margin:0!important;
+  white-space:nowrap;
+  color:rgba(245,241,233,.42)!important;
+  letter-spacing:.08em!important;
+}
+
+/* Sections: more breathing room but no empty theatre. */
+.manifesto,
+.editorial-band,
+.editorial-essay,
+.discovery,
+.home-feature,
+.home-explore,
+.services,
+.catalogue,
+.ebooks,
+.oracle{
+  border-color:var(--ak-line)!important;
+}
+
+hr{
+  border:0;
+  border-top:1px solid var(--ak-line);
+}
+
+/* Footer: quieter, cleaner. */
+.footer,
+.home-footer,
+footer{
+  background:#0a0a0a!important;
+  border-top:1px solid var(--ak-line)!important;
+}
+
+.footer__link,
+.home-footer a,
+footer a{
+  color:rgba(245,241,233,.58)!important;
+  transition:color var(--ak-ease)!important;
+}
+
+.footer__link:hover,
+.home-footer a:hover,
+footer a:hover{
+  color:#fff!important;
+}
+
+/* Consent and floating conversion UI: Apple-like utility surfaces. */
+.maison-consent,
+.conversion-nudge,
+.conversion-float,
+.conversion-bar{
+  border-color:var(--ak-line)!important;
+  background:rgba(18,18,18,.88)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(140%);
+  backdrop-filter:blur(24px) saturate(140%);
+  box-shadow:0 16px 60px rgba(0,0,0,.28)!important;
+}
+
+.maison-consent,
+.conversion-nudge{
+  border-radius:20px!important;
+}
+
+/* Accessibility + touch. */
+@media(max-width:768px){
+  .farol__options{
+    grid-template-columns:1fr!important;
+  }
+
+  .farol__option{
+    min-height:82px!important;
+  }
+
+  .oracle-card,
+  .territory.oracle-card{
+    align-items:flex-start!important;
+    flex-direction:column!important;
+    gap:7px!important;
+    padding:16px 2px!important;
+  }
+
+  .oracle-card small{
+    white-space:normal;
+  }
+
+  .button,
+  .btn,
+  .resposta__cta,
+  .filters button{
+    min-height:46px!important;
+  }
+
+  .site-header,
+  .header{
+    -webkit-backdrop-filter:blur(20px) saturate(130%);
+    backdrop-filter:blur(20px) saturate(130%);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .door:hover,
+  .journey-card:hover,
+  .offer-card:hover,
+  .related-card:hover,
+  .product:hover,
+  .company-format:hover,
+  .catalogue-card:hover,
+  .service-card:hover,
+  .transformacao-card:hover,
+  .farol__option:hover,
+  .button:hover,
+  .btn:hover{
+    transform:none!important;
+  }
+}
