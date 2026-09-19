@@ -70,7 +70,7 @@ function compatibleWithPicked(block,picked){
   const incompatibleFingerprints=new Set(c.incompatibleFingerprints||[]);
   for(const other of picked){
     if(forbidden.has(other.id))return false;
-    if(block.semanticFingerprint&&incompatibleFingerprints.has(block.semanticFingerprint))return false;
+    if(other.semanticFingerprint&&incompatibleFingerprints.has(other.semanticFingerprint))return false;
     const oc=other.compatibility||{};
     if((oc.forbiddenBlockIds||[]).includes(block.id))return false;
     if(block.semanticFingerprint&&(oc.incompatibleFingerprints||[]).includes(block.semanticFingerprint))return false;
