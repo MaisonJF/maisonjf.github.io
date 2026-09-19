@@ -1,7 +1,8 @@
 const PRODUCT={
   slug:'relacoes',
   name:'PÁRA DE IGNORAR! · Relações',
-  currency:'eur'
+  currency:'eur',
+  amount:599
 };
 
 export async function onRequestPost({ request, env }) {
@@ -16,10 +17,7 @@ export async function onRequestPost({ request, env }) {
       return json({error:'Checkout temporariamente indisponível.'},503);
     }
 
-    const amount=Number.parseInt(String(env?.PDI_RELACOES_PRICE_CENTS||''),10);
-    if(!Number.isInteger(amount) || amount<100 || amount>50000){
-      return json({error:'Produto ainda não está à venda.'},503);
-    }
+    const amount=PRODUCT.amount;
 
     const body=await request.json().catch(()=>({}));
     if(body?.theme && body.theme!==PRODUCT.slug){
