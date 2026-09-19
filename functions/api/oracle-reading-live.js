@@ -13,7 +13,8 @@ import {
   listSeenOracleBlockIds,
   findOracleSessionByStripe,
   createOracleSession,
-  readOracleSession
+  readOracleSession,
+  recordOracleSessionReopenedV2
 } from '../_lib/maison-vault-v2.js';
 
 const AUTHORED_READINGS={
@@ -107,6 +108,11 @@ async function tryComposedReading({env,session,theme}){
   const existing=await findOracleSessionByStripe(db,session.id);
   if(existing){
     if(existing.territory!==theme)return null;
+    await recordOracleSessionReopenedV2(db,{
+      oracleSessionId:existing.oracle_session_id,
+      buyerKey:existing.buyer_key,
+      territory:existing.territory
+    }).catch(()=>{});
     return await readOracleSession(db,existing.oracle_session_id);
   }
 
