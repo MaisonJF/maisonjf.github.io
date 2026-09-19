@@ -1610,7 +1610,7 @@ ul, ol {
 .profissionais__visual-photo {
   background-image:
     linear-gradient(rgba(10,8,6,.10), rgba(10,8,6,.28)),
-    url('profissionais.jpg');
+    url('images/generated/b2b-office-20260919.jpg?v=1');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -1672,7 +1672,7 @@ ul, ol {
 .transformacao-card__visual--bordeaux {
   background-image:
     linear-gradient(rgba(8,7,6,.12), rgba(8,7,6,.34)),
-    url('profissionais.jpg');
+    url('images/generated/b2b-office-20260919.jpg?v=1');
   background-size: cover;
   background-position: center 58%;
 }
@@ -1731,7 +1731,7 @@ ul, ol {
 }
 
 .maison-consent__copy { display: grid; gap: .35rem; max-width: 720px; }
-.maison-consent__copy strong { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 500; }
+.maison-consent__copy strong { font-family: 'Bodoni Moda', Didot, serif; font-size: 1.25rem; font-weight: 500; }
 .maison-consent__copy span { color: rgba(244, 239, 229, .78); font-size: .85rem; line-height: 1.5; }
 .maison-consent__copy a { color: #c4a265; font-size: .78rem; text-underline-offset: .2em; }
 .maison-consent__actions { display: flex; flex: 0 0 auto; gap: .65rem; }
@@ -1755,4 +1755,27 @@ ul, ol {
   .maison-consent__actions { width: 100%; }
   .maison-consent button { flex: 1; min-height: 40px; padding: .55rem .65rem; font-size: .66rem; }
   .maison-consent-settings { margin: .6rem 0 0; }
+}
+
+
+/* MAISON JF® · Readable editorial type on small screens · 2026-09-19 */
+@media (max-width: 768px) {
+  .hero__title--primary,
+  .hero__title--secondary,
+  .farol__title,
+  .section-title,
+  h1,h2,h3 {
+    font-weight: 500;
+    font-optical-sizing: auto;
+    font-kerning: normal;
+    letter-spacing: -.015em;
+  }
+  .hero__title--primary {
+    font-size: clamp(2.9rem, 13vw, 4.35rem);
+    line-height: .92;
+  }
+  .hero__title--secondary {
+    font-size: clamp(1.9rem, 8vw, 2.75rem);
+    line-height: 1;
+  }
 }
