@@ -38,7 +38,7 @@ export function composeQuestionSession({
   const packB=buildPack('B');
 
   return {
-    engineVersion:'question-composer-v1',
+    engineVersion:'question-composer-v2',
     theme,
     seed:String(seed),
     packA,
@@ -48,7 +48,7 @@ export function composeQuestionSession({
 
   function buildPack(label){
     return packTemplate.map(slot=>{
-      const candidates=valid.filter(card=>
+      const eligible=valid.filter(card=>
         !used.has(card.id) &&
         card.stage===slot.stage &&
         card.intensity>=slot.minIntensity &&
@@ -56,9 +56,11 @@ export function composeQuestionSession({
         !hasConflict(card,used,valid) &&
         (!card.similarityGroup||!signatureGroups.has(card.similarityGroup))
       );
-      if(!candidates.length){
+      if(!eligible.length){
         throw new Error('insufficient_candidates_for_'+label+'_'+slot.position+'_'+slot.stage);
       }
+      const unseenEligible=eligible.filter(card=>!seen.has(card.id));
+      const candidates=unseenEligible.length ? unseenEligible : eligible;
       const picked=weightedPick(candidates,rng,cardWeight);
       used.add(picked.id);
       if(picked.similarityGroup)signatureGroups.add(picked.similarityGroup);
