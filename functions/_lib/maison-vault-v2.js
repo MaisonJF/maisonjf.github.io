@@ -158,4 +158,145 @@ export async function upsertContentNeed(db,need){
   return id;
 }
 
+
+export async function recordExperienceSignal(db,{
+  product,eventType,contentType=null,contentId=null,buyerKey=null,territory=null,
+  metadata={},signalKey=null
+}={}){
+  if(!product||!eventType)throw new Error('experience_signal_fields_required');
+  const key=signalKey||[product,eventType,contentType||'',contentId||'',buyerKey||'',territory||''].join('|');
+  const signalId='sig_'+(await digestHex(key)).slice(0,40);
+  const result=await db.prepare(
+    `INSERT OR IGNORE INTO vault_experience_signals
+     (signal_id,product,event_type,content_type,content_id,buyer_key,territory,metadata_json)
+     VALUES(?1,?2,?3,?4,?5,?6,?7,?8)`
+  ).bind(
+    signalId,product,eventType,contentType,contentId,buyerKey,territory,
+    JSON.stringify(metadata||{})
+  ).run();
+  return {signalId,inserted:Number(result?.meta?.changes||0)>0};
+}
+
+export async function recordQuestionSessionServedV2(db,{gameSessionId,buyerKey,theme,questionIds=[]}={}){
+  if(!gameSessionId||!buyerKey||!theme)throw new Error('question_session_signal_fields_required');
+  const unique=[...new Set((questionIds||[]).filter(Boolean))];
+  await recordExperienceSignal(db,{
+    product:'para_de_ignorar',
+    eventType:'served',
+    contentType:'session',
+    contentId:gameSessionId,
+    buyerKey,
+    territory:theme,
+    signalKey:['pdi','served','session',gameSessionId].join('|')
+  });
+  for(const questionId of unique){
+    const signal=await recordExperienceSignal(db,{
+      product:'para_de_ignorar',
+      eventType:'served',
+      contentType:'question',
+      contentId:questionId,
+      buyerKey,
+      territory:theme,
+      signalKey:['pdi','served',gameSessionId,questionId].join('|')
+    });
+    if(signal.inserted){
+      await db.prepare(
+        `INSERT INTO vault_question_metrics(question_id,shown_count)
+         VALUES(?1,1)
+         ON CONFLICT(question_id) DO UPDATE SET
+           shown_count=shown_count+1,
+           updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now')`
+      ).bind(questionId).run();
+    }
+  }
+}
+
+export async function recordQuestionInteractionV2(db,{
+  gameSessionId,buyerKey,theme,questionId,eventType
+}={}){
+  if(!['advanced','passed','shared'].includes(eventType))throw new Error('unsupported_question_event');
+  if(!gameSessionId||!buyerKey||!theme||!questionId)throw new Error('question_event_fields_required');
+  const signal=await recordExperienceSignal(db,{
+    product:'para_de_ignorar',
+    eventType,
+    contentType:'question',
+    contentId:questionId,
+    buyerKey,
+    territory:theme,
+    signalKey:['pdi',eventType,gameSessionId,questionId].join('|')
+  });
+  if(!signal.inserted)return false;
+  const column={advanced:'advanced_count',passed:'passed_count',shared:'shared_count'}[eventType];
+  await db.prepare(
+    `INSERT INTO vault_question_metrics(question_id,${column})
+     VALUES(?1,1)
+     ON CONFLICT(question_id) DO UPDATE SET
+       ${column}=${column}+1,
+       updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now')`
+  ).bind(questionId).run();
+  return true;
+}
+
+export async function markQuestionSessionCompletedV2(db,{gameSessionId,buyerKey,theme}={}){
+  if(!gameSessionId||!buyerKey||!theme)throw new Error('question_complete_fields_required');
+  const signal=await recordExperienceSignal(db,{
+    product:'para_de_ignorar',
+    eventType:'completed',
+    contentType:'session',
+    contentId:gameSessionId,
+    buyerKey,
+    territory:theme,
+    signalKey:['pdi','completed','session',gameSessionId].join('|')
+  });
+  await db.prepare(
+    `UPDATE vault_game_sessions
+        SET status='completed',completed_at=coalesce(completed_at,strftime('%Y-%m-%dT%H:%M:%fZ','now'))
+      WHERE game_session_id=?1`
+  ).bind(gameSessionId).run();
+  if(!signal.inserted)return false;
+  const rows=await db.prepare(
+    `SELECT DISTINCT question_id FROM vault_game_session_cards WHERE game_session_id=?1`
+  ).bind(gameSessionId).all();
+  for(const row of (rows.results||[])){
+    await db.prepare(
+      `INSERT INTO vault_question_metrics(question_id,completed_session_count)
+       VALUES(?1,1)
+       ON CONFLICT(question_id) DO UPDATE SET
+         completed_session_count=completed_session_count+1,
+         updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now')`
+    ).bind(row.question_id).run();
+  }
+  return true;
+}
+
+export async function recordOracleSessionReopenedV2(db,{oracleSessionId,buyerKey,territory}={}){
+  if(!oracleSessionId||!buyerKey||!territory)throw new Error('oracle_reopen_fields_required');
+  const signal=await recordExperienceSignal(db,{
+    product:'oracle',
+    eventType:'reopened',
+    contentType:'session',
+    contentId:oracleSessionId,
+    buyerKey,
+    territory,
+    signalKey:['oracle','reopened',oracleSessionId,new Date().toISOString().slice(0,10)].join('|')
+  });
+  if(!signal.inserted)return false;
+  await db.prepare(
+    `UPDATE vault_oracle_block_metrics
+        SET reopened_count=reopened_count+1,
+            updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now')
+      WHERE block_id IN (
+        SELECT block_id FROM vault_oracle_session_blocks WHERE oracle_session_id=?1
+      )`
+  ).bind(oracleSessionId).run();
+  return true;
+}
+
+async function digestHex(value){
+  const bytes=new Uint8Array(await crypto.subtle.digest(
+    'SHA-256',new TextEncoder().encode(String(value))
+  ));
+  return [...bytes].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
 function parseJson(value,fallback){try{return JSON.parse(value)}catch{return fallback}}
