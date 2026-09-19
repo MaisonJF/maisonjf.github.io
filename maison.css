@@ -1505,3 +1505,25 @@ h1,h2,h3,blockquote,.questions a,.product-price,.price{
     object-position:76% top!important;
   }
 }
+
+
+/* MAISON JF® · lighthouse no-cut final geometry · 2026-09-19 */
+@media(min-width:701px){
+  .home-page--final #profissionais>figure.b2b-lighthouse{
+    aspect-ratio:16 / 7.2!important;
+    min-height:0!important;
+  }
+  .home-page--final #profissionais>figure.b2b-lighthouse img{
+    object-fit:cover!important;
+    object-position:right top!important;
+  }
+}
+@media(max-width:700px){
+  .home-page--final #profissionais>figure.b2b-lighthouse{
+    aspect-ratio:4 / 3!important;
+  }
+  .home-page--final #profissionais>figure.b2b-lighthouse img{
+    object-fit:cover!important;
+    object-position:72% top!important;
+  }
+}
