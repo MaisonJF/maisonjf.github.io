@@ -1,5 +1,5 @@
 const PRODUCTS={
-  relacoes:{name:'PÁRA DE IGNORAR! · Relações',currency:'EUR',amount:599}
+  relacoes:{name:'PÁRA DE IGNORAR! · Relações',currency:'EUR',amount:500}
 };
 
 export async function onRequestGet({ request, env }) {
