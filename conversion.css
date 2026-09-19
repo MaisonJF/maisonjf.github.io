@@ -234,3 +234,21 @@
     transition: none;
   }
 }
+
+
+/* MAISON JF® · APPLE + KISS compatibility · 2026-09-19 */
+.conversion-float,
+.conversion-bar__link,
+.conversion-nudge{
+  border-radius:999px;
+}
+.conversion-nudge{
+  border-radius:20px;
+}
+.conversion-trust{
+  background:rgba(10,10,10,.88);
+  border-color:rgba(255,255,255,.09);
+}
+.conversion-trust__item::before{
+  color:#c7aa73;
+}
