@@ -962,3 +962,82 @@
   }
   .maison-beacon__copy h2{font-size:clamp(40px,12vw,58px)}
 }
+
+
+/* MAISON JF® · Final mobile readability + navigation pass · 2026-09-19 */
+h1,h2,h3,blockquote,.questions a,.product-price,.price{
+  font-optical-sizing:auto;
+  font-kerning:normal;
+  text-rendering:optimizeLegibility;
+}
+@media(max-width:700px){
+  .site-header{
+    padding:17px 14px 14px;
+    gap:12px;
+  }
+  .site-header .brand{
+    font-size:14px;
+    letter-spacing:.18em;
+  }
+  .site-header nav{
+    display:grid;
+    grid-template-columns:repeat(5,max-content);
+    width:100%;
+    max-width:100%;
+    justify-content:space-between;
+    gap:0;
+    overflow:visible;
+    white-space:nowrap;
+    padding:0;
+  }
+  .site-header nav a{
+    font-size:8.5px;
+    line-height:1.15;
+    letter-spacing:.075em;
+  }
+
+  .home-page--final .hero__headline,
+  .hero h1{
+    font-weight:500;
+    letter-spacing:-.022em;
+    line-height:.90;
+    text-wrap:balance;
+  }
+  .home-page--final .hero__headline{
+    font-size:clamp(49px,14vw,64px);
+    max-width:100%;
+  }
+  .home-page--final .home-section-head h2,
+  .intro h2,.discovery h2,.editorial h2,
+  .home-feature__copy h2,
+  .manifesto blockquote,
+  .door h3,
+  .product-hero h1,
+  .catalogue h1,
+  .ebooks h1{
+    font-weight:500;
+    letter-spacing:-.018em;
+  }
+  .home-page--final .home-section-head h2{
+    font-size:clamp(44px,12vw,60px);
+    line-height:.98;
+  }
+  .door h3{
+    line-height:1.03;
+  }
+  .home-page--final #profissionais .b2b-lighthouse blockquote,
+  .pro-signature__copy blockquote{
+    font-weight:500;
+    letter-spacing:-.015em;
+    line-height:1.02;
+  }
+}
+@media(max-width:390px){
+  .site-header nav a{
+    font-size:8px;
+    letter-spacing:.055em;
+  }
+  .home-page--final .hero__headline{
+    font-size:clamp(46px,13.6vw,58px);
+  }
+}
