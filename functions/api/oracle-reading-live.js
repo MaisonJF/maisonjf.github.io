@@ -5,6 +5,16 @@ import { ORACLE_FAMILIA_READINGS } from '../_lib/oracle-familia.js';
 import { ORACLE_ESCOLHAS_READINGS } from '../_lib/oracle-escolhas.js';
 import { ORACLE_PADROES_READINGS } from '../_lib/oracle-padroes.js';
 import { ORACLE_TERRITORIES, buildTerritoryReadings } from '../_lib/oracle-territories.js';
+import { composeOracleReading } from '../_lib/oracle-composer.js';
+import { requireMaisonVault, pseudonymousBuyerKey } from '../_lib/maison-vault.js';
+import {
+  vaultExperienceEngineReady,
+  listActiveOracleBlocks,
+  listSeenOracleBlockIds,
+  findOracleSessionByStripe,
+  createOracleSession,
+  readOracleSession
+} from '../_lib/maison-vault-v2.js';
 
 const AUTHORED_READINGS={
   amor:ORACLE_AMOR_READINGS,
@@ -60,8 +70,20 @@ export async function onRequestGet({ request, env }) {
       session.currency === 'eur';
 
     if (!valid) return json({ error:'Esta sessão não dá acesso a esta abertura.' },403);
-    if (!readings.length) return json({ error:'O Oráculo ficou temporariamente em silêncio.' },503);
 
+    const composed=await tryComposedReading({env,session,theme}).catch(()=>null);
+    if(composed?.reading?.text){
+      return json({
+        paid:true,
+        theme,
+        session_id:session.id,
+        reading:composed.reading,
+        amount_total:200,
+        currency:'eur'
+      });
+    }
+
+    if (!readings.length) return json({ error:'O Oráculo ficou temporariamente em silêncio.' },503);
     const index = await readingIndex(theme, sessionId, readings.length);
     const selected = readings[index];
 
@@ -76,6 +98,41 @@ export async function onRequestGet({ request, env }) {
   } catch {
     return json({ error:'Não foi possível abrir esta leitura.' },500);
   }
+}
+
+async function tryComposedReading({env,session,theme}){
+  const db=requireMaisonVault(env);
+  if(!await vaultExperienceEngineReady(db))return null;
+
+  const existing=await findOracleSessionByStripe(db,session.id);
+  if(existing){
+    if(existing.territory!==theme)return null;
+    return await readOracleSession(db,existing.oracle_session_id);
+  }
+
+  const email=String(session.customer_details?.email||session.customer_email||'');
+  const buyerKey=await pseudonymousBuyerKey({env,email,stripeSessionId:session.id});
+  const [blocks,seenIds]=await Promise.all([
+    listActiveOracleBlocks(db,theme),
+    listSeenOracleBlockIds(db,buyerKey,theme)
+  ]);
+  if(blocks.length<5)return null;
+
+  const seed=await stableSeed('maison-jf-oracle-v3|'+theme+'|'+session.id);
+  const composed=composeOracleReading({territory:theme,seed,blocks,seenIds});
+  const oracleSessionId='orc_'+crypto.randomUUID().replace(/-/g,'');
+  await createOracleSession(db,{
+    oracleSessionId,
+    stripeSessionId:session.id,
+    buyerKey,
+    composed
+  });
+  return await readOracleSession(db,oracleSessionId);
+}
+
+async function stableSeed(input){
+  const digest=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(input)));
+  return [...digest].map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 
 async function readingIndex(theme,sessionId,length) {
