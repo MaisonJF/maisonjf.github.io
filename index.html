@@ -7,7 +7,7 @@
 <meta name="description" content="PÁRA DE IGNORAR. Volta Para Casa. Entra pela Porta que mais se aproxima do que está a apertar agora: Casa, Corpo, Cabeça ou Companhia.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <link rel="canonical" href="https://maison-jf.com/">
-<link rel="preload" as="image" href="./images/maison-jf-hero-hq.jpg?v=20260919-hq1" type="image/jpeg">
+<link rel="preload" as="image" href="./images/maison-jf-hero-hq.jpg" type="image/jpeg">
 <link rel="stylesheet" href="./maison.css?v=20260919-audit1">
 <script src="./analytics.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://maison-jf.com/#organization","name":"MAISON JF®","url":"https://maison-jf.com/","logo":"https://maison-jf.com/maison-jf-mark.svg"},{"@type":"WebSite","@id":"https://maison-jf.com/#website","url":"https://maison-jf.com/","name":"MAISON JF®","publisher":{"@id":"https://maison-jf.com/#organization"},"inLanguage":"pt-PT"}]}</script>
@@ -20,19 +20,20 @@
 <body class="home-page home-page--final">
 <header class="site-header site-header--home">
   <a class="brand" href="./">MAISON JF®</a>
-  <nav aria-label="Principal">
+  <nav id="main-navigation" aria-label="Principal">
     <a href="./farol">O Farol</a>
     <a href="./teste/">Volta Para Casa</a>
     <a href="./produtos/">Produtos</a>
     <a href="./servicos/">Serviços</a>
     <a href="./oraculo/">Oráculo</a>
   </nav>
+  <button class="maison-menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" aria-label="Abrir menu"><span aria-hidden="true"></span></button>
 </header>
 
 <main>
   <section class="hero hero--home hero--final">
     <div class="media-slot media-slot--hero">
-      <img src="./images/maison-jf-hero-hq.jpg?v=20260919-hq1" width="1672" height="941" fetchpriority="high" decoding="async" alt="Homem num refúgio costeiro MAISON JF, à noite, com o Farol sobre o oceano">
+      <img src="./images/maison-jf-hero-hq.jpg" width="1672" height="941" fetchpriority="high" decoding="async" alt="Homem num refúgio costeiro MAISON JF, à noite, com o Farol sobre o oceano">
     </div>
     <div class="hero__copy hero__copy--final">
       <div class="hero__identity"><p class="eyebrow">MAISON JF®</p></div>
@@ -60,19 +61,19 @@
 
   <section class="doors doors--editorial shell" aria-label="As quatro portas da Maison">
     <a class="door door--editorial" href="./portas/casa">
-      <div class="media-slot"><img src="./images/maison-jf-casa-amigos-hq.jpg?v=20260919-hq1" alt="Amigos reunidos num ambiente acolhedor MAISON JF"></div>
+      <div class="media-slot"><img src="./images/maison-jf-casa-amigos-hq.jpg" alt="Amigos reunidos num ambiente acolhedor MAISON JF"></div>
       <div class="door__copy"><span>01 · Casa</span><h3>Quero voltar a gostar de chegar a casa.</h3><b>ENTRAR →</b></div>
     </a>
     <a class="door door--editorial" href="./portas/corpo">
-      <div class="media-slot"><img src="./images/maison-jf-corpo-homem-hq.jpg?v=20260919-hq1" alt="Homem num ritual de pausa e cuidado corporal MAISON JF"></div>
+      <div class="media-slot"><img src="./images/maison-jf-corpo-homem-hq.jpg" alt="Homem num ritual de pausa e cuidado corporal MAISON JF"></div>
       <div class="door__copy"><span>02 · Corpo</span><h3>O meu corpo está a pedir que eu pare.</h3><b>ENTRAR →</b></div>
     </a>
     <a class="door door--editorial" href="./portas/cabeca">
-      <div class="media-slot"><img src="./images/cabeca-mulher-q94.jpg?v=20260919-final" alt="Mulher num momento silencioso de reflexão e clareza junto ao oceano" loading="lazy" decoding="async"></div>
+      <div class="media-slot"><img src="./images/cabeca-mulher-q94.jpg" alt="Mulher num momento silencioso de reflexão e clareza junto ao oceano" loading="lazy" decoding="async"></div>
       <div class="door__copy"><span>03 · Cabeça</span><h3>Preciso de perceber o que fazer com isto.</h3><b>ENTRAR →</b></div>
     </a>
     <a class="door door--editorial" href="./portas/companhia">
-      <div class="media-slot"><img src="./images/maison-jf-companhia-hq.jpg?v=20260919-hq1" alt="Dois cocktails num ambiente nocturno preparado para partilhar tempo"></div>
+      <div class="media-slot"><img src="./images/maison-jf-companhia-hq.jpg" alt="Dois cocktails num ambiente nocturno preparado para partilhar tempo"></div>
       <div class="door__copy"><span>04 · Companhia</span><h3>Há coisas que pesam menos a dois.</h3><b>ENTRAR →</b></div>
     </a>
   </section>
@@ -90,7 +91,7 @@
 
   <section class="home-feature home-feature--professionals shell" id="profissionais">
     <div class="home-feature__media">
-      <img src="./images/maison-jf-b2b-office-hq.jpg?v=20260919-hq1" alt="Escritório contemporâneo e editorial MAISON JF para profissionais" loading="lazy" decoding="async">
+      <img src="./images/maison-jf-b2b-office-hq.jpg" alt="Escritório contemporâneo e editorial MAISON JF para profissionais" loading="lazy" decoding="async">
     </div>
     <div class="home-feature__copy">
       <p class="eyebrow">Profissionais · B2B</p>
@@ -102,7 +103,7 @@
       </div>
     </div>
     <figure class="b2b-lighthouse">
-      <img src="./images/maison-jf-farol-nocturno-hq.jpg?v=20260919-hq1" alt="Farol nocturno MAISON JF sobre o oceano" loading="lazy" decoding="async">
+      <img src="./images/maison-jf-farol-nocturno-hq.jpg" alt="Farol nocturno MAISON JF sobre o oceano" loading="lazy" decoding="async">
       <figcaption class="b2b-lighthouse__signature">
         <p class="b2b-lighthouse__quote">Mais do que produtos, levamos intenção.</p>
         <p class="b2b-lighthouse__sub">Juntos, criamos experiências que ficam.</p>
@@ -119,5 +120,21 @@
     <p class="home-footer__legal">Marca registada na União Europeia · Certificação PME pelo IAPMEI.</p>
   </div>
 </footer>
+<script>
+(() => {
+  const header = document.querySelector('.site-header');
+  const toggle = document.querySelector('.maison-menu-toggle');
+  const menu = document.querySelector('#main-navigation');
+  if (!header || !toggle || !menu) return;
+  const close = () => { header.classList.remove('site-header--menu-open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Abrir menu'); };
+  toggle.addEventListener('click', () => {
+    const open = header.classList.toggle('site-header--menu-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  });
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
+  window.addEventListener('resize', () => { if (window.innerWidth > 700) close(); });
+})();
+</script>
 </body>
 </html>
