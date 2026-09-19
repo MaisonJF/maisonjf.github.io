@@ -37,7 +37,7 @@ window.MAISON_PRODUCTS=[
 {
  slug:'escalda-pes',name:'Escalda-Pés',size:'150 g',category:'Corpo',price:5,currency:'EUR',
  description:'Um gesto simples para parar, aquecer e criar um momento para os pés.',
- media:[{role:'hero',src:'../images/root/corpo-escalda-pes.webp?v=20260919-fix1',alt:'Escalda-Pés MAISON JF numa pausa de cuidado corporal',aspect:'portrait',editorial:true}],
+ media:[],
  ritual:{title:'Não compliques a pausa.',text:'Água morna, aroma e alguns minutos em que ninguém te pede nada.'},
  cta:'Quero criar este momento'
 }
