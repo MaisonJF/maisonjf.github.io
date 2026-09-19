@@ -364,3 +364,21 @@ body[data-yoichi-page="index.html"] .btn { letter-spacing:.035em; }
 @media (min-width:980px){body[data-yoichi-page="index.html"] #hero .hero__content{padding-left:clamp(3rem,7vw,8rem);padding-right:clamp(3rem,7vw,8rem);padding-bottom:clamp(5rem,9vh,8rem)}body[data-yoichi-page="index.html"] #transformacoes .transformacoes__grid{gap:clamp(1rem,1.65vw,1.75rem)}body[data-yoichi-page="index.html"] #transformacoes .transformacao-card:nth-child(even){margin-top:clamp(2.75rem,5vw,5.5rem)}}
 @media (max-width:979px){body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__visual{min-height:280px}}
 @media (max-width:768px){body[data-yoichi-page="index.html"] #hero{min-height:92svh}body[data-yoichi-page="index.html"] #transformacoes .transformacoes__grid{gap:1.4rem}body[data-yoichi-page="index.html"] #transformacoes .transformacao-card__visual{aspect-ratio:4/4.6;min-height:0}}
+
+
+/* MAISON JF® · APPLE + KISS final mobile pass · 2026-09-19 */
+@media(max-width:768px){
+  .offer-card,
+  .service-card,
+  .catalogue-card,
+  .farol__option{
+    border-radius:16px!important;
+  }
+  .detail-actions .btn,
+  .offer-card .btn,
+  .service-card .btn,
+  .catalogue-card .btn,
+  .profissionais__inner .btn{
+    border-radius:999px!important;
+  }
+}
