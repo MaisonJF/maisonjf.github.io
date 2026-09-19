@@ -3,7 +3,7 @@ PÁRA DE IGNORAR! — internal product contract
 The public promise is intentionally smaller than the engine.
 */
 export const PARA_DE_IGNORAR_POLICY={
-  version:'2026-09-18-v1',
+  version:'2026-09-19-v2',
   format:'digital-only',
   session:{
     cards:28,
@@ -26,20 +26,21 @@ export const PARA_DE_IGNORAR_POLICY={
   },
   growth:{
     repertoire:'unbounded',
+    themes:'unbounded',
     oceansCanPropose:true,
+    oceansCanProposeThemes:true,
     automaticPaidPublication:false,
+    automaticThemeActivation:false,
     humanEditorialApprovalRequired:true
   },
-  themes:[
-    {slug:'relacoes',label:'Relações',status:'launch'},
-    {slug:'dinheiro',label:'Dinheiro',status:'future'},
-    {slug:'sonhos',label:'Sonhos',status:'future'},
-    {slug:'instrumentalizacao-mental',label:'Instrumentalização Mental',status:'future'},
-    {slug:'amor',label:'Amor',status:'future'},
-    {slug:'sexo',label:'Sexo',status:'future'},
-    {slug:'amizade',label:'Amizade',status:'future'},
-    {slug:'carreira',label:'Carreira',status:'future'},
-    {slug:'vida-adulta',label:'Vida Adulta',status:'future'}
+  themeDesign:{
+    principle:'Aquilo que sempre quiseste saber. Sem saber como perguntar.',
+    source:'maison_oracle_farol_vpc_oceans',
+    publicCatalogue:'curated_not_exhaustive',
+    numericCap:null
+  },
+  launchThemes:[
+    {slug:'relacoes',label:'Relações',status:'launch'}
   ]
 };
 
