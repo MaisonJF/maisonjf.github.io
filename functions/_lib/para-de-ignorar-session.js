@@ -8,7 +8,8 @@ import {
   createGameSession,
   readGameSession
 } from './maison-vault.js';
-import { vaultExperienceEngineReady, recordQuestionSessionServedV2 } from './maison-vault-v2.js';
+import { vaultExperienceEngineReady, recordQuestionSessionServedV2, upsertContentNeed } from './maison-vault-v2.js';
+import { detectQuestionContentNeeds } from './content-gap-detector.js';
 import { listActivePaidQuestionsV2 } from './question-vault-v2.js';
 
 /*
@@ -37,6 +38,11 @@ export async function getOrCreateQuestionSession({env,stripeSession,theme}={}){
     useV2?listActivePaidQuestionsV2(db,theme):listActivePaidQuestions(db,theme),
     listSeenQuestionIds(db,buyerKey,theme)
   ]);
+
+  if(useV2){
+    const needs=detectQuestionContentNeeds({theme,questions});
+    for(const need of needs)await upsertContentNeed(db,need);
+  }
 
   const seed=await stableSeed('pdi-v2|'+theme+'|'+stripeSession.id);
   const composed=composeQuestionSession({
