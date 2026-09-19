@@ -2,7 +2,7 @@
   "version":"2026-09-18",
   "visibility":"internal-site",
   "note":"Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at":"2026-09-19T02:09:33+01:00",
+  "last_enriched_at":"2026-09-19T08:12:55+01:00",
   "candidates":[
     {
       "painLanguage":"Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
@@ -20,6 +20,22 @@
       "status":"internal_candidate",
       "firstSeenAt":"2026-09-19T02:09:33+01:00",
       "lastSeenAt":"2026-09-19T02:09:33+01:00"
+    },
+    {
+      "painLanguage":"Há perdas em que nada termina de forma limpa: a pessoa, o vínculo ou o papel continua presente de alguma maneira, mas já não está disponível como antes, deixando quem fica preso entre esperança, ausência e falta de certeza.",
+      "territory":"perda-ambigua-sem-fecho-claro",
+      "intent":"reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
+      "commercialAdjacency":"Oráculo Luto & Perda, Separação & Fim e transições; experiências reflexivas sobre ausência, mudança de vínculo e reconstrução de significado, sem substituir apoio clínico",
+      "evidence":[
+        "American Psychological Association (2024): descreve a perda ambígua como particularmente difícil quando alguém permanece fisicamente presente mas psicologicamente/cognitivamente ausente, salientando ausência de resolução, ambivalência, culpa e raiva — https://www.apa.org/monitor/2024/10/alzheimers-dementia-grief",
+        "Psychological Trauma (2025; PMID 39347732): estudo mixed-methods sobre perda ambígua encontrou incerteza e ambivalência como temas centrais e associação entre respostas à perda ambígua e sintomas de stress pós-traumático — https://pubmed.ncbi.nlm.nih.gov/39347732/"
+      ],
+      "questionPotential":true,
+      "questionThemeCandidates":["perda sem resolução","presença e ausência ao mesmo tempo","espera por certeza","vínculo que mudou sem desaparecer","continuar sem fecho"],
+      "oraclePotential":true,
+      "status":"internal_candidate",
+      "firstSeenAt":"2026-09-19T08:12:55+01:00",
+      "lastSeenAt":"2026-09-19T08:12:55+01:00"
     }
   ]
 }
