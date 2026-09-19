@@ -2,7 +2,7 @@
   "version":"2026-09-18",
   "visibility":"internal-site",
   "note":"Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at":"2026-09-19T14:12:38+01:00",
+  "last_enriched_at":"2026-09-19T20:13:36+01:00",
   "candidates":[
     {
       "painLanguage":"Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
@@ -42,6 +42,19 @@
       "status":"internal_candidate",
       "firstSeenAt":"2026-09-19T14:12:38+01:00",
       "lastSeenAt":"2026-09-19T14:12:38+01:00"
+    },
+    {
+      "painLanguage":"Cuidar de alguém pode nascer do amor e, ainda assim, ocupar tanto espaço que descansar, pedir ajuda ou proteger uma parte da própria vida começa a parecer egoísmo, abandono ou falha moral.",
+      "territory":"cuidar-sem-desaparecer-no-papel-de-cuidador",
+      "intent":"reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
+      "commercialAdjacency":"Oráculo Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas para cuidadores informais sobre culpa, agência, partilha de responsabilidade e preservação de identidade, sem aconselhamento clínico ou de cuidados",
+      "evidence":["Stress and Health (systematic review and meta-analysis, 2024): subjective caregiver burden is highly prevalent in family carers; dysfunctional coping was associated with higher burden and active coping with lower burden — https://doi.org/10.1002/smi.3395","BMC Palliative Care (scoping review, 2026): caregiver guilt recurred around perceived inadequacy, difficult care decisions, self-care and competing family responsibilities, with action-oriented and identity-oriented guilt identified as distinct dimensions — https://doi.org/10.1186/s12904-026-02203-z","Geriatrics (2026; PMID 42644998): former dementia caregivers described constrained choice and role engulfment; wellbeing was linked not only to care demands but to whether care felt chosen, bounded, shared and supported — https://pubmed.ncbi.nlm.nih.gov/42644998/"],
+      "questionPotential":true,
+      "questionThemeCandidates":["culpa ao descansar","cuidar e manter identidade","responsabilidade partilhada","limites no cuidado","amor sem autoapagamento","escolha e obrigação no cuidar"],
+      "oraclePotential":true,
+      "status":"internal_candidate",
+      "firstSeenAt":"2026-09-19T20:13:36+01:00",
+      "lastSeenAt":"2026-09-19T20:13:36+01:00"
     }
   ]
 }
