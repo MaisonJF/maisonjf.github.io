@@ -97,8 +97,8 @@ linear-gradient(#090807,#030303)}
       <p class="eyebrow">PÁRA DE IGNORAR! · RELAÇÕES</p>
       <h2>Fica entre vocês.</h2>
       <p>Não guardamos aquilo que dizem.</p>
-      <a class="cta cta--ghost" href="#" id="preview-buy">Comprar Relações</a>
-      <p class="micro">Checkout fechado neste preview</p>
+      <a class="cta cta--ghost" href="#" id="preview-buy" aria-disabled="true">Comprar Relações</a>
+      <p class="micro" id="price-line">Preço ainda não definido</p>
     </div>
   </section>
 </main>
@@ -106,9 +106,43 @@ linear-gradient(#090807,#030303)}
 <div class="preview-chip">Preview interno · venda</div>
 
 <script>
-document.getElementById('preview-buy').addEventListener('click',e=>{
-  e.preventDefault();
-});
+(async()=>{
+  const buy=document.getElementById('preview-buy');
+  const priceLine=document.getElementById('price-line');
+  let available=false;
+
+  try{
+    const response=await fetch('/api/pdi-product-live?theme=relacoes',{cache:'no-store'});
+    const product=await response.json();
+    if(response.ok&&product.available){
+      available=true;
+      priceLine.textContent=product.display_price+' · pagamento único';
+      buy.setAttribute('aria-disabled','false');
+    }
+  }catch{}
+
+  buy.addEventListener('click',async e=>{
+    e.preventDefault();
+    if(!available)return;
+
+    buy.setAttribute('aria-busy','true');
+    const original=buy.textContent;
+    buy.textContent='A abrir…';
+    try{
+      const response=await fetch('/api/create-pdi-checkout-live',{
+        method:'POST',
+        headers:{'content-type':'application/json'},
+        body:JSON.stringify({theme:'relacoes'})
+      });
+      const payload=await response.json().catch(()=>({}));
+      if(!response.ok||!payload.url)throw new Error();
+      location.href=payload.url;
+    }catch{
+      buy.textContent='Tentar novamente';
+      setTimeout(()=>{buy.textContent=original;buy.removeAttribute('aria-busy')},1800);
+    }
+  });
+})();
 </script>
 </body>
 </html>
