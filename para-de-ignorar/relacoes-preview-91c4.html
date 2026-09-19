@@ -18,7 +18,7 @@ linear-gradient(#090807,#030303)}
 .brand,.eyebrow,.micro,.note,.step__n,.preview-chip{font-family:Arial,sans-serif;text-transform:uppercase}
 .brand{font-size:11px;font-weight:600;letter-spacing:.16em;color:#d3ccbf}
 .eyebrow{font-size:10px;letter-spacing:.2em;color:#8c8274}
-.hero{min-height:80svh;display:grid;place-items:center;padding:24px 22px}
+.hero{min-height:calc(100svh - 54px);display:grid;place-items:center;padding:24px 22px}
 .hero__inner{width:min(760px,100%);text-align:center}
 .hero h1{font:400 clamp(52px,11vw,96px)/.93 var(--serif);letter-spacing:-.035em;margin:0;color:#f0eadf}
 .hero .line{display:block}
@@ -42,7 +42,7 @@ linear-gradient(#090807,#030303)}
 @media(max-width:680px){
  .top{padding-inline:16px}
  .top .eyebrow{display:none}
- .hero{padding-inline:16px;min-height:78svh}
+ .hero{padding-inline:16px;min-height:calc(100svh - 54px)}
  .section{padding:86px 16px}
  .steps{grid-template-columns:1fr;gap:34px;margin-top:54px}
 }
@@ -98,7 +98,7 @@ linear-gradient(#090807,#030303)}
       <h2>Fica entre vocês.</h2>
       <p>Não guardamos aquilo que dizem.</p>
       <a class="cta cta--ghost" href="#" id="preview-buy" aria-disabled="true">Comprar Relações</a>
-      <p class="micro" id="price-line">Preço ainda não definido</p>
+      <p class="micro" id="price-line">Disponível em breve</p>
     </div>
   </section>
 </main>
