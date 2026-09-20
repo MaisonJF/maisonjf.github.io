@@ -127,7 +127,7 @@
       button.remove();
       showConsent();
     });
-    const footer = document.querySelector('.footer__bottom, footer');
+    const footer = document.querySelector('.footer__legal') || document.querySelector('.footer__bottom') || document.querySelector('footer');
     (footer || document.body).appendChild(button);
   }
 
