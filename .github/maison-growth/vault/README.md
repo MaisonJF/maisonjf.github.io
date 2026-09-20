@@ -87,6 +87,24 @@ No answer text is requested or stored.
 
 `content-gap-detector.js` detects minimum healthy coverage by role/stage. These values are **floors, never catalogue caps**. The purpose is to tell the Brain/Oceans where depth is missing instead of endlessly generating more of what is already abundant.
 
+## Volta Para Casa · Ocean/Vault question loop
+
+The free Volta Para Casa tests are now consumers of the same intelligence loop without exposing the paid repertoire.
+
+Runtime order:
+
+`Ocean question signals → generated public signal bridge → VPC question engine → approved public_social Vault cards → balanced session → anonymous interaction signals`
+
+Rules:
+
+- Ocean candidates with `questionPotential=true` are mirrored into `functions/_lib/vpc-ocean-signals.generated.js`; CI refuses a stale mirror.
+- The VPC engine also uses the 100 Oracle territories and Maison conversation seeds as safe thematic material, creating many session combinations without publishing private paid bodies.
+- A live D1 question can join a free VPC session only when it is `status='active'`, `exposure='public_social'`, `lifecycle_state='live'` and its `product_fit_json.vpc.test` identifies `attention`, `apego` or `afeto`.
+- Multiple-choice scoring metadata for a public VPC card lives under `product_fit_json.vpc.choices`; paid PÁRA DE IGNORAR! bodies remain under the existing private paid contract and are never reused automatically in free tests.
+- The public browser receives only the composed session, never the full Vault repertoire.
+- If D1 is unavailable or has no eligible VPC cards, the Ocean engine remains usable; if that endpoint fails too, the browser falls back to the curated local question bank.
+- New Ocean signals expand the thematic pool, but they still pass deterministic structural/quality checks. Engagement can influence rotation later; it does not redefine editorial truth.
+
 ## Safety contract
 
 - GitHub stores code/schema, not paid bodies.
