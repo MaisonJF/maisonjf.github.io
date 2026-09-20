@@ -1,4 +1,4 @@
-import { buildPdiThemeSourceSignals } from './pdi-theme-sources.js';
+import { groupExactThemeSignals } from './pdi-theme-sources.js';
 
 const DEFAULT_AMOUNT=500;
 const MINIMUM_LIVE_QUESTIONS=28;
@@ -9,26 +9,27 @@ const launch={
   family:'Relações & Vínculos',
   focus:'uma conversa a dois sobre vínculo, proximidade, diferença, desejo, cuidado e futuro',
   source:'launch',
+  aliases:[],
   amount:DEFAULT_AMOUNT,
   currency:'eur'
 };
 
-const bySlug=new Map([[launch.slug,launch]]);
-for(const signal of buildPdiThemeSourceSignals()){
-  const slug=String(signal.slug||'').trim();
-  if(!slug||bySlug.has(slug))continue;
-  bySlug.set(slug,{
-    slug,
-    label:String(signal.label||slug),
-    family:String(signal.family||'Maison'),
-    focus:String(signal.focus||''),
-    source:String(signal.source||'brain'),
+const themes=[launch];
+for(const group of groupExactThemeSignals()){
+  const evidence=group.evidence?.[0]||{};
+  themes.push({
+    slug:String(group.candidateKey),
+    label:String(group.preferredLabel||group.candidateKey),
+    family:String(evidence.family||'Maison'),
+    focus:String(evidence.focus||''),
+    source:(group.sources||[]).join('+')||'brain',
+    aliases:[...(group.slugs||[])],
     amount:DEFAULT_AMOUNT,
     currency:'eur'
   });
 }
 
-export const PDI_THEME_REGISTRY=Object.freeze([...bySlug.values()]);
+export const PDI_THEME_REGISTRY=Object.freeze(themes);
 export const PDI_MINIMUM_LIVE_QUESTIONS=MINIMUM_LIVE_QUESTIONS;
 
 export function getPdiTheme(slug){
@@ -37,7 +38,7 @@ export function getPdiTheme(slug){
 }
 
 export function listPdiThemes(){
-  return PDI_THEME_REGISTRY.map(x=>({...x}));
+  return PDI_THEME_REGISTRY.map(x=>({...x,aliases:[...(x.aliases||[])]}));
 }
 
 export function pdiThemeRegistryStats(){
