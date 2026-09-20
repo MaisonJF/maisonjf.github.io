@@ -221,12 +221,6 @@
       secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
-    'maison-todo-o-mes.html': {
-      label: 'Escolher a minha opção',
-      message: 'Olá Maison JF. Estou a ver a Maison Todo o Mês e quero ajuda a escolher a opção certa.',
-      secondHref: 'farol.html',
-      secondText: 'Usar o Farol'
-    },
     'editions.html': {
       label: 'Pedir uma edição',
       message: 'Olá Maison JF. Estou a ver as Edições e quero saber o que está disponível.',
