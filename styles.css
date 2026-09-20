@@ -2487,3 +2487,97 @@ textarea,
 .product-digital{
   border-radius:0!important;
 }
+
+
+/* MAISON JF® · MODERN FOOTER · 2026-09-20 */
+.footer.footer--modern{
+  padding:68px 0 34px!important;
+  background:#0a0a0a!important;
+  border-top:1px solid var(--ak-line,rgba(255,255,255,.105))!important;
+}
+.footer--modern .footer__inner{
+  max-width:1240px!important;
+  margin:0 auto!important;
+  padding:0 20px!important;
+}
+.footer--modern .footer__top{
+  display:grid!important;
+  grid-template-columns:1.2fr .9fr .9fr!important;
+  gap:56px 60px!important;
+  margin:0!important;
+}
+.footer--modern .footer__brand{
+  max-width:none!important;
+}
+.footer--modern .footer__logo{
+  margin:0!important;
+  color:#f5f1e9!important;
+  font-family:var(--fonte-editorial)!important;
+  font-size:18px!important;
+  letter-spacing:.16em!important;
+}
+.footer--modern .footer__tagline{
+  margin:24px 0 0!important;
+  max-width:360px!important;
+  color:#d6cec1!important;
+  font-family:var(--fonte-editorial)!important;
+  font-size:28px!important;
+  line-height:1.05!important;
+  font-weight:300!important;
+}
+.footer--modern .footer__column-title{
+  margin:0 0 18px!important;
+  color:var(--ak-accent,#c7aa73)!important;
+  font-size:9px!important;
+  font-weight:700!important;
+  letter-spacing:.2em!important;
+}
+.footer--modern .footer__links{
+  list-style:none!important;
+  margin:0!important;
+  padding:0!important;
+  display:grid!important;
+  gap:11px!important;
+}
+.footer--modern .footer__link{
+  color:rgba(245,241,233,.58)!important;
+  font-size:11px!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+  text-decoration:none!important;
+}
+.footer--modern .footer__link:hover{
+  color:#fff!important;
+}
+.footer--modern .footer__bottom{
+  margin-top:52px!important;
+  padding-top:26px!important;
+  border-top:1px solid var(--ak-line,rgba(255,255,255,.105))!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:18px!important;
+}
+.footer--modern .footer__copyright{
+  margin:0!important;
+  color:#6f6a63!important;
+  font-size:11px!important;
+}
+.footer--modern .maison-consent-settings{
+  margin:0 0 0 auto!important;
+  color:rgba(245,241,233,.48)!important;
+  font-size:11px!important;
+}
+@media(max-width:760px){
+  .footer--modern .footer__top{
+    grid-template-columns:1fr!important;
+    gap:38px!important;
+  }
+  .footer--modern .footer__bottom{
+    align-items:flex-start!important;
+    flex-direction:column!important;
+  }
+  .footer--modern .maison-consent-settings{
+    margin-left:0!important;
+  }
+}
