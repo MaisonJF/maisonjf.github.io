@@ -1,0 +1,394 @@
+{
+  "version": "2026-09-20-v1",
+  "visibility": "internal-editorial",
+  "generatedAt": "2026-09-20T08:14:28+01:00",
+  "source": ".github/maison-growth/oceans/candidates.json",
+  "contract": {
+    "storesPaidBodies": false,
+    "automaticPublication": false,
+    "automaticActivation": false,
+    "humanEditorialApprovalRequired": true,
+    "minimumIndependentEvidenceSources": 2
+  },
+  "summary": {
+    "oceansConsidered": 6,
+    "queueItems": 12,
+    "questionCandidates": 6,
+    "questionThemeHypotheses": 33,
+    "oracleCandidates": 6,
+    "oracleRoleSlots": 42
+  },
+  "items": [
+    {
+      "id": "brain_question_evitamento_financeiro_sob_escassez",
+      "type": "question_candidate",
+      "sourceOceanId": "evitamento-financeiro-sob-escassez",
+      "territory": "evitamento-financeiro-sob-escassez",
+      "intent": "compreender e interromper o ciclo entre sensação de escassez, sobrecarga cognitiva e evitamento de decisões financeiras",
+      "painLanguage": "Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
+      "commercialAdjacency": "Oráculo Dinheiro & Segurança; experiências reflexivas de decisão e clareza financeira sem aconselhamento financeiro personalizado",
+      "evidenceCount": 3,
+      "evidence": [
+        "Journal of Economic Psychology (longitudinal, 2021): financial scarcity predicted later financial avoidance, and avoidance predicted later scarcity — https://doi.org/10.1016/j.joep.2021.102459",
+        "Journal of Economic Psychology (meta-analysis, 2024): across 29 datasets/111,852 respondents, financial scarcity showed a detrimental association with cognitive performance — https://doi.org/10.1016/j.joep.2024.102702",
+        "Frontiers in Psychology (2026): economic insecurity was studied as anticipated vulnerability linked to decision fatigue and lower wellbeing in digitally mediated financial decisions — https://doi.org/10.3389/fpsyg.2026.1858489"
+      ],
+      "questionThemeCandidates": [
+        "evitamento financeiro",
+        "escassez e atenção",
+        "adiamento de decisões",
+        "curto prazo vs futuro",
+        "dinheiro e carga mental"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_oracle_evitamento_financeiro_sob_escassez",
+      "type": "oracle_candidate",
+      "sourceOceanId": "evitamento-financeiro-sob-escassez",
+      "territory": "evitamento-financeiro-sob-escassez",
+      "intent": "compreender e interromper o ciclo entre sensação de escassez, sobrecarga cognitiva e evitamento de decisões financeiras",
+      "painLanguage": "Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
+      "commercialAdjacency": "Oráculo Dinheiro & Segurança; experiências reflexivas de decisão e clareza financeira sem aconselhamento financeiro personalizado",
+      "evidenceCount": 3,
+      "evidence": [
+        "Journal of Economic Psychology (longitudinal, 2021): financial scarcity predicted later financial avoidance, and avoidance predicted later scarcity — https://doi.org/10.1016/j.joep.2021.102459",
+        "Journal of Economic Psychology (meta-analysis, 2024): across 29 datasets/111,852 respondents, financial scarcity showed a detrimental association with cognitive performance — https://doi.org/10.1016/j.joep.2024.102702",
+        "Frontiers in Psychology (2026): economic insecurity was studied as anticipated vulnerability linked to decision fatigue and lower wellbeing in digitally mediated financial decisions — https://doi.org/10.3389/fpsyg.2026.1858489"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_perda_ambigua_sem_fecho_claro",
+      "type": "question_candidate",
+      "sourceOceanId": "perda-ambigua-sem-fecho-claro",
+      "territory": "perda-ambigua-sem-fecho-claro",
+      "intent": "reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
+      "painLanguage": "Há perdas em que nada termina de forma limpa: a pessoa, o vínculo ou o papel continua presente de alguma maneira, mas já não está disponível como antes, deixando quem fica preso entre esperança, ausência e falta de certeza.",
+      "commercialAdjacency": "Oráculo Luto & Perda, Separação & Fim e transições; experiências reflexivas sobre ausência, mudança de vínculo e reconstrução de significado, sem substituir apoio clínico",
+      "evidenceCount": 2,
+      "evidence": [
+        "American Psychological Association (2024): descreve a perda ambígua como particularmente difícil quando alguém permanece fisicamente presente mas psicologicamente/cognitivamente ausente, salientando ausência de resolução, ambivalência, culpa e raiva — https://www.apa.org/monitor/2024/10/alzheimers-dementia-grief",
+        "Psychological Trauma (2025; PMID 39347732): estudo mixed-methods sobre perda ambígua encontrou incerteza e ambivalência como temas centrais e associação entre respostas à perda ambígua e sintomas de stress pós-traumático — https://pubmed.ncbi.nlm.nih.gov/39347732/"
+      ],
+      "questionThemeCandidates": [
+        "perda sem resolução",
+        "presença e ausência ao mesmo tempo",
+        "espera por certeza",
+        "vínculo que mudou sem desaparecer",
+        "continuar sem fecho"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_oracle_perda_ambigua_sem_fecho_claro",
+      "type": "oracle_candidate",
+      "sourceOceanId": "perda-ambigua-sem-fecho-claro",
+      "territory": "perda-ambigua-sem-fecho-claro",
+      "intent": "reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
+      "painLanguage": "Há perdas em que nada termina de forma limpa: a pessoa, o vínculo ou o papel continua presente de alguma maneira, mas já não está disponível como antes, deixando quem fica preso entre esperança, ausência e falta de certeza.",
+      "commercialAdjacency": "Oráculo Luto & Perda, Separação & Fim e transições; experiências reflexivas sobre ausência, mudança de vínculo e reconstrução de significado, sem substituir apoio clínico",
+      "evidenceCount": 2,
+      "evidence": [
+        "American Psychological Association (2024): descreve a perda ambígua como particularmente difícil quando alguém permanece fisicamente presente mas psicologicamente/cognitivamente ausente, salientando ausência de resolução, ambivalência, culpa e raiva — https://www.apa.org/monitor/2024/10/alzheimers-dementia-grief",
+        "Psychological Trauma (2025; PMID 39347732): estudo mixed-methods sobre perda ambígua encontrou incerteza e ambivalência como temas centrais e associação entre respostas à perda ambígua e sintomas de stress pós-traumático — https://pubmed.ncbi.nlm.nih.gov/39347732/"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_solidao_com_contacto_sem_conexao_de_qualidade",
+      "type": "question_candidate",
+      "sourceOceanId": "solidao-com-contacto-sem-conexao-de-qualidade",
+      "territory": "solidao-com-contacto-sem-conexao-de-qualidade",
+      "intent": "distinguir presença social de conexão sentida e reconhecer quando o problema não é falta de contacto, mas falta de qualidade, apoio ou reciprocidade nos vínculos",
+      "painLanguage": "É possível falar com pessoas, trocar mensagens e até ter relações por perto e, ainda assim, sentir que falta ligação real: quantidade de contacto não garante apoio, intimidade nem a sensação de ser visto.",
+      "commercialAdjacency": "Oráculo Companhia & Solidão e Relações; experiências reflexivas sobre pertença, reciprocidade, intimidade e qualidade dos vínculos, sem substituir apoio clínico",
+      "evidenceCount": 2,
+      "evidence": [
+        "WHO Commission on Social Connection (2025): define solidão como a experiência dolorosa de uma diferença entre as conexões sociais existentes e as desejadas/necessárias, distinguindo-a de isolamento social objectivo — https://www.who.int/news-room/questions-and-answers/item/social-connection",
+        "OECD, Social Connections and Loneliness in OECD Countries (2025): frequência de interacções e qualidade percebida das relações têm correlações apenas fracas; contacto frequente não garante relações de alta qualidade ou apoio — https://doi.org/10.1787/6df2d6a0-en"
+      ],
+      "questionThemeCandidates": [
+        "companhia sem conexão",
+        "qualidade vs quantidade de contacto",
+        "sentir-se visto",
+        "apoio e reciprocidade",
+        "intimidade emocional"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_oracle_solidao_com_contacto_sem_conexao_de_qualidade",
+      "type": "oracle_candidate",
+      "sourceOceanId": "solidao-com-contacto-sem-conexao-de-qualidade",
+      "territory": "solidao-com-contacto-sem-conexao-de-qualidade",
+      "intent": "distinguir presença social de conexão sentida e reconhecer quando o problema não é falta de contacto, mas falta de qualidade, apoio ou reciprocidade nos vínculos",
+      "painLanguage": "É possível falar com pessoas, trocar mensagens e até ter relações por perto e, ainda assim, sentir que falta ligação real: quantidade de contacto não garante apoio, intimidade nem a sensação de ser visto.",
+      "commercialAdjacency": "Oráculo Companhia & Solidão e Relações; experiências reflexivas sobre pertença, reciprocidade, intimidade e qualidade dos vínculos, sem substituir apoio clínico",
+      "evidenceCount": 2,
+      "evidence": [
+        "WHO Commission on Social Connection (2025): define solidão como a experiência dolorosa de uma diferença entre as conexões sociais existentes e as desejadas/necessárias, distinguindo-a de isolamento social objectivo — https://www.who.int/news-room/questions-and-answers/item/social-connection",
+        "OECD, Social Connections and Loneliness in OECD Countries (2025): frequência de interacções e qualidade percebida das relações têm correlações apenas fracas; contacto frequente não garante relações de alta qualidade ou apoio — https://doi.org/10.1787/6df2d6a0-en"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_cuidar_sem_desaparecer_no_papel_de_cuidador",
+      "type": "question_candidate",
+      "sourceOceanId": "cuidar-sem-desaparecer-no-papel-de-cuidador",
+      "territory": "cuidar-sem-desaparecer-no-papel-de-cuidador",
+      "intent": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
+      "painLanguage": "Cuidar de alguém pode nascer do amor e, ainda assim, ocupar tanto espaço que descansar, pedir ajuda ou proteger uma parte da própria vida começa a parecer egoísmo, abandono ou falha moral.",
+      "commercialAdjacency": "Oráculo Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas para cuidadores informais sobre culpa, agência, partilha de responsabilidade e preservação de identidade, sem aconselhamento clínico ou de cuidados",
+      "evidenceCount": 3,
+      "evidence": [
+        "Stress and Health (systematic review and meta-analysis, 2024): subjective caregiver burden is highly prevalent in family carers; dysfunctional coping was associated with higher burden and active coping with lower burden — https://doi.org/10.1002/smi.3395",
+        "BMC Palliative Care (scoping review, 2026): caregiver guilt recurred around perceived inadequacy, difficult care decisions, self-care and competing family responsibilities, with action-oriented and identity-oriented guilt identified as distinct dimensions — https://doi.org/10.1186/s12904-026-02203-z",
+        "Geriatrics (2026; PMID 42644998): former dementia caregivers described constrained choice and role engulfment; wellbeing was linked not only to care demands but to whether care felt chosen, bounded, shared and supported — https://pubmed.ncbi.nlm.nih.gov/42644998/"
+      ],
+      "questionThemeCandidates": [
+        "culpa ao descansar",
+        "cuidar e manter identidade",
+        "responsabilidade partilhada",
+        "limites no cuidado",
+        "amor sem autoapagamento",
+        "escolha e obrigação no cuidar"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_oracle_cuidar_sem_desaparecer_no_papel_de_cuidador",
+      "type": "oracle_candidate",
+      "sourceOceanId": "cuidar-sem-desaparecer-no-papel-de-cuidador",
+      "territory": "cuidar-sem-desaparecer-no-papel-de-cuidador",
+      "intent": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
+      "painLanguage": "Cuidar de alguém pode nascer do amor e, ainda assim, ocupar tanto espaço que descansar, pedir ajuda ou proteger uma parte da própria vida começa a parecer egoísmo, abandono ou falha moral.",
+      "commercialAdjacency": "Oráculo Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas para cuidadores informais sobre culpa, agência, partilha de responsabilidade e preservação de identidade, sem aconselhamento clínico ou de cuidados",
+      "evidenceCount": 3,
+      "evidence": [
+        "Stress and Health (systematic review and meta-analysis, 2024): subjective caregiver burden is highly prevalent in family carers; dysfunctional coping was associated with higher burden and active coping with lower burden — https://doi.org/10.1002/smi.3395",
+        "BMC Palliative Care (scoping review, 2026): caregiver guilt recurred around perceived inadequacy, difficult care decisions, self-care and competing family responsibilities, with action-oriented and identity-oriented guilt identified as distinct dimensions — https://doi.org/10.1186/s12904-026-02203-z",
+        "Geriatrics (2026; PMID 42644998): former dementia caregivers described constrained choice and role engulfment; wellbeing was linked not only to care demands but to whether care felt chosen, bounded, shared and supported — https://pubmed.ncbi.nlm.nih.gov/42644998/"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_sobrecarga_de_escolha_quando_mais_opcoes_paralisam",
+      "type": "question_candidate",
+      "sourceOceanId": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
+      "territory": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
+      "intent": "reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
+      "painLanguage": "Ter muitas opções pode parecer liberdade e, ao mesmo tempo, transformar uma escolha simples num labirinto: comparar tudo, recear deixar passar a melhor alternativa e acabar cansado, menos confiante ou sem escolher.",
+      "commercialAdjacency": "Oráculo Decisões & Caminhos; experiências reflexivas sobre critérios, suficiente-bom, renúncia e compromisso com escolhas, sem aconselhamento financeiro, clínico ou profissional personalizado",
+      "evidenceCount": 3,
+      "evidence": [
+        "Biological Psychology (2019; PMID 30951804): em dois estudos, escolher entre muitas opções esteve associado a maior envolvimento mas também a respostas compatíveis com maior ameaça e menor percepção de recursos para gerir a decisão — https://pubmed.ncbi.nlm.nih.gov/30951804/",
+        "Acta Psychologica (2010; PMID 19766972): dois experimentos mostraram que o efeito de excesso de escolha depende da complexidade; muitas alternativas reduziram satisfação quando também exigiam comparar muitos atributos — https://pubmed.ncbi.nlm.nih.gov/19766972/",
+        "NeuroImage (2019; PMID 30988434): conjuntos percebidos como demasiado grandes mostraram menor sinal neural de valor do conjunto de escolha do que um conjunto intermédio percebido como tendo a quantidade adequada — https://pubmed.ncbi.nlm.nih.gov/30988434/"
+      ],
+      "questionThemeCandidates": [
+        "demasiadas opções",
+        "medo de escolher mal",
+        "comparar sem fim",
+        "suficientemente bom",
+        "renúncia ao não escolhido",
+        "compromisso com uma decisão"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_oracle_sobrecarga_de_escolha_quando_mais_opcoes_paralisam",
+      "type": "oracle_candidate",
+      "sourceOceanId": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
+      "territory": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
+      "intent": "reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
+      "painLanguage": "Ter muitas opções pode parecer liberdade e, ao mesmo tempo, transformar uma escolha simples num labirinto: comparar tudo, recear deixar passar a melhor alternativa e acabar cansado, menos confiante ou sem escolher.",
+      "commercialAdjacency": "Oráculo Decisões & Caminhos; experiências reflexivas sobre critérios, suficiente-bom, renúncia e compromisso com escolhas, sem aconselhamento financeiro, clínico ou profissional personalizado",
+      "evidenceCount": 3,
+      "evidence": [
+        "Biological Psychology (2019; PMID 30951804): em dois estudos, escolher entre muitas opções esteve associado a maior envolvimento mas também a respostas compatíveis com maior ameaça e menor percepção de recursos para gerir a decisão — https://pubmed.ncbi.nlm.nih.gov/30951804/",
+        "Acta Psychologica (2010; PMID 19766972): dois experimentos mostraram que o efeito de excesso de escolha depende da complexidade; muitas alternativas reduziram satisfação quando também exigiam comparar muitos atributos — https://pubmed.ncbi.nlm.nih.gov/19766972/",
+        "NeuroImage (2019; PMID 30988434): conjuntos percebidos como demasiado grandes mostraram menor sinal neural de valor do conjunto de escolha do que um conjunto intermédio percebido como tendo a quantidade adequada — https://pubmed.ncbi.nlm.nih.gov/30988434/"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_auto_silenciamento_para_preservar_o_vinculo",
+      "type": "question_candidate",
+      "sourceOceanId": "auto-silenciamento-para-preservar-o-vinculo",
+      "territory": "auto-silenciamento-para-preservar-o-vinculo",
+      "intent": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+      "painLanguage": "Às vezes, manter a paz parece exigir engolir opiniões, necessidades ou desconforto. A relação continua, mas a pessoa começa a dividir-se entre aquilo que sente por dentro e aquilo que se permite mostrar para não arriscar conflito, rejeição ou perda.",
+      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; experiências reflexivas sobre voz, segurança relacional, necessidades e reciprocidade, sem substituir apoio clínico",
+      "evidenceCount": 3,
+      "evidence": [
+        "Behavioral Sciences (2026; PMID 42352796): estudo qualitativo encontrou auto-silenciamento específico de cada relação, associado sobretudo à segurança percebida; a supressão repetida da expressão para preservar vínculos apresentou custos psicológicos cumulativos — https://pubmed.ncbi.nlm.nih.gov/42352796/",
+        "International Journal of Social Psychiatry (2023; PMID 35102764): em adultos em relações, o auto-silenciamento mediou a associação entre dimensões de apego inseguro e sintomas depressivos — https://pubmed.ncbi.nlm.nih.gov/35102764/",
+        "Journal of Adolescence (2011; PMID 20493520): estudo longitudinal encontrou que auto-silenciamento predisse aumento posterior de sintomas depressivos, apoiando a relevância do padrão para além de um conflito isolado — https://pubmed.ncbi.nlm.nih.gov/20493520/"
+      ],
+      "questionThemeCandidates": [
+        "calar para manter a paz",
+        "voz e segurança relacional",
+        "necessidades não ditas",
+        "acomodação vs autoapagamento",
+        "medo da reacção ao dizer a verdade",
+        "eu interior vs eu mostrado"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_oracle_auto_silenciamento_para_preservar_o_vinculo",
+      "type": "oracle_candidate",
+      "sourceOceanId": "auto-silenciamento-para-preservar-o-vinculo",
+      "territory": "auto-silenciamento-para-preservar-o-vinculo",
+      "intent": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+      "painLanguage": "Às vezes, manter a paz parece exigir engolir opiniões, necessidades ou desconforto. A relação continua, mas a pessoa começa a dividir-se entre aquilo que sente por dentro e aquilo que se permite mostrar para não arriscar conflito, rejeição ou perda.",
+      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; experiências reflexivas sobre voz, segurança relacional, necessidades e reciprocidade, sem substituir apoio clínico",
+      "evidenceCount": 3,
+      "evidence": [
+        "Behavioral Sciences (2026; PMID 42352796): estudo qualitativo encontrou auto-silenciamento específico de cada relação, associado sobretudo à segurança percebida; a supressão repetida da expressão para preservar vínculos apresentou custos psicológicos cumulativos — https://pubmed.ncbi.nlm.nih.gov/42352796/",
+        "International Journal of Social Psychiatry (2023; PMID 35102764): em adultos em relações, o auto-silenciamento mediou a associação entre dimensões de apego inseguro e sintomas depressivos — https://pubmed.ncbi.nlm.nih.gov/35102764/",
+        "Journal of Adolescence (2011; PMID 20493520): estudo longitudinal encontrou que auto-silenciamento predisse aumento posterior de sintomas depressivos, apoiando a relevância do padrão para além de um conflito isolado — https://pubmed.ncbi.nlm.nih.gov/20493520/"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    }
+  ]
+}
