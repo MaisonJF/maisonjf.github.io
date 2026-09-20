@@ -113,3 +113,12 @@
 .vpc-progress__bar,.vpc-affinity__row>div{border-radius:999px!important}
 .vpc-progress__bar span,.vpc-affinity__row i{border-radius:999px!important;background:#c7aa73!important}
 .vpc-scope__options button{border-radius:999px!important;min-height:44px!important}
+
+
+/* Volta Para Casa · viral test index */
+.vpc-specific-tests{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.vpc-specific-tests>span{width:100%;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#756f67}
+.vpc-specific-tests a{color:#c9c0b4;text-decoration:none;font:400 16px/1.35 var(--serif)}
+.vpc-specific-tests a:hover,.vpc-specific-tests a:focus-visible{color:#f2eadf;outline:none}
+.vpc-share a{color:#9a9288;text-decoration:underline;font-size:12px}
+@media(max-width:560px){.vpc-specific-tests{display:grid}.vpc-specific-tests a{font-size:17px}}
