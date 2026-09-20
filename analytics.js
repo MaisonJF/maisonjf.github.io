@@ -3,6 +3,8 @@
 
   const MEASUREMENT_ID = 'G-3W8B4L5QWP';
   const CONSENT_KEY = 'maison_analytics_consent_v1';
+  const ATTRIBUTION_KEY = 'maison_offer_attribution_v1';
+  const ATTRIBUTION_TTL = 24 * 60 * 60 * 1000;
   let googleLoaded = false;
   const queuedEvents = Array.isArray(window.__maisonAnalyticsQueue) ? window.__maisonAnalyticsQueue.splice(0) : [];
 
@@ -53,12 +55,50 @@
     });
   }
 
+  function captureOfferAttribution() {
+    try {
+      const query = new URLSearchParams(window.location.search);
+      if (query.get('mj_source') !== 'vpc') return;
+      const payload = {
+        source: 'vpc',
+        offer: String(query.get('mj_offer') || '').slice(0, 80),
+        result: String(query.get('mj_result') || '').slice(0, 40),
+        route: String(query.get('mj_route') || '').slice(0, 40),
+        brain: String(query.get('mj_brain') || '').slice(0, 80),
+        ts: Date.now()
+      };
+      sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(payload));
+    } catch (_) {}
+  }
+
+  function offerAttribution() {
+    try {
+      const raw = sessionStorage.getItem(ATTRIBUTION_KEY);
+      if (!raw) return {};
+      const data = JSON.parse(raw);
+      if (!data || !data.ts || Date.now() - Number(data.ts) > ATTRIBUTION_TTL) {
+        sessionStorage.removeItem(ATTRIBUTION_KEY);
+        return {};
+      }
+      return {
+        recommendation_source: data.source || '',
+        recommendation_offer: data.offer || '',
+        recommendation_result: data.result || '',
+        recommendation_route: data.route || '',
+        recommendation_brain: data.brain || ''
+      };
+    } catch (_) {
+      return {};
+    }
+  }
+
   function track(name, parameters = {}) {
     if (localStorage.getItem(CONSENT_KEY) !== 'granted') return;
     loadGoogle();
-    window.gtag('event', name, parameters);
+    window.gtag('event', name, { ...offerAttribution(), ...parameters });
   }
 
+  captureOfferAttribution();
   window.maisonAnalytics = { track };
   queuedEvents.forEach(([name, parameters]) => track(name, parameters));
 
