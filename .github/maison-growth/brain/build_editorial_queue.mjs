@@ -13,6 +13,10 @@ const ROLES=['opening','recognition','tension','counterpoint','reframe','movemen
 const STAGES=['open','recognize','deepen','touch','close','signature'];
 const QUESTION_TARGET_PER_MATURE_THEME=300;
 
+const slug=value=>String(value||'')
+  .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+  .replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'').slice(0,80);
+
 const oceans=JSON.parse(fs.readFileSync(OCEANS,'utf8'));
 const pdiThemeGroups=groupExactThemeSignals();
 const pdiSourceStats=pdiThemeSourceStats();
@@ -35,10 +39,6 @@ const pdiGrowthThemes=pdiThemeGroups.map(group=>({
 let previous={items:[]};
 try{ previous=JSON.parse(fs.readFileSync(QUEUE,'utf8')); }catch{}
 const previousById=new Map((previous.items||[]).map(x=>[x.id,x]));
-
-const slug=value=>String(value||'')
-  .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-  .replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'').slice(0,80);
 
 const keepHumanState=(id,base)=>{
   const prior=previousById.get(id)||{};
