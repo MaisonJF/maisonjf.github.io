@@ -1,6 +1,6 @@
 (function(){
   const track=(name,data)=>window.maisonAnalytics?.track?window.maisonAnalytics.track(name,data):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([name,data]);
-  const money=n=>new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'}).format(n);
+  const money=n=>{const v=Number(n);const whole=Number.isInteger(v);return new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR',minimumFractionDigits:whole?0:2,maximumFractionDigits:whole?0:2}).format(v)};
   const all=window.MAISON_PRODUCTS||[];
   const page=document.querySelector('#page');
   if(!page)return;
