@@ -9,7 +9,7 @@ export const MAISON_OFFER_BRAIN={
     noDarkPatterns:'Não inventar urgência, escassez, diagnóstico, medo ou promessa de resultado para provocar compra.'
   },
   ladders:{
-    clarity:['Oráculo · 2 €','Tarot Expresso · 17 €','Consulta Escrita · 25–45 €','Tarot Integrativo · 35 €','Escuta · 60 €','Tarot Terapêutico · 70 €','Continuidade'],
+    clarity:['Oráculo · 2 €','Uma pergunta · Tarot · 17 €','Por escrito · 25–45 €','Uma consulta · Tarot · 35 €','Escuta · 60 €','Aprofundar · Tarot · 70 €','Continuidade'],
     body:['Escalda-Pés · 5 €','Óleo de Massagem · 12 €','Serviços'],
     home:['Névoa · 7 €','Vela Aromática · 8 €','Vela Aromática · 14 €'],
     company:['Oráculo · 2 €','Companhia','Escuta / Continuidade'],
