@@ -211,7 +211,7 @@
     },
     'companhia.html': {
       label: 'Ver disponibilidade',
-      message: 'Olá Maison JF. Estou a ver a área de Companhia e quero saber qual opção faz mais sentido e a disponibilidade.',
+      message: 'Olá Maison JF. Estou a ver a área de Presença e quero saber qual opção faz mais sentido e a disponibilidade.',
       secondHref: 'farol.html',
       secondText: 'Usar o Farol'
     },
