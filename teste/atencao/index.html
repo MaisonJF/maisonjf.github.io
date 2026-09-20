@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Volta Para Casa · Parte I | MAISON JF®</title>
+<meta name="description" content="Volta Para Casa · Parte I: reconhece o que está a pedir mais atenção e encontra um próximo passo.">
+<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://maison-jf.com/teste/atencao/">
+<link rel="stylesheet" href="../../maison.css?v=20260920-architecture1"><link rel="stylesheet" href="../volta.css?v=20260920-service1"><script src="../../analytics.js" defer></script>
+</head>
+<body class="vpc-page">
+<header class="site-header"><a class="brand" href="../../">MAISON JF®</a><nav><a href="../../farol">O Farol</a><a href="../">Volta Para Casa</a><a href="../../produtos/">Produtos</a><a href="../../servicos/">Serviços</a></nav></header>
+
+<main class="vpc-test vpc-shell">
+<section class="vpc-stage" id="intro">
+<p class="vpc-kicker">VOLTA PARA CASA · PARTE I</p>
+<h1 class="vpc-title">Há qualquer coisa<br>a pedir a tua atenção.</h1>
+<div class="vpc-actions"><button class="button button--light" id="start">Começar</button></div>
+<p class="vpc-note">Autoconhecimento, não diagnóstico.</p>
+<nav class="vpc-specific-tests" aria-label="Testes específicos">
+  <span>Ou vai directo ao que queres perceber</span>
+  <a href="../apego/">Qual é o teu estilo de apego? →</a>
+  <a href="../afeto/">Como gostas de receber amor? →</a>
+</nav>
+</section>
+
+<section class="vpc-stage" id="quiz" hidden>
+<div class="vpc-progress"><div class="vpc-progress__meta"><span id="count"></span><span>Volta Para Casa</span></div><div class="vpc-progress__bar"><span id="bar"></span></div></div>
+<h2 class="vpc-question" id="question" tabindex="-1"></h2>
+<div class="vpc-choices" id="choices"></div>
+</section>
+
+<section class="vpc-stage vpc-result" id="result" hidden>
+<p class="vpc-result__label" id="resultLabel"></p>
+<h1 id="resultTitle"></h1>
+<p class="vpc-result__lead" id="resultLead"></p>
+<blockquote class="vpc-result__quote" id="shareLine"></blockquote>
+
+<div class="vpc-share vpc-share--primary">
+<button class="button button--light" id="share" type="button">Partilhar o meu resultado</button>
+<span class="vpc-share__status" id="shareStatus" aria-live="polite"></span>
+</div>
+
+<section class="vpc-convert" aria-labelledby="nextTitle">
+<p class="vpc-kicker">Se quiseres continuar</p>
+<h2 id="nextTitle">Escolhe o que te fizer sentido.</h2>
+<div class="vpc-offers" id="nextLinks"></div>
+</section>
+
+<section class="vpc-report" aria-labelledby="reportTitle">
+<p class="vpc-kicker">Viste uma parte.</p>
+<h2 id="reportTitle">Queres perceber o quadro inteiro?</h2>
+<p>O resultado mostrou-te uma parte. O relatório vai mais fundo e devolve-te uma leitura mais completa do que apareceu nas tuas respostas.</p>
+<a class="button" id="reportLink" href="./relatorio/">Ver o meu relatório completo →</a>
+</section>
+
+<div class="vpc-share"><button id="restart" type="button">Refazer</button><a href="../apego/">Continuar para a Parte II · Apego →</a></div>
+<p class="vpc-note">O resultado reflecte as respostas que deste hoje. Não é uma avaliação clínica nem substitui apoio profissional quando necessário.</p>
+</section>
+</main>
+
+<script>
+const AXES={
+seen:{label:'Valorização',title:'Não queres aplausos. Queres deixar de desaparecer quando ninguém confirma o teu valor.',lead:'Nas tuas respostas, ser visto e reconhecido pesa mais do que parece. Quando isso falta, uma opinião ou um silêncio pode começar a valer demasiado.',share:'Não quero aplausos. Quero deixar de perder o meu valor quando ninguém o confirma.'},
+attachment:{label:'Vínculo',title:'Um pequeno afastamento consegue ocupar-te muito espaço.',lead:'Nas tuas respostas, mudanças na proximidade parecem activar rapidamente a necessidade de perceber se a ligação continua segura.',share:'Às vezes não me falta uma resposta. Falta-me sentir que a ligação continua lá.'},
+self:{label:'Autoabandono',title:'Tens jeito para ficar ao lado dos outros. Nem sempre ficas ao teu.',lead:'Em várias respostas, as necessidades dos outros chegam primeiro. O custo pode aparecer depois: cansaço, ressentimento ou dificuldade em perceber o que tu próprio queres.',share:'Sou rápido a ficar ao lado dos outros. Nem sempre fico ao meu.'},
+control:{label:'Controlo',title:'Pensar mais dá-te a sensação de que vais sofrer menos.',lead:'Nas tuas respostas, incerteza e falta de resposta puxam-te para mais análise, mais cenários e mais tentativa de prever.',share:'Às vezes penso mais não para perceber melhor, mas para não ser apanhado desprevenido.'},
+belong:{label:'Pertença',title:'Não te falta necessariamente gente. Falta-te sentir que tens lugar.',lead:'Presença, ligação e a sensação de poderes existir sem representar apareceram com força nas tuas respostas.',share:'Posso estar acompanhado e continuar a sentir falta de um lugar onde não precise de representar.'},
+load:{label:'Sobrecarga',title:'O corpo já pediu pausa. Tu continuaste a negociar.',lead:'Nas tuas respostas, parar parece difícil mesmo quando já não há muita margem. Descansar e sentir descanso nem sempre são a mesma coisa.',share:'O meu corpo pede pausa antes de eu me autorizar a parar.'},
+direction:{label:'Direcção',title:'Talvez não te faltem opções. Talvez te esteja a faltar reconhecer qual delas é tua.',lead:'Nas tuas respostas, caminho, identidade e expectativas dos outros aparecem demasiado misturados para uma escolha parecer simples.',share:'Talvez eu não esteja perdido. Talvez tenha demasiadas vozes dentro da mesma decisão.'},
+security:{label:'Segurança',title:'Mesmo quando hoje está tudo bem, uma parte tua continua a preparar-se para perder chão.',lead:'Nas tuas respostas, estabilidade e margem pesam muito nas decisões. O medo de perder segurança pode aparecer antes de existir uma perda real.',share:'Às vezes preparo-me para perder o chão mesmo quando ainda estou de pé.'}
+};
+
+const QUESTIONS=[
+{q:'Quando o dia te aperta, o que dói primeiro?',a:[
+{t:'Fazer muito e sentir que ninguém vê.',p:'seen',s:'self'},
+{t:'Notar alguém diferente e pensar logo que alguma coisa mudou.',p:'attachment',s:'control'},
+{t:'Cuidar de toda a gente e esquecer-me de mim.',p:'self',s:'load'},
+{t:'Começar a construir cenários até encontrar uma explicação.',p:'control',s:'security'}]},
+{q:'Qual destas te apanha num dia perfeitamente normal?',a:[
+{t:'Estar rodeado e, mesmo assim, sentir-me sozinho.',p:'belong',s:'attachment'},
+{t:'Parar e continuar cansado.',p:'load',s:'self'},
+{t:'Fazer tudo certo e não saber para onde isto me leva.',p:'direction',s:'seen'},
+{t:'Ter o dia controlado e já pensar no que pode faltar amanhã.',p:'security',s:'control'}]},
+{q:'Quando estás mal, o que faz mais falta?',a:[
+{t:'Que alguém veja o que estou a carregar.',p:'seen',s:'belong'},
+{t:'Presença verdadeira. Não só companhia.',p:'belong',s:'attachment'},
+{t:'Um sinal claro de que a ligação continua.',p:'attachment',s:'security'},
+{t:'Espaço para parar sem sentir que estou a falhar.',p:'load',s:'self'}]},
+{q:'Quando tens de escolher algo importante, o que te prende mais?',a:[
+{t:'O efeito que a minha escolha vai ter nos outros.',p:'self',s:'seen'},
+{t:'As vidas diferentes que podia ter.',p:'direction',s:'control'},
+{t:'Precisar de informação suficiente para não me arrepender.',p:'control',s:'security'},
+{t:'O medo de mexer no pouco chão que já tenho.',p:'security',s:'direction'}]},
+{q:'Qual destas te acerta onde não gostas?',a:[
+{t:'Uma crítica apaga dez elogios.',p:'seen',s:'self'},
+{t:'Descansar dá-me culpa antes de dar descanso.',p:'load',s:'seen'},
+{t:'Sei cuidar dos outros melhor do que sei pedir para mim.',p:'self',s:'belong'},
+{t:'Mal ganho chão, começo a imaginar como o posso perder.',p:'security',s:'control'}]},
+{q:'Quando alguém ou alguma coisa fica em silêncio…',a:[
+{t:'Quero garantir que a ligação ainda está bem.',p:'attachment',s:'belong'},
+{t:'Sinto logo que posso estar sozinho nisto.',p:'belong',s:'attachment'},
+{t:'Volto ao assunto até encontrar a peça que falta.',p:'control',s:'direction'},
+{t:'Pergunto-me se estou a insistir numa vida que já não é minha.',p:'direction',s:'self'}]},
+{q:'O que tem mais poder sobre ti do que gostarias?',a:[
+{t:'A opinião de alguém sobre o meu valor.',p:'seen',s:'self'},
+{t:'O medo de descobrir tarde demais que escolhi mal.',p:'direction',s:'control'},
+{t:'A distância de alguém de quem gosto.',p:'attachment',s:'belong'},
+{t:'A possibilidade de perder estabilidade.',p:'security',s:'control'}]},
+{q:'Quando chegas ao limite, qual é o teu truque?',a:[
+{t:'Continuar a dizer sim para não desiludir.',p:'self',s:'seen'},
+{t:'Procurar alguém — mas não qualquer pessoa.',p:'belong',s:'attachment'},
+{t:'Controlar mais coisas para sentir menos medo.',p:'control',s:'security'},
+{t:'Negociar com um corpo que já pediu para parar.',p:'load',s:'self'}]},
+{q:'Qual destas te custa admitir em voz alta?',a:[
+{t:'Preciso de me sentir visto mais do que queria.',p:'seen',s:'belong'},
+{t:'Fico inquieto quando não tenho uma resposta.',p:'control',s:'direction'},
+{t:'Às vezes não quero conselho. Quero sentir que pertenço.',p:'belong',s:'attachment'},
+{t:'Há decisões que tomo mais para não perder segurança do que para ganhar vida.',p:'security',s:'direction'}]},
+{q:'O que te acontece sem dares por isso?',a:[
+{t:'Quando está tudo bem, fico à espera que alguma coisa mude.',p:'attachment',s:'control'},
+{t:'Peço desculpa por precisar, ocupar espaço ou dizer não.',p:'self',s:'seen'},
+{t:'Vou aguentando até já não haver margem.',p:'load',s:'self'},
+{t:'Cumpro tantos papéis que às vezes não sei quem sou fora deles.',p:'direction',s:'seen'}]},
+{q:'Qual destas perguntas preferias que ninguém te fizesse?',a:[
+{t:'Se ninguém reparar, continuo a achar que valeu?',p:'seen',s:'self'},
+{t:'O que queria eu se não tivesse de agradar a ninguém?',p:'self',s:'direction'},
+{t:'Com quem posso estar sem representar?',p:'belong',s:'seen'},
+{t:'Se deixasse de fazer o que esperam de mim, quem ficava?',p:'direction',s:'self'}]},
+{q:'Quando pensas nos próximos meses, o que pesa mais?',a:[
+{t:'Perder alguém ou sentir uma ligação mudar.',p:'attachment',s:'security'},
+{t:'Ser apanhado desprevenido.',p:'control',s:'security'},
+{t:'Só de pensar no que tenho de manter, já fico cansado.',p:'load',s:'self'},
+{t:'Ficar sem margem, dinheiro, apoio ou chão.',p:'security',s:'control'}]}
+];
+
+const ROUTE_QUESTIONS=[
+{q:'Quando queres sair do mesmo sítio, o que te ajuda de verdade?',a:[
+{t:'Falar até a confusão ganhar nome.',r:'talk'},
+{t:'Saber que não tenho de resolver tudo num dia.',r:'continuity'},
+{t:'Mudar alguma coisa concreta no corpo, no espaço ou na rotina.',r:'gesture'},
+{t:'Ter algo a que possa voltar sozinho.',r:'selfpaced'}]},
+{q:'Quando dizes “isto fez-me bem”, o que aconteceu?',a:[
+{t:'Saí com mais clareza.',r:'talk'},
+{t:'Não fiquei sozinho a tentar manter a mudança.',r:'continuity'},
+{t:'Senti diferença no corpo, no ambiente ou no dia.',r:'gesture'},
+{t:'Fiquei com algo para reler, repetir ou revisitar.',r:'selfpaced'}]}
+];
+
+
+const primaryScores=Object.fromEntries(Object.keys(AXES).map(k=>[k,0]));
+const secondaryScores=Object.fromEntries(Object.keys(AXES).map(k=>[k,0]));
+const routeScores={talk:0,continuity:0,gesture:0,selfpaced:0};
+const FLOW=[
+{type:'axis',index:0},{type:'axis',index:1},{type:'axis',index:2},{type:'axis',index:3},
+{type:'route',index:0},
+{type:'axis',index:4},{type:'axis',index:5},{type:'axis',index:6},{type:'axis',index:7},{type:'axis',index:8},
+{type:'route',index:1},
+{type:'axis',index:9},{type:'axis',index:10},{type:'axis',index:11}
+];
+let step=0;
+const TOTAL=FLOW.length;
+const $=id=>document.getElementById(id);
+const track=(name,data={})=>window.maisonAnalytics?.track?.(name,{...data,page_path:location.pathname});
+
+function shuffle(items){const a=items.slice();for(let x=a.length-1;x>0;x--){const y=Math.floor(Math.random()*(x+1)),t=a[x];a[x]=a[y];a[y]=t}return a}
+function show(id){['intro','quiz','result'].forEach(x=>$(x).hidden=x!==id)}
+function currentQuestion(){const item=FLOW[step];return {type:item.type,data:item.type==='axis'?QUESTIONS[item.index]:ROUTE_QUESTIONS[item.index]}}
+function render(){
+ const current=currentQuestion(),q=current.data;
+ $('count').textContent=(step+1)+' / '+TOTAL;
+ $('bar').style.width=((step+1)/TOTAL*100)+'%';
+ $('question').textContent=q.q;$('choices').innerHTML='';
+ shuffle(q.a).forEach(opt=>{
+  const b=document.createElement('button');b.type='button';b.className='vpc-choice';b.textContent=opt.t;
+  b.addEventListener('click',()=>{
+   if(current.type==='axis'){primaryScores[opt.p]+=2;secondaryScores[opt.s]+=1;track('vpc_core_answer',{step:step+1,axis:opt.p})}
+   else{routeScores[opt.r]+=1;track('vpc_route_answer',{step:step+1,route:opt.r})}
+   step++;if(step<TOTAL)render();else finish();
+  });$('choices').appendChild(b);
+ });$('question').focus();
+}
+function rankedAxes(){const exposure=Object.fromEntries(Object.keys(AXES).map(k=>[k,0]));QUESTIONS.forEach(q=>q.a.forEach(a=>exposure[a.s]++));return Object.keys(AXES).map(k=>{const secondaryRate=exposure[k]?secondaryScores[k]/exposure[k]:0;return {key:k,primary:primaryScores[k],secondary:secondaryScores[k],secondaryRate:secondaryRate,total:primaryScores[k]*100+Math.round(secondaryRate*99)}}).sort((a,b)=>(b.primary-a.primary)||(b.secondaryRate-a.secondaryRate))}
+function routeMode(){const ranked=Object.entries(routeScores).sort((a,b)=>b[1]-a[1]);return ranked[0][1]===ranked[1][1]?'default':ranked[0][0]}
+const FALLBACK_OFFERS=[
+ {id:'oracle-fallback',slot:'now',slotLabel:'Agora',title:'Oráculo MAISON JF®',description:'Uma abertura simbólica para olhares para isto de outro ângulo.',href:'../../oraculo/',priceLabel:'2 €'},
+ {id:'products-fallback',slot:'deeper',slotLabel:'Outra forma',title:'Produtos',description:'Produtos físicos e digitais escolhidos pelo que precisas agora.',href:'../../produtos/',priceLabel:''},
+ {id:'services-fallback',slot:'continuity',slotLabel:'Quero ir mais fundo',title:'Serviços',description:'Quando queres falar, aprofundar ou ter continuidade.',href:'../../servicos/',priceLabel:''}
+];
+function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function attributedHref(raw,offerId,result,route,brainVersion){
+ const url=new URL(raw,location.href);
+ url.searchParams.set('mj_source','vpc');
+ url.searchParams.set('mj_offer',offerId);
+ url.searchParams.set('mj_result',result);
+ url.searchParams.set('mj_route',route);
+ url.searchParams.set('mj_brain',brainVersion||'fallback');
+ return url.pathname+url.search+url.hash;
+}
+function offerMarkup(o,index,result,route,brainVersion){
+ const label=[o.slotLabel,o.priceLabel].filter(Boolean).join(' · ');
+ const href=attributedHref(o.href,o.id,result,route,brainVersion);
+ return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brainVersion||'fallback')+'" href="'+esc(href)+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
+}
+async function renderBrainOffers(result,ranked,route){
+ const host=$('nextLinks');
+ host.innerHTML='<p class="vpc-note">A escolher o que faz mais sentido agora…</p>';
+ try{
+  const response=await fetch('/api/recommend-offers',{
+   method:'POST',
+   headers:{'content-type':'application/json'},
+   body:JSON.stringify({result,route,ranked:ranked.slice(0,4).map(x=>({key:x.key,score:x.total}))})
+  });
+  const payload=await response.json().catch(()=>({}));
+  if(!response.ok||!Array.isArray(payload.offers)||!payload.offers.length)throw new Error('brain_unavailable');
+  host.innerHTML=payload.offers.map((o,index)=>offerMarkup(o,index,result,route,payload.version)).join('');
+  track('vpc_offer_brain_result',{result,route,brain_version:payload.version,offers:payload.offers.map(o=>o.id).join(',')});
+ }catch(e){
+  host.innerHTML=FALLBACK_OFFERS.map((o,index)=>offerMarkup(o,index,result,route,'fallback')).join('');
+  track('vpc_offer_brain_fallback',{result,route});
+ }
+}
+function saveProfile(result,ranked,mode){const profile={version:2,result:result,ranked:ranked.map(x=>({key:x.key,score:x.total})),route:mode,createdAt:Date.now()};try{localStorage.setItem('maison_vpc_profile_v2',JSON.stringify(profile))}catch(e){}}
+function finish(){
+ const ranked=rankedAxes(),key=ranked[0].key,r=AXES[key],mode=routeMode();
+ show('result');$('resultLabel').textContent='O que está a pedir mais atenção · '+r.label;$('resultTitle').textContent=r.title;$('resultLead').textContent=r.lead;$('shareLine').textContent='“'+r.share+'”';
+ $('reportLink').href='../relatorio/?resultado='+encodeURIComponent(key);saveProfile(key,ranked,mode);
+ track('vpc_core_result',{result:key,route:mode});
+ renderBrainOffers(key,ranked,mode);
+}
+function wrapText(ctx,text,maxWidth){const words=text.split(/\s+/),lines=[];let line='';words.forEach(word=>{const test=line?line+' '+word:word;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}else line=test});if(line)lines.push(line);return lines}
+async function makeShareCard(){
+ if(document.fonts&&document.fonts.ready)try{await document.fonts.ready}catch(e){}
+ const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;const ctx=canvas.getContext('2d');
+ const g=ctx.createRadialGradient(540,0,40,540,520,1300);g.addColorStop(0,'#261d17');g.addColorStop(.42,'#11100f');g.addColorStop(1,'#070707');ctx.fillStyle=g;ctx.fillRect(0,0,1080,1920);
+ ctx.fillStyle='#c3a66d';ctx.fillRect(90,132,74,3);ctx.fillStyle='#f3efe7';ctx.font='700 26px Arial';ctx.fillText('MAISON JF®',90,205);
+ const label=$('resultLabel').textContent.replace('O que está a pedir mais atenção · ','').toUpperCase();
+ ctx.fillStyle='#9f978c';ctx.font='600 24px Arial';ctx.fillText('VOLTA PARA CASA · PARTE I',90,390);
+ ctx.fillStyle='#f3efe7';ctx.font='400 92px Georgia';let y=525;wrapText(ctx,label,900).forEach(line=>{ctx.fillText(line,90,y);y+=100});
+ ctx.fillStyle='#d8d0c2';ctx.font='italic 400 58px Georgia';y+=85;wrapText(ctx,$('shareLine').textContent.replace(/[“”]/g,''),890).forEach(line=>{ctx.fillText(line,90,y);y+=75});
+ ctx.fillStyle='#c3a66d';ctx.fillRect(90,1585,900,1);ctx.fillStyle='#f3efe7';ctx.font='400 42px Georgia';ctx.fillText('E tu? O que está a pedir mais atenção?',90,1690);ctx.font='700 42px Arial';ctx.fillText('maison-jf.com/teste/atencao',90,1760);
+ ctx.fillStyle='#706a62';ctx.font='400 21px Arial';ctx.fillText('Autoconhecimento, não diagnóstico.',90,1835);
+ return new Promise(resolve=>canvas.toBlob(resolve,'image/png',.96));
+}
+async function shareResult(){
+ const r=$('resultLabel').textContent.replace('O que está a pedir mais atenção · ',''),shareUrl='https://maison-jf.com/teste/atencao/?utm_source=share&utm_medium=organic&utm_campaign=volta_para_casa_parte_1',text='No Volta Para Casa apareceu '+r+'. E tu? O que está a pedir mais atenção? '+shareUrl;$('shareStatus').textContent='A preparar…';
+ try{
+  const blob=await makeShareCard(),file=new File([blob],'volta-para-casa-'+r.toLowerCase().replace(/[^a-z0-9]+/g,'-')+'.png',{type:'image/png'});
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'Volta Para Casa · MAISON JF®',text:text,url:shareUrl});$('shareStatus').textContent='';track('vpc_share_card',{result:r,method:'file'});return}
+  if(navigator.share){await navigator.share({title:'Volta Para Casa · MAISON JF®',text:text,url:shareUrl});$('shareStatus').textContent='';track('vpc_share_card',{result:r,method:'text'});return}
+  await navigator.clipboard.writeText(text);$('shareStatus').textContent='Texto copiado.';track('vpc_share_card',{result:r,method:'clipboard'});
+ }catch(e){if(e&&e.name==='AbortError'){$('shareStatus').textContent='';return}$('shareStatus').textContent='Não foi possível abrir a partilha.'}
+}
+$('start').addEventListener('click',()=>{show('quiz');track('vpc_core_start');render()});
+$('restart').addEventListener('click',()=>location.reload());
+$('share').addEventListener('click',shareResult);
+$('nextLinks').addEventListener('click',e=>{const a=e.target.closest('[data-vpc-offer]');if(!a)return;try{sessionStorage.setItem('maison_offer_attribution_v1',JSON.stringify({source:'vpc',offer:a.dataset.vpcOffer||'',result:$('resultLabel').textContent.replace('O que está a pedir mais atenção · ',''),slot:a.dataset.vpcSlot||'',brain:a.dataset.vpcBrain||'',ts:Date.now()}))}catch(_){}track('vpc_offer_click',{offer:a.dataset.vpcOffer,slot:a.dataset.vpcSlot||'',brain_version:a.dataset.vpcBrain||'',result:$('resultLabel').textContent})});
+$('reportLink').addEventListener('click',()=>track('vpc_report_interest',{result:$('resultLabel').textContent}));
+</script>
+</body></html>
