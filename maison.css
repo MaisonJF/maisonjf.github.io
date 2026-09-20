@@ -2265,3 +2265,33 @@ footer a:hover{
   overflow:hidden;
   border-color:var(--ak-line)!important;
 }
+
+
+/* MAISON JF® · homepage architecture KISS · 2026-09-20 */
+.home-page--final .hero__headline{
+  white-space:nowrap;
+  font-size:clamp(42px,7.35vw,112px)!important;
+  line-height:.88!important;
+  letter-spacing:-.048em!important;
+}
+.home-page--final #portas{
+  padding-top:clamp(54px,7vw,92px);
+}
+.home-page--final #para-de-ignorar h2{
+  max-width:15ch;
+  text-wrap:balance;
+}
+@media(max-width:700px){
+  .home-page--final .hero__headline{
+    font-size:clamp(27px,8.6vw,52px)!important;
+    letter-spacing:-.045em!important;
+  }
+  .home-page--final #portas{
+    padding-top:46px;
+  }
+}
+@media(max-width:360px){
+  .home-page--final .hero__headline{
+    font-size:clamp(25px,8.2vw,31px)!important;
+  }
+}
