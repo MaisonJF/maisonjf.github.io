@@ -2461,3 +2461,70 @@ a.product-digital__card p{
     transform:none;
   }
 }
+
+
+/* MAISON JF® · ROUNDED ACTION SYSTEM · 2026-09-20 */
+:root{
+  --maison-radius-pill:999px;
+  --maison-radius-card:22px;
+  --maison-radius-soft:18px;
+}
+
+/* Buttons and compact actions: full capsule. */
+.button,
+.btn,
+.pdi-buy,
+.filters button,
+.vpc-scope__options button,
+.maison-consent button,
+.conversion-bar__link,
+.conversion-nudge__actions a{
+  border-radius:var(--maison-radius-pill)!important;
+}
+
+/* Major clickable choice surfaces: rounded, but still editorial rather than app-like. */
+.home-page--final .home-explore__links>a,
+a.territory-offer,
+a.product-digital__card,
+a.related-card,
+a.journey-card,
+a.offer-card,
+a.door:not(.door--editorial),
+a.catalogue-card,
+a.service-card,
+a.transformacao-card,
+a.gift-card,
+a.ebook-card,
+.farol__option,
+.vpc-card,
+.vpc-choice,
+.vpc-convert,
+.vpc-offer,
+.vpc-report{
+  border-radius:var(--maison-radius-card)!important;
+  overflow:hidden;
+}
+
+/* Utility/form surfaces keep a softer radius. */
+input,
+select,
+textarea,
+.oracle__search{
+  border-radius:var(--maison-radius-soft)!important;
+}
+
+/* Homepage quick-choice blocks: same rounded language as the hero. */
+.home-page--final .home-explore__links>a{
+  min-height:92px;
+  padding-inline:22px!important;
+}
+
+/* Keep large editorial photography and structural sections from turning into pills. */
+.door--editorial,
+.home-feature,
+.editorial,
+.manifesto,
+.territory-offers,
+.product-digital{
+  border-radius:0!important;
+}
