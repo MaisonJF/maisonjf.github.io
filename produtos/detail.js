@@ -58,7 +58,7 @@
         <p>${p.description}</p>
         <div class="product-price">${p.priceNote||money(p.price)}</div>
         <div class="product-actions">
-          <button class="button button--light" data-buy type="button">Comprar · ${p.priceNote||money(p.price)}</button>
+          <button class="button button--light" data-buy type="button">Comprar agora</button>
           <button class="text-link" data-cart-add type="button" style="background:none;border:0;padding:0;cursor:pointer">Adicionar ao carrinho</button>
           <a class="text-link" data-cart-link href="${root}produtos/carrinho/">Carrinho</a>
           <a class="text-link" data-whatsapp href="${whatsapp}" target="_blank" rel="noopener noreferrer">Tenho uma dúvida</a>
@@ -80,9 +80,9 @@
         <p>${ritual.text}</p>
       </div>
       <div>
-        <p class="eyebrow">Ainda a pensar?</p>
-        <h2>Não forces a escolha.</h2>
-        <p>Se ainda não sabes se é isto, entra pelo que queres sentir.</p>
+        <p class="eyebrow">Não é isto?</p>
+        <h2>Não adivinhes.</h2>
+        <p>Entra pelo que queres sentir.</p>
         <a class="text-link" href="${root}farol#farol">Seguir o Farol →</a>
       </div>
     </section>

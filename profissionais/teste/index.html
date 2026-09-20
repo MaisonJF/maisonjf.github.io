@@ -79,7 +79,7 @@ const confessions={
   ['fim','“O cliente gosta do tratamento, mas a experiência acaba quando sai.”'],
   ['venda','“Podíamos vender mais sem transformar a equipa em vendedores agressivos.”'],
   ['ritual','“Os tratamentos são bons, mas ainda não temos um ritual que o cliente reconheça como nosso.”'],
-  ['casa','“Há cuidados que podiam continuar em casa — e hoje não captamos esse valor.”']
+  ['casa','“Há cuidados que podiam continuar em casa. Hoje não captamos esse valor.”']
  ],
  terapeuta:[
   ['sessao','“A sessão termina e eu deixo dinheiro e continuidade à porta.”'],
@@ -127,7 +127,7 @@ function resultType(){
  if(state.goal==='presentear'||state.model==='presente'||state.client==='presente')return ['UM PRESENTE QUE TAMBÉM TRABALHA PELA MARCA','Há espaço para transformar presente, agradecimento ou cortesia numa extensão coerente da experiência e da memória do teu negócio.','gifting'];
  if(state.model==='boasvindas'||state.business==='alojamento'||state.goal==='boasvindas')return ['BOAS-VINDAS QUE FICAM','Existe margem para transformar chegada, ambiente ou cortesia numa parte reconhecível da experiência.','welcome'];
  if(state.model==='ambos'||state.goal==='continuar'||state.gap==='fim')return ['A EXPERIÊNCIA TERMINA CEDO','Há uma oportunidade para prolongar o que o cliente vive no espaço e criar continuidade para casa.','continuity'];
- if(state.goal==='ticket'||state.gap==='extra')return ['TICKET MÉDIO SUBAPROVEITADO','Já existe confiança no serviço ou produto principal. O próximo ganho pode estar numa compra complementar que faça sentido — não em vender por vender.','ticket'];
+ if(state.goal==='ticket'||state.gap==='extra')return ['TICKET MÉDIO SUBAPROVEITADO','Já existe confiança no serviço ou produto principal. O próximo ganho pode estar numa compra complementar que faça sentido. Não em vender por vender.','ticket'];
  if(state.goal==='diferenciar'||state.gap==='assinatura')return ['ASSINATURA SENSORIAL','O teu negócio pode ganhar uma memória própria através de aroma, ritual, apresentação ou detalhe de uso.','signature'];
  if(state.model==='revenda'||state.goal==='recompra')return ['REVENDA COM CONTINUIDADE','Existe espaço para escolher poucas referências que possam gerar recompra em vez de encher prateleiras.','resale'];
  if(state.scale==='pequeno'||state.goal==='testar'||state.gap==='stock')return ['TESTAR SEM ENCHER O ARMAZÉM','O ponto de entrada deve ser pequeno, legível e fácil de avaliar antes de aumentar quantidades.','pilot'];
