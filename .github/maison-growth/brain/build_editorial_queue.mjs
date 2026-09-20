@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { contentCandidatesFromSignal } from '../../../functions/_lib/maison-brain-bridge.js';
+import { groupExactThemeSignals, pdiThemeSourceStats } from '../../../functions/_lib/pdi-theme-sources.js';
 
 const HERE=path.dirname(fileURLToPath(import.meta.url));
 const ROOT=path.resolve(HERE,'../../..');
@@ -12,14 +13,32 @@ const ROLES=['opening','recognition','tension','counterpoint','reframe','movemen
 const STAGES=['open','recognize','deepen','touch','close','signature'];
 const QUESTION_TARGET_PER_MATURE_THEME=300;
 
-const oceans=JSON.parse(fs.readFileSync(OCEANS,'utf8'));
-let previous={items:[]};
-try{ previous=JSON.parse(fs.readFileSync(QUEUE,'utf8')); }catch{}
-const previousById=new Map((previous.items||[]).map(x=>[x.id,x]));
-
 const slug=value=>String(value||'')
   .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
   .replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'').slice(0,80);
+
+const oceans=JSON.parse(fs.readFileSync(OCEANS,'utf8'));
+const pdiThemeGroups=groupExactThemeSignals();
+const pdiSourceStats=pdiThemeSourceStats();
+const pdiGrowthThemes=pdiThemeGroups.map(group=>({
+  candidateKey:group.candidateKey,
+  preferredLabel:group.preferredLabel,
+  slugs:group.slugs,
+  sources:group.sources,
+  evidence:group.evidence,
+  questionDesignSlots:STAGES.map(stage=>({
+    id:'pdi_source_slot_'+slug(group.candidateKey)+'_'+stage,
+    stage,
+    status:'needs_editorial'
+  })),
+  bodyStored:false,
+  approvalRequired:true,
+  automaticActivation:false,
+  status:'needs_editorial'
+}));
+let previous={items:[]};
+try{ previous=JSON.parse(fs.readFileSync(QUEUE,'utf8')); }catch{}
+const previousById=new Map((previous.items||[]).map(x=>[x.id,x]));
 
 const keepHumanState=(id,base)=>{
   const prior=previousById.get(id)||{};
@@ -103,7 +122,7 @@ items.sort((a,b)=>a.id.localeCompare(b.id));
 const questionItems=items.filter(x=>x.type==='question_candidate');
 const oracleItems=items.filter(x=>x.type==='oracle_candidate');
 const out={
-  version:'2026-09-20-v2',
+  version:'2026-09-20-v3',
   visibility:'internal-editorial',
   generatedAt:oceans.last_enriched_at||null,
   source:'.github/maison-growth/oceans/candidates.json',
@@ -121,8 +140,15 @@ const out={
     questionThemeHypotheses:questionItems.reduce((n,x)=>n+(x.questionThemeCandidates||[]).length,0),
     questionDesignSlots:questionItems.reduce((n,x)=>n+(x.questionDesignSlots||[]).length,0),
     activeQuestionTargetPerMatureTheme:QUESTION_TARGET_PER_MATURE_THEME,
+    pdiSourceSignals:pdiSourceStats.totalSignals,
+    pdiThemeBacklog:pdiGrowthThemes.length,
+    pdiSourceDesignSlots:pdiGrowthThemes.reduce((n,x)=>n+(x.questionDesignSlots||[]).length,0),
     oracleCandidates:oracleItems.length,
     oracleRoleSlots:oracleItems.reduce((n,x)=>n+(x.roleCandidates||[]).length,0)
+  },
+  pdiGrowth:{
+    sourceStats:pdiSourceStats,
+    themes:pdiGrowthThemes
   },
   items
 };
