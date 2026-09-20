@@ -32,7 +32,7 @@ export async function onRequestPost({ request, env }) {
     params.set('line_items[0][price_data][unit_amount]',String(amount));
     params.set('line_items[0][price_data][product_data][name]',PRODUCT.name);
     params.set('success_url',url.origin+'/para-de-ignorar/jogar.html?session_id={CHECKOUT_SESSION_ID}&theme='+PRODUCT.slug);
-    params.set('cancel_url',url.origin+'/para-de-ignorar/relacoes-preview-91c4.html');
+    params.set('cancel_url',url.origin+'/para-de-ignorar/');
     params.set('metadata[environment]','maison-jf-live');
     params.set('metadata[source]','para-de-ignorar-live');
     params.set('metadata[pdi_access]','single-session');
