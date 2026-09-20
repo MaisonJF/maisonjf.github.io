@@ -51,6 +51,13 @@ jobs:
           node --check functions/_lib/offer-brain.js
           node --check functions/_lib/viral-test-policy.js
           node --check functions/api/recommend-offers.js
+          node --check functions/_lib/vpc-ocean-signals.generated.js
+          node --check functions/_lib/vpc-question-engine.js
+          node --check functions/_lib/vpc-public-question-vault.js
+          node --check functions/api/vpc-question-set.js
+          node --check .github/maison-growth/brain/build_vpc_ocean_signals.mjs
+          node .github/maison-growth/brain/build_vpc_ocean_signals.mjs --check
+          node .github/maison-growth/vault/validate_vpc_question_engine.mjs
           node --check analytics.js
           node --check maison-language.js
           node --check produtos/detail.js
