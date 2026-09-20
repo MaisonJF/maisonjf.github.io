@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Como gostas de receber amor? | MAISON JF®</title>
+<meta name="description" content="Teste MAISON JF® de preferências de afeto: palavras, tempo, gestos, toque e símbolos. Descobre o que pesa mais para ti e partilha o resultado.">
+<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://maison-jf.com/teste/afeto/">
+<link rel="stylesheet" href="../../maison.css?v=20260920-architecture1"><link rel="stylesheet" href="../volta.css?v=20260920-tests1"><script src="../../analytics.js" defer></script>
+</head>
+<body class="vpc-page">
+<header class="site-header"><a class="brand" href="../../">MAISON JF®</a><nav><a href="../">Volta Para Casa</a><a href="../../farol">O Farol</a><a href="../../produtos/">Produtos</a><a href="../../servicos/">Serviços</a></nav></header>
+<main class="vpc-test vpc-shell"><a class="vpc-back" href="../">← Volta Para Casa</a>
+
+<section class="vpc-stage" id="intro">
+<p class="vpc-kicker">VOLTA PARA CASA · AFETO</p>
+<h1 class="vpc-title">Como gostas<br>de receber amor?</h1>
+<p class="vpc-intro">Não escolhas aquilo que parece mais romântico. Escolhe o que realmente te faz sentir que alguém esteve contigo.</p>
+<div class="vpc-actions"><button class="button button--light" id="start">Começar</button></div>
+<p class="vpc-note">Preferências de afeto, não uma caixa fixa.</p>
+</section>
+
+<section class="vpc-stage" id="quiz" hidden>
+<div class="vpc-progress"><div class="vpc-progress__meta"><span id="count"></span><span>Volta Para Casa</span></div><div class="vpc-progress__bar"><span id="bar"></span></div></div>
+<h2 class="vpc-question" id="question" tabindex="-1"></h2>
+<div class="vpc-choices" id="choices"></div>
+</section>
+
+<section class="vpc-stage vpc-result" id="result" hidden>
+<p class="vpc-result__label" id="resultLabel"></p>
+<h1 id="resultTitle"></h1>
+<p class="vpc-result__lead" id="resultLead"></p>
+<p class="vpc-secondary" id="secondary"></p>
+<blockquote class="vpc-result__quote" id="shareLine"></blockquote>
+
+<section class="vpc-affinity" aria-labelledby="affinityTitle">
+<div class="vpc-affinity__head"><span id="affinityTitle">O que pesou mais nas tuas respostas</span><small>Hoje</small></div>
+<div id="affinityList"></div>
+<p>As preferências mudam com a pessoa, o momento e aquilo de que estás a precisar.</p>
+</section>
+
+<div class="vpc-share vpc-share--primary">
+<button class="button button--light" id="share" type="button">Partilhar o meu resultado</button>
+<span class="vpc-share__status" id="shareStatus" aria-live="polite"></span>
+</div>
+
+<section class="vpc-convert" aria-labelledby="nextTitle">
+<p class="vpc-kicker">E agora?</p>
+<h2 id="nextTitle">O Brain escolheu três portas para este resultado.</h2>
+<div class="vpc-offers" id="nextLinks"></div>
+</section>
+
+<div class="vpc-share"><button id="restart" type="button">Refazer teste</button><a href="../apego/">Fazer o teste de apego</a></div>
+<p class="vpc-note">Este teste descreve preferências de afeto a partir das tuas respostas. Não mede a qualidade de uma relação nem substitui conversa real entre pessoas.</p>
+</section>
+</main>
+
+<script>
+const TYPES={
+ palavras:{label:'Palavras',title:'Tu ouves amor antes de o dares por garantido.',lead:'Para ti, aquilo que alguém diz — e a forma como diz — consegue tornar o afeto visível. Reconhecimento, carinho verbal e dizer o que sente não são “só palavras” quando chegam com verdade.',share:'O meu resultado foi PALAVRAS. Eu noto o que sentes quando o dizes.'},
+ tempo:{label:'Tempo',title:'Para ti, presença não é estar perto. É estar mesmo ali.',lead:'O que pesa é atenção inteira: tempo partilhado, interesse real, estar sem parecer que a pessoa já está a ir embora por dentro.',share:'O meu resultado foi TEMPO. Não preciso de horas. Preciso que estejas mesmo aqui.'},
+ gestos:{label:'Gestos',title:'Tu acreditas no afeto quando ele ganha mãos.',lead:'Pequenas ações contam muito para ti: reparar, ajudar, facilitar, fazer aquilo que mostra que alguém prestou atenção ao que precisavas.',share:'O meu resultado foi GESTOS. Eu noto amor quando ele faz alguma coisa.'},
+ toque:{label:'Toque',title:'Há coisas que o teu corpo percebe antes da tua cabeça.',lead:'Proximidade física, abraço, contacto e calor humano ajudam-te a sentir ligação de uma forma que nem sempre precisa de muitas palavras.',share:'O meu resultado foi TOQUE. Há presença que eu preciso de sentir no corpo.'},
+ simbolos:{label:'Símbolos',title:'Tu guardas provas pequenas de que alguém pensou em ti.',lead:'Um objeto, uma lembrança ou um detalhe escolhido com intenção pode ficar contigo muito depois do momento. Não é o preço: é “vi isto e pensei em ti”.',share:'O meu resultado foi SÍMBOLOS. Eu guardo os pequenos “lembrei-me de ti”.'}
+};
+
+const QUESTIONS=[
+['Num dia difícil, o que te chegava mais fundo?',[
+ ['palavras','Ouvir “eu vejo o que estás a fazer e estou contigo”.'],
+ ['tempo','Ter alguém a sentar-se comigo sem pressa.'],
+ ['gestos','Alguém resolver uma pequena coisa que eu já não tinha cabeça para resolver.'],
+ ['toque','Um abraço demorado sem precisar de explicar muito.'],
+ ['simbolos','Receber uma pequena coisa escolhida porque a pessoa se lembrou de mim.']]],
+['Depois de uma semana caótica, o que te faria sentir mais ligado a alguém?',[
+ ['palavras','Uma mensagem que dissesse exactamente aquilo que eu precisava de ouvir.'],
+ ['tempo','Uma noite só nossa, sem telemóveis a disputar atenção.'],
+ ['gestos','Chegar e perceber que a pessoa tratou de alguma coisa para me aliviar.'],
+ ['toque','Ficar encostados, de mãos dadas ou abraçados.'],
+ ['simbolos','Um detalhe inesperado que mostre que me teve na cabeça durante a semana.']]],
+['Quando alguém pede desculpa, o que te ajuda mais a acreditar?',[
+ ['palavras','Ouvir a pessoa nomear claramente o que aconteceu e o que sente.'],
+ ['tempo','Ela ficar disponível para conversar sem fugir ao assunto.'],
+ ['gestos','Ver uma mudança concreta no que faz depois.'],
+ ['toque','Sentir proximidade física quando já há espaço para isso.'],
+ ['simbolos','Um gesto material simples que marque a reparação e o cuidado.']]],
+['Num aniversário, o que te emociona mais?',[
+ ['palavras','Uma carta ou mensagem pessoal, nada genérica.'],
+ ['tempo','Ter tempo de qualidade planeado para passarmos juntos.'],
+ ['gestos','A pessoa ter organizado coisas para eu poder simplesmente aproveitar.'],
+ ['toque','A proximidade, os abraços e o carinho durante o dia.'],
+ ['simbolos','Abrir algo escolhido mesmo a pensar em mim.']]],
+['O que sentes mais falta quando uma relação começa a esfriar?',[
+ ['palavras','De ouvir carinho, reconhecimento ou aquilo que a pessoa sente.'],
+ ['tempo','De momentos em que estamos realmente presentes um para o outro.'],
+ ['gestos','De pequenos cuidados que antes aconteciam naturalmente.'],
+ ['toque','De contacto, proximidade e carinho físico.'],
+ ['simbolos','De sinais concretos de que ainda se lembra de mim quando não estou.']]],
+['Se alguém quiser fazer-te uma surpresa, qual preferes?',[
+ ['palavras','Deixar-me uma mensagem que eu vá guardar.'],
+ ['tempo','Levar-me para algum lado e passar tempo comigo.'],
+ ['gestos','Fazer por mim uma coisa que sabe que me custa ou me rouba tempo.'],
+ ['toque','Criar um momento de proximidade e carinho físico.'],
+ ['simbolos','Dar-me uma coisa pequena, mas estranhamente certeira.']]],
+['Qual destas coisas te faz pensar “esta pessoa conhece-me”?',[
+ ['palavras','Saber dizer-me algo específico que mostra que reparou em mim.'],
+ ['tempo','Saber quando eu preciso de atenção sem estar a olhar para o relógio.'],
+ ['gestos','Antecipar uma necessidade prática sem eu ter de pedir.'],
+ ['toque','Saber quando preciso de um abraço, mão ou proximidade.'],
+ ['simbolos','Escolher um detalhe que só faz sentido porque conhece os meus gostos.']]],
+['Depois de uma discussão, o que ajuda mais a reconstruir proximidade?',[
+ ['palavras','Dizermos claramente o que sentimos e o que queremos fazer diferente.'],
+ ['tempo','Ficarmos juntos tempo suficiente para a distância baixar.'],
+ ['gestos','A pessoa mostrar na prática que levou a conversa a sério.'],
+ ['toque','Voltarmos ao contacto físico quando ambos estamos confortáveis.'],
+ ['simbolos','Um pequeno sinal concreto que diga “não me esqueci de nós”.']]],
+['O que mais facilmente te faz sentir ignorado?',[
+ ['palavras','Nunca ouvir reconhecimento ou carinho, mesmo quando existe.'],
+ ['tempo','Estar com alguém que está sempre dividido entre mim e outra coisa.'],
+ ['gestos','Ter de pedir repetidamente ajuda ou cuidado que parecia óbvio.'],
+ ['toque','Sentir que a proximidade física desapareceu sem conversa.'],
+ ['simbolos','Perceber que nunca há aquele pequeno sinal de “pensei em ti”.']]],
+['Se só pudesses escolher uma coisa esta semana, qual seria?',[
+ ['palavras','Uma conversa em que alguém me dissesse claramente o que sente por mim.'],
+ ['tempo','Algumas horas de atenção inteira com alguém importante.'],
+ ['gestos','Uma ajuda concreta que me aliviasse mesmo.'],
+ ['toque','Um abraço, colo ou contacto de que tenho sentido falta.'],
+ ['simbolos','Uma pequena lembrança escolhida especificamente para mim.']]]
+];
+
+const scores={palavras:0,tempo:0,gestos:0,toque:0,simbolos:0};
+let step=0;
+const $=id=>document.getElementById(id);
+const track=(name,data={})=>window.maisonAnalytics?.track?.(name,{...data,test:'afeto',page_path:location.pathname});
+const shuffle=items=>{const a=items.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+function show(id){['intro','quiz','result'].forEach(x=>$(x).hidden=x!==id)}
+function render(){
+ const q=QUESTIONS[step];
+ $('count').textContent=(step+1)+' / '+QUESTIONS.length;
+ $('bar').style.width=((step+1)/QUESTIONS.length*100)+'%';
+ $('question').textContent=q[0];$('choices').innerHTML='';
+ shuffle(q[1]).forEach(opt=>{
+  const b=document.createElement('button');b.type='button';b.className='vpc-choice';b.textContent=opt[1];
+  b.addEventListener('click',()=>{scores[opt[0]]++;track('vpc_test_answer',{step:step+1,choice:opt[0]});step++;if(step<QUESTIONS.length)render();else finish()});
+  $('choices').appendChild(b);
+ });
+ $('question').focus();
+}
+function ranked(){
+ const entries=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+ const total=Object.values(scores).reduce((a,b)=>a+b,0)||1;
+ return entries.map(([key,value])=>[key,Math.round(value/total*100)]);
+}
+function attributedHref(raw,offerId,result,brainVersion){
+ const url=new URL(raw,location.href);
+ url.searchParams.set('mj_source','vpc');url.searchParams.set('mj_offer',offerId);url.searchParams.set('mj_result','afeto-'+result);url.searchParams.set('mj_route','test');url.searchParams.set('mj_brain',brainVersion||'fallback');
+ return url.pathname+url.search+url.hash;
+}
+function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function offerMarkup(o,index,result,brain){
+ const label=[o.slotLabel,o.priceLabel].filter(Boolean).join(' · ');
+ return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brain||'fallback')+'" href="'+esc(attributedHref(o.href,o.id,result,brain))+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
+}
+async function brainOffers(result){
+ const host=$('nextLinks');host.innerHTML='<p class="vpc-note">A escolher o que faz mais sentido agora…</p>';
+ try{
+  const response=await fetch('/api/recommend-offers',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({test:'afeto',testResult:result})});
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok||!Array.isArray(data.offers)||!data.offers.length)throw new Error('brain');
+  host.innerHTML=data.offers.map((o,i)=>offerMarkup(o,i,result,data.version)).join('');
+  track('vpc_offer_brain_result',{result,brain_version:data.version,offers:data.offers.map(o=>o.id).join(',')});
+ }catch(_){
+  host.innerHTML='<a class="vpc-offer vpc-offer--primary" href="../../produtos/"><small>Explorar</small><strong>Produtos →</strong><span>Físicos e digitais, escolhidos pelo que precisas.</span></a><a class="vpc-offer" href="../../servicos/"><small>Aprofundar</small><strong>Serviços →</strong><span>Quando queres falar ou ir mais fundo.</span></a>';
+ }
+}
+async function makeShareCard(key){
+ if(document.fonts&&document.fonts.ready)try{await document.fonts.ready}catch(_){}
+ const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;const ctx=canvas.getContext('2d');
+ const g=ctx.createRadialGradient(540,120,40,540,650,1350);g.addColorStop(0,'#2a211a');g.addColorStop(.45,'#11100f');g.addColorStop(1,'#070707');ctx.fillStyle=g;ctx.fillRect(0,0,1080,1920);
+ ctx.fillStyle='#c3a66d';ctx.fillRect(90,132,74,3);ctx.fillStyle='#f3efe7';ctx.font='700 26px Arial';ctx.fillText('MAISON JF®',90,205);
+ ctx.fillStyle='#9f978c';ctx.font='600 24px Arial';ctx.fillText('VOLTA PARA CASA · AFETO',90,395);
+ ctx.fillStyle='#f3efe7';ctx.font='400 100px Georgia';ctx.fillText(TYPES[key].label.toUpperCase(),90,570);
+ ctx.fillStyle='#d8d0c2';ctx.font='italic 400 58px Georgia';
+ let y=735;wrapText(ctx,TYPES[key].share.replace(/^O meu resultado foi [^.]+\.\s*/i,''),890).forEach(line=>{ctx.fillText(line,90,y);y+=76});
+ ctx.fillStyle='#c3a66d';ctx.fillRect(90,1570,900,1);ctx.fillStyle='#f3efe7';ctx.font='400 42px Georgia';ctx.fillText('E tu? Como gostas de receber amor?',90,1680);ctx.font='700 39px Arial';ctx.fillText('maison-jf.com/teste/afeto',90,1750);
+ ctx.fillStyle='#706a62';ctx.font='400 21px Arial';ctx.fillText('Preferências de afeto. Não uma caixa fixa.',90,1832);
+ return new Promise(resolve=>canvas.toBlob(resolve,'image/png',.96));
+}
+function wrapText(ctx,text,maxWidth){const words=text.split(/\s+/),lines=[];let line='';for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);return lines}
+async function shareResult(key){
+ $('shareStatus').textContent='A preparar…';
+ const text=TYPES[key].share+' Fiz o teste da MAISON JF®.';
+ try{
+  const blob=await makeShareCard(key),file=new File([blob],'maison-jf-afeto-'+key+'.png',{type:'image/png'});
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'Como gostas de receber amor? · MAISON JF®',text});$('shareStatus').textContent='';track('vpc_test_share',{result:key,method:'card'});return}
+  if(navigator.share){await navigator.share({title:'Como gostas de receber amor? · MAISON JF®',text,url:location.href});$('shareStatus').textContent='';track('vpc_test_share',{result:key,method:'text'});return}
+  await navigator.clipboard.writeText(text+' '+location.href);$('shareStatus').textContent='Resultado copiado.';track('vpc_test_share',{result:key,method:'clipboard'});
+ }catch(e){if(e?.name==='AbortError')$('shareStatus').textContent='';else $('shareStatus').textContent='Não foi possível abrir a partilha.'}
+}
+function finish(){
+ const list=ranked(),key=list[0][0],r=TYPES[key];show('result');
+ $('resultLabel').textContent='A tua preferência de afeto · '+r.label;$('resultTitle').textContent=r.title;$('resultLead').textContent=r.lead;$('shareLine').textContent='“'+r.share+'”';
+ $('secondary').textContent=list[1][1]===list[0][1]?'Duas formas ficaram empatadas. Não tens de escolher uma só para sempre.':'A segunda forma que mais apareceu foi '+TYPES[list[1][0]].label+'.';
+ $('affinityList').innerHTML=list.map(([k,p])=>'<div class="vpc-affinity__row"><span>'+TYPES[k].label+'</span><div><i style="width:'+p+'%"></i></div><b>'+p+'%</b></div>').join('');
+ $('share').onclick=()=>shareResult(key);
+ try{localStorage.setItem('maison_vpc_afeto_v1',JSON.stringify({result:key,ranked:list,createdAt:Date.now()}))}catch(_){}
+ track('vpc_test_result',{result:key,secondary:list[1][0]});brainOffers(key);
+}
+$('start').addEventListener('click',()=>{show('quiz');track('vpc_test_start');render()});
+$('restart').addEventListener('click',()=>location.reload());
+$('nextLinks').addEventListener('click',e=>{const a=e.target.closest('[data-vpc-offer]');if(!a)return;track('vpc_offer_click',{offer:a.dataset.vpcOffer,slot:a.dataset.vpcSlot||'',brain_version:a.dataset.vpcBrain||''})});
+</script>
+</body></html>
