@@ -5,7 +5,7 @@
 <title>Volta Para Casa · Porta Atenção | MAISON JF®</title>
 <meta name="description" content="Volta Para Casa · Porta Atenção: reconhece o que está a pedir mais atenção e encontra um próximo passo.">
 <meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://maison-jf.com/teste/atencao/">
-<link rel="stylesheet" href="../../maison.css?v=20260920-architecture1"><link rel="stylesheet" href="../volta.css?v=20260920-service1"><script src="../../analytics.js" defer></script>
+<link rel="stylesheet" href="../../maison.css?v=20260920-goldsystem1"><link rel="stylesheet" href="../volta.css?v=20260920-resultgold1"><script src="../../analytics.js?v=20260920-consent3" defer></script>
 </head>
 <body class="vpc-page">
 <header class="site-header"><a class="brand" href="../../">MAISON JF®</a><nav><a href="../../farol">O Farol</a><a href="../">Volta Para Casa</a><a href="../../produtos/">Produtos</a><a href="../../servicos/">Serviços</a></nav></header>
@@ -178,9 +178,10 @@ function render(){
 function rankedAxes(){const exposure=Object.fromEntries(Object.keys(AXES).map(k=>[k,0]));QUESTIONS.forEach(q=>q.a.forEach(a=>exposure[a.s]++));return Object.keys(AXES).map(k=>{const secondaryRate=exposure[k]?secondaryScores[k]/exposure[k]:0;return {key:k,primary:primaryScores[k],secondary:secondaryScores[k],secondaryRate:secondaryRate,total:primaryScores[k]*100+Math.round(secondaryRate*99)}}).sort((a,b)=>(b.primary-a.primary)||(b.secondaryRate-a.secondaryRate))}
 function routeMode(){const ranked=Object.entries(routeScores).sort((a,b)=>b[1]-a[1]);return ranked[0][1]===ranked[1][1]?'default':ranked[0][0]}
 const FALLBACK_OFFERS=[
- {id:'oracle-fallback',slot:'now',slotLabel:'Agora',title:'Oráculo MAISON JF®',description:'Uma abertura simbólica para olhares para isto de outro ângulo.',href:'../../oraculo/',priceLabel:'2 €'},
- {id:'products-fallback',slot:'deeper',slotLabel:'Outra forma',title:'Produtos',description:'Produtos físicos e digitais escolhidos pelo que precisas agora.',href:'../../produtos/',priceLabel:''},
- {id:'services-fallback',slot:'continuity',slotLabel:'Quero ir mais fundo',title:'Serviços',description:'Quando queres falar, aprofundar ou ter continuidade.',href:'../../servicos/',priceLabel:''}
+ {id:'oracle-fallback',slot:'oracle',slotLabel:'Outra perspectiva',title:'Oráculo MAISON JF®',description:'Uma abertura simbólica para olhares para isto de outro ângulo.',href:'../../oraculo/',priceLabel:'2 €'},
+ {id:'pdi-fallback',slot:'game',slotLabel:'Para abrir conversa',title:'PÁRA DE IGNORAR!',description:'28 perguntas para duas pessoas abrirem uma conversa que nem sempre sabe começar sozinha.',href:'../../para-de-ignorar/',priceLabel:'5 €'},
+ {id:'physical-fallback',slot:'physical',slotLabel:'Um gesto concreto',title:'Produtos físicos',description:'Pausa, toque e aroma para transformar o que sentiste num gesto simples.',href:'../../produtos/',priceLabel:''},
+ {id:'consultation-fallback',slot:'consultation',slotLabel:'Quero ir mais fundo',title:'Consultas',description:'Quando queres contexto, leitura e uma conversa mais funda sobre o que apareceu.',href:'../../servicos/',priceLabel:''}
 ];
 function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
 function attributedHref(raw,offerId,result,route,brainVersion){

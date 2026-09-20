@@ -2581,3 +2581,26 @@ textarea,
     margin-left:0!important;
   }
 }
+
+
+/* MAISON JF® · GOLD DETAIL SYSTEM · 2026-09-20 */
+:root{--maison-gold:#c7aa73;--maison-gold-light:#e0c48b}
+.eyebrow,
+.detail-eyebrow,
+.catalogue-card__eyebrow,
+.service-card__eyebrow,
+.footer__column-title,
+.home-footer__group>span,
+.gift-card small,
+.journey-card small,
+.offer-card small,
+.territory small,
+.product__body small{
+  color:var(--maison-gold)!important;
+}
+.gift-card:hover small,
+.journey-card:hover small,
+.offer-card:hover small,
+.territory:hover small{
+  color:var(--maison-gold-light)!important;
+}
