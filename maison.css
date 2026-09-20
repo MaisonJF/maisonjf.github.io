@@ -2554,3 +2554,39 @@ a.product-digital__card b{
 a.product-digital__card p{
   color:var(--ak-muted,#aaa39a)!important;
 }
+
+
+/* MAISON JF® · GOLD DETAIL SYSTEM · 2026-09-20 */
+:root{
+  --maison-gold:#c7aa73;
+  --maison-gold-light:#e0c48b;
+}
+.eyebrow,
+.detail-eyebrow,
+.catalogue-card__eyebrow,
+.service-card__eyebrow,
+.footer__column-title,
+.home-footer__group>span,
+.journey-card small,
+.offer-card small,
+.related-card small,
+.territory small,
+.product__body small,
+.product-meta-links a,
+.gift-card small,
+.vpc-kicker,
+.vpc-result__label,
+.vpc-progress__meta,
+.vpc-affinity__head,
+.vpc-offer small{
+  color:var(--maison-gold)!important;
+}
+.journey-card:hover small,
+.offer-card:hover small,
+.related-card:hover small,
+.territory:hover small,
+.gift-card:hover small,
+.vpc-offer:hover small,
+.vpc-offer:focus-visible small{
+  color:var(--maison-gold-light)!important;
+}
