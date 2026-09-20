@@ -30,8 +30,8 @@
       "farol": 11,
       "voltaParaCasa": 8,
       "maisonNative": 3,
-      "exactGroups": 150,
-      "pdiConversation": 28
+      "pdiConversation": 28,
+      "exactGroups": 150
     },
     "themes": [
       {
@@ -6461,168 +6461,6 @@
         "status": "needs_editorial"
       },
       {
-        "candidateKey": "o-que-nunca-te-perguntei",
-        "preferredLabel": "O que nunca te perguntei",
-        "slugs": [
-          "o-que-nunca-te-perguntei"
-        ],
-        "sources": [
-          "maison-native"
-        ],
-        "evidence": [
-          {
-            "source": "maison-native",
-            "sourceId": "o-que-nunca-te-perguntei",
-            "focus": "aquilo que sempre quiseste saber sobre alguém sem encontrares a forma de perguntar",
-            "family": "Não dito"
-          }
-        ],
-        "questionDesignSlots": [
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_perguntei_open",
-            "stage": "open",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_perguntei_recognize",
-            "stage": "recognize",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_perguntei_deepen",
-            "stage": "deepen",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_perguntei_touch",
-            "stage": "touch",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_perguntei_close",
-            "stage": "close",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_perguntei_signature",
-            "stage": "signature",
-            "status": "needs_editorial"
-          }
-        ],
-        "bodyStored": false,
-        "approvalRequired": true,
-        "automaticActivation": false,
-        "status": "needs_editorial"
-      },
-      {
-        "candidateKey": "o-que-nunca-te-disse",
-        "preferredLabel": "O que nunca te disse",
-        "slugs": [
-          "o-que-nunca-disse"
-        ],
-        "sources": [
-          "maison-native"
-        ],
-        "evidence": [
-          {
-            "source": "maison-native",
-            "sourceId": "o-que-nunca-disse",
-            "focus": "aquilo que ficou por dizer por medo, vergonha, timing ou falta de palavras",
-            "family": "Não dito"
-          }
-        ],
-        "questionDesignSlots": [
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_disse_open",
-            "stage": "open",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_disse_recognize",
-            "stage": "recognize",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_disse_deepen",
-            "stage": "deepen",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_disse_touch",
-            "stage": "touch",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_disse_close",
-            "stage": "close",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_o_que_nunca_te_disse_signature",
-            "stage": "signature",
-            "status": "needs_editorial"
-          }
-        ],
-        "bodyStored": false,
-        "approvalRequired": true,
-        "automaticActivation": false,
-        "status": "needs_editorial"
-      },
-      {
-        "candidateKey": "se-eu-pudesse-perguntar",
-        "preferredLabel": "Se eu pudesse perguntar",
-        "slugs": [
-          "se-eu-pudesse-perguntar"
-        ],
-        "sources": [
-          "maison-native"
-        ],
-        "evidence": [
-          {
-            "source": "maison-native",
-            "sourceId": "se-eu-pudesse-perguntar",
-            "focus": "perguntas que normalmente ficam presas entre curiosidade, intimidade e receio da resposta",
-            "family": "Não dito"
-          }
-        ],
-        "questionDesignSlots": [
-          {
-            "id": "pdi_source_slot_se_eu_pudesse_perguntar_open",
-            "stage": "open",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_se_eu_pudesse_perguntar_recognize",
-            "stage": "recognize",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_se_eu_pudesse_perguntar_deepen",
-            "stage": "deepen",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_se_eu_pudesse_perguntar_touch",
-            "stage": "touch",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_se_eu_pudesse_perguntar_close",
-            "stage": "close",
-            "status": "needs_editorial"
-          },
-          {
-            "id": "pdi_source_slot_se_eu_pudesse_perguntar_signature",
-            "stage": "signature",
-            "status": "needs_editorial"
-          }
-        ],
-        "bodyStored": false,
-        "approvalRequired": true,
-        "automaticActivation": false,
-        "status": "needs_editorial"
-      },
-      {
         "candidateKey": "primeiras-impressoes",
         "preferredLabel": "Primeiras Impressões",
         "slugs": [
@@ -7325,7 +7163,7 @@
         "status": "needs_editorial"
       },
       {
-        "candidateKey": "trabalho-entra-em-casa",
+        "candidateKey": "quando-o-trabalho-entra-em-casa",
         "preferredLabel": "Quando o Trabalho Entra em Casa",
         "slugs": [
           "trabalho-entra-em-casa"
@@ -7343,32 +7181,32 @@
         ],
         "questionDesignSlots": [
           {
-            "id": "pdi_source_slot_trabalho_entra_em_casa_open",
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_open",
             "stage": "open",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_trabalho_entra_em_casa_recognize",
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_recognize",
             "stage": "recognize",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_trabalho_entra_em_casa_deepen",
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_deepen",
             "stage": "deepen",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_trabalho_entra_em_casa_touch",
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_touch",
             "stage": "touch",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_trabalho_entra_em_casa_close",
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_close",
             "stage": "close",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_trabalho_entra_em_casa_signature",
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -7703,7 +7541,7 @@
         "status": "needs_editorial"
       },
       {
-        "candidateKey": "sexo-sem-roteiro",
+        "candidateKey": "intimidade-sem-roteiro",
         "preferredLabel": "Intimidade sem Roteiro",
         "slugs": [
           "sexo-sem-roteiro"
@@ -7721,32 +7559,32 @@
         ],
         "questionDesignSlots": [
           {
-            "id": "pdi_source_slot_sexo_sem_roteiro_open",
+            "id": "pdi_source_slot_intimidade_sem_roteiro_open",
             "stage": "open",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_sexo_sem_roteiro_recognize",
+            "id": "pdi_source_slot_intimidade_sem_roteiro_recognize",
             "stage": "recognize",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_sexo_sem_roteiro_deepen",
+            "id": "pdi_source_slot_intimidade_sem_roteiro_deepen",
             "stage": "deepen",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_sexo_sem_roteiro_touch",
+            "id": "pdi_source_slot_intimidade_sem_roteiro_touch",
             "stage": "touch",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_sexo_sem_roteiro_close",
+            "id": "pdi_source_slot_intimidade_sem_roteiro_close",
             "stage": "close",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_sexo_sem_roteiro_signature",
+            "id": "pdi_source_slot_intimidade_sem_roteiro_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -7811,7 +7649,7 @@
         "status": "needs_editorial"
       },
       {
-        "candidateKey": "sonhos-e-planos-absurdos",
+        "candidateKey": "sonhos-e-planos-improvaveis",
         "preferredLabel": "Sonhos & Planos Improváveis",
         "slugs": [
           "sonhos-e-planos-absurdos"
@@ -7829,32 +7667,32 @@
         ],
         "questionDesignSlots": [
           {
-            "id": "pdi_source_slot_sonhos_e_planos_absurdos_open",
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_open",
             "stage": "open",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_sonhos_e_planos_absurdos_recognize",
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_recognize",
             "stage": "recognize",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_sonhos_e_planos_absurdos_deepen",
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_deepen",
             "stage": "deepen",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_sonhos_e_planos_absurdos_touch",
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_touch",
             "stage": "touch",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_sonhos_e_planos_absurdos_close",
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_close",
             "stage": "close",
             "status": "needs_editorial"
           },
           {
-            "id": "pdi_source_slot_sonhos_e_planos_absurdos_signature",
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -8125,6 +7963,168 @@
           },
           {
             "id": "pdi_source_slot_perguntas_que_nunca_fiz_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "o-que-nunca-te-perguntei",
+        "preferredLabel": "O que nunca te perguntei",
+        "slugs": [
+          "o-que-nunca-te-perguntei"
+        ],
+        "sources": [
+          "maison-native"
+        ],
+        "evidence": [
+          {
+            "source": "maison-native",
+            "sourceId": "o-que-nunca-te-perguntei",
+            "focus": "aquilo que sempre quiseste saber sobre alguém sem encontrares a forma de perguntar",
+            "family": "Não dito"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_perguntei_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_perguntei_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_perguntei_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_perguntei_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_perguntei_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_perguntei_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "o-que-nunca-te-disse",
+        "preferredLabel": "O que nunca te disse",
+        "slugs": [
+          "o-que-nunca-disse"
+        ],
+        "sources": [
+          "maison-native"
+        ],
+        "evidence": [
+          {
+            "source": "maison-native",
+            "sourceId": "o-que-nunca-disse",
+            "focus": "aquilo que ficou por dizer por medo, vergonha, timing ou falta de palavras",
+            "family": "Não dito"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_disse_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_disse_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_disse_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_disse_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_disse_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_nunca_te_disse_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "se-eu-pudesse-perguntar",
+        "preferredLabel": "Se eu pudesse perguntar",
+        "slugs": [
+          "se-eu-pudesse-perguntar"
+        ],
+        "sources": [
+          "maison-native"
+        ],
+        "evidence": [
+          {
+            "source": "maison-native",
+            "sourceId": "se-eu-pudesse-perguntar",
+            "focus": "perguntas que normalmente ficam presas entre curiosidade, intimidade e receio da resposta",
+            "family": "Não dito"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_se_eu_pudesse_perguntar_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_se_eu_pudesse_perguntar_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_se_eu_pudesse_perguntar_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_se_eu_pudesse_perguntar_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_se_eu_pudesse_perguntar_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_se_eu_pudesse_perguntar_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
