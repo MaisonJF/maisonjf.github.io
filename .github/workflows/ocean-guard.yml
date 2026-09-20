@@ -134,6 +134,10 @@ jobs:
           print('Final public service catalogue is locked.')
           PY
 
+      - name: Audit public site integrity
+        shell: bash
+        run: python3 scripts/audit-public-site.py
+
       - name: Ensure every Ocean flows somewhere public
         shell: bash
         run: |
