@@ -18,7 +18,7 @@
 .consultation-panel{padding:8px 0 26px}.consultation-panel[hidden]{display:none}.consultation-panel__head{display:flex;justify-content:space-between;gap:30px;align-items:end;padding:0 0 14px;border-bottom:1px solid var(--line)}.consultation-panel__head h3{font:400 34px/1 var(--serif);margin:.2em 0}.consultation-panel__head p{color:#8f887e;margin:0;max-width:420px}.consultation-other{padding:26px 0 10px;border-top:1px solid var(--line);margin-top:18px}.consultation-other summary{cursor:pointer;color:#c8b58d;text-transform:uppercase;letter-spacing:.11em;font-size:10px}.consultation-other .service-list{margin-top:14px}
 .service-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 44px}.service-card{padding:30px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:24px}
 .service-card small{display:block;color:#8f887e;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}.service-card h3{font:400 31px/1 var(--serif);margin:0 0 10px}.service-card p{color:#aaa39a;margin:0;max-width:540px}.service-card__limits{margin-top:12px;color:#777;font-size:12px}.service-card__limits summary{cursor:pointer;color:#8f887e;text-decoration:underline}.service-card__limits p{margin:8px 0 0!important;color:#777!important;font-size:12px!important}
-.service-card__side{text-align:right;min-width:135px}.service-card__price{font:400 19px var(--serif);color:#e8dfd2}.service-card__side .text-link{margin-top:10px}
+.service-card__side{text-align:right;min-width:150px}.service-card__price{font:400 19px var(--serif);color:#e8dfd2}.service-card__side .text-link{margin-top:10px}.service-buy{appearance:none;background:none;border:0;padding:0;color:#c8b58d;cursor:pointer;text-transform:uppercase;letter-spacing:.1em;font:600 10px/1.4 var(--sans)}.service-buy:disabled{opacity:.55;cursor:not-allowed}.service-help{display:block;font-size:10px;color:#8f887e!important}.consultation-checkout-status{color:#8f887e;font-size:12px;min-height:18px;margin:8px 0 18px}
 .special-service{margin-top:110px;display:grid;grid-template-columns:1.08fr .92fr;background:#111}.special-service__media{min-height:620px}.special-service__media img{width:100%;height:100%;object-fit:cover;display:block}.special-service__copy{padding:clamp(38px,7vw,86px);display:flex;flex-direction:column;justify-content:center}.special-service__copy h2{font:400 clamp(48px,6vw,82px)/.92 var(--serif);margin:.2em 0}.special-service__copy p{color:#aaa39a}.special-service__formats{font:400 24px/1 var(--serif);margin:16px 0 2px!important;color:#eee6da!important}
 .professional{margin-top:100px;padding:70px;border:1px solid var(--line);display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:end}.professional h2{font:400 clamp(38px,5vw,62px)/1 var(--serif);margin:.2em 0}.professional p{color:#aaa39a}
 .start{margin-top:100px;padding-top:70px;border-top:1px solid var(--line);display:grid;grid-template-columns:1.1fr .9fr;gap:70px}.start h2{font:400 clamp(38px,5vw,62px)/1 var(--serif);margin:.2em 0}.start p{color:#aaa39a}
@@ -62,6 +62,7 @@
   <div class="consultation-panel__head"><div><p class="eyebrow" id="consultationEyebrow">Consulta</p><h3 id="consultationTitle">Escolhe o formato.</h3></div><p id="consultationHint"></p></div>
   <div class="service-list" id="consultasList"></div>
 </section>
+<p class="consultation-checkout-status" id="consultationCheckoutStatus" aria-live="polite"></p>
 <details class="consultation-other">
   <summary>Outras leituras</summary>
   <div class="service-list" id="outrasLeiturasList"></div>
@@ -100,8 +101,16 @@
    if(s.limits){const details=document.createElement('details');details.className='service-card__limits';const summary=document.createElement('summary');summary.textContent='Antes de marcar';const lim=document.createElement('p');lim.textContent=s.limits;details.append(summary,lim);main.appendChild(details)}
    const side=document.createElement('div');side.className='service-card__side';
    const price=document.createElement('div');price.className='service-card__price';price.textContent=s.price||'Sob consulta';
-   const a=document.createElement('a');a.className='text-link';a.dataset.service=s.slug;a.href=contact+'?interesse='+encodeURIComponent(s.slug);a.textContent=s.cta;
-   side.append(price,a);el.append(main,side);
+   side.appendChild(price);
+   if(Number.isInteger(s.amount)&&s.amount>0){
+     const buy=document.createElement('button');buy.type='button';buy.className='service-buy';buy.dataset.buyService=s.slug;buy.textContent='Comprar agora';
+     const help=document.createElement('a');help.className='text-link service-help';help.target='_blank';help.rel='noopener noreferrer';help.href='https://wa.me/351923318289?text='+encodeURIComponent('Olá Maison JF. Tenho uma dúvida sobre '+s.name+'.');help.textContent='Tenho uma dúvida';
+     side.append(buy,help);
+   }else{
+     const a=document.createElement('a');a.className='text-link';a.dataset.service=s.slug;a.href=contact+'?interesse='+encodeURIComponent(s.slug);a.textContent=s.cta;
+     side.appendChild(a);
+   }
+   el.append(main,side);
    return el;
  }
  function render(kind,target){
@@ -141,7 +150,33 @@
  }
  revealHash();window.addEventListener('hashchange',revealHash);
 
- document.addEventListener('click',e=>{const a=e.target.closest('[data-service]');if(a)track('service_interest',{service:a.dataset.service,page_path:location.pathname})});
+ document.addEventListener('click',async e=>{
+   const buy=e.target.closest('[data-buy-service]');
+   const a=e.target.closest('[data-service]');
+   if(a)track('service_interest',{service:a.dataset.service,page_path:location.pathname});
+   if(!buy)return;
+   const slug=String(buy.dataset.buyService||'');
+   const status=document.getElementById('consultationCheckoutStatus');
+   const original=buy.textContent;
+   document.querySelectorAll('[data-buy-service]').forEach(button=>button.disabled=true);
+   buy.textContent='A abrir pagamento…';
+   if(status)status.textContent='';
+   track('consultation_purchase_intent',{service:slug,page_path:location.pathname});
+   try{
+     const response=await fetch('/api/create-consultation-checkout-live',{
+       method:'POST',
+       headers:{'content-type':'application/json'},
+       body:JSON.stringify({slug})
+     });
+     const payload=await response.json().catch(()=>({}));
+     if(!response.ok||!payload.url)throw new Error(payload.error||'Não foi possível abrir o pagamento.');
+     location.href=payload.url;
+   }catch(error){
+     document.querySelectorAll('[data-buy-service]').forEach(button=>button.disabled=false);
+     buy.textContent=original;
+     if(status)status.textContent=error.message||'Não foi possível abrir o pagamento.';
+   }
+ });
 })();
 </script>
 </body></html>
