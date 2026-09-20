@@ -1,12 +1,9 @@
 import { getOrCreateQuestionSession } from '../_lib/para-de-ignorar-session.js';
+import { getPdiTheme } from '../_lib/pdi-theme-registry.js';
 
-const THEMES={
-  relacoes:{label:'Relações'}
-};
-
-export async function onRequestGet({ request, env }) {
-  try {
-    if (!env?.STRIPE_LIVE_SECRET_KEY) {
+export async function onRequestGet({request,env}){
+  try{
+    if(!env?.STRIPE_LIVE_SECRET_KEY){
       return json({error:'Esta sessão está temporariamente indisponível.'},503);
     }
 
@@ -32,34 +29,31 @@ export async function onRequestGet({ request, env }) {
     }
 
     const theme=String(stripeSession.metadata?.pdi_theme||'');
+    const product=getPdiTheme(theme);
     const valid=
-      THEMES[theme] &&
+      product &&
       stripeSession.livemode===true &&
       stripeSession.payment_status==='paid' &&
       stripeSession.metadata?.environment==='maison-jf-live' &&
       stripeSession.metadata?.source==='para-de-ignorar-live' &&
       stripeSession.metadata?.pdi_access==='single-session' &&
-      stripeSession.amount_total===500 &&
-      stripeSession.currency==='eur' &&
-      (!requestedTheme || requestedTheme===theme);
+      stripeSession.amount_total===product.amount &&
+      stripeSession.currency===String(product.currency||'eur') &&
+      (!requestedTheme||requestedTheme===theme);
 
     if(!valid){
       return json({error:'Esta compra não dá acesso a esta sessão.'},403);
     }
 
-    const frozen=await getOrCreateQuestionSession({
-      env,
-      stripeSession,
-      theme
-    });
-    if(!frozen || frozen.packA?.length!==14 || frozen.packB?.length!==14){
+    const frozen=await getOrCreateQuestionSession({env,stripeSession,theme});
+    if(!frozen||frozen.packA?.length!==14||frozen.packB?.length!==14){
       return json({error:'Não foi possível preparar esta sessão.'},503);
     }
 
     return json({
       paid:true,
       theme,
-      label:THEMES[theme].label,
+      label:product.label,
       session_id:stripeSession.id,
       game_session_id:frozen.game_session_id,
       packs:{
@@ -67,7 +61,7 @@ export async function onRequestGet({ request, env }) {
         B:frozen.packB.map(card=>({id:card.id,position:card.position,text:card.text}))
       }
     });
-  } catch {
+  }catch{
     return json({error:'Não foi possível abrir esta sessão.'},500);
   }
 }

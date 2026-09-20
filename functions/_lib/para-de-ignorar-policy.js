@@ -3,7 +3,7 @@ PÁRA DE IGNORAR! — internal product contract
 The public promise is intentionally smaller than the engine.
 */
 export const PARA_DE_IGNORAR_POLICY={
-  version:'2026-09-20-v3',
+  version:'2026-09-20-v4',
   format:'digital-only',
   session:{
     cards:28,
@@ -28,7 +28,10 @@ export const PARA_DE_IGNORAR_POLICY={
     repertoire:'unbounded',
     themes:'unbounded',
     activeQuestionTargetPerMatureTheme:300,
-    principle:'A mature theme should have enough depth to make repeated purchases materially different; 300 is a growth floor/target, never a catalogue cap.',
+    editorialCoreTargetAcrossCurrentThemes:45000,
+    combinatorialPossibilityTarget:2800000,
+    importBatchMaximum:100,
+    principle:'A mature theme should have enough depth to make repeated purchases materially different; 300 is a growth floor/target, never a catalogue cap. Private generation may expand far beyond the stored editorial core, but only quality-gated material may become live.',
     oceansCanPropose:true,
     oceansCanProposeThemes:true,
     automaticPaidPublication:false,

@@ -12,6 +12,7 @@ const CHECK=process.argv.includes('--check');
 const ROLES=['opening','recognition','tension','counterpoint','reframe','movement','close'];
 const STAGES=['open','recognize','deepen','touch','close','signature'];
 const QUESTION_TARGET_PER_MATURE_THEME=300;
+const COMBINATORIAL_TARGET=2800000;
 
 const slug=value=>String(value||'')
   .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
@@ -122,7 +123,7 @@ items.sort((a,b)=>a.id.localeCompare(b.id));
 const questionItems=items.filter(x=>x.type==='question_candidate');
 const oracleItems=items.filter(x=>x.type==='oracle_candidate');
 const out={
-  version:'2026-09-20-v4',
+  version:'2026-09-20-v5',
   visibility:'internal-editorial',
   generatedAt:oceans.last_enriched_at||null,
   source:'.github/maison-growth/oceans/candidates.json',
@@ -143,10 +144,19 @@ const out={
     pdiSourceSignals:pdiSourceStats.totalSignals,
     pdiThemeBacklog:pdiGrowthThemes.length,
     pdiSourceDesignSlots:pdiGrowthThemes.reduce((n,x)=>n+(x.questionDesignSlots||[]).length,0),
+    pdiEditorialCoreTarget:pdiGrowthThemes.length*QUESTION_TARGET_PER_MATURE_THEME,
+    pdiCombinatorialTarget:COMBINATORIAL_TARGET,
     oracleCandidates:oracleItems.length,
     oracleRoleSlots:oracleItems.reduce((n,x)=>n+(x.roleCandidates||[]).length,0)
   },
   pdiGrowth:{
+    scale:{
+      activeQuestionTargetPerMatureTheme:QUESTION_TARGET_PER_MATURE_THEME,
+      editorialCoreTarget:pdiGrowthThemes.length*QUESTION_TARGET_PER_MATURE_THEME,
+      combinatorialPossibilityTarget:COMBINATORIAL_TARGET,
+      paidBodiesStoredInRepository:false,
+      automaticActivation:false
+    },
     sourceStats:pdiSourceStats,
     themes:pdiGrowthThemes
   },

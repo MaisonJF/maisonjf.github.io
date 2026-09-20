@@ -1,28 +1,29 @@
-const PRODUCTS={
-  relacoes:{name:'PÁRA DE IGNORAR! · Relações',currency:'EUR',amount:500}
-};
+import { pdiThemeAvailability } from '../_lib/pdi-theme-catalogue.js';
 
-export async function onRequestGet({ request, env }) {
-  const url=new URL(request.url);
-  const theme=String(url.searchParams.get('theme')||'relacoes');
-  const product=PRODUCTS[theme];
-  if(!product)return json({available:false},404);
+export async function onRequestGet({request,env}){
+  try{
+    const url=new URL(request.url);
+    const theme=String(url.searchParams.get('theme')||'relacoes');
+    const product=await pdiThemeAvailability(env,theme);
+    if(!product)return json({available:false},404);
 
-  const amount=product.amount;
-  const available=true;
-
-  return json({
-    theme,
-    name:product.name,
-    currency:product.currency,
-    available,
-    amount_cents:available?amount:null,
-    display_price:available?formatEUR(amount):null
-  });
+    return json({
+      theme:product.slug,
+      name:'PÁRA DE IGNORAR! · '+product.label,
+      label:product.label,
+      family:product.family,
+      currency:String(product.currency||'eur').toUpperCase(),
+      available:product.available,
+      amount_cents:product.available?product.amount:null,
+      display_price:product.available?formatEUR(product.amount):null
+    },product.available?200:409);
+  }catch{
+    return json({available:false,error:'Produto temporariamente indisponível.'},503);
+  }
 }
 
 function formatEUR(cents){
-  return new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'}).format(cents/100);
+  return new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'}).format(Number(cents||0)/100);
 }
 function json(payload,status=200){
   return new Response(JSON.stringify(payload),{

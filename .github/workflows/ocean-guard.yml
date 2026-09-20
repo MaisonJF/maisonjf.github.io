@@ -34,6 +34,15 @@ jobs:
           node --check functions/_lib/question-vault-v2.js
           node --check functions/_lib/question-composer.js
           node --check functions/_lib/para-de-ignorar-session.js
+          node --check functions/_lib/pdi-theme-sources.js
+          node --check functions/_lib/pdi-theme-registry.js
+          node --check functions/_lib/pdi-theme-catalogue.js
+          node --check functions/_lib/pdi-vault-admin.js
+          node .github/maison-growth/vault/validate_pdi_registry.mjs
+          node --check functions/api/pdi-admin-import.js
+          node --check functions/api/pdi-themes-live.js
+          node --check functions/api/pdi-product-live.js
+          node --check functions/api/create-pdi-checkout-live.js
           node --check functions/api/oracle-reading-live.js
           node --check functions/api/pdi-event-live.js
           node --check functions/api/pdi-session-live.js
