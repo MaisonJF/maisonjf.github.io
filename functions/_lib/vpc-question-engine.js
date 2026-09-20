@@ -9,20 +9,81 @@ const SECONDARY={
   seen:'belong',attachment:'control',self:'load',control:'security',
   belong:'attachment',load:'self',direction:'control',security:'control'
 };
-const ATTENTION_STEMS=[
-  'Quando alguma coisa começa a ocupar espaço a mais, qual destas tensões se parece mais contigo?',
-  'O que te prende mais depressa quando o dia perde equilíbrio?',
-  'Se tivesses de nomear o ruído de fundo de hoje, qual se aproxima mais?',
-  'Quando a cabeça começa a insistir, onde costuma agarrar primeiro?',
-  'Qual destas coisas tem mais facilidade em roubar-te margem?',
-  'Se hoje houvesse uma coisa a pedir atenção sem pedir licença, qual seria?',
-  'Quando ficas mais vulnerável, que preocupação cresce mais depressa?',
-  'Qual destas tensões reconheces antes de conseguires explicá-la?',
-  'Quando tudo parece misturado, qual destes fios costuma estar por baixo?',
-  'O que te custa mais deixar simplesmente em aberto?',
-  'Qual destas coisas tende a voltar mesmo depois de tentares mudar de assunto?',
-  'Se o teu dia tivesse um ponto sensível, qual destas zonas estaria mais perto dele?'
+const ATTENTION_TOPIC_STEMS=[
+  label=>`Quando ${lower(label)} começa a ocupar espaço, o que parece estar realmente em jogo?`,
+  label=>`Se o tema fosse ${lower(label)}, onde sentirias primeiro a pressão?`,
+  label=>`O que costuma pesar mais em ti quando aparece ${lower(label)}?`,
+  label=>`Quando pensas em ${lower(label)}, qual destas tensões reconheces mais depressa?`,
+  label=>`Se ${lower(label)} te apanhasse num dia mais vulnerável, o que cresceria primeiro?`,
+  label=>`Por baixo de ${lower(label)}, qual destas necessidades poderia estar a pedir atenção?`
 ];
+
+const AXIS_OPTIONS={
+  seen:[
+    'Sentir que o meu esforço passou despercebido.',
+    'Precisar de perceber se aquilo que fiz teve valor.',
+    'Ficar preso ao modo como fui visto ou avaliado.',
+    'Querer um sinal de reconhecimento antes de conseguir pousar o assunto.',
+    'Sentir que tenho de provar outra vez que mereço lugar.',
+    'Levar uma crítica comigo muito depois de a conversa acabar.'
+  ],
+  attachment:[
+    'Não saber ao certo onde estou numa ligação importante.',
+    'Notar distância e querer perceber imediatamente o que mudou.',
+    'Precisar de um sinal de que a ligação continua segura.',
+    'Ficar preso ao silêncio, à ausência ou à falta de resposta.',
+    'Sentir medo de perder uma pessoa antes de existir uma perda real.',
+    'Dar demasiado peso a pequenas mudanças na proximidade.'
+  ],
+  self:[
+    'Perceber que me estou a deixar para depois.',
+    'Sentir culpa por escolher uma necessidade minha.',
+    'Continuar a cuidar quando já precisava de parar.',
+    'Ter dificuldade em dizer não sem me sentir egoísta.',
+    'Engolir o que preciso para evitar desapontar alguém.',
+    'Confundir ser útil com ter de aguentar sempre mais.'
+  ],
+  control:[
+    'Precisar de fechar a incerteza antes de conseguir descansar.',
+    'Pensar mais e mais à procura de uma garantia que não existe.',
+    'Tentar antecipar todos os cenários para não ser apanhado de surpresa.',
+    'Ficar preso à peça de informação que ainda me falta.',
+    'Sentir que só consigo avançar quando tudo fizer sentido.',
+    'Voltar ao mesmo assunto porque ainda não encontrei uma resposta definitiva.'
+  ],
+  belong:[
+    'Sentir falta de um lugar onde possa baixar a guarda.',
+    'Estar com pessoas e continuar a sentir pouca ligação real.',
+    'Perguntar-me se pertenço mesmo ali.',
+    'Sentir que tenho contacto, mas não a companhia de que preciso.',
+    'Precisar de reciprocidade em vez de apenas presença à volta.',
+    'Querer ser incluído sem ter de me tornar indispensável.'
+  ],
+  load:[
+    'Ter mais coisas em cima do que energia disponível.',
+    'Sentir que o corpo já está a pedir pausa antes de eu aceitar parar.',
+    'Continuar a funcionar mesmo quando já não tenho margem.',
+    'Chegar ao fim do dia sem ter recuperado em momento nenhum.',
+    'Sentir que até coisas pequenas começam a pesar demasiado.',
+    'Precisar de descanso e tratá-lo como mais uma obrigação.'
+  ],
+  direction:[
+    'Não saber qual é o próximo passo que me pertence.',
+    'Ter opções e continuar sem conseguir escolher uma.',
+    'Perguntar-me se estou a construir a vida certa para mim.',
+    'Adiar uma decisão porque todas as alternativas parecem ter um custo.',
+    'Sentir que avanço, mas não sei se é na minha direcção.',
+    'Querer escolher sem ter de garantir já o futuro inteiro.'
+  ],
+  security:[
+    'Sentir que a margem pode desaparecer depressa.',
+    'Pensar no futuro como se estivesse sempre a um passo de faltar alguma coisa.',
+    'Precisar de uma base prática antes de conseguir relaxar.',
+    'Ficar em alerta quando dinheiro, casa ou estabilidade parecem incertos.',
+    'Escolher o mais seguro mesmo quando já não me serve muito bem.',
+    'Sentir que uma mudança pequena pode tirar-me demasiado chão.'
+  ]
+};
 
 const APEGO_STEMS=[
   label=>`Quando ${lower(label)} mexe numa relação importante, qual destes impulsos reconheces primeiro?`,
@@ -155,32 +216,26 @@ function payload(test,questions,seed,vaultCount){
 }
 
 function buildAttentionPool(rng){
-  const buckets=Object.fromEntries(AXES.map(a=>[a,[]]));
-  for(const t of ORACLE_TERRITORIES){
-    const axis=axisForTerritory(t);
-    const phrase=optionPhrase(t);
-    if(axis&&phrase)buckets[axis].push({text:phrase,sourceId:t.slug});
-  }
-  for(const o of VPC_OCEAN_SIGNALS){
-    const axis=axisForOcean(o);
-    for(const theme of o.themes||[]){
-      const phrase=themeOption(theme);
-      if(axis&&phrase)buckets[axis].push({text:phrase,sourceId:o.id});
-    }
-  }
+  const topics=[
+    ...ORACLE_TERRITORIES.map(t=>({id:t.slug,label:t.label,kind:'ocean-territory'})),
+    ...VPC_OCEAN_SIGNALS.flatMap(o=>(o.themes||[]).map((theme,index)=>({id:o.id+'-'+index,label:humanize(theme),kind:'ocean-signal',oceanId:o.id})))
+  ];
   const pool=[];
-  for(let i=0;i<96;i++){
-    const axes=sampleDistinct(AXES,4,rng);
-    const a=axes.map(axis=>{
-      const source=pick(buckets[axis],rng)||{text:fallbackAxisText(axis),sourceId:'axis'};
-      return {t:source.text,p:axis,s:SECONDARY[axis],sourceId:source.sourceId};
-    });
-    pool.push({
-      test:'attention',
-      q:ATTENTION_STEMS[i%ATTENTION_STEMS.length],
-      a,
-      source:{kind:'ocean-derived',id:'attention-'+i,oceanId:a.map(x=>x.sourceId).join('|')}
-    });
+  for(const topic of shuffle(topics,rng)){
+    for(let v=0;v<ATTENTION_TOPIC_STEMS.length;v++){
+      const axes=sampleDistinct(AXES,4,rng);
+      const a=axes.map(axis=>({
+        t:pick(AXIS_OPTIONS[axis],rng)||fallbackAxisText(axis),
+        p:axis,
+        s:SECONDARY[axis]
+      }));
+      pool.push({
+        test:'attention',
+        q:ATTENTION_TOPIC_STEMS[v](topic.label),
+        a,
+        source:{kind:topic.kind,id:'attention-'+topic.id+'-'+v,oceanId:topic.oceanId||topic.id}
+      });
+    }
   }
   return dedupe(pool,cardSignature);
 }
@@ -282,40 +337,7 @@ function stripInternal(card){
   return [card.q,shuffleNative(card.a).map(x=>x.slice())];
 }
 
-function axisForTerritory(t){
-  const text=normalize([t.slug,t.label,t.group,t.focus,t.hidden].join(' '));
-  if(/dinheiro|poupanca|divida|escassez|rendimento|heranca|seguranca|desemprego|risco/.test(text))return 'security';
-  if(/cansaco|sono|corpo|ritmo|sobrecarga|descanso|pausa|energia|dor|organizacao/.test(text))return 'load';
-  if(/aprovacao|validacao|critica|fracasso|vergonha|fraude|autoestima|comparacao|estatuto/.test(text))return 'seen';
-  if(/autoabandono|culpa|limites|autenticidade|identidade|cuidar|expectativas|responsabilidade/.test(text))return 'self';
-  if(/controlo|incerteza|ruminacao|pensar|perfeccionismo|procrastinacao|foco|distracao|arrependimento/.test(text))return 'control';
-  if(/escolha|mudanca|trabalho|caminho|proposito|reconversao|emprego|negocio|estudo|criatividade|cidade|emigracao/.test(text))return 'direction';
-  if(/solidao|companhia|amizade|pertenca|grupo|familia|convivencia/.test(text))return 'belong';
-  if(/amor|relacao|separacao|saudade|confianca|traicao|ciume|intimidade|desejo|comunicacao|perdao|dependencia|rejeicao|abandono|compromisso|reencontro/.test(text))return 'attachment';
-  if(t.group==='Relações & Vínculos')return 'attachment';
-  if(t.group==='Eu & Identidade')return 'seen';
-  if(t.group==='Emoções & Mente')return 'control';
-  if(t.group==='Corpo & Ritmo')return 'load';
-  return 'direction';
-}
 
-function axisForOcean(o){
-  const text=normalize([o.id,o.intent,...(o.themes||[])].join(' '));
-  if(/finance|escassez|dinheiro/.test(text))return 'security';
-  if(/solidao|conexao|companhia|reciprocidade/.test(text))return 'belong';
-  if(/cuidar|autoapagamento|silencia|voz|limite/.test(text))return 'self';
-  if(/perda|vinculo|relacao|abandono/.test(text))return 'attachment';
-  if(/opcoes|escolha|decisao|paralisa/.test(text))return 'direction';
-  return 'control';
-}
-
-function optionPhrase(t){
-  const raw=String(t.hidden||t.signal||t.focus||t.label||'').trim();
-  if(!raw)return '';
-  const cleaned=raw.replace(/[.?!]+$/,'');
-  return capitalize(cleaned.length>150?cleaned.slice(0,147).replace(/\s+\S*$/,'')+'…':cleaned);
-}
-function themeOption(theme){return capitalize(String(theme||'').trim().replace(/[.?!]+$/,''));}
 function fallbackAxisText(axis){
   return {
     seen:'Sentir que não fui realmente visto ou reconhecido',
@@ -341,7 +363,7 @@ function cleanText(value,max=180){
   const text=String(value||'').replace(/\s+/g,' ').trim();
   return text&&text.length<=max?text:'';
 }
-function lower(value){const s=String(value||'').trim();return s?s.charAt(0).toLowerCase()+s.slice(1):s}
+function lower(value){return String(value||'').trim().toLocaleLowerCase('pt-PT')}
 function capitalize(value){const s=String(value||'').trim();return s?s.charAt(0).toUpperCase()+s.slice(1):s}
 function humanize(value){return capitalize(String(value||'').replace(/[-_]+/g,' ').trim())}
 function normalize(value){return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
