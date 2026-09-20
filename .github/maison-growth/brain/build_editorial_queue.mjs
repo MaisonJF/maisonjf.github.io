@@ -122,7 +122,7 @@ items.sort((a,b)=>a.id.localeCompare(b.id));
 const questionItems=items.filter(x=>x.type==='question_candidate');
 const oracleItems=items.filter(x=>x.type==='oracle_candidate');
 const out={
-  version:'2026-09-20-v3',
+  version:'2026-09-20-v4',
   visibility:'internal-editorial',
   generatedAt:oceans.last_enriched_at||null,
   source:'.github/maison-growth/oceans/candidates.json',
