@@ -12,7 +12,7 @@
 <main class="vpc-test vpc-shell"><a class="vpc-back" href="../">← Volta Para Casa</a>
 
 <section class="vpc-stage" id="intro">
-<p class="vpc-kicker">VOLTA PARA CASA · AFETO</p>
+<p class="vpc-kicker">VOLTA PARA CASA · PARTE III</p>
 <h1 class="vpc-title">Como gostas<br>de receber amor?</h1>
 <p class="vpc-intro">Não escolhas aquilo que parece mais romântico. Escolhe o que realmente te faz sentir que alguém esteve contigo.</p>
 <div class="vpc-actions"><button class="button button--light" id="start">Começar</button></div>
@@ -49,7 +49,7 @@
 <div class="vpc-offers" id="nextLinks"></div>
 </section>
 
-<div class="vpc-share"><button id="restart" type="button">Refazer teste</button><a href="../apego/">Fazer o teste de apego</a></div>
+<div class="vpc-share"><button id="restart" type="button">Refazer</button><a href="../">Ver as três partes de Volta Para Casa →</a></div>
 <p class="vpc-note">Este teste descreve preferências de afeto a partir das tuas respostas. Não mede a qualidade de uma relação nem substitui conversa real entre pessoas.</p>
 </section>
 </main>
@@ -177,7 +177,7 @@ async function makeShareCard(key){
  const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;const ctx=canvas.getContext('2d');
  const g=ctx.createRadialGradient(540,120,40,540,650,1350);g.addColorStop(0,'#2a211a');g.addColorStop(.45,'#11100f');g.addColorStop(1,'#070707');ctx.fillStyle=g;ctx.fillRect(0,0,1080,1920);
  ctx.fillStyle='#c3a66d';ctx.fillRect(90,132,74,3);ctx.fillStyle='#f3efe7';ctx.font='700 26px Arial';ctx.fillText('MAISON JF®',90,205);
- ctx.fillStyle='#9f978c';ctx.font='600 24px Arial';ctx.fillText('VOLTA PARA CASA · AFETO',90,395);
+ ctx.fillStyle='#9f978c';ctx.font='600 24px Arial';ctx.fillText('VOLTA PARA CASA · PARTE III',90,395);
  ctx.fillStyle='#f3efe7';ctx.font='400 100px Georgia';ctx.fillText(TYPES[key].label.toUpperCase(),90,570);
  ctx.fillStyle='#d8d0c2';ctx.font='italic 400 58px Georgia';
  let y=735;wrapText(ctx,TYPES[key].share.replace(/^O meu resultado foi [^.]+\.\s*/i,''),890).forEach(line=>{ctx.fillText(line,90,y);y+=76});
