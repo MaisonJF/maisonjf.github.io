@@ -67,9 +67,22 @@ security:{label:'Segurança',title:'Mesmo quando hoje está tudo bem, uma parte 
 };
 
 const QUESTION_BANK=window.MAISON_TEST_QUESTION_BANK;
-const QUESTIONS=QUESTION_BANK?.pick('attention-core',12)||[];
+let QUESTIONS=QUESTION_BANK?.pick('attention-core',12)||[];
 const ROUTE_QUESTIONS=QUESTION_BANK?.pick('attention-route',2)||[];
 if(QUESTIONS.length!==12||ROUTE_QUESTIONS.length!==2)throw new Error('question_bank_unavailable');
+
+async function hydrateOceanQuestions(){
+ try{
+  const seed=(globalThis.crypto?.randomUUID?.()||String(Date.now())+'-'+Math.random()).slice(0,120);
+  const response=await fetch('/api/vpc-question-set?test=attention&seed='+encodeURIComponent(seed),{cache:'no-store'});
+  const payload=await response.json().catch(()=>({}));
+  if(!response.ok||!Array.isArray(payload.questions)||payload.questions.length!==12)throw new Error('question_engine');
+  QUESTIONS=payload.questions;
+  track('vpc_question_set',{test:'attention',engine_version:payload.version||'',ocean_version:payload.oceanVersion||'',sources:(payload.sources||[]).join(','),vault_candidates:payload.approvedVaultCandidates||0});
+ }catch(_){
+  track('vpc_question_set_fallback',{test:'attention'});
+ }
+}
 
 const primaryScores=Object.fromEntries(Object.keys(AXES).map(k=>[k,0]));
 const secondaryScores=Object.fromEntries(Object.keys(AXES).map(k=>[k,0]));
@@ -175,7 +188,11 @@ async function shareResult(){
   await navigator.clipboard.writeText(text);$('shareStatus').textContent='Texto copiado.';track('vpc_share_card',{result:r,method:'clipboard'});
  }catch(e){if(e&&e.name==='AbortError'){$('shareStatus').textContent='';return}$('shareStatus').textContent='Não foi possível abrir a partilha.'}
 }
-$('start').addEventListener('click',()=>{show('quiz');track('vpc_core_start');render()});
+$('start').addEventListener('click',async()=>{
+ const button=$('start');button.disabled=true;
+ await hydrateOceanQuestions();
+ show('quiz');track('vpc_core_start',{question_engine:'ocean-vault'});render();
+});
 $('restart').addEventListener('click',()=>location.reload());
 $('share').addEventListener('click',shareResult);
 $('nextLinks').addEventListener('click',e=>{const a=e.target.closest('[data-vpc-offer]');if(!a)return;try{sessionStorage.setItem('maison_offer_attribution_v1',JSON.stringify({source:'vpc',offer:a.dataset.vpcOffer||'',result:$('resultLabel').textContent.replace('O que está a pedir mais atenção · ',''),slot:a.dataset.vpcSlot||'',brain:a.dataset.vpcBrain||'',ts:Date.now()}))}catch(_){}track('vpc_offer_click',{offer:a.dataset.vpcOffer,slot:a.dataset.vpcSlot||'',brain_version:a.dataset.vpcBrain||'',result:$('resultLabel').textContent})});
