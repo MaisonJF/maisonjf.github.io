@@ -2327,3 +2327,137 @@ footer a:hover{
 @media(max-width:360px){
   .home-page--final .hero__headline--one-line{font-size:clamp(25px,8.2vw,31px)!important}
 }
+
+
+/* MAISON JF® · IVORY ACTION SYSTEM · 2026-09-20 */
+:root{
+  --maison-ivory:#f3efe7;
+  --maison-ivory-hover:#fbf7ef;
+  --maison-ivory-ink:#0b0b0c;
+  --maison-ivory-muted:#514b43;
+  --maison-ivory-gold:#8b6e37;
+}
+
+/* Primary CTAs: ivory is the visual cue for an important next step. */
+.button--light,
+.btn--primary,
+.pdi-buy{
+  background:var(--maison-ivory)!important;
+  color:var(--maison-ivory-ink)!important;
+  border-color:var(--maison-ivory)!important;
+}
+
+.button--light:hover,
+.btn--primary:hover,
+.pdi-buy:hover{
+  background:var(--maison-ivory-hover)!important;
+  color:var(--maison-ivory-ink)!important;
+  border-color:var(--maison-ivory-hover)!important;
+}
+
+/* Secondary CTAs remain dark/transparent with an ivory outline. */
+.button:not(.button--light),
+.btn--secondary,
+.btn--ghost{
+  border-color:rgba(243,239,231,.58)!important;
+  color:var(--maison-ivory)!important;
+}
+
+.button:not(.button--light):hover,
+.btn--secondary:hover,
+.btn--ghost:hover{
+  border-color:var(--maison-ivory)!important;
+  color:#fff!important;
+}
+
+/* Major text-only choice surfaces become ivory "doors". */
+.home-page--final .home-explore__links{
+  gap:10px!important;
+  border:0!important;
+  background:transparent!important;
+}
+
+.home-page--final .home-explore__links>a{
+  background:var(--maison-ivory)!important;
+  color:var(--maison-ivory-ink)!important;
+  border:1px solid var(--maison-ivory)!important;
+  border-radius:2px!important;
+  transition:background-color .22s ease,border-color .22s ease,transform .22s ease!important;
+}
+
+.home-page--final .home-explore__links>a:hover{
+  background:var(--maison-ivory-hover)!important;
+  border-color:var(--maison-ivory-hover)!important;
+  transform:translateY(-2px);
+}
+
+.home-page--final .home-explore__links>a span{
+  color:var(--maison-ivory-ink)!important;
+  transition:transform .22s ease!important;
+}
+
+.home-page--final .home-explore__links>a:hover span{
+  transform:translateX(3px);
+}
+
+/* Entire text-led cards that are themselves an important action use the same language. */
+a.territory-offer,
+a.product-digital__card,
+a.related-card{
+  background:var(--maison-ivory)!important;
+  color:var(--maison-ivory-ink)!important;
+  border-color:var(--maison-ivory)!important;
+}
+
+a.territory-offer:hover,
+a.product-digital__card:hover,
+a.related-card:hover{
+  background:var(--maison-ivory-hover)!important;
+  border-color:var(--maison-ivory-hover)!important;
+}
+
+a.territory-offer small,
+a.product-digital__card small,
+a.related-card small{
+  color:var(--maison-ivory-gold)!important;
+}
+
+a.territory-offer strong,
+a.product-digital__card strong,
+a.related-card strong,
+a.product-digital__card b{
+  color:var(--maison-ivory-ink)!important;
+}
+
+a.territory-offer span,
+a.product-digital__card p{
+  color:var(--maison-ivory-muted)!important;
+}
+
+/* Hero keeps hierarchy: Farol = primary ivory; the other two entrances = secondary outline. */
+.home-page--final .button--farol{
+  background:var(--maison-ivory)!important;
+  color:var(--maison-ivory-ink)!important;
+  border-color:var(--maison-ivory)!important;
+}
+
+.home-page--final .button--vpc,
+.home-page--final .button--explore{
+  background:rgba(8,8,8,.20)!important;
+  color:var(--maison-ivory)!important;
+  border-color:rgba(243,239,231,.52)!important;
+}
+
+/* Preserve simple text links as text: ivory is reserved for actions, not every link. */
+.text-link{
+  background:transparent!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .home-page--final .home-explore__links>a:hover{
+    transform:none;
+  }
+  .home-page--final .home-explore__links>a:hover span{
+    transform:none;
+  }
+}
