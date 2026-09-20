@@ -59,6 +59,8 @@
         <div class="product-price">${p.priceNote||money(p.price)}</div>
         <div class="product-actions">
           <button class="button button--light" data-buy type="button">Comprar · ${p.priceNote||money(p.price)}</button>
+          <button class="text-link" data-cart-add type="button" style="background:none;border:0;padding:0;cursor:pointer">Adicionar ao carrinho</button>
+          <a class="text-link" data-cart-link href="${root}produtos/carrinho/">Carrinho</a>
           <a class="text-link" data-whatsapp href="${whatsapp}" target="_blank" rel="noopener noreferrer">Tenho uma dúvida</a>
         </div>
         <p class="product-checkout-status" data-checkout-status aria-live="polite"></p>
@@ -89,30 +91,37 @@
   `;
 
   track('maison_product_view',{product:p.slug,price:p.price,page_path:location.pathname});
-  page.addEventListener('click',async e=>{
+  const CART_KEY='maisonPhysicalCartV1';
+  const readCart=()=>{try{const raw=JSON.parse(localStorage.getItem(CART_KEY)||'[]');return Array.isArray(raw)?raw:[]}catch{return[]}};
+  const writeCart=items=>{try{localStorage.setItem(CART_KEY,JSON.stringify(items))}catch{}};
+  function addToCart(slug){
+    const items=readCart();
+    const found=items.find(item=>item.slug===slug);
+    if(found)found.quantity=Math.min(10,(Number(found.quantity)||1)+1);
+    else items.push({slug,quantity:1});
+    writeCart(items);
+    const count=items.reduce((sum,item)=>sum+(Number(item.quantity)||0),0);
+    page.querySelectorAll('[data-cart-link]').forEach(link=>link.textContent='Carrinho ('+count+')');
+    return count;
+  }
+  const initialCount=readCart().reduce((sum,item)=>sum+(Number(item.quantity)||0),0);
+  if(initialCount)page.querySelectorAll('[data-cart-link]').forEach(link=>link.textContent='Carrinho ('+initialCount+')');
+
+  page.addEventListener('click',e=>{
     const buy=e.target.closest('[data-buy]');
+    const add=e.target.closest('[data-cart-add]');
     const whatsappLink=e.target.closest('[data-whatsapp]');
     const rel=e.target.closest('[data-related]');
+    const status=page.querySelector('[data-checkout-status]');
+    if(add){
+      addToCart(p.slug);
+      if(status)status.textContent='Adicionado ao carrinho.';
+      track('physical_cart_add',{product:p.slug,price:p.price,page_path:location.pathname});
+    }
     if(buy){
-      const status=page.querySelector('[data-checkout-status]');
-      buy.disabled=true;
-      buy.textContent='A abrir checkout…';
-      if(status)status.textContent='';
+      addToCart(p.slug);
       track('product_checkout_intent',{product:p.slug,price:p.price,page_path:location.pathname});
-      try{
-        const response=await fetch('/api/create-product-checkout-live',{
-          method:'POST',
-          headers:{'content-type':'application/json'},
-          body:JSON.stringify({slug:p.slug})
-        });
-        const data=await response.json().catch(()=>({}));
-        if(!response.ok||!data.url)throw new Error(data.error||'Não foi possível abrir o checkout.');
-        location.href=data.url;
-      }catch(error){
-        buy.disabled=false;
-        buy.textContent='Comprar · '+(p.priceNote||money(p.price));
-        if(status)status.textContent=error.message||'Não foi possível abrir o checkout.';
-      }
+      location.href=root+'produtos/carrinho/';
     }
     if(whatsappLink)track('product_whatsapp_question',{product:p.slug,price:p.price,page_path:location.pathname});
     if(rel)track('product_cross_sell',{from:p.slug,to:rel.dataset.related,page_path:location.pathname});

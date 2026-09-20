@@ -134,6 +134,36 @@ jobs:
           print('Final public service catalogue is locked.')
           PY
 
+      - name: Guard shipping prices and free thresholds
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          checkout=Path('functions/api/create-product-checkout-live.js').read_text(encoding='utf-8')
+          cart=Path('produtos/carrinho/index.html').read_text(encoding='utf-8')
+          shipping=Path('envios.html').read_text(encoding='utf-8')
+          rules=[
+              ('mainland','590','4900','5,90 €','49 €'),
+              ('islands','1190','7900','11,90 €','79 €'),
+              ('eu','1790','9900','17,90 €','99 €'),
+              ('world','2990','14900','29,90 €','149 €'),
+          ]
+          for key,amount,threshold,display,free in rules:
+              if f"{key}:{{" not in checkout or f"amount:{amount}" not in checkout or f"threshold:{threshold}" not in checkout:
+                  raise SystemExit(f'Checkout shipping rule missing for {key}')
+              if display not in cart or free not in cart:
+                  raise SystemExit(f'Cart shipping copy missing for {key}')
+              if display not in shipping or free not in shipping:
+                  raise SystemExit(f'Shipping page rule missing for {key}')
+          if "subtotalCents>=shipping.threshold?0:shipping.amount" not in checkout:
+              raise SystemExit('Free shipping is not applied automatically from the cart subtotal')
+          print('Shipping prices and free thresholds match across checkout, cart and public policy.')
+          PY
+
+      - name: Audit public site integrity
+        shell: bash
+        run: python3 scripts/audit-public-site.py
+
       - name: Ensure every Ocean flows somewhere public
         shell: bash
         run: |
