@@ -71,6 +71,10 @@ jobs:
           node --check .github/maison-growth/brain/build_editorial_queue.mjs
           node .github/maison-growth/brain/build_editorial_queue.mjs --check
 
+      - name: Quiet-luxury discovery guard
+        shell: bash
+        run: node .github/maison-growth/validate_luxury_surface.mjs
+
       - name: Guard structural global navigation
         shell: bash
         run: |
@@ -108,10 +112,12 @@ jobs:
           required=('Presença Online','Presença Social','Presença Próxima','SOS 1 dia','SOS 1 semana','35 €','60 €','80 €','120 €')
           for token in required:
               if token not in presence:
-                  raise SystemExit(f'Missing required Presença offer or price: {token}')
+                  raise SystemExit(f'Missing required Presença offer or condition price: {token}')
+          if 'presence-price' in presence or '?interesse=' in presence and '&preco=' in presence:
+              raise SystemExit('Presence prices must live in the conditions, not discovery cards or CTA query strings')
           if '3, 7, 14, 21 ou 28' in Path('llms.txt').read_text(encoding='utf-8'):
               raise SystemExit('Old SOS duration ladder is still documented')
-          print('Presença naming, offers and prices are consistent across core public surfaces.')
+          print('Presença naming and prices are consistent; prices stay inside conditions, not discovery cards.')
           PY
 
       - name: Guard final public service catalogue
