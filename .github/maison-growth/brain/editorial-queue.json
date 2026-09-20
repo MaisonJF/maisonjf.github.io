@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-20-v4",
+  "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
   "generatedAt": "2026-09-20T08:14:28+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
@@ -21,7 +21,9 @@
     "pdiThemeBacklog": 150,
     "pdiSourceDesignSlots": 900,
     "oracleCandidates": 6,
-    "oracleRoleSlots": 42
+    "oracleRoleSlots": 42,
+    "pdiEditorialCoreTarget": 45000,
+    "pdiCombinatorialTarget": 2800000
   },
   "pdiGrowth": {
     "sourceStats": {
@@ -8134,7 +8136,14 @@
         "automaticActivation": false,
         "status": "needs_editorial"
       }
-    ]
+    ],
+    "scale": {
+      "activeQuestionTargetPerMatureTheme": 300,
+      "editorialCoreTarget": 45000,
+      "combinatorialPossibilityTarget": 2800000,
+      "paidBodiesStoredInRepository": false,
+      "automaticActivation": false
+    }
   },
   "items": [
     {
