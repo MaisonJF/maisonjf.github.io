@@ -14,7 +14,7 @@
  if(price)price.textContent=book.price==null?'':Number(book.price).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
  if(buy&&book.checkoutId&&book.price!=null){
    buy.hidden=false;buy.dataset.buyEbook=book.checkoutId;
-   buy.textContent='Comprar agora · '+Number(book.price).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+   buy.textContent='Comprar agora';
  }else if(buy){buy.hidden=true}
  document.title=book.title+' | MAISON JF®';
 
