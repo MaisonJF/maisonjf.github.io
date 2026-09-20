@@ -38,6 +38,8 @@ jobs:
           node --check functions/api/pdi-event-live.js
           node --check functions/api/pdi-session-live.js
           node --check functions/api/engine-health.js
+          node --check .github/maison-growth/brain/build_editorial_queue.mjs
+          node .github/maison-growth/brain/build_editorial_queue.mjs --check
 
       - name: Ensure every Ocean flows somewhere public
         shell: bash

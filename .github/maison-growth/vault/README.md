@@ -110,3 +110,18 @@ No answer text is requested or stored.
 - `global` Oracle blocks may support an already-developed territory, but cannot by themselves switch an untouched territory to composition.
 - Territory-specific Oracle blocks take precedence over global fallback blocks.
 - Coverage gaps are written idempotently to `vault_content_needs`; they are evidence for Brain/Oceans, never automatic paid publication.
+
+
+## Brain editorial queue
+
+The internal file `.github/maison-growth/brain/editorial-queue.json` is the persisted hand-off between Ocean discovery and paid editorial work.
+
+It contains **metadata and editorial hypotheses only**. It never stores paid question bodies, Oracle answer/reading bodies, private conversation text or personal data. Every entry requires human editorial approval and has automatic activation disabled.
+
+The queue is rebuilt from `.github/maison-growth/oceans/candidates.json` with:
+
+`node .github/maison-growth/brain/build_editorial_queue.mjs`
+
+CI uses `--check` so a new or changed Ocean cannot silently drift away from the editorial queue.
+
+The production health endpoint may expose aggregate catalogue counts and coverage needs only. It must never expose paid bodies or buyer-level data.
