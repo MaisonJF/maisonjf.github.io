@@ -1,5 +1,5 @@
 import { requireMaisonVault } from '../_lib/maison-vault.js';
-import { vaultExperienceEngineReady, listActiveOracleBlocks } from '../_lib/maison-vault-v2.js';
+import { vaultExperienceEngineReady, listActiveOracleBlocks, summarizeExperienceCatalogue } from '../_lib/maison-vault-v2.js';
 import { listActivePaidQuestionsV2 } from '../_lib/question-vault-v2.js';
 import { composeQuestionSession } from '../_lib/question-composer.js';
 import { composeOracleReading } from '../_lib/oracle-composer.js';
@@ -17,6 +17,7 @@ export async function onRequestGet({env}){
 
     const pdi=await checkPdi(db);
     const oracleAmor=await checkOracleAmor(db);
+    const catalogue=await summarizeExperienceCatalogue(db);
 
     return json({
       ok:pdi.ok&&oracleAmor.ok,
@@ -26,6 +27,7 @@ export async function onRequestGet({env}){
         amor:oracleAmor,
         incomplete_territories_use_legacy_fallback:true
       },
+      catalogue,
       privacy:{
         answer_text_stored:false,
         private_conversation_stored:false
