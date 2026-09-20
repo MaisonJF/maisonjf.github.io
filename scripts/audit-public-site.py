@@ -139,8 +139,9 @@ def main():
         for img in parser.images:
             if not img.get('src','').strip():
                 issues.append((url,'imagem sem src'))
-            if 'alt' not in img or not img.get('alt','').strip():
-                issues.append((url,'imagem sem alt'))
+            decorative=img.get('aria-hidden','').lower()=='true' or img.get('role','').lower() in ('presentation','none')
+            if 'alt' not in img or (not img.get('alt','').strip() and not decorative):
+                issues.append((url,'imagem informativa sem alt'))
         for tag,a in parser.links:
             attr='href' if tag in ('a','link') else 'src'
             raw=a.get(attr,'').strip()
