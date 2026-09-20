@@ -53,7 +53,7 @@
 <p class="vpc-note">Este teste descreve preferências de afeto a partir das tuas respostas. Não mede a qualidade de uma relação nem substitui conversa real entre pessoas.</p>
 </section>
 </main>
-
+<script src="../question-bank.js?v=20260921-v1"></script>
 <script>
 const TYPES={
  palavras:{label:'Palavras',title:'Tu ouves amor antes de o dares por garantido.',lead:'Para ti, aquilo que alguém diz, e a forma como diz, consegue tornar o afeto visível. Reconhecimento, carinho verbal e dizer o que sente não são “só palavras” quando chegam com verdade.',share:'O meu resultado foi PALAVRAS. Eu noto o que sentes quando o dizes.'},
@@ -63,68 +63,9 @@ const TYPES={
  simbolos:{label:'Símbolos',title:'Tu guardas provas pequenas de que alguém pensou em ti.',lead:'Um objeto, uma lembrança ou um detalhe escolhido com intenção pode ficar contigo muito depois do momento. Não é o preço: é “vi isto e pensei em ti”.',share:'O meu resultado foi SÍMBOLOS. Eu guardo os pequenos “lembrei-me de ti”.'}
 };
 
-const QUESTIONS=[
-['Num dia mau, o que te chega mais fundo?',[
- ['palavras','Ouvir uma frase que mostre que alguém reparou mesmo em mim.'],
- ['tempo','Ter alguém comigo sem pressa nem distrações.'],
- ['gestos','Alguém tirar-me uma pequena coisa de cima sem eu pedir.'],
- ['toque','Um abraço demorado sem precisar de explicar tudo.'],
- ['simbolos','Receber um detalhe escolhido porque a pessoa se lembrou de mim.']]],
-['Depois de uma semana caótica, o que te faz sentir mais ligado?',[
- ['palavras','Uma mensagem que diga exactamente aquilo que eu precisava de ouvir.'],
- ['tempo','Tempo só nosso, sem telemóveis a roubar atenção.'],
- ['gestos','Chegar e perceber que alguém tratou de uma coisa por mim.'],
- ['toque','Ficar perto, encostados, de mãos dadas ou abraçados.'],
- ['simbolos','Um pequeno detalhe que diga “pensei em ti”.']]],
-['Quando alguém pede desculpa, o que te faz acreditar mais?',[
- ['palavras','Ouvir a pessoa dizer claramente o que percebeu e o que sente.'],
- ['tempo','Ela ficar e conversar sem fugir ao assunto.'],
- ['gestos','Ver uma mudança concreta depois da conversa.'],
- ['toque','Voltar à proximidade física quando ambos estamos prontos.'],
- ['simbolos','Um pequeno gesto que marque cuidado e reparação.']]],
-['Num aniversário, o que te toca mais?',[
- ['palavras','Uma mensagem pessoal que eu queira guardar.'],
- ['tempo','Ter tempo inteiro planeado para nós.'],
- ['gestos','A pessoa ter organizado coisas para eu só aproveitar.'],
- ['toque','Abraços, proximidade e carinho durante o dia.'],
- ['simbolos','Abrir algo escolhido mesmo a pensar em mim.']]],
-['Quando uma relação esfria, o que notas primeiro que desapareceu?',[
- ['palavras','As palavras de carinho, reconhecimento ou afeto.'],
- ['tempo','Os momentos em que estamos realmente presentes.'],
- ['gestos','Os pequenos cuidados que antes aconteciam sem pedir.'],
- ['toque','O contacto, os abraços e a proximidade física.'],
- ['simbolos','Os sinais de “lembrei-me de ti” quando não estou.']]],
-['Se alguém quiser surpreender-te, qual ganha?',[
- ['palavras','Uma mensagem que eu vá reler mais tarde.'],
- ['tempo','Levar-me para algum lado e ficar mesmo comigo.'],
- ['gestos','Fazer por mim uma coisa que sabe que me pesa.'],
- ['toque','Criar um momento de proximidade e carinho.'],
- ['simbolos','Dar-me uma coisa pequena, mas estranhamente certeira.']]],
-['O que te faz pensar “esta pessoa conhece-me mesmo”?',[
- ['palavras','Dizer algo tão específico que eu percebo que reparou.'],
- ['tempo','Saber quando eu preciso de atenção inteira.'],
- ['gestos','Antecipar uma necessidade sem eu ter de pedir.'],
- ['toque','Saber quando eu preciso de um abraço ou de proximidade.'],
- ['simbolos','Escolher um detalhe que só faz sentido porque me conhece.']]],
-['Depois de uma discussão, o que reconstrói ligação mais depressa?',[
- ['palavras','Dizermos claramente o que sentimos e o que muda daqui para a frente.'],
- ['tempo','Ficarmos juntos até a distância baixar.'],
- ['gestos','A pessoa mostrar na prática que ouviu o que eu disse.'],
- ['toque','Voltarmos ao contacto físico quando ambos queremos.'],
- ['simbolos','Um sinal concreto de “não me esqueci de nós”.']]],
-['O que mais facilmente te faz sentir ignorado?',[
- ['palavras','Nunca ouvir carinho ou reconhecimento, mesmo quando existe.'],
- ['tempo','Estar com alguém que está sempre metade noutro sítio.'],
- ['gestos','Ter de pedir várias vezes aquilo que parecia cuidado básico.'],
- ['toque','Sentir a proximidade física desaparecer sem conversa.'],
- ['simbolos','Nunca existir aquele pequeno “vi isto e lembrei-me de ti”.']]],
-['Se só pudesses pedir uma coisa esta semana, qual seria?',[
- ['palavras','Que alguém me dissesse claramente o que sente por mim.'],
- ['tempo','Algumas horas de atenção inteira com alguém importante.'],
- ['gestos','Uma ajuda concreta que me aliviasse mesmo.'],
- ['toque','Um abraço, colo ou contacto de que tenho sentido falta.'],
- ['simbolos','Uma pequena coisa escolhida especificamente para mim.']]]
-];
+const QUESTION_BANK=window.MAISON_TEST_QUESTION_BANK;
+const QUESTIONS=QUESTION_BANK?.pick('afeto',10)||[];
+if(QUESTIONS.length!==10)throw new Error('question_bank_unavailable');
 
 const scores={palavras:0,tempo:0,gestos:0,toque:0,simbolos:0};
 let step=0;
@@ -157,7 +98,7 @@ function attributedHref(raw,offerId,result,brainVersion){
 }
 function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
 function offerMarkup(o,index,result,brain){
- const label=[o.slotLabel,o.priceLabel].filter(Boolean).join(' · ');
+ const label=o.slotLabel||'';
  return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brain||'fallback')+'" href="'+esc(attributedHref(o.href,o.id,result,brain))+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
 }
 async function brainOffers(result){
@@ -169,7 +110,7 @@ async function brainOffers(result){
   host.innerHTML=data.offers.map((o,i)=>offerMarkup(o,i,result,data.version)).join('');
   track('vpc_offer_brain_result',{result,brain_version:data.version,offers:data.offers.map(o=>o.id).join(',')});
  }catch(_){
-  host.innerHTML='<a class="vpc-offer vpc-offer--primary" href="../../oraculo/"><small>Outra perspectiva · 2 €</small><strong>Oráculo MAISON JF® →</strong><span>Abre outra perspectiva sobre aquilo que apareceu.</span></a><a class="vpc-offer" href="../../para-de-ignorar/"><small>Para abrir conversa · 5 €</small><strong>PÁRA DE IGNORAR! →</strong><span>28 perguntas para duas pessoas transformarem afeto em conversa.</span></a><a class="vpc-offer" href="../../presentes/"><small>Para oferecer</small><strong>Presentes com intenção →</strong><span>Quando carinho, memória ou cuidado pedem um gesto concreto.</span></a><a class="vpc-offer" href="../../servicos/"><small>Quero ir mais fundo</small><strong>Consultas →</strong><span>Quando queres contexto, leitura e uma conversa mais funda.</span></a>';
+  host.innerHTML='<a class="vpc-offer vpc-offer--primary" href="../../oraculo/"><small>Outra perspectiva</small><strong>Oráculo MAISON JF® →</strong><span>Abre outra perspectiva sobre aquilo que apareceu.</span></a><a class="vpc-offer" href="../../para-de-ignorar/"><small>Para abrir conversa</small><strong>PÁRA DE IGNORAR! →</strong><span>28 perguntas para duas pessoas transformarem afeto em conversa.</span></a><a class="vpc-offer" href="../../presentes/"><small>Para oferecer</small><strong>Presentes com intenção →</strong><span>Quando carinho, memória ou cuidado pedem um gesto concreto.</span></a><a class="vpc-offer" href="../../servicos/"><small>Quero ir mais fundo</small><strong>Consultas →</strong><span>Quando queres contexto, leitura e uma conversa mais funda.</span></a>';
  }
 }
 async function makeShareCard(key){
