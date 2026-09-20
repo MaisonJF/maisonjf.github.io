@@ -305,14 +305,14 @@
     setText('.detail-hero .detail-lead', 'Então começa pelo que está mesmo a acontecer. Depois escolhemos o formato.');
 
     $$('h3').forEach(heading => {
-      if (heading.textContent.trim() === 'Tarot Terapêutico') heading.textContent = 'Tarot de Aprofundamento';
+      if (heading.textContent.trim() === 'Aprofundar') heading.textContent = 'Aprofundar';
     });
 
-    rewriteCard(document, 'Tarot Expresso', 'Uma pergunta concreta. Sem rodeios. Para parares de a mastigar pela vigésima vez.');
-    rewriteCard(document, 'Tarot Integrativo', 'A pergunta parece simples. Por baixo há medo, desejo, padrões e outra pessoa no meio.');
-    rewriteCard(document, 'Tarot de Aprofundamento', 'O assunto tem história e uma resposta curta não chega.');
-    rewriteCard(document, 'Consulta Escrita Breve', 'Queres uma resposta concreta por escrito e voltar a ela depois.');
-    rewriteCard(document, 'Consulta Escrita Aprofundada', 'A situação tem camadas. Queres tempo para ler, reler e pensar.');
+    rewriteCard(document, 'Uma pergunta', 'Uma pergunta concreta. Sem rodeios. Para parares de a mastigar pela vigésima vez.');
+    rewriteCard(document, 'Uma consulta', 'A pergunta parece simples. Por baixo há medo, desejo, padrões e outra pessoa no meio.');
+    rewriteCard(document, 'Aprofundar', 'O assunto tem história e uma resposta curta não chega.');
+    rewriteCard(document, 'Breve', 'Queres uma resposta concreta por escrito e voltar a ela depois.');
+    rewriteCard(document, 'Aprofundada', 'A situação tem camadas. Queres tempo para ler, reler e pensar.');
 
     const tarotGrid = $('#tarot .detail-grid');
     practicalNote(tarotGrid, 'Antes de marcar, confirmamos formato, duração, o que está incluído e quando recebes a resposta.');
