@@ -64,8 +64,21 @@ const TYPES={
 };
 
 const QUESTION_BANK=window.MAISON_TEST_QUESTION_BANK;
-const QUESTIONS=QUESTION_BANK?.pick('afeto',10)||[];
+let QUESTIONS=QUESTION_BANK?.pick('afeto',10)||[];
 if(QUESTIONS.length!==10)throw new Error('question_bank_unavailable');
+
+async function hydrateOceanQuestions(){
+ try{
+  const seed=(globalThis.crypto?.randomUUID?.()||String(Date.now())+'-'+Math.random()).slice(0,120);
+  const response=await fetch('/api/vpc-question-set?test=afeto&seed='+encodeURIComponent(seed),{cache:'no-store'});
+  const payload=await response.json().catch(()=>({}));
+  if(!response.ok||!Array.isArray(payload.questions)||payload.questions.length!==10)throw new Error('question_engine');
+  QUESTIONS=payload.questions;
+  track('vpc_question_set',{engine_version:payload.version||'',ocean_version:payload.oceanVersion||'',sources:(payload.sources||[]).join(','),vault_candidates:payload.approvedVaultCandidates||0});
+ }catch(_){
+  track('vpc_question_set_fallback');
+ }
+}
 
 const scores={palavras:0,tempo:0,gestos:0,toque:0,simbolos:0};
 let step=0;
@@ -146,7 +159,7 @@ function finish(){
  try{localStorage.setItem('maison_vpc_afeto_v1',JSON.stringify({result:key,ranked:list,createdAt:Date.now()}))}catch(_){}
  track('vpc_test_result',{result:key,secondary:list[1][0]});brainOffers(key);
 }
-$('start').addEventListener('click',()=>{show('quiz');track('vpc_test_start');render()});
+$('start').addEventListener('click',async()=>{const button=$('start');button.disabled=true;await hydrateOceanQuestions();show('quiz');track('vpc_test_start',{question_engine:'ocean-vault'});render()});
 $('restart').addEventListener('click',()=>location.reload());
 $('nextLinks').addEventListener('click',e=>{const a=e.target.closest('[data-vpc-offer]');if(!a)return;track('vpc_offer_click',{offer:a.dataset.vpcOffer,slot:a.dataset.vpcSlot||'',brain_version:a.dataset.vpcBrain||''})});
 </script>

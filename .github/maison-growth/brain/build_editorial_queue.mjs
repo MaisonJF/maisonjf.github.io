@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
 import { contentCandidatesFromSignal } from '../../../functions/_lib/maison-brain-bridge.js';
 import { groupExactThemeSignals, pdiThemeSourceStats } from '../../../functions/_lib/pdi-theme-sources.js';
 
@@ -171,3 +172,7 @@ if(CHECK){
   fs.writeFileSync(QUEUE,rendered);
   console.log(JSON.stringify(out.summary));
 }
+
+const bridge=path.join(HERE,'build_vpc_ocean_signals.mjs');
+const bridgeRun=spawnSync(process.execPath,[bridge,...(CHECK?['--check']:[])],{stdio:'inherit'});
+if(bridgeRun.status!==0)process.exit(bridgeRun.status||1);
