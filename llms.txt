@@ -43,11 +43,11 @@ Não devem ser inventados ingredientes, benefícios, disponibilidade, stock, tam
 
 ## Serviços
 Consultas e orientação:
-- Tarot Expresso — 17 €
-- Tarot Integrativo — 35 €
-- Tarot Terapêutico — 70 €
-- Consulta Escrita Breve — 25 €
-- Consulta Escrita Aprofundada — 45 €
+- Tarot, uma pergunta — 17 €
+- Tarot, uma consulta — 35 €
+- Tarot, aprofundar — 70 €
+- Por escrito, breve — 25 €
+- Por escrito, aprofundada — 45 €
 - Escuta Orientada — 60 €
 - Astrologia — sob consulta
 - Numerologia — sob consulta
