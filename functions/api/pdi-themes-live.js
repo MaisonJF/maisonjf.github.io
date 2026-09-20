@@ -20,7 +20,14 @@ export async function onRequestGet({env}){
 }
 
 function formatEUR(cents){
-  return new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'}).format(Number(cents||0)/100);
+  const value=Number(cents||0)/100;
+  const whole=Number.isInteger(value);
+  return new Intl.NumberFormat('pt-PT',{
+    style:'currency',
+    currency:'EUR',
+    minimumFractionDigits:whole?0:2,
+    maximumFractionDigits:whole?0:2
+  }).format(value);
 }
 function json(payload,status=200){
   return new Response(JSON.stringify(payload),{
