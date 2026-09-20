@@ -16,6 +16,6 @@ assert.equal(new Set(registry.map(x=>x.slug)).size,registry.length);
 assert.equal(getPdiTheme('relacoes')?.label,'Relações');
 assert.ok(getPdiTheme('trabalho'));
 assert.ok(getPdiTheme('dinheiro'));
-assert.ok(getPdiTheme('familia'));
+assert.ok(getPdiTheme('familia-e-lacos'));
 
 console.log('PDI theme registry: OK · 150 source themes + Relações umbrella');
