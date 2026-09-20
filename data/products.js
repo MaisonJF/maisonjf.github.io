@@ -28,7 +28,7 @@ window.MAISON_PRODUCTS=[
  cta:'Quero saber mais'
 },
 {
- slug:'nevoa',name:'Névoa de Ambiente',size:'20 ml',category:'Casa',price:6.5,currency:'EUR',
+ slug:'nevoa',name:'Névoa de Ambiente',size:'20 ml',category:'Casa',price:7,currency:'EUR',
  description:'Uma forma rápida de mudar o ambiente através do aroma.',
  media:[],
  ritual:{title:'Muda o ar antes de mudares tudo.',text:'Um gesto no espaço pode bastar para marcar a passagem entre o que veio de fora e o tempo que agora é teu.'},
