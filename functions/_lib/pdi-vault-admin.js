@@ -45,8 +45,8 @@ export async function importPrivateQuestionBatch(db,{batchId,questions=[]}={}){
         semantic_fingerprint,compatibility_json,product_fit_json,lifecycle_state,
         rotation_state,source_ocean_id,quality_version)
        VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,'paid','candidate',?11,'{}','[]','[]',
-              ?12,?13,?14,?15,?16,?17,?18,?19,?20,?21,?22,?23,'{}',?24,
-              'candidate','new',?25,?26)`
+              ?12,?13,?14,?15,?16,?17,?18,?19,?20,?21,?22,'{}',?23,
+              'candidate','new',?24,?25)`
     ).bind(
       q.id,q.canonicalKey,q.theme,q.text,JSON.stringify(q.subthemes),q.class,q.stage,q.intensity,
       q.direction,q.time,JSON.stringify(q.scores),q.similarityGroup,SOURCE_KIND,q.painFamily,
