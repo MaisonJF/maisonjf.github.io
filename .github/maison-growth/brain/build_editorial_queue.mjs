@@ -10,6 +10,7 @@ const QUEUE=path.join(HERE,'editorial-queue.json');
 const CHECK=process.argv.includes('--check');
 const ROLES=['opening','recognition','tension','counterpoint','reframe','movement','close'];
 const STAGES=['open','recognize','deepen','touch','close','signature'];
+const QUESTION_TARGET_PER_MATURE_THEME=300;
 
 const oceans=JSON.parse(fs.readFileSync(OCEANS,'utf8'));
 let previous={items:[]};
@@ -54,6 +55,14 @@ for(const ocean of oceans.candidates||[]){
         evidence,
         questionThemeCandidates:[...new Set((ocean.questionThemeCandidates||[]).filter(Boolean))],
         stageCandidates:STAGES,
+        questionDesignSlots:[...new Set((ocean.questionThemeCandidates||[]).filter(Boolean))].flatMap(theme=>
+          STAGES.map(stage=>({
+            id:'slot_'+slug(ocean.territory)+'_'+slug(theme)+'_'+stage,
+            theme,
+            stage,
+            status:'needs_editorial'
+          }))
+        ),
         bodyStored:false,
         approvalRequired:true,
         automaticActivation:false
@@ -94,7 +103,7 @@ items.sort((a,b)=>a.id.localeCompare(b.id));
 const questionItems=items.filter(x=>x.type==='question_candidate');
 const oracleItems=items.filter(x=>x.type==='oracle_candidate');
 const out={
-  version:'2026-09-20-v1',
+  version:'2026-09-20-v2',
   visibility:'internal-editorial',
   generatedAt:oceans.last_enriched_at||null,
   source:'.github/maison-growth/oceans/candidates.json',
@@ -110,6 +119,8 @@ const out={
     queueItems:items.length,
     questionCandidates:questionItems.length,
     questionThemeHypotheses:questionItems.reduce((n,x)=>n+(x.questionThemeCandidates||[]).length,0),
+    questionDesignSlots:questionItems.reduce((n,x)=>n+(x.questionDesignSlots||[]).length,0),
+    activeQuestionTargetPerMatureTheme:QUESTION_TARGET_PER_MATURE_THEME,
     oracleCandidates:oracleItems.length,
     oracleRoleSlots:oracleItems.reduce((n,x)=>n+(x.roleCandidates||[]).length,0)
   },
