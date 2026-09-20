@@ -16,7 +16,7 @@
     ['farol.html', 'O Farol'],
     ['/produtos/', 'Produtos'],
     ['servicos.html', 'Serviços'],
-    ['companhia.html', 'Companhia'],
+    ['companhia.html', 'Presença'],
     ['profissionais.html', 'Profissionais'],
     ['index.html#joao', 'Sobre']
   ];
@@ -160,10 +160,10 @@
           href: '/produtos/nevoa/'
         },
         {
-          tag: 'Companhia',
+          tag: 'Presença',
           title: '“Quantas vezes mais vou desistir só porque não tenho com quem ir?”',
           desc: 'O plano continua a apetecer-te. Só não queres vivê-lo sem ninguém ao lado.',
-          cta: 'Quero conhecer a Companhia',
+          cta: 'Quero conhecer Presença',
           href: '/portas/companhia.html'
         }
       ];
@@ -202,7 +202,8 @@
       rewriteCard(servicesGrid, 'Tarot e Consultas', 'Para olhar de outro ângulo para uma pergunta que continua sem resposta.');
       rewriteCard(servicesGrid, 'Escuta Orientada', 'Um espaço para falar, organizar o que está misturado e encontrar o próximo passo.');
       rewriteCard(servicesGrid, 'Acompanhamento', 'Continuidade para fases que não ficam resolvidas numa única sessão, incluindo os formatos SOS.');
-      rewriteCard(servicesGrid, 'Companhia', 'Companhia para sair, conversar ou partilhar um plano que não queres fazer a sós.');
+      rewriteCard(servicesGrid, 'Companhia', 'Presença para sair, conversar ou partilhar um plano que não queres fazer a sós.');
+      rewriteCard(servicesGrid, 'Presença', 'Presença para sair, conversar ou partilhar um plano que não queres fazer a sós.');
       rewriteCard(servicesGrid, 'Astrologia, Numerologia e Outras Terapias Complementares', 'Análises preparadas de acordo com a questão, o âmbito e a disponibilidade.');
       rewriteCard(servicesGrid, 'Defumações, Limpeza Energética e Abertura de Caminhos', 'Trabalhos simbólicos preparados sob consulta, de acordo com o pedido.');
 
@@ -362,7 +363,7 @@
     );
     if (companhiaSection) {
       setText('.detail-section__title', 'O que te falta não é orientação. É alguém contigo.', companhiaSection);
-      setText('.detail-copy', 'Se queres presença para um jantar, passeio, evento ou outro plano, vê os formatos de Companhia.', companhiaSection);
+      setText('.detail-copy', 'Se queres presença para um jantar, passeio, evento ou outro plano, vê os formatos de Presença.', companhiaSection);
     }
   }
 
@@ -377,7 +378,7 @@
     const friend = document.getElementById('friend4rent');
     if (friend) {
       const ps = $$('p:not(.detail-kicker)', friend);
-      if (ps[0]) ps[0].textContent = 'Jantar, cinema, concerto, passeio, compras ou conversa. Companhia sem romance.';
+      if (ps[0]) ps[0].textContent = 'Jantar, cinema, concerto, passeio, compras ou conversa. Presença social sem romance.';
       if (ps[1]) ps[1].textContent = 'Escolhes o plano. Combinamos tudo antes. Depois vais com companhia.';
     }
 
@@ -401,8 +402,8 @@
     const limites = document.getElementById('limites');
     if (limites) {
       setText('.detail-section__title', 'Proximidade não significa ambiguidade.', limites);
-      rewriteCard(limites, 'Friend4Rent', 'Companhia sem romance. Sem componente sexual.');
-      rewriteCard(limites, 'Boyfriend4Rent', 'Proximidade e romance leve dentro do que ficou combinado. Sem sexo, nudez ou contacto sexual.');
+      rewriteCard(limites, 'Presença Social', 'Tempo partilhado para planos sociais, sem romance.');
+      rewriteCard(limites, 'Presença Próxima', 'Proximidade afetiva dentro do que ficou combinado antes.');
       rewriteCard(limites, 'Não é Acompanhamento Permanente', 'É presença social ou afectiva. Não substitui cuidados psicológicos, médicos ou sociais especializados.');
       rewriteCard(limites, 'Queres Juntar Acompanhamento?', 'Podes juntar Escuta ou Acompanhamento se ficar combinado antes, com valor separado.');
       rewriteCard(limites, 'O Âmbito Não Muda Durante a Reserva', 'Nada de extras sexuais ou mudanças de âmbito durante o encontro.');
