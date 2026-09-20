@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>PDI · Importador privado | MAISON JF®</title>
+<link rel="stylesheet" href="../maison.css">
+<style>
+body{background:#080808}.admin{width:min(920px,calc(100% - 32px));margin:0 auto;padding:80px 0 120px}
+.admin h1{font:400 clamp(44px,7vw,78px)/.95 var(--serif);margin:.2em 0}.admin p{color:#aaa39a}
+.panel{border:1px solid var(--line);padding:28px;margin-top:24px;background:#10100f}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{display:grid;gap:8px}.field label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9b948a}
+.field input{width:100%;padding:13px;border:1px solid var(--line);background:#090909;color:#eee;font:14px var(--sans)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.actions button{padding:13px 17px;border:1px solid #d8d0c2;background:transparent;color:#eee;cursor:pointer;font:600 10px var(--sans);letter-spacing:.11em;text-transform:uppercase}.actions .primary{background:#eee8dd;color:#111}
+.actions button:disabled{opacity:.35;cursor:not-allowed}
+.summary{margin-top:20px;padding:18px;border-top:1px solid var(--line);font-family:ui-monospace,Consolas,monospace;font-size:12px;white-space:pre-wrap;color:#cfc7bb;min-height:70px}
+.warning{color:#c8a56a!important}.ok{color:#b8c8ae!important}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="admin">
+<p class="eyebrow">MAISON JF® · privado</p>
+<h1>Importador PÁRA DE IGNORAR!</h1>
+<p>Importa corpos pagos diretamente para a D1 sem os colocar no GitHub público. Cada ficheiro entra primeiro como candidato; a ativação exige uma ação separada.</p>
+
+<section class="panel">
+  <div class="grid">
+    <div class="field"><label for="secret">Secret de importação</label><input id="secret" type="password" autocomplete="off" spellcheck="false" placeholder="MAISON_PDI_IMPORT_SECRET"></div>
+    <div class="field"><label for="batch">Batch ID</label><input id="batch" type="text" spellcheck="false" placeholder="ex.: trabalho-2026-09-a"></div>
+    <div class="field"><label for="file">Ficheiro JSON privado</label><input id="file" type="file" accept=".json,application/json"></div>
+    <div class="field"><label>Conteúdo carregado</label><input id="loaded" type="text" readonly value="Nenhum ficheiro"></div>
+  </div>
+  <div class="actions">
+    <button type="button" id="inspect-file">Verificar ficheiro</button>
+    <button type="button" id="import" class="primary" disabled>Importar candidatos</button>
+    <button type="button" id="inspect-server">Verificar na D1</button>
+    <button type="button" id="activate">Ativar batch</button>
+  </div>
+  <div class="summary" id="log">À espera de um ficheiro privado.</div>
+</section>
+</main>
+<script>
+(()=>{
+ const $=id=>document.getElementById(id);
+ const file=$('file'),secret=$('secret'),batch=$('batch'),loaded=$('loaded'),log=$('log');
+ let payload=null;
+
+ function write(value,cls=''){
+   log.className='summary'+(cls?' '+cls:'');
+   log.textContent=typeof value==='string'?value:JSON.stringify(value,null,2);
+ }
+ function credentials(){
+   const key=secret.value.trim(),batchId=batch.value.trim();
+   if(!key)throw new Error('Escreve a secret configurada na Cloudflare.');
+   if(!batchId)throw new Error('Falta o Batch ID.');
+   return {key,batchId};
+ }
+ async function call(action,extra={}){
+   const {key,batchId}=credentials();
+   const response=await fetch('/api/pdi-admin-import',{
+     method:'POST',
+     headers:{'content-type':'application/json','x-maison-admin-key':key},
+     body:JSON.stringify({action,batchId,...extra})
+   });
+   const body=await response.json().catch(()=>({error:'Resposta inválida.'}));
+   if(!response.ok)throw new Error(body.error||('HTTP '+response.status));
+   return body;
+ }
+
+ file.addEventListener('change',async()=>{
+   payload=null;$('import').disabled=true;
+   const selected=file.files?.[0];
+   if(!selected){loaded.value='Nenhum ficheiro';return}
+   try{
+     const parsed=JSON.parse(await selected.text());
+     const questions=Array.isArray(parsed)?parsed:parsed.questions;
+     if(!Array.isArray(questions)||!questions.length)throw new Error('O JSON não contém uma lista questions.');
+     payload={...parsed,questions};
+     loaded.value=questions.length+' perguntas';
+     if(!batch.value&&parsed.batch)batch.value=String(parsed.batch);
+     $('import').disabled=false;
+     write({questions:questions.length,batch:batch.value||null,themes:[...new Set(questions.map(q=>q.theme).filter(Boolean))]},'ok');
+   }catch(error){write(error.message,'warning')}
+ });
+
+ $('inspect-file').addEventListener('click',()=>{
+   if(!payload)return write('Escolhe primeiro um ficheiro JSON.','warning');
+   const stages={},themes={};
+   for(const q of payload.questions){
+     stages[q.stage]=(stages[q.stage]||0)+1;
+     themes[q.theme]=(themes[q.theme]||0)+1;
+   }
+   write({questions:payload.questions.length,themes,stages},'ok');
+ });
+
+ $('import').addEventListener('click',async()=>{
+   if(!payload)return;
+   try{
+     $('import').disabled=true;
+     let accepted=0,skipped=0;
+     for(let i=0;i<payload.questions.length;i+=100){
+       const chunk=payload.questions.slice(i,i+100);
+       write('A importar '+(i+1)+'–'+Math.min(i+chunk.length,payload.questions.length)+' de '+payload.questions.length+'…');
+       const result=await call('import',{questions:chunk});
+       if(result.ok===false)throw new Error(JSON.stringify(result.errors||result));
+       accepted+=Number(result.accepted||0);skipped+=Number(result.skipped||0);
+     }
+     write({imported:true,batchId:batch.value.trim(),accepted,skipped,next:'Verificar na D1; depois ativar.'},'ok');
+   }catch(error){write(error.message,'warning')}
+   finally{$('import').disabled=false}
+ });
+
+ $('inspect-server').addEventListener('click',async()=>{
+   try{write(await call('inspect'),'ok')}catch(error){write(error.message,'warning')}
+ });
+ $('activate').addEventListener('click',async()=>{
+   try{
+     if(!confirm('Ativar este batch no PÁRA DE IGNORAR!? Esta ação torna as perguntas elegíveis para sessões pagas.'))return;
+     write(await call('activate'),'ok');
+   }catch(error){write(error.message,'warning')}
+ });
+})();
+</script>
+</body>
+</html>
