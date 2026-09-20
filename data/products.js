@@ -21,7 +21,7 @@ window.MAISON_PRODUCTS=[
  cta:'Quero levar para casa'
 },
 {
- slug:'oleo-massagem',name:'Óleo de Massagem',size:'60 ml',category:'Corpo',price:12.5,currency:'EUR',
+ slug:'oleo-massagem',name:'Óleo de Massagem',size:'60 ml',category:'Corpo',price:12,currency:'EUR',
  description:'Toque e pausa num ritual simples de massagem.',
  media:[{role:'hero',src:'../images/cinematic/ritual.avif',alt:'Atmosfera editorial MAISON JF de toque e pausa',aspect:'portrait',editorial:true}],
  ritual:{title:'O corpo percebe o toque antes da explicação.',text:'Alguns minutos de massagem podem ser uma forma simples de devolver presença ao corpo.'},
