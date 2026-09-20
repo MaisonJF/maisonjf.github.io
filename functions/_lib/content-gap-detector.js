@@ -17,12 +17,14 @@ const ORACLE_FLOORS={
 };
 
 const QUESTION_STAGE_FLOORS={
-  open:12,
-  recognize:12,
-  deepen:12,
-  touch:12,
-  close:6,
-  signature:6
+  // 300-question healthy-depth target for a mature paid theme.
+  // Floors guide growth; they are never hard catalogue caps.
+  open:60,
+  recognize:60,
+  deepen:60,
+  touch:60,
+  close:30,
+  signature:30
 };
 
 export function detectOracleContentNeeds({territory,blocks=[],floors=ORACLE_FLOORS}={}){
