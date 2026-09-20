@@ -19,7 +19,6 @@ export async function onRequestPost({request,env}){
 
     const params=new URLSearchParams();
     params.set('mode','payment');
-    params.set('payment_method_types[0]','card');
     params.set('line_items[0][quantity]','1');
     params.set('line_items[0][price_data][currency]',String(product.currency||'eur'));
     params.set('line_items[0][price_data][unit_amount]',String(product.amount));
