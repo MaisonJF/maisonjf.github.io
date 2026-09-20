@@ -2265,3 +2265,65 @@ footer a:hover{
   overflow:hidden;
   border-color:var(--ak-line)!important;
 }
+
+
+/* MAISON JF® · human territories architecture · 2026-09-20 */
+.site-header nav>a[href*="oraculo"],
+.site-header nav>a[href*="para-de-ignorar"]{
+  display:none!important;
+}
+.home-page--final .hero__headline--one-line{
+  white-space:nowrap!important;
+  width:max-content!important;
+  max-width:none!important;
+  text-wrap:nowrap!important;
+  font-size:clamp(34px,6.35vw,102px)!important;
+  line-height:.9!important;
+  letter-spacing:-.052em!important;
+}
+.home-page--final #portas{padding-top:clamp(54px,7vw,92px)}
+.home-page--final .home-explore__links{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  max-width:900px;
+}
+.home-page--final .home-explore__links>a{min-width:0!important;width:auto!important}
+
+.territory-offers{padding:90px 0 110px;border-top:1px solid var(--ak-line)}
+.territory-offers__head{max-width:760px;margin-bottom:34px}
+.territory-offers__head h2{font:400 clamp(38px,5vw,66px)/.98 var(--serif);margin:.2em 0}
+.territory-offers__head p:last-child{color:var(--ak-muted);max-width:620px}
+.territory-offers__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.territory-offer{min-height:220px;padding:28px;border:1px solid var(--ak-line);border-radius:var(--ak-radius);background:var(--ak-surface);text-decoration:none;display:flex;flex-direction:column;transition:transform var(--ak-ease),background var(--ak-ease),border-color var(--ak-ease)}
+.territory-offer:hover{transform:translateY(-2px);background:var(--ak-surface-hover);border-color:rgba(199,170,115,.28)}
+.territory-offer small{color:var(--ak-accent);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.territory-offer strong{font:400 31px/1.02 var(--serif);margin:16px 0 10px}
+.territory-offer span{color:var(--ak-muted);font-size:14px;line-height:1.5;margin-top:auto}
+
+.product-digital{margin:46px 0 56px}
+.product-digital__head{margin-bottom:22px}
+.product-digital__head h2{font:400 clamp(34px,4.7vw,56px)/.98 var(--serif);margin:.15em 0}
+.product-digital__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.product-digital__card{min-height:250px;padding:28px;border:1px solid var(--ak-line);border-radius:var(--ak-radius);background:var(--ak-surface);text-decoration:none;display:flex;flex-direction:column}
+.product-digital__card small{color:var(--ak-accent);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.product-digital__card strong{font:400 31px/1 var(--serif);margin:16px 0 10px}
+.product-digital__card p{color:var(--ak-muted);margin:0 0 20px}
+.product-digital__card b{margin-top:auto;font-size:12px;font-weight:500;color:var(--ak-text)}
+
+@media(max-width:900px){
+  .territory-offers__grid,.product-digital__grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .home-page--final .hero__headline--one-line{
+    font-size:clamp(26px,8.1vw,50px)!important;
+    letter-spacing:-.05em!important;
+  }
+  .home-page--final #portas{padding-top:46px}
+  .home-page--final .home-explore__links{grid-template-columns:1fr!important}
+  .home-page--final .home-explore__links>a{width:100%!important;border-left:0!important;border-right:0!important}
+  .territory-offers{padding:70px 0 84px}
+  .territory-offers__grid,.product-digital__grid{grid-template-columns:1fr}
+  .territory-offer,.product-digital__card{min-height:0}
+}
+@media(max-width:360px){
+  .home-page--final .hero__headline--one-line{font-size:clamp(25px,8.2vw,31px)!important}
+}
