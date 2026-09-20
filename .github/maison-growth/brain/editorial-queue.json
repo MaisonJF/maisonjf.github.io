@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-20-v1",
+  "version": "2026-09-20-v2",
   "visibility": "internal-editorial",
   "generatedAt": "2026-09-20T08:14:28+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
@@ -15,6 +15,8 @@
     "queueItems": 12,
     "questionCandidates": 6,
     "questionThemeHypotheses": 33,
+    "questionDesignSlots": 198,
+    "activeQuestionTargetPerMatureTheme": 300,
     "oracleCandidates": 6,
     "oracleRoleSlots": 42
   },
@@ -215,6 +217,224 @@
         "close",
         "signature"
       ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_calar_para_manter_a_paz_open",
+          "theme": "calar para manter a paz",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_calar_para_manter_a_paz_recognize",
+          "theme": "calar para manter a paz",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_calar_para_manter_a_paz_deepen",
+          "theme": "calar para manter a paz",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_calar_para_manter_a_paz_touch",
+          "theme": "calar para manter a paz",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_calar_para_manter_a_paz_close",
+          "theme": "calar para manter a paz",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_calar_para_manter_a_paz_signature",
+          "theme": "calar para manter a paz",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_voz_e_seguranca_relacional_open",
+          "theme": "voz e segurança relacional",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_voz_e_seguranca_relacional_recognize",
+          "theme": "voz e segurança relacional",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_voz_e_seguranca_relacional_deepen",
+          "theme": "voz e segurança relacional",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_voz_e_seguranca_relacional_touch",
+          "theme": "voz e segurança relacional",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_voz_e_seguranca_relacional_close",
+          "theme": "voz e segurança relacional",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_voz_e_seguranca_relacional_signature",
+          "theme": "voz e segurança relacional",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_necessidades_nao_ditas_open",
+          "theme": "necessidades não ditas",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_necessidades_nao_ditas_recognize",
+          "theme": "necessidades não ditas",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_necessidades_nao_ditas_deepen",
+          "theme": "necessidades não ditas",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_necessidades_nao_ditas_touch",
+          "theme": "necessidades não ditas",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_necessidades_nao_ditas_close",
+          "theme": "necessidades não ditas",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_necessidades_nao_ditas_signature",
+          "theme": "necessidades não ditas",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_acomodacao_vs_autoapagamento_open",
+          "theme": "acomodação vs autoapagamento",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_acomodacao_vs_autoapagamento_recognize",
+          "theme": "acomodação vs autoapagamento",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_acomodacao_vs_autoapagamento_deepen",
+          "theme": "acomodação vs autoapagamento",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_acomodacao_vs_autoapagamento_touch",
+          "theme": "acomodação vs autoapagamento",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_acomodacao_vs_autoapagamento_close",
+          "theme": "acomodação vs autoapagamento",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_acomodacao_vs_autoapagamento_signature",
+          "theme": "acomodação vs autoapagamento",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_medo_da_reaccao_ao_dizer_a_verdade_open",
+          "theme": "medo da reacção ao dizer a verdade",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_medo_da_reaccao_ao_dizer_a_verdade_recognize",
+          "theme": "medo da reacção ao dizer a verdade",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_medo_da_reaccao_ao_dizer_a_verdade_deepen",
+          "theme": "medo da reacção ao dizer a verdade",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_medo_da_reaccao_ao_dizer_a_verdade_touch",
+          "theme": "medo da reacção ao dizer a verdade",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_medo_da_reaccao_ao_dizer_a_verdade_close",
+          "theme": "medo da reacção ao dizer a verdade",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_medo_da_reaccao_ao_dizer_a_verdade_signature",
+          "theme": "medo da reacção ao dizer a verdade",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_eu_interior_vs_eu_mostrado_open",
+          "theme": "eu interior vs eu mostrado",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_eu_interior_vs_eu_mostrado_recognize",
+          "theme": "eu interior vs eu mostrado",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_eu_interior_vs_eu_mostrado_deepen",
+          "theme": "eu interior vs eu mostrado",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_eu_interior_vs_eu_mostrado_touch",
+          "theme": "eu interior vs eu mostrado",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_eu_interior_vs_eu_mostrado_close",
+          "theme": "eu interior vs eu mostrado",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_auto_silenciamento_para_preservar_o_vinculo_eu_interior_vs_eu_mostrado_signature",
+          "theme": "eu interior vs eu mostrado",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
       "bodyStored": false,
       "approvalRequired": true,
       "automaticActivation": false,
@@ -250,6 +470,224 @@
         "close",
         "signature"
       ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_culpa_ao_descansar_open",
+          "theme": "culpa ao descansar",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_culpa_ao_descansar_recognize",
+          "theme": "culpa ao descansar",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_culpa_ao_descansar_deepen",
+          "theme": "culpa ao descansar",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_culpa_ao_descansar_touch",
+          "theme": "culpa ao descansar",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_culpa_ao_descansar_close",
+          "theme": "culpa ao descansar",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_culpa_ao_descansar_signature",
+          "theme": "culpa ao descansar",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_cuidar_e_manter_identidade_open",
+          "theme": "cuidar e manter identidade",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_cuidar_e_manter_identidade_recognize",
+          "theme": "cuidar e manter identidade",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_cuidar_e_manter_identidade_deepen",
+          "theme": "cuidar e manter identidade",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_cuidar_e_manter_identidade_touch",
+          "theme": "cuidar e manter identidade",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_cuidar_e_manter_identidade_close",
+          "theme": "cuidar e manter identidade",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_cuidar_e_manter_identidade_signature",
+          "theme": "cuidar e manter identidade",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_responsabilidade_partilhada_open",
+          "theme": "responsabilidade partilhada",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_responsabilidade_partilhada_recognize",
+          "theme": "responsabilidade partilhada",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_responsabilidade_partilhada_deepen",
+          "theme": "responsabilidade partilhada",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_responsabilidade_partilhada_touch",
+          "theme": "responsabilidade partilhada",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_responsabilidade_partilhada_close",
+          "theme": "responsabilidade partilhada",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_responsabilidade_partilhada_signature",
+          "theme": "responsabilidade partilhada",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_limites_no_cuidado_open",
+          "theme": "limites no cuidado",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_limites_no_cuidado_recognize",
+          "theme": "limites no cuidado",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_limites_no_cuidado_deepen",
+          "theme": "limites no cuidado",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_limites_no_cuidado_touch",
+          "theme": "limites no cuidado",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_limites_no_cuidado_close",
+          "theme": "limites no cuidado",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_limites_no_cuidado_signature",
+          "theme": "limites no cuidado",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_amor_sem_autoapagamento_open",
+          "theme": "amor sem autoapagamento",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_amor_sem_autoapagamento_recognize",
+          "theme": "amor sem autoapagamento",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_amor_sem_autoapagamento_deepen",
+          "theme": "amor sem autoapagamento",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_amor_sem_autoapagamento_touch",
+          "theme": "amor sem autoapagamento",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_amor_sem_autoapagamento_close",
+          "theme": "amor sem autoapagamento",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_amor_sem_autoapagamento_signature",
+          "theme": "amor sem autoapagamento",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_escolha_e_obrigacao_no_cuidar_open",
+          "theme": "escolha e obrigação no cuidar",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_escolha_e_obrigacao_no_cuidar_recognize",
+          "theme": "escolha e obrigação no cuidar",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_escolha_e_obrigacao_no_cuidar_deepen",
+          "theme": "escolha e obrigação no cuidar",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_escolha_e_obrigacao_no_cuidar_touch",
+          "theme": "escolha e obrigação no cuidar",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_escolha_e_obrigacao_no_cuidar_close",
+          "theme": "escolha e obrigação no cuidar",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_escolha_e_obrigacao_no_cuidar_signature",
+          "theme": "escolha e obrigação no cuidar",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
       "bodyStored": false,
       "approvalRequired": true,
       "automaticActivation": false,
@@ -284,6 +722,188 @@
         "close",
         "signature"
       ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_evitamento_financeiro_open",
+          "theme": "evitamento financeiro",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_evitamento_financeiro_recognize",
+          "theme": "evitamento financeiro",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_evitamento_financeiro_deepen",
+          "theme": "evitamento financeiro",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_evitamento_financeiro_touch",
+          "theme": "evitamento financeiro",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_evitamento_financeiro_close",
+          "theme": "evitamento financeiro",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_evitamento_financeiro_signature",
+          "theme": "evitamento financeiro",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_escassez_e_atencao_open",
+          "theme": "escassez e atenção",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_escassez_e_atencao_recognize",
+          "theme": "escassez e atenção",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_escassez_e_atencao_deepen",
+          "theme": "escassez e atenção",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_escassez_e_atencao_touch",
+          "theme": "escassez e atenção",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_escassez_e_atencao_close",
+          "theme": "escassez e atenção",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_escassez_e_atencao_signature",
+          "theme": "escassez e atenção",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_adiamento_de_decisoes_open",
+          "theme": "adiamento de decisões",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_adiamento_de_decisoes_recognize",
+          "theme": "adiamento de decisões",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_adiamento_de_decisoes_deepen",
+          "theme": "adiamento de decisões",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_adiamento_de_decisoes_touch",
+          "theme": "adiamento de decisões",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_adiamento_de_decisoes_close",
+          "theme": "adiamento de decisões",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_adiamento_de_decisoes_signature",
+          "theme": "adiamento de decisões",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_curto_prazo_vs_futuro_open",
+          "theme": "curto prazo vs futuro",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_curto_prazo_vs_futuro_recognize",
+          "theme": "curto prazo vs futuro",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_curto_prazo_vs_futuro_deepen",
+          "theme": "curto prazo vs futuro",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_curto_prazo_vs_futuro_touch",
+          "theme": "curto prazo vs futuro",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_curto_prazo_vs_futuro_close",
+          "theme": "curto prazo vs futuro",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_curto_prazo_vs_futuro_signature",
+          "theme": "curto prazo vs futuro",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_dinheiro_e_carga_mental_open",
+          "theme": "dinheiro e carga mental",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_dinheiro_e_carga_mental_recognize",
+          "theme": "dinheiro e carga mental",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_dinheiro_e_carga_mental_deepen",
+          "theme": "dinheiro e carga mental",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_dinheiro_e_carga_mental_touch",
+          "theme": "dinheiro e carga mental",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_dinheiro_e_carga_mental_close",
+          "theme": "dinheiro e carga mental",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_evitamento_financeiro_sob_escassez_dinheiro_e_carga_mental_signature",
+          "theme": "dinheiro e carga mental",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
       "bodyStored": false,
       "approvalRequired": true,
       "automaticActivation": false,
@@ -316,6 +936,188 @@
         "touch",
         "close",
         "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_perda_sem_resolucao_open",
+          "theme": "perda sem resolução",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_perda_sem_resolucao_recognize",
+          "theme": "perda sem resolução",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_perda_sem_resolucao_deepen",
+          "theme": "perda sem resolução",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_perda_sem_resolucao_touch",
+          "theme": "perda sem resolução",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_perda_sem_resolucao_close",
+          "theme": "perda sem resolução",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_perda_sem_resolucao_signature",
+          "theme": "perda sem resolução",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_presenca_e_ausencia_ao_mesmo_tempo_open",
+          "theme": "presença e ausência ao mesmo tempo",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_presenca_e_ausencia_ao_mesmo_tempo_recognize",
+          "theme": "presença e ausência ao mesmo tempo",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_presenca_e_ausencia_ao_mesmo_tempo_deepen",
+          "theme": "presença e ausência ao mesmo tempo",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_presenca_e_ausencia_ao_mesmo_tempo_touch",
+          "theme": "presença e ausência ao mesmo tempo",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_presenca_e_ausencia_ao_mesmo_tempo_close",
+          "theme": "presença e ausência ao mesmo tempo",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_presenca_e_ausencia_ao_mesmo_tempo_signature",
+          "theme": "presença e ausência ao mesmo tempo",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_espera_por_certeza_open",
+          "theme": "espera por certeza",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_espera_por_certeza_recognize",
+          "theme": "espera por certeza",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_espera_por_certeza_deepen",
+          "theme": "espera por certeza",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_espera_por_certeza_touch",
+          "theme": "espera por certeza",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_espera_por_certeza_close",
+          "theme": "espera por certeza",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_espera_por_certeza_signature",
+          "theme": "espera por certeza",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_vinculo_que_mudou_sem_desaparecer_open",
+          "theme": "vínculo que mudou sem desaparecer",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_vinculo_que_mudou_sem_desaparecer_recognize",
+          "theme": "vínculo que mudou sem desaparecer",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_vinculo_que_mudou_sem_desaparecer_deepen",
+          "theme": "vínculo que mudou sem desaparecer",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_vinculo_que_mudou_sem_desaparecer_touch",
+          "theme": "vínculo que mudou sem desaparecer",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_vinculo_que_mudou_sem_desaparecer_close",
+          "theme": "vínculo que mudou sem desaparecer",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_vinculo_que_mudou_sem_desaparecer_signature",
+          "theme": "vínculo que mudou sem desaparecer",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_continuar_sem_fecho_open",
+          "theme": "continuar sem fecho",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_continuar_sem_fecho_recognize",
+          "theme": "continuar sem fecho",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_continuar_sem_fecho_deepen",
+          "theme": "continuar sem fecho",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_continuar_sem_fecho_touch",
+          "theme": "continuar sem fecho",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_continuar_sem_fecho_close",
+          "theme": "continuar sem fecho",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_perda_ambigua_sem_fecho_claro_continuar_sem_fecho_signature",
+          "theme": "continuar sem fecho",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
       ],
       "bodyStored": false,
       "approvalRequired": true,
@@ -352,6 +1154,224 @@
         "close",
         "signature"
       ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_demasiadas_opcoes_open",
+          "theme": "demasiadas opções",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_demasiadas_opcoes_recognize",
+          "theme": "demasiadas opções",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_demasiadas_opcoes_deepen",
+          "theme": "demasiadas opções",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_demasiadas_opcoes_touch",
+          "theme": "demasiadas opções",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_demasiadas_opcoes_close",
+          "theme": "demasiadas opções",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_demasiadas_opcoes_signature",
+          "theme": "demasiadas opções",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_medo_de_escolher_mal_open",
+          "theme": "medo de escolher mal",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_medo_de_escolher_mal_recognize",
+          "theme": "medo de escolher mal",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_medo_de_escolher_mal_deepen",
+          "theme": "medo de escolher mal",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_medo_de_escolher_mal_touch",
+          "theme": "medo de escolher mal",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_medo_de_escolher_mal_close",
+          "theme": "medo de escolher mal",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_medo_de_escolher_mal_signature",
+          "theme": "medo de escolher mal",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_comparar_sem_fim_open",
+          "theme": "comparar sem fim",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_comparar_sem_fim_recognize",
+          "theme": "comparar sem fim",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_comparar_sem_fim_deepen",
+          "theme": "comparar sem fim",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_comparar_sem_fim_touch",
+          "theme": "comparar sem fim",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_comparar_sem_fim_close",
+          "theme": "comparar sem fim",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_comparar_sem_fim_signature",
+          "theme": "comparar sem fim",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_suficientemente_bom_open",
+          "theme": "suficientemente bom",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_suficientemente_bom_recognize",
+          "theme": "suficientemente bom",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_suficientemente_bom_deepen",
+          "theme": "suficientemente bom",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_suficientemente_bom_touch",
+          "theme": "suficientemente bom",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_suficientemente_bom_close",
+          "theme": "suficientemente bom",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_suficientemente_bom_signature",
+          "theme": "suficientemente bom",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_renuncia_ao_nao_escolhido_open",
+          "theme": "renúncia ao não escolhido",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_renuncia_ao_nao_escolhido_recognize",
+          "theme": "renúncia ao não escolhido",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_renuncia_ao_nao_escolhido_deepen",
+          "theme": "renúncia ao não escolhido",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_renuncia_ao_nao_escolhido_touch",
+          "theme": "renúncia ao não escolhido",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_renuncia_ao_nao_escolhido_close",
+          "theme": "renúncia ao não escolhido",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_renuncia_ao_nao_escolhido_signature",
+          "theme": "renúncia ao não escolhido",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_compromisso_com_uma_decisao_open",
+          "theme": "compromisso com uma decisão",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_compromisso_com_uma_decisao_recognize",
+          "theme": "compromisso com uma decisão",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_compromisso_com_uma_decisao_deepen",
+          "theme": "compromisso com uma decisão",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_compromisso_com_uma_decisao_touch",
+          "theme": "compromisso com uma decisão",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_compromisso_com_uma_decisao_close",
+          "theme": "compromisso com uma decisão",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_sobrecarga_de_escolha_quando_mais_opcoes_paralisam_compromisso_com_uma_decisao_signature",
+          "theme": "compromisso com uma decisão",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
       "bodyStored": false,
       "approvalRequired": true,
       "automaticActivation": false,
@@ -384,6 +1404,188 @@
         "touch",
         "close",
         "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_companhia_sem_conexao_open",
+          "theme": "companhia sem conexão",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_companhia_sem_conexao_recognize",
+          "theme": "companhia sem conexão",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_companhia_sem_conexao_deepen",
+          "theme": "companhia sem conexão",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_companhia_sem_conexao_touch",
+          "theme": "companhia sem conexão",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_companhia_sem_conexao_close",
+          "theme": "companhia sem conexão",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_companhia_sem_conexao_signature",
+          "theme": "companhia sem conexão",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_qualidade_vs_quantidade_de_contacto_open",
+          "theme": "qualidade vs quantidade de contacto",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_qualidade_vs_quantidade_de_contacto_recognize",
+          "theme": "qualidade vs quantidade de contacto",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_qualidade_vs_quantidade_de_contacto_deepen",
+          "theme": "qualidade vs quantidade de contacto",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_qualidade_vs_quantidade_de_contacto_touch",
+          "theme": "qualidade vs quantidade de contacto",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_qualidade_vs_quantidade_de_contacto_close",
+          "theme": "qualidade vs quantidade de contacto",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_qualidade_vs_quantidade_de_contacto_signature",
+          "theme": "qualidade vs quantidade de contacto",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_sentir_se_visto_open",
+          "theme": "sentir-se visto",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_sentir_se_visto_recognize",
+          "theme": "sentir-se visto",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_sentir_se_visto_deepen",
+          "theme": "sentir-se visto",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_sentir_se_visto_touch",
+          "theme": "sentir-se visto",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_sentir_se_visto_close",
+          "theme": "sentir-se visto",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_sentir_se_visto_signature",
+          "theme": "sentir-se visto",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_apoio_e_reciprocidade_open",
+          "theme": "apoio e reciprocidade",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_apoio_e_reciprocidade_recognize",
+          "theme": "apoio e reciprocidade",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_apoio_e_reciprocidade_deepen",
+          "theme": "apoio e reciprocidade",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_apoio_e_reciprocidade_touch",
+          "theme": "apoio e reciprocidade",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_apoio_e_reciprocidade_close",
+          "theme": "apoio e reciprocidade",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_apoio_e_reciprocidade_signature",
+          "theme": "apoio e reciprocidade",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_intimidade_emocional_open",
+          "theme": "intimidade emocional",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_intimidade_emocional_recognize",
+          "theme": "intimidade emocional",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_intimidade_emocional_deepen",
+          "theme": "intimidade emocional",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_intimidade_emocional_touch",
+          "theme": "intimidade emocional",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_intimidade_emocional_close",
+          "theme": "intimidade emocional",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_intimidade_emocional_signature",
+          "theme": "intimidade emocional",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
       ],
       "bodyStored": false,
       "approvalRequired": true,
