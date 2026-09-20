@@ -2590,3 +2590,141 @@ a.product-digital__card p{
 .vpc-offer:focus-visible small{
   color:var(--maison-gold-light)!important;
 }
+
+
+/* MAISON JF® · QUIET LUXURY / GOLD DETAIL SYSTEM · 2026-09-21
+   Discovery first: dark tactile surfaces, restrained gold, prices only when they are decision-critical. */
+:root{
+  --maison-gold:#c7aa73;
+  --maison-gold-light:#e0c48b;
+  --maison-card:#10100f;
+  --maison-card-hover:#14130f;
+  --maison-card-line:rgba(199,170,115,.18);
+  --maison-card-line-hover:rgba(199,170,115,.46);
+}
+
+.eyebrow,
+.detail-eyebrow,
+.detail-kicker,
+.catalogue-card__eyebrow,
+.service-card__eyebrow,
+.footer__column-title,
+.home-footer__group>span,
+.journey-card small,
+.offer-card small,
+.related-card small,
+.territory small,
+.product__body small,
+.product-digital__card small,
+.gift-card small,
+.pro-card small,
+.presence-card small,
+.service-door small,
+.consultation-door small,
+.territory-offer small,
+.product-meta-links a,
+.service-family__summary>span,
+.consultation-other summary,
+.presence-details summary,
+.door--editorial .door__copy span,
+.door--editorial .door__copy b{
+  color:var(--maison-gold)!important;
+}
+
+.text-link,
+.service-buy{
+  color:var(--maison-gold)!important;
+}
+.text-link:hover,
+.service-buy:hover{
+  color:var(--maison-gold-light)!important;
+}
+
+a.territory-offer,
+a.product-digital__card,
+a.related-card,
+a.journey-card,
+a.offer-card,
+a.gift-card,
+a.catalogue-card,
+.pro-card,
+.presence-card,
+.service-door,
+.consultation-door,
+.route-options a,
+.links-grid a{
+  background:var(--maison-card)!important;
+  color:#f3efe7!important;
+  border-color:var(--maison-card-line)!important;
+  box-shadow:none!important;
+}
+
+a.territory-offer:hover,
+a.product-digital__card:hover,
+a.related-card:hover,
+a.journey-card:hover,
+a.offer-card:hover,
+a.gift-card:hover,
+a.catalogue-card:hover,
+.pro-card:hover,
+.presence-card:hover,
+.service-door:hover,
+.consultation-door:hover,
+.consultation-door[aria-expanded="true"],
+.route-options a:hover,
+.links-grid a:hover{
+  background:var(--maison-card-hover)!important;
+  border-color:var(--maison-card-line-hover)!important;
+}
+
+a.territory-offer strong,
+a.product-digital__card strong,
+a.related-card strong,
+a.journey-card strong,
+a.offer-card strong,
+a.gift-card strong,
+a.catalogue-card strong,
+.pro-card h2,
+.presence-card h3,
+.service-door strong,
+.consultation-door strong{
+  color:#f3efe7!important;
+}
+
+a.territory-offer span,
+a.product-digital__card p,
+a.related-card span,
+a.journey-card p,
+a.offer-card p,
+a.gift-card p,
+.pro-card p,
+.presence-card p,
+.service-door span,
+.consultation-door span{
+  color:#aaa39a!important;
+}
+
+/* Discovery surfaces do not lead with price. Price remains on product/service detail and checkout. */
+.product-grid .price,
+.catalogue-card__price,
+.gift-card .price,
+.related-card .price,
+.journey-card .price{
+  display:none!important;
+}
+
+/* Homepage door labels are names, not sequence numbers; HTML removes the numbering. */
+.door--editorial:hover{
+  border-color:var(--maison-card-line-hover)!important;
+}
+
+/* Gold should feel like jewellery, not paint. */
+hr,
+.detail-note,
+.manifesto,
+.editorial-essay,
+.home-feature,
+.presence-sos,
+.presence-rules{
+  border-color:rgba(199,170,115,.14);
+}
