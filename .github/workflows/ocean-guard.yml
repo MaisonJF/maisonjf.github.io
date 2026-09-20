@@ -107,6 +107,33 @@ jobs:
           print('Presença naming, offers and prices are consistent across core public surfaces.')
           PY
 
+      - name: Guard final public service catalogue
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          public_files=[
+              'data/services.js','servicos/index.html','farol.js',
+              'farol.html','contacto/index.html'
+          ]
+          forbidden=('Astrologia','Numerologia','Maison Todo o Mês','Outras Terapias Complementares','mentoria-pontual')
+          for name in public_files:
+              text=Path(name).read_text(encoding='utf-8')
+              for token in forbidden:
+                  if token in text:
+                      raise SystemExit(f'Retired public offer {token} still appears in {name}')
+          catalogue=Path('data/services.js').read_text(encoding='utf-8')
+          required=(
+              "name:'Acompanhamento'","price:'170 € · 4 semanas'",
+              "name:'Mentoria'","price:'a partir de 125 €'",
+              "name:'Ritual Personalizado'","name:'Pedidos Físicos'","jesmonite"
+          )
+          for token in required:
+              if token not in catalogue:
+                  raise SystemExit(f'Missing final catalogue requirement: {token}')
+          print('Final public service catalogue is locked.')
+          PY
+
       - name: Ensure every Ocean flows somewhere public
         shell: bash
         run: |
