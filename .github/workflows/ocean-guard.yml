@@ -97,7 +97,14 @@ jobs:
               for token in forbidden:
                   if token in text:
                       raise SystemExit(f'{token} must not appear in public Presença surfaces: {name}')
-          print('Presença naming is consistent across core public surfaces.')
+          presence=Path('portas/companhia.html').read_text(encoding='utf-8')
+          required=('Presença Online','Presença Social','Presença Próxima','SOS Dia','SOS Semana','35 €','60 €','80 €','120 €')
+          for token in required:
+              if token not in presence:
+                  raise SystemExit(f'Missing required Presença offer or price: {token}')
+          if '3, 7, 14, 21 ou 28' in Path('llms.txt').read_text(encoding='utf-8'):
+              raise SystemExit('Old SOS duration ladder is still documented')
+          print('Presença naming, offers and prices are consistent across core public surfaces.')
           PY
 
       - name: Ensure every Ocean flows somewhere public
