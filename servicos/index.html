@@ -38,7 +38,7 @@
 <a class="service-door" href="#consultas"><small>01</small><strong>Consultas</strong><span>Tarot, escrito ou conversa.</span></a>
 <a class="service-door" href="#continuidade"><small>02</small><strong>Continuidade</strong><span>Para quando uma vez não chega.</span></a>
 <a class="service-door" href="#companhia"><small>03</small><strong>Presença</strong><span>Ao teu lado, à distância ou enquanto isto acontece.</span></a>
-<a class="service-door" href="#especiais"><small>04</small><strong>Pedidos especiais</strong><span>Rituais e pedidos fora do catálogo.</span></a>
+<a class="service-door" href="#especiais"><small>04</small><strong>Pedidos especiais</strong><span>Rituais e pedidos físicos feitos à medida.</span></a>
 </section>
 
 <details class="service-family service-section" id="consultas" open>
@@ -63,19 +63,15 @@
   <div class="service-list" id="consultasList"></div>
 </section>
 <p class="consultation-checkout-status" id="consultationCheckoutStatus" aria-live="polite"></p>
-<details class="consultation-other">
-  <summary>Outras leituras</summary>
-  <div class="service-list" id="outrasLeiturasList"></div>
-</details>
 </details>
 
 <details class="service-family service-section" id="continuidade">
-<summary class="service-family__summary"><div><p class="eyebrow">Continuidade</p><h2>Quando uma vez não chega.</h2></div><p>Acompanhamento, Mentoria e Maison Todo o Mês.</p><span>Ver formatos →</span></summary>
+<summary class="service-family__summary"><div><p class="eyebrow">Continuidade</p><h2>Quando uma vez não chega.</h2></div><p>Acompanhamento e Mentoria.</p><span>Ver formatos →</span></summary>
 <div class="service-list" id="continuidadeList"></div>
 </details>
 
 <details class="service-family service-section" id="especiais">
-<summary class="service-family__summary"><div><p class="eyebrow">Pedidos especiais</p><h2>Quando não cabe no catálogo.</h2></div><p>Primeiro percebemos o que procuras. Só depois confirmamos se existe uma proposta adequada.</p><span>Ver possibilidades →</span></summary>
+<summary class="service-family__summary"><div><p class="eyebrow">Pedidos especiais</p><h2>Quando não cabe no catálogo.</h2></div><p>Rituais personalizados e pedidos físicos quando o catálogo não chega.</p><span>Ver possibilidades →</span></summary>
 <div class="service-list" id="especiaisList"></div>
 </details>
 
@@ -137,8 +133,6 @@
    consultPanel.scrollIntoView({behavior:'smooth',block:'nearest'});
  }
  document.querySelectorAll('[data-consult-group]').forEach(button=>button.addEventListener('click',()=>showConsultation(button.dataset.consultGroup)));
- const otherHost=document.getElementById('outrasLeiturasList');
- items.filter(s=>s.kind==='consulta'&&s.group==='outras').forEach(s=>otherHost?.appendChild(serviceCard(s)));
  render('continuidade','continuidadeList');render('especial','especiaisList');
 
  function revealHash(){
