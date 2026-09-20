@@ -71,7 +71,7 @@
   <section class="pdi-themes" id="temas">
     <p class="eyebrow">Escolhe por onde entrar</p>
     <h2>Escolhe onde dói.<br>Ou onde tens curiosidade.</h2>
-    <p>Uma conversa de cada vez.</p>
+    <p id="pdi-theme-summary">Cada tema · 28 perguntas.</p>
     <div class="pdi-theme-grid" id="pdi-theme-grid" aria-live="polite">
       <article class="pdi-theme"><small>A carregar</small><h3>Relações</h3><p>Só um instante…</p></article>
     </div>
@@ -97,6 +97,7 @@
 (async()=>{
   const status=document.getElementById('pdi-status');
   const grid=document.getElementById('pdi-theme-grid');
+  const themeSummary=document.getElementById('pdi-theme-summary');
   let available=new Map();
 
   try{
@@ -119,15 +120,18 @@
       return;
     }
     grid.innerHTML='';
+    const prices=[...new Set(themes.map(theme=>theme.display_price).filter(Boolean))];
+    const onePrice=prices.length===1?prices[0]:null;
+    themeSummary.textContent=onePrice?'Cada tema · 28 perguntas · '+onePrice:'Escolhe o tema. O preço aparece em cada cartão.';
     for(const theme of themes){
       const card=document.createElement('article');
       card.className='pdi-theme';
       const small=document.createElement('small');small.textContent=theme.family||'PÁRA DE IGNORAR!';
       const h=document.createElement('h3');h.textContent=theme.label;
-      const p=document.createElement('p');p.textContent='28 perguntas · '+theme.display_price;
+      const p=document.createElement('p');p.textContent=onePrice?'28 perguntas':'28 perguntas · '+theme.display_price;
       const button=document.createElement('button');
       button.className='pdi-buy';button.type='button';button.dataset.theme=theme.slug;
-      button.textContent='Jogar · '+theme.display_price;
+      button.textContent='Jogar';
       card.append(small,h,p,button);grid.append(card);
     }
   }
