@@ -98,7 +98,7 @@ jobs:
                   if token in text:
                       raise SystemExit(f'{token} must not appear in public Presença surfaces: {name}')
           presence=Path('portas/companhia.html').read_text(encoding='utf-8')
-          required=('Presença Online','Presença Social','Presença Próxima','SOS Dia','SOS Semana','35 €','60 €','80 €','120 €')
+          required=('Presença Online','Presença Social','Presença Próxima','SOS 1 dia','SOS 1 semana','35 €','60 €','80 €','120 €')
           for token in required:
               if token not in presence:
                   raise SystemExit(f'Missing required Presença offer or price: {token}')
