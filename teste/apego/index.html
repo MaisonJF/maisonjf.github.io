@@ -1,13 +1,13 @@
 <!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Qual é o teu estilo de apego? | MAISON JF®</title><meta name="description" content="Teste de autoconhecimento MAISON JF® para reconhecer padrões de proximidade, distância, segurança e medo nos vínculos."><meta name="robots" content="index,follow"><link rel="canonical" href="https://maison-jf.com/teste/apego/">
-<link rel="stylesheet" href="../../maison.css"><link rel="stylesheet" href="../volta.css"><script src="../../analytics.js" defer></script></head>
+<link rel="stylesheet" href="../../maison.css?v=20260920-architecture1"><link rel="stylesheet" href="../volta.css?v=20260920-tests1"><script src="../../analytics.js" defer></script></head>
 <body class="vpc-page"><header class="site-header"><a class="brand" href="../../">MAISON JF®</a><nav><a href="../">Volta Para Casa</a><a href="../../farol">O Farol</a><a href="../../servicos/">Serviços</a><a href="../../ebooks/">Biblioteca</a></nav></header>
 <main class="vpc-test vpc-shell"><a class="vpc-back" href="../">← Volta Para Casa</a>
 <section class="vpc-stage" id="intro"><p class="vpc-kicker">VOLTA PARA CASA</p><h1 class="vpc-title">Qual é o teu<br>estilo de apego?</h1><p class="vpc-intro">Não respondas como gostarias de ser. Responde como ficas quando alguém realmente te importa.</p><div class="vpc-scope"><p class="vpc-kicker">Pensa em</p><div class="vpc-scope__options"><button type="button" data-scope="specific">Uma pessoa específica</button><button type="button" data-scope="general">As minhas relações em geral</button></div><p class="vpc-scope__hint" id="scopeHint">Não precisas de dizer quem é.</p></div><div class="vpc-actions"><button class="button button--light" id="start" disabled>Começar</button></div><p class="vpc-note">Autoconhecimento, não diagnóstico.</p></section>
 <section class="vpc-stage" id="quiz" hidden><div class="vpc-progress"><div class="vpc-progress__meta"><span id="count"></span><span>Volta Para Casa</span></div><div class="vpc-progress__bar"><span id="bar"></span></div></div><h2 class="vpc-question" id="question" tabindex="-1"></h2><div class="vpc-choices" id="choices"></div></section>
 <section class="vpc-stage vpc-result" id="result" hidden><p class="vpc-result__label" id="resultLabel"></p><h1 id="resultTitle"></h1><p class="vpc-result__lead" id="resultLead"></p><p class="vpc-secondary" id="secondary"></p><div class="vpc-result__detail" id="resultDetail"></div><blockquote class="vpc-result__quote" id="shareLine"></blockquote><section class="vpc-affinity" aria-labelledby="affinityTitle"><div class="vpc-affinity__head"><span id="affinityTitle">Afinidade aproximada</span><small>Não é diagnóstico</small></div><div id="affinityList"></div><p>Estimativa deste teste. Pode mudar conforme a relação e o momento.</p><details><summary>Como ler isto?</summary><p>Os estilos de apego não são caixas fixas. Podes sentir-te mais seguro com uma pessoa e mais ansioso, evitante ou temeroso com outra. Aqui mostramos apenas a proximidade das tuas respostas de hoje a cada padrão.</p></details></section>
-<div class="vpc-convert"><p class="vpc-kicker">E agora?</p><h2 id="solutionTitle"></h2><p id="solutionText"></p><div class="vpc-convert__links" id="nextLinks"></div></div>
-<div class="vpc-share"><button id="share" type="button">Partilhar resultado</button><button id="restart" type="button">Refazer teste</button></div><p class="vpc-note">O resultado mostra apenas o padrão que apareceu mais nas tuas respostas hoje. Pessoas reais são mais complexas do que quatro categorias.</p></section>
+<div class="vpc-convert"><p class="vpc-kicker">E agora?</p><h2 id="solutionTitle"></h2><p id="solutionText"></p><div class="vpc-offers" id="nextLinks"></div></div>
+<div class="vpc-share"><button id="share" type="button">Partilhar o meu resultado</button><button id="restart" type="button">Refazer teste</button><span class="vpc-share__status" id="shareStatus" aria-live="polite"></span></div><p class="vpc-note">O resultado mostra apenas o padrão que apareceu mais nas tuas respostas hoje. Pessoas reais são mais complexas do que quatro categorias.</p></section>
 </main><script>const QUESTIONS=[["Quando alguém de quem gostas demora mais do que o normal a responder, o que aparece primeiro?",[["secure","Assumo que pode estar ocupado e sigo o meu dia."],["anxious","Começo a rever mensagens e a procurar sinais de que alguma coisa mudou."],["avoidant","Até agradeço o espaço. Não gosto de sentir que tenho de estar sempre disponível."],["fearful","Quero escrever outra vez — e ao mesmo tempo penso em afastar-me antes que doa."]]],["Quando uma relação começa a ficar mesmo próxima…",[["secure","Gosto da proximidade sem sentir que tenho de perder o meu espaço."],["anxious","Fico atento a qualquer mudança que possa significar afastamento."],["avoidant","Começo a sentir falta do tempo em que ninguém esperava tanto de mim."],["fearful","Quero muito essa proximidade, mas quando chega fico inquieto."]]],["Depois de uma discussão importante, o que te sai mais naturalmente?",[["secure","Preciso de algum tempo, mas quero voltar à conversa e reparar o que ficou."],["anxious","Quero resolver já. O silêncio entre nós custa-me mais do que a discussão."],["avoidant","Prefiro fechar o assunto e recuperar espaço antes de voltar a falar."],["fearful","Quero que a pessoa venha atrás de mim, mas também tenho vontade de desaparecer."]]],["Quando alguém te diz claramente que gosta de ti…",[["secure","Acredito no que vejo e deixo a relação mostrar-se com o tempo."],["anxious","Sabe bem, mas uma parte de mim pergunta quanto tempo vai durar."],["avoidant","Gosto, mas também sinto uma pressão que não sei bem explicar."],["fearful","É aquilo que eu queria ouvir — e mesmo assim não consigo relaxar completamente."]]],["Se alguém importante pede mais proximidade emocional…",[["secure","Tento perceber o que precisa sem assumir que tenho de deixar de ser eu."],["anxious","Quero dar tudo para não criar distância."],["avoidant","Sinto que estão a entrar demasiado no meu espaço."],["fearful","Quero corresponder, mas fico com medo do que essa proximidade vai exigir."]]],["Quando sentes que a outra pessoa está mais distante…",[["secure","Pergunto, observo e não tiro conclusões antes de ter informação."],["anxious","A minha cabeça começa imediatamente a procurar o que fiz de errado."],["avoidant","Também me afasto. Se quer espaço, terá espaço."],["fearful","Fico dividido entre correr atrás e cortar antes de ser deixado."]]],["O que te assusta mais numa relação?",[["secure","Perdermos honestidade e deixarmos de conseguir falar um com o outro."],["anxious","Deixar de ser escolhido."],["avoidant","Perder liberdade e ficar preso a expectativas que não quero."],["fearful","Precisar de alguém que depois possa magoar-me."]]],["Quando precisas de apoio…",[["secure","Consigo pedir, mesmo que não goste de depender demasiado."],["anxious","Quero pedir, mas também preciso de sentir que a pessoa quer mesmo estar lá."],["avoidant","Normalmente tento resolver sozinho antes de envolver alguém."],["fearful","Quero muito apoio, mas mostrar que preciso deixa-me vulnerável demais."]]],["Se a relação está tranquila durante algum tempo…",[["secure","Consigo aproveitar a tranquilidade."],["anxious","Às vezes fico à espera do momento em que alguma coisa vai mudar."],["avoidant","É mais fácil quando ninguém exige demasiado de mim."],["fearful","Uma parte de mim relaxa; outra começa a procurar onde está o perigo."]]],["Qual destas frases te custa mais admitir?",[["secure","“Posso gostar muito de alguém sem me abandonar.”"],["anxious","“Às vezes preciso de provas de amor que nenhuma prova consegue fechar para sempre.”"],["avoidant","“Às vezes chamo liberdade ao medo de precisar de alguém.”"],["fearful","“Quero ser escolhido — mas quando alguém chega perto, nem sempre sei ficar.”"]]]];
 const RESULTS={"secure":{"label":"Seguro","title":"Gostas. Ficas. E continuas a ser tu.","lead":"Nas tuas respostas, proximidade não parece exigir que te abandones — e espaço não soa automaticamente a rejeição.","detail":"Podes querer muito alguém sem transformar cada silêncio numa ameaça. Podes precisar de espaço sem o usar como fuga. Isso não te torna imune ao medo; só sugere que, quando a relação mexe, ainda consegues continuar dentro de ti.","share":"Consigo gostar de alguém sem me abandonar.","solutionTitle":"Continua inteiro quando a relação mexer.","solutionText":"O próximo passo não é corrigir-te. É perceber como reconheces afecto — e onde podes começar a sentir falta dele antes de perceberes porquê.","oracle":"/oraculo/compromisso-futuro"},"anxious":{"label":"Ansioso","title":"Cinco minutos de silêncio podem parecer uma história inteira.","lead":"Quando alguém se afasta, a tua cabeça parece aproximar-se ainda mais: procura sinais, respostas e provas de que continuas a ser escolhido.","detail":"Às vezes não queres outra mensagem. Queres a sensação de que está tudo bem. E essa é a parte cruel: nenhuma mensagem consegue garantir para sempre aquilo que o medo volta a perguntar amanhã.","share":"Às vezes não quero mais mensagens. Quero parar de sentir que o silêncio é uma resposta.","solutionTitle":"O objectivo não é sentir menos.","solutionText":"É deixar de entregar ao próximo sinal o poder de decidir se estás seguro. Descobre agora o que te faz sentir amado — e o que te deixa sempre a pedir mais.","oracle":"/oraculo/rejeicao-abandono"},"avoidant":{"label":"Evitante","title":"Queres amor. Só não queres sentir que ele te prende.","lead":"Nas tuas respostas, o espaço ganha valor precisamente quando a relação começa a pedir mais proximidade, expectativa ou dependência.","detail":"Não significa que não queiras vínculo. Pode significar que precisar de alguém te deixa exposto — e que afastar-te devolve rapidamente uma sensação de controlo. Às vezes o alívio parece liberdade. Nem sempre são a mesma coisa.","share":"Às vezes chamo liberdade ao alívio de não precisar de ninguém.","solutionTitle":"Não tens de escolher entre amor e espaço.","solutionText":"A descoberta seguinte é perceber de que forma reconheces afecto sem sentir que estás a perder margem para seres tu.","oracle":"/oraculo/intimidade-vulnerabilidade"},"fearful":{"label":"Temeroso","title":"Queres que fiquem. E uma parte tua prepara-se para fugir.","lead":"Nas tuas respostas aparecem duas forças ao mesmo tempo: medo de perder a ligação e medo do que pode acontecer se te deixares ficar demasiado perto.","detail":"Podes correr atrás quando sentes distância e querer desaparecer quando finalmente tens proximidade. Não porque não saibas o que queres — mas porque, às vezes, querer alguém e sentir-te seguro com isso não chegam ao mesmo tempo.","share":"Quero que fiques. Só ainda não sei sempre o que fazer quando ficas.","solutionTitle":"Não tens de escolher entre agarrar e fugir.","solutionText":"O próximo passo é perceber o que te faz sentir amado quando a proximidade chega — e o que continua a parecer pouco mesmo quando alguém está lá.","oracle":"/oraculo/dependencia-emocional"}};
 const scores={secure:0,anxious:0,avoidant:0,fearful:0};
@@ -70,6 +70,29 @@ function affinityScores(){
   });
   return whole;
 }
+function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function attributedHref(raw,offerId,result,brainVersion){
+  const url=new URL(raw,location.href);
+  url.searchParams.set('mj_source','vpc');url.searchParams.set('mj_offer',offerId);url.searchParams.set('mj_result','apego-'+result);url.searchParams.set('mj_route','test');url.searchParams.set('mj_brain',brainVersion||'fallback');
+  return url.pathname+url.search+url.hash;
+}
+function offerMarkup(o,index,result,brain){
+  const label=[o.slotLabel,o.priceLabel].filter(Boolean).join(' · ');
+  return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brain||'fallback')+'" href="'+esc(attributedHref(o.href,o.id,result,brain))+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
+}
+async function brainOffers(result){
+  const host=$('nextLinks');host.innerHTML='<p class="vpc-note">A escolher o que faz mais sentido agora…</p>';
+  try{
+    const response=await fetch('/api/recommend-offers',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({test:'apego',testResult:result})});
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok||!Array.isArray(data.offers)||!data.offers.length)throw new Error('brain');
+    host.innerHTML=data.offers.map((o,i)=>offerMarkup(o,i,result,data.version)).join('');
+    track('vpc_offer_brain_result',{test:'apego',result,brain_version:data.version,offers:data.offers.map(o=>o.id).join(',')});
+  }catch(_){
+    const r=RESULTS[result];
+    host.innerHTML='<a class="vpc-offer vpc-offer--primary" href="'+r.oracle+'"><small>Agora · 2 €</small><strong>Abrir o Oráculo →</strong><span>Outra perspectiva sobre aquilo que apareceu.</span></a><a class="vpc-offer" href="../../servicos/"><small>Aprofundar</small><strong>Explorar Serviços →</strong><span>Quando queres falar ou ir mais fundo.</span></a>';
+  }
+}
 function finish(){
   const affinities=affinityScores();
   const ranked=Object.entries(affinities).sort((a,b)=>b[1]-a[1]);
@@ -85,9 +108,11 @@ function finish(){
   $('solutionText').textContent=r.solutionText;
   $('secondary').textContent=ranked[1][1]===ranked[0][1]?'Dois padrões ficaram muito próximos. Isso não estraga o resultado — só prova que não cabes numa caixa.':'';
   $('affinityList').innerHTML=ranked.map(([k,p])=>'<div class="vpc-affinity__row"><span>'+RESULTS[k].label+'</span><div><i style="width:'+p+'%"></i></div><b>'+p+'%</b></div>').join('');
-  $('nextLinks').innerHTML='<a href="../../servicos/#consultas"><small>Quero olhar para isto com espaço</small><strong>Explorar Consultas →</strong></a><a href="'+r.oracle+'"><small>Quero outra perspectiva</small><strong>Abrir o Oráculo →</strong></a><a href="../../servicos/#acompanhamento"><small>Isto repete-se demasiado</small><strong>Ver Acompanhamento →</strong></a>';
   $('restart').textContent=scope==='specific'?'Testar outra relação':'Refazer teste';
+  $('share').dataset.result=key;
+  try{localStorage.setItem('maison_vpc_apego_v2',JSON.stringify({result:key,affinity:affinities,scope,createdAt:Date.now()}))}catch(_){}
   track('vpc_test_result',{test:'apego',result:key,affinity:affinities});
+  brainOffers(key);
 }
 $('start').addEventListener('click',()=>{
   if(!scope)return;
@@ -95,20 +120,30 @@ $('start').addEventListener('click',()=>{
   track('vpc_test_start',{test:'apego'});
   render();
 });
+function wrapText(ctx,text,maxWidth){const words=text.split(/\s+/),lines=[];let line='';for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);return lines}
+async function makeShareCard(key){
+  if(document.fonts&&document.fonts.ready)try{await document.fonts.ready}catch(_){}
+  const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;const ctx=canvas.getContext('2d');
+  const g=ctx.createRadialGradient(540,120,40,540,650,1350);g.addColorStop(0,'#2a211a');g.addColorStop(.45,'#11100f');g.addColorStop(1,'#070707');ctx.fillStyle=g;ctx.fillRect(0,0,1080,1920);
+  ctx.fillStyle='#c3a66d';ctx.fillRect(90,132,74,3);ctx.fillStyle='#f3efe7';ctx.font='700 26px Arial';ctx.fillText('MAISON JF®',90,205);
+  ctx.fillStyle='#9f978c';ctx.font='600 24px Arial';ctx.fillText('VOLTA PARA CASA · APEGO',90,395);
+  ctx.fillStyle='#f3efe7';ctx.font='400 100px Georgia';ctx.fillText(RESULTS[key].label.toUpperCase(),90,570);
+  ctx.fillStyle='#d8d0c2';ctx.font='italic 400 58px Georgia';let y=735;wrapText(ctx,RESULTS[key].share,890).forEach(line=>{ctx.fillText(line,90,y);y+=76});
+  ctx.fillStyle='#c3a66d';ctx.fillRect(90,1570,900,1);ctx.fillStyle='#f3efe7';ctx.font='400 42px Georgia';ctx.fillText('E tu? Qual é o teu padrão?',90,1680);ctx.font='700 39px Arial';ctx.fillText('maison-jf.com/teste/apego',90,1750);
+  ctx.fillStyle='#706a62';ctx.font='400 21px Arial';ctx.fillText('Autoconhecimento, não diagnóstico.',90,1832);
+  return new Promise(resolve=>canvas.toBlob(resolve,'image/png',.96));
+}
 $('restart').addEventListener('click',()=>location.reload());
 $('share').addEventListener('click',async()=>{
-  const label=$('resultLabel').textContent.replace(/^.* · /,'');
-  const text='Deu-me '+label+' no teste de apego da MAISON JF® — '+$('shareLine').textContent.replace(/[“”]/g,'');
-  if(navigator.share){
-    try{
-      await navigator.share({title:'Volta Para Casa · MAISON JF®',text,url:location.href});
-      track('vpc_test_share',{test:'apego'});
-      return;
-    }catch(e){}
-  }
+  const key=$('share').dataset.result;if(!key)return;
+  const text='Deu-me '+RESULTS[key].label+' no teste de apego da MAISON JF® — '+RESULTS[key].share;
+  $('shareStatus').textContent='A preparar…';
   try{
-    await navigator.clipboard.writeText(text+' '+location.href);
-    $('share').textContent='Copiado';
-    track('vpc_test_share',{test:'apego',method:'clipboard'});
-  }catch(e){}
-});</script></body></html>
+    const blob=await makeShareCard(key),file=new File([blob],'maison-jf-apego-'+key+'.png',{type:'image/png'});
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'Qual é o teu estilo de apego? · MAISON JF®',text});$('shareStatus').textContent='';track('vpc_test_share',{test:'apego',result:key,method:'card'});return}
+    if(navigator.share){await navigator.share({title:'Qual é o teu estilo de apego? · MAISON JF®',text,url:location.href});$('shareStatus').textContent='';track('vpc_test_share',{test:'apego',result:key,method:'text'});return}
+    await navigator.clipboard.writeText(text+' '+location.href);$('shareStatus').textContent='Resultado copiado.';track('vpc_test_share',{test:'apego',result:key,method:'clipboard'});
+  }catch(e){if(e?.name==='AbortError')$('shareStatus').textContent='';else $('shareStatus').textContent='Não foi possível abrir a partilha.'}
+});
+$('nextLinks').addEventListener('click',e=>{const a=e.target.closest('[data-vpc-offer]');if(a)track('vpc_offer_click',{test:'apego',offer:a.dataset.vpcOffer,slot:a.dataset.vpcSlot||'',brain_version:a.dataset.vpcBrain||''})});
+</script></body></html>

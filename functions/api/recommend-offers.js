@@ -8,6 +8,8 @@ export async function onRequestPost({request}){
 
     const body=await request.json().catch(()=>({}));
     const result=recommendMaisonOffers({
+      test:body?.test,
+      testResult:body?.testResult,
       result:body?.result,
       ranked:body?.ranked,
       route:body?.route
