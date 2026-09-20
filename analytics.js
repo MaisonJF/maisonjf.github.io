@@ -120,7 +120,7 @@
     const style = document.createElement('style');
     style.id = 'maison-consent-settings-style';
     style.textContent = [
-      '.maison-consent-settings{appearance:none;-webkit-appearance:none;border:0;background:transparent;padding:0;color:rgba(245,241,233,.58);cursor:pointer;font:500 11px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.08em;text-transform:uppercase;text-align:left;transition:color .2s ease}',
+      '.maison-consent-settings{appearance:none;-webkit-appearance:none;border:0;background:transparent;padding:0;color:rgba(245,241,233,.58);cursor:pointer;font:500 11px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.08em;text-transform:uppercase;text-align:left;text-decoration:none!important;text-underline-offset:0;transition:color .2s ease}',
       '.maison-consent-settings:hover{color:#fff}',
       '.maison-consent-settings:focus-visible{color:#fff;outline:1px solid rgba(199,170,115,.68);outline-offset:4px}',
       '.maison-consent-settings-item{list-style:none}',
