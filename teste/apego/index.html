@@ -8,58 +8,9 @@
 <section class="vpc-stage vpc-result" id="result" hidden><p class="vpc-result__label" id="resultLabel"></p><h1 id="resultTitle"></h1><p class="vpc-result__lead" id="resultLead"></p><p class="vpc-secondary" id="secondary"></p><div class="vpc-result__detail" id="resultDetail"></div><blockquote class="vpc-result__quote" id="shareLine"></blockquote><section class="vpc-affinity" aria-labelledby="affinityTitle"><div class="vpc-affinity__head"><span id="affinityTitle">Afinidade aproximada</span><small>Não é diagnóstico</small></div><div id="affinityList"></div><p>Estimativa deste teste. Pode mudar conforme a relação e o momento.</p><details><summary>Como ler isto?</summary><p>Os estilos de apego não são caixas fixas. Podes sentir-te mais seguro com uma pessoa e mais ansioso, evitante ou temeroso com outra. Aqui mostramos apenas a proximidade das tuas respostas de hoje a cada padrão.</p></details></section>
 <div class="vpc-convert"><p class="vpc-kicker">Se isto ficou contigo</p><h2 id="solutionTitle"></h2><p id="solutionText"></p><div class="vpc-offers" id="nextLinks"></div></div>
 <div class="vpc-share"><button id="share" type="button">Partilhar o meu resultado</button><button id="restart" type="button">Refazer</button><a href="../afeto/">Abrir outra porta · Afecto →</a><span class="vpc-share__status" id="shareStatus" aria-live="polite"></span></div><p class="vpc-note">O resultado mostra apenas o padrão que apareceu mais nas tuas respostas hoje. Pessoas reais são mais complexas do que quatro categorias.</p></section>
-</main><script>const QUESTIONS=[
-["A pessoa demora mais do que o normal a responder. O que acontece dentro de ti?",[
-["secure","Assumo que pode estar ocupada e sigo o meu dia."],
-["anxious","Começo a procurar sinais de que alguma coisa mudou."],
-["avoidant","Até agradeço o espaço. Não gosto de estar sempre disponível."],
-["fearful","Quero escrever outra vez. E afastar-me antes que doa."]]],
-["Quando alguém começa mesmo a aproximar-se…",[
-["secure","Gosto da proximidade sem sentir que tenho de desaparecer dentro dela."],
-["anxious","Fico atento a qualquer sinal de afastamento."],
-["avoidant","Começo a sentir falta do tempo em que ninguém esperava tanto de mim."],
-["fearful","Era isto que eu queria. E, mesmo assim, fico inquieto."]]],
-["Depois de uma discussão importante, qual é o teu impulso?",[
-["secure","Preciso de algum tempo, mas quero voltar e reparar o que ficou."],
-["anxious","Quero resolver já. O silêncio custa-me mais do que a discussão."],
-["avoidant","Quero fechar o assunto e recuperar espaço."],
-["fearful","Quero que venha atrás de mim. E também quero desaparecer."]]],
-["Alguém diz claramente que gosta de ti. O que aparece logo a seguir?",[
-["secure","Acredito no que vejo e deixo o tempo confirmar."],
-["anxious","Sabe bem. E uma parte de mim pergunta quanto tempo vai durar."],
-["avoidant","Gosto. Mas também sinto uma pressão difícil de explicar."],
-["fearful","É o que eu queria ouvir. Mesmo assim, não relaxo totalmente."]]],
-["Se alguém importante te pede mais proximidade emocional…",[
-["secure","Tento perceber o que precisa sem deixar de ser eu."],
-["anxious","Quero dar tudo para não criar distância."],
-["avoidant","Sinto que estão a entrar demasiado no meu espaço."],
-["fearful","Quero corresponder, mas assusta-me o que isso pode exigir."]]],
-["Quando sentes a outra pessoa mais distante…",[
-["secure","Pergunto e observo antes de inventar uma resposta."],
-["anxious","A minha cabeça procura logo o que fiz de errado."],
-["avoidant","Também me afasto. Se quer espaço, terá espaço."],
-["fearful","Fico entre correr atrás e cortar antes de ser deixado."]]],
-["O que te assusta mais numa relação?",[
-["secure","Deixarmos de conseguir falar com verdade."],
-["anxious","Deixar de ser escolhido."],
-["avoidant","Perder liberdade e ficar preso a expectativas."],
-["fearful","Precisar de alguém que depois possa magoar-me."]]],
-["Quando és tu que precisas de apoio…",[
-["secure","Consigo pedir, mesmo sem gostar de depender demasiado."],
-["anxious","Quero pedir. E preciso de sentir que a pessoa quer mesmo ficar."],
-["avoidant","Tento resolver sozinho antes de envolver alguém."],
-["fearful","Quero apoio, mas mostrar que preciso deixa-me demasiado exposto."]]],
-["Se a relação está tranquila durante algum tempo…",[
-["secure","Consigo aproveitar a tranquilidade."],
-["anxious","Uma parte de mim fica à espera de quando vai mudar."],
-["avoidant","É mais fácil quando ninguém exige demasiado de mim."],
-["fearful","Uma parte relaxa. Outra começa a procurar o perigo."]]],
-["Qual destas te custa mais admitir?",[
-["secure","Posso gostar muito de alguém sem me abandonar."],
-["anxious","Nenhuma prova de amor me fecha a dúvida para sempre."],
-["avoidant","Às vezes chamo liberdade ao medo de precisar de alguém."],
-["fearful","Quero que fiquem. Nem sempre sei o que fazer quando ficam."]]]
-];
+</main><script src="../question-bank.js?v=20260921-v1"></script><script>const QUESTION_BANK=window.MAISON_TEST_QUESTION_BANK;
+const QUESTIONS=QUESTION_BANK?.pick('apego',10)||[];
+if(QUESTIONS.length!==10)throw new Error('question_bank_unavailable');
 const RESULTS={"secure":{"label":"Seguro","title":"Gostas. Ficas. E continuas a ser tu.","lead":"Nas tuas respostas, proximidade não parece exigir que te abandones. Espaço também não soa automaticamente a rejeição.","detail":"Podes querer muito alguém sem transformar cada silêncio numa ameaça. Podes precisar de espaço sem o usar como fuga. Isso não te torna imune ao medo; só sugere que, quando a relação mexe, ainda consegues continuar dentro de ti.","share":"Consigo gostar de alguém sem me abandonar.","solutionTitle":"Continua inteiro quando a relação mexer.","solutionText":"O próximo passo não é corrigir-te. É perceber como reconheces afecto. E onde podes começar a sentir falta dele antes de perceberes porquê.","oracle":"/oraculo/compromisso-futuro"},"anxious":{"label":"Ansioso","title":"Cinco minutos de silêncio podem parecer uma história inteira.","lead":"Quando alguém se afasta, a tua cabeça parece aproximar-se ainda mais: procura sinais, respostas e provas de que continuas a ser escolhido.","detail":"Às vezes não queres outra mensagem. Queres a sensação de que está tudo bem. E essa é a parte cruel: nenhuma mensagem consegue garantir para sempre aquilo que o medo volta a perguntar amanhã.","share":"Às vezes não quero mais mensagens. Quero parar de sentir que o silêncio é uma resposta.","solutionTitle":"O objectivo não é sentir menos.","solutionText":"É deixar de entregar ao próximo sinal o poder de decidir se estás seguro. Descobre agora o que te faz sentir amado. E o que te deixa sempre a pedir mais.","oracle":"/oraculo/rejeicao-abandono"},"avoidant":{"label":"Evitante","title":"Queres amor. Só não queres sentir que ele te prende.","lead":"Nas tuas respostas, o espaço ganha valor precisamente quando a relação começa a pedir mais proximidade, expectativa ou dependência.","detail":"Não significa que não queiras vínculo. Pode significar que precisar de alguém te deixa exposto. Afastar-te pode devolver rapidamente uma sensação de controlo. Às vezes o alívio parece liberdade. Nem sempre são a mesma coisa.","share":"Às vezes chamo liberdade ao alívio de não precisar de ninguém.","solutionTitle":"Não tens de escolher entre amor e espaço.","solutionText":"A descoberta seguinte é perceber de que forma reconheces afecto sem sentir que estás a perder margem para seres tu.","oracle":"/oraculo/intimidade-vulnerabilidade"},"fearful":{"label":"Temeroso","title":"Queres que fiquem. E uma parte tua prepara-se para fugir.","lead":"Nas tuas respostas aparecem duas forças ao mesmo tempo: medo de perder a ligação e medo do que pode acontecer se te deixares ficar demasiado perto.","detail":"Podes correr atrás quando sentes distância e querer desaparecer quando finalmente tens proximidade. Não porque não saibas o que queres. Às vezes, querer alguém e sentir-te seguro com isso não chegam ao mesmo tempo.","share":"Quero que fiques. Só ainda não sei sempre o que fazer quando ficas.","solutionTitle":"Não tens de escolher entre agarrar e fugir.","solutionText":"O próximo passo é perceber o que te faz sentir amado quando a proximidade chega. E o que continua a parecer pouco mesmo quando alguém está lá.","oracle":"/oraculo/dependencia-emocional"}};
 const scores={secure:0,anxious:0,avoidant:0,fearful:0};
 let i=0,scope='';
@@ -85,7 +36,7 @@ function render(){
   $('bar').style.width=((i+1)/QUESTIONS.length*100)+'%';
   $('question').textContent=q[0];
   $('choices').innerHTML='';
-  q[1].forEach(opt=>{
+  QUESTION_BANK.shuffle(q[1]).forEach(opt=>{
     const b=document.createElement('button');
     b.type='button';
     b.className='vpc-choice';
@@ -128,7 +79,7 @@ function attributedHref(raw,offerId,result,brainVersion){
   return url.pathname+url.search+url.hash;
 }
 function offerMarkup(o,index,result,brain){
-  const label=[o.slotLabel,o.priceLabel].filter(Boolean).join(' · ');
+  const label=o.slotLabel||'';
   return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brain||'fallback')+'" href="'+esc(attributedHref(o.href,o.id,result,brain))+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
 }
 async function brainOffers(result){
@@ -141,7 +92,7 @@ async function brainOffers(result){
     track('vpc_offer_brain_result',{test:'apego',result,brain_version:data.version,offers:data.offers.map(o=>o.id).join(',')});
   }catch(_){
     const r=RESULTS[result];
-    host.innerHTML='<a class="vpc-offer vpc-offer--primary" href="'+r.oracle+'"><small>Outra perspectiva · 2 €</small><strong>Abrir o Oráculo →</strong><span>Outra perspectiva sobre aquilo que apareceu.</span></a><a class="vpc-offer" href="../../para-de-ignorar/"><small>Para abrir conversa · 5 €</small><strong>PÁRA DE IGNORAR! →</strong><span>28 perguntas para duas pessoas dizerem o que nem sempre sai sozinho.</span></a><a class="vpc-offer" href="../../presentes/"><small>Para oferecer</small><strong>Presentes com intenção →</strong><span>Um gesto escolhido para alguém, sem oferecer só para cumprir.</span></a><a class="vpc-offer" href="../../servicos/"><small>Quero ir mais fundo</small><strong>Consultas →</strong><span>Quando queres contexto, leitura e uma conversa mais funda.</span></a>';
+    host.innerHTML='<a class="vpc-offer vpc-offer--primary" href="'+r.oracle+'"><small>Outra perspectiva</small><strong>Abrir o Oráculo →</strong><span>Outra perspectiva sobre aquilo que apareceu.</span></a><a class="vpc-offer" href="../../para-de-ignorar/"><small>Para abrir conversa</small><strong>PÁRA DE IGNORAR! →</strong><span>28 perguntas para duas pessoas dizerem o que nem sempre sai sozinho.</span></a><a class="vpc-offer" href="../../presentes/"><small>Para oferecer</small><strong>Presentes com intenção →</strong><span>Um gesto escolhido para alguém, sem oferecer só para cumprir.</span></a><a class="vpc-offer" href="../../servicos/"><small>Quero ir mais fundo</small><strong>Consultas →</strong><span>Quando queres contexto, leitura e uma conversa mais funda.</span></a>';
   }
 }
 function finish(){
