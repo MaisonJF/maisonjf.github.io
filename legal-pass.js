@@ -6,6 +6,7 @@
   const SHARE_URL = 'https://wa.me/?text=' + encodeURIComponent('Segue a MAISON JF® no WhatsApp 🔦 https://maison-jf.com/canal/');
 
   document.querySelectorAll('.footer').forEach(footer => {
+    if (footer.dataset.footerModern === '1') return;
     const columns = Array.from(footer.querySelectorAll('.footer__column'));
     const contact = columns.find(column => {
       const title = column.querySelector('.footer__column-title');
