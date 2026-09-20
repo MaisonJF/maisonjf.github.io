@@ -48,6 +48,9 @@ jobs:
           node --check functions/api/product-checkout-session-live.js
           node --check functions/api/create-consultation-checkout-live.js
           node --check functions/api/consultation-checkout-session-live.js
+          node --check functions/_lib/offer-brain.js
+          node --check functions/api/recommend-offers.js
+          node --check analytics.js
           node --check produtos/detail.js
           node --check data/services.js
           node --check farol.js
