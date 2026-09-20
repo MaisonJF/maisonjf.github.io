@@ -38,6 +38,7 @@ jobs:
           node --check functions/_lib/pdi-theme-registry.js
           node --check functions/_lib/pdi-theme-catalogue.js
           node --check functions/_lib/pdi-vault-admin.js
+          node .github/maison-growth/vault/validate_pdi_import_insert.mjs
           node .github/maison-growth/vault/validate_pdi_registry.mjs
           node --check functions/api/pdi-admin-import.js
           node --check functions/api/pdi-themes-live.js
