@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Serviços | MAISON JF®</title>
-<meta name="description" content="Tarot Expresso, Tarot Integrativo, Tarot Terapêutico, consultas escritas, Escuta, Acompanhamento, Mentoria, SOS, Astrologia, Numerologia, Companhia e outros serviços MAISON JF®.">
+<meta name="description" content="Tarot, consultas por escrito, Escuta, Acompanhamento, Mentoria, Companhia e outros serviços MAISON JF®. Escolhe primeiro como queres olhar para o que te trouxe aqui.">
 <meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://maison-jf.com/servicos/">
 <link rel="stylesheet" href="../maison.css?v=20260919-ak1"><script src="../analytics.js" defer></script>
 <style>
@@ -13,13 +13,16 @@
 .service-section{margin-top:28px;scroll-margin-top:100px}.service-family{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.service-family+.service-family{border-top:0}.service-family__summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr minmax(240px,.65fr) auto;gap:40px;align-items:end;padding:34px 0}.service-family__summary::-webkit-details-marker{display:none}.service-family__summary h2{font:400 clamp(34px,4.6vw,58px)/.96 var(--serif);margin:.18em 0 0}.service-family__summary>p{color:#8f887e;margin:0}.service-family__summary>span{font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:#c8b58d;white-space:nowrap}.service-family[open] .service-family__summary>span{font-size:0}.service-family[open] .service-family__summary>span:after{content:'Fechar ↑';font-size:10px}
 .service-section__head{display:grid;grid-template-columns:1fr minmax(260px,.7fr);gap:50px;align-items:end;padding-bottom:26px;border-bottom:1px solid var(--line)}
 .service-section__head h2{font:400 clamp(38px,5vw,68px)/.95 var(--serif);margin:.2em 0}.service-section__head p{color:#8f887e;margin:0}
+.consultation-intro{padding:18px 0 10px}.consultation-intro h3{font:400 clamp(38px,5vw,62px)/.96 var(--serif);margin:.2em 0}.consultation-intro p{color:#aaa39a;max-width:620px}
+.consultation-doors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:28px 0 34px}.consultation-door{appearance:none;text-align:left;border:1px solid var(--line);background:#10100f;color:inherit;padding:28px;min-height:190px;display:flex;flex-direction:column;cursor:pointer}.consultation-door small{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8f887e}.consultation-door strong{font:400 35px/1 var(--serif);margin:18px 0 10px}.consultation-door span{margin-top:auto;color:#aaa39a;line-height:1.45}.consultation-door:hover,.consultation-door[aria-expanded="true"]{border-color:rgba(183,154,98,.65);background:#13120f}.consultation-door[aria-expanded="true"] strong{color:#f1eadf}
+.consultation-panel{padding:8px 0 26px}.consultation-panel[hidden]{display:none}.consultation-panel__head{display:flex;justify-content:space-between;gap:30px;align-items:end;padding:0 0 14px;border-bottom:1px solid var(--line)}.consultation-panel__head h3{font:400 34px/1 var(--serif);margin:.2em 0}.consultation-panel__head p{color:#8f887e;margin:0;max-width:420px}.consultation-other{padding:26px 0 10px;border-top:1px solid var(--line);margin-top:18px}.consultation-other summary{cursor:pointer;color:#c8b58d;text-transform:uppercase;letter-spacing:.11em;font-size:10px}.consultation-other .service-list{margin-top:14px}
 .service-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 44px}.service-card{padding:30px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:24px}
 .service-card small{display:block;color:#8f887e;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}.service-card h3{font:400 31px/1 var(--serif);margin:0 0 10px}.service-card p{color:#aaa39a;margin:0;max-width:540px}.service-card__limits{margin-top:12px;color:#777;font-size:12px}.service-card__limits summary{cursor:pointer;color:#8f887e;text-decoration:underline}.service-card__limits p{margin:8px 0 0!important;color:#777!important;font-size:12px!important}
 .service-card__side{text-align:right;min-width:135px}.service-card__price{font:400 19px var(--serif);color:#e8dfd2}.service-card__side .text-link{margin-top:10px}
 .special-service{margin-top:110px;display:grid;grid-template-columns:1.08fr .92fr;background:#111}.special-service__media{min-height:620px}.special-service__media img{width:100%;height:100%;object-fit:cover;display:block}.special-service__copy{padding:clamp(38px,7vw,86px);display:flex;flex-direction:column;justify-content:center}.special-service__copy h2{font:400 clamp(48px,6vw,82px)/.92 var(--serif);margin:.2em 0}.special-service__copy p{color:#aaa39a}.special-service__formats{font:400 24px/1 var(--serif);margin:16px 0 2px!important;color:#eee6da!important}
 .professional{margin-top:100px;padding:70px;border:1px solid var(--line);display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:end}.professional h2{font:400 clamp(38px,5vw,62px)/1 var(--serif);margin:.2em 0}.professional p{color:#aaa39a}
 .start{margin-top:100px;padding-top:70px;border-top:1px solid var(--line);display:grid;grid-template-columns:1.1fr .9fr;gap:70px}.start h2{font:400 clamp(38px,5vw,62px)/1 var(--serif);margin:.2em 0}.start p{color:#aaa39a}
-@media(max-width:850px){.services-hero,.service-section__head,.professional,.start{grid-template-columns:1fr}.service-doors{grid-template-columns:1fr 1fr}.service-family__summary{grid-template-columns:1fr auto}.service-family__summary>p{grid-column:1/-1}.service-list{grid-template-columns:1fr}.special-service{grid-template-columns:1fr}.special-service__media{min-height:430px}.services-hero .media-slot{max-width:620px}}
+@media(max-width:850px){.services-hero,.service-section__head,.professional,.start{grid-template-columns:1fr}.service-doors{grid-template-columns:1fr 1fr}.consultation-doors{grid-template-columns:1fr}.service-family__summary{grid-template-columns:1fr auto}.service-family__summary>p{grid-column:1/-1}.service-list{grid-template-columns:1fr}.special-service{grid-template-columns:1fr}.special-service__media{min-height:430px}.services-hero .media-slot{max-width:620px}}
 @media(max-width:560px){.service-doors{grid-template-columns:1fr}.service-door{min-height:132px}.service-family__summary{gap:16px;padding:28px 0}.service-family__summary>span{align-self:start;padding-top:8px}.service-card{grid-template-columns:1fr}.service-card__side{text-align:left}.professional{padding:38px 28px}}
 </style>
 </head>
@@ -27,20 +30,42 @@
 <header class="site-header"><a class="brand" href="../">MAISON JF®</a><nav><a href="../farol">O Farol</a><a href="../teste/">Volta Para Casa</a><a href="../produtos/">Produtos</a><a href="../servicos/">Serviços</a><a href="../oraculo/">Oráculo</a></nav></header>
 <main class="services shell">
 <section class="services-hero">
-<div><p class="eyebrow">Serviços · MAISON JF®</p><h1>Há coisas que não te largam até lhes dares um lugar.</h1><p class="services__lead">Há perguntas que pedem uma resposta. Outras pedem tempo, presença ou silêncio. Começa pela porta que mais se aproxima do que procuras.</p><div class="actions"><a class="button button--light" href="#formas">Escolher uma porta</a></div></div>
+<div><p class="eyebrow">Serviços · MAISON JF®</p><h1>O que é que ainda não conseguiste resolver sozinho?</h1><p class="services__lead">Não comeces pelo nome do serviço. Começa pela forma como queres olhar para isso.</p><div class="actions"><a class="button button--light" href="#consultas">Escolher como</a></div></div>
 <div class="media-slot media-slot--portrait"><img src="../images/cinematic/editorial.avif" width="1448" height="1086" alt="Atmosfera editorial MAISON JF para orientação e clareza" fetchpriority="high" decoding="async"></div>
 </section>
 
 <section class="service-doors" id="formas" aria-label="Formas de entrar">
-<a class="service-door" href="#consultas"><small>01</small><strong>Consultas</strong><span>Falado, escrito, com Tarot ou sem Tarot. →</span></a>
-<a class="service-door" href="#continuidade"><small>02</small><strong>Continuidade</strong><span>Para quando uma vez não chega. →</span></a>
-<a class="service-door" href="#companhia"><small>03</small><strong>Companhia</strong><span>Presença adulta combinada. →</span></a>
-<a class="service-door" href="#especiais"><small>04</small><strong>Pedidos especiais</strong><span>Rituais e pedidos fora do catálogo. →</span></a>
+<a class="service-door" href="#consultas"><small>01</small><strong>Consultas</strong><span>Tarot, escrito ou conversa.</span></a>
+<a class="service-door" href="#continuidade"><small>02</small><strong>Continuidade</strong><span>Para quando uma vez não chega.</span></a>
+<a class="service-door" href="#companhia"><small>03</small><strong>Companhia</strong><span>Presença adulta combinada.</span></a>
+<a class="service-door" href="#especiais"><small>04</small><strong>Pedidos especiais</strong><span>Rituais e pedidos fora do catálogo.</span></a>
 </section>
 
-<details class="service-family service-section" id="consultas">
-<summary class="service-family__summary"><div><p class="eyebrow">Consultas</p><h2>Escolhe como queres olhar para isto.</h2></div><p>Falado, escrito, com Tarot ou sem Tarot.</p><span>Ver formatos →</span></summary>
-<div class="service-list" id="consultasList"></div>
+<details class="service-family service-section" id="consultas" open>
+<summary class="service-family__summary"><div><p class="eyebrow">Consultas</p><h2>Como queres chegar à resposta?</h2></div><p>Escolhe a forma. Só depois escolhes o tamanho.</p><span>Ver opções →</span></summary>
+<div class="consultation-intro">
+  <h3>Não precisas de perceber os nossos serviços.</h3>
+  <p>Escolhe a frase que se parece mais contigo agora.</p>
+</div>
+<div class="consultation-doors" aria-label="Escolher formato da consulta">
+  <button class="consultation-door" type="button" data-consult-group="tarot" aria-expanded="false">
+    <small>Com cartas</small><strong>Tarot</strong><span>Quero ver isto de outro ângulo.</span>
+  </button>
+  <button class="consultation-door" type="button" data-consult-group="escrito" aria-expanded="false">
+    <small>Para guardar</small><strong>Por escrito</strong><span>Quero receber e poder reler.</span>
+  </button>
+  <button class="consultation-door" type="button" data-consult-group="sem-tarot" aria-expanded="false">
+    <small>Em conversa</small><strong>Sem Tarot</strong><span>Quero falar e pôr ordem nisto.</span>
+  </button>
+</div>
+<section class="consultation-panel" id="consultationPanel" hidden aria-live="polite">
+  <div class="consultation-panel__head"><div><p class="eyebrow" id="consultationEyebrow">Consulta</p><h3 id="consultationTitle">Escolhe o formato.</h3></div><p id="consultationHint"></p></div>
+  <div class="service-list" id="consultasList"></div>
+</section>
+<details class="consultation-other">
+  <summary>Outras leituras</summary>
+  <div class="service-list" id="outrasLeiturasList"></div>
+</details>
 </details>
 
 <details class="service-family service-section" id="continuidade">
@@ -65,9 +90,7 @@
 (function(){
  const track=(name,data)=>window.maisonAnalytics?.track?window.maisonAnalytics.track(name,data):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([name,data]);
  const items=window.MAISON_SERVICES||[],contact='../contacto/';
- function render(kind,target){
-  const host=document.getElementById(target);if(!host)return;
-  items.filter(s=>s.kind===kind).forEach(s=>{
+ function serviceCard(s){
    const el=document.createElement('article');el.className='service-card';el.id=s.slug;
    const main=document.createElement('div');
    const small=document.createElement('small');small.textContent=s.door;
@@ -79,12 +102,35 @@
    const price=document.createElement('div');price.className='service-card__price';price.textContent=s.price||'Sob consulta';
    const a=document.createElement('a');a.className='text-link';a.dataset.service=s.slug;a.href=contact+'?interesse='+encodeURIComponent(s.slug);a.textContent=s.cta;
    side.append(price,a);el.append(main,side);
-   const media=(s.media||[])[0];
-   if(media&&media.src){const m=document.createElement('div');m.className='service-card__media';const img=document.createElement('img');img.src=media.src;img.alt=media.alt||s.name;img.loading='lazy';m.appendChild(img);el.appendChild(m)}
-   host.appendChild(el);
-  });
+   return el;
  }
- render('consulta','consultasList');render('continuidade','continuidadeList');render('especial','especiaisList');
+ function render(kind,target){
+  const host=document.getElementById(target);if(!host)return;
+  items.filter(s=>s.kind===kind).forEach(s=>host.appendChild(serviceCard(s)));
+ }
+ const consultationCopy={
+   tarot:{eyebrow:'Tarot',title:'Quanto espaço precisa esta pergunta?',hint:'Uma pergunta, uma consulta ou um mergulho mais fundo.'},
+   escrito:{eyebrow:'Por escrito',title:'Quanto queres levar contigo?',hint:'Uma resposta breve ou uma leitura mais aprofundada para reler.'},
+   'sem-tarot':{eyebrow:'Sem Tarot',title:'Fala. Depois pomos ordem.',hint:'Quando não queres cartas. Queres espaço e clareza.'}
+ };
+ const consultHost=document.getElementById('consultasList');
+ const consultPanel=document.getElementById('consultationPanel');
+ function showConsultation(group){
+   const copy=consultationCopy[group];if(!copy||!consultHost||!consultPanel)return;
+   document.querySelectorAll('[data-consult-group]').forEach(button=>button.setAttribute('aria-expanded',String(button.dataset.consultGroup===group)));
+   document.getElementById('consultationEyebrow').textContent=copy.eyebrow;
+   document.getElementById('consultationTitle').textContent=copy.title;
+   document.getElementById('consultationHint').textContent=copy.hint;
+   consultHost.innerHTML='';
+   items.filter(s=>s.kind==='consulta'&&s.group===group).forEach(s=>consultHost.appendChild(serviceCard(s)));
+   consultPanel.hidden=false;
+   window.maisonAnalytics?.track?.('consultation_format_selected',{format:group,page_path:location.pathname});
+   consultPanel.scrollIntoView({behavior:'smooth',block:'nearest'});
+ }
+ document.querySelectorAll('[data-consult-group]').forEach(button=>button.addEventListener('click',()=>showConsultation(button.dataset.consultGroup)));
+ const otherHost=document.getElementById('outrasLeiturasList');
+ items.filter(s=>s.kind==='consulta'&&s.group==='outras').forEach(s=>otherHost?.appendChild(serviceCard(s)));
+ render('continuidade','continuidadeList');render('especial','especiaisList');
 
  function revealHash(){
   const id=location.hash.replace('#','');if(!id)return;
