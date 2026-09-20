@@ -202,14 +202,6 @@ const data={
           "label": "“Eu sei ler Tarot.” Não apenas decorar significados."
         },
         {
-          "key": "astrologia",
-          "label": "“Eu percebo um mapa.” Não apenas frases soltas."
-        },
-        {
-          "key": "numerologia",
-          "label": "“Eu consigo ler os números com estrutura.”"
-        },
-        {
           "key": "outra",
           "label": "“Finalmente comecei.” Seja qual for a área."
         }
@@ -415,12 +407,9 @@ const data={
       "text": "O Acompanhamento existe para aquilo que continua entre uma decisão e a seguinte. O âmbito é combinado antes.",
       "cta": {
         "href": "/contacto/?interesse=acompanhamento",
-        "text": "Acompanhamento · desde 170 €"
+        "text": "Acompanhamento · 170 € · 4 semanas"
       },
-      "cta2": {
-        "href": "/servicos/#maison-todo-o-mes",
-        "text": "Maison Todo o Mês · desde 19 €"
-      }
+      "cta2": null
     },
     "casa_ar": {
       "title": "Não queres mudar a casa toda. Queres sentir que entraste noutro lugar.",
@@ -462,13 +451,10 @@ const data={
       "title": "Não procuras perfume. Procuras uma mudança de atmosfera.",
       "text": "Há pedidos que pedem ritual: defumação, limpeza energética ou outra preparação definida para o contexto. Primeiro percebemos o que queres criar.",
       "cta": {
-        "href": "/contacto/?interesse=defumacoes",
+        "href": "/contacto/?interesse=ritual-personalizado",
         "text": "Falar sobre um ritual"
       },
-      "cta2": {
-        "href": "/contacto/?interesse=limpeza-energetica",
-        "text": "Explorar limpeza energética"
-      }
+      "cta2": null
     },
     "trabalho_escolher": {
       "title": "Mais uma lista talvez não seja o que falta.",
@@ -505,7 +491,7 @@ const data={
       "text": "A Mentoria serve para aprender, estruturar e avançar com objectivos e acompanhamento durante um período definido.",
       "cta": {
         "href": "/contacto/?interesse=mentoria",
-        "text": "Mentoria · desde 125 €"
+        "text": "Mentoria · a partir de 125 €"
       },
       "cta2": null
     },
@@ -544,7 +530,7 @@ const data={
       "text": "Se o que queres é organizar uma ideia, objectivos e próximos passos, pergunta pela Mentoria. Não é aconselhamento financeiro.",
       "cta": {
         "href": "/contacto/?interesse=mentoria",
-        "text": "Mentoria · desde 125 €"
+        "text": "Mentoria · a partir de 125 €"
       },
       "cta2": null
     },
@@ -661,25 +647,7 @@ const data={
       "text": "A Mentoria dá estrutura, prática e acompanhamento para aprender Tarot a sério, com objectivos definidos antes de começar.",
       "cta": {
         "href": "/contacto/?interesse=mentoria",
-        "text": "Mentoria · desde 125 €"
-      },
-      "cta2": null
-    },
-    "aprender_astrologia": {
-      "title": "Queres perceber um mapa, não coleccionar frases feitas.",
-      "text": "As análises e formatos de Astrologia são preparados sob encomenda. Diz-nos o que queres aprender e confirmamos o formato disponível.",
-      "cta": {
-        "href": "/contacto/?interesse=astrologia",
-        "text": "Perguntar sobre Astrologia"
-      },
-      "cta2": null
-    },
-    "aprender_numerologia": {
-      "title": "Os números só ficam interessantes quando deixam de ser decoração.",
-      "text": "Os trabalhos de Numerologia são definidos conforme a questão ou objectivo. Primeiro percebemos o que queres aprender ou aprofundar.",
-      "cta": {
-        "href": "/contacto/?interesse=numerologia",
-        "text": "Perguntar sobre Numerologia"
+        "text": "Mentoria · a partir de 125 €"
       },
       "cta2": null
     },
@@ -688,7 +656,7 @@ const data={
       "text": "Diz-nos a área e o objectivo. Se houver enquadramento na Maison, a Mentoria pode ser desenhada com estrutura e acompanhamento.",
       "cta": {
         "href": "/contacto/?interesse=mentoria",
-        "text": "Perguntar pela Mentoria · desde 125 €"
+        "text": "Perguntar pela Mentoria · a partir de 125 €"
       },
       "cta2": null
     },
@@ -724,7 +692,7 @@ const data={
       "text": "Se o que pesa é continuar a atravessar tudo sozinho(a), o Acompanhamento pode fazer mais sentido do que preencher apenas um plano.",
       "cta": {
         "href": "/contacto/?interesse=acompanhamento",
-        "text": "Acompanhamento · desde 170 €"
+        "text": "Acompanhamento · 170 € · 4 semanas"
       },
       "cta2": {
         "href": "/portas/companhia",
