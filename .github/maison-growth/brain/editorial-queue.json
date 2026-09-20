@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-20-v3",
+  "version": "2026-09-20-v4",
   "visibility": "internal-editorial",
   "generatedAt": "2026-09-20T08:14:28+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
@@ -17,20 +17,21 @@
     "questionThemeHypotheses": 33,
     "questionDesignSlots": 198,
     "activeQuestionTargetPerMatureTheme": 300,
-    "pdiSourceSignals": 122,
-    "pdiThemeBacklog": 122,
-    "pdiSourceDesignSlots": 732,
+    "pdiSourceSignals": 150,
+    "pdiThemeBacklog": 150,
+    "pdiSourceDesignSlots": 900,
     "oracleCandidates": 6,
     "oracleRoleSlots": 42
   },
   "pdiGrowth": {
     "sourceStats": {
-      "totalSignals": 122,
+      "totalSignals": 150,
       "oracle": 100,
       "farol": 11,
       "voltaParaCasa": 8,
       "maisonNative": 3,
-      "exactGroups": 122
+      "pdiConversation": 28,
+      "exactGroups": 150
     },
     "themes": [
       {
@@ -6450,6 +6451,1518 @@
           },
           {
             "id": "pdi_source_slot_seguranca_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "primeiras-impressoes",
+        "preferredLabel": "Primeiras Impressões",
+        "slugs": [
+          "primeiras-impressoes"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "primeiras-impressoes",
+            "focus": "aquilo que cada pessoa reparou primeiro e o que mudou desde então",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_primeiras_impressoes_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_primeiras_impressoes_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_primeiras_impressoes_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_primeiras_impressoes_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_primeiras_impressoes_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_primeiras_impressoes_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "pequenas-manias",
+        "preferredLabel": "Pequenas Manias",
+        "slugs": [
+          "pequenas-manias"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "pequenas-manias",
+            "focus": "hábitos, gestos e detalhes quotidianos que irritam, divertem ou dão ternura",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_pequenas_manias_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pequenas_manias_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pequenas_manias_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pequenas_manias_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pequenas_manias_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pequenas_manias_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "o-que-admiro-em-ti",
+        "preferredLabel": "O que admiro em ti",
+        "slugs": [
+          "o-que-admiro-em-ti"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "o-que-admiro-em-ti",
+            "focus": "qualidades, capacidades e formas de estar que merecem ser ditas em voz alta",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_o_que_admiro_em_ti_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_admiro_em_ti_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_admiro_em_ti_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_admiro_em_ti_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_admiro_em_ti_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_admiro_em_ti_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "humor-e-brincadeira",
+        "preferredLabel": "Humor & Brincadeira",
+        "slugs": [
+          "humor-e-brincadeira"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "humor-e-brincadeira",
+            "focus": "o que faz duas pessoas rir, provocar-se e voltar a sentir leveza juntas",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_humor_e_brincadeira_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_humor_e_brincadeira_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_humor_e_brincadeira_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_humor_e_brincadeira_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_humor_e_brincadeira_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_humor_e_brincadeira_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "desejo-e-iniciativa",
+        "preferredLabel": "Desejo & Iniciativa",
+        "slugs": [
+          "desejo-e-iniciativa"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "desejo-e-iniciativa",
+            "focus": "como cada pessoa vive atração, iniciativa, vontade e reciprocidade sem pressupor respostas",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_desejo_e_iniciativa_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desejo_e_iniciativa_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desejo_e_iniciativa_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desejo_e_iniciativa_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desejo_e_iniciativa_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desejo_e_iniciativa_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "toque-e-proximidade",
+        "preferredLabel": "Toque & Proximidade",
+        "slugs": [
+          "toque-e-proximidade"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "toque-e-proximidade",
+            "focus": "formas de carinho, proximidade física e conforto que fazem sentido para cada pessoa",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_toque_e_proximidade_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_toque_e_proximidade_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_toque_e_proximidade_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_toque_e_proximidade_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_toque_e_proximidade_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_toque_e_proximidade_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "segredos-e-silencios",
+        "preferredLabel": "Segredos & Silêncios",
+        "slugs": [
+          "segredos-e-silencios"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "segredos-e-silencios",
+            "focus": "coisas que ficaram por dizer, não por obrigação de revelar, mas por falta de momento ou coragem",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_segredos_e_silencios_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_segredos_e_silencios_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_segredos_e_silencios_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_segredos_e_silencios_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_segredos_e_silencios_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_segredos_e_silencios_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "depois-da-discussao",
+        "preferredLabel": "Depois da Discussão",
+        "slugs": [
+          "depois-da-discussao"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "depois-da-discussao",
+            "focus": "como cada pessoa repara, regressa ao vínculo e percebe quando um conflito realmente terminou",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_depois_da_discussao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_depois_da_discussao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_depois_da_discussao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_depois_da_discussao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_depois_da_discussao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_depois_da_discussao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "pedir-e-receber",
+        "preferredLabel": "Pedir & Receber",
+        "slugs": [
+          "pedir-e-receber"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "pedir-e-receber",
+            "focus": "a dificuldade de pedir atenção, ajuda, carinho ou espaço e a forma como o outro responde",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_pedir_e_receber_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_e_receber_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_e_receber_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_e_receber_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_e_receber_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_e_receber_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "liberdade-dentro-da-relacao",
+        "preferredLabel": "Liberdade dentro da Relação",
+        "slugs": [
+          "liberdade-dentro-da-relacao"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "liberdade-dentro-da-relacao",
+            "focus": "individualidade, autonomia e espaço pessoal sem transformar distância em ameaça",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_liberdade_dentro_da_relacao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_liberdade_dentro_da_relacao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_liberdade_dentro_da_relacao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_liberdade_dentro_da_relacao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_liberdade_dentro_da_relacao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_liberdade_dentro_da_relacao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "rotina-e-tedio",
+        "preferredLabel": "Rotina & Tédio",
+        "slugs": [
+          "rotina-e-tedio"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "rotina-e-tedio",
+            "focus": "o que a rotina protege, o que adormece e aquilo que ainda pode surpreender",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_rotina_e_tedio_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_rotina_e_tedio_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_rotina_e_tedio_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_rotina_e_tedio_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_rotina_e_tedio_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_rotina_e_tedio_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "rituais-de-dois",
+        "preferredLabel": "Rituais de Dois",
+        "slugs": [
+          "rituais-de-dois"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "rituais-de-dois",
+            "focus": "pequenos hábitos partilhados que dão identidade, segurança ou prazer à relação",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_rituais_de_dois_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_rituais_de_dois_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_rituais_de_dois_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_rituais_de_dois_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_rituais_de_dois_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_rituais_de_dois_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "dinheiro-a-dois",
+        "preferredLabel": "Dinheiro a Dois",
+        "slugs": [
+          "dinheiro-a-dois"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "dinheiro-a-dois",
+            "focus": "gastos, poupança, ajuda, independência e expectativas financeiras entre duas pessoas",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_dinheiro_a_dois_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dinheiro_a_dois_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dinheiro_a_dois_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dinheiro_a_dois_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dinheiro_a_dois_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dinheiro_a_dois_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "quando-o-trabalho-entra-em-casa",
+        "preferredLabel": "Quando o Trabalho Entra em Casa",
+        "slugs": [
+          "trabalho-entra-em-casa"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "trabalho-entra-em-casa",
+            "focus": "o impacto do cansaço, horários, ambição e pressão profissional na relação",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_trabalho_entra_em_casa_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "familias-que-entram-na-relacao",
+        "preferredLabel": "Famílias que entram na Relação",
+        "slugs": [
+          "familias-que-entram-na-relacao"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "familias-que-entram-na-relacao",
+            "focus": "expectativas familiares, lealdades, tradições e fronteiras entre o casal e as famílias",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_familias_que_entram_na_relacao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_familias_que_entram_na_relacao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_familias_que_entram_na_relacao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_familias_que_entram_na_relacao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_familias_que_entram_na_relacao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_familias_que_entram_na_relacao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "amigos-e-vida-social",
+        "preferredLabel": "Amigos & Vida Social",
+        "slugs": [
+          "amigos-e-vida-social"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "amigos-e-vida-social",
+            "focus": "amizades, saídas, grupos, prioridades e a forma como cada pessoa ocupa o mundo fora da relação",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_amigos_e_vida_social_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_amigos_e_vida_social_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_amigos_e_vida_social_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_amigos_e_vida_social_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_amigos_e_vida_social_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_amigos_e_vida_social_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "o-passado-que-ainda-aparece",
+        "preferredLabel": "O Passado que Ainda Aparece",
+        "slugs": [
+          "o-passado-que-ainda-aparece"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "o-passado-que-ainda-aparece",
+            "focus": "ex-relacionamentos, memórias e comparações que ainda influenciam a relação presente",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_o_passado_que_ainda_aparece_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_passado_que_ainda_aparece_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_passado_que_ainda_aparece_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_passado_que_ainda_aparece_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_passado_que_ainda_aparece_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_passado_que_ainda_aparece_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "telemovel-e-privacidade",
+        "preferredLabel": "Telemóvel & Privacidade",
+        "slugs": [
+          "telemovel-e-privacidade"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "telemovel-e-privacidade",
+            "focus": "mensagens, redes sociais, passwords, disponibilidade e limites digitais",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_telemovel_e_privacidade_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_telemovel_e_privacidade_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_telemovel_e_privacidade_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_telemovel_e_privacidade_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_telemovel_e_privacidade_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_telemovel_e_privacidade_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "distancia-e-presenca",
+        "preferredLabel": "Distância & Presença",
+        "slugs": [
+          "distancia-e-presenca"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "distancia-e-presenca",
+            "focus": "o que muda quando há distância física, emocional ou temporal entre duas pessoas",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_distancia_e_presenca_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_distancia_e_presenca_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_distancia_e_presenca_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_distancia_e_presenca_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_distancia_e_presenca_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_distancia_e_presenca_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "casa-e-convivencia",
+        "preferredLabel": "Casa & Convivência",
+        "slugs": [
+          "casa-e-convivencia"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "casa-e-convivencia",
+            "focus": "tarefas, espaço, descanso, organização e as pequenas negociações de viver juntos",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_casa_e_convivencia_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_casa_e_convivencia_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_casa_e_convivencia_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_casa_e_convivencia_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_casa_e_convivencia_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_casa_e_convivencia_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "intimidade-sem-roteiro",
+        "preferredLabel": "Intimidade sem Roteiro",
+        "slugs": [
+          "sexo-sem-roteiro"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "sexo-sem-roteiro",
+            "focus": "conversa adulta sobre desejo, conforto, curiosidade e limites sem exigir desempenho nem detalhe explícito",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_intimidade_sem_roteiro_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_intimidade_sem_roteiro_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_intimidade_sem_roteiro_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_intimidade_sem_roteiro_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_intimidade_sem_roteiro_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_intimidade_sem_roteiro_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "futuro-imaginado",
+        "preferredLabel": "Futuro Imaginado",
+        "slugs": [
+          "futuro-imaginado"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "futuro-imaginado",
+            "focus": "os futuros que cada pessoa imagina, teme ou evita nomear",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_futuro_imaginado_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_futuro_imaginado_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_futuro_imaginado_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_futuro_imaginado_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_futuro_imaginado_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_futuro_imaginado_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "sonhos-e-planos-improvaveis",
+        "preferredLabel": "Sonhos & Planos Improváveis",
+        "slugs": [
+          "sonhos-e-planos-absurdos"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "sonhos-e-planos-absurdos",
+            "focus": "coisas grandes, estranhas ou improváveis que cada pessoa ainda gostaria de viver",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sonhos_e_planos_improvaveis_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "medos-que-nao-mostro",
+        "preferredLabel": "Medos que Não Mostro",
+        "slugs": [
+          "medos-que-nao-mostro"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "medos-que-nao-mostro",
+            "focus": "inseguranças, receios e vulnerabilidades que nem sempre aparecem por fora",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_medos_que_nao_mostro_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medos_que_nao_mostro_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medos_que_nao_mostro_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medos_que_nao_mostro_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medos_que_nao_mostro_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medos_que_nao_mostro_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "como-gosto-de-ser-cuidado",
+        "preferredLabel": "Como Gosto de Ser Cuidado",
+        "slugs": [
+          "como-gosto-de-ser-cuidado"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "como-gosto-de-ser-cuidado",
+            "focus": "gestos de apoio, presença e cuidado que realmente chegam a cada pessoa",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_como_gosto_de_ser_cuidado_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_gosto_de_ser_cuidado_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_gosto_de_ser_cuidado_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_gosto_de_ser_cuidado_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_gosto_de_ser_cuidado_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_gosto_de_ser_cuidado_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "quando-preciso-de-espaco",
+        "preferredLabel": "Quando Preciso de Espaço",
+        "slugs": [
+          "quando-preciso-de-espaco"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "quando-preciso-de-espaco",
+            "focus": "como pedir distância temporária sem abandono, castigo ou leitura automática de rejeição",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_quando_preciso_de_espaco_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_preciso_de_espaco_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_preciso_de_espaco_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_preciso_de_espaco_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_preciso_de_espaco_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_preciso_de_espaco_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "coisas-que-quero-viver-contigo",
+        "preferredLabel": "Coisas que Quero Viver Contigo",
+        "slugs": [
+          "coisas-que-quero-viver-contigo"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "coisas-que-quero-viver-contigo",
+            "focus": "experiências, lugares, rotinas e memórias que ainda gostariam de construir juntos",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_coisas_que_quero_viver_contigo_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_coisas_que_quero_viver_contigo_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_coisas_que_quero_viver_contigo_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_coisas_que_quero_viver_contigo_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_coisas_que_quero_viver_contigo_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_coisas_que_quero_viver_contigo_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "perguntas-que-nunca-fiz",
+        "preferredLabel": "Perguntas que Nunca Fiz",
+        "slugs": [
+          "perguntas-que-nunca-fiz"
+        ],
+        "sources": [
+          "pdi-conversation"
+        ],
+        "evidence": [
+          {
+            "source": "pdi-conversation",
+            "sourceId": "perguntas-que-nunca-fiz",
+            "focus": "curiosidades honestas que ficaram adiadas porque nunca apareceu o momento certo",
+            "family": "Conversa a dois"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_perguntas_que_nunca_fiz_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perguntas_que_nunca_fiz_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perguntas_que_nunca_fiz_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perguntas_que_nunca_fiz_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perguntas_que_nunca_fiz_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perguntas_que_nunca_fiz_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
