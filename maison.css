@@ -2528,3 +2528,29 @@ textarea,
 .product-digital{
   border-radius:0!important;
 }
+
+
+/* MAISON JF® · DIGITAL CARDS DARK EDITORIAL · 2026-09-20 */
+a.product-digital__card{
+  background:var(--ak-surface,#111)!important;
+  color:var(--ak-text,#f5f1e9)!important;
+  border-color:var(--ak-line,rgba(255,255,255,.105))!important;
+}
+
+a.product-digital__card:hover{
+  background:var(--ak-surface-hover,#161616)!important;
+  border-color:rgba(199,170,115,.28)!important;
+}
+
+a.product-digital__card small{
+  color:var(--ak-accent,#c7aa73)!important;
+}
+
+a.product-digital__card strong,
+a.product-digital__card b{
+  color:var(--ak-text,#f5f1e9)!important;
+}
+
+a.product-digital__card p{
+  color:var(--ak-muted,#aaa39a)!important;
+}
