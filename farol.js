@@ -344,7 +344,7 @@ const data={
       },
       "cta2": {
         "href": "/produtos/nevoa/",
-        "text": "Mudar também o ar · 6,50 €"
+        "text": "Mudar também o ar · 7 €"
       }
     },
     "relacao_historia": {
@@ -374,7 +374,7 @@ const data={
       },
       "cta2": {
         "href": "/produtos/oleo-massagem/",
-        "text": "Prefiro toque · 12,50 €"
+        "text": "Prefiro toque · 12 €"
       }
     },
     "cansaco_toque": {
@@ -382,7 +382,7 @@ const data={
       "text": "O Óleo de Massagem transforma toque em pausa. Sem performance. Sem teres de perceber nada primeiro.",
       "cta": {
         "href": "/produtos/oleo-massagem/",
-        "text": "Óleo de Massagem · 12,50 €"
+        "text": "Óleo de Massagem · 12 €"
       },
       "cta2": {
         "href": "/produtos/escalda-pes/",
@@ -398,7 +398,7 @@ const data={
       },
       "cta2": {
         "href": "/produtos/nevoa/",
-        "text": "Quero mudar o ar · 6,50 €"
+        "text": "Quero mudar o ar · 7 €"
       }
     },
     "cansaco_historia": {
@@ -427,7 +427,7 @@ const data={
       "text": "A Névoa muda o ar num gesto. É a diferença mais rápida entre o que veio da rua e o que fica cá dentro.",
       "cta": {
         "href": "/produtos/nevoa/",
-        "text": "Névoa de Ambiente · 6,50 €"
+        "text": "Névoa de Ambiente · 7 €"
       },
       "cta2": {
         "href": "/produtos/vela-vidro/",
@@ -455,7 +455,7 @@ const data={
       },
       "cta2": {
         "href": "/produtos/oleo-massagem/",
-        "text": "Levar a pausa ao toque · 12,50 €"
+        "text": "Levar a pausa ao toque · 12 €"
       }
     },
     "casa_ritual": {
@@ -601,7 +601,7 @@ const data={
       "text": "Óleo, toque, alguns minutos e nenhum relatório sobre o que sentiste. Fazer alguma coisa por ti também pode ser só isto.",
       "cta": {
         "href": "/produtos/oleo-massagem/",
-        "text": "Óleo de Massagem · 12,50 €"
+        "text": "Óleo de Massagem · 12 €"
       },
       "cta2": {
         "href": "/produtos/escalda-pes/",
@@ -631,7 +631,7 @@ const data={
       "text": "A Névoa de Ambiente é imediata: um gesto, outro aroma, outra entrada no mesmo espaço.",
       "cta": {
         "href": "/produtos/nevoa/",
-        "text": "Névoa de Ambiente · 6,50 €"
+        "text": "Névoa de Ambiente · 7 €"
       },
       "cta2": null
     },
@@ -640,7 +640,7 @@ const data={
       "text": "O Óleo de Massagem dá-te um ritual simples de toque e presença corporal. Sem teres de chegar a conclusão nenhuma.",
       "cta": {
         "href": "/produtos/oleo-massagem/",
-        "text": "Óleo de Massagem · 12,50 €"
+        "text": "Óleo de Massagem · 12 €"
       },
       "cta2": {
         "href": "/produtos/escalda-pes/",
@@ -740,7 +740,7 @@ const data={
       },
       "cta2": {
         "href": "/produtos/nevoa/",
-        "text": "Névoa · 6,50 €"
+        "text": "Névoa · 7 €"
       }
     },
     "presente_corpo": {
@@ -748,7 +748,7 @@ const data={
       "text": "O Óleo de Massagem oferece toque e pausa. Se queres um ritual de água e calor, escolhe o Escalda-Pés.",
       "cta": {
         "href": "/produtos/oleo-massagem/",
-        "text": "Óleo de Massagem · 12,50 €"
+        "text": "Óleo de Massagem · 12 €"
       },
       "cta2": {
         "href": "/produtos/escalda-pes/",

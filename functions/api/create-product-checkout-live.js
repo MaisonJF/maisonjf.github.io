@@ -2,7 +2,7 @@ const PRODUCTS={
   'vela-vidro':{name:'Vela Aromática MAISON JF® 170 g',price:'price_1UEoZT5H3wYRPmPV4hXuKvbZ'},
   'vela-pequena':{name:'Vela Aromática MAISON JF® 70 g',price:'price_1UHlIA5H3wYRPmPV3sMw6cZU'},
   'oleo-massagem':{name:'Óleo de Massagem MAISON JF® 60 ml',price:'price_1UEoZd5H3wYRPmPVVyUiS0MX'},
-  'nevoa':{name:'Névoa de Ambiente MAISON JF® 20 ml',price:'price_1UEoZh5H3wYRPmPVSNTmhHzv'},
+  'nevoa':{name:'Névoa de Ambiente MAISON JF® 20 ml',price:'price_1UHlo65H3wYRPmPVQsQBBDOU'},
   'escalda-pes':{name:'Escalda-Pés MAISON JF® 150 g',price:'price_1UHlHp5H3wYRPmPVWJX7cZGi'}
 };
 

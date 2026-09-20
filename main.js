@@ -180,8 +180,8 @@
       secondText: 'Usar o Farol'
     },
     'produto-bruma-ambiente.html': {
-      label: 'Pedir Névoa · 6,50 €',
-      message: 'Olá Maison JF. Quero pedir uma Névoa de Ambiente de 20 mL por 6,50 €. Que opções estão disponíveis?',
+      label: 'Pedir Névoa · 7 €',
+      message: 'Olá Maison JF. Quero pedir uma Névoa de Ambiente de 20 mL por 7 €. Que opções estão disponíveis?',
       secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
