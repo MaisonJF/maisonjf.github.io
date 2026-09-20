@@ -52,6 +52,7 @@ jobs:
           node --check functions/_lib/viral-test-policy.js
           node --check functions/api/recommend-offers.js
           node --check analytics.js
+          node --check maison-language.js
           node --check produtos/detail.js
           node --check data/services.js
           node --check farol.js
@@ -62,6 +63,24 @@ jobs:
           node --check functions/api/engine-health.js
           node --check .github/maison-growth/brain/build_editorial_queue.mjs
           node .github/maison-growth/brain/build_editorial_queue.mjs --check
+
+      - name: Guard structural global navigation
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          bad=[]
+          for path in Path('.').rglob('*.html'):
+              text=path.read_text(encoding='utf-8',errors='ignore')
+              for header in re.findall(r'<header class="site-header"[^>]*>[\s\S]*?</header>',text,re.I):
+                  if re.search(r'href=["\'][^"\']*(?:oraculo|para-de-ignorar)[^"\']*["\']',header,re.I):
+                      bad.append(str(path))
+                      break
+          if bad:
+              raise SystemExit('Product-specific links must not appear in global navigation: '+', '.join(sorted(bad)))
+          print('Global navigation remains structural: Farol / Volta Para Casa / Produtos / Serviços.')
+          PY
 
       - name: Guard Presença public naming
         shell: bash

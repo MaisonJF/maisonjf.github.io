@@ -1,6 +1,11 @@
 (() => {
   'use strict';
 
+  const languageScript = document.createElement('script');
+  languageScript.src = '/maison-language.js?v=20260920-pre90';
+  languageScript.defer = true;
+  document.head.appendChild(languageScript);
+
   const MEASUREMENT_ID = 'G-3W8B4L5QWP';
   const CONSENT_KEY = 'maison_analytics_consent_v1';
   const ATTRIBUTION_KEY = 'maison_offer_attribution_v1';
