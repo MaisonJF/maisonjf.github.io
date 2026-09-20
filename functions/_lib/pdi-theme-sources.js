@@ -25,6 +25,38 @@ const VPC_AXES=[
   {slug:'seguranca',label:'Segurança'}
 ];
 
+
+const PDI_CONVERSATION_SEEDS=[
+  {slug:'primeiras-impressoes',label:'Primeiras Impressões',focus:'aquilo que cada pessoa reparou primeiro e o que mudou desde então'},
+  {slug:'pequenas-manias',label:'Pequenas Manias',focus:'hábitos, gestos e detalhes quotidianos que irritam, divertem ou dão ternura'},
+  {slug:'o-que-admiro-em-ti',label:'O que admiro em ti',focus:'qualidades, capacidades e formas de estar que merecem ser ditas em voz alta'},
+  {slug:'humor-e-brincadeira',label:'Humor & Brincadeira',focus:'o que faz duas pessoas rir, provocar-se e voltar a sentir leveza juntas'},
+  {slug:'desejo-e-iniciativa',label:'Desejo & Iniciativa',focus:'como cada pessoa vive atração, iniciativa, vontade e reciprocidade sem pressupor respostas'},
+  {slug:'toque-e-proximidade',label:'Toque & Proximidade',focus:'formas de carinho, proximidade física e conforto que fazem sentido para cada pessoa'},
+  {slug:'segredos-e-silencios',label:'Segredos & Silêncios',focus:'coisas que ficaram por dizer, não por obrigação de revelar, mas por falta de momento ou coragem'},
+  {slug:'depois-da-discussao',label:'Depois da Discussão',focus:'como cada pessoa repara, regressa ao vínculo e percebe quando um conflito realmente terminou'},
+  {slug:'pedir-e-receber',label:'Pedir & Receber',focus:'a dificuldade de pedir atenção, ajuda, carinho ou espaço e a forma como o outro responde'},
+  {slug:'liberdade-dentro-da-relacao',label:'Liberdade dentro da Relação',focus:'individualidade, autonomia e espaço pessoal sem transformar distância em ameaça'},
+  {slug:'rotina-e-tedio',label:'Rotina & Tédio',focus:'o que a rotina protege, o que adormece e aquilo que ainda pode surpreender'},
+  {slug:'rituais-de-dois',label:'Rituais de Dois',focus:'pequenos hábitos partilhados que dão identidade, segurança ou prazer à relação'},
+  {slug:'dinheiro-a-dois',label:'Dinheiro a Dois',focus:'gastos, poupança, ajuda, independência e expectativas financeiras entre duas pessoas'},
+  {slug:'trabalho-entra-em-casa',label:'Quando o Trabalho Entra em Casa',focus:'o impacto do cansaço, horários, ambição e pressão profissional na relação'},
+  {slug:'familias-que-entram-na-relacao',label:'Famílias que entram na Relação',focus:'expectativas familiares, lealdades, tradições e fronteiras entre o casal e as famílias'},
+  {slug:'amigos-e-vida-social',label:'Amigos & Vida Social',focus:'amizades, saídas, grupos, prioridades e a forma como cada pessoa ocupa o mundo fora da relação'},
+  {slug:'o-passado-que-ainda-aparece',label:'O Passado que Ainda Aparece',focus:'ex-relacionamentos, memórias e comparações que ainda influenciam a relação presente'},
+  {slug:'telemovel-e-privacidade',label:'Telemóvel & Privacidade',focus:'mensagens, redes sociais, passwords, disponibilidade e limites digitais'},
+  {slug:'distancia-e-presenca',label:'Distância & Presença',focus:'o que muda quando há distância física, emocional ou temporal entre duas pessoas'},
+  {slug:'casa-e-convivencia',label:'Casa & Convivência',focus:'tarefas, espaço, descanso, organização e as pequenas negociações de viver juntos'},
+  {slug:'sexo-sem-roteiro',label:'Intimidade sem Roteiro',focus:'conversa adulta sobre desejo, conforto, curiosidade e limites sem exigir desempenho nem detalhe explícito'},
+  {slug:'futuro-imaginado',label:'Futuro Imaginado',focus:'os futuros que cada pessoa imagina, teme ou evita nomear'},
+  {slug:'sonhos-e-planos-absurdos',label:'Sonhos & Planos Improváveis',focus:'coisas grandes, estranhas ou improváveis que cada pessoa ainda gostaria de viver'},
+  {slug:'medos-que-nao-mostro',label:'Medos que Não Mostro',focus:'inseguranças, receios e vulnerabilidades que nem sempre aparecem por fora'},
+  {slug:'como-gosto-de-ser-cuidado',label:'Como Gosto de Ser Cuidado',focus:'gestos de apoio, presença e cuidado que realmente chegam a cada pessoa'},
+  {slug:'quando-preciso-de-espaco',label:'Quando Preciso de Espaço',focus:'como pedir distância temporária sem abandono, castigo ou leitura automática de rejeição'},
+  {slug:'coisas-que-quero-viver-contigo',label:'Coisas que Quero Viver Contigo',focus:'experiências, lugares, rotinas e memórias que ainda gostariam de construir juntos'},
+  {slug:'perguntas-que-nunca-fiz',label:'Perguntas que Nunca Fiz',focus:'curiosidades honestas que ficaram adiadas porque nunca apareceu o momento certo'}
+];
+
 const MAISON_NATIVE_SEEDS=[
   {
     slug:'o-que-nunca-te-perguntei',
@@ -81,6 +113,17 @@ export function buildPdiThemeSourceSignals(){
     });
   }
 
+  for(const seed of PDI_CONVERSATION_SEEDS){
+    signals.push({
+      source:'pdi-conversation',
+      sourceId:seed.slug,
+      slug:seed.slug,
+      label:seed.label,
+      family:'Conversa a dois',
+      focus:seed.focus
+    });
+  }
+
   for(const seed of MAISON_NATIVE_SEEDS){
     signals.push({
       source:'maison-native',
@@ -129,6 +172,7 @@ export function pdiThemeSourceStats(){
     farol:signals.filter(x=>x.source==='farol').length,
     voltaParaCasa:signals.filter(x=>x.source==='volta-para-casa').length,
     maisonNative:signals.filter(x=>x.source==='maison-native').length,
+    pdiConversation:signals.filter(x=>x.source==='pdi-conversation').length,
     exactGroups:groupExactThemeSignals(signals).length
   };
 }
