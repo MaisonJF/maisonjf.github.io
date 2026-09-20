@@ -78,7 +78,7 @@ export const MAISON_OFFER_CATALOGUE=[
 
   {id:'maison-todo-o-mes',family:'continuity',stage:'continuity',format:'continuity',title:'Maison Todo o Mês',description:'Uma forma de não voltares ao zero todos os meses, com níveis diferentes de continuidade.',href:'/servicos/#maison-todo-o-mes',amount:1900,priceLabel:'desde 19 €',axes:['load','self','security','direction'],territories:['casa','corpo','cabeca'],routes:['continuity','gesture'],base:4},
   {id:'acompanhamento',family:'continuity',stage:'continuity',format:'continuity',title:'Acompanhamento Permanente',description:'Para quando o assunto não acaba numa sessão e queres continuidade entre decisões e mudanças.',href:'/servicos/#acompanhamento',amount:17000,priceLabel:'a partir de 170 €',axes:['seen','attachment','self','control','belong','load','direction','security'],territories:['cabeca','presenca','corpo'],routes:['continuity'],base:6},
-  {id:'sos',family:'continuity',stage:'continuity',format:'continuity',title:'SOS',description:'Para períodos em que precisas de uma presença mais próxima durante alguns dias.',href:'/servicos/#sos',amount:null,priceLabel:'Sob consulta',axes:['attachment','belong','load','security'],territories:['presenca','corpo','cabeca'],routes:['continuity','talk'],base:5}
+  {id:'sos',family:'presence',stage:'continuity',format:'presence',title:'SOS Maison',description:'Uma janela de presença assíncrona para uma situação que ainda está a acontecer.',href:'/portas/companhia#sos',amount:6000,priceLabel:'desde 60 €',axes:['attachment','belong','load','security'],territories:['presenca','corpo','cabeca'],routes:['continuity','talk'],base:5}
 ];
 
 export function recommendMaisonOffers(signal={}){
