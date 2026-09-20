@@ -119,7 +119,9 @@ export async function activatePrivateQuestionBatch(db,{batchId}={}){
     row.question_id,
     JSON.stringify({batchId:safeBatch})
   ));
-  if(decisions.length)await db.batch(decisions);
+  for(let i=0;i<decisions.length;i+=100){
+    await db.batch(decisions.slice(i,i+100));
+  }
 
   return {
     batchId:safeBatch,
