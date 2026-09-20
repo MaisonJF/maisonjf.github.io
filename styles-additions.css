@@ -487,3 +487,12 @@ textarea,
 .product-digital{
   border-radius:0!important;
 }
+
+
+/* MAISON JF® · QUIET LUXURY / GOLD DETAIL SYSTEM · 2026-09-21 */
+:root{--maison-gold:#c7aa73;--maison-gold-light:#e0c48b;--maison-card:#10100f;--maison-card-hover:#14130f;--maison-card-line:rgba(199,170,115,.18);--maison-card-line-hover:rgba(199,170,115,.46)}
+.eyebrow,.detail-eyebrow,.detail-kicker,.catalogue-card__eyebrow,.service-card__eyebrow,.footer__column-title,.journey-card small,.offer-card small,.related-card small,.territory small,.product__body small,.product-digital__card small,.gift-card small{color:var(--maison-gold)!important}
+.text-link{color:var(--maison-gold)!important}.text-link:hover{color:var(--maison-gold-light)!important}
+a.territory-offer,a.product-digital__card,a.related-card,a.journey-card,a.offer-card,a.gift-card,a.catalogue-card{background:var(--maison-card)!important;color:#f3efe7!important;border-color:var(--maison-card-line)!important;box-shadow:none!important}
+a.territory-offer:hover,a.product-digital__card:hover,a.related-card:hover,a.journey-card:hover,a.offer-card:hover,a.gift-card:hover,a.catalogue-card:hover{background:var(--maison-card-hover)!important;border-color:var(--maison-card-line-hover)!important}
+.product-grid .price,.catalogue-card__price,.gift-card .price,.related-card .price,.journey-card .price{display:none!important}
