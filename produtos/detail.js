@@ -80,9 +80,9 @@
         <p>${ritual.text}</p>
       </div>
       <div>
-        <p class="eyebrow">Ainda a pensar?</p>
-        <h2>Não forces a escolha.</h2>
-        <p>Se ainda não sabes se é isto, entra pelo que queres sentir.</p>
+        <p class="eyebrow">Não é isto?</p>
+        <h2>Não adivinhes.</h2>
+        <p>Entra pelo que queres sentir.</p>
         <a class="text-link" href="${root}farol#farol">Seguir o Farol →</a>
       </div>
     </section>
