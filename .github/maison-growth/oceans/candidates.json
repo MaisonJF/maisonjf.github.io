@@ -2,7 +2,7 @@
   "version":"2026-09-18",
   "visibility":"internal-site",
   "note":"Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at":"2026-09-19T20:13:36+01:00",
+  "last_enriched_at":"2026-09-20T02:13:56+01:00",
   "candidates":[
     {
       "painLanguage":"Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
@@ -55,6 +55,19 @@
       "status":"internal_candidate",
       "firstSeenAt":"2026-09-19T20:13:36+01:00",
       "lastSeenAt":"2026-09-19T20:13:36+01:00"
+    },
+    {
+      "painLanguage":"Ter muitas opções pode parecer liberdade e, ao mesmo tempo, transformar uma escolha simples num labirinto: comparar tudo, recear deixar passar a melhor alternativa e acabar cansado, menos confiante ou sem escolher.",
+      "territory":"sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
+      "intent":"reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
+      "commercialAdjacency":"Oráculo Decisões & Caminhos; experiências reflexivas sobre critérios, suficiente-bom, renúncia e compromisso com escolhas, sem aconselhamento financeiro, clínico ou profissional personalizado",
+      "evidence":["Biological Psychology (2019; PMID 30951804): em dois estudos, escolher entre muitas opções esteve associado a maior envolvimento mas também a respostas compatíveis com maior ameaça e menor percepção de recursos para gerir a decisão — https://pubmed.ncbi.nlm.nih.gov/30951804/","Acta Psychologica (2010; PMID 19766972): dois experimentos mostraram que o efeito de excesso de escolha depende da complexidade; muitas alternativas reduziram satisfação quando também exigiam comparar muitos atributos — https://pubmed.ncbi.nlm.nih.gov/19766972/","NeuroImage (2019; PMID 30988434): conjuntos percebidos como demasiado grandes mostraram menor sinal neural de valor do conjunto de escolha do que um conjunto intermédio percebido como tendo a quantidade adequada — https://pubmed.ncbi.nlm.nih.gov/30988434/"],
+      "questionPotential":true,
+      "questionThemeCandidates":["demasiadas opções","medo de escolher mal","comparar sem fim","suficientemente bom","renúncia ao não escolhido","compromisso com uma decisão"],
+      "oraclePotential":true,
+      "status":"internal_candidate",
+      "firstSeenAt":"2026-09-20T02:13:56+01:00",
+      "lastSeenAt":"2026-09-20T02:13:56+01:00"
     }
   ]
 }
