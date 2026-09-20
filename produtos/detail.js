@@ -37,7 +37,7 @@
   const root=location.pathname.includes('/produtos/'+p.slug+'/')?'../../':'../';
   const hero=media.find(m=>m.role==='hero')||media[0]||null;
   const rest=hero?media.filter(m=>m!==hero):media;
-  const contact=`${root}contacto/?produto=${encodeURIComponent(p.slug)}&preco=${encodeURIComponent(p.priceNote||money(p.price))}`;
+  const whatsapp=`https://wa.me/351923318289?text=${encodeURIComponent(`Olá Maison JF. Tenho uma dúvida sobre ${p.name}${p.size?' '+p.size:''}.`)}`;
   const ritual=p.ritual||{title:'Leva o ritual para casa.',text:'Um gesto pequeno pode mudar a forma como o momento se sente.'};
   const complementary={Corpo:['vela-vidro','nevoa'],Casa:['escalda-pes','oleo-massagem']}[p.category]||[];
   const related=(p.related||complementary).map(s=>all.find(x=>x.slug===s)).filter(Boolean).slice(0,2);
@@ -58,9 +58,10 @@
         <p>${p.description}</p>
         <div class="product-price">${p.priceNote||money(p.price)}</div>
         <div class="product-actions">
-          <a class="button button--light" data-buy href="${contact}">${p.cta}</a>
-          <a class="text-link" href="${root}farol#farol">Ainda não sei se é isto</a>
+          <button class="button button--light" data-buy type="button">Comprar · ${p.priceNote||money(p.price)}</button>
+          <a class="text-link" data-whatsapp href="${whatsapp}" target="_blank" rel="noopener noreferrer">Tenho uma dúvida</a>
         </div>
+        <p class="product-checkout-status" data-checkout-status aria-live="polite"></p>
         <div class="product-meta-links">
           <a href="${root}envios.html">Envios</a>
           <a href="${root}informacao-legal.html">Condições</a>
@@ -88,10 +89,32 @@
   `;
 
   track('maison_product_view',{product:p.slug,price:p.price,page_path:location.pathname});
-  page.addEventListener('click',e=>{
+  page.addEventListener('click',async e=>{
     const buy=e.target.closest('[data-buy]');
+    const whatsappLink=e.target.closest('[data-whatsapp]');
     const rel=e.target.closest('[data-related]');
-    if(buy)track('product_contact_click',{product:p.slug,price:p.price,page_path:location.pathname});
+    if(buy){
+      const status=page.querySelector('[data-checkout-status]');
+      buy.disabled=true;
+      buy.textContent='A abrir checkout…';
+      if(status)status.textContent='';
+      track('product_checkout_intent',{product:p.slug,price:p.price,page_path:location.pathname});
+      try{
+        const response=await fetch('/api/create-product-checkout-live',{
+          method:'POST',
+          headers:{'content-type':'application/json'},
+          body:JSON.stringify({slug:p.slug})
+        });
+        const data=await response.json().catch(()=>({}));
+        if(!response.ok||!data.url)throw new Error(data.error||'Não foi possível abrir o checkout.');
+        location.href=data.url;
+      }catch(error){
+        buy.disabled=false;
+        buy.textContent='Comprar · '+(p.priceNote||money(p.price));
+        if(status)status.textContent=error.message||'Não foi possível abrir o checkout.';
+      }
+    }
+    if(whatsappLink)track('product_whatsapp_question',{product:p.slug,price:p.price,page_path:location.pathname});
     if(rel)track('product_cross_sell',{from:p.slug,to:rel.dataset.related,page_path:location.pathname});
   });
 })();
