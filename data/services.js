@@ -1,6 +1,6 @@
 /* MAISON SERVICE CATALOGUE
    Public service architecture. Prices shown only where they are already defined.
-   Services are grouped by kind on the public page; Companhia remains a distinct special service.
+   Services are grouped by kind on the public page; Presença remains a distinct special service.
 */
 window.MAISON_SERVICES=[
 {slug:'tarot-expresso',kind:'consulta',group:'tarot',door:'Tarot',name:'Uma pergunta',price:'17 €',amount:1700,description:'Uma pergunta concreta. Uma leitura directa. Para deixares de andar às voltas no mesmo ponto.',limits:'Não decide por ti nem transforma possibilidades em certezas.',media:[],cta:'Quero perguntar'},
@@ -24,7 +24,7 @@ window.MAISON_SERVICES=[
 {slug:'banho-de-ervas',kind:'especial',door:'Ritual · Sob consulta',name:'Banho de Ervas',price:null,description:'Preparações e orientações de uso ritual sob consulta, conforme o objectivo e o contexto.',limits:'O formato é confirmado antes de avançar.',media:[],cta:'Quero pedir informações'},
 {slug:'pedidos-especiais',kind:'especial',door:'Pedidos especiais',name:'Cristais, Pulseiras e Outros Pedidos',price:null,description:'Cristais, pulseiras, preparações e pedidos específicos podem ser avaliados directamente. Primeiro percebemos o que procuras e respondemos com o que realmente conseguimos fazer.',limits:'Disponibilidade e condições são confirmadas caso a caso.',media:[],cta:'Quero explicar o que procuro'},
 
-{slug:'companhia',kind:'companhia',door:'Companhia',name:'Companhia',price:null,description:'Um serviço especial de presença adulta para um café, passeio, evento ou momento acordado. Friend4Rent e Boyfriend4Rent são formatos diferentes dentro desta porta.',limits:'Tudo é combinado antes: formato, duração, local, despesas e limites. Não é um serviço sexual.',media:[{role:'ambience',src:'../images/root/companhia-cafe-fixed.webp?v=20260916-1532-fixed',alt:'Mesa com café como imagem de conversa e companhia',aspect:'portrait'}],formats:['Friend4Rent','Boyfriend4Rent'],cta:'Descobrir Companhia',next:{slug:'acompanhamento',label:'Se procuras continuidade, ver Acompanhamento'}},
+{slug:'companhia',kind:'companhia',door:'Presença',name:'Presença',price:null,description:'Um serviço de presença adulta para um café, jantar, passeio, evento ou outro plano combinado antes.',limits:'Tudo é combinado antes: formato, duração, local, despesas e limites. Não é um serviço sexual.',media:[{role:'ambience',src:'../images/root/companhia-cafe-fixed.webp?v=20260916-1532-fixed',alt:'Mesa com café como imagem de tempo partilhado',aspect:'portrait'}],formats:['Presença Social','Presença Próxima'],cta:'Descobrir Presença',next:{slug:'acompanhamento',label:'Se procuras continuidade, ver Acompanhamento'}},
 
 {slug:'b2b',kind:'profissional',door:'Profissional',name:'Maison para profissionais',price:null,description:'Produtos e propostas para spas, gabinetes, massagistas, lojas e outros espaços. Começamos pelo espaço, utilização e cliente final para construir uma proposta comercial que faça sentido.',limits:'A proposta e o preço dependem das necessidades, quantidades e contexto profissional.',media:[],cta:'Quero uma proposta B2B'}
 ];

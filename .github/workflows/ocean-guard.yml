@@ -50,12 +50,32 @@ jobs:
           node --check functions/api/consultation-checkout-session-live.js
           node --check produtos/detail.js
           node --check data/services.js
+          node --check farol.js
+          node --check yoichi-pass-core.js
           node --check functions/api/oracle-reading-live.js
           node --check functions/api/pdi-event-live.js
           node --check functions/api/pdi-session-live.js
           node --check functions/api/engine-health.js
           node --check .github/maison-growth/brain/build_editorial_queue.mjs
           node .github/maison-growth/brain/build_editorial_queue.mjs --check
+
+      - name: Guard Presença public naming
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          files=[
+              'portas/companhia.html','servicos/index.html','data/services.js',
+              'farol.js','contacto/index.html','index.html','teste/index.html','llms.txt'
+          ]
+          forbidden=('Friend4Rent','Boyfriend4Rent','Descobrir Companhia')
+          for name in files:
+              text=Path(name).read_text(encoding='utf-8')
+              for token in forbidden:
+                  if token in text:
+                      raise SystemExit(f'{token} must not appear in public Presença surfaces: {name}')
+          print('Presença naming is consistent across core public surfaces.')
+          PY
 
       - name: Ensure every Ocean flows somewhere public
         shell: bash
