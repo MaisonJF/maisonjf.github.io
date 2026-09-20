@@ -2,7 +2,7 @@
   "version":"2026-09-18",
   "visibility":"internal-site",
   "note":"Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at":"2026-09-20T02:13:56+01:00",
+  "last_enriched_at":"2026-09-20T08:14:28+01:00",
   "candidates":[
     {
       "painLanguage":"Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
@@ -68,6 +68,19 @@
       "status":"internal_candidate",
       "firstSeenAt":"2026-09-20T02:13:56+01:00",
       "lastSeenAt":"2026-09-20T02:13:56+01:00"
+    },
+    {
+      "painLanguage":"Às vezes, manter a paz parece exigir engolir opiniões, necessidades ou desconforto. A relação continua, mas a pessoa começa a dividir-se entre aquilo que sente por dentro e aquilo que se permite mostrar para não arriscar conflito, rejeição ou perda.",
+      "territory":"auto-silenciamento-para-preservar-o-vinculo",
+      "intent":"reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+      "commercialAdjacency":"Oráculo Comunicação & Conflito, Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; experiências reflexivas sobre voz, segurança relacional, necessidades e reciprocidade, sem substituir apoio clínico",
+      "evidence":["Behavioral Sciences (2026; PMID 42352796): estudo qualitativo encontrou auto-silenciamento específico de cada relação, associado sobretudo à segurança percebida; a supressão repetida da expressão para preservar vínculos apresentou custos psicológicos cumulativos — https://pubmed.ncbi.nlm.nih.gov/42352796/","International Journal of Social Psychiatry (2023; PMID 35102764): em adultos em relações, o auto-silenciamento mediou a associação entre dimensões de apego inseguro e sintomas depressivos — https://pubmed.ncbi.nlm.nih.gov/35102764/","Journal of Adolescence (2011; PMID 20493520): estudo longitudinal encontrou que auto-silenciamento predisse aumento posterior de sintomas depressivos, apoiando a relevância do padrão para além de um conflito isolado — https://pubmed.ncbi.nlm.nih.gov/20493520/"],
+      "questionPotential":true,
+      "questionThemeCandidates":["calar para manter a paz","voz e segurança relacional","necessidades não ditas","acomodação vs autoapagamento","medo da reacção ao dizer a verdade","eu interior vs eu mostrado"],
+      "oraclePotential":true,
+      "status":"internal_candidate",
+      "firstSeenAt":"2026-09-20T08:14:28+01:00",
+      "lastSeenAt":"2026-09-20T08:14:28+01:00"
     }
   ]
 }
