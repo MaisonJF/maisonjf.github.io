@@ -53,7 +53,7 @@
     .then(data=>{
       if(data.payment_status==='paid'){
         title.textContent='Pagamento confirmado.';
-        message.textContent='A tua encomenda de '+data.product_name+' ficou registada.';
+        message.textContent=data.items&&data.items.length>1?'A tua encomenda ficou registada.':'A tua encomenda de '+data.product_name+' ficou registada.';
         const parts=[];
         if(Number.isInteger(data.amount_total))parts.push('Total: '+money(data.amount_total,data.currency));
         if(data.email)parts.push('Email: '+data.email);
@@ -62,8 +62,9 @@
           transaction_id:sessionId,
           value:Number.isInteger(data.amount_total)?data.amount_total/100:undefined,
           currency:(data.currency||'EUR').toUpperCase(),
-          items:[{item_id:data.product_slug,item_name:data.product_name}]
+          items:(data.items||[]).map(item=>({item_id:item.slug,item_name:item.name,quantity:item.quantity}))
         });
+        try{localStorage.removeItem('maisonPhysicalCartV1')}catch{}
         fetch('/api/checkout-receipt-live',{
           method:'POST',
           headers:{'content-type':'application/json'},
