@@ -358,10 +358,10 @@ const data={
     },
     "relacao_presenca": {
       "title": "Talvez hoje não precises de interpretar nada.",
-      "text": "Se o que te falta é alguém contigo num café, passeio, evento ou momento combinado, entra pela Companhia. Os limites são definidos antes.",
+      "text": "Se o que te falta é alguém contigo num café, passeio, evento ou momento combinado, entra em Presença. Os limites são definidos antes.",
       "cta": {
         "href": "/portas/companhia",
-        "text": "Descobrir Companhia"
+        "text": "Descobrir Presença"
       },
       "cta2": null
     },
@@ -649,10 +649,10 @@ const data={
     },
     "desligar_presenca": {
       "title": "Há noites em que distração não chega. Queres alguém ali.",
-      "text": "A Companhia é presença adulta combinada antes: café, passeio, evento ou outro momento acordado, com formato e limites claros.",
+      "text": "Presença é tempo partilhado combinado antes: café, jantar, passeio, evento ou outro plano, com formato e limites claros.",
       "cta": {
         "href": "/portas/companhia",
-        "text": "Descobrir Companhia"
+        "text": "Descobrir Presença"
       },
       "cta2": null
     },
@@ -694,28 +694,28 @@ const data={
     },
     "companhia_evento": {
       "title": "O convite já existe. Falta não chegares sozinho(a).",
-      "text": "A Companhia pode acompanhar um evento ou plano previamente combinado. Formato, duração, despesas e limites ficam claros antes.",
+      "text": "Presença pode acompanhar um evento ou plano previamente combinado. Formato, duração, despesas e limites ficam claros antes.",
       "cta": {
         "href": "/portas/companhia",
-        "text": "Quero Companhia"
+        "text": "Quero Presença"
       },
       "cta2": null
     },
     "companhia_conversa": {
       "title": "Não queres entretenimento. Queres presença sem performance.",
-      "text": "Um café, passeio ou tempo partilhado pode ser exactamente isso. Entra na Companhia e vê os formatos.",
+      "text": "Um café, passeio ou tempo partilhado pode ser exactamente isso. Entra em Presença e vê os formatos.",
       "cta": {
         "href": "/portas/companhia",
-        "text": "Descobrir Companhia"
+        "text": "Descobrir Presença"
       },
       "cta2": null
     },
     "companhia_afecto": {
       "title": "Queres proximidade. Então os limites precisam de ser ainda mais claros.",
-      "text": "Vê o formato Boyfriend4Rent dentro da Companhia. É presença adulta combinada; não é serviço sexual nem promessa de relação.",
+      "text": "Vê Presença Próxima. É proximidade afetiva combinada antes, dentro de limites claros.",
       "cta": {
         "href": "/portas/companhia",
-        "text": "Ver Companhia"
+        "text": "Ver Presença"
       },
       "cta2": null
     },
@@ -728,7 +728,7 @@ const data={
       },
       "cta2": {
         "href": "/portas/companhia",
-        "text": "Hoje quero Companhia"
+        "text": "Hoje quero Presença"
       }
     },
     "presente_casa": {
