@@ -56,7 +56,6 @@
       <p class="eyebrow">28 perguntas · duas pessoas</p>
       <h1>PÁRA DE<br>IGNORAR!</h1>
       <p class="pdi-sale__lead">Aquilo que sempre quiseste saber.<br>Sem saber como perguntar.</p>
-      <p class="pdi-sale__price">5 €</p>
       <a class="pdi-buy" id="pdi-choose" href="#temas">Escolher tema</a>
       <p class="pdi-status" id="pdi-status">Uma sessão. Uma conversa que pode mudar qualquer coisa.</p>
     </div>
@@ -67,6 +66,7 @@
     <article class="pdi-sale__card"><small>02</small><h2>Responde. Ou passa.</h2><p>Sem justificações.</p></article>
     <article class="pdi-sale__card"><small>03</small><h2>Troquem.</h2><p>Agora é a vez do outro.</p></article>
   </section>
+  <p class="pdi-sale__micro" style="text-align:center;margin-top:22px">Cada tema · 28 perguntas · 5 €</p>
 
   <section class="pdi-themes" id="temas">
     <p class="eyebrow">Escolhe por onde entrar</p>
@@ -124,10 +124,10 @@
       card.className='pdi-theme';
       const small=document.createElement('small');small.textContent=theme.family||'PÁRA DE IGNORAR!';
       const h=document.createElement('h3');h.textContent=theme.label;
-      const p=document.createElement('p');p.textContent='28 perguntas · '+theme.display_price;
+      const p=document.createElement('p');p.textContent='28 perguntas';
       const button=document.createElement('button');
       button.className='pdi-buy';button.type='button';button.dataset.theme=theme.slug;
-      button.textContent='Jogar · '+theme.display_price;
+      button.textContent='Jogar';
       card.append(small,h,p,button);grid.append(card);
     }
   }
