@@ -1,5 +1,5 @@
 export const MAISON_OFFER_BRAIN={
-  version:'2026-09-20-v3',
+  version:'2026-09-20-v4',
   freeOnly:'/teste/',
   maxOffers:3,
   principles:{
@@ -16,6 +16,21 @@ export const MAISON_OFFER_BRAIN={
 
 const AXES=new Set(['seen','attachment','self','control','belong','load','direction','security']);
 const ROUTES=new Set(['talk','continuity','gesture','selfpaced','default']);
+const TEST_PROFILES={
+  apego:{
+    secure:{result:'belong',route:'talk',ranked:[{key:'attachment',score:7},{key:'self',score:5},{key:'seen',score:3}]},
+    anxious:{result:'attachment',route:'talk',ranked:[{key:'belong',score:8},{key:'seen',score:6},{key:'control',score:4}]},
+    avoidant:{result:'self',route:'selfpaced',ranked:[{key:'control',score:7},{key:'attachment',score:4},{key:'direction',score:3}]},
+    fearful:{result:'attachment',route:'continuity',ranked:[{key:'control',score:8},{key:'belong',score:7},{key:'security',score:5}]}
+  },
+  afeto:{
+    palavras:{result:'seen',route:'talk',ranked:[{key:'belong',score:7},{key:'attachment',score:5}]},
+    tempo:{result:'belong',route:'talk',ranked:[{key:'attachment',score:7},{key:'seen',score:4}]},
+    gestos:{result:'self',route:'gesture',ranked:[{key:'seen',score:6},{key:'belong',score:4}]},
+    toque:{result:'belong',route:'gesture',ranked:[{key:'attachment',score:7},{key:'load',score:4}]},
+    simbolos:{result:'seen',route:'gesture',ranked:[{key:'belong',score:6},{key:'attachment',score:4}]}
+  }
+};
 const AXIS_TERRITORIES={
   seen:['cabeca','presenca'],
   attachment:['presenca','cabeca'],
@@ -98,16 +113,19 @@ export function recommendMaisonOffers(signal={}){
 }
 
 function normalizeProfile(signal){
-  const result=AXES.has(String(signal.result||''))?String(signal.result):'control';
-  const route=ROUTES.has(String(signal.route||''))?String(signal.route):'default';
-  const ranked=Array.isArray(signal.ranked)?signal.ranked.slice(0,8):[];
+  const test=String(signal.test||'').toLowerCase();
+  const testResult=String(signal.testResult||'').toLowerCase();
+  const mapped=TEST_PROFILES[test]?.[testResult]||null;
+  const result=AXES.has(String(signal.result||''))?String(signal.result):(mapped?.result||'control');
+  const route=ROUTES.has(String(signal.route||''))?String(signal.route):(mapped?.route||'default');
+  const ranked=Array.isArray(signal.ranked)&&signal.ranked.length?signal.ranked.slice(0,8):(mapped?.ranked||[]);
   const rankedAxes=ranked
     .map((item,index)=>({
       key:AXES.has(String(item?.key||''))?String(item.key):'',
       score:Number.isFinite(Number(item?.score))?Number(item.score):Math.max(0,8-index)
     }))
     .filter(x=>x.key);
-  return {result,route,rankedAxes};
+  return {result,route,rankedAxes,test,testResult};
 }
 
 function scoreOffer(offer,profile,territories){
