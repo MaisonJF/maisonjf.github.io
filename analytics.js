@@ -115,20 +115,60 @@
     showPreferencesControl();
   }
 
+  function ensurePreferencesControlStyles() {
+    if (document.getElementById('maison-consent-settings-style')) return;
+    const style = document.createElement('style');
+    style.id = 'maison-consent-settings-style';
+    style.textContent = [
+      '.maison-consent-settings{appearance:none;-webkit-appearance:none;border:0;background:transparent;padding:0;color:rgba(245,241,233,.58);cursor:pointer;font:500 11px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.08em;text-transform:uppercase;text-align:left;transition:color .2s ease}',
+      '.maison-consent-settings:hover{color:#fff}',
+      '.maison-consent-settings:focus-visible{color:#fff;outline:1px solid rgba(199,170,115,.68);outline-offset:4px}',
+      '.maison-consent-settings-item{list-style:none}',
+      '.home-footer__group nav .maison-consent-settings{font-size:11px}',
+      '.footer__links .maison-consent-settings{font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit}',
+      '.maison-consent-settings--standalone{display:block;width:max-content;max-width:calc(100% - 36px);margin:34px auto 24px;color:rgba(245,241,233,.42);font-size:10px}',
+      '@media(max-width:700px){.maison-consent-settings--standalone{margin-top:28px;margin-bottom:20px}}'
+    ].join('');
+    document.head.appendChild(style);
+  }
+
   function showPreferencesControl() {
     if (document.querySelector('.maison-consent-settings')) return;
+    ensurePreferencesControlStyles();
+
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'maison-consent-settings';
-    button.textContent = 'Gerir cookies';
+    button.textContent = 'Preferências de cookies';
     button.setAttribute('aria-label', 'Alterar preferências de cookies');
     button.addEventListener('click', () => {
       localStorage.removeItem(CONSENT_KEY);
-      button.remove();
+      const item = button.closest('.maison-consent-settings-item');
+      if (item) item.remove();
+      else button.remove();
       showConsent();
     });
-    const footer = document.querySelector('.footer__legal') || document.querySelector('.footer__bottom') || document.querySelector('footer');
-    (footer || document.body).appendChild(button);
+
+    const homeMaisonNav = document.querySelector('.home-footer__group nav[aria-label="Maison"]');
+    if (homeMaisonNav) {
+      button.classList.add('maison-consent-settings--nav');
+      homeMaisonNav.appendChild(button);
+      return;
+    }
+
+    const legalLink = document.querySelector('footer a[href*="informacao-legal"]');
+    const footerList = legalLink?.closest('.footer__links');
+    if (footerList) {
+      const item = document.createElement('li');
+      item.className = 'maison-consent-settings-item';
+      button.classList.add('footer__link', 'maison-consent-settings--nav');
+      item.appendChild(button);
+      footerList.appendChild(item);
+      return;
+    }
+
+    button.classList.add('maison-consent-settings--standalone');
+    (document.querySelector('main') || document.body).appendChild(button);
   }
 
   function showConsent() {
