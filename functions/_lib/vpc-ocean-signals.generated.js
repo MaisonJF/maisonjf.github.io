@@ -1,0 +1,80 @@
+/* AUTO-GENERATED from .github/maison-growth/oceans/candidates.json. */
+/* Do not edit by hand. Run build_vpc_ocean_signals.mjs. */
+export const VPC_OCEAN_SIGNALS=[
+  {
+    "id": "evitamento-financeiro-sob-escassez",
+    "painLanguage": "Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
+    "intent": "compreender e interromper o ciclo entre sensação de escassez, sobrecarga cognitiva e evitamento de decisões financeiras",
+    "themes": [
+      "evitamento financeiro",
+      "escassez e atenção",
+      "adiamento de decisões",
+      "curto prazo vs futuro",
+      "dinheiro e carga mental"
+    ]
+  },
+  {
+    "id": "perda-ambigua-sem-fecho-claro",
+    "painLanguage": "Há perdas em que nada termina de forma limpa: a pessoa, o vínculo ou o papel continua presente de alguma maneira, mas já não está disponível como antes, deixando quem fica preso entre esperança, ausência e falta de certeza.",
+    "intent": "reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
+    "themes": [
+      "perda sem resolução",
+      "presença e ausência ao mesmo tempo",
+      "espera por certeza",
+      "vínculo que mudou sem desaparecer",
+      "continuar sem fecho"
+    ]
+  },
+  {
+    "id": "solidao-com-contacto-sem-conexao-de-qualidade",
+    "painLanguage": "É possível falar com pessoas, trocar mensagens e até ter relações por perto e, ainda assim, sentir que falta ligação real: quantidade de contacto não garante apoio, intimidade nem a sensação de ser visto.",
+    "intent": "distinguir presença social de conexão sentida e reconhecer quando o problema não é falta de contacto, mas falta de qualidade, apoio ou reciprocidade nos vínculos",
+    "themes": [
+      "companhia sem conexão",
+      "qualidade vs quantidade de contacto",
+      "sentir-se visto",
+      "apoio e reciprocidade",
+      "intimidade emocional"
+    ]
+  },
+  {
+    "id": "cuidar-sem-desaparecer-no-papel-de-cuidador",
+    "painLanguage": "Cuidar de alguém pode nascer do amor e, ainda assim, ocupar tanto espaço que descansar, pedir ajuda ou proteger uma parte da própria vida começa a parecer egoísmo, abandono ou falha moral.",
+    "intent": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
+    "themes": [
+      "culpa ao descansar",
+      "cuidar e manter identidade",
+      "responsabilidade partilhada",
+      "limites no cuidado",
+      "amor sem autoapagamento",
+      "escolha e obrigação no cuidar"
+    ]
+  },
+  {
+    "id": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
+    "painLanguage": "Ter muitas opções pode parecer liberdade e, ao mesmo tempo, transformar uma escolha simples num labirinto: comparar tudo, recear deixar passar a melhor alternativa e acabar cansado, menos confiante ou sem escolher.",
+    "intent": "reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
+    "themes": [
+      "demasiadas opções",
+      "medo de escolher mal",
+      "comparar sem fim",
+      "suficientemente bom",
+      "renúncia ao não escolhido",
+      "compromisso com uma decisão"
+    ]
+  },
+  {
+    "id": "auto-silenciamento-para-preservar-o-vinculo",
+    "painLanguage": "Às vezes, manter a paz parece exigir engolir opiniões, necessidades ou desconforto. A relação continua, mas a pessoa começa a dividir-se entre aquilo que sente por dentro e aquilo que se permite mostrar para não arriscar conflito, rejeição ou perda.",
+    "intent": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+    "themes": [
+      "calar para manter a paz",
+      "voz e segurança relacional",
+      "necessidades não ditas",
+      "acomodação vs autoapagamento",
+      "medo da reacção ao dizer a verdade",
+      "eu interior vs eu mostrado"
+    ]
+  }
+];
+export const VPC_OCEAN_SIGNAL_VERSION="2026-09-18";
