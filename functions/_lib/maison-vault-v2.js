@@ -330,6 +330,76 @@ export async function recordOracleSessionReopenedV2(db,{oracleSessionId,buyerKey
   return true;
 }
 
+
+export async function summarizeExperienceCatalogue(db){
+  const [questionRows,oracleRows,needRows]=await Promise.all([
+    db.prepare(
+      `SELECT theme,stage,COUNT(*) AS count
+         FROM vault_questions
+        WHERE status='active'
+          AND exposure='paid'
+          AND lifecycle_state='live'
+          AND rotation_state IN ('new','limited','normal')
+        GROUP BY theme,stage
+        ORDER BY theme,stage`
+    ).all(),
+    db.prepare(
+      `SELECT territory,role,COUNT(*) AS count
+         FROM vault_oracle_blocks
+        WHERE status='active'
+          AND lifecycle_state='live'
+          AND rotation_state IN ('new','limited','normal')
+        GROUP BY territory,role
+        ORDER BY territory,role`
+    ).all(),
+    db.prepare(
+      `SELECT target_type,coalesce(territory,'') AS territory,COUNT(*) AS count,
+              MAX(priority) AS max_priority
+         FROM vault_content_needs
+        WHERE status IN ('open','in_progress')
+        GROUP BY target_type,coalesce(territory,'')
+        ORDER BY target_type,territory`
+    ).all()
+  ]);
+
+  const questions=groupCatalogue(questionRows.results||[],'theme','stage');
+  const oracle=groupCatalogue(oracleRows.results||[],'territory','role');
+  const openNeeds=(needRows.results||[]).map(row=>({
+    targetType:row.target_type,
+    territory:row.territory||null,
+    count:Number(row.count||0),
+    maxPriority:Number(row.max_priority||0)
+  }));
+  return {
+    questions:{
+      total:questions.reduce((n,x)=>n+x.total,0),
+      byTheme:questions
+    },
+    oracle:{
+      total:oracle.reduce((n,x)=>n+x.total,0),
+      byTerritory:oracle
+    },
+    openNeeds:{
+      total:openNeeds.reduce((n,x)=>n+x.count,0),
+      groups:openNeeds
+    }
+  };
+}
+
+function groupCatalogue(rows,groupKey,detailKey){
+  const map=new Map();
+  for(const row of rows){
+    const name=String(row[groupKey]||'');
+    if(!name)continue;
+    if(!map.has(name))map.set(name,{name,total:0,breakdown:{}});
+    const entry=map.get(name);
+    const count=Number(row.count||0);
+    entry.total+=count;
+    entry.breakdown[String(row[detailKey]||'unknown')]=count;
+  }
+  return [...map.values()];
+}
+
 async function digestHex(value){
   const bytes=new Uint8Array(await crypto.subtle.digest(
     'SHA-256',new TextEncoder().encode(String(value))
