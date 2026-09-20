@@ -9,8 +9,21 @@
 <div class="vpc-convert"><p class="vpc-kicker">Se isto ficou contigo</p><h2 id="solutionTitle"></h2><p id="solutionText"></p><div class="vpc-offers" id="nextLinks"></div></div>
 <div class="vpc-share"><button id="share" type="button">Partilhar o meu resultado</button><button id="restart" type="button">Refazer</button><a href="../afeto/">Abrir outra porta · Afecto →</a><span class="vpc-share__status" id="shareStatus" aria-live="polite"></span></div><p class="vpc-note">O resultado mostra apenas o padrão que apareceu mais nas tuas respostas hoje. Pessoas reais são mais complexas do que quatro categorias.</p></section>
 </main><script src="../question-bank.js?v=20260921-v1"></script><script>const QUESTION_BANK=window.MAISON_TEST_QUESTION_BANK;
-const QUESTIONS=QUESTION_BANK?.pick('apego',10)||[];
+let QUESTIONS=QUESTION_BANK?.pick('apego',10)||[];
 if(QUESTIONS.length!==10)throw new Error('question_bank_unavailable');
+
+async function hydrateOceanQuestions(){
+ try{
+  const seed=(globalThis.crypto?.randomUUID?.()||String(Date.now())+'-'+Math.random()).slice(0,120);
+  const response=await fetch('/api/vpc-question-set?test=apego&seed='+encodeURIComponent(seed),{cache:'no-store'});
+  const payload=await response.json().catch(()=>({}));
+  if(!response.ok||!Array.isArray(payload.questions)||payload.questions.length!==10)throw new Error('question_engine');
+  QUESTIONS=payload.questions;
+  track('vpc_question_set',{engine_version:payload.version||'',ocean_version:payload.oceanVersion||'',sources:(payload.sources||[]).join(','),vault_candidates:payload.approvedVaultCandidates||0});
+ }catch(_){
+  track('vpc_question_set_fallback');
+ }
+}
 const RESULTS={"secure":{"label":"Seguro","title":"Gostas. Ficas. E continuas a ser tu.","lead":"Nas tuas respostas, proximidade não parece exigir que te abandones. Espaço também não soa automaticamente a rejeição.","detail":"Podes querer muito alguém sem transformar cada silêncio numa ameaça. Podes precisar de espaço sem o usar como fuga. Isso não te torna imune ao medo; só sugere que, quando a relação mexe, ainda consegues continuar dentro de ti.","share":"Consigo gostar de alguém sem me abandonar.","solutionTitle":"Continua inteiro quando a relação mexer.","solutionText":"O próximo passo não é corrigir-te. É perceber como reconheces afecto. E onde podes começar a sentir falta dele antes de perceberes porquê.","oracle":"/oraculo/compromisso-futuro"},"anxious":{"label":"Ansioso","title":"Cinco minutos de silêncio podem parecer uma história inteira.","lead":"Quando alguém se afasta, a tua cabeça parece aproximar-se ainda mais: procura sinais, respostas e provas de que continuas a ser escolhido.","detail":"Às vezes não queres outra mensagem. Queres a sensação de que está tudo bem. E essa é a parte cruel: nenhuma mensagem consegue garantir para sempre aquilo que o medo volta a perguntar amanhã.","share":"Às vezes não quero mais mensagens. Quero parar de sentir que o silêncio é uma resposta.","solutionTitle":"O objectivo não é sentir menos.","solutionText":"É deixar de entregar ao próximo sinal o poder de decidir se estás seguro. Descobre agora o que te faz sentir amado. E o que te deixa sempre a pedir mais.","oracle":"/oraculo/rejeicao-abandono"},"avoidant":{"label":"Evitante","title":"Queres amor. Só não queres sentir que ele te prende.","lead":"Nas tuas respostas, o espaço ganha valor precisamente quando a relação começa a pedir mais proximidade, expectativa ou dependência.","detail":"Não significa que não queiras vínculo. Pode significar que precisar de alguém te deixa exposto. Afastar-te pode devolver rapidamente uma sensação de controlo. Às vezes o alívio parece liberdade. Nem sempre são a mesma coisa.","share":"Às vezes chamo liberdade ao alívio de não precisar de ninguém.","solutionTitle":"Não tens de escolher entre amor e espaço.","solutionText":"A descoberta seguinte é perceber de que forma reconheces afecto sem sentir que estás a perder margem para seres tu.","oracle":"/oraculo/intimidade-vulnerabilidade"},"fearful":{"label":"Temeroso","title":"Queres que fiquem. E uma parte tua prepara-se para fugir.","lead":"Nas tuas respostas aparecem duas forças ao mesmo tempo: medo de perder a ligação e medo do que pode acontecer se te deixares ficar demasiado perto.","detail":"Podes correr atrás quando sentes distância e querer desaparecer quando finalmente tens proximidade. Não porque não saibas o que queres. Às vezes, querer alguém e sentir-te seguro com isso não chegam ao mesmo tempo.","share":"Quero que fiques. Só ainda não sei sempre o que fazer quando ficas.","solutionTitle":"Não tens de escolher entre agarrar e fugir.","solutionText":"O próximo passo é perceber o que te faz sentir amado quando a proximidade chega. E o que continua a parecer pouco mesmo quando alguém está lá.","oracle":"/oraculo/dependencia-emocional"}};
 const scores={secure:0,anxious:0,avoidant:0,fearful:0};
 let i=0,scope='';
@@ -116,10 +129,12 @@ function finish(){
   track('vpc_test_result',{test:'apego',result:key,affinity:affinities});
   brainOffers(key);
 }
-$('start').addEventListener('click',()=>{
+$('start').addEventListener('click',async()=>{
   if(!scope)return;
+  const button=$('start');button.disabled=true;
+  await hydrateOceanQuestions();
   show('quiz');
-  track('vpc_test_start',{test:'apego'});
+  track('vpc_test_start',{test:'apego',question_engine:'ocean-vault'});
   render();
 });
 function wrapText(ctx,text,maxWidth){const words=text.split(/\s+/),lines=[];let line='';for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);return lines}
