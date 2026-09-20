@@ -64,3 +64,18 @@ MAISON JF visual grade: dark cinematic quiet luxury, charcoal blacks, restrained
 - Use it strategically on major transition or closing surfaces such as Services, Products, Oracle and B2B.
 - Copy over lighthouse imagery must always be live HTML/CSS, never baked into the image.
 - The preferred mood is nocturnal, misty or low-light and cinematic; avoid making every lighthouse treatment another orange sunset.
+
+
+## Quiet-luxury commercial surfaces
+
+Public discovery follows a restrained luxury rule: **the feeling leads; the price does not**.
+
+- Core surfaces are charcoal/black with warm ivory type.
+- Gold is an accent for eyebrows, micro-labels, arrows, active states, fine borders and hover/focus. It is jewellery, not a fill colour.
+- Large discovery cards must not default to white/ivory backgrounds.
+- Decorative sequence numbers are avoided unless the sequence itself carries meaning.
+- Discovery cards do not show price when the next click leads to a dedicated product/service detail where price can be understood in context.
+- Price remains visible where it is decision-critical: product/service detail, checkout, or a direct-purchase surface with no intermediate detail.
+- One card = one promise + one next action. Keep copy short enough to scan, specific enough to recognise.
+- CTAs should reduce friction without using fake urgency, concealed costs, countdowns, scarcity claims or other dark patterns.
+- B2B uses the same gold micro-detail system but stays more architectural and restrained than B2C.
