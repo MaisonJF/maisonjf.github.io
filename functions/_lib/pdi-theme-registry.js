@@ -3,18 +3,30 @@ import { groupExactThemeSignals } from './pdi-theme-sources.js';
 const DEFAULT_AMOUNT=500;
 const MINIMUM_LIVE_QUESTIONS=28;
 
-const launch={
-  slug:'relacoes',
-  label:'Relações',
-  family:'Relações & Vínculos',
-  focus:'uma conversa a dois sobre vínculo, proximidade, diferença, desejo, cuidado e futuro',
-  source:'launch',
-  aliases:[],
-  amount:DEFAULT_AMOUNT,
-  currency:'eur'
-};
+const curated=[
+  {
+    slug:'relacoes',
+    label:'Relações',
+    family:'Relações & Vínculos',
+    focus:'uma conversa a dois sobre vínculo, proximidade, diferença, desejo, cuidado e futuro',
+    source:'curated',
+    aliases:[],
+    amount:DEFAULT_AMOUNT,
+    currency:'eur'
+  },
+  {
+    slug:'amor-sem-filtro',
+    label:'Amor sem Filtro',
+    family:'Relações & Vínculos',
+    focus:'reciprocidade, ciúme, confiança, vulnerabilidade, desejo, medo de perder, dúvida, escolha e verdades difíceis',
+    source:'curated',
+    aliases:[],
+    amount:DEFAULT_AMOUNT,
+    currency:'eur'
+  }
+];
 
-const themes=[launch];
+const themes=[...curated];
 for(const group of groupExactThemeSignals()){
   const evidence=group.evidence?.[0]||{};
   themes.push({
@@ -44,7 +56,8 @@ export function listPdiThemes(){
 export function pdiThemeRegistryStats(){
   return {
     registered:PDI_THEME_REGISTRY.length,
-    sourceThemes:PDI_THEME_REGISTRY.filter(x=>x.source!=='launch').length,
+    sourceThemes:PDI_THEME_REGISTRY.filter(x=>x.source!=='curated').length,
+    curatedThemes:PDI_THEME_REGISTRY.filter(x=>x.source==='curated').length,
     minimumLiveQuestions:MINIMUM_LIVE_QUESTIONS,
     priceCents:DEFAULT_AMOUNT
   };
