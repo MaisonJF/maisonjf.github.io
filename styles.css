@@ -2966,3 +2966,6 @@ button:focus-visible{
   outline:1px solid var(--maison-gold)!important;
   outline-offset:4px!important;
 }
+
+/* No decorative sequence numbers on homepage doors. */
+.door--editorial .door__copy span::before{content:none!important;display:none!important}
