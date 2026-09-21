@@ -2742,3 +2742,227 @@ hr,
 .presence-rules{
   border-color:rgba(199,170,115,.14);
 }
+
+
+/* MAISON JF® · QUIET LUXURY FINAL · 2026-09-21 */
+:root{
+  --maison-gold:#c7aa73;
+  --maison-gold-light:#e0c48b;
+  --maison-night:#080808;
+  --maison-card:#10100f;
+  --maison-card-hover:#15140f;
+  --maison-card-line:rgba(199,170,115,.18);
+  --maison-card-line-hover:rgba(199,170,115,.48);
+  --maison-ivory:#f3efe7;
+  --maison-muted:#aaa39a;
+}
+
+/* Gold is the Maison's jewellery: labels, micro-navigation, active cues and quiet conversion. */
+.eyebrow,
+.detail-eyebrow,
+.detail-kicker,
+.catalogue-card__eyebrow,
+.service-card__eyebrow,
+.footer__column-title,
+.home-footer__group>span,
+.journey-card small,
+.offer-card small,
+.related-card small,
+.territory small,
+.product__body small,
+.product-digital__card small,
+.gift-card small,
+.pro-card small,
+.presence-card small,
+.service-door small,
+.consultation-door small,
+.territory-offer small,
+.product-meta-links a,
+.service-family__summary>span,
+.consultation-other summary,
+.presence-details summary,
+.door--editorial .door__copy span,
+.door--editorial .door__copy b,
+.press-fact small,
+.press-topic span,
+.steps small,
+.result-meta span,
+.vpc-kicker,
+.vpc-result__label,
+.vpc-progress__meta,
+.vpc-affinity__head,
+.vpc-offer small{
+  color:var(--maison-gold)!important;
+}
+
+/* Internal discovery cards stay dark. Ivory remains reserved for a small number of primary actions. */
+a.territory-offer,
+a.product-digital__card,
+a.related-card,
+a.journey-card,
+a.offer-card,
+a.gift-card,
+a.catalogue-card,
+a.service-card,
+a.ebook-card,
+.pro-card,
+.presence-card,
+.service-door,
+.consultation-door,
+.route-options a,
+.links-grid a,
+.professional,
+.special-service,
+.product{
+  background:var(--maison-card)!important;
+  color:var(--maison-ivory)!important;
+  border-color:var(--maison-card-line)!important;
+  box-shadow:none!important;
+}
+
+a.territory-offer:hover,
+a.product-digital__card:hover,
+a.related-card:hover,
+a.journey-card:hover,
+a.offer-card:hover,
+a.gift-card:hover,
+a.catalogue-card:hover,
+a.service-card:hover,
+a.ebook-card:hover,
+.pro-card:hover,
+.presence-card:hover,
+.service-door:hover,
+.consultation-door:hover,
+.consultation-door[aria-expanded="true"],
+.route-options a:hover,
+.links-grid a:hover,
+.professional:hover,
+.special-service:hover,
+.product:hover{
+  background:var(--maison-card-hover)!important;
+  border-color:var(--maison-card-line-hover)!important;
+}
+
+a.territory-offer strong,
+a.product-digital__card strong,
+a.related-card strong,
+a.journey-card strong,
+a.offer-card strong,
+a.gift-card strong,
+a.catalogue-card strong,
+a.service-card h2,
+a.service-card h3,
+a.ebook-card h2,
+.pro-card h2,
+.presence-card h3,
+.service-door strong,
+.consultation-door strong,
+.professional h2,
+.professional h3,
+.special-service h2,
+.special-service h3,
+.product h2,
+.product h3{
+  color:var(--maison-ivory)!important;
+}
+
+a.territory-offer span,
+a.product-digital__card p,
+a.related-card span,
+a.journey-card p,
+a.offer-card p,
+a.gift-card p,
+a.catalogue-card p,
+a.service-card p,
+a.ebook-card p,
+.pro-card p,
+.presence-card p,
+.service-door span,
+.consultation-door span,
+.professional p,
+.special-service p,
+.product p{
+  color:var(--maison-muted)!important;
+}
+
+/* Conversion without catalogue noise: discovery sells the next step, detail pages sell the price. */
+.product-grid .price,
+.catalogue-card__price,
+.gift-card .price,
+.related-card .price,
+.journey-card .price,
+.offer-card .price,
+.service-card__price,
+.service-door .price,
+.consultation-door .price,
+.territory-offer .price,
+.product-digital__card .price,
+.pro-card .price,
+.presence-card .price,
+.links-grid .price,
+.route-options .price{
+  display:none!important;
+}
+
+/* Gold micro-actions make the next step obvious without shouting. */
+.text-link,
+.service-buy,
+a.territory-offer::after,
+a.product-digital__card::after,
+a.related-card::after{
+  color:var(--maison-gold)!important;
+}
+.text-link:hover,
+.service-buy:hover{
+  color:var(--maison-gold-light)!important;
+}
+
+/* Quiet gold structure. */
+hr,
+.detail-note,
+.manifesto,
+.editorial-essay,
+.home-feature,
+.presence-sos,
+.presence-rules,
+.pro-signature,
+.conversation,
+.steps,
+.territory-offers{
+  border-color:rgba(199,170,115,.14)!important;
+}
+
+/* Keep the homepage's two explicit exploration doors ivory; they are the exception, not the card language. */
+.home-page--final .home-explore__links>a{
+  background:var(--maison-ivory)!important;
+  color:#0b0b0c!important;
+  border-color:var(--maison-ivory)!important;
+}
+
+/* Primary action remains instantly legible; everything else is quieter. */
+.button--light,
+.btn--primary,
+.pdi-buy{
+  background:var(--maison-ivory)!important;
+  color:#0b0b0c!important;
+  border-color:var(--maison-ivory)!important;
+}
+.button--light:hover,
+.btn--primary:hover,
+.pdi-buy:hover{
+  background:#fbf7ef!important;
+  border-color:#fbf7ef!important;
+}
+
+/* Decorative numbering must never overpower the actual choice. */
+.door--editorial .door__copy span{
+  text-transform:uppercase!important;
+  letter-spacing:.18em!important;
+}
+
+/* Preserve reduced motion and clear focus. */
+a:focus-visible,
+button:focus-visible{
+  outline:1px solid var(--maison-gold)!important;
+  outline-offset:4px!important;
+}
