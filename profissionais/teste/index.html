@@ -7,14 +7,14 @@
 <title>O QUE O TEU NEGÓCIO ESTÁ A IGNORAR? | MAISON JF®</title>
 <meta name="description" content="Diagnóstico profissional MAISON JF®: oito perguntas para identificar oportunidades de revenda, experiência, continuidade e diferenciação.">
 <link rel="canonical" href="https://maison-jf.com/profissionais/teste/">
-<link rel="stylesheet" href="../../maison.css">
-<script src="../../analytics.js" defer></script>
+<link rel="stylesheet" href="../../maison.css?v=20260921-feral1">
+<script src="../../analytics.js?v=20260921-footer2" defer></script>
 <style>
 .b2b-test{min-height:100svh;padding:132px 22px 86px;background:radial-gradient(circle at 50% 0,#292117 0,#11100e 34%,#070707 72%);display:grid;align-items:center}
 .box{width:min(940px,100%);margin:auto}.step{display:none}.step.on{display:block}
 .progress{font:600 9px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:#8f887d;margin-bottom:26px}
 .progressbar{height:1px;background:#2f2a24;margin:-13px 0 46px;overflow:hidden}.progressbar span{display:block;height:100%;background:#c3a66d;transition:width .28s ease}
-.title{font:400 clamp(50px,8vw,96px)/.91 var(--serif);letter-spacing:-.035em;margin:.16em 0 .34em}
+.title{font:400 clamp(44px,6.8vw,82px)/.92 var(--serif);letter-spacing:-.035em;margin:.16em 0 .34em;max-width:13ch;text-wrap:balance}
 #intro>p:not(.eyebrow){max-width:700px;font:400 clamp(18px,2.2vw,23px)/1.55 var(--serif);color:#bcb4a9;margin-bottom:32px}
 .q{font:400 clamp(31px,4.5vw,50px)/1.08 var(--serif);letter-spacing:-.02em;margin:28px 0 38px;max-width:880px}
 .choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
@@ -26,13 +26,13 @@
 .offer h2{font:400 clamp(30px,4vw,43px)/1.02 var(--serif);margin:.2em 0 .35em}.offer p{max-width:650px;color:#aaa39a}
 .offer-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.offer-options a{border:1px solid var(--line);padding:15px 16px;text-decoration:none}.offer-options small{display:block;color:#837c72;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}.offer-options strong{font:400 21px/1.1 var(--serif)}
 .restart{border:0;background:none;color:#8e877d;text-decoration:underline;cursor:pointer;margin-top:32px}
-@media(max-width:700px){.b2b-test{padding:108px 18px 60px;align-items:start}.title{font-size:49px}.q{font-size:31px}.choices,.offer-options{grid-template-columns:1fr}.choices button{min-height:86px}.offer{padding:24px}}
+@media(max-width:700px){.b2b-test{padding:108px 18px 60px;align-items:start}.title{font-size:clamp(40px,12vw,52px).q{font-size:31px}.choices,.offer-options{grid-template-columns:1fr}.choices button{min-height:86px}.offer{padding:24px}}
 </style>
 </head>
 <body>
 <header class="site-header"><a class="brand" href="../">MAISON JF® · PROFISSIONAIS</a><nav><a href="../">Profissionais</a><a href="../../contacto/?interesse=b2b">Contacto B2B</a></nav></header>
 <main class="b2b-test"><div class="box">
-<section id="intro" class="step on"><p class="eyebrow">≈ 2 minutos · 8 perguntas · gratuito</p><h1 class="title">O QUE O TEU NEGÓCIO<br>ESTÁ A IGNORAR?</h1><p>Talvez haja dinheiro escondido numa parte da experiência que hoje parece apenas rotina. Este diagnóstico não promete receitas mágicas: ajuda-nos a perceber onde existe uma oportunidade comercial que vale a pena explorar.</p><button class="button button--light" id="start">Começar</button></section>
+<section id="intro" class="step on"><p class="eyebrow">≈ 2 minutos · 8 perguntas · gratuito</p><h1 class="title">O QUE O TEU NEGÓCIO ESTÁ A IGNORAR?</h1><p>Talvez haja dinheiro escondido numa parte da experiência que hoje parece apenas rotina. Este diagnóstico não promete receitas mágicas: ajuda-nos a perceber onde existe uma oportunidade comercial que vale a pena explorar.</p><button class="button button--light" id="start">Começar</button></section>
 <section id="questions" class="step"><div class="progress" id="progress"></div><div class="progressbar"><span id="bar"></span></div><div class="q" id="question" tabindex="-1"></div><div class="choices" id="choices"></div></section>
 <section id="result" class="step"><p class="eyebrow">Oportunidade detectada</p><h1 class="title" id="resultTitle" tabindex="-1"></h1><p class="result-copy" id="resultText"></p><div class="result-meta" id="resultMeta"></div><div class="offer"><p class="eyebrow">Próximo passo</p><h2 id="offerTitle"></h2><p id="offerText"></p><a class="button button--light" id="offerCta"></a><div class="offer-options" id="offerOptions"></div></div><button class="restart" id="restart">Refazer o diagnóstico</button></section>
 </div></main>
