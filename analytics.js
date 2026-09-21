@@ -125,6 +125,7 @@
       '.maison-consent-settings:focus-visible{color:#fff;outline:1px solid rgba(199,170,115,.68);outline-offset:4px}',
       '.maison-consent-settings-item{list-style:none}',
       '.home-footer__group nav .maison-consent-settings{font-size:11px}',
+      'footer nav .maison-consent-settings{font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;text-decoration:none!important}',
       '.footer__links .maison-consent-settings{font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit}',
       '.maison-consent-settings--standalone{display:block;width:max-content;max-width:calc(100% - 36px);margin:34px auto 24px;color:rgba(245,241,233,.42);font-size:10px}',
       '@media(max-width:700px){.maison-consent-settings--standalone{margin-top:28px;margin-bottom:20px}}'
@@ -164,6 +165,13 @@
       button.classList.add('footer__link', 'maison-consent-settings--nav');
       item.appendChild(button);
       footerList.appendChild(item);
+      return;
+    }
+
+    const genericFooterNav = document.querySelector('footer nav');
+    if (genericFooterNav) {
+      button.classList.add('maison-consent-settings--nav');
+      genericFooterNav.appendChild(button);
       return;
     }
 
