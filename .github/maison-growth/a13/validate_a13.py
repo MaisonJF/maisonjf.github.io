@@ -17,6 +17,7 @@ def ok(condition, message):
 contract = load("a13-contract.json")
 registry = load("provider-registry.json")
 memory = load("memory-contribution-contract.json")
+permissions = load("a13-permissions.json")
 
 ok(contract["contract_version"] == "A13.1", "wrong contract version")
 ok(contract["mode"] == "repository_ready_runtime_disabled", "runtime must be disabled")
@@ -30,6 +31,14 @@ ok(all(p["runtime_enabled"] is False for p in registry["providers"]), "provider 
 ok(all(p["private_memory_access"] is False for p in registry["providers"]), "private memory access forbidden")
 ok(memory["required_values"]["user_selected_content"] is True, "memory must be user selected")
 ok(memory["required_values"]["revocable"] is True, "memory contribution must be revocable")
+ok(permissions["default"] == "deny", "permissions must deny by default")
+for forbidden in [
+    "repository.write","public_site.write","private_memory.read",
+    "hidden_account_context.read","credential.read","direct_pii.persist",
+    "oracle.content.read","price.write","checkout.write","catalogue.write",
+    "permissions.write"
+]:
+    ok(forbidden in permissions["forbidden"], f"missing deny: {forbidden}")
 
 result = subprocess.run(
     [sys.executable, "-m", "unittest", "test_a13.py", "-v"],
