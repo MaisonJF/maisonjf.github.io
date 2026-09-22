@@ -496,3 +496,55 @@ textarea,
 a.territory-offer,a.product-digital__card,a.related-card,a.journey-card,a.offer-card,a.gift-card,a.catalogue-card{background:var(--maison-card)!important;color:#f3efe7!important;border-color:var(--maison-card-line)!important;box-shadow:none!important}
 a.territory-offer:hover,a.product-digital__card:hover,a.related-card:hover,a.journey-card:hover,a.offer-card:hover,a.gift-card:hover,a.catalogue-card:hover{background:var(--maison-card-hover)!important;border-color:var(--maison-card-line-hover)!important}
 .product-grid .price,.catalogue-card__price,.gift-card .price,.related-card .price,.journey-card .price{display:none!important}
+
+/* MAISON JF® — FINAL PALETTE + STRUCTURE LOCK · 2026-09-22 */
+:root{
+  --maison-noir:#080808;
+  --maison-ivory:#f1eadf;
+  --maison-gold:#d2b36f;
+  --maison-gold-light:#e4ca90;
+  --maison-gold-deep:#a17d3f;
+  --maison-muted:#b9afa1;
+  --ambre:var(--maison-gold);
+  --dourado:var(--maison-gold);
+  --texto-primario:var(--maison-ivory);
+  --texto-secundario:var(--maison-muted);
+}
+.detail-page,.farol-page{background:var(--maison-noir)}
+.detail-eyebrow,.detail-kicker,.farol__label,.footer__column-title{color:var(--maison-gold)!important}
+.detail-title,.farol__title,.footer--modern .footer__logo{color:var(--maison-ivory)!important}
+.detail-lead,.farol__subtitle{color:var(--maison-muted)!important}
+.footer--modern .footer__column-title::after{
+  content:"";
+  display:block;
+  width:28px;
+  height:1px;
+  margin-top:9px;
+  background:var(--maison-gold);
+  opacity:.72
+}
+.footer--modern .footer__tagline .footer__gold{color:var(--maison-gold)!important}
+.footer--modern .footer__link:hover{color:var(--maison-gold)!important}
+
+/* Farol: sem espaço fantasma antes do footer. */
+.farol-page .farol{
+  padding-top:clamp(5.5rem,7vw,7rem)!important;
+  padding-bottom:clamp(4rem,5vw,5rem)!important;
+}
+.farol-page .farol__header{
+  margin-bottom:clamp(2.5rem,4vw,4rem)!important;
+}
+.farol-page .farol__disclaimer{
+  margin-top:clamp(2rem,3vw,2.75rem)!important;
+}
+.farol-page main > section[hidden],
+.farol-page .detail-section[hidden],
+.farol-page .section-bridge[hidden]{
+  display:none!important;
+}
+@media(max-width:768px){
+  .farol-page .farol{
+    padding-top:4.5rem!important;
+    padding-bottom:3.5rem!important;
+  }
+}
