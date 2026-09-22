@@ -43,9 +43,7 @@ Não devem ser inventados ingredientes, benefícios, disponibilidade, stock, tam
 
 ## Serviços
 Consultas e orientação:
-- Tarot, uma pergunta — 17 €
-- Tarot, uma consulta — 35 €
-- Tarot, aprofundar — 70 €
+- Consulta de Tarot — 35 €
 - Por escrito, breve — 25 €
 - Por escrito, aprofundada — 45 €
 - Escuta Orientada — 60 €
