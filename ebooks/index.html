@@ -13,6 +13,22 @@
 .poster-library{margin-top:100px;padding-top:70px;border-top:1px solid var(--line)}.poster-library__head{max-width:760px}.poster-library__lead{max-width:560px;margin:14px 0 0;color:#aaa39a;font-size:1rem}.poster-library__head h2{font:400 clamp(42px,5vw,62px)/.94 var(--serif);margin:.18em 0}.poster-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:38px;max-width:920px}.poster-card{margin:0;min-width:0}.poster-card img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;background:#0a0a0a;border:1px solid var(--line);image-rendering:auto}.poster-card figcaption{display:none}
 @media(min-width:901px){.poster-grid{width:100%;max-width:1280px;gap:clamp(22px,1.7vw,28px)}.poster-card img{image-rendering:auto;-webkit-font-smoothing:antialiased}}@media(max-width:900px){.poster-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:720px}}@media(max-width:760px){.ebooks{padding-top:115px}.ebook-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 12px}.ebook-card h2{font-size:21px}.poster-library{margin-top:76px;padding-top:58px}.poster-grid{gap:18px}}
 @media(max-width:440px){.ebook-grid{grid-template-columns:1fr}.ebook-card{max-width:320px}.poster-grid{grid-template-columns:1fr;max-width:330px}.poster-library__head h2{font-size:44px}}
+
+/* Poster viewer: preserves the gallery layout at every breakpoint. */
+.poster-open{display:block;cursor:zoom-in}
+.poster-open:focus-visible{outline:2px solid var(--maison-gold,#d2b36f);outline-offset:5px}
+.poster-viewer{position:fixed;inset:0;width:100%;height:100%;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(8,8,8,.98);color:#f1eadf}
+.poster-viewer::backdrop{background:rgba(0,0,0,.85)}
+.poster-viewer[open]{display:flex;flex-direction:column}
+.poster-viewer__bar{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));border-bottom:1px solid #494238}
+.poster-viewer__title{flex:1;margin:0;font:400 16px/1.3 var(--sans,sans-serif);min-width:120px}
+.poster-viewer button{min-height:44px;padding:8px 14px;border:1px solid #d2b36f;background:#080808;color:#f1eadf;font:inherit;cursor:pointer}
+.poster-viewer button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.poster-viewer__stage{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:16px}
+.poster-viewer__canvas{display:flex;align-items:center;justify-content:center;min-width:100%;min-height:100%;width:100%;height:100%}
+.poster-viewer__image{display:block;flex-shrink:0;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in}
+.poster-viewer.is-zoomed .poster-viewer__canvas{width:max-content;height:auto}
+.poster-viewer.is-zoomed .poster-viewer__image{width:1024px;height:1536px;max-width:none;max-height:none;cursor:zoom-out}
 </style>
 </head>
 <body>
@@ -24,14 +40,72 @@
 <section class="poster-library" aria-labelledby="posters-title">
   <div class="poster-library__head"><p class="eyebrow">Inéditos</p><h2 id="posters-title">Universos por revelar.</h2><p class="poster-library__lead">Já escritos. Ainda não publicados.</p></div>
   <div class="poster-grid">
-    <figure class="poster-card"><img src="../images/ebooks/posters/virgulas-do-destino.webp?v=20260922-lossless-final" width="1024" height="1536" alt="Poster Vírgulas do Destino" loading="lazy" decoding="async"><figcaption>Vírgulas do Destino</figcaption></figure>
-    <figure class="poster-card"><img src="../images/ebooks/posters/sombras-da-luz.webp?v=20260922-lossless-final" width="1024" height="1536" alt="Poster Sombras da Luz" loading="lazy" decoding="async"><figcaption>Sombras da Luz</figcaption></figure>
-    <figure class="poster-card"><img src="../images/ebooks/posters/escrito-nas-entrelinhas.webp?v=20260922-lossless-final" width="1024" height="1536" alt="Poster Escrito nas Entrelinhas" loading="lazy" decoding="async"><figcaption>Escrito nas Entrelinhas</figcaption></figure>
-    <figure class="poster-card"><img src="../images/ebooks/posters/sombras-da-alma.webp?v=20260922-lossless-final" width="1024" height="1536" alt="Poster Sombras da Alma" loading="lazy" decoding="async"><figcaption>Sombras da Alma</figcaption></figure>
+    <figure class="poster-card"><a class="poster-open" href="../images/ebooks/posters/virgulas-do-destino.webp?v=20260922-lossless-final" aria-haspopup="dialog" aria-label="Ampliar Vírgulas do Destino"><img src="../images/ebooks/posters/virgulas-do-destino.webp?v=20260922-lossless-final" width="1024" height="1536" alt="Poster Vírgulas do Destino" loading="lazy" decoding="async"></a><figcaption>Vírgulas do Destino</figcaption></figure>
+    <figure class="poster-card"><a class="poster-open" href="../images/ebooks/posters/sombras-da-luz.webp?v=20260922-lossless-final" aria-haspopup="dialog" aria-label="Ampliar Sombras da Luz"><img src="../images/ebooks/posters/sombras-da-luz.webp?v=20260922-lossless-final" width="1024" height="1536" alt="Poster Sombras da Luz" loading="lazy" decoding="async"></a><figcaption>Sombras da Luz</figcaption></figure>
+    <figure class="poster-card"><a class="poster-open" href="../images/ebooks/posters/escrito-nas-entrelinhas.webp?v=20260922-lossless-final" aria-haspopup="dialog" aria-label="Ampliar Escrito nas Entrelinhas"><img src="../images/ebooks/posters/escrito-nas-entrelinhas.webp?v=20260922-lossless-final" width="1024" height="1536" alt="Poster Escrito nas Entrelinhas" loading="lazy" decoding="async"></a><figcaption>Escrito nas Entrelinhas</figcaption></figure>
+    <figure class="poster-card"><a class="poster-open" href="../images/ebooks/posters/sombras-da-alma.webp?v=20260922-lossless-final" aria-haspopup="dialog" aria-label="Ampliar Sombras da Alma"><img src="../images/ebooks/posters/sombras-da-alma.webp?v=20260922-lossless-final" width="1024" height="1536" alt="Poster Sombras da Alma" loading="lazy" decoding="async"></a><figcaption>Sombras da Alma</figcaption></figure>
   </div>
 </section>
 </main>
 <script src="../data/ebooks.js"></script>
 <script>(function(){const published=(window.MAISON_EBOOKS||[]).filter(b=>b.status==='published');function card(book){const el=document.createElement('article');el.className='ebook-card';const link=document.createElement('a');link.href='./'+encodeURIComponent(book.slug)+'/';const cover=document.createElement('div');cover.className='cover';const coverMedia=(book.media||[]).find(m=>m.role==='cover')||(book.media||[])[0];const coverSrc=book.cover||(coverMedia&&coverMedia.src);if(coverSrc){const img=document.createElement('img');img.src=coverSrc;img.alt=(coverMedia&&coverMedia.alt)||('Capa de '+book.title);img.loading='lazy';cover.appendChild(img)}link.appendChild(cover);const title=document.createElement('h2');title.textContent=book.title;const meta=document.createElement('p');meta.className='meta';meta.textContent=book.collection||'';el.append(link,title,meta);const discover=document.createElement('a');discover.className='text-link buy';discover.href='./'+encodeURIComponent(book.slug)+'/';discover.textContent='Descobrir →';el.appendChild(discover);return el}published.forEach(b=>document.getElementById('publishedGrid').appendChild(card(b)))})();</script>
+
+
+<dialog class="poster-viewer" id="poster-viewer" aria-labelledby="poster-viewer-title">
+  <div class="poster-viewer__bar">
+    <h2 class="poster-viewer__title" id="poster-viewer-title">Poster</h2>
+    <button type="button" id="poster-zoom" aria-pressed="false">Ampliar 100%</button>
+    <button type="button" id="poster-close" autofocus aria-label="Fechar poster ampliado">Fechar ×</button>
+  </div>
+  <div class="poster-viewer__stage" tabindex="0" aria-label="Imagem ampliada; use as setas para percorrer">
+    <div class="poster-viewer__canvas"><img class="poster-viewer__image" width="1024" height="1536" alt=""></div>
+  </div>
+</dialog>
+<script>
+(function(){
+  const viewer=document.getElementById('poster-viewer');
+  if(typeof viewer.showModal!=='function')return;
+  const picture=viewer.querySelector('img');
+  const title=document.getElementById('poster-viewer-title');
+  const zoom=document.getElementById('poster-zoom');
+  const close=document.getElementById('poster-close');
+  const stage=viewer.querySelector('.poster-viewer__stage');
+  let opener=null,previousOverflow='';
+  function setZoom(on){
+    viewer.classList.toggle('is-zoomed',on);
+    zoom.setAttribute('aria-pressed',String(on));
+    zoom.textContent=on?'Ajustar ao ecrã':'Ampliar 100%';
+    stage.scrollTo(0,0);
+  }
+  document.querySelectorAll('.poster-open').forEach(function(link){
+    link.addEventListener('click',function(event){
+      if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+      event.preventDefault();
+      opener=link;
+      const thumbnail=link.querySelector('img');
+      picture.src=link.href;
+      picture.alt=thumbnail.alt;
+      title.textContent=thumbnail.alt.replace(/^Poster /,'');
+      setZoom(false);
+      previousOverflow=document.documentElement.style.overflow;
+      viewer.showModal();
+      document.documentElement.style.overflow='hidden';
+      close.focus();
+    });
+  });
+  zoom.addEventListener('click',function(){setZoom(!viewer.classList.contains('is-zoomed'));});
+  picture.addEventListener('click',function(){setZoom(!viewer.classList.contains('is-zoomed'));});
+  close.addEventListener('click',function(){viewer.close();});
+  viewer.addEventListener('click',function(event){
+    if(event.target===stage||event.target.classList.contains('poster-viewer__canvas'))viewer.close();
+  });
+  viewer.addEventListener('close',function(){
+    document.documentElement.style.overflow=previousOverflow;
+    if(opener)opener.focus({preventScroll:true});
+    picture.removeAttribute('src');
+    setZoom(false);
+  });
+})();
+</script>
 
 </body></html>
