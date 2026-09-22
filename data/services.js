@@ -1,6 +1,5 @@
 /* MAISON SERVICE CATALOGUE
-   Public service architecture. Prices shown only where they are defined.
-   Services are grouped by kind on the public page; Presença remains a distinct special service.
+   Service catalogue used by MAISON systems. Some formats are intentionally non-public and may be offered only after human conversation.
 */
 window.MAISON_SERVICES=[
 {slug:'tarot',kind:'consulta',group:'tarot',door:'Tarot',name:'Consulta de Tarot',price:'35 €',amount:3500,description:'Uma consulta para olhar para a tua pergunta com contexto e sem ruído.',limits:'Não decide por ti nem transforma possibilidades em certezas.',media:[],cta:'Quero olhar para isto',next:{slug:'acompanhamento',label:'Se uma consulta não chegar, continuar em Acompanhamento'}},
