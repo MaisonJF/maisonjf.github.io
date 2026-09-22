@@ -20,6 +20,10 @@ async function jsonFetch(url, options, timeoutMs = 45000) {
   }
 }
 
+function enabled(value) {
+  return String(value ?? '').toLowerCase() === 'true';
+}
+
 function openAIText(data) {
   if (typeof data.output_text === 'string') return data.output_text;
   const parts = [];
@@ -30,6 +34,28 @@ function openAIText(data) {
     }
   }
   return parts.join('\n');
+}
+
+export async function callCloudflareWorkersAI(env, prompt) {
+  if (!env.AI || !env.WORKERS_AI_MODEL) throw new Error('cloudflare_workers_ai_not_configured');
+  const data = await env.AI.run(env.WORKERS_AI_MODEL, {
+    prompt,
+    max_tokens: 1200
+  });
+  const text =
+    (typeof data === 'string' && data) ||
+    (typeof data?.response === 'string' && data.response) ||
+    (typeof data?.result?.response === 'string' && data.result.response) ||
+    '';
+  return {
+    providerId: 'cloudflare_workers_ai',
+    modelId: env.WORKERS_AI_MODEL,
+    sourceClass: 'ai_api',
+    text,
+    citations: [],
+    requestId: null,
+    usage: data?.usage ?? null
+  };
 }
 
 export async function callOpenAI(env, prompt) {
@@ -128,6 +154,7 @@ export async function callAnthropic(env, prompt) {
 }
 
 export const PROVIDERS = {
+  cloudflare_workers_ai: callCloudflareWorkersAI,
   openai: callOpenAI,
   google_gemini: callGemini,
   perplexity: callPerplexity,
@@ -136,9 +163,10 @@ export const PROVIDERS = {
 
 export function configuredProviders(env) {
   const providers = [];
-  if (env.OPENAI_API_KEY && env.OPENAI_MODEL) providers.push('openai');
-  if (env.GEMINI_API_KEY && env.GEMINI_MODEL) providers.push('google_gemini');
-  if (env.PERPLEXITY_API_KEY) providers.push('perplexity');
-  if (env.ANTHROPIC_API_KEY && env.ANTHROPIC_MODEL) providers.push('anthropic');
+  if (env.AI && env.WORKERS_AI_MODEL) providers.push('cloudflare_workers_ai');
+  if (enabled(env.OPENAI_ENABLED) && env.OPENAI_API_KEY && env.OPENAI_MODEL) providers.push('openai');
+  if (enabled(env.GEMINI_ENABLED) && env.GEMINI_API_KEY && env.GEMINI_MODEL) providers.push('google_gemini');
+  if (enabled(env.PERPLEXITY_ENABLED) && env.PERPLEXITY_API_KEY) providers.push('perplexity');
+  if (enabled(env.ANTHROPIC_ENABLED) && env.ANTHROPIC_API_KEY && env.ANTHROPIC_MODEL) providers.push('anthropic');
   return providers;
 }
