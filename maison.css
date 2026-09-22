@@ -3018,3 +3018,56 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--maison-gold);outlin
 .home-footer__brand strong{color:var(--maison-ivory)}
 .home-footer__group nav a{color:#aaa39a}
 .home-footer__group nav a:hover{color:var(--maison-gold)}
+
+/* MAISON JF® — AUTHORITATIVE PALETTE · 2026-09-22 */
+:root{
+  --maison-noir:#080808;
+  --maison-ivory:#f1eadf;
+  --maison-gold:#d2b36f;
+  --maison-gold-light:#e4ca90;
+  --maison-gold-deep:#a17d3f;
+  --maison-muted:#b9afa1;
+  --ak-accent:var(--maison-gold);
+  --ambre:var(--maison-gold);
+  --dourado:var(--maison-gold);
+}
+body{background:var(--maison-noir);color:var(--maison-ivory)}
+::selection{background:var(--maison-gold);color:var(--maison-noir)}
+.brand{color:var(--maison-ivory)}
+.eyebrow,.detail-eyebrow,.detail-kicker,.catalogue-card__eyebrow,.service-card__eyebrow,
+.footer__column-title,.home-footer__group>span,.journey-card small,.offer-card small,
+.related-card small,.territory small,.product__body small,.product-digital__card small,
+.gift-card small,.pro-card small,.presence-card small,.service-door small,.consultation-door small,
+.territory-offer small,.product-meta-links a,.service-family__summary>span,
+.consultation-other summary,.presence-details summary,.door--editorial .door__copy span,
+.door--editorial .door__copy b,.press-fact small,.press-topic span,.steps small,.result-meta span,
+.vpc-kicker,.vpc-result__label,.vpc-progress__meta,.vpc-affinity__head,.vpc-offer small,
+.progress,.restart{color:var(--maison-gold)!important}
+.text-link{color:var(--maison-gold)}
+.text-link:hover{color:var(--maison-ivory)}
+.site-header nav a,footer a{transition:color .2s ease,border-color .2s ease}
+.site-header nav a:hover,footer a:hover,.footer__link:hover{color:var(--maison-gold)!important}
+.button,.btn,.cta{border-color:rgba(210,179,111,.58)}
+.button:hover,.btn:hover,.cta:hover{border-color:var(--maison-gold)}
+.button--light,.btn--primary,.pdi-buy{
+  background:var(--maison-ivory)!important;
+  color:var(--maison-noir)!important;
+  border-color:var(--maison-ivory)!important
+}
+.button--light:hover,.btn--primary:hover,.pdi-buy:hover{
+  box-shadow:inset 0 0 0 1px var(--maison-gold);
+  border-color:var(--maison-gold)!important
+}
+.journey-card:hover,.offer-card:hover,.related-card:hover,.route-options a:hover,.territory:hover,
+.product-digital__card:hover,.gift-card:hover,.pro-card:hover,.presence-card:hover{
+  border-color:rgba(210,179,111,.58)!important
+}
+.home-footer__brand p .home-footer__gold{color:var(--maison-gold)!important}
+.home-footer__group>span::after,.footer__column-title::after{
+  background:var(--maison-gold)
+}
+.maison-consent{border-color:rgba(210,179,111,.55);background:rgba(8,8,8,.97);color:var(--maison-ivory)}
+.maison-consent button{border-color:var(--maison-gold);color:var(--maison-ivory)}
+.maison-consent button[data-consent="granted"]{background:var(--maison-gold);color:var(--maison-noir)}
+.maison-consent-settings{color:var(--maison-gold)}
+a:focus-visible,button:focus-visible{outline:1px solid var(--maison-gold)!important;outline-offset:4px!important}
