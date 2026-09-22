@@ -1,0 +1,113 @@
+{
+  "version": "2026-09-22.1",
+  "status": "active",
+  "goal": {
+    "paying_clients": 10,
+    "paid_ads": false,
+    "initial_cash_budget_eur": 0,
+    "max_monthly_cash_budget_eur_before_evidence": 10
+  },
+  "counting_rule": "client_counts_after_paid_transaction_or_confirmed_paid_booking",
+  "primary_entry_offers": [
+    {
+      "slug": "tarot-expresso",
+      "price_eur": 17,
+      "role": "lowest_friction_live_entry"
+    },
+    {
+      "slug": "tarot",
+      "price_eur": 35,
+      "role": "standard_consultation_entry"
+    },
+    {
+      "slug": "consulta-escrita-breve",
+      "price_eur": 25,
+      "role": "asynchronous_entry"
+    },
+    {
+      "slug": "physical-products",
+      "price_eur": null,
+      "role": "search_and_occasion_led_entry"
+    }
+  ],
+  "lanes": [
+    {
+      "id": "search",
+      "cash_cost_target_eur": 0,
+      "channels": [
+        "organic-search",
+        "google-free-product-surfaces",
+        "google-business-if-eligible"
+      ]
+    },
+    {
+      "id": "social",
+      "cash_cost_target_eur": 0,
+      "channels": [
+        "instagram",
+        "tiktok",
+        "short-form-content"
+      ]
+    },
+    {
+      "id": "partnerships",
+      "cash_cost_target_eur": 0,
+      "channels": [
+        "local-partners",
+        "small-creators",
+        "events",
+        "professional-referrals"
+      ]
+    },
+    {
+      "id": "warm-network",
+      "cash_cost_target_eur": 0,
+      "channels": [
+        "past-clients",
+        "past-enquiries",
+        "engaged-followers",
+        "professional-contacts"
+      ]
+    }
+  ],
+  "demand_hunter_fields": [
+    "pain_language",
+    "active_search_language",
+    "intent_class",
+    "urgency_without_manipulation",
+    "existing_offer_match",
+    "missing_offer_gap",
+    "source_independence",
+    "acquisition_channel",
+    "recommended_destination",
+    "confidence"
+  ],
+  "daily_actions": {
+    "social_assets": 1,
+    "high_intent_destination_improvements": 1,
+    "thoughtful_outreach_min": 2,
+    "thoughtful_outreach_max": 3,
+    "previous_day_event_review": true
+  },
+  "review_days": [
+    7,
+    14
+  ],
+  "metrics": [
+    "qualified_visits",
+    "service_or_product_cta_clicks",
+    "contact_starts",
+    "paid_clients",
+    "revenue",
+    "cash_acquisition_cost",
+    "human_effort",
+    "repeat_purchase"
+  ],
+  "prohibited_now": [
+    "bulk_dm_automation",
+    "broad_paid_ads",
+    "continuous_paid_ai_background",
+    "fake_urgency",
+    "vanity_metrics_as_primary_goal"
+  ]
+}
