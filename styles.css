@@ -12,7 +12,7 @@
   --carvao: #1c1c1c;
   --grafite: #2a2a2a;
 
-  --marfim: #f0ebe3;
+  --marfim: #f1eadf;
   --marfim-suave: #e5ddd2;
   --marfim-escuro: #b8a994;
   --marfim-dim: #7a6e5e;
@@ -22,8 +22,13 @@
   --ambre-claro: #d4b87a;
   --ambre-glow: rgba(196, 162, 101, 0.15);
 
-  --dourado: #c9a84c;
-  --dourado-suave: #b8943f;
+  /* Identidade cromática MAISON JF® */
+  --maison-noir: var(--noite);
+  --maison-ivory: var(--marfim);
+  --maison-gold: var(--ambre);
+
+  --dourado: var(--ambre);
+  --dourado-suave: #a3834a;
 
   --esmeralda: #0d3d2e;
   --bordeaux: #3d0d1f;
@@ -2969,3 +2974,8 @@ button:focus-visible{
 
 /* No decorative sequence numbers on homepage doors. */
 .door--editorial .door__copy span::before{content:none!important;display:none!important}
+
+
+/* MAISON JF® — palette lock 2026-09-22 */
+::selection{background:var(--maison-gold);color:var(--maison-noir)}
+a:focus-visible,button:focus-visible{outline:1px solid var(--maison-gold);outline-offset:4px}
