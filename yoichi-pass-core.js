@@ -2,23 +2,30 @@
 (function () {
   'use strict';
 
-  const page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const routePath = ('/' + window.location.pathname.replace(/^\/+|\/+$/g, '')).toLowerCase();
+  const page = (() => {
+    if (routePath === '/' || routePath === '/index.html') return 'index.html';
+    if (/^\/farol(?:\.html)?$/.test(routePath)) return 'farol.html';
+    if (routePath === '/produtos') return '/produtos/';
+    if (routePath === '/servicos' || routePath === '/servicos.html') return 'servicos.html';
+    if (routePath === '/profissionais' || routePath === '/profissionais.html') return 'profissionais.html';
+    if (routePath === '/portas/companhia' || routePath === '/portas/companhia.html' || routePath === '/companhia.html') return 'companhia.html';
+    return routePath.split('/').filter(Boolean).pop() || 'index.html';
+  })();
   document.body.dataset.yoichiPage = page;
 
   if (!document.querySelector('link[href^="yoichi-pass.css"]')) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = 'yoichi-pass.css?v=20260914-1008';
+    link.href = '/yoichi-pass.css?v=20260922-structure1';
     document.head.appendChild(link);
   }
 
   const navItems = [
-    ['farol.html', 'O Farol'],
+    ['/farol', 'O Farol'],
+    ['/teste/', 'Volta Para Casa'],
     ['/produtos/', 'Produtos'],
-    ['servicos.html', 'Serviços'],
-    ['companhia.html', 'Presença'],
-    ['profissionais.html', 'Profissionais'],
-    ['index.html#joao', 'Sobre']
+    ['/servicos/', 'Serviços']
   ];
 
   const desktopNav = document.querySelector('.header__nav-list');
