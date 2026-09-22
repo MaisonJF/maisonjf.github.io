@@ -10,6 +10,7 @@
   const CONSENT_KEY = 'maison_analytics_consent_v1';
   const ATTRIBUTION_KEY = 'maison_offer_attribution_v1';
   const ATTRIBUTION_TTL = 24 * 60 * 60 * 1000;
+  const ACQUISITION_KEY = 'maison_acquisition_attribution_v1';
   let googleLoaded = false;
   const queuedEvents = Array.isArray(window.__maisonAnalyticsQueue) ? window.__maisonAnalyticsQueue.splice(0) : [];
 
@@ -97,19 +98,61 @@
     }
   }
 
+  function captureAcquisitionAttribution() {
+    if (localStorage.getItem(CONSENT_KEY) !== 'granted') return;
+    try {
+      if (sessionStorage.getItem(ACQUISITION_KEY)) return;
+      const query = new URLSearchParams(window.location.search);
+      let referrerHost = '';
+      try { referrerHost = document.referrer ? new URL(document.referrer).hostname.slice(0,120) : ''; } catch (_) {}
+      const data = {
+        referrer: referrerHost,
+        landing: window.location.pathname.slice(0,180),
+        utm_source: String(query.get('utm_source') || '').slice(0,100),
+        utm_medium: String(query.get('utm_medium') || '').slice(0,100),
+        utm_campaign: String(query.get('utm_campaign') || '').slice(0,140),
+        ts: Date.now()
+      };
+      sessionStorage.setItem(ACQUISITION_KEY, JSON.stringify(data));
+    } catch (_) {}
+  }
+
+  function acquisitionAttribution() {
+    if (localStorage.getItem(CONSENT_KEY) !== 'granted') return {};
+    try {
+      const raw = sessionStorage.getItem(ACQUISITION_KEY);
+      if (!raw) return {};
+      const data = JSON.parse(raw);
+      if (!data || !data.ts || Date.now() - Number(data.ts) > ATTRIBUTION_TTL) return {};
+      return {
+        acquisition_referrer: data.referrer || '',
+        acquisition_landing: data.landing || '',
+        acquisition_utm_source: data.utm_source || '',
+        acquisition_utm_medium: data.utm_medium || '',
+        acquisition_utm_campaign: data.utm_campaign || ''
+      };
+    } catch (_) { return {}; }
+  }
+
+  function getAttribution() {
+    if (localStorage.getItem(CONSENT_KEY) !== 'granted') return {};
+    return { ...offerAttribution(), ...acquisitionAttribution() };
+  }
+
   function track(name, parameters = {}) {
     if (localStorage.getItem(CONSENT_KEY) !== 'granted') return;
     loadGoogle();
-    window.gtag('event', name, { ...offerAttribution(), ...parameters });
+    window.gtag('event', name, { ...getAttribution(), ...parameters });
   }
 
   captureOfferAttribution();
-  window.maisonAnalytics = { track };
+  captureAcquisitionAttribution();
+  window.maisonAnalytics = { track, getAttribution };
   queuedEvents.forEach(([name, parameters]) => track(name, parameters));
 
   function saveConsent(value) {
     localStorage.setItem(CONSENT_KEY, value);
-    if (value === 'granted') loadGoogle();
+    if (value === 'granted') { loadGoogle(); captureAcquisitionAttribution(); }
     else window.gtag('consent', 'update', { analytics_storage: 'denied' });
     document.querySelector('.maison-consent')?.remove();
     showPreferencesControl();
