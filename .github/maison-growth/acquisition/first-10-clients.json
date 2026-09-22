@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-22.1",
+  "version": "2026-09-22.2",
   "status": "active",
   "goal": {
     "paying_clients": 10,
@@ -8,28 +8,13 @@
     "max_monthly_cash_budget_eur_before_evidence": 10
   },
   "counting_rule": "client_counts_after_paid_transaction_or_confirmed_paid_booking",
-  "primary_entry_offers": [
-    {
-      "slug": "tarot-expresso",
-      "price_eur": 17,
-      "role": "lowest_friction_live_entry"
-    },
-    {
-      "slug": "tarot",
-      "price_eur": 35,
-      "role": "standard_consultation_entry"
-    },
-    {
-      "slug": "consulta-escrita-breve",
-      "price_eur": 25,
-      "role": "asynchronous_entry"
-    },
-    {
-      "slug": "physical-products",
-      "price_eur": null,
-      "role": "search_and_occasion_led_entry"
-    }
-  ],
+  "acquisition_architecture": {
+    "fixed_entry_offer_menu": false,
+    "route_from_problem_or_intent": true,
+    "one_context_matched_next_step": true,
+    "generic_catalogue_as_default_destination": false,
+    "volta_para_casa_for_unclear_need": true
+  },
   "lanes": [
     {
       "id": "search",
@@ -75,8 +60,8 @@
     "active_search_language",
     "intent_class",
     "urgency_without_manipulation",
-    "existing_offer_match",
-    "missing_offer_gap",
+    "existing_solution_match",
+    "missing_solution_gap",
     "source_independence",
     "acquisition_channel",
     "recommended_destination",
@@ -95,7 +80,7 @@
   ],
   "metrics": [
     "qualified_visits",
-    "service_or_product_cta_clicks",
+    "relevant_cta_clicks",
     "contact_starts",
     "paid_clients",
     "revenue",
@@ -108,6 +93,8 @@
     "broad_paid_ads",
     "continuous_paid_ai_background",
     "fake_urgency",
+    "fixed_cold_entry_offer_shortlist",
+    "generic_catalogue_as_default_cold_destination",
     "vanity_metrics_as_primary_goal"
   ]
 }
