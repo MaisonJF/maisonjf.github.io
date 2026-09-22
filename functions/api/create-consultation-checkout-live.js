@@ -1,7 +1,5 @@
 const SERVICES={
-  'tarot-expresso':{name:'Tarot · Uma pergunta',amount:1700},
   'tarot':{name:'Tarot · Uma consulta',amount:3500},
-  'tarot-terapeutico':{name:'Tarot · Aprofundar',amount:7000},
   'consulta-escrita-breve':{name:'Por escrito · Breve',amount:2500},
   'consulta-escrita-aprofundada':{name:'Por escrito · Aprofundada',amount:4500},
   'escuta':{name:'Escuta Orientada',amount:6000}

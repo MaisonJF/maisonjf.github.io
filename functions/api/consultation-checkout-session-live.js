@@ -1,7 +1,5 @@
 const SERVICES={
-  'tarot-expresso':'Tarot · Uma pergunta',
   'tarot':'Tarot · Uma consulta',
-  'tarot-terapeutico':'Tarot · Aprofundar',
   'consulta-escrita-breve':'Por escrito · Breve',
   'consulta-escrita-aprofundada':'Por escrito · Aprofundada',
   'escuta':'Escuta Orientada'
