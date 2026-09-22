@@ -21,7 +21,7 @@
     const link = document.createElement('link');
     link.id = 'maison-yoichi-unified';
     link.rel = 'stylesheet';
-    link.href = 'yoichi-pass.css?v=20260914-unified-2238';
+    link.href = '/yoichi-pass.css?v=20260922-structure1';
     document.head.appendChild(link);
   }
 
@@ -32,7 +32,7 @@
     const link = document.createElement('link');
     link.id = 'maison-home-images-final';
     link.rel = 'stylesheet';
-    link.href = 'home-images.css?v=20260914-final-authority-2238';
+    link.href = '/home-images.css?v=20260922-structure1';
     document.head.appendChild(link);
   }
 
@@ -60,11 +60,11 @@
 
   loadUnifiedEditorialPass();
 
-  loadScript('yoichi-pass-core.js?v=20260914-unified-2238', 'yoichi-pass-core.js')
+  loadScript('/yoichi-pass-core.js?v=20260922-structure1', 'yoichi-pass-core.js')
     .then(() => {
       loadFinalImageAuthority();
       ensureOracleEntry();
-      return loadScript('legal-pass.js?v=20260911-envios', 'legal-pass.js');
+      return loadScript('/legal-pass.js?v=20260922-structure1', 'legal-pass.js');
     })
-    .then(() => loadScript('commerce-pass.js?v=20260912-products', 'commerce-pass.js'));
+    .then(() => loadScript('/commerce-pass.js?v=20260922-structure1', 'commerce-pass.js'));
 })();
