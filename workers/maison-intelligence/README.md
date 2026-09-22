@@ -6,7 +6,7 @@ It is deliberately **off by default**. Repository code alone cannot spend money 
 
 ## Runtime flow
 
-`Cloudflare Cron → Queue → provider adapters → A13 privacy/provenance/echo control → A1-compatible event + A13 observation → external_intelligence_brain_feed`
+`Cloudflare Cron → Queue → provider adapters → A13 privacy/provenance/echo control → A1 event + A13 observation + A4 map_evidence → A5 Brain`
 
 The public Maison site does not depend on this Worker.
 
@@ -32,7 +32,7 @@ A provider is skipped unless its secret and required model setting are configure
 - three retries with delay;
 - dead-letter queue;
 - direct contact details are redacted before persistence;
-- external output is stored as untrusted observation data only;
+- external output is stored as untrusted observation/evidence data only;
 - no external model has repository, publishing, checkout, price, catalogue or permission authority.
 
 ## 1. Create Cloudflare resources
@@ -51,7 +51,7 @@ Copy `wrangler.template.jsonc` to `wrangler.jsonc` and replace `REPLACE_WITH_D1_
 
 ## 2. Apply Growth migrations
 
-The dedicated Growth database must receive the existing migrations in order, then A13:
+**Use the helper below only for a fresh, dedicated `maison-growth` database.** It applies the complete Growth schema from A1 through A13 and is not an idempotent upgrade script for an already-initialized database.
 
 ```bash
 bash scripts/apply-growth-migrations.sh maison-growth
@@ -61,7 +61,7 @@ The A13 migration intentionally leaves its database kill switch ON.
 
 ## 3. Configure provider secrets
 
-Configure any subset. Do not commit values to GitHub.
+Configure any subset. Do not commit values to GitHub and do not place them in ordinary Worker vars.
 
 Secret names:
 
@@ -84,7 +84,7 @@ Then deploy while both kill switches are still ON.
 
 ## 5. Activate in observe-only mode
 
-After verifying bindings, Queue, D1 and provider secrets, change only the controlled runtime flags:
+After verifying bindings, Queue, D1 and provider secrets:
 
 1. set `KILL_SWITCH=false` and `WORKER_ENABLED=true` in the Worker environment/config;
 2. deploy;
@@ -117,6 +117,8 @@ The initial schedule runs daily at 04:17 UTC. With the default two territories a
 When a provider reports cost metadata, A13 records it in `external_intelligence_daily_usage.reported_cost_usd`. Call caps remain authoritative because not every provider reports cost in the same way.
 
 ## Brain feed
+
+Every accepted sensor response creates a privacy-reviewed `map_evidence` fact for A5 as well as the richer A13 provenance record.
 
 `external_intelligence_brain_feed` summarizes observations by territory/day and, critically, counts **independent canonical evidence roots** separately from provider count. Ten models repeating one URL therefore remain one evidence root.
 
