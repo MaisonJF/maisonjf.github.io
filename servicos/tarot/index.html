@@ -18,24 +18,27 @@
 .tarot-hero h1{max-width:9ch;margin:.2em 0 .22em;font:500 clamp(72px,11vw,154px)/.82 var(--serif);letter-spacing:-.055em}
 .tarot-hero__lead{max-width:650px;margin:0;color:#bbb2a6;font-size:clamp(17px,1.6vw,21px);line-height:1.65}
 .tarot-offer{padding:clamp(85px,10vw,145px) 0}
-.tarot-offer__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(50px,8vw,120px);align-items:start}
+.tarot-offer__grid{display:block}
 .tarot-offer__title small{display:block;margin-bottom:18px;color:#9e8b67;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
-.tarot-offer__title h2{max-width:9ch;margin:0;font:500 clamp(52px,6.8vw,94px)/.9 var(--serif);letter-spacing:-.04em}
-.tarot-offer__body{max-width:520px;padding-top:12px}
-.tarot-offer__body p{color:#aaa299;font-size:16px;line-height:1.75}
-.tarot-price{margin:34px 0 26px;font:400 clamp(42px,5vw,64px)/1 var(--serif)}
-.tarot-buy{min-height:52px;padding:14px 22px;border:1px solid var(--maison-ivory);background:var(--maison-ivory);color:#080808;cursor:pointer;font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase}
-.tarot-buy:disabled{opacity:.55;cursor:wait}.tarot-offer__body>.text-link{display:inline-block;margin-left:20px;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
-.tarot-status{min-height:24px;margin-top:16px;color:#9f978d;font-size:13px}
-.tarot-rule{margin-top:42px;padding-top:24px;border-top:1px solid var(--line);color:#777068!important;font-size:13px!important}
+.tarot-offer__title h2{max-width:none;margin:0;font:500 clamp(48px,5.8vw,82px)/.92 var(--serif);letter-spacing:-.038em;white-space:nowrap}
+.tarot-offer__body{display:grid;grid-template-columns:auto minmax(220px,.72fr) minmax(260px,1fr) minmax(280px,1fr);gap:clamp(28px,4vw,64px);align-items:start;margin-top:48px;padding-top:30px;border-top:1px solid var(--line);max-width:none}
+.tarot-offer__body>p{margin:0;color:#aaa299;font-size:15px;line-height:1.7}.tarot-description{max-width:360px}
+.tarot-price{margin:0;font:400 clamp(44px,5vw,66px)/1 var(--serif);white-space:nowrap}
+.tarot-actions{display:flex;flex-direction:column;align-items:flex-start;gap:18px}.tarot-buy{min-height:52px;padding:14px 22px;border:1px solid var(--maison-ivory);background:var(--maison-ivory);color:#080808;cursor:pointer;font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.tarot-buy:disabled{opacity:.55;cursor:wait}.tarot-actions>.text-link{font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.tarot-status{display:none}
+.tarot-rule{padding-left:clamp(22px,2.2vw,36px);border-left:1px solid var(--line);color:#777068!important;font-size:12px!important;line-height:1.75!important}
 .tarot-footer{padding:50px 0 64px;border-top:1px solid var(--line)}
 .tarot-footer .shell{display:flex;justify-content:space-between;gap:24px}
 @media(max-width:760px){
   .tarot-hero{min-height:76svh}
   .tarot-hero h1{font-size:clamp(60px,18vw,86px)}
-  .tarot-offer__grid{grid-template-columns:1fr;gap:34px}
+  .tarot-offer__title h2{white-space:normal}
+  .tarot-offer__body{grid-template-columns:1fr 1fr;gap:30px 42px}
+  .tarot-rule{padding-left:0;border-left:0}
   .tarot-footer .shell{flex-direction:column}
 }
+@media(max-width:560px){.tarot-offer__body{grid-template-columns:1fr;margin-top:34px;padding-top:24px}}
 </style>
 </head>
 <body class="tarot-page">
@@ -66,10 +69,13 @@
         <h2>Uma escolha. Sem ruído.</h2>
       </div>
       <div class="tarot-offer__body">
-        <p>Uma consulta para trazer contexto à tua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.</p>
         <div class="tarot-price">35 €</div>
-        <button class="tarot-buy" type="button" data-buy-service="tarot">Marcar consulta →</button> <a class="text-link" target="_blank" rel="noopener noreferrer" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Consulta%20de%20Tarot.">Tenho uma dúvida</a>
+        <div class="tarot-actions">
+          <button class="tarot-buy" type="button" data-buy-service="tarot">Marcar consulta →</button>
+          <a class="text-link" target="_blank" rel="noopener noreferrer" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Consulta%20de%20Tarot.">Tenho uma dúvida</a>
+        </div>
         <p id="checkout-status" class="tarot-status" aria-live="polite"></p>
+        <p class="tarot-description">Uma consulta para trazer contexto à tua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.</p>
         <p class="tarot-rule">O Tarot é usado como ferramenta de reflexão e orientação. Não decide por ti, não garante acontecimentos futuros e não substitui cuidados de saúde mental ou acompanhamento clínico quando necessários.</p>
       </div>
     </div>
