@@ -100,7 +100,7 @@
   checkout.disabled=true;checkout.textContent='A abrir pagamento…';status.textContent='';
   window.maisonAnalytics?.track?.('physical_cart_checkout_intent',{items:cart,subtotal:subtotal(),shipping_zone:z,page_path:location.pathname});
   try{
-   const response=await fetch('/api/create-product-checkout-live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({items:cart,shipping_zone:z})});
+   const response=await fetch('/api/create-product-checkout-live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({items:cart,shipping_zone:z,attribution:window.maisonAnalytics?.getAttribution?.()||{}})});
    const data=await response.json().catch(()=>({}));
    if(!response.ok||!data.url)throw new Error(data.error||'Não foi possível abrir o checkout.');
    location.href=data.url;
