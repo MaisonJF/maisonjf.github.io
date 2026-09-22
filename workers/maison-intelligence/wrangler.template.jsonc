@@ -1,0 +1,49 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "maison-intelligence",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-22",
+
+  "triggers": {
+    "crons": ["17 4 * * *"]
+  },
+
+  "vars": {
+    "WORKER_ENABLED": "false",
+    "KILL_SWITCH": "true",
+    "PROMPTS_PER_RUN": "2",
+    "MAX_DAILY_CALLS_PER_PROVIDER": "2",
+    "OPENAI_MODEL": "gpt-5.5",
+    "GEMINI_MODEL": "gemini-2.5-flash",
+    "PERPLEXITY_MODEL": "sonar",
+    "ANTHROPIC_MODEL": ""
+  },
+
+  "d1_databases": [
+    {
+      "binding": "GROWTH_DB",
+      "database_name": "maison-growth",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+    }
+  ],
+
+  "queues": {
+    "producers": [
+      {
+        "binding": "INTELLIGENCE_QUEUE",
+        "queue": "maison-intelligence"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "maison-intelligence",
+        "max_batch_size": 2,
+        "max_batch_timeout": 5,
+        "max_retries": 3,
+        "retry_delay": 300,
+        "dead_letter_queue": "maison-intelligence-dlq",
+        "max_concurrency": 1
+      }
+    ]
+  }
+}
