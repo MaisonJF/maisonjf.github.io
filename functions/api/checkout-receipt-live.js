@@ -1,3 +1,4 @@
+import { recordStripePurchase } from '../_lib/commerce-events.js';
 export async function onRequestPost({ request, env }) {
   try {
     if (!env.STRIPE_LIVE_SECRET_KEY) {
@@ -39,6 +40,14 @@ export async function onRequestPost({ request, env }) {
 
     if (!email || !paymentIntentId) {
       return json({ error: 'Faltam dados para preparar o recibo.' }, 422);
+    }
+
+    // A compra confirmada entra no Brain de forma idempotente, sem depender do GA,
+    // do consentimento de analytics ou de uma segunda visita do cliente.
+    try {
+      if (env?.MAISON_BRAIN_DB) await recordStripePurchase(env.MAISON_BRAIN_DB, session);
+    } catch (_) {
+      // O recibo não deve falhar só porque a camada de aprendizagem está indisponível.
     }
 
     const paymentResponse = await stripeGet(

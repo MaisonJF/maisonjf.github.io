@@ -1,0 +1,36 @@
+name: Commerce Feeds
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/products.js'
+      - 'images/products/**'
+      - 'scripts/build-commerce-feeds.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-feeds:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate feeds from the Maison catalogue
+        run: node scripts/build-commerce-feeds.mjs
+      - name: Commit generated feeds when needed
+        shell: bash
+        run: |
+          if git diff --quiet -- merchant-feed.xml openai-products.jsonl; then
+            echo "Feeds already current."
+            exit 0
+          fi
+          git config user.name "Maison JF Commerce"
+          git config user.email "maisonjf@proton.me"
+          git add merchant-feed.xml openai-products.jsonl
+          git commit -m "Update commerce feeds from catalogue"
+          git push

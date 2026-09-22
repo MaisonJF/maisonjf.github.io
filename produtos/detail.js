@@ -21,18 +21,24 @@
   const canonical=document.querySelector('link[rel="canonical"]');
   const productUrl='https://maison-jf.com/produtos/'+encodeURIComponent(p.slug)+'/';
   if(canonical)canonical.href=productUrl;
-  const schema=document.createElement('script');
+  const schema=document.querySelector('[data-product-schema]')||document.createElement('script');
   schema.type='application/ld+json';
-  schema.textContent=JSON.stringify({
+  schema.dataset.productSchema='';
+  const availabilityMap={in_stock:'https://schema.org/InStock',out_of_stock:'https://schema.org/OutOfStock',preorder:'https://schema.org/PreOrder'};
+  const conditionMap={new:'https://schema.org/NewCondition',used:'https://schema.org/UsedCondition',refurbished:'https://schema.org/RefurbishedCondition'};
+  const structured={
     '@context':'https://schema.org',
     '@type':'Product',
     name:p.name+(p.size?' '+p.size:''),
     description:p.description,
     url:productUrl,
+    sku:p.sku||undefined,
     brand:{'@type':'Brand',name:'MAISON JF®'},
-    offers:p.price!=null?{'@type':'Offer',price:Number(p.price).toFixed(2),priceCurrency:p.currency||'EUR',url:productUrl}:undefined
-  });
-  document.head.appendChild(schema);
+    image:p.productImage?[new URL(p.productImage,location.origin).href]:undefined,
+    offers:p.price!=null?{'@type':'Offer',price:Number(p.price).toFixed(2),priceCurrency:p.currency||'EUR',url:productUrl,availability:availabilityMap[p.availability],itemCondition:conditionMap[p.condition]}:undefined
+  };
+  schema.textContent=JSON.stringify(structured);
+  if(!schema.isConnected)document.head.appendChild(schema);
   const media=p.media||[];
   const root=location.pathname.includes('/produtos/'+p.slug+'/')?'../../':'../';
   const hero=media.find(m=>m.role==='hero')||media[0]||null;
