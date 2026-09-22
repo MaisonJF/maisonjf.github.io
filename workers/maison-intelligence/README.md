@@ -1,0 +1,125 @@
+# MAISON JF · External Intelligence Worker
+
+This Worker is the live runtime prepared for A13 External Intelligence Mesh.
+
+It is deliberately **off by default**. Repository code alone cannot spend money or call external AI APIs.
+
+## Runtime flow
+
+`Cloudflare Cron → Queue → provider adapters → A13 privacy/provenance/echo control → A1 event + A13 observation + A4 map_evidence → A5 Brain`
+
+The public Maison site does not depend on this Worker.
+
+## Providers
+
+Adapters are implemented for:
+
+- OpenAI Responses API + Web Search;
+- Google Gemini + Google Search grounding;
+- Perplexity Sonar;
+- Anthropic Messages API (ungrounded sensor unless a later grounded adapter is added).
+
+A provider is skipped unless its secret and required model setting are configured.
+
+## Safety defaults
+
+- environment `WORKER_ENABLED=false`;
+- environment `KILL_SWITCH=true`;
+- database kill switch = ON after migration;
+- two territories per run;
+- maximum two calls per provider per UTC day;
+- queue concurrency = 1;
+- three retries with delay;
+- dead-letter queue;
+- direct contact details are redacted before persistence;
+- external output is stored as untrusted observation/evidence data only;
+- no external model has repository, publishing, checkout, price, catalogue or permission authority.
+
+## 1. Create Cloudflare resources
+
+From this directory:
+
+```bash
+npm install
+npx wrangler login
+npx wrangler d1 create maison-growth
+npx wrangler queues create maison-intelligence
+npx wrangler queues create maison-intelligence-dlq
+```
+
+Copy `wrangler.template.jsonc` to `wrangler.jsonc` and replace `REPLACE_WITH_D1_DATABASE_ID` with the ID returned by Cloudflare.
+
+## 2. Apply Growth migrations
+
+**Use the helper below only for a fresh, dedicated `maison-growth` database.** It applies the complete Growth schema from A1 through A13 and is not an idempotent upgrade script for an already-initialized database.
+
+```bash
+bash scripts/apply-growth-migrations.sh maison-growth
+```
+
+The A13 migration intentionally leaves its database kill switch ON.
+
+## 3. Configure provider secrets
+
+Configure any subset. Do not commit values to GitHub and do not place them in ordinary Worker vars.
+
+Secret names:
+
+- `OPENAI_API_KEY`
+- `GEMINI_API_KEY`
+- `PERPLEXITY_API_KEY`
+- `ANTHROPIC_API_KEY`
+
+Model vars live in `wrangler.jsonc`. Anthropic is intentionally blank in the template so no model is guessed silently.
+
+## 4. Validate before activation
+
+```bash
+npm test
+npm run check
+npx wrangler deploy --dry-run
+```
+
+Then deploy while both kill switches are still ON.
+
+## 5. Activate in observe-only mode
+
+After verifying bindings, Queue, D1 and provider secrets:
+
+1. set `KILL_SWITCH=false` and `WORKER_ENABLED=true` in the Worker environment/config;
+2. deploy;
+3. turn off the database kill switch:
+
+```bash
+npx wrangler d1 execute maison-growth --remote --command \
+  "UPDATE external_intelligence_control SET kill_switch=0, observe_only=1, updated_at=datetime('now'), updated_by='human_activation' WHERE control_id='global';"
+```
+
+The first live mode remains observe-only. It collects and stores evidence; it does not publish.
+
+## 6. Emergency stop
+
+Either switch stops collection:
+
+- set `KILL_SWITCH=true` and deploy; or
+- execute:
+
+```sql
+UPDATE external_intelligence_control
+SET kill_switch=1, updated_at=datetime('now'), updated_by='human_kill_switch'
+WHERE control_id='global';
+```
+
+## Cost discipline
+
+The initial schedule runs daily at 04:17 UTC. With the default two territories and cap of two calls/provider/day, a configured provider can make at most two calls per UTC day. Increase only after inspecting real provider usage.
+
+When a provider reports cost metadata, A13 records it in `external_intelligence_daily_usage.reported_cost_usd`. Call caps remain authoritative because not every provider reports cost in the same way.
+
+## Brain feed
+
+Every accepted sensor response creates a privacy-reviewed `map_evidence` fact for A5 as well as the richer A13 provenance record.
+
+`external_intelligence_brain_feed` summarizes observations by territory/day and, critically, counts **independent canonical evidence roots** separately from provider count. Ten models repeating one URL therefore remain one evidence root.
+
+This is sensor evidence, not automatic truth and not publication permission.

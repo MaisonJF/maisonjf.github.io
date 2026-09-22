@@ -1,0 +1,12 @@
+{
+  "name": "maison-intelligence-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/index.js && node --check src/providers.js && node --check src/core.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
