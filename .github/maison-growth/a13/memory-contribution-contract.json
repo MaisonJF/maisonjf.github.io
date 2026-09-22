@@ -1,0 +1,32 @@
+{
+  "contract_version": "A13.1",
+  "contribution_type": "user_contributed_memory",
+  "principle": "selected_and_shared_by_user_not_fetched_from_private_memory",
+  "required_consent_fields": [
+    "consent_version",
+    "granted_at",
+    "scope",
+    "user_selected_content",
+    "revocable"
+  ],
+  "required_values": {
+    "user_selected_content": true,
+    "revocable": true
+  },
+  "prohibited_ingestion": [
+    "platform_private_memory_without_user_export_or_share",
+    "hidden_account_context",
+    "passwords_or_auth_tokens",
+    "direct_identifiers",
+    "commercial_identity",
+    "paid_oracle_text"
+  ],
+  "storage": {
+    "raw_identity": false,
+    "direct_pii": false,
+    "consent_receipt_hash": true,
+    "contribution_fingerprint": true,
+    "future_use_after_revocation": false
+  },
+  "analysis_goal": "derive de-identified human patterns, language, needs and questions"
+}

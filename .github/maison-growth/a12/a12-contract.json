@@ -18,5 +18,5 @@
   "idempotent_jobs_required": true,
   "locking_required": true,
   "dashboard_v2_read_only": true,
-  "a13_started": false
+  "a13_started": true
 }

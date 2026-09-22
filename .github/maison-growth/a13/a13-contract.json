@@ -1,0 +1,72 @@
+{
+  "contract_version": "A13.1",
+  "module": "external_intelligence_mesh",
+  "mode": "repository_ready_runtime_disabled",
+  "depends_on": [
+    "A0",
+    "A1.1",
+    "A2.1",
+    "A4.1",
+    "A5.1",
+    "A12.1"
+  ],
+  "purpose": "Treat compatible external AI systems, public web sources and explicitly user-contributed memory excerpts as sensors feeding Oceans and Brain.",
+  "pipeline": [
+    "external_sensor",
+    "a13_provenance_privacy_echo_control",
+    "a2_event_collector",
+    "a4_radar",
+    "a5_brain"
+  ],
+  "source_classes": [
+    "ai_api",
+    "ai_web_grounded",
+    "public_web",
+    "user_contributed_memory"
+  ],
+  "hard_boundaries": {
+    "private_memory_scraping": false,
+    "hidden_account_context_access": false,
+    "credential_scraping": false,
+    "direct_pii_persistence": false,
+    "paid_oracle_text": false,
+    "external_output_executes_instructions": false,
+    "external_output_can_change_permissions": false,
+    "external_output_can_publish": false,
+    "repo_write": false,
+    "public_site_write": false
+  },
+  "provenance_required": [
+    "provider_id",
+    "model_id_or_null",
+    "source_class",
+    "retrieved_at",
+    "prompt_fingerprint_or_null",
+    "response_hash",
+    "citations",
+    "grounding_state"
+  ],
+  "evidence_rules": {
+    "cited_root_urls_are_canonicalized": true,
+    "same_root_repeated_by_many_models_counts_once": true,
+    "ungrounded_model_output_independent_evidence_count": 0,
+    "model_count_must_not_be_used_as_source_independence": true
+  },
+  "user_contribution": {
+    "explicit_user_action_required": true,
+    "consent_receipt_required": true,
+    "user_selected_content_only": true,
+    "identity_retained_for_analysis": false,
+    "revocation_stops_future_raw_use": true
+  },
+  "runtime": {
+    "external_network_enabled": false,
+    "production_credentials_present": false,
+    "secrets_in_repository": false,
+    "provider_activation_requires_explicit_review": true,
+    "kill_switch_required": true,
+    "rate_limits_required": true,
+    "budget_caps_required": true,
+    "circuit_breaker_required": true
+  }
+}

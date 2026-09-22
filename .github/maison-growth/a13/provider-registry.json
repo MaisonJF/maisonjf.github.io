@@ -1,0 +1,64 @@
+{
+  "registry_version": "A13.1",
+  "default_runtime_enabled": false,
+  "activation_rule": "explicit_allowlist_after_current_api_terms_security_cost_review",
+  "providers": [
+    {
+      "provider_id": "openai",
+      "source_class": [
+        "ai_api"
+      ],
+      "runtime_enabled": false,
+      "private_memory_access": false,
+      "requires_secret": true
+    },
+    {
+      "provider_id": "anthropic",
+      "source_class": [
+        "ai_api"
+      ],
+      "runtime_enabled": false,
+      "private_memory_access": false,
+      "requires_secret": true
+    },
+    {
+      "provider_id": "google_gemini",
+      "source_class": [
+        "ai_api",
+        "ai_web_grounded"
+      ],
+      "runtime_enabled": false,
+      "private_memory_access": false,
+      "requires_secret": true
+    },
+    {
+      "provider_id": "perplexity",
+      "source_class": [
+        "ai_api",
+        "ai_web_grounded"
+      ],
+      "runtime_enabled": false,
+      "private_memory_access": false,
+      "requires_secret": true
+    },
+    {
+      "provider_id": "public_web",
+      "source_class": [
+        "public_web"
+      ],
+      "runtime_enabled": false,
+      "private_memory_access": false,
+      "requires_secret": false
+    },
+    {
+      "provider_id": "user_contributed_memory",
+      "source_class": [
+        "user_contributed_memory"
+      ],
+      "runtime_enabled": false,
+      "private_memory_access": false,
+      "requires_secret": false,
+      "explicit_consent_required": true
+    }
+  ]
+}
