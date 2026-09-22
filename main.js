@@ -16,7 +16,7 @@
   if (!document.querySelector('link[href="conversion.css"]')) {
     const conversionStyles = document.createElement('link');
     conversionStyles.rel = 'stylesheet';
-    conversionStyles.href = 'conversion.css';
+    conversionStyles.href = '/conversion.css?v=20260922-structure1';
     document.head.appendChild(conversionStyles);
   }
 
@@ -153,6 +153,44 @@
     });
   }
 
+
+  // ============================================================
+  // STRUCTURAL FALLBACKS
+  // ============================================================
+  function collapseEmptyStructuralSections(root = document) {
+    root.querySelectorAll('main > section, .detail-section, .section-bridge').forEach(section => {
+      if (section.hidden || section.dataset.keepEmpty === '1') return;
+      const hasText = section.textContent.replace(/\s+/g, ' ').trim().length > 0;
+      const hasInteractive = Boolean(section.querySelector('a[href],button,input,select,textarea,video,iframe,canvas,svg'));
+      const hasUsableImage = Boolean(section.querySelector('img:not([hidden])'));
+      if (!hasText && !hasInteractive && !hasUsableImage) {
+        section.hidden = true;
+        section.dataset.emptyCollapsed = '1';
+      }
+    });
+  }
+
+  function bindImageFallbacks(root = document) {
+    root.querySelectorAll('img').forEach(img => {
+      if (img.dataset.fallbackBound === '1') return;
+      img.dataset.fallbackBound = '1';
+      img.addEventListener('error', () => {
+        img.hidden = true;
+        img.setAttribute('aria-hidden', 'true');
+        const wrapper = img.closest('.media-slot,.essay-shot,.service-visual,.service-card__media,.product-gallery__item,.home-feature__media');
+        if (wrapper) {
+          const otherMedia = wrapper.querySelector('img:not([hidden]),video,iframe');
+          const meaningfulText = wrapper.textContent.replace(/\s+/g, ' ').trim();
+          if (!otherMedia && !meaningfulText) wrapper.hidden = true;
+        }
+        collapseEmptyStructuralSections();
+      }, { once: true });
+    });
+  }
+
+  bindImageFallbacks();
+  collapseEmptyStructuralSections();
+
   // ============================================================
   // PERFORMANCE BÁSICA
   // ============================================================
@@ -164,7 +202,14 @@
   // ============================================================
   // CAMADA DE CONVERSÃO
   // ============================================================
-  const fileName = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const routePath = ('/' + window.location.pathname.replace(/^\/+|\/+$/g, '')).toLowerCase();
+  const fileName = (() => {
+    if (routePath === '/' || routePath === '/index.html') return 'index.html';
+    if (/^\/farol(?:\.html)?$/.test(routePath)) return 'farol.html';
+    if (/^\/envios(?:\.html)?$/.test(routePath)) return 'envios.html';
+    if (/^\/informacao-legal(?:\.html)?$/.test(routePath)) return 'informacao-legal.html';
+    return routePath.split('/').filter(Boolean).pop() || 'index.html';
+  })();
 
   const pageConfig = {
     'index.html': {
@@ -405,6 +450,6 @@
 (function loadYoichiPass() {
   if (document.querySelector('script[src^="yoichi-pass.js"]')) return;
   const script = document.createElement('script');
-  script.src = 'yoichi-pass.js?v=20260915-unified-live';
+  script.src = '/yoichi-pass.js?v=20260922-structure1';
   document.body.appendChild(script);
 })();
