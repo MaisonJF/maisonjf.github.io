@@ -55,14 +55,27 @@ async function persistObservation(env, task, result) {
   }));
   const eventId = id('evt_');
   const observationId = id('obs_');
+  const evidenceId = id('evd_');
   const observedAt = new Date().toISOString();
   const source = `a13.${result.providerId}`.slice(0, 80);
   const idempotencyKey = task.taskKey.slice(0, 200);
   const groundingState = citations.length ? 'grounded' : 'ungrounded';
+  const strength = citations.length >= 3 ? 80 : citations.length >= 1 ? 60 : 25;
+  const confidenceClass = citations.length >= 2 ? 'high' : citations.length >= 1 ? 'medium' : 'low';
   const metadata = JSON.stringify({
     a13: true, territory_key: task.territoryKey, provider_id: result.providerId,
     model_id: result.modelId, grounding_state: groundingState,
     independent_evidence_roots: citations.length
+  });
+  const evidenceFacts = JSON.stringify({
+    source_kind: 'external_intelligence',
+    territory_key: task.territoryKey,
+    provider_id: result.providerId,
+    model_id: result.modelId,
+    grounding_state: groundingState,
+    independent_evidence_roots: citations.length,
+    normalized_language: safeText,
+    citations
   });
 
   const statements = [
@@ -81,6 +94,14 @@ async function persistObservation(env, task, result) {
       observationId,eventId,task.taskKey,result.providerId,result.modelId ?? null,result.sourceClass,
       task.territoryKey,task.promptFingerprint,responseHash,groundingState,safeText,
       JSON.stringify(citations),JSON.stringify(result.usage ?? {}),result.requestId ?? null,observedAt
+    ),
+    env.GROWTH_DB.prepare(`
+      INSERT INTO map_evidence
+        (evidence_id,source,source_event_id,journey_id,evidence_kind,observed_at,strength,
+         confidence_class,payload_hash,facts_json,created_at)
+      VALUES (?,'system',?,NULL,'demand',?,?,?,?,?,?)
+    `).bind(
+      evidenceId,eventId,observedAt,strength,confidenceClass,payloadHash,evidenceFacts,observedAt
     )
   ];
 
