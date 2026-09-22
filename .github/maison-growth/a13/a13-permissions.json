@@ -1,0 +1,30 @@
+{
+  "permissions_version": "A13.1",
+  "default": "deny",
+  "component": "external_intelligence_mesh",
+  "reads": [
+    "approved_public_sources",
+    "approved_ai_api_responses",
+    "explicit_user_contributions"
+  ],
+  "writes": [
+    "growth.events",
+    "growth.provenance"
+  ],
+  "forbidden": [
+    "repository.write",
+    "public_site.write",
+    "private_memory.read",
+    "hidden_account_context.read",
+    "credential.read",
+    "direct_pii.persist",
+    "commercial_identity.persist",
+    "oracle.content.read",
+    "price.write",
+    "checkout.write",
+    "catalogue.write",
+    "permissions.write"
+  ],
+  "external_output_trust": "untrusted_data_only",
+  "public_change_via": "publisher_gateway_after_separate_decision_and_authorization"
+}
