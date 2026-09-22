@@ -1,23 +1,31 @@
 # A13 runtime activation
 
-Repository completion does not activate external collection.
+A13.2 contains a production-shaped Cloudflare Worker implementation, but repository completion does **not** provision or activate Cloudflare resources.
 
 ## Safe activation order
 
-1. Review each provider's current API, terms, data-use rules and pricing immediately before activation.
-2. Keep provider secrets in Cloudflare secret storage only; never commit API keys.
-3. Activate an explicit provider allowlist, one adapter at a time.
-4. Route all fetched material through A13 privacy/provenance/echo controls before A2.
-5. Start in `observe_only`; no external output may directly trigger publishing, pricing, checkout, catalogue or permission changes.
-6. Use Cloudflare rate limits, per-provider budget caps, retries with backoff and a global kill switch.
-7. Keep raw user-contributed material separate from analytical facts; require a consent receipt and support revocation of future raw use.
-8. Treat provider/model versions as evidence metadata. A model upgrade is a source change, not an invisible substitution.
-9. Store citations where the provider supplies them and re-resolve canonical public sources where permitted.
-10. Measure convergence by independent source roots, not by the number of AI brands that repeat the same claim.
+1. Create a dedicated Growth D1 database.
+2. Apply A1→A13 migrations in order to that fresh database.
+3. Create `maison-intelligence` and `maison-intelligence-dlq` queues.
+4. Copy `workers/maison-intelligence/wrangler.template.jsonc` to a local/deployment `wrangler.jsonc` and insert the real D1 database ID.
+5. Keep `WORKER_ENABLED=false` and `KILL_SWITCH=true`.
+6. Add provider API keys as Cloudflare Worker **secrets**, never repository variables.
+7. Deploy and verify bindings while collection is still disabled.
+8. Validate Queue delivery, D1 writes, retries and usage counters with synthetic/provider test traffic.
+9. Enable the environment flags only after those checks.
+10. Finally turn off the database kill switch while leaving `observe_only=1`.
 
-## Adapter contract
+The first live mode is therefore observation only. External intelligence may create A1 events, A13 observations and A4 map evidence, but may not publish, alter prices, checkout, catalogue, permissions or protected Maison architecture.
 
-Every live adapter must return only:
+## Live Worker shape
+
+`Cron → Queue → provider adapter → A13 privacy/provenance/echo control → A1 event + A13 observation + A4 map_evidence → A5 Brain`
+
+The public Maison site remains fail-open: if all A13 providers fail, the site, Oráculo, checkout and services continue to work.
+
+## Provider rules
+
+Every live adapter may return only:
 
 - provider/model identity;
 - source class;
@@ -28,16 +36,31 @@ Every live adapter must return only:
 - provider request identifier when safe;
 - cost/usage metadata when available.
 
-The adapter must not expose credentials, hidden prompts, private user memory, account cookies or private conversations.
+The adapter must never expose credentials, hidden prompts, private user memory, account cookies or private conversations.
 
-## Cloudflare shape
+Provider model/version settings are explicit runtime configuration. A provider or model upgrade is treated as a source change, not an invisible substitution.
 
-The intended production shape is:
+## Cost and failure controls
 
-`Cron/Queue → provider adapters → A13 normalizer → A2 collector → D1 → A4 Radar → A5 Brain`
+Initial defaults are intentionally small:
 
-The public Maison site remains fail-open: if all A13 providers fail, the site, Oráculo, checkout and services continue to work.
+- one scheduled run per day;
+- two territories per run;
+- maximum two calls per configured provider per UTC day;
+- Queue concurrency of one;
+- delayed retries;
+- dead-letter queue;
+- environment kill switch;
+- D1 kill switch.
+
+These caps can be increased only after real usage and cost are inspected.
+
+## Evidence independence
+
+A13 canonicalises cited public URLs before counting evidence. Multiple AI systems repeating the same canonical source count as multiple observations but one independent evidence root.
+
+Ungrounded AI output contributes zero independent roots.
 
 ## "All AIs" means extensible, not blind
 
-A13 is designed so any compatible system can be added through the registry and adapter contract. It must never scrape private interfaces or bypass access controls merely to increase provider count.
+A13 can add any compatible provider through the registry/adapter contract. It must never scrape private interfaces, bypass access controls or access another platform's private memory merely to increase provider count.
