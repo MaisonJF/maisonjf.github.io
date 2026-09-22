@@ -24,11 +24,9 @@
 .poster-viewer__title{flex:1;margin:0;font:400 16px/1.3 var(--sans,sans-serif);min-width:120px}
 .poster-viewer button{min-height:44px;padding:8px 14px;border:1px solid #d2b36f;background:#080808;color:#f1eadf;font:inherit;cursor:pointer}
 .poster-viewer button:focus-visible{outline:2px solid #fff;outline-offset:3px}
-.poster-viewer__stage{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:16px}
-.poster-viewer__canvas{display:flex;align-items:center;justify-content:center;min-width:100%;min-height:100%;width:100%;height:100%}
-.poster-viewer__image{display:block;flex-shrink:0;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in}
-.poster-viewer.is-zoomed .poster-viewer__canvas{width:max-content;height:auto}
-.poster-viewer.is-zoomed .poster-viewer__image{width:1024px;height:1536px;max-width:none;max-height:none;cursor:zoom-out}
+.poster-viewer__stage{flex:1;min-height:0;overflow:hidden;overscroll-behavior:contain;padding:16px}
+.poster-viewer__canvas{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-width:0;min-height:0}
+.poster-viewer__image{display:block;width:auto;height:auto;max-width:calc(100vw - 32px);max-height:100%;object-fit:contain;cursor:default}
 </style>
 </head>
 <body>
@@ -54,11 +52,10 @@
 <dialog class="poster-viewer" id="poster-viewer" aria-labelledby="poster-viewer-title">
   <div class="poster-viewer__bar">
     <h2 class="poster-viewer__title" id="poster-viewer-title">Poster</h2>
-    <button type="button" id="poster-zoom" aria-pressed="false">Ampliar 100%</button>
     <button type="button" id="poster-close" autofocus aria-label="Fechar poster ampliado">Fechar ×</button>
   </div>
   <div class="poster-viewer__stage" tabindex="0" aria-label="Imagem ampliada; use as setas para percorrer">
-    <div class="poster-viewer__canvas"><img class="poster-viewer__image" src="../images/ebooks/posters/virgulas-do-destino.webp?v=20260922-lossless-final" width="1024" height="1536" alt="Poster Vírgulas do Destino ampliado"></div>
+    <div class="poster-viewer__canvas"><img class="poster-viewer__image" width="1024" height="1536" alt=""></div>
   </div>
 </dialog>
 <script>
@@ -67,16 +64,9 @@
   if(typeof viewer.showModal!=='function')return;
   const picture=viewer.querySelector('img');
   const title=document.getElementById('poster-viewer-title');
-  const zoom=document.getElementById('poster-zoom');
   const close=document.getElementById('poster-close');
   const stage=viewer.querySelector('.poster-viewer__stage');
   let opener=null,previousOverflow='';
-  function setZoom(on){
-    viewer.classList.toggle('is-zoomed',on);
-    zoom.setAttribute('aria-pressed',String(on));
-    zoom.textContent=on?'Ajustar ao ecrã':'Ampliar 100%';
-    stage.scrollTo(0,0);
-  }
   document.querySelectorAll('.poster-open').forEach(function(link){
     link.addEventListener('click',function(event){
       if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
@@ -86,15 +76,15 @@
       picture.src=link.href;
       picture.alt=thumbnail.alt;
       title.textContent=thumbnail.alt.replace(/^Poster /,'');
-      setZoom(false);
       previousOverflow=document.documentElement.style.overflow;
       viewer.showModal();
+      viewer.classList.remove('is-zoomed');
+      stage.scrollTop=0;
+      stage.scrollLeft=0;
       document.documentElement.style.overflow='hidden';
       close.focus();
     });
   });
-  zoom.addEventListener('click',function(){setZoom(!viewer.classList.contains('is-zoomed'));});
-  picture.addEventListener('click',function(){setZoom(!viewer.classList.contains('is-zoomed'));});
   close.addEventListener('click',function(){viewer.close();});
   viewer.addEventListener('click',function(event){
     if(event.target===stage||event.target.classList.contains('poster-viewer__canvas'))viewer.close();
@@ -103,7 +93,7 @@
     document.documentElement.style.overflow=previousOverflow;
     if(opener)opener.focus({preventScroll:true});
     picture.removeAttribute('src');
-    setZoom(false);
+    viewer.classList.remove('is-zoomed');
   });
 })();
 </script>
