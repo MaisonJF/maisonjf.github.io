@@ -26,6 +26,20 @@ export const SEO_PILLARS_2026=[
     "path": "trabalho/estou-farto-de-enviar-candidaturas-e-nao-ter-resposta.html",
     "title": "Estou farto de enviar candidaturas e não ter resposta.",
     "existing": false
+  },
+  {
+    "territory": "padroes-repetidos",
+    "label": "Padrões Repetidos",
+    "path": "cabeca/porque-volto-sempre-aos-mesmos-padroes.html",
+    "title": "Porque volto sempre aos mesmos padrões?",
+    "existing": true
+  },
+  {
+    "territory": "ritual-protecao-simbolica",
+    "label": "Ritual & Proteção Simbólica",
+    "path": "espiritualidade/protecao-energetica.html",
+    "title": "Quando sentes o ambiente pesado.",
+    "existing": true
   }
 ];
 
