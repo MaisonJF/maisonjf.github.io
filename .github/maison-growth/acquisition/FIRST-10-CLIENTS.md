@@ -23,34 +23,28 @@ A "client" counts only after a paid transaction or confirmed paid booking. Leads
 
 ## Funnel
 
-`new person → qualified visit → recognises own problem → sees one fitting offer → trust → CTA → paid booking/order`
+`new person → recognises own problem → Maison resolves the context → one relevant next step → trust → CTA → paid booking/order`
 
-The sprint optimises the first three transitions before adding DM automation.
+The sprint optimises acquisition before adding DM automation.
 
-## Front-door offers
+## No offer menu at acquisition
 
-The acquisition system should not send new visitors to the whole catalogue by default.
+The Maison does **not** use a shortlist of three or four "entry offers" for cold acquisition.
 
-Use a small number of clear entry offers:
+A new person should not be asked to choose between Tarot formats, written/live formats or a small menu invented for the campaign.
 
-1. **Uma pergunta · Tarot · €17**
-   - lowest-friction paid service;
-   - appropriate for high-intent, specific questions;
-   - CTA: `Quero perguntar`.
+Acquisition starts from the **person's problem, search intent, moment or desired change**. The Maison then routes that context to the single most relevant next step already available in the ecosystem.
 
-2. **Consulta · Tarot · €35**
-   - for a situation larger than one question;
-   - CTA: `Quero olhar para isto`.
+Rules:
 
-3. **Consulta escrita breve · €25**
-   - useful for people who do not want live interaction;
-   - CTA: `Quero por escrito`.
+- no "pick one of these three offers" cold-entry architecture;
+- no forcing the visitor to understand the Maison catalogue before acting;
+- no generic catalogue as the destination when intent already tells us what fits;
+- one acquisition asset/query/problem → one most relevant destination/CTA;
+- the full service/product catalogue remains available for deliberate browsing, not as the default acquisition mechanism;
+- Volta Para Casa remains the free diagnostic path when the person does not yet know what they need.
 
-4. **Physical products**
-   - acquisition through Google free product surfaces and problem/occasion-led content;
-   - do not lead with the entire catalogue when a specific product solves the visitor's intent.
-
-Higher-ticket services remain visible but are not the default cold-audience entry point.
+The chosen next step can be a service, product, Oráculo, Presença, B2B proposal or another existing Maison path. It is determined by context, not by a fixed acquisition shortlist.
 
 ## Four acquisition lanes
 
@@ -60,14 +54,14 @@ Goal: capture people who are already looking for help, a service, a symbolic rea
 
 Actions:
 - maintain high-intent SEO pages around real first-person problems;
-- connect each page to **one** most relevant paid next step;
+- connect each page to **one** most relevant next step;
 - ensure Search Console/indexing continues;
 - evaluate Google Business Profile eligibility;
 - prepare Google Merchant Center free listings for physical products;
 - use the Brain to identify underserved query/problem clusters.
 
 Success metric:
-- organic qualified visits → service/product CTA clicks → paid conversion.
+- organic qualified visits → relevant CTA clicks → paid conversion.
 
 ### Lane B · Social discovery
 
@@ -75,15 +69,15 @@ Goal: reach people before they actively search.
 
 Content pattern:
 
-`recognisable pain → useful observation → one next move → one offer`
+`recognisable pain → useful observation → one next move → one context-matched destination`
 
 Not every post needs cinematic production. Prefer clarity and recognisability.
 
 Each acquisition post must map to exactly one destination:
 - a high-intent Ocean/SEO page;
 - Volta Para Casa;
-- one service;
-- one product.
+- one context-matched service/product/experience;
+- one other relevant Maison path.
 
 No generic "link in bio to discover the Maison" when a more specific action exists.
 
@@ -109,7 +103,7 @@ Possible exchanges:
 - small co-created event;
 - sample/display with QR;
 - partner-only offer without fake scarcity;
-- giveaway where the prize directly demonstrates the paid offer;
+- giveaway where the prize directly demonstrates the relevant Maison experience;
 - content collaboration with a tracked link.
 
 Do not mass-spam. Prioritise a small number of highly relevant partners and make a specific proposal.
@@ -142,19 +136,19 @@ For every candidate signal, classify:
 - active-search language;
 - informational vs transactional intent;
 - urgency without inventing urgency;
-- existing Maison offer match;
-- missing-offer gap;
+- existing Maison solution match;
+- missing-solution gap;
 - competition/saturation indication;
 - source independence;
 - likely acquisition channel;
-- recommended destination page;
+- recommended destination page/path;
 - confidence.
 
 The Brain should prefer opportunities where:
 
 1. the problem is repeated independently;
-2. the Maison already has a fitting solution;
-3. the visitor can understand the next step quickly;
+2. the Maison already has a fitting solution or can make the path clearer;
+3. the visitor does not need to decode a menu of offers;
 4. one clear CTA exists;
 5. acquisition can be tested at €0.
 
@@ -182,15 +176,16 @@ No channel receives a permanent role merely because one sale happened. We look f
 ## 14-day operating rhythm
 
 ### Days 1–2 · conversion preparation
-- choose 3 primary cold-audience entry offers;
-- audit their destination and contact path;
-- confirm analytics for service interest, WhatsApp click and purchase/booking;
-- ensure every high-intent page has one obvious next action.
+- identify the 10 strongest existing high-intent problem/search destinations;
+- audit each destination and contact/purchase path;
+- assign one context-matched next step to each;
+- confirm analytics for CTA, WhatsApp/contact and purchase/booking;
+- remove unnecessary choice from the acquisition path.
 
 ### Days 3–5 · free distribution foundations
 - Google Business Profile eligibility check;
 - Merchant Center/free product listing feasibility;
-- identify 10 high-intent existing pages that deserve the clearest paid bridge;
+- identify search/social demand gaps with the Brain;
 - identify first 20 potential partner profiles/categories.
 
 ### Days 4–14 · active acquisition
@@ -225,7 +220,7 @@ Do not pay merely to "do marketing".
 A paid tool/ad/API is considered only after a free path shows a measurable bottleneck that money can plausibly remove.
 
 Examples:
-- traffic exists but conversion is weak → fix offer/page before ads;
+- traffic exists but conversion is weak → fix route/page before ads;
 - strong partner referrals are limited by manual follow-up → automation may become justified;
 - free intelligence finds strong opportunities but needs corroboration → selective paid AI escalation may be justified;
 - a page converts organically but has insufficient reach → small paid distribution test may become justified.
@@ -236,11 +231,12 @@ Examples:
 - no broad paid ads;
 - no paid AI as continuous background worker;
 - no discounts invented just to force urgency;
+- no fixed cold-entry shortlist of offers;
 - no giant catalogue as the default cold-audience landing experience;
 - no vanity-metric optimisation as the primary goal.
 
 ## Current success definition
 
-The Maison succeeds at this stage when strangers or weak-tie contacts discover a specific problem/offer path, understand it, trust it enough to act, and become paying clients.
+The Maison succeeds at this stage when strangers or weak-tie contacts arrive through a specific problem or intent, are routed to the relevant Maison path without unnecessary choice, trust it enough to act, and become paying clients.
 
 **The first 10 clients are the experiment.**
