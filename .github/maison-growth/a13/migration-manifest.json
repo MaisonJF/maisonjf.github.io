@@ -1,0 +1,25 @@
+{
+  "schema_version": "A13.2",
+  "depends_on": [
+    "A1.1",
+    "A3.1",
+    "A4.1",
+    "A5.1",
+    "A7.1",
+    "A8.1",
+    "A9.1",
+    "A10.1",
+    "A11.1",
+    "A12.1"
+  ],
+  "migrations": [
+    {
+      "order": 11,
+      "path": "migrations/0011_external_intelligence_runtime.sql",
+      "sha256": "d41a2ee3dcd33abfe86cbbbce111ec37d26fe7075a9e25da79c1ce0d0e1bad7e",
+      "runtime": "Cloudflare D1 / SQLite"
+    }
+  ],
+  "runtime_code": "workers/maison-intelligence",
+  "cloudflare_resources_provisioned": false
+}
