@@ -1,5 +1,5 @@
 export const MAISON_OFFER_BRAIN={
-  version:'2026-09-20-v5',
+  version:'2026-09-22-v6',
   freeOnly:'/teste/',
   maxOffers:4,
   principles:{
