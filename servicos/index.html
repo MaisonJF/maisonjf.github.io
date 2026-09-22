@@ -156,7 +156,7 @@
      const response=await fetch('/api/create-consultation-checkout-live',{
        method:'POST',
        headers:{'content-type':'application/json'},
-       body:JSON.stringify({slug})
+       body:JSON.stringify({slug,attribution:window.maisonAnalytics?.getAttribution?.()||{}})
      });
      const payload=await response.json().catch(()=>({}));
      if(!response.ok||!payload.url)throw new Error(payload.error||'Não foi possível abrir o pagamento.');
