@@ -54,7 +54,8 @@ Verification is separate from status. A tool can be strategically approved while
 | Discovery | Maison Scout |
 | Adversarial validation | Maison Critic |
 | Product/IP generation | Maison Content & Product Foundry |
-| Commercial learning | A3 + A7 + A8 + A11 + Opportunity/Insight attribution bridge |
+| Universal commercial opportunity + earned distribution | A14 Universal Opportunity + Earned Distribution |
+| Commercial learning | A3 + A7 + A8 + A11 + A14 Opportunity/Insight attribution bridge |
 | Publishing artefacts | Typst + Pandoc |
 
 ## Architectural memory tiers
@@ -74,7 +75,8 @@ The next useful organs are not “more AI models”. They are:
 - weak-signal convergence;
 - Scout;
 - Critic;
-- commercial Opportunity/Insight attribution;
+- A14 universal Opportunity/Offer/Distribution bridge;
+- commercial Opportunity/Insight attribution and Revenue Per Insight;
 - Content & Product Foundry;
 - safe tool contracts (MCP);
 - low-cost public-source ingestion.
@@ -86,3 +88,7 @@ The machine-readable canonical inventory is:
 `.github/maison-growth/technology-ledger.json`
 
 When a new tool, source or capability is discussed, add it there with decision status, verification state and rationale.
+
+## A14 integration rule
+
+A14 does not replace A13, A7, A3, A8, A11 or A12. It is the analysis-only bridge that connects their existing responsibilities. Canonical external evidence stays in A13/A1/D1; Osiris Memory, Oceanos and Maison Semantic Memory remain supporting memories/projections; DuckDB/Polars remain analytical preprocessing rather than the transactional source of truth.
