@@ -100,11 +100,23 @@ jobs:
         run: |
           python .github/maison-growth/runtime/preflight_private_runtime.py "$RUNTIME_STAGE"
 
-      - name: Render temporary Wrangler config
+      - name: Render temporary Wrangler config (dry-run)
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.apply }}
         run: |
           python .github/maison-growth/runtime/render_private_worker_config.py \
             "$RUNTIME_STAGE" \
             --template workers/maison-intelligence/wrangler.jsonc \
+            --output workers/maison-intelligence/wrangler.private.runtime.jsonc
+
+      - name: Render temporary Wrangler config (live custom domain)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        env:
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+        run: |
+          python .github/maison-growth/runtime/render_private_worker_config.py \
+            "$RUNTIME_STAGE" \
+            --template workers/maison-intelligence/wrangler.jsonc \
+            --private-url "$BRAIN_CONTROL_API_URL" \
             --output workers/maison-intelligence/wrangler.private.runtime.jsonc
 
       - name: Install Worker tooling
