@@ -66,6 +66,8 @@ A separate manual workflow, `.github/workflows/maison-cloudflare-readonly-inspec
 
 After deployment, it performs an authenticated GET against `/internal/brain/health` and requires `status=ok` plus `mode=read_only`. A deployment that cannot be reached through the configured private boundary is therefore treated as incomplete.
 
+Once the private read surface is healthy, run the separate manual `Maison Private Commercial Preview` workflow before enabling proposal writes. It uses only the Brain Control token, forces `MAISON_A14_MATERIALIZE_ENABLED=false`, disables Semantic/Osiris runtime context for this first smoke, and prints counts/authority only — no opportunity, queue or experiment identifiers.
+
 ## 1. Private Brain read
 
 Before changing any remote switch:
