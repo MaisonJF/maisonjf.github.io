@@ -18,6 +18,7 @@ files=(
   ".github/maison-growth/a13/migrations/0011_external_intelligence_runtime.sql"
   ".github/maison-growth/a14/migrations/0012_universal_opportunity_earned_distribution.sql"
   ".github/maison-growth/a14/migrations/0013_a14_bridges_cash.sql"
+  ".github/maison-growth/brain/migrations/0014_brain_runtime_views.sql"
 )
 
 for file in "${files[@]}"; do
@@ -25,4 +26,4 @@ for file in "${files[@]}"; do
   npx wrangler d1 execute "$DB_NAME" --remote --file="$ROOT/$file"
 done
 
-echo "Growth D1 schema includes A14.2. A13 collection/spend remains disabled by its kill switches; A14 has no outbound authority."
+echo "Growth D1 schema includes Brain runtime views through 0014. A13 collection/spend remains disabled by its kill switches; A14 has no outbound authority."
