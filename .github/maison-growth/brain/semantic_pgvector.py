@@ -173,14 +173,13 @@ class PgvectorSemanticMemory:
             raise PgvectorError("limit_must_be_1_100")
         vector=_vector_literal(self.embedder.embed(query),self.embedder.dimensions)
         where=["embedding_model_id=%s"]
-        params:list[object]=[self.embedder.model_id]
         allowed={"territory_key","knowledge_type","privacy_class","language"}
+        filter_values=[]
         for key,value in filters.items():
             if key not in allowed:
                 raise PgvectorError(f"unsupported_filter:{key}")
             where.append(f"{key}=%s")
-            params.append(value)
-        params.extend([vector,limit])
+            filter_values.append(value)
         sql=f"""
             SELECT document_id,
                    1-(embedding <=> %s::vector) AS score,
@@ -191,11 +190,8 @@ class PgvectorSemanticMemory:
             ORDER BY embedding <=> %s::vector
             LIMIT %s
         """
-        # Query vector is needed once in SELECT and once in ORDER BY.
-        query_params=[self.embedder.model_id]
-        for key,value in filters.items():
-            query_params.append(value)
-        query_params.extend([vector,vector,limit])
+        # Placeholder order is SELECT vector, WHERE model/filter values, ORDER BY vector, LIMIT.
+        query_params=[vector,self.embedder.model_id,*filter_values,vector,limit]
         with self.conn.cursor() as cur:
             cur.execute(sql,query_params)
             rows=cur.fetchall()
