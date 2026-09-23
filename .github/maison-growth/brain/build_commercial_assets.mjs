@@ -21,6 +21,79 @@ function moneyMinor(value){
   return Math.round(n*100);
 }
 
+function euroMinorFromLabel(value){
+  const text=String(value||'').trim();
+  const match=text.match(/(\d+(?:[.,]\d+)?)\s*€/);
+  if(!match)return null;
+  const amount=Number(match[1].replace(',','.'));
+  return Number.isFinite(amount)&&amount>=0?Math.round(amount*100):null;
+}
+
+function servicePricing(service){
+  const label=String(service.price||'').trim();
+  const lower=label.toLowerCase();
+  const options=(Array.isArray(service.formats)?service.formats:[])
+    .map(raw=>{
+      const text=String(raw||'').trim();
+      const match=text.match(/^(.+?)\s*·\s*(\d+(?:[.,]\d+)?)\s*€\s*$/);
+      if(!match)return null;
+      return {
+        label:match[1].trim(),
+        amount_minor:Math.round(Number(match[2].replace(',','.'))*100)
+      };
+    })
+    .filter(Boolean);
+
+  if(options.length){
+    return {
+      price_kind:'multi_format',
+      minimum_price_minor:Math.min(...options.map(x=>x.amount_minor)),
+      price_options:options,
+      price_source:'formats'
+    };
+  }
+  if(Number.isInteger(service.amount)){
+    return {
+      price_kind:'fixed',
+      minimum_price_minor:service.amount,
+      price_options:[],
+      price_source:'amount_field'
+    };
+  }
+  const parsed=euroMinorFromLabel(label);
+  if(parsed!==null && (lower.startsWith('desde ')||lower.startsWith('a partir de '))){
+    return {
+      price_kind:'starting_from',
+      minimum_price_minor:parsed,
+      price_options:[],
+      price_source:'price_label'
+    };
+  }
+  if(parsed!==null){
+    return {
+      price_kind:'fixed',
+      minimum_price_minor:parsed,
+      price_options:[],
+      price_source:'price_label'
+    };
+  }
+  const quoteContext=(label+' '+String(service.door||'')+' '+String(service.kind||'')).toLowerCase();
+  if(quoteContext.includes('sob orçamento')||service.kind==='profissional'||service.kind==='especial'){
+    return {
+      price_kind:'quote',
+      minimum_price_minor:null,
+      price_options:[],
+      price_source:'quote'
+    };
+  }
+  return {
+    price_kind:'unknown',
+    minimum_price_minor:null,
+    price_options:[],
+    price_source:'unknown'
+  };
+}
+
 function operationalUnknowns(kind){
   if(kind==='physical_product'){
     return {
@@ -96,7 +169,8 @@ for(const p of products.MAISON_PRODUCT_FUTURE||[]){
 }
 
 for(const s of services.MAISON_SERVICES||[]){
-  assets.push({
+  const pricing=servicePricing(s);
+  const row={
     asset_ref:`catalog:service:${s.slug}`,
     source_kind:'service_catalogue',
     asset_type:s.kind==='profissional'?'b2b_service':'service',
@@ -107,7 +181,7 @@ for(const s of services.MAISON_SERVICES||[]){
     category:s.door||s.group||s.kind||null,
     public:s.public!==false,
     lifecycle_status:'active',
-    price_minor:Number.isInteger(s.amount)?s.amount:null,
+    price_minor:pricing.price_kind==='fixed'?pricing.minimum_price_minor:null,
     price_label:s.price==null?null:String(s.price),
     currency:'EUR',
     catalogue_availability:null,
@@ -119,7 +193,12 @@ for(const s of services.MAISON_SERVICES||[]){
       ...(Array.isArray(s.formats)?s.formats:[])
     ].filter(Boolean),
     operational:operationalUnknowns('service')
-  });
+  };
+  row.price_kind=pricing.price_kind;
+  row.minimum_price_minor=pricing.minimum_price_minor;
+  row.price_options=pricing.price_options;
+  row.price_source=pricing.price_source;
+  assets.push(row);
 }
 
 assets.sort((a,b)=>a.asset_ref.localeCompare(b.asset_ref));
