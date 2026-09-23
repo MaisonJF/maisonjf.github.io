@@ -1,0 +1,25 @@
+FROM python:3.12-slim
+
+ARG OSIRIS_REF=181658e1db85ce4d2e8702124423b674b3cb136f
+ARG UV_VERSION=0.12.18
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git ca-certificates curl build-essential libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN python -m pip install --no-cache-dir "uv==${UV_VERSION}"
+
+RUN git clone https://github.com/asuramaya/osiris.git /opt/osiris \
+    && cd /opt/osiris \
+    && git checkout "${OSIRIS_REF}" \
+    && git remote remove origin
+
+WORKDIR /opt/osiris
+RUN uv sync --frozen --no-dev
+
+COPY .github/maison-growth/runtime/osiris_bridge.py /opt/maison/osiris_bridge.py
+
+ENV PYTHONPATH=/opt/osiris:/opt/maison
+ENV PATH=/opt/osiris/.venv/bin:$PATH
+
+CMD ["uv", "run", "python", "-m", "src.mcp_server"]
