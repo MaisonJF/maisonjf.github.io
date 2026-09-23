@@ -21,8 +21,8 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Osiris Memory read context | READY MCP graph_search adapter + smoke profile | NOT STARTED |
 | Maison Brain MCP | READY read-only tools: status/Oceanos/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
 | A1/A13/D1 canonical evidence | READY schema/contracts | D1 NOT PROVISIONED HERE |
-| Brain Control API | READY bearer-authenticated GET-only feed/solutions/economics | DISABLED |
-| Canonical observe cycle | READY Pre-Brain→Scout→Critic→Foundry one-shot | OPTIONAL / NOT STARTED |
+| Brain Control API | READY GET-only feed/solutions/economics/A11 learning + A5 mappings | DISABLED |
+| Canonical observe cycle | READY A5→Pre-Brain→Scout→Critic→Foundry→A14 preview + A3/A11 feedback context | OPTIONAL / NOT STARTED |
 | Persistent observe runtime | READY Docker Compose: pgvector/Postgres + Redis + Osiris + authenticated bridge + healthchecks | NOT STARTED |
 | Pre-Brain | READY analysis core | NOT PROVISIONED |
 | DuckDB | READY optional analytical adapter | PACKAGE/HOST NOT PROVISIONED |
@@ -30,9 +30,11 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | GLiNER | READY optional adapter | MODEL/PACKAGE NOT SELECTED |
 | Ruptures | READY optional adapter | PACKAGE/HOST NOT PROVISIONED |
 | Multilingual E5 local embeddings | READY pinned local provider, 384d | MODEL CACHE NOT DOWNLOADED / NOT STARTED |
+| Semantic projection sync | READY manual allowlisted D1→pgvector incremental projection | DISABLED / NOT RUN |
+| Runtime Semantic + Osiris context | READY bounded read-only context adapters | DISABLED BY DEFAULT |
 | A5 semantic interpretation | READY existing contract | analysis/runtime activation separate |
 | Oceanos curated context | READY read-only editorial metadata adapter | repository context available |
-| Maison Semantic Memory | READY pgvector backend + stable interface | NOT STARTED; pgvector first, Qdrant deferred experiment |
+| Maison Semantic Memory | READY pgvector backend + stable interface + manual D1→pgvector sync | NOT STARTED; pgvector first, Qdrant deferred experiment |
 | Scout | READY | analysis only |
 | Critic | READY | analysis only |
 | Foundry | READY multi-format concept engine | analysis only |
@@ -46,7 +48,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 
 ## Current internal flow
 
-`A13/A1 evidence → brain_prebrain_feed → Pre-Brain → A5 + Oceanos/Semantic/Osiris context → Scout → Critic → Foundry → A7/A14 → A12 → A8 → A3 → A11 → feedback`
+`A13/A1 evidence → A5 canonical need/intent mapping → brain_prebrain_feed → Pre-Brain → Oceanos + optional Semantic/Osiris + A3/A11 observed context → Scout → Critic → Foundry → A14 preview → A12 → A8 → A3 → A11 → feedback`
 
 ## Memory ownership
 
@@ -63,9 +65,11 @@ No layer should become a copy of every other layer.
 
 1. Run repository validators and schema migration tests.
 2. Run the prepared persistent observe stack locally/private-only and pass its smoke tests; this still does not activate A13 external collection.
-3. Provision D1/Queue bindings and private memory bridge.
-4. Configure only selected zero/low-cost providers.
-5. Start A13 in observe-only with kill switches and conservative caps.
-6. Feed observed A13 evidence through Pre-Brain/Scout/Critic/A14.
-7. Activate commercial experiments only through A12/A8 human approval.
-8. Let A3/A11 replace hypotheses with observed economics.
+3. If explicitly authorised, expose only the private Brain Control API first (sensors still off) behind authenticated HTTPS and test the canonical read cycle.
+4. Run the manual allowlisted semantic projection sync only after the private read path is verified.
+5. Provision D1/Queue bindings and private memory bridge.
+6. Configure only selected zero/low-cost providers.
+7. Start A13 in observe-only with kill switches and conservative caps.
+8. Feed observed A13 evidence through A5/Pre-Brain/Scout/Critic/A14.
+9. Activate commercial experiments only through A12/A8 human approval.
+10. Let A3/A11 replace hypotheses with observed economics; never auto-rewrite policy from correlation.
