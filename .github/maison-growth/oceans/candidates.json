@@ -2,7 +2,7 @@
   "version": "2026-09-18",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-09-23T23:41:00+01:00",
+  "last_enriched_at": "2026-09-23T23:45:18+01:00",
   "candidates": [
     {
       "painLanguage": "Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
@@ -313,6 +313,31 @@
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T23:41:00+01:00",
       "lastSeenAt": "2026-09-23T23:41:00+01:00"
+    },
+    {
+      "painLanguage": "Às vezes ninguém diz “não podes”. Mas a escolha deixa de parecer livre quando a pessoa já sabe que, se sair, disser não, pedir espaço ou escolher por si, pode encontrar silêncio, frieza, culpa, tensão ou outra reacção que funciona como preço a pagar.",
+      "territory": "autonomia-condicionada-pelo-medo-da-reaccao",
+      "intent": "reconhecer quando a liberdade formal dentro de uma relação é reduzida pela antecipação de consequências emocionais após escolhas autónomas, distinguindo desacordo legítimo de padrões repetidos de punição, retirada ou pressão que levam a pessoa a mudar o próprio comportamento para evitar a reacção do outro",
+      "commercialAdjacency": "Oráculo Limites & Respeito, Comunicação & Conflito e Eu & Padrões; experiências digitais intermédias sobre autonomia e escolhas; ângulos de venda/contexto para Ritual Volta Para Casa, velas, névoas, escalda-pés e óleos como momentos de regresso a si e preparação para decisões ou conversas, sem claims clínicos nem promessa de alterar relações",
+      "evidence": [
+        "Current Opinion in Psychology / PubMed (2025; PMID 41418500): review on partner ostracism integrates silent treatment, stonewalling and emotional withdrawal with intimate-partner maltreatment literature, highlighting threats to belonging, self-esteem and perceived control — https://pubmed.ncbi.nlm.nih.gov/41418500/",
+        "Systematic review / PMC (2026): review of silent treatment in close adult relationships found it can operate both as emotion regulation and as an interpersonal control mechanism, including use to influence, protest or punish — https://pmc.ncbi.nlm.nih.gov/articles/PMC12937000/",
+        "Journal of Interpersonal Violence / PubMed (2026; PMID 39988968): qualitative research on coercive control describes restrictive regulation through isolation, threats, psychological manipulation and other tactics that can erode autonomy over time — https://pubmed.ncbi.nlm.nih.gov/39988968/"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "liberdade com preço emocional",
+        "medo da reacção depois de escolher",
+        "autonomia e consequências relacionais",
+        "punição sem proibição explícita",
+        "mudar escolhas para evitar tensão",
+        "desacordo vs controlo",
+        "escolher sem pedir permissão emocional"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-23T23:45:18+01:00",
+      "lastSeenAt": "2026-09-23T23:45:18+01:00"
     }
   ]
 }
