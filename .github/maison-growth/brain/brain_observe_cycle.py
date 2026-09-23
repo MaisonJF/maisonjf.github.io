@@ -7,6 +7,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from a14_projection import preview_to_dict, project_packet_to_a14
 from brain_control_client import BrainControlClient
 from knowledge_context import OceanEditorialContext
 from orchestrator import packet_to_dict, run_brain_cycle
@@ -163,6 +164,14 @@ def main() -> None:
         operational_constraints_by_territory=_operational_constraints(policy),
     )
 
+    a14_previews=[
+        project_packet_to_a14(
+            packet,
+            policy_by_territory=policy,
+        )
+        for packet in packets
+    ]
+
     output={
         "mode":"observe_only",
         "source":"authenticated_brain_control_api",
@@ -170,7 +179,9 @@ def main() -> None:
         "solution_rows":len(solutions),
         "solution_links":len(links),
         "packets":[packet_to_dict(x) for x in packets],
+        "a14_previews":[preview_to_dict(x) for x in a14_previews],
         "writes_performed":False,
+        "execution_authority":False,
     }
     print(json.dumps(output,ensure_ascii=False,indent=2))
 
