@@ -72,6 +72,12 @@ class RemoteSchemaGateTests(unittest.TestCase):
         self.assertIn('DB_NAME="${1:-maison-growth-engine}"', self.apply)
         self.assertNotIn('DB_NAME="${1:-maison-growth}"', self.apply)
 
+    def test_full_migration_helper_requires_explicit_fresh_confirmation(self):
+        self.assertIn('CONFIRM="${2:-}"', self.apply)
+        self.assertIn('[[ "$CONFIRM" != "--confirm-fresh" ]]', self.apply)
+        self.assertIn("Refusing to apply the full migration chain", self.apply)
+        self.assertIn("exit 2", self.apply)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
