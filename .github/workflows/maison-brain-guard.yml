@@ -29,6 +29,14 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Validate supporting Growth organs
+        shell: bash
+        run: |
+          set -euo pipefail
+          for module in a1 a3 a4 a5 a7 a8 a9 a10 a11 a12 a13; do
+            python ".github/maison-growth/${module}/validate_${module}.py"
+          done
+
       - name: Validate A14 commercial brain
         run: python .github/maison-growth/a14/validate_a14.py
 
