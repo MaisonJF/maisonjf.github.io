@@ -40,19 +40,21 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Critic | READY | analysis only |
 | Foundry | READY multi-format concept engine | analysis only |
 | A7 Commercial Discovery | READY existing module | analysis only |
-| A14 Universal Opportunity + Earned Distribution | READY A14.2 + deterministic hypothesis IDs + strict idempotent repository | analysis only |
+| A14 Universal Opportunity + Earned Distribution | READY A14.3 + deterministic IDs + review→validation planning | analysis/planning only |
 | A14 materialization | READY narrow proposal API + manual runtime profile | DISABLED |
 | Commercial human inbox | READY read-only A12 inbox + CLI | AVAILABLE WHEN PRIVATE READ ENABLED |
 | Human review decision | READY A12.2 planning-only append-only decision API | DISABLED |
+| Approved validation planning | READY A14.3 behaviour-matched manual/B2B/physical/service/CTA plans | DISABLED / PREVIEW-FIRST |
+| A8 CTA draft planning | READY explicit private CTA context + hard-gated A7 decision → A8 draft | DISABLED / DRAFT ONLY |
 | A12 governance/HITL | READY A12.2 + append-only commercial review decisions | simulation / human-gated / execution OFF |
-| A8 experiments | READY existing module | repository/simulation boundaries |
+| A8 experiments | READY existing module + narrow draft materialization | DRAFT/SIMULATION ONLY; READY/RUNNING NOT AUTHORIZED |
 | A3 journeys/economics/attribution | READY existing module | runtime depends on event flow |
 | A11 learning | READY existing module | analysis only |
 | Cash & Profit mode | READY | begins measuring when A3 receives real conversions |
 
 ## Current internal flow
 
-`A13/A1 evidence → A5 canonical need/intent mapping → brain_prebrain_feed → Pre-Brain → Oceanos + optional Semantic/Osiris + A3/A11 observed context → Scout → Critic → Foundry → A14 preview → A12 → A8 → A3 → A11 → feedback`
+`A13/A1 evidence → A5 mapping → Pre-Brain/context → Scout → Critic → Foundry → A14 → A12 human review → A14 validation plan → (manual pilot OR A7 hard-gated CTA decision → A8 draft) → future authorized execution → A3 → A11 → feedback`
 
 ## Memory ownership
 
