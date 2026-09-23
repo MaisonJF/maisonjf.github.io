@@ -363,7 +363,7 @@
       "name": "Acompanhamento",
       "asset_type": "service",
       "slug": "acompanhamento",
-      "price_minor": null,
+      "price_minor": 17000,
       "price_label": "170 € · 4 semanas",
       "currency": "EUR",
       "attention_score": 17,
