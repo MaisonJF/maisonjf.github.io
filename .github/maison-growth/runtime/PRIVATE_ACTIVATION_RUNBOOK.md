@@ -62,7 +62,9 @@ For a live apply, the renderer also converts `MAISON_BRAIN_PRIVATE_URL` into the
 
 Before a live apply, the workflow also runs the read-only `scripts/verify-growth-schema.sh` check against `maison-growth-engine`. It references the Brain/A12/A14 planning tables and views with `LIMIT 0`; a missing migration blocks deployment without mutating D1.
 
-A separate manual workflow, `.github/workflows/maison-cloudflare-readonly-inspect.yml`, is available for the first Cloudflare session. It needs only `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`, runs the `0001→0016` migration inspector, and contains no deploy, secret-write or D1 mutation command.
+A separate manual workflow, `.github/workflows/maison-cloudflare-readonly-inspect.yml`, is available for the first Cloudflare session. It prefers the optional `CLOUDFLARE_READ_API_TOKEN` and falls back to `CLOUDFLARE_API_TOKEN`; it also needs `CLOUDFLARE_ACCOUNT_ID`. It verifies that `maison-growth-engine` is reachable, attempts to confirm whether the `maison-intelligence` Worker already exists, runs the `0001→0016` migration inspector, and contains no deploy, secret-write or D1 mutation command.
+
+Use `CLOUDFLARE_PERMISSION_GUIDE.md` when creating tokens. In particular, keep D1 Edit separate from ordinary inspection, and remember that creating a new Worker needs more privilege than deploying an existing one.
 
 After deployment, it performs an authenticated GET against `/internal/brain/health` and requires `status=ok` plus `mode=read_only`. A deployment that cannot be reached through the configured private boundary is therefore treated as incomplete.
 
