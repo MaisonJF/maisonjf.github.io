@@ -111,36 +111,49 @@ async function feed(env, url) {
 async function cashFeedback(env, url) {
   const limit=parseLimit(url);
   const after=parseAfter(url);
-  const afterId=parseAfterId(url,'cnv_');
+  const afterId=parseAfterId(url,'eva_');
+  const fields=`
+    conversion_id,economic_assessment_id,economics_version_id,solution_id,conversion_kind,
+    occurred_at,assessment_created_at,revenue_minor,currency,variable_cost_minor,
+    human_effort_minutes,human_effort_cost_minor,immediate_contribution_minor,
+    continuation_expected_value_minor,expected_total_value_minor,scalability_score,
+    repeatability_class,confidence_class,calculation_version,
+    opportunity_ids_json,offer_hypothesis_ids_json,distribution_match_ids_json
+  `;
   let statement;
   if (after) {
     statement=env.GROWTH_DB.prepare(`
-      SELECT opportunity_id,offer_hypothesis_id,distribution_match_id,conversion_id,
-             economic_assessment_id,attribution_role,solution_id,occurred_at,revenue_minor,
-             currency,variable_cost_minor,human_effort_cost_minor,
-             immediate_contribution_minor,repeatability_class,confidence_class
+      SELECT ${fields}
       FROM brain_cash_feedback
-      WHERE occurred_at > ? OR (occurred_at = ? AND conversion_id > ?)
-      ORDER BY occurred_at,conversion_id
+      WHERE assessment_created_at > ?
+         OR (assessment_created_at = ? AND economic_assessment_id > ?)
+      ORDER BY assessment_created_at,economic_assessment_id
       LIMIT ?
     `).bind(after,after,afterId,limit);
   } else {
     statement=env.GROWTH_DB.prepare(`
-      SELECT opportunity_id,offer_hypothesis_id,distribution_match_id,conversion_id,
-             economic_assessment_id,attribution_role,solution_id,occurred_at,revenue_minor,
-             currency,variable_cost_minor,human_effort_cost_minor,
-             immediate_contribution_minor,repeatability_class,confidence_class
+      SELECT ${fields}
       FROM brain_cash_feedback
-      ORDER BY occurred_at,conversion_id
+      ORDER BY assessment_created_at,economic_assessment_id
       LIMIT ?
     `).bind(limit);
   }
-  const rows=await all(statement);
+  const rows=(await all(statement)).map(row=>({
+    ...row,
+    opportunity_ids:parseJsonArray(row.opportunity_ids_json),
+    offer_hypothesis_ids:parseJsonArray(row.offer_hypothesis_ids_json),
+    distribution_match_ids:parseJsonArray(row.distribution_match_ids_json),
+    opportunity_ids_json:undefined,
+    offer_hypothesis_ids_json:undefined,
+    distribution_match_ids_json:undefined
+  }));
   const last=rows.at(-1);
   return json({
     kind:'brain_cash_feedback',
     rows,
-    next_cursor:last ? { after:last.occurred_at, after_id:last.conversion_id } : null
+    next_cursor:last
+      ? { after:last.assessment_created_at, after_id:last.economic_assessment_id }
+      : null
   });
 }
 
