@@ -1066,6 +1066,31 @@
       "notes": "Do not choose model size until hardware is known."
     },
     {
+      "id": "multilingual-e5-small",
+      "type": "local_model",
+      "name": "intfloat/multilingual-e5-small",
+      "status": "AGORA",
+      "priority": "P1",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "first local multilingual embedding model for Maison Semantic Memory",
+      "sense": "semantic retrieval PT/PT-BR/ES/EN and broader multilingual text",
+      "cost": "0 model/API cost; local CPU/RAM required",
+      "license": "MIT",
+      "self_hosted": true,
+      "depends_on": [
+        "sentence-transformers 6.1.0",
+        "pgvector semantic backend",
+        "model download/cache"
+      ],
+      "serves": [
+        "Maison Semantic Memory",
+        "A5",
+        "Brain",
+        "Scout"
+      ],
+      "notes": "Pinned to Hugging Face revision 03415a4be176a1620747c692ed433219fabc3def; 384 dimensions. Provider implements required E5 query:/passage: prefixes and normalized embeddings. Runtime/model weights not yet provisioned."
+    },
+    {
       "id": "fastembed-local",
       "type": "embedding",
       "name": "Local embeddings / FastEmbed-class runtime",
