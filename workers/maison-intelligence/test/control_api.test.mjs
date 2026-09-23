@@ -305,3 +305,40 @@ test('validation plan state is validated', async () => {
   assert.equal(response.status,400);
   assert.equal((await response.json()).error,'invalid_validation_state');
 });
+
+
+test('A7 CTA decision lookup returns only hard-gated matching solution decisions', async () => {
+  const sol='sol_12345678-1234-1234-1234-123456789012';
+  const e=env((sql,params)=>{
+    assert.match(sql,/FROM decision_records/);
+    assert.match(sql,/decision_type='test_cta'/);
+    assert.match(sql,/hard_gates_passed=1/);
+    assert.deepEqual(params,[sol,5]);
+    return [{
+      decision_id:'dec_12345678-1234-1234-1234-123456789012',
+      subject_type:'solution',subject_id:sol,decision_type:'test_cta',
+      hard_gates_passed:1,discovery_score:70,commercial_score:65,
+      confidence_score:80,reason_codes_json:'["journey_gap_existing_solution_test"]',
+      evidence_refs_json:'["evd_x"]',recommended_solution_id:sol,
+      rule_version_id:'rul_12345678-1234-1234-1234-123456789012',
+      model_version_id:null,created_at:'2026-09-23T18:00:00Z'
+    }];
+  });
+  const response=await handleBrainControlRequest(
+    req('/internal/brain/a7-decisions?solution_id='+encodeURIComponent(sol)+'&limit=5'),e
+  );
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.rows[0].decision_type,'test_cta');
+  assert.equal(body.rows[0].hard_gates_passed,true);
+  assert.equal(body.rows[0].public_side_effects,false);
+  assert.deepEqual(body.rows[0].evidence_refs,['evd_x']);
+});
+
+test('A7 CTA decision lookup requires stable solution ID', async () => {
+  const response=await handleBrainControlRequest(
+    req('/internal/brain/a7-decisions?solution_id=bad'),env()
+  );
+  assert.equal(response.status,400);
+  assert.equal((await response.json()).error,'invalid_solution_id');
+});
