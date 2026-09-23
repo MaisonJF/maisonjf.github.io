@@ -43,6 +43,25 @@ class CommercialAssetTests(unittest.TestCase):
             self.assertEqual(row["evidence_refs"],[])
             self.assertTrue(all(value is None for value in row["operational"].values()))
 
+    def test_service_capacity_template_contains_all_active_public_services(self):
+        template=json.loads((ROOT/"commercial-service-capacity.template.json").read_text(encoding="utf-8"))
+        self.assertEqual(template["target_overlay_schema"],"commercial_asset_overlay_v1")
+        refs={row["asset_ref"] for row in template["assets"]}
+        self.assertEqual(refs,{
+            "catalog:service:acompanhamento",
+            "catalog:service:b2b",
+            "catalog:service:companhia",
+            "catalog:service:mentoria",
+            "catalog:service:pedidos-especiais",
+            "catalog:service:ritual-personalizado",
+            "catalog:service:tarot",
+        })
+        self.assertIsNone(template["observed_at"])
+        for row in template["assets"]:
+            self.assertEqual(row["source"],"manual_capacity_review")
+            self.assertEqual(row["evidence_refs"],[])
+            self.assertTrue(all(value is None for value in row["operational"].values()))
+
     def test_search_finds_existing_product_without_claiming_stock_quantity(self):
         ctx=CommercialAssetContext(self.registry())
         hits=ctx.search("massagem toque corpo",limit=5)

@@ -163,6 +163,29 @@ class CommercialAssetContext:
         base["operational"]=operational
         return base,evidence
 
+    def operational_snapshot(self, ref: str) -> dict[str,Any]:
+        """Return one effective asset for private operator-side economics checks.
+
+        This method does not grant any execution authority and is not exposed by the
+        general read-only MCP asset search.
+        """
+        if ref not in self.assets:
+            raise CommercialAssetError(f"unknown_asset_ref:{ref}")
+        asset,evidence=self._effective(ref)
+        return {
+            "asset_ref":ref,
+            "asset_type":str(asset.get("asset_type") or "unknown"),
+            "name":str(asset.get("name") or ref),
+            "public":bool(asset.get("public")),
+            "lifecycle_status":str(asset.get("lifecycle_status") or "unknown"),
+            "price_minor":asset.get("price_minor"),
+            "price_label":asset.get("price_label"),
+            "currency":asset.get("currency"),
+            "operational":dict(asset.get("operational",{})),
+            "operational_evidence_refs":evidence,
+            "execution_authority":False,
+        }
+
     def search(self, query: str, *, limit: int=6) -> tuple[CommercialAssetHit,...]:
         if not 1<=limit<=30:
             raise CommercialAssetError("limit_must_be_1_30")
