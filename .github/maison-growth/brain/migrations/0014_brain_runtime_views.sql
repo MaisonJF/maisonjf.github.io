@@ -38,22 +38,47 @@ LEFT JOIN map_evidence e
 
 CREATE VIEW brain_cash_feedback AS
 SELECT
-  opportunity_id,
-  offer_hypothesis_id,
-  distribution_match_id,
-  conversion_id,
-  economic_assessment_id,
-  attribution_role,
-  solution_id,
-  occurred_at,
-  revenue_minor,
-  currency,
-  variable_cost_minor,
-  human_effort_cost_minor,
-  immediate_contribution_minor,
-  repeatability_class,
-  confidence_class
-FROM a14_realised_economics;
+  c.conversion_id,
+  e.economic_assessment_id,
+  e.economics_version_id,
+  c.solution_id,
+  c.conversion_kind,
+  c.occurred_at,
+  e.created_at AS assessment_created_at,
+  e.revenue_minor,
+  c.currency,
+  e.variable_cost_minor,
+  e.human_effort_minutes,
+  e.human_effort_cost_minor,
+  e.immediate_contribution_minor,
+  e.continuation_expected_value_minor,
+  e.expected_total_value_minor,
+  e.scalability_score,
+  e.repeatability_class,
+  e.confidence_class,
+  e.calculation_version,
+  COALESCE((
+    SELECT json_group_array(DISTINCT l.opportunity_id)
+    FROM a14_outcome_links l
+    WHERE l.conversion_id=c.conversion_id
+      AND (l.economic_assessment_id IS NULL OR l.economic_assessment_id=e.economic_assessment_id)
+  ),'[]') AS opportunity_ids_json,
+  COALESCE((
+    SELECT json_group_array(DISTINCT l.offer_hypothesis_id)
+    FROM a14_outcome_links l
+    WHERE l.conversion_id=c.conversion_id
+      AND l.offer_hypothesis_id IS NOT NULL
+      AND (l.economic_assessment_id IS NULL OR l.economic_assessment_id=e.economic_assessment_id)
+  ),'[]') AS offer_hypothesis_ids_json,
+  COALESCE((
+    SELECT json_group_array(DISTINCT l.distribution_match_id)
+    FROM a14_outcome_links l
+    WHERE l.conversion_id=c.conversion_id
+      AND l.distribution_match_id IS NOT NULL
+      AND (l.economic_assessment_id IS NULL OR l.economic_assessment_id=e.economic_assessment_id)
+  ),'[]') AS distribution_match_ids_json
+FROM conversion_economic_assessments e
+JOIN conversions c ON c.conversion_id=e.conversion_id;
 
 INSERT INTO schema_state(schema_key,schema_value)
 VALUES ('maison_brain_runtime_schema_version','BRAIN.1')
