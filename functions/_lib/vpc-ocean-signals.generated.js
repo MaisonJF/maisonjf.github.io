@@ -169,6 +169,34 @@ export const VPC_OCEAN_SIGNALS=[
       "quando o modo avião é descanso",
       "explicar que preciso de espaço sem desaparecer"
     ]
+  },
+  {
+    "id": "autonomia-condicionada-pelo-medo-da-reaccao",
+    "painLanguage": "Às vezes ninguém diz “não podes”. Mas a escolha deixa de parecer livre quando a pessoa já sabe que, se sair, disser não, pedir espaço ou escolher por si, pode encontrar silêncio, frieza, culpa, tensão ou outra reacção que funciona como preço a pagar.",
+    "intent": "reconhecer quando a liberdade formal dentro de uma relação é reduzida pela antecipação de consequências emocionais após escolhas autónomas, distinguindo desacordo legítimo de padrões repetidos de punição, retirada ou pressão que levam a pessoa a mudar o próprio comportamento para evitar a reacção do outro",
+    "themes": [
+      "liberdade com preço emocional",
+      "medo da reacção depois de escolher",
+      "autonomia e consequências relacionais",
+      "punição sem proibição explícita",
+      "mudar escolhas para evitar tensão",
+      "desacordo vs controlo",
+      "escolher sem pedir permissão emocional"
+    ]
+  },
+  {
+    "id": "presenca-que-ampara-sem-tentar-resolver",
+    "painLanguage": "Há momentos de medo, espera ou sobrecarga em que a pessoa não precisa de uma solução perfeita nem de um conselho brilhante. Precisa sobretudo de sentir que alguém ficou, ouviu e não a deixou atravessar aquele momento sozinha.",
+    "intent": "reconhecer quando a necessidade principal não é resolver imediatamente o problema, mas receber presença, escuta e apoio relacional suficiente para atravessar um momento difícil, distinguindo companhia humana de aconselhamento, tratamento clínico ou resposta de emergência",
+    "themes": [
+      "alguém ficar quando tenho medo",
+      "presença vs solução",
+      "ouvir sem tentar corrigir",
+      "não atravessar sozinho",
+      "pedir apoio sem ter a frase perfeita",
+      "companhia em momentos difíceis",
+      "estar com alguém sem ter de salvar tudo"
+    ]
   }
 ];
 export const VPC_OCEAN_SIGNAL_VERSION="2026-09-18";
