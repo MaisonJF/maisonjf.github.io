@@ -9,7 +9,7 @@
     },
     {
       "order": 13,
-      "path": "migrations/0013_a14_bridges_recovery.sql",
+      "path": "migrations/0013_a14_bridges_cash.sql",
       "runtime_required": false,
       "public_site_dependency": false
     }
