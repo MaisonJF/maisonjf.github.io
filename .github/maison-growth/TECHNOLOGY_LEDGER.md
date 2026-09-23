@@ -57,6 +57,8 @@ Verification is separate from status. A tool can be strategically approved while
 | Product/IP generation | Maison Content & Product Foundry |
 | Existing commercial assets | Generated products/services registry + optional private stock/cost/capacity overlay |
 | Universal commercial opportunity + earned distribution | A14 Universal Opportunity + Earned Distribution |
+| Human-approved validation planning | A14.3 validation planner → manual pilot or A7-gated A8 draft |
+| CTA experiment draft planning | Explicit private CTA context + A7 `test_cta` + A8 draft-only writer |
 | Canonical Brain read cycle | Brain Control API + A5 mapping + Pre-Brain/Scout/Critic/Foundry + A14 preview |
 | Semantic projection ingestion | Manual allowlisted D1 → pgvector sync; rebuildable cursor |
 | Commercial learning | A3 + A7 + A8 + A11 + A14 Opportunity/Insight attribution bridge |
@@ -141,3 +143,18 @@ A14 analysis can now be materialized through a separate, narrow internal proposa
 Materialization is idempotent and cannot authorize launch, pricing, public writes, outbound contact, spend or experiment execution. Analysis-only hypotheses may be stored without creating human-review work. Only human-review-ready offers enter A12.
 
 A12.2 records human commercial decisions append-only. `approved` means only `experiment_planning_only`; it is not permission to run an experiment or alter the public Maison. A separate decision token/switch is required, and the original queue row remains immutable.
+
+
+## Validation planning decision
+
+An A12 approval is not an experiment. A14.3 converts an approved offer into a validation plan whose method must match the real purchase behaviour:
+
+- B2B/wholesale/white-label/corporate offers → manual B2B pilot;
+- service/workshop/experience → manual service pilot;
+- physical product/bundle/personalisation → manual physical pilot;
+- partnership/distribution → manual distribution pilot;
+- CTA routing → A8 only when the offer points to an existing canonical A3 solution.
+
+CTA validation has an additional hard boundary. An A8 draft requires both a canonical A7 `test_cta` decision with passed hard gates and an explicit private CTA context containing source asset, CTA slot, control solution, treatment solution and maximum exposure count. Multiple eligible A7 decisions require explicit selection; the Brain never chooses one arbitrarily.
+
+The A8 writer re-derives hashes and deterministic IDs at the Worker boundary. It may create only `draft` experiment state plus append-only A14↔A7↔A8 lineage. It cannot create a snapshot, mark an experiment `ready`, send traffic, publish, contact anyone, spend, change price, catalogue or checkout. Public execution remains a future A9/A12-gated step.
