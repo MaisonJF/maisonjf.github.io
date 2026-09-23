@@ -1,10 +1,16 @@
 {
-  "contract_version": "A12.1",
+  "contract_version": "A12.2",
   "migrations": [
     {
       "order": 10,
       "path": "migrations/0010_gradual_autonomy_dashboard_v2.sql",
       "sha256": "7d3d6cda5aca8adedf160e9e8f938e6419ae4b11be99082d9547f538f86cab96",
+      "runtime_required_now": false
+    },
+    {
+      "order": 15,
+      "path": "migrations/0015_human_commercial_review_resolution.sql",
+      "sha256": "9b34cb8b3b40b72e8a0bae72bccaa6fba14efb0bfbb74f5b146196f6c1dfb253",
       "runtime_required_now": false
     }
   ],
