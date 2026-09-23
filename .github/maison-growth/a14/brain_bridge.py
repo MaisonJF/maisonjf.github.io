@@ -59,6 +59,7 @@ def build_opportunity_record(
     territory_code: Optional[str],
     metrics: Mapping[str, EvidenceMetric],
     evidence_refs: Sequence[str]=(),
+    reason_codes: Sequence[str]=(),
     existing_solution_ids: Sequence[str],
     knowledge_context_refs: Sequence[str],
     rule_version_id: str,
@@ -68,7 +69,7 @@ def build_opportunity_record(
     score = score_universal_opportunity(metrics, policy.opportunity_weights)
     existing = tuple(sorted(set(existing_solution_ids)))
     status = "observe"
-    reasons = ["a14_evidence_weighted_opportunity"]
+    reasons = ["a14_evidence_weighted_opportunity",*reason_codes]
     if score.score is not None and score.confidence > 0:
         status = "human_review_required"
         reasons.append("commercial_hypothesis_requires_human_review")
@@ -88,6 +89,7 @@ def build_opportunity_record(
             for key, value in sorted(metrics.items())
         },
         "evidence_refs": tuple(sorted(set(evidence_refs))),
+        "reason_codes": tuple(dict.fromkeys(reason_codes)),
         "existing_solution_ids": tuple(existing),
         "knowledge_context_refs": tuple(sorted(set(knowledge_context_refs))),
         "rule_version_id": rule_version_id,
@@ -119,8 +121,9 @@ def build_offer_hypothesis(
     offer_type: str,
     existing_solution_ids: Sequence[str],
     existing_solution_id: Optional[str]=None,
-    fit_metrics: Mapping[str, EvidenceMetric]=None,
+    fit_metrics: Optional[Mapping[str, EvidenceMetric]]=None,
     evidence_refs: Sequence[str]=(),
+    reason_codes: Sequence[str]=(),
     validation_mode: Optional[str],
     economics: Mapping[str, Any],
     policy: A14Policy,
@@ -128,7 +131,7 @@ def build_offer_hypothesis(
     path = choose_offer_path(existing_solution_ids, (offer_type,))
     fit = score_universal_opportunity(fit_metrics or {}, policy.opportunity_weights)
     existing = tuple(path["existing_solution_ids"])
-    reasons = list(path["reason_codes"])
+    reasons = list(path["reason_codes"]) + list(reason_codes)
     selected = existing_solution_id
     if selected is not None and selected not in existing:
         raise ValueError("existing_solution_id_not_in_supplied_existing_solutions")
