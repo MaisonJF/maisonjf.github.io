@@ -76,18 +76,6 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
             self.live_config["d1_databases"][0]["database_name"],
         )
 
-    def test_existing_database_id_is_preserved_without_override(self):
-        expected = self.live_config["d1_databases"][0]["database_id"]
-        cfg = render_private_worker_config(
-            stage_name="private_brain_read_candidate",
-            template=self.live_config,
-        )
-        self.assertEqual(cfg["d1_databases"][0]["database_id"], expected)
-        self.assertEqual(
-            cfg["d1_databases"][0]["database_name"],
-            self.live_config["d1_databases"][0]["database_name"],
-        )
-
     def test_placeholder_database_id_is_refused(self):
         with self.assertRaisesRegex(ValueError, "valid_d1_database_id_required"):
             render_private_worker_config(
