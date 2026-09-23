@@ -31,6 +31,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Private custom-domain route | READY exact HTTPS Custom Domain from `MAISON_BRAIN_PRIVATE_URL`; workers.dev/previews/cron/queue/AI stripped | BLOCKED: private URL + Cloudflare credentials not configured |
 | Cloudflare read-only inspect | READY manual workflow; only API token/account ID; 0001→0016 inspector; no deploy/write commands | NOT RUN |
 | Private deploy verification | READY read-only remote D1 schema gate + authenticated Brain health probe | NOT RUN |
+| Private commercial preview | READY manual Brain-Control-only workflow; materialization/memory backends OFF; counts/authority output only | NOT RUN |
 | Pre-Brain | READY analysis core | NOT PROVISIONED |
 | DuckDB | READY optional analytical adapter | PACKAGE/HOST NOT PROVISIONED |
 | Polars | READY optional analytical adapter | PACKAGE/HOST NOT PROVISIONED |

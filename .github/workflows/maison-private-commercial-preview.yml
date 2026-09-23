@@ -1,0 +1,38 @@
+name: Maison Private Commercial Preview
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+      BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+      CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+      CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+      MAISON_A14_MATERIALIZE_ENABLED: 'false'
+      MAISON_SEMANTIC_CONTEXT_ENABLED: 'false'
+      MAISON_OSIRIS_CONTEXT_ENABLED: 'false'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Preflight private read surface
+        run: python .github/maison-growth/runtime/preflight_private_runtime.py private_brain_read_candidate
+
+      - name: Verify private Brain health
+        run: python .github/maison-growth/runtime/verify_private_brain_health.py
+
+      - name: Run identifier-free commercial preview
+        run: python .github/maison-growth/brain/private_commercial_preview.py
