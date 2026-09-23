@@ -2,7 +2,7 @@
   "version": "2026-09-18",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-09-23T22:46:00+01:00",
+  "last_enriched_at": "2026-09-23T23:41:00+01:00",
   "candidates": [
     {
       "painLanguage": "Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
@@ -136,12 +136,15 @@
         "necessidades não ditas",
         "acomodação vs autoapagamento",
         "medo da reacção ao dizer a verdade",
-        "eu interior vs eu mostrado"
+        "eu interior vs eu mostrado",
+        "baixar a régua para não perder o vínculo",
+        "pedir menos para não parecer exigente",
+        "normalizar atenção ou carinho insuficientes"
       ],
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-20T08:14:28+01:00",
-      "lastSeenAt": "2026-09-20T08:14:28+01:00"
+      "lastSeenAt": "2026-09-23T23:41:00+01:00"
     },
     {
       "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
@@ -262,6 +265,54 @@
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T22:46:00+01:00",
       "lastSeenAt": "2026-09-23T22:46:00+01:00"
+    },
+    {
+      "painLanguage": "Há futuros que não acabam porque aconteceram; acabam porque deixaram de poder acontecer. Às vezes a pessoa só percebe tarde que queria um filho, uma vida, um caminho ou uma possibilidade que durante anos parecia disponível — e precisa de fazer luto por algo que nunca chegou a existir.",
+      "territory": "luto-por-um-futuro-que-deixou-de-ser-possivel",
+      "intent": "dar linguagem ao luto por possibilidades de vida que se tornam inalcançáveis com o tempo, distinguindo arrependimento, perda de esperança e reconstrução de significado sem tratar como falha moral o facto de o desejo ter mudado ou chegado tarde",
+      "commercialAdjacency": "Oráculo Luto & Perda, Parentalidade & Escolha, Escolhas & Mudança e Propósito & Sentido; experiências reflexivas sobre futuros não vividos, irreversibilidade e reconstrução de significado, sem aconselhamento médico, reprodutivo ou clínico",
+      "evidence": [
+        "Humanities and Social Sciences Communications (2024; PMID 39003684): estudo clínico/qualitativo com seis mulheres involuntariamente sem filhos descreveu luto persistente, perda do plano de ter filhos e dificuldade em integrar uma vida sem o futuro imaginado; amostra pequena e específica — https://pubmed.ncbi.nlm.nih.gov/39003684/",
+        "Human Reproduction (2020; PMID 32268357): entrevistas aprofundadas com 12 mulheres britânicas de meia-idade involuntariamente sem filhos encontraram luto ambíguo e intangível pela perda de esperança de maternidade, com necessidade de apoio a longo prazo; população específica — https://pubmed.ncbi.nlm.nih.gov/32268357/",
+        "Journal of Population Ageing / scoping review (2025): revisão sobre experiências sociais de ausência de filhos na meia-idade e velhice identificou luto deslegitimado, alienação e narrativas retrospectivas sobre circunstâncias biográficas que fecharam a possibilidade de parentalidade — https://pmc.ncbi.nlm.nih.gov/articles/PMC12332159/"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "quando o talvez vira já não",
+        "luto por uma vida que não aconteceu",
+        "desejo que chegou tarde",
+        "irreversibilidade e arrependimento",
+        "futuro imaginado que fechou",
+        "continuar depois de perder uma possibilidade"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-23T23:41:00+01:00",
+      "lastSeenAt": "2026-09-23T23:41:00+01:00"
+    },
+    {
+      "painLanguage": "Há dias em que o silêncio não é solidão nem rejeição: é recuperação. A pessoa gosta da família, dos amigos ou de quem vive com ela e, ainda assim, só de imaginar mais conversa, chamadas, visitas ou jantares sente que já não tem energia social para dar.",
+      "territory": "precisar-de-solidao-para-recuperar-energia-social",
+      "intent": "reconhecer a necessidade temporária de estar só como forma de recuperar energia e autonomia depois de muita interação, distinguindo solitude escolhida de solidão indesejada, castigo silencioso ou ruptura do vínculo",
+      "commercialAdjacency": "Oráculo Companhia & Solidão, Família & Laços, Limites & Respeito e Corpo & Ritmo; Ritual Volta Para Casa e experiências sobre pausa social, recuperação e comunicação de necessidade de espaço, sem patologizar introversão ou isolamento",
+      "evidence": [
+        "British Journal of Psychology (2022; PMID 35957493): estudo de 21 dias com 118 adultos de 65–94 anos encontrou alternância entre interação social e solitude e interpretou a solitude como parte de regulação de energia e recuperação; população idosa específica — https://pubmed.ncbi.nlm.nih.gov/35957493/",
+        "Progress in Brain Research (2024; PMID 39097352): revisão distingue solidão crónica de momentos temporários de solitude positiva e discute efeitos potencialmente benéficos para vida social, criatividade e saúde mental — https://pubmed.ncbi.nlm.nih.gov/39097352/",
+        "Journal of Health Psychology (2026; PMID 41724682): estudo com 569 participantes, maioritariamente jovens adultos, encontrou que competências de solitude positiva modulavam associações entre satisfação com a vida e experiências afectivas; desenho correlacional — https://pubmed.ncbi.nlm.nih.gov/41724682/"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "gosto deles mas não tenho energia para estar com eles",
+        "precisar de ficar sozinho sem rejeitar ninguém",
+        "silêncio como recuperação",
+        "culpa por recusar convívios",
+        "quando o modo avião é descanso",
+        "explicar que preciso de espaço sem desaparecer"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-23T23:41:00+01:00",
+      "lastSeenAt": "2026-09-23T23:41:00+01:00"
     }
   ]
 }

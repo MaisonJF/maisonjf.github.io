@@ -73,7 +73,10 @@ export const VPC_OCEAN_SIGNALS=[
       "necessidades não ditas",
       "acomodação vs autoapagamento",
       "medo da reacção ao dizer a verdade",
-      "eu interior vs eu mostrado"
+      "eu interior vs eu mostrado",
+      "baixar a régua para não perder o vínculo",
+      "pedir menos para não parecer exigente",
+      "normalizar atenção ou carinho insuficientes"
     ]
   },
   {
@@ -139,6 +142,32 @@ export const VPC_OCEAN_SIGNALS=[
       "frequência de interrupções vs tempo de ecrã",
       "retomar custa mais do que parece",
       "proteger blocos de atenção"
+    ]
+  },
+  {
+    "id": "luto-por-um-futuro-que-deixou-de-ser-possivel",
+    "painLanguage": "Há futuros que não acabam porque aconteceram; acabam porque deixaram de poder acontecer. Às vezes a pessoa só percebe tarde que queria um filho, uma vida, um caminho ou uma possibilidade que durante anos parecia disponível — e precisa de fazer luto por algo que nunca chegou a existir.",
+    "intent": "dar linguagem ao luto por possibilidades de vida que se tornam inalcançáveis com o tempo, distinguindo arrependimento, perda de esperança e reconstrução de significado sem tratar como falha moral o facto de o desejo ter mudado ou chegado tarde",
+    "themes": [
+      "quando o talvez vira já não",
+      "luto por uma vida que não aconteceu",
+      "desejo que chegou tarde",
+      "irreversibilidade e arrependimento",
+      "futuro imaginado que fechou",
+      "continuar depois de perder uma possibilidade"
+    ]
+  },
+  {
+    "id": "precisar-de-solidao-para-recuperar-energia-social",
+    "painLanguage": "Há dias em que o silêncio não é solidão nem rejeição: é recuperação. A pessoa gosta da família, dos amigos ou de quem vive com ela e, ainda assim, só de imaginar mais conversa, chamadas, visitas ou jantares sente que já não tem energia social para dar.",
+    "intent": "reconhecer a necessidade temporária de estar só como forma de recuperar energia e autonomia depois de muita interação, distinguindo solitude escolhida de solidão indesejada, castigo silencioso ou ruptura do vínculo",
+    "themes": [
+      "gosto deles mas não tenho energia para estar com eles",
+      "precisar de ficar sozinho sem rejeitar ninguém",
+      "silêncio como recuperação",
+      "culpa por recusar convívios",
+      "quando o modo avião é descanso",
+      "explicar que preciso de espaço sem desaparecer"
     ]
   }
 ];
