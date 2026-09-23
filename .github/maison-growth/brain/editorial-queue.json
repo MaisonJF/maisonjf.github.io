@@ -1,7 +1,7 @@
 {
   "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
-  "generatedAt": "2026-09-20T08:14:28+01:00",
+  "generatedAt": "2026-09-23T21:07:00+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
   "contract": {
     "storesPaidBodies": false,
@@ -11,19 +11,19 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 6,
-    "queueItems": 12,
-    "questionCandidates": 6,
-    "questionThemeHypotheses": 33,
-    "questionDesignSlots": 198,
+    "oceansConsidered": 7,
+    "queueItems": 14,
+    "questionCandidates": 7,
+    "questionThemeHypotheses": 39,
+    "questionDesignSlots": 234,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 150,
     "pdiThemeBacklog": 150,
     "pdiSourceDesignSlots": 900,
     "pdiEditorialCoreTarget": 45000,
     "pdiCombinatorialTarget": 2800000,
-    "oracleCandidates": 6,
-    "oracleRoleSlots": 42
+    "oracleCandidates": 7,
+    "oracleRoleSlots": 49
   },
   "pdiGrowth": {
     "scale": {
@@ -8147,6 +8147,34 @@
   },
   "items": [
     {
+      "id": "brain_oracle_adiar_o_sono_para_recuperar_autonomia",
+      "type": "oracle_candidate",
+      "sourceOceanId": "adiar-o-sono-para-recuperar-autonomia",
+      "territory": "adiar-o-sono-para-recuperar-autonomia",
+      "intent": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
+      "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre transição entre obrigação, tempo próprio e descanso, sem claims médicos ou promessas sobre sono",
+      "evidenceCount": 3,
+      "evidence": [
+        "International Journal of Behavioral Medicine (daily diary study, 2024): higher daily stress was associated with more bedtime procrastination, which in turn was associated with shorter sleep duration and poorer sleep quality — https://doi.org/10.1007/s12529-023-10206-3",
+        "Current Psychology / academic literature on revenge bedtime procrastination (2026): examines intentional delay of bedtime to reclaim leisure or personal time not available during the day, reinforcing autonomy/time-recovery as a distinct behavioural framing — https://link.springer.com/",
+        "CNN Brasil (2026): public cultural coverage describes 'procrastinação vingativa do sono' as delaying bedtime to compensate for days with little personal time or control, providing an independent contemporary language/culture signal — https://www.cnnbrasil.com.br/"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
       "id": "brain_oracle_auto_silenciamento_para_preservar_o_vinculo",
       "type": "oracle_candidate",
       "sourceOceanId": "auto-silenciamento-para-preservar-o-vinculo",
@@ -8306,6 +8334,259 @@
         "reframe",
         "movement",
         "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_adiar_o_sono_para_recuperar_autonomia",
+      "type": "question_candidate",
+      "sourceOceanId": "adiar-o-sono-para-recuperar-autonomia",
+      "territory": "adiar-o-sono-para-recuperar-autonomia",
+      "intent": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
+      "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre transição entre obrigação, tempo próprio e descanso, sem claims médicos ou promessas sobre sono",
+      "evidenceCount": 3,
+      "evidence": [
+        "International Journal of Behavioral Medicine (daily diary study, 2024): higher daily stress was associated with more bedtime procrastination, which in turn was associated with shorter sleep duration and poorer sleep quality — https://doi.org/10.1007/s12529-023-10206-3",
+        "Current Psychology / academic literature on revenge bedtime procrastination (2026): examines intentional delay of bedtime to reclaim leisure or personal time not available during the day, reinforcing autonomy/time-recovery as a distinct behavioural framing — https://link.springer.com/",
+        "CNN Brasil (2026): public cultural coverage describes 'procrastinação vingativa do sono' as delaying bedtime to compensate for days with little personal time or control, providing an independent contemporary language/culture signal — https://www.cnnbrasil.com.br/"
+      ],
+      "questionThemeCandidates": [
+        "tempo que é meu",
+        "dificuldade em terminar o dia",
+        "descanso que parece desperdício",
+        "autonomia nocturna",
+        "mais uma coisa antes de dormir",
+        "transição entre obrigação e descanso"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_open",
+          "theme": "tempo que é meu",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_recognize",
+          "theme": "tempo que é meu",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_deepen",
+          "theme": "tempo que é meu",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_touch",
+          "theme": "tempo que é meu",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_close",
+          "theme": "tempo que é meu",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_signature",
+          "theme": "tempo que é meu",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_open",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_recognize",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_deepen",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_touch",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_close",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_signature",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_open",
+          "theme": "descanso que parece desperdício",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_recognize",
+          "theme": "descanso que parece desperdício",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_deepen",
+          "theme": "descanso que parece desperdício",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_touch",
+          "theme": "descanso que parece desperdício",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_close",
+          "theme": "descanso que parece desperdício",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_signature",
+          "theme": "descanso que parece desperdício",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_open",
+          "theme": "autonomia nocturna",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_recognize",
+          "theme": "autonomia nocturna",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_deepen",
+          "theme": "autonomia nocturna",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_touch",
+          "theme": "autonomia nocturna",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_close",
+          "theme": "autonomia nocturna",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_signature",
+          "theme": "autonomia nocturna",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_open",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_recognize",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_deepen",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_touch",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_close",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_signature",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_open",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_recognize",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_deepen",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_touch",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_close",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_signature",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
       ],
       "bodyStored": false,
       "approvalRequired": true,
