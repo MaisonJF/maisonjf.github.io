@@ -17,7 +17,8 @@ class PgvectorError(RuntimeError):
 class EmbeddingProvider(Protocol):
     model_id: str
     dimensions: int
-    def embed(self, text: str) -> Sequence[float]: ...
+    def embed_query(self, text: str) -> Sequence[float]: ...
+    def embed_document(self, text: str) -> Sequence[float]: ...
 
 
 def _vector_literal(values: Sequence[float], dimensions: int) -> str:
@@ -134,7 +135,7 @@ class PgvectorSemanticMemory:
         rows=[]
         for doc in documents:
             validate_document(doc)
-            vector=_vector_literal(self.embedder.embed(doc.text),self.embedder.dimensions)
+            vector=_vector_literal(self.embedder.embed_document(doc.text),self.embedder.dimensions)
             rows.append((
                 doc.document_id,doc.text,vector,doc.evidence_ref,doc.territory_key,
                 doc.knowledge_type,doc.observed_at,doc.language,doc.confidence,
@@ -171,7 +172,7 @@ class PgvectorSemanticMemory:
     def search(self, query: str, *, limit: int, filters: Mapping[str,object]) -> Sequence[SemanticHit]:
         if limit < 1 or limit > 100:
             raise PgvectorError("limit_must_be_1_100")
-        vector=_vector_literal(self.embedder.embed(query),self.embedder.dimensions)
+        vector=_vector_literal(self.embedder.embed_query(query),self.embedder.dimensions)
         where=["embedding_model_id=%s"]
         allowed={"territory_key","knowledge_type","privacy_class","language"}
         filter_values=[]
