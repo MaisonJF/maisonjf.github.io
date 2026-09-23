@@ -14,7 +14,7 @@ The public Maison site does not depend on this Worker.
 
 The Worker can also ingest the keyless, passive OSIRIS public API into the same A13 provenance pipeline. The passive registry now covers the broad read-only world-sensing surface: aggregate stats, aviation, satellites, space weather, earthquakes, fires, severe weather, air quality, navigation interference, conflicts, GDELT events, country risk, news, markets, supply-chain suppliers, public CCTV metadata, infrastructure, maritime traffic and cyber-threat/malware telemetry. Raw camera streams are never treated as interpreted behaviour; a dedicated aggregate vision layer is still required before camera imagery can become behavioural evidence.
 
-OSIRIS sensing is disabled by default. When enabled, the template schedules passive collection hourly and stores it as `public_web` evidence with source provenance.
+OSIRIS sensing is disabled by default. When enabled, the Worker wakes hourly but each passive source is collected only when its conservative source-specific cadence is due. Cadences are explicit initial policy and may be overridden with `OSIRIS_SOURCE_CADENCES_JSON`; they are not assumptions about source truth or freshness. Results are stored as `public_web` evidence with source provenance.
 
 ## Osiris family
 
@@ -47,6 +47,7 @@ A provider is skipped unless its secret and required model setting are configure
 - environment `OSIRIS_GATEWAY_ENABLED=false`;
 - environment `OSIRIS_MEMORY_ENABLED=false`;
 - OSIRIS uses only an explicit passive-source allowlist; active scanner/RECON routes are not part of this Worker;
+- passive sources use conservative per-source cadences instead of polling every feed every hour;
 - database kill switch = ON after migration;
 - two territories per run;
 - maximum two calls per provider per UTC day;
