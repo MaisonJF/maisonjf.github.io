@@ -7,10 +7,10 @@ import os
 
 async def main() -> None:
     from mcp import ClientSession
-    from mcp.client.streamable_http import streamablehttp_client
+    from mcp.client.streamable_http import streamable_http_client
 
     url=os.environ.get("OSIRIS_MCP_URL","http://osiris-mcp:8790/mcp")
-    async with streamablehttp_client(url) as (read_stream,write_stream,_):
+    async with streamable_http_client(url) as (read_stream,write_stream,_):
         async with ClientSession(read_stream,write_stream) as session:
             await session.initialize()
             tools=await session.list_tools()
