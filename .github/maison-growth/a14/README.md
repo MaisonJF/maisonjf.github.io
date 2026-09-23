@@ -111,13 +111,13 @@ All meaningful action remains governed by A12 and existing execution boundaries.
 
 A14 is repository-only and analysis-only. Its migration is D1/SQLite-compatible but applying repository migrations does not activate outbound behaviour, collection, spend or publication.
 
-## Recovery mode
+## Cash & Profit mode
 
 A14 can prioritise fast-cash hypotheses while the full Brain continues to grow.
 
-Recovery is measured from **observed A3 immediate contribution**, not gross revenue, expected value or forecasts. The repository contains no private recovery amount. A recovery target is runtime/private data stored only when explicitly configured.
+Historical sunk investment is **not** treated as a target. The commercial objective from this point forward is new money: observed revenue, contribution, margin quality, time-to-cash and repeatability.
 
-The recovery layer prefers evidence-backed opportunities with shorter time-to-cash, lower capital requirement, higher expected contribution and lower human effort. Missing commercial inputs remain UNKNOWN and make a candidate `enrich_data`, not a fabricated ranking.
+Cash performance is measured from **observed A3 economics**, not gross forecasts or expected continuation value. The cash layer prefers evidence-backed opportunities with shorter time-to-cash, lower capital requirement, higher expected contribution and lower human effort. Missing commercial inputs remain UNKNOWN and make a candidate `enrich_data`, not a fabricated ranking.
 
 A14.2 adds append-only lineage bridges:
 
