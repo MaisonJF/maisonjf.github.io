@@ -342,3 +342,61 @@ test('A7 CTA decision lookup requires stable solution ID', async () => {
   assert.equal(response.status,400);
   assert.equal((await response.json()).error,'invalid_solution_id');
 });
+
+
+test('commercial action inbox separates decisions manual pilots and A8 drafts', async () => {
+  let call=0;
+  const e=env((sql,params)=>{
+    call++;
+    assert.deepEqual(params,[5]);
+    if (/FROM autonomy_human_queue_current/.test(sql)) {
+      return [{
+        queue_id:'inq_12345678-1234-1234-1234-123456789012',
+        action_id:'act_12345678-1234-1234-1234-123456789012',
+        priority:50,status:'pending',created_at:'2026-09-23T20:00:00Z',
+        risk_class:'medium',autonomy_level:'human_approval_required',
+        opportunity_id:'opp_x',offer_hypothesis_id:'ofh_x',
+        territory_code:'gifting',opportunity_score:80,opportunity_confidence:.7,
+        offer_type:'corporate_gifting',a3_solution_type:'b2b',existing_solution_id:null,
+        fit_score:70,fit_confidence:.6,validation_mode:'b2b_pilot',
+        economics_json:'{"capital_required_minor":null}'
+      }];
+    }
+    if (/FROM a14_validation_plans/.test(sql) && /manual_pilot_required/.test(sql)) {
+      return [{
+        validation_plan_id:'vpl_x',review_resolution_id:'rvr_x',
+        opportunity_id:'opp_x',offer_hypothesis_id:'ofh_x',
+        plan_kind:'manual_b2b_pilot',existing_solution_id:null,
+        hypothesis:'Pilot manual para validar procura.',
+        validation_mode:'b2b_pilot',primary_metric_key:null,
+        evidence_refs_json:'["evd_x"]',reason_codes_json:'["manual"]',
+        state:'manual_pilot_required',created_at:'2026-09-23T20:01:00Z'
+      }];
+    }
+    if (/FROM a14_validation_plan_a8_links/.test(sql)) {
+      return [{
+        validation_plan_id:'vpl_y',opportunity_id:'opp_y',offer_hypothesis_id:'ofh_y',
+        existing_solution_id:'sol_y',experiment_id:'exp_y',experiment_version_id:'exv_y',
+        hypothesis:'CTA draft.',primary_metric_key:'economic_value_per_eligible_session',
+        compatibility_key:'asset:ast_x:cta:primary',policy_version:'experiment_policy_1',
+        experiment_state:'draft',occurred_at:'2026-09-23T20:02:00Z'
+      }];
+    }
+    return [];
+  });
+  const response=await handleBrainControlRequest(
+    req('/internal/brain/action-inbox?limit=5'),e
+  );
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(call,3);
+  assert.equal(body.decide.length,1);
+  assert.equal(body.manual_pilots.length,1);
+  assert.equal(body.a8_drafts.length,1);
+  assert.equal(body.authority.public_write_authorized,false);
+  assert.equal(body.authority.outbound_authorized,false);
+  assert.equal(body.authority.spend_authorized,false);
+  assert.equal(body.authority.experiment_execution_authorized,false);
+  assert.equal(body.manual_pilots[0].outbound_authorized,false);
+  assert.equal(body.a8_drafts[0].experiment_execution_authorized,false);
+});
