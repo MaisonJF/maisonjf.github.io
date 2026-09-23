@@ -14,6 +14,7 @@ The public Maison site does not depend on this Worker.
 
 Adapters are implemented for:
 
+- OpenRouter Chat Completions (provider/model gateway; ungrounded unless a later grounded adapter is configured);
 - OpenAI Responses API + Web Search;
 - Google Gemini + Google Search grounding;
 - Perplexity Sonar;
@@ -65,12 +66,13 @@ Configure any subset. Do not commit values to GitHub and do not place them in or
 
 Secret names:
 
+- `OPENROUTER_API_KEY`
 - `OPENAI_API_KEY`
 - `GEMINI_API_KEY`
 - `PERPLEXITY_API_KEY`
 - `ANTHROPIC_API_KEY`
 
-Model vars live in `wrangler.jsonc`. Anthropic is intentionally blank in the template so no model is guessed silently.
+Model vars live in `wrangler.jsonc`. OpenRouter defaults to `openrouter/free` in the template and remains disabled until explicitly enabled. Anthropic is intentionally blank in the template so no model is guessed silently.
 
 ## 4. Validate before activation
 
