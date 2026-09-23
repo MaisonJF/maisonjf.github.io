@@ -15,6 +15,8 @@ class ScoutError(ValueError):
 class ScoutOpportunity:
     scout_id: str
     territory_key: str
+    need_id: Optional[str]
+    intent_id: Optional[str]
     need_summary: str
     evidence_refs: tuple[str,...]
     independent_roots: tuple[str,...]
@@ -29,6 +31,9 @@ class ScoutOpportunity:
 def discover(
     group: SignalGroup,
     *,
+    need_id: Optional[str]=None,
+    intent_id: Optional[str]=None,
+    mapping_reason_codes: Sequence[str]=(),
     existing_solution_ids: Sequence[str],
     knowledge_context_refs: Sequence[str],
     candidate_offer_types: Sequence[str],
@@ -36,7 +41,7 @@ def discover(
 ) -> ScoutOpportunity:
     if not 0 <= minimum_confidence <= 1:
         raise ScoutError("invalid_minimum_confidence")
-    reasons=["external_signal_convergence"]
+    reasons=["external_signal_convergence",*mapping_reason_codes]
     existing=tuple(sorted(set(existing_solution_ids)))
     if existing:
         reasons.append("existing_asset_first")
@@ -48,6 +53,8 @@ def discover(
     return ScoutOpportunity(
         scout_id="sct_"+group.group_id.removeprefix("pbg_"),
         territory_key=group.territory_key,
+        need_id=need_id,
+        intent_id=intent_id,
         need_summary=group.representative_text,
         evidence_refs=group.evidence_refs,
         independent_roots=group.independent_roots,
