@@ -41,7 +41,10 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Foundry | READY multi-format concept engine | analysis only |
 | A7 Commercial Discovery | READY existing module | analysis only |
 | A14 Universal Opportunity + Earned Distribution | READY A14.2 + deterministic hypothesis IDs + strict idempotent repository | analysis only |
-| A12 governance/HITL | READY existing module | simulation / human-gated |
+| A14 materialization | READY narrow proposal API + manual runtime profile | DISABLED |
+| Commercial human inbox | READY read-only A12 inbox + CLI | AVAILABLE WHEN PRIVATE READ ENABLED |
+| Human review decision | READY A12.2 planning-only append-only decision API | DISABLED |
+| A12 governance/HITL | READY A12.2 + append-only commercial review decisions | simulation / human-gated / execution OFF |
 | A8 experiments | READY existing module | repository/simulation boundaries |
 | A3 journeys/economics/attribution | READY existing module | runtime depends on event flow |
 | A11 learning | READY existing module | analysis only |
