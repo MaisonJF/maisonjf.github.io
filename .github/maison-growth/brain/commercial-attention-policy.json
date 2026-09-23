@@ -1,0 +1,64 @@
+{
+  "schema_version": "commercial_attention_policy_v1",
+  "purpose": "Internal attention ranking for what to test/sell first. It is not a profit forecast and never authorizes publication, stock promises, discounts or checkout.",
+  "contextual_match_min": 0.06,
+  "weights": {
+    "direct_ocean_adjacency": 12,
+    "contextual_ocean_match": 3,
+    "low_price_barrier": 4,
+    "medium_price_barrier": 2,
+    "public_active_asset": 2
+  },
+  "price_barriers_minor": {
+    "low_max": 1500,
+    "medium_max": 5000
+  },
+  "direct_aliases": {
+    "catalog:product:nevoa": [
+      "névoa",
+      "nevoa"
+    ],
+    "catalog:product:escalda-pes": [
+      "escalda-pés",
+      "escalda pes",
+      "escalda"
+    ],
+    "catalog:product:oleo-massagem": [
+      "óleo",
+      "oleo"
+    ],
+    "catalog:product:vela-pequena": [
+      "vela",
+      "velas"
+    ],
+    "catalog:product:vela-vidro": [
+      "vela",
+      "velas"
+    ],
+    "catalog:service:companhia": [
+      "presença",
+      "presenca",
+      "companhia"
+    ],
+    "catalog:service:tarot": [
+      "tarot"
+    ],
+    "catalog:service:acompanhamento": [
+      "acompanhamento"
+    ],
+    "catalog:service:mentoria": [
+      "mentoria"
+    ],
+    "catalog:service:b2b": [
+      "b2b",
+      "para profissionais"
+    ],
+    "catalog:service:ritual-personalizado": [
+      "ritual personalizado"
+    ],
+    "catalog:service:pedidos-especiais": [
+      "pedidos físicos",
+      "pedidos fisicos"
+    ]
+  }
+}
