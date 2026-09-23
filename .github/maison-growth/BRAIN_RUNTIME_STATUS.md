@@ -29,6 +29,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Private Worker deploy gate | READY automatic secret-free dry-run + manual live workflow + minimal D1-only private renderer | DRY-RUN VERIFIED ON `main` @ `5b4bb1e6` |
 | Private credential readiness | READY names-only secret-presence report on trusted `main` pushes | CHECKED: first-stage secrets currently missing |
 | Private custom-domain route | READY exact HTTPS Custom Domain from `MAISON_BRAIN_PRIVATE_URL`; workers.dev/previews/cron/queue/AI stripped | BLOCKED: private URL + Cloudflare credentials not configured |
+| Cloudflare read-only inspect | READY manual workflow; only API token/account ID; 0001→0016 inspector; no deploy/write commands | NOT RUN |
 | Private deploy verification | READY read-only remote D1 schema gate + authenticated Brain health probe | NOT RUN |
 | Pre-Brain | READY analysis core | NOT PROVISIONED |
 | DuckDB | READY optional analytical adapter | PACKAGE/HOST NOT PROVISIONED |
