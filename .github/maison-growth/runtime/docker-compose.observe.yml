@@ -1,0 +1,111 @@
+name: maison-brain-observe
+
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.6-pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-osiris}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-osiris}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - maison_postgres:/var/lib/postgresql/data
+      - ./postgres-init.sh:/docker-entrypoint-initdb.d/001-maison-init.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U ${POSTGRES_USER:-osiris} -d ${POSTGRES_DB:-osiris}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  redis:
+    image: redis:7.4.11-alpine
+    restart: unless-stopped
+    command: ["redis-server","--appendonly","yes","--save","60","100"]
+    ports:
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    volumes:
+      - maison_redis:/data
+    healthcheck:
+      test: ["CMD","redis-cli","ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  osiris-init:
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.osiris
+      args:
+        OSIRIS_REF: ${OSIRIS_REF:-181658e1db85ce4d2e8702124423b674b3cb136f}
+        UV_VERSION: ${UV_VERSION:-0.12.18}
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-osiris}
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: ["/bin/sh","-lc","uv run alembic upgrade head && uv run python -m src.init"]
+    restart: "no"
+
+  osiris-mcp:
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.osiris
+      args:
+        OSIRIS_REF: ${OSIRIS_REF:-181658e1db85ce4d2e8702124423b674b3cb136f}
+        UV_VERSION: ${UV_VERSION:-0.12.18}
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-osiris}
+      REDIS_URL: redis://redis:6379/0
+      OSIRIS_MCP_TRANSPORT: streamable-http
+    depends_on:
+      osiris-init:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:${OSIRIS_MCP_PORT:-8790}:8790"
+    command: ["uv","run","python","-m","src.mcp_server"]
+
+  osiris-worker:
+    profiles: ["worker"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.osiris
+      args:
+        OSIRIS_REF: ${OSIRIS_REF:-181658e1db85ce4d2e8702124423b674b3cb136f}
+        UV_VERSION: ${UV_VERSION:-0.12.18}
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-osiris}
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      osiris-init:
+        condition: service_completed_successfully
+    command: ["uv","run","arq","src.workers.arq_worker.WorkerSettings"]
+
+  maison-osiris-bridge:
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.osiris
+      args:
+        OSIRIS_REF: ${OSIRIS_REF:-181658e1db85ce4d2e8702124423b674b3cb136f}
+        UV_VERSION: ${UV_VERSION:-0.12.18}
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-osiris}
+      REDIS_URL: redis://redis:6379/0
+      MAISON_OSIRIS_BRIDGE_TOKEN: ${MAISON_OSIRIS_BRIDGE_TOKEN:?set MAISON_OSIRIS_BRIDGE_TOKEN}
+    depends_on:
+      osiris-init:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:${MAISON_OSIRIS_BRIDGE_PORT:-8791}:8791"
+    command: ["uvicorn","osiris_bridge:app","--host","0.0.0.0","--port","8791"]
+
+volumes:
+  maison_postgres:
+  maison_redis:
