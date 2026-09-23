@@ -199,7 +199,7 @@ test('learning context remains correlation-only and excludes policy mutation fie
 
 test('commercial review queue exposes actionable context without execution authority', async () => {
   const e=env((sql,params)=>{
-    assert.match(sql,/FROM autonomy_human_queue/);
+    assert.match(sql,/FROM autonomy_human_queue_current/);
     assert.match(sql,/commercial_opportunity_review/);
     assert.deepEqual(params,['pending',10]);
     return [{
