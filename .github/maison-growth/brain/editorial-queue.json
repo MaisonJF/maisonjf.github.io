@@ -1,7 +1,7 @@
 {
   "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
-  "generatedAt": "2026-09-20T08:14:28+01:00",
+  "generatedAt": "2026-09-23T22:31:00+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
   "contract": {
     "storesPaidBodies": false,
@@ -11,19 +11,19 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 6,
-    "queueItems": 12,
-    "questionCandidates": 6,
-    "questionThemeHypotheses": 33,
-    "questionDesignSlots": 198,
+    "oceansConsidered": 9,
+    "queueItems": 18,
+    "questionCandidates": 9,
+    "questionThemeHypotheses": 51,
+    "questionDesignSlots": 306,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 150,
     "pdiThemeBacklog": 150,
     "pdiSourceDesignSlots": 900,
     "pdiEditorialCoreTarget": 45000,
     "pdiCombinatorialTarget": 2800000,
-    "oracleCandidates": 6,
-    "oracleRoleSlots": 42
+    "oracleCandidates": 9,
+    "oracleRoleSlots": 63
   },
   "pdiGrowth": {
     "scale": {
@@ -8147,6 +8147,34 @@
   },
   "items": [
     {
+      "id": "brain_oracle_adiar_o_sono_para_recuperar_autonomia",
+      "type": "oracle_candidate",
+      "sourceOceanId": "adiar-o-sono-para-recuperar-autonomia",
+      "territory": "adiar-o-sono-para-recuperar-autonomia",
+      "intent": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
+      "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre transição entre obrigação, tempo próprio e descanso, sem claims médicos ou promessas sobre sono",
+      "evidenceCount": 3,
+      "evidence": [
+        "International Journal of Behavioral Medicine (daily diary study, 2024): higher daily stress was associated with more bedtime procrastination, which in turn was associated with shorter sleep duration and poorer sleep quality — https://doi.org/10.1007/s12529-023-10206-3",
+        "Current Psychology / academic literature on revenge bedtime procrastination (2026): examines intentional delay of bedtime to reclaim leisure or personal time not available during the day, reinforcing autonomy/time-recovery as a distinct behavioural framing — https://link.springer.com/",
+        "CNN Brasil (2026): public cultural coverage describes 'procrastinação vingativa do sono' as delaying bedtime to compensate for days with little personal time or control, providing an independent contemporary language/culture signal — https://www.cnnbrasil.com.br/"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
       "id": "brain_oracle_auto_silenciamento_para_preservar_o_vinculo",
       "type": "oracle_candidate",
       "sourceOceanId": "auto-silenciamento-para-preservar-o-vinculo",
@@ -8187,6 +8215,34 @@
         "Stress and Health (systematic review and meta-analysis, 2024): subjective caregiver burden is highly prevalent in family carers; dysfunctional coping was associated with higher burden and active coping with lower burden — https://doi.org/10.1002/smi.3395",
         "BMC Palliative Care (scoping review, 2026): caregiver guilt recurred around perceived inadequacy, difficult care decisions, self-care and competing family responsibilities, with action-oriented and identity-oriented guilt identified as distinct dimensions — https://doi.org/10.1186/s12904-026-02203-z",
         "Geriatrics (2026; PMID 42644998): former dementia caregivers described constrained choice and role engulfment; wellbeing was linked not only to care demands but to whether care felt chosen, bounded, shared and supported — https://pubmed.ncbi.nlm.nih.gov/42644998/"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_oracle_doomscrolling_para_tentar_reduzir_incerteza",
+      "type": "oracle_candidate",
+      "sourceOceanId": "doomscrolling-para-tentar-reduzir-incerteza",
+      "territory": "doomscrolling-para-tentar-reduzir-incerteza",
+      "intent": "reconhecer quando procurar informação deixa de ajudar a compreender o mundo e passa a alimentar um ciclo de alerta, repetição e dificuldade em desligar, distinguindo estar informado de permanecer preso a conteúdo negativo sem transformar o comportamento em diagnóstico",
+      "painLanguage": "Há momentos em que a pessoa abre o telemóvel para perceber o que se passa e acaba presa numa corrente de notícias negativas: sabe que aquilo a está a desgastar, mas continuar a procurar parece uma forma de não ser apanhada desprevenida.",
+      "commercialAdjacency": "Oráculo Eu & Padrões, Segurança e Cabeça; Ritual Volta Para Casa e futuras experiências digitais sobre pausa, atenção e relação com o feed, sem claims médicos ou promessa de tratamento",
+      "evidenceCount": 3,
+      "evidence": [
+        "Frontiers in Psychology (systematic review and meta-analysis, 2026): across 44 unique studies, doomscrolling showed correlational associations with greater anxiety, depression and psychological distress and with lower wellbeing and life satisfaction; certainty was rated very low and causality was not established — https://doi.org/10.3389/fpsyg.2026.1893800",
+        "Personality and Individual Differences (2025): a study of 443 participants examined doomscrolling in relation to trait anxiety, intolerance of uncertainty and psychological resilience, supporting uncertainty as a relevant mechanism in persistent negative-news consumption — https://doi.org/10.1016/j.paid.2024.112919",
+        "The Journal of Psychology (2026; PMID 42374759): research on doomscrolling examined links with rumination, hope and subjective vitality, adding recent evidence around difficulty disengaging from bad news — https://pubmed.ncbi.nlm.nih.gov/42374759/"
       ],
       "roleCandidates": [
         "opening",
@@ -8306,6 +8362,287 @@
         "reframe",
         "movement",
         "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_oracle_telepressao_e_disponibilidade_permanente",
+      "type": "oracle_candidate",
+      "sourceOceanId": "telepressao-e-disponibilidade-permanente",
+      "territory": "telepressao-e-disponibilidade-permanente",
+      "intent": "reconhecer quando disponibilidade e rapidez de resposta deixam de ser escolhas e se transformam numa pressão persistente para estar alcançável, distinguindo responsividade saudável de urgência digital constante no trabalho e na vida pessoal",
+      "painLanguage": "Mesmo quando ninguém exige uma resposta imediata, uma mensagem por ler pode continuar a ocupar espaço na cabeça: responder depressa torna-se reflexo, e ficar offline pode começar a parecer descuido, culpa ou risco de falhar alguém.",
+      "commercialAdjacency": "Oráculo Trabalho & Caminho, Comunicação & Conflito e Limites & Respeito; experiências reflexivas sobre disponibilidade, fronteiras digitais e recuperação de tempo próprio, sem aconselhamento laboral ou clínico",
+      "evidenceCount": 3,
+      "evidence": [
+        "Journal of Managerial Psychology (three-wave panel, 2025): greater telepressure — preoccupation with work-related messages — was linked to exhaustion and work interference with family, and flexible work could increase strain through telepressure in some employees — https://doi.org/10.1108/JMP-01-2024-0027",
+        "BMC Psychology (2025): validation work on workplace and private-life telepressure treats both as preoccupation with and urge to respond quickly to electronic messages and examines their relationships with psychological health and wellbeing — https://doi.org/10.1186/s40359-025-02616-0",
+        "International Journal of Workplace Health Management / PubMed (2022; PMID 36339884): diary data linked context-incongruent telepressure and message-based communication with greater affective rumination across work and private-life boundaries — https://pubmed.ncbi.nlm.nih.gov/36339884/"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_adiar_o_sono_para_recuperar_autonomia",
+      "type": "question_candidate",
+      "sourceOceanId": "adiar-o-sono-para-recuperar-autonomia",
+      "territory": "adiar-o-sono-para-recuperar-autonomia",
+      "intent": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
+      "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre transição entre obrigação, tempo próprio e descanso, sem claims médicos ou promessas sobre sono",
+      "evidenceCount": 3,
+      "evidence": [
+        "International Journal of Behavioral Medicine (daily diary study, 2024): higher daily stress was associated with more bedtime procrastination, which in turn was associated with shorter sleep duration and poorer sleep quality — https://doi.org/10.1007/s12529-023-10206-3",
+        "Current Psychology / academic literature on revenge bedtime procrastination (2026): examines intentional delay of bedtime to reclaim leisure or personal time not available during the day, reinforcing autonomy/time-recovery as a distinct behavioural framing — https://link.springer.com/",
+        "CNN Brasil (2026): public cultural coverage describes 'procrastinação vingativa do sono' as delaying bedtime to compensate for days with little personal time or control, providing an independent contemporary language/culture signal — https://www.cnnbrasil.com.br/"
+      ],
+      "questionThemeCandidates": [
+        "tempo que é meu",
+        "dificuldade em terminar o dia",
+        "descanso que parece desperdício",
+        "autonomia nocturna",
+        "mais uma coisa antes de dormir",
+        "transição entre obrigação e descanso"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_open",
+          "theme": "tempo que é meu",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_recognize",
+          "theme": "tempo que é meu",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_deepen",
+          "theme": "tempo que é meu",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_touch",
+          "theme": "tempo que é meu",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_close",
+          "theme": "tempo que é meu",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_tempo_que_e_meu_signature",
+          "theme": "tempo que é meu",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_open",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_recognize",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_deepen",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_touch",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_close",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_dificuldade_em_terminar_o_dia_signature",
+          "theme": "dificuldade em terminar o dia",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_open",
+          "theme": "descanso que parece desperdício",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_recognize",
+          "theme": "descanso que parece desperdício",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_deepen",
+          "theme": "descanso que parece desperdício",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_touch",
+          "theme": "descanso que parece desperdício",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_close",
+          "theme": "descanso que parece desperdício",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_descanso_que_parece_desperdicio_signature",
+          "theme": "descanso que parece desperdício",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_open",
+          "theme": "autonomia nocturna",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_recognize",
+          "theme": "autonomia nocturna",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_deepen",
+          "theme": "autonomia nocturna",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_touch",
+          "theme": "autonomia nocturna",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_close",
+          "theme": "autonomia nocturna",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_autonomia_nocturna_signature",
+          "theme": "autonomia nocturna",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_open",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_recognize",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_deepen",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_touch",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_close",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_mais_uma_coisa_antes_de_dormir_signature",
+          "theme": "mais uma coisa antes de dormir",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_open",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_recognize",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_deepen",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_touch",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_close",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_signature",
+          "theme": "transição entre obrigação e descanso",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
       ],
       "bodyStored": false,
       "approvalRequired": true,
@@ -8809,6 +9146,259 @@
         {
           "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_escolha_e_obrigacao_no_cuidar_signature",
           "theme": "escolha e obrigação no cuidar",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_doomscrolling_para_tentar_reduzir_incerteza",
+      "type": "question_candidate",
+      "sourceOceanId": "doomscrolling-para-tentar-reduzir-incerteza",
+      "territory": "doomscrolling-para-tentar-reduzir-incerteza",
+      "intent": "reconhecer quando procurar informação deixa de ajudar a compreender o mundo e passa a alimentar um ciclo de alerta, repetição e dificuldade em desligar, distinguindo estar informado de permanecer preso a conteúdo negativo sem transformar o comportamento em diagnóstico",
+      "painLanguage": "Há momentos em que a pessoa abre o telemóvel para perceber o que se passa e acaba presa numa corrente de notícias negativas: sabe que aquilo a está a desgastar, mas continuar a procurar parece uma forma de não ser apanhada desprevenida.",
+      "commercialAdjacency": "Oráculo Eu & Padrões, Segurança e Cabeça; Ritual Volta Para Casa e futuras experiências digitais sobre pausa, atenção e relação com o feed, sem claims médicos ou promessa de tratamento",
+      "evidenceCount": 3,
+      "evidence": [
+        "Frontiers in Psychology (systematic review and meta-analysis, 2026): across 44 unique studies, doomscrolling showed correlational associations with greater anxiety, depression and psychological distress and with lower wellbeing and life satisfaction; certainty was rated very low and causality was not established — https://doi.org/10.3389/fpsyg.2026.1893800",
+        "Personality and Individual Differences (2025): a study of 443 participants examined doomscrolling in relation to trait anxiety, intolerance of uncertainty and psychological resilience, supporting uncertainty as a relevant mechanism in persistent negative-news consumption — https://doi.org/10.1016/j.paid.2024.112919",
+        "The Journal of Psychology (2026; PMID 42374759): research on doomscrolling examined links with rumination, hope and subjective vitality, adding recent evidence around difficulty disengaging from bad news — https://pubmed.ncbi.nlm.nih.gov/42374759/"
+      ],
+      "questionThemeCandidates": [
+        "não consigo parar de ver más notícias",
+        "informar-me vs afundar-me",
+        "medo de perder algo importante",
+        "incerteza e procura de mais informação",
+        "quando fechar o ecrã",
+        "corpo em alerta depois do feed"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_nao_consigo_parar_de_ver_mas_noticias_open",
+          "theme": "não consigo parar de ver más notícias",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_nao_consigo_parar_de_ver_mas_noticias_recognize",
+          "theme": "não consigo parar de ver más notícias",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_nao_consigo_parar_de_ver_mas_noticias_deepen",
+          "theme": "não consigo parar de ver más notícias",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_nao_consigo_parar_de_ver_mas_noticias_touch",
+          "theme": "não consigo parar de ver más notícias",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_nao_consigo_parar_de_ver_mas_noticias_close",
+          "theme": "não consigo parar de ver más notícias",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_nao_consigo_parar_de_ver_mas_noticias_signature",
+          "theme": "não consigo parar de ver más notícias",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_informar_me_vs_afundar_me_open",
+          "theme": "informar-me vs afundar-me",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_informar_me_vs_afundar_me_recognize",
+          "theme": "informar-me vs afundar-me",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_informar_me_vs_afundar_me_deepen",
+          "theme": "informar-me vs afundar-me",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_informar_me_vs_afundar_me_touch",
+          "theme": "informar-me vs afundar-me",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_informar_me_vs_afundar_me_close",
+          "theme": "informar-me vs afundar-me",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_informar_me_vs_afundar_me_signature",
+          "theme": "informar-me vs afundar-me",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_medo_de_perder_algo_importante_open",
+          "theme": "medo de perder algo importante",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_medo_de_perder_algo_importante_recognize",
+          "theme": "medo de perder algo importante",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_medo_de_perder_algo_importante_deepen",
+          "theme": "medo de perder algo importante",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_medo_de_perder_algo_importante_touch",
+          "theme": "medo de perder algo importante",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_medo_de_perder_algo_importante_close",
+          "theme": "medo de perder algo importante",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_medo_de_perder_algo_importante_signature",
+          "theme": "medo de perder algo importante",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_incerteza_e_procura_de_mais_informacao_open",
+          "theme": "incerteza e procura de mais informação",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_incerteza_e_procura_de_mais_informacao_recognize",
+          "theme": "incerteza e procura de mais informação",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_incerteza_e_procura_de_mais_informacao_deepen",
+          "theme": "incerteza e procura de mais informação",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_incerteza_e_procura_de_mais_informacao_touch",
+          "theme": "incerteza e procura de mais informação",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_incerteza_e_procura_de_mais_informacao_close",
+          "theme": "incerteza e procura de mais informação",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_incerteza_e_procura_de_mais_informacao_signature",
+          "theme": "incerteza e procura de mais informação",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_quando_fechar_o_ecra_open",
+          "theme": "quando fechar o ecrã",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_quando_fechar_o_ecra_recognize",
+          "theme": "quando fechar o ecrã",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_quando_fechar_o_ecra_deepen",
+          "theme": "quando fechar o ecrã",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_quando_fechar_o_ecra_touch",
+          "theme": "quando fechar o ecrã",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_quando_fechar_o_ecra_close",
+          "theme": "quando fechar o ecrã",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_quando_fechar_o_ecra_signature",
+          "theme": "quando fechar o ecrã",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_corpo_em_alerta_depois_do_feed_open",
+          "theme": "corpo em alerta depois do feed",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_corpo_em_alerta_depois_do_feed_recognize",
+          "theme": "corpo em alerta depois do feed",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_corpo_em_alerta_depois_do_feed_deepen",
+          "theme": "corpo em alerta depois do feed",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_corpo_em_alerta_depois_do_feed_touch",
+          "theme": "corpo em alerta depois do feed",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_corpo_em_alerta_depois_do_feed_close",
+          "theme": "corpo em alerta depois do feed",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_doomscrolling_para_tentar_reduzir_incerteza_corpo_em_alerta_depois_do_feed_signature",
+          "theme": "corpo em alerta depois do feed",
           "stage": "signature",
           "status": "needs_editorial"
         }
@@ -9708,6 +10298,259 @@
         {
           "id": "slot_solidao_com_contacto_sem_conexao_de_qualidade_intimidade_emocional_signature",
           "theme": "intimidade emocional",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_telepressao_e_disponibilidade_permanente",
+      "type": "question_candidate",
+      "sourceOceanId": "telepressao-e-disponibilidade-permanente",
+      "territory": "telepressao-e-disponibilidade-permanente",
+      "intent": "reconhecer quando disponibilidade e rapidez de resposta deixam de ser escolhas e se transformam numa pressão persistente para estar alcançável, distinguindo responsividade saudável de urgência digital constante no trabalho e na vida pessoal",
+      "painLanguage": "Mesmo quando ninguém exige uma resposta imediata, uma mensagem por ler pode continuar a ocupar espaço na cabeça: responder depressa torna-se reflexo, e ficar offline pode começar a parecer descuido, culpa ou risco de falhar alguém.",
+      "commercialAdjacency": "Oráculo Trabalho & Caminho, Comunicação & Conflito e Limites & Respeito; experiências reflexivas sobre disponibilidade, fronteiras digitais e recuperação de tempo próprio, sem aconselhamento laboral ou clínico",
+      "evidenceCount": 3,
+      "evidence": [
+        "Journal of Managerial Psychology (three-wave panel, 2025): greater telepressure — preoccupation with work-related messages — was linked to exhaustion and work interference with family, and flexible work could increase strain through telepressure in some employees — https://doi.org/10.1108/JMP-01-2024-0027",
+        "BMC Psychology (2025): validation work on workplace and private-life telepressure treats both as preoccupation with and urge to respond quickly to electronic messages and examines their relationships with psychological health and wellbeing — https://doi.org/10.1186/s40359-025-02616-0",
+        "International Journal of Workplace Health Management / PubMed (2022; PMID 36339884): diary data linked context-incongruent telepressure and message-based communication with greater affective rumination across work and private-life boundaries — https://pubmed.ncbi.nlm.nih.gov/36339884/"
+      ],
+      "questionThemeCandidates": [
+        "tenho de responder já",
+        "culpa por estar offline",
+        "disponibilidade permanente",
+        "mensagens que ficam na cabeça",
+        "limites digitais",
+        "estar presente sem estar sempre alcançável"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_tenho_de_responder_ja_open",
+          "theme": "tenho de responder já",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_tenho_de_responder_ja_recognize",
+          "theme": "tenho de responder já",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_tenho_de_responder_ja_deepen",
+          "theme": "tenho de responder já",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_tenho_de_responder_ja_touch",
+          "theme": "tenho de responder já",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_tenho_de_responder_ja_close",
+          "theme": "tenho de responder já",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_tenho_de_responder_ja_signature",
+          "theme": "tenho de responder já",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_culpa_por_estar_offline_open",
+          "theme": "culpa por estar offline",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_culpa_por_estar_offline_recognize",
+          "theme": "culpa por estar offline",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_culpa_por_estar_offline_deepen",
+          "theme": "culpa por estar offline",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_culpa_por_estar_offline_touch",
+          "theme": "culpa por estar offline",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_culpa_por_estar_offline_close",
+          "theme": "culpa por estar offline",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_culpa_por_estar_offline_signature",
+          "theme": "culpa por estar offline",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_disponibilidade_permanente_open",
+          "theme": "disponibilidade permanente",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_disponibilidade_permanente_recognize",
+          "theme": "disponibilidade permanente",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_disponibilidade_permanente_deepen",
+          "theme": "disponibilidade permanente",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_disponibilidade_permanente_touch",
+          "theme": "disponibilidade permanente",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_disponibilidade_permanente_close",
+          "theme": "disponibilidade permanente",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_disponibilidade_permanente_signature",
+          "theme": "disponibilidade permanente",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_mensagens_que_ficam_na_cabeca_open",
+          "theme": "mensagens que ficam na cabeça",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_mensagens_que_ficam_na_cabeca_recognize",
+          "theme": "mensagens que ficam na cabeça",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_mensagens_que_ficam_na_cabeca_deepen",
+          "theme": "mensagens que ficam na cabeça",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_mensagens_que_ficam_na_cabeca_touch",
+          "theme": "mensagens que ficam na cabeça",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_mensagens_que_ficam_na_cabeca_close",
+          "theme": "mensagens que ficam na cabeça",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_mensagens_que_ficam_na_cabeca_signature",
+          "theme": "mensagens que ficam na cabeça",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_limites_digitais_open",
+          "theme": "limites digitais",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_limites_digitais_recognize",
+          "theme": "limites digitais",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_limites_digitais_deepen",
+          "theme": "limites digitais",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_limites_digitais_touch",
+          "theme": "limites digitais",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_limites_digitais_close",
+          "theme": "limites digitais",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_limites_digitais_signature",
+          "theme": "limites digitais",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_estar_presente_sem_estar_sempre_alcancavel_open",
+          "theme": "estar presente sem estar sempre alcançável",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_estar_presente_sem_estar_sempre_alcancavel_recognize",
+          "theme": "estar presente sem estar sempre alcançável",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_estar_presente_sem_estar_sempre_alcancavel_deepen",
+          "theme": "estar presente sem estar sempre alcançável",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_estar_presente_sem_estar_sempre_alcancavel_touch",
+          "theme": "estar presente sem estar sempre alcançável",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_estar_presente_sem_estar_sempre_alcancavel_close",
+          "theme": "estar presente sem estar sempre alcançável",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_telepressao_e_disponibilidade_permanente_estar_presente_sem_estar_sempre_alcancavel_signature",
+          "theme": "estar presente sem estar sempre alcançável",
           "stage": "signature",
           "status": "needs_editorial"
         }

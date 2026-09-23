@@ -88,6 +88,32 @@ export const VPC_OCEAN_SIGNALS=[
       "mais uma coisa antes de dormir",
       "transição entre obrigação e descanso"
     ]
+  },
+  {
+    "id": "telepressao-e-disponibilidade-permanente",
+    "painLanguage": "Mesmo quando ninguém exige uma resposta imediata, uma mensagem por ler pode continuar a ocupar espaço na cabeça: responder depressa torna-se reflexo, e ficar offline pode começar a parecer descuido, culpa ou risco de falhar alguém.",
+    "intent": "reconhecer quando disponibilidade e rapidez de resposta deixam de ser escolhas e se transformam numa pressão persistente para estar alcançável, distinguindo responsividade saudável de urgência digital constante no trabalho e na vida pessoal",
+    "themes": [
+      "tenho de responder já",
+      "culpa por estar offline",
+      "disponibilidade permanente",
+      "mensagens que ficam na cabeça",
+      "limites digitais",
+      "estar presente sem estar sempre alcançável"
+    ]
+  },
+  {
+    "id": "doomscrolling-para-tentar-reduzir-incerteza",
+    "painLanguage": "Há momentos em que a pessoa abre o telemóvel para perceber o que se passa e acaba presa numa corrente de notícias negativas: sabe que aquilo a está a desgastar, mas continuar a procurar parece uma forma de não ser apanhada desprevenida.",
+    "intent": "reconhecer quando procurar informação deixa de ajudar a compreender o mundo e passa a alimentar um ciclo de alerta, repetição e dificuldade em desligar, distinguindo estar informado de permanecer preso a conteúdo negativo sem transformar o comportamento em diagnóstico",
+    "themes": [
+      "não consigo parar de ver más notícias",
+      "informar-me vs afundar-me",
+      "medo de perder algo importante",
+      "incerteza e procura de mais informação",
+      "quando fechar o ecrã",
+      "corpo em alerta depois do feed"
+    ]
   }
 ];
 export const VPC_OCEAN_SIGNAL_VERSION="2026-09-18";
