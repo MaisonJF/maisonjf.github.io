@@ -592,7 +592,54 @@ async function persistValidationPlan(env, plan) {
 }
 
 
+async function verifyA8DraftIdentity(payload) {
+  const orderedVariants=[...payload.variants].sort((a,b)=>a.variant_key.localeCompare(b.variant_key));
+  const identity={
+    validation_plan_id:payload.validation_plan_id,
+    decision_id:payload.a7_decision_id,
+    definition:{
+      hypothesis:payload.version.hypothesis,
+      eligible_population:payload.version.eligible_population,
+      primary_metric:payload.version.primary_metric_key,
+      secondary_metrics:payload.version.secondary_metrics,
+      stop_rules:payload.version.stop_rules,
+      success_criteria:payload.version.success_criteria,
+      compatibility_key:payload.version.compatibility_key,
+      variants:orderedVariants.map(v=>({
+        key:v.variant_key,
+        allocation_basis_points:v.allocation_basis_points,
+        payload:v.variant_payload
+      })),
+      policy_version:payload.version.policy_version
+    }
+  };
+  const inputHash=await sha256Hex(identity);
+  assert(inputHash===payload.version.input_hash,'a8_input_hash_mismatch');
+  const experimentId=await stableId('exp_',identity);
+  assert(experimentId===payload.experiment.experiment_id,'a8_experiment_id_mismatch');
+  const versionId=await stableId('exv_',{
+    experiment_id:experimentId,version:1,identity
+  });
+  assert(versionId===payload.version.experiment_version_id,'a8_version_id_mismatch');
+  for (const variant of payload.variants) {
+    const payloadHash=await sha256Hex(variant.variant_payload);
+    assert(payloadHash===variant.payload_hash,'a8_variant_payload_hash_mismatch');
+    const variantId=await stableId('var_',{
+      experiment_version_id:versionId,
+      variant_key:variant.variant_key,
+      payload:variant.variant_payload
+    });
+    assert(variantId===variant.experiment_variant_id,'a8_variant_id_mismatch');
+  }
+  const stateId=await stableId('xst_',{
+    experiment_version_id:versionId,to_state:'draft'
+  });
+  assert(stateId===payload.state.state_event_id,'a8_state_id_mismatch');
+}
+
+
 async function persistA8Draft(env, payload) {
+  await verifyA8DraftIdentity(payload);
   const plan=await first(env,'SELECT * FROM a14_validation_plans WHERE validation_plan_id=?',payload.validation_plan_id);
   assert(plan,'a8_validation_plan_not_found');
   assert(plan.plan_kind==='a8_cta_existing_solution','a8_validation_plan_kind_mismatch');
