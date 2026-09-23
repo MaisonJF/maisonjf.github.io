@@ -195,3 +195,47 @@ test('learning context remains correlation-only and excludes policy mutation fie
   assert.equal('observed_json' in body.rows[0],false);
   assert.equal('recommendation' in body.rows[0],false);
 });
+
+
+test('commercial review queue exposes actionable context without execution authority', async () => {
+  const e=env((sql,params)=>{
+    assert.match(sql,/FROM autonomy_human_queue/);
+    assert.match(sql,/commercial_opportunity_review/);
+    assert.deepEqual(params,['pending',10]);
+    return [{
+      queue_id:'inq_12345678-1234-1234-1234-123456789012',
+      action_id:'act_12345678-1234-1234-1234-123456789012',
+      priority:50,status:'pending',created_at:'2026-09-23T17:00:00Z',
+      action_key:'commercial_opportunity_review',risk_class:'medium',
+      autonomy_level:'human_approval_required',
+      evidence_refs_json:'["evd_x"]',reason_codes_json:'["commercial_human_review_required"]',
+      opportunity_id:'opp_12345678-1234-1234-1234-123456789012',
+      territory_code:'gifting',opportunity_score:82,confidence:.7,
+      opportunity_status:'human_review_required',
+      offer_hypothesis_id:'ofh_12345678-1234-1234-1234-123456789012',
+      offer_type:'corporate_gifting',a3_solution_type:'b2b',existing_solution_id:null,
+      fit_score:75,fit_confidence:.65,
+      economics_json:'{"capital_required_minor":1000}',
+      validation_mode:'b2b_pilot'
+    }];
+  });
+  const response=await handleBrainControlRequest(
+    req('/internal/brain/review-queue?status=pending&limit=10'),e
+  );
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.rows[0].offer_type,'corporate_gifting');
+  assert.equal(body.rows[0].economics.capital_required_minor,1000);
+  assert.equal(body.rows[0].public_write_authorized,false);
+  assert.equal(body.rows[0].outbound_authorized,false);
+  assert.equal(body.rows[0].spend_authorized,false);
+  assert.equal(body.rows[0].experiment_execution_authorized,false);
+});
+
+test('commercial review queue validates status', async () => {
+  const response=await handleBrainControlRequest(
+    req('/internal/brain/review-queue?status=whatever'),env()
+  );
+  assert.equal(response.status,400);
+  assert.equal((await response.json()).error,'invalid_review_status');
+});
