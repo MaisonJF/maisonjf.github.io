@@ -114,6 +114,19 @@ services:
     restart: "no"
     command: ["python","validate_brain_runtime.py"]
 
+  osiris-context-smoke:
+    profiles: ["osiris-context-smoke"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain
+    restart: "no"
+    environment:
+      OSIRIS_MCP_URL: http://osiris-mcp:8790/mcp
+    depends_on:
+      osiris-mcp:
+        condition: service_started
+    command: ["python","/opt/maison-growth/runtime/osiris_context_smoke.py"]
+
   semantic-smoke:
     profiles: ["semantic-smoke"]
     build:
