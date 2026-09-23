@@ -58,6 +58,19 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Report first-stage credential readiness
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          MAISON_BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+          MAISON_CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          MAISON_CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+          MAISON_BRAIN_PROPOSAL_TOKEN: ${{ secrets.MAISON_BRAIN_PROPOSAL_TOKEN }}
+          MAISON_BRAIN_REVIEW_DECISION_TOKEN: ${{ secrets.MAISON_BRAIN_REVIEW_DECISION_TOKEN }}
+        run: python .github/maison-growth/runtime/report_private_runtime_readiness.py
+
       - name: Guard live apply
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
         shell: bash
