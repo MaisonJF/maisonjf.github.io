@@ -1,0 +1,114 @@
+{
+  "schema_version": "commercial_service_capacity_template_v1",
+  "target_overlay_schema": "commercial_asset_overlay_v1",
+  "visibility": "operator_template_no_private_values",
+  "source": "commercial-assets.generated.json",
+  "instructions": [
+    "Copy this template outside the repository before entering private capacity or cost values.",
+    "Set observed_at in the private copy and use source=manual_capacity_review.",
+    "Every non-null operational value in the final overlay must carry at least one evidence_ref.",
+    "For services with several formats/prices, capacity facts may be entered while revenue remains unknown until a concrete offer is selected."
+  ],
+  "observed_at": null,
+  "evidence_ref_example": "manual:capacity-review:YYYY-MM-DD",
+  "assets": [
+    {
+      "asset_ref": "catalog:service:acompanhamento",
+      "slug": "acompanhamento",
+      "name": "Acompanhamento",
+      "source": "manual_capacity_review",
+      "operational": {
+        "capacity_units_per_period": null,
+        "capacity_period": null,
+        "human_effort_minutes": null,
+        "variable_cost_minor": null,
+        "delivery_lead_days": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:service:b2b",
+      "slug": "b2b",
+      "name": "Maison para profissionais",
+      "source": "manual_capacity_review",
+      "operational": {
+        "capacity_units_per_period": null,
+        "capacity_period": null,
+        "human_effort_minutes": null,
+        "variable_cost_minor": null,
+        "delivery_lead_days": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:service:companhia",
+      "slug": "companhia",
+      "name": "Presença",
+      "source": "manual_capacity_review",
+      "operational": {
+        "capacity_units_per_period": null,
+        "capacity_period": null,
+        "human_effort_minutes": null,
+        "variable_cost_minor": null,
+        "delivery_lead_days": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:service:mentoria",
+      "slug": "mentoria",
+      "name": "Mentoria",
+      "source": "manual_capacity_review",
+      "operational": {
+        "capacity_units_per_period": null,
+        "capacity_period": null,
+        "human_effort_minutes": null,
+        "variable_cost_minor": null,
+        "delivery_lead_days": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:service:pedidos-especiais",
+      "slug": "pedidos-especiais",
+      "name": "Pedidos Físicos",
+      "source": "manual_capacity_review",
+      "operational": {
+        "capacity_units_per_period": null,
+        "capacity_period": null,
+        "human_effort_minutes": null,
+        "variable_cost_minor": null,
+        "delivery_lead_days": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:service:ritual-personalizado",
+      "slug": "ritual-personalizado",
+      "name": "Ritual Personalizado",
+      "source": "manual_capacity_review",
+      "operational": {
+        "capacity_units_per_period": null,
+        "capacity_period": null,
+        "human_effort_minutes": null,
+        "variable_cost_minor": null,
+        "delivery_lead_days": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:service:tarot",
+      "slug": "tarot",
+      "name": "Consulta de Tarot",
+      "source": "manual_capacity_review",
+      "operational": {
+        "capacity_units_per_period": null,
+        "capacity_period": null,
+        "human_effort_minutes": null,
+        "variable_cost_minor": null,
+        "delivery_lead_days": null
+      },
+      "evidence_refs": []
+    }
+  ]
+}
