@@ -19,7 +19,7 @@ class CloudflareReadonlyInspectWorkflowTests(unittest.TestCase):
         self.assertNotIn("push:", self.source)
 
     def test_workflow_uses_only_cloudflare_read_credentials(self):
-        self.assertIn("${{ secrets.CLOUDFLARE_API_TOKEN }}", self.source)
+        self.assertIn("secrets.CLOUDFLARE_READ_API_TOKEN || secrets.CLOUDFLARE_API_TOKEN", self.source)
         self.assertIn("${{ secrets.CLOUDFLARE_ACCOUNT_ID }}", self.source)
         for forbidden_secret in (
             "MAISON_BRAIN_CONTROL_TOKEN",
@@ -28,6 +28,14 @@ class CloudflareReadonlyInspectWorkflowTests(unittest.TestCase):
             "MAISON_BRAIN_PRIVATE_URL",
         ):
             self.assertNotIn(forbidden_secret, self.source)
+
+    def test_workflow_checks_d1_and_worker_presence_without_mutation(self):
+        self.assertIn("wrangler d1 info maison-growth-engine --json", self.source)
+        self.assertIn(
+            "wrangler deployments list --name maison-intelligence --json",
+            self.source,
+        )
+        self.assertIn("worker_exists=false", self.source)
 
     def test_workflow_runs_read_only_migration_inspector(self):
         self.assertIn(
@@ -40,6 +48,8 @@ class CloudflareReadonlyInspectWorkflowTests(unittest.TestCase):
         for forbidden in (
             "wrangler deploy",
             "wrangler secret put",
+            "wrangler d1 create",
+            "wrangler queues create",
             "apply-growth-migrations.sh",
             "update external_intelligence_control",
             "insert into ",
