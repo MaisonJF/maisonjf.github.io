@@ -28,6 +28,31 @@
   ],
   "entries": [
     {
+      "id": "maison-persistent-runtime",
+      "type": "runtime",
+      "name": "Maison Persistent Observe Runtime",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "private persistent host stack for Osiris Memory, PostgreSQL/pgvector, Redis and authenticated A13 memory bridge",
+      "sense": "durable memory + local analysis",
+      "cost": "software 0; host resources required",
+      "license": "mixed: Maison repo + upstream Osiris AGPL-3.0-or-later + pgvector PostgreSQL License + Redis upstream terms",
+      "self_hosted": true,
+      "depends_on": [
+        "Docker/Compose",
+        "persistent host",
+        "private secrets"
+      ],
+      "serves": [
+        "Osiris Memory",
+        "Maison Semantic Memory",
+        "Brain",
+        "Pre-Brain"
+      ],
+      "notes": "Repository stage is infra_only. All published ports bind 127.0.0.1; no external provider activation, spend, outbound or public write authority."
+    },
+    {
       "id": "maison-a14",
       "type": "internal_component",
       "name": "A14 Universal Opportunity + Earned Distribution",
@@ -155,7 +180,7 @@
       "role": "persistent relational/agent/provenance memory",
       "sense": "relational memory",
       "cost": "software target open/self-hosted; host resources required",
-      "license": "PENDING_VERIFICATION",
+      "license": "AGPL-3.0-or-later",
       "self_hosted": true,
       "depends_on": [
         "PostgreSQL",
@@ -166,7 +191,8 @@
         "agents",
         "Brain"
       ],
-      "notes": "Projection/enrichment, not replacement for canonical A13/D1 evidence. Never expose local MCP directly."
+      "notes": "Upstream requirements and AGPL-3.0-or-later verified; pinned observe-runtime build at upstream commit 181658e1db85ce4d2e8702124423b674b3cb136f. Maison bridge writes through Osiris Actions Waist, never direct graph SQL. Runtime not yet provisioned.",
+      "priority": "P0"
     },
     {
       "id": "openrouter",
@@ -865,19 +891,19 @@
         "Oceanos",
         "Foundry"
       ],
-      "notes": "Stable A5 semantic contract plus brain/semantic_memory.py projection interface; backend remains abstract while Qdrant vs pgvector is evaluated.",
-      "priority": "P1"
+      "notes": "Stable A5 semantic contract plus brain/semantic_memory.py projection interface. First backend implementation is pgvector; backend remains swappable and semantic similarity never becomes independent evidence.",
+      "priority": "P0"
     },
     {
       "id": "qdrant",
       "type": "vector_store",
       "name": "Qdrant",
       "status": "EXPERIÊNCIA",
-      "verification": "PENDING_VERIFICATION",
+      "verification": "PARTIALLY_VERIFIED",
       "role": "dedicated semantic/hybrid retrieval projection",
       "sense": "semantic similarity",
       "cost": "open/self-host target; host resources required",
-      "license": "PENDING_VERIFICATION",
+      "license": "Apache-2.0",
       "self_hosted": true,
       "depends_on": [
         "embedding model",
@@ -888,18 +914,19 @@
         "Oceanos",
         "Foundry"
       ],
-      "notes": "Derived index, never canonical evidence. Compare empirically with pgvector before committing."
+      "notes": "Valid self-hosted alternative, but not first runtime path because Osiris already requires PostgreSQL+vector. Re-evaluate only if Qdrant demonstrates unique retrieval/operations value.",
+      "priority": "P3"
     },
     {
       "id": "pgvector",
       "type": "vector_store",
       "name": "PostgreSQL + pgvector",
-      "status": "EXPERIÊNCIA",
-      "verification": "PENDING_VERIFICATION",
-      "role": "semantic retrieval within Postgres",
+      "status": "AGORA",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "first Maison Semantic Memory backend experiment, sharing PostgreSQL infrastructure already required by Osiris Memory",
       "sense": "semantic similarity",
       "cost": "software open; persistent host required",
-      "license": "PENDING_VERIFICATION",
+      "license": "PostgreSQL License",
       "self_hosted": true,
       "depends_on": [
         "PostgreSQL",
@@ -908,7 +935,8 @@
       "serves": [
         "Semantic Memory"
       ],
-      "notes": "Evaluate operational simplicity vs dedicated Qdrant."
+      "notes": "Backend implemented in brain/semantic_pgvector.py. pgvector 0.8.6 / PostgreSQL 16 image pinned in observe runtime. Embedding model/dimensions remain explicit and unselected; runtime not yet provisioned.",
+      "priority": "P0"
     },
     {
       "id": "graph-layer",
