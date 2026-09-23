@@ -871,7 +871,7 @@
     {
       "id": "graph-layer",
       "type": "graph",
-      "name": "Apache AGE / Kùzu-class graph layer",
+      "name": "Apache AGE / maintained embedded graph candidate",
       "status": "EXPERIÊNCIA",
       "verification": "PENDING_VERIFICATION",
       "role": "entity/relation graph analytics beyond semantic similarity",
@@ -888,7 +888,7 @@
         "Scout",
         "Osiris Memory"
       ],
-      "notes": "Avoid duplicating Osiris Memory graph functions without a clear capability gap."
+      "notes": "Graph analytics remain an experiment. KùzuDB was archived by its maintainers on 2025-10-10 and must not be adopted as a new production dependency; evaluate actively maintained alternatives only, and avoid duplicating Osiris Memory graph functions without a clear capability gap."
     },
     {
       "id": "cloudflare-workflows",
@@ -1178,6 +1178,21 @@
       "depends_on": [],
       "serves": [],
       "notes": "Rejected for now to avoid testing three vector stores simultaneously; reconsider only if Qdrant/pgvector fail a concrete requirement."
+    },
+    {
+      "id": "kuzudb",
+      "type": "graph",
+      "name": "KùzuDB",
+      "status": "REJEITADO",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "embedded property-graph database candidate",
+      "sense": "relationship traversal",
+      "cost": "0 software cost; legacy only",
+      "license": "MIT (historical release)",
+      "self_hosted": true,
+      "depends_on": [],
+      "serves": [],
+      "notes": "Rejected for new Maison production use: official repository was archived by maintainers on 2025-10-10 and is read-only. Preserve only as historical candidate; choose a maintained graph engine if a graph gap remains after Osiris Memory."
     }
   ]
 }
