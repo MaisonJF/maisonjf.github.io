@@ -12,7 +12,7 @@ The public Maison site does not depend on this Worker.
 
 ## Passive world sensors
 
-The Worker can also ingest the keyless, passive OSIRIS public API into the same A13 provenance pipeline. The initial allowlist covers aggregate stats, earthquakes, fires, severe weather/natural events, public news feeds and markets. CCTV metadata is supported by the adapter registry but is intentionally opt-in until a dedicated aggregate vision layer is attached; raw camera feeds are never treated as interpreted behaviour.
+The Worker can also ingest the keyless, passive OSIRIS public API into the same A13 provenance pipeline. The passive registry now covers the broad read-only world-sensing surface: aggregate stats, aviation, satellites, space weather, earthquakes, fires, severe weather, air quality, navigation interference, conflicts, GDELT events, country risk, news, markets, supply-chain suppliers, public CCTV metadata, infrastructure, maritime traffic and cyber-threat/malware telemetry. Raw camera streams are never treated as interpreted behaviour; a dedicated aggregate vision layer is still required before camera imagery can become behavioural evidence.
 
 OSIRIS sensing is disabled by default. When enabled, the template schedules passive collection hourly and stores it as `public_web` evidence with source provenance.
 
