@@ -1,0 +1,42 @@
+{
+  "policy_version": "a14_policy_v1",
+  "status": "initial_hypothesis_not_empirical_truth",
+  "note": "Weights are transparent prioritisation policy and must be recalibrated from A11 observed outcomes; they are not Maison facts.",
+  "opportunity_weights": {
+    "demand": 0.16,
+    "growth": 0.08,
+    "need_intensity": 0.1,
+    "willingness_to_pay": 0.12,
+    "differentiation": 0.1,
+    "margin_potential": 0.1,
+    "time_to_cash": 0.08,
+    "repeatability": 0.08,
+    "maison_fit": 0.12,
+    "operational_viability": 0.06
+  },
+  "distribution_weights": {
+    "topic_fit": 0.16,
+    "audience_relevance": 0.13,
+    "community_quality": 0.1,
+    "trust": 0.08,
+    "growth": 0.05,
+    "low_commercial_saturation": 0.06,
+    "aesthetic_fit": 0.08,
+    "story_strength": 0.1,
+    "response_likelihood": 0.05,
+    "brand_safety": 0.08,
+    "commercial_potential": 0.07,
+    "recurrence_potential": 0.04
+  },
+  "recovery_weights": {
+    "contribution": 0.4,
+    "speed": 0.3,
+    "capital": 0.2,
+    "human_effort": 0.1
+  },
+  "thresholds": {
+    "minimum_distribution_fit": 70,
+    "minimum_distribution_confidence": 0.6
+  },
+  "calibration_rule": "Do not auto-modify policy. A11 may propose changes for human review after observed outcomes."
+}
