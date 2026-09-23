@@ -18,3 +18,20 @@ Core controls:
 - read-only integration with A7 decisions, A8 experiments, A9 Publisher Gateway, A10 promotion and A11 learning.
 
 No Worker, Queue, D1, binding, production credential or autonomous public publication is activated by A12.
+
+
+## A12.2 commercial review resolution
+
+A12.2 adds an append-only resolution record for Maison commercial opportunity reviews.
+
+A commercial opportunity review is explicitly classified as **medium risk** and always enters `human_approval_required`. A human `approved` decision grants only the scope `experiment_planning_only`.
+
+It does **not** authorize:
+- experiment execution;
+- public site writes;
+- catalogue or price changes;
+- checkout changes;
+- outbound email/DM/contact;
+- product seeding or spend.
+
+The original human queue row remains immutable. Effective status is exposed through `autonomy_human_queue_current`, which overlays the append-only resolution event.
