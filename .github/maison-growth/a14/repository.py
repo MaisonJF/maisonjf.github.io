@@ -5,6 +5,8 @@ import json
 import sqlite3
 from typing import Any, Mapping, Optional
 
+from recovery_engine import ContributionFact, RecoverySnapshot, compute_recovery_snapshot
+
 
 class A14RepositoryError(ValueError):
     pass
@@ -138,6 +140,132 @@ class SQLiteA14Repository:
                 _json(record.get("evidence_refs", [])),
                 record["observed_at"],
             ),
+        )
+
+
+    def persist_governance_link(self, record: Mapping[str, Any]) -> None:
+        self.connection.execute(
+            """INSERT INTO a14_governance_links
+               (governance_link_id,opportunity_id,distribution_match_id,action_id,
+                queue_id,evidence_refs_json,linked_at)
+               VALUES (?,?,?,?,?,?,?)""",
+            (
+                record["governance_link_id"], record.get("opportunity_id"),
+                record.get("distribution_match_id"), record["action_id"],
+                record.get("queue_id"), _json(record.get("evidence_refs", [])),
+                record["linked_at"],
+            ),
+        )
+
+    def persist_experiment_link(self, record: Mapping[str, Any]) -> None:
+        self.connection.execute(
+            """INSERT INTO a14_experiment_links
+               (experiment_link_id,opportunity_id,offer_hypothesis_id,distribution_match_id,
+                experiment_id,experiment_version_id,linkage_kind,evidence_refs_json,linked_at)
+               VALUES (?,?,?,?,?,?,?,?,?)""",
+            (
+                record["experiment_link_id"], record.get("opportunity_id"),
+                record.get("offer_hypothesis_id"), record.get("distribution_match_id"),
+                record["experiment_id"], record.get("experiment_version_id"),
+                record["linkage_kind"], _json(record.get("evidence_refs", [])),
+                record["linked_at"],
+            ),
+        )
+
+    def persist_outcome_link(self, record: Mapping[str, Any]) -> None:
+        self.connection.execute(
+            """INSERT INTO a14_outcome_links
+               (outcome_link_id,opportunity_id,offer_hypothesis_id,distribution_match_id,
+                conversion_id,economic_assessment_id,attribution_role,evidence_refs_json,linked_at)
+               VALUES (?,?,?,?,?,?,?,?,?)""",
+            (
+                record["outcome_link_id"], record["opportunity_id"],
+                record.get("offer_hypothesis_id"), record.get("distribution_match_id"),
+                record["conversion_id"], record.get("economic_assessment_id"),
+                record["attribution_role"], _json(record.get("evidence_refs", [])),
+                record["linked_at"],
+            ),
+        )
+
+    def persist_learning_link(self, record: Mapping[str, Any]) -> None:
+        self.connection.execute(
+            """INSERT INTO a14_learning_links
+               (learning_link_id,opportunity_id,offer_hypothesis_id,distribution_match_id,
+                learning_record_id,linked_at)
+               VALUES (?,?,?,?,?,?)""",
+            (
+                record["learning_link_id"], record["opportunity_id"],
+                record.get("offer_hypothesis_id"), record.get("distribution_match_id"),
+                record["learning_record_id"], record["linked_at"],
+            ),
+        )
+
+    def persist_recovery_target(self, record: Mapping[str, Any]) -> None:
+        self.connection.execute(
+            """INSERT INTO recovery_target_versions
+               (recovery_target_version_id,target_key,target_amount_minor,currency,basis,
+                valid_from,valid_to,created_at,created_by,notes_json)
+               VALUES (?,?,?,?,?,?,?,?,?,?)""",
+            (
+                record["recovery_target_version_id"], record["target_key"],
+                record["target_amount_minor"], record["currency"],
+                "a3_immediate_contribution", record["valid_from"], record.get("valid_to"),
+                record["created_at"], record["created_by"], _json(record.get("notes", {})),
+            ),
+        )
+
+    def active_recovery_target(self, target_key: str, at: str) -> Optional[dict[str, Any]]:
+        row=self.connection.execute(
+            """SELECT recovery_target_version_id,target_key,target_amount_minor,currency,
+                      valid_from,valid_to,created_at,created_by,notes_json
+               FROM recovery_target_versions
+               WHERE target_key=? AND valid_from<=? AND (valid_to IS NULL OR valid_to>?)
+               ORDER BY valid_from DESC LIMIT 1""",
+            (target_key,at,at),
+        ).fetchone()
+        if row is None:
+            return None
+        keys=(
+            "recovery_target_version_id","target_key","target_amount_minor","currency",
+            "valid_from","valid_to","created_at","created_by","notes_json",
+        )
+        out=dict(zip(keys,row))
+        out["notes"]=json.loads(out.pop("notes_json"))
+        return out
+
+    def recovery_contribution_facts(self, *, currency: str, since: str) -> tuple[ContributionFact, ...]:
+        rows=self.connection.execute(
+            """SELECT c.conversion_id,e.economic_assessment_id,e.immediate_contribution_minor,
+                      c.currency,e.created_at
+               FROM conversion_economic_assessments e
+               JOIN conversions c ON c.conversion_id=e.conversion_id
+               WHERE c.currency=? AND c.occurred_at>=?
+               ORDER BY c.conversion_id,e.created_at,e.economic_assessment_id""",
+            (currency,since),
+        ).fetchall()
+        return tuple(
+            ContributionFact(
+                conversion_id=row[0],
+                economic_assessment_id=row[1],
+                immediate_contribution_minor=row[2],
+                currency=row[3],
+                created_at=row[4],
+            )
+            for row in rows
+        )
+
+    def recovery_snapshot(self, *, target_key: str, at: str) -> Optional[RecoverySnapshot]:
+        target=self.active_recovery_target(target_key,at)
+        if target is None:
+            return None
+        facts=self.recovery_contribution_facts(
+            currency=target["currency"],
+            since=target["valid_from"],
+        )
+        return compute_recovery_snapshot(
+            target_minor=target["target_amount_minor"],
+            currency=target["currency"],
+            assessments=facts,
         )
 
     def fetch_opportunity(self, opportunity_id: str) -> Optional[dict[str, Any]]:
