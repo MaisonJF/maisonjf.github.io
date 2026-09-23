@@ -58,6 +58,8 @@ Repository/Actions secrets expected by that workflow:
 
 The renderer reuses the canonical Maison Growth D1 binding already versioned in `workers/maison-intelligence/wrangler.jsonc` and hard-locks `WORKER_ENABLED=false`, `KILL_SWITCH=true`, OSIRIS/public sensors/model gateways OFF. The workflow cannot be used to turn collection on.
 
+For a live apply, the renderer also converts `MAISON_BRAIN_PRIVATE_URL` into the Worker's exact **Custom Domain** binding. The URL must be an HTTPS origin only (no path, query, credentials or custom port). The private config disables `workers.dev` and preview URLs and strips cron triggers, Queue bindings and the Workers AI binding, leaving the private HTTP surfaces plus the canonical D1 binding. Automatic dry-runs intentionally contain no live route and receive no private URL secret.
+
 Before a live apply, the workflow also runs the read-only `scripts/verify-growth-schema.sh` check against `maison-growth-engine`. It references the Brain/A12/A14 planning tables and views with `LIMIT 0`; a missing migration blocks deployment without mutating D1.
 
 After deployment, it performs an authenticated GET against `/internal/brain/health` and requires `status=ok` plus `mode=read_only`. A deployment that cannot be reached through the configured private boundary is therefore treated as incomplete.

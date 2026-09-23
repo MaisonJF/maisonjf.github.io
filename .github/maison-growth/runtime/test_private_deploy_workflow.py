@@ -44,6 +44,22 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
 """
         self.assertIn(block, self.source)
 
+    def test_dry_run_renderer_has_no_private_url_secret(self):
+        start = self.source.index("- name: Render temporary Wrangler config (dry-run)")
+        end = self.source.index("- name: Render temporary Wrangler config (live custom domain)")
+        block = self.source[start:end]
+        self.assertIn("github.event_name != 'workflow_dispatch' || !inputs.apply", block)
+        self.assertNotIn("MAISON_BRAIN_PRIVATE_URL", block)
+        self.assertNotIn("--private-url", block)
+
+    def test_live_renderer_binds_configured_private_custom_domain(self):
+        start = self.source.index("- name: Render temporary Wrangler config (live custom domain)")
+        end = self.source.index("- name: Install Worker tooling")
+        block = self.source[start:end]
+        self.assertIn("github.event_name == 'workflow_dispatch' && inputs.apply", block)
+        self.assertIn("BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}", block)
+        self.assertIn('--private-url "$BRAIN_CONTROL_API_URL"', block)
+
     def test_renderer_reuses_canonical_worker_binding(self):
         self.assertIn("--template workers/maison-intelligence/wrangler.jsonc", self.source)
         self.assertNotIn("MAISON_GROWTH_D1_DATABASE_ID", self.source)
