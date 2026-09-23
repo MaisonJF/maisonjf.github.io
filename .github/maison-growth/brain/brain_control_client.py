@@ -171,6 +171,9 @@ class BrainControlClient:
             "solution_id":solution_id,"limit":limit
         })
 
+    def action_inbox(self, *, limit: int=20) -> Mapping[str,Any]:
+        return self._get("/internal/brain/action-inbox",{"limit":limit})
+
     def solutions(self, *, status: Optional[str]=None, limit: int=100) -> Mapping[str,Any]:
         return self._get("/internal/brain/solutions",{"status":status,"limit":limit})
 
