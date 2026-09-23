@@ -14,7 +14,7 @@ def main() -> None:
     assert contract["mode"]=="analysis_only"
     assert "A12 controls external action" in contract["hard_rules"]
     assert contract["memory_roles"]["DuckDB/Polars"]=="analytical preprocessing only"
-    for test_file in ("test_brain_runtime.py","test_orchestrator.py","test_context_adapters.py","test_semantic_pgvector.py"):
+    for test_file in ("test_brain_runtime.py","test_orchestrator.py","test_context_adapters.py","test_semantic_pgvector.py","test_local_embeddings.py"):
         proc=subprocess.run(
             [sys.executable,str(ROOT/test_file)],
             cwd=str(ROOT),capture_output=True,text=True,
