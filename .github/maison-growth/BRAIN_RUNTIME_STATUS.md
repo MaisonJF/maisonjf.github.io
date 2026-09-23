@@ -40,7 +40,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Critic | READY | analysis only |
 | Foundry | READY multi-format concept engine | analysis only |
 | A7 Commercial Discovery | READY existing module | analysis only |
-| A14 Universal Opportunity + Earned Distribution | READY A14.2 | analysis only |
+| A14 Universal Opportunity + Earned Distribution | READY A14.2 + deterministic hypothesis IDs + strict idempotent repository | analysis only |
 | A12 governance/HITL | READY existing module | simulation / human-gated |
 | A8 experiments | READY existing module | repository/simulation boundaries |
 | A3 journeys/economics/attribution | READY existing module | runtime depends on event flow |
