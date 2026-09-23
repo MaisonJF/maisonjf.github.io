@@ -110,3 +110,20 @@ All meaningful action remains governed by A12 and existing execution boundaries.
 ## Repository state
 
 A14 is repository-only and analysis-only. Its migration is D1/SQLite-compatible but applying repository migrations does not activate outbound behaviour, collection, spend or publication.
+
+## Recovery mode
+
+A14 can prioritise fast-cash hypotheses while the full Brain continues to grow.
+
+Recovery is measured from **observed A3 immediate contribution**, not gross revenue, expected value or forecasts. The repository contains no private recovery amount. A recovery target is runtime/private data stored only when explicitly configured.
+
+The recovery layer prefers evidence-backed opportunities with shorter time-to-cash, lower capital requirement, higher expected contribution and lower human effort. Missing commercial inputs remain UNKNOWN and make a candidate `enrich_data`, not a fabricated ranking.
+
+A14.2 adds append-only lineage bridges:
+
+- A14 → A12 governance/action review;
+- A14 → A8 experiment lineage;
+- A14 → A3 conversion/economic outcomes;
+- A14 → A11 learning records.
+
+These are links, not copies of the other modules' source-of-truth data.
