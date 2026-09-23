@@ -3,6 +3,7 @@ import {
   sha256Hex, territoriesForDate, uniqueCanonicalUrls
 } from './core.js';
 import { configuredProviders, PROVIDERS } from './providers.js';
+import { configuredOsirisSources, fetchOsirisSource, sourceDefinition } from './sources.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -16,8 +17,8 @@ async function controlState(env) {
   return { enabled: true, observeOnly: Number(row.observe_only) !== 0 };
 }
 
-async function underDailyCap(env, providerId, day) {
-  const cap = clampInt(env.MAX_DAILY_CALLS_PER_PROVIDER, 2, 1, 50);
+async function underDailyCap(env, providerId, day, requestedCap = null) {
+  const cap = clampInt(requestedCap ?? env.MAX_DAILY_CALLS_PER_PROVIDER, 2, 1, 200);
   const row = await env.GROWTH_DB.prepare(
     `SELECT calls FROM external_intelligence_daily_usage WHERE usage_date=? AND provider_id=?`
   ).bind(day, providerId).first();
@@ -119,6 +120,27 @@ async function persistObservation(env, task, result) {
   await env.GROWTH_DB.batch(statements);
 }
 
+async function processSourceTask(env, task) {
+  const control = await controlState(env);
+  if (!control.enabled) return { skipped: control.reason };
+  if (await alreadyDone(env, task.taskKey)) return { skipped: 'duplicate_task' };
+  const day = task.day || utcDay();
+  const cap = env.MAX_DAILY_CALLS_PER_OSIRIS_SOURCE || '24';
+  if (!(await underDailyCap(env, task.providerId, day, cap))) return { skipped: 'daily_cap' };
+
+  let result;
+  try {
+    result = await fetchOsirisSource(env, task.sourceKey);
+    await markUsage(env, task.providerId, day, true, null);
+  } catch (error) {
+    await markUsage(env, task.providerId, day, false, null);
+    throw error;
+  }
+
+  await persistObservation(env, task, result);
+  return { stored: true, provider: task.providerId, territory: task.territoryKey };
+}
+
 async function processTask(env, task) {
   const control = await controlState(env);
   if (!control.enabled) return { skipped: control.reason };
@@ -138,6 +160,40 @@ async function processTask(env, task) {
   }
   await persistObservation(env, task, result);
   return { stored: true, provider: task.providerId, territory: task.territoryKey };
+}
+
+async function enqueueOsirisRun(env, scheduledDate) {
+  const control = await controlState(env);
+  if (!control.enabled) return { queued: 0, reason: control.reason };
+
+  const sourceKeys = configuredOsirisSources(env);
+  if (!sourceKeys.length) return { queued: 0, reason: 'osiris_disabled_or_no_sources' };
+
+  const day = utcDay(scheduledDate);
+  const hour = scheduledDate.toISOString().slice(0, 13);
+  const messages = [];
+
+  for (const sourceKey of sourceKeys) {
+    const def = sourceDefinition(sourceKey);
+    if (!def) continue;
+    const providerId = `osiris_${sourceKey}`;
+    const cap = env.MAX_DAILY_CALLS_PER_OSIRIS_SOURCE || '24';
+    if (!(await underDailyCap(env, providerId, day, cap))) continue;
+    const promptFingerprint = await sha256Hex(`${env.OSIRIS_BASE_URL || 'https://osirisai.live'}${def.path}`);
+    messages.push({ body: {
+      kind: 'source_snapshot',
+      day,
+      providerId,
+      sourceKey,
+      territoryKey: def.territoryKey,
+      prompt: `Passive OSIRIS source snapshot: ${sourceKey}`,
+      promptFingerprint,
+      taskKey: `${hour}:osiris:${sourceKey}`
+    }});
+  }
+
+  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0, 100));
+  return { queued: messages.length, sources: sourceKeys.length };
 }
 
 async function enqueueRun(env, scheduledDate) {
@@ -168,15 +224,19 @@ async function enqueueRun(env, scheduledDate) {
 
 export default {
   async scheduled(controller, env, ctx) {
-    ctx.waitUntil(enqueueRun(env, new Date(controller.scheduledTime)));
+    const when = new Date(controller.scheduledTime);
+    const jobs = [enqueueOsirisRun(env, when)];
+    if (controller.cron === '17 4 * * *') jobs.push(enqueueRun(env, when));
+    ctx.waitUntil(Promise.all(jobs));
   },
 
   async queue(batch, env) {
     for (const message of batch.messages) {
       const task = message.body;
-      if (!task || task.kind !== 'sensor_query') { message.ack(); continue; }
+      if (!task || !['sensor_query','source_snapshot'].includes(task.kind)) { message.ack(); continue; }
       try {
-        await processTask(env, task);
+        if (task.kind === 'source_snapshot') await processSourceTask(env, task);
+        else await processTask(env, task);
         message.ack();
       } catch (error) {
         console.error('A13 sensor task failed', task.providerId, task.territoryKey, error?.message ?? error);
