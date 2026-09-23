@@ -4,7 +4,12 @@ from __future__ import annotations
 import unittest
 
 from brain_control_client import BrainControlClient, BrainControlError, _safe_base_url
-from brain_observe_cycle import _offer_types_by_territory, _solutions_by_territory
+from brain_observe_cycle import (
+    _cash_context_by_territory,
+    _learning_context_by_territory,
+    _offer_types_by_territory,
+    _solutions_by_territory,
+)
 
 
 class BrainControlClientTests(unittest.TestCase):
@@ -51,6 +56,48 @@ class BrainControlClientTests(unittest.TestCase):
             {"territory_key":"home","solution_id":"sol_a"},
         ]
         self.assertEqual(_solutions_by_territory(links),{"home":("sol_a","sol_b")})
+
+    def test_a11_context_is_correlation_only(self):
+        feed=[{
+            "territory_key":"home",
+            "need_id":"ned_x",
+            "intent_id":"int_x",
+        }]
+        learning=[
+            {
+                "learning_record_id":"lrn_good",
+                "subject_type":"need",
+                "subject_id":"ned_x",
+                "correlation_only":True,
+                "causal_claim":False,
+            },
+            {
+                "learning_record_id":"lrn_causal",
+                "subject_type":"need",
+                "subject_id":"ned_x",
+                "correlation_only":False,
+                "causal_claim":True,
+            },
+        ]
+        self.assertEqual(
+            _learning_context_by_territory(feed,learning),
+            {"home":("a11:lrn_good",)}
+        )
+
+    def test_a3_cash_context_is_reference_only_by_solution_territory(self):
+        cash=[{
+            "economic_assessment_id":"eva_x",
+            "solution_id":"sol_a",
+            "immediate_contribution_minor":2700,
+        }]
+        links=[{
+            "territory_key":"home",
+            "solution_id":"sol_a",
+        }]
+        self.assertEqual(
+            _cash_context_by_territory(cash,links),
+            {"home":("a3:eva_x",)}
+        )
 
     def test_offer_types_derive_from_existing_solution_types_plus_explicit_policy(self):
         links=[{"territory_key":"home","solution_id":"sol_a"}]
