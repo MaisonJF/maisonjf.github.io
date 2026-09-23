@@ -109,9 +109,9 @@ This profile is not part of the default stack and is not started by repository c
 
 The optional `brain-observe` profile reads canonical A13/A4/A3 data through the authenticated Brain Control API and runs a one-shot:
 
-`Pre-Brain → Scout → Critic → Foundry`
+`A5 mapping → Pre-Brain → Oceanos/A3/A11 + optional Semantic/Osiris context → Scout → Critic → Foundry → A14 preview`
 
-It prints internal packets only. It performs **zero writes**.
+It prints internal packets and A14 previews only. It performs **zero writes** and has no execution authority.
 
 Existing solution fit is derived from A4 `need_solution_relations`, not guessed from product names. A3 solution price/cost fields are not silently converted into opportunity forecasts. New candidate offer families/economics/operational constraints can be supplied only through explicit `MAISON_BRAIN_TERRITORY_POLICY_JSON`.
 
@@ -123,3 +123,28 @@ docker compose \
 ```
 
 Do not enable the remote Brain Control API merely to run this command until its HTTPS/private-access boundary has been configured and explicitly authorised.
+
+
+## Manual Semantic projection sync
+
+The optional `semantic-sync` profile incrementally projects selected canonical A13 observations from D1 into pgvector. It is a rebuildable index, not a second source of truth.
+
+The sync is deliberately manual and privacy-allowlisted. `MAISON_SEMANTIC_SYNC_PROVIDER_PREFIXES` must contain at least one explicitly approved provider family or the process refuses to embed. The example starts with `eurostat_` only.
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile semantic-sync run --rm semantic-sync
+```
+
+The projection keeps the canonical evidence reference. Its cursor lives inside `maison_memory` and may be discarded/rebuilt without changing D1.
+
+## Optional runtime memory context
+
+The one-shot Brain cycle can read Semantic Memory and Osiris Memory, but both switches are **off by default**:
+
+- `MAISON_SEMANTIC_CONTEXT_ENABLED=false`
+- `MAISON_OSIRIS_CONTEXT_ENABLED=false`
+
+When enabled on the private host, these systems contribute retrieval/context references only. They add **zero independent evidence roots** and never turn similarity or graph proximity into fact.
