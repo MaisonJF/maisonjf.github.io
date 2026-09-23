@@ -1,5 +1,5 @@
 {
-  "contract_version": "A14.1",
+  "contract_version": "A14.2",
   "module": "Universal Opportunity + Earned Distribution",
   "mode": "analysis_only",
   "depends_on": [
@@ -76,5 +76,19 @@
     "catalogue_write",
     "paid_oracle_content_read",
     "commercial_pii_replication"
-  ]
+  ],
+  "recovery_mode": {
+    "purpose": "prioritize evidence-backed time-to-cash and measure recovery from realised A3 immediate contribution",
+    "target_amount_in_repository": false,
+    "forecasts_count_as_recovery": false,
+    "expected_value_counts_as_recovery": false,
+    "observed_a3_immediate_contribution_only": true,
+    "private_target_is_runtime_data": true
+  },
+  "integration_bridges": {
+    "a12": "append-only governance/action links",
+    "a8": "append-only experiment lineage links",
+    "a3": "conversion and economic-assessment outcome links",
+    "a11": "learning-record lineage links"
+  }
 }
