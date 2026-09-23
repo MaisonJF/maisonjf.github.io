@@ -190,3 +190,20 @@ A13 now has a second, separately gated public-source family for structured econo
 - no PDF/full-text download is implemented here.
 
 These adapters remain sensors only. Structured source output is still stored as an A13 observation with canonical provenance and must pass through Pre-Brain/Brain before any commercial interpretation.
+
+
+## Brain control API — read-only canonical feed
+
+The Worker now contains a disabled-by-default internal API for the private Brain runtime to read canonical D1 facts without receiving D1 credentials.
+
+`BRAIN_CONTROL_API_ENABLED=false` by default. `BRAIN_CONTROL_TOKEN` is a secret and is never committed.
+
+Authenticated GET-only routes:
+
+- `/internal/brain/health`
+- `/internal/brain/feed` — A13/A4 evidence for Pre-Brain;
+- `/internal/brain/cash-feedback` — **all** observed A3 economic assessments, with A14 lineage when one exists;
+- `/internal/brain/solutions` — safe solution/economics fields only;
+- `/internal/brain/solution-links` — A4 need↔solution relations, so the Brain reuses canonical fit instead of inventing territory/product links.
+
+There are no write routes. Responses are `no-store`. Unknown routes remain 404. When deployed outside a private network, put this route behind authenticated HTTPS/Cloudflare Access in addition to the bearer token.
