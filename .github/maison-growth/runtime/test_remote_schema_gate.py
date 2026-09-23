@@ -6,25 +6,32 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-SCRIPT = ROOT.parents[2] / "workers" / "maison-intelligence" / "scripts" / "verify-growth-schema.sh"
+SCRIPTS = ROOT.parents[2] / "workers" / "maison-intelligence" / "scripts"
+VERIFY = SCRIPTS / "verify-growth-schema.sh"
+INSPECT = SCRIPTS / "inspect-growth-migrations.sh"
+APPLY = SCRIPTS / "apply-growth-migrations.sh"
+
+FORBIDDEN_WRITES = (
+    "INSERT ",
+    "UPDATE ",
+    "DELETE ",
+    "ALTER ",
+    "CREATE ",
+    "DROP ",
+    "REPLACE ",
+)
 
 
 class RemoteSchemaGateTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.source = SCRIPT.read_text(encoding="utf-8")
+        cls.source = VERIFY.read_text(encoding="utf-8")
+        cls.inspect = INSPECT.read_text(encoding="utf-8")
+        cls.apply = APPLY.read_text(encoding="utf-8")
 
     def test_gate_is_read_only(self):
         upper = self.source.upper()
-        for forbidden in (
-            "INSERT ",
-            "UPDATE ",
-            "DELETE ",
-            "ALTER ",
-            "CREATE ",
-            "DROP ",
-            "REPLACE ",
-        ):
+        for forbidden in FORBIDDEN_WRITES:
             self.assertNotIn(forbidden, upper)
         self.assertIn("LIMIT 0", upper)
 
@@ -42,6 +49,28 @@ class RemoteSchemaGateTests(unittest.TestCase):
     def test_gate_uses_remote_d1(self):
         self.assertIn("wrangler d1 execute", self.source)
         self.assertIn("--remote", self.source)
+
+    def test_migration_inspector_is_read_only_and_remote(self):
+        upper = self.inspect.upper()
+        for forbidden in FORBIDDEN_WRITES:
+            self.assertNotIn(forbidden, upper)
+        self.assertIn("sqlite_master", self.inspect)
+        self.assertIn("wrangler d1 execute", self.inspect)
+        self.assertIn("--remote", self.inspect)
+
+    def test_migration_inspector_covers_complete_0001_to_0016_chain(self):
+        found = re.findall(r"'(00\d{2}_[a-z0-9_]+)'", self.inspect)
+        migrations = [item.split("_", 1)[0] for item in found]
+        self.assertEqual(
+            migrations,
+            [f"{number:04d}" for number in range(1, 17)],
+        )
+        self.assertIn("missing_or_partial", self.inspect)
+
+    def test_runtime_helpers_default_to_canonical_growth_database(self):
+        self.assertIn('DB_NAME="${1:-maison-growth-engine}"', self.inspect)
+        self.assertIn('DB_NAME="${1:-maison-growth-engine}"', self.apply)
+        self.assertNotIn('DB_NAME="${1:-maison-growth}"', self.apply)
 
 
 if __name__ == "__main__":
