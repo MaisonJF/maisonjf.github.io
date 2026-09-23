@@ -212,6 +212,9 @@ const payload={
     catalogue_in_stock_is_not_counted_inventory:true,
     operational_unknowns_remain_null:true,
     private_inventory_overlay_not_stored_here:true,
+    structured_service_pricing:true,
+    multi_format_prices_not_flattened:true,
+    quote_prices_remain_unknown:true,
     commercial_pii:false
   },
   summary:{
@@ -219,7 +222,11 @@ const payload={
     active_physical_products:assets.filter(x=>x.asset_type==='physical_product'&&x.lifecycle_status==='active').length,
     future_products:assets.filter(x=>x.lifecycle_status==='future').length,
     services:assets.filter(x=>x.asset_type==='service').length,
-    b2b_services:assets.filter(x=>x.asset_type==='b2b_service').length
+    b2b_services:assets.filter(x=>x.asset_type==='b2b_service').length,
+    fixed_price_services:assets.filter(x=>['service','b2b_service'].includes(x.asset_type)&&x.price_kind==='fixed').length,
+    multi_format_services:assets.filter(x=>['service','b2b_service'].includes(x.asset_type)&&x.price_kind==='multi_format').length,
+    starting_from_services:assets.filter(x=>['service','b2b_service'].includes(x.asset_type)&&x.price_kind==='starting_from').length,
+    quote_services:assets.filter(x=>['service','b2b_service'].includes(x.asset_type)&&x.price_kind==='quote').length
   },
   assets
 };
