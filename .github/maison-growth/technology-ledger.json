@@ -50,7 +50,7 @@
         "Brain",
         "Pre-Brain"
       ],
-      "notes": "Repository stage is infra_only. All published ports bind 127.0.0.1; no external provider activation, spend, outbound or public write authority."
+      "notes": "Repository stage is infra_only. Compose includes pinned pgvector/Postgres, Redis, Osiris, authenticated A13 bridge, MCP read-context smoke and healthchecks; all published ports bind 127.0.0.1. No external provider activation, spend, outbound or public write authority."
     },
     {
       "id": "maison-a14",
@@ -191,7 +191,7 @@
         "agents",
         "Brain"
       ],
-      "notes": "Upstream requirements and AGPL-3.0-or-later verified; pinned observe-runtime build at upstream commit 181658e1db85ce4d2e8702124423b674b3cb136f. Maison bridge writes through Osiris Actions Waist, never direct graph SQL. Runtime not yet provisioned.",
+      "notes": "Upstream requirements and AGPL-3.0-or-later verified; pinned observe-runtime build at upstream commit 181658e1db85ce4d2e8702124423b674b3cb136f. A13 writes through an authenticated bridge using Osiris Actions Waist; Brain reads through private MCP graph_search. No direct graph SQL. Runtime prepared but not started.",
       "priority": "P0"
     },
     {
@@ -259,7 +259,7 @@
       "type": "protocol",
       "name": "Model Context Protocol (MCP)",
       "status": "AGORA",
-      "verification": "PENDING_VERIFICATION",
+      "verification": "PARTIALLY_VERIFIED",
       "role": "stable allowlisted tool contract between Brain/agents and Maison systems",
       "sense": "tool use",
       "cost": "protocol/open tooling",
@@ -275,7 +275,8 @@
         "Critic",
         "Foundry"
       ],
-      "notes": "Initial tools should be read-only; write tools require A12 policy and explicit capability scopes."
+      "notes": "Pinned Python SDK 1.28.1 is now used by Maison Brain for private Osiris graph_search read context. Initial Maison MCP use remains read-only; write tools stay A12-gated.",
+      "priority": "P0"
     },
     {
       "id": "duckdb",
