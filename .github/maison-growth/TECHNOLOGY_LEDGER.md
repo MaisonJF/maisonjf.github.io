@@ -132,3 +132,12 @@ Private operational facts — quantities, reserved units, material/packaging cos
 Opportunity, offer-hypothesis and earned-distribution-match identities are semantic rather than run-based. Equivalent canonical inputs produce the same UUID-shaped IDs across Brain runs; `created_at` does not alter identity.
 
 A14 persistence is strict and idempotent: identical semantic payloads may be presented again without creating duplicates, but any same-ID/different-payload condition is treated as an integrity error. This preserves Opportunity Lifetime Value, Revenue Per Insight and A3/A8/A11 lineage across repeated observation cycles.
+
+
+## Commercial review decision
+
+A14 analysis can now be materialized through a separate, narrow internal proposal surface. The read-only Brain Control API remains GET-only.
+
+Materialization is idempotent and cannot authorize launch, pricing, public writes, outbound contact, spend or experiment execution. Analysis-only hypotheses may be stored without creating human-review work. Only human-review-ready offers enter A12.
+
+A12.2 records human commercial decisions append-only. `approved` means only `experiment_planning_only`; it is not permission to run an experiment or alter the public Maison. A separate decision token/switch is required, and the original queue row remains immutable.
