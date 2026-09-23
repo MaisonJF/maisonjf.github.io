@@ -1,5 +1,16 @@
 # Maison Commercial Operations Runbook
 
+## Derived-context maintenance
+
+When Ocean metadata or the canonical product/service catalogues change, refresh all derived commercial projections in dependency order with:
+
+```bash
+bash .github/maison-growth/brain/rebuild_commercial_context.sh --write
+bash .github/maison-growth/brain/rebuild_commercial_context.sh --check
+```
+
+This rebuild is repository-local only; it has no Cloudflare, D1, deploy, checkout or publication command.
+
 Private operator workflow for turning the current catalogue/Ocean attention model into fact-based commercial readiness.
 
 > This path does not publish, discount, promise stock, open checkout, send outreach or execute experiments.
