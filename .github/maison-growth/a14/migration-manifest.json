@@ -1,9 +1,15 @@
 {
-  "contract_version": "A14.1",
+  "contract_version": "A14.2",
   "migrations": [
     {
       "order": 12,
       "path": "migrations/0012_universal_opportunity_earned_distribution.sql",
+      "runtime_required": false,
+      "public_site_dependency": false
+    },
+    {
+      "order": 13,
+      "path": "migrations/0013_a14_bridges_recovery.sql",
       "runtime_required": false,
       "public_site_dependency": false
     }
