@@ -87,6 +87,7 @@ def build_opportunity_record(
             }
             for key, value in sorted(metrics.items())
         },
+        "evidence_refs": tuple(sorted(set(evidence_refs))),
         "existing_solution_ids": tuple(existing),
         "knowledge_context_refs": tuple(sorted(set(knowledge_context_refs))),
         "rule_version_id": rule_version_id,
