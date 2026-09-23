@@ -199,6 +199,76 @@ function validateValidationPlan(row) {
   }
 }
 
+function validateA8Draft(payload) {
+  assert(payload && typeof payload==='object' && !Array.isArray(payload),'invalid_a8_draft');
+  assert(payload.schema==='maison.a8-draft.v1','unsupported_a8_draft_schema');
+  assertId(payload.validation_plan_id,'vpl_','invalid_a8_validation_plan_id');
+  assertId(payload.a7_decision_id,'dec_','invalid_a8_decision_id');
+  assert(payload.public_write_authorized===false,'a8_public_write_forbidden');
+  assert(payload.experiment_execution_authorized===false,'a8_execution_forbidden');
+
+  const exp=payload.experiment;
+  assert(exp && typeof exp==='object' && !Array.isArray(exp),'invalid_experiment');
+  assertId(exp.experiment_id,'exp_','invalid_experiment_id');
+  assert(typeof exp.experiment_key==='string' && exp.experiment_key.length>=1 && exp.experiment_key.length<=180 && exp.experiment_key===exp.experiment_key.toLowerCase(),'invalid_experiment_key');
+  assert(typeof exp.created_by==='string' && exp.created_by.length>=1 && exp.created_by.length<=160,'invalid_experiment_created_by');
+  assert(exp.public_side_effects===false,'experiment_public_side_effect_forbidden');
+
+  const version=payload.version;
+  assert(version && typeof version==='object' && !Array.isArray(version),'invalid_experiment_version');
+  assertId(version.experiment_version_id,'exv_','invalid_experiment_version_id');
+  assert(version.version_number===1,'a8_initial_version_must_be_one');
+  assert(version.decision_id===payload.a7_decision_id,'a8_decision_mismatch');
+  assert(typeof version.hypothesis==='string' && version.hypothesis.trim().length>=10 && version.hypothesis.length<=1000,'invalid_a8_hypothesis');
+  assert(version.change_class==='cta_route_existing_solution','invalid_a8_change_class');
+  assert(version.eligible_population && typeof version.eligible_population==='object' && !Array.isArray(version.eligible_population),'invalid_a8_population');
+  assert(['economic_value_per_eligible_session','cta_click_rate','conversion_rate'].includes(version.primary_metric_key),'invalid_a8_primary_metric');
+  assertStringArray(version.secondary_metrics,'invalid_a8_secondary_metrics',20);
+  assert(version.stop_rules && typeof version.stop_rules==='object' && !Array.isArray(version.stop_rules),'invalid_a8_stop_rules');
+  assert(Number.isInteger(version.stop_rules.min_exposures) && version.stop_rules.min_exposures>=1,'invalid_a8_min_exposures');
+  assert(Number.isInteger(version.stop_rules.max_exposures) && version.stop_rules.max_exposures>=version.stop_rules.min_exposures,'invalid_a8_max_exposures');
+  assert(version.success_criteria && typeof version.success_criteria==='object' && !Array.isArray(version.success_criteria),'invalid_a8_success_criteria');
+  assert(version.split && typeof version.split==='object' && !Array.isArray(version.split),'invalid_a8_split');
+  assert(typeof version.compatibility_key==='string' && version.compatibility_key.length>=1 && version.compatibility_key.length<=200,'invalid_a8_compatibility_key');
+  assert(typeof version.policy_version==='string' && version.policy_version.length>=1 && version.policy_version.length<=120,'invalid_a8_policy_version');
+  assertId(version.rule_version_id,'rul_','invalid_a8_rule_version_id');
+  if (version.model_version_id != null) assertId(version.model_version_id,'mdl_','invalid_a8_model_version_id');
+  assert(typeof version.input_hash==='string' && /^[0-9a-f]{64}$/.test(version.input_hash),'invalid_a8_input_hash');
+
+  const variants=assertArray(payload.variants,'invalid_a8_variants',3);
+  assert(variants.length===2,'a8_requires_two_variants');
+  const keys=new Set();
+  let allocation=0;
+  for (const variant of variants) {
+    assert(variant && typeof variant==='object' && !Array.isArray(variant),'invalid_a8_variant');
+    assertId(variant.experiment_variant_id,'var_','invalid_a8_variant_id');
+    assert(['control','variant_a'].includes(variant.variant_key),'invalid_a8_variant_key');
+    assert(!keys.has(variant.variant_key),'duplicate_a8_variant_key');
+    keys.add(variant.variant_key);
+    assert(Number.isInteger(variant.allocation_basis_points) && variant.allocation_basis_points>=1 && variant.allocation_basis_points<=9999,'invalid_a8_allocation');
+    allocation+=variant.allocation_basis_points;
+    const body=variant.variant_payload;
+    assert(body && typeof body==='object' && !Array.isArray(body),'invalid_a8_variant_payload');
+    assert(Object.keys(body).length===1 && Object.prototype.hasOwnProperty.call(body,'destination_solution_id'),'a8_variant_field_not_allowlisted');
+    assertId(body.destination_solution_id,'sol_','invalid_a8_destination_solution_id');
+    assert(typeof variant.payload_hash==='string' && /^[0-9a-f]{64}$/.test(variant.payload_hash),'invalid_a8_payload_hash');
+  }
+  assert(keys.has('control') && keys.has('variant_a'),'a8_control_and_variant_required');
+  assert(allocation===10000,'a8_allocation_must_total_10000');
+  assert(version.split.control===variants.find(x=>x.variant_key==='control').allocation_basis_points,'a8_control_split_mismatch');
+  assert(version.split.variant_a===variants.find(x=>x.variant_key==='variant_a').allocation_basis_points,'a8_variant_split_mismatch');
+
+  const state=payload.state;
+  assert(state && typeof state==='object' && !Array.isArray(state),'invalid_a8_state');
+  assertId(state.state_event_id,'xst_','invalid_a8_state_event_id');
+  assert(state.from_state==null,'a8_draft_from_state_must_be_null');
+  assert(state.to_state==='draft','a8_draft_state_required');
+  assert(state.actor_kind==='system_simulation','a8_draft_actor_must_be_simulation');
+  assert(typeof state.reason_code==='string' && state.reason_code.length>=1 && state.reason_code.length<=160,'invalid_a8_state_reason');
+  assert(state.details && typeof state.details==='object' && !Array.isArray(state.details),'invalid_a8_state_details');
+  assertStringArray(payload.evidence_refs,'invalid_a8_evidence_refs');
+}
+
 function validateReview(row, opportunityId, offerIds) {
   assert(row && typeof row==='object' && !Array.isArray(row),'invalid_a12_review');
   assert(row.opportunity_id===opportunityId,'review_opportunity_mismatch');
@@ -522,6 +592,142 @@ async function persistValidationPlan(env, plan) {
 }
 
 
+async function persistA8Draft(env, payload) {
+  const plan=await first(env,'SELECT * FROM a14_validation_plans WHERE validation_plan_id=?',payload.validation_plan_id);
+  assert(plan,'a8_validation_plan_not_found');
+  assert(plan.plan_kind==='a8_cta_existing_solution','a8_validation_plan_kind_mismatch');
+  assert(plan.state==='blocked_needs_a7_decision','a8_validation_plan_state_mismatch');
+  assert(plan.existing_solution_id,'a8_validation_plan_solution_missing');
+
+  const decision=await first(env,'SELECT * FROM decision_records WHERE decision_id=?',payload.a7_decision_id);
+  assert(decision,'a8_a7_decision_not_found');
+  assert(decision.decision_type==='test_cta','a8_a7_decision_type_mismatch');
+  assert(Number(decision.hard_gates_passed)===1,'a8_a7_hard_gates_not_passed');
+  assert(decision.recommended_solution_id===plan.existing_solution_id,'a8_a7_solution_mismatch');
+  assert(payload.version.rule_version_id===decision.rule_version_id,'a8_rule_version_mismatch');
+  assert((payload.version.model_version_id ?? null)===(decision.model_version_id ?? null),'a8_model_version_mismatch');
+
+  const control=payload.variants.find(x=>x.variant_key==='control').variant_payload.destination_solution_id;
+  const treatment=payload.variants.find(x=>x.variant_key==='variant_a').variant_payload.destination_solution_id;
+  assert(treatment===plan.existing_solution_id,'a8_treatment_solution_mismatch');
+  assert(control!==treatment,'a8_control_treatment_must_differ');
+
+  const existingById=await first(env,'SELECT * FROM experiments WHERE experiment_id=?',payload.experiment.experiment_id);
+  const existingByKey=await first(env,'SELECT * FROM experiments WHERE experiment_key=?',payload.experiment.experiment_key);
+  const existing=existingById || existingByKey;
+  if (existing) {
+    assert(existing.experiment_id===payload.experiment.experiment_id,'a8_experiment_identity_drift');
+    assert(existing.experiment_key===payload.experiment.experiment_key,'a8_experiment_key_drift');
+    assert(existing.created_by===payload.experiment.created_by,'a8_experiment_creator_drift');
+    assert(Number(existing.public_side_effects)===0,'a8_experiment_public_side_effect_drift');
+
+    const version=await first(env,'SELECT * FROM experiment_versions WHERE experiment_version_id=?',payload.version.experiment_version_id);
+    assert(version,'a8_existing_version_missing');
+    assert(version.experiment_id===payload.experiment.experiment_id,'a8_existing_version_experiment_drift');
+    assert(version.decision_id===payload.a7_decision_id,'a8_existing_version_decision_drift');
+    assert(version.input_hash===payload.version.input_hash,'a8_existing_version_payload_drift');
+
+    const variantRows=await allRows(env,'SELECT * FROM experiment_variants WHERE experiment_version_id=? ORDER BY variant_key',payload.version.experiment_version_id);
+    assert(variantRows.length===payload.variants.length,'a8_existing_variant_count_drift');
+    for (const variant of payload.variants) {
+      const stored=variantRows.find(x=>x.variant_key===variant.variant_key);
+      assert(stored,'a8_existing_variant_missing');
+      assert(stored.payload_hash===variant.payload_hash,'a8_existing_variant_payload_drift');
+      assert(Number(stored.allocation_basis_points)===variant.allocation_basis_points,'a8_existing_variant_allocation_drift');
+    }
+    return {inserted:false};
+  }
+
+  const now=new Date().toISOString();
+  const a7LinkId=await stableId('adl_',{
+    validation_plan_id:payload.validation_plan_id,
+    decision_id:payload.a7_decision_id
+  });
+  const a8LinkId=await stableId('ael_',{
+    validation_plan_id:payload.validation_plan_id,
+    experiment_version_id:payload.version.experiment_version_id
+  });
+  const experimentLinkId=await stableId('axl_',{
+    validation_plan_id:payload.validation_plan_id,
+    experiment_version_id:payload.version.experiment_version_id
+  });
+
+  const statements=[
+    env.GROWTH_DB.prepare(`
+      INSERT INTO experiments(experiment_id,experiment_key,created_at,created_by,public_side_effects)
+      VALUES(?,?,?,?,0)
+    `).bind(payload.experiment.experiment_id,payload.experiment.experiment_key,now,payload.experiment.created_by),
+    env.GROWTH_DB.prepare(`
+      INSERT INTO experiment_versions(
+        experiment_version_id,experiment_id,version_number,decision_id,hypothesis,change_class,
+        eligible_population_json,primary_metric_key,secondary_metrics_json,stop_rules_json,
+        success_criteria_json,split_json,compatibility_key,policy_version,rule_version_id,
+        model_version_id,input_hash,created_at
+      ) VALUES(?,?,?,?,?,'cta_route_existing_solution',?,?,?,?,?,?,?,?,?,?,?,?)
+    `).bind(
+      payload.version.experiment_version_id,payload.experiment.experiment_id,
+      payload.version.version_number,payload.a7_decision_id,payload.version.hypothesis,
+      JSON.stringify(payload.version.eligible_population),payload.version.primary_metric_key,
+      JSON.stringify(payload.version.secondary_metrics),JSON.stringify(payload.version.stop_rules),
+      JSON.stringify(payload.version.success_criteria),JSON.stringify(payload.version.split),
+      payload.version.compatibility_key,payload.version.policy_version,payload.version.rule_version_id,
+      payload.version.model_version_id ?? null,payload.version.input_hash,now
+    )
+  ];
+  for (const variant of payload.variants) {
+    statements.push(env.GROWTH_DB.prepare(`
+      INSERT INTO experiment_variants(
+        experiment_variant_id,experiment_version_id,variant_key,allocation_basis_points,
+        variant_payload_json,payload_hash,created_at
+      ) VALUES(?,?,?,?,?,?,?)
+    `).bind(
+      variant.experiment_variant_id,payload.version.experiment_version_id,variant.variant_key,
+      variant.allocation_basis_points,JSON.stringify(variant.variant_payload),variant.payload_hash,now
+    ));
+  }
+  statements.push(
+    env.GROWTH_DB.prepare(`
+      INSERT INTO experiment_state_events(
+        state_event_id,experiment_version_id,from_state,to_state,reason_code,
+        occurred_at,actor_kind,details_json
+      ) VALUES(?,?,NULL,'draft',?,?,?,?)
+    `).bind(
+      payload.state.state_event_id,payload.version.experiment_version_id,
+      payload.state.reason_code,now,payload.state.actor_kind,JSON.stringify(payload.state.details)
+    ),
+    env.GROWTH_DB.prepare(`
+      INSERT INTO a14_validation_plan_a7_links(validation_plan_id,decision_id,evidence_refs_json,linked_at)
+      VALUES(?,?,?,?)
+    `).bind(payload.validation_plan_id,payload.a7_decision_id,JSON.stringify(payload.evidence_refs ?? []),now),
+    env.GROWTH_DB.prepare(`
+      INSERT INTO a14_validation_plan_a8_links(
+        validation_plan_id,experiment_id,experiment_version_id,evidence_refs_json,linked_at
+      ) VALUES(?,?,?,?,?)
+    `).bind(
+      payload.validation_plan_id,payload.experiment.experiment_id,payload.version.experiment_version_id,
+      JSON.stringify(payload.evidence_refs ?? []),now
+    ),
+    env.GROWTH_DB.prepare(`
+      INSERT INTO a14_experiment_links(
+        experiment_link_id,opportunity_id,offer_hypothesis_id,distribution_match_id,
+        experiment_id,experiment_version_id,linkage_kind,evidence_refs_json,linked_at
+      ) VALUES(?,?,?,NULL,?,?,'cta_validation',?,?)
+    `).bind(
+      experimentLinkId,plan.opportunity_id,plan.offer_hypothesis_id,payload.experiment.experiment_id,
+      payload.version.experiment_version_id,JSON.stringify(payload.evidence_refs ?? []),now
+    )
+  );
+  await env.GROWTH_DB.batch(statements);
+  return {inserted:true};
+}
+
+
+async function allRows(env, sql, ...params) {
+  const out=await env.GROWTH_DB.prepare(sql).bind(...params).all();
+  return Array.isArray(out?.results) ? out.results : [];
+}
+
+
 export async function handleBrainProposalRequest(request, env) {
   const url=new URL(request.url);
   if (!url.pathname.startsWith('/internal/proposals/')) return null;
@@ -529,7 +735,7 @@ export async function handleBrainProposalRequest(request, env) {
   if (!env.BRAIN_PROPOSAL_TOKEN) return json({error:'proposal_api_misconfigured'},503);
   if (!constantTimeEqual(bearer(request),env.BRAIN_PROPOSAL_TOKEN)) return json({error:'unauthorized'},401);
   if (request.method!=='POST') return json({error:'method_not_allowed'},405);
-  if (!['/internal/proposals/a14','/internal/proposals/validation-plan'].includes(url.pathname)) {
+  if (!['/internal/proposals/a14','/internal/proposals/validation-plan','/internal/proposals/a8-draft'].includes(url.pathname)) {
     return json({error:'not_found'},404);
   }
 
@@ -542,6 +748,21 @@ export async function handleBrainProposalRequest(request, env) {
     assert(new TextEncoder().encode(raw).length<=MAX_BODY_BYTES,'proposal_body_too_large');
     const payload=JSON.parse(raw);
     privacyScan(payload);
+
+    if (url.pathname==='/internal/proposals/a8-draft') {
+      validateA8Draft(payload);
+      const result=await persistA8Draft(env,payload);
+      return json({
+        stored:true,
+        idempotent:!result.inserted,
+        validation_plan_id:payload.validation_plan_id,
+        experiment_id:payload.experiment.experiment_id,
+        experiment_version_id:payload.version.experiment_version_id,
+        state:'draft',
+        public_write_authorized:false,
+        experiment_execution_authorized:false
+      });
+    }
 
     if (url.pathname==='/internal/proposals/validation-plan') {
       assert(payload?.schema==='maison.a14-validation-plan.v1','unsupported_validation_plan_schema');
