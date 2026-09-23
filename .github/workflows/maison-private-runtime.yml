@@ -68,6 +68,7 @@ jobs:
           test -n "$CLOUDFLARE_ACCOUNT_ID"
 
       - name: Private-stage preflight
+        if: ${{ inputs.apply }}
         run: |
           python .github/maison-growth/runtime/preflight_private_runtime.py "${{ inputs.stage }}"
 
