@@ -162,6 +162,31 @@ The optional private overlay contract is `commercial-asset-overlay.schema.json`.
 The general Maison Brain MCP tool `maison_commercial_asset_search` does **not** load or expose the private overlay; it returns catalogue-derived context only.
 
 
+## Private activation preflight
+
+Before enabling any private remote Brain surface, run the stage-specific local preflight. It checks HTTPS boundaries, placeholder/missing secrets, token separation and the zero-authority invariants without printing secret values or changing remote state.
+
+```bash
+python .github/maison-growth/runtime/preflight_private_runtime.py \
+  private_brain_read_candidate \
+  --env-file .env.observe
+```
+
+The exact staged path from private read to first A12 inbox entries is documented in `PRIVATE_ACTIVATION_RUNBOOK.md`.
+
+## Commercial Action Inbox
+
+The read-only operator view now has its own profile:
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile commercial-inbox run --rm commercial-inbox
+```
+
+It summarizes pending human decisions, approved manual pilots and A8 drafts. It performs zero writes.
+
 ## A14 materialization and human review
 
 The Brain now has a narrow, disabled-by-default path from analysis into canonical commercial review:

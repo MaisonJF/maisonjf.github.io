@@ -24,6 +24,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Brain Control API | READY GET-only feed/solutions/economics/A11 learning + A5 mappings | DISABLED |
 | Canonical observe cycle | READY A5→Pre-Brain→Scout→Critic→Foundry→A14 preview + A3/A11 feedback context | OPTIONAL / NOT STARTED |
 | Persistent observe runtime | READY Docker Compose: pgvector/Postgres + Redis + Osiris + authenticated bridge + healthchecks | NOT STARTED |
+| Private activation preflight | READY stage-aware HTTPS/secret/token/authority checks + runbook | NOT RUN |
 | Pre-Brain | READY analysis core | NOT PROVISIONED |
 | DuckDB | READY optional analytical adapter | PACKAGE/HOST NOT PROVISIONED |
 | Polars | READY optional analytical adapter | PACKAGE/HOST NOT PROVISIONED |
@@ -42,7 +43,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | A7 Commercial Discovery | READY existing module | analysis only |
 | A14 Universal Opportunity + Earned Distribution | READY A14.3 + deterministic IDs + review→validation planning | analysis/planning only |
 | A14 materialization | READY narrow proposal API + manual runtime profile | DISABLED |
-| Commercial human inbox | READY read-only A12 inbox + CLI | AVAILABLE WHEN PRIVATE READ ENABLED |
+| Commercial human inbox | READY read-only A12 inbox + Commercial Action Inbox operator CLI | AVAILABLE WHEN PRIVATE READ ENABLED |
 | Human review decision | READY A12.2 planning-only append-only decision API | DISABLED |
 | Approved validation planning | READY A14.3 behaviour-matched manual/B2B/physical/service/CTA plans | DISABLED / PREVIEW-FIRST |
 | A8 CTA draft planning | READY explicit private CTA context + hard-gated A7 decision → A8 draft | DISABLED / DRAFT ONLY |
