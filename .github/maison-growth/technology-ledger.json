@@ -28,6 +28,32 @@
   ],
   "entries": [
     {
+      "id": "maison-brain-control-api",
+      "type": "internal_api",
+      "name": "Maison Brain Control API",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "authenticated GET-only bridge from canonical D1/A13/A4/A3 data to the private persistent Brain runtime",
+      "sense": "canonical data access",
+      "cost": "shares A13 Worker/D1 infrastructure",
+      "license": "Maison repo",
+      "self_hosted": false,
+      "depends_on": [
+        "A13 Worker",
+        "D1",
+        "HTTPS/private ingress",
+        "bearer secret"
+      ],
+      "serves": [
+        "Pre-Brain",
+        "Scout",
+        "Critic",
+        "Cash & Profit learning"
+      ],
+      "notes": "Disabled by default. Exposes canonical feed, all A3 economic feedback, safe solution fields and A4 need↔solution links. No write routes; no customer/journey identity; recommend Cloudflare Access/private HTTPS in addition to bearer auth before activation."
+    },
+    {
       "id": "maison-brain-mcp",
       "type": "protocol_surface",
       "name": "Maison Brain MCP read-only surface",
