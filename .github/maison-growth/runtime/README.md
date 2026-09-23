@@ -160,3 +160,47 @@ The generated registry records known catalogue facts such as product/service ide
 The optional private overlay contract is `commercial-asset-overlay.schema.json`. An operator may keep a matching JSON file **outside git** and point `MAISON_COMMERCIAL_ASSET_OVERLAY_PATH` to it. Any known operational value requires an evidence reference. Catalogue `in_stock` never becomes counted inventory.
 
 The general Maison Brain MCP tool `maison_commercial_asset_search` does **not** load or expose the private overlay; it returns catalogue-derived context only.
+
+
+## A14 materialization and human review
+
+The Brain now has a narrow, disabled-by-default path from analysis into canonical commercial review:
+
+`observe cycle → A14 hypotheses → D1 materialization → A12 human inbox → append-only human decision`
+
+Materialization is manual:
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile a14-materialize run --rm a14-materialize
+```
+
+`MAISON_A14_MATERIALIZE_ENABLED=false` is the default. With it false, the command computes selection counts but performs no proposal writes.
+
+The proposal write surface is separate from the read-only Brain Control API. It uses `BRAIN_PROPOSAL_API_ENABLED` and `BRAIN_PROPOSAL_TOKEN`. Analysis-only hypotheses may be persisted without entering A12. Only `human_review_preview` offers are queued for human review.
+
+The commercial inbox is read with:
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile commercial-review run --rm commercial-review
+```
+
+A human decision is a separate authority. The review-decision API has its own switch and token. To record one manually, run the same container with an explicit command, for example:
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile commercial-review run --rm commercial-review \
+  python /opt/maison-growth/brain/commercial_review_cli.py decide \
+  <QUEUE_ID> approved --reason "Aprovo apenas o planeamento do teste"
+```
+
+This requires `MAISON_REVIEW_DECISION_ENABLED=true`.
+
+**Approval means experiment planning only.** A12.2 stores the decision append-only and structurally keeps `public_write_authorized=0`, `outbound_authorized=0`, `spend_authorized=0` and `experiment_execution_authorized=0`.
