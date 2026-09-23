@@ -73,7 +73,7 @@ for(const p of products.MAISON_PRODUCTS||[]){
 }
 
 for(const p of products.MAISON_PRODUCT_FUTURE||[]){
-  const slug=p.slug||String(p.name||'future').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const slug=p.slug||String(p.name||'future').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   assets.push({
     asset_ref:`catalog:future-product:${slug}`,
     source_kind:'public_product_future_registry',
