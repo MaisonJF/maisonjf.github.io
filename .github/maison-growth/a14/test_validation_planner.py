@@ -23,6 +23,30 @@ class ValidationPlannerTests(unittest.TestCase):
   row={**BASE,"offer_type":"physical_product","validation_mode":"micro_batch","existing_solution_id":None}
   plan=build_validation_plan(row)
   self.assertEqual(plan["plan_kind"],"manual_physical_pilot")
+  self.assertIn("manual_pilot_requires_verified_stock",plan["reason_codes"])
+  self.assertIn("manual_pilot_requires_verified_unit_cost",plan["reason_codes"])
+  self.assertIn("manual_pilot_requires_human_approved_price",plan["reason_codes"])
+  self.assertFalse(plan["experiment_execution_authorized"])
+
+ def test_service_pilot_carries_capacity_cost_and_price_prerequisites(self):
+  row={**BASE,"offer_type":"service","validation_mode":"manual_pilot","existing_solution_id":None}
+  plan=build_validation_plan(row)
+  self.assertEqual(plan["plan_kind"],"manual_service_pilot")
+  self.assertIn("manual_pilot_requires_verified_capacity",plan["reason_codes"])
+  self.assertIn("manual_pilot_requires_verified_human_effort",plan["reason_codes"])
+  self.assertIn("manual_pilot_requires_verified_variable_cost",plan["reason_codes"])
+  self.assertIn("manual_pilot_requires_concrete_human_approved_price",plan["reason_codes"])
+  self.assertFalse(plan["public_write_authorized"])
+  self.assertFalse(plan["outbound_authorized"])
+  self.assertFalse(plan["spend_authorized"])
+
+ def test_b2b_pilot_requires_quote_capacity_and_consent_before_outreach(self):
+  row={**BASE,"offer_type":"b2b","validation_mode":"b2b_pilot","existing_solution_id":None}
+  plan=build_validation_plan(row)
+  self.assertIn("manual_pilot_requires_human_approved_quote",plan["reason_codes"])
+  self.assertIn("manual_pilot_requires_delivery_capacity",plan["reason_codes"])
+  self.assertIn("manual_pilot_requires_counterparty_consent_before_outreach",plan["reason_codes"])
+  self.assertFalse(plan["outbound_authorized"])
 
  def test_existing_solution_cta_requires_a7(self):
   sol="sol_"+"4"*36
