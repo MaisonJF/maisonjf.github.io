@@ -125,3 +125,10 @@ Existing-asset-first cannot rely only on A3 solution IDs because the public Mais
 The registry currently sees 17 catalogue assets: 5 active physical products, 2 future physical products, 9 services and 1 B2B service. Public `in_stock` is only a catalogue availability signal; it is never interpreted as a counted stock quantity.
 
 Private operational facts — quantities, reserved units, material/packaging cost, production time, batch capacity, MOQ, shelf life, supplier lead time, service capacity, human effort and variable cost — stay UNKNOWN until supplied through the evidence-backed private overlay contract. That overlay is intentionally kept outside git.
+
+
+## A14 identity decision
+
+Opportunity, offer-hypothesis and earned-distribution-match identities are semantic rather than run-based. Equivalent canonical inputs produce the same UUID-shaped IDs across Brain runs; `created_at` does not alter identity.
+
+A14 persistence is strict and idempotent: identical semantic payloads may be presented again without creating duplicates, but any same-ID/different-payload condition is treated as an integrity error. This preserves Opportunity Lifetime Value, Revenue Per Insight and A3/A8/A11 lineage across repeated observation cycles.
