@@ -42,6 +42,23 @@ class RuntimeContractTests(unittest.TestCase):
         self.assertFalse(plan["spend_authorized"])
         self.assertFalse(plan["public_write_authorized"])
 
+    def test_proposal_materialization_stage_keeps_execution_off(self):
+        out=subprocess.check_output(
+            [sys.executable,str(ROOT/"plan_observe_activation.py"),"proposal_materialization_candidate"],
+            text=True,
+        )
+        plan=json.loads(out)
+        self.assertEqual(plan["BRAIN_CONTROL_API_ENABLED"],"true")
+        self.assertEqual(plan["BRAIN_PROPOSAL_API_ENABLED"],"true")
+        self.assertEqual(plan["WORKER_ENABLED"],"false")
+        self.assertEqual(plan["OSIRIS_ENABLED"],"false")
+        self.assertEqual(plan["OPENROUTER_ENABLED"],"false")
+        self.assertFalse(plan["outbound_authorized"])
+        self.assertFalse(plan["spend_authorized"])
+        self.assertFalse(plan["public_write_authorized"])
+        self.assertFalse(plan["experiment_execution_authorized"])
+        self.assertTrue(plan["requires_private_https_access"])
+
     def test_memory_stage_requires_https_smoke(self):
         out=subprocess.check_output(
             [sys.executable,str(ROOT/"plan_observe_activation.py"),"memory_mirror_candidate"],
