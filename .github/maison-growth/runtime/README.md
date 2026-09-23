@@ -204,3 +204,52 @@ docker compose \
 This requires `MAISON_REVIEW_DECISION_ENABLED=true`.
 
 **Approval means experiment planning only.** A12.2 stores the decision append-only and structurally keeps `public_write_authorized=0`, `outbound_authorized=0`, `spend_authorized=0` and `experiment_execution_authorized=0`.
+
+
+## Approved validation planning
+
+After a commercial offer has been approved through A12, the optional `validation-plan` profile turns it into the validation method that matches the offer's real purchase behaviour.
+
+With `MAISON_VALIDATION_PLAN_MATERIALIZE_ENABLED=false` it is preview-only:
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile validation-plan run --rm validation-plan
+```
+
+The planner does not force every opportunity through A8. B2B, service, physical-product and distribution opportunities become manual-pilot plans. Only CTA routing to an existing canonical solution is eligible for the A7/A8 path.
+
+## A8 CTA draft planning
+
+A CTA experiment requires real route context that the Brain must not guess. Put the private file at:
+
+`.github/maison-growth/runtime/.private/cta-context.json`
+
+The directory is gitignored. The file follows `brain/cta-experiment-context.schema.json` and records, per validation plan:
+
+- source asset ID;
+- CTA slot key;
+- control solution ID;
+- treatment solution ID;
+- maximum exposure count;
+- evidence references;
+- optional explicit A7 decision ID when more than one eligible decision exists.
+
+Preview:
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile a8-draft run --rm a8-draft
+```
+
+`MAISON_A8_DRAFT_MATERIALIZE_ENABLED=false` is the default.
+
+When explicitly enabled, the command may persist an A8 experiment **only in `draft` state**. The Worker independently re-derives the semantic input hash, experiment/version/variant/state IDs and variant payload hashes before writing.
+
+The draft path structurally requires a canonical A7 `test_cta` decision with passed hard gates and the same treatment solution. It writes append-only A14↔A7↔A8 lineage.
+
+It does **not** capture the pre-change public snapshot, claim `ready`, assign traffic, run the experiment, publish anything, contact anyone, spend money or alter catalogue/price/checkout. Those remain later A8/A9/A12 steps and require separate authority.
