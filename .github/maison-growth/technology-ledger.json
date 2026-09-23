@@ -28,6 +28,57 @@
   ],
   "entries": [
     {
+      "id": "maison-a8-draft-planning",
+      "type": "internal_component",
+      "name": "Maison A8 Draft Planning Bridge",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "build and persist deterministic CTA-routing experiments in draft state only",
+      "sense": "controlled experiment preparation",
+      "cost": "shares Growth D1/runtime",
+      "license": "Maison repo",
+      "self_hosted": false,
+      "depends_on": [
+        "A14.3 validation plan",
+        "A7 test_cta hard gates",
+        "private CTA context",
+        "A8.1"
+      ],
+      "serves": [
+        "A8",
+        "A14",
+        "future A9 execution"
+      ],
+      "notes": "Private CTA context is gitignored and requires asset/slot/control/treatment/max exposures/evidence. Worker re-derives hashes and IDs. Only draft state is written; no snapshot/ready/running, public write, outbound, spend or execution."
+    },
+    {
+      "id": "maison-a14-validation-planning",
+      "type": "internal_component",
+      "name": "Maison A14.3 Validation Planning",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "convert approved A12 commercial reviews into behaviour-matched validation plans without executing them",
+      "sense": "approved opportunity → correct validation method",
+      "cost": "shares Growth D1/runtime",
+      "license": "Maison repo",
+      "self_hosted": false,
+      "depends_on": [
+        "A14.3",
+        "A12.2",
+        "A7",
+        "A8"
+      ],
+      "serves": [
+        "Brain",
+        "A7",
+        "A8",
+        "manual pilots"
+      ],
+      "notes": "B2B/service/physical/distribution opportunities remain manual pilots. CTA routing is eligible for A8 only with an existing canonical solution, hard-gated A7 test_cta decision and explicit private CTA context. No public/outbound/spend/experiment-execution authority."
+    },
+    {
       "id": "maison-human-commercial-review",
       "type": "governance",
       "name": "Maison Human Commercial Review A12.2",
@@ -207,7 +258,7 @@
         "future agents",
         "future orchestrators"
       ],
-      "notes": "Optional localhost-only profile. Exactly four read-only tools; no outreach, publication, catalogue, price, checkout, spend or database-write tools."
+      "notes": "Optional localhost-only profile. Read-only tools only; no outreach, publication, catalogue, price, checkout, spend or database-write tools."
     },
     {
       "id": "maison-persistent-runtime",
@@ -232,7 +283,7 @@
         "Brain",
         "Pre-Brain"
       ],
-      "notes": "Repository stage remains infra_only. Compose includes pinned pgvector/Postgres, Redis, Osiris, authenticated A13 bridge, Brain observe cycle, Brain MCP, manual semantic sync and health/smoke profiles; all published ports bind 127.0.0.1. Semantic/Osiris read context switches are off by default. No external provider activation, spend, outbound or public write authority."
+      "notes": "Repository stage remains infra_only. Compose includes private memory stack plus preview-first A14 materialization, human review, validation-plan and A8-draft profiles. CTA context lives under gitignored runtime/.private. All execution/public/outbound/spend authorities remain off."
     },
     {
       "id": "maison-a14",
@@ -268,7 +319,7 @@
         "Revenue Engine",
         "Earned Distribution"
       ],
-      "notes": "Analysis-only. Existing-asset-first; UNKNOWN remains unknown; contextual amplifier×offer×moment fit. Opportunity/offer/distribution hypothesis IDs are deterministic from canonical semantic payloads and repository persistence is strict/idempotent; same-ID payload drift is rejected. No autonomous outreach, spend, catalogue/price/checkout mutation or public write."
+      "notes": "A14.3 analysis/planning bridge. Existing-asset-first; UNKNOWN remains unknown; deterministic hypotheses; strict idempotence; approved reviews become behaviour-matched validation plans. CTA reaches A8 only through hard-gated A7 + explicit private CTA context. No autonomous execution."
     },
     {
       "id": "maison-a13",
@@ -329,7 +380,7 @@
         "Revenue Engine",
         "Scout"
       ],
-      "notes": "Needs explicit bridge from insight/opportunity to experiment to realised revenue."
+      "notes": "A14.3 now bridges approved opportunities into behaviour-matched validation planning. Existing-solution CTA tests can become A8 drafts only after A7 hard gates and explicit CTA context; real execution/outcomes still require future authorized runtime and A3/A11 feedback."
     },
     {
       "id": "osiris-osint",
