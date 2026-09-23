@@ -130,6 +130,20 @@ def maison_ocean_search(query: str, limit: int=8) -> dict[str,Any]:
 
 
 @mcp.tool(annotations=READ_ONLY)
+def maison_commercial_action_inbox(limit: int=20) -> dict[str,Any]:
+    """Read-only commercial decision/manual-pilot/A8-draft inbox. No execution authority."""
+    if not 1 <= limit <= 100:
+        raise ValueError("limit_must_be_1_100")
+    client=_control_client()
+    result=dict(client.action_inbox(limit=limit))
+    result["mcp_public_write_authorized"]=False
+    result["mcp_outbound_authorized"]=False
+    result["mcp_spend_authorized"]=False
+    result["mcp_experiment_execution_authorized"]=False
+    return result
+
+
+@mcp.tool(annotations=READ_ONLY)
 def maison_commercial_asset_search(query: str, limit: int=6) -> dict[str,Any]:
     """Search Maison's derived product/service catalogue context; no private stock/cost overlay."""
     if not query.strip():
