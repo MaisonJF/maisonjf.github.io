@@ -1,6 +1,18 @@
 name: Maison Private Runtime Deploy
 
 on:
+  pull_request:
+    paths:
+      - '.github/maison-growth/**'
+      - 'workers/maison-intelligence/**'
+      - '.github/workflows/maison-private-runtime.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/maison-growth/**'
+      - 'workers/maison-intelligence/**'
+      - '.github/workflows/maison-private-runtime.yml'
   workflow_dispatch:
     inputs:
       stage:
@@ -30,16 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-      BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
-      BRAIN_PROPOSAL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-      BRAIN_PROPOSAL_TOKEN: ${{ secrets.MAISON_BRAIN_PROPOSAL_TOKEN }}
-      BRAIN_REVIEW_DECISION_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-      BRAIN_REVIEW_DECISION_TOKEN: ${{ secrets.MAISON_BRAIN_REVIEW_DECISION_TOKEN }}
-      CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
-      CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+      RUNTIME_STAGE: ${{ github.event_name == 'workflow_dispatch' && inputs.stage || 'private_brain_read_candidate' }}
 
     steps:
       - name: Checkout
@@ -56,8 +59,11 @@ jobs:
           node-version: '22'
 
       - name: Guard live apply
-        if: ${{ inputs.apply }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
         shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
           if [[ "${{ inputs.access_boundary_confirmed }}" != "true" ]]; then
@@ -68,14 +74,23 @@ jobs:
           test -n "$CLOUDFLARE_ACCOUNT_ID"
 
       - name: Private-stage preflight
-        if: ${{ inputs.apply }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        env:
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+          BRAIN_PROPOSAL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_PROPOSAL_TOKEN: ${{ secrets.MAISON_BRAIN_PROPOSAL_TOKEN }}
+          BRAIN_REVIEW_DECISION_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_REVIEW_DECISION_TOKEN: ${{ secrets.MAISON_BRAIN_REVIEW_DECISION_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
         run: |
-          python .github/maison-growth/runtime/preflight_private_runtime.py "${{ inputs.stage }}"
+          python .github/maison-growth/runtime/preflight_private_runtime.py "$RUNTIME_STAGE"
 
       - name: Render temporary Wrangler config
         run: |
           python .github/maison-growth/runtime/render_private_worker_config.py \
-            "${{ inputs.stage }}" \
+            "$RUNTIME_STAGE" \
             --template workers/maison-intelligence/wrangler.jsonc \
             --output workers/maison-intelligence/wrangler.private.runtime.jsonc
 
@@ -84,8 +99,11 @@ jobs:
         run: npm install --ignore-scripts
 
       - name: Verify remote D1 schema
-        if: ${{ inputs.apply }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
         working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: bash scripts/verify-growth-schema.sh maison-growth-engine
 
       - name: Validate Worker
@@ -96,28 +114,42 @@ jobs:
           npx wrangler deploy --dry-run --config wrangler.private.runtime.jsonc
 
       - name: Install private Worker secrets
-        if: ${{ inputs.apply }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
         working-directory: workers/maison-intelligence
         shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+          BRAIN_PROPOSAL_TOKEN: ${{ secrets.MAISON_BRAIN_PROPOSAL_TOKEN }}
+          BRAIN_REVIEW_DECISION_TOKEN: ${{ secrets.MAISON_BRAIN_REVIEW_DECISION_TOKEN }}
         run: |
           set -euo pipefail
           printf '%s' "$BRAIN_CONTROL_TOKEN" | npx wrangler secret put BRAIN_CONTROL_TOKEN --config wrangler.private.runtime.jsonc
-          case "${{ inputs.stage }}" in
+          case "$RUNTIME_STAGE" in
             proposal_materialization_candidate|human_review_decision_candidate)
               test -n "$BRAIN_PROPOSAL_TOKEN"
               printf '%s' "$BRAIN_PROPOSAL_TOKEN" | npx wrangler secret put BRAIN_PROPOSAL_TOKEN --config wrangler.private.runtime.jsonc
               ;;
           esac
-          if [[ "${{ inputs.stage }}" == "human_review_decision_candidate" ]]; then
+          if [[ "$RUNTIME_STAGE" == "human_review_decision_candidate" ]]; then
             test -n "$BRAIN_REVIEW_DECISION_TOKEN"
             printf '%s' "$BRAIN_REVIEW_DECISION_TOKEN" | npx wrangler secret put BRAIN_REVIEW_DECISION_TOKEN --config wrangler.private.runtime.jsonc
           fi
 
       - name: Deploy private surface
-        if: ${{ inputs.apply }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
         working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx wrangler deploy --config wrangler.private.runtime.jsonc
 
       - name: Verify deployed private Brain health
-        if: ${{ inputs.apply }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        env:
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
         run: python .github/maison-growth/runtime/verify_private_brain_health.py

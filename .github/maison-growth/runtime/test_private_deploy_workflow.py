@@ -13,9 +13,22 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
     def setUpClass(cls):
         cls.source = WORKFLOW.read_text(encoding="utf-8")
 
-    def test_dry_run_does_not_require_live_preflight(self):
+    def test_runtime_changes_get_automatic_secret_free_dry_run(self):
+        self.assertIn("  pull_request:\n", self.source)
+        self.assertIn("  push:\n", self.source)
+        self.assertIn("      - main\n", self.source)
+        self.assertIn(
+            "RUNTIME_STAGE: ${{ github.event_name == 'workflow_dispatch' && inputs.stage || 'private_brain_read_candidate' }}",
+            self.source,
+        )
+
+    def test_job_environment_contains_no_repository_secrets(self):
+        job_header = self.source.split("    steps:", 1)[0]
+        self.assertNotIn("${{ secrets.", job_header)
+
+    def test_live_preflight_never_runs_on_automatic_events(self):
         block = """      - name: Private-stage preflight
-        if: ${{ inputs.apply }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
 """
         self.assertIn(block, self.source)
 
@@ -34,6 +47,20 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
         health = self.source.index("- name: Verify deployed private Brain health")
         self.assertLess(deploy, health)
         self.assertIn("verify_private_brain_health.py", self.source)
+
+    def test_live_steps_require_manual_dispatch_and_apply(self):
+        condition = "if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}"
+        for step in (
+            "Guard live apply",
+            "Private-stage preflight",
+            "Verify remote D1 schema",
+            "Install private Worker secrets",
+            "Deploy private surface",
+            "Verify deployed private Brain health",
+        ):
+            start = self.source.index(f"- name: {step}")
+            tail = self.source[start:start + 350]
+            self.assertIn(condition, tail, step)
 
 
 if __name__ == "__main__":
