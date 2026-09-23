@@ -77,7 +77,9 @@ async function feed(env, url) {
     statement=env.GROWTH_DB.prepare(`
       SELECT observation_id,event_id,territory_key,provider_id,model_id,source_class,
              grounding_state,response_excerpt,observed_at,evidence_id,strength,
-             confidence_class,confidence,independent_roots_json,evidence_refs_json
+             confidence_class,confidence,semantic_observation_id,need_id,intent_id,
+             semantic_confidence_score,semantic_ambiguity,semantic_provider_name,
+             semantic_provider_version,independent_roots_json,evidence_refs_json
       FROM brain_prebrain_feed
       WHERE observed_at > ? OR (observed_at = ? AND observation_id > ?)
       ORDER BY observed_at,observation_id
@@ -87,7 +89,9 @@ async function feed(env, url) {
     statement=env.GROWTH_DB.prepare(`
       SELECT observation_id,event_id,territory_key,provider_id,model_id,source_class,
              grounding_state,response_excerpt,observed_at,evidence_id,strength,
-             confidence_class,confidence,independent_roots_json,evidence_refs_json
+             confidence_class,confidence,semantic_observation_id,need_id,intent_id,
+             semantic_confidence_score,semantic_ambiguity,semantic_provider_name,
+             semantic_provider_version,independent_roots_json,evidence_refs_json
       FROM brain_prebrain_feed
       ORDER BY observed_at,observation_id
       LIMIT ?
