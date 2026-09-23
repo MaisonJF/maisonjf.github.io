@@ -205,3 +205,66 @@ class PgvectorSemanticMemory:
             )
             for row in rows
         )
+
+
+@dataclass
+class PgvectorSemanticReader:
+    """Read-only semantic projection reader.
+
+    Unlike PgvectorSemanticMemory, this class never provisions schema and never commits.
+    It is suitable for the read-only Brain MCP surface.
+    """
+    conn: object
+    embedder: EmbeddingProvider
+
+    @property
+    def name(self) -> str:
+        return "pgvector_read_only"
+
+    def _verify_config(self) -> None:
+        with self.conn.cursor() as cur:
+            cur.execute(
+                "SELECT embedding_model_id,dimensions FROM maison_semantic_config WHERE singleton=TRUE"
+            )
+            row=cur.fetchone()
+        if row is None:
+            raise PgvectorError("semantic_memory_not_provisioned")
+        if row[0] != self.embedder.model_id or int(row[1]) != int(self.embedder.dimensions):
+            raise PgvectorError("semantic_embedding_configuration_mismatch")
+
+    def search(self, query: str, *, limit: int, filters: Mapping[str,object]) -> Sequence[SemanticHit]:
+        self._verify_config()
+        if limit < 1 or limit > 100:
+            raise PgvectorError("limit_must_be_1_100")
+        vector=_vector_literal(self.embedder.embed_query(query),self.embedder.dimensions)
+        where=["embedding_model_id=%s"]
+        allowed={"territory_key","knowledge_type","privacy_class","language"}
+        filter_values=[]
+        for key,value in filters.items():
+            if key not in allowed:
+                raise PgvectorError(f"unsupported_filter:{key}")
+            where.append(f"{key}=%s")
+            filter_values.append(value)
+        sql=f"""
+            SELECT document_id,
+                   1-(embedding <=> %s::vector) AS score,
+                   canonical_evidence_ref,
+                   metadata
+            FROM maison_semantic_documents
+            WHERE {' AND '.join(where)}
+            ORDER BY embedding <=> %s::vector
+            LIMIT %s
+        """
+        params=[vector,self.embedder.model_id,*filter_values,vector,limit]
+        with self.conn.cursor() as cur:
+            cur.execute(sql,params)
+            rows=cur.fetchall()
+        return tuple(
+            SemanticHit(
+                document_id=row[0],
+                score=float(row[1]),
+                evidence_ref=row[2],
+                metadata=dict(row[3] or {}),
+            )
+            for row in rows
+        )
