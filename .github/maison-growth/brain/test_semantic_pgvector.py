@@ -41,7 +41,8 @@ class SemanticPgvectorPureTests(unittest.TestCase):
     def test_search_parameter_order(self):
         class Embed:
             model_id="m1"; dimensions=3
-            def embed_query(self,text): return [1,2,3]\n            def embed_document(self,text): return [4,5,6]
+            def embed_query(self,text): return [1,2,3]
+            def embed_document(self,text): return [4,5,6]
         class Cursor:
             def __init__(self): self.params=None
             def execute(self,sql,params): self.params=list(params)
