@@ -1,7 +1,7 @@
 {
   "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
-  "generatedAt": "2026-09-23T23:45:18+01:00",
+  "generatedAt": "2026-09-23T23:49:58+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
   "contract": {
     "storesPaidBodies": false,
@@ -11,19 +11,19 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 14,
-    "queueItems": 28,
-    "questionCandidates": 14,
-    "questionThemeHypotheses": 85,
-    "questionDesignSlots": 510,
+    "oceansConsidered": 15,
+    "queueItems": 30,
+    "questionCandidates": 15,
+    "questionThemeHypotheses": 92,
+    "questionDesignSlots": 552,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 150,
     "pdiThemeBacklog": 150,
     "pdiSourceDesignSlots": 900,
     "pdiEditorialCoreTarget": 45000,
     "pdiCombinatorialTarget": 2800000,
-    "oracleCandidates": 14,
-    "oracleRoleSlots": 98
+    "oracleCandidates": 15,
+    "oracleRoleSlots": 105
   },
   "pdiGrowth": {
     "scale": {
@@ -8454,6 +8454,34 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_oracle_presenca_que_ampara_sem_tentar_resolver",
+      "type": "oracle_candidate",
+      "sourceOceanId": "presenca-que-ampara-sem-tentar-resolver",
+      "territory": "presenca-que-ampara-sem-tentar-resolver",
+      "intent": "reconhecer quando a necessidade principal não é resolver imediatamente o problema, mas receber presença, escuta e apoio relacional suficiente para atravessar um momento difícil, distinguindo companhia humana de aconselhamento, tratamento clínico ou resposta de emergência",
+      "painLanguage": "Há momentos de medo, espera ou sobrecarga em que a pessoa não precisa de uma solução perfeita nem de um conselho brilhante. Precisa sobretudo de sentir que alguém ficou, ouviu e não a deixou atravessar aquele momento sozinha.",
+      "commercialAdjacency": "Presença e SOS MAISON JF (1 dia/1 semana) como serviços com limites claros; Oráculo Solidão & Companhia e experiências digitais sobre pedir/receber apoio; SOS Maison JF como linguagem de check-in e contacto de confiança sem promessa de emergência; Ritual Volta Para Casa; e velas, névoas, escalda-pés e óleos como gestos de presença/autocuidado ou presente para alguém que atravessa um momento difícil, sem claims médicos nem promessa de alterar resultados",
+      "evidenceCount": 3,
+      "evidence": [
+        "PLOS ONE (2025): estudo experimental sobre presença social durante stress encontrou que a co-presença de outra pessoa pode modular reactividade cardiovascular e afectiva, com efeitos dependentes do contexto e diferenças individuais — https://doi.org/10.1371/journal.pone.0325303",
+        "Scientific Reports (2025): lembretes de figuras de apoio social reduziram medo a longo prazo em comparação com sinais de segurança aprendidos, apoiando um papel específico de pistas de suporte social na regulação de ameaça — https://doi.org/10.1038/s41598-025-27689-0",
+        "Patient Experience Journal (2025): artigo sobre 'holding space' descreve presença profunda, escuta e postura não julgadora como uma abordagem centrada na pessoa quando a esperança diminui — https://pxjournal.org/journal/vol12/iss2/7/"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial",
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ]
+    },
+    {
       "id": "brain_oracle_sobrecarga_de_escolha_quando_mais_opcoes_paralisam",
       "type": "oracle_candidate",
       "sourceOceanId": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
@@ -11391,6 +11419,296 @@
       "approvalRequired": true,
       "automaticActivation": false,
       "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_presenca_que_ampara_sem_tentar_resolver",
+      "type": "question_candidate",
+      "sourceOceanId": "presenca-que-ampara-sem-tentar-resolver",
+      "territory": "presenca-que-ampara-sem-tentar-resolver",
+      "intent": "reconhecer quando a necessidade principal não é resolver imediatamente o problema, mas receber presença, escuta e apoio relacional suficiente para atravessar um momento difícil, distinguindo companhia humana de aconselhamento, tratamento clínico ou resposta de emergência",
+      "painLanguage": "Há momentos de medo, espera ou sobrecarga em que a pessoa não precisa de uma solução perfeita nem de um conselho brilhante. Precisa sobretudo de sentir que alguém ficou, ouviu e não a deixou atravessar aquele momento sozinha.",
+      "commercialAdjacency": "Presença e SOS MAISON JF (1 dia/1 semana) como serviços com limites claros; Oráculo Solidão & Companhia e experiências digitais sobre pedir/receber apoio; SOS Maison JF como linguagem de check-in e contacto de confiança sem promessa de emergência; Ritual Volta Para Casa; e velas, névoas, escalda-pés e óleos como gestos de presença/autocuidado ou presente para alguém que atravessa um momento difícil, sem claims médicos nem promessa de alterar resultados",
+      "evidenceCount": 3,
+      "evidence": [
+        "PLOS ONE (2025): estudo experimental sobre presença social durante stress encontrou que a co-presença de outra pessoa pode modular reactividade cardiovascular e afectiva, com efeitos dependentes do contexto e diferenças individuais — https://doi.org/10.1371/journal.pone.0325303",
+        "Scientific Reports (2025): lembretes de figuras de apoio social reduziram medo a longo prazo em comparação com sinais de segurança aprendidos, apoiando um papel específico de pistas de suporte social na regulação de ameaça — https://doi.org/10.1038/s41598-025-27689-0",
+        "Patient Experience Journal (2025): artigo sobre 'holding space' descreve presença profunda, escuta e postura não julgadora como uma abordagem centrada na pessoa quando a esperança diminui — https://pxjournal.org/journal/vol12/iss2/7/"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial",
+      "questionThemeCandidates": [
+        "alguém ficar quando tenho medo",
+        "presença vs solução",
+        "ouvir sem tentar corrigir",
+        "não atravessar sozinho",
+        "pedir apoio sem ter a frase perfeita",
+        "companhia em momentos difíceis",
+        "estar com alguém sem ter de salvar tudo"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_alguem_ficar_quando_tenho_medo_open",
+          "theme": "alguém ficar quando tenho medo",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_alguem_ficar_quando_tenho_medo_recognize",
+          "theme": "alguém ficar quando tenho medo",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_alguem_ficar_quando_tenho_medo_deepen",
+          "theme": "alguém ficar quando tenho medo",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_alguem_ficar_quando_tenho_medo_touch",
+          "theme": "alguém ficar quando tenho medo",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_alguem_ficar_quando_tenho_medo_close",
+          "theme": "alguém ficar quando tenho medo",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_alguem_ficar_quando_tenho_medo_signature",
+          "theme": "alguém ficar quando tenho medo",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_presenca_vs_solucao_open",
+          "theme": "presença vs solução",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_presenca_vs_solucao_recognize",
+          "theme": "presença vs solução",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_presenca_vs_solucao_deepen",
+          "theme": "presença vs solução",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_presenca_vs_solucao_touch",
+          "theme": "presença vs solução",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_presenca_vs_solucao_close",
+          "theme": "presença vs solução",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_presenca_vs_solucao_signature",
+          "theme": "presença vs solução",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_ouvir_sem_tentar_corrigir_open",
+          "theme": "ouvir sem tentar corrigir",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_ouvir_sem_tentar_corrigir_recognize",
+          "theme": "ouvir sem tentar corrigir",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_ouvir_sem_tentar_corrigir_deepen",
+          "theme": "ouvir sem tentar corrigir",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_ouvir_sem_tentar_corrigir_touch",
+          "theme": "ouvir sem tentar corrigir",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_ouvir_sem_tentar_corrigir_close",
+          "theme": "ouvir sem tentar corrigir",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_ouvir_sem_tentar_corrigir_signature",
+          "theme": "ouvir sem tentar corrigir",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_nao_atravessar_sozinho_open",
+          "theme": "não atravessar sozinho",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_nao_atravessar_sozinho_recognize",
+          "theme": "não atravessar sozinho",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_nao_atravessar_sozinho_deepen",
+          "theme": "não atravessar sozinho",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_nao_atravessar_sozinho_touch",
+          "theme": "não atravessar sozinho",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_nao_atravessar_sozinho_close",
+          "theme": "não atravessar sozinho",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_nao_atravessar_sozinho_signature",
+          "theme": "não atravessar sozinho",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_pedir_apoio_sem_ter_a_frase_perfeita_open",
+          "theme": "pedir apoio sem ter a frase perfeita",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_pedir_apoio_sem_ter_a_frase_perfeita_recognize",
+          "theme": "pedir apoio sem ter a frase perfeita",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_pedir_apoio_sem_ter_a_frase_perfeita_deepen",
+          "theme": "pedir apoio sem ter a frase perfeita",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_pedir_apoio_sem_ter_a_frase_perfeita_touch",
+          "theme": "pedir apoio sem ter a frase perfeita",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_pedir_apoio_sem_ter_a_frase_perfeita_close",
+          "theme": "pedir apoio sem ter a frase perfeita",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_pedir_apoio_sem_ter_a_frase_perfeita_signature",
+          "theme": "pedir apoio sem ter a frase perfeita",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_companhia_em_momentos_dificeis_open",
+          "theme": "companhia em momentos difíceis",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_companhia_em_momentos_dificeis_recognize",
+          "theme": "companhia em momentos difíceis",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_companhia_em_momentos_dificeis_deepen",
+          "theme": "companhia em momentos difíceis",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_companhia_em_momentos_dificeis_touch",
+          "theme": "companhia em momentos difíceis",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_companhia_em_momentos_dificeis_close",
+          "theme": "companhia em momentos difíceis",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_companhia_em_momentos_dificeis_signature",
+          "theme": "companhia em momentos difíceis",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_estar_com_alguem_sem_ter_de_salvar_tudo_open",
+          "theme": "estar com alguém sem ter de salvar tudo",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_estar_com_alguem_sem_ter_de_salvar_tudo_recognize",
+          "theme": "estar com alguém sem ter de salvar tudo",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_estar_com_alguem_sem_ter_de_salvar_tudo_deepen",
+          "theme": "estar com alguém sem ter de salvar tudo",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_estar_com_alguem_sem_ter_de_salvar_tudo_touch",
+          "theme": "estar com alguém sem ter de salvar tudo",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_estar_com_alguem_sem_ter_de_salvar_tudo_close",
+          "theme": "estar com alguém sem ter de salvar tudo",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_presenca_que_ampara_sem_tentar_resolver_estar_com_alguem_sem_ter_de_salvar_tudo_signature",
+          "theme": "estar com alguém sem ter de salvar tudo",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ]
     },
     {
       "id": "brain_question_sobrecarga_de_escolha_quando_mais_opcoes_paralisam",
