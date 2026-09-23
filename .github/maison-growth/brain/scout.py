@@ -43,8 +43,11 @@ def discover(
         raise ScoutError("invalid_minimum_confidence")
     reasons=["external_signal_convergence",*mapping_reason_codes]
     existing=tuple(sorted(set(existing_solution_ids)))
+    contexts=tuple(sorted(set(knowledge_context_refs)))
     if existing:
         reasons.append("existing_asset_first")
+    if any(ref.startswith("asset:") for ref in contexts):
+        reasons.append("existing_catalogue_asset_context")
     if len(group.independent_roots) < 2:
         reasons.append("weak_source_independence")
     status="observe"
@@ -59,7 +62,7 @@ def discover(
         evidence_refs=group.evidence_refs,
         independent_roots=group.independent_roots,
         existing_solution_ids=existing,
-        knowledge_context_refs=tuple(sorted(set(knowledge_context_refs))),
+        knowledge_context_refs=contexts,
         candidate_offer_types=tuple(dict.fromkeys(candidate_offer_types)),
         confidence=group.confidence,
         status=status,
