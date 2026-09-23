@@ -174,6 +174,21 @@ python .github/maison-growth/runtime/preflight_private_runtime.py \
 
 The exact staged path from private read to first A12 inbox entries is documented in `PRIVATE_ACTIVATION_RUNBOOK.md`.
 
+## One-command private commercial cycle
+
+Once the private read and proposal surfaces pass preflight, the `commercial-cycle` profile runs the useful internal loop in one shot:
+
+`read inbox → observe canonical evidence → Brain/A14 → optional proposal materialization → read inbox again`
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile commercial-cycle run --rm commercial-cycle
+```
+
+With `MAISON_A14_MATERIALIZE_ENABLED=false` it is preview-only. With the flag explicitly set to `true`, it may write only A14 hypotheses and A12 human-review queue items through the narrow proposal API. It never records the human decision, executes A8, publishes, contacts anyone or spends money.
+
 ## Commercial Action Inbox
 
 The read-only operator view now has its own profile:

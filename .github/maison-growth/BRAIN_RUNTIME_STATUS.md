@@ -44,6 +44,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | A14 Universal Opportunity + Earned Distribution | READY A14.3 + deterministic IDs + review→validation planning | analysis/planning only |
 | A14 materialization | READY narrow proposal API + manual runtime profile | DISABLED |
 | Commercial human inbox | READY read-only A12 inbox + Commercial Action Inbox operator CLI | AVAILABLE WHEN PRIVATE READ ENABLED |
+| Private commercial cycle | READY one-shot observe → optional A14 materialize → A12 inbox refresh; never self-approves | NOT STARTED |
 | Human review decision | READY A12.2 planning-only append-only decision API | DISABLED |
 | Approved validation planning | READY A14.3 behaviour-matched manual/B2B/physical/service/CTA plans | DISABLED / PREVIEW-FIRST |
 | A8 CTA draft planning | READY explicit private CTA context + hard-gated A7 decision → A8 draft | DISABLED / DRAFT ONLY |

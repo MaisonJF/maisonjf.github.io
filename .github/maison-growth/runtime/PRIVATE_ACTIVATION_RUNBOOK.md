@@ -122,6 +122,19 @@ The output separates:
 - `manual_pilots` — approved plans that require a human-operated test;
 - `a8_drafts` — CTA experiments that exist only as drafts.
 
+### One-command cycle after both private surfaces are ready
+
+The separate observe/materialize/inbox commands above remain the clearest activation path. After they have passed once, the same loop can be run as one private operation:
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile commercial-cycle run --rm commercial-cycle
+```
+
+The cycle reads the inbox before and after the Brain pass. It only materializes A14/A12 proposals when `MAISON_A14_MATERIALIZE_ENABLED=true`; it never approves its own proposals.
+
 ## 3. Human decisions
 
 Enable the review-decision surface only when a real queue item is ready for a human decision:
