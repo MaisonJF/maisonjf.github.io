@@ -150,6 +150,17 @@ class BrainControlClient:
     def review_queue(self, *, status: str="pending", limit: int=100) -> Mapping[str,Any]:
         return self._get("/internal/brain/review-queue",{"status":status,"limit":limit})
 
+    def approved_validations(self, *, limit: int=100) -> Mapping[str,Any]:
+        return self._get("/internal/brain/approved-validations",{"limit":limit})
+
+    def validation_plans(
+        self,
+        *,
+        state: Optional[str]=None,
+        limit: int=100,
+    ) -> Mapping[str,Any]:
+        return self._get("/internal/brain/validation-plans",{"state":state,"limit":limit})
+
     def solutions(self, *, status: Optional[str]=None, limit: int=100) -> Mapping[str,Any]:
         return self._get("/internal/brain/solutions",{"status":status,"limit":limit})
 
