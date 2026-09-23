@@ -160,3 +160,33 @@ Maison integration therefore uses a bridge contract:
 `A13 privacy-reviewed observation → authenticated HTTPS bridge → local Osiris Memory MCP (:8790) → PostgreSQL/Redis graph`
 
 The bridge URL and bearer token are environment/secrets only. A Memory bridge failure never prevents the canonical A13/D1 observation from being stored.
+
+
+## Public economic/science sensors
+
+A13 now has a second, separately gated public-source family for structured economic/B2B/science sensing. The master switch is `PUBLIC_DATA_ENABLED=false`; every individual source is also disabled by default.
+
+### Eurostat
+
+- official Statistics API;
+- no API key in the adapter;
+- query profiles are explicit through `EUROSTAT_QUERIES_JSON`;
+- each profile carries its own territory and cadence;
+- no default datasets are silently queried.
+
+### BASE / IMPIC public procurement
+
+- adapter targets the official Portal BASE API allowlist only;
+- production API access requires prior IMPIC authorization and `BASE_PT_API_TOKEN`;
+- if the token is absent, A13 creates **zero BASE tasks**;
+- the token is sent only in the `_AcessToken` header and never stored in citations/provenance.
+
+### OpenAlex
+
+- production adapter requires an account API key even though limited anonymous/demo access exists;
+- the key is sent in the Authorization header, never in the request URL;
+- `meta.cost_usd` is recorded into A13 usage accounting when returned;
+- `MAX_DAILY_CALLS_PER_PUBLIC_SOURCE` provides an additional Maison-side cap;
+- no PDF/full-text download is implemented here.
+
+These adapters remain sensors only. Structured source output is still stored as an A13 observation with canonical provenance and must pass through Pre-Brain/Brain before any commercial interpretation.
