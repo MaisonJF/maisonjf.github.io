@@ -7,7 +7,7 @@ from pathlib import Path
 
 import psycopg
 
-BRAIN=Path(__file__).resolve().parents[1]/"brain"
+BRAIN=Path(__file__).resolve().parents[0]/"brain"
 sys.path.insert(0,str(BRAIN))
 
 from local_embeddings import MultilingualE5SmallProvider
