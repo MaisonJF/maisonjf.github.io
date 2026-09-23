@@ -26,7 +26,8 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Canonical observe cycle | READY A5→Pre-Brain→Scout→Critic→Foundry→A14 preview + A3/A11 feedback context | OPTIONAL / NOT STARTED |
 | Persistent observe runtime | READY Docker Compose: pgvector/Postgres + Redis + Osiris + authenticated bridge + healthchecks | NOT STARTED |
 | Private activation preflight | READY stage-aware HTTPS/secret/token/authority checks + runbook | NOT RUN |
-| Private Worker deploy gate | READY manual workflow + renderer; private Brain surfaces only, collection hard-OFF | NOT RUN |
+| Private Worker deploy gate | READY automatic secret-free dry-run + manual live workflow + renderer; collection hard-OFF | DRY-RUN VERIFIED ON `main` @ `57ce05d3` |
+| Private credential readiness | READY names-only secret-presence report on trusted `main` pushes | PENDING NEXT `main` PUSH |
 | Private deploy verification | READY read-only remote D1 schema gate + authenticated Brain health probe | NOT RUN |
 | Pre-Brain | READY analysis core | NOT PROVISIONED |
 | DuckDB | READY optional analytical adapter | PACKAGE/HOST NOT PROVISIONED |
