@@ -86,10 +86,10 @@ npx wrangler queues create maison-intelligence-dlq
 
 ## 2. Apply Growth migrations
 
-**Use the helper below only for a fresh, dedicated database.** It applies the complete current Growth schema from A1 through the Brain/A12/A14 planning surfaces at migration `0016`. It is not an idempotent upgrade script for an already-initialized database.
+**Use the helper below only for a fresh, dedicated database.** It applies the complete current Growth schema from A1 through the Brain/A12/A14 planning surfaces at migration `0016`. It is not an idempotent upgrade script for an already-initialized database, and it now refuses to run unless `--confirm-fresh` is supplied.
 
 ```bash
-bash scripts/apply-growth-migrations.sh maison-growth-engine
+bash scripts/apply-growth-migrations.sh maison-growth-engine --confirm-fresh
 ```
 
 On an existing database, run the read-only inspector first and apply only reviewed missing migrations. The A13 migration intentionally leaves its database kill switch ON; A14 adds analysis/planning structures but no outbound authority.
