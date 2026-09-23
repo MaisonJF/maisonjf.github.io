@@ -7,6 +7,7 @@ import { configuredOsirisSources, fetchOsirisSource, sourceDefinition, osirisSou
 import { mirrorToOsirisMemory } from './memory.js';
 import { configuredPublicSourceTasks, fetchPublicSource, publicSourceDue, publicTaskIdentity } from './public_sources.js';
 import { handleBrainControlRequest } from './control_api.js';
+import { handleBrainProposalRequest } from './proposal_api.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -296,6 +297,8 @@ async function enqueueRun(env, scheduledDate) {
 
 export default {
   async fetch(request, env) {
+    const proposal = await handleBrainProposalRequest(request, env);
+    if (proposal) return proposal;
     const internal = await handleBrainControlRequest(request, env);
     if (internal) return internal;
     return new Response('Not Found', {
