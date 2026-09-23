@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent
@@ -49,6 +51,16 @@ def main() -> None:
 
     status=(GROWTH/"BRAIN_RUNTIME_STATUS.md").read_text(encoding="utf-8")
     require("Code-ready does not mean live" in status,"runtime status safety notice missing")
+
+    proc=subprocess.run(
+        [sys.executable,str(ROOT/"test_runtime_contract.py")],
+        cwd=str(ROOT),capture_output=True,text=True,
+    )
+    if proc.returncode:
+        print(proc.stdout)
+        print(proc.stderr,file=sys.stderr)
+        raise SystemExit(proc.returncode)
+    print(proc.stdout,end="")
     print("Maison persistent observe runtime: OK")
 
 
