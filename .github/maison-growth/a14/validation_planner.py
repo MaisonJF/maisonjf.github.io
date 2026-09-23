@@ -35,6 +35,40 @@ def choose_plan_kind(row: Mapping[str,Any]) -> str:
     return "manual_validation"
 
 
+def plan_prerequisite_reason_codes(plan_kind: str) -> tuple[str,...]:
+    """Safety/operations facts a human must verify before a manual pilot is executed."""
+    mapping={
+        "manual_physical_pilot":(
+            "manual_pilot_requires_verified_stock",
+            "manual_pilot_requires_verified_unit_cost",
+            "manual_pilot_requires_human_approved_price",
+            "manual_pilot_requires_fulfilment_feasibility",
+        ),
+        "manual_service_pilot":(
+            "manual_pilot_requires_verified_capacity",
+            "manual_pilot_requires_verified_human_effort",
+            "manual_pilot_requires_verified_variable_cost",
+            "manual_pilot_requires_concrete_human_approved_price",
+            "manual_pilot_requires_delivery_window",
+        ),
+        "manual_b2b_pilot":(
+            "manual_pilot_requires_b2b_scope",
+            "manual_pilot_requires_human_approved_quote",
+            "manual_pilot_requires_delivery_capacity",
+            "manual_pilot_requires_counterparty_consent_before_outreach",
+        ),
+        "manual_distribution_pilot":(
+            "manual_pilot_requires_channel_permission",
+            "manual_pilot_requires_distribution_economics",
+            "manual_pilot_requires_human_approved_terms",
+        ),
+        "manual_validation":(
+            "manual_pilot_requires_human_defined_validation_steps",
+        ),
+    }
+    return mapping.get(plan_kind,())
+
+
 def build_validation_plan(row: Mapping[str,Any]) -> dict[str,Any]:
     if row.get("decision") not in (None,"approved"):
         raise ValueError("approved_review_required")
@@ -61,6 +95,7 @@ def build_validation_plan(row: Mapping[str,Any]) -> dict[str,Any]:
         metric=None
         hypothesis=f"A small {plan_kind.replace('_',' ')} can validate demand for the approved {offer} opportunity in {territory} without assuming revenue."
         reasons.append("validation_must_match_purchase_behaviour")
+        reasons.extend(plan_prerequisite_reason_codes(plan_kind))
 
     fingerprint={
         "review_resolution_id":review_id,
