@@ -11,6 +11,7 @@ from a14_projection import preview_to_dict, project_packet_to_a14
 from brain_control_client import BrainControlClient
 from knowledge_context import OceanEditorialContext
 from orchestrator import packet_to_dict, run_brain_cycle
+from runtime_memory_context import collect_runtime_memory_context
 
 
 ROOT=Path(__file__).resolve().parent
@@ -224,6 +225,10 @@ def main() -> None:
     for territory,refs in _learning_context_by_territory(feed,learning).items():
         _append_context(knowledge_context,territory,refs)
 
+    runtime_memory=collect_runtime_memory_context(feed)
+    for territory,refs in runtime_memory.refs_by_territory.items():
+        _append_context(knowledge_context,territory,refs)
+
     packets=run_brain_cycle(
         rows=feed,
         similarity_threshold=float(os.environ.get("MAISON_PREBRAIN_SIMILARITY","0.45")),
@@ -253,6 +258,7 @@ def main() -> None:
         "solution_links":len(links),
         "cash_feedback_rows":len(cash),
         "learning_rows":len(learning),
+        "runtime_memory_status":dict(runtime_memory.status),
         "packets":[packet_to_dict(x) for x in packets],
         "a14_previews":[preview_to_dict(x) for x in a14_previews],
         "writes_performed":False,
