@@ -16,6 +16,18 @@ def _json(value: Any) -> str:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
+def _semantic_equal(left: Mapping[str,Any], right: Mapping[str,Any], fields: tuple[str,...]) -> bool:
+    for field in fields:
+        lv=left.get(field)
+        rv=right.get(field)
+        if isinstance(lv,(list,tuple,dict)) or isinstance(rv,(list,tuple,dict)):
+            if _json(lv) != _json(rv):
+                return False
+        elif lv != rv:
+            return False
+    return True
+
+
 class SQLiteA14Repository:
     """Append-only persistence adapter for A14 internal analysis records.
 
@@ -26,7 +38,18 @@ class SQLiteA14Repository:
     def __init__(self, connection: sqlite3.Connection):
         self.connection = connection
 
-    def persist_opportunity(self, record: Mapping[str, Any]) -> None:
+    def persist_opportunity(self, record: Mapping[str, Any]) -> bool:
+        existing=self.fetch_opportunity(str(record["opportunity_id"]))
+        if existing is not None:
+            fields=(
+                "need_id","territory_code","opportunity_score","confidence",
+                "known_dimensions","unknown_dimensions","evidence_refs",
+                "existing_solution_ids","knowledge_context_refs","status",
+                "reason_codes","rule_version_id","model_version_id","input_hash",
+            )
+            if _semantic_equal(record,existing,fields):
+                return False
+            raise A14RepositoryError("opportunity_identity_collision_or_payload_drift")
         self.connection.execute(
             """INSERT INTO opportunity_hypotheses
                (opportunity_id,need_id,territory_code,opportunity_score,confidence,
@@ -53,8 +76,19 @@ class SQLiteA14Repository:
                 record["created_at"],
             ),
         )
+        return True
 
-    def persist_offer_hypothesis(self, record: Mapping[str, Any]) -> None:
+    def persist_offer_hypothesis(self, record: Mapping[str, Any]) -> bool:
+        existing=self.fetch_offer_hypothesis(str(record["offer_hypothesis_id"]))
+        if existing is not None:
+            fields=(
+                "opportunity_id","offer_type","a3_solution_type","existing_solution_id",
+                "fit_score","fit_confidence","economics","validation_mode",
+                "evidence_refs","reason_codes",
+            )
+            if _semantic_equal(record,existing,fields):
+                return False
+            raise A14RepositoryError("offer_identity_collision_or_payload_drift")
         self.connection.execute(
             """INSERT INTO opportunity_offer_hypotheses
                (offer_hypothesis_id,opportunity_id,offer_type,a3_solution_type,
@@ -82,8 +116,20 @@ class SQLiteA14Repository:
                 record["created_at"],
             ),
         )
+        return True
 
-    def persist_distribution_match(self, record: Mapping[str, Any]) -> None:
+    def persist_distribution_match(self, record: Mapping[str, Any]) -> bool:
+        existing=self.fetch_distribution_match(str(record["distribution_match_id"]))
+        if existing is not None:
+            fields=(
+                "offer_hypothesis_id","amplifier_ref","moment_key","story_angle_key",
+                "channel_class","fit_score","fit_confidence","known_dimensions",
+                "unknown_dimensions","evidence_refs","economics",
+                "recommended_strategy","recommendation_state","a12_review_ref","experiment_id",
+            )
+            if _semantic_equal(record,existing,fields):
+                return False
+            raise A14RepositoryError("distribution_identity_collision_or_payload_drift")
         self.connection.execute(
             """INSERT INTO earned_distribution_match_assessments
                (distribution_match_id,offer_hypothesis_id,amplifier_ref,moment_key,
@@ -112,6 +158,7 @@ class SQLiteA14Repository:
                 record["created_at"],
             ),
         )
+        return True
 
     def persist_distribution_observation(self, record: Mapping[str, Any]) -> None:
         self.connection.execute(
@@ -228,6 +275,54 @@ class SQLiteA14Repository:
             since=since,
             assessments=self.cash_contribution_facts(currency=currency,since=since),
         )
+
+    def fetch_offer_hypothesis(self, offer_hypothesis_id: str) -> Optional[dict[str,Any]]:
+        row=self.connection.execute(
+            """SELECT offer_hypothesis_id,opportunity_id,offer_type,a3_solution_type,
+                      existing_solution_id,fit_score,fit_confidence,economics_json,
+                      validation_mode,evidence_refs_json,reason_codes_json,
+                      human_review_required,launch_authorized,price_authorized,
+                      public_side_effects,created_at
+               FROM opportunity_offer_hypotheses WHERE offer_hypothesis_id=?""",
+            (offer_hypothesis_id,),
+        ).fetchone()
+        if row is None:
+            return None
+        keys=(
+            "offer_hypothesis_id","opportunity_id","offer_type","a3_solution_type",
+            "existing_solution_id","fit_score","fit_confidence","economics_json",
+            "validation_mode","evidence_refs_json","reason_codes_json",
+            "human_review_required","launch_authorized","price_authorized",
+            "public_side_effects","created_at",
+        )
+        out=dict(zip(keys,row))
+        for key in ("economics_json","evidence_refs_json","reason_codes_json"):
+            out[key.removesuffix("_json")]=json.loads(out.pop(key))
+        return out
+
+    def fetch_distribution_match(self, distribution_match_id: str) -> Optional[dict[str,Any]]:
+        row=self.connection.execute(
+            """SELECT distribution_match_id,offer_hypothesis_id,amplifier_ref,moment_key,
+                      story_angle_key,channel_class,fit_score,fit_confidence,
+                      known_dimensions_json,unknown_dimensions_json,evidence_refs_json,
+                      economics_json,recommended_strategy,recommendation_state,
+                      a12_review_ref,experiment_id,outbound_authorized,spend_authorized,created_at
+               FROM earned_distribution_match_assessments WHERE distribution_match_id=?""",
+            (distribution_match_id,),
+        ).fetchone()
+        if row is None:
+            return None
+        keys=(
+            "distribution_match_id","offer_hypothesis_id","amplifier_ref","moment_key",
+            "story_angle_key","channel_class","fit_score","fit_confidence",
+            "known_dimensions_json","unknown_dimensions_json","evidence_refs_json",
+            "economics_json","recommended_strategy","recommendation_state",
+            "a12_review_ref","experiment_id","outbound_authorized","spend_authorized","created_at",
+        )
+        out=dict(zip(keys,row))
+        for key in ("known_dimensions_json","unknown_dimensions_json","evidence_refs_json","economics_json"):
+            out[key.removesuffix("_json")]=json.loads(out.pop(key))
+        return out
 
     def fetch_opportunity(self, opportunity_id: str) -> Optional[dict[str, Any]]:
         row = self.connection.execute(
