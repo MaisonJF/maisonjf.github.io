@@ -1,5 +1,5 @@
 {
-  "contract_version": "A14.2",
+  "contract_version": "A14.3",
   "migrations": [
     {
       "order": 12,
@@ -10,6 +10,12 @@
     {
       "order": 13,
       "path": "migrations/0013_a14_bridges_cash.sql",
+      "runtime_required": false,
+      "public_site_dependency": false
+    },
+    {
+      "order": 16,
+      "path": "migrations/0016_approved_validation_planning.sql",
       "runtime_required": false,
       "public_site_dependency": false
     }
