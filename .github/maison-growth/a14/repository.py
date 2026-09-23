@@ -5,7 +5,7 @@ import json
 import sqlite3
 from typing import Any, Mapping, Optional
 
-from recovery_engine import ContributionFact, RecoverySnapshot, compute_recovery_snapshot
+from cash_engine import CashFact, CashSnapshot, compute_cash_snapshot
 
 
 class A14RepositoryError(ValueError):
@@ -200,43 +200,10 @@ class SQLiteA14Repository:
             ),
         )
 
-    def persist_recovery_target(self, record: Mapping[str, Any]) -> None:
-        self.connection.execute(
-            """INSERT INTO recovery_target_versions
-               (recovery_target_version_id,target_key,target_amount_minor,currency,basis,
-                valid_from,valid_to,created_at,created_by,notes_json)
-               VALUES (?,?,?,?,?,?,?,?,?,?)""",
-            (
-                record["recovery_target_version_id"], record["target_key"],
-                record["target_amount_minor"], record["currency"],
-                "a3_immediate_contribution", record["valid_from"], record.get("valid_to"),
-                record["created_at"], record["created_by"], _json(record.get("notes", {})),
-            ),
-        )
-
-    def active_recovery_target(self, target_key: str, at: str) -> Optional[dict[str, Any]]:
-        row=self.connection.execute(
-            """SELECT recovery_target_version_id,target_key,target_amount_minor,currency,
-                      valid_from,valid_to,created_at,created_by,notes_json
-               FROM recovery_target_versions
-               WHERE target_key=? AND valid_from<=? AND (valid_to IS NULL OR valid_to>?)
-               ORDER BY valid_from DESC LIMIT 1""",
-            (target_key,at,at),
-        ).fetchone()
-        if row is None:
-            return None
-        keys=(
-            "recovery_target_version_id","target_key","target_amount_minor","currency",
-            "valid_from","valid_to","created_at","created_by","notes_json",
-        )
-        out=dict(zip(keys,row))
-        out["notes"]=json.loads(out.pop("notes_json"))
-        return out
-
-    def recovery_contribution_facts(self, *, currency: str, since: str) -> tuple[ContributionFact, ...]:
+    def cash_contribution_facts(self, *, currency: str, since: str) -> tuple[CashFact, ...]:
         rows=self.connection.execute(
-            """SELECT c.conversion_id,e.economic_assessment_id,e.immediate_contribution_minor,
-                      c.currency,e.created_at
+            """SELECT c.conversion_id,e.economic_assessment_id,c.revenue_minor,
+                      e.immediate_contribution_minor,c.currency,e.created_at
                FROM conversion_economic_assessments e
                JOIN conversions c ON c.conversion_id=e.conversion_id
                WHERE c.currency=? AND c.occurred_at>=?
@@ -244,28 +211,22 @@ class SQLiteA14Repository:
             (currency,since),
         ).fetchall()
         return tuple(
-            ContributionFact(
+            CashFact(
                 conversion_id=row[0],
                 economic_assessment_id=row[1],
-                immediate_contribution_minor=row[2],
-                currency=row[3],
-                created_at=row[4],
+                revenue_minor=row[2] or 0,
+                immediate_contribution_minor=row[3],
+                currency=row[4],
+                created_at=row[5],
             )
             for row in rows
         )
 
-    def recovery_snapshot(self, *, target_key: str, at: str) -> Optional[RecoverySnapshot]:
-        target=self.active_recovery_target(target_key,at)
-        if target is None:
-            return None
-        facts=self.recovery_contribution_facts(
-            currency=target["currency"],
-            since=target["valid_from"],
-        )
-        return compute_recovery_snapshot(
-            target_minor=target["target_amount_minor"],
-            currency=target["currency"],
-            assessments=facts,
+    def cash_snapshot(self, *, currency: str, since: str) -> CashSnapshot:
+        return compute_cash_snapshot(
+            currency=currency,
+            since=since,
+            assessments=self.cash_contribution_facts(currency=currency,since=since),
         )
 
     def fetch_opportunity(self, opportunity_id: str) -> Optional[dict[str, Any]]:
