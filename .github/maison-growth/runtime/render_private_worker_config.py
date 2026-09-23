@@ -19,7 +19,7 @@ def render_private_worker_config(
     *,
     stage_name: str,
     template: dict[str, Any],
-    database_id: str,
+    database_id: str | None = None,
 ) -> dict[str, Any]:
     policy = json.loads(POLICY_PATH.read_text(encoding="utf-8"))
     if stage_name not in PRIVATE_STAGES:
@@ -35,10 +35,6 @@ def render_private_worker_config(
             raise ValueError(f"private_surface_stage_{key}_must_be_false")
     if stage.get("experiment_execution_authorized", False) is not False:
         raise ValueError("private_surface_stage_experiment_execution_must_be_false")
-
-    database_id = database_id.strip()
-    if not database_id or "REPLACE_WITH" in database_id or len(database_id) < 16:
-        raise ValueError("valid_d1_database_id_required")
 
     config = json.loads(json.dumps(template))
     vars_ = config.setdefault("vars", {})
@@ -61,7 +57,18 @@ def render_private_worker_config(
     databases = config.get("d1_databases")
     if not isinstance(databases, list) or len(databases) != 1:
         raise ValueError("exactly_one_growth_d1_binding_required")
-    databases[0]["database_id"] = database_id
+    selected_database_id = (
+        database_id.strip()
+        if database_id is not None
+        else str(databases[0].get("database_id") or "").strip()
+    )
+    if (
+        not selected_database_id
+        or "REPLACE_WITH" in selected_database_id
+        or len(selected_database_id) < 16
+    ):
+        raise ValueError("valid_d1_database_id_required")
+    databases[0]["database_id"] = selected_database_id
 
     return config
 
@@ -72,7 +79,7 @@ def main() -> None:
     )
     parser.add_argument("stage", choices=PRIVATE_STAGES)
     parser.add_argument("--template", type=Path, required=True)
-    parser.add_argument("--database-id", required=True)
+    parser.add_argument("--database-id")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
