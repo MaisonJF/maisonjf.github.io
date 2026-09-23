@@ -325,6 +325,38 @@ async function validationPlans(env, url) {
   return json({kind:'brain_validation_plans',state:state||null,rows});
 }
 
+async function a7Decisions(env, url) {
+  const limit=parseLimit(url);
+  const solutionId=url.searchParams.get('solution_id');
+  if (!solutionId || solutionId.length!==40 || !solutionId.startsWith('sol_')) {
+    throw new Error('invalid_solution_id');
+  }
+  const rows=await all(env.GROWTH_DB.prepare(`
+    SELECT decision_id,subject_type,subject_id,decision_type,hard_gates_passed,
+           discovery_score,commercial_score,confidence_score,reason_codes_json,
+           evidence_refs_json,recommended_solution_id,rule_version_id,model_version_id,created_at
+    FROM decision_records
+    WHERE decision_type='test_cta'
+      AND hard_gates_passed=1
+      AND recommended_solution_id=?
+    ORDER BY created_at DESC,decision_id DESC
+    LIMIT ?
+  `).bind(solutionId,limit));
+  return json({
+    kind:'brain_a7_test_cta_decisions',
+    solution_id:solutionId,
+    rows:rows.map(row=>({
+      ...row,
+      reason_codes:parseJsonArray(row.reason_codes_json),
+      evidence_refs:parseJsonArray(row.evidence_refs_json),
+      reason_codes_json:undefined,
+      evidence_refs_json:undefined,
+      hard_gates_passed:Number(row.hard_gates_passed)===1,
+      public_side_effects:false
+    }))
+  });
+}
+
 async function solutions(env, url) {
   const limit=parseLimit(url);
   const status=url.searchParams.get('status');
@@ -403,6 +435,7 @@ export async function handleBrainControlRequest(request, env) {
     if (url.pathname === '/internal/brain/review-queue') return await reviewQueue(env,url);
     if (url.pathname === '/internal/brain/approved-validations') return await approvedValidations(env,url);
     if (url.pathname === '/internal/brain/validation-plans') return await validationPlans(env,url);
+    if (url.pathname === '/internal/brain/a7-decisions') return await a7Decisions(env,url);
     if (url.pathname === '/internal/brain/solutions') return await solutions(env,url);
     if (url.pathname === '/internal/brain/solution-links') return await solutionLinks(env,url);
     if (url.pathname === '/internal/brain/health') return json({ status:'ok',mode:'read_only' });
