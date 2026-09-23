@@ -16,9 +16,55 @@ def _margin_bps(revenue: int | None, contribution: int | None) -> int | None:
     return int(round((contribution / revenue) * 10000))
 
 
+def _resolve_service_price(
+    snap: Mapping[str,Any],
+    selected_price_minor: int | None,
+) -> tuple[int | None,str]:
+    kind=str(snap.get("price_kind") or "unknown")
+    fixed=snap.get("price_minor")
+    minimum=snap.get("minimum_price_minor")
+    options=snap.get("price_options",[])
+
+    if selected_price_minor is not None and (
+        not isinstance(selected_price_minor,int) or selected_price_minor <= 0
+    ):
+        raise CommercialEconomicsError("selected_price_minor_must_be_positive_int")
+
+    if kind=="fixed":
+        price=fixed if isinstance(fixed,int) else None
+        if selected_price_minor is not None and selected_price_minor != price:
+            raise CommercialEconomicsError("selected_price_conflicts_with_fixed_catalogue_price")
+        return price,"fixed_catalogue"
+
+    if selected_price_minor is None:
+        return None,"human_selection_required"
+
+    if kind=="multi_format":
+        allowed={
+            int(row["amount_minor"])
+            for row in options
+            if isinstance(row,Mapping) and isinstance(row.get("amount_minor"),int)
+        }
+        if selected_price_minor not in allowed:
+            raise CommercialEconomicsError("selected_price_not_in_catalogue_service_options")
+        return selected_price_minor,"human_selected_catalogue_option"
+
+    if kind=="starting_from":
+        if not isinstance(minimum,int) or selected_price_minor < minimum:
+            raise CommercialEconomicsError("selected_price_below_catalogue_minimum")
+        return selected_price_minor,"human_selected_at_or_above_minimum"
+
+    if kind in {"quote","unknown"}:
+        return selected_price_minor,"human_selected_quote"
+
+    raise CommercialEconomicsError(f"unsupported_service_price_kind:{kind}")
+
+
 def evaluate_asset(
     context: CommercialAssetContext,
     asset_ref: str,
+    *,
+    selected_price_minor: int | None=None,
 ) -> dict[str,Any]:
     snap=context.operational_snapshot(asset_ref)
     op=snap["operational"]
@@ -26,6 +72,8 @@ def evaluate_asset(
     price=snap["price_minor"] if isinstance(snap["price_minor"],int) else None
 
     if asset_type=="physical_product":
+        if selected_price_minor is not None:
+            raise CommercialEconomicsError("selected_price_not_supported_for_physical_asset")
         inventory=op.get("inventory_quantity")
         reserved=op.get("reserved_quantity")
         material=op.get("unit_material_cost_minor")
@@ -69,6 +117,7 @@ def evaluate_asset(
         }
 
     if asset_type in {"service","b2b_service"}:
+        price,price_resolution=_resolve_service_price(snap,selected_price_minor)
         capacity=op.get("capacity_units_per_period")
         period=op.get("capacity_period")
         effort=op.get("human_effort_minutes")
@@ -93,6 +142,11 @@ def evaluate_asset(
             "name":snap["name"],
             "currency":snap["currency"],
             "price_minor":price,
+            "price_kind":snap.get("price_kind"),
+            "minimum_price_minor":snap.get("minimum_price_minor"),
+            "price_options":snap.get("price_options",[]),
+            "price_resolution":price_resolution,
+            "price_selection_required":price_resolution=="human_selection_required",
             "capacity_units_per_period":capacity if isinstance(capacity,int) else None,
             "capacity_period":period if isinstance(period,str) else None,
             "human_effort_minutes":effort if isinstance(effort,int) else None,
