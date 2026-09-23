@@ -48,6 +48,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Commercial attention MCP | READY read-only attention + bundle-hypothesis tools | OPTIONAL PROFILE / NOT STARTED |
 | Private stocktake preparation | READY operator template covers all 5 active public physical products; contains no private values | AWAITING MANUAL COUNTS/COSTS |
 | Service capacity preparation | READY operator template covers all 7 active public service/B2B entries; contains no private values | AWAITING MANUAL CAPACITY/COST FACTS |
+| Structured service pricing | READY fixed vs multi-format vs starting-from vs quote pricing preserved from canonical catalogue; human selection required where appropriate | CODE-READY |
 | Fact-based commercial economics | READY private evaluator for product/service unit economics + human-priced bundle evaluation | AWAITING PRIVATE OPERATIONAL OVERLAY |
 | Commercial operator report | READY combines attention, observed operational facts and bundle blockers without granting execution authority | AWAITING PRIVATE OPERATIONAL OVERLAY |
 | Maison Semantic Memory | READY pgvector backend + stable interface + manual D1→pgvector sync | NOT STARTED; pgvector first, Qdrant deferred experiment |

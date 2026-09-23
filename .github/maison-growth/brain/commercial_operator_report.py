@@ -16,16 +16,25 @@ ATTENTION=ROOT/"commercial-attention.generated.json"
 BUNDLES=ROOT/"commercial-bundles.generated.json"
 
 
-def build_report(*, overlay_path: Path | None=None) -> dict[str,Any]:
+def build_report(
+    *,
+    overlay_path: Path | None=None,
+    selected_service_prices: dict[str,int] | None=None,
+) -> dict[str,Any]:
     registry=json.loads(REGISTRY.read_text(encoding="utf-8"))
     attention=json.loads(ATTENTION.read_text(encoding="utf-8"))
     bundles=json.loads(BUNDLES.read_text(encoding="utf-8"))
     context=CommercialAssetContext.from_files(REGISTRY,overlay_path=overlay_path)
+    selected_service_prices=selected_service_prices or {}
 
     rows=[]
     for ranked in attention.get("assets",[]):
         ref=str(ranked["asset_ref"])
-        economics=evaluate_asset(context,ref)
+        economics=evaluate_asset(
+            context,
+            ref,
+            selected_price_minor=selected_service_prices.get(ref),
+        )
         rows.append({
             "attention_rank":ranked["attention_rank"],
             "asset_ref":ref,
@@ -85,9 +94,30 @@ def main() -> None:
     parser.add_argument("--overlay",type=Path)
     parser.add_argument("--bundle-id")
     parser.add_argument("--proposed-price-minor",type=int)
+    parser.add_argument(
+        "--service-price",
+        action="append",
+        default=[],
+        metavar="ASSET_REF=MINOR",
+        help="Human-selected concrete service price. Repeatable.",
+    )
     args=parser.parse_args()
 
-    report=build_report(overlay_path=args.overlay)
+    selected_service_prices={}
+    for raw in args.service_price:
+        if "=" not in raw:
+            raise SystemExit("--service-price must be ASSET_REF=MINOR")
+        ref,value=raw.rsplit("=",1)
+        try:
+            amount=int(value)
+        except ValueError as exc:
+            raise SystemExit("--service-price amount must be an integer in minor units") from exc
+        selected_service_prices[ref.strip()]=amount
+
+    report=build_report(
+        overlay_path=args.overlay,
+        selected_service_prices=selected_service_prices,
+    )
 
     if args.bundle_id:
         bundles=json.loads(BUNDLES.read_text(encoding="utf-8"))

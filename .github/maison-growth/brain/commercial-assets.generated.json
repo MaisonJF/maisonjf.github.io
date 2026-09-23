@@ -10,6 +10,9 @@
     "catalogue_in_stock_is_not_counted_inventory": true,
     "operational_unknowns_remain_null": true,
     "private_inventory_overlay_not_stored_here": true,
+    "structured_service_pricing": true,
+    "multi_format_prices_not_flattened": true,
+    "quote_prices_remain_unknown": true,
     "commercial_pii": false
   },
   "summary": {
@@ -17,7 +20,11 @@
     "active_physical_products": 5,
     "future_products": 2,
     "services": 9,
-    "b2b_services": 1
+    "b2b_services": 1,
+    "fixed_price_services": 5,
+    "multi_format_services": 1,
+    "starting_from_services": 1,
+    "quote_services": 3
   },
   "assets": [
     {
@@ -281,7 +288,7 @@
       "category": "Continuidade",
       "public": true,
       "lifecycle_status": "active",
-      "price_minor": null,
+      "price_minor": 17000,
       "price_label": "170 € · 4 semanas",
       "currency": "EUR",
       "catalogue_availability": null,
@@ -304,7 +311,11 @@
         "human_effort_minutes": null,
         "variable_cost_minor": null,
         "delivery_lead_days": null
-      }
+      },
+      "price_kind": "fixed",
+      "minimum_price_minor": 17000,
+      "price_options": [],
+      "price_source": "price_label"
     },
     {
       "asset_ref": "catalog:service:b2b",
@@ -336,7 +347,11 @@
         "human_effort_minutes": null,
         "variable_cost_minor": null,
         "delivery_lead_days": null
-      }
+      },
+      "price_kind": "quote",
+      "minimum_price_minor": null,
+      "price_options": [],
+      "price_source": "quote"
     },
     {
       "asset_ref": "catalog:service:companhia",
@@ -373,7 +388,32 @@
         "human_effort_minutes": null,
         "variable_cost_minor": null,
         "delivery_lead_days": null
-      }
+      },
+      "price_kind": "multi_format",
+      "minimum_price_minor": 3500,
+      "price_options": [
+        {
+          "label": "Presença Online",
+          "amount_minor": 3500
+        },
+        {
+          "label": "Presença Social",
+          "amount_minor": 8000
+        },
+        {
+          "label": "Presença Próxima",
+          "amount_minor": 8000
+        },
+        {
+          "label": "SOS 1 dia",
+          "amount_minor": 6000
+        },
+        {
+          "label": "SOS 1 semana",
+          "amount_minor": 12000
+        }
+      ],
+      "price_source": "formats"
     },
     {
       "asset_ref": "catalog:service:consulta-escrita-aprofundada",
@@ -406,7 +446,11 @@
         "human_effort_minutes": null,
         "variable_cost_minor": null,
         "delivery_lead_days": null
-      }
+      },
+      "price_kind": "fixed",
+      "minimum_price_minor": 4500,
+      "price_options": [],
+      "price_source": "amount_field"
     },
     {
       "asset_ref": "catalog:service:consulta-escrita-breve",
@@ -439,7 +483,11 @@
         "human_effort_minutes": null,
         "variable_cost_minor": null,
         "delivery_lead_days": null
-      }
+      },
+      "price_kind": "fixed",
+      "minimum_price_minor": 2500,
+      "price_options": [],
+      "price_source": "amount_field"
     },
     {
       "asset_ref": "catalog:service:escuta",
@@ -472,7 +520,11 @@
         "human_effort_minutes": null,
         "variable_cost_minor": null,
         "delivery_lead_days": null
-      }
+      },
+      "price_kind": "fixed",
+      "minimum_price_minor": 6000,
+      "price_options": [],
+      "price_source": "amount_field"
     },
     {
       "asset_ref": "catalog:service:mentoria",
@@ -504,7 +556,11 @@
         "human_effort_minutes": null,
         "variable_cost_minor": null,
         "delivery_lead_days": null
-      }
+      },
+      "price_kind": "starting_from",
+      "minimum_price_minor": 12500,
+      "price_options": [],
+      "price_source": "price_label"
     },
     {
       "asset_ref": "catalog:service:pedidos-especiais",
@@ -536,7 +592,11 @@
         "human_effort_minutes": null,
         "variable_cost_minor": null,
         "delivery_lead_days": null
-      }
+      },
+      "price_kind": "quote",
+      "minimum_price_minor": null,
+      "price_options": [],
+      "price_source": "quote"
     },
     {
       "asset_ref": "catalog:service:ritual-personalizado",
@@ -568,7 +628,11 @@
         "human_effort_minutes": null,
         "variable_cost_minor": null,
         "delivery_lead_days": null
-      }
+      },
+      "price_kind": "quote",
+      "minimum_price_minor": null,
+      "price_options": [],
+      "price_source": "quote"
     },
     {
       "asset_ref": "catalog:service:tarot",
@@ -601,7 +665,11 @@
         "human_effort_minutes": null,
         "variable_cost_minor": null,
         "delivery_lead_days": null
-      }
+      },
+      "price_kind": "fixed",
+      "minimum_price_minor": 3500,
+      "price_options": [],
+      "price_source": "amount_field"
     }
   ]
 }

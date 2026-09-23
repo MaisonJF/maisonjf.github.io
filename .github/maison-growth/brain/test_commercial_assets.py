@@ -26,6 +26,33 @@ class CommercialAssetTests(unittest.TestCase):
         self.assertGreater(summary["unknown_operational_fields"],0)
         self.assertFalse(summary["catalogue_in_stock_is_counted_inventory"])
 
+    def test_service_pricing_is_structured_without_flattening_multi_format_or_quote_offers(self):
+        by_ref={row["asset_ref"]:row for row in self.registry()["assets"]}
+
+        acompanhamento=by_ref["catalog:service:acompanhamento"]
+        self.assertEqual(acompanhamento["price_kind"],"fixed")
+        self.assertEqual(acompanhamento["price_minor"],17000)
+        self.assertEqual(acompanhamento["price_source"],"price_label")
+
+        presenca=by_ref["catalog:service:companhia"]
+        self.assertEqual(presenca["price_kind"],"multi_format")
+        self.assertIsNone(presenca["price_minor"])
+        self.assertEqual(presenca["minimum_price_minor"],3500)
+        self.assertEqual(len(presenca["price_options"]),5)
+        self.assertIn(
+            {"label":"Presença Online","amount_minor":3500},
+            presenca["price_options"],
+        )
+
+        mentoria=by_ref["catalog:service:mentoria"]
+        self.assertEqual(mentoria["price_kind"],"starting_from")
+        self.assertEqual(mentoria["minimum_price_minor"],12500)
+        self.assertIsNone(mentoria["price_minor"])
+
+        b2b=by_ref["catalog:service:b2b"]
+        self.assertEqual(b2b["price_kind"],"quote")
+        self.assertIsNone(b2b["minimum_price_minor"])
+
     def test_stocktake_template_contains_all_active_public_physical_assets_only(self):
         template=json.loads((ROOT/"commercial-stocktake.template.json").read_text(encoding="utf-8"))
         self.assertEqual(template["target_overlay_schema"],"commercial_asset_overlay_v1")
