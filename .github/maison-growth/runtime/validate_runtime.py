@@ -53,7 +53,7 @@ def main() -> None:
     require("Code-ready does not mean live" in status,"runtime status safety notice missing")
 
     proc=subprocess.run(
-        [sys.executable,"-m","unittest","-v","test_runtime_contract.py","test_private_runtime_preflight.py","test_render_private_worker_config.py","test_remote_schema_gate.py","test_private_brain_health.py","test_osiris_bridge_contract.py","test_brain_mcp_contract.py"],
+        [sys.executable,"-m","unittest","-v","test_runtime_contract.py","test_private_runtime_preflight.py","test_render_private_worker_config.py","test_remote_schema_gate.py","test_private_brain_health.py","test_private_deploy_workflow.py","test_osiris_bridge_contract.py","test_brain_mcp_contract.py"],
         cwd=str(ROOT),capture_output=True,text=True,
     )
     if proc.returncode:
