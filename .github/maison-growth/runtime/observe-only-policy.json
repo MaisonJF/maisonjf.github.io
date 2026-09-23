@@ -1,0 +1,47 @@
+{
+  "policy_version": "observe_only_v1",
+  "current_stage": "infra_only",
+  "stages": {
+    "infra_only": {
+      "worker_enabled": false,
+      "kill_switch": true,
+      "osiris_osint_enabled": false,
+      "osiris_memory_enabled": false,
+      "model_providers_enabled": [],
+      "outbound_authorized": false,
+      "spend_authorized": false,
+      "public_write_authorized": false
+    },
+    "keyless_observe_candidate": {
+      "worker_enabled": true,
+      "kill_switch": false,
+      "osiris_osint_enabled": true,
+      "osiris_memory_enabled": false,
+      "model_providers_enabled": [],
+      "outbound_authorized": false,
+      "spend_authorized": false,
+      "public_write_authorized": false,
+      "requires_explicit_activation": true
+    },
+    "memory_mirror_candidate": {
+      "worker_enabled": true,
+      "kill_switch": false,
+      "osiris_osint_enabled": true,
+      "osiris_memory_enabled": true,
+      "model_providers_enabled": [],
+      "outbound_authorized": false,
+      "spend_authorized": false,
+      "public_write_authorized": false,
+      "requires_https_bridge_smoke_test": true,
+      "requires_explicit_activation": true
+    }
+  },
+  "invariants": [
+    "paid_or_keyed_model_providers_remain_off_until_separately_authorized",
+    "outbound_actions_remain_a12_gated",
+    "public_writes_remain_a9_a12_gated",
+    "postgres_and_redis_never_exposed_publicly",
+    "osiris_mcp_never_exposed_publicly_by_default",
+    "memory_bridge_requires_authenticated_https_before_cloud_worker_mirroring"
+  ]
+}
