@@ -6,6 +6,33 @@ class FakeStatement {
   constructor(db, sql) { this.db=db; this.sql=sql; this.params=[]; }
   bind(...params) { this.params=params; return this; }
   async all() {
+    if (/FROM autonomy_human_review_resolutions r/i.test(this.sql)) {
+      const review=this.db.tables.autonomy_human_review_resolutions.get(String(this.params[0]));
+      if (!review) return {results:[]};
+      const action=this.db.tables.autonomy_action_log.get(review.action_id);
+      const governance=[...this.db.tables.a14_governance_links.values()].find(x=>x.action_id===review.action_id);
+      const result=action ? JSON.parse(action.result_json) : {};
+      const offer=this.db.tables.opportunity_offer_hypotheses.get(result.offer_hypothesis_id);
+      if (!action || !governance || !offer) return {results:[]};
+      return {results:[{
+        review_resolution_id:review.review_resolution_id,
+        decision:review.decision,
+        approved_scope:review.approved_scope,
+        public_write_authorized:review.public_write_authorized,
+        outbound_authorized:review.outbound_authorized,
+        spend_authorized:review.spend_authorized,
+        experiment_execution_authorized:review.experiment_execution_authorized,
+        opportunity_id:governance.opportunity_id,
+        offer_hypothesis_id:result.offer_hypothesis_id,
+        existing_solution_id:offer.existing_solution_id,
+        validation_mode:offer.validation_mode,
+        offer_type:offer.offer_type
+      }]};
+    }
+    if (/SELECT \* FROM a14_validation_plans WHERE review_resolution_id=\?/i.test(this.sql)) {
+      const row=[...this.db.tables.a14_validation_plans.values()].find(x=>x.review_resolution_id===String(this.params[0]));
+      return {results:row ? [{...row}] : []};
+    }
     const m=this.sql.match(/SELECT \* FROM\s+([a-z0-9_]+)\s+WHERE\s+([a-z0-9_]+)=\?/i);
     if (!m) return {results:[]};
     const [,_table,key]=m;
@@ -22,7 +49,9 @@ class FakeDB {
       earned_distribution_match_assessments:new Map(),
       autonomy_action_log:new Map(),
       autonomy_human_queue:new Map(),
-      a14_governance_links:new Map()
+      autonomy_human_review_resolutions:new Map(),
+      a14_governance_links:new Map(),
+      a14_validation_plans:new Map()
     };
     this.batchCalls=[];
   }
@@ -76,6 +105,16 @@ class FakeDB {
         action_id:p[2],queue_id:p[3],evidence_refs_json:p[4],linked_at:p[5]
       }); return;
     }
+    if (/INSERT INTO a14_validation_plans/i.test(sql)) {
+      this.tables.a14_validation_plans.set(p[0],{
+        validation_plan_id:p[0],review_resolution_id:p[1],opportunity_id:p[2],
+        offer_hypothesis_id:p[3],plan_kind:p[4],existing_solution_id:p[5],
+        a7_decision_id:null,a8_experiment_id:null,hypothesis:p[6],validation_mode:p[7],
+        primary_metric_key:p[8],evidence_refs_json:p[9],reason_codes_json:p[10],
+        state:p[11],public_write_authorized:0,outbound_authorized:0,spend_authorized:0,
+        experiment_execution_authorized:0,created_at:p[12]
+      }); return;
+    }
     throw new Error('unhandled fake insert');
   }
 }
@@ -121,8 +160,8 @@ function basePayload() {
   };
 }
 
-function request(payload,{token='proposal-secret',method='POST'}={}) {
-  return new Request('https://worker.example/internal/proposals/a14',{
+function request(payload,{token='proposal-secret',method='POST',path='/internal/proposals/a14'}={}) {
+  return new Request('https://worker.example'+path,{
     method,
     headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},
     body:method==='POST' ? JSON.stringify(payload) : undefined
@@ -247,4 +286,125 @@ test('analysis-only proposal cannot smuggle human reviews', async () => {
   const response=await handleBrainProposalRequest(request(payload),env());
   assert.equal(response.status,400);
   assert.equal((await response.json()).error,'analysis_only_proposal_cannot_create_human_reviews');
+});
+
+
+function approveBaseProposal(e) {
+  const action=[...e.tables.autonomy_action_log.values()][0];
+  const reviewId='rvr_12345678-1234-5234-9234-123456789012';
+  e.tables.autonomy_human_review_resolutions.set(reviewId,{
+    review_resolution_id:reviewId,
+    queue_id:[...e.tables.autonomy_human_queue.keys()][0],
+    action_id:action.action_id,
+    decision:'approved',
+    approved_scope:'experiment_planning_only',
+    decision_reason:'Approved for validation planning',
+    evidence_refs_json:'["human:review"]',
+    actor_kind:'human',
+    public_write_authorized:0,
+    outbound_authorized:0,
+    spend_authorized:0,
+    experiment_execution_authorized:0,
+    decided_at:'2026-09-23T19:00:00.000Z'
+  });
+  return reviewId;
+}
+
+function validationPayload(reviewId, base=basePayload()) {
+  const opportunity=base.opportunity;
+  const offer=base.offer_hypotheses[0];
+  return {
+    schema:'maison.a14-validation-plan.v1',
+    plan:{
+      validation_plan_id:'vpl_12345678-1234-5234-9234-123456789012',
+      review_resolution_id:reviewId,
+      opportunity_id:opportunity.opportunity_id,
+      offer_hypothesis_id:offer.offer_hypothesis_id,
+      plan_kind:'manual_b2b_pilot',
+      existing_solution_id:offer.existing_solution_id,
+      a7_decision_id:null,
+      a8_experiment_id:null,
+      hypothesis:'A small B2B pilot can validate demand without assuming revenue.',
+      validation_mode:offer.validation_mode,
+      primary_metric_key:null,
+      evidence_refs:['evd_x'],
+      reason_codes:['validation_must_match_purchase_behaviour'],
+      state:'manual_pilot_required',
+      public_write_authorized:false,
+      outbound_authorized:false,
+      spend_authorized:false,
+      experiment_execution_authorized:false,
+      created_at:'2026-09-23T19:05:00.000Z'
+    }
+  };
+}
+
+test('approved review can persist a planning-only validation plan', async () => {
+  const e=env();
+  let response=await handleBrainProposalRequest(request(basePayload()),e);
+  assert.equal(response.status,200);
+  const reviewId=approveBaseProposal(e);
+  response=await handleBrainProposalRequest(
+    request(validationPayload(reviewId),{path:'/internal/proposals/validation-plan'}),e
+  );
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.plan_kind,'manual_b2b_pilot');
+  assert.equal(body.state,'manual_pilot_required');
+  assert.equal(body.public_write_authorized,false);
+  assert.equal(body.outbound_authorized,false);
+  assert.equal(body.spend_authorized,false);
+  assert.equal(body.experiment_execution_authorized,false);
+  assert.equal(e.tables.a14_validation_plans.size,1);
+});
+
+test('validation-plan persistence is idempotent', async () => {
+  const e=env();
+  await handleBrainProposalRequest(request(basePayload()),e);
+  const reviewId=approveBaseProposal(e);
+  const req=validationPayload(reviewId);
+  let response=await handleBrainProposalRequest(
+    request(req,{path:'/internal/proposals/validation-plan'}),e
+  );
+  assert.equal(response.status,200);
+  response=await handleBrainProposalRequest(
+    request(req,{path:'/internal/proposals/validation-plan'}),e
+  );
+  assert.equal(response.status,200);
+  assert.equal((await response.json()).idempotent,true);
+  assert.equal(e.tables.a14_validation_plans.size,1);
+});
+
+test('validation plan rejects unapproved review', async () => {
+  const e=env();
+  await handleBrainProposalRequest(request(basePayload()),e);
+  const reviewId=approveBaseProposal(e);
+  e.tables.autonomy_human_review_resolutions.get(reviewId).decision='rejected';
+  const response=await handleBrainProposalRequest(
+    request(validationPayload(reviewId),{path:'/internal/proposals/validation-plan'}),e
+  );
+  assert.equal(response.status,400);
+  assert.equal((await response.json()).error,'validation_plan_requires_approved_review');
+});
+
+test('validation plan cannot smuggle A7 A8 or execution authority', async () => {
+  const mutators=[
+    p=>p.plan.a7_decision_id='dec_12345678-1234-5234-9234-123456789012',
+    p=>p.plan.a8_experiment_id='exp_12345678-1234-5234-9234-123456789012',
+    p=>p.plan.public_write_authorized=true,
+    p=>p.plan.outbound_authorized=true,
+    p=>p.plan.spend_authorized=true,
+    p=>p.plan.experiment_execution_authorized=true
+  ];
+  for (const mutate of mutators) {
+    const e=env();
+    await handleBrainProposalRequest(request(basePayload()),e);
+    const reviewId=approveBaseProposal(e);
+    const payload=validationPayload(reviewId);
+    mutate(payload);
+    const response=await handleBrainProposalRequest(
+      request(payload,{path:'/internal/proposals/validation-plan'}),e
+    );
+    assert.equal(response.status,400);
+  }
 });
