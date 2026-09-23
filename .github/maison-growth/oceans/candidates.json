@@ -2,7 +2,7 @@
   "version": "2026-09-18",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-09-23T22:31:00+01:00",
+  "last_enriched_at": "2026-09-23T22:46:00+01:00",
   "candidates": [
     {
       "painLanguage": "Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
@@ -214,6 +214,54 @@
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T22:31:00+01:00",
       "lastSeenAt": "2026-09-23T22:31:00+01:00"
+    },
+    {
+      "painLanguage": "Numa casa, fazer a tarefa é só uma parte do trabalho. Há também quem se lembre do que falta, antecipe necessidades, marque, planeie, confirme, delegue e mantenha dezenas de pequenas coisas mentalmente abertas — um trabalho que muitas vezes só se nota quando deixa de ser feito.",
+      "territory": "carga-mental-invisivel-da-casa",
+      "intent": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
+      "commercialAdjacency": "Oráculo Casa Partilhada, Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas sobre responsabilidade invisível, acordos domésticos e repartição de carga, sem aconselhamento clínico ou familiar",
+      "evidence": [
+        "Archives of Women's Mental Health (2025; PMID 38951218): em 322 mães de crianças pequenas, a carga cognitiva doméstica — planear, antecipar e delegar — foi mais desigual do que a execução física e associou-se a stress, burnout, saúde mental e funcionamento relacional; população específica, não generalizável automaticamente a todas as casas — https://doi.org/10.1007/s00737-024-01490-w",
+        "Personality and Social Psychology Bulletin (2026; PMID 42630014): em dois estudos sobre relações heterossexuais, maior partilha da carga mental associou-se a maior satisfação relacional e sexual das mulheres, sendo a carga mental um preditor distinto da divisão do trabalho físico — https://doi.org/10.1177/01461672261474320",
+        "Frontiers in Sociology (2026; PMID 41695447): estudo com 2.309 mães italianas descreveu trabalho mental familiar como planeamento, antecipação e monitorização emocional, encontrando carga substancial e desigualdade percebida ligada a dinâmicas relacionais; população específica de mães italianas — https://doi.org/10.3389/fsoc.2025.1683261"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "ser quem se lembra de tudo",
+        "fazer vs pensar no que tem de ser feito",
+        "tarefas invisíveis da casa",
+        "antecipar necessidades de todos",
+        "delegar também é trabalho",
+        "partilhar responsabilidade mental"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-23T22:46:00+01:00",
+      "lastSeenAt": "2026-09-23T22:46:00+01:00"
+    },
+    {
+      "painLanguage": "Às vezes o problema não é passar horas no telemóvel, mas nunca conseguir ficar tempo suficiente numa coisa só: uma notificação, um ping, uma janela, outra tarefa — e cada pequena interrupção obriga a cabeça a abandonar e reconstruir o fio outra vez.",
+      "territory": "atencao-fragmentada-por-interrupcoes-digitais",
+      "intent": "reconhecer quando interrupções frequentes e mudanças constantes de contexto fragmentam a atenção e dificultam retomar tarefas, distinguindo tempo total de ecrã da frequência com que a atenção é capturada e redireccionada",
+      "commercialAdjacency": "Oráculo Cabeça, Eu & Padrões e Trabalho & Caminho; Ritual Volta Para Casa e experiências digitais sobre foco, pausa e recuperação atencional, sem claims médicos, diagnóstico ou promessa de melhoria clínica",
+      "evidence": [
+        "Computers in Human Behavior (2026): experiência com notificações tipo smartphone encontrou abrandamento transitório do processamento cognitivo por cerca de sete segundos após notificações, com maior perturbação associada à relevância percebida e à frequência habitual de interacção com o smartphone — https://doi.org/10.1016/j.chb.2026.108926",
+        "BMC Psychology (2026; PMID 42192465): estudo mixed-methods em adultos indianos de 18–45 anos encontrou associação entre maior uso de redes sociais, fragmentação da atenção e distress emocional; o desenho é associativo e a população é específica, pelo que não estabelece causalidade universal — https://doi.org/10.1186/s40359-026-04846-2",
+        "Computers in Human Behavior (2024): experiência de media multitasking encontrou pior desempenho numa tarefa de leitura repetidamente interrompida por notificações de apps, apoiando custos de alternância mesmo quando o conteúdo da notificação era compreendido — https://doi.org/10.1016/j.chb.2024.108313"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "não consigo ficar numa coisa só",
+        "perder o fio depois de uma interrupção",
+        "muitas pequenas mudanças de contexto",
+        "frequência de interrupções vs tempo de ecrã",
+        "retomar custa mais do que parece",
+        "proteger blocos de atenção"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-23T22:46:00+01:00",
+      "lastSeenAt": "2026-09-23T22:46:00+01:00"
     }
   ]
 }

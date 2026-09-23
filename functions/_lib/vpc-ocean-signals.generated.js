@@ -114,6 +114,32 @@ export const VPC_OCEAN_SIGNALS=[
       "quando fechar o ecrã",
       "corpo em alerta depois do feed"
     ]
+  },
+  {
+    "id": "carga-mental-invisivel-da-casa",
+    "painLanguage": "Numa casa, fazer a tarefa é só uma parte do trabalho. Há também quem se lembre do que falta, antecipe necessidades, marque, planeie, confirme, delegue e mantenha dezenas de pequenas coisas mentalmente abertas — um trabalho que muitas vezes só se nota quando deixa de ser feito.",
+    "intent": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
+    "themes": [
+      "ser quem se lembra de tudo",
+      "fazer vs pensar no que tem de ser feito",
+      "tarefas invisíveis da casa",
+      "antecipar necessidades de todos",
+      "delegar também é trabalho",
+      "partilhar responsabilidade mental"
+    ]
+  },
+  {
+    "id": "atencao-fragmentada-por-interrupcoes-digitais",
+    "painLanguage": "Às vezes o problema não é passar horas no telemóvel, mas nunca conseguir ficar tempo suficiente numa coisa só: uma notificação, um ping, uma janela, outra tarefa — e cada pequena interrupção obriga a cabeça a abandonar e reconstruir o fio outra vez.",
+    "intent": "reconhecer quando interrupções frequentes e mudanças constantes de contexto fragmentam a atenção e dificultam retomar tarefas, distinguindo tempo total de ecrã da frequência com que a atenção é capturada e redireccionada",
+    "themes": [
+      "não consigo ficar numa coisa só",
+      "perder o fio depois de uma interrupção",
+      "muitas pequenas mudanças de contexto",
+      "frequência de interrupções vs tempo de ecrã",
+      "retomar custa mais do que parece",
+      "proteger blocos de atenção"
+    ]
   }
 ];
 export const VPC_OCEAN_SIGNAL_VERSION="2026-09-18";

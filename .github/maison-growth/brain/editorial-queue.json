@@ -1,7 +1,7 @@
 {
   "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
-  "generatedAt": "2026-09-23T22:31:00+01:00",
+  "generatedAt": "2026-09-23T22:46:00+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
   "contract": {
     "storesPaidBodies": false,
@@ -11,19 +11,19 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 9,
-    "queueItems": 18,
-    "questionCandidates": 9,
-    "questionThemeHypotheses": 51,
-    "questionDesignSlots": 306,
+    "oceansConsidered": 11,
+    "queueItems": 22,
+    "questionCandidates": 11,
+    "questionThemeHypotheses": 63,
+    "questionDesignSlots": 378,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 150,
     "pdiThemeBacklog": 150,
     "pdiSourceDesignSlots": 900,
     "pdiEditorialCoreTarget": 45000,
     "pdiCombinatorialTarget": 2800000,
-    "oracleCandidates": 9,
-    "oracleRoleSlots": 63
+    "oracleCandidates": 11,
+    "oracleRoleSlots": 77
   },
   "pdiGrowth": {
     "scale": {
@@ -8175,6 +8175,34 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_oracle_atencao_fragmentada_por_interrupcoes_digitais",
+      "type": "oracle_candidate",
+      "sourceOceanId": "atencao-fragmentada-por-interrupcoes-digitais",
+      "territory": "atencao-fragmentada-por-interrupcoes-digitais",
+      "intent": "reconhecer quando interrupções frequentes e mudanças constantes de contexto fragmentam a atenção e dificultam retomar tarefas, distinguindo tempo total de ecrã da frequência com que a atenção é capturada e redireccionada",
+      "painLanguage": "Às vezes o problema não é passar horas no telemóvel, mas nunca conseguir ficar tempo suficiente numa coisa só: uma notificação, um ping, uma janela, outra tarefa — e cada pequena interrupção obriga a cabeça a abandonar e reconstruir o fio outra vez.",
+      "commercialAdjacency": "Oráculo Cabeça, Eu & Padrões e Trabalho & Caminho; Ritual Volta Para Casa e experiências digitais sobre foco, pausa e recuperação atencional, sem claims médicos, diagnóstico ou promessa de melhoria clínica",
+      "evidenceCount": 3,
+      "evidence": [
+        "Computers in Human Behavior (2026): experiência com notificações tipo smartphone encontrou abrandamento transitório do processamento cognitivo por cerca de sete segundos após notificações, com maior perturbação associada à relevância percebida e à frequência habitual de interacção com o smartphone — https://doi.org/10.1016/j.chb.2026.108926",
+        "BMC Psychology (2026; PMID 42192465): estudo mixed-methods em adultos indianos de 18–45 anos encontrou associação entre maior uso de redes sociais, fragmentação da atenção e distress emocional; o desenho é associativo e a população é específica, pelo que não estabelece causalidade universal — https://doi.org/10.1186/s40359-026-04846-2",
+        "Computers in Human Behavior (2024): experiência de media multitasking encontrou pior desempenho numa tarefa de leitura repetidamente interrompida por notificações de apps, apoiando custos de alternância mesmo quando o conteúdo da notificação era compreendido — https://doi.org/10.1016/j.chb.2024.108313"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
       "id": "brain_oracle_auto_silenciamento_para_preservar_o_vinculo",
       "type": "oracle_candidate",
       "sourceOceanId": "auto-silenciamento-para-preservar-o-vinculo",
@@ -8187,6 +8215,34 @@
         "Behavioral Sciences (2026; PMID 42352796): estudo qualitativo encontrou auto-silenciamento específico de cada relação, associado sobretudo à segurança percebida; a supressão repetida da expressão para preservar vínculos apresentou custos psicológicos cumulativos — https://pubmed.ncbi.nlm.nih.gov/42352796/",
         "International Journal of Social Psychiatry (2023; PMID 35102764): em adultos em relações, o auto-silenciamento mediou a associação entre dimensões de apego inseguro e sintomas depressivos — https://pubmed.ncbi.nlm.nih.gov/35102764/",
         "Journal of Adolescence (2011; PMID 20493520): estudo longitudinal encontrou que auto-silenciamento predisse aumento posterior de sintomas depressivos, apoiando a relevância do padrão para além de um conflito isolado — https://pubmed.ncbi.nlm.nih.gov/20493520/"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_oracle_carga_mental_invisivel_da_casa",
+      "type": "oracle_candidate",
+      "sourceOceanId": "carga-mental-invisivel-da-casa",
+      "territory": "carga-mental-invisivel-da-casa",
+      "intent": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
+      "painLanguage": "Numa casa, fazer a tarefa é só uma parte do trabalho. Há também quem se lembre do que falta, antecipe necessidades, marque, planeie, confirme, delegue e mantenha dezenas de pequenas coisas mentalmente abertas — um trabalho que muitas vezes só se nota quando deixa de ser feito.",
+      "commercialAdjacency": "Oráculo Casa Partilhada, Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas sobre responsabilidade invisível, acordos domésticos e repartição de carga, sem aconselhamento clínico ou familiar",
+      "evidenceCount": 3,
+      "evidence": [
+        "Archives of Women's Mental Health (2025; PMID 38951218): em 322 mães de crianças pequenas, a carga cognitiva doméstica — planear, antecipar e delegar — foi mais desigual do que a execução física e associou-se a stress, burnout, saúde mental e funcionamento relacional; população específica, não generalizável automaticamente a todas as casas — https://doi.org/10.1007/s00737-024-01490-w",
+        "Personality and Social Psychology Bulletin (2026; PMID 42630014): em dois estudos sobre relações heterossexuais, maior partilha da carga mental associou-se a maior satisfação relacional e sexual das mulheres, sendo a carga mental um preditor distinto da divisão do trabalho físico — https://doi.org/10.1177/01461672261474320",
+        "Frontiers in Sociology (2026; PMID 41695447): estudo com 2.309 mães italianas descreveu trabalho mental familiar como planeamento, antecipação e monitorização emocional, encontrando carga substancial e desigualdade percebida ligada a dinâmicas relacionais; população específica de mães italianas — https://doi.org/10.3389/fsoc.2025.1683261"
       ],
       "roleCandidates": [
         "opening",
@@ -8650,6 +8706,259 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_question_atencao_fragmentada_por_interrupcoes_digitais",
+      "type": "question_candidate",
+      "sourceOceanId": "atencao-fragmentada-por-interrupcoes-digitais",
+      "territory": "atencao-fragmentada-por-interrupcoes-digitais",
+      "intent": "reconhecer quando interrupções frequentes e mudanças constantes de contexto fragmentam a atenção e dificultam retomar tarefas, distinguindo tempo total de ecrã da frequência com que a atenção é capturada e redireccionada",
+      "painLanguage": "Às vezes o problema não é passar horas no telemóvel, mas nunca conseguir ficar tempo suficiente numa coisa só: uma notificação, um ping, uma janela, outra tarefa — e cada pequena interrupção obriga a cabeça a abandonar e reconstruir o fio outra vez.",
+      "commercialAdjacency": "Oráculo Cabeça, Eu & Padrões e Trabalho & Caminho; Ritual Volta Para Casa e experiências digitais sobre foco, pausa e recuperação atencional, sem claims médicos, diagnóstico ou promessa de melhoria clínica",
+      "evidenceCount": 3,
+      "evidence": [
+        "Computers in Human Behavior (2026): experiência com notificações tipo smartphone encontrou abrandamento transitório do processamento cognitivo por cerca de sete segundos após notificações, com maior perturbação associada à relevância percebida e à frequência habitual de interacção com o smartphone — https://doi.org/10.1016/j.chb.2026.108926",
+        "BMC Psychology (2026; PMID 42192465): estudo mixed-methods em adultos indianos de 18–45 anos encontrou associação entre maior uso de redes sociais, fragmentação da atenção e distress emocional; o desenho é associativo e a população é específica, pelo que não estabelece causalidade universal — https://doi.org/10.1186/s40359-026-04846-2",
+        "Computers in Human Behavior (2024): experiência de media multitasking encontrou pior desempenho numa tarefa de leitura repetidamente interrompida por notificações de apps, apoiando custos de alternância mesmo quando o conteúdo da notificação era compreendido — https://doi.org/10.1016/j.chb.2024.108313"
+      ],
+      "questionThemeCandidates": [
+        "não consigo ficar numa coisa só",
+        "perder o fio depois de uma interrupção",
+        "muitas pequenas mudanças de contexto",
+        "frequência de interrupções vs tempo de ecrã",
+        "retomar custa mais do que parece",
+        "proteger blocos de atenção"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_nao_consigo_ficar_numa_coisa_so_open",
+          "theme": "não consigo ficar numa coisa só",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_nao_consigo_ficar_numa_coisa_so_recognize",
+          "theme": "não consigo ficar numa coisa só",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_nao_consigo_ficar_numa_coisa_so_deepen",
+          "theme": "não consigo ficar numa coisa só",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_nao_consigo_ficar_numa_coisa_so_touch",
+          "theme": "não consigo ficar numa coisa só",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_nao_consigo_ficar_numa_coisa_so_close",
+          "theme": "não consigo ficar numa coisa só",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_nao_consigo_ficar_numa_coisa_so_signature",
+          "theme": "não consigo ficar numa coisa só",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_perder_o_fio_depois_de_uma_interrupcao_open",
+          "theme": "perder o fio depois de uma interrupção",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_perder_o_fio_depois_de_uma_interrupcao_recognize",
+          "theme": "perder o fio depois de uma interrupção",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_perder_o_fio_depois_de_uma_interrupcao_deepen",
+          "theme": "perder o fio depois de uma interrupção",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_perder_o_fio_depois_de_uma_interrupcao_touch",
+          "theme": "perder o fio depois de uma interrupção",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_perder_o_fio_depois_de_uma_interrupcao_close",
+          "theme": "perder o fio depois de uma interrupção",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_perder_o_fio_depois_de_uma_interrupcao_signature",
+          "theme": "perder o fio depois de uma interrupção",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_muitas_pequenas_mudancas_de_contexto_open",
+          "theme": "muitas pequenas mudanças de contexto",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_muitas_pequenas_mudancas_de_contexto_recognize",
+          "theme": "muitas pequenas mudanças de contexto",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_muitas_pequenas_mudancas_de_contexto_deepen",
+          "theme": "muitas pequenas mudanças de contexto",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_muitas_pequenas_mudancas_de_contexto_touch",
+          "theme": "muitas pequenas mudanças de contexto",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_muitas_pequenas_mudancas_de_contexto_close",
+          "theme": "muitas pequenas mudanças de contexto",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_muitas_pequenas_mudancas_de_contexto_signature",
+          "theme": "muitas pequenas mudanças de contexto",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_frequencia_de_interrupcoes_vs_tempo_de_ecra_open",
+          "theme": "frequência de interrupções vs tempo de ecrã",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_frequencia_de_interrupcoes_vs_tempo_de_ecra_recognize",
+          "theme": "frequência de interrupções vs tempo de ecrã",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_frequencia_de_interrupcoes_vs_tempo_de_ecra_deepen",
+          "theme": "frequência de interrupções vs tempo de ecrã",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_frequencia_de_interrupcoes_vs_tempo_de_ecra_touch",
+          "theme": "frequência de interrupções vs tempo de ecrã",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_frequencia_de_interrupcoes_vs_tempo_de_ecra_close",
+          "theme": "frequência de interrupções vs tempo de ecrã",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_frequencia_de_interrupcoes_vs_tempo_de_ecra_signature",
+          "theme": "frequência de interrupções vs tempo de ecrã",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_retomar_custa_mais_do_que_parece_open",
+          "theme": "retomar custa mais do que parece",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_retomar_custa_mais_do_que_parece_recognize",
+          "theme": "retomar custa mais do que parece",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_retomar_custa_mais_do_que_parece_deepen",
+          "theme": "retomar custa mais do que parece",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_retomar_custa_mais_do_que_parece_touch",
+          "theme": "retomar custa mais do que parece",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_retomar_custa_mais_do_que_parece_close",
+          "theme": "retomar custa mais do que parece",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_retomar_custa_mais_do_que_parece_signature",
+          "theme": "retomar custa mais do que parece",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_proteger_blocos_de_atencao_open",
+          "theme": "proteger blocos de atenção",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_proteger_blocos_de_atencao_recognize",
+          "theme": "proteger blocos de atenção",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_proteger_blocos_de_atencao_deepen",
+          "theme": "proteger blocos de atenção",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_proteger_blocos_de_atencao_touch",
+          "theme": "proteger blocos de atenção",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_proteger_blocos_de_atencao_close",
+          "theme": "proteger blocos de atenção",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atencao_fragmentada_por_interrupcoes_digitais_proteger_blocos_de_atencao_signature",
+          "theme": "proteger blocos de atenção",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
       "id": "brain_question_auto_silenciamento_para_preservar_o_vinculo",
       "type": "question_candidate",
       "sourceOceanId": "auto-silenciamento-para-preservar-o-vinculo",
@@ -8893,6 +9202,259 @@
         {
           "id": "slot_auto_silenciamento_para_preservar_o_vinculo_eu_interior_vs_eu_mostrado_signature",
           "theme": "eu interior vs eu mostrado",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_carga_mental_invisivel_da_casa",
+      "type": "question_candidate",
+      "sourceOceanId": "carga-mental-invisivel-da-casa",
+      "territory": "carga-mental-invisivel-da-casa",
+      "intent": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
+      "painLanguage": "Numa casa, fazer a tarefa é só uma parte do trabalho. Há também quem se lembre do que falta, antecipe necessidades, marque, planeie, confirme, delegue e mantenha dezenas de pequenas coisas mentalmente abertas — um trabalho que muitas vezes só se nota quando deixa de ser feito.",
+      "commercialAdjacency": "Oráculo Casa Partilhada, Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas sobre responsabilidade invisível, acordos domésticos e repartição de carga, sem aconselhamento clínico ou familiar",
+      "evidenceCount": 3,
+      "evidence": [
+        "Archives of Women's Mental Health (2025; PMID 38951218): em 322 mães de crianças pequenas, a carga cognitiva doméstica — planear, antecipar e delegar — foi mais desigual do que a execução física e associou-se a stress, burnout, saúde mental e funcionamento relacional; população específica, não generalizável automaticamente a todas as casas — https://doi.org/10.1007/s00737-024-01490-w",
+        "Personality and Social Psychology Bulletin (2026; PMID 42630014): em dois estudos sobre relações heterossexuais, maior partilha da carga mental associou-se a maior satisfação relacional e sexual das mulheres, sendo a carga mental um preditor distinto da divisão do trabalho físico — https://doi.org/10.1177/01461672261474320",
+        "Frontiers in Sociology (2026; PMID 41695447): estudo com 2.309 mães italianas descreveu trabalho mental familiar como planeamento, antecipação e monitorização emocional, encontrando carga substancial e desigualdade percebida ligada a dinâmicas relacionais; população específica de mães italianas — https://doi.org/10.3389/fsoc.2025.1683261"
+      ],
+      "questionThemeCandidates": [
+        "ser quem se lembra de tudo",
+        "fazer vs pensar no que tem de ser feito",
+        "tarefas invisíveis da casa",
+        "antecipar necessidades de todos",
+        "delegar também é trabalho",
+        "partilhar responsabilidade mental"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_ser_quem_se_lembra_de_tudo_open",
+          "theme": "ser quem se lembra de tudo",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_ser_quem_se_lembra_de_tudo_recognize",
+          "theme": "ser quem se lembra de tudo",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_ser_quem_se_lembra_de_tudo_deepen",
+          "theme": "ser quem se lembra de tudo",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_ser_quem_se_lembra_de_tudo_touch",
+          "theme": "ser quem se lembra de tudo",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_ser_quem_se_lembra_de_tudo_close",
+          "theme": "ser quem se lembra de tudo",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_ser_quem_se_lembra_de_tudo_signature",
+          "theme": "ser quem se lembra de tudo",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_fazer_vs_pensar_no_que_tem_de_ser_feito_open",
+          "theme": "fazer vs pensar no que tem de ser feito",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_fazer_vs_pensar_no_que_tem_de_ser_feito_recognize",
+          "theme": "fazer vs pensar no que tem de ser feito",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_fazer_vs_pensar_no_que_tem_de_ser_feito_deepen",
+          "theme": "fazer vs pensar no que tem de ser feito",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_fazer_vs_pensar_no_que_tem_de_ser_feito_touch",
+          "theme": "fazer vs pensar no que tem de ser feito",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_fazer_vs_pensar_no_que_tem_de_ser_feito_close",
+          "theme": "fazer vs pensar no que tem de ser feito",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_fazer_vs_pensar_no_que_tem_de_ser_feito_signature",
+          "theme": "fazer vs pensar no que tem de ser feito",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_tarefas_invisiveis_da_casa_open",
+          "theme": "tarefas invisíveis da casa",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_tarefas_invisiveis_da_casa_recognize",
+          "theme": "tarefas invisíveis da casa",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_tarefas_invisiveis_da_casa_deepen",
+          "theme": "tarefas invisíveis da casa",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_tarefas_invisiveis_da_casa_touch",
+          "theme": "tarefas invisíveis da casa",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_tarefas_invisiveis_da_casa_close",
+          "theme": "tarefas invisíveis da casa",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_tarefas_invisiveis_da_casa_signature",
+          "theme": "tarefas invisíveis da casa",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_antecipar_necessidades_de_todos_open",
+          "theme": "antecipar necessidades de todos",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_antecipar_necessidades_de_todos_recognize",
+          "theme": "antecipar necessidades de todos",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_antecipar_necessidades_de_todos_deepen",
+          "theme": "antecipar necessidades de todos",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_antecipar_necessidades_de_todos_touch",
+          "theme": "antecipar necessidades de todos",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_antecipar_necessidades_de_todos_close",
+          "theme": "antecipar necessidades de todos",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_antecipar_necessidades_de_todos_signature",
+          "theme": "antecipar necessidades de todos",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_delegar_tambem_e_trabalho_open",
+          "theme": "delegar também é trabalho",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_delegar_tambem_e_trabalho_recognize",
+          "theme": "delegar também é trabalho",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_delegar_tambem_e_trabalho_deepen",
+          "theme": "delegar também é trabalho",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_delegar_tambem_e_trabalho_touch",
+          "theme": "delegar também é trabalho",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_delegar_tambem_e_trabalho_close",
+          "theme": "delegar também é trabalho",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_delegar_tambem_e_trabalho_signature",
+          "theme": "delegar também é trabalho",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_partilhar_responsabilidade_mental_open",
+          "theme": "partilhar responsabilidade mental",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_partilhar_responsabilidade_mental_recognize",
+          "theme": "partilhar responsabilidade mental",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_partilhar_responsabilidade_mental_deepen",
+          "theme": "partilhar responsabilidade mental",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_partilhar_responsabilidade_mental_touch",
+          "theme": "partilhar responsabilidade mental",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_partilhar_responsabilidade_mental_close",
+          "theme": "partilhar responsabilidade mental",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_carga_mental_invisivel_da_casa_partilhar_responsabilidade_mental_signature",
+          "theme": "partilhar responsabilidade mental",
           "stage": "signature",
           "status": "needs_editorial"
         }
