@@ -28,6 +28,16 @@ def summarize(values: Mapping[str, str]) -> dict[str, object]:
     configured = [name for name in FIRST_STAGE_REQUIRED if present(name)]
     missing = [name for name in FIRST_STAGE_REQUIRED if not present(name)]
     access = [present(name) for name in ACCESS_PAIR]
+    dedicated_read_token=present("CLOUDFLARE_READ_API_TOKEN")
+    deploy_token=present("CLOUDFLARE_API_TOKEN")
+    account_id=present("CLOUDFLARE_ACCOUNT_ID")
+    read_token_source=(
+        "dedicated_read"
+        if dedicated_read_token
+        else "deployment_fallback"
+        if deploy_token
+        else "missing"
+    )
 
     return {
         "kind": "maison_private_runtime_credential_readiness",
@@ -35,6 +45,8 @@ def summarize(values: Mapping[str, str]) -> dict[str, object]:
         "first_stage_configured": configured,
         "first_stage_missing": missing,
         "first_stage_credentials_present": not missing,
+        "read_only_inspection_credentials_present": account_id and (dedicated_read_token or deploy_token),
+        "read_only_inspection_token_source": read_token_source,
         "access_boundary_pair_present": all(access),
         "access_boundary_pair_partial": any(access) and not all(access),
         "later_stage_configured": [name for name in LATER_STAGE if present(name)],
