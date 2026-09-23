@@ -24,6 +24,7 @@ def main() -> None:
         "OSIRIS_MEMORY_ENABLED":str(stage["osiris_memory_enabled"]).lower(),
         "BRAIN_CONTROL_API_ENABLED":str(stage.get("brain_control_api_enabled",False)).lower(),
         "BRAIN_PROPOSAL_API_ENABLED":str(stage.get("brain_proposal_api_enabled",False)).lower(),
+        "BRAIN_REVIEW_DECISION_ENABLED":str(stage.get("brain_review_decision_enabled",False)).lower(),
         "OPENROUTER_ENABLED":"false",
         "OSIRIS_GATEWAY_ENABLED":"false",
         "outbound_authorized":False,
