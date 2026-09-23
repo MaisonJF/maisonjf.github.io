@@ -21,7 +21,7 @@
   },
   "assets": [
     {
-      "asset_ref": "catalog:future-product:gua-perfumada",
+      "asset_ref": "catalog:future-product:agua-perfumada",
       "source_kind": "public_product_future_registry",
       "asset_type": "physical_product",
       "slug": null,
