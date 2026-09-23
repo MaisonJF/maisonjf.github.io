@@ -2,7 +2,14 @@
 set -euo pipefail
 
 DB_NAME="${1:-maison-growth-engine}"
+CONFIRM="${2:-}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+
+if [[ "$CONFIRM" != "--confirm-fresh" ]]; then
+  echo "Refusing to apply the full migration chain without --confirm-fresh." >&2
+  echo "For an existing database, run inspect-growth-migrations.sh first and apply only reviewed missing migrations." >&2
+  exit 2
+fi
 
 files=(
   ".github/maison-growth/a1/migrations/0001_data_foundation.sql"
