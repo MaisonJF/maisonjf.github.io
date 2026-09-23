@@ -58,6 +58,7 @@ def build_opportunity_record(
     need_id: Optional[str],
     territory_code: Optional[str],
     metrics: Mapping[str, EvidenceMetric],
+    evidence_refs: Sequence[str]=(),
     existing_solution_ids: Sequence[str],
     knowledge_context_refs: Sequence[str],
     rule_version_id: str,
@@ -99,7 +100,7 @@ def build_opportunity_record(
         "confidence": score.confidence,
         "known_dimensions": score.known_dimensions,
         "unknown_dimensions": score.unknown_dimensions,
-        "evidence_refs": score.evidence_refs,
+        "evidence_refs": tuple(sorted(set(score.evidence_refs) | set(evidence_refs))),
         "existing_solution_ids": existing,
         "knowledge_context_refs": tuple(sorted(set(knowledge_context_refs))),
         "status": status,
@@ -116,26 +117,37 @@ def build_offer_hypothesis(
     opportunity_id: str,
     offer_type: str,
     existing_solution_ids: Sequence[str],
-    fit_metrics: Mapping[str, EvidenceMetric],
+    existing_solution_id: Optional[str]=None,
+    fit_metrics: Mapping[str, EvidenceMetric]=None,
+    evidence_refs: Sequence[str]=(),
     validation_mode: Optional[str],
     economics: Mapping[str, Any],
     policy: A14Policy,
 ) -> dict[str, Any]:
     path = choose_offer_path(existing_solution_ids, (offer_type,))
-    fit = score_universal_opportunity(fit_metrics, policy.opportunity_weights)
-    existing_solution_id = path["existing_solution_ids"][0] if path["existing_solution_ids"] else None
+    fit = score_universal_opportunity(fit_metrics or {}, policy.opportunity_weights)
+    existing = tuple(path["existing_solution_ids"])
+    reasons = list(path["reason_codes"])
+    selected = existing_solution_id
+    if selected is not None and selected not in existing:
+        raise ValueError("existing_solution_id_not_in_supplied_existing_solutions")
+    if selected is None:
+        if len(existing) == 1:
+            selected = existing[0]
+        elif len(existing) > 1:
+            reasons.append("multiple_existing_solutions_require_explicit_selection")
     return {
         "offer_hypothesis_id": new_id("ofh_"),
         "opportunity_id": opportunity_id,
         "offer_type": offer_type,
         "a3_solution_type": map_offer_to_a3_solution_type(offer_type),
-        "existing_solution_id": existing_solution_id,
+        "existing_solution_id": selected,
         "fit_score": fit.score,
         "fit_confidence": fit.confidence,
         "economics": dict(economics),
         "validation_mode": validation_mode,
-        "evidence_refs": fit.evidence_refs,
-        "reason_codes": path["reason_codes"],
+        "evidence_refs": tuple(sorted(set(fit.evidence_refs) | set(evidence_refs))),
+        "reason_codes": tuple(reasons),
         "created_at": _now(),
     }
 
