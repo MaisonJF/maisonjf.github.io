@@ -1,7 +1,7 @@
--- Maison Growth Engine · A14.2 integration bridges + recovery measurement
+-- Maison Growth Engine · A14.2 integration bridges + cash measurement
 -- D1 / SQLite-compatible migration 0013.
 -- Links A14 to A12/A8/A3/A11 without copying their source-of-truth data.
--- Adds a generic recovery target model; no private target amount is embedded in repository code.
+-- Adds no sunk-cost target. Cash/profit measurement is derived from observed A3 economics.
 
 PRAGMA foreign_keys = ON;
 
@@ -87,23 +87,6 @@ CREATE TABLE a14_learning_links (
     UNIQUE(opportunity_id,offer_hypothesis_id,distribution_match_id,learning_record_id)
 );
 
-CREATE TABLE recovery_target_versions (
-    recovery_target_version_id TEXT PRIMARY KEY
-        CHECK (length(recovery_target_version_id)=40 AND substr(recovery_target_version_id,1,4)='rtv_'),
-    target_key TEXT NOT NULL CHECK (length(trim(target_key)) BETWEEN 1 AND 120),
-    target_amount_minor INTEGER NOT NULL CHECK (target_amount_minor > 0),
-    currency TEXT NOT NULL
-        CHECK (length(currency)=3 AND currency=upper(currency) AND currency NOT GLOB '*[^A-Z]*'),
-    basis TEXT NOT NULL CHECK (basis='a3_immediate_contribution'),
-    valid_from TEXT NOT NULL,
-    valid_to TEXT NULL,
-    created_at TEXT NOT NULL,
-    created_by TEXT NOT NULL CHECK (length(trim(created_by)) BETWEEN 1 AND 120),
-    notes_json TEXT NOT NULL DEFAULT '{}' CHECK (json_valid(notes_json)),
-    CHECK (valid_to IS NULL OR valid_to > valid_from),
-    UNIQUE(target_key,valid_from)
-);
-
 CREATE VIEW a14_realised_economics AS
 SELECT
     l.opportunity_id,
@@ -142,5 +125,3 @@ CREATE TRIGGER trg_a14_outcome_links_no_update BEFORE UPDATE ON a14_outcome_link
 CREATE TRIGGER trg_a14_outcome_links_no_delete BEFORE DELETE ON a14_outcome_links BEGIN SELECT RAISE(ABORT,'A14 outcome links are append-only'); END;
 CREATE TRIGGER trg_a14_learning_links_no_update BEFORE UPDATE ON a14_learning_links BEGIN SELECT RAISE(ABORT,'A14 learning links are append-only'); END;
 CREATE TRIGGER trg_a14_learning_links_no_delete BEFORE DELETE ON a14_learning_links BEGIN SELECT RAISE(ABORT,'A14 learning links are append-only'); END;
-CREATE TRIGGER trg_recovery_targets_no_update BEFORE UPDATE ON recovery_target_versions BEGIN SELECT RAISE(ABORT,'Recovery targets are versioned; insert a new version'); END;
-CREATE TRIGGER trg_recovery_targets_no_delete BEFORE DELETE ON recovery_target_versions BEGIN SELECT RAISE(ABORT,'Recovery target history is immutable'); END;
