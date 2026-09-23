@@ -44,6 +44,13 @@ def new_id(prefix: str) -> str:
     return f"{prefix}{_uuid7()}"
 
 
+def stable_id(prefix: str, payload: Any) -> str:
+    """Deterministic UUID-shaped ID for repeatable semantic hypotheses/previews."""
+    digest=_hash(payload)
+    value=uuid.uuid5(uuid.NAMESPACE_URL,f"https://maison-jf.com/a14/{prefix}/{digest}")
+    return f"{prefix}{value}"
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
 
@@ -95,8 +102,9 @@ def build_opportunity_record(
         "rule_version_id": rule_version_id,
         "model_version_id": model_version_id,
     }
+    input_hash=_hash(payload)
     return {
-        "opportunity_id": new_id("opp_"),
+        "opportunity_id": stable_id("opp_",{"input_hash":input_hash}),
         "need_id": need_id,
         "territory_code": territory_code,
         "opportunity_score": score.score,
@@ -110,7 +118,7 @@ def build_opportunity_record(
         "reason_codes": tuple(reasons),
         "rule_version_id": rule_version_id,
         "model_version_id": model_version_id,
-        "input_hash": _hash(payload),
+        "input_hash": input_hash,
         "created_at": _now(),
     }
 
@@ -140,8 +148,28 @@ def build_offer_hypothesis(
             selected = existing[0]
         elif len(existing) > 1:
             reasons.append("multiple_existing_solutions_require_explicit_selection")
+    fingerprint={
+        "opportunity_id":opportunity_id,
+        "offer_type":offer_type,
+        "a3_solution_type":map_offer_to_a3_solution_type(offer_type),
+        "existing_solution_id":selected,
+        "fit_metrics":{
+            key:{
+                "value":value.value,
+                "status":value.status,
+                "confidence":value.confidence,
+                "evidence_refs":value.evidence_refs,
+            }
+            for key,value in sorted((fit_metrics or {}).items())
+        },
+        "economics":dict(economics),
+        "validation_mode":validation_mode,
+        "evidence_refs":tuple(sorted(set(fit.evidence_refs) | set(evidence_refs))),
+        "reason_codes":tuple(dict.fromkeys(reasons)),
+        "policy_version":policy.policy_version,
+    }
     return {
-        "offer_hypothesis_id": new_id("ofh_"),
+        "offer_hypothesis_id": stable_id("ofh_",fingerprint),
         "opportunity_id": opportunity_id,
         "offer_type": offer_type,
         "a3_solution_type": map_offer_to_a3_solution_type(offer_type),
@@ -186,8 +214,29 @@ def build_distribution_match(
         channel_class=channel_class,
         seedable=seedable,
     )
+    fingerprint={
+        "offer_hypothesis_id":offer_hypothesis_id,
+        "amplifier_ref":amplifier_ref,
+        "moment_key":moment_key,
+        "story_angle_key":story_angle_key,
+        "channel_class":channel_class,
+        "fit_metrics":{
+            key:{
+                "value":value.value,
+                "status":value.status,
+                "confidence":value.confidence,
+                "evidence_refs":value.evidence_refs,
+            }
+            for key,value in sorted(fit_metrics.items())
+        },
+        "economics":asdict(economics),
+        "recommended_strategy":rec.strategy,
+        "recommendation_state":rec.state,
+        "seedable":seedable,
+        "policy_version":policy.policy_version,
+    }
     return {
-        "distribution_match_id": new_id("dma_"),
+        "distribution_match_id": stable_id("dma_",fingerprint),
         "offer_hypothesis_id": offer_hypothesis_id,
         "amplifier_ref": amplifier_ref,
         "moment_key": moment_key,
