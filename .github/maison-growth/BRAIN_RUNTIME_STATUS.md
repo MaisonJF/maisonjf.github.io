@@ -20,7 +20,8 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Osiris Memory write mirror | READY authenticated bridge using Osiris Actions Waist | PRIVATE STACK PREPARED / NOT STARTED |
 | Osiris Memory read context | READY MCP graph_search adapter + smoke profile | NOT STARTED |
 | Maison Brain MCP | READY read-only tools: status/Oceanos/catalogue assets/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
-| A1/A13/D1 canonical evidence | READY schema/contracts | D1 NOT PROVISIONED HERE |
+| A1/A13/D1 canonical evidence | READY schema/contracts + canonical `maison-growth-engine` binding | REMOTE 0001→0016 SCHEMA NOT YET VERIFIED |
+| Cloudflare D1/Queue bindings | READY canonical D1 + intelligence queue/DLQ configuration in Wrangler | REMOTE RESOURCE STATE NOT YET VERIFIED |
 | Brain Control API | READY GET-only feed/solutions/economics/A11 learning + A5 mappings | DISABLED |
 | Canonical observe cycle | READY A5→Pre-Brain→Scout→Critic→Foundry→A14 preview + A3/A11 feedback context | OPTIONAL / NOT STARTED |
 | Persistent observe runtime | READY Docker Compose: pgvector/Postgres + Redis + Osiris + authenticated bridge + healthchecks | NOT STARTED |
@@ -77,7 +78,7 @@ No layer should become a copy of every other layer.
 2. Run the prepared persistent observe stack locally/private-only and pass its smoke tests; this still does not activate A13 external collection.
 3. If explicitly authorised, expose only the private Brain Control API first (sensors still off) behind authenticated HTTPS and test the canonical read cycle.
 4. Run the manual allowlisted semantic projection sync only after the private read path is verified.
-5. Provision D1/Queue bindings and private memory bridge.
+5. Verify the existing D1/Queue bindings remotely, apply any missing schema migration through 0016, then connect the private memory bridge.
 6. Configure only selected zero/low-cost providers.
 7. Start A13 in observe-only with kill switches and conservative caps.
 8. Feed observed A13 evidence through A5/Pre-Brain/Scout/Critic/A14.
