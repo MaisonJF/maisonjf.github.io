@@ -1,5 +1,5 @@
 {
-  "contract_version": "A14.2",
+  "contract_version": "A14.3",
   "module": "Universal Opportunity + Earned Distribution",
   "mode": "analysis_only",
   "depends_on": [
@@ -89,5 +89,12 @@
     "forecasts_count_as_realised_money": false,
     "expected_value_counts_as_realised_money": false,
     "observed_a3_economics_only": true
+  },
+  "validation_planning": {
+    "approved_review_required": true,
+    "planning_only": true,
+    "a8_scope": "cta_route_existing_solution_only",
+    "manual_validation_for_unsupported_modes": true,
+    "experiment_execution_authorized": false
   }
 }
