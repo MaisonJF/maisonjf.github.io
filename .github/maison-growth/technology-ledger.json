@@ -217,7 +217,7 @@
         "Revenue Engine",
         "Earned Distribution"
       ],
-      "notes": "Analysis-only. Existing-asset-first; UNKNOWN remains unknown; amplifier fit is contextual (amplifier × offer × moment); no autonomous outreach, spend, catalogue/price/checkout mutation or public write."
+      "notes": "Analysis-only. Existing-asset-first; UNKNOWN remains unknown; contextual amplifier×offer×moment fit. Opportunity/offer/distribution hypothesis IDs are deterministic from canonical semantic payloads and repository persistence is strict/idempotent; same-ID payload drift is rejected. No autonomous outreach, spend, catalogue/price/checkout mutation or public write."
     },
     {
       "id": "maison-a13",
