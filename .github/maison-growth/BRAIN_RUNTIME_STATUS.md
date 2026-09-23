@@ -19,7 +19,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Osiris AI Gateway | READY optional adapter | DISABLED / config+secret required |
 | Osiris Memory write mirror | READY authenticated bridge using Osiris Actions Waist | PRIVATE STACK PREPARED / NOT STARTED |
 | Osiris Memory read context | READY MCP graph_search adapter + smoke profile | NOT STARTED |
-| Maison Brain MCP | READY read-only tools: status/Oceanos/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
+| Maison Brain MCP | READY read-only tools: status/Oceanos/catalogue assets/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
 | A1/A13/D1 canonical evidence | READY schema/contracts | D1 NOT PROVISIONED HERE |
 | Brain Control API | READY GET-only feed/solutions/economics/A11 learning + A5 mappings | DISABLED |
 | Canonical observe cycle | READY A5→Pre-Brain→Scout→Critic→Foundry→A14 preview + A3/A11 feedback context | OPTIONAL / NOT STARTED |
