@@ -32,6 +32,8 @@ class BrainMCPContractTests(unittest.TestCase):
             "maison_ocean_search",
             "maison_commercial_action_inbox",
             "maison_commercial_asset_search",
+            "maison_commercial_attention",
+            "maison_commercial_bundle_hypotheses",
             "maison_osiris_search",
             "maison_semantic_search",
         })
@@ -39,12 +41,15 @@ class BrainMCPContractTests(unittest.TestCase):
 
     def test_all_tools_use_read_only_annotations(self):
         decorated=re.findall(r"@mcp\.tool\(([^)]*)\)",self.source)
-        self.assertEqual(len(decorated),6)
+        self.assertEqual(len(decorated),8)
         self.assertTrue(all("annotations=READ_ONLY" in x for x in decorated))
         self.assertIn("readOnlyHint=True",self.source)
         self.assertIn("destructiveHint=False",self.source)
         self.assertIn('"private_operational_overlay_exposed":False',self.source)
         self.assertIn('result["mcp_experiment_execution_authorized"]=False',self.source)
+        self.assertIn('"attention_score_is_not_profit_score":True',self.source)
+        self.assertIn('"bundle_price_authorized":False',self.source)
+        self.assertIn('"automatic_checkout_authorized":False',self.source)
 
     def test_server_has_no_commercial_write_calls(self):
         forbidden=(
