@@ -9,6 +9,7 @@ from typing import Any, Mapping, Sequence
 
 from a14_projection import preview_to_dict, project_packet_to_a14
 from brain_control_client import BrainControlClient
+from commercial_assets import CommercialAssetContext
 from knowledge_context import OceanEditorialContext
 from orchestrator import packet_to_dict, run_brain_cycle
 from runtime_memory_context import collect_runtime_memory_context
@@ -210,7 +211,13 @@ def main() -> None:
     learning=_rows(client.learning(limit=100))
     policy=_explicit_policy()
 
-    # Oceanos contributes curated context refs, never independent evidence roots.
+    overlay_raw=os.environ.get("MAISON_COMMERCIAL_ASSET_OVERLAY_PATH","").strip()
+    asset_context=CommercialAssetContext.from_files(
+        ROOT/"commercial-assets.generated.json",
+        overlay_path=Path(overlay_raw) if overlay_raw else None,
+    )
+
+    # Oceanos and commercial assets contribute supporting context refs, never independent evidence roots.
     ocean=OceanEditorialContext.from_file(ROOT/"editorial-queue.json")
     knowledge_context:dict[str,tuple[str,...]]={}
     for row in feed:
@@ -219,6 +226,9 @@ def main() -> None:
         refs=[hit.ref for hit in ocean.search(text,limit=5)]
         if refs:
             _append_context(knowledge_context,territory,refs)
+        asset_refs=[hit.ref for hit in asset_context.search(text,limit=5)]
+        if asset_refs:
+            _append_context(knowledge_context,territory,asset_refs)
 
     for territory,refs in _cash_context_by_territory(cash,links).items():
         _append_context(knowledge_context,territory,refs)
@@ -259,6 +269,7 @@ def main() -> None:
         "cash_feedback_rows":len(cash),
         "learning_rows":len(learning),
         "runtime_memory_status":dict(runtime_memory.status),
+        "commercial_asset_status":asset_context.summary(),
         "packets":[packet_to_dict(x) for x in packets],
         "a14_previews":[preview_to_dict(x) for x in a14_previews],
         "writes_performed":False,
