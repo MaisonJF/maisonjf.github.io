@@ -58,29 +58,41 @@ A provider is skipped unless its secret and required model setting are configure
 - external output is stored as untrusted observation/evidence data only;
 - no external model has repository, publishing, checkout, price, catalogue or permission authority.
 
-## 1. Create Cloudflare resources
+## 1. Verify Cloudflare resources
 
-From this directory:
+The repository already carries the canonical Worker binding for the Maison Growth database:
+
+- D1 database: `maison-growth-engine`;
+- Queue: `maison-intelligence`;
+- dead-letter Queue: `maison-intelligence-dlq`.
+
+Do **not** create a second database merely because an older bootstrap note says `maison-growth`. For the existing Maison environment, authenticate Wrangler and inspect the configured resources first.
 
 ```bash
 npm install
 npx wrangler login
-npx wrangler d1 create maison-growth
+bash scripts/inspect-growth-migrations.sh maison-growth-engine
+```
+
+The inspector is read-only and reports migration sentinels from `0001` through `0016`.
+
+For a completely fresh environment only, create the resources explicitly and then update a deployment copy of `wrangler.jsonc` with the returned D1 ID.
+
+```bash
+npx wrangler d1 create maison-growth-engine
 npx wrangler queues create maison-intelligence
 npx wrangler queues create maison-intelligence-dlq
 ```
 
-Copy `wrangler.template.jsonc` to `wrangler.jsonc` and replace `REPLACE_WITH_D1_DATABASE_ID` with the ID returned by Cloudflare.
-
 ## 2. Apply Growth migrations
 
-**Use the helper below only for a fresh, dedicated `maison-growth` database.** It applies the complete Growth schema from A1 through A13 and is not an idempotent upgrade script for an already-initialized database.
+**Use the helper below only for a fresh, dedicated database.** It applies the complete current Growth schema from A1 through the Brain/A12/A14 planning surfaces at migration `0016`. It is not an idempotent upgrade script for an already-initialized database.
 
 ```bash
-bash scripts/apply-growth-migrations.sh maison-growth
+bash scripts/apply-growth-migrations.sh maison-growth-engine
 ```
 
-The A13 migration intentionally leaves its database kill switch ON.
+On an existing database, run the read-only inspector first and apply only reviewed missing migrations. The A13 migration intentionally leaves its database kill switch ON; A14 adds analysis/planning structures but no outbound authority.
 
 ## 3. Configure provider secrets
 
@@ -117,7 +129,7 @@ After verifying bindings, Queue, D1 and provider secrets:
 3. turn off the database kill switch:
 
 ```bash
-npx wrangler d1 execute maison-growth --remote --command \
+npx wrangler d1 execute maison-growth-engine --remote --command \
   "UPDATE external_intelligence_control SET kill_switch=0, observe_only=1, updated_at=datetime('now'), updated_by='human_activation' WHERE control_id='global';"
 ```
 
@@ -198,12 +210,17 @@ The Worker now contains a disabled-by-default internal API for the private Brain
 
 `BRAIN_CONTROL_API_ENABLED=false` by default. `BRAIN_CONTROL_TOKEN` is a secret and is never committed.
 
-Authenticated GET-only routes:
+Authenticated GET-only routes include:
 
 - `/internal/brain/health`
 - `/internal/brain/feed` — A13/A4 evidence for Pre-Brain;
-- `/internal/brain/cash-feedback` — **all** observed A3 economic assessments, with A14 lineage when one exists;
-- `/internal/brain/solutions` — safe solution/economics fields only;
-- `/internal/brain/solution-links` — A4 need↔solution relations, so the Brain reuses canonical fit instead of inventing territory/product links.
+- `/internal/brain/cash-feedback` — observed A3 economic assessments with A14 lineage where available;
+- `/internal/brain/learning` — bounded A11 learning context;
+- `/internal/brain/solutions` and `/internal/brain/solution-links`;
+- `/internal/brain/review-queue`;
+- `/internal/brain/approved-validations`;
+- `/internal/brain/validation-plans`;
+- `/internal/brain/a7-decisions`;
+- `/internal/brain/action-inbox` — the Commercial Action Inbox.
 
-There are no write routes. Responses are `no-store`. Unknown routes remain 404. When deployed outside a private network, put this route behind authenticated HTTPS/Cloudflare Access in addition to the bearer token.
+The Brain Control surface itself has no write routes. Proposal/review-decision writes live behind separate disabled-by-default APIs and separate tokens. Responses are `no-store`; unknown routes remain 404. When deployed outside a private network, put the private Brain route behind authenticated HTTPS/Cloudflare Access in addition to the bearer token.
