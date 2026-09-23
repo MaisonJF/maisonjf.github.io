@@ -10,6 +10,9 @@
     "catalogue_in_stock_is_not_counted_inventory": true,
     "operational_unknowns_remain_null": true,
     "private_inventory_overlay_not_stored_here": true,
+    "structured_service_pricing": true,
+    "multi_format_prices_not_flattened": true,
+    "quote_prices_remain_unknown": true,
     "commercial_pii": false
   },
   "summary": {
@@ -17,7 +20,11 @@
     "active_physical_products": 5,
     "future_products": 2,
     "services": 9,
-    "b2b_services": 1
+    "b2b_services": 1,
+    "fixed_price_services": 5,
+    "multi_format_services": 1,
+    "starting_from_services": 1,
+    "quote_services": 3
   },
   "assets": [
     {
