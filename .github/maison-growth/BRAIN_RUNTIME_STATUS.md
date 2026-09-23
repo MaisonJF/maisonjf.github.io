@@ -34,6 +34,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Runtime Semantic + Osiris context | READY bounded read-only context adapters | DISABLED BY DEFAULT |
 | A5 semantic interpretation | READY existing contract | analysis/runtime activation separate |
 | Oceanos curated context | READY read-only editorial metadata adapter | repository context available |
+| Commercial Asset Context | READY generated catalogue registry + optional evidence-backed private overlay | CATALOGUE READY / PRIVATE STOCK OVERLAY NOT LOADED |
 | Maison Semantic Memory | READY pgvector backend + stable interface + manual D1→pgvector sync | NOT STARTED; pgvector first, Qdrant deferred experiment |
 | Scout | READY | analysis only |
 | Critic | READY | analysis only |
