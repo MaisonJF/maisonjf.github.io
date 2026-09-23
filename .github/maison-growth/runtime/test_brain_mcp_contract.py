@@ -44,7 +44,7 @@ class BrainMCPContractTests(unittest.TestCase):
         self.assertIn("readOnlyHint=True",self.source)
         self.assertIn("destructiveHint=False",self.source)
         self.assertIn('"private_operational_overlay_exposed":False',self.source)
-        self.assertIn('"mcp_experiment_execution_authorized":False',self.source)
+        self.assertIn('result["mcp_experiment_execution_authorized"]=False',self.source)
 
     def test_server_has_no_commercial_write_calls(self):
         forbidden=(
