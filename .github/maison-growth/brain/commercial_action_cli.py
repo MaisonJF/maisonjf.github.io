@@ -56,6 +56,10 @@ def summarize(payload: Mapping[str, Any]) -> dict[str, Any]:
                 "plan_kind": row.get("plan_kind"),
                 "validation_mode": row.get("validation_mode"),
                 "primary_metric_key": row.get("primary_metric_key"),
+                "reason_codes": [
+                    str(x) for x in row.get("reason_codes", [])
+                    if str(x).strip()
+                ] if isinstance(row.get("reason_codes"), list) else [],
             }
             for row in pilots
         ],
