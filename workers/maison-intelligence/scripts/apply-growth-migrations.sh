@@ -17,7 +17,7 @@ files=(
   ".github/maison-growth/a12/migrations/0010_gradual_autonomy_dashboard_v2.sql"
   ".github/maison-growth/a13/migrations/0011_external_intelligence_runtime.sql"
   ".github/maison-growth/a14/migrations/0012_universal_opportunity_earned_distribution.sql"
-  ".github/maison-growth/a14/migrations/0013_a14_bridges_recovery.sql"
+  ".github/maison-growth/a14/migrations/0013_a14_bridges_cash.sql"
 )
 
 for file in "${files[@]}"; do
