@@ -194,7 +194,7 @@ def _economics_policy(explicit: Mapping[str,Any]) -> dict[str,dict[str,dict[str,
     return out
 
 
-def main() -> None:
+def build_observe_output() -> dict[str,Any]:
     base_url=os.environ["BRAIN_CONTROL_API_URL"]
     token=os.environ["BRAIN_CONTROL_TOKEN"]
     client=BrainControlClient(
@@ -275,7 +275,11 @@ def main() -> None:
         "writes_performed":False,
         "execution_authority":False,
     }
-    print(json.dumps(output,ensure_ascii=False,indent=2))
+    return output
+
+
+def main() -> None:
+    print(json.dumps(build_observe_output(),ensure_ascii=False,indent=2))
 
 
 if __name__=="__main__":
