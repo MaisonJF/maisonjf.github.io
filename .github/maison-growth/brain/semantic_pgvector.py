@@ -98,6 +98,14 @@ def provision_pgvector_schema(conn, *, dimensions: int, embedding_model_id: str)
             )
         """)
         cur.execute("""
+            CREATE TABLE IF NOT EXISTS maison_semantic_sync_state(
+              source_key TEXT PRIMARY KEY,
+              after_ts TEXT NULL,
+              after_id TEXT NULL,
+              updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+            )
+        """)
+        cur.execute("""
             CREATE INDEX IF NOT EXISTS idx_maison_semantic_territory
             ON maison_semantic_documents(territory_key,knowledge_type)
         """)
