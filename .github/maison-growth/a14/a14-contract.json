@@ -1,0 +1,80 @@
+{
+  "contract_version": "A14.1",
+  "module": "Universal Opportunity + Earned Distribution",
+  "mode": "analysis_only",
+  "depends_on": [
+    "A1.1",
+    "A3.1",
+    "A4.1",
+    "A5.1",
+    "A7.1",
+    "A8.1",
+    "A11.1",
+    "A12.1",
+    "A13.2"
+  ],
+  "canonical_evidence": "A13/A1/D1",
+  "supporting_memory": {
+    "relational": "Osiris Memory",
+    "curated": "Oceanos",
+    "semantic": "Maison Semantic Memory contract",
+    "analytical": "DuckDB + Polars"
+  },
+  "principles": {
+    "existing_asset_first": true,
+    "unknown_is_not_default": true,
+    "provenance_required_for_scored_inputs": true,
+    "fit_separate_from_economics": true,
+    "amplifier_score_is_contextual": true,
+    "economic_unknowns_remain_null": true,
+    "indirect_distribution_value_not_forced_to_eur": true,
+    "human_review_required_for_outbound_action": true,
+    "parallel_crm_prohibited": true,
+    "public_side_effects": false
+  },
+  "offer_types": [
+    "physical_product",
+    "digital_product",
+    "ebook",
+    "service",
+    "workshop",
+    "experience",
+    "b2b",
+    "wholesale",
+    "white_label",
+    "licensing",
+    "subscription",
+    "bundle",
+    "partnership",
+    "personalisation",
+    "corporate_gifting",
+    "ip_content_licensing",
+    "oracle"
+  ],
+  "activation_strategies": [
+    "zero_cash_story",
+    "pr_editorial",
+    "product_seeding",
+    "affiliate",
+    "revenue_share",
+    "barter",
+    "partnership",
+    "b2b",
+    "observe",
+    "no_action"
+  ],
+  "prohibited": [
+    "autonomous_outreach",
+    "autonomous_email",
+    "autonomous_dm",
+    "autonomous_seeding",
+    "autonomous_affiliate_creation",
+    "autonomous_publication",
+    "autonomous_spend",
+    "price_write",
+    "checkout_write",
+    "catalogue_write",
+    "paid_oracle_content_read",
+    "commercial_pii_replication"
+  ]
+}
