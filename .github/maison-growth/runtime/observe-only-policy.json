@@ -12,7 +12,8 @@
       "spend_authorized": false,
       "public_write_authorized": false,
       "brain_control_api_enabled": false,
-      "brain_proposal_api_enabled": false
+      "brain_proposal_api_enabled": false,
+      "brain_review_decision_enabled": false
     },
     "keyless_observe_candidate": {
       "worker_enabled": true,
@@ -25,7 +26,8 @@
       "public_write_authorized": false,
       "requires_explicit_activation": true,
       "brain_control_api_enabled": false,
-      "brain_proposal_api_enabled": false
+      "brain_proposal_api_enabled": false,
+      "brain_review_decision_enabled": false
     },
     "memory_mirror_candidate": {
       "worker_enabled": true,
@@ -39,7 +41,8 @@
       "requires_https_bridge_smoke_test": true,
       "requires_explicit_activation": true,
       "brain_control_api_enabled": false,
-      "brain_proposal_api_enabled": false
+      "brain_proposal_api_enabled": false,
+      "brain_review_decision_enabled": false
     },
     "private_brain_read_candidate": {
       "worker_enabled": false,
@@ -53,7 +56,8 @@
       "public_write_authorized": false,
       "requires_private_https_access": true,
       "requires_explicit_activation": true,
-      "brain_proposal_api_enabled": false
+      "brain_proposal_api_enabled": false,
+      "brain_review_decision_enabled": false
     },
     "proposal_materialization_candidate": {
       "worker_enabled": false,
@@ -62,6 +66,23 @@
       "osiris_memory_enabled": false,
       "brain_control_api_enabled": true,
       "brain_proposal_api_enabled": true,
+      "model_providers_enabled": [],
+      "outbound_authorized": false,
+      "spend_authorized": false,
+      "public_write_authorized": false,
+      "experiment_execution_authorized": false,
+      "requires_private_https_access": true,
+      "requires_explicit_activation": true,
+      "brain_review_decision_enabled": false
+    },
+    "human_review_decision_candidate": {
+      "worker_enabled": false,
+      "kill_switch": true,
+      "osiris_osint_enabled": false,
+      "osiris_memory_enabled": false,
+      "brain_control_api_enabled": true,
+      "brain_proposal_api_enabled": true,
+      "brain_review_decision_enabled": true,
       "model_providers_enabled": [],
       "outbound_authorized": false,
       "spend_authorized": false,
@@ -79,6 +100,7 @@
     "osiris_mcp_never_exposed_publicly_by_default",
     "memory_bridge_requires_authenticated_https_before_cloud_worker_mirroring",
     "brain_control_api_requires_authenticated_private_https_before_remote_use",
-    "proposal_materialization_never_authorizes_experiment_execution"
+    "proposal_materialization_never_authorizes_experiment_execution",
+    "human_review_approval_scope_is_experiment_planning_only"
   ]
 }
