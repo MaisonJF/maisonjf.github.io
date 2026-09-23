@@ -16,6 +16,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Osiris AI Gateway | READY optional adapter | DISABLED / config+secret required |
 | Osiris Memory write mirror | READY authenticated bridge using Osiris Actions Waist | PRIVATE STACK PREPARED / NOT STARTED |
 | Osiris Memory read context | READY MCP graph_search adapter + smoke profile | NOT STARTED |
+| Maison Brain MCP | READY read-only tools: status/Oceanos/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
 | A1/A13/D1 canonical evidence | READY schema/contracts | D1 NOT PROVISIONED HERE |
 | Persistent observe runtime | READY Docker Compose: pgvector/Postgres + Redis + Osiris + authenticated bridge + healthchecks | NOT STARTED |
 | Pre-Brain | READY analysis core | NOT PROVISIONED |
