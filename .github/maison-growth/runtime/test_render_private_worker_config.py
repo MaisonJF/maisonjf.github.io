@@ -39,6 +39,49 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["OSIRIS_ENABLED"], "false")
         self.assertEqual(vars_["PUBLIC_DATA_ENABLED"], "false")
 
+    def test_private_surface_removes_collection_and_model_bindings(self):
+        cfg = render_private_worker_config(
+            stage_name="private_brain_read_candidate",
+            template=self.live_config,
+        )
+        for key in ("route", "routes", "triggers", "queues", "ai"):
+            self.assertNotIn(key, cfg)
+        self.assertFalse(cfg["workers_dev"])
+        self.assertFalse(cfg["preview_urls"])
+
+    def test_live_private_url_becomes_exact_custom_domain(self):
+        cfg = render_private_worker_config(
+            stage_name="private_brain_read_candidate",
+            template=self.live_config,
+            private_url="https://brain.private.test/",
+        )
+        self.assertEqual(
+            cfg["routes"],
+            [{"pattern": "brain.private.test", "custom_domain": True}],
+        )
+        self.assertFalse(cfg["workers_dev"])
+        self.assertFalse(cfg["preview_urls"])
+        self.assertNotIn("triggers", cfg)
+        self.assertNotIn("queues", cfg)
+        self.assertNotIn("ai", cfg)
+
+    def test_private_url_rejects_http_path_port_query_and_credentials(self):
+        bad = (
+            "http://brain.private.test",
+            "https://brain.private.test/internal",
+            "https://brain.private.test:8443",
+            "https://brain.private.test?x=1",
+            "https://user:pass@brain.private.test",
+        )
+        for value in bad:
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    render_private_worker_config(
+                        stage_name="private_brain_read_candidate",
+                        template=self.live_config,
+                        private_url=value,
+                    )
+
     def test_proposal_stage_adds_only_proposal_surface(self):
         cfg = render_private_worker_config(
             stage_name="proposal_materialization_candidate",
