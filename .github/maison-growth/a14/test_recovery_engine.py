@@ -45,6 +45,7 @@ class RecoveryEngineTests(unittest.TestCase):
             CashOpportunity("opp_x",None,500,3,60,0.8),
             max_days_to_cash=30,max_capital_minor=10000,
             contribution_scale_minor=50000,human_minutes_scale=600,
+            weights={"contribution":.4,"speed":.3,"capital":.2,"human_effort":.1},
         )
         self.assertIsNone(result.priority_score)
         self.assertEqual(result.state,"enrich_data")
@@ -54,6 +55,7 @@ class RecoveryEngineTests(unittest.TestCase):
             CashOpportunity("opp_x",40000,1000,2,60,0.9),
             max_days_to_cash=30,max_capital_minor=10000,
             contribution_scale_minor=50000,human_minutes_scale=600,
+            weights={"contribution":.4,"speed":.3,"capital":.2,"human_effort":.1},
         )
         self.assertGreater(result.priority_score,70)
 
