@@ -58,6 +58,8 @@ Repository/Actions secrets expected by that workflow:
 
 The renderer reuses the canonical Maison Growth D1 binding already versioned in `workers/maison-intelligence/wrangler.jsonc` and hard-locks `WORKER_ENABLED=false`, `KILL_SWITCH=true`, OSIRIS/public sensors/model gateways OFF. The workflow cannot be used to turn collection on.
 
+Before a live apply, the workflow also runs the read-only `scripts/verify-growth-schema.sh` check against `maison-growth-engine`. It references the Brain/A12/A14 planning tables and views with `LIMIT 0`; a missing migration blocks deployment without mutating D1.
+
 ## 1. Private Brain read
 
 Before changing any remote switch:
