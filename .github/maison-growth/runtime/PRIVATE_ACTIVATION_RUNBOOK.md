@@ -44,7 +44,7 @@ docker compose \
 
 ## Optional GitHub deployment gate
 
-After this branch is merged to the default branch, `.github/workflows/maison-private-runtime.yml` can render and dry-run the private Worker configuration without enabling collection. A live apply is manual-only and requires the workflow input `access_boundary_confirmed=true`. The dry-run path does not require the live Brain URL/tokens; those preflight checks run only for an actual apply.
+`.github/workflows/maison-private-runtime.yml` automatically runs a **secret-free dry-run** on relevant pull requests and pushes to `main`, using `private_brain_read_candidate` as the safe default stage. A live apply remains manual-only through `workflow_dispatch`, requires `apply=true` plus `access_boundary_confirmed=true`, and receives Cloudflare/Brain secrets only inside the live-only steps. Automatic CI never receives those repository secrets.
 
 Repository/Actions secrets expected by that workflow:
 
