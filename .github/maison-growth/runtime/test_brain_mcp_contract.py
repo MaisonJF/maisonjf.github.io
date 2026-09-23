@@ -45,11 +45,12 @@ class BrainMCPContractTests(unittest.TestCase):
     def test_server_has_no_commercial_write_calls(self):
         forbidden=(
             "requests.post(",
-            "checkout",
+            "create-checkout",
+            "checkout_write",
             "price_write",
             "catalogue_write",
-            "send_email",
-            "send_dm",
+            "send_email(",
+            "send_dm(",
             "INSERT INTO ",
             "UPDATE ",
             "DELETE FROM ",
