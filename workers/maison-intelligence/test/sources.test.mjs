@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { configuredOsirisSources, PASSIVE_OSIRIS_KEYS, sourceDefinition } from '../src/sources.js';
+import { configuredOsirisSources, PASSIVE_OSIRIS_KEYS, sourceDefinition, osirisSourceCadenceHours, osirisSourceDue } from '../src/sources.js';
 
 test('OSIRIS is disabled by default', () => {
   assert.deepEqual(configuredOsirisSources({}), []);
@@ -28,4 +28,19 @@ test('unknown or active routes cannot enter the passive source registry', () => 
   assert.deepEqual(keys,['earthquakes']);
   assert.equal(sourceDefinition('scanner'),null);
   assert.equal(sourceDefinition('osint_sweep'),null);
+});
+
+
+test('source cadences are explicit, bounded and overridable', () => {
+  assert.equal(osirisSourceCadenceHours({},'news'),3);
+  assert.equal(osirisSourceCadenceHours({},'country_risk'),24);
+  assert.equal(osirisSourceCadenceHours({OSIRIS_SOURCE_CADENCES_JSON:'{"news":12}'},'news'),12);
+  assert.throws(() => osirisSourceCadenceHours({OSIRIS_SOURCE_CADENCES_JSON:'{"news":0}'},'news'));
+});
+
+test('source due calculation is deterministic', () => {
+  const at=new Date('2026-09-24T00:00:00Z');
+  assert.equal(osirisSourceDue({},'news',at),true);
+  assert.equal(osirisSourceDue({},'country_risk',at),true);
+  assert.equal(osirisSourceDue({},'news',new Date('2026-09-24T01:00:00Z')),false);
 });
