@@ -28,6 +28,31 @@
   ],
   "entries": [
     {
+      "id": "maison-commercial-assets-context",
+      "type": "internal_component",
+      "name": "Maison Commercial Asset Context",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "rebuildable commercial catalogue projection plus optional private operational overlay for existing-asset-first reasoning",
+      "sense": "existing products/services/stock/capacity context",
+      "cost": "existing repository data; no API cost",
+      "license": "Maison repo",
+      "self_hosted": true,
+      "depends_on": [
+        "data/products.js",
+        "data/services.js",
+        "optional private overlay"
+      ],
+      "serves": [
+        "Brain",
+        "Scout",
+        "Foundry",
+        "A14"
+      ],
+      "notes": "Generated registry currently derives 5 active physical products, 2 future products, 9 non-B2B services and 1 B2B service. Catalogue availability is not counted inventory. Quantity, costs, packaging, production time, MOQ, shelf life and capacity remain UNKNOWN unless supplied in an evidence-backed private overlay kept outside git."
+    },
+    {
       "id": "maison-semantic-sync",
       "type": "projection_pipeline",
       "name": "Maison Semantic Projection Sync",
@@ -78,7 +103,7 @@
         "Foundry",
         "A14"
       ],
-      "notes": "Optional/manual only. A5 conflicts remain unresolved rather than majority-voted. A3 economics and A11 correlation-only learning are context, not independent evidence. Outputs A14 previews only; writes_performed=false and execution_authority=false."
+      "notes": "Optional/manual only. Uses A5 mappings, Oceanos, commercial catalogue asset context, A3 realised economics, A11 correlation-only learning and optional Semantic/Osiris retrieval. These supporting contexts add no independent evidence roots. A14 output remains preview-only; writes_performed=false and execution_authority=false."
     },
     {
       "id": "maison-brain-control-api",
