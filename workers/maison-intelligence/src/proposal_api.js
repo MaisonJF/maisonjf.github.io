@@ -682,18 +682,30 @@ async function persistA8Draft(env, payload) {
       assert(stored.payload_hash===variant.payload_hash,'a8_existing_variant_payload_drift');
       assert(Number(stored.allocation_basis_points)===variant.allocation_basis_points,'a8_existing_variant_allocation_drift');
     }
+    const state=await first(env,'SELECT * FROM experiment_state_events WHERE state_event_id=?',payload.state.state_event_id);
+    assert(state && state.experiment_version_id===payload.version.experiment_version_id && state.to_state==='draft','a8_existing_state_missing_or_drift');
+    const a7Link=await first(
+      env,
+      'SELECT * FROM a14_validation_plan_a7_links WHERE validation_plan_id=? AND decision_id=?',
+      payload.validation_plan_id,payload.a7_decision_id
+    );
+    assert(a7Link,'a8_existing_a7_link_missing');
+    const a8Link=await first(
+      env,
+      'SELECT * FROM a14_validation_plan_a8_links WHERE validation_plan_id=? AND experiment_version_id=?',
+      payload.validation_plan_id,payload.version.experiment_version_id
+    );
+    assert(a8Link && a8Link.experiment_id===payload.experiment.experiment_id,'a8_existing_a8_link_missing_or_drift');
+    const lineage=await first(
+      env,
+      'SELECT * FROM a14_experiment_links WHERE experiment_version_id=?',
+      payload.version.experiment_version_id
+    );
+    assert(lineage && lineage.experiment_id===payload.experiment.experiment_id,'a8_existing_lineage_missing_or_drift');
     return {inserted:false};
   }
 
   const now=new Date().toISOString();
-  const a7LinkId=await stableId('adl_',{
-    validation_plan_id:payload.validation_plan_id,
-    decision_id:payload.a7_decision_id
-  });
-  const a8LinkId=await stableId('ael_',{
-    validation_plan_id:payload.validation_plan_id,
-    experiment_version_id:payload.version.experiment_version_id
-  });
   const experimentLinkId=await stableId('axl_',{
     validation_plan_id:payload.validation_plan_id,
     experiment_version_id:payload.version.experiment_version_id
