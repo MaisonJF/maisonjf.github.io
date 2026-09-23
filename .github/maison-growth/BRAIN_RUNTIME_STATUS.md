@@ -21,6 +21,8 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Osiris Memory read context | READY MCP graph_search adapter + smoke profile | NOT STARTED |
 | Maison Brain MCP | READY read-only tools: status/Oceanos/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
 | A1/A13/D1 canonical evidence | READY schema/contracts | D1 NOT PROVISIONED HERE |
+| Brain Control API | READY bearer-authenticated GET-only feed/solutions/economics | DISABLED |
+| Canonical observe cycle | READY Pre-Brain→Scout→Critic→Foundry one-shot | OPTIONAL / NOT STARTED |
 | Persistent observe runtime | READY Docker Compose: pgvector/Postgres + Redis + Osiris + authenticated bridge + healthchecks | NOT STARTED |
 | Pre-Brain | READY analysis core | NOT PROVISIONED |
 | DuckDB | READY optional analytical adapter | PACKAGE/HOST NOT PROVISIONED |
