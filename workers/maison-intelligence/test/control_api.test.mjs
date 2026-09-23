@@ -160,3 +160,38 @@ test('invalid pagination is rejected before D1 query', async () => {
   assert.equal(response.status,400);
   assert.equal((await response.json()).error,'invalid_limit');
 });
+
+
+test('learning context remains correlation-only and excludes policy mutation fields', async () => {
+  const e=env((sql)=>{
+    assert.match(sql,/FROM learning_records/);
+    return [{
+      learning_record_id:'lrn_12345678-1234-1234-1234-123456789012',
+      source_kind:'conversion',
+      source_id:'cnv_12345678-1234-1234-1234-123456789012',
+      subject_type:'need',
+      subject_id:'ned_12345678-1234-1234-1234-123456789012',
+      signal_class:'positive',
+      economic_value_minor:2700,
+      ctr_bps:null,
+      confidence_before:60,
+      confidence_after:70,
+      confidence_delta:10,
+      reason_codes_json:'["ECONOMIC_OUTCOME_ABOVE_EXPECTATION"]',
+      evidence_refs_json:'["evd_a"]',
+      correlation_only:1,
+      causal_claim:0,
+      created_at:'2026-09-23T16:00:00.000Z'
+    }];
+  });
+  const response=await handleBrainControlRequest(req('/internal/brain/learning?limit=10'),e);
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.rows[0].correlation_only,true);
+  assert.equal(body.rows[0].causal_claim,false);
+  assert.deepEqual(body.rows[0].reason_codes,['ECONOMIC_OUTCOME_ABOVE_EXPECTATION']);
+  assert.deepEqual(body.rows[0].evidence_refs,['evd_a']);
+  assert.equal('expected_json' in body.rows[0],false);
+  assert.equal('observed_json' in body.rows[0],false);
+  assert.equal('recommendation' in body.rows[0],false);
+});
