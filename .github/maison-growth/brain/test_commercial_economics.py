@@ -78,6 +78,58 @@ class CommercialEconomicsTests(unittest.TestCase):
         self.assertEqual(result["contribution_margin_bps"],9143)
         self.assertTrue(result["manual_validation_ready"])
 
+    def test_multi_format_service_requires_human_selection_from_catalogue_options(self):
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T00:00:00+01:00",
+            "assets":[{
+                "asset_ref":"catalog:service:companhia",
+                "source":"manual_capacity_review",
+                "operational":{
+                    "capacity_units_per_period":5,
+                    "capacity_period":"week",
+                    "human_effort_minutes":60,
+                    "variable_cost_minor":200,
+                    "delivery_lead_days":1,
+                },
+                "evidence_refs":["manual:capacity-review:2026-09-24"],
+            }],
+        }
+        ctx=CommercialAssetContext(self.registry,overlay=overlay)
+
+        unresolved=evaluate_asset(ctx,"catalog:service:companhia")
+        self.assertTrue(unresolved["price_selection_required"])
+        self.assertIn("concrete_price_unknown",unresolved["blockers"])
+
+        selected=evaluate_asset(
+            ctx,
+            "catalog:service:companhia",
+            selected_price_minor=3500,
+        )
+        self.assertFalse(selected["price_selection_required"])
+        self.assertEqual(selected["price_resolution"],"human_selected_catalogue_option")
+        self.assertEqual(selected["unit_contribution_minor"],3300)
+        self.assertTrue(selected["manual_validation_ready"])
+
+        with self.assertRaisesRegex(
+            CommercialEconomicsError,
+            "not_in_catalogue_service_options",
+        ):
+            evaluate_asset(
+                ctx,
+                "catalog:service:companhia",
+                selected_price_minor=4000,
+            )
+
+    def test_starting_from_service_rejects_human_price_below_catalogue_minimum(self):
+        ctx=CommercialAssetContext(self.registry)
+        with self.assertRaisesRegex(CommercialEconomicsError,"below_catalogue_minimum"):
+            evaluate_asset(
+                ctx,
+                "catalog:service:mentoria",
+                selected_price_minor=12000,
+            )
+
     def test_bundle_evaluation_never_selects_price_or_discount(self):
         overlay={
             "schema_version":"commercial_asset_overlay_v1",
