@@ -45,10 +45,11 @@ Verification is separate from status. A tool can be strategically approved while
 | Economic/B2B sensing | Eurostat, INE, BASE.gov.pt |
 | Geographic intelligence | H3, DuckDB Spatial |
 | Causal analysis | DoWhy |
-| Semantic retrieval | Maison Semantic Memory contract; Qdrant/pgvector under evaluation |
-| Relational/agent memory | Osiris Memory; graph engine candidates under evaluation |
+| Semantic retrieval | Maison Semantic Memory contract; **pgvector first runtime backend**, Qdrant retained as experiment |
+| Relational/agent memory | Osiris Memory pinned/private runtime; graph engine candidates only for proven gaps |
 | Model routing | OpenRouter now; LiteLLM later; Osiris AI Gateway optional route |
 | Tool protocol | MCP |
+| Persistent private runtime | PostgreSQL/pgvector + Redis + pinned Osiris Memory + authenticated A13 bridge |
 | Operational integrations | n8n later |
 | Durable cognition/workflows | Cloudflare Workflows/Durable Objects, Hatchet/LangGraph experiments |
 | Discovery | Maison Scout |
@@ -62,24 +63,22 @@ Verification is separate from status. A tool can be strategically approved while
 
 1. **Canonical event/evidence** — A1/A13/D1.
 2. **Curated knowledge** — Oceanos.
-3. **Semantic retrieval projection** — Qdrant/pgvector behind a stable Maison contract.
+3. **Semantic retrieval projection** — pgvector first behind a stable Maison contract; Qdrant remains a reversible experiment.
 4. **Relational/agent/provenance graph** — Osiris Memory / graph layer.
 5. **Operational workflow state** — Cloudflare Workflows/Durable Objects or chosen durable runner.
 6. **Commercial outcome memory** — A3 economics + experiment/outcome attribution.
 
 ## Immediate engineering direction
 
-The next useful organs are not “more AI models”. They are:
+The core analysis organs are now implemented in-repo. The immediate engineering direction is:
 
-- Pre-Brain filtering and local analytics;
-- weak-signal convergence;
-- Scout;
-- Critic;
-- A14 universal Opportunity/Offer/Distribution bridge;
-- commercial Opportunity/Insight attribution and Revenue Per Insight;
-- Content & Product Foundry;
-- safe tool contracts (MCP);
-- low-cost public-source ingestion.
+- validate and smoke-test the private persistent runtime;
+- bring Osiris Memory online privately before any external mirror;
+- use pgvector as the first Semantic Memory backend with pinned multilingual E5 embeddings;
+- keep A13 in observe-only/keyless-first when explicitly activated;
+- feed A13 → Pre-Brain → Scout → Critic → Foundry → A14;
+- close the A3/A11 feedback loop with observed revenue/contribution before trusting forecasts;
+- add more sensors/tools only when they fill a measured capability gap.
 
 ## Files
 
@@ -92,3 +91,10 @@ When a new tool, source or capability is discussed, add it there with decision s
 ## A14 integration rule
 
 A14 does not replace A13, A7, A3, A8, A11 or A12. It is the analysis-only bridge that connects their existing responsibilities. Canonical external evidence stays in A13/A1/D1; Osiris Memory, Oceanos and Maison Semantic Memory remain supporting memories/projections; DuckDB/Polars remain analytical preprocessing rather than the transactional source of truth.
+
+
+## Persistent memory decision
+
+The first private runtime uses PostgreSQL/pgvector + Redis because Osiris Memory already requires that infrastructure. Maison Semantic Memory uses a separate `maison_memory` database on the same PostgreSQL server. The first local embedding provider is `intfloat/multilingual-e5-small`, pinned to a specific revision and 384 dimensions.
+
+Osiris Memory writes from A13 go through an authenticated bridge and Osiris's Actions Waist. Brain reads use the Osiris MCP `graph_search` surface. Direct graph-table writes from Maison integration code are prohibited. PostgreSQL, Redis and MCP remain private/local by default.
