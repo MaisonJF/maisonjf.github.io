@@ -4,7 +4,6 @@ from __future__ import annotations
 import hashlib
 import json
 import sys
-import uuid
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -29,9 +28,7 @@ def _sha(value: Any) -> str:
 
 
 def _stable_id(prefix: str, payload: Any) -> str:
-    digest=_sha(payload)
-    value=uuid.uuid5(uuid.NAMESPACE_URL,f"https://maison-jf.com/a8/{prefix}/{digest}")
-    return prefix+str(value)
+    return prefix+_sha(payload)[:36]
 
 
 def load_a8_policy() -> dict[str,Any]:
