@@ -27,6 +27,16 @@ class BrainControlClientTests(unittest.TestCase):
         self.assertEqual(captured["token"],"top-secret")
         self.assertIn("limit=20",captured["url"])
 
+    def test_learning_route_is_read_only_client_call(self):
+        captured={}
+        def transport(url,**kwargs):
+            captured["url"]=url
+            return {"rows":[]}
+        client=BrainControlClient("https://brain.example","secret",transport=transport)
+        client.learning(limit=15)
+        self.assertIn("/internal/brain/learning",captured["url"])
+        self.assertIn("limit=15",captured["url"])
+
     def test_cloudflare_access_credentials_are_paired(self):
         with self.assertRaises(BrainControlError):
             BrainControlClient(
