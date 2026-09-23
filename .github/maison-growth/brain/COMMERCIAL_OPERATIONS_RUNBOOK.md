@@ -65,7 +65,26 @@ The report keeps **commercial attention** separate from **unit economics**:
 
 The attention score is never treated as a profit forecast.
 
-## 5. Evaluate a human-chosen bundle price
+## 5. Resolve multi-format / starting-from service prices explicitly
+
+The catalogue projection preserves the difference between:
+
+- fixed prices;
+- multi-format prices such as Presença;
+- `a partir de` prices;
+- quote-only services.
+
+The system never silently flattens these into one price. For a multi-format service, pass the exact catalogue option selected by the human operator:
+
+```bash
+python .github/maison-growth/brain/commercial_operator_report.py \
+  --overlay /private/path/maison-commercial-overlay.private.json \
+  --service-price catalog:service:companhia=3500
+```
+
+For `starting_from` services, the human-selected value must be at or above the catalogue minimum. Quote-only services accept a concrete human-approved quote for evaluation. This is calculation only; it does not change the public catalogue.
+
+## 6. Evaluate a human-chosen bundle price
 
 The system never chooses a bundle price or discount. After a human supplies a candidate price, the evaluator can calculate stock feasibility, combined observed cost, difference from catalogue subtotal and contribution.
 
@@ -78,6 +97,6 @@ python .github/maison-growth/brain/commercial_operator_report.py \
 
 A calculation does not authorize publication, checkout, discounting or experiment execution.
 
-## 6. Only then feed facts into validation planning
+## 7. Only then feed facts into validation planning
 
 Once stock/cost/capacity facts are known, they can support A14/A12 manual validation planning. Human review remains the authority boundary. A8 remains draft-only unless a separately governed CTA decision exists.
