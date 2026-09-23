@@ -90,6 +90,7 @@ Available tools:
 
 - `maison_brain_status`
 - `maison_ocean_search`
+- `maison_commercial_asset_search`
 - `maison_osiris_search`
 - `maison_semantic_search`
 
@@ -148,3 +149,14 @@ The one-shot Brain cycle can read Semantic Memory and Osiris Memory, but both sw
 - `MAISON_OSIRIS_CONTEXT_ENABLED=false`
 
 When enabled on the private host, these systems contribute retrieval/context references only. They add **zero independent evidence roots** and never turn similarity or graph proximity into fact.
+
+
+## Commercial Asset Context
+
+`commercial-assets.generated.json` is a deterministic, rebuildable projection of the existing Maison product and service catalogues. It is guarded in CI against drift from `data/products.js` and `data/services.js`.
+
+The generated registry records known catalogue facts such as product/service identity, public price where machine-readable, lifecycle status and catalogue availability. It deliberately keeps operational fields null/UNKNOWN.
+
+The optional private overlay contract is `commercial-asset-overlay.schema.json`. An operator may keep a matching JSON file **outside git** and point `MAISON_COMMERCIAL_ASSET_OVERLAY_PATH` to it. Any known operational value requires an evidence reference. Catalogue `in_stock` never becomes counted inventory.
+
+The general Maison Brain MCP tool `maison_commercial_asset_search` does **not** load or expose the private overlay; it returns catalogue-derived context only.
