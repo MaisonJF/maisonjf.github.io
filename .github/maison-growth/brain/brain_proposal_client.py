@@ -82,3 +82,6 @@ class BrainProposalClient:
             "/internal/proposals/validation-plan",
             {"schema":"maison.a14-validation-plan.v1","plan":dict(plan)},
         )
+
+    def persist_a8_draft(self, payload: Mapping[str,Any]) -> Mapping[str,Any]:
+        return self._post("/internal/proposals/a8-draft",payload)
