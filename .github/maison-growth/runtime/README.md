@@ -80,3 +80,26 @@ docker compose \
 ```
 
 The Brain client is pinned to MCP Python SDK `1.28.1`, matching the minimum version declared by the pinned Osiris source. Read context uses `graph_search(query, project, max_depth)`; retrieval rank is context relevance, never evidence confidence.
+
+
+## Maison Brain MCP — read-only tool port
+
+The optional `brain-mcp` profile exposes a local MCP endpoint on `127.0.0.1:8792/mcp` (or the configured host port). It is deliberately **read-only**.
+
+Available tools:
+
+- `maison_brain_status`
+- `maison_ocean_search`
+- `maison_osiris_search`
+- `maison_semantic_search`
+
+There are no tools for outreach, email/DM, publication, catalogue, price, checkout or spend.
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile brain-mcp up -d brain-mcp
+```
+
+This profile is not part of the default stack and is not started by repository changes.
