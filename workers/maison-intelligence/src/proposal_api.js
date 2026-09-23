@@ -168,6 +168,37 @@ function validateMatch(row, offerIds) {
   assert(typeof row.created_at==='string' && !Number.isNaN(Date.parse(row.created_at)),'invalid_distribution_created_at');
 }
 
+function validateValidationPlan(row) {
+  assert(row && typeof row==='object' && !Array.isArray(row),'invalid_validation_plan');
+  assertId(row.validation_plan_id,'vpl_','invalid_validation_plan_id');
+  assertId(row.review_resolution_id,'rvr_','invalid_review_resolution_id');
+  assertId(row.opportunity_id,'opp_','invalid_validation_opportunity_id');
+  assertId(row.offer_hypothesis_id,'ofh_','invalid_validation_offer_id');
+  const kinds=new Set([
+    'a8_cta_existing_solution','manual_b2b_pilot','manual_service_pilot',
+    'manual_physical_pilot','manual_distribution_pilot','manual_validation'
+  ]);
+  assert(kinds.has(row.plan_kind),'invalid_validation_plan_kind');
+  if (row.existing_solution_id != null) assertId(row.existing_solution_id,'sol_','invalid_validation_solution_id');
+  assert(row.a7_decision_id == null,'validation_a7_decision_must_start_null');
+  assert(row.a8_experiment_id == null,'validation_a8_experiment_must_start_null');
+  assert(typeof row.hypothesis==='string' && row.hypothesis.trim().length>=10 && row.hypothesis.length<=1000,'invalid_validation_hypothesis');
+  assert(row.validation_mode == null || (typeof row.validation_mode==='string' && row.validation_mode.length<=200),'invalid_validation_mode');
+  assert(row.primary_metric_key == null || ['economic_value_per_eligible_session','cta_click_rate','conversion_rate'].includes(row.primary_metric_key),'invalid_validation_metric');
+  assertStringArray(row.evidence_refs,'invalid_validation_evidence');
+  assertStringArray(row.reason_codes,'invalid_validation_reasons');
+  assert(['planning','blocked_needs_a7_decision','ready_for_a8_draft','manual_pilot_required','rejected'].includes(row.state),'invalid_validation_state');
+  assert(row.public_write_authorized===false,'validation_public_write_forbidden');
+  assert(row.outbound_authorized===false,'validation_outbound_forbidden');
+  assert(row.spend_authorized===false,'validation_spend_forbidden');
+  assert(row.experiment_execution_authorized===false,'validation_experiment_execution_forbidden');
+  assert(typeof row.created_at==='string' && !Number.isNaN(Date.parse(row.created_at)),'invalid_validation_created_at');
+  if (row.plan_kind==='a8_cta_existing_solution') {
+    assert(row.existing_solution_id != null,'a8_validation_requires_existing_solution');
+    assert(row.state==='blocked_needs_a7_decision','a8_validation_must_wait_for_a7');
+  }
+}
+
 function validateReview(row, opportunityId, offerIds) {
   assert(row && typeof row==='object' && !Array.isArray(row),'invalid_a12_review');
   assert(row.opportunity_id===opportunityId,'review_opportunity_mismatch');
@@ -246,6 +277,52 @@ function semanticMatch(row) {
     known_dimensions:row.known_dimensions ?? [], unknown_dimensions:row.unknown_dimensions ?? [],
     evidence_refs:row.evidence_refs ?? [], economics:row.economics ?? {},
     recommended_strategy:row.recommended_strategy, recommendation_state:row.recommendation_state
+  };
+}
+
+function storedValidationPlan(row) {
+  return {
+    validation_plan_id:row.validation_plan_id,
+    review_resolution_id:row.review_resolution_id,
+    opportunity_id:row.opportunity_id,
+    offer_hypothesis_id:row.offer_hypothesis_id,
+    plan_kind:row.plan_kind,
+    existing_solution_id:row.existing_solution_id,
+    a7_decision_id:row.a7_decision_id,
+    a8_experiment_id:row.a8_experiment_id,
+    hypothesis:row.hypothesis,
+    validation_mode:row.validation_mode,
+    primary_metric_key:row.primary_metric_key,
+    evidence_refs:JSON.parse(row.evidence_refs_json),
+    reason_codes:JSON.parse(row.reason_codes_json),
+    state:row.state,
+    public_write_authorized:Boolean(row.public_write_authorized),
+    outbound_authorized:Boolean(row.outbound_authorized),
+    spend_authorized:Boolean(row.spend_authorized),
+    experiment_execution_authorized:Boolean(row.experiment_execution_authorized)
+  };
+}
+
+function semanticValidationPlan(row) {
+  return {
+    validation_plan_id:row.validation_plan_id,
+    review_resolution_id:row.review_resolution_id,
+    opportunity_id:row.opportunity_id,
+    offer_hypothesis_id:row.offer_hypothesis_id,
+    plan_kind:row.plan_kind,
+    existing_solution_id:row.existing_solution_id ?? null,
+    a7_decision_id:null,
+    a8_experiment_id:null,
+    hypothesis:row.hypothesis,
+    validation_mode:row.validation_mode ?? null,
+    primary_metric_key:row.primary_metric_key ?? null,
+    evidence_refs:row.evidence_refs ?? [],
+    reason_codes:row.reason_codes ?? [],
+    state:row.state,
+    public_write_authorized:false,
+    outbound_authorized:false,
+    spend_authorized:false,
+    experiment_execution_authorized:false
   };
 }
 
@@ -389,6 +466,62 @@ async function reviewStatements(env, opportunity, reviews, now) {
   return {inserts,links};
 }
 
+async function persistValidationPlan(env, plan) {
+  const byId=await first(env,'SELECT * FROM a14_validation_plans WHERE validation_plan_id=?',plan.validation_plan_id);
+  const byReview=await first(env,'SELECT * FROM a14_validation_plans WHERE review_resolution_id=?',plan.review_resolution_id);
+  const existing=byId || byReview;
+  if (existing) {
+    assert(canonical(storedValidationPlan(existing))===canonical(semanticValidationPlan(plan)),'validation_plan_payload_drift');
+    return {inserted:false};
+  }
+
+  const source=await first(env,`
+    SELECT
+      r.review_resolution_id,r.decision,r.approved_scope,
+      r.public_write_authorized,r.outbound_authorized,r.spend_authorized,
+      r.experiment_execution_authorized,g.opportunity_id,
+      json_extract(a.result_json,'$.offer_hypothesis_id') AS offer_hypothesis_id,
+      h.existing_solution_id,h.validation_mode,h.offer_type
+    FROM autonomy_human_review_resolutions r
+    JOIN autonomy_action_log a ON a.action_id=r.action_id
+    JOIN a14_governance_links g ON g.action_id=r.action_id
+    JOIN opportunity_offer_hypotheses h
+      ON h.offer_hypothesis_id=json_extract(a.result_json,'$.offer_hypothesis_id')
+    WHERE r.review_resolution_id=?
+  `,plan.review_resolution_id);
+  assert(source,'approved_review_resolution_not_found');
+  assert(source.decision==='approved','validation_plan_requires_approved_review');
+  assert(source.approved_scope==='experiment_planning_only','validation_plan_requires_planning_scope');
+  assert(Number(source.public_write_authorized)===0,'validation_review_public_write_drift');
+  assert(Number(source.outbound_authorized)===0,'validation_review_outbound_drift');
+  assert(Number(source.spend_authorized)===0,'validation_review_spend_drift');
+  assert(Number(source.experiment_execution_authorized)===0,'validation_review_execution_drift');
+  assert(source.opportunity_id===plan.opportunity_id,'validation_opportunity_mismatch');
+  assert(source.offer_hypothesis_id===plan.offer_hypothesis_id,'validation_offer_mismatch');
+  assert((source.existing_solution_id ?? null)===(plan.existing_solution_id ?? null),'validation_existing_solution_mismatch');
+  assert((source.validation_mode ?? null)===(plan.validation_mode ?? null),'validation_mode_mismatch');
+
+  await env.GROWTH_DB.batch([
+    env.GROWTH_DB.prepare(`
+      INSERT INTO a14_validation_plans(
+        validation_plan_id,review_resolution_id,opportunity_id,offer_hypothesis_id,
+        plan_kind,existing_solution_id,a7_decision_id,a8_experiment_id,hypothesis,
+        validation_mode,primary_metric_key,evidence_refs_json,reason_codes_json,state,
+        public_write_authorized,outbound_authorized,spend_authorized,
+        experiment_execution_authorized,created_at
+      ) VALUES(?,?,?,?,?,?,NULL,NULL,?,?,?,?,?,?,0,0,0,0,?)
+    `).bind(
+      plan.validation_plan_id,plan.review_resolution_id,plan.opportunity_id,
+      plan.offer_hypothesis_id,plan.plan_kind,plan.existing_solution_id ?? null,
+      plan.hypothesis,plan.validation_mode ?? null,plan.primary_metric_key ?? null,
+      JSON.stringify(plan.evidence_refs ?? []),JSON.stringify(plan.reason_codes ?? []),
+      plan.state,plan.created_at
+    )
+  ]);
+  return {inserted:true};
+}
+
+
 export async function handleBrainProposalRequest(request, env) {
   const url=new URL(request.url);
   if (!url.pathname.startsWith('/internal/proposals/')) return null;
@@ -396,7 +529,9 @@ export async function handleBrainProposalRequest(request, env) {
   if (!env.BRAIN_PROPOSAL_TOKEN) return json({error:'proposal_api_misconfigured'},503);
   if (!constantTimeEqual(bearer(request),env.BRAIN_PROPOSAL_TOKEN)) return json({error:'unauthorized'},401);
   if (request.method!=='POST') return json({error:'method_not_allowed'},405);
-  if (url.pathname!=='/internal/proposals/a14') return json({error:'not_found'},404);
+  if (!['/internal/proposals/a14','/internal/proposals/validation-plan'].includes(url.pathname)) {
+    return json({error:'not_found'},404);
+  }
 
   try {
     const type=request.headers.get('content-type') || '';
@@ -407,6 +542,23 @@ export async function handleBrainProposalRequest(request, env) {
     assert(new TextEncoder().encode(raw).length<=MAX_BODY_BYTES,'proposal_body_too_large');
     const payload=JSON.parse(raw);
     privacyScan(payload);
+
+    if (url.pathname==='/internal/proposals/validation-plan') {
+      assert(payload?.schema==='maison.a14-validation-plan.v1','unsupported_validation_plan_schema');
+      validateValidationPlan(payload.plan);
+      const result=await persistValidationPlan(env,payload.plan);
+      return json({
+        stored:true,
+        idempotent:!result.inserted,
+        validation_plan_id:payload.plan.validation_plan_id,
+        plan_kind:payload.plan.plan_kind,
+        state:payload.plan.state,
+        public_write_authorized:false,
+        outbound_authorized:false,
+        spend_authorized:false,
+        experiment_execution_authorized:false
+      });
+    }
 
     assert(payload?.schema==='maison.a14-materialize.v1','unsupported_proposal_schema');
     validateOpportunity(payload.opportunity);
