@@ -101,6 +101,7 @@
     "memory_bridge_requires_authenticated_https_before_cloud_worker_mirroring",
     "brain_control_api_requires_authenticated_private_https_before_remote_use",
     "proposal_materialization_never_authorizes_experiment_execution",
-    "human_review_approval_scope_is_experiment_planning_only"
+    "human_review_approval_scope_is_experiment_planning_only",
+    "a8_draft_materialization_stops_at_draft_without_public_execution"
   ]
 }
