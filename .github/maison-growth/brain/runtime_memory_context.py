@@ -76,7 +76,7 @@ def _semantic_context(
                 hits=reader.search(
                     query,
                     limit=limit,
-                    filters={"privacy_class":"public"},
+                    filters={},
                 )
                 _merge(out,territory,tuple(f"semantic:{hit.document_id}" for hit in hits))
     except Exception as exc:
