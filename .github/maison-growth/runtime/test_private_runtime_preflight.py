@@ -59,7 +59,7 @@ class PrivateRuntimePreflightTests(unittest.TestCase):
     def test_remote_http_is_blocked(self):
         code, payload = run(
             "private_brain_read_candidate",
-            "BRAIN_CONTROL_API_URL=http://brain.example\n"
+            "BRAIN_CONTROL_API_URL=http://brain.private.test\n"
             "BRAIN_CONTROL_TOKEN=control_token_abcdefghijklmnopqrstuvwxyz\n",
         )
         self.assertEqual(code, 2)
