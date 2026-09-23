@@ -1,0 +1,1183 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-09-23",
+  "authority": "Maison JF Technology Ledger",
+  "rule": "If it is not recorded here, it has not entered the Maison project.",
+  "statuses": [
+    "AGORA",
+    "DEPOIS",
+    "EXPERIÊNCIA",
+    "REJEITADO"
+  ],
+  "verification_states": [
+    "VERIFIED_IN_REPO",
+    "PARTIALLY_VERIFIED",
+    "PENDING_VERIFICATION",
+    "REJECTED_NO_VERIFY"
+  ],
+  "principles": [
+    "free_open_source_self_hosted_public_data_first",
+    "paid_requires_unique_capability_or_roi",
+    "external_systems_are_sensors_or_tools_not_authority",
+    "a13_d1_provenance_remains_canonical_for_external_evidence",
+    "derived_indexes_should_be_rebuildable",
+    "semantic_similarity_is_not_independent_evidence",
+    "a12_is_central_autonomy_risk_and_human_approval_policy",
+    "public_availability_does_not_equal_reuse_permission"
+  ],
+  "entries": [
+    {
+      "id": "maison-a13",
+      "type": "internal_component",
+      "name": "A13 External Intelligence Mesh",
+      "status": "AGORA",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "canonical external sensing/provenance/privacy/echo-control pipeline",
+      "sense": "trusted ingestion",
+      "cost": "existing Maison infrastructure",
+      "license": "Maison repo",
+      "self_hosted": true,
+      "depends_on": [
+        "A1",
+        "A4",
+        "A5"
+      ],
+      "serves": [
+        "Brain",
+        "Oceanos",
+        "Scout"
+      ],
+      "notes": "External outputs remain untrusted observations; no public-write authority."
+    },
+    {
+      "id": "maison-a12",
+      "type": "internal_component",
+      "name": "A12 Gradual Autonomy",
+      "status": "AGORA",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "risk, autonomy, human approval, kill switches and audit",
+      "sense": "control",
+      "cost": "existing",
+      "license": "Maison repo",
+      "self_hosted": true,
+      "depends_on": [],
+      "serves": [
+        "all agents",
+        "workflows"
+      ],
+      "notes": "Central policy; do not duplicate governance inside every framework."
+    },
+    {
+      "id": "maison-a3-a7-a8-a11",
+      "type": "internal_component",
+      "name": "Commercial learning chain A3+A7+A8+A11",
+      "status": "AGORA",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "economics, commercial candidates, experiments and learning",
+      "sense": "commercial feedback",
+      "cost": "existing",
+      "license": "Maison repo",
+      "self_hosted": true,
+      "depends_on": [
+        "A1"
+      ],
+      "serves": [
+        "Revenue Engine",
+        "Scout"
+      ],
+      "notes": "Needs explicit bridge from insight/opportunity to experiment to realised revenue."
+    },
+    {
+      "id": "osiris-osint",
+      "type": "sensor",
+      "name": "OSIRIS OSINT",
+      "status": "AGORA",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "passive public-world sensor mesh",
+      "sense": "world sensing",
+      "cost": "target zero/keyless passive feeds",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": false,
+      "depends_on": [
+        "A13"
+      ],
+      "serves": [
+        "A13",
+        "Brain",
+        "Oceanos",
+        "Scout"
+      ],
+      "notes": "Passive allowlist only. Active scanning/recon excluded. Per-source cadence must be tuned before activation."
+    },
+    {
+      "id": "osiris-memory",
+      "type": "memory",
+      "name": "Osiris Memory",
+      "status": "AGORA",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "persistent relational/agent/provenance memory",
+      "sense": "relational memory",
+      "cost": "software target open/self-hosted; host resources required",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [
+        "PostgreSQL",
+        "Redis",
+        "private authenticated bridge"
+      ],
+      "serves": [
+        "agents",
+        "Brain"
+      ],
+      "notes": "Projection/enrichment, not replacement for canonical A13/D1 evidence. Never expose local MCP directly."
+    },
+    {
+      "id": "openrouter",
+      "type": "model_gateway",
+      "name": "OpenRouter",
+      "status": "AGORA",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "multi-model gateway/fallback route",
+      "sense": "model diversity",
+      "cost": "free models plus paid models depending route",
+      "license": "hosted service",
+      "self_hosted": false,
+      "depends_on": [
+        "API key"
+      ],
+      "serves": [
+        "A13",
+        "future router"
+      ],
+      "notes": "Already has branch adapter; ungrounded by default unless citations are independently sourced."
+    },
+    {
+      "id": "osiris-ai-gateway",
+      "type": "model_gateway",
+      "name": "Osiris AI Gateway",
+      "status": "EXPERIÊNCIA",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "optional OpenAI-compatible alternate model route",
+      "sense": "provider redundancy",
+      "cost": "PENDING_VERIFICATION",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": false,
+      "depends_on": [
+        "API key",
+        "model availability"
+      ],
+      "serves": [
+        "model routing"
+      ],
+      "notes": "Do not chain as mandatory proxy between LiteLLM and OpenRouter; use as parallel route if retained."
+    },
+    {
+      "id": "litellm",
+      "type": "model_gateway",
+      "name": "LiteLLM",
+      "status": "DEPOIS",
+      "verification": "PENDING_VERIFICATION",
+      "role": "stable Maison model aliases, budgets, routing and fallbacks across direct/gateway/local models",
+      "sense": "model abstraction",
+      "cost": "open-source software; hosting required",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [
+        "runtime host"
+      ],
+      "serves": [
+        "Brain",
+        "agents"
+      ],
+      "notes": "Value rises when Maison combines direct providers, OpenRouter, optional Osiris route and local models."
+    },
+    {
+      "id": "mcp",
+      "type": "protocol",
+      "name": "Model Context Protocol (MCP)",
+      "status": "AGORA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "stable allowlisted tool contract between Brain/agents and Maison systems",
+      "sense": "tool use",
+      "cost": "protocol/open tooling",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [
+        "scoped auth",
+        "A12 gates"
+      ],
+      "serves": [
+        "Brain",
+        "Scout",
+        "Critic",
+        "Foundry"
+      ],
+      "notes": "Initial tools should be read-only; write tools require A12 policy and explicit capability scopes."
+    },
+    {
+      "id": "duckdb",
+      "type": "analytics",
+      "name": "DuckDB",
+      "status": "AGORA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "local analytical SQL/pre-LLM aggregation",
+      "sense": "large-volume local analysis",
+      "cost": "0 software cost",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [],
+      "serves": [
+        "Pre-Brain",
+        "Scout"
+      ],
+      "notes": "Candidate for cheap aggregation before LLM invocation."
+    },
+    {
+      "id": "polars",
+      "type": "analytics",
+      "name": "Polars",
+      "status": "AGORA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "fast local dataframe/transformation engine",
+      "sense": "preprocessing",
+      "cost": "0 software cost",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [],
+      "serves": [
+        "Pre-Brain"
+      ],
+      "notes": "Use with DuckDB where each is strongest; avoid duplicate transforms."
+    },
+    {
+      "id": "gliner",
+      "type": "local_model",
+      "name": "GLiNER",
+      "status": "AGORA",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "local zero-shot entity extraction",
+      "sense": "concept recognition",
+      "cost": "0 software/model cost plus compute",
+      "license": "reported Apache-2.0; verify exact selected model",
+      "self_hosted": true,
+      "depends_on": [
+        "Python/model runtime"
+      ],
+      "serves": [
+        "Pre-Brain",
+        "knowledge graph",
+        "Scout",
+        "Oráculo analytics"
+      ],
+      "notes": "Entity extraction creates hypotheses/structure, not truth."
+    },
+    {
+      "id": "ruptures",
+      "type": "analytics",
+      "name": "Ruptures",
+      "status": "AGORA",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "change-point detection in time series",
+      "sense": "detect trend regime changes",
+      "cost": "0 software cost",
+      "license": "reported BSD-2-Clause",
+      "self_hosted": true,
+      "depends_on": [
+        "time-series history"
+      ],
+      "serves": [
+        "Pre-Brain",
+        "Scout"
+      ],
+      "notes": "Signal generator, not autonomous commercial decision."
+    },
+    {
+      "id": "clustering",
+      "type": "analytics",
+      "name": "BERTopic / HDBSCAN-class clustering",
+      "status": "EXPERIÊNCIA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "discover emerging clusters/topics before labels exist",
+      "sense": "weak-signal topic discovery",
+      "cost": "0 software cost plus compute",
+      "license": "verify selected packages/models",
+      "self_hosted": true,
+      "depends_on": [
+        "embeddings or text features"
+      ],
+      "serves": [
+        "Scout",
+        "PÁRA DE IGNORAR!",
+        "Oráculo"
+      ],
+      "notes": "Evaluate multilingual PT/ES/EN performance and operational cost."
+    },
+    {
+      "id": "dowhy",
+      "type": "analytics",
+      "name": "DoWhy",
+      "status": "DEPOIS",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "causal-inference framework for testing hypotheses",
+      "sense": "causal doubt",
+      "cost": "0 software cost",
+      "license": "reported MIT",
+      "self_hosted": true,
+      "depends_on": [
+        "good observational/experimental data"
+      ],
+      "serves": [
+        "Scout",
+        "experiments",
+        "Revenue Engine"
+      ],
+      "notes": "Cannot manufacture causality from weak data; use mainly after enough measurements exist."
+    },
+    {
+      "id": "crawl4ai",
+      "type": "web_sensor",
+      "name": "Crawl4AI",
+      "status": "AGORA",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "local public-web reading/extraction into clean text",
+      "sense": "web reading",
+      "cost": "0 software cost plus compute/network",
+      "license": "reported Apache-2.0; verify release",
+      "self_hosted": true,
+      "depends_on": [
+        "browser/runtime where needed"
+      ],
+      "serves": [
+        "Scout",
+        "Oceanos",
+        "Foundry",
+        "competitive intelligence"
+      ],
+      "notes": "Respect robots, terms, rate limits and copyright; public readability != reuse rights."
+    },
+    {
+      "id": "rsshub",
+      "type": "web_sensor",
+      "name": "RSSHub",
+      "status": "AGORA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "normalize many changing public sources into feeds",
+      "sense": "continuous listening",
+      "cost": "0 software cost plus hosting",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [
+        "runtime host"
+      ],
+      "serves": [
+        "A13",
+        "Scout",
+        "trend sensing"
+      ],
+      "notes": "Route/source terms still apply."
+    },
+    {
+      "id": "changedetection",
+      "type": "web_sensor",
+      "name": "changedetection.io",
+      "status": "AGORA",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "watch public pages for price/copy/catalogue/stock changes",
+      "sense": "competitive change memory",
+      "cost": "0 self-hosted software cost plus hosting",
+      "license": "reported Apache-2.0",
+      "self_hosted": true,
+      "depends_on": [
+        "Docker/runtime"
+      ],
+      "serves": [
+        "Scout",
+        "competitive intelligence"
+      ],
+      "notes": "Use public pages and conservative polling."
+    },
+    {
+      "id": "faster-whisper",
+      "type": "audio",
+      "name": "Faster-Whisper",
+      "status": "AGORA",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "local transcription of lawful public audio/video sources",
+      "sense": "hearing",
+      "cost": "0 software/model cost plus compute",
+      "license": "reported MIT",
+      "self_hosted": true,
+      "depends_on": [
+        "CPU/GPU depending model"
+      ],
+      "serves": [
+        "Scout",
+        "Oceanos",
+        "PÁRA DE IGNORAR!",
+        "Foundry"
+      ],
+      "notes": "Transcription rights and source terms must be respected; do not archive copyrighted bodies unnecessarily."
+    },
+    {
+      "id": "yamnet",
+      "type": "audio",
+      "name": "YAMNet-class audio event classification",
+      "status": "EXPERIÊNCIA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "classify non-speech aggregate sound events",
+      "sense": "ambient hearing",
+      "cost": "0 model cost plus compute",
+      "license": "verify exact model/package",
+      "self_hosted": true,
+      "depends_on": [
+        "audio source rights"
+      ],
+      "serves": [
+        "future physical-world sensing"
+      ],
+      "notes": "Low current commercial priority."
+    },
+    {
+      "id": "local-vlm",
+      "type": "vision",
+      "name": "Florence-2 / Moondream-class local VLM",
+      "status": "EXPERIÊNCIA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "extract aesthetic/packaging/product-image descriptions",
+      "sense": "visual semantics",
+      "cost": "0 model cost plus compute",
+      "license": "verify exact model checkpoint",
+      "self_hosted": true,
+      "depends_on": [
+        "CPU/GPU",
+        "lawful image source"
+      ],
+      "serves": [
+        "Scout",
+        "product design",
+        "competitive intelligence"
+      ],
+      "notes": "Evaluate model-specific commercial licence before choosing."
+    },
+    {
+      "id": "aggregate-cv",
+      "type": "vision",
+      "name": "Aggregate people/queue/occupancy CV detector",
+      "status": "EXPERIÊNCIA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "anonymous counts/flow/occupancy from permitted public imagery",
+      "sense": "aggregate physical-space observation",
+      "cost": "target open/local; compute required",
+      "license": "select permissive commercial-safe implementation",
+      "self_hosted": true,
+      "depends_on": [
+        "camera/feed permission",
+        "privacy policy"
+      ],
+      "serves": [
+        "Scout",
+        "B2B",
+        "geospatial intelligence"
+      ],
+      "notes": "No facial recognition, person identity, re-identification or cross-camera tracking."
+    },
+    {
+      "id": "ultralytics-yolo",
+      "type": "vision",
+      "name": "Ultralytics YOLO",
+      "status": "REJEITADO",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "object detection candidate",
+      "sense": "computer vision",
+      "cost": "commercial/private licensing concern",
+      "license": "AGPL/enterprise licensing model",
+      "self_hosted": true,
+      "depends_on": [],
+      "serves": [],
+      "notes": "Rejected for now because Maison needs a permissive commercial-safe CV path without unwanted copyleft/enterprise licence dependency."
+    },
+    {
+      "id": "openalex",
+      "type": "data_source",
+      "name": "OpenAlex",
+      "status": "AGORA",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "scientific literature/knowledge graph sensing",
+      "sense": "emerging science",
+      "cost": "free allowance/snapshot; current limits must be checked before production",
+      "license": "open data terms; exact reuse fields must be respected",
+      "self_hosted": "snapshot possible",
+      "depends_on": [
+        "API or snapshot pipeline"
+      ],
+      "serves": [
+        "Scout",
+        "Oceanos",
+        "Foundry"
+      ],
+      "notes": "Do not treat as universal patent database."
+    },
+    {
+      "id": "pubchem",
+      "type": "data_source",
+      "name": "PubChem",
+      "status": "DEPOIS",
+      "verification": "PENDING_VERIFICATION",
+      "role": "chemical/compound reference data",
+      "sense": "ingredient science",
+      "cost": "public API/data",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": "subset possible",
+      "depends_on": [],
+      "serves": [
+        "product research",
+        "Foundry"
+      ],
+      "notes": "Scientific reference; never automatic safety/medical claim authority."
+    },
+    {
+      "id": "cosing",
+      "type": "data_source",
+      "name": "EU CosIng",
+      "status": "DEPOIS",
+      "verification": "PENDING_VERIFICATION",
+      "role": "EU cosmetic ingredient reference",
+      "sense": "regulatory ingredient context",
+      "cost": "public source",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": false,
+      "depends_on": [],
+      "serves": [
+        "physical product research"
+      ],
+      "notes": "Use official EU source as reference; legal/compliance review remains separate."
+    },
+    {
+      "id": "open-beauty-facts",
+      "type": "data_source",
+      "name": "Open Beauty Facts",
+      "status": "EXPERIÊNCIA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "open collaborative product/ingredient observations",
+      "sense": "market ingredient observation",
+      "cost": "public/open dataset",
+      "license": "verify database/content licences and attribution",
+      "self_hosted": "dump possible",
+      "depends_on": [],
+      "serves": [
+        "Scout",
+        "product research"
+      ],
+      "notes": "Crowdsourced data quality must be scored; never infer product safety solely from it."
+    },
+    {
+      "id": "gutenberg",
+      "type": "editorial_source",
+      "name": "Project Gutenberg",
+      "status": "AGORA",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "public-domain historical text corpus",
+      "sense": "historical/editorial memory",
+      "cost": "0",
+      "license": "work-specific public-domain status; territorial check required",
+      "self_hosted": "downloads possible",
+      "depends_on": [
+        "copyright filter"
+      ],
+      "serves": [
+        "Foundry",
+        "Oceanos"
+      ],
+      "notes": "US public-domain status is not automatically enough for Portugal/EU reuse."
+    },
+    {
+      "id": "standard-ebooks",
+      "type": "editorial_source",
+      "name": "Standard Ebooks",
+      "status": "AGORA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "clean editions of public-domain works",
+      "sense": "editorial memory",
+      "cost": "0",
+      "license": "work/edition-specific terms must be checked",
+      "self_hosted": "downloads possible",
+      "depends_on": [
+        "copyright filter"
+      ],
+      "serves": [
+        "Foundry"
+      ],
+      "notes": "Verify text, typography/assets and territorial rights separately."
+    },
+    {
+      "id": "internet-archive",
+      "type": "editorial_source",
+      "name": "Internet Archive",
+      "status": "AGORA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "historical books/media discovery and archival research",
+      "sense": "historical memory",
+      "cost": "0 access for many holdings",
+      "license": "item-specific; online availability != reuse permission",
+      "self_hosted": false,
+      "depends_on": [
+        "rights metadata/filter"
+      ],
+      "serves": [
+        "Foundry",
+        "Oceanos"
+      ],
+      "notes": "Only ingest/reuse items whose rights permit intended Maison use."
+    },
+    {
+      "id": "europeana",
+      "type": "editorial_source",
+      "name": "Europeana",
+      "status": "DEPOIS",
+      "verification": "PENDING_VERIFICATION",
+      "role": "European cultural heritage discovery/API",
+      "sense": "cultural memory",
+      "cost": "public/open access paths",
+      "license": "item-specific rights statements",
+      "self_hosted": false,
+      "depends_on": [
+        "rights filter"
+      ],
+      "serves": [
+        "Foundry",
+        "brand/cultural research"
+      ],
+      "notes": "High value for visual/historical products if rights metadata is preserved."
+    },
+    {
+      "id": "wikisource",
+      "type": "editorial_source",
+      "name": "Wikisource",
+      "status": "DEPOIS",
+      "verification": "PENDING_VERIFICATION",
+      "role": "structured public-domain/free-text corpus",
+      "sense": "historical/editorial memory",
+      "cost": "0",
+      "license": "work/page specific; verify",
+      "self_hosted": "dumps possible",
+      "depends_on": [
+        "rights filter"
+      ],
+      "serves": [
+        "Foundry"
+      ],
+      "notes": "Preserve source/provenance."
+    },
+    {
+      "id": "typst-pandoc",
+      "type": "publishing",
+      "name": "Typst + Pandoc",
+      "status": "AGORA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "compile Maison manuscripts into PDF/EPUB and other artefacts",
+      "sense": "product manufacturing",
+      "cost": "0 software cost",
+      "license": "verify current packages",
+      "self_hosted": true,
+      "depends_on": [
+        "templates",
+        "fonts/assets with valid licences"
+      ],
+      "serves": [
+        "Foundry",
+        "digital products"
+      ],
+      "notes": "Formatting engine only; editorial QA and rights checks remain mandatory."
+    },
+    {
+      "id": "eurostat",
+      "type": "data_source",
+      "name": "Eurostat",
+      "status": "AGORA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "EU economic/demographic/public statistics",
+      "sense": "economic context",
+      "cost": "public data",
+      "license": "verify dataset reuse/attribution terms",
+      "self_hosted": "downloads possible",
+      "depends_on": [],
+      "serves": [
+        "Scout",
+        "B2B",
+        "geographic analysis"
+      ],
+      "notes": "Prefer official datasets and preserve period/geography."
+    },
+    {
+      "id": "ine-pt",
+      "type": "data_source",
+      "name": "INE Portugal",
+      "status": "AGORA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "Portugal official statistics",
+      "sense": "local economic/demographic context",
+      "cost": "public data",
+      "license": "verify reuse/attribution terms",
+      "self_hosted": "downloads possible",
+      "depends_on": [],
+      "serves": [
+        "Scout",
+        "B2B",
+        "Portugal strategy"
+      ],
+      "notes": "Official source preferred for Portugal-specific indicators."
+    },
+    {
+      "id": "base-gov-pt",
+      "type": "data_source",
+      "name": "BASE.gov.pt",
+      "status": "AGORA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "Portuguese public procurement/contracts intelligence",
+      "sense": "B2B opportunity sensing",
+      "cost": "public access",
+      "license": "verify API/data reuse and rate conditions",
+      "self_hosted": false,
+      "depends_on": [],
+      "serves": [
+        "Scout",
+        "B2B"
+      ],
+      "notes": "Useful for public-sector demand patterns and procurement discovery."
+    },
+    {
+      "id": "fred",
+      "type": "data_source",
+      "name": "FRED",
+      "status": "DEPOIS",
+      "verification": "PENDING_VERIFICATION",
+      "role": "macro-economic series",
+      "sense": "international economic context",
+      "cost": "public API",
+      "license": "series-specific source conditions may differ",
+      "self_hosted": false,
+      "depends_on": [
+        "API key/terms"
+      ],
+      "serves": [
+        "Scout"
+      ],
+      "notes": "Lower priority than Eurostat/INE for Maison core markets."
+    },
+    {
+      "id": "h3",
+      "type": "geospatial",
+      "name": "H3",
+      "status": "DEPOIS",
+      "verification": "PENDING_VERIFICATION",
+      "role": "spatial indexing/aggregation",
+      "sense": "geographic pattern recognition",
+      "cost": "0 software cost",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [
+        "geocoded data"
+      ],
+      "serves": [
+        "Scout",
+        "B2B",
+        "physical product demand"
+      ],
+      "notes": "Aggregate geography only; avoid sensitive individual movement profiles."
+    },
+    {
+      "id": "duckdb-spatial",
+      "type": "geospatial",
+      "name": "DuckDB Spatial",
+      "status": "DEPOIS",
+      "verification": "PENDING_VERIFICATION",
+      "role": "local GIS/spatial analytics",
+      "sense": "map analysis",
+      "cost": "0 software cost",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [
+        "DuckDB"
+      ],
+      "serves": [
+        "Scout",
+        "geographic intelligence"
+      ],
+      "notes": "Pairs naturally with H3 for low-cost local analysis."
+    },
+    {
+      "id": "semantic-memory-contract",
+      "type": "architecture",
+      "name": "Maison Semantic Memory contract",
+      "status": "AGORA",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "stable adapter boundary for semantic retrieval independent of database",
+      "sense": "semantic memory",
+      "cost": "architecture only",
+      "license": "Maison repo",
+      "self_hosted": true,
+      "depends_on": [
+        "A5 semantic-provider contract"
+      ],
+      "serves": [
+        "Brain",
+        "Oceanos",
+        "Foundry"
+      ],
+      "notes": "Do not couple Brain directly to Qdrant or pgvector."
+    },
+    {
+      "id": "qdrant",
+      "type": "vector_store",
+      "name": "Qdrant",
+      "status": "EXPERIÊNCIA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "dedicated semantic/hybrid retrieval projection",
+      "sense": "semantic similarity",
+      "cost": "open/self-host target; host resources required",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [
+        "embedding model",
+        "sync/rebuild pipeline"
+      ],
+      "serves": [
+        "Semantic Memory",
+        "Oceanos",
+        "Foundry"
+      ],
+      "notes": "Derived index, never canonical evidence. Compare empirically with pgvector before committing."
+    },
+    {
+      "id": "pgvector",
+      "type": "vector_store",
+      "name": "PostgreSQL + pgvector",
+      "status": "EXPERIÊNCIA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "semantic retrieval within Postgres",
+      "sense": "semantic similarity",
+      "cost": "software open; persistent host required",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [
+        "PostgreSQL",
+        "embedding model"
+      ],
+      "serves": [
+        "Semantic Memory"
+      ],
+      "notes": "Evaluate operational simplicity vs dedicated Qdrant."
+    },
+    {
+      "id": "graph-layer",
+      "type": "graph",
+      "name": "Apache AGE / Kùzu-class graph layer",
+      "status": "EXPERIÊNCIA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "entity/relation graph analytics beyond semantic similarity",
+      "sense": "relationship discovery",
+      "cost": "target 0 software cost",
+      "license": "verify selected engine",
+      "self_hosted": true,
+      "depends_on": [
+        "entity resolution",
+        "provenance model"
+      ],
+      "serves": [
+        "Brain",
+        "Scout",
+        "Osiris Memory"
+      ],
+      "notes": "Avoid duplicating Osiris Memory graph functions without a clear capability gap."
+    },
+    {
+      "id": "cloudflare-workflows",
+      "type": "orchestration",
+      "name": "Cloudflare Workflows / Durable Objects",
+      "status": "DEPOIS",
+      "verification": "PENDING_VERIFICATION",
+      "role": "durable long-running workflow state close to current Cloudflare stack",
+      "sense": "operational continuity",
+      "cost": "Cloudflare plan/usage dependent",
+      "license": "managed platform",
+      "self_hosted": false,
+      "depends_on": [
+        "Cloudflare runtime"
+      ],
+      "serves": [
+        "Scout",
+        "scheduled cognition",
+        "A12"
+      ],
+      "notes": "Evaluate before adding a separate orchestration platform."
+    },
+    {
+      "id": "langgraph",
+      "type": "orchestration",
+      "name": "LangGraph",
+      "status": "EXPERIÊNCIA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "stateful agentic reasoning graphs",
+      "sense": "cognitive orchestration",
+      "cost": "open software plus runtime",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [
+        "agent runtime",
+        "checkpoint store"
+      ],
+      "serves": [
+        "Scout",
+        "Critic"
+      ],
+      "notes": "Use only if it adds cognitive workflow capabilities not already covered by Cloudflare durable execution."
+    },
+    {
+      "id": "hatchet",
+      "type": "orchestration",
+      "name": "Hatchet",
+      "status": "EXPERIÊNCIA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "durable workflow/task execution candidate",
+      "sense": "workflow reliability",
+      "cost": "open/self-host candidate; verify current licensing",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [
+        "persistent runtime"
+      ],
+      "serves": [
+        "Scout",
+        "background workflows"
+      ],
+      "notes": "Compare with Cloudflare Workflows before introducing another operational plane."
+    },
+    {
+      "id": "n8n",
+      "type": "automation",
+      "name": "n8n",
+      "status": "DEPOIS",
+      "verification": "PENDING_VERIFICATION",
+      "role": "external integrations, deterministic SaaS/API/webhook/ETL workflows",
+      "sense": "hands",
+      "cost": "self-host software/host cost; licence has use restrictions",
+      "license": "Sustainable Use/fair-code family; verify intended use",
+      "self_hosted": true,
+      "depends_on": [
+        "persistent host",
+        "database"
+      ],
+      "serves": [
+        "operations",
+        "B2B",
+        "future CRM/email"
+      ],
+      "notes": "Not the Brain. Avoid implementing the same workflow in n8n and cognitive orchestrator."
+    },
+    {
+      "id": "ollama-local",
+      "type": "local_model_runtime",
+      "name": "Local model runtime (Ollama-class)",
+      "status": "EXPERIÊNCIA",
+      "verification": "PENDING_VERIFICATION",
+      "role": "cheap/private local inference for suitable small models",
+      "sense": "local reasoning/classification",
+      "cost": "software low/zero; hardware dependent",
+      "license": "runtime and each model must be verified separately",
+      "self_hosted": true,
+      "depends_on": [
+        "user/server hardware"
+      ],
+      "serves": [
+        "Pre-Brain",
+        "embeddings",
+        "fallback models"
+      ],
+      "notes": "Do not choose model size until hardware is known."
+    },
+    {
+      "id": "fastembed-local",
+      "type": "embedding",
+      "name": "Local embeddings / FastEmbed-class runtime",
+      "status": "DEPOIS",
+      "verification": "PENDING_VERIFICATION",
+      "role": "low-cost local embeddings for semantic index",
+      "sense": "semantic encoding",
+      "cost": "0 model/runtime plus compute",
+      "license": "model-specific",
+      "self_hosted": true,
+      "depends_on": [
+        "selected multilingual embedding model"
+      ],
+      "serves": [
+        "Semantic Memory",
+        "Foundry"
+      ],
+      "notes": "Embedding model must be stable and multilingual; changing dimensions/model implies reindex."
+    },
+    {
+      "id": "maison-prebrain",
+      "type": "internal_capability",
+      "name": "Maison Pre-Brain",
+      "status": "AGORA",
+      "verification": "DESIGN_APPROVED",
+      "role": "local filter before LLM: dedupe, anomaly detection, lightweight classification, clustering, weak-signal convergence",
+      "sense": "attention",
+      "cost": "target near-zero compute",
+      "license": "Maison code + dependencies",
+      "self_hosted": true,
+      "depends_on": [
+        "DuckDB",
+        "Polars",
+        "GLiNER",
+        "Ruptures"
+      ],
+      "serves": [
+        "A13",
+        "Brain",
+        "Scout"
+      ],
+      "notes": "Goal is to send only high-value evidence/hypotheses to expensive reasoning."
+    },
+    {
+      "id": "maison-scout",
+      "type": "internal_agent",
+      "name": "Maison Scout",
+      "status": "AGORA",
+      "verification": "DESIGN_APPROVED",
+      "role": "continuous discovery of unmet needs, anomalies and unasked commercial opportunities",
+      "sense": "curiosity",
+      "cost": "bounded by sensors/compute",
+      "license": "Maison logic",
+      "self_hosted": true,
+      "depends_on": [
+        "A13",
+        "Pre-Brain",
+        "Oceanos",
+        "A12"
+      ],
+      "serves": [
+        "Revenue Engine",
+        "Foundry",
+        "Oráculo",
+        "PÁRA DE IGNORAR!"
+      ],
+      "notes": "Produces internal hypotheses/candidates only."
+    },
+    {
+      "id": "maison-critic",
+      "type": "internal_agent",
+      "name": "Maison Critic",
+      "status": "AGORA",
+      "verification": "DESIGN_APPROVED",
+      "role": "adversarially challenge Scout proposals before human inbox",
+      "sense": "skepticism",
+      "cost": "local/cheap model preferred where possible",
+      "license": "Maison logic",
+      "self_hosted": true,
+      "depends_on": [
+        "Scout",
+        "A12"
+      ],
+      "serves": [
+        "Revenue Engine"
+      ],
+      "notes": "Critic may reject/flag; it does not launch products."
+    },
+    {
+      "id": "maison-foundry",
+      "type": "internal_capability",
+      "name": "Maison Content & Product Foundry",
+      "status": "AGORA",
+      "verification": "DESIGN_APPROVED",
+      "role": "turn validated territories into original digital/physical/service product families",
+      "sense": "creation",
+      "cost": "variable; digital-first validation",
+      "license": "Maison IP + source rights",
+      "self_hosted": true,
+      "depends_on": [
+        "rights filter",
+        "Oceanos",
+        "Foundry research",
+        "Typst/Pandoc"
+      ],
+      "serves": [
+        "ebooks",
+        "workbooks",
+        "audio",
+        "physical products",
+        "Oráculo",
+        "PÁRA DE IGNORAR!"
+      ],
+      "notes": "Research/synthesis must produce original work; copyrighted works are not re-skinned."
+    },
+    {
+      "id": "opportunity-attribution",
+      "type": "internal_capability",
+      "name": "Opportunity / Revenue Per Insight attribution",
+      "status": "AGORA",
+      "verification": "DESIGN_APPROVED",
+      "role": "link Brain insight -> commercial candidate -> experiment -> conversion -> revenue -> learning",
+      "sense": "economic learning",
+      "cost": "mostly existing infrastructure",
+      "license": "Maison code",
+      "self_hosted": true,
+      "depends_on": [
+        "A3",
+        "A7",
+        "A8",
+        "A11"
+      ],
+      "serves": [
+        "Revenue Engine",
+        "Scout"
+      ],
+      "notes": "Extend existing attribution rather than build a parallel economics system."
+    },
+    {
+      "id": "pytrends-original",
+      "type": "data_source",
+      "name": "Original pytrends dependency",
+      "status": "REJEITADO",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "unofficial Google Trends client",
+      "sense": "search trend sensing",
+      "cost": "0",
+      "license": "project-specific",
+      "self_hosted": true,
+      "depends_on": [],
+      "serves": [],
+      "notes": "Do not make an archived/unofficial client a critical dependency. Seek current lawful alternatives or direct sources."
+    },
+    {
+      "id": "pinecone",
+      "type": "vector_store",
+      "name": "Pinecone",
+      "status": "REJEITADO",
+      "verification": "REJECTED_NO_VERIFY",
+      "role": "managed vector database",
+      "sense": "semantic retrieval",
+      "cost": "managed service",
+      "license": "proprietary",
+      "self_hosted": false,
+      "depends_on": [],
+      "serves": [],
+      "notes": "Rejected for now: Qdrant/pgvector experiments cover the capability without adding a proprietary dependency."
+    },
+    {
+      "id": "chroma",
+      "type": "vector_store",
+      "name": "Chroma",
+      "status": "REJEITADO",
+      "verification": "REJECTED_NO_VERIFY",
+      "role": "additional vector-store candidate",
+      "sense": "semantic retrieval",
+      "cost": "varies",
+      "license": "PENDING_VERIFICATION",
+      "self_hosted": true,
+      "depends_on": [],
+      "serves": [],
+      "notes": "Rejected for now to avoid testing three vector stores simultaneously; reconsider only if Qdrant/pgvector fail a concrete requirement."
+    }
+  ]
+}
