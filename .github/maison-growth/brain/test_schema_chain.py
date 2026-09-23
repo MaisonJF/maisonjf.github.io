@@ -22,6 +22,7 @@ MIGRATIONS=(
     GROWTH/"a14/migrations/0012_universal_opportunity_earned_distribution.sql",
     GROWTH/"a14/migrations/0013_a14_bridges_cash.sql",
     GROWTH/"brain/migrations/0014_brain_runtime_views.sql",
+    GROWTH/"a12/migrations/0015_human_commercial_review_resolution.sql",
 )
 
 
@@ -36,6 +37,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
         state=dict(con.execute("SELECT schema_key,schema_value FROM schema_state"))
         self.assertEqual(state["maison_growth_a14_schema_version"],"A14.2")
         self.assertEqual(state["maison_brain_runtime_schema_version"],"BRAIN.1")
+        self.assertEqual(state["maison_growth_a12_schema_version"],"A12.2")
 
         views={
             row[0] for row in con.execute(
@@ -45,6 +47,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
         self.assertIn("brain_prebrain_feed",views)
         self.assertIn("brain_cash_feedback",views)
         self.assertIn("a14_realised_economics",views)
+        self.assertIn("autonomy_human_queue_current",views)
 
     def test_cash_feedback_accepts_unlinked_a3_economics(self):
         con=sqlite3.connect(":memory:")
