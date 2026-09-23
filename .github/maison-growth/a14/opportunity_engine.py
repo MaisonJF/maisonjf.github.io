@@ -26,7 +26,7 @@ OFFER_TO_A3 = {
     "oracle": "oracle",
 }
 
-OPPORTUNITY_WEIGHTS = {
+INITIAL_OPPORTUNITY_WEIGHTS = {
     "demand": 0.16,
     "growth": 0.08,
     "need_intensity": 0.10,
@@ -39,7 +39,7 @@ OPPORTUNITY_WEIGHTS = {
     "operational_viability": 0.06,
 }
 
-DISTRIBUTION_WEIGHTS = {
+INITIAL_DISTRIBUTION_WEIGHTS = {
     "topic_fit": 0.16,
     "audience_relevance": 0.13,
     "community_quality": 0.10,
@@ -179,14 +179,20 @@ def _score(metrics: Mapping[str, EvidenceMetric], weights: Mapping[str, float]) 
     )
 
 
-def score_universal_opportunity(metrics: Mapping[str, EvidenceMetric]) -> ScoreResult:
-    """Evidence-weighted opportunity score. Missing dimensions reduce confidence; they never become 50."""
-    return _score(metrics, OPPORTUNITY_WEIGHTS)
+def score_universal_opportunity(
+    metrics: Mapping[str, EvidenceMetric],
+    weights: Mapping[str, float],
+) -> ScoreResult:
+    """Evidence-weighted opportunity score using an explicit versioned policy."""
+    return _score(metrics, weights)
 
 
-def score_distribution_fit(metrics: Mapping[str, EvidenceMetric]) -> ScoreResult:
-    """Contextual Amplifier × Offer × Moment fit. Costs are deliberately excluded."""
-    return _score(metrics, DISTRIBUTION_WEIGHTS)
+def score_distribution_fit(
+    metrics: Mapping[str, EvidenceMetric],
+    weights: Mapping[str, float],
+) -> ScoreResult:
+    """Contextual Amplifier × Offer × Moment fit; weights are explicit policy, not facts."""
+    return _score(metrics, weights)
 
 
 def map_offer_to_a3_solution_type(offer_type: str) -> str:
