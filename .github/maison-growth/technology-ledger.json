@@ -28,6 +28,57 @@
   ],
   "entries": [
     {
+      "id": "maison-human-commercial-review",
+      "type": "governance",
+      "name": "Maison Human Commercial Review A12.2",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "append-only human approve/reject decision for commercial opportunities with planning-only scope",
+      "sense": "human governance",
+      "cost": "shares Growth D1/runtime",
+      "license": "Maison repo",
+      "self_hosted": false,
+      "depends_on": [
+        "A12.2",
+        "A14 materialization",
+        "private HTTPS",
+        "separate decision token"
+      ],
+      "serves": [
+        "A12",
+        "A14",
+        "future validation planner"
+      ],
+      "notes": "Approval scope is experiment_planning_only. Structural guards keep public_write, outbound, spend and experiment_execution authorization at false/0. Original queue rows remain immutable; current status is projected through autonomy_human_queue_current."
+    },
+    {
+      "id": "maison-a14-materialization",
+      "type": "internal_api",
+      "name": "Maison A14 Proposal Materialization",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "narrow authenticated write surface for idempotent A14 hypotheses and optional A12 human-review queueing",
+      "sense": "analysis → canonical commercial review",
+      "cost": "shares A13 Worker/D1; no model/API cost",
+      "license": "Maison repo",
+      "self_hosted": false,
+      "depends_on": [
+        "A14",
+        "A12",
+        "Growth D1",
+        "private HTTPS",
+        "separate bearer secret"
+      ],
+      "serves": [
+        "Brain",
+        "A14",
+        "A12"
+      ],
+      "notes": "Disabled by default. Separate from GET-only Brain Control API. Can persist analysis-only hypotheses or queue human_review_preview offers. Cannot authorize launch, price, public writes, outbound, spend or experiment execution."
+    },
+    {
       "id": "maison-commercial-assets-context",
       "type": "internal_component",
       "name": "Maison Commercial Asset Context",
@@ -258,7 +309,7 @@
         "all agents",
         "workflows"
       ],
-      "notes": "Central policy; do not duplicate governance inside every framework."
+      "notes": "A12.2 simulation-only governance with append-only human commercial review resolution. commercial_opportunity_review is medium risk and human-gated. Approval permits experiment planning only; no public/outbound/spend/experiment-execution authority."
     },
     {
       "id": "maison-a3-a7-a8-a11",
