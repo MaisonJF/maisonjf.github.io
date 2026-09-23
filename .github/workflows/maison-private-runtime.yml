@@ -32,7 +32,6 @@ jobs:
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      MAISON_GROWTH_D1_DATABASE_ID: ${{ secrets.MAISON_GROWTH_D1_DATABASE_ID }}
       BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
       BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
       BRAIN_PROPOSAL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
@@ -67,7 +66,6 @@ jobs:
           fi
           test -n "$CLOUDFLARE_API_TOKEN"
           test -n "$CLOUDFLARE_ACCOUNT_ID"
-          test -n "$MAISON_GROWTH_D1_DATABASE_ID"
 
       - name: Private-stage preflight
         run: |
@@ -75,7 +73,10 @@ jobs:
 
       - name: Render temporary Wrangler config
         run: |
-          python .github/maison-growth/runtime/render_private_worker_config.py             "${{ inputs.stage }}"             --template workers/maison-intelligence/wrangler.template.jsonc             --database-id "$MAISON_GROWTH_D1_DATABASE_ID"             --output workers/maison-intelligence/wrangler.private.runtime.jsonc
+          python .github/maison-growth/runtime/render_private_worker_config.py \
+            "${{ inputs.stage }}" \
+            --template workers/maison-intelligence/wrangler.jsonc \
+            --output workers/maison-intelligence/wrangler.private.runtime.jsonc
 
       - name: Install Worker tooling
         working-directory: workers/maison-intelligence
