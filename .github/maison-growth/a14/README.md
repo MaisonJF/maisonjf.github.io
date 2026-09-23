@@ -127,3 +127,12 @@ A14.2 adds append-only lineage bridges:
 - A14 → A11 learning records.
 
 These are links, not copies of the other modules' source-of-truth data.
+
+
+## Stable hypothesis identity
+
+A14 semantic hypotheses use deterministic UUID-shaped identifiers derived from their canonical semantic payloads. Re-running the same opportunity, offer hypothesis or distribution match therefore preserves identity instead of creating a new record merely because the Brain ran at a different time.
+
+`created_at` is not part of semantic identity. Relevant evidence, selected solution, offer economics, distribution moment/context and policy version are.
+
+Repository persistence is strictly idempotent for these semantic records: an identical record with the same ID is treated as already present, while the same ID with different semantic content raises an explicit repository error. This prevents both duplicate learning lineage and silent payload drift.
