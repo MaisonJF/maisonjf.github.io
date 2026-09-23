@@ -1,49 +1,51 @@
+const DOC_ROOT = 'https://osirisai.live/docs';
+
 const SOURCE_REGISTRY = {
-  stats: {
-    path: '/api/stats',
-    territoryKey: 'world_pulse',
-    roots: ['https://osirisai.live/docs']
-  },
+  stats: { path: '/api/stats', territoryKey: 'world_pulse', roots: [DOC_ROOT] },
+
+  flights: { path: '/api/flights', territoryKey: 'mobility_aviation', roots: [DOC_ROOT, 'https://opensky-network.org/'] },
+  satellites: { path: '/api/satellites', territoryKey: 'space_activity', roots: [DOC_ROOT] },
+  space_weather: { path: '/api/space-weather', territoryKey: 'space_weather', roots: [DOC_ROOT, 'https://www.swpc.noaa.gov/'] },
+
   earthquakes: {
     path: '/api/earthquakes',
     territoryKey: 'earth_hazards',
-    roots: [
-      'https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php',
-      'https://osirisai.live/docs'
-    ]
+    roots: [DOC_ROOT, 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php']
   },
   fires: {
     path: '/api/fires',
     territoryKey: 'earth_hazards',
-    roots: [
-      'https://firms.modaps.eosdis.nasa.gov/',
-      'https://osirisai.live/docs'
-    ]
+    roots: [DOC_ROOT, 'https://firms.modaps.eosdis.nasa.gov/']
   },
   weather: {
     path: '/api/weather',
     territoryKey: 'weather_hazards',
-    roots: [
-      'https://eonet.gsfc.nasa.gov/',
-      'https://osirisai.live/docs'
-    ]
+    roots: [DOC_ROOT, 'https://eonet.gsfc.nasa.gov/']
   },
-  news: {
-    path: '/api/news',
-    territoryKey: 'world_events',
-    roots: ['https://osirisai.live/docs']
-  },
-  markets: {
-    path: '/api/markets',
-    territoryKey: 'markets',
-    roots: ['https://osirisai.live/docs']
-  },
-  cctv: {
-    path: '/api/cctv',
-    territoryKey: 'public_space',
-    roots: ['https://osirisai.live/docs']
-  }
+  air_quality: { path: '/api/air-quality', territoryKey: 'environment_health', roots: [DOC_ROOT] },
+  radar: { path: '/api/radar', territoryKey: 'navigation_disruption', roots: [DOC_ROOT] },
+
+  conflicts: { path: '/api/conflicts', territoryKey: 'geopolitical_events', roots: [DOC_ROOT] },
+  frontlines: { path: '/api/frontlines', territoryKey: 'geopolitical_events', roots: [DOC_ROOT] },
+  gdelt: { path: '/api/gdelt', territoryKey: 'world_events', roots: [DOC_ROOT, 'https://www.gdeltproject.org/'] },
+  country_risk: { path: '/api/country-risk', territoryKey: 'country_risk', roots: [DOC_ROOT] },
+
+  news: { path: '/api/news', territoryKey: 'world_events', roots: [DOC_ROOT] },
+  live_news: { path: '/api/live-news', territoryKey: 'media_pulse', roots: [DOC_ROOT] },
+  markets: { path: '/api/markets', territoryKey: 'markets', roots: [DOC_ROOT] },
+  crypto: { path: '/api/crypto', territoryKey: 'markets', roots: [DOC_ROOT] },
+  scm_suppliers: { path: '/api/scm-suppliers', territoryKey: 'supply_chain', roots: [DOC_ROOT] },
+
+  cctv: { path: '/api/cctv', territoryKey: 'public_space', roots: [DOC_ROOT] },
+  infrastructure: { path: '/api/infrastructure', territoryKey: 'infrastructure', roots: [DOC_ROOT] },
+  maritime: { path: '/api/maritime', territoryKey: 'mobility_maritime', roots: [DOC_ROOT] },
+
+  cyber_threats: { path: '/api/cyber-threats', territoryKey: 'cyber_risk', roots: [DOC_ROOT, 'https://nvd.nist.gov/'] },
+  cyber_attacks: { path: '/api/cyber-attacks', territoryKey: 'cyber_risk', roots: [DOC_ROOT, 'https://feodotracker.abuse.ch/'] },
+  malware: { path: '/api/malware', territoryKey: 'cyber_risk', roots: [DOC_ROOT, 'https://urlhaus.abuse.ch/'] }
 };
+
+export const PASSIVE_OSIRIS_KEYS = Object.freeze(Object.keys(SOURCE_REGISTRY));
 
 function compact(value, depth = 0) {
   if (depth > 5) return '[depth-truncated]';
@@ -64,7 +66,7 @@ function compact(value, depth = 0) {
 }
 
 function parseKeys(raw) {
-  const fallback = 'stats,earthquakes,fires,weather,news,markets';
+  const fallback = PASSIVE_OSIRIS_KEYS.join(',');
   return String(raw || fallback)
     .split(',')
     .map(x => x.trim().toLowerCase())
