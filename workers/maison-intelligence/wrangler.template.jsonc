@@ -22,7 +22,7 @@
     "OPENROUTER_MODEL": "openrouter/free",
     "OSIRIS_ENABLED": "false",
     "OSIRIS_BASE_URL": "https://osirisai.live",
-    "OSIRIS_SOURCE_KEYS": "stats,earthquakes,fires,weather,news,markets",
+    "OSIRIS_SOURCE_KEYS": "stats,flights,satellites,space_weather,earthquakes,fires,weather,air_quality,radar,conflicts,frontlines,gdelt,country_risk,news,live_news,markets,crypto,scm_suppliers,cctv,infrastructure,maritime,cyber_threats,cyber_attacks,malware",
     "MAX_DAILY_CALLS_PER_OSIRIS_SOURCE": "24",
     "OPENAI_MODEL": "gpt-5.6-luna",
     "GEMINI_MODEL": "gemini-2.5-flash",
