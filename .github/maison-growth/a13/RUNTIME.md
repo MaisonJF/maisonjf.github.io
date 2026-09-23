@@ -4,16 +4,18 @@ A13.2 contains a production-shaped Cloudflare Worker implementation, but reposit
 
 ## Safe activation order
 
-1. Create a dedicated Growth D1 database.
-2. Apply A1→A13 migrations in order to that fresh database.
-3. Create `maison-intelligence` and `maison-intelligence-dlq` queues.
-4. Copy `workers/maison-intelligence/wrangler.template.jsonc` to a local/deployment `wrangler.jsonc` and insert the real D1 database ID.
-5. Keep `WORKER_ENABLED=false` and `KILL_SWITCH=true`.
+1. For the existing Maison environment, verify the canonical `maison-growth-engine` D1/Queue bindings already versioned in `workers/maison-intelligence/wrangler.jsonc`; do not create duplicate resources.
+2. Run `workers/maison-intelligence/scripts/inspect-growth-migrations.sh maison-growth-engine` to inspect the remote schema read-only through migration `0016`.
+3. If the database is fresh, apply the complete migration chain; if it is existing, apply only reviewed missing migrations.
+4. Keep `WORKER_ENABLED=false` and `KILL_SWITCH=true`.
+5. Bring up the private Brain read surface before A13 collection; its private renderer strips cron, Queue and Workers AI bindings.
 6. Add provider API keys as Cloudflare Worker **secrets**, never repository variables.
-7. Deploy and verify bindings while collection is still disabled.
+7. Deploy and verify A13 bindings while collection is still disabled.
 8. Validate Queue delivery, D1 writes, retries and usage counters with synthetic/provider test traffic.
 9. Enable the environment flags only after those checks.
 10. Finally turn off the database kill switch while leaving `observe_only=1`.
+
+For a completely new environment, create a dedicated D1 database named `maison-growth-engine` plus the two intelligence queues before step 2.
 
 The first live mode is therefore observation only. External intelligence may create A1 events, A13 observations and A4 map evidence, but may not publish, alter prices, checkout, catalogue, permissions or protected Maison architecture.
 
