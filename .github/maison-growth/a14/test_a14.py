@@ -7,6 +7,8 @@ from opportunity_engine import (
     A14ValidationError,
     EvidenceMetric,
     MoneyMetric,
+    INITIAL_OPPORTUNITY_WEIGHTS,
+    INITIAL_DISTRIBUTION_WEIGHTS,
     choose_offer_path,
     compute_activation_economics,
     map_offer_to_a3_solution_type,
@@ -26,7 +28,7 @@ def eur(value, confidence=1.0, ref="evd_money"):
 
 class A14Tests(unittest.TestCase):
     def test_unknown_is_not_filled_with_midpoint(self):
-        result = score_universal_opportunity({"demand": m(90)})
+        result = score_universal_opportunity({"demand": m(90)}, INITIAL_OPPORTUNITY_WEIGHTS)
         self.assertEqual(result.score, 90.0)
         self.assertLess(result.confidence, 0.2)
         self.assertIn("willingness_to_pay", result.unknown_dimensions)
@@ -36,7 +38,7 @@ class A14Tests(unittest.TestCase):
             EvidenceMetric(80, "OBSERVED", 0.8, ())
 
     def test_no_evidence_means_no_score(self):
-        result = score_distribution_fit({})
+        result = score_distribution_fit({}, INITIAL_DISTRIBUTION_WEIGHTS)
         self.assertIsNone(result.score)
         self.assertEqual(result.confidence, 0.0)
 
@@ -45,7 +47,7 @@ class A14Tests(unittest.TestCase):
             "topic_fit": m(95),
             "audience_relevance": m(90),
             "community_quality": m(85),
-        })
+        }, INITIAL_DISTRIBUTION_WEIGHTS)
         self.assertGreater(result.score, 85)
         self.assertIn("aesthetic_fit", result.unknown_dimensions)
 
@@ -85,7 +87,7 @@ class A14Tests(unittest.TestCase):
             "topic_fit","audience_relevance","community_quality","trust","growth",
             "low_commercial_saturation","aesthetic_fit","story_strength",
             "response_likelihood","brand_safety","commercial_potential","recurrence_potential"
-        )})
+        )}, INITIAL_DISTRIBUTION_WEIGHTS)
         economics = compute_activation_economics(
             direct_cost=eur(950),
             expected_direct_revenue=MoneyMetric(None),
@@ -105,7 +107,7 @@ class A14Tests(unittest.TestCase):
             "topic_fit","audience_relevance","community_quality","trust","growth",
             "low_commercial_saturation","aesthetic_fit","story_strength",
             "response_likelihood","brand_safety","commercial_potential","recurrence_potential"
-        )})
+        )}, INITIAL_DISTRIBUTION_WEIGHTS)
         economics = compute_activation_economics(
             direct_cost=eur(900),
             expected_direct_revenue=eur(5000),
@@ -125,7 +127,7 @@ class A14Tests(unittest.TestCase):
             "topic_fit","audience_relevance","community_quality","trust","growth",
             "low_commercial_saturation","aesthetic_fit","story_strength",
             "response_likelihood","brand_safety","commercial_potential","recurrence_potential"
-        )})
+        )}, INITIAL_DISTRIBUTION_WEIGHTS)
         economics = compute_activation_economics(
             direct_cost=MoneyMetric(None), expected_direct_revenue=MoneyMetric(None),
             expected_direct_margin=MoneyMetric(None), monetized_indirect_value=MoneyMetric(None),
