@@ -1,48 +1,51 @@
 const DOC_ROOT = 'https://osirisai.live/docs';
 
 const SOURCE_REGISTRY = {
-  stats: { path: '/api/stats', territoryKey: 'world_pulse', roots: [DOC_ROOT] },
+  stats: { path: '/api/stats', territoryKey: 'world_pulse', cadenceHours: 24, roots: [DOC_ROOT] },
 
-  flights: { path: '/api/flights', territoryKey: 'mobility_aviation', roots: [DOC_ROOT, 'https://opensky-network.org/'] },
-  satellites: { path: '/api/satellites', territoryKey: 'space_activity', roots: [DOC_ROOT] },
-  space_weather: { path: '/api/space-weather', territoryKey: 'space_weather', roots: [DOC_ROOT, 'https://www.swpc.noaa.gov/'] },
+  flights: { path: '/api/flights', territoryKey: 'mobility_aviation', cadenceHours: 6, roots: [DOC_ROOT, 'https://opensky-network.org/'] },
+  satellites: { path: '/api/satellites', territoryKey: 'space_activity', cadenceHours: 12, roots: [DOC_ROOT] },
+  space_weather: { path: '/api/space-weather', territoryKey: 'space_weather', cadenceHours: 6, roots: [DOC_ROOT, 'https://www.swpc.noaa.gov/'] },
 
   earthquakes: {
     path: '/api/earthquakes',
     territoryKey: 'earth_hazards',
+    cadenceHours: 3,
     roots: [DOC_ROOT, 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php']
   },
   fires: {
     path: '/api/fires',
     territoryKey: 'earth_hazards',
+    cadenceHours: 6,
     roots: [DOC_ROOT, 'https://firms.modaps.eosdis.nasa.gov/']
   },
   weather: {
     path: '/api/weather',
     territoryKey: 'weather_hazards',
+    cadenceHours: 3,
     roots: [DOC_ROOT, 'https://eonet.gsfc.nasa.gov/']
   },
-  air_quality: { path: '/api/air-quality', territoryKey: 'environment_health', roots: [DOC_ROOT] },
-  radar: { path: '/api/radar', territoryKey: 'navigation_disruption', roots: [DOC_ROOT] },
+  air_quality: { path: '/api/air-quality', territoryKey: 'environment_health', cadenceHours: 6, roots: [DOC_ROOT] },
+  radar: { path: '/api/radar', territoryKey: 'navigation_disruption', cadenceHours: 6, roots: [DOC_ROOT] },
 
-  conflicts: { path: '/api/conflicts', territoryKey: 'geopolitical_events', roots: [DOC_ROOT] },
-  frontlines: { path: '/api/frontlines', territoryKey: 'geopolitical_events', roots: [DOC_ROOT] },
-  gdelt: { path: '/api/gdelt', territoryKey: 'world_events', roots: [DOC_ROOT, 'https://www.gdeltproject.org/'] },
-  country_risk: { path: '/api/country-risk', territoryKey: 'country_risk', roots: [DOC_ROOT] },
+  conflicts: { path: '/api/conflicts', territoryKey: 'geopolitical_events', cadenceHours: 6, roots: [DOC_ROOT] },
+  frontlines: { path: '/api/frontlines', territoryKey: 'geopolitical_events', cadenceHours: 12, roots: [DOC_ROOT] },
+  gdelt: { path: '/api/gdelt', territoryKey: 'world_events', cadenceHours: 6, roots: [DOC_ROOT, 'https://www.gdeltproject.org/'] },
+  country_risk: { path: '/api/country-risk', territoryKey: 'country_risk', cadenceHours: 24, roots: [DOC_ROOT] },
 
-  news: { path: '/api/news', territoryKey: 'world_events', roots: [DOC_ROOT] },
-  live_news: { path: '/api/live-news', territoryKey: 'media_pulse', roots: [DOC_ROOT] },
-  markets: { path: '/api/markets', territoryKey: 'markets', roots: [DOC_ROOT] },
-  crypto: { path: '/api/crypto', territoryKey: 'markets', roots: [DOC_ROOT] },
-  scm_suppliers: { path: '/api/scm-suppliers', territoryKey: 'supply_chain', roots: [DOC_ROOT] },
+  news: { path: '/api/news', territoryKey: 'world_events', cadenceHours: 3, roots: [DOC_ROOT] },
+  live_news: { path: '/api/live-news', territoryKey: 'media_pulse', cadenceHours: 3, roots: [DOC_ROOT] },
+  markets: { path: '/api/markets', territoryKey: 'markets', cadenceHours: 3, roots: [DOC_ROOT] },
+  crypto: { path: '/api/crypto', territoryKey: 'markets', cadenceHours: 3, roots: [DOC_ROOT] },
+  scm_suppliers: { path: '/api/scm-suppliers', territoryKey: 'supply_chain', cadenceHours: 24, roots: [DOC_ROOT] },
 
-  cctv: { path: '/api/cctv', territoryKey: 'public_space', roots: [DOC_ROOT] },
-  infrastructure: { path: '/api/infrastructure', territoryKey: 'infrastructure', roots: [DOC_ROOT] },
-  maritime: { path: '/api/maritime', territoryKey: 'mobility_maritime', roots: [DOC_ROOT] },
+  cctv: { path: '/api/cctv', territoryKey: 'public_space', cadenceHours: 12, roots: [DOC_ROOT] },
+  infrastructure: { path: '/api/infrastructure', territoryKey: 'infrastructure', cadenceHours: 12, roots: [DOC_ROOT] },
+  maritime: { path: '/api/maritime', territoryKey: 'mobility_maritime', cadenceHours: 6, roots: [DOC_ROOT] },
 
-  cyber_threats: { path: '/api/cyber-threats', territoryKey: 'cyber_risk', roots: [DOC_ROOT, 'https://nvd.nist.gov/'] },
-  cyber_attacks: { path: '/api/cyber-attacks', territoryKey: 'cyber_risk', roots: [DOC_ROOT, 'https://feodotracker.abuse.ch/'] },
-  malware: { path: '/api/malware', territoryKey: 'cyber_risk', roots: [DOC_ROOT, 'https://urlhaus.abuse.ch/'] }
+  cyber_threats: { path: '/api/cyber-threats', territoryKey: 'cyber_risk', cadenceHours: 6, roots: [DOC_ROOT, 'https://nvd.nist.gov/'] },
+  cyber_attacks: { path: '/api/cyber-attacks', territoryKey: 'cyber_risk', cadenceHours: 6, roots: [DOC_ROOT, 'https://feodotracker.abuse.ch/'] },
+  malware: { path: '/api/malware', territoryKey: 'cyber_risk', cadenceHours: 6, roots: [DOC_ROOT, 'https://urlhaus.abuse.ch/'] }
 };
 
 export const PASSIVE_OSIRIS_KEYS = Object.freeze(Object.keys(SOURCE_REGISTRY));
@@ -82,6 +85,27 @@ export function configuredOsirisSources(env) {
 
 export function sourceDefinition(key) {
   return SOURCE_REGISTRY[key] ?? null;
+}
+
+export function osirisSourceCadenceHours(env, key) {
+  const def = sourceDefinition(key);
+  if (!def) return null;
+  let overrides = {};
+  if (env?.OSIRIS_SOURCE_CADENCES_JSON) {
+    try { overrides = JSON.parse(String(env.OSIRIS_SOURCE_CADENCES_JSON)); }
+    catch { throw new Error('osiris_invalid_cadence_json'); }
+  }
+  const raw = overrides[key] ?? def.cadenceHours ?? 24;
+  const hours = Number(raw);
+  if (!Number.isInteger(hours) || hours < 1 || hours > 168) throw new Error('osiris_invalid_cadence_hours');
+  return hours;
+}
+
+export function osirisSourceDue(env, key, scheduledDate) {
+  const cadence = osirisSourceCadenceHours(env, key);
+  if (!cadence) return false;
+  const epochHour = Math.floor(scheduledDate.getTime() / 3600000);
+  return epochHour % cadence === 0;
 }
 
 export async function fetchOsirisSource(env, sourceKey) {
