@@ -136,3 +136,21 @@ A14 semantic hypotheses use deterministic UUID-shaped identifiers derived from t
 `created_at` is not part of semantic identity. Relevant evidence, selected solution, offer economics, distribution moment/context and policy version are.
 
 Repository persistence is strictly idempotent for these semantic records: an identical record with the same ID is treated as already present, while the same ID with different semantic content raises an explicit repository error. This prevents both duplicate learning lineage and silent payload drift.
+
+
+## A14.3 validation planning
+
+A human A12 approval authorizes **planning only**. A14.3 converts an approved offer into the validation method that matches its real purchase behaviour instead of forcing every opportunity through the same funnel.
+
+Manual plans cover B2B, service, physical-product and distribution pilots. CTA routing is the only current path into A8 and requires all of the following before an A8 draft can exist:
+
+- an existing canonical A3 solution;
+- a canonical A7 `test_cta` decision with hard gates passed;
+- the same treatment solution in A7, A14 and the private CTA context;
+- explicit source asset and CTA slot;
+- explicit control solution;
+- explicit maximum exposures and evidence references.
+
+If more than one eligible A7 decision exists, selection must be explicit. The Brain does not choose the newest or highest-scoring decision automatically.
+
+A8 materialization stops at `draft`. The write boundary independently re-derives semantic hashes and deterministic experiment/version/variant/state IDs. Draft creation writes lineage only; it does not snapshot public state, claim `ready`, assign traffic, publish, contact anyone, spend money or mutate catalogue/price/checkout.
