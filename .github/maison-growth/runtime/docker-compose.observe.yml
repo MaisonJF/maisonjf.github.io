@@ -156,6 +156,34 @@ services:
         condition: service_healthy
     command: ["python","/opt/maison-growth/runtime/osiris_context_smoke.py"]
 
+  brain-mcp:
+    profiles: ["brain-mcp"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain-embeddings
+    restart: unless-stopped
+    environment:
+      MAISON_SEMANTIC_DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/maison_memory
+      MAISON_EMBEDDING_DEVICE: cpu
+      MAISON_BRAIN_MCP_PORT: "8792"
+      OSIRIS_MCP_URL: http://osiris-mcp:8790/mcp
+      HF_HOME: /model-cache
+    depends_on:
+      osiris-mcp:
+        condition: service_healthy
+      maison-memory-init:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:${BRAIN_MCP_HOST_PORT:-8792}:8792"
+    volumes:
+      - maison_model_cache:/model-cache
+    command: ["python","/opt/maison-growth/brain/brain_mcp_server.py"]
+    healthcheck:
+      test: ["CMD-SHELL","python -c \"import socket; s=socket.socket(); s.settimeout(2); s.connect(('127.0.0.1',8792)); s.close()\""]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+
   semantic-smoke:
     profiles: ["semantic-smoke"]
     build:
