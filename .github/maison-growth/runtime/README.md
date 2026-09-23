@@ -41,3 +41,28 @@ docker compose \
 The bridge health endpoint is local-only at `http://127.0.0.1:8791/health`.
 
 Do not set `OSIRIS_MEMORY_ENABLED=true` in A13 until the bridge is reachable over authenticated HTTPS and the observation-mirroring smoke test passes.
+
+
+## Validate Brain container
+
+This profile installs only the core analytical dependencies and runs repository validators:
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile brain-validation run --rm brain-validate
+```
+
+## Semantic Memory smoke
+
+This is an **explicit/manual** profile because it downloads the pinned multilingual E5 model into a persistent local model cache and writes only a system fixture to the `maison_memory` projection database.
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile semantic-smoke run --rm semantic-smoke
+```
+
+The selected first model is `intfloat/multilingual-e5-small`, pinned to revision `03415a4be176a1620747c692ed433219fabc3def`, 384 dimensions. Qdrant is not started; pgvector is the first experiment because PostgreSQL is already required by Osiris Memory.
