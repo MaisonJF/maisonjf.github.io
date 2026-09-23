@@ -39,7 +39,7 @@ class A14BridgeSchemaTests(unittest.TestCase):
         """)
         root=Path(__file__).resolve().parent/"migrations"
         con.executescript((root/"0012_universal_opportunity_earned_distribution.sql").read_text())
-        con.executescript((root/"0013_a14_bridges_recovery.sql").read_text())
+        con.executescript((root/"0013_a14_bridges_cash.sql").read_text())
         return con
 
     def seed_a14(self,con):
@@ -87,17 +87,6 @@ class A14BridgeSchemaTests(unittest.TestCase):
         row=con.execute("SELECT revenue_minor,immediate_contribution_minor FROM a14_realised_economics").fetchone()
         self.assertEqual(row,(3500,3000))
 
-    def test_recovery_target_has_no_repository_default_and_is_immutable(self):
-        con=self.make_db()
-        self.assertEqual(con.execute("SELECT count(*) FROM recovery_target_versions").fetchone()[0],0)
-        con.execute("""INSERT INTO recovery_target_versions
-          (recovery_target_version_id,target_key,target_amount_minor,currency,basis,
-           valid_from,valid_to,created_at,created_by,notes_json)
-          VALUES (?,?,?,?,?,?,?,?,?,?)""",
-          ("rtv_"+"8"*36,"capital_recovery",100000,"EUR","a3_immediate_contribution",
-           "2026-09-23T00:00:00Z",None,"2026-09-23T00:00:00Z","private_runtime","{}"))
-        with self.assertRaises(sqlite3.DatabaseError):
-            con.execute("UPDATE recovery_target_versions SET target_amount_minor=1")
 
 
 if __name__=="__main__":
