@@ -8244,10 +8244,6 @@
         "Systematic review / PMC (2026): review of silent treatment in close adult relationships found it can operate both as emotion regulation and as an interpersonal control mechanism, including use to influence, protest or punish — https://pmc.ncbi.nlm.nih.gov/articles/PMC12937000/",
         "Journal of Interpersonal Violence / PubMed (2026; PMID 39988968): qualitative research on coercive control describes restrictive regulation through isolation, threats, psychological manipulation and other tactics that can erode autonomy over time — https://pubmed.ncbi.nlm.nih.gov/39988968/"
       ],
-      "bodyStored": false,
-      "approvalRequired": true,
-      "automaticActivation": false,
-      "status": "needs_editorial",
       "roleCandidates": [
         "opening",
         "recognition",
@@ -8256,7 +8252,11 @@
         "reframe",
         "movement",
         "close"
-      ]
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
     },
     {
       "id": "brain_oracle_carga_mental_invisivel_da_casa",
@@ -8467,10 +8467,6 @@
         "Scientific Reports (2025): lembretes de figuras de apoio social reduziram medo a longo prazo em comparação com sinais de segurança aprendidos, apoiando um papel específico de pistas de suporte social na regulação de ameaça — https://doi.org/10.1038/s41598-025-27689-0",
         "Patient Experience Journal (2025): artigo sobre 'holding space' descreve presença profunda, escuta e postura não julgadora como uma abordagem centrada na pessoa quando a esperança diminui — https://pxjournal.org/journal/vol12/iss2/7/"
       ],
-      "bodyStored": false,
-      "approvalRequired": true,
-      "automaticActivation": false,
-      "status": "needs_editorial",
       "roleCandidates": [
         "opening",
         "recognition",
@@ -8479,7 +8475,11 @@
         "reframe",
         "movement",
         "close"
-      ]
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
     },
     {
       "id": "brain_oracle_sobrecarga_de_escolha_quando_mais_opcoes_paralisam",
@@ -9448,10 +9448,6 @@
         "Systematic review / PMC (2026): review of silent treatment in close adult relationships found it can operate both as emotion regulation and as an interpersonal control mechanism, including use to influence, protest or punish — https://pmc.ncbi.nlm.nih.gov/articles/PMC12937000/",
         "Journal of Interpersonal Violence / PubMed (2026; PMID 39988968): qualitative research on coercive control describes restrictive regulation through isolation, threats, psychological manipulation and other tactics that can erode autonomy over time — https://pubmed.ncbi.nlm.nih.gov/39988968/"
       ],
-      "bodyStored": false,
-      "approvalRequired": true,
-      "automaticActivation": false,
-      "status": "needs_editorial",
       "questionThemeCandidates": [
         "liberdade com preço emocional",
         "medo da reacção depois de escolher",
@@ -9722,7 +9718,11 @@
           "stage": "signature",
           "status": "needs_editorial"
         }
-      ]
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
     },
     {
       "id": "brain_question_carga_mental_invisivel_da_casa",
@@ -11434,10 +11434,6 @@
         "Scientific Reports (2025): lembretes de figuras de apoio social reduziram medo a longo prazo em comparação com sinais de segurança aprendidos, apoiando um papel específico de pistas de suporte social na regulação de ameaça — https://doi.org/10.1038/s41598-025-27689-0",
         "Patient Experience Journal (2025): artigo sobre 'holding space' descreve presença profunda, escuta e postura não julgadora como uma abordagem centrada na pessoa quando a esperança diminui — https://pxjournal.org/journal/vol12/iss2/7/"
       ],
-      "bodyStored": false,
-      "approvalRequired": true,
-      "automaticActivation": false,
-      "status": "needs_editorial",
       "questionThemeCandidates": [
         "alguém ficar quando tenho medo",
         "presença vs solução",
@@ -11708,7 +11704,11 @@
           "stage": "signature",
           "status": "needs_editorial"
         }
-      ]
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
     },
     {
       "id": "brain_question_sobrecarga_de_escolha_quando_mais_opcoes_paralisam",
