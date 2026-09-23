@@ -599,8 +599,8 @@
       "verification": "PARTIALLY_VERIFIED",
       "role": "scientific literature/knowledge graph sensing",
       "sense": "emerging science",
-      "cost": "free allowance/snapshot; current limits must be checked before production",
-      "license": "open data terms; exact reuse fields must be respected",
+      "cost": "usage-based API with free daily account budget; Maison cap required",
+      "license": "OpenAlex data CC0; API service has usage-based access terms",
       "self_hosted": "snapshot possible",
       "depends_on": [
         "API or snapshot pipeline"
@@ -610,7 +610,8 @@
         "Oceanos",
         "Foundry"
       ],
-      "notes": "Do not treat as universal patent database."
+      "notes": "A13 metadata-only search adapter implemented. Production path requires account API key; key never enters URL/provenance. API-reported cost is recorded. No PDF/full-text downloads.",
+      "priority": "P2"
     },
     {
       "id": "pubchem",
@@ -789,10 +790,10 @@
       "type": "data_source",
       "name": "Eurostat",
       "status": "AGORA",
-      "verification": "PENDING_VERIFICATION",
+      "verification": "PARTIALLY_VERIFIED",
       "role": "EU economic/demographic/public statistics",
       "sense": "economic context",
-      "cost": "public data",
+      "cost": "official API access free of charge",
       "license": "verify dataset reuse/attribution terms",
       "self_hosted": "downloads possible",
       "depends_on": [],
@@ -801,7 +802,8 @@
         "B2B",
         "geographic analysis"
       ],
-      "notes": "Prefer official datasets and preserve period/geography."
+      "notes": "A13 adapter implemented with explicit query profiles/cadences and master+source kill switches. Official Statistics API returns JSON-stat 2.0; no default datasets are silently queried.",
+      "priority": "P1"
     },
     {
       "id": "ine-pt",
@@ -827,10 +829,10 @@
       "type": "data_source",
       "name": "BASE.gov.pt",
       "status": "AGORA",
-      "verification": "PENDING_VERIFICATION",
+      "verification": "PARTIALLY_VERIFIED",
       "role": "Portuguese public procurement/contracts intelligence",
       "sense": "B2B opportunity sensing",
-      "cost": "public access",
+      "cost": "public data; high-volume API requires prior IMPIC authorization/token",
       "license": "verify API/data reuse and rate conditions",
       "self_hosted": false,
       "depends_on": [],
@@ -838,7 +840,8 @@
         "Scout",
         "B2B"
       ],
-      "notes": "Useful for public-sector demand patterns and procurement discovery."
+      "notes": "A13 official API adapter implemented for allowlisted contract/announcement/modification/entity endpoints. No token = no task. Weekly open-data route remains a separate future option.",
+      "priority": "P1"
     },
     {
       "id": "fred",
