@@ -16,13 +16,13 @@ def main() -> None:
     assert contract["principles"]["unknown_is_not_default"] is True
     assert contract["principles"]["public_side_effects"] is False
     assert policy["status"] == "initial_hypothesis_not_empirical_truth"
-    for key in ("opportunity_weights","distribution_weights","recovery_weights"):
+    for key in ("opportunity_weights","distribution_weights","cash_weights"):
         assert policy[key] and all(float(v) >= 0 for v in policy[key].values())
         assert sum(float(v) for v in policy[key].values()) > 0
     source = (ROOT / "opportunity_engine.py").read_text(encoding="utf-8").lower()
     for prohibited in ("requests.post(", "smtplib", "sendgrid", "checkout-session", "price_write"):
         assert prohibited not in source
-    for test_file in ("test_a14.py", "test_a14_repository.py", "test_recovery_engine.py", "test_a14_bridges.py", "test_recovery_repository.py"):
+    for test_file in ("test_a14.py", "test_a14_repository.py", "test_cash_engine.py", "test_a14_bridges.py", "test_cash_repository.py"):
         proc = subprocess.run(
             [sys.executable, str(ROOT / test_file)],
             cwd=str(ROOT),
