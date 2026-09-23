@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 from pathlib import Path
 from typing import Any, Optional
@@ -65,6 +66,14 @@ def _commercial_assets() -> CommercialAssetContext:
     # MCP intentionally exposes catalogue-derived context only. Private stock/cost overlay
     # is not loaded through this general agent-facing read surface.
     return CommercialAssetContext.from_files(ROOT/"commercial-assets.generated.json")
+
+
+def _commercial_attention() -> dict[str,Any]:
+    return json.loads((ROOT/"commercial-attention.generated.json").read_text(encoding="utf-8"))
+
+
+def _commercial_bundles() -> dict[str,Any]:
+    return json.loads((ROOT/"commercial-bundles.generated.json").read_text(encoding="utf-8"))
 
 
 def _semantic_search_sync(
@@ -170,6 +179,47 @@ def maison_commercial_asset_search(query: str, limit: int=6) -> dict[str,Any]:
             }
             for hit in hits
         ],
+    }
+
+
+@mcp.tool(annotations=READ_ONLY)
+def maison_commercial_attention(
+    limit: int=10,
+    asset_type: str | None=None,
+) -> dict[str,Any]:
+    """Read the internal Ocean-informed commercial attention ranking; never a profit forecast."""
+    if not 1 <= limit <= 30:
+        raise ValueError("limit_must_be_1_30")
+    allowed={None,"physical_product","service","b2b_service"}
+    if asset_type not in allowed:
+        raise ValueError("unsupported_asset_type")
+    payload=_commercial_attention()
+    rows=payload.get("assets",[])
+    if asset_type is not None:
+        rows=[row for row in rows if row.get("asset_type")==asset_type]
+    return {
+        "mode":"read_only",
+        "attention_score_is_not_profit_score":True,
+        "execution_authority":False,
+        "summary":payload.get("summary",{}),
+        "assets":rows[:limit],
+    }
+
+
+@mcp.tool(annotations=READ_ONLY)
+def maison_commercial_bundle_hypotheses(limit: int=10) -> dict[str,Any]:
+    """Read internal physical bundle drafts; catalogue subtotals are not approved bundle prices."""
+    if not 1 <= limit <= 30:
+        raise ValueError("limit_must_be_1_30")
+    payload=_commercial_bundles()
+    return {
+        "mode":"read_only",
+        "bundle_price_authorized":False,
+        "discount_authorized":False,
+        "public_write_authorized":False,
+        "automatic_checkout_authorized":False,
+        "summary":payload.get("summary",{}),
+        "bundles":payload.get("bundles",[])[:limit],
     }
 
 

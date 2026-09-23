@@ -1,0 +1,563 @@
+{
+  "schema_version": "commercial_attention_v1",
+  "source_assets": "commercial-assets.generated.json",
+  "source_oceans": "editorial-queue.json",
+  "policy": "commercial-attention-policy.json",
+  "contract": {
+    "internal_only": true,
+    "attention_score_is_not_profit_score": true,
+    "operational_unknowns_block_execution": true,
+    "ocean_metadata_is_context_not_external_evidence": true,
+    "automatic_publication": false,
+    "automatic_discount": false,
+    "automatic_checkout": false
+  },
+  "summary": {
+    "ranked_assets": 12,
+    "physical_products": 5,
+    "services": 6,
+    "b2b_services": 1,
+    "execution_ready": 0
+  },
+  "assets": [
+    {
+      "asset_ref": "catalog:service:companhia",
+      "name": "Presença",
+      "asset_type": "service",
+      "slug": "companhia",
+      "price_minor": null,
+      "price_label": "desde 35 €",
+      "currency": "EUR",
+      "attention_score": 44,
+      "direct_ocean_mentions": 3,
+      "direct_ocean_territories": [
+        "precisar-de-solidao-para-recuperar-energia-social",
+        "presenca-que-ampara-sem-tentar-resolver",
+        "solidao-com-contacto-sem-conexao-de-qualidade"
+      ],
+      "contextual_ocean_matches": [
+        {
+          "territory": "presenca-que-ampara-sem-tentar-resolver",
+          "score": 0.0874
+        },
+        {
+          "territory": "solidao-com-contacto-sem-conexao-de-qualidade",
+          "score": 0.0781
+        }
+      ],
+      "operational_blockers": [
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "direct_ocean_adjacency",
+        "contextual_ocean_match",
+        "public_active_asset",
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 1
+    },
+    {
+      "asset_ref": "catalog:product:nevoa",
+      "name": "Névoa de Ambiente",
+      "asset_type": "physical_product",
+      "slug": "nevoa",
+      "price_minor": 700,
+      "price_label": "7",
+      "currency": "EUR",
+      "attention_score": 42,
+      "direct_ocean_mentions": 2,
+      "direct_ocean_territories": [
+        "autonomia-condicionada-pelo-medo-da-reaccao",
+        "presenca-que-ampara-sem-tentar-resolver"
+      ],
+      "contextual_ocean_matches": [
+        {
+          "territory": "adiar-o-sono-para-recuperar-autonomia",
+          "score": 0.1042
+        },
+        {
+          "territory": "autonomia-condicionada-pelo-medo-da-reaccao",
+          "score": 0.0667
+        },
+        {
+          "territory": "telepressao-e-disponibilidade-permanente",
+          "score": 0.0625
+        },
+        {
+          "territory": "presenca-que-ampara-sem-tentar-resolver",
+          "score": 0.0603
+        }
+      ],
+      "operational_blockers": [
+        "inventory_unknown",
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "direct_ocean_adjacency",
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset",
+        "inventory_unknown",
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 2
+    },
+    {
+      "asset_ref": "catalog:product:escalda-pes",
+      "name": "Escalda-Pés",
+      "asset_type": "physical_product",
+      "slug": "escalda-pes",
+      "price_minor": 500,
+      "price_label": "5",
+      "currency": "EUR",
+      "attention_score": 36,
+      "direct_ocean_mentions": 2,
+      "direct_ocean_territories": [
+        "autonomia-condicionada-pelo-medo-da-reaccao",
+        "presenca-que-ampara-sem-tentar-resolver"
+      ],
+      "contextual_ocean_matches": [
+        {
+          "territory": "doomscrolling-para-tentar-reduzir-incerteza",
+          "score": 0.0673
+        },
+        {
+          "territory": "presenca-que-ampara-sem-tentar-resolver",
+          "score": 0.0625
+        }
+      ],
+      "operational_blockers": [
+        "inventory_unknown",
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "direct_ocean_adjacency",
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset",
+        "inventory_unknown",
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 3
+    },
+    {
+      "asset_ref": "catalog:product:vela-pequena",
+      "name": "Vela Aromática",
+      "asset_type": "physical_product",
+      "slug": "vela-pequena",
+      "price_minor": 800,
+      "price_label": "8",
+      "currency": "EUR",
+      "attention_score": 33,
+      "direct_ocean_mentions": 2,
+      "direct_ocean_territories": [
+        "autonomia-condicionada-pelo-medo-da-reaccao",
+        "presenca-que-ampara-sem-tentar-resolver"
+      ],
+      "contextual_ocean_matches": [
+        {
+          "territory": "adiar-o-sono-para-recuperar-autonomia",
+          "score": 0.0619
+        }
+      ],
+      "operational_blockers": [
+        "inventory_unknown",
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "direct_ocean_adjacency",
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset",
+        "inventory_unknown",
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 4
+    },
+    {
+      "asset_ref": "catalog:product:vela-vidro",
+      "name": "Vela Aromática",
+      "asset_type": "physical_product",
+      "slug": "vela-vidro",
+      "price_minor": 1400,
+      "price_label": "14",
+      "currency": "EUR",
+      "attention_score": 33,
+      "direct_ocean_mentions": 2,
+      "direct_ocean_territories": [
+        "autonomia-condicionada-pelo-medo-da-reaccao",
+        "presenca-que-ampara-sem-tentar-resolver"
+      ],
+      "contextual_ocean_matches": [
+        {
+          "territory": "adiar-o-sono-para-recuperar-autonomia",
+          "score": 0.0659
+        }
+      ],
+      "operational_blockers": [
+        "inventory_unknown",
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "direct_ocean_adjacency",
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset",
+        "inventory_unknown",
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 5
+    },
+    {
+      "asset_ref": "catalog:product:oleo-massagem",
+      "name": "Óleo de Massagem",
+      "asset_type": "physical_product",
+      "slug": "oleo-massagem",
+      "price_minor": 1200,
+      "price_label": "12",
+      "currency": "EUR",
+      "attention_score": 30,
+      "direct_ocean_mentions": 2,
+      "direct_ocean_territories": [
+        "autonomia-condicionada-pelo-medo-da-reaccao",
+        "presenca-que-ampara-sem-tentar-resolver"
+      ],
+      "contextual_ocean_matches": [],
+      "operational_blockers": [
+        "inventory_unknown",
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "direct_ocean_adjacency",
+        "low_price_barrier",
+        "public_active_asset",
+        "inventory_unknown",
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 6
+    },
+    {
+      "asset_ref": "catalog:service:tarot",
+      "name": "Consulta de Tarot",
+      "asset_type": "service",
+      "slug": "tarot",
+      "price_minor": 3500,
+      "price_label": "35 €",
+      "currency": "EUR",
+      "attention_score": 22,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "perda-ambigua-sem-fecho-claro",
+          "score": 0.08
+        },
+        {
+          "territory": "solidao-com-contacto-sem-conexao-de-qualidade",
+          "score": 0.0758
+        },
+        {
+          "territory": "auto-silenciamento-para-preservar-o-vinculo",
+          "score": 0.0745
+        },
+        {
+          "territory": "autonomia-condicionada-pelo-medo-da-reaccao",
+          "score": 0.0721
+        },
+        {
+          "territory": "luto-por-um-futuro-que-deixou-de-ser-possivel",
+          "score": 0.0674
+        },
+        {
+          "territory": "atencao-fragmentada-por-interrupcoes-digitais",
+          "score": 0.0659
+        }
+      ],
+      "operational_blockers": [
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "medium_price_barrier",
+        "public_active_asset",
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 7
+    },
+    {
+      "asset_ref": "catalog:service:acompanhamento",
+      "name": "Acompanhamento",
+      "asset_type": "service",
+      "slug": "acompanhamento",
+      "price_minor": null,
+      "price_label": "170 € · 4 semanas",
+      "currency": "EUR",
+      "attention_score": 17,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "solidao-com-contacto-sem-conexao-de-qualidade",
+          "score": 0.0964
+        },
+        {
+          "territory": "presenca-que-ampara-sem-tentar-resolver",
+          "score": 0.0894
+        },
+        {
+          "territory": "perda-ambigua-sem-fecho-claro",
+          "score": 0.0745
+        },
+        {
+          "territory": "telepressao-e-disponibilidade-permanente",
+          "score": 0.066
+        },
+        {
+          "territory": "atencao-fragmentada-por-interrupcoes-digitais",
+          "score": 0.0636
+        }
+      ],
+      "operational_blockers": [
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "public_active_asset",
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 8
+    },
+    {
+      "asset_ref": "catalog:service:ritual-personalizado",
+      "name": "Ritual Personalizado",
+      "asset_type": "service",
+      "slug": "ritual-personalizado",
+      "price_minor": null,
+      "price_label": null,
+      "currency": "EUR",
+      "attention_score": 11,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "adiar-o-sono-para-recuperar-autonomia",
+          "score": 0.0737
+        },
+        {
+          "territory": "atencao-fragmentada-por-interrupcoes-digitais",
+          "score": 0.0625
+        },
+        {
+          "territory": "evitamento-financeiro-sob-escassez",
+          "score": 0.0606
+        }
+      ],
+      "operational_blockers": [
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "public_active_asset",
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 9
+    },
+    {
+      "asset_ref": "catalog:service:b2b",
+      "name": "Maison para profissionais",
+      "asset_type": "b2b_service",
+      "slug": "b2b",
+      "price_minor": null,
+      "price_label": null,
+      "currency": "EUR",
+      "attention_score": 2,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [],
+      "operational_blockers": [
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "public_active_asset",
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 10
+    },
+    {
+      "asset_ref": "catalog:service:mentoria",
+      "name": "Mentoria",
+      "asset_type": "service",
+      "slug": "mentoria",
+      "price_minor": null,
+      "price_label": "a partir de 125 €",
+      "currency": "EUR",
+      "attention_score": 2,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [],
+      "operational_blockers": [
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "public_active_asset",
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 11
+    },
+    {
+      "asset_ref": "catalog:service:pedidos-especiais",
+      "name": "Pedidos Físicos",
+      "asset_type": "service",
+      "slug": "pedidos-especiais",
+      "price_minor": null,
+      "price_label": null,
+      "currency": "EUR",
+      "attention_score": 2,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [],
+      "operational_blockers": [
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "public_active_asset",
+        "capacity_unknown",
+        "variable_cost_unknown",
+        "human_effort_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 12
+    }
+  ]
+}
