@@ -2,9 +2,8 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 
-const ROOT=new URL('../../../..',import.meta.url);
-const PRODUCTS_URL=new URL('data/products.js',ROOT);
-const SERVICES_URL=new URL('data/services.js',ROOT);
+const PRODUCTS_URL=new URL('../../../data/products.js',import.meta.url);
+const SERVICES_URL=new URL('../../../data/services.js',import.meta.url);
 const OUTPUT_URL=new URL('commercial-assets.generated.json',import.meta.url);
 
 function loadWindow(url){
