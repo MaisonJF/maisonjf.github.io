@@ -415,9 +415,12 @@ export async function handleBrainProposalRequest(request, env) {
     const offerIds=new Set(offers.map(x=>x.offer_hypothesis_id));
     const matches=assertArray(payload.distribution_matches ?? [],'invalid_distribution_matches',MAX_MATCHES);
     matches.forEach(x=>validateMatch(x,offerIds));
+    const queueForHuman=payload.queue_for_human===true;
+    assert(payload.queue_for_human===true || payload.queue_for_human===false,'queue_for_human_required');
     const reviews=assertArray(payload.a12_review_payloads ?? [],'invalid_a12_reviews',MAX_OFFERS);
     reviews.forEach(x=>validateReview(x,payload.opportunity.opportunity_id,offerIds));
-    assert(reviews.length===offers.length,'every_offer_requires_a12_review');
+    if (queueForHuman) assert(reviews.length===offers.length,'every_offer_requires_a12_review');
+    else assert(reviews.length===0,'analysis_only_proposal_cannot_create_human_reviews');
 
     const hypothesisStatements=await preflight(env,payload.opportunity,offers,matches);
     const now=new Date().toISOString();
@@ -428,7 +431,7 @@ export async function handleBrainProposalRequest(request, env) {
 
     return json({
       stored:true,
-      mode:'analysis_and_human_review_only',
+      mode:queueForHuman ? 'analysis_and_human_review_only' : 'analysis_only',
       opportunity_id:payload.opportunity.opportunity_id,
       offer_hypotheses:offers.length,
       distribution_matches:matches.length,
