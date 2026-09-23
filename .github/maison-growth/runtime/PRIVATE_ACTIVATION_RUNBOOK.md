@@ -42,6 +42,23 @@ docker compose \
   --profile brain-validation run --rm brain-validate
 ```
 
+## Optional GitHub deployment gate
+
+After this branch is merged to the default branch, `.github/workflows/maison-private-runtime.yml` can render and dry-run the private Worker configuration without enabling collection. A live apply is manual-only and requires the workflow input `access_boundary_confirmed=true`.
+
+Repository/Actions secrets expected by that workflow:
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+- `MAISON_GROWTH_D1_DATABASE_ID`
+- `MAISON_BRAIN_PRIVATE_URL`
+- `MAISON_BRAIN_CONTROL_TOKEN`
+- `MAISON_BRAIN_PROPOSAL_TOKEN` for proposal stages
+- `MAISON_BRAIN_REVIEW_DECISION_TOKEN` for human-decision stage
+- optional paired `MAISON_CF_ACCESS_CLIENT_ID` + `MAISON_CF_ACCESS_CLIENT_SECRET`
+
+The renderer hard-locks `WORKER_ENABLED=false`, `KILL_SWITCH=true`, OSIRIS/public sensors/model gateways OFF. The workflow cannot be used to turn collection on.
+
 ## 1. Private Brain read
 
 Before changing any remote switch:

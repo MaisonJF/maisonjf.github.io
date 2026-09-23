@@ -1,0 +1,112 @@
+name: Maison Private Runtime Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: Private Brain surface to deploy
+        required: true
+        type: choice
+        options:
+          - private_brain_read_candidate
+          - proposal_materialization_candidate
+          - human_review_decision_candidate
+      apply:
+        description: Apply to Cloudflare (false = dry-run only)
+        required: true
+        default: false
+        type: boolean
+      access_boundary_confirmed:
+        description: Confirm authenticated HTTPS/Access boundary is already configured
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  private-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      MAISON_GROWTH_D1_DATABASE_ID: ${{ secrets.MAISON_GROWTH_D1_DATABASE_ID }}
+      BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+      BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+      BRAIN_PROPOSAL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+      BRAIN_PROPOSAL_TOKEN: ${{ secrets.MAISON_BRAIN_PROPOSAL_TOKEN }}
+      BRAIN_REVIEW_DECISION_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+      BRAIN_REVIEW_DECISION_TOKEN: ${{ secrets.MAISON_BRAIN_REVIEW_DECISION_TOKEN }}
+      CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+      CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Guard live apply
+        if: ${{ inputs.apply }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ inputs.access_boundary_confirmed }}" != "true" ]]; then
+            echo "Refusing apply: authenticated HTTPS/Access boundary was not confirmed."
+            exit 1
+          fi
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$MAISON_GROWTH_D1_DATABASE_ID"
+
+      - name: Private-stage preflight
+        run: |
+          python .github/maison-growth/runtime/preflight_private_runtime.py "${{ inputs.stage }}"
+
+      - name: Render temporary Wrangler config
+        run: |
+          python .github/maison-growth/runtime/render_private_worker_config.py             "${{ inputs.stage }}"             --template workers/maison-intelligence/wrangler.template.jsonc             --database-id "$MAISON_GROWTH_D1_DATABASE_ID"             --output workers/maison-intelligence/wrangler.private.runtime.jsonc
+
+      - name: Install Worker tooling
+        working-directory: workers/maison-intelligence
+        run: npm install --ignore-scripts
+
+      - name: Validate Worker
+        working-directory: workers/maison-intelligence
+        run: |
+          npm test
+          npm run check
+          npx wrangler deploy --dry-run --config wrangler.private.runtime.jsonc
+
+      - name: Install private Worker secrets
+        if: ${{ inputs.apply }}
+        working-directory: workers/maison-intelligence
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s' "$BRAIN_CONTROL_TOKEN" | npx wrangler secret put BRAIN_CONTROL_TOKEN --config wrangler.private.runtime.jsonc
+          case "${{ inputs.stage }}" in
+            proposal_materialization_candidate|human_review_decision_candidate)
+              test -n "$BRAIN_PROPOSAL_TOKEN"
+              printf '%s' "$BRAIN_PROPOSAL_TOKEN" | npx wrangler secret put BRAIN_PROPOSAL_TOKEN --config wrangler.private.runtime.jsonc
+              ;;
+          esac
+          if [[ "${{ inputs.stage }}" == "human_review_decision_candidate" ]]; then
+            test -n "$BRAIN_REVIEW_DECISION_TOKEN"
+            printf '%s' "$BRAIN_REVIEW_DECISION_TOKEN" | npx wrangler secret put BRAIN_REVIEW_DECISION_TOKEN --config wrangler.private.runtime.jsonc
+          fi
+
+      - name: Deploy private surface
+        if: ${{ inputs.apply }}
+        working-directory: workers/maison-intelligence
+        run: npx wrangler deploy --config wrangler.private.runtime.jsonc
