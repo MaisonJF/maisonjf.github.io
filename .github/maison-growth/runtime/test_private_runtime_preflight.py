@@ -29,7 +29,7 @@ def run(stage: str, body: str):
 
 
 VALID_CONTROL = """
-BRAIN_CONTROL_API_URL=https://brain.private.example
+BRAIN_CONTROL_API_URL=https://brain.private.test
 BRAIN_CONTROL_TOKEN=control_token_abcdefghijklmnopqrstuvwxyz
 CF_ACCESS_CLIENT_ID=access-client
 CF_ACCESS_CLIENT_SECRET=access-secret
@@ -70,7 +70,7 @@ class PrivateRuntimePreflightTests(unittest.TestCase):
         code, payload = run(
             "proposal_materialization_candidate",
             VALID_CONTROL
-            + "BRAIN_PROPOSAL_API_URL=https://brain.private.example\n"
+            + "BRAIN_PROPOSAL_API_URL=https://brain.private.test\n"
             + f"BRAIN_PROPOSAL_TOKEN={shared}\n"
             + f"BRAIN_CONTROL_TOKEN={shared}\n",
         )
@@ -81,7 +81,7 @@ class PrivateRuntimePreflightTests(unittest.TestCase):
         code, payload = run(
             "proposal_materialization_candidate",
             VALID_CONTROL
-            + "BRAIN_PROPOSAL_API_URL=https://brain.private.example\n"
+            + "BRAIN_PROPOSAL_API_URL=https://brain.private.test\n"
             + "BRAIN_PROPOSAL_TOKEN=proposal_token_abcdefghijklmnopqrstuvwxyz\n",
         )
         self.assertEqual(code, 0)
