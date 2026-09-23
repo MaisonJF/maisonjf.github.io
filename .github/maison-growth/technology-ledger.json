@@ -861,7 +861,8 @@
         "Oceanos",
         "Foundry"
       ],
-      "notes": "Do not couple Brain directly to Qdrant or pgvector."
+      "notes": "Stable A5 semantic contract plus brain/semantic_memory.py projection interface; backend remains abstract while Qdrant vs pgvector is evaluated.",
+      "priority": "P1"
     },
     {
       "id": "qdrant",
@@ -1057,7 +1058,7 @@
       "type": "internal_capability",
       "name": "Maison Pre-Brain",
       "status": "AGORA",
-      "verification": "DESIGN_APPROVED",
+      "verification": "VERIFIED_IN_REPO",
       "role": "local filter before LLM: dedupe, anomaly detection, lightweight classification, clustering, weak-signal convergence",
       "sense": "attention",
       "cost": "target near-zero compute",
@@ -1074,14 +1075,15 @@
         "Brain",
         "Scout"
       ],
-      "notes": "Goal is to send only high-value evidence/hypotheses to expensive reasoning."
+      "notes": "Implemented analysis-only core in .github/maison-growth/brain/prebrain.py with A13 feed view; DuckDB/Polars adapters are optional analytical backends, not canonical stores.",
+      "priority": "P0"
     },
     {
       "id": "maison-scout",
       "type": "internal_agent",
       "name": "Maison Scout",
       "status": "AGORA",
-      "verification": "DESIGN_APPROVED",
+      "verification": "VERIFIED_IN_REPO",
       "role": "continuous discovery of unmet needs, anomalies and unasked commercial opportunities",
       "sense": "curiosity",
       "cost": "bounded by sensors/compute",
@@ -1099,14 +1101,15 @@
         "Oráculo",
         "PÁRA DE IGNORAR!"
       ],
-      "notes": "Produces internal hypotheses/candidates only."
+      "notes": "Implemented in brain/scout.py; produces internal evidence-linked opportunity candidates only and enforces existing-asset-first context.",
+      "priority": "P0"
     },
     {
       "id": "maison-critic",
       "type": "internal_agent",
       "name": "Maison Critic",
       "status": "AGORA",
-      "verification": "DESIGN_APPROVED",
+      "verification": "VERIFIED_IN_REPO",
       "role": "adversarially challenge Scout proposals before human inbox",
       "sense": "skepticism",
       "cost": "local/cheap model preferred where possible",
@@ -1119,14 +1122,15 @@
       "serves": [
         "Revenue Engine"
       ],
-      "notes": "Critic may reject/flag; it does not launch products."
+      "notes": "Implemented in brain/critic.py; challenges source independence, contradictions, economics and operational unknowns before A14 forwarding.",
+      "priority": "P0"
     },
     {
       "id": "maison-foundry",
       "type": "internal_capability",
       "name": "Maison Content & Product Foundry",
       "status": "AGORA",
-      "verification": "DESIGN_APPROVED",
+      "verification": "VERIFIED_IN_REPO",
       "role": "turn validated territories into original digital/physical/service product families",
       "sense": "creation",
       "cost": "variable; digital-first validation",
@@ -1146,7 +1150,8 @@
         "Oráculo",
         "PÁRA DE IGNORAR!"
       ],
-      "notes": "Research/synthesis must produce original work; copyrighted works are not re-skinned."
+      "notes": "Implemented in brain/foundry.py across physical, digital, service, experience, B2B, wholesale, white-label, licensing and other A14 offer types; no launch authority.",
+      "priority": "P0"
     },
     {
       "id": "opportunity-attribution",
