@@ -116,3 +116,7 @@ jobs:
         if: ${{ inputs.apply }}
         working-directory: workers/maison-intelligence
         run: npx wrangler deploy --config wrangler.private.runtime.jsonc
+
+      - name: Verify deployed private Brain health
+        if: ${{ inputs.apply }}
+        run: python .github/maison-growth/runtime/verify_private_brain_health.py
