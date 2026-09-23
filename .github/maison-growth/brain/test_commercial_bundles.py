@@ -19,6 +19,10 @@ class CommercialBundleTests(unittest.TestCase):
         cls.payload=build_payload(cls.source,cls.assets)
         cls.editorial=json.loads((ROOT/"editorial-queue.json").read_text(encoding="utf-8"))
 
+    def test_generated_bundle_file_is_current(self):
+        generated=json.loads((ROOT/"commercial-bundles.generated.json").read_text(encoding="utf-8"))
+        self.assertEqual(generated,self.payload)
+
     def test_bundle_drafts_are_internal_and_non_executing(self):
         self.assertEqual(self.payload["summary"]["bundle_count"],4)
         self.assertEqual(self.payload["summary"]["ready_for_publication"],0)
