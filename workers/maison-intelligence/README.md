@@ -10,6 +10,12 @@ It is deliberately **off by default**. Repository code alone cannot spend money 
 
 The public Maison site does not depend on this Worker.
 
+## Passive world sensors
+
+The Worker can also ingest the keyless, passive OSIRIS public API into the same A13 provenance pipeline. The initial allowlist covers aggregate stats, earthquakes, fires, severe weather/natural events, public news feeds and markets. CCTV metadata is supported by the adapter registry but is intentionally opt-in until a dedicated aggregate vision layer is attached; raw camera feeds are never treated as interpreted behaviour.
+
+OSIRIS sensing is disabled by default. When enabled, the template schedules passive collection hourly and stores it as `public_web` evidence with source provenance.
+
 ## Providers
 
 Adapters are implemented for:
@@ -26,6 +32,8 @@ A provider is skipped unless its secret and required model setting are configure
 
 - environment `WORKER_ENABLED=false`;
 - environment `KILL_SWITCH=true`;
+- environment `OSIRIS_ENABLED=false`;
+- OSIRIS uses only an explicit passive-source allowlist; active scanner/RECON routes are not part of this Worker;
 - database kill switch = ON after migration;
 - two territories per run;
 - maximum two calls per provider per UTC day;
@@ -114,7 +122,7 @@ WHERE control_id='global';
 
 ## Cost discipline
 
-The initial schedule runs daily at 04:17 UTC. With the default two territories and cap of two calls/provider/day, a configured provider can make at most two calls per UTC day. Increase only after inspecting real provider usage.
+The grounded/AI research schedule runs daily at 04:17 UTC. The passive OSIRIS schedule is hourly when explicitly enabled, with a separate per-source daily cap. With the default two AI territories and cap of two calls/provider/day, a configured AI provider can make at most two calls per UTC day. Increase only after inspecting real provider usage.
 
 When a provider reports cost metadata, A13 records it in `external_intelligence_daily_usage.reported_cost_usd`. Call caps remain authoritative because not every provider reports cost in the same way.
 
