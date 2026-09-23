@@ -93,6 +93,7 @@ function basePayload() {
   const offerId='ofh_12345678-1234-5234-9234-123456789012';
   return {
     schema:'maison.a14-materialize.v1',
+    queue_for_human:true,
     opportunity:{
       opportunity_id:opportunityId,need_id:null,territory_code:'gifting',
       opportunity_score:null,confidence:0.7,known_dimensions:[],unknown_dimensions:['demand'],
@@ -164,6 +165,22 @@ test('valid A14 proposal persists hypotheses and A12 human review only', async (
   assert.equal(queue.status,'pending');
 });
 
+test('analysis-only persistence creates no A12 queue', async () => {
+  const e=env();
+  const payload=basePayload();
+  payload.queue_for_human=false;
+  payload.a12_review_payloads=[];
+  const response=await handleBrainProposalRequest(request(payload),e);
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.mode,'analysis_only');
+  assert.equal(body.human_reviews,0);
+  assert.equal(e.tables.opportunity_hypotheses.size,1);
+  assert.equal(e.tables.opportunity_offer_hypotheses.size,1);
+  assert.equal(e.tables.autonomy_action_log.size,0);
+  assert.equal(e.tables.autonomy_human_queue.size,0);
+});
+
 test('same semantic proposal is idempotent', async () => {
   const e=env();
   let response=await handleBrainProposalRequest(request(basePayload()),e);
@@ -220,4 +237,13 @@ test('proposal privacy scan rejects direct PII', async () => {
   const response=await handleBrainProposalRequest(request(payload),env());
   assert.equal(response.status,400);
   assert.match((await response.json()).error,/proposal_privacy_email_detected/);
+});
+
+
+test('analysis-only proposal cannot smuggle human reviews', async () => {
+  const payload=basePayload();
+  payload.queue_for_human=false;
+  const response=await handleBrainProposalRequest(request(payload),env());
+  assert.equal(response.status,400);
+  assert.equal((await response.json()).error,'analysis_only_proposal_cannot_create_human_reviews');
 });
