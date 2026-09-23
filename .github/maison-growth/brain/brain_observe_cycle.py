@@ -44,6 +44,17 @@ def _explicit_policy() -> dict[str,Any]:
     return value
 
 
+def _commercial_asset_query(text: str, hints: Sequence[object]) -> str:
+    chunks=[text]
+    for hint in hints:
+        chunks.extend([
+            str(getattr(hint,"commercial_adjacency","") or ""),
+            str(getattr(hint,"intent","") or ""),
+            " ".join(getattr(hint,"question_theme_candidates",()) or ()),
+        ])
+    return " ".join(x for x in chunks if x).strip()
+
+
 def _append_context(
     target: dict[str,tuple[str,...]],
     territory: str,
@@ -220,13 +231,27 @@ def build_observe_output() -> dict[str,Any]:
     # Oceanos and commercial assets contribute supporting context refs, never independent evidence roots.
     ocean=OceanEditorialContext.from_file(ROOT/"editorial-queue.json")
     knowledge_context:dict[str,tuple[str,...]]={}
+    ocean_commercial_hint_matches=0
     for row in feed:
         territory=str(row.get("territory_key") or "")
         text=str(row.get("response_excerpt") or "")
         refs=[hit.ref for hit in ocean.search(text,limit=5)]
         if refs:
             _append_context(knowledge_context,territory,refs)
-        asset_refs=[hit.ref for hit in asset_context.search(text,limit=5)]
+
+        commercial_hints=ocean.commercial_hints(text,limit=3)
+        if commercial_hints:
+            ocean_commercial_hint_matches+=len(commercial_hints)
+            _append_context(
+                knowledge_context,
+                territory,
+                [hint.ref for hint in commercial_hints],
+            )
+
+        # Ocean commercial adjacency is routing context only: it may help find an
+        # existing Maison asset, but it never becomes external evidence or execution authority.
+        asset_query=_commercial_asset_query(text,commercial_hints)
+        asset_refs=[hit.ref for hit in asset_context.search(asset_query,limit=5)]
         if asset_refs:
             _append_context(knowledge_context,territory,asset_refs)
 
@@ -270,6 +295,7 @@ def build_observe_output() -> dict[str,Any]:
         "learning_rows":len(learning),
         "runtime_memory_status":dict(runtime_memory.status),
         "commercial_asset_status":asset_context.summary(),
+        "ocean_commercial_hint_matches":ocean_commercial_hint_matches,
         "packets":[packet_to_dict(x) for x in packets],
         "a14_previews":[preview_to_dict(x) for x in a14_previews],
         "writes_performed":False,

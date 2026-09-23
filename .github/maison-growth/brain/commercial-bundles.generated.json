@@ -1,0 +1,256 @@
+{
+  "schema_version": "commercial_bundle_hypotheses_v1",
+  "source": "commercial-bundles.source.json",
+  "asset_source": "commercial-assets.generated.json",
+  "contract": {
+    "hypotheses_only": true,
+    "human_approval_required": true,
+    "automatic_publication": false,
+    "automatic_discount": false,
+    "catalogue_subtotal_is_not_bundle_price": true,
+    "stock_must_be_verified_before_offer": true
+  },
+  "summary": {
+    "bundle_count": 4,
+    "ready_for_publication": 0,
+    "requires_stock_check": 4,
+    "requires_margin_check": 4
+  },
+  "bundles": [
+    {
+      "bundle_id": "bundle_pausa_casa",
+      "label": "Pausa em Casa",
+      "purpose": "Juntar dois gestos simples de ambiente para marcar uma transição de ritmo em casa.",
+      "status": "draft_hypothesis",
+      "asset_refs": [
+        "catalog:product:nevoa",
+        "catalog:product:vela-pequena"
+      ],
+      "assets": [
+        {
+          "asset_ref": "catalog:product:nevoa",
+          "name": "Névoa de Ambiente",
+          "sku": "MJ-NEVOA-020",
+          "price_minor": 700,
+          "currency": "EUR"
+        },
+        {
+          "asset_ref": "catalog:product:vela-pequena",
+          "name": "Vela Aromática",
+          "sku": "MJ-VELA-070",
+          "price_minor": 800,
+          "currency": "EUR"
+        }
+      ],
+      "ocean_territories": [
+        "adiar-o-sono-para-recuperar-autonomia",
+        "atencao-fragmentada-por-interrupcoes-digitais",
+        "telepressao-e-disponibilidade-permanente"
+      ],
+      "catalogue_subtotal_minor": 1500,
+      "currency": "EUR",
+      "bundle_price_minor": null,
+      "discount_minor": null,
+      "operational_readiness": {
+        "inventory_known": false,
+        "unit_cost_known": false,
+        "stock_check_required": true,
+        "margin_check_required": true
+      },
+      "authority": {
+        "public_write_authorized": false,
+        "automatic_discount_authorized": false,
+        "automatic_checkout_authorized": false,
+        "human_approval_required": true
+      },
+      "reason_codes": [
+        "internal_bundle_hypothesis",
+        "catalogue_subtotal_not_offer_price",
+        "inventory_unknown",
+        "unit_cost_unknown"
+      ]
+    },
+    {
+      "bundle_id": "bundle_pausa_corpo",
+      "label": "Pausa no Corpo",
+      "purpose": "Juntar dois gestos simples de cuidado corporal sem transformar o produto em promessa clínica.",
+      "status": "draft_hypothesis",
+      "asset_refs": [
+        "catalog:product:escalda-pes",
+        "catalog:product:oleo-massagem"
+      ],
+      "assets": [
+        {
+          "asset_ref": "catalog:product:escalda-pes",
+          "name": "Escalda-Pés",
+          "sku": "MJ-ESCALDA-150",
+          "price_minor": 500,
+          "currency": "EUR"
+        },
+        {
+          "asset_ref": "catalog:product:oleo-massagem",
+          "name": "Óleo de Massagem",
+          "sku": "MJ-OLEO-060",
+          "price_minor": 1200,
+          "currency": "EUR"
+        }
+      ],
+      "ocean_territories": [
+        "cuidar-sem-desaparecer-no-papel-de-cuidador",
+        "precisar-de-solidao-para-recuperar-energia-social",
+        "doomscrolling-para-tentar-reduzir-incerteza"
+      ],
+      "catalogue_subtotal_minor": 1700,
+      "currency": "EUR",
+      "bundle_price_minor": null,
+      "discount_minor": null,
+      "operational_readiness": {
+        "inventory_known": false,
+        "unit_cost_known": false,
+        "stock_check_required": true,
+        "margin_check_required": true
+      },
+      "authority": {
+        "public_write_authorized": false,
+        "automatic_discount_authorized": false,
+        "automatic_checkout_authorized": false,
+        "human_approval_required": true
+      },
+      "reason_codes": [
+        "internal_bundle_hypothesis",
+        "catalogue_subtotal_not_offer_price",
+        "inventory_unknown",
+        "unit_cost_unknown"
+      ]
+    },
+    {
+      "bundle_id": "bundle_volta_para_casa",
+      "label": "Volta Para Casa",
+      "purpose": "Combinar casa e corpo num ritual físico curto de regresso ao próprio espaço.",
+      "status": "draft_hypothesis",
+      "asset_refs": [
+        "catalog:product:nevoa",
+        "catalog:product:vela-pequena",
+        "catalog:product:escalda-pes"
+      ],
+      "assets": [
+        {
+          "asset_ref": "catalog:product:nevoa",
+          "name": "Névoa de Ambiente",
+          "sku": "MJ-NEVOA-020",
+          "price_minor": 700,
+          "currency": "EUR"
+        },
+        {
+          "asset_ref": "catalog:product:vela-pequena",
+          "name": "Vela Aromática",
+          "sku": "MJ-VELA-070",
+          "price_minor": 800,
+          "currency": "EUR"
+        },
+        {
+          "asset_ref": "catalog:product:escalda-pes",
+          "name": "Escalda-Pés",
+          "sku": "MJ-ESCALDA-150",
+          "price_minor": 500,
+          "currency": "EUR"
+        }
+      ],
+      "ocean_territories": [
+        "autonomia-condicionada-pelo-medo-da-reaccao",
+        "presenca-que-ampara-sem-tentar-resolver",
+        "adiar-o-sono-para-recuperar-autonomia"
+      ],
+      "catalogue_subtotal_minor": 2000,
+      "currency": "EUR",
+      "bundle_price_minor": null,
+      "discount_minor": null,
+      "operational_readiness": {
+        "inventory_known": false,
+        "unit_cost_known": false,
+        "stock_check_required": true,
+        "margin_check_required": true
+      },
+      "authority": {
+        "public_write_authorized": false,
+        "automatic_discount_authorized": false,
+        "automatic_checkout_authorized": false,
+        "human_approval_required": true
+      },
+      "reason_codes": [
+        "internal_bundle_hypothesis",
+        "catalogue_subtotal_not_offer_price",
+        "inventory_unknown",
+        "unit_cost_unknown"
+      ]
+    },
+    {
+      "bundle_id": "bundle_casa_corpo_completo",
+      "label": "Casa + Corpo",
+      "purpose": "Hipótese de conjunto completo para testar procura por uma experiência física mais ampla.",
+      "status": "draft_hypothesis",
+      "asset_refs": [
+        "catalog:product:nevoa",
+        "catalog:product:vela-pequena",
+        "catalog:product:escalda-pes",
+        "catalog:product:oleo-massagem"
+      ],
+      "assets": [
+        {
+          "asset_ref": "catalog:product:nevoa",
+          "name": "Névoa de Ambiente",
+          "sku": "MJ-NEVOA-020",
+          "price_minor": 700,
+          "currency": "EUR"
+        },
+        {
+          "asset_ref": "catalog:product:vela-pequena",
+          "name": "Vela Aromática",
+          "sku": "MJ-VELA-070",
+          "price_minor": 800,
+          "currency": "EUR"
+        },
+        {
+          "asset_ref": "catalog:product:escalda-pes",
+          "name": "Escalda-Pés",
+          "sku": "MJ-ESCALDA-150",
+          "price_minor": 500,
+          "currency": "EUR"
+        },
+        {
+          "asset_ref": "catalog:product:oleo-massagem",
+          "name": "Óleo de Massagem",
+          "sku": "MJ-OLEO-060",
+          "price_minor": 1200,
+          "currency": "EUR"
+        }
+      ],
+      "ocean_territories": [
+        "presenca-que-ampara-sem-tentar-resolver",
+        "precisar-de-solidao-para-recuperar-energia-social"
+      ],
+      "catalogue_subtotal_minor": 3200,
+      "currency": "EUR",
+      "bundle_price_minor": null,
+      "discount_minor": null,
+      "operational_readiness": {
+        "inventory_known": false,
+        "unit_cost_known": false,
+        "stock_check_required": true,
+        "margin_check_required": true
+      },
+      "authority": {
+        "public_write_authorized": false,
+        "automatic_discount_authorized": false,
+        "automatic_checkout_authorized": false,
+        "human_approval_required": true
+      },
+      "reason_codes": [
+        "internal_bundle_hypothesis",
+        "catalogue_subtotal_not_offer_price",
+        "inventory_unknown",
+        "unit_cost_unknown"
+      ]
+    }
+  ]
+}
