@@ -55,6 +55,7 @@ Verification is separate from status. A tool can be strategically approved while
 | Discovery | Maison Scout |
 | Adversarial validation | Maison Critic |
 | Product/IP generation | Maison Content & Product Foundry |
+| Existing commercial assets | Generated products/services registry + optional private stock/cost/capacity overlay |
 | Universal commercial opportunity + earned distribution | A14 Universal Opportunity + Earned Distribution |
 | Canonical Brain read cycle | Brain Control API + A5 mapping + Pre-Brain/Scout/Critic/Foundry + A14 preview |
 | Semantic projection ingestion | Manual allowlisted D1 → pgvector sync; rebuildable cursor |
@@ -115,3 +116,12 @@ A3 realised economics and A11 correlation-only learning return to Scout as conte
 ## Semantic projection sync decision
 
 Maison Semantic Memory is rebuildable. The manual `semantic-sync` profile reads the canonical Brain Control API and projects only explicitly allowlisted provider families into pgvector. The projection stores canonical evidence references and its own disposable sync cursor. An empty provider allowlist refuses to embed. The current example allowlist begins conservatively with `eurostat_`; other provider families require an explicit privacy/reuse decision before addition.
+
+
+## Commercial asset decision
+
+Existing-asset-first cannot rely only on A3 solution IDs because the public Maison catalogue already contains commercial things that are not yet mapped to canonical A3 solutions. A deterministic registry is therefore generated from `data/products.js` and `data/services.js` and used as **supporting context**, never as a new transactional source of truth.
+
+The registry currently sees 17 catalogue assets: 5 active physical products, 2 future physical products, 9 services and 1 B2B service. Public `in_stock` is only a catalogue availability signal; it is never interpreted as a counted stock quantity.
+
+Private operational facts — quantities, reserved units, material/packaging cost, production time, batch capacity, MOQ, shelf life, supplier lead time, service capacity, human effort and variable cost — stay UNKNOWN until supplied through the evidence-backed private overlay contract. That overlay is intentionally kept outside git.
