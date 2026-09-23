@@ -22,7 +22,7 @@ def main() -> None:
     source = (ROOT / "opportunity_engine.py").read_text(encoding="utf-8").lower()
     for prohibited in ("requests.post(", "smtplib", "sendgrid", "checkout-session", "price_write"):
         assert prohibited not in source
-    for test_file in ("test_a14.py", "test_a14_repository.py", "test_cash_engine.py", "test_a14_bridges.py", "test_cash_repository.py"):
+    for test_file in ("test_a14.py", "test_a14_repository.py", "test_cash_engine.py", "test_a14_bridges.py", "test_cash_repository.py", "test_a14_identity.py"):
         proc = subprocess.run(
             [sys.executable, str(ROOT / test_file)],
             cwd=str(ROOT),
