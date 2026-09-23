@@ -1,0 +1,11 @@
+{
+  "contract_version": "A14.1",
+  "migrations": [
+    {
+      "order": 12,
+      "path": "migrations/0012_universal_opportunity_earned_distribution.sql",
+      "runtime_required": false,
+      "public_site_dependency": false
+    }
+  ]
+}
