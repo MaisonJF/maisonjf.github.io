@@ -115,7 +115,7 @@ async def graph_search(
 
     try:
         from mcp import ClientSession
-        from mcp.client.streamable_http import streamablehttp_client
+        from mcp.client.streamable_http import streamable_http_client
     except Exception as exc:
         raise OsirisContextError("mcp_client_not_available") from exc
 
@@ -123,7 +123,7 @@ async def graph_search(
     if project:
         args["project"]=project
 
-    async with streamablehttp_client(url) as (read_stream,write_stream,_):
+    async with streamable_http_client(url) as (read_stream,write_stream,_):
         async with ClientSession(read_stream,write_stream) as session:
             await session.initialize()
             result=await session.call_tool("graph_search",arguments=args)
