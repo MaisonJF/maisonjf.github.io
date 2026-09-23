@@ -13,7 +13,8 @@
     "VERIFIED_IN_REPO",
     "PARTIALLY_VERIFIED",
     "PENDING_VERIFICATION",
-    "REJECTED_NO_VERIFY"
+    "REJECTED_NO_VERIFY",
+    "DESIGN_APPROVED"
   ],
   "principles": [
     "free_open_source_self_hosted_public_data_first",
@@ -26,6 +27,42 @@
     "public_availability_does_not_equal_reuse_permission"
   ],
   "entries": [
+    {
+      "id": "maison-a14",
+      "type": "internal_component",
+      "name": "A14 Universal Opportunity + Earned Distribution",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "evidence-backed bridge from need/opportunity to offer type, distribution fit, activation recommendation and commercial learning",
+      "sense": "commercial opportunity + organic distribution",
+      "cost": "existing Maison repository infrastructure",
+      "license": "Maison repo",
+      "self_hosted": true,
+      "depends_on": [
+        "A1",
+        "A3",
+        "A4",
+        "A5",
+        "A7",
+        "A8",
+        "A11",
+        "A12",
+        "A13",
+        "Osiris Memory",
+        "Oceanos",
+        "Maison Semantic Memory",
+        "DuckDB/Polars"
+      ],
+      "serves": [
+        "Brain",
+        "Scout",
+        "Critic",
+        "Revenue Engine",
+        "Earned Distribution"
+      ],
+      "notes": "Analysis-only. Existing-asset-first; UNKNOWN remains unknown; amplifier fit is contextual (amplifier × offer × moment); no autonomous outreach, spend, catalogue/price/checkout mutation or public write."
+    },
     {
       "id": "maison-a13",
       "type": "internal_component",
