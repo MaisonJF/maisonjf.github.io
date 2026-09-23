@@ -161,6 +161,16 @@ class BrainControlClient:
     ) -> Mapping[str,Any]:
         return self._get("/internal/brain/validation-plans",{"state":state,"limit":limit})
 
+    def a7_test_cta_decisions(
+        self,
+        *,
+        solution_id: str,
+        limit: int=20,
+    ) -> Mapping[str,Any]:
+        return self._get("/internal/brain/a7-decisions",{
+            "solution_id":solution_id,"limit":limit
+        })
+
     def solutions(self, *, status: Optional[str]=None, limit: int=100) -> Mapping[str,Any]:
         return self._get("/internal/brain/solutions",{"status":status,"limit":limit})
 
