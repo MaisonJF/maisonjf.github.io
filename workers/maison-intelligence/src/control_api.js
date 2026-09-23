@@ -204,6 +204,65 @@ async function learningContext(env, url) {
   });
 }
 
+async function reviewQueue(env, url) {
+  const limit=parseLimit(url);
+  const status=url.searchParams.get('status') || 'pending';
+  if (!['pending','approved','rejected','expired'].includes(status)) throw new Error('invalid_review_status');
+
+  const rows=await all(env.GROWTH_DB.prepare(`
+    SELECT
+      q.queue_id,q.action_id,q.priority,q.status,q.created_at,
+      a.action_key,a.risk_class,a.autonomy_level,a.evidence_refs_json,a.reason_codes_json,
+      g.opportunity_id,
+      o.territory_code,o.opportunity_score,o.confidence,o.status AS opportunity_status,
+      json_extract(a.result_json,'$.offer_hypothesis_id') AS offer_hypothesis_id,
+      h.offer_type,h.a3_solution_type,h.existing_solution_id,h.fit_score,h.fit_confidence,
+      h.economics_json,h.validation_mode
+    FROM autonomy_human_queue q
+    JOIN autonomy_action_log a ON a.action_id=q.action_id
+    LEFT JOIN a14_governance_links g ON g.action_id=a.action_id
+    LEFT JOIN opportunity_hypotheses o ON o.opportunity_id=g.opportunity_id
+    LEFT JOIN opportunity_offer_hypotheses h
+      ON h.offer_hypothesis_id=json_extract(a.result_json,'$.offer_hypothesis_id')
+    WHERE q.status=? AND a.action_key='commercial_opportunity_review'
+    ORDER BY q.priority DESC,q.created_at,q.queue_id
+    LIMIT ?
+  `).bind(status,limit));
+
+  return json({
+    kind:'brain_commercial_review_queue',
+    status,
+    rows:rows.map(row=>({
+      queue_id:row.queue_id,
+      action_id:row.action_id,
+      priority:row.priority,
+      status:row.status,
+      created_at:row.created_at,
+      risk_class:row.risk_class,
+      autonomy_level:row.autonomy_level,
+      opportunity_id:row.opportunity_id,
+      territory_code:row.territory_code,
+      opportunity_score:row.opportunity_score,
+      opportunity_confidence:row.confidence,
+      opportunity_status:row.opportunity_status,
+      offer_hypothesis_id:row.offer_hypothesis_id,
+      offer_type:row.offer_type,
+      a3_solution_type:row.a3_solution_type,
+      existing_solution_id:row.existing_solution_id,
+      fit_score:row.fit_score,
+      fit_confidence:row.fit_confidence,
+      economics:row.economics_json ? JSON.parse(row.economics_json) : {},
+      validation_mode:row.validation_mode,
+      evidence_refs:parseJsonArray(row.evidence_refs_json),
+      reason_codes:parseJsonArray(row.reason_codes_json),
+      public_write_authorized:false,
+      outbound_authorized:false,
+      spend_authorized:false,
+      experiment_execution_authorized:false
+    }))
+  });
+}
+
 async function solutions(env, url) {
   const limit=parseLimit(url);
   const status=url.searchParams.get('status');
@@ -279,6 +338,7 @@ export async function handleBrainControlRequest(request, env) {
     if (url.pathname === '/internal/brain/feed') return await feed(env,url);
     if (url.pathname === '/internal/brain/cash-feedback') return await cashFeedback(env,url);
     if (url.pathname === '/internal/brain/learning') return await learningContext(env,url);
+    if (url.pathname === '/internal/brain/review-queue') return await reviewQueue(env,url);
     if (url.pathname === '/internal/brain/solutions') return await solutions(env,url);
     if (url.pathname === '/internal/brain/solution-links') return await solutionLinks(env,url);
     if (url.pathname === '/internal/brain/health') return json({ status:'ok',mode:'read_only' });
