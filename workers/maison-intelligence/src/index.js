@@ -4,6 +4,7 @@ import {
 } from './core.js';
 import { configuredProviders, PROVIDERS } from './providers.js';
 import { configuredOsirisSources, fetchOsirisSource, sourceDefinition } from './sources.js';
+import { mirrorToOsirisMemory } from './memory.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -118,6 +119,24 @@ async function persistObservation(env, task, result) {
     `).bind(observationId,url));
   }
   await env.GROWTH_DB.batch(statements);
+
+  try {
+    await mirrorToOsirisMemory(env, {
+      observationId,
+      eventId,
+      providerId: result.providerId,
+      modelId: result.modelId ?? null,
+      sourceClass: result.sourceClass,
+      territoryKey: task.territoryKey,
+      groundingState,
+      observedAt,
+      confidenceClass,
+      citations,
+      safeText
+    });
+  } catch (error) {
+    console.error('Osiris Memory mirror failed', observationId, error?.message ?? error);
+  }
 }
 
 async function processSourceTask(env, task) {
