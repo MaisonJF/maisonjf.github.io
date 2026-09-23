@@ -16,6 +16,8 @@
     "OSIRIS_GATEWAY_ENABLED": "false",
     "OSIRIS_GATEWAY_BASE_URL": "https://ai.osiris-code.com/v1",
     "OSIRIS_GATEWAY_MODEL": "",
+    "OSIRIS_MEMORY_ENABLED": "false",
+    "OSIRIS_MEMORY_BRIDGE_URL": "",
     "OPENROUTER_ENABLED": "false",
     "OPENROUTER_MODEL": "openrouter/free",
     "OSIRIS_ENABLED": "false",
