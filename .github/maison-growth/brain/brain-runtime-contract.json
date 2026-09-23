@@ -1,0 +1,36 @@
+{
+  "contract_version": "brain.runtime.1",
+  "mode": "analysis_only",
+  "canonical_flow": [
+    "A13/A1 canonical evidence",
+    "Pre-Brain reduction",
+    "A5 semantic interpretation",
+    "Oceanos + Semantic Memory + Osiris Memory context",
+    "Scout opportunity discovery",
+    "Critic adversarial challenge",
+    "A7 commercial discovery",
+    "Foundry offer concepts",
+    "A14 opportunity/distribution/economics",
+    "A12 governance",
+    "A8 experiment",
+    "A3 realised economics",
+    "A11 learning"
+  ],
+  "memory_roles": {
+    "A13/A1/D1": "canonical evidence and provenance",
+    "Oceanos": "curated Maison knowledge",
+    "Maison Semantic Memory": "rebuildable semantic retrieval projection",
+    "Osiris Memory": "private relational/agent/provenance projection",
+    "DuckDB/Polars": "analytical preprocessing only"
+  },
+  "hard_rules": [
+    "no memory layer duplicates canonical truth",
+    "semantic similarity is not independent evidence",
+    "unknown remains unknown",
+    "existing assets checked before new creation",
+    "Critic precedes meaningful commercial recommendation",
+    "A12 controls external action",
+    "A3 observed economics outrank forecasts",
+    "A11 may propose policy changes but cannot self-authorize sensitive changes"
+  ]
+}

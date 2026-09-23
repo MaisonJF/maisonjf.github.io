@@ -16,6 +16,11 @@ files=(
   ".github/maison-growth/a11/migrations/0009_learning_engine.sql"
   ".github/maison-growth/a12/migrations/0010_gradual_autonomy_dashboard_v2.sql"
   ".github/maison-growth/a13/migrations/0011_external_intelligence_runtime.sql"
+  ".github/maison-growth/a14/migrations/0012_universal_opportunity_earned_distribution.sql"
+  ".github/maison-growth/a14/migrations/0013_a14_bridges_cash.sql"
+  ".github/maison-growth/brain/migrations/0014_brain_runtime_views.sql"
+  ".github/maison-growth/a12/migrations/0015_human_commercial_review_resolution.sql"
+  ".github/maison-growth/a14/migrations/0016_approved_validation_planning.sql"
 )
 
 for file in "${files[@]}"; do
@@ -23,4 +28,4 @@ for file in "${files[@]}"; do
   npx wrangler d1 execute "$DB_NAME" --remote --file="$ROOT/$file"
 done
 
-echo "Growth D1 schema is now at A13.2. The A13 database kill switch remains ON."
+echo "Growth D1 schema includes Brain runtime views through 0016. A13 collection/spend remains disabled by its kill switches; A14 has no outbound authority."

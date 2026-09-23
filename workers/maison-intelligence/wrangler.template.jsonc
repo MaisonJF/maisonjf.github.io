@@ -5,14 +5,37 @@
   "compatibility_date": "2026-09-22",
 
   "triggers": {
-    "crons": ["17 4 * * *"]
+    "crons": ["0 * * * *", "17 4 * * *"]
   },
 
   "vars": {
     "WORKER_ENABLED": "false",
+    "BRAIN_CONTROL_API_ENABLED": "false",
+    "BRAIN_PROPOSAL_API_ENABLED": "false",
+    "BRAIN_REVIEW_DECISION_ENABLED": "false",
     "KILL_SWITCH": "true",
     "PROMPTS_PER_RUN": "2",
     "MAX_DAILY_CALLS_PER_PROVIDER": "2",
+    "OSIRIS_GATEWAY_ENABLED": "false",
+    "OSIRIS_GATEWAY_BASE_URL": "https://ai.osiris-code.com/v1",
+    "OSIRIS_GATEWAY_MODEL": "",
+    "OSIRIS_MEMORY_ENABLED": "false",
+    "OSIRIS_MEMORY_BRIDGE_URL": "",
+    "OPENROUTER_ENABLED": "false",
+    "OPENROUTER_MODEL": "openrouter/free",
+    "OSIRIS_ENABLED": "false",
+    "OSIRIS_BASE_URL": "https://osirisai.live",
+    "OSIRIS_SOURCE_KEYS": "stats,flights,satellites,space_weather,earthquakes,fires,weather,air_quality,radar,conflicts,frontlines,gdelt,country_risk,news,live_news,markets,crypto,scm_suppliers,cctv,infrastructure,maritime,cyber_threats,cyber_attacks,malware",
+    "OSIRIS_SOURCE_CADENCES_JSON": "",
+    "MAX_DAILY_CALLS_PER_OSIRIS_SOURCE": "24",
+    "PUBLIC_DATA_ENABLED": "false",
+    "MAX_DAILY_CALLS_PER_PUBLIC_SOURCE": "4",
+    "EUROSTAT_ENABLED": "false",
+    "EUROSTAT_QUERIES_JSON": "[]",
+    "BASE_PT_ENABLED": "false",
+    "BASE_PT_QUERIES_JSON": "[]",
+    "OPENALEX_ENABLED": "false",
+    "OPENALEX_QUERIES_JSON": "[]",
     "OPENAI_MODEL": "gpt-5.6-luna",
     "GEMINI_MODEL": "gemini-2.5-flash",
     "PERPLEXITY_MODEL": "sonar",

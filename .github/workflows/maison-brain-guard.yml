@@ -1,0 +1,60 @@
+name: Maison Brain Guard
+
+on:
+  pull_request:
+    paths:
+      - '.github/maison-growth/**'
+      - 'workers/maison-intelligence/**'
+      - 'data/products.js'
+      - 'data/services.js'
+      - '.github/workflows/maison-brain-guard.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-brain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate supporting Growth organs
+        shell: bash
+        run: |
+          set -euo pipefail
+          for module in a1 a3 a4 a5 a7 a8 a9 a10 a11 a12 a13; do
+            python ".github/maison-growth/${module}/validate_${module}.py"
+          done
+
+      - name: Validate A14 commercial brain
+        run: python .github/maison-growth/a14/validate_a14.py
+
+      - name: Check commercial asset projection
+        run: node .github/maison-growth/brain/build_commercial_assets.mjs --check
+
+      - name: Validate Brain contracts and schema chain
+        run: python .github/maison-growth/brain/validate_brain_runtime.py
+
+      - name: Validate persistent observe runtime contracts
+        run: python .github/maison-growth/runtime/validate_runtime.py
+
+      - name: Check A13 worker JavaScript
+        working-directory: workers/maison-intelligence
+        run: npm run check
+
+      - name: Test A13 worker
+        working-directory: workers/maison-intelligence
+        run: npm test

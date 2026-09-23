@@ -1,0 +1,407 @@
+name: maison-brain-observe
+
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.6-pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-osiris}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-osiris}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - maison_postgres:/var/lib/postgresql/data
+      - ./postgres-init.sh:/docker-entrypoint-initdb.d/001-maison-init.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U ${POSTGRES_USER:-osiris} -d ${POSTGRES_DB:-osiris}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  redis:
+    image: redis:7.4.11-alpine
+    restart: unless-stopped
+    command: ["redis-server","--appendonly","yes","--save","60","100"]
+    ports:
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    volumes:
+      - maison_redis:/data
+    healthcheck:
+      test: ["CMD","redis-cli","ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  osiris-init:
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.osiris
+      args:
+        OSIRIS_REF: ${OSIRIS_REF:-181658e1db85ce4d2e8702124423b674b3cb136f}
+        UV_VERSION: ${UV_VERSION:-0.12.18}
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-osiris}
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: ["/bin/sh","-lc","uv run alembic upgrade head && uv run python -m src.init"]
+    restart: "no"
+
+  osiris-mcp:
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.osiris
+      args:
+        OSIRIS_REF: ${OSIRIS_REF:-181658e1db85ce4d2e8702124423b674b3cb136f}
+        UV_VERSION: ${UV_VERSION:-0.12.18}
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-osiris}
+      REDIS_URL: redis://redis:6379/0
+      OSIRIS_MCP_TRANSPORT: streamable-http
+    depends_on:
+      osiris-init:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:${OSIRIS_MCP_PORT:-8790}:8790"
+    command: ["uv","run","python","-m","src.mcp_server"]
+    healthcheck:
+      test: ["CMD-SHELL","code=$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8790/mcp || true); case $code in 200|400|405|406) exit 0;; *) exit 1;; esac"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+
+  osiris-worker:
+    profiles: ["worker"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.osiris
+      args:
+        OSIRIS_REF: ${OSIRIS_REF:-181658e1db85ce4d2e8702124423b674b3cb136f}
+        UV_VERSION: ${UV_VERSION:-0.12.18}
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-osiris}
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      osiris-init:
+        condition: service_completed_successfully
+    command: ["uv","run","arq","src.workers.arq_worker.WorkerSettings"]
+
+  maison-osiris-bridge:
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.osiris
+      args:
+        OSIRIS_REF: ${OSIRIS_REF:-181658e1db85ce4d2e8702124423b674b3cb136f}
+        UV_VERSION: ${UV_VERSION:-0.12.18}
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-osiris}
+      REDIS_URL: redis://redis:6379/0
+      MAISON_OSIRIS_BRIDGE_TOKEN: ${MAISON_OSIRIS_BRIDGE_TOKEN:?set MAISON_OSIRIS_BRIDGE_TOKEN}
+    depends_on:
+      osiris-init:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:${MAISON_OSIRIS_BRIDGE_PORT:-8791}:8791"
+    command: ["uvicorn","osiris_bridge:app","--host","0.0.0.0","--port","8791"]
+    healthcheck:
+      test: ["CMD-SHELL","curl -fsS http://127.0.0.1:8791/health >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+
+  maison-memory-init:
+    image: pgvector/pgvector:0.8.6-pg16
+    profiles: ["semantic-smoke","semantic-sync","brain-mcp","brain-observe"]
+    restart: "no"
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command:
+      - /bin/sh
+      - -lc
+      - |
+        psql -h postgres -U ${POSTGRES_USER:-osiris} -d ${POSTGRES_DB:-osiris} -v ON_ERROR_STOP=1 <<'SQL'
+        SELECT 'CREATE DATABASE maison_memory'
+        WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname='maison_memory')\gexec
+        SQL
+        psql -h postgres -U ${POSTGRES_USER:-osiris} -d maison_memory -v ON_ERROR_STOP=1 -c 'CREATE EXTENSION IF NOT EXISTS vector; CREATE EXTENSION IF NOT EXISTS pg_trgm;'
+
+  brain-validate:
+    profiles: ["brain-validation"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain
+    restart: "no"
+    command: ["python","validate_brain_runtime.py"]
+
+  osiris-context-smoke:
+    profiles: ["osiris-context-smoke"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain
+    restart: "no"
+    environment:
+      OSIRIS_MCP_URL: http://osiris-mcp:8790/mcp
+    depends_on:
+      osiris-mcp:
+        condition: service_healthy
+    command: ["python","/opt/maison-growth/runtime/osiris_context_smoke.py"]
+
+  commercial-inbox:
+    profiles: ["commercial-inbox"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain
+    restart: "no"
+    environment:
+      BRAIN_CONTROL_API_URL: ${BRAIN_CONTROL_API_URL:?set BRAIN_CONTROL_API_URL}
+      BRAIN_CONTROL_TOKEN: ${BRAIN_CONTROL_TOKEN:?set BRAIN_CONTROL_TOKEN}
+      CF_ACCESS_CLIENT_ID: ${CF_ACCESS_CLIENT_ID:-}
+      CF_ACCESS_CLIENT_SECRET: ${CF_ACCESS_CLIENT_SECRET:-}
+    command: ["python","/opt/maison-growth/brain/commercial_action_cli.py","--limit","50"]
+
+  commercial-review:
+    profiles: ["commercial-review"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain
+    restart: "no"
+    environment:
+      BRAIN_CONTROL_API_URL: ${BRAIN_CONTROL_API_URL:?set BRAIN_CONTROL_API_URL}
+      BRAIN_CONTROL_TOKEN: ${BRAIN_CONTROL_TOKEN:?set BRAIN_CONTROL_TOKEN}
+      BRAIN_REVIEW_DECISION_API_URL: ${BRAIN_REVIEW_DECISION_API_URL:-}
+      BRAIN_REVIEW_DECISION_TOKEN: ${BRAIN_REVIEW_DECISION_TOKEN:-}
+      CF_ACCESS_CLIENT_ID: ${CF_ACCESS_CLIENT_ID:-}
+      CF_ACCESS_CLIENT_SECRET: ${CF_ACCESS_CLIENT_SECRET:-}
+      MAISON_REVIEW_DECISION_ENABLED: ${MAISON_REVIEW_DECISION_ENABLED:-false}
+    command: ["python","/opt/maison-growth/brain/commercial_review_cli.py","list","--status","pending","--limit","20"]
+
+  validation-plan:
+    profiles: ["validation-plan"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain
+    restart: "no"
+    environment:
+      BRAIN_CONTROL_API_URL: ${BRAIN_CONTROL_API_URL:?set BRAIN_CONTROL_API_URL}
+      BRAIN_CONTROL_TOKEN: ${BRAIN_CONTROL_TOKEN:?set BRAIN_CONTROL_TOKEN}
+      BRAIN_PROPOSAL_API_URL: ${BRAIN_PROPOSAL_API_URL:?set BRAIN_PROPOSAL_API_URL}
+      BRAIN_PROPOSAL_TOKEN: ${BRAIN_PROPOSAL_TOKEN:?set BRAIN_PROPOSAL_TOKEN}
+      CF_ACCESS_CLIENT_ID: ${CF_ACCESS_CLIENT_ID:-}
+      CF_ACCESS_CLIENT_SECRET: ${CF_ACCESS_CLIENT_SECRET:-}
+      MAISON_VALIDATION_PLAN_MATERIALIZE_ENABLED: ${MAISON_VALIDATION_PLAN_MATERIALIZE_ENABLED:-false}
+      MAISON_VALIDATION_PLAN_LIMIT: ${MAISON_VALIDATION_PLAN_LIMIT:-50}
+    command: ["python","/opt/maison-growth/brain/plan_approved_validations.py"]
+
+  a8-draft:
+    profiles: ["a8-draft"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain
+    restart: "no"
+    environment:
+      BRAIN_CONTROL_API_URL: ${BRAIN_CONTROL_API_URL:?set BRAIN_CONTROL_API_URL}
+      BRAIN_CONTROL_TOKEN: ${BRAIN_CONTROL_TOKEN:?set BRAIN_CONTROL_TOKEN}
+      BRAIN_PROPOSAL_API_URL: ${BRAIN_PROPOSAL_API_URL:?set BRAIN_PROPOSAL_API_URL}
+      BRAIN_PROPOSAL_TOKEN: ${BRAIN_PROPOSAL_TOKEN:?set BRAIN_PROPOSAL_TOKEN}
+      CF_ACCESS_CLIENT_ID: ${CF_ACCESS_CLIENT_ID:-}
+      CF_ACCESS_CLIENT_SECRET: ${CF_ACCESS_CLIENT_SECRET:-}
+      MAISON_CTA_CONTEXT_PATH: /run/private/cta-context.json
+      MAISON_A8_DRAFT_MATERIALIZE_ENABLED: ${MAISON_A8_DRAFT_MATERIALIZE_ENABLED:-false}
+      MAISON_A8_DRAFT_LIMIT: ${MAISON_A8_DRAFT_LIMIT:-50}
+    volumes:
+      - ./.private/cta-context.json:/run/private/cta-context.json:ro
+    command: ["python","/opt/maison-growth/brain/plan_a8_drafts.py"]
+
+  a14-materialize:
+    profiles: ["a14-materialize"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain-embeddings
+    restart: "no"
+    environment:
+      BRAIN_CONTROL_API_URL: ${BRAIN_CONTROL_API_URL:?set BRAIN_CONTROL_API_URL}
+      BRAIN_CONTROL_TOKEN: ${BRAIN_CONTROL_TOKEN:?set BRAIN_CONTROL_TOKEN}
+      BRAIN_PROPOSAL_API_URL: ${BRAIN_PROPOSAL_API_URL:?set BRAIN_PROPOSAL_API_URL}
+      BRAIN_PROPOSAL_TOKEN: ${BRAIN_PROPOSAL_TOKEN:?set BRAIN_PROPOSAL_TOKEN}
+      CF_ACCESS_CLIENT_ID: ${CF_ACCESS_CLIENT_ID:-}
+      CF_ACCESS_CLIENT_SECRET: ${CF_ACCESS_CLIENT_SECRET:-}
+      MAISON_A14_MATERIALIZE_ENABLED: ${MAISON_A14_MATERIALIZE_ENABLED:-false}
+      MAISON_A14_MATERIALIZE_STATES: ${MAISON_A14_MATERIALIZE_STATES:-enrichment_required,human_review_preview}
+      MAISON_BRAIN_TERRITORY_POLICY_JSON: ${MAISON_BRAIN_TERRITORY_POLICY_JSON:-{}}
+      MAISON_PREBRAIN_SIMILARITY: ${MAISON_PREBRAIN_SIMILARITY:-0.45}
+      MAISON_PREBRAIN_MIN_ROOTS: ${MAISON_PREBRAIN_MIN_ROOTS:-2}
+      MAISON_SCOUT_MIN_CONFIDENCE: ${MAISON_SCOUT_MIN_CONFIDENCE:-0.60}
+      MAISON_SEMANTIC_CONTEXT_ENABLED: ${MAISON_SEMANTIC_CONTEXT_ENABLED:-false}
+      MAISON_OSIRIS_CONTEXT_ENABLED: ${MAISON_OSIRIS_CONTEXT_ENABLED:-false}
+      MAISON_MEMORY_CONTEXT_MAX_TERRITORIES: ${MAISON_MEMORY_CONTEXT_MAX_TERRITORIES:-8}
+      MAISON_MEMORY_CONTEXT_LIMIT: ${MAISON_MEMORY_CONTEXT_LIMIT:-5}
+      MAISON_OSIRIS_CONTEXT_MAX_DEPTH: ${MAISON_OSIRIS_CONTEXT_MAX_DEPTH:-1}
+      MAISON_SEMANTIC_DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/maison_memory
+      MAISON_EMBEDDING_DEVICE: cpu
+      OSIRIS_MCP_URL: http://osiris-mcp:8790/mcp
+      OSIRIS_PROJECT: ${OSIRIS_PROJECT:-}
+      HF_HOME: /model-cache
+    depends_on:
+      osiris-mcp:
+        condition: service_healthy
+      maison-memory-init:
+        condition: service_completed_successfully
+    volumes:
+      - maison_model_cache:/model-cache
+    command: ["python","/opt/maison-growth/brain/materialize_a14.py"]
+
+  commercial-cycle:
+    profiles: ["commercial-cycle"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain-embeddings
+    restart: "no"
+    environment:
+      BRAIN_CONTROL_API_URL: ${BRAIN_CONTROL_API_URL:?set BRAIN_CONTROL_API_URL}
+      BRAIN_CONTROL_TOKEN: ${BRAIN_CONTROL_TOKEN:?set BRAIN_CONTROL_TOKEN}
+      BRAIN_PROPOSAL_API_URL: ${BRAIN_PROPOSAL_API_URL:?set BRAIN_PROPOSAL_API_URL}
+      BRAIN_PROPOSAL_TOKEN: ${BRAIN_PROPOSAL_TOKEN:?set BRAIN_PROPOSAL_TOKEN}
+      CF_ACCESS_CLIENT_ID: ${CF_ACCESS_CLIENT_ID:-}
+      CF_ACCESS_CLIENT_SECRET: ${CF_ACCESS_CLIENT_SECRET:-}
+      MAISON_A14_MATERIALIZE_ENABLED: ${MAISON_A14_MATERIALIZE_ENABLED:-false}
+      MAISON_A14_MATERIALIZE_STATES: ${MAISON_A14_MATERIALIZE_STATES:-enrichment_required,human_review_preview}
+      MAISON_BRAIN_TERRITORY_POLICY_JSON: ${MAISON_BRAIN_TERRITORY_POLICY_JSON:-{}}
+      MAISON_PREBRAIN_SIMILARITY: ${MAISON_PREBRAIN_SIMILARITY:-0.45}
+      MAISON_PREBRAIN_MIN_ROOTS: ${MAISON_PREBRAIN_MIN_ROOTS:-2}
+      MAISON_SCOUT_MIN_CONFIDENCE: ${MAISON_SCOUT_MIN_CONFIDENCE:-0.60}
+      MAISON_SEMANTIC_CONTEXT_ENABLED: ${MAISON_SEMANTIC_CONTEXT_ENABLED:-false}
+      MAISON_OSIRIS_CONTEXT_ENABLED: ${MAISON_OSIRIS_CONTEXT_ENABLED:-false}
+      MAISON_MEMORY_CONTEXT_MAX_TERRITORIES: ${MAISON_MEMORY_CONTEXT_MAX_TERRITORIES:-8}
+      MAISON_MEMORY_CONTEXT_LIMIT: ${MAISON_MEMORY_CONTEXT_LIMIT:-5}
+      MAISON_OSIRIS_CONTEXT_MAX_DEPTH: ${MAISON_OSIRIS_CONTEXT_MAX_DEPTH:-1}
+      MAISON_SEMANTIC_DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/maison_memory
+      MAISON_EMBEDDING_DEVICE: cpu
+      OSIRIS_MCP_URL: http://osiris-mcp:8790/mcp
+      OSIRIS_PROJECT: ${OSIRIS_PROJECT:-}
+      HF_HOME: /model-cache
+    depends_on:
+      osiris-mcp:
+        condition: service_healthy
+      maison-memory-init:
+        condition: service_completed_successfully
+    volumes:
+      - maison_model_cache:/model-cache
+    command: ["python","/opt/maison-growth/brain/commercial_cycle.py"]
+
+  brain-observe-cycle:
+    profiles: ["brain-observe"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain-embeddings
+    restart: "no"
+    environment:
+      BRAIN_CONTROL_API_URL: ${BRAIN_CONTROL_API_URL:?set BRAIN_CONTROL_API_URL}
+      BRAIN_CONTROL_TOKEN: ${BRAIN_CONTROL_TOKEN:?set BRAIN_CONTROL_TOKEN}
+      CF_ACCESS_CLIENT_ID: ${CF_ACCESS_CLIENT_ID:-}
+      CF_ACCESS_CLIENT_SECRET: ${CF_ACCESS_CLIENT_SECRET:-}
+      MAISON_BRAIN_TERRITORY_POLICY_JSON: ${MAISON_BRAIN_TERRITORY_POLICY_JSON:-{}}
+      MAISON_PREBRAIN_SIMILARITY: ${MAISON_PREBRAIN_SIMILARITY:-0.45}
+      MAISON_PREBRAIN_MIN_ROOTS: ${MAISON_PREBRAIN_MIN_ROOTS:-2}
+      MAISON_SCOUT_MIN_CONFIDENCE: ${MAISON_SCOUT_MIN_CONFIDENCE:-0.60}
+      MAISON_SEMANTIC_CONTEXT_ENABLED: ${MAISON_SEMANTIC_CONTEXT_ENABLED:-false}
+      MAISON_OSIRIS_CONTEXT_ENABLED: ${MAISON_OSIRIS_CONTEXT_ENABLED:-false}
+      MAISON_MEMORY_CONTEXT_MAX_TERRITORIES: ${MAISON_MEMORY_CONTEXT_MAX_TERRITORIES:-8}
+      MAISON_MEMORY_CONTEXT_LIMIT: ${MAISON_MEMORY_CONTEXT_LIMIT:-5}
+      MAISON_OSIRIS_CONTEXT_MAX_DEPTH: ${MAISON_OSIRIS_CONTEXT_MAX_DEPTH:-1}
+      MAISON_SEMANTIC_DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/maison_memory
+      MAISON_EMBEDDING_DEVICE: cpu
+      OSIRIS_MCP_URL: http://osiris-mcp:8790/mcp
+      OSIRIS_PROJECT: ${OSIRIS_PROJECT:-}
+      HF_HOME: /model-cache
+    depends_on:
+      osiris-mcp:
+        condition: service_healthy
+      maison-memory-init:
+        condition: service_completed_successfully
+    volumes:
+      - maison_model_cache:/model-cache
+    command: ["python","/opt/maison-growth/brain/brain_observe_cycle.py"]
+
+  brain-mcp:
+    profiles: ["brain-mcp"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain-embeddings
+    restart: unless-stopped
+    environment:
+      MAISON_SEMANTIC_DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/maison_memory
+      MAISON_EMBEDDING_DEVICE: cpu
+      MAISON_BRAIN_MCP_PORT: "8792"
+      OSIRIS_MCP_URL: http://osiris-mcp:8790/mcp
+      HF_HOME: /model-cache
+    depends_on:
+      osiris-mcp:
+        condition: service_healthy
+      maison-memory-init:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:${BRAIN_MCP_HOST_PORT:-8792}:8792"
+    volumes:
+      - maison_model_cache:/model-cache
+    command: ["python","/opt/maison-growth/brain/brain_mcp_server.py"]
+    healthcheck:
+      test: ["CMD-SHELL","python -c \"import socket; s=socket.socket(); s.settimeout(2); s.connect(('127.0.0.1',8792)); s.close()\""]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+
+  semantic-sync:
+    profiles: ["semantic-sync"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain-embeddings
+    restart: "no"
+    environment:
+      BRAIN_CONTROL_API_URL: ${BRAIN_CONTROL_API_URL:?set BRAIN_CONTROL_API_URL}
+      BRAIN_CONTROL_TOKEN: ${BRAIN_CONTROL_TOKEN:?set BRAIN_CONTROL_TOKEN}
+      CF_ACCESS_CLIENT_ID: ${CF_ACCESS_CLIENT_ID:-}
+      CF_ACCESS_CLIENT_SECRET: ${CF_ACCESS_CLIENT_SECRET:-}
+      MAISON_SEMANTIC_DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/maison_memory
+      MAISON_EMBEDDING_DEVICE: cpu
+      MAISON_SEMANTIC_SYNC_PROVIDER_PREFIXES: ${MAISON_SEMANTIC_SYNC_PROVIDER_PREFIXES:-eurostat_}
+      MAISON_SEMANTIC_SYNC_PAGE_SIZE: ${MAISON_SEMANTIC_SYNC_PAGE_SIZE:-100}
+      MAISON_SEMANTIC_SYNC_MAX_PAGES: ${MAISON_SEMANTIC_SYNC_MAX_PAGES:-20}
+      HF_HOME: /model-cache
+    depends_on:
+      maison-memory-init:
+        condition: service_completed_successfully
+    volumes:
+      - maison_model_cache:/model-cache
+    command: ["python","/opt/maison-growth/brain/semantic_sync.py"]
+
+  semantic-smoke:
+    profiles: ["semantic-smoke"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain-embeddings
+    restart: "no"
+    environment:
+      MAISON_SEMANTIC_DATABASE_URL: postgresql://${POSTGRES_USER:-osiris}:${POSTGRES_PASSWORD}@postgres:5432/maison_memory
+      MAISON_EMBEDDING_DEVICE: cpu
+      HF_HOME: /model-cache
+    depends_on:
+      maison-memory-init:
+        condition: service_completed_successfully
+    volumes:
+      - maison_model_cache:/model-cache
+    command: ["python","/opt/maison-growth/runtime/semantic_smoke.py"]
+
+volumes:
+  maison_postgres:
+  maison_redis:
+  maison_model_cache:

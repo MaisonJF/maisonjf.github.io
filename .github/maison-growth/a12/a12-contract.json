@@ -1,15 +1,34 @@
 {
-  "contract_version": "A12.1",
+  "contract_version": "A12.2",
   "module": "Gradual Autonomy + Dashboard v2",
   "mode": "simulation_only",
-  "depends_on": ["A3.1","A6.1","A7.1","A8.1","A9.1","A10.1","A11.1"],
+  "depends_on": [
+    "A3.1",
+    "A6.1",
+    "A7.1",
+    "A8.1",
+    "A9.1",
+    "A10.1",
+    "A11.1"
+  ],
   "public_site_dependency": false,
   "public_write_authorized": false,
   "autonomous_public_write_authorized": false,
   "production_credentials_present": false,
   "cloudflare_runtime_required_for_repository_completion": false,
-  "autonomy_levels": ["observe_only","recommend","human_approval_required","low_risk_auto","paused"],
-  "risk_classes": ["low","medium","high","critical"],
+  "autonomy_levels": [
+    "observe_only",
+    "recommend",
+    "human_approval_required",
+    "low_risk_auto",
+    "paused"
+  ],
+  "risk_classes": [
+    "low",
+    "medium",
+    "high",
+    "critical"
+  ],
   "automatic_execution_risk_max": "low",
   "automatic_execution_scope": "internal_analysis_only",
   "human_required_for_high_risk": true,
@@ -18,5 +37,8 @@
   "idempotent_jobs_required": true,
   "locking_required": true,
   "dashboard_v2_read_only": true,
-  "a13_started": true
+  "a13_started": true,
+  "human_review_resolution_append_only": true,
+  "commercial_review_approval_scope": "experiment_planning_only",
+  "commercial_review_execution_authorized": false
 }

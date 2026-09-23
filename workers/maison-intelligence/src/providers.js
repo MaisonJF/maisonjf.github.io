@@ -58,6 +58,65 @@ export async function callCloudflareWorkersAI(env, prompt) {
   };
 }
 
+function openRouterText(data) {
+  return data?.choices?.[0]?.message?.content ?? '';
+}
+
+export async function callOsirisGateway(env, prompt) {
+  if (!env.OSIRIS_GATEWAY_API_KEY || !env.OSIRIS_GATEWAY_MODEL) throw new Error('osiris_gateway_not_configured');
+  const base = String(env.OSIRIS_GATEWAY_BASE_URL || 'https://ai.osiris-code.com/v1').replace(/\/+$/, '');
+  const data = await jsonFetch(`${base}/chat/completions`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${env.OSIRIS_GATEWAY_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: env.OSIRIS_GATEWAY_MODEL,
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: 1200,
+      temperature: 0.2
+    })
+  });
+  return {
+    providerId: 'osiris_gateway',
+    modelId: data.model ?? env.OSIRIS_GATEWAY_MODEL,
+    sourceClass: 'ai_api',
+    text: openRouterText(data),
+    citations: [],
+    requestId: data.id ?? null,
+    usage: data.usage ?? null
+  };
+}
+
+export async function callOpenRouter(env, prompt) {
+  if (!env.OPENROUTER_API_KEY || !env.OPENROUTER_MODEL) throw new Error('openrouter_not_configured');
+  const data = await jsonFetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${env.OPENROUTER_API_KEY}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': 'https://maison-jf.com',
+      'X-OpenRouter-Title': 'MAISON JF Intelligence'
+    },
+    body: JSON.stringify({
+      model: env.OPENROUTER_MODEL,
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: 1200,
+      temperature: 0.2
+    })
+  });
+  return {
+    providerId: 'openrouter',
+    modelId: data.model ?? env.OPENROUTER_MODEL,
+    sourceClass: 'ai_api',
+    text: openRouterText(data),
+    citations: [],
+    requestId: data.id ?? null,
+    usage: data.usage ?? null
+  };
+}
+
 export async function callOpenAI(env, prompt) {
   if (!env.OPENAI_API_KEY || !env.OPENAI_MODEL) throw new Error('openai_not_configured');
   const data = await jsonFetch('https://api.openai.com/v1/responses', {
@@ -155,6 +214,8 @@ export async function callAnthropic(env, prompt) {
 
 export const PROVIDERS = {
   cloudflare_workers_ai: callCloudflareWorkersAI,
+  osiris_gateway: callOsirisGateway,
+  openrouter: callOpenRouter,
   openai: callOpenAI,
   google_gemini: callGemini,
   perplexity: callPerplexity,
@@ -164,6 +225,8 @@ export const PROVIDERS = {
 export function configuredProviders(env) {
   const providers = [];
   if (env.AI && env.WORKERS_AI_MODEL) providers.push('cloudflare_workers_ai');
+  if (enabled(env.OSIRIS_GATEWAY_ENABLED) && env.OSIRIS_GATEWAY_API_KEY && env.OSIRIS_GATEWAY_MODEL) providers.push('osiris_gateway');
+  if (enabled(env.OPENROUTER_ENABLED) && env.OPENROUTER_API_KEY && env.OPENROUTER_MODEL) providers.push('openrouter');
   if (enabled(env.OPENAI_ENABLED) && env.OPENAI_API_KEY && env.OPENAI_MODEL) providers.push('openai');
   if (enabled(env.GEMINI_ENABLED) && env.GEMINI_API_KEY && env.GEMINI_MODEL) providers.push('google_gemini');
   if (enabled(env.PERPLEXITY_ENABLED) && env.PERPLEXITY_API_KEY) providers.push('perplexity');

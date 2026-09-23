@@ -5,6 +5,12 @@ from dashboard_v2 import why,build_dashboard_v2
 RUL='rul_'+'a'*36
 
 class A12Tests(unittest.TestCase):
+ def test_commercial_opportunity_review_is_medium_and_human_gated(self):
+  self.assertEqual(risk_for("commercial_opportunity_review"),"medium")
+  level,reasons=autonomous_level("commercial_opportunity_review",10,100,"human_approval_required")
+  self.assertEqual(level,"human_approval_required")
+  self.assertIn("HUMAN_APPROVAL_REQUESTED",reasons)
+
  def st(self): s=SchedulerState(); s.kill_switch=False; return s
  def test_threshold_pass_low_risk(self):
   level,reasons=autonomous_level('internal_health_check',2,80,'low_risk_auto'); self.assertEqual(level,'low_risk_auto'); self.assertIn('LOW_RISK_AUTO_THRESHOLDS_PASSED',reasons)

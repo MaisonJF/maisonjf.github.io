@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maison-jf.com/schemas/cta-experiment-context-v1.json",
+  "title": "Maison private CTA experiment context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "observed_at",
+    "contexts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "cta_experiment_context_v1"
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "contexts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "validation_plan_id",
+          "source_asset_id",
+          "cta_slot_key",
+          "control_solution_id",
+          "treatment_solution_id",
+          "max_exposures",
+          "evidence_refs"
+        ],
+        "properties": {
+          "validation_plan_id": {
+            "type": "string",
+            "pattern": "^vpl_.{36}$"
+          },
+          "source_asset_id": {
+            "type": "string",
+            "pattern": "^ast_.{36}$"
+          },
+          "cta_slot_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "control_solution_id": {
+            "type": "string",
+            "pattern": "^sol_.{36}$"
+          },
+          "treatment_solution_id": {
+            "type": "string",
+            "pattern": "^sol_.{36}$"
+          },
+          "a7_decision_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^dec_.{36}$"
+          },
+          "max_exposures": {
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 1000000
+          },
+          "territory_key": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 120
+          },
+          "evidence_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          }
+        }
+      }
+    }
+  }
+}

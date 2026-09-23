@@ -1,0 +1,14 @@
+FROM python:3.12-slim
+
+WORKDIR /opt/maison-growth
+
+COPY .github/maison-growth/runtime/requirements-brain-core.txt /tmp/requirements-brain-core.txt
+COPY .github/maison-growth/runtime/requirements-brain-embeddings.txt /tmp/requirements-brain-embeddings.txt
+RUN python -m pip install --no-cache-dir \
+    -r /tmp/requirements-brain-core.txt \
+    -r /tmp/requirements-brain-embeddings.txt
+
+COPY .github/maison-growth /opt/maison-growth
+
+WORKDIR /opt/maison-growth/brain
+CMD ["python","validate_brain_runtime.py"]

@@ -81,6 +81,8 @@ commands = [
     ["node", "--test", "workers/maison-intelligence/test/core.test.mjs"],
     ["node", "--check", "workers/maison-intelligence/src/core.js"],
     ["node", "--check", "workers/maison-intelligence/src/providers.js"],
+    ["node", "--check", "workers/maison-intelligence/src/sources.js"],
+    ["node", "--check", "workers/maison-intelligence/src/memory.js"],
     ["node", "--check", "workers/maison-intelligence/src/index.js"]
 ]
 

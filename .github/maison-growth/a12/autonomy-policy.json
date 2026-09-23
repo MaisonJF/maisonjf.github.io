@@ -5,8 +5,14 @@
   "global_kill_switch_default": true,
   "public_autonomy_enabled": false,
   "thresholds": {
-    "low_risk_auto": {"min_evidence_count": 2, "min_confidence_score": 80},
-    "recommend": {"min_evidence_count": 1, "min_confidence_score": 60}
+    "low_risk_auto": {
+      "min_evidence_count": 2,
+      "min_confidence_score": 80
+    },
+    "recommend": {
+      "min_evidence_count": 1,
+      "min_confidence_score": 60
+    }
   },
   "risk_rules": {
     "internal_health_check": "low",
@@ -19,11 +25,44 @@
     "cta_public_write": "high",
     "catalogue_change": "critical",
     "price_change": "critical",
-    "checkout_change": "critical"
+    "checkout_change": "critical",
+    "commercial_opportunity_review": "medium"
   },
-  "low_risk_auto_allowlist": ["internal_health_check","internal_learning_refresh","internal_dashboard_refresh"],
-  "public_action_keys": ["public_content_write","cta_public_write","catalogue_change","price_change","checkout_change"],
-  "limits": {"max_actions_per_job_window": 10, "max_failures_before_circuit_open": 3, "max_alerts_per_window": 20},
-  "human_queue_priorities": {"critical": 100, "high": 80, "medium": 50, "low": 20},
-  "protected_domains": ["hard_gates","permissions","pricing","discounts","checkout","catalogue","paid_content","security_policy","legal","commercial_promises","protected_architecture","public_authorization"]
+  "low_risk_auto_allowlist": [
+    "internal_health_check",
+    "internal_learning_refresh",
+    "internal_dashboard_refresh"
+  ],
+  "public_action_keys": [
+    "public_content_write",
+    "cta_public_write",
+    "catalogue_change",
+    "price_change",
+    "checkout_change"
+  ],
+  "limits": {
+    "max_actions_per_job_window": 10,
+    "max_failures_before_circuit_open": 3,
+    "max_alerts_per_window": 20
+  },
+  "human_queue_priorities": {
+    "critical": 100,
+    "high": 80,
+    "medium": 50,
+    "low": 20
+  },
+  "protected_domains": [
+    "hard_gates",
+    "permissions",
+    "pricing",
+    "discounts",
+    "checkout",
+    "catalogue",
+    "paid_content",
+    "security_policy",
+    "legal",
+    "commercial_promises",
+    "protected_architecture",
+    "public_authorization"
+  ]
 }
