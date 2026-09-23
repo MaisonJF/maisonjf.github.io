@@ -44,6 +44,8 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Commercial Asset Context | READY generated catalogue registry + optional evidence-backed private overlay | CATALOGUE READY / PRIVATE STOCK OVERLAY NOT LOADED |
 | Ocean → commercial routing | READY Ocean pain/intent/adjacency metadata enriches catalogue lookup as supporting context only | CODE-READY |
 | Physical bundle hypotheses | READY 4 internal drafts from current catalogue subtotals; no bundle price/discount/publication authority | STOCK + MARGIN CHECKS REQUIRED |
+| Commercial attention ranking | READY Ocean-informed read-only ranking across active public products/services; explicitly not a profit score | ALL ASSETS BLOCKED ON OPERATIONAL FACTS |
+| Commercial attention MCP | READY read-only attention + bundle-hypothesis tools | OPTIONAL PROFILE / NOT STARTED |
 | Private stocktake preparation | READY operator template covers all 5 active public physical products; contains no private values | AWAITING MANUAL COUNTS/COSTS |
 | Maison Semantic Memory | READY pgvector backend + stable interface + manual D1→pgvector sync | NOT STARTED; pgvector first, Qdrant deferred experiment |
 | Scout | READY | analysis only |
