@@ -51,6 +51,18 @@ class GrowthSchemaChainTests(unittest.TestCase):
         self.assertIn("autonomy_human_queue_current",views)
         self.assertIn("a14_approved_offers_ready_for_planning",views)
 
+        tables={
+            row[0] for row in con.execute(
+                "SELECT name FROM sqlite_master WHERE type='table'"
+            )
+        }
+        for expected in (
+            "a14_validation_plans",
+            "a14_validation_plan_a7_links",
+            "a14_validation_plan_a8_links",
+        ):
+            self.assertIn(expected,tables)
+
     def test_cash_feedback_accepts_unlinked_a3_economics(self):
         con=sqlite3.connect(":memory:")
         con.execute("PRAGMA foreign_keys=ON")
