@@ -84,7 +84,8 @@ function env(db=new FakeDB()) {
   return {
     BRAIN_PROPOSAL_API_ENABLED:'true',
     BRAIN_PROPOSAL_TOKEN:'proposal-secret',
-    GROWTH_DB:db
+    GROWTH_DB:db,
+    tables:db.tables
   };
 }
 
