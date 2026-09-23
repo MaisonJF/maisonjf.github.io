@@ -267,7 +267,8 @@
         "Pre-Brain",
         "Scout"
       ],
-      "notes": "Candidate for cheap aggregation before LLM invocation."
+      "notes": "Optional analytical backend implemented in brain/prebrain.py. Used for aggregation before expensive reasoning; never canonical storage.",
+      "priority": "P1"
     },
     {
       "id": "polars",
@@ -284,7 +285,8 @@
       "serves": [
         "Pre-Brain"
       ],
-      "notes": "Use with DuckDB where each is strongest; avoid duplicate transforms."
+      "notes": "Optional analytical backend implemented in brain/prebrain.py. Used for fast local transforms; never canonical storage.",
+      "priority": "P1"
     },
     {
       "id": "gliner",
@@ -306,7 +308,8 @@
         "Scout",
         "Oráculo analytics"
       ],
-      "notes": "Entity extraction creates hypotheses/structure, not truth."
+      "notes": "Optional adapter implemented in brain/prebrain_adapters.py; exact model/checkpoint remains operator-configured and licence-verified before runtime use. Entity output is hypothesis/structure, not truth.",
+      "priority": "P1"
     },
     {
       "id": "ruptures",
@@ -326,7 +329,8 @@
         "Pre-Brain",
         "Scout"
       ],
-      "notes": "Signal generator, not autonomous commercial decision."
+      "notes": "Optional change-point adapter implemented in brain/prebrain_adapters.py; algorithm/model/penalty are explicit runtime policy. Signal generator only.",
+      "priority": "P1"
     },
     {
       "id": "clustering",
