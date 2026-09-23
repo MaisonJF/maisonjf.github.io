@@ -82,6 +82,11 @@ jobs:
         working-directory: workers/maison-intelligence
         run: npm install --ignore-scripts
 
+      - name: Verify remote D1 schema
+        if: ${{ inputs.apply }}
+        working-directory: workers/maison-intelligence
+        run: bash scripts/verify-growth-schema.sh maison-growth-engine
+
       - name: Validate Worker
         working-directory: workers/maison-intelligence
         run: |
