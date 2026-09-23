@@ -28,6 +28,59 @@
   ],
   "entries": [
     {
+      "id": "maison-semantic-sync",
+      "type": "projection_pipeline",
+      "name": "Maison Semantic Projection Sync",
+      "status": "AGORA",
+      "priority": "P1",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "manual incremental projection from canonical Brain Control API/D1 observations into rebuildable pgvector Semantic Memory",
+      "sense": "semantic memory ingestion",
+      "cost": "0 API cost for local embedding/runtime; local CPU/RAM required",
+      "license": "Maison repo + pgvector + pinned multilingual E5 dependency",
+      "self_hosted": true,
+      "depends_on": [
+        "Brain Control API",
+        "pgvector",
+        "multilingual-e5-small"
+      ],
+      "serves": [
+        "Maison Semantic Memory",
+        "Brain",
+        "Scout"
+      ],
+      "notes": "Manual only, no scheduler. Requires explicit provider-prefix privacy allowlist and refuses empty allowlist. Cursor lives in disposable projection DB; canonical evidence remains D1. Current env example begins with eurostat_ only."
+    },
+    {
+      "id": "maison-brain-observe-cycle",
+      "type": "internal_component",
+      "name": "Maison Canonical Brain Observe Cycle",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "one-shot read-only analysis flow from canonical A13/A5/A4/A3/A11 data through Pre-Brain, Scout, Critic, Foundry and A14 preview",
+      "sense": "commercial cognition",
+      "cost": "shares existing Brain runtime",
+      "license": "Maison repo",
+      "self_hosted": true,
+      "depends_on": [
+        "Brain Control API",
+        "A5",
+        "A4",
+        "A3",
+        "A11",
+        "A14"
+      ],
+      "serves": [
+        "Brain",
+        "Scout",
+        "Critic",
+        "Foundry",
+        "A14"
+      ],
+      "notes": "Optional/manual only. A5 conflicts remain unresolved rather than majority-voted. A3 economics and A11 correlation-only learning are context, not independent evidence. Outputs A14 previews only; writes_performed=false and execution_authority=false."
+    },
+    {
       "id": "maison-brain-control-api",
       "type": "internal_api",
       "name": "Maison Brain Control API",
@@ -51,7 +104,7 @@
         "Critic",
         "Cash & Profit learning"
       ],
-      "notes": "Disabled by default. Exposes canonical feed, all A3 economic feedback, safe solution fields and A4 need↔solution links. No write routes; no customer/journey identity; recommend Cloudflare Access/private HTTPS in addition to bearer auth before activation."
+      "notes": "Disabled by default. Exposes canonical A13/A5 feed, all A3 economic feedback, safe solution fields, A4 need↔solution links and safe A11 learning context. No write routes; no customer/journey identity. Separate private_brain_read_candidate stage can later enable reads while sensing remains off; authenticated HTTPS/Cloudflare Access recommended in addition to bearer auth."
     },
     {
       "id": "maison-brain-mcp",
@@ -103,7 +156,7 @@
         "Brain",
         "Pre-Brain"
       ],
-      "notes": "Repository stage is infra_only. Compose includes pinned pgvector/Postgres, Redis, Osiris, authenticated A13 bridge, MCP read-context smoke and healthchecks; all published ports bind 127.0.0.1. No external provider activation, spend, outbound or public write authority."
+      "notes": "Repository stage remains infra_only. Compose includes pinned pgvector/Postgres, Redis, Osiris, authenticated A13 bridge, Brain observe cycle, Brain MCP, manual semantic sync and health/smoke profiles; all published ports bind 127.0.0.1. Semantic/Osiris read context switches are off by default. No external provider activation, spend, outbound or public write authority."
     },
     {
       "id": "maison-a14",
@@ -948,7 +1001,7 @@
         "Oceanos",
         "Foundry"
       ],
-      "notes": "Stable A5 semantic contract plus brain/semantic_memory.py projection interface. First backend implementation is pgvector; backend remains swappable and semantic similarity never becomes independent evidence.",
+      "notes": "Stable A5 semantic contract plus brain/semantic_memory.py projection interface. First backend is pgvector; manual allowlisted D1→pgvector sync implemented. Backend remains rebuildable/swappable and semantic similarity never becomes independent evidence.",
       "priority": "P0"
     },
     {
