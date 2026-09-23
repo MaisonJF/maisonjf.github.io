@@ -6,7 +6,6 @@ import os
 from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
-import psycopg
 
 from brain_control_client import BrainControlClient
 from local_embeddings import MultilingualE5SmallProvider
@@ -167,6 +166,8 @@ def sync_semantic_projection(
 
 
 def main() -> None:
+    import psycopg
+
     prefixes=_prefixes(os.environ.get("MAISON_SEMANTIC_SYNC_PROVIDER_PREFIXES",""))
     if not prefixes:
         raise SystemExit("No semantic-sync provider prefixes approved; refusing to embed.")
