@@ -17,17 +17,18 @@ def main() -> None:
     source = (ROOT / "opportunity_engine.py").read_text(encoding="utf-8").lower()
     for prohibited in ("requests.post(", "smtplib", "sendgrid", "checkout-session", "price_write"):
         assert prohibited not in source
-    proc = subprocess.run(
-        [sys.executable, str(ROOT / "test_a14.py")],
-        cwd=str(ROOT),
-        capture_output=True,
-        text=True,
-    )
-    if proc.returncode:
-        print(proc.stdout)
-        print(proc.stderr, file=sys.stderr)
-        raise SystemExit(proc.returncode)
-    print(proc.stdout, end="")
+    for test_file in ("test_a14.py", "test_a14_repository.py"):
+        proc = subprocess.run(
+            [sys.executable, str(ROOT / test_file)],
+            cwd=str(ROOT),
+            capture_output=True,
+            text=True,
+        )
+        if proc.returncode:
+            print(proc.stdout)
+            print(proc.stderr, file=sys.stderr)
+            raise SystemExit(proc.returncode)
+        print(proc.stdout, end="")
     print("A14 Universal Opportunity + Earned Distribution: OK")
 
 
