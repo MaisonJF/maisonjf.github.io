@@ -3,7 +3,7 @@ import {
   sha256Hex, territoriesForDate, uniqueCanonicalUrls
 } from './core.js';
 import { configuredProviders, PROVIDERS } from './providers.js';
-import { configuredOsirisSources, fetchOsirisSource, sourceDefinition } from './sources.js';
+import { configuredOsirisSources, fetchOsirisSource, sourceDefinition, osirisSourceDue } from './sources.js';
 import { mirrorToOsirisMemory } from './memory.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
@@ -194,7 +194,7 @@ async function enqueueOsirisRun(env, scheduledDate) {
 
   for (const sourceKey of sourceKeys) {
     const def = sourceDefinition(sourceKey);
-    if (!def) continue;
+    if (!def || !osirisSourceDue(env, sourceKey, scheduledDate)) continue;
     const providerId = `osiris_${sourceKey}`;
     const cap = env.MAX_DAILY_CALLS_PER_OSIRIS_SOURCE || '24';
     if (!(await underDailyCap(env, providerId, day, cap))) continue;
