@@ -2,7 +2,7 @@
   "version": "2026-09-18",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-09-23T23:45:18+01:00",
+  "last_enriched_at": "2026-09-23T23:49:58+01:00",
   "candidates": [
     {
       "painLanguage": "Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
@@ -338,6 +338,31 @@
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T23:45:18+01:00",
       "lastSeenAt": "2026-09-23T23:45:18+01:00"
+    },
+    {
+      "painLanguage": "Há momentos de medo, espera ou sobrecarga em que a pessoa não precisa de uma solução perfeita nem de um conselho brilhante. Precisa sobretudo de sentir que alguém ficou, ouviu e não a deixou atravessar aquele momento sozinha.",
+      "territory": "presenca-que-ampara-sem-tentar-resolver",
+      "intent": "reconhecer quando a necessidade principal não é resolver imediatamente o problema, mas receber presença, escuta e apoio relacional suficiente para atravessar um momento difícil, distinguindo companhia humana de aconselhamento, tratamento clínico ou resposta de emergência",
+      "commercialAdjacency": "Presença e SOS MAISON JF (1 dia/1 semana) como serviços com limites claros; Oráculo Solidão & Companhia e experiências digitais sobre pedir/receber apoio; SOS Maison JF como linguagem de check-in e contacto de confiança sem promessa de emergência; Ritual Volta Para Casa; e velas, névoas, escalda-pés e óleos como gestos de presença/autocuidado ou presente para alguém que atravessa um momento difícil, sem claims médicos nem promessa de alterar resultados",
+      "evidence": [
+        "PLOS ONE (2025): estudo experimental sobre presença social durante stress encontrou que a co-presença de outra pessoa pode modular reactividade cardiovascular e afectiva, com efeitos dependentes do contexto e diferenças individuais — https://doi.org/10.1371/journal.pone.0325303",
+        "Scientific Reports (2025): lembretes de figuras de apoio social reduziram medo a longo prazo em comparação com sinais de segurança aprendidos, apoiando um papel específico de pistas de suporte social na regulação de ameaça — https://doi.org/10.1038/s41598-025-27689-0",
+        "Patient Experience Journal (2025): artigo sobre 'holding space' descreve presença profunda, escuta e postura não julgadora como uma abordagem centrada na pessoa quando a esperança diminui — https://pxjournal.org/journal/vol12/iss2/7/"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "alguém ficar quando tenho medo",
+        "presença vs solução",
+        "ouvir sem tentar corrigir",
+        "não atravessar sozinho",
+        "pedir apoio sem ter a frase perfeita",
+        "companhia em momentos difíceis",
+        "estar com alguém sem ter de salvar tudo"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-23T23:49:58+01:00",
+      "lastSeenAt": "2026-09-23T23:49:58+01:00"
     }
   ]
 }
