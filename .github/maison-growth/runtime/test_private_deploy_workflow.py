@@ -26,6 +26,18 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
         job_header = self.source.split("    steps:", 1)[0]
         self.assertNotIn("${{ secrets.", job_header)
 
+    def test_readiness_report_only_runs_on_trusted_main_pushes(self):
+        block = """      - name: Report first-stage credential readiness
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+"""
+        self.assertIn(block, self.source)
+        start = self.source.index("- name: Report first-stage credential readiness")
+        guard = self.source.index("- name: Guard live apply")
+        report_block = self.source[start:guard]
+        self.assertIn("report_private_runtime_readiness.py", report_block)
+        self.assertIn("${{ secrets.CLOUDFLARE_API_TOKEN }}", report_block)
+        self.assertIn("${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}", report_block)
+
     def test_live_preflight_never_runs_on_automatic_events(self):
         block = """      - name: Private-stage preflight
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
