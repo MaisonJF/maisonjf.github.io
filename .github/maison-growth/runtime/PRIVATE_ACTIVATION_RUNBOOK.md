@@ -60,6 +60,8 @@ The renderer reuses the canonical Maison Growth D1 binding already versioned in 
 
 Before a live apply, the workflow also runs the read-only `scripts/verify-growth-schema.sh` check against `maison-growth-engine`. It references the Brain/A12/A14 planning tables and views with `LIMIT 0`; a missing migration blocks deployment without mutating D1.
 
+After deployment, it performs an authenticated GET against `/internal/brain/health` and requires `status=ok` plus `mode=read_only`. A deployment that cannot be reached through the configured private boundary is therefore treated as incomplete.
+
 ## 1. Private Brain read
 
 Before changing any remote switch:
