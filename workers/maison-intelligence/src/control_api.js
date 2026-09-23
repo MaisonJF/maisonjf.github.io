@@ -211,20 +211,21 @@ async function reviewQueue(env, url) {
 
   const rows=await all(env.GROWTH_DB.prepare(`
     SELECT
-      q.queue_id,q.action_id,q.priority,q.status,q.created_at,
+      q.queue_id,q.action_id,q.priority,q.effective_status AS status,q.created_at,
+      q.review_resolution_id,q.approved_scope,q.decision_reason,q.decided_at,
       a.action_key,a.risk_class,a.autonomy_level,a.evidence_refs_json,a.reason_codes_json,
       g.opportunity_id,
       o.territory_code,o.opportunity_score,o.confidence,o.status AS opportunity_status,
       json_extract(a.result_json,'$.offer_hypothesis_id') AS offer_hypothesis_id,
       h.offer_type,h.a3_solution_type,h.existing_solution_id,h.fit_score,h.fit_confidence,
       h.economics_json,h.validation_mode
-    FROM autonomy_human_queue q
+    FROM autonomy_human_queue_current q
     JOIN autonomy_action_log a ON a.action_id=q.action_id
     LEFT JOIN a14_governance_links g ON g.action_id=a.action_id
     LEFT JOIN opportunity_hypotheses o ON o.opportunity_id=g.opportunity_id
     LEFT JOIN opportunity_offer_hypotheses h
       ON h.offer_hypothesis_id=json_extract(a.result_json,'$.offer_hypothesis_id')
-    WHERE q.status=? AND a.action_key='commercial_opportunity_review'
+    WHERE q.effective_status=? AND a.action_key='commercial_opportunity_review'
     ORDER BY q.priority DESC,q.created_at,q.queue_id
     LIMIT ?
   `).bind(status,limit));
@@ -240,6 +241,10 @@ async function reviewQueue(env, url) {
       created_at:row.created_at,
       risk_class:row.risk_class,
       autonomy_level:row.autonomy_level,
+      review_resolution_id:row.review_resolution_id,
+      approved_scope:row.approved_scope,
+      decision_reason:row.decision_reason,
+      decided_at:row.decided_at,
       opportunity_id:row.opportunity_id,
       territory_code:row.territory_code,
       opportunity_score:row.opportunity_score,
