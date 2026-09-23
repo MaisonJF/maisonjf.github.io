@@ -5,7 +5,7 @@ import sqlite3
 import unittest
 from pathlib import Path
 
-from repository import SQLiteA14Repository
+from repository import A14RepositoryError, SQLiteA14Repository
 
 
 class A14RepositoryTests(unittest.TestCase):
@@ -51,6 +51,101 @@ class A14RepositoryTests(unittest.TestCase):
         self.assertEqual(stored["knowledge_context_refs"], ["ocean:casa","osiris:entity:abc"])
         with self.assertRaises(sqlite3.DatabaseError):
             con.execute("UPDATE opportunity_hypotheses SET status='archived' WHERE opportunity_id=?", (record["opportunity_id"],))
+
+    def test_opportunity_persistence_is_idempotent_and_detects_drift(self):
+        con=self.make_db()
+        repo=SQLiteA14Repository(con)
+        record={
+            "opportunity_id":"opp_"+"a"*36,
+            "need_id":None,
+            "territory_code":"CASA",
+            "opportunity_score":82.0,
+            "confidence":0.61,
+            "known_dimensions":["demand"],
+            "unknown_dimensions":["growth"],
+            "evidence_refs":["evd_x"],
+            "existing_solution_ids":[],
+            "knowledge_context_refs":["ocean:casa"],
+            "status":"human_review_required",
+            "reason_codes":["test"],
+            "rule_version_id":"a14_policy_test",
+            "model_version_id":None,
+            "input_hash":"c"*64,
+            "created_at":"2026-09-23T14:00:00.000Z",
+        }
+        self.assertTrue(repo.persist_opportunity(record))
+        rerun={**record,"created_at":"2026-09-23T15:00:00.000Z"}
+        self.assertFalse(repo.persist_opportunity(rerun))
+        self.assertEqual(con.execute("SELECT count(*) FROM opportunity_hypotheses").fetchone()[0],1)
+        drift={**rerun,"territory_code":"CORPO"}
+        with self.assertRaises(A14RepositoryError):
+            repo.persist_opportunity(drift)
+
+    def test_offer_and_distribution_persistence_are_idempotent(self):
+        con=self.make_db()
+        repo=SQLiteA14Repository(con)
+        opportunity={
+            "opportunity_id":"opp_"+"a"*36,
+            "need_id":None,
+            "territory_code":"CASA",
+            "opportunity_score":None,
+            "confidence":0.0,
+            "known_dimensions":[],
+            "unknown_dimensions":["demand"],
+            "evidence_refs":["evd_x"],
+            "existing_solution_ids":[],
+            "knowledge_context_refs":[],
+            "status":"observe",
+            "reason_codes":["test"],
+            "rule_version_id":"a14_policy_test",
+            "model_version_id":None,
+            "input_hash":"d"*64,
+            "created_at":"2026-09-23T14:00:00.000Z",
+        }
+        self.assertTrue(repo.persist_opportunity(opportunity))
+        offer={
+            "offer_hypothesis_id":"ofh_"+"b"*36,
+            "opportunity_id":opportunity["opportunity_id"],
+            "offer_type":"service",
+            "a3_solution_type":"service",
+            "existing_solution_id":None,
+            "fit_score":None,
+            "fit_confidence":0.0,
+            "economics":{"capital_required_minor":None},
+            "validation_mode":"manual",
+            "evidence_refs":["evd_x"],
+            "reason_codes":["test"],
+            "created_at":"2026-09-23T14:01:00.000Z",
+        }
+        self.assertTrue(repo.persist_offer_hypothesis(offer))
+        self.assertFalse(repo.persist_offer_hypothesis({**offer,"created_at":"2026-09-23T15:01:00.000Z"}))
+
+        match={
+            "distribution_match_id":"dma_"+"c"*36,
+            "offer_hypothesis_id":offer["offer_hypothesis_id"],
+            "amplifier_ref":"a13:entity:test",
+            "moment_key":"outono",
+            "story_angle_key":"aconchego",
+            "channel_class":"creator",
+            "fit_score":None,
+            "fit_confidence":0.0,
+            "known_dimensions":[],
+            "unknown_dimensions":["topic_fit"],
+            "evidence_refs":["evd_x"],
+            "economics":{"net_total_expected_value_minor":None},
+            "recommended_strategy":"observe",
+            "recommendation_state":"enrich_data",
+            "a12_review_ref":None,
+            "experiment_id":None,
+            "created_at":"2026-09-23T14:02:00.000Z",
+        }
+        self.assertTrue(repo.persist_distribution_match(match))
+        self.assertFalse(repo.persist_distribution_match({**match,"created_at":"2026-09-23T15:02:00.000Z"}))
+        self.assertEqual(con.execute("SELECT count(*) FROM opportunity_offer_hypotheses").fetchone()[0],1)
+        self.assertEqual(con.execute("SELECT count(*) FROM earned_distribution_match_assessments").fetchone()[0],1)
+
+        with self.assertRaises(A14RepositoryError):
+            repo.persist_distribution_match({**match,"channel_class":"b2b"})
 
     def test_distribution_match_cannot_authorize_outbound_or_spend(self):
         con = self.make_db()
