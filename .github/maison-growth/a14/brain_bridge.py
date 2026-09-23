@@ -26,6 +26,8 @@ from opportunity_engine import (
 @dataclass(frozen=True)
 class A14Policy:
     policy_version: str
+    opportunity_weights: Mapping[str, float]
+    distribution_weights: Mapping[str, float]
     minimum_distribution_fit: float
     minimum_distribution_confidence: float
 
@@ -60,8 +62,9 @@ def build_opportunity_record(
     knowledge_context_refs: Sequence[str],
     rule_version_id: str,
     model_version_id: Optional[str] = None,
+    policy: A14Policy,
 ) -> dict[str, Any]:
-    score = score_universal_opportunity(metrics)
+    score = score_universal_opportunity(metrics, policy.opportunity_weights)
     existing = tuple(sorted(set(existing_solution_ids)))
     status = "observe"
     reasons = ["a14_evidence_weighted_opportunity"]
@@ -116,9 +119,10 @@ def build_offer_hypothesis(
     fit_metrics: Mapping[str, EvidenceMetric],
     validation_mode: Optional[str],
     economics: Mapping[str, Any],
+    policy: A14Policy,
 ) -> dict[str, Any]:
     path = choose_offer_path(existing_solution_ids, (offer_type,))
-    fit = score_universal_opportunity(fit_metrics)
+    fit = score_universal_opportunity(fit_metrics, policy.opportunity_weights)
     existing_solution_id = path["existing_solution_ids"][0] if path["existing_solution_ids"] else None
     return {
         "offer_hypothesis_id": new_id("ofh_"),
@@ -151,7 +155,7 @@ def build_distribution_match(
     policy: A14Policy,
     seedable: bool,
 ) -> dict[str, Any]:
-    fit = score_distribution_fit(fit_metrics)
+    fit = score_distribution_fit(fit_metrics, policy.distribution_weights)
     economics = compute_activation_economics(
         direct_cost=direct_cost,
         expected_direct_revenue=expected_direct_revenue,
