@@ -1,7 +1,7 @@
 {
   "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
-  "generatedAt": "2026-09-23T23:41:00+01:00",
+  "generatedAt": "2026-09-23T23:45:18+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
   "contract": {
     "storesPaidBodies": false,
@@ -11,19 +11,19 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 13,
-    "queueItems": 26,
-    "questionCandidates": 13,
-    "questionThemeHypotheses": 78,
-    "questionDesignSlots": 468,
+    "oceansConsidered": 14,
+    "queueItems": 28,
+    "questionCandidates": 14,
+    "questionThemeHypotheses": 85,
+    "questionDesignSlots": 510,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 150,
     "pdiThemeBacklog": 150,
     "pdiSourceDesignSlots": 900,
     "pdiEditorialCoreTarget": 45000,
     "pdiCombinatorialTarget": 2800000,
-    "oracleCandidates": 13,
-    "oracleRoleSlots": 91
+    "oracleCandidates": 14,
+    "oracleRoleSlots": 98
   },
   "pdiGrowth": {
     "scale": {
@@ -8231,6 +8231,34 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_oracle_autonomia_condicionada_pelo_medo_da_reaccao",
+      "type": "oracle_candidate",
+      "sourceOceanId": "autonomia-condicionada-pelo-medo-da-reaccao",
+      "territory": "autonomia-condicionada-pelo-medo-da-reaccao",
+      "intent": "reconhecer quando a liberdade formal dentro de uma relação é reduzida pela antecipação de consequências emocionais após escolhas autónomas, distinguindo desacordo legítimo de padrões repetidos de punição, retirada ou pressão que levam a pessoa a mudar o próprio comportamento para evitar a reacção do outro",
+      "painLanguage": "Às vezes ninguém diz “não podes”. Mas a escolha deixa de parecer livre quando a pessoa já sabe que, se sair, disser não, pedir espaço ou escolher por si, pode encontrar silêncio, frieza, culpa, tensão ou outra reacção que funciona como preço a pagar.",
+      "commercialAdjacency": "Oráculo Limites & Respeito, Comunicação & Conflito e Eu & Padrões; experiências digitais intermédias sobre autonomia e escolhas; ângulos de venda/contexto para Ritual Volta Para Casa, velas, névoas, escalda-pés e óleos como momentos de regresso a si e preparação para decisões ou conversas, sem claims clínicos nem promessa de alterar relações",
+      "evidenceCount": 3,
+      "evidence": [
+        "Current Opinion in Psychology / PubMed (2025; PMID 41418500): review on partner ostracism integrates silent treatment, stonewalling and emotional withdrawal with intimate-partner maltreatment literature, highlighting threats to belonging, self-esteem and perceived control — https://pubmed.ncbi.nlm.nih.gov/41418500/",
+        "Systematic review / PMC (2026): review of silent treatment in close adult relationships found it can operate both as emotion regulation and as an interpersonal control mechanism, including use to influence, protest or punish — https://pmc.ncbi.nlm.nih.gov/articles/PMC12937000/",
+        "Journal of Interpersonal Violence / PubMed (2026; PMID 39988968): qualitative research on coercive control describes restrictive regulation through isolation, threats, psychological manipulation and other tactics that can erode autonomy over time — https://pubmed.ncbi.nlm.nih.gov/39988968/"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial",
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ]
+    },
+    {
       "id": "brain_oracle_carga_mental_invisivel_da_casa",
       "type": "oracle_candidate",
       "sourceOceanId": "carga-mental-invisivel-da-casa",
@@ -9377,6 +9405,296 @@
       "approvalRequired": true,
       "automaticActivation": false,
       "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_autonomia_condicionada_pelo_medo_da_reaccao",
+      "type": "question_candidate",
+      "sourceOceanId": "autonomia-condicionada-pelo-medo-da-reaccao",
+      "territory": "autonomia-condicionada-pelo-medo-da-reaccao",
+      "intent": "reconhecer quando a liberdade formal dentro de uma relação é reduzida pela antecipação de consequências emocionais após escolhas autónomas, distinguindo desacordo legítimo de padrões repetidos de punição, retirada ou pressão que levam a pessoa a mudar o próprio comportamento para evitar a reacção do outro",
+      "painLanguage": "Às vezes ninguém diz “não podes”. Mas a escolha deixa de parecer livre quando a pessoa já sabe que, se sair, disser não, pedir espaço ou escolher por si, pode encontrar silêncio, frieza, culpa, tensão ou outra reacção que funciona como preço a pagar.",
+      "commercialAdjacency": "Oráculo Limites & Respeito, Comunicação & Conflito e Eu & Padrões; experiências digitais intermédias sobre autonomia e escolhas; ângulos de venda/contexto para Ritual Volta Para Casa, velas, névoas, escalda-pés e óleos como momentos de regresso a si e preparação para decisões ou conversas, sem claims clínicos nem promessa de alterar relações",
+      "evidenceCount": 3,
+      "evidence": [
+        "Current Opinion in Psychology / PubMed (2025; PMID 41418500): review on partner ostracism integrates silent treatment, stonewalling and emotional withdrawal with intimate-partner maltreatment literature, highlighting threats to belonging, self-esteem and perceived control — https://pubmed.ncbi.nlm.nih.gov/41418500/",
+        "Systematic review / PMC (2026): review of silent treatment in close adult relationships found it can operate both as emotion regulation and as an interpersonal control mechanism, including use to influence, protest or punish — https://pmc.ncbi.nlm.nih.gov/articles/PMC12937000/",
+        "Journal of Interpersonal Violence / PubMed (2026; PMID 39988968): qualitative research on coercive control describes restrictive regulation through isolation, threats, psychological manipulation and other tactics that can erode autonomy over time — https://pubmed.ncbi.nlm.nih.gov/39988968/"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial",
+      "questionThemeCandidates": [
+        "liberdade com preço emocional",
+        "medo da reacção depois de escolher",
+        "autonomia e consequências relacionais",
+        "punição sem proibição explícita",
+        "mudar escolhas para evitar tensão",
+        "desacordo vs controlo",
+        "escolher sem pedir permissão emocional"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_liberdade_com_preco_emocional_open",
+          "theme": "liberdade com preço emocional",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_liberdade_com_preco_emocional_recognize",
+          "theme": "liberdade com preço emocional",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_liberdade_com_preco_emocional_deepen",
+          "theme": "liberdade com preço emocional",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_liberdade_com_preco_emocional_touch",
+          "theme": "liberdade com preço emocional",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_liberdade_com_preco_emocional_close",
+          "theme": "liberdade com preço emocional",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_liberdade_com_preco_emocional_signature",
+          "theme": "liberdade com preço emocional",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_medo_da_reaccao_depois_de_escolher_open",
+          "theme": "medo da reacção depois de escolher",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_medo_da_reaccao_depois_de_escolher_recognize",
+          "theme": "medo da reacção depois de escolher",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_medo_da_reaccao_depois_de_escolher_deepen",
+          "theme": "medo da reacção depois de escolher",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_medo_da_reaccao_depois_de_escolher_touch",
+          "theme": "medo da reacção depois de escolher",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_medo_da_reaccao_depois_de_escolher_close",
+          "theme": "medo da reacção depois de escolher",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_medo_da_reaccao_depois_de_escolher_signature",
+          "theme": "medo da reacção depois de escolher",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_autonomia_e_consequencias_relacionais_open",
+          "theme": "autonomia e consequências relacionais",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_autonomia_e_consequencias_relacionais_recognize",
+          "theme": "autonomia e consequências relacionais",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_autonomia_e_consequencias_relacionais_deepen",
+          "theme": "autonomia e consequências relacionais",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_autonomia_e_consequencias_relacionais_touch",
+          "theme": "autonomia e consequências relacionais",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_autonomia_e_consequencias_relacionais_close",
+          "theme": "autonomia e consequências relacionais",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_autonomia_e_consequencias_relacionais_signature",
+          "theme": "autonomia e consequências relacionais",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_punicao_sem_proibicao_explicita_open",
+          "theme": "punição sem proibição explícita",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_punicao_sem_proibicao_explicita_recognize",
+          "theme": "punição sem proibição explícita",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_punicao_sem_proibicao_explicita_deepen",
+          "theme": "punição sem proibição explícita",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_punicao_sem_proibicao_explicita_touch",
+          "theme": "punição sem proibição explícita",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_punicao_sem_proibicao_explicita_close",
+          "theme": "punição sem proibição explícita",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_punicao_sem_proibicao_explicita_signature",
+          "theme": "punição sem proibição explícita",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_mudar_escolhas_para_evitar_tensao_open",
+          "theme": "mudar escolhas para evitar tensão",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_mudar_escolhas_para_evitar_tensao_recognize",
+          "theme": "mudar escolhas para evitar tensão",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_mudar_escolhas_para_evitar_tensao_deepen",
+          "theme": "mudar escolhas para evitar tensão",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_mudar_escolhas_para_evitar_tensao_touch",
+          "theme": "mudar escolhas para evitar tensão",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_mudar_escolhas_para_evitar_tensao_close",
+          "theme": "mudar escolhas para evitar tensão",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_mudar_escolhas_para_evitar_tensao_signature",
+          "theme": "mudar escolhas para evitar tensão",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_desacordo_vs_controlo_open",
+          "theme": "desacordo vs controlo",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_desacordo_vs_controlo_recognize",
+          "theme": "desacordo vs controlo",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_desacordo_vs_controlo_deepen",
+          "theme": "desacordo vs controlo",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_desacordo_vs_controlo_touch",
+          "theme": "desacordo vs controlo",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_desacordo_vs_controlo_close",
+          "theme": "desacordo vs controlo",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_desacordo_vs_controlo_signature",
+          "theme": "desacordo vs controlo",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_escolher_sem_pedir_permissao_emocional_open",
+          "theme": "escolher sem pedir permissão emocional",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_escolher_sem_pedir_permissao_emocional_recognize",
+          "theme": "escolher sem pedir permissão emocional",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_escolher_sem_pedir_permissao_emocional_deepen",
+          "theme": "escolher sem pedir permissão emocional",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_escolher_sem_pedir_permissao_emocional_touch",
+          "theme": "escolher sem pedir permissão emocional",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_escolher_sem_pedir_permissao_emocional_close",
+          "theme": "escolher sem pedir permissão emocional",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_autonomia_condicionada_pelo_medo_da_reaccao_escolher_sem_pedir_permissao_emocional_signature",
+          "theme": "escolher sem pedir permissão emocional",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ]
     },
     {
       "id": "brain_question_carga_mental_invisivel_da_casa",
