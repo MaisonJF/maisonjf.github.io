@@ -66,12 +66,17 @@ def _semantic_search_sync(
     territory_key: Optional[str],
     knowledge_type: Optional[str],
     language: Optional[str],
+    privacy_class: Optional[str],
     limit: int,
 ) -> list[dict[str,Any]]:
     dsn=os.environ.get("MAISON_SEMANTIC_DATABASE_URL","").strip()
     if not dsn:
         return [{"state":"not_configured","reason":"MAISON_SEMANTIC_DATABASE_URL_missing"}]
-    filters:dict[str,object]={"privacy_class":"public"}
+    filters:dict[str,object]={}
+    if privacy_class:
+        if privacy_class not in {"public","system","aggregated","internal_non_pii"}:
+            raise ValueError("unsupported_privacy_class")
+        filters["privacy_class"]=privacy_class
     if territory_key: filters["territory_key"]=territory_key
     if knowledge_type: filters["knowledge_type"]=knowledge_type
     if language: filters["language"]=language
@@ -151,6 +156,7 @@ async def maison_semantic_search(
     territory_key: str | None=None,
     knowledge_type: str | None=None,
     language: str | None=None,
+    privacy_class: str | None=None,
     limit: int=10,
 ) -> dict[str,Any]:
     """Search the rebuildable pgvector Semantic Memory projection read-only."""
@@ -164,6 +170,7 @@ async def maison_semantic_search(
         territory_key=territory_key,
         knowledge_type=knowledge_type,
         language=language,
+        privacy_class=privacy_class,
         limit=limit,
     )
     return {"query":query,"hits":hits}
