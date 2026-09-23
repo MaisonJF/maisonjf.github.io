@@ -5,6 +5,7 @@ import {
 import { configuredProviders, PROVIDERS } from './providers.js';
 import { configuredOsirisSources, fetchOsirisSource, sourceDefinition, osirisSourceDue } from './sources.js';
 import { mirrorToOsirisMemory } from './memory.js';
+import { configuredPublicSourceTasks, fetchPublicSource, publicSourceDue, publicTaskIdentity } from './public_sources.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -160,6 +161,26 @@ async function processSourceTask(env, task) {
   return { stored: true, provider: task.providerId, territory: task.territoryKey };
 }
 
+async function processPublicSourceTask(env, task) {
+  const control = await controlState(env);
+  if (!control.enabled) return { skipped: control.reason };
+  if (await alreadyDone(env, task.taskKey)) return { skipped: 'duplicate_task' };
+  const day = task.day || utcDay();
+  const cap = env.MAX_DAILY_CALLS_PER_PUBLIC_SOURCE || '4';
+  if (!(await underDailyCap(env, task.providerId, day, cap))) return { skipped: 'daily_cap' };
+
+  let result;
+  try {
+    result = await fetchPublicSource(env, task.publicTask);
+    await markUsage(env, task.providerId, day, true, result.usage);
+  } catch (error) {
+    await markUsage(env, task.providerId, day, false, null);
+    throw error;
+  }
+  await persistObservation(env, task, result);
+  return { stored: true, provider: task.providerId, territory: task.territoryKey };
+}
+
 async function processTask(env, task) {
   const control = await controlState(env);
   if (!control.enabled) return { skipped: control.reason };
@@ -215,6 +236,37 @@ async function enqueueOsirisRun(env, scheduledDate) {
   return { queued: messages.length, sources: sourceKeys.length };
 }
 
+async function enqueuePublicSourceRun(env, scheduledDate) {
+  const control = await controlState(env);
+  if (!control.enabled) return { queued: 0, reason: control.reason };
+
+  const configured = configuredPublicSourceTasks(env);
+  if (!configured.length) return { queued: 0, reason: 'public_sources_disabled_or_unconfigured' };
+
+  const day = utcDay(scheduledDate);
+  const hour = scheduledDate.toISOString().slice(0, 13);
+  const messages = [];
+  for (const publicTask of configured) {
+    if (!publicSourceDue(publicTask, scheduledDate)) continue;
+    const providerId = publicTask.providerId;
+    const cap = env.MAX_DAILY_CALLS_PER_PUBLIC_SOURCE || '4';
+    if (!(await underDailyCap(env, providerId, day, cap))) continue;
+    const promptFingerprint = await sha256Hex(publicTaskIdentity(publicTask));
+    messages.push({ body: {
+      kind: 'public_source_snapshot',
+      day,
+      providerId,
+      territoryKey: publicTask.territoryKey,
+      prompt: `Public source snapshot: ${publicTask.family}/${publicTask.key}`,
+      promptFingerprint,
+      taskKey: `${hour}:public:${publicTask.family}:${publicTask.key}`,
+      publicTask
+    }});
+  }
+  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0, 100));
+  return { queued: messages.length, configured: configured.length };
+}
+
 async function enqueueRun(env, scheduledDate) {
   const control = await controlState(env);
   if (!control.enabled) return { queued: 0, reason: control.reason };
@@ -244,7 +296,7 @@ async function enqueueRun(env, scheduledDate) {
 export default {
   async scheduled(controller, env, ctx) {
     const when = new Date(controller.scheduledTime);
-    const jobs = [enqueueOsirisRun(env, when)];
+    const jobs = [enqueueOsirisRun(env, when), enqueuePublicSourceRun(env, when)];
     if (controller.cron === '17 4 * * *') jobs.push(enqueueRun(env, when));
     ctx.waitUntil(Promise.all(jobs));
   },
@@ -252,9 +304,10 @@ export default {
   async queue(batch, env) {
     for (const message of batch.messages) {
       const task = message.body;
-      if (!task || !['sensor_query','source_snapshot'].includes(task.kind)) { message.ack(); continue; }
+      if (!task || !['sensor_query','source_snapshot','public_source_snapshot'].includes(task.kind)) { message.ack(); continue; }
       try {
         if (task.kind === 'source_snapshot') await processSourceTask(env, task);
+        else if (task.kind === 'public_source_snapshot') await processPublicSourceTask(env, task);
         else await processTask(env, task);
         message.ack();
       } catch (error) {
