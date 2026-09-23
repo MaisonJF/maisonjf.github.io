@@ -30,7 +30,7 @@ class BrainProposalClient:
         if (self.access_client_id is None)!=(self.access_client_secret is None):
             raise BrainProposalError("cloudflare_access_credentials_must_be_paired")
 
-    def materialize(self, payload: Mapping[str,Any]) -> Mapping[str,Any]:
+    def _post(self, path: str, payload: Mapping[str,Any]) -> Mapping[str,Any]:
         raw=json.dumps(payload,ensure_ascii=False,separators=(",",":")).encode("utf-8")
         headers={
             "Accept":"application/json",
@@ -43,7 +43,7 @@ class BrainProposalClient:
             headers["CF-Access-Client-Secret"]=self.access_client_secret
 
         request=urllib.request.Request(
-            self.base_url+"/internal/proposals/a14",
+            self.base_url+path,
             data=raw,
             headers=headers,
             method="POST",
@@ -73,3 +73,12 @@ class BrainProposalClient:
         if not isinstance(value,Mapping):
             raise BrainProposalError("brain_proposal_invalid_payload")
         return value
+
+    def materialize(self, payload: Mapping[str,Any]) -> Mapping[str,Any]:
+        return self._post("/internal/proposals/a14",payload)
+
+    def persist_validation_plan(self, plan: Mapping[str,Any]) -> Mapping[str,Any]:
+        return self._post(
+            "/internal/proposals/validation-plan",
+            {"schema":"maison.a14-validation-plan.v1","plan":dict(plan)},
+        )
