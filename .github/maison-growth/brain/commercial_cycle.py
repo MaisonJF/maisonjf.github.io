@@ -44,6 +44,63 @@ def select_payloads(
     return selected
 
 
+def run_commercial_cycle(
+    *,
+    control: Any,
+    observe_output: Mapping[str, Any],
+    enabled: bool,
+    allowed_states: Sequence[str] | set[str],
+    proposal: Any | None = None,
+    inbox_limit: int = 50,
+) -> dict[str, Any]:
+    """Run the private commercial loop against injected clients.
+
+    This function is deliberately transport-agnostic so the complete
+    observe→optional-materialize→inbox-refresh contract can be tested without
+    Cloudflare credentials or network access.
+    """
+    inbox_before = summarize_inbox(control.action_inbox(limit=inbox_limit))
+    selected = select_payloads(observe_output, allowed_states)
+
+    responses: list[dict[str, Any]] = []
+    if enabled and selected:
+        if proposal is None:
+            raise RuntimeError("proposal_client_required_when_materialization_enabled")
+        for payload in selected:
+            responses.append(dict(proposal.materialize(payload)))
+
+    inbox_after = summarize_inbox(control.action_inbox(limit=inbox_limit))
+    writes_performed = bool(enabled and selected)
+    return {
+        "kind": "maison_private_commercial_cycle",
+        "mode": "materialize_to_human_inbox" if enabled else "preview_only",
+        "observe": {
+            "feed_rows": observe_output.get("feed_rows", 0),
+            "packets": len(observe_output.get("packets", [])),
+            "a14_previews": len(observe_output.get("a14_previews", [])),
+        },
+        "selected_previews": len(selected),
+        "selected_for_human_review": sum(
+            1 for x in selected if x.get("queue_for_human") is True
+        ),
+        "selected_analysis_only": sum(
+            1 for x in selected if x.get("queue_for_human") is False
+        ),
+        "writes_performed": writes_performed,
+        "write_scope": "a14_hypotheses_and_a12_queue_only" if writes_performed else "none",
+        "proposal_responses": responses,
+        "inbox_before": inbox_before,
+        "inbox_after": inbox_after,
+        "authority": {
+            "public_write_authorized": False,
+            "outbound_authorized": False,
+            "spend_authorized": False,
+            "experiment_execution_authorized": False,
+            "human_decision_automated": False,
+        },
+    }
+
+
 def control_client() -> BrainControlClient:
     return BrainControlClient(
         base_url=os.environ["BRAIN_CONTROL_API_URL"],
@@ -64,43 +121,18 @@ def proposal_client() -> BrainProposalClient:
 
 def main() -> None:
     control = control_client()
-    inbox_before = summarize_inbox(control.action_inbox(limit=50))
-
     observe_output = build_observe_output()
-    selected = select_payloads(observe_output, _allowed_states())
     enabled = _true(os.environ.get("MAISON_A14_MATERIALIZE_ENABLED"))
+    selected = select_payloads(observe_output, _allowed_states())
+    proposal = proposal_client() if enabled and selected else None
 
-    responses: list[dict[str, Any]] = []
-    if enabled and selected:
-        proposals = proposal_client()
-        for payload in selected:
-            responses.append(dict(proposals.materialize(payload)))
-
-    inbox_after = summarize_inbox(control.action_inbox(limit=50))
-    report = {
-        "kind": "maison_private_commercial_cycle",
-        "mode": "materialize_to_human_inbox" if enabled else "preview_only",
-        "observe": {
-            "feed_rows": observe_output.get("feed_rows", 0),
-            "packets": len(observe_output.get("packets", [])),
-            "a14_previews": len(observe_output.get("a14_previews", [])),
-        },
-        "selected_previews": len(selected),
-        "selected_for_human_review": sum(1 for x in selected if x.get("queue_for_human") is True),
-        "selected_analysis_only": sum(1 for x in selected if x.get("queue_for_human") is False),
-        "writes_performed": bool(enabled and selected),
-        "write_scope": "a14_hypotheses_and_a12_queue_only" if enabled else "none",
-        "proposal_responses": responses,
-        "inbox_before": inbox_before,
-        "inbox_after": inbox_after,
-        "authority": {
-            "public_write_authorized": False,
-            "outbound_authorized": False,
-            "spend_authorized": False,
-            "experiment_execution_authorized": False,
-            "human_decision_automated": False,
-        },
-    }
+    report = run_commercial_cycle(
+        control=control,
+        observe_output=observe_output,
+        enabled=enabled,
+        allowed_states=_allowed_states(),
+        proposal=proposal,
+    )
     print(json.dumps(report, ensure_ascii=False, indent=2))
 
 
