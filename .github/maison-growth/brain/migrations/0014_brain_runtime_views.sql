@@ -5,6 +5,23 @@
 PRAGMA foreign_keys = ON;
 
 CREATE VIEW brain_prebrain_feed AS
+WITH latest_semantic AS (
+  SELECT
+    source_evidence_id,
+    semantic_observation_id,
+    need_id,
+    intent_id,
+    confidence_score AS semantic_confidence_score,
+    ambiguity AS semantic_ambiguity,
+    provider_name AS semantic_provider_name,
+    provider_version AS semantic_provider_version,
+    ROW_NUMBER() OVER (
+      PARTITION BY source_evidence_id
+      ORDER BY confidence_score DESC, created_at DESC, semantic_observation_id DESC
+    ) AS rn
+  FROM semantic_observations
+  WHERE source_evidence_id IS NOT NULL
+)
 SELECT
   o.observation_id,
   o.event_id,
@@ -22,6 +39,13 @@ SELECT
     WHEN e.strength IS NULL THEN 0.0
     ELSE CAST(e.strength AS REAL)/100.0
   END AS confidence,
+  s.semantic_observation_id,
+  s.need_id,
+  s.intent_id,
+  s.semantic_confidence_score,
+  s.semantic_ambiguity,
+  s.semantic_provider_name,
+  s.semantic_provider_version,
   COALESCE(
     (SELECT json_group_array(root_url)
      FROM external_intelligence_observation_roots r
@@ -34,7 +58,9 @@ SELECT
   ) AS evidence_refs_json
 FROM external_intelligence_observations o
 LEFT JOIN map_evidence e
-  ON e.source_event_id=o.event_id;
+  ON e.source_event_id=o.event_id
+LEFT JOIN latest_semantic s
+  ON s.source_evidence_id=e.evidence_id AND s.rn=1;
 
 CREATE VIEW brain_cash_feedback AS
 SELECT
