@@ -16,10 +16,21 @@ The Worker can also ingest the keyless, passive OSIRIS public API into the same 
 
 OSIRIS sensing is disabled by default. When enabled, the template schedules passive collection hourly and stores it as `public_web` evidence with source provenance.
 
+## Osiris family
+
+The Maison uses the three distinct Osiris systems for different roles:
+
+- **OSIRIS OSINT** — passive world sensing into A13/Oceans/Brain.
+- **Osiris Memory** — optional self-hosted persistent agent memory/coordination. The Worker never exposes Osiris Memory directly; it can mirror already privacy-reviewed observations through a separately authenticated HTTPS bridge co-located with the private Memory service.
+- **Osiris AI Gateway** — optional OpenAI-compatible model gateway/fallback route.
+
+All three remain disabled until explicitly configured.
+
 ## Providers
 
 Adapters are implemented for:
 
+- Osiris AI Gateway (OpenAI-compatible; ungrounded unless its returned data is independently sourced);
 - OpenRouter Chat Completions (provider/model gateway; ungrounded unless a later grounded adapter is configured);
 - OpenAI Responses API + Web Search;
 - Google Gemini + Google Search grounding;
@@ -33,6 +44,8 @@ A provider is skipped unless its secret and required model setting are configure
 - environment `WORKER_ENABLED=false`;
 - environment `KILL_SWITCH=true`;
 - environment `OSIRIS_ENABLED=false`;
+- environment `OSIRIS_GATEWAY_ENABLED=false`;
+- environment `OSIRIS_MEMORY_ENABLED=false`;
 - OSIRIS uses only an explicit passive-source allowlist; active scanner/RECON routes are not part of this Worker;
 - database kill switch = ON after migration;
 - two territories per run;
@@ -74,13 +87,15 @@ Configure any subset. Do not commit values to GitHub and do not place them in or
 
 Secret names:
 
+- `OSIRIS_GATEWAY_API_KEY`
+- `OSIRIS_MEMORY_BRIDGE_TOKEN`
 - `OPENROUTER_API_KEY`
 - `OPENAI_API_KEY`
 - `GEMINI_API_KEY`
 - `PERPLEXITY_API_KEY`
 - `ANTHROPIC_API_KEY`
 
-Model vars live in `wrangler.jsonc`. OpenRouter defaults to `openrouter/free` in the template and remains disabled until explicitly enabled. Anthropic is intentionally blank in the template so no model is guessed silently.
+Model vars live in `wrangler.jsonc`. Osiris Gateway deliberately has no guessed default model. OpenRouter defaults to `openrouter/free` in the template and remains disabled until explicitly enabled. Anthropic is intentionally blank in the template so no model is guessed silently.
 
 ## 4. Validate before activation
 
@@ -133,3 +148,14 @@ Every accepted sensor response creates a privacy-reviewed `map_evidence` fact fo
 `external_intelligence_brain_feed` summarizes observations by territory/day and, critically, counts **independent canonical evidence roots** separately from provider count. Ten models repeating one URL therefore remain one evidence root.
 
 This is sensor evidence, not automatic truth and not publication permission.
+
+
+## Osiris Memory deployment boundary
+
+Osiris Memory currently targets a single trusted operator and binds its MCP/HTTP services to localhost without a production multi-user authentication layer. Do **not** expose its port directly to the public Internet.
+
+Maison integration therefore uses a bridge contract:
+
+`A13 privacy-reviewed observation → authenticated HTTPS bridge → local Osiris Memory MCP (:8790) → PostgreSQL/Redis graph`
+
+The bridge URL and bearer token are environment/secrets only. A Memory bridge failure never prevents the canonical A13/D1 observation from being stored.
