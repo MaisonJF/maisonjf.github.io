@@ -239,3 +239,69 @@ test('commercial review queue validates status', async () => {
   assert.equal(response.status,400);
   assert.equal((await response.json()).error,'invalid_review_status');
 });
+
+
+test('approved validation inbox exposes only planning context', async () => {
+  const e=env((sql,params)=>{
+    assert.match(sql,/FROM a14_approved_offers_ready_for_planning/);
+    assert.deepEqual(params,[10]);
+    return [{
+      review_resolution_id:'rvr_12345678-1234-1234-1234-123456789012',
+      queue_id:'inq_12345678-1234-1234-1234-123456789012',
+      action_id:'act_12345678-1234-1234-1234-123456789012',
+      opportunity_id:'opp_12345678-1234-1234-1234-123456789012',
+      offer_hypothesis_id:'ofh_12345678-1234-1234-1234-123456789012',
+      territory_code:'gifting',opportunity_score:80,opportunity_confidence:.7,
+      offer_type:'corporate_gifting',a3_solution_type:'b2b',existing_solution_id:null,
+      fit_score:70,fit_confidence:.6,validation_mode:'b2b_pilot',
+      economics_json:'{"capital_required_minor":null}',
+      evidence_refs_json:'["evd_x"]',reason_codes_json:'["approved"]',
+      decided_at:'2026-09-23T19:00:00Z'
+    }];
+  });
+  const response=await handleBrainControlRequest(
+    req('/internal/brain/approved-validations?limit=10'),e
+  );
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.rows[0].offer_type,'corporate_gifting');
+  assert.deepEqual(body.rows[0].evidence_refs,['evd_x']);
+  assert.equal('economics_json' in body.rows[0],false);
+});
+
+test('validation plans remain read-only and execution disabled', async () => {
+  const e=env((sql,params)=>{
+    assert.match(sql,/FROM a14_validation_plans/);
+    assert.deepEqual(params,['manual_pilot_required',10]);
+    return [{
+      validation_plan_id:'vpl_12345678-1234-1234-1234-123456789012',
+      review_resolution_id:'rvr_12345678-1234-1234-1234-123456789012',
+      opportunity_id:'opp_12345678-1234-1234-1234-123456789012',
+      offer_hypothesis_id:'ofh_12345678-1234-1234-1234-123456789012',
+      plan_kind:'manual_b2b_pilot',existing_solution_id:null,
+      a7_decision_id:null,a8_experiment_id:null,
+      hypothesis:'Pilot validates demand safely.',
+      validation_mode:'b2b_pilot',primary_metric_key:null,
+      evidence_refs_json:'["evd_x"]',reason_codes_json:'["manual"]',
+      state:'manual_pilot_required',created_at:'2026-09-23T19:05:00Z'
+    }];
+  });
+  const response=await handleBrainControlRequest(
+    req('/internal/brain/validation-plans?state=manual_pilot_required&limit=10'),e
+  );
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.rows[0].plan_kind,'manual_b2b_pilot');
+  assert.equal(body.rows[0].public_write_authorized,false);
+  assert.equal(body.rows[0].outbound_authorized,false);
+  assert.equal(body.rows[0].spend_authorized,false);
+  assert.equal(body.rows[0].experiment_execution_authorized,false);
+});
+
+test('validation plan state is validated', async () => {
+  const response=await handleBrainControlRequest(
+    req('/internal/brain/validation-plans?state=magic'),env()
+  );
+  assert.equal(response.status,400);
+  assert.equal((await response.json()).error,'invalid_validation_state');
+});
