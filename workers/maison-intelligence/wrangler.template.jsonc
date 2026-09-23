@@ -10,6 +10,7 @@
 
   "vars": {
     "WORKER_ENABLED": "false",
+    "BRAIN_CONTROL_API_ENABLED": "false",
     "KILL_SWITCH": "true",
     "PROMPTS_PER_RUN": "2",
     "MAX_DAILY_CALLS_PER_PROVIDER": "2",
