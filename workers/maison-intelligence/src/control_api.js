@@ -161,6 +161,49 @@ async function cashFeedback(env, url) {
   });
 }
 
+async function learningContext(env, url) {
+  const limit=parseLimit(url);
+  const after=parseAfter(url);
+  const afterId=parseAfterId(url,'lrn_');
+  const fields=`
+    learning_record_id,source_kind,source_id,subject_type,subject_id,signal_class,
+    economic_value_minor,ctr_bps,confidence_before,confidence_after,confidence_delta,
+    reason_codes_json,evidence_refs_json,correlation_only,causal_claim,created_at
+  `;
+  let statement;
+  if (after) {
+    statement=env.GROWTH_DB.prepare(`
+      SELECT ${fields}
+      FROM learning_records
+      WHERE created_at > ? OR (created_at = ? AND learning_record_id > ?)
+      ORDER BY created_at,learning_record_id
+      LIMIT ?
+    `).bind(after,after,afterId,limit);
+  } else {
+    statement=env.GROWTH_DB.prepare(`
+      SELECT ${fields}
+      FROM learning_records
+      ORDER BY created_at,learning_record_id
+      LIMIT ?
+    `).bind(limit);
+  }
+  const rows=(await all(statement)).map(row=>({
+    ...row,
+    reason_codes:parseJsonArray(row.reason_codes_json),
+    evidence_refs:parseJsonArray(row.evidence_refs_json),
+    reason_codes_json:undefined,
+    evidence_refs_json:undefined,
+    correlation_only:Number(row.correlation_only)===1,
+    causal_claim:Number(row.causal_claim)===1
+  }));
+  const last=rows.at(-1);
+  return json({
+    kind:'brain_learning_context',
+    rows,
+    next_cursor:last ? { after:last.created_at, after_id:last.learning_record_id } : null
+  });
+}
+
 async function solutions(env, url) {
   const limit=parseLimit(url);
   const status=url.searchParams.get('status');
@@ -235,6 +278,7 @@ export async function handleBrainControlRequest(request, env) {
   try {
     if (url.pathname === '/internal/brain/feed') return await feed(env,url);
     if (url.pathname === '/internal/brain/cash-feedback') return await cashFeedback(env,url);
+    if (url.pathname === '/internal/brain/learning') return await learningContext(env,url);
     if (url.pathname === '/internal/brain/solutions') return await solutions(env,url);
     if (url.pathname === '/internal/brain/solution-links') return await solutionLinks(env,url);
     if (url.pathname === '/internal/brain/health') return json({ status:'ok',mode:'read_only' });
