@@ -1,0 +1,231 @@
+function enabled(value) {
+  return String(value ?? '').toLowerCase() === 'true';
+}
+
+function constantTimeEqual(left, right) {
+  const a=String(left ?? '');
+  const b=String(right ?? '');
+  let diff=a.length ^ b.length;
+  const n=Math.max(a.length,b.length);
+  for (let i=0;i<n;i++) {
+    diff |= (a.charCodeAt(i % Math.max(a.length,1)) || 0) ^ (b.charCodeAt(i % Math.max(b.length,1)) || 0);
+  }
+  return diff === 0;
+}
+
+function json(body, status=200) {
+  return new Response(JSON.stringify(body),{
+    status,
+    headers:{
+      'Content-Type':'application/json; charset=utf-8',
+      'Cache-Control':'no-store, max-age=0',
+      'Pragma':'no-cache',
+      'X-Content-Type-Options':'nosniff',
+      'Referrer-Policy':'no-referrer'
+    }
+  });
+}
+
+function tokenFrom(request) {
+  const raw=request.headers.get('Authorization') || '';
+  return raw.startsWith('Bearer ') ? raw.slice(7).trim() : '';
+}
+
+function parseLimit(url) {
+  const raw=url.searchParams.get('limit') ?? '50';
+  if (!/^\d{1,3}$/.test(raw)) throw new Error('invalid_limit');
+  const n=Number(raw);
+  if (n < 1 || n > 100) throw new Error('invalid_limit');
+  return n;
+}
+
+function parseAfter(url) {
+  const raw=url.searchParams.get('after');
+  if (!raw) return null;
+  if (raw.length > 80 || Number.isNaN(Date.parse(raw))) throw new Error('invalid_after');
+  return new Date(raw).toISOString();
+}
+
+function parseAfterId(url, prefix) {
+  const raw=url.searchParams.get('after_id');
+  if (!raw) return '';
+  if (raw.length !== 40 || !raw.startsWith(prefix)) throw new Error('invalid_after_id');
+  return raw;
+}
+
+function parseJsonArray(raw) {
+  if (!raw) return [];
+  try {
+    const value=JSON.parse(raw);
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
+  }
+}
+
+async function all(statement) {
+  const out=await statement.all();
+  return Array.isArray(out?.results) ? out.results : [];
+}
+
+async function feed(env, url) {
+  const limit=parseLimit(url);
+  const after=parseAfter(url);
+  const afterId=parseAfterId(url,'obs_');
+  let statement;
+  if (after) {
+    statement=env.GROWTH_DB.prepare(`
+      SELECT observation_id,event_id,territory_key,provider_id,model_id,source_class,
+             grounding_state,response_excerpt,observed_at,evidence_id,strength,
+             confidence_class,confidence,independent_roots_json,evidence_refs_json
+      FROM brain_prebrain_feed
+      WHERE observed_at > ? OR (observed_at = ? AND observation_id > ?)
+      ORDER BY observed_at,observation_id
+      LIMIT ?
+    `).bind(after,after,afterId,limit);
+  } else {
+    statement=env.GROWTH_DB.prepare(`
+      SELECT observation_id,event_id,territory_key,provider_id,model_id,source_class,
+             grounding_state,response_excerpt,observed_at,evidence_id,strength,
+             confidence_class,confidence,independent_roots_json,evidence_refs_json
+      FROM brain_prebrain_feed
+      ORDER BY observed_at,observation_id
+      LIMIT ?
+    `).bind(limit);
+  }
+  const rows=(await all(statement)).map(row=>({
+    ...row,
+    independent_roots:parseJsonArray(row.independent_roots_json),
+    evidence_refs:parseJsonArray(row.evidence_refs_json),
+    independent_roots_json:undefined,
+    evidence_refs_json:undefined
+  }));
+  const last=rows.at(-1);
+  return json({
+    kind:'brain_prebrain_feed',
+    rows,
+    next_cursor:last ? { after:last.observed_at, after_id:last.observation_id } : null
+  });
+}
+
+async function cashFeedback(env, url) {
+  const limit=parseLimit(url);
+  const after=parseAfter(url);
+  const afterId=parseAfterId(url,'cnv_');
+  let statement;
+  if (after) {
+    statement=env.GROWTH_DB.prepare(`
+      SELECT opportunity_id,offer_hypothesis_id,distribution_match_id,conversion_id,
+             economic_assessment_id,attribution_role,solution_id,occurred_at,revenue_minor,
+             currency,variable_cost_minor,human_effort_cost_minor,
+             immediate_contribution_minor,repeatability_class,confidence_class
+      FROM brain_cash_feedback
+      WHERE occurred_at > ? OR (occurred_at = ? AND conversion_id > ?)
+      ORDER BY occurred_at,conversion_id
+      LIMIT ?
+    `).bind(after,after,afterId,limit);
+  } else {
+    statement=env.GROWTH_DB.prepare(`
+      SELECT opportunity_id,offer_hypothesis_id,distribution_match_id,conversion_id,
+             economic_assessment_id,attribution_role,solution_id,occurred_at,revenue_minor,
+             currency,variable_cost_minor,human_effort_cost_minor,
+             immediate_contribution_minor,repeatability_class,confidence_class
+      FROM brain_cash_feedback
+      ORDER BY occurred_at,conversion_id
+      LIMIT ?
+    `).bind(limit);
+  }
+  const rows=await all(statement);
+  const last=rows.at(-1);
+  return json({
+    kind:'brain_cash_feedback',
+    rows,
+    next_cursor:last ? { after:last.occurred_at, after_id:last.conversion_id } : null
+  });
+}
+
+async function solutions(env, url) {
+  const limit=parseLimit(url);
+  const status=url.searchParams.get('status');
+  if (status && !['planned','active','paused','retired'].includes(status)) throw new Error('invalid_solution_status');
+  const now=new Date().toISOString();
+  const filter=status ? 'WHERE s.status=?' : '';
+  const sql=`
+    WITH ranked AS (
+      SELECT v.*,
+             ROW_NUMBER() OVER (
+               PARTITION BY v.solution_id
+               ORDER BY v.valid_from DESC,v.created_at DESC,v.economics_version_id DESC
+             ) AS rn
+      FROM solution_economics_versions v
+      WHERE v.valid_from <= ? AND (v.valid_to IS NULL OR v.valid_to > ?)
+    )
+    SELECT s.solution_id,s.solution_key,s.solution_type,s.delivery_mode,s.capacity_class,s.status,
+           r.economics_version_id,r.currency,r.reference_price_minor,r.variable_cost_minor,
+           r.human_effort_minutes,r.human_effort_cost_minor,r.continuation_expected_value_minor,
+           r.repeatability_class,r.scalability_score,r.capacity_units_per_period,r.confidence_class
+    FROM solutions s
+    LEFT JOIN ranked r ON r.solution_id=s.solution_id AND r.rn=1
+    ${filter}
+    ORDER BY s.solution_key
+    LIMIT ?
+  `;
+  const stmt=status
+    ? env.GROWTH_DB.prepare(sql).bind(now,now,status,limit)
+    : env.GROWTH_DB.prepare(sql).bind(now,now,limit);
+  return json({ kind:'brain_solutions', rows:await all(stmt) });
+}
+
+async function solutionLinks(env, url) {
+  const limit=parseLimit(url);
+  const territory=url.searchParams.get('territory_key');
+  if (territory && !/^[A-Za-z0-9_-]{1,120}$/.test(territory)) throw new Error('invalid_territory_key');
+  const base=`
+    SELECT r.relation_id,r.need_id,n.need_key,n.canonical_label,n.territory_key,
+           r.solution_id,s.solution_key,s.solution_type,r.relation_role,r.strength,r.status,
+           COALESCE((
+             SELECT json_group_array(re.evidence_id)
+             FROM relation_evidence re
+             WHERE re.relation_type='need_solution' AND re.relation_id=r.relation_id
+           ),'[]') AS evidence_refs_json
+    FROM need_solution_relations r
+    JOIN needs n ON n.need_id=r.need_id
+    JOIN solutions s ON s.solution_id=r.solution_id
+    WHERE r.status IN ('observed','active')
+  `;
+  const sql=territory
+    ? base + ' AND n.territory_key=? ORDER BY r.strength DESC,r.relation_id LIMIT ?'
+    : base + ' ORDER BY n.territory_key,r.strength DESC,r.relation_id LIMIT ?';
+  const stmt=territory
+    ? env.GROWTH_DB.prepare(sql).bind(territory,limit)
+    : env.GROWTH_DB.prepare(sql).bind(limit);
+  const rows=(await all(stmt)).map(row=>({
+    ...row,
+    evidence_refs:parseJsonArray(row.evidence_refs_json),
+    evidence_refs_json:undefined
+  }));
+  return json({ kind:'brain_solution_links', rows });
+}
+
+export async function handleBrainControlRequest(request, env) {
+  const url=new URL(request.url);
+  if (!url.pathname.startsWith('/internal/brain/')) return null;
+  if (!enabled(env.BRAIN_CONTROL_API_ENABLED)) return json({ error:'not_found' },404);
+  if (!env.BRAIN_CONTROL_TOKEN) return json({ error:'control_api_misconfigured' },503);
+  if (!constantTimeEqual(tokenFrom(request),env.BRAIN_CONTROL_TOKEN)) return json({ error:'unauthorized' },401);
+  if (request.method !== 'GET') return json({ error:'method_not_allowed' },405);
+
+  try {
+    if (url.pathname === '/internal/brain/feed') return await feed(env,url);
+    if (url.pathname === '/internal/brain/cash-feedback') return await cashFeedback(env,url);
+    if (url.pathname === '/internal/brain/solutions') return await solutions(env,url);
+    if (url.pathname === '/internal/brain/solution-links') return await solutionLinks(env,url);
+    if (url.pathname === '/internal/brain/health') return json({ status:'ok',mode:'read_only' });
+    return json({ error:'not_found' },404);
+  } catch (error) {
+    const message=error?.message || 'bad_request';
+    if (String(message).startsWith('invalid_')) return json({ error:message },400);
+    console.error('Brain control API error',message);
+    return json({ error:'internal_error' },500);
+  }
+}
