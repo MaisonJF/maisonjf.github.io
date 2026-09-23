@@ -11,6 +11,7 @@ from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
 from mcp.types import ToolAnnotations
 
+from commercial_assets import CommercialAssetContext
 from knowledge_context import OceanEditorialContext
 from local_embeddings import MultilingualE5SmallProvider
 from osiris_context import graph_search as osiris_graph_search
@@ -58,6 +59,12 @@ def _status_text() -> str:
 
 def _ocean_context() -> OceanEditorialContext:
     return OceanEditorialContext.from_file(ROOT/"editorial-queue.json")
+
+
+def _commercial_assets() -> CommercialAssetContext:
+    # MCP intentionally exposes catalogue-derived context only. Private stock/cost overlay
+    # is not loaded through this general agent-facing read surface.
+    return CommercialAssetContext.from_files(ROOT/"commercial-assets.generated.json")
 
 
 def _semantic_search_sync(
@@ -116,6 +123,36 @@ def maison_ocean_search(query: str, limit: int=8) -> dict[str,Any]:
                 "score":hit.score,
                 "source_kind":hit.source_kind,
                 "evidence_refs":hit.evidence_refs,
+            }
+            for hit in hits
+        ],
+    }
+
+
+@mcp.tool(annotations=READ_ONLY)
+def maison_commercial_asset_search(query: str, limit: int=6) -> dict[str,Any]:
+    """Search Maison's derived product/service catalogue context; no private stock/cost overlay."""
+    if not query.strip():
+        raise ValueError("query_required")
+    if not 1 <= limit <= 30:
+        raise ValueError("limit_must_be_1_30")
+    hits=_commercial_assets().search(query,limit=limit)
+    return {
+        "query":query,
+        "private_operational_overlay_exposed":False,
+        "hits":[
+            {
+                "ref":hit.ref,
+                "label":hit.label,
+                "score":hit.score,
+                "asset_type":hit.asset_type,
+                "lifecycle_status":hit.lifecycle_status,
+                "public":hit.public,
+                "price_minor":hit.price_minor,
+                "currency":hit.currency,
+                "catalogue_availability":hit.catalogue_availability,
+                "known_operational_fields":hit.known_operational_fields,
+                "unknown_operational_fields":hit.unknown_operational_fields,
             }
             for hit in hits
         ],
