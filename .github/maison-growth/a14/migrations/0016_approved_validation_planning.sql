@@ -47,6 +47,19 @@ CREATE TABLE a14_validation_plan_a7_links (
   PRIMARY KEY(validation_plan_id,decision_id)
 ) WITHOUT ROWID;
 
+CREATE TABLE a14_validation_plan_a8_links (
+  validation_plan_id TEXT NOT NULL
+    REFERENCES a14_validation_plans(validation_plan_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  experiment_id TEXT NOT NULL
+    REFERENCES experiments(experiment_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  experiment_version_id TEXT NOT NULL
+    REFERENCES experiment_versions(experiment_version_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  evidence_refs_json TEXT NOT NULL DEFAULT '[]' CHECK(json_valid(evidence_refs_json)),
+  linked_at TEXT NOT NULL,
+  PRIMARY KEY(validation_plan_id,experiment_version_id),
+  UNIQUE(experiment_version_id)
+) WITHOUT ROWID;
+
 CREATE VIEW a14_approved_offers_ready_for_planning AS
 SELECT
   r.review_resolution_id,
@@ -101,3 +114,11 @@ BEGIN SELECT RAISE(ABORT,'A14 validation A7 links are append-only'); END;
 CREATE TRIGGER trg_a14_validation_a7_link_no_delete
 BEFORE DELETE ON a14_validation_plan_a7_links
 BEGIN SELECT RAISE(ABORT,'A14 validation A7 links are append-only'); END;
+
+CREATE TRIGGER trg_a14_validation_a8_link_no_update
+BEFORE UPDATE ON a14_validation_plan_a8_links
+BEGIN SELECT RAISE(ABORT,'A14 validation A8 links are append-only'); END;
+
+CREATE TRIGGER trg_a14_validation_a8_link_no_delete
+BEFORE DELETE ON a14_validation_plan_a8_links
+BEGIN SELECT RAISE(ABORT,'A14 validation A8 links are append-only'); END;
