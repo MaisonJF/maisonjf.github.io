@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/maison-growth/**'
       - 'workers/maison-intelligence/**'
+      - 'data/products.js'
+      - 'data/services.js'
       - '.github/workflows/maison-brain-guard.yml'
   workflow_dispatch:
 
@@ -39,6 +41,9 @@ jobs:
 
       - name: Validate A14 commercial brain
         run: python .github/maison-growth/a14/validate_a14.py
+
+      - name: Check commercial asset projection
+        run: node .github/maison-growth/brain/build_commercial_assets.mjs --check
 
       - name: Validate Brain contracts and schema chain
         run: python .github/maison-growth/brain/validate_brain_runtime.py
