@@ -189,6 +189,26 @@ services:
       MAISON_VALIDATION_PLAN_LIMIT: ${MAISON_VALIDATION_PLAN_LIMIT:-50}
     command: ["python","/opt/maison-growth/brain/plan_approved_validations.py"]
 
+  a8-draft:
+    profiles: ["a8-draft"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain
+    restart: "no"
+    environment:
+      BRAIN_CONTROL_API_URL: ${BRAIN_CONTROL_API_URL:?set BRAIN_CONTROL_API_URL}
+      BRAIN_CONTROL_TOKEN: ${BRAIN_CONTROL_TOKEN:?set BRAIN_CONTROL_TOKEN}
+      BRAIN_PROPOSAL_API_URL: ${BRAIN_PROPOSAL_API_URL:?set BRAIN_PROPOSAL_API_URL}
+      BRAIN_PROPOSAL_TOKEN: ${BRAIN_PROPOSAL_TOKEN:?set BRAIN_PROPOSAL_TOKEN}
+      CF_ACCESS_CLIENT_ID: ${CF_ACCESS_CLIENT_ID:-}
+      CF_ACCESS_CLIENT_SECRET: ${CF_ACCESS_CLIENT_SECRET:-}
+      MAISON_CTA_CONTEXT_PATH: /run/private/cta-context.json
+      MAISON_A8_DRAFT_MATERIALIZE_ENABLED: ${MAISON_A8_DRAFT_MATERIALIZE_ENABLED:-false}
+      MAISON_A8_DRAFT_LIMIT: ${MAISON_A8_DRAFT_LIMIT:-50}
+    volumes:
+      - ./.private/cta-context.json:/run/private/cta-context.json:ro
+    command: ["python","/opt/maison-growth/brain/plan_a8_drafts.py"]
+
   a14-materialize:
     profiles: ["a14-materialize"]
     build:
