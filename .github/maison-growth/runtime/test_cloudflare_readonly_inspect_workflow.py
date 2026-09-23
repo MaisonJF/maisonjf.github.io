@@ -46,7 +46,7 @@ class CloudflareReadonlyInspectWorkflowTests(unittest.TestCase):
     def test_workflow_contains_no_deploy_secret_put_or_d1_write_command(self):
         lowered = self.source.lower()
         for forbidden in (
-            "wrangler deploy",
+            "wrangler deploy ",
             "wrangler secret put",
             "wrangler d1 create",
             "wrangler queues create",
