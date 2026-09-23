@@ -26,6 +26,23 @@ class CommercialAssetTests(unittest.TestCase):
         self.assertGreater(summary["unknown_operational_fields"],0)
         self.assertFalse(summary["catalogue_in_stock_is_counted_inventory"])
 
+    def test_stocktake_template_contains_all_active_public_physical_assets_only(self):
+        template=json.loads((ROOT/"commercial-stocktake.template.json").read_text(encoding="utf-8"))
+        self.assertEqual(template["target_overlay_schema"],"commercial_asset_overlay_v1")
+        refs={row["asset_ref"] for row in template["assets"]}
+        self.assertEqual(refs,{
+            "catalog:product:escalda-pes",
+            "catalog:product:nevoa",
+            "catalog:product:oleo-massagem",
+            "catalog:product:vela-pequena",
+            "catalog:product:vela-vidro",
+        })
+        self.assertIsNone(template["observed_at"])
+        for row in template["assets"]:
+            self.assertEqual(row["source"],"manual_stocktake")
+            self.assertEqual(row["evidence_refs"],[])
+            self.assertTrue(all(value is None for value in row["operational"].values()))
+
     def test_search_finds_existing_product_without_claiming_stock_quantity(self):
         ctx=CommercialAssetContext(self.registry())
         hits=ctx.search("massagem toque corpo",limit=5)
