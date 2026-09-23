@@ -66,3 +66,17 @@ docker compose \
 ```
 
 The selected first model is `intfloat/multilingual-e5-small`, pinned to revision `03415a4be176a1620747c692ed433219fabc3def`, 384 dimensions. Qdrant is not started; pgvector is the first experiment because PostgreSQL is already required by Osiris Memory.
+
+
+## Osiris read-context smoke
+
+This verifies the Brain can discover the pinned Osiris `graph_search` MCP tool through the private Docker network. It does not write to Osiris and does not expose MCP publicly.
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile osiris-context-smoke run --rm osiris-context-smoke
+```
+
+The Brain client is pinned to MCP Python SDK `1.28.1`, matching the minimum version declared by the pinned Osiris source. Read context uses `graph_search(query, project, max_depth)`; retrieval rank is context relevance, never evidence confidence.
