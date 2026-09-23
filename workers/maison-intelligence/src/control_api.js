@@ -268,6 +268,63 @@ async function reviewQueue(env, url) {
   });
 }
 
+async function approvedValidations(env, url) {
+  const limit=parseLimit(url);
+  const rows=await all(env.GROWTH_DB.prepare(`
+    SELECT review_resolution_id,queue_id,action_id,opportunity_id,offer_hypothesis_id,
+           territory_code,opportunity_score,opportunity_confidence,offer_type,a3_solution_type,
+           existing_solution_id,fit_score,fit_confidence,validation_mode,economics_json,
+           evidence_refs_json,reason_codes_json,decided_at
+    FROM a14_approved_offers_ready_for_planning
+    ORDER BY decided_at,review_resolution_id
+    LIMIT ?
+  `).bind(limit));
+  return json({
+    kind:'brain_approved_validations',
+    rows:rows.map(row=>({
+      ...row,
+      economics:row.economics_json ? JSON.parse(row.economics_json) : {},
+      evidence_refs:parseJsonArray(row.evidence_refs_json),
+      reason_codes:parseJsonArray(row.reason_codes_json),
+      economics_json:undefined,
+      evidence_refs_json:undefined,
+      reason_codes_json:undefined
+    }))
+  });
+}
+
+async function validationPlans(env, url) {
+  const limit=parseLimit(url);
+  const state=url.searchParams.get('state');
+  const allowed=['planning','blocked_needs_a7_decision','ready_for_a8_draft','manual_pilot_required','rejected'];
+  if (state && !allowed.includes(state)) throw new Error('invalid_validation_state');
+  const sql=`
+    SELECT validation_plan_id,review_resolution_id,opportunity_id,offer_hypothesis_id,
+           plan_kind,existing_solution_id,a7_decision_id,a8_experiment_id,hypothesis,
+           validation_mode,primary_metric_key,evidence_refs_json,reason_codes_json,state,
+           created_at
+    FROM a14_validation_plans
+    ${state ? 'WHERE state=?' : ''}
+    ORDER BY created_at,validation_plan_id
+    LIMIT ?
+  `;
+  const stmt=state
+    ? env.GROWTH_DB.prepare(sql).bind(state,limit)
+    : env.GROWTH_DB.prepare(sql).bind(limit);
+  const rows=(await all(stmt)).map(row=>({
+    ...row,
+    evidence_refs:parseJsonArray(row.evidence_refs_json),
+    reason_codes:parseJsonArray(row.reason_codes_json),
+    evidence_refs_json:undefined,
+    reason_codes_json:undefined,
+    public_write_authorized:false,
+    outbound_authorized:false,
+    spend_authorized:false,
+    experiment_execution_authorized:false
+  }));
+  return json({kind:'brain_validation_plans',state:state||null,rows});
+}
+
 async function solutions(env, url) {
   const limit=parseLimit(url);
   const status=url.searchParams.get('status');
@@ -344,6 +401,8 @@ export async function handleBrainControlRequest(request, env) {
     if (url.pathname === '/internal/brain/cash-feedback') return await cashFeedback(env,url);
     if (url.pathname === '/internal/brain/learning') return await learningContext(env,url);
     if (url.pathname === '/internal/brain/review-queue') return await reviewQueue(env,url);
+    if (url.pathname === '/internal/brain/approved-validations') return await approvedValidations(env,url);
+    if (url.pathname === '/internal/brain/validation-plans') return await validationPlans(env,url);
     if (url.pathname === '/internal/brain/solutions') return await solutions(env,url);
     if (url.pathname === '/internal/brain/solution-links') return await solutionLinks(env,url);
     if (url.pathname === '/internal/brain/health') return json({ status:'ok',mode:'read_only' });
