@@ -6,6 +6,7 @@ import { configuredProviders, PROVIDERS } from './providers.js';
 import { configuredOsirisSources, fetchOsirisSource, sourceDefinition, osirisSourceDue } from './sources.js';
 import { mirrorToOsirisMemory } from './memory.js';
 import { configuredPublicSourceTasks, fetchPublicSource, publicSourceDue, publicTaskIdentity } from './public_sources.js';
+import { handleBrainControlRequest } from './control_api.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -294,6 +295,15 @@ async function enqueueRun(env, scheduledDate) {
 }
 
 export default {
+  async fetch(request, env) {
+    const internal = await handleBrainControlRequest(request, env);
+    if (internal) return internal;
+    return new Response('Not Found', {
+      status: 404,
+      headers: { 'Cache-Control':'no-store', 'X-Content-Type-Options':'nosniff' }
+    });
+  },
+
   async scheduled(controller, env, ctx) {
     const when = new Date(controller.scheduledTime);
     const jobs = [enqueueOsirisRun(env, when), enqueuePublicSourceRun(env, when)];
