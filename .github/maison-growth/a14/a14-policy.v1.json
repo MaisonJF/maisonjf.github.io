@@ -28,15 +28,15 @@
     "commercial_potential": 0.07,
     "recurrence_potential": 0.04
   },
-  "recovery_weights": {
-    "contribution": 0.4,
-    "speed": 0.3,
-    "capital": 0.2,
-    "human_effort": 0.1
-  },
   "thresholds": {
     "minimum_distribution_fit": 70,
     "minimum_distribution_confidence": 0.6
   },
-  "calibration_rule": "Do not auto-modify policy. A11 may propose changes for human review after observed outcomes."
+  "calibration_rule": "Do not auto-modify policy. A11 may propose changes for human review after observed outcomes.",
+  "cash_weights": {
+    "contribution": 0.4,
+    "speed": 0.3,
+    "capital": 0.2,
+    "human_effort": 0.1
+  }
 }
