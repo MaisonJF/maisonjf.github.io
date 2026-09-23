@@ -81,21 +81,33 @@ test('feed returns canonical evidence roots and composite cursor', async () => {
   assert.equal('independent_roots_json' in body.rows[0],false);
 });
 
-test('cash feedback exposes economics without customer/journey identity', async () => {
+test('cash feedback exposes all A3 economics with optional A14 lineage and no customer identity', async () => {
   const e=env((sql)=>{
     assert.match(sql,/FROM brain_cash_feedback/);
     return [{
-      opportunity_id:'opp_x',offer_hypothesis_id:'ofh_x',distribution_match_id:null,
       conversion_id:'cnv_12345678-1234-1234-1234-123456789012',
-      economic_assessment_id:'eva_x',attribution_role:'direct',solution_id:'sol_x',
-      occurred_at:'2026-09-23T12:00:00.000Z',revenue_minor:3500,currency:'EUR',
-      variable_cost_minor:500,human_effort_cost_minor:300,
-      immediate_contribution_minor:2700,repeatability_class:'medium',confidence_class:'observed'
+      economic_assessment_id:'eva_12345678-1234-1234-1234-123456789012',
+      economics_version_id:'eco_x',solution_id:'sol_x',conversion_kind:'purchase',
+      occurred_at:'2026-09-23T12:00:00.000Z',
+      assessment_created_at:'2026-09-23T12:01:00.000Z',
+      revenue_minor:3500,currency:'EUR',variable_cost_minor:500,
+      human_effort_minutes:60,human_effort_cost_minor:300,
+      immediate_contribution_minor:2700,continuation_expected_value_minor:null,
+      expected_total_value_minor:null,scalability_score:20,
+      repeatability_class:'medium',confidence_class:'observed',
+      calculation_version:'a3_v1',
+      opportunity_ids_json:'["opp_x"]',
+      offer_hypothesis_ids_json:'["ofh_x"]',
+      distribution_match_ids_json:'[]'
     }];
   });
   const response=await handleBrainControlRequest(req('/internal/brain/cash-feedback'),e);
   const body=await response.json();
   assert.equal(body.rows[0].immediate_contribution_minor,2700);
+  assert.deepEqual(body.rows[0].opportunity_ids,['opp_x']);
+  assert.deepEqual(body.rows[0].offer_hypothesis_ids,['ofh_x']);
+  assert.deepEqual(body.rows[0].distribution_match_ids,[]);
+  assert.equal(body.next_cursor.after_id,'eva_12345678-1234-1234-1234-123456789012');
   assert.equal('journey_id' in body.rows[0],false);
   assert.equal('customer_id' in body.rows[0],false);
 });
