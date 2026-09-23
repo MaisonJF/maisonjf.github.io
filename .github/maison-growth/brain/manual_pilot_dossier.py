@@ -99,6 +99,12 @@ def _manual_requirements(
     success=[]
     stop=[]
     steps=[]
+    known_operational={
+        field
+        for hit in asset_hits
+        for field in hit.known_operational_fields
+    }
+    has_catalogue_price=any(hit.price_minor is not None for hit in asset_hits)
 
     if plan_kind=="manual_b2b_pilot":
         steps.extend((
@@ -110,8 +116,15 @@ def _manual_requirements(
         ))
         success=("pedido_de_reuniao_ou_orcamento","encomenda_paga","margem_observada_positiva","sinal_de_recorrencia")
         stop=("capacidade_insuficiente","margem_desconhecida_ou_negativa","personalizacao_inviavel","sem_acesso_ao_decisor")
-        for key in ("target_profile","capacity","unit_or_project_cost","price_or_quote_rule","fulfilment_lead_time"):
-            missing.append(key)
+        missing.append("target_profile")
+        if not ({"capacity_units_per_period","batch_capacity_units"} & known_operational):
+            missing.append("capacity")
+        if not ({"variable_cost_minor","unit_material_cost_minor"} & known_operational) and not economics:
+            missing.append("unit_or_project_cost")
+        if not has_catalogue_price and not any("price" in str(k).lower() for k in economics):
+            missing.append("price_or_quote_rule")
+        if not ({"delivery_lead_days","supplier_lead_days"} & known_operational):
+            missing.append("fulfilment_lead_time")
 
     elif plan_kind=="manual_physical_pilot":
         steps.extend((
@@ -124,7 +137,8 @@ def _manual_requirements(
         success=("venda_paga","margem_unitaria_observada_positiva","procura_repetida","baixo_desperdicio")
         stop=("stock_ou_material_insuficiente","custo_unitario_desconhecido","margem_negativa","risco_de_validade_ou_desperdicio")
         for key in ("inventory_quantity","unit_material_cost_minor","packaging_cost_minor","production_minutes_per_unit","batch_capacity_units"):
-            missing.append(key)
+            if key not in known_operational:
+                missing.append(key)
 
     elif plan_kind=="manual_service_pilot":
         steps.extend((
@@ -137,7 +151,8 @@ def _manual_requirements(
         success=("reserva_ou_pagamento","margem_por_hora_observada_positiva","entrega_dentro_da_capacidade","repeticao_ou_recomendacao")
         stop=("sobrecarga_de_capacidade","tempo_real_muito_acima_do_previsto","margem_negativa","qualidade_nao_repetivel")
         for key in ("capacity_units_per_period","capacity_period","human_effort_minutes","variable_cost_minor"):
-            missing.append(key)
+            if key not in known_operational:
+                missing.append(key)
 
     elif plan_kind=="manual_distribution_pilot":
         steps.extend((
