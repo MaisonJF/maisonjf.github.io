@@ -1,0 +1,4 @@
+# Private operator inputs must stay outside version control.
+*.private.json
+*.private.env
+private-overlays/
