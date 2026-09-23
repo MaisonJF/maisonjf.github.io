@@ -56,6 +56,8 @@ Verification is separate from status. A tool can be strategically approved while
 | Adversarial validation | Maison Critic |
 | Product/IP generation | Maison Content & Product Foundry |
 | Universal commercial opportunity + earned distribution | A14 Universal Opportunity + Earned Distribution |
+| Canonical Brain read cycle | Brain Control API + A5 mapping + Pre-Brain/Scout/Critic/Foundry + A14 preview |
+| Semantic projection ingestion | Manual allowlisted D1 → pgvector sync; rebuildable cursor |
 | Commercial learning | A3 + A7 + A8 + A11 + A14 Opportunity/Insight attribution bridge |
 | Publishing artefacts | Typst + Pandoc |
 
@@ -76,8 +78,10 @@ The core analysis organs are now implemented in-repo. The immediate engineering 
 - bring Osiris Memory online privately before any external mirror;
 - use pgvector as the first Semantic Memory backend with pinned multilingual E5 embeddings;
 - keep A13 in observe-only/keyless-first when explicitly activated;
-- feed A13 → Pre-Brain → Scout → Critic → Foundry → A14;
-- close the A3/A11 feedback loop with observed revenue/contribution before trusting forecasts;
+- feed A13 → A5 canonical mapping → Pre-Brain → Scout → Critic → Foundry → A14 preview;
+- feed observed A3 economics and correlation-only A11 learning back as context, never as automatic policy mutation;
+- keep Semantic/Osiris retrieval as supporting context, never independent evidence;
+- populate pgvector only through an explicit provider allowlist and a rebuildable D1 projection sync;
 - add more sensors/tools only when they fill a measured capability gap.
 
 ## Files
@@ -98,3 +102,16 @@ A14 does not replace A13, A7, A3, A8, A11 or A12. It is the analysis-only bridge
 The first private runtime uses PostgreSQL/pgvector + Redis because Osiris Memory already requires that infrastructure. Maison Semantic Memory uses a separate `maison_memory` database on the same PostgreSQL server. The first local embedding provider is `intfloat/multilingual-e5-small`, pinned to a specific revision and 384 dimensions.
 
 Osiris Memory writes from A13 go through an authenticated bridge and Osiris's Actions Waist. Brain reads use the Osiris MCP `graph_search` surface. Direct graph-table writes from Maison integration code are prohibited. PostgreSQL, Redis and MCP remain private/local by default.
+
+
+## Canonical read-loop decision
+
+The persistent Brain does not receive D1 credentials. A disabled-by-default, bearer-authenticated GET-only Brain Control API exposes the canonical A13/A5/A4/A3/A11 views required for analysis. A separate `private_brain_read_candidate` activation stage may later enable this read surface while leaving A13 world sensing, model providers, outbound action, spend and public writes off.
+
+A5 need/intent mappings are carried into Pre-Brain. When multiple non-ambiguous A5 mappings conflict inside one signal group, the Brain preserves the conflict instead of majority-voting a canonical need.
+
+A3 realised economics and A11 correlation-only learning return to Scout as context references. They do not become new independent evidence roots and do not automatically alter prices, weights, policy or causal claims.
+
+## Semantic projection sync decision
+
+Maison Semantic Memory is rebuildable. The manual `semantic-sync` profile reads the canonical Brain Control API and projects only explicitly allowlisted provider families into pgvector. The projection stores canonical evidence references and its own disposable sync cursor. An empty provider allowlist refuses to embed. The current example allowlist begins conservatively with `eurostat_`; other provider families require an explicit privacy/reuse decision before addition.
