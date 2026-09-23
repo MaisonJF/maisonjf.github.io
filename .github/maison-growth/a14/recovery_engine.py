@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Iterable, Optional
+from typing import Iterable, Mapping, Optional
 
 
 class RecoveryValidationError(ValueError):
@@ -98,6 +98,7 @@ def cash_priority(
     max_capital_minor: int,
     contribution_scale_minor: int,
     human_minutes_scale: int,
+    weights: Mapping[str, float],
 ) -> CashPriorityResult:
     """Rank fast-cash hypotheses only when the required commercial evidence exists.
 
@@ -108,6 +109,9 @@ def cash_priority(
         raise RecoveryValidationError("confidence must be 0..1")
     if min(max_days_to_cash,max_capital_minor,contribution_scale_minor,human_minutes_scale) <= 0:
         raise RecoveryValidationError("policy scales must be positive")
+    required_weights={"contribution","speed","capital","human_effort"}
+    if set(weights) != required_weights or any(float(v) < 0 for v in weights.values()) or sum(float(v) for v in weights.values()) <= 0:
+        raise RecoveryValidationError("recovery weights must contain contribution/speed/capital/human_effort with non-negative positive-total values")
 
     missing=[]
     if candidate.expected_contribution_minor is None: missing.append("expected_contribution_minor")
@@ -128,8 +132,14 @@ def cash_priority(
     capital=max(0.0,1.0-(candidate.capital_required_minor/max_capital_minor))
     effort=max(0.0,1.0-(candidate.human_effort_minutes/human_minutes_scale))
 
-    # Recovery policy: cash contribution and time-to-cash dominate; capital efficiency next.
-    raw=(0.40*contribution + 0.30*speed + 0.20*capital + 0.10*effort) * candidate.confidence
+    total_weight=sum(float(v) for v in weights.values())
+    raw=(
+        float(weights["contribution"])*contribution
+        + float(weights["speed"])*speed
+        + float(weights["capital"])*capital
+        + float(weights["human_effort"])*effort
+    ) / total_weight
+    raw *= candidate.confidence
     return CashPriorityResult(
         candidate.opportunity_id,round(raw*100,2),"rankable",
         ("recovery_mode","evidence_backed_cash_priority"),
