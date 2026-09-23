@@ -42,6 +42,74 @@ def _explicit_policy() -> dict[str,Any]:
     return value
 
 
+def _append_context(
+    target: dict[str,tuple[str,...]],
+    territory: str,
+    refs: Sequence[str],
+) -> None:
+    if not territory or not refs:
+        return
+    current=list(target.get(territory,()))
+    current.extend(str(x) for x in refs if x)
+    target[territory]=tuple(dict.fromkeys(current))
+
+
+def _learning_context_by_territory(
+    feed: Sequence[Mapping[str,Any]],
+    learning: Sequence[Mapping[str,Any]],
+) -> dict[str,tuple[str,...]]:
+    need_territories:dict[str,set[str]]={}
+    intent_territories:dict[str,set[str]]={}
+    for row in feed:
+        territory=str(row.get("territory_key") or "").strip()
+        need_id=str(row.get("need_id") or "").strip()
+        intent_id=str(row.get("intent_id") or "").strip()
+        if territory and need_id:
+            need_territories.setdefault(need_id,set()).add(territory)
+        if territory and intent_id:
+            intent_territories.setdefault(intent_id,set()).add(territory)
+
+    out:dict[str,tuple[str,...]]={}
+    for row in learning:
+        if row.get("correlation_only") is not True or row.get("causal_claim") is True:
+            continue
+        subject_type=str(row.get("subject_type") or "")
+        subject_id=str(row.get("subject_id") or "")
+        learning_id=str(row.get("learning_record_id") or "")
+        if not learning_id:
+            continue
+        territories=(
+            need_territories.get(subject_id,set()) if subject_type=="need"
+            else intent_territories.get(subject_id,set()) if subject_type=="intent"
+            else set()
+        )
+        for territory in territories:
+            _append_context(out,territory,(f"a11:{learning_id}",))
+    return out
+
+
+def _cash_context_by_territory(
+    cash: Sequence[Mapping[str,Any]],
+    links: Sequence[Mapping[str,Any]],
+) -> dict[str,tuple[str,...]]:
+    solution_territories:dict[str,set[str]]={}
+    for row in links:
+        territory=str(row.get("territory_key") or "").strip()
+        solution_id=str(row.get("solution_id") or "").strip()
+        if territory and solution_id:
+            solution_territories.setdefault(solution_id,set()).add(territory)
+
+    out:dict[str,tuple[str,...]]={}
+    for row in cash:
+        assessment_id=str(row.get("economic_assessment_id") or "").strip()
+        solution_id=str(row.get("solution_id") or "").strip()
+        if not assessment_id or not solution_id:
+            continue
+        for territory in solution_territories.get(solution_id,set()):
+            _append_context(out,territory,(f"a3:{assessment_id}",))
+    return out
+
+
 def _solutions_by_territory(links: Sequence[Mapping[str,Any]]) -> dict[str,tuple[str,...]]:
     out:dict[str,set[str]]={}
     for row in links:
@@ -137,6 +205,8 @@ def main() -> None:
     feed=_rows(client.feed(limit=100))
     solutions=_rows(client.solutions(limit=100))
     links=_rows(client.solution_links(limit=100))
+    cash=_rows(client.cash_feedback(limit=100))
+    learning=_rows(client.learning(limit=100))
     policy=_explicit_policy()
 
     # Oceanos contributes curated context refs, never independent evidence roots.
@@ -147,9 +217,12 @@ def main() -> None:
         text=str(row.get("response_excerpt") or "")
         refs=[hit.ref for hit in ocean.search(text,limit=5)]
         if refs:
-            current=list(knowledge_context.get(territory,()))
-            current.extend(refs)
-            knowledge_context[territory]=tuple(dict.fromkeys(current))
+            _append_context(knowledge_context,territory,refs)
+
+    for territory,refs in _cash_context_by_territory(cash,links).items():
+        _append_context(knowledge_context,territory,refs)
+    for territory,refs in _learning_context_by_territory(feed,learning).items():
+        _append_context(knowledge_context,territory,refs)
 
     packets=run_brain_cycle(
         rows=feed,
@@ -178,6 +251,8 @@ def main() -> None:
         "feed_rows":len(feed),
         "solution_rows":len(solutions),
         "solution_links":len(links),
+        "cash_feedback_rows":len(cash),
+        "learning_rows":len(learning),
         "packets":[packet_to_dict(x) for x in packets],
         "a14_previews":[preview_to_dict(x) for x in a14_previews],
         "writes_performed":False,
