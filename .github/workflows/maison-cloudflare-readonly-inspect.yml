@@ -10,6 +10,9 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_READ_API_TOKEN || secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
     steps:
       - name: Checkout
@@ -22,9 +25,6 @@ jobs:
 
       - name: Guard Cloudflare read credentials
         shell: bash
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
           test -n "$CLOUDFLARE_API_TOKEN"
@@ -34,9 +34,43 @@ jobs:
         working-directory: workers/maison-intelligence
         run: npm install --ignore-scripts
 
+      - name: Verify canonical D1 resource exists
+        working-directory: workers/maison-intelligence
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx wrangler d1 info maison-growth-engine --json > /tmp/maison-d1-info.json
+          echo "Canonical D1 resource is reachable."
+
+      - name: Check whether Maison Worker already exists
+        id: worker_presence
+        working-directory: workers/maison-intelligence
+        shell: bash
+        run: |
+          set +e
+          npx wrangler deployments list --name maison-intelligence --json > /tmp/maison-worker-deployments.json 2>/tmp/maison-worker-presence.err
+          status=$?
+          set -e
+          if [[ "$status" -eq 0 ]]; then
+            echo "worker_exists=true" >> "$GITHUB_OUTPUT"
+            echo "Existing maison-intelligence Worker deployment confirmed."
+          else
+            echo "worker_exists=false" >> "$GITHUB_OUTPUT"
+            echo "Existing Worker could not be confirmed. This may mean it does not exist or the read token lacks Worker visibility."
+          fi
+
       - name: Inspect canonical Growth D1 migrations
         working-directory: workers/maison-intelligence
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: bash scripts/inspect-growth-migrations.sh maison-growth-engine
+
+      - name: Summarize read-only inspection
+        shell: bash
+        run: |
+          {
+            echo "## Maison Cloudflare read-only inspection"
+            echo
+            echo "- D1 maison-growth-engine: reachable"
+            echo "- Existing maison-intelligence Worker confirmed: ${{ steps.worker_presence.outputs.worker_exists }}"
+            echo "- D1 migration inspection: completed read-only"
+            echo "- Mutations performed: false"
+          } >> "$GITHUB_STEP_SUMMARY"
