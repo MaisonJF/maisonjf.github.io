@@ -156,6 +156,22 @@ services:
         condition: service_healthy
     command: ["python","/opt/maison-growth/runtime/osiris_context_smoke.py"]
 
+  commercial-review:
+    profiles: ["commercial-review"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain
+    restart: "no"
+    environment:
+      BRAIN_CONTROL_API_URL: ${BRAIN_CONTROL_API_URL:?set BRAIN_CONTROL_API_URL}
+      BRAIN_CONTROL_TOKEN: ${BRAIN_CONTROL_TOKEN:?set BRAIN_CONTROL_TOKEN}
+      BRAIN_REVIEW_DECISION_API_URL: ${BRAIN_REVIEW_DECISION_API_URL:-}
+      BRAIN_REVIEW_DECISION_TOKEN: ${BRAIN_REVIEW_DECISION_TOKEN:-}
+      CF_ACCESS_CLIENT_ID: ${CF_ACCESS_CLIENT_ID:-}
+      CF_ACCESS_CLIENT_SECRET: ${CF_ACCESS_CLIENT_SECRET:-}
+      MAISON_REVIEW_DECISION_ENABLED: ${MAISON_REVIEW_DECISION_ENABLED:-false}
+    command: ["python","/opt/maison-growth/brain/commercial_review_cli.py","list","--status","pending","--limit","20"]
+
   a14-materialize:
     profiles: ["a14-materialize"]
     build:
