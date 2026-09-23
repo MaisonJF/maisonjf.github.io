@@ -90,6 +90,23 @@
       "experiment_execution_authorized": false,
       "requires_private_https_access": true,
       "requires_explicit_activation": true
+    },
+    "a8_draft_candidate": {
+      "worker_enabled": false,
+      "kill_switch": true,
+      "osiris_osint_enabled": false,
+      "osiris_memory_enabled": false,
+      "brain_control_api_enabled": true,
+      "brain_proposal_api_enabled": true,
+      "brain_review_decision_enabled": false,
+      "model_providers_enabled": [],
+      "outbound_authorized": false,
+      "spend_authorized": false,
+      "public_write_authorized": false,
+      "experiment_execution_authorized": false,
+      "requires_private_https_access": true,
+      "requires_private_cta_context": true,
+      "requires_explicit_activation": true
     }
   },
   "invariants": [
