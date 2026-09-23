@@ -46,7 +46,7 @@ function parseProfiles(raw, family) {
 
 function validateKey(value, family) {
   const key = String(value || '').trim().toLowerCase();
-  if (!/^[a-z0-9][a-z0-9_-]{1,79}$/.test(key)) throw new Error(`${family}_invalid_key`);
+  if (!/^[a-z0-9][a-z0-9_-]{1,59}$/.test(key)) throw new Error(`${family}_invalid_key`);
   return key;
 }
 
