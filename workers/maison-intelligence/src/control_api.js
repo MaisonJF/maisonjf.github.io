@@ -299,13 +299,16 @@ async function validationPlans(env, url) {
   const allowed=['planning','blocked_needs_a7_decision','ready_for_a8_draft','manual_pilot_required','rejected'];
   if (state && !allowed.includes(state)) throw new Error('invalid_validation_state');
   const sql=`
-    SELECT validation_plan_id,review_resolution_id,opportunity_id,offer_hypothesis_id,
-           plan_kind,existing_solution_id,a7_decision_id,a8_experiment_id,hypothesis,
-           validation_mode,primary_metric_key,evidence_refs_json,reason_codes_json,state,
-           created_at
-    FROM a14_validation_plans
-    ${state ? 'WHERE state=?' : ''}
-    ORDER BY created_at,validation_plan_id
+    SELECT p.validation_plan_id,p.review_resolution_id,p.opportunity_id,p.offer_hypothesis_id,
+           p.plan_kind,p.existing_solution_id,p.a7_decision_id,p.a8_experiment_id,p.hypothesis,
+           p.validation_mode,p.primary_metric_key,p.evidence_refs_json,p.reason_codes_json,p.state,
+           p.created_at,o.territory_code,o.opportunity_score,o.confidence AS opportunity_confidence,
+           h.offer_type,h.a3_solution_type,h.fit_score,h.fit_confidence,h.economics_json
+    FROM a14_validation_plans p
+    JOIN opportunity_hypotheses o ON o.opportunity_id=p.opportunity_id
+    JOIN opportunity_offer_hypotheses h ON h.offer_hypothesis_id=p.offer_hypothesis_id
+    ${state ? 'WHERE p.state=?' : ''}
+    ORDER BY p.created_at,p.validation_plan_id
     LIMIT ?
   `;
   const stmt=state
@@ -315,8 +318,10 @@ async function validationPlans(env, url) {
     ...row,
     evidence_refs:parseJsonArray(row.evidence_refs_json),
     reason_codes:parseJsonArray(row.reason_codes_json),
+    economics:row.economics_json ? JSON.parse(row.economics_json) : {},
     evidence_refs_json:undefined,
     reason_codes_json:undefined,
+    economics_json:undefined,
     public_write_authorized:false,
     outbound_authorized:false,
     spend_authorized:false,
