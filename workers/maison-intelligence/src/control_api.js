@@ -362,6 +362,92 @@ async function a7Decisions(env, url) {
   });
 }
 
+async function commercialActionInbox(env, url) {
+  const limit=parseLimit(url);
+
+  const decisions=await all(env.GROWTH_DB.prepare(`
+    SELECT
+      q.queue_id,q.action_id,q.priority,q.effective_status AS status,q.created_at,
+      a.risk_class,a.autonomy_level,g.opportunity_id,
+      json_extract(a.result_json,'$.offer_hypothesis_id') AS offer_hypothesis_id,
+      o.territory_code,o.opportunity_score,o.confidence AS opportunity_confidence,
+      h.offer_type,h.a3_solution_type,h.existing_solution_id,h.fit_score,h.fit_confidence,
+      h.validation_mode,h.economics_json
+    FROM autonomy_human_queue_current q
+    JOIN autonomy_action_log a ON a.action_id=q.action_id
+    LEFT JOIN a14_governance_links g ON g.action_id=a.action_id
+    LEFT JOIN opportunity_hypotheses o ON o.opportunity_id=g.opportunity_id
+    LEFT JOIN opportunity_offer_hypotheses h
+      ON h.offer_hypothesis_id=json_extract(a.result_json,'$.offer_hypothesis_id')
+    WHERE q.effective_status='pending'
+      AND a.action_key='commercial_opportunity_review'
+    ORDER BY q.priority DESC,q.created_at,q.queue_id
+    LIMIT ?
+  `).bind(limit));
+
+  const manualPilots=await all(env.GROWTH_DB.prepare(`
+    SELECT
+      validation_plan_id,review_resolution_id,opportunity_id,offer_hypothesis_id,
+      plan_kind,existing_solution_id,hypothesis,validation_mode,primary_metric_key,
+      evidence_refs_json,reason_codes_json,state,created_at
+    FROM a14_validation_plans
+    WHERE state='manual_pilot_required'
+    ORDER BY created_at,validation_plan_id
+    LIMIT ?
+  `).bind(limit));
+
+  const a8Drafts=await all(env.GROWTH_DB.prepare(`
+    SELECT
+      p.validation_plan_id,p.opportunity_id,p.offer_hypothesis_id,p.existing_solution_id,
+      l.experiment_id,l.experiment_version_id,
+      v.hypothesis,v.primary_metric_key,v.compatibility_key,v.policy_version,
+      s.to_state AS experiment_state,s.occurred_at
+    FROM a14_validation_plan_a8_links l
+    JOIN a14_validation_plans p ON p.validation_plan_id=l.validation_plan_id
+    JOIN experiment_versions v ON v.experiment_version_id=l.experiment_version_id
+    JOIN experiment_state_events s ON s.state_event_id=(
+      SELECT s2.state_event_id
+      FROM experiment_state_events s2
+      WHERE s2.experiment_version_id=l.experiment_version_id
+      ORDER BY s2.occurred_at DESC,s2.state_event_id DESC
+      LIMIT 1
+    )
+    WHERE s.to_state='draft'
+    ORDER BY s.occurred_at,l.experiment_version_id
+    LIMIT ?
+  `).bind(limit));
+
+  return json({
+    kind:'brain_commercial_action_inbox',
+    authority:{
+      public_write_authorized:false,
+      outbound_authorized:false,
+      spend_authorized:false,
+      experiment_execution_authorized:false
+    },
+    decide:decisions.map(row=>({
+      ...row,
+      economics:row.economics_json ? JSON.parse(row.economics_json) : {},
+      economics_json:undefined
+    })),
+    manual_pilots:manualPilots.map(row=>({
+      ...row,
+      evidence_refs:parseJsonArray(row.evidence_refs_json),
+      reason_codes:parseJsonArray(row.reason_codes_json),
+      evidence_refs_json:undefined,
+      reason_codes_json:undefined,
+      outbound_authorized:false,
+      spend_authorized:false,
+      public_write_authorized:false
+    })),
+    a8_drafts:a8Drafts.map(row=>({
+      ...row,
+      experiment_execution_authorized:false,
+      public_write_authorized:false
+    }))
+  });
+}
+
 async function solutions(env, url) {
   const limit=parseLimit(url);
   const status=url.searchParams.get('status');
@@ -441,6 +527,7 @@ export async function handleBrainControlRequest(request, env) {
     if (url.pathname === '/internal/brain/approved-validations') return await approvedValidations(env,url);
     if (url.pathname === '/internal/brain/validation-plans') return await validationPlans(env,url);
     if (url.pathname === '/internal/brain/a7-decisions') return await a7Decisions(env,url);
+    if (url.pathname === '/internal/brain/action-inbox') return await commercialActionInbox(env,url);
     if (url.pathname === '/internal/brain/solutions') return await solutions(env,url);
     if (url.pathname === '/internal/brain/solution-links') return await solutionLinks(env,url);
     if (url.pathname === '/internal/brain/health') return json({ status:'ok',mode:'read_only' });
