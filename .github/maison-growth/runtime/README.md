@@ -103,3 +103,23 @@ docker compose \
 ```
 
 This profile is not part of the default stack and is not started by repository changes.
+
+
+## Canonical observe cycle
+
+The optional `brain-observe` profile reads canonical A13/A4/A3 data through the authenticated Brain Control API and runs a one-shot:
+
+`Pre-Brain → Scout → Critic → Foundry`
+
+It prints internal packets only. It performs **zero writes**.
+
+Existing solution fit is derived from A4 `need_solution_relations`, not guessed from product names. A3 solution price/cost fields are not silently converted into opportunity forecasts. New candidate offer families/economics/operational constraints can be supplied only through explicit `MAISON_BRAIN_TERRITORY_POLICY_JSON`.
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile brain-observe run --rm brain-observe-cycle
+```
+
+Do not enable the remote Brain Control API merely to run this command until its HTTPS/private-access boundary has been configured and explicitly authorised.
