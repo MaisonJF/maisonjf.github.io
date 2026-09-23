@@ -60,7 +60,10 @@ function env(db=new FakeDB()){
   return {
     BRAIN_REVIEW_DECISION_ENABLED:'true',
     BRAIN_REVIEW_DECISION_TOKEN:'decision-secret',
-    GROWTH_DB:db
+    GROWTH_DB:db,
+    actions:db.actions,
+    queue:db.queue,
+    resolutions:db.resolutions
   };
 }
 
