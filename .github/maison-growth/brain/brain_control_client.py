@@ -136,6 +136,17 @@ class BrainControlClient:
             "limit":limit,"after":after,"after_id":after_id
         })
 
+    def learning(
+        self,
+        *,
+        limit: int=100,
+        after: Optional[str]=None,
+        after_id: Optional[str]=None,
+    ) -> Mapping[str,Any]:
+        return self._get("/internal/brain/learning",{
+            "limit":limit,"after":after,"after_id":after_id
+        })
+
     def solutions(self, *, status: Optional[str]=None, limit: int=100) -> Mapping[str,Any]:
         return self._get("/internal/brain/solutions",{"status":status,"limit":limit})
 
