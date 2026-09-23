@@ -28,6 +28,33 @@
   ],
   "entries": [
     {
+      "id": "maison-brain-mcp",
+      "type": "protocol_surface",
+      "name": "Maison Brain MCP read-only surface",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "stable read-only tool port for agents to query Brain status, Oceanos metadata, Osiris graph context and Semantic Memory without direct database access",
+      "sense": "agent tool access",
+      "cost": "software 0; shares persistent Brain runtime",
+      "license": "Maison repo; MCP SDK dependency",
+      "self_hosted": true,
+      "depends_on": [
+        "MCP 1.28.1",
+        "Osiris Memory",
+        "Maison Semantic Memory",
+        "A12 boundaries"
+      ],
+      "serves": [
+        "Brain",
+        "Scout",
+        "Critic",
+        "future agents",
+        "future orchestrators"
+      ],
+      "notes": "Optional localhost-only profile. Exactly four read-only tools; no outreach, publication, catalogue, price, checkout, spend or database-write tools."
+    },
+    {
       "id": "maison-persistent-runtime",
       "type": "runtime",
       "name": "Maison Persistent Observe Runtime",
