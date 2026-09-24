@@ -64,6 +64,12 @@ def build_board(
         )
         next_action,next_reason=_next_action(ranked,economics)
         asset_type=str(ranked.get("asset_type") or economics.get("asset_type") or "")
+        commercial_state="needs_facts"
+        if economics.get("manual_validation_ready") is True:
+            commercial_state="ready_for_human_validation"
+        elif asset_type=="physical_product" and economics.get("replenishment_capacity_known") is True:
+            commercial_state="replenishable_needs_economics"
+
         rows.append({
             "attention_rank":ranked.get("attention_rank"),
             "asset_ref":ref,
@@ -100,6 +106,7 @@ def build_board(
                 "production_minutes_per_unit":economics.get("production_minutes_per_unit"),
                 "batch_capacity_units":economics.get("batch_capacity_units"),
             } if asset_type=="physical_product" else None,
+            "commercial_state":commercial_state,
             "next_action":{
                 "code":next_action,
                 "reason":next_reason,
@@ -148,6 +155,8 @@ def build_board(
             "manual_validation_ready":sum(bool(x["readiness"]["manual_validation_ready"]) for x in rows),
             "unit_economics_known":sum(bool(x["readiness"]["unit_economics_known"]) for x in rows),
             "operational_facts_complete":sum(bool(x["readiness"]["operational_facts_complete"]) for x in rows),
+            "ready_for_human_validation":sum(x["commercial_state"]=="ready_for_human_validation" for x in rows),
+            "replenishable_needs_economics":sum(x["commercial_state"]=="replenishable_needs_economics" for x in rows),
             "next_action_counts":dict(sorted(action_counts.items())),
             "blocker_counts":dict(sorted(blocker_counts.items())),
         },
