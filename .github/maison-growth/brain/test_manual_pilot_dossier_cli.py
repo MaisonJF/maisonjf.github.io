@@ -70,6 +70,29 @@ class ManualPilotDossierCliTests(unittest.TestCase):
             self.assertNotIn(secret,rendered)
         self.assertTrue(result["most_common_required_inputs"])
 
+    def test_summary_never_prints_private_context_values(self):
+        secret_profile="secret target profile that must not be printed"
+        secret_price_rule="secret human quote rule"
+        result=build_operator_output(
+            [row()],
+            assets=CommercialAssetContext(registry()),
+            full=False,
+            pilot_contexts={
+                "vpl_secret":{
+                    "inputs":{
+                        "target_profile":secret_profile,
+                        "price_or_quote_rule":secret_price_rule,
+                    },
+                    "evidence_refs":["manual:private:context"],
+                }
+            },
+        )
+        rendered=json.dumps(result)
+        self.assertNotIn(secret_profile,rendered)
+        self.assertNotIn(secret_price_rule,rendered)
+        self.assertFalse(result["identifiers_printed"])
+
+
     def test_full_mode_is_explicit_and_contains_operator_dossier(self):
         result=build_operator_output(
             [row("vpl_full")],

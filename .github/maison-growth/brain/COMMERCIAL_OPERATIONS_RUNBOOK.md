@@ -119,9 +119,19 @@ python .github/maison-growth/brain/manual_pilot_dossier_cli.py \
   --overlay /private/path/maison-commercial-overlay.private.json
 ```
 
-For a private/local operator terminal only, `--full` prints the detailed dossier, including candidate assets, required inputs, success/stop signals and internal plan identifiers.
+B2B, distribution and generic manual pilots can also need pilot-specific facts that do not belong in the public catalogue or stock/capacity overlay. Store those in a separate private file following `manual-pilot-context.schema.json`, with a validation-plan ID, strict allowed inputs and at least one evidence reference per row:
 
-A dossier can become `ready_for_human_action_review` only when one actual candidate carries the complete operational fact set required for that pilot. Facts split across several different candidates do not fake readiness.
+```bash
+python .github/maison-growth/brain/manual_pilot_dossier_cli.py \
+  --overlay /private/path/maison-commercial-overlay.private.json \
+  --pilot-context /private/path/manual-pilot-context.private.json
+```
+
+The private context can supply items such as a B2B target profile, human quote rule, fulfilment lead time, distribution partner/strategy/cost/attribution, or the scope/cost/capacity basis for a generic manual validation. It can also carry an explicit human new-offer decision reference when no existing catalogue asset matches. Summary mode never prints these private values.
+
+For a private/local operator terminal only, `--full` prints the detailed dossier, including candidate assets, required inputs, success/stop signals and internal plan identifiers. Private context values themselves are not copied into the dossier; only their evidence references and the fact that evidence-backed context was applied are retained.
+
+A physical or service dossier can become `ready_for_human_action_review` only when one actual candidate carries the complete operational fact set required for that pilot. Facts split across several different candidates do not fake readiness, and the pilot-context file cannot bypass this rule. For every plan kind, `ready_for_human_action_review` still grants no outbound, spend, public-write or experiment-execution authority.
 
 ## 8. Only then feed facts into validation planning
 

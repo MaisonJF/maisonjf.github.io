@@ -10,6 +10,7 @@ from typing import Any, Mapping
 
 from brain_control_client import BrainControlClient
 from commercial_assets import CommercialAssetContext
+from manual_pilot_context import load_manual_pilot_context
 from manual_pilot_dossier import build_pilot_dossier, dossier_to_dict
 
 
@@ -32,12 +33,21 @@ def build_operator_output(
     assets: CommercialAssetContext,
     full: bool,
     validation_plan_id: str | None=None,
+    pilot_contexts: Mapping[str,Mapping[str,Any]] | None=None,
 ) -> dict[str,Any]:
     selected=[
         row for row in rows
         if validation_plan_id is None or str(row.get("validation_plan_id"))==validation_plan_id
     ]
-    dossiers=[build_pilot_dossier(row,assets=assets) for row in selected]
+    contexts=pilot_contexts or {}
+    dossiers=[
+        build_pilot_dossier(
+            row,
+            assets=assets,
+            pilot_context=contexts.get(str(row.get("validation_plan_id") or "")),
+        )
+        for row in selected
+    ]
 
     if full:
         return {
@@ -81,6 +91,11 @@ def main() -> None:
     parser.add_argument("--validation-plan-id")
     parser.add_argument("--overlay",type=Path)
     parser.add_argument(
+        "--pilot-context",
+        type=Path,
+        help="Private evidence-backed manual-pilot context file. Values are never printed by summary mode.",
+    )
+    parser.add_argument(
         "--full",
         action="store_true",
         help="Print full operator dossiers including internal identifiers. Prefer local/private terminals.",
@@ -99,6 +114,17 @@ def main() -> None:
         REGISTRY,
         overlay_path=overlay_path,
     )
+
+    pilot_context_path=args.pilot_context
+    if pilot_context_path is None:
+        raw=os.environ.get("MAISON_MANUAL_PILOT_CONTEXT_PATH","").strip()
+        pilot_context_path=Path(raw) if raw else None
+    pilot_contexts=(
+        load_manual_pilot_context(pilot_context_path)
+        if pilot_context_path is not None
+        else {}
+    )
+
     payload=_client().validation_plans(
         state="manual_pilot_required",
         limit=args.limit,
@@ -112,6 +138,7 @@ def main() -> None:
         assets=assets,
         full=args.full,
         validation_plan_id=args.validation_plan_id,
+        pilot_contexts=pilot_contexts,
     )
     print(json.dumps(output,ensure_ascii=False,indent=2))
 
