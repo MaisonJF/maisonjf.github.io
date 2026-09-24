@@ -115,6 +115,7 @@ Available tools:
 - `maison_commercial_asset_search`
 - `maison_commercial_attention`
 - `maison_digital_experience_coverage`
+- `maison_ocean_commercial_matrix`
 - `maison_commercial_readiness`
 - `maison_commercial_bundle_hypotheses`
 - `maison_commercial_action_inbox`
@@ -186,7 +187,7 @@ The generated registry records known catalogue facts such as product/service ide
 
 The optional private overlay contract is `commercial-asset-overlay.schema.json`. An operator may keep a matching JSON file **outside git** and point `MAISON_COMMERCIAL_ASSET_OVERLAY_PATH` to it. Any known operational value requires an evidence reference. Catalogue `in_stock` never becomes counted inventory. For the existing digital products, `commercial-digital-operations.template.json` captures only per-sale human effort, variable cost and delivery lead time; null remains UNKNOWN and zero must be evidence-backed rather than assumed.
 
-The general Maison Brain MCP tool `maison_commercial_asset_search` does **not** load or expose the private overlay; it returns catalogue-derived context only. `maison_digital_experience_coverage` exposes metadata-only Ocean → Oráculo/PÁRA DE IGNORAR! feed coverage, never paid question or reading bodies.
+The general Maison Brain MCP tool `maison_commercial_asset_search` does **not** load or expose the private overlay; it returns catalogue-derived context only. `maison_digital_experience_coverage` exposes metadata-only Ocean → Oráculo/PÁRA DE IGNORAR! feed coverage, never paid question or reading bodies. `maison_ocean_commercial_matrix` derives, at read time, which current offers already map to each Ocean and which structural coverage gaps remain; it is context for human/commercial analysis, never a launch recommendation or profit score.
 
 
 ## Private activation preflight
