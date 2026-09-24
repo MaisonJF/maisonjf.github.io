@@ -129,5 +129,30 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         self.assertFalse(any(row["authority"].values()))
 
 
+    def test_known_effort_with_missing_lead_asks_only_for_delivery_window(self):
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T08:30:00+01:00",
+            "assets":[{
+                "asset_ref":"catalog:service:tarot",
+                "operational":{
+                    "capacity_units_per_period":5,
+                    "capacity_period":"week",
+                    "human_effort_minutes":60,
+                    "variable_cost_minor":0,
+                },
+                "evidence_refs":["manual:service-capacity:test"],
+            }],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/"facts.private.json"
+            path.write_text(json.dumps(overlay),encoding="utf-8")
+            board=build_board(overlay_path=path)
+        row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:service:tarot")
+        self.assertEqual(row["next_action"]["code"],"verify_delivery_window")
+        self.assertIn("delivery_effort_incomplete",row["readiness"]["blockers"])
+        self.assertFalse(any(row["authority"].values()))
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
