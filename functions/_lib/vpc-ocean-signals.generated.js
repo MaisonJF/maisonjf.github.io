@@ -211,6 +211,19 @@ export const VPC_OCEAN_SIGNALS=[
       "tarefas inacabadas durante a pausa",
       "permitir-se não produzir"
     ]
+  },
+  {
+    "id": "ansiedade-antecipatoria-na-transicao-domingo-semana",
+    "painLanguage": "O domingo ainda não acabou, mas a cabeça já começou a viver a segunda-feira: tarefas, mensagens, reuniões e obrigações entram mentalmente antes de o tempo de descanso terminar, roubando presença ao fim do fim-de-semana.",
+    "intent": "reconhecer quando a antecipação da semana de trabalho invade o domingo e transforma uma transição normal numa sequência de ruminação, tensão ou perda de descanso, distinguindo preparação útil de viver a segunda-feira antes de ela chegar",
+    "themes": [
+      "domingo que já parece segunda-feira",
+      "antecipação da semana",
+      "ruminação antes do trabalho",
+      "fim do descanso",
+      "transição entre fim-de-semana e obrigação",
+      "preparar sem perder o presente"
+    ]
   }
 ];
 export const VPC_OCEAN_SIGNAL_VERSION="2026-09-18";
