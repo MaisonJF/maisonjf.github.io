@@ -257,6 +257,12 @@ def evaluate_bundle(
     )
     costs_known=all(part["unit_cost_minor"] is not None for part in parts)
     combined_cost=sum(part["unit_cost_minor"] for part in parts) if costs_known else None
+    evidence_refs=sorted({
+        str(ref)
+        for part in parts
+        for ref in part.get("operational_evidence_refs",[])
+        if str(ref).strip()
+    })
     subtotal=bundle.get("catalogue_subtotal_minor")
     subtotal=subtotal if isinstance(subtotal,int) else None
 
@@ -309,6 +315,7 @@ def evaluate_bundle(
         "manual_validation_ready":not blockers,
         "blockers":blockers,
         "signals":signals,
+        "operational_evidence_refs":evidence_refs,
         "authority":{
             "bundle_price_selected_by_system":False,
             "public_write_authorized":False,
