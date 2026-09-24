@@ -15,7 +15,7 @@ class CommercialOperatorReportTests(unittest.TestCase):
         self.assertFalse(report["overlay_loaded"])
         self.assertTrue(report["attention_score_is_not_profit_score"])
         self.assertFalse(any(report["authority"].values()))
-        self.assertEqual(report["summary"]["ranked_assets"],12)
+        self.assertEqual(report["summary"]["ranked_assets"],14)
         self.assertEqual(report["summary"]["operationally_complete_assets"],0)
         self.assertEqual(report["summary"]["unit_economics_known_assets"],0)
         self.assertEqual(report["summary"]["manual_validation_ready_assets"],0)
@@ -27,6 +27,19 @@ class CommercialOperatorReportTests(unittest.TestCase):
             row["economics"]["unit_contribution_minor"] is None
             for row in report["attention"]
         ))
+
+    def test_digital_products_are_reported_without_inventing_zero_cost(self):
+        report=build_report()
+        oracle=next(x for x in report["attention"] if x["asset_ref"]=="catalog:digital:oracle")
+        pdi=next(x for x in report["attention"] if x["asset_ref"]=="catalog:digital:pdi")
+        self.assertEqual(oracle["economics"]["price_minor"],200)
+        self.assertEqual(pdi["economics"]["price_minor"],500)
+        self.assertIsNone(oracle["economics"]["variable_cost_minor"])
+        self.assertIsNone(pdi["economics"]["variable_cost_minor"])
+        self.assertFalse(oracle["unit_economics_known"])
+        self.assertFalse(pdi["unit_economics_known"])
+        self.assertFalse(oracle["manual_validation_ready"])
+        self.assertFalse(pdi["manual_validation_ready"])
 
     def test_operator_can_select_catalogue_service_variant_without_changing_catalogue(self):
         overlay={
