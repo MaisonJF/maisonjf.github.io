@@ -96,6 +96,20 @@ class CommercialAssetTests(unittest.TestCase):
             self.assertEqual(row["evidence_refs"],[])
             self.assertTrue(all(value is None for value in row["operational"].values()))
 
+    def test_digital_operations_template_contains_only_oracle_and_pdi(self):
+        template=json.loads((ROOT/"commercial-digital-operations.template.json").read_text(encoding="utf-8"))
+        self.assertEqual(template["target_overlay_schema"],"commercial_asset_overlay_v1")
+        refs={row["asset_ref"] for row in template["assets"]}
+        self.assertEqual(refs,{"catalog:digital:oracle","catalog:digital:pdi"})
+        self.assertIsNone(template["observed_at"])
+        for row in template["assets"]:
+            self.assertEqual(row["source"],"manual_digital_delivery_review")
+            self.assertEqual(row["evidence_refs"],[])
+            self.assertEqual(set(row["operational"]),{
+                "human_effort_minutes","variable_cost_minor","delivery_lead_days"
+            })
+            self.assertTrue(all(value is None for value in row["operational"].values()))
+
     def test_search_exposes_oracle_and_pdi_to_brain_context(self):
         ctx=CommercialAssetContext(self.registry())
         oracle_hits=ctx.search("oráculo solidão companhia",limit=10)
