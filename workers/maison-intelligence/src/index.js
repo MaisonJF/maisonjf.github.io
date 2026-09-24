@@ -313,7 +313,7 @@ export default {
   async scheduled(controller, env, ctx) {
     const when = new Date(controller.scheduledTime);
     const jobs = [enqueueOsirisRun(env, when), enqueuePublicSourceRun(env, when)];
-    if (controller.cron === '17 4 * * *') jobs.push(enqueueRun(env, when));
+    if (controller.cron === '17 0 * * *') jobs.push(enqueueRun(env, when));
     ctx.waitUntil(Promise.all(jobs));
   },
 
