@@ -56,6 +56,7 @@ def build_board(
         if not isinstance(ranked,Mapping):
             continue
         ref=str(ranked.get("asset_ref") or "")
+        asset_type=str(ranked.get("asset_type") or "")
         economics=evaluate_asset(
             context,
             ref,
