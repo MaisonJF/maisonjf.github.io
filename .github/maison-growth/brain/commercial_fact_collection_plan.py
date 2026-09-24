@@ -28,6 +28,10 @@ ACTION_FIELDS={
         ("human_effort_minutes","How many human minutes does one delivered unit require?"),
         ("delivery_lead_days","What is the realistic delivery lead time in days?"),
     ],
+    "verify_digital_delivery_effort":[
+        ("human_effort_minutes","How many human minutes does one delivered digital unit require? Use zero only when verified."),
+        ("delivery_lead_days","What is the observed delivery lead time in days for one digital unit? Use zero only when verified."),
+    ],
     "verify_variable_cost":[
         ("variable_cost_minor","What is the variable cost of one delivered unit, in euro cents?"),
     ],
