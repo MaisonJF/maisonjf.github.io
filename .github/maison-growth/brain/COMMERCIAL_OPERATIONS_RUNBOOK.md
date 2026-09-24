@@ -127,7 +127,18 @@ python .github/maison-growth/brain/commercial_readiness_board.py \
 
 Each row keeps Ocean context, catalogue pricing, operational/economic blockers and one explicit next human action together. Attention is never presented as profit, catalogue `in_stock` is never treated as counted inventory, and every external authority remains false.
 
-## 8. Build manual-pilot dossiers from approved validation plans
+## 8. Generate the shortest fact-collection queue
+
+The readiness board can be reduced to a zero-private-data operator worksheet. It asks only for the **next** missing fact group for each ranked asset, rather than making the operator fill every possible field at once:
+
+```bash
+python .github/maison-growth/brain/commercial_fact_collection_plan.py \
+  --output /private/path/maison-commercial-fact-plan.private.json
+```
+
+If a private overlay already exists, pass it with `--overlay`. Assets automatically move from stock → cost → human review (or service price → capacity → effort/cost) as evidence-backed facts become known. Generated values remain null; the script never guesses stock, cost, capacity or prices and grants no execution authority.
+
+## 9. Build manual-pilot dossiers from approved validation plans
 
 After the private Brain has human-approved validation plans, the operator can inspect what each manual pilot still needs before any external action.
 
@@ -152,6 +163,6 @@ For a private/local operator terminal only, `--full` prints the detailed dossier
 
 A physical or service dossier can become `ready_for_human_action_review` only when one actual candidate carries the complete operational fact set required for that pilot. Facts split across several different candidates do not fake readiness, and the pilot-context file cannot bypass this rule. For every plan kind, `ready_for_human_action_review` still grants no outbound, spend, public-write or experiment-execution authority.
 
-## 9. Only then feed facts into validation planning
+## 10. Only then feed facts into validation planning
 
 Once stock/cost/capacity facts are known, they can support A14/A12 manual validation planning. Human review remains the authority boundary. A8 remains draft-only unless a separately governed CTA decision exists.
