@@ -38,6 +38,11 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["KILL_SWITCH"], "true")
         self.assertEqual(vars_["OSIRIS_ENABLED"], "false")
         self.assertEqual(vars_["PUBLIC_DATA_ENABLED"], "false")
+        for key in (
+            "WORKERS_AI_ENABLED","OSIRIS_GATEWAY_ENABLED","OPENROUTER_ENABLED",
+            "OPENAI_ENABLED","GEMINI_ENABLED","PERPLEXITY_ENABLED","ANTHROPIC_ENABLED",
+        ):
+            self.assertEqual(vars_[key], "false")
 
     def test_private_surface_removes_collection_and_model_bindings(self):
         cfg = render_private_worker_config(
