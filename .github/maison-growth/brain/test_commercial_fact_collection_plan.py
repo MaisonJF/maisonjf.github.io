@@ -25,8 +25,8 @@ class CommercialFactCollectionPlanTests(unittest.TestCase):
     def test_top_physical_asset_does_not_require_volatile_stock_snapshot(self):
         plan=build_plan()
         task=next(x for x in plan["tasks"] if x["asset_ref"]=="catalog:product:nevoa")
-        self.assertEqual(task["next_action"],"verify_replenishment_capacity")
-        self.assertEqual([x["field"] for x in task["fields"]],["production_minutes_per_unit","batch_capacity_units"])
+        self.assertEqual(task["next_action"],"verify_unit_cost")
+        self.assertEqual([x["field"] for x in task["fields"]],["unit_material_cost_minor","packaging_cost_minor"])
         self.assertTrue(task["rules"]["current_stock_snapshot_is_optional_and_volatile"])
 
     def test_service_without_concrete_price_asks_human_to_select_price(self):
@@ -53,8 +53,8 @@ class CommercialFactCollectionPlanTests(unittest.TestCase):
             path.write_text(json.dumps(overlay),encoding="utf-8")
             plan=build_plan(overlay_path=path)
         task=next(x for x in plan["tasks"] if x["asset_ref"]=="catalog:product:nevoa")
-        self.assertEqual(task["next_action"],"verify_unit_cost")
-        self.assertEqual([x["field"] for x in task["fields"]],["unit_material_cost_minor","packaging_cost_minor"])
+        self.assertEqual(task["next_action"],"verify_replenishment_capacity")
+        self.assertEqual([x["field"] for x in task["fields"]],["production_minutes_per_unit","batch_capacity_units"])
 
     def test_complete_asset_disappears_from_collection_tasks(self):
         overlay={
