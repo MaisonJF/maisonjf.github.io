@@ -92,7 +92,6 @@ def build_payload(
             "catalogue_subtotal_minor":subtotal if price_complete else None,
             "currency":"EUR" if price_complete else None,
             "bundle_price_minor":None,
-            "discount_minor":None,
             "operational_readiness":{
                 "current_stock_snapshot_required":False,
                 "stock_snapshot_is_readiness_gate":False,
@@ -103,7 +102,6 @@ def build_payload(
             },
             "authority":{
                 "public_write_authorized":False,
-                "automatic_discount_authorized":False,
                 "automatic_checkout_authorized":False,
                 "human_approval_required":True,
             },
