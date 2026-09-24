@@ -62,60 +62,40 @@
     ],
     "catalog:digital:pdi-relacoes": [
       "pára de ignorar",
-      "para de ignorar",
-      "jogo",
-      "perguntas"
+      "para de ignorar"
     ],
     "catalog:digital:oracle-seen": [
-      "oráculo",
-      "oraculo",
       "aprovação",
       "validação"
     ],
     "catalog:digital:oracle-attachment": [
-      "oráculo",
-      "oraculo",
       "apego",
       "dependência"
     ],
     "catalog:digital:oracle-self": [
-      "oráculo",
-      "oraculo",
       "autoabandono"
     ],
     "catalog:digital:oracle-self-worth": [
-      "oráculo",
-      "oraculo",
       "autoestima",
       "valor"
     ],
     "catalog:digital:oracle-control": [
-      "oráculo",
-      "oraculo",
       "controlo",
       "incerteza"
     ],
     "catalog:digital:oracle-belong": [
-      "oráculo",
-      "oraculo",
       "solidão",
       "companhia"
     ],
     "catalog:digital:oracle-load": [
-      "oráculo",
-      "oraculo",
       "energia",
       "cansaço"
     ],
     "catalog:digital:oracle-direction": [
-      "oráculo",
-      "oraculo",
       "escolhas",
       "mudança"
     ],
     "catalog:digital:oracle-security": [
-      "oráculo",
-      "oraculo",
       "medo do futuro",
       "segurança"
     ]
