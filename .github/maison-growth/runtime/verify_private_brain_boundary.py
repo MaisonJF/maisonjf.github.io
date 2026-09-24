@@ -26,6 +26,16 @@ class HttpResult:
     body:Mapping[str,Any]|None
 
 
+def _normalize_access_credential(raw:str|None,header_name:str)->str|None:
+    if raw is None:
+        return None
+    value=raw.strip()
+    prefix=f"{header_name}:"
+    if value.lower().startswith(prefix.lower()):
+        value=value[len(prefix):].strip()
+    return value or None
+
+
 def _safe_base_url(raw:str)->str:
     value=raw.strip().rstrip("/")
     parsed=urlparse(value)
@@ -126,8 +136,8 @@ def verify_live(stage:str,values:Mapping[str,str])->dict[str,Any]:
     token=values["BRAIN_CONTROL_TOKEN"].strip()
     if not token:
         raise BoundaryVerificationError("brain_control_token_required")
-    access_id=values.get("CF_ACCESS_CLIENT_ID","").strip() or None
-    access_secret=values.get("CF_ACCESS_CLIENT_SECRET","").strip() or None
+    access_id=_normalize_access_credential(values.get("CF_ACCESS_CLIENT_ID"),"CF-Access-Client-Id")
+    access_secret=_normalize_access_credential(values.get("CF_ACCESS_CLIENT_SECRET"),"CF-Access-Client-Secret")
     if (access_id is None)!=(access_secret is None):
         raise BoundaryVerificationError("cloudflare_access_credentials_must_be_paired")
     unauth=_request(base,"/internal/brain/health",access_client_id=access_id,access_client_secret=access_secret)
