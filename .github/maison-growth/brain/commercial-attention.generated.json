@@ -9,7 +9,6 @@
     "operational_unknowns_block_execution": true,
     "ocean_metadata_is_context_not_external_evidence": true,
     "automatic_publication": false,
-    "automatic_discount": false,
     "automatic_checkout": false
   },
   "summary": {
@@ -77,7 +76,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -124,7 +122,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -186,7 +183,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -248,7 +244,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -296,7 +291,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -350,7 +344,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -396,7 +389,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -442,7 +434,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -482,7 +473,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -542,7 +532,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -597,7 +586,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -638,7 +626,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -689,7 +676,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -726,7 +712,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -763,7 +748,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -796,7 +780,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -829,7 +812,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -862,7 +844,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -889,7 +870,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -928,7 +908,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -961,7 +940,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
@@ -994,7 +972,6 @@
       ],
       "authority": {
         "public_write_authorized": false,
-        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
