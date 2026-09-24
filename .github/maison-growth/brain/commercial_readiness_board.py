@@ -32,11 +32,11 @@ def _next_action(row: Mapping[str,Any], economics: Mapping[str,Any]) -> tuple[st
         if "capacity_incomplete" in blockers:
             return "verify_service_capacity","Record real service capacity and its period."
         if "delivery_effort_incomplete" in blockers:
+            if economics.get("human_effort_minutes") is not None and economics.get("delivery_lead_days") is None:
+                return "verify_delivery_window","Human effort is known; record only the remaining realistic delivery/lead time."
             return "verify_delivery_effort","Record human effort and the realistic delivery/lead time."
         if "variable_cost_unknown" in blockers:
             return "verify_variable_cost","Record the variable cost for one delivered unit."
-        if "delivery_lead_unknown" in blockers:
-            return "verify_delivery_window","Record the realistic delivery/lead time."
     if not economics.get("unit_economics_known"):
         return "complete_unit_economics","Complete the remaining operational facts before judging profitability."
     return "human_review","Keep this item human-gated; no automatic commercial action is authorized."
