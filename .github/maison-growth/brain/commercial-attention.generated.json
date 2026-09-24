@@ -17,7 +17,7 @@
     "services": 6,
     "b2b_services": 1,
     "digital_products": 2,
-    "execution_ready": 2
+    "execution_ready": 0
   },
   "assets": [
     {
@@ -48,13 +48,20 @@
         "telepressao-e-disponibilidade-permanente"
       ],
       "contextual_ocean_matches": [],
-      "operational_blockers": [],
+      "operational_blockers": [
+        "human_effort_unknown",
+        "variable_cost_unknown",
+        "delivery_lead_unknown"
+      ],
       "profitability_known": false,
       "ready_for_automatic_sale": false,
       "reason_codes": [
         "direct_ocean_adjacency",
         "low_price_barrier",
-        "public_active_asset"
+        "public_active_asset",
+        "human_effort_unknown",
+        "variable_cost_unknown",
+        "delivery_lead_unknown"
       ],
       "authority": {
         "public_write_authorized": false,
@@ -528,12 +535,19 @@
       "direct_ocean_mentions": 0,
       "direct_ocean_territories": [],
       "contextual_ocean_matches": [],
-      "operational_blockers": [],
+      "operational_blockers": [
+        "human_effort_unknown",
+        "variable_cost_unknown",
+        "delivery_lead_unknown"
+      ],
       "profitability_known": false,
       "ready_for_automatic_sale": false,
       "reason_codes": [
         "low_price_barrier",
-        "public_active_asset"
+        "public_active_asset",
+        "human_effort_unknown",
+        "variable_cost_unknown",
+        "delivery_lead_unknown"
       ],
       "authority": {
         "public_write_authorized": false,
