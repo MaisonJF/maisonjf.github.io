@@ -7,18 +7,17 @@
   "preview_urls": false,
   "triggers": {
     "crons": [
-      "0 * * * *",
-      "17 4 * * *"
+      "17 0 * * *"
     ]
   },
   "vars": {
-    "WORKER_ENABLED": "false",
+    "WORKER_ENABLED": "true",
     "BRAIN_CONTROL_API_ENABLED": "true",
     "BRAIN_PROPOSAL_API_ENABLED": "false",
     "BRAIN_REVIEW_DECISION_ENABLED": "false",
-    "KILL_SWITCH": "true",
+    "KILL_SWITCH": "false",
     "PROMPTS_PER_RUN": "2",
-    "MAX_DAILY_CALLS_PER_PROVIDER": "2",
+    "MAX_DAILY_CALLS_PER_PROVIDER": "1",
     "WORKERS_AI_ENABLED": "false",
     "WORKERS_AI_MODEL": "@cf/google/gemma-4-26b-a4b-it",
     "OSIRIS_GATEWAY_ENABLED": "false",
@@ -26,13 +25,13 @@
     "OSIRIS_GATEWAY_MODEL": "",
     "OSIRIS_MEMORY_ENABLED": "false",
     "OSIRIS_MEMORY_BRIDGE_URL": "",
-    "OPENROUTER_ENABLED": "false",
+    "OPENROUTER_ENABLED": "true",
     "OPENROUTER_MODEL": "openrouter/free",
-    "OSIRIS_ENABLED": "false",
+    "OSIRIS_ENABLED": "true",
     "OSIRIS_BASE_URL": "https://osirisai.live",
     "OSIRIS_SOURCE_KEYS": "stats,flights,satellites,space_weather,earthquakes,fires,weather,air_quality,radar,conflicts,frontlines,gdelt,country_risk,news,live_news,markets,crypto,scm_suppliers,cctv,infrastructure,maritime,cyber_threats,cyber_attacks,malware",
-    "OSIRIS_SOURCE_CADENCES_JSON": "",
-    "MAX_DAILY_CALLS_PER_OSIRIS_SOURCE": "24",
+    "OSIRIS_SOURCE_CADENCES_JSON": "{\"stats\":24,\"flights\":24,\"satellites\":24,\"space_weather\":24,\"earthquakes\":24,\"fires\":24,\"weather\":24,\"air_quality\":24,\"radar\":24,\"conflicts\":24,\"frontlines\":24,\"gdelt\":24,\"country_risk\":24,\"news\":24,\"live_news\":24,\"markets\":24,\"crypto\":24,\"scm_suppliers\":24,\"cctv\":24,\"infrastructure\":24,\"maritime\":24,\"cyber_threats\":24,\"cyber_attacks\":24,\"malware\":24}",
+    "MAX_DAILY_CALLS_PER_OSIRIS_SOURCE": "1",
     "PUBLIC_DATA_ENABLED": "false",
     "MAX_DAILY_CALLS_PER_PUBLIC_SOURCE": "4",
     "EUROSTAT_ENABLED": "false",
@@ -48,7 +47,9 @@
     "PERPLEXITY_ENABLED": "false",
     "PERPLEXITY_MODEL": "sonar",
     "ANTHROPIC_ENABLED": "false",
-    "ANTHROPIC_MODEL": ""
+    "ANTHROPIC_MODEL": "",
+    "ZERO_COST_MODE": "true",
+    "ZERO_COST_OBSERVE_ACTIVATION": "true"
   },
   "ai": {
     "binding": "AI"
