@@ -17,6 +17,17 @@ The Osiris upstream source is not vendored. The image clones a pinned upstream c
 - Osiris worker is behind the optional `worker` profile.
 - No public port/TLS reverse proxy is configured here. If A13 later mirrors from Cloudflare, expose only the bridge through an authenticated HTTPS private ingress; never expose Postgres/Redis.
 
+## Host preflight — no services started
+
+Before building or starting the private persistent stack, validate the local host:
+
+```bash
+python .github/maison-growth/runtime/preflight_observe_host.py \
+  --env-file .env.observe
+```
+
+The preflight checks the two base secrets without printing them, rejects placeholders/reused base secrets, validates host-port collisions/availability, confirms Docker Compose can expand the full file, and reports free disk. It performs **no remote changes** and starts **zero services**. Optional Cloudflare/Brain profiles receive structural local placeholders during the Compose syntax check when they are not configured yet; that does not activate them.
+
 ## Build only
 
 ```bash
