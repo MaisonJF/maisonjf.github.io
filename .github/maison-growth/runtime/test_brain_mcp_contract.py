@@ -34,6 +34,7 @@ class BrainMCPContractTests(unittest.TestCase):
             "maison_commercial_asset_search",
             "maison_commercial_attention",
             "maison_commercial_bundle_hypotheses",
+            "maison_commercial_readiness",
             "maison_osiris_search",
             "maison_semantic_search",
         })
@@ -41,7 +42,7 @@ class BrainMCPContractTests(unittest.TestCase):
 
     def test_all_tools_use_read_only_annotations(self):
         decorated=re.findall(r"@mcp\.tool\(([^)]*)\)",self.source)
-        self.assertEqual(len(decorated),8)
+        self.assertEqual(len(decorated),9)
         self.assertTrue(all("annotations=READ_ONLY" in x for x in decorated))
         self.assertIn("readOnlyHint=True",self.source)
         self.assertIn("destructiveHint=False",self.source)
