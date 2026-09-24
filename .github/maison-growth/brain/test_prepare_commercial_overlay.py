@@ -51,6 +51,33 @@ class PrepareCommercialOverlayTests(unittest.TestCase):
             by_ref["catalog:service:tarot"]["evidence_refs"],
         )
 
+    def test_builds_overlay_from_operations_facts_template_without_stock_snapshot(self):
+        operations={
+            "schema_version":"commercial_operations_facts_template_v1",
+            "assets":[{
+                "asset_ref":"catalog:product:nevoa",
+                "source":"manual_operations_review",
+                "operational":{
+                    "unit_material_cost_minor":180,
+                    "packaging_cost_minor":70,
+                    "production_minutes_per_unit":5,
+                    "batch_capacity_units":30,
+                    "inventory_quantity":None,
+                    "reserved_quantity":None,
+                },
+                "evidence_refs":["manual:operations:2026-09-24"],
+            }],
+        }
+        payload=build_overlay(
+            templates=(operations,),
+            observed_at="2026-09-24T10:15:00+01:00",
+        )
+        row=payload["assets"][0]
+        self.assertEqual(row["asset_ref"],"catalog:product:nevoa")
+        self.assertNotIn("inventory_quantity",row["operational"])
+        self.assertNotIn("reserved_quantity",row["operational"])
+        self.assertEqual(row["operational"]["batch_capacity_units"],30)
+
     def test_skips_empty_rows_but_requires_at_least_one_filled_asset(self):
         empty={
             "schema_version":"commercial_stocktake_template_v1",
