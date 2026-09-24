@@ -13,6 +13,7 @@ ROOT=Path(__file__).resolve().parent
 REPO_ROOT=ROOT.parents[2]
 REGISTRY=ROOT/"commercial-assets.generated.json"
 TEMPLATE_SCHEMAS={
+    "commercial_operations_facts_template_v1",
     "commercial_stocktake_template_v1",
     "commercial_service_capacity_template_v1",
 }
@@ -87,16 +88,19 @@ def main() -> None:
     parser=argparse.ArgumentParser(
         description="Build a validated private commercial overlay from filled operator templates."
     )
-    parser.add_argument("--stocktake",type=Path)
+    parser.add_argument("--operations",type=Path,help="Preferred physical operations-facts template.")
+    parser.add_argument("--stocktake",type=Path,help="Legacy compatibility input; prefer --operations.")
     parser.add_argument("--services",type=Path)
     parser.add_argument("--observed-at",required=True)
     parser.add_argument("--evidence-ref",action="append",default=[])
     parser.add_argument("--output",type=Path,required=True)
     args=parser.parse_args()
 
-    inputs=[x for x in (args.stocktake,args.services) if x is not None]
+    if args.operations is not None and args.stocktake is not None:
+        raise SystemExit("use either --operations or legacy --stocktake, not both")
+    inputs=[x for x in (args.operations,args.stocktake,args.services) if x is not None]
     if not inputs:
-        raise SystemExit("at least one of --stocktake or --services is required")
+        raise SystemExit("at least one of --operations, --stocktake or --services is required")
     if not _outside_repo(args.output):
         raise SystemExit("refusing to write a private commercial overlay inside the repository")
 

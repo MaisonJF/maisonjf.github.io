@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
+from commercial_operations_fact_summary import build_summary
 from prepare_commercial_overlay import build_overlay
 
 
@@ -50,6 +54,64 @@ class PrepareCommercialOverlayTests(unittest.TestCase):
             "manual:capacity-review:2026-09-24",
             by_ref["catalog:service:tarot"]["evidence_refs"],
         )
+
+    def test_operations_template_builds_structural_overlay_without_stock_snapshot(self):
+        operations={
+            "schema_version":"commercial_operations_facts_template_v1",
+            "assets":[{
+                "asset_ref":"catalog:product:nevoa",
+                "source":"manual_operations_review",
+                "operational":{
+                    "unit_material_cost_minor":180,
+                    "packaging_cost_minor":70,
+                    "production_minutes_per_unit":5,
+                    "batch_capacity_units":30,
+                    "inventory_quantity":None,
+                    "reserved_quantity":None,
+                },
+                "evidence_refs":["manual:operations:2026-09-24"],
+            }],
+        }
+        payload=build_overlay(
+            templates=(operations,),
+            observed_at="2026-09-24T10:15:00+01:00",
+        )
+        row=payload["assets"][0]
+        self.assertEqual(row["asset_ref"],"catalog:product:nevoa")
+        self.assertNotIn("inventory_quantity",row["operational"])
+        self.assertNotIn("reserved_quantity",row["operational"])
+        self.assertEqual(row["operational"]["batch_capacity_units"],30)
+
+    def test_operations_summary_exposes_presence_not_private_values(self):
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T10:20:00+01:00",
+            "assets":[{
+                "asset_ref":"catalog:product:nevoa",
+                "source":"manual_operations_review",
+                "operational":{
+                    "unit_material_cost_minor":180,
+                    "packaging_cost_minor":70,
+                    "production_minutes_per_unit":5,
+                    "batch_capacity_units":30,
+                },
+                "evidence_refs":["manual:operations:test"],
+            }],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/"facts.private.json"
+            path.write_text(json.dumps(overlay),encoding="utf-8")
+            summary=build_summary(overlay_path=path)
+        row=next(x for x in summary["assets"] if x["asset_ref"]=="catalog:product:nevoa")
+        self.assertFalse(summary["private_values_exposed"])
+        self.assertEqual(row["structural_missing_fields"],[])
+        self.assertEqual(row["stock_snapshot_known_fields"],[])
+        self.assertFalse(row["stock_snapshot_is_readiness_gate"])
+        self.assertTrue(row["replenishment_capacity_known"])
+        self.assertTrue(row["unit_economics_known"])
+        self.assertTrue(row["manual_validation_ready"])
+        self.assertNotIn("unit_cost_minor",row)
+        self.assertNotIn("available_units",row)
 
     def test_skips_empty_rows_but_requires_at_least_one_filled_asset(self):
         empty={
