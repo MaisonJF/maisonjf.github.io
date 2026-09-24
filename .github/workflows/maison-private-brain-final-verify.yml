@@ -1,0 +1,36 @@
+name: Maison Private Brain Final Verify
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/maison-private-brain-final-verify.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Allow Cloudflare Git deployment to settle
+        run: sleep 30
+      - name: Verify live private Brain health
+        env:
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: python .github/maison-growth/runtime/verify_private_brain_health.py
+      - name: Verify live private Brain boundary
+        env:
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: python .github/maison-growth/runtime/verify_private_brain_boundary.py private_brain_read_candidate
