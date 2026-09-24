@@ -1,0 +1,116 @@
+{
+  "schema_version": "commercial_digital_economics_template_v1",
+  "target_overlay_schema": "commercial_asset_overlay_v1",
+  "visibility": "operator_template_no_private_values",
+  "source": "commercial-assets.generated.json",
+  "instructions": [
+    "Copy this template outside the repository before entering private marginal-cost values.",
+    "Record only an observed per-delivery marginal cost in euro cents; do not assume zero because delivery is digital.",
+    "Every non-null value in the final overlay must carry at least one evidence_ref.",
+    "Capacity, human effort and delivery lead are not structural readiness fields for self-paced digital products."
+  ],
+  "observed_at": null,
+  "evidence_ref_example": "manual:digital-cost-review:YYYY-MM-DD",
+  "assets": [
+    {
+      "asset_ref": "catalog:digital:oracle-attachment",
+      "slug": "oracle-attachment",
+      "name": "Oráculo · Apego & Dependência",
+      "source": "manual_digital_cost_review",
+      "operational": {
+        "variable_cost_minor": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-belong",
+      "slug": "oracle-belong",
+      "name": "Oráculo · Solidão & Companhia",
+      "source": "manual_digital_cost_review",
+      "operational": {
+        "variable_cost_minor": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-control",
+      "slug": "oracle-control",
+      "name": "Oráculo · Controlo & Incerteza",
+      "source": "manual_digital_cost_review",
+      "operational": {
+        "variable_cost_minor": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-direction",
+      "slug": "oracle-direction",
+      "name": "Oráculo · Escolhas & Mudança",
+      "source": "manual_digital_cost_review",
+      "operational": {
+        "variable_cost_minor": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-load",
+      "slug": "oracle-load",
+      "name": "Oráculo · Energia & Cansaço",
+      "source": "manual_digital_cost_review",
+      "operational": {
+        "variable_cost_minor": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-security",
+      "slug": "oracle-security",
+      "name": "Oráculo · Medo do Futuro",
+      "source": "manual_digital_cost_review",
+      "operational": {
+        "variable_cost_minor": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-seen",
+      "slug": "oracle-seen",
+      "name": "Oráculo · Aprovação & Validação",
+      "source": "manual_digital_cost_review",
+      "operational": {
+        "variable_cost_minor": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-self",
+      "slug": "oracle-self",
+      "name": "Oráculo · Autoabandono",
+      "source": "manual_digital_cost_review",
+      "operational": {
+        "variable_cost_minor": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-self-worth",
+      "slug": "oracle-self-worth",
+      "name": "Oráculo · Autoestima & Valor",
+      "source": "manual_digital_cost_review",
+      "operational": {
+        "variable_cost_minor": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:digital:pdi-relacoes",
+      "slug": "pdi-relacoes",
+      "name": "PÁRA DE IGNORAR!",
+      "source": "manual_digital_cost_review",
+      "operational": {
+        "variable_cost_minor": null
+      },
+      "evidence_refs": []
+    }
+  ]
+}
