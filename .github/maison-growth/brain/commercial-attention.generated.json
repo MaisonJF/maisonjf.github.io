@@ -101,9 +101,10 @@
         }
       ],
       "operational_blockers": [
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "profitability_known": false,
       "ready_for_automatic_sale": false,
@@ -112,9 +113,10 @@
         "contextual_ocean_match",
         "low_price_barrier",
         "public_active_asset",
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "authority": {
         "public_write_authorized": false,
@@ -149,9 +151,10 @@
         }
       ],
       "operational_blockers": [
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "profitability_known": false,
       "ready_for_automatic_sale": false,
@@ -160,9 +163,10 @@
         "contextual_ocean_match",
         "low_price_barrier",
         "public_active_asset",
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "authority": {
         "public_write_authorized": false,
@@ -193,9 +197,10 @@
         }
       ],
       "operational_blockers": [
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "profitability_known": false,
       "ready_for_automatic_sale": false,
@@ -204,9 +209,10 @@
         "contextual_ocean_match",
         "low_price_barrier",
         "public_active_asset",
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "authority": {
         "public_write_authorized": false,
@@ -237,9 +243,10 @@
         }
       ],
       "operational_blockers": [
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "profitability_known": false,
       "ready_for_automatic_sale": false,
@@ -248,9 +255,10 @@
         "contextual_ocean_match",
         "low_price_barrier",
         "public_active_asset",
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "authority": {
         "public_write_authorized": false,
@@ -276,9 +284,10 @@
       ],
       "contextual_ocean_matches": [],
       "operational_blockers": [
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "profitability_known": false,
       "ready_for_automatic_sale": false,
@@ -286,9 +295,10 @@
         "direct_ocean_adjacency",
         "low_price_barrier",
         "public_active_asset",
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "authority": {
         "public_write_authorized": false,
