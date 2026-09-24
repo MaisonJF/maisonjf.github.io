@@ -179,3 +179,12 @@ jobs:
           CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
         run: python .github/maison-growth/runtime/verify_private_brain_health.py
+
+      - name: Verify deployed private Brain boundary
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        env:
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: python .github/maison-growth/runtime/verify_private_brain_boundary.py "$RUNTIME_STAGE"

@@ -76,6 +76,15 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
         self.assertLess(deploy, health)
         self.assertIn("verify_private_brain_health.py", self.source)
 
+    def test_live_apply_verifies_private_boundary_after_health(self):
+        health = self.source.index("- name: Verify deployed private Brain health")
+        boundary = self.source.index("- name: Verify deployed private Brain boundary")
+        self.assertLess(health, boundary)
+        block = self.source[boundary:boundary + 650]
+        self.assertIn('verify_private_brain_boundary.py "$RUNTIME_STAGE"', block)
+        self.assertIn("MAISON_BRAIN_PRIVATE_URL", block)
+        self.assertIn("MAISON_BRAIN_CONTROL_TOKEN", block)
+
     def test_live_steps_require_manual_dispatch_and_apply(self):
         condition = "if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}"
         for step in (
@@ -85,6 +94,7 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
             "Install private Worker secrets",
             "Deploy private surface",
             "Verify deployed private Brain health",
+            "Verify deployed private Brain boundary",
         ):
             start = self.source.index(f"- name: {step}")
             tail = self.source[start:start + 350]
