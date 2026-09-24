@@ -15,6 +15,7 @@ REGISTRY=ROOT/"commercial-assets.generated.json"
 TEMPLATE_SCHEMAS={
     "commercial_stocktake_template_v1",
     "commercial_service_capacity_template_v1",
+    "commercial_digital_operations_template_v1",
 }
 
 
@@ -89,14 +90,15 @@ def main() -> None:
     )
     parser.add_argument("--stocktake",type=Path)
     parser.add_argument("--services",type=Path)
+    parser.add_argument("--digital",type=Path)
     parser.add_argument("--observed-at",required=True)
     parser.add_argument("--evidence-ref",action="append",default=[])
     parser.add_argument("--output",type=Path,required=True)
     args=parser.parse_args()
 
-    inputs=[x for x in (args.stocktake,args.services) if x is not None]
+    inputs=[x for x in (args.stocktake,args.services,args.digital) if x is not None]
     if not inputs:
-        raise SystemExit("at least one of --stocktake or --services is required")
+        raise SystemExit("at least one of --stocktake, --services or --digital is required")
     if not _outside_repo(args.output):
         raise SystemExit("refusing to write a private commercial overlay inside the repository")
 
