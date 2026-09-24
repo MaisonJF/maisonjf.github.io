@@ -2,7 +2,7 @@
   "version": "2026-09-18",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-09-23T23:49:58+01:00",
+  "last_enriched_at": "2026-09-24T07:27:00+01:00",
   "candidates": [
     {
       "painLanguage": "Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
@@ -363,6 +363,31 @@
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T23:49:58+01:00",
       "lastSeenAt": "2026-09-23T23:49:58+01:00"
+    },
+    {
+      "painLanguage": "Mesmo quando existe tempo para parar, descansar pode trazer culpa, inquietação ou a sensação de estar a desperdiçar tempo. A pessoa pára por fora, mas por dentro continua a medir o próprio valor pelo que ainda devia estar a produzir.",
+      "territory": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+      "intent": "reconhecer quando descanso e lazer são tratados como algo que precisa de ser merecido, distinguindo uma pausa escolhida de culpa, ruminação e autojulgamento ligados à produtividade sem transformar a experiência em diagnóstico",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre permissão para parar e transição entre produtividade e descanso; Oráculo Eu & Padrões e Trabalho & Caminho, sem claims médicos ou promessa terapêutica",
+      "evidence": [
+        "Personality and Social Psychology Bulletin (2026; PMID 42500858): quatro estudos conceptualizam leisure guilt como culpa ou desconforto por passar tempo em lazer em vez de ser produtivo; no estudo de experiência diária, ocorreu em média em 14% das ocasiões de lazer e maior propensão associou-se a menor benefício psicológico percebido do lazer — https://pubmed.ncbi.nlm.nih.gov/42500858/",
+        "Frontiers in Psychology (2026): estudo de network analysis distingue rest intolerance de leisure guilt e descreve culpa, ansiedade, pensamento obsessivo e comparação durante o descanso, relacionando o fenómeno com pobreza de tempo percebida — https://doi.org/10.3389/fpsyg.2026.1872834",
+        "Psychiatric Quarterly (2026; open access): validação de rest intolerance caracteriza emoções negativas como vergonha e culpa durante períodos de descanso e examina a relação com distress emocional, sono e estratégias adaptativas — https://doi.org/10.1007/s11126-025-10176-0"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "culpa ao descansar",
+        "descanso que parece ter de ser merecido",
+        "valor pessoal e produtividade",
+        "parar sem conseguir desligar",
+        "tempo livre que parece desperdício",
+        "tarefas inacabadas durante a pausa",
+        "permitir-se não produzir"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-24T07:27:00+01:00",
+      "lastSeenAt": "2026-09-24T07:27:00+01:00"
     }
   ]
 }
