@@ -81,5 +81,12 @@ class CommercialFactCollectionPlanTests(unittest.TestCase):
         self.assertEqual(plan["summary"]["assets_already_past_collection_gate"],1)
 
 
+    def test_digital_offer_collects_only_marginal_cost(self):
+        plan=build_plan()
+        task=next(x for x in plan["tasks"] if x["asset_ref"]=="catalog:digital:oracle")
+        self.assertEqual(task["next_action"],"verify_variable_cost")
+        self.assertEqual([x["field"] for x in task["fields"]],["variable_cost_minor"])
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
