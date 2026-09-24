@@ -17,6 +17,17 @@ The Osiris upstream source is not vendored. The image clones a pinned upstream c
 - Osiris worker is behind the optional `worker` profile.
 - No public port/TLS reverse proxy is configured here. If A13 later mirrors from Cloudflare, expose only the bridge through an authenticated HTTPS private ingress; never expose Postgres/Redis.
 
+## Activation doctor — one safe first command
+
+To get one names-only readiness snapshot before touching Cloudflare or starting containers:
+
+```bash
+python .github/maison-growth/runtime/activation_doctor.py \
+  --env-file .env.observe
+```
+
+The doctor combines credential presence with the no-start host checks, prints no secret values, starts zero services and performs zero remote changes. Its `recommended_next_step` deliberately stops at the next safe gate: fix the local host, configure read-only Cloudflare credentials, run the read-only Cloudflare inspection, or run the private Brain read preflight.
+
 ## Host preflight — no services started
 
 Before building or starting the private persistent stack, validate the local host:

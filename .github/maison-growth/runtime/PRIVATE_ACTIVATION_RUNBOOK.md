@@ -16,6 +16,17 @@ Throughout this runbook:
 - experiment execution = OFF;
 - A8, when used later, stops at `draft`.
 
+## First command: readiness doctor
+
+After creating `.env.observe`, run the combined no-start/no-write doctor before any Cloudflare action or container start:
+
+```bash
+python .github/maison-growth/runtime/activation_doctor.py \
+  --env-file .env.observe
+```
+
+It reports names-only credential readiness plus host/Compose readiness and points to exactly one next gate. It never deploys, changes D1, starts services, prints secret values or grants execution authority.
+
 ## 0. Local/private dependencies
 
 Copy the example environment and replace placeholders locally. Do not commit it.
