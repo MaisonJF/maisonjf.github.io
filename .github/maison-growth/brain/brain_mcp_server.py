@@ -77,6 +77,10 @@ def _commercial_bundles() -> dict[str,Any]:
     return json.loads((ROOT/"commercial-bundles.generated.json").read_text(encoding="utf-8"))
 
 
+def _digital_experience_coverage() -> dict[str,Any]:
+    return json.loads((ROOT/"digital-experience-coverage.generated.json").read_text(encoding="utf-8"))
+
+
 def _semantic_search_sync(
     query: str,
     *,
@@ -191,7 +195,7 @@ def maison_commercial_attention(
     """Read the internal Ocean-informed commercial attention ranking; never a profit forecast."""
     if not 1 <= limit <= 30:
         raise ValueError("limit_must_be_1_30")
-    allowed={None,"physical_product","service","b2b_service"}
+    allowed={None,"physical_product","digital_product","service","b2b_service"}
     if asset_type not in allowed:
         raise ValueError("unsupported_asset_type")
     payload=_commercial_attention()
@@ -204,6 +208,32 @@ def maison_commercial_attention(
         "execution_authority":False,
         "summary":payload.get("summary",{}),
         "assets":rows[:limit],
+    }
+
+
+@mcp.tool(annotations=READ_ONLY)
+def maison_digital_experience_coverage(
+    territory: str | None=None,
+    limit: int=20,
+) -> dict[str,Any]:
+    """Read how current Oceans feed Oráculo and PÁRA DE IGNORAR! without exposing paid bodies."""
+    if not 1 <= limit <= 100:
+        raise ValueError("limit_must_be_1_100")
+    payload=_digital_experience_coverage()
+    rows=payload.get("oceans",[])
+    if territory is not None:
+        key=territory.strip()
+        if not key:
+            raise ValueError("territory_required")
+        rows=[row for row in rows if row.get("territory")==key]
+    return {
+        "mode":"read_only",
+        "paid_bodies_exposed":False,
+        "automatic_activation_authorized":False,
+        "execution_authority":False,
+        "summary":payload.get("summary",{}),
+        "products":payload.get("products",{}),
+        "oceans":rows[:limit],
     }
 
 
