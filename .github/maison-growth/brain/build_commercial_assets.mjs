@@ -4,6 +4,7 @@ import vm from 'node:vm';
 
 const PRODUCTS_URL=new URL('../../../data/products.js',import.meta.url);
 const SERVICES_URL=new URL('../../../data/services.js',import.meta.url);
+const OFFER_BRAIN_URL=new URL('../../../functions/_lib/offer-brain.js',import.meta.url);
 const OUTPUT_URL=new URL('commercial-assets.generated.json',import.meta.url);
 
 function loadWindow(url){
@@ -121,6 +122,27 @@ const products=loadWindow(PRODUCTS_URL);
 const services=loadWindow(SERVICES_URL);
 const assets=[];
 
+function loadDigitalOffers(url){
+  const source=fs.readFileSync(url,'utf8');
+  const marker='export const MAISON_OFFER_CATALOGUE=';
+  const start=source.indexOf(marker);
+  if(start<0)throw new Error('offer_catalogue_not_found');
+  const arrayStart=source.indexOf('[',start+marker.length);
+  const arrayEnd=source.indexOf('];',arrayStart);
+  if(arrayStart<0||arrayEnd<0)throw new Error('offer_catalogue_parse_failed');
+  return vm.runInNewContext(source.slice(arrayStart,arrayEnd+1),Object.create(null),{filename:url.pathname});
+}
+
+function digitalOperationalUnknowns(){
+  return {
+    capacity_units_per_period:null,
+    capacity_period:null,
+    human_effort_minutes:null,
+    variable_cost_minor:null,
+    delivery_lead_days:null
+  };
+}
+
 for(const p of products.MAISON_PRODUCTS||[]){
   assets.push({
     asset_ref:`catalog:product:${p.slug}`,
@@ -201,11 +223,45 @@ for(const s of services.MAISON_SERVICES||[]){
   assets.push(row);
 }
 
+
+for(const o of loadDigitalOffers(OFFER_BRAIN_URL)){
+  if(!['oracle','pdi'].includes(o.family))continue;
+  assets.push({
+    asset_ref:`catalog:digital:${o.id}`,
+    source_kind:'offer_brain_digital_catalogue',
+    asset_type:'digital_product',
+    slug:o.id,
+    sku:null,
+    name:o.title,
+    size:null,
+    category:o.family==='oracle'?'Oráculo':'PÁRA DE IGNORAR!',
+    public:o.status!=='hidden',
+    lifecycle_status:'active',
+    price_minor:Number.isInteger(o.amount)?o.amount:null,
+    price_label:o.priceLabel||null,
+    currency:'EUR',
+    catalogue_availability:null,
+    condition:null,
+    description:o.description||'',
+    search_context:[
+      o.family,o.format,o.title,o.description,
+      ...(Array.isArray(o.axes)?o.axes:[]),
+      ...(Array.isArray(o.territories)?o.territories:[]),
+      ...(Array.isArray(o.routes)?o.routes:[])
+    ].filter(Boolean),
+    operational:digitalOperationalUnknowns(),
+    price_kind:Number.isInteger(o.amount)?'fixed':'unknown',
+    minimum_price_minor:Number.isInteger(o.amount)?o.amount:null,
+    price_options:[],
+    price_source:Number.isInteger(o.amount)?'offer_brain':'unknown'
+  });
+}
+
 assets.sort((a,b)=>a.asset_ref.localeCompare(b.asset_ref));
 
 const payload={
   schema_version:'commercial_assets_v1',
-  sources:['data/products.js','data/services.js'],
+  sources:['data/products.js','data/services.js','functions/_lib/offer-brain.js'],
   contract:{
     derived_projection:true,
     canonical_catalogues_unchanged:true,
@@ -221,6 +277,7 @@ const payload={
     total:assets.length,
     active_physical_products:assets.filter(x=>x.asset_type==='physical_product'&&x.lifecycle_status==='active').length,
     future_products:assets.filter(x=>x.lifecycle_status==='future').length,
+    digital_products:assets.filter(x=>x.asset_type==='digital_product').length,
     services:assets.filter(x=>x.asset_type==='service').length,
     b2b_services:assets.filter(x=>x.asset_type==='b2b_service').length,
     fixed_price_services:assets.filter(x=>['service','b2b_service'].includes(x.asset_type)&&x.price_kind==='fixed').length,
