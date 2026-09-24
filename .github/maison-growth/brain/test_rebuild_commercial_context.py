@@ -32,7 +32,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
             "build_vpc_ocean_signals.mjs",
             "build_editorial_queue.mjs",
             "build_commercial_assets.mjs",
-            "build_digital_experience_coverage.mjs",
+            "digital_experience_coverage.py",
             "build_commercial_bundles.py",
             "build_commercial_attention.py",
         ):
