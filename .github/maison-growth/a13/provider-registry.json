@@ -4,6 +4,34 @@
   "activation_rule": "explicit_allowlist_after_current_api_terms_security_cost_review",
   "providers": [
     {
+      "provider_id": "openrouter",
+      "source_class": [
+        "ai_api"
+      ],
+      "runtime_enabled": false,
+      "private_memory_access": false,
+      "requires_secret": true
+    },
+    {
+      "provider_id": "osiris_gateway",
+      "source_class": [
+        "ai_api"
+      ],
+      "runtime_enabled": false,
+      "private_memory_access": false,
+      "requires_secret": true
+    },
+    {
+      "provider_id": "cloudflare_workers_ai",
+      "source_class": [
+        "ai_api"
+      ],
+      "runtime_enabled": false,
+      "private_memory_access": false,
+      "requires_secret": false,
+      "requires_binding": true
+    },
+    {
       "provider_id": "openai",
       "source_class": [
         "ai_api"
