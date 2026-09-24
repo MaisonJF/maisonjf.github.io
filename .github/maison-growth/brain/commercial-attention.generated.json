@@ -21,6 +21,68 @@
   },
   "assets": [
     {
+      "asset_ref": "catalog:product:nevoa",
+      "name": "Névoa de Ambiente",
+      "asset_type": "physical_product",
+      "slug": "nevoa",
+      "price_minor": 700,
+      "price_label": "7",
+      "currency": "EUR",
+      "attention_score": 45,
+      "direct_ocean_mentions": 2,
+      "direct_ocean_territories": [
+        "autonomia-condicionada-pelo-medo-da-reaccao",
+        "presenca-que-ampara-sem-tentar-resolver"
+      ],
+      "contextual_ocean_matches": [
+        {
+          "territory": "adiar-o-sono-para-recuperar-autonomia",
+          "score": 0.1042
+        },
+        {
+          "territory": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+          "score": 0.0891
+        },
+        {
+          "territory": "autonomia-condicionada-pelo-medo-da-reaccao",
+          "score": 0.0667
+        },
+        {
+          "territory": "telepressao-e-disponibilidade-permanente",
+          "score": 0.0625
+        },
+        {
+          "territory": "presenca-que-ampara-sem-tentar-resolver",
+          "score": 0.0603
+        }
+      ],
+      "operational_blockers": [
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
+      ],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "direct_ocean_adjacency",
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset",
+        "unit_material_cost_unknown",
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 1
+    },
+    {
       "asset_ref": "catalog:service:companhia",
       "name": "Presença",
       "asset_type": "service",
@@ -66,62 +128,6 @@
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 1
-    },
-    {
-      "asset_ref": "catalog:product:nevoa",
-      "name": "Névoa de Ambiente",
-      "asset_type": "physical_product",
-      "slug": "nevoa",
-      "price_minor": 700,
-      "price_label": "7",
-      "currency": "EUR",
-      "attention_score": 42,
-      "direct_ocean_mentions": 2,
-      "direct_ocean_territories": [
-        "autonomia-condicionada-pelo-medo-da-reaccao",
-        "presenca-que-ampara-sem-tentar-resolver"
-      ],
-      "contextual_ocean_matches": [
-        {
-          "territory": "adiar-o-sono-para-recuperar-autonomia",
-          "score": 0.1042
-        },
-        {
-          "territory": "autonomia-condicionada-pelo-medo-da-reaccao",
-          "score": 0.0667
-        },
-        {
-          "territory": "telepressao-e-disponibilidade-permanente",
-          "score": 0.0625
-        },
-        {
-          "territory": "presenca-que-ampara-sem-tentar-resolver",
-          "score": 0.0603
-        }
-      ],
-      "operational_blockers": [
-        "inventory_unknown",
-        "unit_material_cost_unknown",
-        "packaging_cost_unknown"
-      ],
-      "profitability_known": false,
-      "ready_for_automatic_sale": false,
-      "reason_codes": [
-        "direct_ocean_adjacency",
-        "contextual_ocean_match",
-        "low_price_barrier",
-        "public_active_asset",
-        "inventory_unknown",
-        "unit_material_cost_unknown",
-        "packaging_cost_unknown"
-      ],
-      "authority": {
-        "public_write_authorized": false,
-        "discount_authorized": false,
-        "stock_promise_authorized": false,
-        "automatic_checkout_authorized": false
-      },
       "attention_rank": 2
     },
     {
@@ -132,13 +138,17 @@
       "price_minor": 500,
       "price_label": "5",
       "currency": "EUR",
-      "attention_score": 36,
+      "attention_score": 39,
       "direct_ocean_mentions": 2,
       "direct_ocean_territories": [
         "autonomia-condicionada-pelo-medo-da-reaccao",
         "presenca-que-ampara-sem-tentar-resolver"
       ],
       "contextual_ocean_matches": [
+        {
+          "territory": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+          "score": 0.0707
+        },
         {
           "territory": "doomscrolling-para-tentar-reduzir-incerteza",
           "score": 0.0673
@@ -149,9 +159,10 @@
         }
       ],
       "operational_blockers": [
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "profitability_known": false,
       "ready_for_automatic_sale": false,
@@ -160,9 +171,10 @@
         "contextual_ocean_match",
         "low_price_barrier",
         "public_active_asset",
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "authority": {
         "public_write_authorized": false,
@@ -193,9 +205,10 @@
         }
       ],
       "operational_blockers": [
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "profitability_known": false,
       "ready_for_automatic_sale": false,
@@ -204,9 +217,10 @@
         "contextual_ocean_match",
         "low_price_barrier",
         "public_active_asset",
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "authority": {
         "public_write_authorized": false,
@@ -237,9 +251,10 @@
         }
       ],
       "operational_blockers": [
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "profitability_known": false,
       "ready_for_automatic_sale": false,
@@ -248,9 +263,10 @@
         "contextual_ocean_match",
         "low_price_barrier",
         "public_active_asset",
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "authority": {
         "public_write_authorized": false,
@@ -276,9 +292,10 @@
       ],
       "contextual_ocean_matches": [],
       "operational_blockers": [
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "profitability_known": false,
       "ready_for_automatic_sale": false,
@@ -286,9 +303,10 @@
         "direct_ocean_adjacency",
         "low_price_barrier",
         "public_active_asset",
-        "inventory_unknown",
         "unit_material_cost_unknown",
-        "packaging_cost_unknown"
+        "packaging_cost_unknown",
+        "production_time_unknown",
+        "replenishment_capacity_unknown"
       ],
       "authority": {
         "public_write_authorized": false,
@@ -421,10 +439,14 @@
       "price_minor": null,
       "price_label": null,
       "currency": "EUR",
-      "attention_score": 11,
+      "attention_score": 14,
       "direct_ocean_mentions": 0,
       "direct_ocean_territories": [],
       "contextual_ocean_matches": [
+        {
+          "territory": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+          "score": 0.0816
+        },
         {
           "territory": "adiar-o-sono-para-recuperar-autonomia",
           "score": 0.0737
@@ -461,17 +483,22 @@
       "attention_rank": 9
     },
     {
-      "asset_ref": "catalog:service:b2b",
-      "name": "Maison para profissionais",
-      "asset_type": "b2b_service",
-      "slug": "b2b",
+      "asset_ref": "catalog:service:mentoria",
+      "name": "Mentoria",
+      "asset_type": "service",
+      "slug": "mentoria",
       "price_minor": null,
-      "price_label": null,
+      "price_label": "a partir de 125 €",
       "currency": "EUR",
-      "attention_score": 2,
+      "attention_score": 5,
       "direct_ocean_mentions": 0,
       "direct_ocean_territories": [],
-      "contextual_ocean_matches": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+          "score": 0.0606
+        }
+      ],
       "operational_blockers": [
         "capacity_unknown",
         "variable_cost_unknown",
@@ -480,6 +507,7 @@
       "profitability_known": false,
       "ready_for_automatic_sale": false,
       "reason_codes": [
+        "contextual_ocean_match",
         "public_active_asset",
         "capacity_unknown",
         "variable_cost_unknown",
@@ -494,12 +522,12 @@
       "attention_rank": 10
     },
     {
-      "asset_ref": "catalog:service:mentoria",
-      "name": "Mentoria",
-      "asset_type": "service",
-      "slug": "mentoria",
+      "asset_ref": "catalog:service:b2b",
+      "name": "Maison para profissionais",
+      "asset_type": "b2b_service",
+      "slug": "b2b",
       "price_minor": null,
-      "price_label": "a partir de 125 €",
+      "price_label": null,
       "currency": "EUR",
       "attention_score": 2,
       "direct_ocean_mentions": 0,

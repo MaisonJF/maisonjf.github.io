@@ -64,6 +64,8 @@ class CommercialOperatorReportTests(unittest.TestCase):
                     "reserved_quantity":1,
                     "unit_material_cost_minor":180,
                     "packaging_cost_minor":70,
+                    "production_minutes_per_unit":5,
+                    "batch_capacity_units":30,
                 },
                 "evidence_refs":["manual:ops:2026-09-24"],
             }],

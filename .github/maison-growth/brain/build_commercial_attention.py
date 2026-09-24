@@ -68,12 +68,14 @@ def _operational_blockers(asset: Mapping[str,Any]) -> list[str]:
         operational={}
     if asset.get("asset_type")=="physical_product":
         blockers=[]
-        if operational.get("inventory_quantity") is None:
-            blockers.append("inventory_unknown")
         if operational.get("unit_material_cost_minor") is None:
             blockers.append("unit_material_cost_unknown")
         if operational.get("packaging_cost_minor") is None:
             blockers.append("packaging_cost_unknown")
+        if operational.get("production_minutes_per_unit") is None:
+            blockers.append("production_time_unknown")
+        if operational.get("batch_capacity_units") is None:
+            blockers.append("replenishment_capacity_unknown")
         return blockers
     blockers=[]
     if operational.get("capacity_units_per_period") is None:
@@ -231,7 +233,11 @@ def main() -> None:
     )
     rendered=json.dumps(payload,ensure_ascii=False,indent=2)+"\n"
     if args.check:
-        if OUTPUT.read_text(encoding="utf-8")!=rendered:
+        try:
+            current=json.loads(OUTPUT.read_text(encoding="utf-8"))
+        except (OSError,json.JSONDecodeError) as exc:
+            raise SystemExit("commercial-attention.generated.json is missing or invalid; run build_commercial_attention.py") from exc
+        if current!=payload:
             raise SystemExit("commercial-attention.generated.json is stale; run build_commercial_attention.py")
         print(f"Commercial attention projection: OK · {payload['summary']['ranked_assets']} assets")
         return

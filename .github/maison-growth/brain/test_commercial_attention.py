@@ -55,7 +55,8 @@ class CommercialAttentionTests(unittest.TestCase):
         ):
             row=by_ref[ref]
             self.assertGreater(row["attention_score"],0)
-            self.assertIn("inventory_unknown",row["operational_blockers"])
+            self.assertNotIn("inventory_unknown",row["operational_blockers"])
+            self.assertIn("replenishment_capacity_unknown",row["operational_blockers"])
 
         self.assertGreater(
             by_ref["catalog:product:nevoa"]["attention_score"],

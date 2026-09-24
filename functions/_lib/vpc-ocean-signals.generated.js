@@ -197,6 +197,20 @@ export const VPC_OCEAN_SIGNALS=[
       "companhia em momentos difíceis",
       "estar com alguém sem ter de salvar tudo"
     ]
+  },
+  {
+    "id": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+    "painLanguage": "Mesmo quando existe tempo para parar, descansar pode trazer culpa, inquietação ou a sensação de estar a desperdiçar tempo. A pessoa pára por fora, mas por dentro continua a medir o próprio valor pelo que ainda devia estar a produzir.",
+    "intent": "reconhecer quando descanso e lazer são tratados como algo que precisa de ser merecido, distinguindo uma pausa escolhida de culpa, ruminação e autojulgamento ligados à produtividade sem transformar a experiência em diagnóstico",
+    "themes": [
+      "culpa ao descansar",
+      "descanso que parece ter de ser merecido",
+      "valor pessoal e produtividade",
+      "parar sem conseguir desligar",
+      "tempo livre que parece desperdício",
+      "tarefas inacabadas durante a pausa",
+      "permitir-se não produzir"
+    ]
   }
 ];
 export const VPC_OCEAN_SIGNAL_VERSION="2026-09-18";

@@ -173,15 +173,14 @@ def _manual_requirements(
     elif plan_kind=="manual_physical_pilot":
         steps.extend((
             "Seleccionar o produto existente ou combinação de stock mais próxima da oportunidade.",
-            "Confirmar quantidade real, matérias-primas, embalagem, custo unitário e capacidade antes de fabricar.",
+            "Confirmar matérias-primas, embalagem, custo unitário e capacidade de reposição antes de fabricar; stock acabado é apenas um snapshot temporal.",
             "Escolher micro-lote, amostra, conceito ou pré-encomenda conforme o risco operacional conhecido.",
             "Preparar apresentação e oferta do piloto sem alterar catálogo/preço público automaticamente.",
             "Registar unidades produzidas, vendidas, margem, devoluções e procura repetida.",
         ))
         success=("venda_paga","margem_unitaria_observada_positiva","procura_repetida","baixo_desperdicio")
-        stop=("stock_ou_material_insuficiente","custo_unitario_desconhecido","margem_negativa","risco_de_validade_ou_desperdicio")
+        stop=("materia_prima_ou_capacidade_insuficiente","custo_unitario_desconhecido","margem_negativa","risco_de_validade_ou_desperdicio")
         physical_required={
-            "inventory_quantity",
             "unit_material_cost_minor",
             "packaging_cost_minor",
             "production_minutes_per_unit",

@@ -12,15 +12,11 @@ from commercial_readiness_board import build_board
 ROOT=Path(__file__).resolve().parent
 
 ACTION_FIELDS={
-    "verify_stock":[
-        ("inventory_quantity","How many finished units physically exist now?"),
-        ("reserved_quantity","How many of those units are already reserved?"),
-    ],
     "verify_unit_cost":[
         ("unit_material_cost_minor","What is the material cost for one unit, in euro cents?"),
         ("packaging_cost_minor","What is the packaging cost for one unit, in euro cents?"),
     ],
-    "verify_production_capacity":[
+    "verify_replenishment_capacity":[
         ("production_minutes_per_unit","How many production minutes does one unit require?"),
         ("batch_capacity_units","How many units can one practical batch produce?"),
     ],
@@ -69,6 +65,8 @@ def build_plan(*, overlay_path: Path | None=None) -> dict[str,Any]:
                 "unknown_may_remain_null":True,
                 "evidence_required_for_known_value":True,
                 "catalogue_availability_is_not_counted_inventory":True,
+                "current_stock_snapshot_is_optional_and_volatile":True,
+                "replenishment_capacity_is_structural":True,
             },
         })
     return {

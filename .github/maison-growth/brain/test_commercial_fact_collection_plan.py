@@ -22,12 +22,12 @@ class CommercialFactCollectionPlanTests(unittest.TestCase):
                 self.assertIsNone(field["value"])
                 self.assertIsNone(field["evidence_ref"])
 
-    def test_top_physical_asset_asks_for_counted_stock_not_catalogue_availability(self):
+    def test_top_physical_asset_does_not_require_volatile_stock_snapshot(self):
         plan=build_plan()
         task=next(x for x in plan["tasks"] if x["asset_ref"]=="catalog:product:nevoa")
-        self.assertEqual(task["next_action"],"verify_stock")
-        self.assertEqual([x["field"] for x in task["fields"]],["inventory_quantity","reserved_quantity"])
-        self.assertTrue(task["rules"]["catalogue_availability_is_not_counted_inventory"])
+        self.assertEqual(task["next_action"],"verify_unit_cost")
+        self.assertEqual([x["field"] for x in task["fields"]],["unit_material_cost_minor","packaging_cost_minor"])
+        self.assertTrue(task["rules"]["current_stock_snapshot_is_optional_and_volatile"])
 
     def test_service_without_concrete_price_asks_human_to_select_price(self):
         plan=build_plan()
@@ -35,17 +35,17 @@ class CommercialFactCollectionPlanTests(unittest.TestCase):
         self.assertEqual(task["next_action"],"select_concrete_price")
         self.assertEqual([x["field"] for x in task["fields"]],["selected_price_minor"])
 
-    def test_overlay_advances_one_asset_to_next_missing_fact_group(self):
+    def test_overlay_advances_one_asset_to_replenishment_after_cost(self):
         overlay={
             "schema_version":"commercial_asset_overlay_v1",
             "observed_at":"2026-09-24T07:00:00+01:00",
             "assets":[{
                 "asset_ref":"catalog:product:nevoa",
                 "operational":{
-                    "inventory_quantity":8,
-                    "reserved_quantity":1,
+                    "unit_material_cost_minor":150,
+                    "packaging_cost_minor":50,
                 },
-                "evidence_refs":["manual:stocktake:test"],
+                "evidence_refs":["manual:cost-sheet:test"],
             }],
         }
         with tempfile.TemporaryDirectory() as tmp:
@@ -53,8 +53,8 @@ class CommercialFactCollectionPlanTests(unittest.TestCase):
             path.write_text(json.dumps(overlay),encoding="utf-8")
             plan=build_plan(overlay_path=path)
         task=next(x for x in plan["tasks"] if x["asset_ref"]=="catalog:product:nevoa")
-        self.assertEqual(task["next_action"],"verify_unit_cost")
-        self.assertEqual([x["field"] for x in task["fields"]],["unit_material_cost_minor","packaging_cost_minor"])
+        self.assertEqual(task["next_action"],"verify_replenishment_capacity")
+        self.assertEqual([x["field"] for x in task["fields"]],["production_minutes_per_unit","batch_capacity_units"])
 
     def test_complete_asset_disappears_from_collection_tasks(self):
         overlay={
