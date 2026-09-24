@@ -32,7 +32,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Private credential readiness | READY names-only report distinguishes read-only inspection credentials from full first-stage deploy credentials | CHECKED: first-stage secrets currently missing |
 | Private custom-domain route | READY exact HTTPS Custom Domain from `MAISON_BRAIN_PRIVATE_URL`; workers.dev/previews/cron/queue/AI stripped | BLOCKED: private URL + Cloudflare credentials not configured |
 | Cloudflare read-only inspect | READY manual workflow; optional dedicated read token; D1 reachability + Worker-presence probe + 0001→0016 inspector; no deploy/write commands | NOT RUN |
-| Private deploy verification | READY read-only remote D1 schema gate + authenticated Brain health probe | NOT RUN |
+| Private deploy verification | READY remote D1 schema gate + boundary verifier: unauthenticated denial, authenticated read-only health, false action authority and hidden proposal/review write surfaces in private-read stage | NOT RUN LIVE |
 | Private commercial preview | READY manual Brain-Control-only workflow; materialization/memory backends OFF; counts/authority output only | NOT RUN |
 | Pre-Brain | READY analysis core | NOT PROVISIONED |
 | DuckDB | READY optional analytical adapter | PACKAGE/HOST NOT PROVISIONED |
@@ -46,17 +46,17 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Oceanos curated context | READY read-only editorial metadata adapter | repository context available |
 | Commercial Asset Context | READY generated catalogue registry for physical products, services and 2 canonical digital products + optional evidence-backed private overlay | CATALOGUE READY / PRIVATE OPERATIONAL OVERLAY NOT LOADED |
 | Ocean → commercial routing | READY Ocean pain/intent/adjacency metadata enriches catalogue lookup as supporting context only | CODE-READY |
-| Physical bundle hypotheses | READY 4 internal drafts from current catalogue subtotals; no bundle price/discount/publication authority | STOCK + MARGIN CHECKS REQUIRED |
-| Commercial attention ranking | READY Ocean-informed read-only ranking across active public physical, service and digital products; explicitly not a profit score | ALL ASSETS BLOCKED ON OPERATIONAL FACTS |
+| Physical bundle hypotheses | READY 4 internal drafts from current catalogue subtotals; no automatic price/publication authority and no discount mechanism | COST + REPLENISHMENT + HUMAN PRICE FACTS REQUIRED |
+| Commercial attention ranking | READY Ocean-informed read-only ranking across active public physical, service and digital products; explicitly not a profit score | ATTENTION AVAILABLE; ECONOMICS REMAIN UNKNOWN UNTIL EVIDENCE-BACKED FACTS ARRIVE |
 | Commercial attention MCP | READY read-only attention + digital-experience coverage + bundle-hypothesis tools | OPTIONAL PROFILE / NOT STARTED |
-| Private stocktake preparation | READY operator template covers all 5 active public physical products; contains no private values | AWAITING MANUAL COUNTS/COSTS |
+| Physical operations-facts preparation | READY replenishment-first operator template covers all 5 active public physical products; unit cost + replenishment are structural, finished stock is optional/volatile; legacy stocktake input remains compatible | AWAITING PRIVATE COST/REPLENISHMENT FACTS |
 | Service capacity preparation | READY operator template covers all 7 active public service/B2B entries; contains no private values | AWAITING MANUAL CAPACITY/COST FACTS |
 | Digital operations preparation | READY evidence-backed template covers Oráculo + PÁRA DE IGNORAR! per-sale effort/variable cost/delivery lead; zero is never assumed | AWAITING MANUAL DELIVERY/COST FACTS |
 | Ocean → Oráculo/PDI feed coverage | READY deterministic internal bridge: 18/18 Oceans feed both products; 666 PDI stage slots + 126 Oracle role slots; no paid bodies in Git | CODE-READY / 0 FEED GAPS |
 | Structured service pricing | READY fixed vs multi-format vs starting-from vs quote pricing preserved from canonical catalogue; human selection required where appropriate | CODE-READY |
 | Fact-based commercial economics | READY private evaluator for physical/service/digital unit economics + human-priced bundle evaluation | AWAITING PRIVATE OPERATIONAL OVERLAY |
-| Commercial operator report | READY combines attention, observed operational facts and bundle blockers without granting execution authority | AWAITING PRIVATE OPERATIONAL OVERLAY |
-| Offline commercial readiness board | READY Ocean context + catalogue pricing + operational/economic blockers + explicit next human action; zero external authority | AVAILABLE NOW |
+| Commercial operator report | READY combines attention, evidence-backed operational facts, separate economics dimensions and bundle blockers without granting execution authority | AWAITING PRIVATE OPERATIONAL OVERLAY |
+| Offline commercial readiness board | READY Ocean context + catalogue pricing + operational/economic blockers + explicit next human action; zero external authority | AVAILABLE NOW |\n| Commercial decision-support matrix | READY human-only matrix preserves attention order while keeping readiness/economics separate; no combined score, profit ranking or recommended winner; private values opt-in only | AVAILABLE NOW |
 | Progressive commercial fact plan | READY zero-private-data worksheet asks only for each asset's next missing fact group and advances as evidence arrives | AVAILABLE NOW |
 | Maison Semantic Memory | READY pgvector backend + stable interface + manual D1→pgvector sync | NOT STARTED; pgvector first, Qdrant deferred experiment |
 | Scout | READY | analysis only |
@@ -70,7 +70,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Offline commercial golden path | READY canonical evidence → Brain → A14 review preview → proposal-only write → A12 inbox; authority guards asserted | CI-VERIFIED |
 | Human review decision | READY A12.2 planning-only append-only decision API | DISABLED |
 | Approved validation planning | READY A14.3 behaviour-matched manual/B2B/physical/service/CTA plans | DISABLED / PREVIEW-FIRST |
-| Manual pilot prerequisites | READY plan-kind reason codes require stock/cost/price or capacity/effort/quote/consent facts before human execution | HUMAN-GATED |
+| Manual pilot prerequisites | READY plan-kind reason codes require evidence-backed cost/replenishment or capacity/effort/quote/consent facts before human execution; finished stock count is not a structural physical readiness gate | HUMAN-GATED |
 | Manual pilot dossiers | READY read-only operator dossiers + safe identifier-free summary + evidence-backed private pilot context; physical/service readiness still requires one complete real candidate | AVAILABLE AFTER PRIVATE READ + APPROVED PLANS; PRIVATE INPUTS NOT LOADED |
 | A8 CTA draft planning | READY explicit private CTA context + hard-gated A7 decision → A8 draft | DISABLED / DRAFT ONLY |
 | A12 governance/HITL | READY A12.2 + append-only commercial review decisions | simulation / human-gated / execution OFF |

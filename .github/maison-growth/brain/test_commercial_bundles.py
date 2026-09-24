@@ -33,6 +33,12 @@ class CommercialBundleTests(unittest.TestCase):
             self.assertFalse(bundle["authority"]["automatic_checkout_authorized"])
             self.assertTrue(bundle["authority"]["human_approval_required"])
 
+    def test_bundle_contract_has_no_discount_mechanism(self):
+        self.assertNotIn("automatic_discount",self.source["contract"])
+        self.assertNotIn("automatic_discount",self.payload["contract"])
+        generated=json.loads((ROOT/"commercial-bundles.generated.json").read_text(encoding="utf-8"))
+        self.assertNotIn("automatic_discount",generated["contract"])
+
     def test_catalogue_subtotals_are_derived_not_offer_prices(self):
         subtotals={x["bundle_id"]:x["catalogue_subtotal_minor"] for x in self.payload["bundles"]}
         self.assertEqual(subtotals,{
