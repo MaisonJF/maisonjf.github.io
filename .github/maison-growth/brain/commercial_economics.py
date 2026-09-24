@@ -203,6 +203,15 @@ def evaluate_bundle(
 
     stock_known=all(part["available_units"] is not None for part in parts)
     available_bundle_units=min(part["available_units"] for part in parts) if stock_known else None
+    replenishment_known=all(part["replenishment_capacity_known"] for part in parts)
+    replenishment_batch_units=(
+        min(part["batch_capacity_units"] for part in parts)
+        if replenishment_known else None
+    )
+    production_minutes_per_bundle=(
+        sum(part["production_minutes_per_unit"] for part in parts)
+        if replenishment_known else None
+    )
     costs_known=all(part["unit_cost_minor"] is not None for part in parts)
     combined_cost=sum(part["unit_cost_minor"] for part in parts) if costs_known else None
     subtotal=bundle.get("catalogue_subtotal_minor")
@@ -218,14 +227,17 @@ def evaluate_bundle(
         else None
     )
     blockers=[]
-    if available_bundle_units is None:
-        blockers.append("bundle_stock_incomplete")
-    elif available_bundle_units <= 0:
-        blockers.append("bundle_out_of_stock")
+    if not replenishment_known:
+        blockers.append("bundle_replenishment_capacity_incomplete")
     if combined_cost is None:
         blockers.append("bundle_cost_incomplete")
     if proposed_price_minor is None:
         blockers.append("human_price_not_supplied")
+    signals=[]
+    if not stock_known:
+        signals.append("bundle_current_stock_snapshot_unknown")
+    elif available_bundle_units <= 0:
+        signals.append("bundle_no_units_available_at_observation")
 
     return {
         "bundle_id":str(bundle.get("bundle_id") or ""),
@@ -233,6 +245,11 @@ def evaluate_bundle(
         "asset_refs":[str(x) for x in refs],
         "catalogue_subtotal_minor":subtotal,
         "available_bundle_units":available_bundle_units,
+        "stock_snapshot_known":stock_known,
+        "stock_snapshot_is_readiness_gate":False,
+        "replenishment_capacity_known":replenishment_known,
+        "replenishment_batch_units":replenishment_batch_units,
+        "production_minutes_per_bundle":production_minutes_per_bundle,
         "combined_unit_cost_minor":combined_cost,
         "proposed_price_minor":proposed_price_minor,
         "difference_from_catalogue_subtotal_minor":(
@@ -244,6 +261,7 @@ def evaluate_bundle(
         "contribution_margin_bps":_margin_bps(proposed_price_minor,contribution),
         "manual_validation_ready":not blockers,
         "blockers":blockers,
+        "signals":signals,
         "authority":{
             "bundle_price_selected_by_system":False,
             "discount_authorized":False,
