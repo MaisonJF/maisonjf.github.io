@@ -275,5 +275,36 @@ class CommercialEconomicsTests(unittest.TestCase):
             evaluate_bundle(bundle=bundle,context=ctx,proposed_price_minor=0)
 
 
+    def test_digital_product_never_guesses_marginal_cost(self):
+        ctx=CommercialAssetContext(self.registry)
+        unknown=evaluate_asset(ctx,"catalog:digital:oracle")
+        self.assertEqual(unknown["price_minor"],200)
+        self.assertIn("variable_cost_unknown",unknown["blockers"])
+        self.assertFalse(unknown["unit_economics_known"])
+        self.assertFalse(unknown["manual_validation_ready"])
+        self.assertFalse(any(unknown["authority"].values()))
+
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T08:40:00+01:00",
+            "assets":[{
+                "asset_ref":"catalog:digital:oracle",
+                "source":"manual_digital_cost_review",
+                "operational":{"variable_cost_minor":35},
+                "evidence_refs":["manual:digital-cost:test"],
+            }],
+        }
+        known=evaluate_asset(
+            CommercialAssetContext(self.registry,overlay=overlay),
+            "catalog:digital:oracle",
+        )
+        self.assertTrue(known["operational_facts_complete"])
+        self.assertTrue(known["unit_economics_known"])
+        self.assertTrue(known["manual_validation_ready"])
+        self.assertEqual(known["unit_contribution_minor"],165)
+        self.assertEqual(known["contribution_margin_bps"],8250)
+        self.assertEqual(known["operational_evidence_refs"],("manual:digital-cost:test",))
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
