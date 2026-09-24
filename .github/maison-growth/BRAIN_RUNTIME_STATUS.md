@@ -19,7 +19,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Osiris AI Gateway | READY optional adapter | DISABLED / config+secret required |
 | Osiris Memory write mirror | READY authenticated bridge using Osiris Actions Waist | PRIVATE STACK PREPARED / NOT STARTED |
 | Osiris Memory read context | READY MCP graph_search adapter + smoke profile | NOT STARTED |
-| Maison Brain MCP | READY read-only tools: status/Oceanos/catalogue assets/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
+| Maison Brain MCP | READY read-only tools: status/Oceanos/catalogue assets/commercial attention/Oráculo+PDI coverage/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
 | A1/A13/D1 canonical evidence | READY schema/contracts + canonical `maison-growth-engine` binding | REMOTE 0001→0016 SCHEMA NOT YET VERIFIED |
 | Cloudflare D1/Queue bindings | READY canonical D1 + intelligence queue/DLQ configuration in Wrangler | REMOTE RESOURCE STATE NOT YET VERIFIED |
 | Brain Control API | READY GET-only feed/solutions/economics/A11 learning + A5 mappings | DISABLED |
@@ -44,15 +44,17 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Runtime Semantic + Osiris context | READY bounded read-only context adapters | DISABLED BY DEFAULT |
 | A5 semantic interpretation | READY existing contract | analysis/runtime activation separate |
 | Oceanos curated context | READY read-only editorial metadata adapter | repository context available |
-| Commercial Asset Context | READY generated catalogue registry + optional evidence-backed private overlay | CATALOGUE READY / PRIVATE STOCK OVERLAY NOT LOADED |
+| Commercial Asset Context | READY generated catalogue registry for physical products, services and 2 canonical digital products + optional evidence-backed private overlay | CATALOGUE READY / PRIVATE OPERATIONAL OVERLAY NOT LOADED |
 | Ocean → commercial routing | READY Ocean pain/intent/adjacency metadata enriches catalogue lookup as supporting context only | CODE-READY |
 | Physical bundle hypotheses | READY 4 internal drafts from current catalogue subtotals; no bundle price/discount/publication authority | STOCK + MARGIN CHECKS REQUIRED |
-| Commercial attention ranking | READY Ocean-informed read-only ranking across active public products/services; explicitly not a profit score | ALL ASSETS BLOCKED ON OPERATIONAL FACTS |
-| Commercial attention MCP | READY read-only attention + bundle-hypothesis tools | OPTIONAL PROFILE / NOT STARTED |
+| Commercial attention ranking | READY Ocean-informed read-only ranking across active public physical, service and digital products; explicitly not a profit score | ALL ASSETS BLOCKED ON OPERATIONAL FACTS |
+| Commercial attention MCP | READY read-only attention + digital-experience coverage + bundle-hypothesis tools | OPTIONAL PROFILE / NOT STARTED |
 | Private stocktake preparation | READY operator template covers all 5 active public physical products; contains no private values | AWAITING MANUAL COUNTS/COSTS |
 | Service capacity preparation | READY operator template covers all 7 active public service/B2B entries; contains no private values | AWAITING MANUAL CAPACITY/COST FACTS |
+| Digital operations preparation | READY evidence-backed template covers Oráculo + PÁRA DE IGNORAR! per-sale effort/variable cost/delivery lead; zero is never assumed | AWAITING MANUAL DELIVERY/COST FACTS |
+| Ocean → Oráculo/PDI feed coverage | READY deterministic internal bridge: 16/16 Oceans feed both products; 594 PDI stage slots + 112 Oracle role slots; no paid bodies in Git | CODE-READY / 0 FEED GAPS |
 | Structured service pricing | READY fixed vs multi-format vs starting-from vs quote pricing preserved from canonical catalogue; human selection required where appropriate | CODE-READY |
-| Fact-based commercial economics | READY private evaluator for product/service unit economics + human-priced bundle evaluation | AWAITING PRIVATE OPERATIONAL OVERLAY |
+| Fact-based commercial economics | READY private evaluator for physical/service/digital unit economics + human-priced bundle evaluation | AWAITING PRIVATE OPERATIONAL OVERLAY |
 | Commercial operator report | READY combines attention, observed operational facts and bundle blockers without granting execution authority | AWAITING PRIVATE OPERATIONAL OVERLAY |
 | Offline commercial readiness board | READY Ocean context + catalogue pricing + operational/economic blockers + explicit next human action; zero external authority | AVAILABLE NOW |
 | Progressive commercial fact plan | READY zero-private-data worksheet asks only for each asset's next missing fact group and advances as evidence arrives | AVAILABLE NOW |
