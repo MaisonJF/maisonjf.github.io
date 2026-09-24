@@ -186,7 +186,6 @@ def build_attention(
             ],
             "authority":{
                 "public_write_authorized":False,
-                "discount_authorized":False,
                 "stock_promise_authorized":False,
                 "automatic_checkout_authorized":False,
             },
