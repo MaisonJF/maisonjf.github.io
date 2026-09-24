@@ -89,11 +89,31 @@ def _base_inputs(plan: Mapping[str,Any]) -> list[str]:
     return missing
 
 
+def _context_present(inputs: Mapping[str,Any], key: str) -> bool:
+    value=inputs.get(key)
+    if isinstance(value,str):
+        return bool(value.strip())
+    return value is not None
+
+
+def _context_has_economics(inputs: Mapping[str,Any]) -> bool:
+    return any(
+        _context_present(inputs,key)
+        for key in (
+            "unit_or_project_cost_minor",
+            "direct_cost_minor",
+            "cost_basis",
+            "price_or_quote_rule",
+        )
+    )
+
+
 def _manual_requirements(
     plan_kind: str,
     *,
     asset_hits: Sequence[CommercialAssetHit],
     economics: Mapping[str,Any],
+    pilot_inputs: Mapping[str,Any],
 ) -> tuple[list[str],tuple[str,...],tuple[str,...],tuple[str,...]]:
     missing=[]
     success=[]
@@ -124,14 +144,30 @@ def _manual_requirements(
         ))
         success=("pedido_de_reuniao_ou_orcamento","encomenda_paga","margem_observada_positiva","sinal_de_recorrencia")
         stop=("capacidade_insuficiente","margem_desconhecida_ou_negativa","personalizacao_inviavel","sem_acesso_ao_decisor")
-        missing.append("target_profile")
-        if not ({"capacity_units_per_period","batch_capacity_units"} & known_operational):
+        if not _context_present(pilot_inputs,"target_profile"):
+            missing.append("target_profile")
+        if (
+            not ({"capacity_units_per_period","batch_capacity_units"} & known_operational)
+            and not _context_present(pilot_inputs,"capacity_basis")
+        ):
             missing.append("capacity")
-        if not ({"variable_cost_minor","unit_material_cost_minor"} & known_operational) and not economics:
+        if (
+            not ({"variable_cost_minor","unit_material_cost_minor"} & known_operational)
+            and not economics
+            and not _context_present(pilot_inputs,"unit_or_project_cost_minor")
+            and not _context_present(pilot_inputs,"cost_basis")
+        ):
             missing.append("unit_or_project_cost")
-        if not has_catalogue_price and not any("price" in str(k).lower() for k in economics):
+        if (
+            not has_catalogue_price
+            and not any("price" in str(k).lower() for k in economics)
+            and not _context_present(pilot_inputs,"price_or_quote_rule")
+        ):
             missing.append("price_or_quote_rule")
-        if not ({"delivery_lead_days","supplier_lead_days"} & known_operational):
+        if (
+            not ({"delivery_lead_days","supplier_lead_days"} & known_operational)
+            and not _context_present(pilot_inputs,"fulfilment_lead_time_days")
+        ):
             missing.append("fulfilment_lead_time")
 
     elif plan_kind=="manual_physical_pilot":
@@ -196,7 +232,8 @@ def _manual_requirements(
         success=("mencao_qualificada","trafego_atribuivel","lead_b2b","venda_atribuivel","distribuicao_repetivel")
         stop=("fit_insuficiente","custo_de_activacao_desconhecido","sem_atribuicao_minima","risco_reputacional")
         for key in ("amplifier_or_partner_ref","activation_strategy","direct_cost_minor","attribution_method"):
-            missing.append(key)
+            if not _context_present(pilot_inputs,key):
+                missing.append(key)
 
     else:
         steps.extend((
@@ -208,11 +245,16 @@ def _manual_requirements(
         ))
         success=("comportamento_de_compra_observado","economia_observada","decisao_comercial_melhor_informada")
         stop=("hipotese_nao_testavel","custos_ou_capacidade_desconhecidos","efeito_externo_nao_aprovado")
-        missing.extend(("purchase_behaviour","pilot_scope","cost_basis","capacity_basis"))
+        for key in ("purchase_behaviour","pilot_scope","cost_basis","capacity_basis"):
+            if not _context_present(pilot_inputs,key):
+                missing.append(key)
 
-    if not asset_hits:
+    if not asset_hits and not _context_present(
+        pilot_inputs,
+        "explicit_new_offer_decision_ref",
+    ):
         missing.append("existing_asset_match_or_explicit_new_offer_decision")
-    if not economics:
+    if not economics and not _context_has_economics(pilot_inputs):
         missing.append("observed_or_explicit_economic_inputs")
 
     return missing,tuple(steps),tuple(success),tuple(stop)
@@ -222,6 +264,7 @@ def build_pilot_dossier(
     plan: Mapping[str,Any],
     *,
     assets: CommercialAssetContext,
+    pilot_context: Mapping[str,Any] | None=None,
     asset_limit: int=5,
 ) -> PilotDossier:
     plan_kind=str(plan.get("plan_kind") or "")
@@ -241,11 +284,21 @@ def build_pilot_dossier(
     known_econ,unknown_econ=_known_economics(economics_raw)
     hits=assets.search(_asset_query(plan),limit=asset_limit)
 
+    context=dict(pilot_context or {})
+    raw_inputs=context.get("inputs",{})
+    if not isinstance(raw_inputs,Mapping):
+        raise PilotDossierError("manual_pilot_context_inputs_must_be_object")
+    pilot_inputs=dict(raw_inputs)
+    raw_context_refs=context.get("evidence_refs",())
+    if not isinstance(raw_context_refs,(list,tuple)):
+        raise PilotDossierError("manual_pilot_context_evidence_refs_must_be_array")
+
     missing=_base_inputs(plan)
     kind_missing,steps,success,stop=_manual_requirements(
         plan_kind,
         asset_hits=hits,
         economics=known_econ,
+        pilot_inputs=pilot_inputs,
     )
     missing.extend(kind_missing)
     missing.extend(unknown_econ)
@@ -261,11 +314,14 @@ def build_pilot_dossier(
     }[plan_kind]
 
     refs=set(str(x) for x in plan.get("evidence_refs",()) if x)
+    refs.update(str(x) for x in raw_context_refs if x)
     for hit in hits:
         refs.update(hit.operational_evidence_refs)
 
     reasons=list(str(x) for x in plan.get("reason_codes",()) if x)
     reasons.append("manual_pilot_requires_human_external_action")
+    if pilot_inputs:
+        reasons.append("private_evidence_backed_pilot_context_applied")
     if missing:
         reasons.append("pilot_inputs_incomplete")
     else:
