@@ -77,6 +77,8 @@ def _operational_blockers(asset: Mapping[str,Any]) -> list[str]:
         if operational.get("batch_capacity_units") is None:
             blockers.append("replenishment_capacity_unknown")
         return blockers
+    if asset.get("asset_type")=="digital_product":
+        return []
     blockers=[]
     if operational.get("capacity_units_per_period") is None:
         blockers.append("capacity_unknown")
@@ -213,6 +215,7 @@ def build_attention(
             "physical_products":sum(x["asset_type"]=="physical_product" for x in rows),
             "services":sum(x["asset_type"]=="service" for x in rows),
             "b2b_services":sum(x["asset_type"]=="b2b_service" for x in rows),
+            "digital_products":sum(x["asset_type"]=="digital_product" for x in rows),
             "execution_ready":sum(not x["operational_blockers"] for x in rows),
         },
         "assets":rows,
