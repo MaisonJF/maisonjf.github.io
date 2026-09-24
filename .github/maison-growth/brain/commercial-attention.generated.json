@@ -9,16 +9,189 @@
     "operational_unknowns_block_execution": true,
     "ocean_metadata_is_context_not_external_evidence": true,
     "automatic_publication": false,
+    "automatic_discount": false,
     "automatic_checkout": false
   },
   "summary": {
-    "ranked_assets": 12,
+    "ranked_assets": 22,
     "physical_products": 5,
     "services": 6,
     "b2b_services": 1,
-    "execution_ready": 0
+    "digital_products": 10,
+    "execution_ready": 10
   },
   "assets": [
+    {
+      "asset_ref": "catalog:digital:oracle-belong",
+      "name": "Oráculo · Solidão & Companhia",
+      "asset_type": "digital_product",
+      "slug": "oracle-belong",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 63,
+      "direct_ocean_mentions": 3,
+      "direct_ocean_territories": [
+        "precisar-de-solidao-para-recuperar-energia-social",
+        "presenca-que-ampara-sem-tentar-resolver",
+        "solidao-com-contacto-sem-conexao-de-qualidade"
+      ],
+      "contextual_ocean_matches": [
+        {
+          "territory": "solidao-com-contacto-sem-conexao-de-qualidade",
+          "score": 0.2034
+        },
+        {
+          "territory": "precisar-de-solidao-para-recuperar-energia-social",
+          "score": 0.0909
+        },
+        {
+          "territory": "presenca-que-ampara-sem-tentar-resolver",
+          "score": 0.0857
+        },
+        {
+          "territory": "perda-ambigua-sem-fecho-claro",
+          "score": 0.08
+        },
+        {
+          "territory": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+          "score": 0.0745
+        },
+        {
+          "territory": "evitamento-financeiro-sob-escassez",
+          "score": 0.0656
+        },
+        {
+          "territory": "auto-silenciamento-para-preservar-o-vinculo",
+          "score": 0.0632
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "direct_ocean_adjacency",
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 1
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-direction",
+      "name": "Oráculo · Escolhas & Mudança",
+      "asset_type": "digital_product",
+      "slug": "oracle-direction",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 63,
+      "direct_ocean_mentions": 4,
+      "direct_ocean_territories": [
+        "autonomia-condicionada-pelo-medo-da-reaccao",
+        "luto-por-um-futuro-que-deixou-de-ser-possivel",
+        "perda-ambigua-sem-fecho-claro",
+        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam"
+      ],
+      "contextual_ocean_matches": [
+        {
+          "territory": "solidao-com-contacto-sem-conexao-de-qualidade",
+          "score": 0.0746
+        },
+        {
+          "territory": "atencao-fragmentada-por-interrupcoes-digitais",
+          "score": 0.0652
+        },
+        {
+          "territory": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
+          "score": 0.0641
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "direct_ocean_adjacency",
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 2
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-security",
+      "name": "Oráculo · Medo do Futuro",
+      "asset_type": "digital_product",
+      "slug": "oracle-security",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 63,
+      "direct_ocean_mentions": 3,
+      "direct_ocean_territories": [
+        "auto-silenciamento-para-preservar-o-vinculo",
+        "doomscrolling-para-tentar-reduzir-incerteza",
+        "evitamento-financeiro-sob-escassez"
+      ],
+      "contextual_ocean_matches": [
+        {
+          "territory": "doomscrolling-para-tentar-reduzir-incerteza",
+          "score": 0.0825
+        },
+        {
+          "territory": "atencao-fragmentada-por-interrupcoes-digitais",
+          "score": 0.0787
+        },
+        {
+          "territory": "auto-silenciamento-para-preservar-o-vinculo",
+          "score": 0.0753
+        },
+        {
+          "territory": "carga-mental-invisivel-da-casa",
+          "score": 0.0674
+        },
+        {
+          "territory": "evitamento-financeiro-sob-escassez",
+          "score": 0.0667
+        },
+        {
+          "territory": "cuidar-sem-desaparecer-no-papel-de-cuidador",
+          "score": 0.0658
+        },
+        {
+          "territory": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+          "score": 0.0638
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "direct_ocean_adjacency",
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 3
+    },
     {
       "asset_ref": "catalog:product:nevoa",
       "name": "Névoa de Ambiente",
@@ -75,10 +248,11 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 1
+      "attention_rank": 4
     },
     {
       "asset_ref": "catalog:service:companhia",
@@ -122,10 +296,11 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 2
+      "attention_rank": 5
     },
     {
       "asset_ref": "catalog:product:escalda-pes",
@@ -175,10 +350,11 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 3
+      "attention_rank": 6
     },
     {
       "asset_ref": "catalog:product:vela-pequena",
@@ -220,10 +396,11 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 4
+      "attention_rank": 7
     },
     {
       "asset_ref": "catalog:product:vela-vidro",
@@ -265,10 +442,11 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 5
+      "attention_rank": 8
     },
     {
       "asset_ref": "catalog:product:oleo-massagem",
@@ -304,10 +482,11 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 6
+      "attention_rank": 9
     },
     {
       "asset_ref": "catalog:service:tarot",
@@ -363,10 +542,11 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 7
+      "attention_rank": 10
     },
     {
       "asset_ref": "catalog:service:acompanhamento",
@@ -417,10 +597,52 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 8
+      "attention_rank": 11
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-self",
+      "name": "Oráculo · Autoabandono",
+      "asset_type": "digital_product",
+      "slug": "oracle-self",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 15,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "doomscrolling-para-tentar-reduzir-incerteza",
+          "score": 0.0792
+        },
+        {
+          "territory": "atencao-fragmentada-por-interrupcoes-digitais",
+          "score": 0.0638
+        },
+        {
+          "territory": "evitamento-financeiro-sob-escassez",
+          "score": 0.0625
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 12
     },
     {
       "asset_ref": "catalog:service:ritual-personalizado",
@@ -467,10 +689,211 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 9
+      "attention_rank": 13
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-attachment",
+      "name": "Oráculo · Apego & Dependência",
+      "asset_type": "digital_product",
+      "slug": "oracle-attachment",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 12,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "telepressao-e-disponibilidade-permanente",
+          "score": 0.0682
+        },
+        {
+          "territory": "cuidar-sem-desaparecer-no-papel-de-cuidador",
+          "score": 0.0641
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 14
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-seen",
+      "name": "Oráculo · Aprovação & Validação",
+      "asset_type": "digital_product",
+      "slug": "oracle-seen",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 12,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "perda-ambigua-sem-fecho-claro",
+          "score": 0.0625
+        },
+        {
+          "territory": "evitamento-financeiro-sob-escassez",
+          "score": 0.0615
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 15
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-control",
+      "name": "Oráculo · Controlo & Incerteza",
+      "asset_type": "digital_product",
+      "slug": "oracle-control",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 9,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "doomscrolling-para-tentar-reduzir-incerteza",
+          "score": 0.0729
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 16
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-load",
+      "name": "Oráculo · Energia & Cansaço",
+      "asset_type": "digital_product",
+      "slug": "oracle-load",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 9,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "precisar-de-solidao-para-recuperar-energia-social",
+          "score": 0.06
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 17
+    },
+    {
+      "asset_ref": "catalog:digital:pdi-relacoes",
+      "name": "PÁRA DE IGNORAR!",
+      "asset_type": "digital_product",
+      "slug": "pdi-relacoes",
+      "price_minor": 500,
+      "price_label": "5 €",
+      "currency": "EUR",
+      "attention_score": 9,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "presenca-que-ampara-sem-tentar-resolver",
+          "score": 0.0625
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 18
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-self-worth",
+      "name": "Oráculo · Autoestima & Valor",
+      "asset_type": "digital_product",
+      "slug": "oracle-self-worth",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 6,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 19
     },
     {
       "asset_ref": "catalog:service:mentoria",
@@ -505,10 +928,11 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 10
+      "attention_rank": 20
     },
     {
       "asset_ref": "catalog:service:b2b",
@@ -537,10 +961,11 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 11
+      "attention_rank": 21
     },
     {
       "asset_ref": "catalog:service:pedidos-especiais",
@@ -569,10 +994,11 @@
       ],
       "authority": {
         "public_write_authorized": false,
+        "discount_authorized": false,
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 12
+      "attention_rank": 22
     }
   ]
 }
