@@ -108,7 +108,26 @@ python .github/maison-growth/brain/commercial_operator_report.py \
 
 A calculation does not authorize publication, checkout, discounting or experiment execution.
 
-## 7. Build manual-pilot dossiers from approved validation plans
+## 7. Read the offline Commercial Readiness Board
+
+Before Cloudflare is active, the same catalogue + Ocean + private operational overlay can be reduced to one operator board:
+
+```bash
+python .github/maison-growth/brain/commercial_readiness_board.py \
+  --overlay /private/path/maison-commercial-overlay.private.json
+```
+
+For multi-format or quote/starting-from services, pass only a human-selected concrete price when one exists:
+
+```bash
+python .github/maison-growth/brain/commercial_readiness_board.py \
+  --overlay /private/path/maison-commercial-overlay.private.json \
+  --service-price catalog:service:companhia=3500
+```
+
+Each row keeps Ocean context, catalogue pricing, operational/economic blockers and one explicit next human action together. Attention is never presented as profit, catalogue `in_stock` is never treated as counted inventory, and every external authority remains false.
+
+## 8. Build manual-pilot dossiers from approved validation plans
 
 After the private Brain has human-approved validation plans, the operator can inspect what each manual pilot still needs before any external action.
 
@@ -133,6 +152,6 @@ For a private/local operator terminal only, `--full` prints the detailed dossier
 
 A physical or service dossier can become `ready_for_human_action_review` only when one actual candidate carries the complete operational fact set required for that pilot. Facts split across several different candidates do not fake readiness, and the pilot-context file cannot bypass this rule. For every plan kind, `ready_for_human_action_review` still grants no outbound, spend, public-write or experiment-execution authority.
 
-## 8. Only then feed facts into validation planning
+## 9. Only then feed facts into validation planning
 
 Once stock/cost/capacity facts are known, they can support A14/A12 manual validation planning. Human review remains the authority boundary. A8 remains draft-only unless a separately governed CTA decision exists.
