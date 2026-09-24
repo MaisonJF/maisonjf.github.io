@@ -60,44 +60,13 @@
       "pedidos físicos",
       "pedidos fisicos"
     ],
-    "catalog:digital:pdi-relacoes": [
+    "catalog:digital:oracle": [
+      "oráculo",
+      "oraculo"
+    ],
+    "catalog:digital:pdi": [
       "pára de ignorar",
       "para de ignorar"
-    ],
-    "catalog:digital:oracle-seen": [
-      "aprovação",
-      "validação"
-    ],
-    "catalog:digital:oracle-attachment": [
-      "apego",
-      "dependência"
-    ],
-    "catalog:digital:oracle-self": [
-      "autoabandono"
-    ],
-    "catalog:digital:oracle-self-worth": [
-      "autoestima",
-      "valor"
-    ],
-    "catalog:digital:oracle-control": [
-      "controlo",
-      "incerteza"
-    ],
-    "catalog:digital:oracle-belong": [
-      "solidão",
-      "companhia"
-    ],
-    "catalog:digital:oracle-load": [
-      "energia",
-      "cansaço"
-    ],
-    "catalog:digital:oracle-direction": [
-      "escolhas",
-      "mudança"
-    ],
-    "catalog:digital:oracle-security": [
-      "medo do futuro",
-      "segurança"
     ]
   }
 }
