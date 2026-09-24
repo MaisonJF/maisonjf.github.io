@@ -97,5 +97,25 @@ class PrepareCommercialOverlayTests(unittest.TestCase):
             )
 
 
+    def test_builds_digital_cost_overlay_without_inventing_capacity(self):
+        digital={
+            "schema_version":"commercial_digital_economics_template_v1",
+            "assets":[{
+                "asset_ref":"catalog:digital:oracle-belong",
+                "source":"manual_digital_cost_review",
+                "operational":{"variable_cost_minor":35},
+                "evidence_refs":["manual:digital-cost:test"],
+            }],
+        }
+        payload=build_overlay(
+            templates=(digital,),
+            observed_at="2026-09-24T08:45:00+01:00",
+        )
+        row=payload["assets"][0]
+        self.assertEqual(row["asset_ref"],"catalog:digital:oracle-belong")
+        self.assertEqual(row["operational"],{"variable_cost_minor":35})
+        self.assertEqual(row["evidence_refs"],["manual:digital-cost:test"])
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
