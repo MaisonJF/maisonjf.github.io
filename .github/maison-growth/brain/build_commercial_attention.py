@@ -68,12 +68,14 @@ def _operational_blockers(asset: Mapping[str,Any]) -> list[str]:
         operational={}
     if asset.get("asset_type")=="physical_product":
         blockers=[]
-        if operational.get("inventory_quantity") is None:
-            blockers.append("inventory_unknown")
         if operational.get("unit_material_cost_minor") is None:
             blockers.append("unit_material_cost_unknown")
         if operational.get("packaging_cost_minor") is None:
             blockers.append("packaging_cost_unknown")
+        if operational.get("production_minutes_per_unit") is None:
+            blockers.append("production_time_unknown")
+        if operational.get("batch_capacity_units") is None:
+            blockers.append("replenishment_capacity_unknown")
         return blockers
     blockers=[]
     if operational.get("capacity_units_per_period") is None:
