@@ -81,6 +81,12 @@ class CommercialGreenInvariantTests(unittest.TestCase):
             self.assertFalse(row["attention"]["is_profit_score"])
             self.assertNotIn("private_economics",row)
 
+    def test_validation_planner_does_not_restore_finished_stock_as_physical_gate(self):
+        planner=(ROOT/"validation_planner.py").read_text(encoding="utf-8")
+        self.assertNotIn("stock_or_material_availability",planner)
+        self.assertIn("production_minutes_per_unit",planner)
+        self.assertIn("batch_capacity_units",planner)
+
     def test_status_and_runbook_do_not_regress_to_old_stock_gate_language(self):
         status=(GROWTH/"BRAIN_RUNTIME_STATUS.md").read_text(encoding="utf-8")
         runbook=(ROOT/"COMMERCIAL_OPERATIONS_RUNBOOK.md").read_text(encoding="utf-8")
