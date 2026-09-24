@@ -192,6 +192,8 @@ class CommercialEconomicsTests(unittest.TestCase):
                         "reserved_quantity":1,
                         "unit_material_cost_minor":180,
                         "packaging_cost_minor":70,
+                        "production_minutes_per_unit":5,
+                        "batch_capacity_units":30,
                     },
                     "evidence_refs":["manual:ops:2026-09-24"],
                 },
@@ -202,6 +204,8 @@ class CommercialEconomicsTests(unittest.TestCase):
                         "reserved_quantity":1,
                         "unit_material_cost_minor":220,
                         "packaging_cost_minor":90,
+                        "production_minutes_per_unit":8,
+                        "batch_capacity_units":12,
                     },
                     "evidence_refs":["manual:ops:2026-09-24"],
                 },
@@ -218,12 +222,52 @@ class CommercialEconomicsTests(unittest.TestCase):
 
         evaluated=evaluate_bundle(bundle=bundle,context=ctx,proposed_price_minor=1400)
         self.assertEqual(evaluated["available_bundle_units"],5)
+        self.assertTrue(evaluated["replenishment_capacity_known"])
+        self.assertEqual(evaluated["replenishment_batch_units"],12)
+        self.assertEqual(evaluated["production_minutes_per_bundle"],13)
         self.assertEqual(evaluated["combined_unit_cost_minor"],560)
         self.assertEqual(evaluated["difference_from_catalogue_subtotal_minor"],-100)
         self.assertEqual(evaluated["unit_contribution_minor"],840)
         self.assertEqual(evaluated["contribution_margin_bps"],6000)
         self.assertTrue(evaluated["manual_validation_ready"])
         self.assertFalse(evaluated["authority"]["discount_authorized"])
+
+    def test_bundle_unknown_finished_stock_does_not_block_known_replenishment(self):
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T08:00:00+01:00",
+            "assets":[
+                {
+                    "asset_ref":"catalog:product:nevoa",
+                    "operational":{
+                        "unit_material_cost_minor":180,
+                        "packaging_cost_minor":70,
+                        "production_minutes_per_unit":5,
+                        "batch_capacity_units":30,
+                    },
+                    "evidence_refs":["manual:ops:test"],
+                },
+                {
+                    "asset_ref":"catalog:product:vela-pequena",
+                    "operational":{
+                        "unit_material_cost_minor":220,
+                        "packaging_cost_minor":90,
+                        "production_minutes_per_unit":8,
+                        "batch_capacity_units":12,
+                    },
+                    "evidence_refs":["manual:ops:test"],
+                },
+            ],
+        }
+        ctx=CommercialAssetContext(self.registry,overlay=overlay)
+        bundle=next(x for x in self.bundles["bundles"] if x["bundle_id"]=="bundle_pausa_casa")
+        result=evaluate_bundle(bundle=bundle,context=ctx,proposed_price_minor=1400)
+        self.assertIsNone(result["available_bundle_units"])
+        self.assertIn("bundle_current_stock_snapshot_unknown",result["signals"])
+        self.assertTrue(result["replenishment_capacity_known"])
+        self.assertFalse(result["stock_snapshot_is_readiness_gate"])
+        self.assertTrue(result["manual_validation_ready"])
+        self.assertFalse(any(result["authority"].values()))
 
     def test_bundle_rejects_invalid_human_price(self):
         ctx=CommercialAssetContext(self.registry)
