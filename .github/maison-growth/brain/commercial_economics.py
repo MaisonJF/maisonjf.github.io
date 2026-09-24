@@ -131,6 +131,51 @@ def evaluate_asset(
             },
         }
 
+    if asset_type=="digital_product":
+        if selected_price_minor is not None:
+            raise CommercialEconomicsError("selected_price_not_supported_for_digital_asset")
+        effort=op.get("human_effort_minutes")
+        variable=op.get("variable_cost_minor")
+        lead=op.get("delivery_lead_days")
+        delivery_known=isinstance(effort,int) and isinstance(lead,int)
+        cost_known=isinstance(variable,int)
+        contribution=price-variable if price is not None and cost_known else None
+        blockers=[]
+        if not delivery_known:
+            blockers.append("delivery_effort_incomplete")
+        if not cost_known:
+            blockers.append("variable_cost_unknown")
+        if price is None:
+            blockers.append("price_unknown")
+        return {
+            "asset_ref":asset_ref,
+            "asset_type":asset_type,
+            "name":snap["name"],
+            "currency":snap["currency"],
+            "price_minor":price,
+            "price_kind":snap.get("price_kind"),
+            "minimum_price_minor":snap.get("minimum_price_minor"),
+            "price_options":snap.get("price_options",[]),
+            "price_resolution":"fixed_catalogue" if price is not None else "unknown",
+            "price_selection_required":False,
+            "human_effort_minutes":effort if isinstance(effort,int) else None,
+            "delivery_lead_days":lead if isinstance(lead,int) else None,
+            "variable_cost_minor":variable if isinstance(variable,int) else None,
+            "unit_contribution_minor":contribution,
+            "contribution_margin_bps":_margin_bps(price,contribution),
+            "operational_facts_complete":delivery_known and cost_known,
+            "unit_economics_known":price is not None and cost_known,
+            "manual_validation_ready":not blockers,
+            "blockers":blockers,
+            "operational_evidence_refs":snap["operational_evidence_refs"],
+            "authority":{
+                "public_write_authorized":False,
+                "stock_promise_authorized":False,
+                "automatic_checkout_authorized":False,
+                "experiment_execution_authorized":False,
+            },
+        }
+
     if asset_type in {"service","b2b_service"}:
         price,price_resolution=_resolve_service_price(snap,selected_price_minor)
         capacity=op.get("capacity_units_per_period")
