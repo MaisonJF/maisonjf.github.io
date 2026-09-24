@@ -62,6 +62,11 @@ function openRouterText(data) {
   return data?.choices?.[0]?.message?.content ?? '';
 }
 
+export function isZeroCostOpenRouterModel(model) {
+  const value = String(model ?? '').trim().toLowerCase();
+  return value === 'openrouter/free' || value.endsWith(':free');
+}
+
 export async function callOsirisGateway(env, prompt) {
   if (!env.OSIRIS_GATEWAY_API_KEY || !env.OSIRIS_GATEWAY_MODEL) throw new Error('osiris_gateway_not_configured');
   const base = String(env.OSIRIS_GATEWAY_BASE_URL || 'https://ai.osiris-code.com/v1').replace(/\/+$/, '');
@@ -91,6 +96,7 @@ export async function callOsirisGateway(env, prompt) {
 
 export async function callOpenRouter(env, prompt) {
   if (!env.OPENROUTER_API_KEY || !env.OPENROUTER_MODEL) throw new Error('openrouter_not_configured');
+  if (!isZeroCostOpenRouterModel(env.OPENROUTER_MODEL)) throw new Error('openrouter_paid_model_forbidden');
   const data = await jsonFetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -103,7 +109,14 @@ export async function callOpenRouter(env, prompt) {
       model: env.OPENROUTER_MODEL,
       messages: [{ role: 'user', content: prompt }],
       max_tokens: 1200,
-      temperature: 0.2
+      temperature: 0.2,
+      provider: {
+        allow_fallbacks: false,
+        max_price: {
+          prompt: 0,
+          completion: 0
+        }
+      }
     })
   });
   return {
@@ -226,7 +239,11 @@ export function configuredProviders(env) {
   const providers = [];
   if (enabled(env.WORKERS_AI_ENABLED) && env.AI && env.WORKERS_AI_MODEL) providers.push('cloudflare_workers_ai');
   if (enabled(env.OSIRIS_GATEWAY_ENABLED) && env.OSIRIS_GATEWAY_API_KEY && env.OSIRIS_GATEWAY_MODEL) providers.push('osiris_gateway');
-  if (enabled(env.OPENROUTER_ENABLED) && env.OPENROUTER_API_KEY && env.OPENROUTER_MODEL) providers.push('openrouter');
+  if (
+    enabled(env.OPENROUTER_ENABLED) &&
+    env.OPENROUTER_API_KEY &&
+    isZeroCostOpenRouterModel(env.OPENROUTER_MODEL)
+  ) providers.push('openrouter');
   if (enabled(env.OPENAI_ENABLED) && env.OPENAI_API_KEY && env.OPENAI_MODEL) providers.push('openai');
   if (enabled(env.GEMINI_ENABLED) && env.GEMINI_API_KEY && env.GEMINI_MODEL) providers.push('google_gemini');
   if (enabled(env.PERPLEXITY_ENABLED) && env.PERPLEXITY_API_KEY) providers.push('perplexity');
