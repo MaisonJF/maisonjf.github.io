@@ -165,5 +165,20 @@ class CommercialAssetTests(unittest.TestCase):
         self.assertEqual(digital.unknown_operational_fields,("variable_cost_minor",))
 
 
+    def test_digital_economics_template_contains_all_active_digital_assets(self):
+        template=json.loads((ROOT/"commercial-digital-economics.template.json").read_text(encoding="utf-8"))
+        expected={
+            row["asset_ref"] for row in self.registry()["assets"]
+            if row["asset_type"]=="digital_product" and row["public"] is True and row["lifecycle_status"]=="active"
+        }
+        refs={row["asset_ref"] for row in template["assets"]}
+        self.assertEqual(refs,expected)
+        self.assertEqual(len(refs),10)
+        for row in template["assets"]:
+            self.assertEqual(row["source"],"manual_digital_cost_review")
+            self.assertEqual(row["operational"],{"variable_cost_minor":None})
+            self.assertEqual(row["evidence_refs"],[])
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
