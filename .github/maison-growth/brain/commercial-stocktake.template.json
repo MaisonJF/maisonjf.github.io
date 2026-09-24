@@ -4,10 +4,10 @@
   "visibility": "operator_template_no_private_values",
   "source": "commercial-assets.generated.json",
   "instructions": [
-    "Copy this template outside the repository before entering private stock, cost or capacity values.",
-    "Set observed_at in the private copy and use source=manual_stocktake.",
-    "Every non-null operational value in the final overlay must carry at least one evidence_ref.",
-    "Catalogue availability such as in_stock is not a counted inventory quantity."
+    "Legacy compatibility template. Prefer commercial-operations-facts.template.json for new operator work.",
+    "Finished stock is an optional volatile snapshot and is not a structural commercial readiness gate.",
+    "Unit cost and replenishment capacity are the structural physical facts.",
+    "Copy outside the repository before entering private values; every known value requires an evidence_ref."
   ],
   "observed_at": null,
   "evidence_ref_example": "manual:stocktake:YYYY-MM-DD",
@@ -102,5 +102,7 @@
       },
       "evidence_refs": []
     }
-  ]
+  ],
+  "deprecated_for_structural_readiness": true,
+  "superseded_by": "commercial-operations-facts.template.json"
 }
