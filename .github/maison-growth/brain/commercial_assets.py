@@ -30,6 +30,9 @@ SERVICE_OPERATIONAL_FIELDS=(
     "variable_cost_minor",
     "delivery_lead_days",
 )
+DIGITAL_OPERATIONAL_FIELDS=(
+    "variable_cost_minor",
+)
 
 
 @dataclass(frozen=True)
@@ -63,7 +66,11 @@ def _overlap(query: str, text: str) -> float:
 
 
 def _operational_fields(asset_type: str) -> tuple[str,...]:
-    return PHYSICAL_OPERATIONAL_FIELDS if asset_type=="physical_product" else SERVICE_OPERATIONAL_FIELDS
+    if asset_type=="physical_product":
+        return PHYSICAL_OPERATIONAL_FIELDS
+    if asset_type=="digital_product":
+        return DIGITAL_OPERATIONAL_FIELDS
+    return SERVICE_OPERATIONAL_FIELDS
 
 
 class CommercialAssetContext:
