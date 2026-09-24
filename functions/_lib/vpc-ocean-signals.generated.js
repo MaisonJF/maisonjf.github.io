@@ -224,6 +224,19 @@ export const VPC_OCEAN_SIGNALS=[
       "transição entre fim-de-semana e obrigação",
       "preparar sem perder o presente"
     ]
+  },
+  {
+    "id": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
+    "painLanguage": "Há esperas em que a vida parece ficar em suspenso: depois de enviar uma candidatura, fazer um exame, ter uma conversa importante ou entregar algo decisivo, já não há muito para fazer — mas a resposta ainda não chegou, e a cabeça continua a voltar ao assunto como se vigiar pudesse acelerar o desfecho.",
+    "intent": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
+    "themes": [
+      "vida em suspenso",
+      "esperar por uma resposta",
+      "incerteza fora do meu controlo",
+      "vigiar não acelera o resultado",
+      "entre fazer tudo e não poder fazer mais",
+      "voltar à vida enquanto a resposta não chega"
+    ]
   }
 ];
 export const VPC_OCEAN_SIGNAL_VERSION="2026-09-18";
