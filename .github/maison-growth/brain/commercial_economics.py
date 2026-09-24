@@ -80,18 +80,28 @@ def evaluate_asset(
         packaging=op.get("packaging_cost_minor")
         stock_known=isinstance(inventory,int) and isinstance(reserved,int)
         available=max(inventory-reserved,0) if stock_known else None
+        production_minutes=op.get("production_minutes_per_unit")
+        batch_capacity=op.get("batch_capacity_units")
+        replenishment_known=(
+            isinstance(production_minutes,int)
+            and isinstance(batch_capacity,int)
+            and batch_capacity > 0
+        )
         cost_known=isinstance(material,int) and isinstance(packaging,int)
         unit_cost=material+packaging if cost_known else None
         contribution=price-unit_cost if price is not None and unit_cost is not None else None
         blockers=[]
-        if not stock_known:
-            blockers.append("stock_count_incomplete")
         if not cost_known:
             blockers.append("unit_cost_incomplete")
-        if stock_known and available == 0:
-            blockers.append("no_available_units")
+        if not replenishment_known:
+            blockers.append("replenishment_capacity_incomplete")
         if price is None:
             blockers.append("price_unknown")
+        signals=[]
+        if not stock_known:
+            signals.append("current_stock_snapshot_unknown")
+        elif available == 0:
+            signals.append("no_units_available_at_observation")
         return {
             "asset_ref":asset_ref,
             "asset_type":asset_type,
@@ -99,13 +109,19 @@ def evaluate_asset(
             "currency":snap["currency"],
             "price_minor":price,
             "available_units":available,
+            "stock_snapshot_known":stock_known,
+            "stock_snapshot_is_readiness_gate":False,
+            "production_minutes_per_unit":production_minutes if isinstance(production_minutes,int) else None,
+            "batch_capacity_units":batch_capacity if isinstance(batch_capacity,int) else None,
+            "replenishment_capacity_known":replenishment_known,
             "unit_cost_minor":unit_cost,
             "unit_contribution_minor":contribution,
             "contribution_margin_bps":_margin_bps(price,contribution),
-            "operational_facts_complete":stock_known and cost_known,
+            "operational_facts_complete":cost_known and replenishment_known,
             "unit_economics_known":price is not None and unit_cost is not None,
             "manual_validation_ready":not blockers,
             "blockers":blockers,
+            "signals":signals,
             "operational_evidence_refs":snap["operational_evidence_refs"],
             "authority":{
                 "public_write_authorized":False,
