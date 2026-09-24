@@ -224,7 +224,7 @@ export const PROVIDERS = {
 
 export function configuredProviders(env) {
   const providers = [];
-  if (env.AI && env.WORKERS_AI_MODEL) providers.push('cloudflare_workers_ai');
+  if (enabled(env.WORKERS_AI_ENABLED) && env.AI && env.WORKERS_AI_MODEL) providers.push('cloudflare_workers_ai');
   if (enabled(env.OSIRIS_GATEWAY_ENABLED) && env.OSIRIS_GATEWAY_API_KEY && env.OSIRIS_GATEWAY_MODEL) providers.push('osiris_gateway');
   if (enabled(env.OPENROUTER_ENABLED) && env.OPENROUTER_API_KEY && env.OPENROUTER_MODEL) providers.push('openrouter');
   if (enabled(env.OPENAI_ENABLED) && env.OPENAI_API_KEY && env.OPENAI_MODEL) providers.push('openai');
