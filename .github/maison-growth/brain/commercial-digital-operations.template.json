@@ -1,4 +1,5 @@
 {
+  "schema_version": "commercial_digital_operations_template_v1",
   "target_overlay_schema": "commercial_asset_overlay_v1",
   "purpose": "Manual evidence-backed digital delivery facts for existing MAISON digital products. Null means UNKNOWN; zero is allowed only when observed and supported by evidence.",
   "observed_at": null,
