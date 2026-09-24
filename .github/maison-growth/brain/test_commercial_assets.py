@@ -157,5 +157,13 @@ class CommercialAssetTests(unittest.TestCase):
         self.assertEqual(scout.independent_roots,("https://example.org/a",))
 
 
+    def test_digital_assets_expose_only_relevant_marginal_cost_field(self):
+        ctx=CommercialAssetContext(self.registry())
+        hits=ctx.search("solidão companhia",limit=10)
+        digital=next(x for x in hits if x.ref=="asset:catalog:digital:oracle-belong")
+        self.assertEqual(digital.known_operational_fields,())
+        self.assertEqual(digital.unknown_operational_fields,("variable_cost_minor",))
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
