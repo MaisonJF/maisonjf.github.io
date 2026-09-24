@@ -11,19 +11,19 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 17,
-    "queueItems": 34,
-    "questionCandidates": 17,
-    "questionThemeHypotheses": 105,
-    "questionDesignSlots": 630,
+    "oceansConsidered": 18,
+    "queueItems": 36,
+    "questionCandidates": 18,
+    "questionThemeHypotheses": 111,
+    "questionDesignSlots": 666,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 249,
     "pdiThemeBacklog": 248,
     "pdiSourceDesignSlots": 1488,
     "pdiEditorialCoreTarget": 74400,
     "pdiCombinatorialTarget": 2800000,
-    "oracleCandidates": 17,
-    "oracleRoleSlots": 119
+    "oracleCandidates": 18,
+    "oracleRoleSlots": 126
   },
   "pdiGrowth": {
     "scale": {
@@ -13725,6 +13725,33 @@
       "status": "needs_editorial"
     },
     {
+      "sourceOceanId": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
+      "territory": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
+      "intent": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
+      "painLanguage": "Há esperas em que a vida parece ficar em suspenso: depois de enviar uma candidatura, fazer um exame, ter uma conversa importante ou entregar algo decisivo, já não há muito para fazer — mas a resposta ainda não chegou, e a cabeça continua a voltar ao assunto como se vigiar pudesse acelerar o desfecho.",
+      "commercialAdjacency": "Experiências Digitais Personalizadas Intermédias; Oráculo Decisões & Caminhos, Trabalho & Caminho e Eu & Padrões; Ritual Volta Para Casa para momentos de espera; conteúdos/ebooks/guias reflexivos sobre incerteza e controlo, sem aconselhamento clínico ou promessas de resultado",
+      "evidenceCount": 2,
+      "evidence": [
+        "American Psychological Association, Speaking of Psychology: a investigação de Kate Sweeny sobre espera por notícias importantes descreve a combinação de incerteza e falta de controlo como particularmente stressante, estudada em candidatos a emprego, resultados de exames e resultados médicos — https://www.apa.org/news/podcasts/speaking-of-psychology/waiting-stress",
+        "Frontiers in Radiology / PMC (2026; PMID 41717567): revisão narrativa sobre “waiting anxiety” identifica incerteza sobre resultados e perda de controlo como mecanismos relevantes durante períodos de espera, com evidência de ansiedade persistente enquanto se aguardam exames/resultados — https://pmc.ncbi.nlm.nih.gov/articles/PMC12913184/"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial",
+      "id": "brain_oracle_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante",
+      "type": "oracle_candidate",
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ]
+    },
+    {
       "id": "brain_oracle_luto_por_um_futuro_que_deixou_de_ser_possivel",
       "type": "oracle_candidate",
       "sourceOceanId": "luto-por-um-futuro-que-deixou-de-ser-possivel",
@@ -16594,6 +16621,258 @@
       "approvalRequired": true,
       "automaticActivation": false,
       "status": "needs_editorial"
+    },
+    {
+      "sourceOceanId": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
+      "territory": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
+      "intent": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
+      "painLanguage": "Há esperas em que a vida parece ficar em suspenso: depois de enviar uma candidatura, fazer um exame, ter uma conversa importante ou entregar algo decisivo, já não há muito para fazer — mas a resposta ainda não chegou, e a cabeça continua a voltar ao assunto como se vigiar pudesse acelerar o desfecho.",
+      "commercialAdjacency": "Experiências Digitais Personalizadas Intermédias; Oráculo Decisões & Caminhos, Trabalho & Caminho e Eu & Padrões; Ritual Volta Para Casa para momentos de espera; conteúdos/ebooks/guias reflexivos sobre incerteza e controlo, sem aconselhamento clínico ou promessas de resultado",
+      "evidenceCount": 2,
+      "evidence": [
+        "American Psychological Association, Speaking of Psychology: a investigação de Kate Sweeny sobre espera por notícias importantes descreve a combinação de incerteza e falta de controlo como particularmente stressante, estudada em candidatos a emprego, resultados de exames e resultados médicos — https://www.apa.org/news/podcasts/speaking-of-psychology/waiting-stress",
+        "Frontiers in Radiology / PMC (2026; PMID 41717567): revisão narrativa sobre “waiting anxiety” identifica incerteza sobre resultados e perda de controlo como mecanismos relevantes durante períodos de espera, com evidência de ansiedade persistente enquanto se aguardam exames/resultados — https://pmc.ncbi.nlm.nih.gov/articles/PMC12913184/"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial",
+      "id": "brain_question_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante",
+      "type": "question_candidate",
+      "questionThemeCandidates": [
+        "vida em suspenso",
+        "esperar por uma resposta",
+        "incerteza fora do meu controlo",
+        "vigiar não acelera o resultado",
+        "entre fazer tudo e não poder fazer mais",
+        "voltar à vida enquanto a resposta não chega"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vida_em_suspenso_open",
+          "theme": "vida em suspenso",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vida_em_suspenso_recognize",
+          "theme": "vida em suspenso",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vida_em_suspenso_deepen",
+          "theme": "vida em suspenso",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vida_em_suspenso_touch",
+          "theme": "vida em suspenso",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vida_em_suspenso_close",
+          "theme": "vida em suspenso",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vida_em_suspenso_signature",
+          "theme": "vida em suspenso",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_esperar_por_uma_resposta_open",
+          "theme": "esperar por uma resposta",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_esperar_por_uma_resposta_recognize",
+          "theme": "esperar por uma resposta",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_esperar_por_uma_resposta_deepen",
+          "theme": "esperar por uma resposta",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_esperar_por_uma_resposta_touch",
+          "theme": "esperar por uma resposta",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_esperar_por_uma_resposta_close",
+          "theme": "esperar por uma resposta",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_esperar_por_uma_resposta_signature",
+          "theme": "esperar por uma resposta",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_incerteza_fora_do_meu_controlo_open",
+          "theme": "incerteza fora do meu controlo",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_incerteza_fora_do_meu_controlo_recognize",
+          "theme": "incerteza fora do meu controlo",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_incerteza_fora_do_meu_controlo_deepen",
+          "theme": "incerteza fora do meu controlo",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_incerteza_fora_do_meu_controlo_touch",
+          "theme": "incerteza fora do meu controlo",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_incerteza_fora_do_meu_controlo_close",
+          "theme": "incerteza fora do meu controlo",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_incerteza_fora_do_meu_controlo_signature",
+          "theme": "incerteza fora do meu controlo",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vigiar_nao_acelera_o_resultado_open",
+          "theme": "vigiar não acelera o resultado",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vigiar_nao_acelera_o_resultado_recognize",
+          "theme": "vigiar não acelera o resultado",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vigiar_nao_acelera_o_resultado_deepen",
+          "theme": "vigiar não acelera o resultado",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vigiar_nao_acelera_o_resultado_touch",
+          "theme": "vigiar não acelera o resultado",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vigiar_nao_acelera_o_resultado_close",
+          "theme": "vigiar não acelera o resultado",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_vigiar_nao_acelera_o_resultado_signature",
+          "theme": "vigiar não acelera o resultado",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_entre_fazer_tudo_e_nao_poder_fazer_mais_open",
+          "theme": "entre fazer tudo e não poder fazer mais",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_entre_fazer_tudo_e_nao_poder_fazer_mais_recognize",
+          "theme": "entre fazer tudo e não poder fazer mais",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_entre_fazer_tudo_e_nao_poder_fazer_mais_deepen",
+          "theme": "entre fazer tudo e não poder fazer mais",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_entre_fazer_tudo_e_nao_poder_fazer_mais_touch",
+          "theme": "entre fazer tudo e não poder fazer mais",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_entre_fazer_tudo_e_nao_poder_fazer_mais_close",
+          "theme": "entre fazer tudo e não poder fazer mais",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_entre_fazer_tudo_e_nao_poder_fazer_mais_signature",
+          "theme": "entre fazer tudo e não poder fazer mais",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_voltar_a_vida_enquanto_a_resposta_nao_chega_open",
+          "theme": "voltar à vida enquanto a resposta não chega",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_voltar_a_vida_enquanto_a_resposta_nao_chega_recognize",
+          "theme": "voltar à vida enquanto a resposta não chega",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_voltar_a_vida_enquanto_a_resposta_nao_chega_deepen",
+          "theme": "voltar à vida enquanto a resposta não chega",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_voltar_a_vida_enquanto_a_resposta_nao_chega_touch",
+          "theme": "voltar à vida enquanto a resposta não chega",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_voltar_a_vida_enquanto_a_resposta_nao_chega_close",
+          "theme": "voltar à vida enquanto a resposta não chega",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante_voltar_a_vida_enquanto_a_resposta_nao_chega_signature",
+          "theme": "voltar à vida enquanto a resposta não chega",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ]
     },
     {
       "id": "brain_question_luto_por_um_futuro_que_deixou_de_ser_possivel",
