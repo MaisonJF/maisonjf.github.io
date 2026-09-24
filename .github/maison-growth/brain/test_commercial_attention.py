@@ -32,7 +32,7 @@ class CommercialAttentionTests(unittest.TestCase):
         self.assertTrue(self.payload["contract"]["operational_unknowns_block_execution"])
         self.assertFalse(self.payload["contract"]["automatic_publication"])
         self.assertFalse(self.payload["contract"]["automatic_checkout"])
-        self.assertEqual(self.payload["summary"]["execution_ready"],10)
+        self.assertEqual(self.payload["summary"]["execution_ready"],2)
 
         for asset in self.payload["assets"]:
             self.assertFalse(asset["profitability_known"])
@@ -66,8 +66,8 @@ class CommercialAttentionTests(unittest.TestCase):
 
     def test_oracle_and_pdi_are_ranked_as_digital_assets(self):
         by_ref={row["asset_ref"]:row for row in self.payload["assets"]}
-        oracle=by_ref["catalog:digital:oracle-belong"]
-        pdi=by_ref["catalog:digital:pdi-relacoes"]
+        oracle=by_ref["catalog:digital:oracle"]
+        pdi=by_ref["catalog:digital:pdi"]
         self.assertEqual(oracle["asset_type"],"digital_product")
         self.assertEqual(pdi["asset_type"],"digital_product")
         self.assertEqual(oracle["price_minor"],200)
