@@ -255,15 +255,16 @@ class CommercialEconomicsTests(unittest.TestCase):
         self.assertIn("human_price_not_supplied",preview["blockers"])
         self.assertFalse(preview["authority"]["bundle_price_selected_by_system"])
 
-        evaluated=evaluate_bundle(bundle=bundle,context=ctx,proposed_price_minor=1400)
+        evaluated=evaluate_bundle(bundle=bundle,context=ctx,proposed_price_minor=1500)
         self.assertEqual(evaluated["available_bundle_units"],5)
         self.assertTrue(evaluated["replenishment_capacity_known"])
         self.assertEqual(evaluated["replenishment_batch_units"],12)
         self.assertEqual(evaluated["production_minutes_per_bundle"],13)
         self.assertEqual(evaluated["combined_unit_cost_minor"],560)
-        self.assertEqual(evaluated["difference_from_catalogue_subtotal_minor"],-100)
-        self.assertEqual(evaluated["unit_contribution_minor"],840)
-        self.assertEqual(evaluated["contribution_margin_bps"],6000)
+        self.assertEqual(evaluated["bundle_price_floor_minor"],1500)
+        self.assertEqual(evaluated["difference_from_catalogue_subtotal_minor"],0)
+        self.assertEqual(evaluated["unit_contribution_minor"],940)
+        self.assertEqual(evaluated["contribution_margin_bps"],6267)
         self.assertTrue(evaluated["manual_validation_ready"])
 
     def test_bundle_unknown_finished_stock_does_not_block_known_replenishment(self):
@@ -295,13 +296,19 @@ class CommercialEconomicsTests(unittest.TestCase):
         }
         ctx=CommercialAssetContext(self.registry,overlay=overlay)
         bundle=next(x for x in self.bundles["bundles"] if x["bundle_id"]=="bundle_pausa_casa")
-        result=evaluate_bundle(bundle=bundle,context=ctx,proposed_price_minor=1400)
+        result=evaluate_bundle(bundle=bundle,context=ctx,proposed_price_minor=1500)
         self.assertIsNone(result["available_bundle_units"])
         self.assertIn("bundle_current_stock_snapshot_unknown",result["signals"])
         self.assertTrue(result["replenishment_capacity_known"])
         self.assertFalse(result["stock_snapshot_is_readiness_gate"])
         self.assertTrue(result["manual_validation_ready"])
         self.assertFalse(any(result["authority"].values()))
+
+    def test_bundle_rejects_human_price_below_catalogue_subtotal(self):
+        ctx=CommercialAssetContext(self.registry)
+        bundle=next(x for x in self.bundles["bundles"] if x["bundle_id"]=="bundle_pausa_casa")
+        with self.assertRaisesRegex(CommercialEconomicsError,"below_catalogue_subtotal"):
+            evaluate_bundle(bundle=bundle,context=ctx,proposed_price_minor=1499)
 
     def test_bundle_rejects_invalid_human_price(self):
         ctx=CommercialAssetContext(self.registry)
