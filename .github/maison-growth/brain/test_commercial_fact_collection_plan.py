@@ -29,6 +29,16 @@ class CommercialFactCollectionPlanTests(unittest.TestCase):
         self.assertEqual([x["field"] for x in task["fields"]],["unit_material_cost_minor","packaging_cost_minor"])
         self.assertTrue(task["rules"]["current_stock_snapshot_is_optional_and_volatile"])
 
+    def test_digital_product_asks_for_delivery_facts_without_assuming_zero(self):
+        plan=build_plan()
+        task=next(x for x in plan["tasks"] if x["asset_ref"]=="catalog:digital:oracle")
+        self.assertEqual(task["next_action"],"verify_digital_delivery_effort")
+        self.assertEqual(
+            [x["field"] for x in task["fields"]],
+            ["human_effort_minutes","delivery_lead_days"],
+        )
+        self.assertTrue(all(x["value"] is None for x in task["fields"]))
+
     def test_service_without_concrete_price_asks_human_to_select_price(self):
         plan=build_plan()
         task=next(x for x in plan["tasks"] if x["asset_ref"]=="catalog:service:companhia")
