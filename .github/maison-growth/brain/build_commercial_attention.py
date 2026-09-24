@@ -238,6 +238,7 @@ def main() -> None:
         except (OSError,json.JSONDecodeError) as exc:
             raise SystemExit("commercial-attention.generated.json is missing or invalid; run build_commercial_attention.py") from exc
         if current!=payload:
+            print("EXPECTED_ATTENTION_PAYLOAD="+json.dumps(payload,ensure_ascii=False,separators=(",",":")))
             raise SystemExit("commercial-attention.generated.json is stale; run build_commercial_attention.py")
         print(f"Commercial attention projection: OK · {payload['summary']['ranked_assets']} assets")
         return
