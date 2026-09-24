@@ -131,6 +131,41 @@ def evaluate_asset(
             },
         }
 
+    if asset_type=="digital_product":
+        if selected_price_minor is not None:
+            raise CommercialEconomicsError("selected_price_not_supported_for_digital_asset")
+        variable=op.get("variable_cost_minor")
+        cost_known=isinstance(variable,int)
+        contribution=price-variable if price is not None and cost_known else None
+        blockers=[]
+        if not cost_known:
+            blockers.append("variable_cost_unknown")
+        if price is None:
+            blockers.append("price_unknown")
+        return {
+            "asset_ref":asset_ref,
+            "asset_type":asset_type,
+            "name":snap["name"],
+            "currency":snap["currency"],
+            "price_minor":price,
+            "price_kind":snap.get("price_kind"),
+            "variable_cost_minor":variable if isinstance(variable,int) else None,
+            "unit_contribution_minor":contribution,
+            "contribution_margin_bps":_margin_bps(price,contribution),
+            "operational_facts_complete":cost_known,
+            "unit_economics_known":price is not None and cost_known,
+            "manual_validation_ready":not blockers,
+            "blockers":blockers,
+            "signals":[],
+            "operational_evidence_refs":snap["operational_evidence_refs"],
+            "authority":{
+                "public_write_authorized":False,
+                "stock_promise_authorized":False,
+                "automatic_checkout_authorized":False,
+                "experiment_execution_authorized":False,
+            },
+        }
+
     if asset_type in {"service","b2b_service"}:
         price,price_resolution=_resolve_service_price(snap,selected_price_minor)
         capacity=op.get("capacity_units_per_period")
