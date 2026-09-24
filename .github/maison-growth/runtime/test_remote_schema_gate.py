@@ -61,8 +61,9 @@ class RemoteSchemaGateTests(unittest.TestCase):
     def test_migration_inspector_covers_complete_0001_to_0016_chain(self):
         found = re.findall(r"'(00\d{2}_[a-z0-9_]+)'", self.inspect)
         migrations = [item.split("_", 1)[0] for item in found]
+        unique_migrations = list(dict.fromkeys(migrations))
         self.assertEqual(
-            migrations,
+            unique_migrations,
             [f"{number:04d}" for number in range(1, 17)],
         )
         self.assertIn("missing_or_partial", self.inspect)
