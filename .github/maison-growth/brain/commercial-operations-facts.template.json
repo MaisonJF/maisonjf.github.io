@@ -1,0 +1,106 @@
+{
+  "schema_version": "commercial_operations_facts_template_v1",
+  "target_overlay_schema": "commercial_asset_overlay_v1",
+  "visibility": "operator_template_no_private_values",
+  "source": "commercial-assets.generated.json",
+  "instructions": [
+    "Copy this template outside the repository before entering private operational values.",
+    "For physical products, unit cost and replenishment capacity are structural; finished stock is an optional volatile snapshot.",
+    "Set observed_at in the private copy. Every known operational value requires at least one evidence_ref.",
+    "Unknown values remain null. Catalogue availability is never a counted inventory quantity."
+  ],
+  "observed_at": null,
+  "evidence_ref_example": "manual:operations:YYYY-MM-DD",
+  "physical_products": [
+    {
+      "asset_ref": "catalog:product:escalda-pes",
+      "sku": "MJ-ESCALDA-150",
+      "name": "Escalda-Pés",
+      "source": "manual_operations_review",
+      "operational": {
+        "unit_material_cost_minor": null,
+        "packaging_cost_minor": null,
+        "production_minutes_per_unit": null,
+        "batch_capacity_units": null,
+        "inventory_quantity": null,
+        "reserved_quantity": null,
+        "moq_units": null,
+        "shelf_life_days": null,
+        "supplier_lead_days": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:product:nevoa",
+      "sku": "MJ-NEVOA-020",
+      "name": "Névoa de Ambiente",
+      "source": "manual_operations_review",
+      "operational": {
+        "unit_material_cost_minor": null,
+        "packaging_cost_minor": null,
+        "production_minutes_per_unit": null,
+        "batch_capacity_units": null,
+        "inventory_quantity": null,
+        "reserved_quantity": null,
+        "moq_units": null,
+        "shelf_life_days": null,
+        "supplier_lead_days": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:product:oleo-massagem",
+      "sku": "MJ-OLEO-060",
+      "name": "Óleo de Massagem",
+      "source": "manual_operations_review",
+      "operational": {
+        "unit_material_cost_minor": null,
+        "packaging_cost_minor": null,
+        "production_minutes_per_unit": null,
+        "batch_capacity_units": null,
+        "inventory_quantity": null,
+        "reserved_quantity": null,
+        "moq_units": null,
+        "shelf_life_days": null,
+        "supplier_lead_days": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:product:vela-pequena",
+      "sku": "MJ-VELA-070",
+      "name": "Vela Aromática",
+      "source": "manual_operations_review",
+      "operational": {
+        "unit_material_cost_minor": null,
+        "packaging_cost_minor": null,
+        "production_minutes_per_unit": null,
+        "batch_capacity_units": null,
+        "inventory_quantity": null,
+        "reserved_quantity": null,
+        "moq_units": null,
+        "shelf_life_days": null,
+        "supplier_lead_days": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:product:vela-vidro",
+      "sku": "MJ-VELA-170",
+      "name": "Vela Aromática",
+      "source": "manual_operations_review",
+      "operational": {
+        "unit_material_cost_minor": null,
+        "packaging_cost_minor": null,
+        "production_minutes_per_unit": null,
+        "batch_capacity_units": null,
+        "inventory_quantity": null,
+        "reserved_quantity": null,
+        "moq_units": null,
+        "shelf_life_days": null,
+        "supplier_lead_days": null
+      },
+      "evidence_refs": []
+    }
+  ]
+}
