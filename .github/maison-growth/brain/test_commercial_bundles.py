@@ -2,10 +2,12 @@
 from __future__ import annotations
 
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
 from build_commercial_bundles import build_payload
+from commercial_bundle_validation_preview import build_preview
 
 
 ROOT=Path(__file__).resolve().parent
@@ -32,6 +34,70 @@ class CommercialBundleTests(unittest.TestCase):
             self.assertFalse(bundle["authority"]["public_write_authorized"])
             self.assertFalse(bundle["authority"]["automatic_checkout_authorized"])
             self.assertTrue(bundle["authority"]["human_approval_required"])
+
+    def test_bundle_contract_contains_no_price_reduction_mechanism(self):
+        source_text=json.dumps(self.source,ensure_ascii=False).lower()
+        generated_text=json.dumps(self.payload,ensure_ascii=False).lower()
+        self.assertNotIn("discount",source_text)
+        self.assertNotIn("discount",generated_text)
+        self.assertTrue(self.payload["contract"]["bundle_price_must_not_undercut_catalogue_subtotal"])
+        self.assertTrue(self.payload["contract"]["value_growth_comes_from_composition_not_price_reduction"])
+
+    def test_bundle_validation_preview_stays_human_gated(self):
+        empty=build_preview("bundle_pausa_casa")
+        self.assertEqual(empty["state"],"needs_operational_facts")
+        self.assertFalse(any(empty["authority"].values()))
+
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T09:00:00+01:00",
+            "assets":[
+                {
+                    "asset_ref":"catalog:product:nevoa",
+                    "source":"manual_operations_review",
+                    "operational":{
+                        "unit_material_cost_minor":180,
+                        "packaging_cost_minor":70,
+                        "production_minutes_per_unit":5,
+                        "batch_capacity_units":30,
+                    },
+                    "evidence_refs":["manual:bundle:nevoa"],
+                },
+                {
+                    "asset_ref":"catalog:product:vela-pequena",
+                    "source":"manual_operations_review",
+                    "operational":{
+                        "unit_material_cost_minor":220,
+                        "packaging_cost_minor":90,
+                        "production_minutes_per_unit":8,
+                        "batch_capacity_units":12,
+                    },
+                    "evidence_refs":["manual:bundle:vela"],
+                },
+            ],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/"bundle.private.json"
+            path.write_text(json.dumps(overlay),encoding="utf-8")
+            needs_price=build_preview("bundle_pausa_casa",overlay_path=path)
+            ready=build_preview(
+                "bundle_pausa_casa",
+                overlay_path=path,
+                proposed_price_minor=1500,
+            )
+
+        self.assertEqual(needs_price["state"],"needs_human_price")
+        self.assertEqual(needs_price["bundle_price_floor_minor"],1500)
+        self.assertEqual(ready["state"],"ready_for_human_validation_review")
+        self.assertEqual(ready["proposed_price_minor"],1500)
+        self.assertEqual(ready["combined_unit_cost_minor"],560)
+        self.assertEqual(ready["operational_evidence_refs"],[
+            "manual:bundle:nevoa",
+            "manual:bundle:vela",
+        ])
+        self.assertTrue(ready["contract"]["human_validation_required"])
+        self.assertFalse(ready["contract"]["bundle_price_selected_by_system"])
+        self.assertFalse(any(ready["authority"].values()))
 
     def test_catalogue_subtotals_are_derived_not_offer_prices(self):
         subtotals={x["bundle_id"]:x["catalogue_subtotal_minor"] for x in self.payload["bundles"]}

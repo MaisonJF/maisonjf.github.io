@@ -8,6 +8,7 @@ from typing import Any
 
 from commercial_assets import CommercialAssetContext
 from build_commercial_attention import load_attention
+from commercial_bundle_validation_preview import build_preview
 from commercial_economics import evaluate_asset, evaluate_bundle
 
 
@@ -154,16 +155,14 @@ def main() -> None:
     )
 
     if args.bundle_id:
-        bundles=json.loads(BUNDLES.read_text(encoding="utf-8"))
-        by_id={x["bundle_id"]:x for x in bundles.get("bundles",[])}
-        if args.bundle_id not in by_id:
-            raise SystemExit("unknown bundle id")
-        context=CommercialAssetContext.from_files(REGISTRY,overlay_path=args.overlay)
-        report["bundle_price_evaluation"]=evaluate_bundle(
-            bundle=by_id[args.bundle_id],
-            context=context,
-            proposed_price_minor=args.proposed_price_minor,
-        )
+        try:
+            report["bundle_validation_preview"]=build_preview(
+                args.bundle_id,
+                overlay_path=args.overlay,
+                proposed_price_minor=args.proposed_price_minor,
+            )
+        except ValueError as exc:
+            raise SystemExit(str(exc)) from exc
     elif args.proposed_price_minor is not None:
         raise SystemExit("--proposed-price-minor requires --bundle-id")
 

@@ -257,12 +257,20 @@ def evaluate_bundle(
     )
     costs_known=all(part["unit_cost_minor"] is not None for part in parts)
     combined_cost=sum(part["unit_cost_minor"] for part in parts) if costs_known else None
+    evidence_refs=sorted({
+        str(ref)
+        for part in parts
+        for ref in part.get("operational_evidence_refs",[])
+        if str(ref).strip()
+    })
     subtotal=bundle.get("catalogue_subtotal_minor")
     subtotal=subtotal if isinstance(subtotal,int) else None
 
     if proposed_price_minor is not None:
         if not isinstance(proposed_price_minor,int) or proposed_price_minor <= 0:
             raise CommercialEconomicsError("proposed_price_minor_must_be_positive_int")
+        if subtotal is not None and proposed_price_minor < subtotal:
+            raise CommercialEconomicsError("proposed_bundle_price_below_catalogue_subtotal_not_supported")
 
     contribution=(
         proposed_price_minor-combined_cost
@@ -287,6 +295,8 @@ def evaluate_bundle(
         "label":str(bundle.get("label") or ""),
         "asset_refs":[str(x) for x in refs],
         "catalogue_subtotal_minor":subtotal,
+        "bundle_price_floor_minor":subtotal,
+        "bundle_price_floor_source":"catalogue_subtotal" if subtotal is not None else None,
         "available_bundle_units":available_bundle_units,
         "stock_snapshot_known":stock_known,
         "stock_snapshot_is_readiness_gate":False,
@@ -305,6 +315,7 @@ def evaluate_bundle(
         "manual_validation_ready":not blockers,
         "blockers":blockers,
         "signals":signals,
+        "operational_evidence_refs":evidence_refs,
         "authority":{
             "bundle_price_selected_by_system":False,
             "public_write_authorized":False,

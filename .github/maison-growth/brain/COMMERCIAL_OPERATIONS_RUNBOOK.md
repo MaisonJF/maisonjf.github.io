@@ -13,13 +13,13 @@ This rebuild is repository-local only; it has no Cloudflare, D1, deploy, checkou
 
 Private operator workflow for turning the current catalogue/Ocean attention model into fact-based commercial readiness.
 
-> This path does not publish, discount, promise stock, open checkout, send outreach or execute experiments.
+> This path does not publish, change public prices, promise stock, open checkout, send outreach or execute experiments.
 
 ## 1. Copy the operator templates outside the repository
 
 Use both templates when possible:
 
-- `commercial-stocktake.template.json` — 5 active public physical products;
+- `commercial-operations-facts.template.json` — 5 active public physical products, with cost + replenishment as the structural facts;\n- `commercial-stocktake.template.json` — legacy compatibility template only; finished-stock counts are optional snapshots;
 - `commercial-service-capacity.template.json` — 7 active public service/B2B entries.
 
 Never fill private quantities/costs inside the git repository. The Brain directory also ignores `*.private.json`, but the overlay builder goes further and refuses to write its final private overlay anywhere inside the repository.
@@ -52,7 +52,7 @@ Example:
 
 ```bash
 python .github/maison-growth/brain/prepare_commercial_overlay.py \
-  --stocktake /private/path/stocktake.json \
+  --operations /private/path/operations-facts.json \
   --services /private/path/services.json \
   --observed-at "<ISO-8601 timestamp>" \
   --evidence-ref "manual:operations:<date>" \
@@ -72,7 +72,7 @@ The report keeps **commercial attention** separate from **unit economics**:
 
 - attention = Ocean relevance + current public offer context;
 - unit economics = observed price/cost facts only;
-- operational readiness = observed stock/capacity facts only.
+- operational readiness = evidence-backed cost/capacity facts; finished stock is only an optional timestamped snapshot.
 
 The attention score is never treated as a profit forecast.
 
@@ -95,9 +95,9 @@ python .github/maison-growth/brain/commercial_operator_report.py \
 
 For `starting_from` services, the human-selected value must be at or above the catalogue minimum. Quote-only services accept a concrete human-approved quote for evaluation. This is calculation only; it does not change the public catalogue.
 
-## 6. Evaluate a human-chosen bundle price
+## 6. Preview a human-chosen bundle price for validation
 
-The system never chooses a bundle price or discount. After a human supplies a candidate price, the evaluator can calculate stock feasibility, combined observed cost, difference from catalogue subtotal and contribution.
+The system never chooses a bundle price. The catalogue subtotal is the minimum supported bundle price; value is added through composition and experience rather than price reduction. After a human supplies a candidate price at or above that floor, the evaluator can calculate replenishment feasibility, combined observed cost, contribution and the next human-validation gate.
 
 ```bash
 python .github/maison-growth/brain/commercial_operator_report.py \
@@ -106,7 +106,7 @@ python .github/maison-growth/brain/commercial_operator_report.py \
   --proposed-price-minor <HUMAN_CHOSEN_PRICE_MINOR>
 ```
 
-A calculation does not authorize publication, checkout, discounting or experiment execution.
+A calculation does not authorize publication, checkout, price changes or experiment execution.
 
 ## 7. Read the offline Commercial Readiness Board
 
