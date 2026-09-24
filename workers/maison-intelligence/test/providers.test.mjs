@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { configuredProviders } from '../src/providers.js';
+import { configuredProviders, isZeroCostOpenRouterModel } from '../src/providers.js';
 
 test('all AI providers are opt-in even when bindings or model names exist', () => {
   const env = {
@@ -27,7 +27,7 @@ test('explicit enable flags expose only selected configured providers', () => {
     OPENAI_MODEL: 'test',
     OPENROUTER_ENABLED: 'true',
     OPENROUTER_API_KEY: 'x',
-    OPENROUTER_MODEL: 'test',
+    OPENROUTER_MODEL: 'openrouter/free',
     GEMINI_ENABLED: 'false',
     GEMINI_API_KEY: 'x',
     GEMINI_MODEL: 'test'
@@ -46,4 +46,28 @@ test('enable flag without required secret or model is skipped', () => {
     ANTHROPIC_ENABLED: 'true',
     ANTHROPIC_API_KEY: 'x'
   }), []);
+});
+
+
+test('OpenRouter only accepts explicitly free model routes', () => {
+  assert.equal(isZeroCostOpenRouterModel('openrouter/free'), true);
+  assert.equal(isZeroCostOpenRouterModel('google/gemma-4-27b-it:free'), true);
+  assert.equal(isZeroCostOpenRouterModel('openai/gpt-5'), false);
+  assert.equal(isZeroCostOpenRouterModel('openrouter/auto'), false);
+});
+
+test('paid OpenRouter model is refused even when enabled and keyed', () => {
+  assert.deepEqual(configuredProviders({
+    OPENROUTER_ENABLED: 'true',
+    OPENROUTER_API_KEY: 'x',
+    OPENROUTER_MODEL: 'openai/gpt-5'
+  }), []);
+});
+
+test('free OpenRouter route is admitted when enabled and keyed', () => {
+  assert.deepEqual(configuredProviders({
+    OPENROUTER_ENABLED: 'true',
+    OPENROUTER_API_KEY: 'x',
+    OPENROUTER_MODEL: 'openrouter/free'
+  }), ['openrouter']);
 });
