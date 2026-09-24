@@ -136,7 +136,7 @@ python .github/maison-growth/brain/commercial_fact_collection_plan.py \
   --output /private/path/maison-commercial-fact-plan.private.json
 ```
 
-If a private overlay already exists, pass it with `--overlay`. Assets automatically move from stock → cost → human review (or service price → capacity → effort/cost) as evidence-backed facts become known. Generated values remain null; the script never guesses stock, cost, capacity or prices and grants no execution authority.
+If a private overlay already exists, pass it with `--overlay`. Physical assets automatically move through cost → replenishment capacity → human review as evidence-backed facts become known. Current finished-stock counts may be recorded as timestamped snapshots, but they are not a structural readiness gate because Maison can replenish production quickly. Services move through price → capacity → effort/cost. Generated values remain null; the script never guesses stock, cost, capacity or prices and grants no execution authority.
 
 ## 9. Build manual-pilot dossiers from approved validation plans
 
