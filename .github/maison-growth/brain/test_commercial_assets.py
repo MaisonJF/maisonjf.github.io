@@ -77,6 +77,23 @@ class CommercialAssetTests(unittest.TestCase):
             self.assertEqual(row["evidence_refs"],[])
             self.assertTrue(all(value is None for value in row["operational"].values()))
 
+    def test_operations_facts_template_covers_active_public_physical_assets(self):
+        template=json.loads((ROOT/"commercial-operations-facts.template.json").read_text(encoding="utf-8"))
+        self.assertEqual(template["target_overlay_schema"],"commercial_asset_overlay_v1")
+        refs={row["asset_ref"] for row in template["assets"]}
+        self.assertEqual(refs,{
+            "catalog:product:escalda-pes",
+            "catalog:product:nevoa",
+            "catalog:product:oleo-massagem",
+            "catalog:product:vela-pequena",
+            "catalog:product:vela-vidro",
+        })
+        self.assertIsNone(template["observed_at"])
+        for row in template["assets"]:
+            self.assertEqual(row["source"],"manual_operations_review")
+            self.assertEqual(row["evidence_refs"],[])
+            self.assertTrue(all(value is None for value in row["operational"].values()))
+
     def test_service_capacity_template_contains_all_active_public_services(self):
         template=json.loads((ROOT/"commercial-service-capacity.template.json").read_text(encoding="utf-8"))
         self.assertEqual(template["target_overlay_schema"],"commercial_asset_overlay_v1")
