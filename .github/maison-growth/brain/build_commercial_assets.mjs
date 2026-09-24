@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import vm from 'node:vm';
+import { MAISON_OFFER_CATALOGUE } from '../../../functions/_lib/offer-brain.js';
 
 const PRODUCTS_URL=new URL('../../../data/products.js',import.meta.url);
 const SERVICES_URL=new URL('../../../data/services.js',import.meta.url);
-const OFFER_BRAIN_URL=new URL('../../../functions/_lib/offer-brain.js',import.meta.url);
 const OUTPUT_URL=new URL('commercial-assets.generated.json',import.meta.url);
 
 function loadWindow(url){
@@ -122,17 +122,6 @@ const products=loadWindow(PRODUCTS_URL);
 const services=loadWindow(SERVICES_URL);
 const assets=[];
 
-function loadDigitalOffers(url){
-  const source=fs.readFileSync(url,'utf8');
-  const marker='export const MAISON_OFFER_CATALOGUE=';
-  const start=source.indexOf(marker);
-  if(start<0)throw new Error('offer_catalogue_not_found');
-  const arrayStart=source.indexOf('[',start+marker.length);
-  const arrayEnd=source.indexOf('];',arrayStart);
-  if(arrayStart<0||arrayEnd<0)throw new Error('offer_catalogue_parse_failed');
-  return vm.runInNewContext(source.slice(arrayStart,arrayEnd+1),Object.create(null),{filename:url.pathname});
-}
-
 function digitalOperationalUnknowns(){
   return {
     capacity_units_per_period:null,
@@ -224,7 +213,7 @@ for(const s of services.MAISON_SERVICES||[]){
 }
 
 
-for(const o of loadDigitalOffers(OFFER_BRAIN_URL)){
+for(const o of MAISON_OFFER_CATALOGUE){
   if(!['oracle','pdi'].includes(o.family))continue;
   assets.push({
     asset_ref:`catalog:digital:${o.id}`,
