@@ -14,7 +14,7 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         board=build_board()
         self.assertEqual(board["kind"],"maison_commercial_readiness_board")
         self.assertFalse(board["overlay_loaded"])
-        self.assertEqual(board["summary"]["assets"],12)
+        self.assertEqual(board["summary"]["assets"],14)
         self.assertEqual(board["summary"]["manual_validation_ready"],0)
         self.assertEqual(board["summary"]["unit_economics_known"],0)
         self.assertFalse(any(board["authority"].values()))
@@ -30,6 +30,16 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         self.assertIn("current_stock_snapshot_unknown",row["readiness"]["signals"])
         self.assertFalse(row["fulfilment"]["stock_snapshot_is_readiness_gate"])
         self.assertFalse(row["readiness"]["unit_economics_known"])
+        self.assertFalse(row["readiness"]["manual_validation_ready"])
+        self.assertFalse(any(row["authority"].values()))
+
+    def test_digital_product_requests_delivery_facts_not_service_capacity(self):
+        board=build_board()
+        row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:digital:oracle")
+        self.assertEqual(row["asset_type"],"digital_product")
+        self.assertEqual(row["next_action"]["code"],"verify_digital_delivery_effort")
+        self.assertNotIn("capacity_incomplete",row["readiness"]["blockers"])
+        self.assertIn("delivery_effort_incomplete",row["readiness"]["blockers"])
         self.assertFalse(row["readiness"]["manual_validation_ready"])
         self.assertFalse(any(row["authority"].values()))
 
