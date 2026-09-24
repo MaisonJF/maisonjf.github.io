@@ -22,10 +22,12 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         self.assertTrue(board["contract"]["unknown_facts_remain_unknown"])
         self.assertTrue(board["contract"]["catalogue_availability_is_not_inventory"])
 
-    def test_physical_product_points_to_stock_before_profit_claim(self):
+    def test_physical_product_points_to_cost_then_replenishment_not_stock_count(self):
         board=build_board()
         row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:product:nevoa")
-        self.assertEqual(row["next_action"]["code"],"verify_stock")
+        self.assertEqual(row["next_action"]["code"],"verify_unit_cost")
+        self.assertIn("current_stock_snapshot_unknown",row["readiness"]["signals"])
+        self.assertFalse(row["fulfilment"]["stock_snapshot_is_readiness_gate"])
         self.assertFalse(row["readiness"]["unit_economics_known"])
         self.assertFalse(row["readiness"]["manual_validation_ready"])
         self.assertFalse(any(row["authority"].values()))
@@ -64,6 +66,31 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         self.assertTrue(row["readiness"]["manual_validation_ready"])
         self.assertEqual(row["next_action"]["code"],"human_validation_review")
         self.assertFalse(any(row["authority"].values()))
+
+    def test_unknown_stock_can_still_be_ready_when_replenishment_is_known(self):
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T04:01:00+01:00",
+            "assets":[{
+                "asset_ref":"catalog:product:nevoa",
+                "operational":{
+                    "unit_material_cost_minor":150,
+                    "packaging_cost_minor":50,
+                    "production_minutes_per_unit":5,
+                    "batch_capacity_units":30,
+                },
+                "evidence_refs":["manual:operations:test"],
+            }],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/"facts.private.json"
+            path.write_text(json.dumps(overlay),encoding="utf-8")
+            board=build_board(overlay_path=path)
+        row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:product:nevoa")
+        self.assertIsNone(row["fulfilment"]["available_units_at_observation"])
+        self.assertTrue(row["fulfilment"]["replenishment_capacity_known"])
+        self.assertTrue(row["readiness"]["manual_validation_ready"])
+        self.assertEqual(row["next_action"]["code"],"human_validation_review")
 
     def test_selected_catalogue_service_option_is_visible_but_still_human_gated(self):
         board=build_board(selected_service_prices={"catalog:service:companhia":3500})
