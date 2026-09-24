@@ -184,7 +184,7 @@ When enabled on the private host, these systems contribute retrieval/context ref
 
 The generated registry records known catalogue facts such as product/service identity, public price where machine-readable, lifecycle status and catalogue availability. It deliberately keeps operational fields null/UNKNOWN.
 
-The optional private overlay contract is `commercial-asset-overlay.schema.json`. An operator may keep a matching JSON file **outside git** and point `MAISON_COMMERCIAL_ASSET_OVERLAY_PATH` to it. Any known operational value requires an evidence reference. Catalogue `in_stock` never becomes counted inventory.
+The optional private overlay contract is `commercial-asset-overlay.schema.json`. An operator may keep a matching JSON file **outside git** and point `MAISON_COMMERCIAL_ASSET_OVERLAY_PATH` to it. Any known operational value requires an evidence reference. Catalogue `in_stock` never becomes counted inventory. For the existing digital products, `commercial-digital-operations.template.json` captures only per-sale human effort, variable cost and delivery lead time; null remains UNKNOWN and zero must be evidence-backed rather than assumed.
 
 The general Maison Brain MCP tool `maison_commercial_asset_search` does **not** load or expose the private overlay; it returns catalogue-derived context only. `maison_digital_experience_coverage` exposes metadata-only Ocean → Oráculo/PÁRA DE IGNORAR! feed coverage, never paid question or reading bodies.
 
