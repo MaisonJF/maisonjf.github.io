@@ -17,10 +17,11 @@ Private operator workflow for turning the current catalogue/Ocean attention mode
 
 ## 1. Copy the operator templates outside the repository
 
-Use both templates when possible:
+Use the current operator templates when possible:
 
-- `commercial-stocktake.template.json` — 5 active public physical products;
-- `commercial-service-capacity.template.json` — 7 active public service/B2B entries.
+- `commercial-operations-facts.template.json` — preferred physical-products template; unit cost + replenishment capacity are structural facts and finished stock is optional/volatile;
+- `commercial-service-capacity.template.json` — active public service/B2B entries;
+- `commercial-stocktake.template.json` — legacy compatibility input only.
 
 Never fill private quantities/costs inside the git repository. The Brain directory also ignores `*.private.json`, but the overlay builder goes further and refuses to write its final private overlay anywhere inside the repository.
 
@@ -28,11 +29,12 @@ Never fill private quantities/costs inside the git repository. The Brain directo
 
 Physical products support:
 
-- `inventory_quantity`;
-- `reserved_quantity`;
-- `unit_material_cost_minor`;
-- `packaging_cost_minor`;
-- production/batch/MOQ/shelf-life/supplier-lead facts when actually known.
+- structural cost facts: `unit_material_cost_minor` and `packaging_cost_minor`;
+- structural replenishment facts: `production_minutes_per_unit` and `batch_capacity_units`;
+- optional timestamped stock snapshot: `inventory_quantity` and `reserved_quantity`;
+- optional MOQ/shelf-life/supplier-lead facts when actually known.
+
+Finished-stock quantity is never a structural readiness gate: Maison may be able to replenish rapidly, so fulfilment readiness is based on real replenishment capacity plus economics.
 
 Services support:
 
@@ -52,7 +54,7 @@ Example:
 
 ```bash
 python .github/maison-growth/brain/prepare_commercial_overlay.py \
-  --stocktake /private/path/stocktake.json \
+  --operations /private/path/operations-facts.json \
   --services /private/path/services.json \
   --observed-at "<ISO-8601 timestamp>" \
   --evidence-ref "manual:operations:<date>" \
@@ -72,7 +74,7 @@ The report keeps **commercial attention** separate from **unit economics**:
 
 - attention = Ocean relevance + current public offer context;
 - unit economics = observed price/cost facts only;
-- operational readiness = observed stock/capacity facts only.
+- operational readiness = observed replenishment/capacity facts only; finished stock remains a volatile snapshot.
 
 The attention score is never treated as a profit forecast.
 
@@ -97,7 +99,7 @@ For `starting_from` services, the human-selected value must be at or above the c
 
 ## 6. Evaluate a human-chosen bundle price
 
-The system never chooses a bundle price or discount. After a human supplies a candidate price, the evaluator can calculate stock feasibility, combined observed cost, difference from catalogue subtotal and contribution.
+The system never chooses a bundle price. Maison has no discount mechanism. After a human supplies a candidate price, the evaluator can calculate replenishment feasibility, combined observed cost, difference from catalogue subtotal and contribution.
 
 ```bash
 python .github/maison-growth/brain/commercial_operator_report.py \
@@ -106,7 +108,7 @@ python .github/maison-growth/brain/commercial_operator_report.py \
   --proposed-price-minor <HUMAN_CHOSEN_PRICE_MINOR>
 ```
 
-A calculation does not authorize publication, checkout, discounting or experiment execution.
+A calculation does not authorize publication, checkout or experiment execution.
 
 ## 7. Read the offline Commercial Readiness Board
 
@@ -161,8 +163,20 @@ The private context can supply items such as a B2B target profile, human quote r
 
 For a private/local operator terminal only, `--full` prints the detailed dossier, including candidate assets, required inputs, success/stop signals and internal plan identifiers. Private context values themselves are not copied into the dossier; only their evidence references and the fact that evidence-backed context was applied are retained.
 
-A physical or service dossier can become `ready_for_human_action_review` only when one actual candidate carries the complete operational fact set required for that pilot. Facts split across several different candidates do not fake readiness, and the pilot-context file cannot bypass this rule. For every plan kind, `ready_for_human_action_review` still grants no outbound, spend, public-write or experiment-execution authority.
+A physical or service dossier can become `ready_for_human_action_review` only when one actual candidate carries the complete operational fact set required for that pilot. For physical candidates, that means evidence-backed unit economics plus practical replenishment capacity; a finished-stock count may be recorded but is not structurally required. Facts split across several different candidates do not fake readiness, and the pilot-context file cannot bypass this rule. For every plan kind, `ready_for_human_action_review` still grants no outbound, spend, public-write or experiment-execution authority.
 
 ## 10. Only then feed facts into validation planning
 
 Once stock/cost/capacity facts are known, they can support A14/A12 manual validation planning. Human review remains the authority boundary. A8 remains draft-only unless a separately governed CTA decision exists.
+
+
+## 11. Compare attention and economics without collapsing them into one score
+
+Use the human-only decision-support matrix when you want one view across attention, readiness and economics without inventing a winner:
+
+```bash
+python .github/maison-growth/brain/commercial_decision_support_matrix.py \
+  --overlay /private/path/maison-commercial-overlay.private.json
+```
+
+By default, private economic values are not printed: the matrix reports only whether each dimension is known or unknown. For a private local operator terminal, `--full-private-values` may be used together with `--overlay` to reveal the evidence-backed numbers. The matrix preserves attention order, creates no combined score, performs no profit ranking and never recommends an automatic commercial winner.
