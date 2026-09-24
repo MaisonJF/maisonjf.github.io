@@ -271,7 +271,8 @@ const payload={
     structured_service_pricing:true,
     multi_format_prices_not_flattened:true,
     quote_prices_remain_unknown:true,
-    commercial_pii:false
+    commercial_pii:false,
+    digital_assets_from_offer_brain:true
   },
   summary:{
     total:assets.length,
