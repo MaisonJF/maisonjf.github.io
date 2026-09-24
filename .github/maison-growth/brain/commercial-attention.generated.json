@@ -29,24 +29,12 @@
       "price_minor": 200,
       "price_label": "2 €",
       "currency": "EUR",
-      "attention_score": 207,
-      "direct_ocean_mentions": 15,
+      "attention_score": 63,
+      "direct_ocean_mentions": 3,
       "direct_ocean_territories": [
-        "atencao-fragmentada-por-interrupcoes-digitais",
-        "auto-silenciamento-para-preservar-o-vinculo",
-        "autonomia-condicionada-pelo-medo-da-reaccao",
-        "carga-mental-invisivel-da-casa",
-        "cuidar-sem-desaparecer-no-papel-de-cuidador",
-        "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
-        "doomscrolling-para-tentar-reduzir-incerteza",
-        "evitamento-financeiro-sob-escassez",
-        "luto-por-um-futuro-que-deixou-de-ser-possivel",
-        "perda-ambigua-sem-fecho-claro",
         "precisar-de-solidao-para-recuperar-energia-social",
         "presenca-que-ampara-sem-tentar-resolver",
-        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-        "solidao-com-contacto-sem-conexao-de-qualidade",
-        "telepressao-e-disponibilidade-permanente"
+        "solidao-com-contacto-sem-conexao-de-qualidade"
       ],
       "contextual_ocean_matches": [
         {
@@ -96,6 +84,53 @@
       "attention_rank": 1
     },
     {
+      "asset_ref": "catalog:digital:oracle-direction",
+      "name": "Oráculo · Escolhas & Mudança",
+      "asset_type": "digital_product",
+      "slug": "oracle-direction",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 63,
+      "direct_ocean_mentions": 4,
+      "direct_ocean_territories": [
+        "autonomia-condicionada-pelo-medo-da-reaccao",
+        "luto-por-um-futuro-que-deixou-de-ser-possivel",
+        "perda-ambigua-sem-fecho-claro",
+        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam"
+      ],
+      "contextual_ocean_matches": [
+        {
+          "territory": "solidao-com-contacto-sem-conexao-de-qualidade",
+          "score": 0.0746
+        },
+        {
+          "territory": "atencao-fragmentada-por-interrupcoes-digitais",
+          "score": 0.0652
+        },
+        {
+          "territory": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
+          "score": 0.0641
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "direct_ocean_adjacency",
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 2
+    },
+    {
       "asset_ref": "catalog:digital:oracle-security",
       "name": "Oráculo · Medo do Futuro",
       "asset_type": "digital_product",
@@ -103,24 +138,12 @@
       "price_minor": 200,
       "price_label": "2 €",
       "currency": "EUR",
-      "attention_score": 207,
-      "direct_ocean_mentions": 15,
+      "attention_score": 63,
+      "direct_ocean_mentions": 3,
       "direct_ocean_territories": [
-        "atencao-fragmentada-por-interrupcoes-digitais",
         "auto-silenciamento-para-preservar-o-vinculo",
-        "autonomia-condicionada-pelo-medo-da-reaccao",
-        "carga-mental-invisivel-da-casa",
-        "cuidar-sem-desaparecer-no-papel-de-cuidador",
-        "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
         "doomscrolling-para-tentar-reduzir-incerteza",
-        "evitamento-financeiro-sob-escassez",
-        "luto-por-um-futuro-que-deixou-de-ser-possivel",
-        "perda-ambigua-sem-fecho-claro",
-        "precisar-de-solidao-para-recuperar-energia-social",
-        "presenca-que-ampara-sem-tentar-resolver",
-        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-        "solidao-com-contacto-sem-conexao-de-qualidade",
-        "telepressao-e-disponibilidade-permanente"
+        "evitamento-financeiro-sob-escassez"
       ],
       "contextual_ocean_matches": [
         {
@@ -167,375 +190,7 @@
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 2
-    },
-    {
-      "asset_ref": "catalog:digital:oracle-direction",
-      "name": "Oráculo · Escolhas & Mudança",
-      "asset_type": "digital_product",
-      "slug": "oracle-direction",
-      "price_minor": 200,
-      "price_label": "2 €",
-      "currency": "EUR",
-      "attention_score": 195,
-      "direct_ocean_mentions": 15,
-      "direct_ocean_territories": [
-        "atencao-fragmentada-por-interrupcoes-digitais",
-        "auto-silenciamento-para-preservar-o-vinculo",
-        "autonomia-condicionada-pelo-medo-da-reaccao",
-        "carga-mental-invisivel-da-casa",
-        "cuidar-sem-desaparecer-no-papel-de-cuidador",
-        "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
-        "doomscrolling-para-tentar-reduzir-incerteza",
-        "evitamento-financeiro-sob-escassez",
-        "luto-por-um-futuro-que-deixou-de-ser-possivel",
-        "perda-ambigua-sem-fecho-claro",
-        "precisar-de-solidao-para-recuperar-energia-social",
-        "presenca-que-ampara-sem-tentar-resolver",
-        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-        "solidao-com-contacto-sem-conexao-de-qualidade",
-        "telepressao-e-disponibilidade-permanente"
-      ],
-      "contextual_ocean_matches": [
-        {
-          "territory": "solidao-com-contacto-sem-conexao-de-qualidade",
-          "score": 0.0746
-        },
-        {
-          "territory": "atencao-fragmentada-por-interrupcoes-digitais",
-          "score": 0.0652
-        },
-        {
-          "territory": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-          "score": 0.0641
-        }
-      ],
-      "operational_blockers": [],
-      "profitability_known": false,
-      "ready_for_automatic_sale": false,
-      "reason_codes": [
-        "direct_ocean_adjacency",
-        "contextual_ocean_match",
-        "low_price_barrier",
-        "public_active_asset"
-      ],
-      "authority": {
-        "public_write_authorized": false,
-        "discount_authorized": false,
-        "stock_promise_authorized": false,
-        "automatic_checkout_authorized": false
-      },
       "attention_rank": 3
-    },
-    {
-      "asset_ref": "catalog:digital:oracle-self",
-      "name": "Oráculo · Autoabandono",
-      "asset_type": "digital_product",
-      "slug": "oracle-self",
-      "price_minor": 200,
-      "price_label": "2 €",
-      "currency": "EUR",
-      "attention_score": 195,
-      "direct_ocean_mentions": 15,
-      "direct_ocean_territories": [
-        "atencao-fragmentada-por-interrupcoes-digitais",
-        "auto-silenciamento-para-preservar-o-vinculo",
-        "autonomia-condicionada-pelo-medo-da-reaccao",
-        "carga-mental-invisivel-da-casa",
-        "cuidar-sem-desaparecer-no-papel-de-cuidador",
-        "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
-        "doomscrolling-para-tentar-reduzir-incerteza",
-        "evitamento-financeiro-sob-escassez",
-        "luto-por-um-futuro-que-deixou-de-ser-possivel",
-        "perda-ambigua-sem-fecho-claro",
-        "precisar-de-solidao-para-recuperar-energia-social",
-        "presenca-que-ampara-sem-tentar-resolver",
-        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-        "solidao-com-contacto-sem-conexao-de-qualidade",
-        "telepressao-e-disponibilidade-permanente"
-      ],
-      "contextual_ocean_matches": [
-        {
-          "territory": "doomscrolling-para-tentar-reduzir-incerteza",
-          "score": 0.0792
-        },
-        {
-          "territory": "atencao-fragmentada-por-interrupcoes-digitais",
-          "score": 0.0638
-        },
-        {
-          "territory": "evitamento-financeiro-sob-escassez",
-          "score": 0.0625
-        }
-      ],
-      "operational_blockers": [],
-      "profitability_known": false,
-      "ready_for_automatic_sale": false,
-      "reason_codes": [
-        "direct_ocean_adjacency",
-        "contextual_ocean_match",
-        "low_price_barrier",
-        "public_active_asset"
-      ],
-      "authority": {
-        "public_write_authorized": false,
-        "discount_authorized": false,
-        "stock_promise_authorized": false,
-        "automatic_checkout_authorized": false
-      },
-      "attention_rank": 4
-    },
-    {
-      "asset_ref": "catalog:digital:oracle-attachment",
-      "name": "Oráculo · Apego & Dependência",
-      "asset_type": "digital_product",
-      "slug": "oracle-attachment",
-      "price_minor": 200,
-      "price_label": "2 €",
-      "currency": "EUR",
-      "attention_score": 192,
-      "direct_ocean_mentions": 15,
-      "direct_ocean_territories": [
-        "atencao-fragmentada-por-interrupcoes-digitais",
-        "auto-silenciamento-para-preservar-o-vinculo",
-        "autonomia-condicionada-pelo-medo-da-reaccao",
-        "carga-mental-invisivel-da-casa",
-        "cuidar-sem-desaparecer-no-papel-de-cuidador",
-        "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
-        "doomscrolling-para-tentar-reduzir-incerteza",
-        "evitamento-financeiro-sob-escassez",
-        "luto-por-um-futuro-que-deixou-de-ser-possivel",
-        "perda-ambigua-sem-fecho-claro",
-        "precisar-de-solidao-para-recuperar-energia-social",
-        "presenca-que-ampara-sem-tentar-resolver",
-        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-        "solidao-com-contacto-sem-conexao-de-qualidade",
-        "telepressao-e-disponibilidade-permanente"
-      ],
-      "contextual_ocean_matches": [
-        {
-          "territory": "telepressao-e-disponibilidade-permanente",
-          "score": 0.0682
-        },
-        {
-          "territory": "cuidar-sem-desaparecer-no-papel-de-cuidador",
-          "score": 0.0641
-        }
-      ],
-      "operational_blockers": [],
-      "profitability_known": false,
-      "ready_for_automatic_sale": false,
-      "reason_codes": [
-        "direct_ocean_adjacency",
-        "contextual_ocean_match",
-        "low_price_barrier",
-        "public_active_asset"
-      ],
-      "authority": {
-        "public_write_authorized": false,
-        "discount_authorized": false,
-        "stock_promise_authorized": false,
-        "automatic_checkout_authorized": false
-      },
-      "attention_rank": 5
-    },
-    {
-      "asset_ref": "catalog:digital:oracle-seen",
-      "name": "Oráculo · Aprovação & Validação",
-      "asset_type": "digital_product",
-      "slug": "oracle-seen",
-      "price_minor": 200,
-      "price_label": "2 €",
-      "currency": "EUR",
-      "attention_score": 192,
-      "direct_ocean_mentions": 15,
-      "direct_ocean_territories": [
-        "atencao-fragmentada-por-interrupcoes-digitais",
-        "auto-silenciamento-para-preservar-o-vinculo",
-        "autonomia-condicionada-pelo-medo-da-reaccao",
-        "carga-mental-invisivel-da-casa",
-        "cuidar-sem-desaparecer-no-papel-de-cuidador",
-        "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
-        "doomscrolling-para-tentar-reduzir-incerteza",
-        "evitamento-financeiro-sob-escassez",
-        "luto-por-um-futuro-que-deixou-de-ser-possivel",
-        "perda-ambigua-sem-fecho-claro",
-        "precisar-de-solidao-para-recuperar-energia-social",
-        "presenca-que-ampara-sem-tentar-resolver",
-        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-        "solidao-com-contacto-sem-conexao-de-qualidade",
-        "telepressao-e-disponibilidade-permanente"
-      ],
-      "contextual_ocean_matches": [
-        {
-          "territory": "perda-ambigua-sem-fecho-claro",
-          "score": 0.0625
-        },
-        {
-          "territory": "evitamento-financeiro-sob-escassez",
-          "score": 0.0615
-        }
-      ],
-      "operational_blockers": [],
-      "profitability_known": false,
-      "ready_for_automatic_sale": false,
-      "reason_codes": [
-        "direct_ocean_adjacency",
-        "contextual_ocean_match",
-        "low_price_barrier",
-        "public_active_asset"
-      ],
-      "authority": {
-        "public_write_authorized": false,
-        "discount_authorized": false,
-        "stock_promise_authorized": false,
-        "automatic_checkout_authorized": false
-      },
-      "attention_rank": 6
-    },
-    {
-      "asset_ref": "catalog:digital:oracle-control",
-      "name": "Oráculo · Controlo & Incerteza",
-      "asset_type": "digital_product",
-      "slug": "oracle-control",
-      "price_minor": 200,
-      "price_label": "2 €",
-      "currency": "EUR",
-      "attention_score": 189,
-      "direct_ocean_mentions": 15,
-      "direct_ocean_territories": [
-        "atencao-fragmentada-por-interrupcoes-digitais",
-        "auto-silenciamento-para-preservar-o-vinculo",
-        "autonomia-condicionada-pelo-medo-da-reaccao",
-        "carga-mental-invisivel-da-casa",
-        "cuidar-sem-desaparecer-no-papel-de-cuidador",
-        "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
-        "doomscrolling-para-tentar-reduzir-incerteza",
-        "evitamento-financeiro-sob-escassez",
-        "luto-por-um-futuro-que-deixou-de-ser-possivel",
-        "perda-ambigua-sem-fecho-claro",
-        "precisar-de-solidao-para-recuperar-energia-social",
-        "presenca-que-ampara-sem-tentar-resolver",
-        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-        "solidao-com-contacto-sem-conexao-de-qualidade",
-        "telepressao-e-disponibilidade-permanente"
-      ],
-      "contextual_ocean_matches": [
-        {
-          "territory": "doomscrolling-para-tentar-reduzir-incerteza",
-          "score": 0.0729
-        }
-      ],
-      "operational_blockers": [],
-      "profitability_known": false,
-      "ready_for_automatic_sale": false,
-      "reason_codes": [
-        "direct_ocean_adjacency",
-        "contextual_ocean_match",
-        "low_price_barrier",
-        "public_active_asset"
-      ],
-      "authority": {
-        "public_write_authorized": false,
-        "discount_authorized": false,
-        "stock_promise_authorized": false,
-        "automatic_checkout_authorized": false
-      },
-      "attention_rank": 7
-    },
-    {
-      "asset_ref": "catalog:digital:oracle-load",
-      "name": "Oráculo · Energia & Cansaço",
-      "asset_type": "digital_product",
-      "slug": "oracle-load",
-      "price_minor": 200,
-      "price_label": "2 €",
-      "currency": "EUR",
-      "attention_score": 189,
-      "direct_ocean_mentions": 15,
-      "direct_ocean_territories": [
-        "atencao-fragmentada-por-interrupcoes-digitais",
-        "auto-silenciamento-para-preservar-o-vinculo",
-        "autonomia-condicionada-pelo-medo-da-reaccao",
-        "carga-mental-invisivel-da-casa",
-        "cuidar-sem-desaparecer-no-papel-de-cuidador",
-        "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
-        "doomscrolling-para-tentar-reduzir-incerteza",
-        "evitamento-financeiro-sob-escassez",
-        "luto-por-um-futuro-que-deixou-de-ser-possivel",
-        "perda-ambigua-sem-fecho-claro",
-        "precisar-de-solidao-para-recuperar-energia-social",
-        "presenca-que-ampara-sem-tentar-resolver",
-        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-        "solidao-com-contacto-sem-conexao-de-qualidade",
-        "telepressao-e-disponibilidade-permanente"
-      ],
-      "contextual_ocean_matches": [
-        {
-          "territory": "precisar-de-solidao-para-recuperar-energia-social",
-          "score": 0.06
-        }
-      ],
-      "operational_blockers": [],
-      "profitability_known": false,
-      "ready_for_automatic_sale": false,
-      "reason_codes": [
-        "direct_ocean_adjacency",
-        "contextual_ocean_match",
-        "low_price_barrier",
-        "public_active_asset"
-      ],
-      "authority": {
-        "public_write_authorized": false,
-        "discount_authorized": false,
-        "stock_promise_authorized": false,
-        "automatic_checkout_authorized": false
-      },
-      "attention_rank": 8
-    },
-    {
-      "asset_ref": "catalog:digital:oracle-self-worth",
-      "name": "Oráculo · Autoestima & Valor",
-      "asset_type": "digital_product",
-      "slug": "oracle-self-worth",
-      "price_minor": 200,
-      "price_label": "2 €",
-      "currency": "EUR",
-      "attention_score": 186,
-      "direct_ocean_mentions": 15,
-      "direct_ocean_territories": [
-        "atencao-fragmentada-por-interrupcoes-digitais",
-        "auto-silenciamento-para-preservar-o-vinculo",
-        "autonomia-condicionada-pelo-medo-da-reaccao",
-        "carga-mental-invisivel-da-casa",
-        "cuidar-sem-desaparecer-no-papel-de-cuidador",
-        "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
-        "doomscrolling-para-tentar-reduzir-incerteza",
-        "evitamento-financeiro-sob-escassez",
-        "luto-por-um-futuro-que-deixou-de-ser-possivel",
-        "perda-ambigua-sem-fecho-claro",
-        "precisar-de-solidao-para-recuperar-energia-social",
-        "presenca-que-ampara-sem-tentar-resolver",
-        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-        "solidao-com-contacto-sem-conexao-de-qualidade",
-        "telepressao-e-disponibilidade-permanente"
-      ],
-      "contextual_ocean_matches": [],
-      "operational_blockers": [],
-      "profitability_known": false,
-      "ready_for_automatic_sale": false,
-      "reason_codes": [
-        "direct_ocean_adjacency",
-        "low_price_barrier",
-        "public_active_asset"
-      ],
-      "authority": {
-        "public_write_authorized": false,
-        "discount_authorized": false,
-        "stock_promise_authorized": false,
-        "automatic_checkout_authorized": false
-      },
-      "attention_rank": 9
     },
     {
       "asset_ref": "catalog:product:nevoa",
@@ -597,7 +252,7 @@
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 10
+      "attention_rank": 4
     },
     {
       "asset_ref": "catalog:service:companhia",
@@ -645,7 +300,7 @@
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 11
+      "attention_rank": 5
     },
     {
       "asset_ref": "catalog:product:escalda-pes",
@@ -699,7 +354,7 @@
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 12
+      "attention_rank": 6
     },
     {
       "asset_ref": "catalog:product:vela-pequena",
@@ -745,7 +400,7 @@
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 13
+      "attention_rank": 7
     },
     {
       "asset_ref": "catalog:product:vela-vidro",
@@ -791,7 +446,7 @@
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 14
+      "attention_rank": 8
     },
     {
       "asset_ref": "catalog:product:oleo-massagem",
@@ -831,7 +486,7 @@
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 15
+      "attention_rank": 9
     },
     {
       "asset_ref": "catalog:service:tarot",
@@ -891,7 +546,7 @@
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 16
+      "attention_rank": 10
     },
     {
       "asset_ref": "catalog:service:acompanhamento",
@@ -946,7 +601,48 @@
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 17
+      "attention_rank": 11
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-self",
+      "name": "Oráculo · Autoabandono",
+      "asset_type": "digital_product",
+      "slug": "oracle-self",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 15,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "doomscrolling-para-tentar-reduzir-incerteza",
+          "score": 0.0792
+        },
+        {
+          "territory": "atencao-fragmentada-por-interrupcoes-digitais",
+          "score": 0.0638
+        },
+        {
+          "territory": "evitamento-financeiro-sob-escassez",
+          "score": 0.0625
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 12
     },
     {
       "asset_ref": "catalog:service:ritual-personalizado",
@@ -997,7 +693,147 @@
         "stock_promise_authorized": false,
         "automatic_checkout_authorized": false
       },
-      "attention_rank": 18
+      "attention_rank": 13
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-attachment",
+      "name": "Oráculo · Apego & Dependência",
+      "asset_type": "digital_product",
+      "slug": "oracle-attachment",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 12,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "telepressao-e-disponibilidade-permanente",
+          "score": 0.0682
+        },
+        {
+          "territory": "cuidar-sem-desaparecer-no-papel-de-cuidador",
+          "score": 0.0641
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 14
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-seen",
+      "name": "Oráculo · Aprovação & Validação",
+      "asset_type": "digital_product",
+      "slug": "oracle-seen",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 12,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "perda-ambigua-sem-fecho-claro",
+          "score": 0.0625
+        },
+        {
+          "territory": "evitamento-financeiro-sob-escassez",
+          "score": 0.0615
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 15
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-control",
+      "name": "Oráculo · Controlo & Incerteza",
+      "asset_type": "digital_product",
+      "slug": "oracle-control",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 9,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "doomscrolling-para-tentar-reduzir-incerteza",
+          "score": 0.0729
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 16
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-load",
+      "name": "Oráculo · Energia & Cansaço",
+      "asset_type": "digital_product",
+      "slug": "oracle-load",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 9,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [
+        {
+          "territory": "precisar-de-solidao-para-recuperar-energia-social",
+          "score": 0.06
+        }
+      ],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
+        "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 17
     },
     {
       "asset_ref": "catalog:digital:pdi-relacoes",
@@ -1021,6 +857,33 @@
       "ready_for_automatic_sale": false,
       "reason_codes": [
         "contextual_ocean_match",
+        "low_price_barrier",
+        "public_active_asset"
+      ],
+      "authority": {
+        "public_write_authorized": false,
+        "discount_authorized": false,
+        "stock_promise_authorized": false,
+        "automatic_checkout_authorized": false
+      },
+      "attention_rank": 18
+    },
+    {
+      "asset_ref": "catalog:digital:oracle-self-worth",
+      "name": "Oráculo · Autoestima & Valor",
+      "asset_type": "digital_product",
+      "slug": "oracle-self-worth",
+      "price_minor": 200,
+      "price_label": "2 €",
+      "currency": "EUR",
+      "attention_score": 6,
+      "direct_ocean_mentions": 0,
+      "direct_ocean_territories": [],
+      "contextual_ocean_matches": [],
+      "operational_blockers": [],
+      "profitability_known": false,
+      "ready_for_automatic_sale": false,
+      "reason_codes": [
         "low_price_barrier",
         "public_active_asset"
       ],
