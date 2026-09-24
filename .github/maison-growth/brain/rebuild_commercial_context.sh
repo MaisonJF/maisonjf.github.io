@@ -12,7 +12,7 @@ case "$MODE" in
     node "$ROOT/build_commercial_assets.mjs"
     "$PYTHON_BIN" "$ROOT/digital_experience_coverage.py" --check
     "$PYTHON_BIN" "$ROOT/build_commercial_bundles.py"
-    "$PYTHON_BIN" "$ROOT/build_commercial_attention.py"
+    "$PYTHON_BIN" "$ROOT/build_commercial_attention.py" --check
     ;;
   --check)
     node "$ROOT/build_vpc_ocean_signals.mjs" --check
