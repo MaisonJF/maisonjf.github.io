@@ -8,12 +8,12 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from commercial_assets import CommercialAssetContext
+from build_commercial_attention import load_attention
 from commercial_economics import evaluate_asset
 
 
 ROOT=Path(__file__).resolve().parent
 REGISTRY=ROOT/"commercial-assets.generated.json"
-ATTENTION=ROOT/"commercial-attention.generated.json"
 
 
 def _next_action(row: Mapping[str,Any], economics: Mapping[str,Any]) -> tuple[str,str]:
@@ -52,7 +52,7 @@ def build_board(
     overlay_path: Path | None=None,
     selected_service_prices: Mapping[str,int] | None=None,
 ) -> dict[str,Any]:
-    attention=json.loads(ATTENTION.read_text(encoding="utf-8"))
+    attention=load_attention()
     context=CommercialAssetContext.from_files(REGISTRY,overlay_path=overlay_path)
     selected_service_prices=dict(selected_service_prices or {})
 
