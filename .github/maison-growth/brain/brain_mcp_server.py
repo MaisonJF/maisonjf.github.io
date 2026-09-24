@@ -13,6 +13,7 @@ from mcp.server.transport_security import TransportSecuritySettings
 from mcp.types import ToolAnnotations
 
 from commercial_assets import CommercialAssetContext
+from commercial_ocean_matrix import build_ocean_matrix
 from build_commercial_attention import load_attention as load_commercial_attention
 from digital_experience_coverage import load_coverage as load_digital_experience_coverage
 from commercial_readiness_board import build_board
@@ -235,6 +236,31 @@ def maison_digital_experience_coverage(
         "execution_authority":False,
         "summary":payload.get("summary",{}),
         "products":payload.get("products",{}),
+        "oceans":rows[:limit],
+    }
+
+
+@mcp.tool(annotations=READ_ONLY)
+def maison_ocean_commercial_matrix(
+    territory: str | None=None,
+    limit: int=20,
+) -> dict[str,Any]:
+    """Read current Ocean → digital-feed + existing-offer coverage; no launch recommendation or execution."""
+    if not 1 <= limit <= 100:
+        raise ValueError("limit_must_be_1_100")
+    payload=build_ocean_matrix()
+    rows=payload.get("oceans",[])
+    if territory is not None:
+        key=territory.strip()
+        if not key:
+            raise ValueError("territory_required")
+        rows=[row for row in rows if row.get("territory")==key]
+    return {
+        "mode":"read_only",
+        "attention_score_is_not_profit_score":True,
+        "feed_eligibility_is_not_commercial_demand":True,
+        "execution_authority":False,
+        "summary":payload.get("summary",{}),
         "oceans":rows[:limit],
     }
 
