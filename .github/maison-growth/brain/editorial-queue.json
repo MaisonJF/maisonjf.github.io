@@ -1,7 +1,7 @@
 {
   "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
-  "generatedAt": "2026-09-23T23:49:58+01:00",
+  "generatedAt": "2026-09-24T07:27:00+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
   "contract": {
     "storesPaidBodies": false,
@@ -11,19 +11,19 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 15,
-    "queueItems": 30,
-    "questionCandidates": 15,
-    "questionThemeHypotheses": 92,
-    "questionDesignSlots": 552,
+    "oceansConsidered": 16,
+    "queueItems": 32,
+    "questionCandidates": 16,
+    "questionThemeHypotheses": 99,
+    "questionDesignSlots": 594,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 150,
     "pdiThemeBacklog": 150,
     "pdiSourceDesignSlots": 900,
     "pdiEditorialCoreTarget": 45000,
     "pdiCombinatorialTarget": 2800000,
-    "oracleCandidates": 15,
-    "oracleRoleSlots": 105
+    "oracleCandidates": 16,
+    "oracleRoleSlots": 112
   },
   "pdiGrowth": {
     "scale": {
@@ -8315,6 +8315,34 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_oracle_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido",
+      "type": "oracle_candidate",
+      "sourceOceanId": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+      "territory": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+      "intent": "reconhecer quando descanso e lazer são tratados como algo que precisa de ser merecido, distinguindo uma pausa escolhida de culpa, ruminação e autojulgamento ligados à produtividade sem transformar a experiência em diagnóstico",
+      "painLanguage": "Mesmo quando existe tempo para parar, descansar pode trazer culpa, inquietação ou a sensação de estar a desperdiçar tempo. A pessoa pára por fora, mas por dentro continua a medir o próprio valor pelo que ainda devia estar a produzir.",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre permissão para parar e transição entre produtividade e descanso; Oráculo Eu & Padrões e Trabalho & Caminho, sem claims médicos ou promessa terapêutica",
+      "evidenceCount": 3,
+      "evidence": [
+        "Personality and Social Psychology Bulletin (2026; PMID 42500858): quatro estudos conceptualizam leisure guilt como culpa ou desconforto por passar tempo em lazer em vez de ser produtivo; no estudo de experiência diária, ocorreu em média em 14% das ocasiões de lazer e maior propensão associou-se a menor benefício psicológico percebido do lazer — https://pubmed.ncbi.nlm.nih.gov/42500858/",
+        "Frontiers in Psychology (2026): estudo de network analysis distingue rest intolerance de leisure guilt e descreve culpa, ansiedade, pensamento obsessivo e comparação durante o descanso, relacionando o fenómeno com pobreza de tempo percebida — https://doi.org/10.3389/fpsyg.2026.1872834",
+        "Psychiatric Quarterly (2026; open access): validação de rest intolerance caracteriza emoções negativas como vergonha e culpa durante períodos de descanso e examina a relação com distress emocional, sono e estratégias adaptativas — https://doi.org/10.1007/s11126-025-10176-0"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
       "id": "brain_oracle_doomscrolling_para_tentar_reduzir_incerteza",
       "type": "oracle_candidate",
       "sourceOceanId": "doomscrolling-para-tentar-reduzir-incerteza",
@@ -10221,6 +10249,296 @@
         {
           "id": "slot_cuidar_sem_desaparecer_no_papel_de_cuidador_escolha_e_obrigacao_no_cuidar_signature",
           "theme": "escolha e obrigação no cuidar",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido",
+      "type": "question_candidate",
+      "sourceOceanId": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+      "territory": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+      "intent": "reconhecer quando descanso e lazer são tratados como algo que precisa de ser merecido, distinguindo uma pausa escolhida de culpa, ruminação e autojulgamento ligados à produtividade sem transformar a experiência em diagnóstico",
+      "painLanguage": "Mesmo quando existe tempo para parar, descansar pode trazer culpa, inquietação ou a sensação de estar a desperdiçar tempo. A pessoa pára por fora, mas por dentro continua a medir o próprio valor pelo que ainda devia estar a produzir.",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre permissão para parar e transição entre produtividade e descanso; Oráculo Eu & Padrões e Trabalho & Caminho, sem claims médicos ou promessa terapêutica",
+      "evidenceCount": 3,
+      "evidence": [
+        "Personality and Social Psychology Bulletin (2026; PMID 42500858): quatro estudos conceptualizam leisure guilt como culpa ou desconforto por passar tempo em lazer em vez de ser produtivo; no estudo de experiência diária, ocorreu em média em 14% das ocasiões de lazer e maior propensão associou-se a menor benefício psicológico percebido do lazer — https://pubmed.ncbi.nlm.nih.gov/42500858/",
+        "Frontiers in Psychology (2026): estudo de network analysis distingue rest intolerance de leisure guilt e descreve culpa, ansiedade, pensamento obsessivo e comparação durante o descanso, relacionando o fenómeno com pobreza de tempo percebida — https://doi.org/10.3389/fpsyg.2026.1872834",
+        "Psychiatric Quarterly (2026; open access): validação de rest intolerance caracteriza emoções negativas como vergonha e culpa durante períodos de descanso e examina a relação com distress emocional, sono e estratégias adaptativas — https://doi.org/10.1007/s11126-025-10176-0"
+      ],
+      "questionThemeCandidates": [
+        "culpa ao descansar",
+        "descanso que parece ter de ser merecido",
+        "valor pessoal e produtividade",
+        "parar sem conseguir desligar",
+        "tempo livre que parece desperdício",
+        "tarefas inacabadas durante a pausa",
+        "permitir-se não produzir"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_culpa_ao_descansar_open",
+          "theme": "culpa ao descansar",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_culpa_ao_descansar_recognize",
+          "theme": "culpa ao descansar",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_culpa_ao_descansar_deepen",
+          "theme": "culpa ao descansar",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_culpa_ao_descansar_touch",
+          "theme": "culpa ao descansar",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_culpa_ao_descansar_close",
+          "theme": "culpa ao descansar",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_culpa_ao_descansar_signature",
+          "theme": "culpa ao descansar",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_descanso_que_parece_ter_de_ser_merecido_open",
+          "theme": "descanso que parece ter de ser merecido",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_descanso_que_parece_ter_de_ser_merecido_recognize",
+          "theme": "descanso que parece ter de ser merecido",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_descanso_que_parece_ter_de_ser_merecido_deepen",
+          "theme": "descanso que parece ter de ser merecido",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_descanso_que_parece_ter_de_ser_merecido_touch",
+          "theme": "descanso que parece ter de ser merecido",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_descanso_que_parece_ter_de_ser_merecido_close",
+          "theme": "descanso que parece ter de ser merecido",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_descanso_que_parece_ter_de_ser_merecido_signature",
+          "theme": "descanso que parece ter de ser merecido",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_valor_pessoal_e_produtividade_open",
+          "theme": "valor pessoal e produtividade",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_valor_pessoal_e_produtividade_recognize",
+          "theme": "valor pessoal e produtividade",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_valor_pessoal_e_produtividade_deepen",
+          "theme": "valor pessoal e produtividade",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_valor_pessoal_e_produtividade_touch",
+          "theme": "valor pessoal e produtividade",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_valor_pessoal_e_produtividade_close",
+          "theme": "valor pessoal e produtividade",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_valor_pessoal_e_produtividade_signature",
+          "theme": "valor pessoal e produtividade",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_parar_sem_conseguir_desligar_open",
+          "theme": "parar sem conseguir desligar",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_parar_sem_conseguir_desligar_recognize",
+          "theme": "parar sem conseguir desligar",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_parar_sem_conseguir_desligar_deepen",
+          "theme": "parar sem conseguir desligar",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_parar_sem_conseguir_desligar_touch",
+          "theme": "parar sem conseguir desligar",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_parar_sem_conseguir_desligar_close",
+          "theme": "parar sem conseguir desligar",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_parar_sem_conseguir_desligar_signature",
+          "theme": "parar sem conseguir desligar",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tempo_livre_que_parece_desperdicio_open",
+          "theme": "tempo livre que parece desperdício",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tempo_livre_que_parece_desperdicio_recognize",
+          "theme": "tempo livre que parece desperdício",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tempo_livre_que_parece_desperdicio_deepen",
+          "theme": "tempo livre que parece desperdício",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tempo_livre_que_parece_desperdicio_touch",
+          "theme": "tempo livre que parece desperdício",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tempo_livre_que_parece_desperdicio_close",
+          "theme": "tempo livre que parece desperdício",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tempo_livre_que_parece_desperdicio_signature",
+          "theme": "tempo livre que parece desperdício",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tarefas_inacabadas_durante_a_pausa_open",
+          "theme": "tarefas inacabadas durante a pausa",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tarefas_inacabadas_durante_a_pausa_recognize",
+          "theme": "tarefas inacabadas durante a pausa",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tarefas_inacabadas_durante_a_pausa_deepen",
+          "theme": "tarefas inacabadas durante a pausa",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tarefas_inacabadas_durante_a_pausa_touch",
+          "theme": "tarefas inacabadas durante a pausa",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tarefas_inacabadas_durante_a_pausa_close",
+          "theme": "tarefas inacabadas durante a pausa",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_tarefas_inacabadas_durante_a_pausa_signature",
+          "theme": "tarefas inacabadas durante a pausa",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_permitir_se_nao_produzir_open",
+          "theme": "permitir-se não produzir",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_permitir_se_nao_produzir_recognize",
+          "theme": "permitir-se não produzir",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_permitir_se_nao_produzir_deepen",
+          "theme": "permitir-se não produzir",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_permitir_se_nao_produzir_touch",
+          "theme": "permitir-se não produzir",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_permitir_se_nao_produzir_close",
+          "theme": "permitir-se não produzir",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_culpa_ao_descansar_como_se_o_descanso_tivesse_de_ser_merecido_permitir_se_nao_produzir_signature",
+          "theme": "permitir-se não produzir",
           "stage": "signature",
           "status": "needs_editorial"
         }
