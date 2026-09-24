@@ -8,12 +8,14 @@
     "automatic_publication": false,
     "automatic_discount": false,
     "catalogue_subtotal_is_not_bundle_price": true,
-    "stock_must_be_verified_before_offer": true
+    "current_stock_is_optional_snapshot": true,
+    "replenishment_capacity_must_be_verified_before_offer": true
   },
   "summary": {
     "bundle_count": 4,
     "ready_for_publication": 0,
-    "requires_stock_check": 4,
+    "requires_stock_check": 0,
+    "requires_replenishment_check": 4,
     "requires_margin_check": 4
   },
   "bundles": [
@@ -52,9 +54,11 @@
       "bundle_price_minor": null,
       "discount_minor": null,
       "operational_readiness": {
-        "inventory_known": false,
+        "current_stock_snapshot_required": false,
+        "stock_snapshot_is_readiness_gate": false,
+        "replenishment_capacity_known": false,
+        "replenishment_check_required": true,
         "unit_cost_known": false,
-        "stock_check_required": true,
         "margin_check_required": true
       },
       "authority": {
@@ -66,7 +70,8 @@
       "reason_codes": [
         "internal_bundle_hypothesis",
         "catalogue_subtotal_not_offer_price",
-        "inventory_unknown",
+        "current_stock_is_volatile_snapshot",
+        "replenishment_capacity_unknown",
         "unit_cost_unknown"
       ]
     },
@@ -105,9 +110,11 @@
       "bundle_price_minor": null,
       "discount_minor": null,
       "operational_readiness": {
-        "inventory_known": false,
+        "current_stock_snapshot_required": false,
+        "stock_snapshot_is_readiness_gate": false,
+        "replenishment_capacity_known": false,
+        "replenishment_check_required": true,
         "unit_cost_known": false,
-        "stock_check_required": true,
         "margin_check_required": true
       },
       "authority": {
@@ -119,7 +126,8 @@
       "reason_codes": [
         "internal_bundle_hypothesis",
         "catalogue_subtotal_not_offer_price",
-        "inventory_unknown",
+        "current_stock_is_volatile_snapshot",
+        "replenishment_capacity_unknown",
         "unit_cost_unknown"
       ]
     },
@@ -166,9 +174,11 @@
       "bundle_price_minor": null,
       "discount_minor": null,
       "operational_readiness": {
-        "inventory_known": false,
+        "current_stock_snapshot_required": false,
+        "stock_snapshot_is_readiness_gate": false,
+        "replenishment_capacity_known": false,
+        "replenishment_check_required": true,
         "unit_cost_known": false,
-        "stock_check_required": true,
         "margin_check_required": true
       },
       "authority": {
@@ -180,7 +190,8 @@
       "reason_codes": [
         "internal_bundle_hypothesis",
         "catalogue_subtotal_not_offer_price",
-        "inventory_unknown",
+        "current_stock_is_volatile_snapshot",
+        "replenishment_capacity_unknown",
         "unit_cost_unknown"
       ]
     },
@@ -234,9 +245,11 @@
       "bundle_price_minor": null,
       "discount_minor": null,
       "operational_readiness": {
-        "inventory_known": false,
+        "current_stock_snapshot_required": false,
+        "stock_snapshot_is_readiness_gate": false,
+        "replenishment_capacity_known": false,
+        "replenishment_check_required": true,
         "unit_cost_known": false,
-        "stock_check_required": true,
         "margin_check_required": true
       },
       "authority": {
@@ -248,7 +261,8 @@
       "reason_codes": [
         "internal_bundle_hypothesis",
         "catalogue_subtotal_not_offer_price",
-        "inventory_unknown",
+        "current_stock_is_volatile_snapshot",
+        "replenishment_capacity_unknown",
         "unit_cost_unknown"
       ]
     }
