@@ -32,15 +32,12 @@ class CommercialAttentionTests(unittest.TestCase):
         self.assertTrue(self.payload["contract"]["operational_unknowns_block_execution"])
         self.assertFalse(self.payload["contract"]["automatic_publication"])
         self.assertFalse(self.payload["contract"]["automatic_checkout"])
-        self.assertEqual(self.payload["summary"]["execution_ready"],2)
+        self.assertEqual(self.payload["summary"]["execution_ready"],0)
 
         for asset in self.payload["assets"]:
             self.assertFalse(asset["profitability_known"])
             self.assertFalse(asset["ready_for_automatic_sale"])
-            if asset["asset_type"]=="digital_product":
-                self.assertEqual(asset["operational_blockers"],[])
-            else:
-                self.assertTrue(asset["operational_blockers"])
+            self.assertTrue(asset["operational_blockers"])
             self.assertFalse(asset["authority"]["public_write_authorized"])
             self.assertFalse(asset["authority"]["stock_promise_authorized"])
             self.assertFalse(asset["authority"]["automatic_checkout_authorized"])
@@ -72,8 +69,10 @@ class CommercialAttentionTests(unittest.TestCase):
         self.assertEqual(pdi["asset_type"],"digital_product")
         self.assertEqual(oracle["price_minor"],200)
         self.assertEqual(pdi["price_minor"],500)
-        self.assertEqual(oracle["operational_blockers"],[])
-        self.assertEqual(pdi["operational_blockers"],[])
+        self.assertIn("variable_cost_unknown",oracle["operational_blockers"])
+        self.assertIn("variable_cost_unknown",pdi["operational_blockers"])
+        self.assertIn("human_effort_unknown",oracle["operational_blockers"])
+        self.assertIn("human_effort_unknown",pdi["operational_blockers"])
         self.assertGreater(oracle["attention_score"],0)
         self.assertGreater(pdi["attention_score"],0)
 
