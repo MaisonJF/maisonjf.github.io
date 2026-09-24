@@ -62,6 +62,7 @@ class CommercialAssetTests(unittest.TestCase):
 
     def test_stocktake_template_contains_all_active_public_physical_assets_only(self):
         template=json.loads((ROOT/"commercial-stocktake.template.json").read_text(encoding="utf-8"))
+        self.assertEqual(template["schema_version"],"commercial_digital_operations_template_v1")
         self.assertEqual(template["target_overlay_schema"],"commercial_asset_overlay_v1")
         refs={row["asset_ref"] for row in template["assets"]}
         self.assertEqual(refs,{
