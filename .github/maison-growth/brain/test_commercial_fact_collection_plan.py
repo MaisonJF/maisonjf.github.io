@@ -29,11 +29,43 @@ class CommercialFactCollectionPlanTests(unittest.TestCase):
         self.assertEqual([x["field"] for x in task["fields"]],["unit_material_cost_minor","packaging_cost_minor"])
         self.assertTrue(task["rules"]["current_stock_snapshot_is_optional_and_volatile"])
 
+    def test_digital_product_asks_for_delivery_facts_without_assuming_zero(self):
+        plan=build_plan()
+        task=next(x for x in plan["tasks"] if x["asset_ref"]=="catalog:digital:oracle")
+        self.assertEqual(task["next_action"],"verify_digital_delivery_effort")
+        self.assertEqual(
+            [x["field"] for x in task["fields"]],
+            ["human_effort_minutes","delivery_lead_days"],
+        )
+        self.assertTrue(all(x["value"] is None for x in task["fields"]))
+
     def test_service_without_concrete_price_asks_human_to_select_price(self):
         plan=build_plan()
         task=next(x for x in plan["tasks"] if x["asset_ref"]=="catalog:service:companhia")
         self.assertEqual(task["next_action"],"select_concrete_price")
         self.assertEqual([x["field"] for x in task["fields"]],["selected_price_minor"])
+
+    def test_digital_overlay_advances_from_delivery_to_variable_cost(self):
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T08:45:00+01:00",
+            "assets":[{
+                "asset_ref":"catalog:digital:pdi",
+                "source":"manual_digital_delivery_review",
+                "operational":{
+                    "human_effort_minutes":0,
+                    "delivery_lead_days":0,
+                },
+                "evidence_refs":["manual:digital-delivery:pdi:test"],
+            }],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/"facts.private.json"
+            path.write_text(json.dumps(overlay),encoding="utf-8")
+            plan=build_plan(overlay_path=path)
+        task=next(x for x in plan["tasks"] if x["asset_ref"]=="catalog:digital:pdi")
+        self.assertEqual(task["next_action"],"verify_variable_cost")
+        self.assertEqual([x["field"] for x in task["fields"]],["variable_cost_minor"])
 
     def test_overlay_advances_one_asset_to_replenishment_after_cost(self):
         overlay={
