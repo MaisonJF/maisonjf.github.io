@@ -64,6 +64,7 @@ def _asset_payload(hit: CommercialAssetHit) -> dict[str,Any]:
         "catalogue_availability":hit.catalogue_availability,
         "known_operational_fields":hit.known_operational_fields,
         "unknown_operational_fields":hit.unknown_operational_fields,
+        "stock_snapshot_is_readiness_gate":False if hit.asset_type=="physical_product" else None,
         "operational_evidence_refs":hit.operational_evidence_refs,
     }
 
@@ -125,6 +126,7 @@ def _manual_requirements(
         for field in hit.known_operational_fields
     }
     has_catalogue_price=any(hit.price_minor is not None for hit in asset_hits)
+    stock_snapshot_fields={"inventory_quantity","reserved_quantity"}
 
     def has_complete_candidate(required: set[str], *, allowed_types: set[str] | None=None) -> bool:
         for hit in asset_hits:
@@ -194,6 +196,7 @@ def _manual_requirements(
                 ):
                     missing.append(key)
             missing.append("single_physical_candidate_with_complete_operational_facts")
+        missing[:]=[x for x in missing if x not in stock_snapshot_fields]
 
     elif plan_kind=="manual_service_pilot":
         steps.extend((
