@@ -144,6 +144,30 @@ class ManualPilotDossierTests(unittest.TestCase):
         self.assertFalse(payload["experiment_execution_authorized"])
         self.assertIn("manual:ops:complete",payload["evidence_refs"])
 
+    def test_physical_pilot_can_reach_human_review_without_finished_stock_count(self):
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T08:15:00+01:00",
+            "assets":[{
+                "asset_ref":"catalog:product:vela-a",
+                "operational":{
+                    "unit_material_cost_minor":200,
+                    "packaging_cost_minor":50,
+                    "production_minutes_per_unit":20,
+                    "batch_capacity_units":8,
+                },
+                "evidence_refs":["manual:ops:replenishable"],
+            }],
+        }
+        dossier=build_pilot_dossier(
+            base_plan(),
+            assets=CommercialAssetContext(physical_registry(),overlay=overlay),
+        )
+        self.assertEqual(dossier.ready_state,"ready_for_human_action_review")
+        self.assertNotIn("inventory_quantity",dossier.required_inputs)
+        self.assertNotIn("reserved_quantity",dossier.required_inputs)
+        self.assertFalse(dossier.experiment_execution_authorized)
+
     def test_private_b2b_context_can_complete_non_asset_inputs_without_granting_authority(self):
         plan={
             **base_plan("manual_b2b_pilot"),
