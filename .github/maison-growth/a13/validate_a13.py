@@ -36,6 +36,13 @@ ok(contract["hard_boundaries"]["external_output_can_publish"] is False, "externa
 ok(registry["default_runtime_enabled"] is False, "providers deny by default")
 ok(all(p["runtime_enabled"] is False for p in registry["providers"]), "provider unexpectedly enabled in registry")
 ok(all(p["private_memory_access"] is False for p in registry["providers"]), "private memory access forbidden")
+provider_ids={p["provider_id"] for p in registry["providers"]}
+required_provider_ids={
+    "cloudflare_workers_ai","osiris_gateway","openrouter",
+    "openai","anthropic","google_gemini","perplexity",
+    "public_web","user_contributed_memory"
+}
+ok(required_provider_ids <= provider_ids, f"provider registry missing: {sorted(required_provider_ids-provider_ids)}")
 ok(memory["required_values"]["user_selected_content"] is True, "memory must be user selected")
 ok(memory["required_values"]["revocable"] is True, "memory contribution must be revocable")
 ok(permissions["default"] == "deny", "permissions must deny by default")
@@ -79,6 +86,7 @@ db.close()
 commands = [
     [sys.executable, "-m", "unittest", "test_a13.py", "-v"],
     ["node", "--test", "workers/maison-intelligence/test/core.test.mjs"],
+    ["node", "--test", "workers/maison-intelligence/test/providers.test.mjs"],
     ["node", "--check", "workers/maison-intelligence/src/core.js"],
     ["node", "--check", "workers/maison-intelligence/src/providers.js"],
     ["node", "--check", "workers/maison-intelligence/src/sources.js"],
