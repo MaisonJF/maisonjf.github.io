@@ -20,6 +20,13 @@ class CommercialOperatorReportTests(unittest.TestCase):
         self.assertEqual(report["summary"]["unit_economics_known_assets"],0)
         self.assertEqual(report["summary"]["manual_validation_ready_assets"],0)
         self.assertEqual(report["summary"]["bundle_manual_validation_ready"],0)
+        self.assertTrue(report["economics_contract"]["economics_are_separate_from_attention"])
+        self.assertTrue(report["economics_contract"]["unknown_economics_remain_null"])
+        self.assertTrue(report["economics_contract"]["no_automatic_profit_ranking"])
+        self.assertTrue(all(
+            row["economics"]["unit_contribution_minor"] is None
+            for row in report["attention"]
+        ))
 
     def test_operator_can_select_catalogue_service_variant_without_changing_catalogue(self):
         overlay={
@@ -50,6 +57,11 @@ class CommercialOperatorReportTests(unittest.TestCase):
         self.assertTrue(row["operational_facts_complete"])
         self.assertTrue(row["unit_economics_known"])
         self.assertTrue(row["manual_validation_ready"])
+        self.assertEqual(row["economics"]["price_minor"],3500)
+        self.assertEqual(row["economics"]["variable_cost_minor"],200)
+        self.assertEqual(row["economics"]["unit_contribution_minor"],3300)
+        self.assertEqual(row["economics"]["contribution_per_human_minute_minor"],55.0)
+        self.assertEqual(row["economics"]["evidence_refs"],["manual:capacity-review:2026-09-24"])
         self.assertFalse(any(report["authority"].values()))
 
     def test_private_overlay_changes_readiness_without_granting_authority(self):
@@ -80,6 +92,12 @@ class CommercialOperatorReportTests(unittest.TestCase):
         self.assertTrue(row["operational_facts_complete"])
         self.assertTrue(row["unit_economics_known"])
         self.assertTrue(row["manual_validation_ready"])
+        self.assertEqual(row["economics"]["price_minor"],700)
+        self.assertEqual(row["economics"]["unit_cost_minor"],250)
+        self.assertEqual(row["economics"]["unit_contribution_minor"],450)
+        self.assertEqual(row["economics"]["contribution_margin_bps"],6429)
+        self.assertEqual(row["economics"]["contribution_per_production_minute_minor"],90.0)
+        self.assertEqual(row["economics"]["evidence_refs"],["manual:ops:2026-09-24"])
         self.assertFalse(any(report["authority"].values()))
 
 
