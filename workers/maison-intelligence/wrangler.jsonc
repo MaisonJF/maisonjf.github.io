@@ -13,7 +13,7 @@
   },
   "vars": {
     "WORKER_ENABLED": "false",
-    "BRAIN_CONTROL_API_ENABLED": "false",
+    "BRAIN_CONTROL_API_ENABLED": "true",
     "BRAIN_PROPOSAL_API_ENABLED": "false",
     "BRAIN_REVIEW_DECISION_ENABLED": "false",
     "KILL_SWITCH": "true",
