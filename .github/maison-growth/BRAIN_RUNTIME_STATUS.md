@@ -54,6 +54,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Structured service pricing | READY fixed vs multi-format vs starting-from vs quote pricing preserved from canonical catalogue; human selection required where appropriate | CODE-READY |
 | Fact-based commercial economics | READY private evaluator for product/service unit economics + human-priced bundle evaluation | AWAITING PRIVATE OPERATIONAL OVERLAY |
 | Commercial operator report | READY combines attention, observed operational facts and bundle blockers without granting execution authority | AWAITING PRIVATE OPERATIONAL OVERLAY |
+| Offline commercial readiness board | READY Ocean context + catalogue pricing + operational/economic blockers + explicit next human action; zero external authority | AVAILABLE NOW |
 | Maison Semantic Memory | READY pgvector backend + stable interface + manual D1→pgvector sync | NOT STARTED; pgvector first, Qdrant deferred experiment |
 | Scout | READY | analysis only |
 | Critic | READY | analysis only |
