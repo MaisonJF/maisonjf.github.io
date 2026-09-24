@@ -78,7 +78,14 @@ def _operational_blockers(asset: Mapping[str,Any]) -> list[str]:
             blockers.append("replenishment_capacity_unknown")
         return blockers
     if asset.get("asset_type")=="digital_product":
-        return []
+        blockers=[]
+        if operational.get("human_effort_minutes") is None:
+            blockers.append("human_effort_unknown")
+        if operational.get("variable_cost_minor") is None:
+            blockers.append("variable_cost_unknown")
+        if operational.get("delivery_lead_days") is None:
+            blockers.append("delivery_lead_unknown")
+        return blockers
     blockers=[]
     if operational.get("capacity_units_per_period") is None:
         blockers.append("capacity_unknown")
