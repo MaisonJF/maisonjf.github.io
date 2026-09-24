@@ -17,10 +17,10 @@
     "questionThemeHypotheses": 99,
     "questionDesignSlots": 594,
     "activeQuestionTargetPerMatureTheme": 300,
-    "pdiSourceSignals": 150,
-    "pdiThemeBacklog": 150,
-    "pdiSourceDesignSlots": 900,
-    "pdiEditorialCoreTarget": 45000,
+    "pdiSourceSignals": 249,
+    "pdiThemeBacklog": 248,
+    "pdiSourceDesignSlots": 1488,
+    "pdiEditorialCoreTarget": 74400,
     "pdiCombinatorialTarget": 2800000,
     "oracleCandidates": 16,
     "oracleRoleSlots": 112
@@ -28,19 +28,20 @@
   "pdiGrowth": {
     "scale": {
       "activeQuestionTargetPerMatureTheme": 300,
-      "editorialCoreTarget": 45000,
+      "editorialCoreTarget": 74400,
       "combinatorialPossibilityTarget": 2800000,
       "paidBodiesStoredInRepository": false,
       "automaticActivation": false
     },
     "sourceStats": {
-      "totalSignals": 150,
+      "totalSignals": 249,
       "oracle": 100,
       "farol": 11,
       "voltaParaCasa": 8,
       "maisonNative": 3,
       "pdiConversation": 28,
-      "exactGroups": 150
+      "ocean": 99,
+      "exactGroups": 248
     },
     "themes": [
       {
@@ -8134,6 +8135,5304 @@
           },
           {
             "id": "pdi_source_slot_se_eu_pudesse_perguntar_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "evitamento-financeiro",
+        "preferredLabel": "Evitamento financeiro",
+        "slugs": [
+          "evitamento-financeiro"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "evitamento-financeiro-sob-escassez:evitamento-financeiro",
+            "focus": "compreender e interromper o ciclo entre sensação de escassez, sobrecarga cognitiva e evitamento de decisões financeiras",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_evitamento_financeiro_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_evitamento_financeiro_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_evitamento_financeiro_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_evitamento_financeiro_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_evitamento_financeiro_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_evitamento_financeiro_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "escassez-e-atencao",
+        "preferredLabel": "Escassez e atenção",
+        "slugs": [
+          "escassez-e-atencao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "evitamento-financeiro-sob-escassez:escassez-e-atencao",
+            "focus": "compreender e interromper o ciclo entre sensação de escassez, sobrecarga cognitiva e evitamento de decisões financeiras",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_escassez_e_atencao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escassez_e_atencao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escassez_e_atencao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escassez_e_atencao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escassez_e_atencao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escassez_e_atencao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "adiamento-de-decisoes",
+        "preferredLabel": "Adiamento de decisões",
+        "slugs": [
+          "adiamento-de-decisoes"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "evitamento-financeiro-sob-escassez:adiamento-de-decisoes",
+            "focus": "compreender e interromper o ciclo entre sensação de escassez, sobrecarga cognitiva e evitamento de decisões financeiras",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_adiamento_de_decisoes_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_adiamento_de_decisoes_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_adiamento_de_decisoes_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_adiamento_de_decisoes_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_adiamento_de_decisoes_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_adiamento_de_decisoes_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "curto-prazo-vs-futuro",
+        "preferredLabel": "Curto prazo vs futuro",
+        "slugs": [
+          "curto-prazo-vs-futuro"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "evitamento-financeiro-sob-escassez:curto-prazo-vs-futuro",
+            "focus": "compreender e interromper o ciclo entre sensação de escassez, sobrecarga cognitiva e evitamento de decisões financeiras",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_curto_prazo_vs_futuro_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_curto_prazo_vs_futuro_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_curto_prazo_vs_futuro_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_curto_prazo_vs_futuro_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_curto_prazo_vs_futuro_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_curto_prazo_vs_futuro_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "dinheiro-e-carga-mental",
+        "preferredLabel": "Dinheiro e carga mental",
+        "slugs": [
+          "dinheiro-e-carga-mental"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "evitamento-financeiro-sob-escassez:dinheiro-e-carga-mental",
+            "focus": "compreender e interromper o ciclo entre sensação de escassez, sobrecarga cognitiva e evitamento de decisões financeiras",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_dinheiro_e_carga_mental_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dinheiro_e_carga_mental_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dinheiro_e_carga_mental_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dinheiro_e_carga_mental_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dinheiro_e_carga_mental_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dinheiro_e_carga_mental_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "perda-sem-resolucao",
+        "preferredLabel": "Perda sem resolução",
+        "slugs": [
+          "perda-sem-resolucao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "perda-ambigua-sem-fecho-claro:perda-sem-resolucao",
+            "focus": "reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_perda_sem_resolucao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perda_sem_resolucao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perda_sem_resolucao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perda_sem_resolucao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perda_sem_resolucao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perda_sem_resolucao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "presenca-e-ausencia-ao-mesmo-tempo",
+        "preferredLabel": "Presença e ausência ao mesmo tempo",
+        "slugs": [
+          "presenca-e-ausencia-ao-mesmo-tempo"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "perda-ambigua-sem-fecho-claro:presenca-e-ausencia-ao-mesmo-tempo",
+            "focus": "reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_presenca_e_ausencia_ao_mesmo_tempo_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presenca_e_ausencia_ao_mesmo_tempo_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presenca_e_ausencia_ao_mesmo_tempo_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presenca_e_ausencia_ao_mesmo_tempo_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presenca_e_ausencia_ao_mesmo_tempo_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presenca_e_ausencia_ao_mesmo_tempo_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "espera-por-certeza",
+        "preferredLabel": "Espera por certeza",
+        "slugs": [
+          "espera-por-certeza"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "perda-ambigua-sem-fecho-claro:espera-por-certeza",
+            "focus": "reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_espera_por_certeza_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_espera_por_certeza_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_espera_por_certeza_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_espera_por_certeza_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_espera_por_certeza_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_espera_por_certeza_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "vinculo-que-mudou-sem-desaparecer",
+        "preferredLabel": "Vínculo que mudou sem desaparecer",
+        "slugs": [
+          "vinculo-que-mudou-sem-desaparecer"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "perda-ambigua-sem-fecho-claro:vinculo-que-mudou-sem-desaparecer",
+            "focus": "reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_vinculo_que_mudou_sem_desaparecer_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vinculo_que_mudou_sem_desaparecer_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vinculo_que_mudou_sem_desaparecer_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vinculo_que_mudou_sem_desaparecer_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vinculo_que_mudou_sem_desaparecer_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vinculo_que_mudou_sem_desaparecer_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "continuar-sem-fecho",
+        "preferredLabel": "Continuar sem fecho",
+        "slugs": [
+          "continuar-sem-fecho"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "perda-ambigua-sem-fecho-claro:continuar-sem-fecho",
+            "focus": "reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_continuar_sem_fecho_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_continuar_sem_fecho_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_continuar_sem_fecho_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_continuar_sem_fecho_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_continuar_sem_fecho_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_continuar_sem_fecho_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "companhia-sem-conexao",
+        "preferredLabel": "Companhia sem conexão",
+        "slugs": [
+          "companhia-sem-conexao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "solidao-com-contacto-sem-conexao-de-qualidade:companhia-sem-conexao",
+            "focus": "distinguir presença social de conexão sentida e reconhecer quando o problema não é falta de contacto, mas falta de qualidade, apoio ou reciprocidade nos vínculos",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_companhia_sem_conexao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_companhia_sem_conexao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_companhia_sem_conexao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_companhia_sem_conexao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_companhia_sem_conexao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_companhia_sem_conexao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "qualidade-vs-quantidade-de-contacto",
+        "preferredLabel": "Qualidade vs quantidade de contacto",
+        "slugs": [
+          "qualidade-vs-quantidade-de-contacto"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "solidao-com-contacto-sem-conexao-de-qualidade:qualidade-vs-quantidade-de-contacto",
+            "focus": "distinguir presença social de conexão sentida e reconhecer quando o problema não é falta de contacto, mas falta de qualidade, apoio ou reciprocidade nos vínculos",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_qualidade_vs_quantidade_de_contacto_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_qualidade_vs_quantidade_de_contacto_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_qualidade_vs_quantidade_de_contacto_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_qualidade_vs_quantidade_de_contacto_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_qualidade_vs_quantidade_de_contacto_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_qualidade_vs_quantidade_de_contacto_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "sentir-se-visto",
+        "preferredLabel": "Sentir-se visto",
+        "slugs": [
+          "sentir-se-visto"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "solidao-com-contacto-sem-conexao-de-qualidade:sentir-se-visto",
+            "focus": "distinguir presença social de conexão sentida e reconhecer quando o problema não é falta de contacto, mas falta de qualidade, apoio ou reciprocidade nos vínculos",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_sentir_se_visto_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sentir_se_visto_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sentir_se_visto_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sentir_se_visto_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sentir_se_visto_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sentir_se_visto_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "apoio-e-reciprocidade",
+        "preferredLabel": "Apoio e reciprocidade",
+        "slugs": [
+          "apoio-e-reciprocidade"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "solidao-com-contacto-sem-conexao-de-qualidade:apoio-e-reciprocidade",
+            "focus": "distinguir presença social de conexão sentida e reconhecer quando o problema não é falta de contacto, mas falta de qualidade, apoio ou reciprocidade nos vínculos",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_apoio_e_reciprocidade_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_apoio_e_reciprocidade_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_apoio_e_reciprocidade_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_apoio_e_reciprocidade_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_apoio_e_reciprocidade_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_apoio_e_reciprocidade_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "intimidade-emocional",
+        "preferredLabel": "Intimidade emocional",
+        "slugs": [
+          "intimidade-emocional"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "solidao-com-contacto-sem-conexao-de-qualidade:intimidade-emocional",
+            "focus": "distinguir presença social de conexão sentida e reconhecer quando o problema não é falta de contacto, mas falta de qualidade, apoio ou reciprocidade nos vínculos",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_intimidade_emocional_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_intimidade_emocional_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_intimidade_emocional_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_intimidade_emocional_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_intimidade_emocional_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_intimidade_emocional_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "culpa-ao-descansar",
+        "preferredLabel": "Culpa ao descansar",
+        "slugs": [
+          "culpa-ao-descansar"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "cuidar-sem-desaparecer-no-papel-de-cuidador:culpa-ao-descansar",
+            "focus": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
+            "family": "Ocean MAISON"
+          },
+          {
+            "source": "ocean",
+            "sourceId": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:culpa-ao-descansar",
+            "focus": "reconhecer quando descanso e lazer são tratados como algo que precisa de ser merecido, distinguindo uma pausa escolhida de culpa, ruminação e autojulgamento ligados à produtividade sem transformar a experiência em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_culpa_ao_descansar_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_ao_descansar_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_ao_descansar_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_ao_descansar_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_ao_descansar_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_ao_descansar_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "cuidar-e-manter-identidade",
+        "preferredLabel": "Cuidar e manter identidade",
+        "slugs": [
+          "cuidar-e-manter-identidade"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "cuidar-sem-desaparecer-no-papel-de-cuidador:cuidar-e-manter-identidade",
+            "focus": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_cuidar_e_manter_identidade_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_cuidar_e_manter_identidade_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_cuidar_e_manter_identidade_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_cuidar_e_manter_identidade_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_cuidar_e_manter_identidade_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_cuidar_e_manter_identidade_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "responsabilidade-partilhada",
+        "preferredLabel": "Responsabilidade partilhada",
+        "slugs": [
+          "responsabilidade-partilhada"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "cuidar-sem-desaparecer-no-papel-de-cuidador:responsabilidade-partilhada",
+            "focus": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_responsabilidade_partilhada_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_responsabilidade_partilhada_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_responsabilidade_partilhada_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_responsabilidade_partilhada_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_responsabilidade_partilhada_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_responsabilidade_partilhada_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "limites-no-cuidado",
+        "preferredLabel": "Limites no cuidado",
+        "slugs": [
+          "limites-no-cuidado"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "cuidar-sem-desaparecer-no-papel-de-cuidador:limites-no-cuidado",
+            "focus": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_limites_no_cuidado_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_no_cuidado_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_no_cuidado_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_no_cuidado_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_no_cuidado_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_no_cuidado_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "amor-sem-autoapagamento",
+        "preferredLabel": "Amor sem autoapagamento",
+        "slugs": [
+          "amor-sem-autoapagamento"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "cuidar-sem-desaparecer-no-papel-de-cuidador:amor-sem-autoapagamento",
+            "focus": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_amor_sem_autoapagamento_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_amor_sem_autoapagamento_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_amor_sem_autoapagamento_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_amor_sem_autoapagamento_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_amor_sem_autoapagamento_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_amor_sem_autoapagamento_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "escolha-e-obrigacao-no-cuidar",
+        "preferredLabel": "Escolha e obrigação no cuidar",
+        "slugs": [
+          "escolha-e-obrigacao-no-cuidar"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "cuidar-sem-desaparecer-no-papel-de-cuidador:escolha-e-obrigacao-no-cuidar",
+            "focus": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_escolha_e_obrigacao_no_cuidar_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escolha_e_obrigacao_no_cuidar_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escolha_e_obrigacao_no_cuidar_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escolha_e_obrigacao_no_cuidar_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escolha_e_obrigacao_no_cuidar_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escolha_e_obrigacao_no_cuidar_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "demasiadas-opcoes",
+        "preferredLabel": "Demasiadas opções",
+        "slugs": [
+          "demasiadas-opcoes"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam:demasiadas-opcoes",
+            "focus": "reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_demasiadas_opcoes_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_demasiadas_opcoes_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_demasiadas_opcoes_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_demasiadas_opcoes_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_demasiadas_opcoes_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_demasiadas_opcoes_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "medo-de-escolher-mal",
+        "preferredLabel": "Medo de escolher mal",
+        "slugs": [
+          "medo-de-escolher-mal"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam:medo-de-escolher-mal",
+            "focus": "reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_medo_de_escolher_mal_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_de_escolher_mal_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_de_escolher_mal_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_de_escolher_mal_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_de_escolher_mal_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_de_escolher_mal_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "comparar-sem-fim",
+        "preferredLabel": "Comparar sem fim",
+        "slugs": [
+          "comparar-sem-fim"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam:comparar-sem-fim",
+            "focus": "reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_comparar_sem_fim_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_comparar_sem_fim_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_comparar_sem_fim_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_comparar_sem_fim_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_comparar_sem_fim_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_comparar_sem_fim_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "suficientemente-bom",
+        "preferredLabel": "Suficientemente bom",
+        "slugs": [
+          "suficientemente-bom"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam:suficientemente-bom",
+            "focus": "reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_suficientemente_bom_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_suficientemente_bom_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_suficientemente_bom_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_suficientemente_bom_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_suficientemente_bom_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_suficientemente_bom_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "renuncia-ao-nao-escolhido",
+        "preferredLabel": "Renúncia ao não escolhido",
+        "slugs": [
+          "renuncia-ao-nao-escolhido"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam:renuncia-ao-nao-escolhido",
+            "focus": "reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_renuncia_ao_nao_escolhido_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_renuncia_ao_nao_escolhido_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_renuncia_ao_nao_escolhido_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_renuncia_ao_nao_escolhido_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_renuncia_ao_nao_escolhido_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_renuncia_ao_nao_escolhido_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "compromisso-com-uma-decisao",
+        "preferredLabel": "Compromisso com uma decisão",
+        "slugs": [
+          "compromisso-com-uma-decisao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam:compromisso-com-uma-decisao",
+            "focus": "reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_compromisso_com_uma_decisao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_compromisso_com_uma_decisao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_compromisso_com_uma_decisao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_compromisso_com_uma_decisao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_compromisso_com_uma_decisao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_compromisso_com_uma_decisao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "calar-para-manter-a-paz",
+        "preferredLabel": "Calar para manter a paz",
+        "slugs": [
+          "calar-para-manter-a-paz"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "auto-silenciamento-para-preservar-o-vinculo:calar-para-manter-a-paz",
+            "focus": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_calar_para_manter_a_paz_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_calar_para_manter_a_paz_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_calar_para_manter_a_paz_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_calar_para_manter_a_paz_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_calar_para_manter_a_paz_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_calar_para_manter_a_paz_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "voz-e-seguranca-relacional",
+        "preferredLabel": "Voz e segurança relacional",
+        "slugs": [
+          "voz-e-seguranca-relacional"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "auto-silenciamento-para-preservar-o-vinculo:voz-e-seguranca-relacional",
+            "focus": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_voz_e_seguranca_relacional_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_voz_e_seguranca_relacional_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_voz_e_seguranca_relacional_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_voz_e_seguranca_relacional_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_voz_e_seguranca_relacional_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_voz_e_seguranca_relacional_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "necessidades-nao-ditas",
+        "preferredLabel": "Necessidades não ditas",
+        "slugs": [
+          "necessidades-nao-ditas"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "auto-silenciamento-para-preservar-o-vinculo:necessidades-nao-ditas",
+            "focus": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_necessidades_nao_ditas_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_necessidades_nao_ditas_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_necessidades_nao_ditas_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_necessidades_nao_ditas_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_necessidades_nao_ditas_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_necessidades_nao_ditas_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "acomodacao-vs-autoapagamento",
+        "preferredLabel": "Acomodação vs autoapagamento",
+        "slugs": [
+          "acomodacao-vs-autoapagamento"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "auto-silenciamento-para-preservar-o-vinculo:acomodacao-vs-autoapagamento",
+            "focus": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_acomodacao_vs_autoapagamento_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_acomodacao_vs_autoapagamento_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_acomodacao_vs_autoapagamento_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_acomodacao_vs_autoapagamento_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_acomodacao_vs_autoapagamento_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_acomodacao_vs_autoapagamento_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "medo-da-reaccao-ao-dizer-a-verdade",
+        "preferredLabel": "Medo da reacção ao dizer a verdade",
+        "slugs": [
+          "medo-da-reaccao-ao-dizer-a-verdade"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "auto-silenciamento-para-preservar-o-vinculo:medo-da-reaccao-ao-dizer-a-verdade",
+            "focus": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_ao_dizer_a_verdade_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_ao_dizer_a_verdade_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_ao_dizer_a_verdade_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_ao_dizer_a_verdade_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_ao_dizer_a_verdade_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_ao_dizer_a_verdade_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "eu-interior-vs-eu-mostrado",
+        "preferredLabel": "Eu interior vs eu mostrado",
+        "slugs": [
+          "eu-interior-vs-eu-mostrado"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "auto-silenciamento-para-preservar-o-vinculo:eu-interior-vs-eu-mostrado",
+            "focus": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_eu_interior_vs_eu_mostrado_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_eu_interior_vs_eu_mostrado_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_eu_interior_vs_eu_mostrado_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_eu_interior_vs_eu_mostrado_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_eu_interior_vs_eu_mostrado_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_eu_interior_vs_eu_mostrado_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "baixar-a-regua-para-nao-perder-o-vinculo",
+        "preferredLabel": "Baixar a régua para não perder o vínculo",
+        "slugs": [
+          "baixar-a-regua-para-nao-perder-o-vinculo"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "auto-silenciamento-para-preservar-o-vinculo:baixar-a-regua-para-nao-perder-o-vinculo",
+            "focus": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_baixar_a_regua_para_nao_perder_o_vinculo_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_baixar_a_regua_para_nao_perder_o_vinculo_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_baixar_a_regua_para_nao_perder_o_vinculo_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_baixar_a_regua_para_nao_perder_o_vinculo_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_baixar_a_regua_para_nao_perder_o_vinculo_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_baixar_a_regua_para_nao_perder_o_vinculo_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "pedir-menos-para-nao-parecer-exigente",
+        "preferredLabel": "Pedir menos para não parecer exigente",
+        "slugs": [
+          "pedir-menos-para-nao-parecer-exigente"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "auto-silenciamento-para-preservar-o-vinculo:pedir-menos-para-nao-parecer-exigente",
+            "focus": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_pedir_menos_para_nao_parecer_exigente_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_menos_para_nao_parecer_exigente_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_menos_para_nao_parecer_exigente_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_menos_para_nao_parecer_exigente_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_menos_para_nao_parecer_exigente_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_menos_para_nao_parecer_exigente_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "normalizar-atencao-ou-carinho-insuficientes",
+        "preferredLabel": "Normalizar atenção ou carinho insuficientes",
+        "slugs": [
+          "normalizar-atencao-ou-carinho-insuficientes"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "auto-silenciamento-para-preservar-o-vinculo:normalizar-atencao-ou-carinho-insuficientes",
+            "focus": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_normalizar_atencao_ou_carinho_insuficientes_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_normalizar_atencao_ou_carinho_insuficientes_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_normalizar_atencao_ou_carinho_insuficientes_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_normalizar_atencao_ou_carinho_insuficientes_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_normalizar_atencao_ou_carinho_insuficientes_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_normalizar_atencao_ou_carinho_insuficientes_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "tempo-que-e-meu",
+        "preferredLabel": "Tempo que é meu",
+        "slugs": [
+          "tempo-que-e-meu"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "adiar-o-sono-para-recuperar-autonomia:tempo-que-e-meu",
+            "focus": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_tempo_que_e_meu_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tempo_que_e_meu_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tempo_que_e_meu_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tempo_que_e_meu_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tempo_que_e_meu_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tempo_que_e_meu_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "dificuldade-em-terminar-o-dia",
+        "preferredLabel": "Dificuldade em terminar o dia",
+        "slugs": [
+          "dificuldade-em-terminar-o-dia"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "adiar-o-sono-para-recuperar-autonomia:dificuldade-em-terminar-o-dia",
+            "focus": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_dificuldade_em_terminar_o_dia_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dificuldade_em_terminar_o_dia_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dificuldade_em_terminar_o_dia_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dificuldade_em_terminar_o_dia_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dificuldade_em_terminar_o_dia_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dificuldade_em_terminar_o_dia_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "descanso-que-parece-desperdicio",
+        "preferredLabel": "Descanso que parece desperdício",
+        "slugs": [
+          "descanso-que-parece-desperdicio"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "adiar-o-sono-para-recuperar-autonomia:descanso-que-parece-desperdicio",
+            "focus": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_descanso_que_parece_desperdicio_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_descanso_que_parece_desperdicio_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_descanso_que_parece_desperdicio_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_descanso_que_parece_desperdicio_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_descanso_que_parece_desperdicio_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_descanso_que_parece_desperdicio_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "autonomia-nocturna",
+        "preferredLabel": "Autonomia nocturna",
+        "slugs": [
+          "autonomia-nocturna"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "adiar-o-sono-para-recuperar-autonomia:autonomia-nocturna",
+            "focus": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_autonomia_nocturna_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_autonomia_nocturna_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_autonomia_nocturna_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_autonomia_nocturna_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_autonomia_nocturna_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_autonomia_nocturna_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "mais-uma-coisa-antes-de-dormir",
+        "preferredLabel": "Mais uma coisa antes de dormir",
+        "slugs": [
+          "mais-uma-coisa-antes-de-dormir"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "adiar-o-sono-para-recuperar-autonomia:mais-uma-coisa-antes-de-dormir",
+            "focus": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_mais_uma_coisa_antes_de_dormir_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mais_uma_coisa_antes_de_dormir_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mais_uma_coisa_antes_de_dormir_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mais_uma_coisa_antes_de_dormir_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mais_uma_coisa_antes_de_dormir_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mais_uma_coisa_antes_de_dormir_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "transicao-entre-obrigacao-e-descanso",
+        "preferredLabel": "Transição entre obrigação e descanso",
+        "slugs": [
+          "transicao-entre-obrigacao-e-descanso"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "adiar-o-sono-para-recuperar-autonomia:transicao-entre-obrigacao-e-descanso",
+            "focus": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_transicao_entre_obrigacao_e_descanso_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_transicao_entre_obrigacao_e_descanso_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_transicao_entre_obrigacao_e_descanso_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_transicao_entre_obrigacao_e_descanso_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_transicao_entre_obrigacao_e_descanso_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_transicao_entre_obrigacao_e_descanso_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "tenho-de-responder-ja",
+        "preferredLabel": "Tenho de responder já",
+        "slugs": [
+          "tenho-de-responder-ja"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "telepressao-e-disponibilidade-permanente:tenho-de-responder-ja",
+            "focus": "reconhecer quando disponibilidade e rapidez de resposta deixam de ser escolhas e se transformam numa pressão persistente para estar alcançável, distinguindo responsividade saudável de urgência digital constante no trabalho e na vida pessoal",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_tenho_de_responder_ja_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tenho_de_responder_ja_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tenho_de_responder_ja_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tenho_de_responder_ja_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tenho_de_responder_ja_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tenho_de_responder_ja_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "culpa-por-estar-offline",
+        "preferredLabel": "Culpa por estar offline",
+        "slugs": [
+          "culpa-por-estar-offline"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "telepressao-e-disponibilidade-permanente:culpa-por-estar-offline",
+            "focus": "reconhecer quando disponibilidade e rapidez de resposta deixam de ser escolhas e se transformam numa pressão persistente para estar alcançável, distinguindo responsividade saudável de urgência digital constante no trabalho e na vida pessoal",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_culpa_por_estar_offline_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_por_estar_offline_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_por_estar_offline_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_por_estar_offline_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_por_estar_offline_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_por_estar_offline_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "disponibilidade-permanente",
+        "preferredLabel": "Disponibilidade permanente",
+        "slugs": [
+          "disponibilidade-permanente"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "telepressao-e-disponibilidade-permanente:disponibilidade-permanente",
+            "focus": "reconhecer quando disponibilidade e rapidez de resposta deixam de ser escolhas e se transformam numa pressão persistente para estar alcançável, distinguindo responsividade saudável de urgência digital constante no trabalho e na vida pessoal",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_disponibilidade_permanente_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_disponibilidade_permanente_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_disponibilidade_permanente_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_disponibilidade_permanente_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_disponibilidade_permanente_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_disponibilidade_permanente_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "mensagens-que-ficam-na-cabeca",
+        "preferredLabel": "Mensagens que ficam na cabeça",
+        "slugs": [
+          "mensagens-que-ficam-na-cabeca"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "telepressao-e-disponibilidade-permanente:mensagens-que-ficam-na-cabeca",
+            "focus": "reconhecer quando disponibilidade e rapidez de resposta deixam de ser escolhas e se transformam numa pressão persistente para estar alcançável, distinguindo responsividade saudável de urgência digital constante no trabalho e na vida pessoal",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_mensagens_que_ficam_na_cabeca_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mensagens_que_ficam_na_cabeca_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mensagens_que_ficam_na_cabeca_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mensagens_que_ficam_na_cabeca_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mensagens_que_ficam_na_cabeca_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mensagens_que_ficam_na_cabeca_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "limites-digitais",
+        "preferredLabel": "Limites digitais",
+        "slugs": [
+          "limites-digitais"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "telepressao-e-disponibilidade-permanente:limites-digitais",
+            "focus": "reconhecer quando disponibilidade e rapidez de resposta deixam de ser escolhas e se transformam numa pressão persistente para estar alcançável, distinguindo responsividade saudável de urgência digital constante no trabalho e na vida pessoal",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_limites_digitais_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_digitais_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_digitais_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_digitais_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_digitais_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_digitais_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "estar-presente-sem-estar-sempre-alcancavel",
+        "preferredLabel": "Estar presente sem estar sempre alcançável",
+        "slugs": [
+          "estar-presente-sem-estar-sempre-alcancavel"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "telepressao-e-disponibilidade-permanente:estar-presente-sem-estar-sempre-alcancavel",
+            "focus": "reconhecer quando disponibilidade e rapidez de resposta deixam de ser escolhas e se transformam numa pressão persistente para estar alcançável, distinguindo responsividade saudável de urgência digital constante no trabalho e na vida pessoal",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_estar_presente_sem_estar_sempre_alcancavel_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_estar_presente_sem_estar_sempre_alcancavel_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_estar_presente_sem_estar_sempre_alcancavel_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_estar_presente_sem_estar_sempre_alcancavel_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_estar_presente_sem_estar_sempre_alcancavel_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_estar_presente_sem_estar_sempre_alcancavel_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "nao-consigo-parar-de-ver-mas-noticias",
+        "preferredLabel": "Não consigo parar de ver más notícias",
+        "slugs": [
+          "nao-consigo-parar-de-ver-mas-noticias"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "doomscrolling-para-tentar-reduzir-incerteza:nao-consigo-parar-de-ver-mas-noticias",
+            "focus": "reconhecer quando procurar informação deixa de ajudar a compreender o mundo e passa a alimentar um ciclo de alerta, repetição e dificuldade em desligar, distinguindo estar informado de permanecer preso a conteúdo negativo sem transformar o comportamento em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_nao_consigo_parar_de_ver_mas_noticias_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_consigo_parar_de_ver_mas_noticias_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_consigo_parar_de_ver_mas_noticias_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_consigo_parar_de_ver_mas_noticias_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_consigo_parar_de_ver_mas_noticias_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_consigo_parar_de_ver_mas_noticias_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "informar-me-vs-afundar-me",
+        "preferredLabel": "Informar-me vs afundar-me",
+        "slugs": [
+          "informar-me-vs-afundar-me"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "doomscrolling-para-tentar-reduzir-incerteza:informar-me-vs-afundar-me",
+            "focus": "reconhecer quando procurar informação deixa de ajudar a compreender o mundo e passa a alimentar um ciclo de alerta, repetição e dificuldade em desligar, distinguindo estar informado de permanecer preso a conteúdo negativo sem transformar o comportamento em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_informar_me_vs_afundar_me_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_informar_me_vs_afundar_me_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_informar_me_vs_afundar_me_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_informar_me_vs_afundar_me_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_informar_me_vs_afundar_me_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_informar_me_vs_afundar_me_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "medo-de-perder-algo-importante",
+        "preferredLabel": "Medo de perder algo importante",
+        "slugs": [
+          "medo-de-perder-algo-importante"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "doomscrolling-para-tentar-reduzir-incerteza:medo-de-perder-algo-importante",
+            "focus": "reconhecer quando procurar informação deixa de ajudar a compreender o mundo e passa a alimentar um ciclo de alerta, repetição e dificuldade em desligar, distinguindo estar informado de permanecer preso a conteúdo negativo sem transformar o comportamento em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_medo_de_perder_algo_importante_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_de_perder_algo_importante_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_de_perder_algo_importante_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_de_perder_algo_importante_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_de_perder_algo_importante_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_de_perder_algo_importante_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "incerteza-e-procura-de-mais-informacao",
+        "preferredLabel": "Incerteza e procura de mais informação",
+        "slugs": [
+          "incerteza-e-procura-de-mais-informacao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "doomscrolling-para-tentar-reduzir-incerteza:incerteza-e-procura-de-mais-informacao",
+            "focus": "reconhecer quando procurar informação deixa de ajudar a compreender o mundo e passa a alimentar um ciclo de alerta, repetição e dificuldade em desligar, distinguindo estar informado de permanecer preso a conteúdo negativo sem transformar o comportamento em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_incerteza_e_procura_de_mais_informacao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_incerteza_e_procura_de_mais_informacao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_incerteza_e_procura_de_mais_informacao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_incerteza_e_procura_de_mais_informacao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_incerteza_e_procura_de_mais_informacao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_incerteza_e_procura_de_mais_informacao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "quando-fechar-o-ecra",
+        "preferredLabel": "Quando fechar o ecrã",
+        "slugs": [
+          "quando-fechar-o-ecra"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "doomscrolling-para-tentar-reduzir-incerteza:quando-fechar-o-ecra",
+            "focus": "reconhecer quando procurar informação deixa de ajudar a compreender o mundo e passa a alimentar um ciclo de alerta, repetição e dificuldade em desligar, distinguindo estar informado de permanecer preso a conteúdo negativo sem transformar o comportamento em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_quando_fechar_o_ecra_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_fechar_o_ecra_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_fechar_o_ecra_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_fechar_o_ecra_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_fechar_o_ecra_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_fechar_o_ecra_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "corpo-em-alerta-depois-do-feed",
+        "preferredLabel": "Corpo em alerta depois do feed",
+        "slugs": [
+          "corpo-em-alerta-depois-do-feed"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "doomscrolling-para-tentar-reduzir-incerteza:corpo-em-alerta-depois-do-feed",
+            "focus": "reconhecer quando procurar informação deixa de ajudar a compreender o mundo e passa a alimentar um ciclo de alerta, repetição e dificuldade em desligar, distinguindo estar informado de permanecer preso a conteúdo negativo sem transformar o comportamento em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_corpo_em_alerta_depois_do_feed_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_corpo_em_alerta_depois_do_feed_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_corpo_em_alerta_depois_do_feed_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_corpo_em_alerta_depois_do_feed_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_corpo_em_alerta_depois_do_feed_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_corpo_em_alerta_depois_do_feed_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "ser-quem-se-lembra-de-tudo",
+        "preferredLabel": "Ser quem se lembra de tudo",
+        "slugs": [
+          "ser-quem-se-lembra-de-tudo"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "carga-mental-invisivel-da-casa:ser-quem-se-lembra-de-tudo",
+            "focus": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_ser_quem_se_lembra_de_tudo_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ser_quem_se_lembra_de_tudo_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ser_quem_se_lembra_de_tudo_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ser_quem_se_lembra_de_tudo_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ser_quem_se_lembra_de_tudo_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ser_quem_se_lembra_de_tudo_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "fazer-vs-pensar-no-que-tem-de-ser-feito",
+        "preferredLabel": "Fazer vs pensar no que tem de ser feito",
+        "slugs": [
+          "fazer-vs-pensar-no-que-tem-de-ser-feito"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "carga-mental-invisivel-da-casa:fazer-vs-pensar-no-que-tem-de-ser-feito",
+            "focus": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_fazer_vs_pensar_no_que_tem_de_ser_feito_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_fazer_vs_pensar_no_que_tem_de_ser_feito_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_fazer_vs_pensar_no_que_tem_de_ser_feito_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_fazer_vs_pensar_no_que_tem_de_ser_feito_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_fazer_vs_pensar_no_que_tem_de_ser_feito_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_fazer_vs_pensar_no_que_tem_de_ser_feito_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "tarefas-invisiveis-da-casa",
+        "preferredLabel": "Tarefas invisíveis da casa",
+        "slugs": [
+          "tarefas-invisiveis-da-casa"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "carga-mental-invisivel-da-casa:tarefas-invisiveis-da-casa",
+            "focus": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_tarefas_invisiveis_da_casa_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tarefas_invisiveis_da_casa_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tarefas_invisiveis_da_casa_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tarefas_invisiveis_da_casa_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tarefas_invisiveis_da_casa_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tarefas_invisiveis_da_casa_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "antecipar-necessidades-de-todos",
+        "preferredLabel": "Antecipar necessidades de todos",
+        "slugs": [
+          "antecipar-necessidades-de-todos"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "carga-mental-invisivel-da-casa:antecipar-necessidades-de-todos",
+            "focus": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_antecipar_necessidades_de_todos_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_antecipar_necessidades_de_todos_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_antecipar_necessidades_de_todos_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_antecipar_necessidades_de_todos_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_antecipar_necessidades_de_todos_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_antecipar_necessidades_de_todos_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "delegar-tambem-e-trabalho",
+        "preferredLabel": "Delegar também é trabalho",
+        "slugs": [
+          "delegar-tambem-e-trabalho"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "carga-mental-invisivel-da-casa:delegar-tambem-e-trabalho",
+            "focus": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_delegar_tambem_e_trabalho_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_delegar_tambem_e_trabalho_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_delegar_tambem_e_trabalho_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_delegar_tambem_e_trabalho_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_delegar_tambem_e_trabalho_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_delegar_tambem_e_trabalho_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "partilhar-responsabilidade-mental",
+        "preferredLabel": "Partilhar responsabilidade mental",
+        "slugs": [
+          "partilhar-responsabilidade-mental"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "carga-mental-invisivel-da-casa:partilhar-responsabilidade-mental",
+            "focus": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_partilhar_responsabilidade_mental_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_partilhar_responsabilidade_mental_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_partilhar_responsabilidade_mental_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_partilhar_responsabilidade_mental_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_partilhar_responsabilidade_mental_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_partilhar_responsabilidade_mental_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "nao-consigo-ficar-numa-coisa-so",
+        "preferredLabel": "Não consigo ficar numa coisa só",
+        "slugs": [
+          "nao-consigo-ficar-numa-coisa-so"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atencao-fragmentada-por-interrupcoes-digitais:nao-consigo-ficar-numa-coisa-so",
+            "focus": "reconhecer quando interrupções frequentes e mudanças constantes de contexto fragmentam a atenção e dificultam retomar tarefas, distinguindo tempo total de ecrã da frequência com que a atenção é capturada e redireccionada",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_nao_consigo_ficar_numa_coisa_so_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_consigo_ficar_numa_coisa_so_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_consigo_ficar_numa_coisa_so_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_consigo_ficar_numa_coisa_so_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_consigo_ficar_numa_coisa_so_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_consigo_ficar_numa_coisa_so_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "perder-o-fio-depois-de-uma-interrupcao",
+        "preferredLabel": "Perder o fio depois de uma interrupção",
+        "slugs": [
+          "perder-o-fio-depois-de-uma-interrupcao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atencao-fragmentada-por-interrupcoes-digitais:perder-o-fio-depois-de-uma-interrupcao",
+            "focus": "reconhecer quando interrupções frequentes e mudanças constantes de contexto fragmentam a atenção e dificultam retomar tarefas, distinguindo tempo total de ecrã da frequência com que a atenção é capturada e redireccionada",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_perder_o_fio_depois_de_uma_interrupcao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perder_o_fio_depois_de_uma_interrupcao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perder_o_fio_depois_de_uma_interrupcao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perder_o_fio_depois_de_uma_interrupcao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perder_o_fio_depois_de_uma_interrupcao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_perder_o_fio_depois_de_uma_interrupcao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "muitas-pequenas-mudancas-de-contexto",
+        "preferredLabel": "Muitas pequenas mudanças de contexto",
+        "slugs": [
+          "muitas-pequenas-mudancas-de-contexto"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atencao-fragmentada-por-interrupcoes-digitais:muitas-pequenas-mudancas-de-contexto",
+            "focus": "reconhecer quando interrupções frequentes e mudanças constantes de contexto fragmentam a atenção e dificultam retomar tarefas, distinguindo tempo total de ecrã da frequência com que a atenção é capturada e redireccionada",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_muitas_pequenas_mudancas_de_contexto_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_muitas_pequenas_mudancas_de_contexto_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_muitas_pequenas_mudancas_de_contexto_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_muitas_pequenas_mudancas_de_contexto_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_muitas_pequenas_mudancas_de_contexto_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_muitas_pequenas_mudancas_de_contexto_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "frequencia-de-interrupcoes-vs-tempo-de-ecra",
+        "preferredLabel": "Frequência de interrupções vs tempo de ecrã",
+        "slugs": [
+          "frequencia-de-interrupcoes-vs-tempo-de-ecra"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atencao-fragmentada-por-interrupcoes-digitais:frequencia-de-interrupcoes-vs-tempo-de-ecra",
+            "focus": "reconhecer quando interrupções frequentes e mudanças constantes de contexto fragmentam a atenção e dificultam retomar tarefas, distinguindo tempo total de ecrã da frequência com que a atenção é capturada e redireccionada",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_frequencia_de_interrupcoes_vs_tempo_de_ecra_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_frequencia_de_interrupcoes_vs_tempo_de_ecra_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_frequencia_de_interrupcoes_vs_tempo_de_ecra_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_frequencia_de_interrupcoes_vs_tempo_de_ecra_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_frequencia_de_interrupcoes_vs_tempo_de_ecra_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_frequencia_de_interrupcoes_vs_tempo_de_ecra_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "retomar-custa-mais-do-que-parece",
+        "preferredLabel": "Retomar custa mais do que parece",
+        "slugs": [
+          "retomar-custa-mais-do-que-parece"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atencao-fragmentada-por-interrupcoes-digitais:retomar-custa-mais-do-que-parece",
+            "focus": "reconhecer quando interrupções frequentes e mudanças constantes de contexto fragmentam a atenção e dificultam retomar tarefas, distinguindo tempo total de ecrã da frequência com que a atenção é capturada e redireccionada",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_retomar_custa_mais_do_que_parece_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_retomar_custa_mais_do_que_parece_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_retomar_custa_mais_do_que_parece_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_retomar_custa_mais_do_que_parece_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_retomar_custa_mais_do_que_parece_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_retomar_custa_mais_do_que_parece_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "proteger-blocos-de-atencao",
+        "preferredLabel": "Proteger blocos de atenção",
+        "slugs": [
+          "proteger-blocos-de-atencao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atencao-fragmentada-por-interrupcoes-digitais:proteger-blocos-de-atencao",
+            "focus": "reconhecer quando interrupções frequentes e mudanças constantes de contexto fragmentam a atenção e dificultam retomar tarefas, distinguindo tempo total de ecrã da frequência com que a atenção é capturada e redireccionada",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_proteger_blocos_de_atencao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_proteger_blocos_de_atencao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_proteger_blocos_de_atencao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_proteger_blocos_de_atencao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_proteger_blocos_de_atencao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_proteger_blocos_de_atencao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "quando-o-talvez-vira-ja-nao",
+        "preferredLabel": "Quando o talvez vira já não",
+        "slugs": [
+          "quando-o-talvez-vira-ja-nao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "luto-por-um-futuro-que-deixou-de-ser-possivel:quando-o-talvez-vira-ja-nao",
+            "focus": "dar linguagem ao luto por possibilidades de vida que se tornam inalcançáveis com o tempo, distinguindo arrependimento, perda de esperança e reconstrução de significado sem tratar como falha moral o facto de o desejo ter mudado ou chegado tarde",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_quando_o_talvez_vira_ja_nao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_talvez_vira_ja_nao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_talvez_vira_ja_nao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_talvez_vira_ja_nao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_talvez_vira_ja_nao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_talvez_vira_ja_nao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "luto-por-uma-vida-que-nao-aconteceu",
+        "preferredLabel": "Luto por uma vida que não aconteceu",
+        "slugs": [
+          "luto-por-uma-vida-que-nao-aconteceu"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "luto-por-um-futuro-que-deixou-de-ser-possivel:luto-por-uma-vida-que-nao-aconteceu",
+            "focus": "dar linguagem ao luto por possibilidades de vida que se tornam inalcançáveis com o tempo, distinguindo arrependimento, perda de esperança e reconstrução de significado sem tratar como falha moral o facto de o desejo ter mudado ou chegado tarde",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_luto_por_uma_vida_que_nao_aconteceu_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_luto_por_uma_vida_que_nao_aconteceu_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_luto_por_uma_vida_que_nao_aconteceu_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_luto_por_uma_vida_que_nao_aconteceu_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_luto_por_uma_vida_que_nao_aconteceu_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_luto_por_uma_vida_que_nao_aconteceu_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "desejo-que-chegou-tarde",
+        "preferredLabel": "Desejo que chegou tarde",
+        "slugs": [
+          "desejo-que-chegou-tarde"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "luto-por-um-futuro-que-deixou-de-ser-possivel:desejo-que-chegou-tarde",
+            "focus": "dar linguagem ao luto por possibilidades de vida que se tornam inalcançáveis com o tempo, distinguindo arrependimento, perda de esperança e reconstrução de significado sem tratar como falha moral o facto de o desejo ter mudado ou chegado tarde",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_desejo_que_chegou_tarde_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desejo_que_chegou_tarde_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desejo_que_chegou_tarde_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desejo_que_chegou_tarde_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desejo_que_chegou_tarde_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desejo_que_chegou_tarde_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "irreversibilidade-e-arrependimento",
+        "preferredLabel": "Irreversibilidade e arrependimento",
+        "slugs": [
+          "irreversibilidade-e-arrependimento"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "luto-por-um-futuro-que-deixou-de-ser-possivel:irreversibilidade-e-arrependimento",
+            "focus": "dar linguagem ao luto por possibilidades de vida que se tornam inalcançáveis com o tempo, distinguindo arrependimento, perda de esperança e reconstrução de significado sem tratar como falha moral o facto de o desejo ter mudado ou chegado tarde",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_irreversibilidade_e_arrependimento_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_irreversibilidade_e_arrependimento_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_irreversibilidade_e_arrependimento_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_irreversibilidade_e_arrependimento_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_irreversibilidade_e_arrependimento_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_irreversibilidade_e_arrependimento_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "futuro-imaginado-que-fechou",
+        "preferredLabel": "Futuro imaginado que fechou",
+        "slugs": [
+          "futuro-imaginado-que-fechou"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "luto-por-um-futuro-que-deixou-de-ser-possivel:futuro-imaginado-que-fechou",
+            "focus": "dar linguagem ao luto por possibilidades de vida que se tornam inalcançáveis com o tempo, distinguindo arrependimento, perda de esperança e reconstrução de significado sem tratar como falha moral o facto de o desejo ter mudado ou chegado tarde",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_futuro_imaginado_que_fechou_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_futuro_imaginado_que_fechou_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_futuro_imaginado_que_fechou_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_futuro_imaginado_que_fechou_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_futuro_imaginado_que_fechou_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_futuro_imaginado_que_fechou_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "continuar-depois-de-perder-uma-possibilidade",
+        "preferredLabel": "Continuar depois de perder uma possibilidade",
+        "slugs": [
+          "continuar-depois-de-perder-uma-possibilidade"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "luto-por-um-futuro-que-deixou-de-ser-possivel:continuar-depois-de-perder-uma-possibilidade",
+            "focus": "dar linguagem ao luto por possibilidades de vida que se tornam inalcançáveis com o tempo, distinguindo arrependimento, perda de esperança e reconstrução de significado sem tratar como falha moral o facto de o desejo ter mudado ou chegado tarde",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_continuar_depois_de_perder_uma_possibilidade_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_continuar_depois_de_perder_uma_possibilidade_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_continuar_depois_de_perder_uma_possibilidade_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_continuar_depois_de_perder_uma_possibilidade_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_continuar_depois_de_perder_uma_possibilidade_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_continuar_depois_de_perder_uma_possibilidade_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "gosto-deles-mas-nao-tenho-energia-para-estar-com-eles",
+        "preferredLabel": "Gosto deles mas não tenho energia para estar com eles",
+        "slugs": [
+          "gosto-deles-mas-nao-tenho-energia-para-estar-com-eles"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "precisar-de-solidao-para-recuperar-energia-social:gosto-deles-mas-nao-tenho-energia-para-estar-com-eles",
+            "focus": "reconhecer a necessidade temporária de estar só como forma de recuperar energia e autonomia depois de muita interação, distinguindo solitude escolhida de solidão indesejada, castigo silencioso ou ruptura do vínculo",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_gosto_deles_mas_nao_tenho_energia_para_estar_com_eles_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gosto_deles_mas_nao_tenho_energia_para_estar_com_eles_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gosto_deles_mas_nao_tenho_energia_para_estar_com_eles_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gosto_deles_mas_nao_tenho_energia_para_estar_com_eles_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gosto_deles_mas_nao_tenho_energia_para_estar_com_eles_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gosto_deles_mas_nao_tenho_energia_para_estar_com_eles_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "precisar-de-ficar-sozinho-sem-rejeitar-ninguem",
+        "preferredLabel": "Precisar de ficar sozinho sem rejeitar ninguém",
+        "slugs": [
+          "precisar-de-ficar-sozinho-sem-rejeitar-ninguem"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "precisar-de-solidao-para-recuperar-energia-social:precisar-de-ficar-sozinho-sem-rejeitar-ninguem",
+            "focus": "reconhecer a necessidade temporária de estar só como forma de recuperar energia e autonomia depois de muita interação, distinguindo solitude escolhida de solidão indesejada, castigo silencioso ou ruptura do vínculo",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_precisar_de_ficar_sozinho_sem_rejeitar_ninguem_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_precisar_de_ficar_sozinho_sem_rejeitar_ninguem_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_precisar_de_ficar_sozinho_sem_rejeitar_ninguem_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_precisar_de_ficar_sozinho_sem_rejeitar_ninguem_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_precisar_de_ficar_sozinho_sem_rejeitar_ninguem_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_precisar_de_ficar_sozinho_sem_rejeitar_ninguem_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "silencio-como-recuperacao",
+        "preferredLabel": "Silêncio como recuperação",
+        "slugs": [
+          "silencio-como-recuperacao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "precisar-de-solidao-para-recuperar-energia-social:silencio-como-recuperacao",
+            "focus": "reconhecer a necessidade temporária de estar só como forma de recuperar energia e autonomia depois de muita interação, distinguindo solitude escolhida de solidão indesejada, castigo silencioso ou ruptura do vínculo",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_silencio_como_recuperacao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_silencio_como_recuperacao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_silencio_como_recuperacao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_silencio_como_recuperacao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_silencio_como_recuperacao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_silencio_como_recuperacao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "culpa-por-recusar-convivios",
+        "preferredLabel": "Culpa por recusar convívios",
+        "slugs": [
+          "culpa-por-recusar-convivios"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "precisar-de-solidao-para-recuperar-energia-social:culpa-por-recusar-convivios",
+            "focus": "reconhecer a necessidade temporária de estar só como forma de recuperar energia e autonomia depois de muita interação, distinguindo solitude escolhida de solidão indesejada, castigo silencioso ou ruptura do vínculo",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_culpa_por_recusar_convivios_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_por_recusar_convivios_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_por_recusar_convivios_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_por_recusar_convivios_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_por_recusar_convivios_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_culpa_por_recusar_convivios_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "quando-o-modo-aviao-e-descanso",
+        "preferredLabel": "Quando o modo avião é descanso",
+        "slugs": [
+          "quando-o-modo-aviao-e-descanso"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "precisar-de-solidao-para-recuperar-energia-social:quando-o-modo-aviao-e-descanso",
+            "focus": "reconhecer a necessidade temporária de estar só como forma de recuperar energia e autonomia depois de muita interação, distinguindo solitude escolhida de solidão indesejada, castigo silencioso ou ruptura do vínculo",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_quando_o_modo_aviao_e_descanso_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_modo_aviao_e_descanso_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_modo_aviao_e_descanso_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_modo_aviao_e_descanso_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_modo_aviao_e_descanso_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_modo_aviao_e_descanso_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "explicar-que-preciso-de-espaco-sem-desaparecer",
+        "preferredLabel": "Explicar que preciso de espaço sem desaparecer",
+        "slugs": [
+          "explicar-que-preciso-de-espaco-sem-desaparecer"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "precisar-de-solidao-para-recuperar-energia-social:explicar-que-preciso-de-espaco-sem-desaparecer",
+            "focus": "reconhecer a necessidade temporária de estar só como forma de recuperar energia e autonomia depois de muita interação, distinguindo solitude escolhida de solidão indesejada, castigo silencioso ou ruptura do vínculo",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_explicar_que_preciso_de_espaco_sem_desaparecer_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_explicar_que_preciso_de_espaco_sem_desaparecer_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_explicar_que_preciso_de_espaco_sem_desaparecer_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_explicar_que_preciso_de_espaco_sem_desaparecer_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_explicar_que_preciso_de_espaco_sem_desaparecer_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_explicar_que_preciso_de_espaco_sem_desaparecer_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "liberdade-com-preco-emocional",
+        "preferredLabel": "Liberdade com preço emocional",
+        "slugs": [
+          "liberdade-com-preco-emocional"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "autonomia-condicionada-pelo-medo-da-reaccao:liberdade-com-preco-emocional",
+            "focus": "reconhecer quando a liberdade formal dentro de uma relação é reduzida pela antecipação de consequências emocionais após escolhas autónomas, distinguindo desacordo legítimo de padrões repetidos de punição, retirada ou pressão que levam a pessoa a mudar o próprio comportamento para evitar a reacção do outro",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_liberdade_com_preco_emocional_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_liberdade_com_preco_emocional_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_liberdade_com_preco_emocional_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_liberdade_com_preco_emocional_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_liberdade_com_preco_emocional_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_liberdade_com_preco_emocional_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "medo-da-reaccao-depois-de-escolher",
+        "preferredLabel": "Medo da reacção depois de escolher",
+        "slugs": [
+          "medo-da-reaccao-depois-de-escolher"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "autonomia-condicionada-pelo-medo-da-reaccao:medo-da-reaccao-depois-de-escolher",
+            "focus": "reconhecer quando a liberdade formal dentro de uma relação é reduzida pela antecipação de consequências emocionais após escolhas autónomas, distinguindo desacordo legítimo de padrões repetidos de punição, retirada ou pressão que levam a pessoa a mudar o próprio comportamento para evitar a reacção do outro",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_depois_de_escolher_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_depois_de_escolher_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_depois_de_escolher_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_depois_de_escolher_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_depois_de_escolher_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_medo_da_reaccao_depois_de_escolher_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "autonomia-e-consequencias-relacionais",
+        "preferredLabel": "Autonomia e consequências relacionais",
+        "slugs": [
+          "autonomia-e-consequencias-relacionais"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "autonomia-condicionada-pelo-medo-da-reaccao:autonomia-e-consequencias-relacionais",
+            "focus": "reconhecer quando a liberdade formal dentro de uma relação é reduzida pela antecipação de consequências emocionais após escolhas autónomas, distinguindo desacordo legítimo de padrões repetidos de punição, retirada ou pressão que levam a pessoa a mudar o próprio comportamento para evitar a reacção do outro",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_autonomia_e_consequencias_relacionais_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_autonomia_e_consequencias_relacionais_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_autonomia_e_consequencias_relacionais_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_autonomia_e_consequencias_relacionais_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_autonomia_e_consequencias_relacionais_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_autonomia_e_consequencias_relacionais_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "punicao-sem-proibicao-explicita",
+        "preferredLabel": "Punição sem proibição explícita",
+        "slugs": [
+          "punicao-sem-proibicao-explicita"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "autonomia-condicionada-pelo-medo-da-reaccao:punicao-sem-proibicao-explicita",
+            "focus": "reconhecer quando a liberdade formal dentro de uma relação é reduzida pela antecipação de consequências emocionais após escolhas autónomas, distinguindo desacordo legítimo de padrões repetidos de punição, retirada ou pressão que levam a pessoa a mudar o próprio comportamento para evitar a reacção do outro",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_punicao_sem_proibicao_explicita_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_punicao_sem_proibicao_explicita_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_punicao_sem_proibicao_explicita_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_punicao_sem_proibicao_explicita_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_punicao_sem_proibicao_explicita_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_punicao_sem_proibicao_explicita_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "mudar-escolhas-para-evitar-tensao",
+        "preferredLabel": "Mudar escolhas para evitar tensão",
+        "slugs": [
+          "mudar-escolhas-para-evitar-tensao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "autonomia-condicionada-pelo-medo-da-reaccao:mudar-escolhas-para-evitar-tensao",
+            "focus": "reconhecer quando a liberdade formal dentro de uma relação é reduzida pela antecipação de consequências emocionais após escolhas autónomas, distinguindo desacordo legítimo de padrões repetidos de punição, retirada ou pressão que levam a pessoa a mudar o próprio comportamento para evitar a reacção do outro",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_mudar_escolhas_para_evitar_tensao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mudar_escolhas_para_evitar_tensao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mudar_escolhas_para_evitar_tensao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mudar_escolhas_para_evitar_tensao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mudar_escolhas_para_evitar_tensao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_mudar_escolhas_para_evitar_tensao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "desacordo-vs-controlo",
+        "preferredLabel": "Desacordo vs controlo",
+        "slugs": [
+          "desacordo-vs-controlo"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "autonomia-condicionada-pelo-medo-da-reaccao:desacordo-vs-controlo",
+            "focus": "reconhecer quando a liberdade formal dentro de uma relação é reduzida pela antecipação de consequências emocionais após escolhas autónomas, distinguindo desacordo legítimo de padrões repetidos de punição, retirada ou pressão que levam a pessoa a mudar o próprio comportamento para evitar a reacção do outro",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_desacordo_vs_controlo_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desacordo_vs_controlo_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desacordo_vs_controlo_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desacordo_vs_controlo_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desacordo_vs_controlo_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_desacordo_vs_controlo_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "escolher-sem-pedir-permissao-emocional",
+        "preferredLabel": "Escolher sem pedir permissão emocional",
+        "slugs": [
+          "escolher-sem-pedir-permissao-emocional"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "autonomia-condicionada-pelo-medo-da-reaccao:escolher-sem-pedir-permissao-emocional",
+            "focus": "reconhecer quando a liberdade formal dentro de uma relação é reduzida pela antecipação de consequências emocionais após escolhas autónomas, distinguindo desacordo legítimo de padrões repetidos de punição, retirada ou pressão que levam a pessoa a mudar o próprio comportamento para evitar a reacção do outro",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_escolher_sem_pedir_permissao_emocional_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escolher_sem_pedir_permissao_emocional_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escolher_sem_pedir_permissao_emocional_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escolher_sem_pedir_permissao_emocional_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escolher_sem_pedir_permissao_emocional_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_escolher_sem_pedir_permissao_emocional_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "alguem-ficar-quando-tenho-medo",
+        "preferredLabel": "Alguém ficar quando tenho medo",
+        "slugs": [
+          "alguem-ficar-quando-tenho-medo"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "presenca-que-ampara-sem-tentar-resolver:alguem-ficar-quando-tenho-medo",
+            "focus": "reconhecer quando a necessidade principal não é resolver imediatamente o problema, mas receber presença, escuta e apoio relacional suficiente para atravessar um momento difícil, distinguindo companhia humana de aconselhamento, tratamento clínico ou resposta de emergência",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_alguem_ficar_quando_tenho_medo_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_alguem_ficar_quando_tenho_medo_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_alguem_ficar_quando_tenho_medo_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_alguem_ficar_quando_tenho_medo_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_alguem_ficar_quando_tenho_medo_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_alguem_ficar_quando_tenho_medo_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "presenca-vs-solucao",
+        "preferredLabel": "Presença vs solução",
+        "slugs": [
+          "presenca-vs-solucao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "presenca-que-ampara-sem-tentar-resolver:presenca-vs-solucao",
+            "focus": "reconhecer quando a necessidade principal não é resolver imediatamente o problema, mas receber presença, escuta e apoio relacional suficiente para atravessar um momento difícil, distinguindo companhia humana de aconselhamento, tratamento clínico ou resposta de emergência",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_presenca_vs_solucao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presenca_vs_solucao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presenca_vs_solucao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presenca_vs_solucao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presenca_vs_solucao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presenca_vs_solucao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "ouvir-sem-tentar-corrigir",
+        "preferredLabel": "Ouvir sem tentar corrigir",
+        "slugs": [
+          "ouvir-sem-tentar-corrigir"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "presenca-que-ampara-sem-tentar-resolver:ouvir-sem-tentar-corrigir",
+            "focus": "reconhecer quando a necessidade principal não é resolver imediatamente o problema, mas receber presença, escuta e apoio relacional suficiente para atravessar um momento difícil, distinguindo companhia humana de aconselhamento, tratamento clínico ou resposta de emergência",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_ouvir_sem_tentar_corrigir_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ouvir_sem_tentar_corrigir_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ouvir_sem_tentar_corrigir_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ouvir_sem_tentar_corrigir_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ouvir_sem_tentar_corrigir_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ouvir_sem_tentar_corrigir_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "nao-atravessar-sozinho",
+        "preferredLabel": "Não atravessar sozinho",
+        "slugs": [
+          "nao-atravessar-sozinho"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "presenca-que-ampara-sem-tentar-resolver:nao-atravessar-sozinho",
+            "focus": "reconhecer quando a necessidade principal não é resolver imediatamente o problema, mas receber presença, escuta e apoio relacional suficiente para atravessar um momento difícil, distinguindo companhia humana de aconselhamento, tratamento clínico ou resposta de emergência",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_nao_atravessar_sozinho_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_atravessar_sozinho_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_atravessar_sozinho_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_atravessar_sozinho_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_atravessar_sozinho_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_atravessar_sozinho_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "pedir-apoio-sem-ter-a-frase-perfeita",
+        "preferredLabel": "Pedir apoio sem ter a frase perfeita",
+        "slugs": [
+          "pedir-apoio-sem-ter-a-frase-perfeita"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "presenca-que-ampara-sem-tentar-resolver:pedir-apoio-sem-ter-a-frase-perfeita",
+            "focus": "reconhecer quando a necessidade principal não é resolver imediatamente o problema, mas receber presença, escuta e apoio relacional suficiente para atravessar um momento difícil, distinguindo companhia humana de aconselhamento, tratamento clínico ou resposta de emergência",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_pedir_apoio_sem_ter_a_frase_perfeita_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_apoio_sem_ter_a_frase_perfeita_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_apoio_sem_ter_a_frase_perfeita_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_apoio_sem_ter_a_frase_perfeita_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_apoio_sem_ter_a_frase_perfeita_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pedir_apoio_sem_ter_a_frase_perfeita_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "companhia-em-momentos-dificeis",
+        "preferredLabel": "Companhia em momentos difíceis",
+        "slugs": [
+          "companhia-em-momentos-dificeis"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "presenca-que-ampara-sem-tentar-resolver:companhia-em-momentos-dificeis",
+            "focus": "reconhecer quando a necessidade principal não é resolver imediatamente o problema, mas receber presença, escuta e apoio relacional suficiente para atravessar um momento difícil, distinguindo companhia humana de aconselhamento, tratamento clínico ou resposta de emergência",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_companhia_em_momentos_dificeis_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_companhia_em_momentos_dificeis_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_companhia_em_momentos_dificeis_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_companhia_em_momentos_dificeis_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_companhia_em_momentos_dificeis_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_companhia_em_momentos_dificeis_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "estar-com-alguem-sem-ter-de-salvar-tudo",
+        "preferredLabel": "Estar com alguém sem ter de salvar tudo",
+        "slugs": [
+          "estar-com-alguem-sem-ter-de-salvar-tudo"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "presenca-que-ampara-sem-tentar-resolver:estar-com-alguem-sem-ter-de-salvar-tudo",
+            "focus": "reconhecer quando a necessidade principal não é resolver imediatamente o problema, mas receber presença, escuta e apoio relacional suficiente para atravessar um momento difícil, distinguindo companhia humana de aconselhamento, tratamento clínico ou resposta de emergência",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_estar_com_alguem_sem_ter_de_salvar_tudo_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_estar_com_alguem_sem_ter_de_salvar_tudo_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_estar_com_alguem_sem_ter_de_salvar_tudo_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_estar_com_alguem_sem_ter_de_salvar_tudo_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_estar_com_alguem_sem_ter_de_salvar_tudo_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_estar_com_alguem_sem_ter_de_salvar_tudo_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "descanso-que-parece-ter-de-ser-merecido",
+        "preferredLabel": "Descanso que parece ter de ser merecido",
+        "slugs": [
+          "descanso-que-parece-ter-de-ser-merecido"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:descanso-que-parece-ter-de-ser-merecido",
+            "focus": "reconhecer quando descanso e lazer são tratados como algo que precisa de ser merecido, distinguindo uma pausa escolhida de culpa, ruminação e autojulgamento ligados à produtividade sem transformar a experiência em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_descanso_que_parece_ter_de_ser_merecido_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_descanso_que_parece_ter_de_ser_merecido_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_descanso_que_parece_ter_de_ser_merecido_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_descanso_que_parece_ter_de_ser_merecido_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_descanso_que_parece_ter_de_ser_merecido_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_descanso_que_parece_ter_de_ser_merecido_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "valor-pessoal-e-produtividade",
+        "preferredLabel": "Valor pessoal e produtividade",
+        "slugs": [
+          "valor-pessoal-e-produtividade"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:valor-pessoal-e-produtividade",
+            "focus": "reconhecer quando descanso e lazer são tratados como algo que precisa de ser merecido, distinguindo uma pausa escolhida de culpa, ruminação e autojulgamento ligados à produtividade sem transformar a experiência em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_valor_pessoal_e_produtividade_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_valor_pessoal_e_produtividade_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_valor_pessoal_e_produtividade_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_valor_pessoal_e_produtividade_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_valor_pessoal_e_produtividade_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_valor_pessoal_e_produtividade_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "parar-sem-conseguir-desligar",
+        "preferredLabel": "Parar sem conseguir desligar",
+        "slugs": [
+          "parar-sem-conseguir-desligar"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:parar-sem-conseguir-desligar",
+            "focus": "reconhecer quando descanso e lazer são tratados como algo que precisa de ser merecido, distinguindo uma pausa escolhida de culpa, ruminação e autojulgamento ligados à produtividade sem transformar a experiência em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_parar_sem_conseguir_desligar_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_parar_sem_conseguir_desligar_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_parar_sem_conseguir_desligar_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_parar_sem_conseguir_desligar_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_parar_sem_conseguir_desligar_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_parar_sem_conseguir_desligar_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "tempo-livre-que-parece-desperdicio",
+        "preferredLabel": "Tempo livre que parece desperdício",
+        "slugs": [
+          "tempo-livre-que-parece-desperdicio"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:tempo-livre-que-parece-desperdicio",
+            "focus": "reconhecer quando descanso e lazer são tratados como algo que precisa de ser merecido, distinguindo uma pausa escolhida de culpa, ruminação e autojulgamento ligados à produtividade sem transformar a experiência em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_tempo_livre_que_parece_desperdicio_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tempo_livre_que_parece_desperdicio_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tempo_livre_que_parece_desperdicio_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tempo_livre_que_parece_desperdicio_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tempo_livre_que_parece_desperdicio_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tempo_livre_que_parece_desperdicio_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "tarefas-inacabadas-durante-a-pausa",
+        "preferredLabel": "Tarefas inacabadas durante a pausa",
+        "slugs": [
+          "tarefas-inacabadas-durante-a-pausa"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:tarefas-inacabadas-durante-a-pausa",
+            "focus": "reconhecer quando descanso e lazer são tratados como algo que precisa de ser merecido, distinguindo uma pausa escolhida de culpa, ruminação e autojulgamento ligados à produtividade sem transformar a experiência em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_tarefas_inacabadas_durante_a_pausa_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tarefas_inacabadas_durante_a_pausa_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tarefas_inacabadas_durante_a_pausa_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tarefas_inacabadas_durante_a_pausa_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tarefas_inacabadas_durante_a_pausa_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_tarefas_inacabadas_durante_a_pausa_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "permitir-se-nao-produzir",
+        "preferredLabel": "Permitir-se não produzir",
+        "slugs": [
+          "permitir-se-nao-produzir"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:permitir-se-nao-produzir",
+            "focus": "reconhecer quando descanso e lazer são tratados como algo que precisa de ser merecido, distinguindo uma pausa escolhida de culpa, ruminação e autojulgamento ligados à produtividade sem transformar a experiência em diagnóstico",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_permitir_se_nao_produzir_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_permitir_se_nao_produzir_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_permitir_se_nao_produzir_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_permitir_se_nao_produzir_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_permitir_se_nao_produzir_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_permitir_se_nao_produzir_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
