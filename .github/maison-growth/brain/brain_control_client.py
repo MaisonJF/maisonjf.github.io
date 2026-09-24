@@ -34,6 +34,16 @@ class _NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 
+def _normalize_access_credential(raw: Optional[str], header_name: str) -> Optional[str]:
+    if raw is None:
+        return None
+    value = raw.strip()
+    prefix = f"{header_name}:"
+    if value.lower().startswith(prefix.lower()):
+        value = value[len(prefix):].strip()
+    return value or None
+
+
 def _default_transport(
     url: str,
     *,
@@ -88,6 +98,16 @@ class BrainControlClient:
 
     def __post_init__(self) -> None:
         object.__setattr__(self,"base_url",_safe_base_url(self.base_url))
+        object.__setattr__(
+            self,
+            "access_client_id",
+            _normalize_access_credential(self.access_client_id, "CF-Access-Client-Id"),
+        )
+        object.__setattr__(
+            self,
+            "access_client_secret",
+            _normalize_access_credential(self.access_client_secret, "CF-Access-Client-Secret"),
+        )
         if not self.token.strip():
             raise BrainControlError("brain_control_token_required")
         if (self.access_client_id is None) != (self.access_client_secret is None):
