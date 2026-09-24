@@ -144,6 +144,89 @@ class ManualPilotDossierTests(unittest.TestCase):
         self.assertFalse(payload["experiment_execution_authorized"])
         self.assertIn("manual:ops:complete",payload["evidence_refs"])
 
+    def test_private_b2b_context_can_complete_non_asset_inputs_without_granting_authority(self):
+        plan={
+            **base_plan("manual_b2b_pilot"),
+            "offer_type":"b2b",
+            "economics":{},
+        }
+        dossier=build_pilot_dossier(
+            plan,
+            assets=CommercialAssetContext({"assets":[]}),
+            pilot_context={
+                "inputs":{
+                    "target_profile":"retalhistas independentes com decisão local",
+                    "capacity_basis":"máximo de 4 projectos por mês",
+                    "unit_or_project_cost_minor":1200,
+                    "price_or_quote_rule":"orçamento humano por âmbito",
+                    "fulfilment_lead_time_days":7,
+                    "explicit_new_offer_decision_ref":"manual:offer-decision:1",
+                },
+                "evidence_refs":["manual:pilot-context:b2b"],
+            },
+        )
+        self.assertEqual(dossier.ready_state,"ready_for_human_action_review")
+        self.assertEqual(dossier.required_inputs,())
+        payload=dossier_to_dict(dossier)
+        self.assertFalse(payload["outbound_authorized"])
+        self.assertFalse(payload["spend_authorized"])
+        self.assertFalse(payload["public_write_authorized"])
+        self.assertFalse(payload["experiment_execution_authorized"])
+        self.assertIn("manual:pilot-context:b2b",payload["evidence_refs"])
+        self.assertIn(
+            "private_evidence_backed_pilot_context_applied",
+            payload["reason_codes"],
+        )
+
+    def test_private_distribution_context_creates_a_real_path_to_human_review(self):
+        plan={
+            **base_plan("manual_distribution_pilot"),
+            "offer_type":"partnership",
+            "economics":{},
+        }
+        dossier=build_pilot_dossier(
+            plan,
+            assets=CommercialAssetContext({"assets":[]}),
+            pilot_context={
+                "inputs":{
+                    "amplifier_or_partner_ref":"partner:curated:1",
+                    "activation_strategy":"ZERO_CASH_PR",
+                    "direct_cost_minor":0,
+                    "attribution_method":"dedicated_landing_tag",
+                    "explicit_new_offer_decision_ref":"manual:channel-decision:1",
+                },
+                "evidence_refs":["manual:pilot-context:distribution"],
+            },
+        )
+        self.assertEqual(dossier.ready_state,"ready_for_human_action_review")
+        self.assertEqual(dossier.required_inputs,())
+        self.assertFalse(dossier.outbound_authorized)
+
+    def test_generic_manual_validation_can_use_private_evidence_backed_scope(self):
+        plan={
+            **base_plan("manual_validation"),
+            "offer_type":"new_offer_family",
+            "economics":{},
+        }
+        dossier=build_pilot_dossier(
+            plan,
+            assets=CommercialAssetContext({"assets":[]}),
+            pilot_context={
+                "inputs":{
+                    "purchase_behaviour":"pedido de informação qualificado seguido de proposta",
+                    "pilot_scope":"3 conversas humanas sem automação",
+                    "cost_basis":"tempo humano observado; sem media paga",
+                    "capacity_basis":"máximo de 3 conversas nesta validação",
+                    "explicit_new_offer_decision_ref":"manual:new-offer:1",
+                },
+                "evidence_refs":["manual:pilot-context:generic"],
+            },
+        )
+        self.assertEqual(dossier.ready_state,"ready_for_human_action_review")
+        self.assertEqual(dossier.required_inputs,())
+        self.assertFalse(dossier.experiment_execution_authorized)
+
+
     def test_no_asset_match_stays_blocked(self):
         plan={
             **base_plan(),
