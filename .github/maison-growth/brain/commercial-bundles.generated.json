@@ -52,7 +52,6 @@
       "catalogue_subtotal_minor": 1500,
       "currency": "EUR",
       "bundle_price_minor": null,
-      "discount_minor": null,
       "operational_readiness": {
         "current_stock_snapshot_required": false,
         "stock_snapshot_is_readiness_gate": false,
@@ -63,7 +62,6 @@
       },
       "authority": {
         "public_write_authorized": false,
-        "automatic_discount_authorized": false,
         "automatic_checkout_authorized": false,
         "human_approval_required": true
       },
@@ -108,7 +106,6 @@
       "catalogue_subtotal_minor": 1700,
       "currency": "EUR",
       "bundle_price_minor": null,
-      "discount_minor": null,
       "operational_readiness": {
         "current_stock_snapshot_required": false,
         "stock_snapshot_is_readiness_gate": false,
@@ -119,7 +116,6 @@
       },
       "authority": {
         "public_write_authorized": false,
-        "automatic_discount_authorized": false,
         "automatic_checkout_authorized": false,
         "human_approval_required": true
       },
@@ -172,7 +168,6 @@
       "catalogue_subtotal_minor": 2000,
       "currency": "EUR",
       "bundle_price_minor": null,
-      "discount_minor": null,
       "operational_readiness": {
         "current_stock_snapshot_required": false,
         "stock_snapshot_is_readiness_gate": false,
@@ -183,7 +178,6 @@
       },
       "authority": {
         "public_write_authorized": false,
-        "automatic_discount_authorized": false,
         "automatic_checkout_authorized": false,
         "human_approval_required": true
       },
@@ -243,7 +237,6 @@
       "catalogue_subtotal_minor": 3200,
       "currency": "EUR",
       "bundle_price_minor": null,
-      "discount_minor": null,
       "operational_readiness": {
         "current_stock_snapshot_required": false,
         "stock_snapshot_is_readiness_gate": false,
@@ -254,7 +247,6 @@
       },
       "authority": {
         "public_write_authorized": false,
-        "automatic_discount_authorized": false,
         "automatic_checkout_authorized": false,
         "human_approval_required": true
       },
