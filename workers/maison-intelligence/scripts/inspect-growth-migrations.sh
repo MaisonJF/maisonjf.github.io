@@ -56,4 +56,48 @@ SQL
 
 echo "Inspecting Maison Growth D1 migration sentinels on: $DB_NAME"
 npx wrangler d1 execute "$DB_NAME" --remote --command "$SQL"
+
+
+echo
+echo "Detailed state for the pending 0012-0016 surfaces:"
+OBJECT_SQL="
+SELECT type,name
+FROM sqlite_master
+WHERE name IN (
+  'opportunity_hypotheses',
+  'opportunity_offer_hypotheses',
+  'earned_distribution_match_assessments',
+  'distribution_value_observations',
+  'a14_governance_links',
+  'a14_experiment_links',
+  'a14_outcome_links',
+  'a14_learning_links',
+  'a14_realised_economics',
+  'brain_prebrain_feed',
+  'brain_cash_feedback',
+  'autonomy_human_review_resolutions',
+  'autonomy_human_queue_current',
+  'a14_validation_plans',
+  'a14_validation_plan_a7_links',
+  'a14_validation_plan_a8_links',
+  'a14_approved_offers_ready_for_planning'
+)
+ORDER BY type,name;
+"
+npx wrangler d1 execute "$DB_NAME" --remote --command "$OBJECT_SQL"
+
+echo
+echo "Relevant schema_state values:"
+STATE_SQL="
+SELECT schema_key,schema_value
+FROM schema_state
+WHERE schema_key IN (
+  'maison_growth_a14_schema_version',
+  'maison_brain_runtime_schema_version',
+  'maison_growth_a12_schema_version'
+)
+ORDER BY schema_key;
+"
+npx wrangler d1 execute "$DB_NAME" --remote --command "$STATE_SQL"
+
 echo "Inspection complete. This command is read-only; it does not apply migrations."
