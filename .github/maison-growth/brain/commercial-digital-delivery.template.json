@@ -1,0 +1,40 @@
+{
+  "schema_version": "commercial_digital_delivery_template_v1",
+  "target_overlay_schema": "commercial_asset_overlay_v1",
+  "visibility": "operator_template_no_private_values",
+  "source": "commercial-assets.generated.json",
+  "instructions": [
+    "Copy this template outside the repository before entering private delivery or cost observations.",
+    "Enter observed per-sale human effort, variable cost and delivery lead only; zero is valid only when actually verified.",
+    "Every non-null operational value in the final overlay must carry at least one evidence_ref.",
+    "Digital products do not require a service-capacity period; do not invent capacity fields."
+  ],
+  "observed_at": null,
+  "evidence_ref_example": "manual:digital-delivery-review:YYYY-MM-DD",
+  "assets": [
+    {
+      "asset_ref": "catalog:digital:oracle",
+      "slug": "oracle",
+      "name": "Oráculo MAISON JF®",
+      "source": "manual_digital_delivery_review",
+      "operational": {
+        "human_effort_minutes": null,
+        "variable_cost_minor": null,
+        "delivery_lead_days": null
+      },
+      "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:digital:pdi",
+      "slug": "para-de-ignorar",
+      "name": "PÁRA DE IGNORAR!",
+      "source": "manual_digital_delivery_review",
+      "operational": {
+        "human_effort_minutes": null,
+        "variable_cost_minor": null,
+        "delivery_lead_days": null
+      },
+      "evidence_refs": []
+    }
+  ]
+}
