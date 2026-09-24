@@ -46,15 +46,22 @@ class CommercialBundleTests(unittest.TestCase):
         for bundle in self.payload["bundles"]:
             self.assertIn("catalogue_subtotal_not_offer_price",bundle["reason_codes"])
 
-    def test_stock_and_margin_remain_blocked_until_private_operational_facts_exist(self):
-        self.assertEqual(self.payload["summary"]["requires_stock_check"],4)
+    def test_replenishment_and_margin_remain_blocked_but_stock_snapshot_does_not(self):
+        self.assertEqual(self.payload["summary"]["requires_stock_check"],0)
+        self.assertEqual(self.payload["summary"]["requires_replenishment_check"],4)
         self.assertEqual(self.payload["summary"]["requires_margin_check"],4)
+        self.assertTrue(self.payload["contract"]["current_stock_is_optional_snapshot"])
+        self.assertTrue(self.payload["contract"]["replenishment_capacity_must_be_verified_before_offer"])
         for bundle in self.payload["bundles"]:
             readiness=bundle["operational_readiness"]
-            self.assertFalse(readiness["inventory_known"])
+            self.assertFalse(readiness["current_stock_snapshot_required"])
+            self.assertFalse(readiness["stock_snapshot_is_readiness_gate"])
+            self.assertFalse(readiness["replenishment_capacity_known"])
             self.assertFalse(readiness["unit_cost_known"])
-            self.assertTrue(readiness["stock_check_required"])
+            self.assertTrue(readiness["replenishment_check_required"])
             self.assertTrue(readiness["margin_check_required"])
+            self.assertNotIn("inventory_unknown",bundle["reason_codes"])
+            self.assertIn("replenishment_capacity_unknown",bundle["reason_codes"])
 
     def test_bundle_assets_are_existing_public_active_physical_products(self):
         by_ref={x["asset_ref"]:x for x in self.assets["assets"]}
