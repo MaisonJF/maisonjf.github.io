@@ -65,7 +65,7 @@ jobs:
           CLOUDFLARE_READ_API_TOKEN: ${{ secrets.CLOUDFLARE_READ_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-          MAISON_BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+          MAISON_BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
           MAISON_CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           MAISON_CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
           MAISON_BRAIN_PROPOSAL_TOKEN: ${{ secrets.MAISON_BRAIN_PROPOSAL_TOKEN }}
@@ -91,7 +91,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
           BRAIN_PROPOSAL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
           BRAIN_PROPOSAL_TOKEN: ${{ secrets.MAISON_BRAIN_PROPOSAL_TOKEN }}
           BRAIN_REVIEW_DECISION_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
@@ -146,7 +146,7 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
           BRAIN_PROPOSAL_TOKEN: ${{ secrets.MAISON_BRAIN_PROPOSAL_TOKEN }}
           BRAIN_REVIEW_DECISION_TOKEN: ${{ secrets.MAISON_BRAIN_REVIEW_DECISION_TOKEN }}
         run: |
@@ -175,7 +175,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
           CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
         run: python .github/maison-growth/runtime/verify_private_brain_health.py
@@ -184,7 +184,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
           CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
         run: python .github/maison-growth/runtime/verify_private_brain_boundary.py "$RUNTIME_STAGE"
