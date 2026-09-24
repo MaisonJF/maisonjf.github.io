@@ -20,18 +20,18 @@ class CommercialAssetTests(unittest.TestCase):
     def test_generated_registry_has_real_catalogue_and_unknown_operations(self):
         ctx=CommercialAssetContext(self.registry())
         summary=ctx.summary()
-        self.assertEqual(summary["asset_count"],27)
+        self.assertEqual(summary["asset_count"],19)
         self.assertFalse(summary["private_overlay_loaded"])
         self.assertEqual(summary["known_operational_fields"],0)
         self.assertGreater(summary["unknown_operational_fields"],0)
         self.assertFalse(summary["catalogue_in_stock_is_counted_inventory"])
 
         by_ref={row["asset_ref"]:row for row in self.registry()["assets"]}
-        self.assertIn("catalog:digital:pdi-relacoes",by_ref)
-        self.assertIn("catalog:digital:oracle-belong",by_ref)
-        self.assertEqual(by_ref["catalog:digital:pdi-relacoes"]["price_minor"],500)
-        self.assertEqual(by_ref["catalog:digital:oracle-belong"]["price_minor"],200)
-        self.assertEqual(by_ref["catalog:digital:pdi-relacoes"]["asset_type"],"digital_product")
+        self.assertIn("catalog:digital:pdi",by_ref)
+        self.assertIn("catalog:digital:oracle",by_ref)
+        self.assertEqual(by_ref["catalog:digital:pdi"]["price_minor"],500)
+        self.assertEqual(by_ref["catalog:digital:oracle"]["price_minor"],200)
+        self.assertEqual(by_ref["catalog:digital:pdi"]["asset_type"],"digital_product")
 
     def test_service_pricing_is_structured_without_flattening_multi_format_or_quote_offers(self):
         by_ref={row["asset_ref"]:row for row in self.registry()["assets"]}
@@ -112,6 +112,31 @@ class CommercialAssetTests(unittest.TestCase):
             self.assertEqual(row["source"],"manual_capacity_review")
             self.assertEqual(row["evidence_refs"],[])
             self.assertTrue(all(value is None for value in row["operational"].values()))
+
+    def test_digital_operations_template_contains_only_oracle_and_pdi(self):
+        template=json.loads((ROOT/"commercial-digital-operations.template.json").read_text(encoding="utf-8"))
+        self.assertEqual(template["target_overlay_schema"],"commercial_asset_overlay_v1")
+        refs={row["asset_ref"] for row in template["assets"]}
+        self.assertEqual(refs,{"catalog:digital:oracle","catalog:digital:pdi"})
+        self.assertIsNone(template["observed_at"])
+        for row in template["assets"]:
+            self.assertEqual(row["source"],"manual_digital_delivery_review")
+            self.assertEqual(row["evidence_refs"],[])
+            self.assertEqual(set(row["operational"]),{
+                "human_effort_minutes","variable_cost_minor","delivery_lead_days"
+            })
+            self.assertTrue(all(value is None for value in row["operational"].values()))
+
+    def test_search_exposes_oracle_and_pdi_to_brain_context(self):
+        ctx=CommercialAssetContext(self.registry())
+        oracle_hits=ctx.search("oráculo solidão companhia",limit=10)
+        pdi_hits=ctx.search("pára ignorar perguntas conversa",limit=10)
+        oracle=next(x for x in oracle_hits if x.ref=="asset:catalog:digital:oracle")
+        pdi=next(x for x in pdi_hits if x.ref=="asset:catalog:digital:pdi")
+        self.assertEqual(oracle.asset_type,"digital_product")
+        self.assertEqual(oracle.price_minor,200)
+        self.assertEqual(pdi.asset_type,"digital_product")
+        self.assertEqual(pdi.price_minor,500)
 
     def test_search_finds_existing_product_without_claiming_stock_quantity(self):
         ctx=CommercialAssetContext(self.registry())
