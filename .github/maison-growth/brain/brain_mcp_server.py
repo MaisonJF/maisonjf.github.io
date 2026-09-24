@@ -13,6 +13,7 @@ from mcp.server.transport_security import TransportSecuritySettings
 from mcp.types import ToolAnnotations
 
 from commercial_assets import CommercialAssetContext
+from build_commercial_attention import load_attention as load_commercial_attention
 from digital_experience_coverage import load_coverage as load_digital_experience_coverage
 from commercial_readiness_board import build_board
 from knowledge_context import OceanEditorialContext
@@ -71,7 +72,7 @@ def _commercial_assets() -> CommercialAssetContext:
 
 
 def _commercial_attention() -> dict[str,Any]:
-    return json.loads((ROOT/"commercial-attention.generated.json").read_text(encoding="utf-8"))
+    return load_commercial_attention()
 
 
 def _commercial_bundles() -> dict[str,Any]:
