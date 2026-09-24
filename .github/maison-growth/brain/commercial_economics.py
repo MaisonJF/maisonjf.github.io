@@ -125,7 +125,6 @@ def evaluate_asset(
             "operational_evidence_refs":snap["operational_evidence_refs"],
             "authority":{
                 "public_write_authorized":False,
-                "discount_authorized":False,
                 "stock_promise_authorized":False,
                 "automatic_checkout_authorized":False,
                 "experiment_execution_authorized":False,
@@ -177,7 +176,6 @@ def evaluate_asset(
             "operational_evidence_refs":snap["operational_evidence_refs"],
             "authority":{
                 "public_write_authorized":False,
-                "discount_authorized":False,
                 "stock_promise_authorized":False,
                 "automatic_checkout_authorized":False,
                 "experiment_execution_authorized":False,
@@ -264,7 +262,6 @@ def evaluate_bundle(
         "signals":signals,
         "authority":{
             "bundle_price_selected_by_system":False,
-            "discount_authorized":False,
             "public_write_authorized":False,
             "stock_promise_authorized":False,
             "automatic_checkout_authorized":False,
