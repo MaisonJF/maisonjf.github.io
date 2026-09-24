@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from typing import Mapping
 
 FIRST_STAGE_REQUIRED = (
@@ -28,6 +29,13 @@ def summarize(values: Mapping[str, str]) -> dict[str, object]:
     configured = [name for name in FIRST_STAGE_REQUIRED if present(name)]
     missing = [name for name in FIRST_STAGE_REQUIRED if not present(name)]
     access = [present(name) for name in ACCESS_PAIR]
+    access_client_id = str(values.get("MAISON_CF_ACCESS_CLIENT_ID", "") or "").strip()
+    access_client_secret = str(values.get("MAISON_CF_ACCESS_CLIENT_SECRET", "") or "").strip()
+    access_client_id_shape_ok = bool(access_client_id) and access_client_id.endswith(".access")
+    access_client_secret_shape_ok = bool(access_client_secret) and (
+        access_client_secret.startswith("cfast_")
+        or bool(re.fullmatch(r"[0-9a-fA-F]{64}", access_client_secret))
+    )
     dedicated_read_token=present("CLOUDFLARE_READ_API_TOKEN")
     deploy_token=present("CLOUDFLARE_API_TOKEN")
     account_id=present("CLOUDFLARE_ACCOUNT_ID")
@@ -49,6 +57,11 @@ def summarize(values: Mapping[str, str]) -> dict[str, object]:
         "read_only_inspection_token_source": read_token_source,
         "access_boundary_pair_present": all(access),
         "access_boundary_pair_partial": any(access) and not all(access),
+        "access_client_id_shape_ok": access_client_id_shape_ok,
+        "access_client_secret_shape_ok": access_client_secret_shape_ok,
+        "access_pair_shape_ok": access_client_id_shape_ok and access_client_secret_shape_ok,
+        "access_client_id_length": len(access_client_id),
+        "access_client_secret_length": len(access_client_secret),
         "later_stage_configured": [name for name in LATER_STAGE if present(name)],
         "later_stage_missing": [name for name in LATER_STAGE if not present(name)],
         "secrets_printed": False,
