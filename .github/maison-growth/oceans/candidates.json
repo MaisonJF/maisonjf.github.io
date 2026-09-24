@@ -411,6 +411,29 @@
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-24T10:14:00+01:00",
       "lastSeenAt": "2026-09-24T10:14:00+01:00"
+    },
+    {
+      "painLanguage": "Há esperas em que a vida parece ficar em suspenso: depois de enviar uma candidatura, fazer um exame, ter uma conversa importante ou entregar algo decisivo, já não há muito para fazer — mas a resposta ainda não chegou, e a cabeça continua a voltar ao assunto como se vigiar pudesse acelerar o desfecho.",
+      "territory": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
+      "intent": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
+      "commercialAdjacency": "Experiências Digitais Personalizadas Intermédias; Oráculo Decisões & Caminhos, Trabalho & Caminho e Eu & Padrões; Ritual Volta Para Casa para momentos de espera; conteúdos/ebooks/guias reflexivos sobre incerteza e controlo, sem aconselhamento clínico ou promessas de resultado",
+      "evidence": [
+        "American Psychological Association, Speaking of Psychology: a investigação de Kate Sweeny sobre espera por notícias importantes descreve a combinação de incerteza e falta de controlo como particularmente stressante, estudada em candidatos a emprego, resultados de exames e resultados médicos — https://www.apa.org/news/podcasts/speaking-of-psychology/waiting-stress",
+        "Frontiers in Radiology / PMC (2026; PMID 41717567): revisão narrativa sobre “waiting anxiety” identifica incerteza sobre resultados e perda de controlo como mecanismos relevantes durante períodos de espera, com evidência de ansiedade persistente enquanto se aguardam exames/resultados — https://pmc.ncbi.nlm.nih.gov/articles/PMC12913184/"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "vida em suspenso",
+        "esperar por uma resposta",
+        "incerteza fora do meu controlo",
+        "vigiar não acelera o resultado",
+        "entre fazer tudo e não poder fazer mais",
+        "voltar à vida enquanto a resposta não chega"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-24T10:14:00+01:00",
+      "lastSeenAt": "2026-09-24T10:14:00+01:00"
     }
   ]
 }
