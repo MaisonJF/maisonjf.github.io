@@ -63,6 +63,7 @@ def build_board(
             selected_price_minor=selected_service_prices.get(ref),
         )
         next_action,next_reason=_next_action(ranked,economics)
+        asset_type=str(ranked.get("asset_type") or economics.get("asset_type") or "")
         rows.append({
             "attention_rank":ranked.get("attention_rank"),
             "asset_ref":ref,
