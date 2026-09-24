@@ -23,6 +23,16 @@ class BrainCiWorkflowTests(unittest.TestCase):
             self.guard,
         )
 
+    def test_brain_guard_statically_validates_observe_compose(self):
+        self.assertIn(
+            "Validate Docker Compose expansion without starting services",
+            self.guard,
+        )
+        self.assertIn("docker compose",self.guard)
+        self.assertIn("docker-compose.observe.yml",self.guard)
+        self.assertIn("config --quiet",self.guard)
+        self.assertNotIn("docker compose up",self.guard)
+
     def test_private_commercial_preview_is_manual_only(self):
         self.assertIn("  workflow_dispatch:\n",self.preview)
         self.assertNotIn("  pull_request:\n",self.preview)

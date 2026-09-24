@@ -25,6 +25,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Brain Control API | READY GET-only feed/solutions/economics/A11 learning + A5 mappings | DISABLED |
 | Canonical observe cycle | READY A5→Pre-Brain→Scout→Critic→Foundry→A14 preview + A3/A11 feedback context | OPTIONAL / NOT STARTED |
 | Persistent observe runtime | READY Docker Compose: pgvector/Postgres + Redis + Osiris + authenticated bridge + healthchecks | NOT STARTED |
+| Observe host preflight | READY no-start secret/port/Docker-Compose/disk checks; CI also expands full Compose config | NOT RUN ON PRIVATE HOST |
 | Private activation preflight | READY stage-aware HTTPS/secret/token/authority checks + runbook | NOT RUN |
 | Private Worker deploy gate | READY automatic secret-free dry-run + manual live workflow + minimal D1-only private renderer | DRY-RUN VERIFIED ON `main` @ `5b4bb1e6` |
 | Private credential readiness | READY names-only report distinguishes read-only inspection credentials from full first-stage deploy credentials | CHECKED: first-stage secrets currently missing |

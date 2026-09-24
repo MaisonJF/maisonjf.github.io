@@ -60,6 +60,22 @@ jobs:
       - name: Validate persistent observe runtime contracts
         run: python .github/maison-growth/runtime/validate_runtime.py
 
+      - name: Validate Docker Compose expansion without starting services
+        env:
+          POSTGRES_PASSWORD: ci-only-not-a-secret
+          MAISON_OSIRIS_BRIDGE_TOKEN: ci-only-not-a-secret
+          BRAIN_CONTROL_API_URL: http://maison-intelligence
+          BRAIN_CONTROL_TOKEN: ci-only-not-a-secret
+          BRAIN_PROPOSAL_API_URL: http://maison-intelligence
+          BRAIN_PROPOSAL_TOKEN: ci-only-not-a-secret
+        run: |
+          docker compose \
+            -f .github/maison-growth/runtime/docker-compose.observe.yml \
+            config --quiet
+          docker compose \
+            -f .github/maison-growth/runtime/docker-compose.observe.yml \
+            config --profiles
+
       - name: Check A13 worker JavaScript
         working-directory: workers/maison-intelligence
         run: npm run check
