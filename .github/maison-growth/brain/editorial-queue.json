@@ -17,10 +17,10 @@
     "questionThemeHypotheses": 111,
     "questionDesignSlots": 666,
     "activeQuestionTargetPerMatureTheme": 300,
-    "pdiSourceSignals": 249,
-    "pdiThemeBacklog": 248,
-    "pdiSourceDesignSlots": 1488,
-    "pdiEditorialCoreTarget": 74400,
+    "pdiSourceSignals": 255,
+    "pdiThemeBacklog": 254,
+    "pdiSourceDesignSlots": 1524,
+    "pdiEditorialCoreTarget": 76200,
     "pdiCombinatorialTarget": 2800000,
     "oracleCandidates": 18,
     "oracleRoleSlots": 126
@@ -28,20 +28,20 @@
   "pdiGrowth": {
     "scale": {
       "activeQuestionTargetPerMatureTheme": 300,
-      "editorialCoreTarget": 74400,
+      "editorialCoreTarget": 76200,
       "combinatorialPossibilityTarget": 2800000,
       "paidBodiesStoredInRepository": false,
       "automaticActivation": false
     },
     "sourceStats": {
-      "totalSignals": 249,
+      "totalSignals": 255,
       "oracle": 100,
       "farol": 11,
       "voltaParaCasa": 8,
       "maisonNative": 3,
       "pdiConversation": 28,
-      "ocean": 99,
-      "exactGroups": 248
+      "ocean": 105,
+      "exactGroups": 254
     },
     "themes": [
       {
@@ -13433,6 +13433,330 @@
           },
           {
             "id": "pdi_source_slot_permitir_se_nao_produzir_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "domingo-que-ja-parece-segunda-feira",
+        "preferredLabel": "Domingo que já parece segunda-feira",
+        "slugs": [
+          "domingo-que-ja-parece-segunda-feira"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ansiedade-antecipatoria-na-transicao-domingo-semana:domingo-que-ja-parece-segunda-feira",
+            "focus": "reconhecer quando a antecipação da semana de trabalho invade o domingo e transforma uma transição normal numa sequência de ruminação, tensão ou perda de descanso, distinguindo preparação útil de viver a segunda-feira antes de ela chegar",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_domingo_que_ja_parece_segunda_feira_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_domingo_que_ja_parece_segunda_feira_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_domingo_que_ja_parece_segunda_feira_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_domingo_que_ja_parece_segunda_feira_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_domingo_que_ja_parece_segunda_feira_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_domingo_que_ja_parece_segunda_feira_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "antecipacao-da-semana",
+        "preferredLabel": "Antecipação da semana",
+        "slugs": [
+          "antecipacao-da-semana"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ansiedade-antecipatoria-na-transicao-domingo-semana:antecipacao-da-semana",
+            "focus": "reconhecer quando a antecipação da semana de trabalho invade o domingo e transforma uma transição normal numa sequência de ruminação, tensão ou perda de descanso, distinguindo preparação útil de viver a segunda-feira antes de ela chegar",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_antecipacao_da_semana_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_antecipacao_da_semana_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_antecipacao_da_semana_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_antecipacao_da_semana_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_antecipacao_da_semana_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_antecipacao_da_semana_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "ruminacao-antes-do-trabalho",
+        "preferredLabel": "Ruminação antes do trabalho",
+        "slugs": [
+          "ruminacao-antes-do-trabalho"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ansiedade-antecipatoria-na-transicao-domingo-semana:ruminacao-antes-do-trabalho",
+            "focus": "reconhecer quando a antecipação da semana de trabalho invade o domingo e transforma uma transição normal numa sequência de ruminação, tensão ou perda de descanso, distinguindo preparação útil de viver a segunda-feira antes de ela chegar",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_ruminacao_antes_do_trabalho_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ruminacao_antes_do_trabalho_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ruminacao_antes_do_trabalho_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ruminacao_antes_do_trabalho_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ruminacao_antes_do_trabalho_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ruminacao_antes_do_trabalho_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "fim-do-descanso",
+        "preferredLabel": "Fim do descanso",
+        "slugs": [
+          "fim-do-descanso"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ansiedade-antecipatoria-na-transicao-domingo-semana:fim-do-descanso",
+            "focus": "reconhecer quando a antecipação da semana de trabalho invade o domingo e transforma uma transição normal numa sequência de ruminação, tensão ou perda de descanso, distinguindo preparação útil de viver a segunda-feira antes de ela chegar",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_fim_do_descanso_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_fim_do_descanso_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_fim_do_descanso_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_fim_do_descanso_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_fim_do_descanso_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_fim_do_descanso_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "transicao-entre-fim-de-semana-e-obrigacao",
+        "preferredLabel": "Transição entre fim-de-semana e obrigação",
+        "slugs": [
+          "transicao-entre-fim-de-semana-e-obrigacao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ansiedade-antecipatoria-na-transicao-domingo-semana:transicao-entre-fim-de-semana-e-obrigacao",
+            "focus": "reconhecer quando a antecipação da semana de trabalho invade o domingo e transforma uma transição normal numa sequência de ruminação, tensão ou perda de descanso, distinguindo preparação útil de viver a segunda-feira antes de ela chegar",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_transicao_entre_fim_de_semana_e_obrigacao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_transicao_entre_fim_de_semana_e_obrigacao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_transicao_entre_fim_de_semana_e_obrigacao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_transicao_entre_fim_de_semana_e_obrigacao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_transicao_entre_fim_de_semana_e_obrigacao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_transicao_entre_fim_de_semana_e_obrigacao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "preparar-sem-perder-o-presente",
+        "preferredLabel": "Preparar sem perder o presente",
+        "slugs": [
+          "preparar-sem-perder-o-presente"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ansiedade-antecipatoria-na-transicao-domingo-semana:preparar-sem-perder-o-presente",
+            "focus": "reconhecer quando a antecipação da semana de trabalho invade o domingo e transforma uma transição normal numa sequência de ruminação, tensão ou perda de descanso, distinguindo preparação útil de viver a segunda-feira antes de ela chegar",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_preparar_sem_perder_o_presente_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_preparar_sem_perder_o_presente_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_preparar_sem_perder_o_presente_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_preparar_sem_perder_o_presente_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_preparar_sem_perder_o_presente_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_preparar_sem_perder_o_presente_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
