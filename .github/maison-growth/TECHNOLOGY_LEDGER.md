@@ -35,6 +35,7 @@ Verification is separate from status. A tool can be strategically approved while
 | Capability | Primary candidates |
 |---|---|
 | World sensing | OSIRIS OSINT, RSSHub, Crawl4AI, ChangeDetection |
+| External AI sensors | Cloudflare Workers AI, OpenAI, Gemini, Perplexity, Anthropic, OpenRouter, Osiris AI Gateway |
 | Web/public-source reading | Crawl4AI, RSSHub |
 | Audio hearing | Faster-Whisper, YAMNet (experiment) |
 | Visual understanding | local VLMs (experiment), aggregate CV detector (licence-safe candidate needed) |
