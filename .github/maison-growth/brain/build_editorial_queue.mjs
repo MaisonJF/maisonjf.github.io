@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
+import { isDeepStrictEqual } from 'node:util';
 import { contentCandidatesFromSignal } from '../../../functions/_lib/maison-brain-bridge.js';
 import { groupExactThemeSignals, pdiThemeSourceStats } from '../../../functions/_lib/pdi-theme-sources.js';
 
@@ -165,8 +166,8 @@ const out={
 };
 const rendered=JSON.stringify(out,null,2)+'\n';
 if(CHECK){
-  const current=fs.readFileSync(QUEUE,'utf8');
-  if(current!==rendered)throw new Error('editorial_queue_out_of_sync');
+  const current=JSON.parse(fs.readFileSync(QUEUE,'utf8'));
+  if(!isDeepStrictEqual(current,out))throw new Error('editorial_queue_out_of_sync');
   console.log('Maison Brain editorial queue: OK');
 }else{
   fs.writeFileSync(QUEUE,rendered);
