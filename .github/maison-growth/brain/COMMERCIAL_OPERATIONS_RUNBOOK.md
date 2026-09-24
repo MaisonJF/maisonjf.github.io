@@ -108,6 +108,21 @@ python .github/maison-growth/brain/commercial_operator_report.py \
 
 A calculation does not authorize publication, checkout, discounting or experiment execution.
 
-## 7. Only then feed facts into validation planning
+## 7. Build manual-pilot dossiers from approved validation plans
+
+After the private Brain has human-approved validation plans, the operator can inspect what each manual pilot still needs before any external action.
+
+Safe summary mode (no internal identifiers):
+
+```bash
+python .github/maison-growth/brain/manual_pilot_dossier_cli.py \
+  --overlay /private/path/maison-commercial-overlay.private.json
+```
+
+For a private/local operator terminal only, `--full` prints the detailed dossier, including candidate assets, required inputs, success/stop signals and internal plan identifiers.
+
+A dossier can become `ready_for_human_action_review` only when one actual candidate carries the complete operational fact set required for that pilot. Facts split across several different candidates do not fake readiness.
+
+## 8. Only then feed facts into validation planning
 
 Once stock/cost/capacity facts are known, they can support A14/A12 manual validation planning. Human review remains the authority boundary. A8 remains draft-only unless a separately governed CTA decision exists.
