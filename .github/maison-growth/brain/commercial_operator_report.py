@@ -7,12 +7,12 @@ from pathlib import Path
 from typing import Any
 
 from commercial_assets import CommercialAssetContext
+from build_commercial_attention import load_attention
 from commercial_economics import evaluate_asset, evaluate_bundle
 
 
 ROOT=Path(__file__).resolve().parent
 REGISTRY=ROOT/"commercial-assets.generated.json"
-ATTENTION=ROOT/"commercial-attention.generated.json"
 BUNDLES=ROOT/"commercial-bundles.generated.json"
 
 
@@ -22,7 +22,7 @@ def build_report(
     selected_service_prices: dict[str,int] | None=None,
 ) -> dict[str,Any]:
     registry=json.loads(REGISTRY.read_text(encoding="utf-8"))
-    attention=json.loads(ATTENTION.read_text(encoding="utf-8"))
+    attention=load_attention()
     bundles=json.loads(BUNDLES.read_text(encoding="utf-8"))
     context=CommercialAssetContext.from_files(REGISTRY,overlay_path=overlay_path)
     selected_service_prices=selected_service_prices or {}
