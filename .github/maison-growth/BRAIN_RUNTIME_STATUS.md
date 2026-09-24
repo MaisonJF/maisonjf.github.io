@@ -65,6 +65,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Human review decision | READY A12.2 planning-only append-only decision API | DISABLED |
 | Approved validation planning | READY A14.3 behaviour-matched manual/B2B/physical/service/CTA plans | DISABLED / PREVIEW-FIRST |
 | Manual pilot prerequisites | READY plan-kind reason codes require stock/cost/price or capacity/effort/quote/consent facts before human execution | HUMAN-GATED |
+| Manual pilot dossiers | READY read-only operator dossiers + safe identifier-free summary; one complete candidate required for readiness | AVAILABLE AFTER PRIVATE READ + APPROVED PLANS |
 | A8 CTA draft planning | READY explicit private CTA context + hard-gated A7 decision → A8 draft | DISABLED / DRAFT ONLY |
 | A12 governance/HITL | READY A12.2 + append-only commercial review decisions | simulation / human-gated / execution OFF |
 | A8 experiments | READY existing module + narrow draft materialization | DRAFT/SIMULATION ONLY; READY/RUNNING NOT AUTHORIZED |

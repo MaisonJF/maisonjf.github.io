@@ -106,6 +106,14 @@ def _manual_requirements(
     }
     has_catalogue_price=any(hit.price_minor is not None for hit in asset_hits)
 
+    def has_complete_candidate(required: set[str], *, allowed_types: set[str] | None=None) -> bool:
+        for hit in asset_hits:
+            if allowed_types is not None and hit.asset_type not in allowed_types:
+                continue
+            if required.issubset(set(hit.known_operational_fields)):
+                return True
+        return False
+
     if plan_kind=="manual_b2b_pilot":
         steps.extend((
             "Definir o perfil exacto de parceiro/cliente B2B para este piloto.",
@@ -136,9 +144,21 @@ def _manual_requirements(
         ))
         success=("venda_paga","margem_unitaria_observada_positiva","procura_repetida","baixo_desperdicio")
         stop=("stock_ou_material_insuficiente","custo_unitario_desconhecido","margem_negativa","risco_de_validade_ou_desperdicio")
-        for key in ("inventory_quantity","unit_material_cost_minor","packaging_cost_minor","production_minutes_per_unit","batch_capacity_units"):
-            if key not in known_operational:
-                missing.append(key)
+        physical_required={
+            "inventory_quantity",
+            "unit_material_cost_minor",
+            "packaging_cost_minor",
+            "production_minutes_per_unit",
+            "batch_capacity_units",
+        }
+        if not has_complete_candidate(physical_required,allowed_types={"physical_product"}):
+            for key in sorted(physical_required):
+                if not any(
+                    hit.asset_type=="physical_product" and key in hit.known_operational_fields
+                    for hit in asset_hits
+                ):
+                    missing.append(key)
+            missing.append("single_physical_candidate_with_complete_operational_facts")
 
     elif plan_kind=="manual_service_pilot":
         steps.extend((
@@ -150,9 +170,20 @@ def _manual_requirements(
         ))
         success=("reserva_ou_pagamento","margem_por_hora_observada_positiva","entrega_dentro_da_capacidade","repeticao_ou_recomendacao")
         stop=("sobrecarga_de_capacidade","tempo_real_muito_acima_do_previsto","margem_negativa","qualidade_nao_repetivel")
-        for key in ("capacity_units_per_period","capacity_period","human_effort_minutes","variable_cost_minor"):
-            if key not in known_operational:
-                missing.append(key)
+        service_required={
+            "capacity_units_per_period",
+            "capacity_period",
+            "human_effort_minutes",
+            "variable_cost_minor",
+        }
+        if not has_complete_candidate(service_required,allowed_types={"service","b2b_service"}):
+            for key in sorted(service_required):
+                if not any(
+                    hit.asset_type in {"service","b2b_service"} and key in hit.known_operational_fields
+                    for hit in asset_hits
+                ):
+                    missing.append(key)
+            missing.append("single_service_candidate_with_complete_operational_facts")
 
     elif plan_kind=="manual_distribution_pilot":
         steps.extend((
