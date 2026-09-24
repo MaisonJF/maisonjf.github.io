@@ -14,7 +14,7 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         board=build_board()
         self.assertEqual(board["kind"],"maison_commercial_readiness_board")
         self.assertFalse(board["overlay_loaded"])
-        self.assertEqual(board["summary"]["assets"],12)
+        self.assertEqual(board["summary"]["assets"],22)
         self.assertEqual(board["summary"]["manual_validation_ready"],0)
         self.assertEqual(board["summary"]["unit_economics_known"],0)
         self.assertFalse(any(board["authority"].values()))
@@ -151,6 +151,17 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:service:tarot")
         self.assertEqual(row["next_action"]["code"],"verify_delivery_window")
         self.assertIn("delivery_effort_incomplete",row["readiness"]["blockers"])
+        self.assertFalse(any(row["authority"].values()))
+
+
+    def test_digital_asset_requests_marginal_cost_without_service_capacity(self):
+        board=build_board()
+        row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:digital:oracle-belong")
+        self.assertEqual(row["next_action"]["code"],"verify_variable_cost")
+        self.assertIn("variable_cost_unknown",row["readiness"]["blockers"])
+        self.assertNotIn("capacity_incomplete",row["readiness"]["blockers"])
+        self.assertNotIn("delivery_effort_incomplete",row["readiness"]["blockers"])
+        self.assertFalse(row["readiness"]["unit_economics_known"])
         self.assertFalse(any(row["authority"].values()))
 
 
