@@ -157,5 +157,27 @@ class CommercialAssetTests(unittest.TestCase):
         self.assertEqual(scout.independent_roots,("https://example.org/a",))
 
 
+    def test_digital_assets_expose_only_relevant_marginal_cost_field(self):
+        ctx=CommercialAssetContext(self.registry())
+        hits=ctx.search("oráculo clareza",limit=10)
+        digital=next(x for x in hits if x.ref=="asset:catalog:digital:oracle")
+        self.assertEqual(digital.known_operational_fields,())
+        self.assertEqual(digital.unknown_operational_fields,("variable_cost_minor",))
+
+    def test_digital_economics_template_tracks_current_public_digital_assets(self):
+        template=json.loads((ROOT/"commercial-digital-economics.template.json").read_text(encoding="utf-8"))
+        expected={
+            row["asset_ref"] for row in self.registry()["assets"]
+            if row["asset_type"]=="digital_product" and row["public"] is True and row["lifecycle_status"]=="active"
+        }
+        refs={row["asset_ref"] for row in template["assets"]}
+        self.assertEqual(refs,expected)
+        self.assertEqual(refs,{"catalog:digital:oracle","catalog:digital:pdi"})
+        for row in template["assets"]:
+            self.assertEqual(row["source"],"manual_digital_cost_review")
+            self.assertEqual(row["operational"],{"variable_cost_minor":None})
+            self.assertEqual(row["evidence_refs"],[])
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
