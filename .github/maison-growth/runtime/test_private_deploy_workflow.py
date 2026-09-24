@@ -36,7 +36,7 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
         report_block = self.source[start:guard]
         self.assertIn("report_private_runtime_readiness.py", report_block)
         self.assertIn("${{ secrets.CLOUDFLARE_API_TOKEN }}", report_block)
-        self.assertIn("${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}", report_block)
+        self.assertIn("${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}", report_block)
 
     def test_live_preflight_never_runs_on_automatic_events(self):
         block = """      - name: Private-stage preflight
