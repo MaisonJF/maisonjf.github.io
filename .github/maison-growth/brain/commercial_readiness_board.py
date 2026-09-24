@@ -24,12 +24,10 @@ def _next_action(row: Mapping[str,Any], economics: Mapping[str,Any]) -> tuple[st
     if "concrete_price_unknown" in blockers:
         return "select_concrete_price","A human must select or approve a concrete catalogue/quote price before economics can be evaluated."
     if asset_type=="physical_product":
-        if "stock_count_incomplete" in blockers:
-            return "verify_stock","Count real stock/reservations; catalogue availability is not inventory."
         if "unit_cost_incomplete" in blockers:
             return "verify_unit_cost","Record material and packaging cost for this exact product."
-        if any(x in blockers for x in ("production_minutes_unknown","batch_capacity_unknown")):
-            return "verify_production_capacity","Record production time and practical batch capacity."
+        if "replenishment_capacity_incomplete" in blockers:
+            return "verify_replenishment_capacity","Record production time and practical batch capacity; current finished stock is only a volatile snapshot."
     else:
         if "capacity_incomplete" in blockers:
             return "verify_service_capacity","Record real service capacity and its period."
@@ -90,7 +88,16 @@ def build_board(
                 "unit_economics_known":economics.get("unit_economics_known"),
                 "manual_validation_ready":economics.get("manual_validation_ready"),
                 "blockers":list(economics.get("blockers",[])),
+                "signals":list(economics.get("signals",[])),
             },
+            "fulfilment":{
+                "stock_snapshot_known":economics.get("stock_snapshot_known"),
+                "available_units_at_observation":economics.get("available_units"),
+                "stock_snapshot_is_readiness_gate":economics.get("stock_snapshot_is_readiness_gate"),
+                "replenishment_capacity_known":economics.get("replenishment_capacity_known"),
+                "production_minutes_per_unit":economics.get("production_minutes_per_unit"),
+                "batch_capacity_units":economics.get("batch_capacity_units"),
+            } if asset_type=="physical_product" else None,
             "next_action":{
                 "code":next_action,
                 "reason":next_reason,
@@ -120,6 +127,8 @@ def build_board(
             "attention_is_not_profit":True,
             "unknown_facts_remain_unknown":True,
             "catalogue_availability_is_not_inventory":True,
+            "current_stock_is_volatile_snapshot_not_readiness_gate":True,
+            "replenishment_capacity_is_structural_fulfilment_fact":True,
             "human_gate_required":True,
             "writes_performed":False,
         },
