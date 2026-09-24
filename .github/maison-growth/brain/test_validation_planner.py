@@ -67,7 +67,21 @@ class ValidationPlannerTests(unittest.TestCase):
     def test_physical_routes_to_micro_batch_or_preorder(self):
         plan=plan_review_row(row(offer_type="physical_product"))
         self.assertEqual(plan.route,"physical_micro_batch_or_preorder")
-        self.assertIn("unit_cost",plan.required_human_inputs)
+        self.assertIn("unit_material_cost",plan.required_human_inputs)
+        self.assertIn("packaging_cost",plan.required_human_inputs)
+        self.assertIn("production_minutes_per_unit",plan.required_human_inputs)
+        self.assertIn("batch_capacity_units",plan.required_human_inputs)
+        self.assertNotIn("stock_or_material_availability",plan.required_human_inputs)
+        self.assert_no_execution_authority(plan)
+
+    def test_bundle_uses_same_replenishment_first_physical_requirements(self):
+        plan=plan_review_row(row(offer_type="bundle"))
+        self.assertEqual(plan.route,"physical_micro_batch_or_preorder")
+        self.assertIn("unit_material_cost",plan.required_human_inputs)
+        self.assertIn("packaging_cost",plan.required_human_inputs)
+        self.assertIn("production_minutes_per_unit",plan.required_human_inputs)
+        self.assertIn("batch_capacity_units",plan.required_human_inputs)
+        self.assertNotIn("stock_or_material_availability",plan.required_human_inputs)
         self.assert_no_execution_authority(plan)
 
     def test_service_routes_to_human_service_pilot(self):

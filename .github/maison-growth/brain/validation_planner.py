@@ -66,7 +66,7 @@ def plan_review_row(row: Mapping[str,Any]) -> ValidationPlan:
             queue_id,opportunity_id,offer_id,offer_type,
             "physical_micro_batch_or_preorder","human_plan_required",False,
             ("a8_does_not_cover_physical_production","operational_asset_facts_required"),
-            ("stock_or_material_availability","unit_cost","production_capacity","validation_method"),
+            ("unit_material_cost","packaging_cost","production_minutes_per_unit","batch_capacity_units","validation_method"),
         )
 
     if offer_type in SERVICE_TYPES:
