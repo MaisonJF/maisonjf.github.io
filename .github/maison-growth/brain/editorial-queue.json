@@ -1,7 +1,7 @@
 {
   "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
-  "generatedAt": "2026-09-24T07:27:00+01:00",
+  "generatedAt": "2026-09-24T10:14:00+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
   "contract": {
     "storesPaidBodies": false,
@@ -11,19 +11,19 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 16,
-    "queueItems": 32,
-    "questionCandidates": 16,
-    "questionThemeHypotheses": 99,
-    "questionDesignSlots": 594,
+    "oceansConsidered": 17,
+    "queueItems": 34,
+    "questionCandidates": 17,
+    "questionThemeHypotheses": 105,
+    "questionDesignSlots": 630,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 249,
     "pdiThemeBacklog": 248,
     "pdiSourceDesignSlots": 1488,
     "pdiEditorialCoreTarget": 74400,
     "pdiCombinatorialTarget": 2800000,
-    "oracleCandidates": 16,
-    "oracleRoleSlots": 112
+    "oracleCandidates": 17,
+    "oracleRoleSlots": 119
   },
   "pdiGrowth": {
     "scale": {
@@ -13474,6 +13474,33 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_oracle_ansiedade_antecipatoria_na_transicao_domingo_semana",
+      "type": "oracle_candidate",
+      "sourceOceanId": "ansiedade-antecipatoria-na-transicao-domingo-semana",
+      "territory": "ansiedade-antecipatoria-na-transicao-domingo-semana",
+      "intent": "reconhecer quando a antecipação da semana de trabalho invade o domingo e transforma uma transição normal numa sequência de ruminação, tensão ou perda de descanso, distinguindo preparação útil de viver a segunda-feira antes de ela chegar",
+      "painLanguage": "O domingo ainda não acabou, mas a cabeça já começou a viver a segunda-feira: tarefas, mensagens, reuniões e obrigações entram mentalmente antes de o tempo de descanso terminar, roubando presença ao fim do fim-de-semana.",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias de transição domingo-semana; Oráculo Trabalho & Caminho e Eu & Padrões; bundles físico+digital orientados ao momento de passagem, sem claims médicos",
+      "evidenceCount": 2,
+      "evidence": [
+        "Frontiers in Psychology / PubMed (2026; PMID 42761092): estudo qualitativo com seis focus groups e 26 trabalhadores descreveu os “Sunday Blues” como experiência multidimensional de transição fim-de-semana→semana, com ansiedade, stress, fadiga, ruminação, procrastinação e antecipação de desafios laborais — https://pubmed.ncbi.nlm.nih.gov/42761092/",
+        "Cleveland Clinic (2025): psicólogos clínicos descrevem os “Sunday scaries” como ansiedade antecipatória ligada ao regresso a emails, reuniões e exigências de trabalho, tipicamente emergindo no domingo à tarde/noite — https://health.clevelandclinic.org/sunday-scaries"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
       "id": "brain_oracle_atencao_fragmentada_por_interrupcoes_digitais",
       "type": "oracle_candidate",
       "sourceOceanId": "atencao-fragmentada-por-interrupcoes-digitais",
@@ -14135,6 +14162,258 @@
         {
           "id": "slot_adiar_o_sono_para_recuperar_autonomia_transicao_entre_obrigacao_e_descanso_signature",
           "theme": "transição entre obrigação e descanso",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_ansiedade_antecipatoria_na_transicao_domingo_semana",
+      "type": "question_candidate",
+      "sourceOceanId": "ansiedade-antecipatoria-na-transicao-domingo-semana",
+      "territory": "ansiedade-antecipatoria-na-transicao-domingo-semana",
+      "intent": "reconhecer quando a antecipação da semana de trabalho invade o domingo e transforma uma transição normal numa sequência de ruminação, tensão ou perda de descanso, distinguindo preparação útil de viver a segunda-feira antes de ela chegar",
+      "painLanguage": "O domingo ainda não acabou, mas a cabeça já começou a viver a segunda-feira: tarefas, mensagens, reuniões e obrigações entram mentalmente antes de o tempo de descanso terminar, roubando presença ao fim do fim-de-semana.",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias de transição domingo-semana; Oráculo Trabalho & Caminho e Eu & Padrões; bundles físico+digital orientados ao momento de passagem, sem claims médicos",
+      "evidenceCount": 2,
+      "evidence": [
+        "Frontiers in Psychology / PubMed (2026; PMID 42761092): estudo qualitativo com seis focus groups e 26 trabalhadores descreveu os “Sunday Blues” como experiência multidimensional de transição fim-de-semana→semana, com ansiedade, stress, fadiga, ruminação, procrastinação e antecipação de desafios laborais — https://pubmed.ncbi.nlm.nih.gov/42761092/",
+        "Cleveland Clinic (2025): psicólogos clínicos descrevem os “Sunday scaries” como ansiedade antecipatória ligada ao regresso a emails, reuniões e exigências de trabalho, tipicamente emergindo no domingo à tarde/noite — https://health.clevelandclinic.org/sunday-scaries"
+      ],
+      "questionThemeCandidates": [
+        "domingo que já parece segunda-feira",
+        "antecipação da semana",
+        "ruminação antes do trabalho",
+        "fim do descanso",
+        "transição entre fim-de-semana e obrigação",
+        "preparar sem perder o presente"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_domingo_que_ja_parece_segunda_feira_open",
+          "theme": "domingo que já parece segunda-feira",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_domingo_que_ja_parece_segunda_feira_recognize",
+          "theme": "domingo que já parece segunda-feira",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_domingo_que_ja_parece_segunda_feira_deepen",
+          "theme": "domingo que já parece segunda-feira",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_domingo_que_ja_parece_segunda_feira_touch",
+          "theme": "domingo que já parece segunda-feira",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_domingo_que_ja_parece_segunda_feira_close",
+          "theme": "domingo que já parece segunda-feira",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_domingo_que_ja_parece_segunda_feira_signature",
+          "theme": "domingo que já parece segunda-feira",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_antecipacao_da_semana_open",
+          "theme": "antecipação da semana",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_antecipacao_da_semana_recognize",
+          "theme": "antecipação da semana",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_antecipacao_da_semana_deepen",
+          "theme": "antecipação da semana",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_antecipacao_da_semana_touch",
+          "theme": "antecipação da semana",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_antecipacao_da_semana_close",
+          "theme": "antecipação da semana",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_antecipacao_da_semana_signature",
+          "theme": "antecipação da semana",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_ruminacao_antes_do_trabalho_open",
+          "theme": "ruminação antes do trabalho",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_ruminacao_antes_do_trabalho_recognize",
+          "theme": "ruminação antes do trabalho",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_ruminacao_antes_do_trabalho_deepen",
+          "theme": "ruminação antes do trabalho",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_ruminacao_antes_do_trabalho_touch",
+          "theme": "ruminação antes do trabalho",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_ruminacao_antes_do_trabalho_close",
+          "theme": "ruminação antes do trabalho",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_ruminacao_antes_do_trabalho_signature",
+          "theme": "ruminação antes do trabalho",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_fim_do_descanso_open",
+          "theme": "fim do descanso",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_fim_do_descanso_recognize",
+          "theme": "fim do descanso",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_fim_do_descanso_deepen",
+          "theme": "fim do descanso",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_fim_do_descanso_touch",
+          "theme": "fim do descanso",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_fim_do_descanso_close",
+          "theme": "fim do descanso",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_fim_do_descanso_signature",
+          "theme": "fim do descanso",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_transicao_entre_fim_de_semana_e_obrigacao_open",
+          "theme": "transição entre fim-de-semana e obrigação",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_transicao_entre_fim_de_semana_e_obrigacao_recognize",
+          "theme": "transição entre fim-de-semana e obrigação",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_transicao_entre_fim_de_semana_e_obrigacao_deepen",
+          "theme": "transição entre fim-de-semana e obrigação",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_transicao_entre_fim_de_semana_e_obrigacao_touch",
+          "theme": "transição entre fim-de-semana e obrigação",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_transicao_entre_fim_de_semana_e_obrigacao_close",
+          "theme": "transição entre fim-de-semana e obrigação",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_transicao_entre_fim_de_semana_e_obrigacao_signature",
+          "theme": "transição entre fim-de-semana e obrigação",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_preparar_sem_perder_o_presente_open",
+          "theme": "preparar sem perder o presente",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_preparar_sem_perder_o_presente_recognize",
+          "theme": "preparar sem perder o presente",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_preparar_sem_perder_o_presente_deepen",
+          "theme": "preparar sem perder o presente",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_preparar_sem_perder_o_presente_touch",
+          "theme": "preparar sem perder o presente",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_preparar_sem_perder_o_presente_close",
+          "theme": "preparar sem perder o presente",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_preparar_sem_perder_o_presente_signature",
+          "theme": "preparar sem perder o presente",
           "stage": "signature",
           "status": "needs_editorial"
         }
