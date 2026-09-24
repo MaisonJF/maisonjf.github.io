@@ -81,5 +81,12 @@ class CommercialFactCollectionPlanTests(unittest.TestCase):
         self.assertEqual(plan["summary"]["assets_already_past_collection_gate"],1)
 
 
+    def test_delivery_window_action_has_a_collectable_field(self):
+        from commercial_fact_collection_plan import ACTION_FIELDS
+        self.assertEqual(
+            ACTION_FIELDS["verify_delivery_window"][0][0],
+            "delivery_lead_days",
+        )
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
