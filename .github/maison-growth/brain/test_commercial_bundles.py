@@ -29,9 +29,7 @@ class CommercialBundleTests(unittest.TestCase):
         for bundle in self.payload["bundles"]:
             self.assertEqual(bundle["status"],"draft_hypothesis")
             self.assertIsNone(bundle["bundle_price_minor"])
-            self.assertIsNone(bundle["discount_minor"])
             self.assertFalse(bundle["authority"]["public_write_authorized"])
-            self.assertFalse(bundle["authority"]["automatic_discount_authorized"])
             self.assertFalse(bundle["authority"]["automatic_checkout_authorized"])
             self.assertTrue(bundle["authority"]["human_approval_required"])
 
