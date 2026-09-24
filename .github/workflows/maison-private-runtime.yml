@@ -128,7 +128,9 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
         working-directory: workers/maison-intelligence
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # D1 schema verification is read-only. Prefer the dedicated D1 read token;
+          # fall back to the deploy token only if the read token is unavailable.
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_READ_API_TOKEN || secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: bash scripts/verify-growth-schema.sh maison-growth-engine
 
