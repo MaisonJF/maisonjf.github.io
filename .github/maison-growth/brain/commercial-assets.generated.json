@@ -21,13 +21,13 @@
     "total": 27,
     "active_physical_products": 5,
     "future_products": 2,
+    "digital_products": 10,
     "services": 9,
     "b2b_services": 1,
     "fixed_price_services": 5,
     "multi_format_services": 1,
     "starting_from_services": 1,
-    "quote_services": 3,
-    "digital_products": 10
+    "quote_services": 3
   },
   "assets": [
     {
