@@ -2,7 +2,7 @@
   "version": "2026-09-18",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-09-24T07:27:00+01:00",
+  "last_enriched_at": "2026-09-24T10:14:00+01:00",
   "candidates": [
     {
       "painLanguage": "Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
@@ -388,6 +388,29 @@
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-24T07:27:00+01:00",
       "lastSeenAt": "2026-09-24T07:27:00+01:00"
+    },
+    {
+      "painLanguage": "O domingo ainda não acabou, mas a cabeça já começou a viver a segunda-feira: tarefas, mensagens, reuniões e obrigações entram mentalmente antes de o tempo de descanso terminar, roubando presença ao fim do fim-de-semana.",
+      "territory": "ansiedade-antecipatoria-na-transicao-domingo-semana",
+      "intent": "reconhecer quando a antecipação da semana de trabalho invade o domingo e transforma uma transição normal numa sequência de ruminação, tensão ou perda de descanso, distinguindo preparação útil de viver a segunda-feira antes de ela chegar",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias de transição domingo-semana; Oráculo Trabalho & Caminho e Eu & Padrões; bundles físico+digital orientados ao momento de passagem, sem claims médicos",
+      "evidence": [
+        "Frontiers in Psychology / PubMed (2026; PMID 42761092): estudo qualitativo com seis focus groups e 26 trabalhadores descreveu os “Sunday Blues” como experiência multidimensional de transição fim-de-semana→semana, com ansiedade, stress, fadiga, ruminação, procrastinação e antecipação de desafios laborais — https://pubmed.ncbi.nlm.nih.gov/42761092/",
+        "Cleveland Clinic (2025): psicólogos clínicos descrevem os “Sunday scaries” como ansiedade antecipatória ligada ao regresso a emails, reuniões e exigências de trabalho, tipicamente emergindo no domingo à tarde/noite — https://health.clevelandclinic.org/sunday-scaries"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "domingo que já parece segunda-feira",
+        "antecipação da semana",
+        "ruminação antes do trabalho",
+        "fim do descanso",
+        "transição entre fim-de-semana e obrigação",
+        "preparar sem perder o presente"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-24T10:14:00+01:00",
+      "lastSeenAt": "2026-09-24T10:14:00+01:00"
     }
   ]
 }
