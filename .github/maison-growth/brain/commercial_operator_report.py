@@ -75,7 +75,6 @@ def build_report(
         "attention_score_is_not_profit_score":True,
         "authority":{
             "public_write_authorized":False,
-            "discount_authorized":False,
             "stock_promise_authorized":False,
             "automatic_checkout_authorized":False,
             "experiment_execution_authorized":False,
