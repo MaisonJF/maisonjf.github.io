@@ -1,4 +1,5 @@
 import { ORACLE_TERRITORIES } from './oracle-territories.js';
+import { VPC_OCEAN_SIGNALS } from './vpc-ocean-signals.generated.js';
 
 const FAROL_MOMENTS=[
   {slug:'decisao',label:'Decisão',question:'O que te faria sair daqui diferente?'},
@@ -135,6 +136,21 @@ export function buildPdiThemeSourceSignals(){
     });
   }
 
+  for(const ocean of VPC_OCEAN_SIGNALS){
+    for(const theme of ocean.themes||[]){
+      const slug=normalize(theme);
+      signals.push({
+        source:'ocean',
+        sourceId:ocean.id+':'+slug,
+        slug,
+        label:humanLabel(theme),
+        family:'Ocean MAISON',
+        focus:ocean.intent||ocean.painLanguage||'',
+        oceanId:ocean.id
+      });
+    }
+  }
+
   return signals;
 }
 
@@ -173,8 +189,14 @@ export function pdiThemeSourceStats(){
     voltaParaCasa:signals.filter(x=>x.source==='volta-para-casa').length,
     maisonNative:signals.filter(x=>x.source==='maison-native').length,
     pdiConversation:signals.filter(x=>x.source==='pdi-conversation').length,
+    ocean:signals.filter(x=>x.source==='ocean').length,
     exactGroups:groupExactThemeSignals(signals).length
   };
+}
+
+function humanLabel(value){
+  const text=String(value||'').trim();
+  return text?text.charAt(0).toLocaleUpperCase('pt-PT')+text.slice(1):text;
 }
 
 function normalize(value){
