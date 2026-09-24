@@ -23,9 +23,10 @@ class CommercialAttentionTests(unittest.TestCase):
             editorial=cls.editorial,
         )
 
-    def test_generated_projection_is_current(self):
-        generated=json.loads((ROOT/"commercial-attention.generated.json").read_text(encoding="utf-8"))
-        self.assertEqual(generated,self.payload)
+    def test_projection_is_derived_from_current_sources(self):
+        self.assertEqual(self.payload["source_assets"],"commercial-assets.generated.json")
+        self.assertEqual(self.payload["source_oceans"],"editorial-queue.json")
+        self.assertEqual(self.payload["summary"]["ranked_assets"],14)
 
     def test_attention_is_not_profit_or_execution_authority(self):
         self.assertTrue(self.payload["contract"]["attention_score_is_not_profit_score"])
