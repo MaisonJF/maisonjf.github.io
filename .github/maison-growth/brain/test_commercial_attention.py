@@ -32,12 +32,15 @@ class CommercialAttentionTests(unittest.TestCase):
         self.assertTrue(self.payload["contract"]["operational_unknowns_block_execution"])
         self.assertFalse(self.payload["contract"]["automatic_publication"])
         self.assertFalse(self.payload["contract"]["automatic_checkout"])
-        self.assertEqual(self.payload["summary"]["execution_ready"],0)
+        self.assertEqual(self.payload["summary"]["execution_ready"],10)
 
         for asset in self.payload["assets"]:
             self.assertFalse(asset["profitability_known"])
             self.assertFalse(asset["ready_for_automatic_sale"])
-            self.assertTrue(asset["operational_blockers"])
+            if asset["asset_type"]=="digital_product":
+                self.assertEqual(asset["operational_blockers"],[])
+            else:
+                self.assertTrue(asset["operational_blockers"])
             self.assertFalse(asset["authority"]["public_write_authorized"])
             self.assertFalse(asset["authority"]["stock_promise_authorized"])
             self.assertFalse(asset["authority"]["automatic_checkout_authorized"])
@@ -60,6 +63,19 @@ class CommercialAttentionTests(unittest.TestCase):
             by_ref["catalog:product:nevoa"]["attention_score"],
             by_ref["catalog:product:oleo-massagem"]["attention_score"],
         )
+
+    def test_oracle_and_pdi_are_ranked_as_digital_assets(self):
+        by_ref={row["asset_ref"]:row for row in self.payload["assets"]}
+        oracle=by_ref["catalog:digital:oracle-belong"]
+        pdi=by_ref["catalog:digital:pdi-relacoes"]
+        self.assertEqual(oracle["asset_type"],"digital_product")
+        self.assertEqual(pdi["asset_type"],"digital_product")
+        self.assertEqual(oracle["price_minor"],200)
+        self.assertEqual(pdi["price_minor"],500)
+        self.assertEqual(oracle["operational_blockers"],[])
+        self.assertEqual(pdi["operational_blockers"],[])
+        self.assertGreater(oracle["attention_score"],0)
+        self.assertGreater(pdi["attention_score"],0)
 
     def test_presence_service_is_linked_to_relevant_ocean_territories(self):
         row=next(
