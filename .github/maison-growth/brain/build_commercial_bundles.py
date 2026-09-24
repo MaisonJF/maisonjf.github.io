@@ -63,8 +63,10 @@ def build_payload(
         subtotal=sum(int(x) for x in prices if isinstance(x,int))
         price_complete=len(prices)==len(selected) and all(isinstance(x,int) for x in prices)
 
-        inventory_known=all(
-            isinstance(x.get("operational",{}).get("inventory_quantity"),int)
+        replenishment_known=all(
+            isinstance(x.get("operational",{}).get("production_minutes_per_unit"),int)
+            and isinstance(x.get("operational",{}).get("batch_capacity_units"),int)
+            and x.get("operational",{}).get("batch_capacity_units") > 0
             for x in selected
         )
         unit_cost_known=all(
@@ -92,9 +94,11 @@ def build_payload(
             "bundle_price_minor":None,
             "discount_minor":None,
             "operational_readiness":{
-                "inventory_known":inventory_known,
+                "current_stock_snapshot_required":False,
+                "stock_snapshot_is_readiness_gate":False,
+                "replenishment_capacity_known":replenishment_known,
+                "replenishment_check_required":not replenishment_known,
                 "unit_cost_known":unit_cost_known,
-                "stock_check_required":not inventory_known,
                 "margin_check_required":not unit_cost_known,
             },
             "authority":{
@@ -106,7 +110,8 @@ def build_payload(
             "reason_codes":[
                 "internal_bundle_hypothesis",
                 "catalogue_subtotal_not_offer_price",
-                *([] if inventory_known else ["inventory_unknown"]),
+                "current_stock_is_volatile_snapshot",
+                *([] if replenishment_known else ["replenishment_capacity_unknown"]),
                 *([] if unit_cost_known else ["unit_cost_unknown"]),
             ],
         })
@@ -119,7 +124,8 @@ def build_payload(
         "summary":{
             "bundle_count":len(out),
             "ready_for_publication":0,
-            "requires_stock_check":sum(1 for x in out if x["operational_readiness"]["stock_check_required"]),
+            "requires_stock_check":0,
+            "requires_replenishment_check":sum(1 for x in out if x["operational_readiness"]["replenishment_check_required"]),
             "requires_margin_check":sum(1 for x in out if x["operational_readiness"]["margin_check_required"]),
         },
         "bundles":out,
