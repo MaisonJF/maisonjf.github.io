@@ -24,8 +24,10 @@ class CommercialEconomicsTests(unittest.TestCase):
         self.assertFalse(result["operational_facts_complete"])
         self.assertFalse(result["unit_economics_known"])
         self.assertFalse(result["manual_validation_ready"])
-        self.assertIn("stock_count_incomplete",result["blockers"])
+        self.assertIn("replenishment_capacity_incomplete",result["blockers"])
         self.assertIn("unit_cost_incomplete",result["blockers"])
+        self.assertIn("current_stock_snapshot_unknown",result["signals"])
+        self.assertFalse(result["stock_snapshot_is_readiness_gate"])
         self.assertFalse(any(result["authority"].values()))
 
     def test_physical_asset_economics_use_observed_cost_and_stock_only(self):
@@ -40,6 +42,8 @@ class CommercialEconomicsTests(unittest.TestCase):
                     "reserved_quantity":2,
                     "unit_material_cost_minor":180,
                     "packaging_cost_minor":70,
+                    "production_minutes_per_unit":5,
+                    "batch_capacity_units":30,
                 },
                 "evidence_refs":["manual:stocktake:2026-09-24","manual:cost-sheet:2026-09-24"],
             }],
@@ -52,6 +56,52 @@ class CommercialEconomicsTests(unittest.TestCase):
         self.assertEqual(result["contribution_margin_bps"],6429)
         self.assertTrue(result["manual_validation_ready"])
         self.assertFalse(any(result["authority"].values()))
+
+    def test_zero_current_stock_does_not_block_when_replenishment_is_known(self):
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T00:01:00+01:00",
+            "assets":[{
+                "asset_ref":"catalog:product:nevoa",
+                "source":"manual_operations",
+                "operational":{
+                    "inventory_quantity":0,
+                    "reserved_quantity":0,
+                    "unit_material_cost_minor":180,
+                    "packaging_cost_minor":70,
+                    "production_minutes_per_unit":5,
+                    "batch_capacity_units":30,
+                },
+                "evidence_refs":["manual:ops:2026-09-24"],
+            }],
+        }
+        result=evaluate_asset(CommercialAssetContext(self.registry,overlay=overlay),"catalog:product:nevoa")
+        self.assertEqual(result["available_units"],0)
+        self.assertIn("no_units_available_at_observation",result["signals"])
+        self.assertNotIn("no_available_units",result["blockers"])
+        self.assertTrue(result["replenishment_capacity_known"])
+        self.assertTrue(result["manual_validation_ready"])
+
+    def test_unknown_stock_does_not_block_when_cost_and_replenishment_are_known(self):
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T00:02:00+01:00",
+            "assets":[{
+                "asset_ref":"catalog:product:nevoa",
+                "source":"manual_operations",
+                "operational":{
+                    "unit_material_cost_minor":180,
+                    "packaging_cost_minor":70,
+                    "production_minutes_per_unit":5,
+                    "batch_capacity_units":30,
+                },
+                "evidence_refs":["manual:ops:2026-09-24"],
+            }],
+        }
+        result=evaluate_asset(CommercialAssetContext(self.registry,overlay=overlay),"catalog:product:nevoa")
+        self.assertIsNone(result["available_units"])
+        self.assertIn("current_stock_snapshot_unknown",result["signals"])
+        self.assertTrue(result["manual_validation_ready"])
 
     def test_service_requires_capacity_effort_cost_and_concrete_price(self):
         overlay={
