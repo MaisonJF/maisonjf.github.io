@@ -114,6 +114,22 @@ def docker_compose_check(env_file: Path) -> tuple[bool,str | None]:
     if version.returncode:
         return False,"docker_compose_plugin_unavailable"
 
+    # Compose expands required variables even for optional profiles. Supply local-only
+    # structural placeholders for those optional remote profiles when the operator has
+    # not configured them yet. This does not weaken the runtime preflight for activation.
+    values=dict(os.environ)
+    values.update(read_dotenv(env_file))
+    compose_env=dict(os.environ)
+    optional_profile_defaults={
+        "BRAIN_CONTROL_API_URL":"http://maison-intelligence",
+        "BRAIN_CONTROL_TOKEN":"host-preflight-only",
+        "BRAIN_PROPOSAL_API_URL":"http://maison-intelligence",
+        "BRAIN_PROPOSAL_TOKEN":"host-preflight-only",
+    }
+    for key,value in optional_profile_defaults.items():
+        if not str(values.get(key,"") or "").strip() or _placeholder(str(values.get(key,""))):
+            compose_env[key]=value
+
     proc=subprocess.run(
         [
             "docker","compose",
@@ -122,6 +138,7 @@ def docker_compose_check(env_file: Path) -> tuple[bool,str | None]:
             "config","--quiet",
         ],
         cwd=str(ROOT.parents[2]),
+        env=compose_env,
         capture_output=True,text=True,
     )
     if proc.returncode:
