@@ -26,6 +26,7 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         board=build_board()
         row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:product:nevoa")
         self.assertEqual(row["next_action"]["code"],"verify_unit_cost")
+        self.assertEqual(row["commercial_state"],"needs_facts")
         self.assertIn("current_stock_snapshot_unknown",row["readiness"]["signals"])
         self.assertFalse(row["fulfilment"]["stock_snapshot_is_readiness_gate"])
         self.assertFalse(row["readiness"]["unit_economics_known"])
@@ -64,6 +65,7 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         self.assertTrue(board["overlay_loaded"])
         self.assertTrue(row["readiness"]["unit_economics_known"])
         self.assertTrue(row["readiness"]["manual_validation_ready"])
+        self.assertEqual(row["commercial_state"],"ready_for_human_validation")
         self.assertEqual(row["next_action"]["code"],"human_validation_review")
         self.assertFalse(any(row["authority"].values()))
 
@@ -90,7 +92,33 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         self.assertIsNone(row["fulfilment"]["available_units_at_observation"])
         self.assertTrue(row["fulfilment"]["replenishment_capacity_known"])
         self.assertTrue(row["readiness"]["manual_validation_ready"])
+        self.assertEqual(row["commercial_state"],"ready_for_human_validation")
         self.assertEqual(row["next_action"]["code"],"human_validation_review")
+
+
+    def test_known_replenishment_without_cost_is_not_blocked_by_stock(self):
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T07:45:00+01:00",
+            "assets":[{
+                "asset_ref":"catalog:product:nevoa",
+                "operational":{
+                    "production_minutes_per_unit":5,
+                    "batch_capacity_units":30,
+                },
+                "evidence_refs":["manual:production:test"],
+            }],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/"facts.private.json"
+            path.write_text(json.dumps(overlay),encoding="utf-8")
+            board=build_board(overlay_path=path)
+        row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:product:nevoa")
+        self.assertEqual(row["commercial_state"],"replenishable_needs_economics")
+        self.assertEqual(row["next_action"]["code"],"verify_unit_cost")
+        self.assertIsNone(row["fulfilment"]["available_units_at_observation"])
+        self.assertFalse(row["fulfilment"]["stock_snapshot_is_readiness_gate"])
+        self.assertFalse(any(row["authority"].values()))
 
     def test_selected_catalogue_service_option_is_visible_but_still_human_gated(self):
         board=build_board(selected_service_prices={"catalog:service:companhia":3500})
