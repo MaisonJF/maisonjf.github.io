@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import json
 import unittest
 from pathlib import Path
+
+from digital_experience_coverage import load_coverage
 
 
 ROOT=Path(__file__).resolve().parent
@@ -12,7 +13,7 @@ ROOT=Path(__file__).resolve().parent
 class DigitalExperienceCoverageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.payload=json.loads((ROOT/"digital-experience-coverage.generated.json").read_text(encoding="utf-8"))
+        cls.payload=load_coverage()
 
     def test_canonical_digital_products_are_available_to_brain(self):
         products=self.payload["products"]
