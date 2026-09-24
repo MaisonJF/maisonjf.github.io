@@ -137,13 +137,14 @@
       "priority": "P0",
       "verification": "VERIFIED_IN_REPO",
       "role": "rebuildable commercial catalogue projection plus optional private operational overlay for existing-asset-first reasoning",
-      "sense": "existing products/services/stock/capacity context",
+      "sense": "existing physical/service/digital assets + evidence-backed operational context",
       "cost": "existing repository data; no API cost",
       "license": "Maison repo",
       "self_hosted": true,
       "depends_on": [
         "data/products.js",
         "data/services.js",
+        "functions/_lib/offer-brain.js",
         "optional private overlay"
       ],
       "serves": [
@@ -152,7 +153,7 @@
         "Foundry",
         "A14"
       ],
-      "notes": "Generated registry currently derives 5 active physical products, 2 future products, 9 non-B2B services and 1 B2B service. Catalogue availability is not counted inventory. Quantity, costs, packaging, production time, MOQ, shelf life and capacity remain UNKNOWN unless supplied in an evidence-backed private overlay kept outside git."
+      "notes": "Generated registry currently derives 19 commercial assets: 5 active public physical products, 2 future physical products, 9 services, 1 B2B service and 2 active public digital products. Catalogue availability is not counted inventory. Physical structural readiness uses evidence-backed unit cost plus practical replenishment capacity; finished stock is an optional volatile snapshot. Service/digital capacity, effort, delivery and variable-cost facts remain UNKNOWN unless supplied in an evidence-backed private overlay kept outside git."
     },
     {
       "id": "maison-semantic-sync",

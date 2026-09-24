@@ -56,7 +56,7 @@ Verification is separate from status. A tool can be strategically approved while
 | Discovery | Maison Scout |
 | Adversarial validation | Maison Critic |
 | Product/IP generation | Maison Content & Product Foundry |
-| Existing commercial assets | Generated products/services registry + optional private stock/cost/capacity overlay |
+| Existing commercial assets | Generated physical/service/digital registry + optional evidence-backed private operational overlay |
 | Universal commercial opportunity + earned distribution | A14 Universal Opportunity + Earned Distribution |
 | Human-approved validation planning | A14.3 validation planner → manual pilot or A7-gated A8 draft |
 | CTA experiment draft planning | Explicit private CTA context + A7 `test_cta` + A8 draft-only writer |
@@ -123,11 +123,11 @@ Maison Semantic Memory is rebuildable. The manual `semantic-sync` profile reads 
 
 ## Commercial asset decision
 
-Existing-asset-first cannot rely only on A3 solution IDs because the public Maison catalogue already contains commercial things that are not yet mapped to canonical A3 solutions. A deterministic registry is therefore generated from `data/products.js` and `data/services.js` and used as **supporting context**, never as a new transactional source of truth.
+Existing-asset-first cannot rely only on A3 solution IDs because the Maison commercial surface already contains physical products, services and canonical digital products that are not necessarily mapped to canonical A3 solutions. A deterministic registry is therefore generated from `data/products.js`, `data/services.js` and the Offer Brain and used as **supporting context**, never as a new transactional source of truth.
 
-The registry currently sees 17 catalogue assets: 5 active physical products, 2 future physical products, 9 services and 1 B2B service. Public `in_stock` is only a catalogue availability signal; it is never interpreted as a counted stock quantity.
+The registry currently sees 19 commercial assets: 5 active public physical products, 2 future physical products, 9 services, 1 B2B service and 2 active public digital products (Oráculo and PÁRA DE IGNORAR!). Public `in_stock` is only a catalogue availability signal; it is never interpreted as a counted stock quantity.
 
-Private operational facts — quantities, reserved units, material/packaging cost, production time, batch capacity, MOQ, shelf life, supplier lead time, service capacity, human effort and variable cost — stay UNKNOWN until supplied through the evidence-backed private overlay contract. That overlay is intentionally kept outside git.
+Private operational facts stay UNKNOWN until supplied through the evidence-backed private overlay contract, which is intentionally kept outside git. For physical products, unit cost plus practical replenishment capacity are structural readiness facts; finished-stock quantities are optional timestamped snapshots. Services and digital products use evidence-backed capacity/effort/cost/delivery facts appropriate to their fulfilment model.
 
 
 ## A14 identity decision
