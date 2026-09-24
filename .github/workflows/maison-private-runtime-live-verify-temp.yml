@@ -15,68 +15,41 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect deployed Worker settings safely
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect live Worker setting
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           python - <<'PY'
-          import json, os, urllib.request, urllib.error
+          import json, os, urllib.request
           account=os.environ["CLOUDFLARE_ACCOUNT_ID"].strip()
           token=os.environ["CLOUDFLARE_API_TOKEN"].strip()
           url=f"https://api.cloudflare.com/client/v4/accounts/{account}/workers/scripts/maison-intelligence/settings"
           req=urllib.request.Request(url,headers={"Authorization":"Bearer "+token,"Accept":"application/json"})
-          try:
-              with urllib.request.urlopen(req,timeout=15) as r:
-                  data=json.load(r)
-          except urllib.error.HTTPError as e:
-              print("settings_http",e.code)
-              raise
-          result=data.get("result") or {}
-          bindings=result.get("bindings") or []
-          wanted={"BRAIN_CONTROL_API_ENABLED","WORKER_ENABLED","KILL_SWITCH"}
+          with urllib.request.urlopen(req,timeout=15) as r:
+              data=json.load(r)
           found={}
-          for b in bindings:
-              name=b.get("name")
-              if name in wanted:
-                  found[name]={"type":b.get("type"),"text":b.get("text")}
-          print(json.dumps({"worker_settings":found},sort_keys=True))
+          for b in (data.get("result") or {}).get("bindings") or []:
+              if b.get("name") in {"BRAIN_CONTROL_API_ENABLED","WORKER_ENABLED","KILL_SWITCH"}:
+                  found[b["name"]]=b.get("text")
+          print(json.dumps(found,sort_keys=True))
+          if found.get("BRAIN_CONTROL_API_ENABLED")!="true":
+              raise SystemExit("brain_control_api_not_enabled")
           PY
-      - name: Diagnose live private Brain response safely
+      - name: Verify live private Brain health
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
           BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
           CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
-        run: |
-          python - <<'PY'
-          import os, urllib.request, urllib.error
-          def norm(v, name):
-              v=(v or "").strip()
-              p=name+":"
-              if v.lower().startswith(p.lower()):
-                  v=v[len(p):].strip()
-              return v
-          url=os.environ["BRAIN_CONTROL_API_URL"].rstrip("/")+"/internal/brain/health"
-          headers={
-              "Accept":"application/json",
-              "Authorization":"Bearer "+os.environ["BRAIN_CONTROL_TOKEN"].strip(),
-              "CF-Access-Client-Id":norm(os.environ.get("CF_ACCESS_CLIENT_ID"),"CF-Access-Client-Id"),
-              "CF-Access-Client-Secret":norm(os.environ.get("CF_ACCESS_CLIENT_SECRET"),"CF-Access-Client-Secret"),
-              "User-Agent":"MAISON-JF-Live-Diagnostic/1.0",
-          }
-          req=urllib.request.Request(url,headers=headers,method="GET")
-          try:
-              with urllib.request.urlopen(req,timeout=15) as r:
-                  raw=r.read(1000)
-                  print("status",r.status)
-                  print("content_type",r.headers.get("content-type",""))
-                  print("body",raw.decode("utf-8","replace"))
-          except urllib.error.HTTPError as e:
-              raw=e.read(1000)
-              print("status",e.code)
-              print("content_type",e.headers.get("content-type",""))
-              print("location_present",bool(e.headers.get("location")))
-              print("body",raw.decode("utf-8","replace"))
-              raise SystemExit(1)
-          PY
+        run: python .github/maison-growth/runtime/verify_private_brain_health.py
+      - name: Verify live private Brain boundary
+        env:
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: python .github/maison-growth/runtime/verify_private_brain_boundary.py private_brain_read_candidate
