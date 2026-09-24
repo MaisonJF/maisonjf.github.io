@@ -2,6 +2,8 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 import { MAISON_OFFER_CATALOGUE } from '../../../functions/_lib/offer-brain.js';
+import { ORACLE_TERRITORIES } from '../../../functions/_lib/oracle-territories.js';
+import { buildPdiThemeSourceSignals } from '../../../functions/_lib/pdi-theme-sources.js';
 
 const PRODUCTS_URL=new URL('../../../data/products.js',import.meta.url);
 const SERVICES_URL=new URL('../../../data/services.js',import.meta.url);
@@ -213,38 +215,89 @@ for(const s of services.MAISON_SERVICES||[]){
 }
 
 
-for(const o of MAISON_OFFER_CATALOGUE){
-  if(!['oracle','pdi'].includes(o.family))continue;
-  assets.push({
-    asset_ref:`catalog:digital:${o.id}`,
-    source_kind:'offer_brain_digital_catalogue',
-    asset_type:'digital_product',
-    slug:o.id,
-    sku:null,
-    name:o.title,
-    size:null,
-    category:o.family==='oracle'?'Oráculo':'PÁRA DE IGNORAR!',
-    public:o.status!=='hidden',
-    lifecycle_status:'active',
-    price_minor:Number.isInteger(o.amount)?o.amount:null,
-    price_label:o.priceLabel||null,
-    currency:'EUR',
-    catalogue_availability:null,
-    condition:null,
-    description:o.description||'',
-    search_context:[
-      o.family,o.format,o.title,o.description,
-      ...(Array.isArray(o.axes)?o.axes:[]),
-      ...(Array.isArray(o.territories)?o.territories:[]),
-      ...(Array.isArray(o.routes)?o.routes:[])
-    ].filter(Boolean),
-    operational:digitalOperationalUnknowns(),
-    price_kind:Number.isInteger(o.amount)?'fixed':'unknown',
-    minimum_price_minor:Number.isInteger(o.amount)?o.amount:null,
-    price_options:[],
-    price_source:Number.isInteger(o.amount)?'offer_brain':'unknown'
-  });
+const oracleOffers=MAISON_OFFER_CATALOGUE.filter(x=>x.family==='oracle'&&x.status!=='hidden');
+const pdiOffers=MAISON_OFFER_CATALOGUE.filter(x=>x.family==='pdi'&&x.status!=='hidden');
+const pdiSignals=buildPdiThemeSourceSignals();
+
+function commonFixedAmount(offers,label){
+  const amounts=[...new Set(offers.map(x=>x.amount).filter(Number.isInteger))];
+  if(amounts.length!==1)throw new Error('digital_price_contract_mismatch:'+label);
+  return amounts[0];
 }
+
+const oracleAmount=commonFixedAmount(oracleOffers,'oracle');
+assets.push({
+  asset_ref:'catalog:digital:oracle',
+  source_kind:'offer_brain_digital_product',
+  asset_type:'digital_product',
+  slug:'oracle',
+  sku:null,
+  name:'Oráculo MAISON JF®',
+  size:null,
+  category:'Produto digital',
+  public:true,
+  lifecycle_status:'active',
+  price_minor:oracleAmount,
+  price_label:(oracleOffers[0]?.priceLabel||''),
+  currency:'EUR',
+  catalogue_availability:null,
+  condition:null,
+  description:'Uma abertura simbólica por território para olhar para uma pergunta a partir de outra perspectiva.',
+  search_context:[
+    'oracle','oráculo','produto digital','abertura','reflexão',
+    ...oracleOffers.flatMap(x=>[x.title,x.description,...(x.axes||[]),...(x.territories||[]),...(x.routes||[])]),
+    ...ORACLE_TERRITORIES.flatMap(x=>[x.slug,x.label,x.group,x.focus,x.signal,x.hidden,x.anchor,x.move,x.question])
+  ].filter(Boolean),
+  content_system:{
+    source:'functions/_lib/oracle-territories.js',
+    territory_count:ORACLE_TERRITORIES.length,
+    ocean_feed:'editorial_queue.oracle_candidate',
+    roles:['opening','recognition','tension','counterpoint','reframe','movement','close'],
+    paid_bodies_in_git:false
+  },
+  operational:digitalOperationalUnknowns(),
+  price_kind:'fixed',
+  minimum_price_minor:oracleAmount,
+  price_options:[],
+  price_source:'offer_brain'
+});
+
+const pdiAmount=commonFixedAmount(pdiOffers,'pdi');
+assets.push({
+  asset_ref:'catalog:digital:pdi',
+  source_kind:'offer_brain_digital_product',
+  asset_type:'digital_product',
+  slug:'para-de-ignorar',
+  sku:null,
+  name:'PÁRA DE IGNORAR!',
+  size:null,
+  category:'Jogo digital',
+  public:true,
+  lifecycle_status:'active',
+  price_minor:pdiAmount,
+  price_label:(pdiOffers[0]?.priceLabel||''),
+  currency:'EUR',
+  catalogue_availability:null,
+  condition:null,
+  description:'28 perguntas. Duas pessoas. Uma conversa que não precisa de guardar respostas.',
+  search_context:[
+    'pdi','pára de ignorar','para de ignorar','jogo digital','28 perguntas','duas pessoas','conversa',
+    ...pdiOffers.flatMap(x=>[x.title,x.description,...(x.axes||[]),...(x.territories||[]),...(x.routes||[])]),
+    ...pdiSignals.flatMap(x=>[x.slug,x.label,x.family,x.focus,x.signal,x.hidden])
+  ].filter(Boolean),
+  content_system:{
+    source:'functions/_lib/pdi-theme-sources.js',
+    source_theme_count:pdiSignals.length,
+    ocean_feed:'editorial_queue.question_candidate',
+    stages:['open','recognize','deepen','touch','close','signature'],
+    paid_bodies_in_git:false
+  },
+  operational:digitalOperationalUnknowns(),
+  price_kind:'fixed',
+  minimum_price_minor:pdiAmount,
+  price_options:[],
+  price_source:'offer_brain'
+});
 
 assets.sort((a,b)=>a.asset_ref.localeCompare(b.asset_ref));
 
