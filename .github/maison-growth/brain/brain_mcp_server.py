@@ -13,6 +13,7 @@ from mcp.server.transport_security import TransportSecuritySettings
 from mcp.types import ToolAnnotations
 
 from commercial_assets import CommercialAssetContext
+from commercial_readiness_board import build_board
 from knowledge_context import OceanEditorialContext
 from local_embeddings import MultilingualE5SmallProvider
 from osiris_context import graph_search as osiris_graph_search
@@ -203,6 +204,23 @@ def maison_commercial_attention(
         "execution_authority":False,
         "summary":payload.get("summary",{}),
         "assets":rows[:limit],
+    }
+
+
+@mcp.tool(annotations=READ_ONLY)
+def maison_commercial_readiness(limit: int=12) -> dict[str,Any]:
+    """Read commercial readiness and next fact to verify; current stock is never a structural gate."""
+    if not 1 <= limit <= 30:
+        raise ValueError("limit_must_be_1_30")
+    board=build_board()
+    return {
+        "mode":"read_only",
+        "private_operational_overlay_exposed":False,
+        "stock_snapshot_is_readiness_gate":False,
+        "replenishment_capacity_is_structural":True,
+        "execution_authority":False,
+        "summary":board.get("summary",{}),
+        "rows":board.get("rows",[])[:limit],
     }
 
 
