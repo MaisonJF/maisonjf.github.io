@@ -17,10 +17,10 @@
     "questionThemeHypotheses": 111,
     "questionDesignSlots": 666,
     "activeQuestionTargetPerMatureTheme": 300,
-    "pdiSourceSignals": 255,
-    "pdiThemeBacklog": 254,
-    "pdiSourceDesignSlots": 1524,
-    "pdiEditorialCoreTarget": 76200,
+    "pdiSourceSignals": 261,
+    "pdiThemeBacklog": 260,
+    "pdiSourceDesignSlots": 1560,
+    "pdiEditorialCoreTarget": 78000,
     "pdiCombinatorialTarget": 2800000,
     "oracleCandidates": 18,
     "oracleRoleSlots": 126
@@ -28,20 +28,20 @@
   "pdiGrowth": {
     "scale": {
       "activeQuestionTargetPerMatureTheme": 300,
-      "editorialCoreTarget": 76200,
+      "editorialCoreTarget": 78000,
       "combinatorialPossibilityTarget": 2800000,
       "paidBodiesStoredInRepository": false,
       "automaticActivation": false
     },
     "sourceStats": {
-      "totalSignals": 255,
+      "totalSignals": 261,
       "oracle": 100,
       "farol": 11,
       "voltaParaCasa": 8,
       "maisonNative": 3,
       "pdiConversation": 28,
-      "ocean": 105,
-      "exactGroups": 254
+      "ocean": 111,
+      "exactGroups": 260
     },
     "themes": [
       {
@@ -13757,6 +13757,330 @@
           },
           {
             "id": "pdi_source_slot_preparar_sem_perder_o_presente_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "vida-em-suspenso",
+        "preferredLabel": "Vida em suspenso",
+        "slugs": [
+          "vida-em-suspenso"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante:vida-em-suspenso",
+            "focus": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_vida_em_suspenso_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vida_em_suspenso_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vida_em_suspenso_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vida_em_suspenso_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vida_em_suspenso_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vida_em_suspenso_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "esperar-por-uma-resposta",
+        "preferredLabel": "Esperar por uma resposta",
+        "slugs": [
+          "esperar-por-uma-resposta"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante:esperar-por-uma-resposta",
+            "focus": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_esperar_por_uma_resposta_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_esperar_por_uma_resposta_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_esperar_por_uma_resposta_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_esperar_por_uma_resposta_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_esperar_por_uma_resposta_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_esperar_por_uma_resposta_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "incerteza-fora-do-meu-controlo",
+        "preferredLabel": "Incerteza fora do meu controlo",
+        "slugs": [
+          "incerteza-fora-do-meu-controlo"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante:incerteza-fora-do-meu-controlo",
+            "focus": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_incerteza_fora_do_meu_controlo_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_incerteza_fora_do_meu_controlo_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_incerteza_fora_do_meu_controlo_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_incerteza_fora_do_meu_controlo_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_incerteza_fora_do_meu_controlo_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_incerteza_fora_do_meu_controlo_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "vigiar-nao-acelera-o-resultado",
+        "preferredLabel": "Vigiar não acelera o resultado",
+        "slugs": [
+          "vigiar-nao-acelera-o-resultado"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante:vigiar-nao-acelera-o-resultado",
+            "focus": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_vigiar_nao_acelera_o_resultado_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vigiar_nao_acelera_o_resultado_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vigiar_nao_acelera_o_resultado_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vigiar_nao_acelera_o_resultado_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vigiar_nao_acelera_o_resultado_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vigiar_nao_acelera_o_resultado_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "entre-fazer-tudo-e-nao-poder-fazer-mais",
+        "preferredLabel": "Entre fazer tudo e não poder fazer mais",
+        "slugs": [
+          "entre-fazer-tudo-e-nao-poder-fazer-mais"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante:entre-fazer-tudo-e-nao-poder-fazer-mais",
+            "focus": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_entre_fazer_tudo_e_nao_poder_fazer_mais_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_entre_fazer_tudo_e_nao_poder_fazer_mais_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_entre_fazer_tudo_e_nao_poder_fazer_mais_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_entre_fazer_tudo_e_nao_poder_fazer_mais_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_entre_fazer_tudo_e_nao_poder_fazer_mais_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_entre_fazer_tudo_e_nao_poder_fazer_mais_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "voltar-a-vida-enquanto-a-resposta-nao-chega",
+        "preferredLabel": "Voltar à vida enquanto a resposta não chega",
+        "slugs": [
+          "voltar-a-vida-enquanto-a-resposta-nao-chega"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante:voltar-a-vida-enquanto-a-resposta-nao-chega",
+            "focus": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_voltar_a_vida_enquanto_a_resposta_nao_chega_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_voltar_a_vida_enquanto_a_resposta_nao_chega_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_voltar_a_vida_enquanto_a_resposta_nao_chega_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_voltar_a_vida_enquanto_a_resposta_nao_chega_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_voltar_a_vida_enquanto_a_resposta_nao_chega_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_voltar_a_vida_enquanto_a_resposta_nao_chega_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
