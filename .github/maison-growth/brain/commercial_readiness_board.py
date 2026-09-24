@@ -24,17 +24,17 @@ def _next_action(row: Mapping[str,Any], economics: Mapping[str,Any]) -> tuple[st
     if "concrete_price_unknown" in blockers:
         return "select_concrete_price","A human must select or approve a concrete catalogue/quote price before economics can be evaluated."
     if asset_type=="physical_product":
-        if any(x in blockers for x in ("inventory_unknown","reserved_inventory_unknown")):
+        if "stock_count_incomplete" in blockers:
             return "verify_stock","Count real stock/reservations; catalogue availability is not inventory."
-        if any(x in blockers for x in ("unit_material_cost_unknown","packaging_cost_unknown")):
+        if "unit_cost_incomplete" in blockers:
             return "verify_unit_cost","Record material and packaging cost for this exact product."
         if any(x in blockers for x in ("production_minutes_unknown","batch_capacity_unknown")):
             return "verify_production_capacity","Record production time and practical batch capacity."
     else:
-        if "capacity_unknown" in blockers or "capacity_period_unknown" in blockers:
+        if "capacity_incomplete" in blockers:
             return "verify_service_capacity","Record real service capacity and its period."
-        if "human_effort_unknown" in blockers:
-            return "verify_human_effort","Record the human effort required for one delivered unit."
+        if "delivery_effort_incomplete" in blockers:
+            return "verify_delivery_effort","Record human effort and the realistic delivery/lead time."
         if "variable_cost_unknown" in blockers:
             return "verify_variable_cost","Record the variable cost for one delivered unit."
         if "delivery_lead_unknown" in blockers:
