@@ -17,10 +17,11 @@ Private operator workflow for turning the current catalogue/Ocean attention mode
 
 ## 1. Copy the operator templates outside the repository
 
-Use both templates when possible:
+Use the relevant templates:
 
 - `commercial-stocktake.template.json` — 5 active public physical products;
-- `commercial-service-capacity.template.json` — 7 active public service/B2B entries.
+- `commercial-service-capacity.template.json` — active public service/B2B entries;
+- `commercial-digital-economics.template.json` — active public digital offers, collecting only observed per-delivery marginal cost.
 
 Never fill private quantities/costs inside the git repository. The Brain directory also ignores `*.private.json`, but the overlay builder goes further and refuses to write its final private overlay anywhere inside the repository.
 
@@ -33,6 +34,10 @@ Physical products support:
 - `unit_material_cost_minor`;
 - `packaging_cost_minor`;
 - production/batch/MOQ/shelf-life/supplier-lead facts when actually known.
+
+Digital products support only:
+
+- `variable_cost_minor` — observed per-delivery marginal cost; never assume zero merely because fulfilment is digital.
 
 Services support:
 
@@ -54,6 +59,7 @@ Example:
 python .github/maison-growth/brain/prepare_commercial_overlay.py \
   --stocktake /private/path/stocktake.json \
   --services /private/path/services.json \
+  --digital /private/path/digital-economics.json \
   --observed-at "<ISO-8601 timestamp>" \
   --evidence-ref "manual:operations:<date>" \
   --output /private/path/maison-commercial-overlay.private.json
