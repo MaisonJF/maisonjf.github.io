@@ -15,7 +15,7 @@ class CommercialOperatorReportTests(unittest.TestCase):
         self.assertFalse(report["overlay_loaded"])
         self.assertTrue(report["attention_score_is_not_profit_score"])
         self.assertFalse(any(report["authority"].values()))
-        self.assertEqual(report["summary"]["ranked_assets"],12)
+        self.assertEqual(report["summary"]["ranked_assets"],14)
         self.assertEqual(report["summary"]["operationally_complete_assets"],0)
         self.assertEqual(report["summary"]["unit_economics_known_assets"],0)
         self.assertEqual(report["summary"]["manual_validation_ready_assets"],0)
@@ -99,6 +99,18 @@ class CommercialOperatorReportTests(unittest.TestCase):
         self.assertEqual(row["economics"]["contribution_per_production_minute_minor"],90.0)
         self.assertEqual(row["economics"]["evidence_refs"],["manual:ops:2026-09-24"])
         self.assertFalse(any(report["authority"].values()))
+
+
+    def test_digital_assets_are_reported_without_fake_profitability(self):
+        report=build_report()
+        row=next(x for x in report["attention"] if x["asset_ref"]=="catalog:digital:oracle")
+        self.assertEqual(row["asset_type"],"digital_product")
+        self.assertEqual(row["economics"]["price_minor"],200)
+        self.assertIsNone(row["economics"]["variable_cost_minor"])
+        self.assertIsNone(row["economics"]["unit_contribution_minor"])
+        self.assertIn("variable_cost_unknown",row["blockers"])
+        self.assertFalse(row["unit_economics_known"])
+        self.assertFalse(row["manual_validation_ready"])
 
 
 if __name__=="__main__":
