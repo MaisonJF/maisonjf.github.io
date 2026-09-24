@@ -97,5 +97,32 @@ class PrepareCommercialOverlayTests(unittest.TestCase):
             )
 
 
+    def test_builds_digital_delivery_overlay_from_observed_facts(self):
+        digital={
+            "schema_version":"commercial_digital_delivery_template_v1",
+            "assets":[{
+                "asset_ref":"catalog:digital:oracle",
+                "source":"manual_digital_delivery_review",
+                "operational":{
+                    "human_effort_minutes":0,
+                    "variable_cost_minor":20,
+                    "delivery_lead_days":0,
+                },
+                "evidence_refs":["manual:digital-delivery:test"],
+            }],
+        }
+        payload=build_overlay(
+            templates=(digital,),
+            observed_at="2026-09-24T08:50:00+01:00",
+        )
+        row=payload["assets"][0]
+        self.assertEqual(row["asset_ref"],"catalog:digital:oracle")
+        self.assertEqual(
+            row["operational"],
+            {"human_effort_minutes":0,"variable_cost_minor":20,"delivery_lead_days":0},
+        )
+        self.assertEqual(row["evidence_refs"],["manual:digital-delivery:test"])
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
