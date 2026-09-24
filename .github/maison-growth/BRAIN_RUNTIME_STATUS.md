@@ -52,7 +52,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Private stocktake preparation | READY operator template covers all 5 active public physical products; contains no private values | AWAITING MANUAL COUNTS/COSTS |
 | Service capacity preparation | READY operator template covers all 7 active public service/B2B entries; contains no private values | AWAITING MANUAL CAPACITY/COST FACTS |
 | Digital operations preparation | READY evidence-backed template covers Oráculo + PÁRA DE IGNORAR! per-sale effort/variable cost/delivery lead; zero is never assumed | AWAITING MANUAL DELIVERY/COST FACTS |
-| Ocean → Oráculo/PDI feed coverage | READY deterministic internal bridge: 16/16 Oceans feed both products; 594 PDI stage slots + 112 Oracle role slots; no paid bodies in Git | CODE-READY / 0 FEED GAPS |
+| Ocean → Oráculo/PDI feed coverage | READY deterministic internal bridge: 18/18 Oceans feed both products; 666 PDI stage slots + 126 Oracle role slots; no paid bodies in Git | CODE-READY / 0 FEED GAPS |
 | Structured service pricing | READY fixed vs multi-format vs starting-from vs quote pricing preserved from canonical catalogue; human selection required where appropriate | CODE-READY |
 | Fact-based commercial economics | READY private evaluator for physical/service/digital unit economics + human-priced bundle evaluation | AWAITING PRIVATE OPERATIONAL OVERLAY |
 | Commercial operator report | READY combines attention, observed operational facts and bundle blockers without granting execution authority | AWAITING PRIVATE OPERATIONAL OVERLAY |
