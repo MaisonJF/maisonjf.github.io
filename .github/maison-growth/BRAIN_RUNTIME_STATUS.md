@@ -11,6 +11,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Eurostat structured sensor | READY explicit query-profile adapter | DISABLED |
 | BASE/IMPIC procurement sensor | READY token-gated official API adapter | DISABLED / authorization+secret required |
 | OpenAlex science sensor | READY metadata-only cost-accounted adapter | DISABLED / account key required |
+| Cloudflare Workers AI | READY adapter with explicit opt-in gate | DISABLED |
 | OpenAI Responses + web grounding | READY adapter | DISABLED / secret required |
 | Gemini + Google Search grounding | READY adapter | DISABLED / secret required |
 | Perplexity Sonar | READY adapter | DISABLED / secret required |
