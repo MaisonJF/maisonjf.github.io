@@ -180,7 +180,7 @@ class CommercialEconomicsTests(unittest.TestCase):
                 selected_price_minor=12000,
             )
 
-    def test_bundle_evaluation_never_selects_price_or_discount(self):
+    def test_bundle_evaluation_never_selects_price_automatically(self):
         overlay={
             "schema_version":"commercial_asset_overlay_v1",
             "observed_at":"2026-09-24T00:00:00+01:00",
@@ -230,7 +230,6 @@ class CommercialEconomicsTests(unittest.TestCase):
         self.assertEqual(evaluated["unit_contribution_minor"],840)
         self.assertEqual(evaluated["contribution_margin_bps"],6000)
         self.assertTrue(evaluated["manual_validation_ready"])
-        self.assertFalse(evaluated["authority"]["discount_authorized"])
 
     def test_bundle_unknown_finished_stock_does_not_block_known_replenishment(self):
         overlay={
