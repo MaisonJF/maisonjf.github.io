@@ -13,7 +13,6 @@ ROOT=Path(__file__).resolve().parent
 POLICY=ROOT/"commercial-attention-policy.json"
 ASSETS=ROOT/"commercial-assets.generated.json"
 EDITORIAL=ROOT/"editorial-queue.json"
-OUTPUT=ROOT/"commercial-attention.generated.json"
 
 
 def _norm(value: object) -> str:
@@ -229,28 +228,28 @@ def build_attention(
     }
 
 
+def load_attention() -> dict[str,Any]:
+    return build_attention(
+        policy=json.loads(POLICY.read_text(encoding="utf-8")),
+        registry=json.loads(ASSETS.read_text(encoding="utf-8")),
+        editorial=json.loads(EDITORIAL.read_text(encoding="utf-8")),
+    )
+
+
 def main() -> None:
     parser=argparse.ArgumentParser()
     parser.add_argument("--check",action="store_true")
     args=parser.parse_args()
 
-    payload=build_attention(
-        policy=json.loads(POLICY.read_text(encoding="utf-8")),
-        registry=json.loads(ASSETS.read_text(encoding="utf-8")),
-        editorial=json.loads(EDITORIAL.read_text(encoding="utf-8")),
-    )
-    rendered=json.dumps(payload,ensure_ascii=False,indent=2)+"\n"
+    payload=load_attention()
     if args.check:
-        try:
-            current=json.loads(OUTPUT.read_text(encoding="utf-8"))
-        except (OSError,json.JSONDecodeError) as exc:
-            raise SystemExit("commercial-attention.generated.json is missing or invalid; run build_commercial_attention.py") from exc
-        if current!=payload:
-            raise SystemExit("commercial-attention.generated.json is stale; run build_commercial_attention.py")
-        print(f"Commercial attention projection: OK · {payload['summary']['ranked_assets']} assets")
+        print(f"Commercial attention projection: OK · {payload['summary']['ranked_assets']} assets · derived at read time")
         return
-    OUTPUT.write_text(rendered,encoding="utf-8")
-    print(f"Wrote {payload['summary']['ranked_assets']} ranked assets")
+    print(json.dumps(payload,ensure_ascii=False,indent=2))
+
+
+if __name__=="__main__":
+    main()
 
 
 if __name__=="__main__":
