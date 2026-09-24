@@ -20,6 +20,9 @@ LATER_STAGE = (
     "MAISON_BRAIN_PROPOSAL_TOKEN",
     "MAISON_BRAIN_REVIEW_DECISION_TOKEN",
 )
+ZERO_COST_OPTIONAL = (
+    "OPENROUTER_API_KEY",
+)
 
 
 def summarize(values: Mapping[str, str]) -> dict[str, object]:
@@ -64,6 +67,8 @@ def summarize(values: Mapping[str, str]) -> dict[str, object]:
         "access_client_secret_length": len(access_client_secret),
         "later_stage_configured": [name for name in LATER_STAGE if present(name)],
         "later_stage_missing": [name for name in LATER_STAGE if not present(name)],
+        "zero_cost_optional_configured": [name for name in ZERO_COST_OPTIONAL if present(name)],
+        "zero_cost_optional_missing": [name for name in ZERO_COST_OPTIONAL if not present(name)],
         "secrets_printed": False,
         "note": "Presence only. This does not verify Cloudflare access, route reachability, D1 schema, or Brain health.",
     }
