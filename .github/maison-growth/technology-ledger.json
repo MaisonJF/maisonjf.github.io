@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-09-23",
+  "updated_at": "2026-09-24",
   "authority": "Maison JF Technology Ledger",
   "rule": "If it is not recorded here, it has not entered the Maison project.",
   "statuses": [
@@ -1529,6 +1529,117 @@
       "depends_on": [],
       "serves": [],
       "notes": "Rejected for new Maison production use: official repository was archived by maintainers on 2025-10-10 and is read-only. Preserve only as historical candidate; choose a maintained graph engine if a graph gap remains after Osiris Memory."
+    },
+    {
+      "id": "cloudflare-workers-ai",
+      "type": "model_provider",
+      "name": "Cloudflare Workers AI",
+      "status": "AGORA",
+      "priority": "P1",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "optional model sensor through the Worker AI binding",
+      "sense": "model sensing",
+      "cost": "hosted provider usage; review current billing before activation",
+      "license": "hosted service terms; current terms review required",
+      "self_hosted": false,
+      "depends_on": [
+        "Cloudflare Worker AI binding"
+      ],
+      "serves": [
+        "A13",
+        "Brain",
+        "Oceanos"
+      ],
+      "notes": "Implemented in A13 and explicitly gated by WORKERS_AI_ENABLED=false by default."
+    },
+    {
+      "id": "openai-web-grounded",
+      "type": "model_provider",
+      "name": "OpenAI Responses + Web Search",
+      "status": "AGORA",
+      "priority": "P1",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "web-grounded external intelligence sensor",
+      "sense": "grounded model sensing",
+      "cost": "hosted API usage; review current billing before activation",
+      "license": "hosted service terms; current terms review required",
+      "self_hosted": false,
+      "depends_on": [
+        "API key"
+      ],
+      "serves": [
+        "A13",
+        "Brain",
+        "Oceanos"
+      ],
+      "notes": "Implemented in A13; disabled by default; citations enter provenance and never grant authority."
+    },
+    {
+      "id": "google-gemini-grounded",
+      "type": "model_provider",
+      "name": "Google Gemini + Search grounding",
+      "status": "AGORA",
+      "priority": "P1",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "web-grounded external intelligence sensor",
+      "sense": "grounded model sensing",
+      "cost": "hosted API usage; review current billing before activation",
+      "license": "hosted service terms; current terms review required",
+      "self_hosted": false,
+      "depends_on": [
+        "API key"
+      ],
+      "serves": [
+        "A13",
+        "Brain",
+        "Oceanos"
+      ],
+      "notes": "Implemented in A13; disabled by default; grounding remains evidence, not automatic truth."
+    },
+    {
+      "id": "perplexity-sonar",
+      "type": "model_provider",
+      "name": "Perplexity Sonar",
+      "status": "AGORA",
+      "priority": "P1",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "web-grounded external intelligence sensor",
+      "sense": "grounded model sensing",
+      "cost": "hosted API usage; review current billing before activation",
+      "license": "hosted service terms; current terms review required",
+      "self_hosted": false,
+      "depends_on": [
+        "API key"
+      ],
+      "serves": [
+        "A13",
+        "Brain",
+        "Oceanos"
+      ],
+      "notes": "Implemented in A13; disabled by default; citations are canonicalized for echo control."
+    },
+    {
+      "id": "anthropic-messages",
+      "type": "model_provider",
+      "name": "Anthropic Messages",
+      "status": "AGORA",
+      "priority": "P1",
+      "verification": "PARTIALLY_VERIFIED",
+      "role": "ungrounded external model sensor unless independently sourced",
+      "sense": "model diversity",
+      "cost": "hosted API usage; review current billing before activation",
+      "license": "hosted service terms; current terms review required",
+      "self_hosted": false,
+      "depends_on": [
+        "API key",
+        "explicit model"
+      ],
+      "serves": [
+        "A13",
+        "Brain",
+        "Oceanos"
+      ],
+      "notes": "Implemented in A13; disabled by default; ungrounded output contributes zero independent evidence roots."
     }
   ]
 }
