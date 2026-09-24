@@ -20,18 +20,18 @@ class CommercialAssetTests(unittest.TestCase):
     def test_generated_registry_has_real_catalogue_and_unknown_operations(self):
         ctx=CommercialAssetContext(self.registry())
         summary=ctx.summary()
-        self.assertEqual(summary["asset_count"],27)
+        self.assertEqual(summary["asset_count"],19)
         self.assertFalse(summary["private_overlay_loaded"])
         self.assertEqual(summary["known_operational_fields"],0)
         self.assertGreater(summary["unknown_operational_fields"],0)
         self.assertFalse(summary["catalogue_in_stock_is_counted_inventory"])
 
         by_ref={row["asset_ref"]:row for row in self.registry()["assets"]}
-        self.assertIn("catalog:digital:pdi-relacoes",by_ref)
-        self.assertIn("catalog:digital:oracle-belong",by_ref)
-        self.assertEqual(by_ref["catalog:digital:pdi-relacoes"]["price_minor"],500)
-        self.assertEqual(by_ref["catalog:digital:oracle-belong"]["price_minor"],200)
-        self.assertEqual(by_ref["catalog:digital:pdi-relacoes"]["asset_type"],"digital_product")
+        self.assertIn("catalog:digital:pdi",by_ref)
+        self.assertIn("catalog:digital:oracle",by_ref)
+        self.assertEqual(by_ref["catalog:digital:pdi"]["price_minor"],500)
+        self.assertEqual(by_ref["catalog:digital:oracle"]["price_minor"],200)
+        self.assertEqual(by_ref["catalog:digital:pdi"]["asset_type"],"digital_product")
 
     def test_service_pricing_is_structured_without_flattening_multi_format_or_quote_offers(self):
         by_ref={row["asset_ref"]:row for row in self.registry()["assets"]}
