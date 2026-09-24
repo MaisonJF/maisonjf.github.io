@@ -3,11 +3,12 @@
   "name": "maison-intelligence",
   "main": "src/index.js",
   "compatibility_date": "2026-09-22",
-
   "triggers": {
-    "crons": ["0 * * * *", "17 4 * * *"]
+    "crons": [
+      "0 * * * *",
+      "17 4 * * *"
+    ]
   },
-
   "vars": {
     "WORKER_ENABLED": "false",
     "BRAIN_CONTROL_API_ENABLED": "false",
@@ -16,6 +17,8 @@
     "KILL_SWITCH": "true",
     "PROMPTS_PER_RUN": "2",
     "MAX_DAILY_CALLS_PER_PROVIDER": "2",
+    "WORKERS_AI_ENABLED": "false",
+    "WORKERS_AI_MODEL": "@cf/google/gemma-4-26b-a4b-it",
     "OSIRIS_GATEWAY_ENABLED": "false",
     "OSIRIS_GATEWAY_BASE_URL": "https://ai.osiris-code.com/v1",
     "OSIRIS_GATEWAY_MODEL": "",
@@ -36,20 +39,22 @@
     "BASE_PT_QUERIES_JSON": "[]",
     "OPENALEX_ENABLED": "false",
     "OPENALEX_QUERIES_JSON": "[]",
+    "OPENAI_ENABLED": "false",
     "OPENAI_MODEL": "gpt-5.6-luna",
+    "GEMINI_ENABLED": "false",
     "GEMINI_MODEL": "gemini-2.5-flash",
+    "PERPLEXITY_ENABLED": "false",
     "PERPLEXITY_MODEL": "sonar",
+    "ANTHROPIC_ENABLED": "false",
     "ANTHROPIC_MODEL": ""
   },
-
   "d1_databases": [
     {
       "binding": "GROWTH_DB",
-      "database_name": "maison-growth",
+      "database_name": "maison-growth-engine",
       "database_id": "REPLACE_WITH_D1_DATABASE_ID"
     }
   ],
-
   "queues": {
     "producers": [
       {
@@ -68,5 +73,10 @@
         "max_concurrency": 1
       }
     ]
+  },
+  "workers_dev": false,
+  "preview_urls": false,
+  "ai": {
+    "binding": "AI"
   }
 }
