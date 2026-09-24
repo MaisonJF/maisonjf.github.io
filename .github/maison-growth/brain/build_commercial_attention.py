@@ -186,7 +186,6 @@ def build_attention(
             ],
             "authority":{
                 "public_write_authorized":False,
-                "discount_authorized":False,
                 "stock_promise_authorized":False,
                 "automatic_checkout_authorized":False,
             },
@@ -207,7 +206,6 @@ def build_attention(
             "operational_unknowns_block_execution":True,
             "ocean_metadata_is_context_not_external_evidence":True,
             "automatic_publication":False,
-            "automatic_discount":False,
             "automatic_checkout":False,
         },
         "summary":{

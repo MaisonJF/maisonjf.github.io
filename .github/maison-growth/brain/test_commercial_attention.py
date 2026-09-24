@@ -31,7 +31,6 @@ class CommercialAttentionTests(unittest.TestCase):
         self.assertTrue(self.payload["contract"]["attention_score_is_not_profit_score"])
         self.assertTrue(self.payload["contract"]["operational_unknowns_block_execution"])
         self.assertFalse(self.payload["contract"]["automatic_publication"])
-        self.assertFalse(self.payload["contract"]["automatic_discount"])
         self.assertFalse(self.payload["contract"]["automatic_checkout"])
         self.assertEqual(self.payload["summary"]["execution_ready"],0)
 
@@ -40,7 +39,6 @@ class CommercialAttentionTests(unittest.TestCase):
             self.assertFalse(asset["ready_for_automatic_sale"])
             self.assertTrue(asset["operational_blockers"])
             self.assertFalse(asset["authority"]["public_write_authorized"])
-            self.assertFalse(asset["authority"]["discount_authorized"])
             self.assertFalse(asset["authority"]["stock_promise_authorized"])
             self.assertFalse(asset["authority"]["automatic_checkout_authorized"])
 

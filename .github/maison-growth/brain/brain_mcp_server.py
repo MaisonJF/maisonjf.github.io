@@ -233,7 +233,6 @@ def maison_commercial_bundle_hypotheses(limit: int=10) -> dict[str,Any]:
     return {
         "mode":"read_only",
         "bundle_price_authorized":False,
-        "discount_authorized":False,
         "public_write_authorized":False,
         "automatic_checkout_authorized":False,
         "summary":payload.get("summary",{}),

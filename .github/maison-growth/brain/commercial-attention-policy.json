@@ -1,6 +1,6 @@
 {
   "schema_version": "commercial_attention_policy_v1",
-  "purpose": "Internal attention ranking for what to test/sell first. It is not a profit forecast and never authorizes publication, stock promises, discounts or checkout.",
+  "purpose": "Internal attention ranking for what to test/sell first. It is not a profit forecast and never authorizes publication, stock promises or checkout.",
   "contextual_match_min": 0.06,
   "weights": {
     "direct_ocean_adjacency": 12,
