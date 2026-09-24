@@ -96,6 +96,17 @@ class CommercialAssetTests(unittest.TestCase):
             self.assertEqual(row["evidence_refs"],[])
             self.assertTrue(all(value is None for value in row["operational"].values()))
 
+    def test_search_exposes_oracle_and_pdi_to_brain_context(self):
+        ctx=CommercialAssetContext(self.registry())
+        oracle_hits=ctx.search("oráculo solidão companhia",limit=10)
+        pdi_hits=ctx.search("pára ignorar perguntas conversa",limit=10)
+        oracle=next(x for x in oracle_hits if x.ref=="asset:catalog:digital:oracle")
+        pdi=next(x for x in pdi_hits if x.ref=="asset:catalog:digital:pdi")
+        self.assertEqual(oracle.asset_type,"digital_product")
+        self.assertEqual(oracle.price_minor,200)
+        self.assertEqual(pdi.asset_type,"digital_product")
+        self.assertEqual(pdi.price_minor,500)
+
     def test_search_finds_existing_product_without_claiming_stock_quantity(self):
         ctx=CommercialAssetContext(self.registry())
         hits=ctx.search("massagem toque corpo",limit=5)
