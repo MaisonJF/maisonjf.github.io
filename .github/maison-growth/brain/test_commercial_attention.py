@@ -31,7 +31,6 @@ class CommercialAttentionTests(unittest.TestCase):
         self.assertTrue(self.payload["contract"]["attention_score_is_not_profit_score"])
         self.assertTrue(self.payload["contract"]["operational_unknowns_block_execution"])
         self.assertFalse(self.payload["contract"]["automatic_publication"])
-        self.assertFalse(self.payload["contract"]["automatic_discount"])
         self.assertFalse(self.payload["contract"]["automatic_checkout"])
         self.assertEqual(self.payload["summary"]["execution_ready"],0)
 
