@@ -103,6 +103,41 @@ class CommercialEconomicsTests(unittest.TestCase):
         self.assertIn("current_stock_snapshot_unknown",result["signals"])
         self.assertTrue(result["manual_validation_ready"])
 
+    def test_digital_product_keeps_delivery_costs_unknown_until_observed(self):
+        ctx=CommercialAssetContext(self.registry)
+        result=evaluate_asset(ctx,"catalog:digital:oracle")
+        self.assertEqual(result["price_minor"],200)
+        self.assertFalse(result["operational_facts_complete"])
+        self.assertFalse(result["unit_economics_known"])
+        self.assertFalse(result["manual_validation_ready"])
+        self.assertIn("delivery_effort_incomplete",result["blockers"])
+        self.assertIn("variable_cost_unknown",result["blockers"])
+
+        overlay={
+            "schema_version":"commercial_asset_overlay_v1",
+            "observed_at":"2026-09-24T08:30:00+01:00",
+            "assets":[{
+                "asset_ref":"catalog:digital:oracle",
+                "source":"manual_digital_delivery_review",
+                "operational":{
+                    "human_effort_minutes":0,
+                    "variable_cost_minor":20,
+                    "delivery_lead_days":0,
+                },
+                "evidence_refs":["manual:digital-delivery:oracle:2026-09-24"],
+            }],
+        }
+        result=evaluate_asset(
+            CommercialAssetContext(self.registry,overlay=overlay),
+            "catalog:digital:oracle",
+        )
+        self.assertTrue(result["operational_facts_complete"])
+        self.assertTrue(result["unit_economics_known"])
+        self.assertEqual(result["unit_contribution_minor"],180)
+        self.assertEqual(result["contribution_margin_bps"],9000)
+        self.assertTrue(result["manual_validation_ready"])
+        self.assertFalse(any(result["authority"].values()))
+
     def test_service_requires_capacity_effort_cost_and_concrete_price(self):
         overlay={
             "schema_version":"commercial_asset_overlay_v1",
