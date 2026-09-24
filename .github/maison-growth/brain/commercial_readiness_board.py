@@ -28,6 +28,11 @@ def _next_action(row: Mapping[str,Any], economics: Mapping[str,Any]) -> tuple[st
             return "verify_unit_cost","Record material and packaging cost for this exact product."
         if "replenishment_capacity_incomplete" in blockers:
             return "verify_replenishment_capacity","Record production time and practical batch capacity; current finished stock is only a volatile snapshot."
+    elif asset_type=="digital_product":
+        if "delivery_effort_incomplete" in blockers:
+            return "verify_digital_delivery_effort","Record per-sale human effort and delivery/lead time for this digital product; zero is valid only when verified."
+        if "variable_cost_unknown" in blockers:
+            return "verify_variable_cost","Record the variable cost for one delivered digital unit."
     else:
         if "capacity_incomplete" in blockers:
             return "verify_service_capacity","Record real service capacity and its period."
