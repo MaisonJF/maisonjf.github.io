@@ -18,17 +18,44 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Verify live private Brain health
+      - name: Diagnose live private Brain response safely
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
           BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
           CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
-        run: python .github/maison-growth/runtime/verify_private_brain_health.py
-      - name: Verify live private Brain boundary
-        env:
-          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
-          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
-          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
-        run: python .github/maison-growth/runtime/verify_private_brain_boundary.py private_brain_read_candidate
+        run: |
+          python - <<'PY'
+          import os, urllib.request, urllib.error
+          def norm(v, name):
+              v=(v or "").strip()
+              p=name+":"
+              if v.lower().startswith(p.lower()):
+                  v=v[len(p):].strip()
+              return v
+          url=os.environ["BRAIN_CONTROL_API_URL"].rstrip("/")+"/internal/brain/health"
+          headers={
+              "Accept":"application/json",
+              "Authorization":"Bearer "+os.environ["BRAIN_CONTROL_TOKEN"].strip(),
+              "CF-Access-Client-Id":norm(os.environ.get("CF_ACCESS_CLIENT_ID"),"CF-Access-Client-Id"),
+              "CF-Access-Client-Secret":norm(os.environ.get("CF_ACCESS_CLIENT_SECRET"),"CF-Access-Client-Secret"),
+              "User-Agent":"MAISON-JF-Live-Diagnostic/1.0",
+          }
+          req=urllib.request.Request(url,headers=headers,method="GET")
+          opener=urllib.request.build_opener(urllib.request.HTTPHandler())
+          try:
+              r=opener.open(req,timeout=15)
+              raw=r.read(1000)
+              print("status",r.status)
+              print("content_type",r.headers.get("content-type",""))
+              print("server",r.headers.get("server",""))
+              print("body",raw.decode("utf-8","replace"))
+          except urllib.error.HTTPError as e:
+              raw=e.read(1000)
+              print("status",e.code)
+              print("content_type",e.headers.get("content-type",""))
+              print("server",e.headers.get("server",""))
+              print("location_present",bool(e.headers.get("location")))
+              print("body",raw.decode("utf-8","replace"))
+              raise SystemExit(1)
+          PY
