@@ -70,6 +70,20 @@ class CommercialAssetTests(unittest.TestCase):
             self.assertEqual(row["evidence_refs"],[])
             self.assertTrue(all(value is None for value in row["operational"].values()))
 
+    def test_operations_facts_template_makes_stock_optional_and_replenishment_structural(self):
+        template=json.loads((ROOT/"commercial-operations-facts.template.json").read_text(encoding="utf-8"))
+        self.assertEqual(template["target_overlay_schema"],"commercial_asset_overlay_v1")
+        self.assertEqual(len(template["physical_products"]),5)
+        for row in template["physical_products"]:
+            op=row["operational"]
+            self.assertIn("unit_material_cost_minor",op)
+            self.assertIn("packaging_cost_minor",op)
+            self.assertIn("production_minutes_per_unit",op)
+            self.assertIn("batch_capacity_units",op)
+            self.assertIn("inventory_quantity",op)
+            self.assertTrue(all(value is None for value in op.values()))
+            self.assertEqual(row["evidence_refs"],[])
+
     def test_service_capacity_template_contains_all_active_public_services(self):
         template=json.loads((ROOT/"commercial-service-capacity.template.json").read_text(encoding="utf-8"))
         self.assertEqual(template["target_overlay_schema"],"commercial_asset_overlay_v1")
