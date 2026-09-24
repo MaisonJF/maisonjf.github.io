@@ -37,6 +37,11 @@ class RuntimeContractTests(unittest.TestCase):
         self.assertEqual(plan["WORKER_ENABLED"],"false")
         self.assertEqual(plan["OSIRIS_ENABLED"],"false")
         self.assertEqual(plan["OPENROUTER_ENABLED"],"false")
+        for provider_flag in (
+            "WORKERS_AI_ENABLED","OSIRIS_GATEWAY_ENABLED","OPENAI_ENABLED",
+            "GEMINI_ENABLED","PERPLEXITY_ENABLED","ANTHROPIC_ENABLED",
+        ):
+            self.assertEqual(plan[provider_flag],"false")
         self.assertTrue(plan["requires_private_https_access"])
         self.assertFalse(plan["outbound_authorized"])
         self.assertFalse(plan["spend_authorized"])
