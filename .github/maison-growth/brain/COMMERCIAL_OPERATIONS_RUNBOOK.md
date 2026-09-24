@@ -76,6 +76,21 @@ The report keeps **commercial attention** separate from **unit economics**:
 
 The attention score is never treated as a profit forecast.
 
+## 4A. Turn blockers into a concrete fact-collection checklist
+
+Save the readiness report locally, then convert its blockers into an operator checklist ordered by commercial attention:
+
+```bash
+python .github/maison-growth/brain/commercial_operator_report.py \
+  --overlay /private/path/maison-commercial-overlay.private.json \
+  > /private/path/commercial-readiness.private.json
+
+python .github/maison-growth/brain/precloud_operator_checklist.py \
+  /private/path/commercial-readiness.private.json
+```
+
+This does not guess stock, costs or capacity. It simply tells the human operator which observed facts are still missing per asset/bundle, plus the most common blockers, while all execution authority remains OFF. It is specifically useful before Cloudflare because these facts can be collected independently of the remote runtime.
+
 ## 5. Resolve multi-format / starting-from service prices explicitly
 
 The catalogue projection preserves the difference between:
