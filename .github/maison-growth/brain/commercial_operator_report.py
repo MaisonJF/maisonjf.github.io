@@ -48,6 +48,30 @@ def build_report(
             "unit_economics_known":economics["unit_economics_known"],
             "manual_validation_ready":economics["manual_validation_ready"],
             "blockers":economics["blockers"],
+            "economics":{
+                "price_minor":economics.get("price_minor"),
+                "unit_cost_minor":economics.get("unit_cost_minor"),
+                "variable_cost_minor":economics.get("variable_cost_minor"),
+                "unit_contribution_minor":economics.get("unit_contribution_minor"),
+                "contribution_margin_bps":economics.get("contribution_margin_bps"),
+                "production_minutes_per_unit":economics.get("production_minutes_per_unit"),
+                "human_effort_minutes":economics.get("human_effort_minutes"),
+                "contribution_per_production_minute_minor":(
+                    round(economics["unit_contribution_minor"] / economics["production_minutes_per_unit"],2)
+                    if isinstance(economics.get("unit_contribution_minor"),int)
+                    and isinstance(economics.get("production_minutes_per_unit"),int)
+                    and economics["production_minutes_per_unit"] > 0
+                    else None
+                ),
+                "contribution_per_human_minute_minor":(
+                    round(economics["unit_contribution_minor"] / economics["human_effort_minutes"],2)
+                    if isinstance(economics.get("unit_contribution_minor"),int)
+                    and isinstance(economics.get("human_effort_minutes"),int)
+                    and economics["human_effort_minutes"] > 0
+                    else None
+                ),
+                "evidence_refs":list(economics.get("operational_evidence_refs",[])),
+            },
         })
 
     bundle_rows=[]
@@ -73,6 +97,13 @@ def build_report(
         "kind":"maison_commercial_operator_readiness",
         "overlay_loaded":overlay_path is not None,
         "attention_score_is_not_profit_score":True,
+        "economics_contract":{
+            "economics_are_separate_from_attention":True,
+            "unknown_economics_remain_null":True,
+            "private_overlay_values_are_not_persisted":True,
+            "no_automatic_profit_ranking":True,
+            "human_commercial_judgement_required":True,
+        },
         "authority":{
             "public_write_authorized":False,
             "stock_promise_authorized":False,
