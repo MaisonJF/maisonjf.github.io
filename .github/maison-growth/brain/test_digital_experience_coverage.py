@@ -22,15 +22,15 @@ class DigitalExperienceCoverageTests(unittest.TestCase):
         self.assertEqual(products["oracle"]["territory_source_count"],100)
         self.assertEqual(products["pdi"]["asset_ref"],"catalog:digital:pdi")
         self.assertEqual(products["pdi"]["price_minor"],500)
-        self.assertEqual(products["pdi"]["source_theme_count"],249)
+        self.assertEqual(products["pdi"]["source_theme_count"],261)
 
     def test_all_current_oceans_feed_both_products(self):
         summary=self.payload["summary"]
-        self.assertEqual(summary["oceans"],16)
-        self.assertEqual(summary["pdi_oceans"],16)
-        self.assertEqual(summary["oracle_oceans"],16)
-        self.assertEqual(summary["pdi_stage_slots"],594)
-        self.assertEqual(summary["oracle_role_slots"],112)
+        self.assertEqual(summary["oceans"],18)
+        self.assertEqual(summary["pdi_oceans"],18)
+        self.assertEqual(summary["oracle_oceans"],18)
+        self.assertEqual(summary["pdi_stage_slots"],666)
+        self.assertEqual(summary["oracle_role_slots"],126)
         self.assertEqual(summary["oceans_with_feed_gaps"],0)
 
     def test_feed_contract_never_stores_or_auto_activates_paid_bodies(self):
