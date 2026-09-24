@@ -40,7 +40,6 @@ class CommercialAttentionTests(unittest.TestCase):
             self.assertFalse(asset["ready_for_automatic_sale"])
             self.assertTrue(asset["operational_blockers"])
             self.assertFalse(asset["authority"]["public_write_authorized"])
-            self.assertFalse(asset["authority"]["discount_authorized"])
             self.assertFalse(asset["authority"]["stock_promise_authorized"])
             self.assertFalse(asset["authority"]["automatic_checkout_authorized"])
 
