@@ -142,6 +142,46 @@ class CollectorUnitTests(unittest.TestCase):
         self.assertEqual(normalized["metadata"]["offer_id"], "tarot")
         self.assertNotIn("answer", normalized["metadata"])
 
+    def test_b2b_lead_accepts_only_contract_non_pii(self):
+        event = {
+            "contract_version": 1,
+            "source": "commerce",
+            "event_type": "b2b.lead",
+            "occurred_at": "2026-09-25T12:00:00Z",
+            "idempotency_key": "b2b:lead:fixture-1",
+            "privacy_class": "pseudonymous",
+            "metadata": {
+                "interest": "b2b",
+                "origin": "professional_test",
+                "business": "spa",
+                "goal": "diferenciar",
+                "gap": "continuity",
+                "client": "consumer",
+                "model": "service",
+                "scale": "small",
+                "start": "pilot",
+                "result_type": "signature"
+            }
+        }
+        normalized = normalize_ingestion(event)
+        self.assertEqual(normalized["event_type"], "b2b.lead")
+        self.assertEqual(normalized["metadata"]["business"], "spa")
+
+    def test_b2b_lead_rejects_identity_and_free_text(self):
+        base = {
+            "contract_version": 1,
+            "source": "commerce",
+            "event_type": "b2b.lead",
+            "occurred_at": "2026-09-25T12:00:00Z",
+            "idempotency_key": "b2b:lead:fixture-2",
+            "privacy_class": "pseudonymous",
+        }
+        for forbidden in ("name","email","phone","free_text_message","health_data","client_identity"):
+            event = dict(base)
+            event["metadata"] = {"business": "spa", forbidden: "forbidden-value"}
+            with self.assertRaises(ValidationError):
+                normalize_ingestion(event)
+
     def test_content_performance_contract_is_accepted(self):
         event = {
             "contract_version": 1,
