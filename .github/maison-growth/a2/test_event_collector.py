@@ -179,7 +179,7 @@ class CollectorUnitTests(unittest.TestCase):
         for forbidden in ("name","email","phone","free_text_message","health_data","client_identity"):
             event = dict(base)
             event["metadata"] = {"business": "spa", forbidden: "forbidden-value"}
-            with self.assertRaises(ValidationError):
+            with self.assertRaises((PrivacyViolation, ValidationError)):
                 normalize_ingestion(event)
 
     def test_content_performance_contract_is_accepted(self):
