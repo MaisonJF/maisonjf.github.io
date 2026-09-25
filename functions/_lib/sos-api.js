@@ -86,6 +86,7 @@ export function sosApiError(error){
     invalid_sos_contact_endpoint:400,
     invalid_sos_contact_kind:400,
     invalid_sos_timezone:400,
+    invalid_sos_local_time:400,
     invalid_sos_grace_minutes:400,
     invalid_sos_idempotency_key:400,
     sos_brevo_disabled:503,
