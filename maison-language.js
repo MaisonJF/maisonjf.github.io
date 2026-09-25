@@ -46,7 +46,9 @@
 
   function convert(value){
     if(!value || typeof value!=='string') return value;
-    return value.replace(rx,match=>preserveCase(match,MAP.get(match.toLowerCase())||match));
+    let next=value.replace(rx,match=>preserveCase(match,MAP.get(match.toLowerCase())||match));
+    next=next.replace(/\s+[—–]\s+/g,'. ');
+    return next;
   }
 
   function textNode(node){
@@ -91,5 +93,5 @@
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',apply,{once:true});
   else apply();
 
-  window.MaisonLanguage={convert,variant:'pt-PT-pre-AO90'};
+  window.MaisonLanguage={convert,variant:'pt-PT-pre-AO90-human-voice'};
 })();
