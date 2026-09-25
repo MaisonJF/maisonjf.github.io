@@ -58,6 +58,30 @@ export async function configureSosAccount({env,identity,timezone,graceMinutes=60
   return {accountRef,status:(await accountFor(db,accountRef))?.status||'setup'};
 }
 
+export async function setSosUserReminderEndpoint({
+  env,identity,endpoint,at=new Date().toISOString()
+}={}){
+  const db=requireSosDb(env);
+  const accountRef=await sosAccountRef(env,identity);
+  const account=await accountFor(db,accountRef);
+  if(!account||account.status==='deleted')throw new Error('sos_account_not_configured');
+  const when=nowIso(at);
+  const clean=normalizeEndpoint('email',endpoint);
+  const channelRef=opaqueId('suc_');
+  const encrypted=await encryptSosSecret(env,clean.value,{aad:[accountRef,channelRef,clean.kind].join('|')});
+  await db.batch([
+    db.prepare(`UPDATE sos_user_channels SET revoked_at=?1,updated_at=?1
+      WHERE account_ref=?2 AND revoked_at IS NULL`).bind(when,accountRef),
+    db.prepare(`INSERT INTO sos_user_channels(
+      channel_ref,account_ref,endpoint_kind,endpoint_ciphertext,endpoint_iv,crypto_version,
+      verification_source,verified_at,created_at,updated_at
+    ) VALUES(?1,?2,'email',?3,?4,?5,'auth_provider',?6,?6,?6)`).bind(
+      channelRef,accountRef,encrypted.ciphertext,encrypted.iv,encrypted.version,when
+    )
+  ]);
+  return {channelRef};
+}
+
 export async function createTrustedContactInvite({
   env,identity,endpointKind,endpoint,at=new Date().toISOString(),ttlHours=48
 }={}){
@@ -238,6 +262,24 @@ export async function claimNextSosAction({env,at=new Date().toISOString(),leaseM
   return null;
 }
 
+export async function userReminderTargetForAction({env,actionRef}={}){
+  const db=requireSosDb(env);
+  const row=await db.prepare(`
+    SELECT o.action_ref,o.action_kind,o.state,u.channel_ref,u.account_ref,u.endpoint_kind,
+           u.endpoint_ciphertext,u.endpoint_iv,u.crypto_version
+    FROM sos_outbox o
+    JOIN sos_due_windows d ON d.due_ref=o.due_ref
+    JOIN sos_user_channels u ON u.account_ref=d.account_ref
+      AND u.verified_at IS NOT NULL AND u.revoked_at IS NULL
+    WHERE o.action_ref=?1 LIMIT 1
+  `).bind(String(actionRef||'')).first();
+  if(!row||row.action_kind!=='user_reminder'||row.state!=='claimed')throw new Error('sos_action_not_deliverable');
+  const endpoint=await decryptSosSecret(env,{
+    version:row.crypto_version,iv:row.endpoint_iv,ciphertext:row.endpoint_ciphertext
+  },{aad:[row.account_ref,row.channel_ref,row.endpoint_kind].join('|')});
+  return {endpointKind:row.endpoint_kind,endpoint};
+}
+
 export async function trustedContactTargetForAction({env,actionRef}={}){
   const db=requireSosDb(env);
   const row=await db.prepare(`
@@ -254,6 +296,29 @@ export async function trustedContactTargetForAction({env,actionRef}={}){
     version:row.crypto_version,iv:row.endpoint_iv,ciphertext:row.endpoint_ciphertext
   },{aad:[row.account_ref,row.contact_ref,row.endpoint_kind].join('|')});
   return {endpointKind:row.endpoint_kind,endpoint};
+}
+
+export async function releaseSosActionForRetry({
+  env,actionRef,errorCode='provider_temporary',at=new Date().toISOString()
+}={}){
+  const db=requireSosDb(env);
+  const when=nowIso(at);
+  const row=await db.prepare('SELECT action_ref,state,attempt_count FROM sos_outbox WHERE action_ref=?1 LIMIT 1')
+    .bind(String(actionRef||'')).first();
+  if(!row)throw new Error('sos_action_not_found');
+  if(row.state!=='claimed')throw new Error('sos_action_not_claimed');
+  const attempt=Math.max(1,Number(row.attempt_count||1));
+  const code=String(errorCode||'provider_temporary').slice(0,120);
+  if(attempt>=5){
+    await db.prepare(`UPDATE sos_outbox SET state='failed',claim_expires_at=NULL,last_error_code=?1,updated_at=?2
+      WHERE action_ref=?3 AND state='claimed'`).bind(code,when,row.action_ref).run();
+    return {retry:false,terminal:true};
+  }
+  const backoffMinutes=Math.min(30,2**(attempt-1));
+  const retryAt=plus(when,backoffMinutes*MINUTE);
+  await db.prepare(`UPDATE sos_outbox SET state='pending',claim_expires_at=NULL,not_before=?1,last_error_code=?2,updated_at=?3
+    WHERE action_ref=?4 AND state='claimed'`).bind(retryAt,code,when,row.action_ref).run();
+  return {retry:true,terminal:false,retryAt};
 }
 
 export async function completeSosAction({
