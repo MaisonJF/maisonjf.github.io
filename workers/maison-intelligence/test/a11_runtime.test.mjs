@@ -26,6 +26,8 @@ class FakeD1 {
   prepare(sql){
     const db=this;
     return {
+      first:async()=>db.first(sql,[]),
+      run:async()=>({success:true}),
       bind(...args){
         return {
           sql,args,
