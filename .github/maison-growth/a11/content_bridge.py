@@ -33,7 +33,13 @@ def content_learning_identity(event: Mapping[str, Any]) -> dict[str, Any]:
     identity=content_learning_identity(event)
     meta=_metadata(event)
     content_id=identity["content_id"]
-    refs=list(identity["evidence_refs"])
+    refs=[]
+    event_id=str(event.get("event_id") or "").strip()
+    if event_id:
+        refs.append(f"a1:event:{event_id}")
+    source_hash=str(meta.get("source_refs_hash") or "").strip()
+    if source_hash:
+        refs.append(f"content:source_refs_hash:{source_hash}")
     refs=tuple(dict.fromkeys(refs))
     return {
         "content_id":content_id,
@@ -95,13 +101,7 @@ def content_event_to_learning(
         expected=None
         observed=None
 
-    event_id=str(event.get("event_id") or "").strip()
-    refs=[]
-    if event_id:
-        refs.append(f"a1:event:{event_id}")
-    source_hash=str(meta.get("source_refs_hash") or "").strip()
-    if source_hash:
-        refs.append(f"content:source_refs_hash:{source_hash}")
+    refs=list(identity["evidence_refs"])
 
     return evaluate_content_performance(
         content_id=content_id,
