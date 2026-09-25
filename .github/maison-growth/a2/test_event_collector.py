@@ -77,6 +77,52 @@ class CollectorUnitTests(unittest.TestCase):
         with self.assertRaises(IdempotencyConflict):
             collector.ingest(changed)
 
+    def test_site_cta_contract_is_exact_and_structural(self):
+        event = valid_site(
+            event_type="cta.click",
+            idempotency_key="site:cta:0001",
+            metadata={
+                "path": "/servicos/",
+                "cta_id": "tarot_primary",
+                "surface": "service-card",
+            },
+        )
+        normalized = normalize_ingestion(event)
+        self.assertEqual(normalized["event_type"], "cta.click")
+        self.assertEqual(normalized["metadata"]["cta_id"], "tarot_primary")
+
+    def test_site_navigation_contract_accepts_target_path(self):
+        event = valid_site(
+            event_type="navigation.click",
+            idempotency_key="site:navigation:0001",
+            metadata={
+                "path": "/",
+                "navigation_id": "primary_services",
+                "target_path": "/servicos/?from=header",
+                "surface": "header",
+            },
+        )
+        normalized = normalize_ingestion(event)
+        self.assertEqual(normalized["metadata"]["target_path"], "/servicos/")
+
+    def test_site_prefix_does_not_allow_undeclared_event(self):
+        with self.assertRaises(ValidationError):
+            normalize_ingestion(valid_site(
+                event_type="page.secret",
+                idempotency_key="site:page:secret:0001",
+            ))
+
+    def test_site_event_rejects_metadata_from_another_site_event(self):
+        with self.assertRaises(ValidationError):
+            normalize_ingestion(valid_site(
+                event_type="page.view",
+                idempotency_key="site:page:wrong-meta:0001",
+                metadata={
+                    "path": "/",
+                    "offer_id": "tarot",
+                },
+            ))
+
     def test_offer_interaction_is_privacy_safe_and_normalized(self):
         event = valid_site(
             event_type="offer.click",
