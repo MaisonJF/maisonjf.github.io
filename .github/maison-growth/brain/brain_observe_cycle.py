@@ -228,8 +228,9 @@ def build_observe_output() -> dict[str,Any]:
         overlay_path=Path(overlay_raw) if overlay_raw else None,
     )
 
-    # Oceanos and commercial assets contribute supporting context refs, never independent evidence roots.
-    ocean=OceanEditorialContext.from_file(ROOT/"editorial-queue.json")
+    # Canonical Ocean candidates and commercial assets contribute supporting context refs,
+    # never independent evidence roots. Editorial queue is deliberately not a Brain truth source.
+    ocean=OceanEditorialContext.from_file(ROOT.parent/"oceans"/"candidates.json")
     knowledge_context:dict[str,tuple[str,...]]={}
     ocean_commercial_hint_matches=0
     for row in feed:
