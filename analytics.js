@@ -139,6 +139,211 @@
     return { ...offerAttribution(), ...acquisitionAttribution() };
   }
 
+  const GROWTH_TOKEN_RE = /^[A-Za-z0-9._:/@+-]{1,120}$/;
+  let growthStarted = false;
+  let growthPageViewSent = false;
+  const growthOfferExposureSent = new Set();
+
+  function growthToken(value, maxLength = 120) {
+    const token = String(value || '').trim();
+    if (!token || token.length > maxLength || !GROWTH_TOKEN_RE.test(token)) return '';
+    return token;
+  }
+
+  function growthPath(raw = window.location.pathname) {
+    try {
+      const url = new URL(raw, window.location.origin);
+      if (url.origin !== window.location.origin) return '';
+      let path = url.pathname || '/';
+      if (path.endsWith('.html')) path = path.replace(/\.html$/, '');
+      return path || '/';
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function growthSurface() {
+    const explicit = growthToken(document.body?.dataset?.maisonSurface || '', 80);
+    if (explicit) return explicit;
+    const segment = growthPath().split('/').filter(Boolean)[0] || 'home';
+    return growthToken(segment.replace(/[^A-Za-z0-9._:/@+-]+/g, '_'), 80) || 'page';
+  }
+
+  function growthReferrerHost() {
+    try {
+      if (!document.referrer) return '';
+      const host = new URL(document.referrer).hostname.toLowerCase().replace(/\.$/, '');
+      return /^[A-Za-z0-9.-]{1,255}$/.test(host) ? host : '';
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function growthCampaignId() {
+    try {
+      return growthToken(new URLSearchParams(window.location.search).get('utm_campaign') || '');
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function growthOfferContext(element = null) {
+    const attribution = offerAttribution();
+    const dataOffer = growthToken(
+      element?.dataset?.maisonOfferId ||
+      element?.closest?.('[data-maison-offer-id]')?.dataset?.maisonOfferId ||
+      ''
+    );
+    const offerId = dataOffer || growthToken(attribution.recommendation_offer || '');
+    if (!offerId) return null;
+    const context = {
+      path: growthPath(),
+      surface: growthToken(
+        element?.dataset?.maisonSurface ||
+        element?.closest?.('[data-maison-surface]')?.dataset?.maisonSurface ||
+        growthSurface(),
+        80
+      ) || 'page',
+      offer_id: offerId
+    };
+    const optional = {
+      recommendation_source: attribution.recommendation_source,
+      recommendation_result: attribution.recommendation_result,
+      recommendation_route: attribution.recommendation_route,
+      recommendation_brain: attribution.recommendation_brain
+    };
+    Object.entries(optional).forEach(([key, value]) => {
+      const safe = growthToken(value || '');
+      if (safe) context[key] = safe;
+    });
+    return context;
+  }
+
+  function growthEventKey() {
+    if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+    if (!window.crypto?.getRandomValues) return '';
+    const bytes = window.crypto.getRandomValues(new Uint8Array(16));
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    const hex = [...bytes].map(value => value.toString(16).padStart(2, '0')).join('');
+    return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+  }
+
+  function trackGrowth(eventType, metadata) {
+    if (localStorage.getItem(CONSENT_KEY) !== 'granted') return;
+    const eventKey = growthEventKey();
+    if (!eventKey) return;
+    fetch('/api/site-event', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      credentials: 'same-origin',
+      keepalive: true,
+      body: JSON.stringify({
+        event_type: eventType,
+        event_key: eventKey,
+        consent: true,
+        metadata
+      })
+    }).catch(() => {});
+  }
+
+  function emitGrowthPageView() {
+    if (growthPageViewSent || localStorage.getItem(CONSENT_KEY) !== 'granted') return;
+    const path = growthPath();
+    if (!path) return;
+    const metadata = { path, surface: growthSurface() };
+    const referrer = growthReferrerHost();
+    const campaign = growthCampaignId();
+    if (referrer) metadata.referrer_host = referrer;
+    if (campaign) metadata.campaign_id = campaign;
+    trackGrowth('page.view', metadata);
+    growthPageViewSent = true;
+
+    const offer = growthOfferContext();
+    if (offer && !growthOfferExposureSent.has(offer.offer_id)) {
+      trackGrowth('offer.exposure', offer);
+      growthOfferExposureSent.add(offer.offer_id);
+    }
+  }
+
+  function observeGrowthOffers() {
+    if (!('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.5) return;
+        const offer = growthOfferContext(entry.target);
+        if (!offer || growthOfferExposureSent.has(offer.offer_id)) return;
+        trackGrowth('offer.exposure', offer);
+        growthOfferExposureSent.add(offer.offer_id);
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-maison-offer-id]').forEach(element => observer.observe(element));
+  }
+
+  function startGrowthTelemetry() {
+    if (localStorage.getItem(CONSENT_KEY) !== 'granted' || growthStarted) return;
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startGrowthTelemetry, { once: true });
+      return;
+    }
+    growthStarted = true;
+    emitGrowthPageView();
+    observeGrowthOffers();
+  }
+
+  function growthStructuralId(prefix, value) {
+    const safe = String(value || '').replace(/[^A-Za-z0-9._:/@+-]+/g, '_').slice(0, 100);
+    return growthToken(prefix + ':' + (safe || 'unknown'));
+  }
+
+  function trackGrowthLink(link) {
+    if (localStorage.getItem(CONSENT_KEY) !== 'granted') return;
+    const raw = link.getAttribute('href') || '';
+    let target = null;
+    try { target = new URL(raw, window.location.href); } catch (_) {}
+
+    const currentPath = growthPath();
+    const surface = growthSurface();
+
+    if (target && target.origin === window.location.origin) {
+      const targetPath = growthPath(target.href);
+      if (targetPath) {
+        const area = link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : 'main';
+        const explicitNav = growthToken(link.dataset.navigationId || link.dataset.maisonNavigationId || '');
+        const navigationId = explicitNav || growthStructuralId(area, targetPath);
+        if (navigationId) {
+          trackGrowth('navigation.click', {
+            path: currentPath,
+            navigation_id: navigationId,
+            target_path: targetPath,
+            surface
+          });
+        }
+      }
+    }
+
+    const isCta = link.matches('.button,.btn,[data-cta-id],[data-maison-cta]') ||
+      Boolean(link.closest('[data-maison-offer-id]'));
+    if (!isCta) return;
+
+    let ctaId = growthToken(link.dataset.ctaId || link.dataset.maisonCta || link.id || '');
+    if (!ctaId) {
+      if ((target?.hostname || '').toLowerCase() === 'wa.me') ctaId = 'cta:whatsapp';
+      else if (raw.toLowerCase().includes('checkout')) ctaId = 'cta:checkout';
+      else ctaId = growthStructuralId('cta', target && target.origin === window.location.origin ? growthPath(target.href) : 'external');
+    }
+    if (ctaId) {
+      const metadata = { path: currentPath, cta_id: ctaId, surface };
+      const campaign = growthCampaignId();
+      if (campaign) metadata.campaign_id = campaign;
+      trackGrowth('cta.click', metadata);
+    }
+
+    const offer = growthOfferContext(link);
+    if (offer) trackGrowth('offer.click', offer);
+  }
+
   function track(name, parameters = {}) {
     if (localStorage.getItem(CONSENT_KEY) !== 'granted') return;
     loadGoogle();
@@ -152,7 +357,7 @@
 
   function saveConsent(value) {
     localStorage.setItem(CONSENT_KEY, value);
-    if (value === 'granted') { loadGoogle(); captureAcquisitionAttribution(); }
+    if (value === 'granted') { loadGoogle(); captureAcquisitionAttribution(); startGrowthTelemetry(); }
     else window.gtag('consent', 'update', { analytics_storage: 'denied' });
     document.querySelector('.maison-consent')?.remove();
     showPreferencesControl();
@@ -311,7 +516,7 @@
     observer.observe(document.documentElement, { childList: true, subtree: true });
 
     const consent = localStorage.getItem(CONSENT_KEY);
-    if (consent === 'granted') loadGoogle();
+    if (consent === 'granted') { loadGoogle(); startGrowthTelemetry(); }
     else if (consent !== 'denied') showConsent();
     if (consent === 'granted' || consent === 'denied') showPreferencesControl();
 
@@ -322,6 +527,7 @@
         const clean = cleanInternalHref(current);
         if (clean && clean !== current) link.setAttribute('href', clean);
         classify(link);
+        trackGrowthLink(link);
       }
     }, { capture: true });
   });
