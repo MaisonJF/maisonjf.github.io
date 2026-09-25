@@ -2,7 +2,7 @@
 
 ## Estado desta fundação
 
-**Fase:** fundação técnica e de produto, sem runtime de produção activado.
+**Fase:** fundação de produto + núcleo operacional privado prontos em código, sem runtime de produção activado.
 
 A auditoria de `main` encontrou:
 
@@ -137,38 +137,63 @@ Objectivo mínimo: WCAG 2.2 AA.
 - linguagem curta e literal;
 - acções críticas sem gesto oculto.
 
-## Arquitectura de execução futura
+## Núcleo operacional privado
 
-A fundação actual é deliberadamente **provider-agnostic**.
+A segunda fundação já está implementada em código, mas deliberadamente **não exposta como API pública**.
 
-1. UI envia `ESTOU AQUI` para API autenticada.
-2. API grava confirmação no domínio operacional.
-3. scheduler/durable runner avalia prazos de forma idempotente.
-4. adapter de mensagens envia lembrete/aviso.
-5. receipts actualizam apenas estado operacional.
-6. agregador produz contadores sanitizados.
-7. esses contadores entram no collector canónico A1/A2 como `source=sos_product`.
+- binding futuro dedicado: `MAISON_SOS_DB`;
+- identidade externa obrigatoriamente verificada antes de entrar no produto;
+- sujeito de autenticação transformado num `account_ref` estável por HMAC — o identificador bruto não é persistido;
+- endpoint do contacto cifrado em repouso com AES-256-GCM;
+- token de convite entregue uma única vez e persistido apenas como SHA-256;
+- apenas um contacto de confiança activo por conta no MVP;
+- aceitação do contacto activa a primeira janela diária;
+- `ESTOU AQUI` exige chave de idempotência para resistir a retries da rede;
+- scheduler escreve numa outbox; não envia directamente;
+- um aviso ao contacto só pode ser criado depois do lembrete ao utilizador estar marcado como enviado;
+- claims de entrega têm lease curto para recuperação depois de crash;
+- substituir o contacto cancela janelas e avisos pendentes antes de iniciar nova verificação.
 
-Nenhum fornecedor de SMS/email/push é escolhido nesta fase; isso seria uma decisão de runtime/custo e não é necessário para validar a fundação.
+O armazenamento operacional fica **fisicamente separado do MAISON Brain**. Esta separação é uma fronteira de privacidade, não um novo cérebro.
+
+## Arquitectura de execução
+
+1. futura UI envia `ESTOU AQUI` para uma API autenticada;
+2. o adaptador de autenticação entrega ao runtime um sujeito já verificado;
+3. o runtime grava apenas a referência HMAC e o estado operacional;
+4. o scheduler cria acções idempotentes na outbox;
+5. um adapter futuro de notificação reclama uma acção;
+6. o endpoint do contacto só é decifrado *just in time* para essa entrega;
+7. receipts actualizam apenas estado operacional;
+8. um agregador futuro produz os contadores sanitizados definidos em `SOS.BRAIN.1`;
+9. só esses contadores entram no collector canónico A1/A2 como `source=sos_product`.
+
+Nenhum fornecedor de autenticação, SMS, email ou push foi escolhido. Não há chamadas de rede nem rotas públicas nesta fundação.
 
 ## Ficheiros desta fundação
 
 - `product-contract.json` — invariantes do produto e limites de activação.
 - `operational-data-contract.json` — separação e minimização dos dados necessários.
 - `brain-signal-contract.json` — fronteira exacta de convergência com o Brain.
-- `functions/_lib/sos-maison-core.js` — máquina de estados e decisões puras, sem efeitos externos.
-- `validate_sos.mjs` — testes determinísticos da fundação.
+- `functions/_lib/sos-maison-core.js` — máquina de estados humana, sem efeitos externos.
+- `functions/_lib/sos-auth.js` — fronteira de identidade verificada + pseudonimização HMAC.
+- `functions/_lib/sos-crypto.js` — cifra AES-GCM para campos operacionais sensíveis.
+- `functions/_lib/sos-runtime.js` — configuração, convite, aceitação, check-in, scheduler e outbox.
+- `migrations/0001_operational_core.sql` — esquema D1 operacional separado do Brain.
+- `runtime-contract.json` — bindings, secrets e gates necessários antes de qualquer activação.
+- `validate_sos.mjs` — invariantes da primeira fundação.
+- `validate_sos_runtime.mjs` + `validate_sos_schema.py` — segurança e integridade da segunda fundação.
 
 ## Próximos incrementos permitidos
 
 Depois desta fundação passar CI, o RIO PRODUTO DIGITAL pode construir, nesta ordem:
 
-1. API operacional com armazenamento cifrado e autenticação;
-2. convite/aceitação do contacto de confiança;
-3. scheduler idempotente;
-4. adapter de notificação;
-5. UI/PWA mínima;
-6. testes de falha, duplicação, timezone/DST e recuperação;
-7. activação controlada em ambiente de teste.
+1. escolher e integrar autenticação de utilizador final;
+2. definir o primeiro canal de notificação e o respectivo fornecedor;
+3. criar as rotas API só depois de a autenticação estar resolvida;
+4. construir UI/PWA mínima em cima do runtime existente;
+5. acrescentar testes de timezone/DST, falha de fornecedor e recuperação;
+6. criar agregador A1/A2 sem PII;
+7. activar primeiro num ambiente de teste fechado.
 
 A monetização pode envolver este produto no futuro, mas **preço, checkout e Stripe não pertencem a esta fundação**.
