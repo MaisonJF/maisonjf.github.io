@@ -39,10 +39,19 @@ except sqlite3.IntegrityError:
 
 try:
     db.execute(
-        "INSERT INTO sos_accounts(account_ref,timezone,cadence_hours,grace_minutes,status) VALUES(?,?,?,?,?)",
-        ('sua_'+'d'*36,'Europe/Lisbon',12,60,'setup')
+        "INSERT INTO sos_accounts(account_ref,timezone,checkin_local_time,cadence_hours,grace_minutes,status) VALUES(?,?,?,?,?,?)",
+        ('sua_'+'d'*36,'Europe/Lisbon','20:00',12,60,'setup')
     )
     raise AssertionError('MVP cadence must remain daily')
+except sqlite3.IntegrityError:
+    pass
+
+try:
+    db.execute(
+        "INSERT INTO sos_accounts(account_ref,timezone,checkin_local_time,cadence_hours,grace_minutes,status) VALUES(?,?,?,?,?,?)",
+        ('sua_'+'1'*36,'Europe/Lisbon','25:00',24,60,'setup')
+    )
+    raise AssertionError('invalid local check-in time must be rejected')
 except sqlite3.IntegrityError:
     pass
 
