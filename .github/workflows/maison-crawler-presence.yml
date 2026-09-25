@@ -55,6 +55,19 @@ jobs:
               console.log('| '+row.user_agent+' | '+row.operator+' | '+row.requests+' | '+(row.observed?'yes':'no')+' |');
             }
             console.log('');
+            console.log('### AI referral hosts');
+            if(data.ai_referrals?.observability==='available'){
+              console.log('');
+              console.log('| Operator | Requests | Observed |');
+              console.log('|---|---:|---|');
+              for(const row of data.ai_referrals.sources||[]){
+                console.log('| '+row.operator+' | '+row.requests+' | '+(row.observed?'yes':'no')+' |');
+              }
+            }else{
+              console.log('');
+              console.log('AI referral-host analytics: **unavailable** with the current plan/read token. No absence claim is made.');
+            }
+            console.log('');
             console.log('Cloudflare adaptive analytics may be sampled; counts are observational, not an indexation guarantee.');
           }else{
             console.log('');
