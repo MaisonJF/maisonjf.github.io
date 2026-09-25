@@ -28,6 +28,7 @@ const graphNeeds=(graph.professionalLayer.needs||[]).map(x=>x.id).sort();
 assert(JSON.stringify(contractNeeds)===JSON.stringify(graphNeeds),'professional_need_contract_drift');
 
 assert((graph.professionalLayer.offerFamilies||[]).length===(MAISON_B2B_BRAIN.offerFamilies||[]).length,'b2b_offer_family_projection_drift');
+assert(JSON.stringify(graph.professionalLayer.diagnosticOpportunityMap)===JSON.stringify(MAISON_B2B_BRAIN.diagnosticOpportunityMap),'b2b_diagnostic_map_projection_drift');
 assert(graph.professionalLayer.leadContract?.canonicalEvent==='b2b.lead','b2b_canonical_lead_contract_missing');
 assert(graph.professionalLayer.leadContract?.runtimeStatus.includes('central_telemetry_or_commerce'),'b2b_lead_contract_must_not_claim_parallel_runtime');
 assert(MAISON_B2B_BRAIN.evidencePolicy?.noSyntheticDemand,'b2b_evidence_policy_missing');
@@ -42,8 +43,11 @@ function routeBackingFile(route){
   return direct+'.html';
 }
 
+const canonicalOfferTypes=new Set(['b2b','wholesale','personalisation','corporate_gifting','workshop','digital_product','licensing']);
 for(const offer of MAISON_B2B_BRAIN.offerFamilies||[]){
   assert(offer.claimLimit,'b2b_offer_claim_limit_missing:'+offer.id);
+  assert(canonicalOfferTypes.has(offer.offerType),'b2b_offer_type_not_canonical:'+offer.id);
+  assert(['b2b','service','future_product'].includes(offer.a3SolutionType),'b2b_a3_solution_type_invalid:'+offer.id);
   if(['active_quote','manual_proposal','pilot_by_conversation'].includes(offer.status)){
     assert(Array.isArray(offer.routes)&&offer.routes.length>0,'b2b_offer_route_missing:'+offer.id);
     for(const route of offer.routes){
@@ -52,6 +56,13 @@ for(const offer of MAISON_B2B_BRAIN.offerFamilies||[]){
   }
   if(['research_validation','future_validation'].includes(offer.status)){
     assert((offer.routes||[]).length===0,'unvalidated_b2b_offer_must_not_have_public_route:'+offer.id);
+  }
+}
+for(const resultType of ['gifting','welcome','continuity','ticket','signature','resale','pilot','proposal','training_pilot']){
+  const families=MAISON_B2B_BRAIN.diagnosticOpportunityMap?.[resultType]||[];
+  assert(families.length>0,'b2b_diagnostic_result_unmapped:'+resultType);
+  for(const family of families){
+    assert((MAISON_B2B_BRAIN.offerFamilies||[]).some(x=>x.id===family),'b2b_diagnostic_family_missing:'+resultType+':'+family);
   }
 }
 assert(MAISON_B2B_BRAIN.recurrence?.rule,'b2b_recurrence_rule_missing');
