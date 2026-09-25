@@ -1,0 +1,28 @@
+{
+  "contract_version": "MAISON-DERIVED-ARTIFACTS-1.0",
+  "principle": "Canonical inputs are authored; derived artifacts are rebuilt, never hand-maintained.",
+  "canonical_inputs": [
+    ".github/maison-growth/oceans/candidates.json",
+    "functions/_lib/offer-brain.js",
+    ".github/maison-growth/a2/source-registry.json"
+  ],
+  "derived_artifacts": [
+    {
+      "path": ".github/maison-growth/brain/maison-knowledge-graph.generated.json",
+      "builder": ".github/maison-growth/brain/build_maison_knowledge_graph.mjs",
+      "policy": "generated_and_committed",
+      "manual_edits": "forbidden"
+    },
+    {
+      "path": ".github/maison-growth/brain/editorial-queue.generated.json",
+      "builder": ".github/maison-growth/brain/build_editorial_queue.mjs",
+      "policy": "generated_and_committed",
+      "manual_edits": "forbidden"
+    }
+  ],
+  "gate": {
+    "check": ".github/maison-growth/brain/rebuild_commercial_context.sh --check",
+    "failure_means": "derived context is stale or a central contract is broken",
+    "autonomy_allowed_when_stale": false
+  }
+}
