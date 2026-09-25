@@ -49,7 +49,7 @@ const pdiGrowthThemes=pdiThemeGroups.map(group=>{
     ...(prior.reviewNote?{reviewNote:prior.reviewNote}:{}),
     ...(prior.editorialDecision?{editorialDecision:prior.editorialDecision}:{})
   };
-});
+}).sort((a,b)=>a.candidateKey.localeCompare(b.candidateKey));
 
 const keepHumanState=(id,base)=>{
   const prior=previousById.get(id)||{};
