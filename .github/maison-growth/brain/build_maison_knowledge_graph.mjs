@@ -6,6 +6,11 @@ const match=source.match(/export const MAISON_OFFER_CATALOGUE=(\[[\s\S]*?\n\]);\
 if(!match)throw new Error('offer_catalogue_not_found');
 const offers=Function('"use strict";return ('+match[1]+')')();
 
+const b2bSource=fs.readFileSync(new URL('../../../functions/_lib/b2b-offer-brain.js',import.meta.url),'utf8');
+const b2bMatch=b2bSource.match(/export const MAISON_B2B_BRAIN=(\{[\s\S]*?\n\});\n\nexport function/);
+if(!b2bMatch)throw new Error('b2b_brain_not_found');
+const b2b=Function('"use strict";return ('+b2bMatch[1]+')')();
+
 const TERRITORIES={
   casa:{label:'Casa',url:'/portas/casa'},
   corpo:{label:'Corpo',url:'/portas/corpo'},
@@ -35,7 +40,7 @@ const territories=Object.entries(TERRITORIES).map(([id,base])=>({
 }));
 const graph={
   schema_version:'maison_knowledge_graph_v1',
-  generated_from:['.github/maison-growth/oceans/candidates.json','functions/_lib/offer-brain.js'],
+  generated_from:['.github/maison-growth/oceans/candidates.json','functions/_lib/offer-brain.js','functions/_lib/b2b-offer-brain.js'],
   principle:'Humano vê João. Máquina vê estrutura. Brain compreende os dois. MAISON transforma isso em desejo, utilidade e negócio.',
   contract:{
     machine_facing:true,
@@ -46,6 +51,19 @@ const graph={
     providers_do_not_define_voice:true
   },
   territories,
+  professional:{
+    surface:{...b2b.surface},
+    serviceAssetRef:b2b.serviceAssetRef,
+    dimensions:[...(b2b.dimensions||[])],
+    opportunityTypes:[...(b2b.opportunityTypes||[])],
+    segments:(b2b.segments||[]).map(x=>({
+      id:x.id,label:x.label,status:x.status,
+      territories:[...(x.territories||[])],routes:[...(x.routes||[])]
+    })),
+    needs:(b2b.needs||[]).map(x=>({...x})),
+    routes:(b2b.routes||[]).map(x=>({...x})),
+    evidencePolicy:{...(b2b.evidencePolicy||{})}
+  },
   offers:offers.filter(o=>o.status!=='hidden').map(o=>({
     id:o.id,title:o.title,href:o.href,format:o.format,family:o.family,stage:o.stage,
     territories:o.territories||[],axes:o.axes||[],routes:o.routes||[]
@@ -68,5 +86,5 @@ if(process.argv.includes('--check')){
   console.log('MAISON knowledge graph: OK');
 }else{
   fs.writeFileSync(outputUrl,out);
-  console.log('Wrote MAISON knowledge graph with '+territories.length+' territories, '+graph.offers.length+' offers and '+graph.oceans.length+' Oceans');
+  console.log('Wrote MAISON knowledge graph with '+territories.length+' territories, '+graph.offers.length+' offers, '+graph.professional.segments.length+' professional segments and '+graph.oceans.length+' Oceans');
 }
