@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/maison-product/sos/**'
       - 'functions/_lib/sos-*.js'
+      - 'functions/api/sos/**'
+      - 'sos/aceitar/**'
       - '.github/maison-growth/a2/source-registry.json'
       - '.github/maison-growth/a2/SOURCES.md'
       - '.github/workflows/sos-product-guard.yml'
@@ -13,6 +15,8 @@ on:
     paths:
       - '.github/maison-product/sos/**'
       - 'functions/_lib/sos-*.js'
+      - 'functions/api/sos/**'
+      - 'sos/aceitar/**'
       - '.github/maison-growth/a2/source-registry.json'
       - '.github/maison-growth/a2/SOURCES.md'
       - '.github/workflows/sos-product-guard.yml'
@@ -42,7 +46,17 @@ jobs:
           node --check functions/_lib/sos-supabase-auth.js
           node --check functions/_lib/sos-brevo.js
           node --check functions/_lib/sos-delivery.js
+          node --check functions/_lib/sos-api.js
+          node --check functions/api/sos/setup.js
+          node --check functions/api/sos/status.js
+          node --check functions/api/sos/checkin.js
+          node --check functions/api/sos/pause.js
+          node --check functions/api/sos/resume.js
+          node --check functions/api/sos/delete.js
+          node --check functions/api/sos/contact/accept.js
+          node --check sos/aceitar/app.js
           node .github/maison-product/sos/validate_sos.mjs
           node .github/maison-product/sos/validate_sos_runtime.mjs
           node .github/maison-product/sos/validate_sos_adapters.mjs
+          node .github/maison-product/sos/validate_sos_api.mjs
           python3 .github/maison-product/sos/validate_sos_schema.py
