@@ -50,7 +50,7 @@ class A11Tests(unittest.TestCase):
     def test_feedback(self):
         r=evaluate(inp(),confidence_before=50,rule_version_id=RUL); f=feedback(r); self.assertEqual(f["action"],"increase_confidence"); self.assertFalse(f["public_side_effects"])
     def test_all_source_kinds_supported(self):
-        source_ids={"decision":"dec_"+"1"*36,"experiment":"xrs_"+"2"*36,"journey":"jns_"+"3"*36,"conversion":"cnv_"+"4"*36,"promotion":"opm_"+"5"*36}
+        source_ids={"decision":"dec_"+"1"*36,"experiment":"xrs_"+"2"*36,"journey":"jns_"+"3"*36,"conversion":"cnv_"+"4"*36,"promotion":"opm_"+"5"*36,"content":"cnt_"+"6"*36}
         for kind,sid in source_ids.items():
             r=evaluate(inp(source_kind=kind,source_id=sid),confidence_before=50,rule_version_id=RUL)
             self.assertEqual(r.signal_class,"positive")
