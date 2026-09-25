@@ -1,0 +1,41 @@
+{
+  "contract_version": "CONTENT-AUTHORING-1.0",
+  "module": "MAISON Public Content Authoring",
+  "mode": "draft_and_review_only",
+  "voice_owner": "functions/_lib/maison-content-ontology.js",
+  "visual_direction_owner": ".github/maison-growth/VISUAL-DIRECTION.md",
+  "canonical_intelligence_owner": "Maison Brain",
+  "supported_formats": [
+    "short_video",
+    "story_sequence",
+    "carousel_post",
+    "editorial_page"
+  ],
+  "principles": {
+    "joao_is_public_voice": true,
+    "brain_engine_language_stays_internal": true,
+    "public_copy_must_be_pt_pt": true,
+    "em_dash_and_en_dash_forbidden": true,
+    "diagnosis_or_fake_certainty_forbidden": true,
+    "fake_urgency_or_scarcity_forbidden": true,
+    "commercial_destination_must_already_be_approved": true,
+    "placeholder_copy_forbidden": true,
+    "human_review_required": true,
+    "approval_is_per_piece": true,
+    "automatic_publication": false
+  },
+  "method_translation": {
+    "KISS": "one clear human idea; remove anything not earning its place",
+    "Hormozi": "make value, pain and desired movement concrete without hype",
+    "Yoichi Feral": "allow an unexpected, sharp human turn when it increases recognition",
+    "Schwartz": "meet the audience at the awareness level already present in the signal",
+    "Berger": "make the idea easy to remember, retell or share when naturally useful",
+    "Cialdini_etico": "use proof, consistency, reciprocity or authority only when truthful and non-coercive"
+  },
+  "approval_boundary": {
+    "draft_can_be_created_without_review": true,
+    "manual_distribution_requires_human_review_ref": true,
+    "approval_scope": "content_and_cta",
+    "approval_does_not_publish": true
+  }
+}
