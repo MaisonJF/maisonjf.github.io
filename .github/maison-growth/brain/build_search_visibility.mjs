@@ -86,7 +86,7 @@ export function buildSearchVisibility(){
         mode:'read_only',
         implemented:true,
         credential_gated:true,
-        profiles:['pages','queries','devices','countries','appearance','fresh_pages'],
+        profiles:['pages','queries','devices','countries','appearance','fresh_pages','image_pages','discover_pages'],
         fresh_data:{
           profile:'fresh_pages',
           data_state:'all',
@@ -149,7 +149,7 @@ export function buildSearchVisibility(){
       search_appearance_features:searchAppearance.length,
       product_snippet_impressions:sum(searchAppearance.filter(row=>row.feature==='PRODUCT_SNIPPETS'),'impressions'),
       inspection_targets:DEFAULT_INSPECTION_URLS.length,
-      google_readonly_sensor_tasks:8,
+      google_readonly_sensor_tasks:10,
       baseline_sitemap_submitted:Number(snapshot.sitemap?.submitted||0),
       baseline_public_pages:publicDiscovery.summary.page_count,
       baseline_sitemap_page_delta:Number(snapshot.sitemap?.submitted||0)-publicDiscovery.summary.page_count,
