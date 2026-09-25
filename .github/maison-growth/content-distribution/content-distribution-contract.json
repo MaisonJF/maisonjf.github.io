@@ -8,7 +8,12 @@
   "event_envelope_source": ".github/maison-growth/a1/event-contract-v2.json",
   "brand": {
     "principle": "PÁRA DE IGNORAR! Volta Para Casa.",
-    "axes": ["casa", "corpo", "cabeca", "transversal"],
+    "axes": [
+      "casa",
+      "corpo",
+      "cabeca",
+      "transversal"
+    ],
     "symbol": "Farol",
     "methods": [
       "KISS",
@@ -81,8 +86,11 @@
   "brain_convergence": {
     "input": "canonical refs plus minimal derived human context",
     "output_event_type": "content.performance_observed",
-    "output_envelope": "A1 v2",
-    "learning_consumer": "Brain/A11",
-    "parallel_intelligence_store_prohibited": true
-  }
+    "learning_consumer": "Brain/A11 after central mapping",
+    "parallel_intelligence_store_prohibited": true,
+    "output_ingestion": "A2 contract v1",
+    "output_envelope_after_ingestion": "A1 v2",
+    "central_learning_mapping_owned_here": false
+  },
+  "event_ingestion_source": ".github/maison-growth/a2/source-registry.json"
 }
