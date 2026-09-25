@@ -61,6 +61,11 @@ const graph={
       territories:[...(x.territories||[])],routes:[...(x.routes||[])]
     })),
     needs:(b2b.needs||[]).map(x=>({...x})),
+    researchCandidates:(b2b.researchCandidates||[]).map(x=>({
+      ...x,
+      segments:[...(x.segments||[])],
+      evidence:(x.evidence||[]).map(e=>({...e}))
+    })),
     routes:(b2b.routes||[]).map(x=>({...x})),
     evidencePolicy:{...(b2b.evidencePolicy||{})}
   },
