@@ -15,6 +15,7 @@
     "WORKER_ENABLED": "true",
     "BRAIN_CONTROL_API_ENABLED": "true",
     "A2_INGEST_API_ENABLED": "false",
+    "A11_LEARNING_WRITE_API_ENABLED": "false",
     "BRAIN_PROPOSAL_API_ENABLED": "false",
     "BRAIN_REVIEW_DECISION_ENABLED": "false",
     "KILL_SWITCH": "false",
