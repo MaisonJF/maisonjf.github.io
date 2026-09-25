@@ -3137,3 +3137,73 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--maison-gold)!import
     padding:10px 16px;
   }
 }
+
+
+/* RIO EXPERIÊNCIA · assinatura cromática MAISON · 2026-09-25
+   Esmeralda e Bordeaux dão profundidade; ouro continua reservado à orientação e acção. */
+:root{
+  --maison-emerald:#0d3d2e;
+  --maison-bordeaux:#3d0d1f;
+  --maison-emerald-wash:rgba(13,61,46,.18);
+  --maison-bordeaux-wash:rgba(61,13,31,.16);
+}
+.home-page--final .home-explore{
+  position:relative;
+  background:
+    radial-gradient(circle at 8% 18%,rgba(13,61,46,.14),transparent 30%),
+    radial-gradient(circle at 92% 82%,rgba(61,13,31,.12),transparent 32%);
+}
+.home-page--final .home-explore::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--maison-emerald),var(--maison-gold),var(--maison-bordeaux),transparent);
+  opacity:.62;
+}
+.home-page--final .home-feature--professionals{
+  position:relative;
+}
+.home-page--final .home-feature--professionals::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(135deg,rgba(13,61,46,.045),transparent 42%,rgba(61,13,31,.055));
+}
+.catalogue-page{
+  background:
+    radial-gradient(circle at 6% 8%,rgba(13,61,46,.13),transparent 25%),
+    radial-gradient(circle at 96% 34%,rgba(61,13,31,.10),transparent 28%),
+    var(--maison-noir);
+}
+.catalogue-page .product-digital{
+  position:relative;
+  background:
+    linear-gradient(145deg,rgba(13,61,46,.055),rgba(61,13,31,.045) 70%,transparent);
+}
+.catalogue-page .filters button.on{
+  box-shadow:0 0 0 1px rgba(210,179,111,.24);
+}
+.services-page .primary-service{
+  position:relative;
+}
+.services-page .primary-service::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:min(180px,28vw);
+  height:1px;
+  background:linear-gradient(90deg,var(--maison-emerald),var(--maison-gold),transparent);
+  opacity:.65;
+}
+.services-page .quiet-link{
+  transition:background .22s ease,border-color .22s ease,color .22s ease;
+}
+.services-page .quiet-link:hover,
+.services-page .quiet-link:focus-visible{
+  background:linear-gradient(90deg,rgba(13,61,46,.08),transparent 48%,rgba(61,13,31,.06));
+}
