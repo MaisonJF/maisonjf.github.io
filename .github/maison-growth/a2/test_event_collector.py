@@ -77,6 +77,25 @@ class CollectorUnitTests(unittest.TestCase):
         with self.assertRaises(IdempotencyConflict):
             collector.ingest(changed)
 
+    def test_offer_interaction_is_privacy_safe_and_normalized(self):
+        event = valid_site(
+            event_type="offer.click",
+            idempotency_key="site:offer:click:0001",
+            metadata={
+                "path": "/teste/",
+                "surface": "recommendation",
+                "offer_id": "tarot",
+                "recommendation_source": "teste",
+                "recommendation_result": "clareza",
+                "recommendation_route": "talk",
+                "recommendation_brain": "offer-brain-v1",
+            },
+        )
+        normalized = normalize_ingestion(event)
+        self.assertEqual(normalized["event_type"], "offer.click")
+        self.assertEqual(normalized["metadata"]["offer_id"], "tarot")
+        self.assertNotIn("answer", normalized["metadata"])
+
     def test_unknown_source_rejected(self):
         with self.assertRaises(UnknownSource):
             normalize_ingestion(valid_site(source="mystery"))
