@@ -23,25 +23,33 @@ const slug=value=>String(value||'')
 const oceans=JSON.parse(fs.readFileSync(OCEANS,'utf8'));
 const pdiThemeGroups=groupExactThemeSignals();
 const pdiSourceStats=pdiThemeSourceStats();
-const pdiGrowthThemes=pdiThemeGroups.map(group=>({
-  candidateKey:group.candidateKey,
-  preferredLabel:group.preferredLabel,
-  slugs:group.slugs,
-  sources:group.sources,
-  evidence:group.evidence,
-  questionDesignSlots:STAGES.map(stage=>({
-    id:'pdi_source_slot_'+slug(group.candidateKey)+'_'+stage,
-    stage,
-    status:'needs_editorial'
-  })),
-  bodyStored:false,
-  approvalRequired:true,
-  automaticActivation:false,
-  status:'needs_editorial'
-}));
 let previous={items:[]};
 try{ previous=JSON.parse(fs.readFileSync(QUEUE,'utf8')); }catch{}
 const previousById=new Map((previous.items||[]).map(x=>[x.id,x]));
+const previousPdiByKey=new Map((previous.pdiGrowth?.themes||[]).map(x=>[x.candidateKey,x]));
+const pdiGrowthThemes=pdiThemeGroups.map(group=>{
+  const prior=previousPdiByKey.get(group.candidateKey)||{};
+  const priorSlots=new Map((prior.questionDesignSlots||[]).map(x=>[x.stage,x]));
+  return {
+    candidateKey:group.candidateKey,
+    preferredLabel:group.preferredLabel,
+    slugs:group.slugs,
+    sources:group.sources,
+    evidence:group.evidence,
+    questionDesignSlots:STAGES.map(stage=>({
+      id:'pdi_source_slot_'+slug(group.candidateKey)+'_'+stage,
+      stage,
+      status:priorSlots.get(stage)?.status||'needs_editorial'
+    })),
+    bodyStored:false,
+    approvalRequired:true,
+    automaticActivation:false,
+    status:prior.status||'needs_editorial',
+    ...(prior.reviewedAt?{reviewedAt:prior.reviewedAt}:{}),
+    ...(prior.reviewNote?{reviewNote:prior.reviewNote}:{}),
+    ...(prior.editorialDecision?{editorialDecision:prior.editorialDecision}:{})
+  };
+});
 
 const keepHumanState=(id,base)=>{
   const prior=previousById.get(id)||{};
