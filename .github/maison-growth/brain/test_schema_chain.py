@@ -125,7 +125,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
                 "journey_id":None,
                 "asset_id":None,
                 "need_id":None,
-                "solution_id":"sol_"+"9"*36,
+                "solution_id":"sol_018f4d7a-1c2b-7abc-8def-999999999999",
                 "value_minor":3500 if event_type in {"b2b.purchase","b2b.recurrence"} else None,
                 "currency":"EUR" if event_type in {"b2b.purchase","b2b.recurrence"} else None,
                 "privacy_class":"pseudonymous",
