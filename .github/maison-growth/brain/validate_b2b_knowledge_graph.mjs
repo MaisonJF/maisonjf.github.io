@@ -43,11 +43,18 @@ function routeBackingFile(route){
   return direct+'.html';
 }
 
-const canonicalOfferTypes=new Set(['b2b','wholesale','personalisation','corporate_gifting','workshop','digital_product','licensing']);
+const a14ToA3={
+  b2b:'b2b',
+  wholesale:'b2b',
+  corporate_gifting:'b2b',
+  workshop:'service',
+  digital_product:'future_product',
+  licensing:'b2b'
+};
 for(const offer of MAISON_B2B_BRAIN.offerFamilies||[]){
   assert(offer.claimLimit,'b2b_offer_claim_limit_missing:'+offer.id);
-  assert(canonicalOfferTypes.has(offer.offerType),'b2b_offer_type_not_canonical:'+offer.id);
-  assert(['b2b','service','future_product'].includes(offer.a3SolutionType),'b2b_a3_solution_type_invalid:'+offer.id);
+  assert(a14ToA3[offer.offerType],'b2b_offer_type_not_canonical:'+offer.id);
+  assert(offer.a3SolutionType===a14ToA3[offer.offerType],'b2b_a14_a3_mapping_mismatch:'+offer.id);
   if(['active_quote','manual_proposal','pilot_by_conversation'].includes(offer.status)){
     assert(Array.isArray(offer.routes)&&offer.routes.length>0,'b2b_offer_route_missing:'+offer.id);
     for(const route of offer.routes){
