@@ -22,12 +22,14 @@
     "change_one_dimension_at_a_time": true,
     "same_campaign_required": true,
     "same_thesis_required": true,
-    "same_platform_required_except_format_comparison": true,
     "commercial_destination_routing_owned_by_A8": true,
     "randomized_experiment_claim": false,
     "causal_claim": false,
     "automatic_winner": false,
-    "automatic_promotion": false
+    "automatic_promotion": false,
+    "same_channel_required_for_hook_and_cta": true,
+    "same_platform_required_for_format": true,
+    "cross_platform_comparison_forbidden": true
   },
   "cadence_rules": {
     "manual_slots_only": true,
