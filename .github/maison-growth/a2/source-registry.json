@@ -104,6 +104,11 @@
       "allowed_event_prefixes": ["content."],
       "metadata": {
         "content_id": {"type": "token", "maxLength": 100},
+        "campaign_id": {"type": "token", "maxLength": 100},
+        "thesis_id": {"type": "token", "maxLength": 100},
+        "comparison_id": {"type": "token", "maxLength": 100},
+        "comparison_dimension": {"type": "token", "maxLength": 80},
+        "variant_key": {"type": "token", "maxLength": 100},
         "platform": {"type": "token", "maxLength": 80},
         "format": {"type": "token", "maxLength": 80},
         "intent": {"type": "token", "maxLength": 80},
