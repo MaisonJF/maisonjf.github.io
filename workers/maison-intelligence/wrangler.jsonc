@@ -49,7 +49,8 @@
     "ANTHROPIC_ENABLED": "false",
     "ANTHROPIC_MODEL": "",
     "ZERO_COST_MODE": "true",
-    "ZERO_COST_OBSERVE_ACTIVATION": "true"
+    "ZERO_COST_OBSERVE_ACTIVATION": "true",
+    "OPENROUTER_FALLBACK_MODELS_JSON": "[\"qwen/qwen3.8-27b:free\",\"nvidia/nemotron-3-super-120b-a12b:free\",\"z-ai/glm-5.2:free\"]"
   },
   "ai": {
     "binding": "AI"
