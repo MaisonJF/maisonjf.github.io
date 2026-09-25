@@ -200,7 +200,7 @@ async function processSearchVisibilityTask(env, task) {
   if (!control.enabled) return { skipped: control.reason };
   if (await alreadyDone(env, task.taskKey)) return { skipped: 'duplicate_task' };
   const day = task.day || utcDay();
-  const cap = env.MAX_DAILY_CALLS_PER_SEARCH_SOURCE || '8';
+  const cap = env.MAX_DAILY_CALLS_PER_SEARCH_SOURCE || '10';
   const usageKey = 'search:' + task.providerId;
   if (!(await underDailyCap(env, usageKey, day, cap))) return { skipped: 'daily_cap' };
 
@@ -336,7 +336,7 @@ async function enqueueSearchVisibilityRun(env, scheduledDate) {
   for (const searchTask of configured) {
     if (!searchVisibilityDue(searchTask, scheduledDate)) continue;
     const usageKey = 'search:' + searchTask.providerId;
-    const cap = env.MAX_DAILY_CALLS_PER_SEARCH_SOURCE || '8';
+    const cap = env.MAX_DAILY_CALLS_PER_SEARCH_SOURCE || '10';
     if (!(await underDailyCap(env, usageKey, day, cap))) continue;
     const promptFingerprint = await sha256Hex(searchVisibilityTaskIdentity(searchTask));
     messages.push({ body: {
