@@ -76,6 +76,58 @@ export const MAISON_B2B_BRAIN={
     {id:'testar',label:'Testar uma nova linha sem começar demasiado grande',opportunityType:'pilot'},
     {id:'presentear',label:'Criar presentes para clientes, hóspedes, equipa, parceiros ou ocasiões',opportunityType:'gifting'}
   ],
+  professionalNetwork:{
+    status:'internal_model_validation_required',
+    principle:'Ensinar pode ser distribuído; a chancela, o método e a autoridade de certificação permanecem MAISON.',
+    credentialIssuer:'maison-jf',
+    franchiseStatus:'not_yet',
+    levels:[
+      {
+        id:'certified_professional',
+        label:'Profissional Certificado MAISON',
+        can:['aplicar_metodos_autorizados','usar_materiais_licenciados','identificar_se_como_profissional_certificado'],
+        cannot:['formar_terceiros','emitir_certificacao_maison','sublicenciar_marca','alterar_metodo_como_se_fosse_maison']
+      },
+      {
+        id:'certified_facilitator',
+        label:'Facilitador Certificado MAISON',
+        can:['aplicar_metodos_autorizados','facilitar_workshops_autorizados','usar_materiais_licenciados','identificar_se_como_facilitador_certificado'],
+        cannot:['formar_novos_profissionais','emitir_certificacao_maison','sublicenciar_marca','criar_curriculo_maison_paralelo']
+      },
+      {
+        id:'licensed_trainer',
+        label:'Formador Licenciado MAISON',
+        can:['ministrar_formacao_maison_autorizada','acompanhar_praticantes','usar_curriculo_e_materiais_licenciados'],
+        cannot:['emitir_certificacao_final_em_nome_proprio','sublicenciar_marca','nomear_outros_formadores_sem_aprovacao_maison','alterar_criterios_de_certificacao']
+      },
+      {
+        id:'territorial_partner',
+        label:'Parceiro Territorial MAISON',
+        status:'future_only_after_validation',
+        can:['operar_modelo_local_aprovado','coordenar_rede_local_quando_contratualmente_autorizado'],
+        cannot:['existir_sem_modelo_economico_validado','conceder_subfranquias_sem_contrato_especifico','apropriar_se_da_propriedade_intelectual_maison']
+      }
+    ],
+    safeguards:{
+      sublicensing:false,
+      centralCertification:true,
+      brandUseByWrittenLicence:true,
+      curriculumControl:'maison',
+      qualityReviewRequired:true,
+      renewalRequired:true,
+      clinicalClaimsForbidden:true,
+      officialQualificationClaimsForbiddenUnlessLegallySupported:true
+    },
+    economicsHypotheses:[
+      'formacao_inicial',
+      'renovacao_licenca',
+      'licenca_de_materiais',
+      'taxa_por_turma_ou_certificacao',
+      'kits_e_reposicao_de_produtos',
+      'auditoria_ou_supervisao_de_qualidade'
+    ],
+    validationRule:'Não definir royalties, exclusividades territoriais, direito de sublicença ou fees de franquia antes de validar procura, margem, capacidade de suporte, qualidade e enquadramento jurídico.'
+  },
   researchCandidates:[
     {
       id:'hospitality_guest_experience',
@@ -158,6 +210,16 @@ export function maisonB2bKnowledgeContext(){
       id:x.id,label:x.label,status:x.status,territories:[...x.territories],routes:[...x.routes]
     })),
     needs:MAISON_B2B_BRAIN.needs.map(x=>({...x})),
+    professionalNetwork:{
+      ...MAISON_B2B_BRAIN.professionalNetwork,
+      levels:(MAISON_B2B_BRAIN.professionalNetwork?.levels||[]).map(level=>({
+        ...level,
+        can:[...(level.can||[])],
+        cannot:[...(level.cannot||[])]
+      })),
+      safeguards:{...(MAISON_B2B_BRAIN.professionalNetwork?.safeguards||{})},
+      economicsHypotheses:[...(MAISON_B2B_BRAIN.professionalNetwork?.economicsHypotheses||[])]
+    },
     researchCandidates:(MAISON_B2B_BRAIN.researchCandidates||[]).map(x=>({
       ...x,
       segments:[...(x.segments||[])],
