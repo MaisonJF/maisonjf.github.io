@@ -143,7 +143,30 @@ if (ROOT / health_gate_rel).exists():
     else:
         ok("Global health gate is wired into GitHub Actions")
 
-# 5) Inventory direct production writes to canonical A1 events.
+# 5) Canonical A2 runtime readiness and commercial privacy classification.
+a2_permissions_rel = ".github/maison-growth/a2/collector-permissions.json"
+a2_permissions_text = read(a2_permissions_rel)
+if a2_permissions_text:
+    try:
+        a2_permissions = json.loads(a2_permissions_text)
+    except json.JSONDecodeError as exc:
+        fail(f"{a2_permissions_rel} is invalid JSON: {exc}")
+    else:
+        if (
+            a2_permissions.get("public_http_endpoint_provisioned") is False
+            and a2_permissions.get("cloudflare_resources_provisioned") is False
+        ):
+            warn("Canonical A2 collector has no provisioned runtime endpoint/resources; A2-valid producers remain contract-only until central activation")
+
+commerce_writer_text = read("functions/_lib/commerce-events.js")
+if (
+    "stripe_session_id" in commerce_writer_text
+    and "privacy_class" in commerce_writer_text
+    and "'anonymous'" in commerce_writer_text
+):
+    warn("Stripe commerce event stores a linkable Stripe session identifier while marking the A1 event anonymous; review pseudonymisation/privacy classification")
+
+# 6) Inventory direct production writes to canonical A1 events.
 direct_writers: list[str] = []
 for path in ROOT.rglob("*"):
     if not path.is_file() or path.suffix not in {".js", ".mjs", ".py"}:
@@ -174,7 +197,7 @@ if unexpected:
 else:
     ok("No unexpected direct production writers into canonical A1 events")
 
-# 6) Flag brittle structural counts. These are informational until Architecture replaces them.
+# 7) Flag brittle structural counts. These are informational until Architecture replaces them.
 for rel in [
     ".github/maison-growth/vault/validate_pdi_registry.mjs",
     ".github/maison-growth/brain/test_digital_experience_coverage.py",
