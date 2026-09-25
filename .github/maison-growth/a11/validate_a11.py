@@ -203,7 +203,7 @@ def sql_validation():
 def main():
     contracts()
     sql_validation()
-    for test_file in ("test_a11.py","test_content_bridge.py"):
+    for test_file in ("test_a11.py","test_content_bridge.py","test_runtime_cycle.py"):
         p=subprocess.run([sys.executable,str(ROOT/test_file)],cwd=str(ROOT),capture_output=True,text=True)
         if p.returncode:
             print(p.stdout)
