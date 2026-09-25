@@ -68,6 +68,26 @@ async function all(statement) {
   return Array.isArray(out?.results) ? out.results : [];
 }
 
+const B2B_METADATA_KEYS=new Set([
+  'interest','origin','business','goal','gap','client','model','scale','start','result_type',
+  'b2b_stage','offer_family','recurrence_type'
+]);
+function safeB2bMetadata(raw) {
+  if (!raw) return {};
+  try {
+    const value=JSON.parse(raw);
+    if (!value || typeof value!=='object' || Array.isArray(value)) return {};
+    const out={};
+    for (const [key,item] of Object.entries(value)) {
+      if (!B2B_METADATA_KEYS.has(key)) continue;
+      if (typeof item==='string' || typeof item==='number' || typeof item==='boolean') out[key]=item;
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}
+
 async function feed(env, url) {
   const limit=parseLimit(url);
   const after=parseAfter(url);
@@ -109,6 +129,62 @@ async function feed(env, url) {
     kind:'brain_prebrain_feed',
     rows,
     next_cursor:last ? { after:last.observed_at, after_id:last.observation_id } : null
+  });
+}
+
+async function b2bFeedback(env, url) {
+  const limit=parseLimit(url);
+  const after=parseAfter(url);
+  const afterId=parseAfterId(url,'cnv_');
+  const fields=`
+    c.conversion_id,c.source_event_id,c.solution_id,c.conversion_kind,
+    e.event_type,e.occurred_at,c.revenue_minor,c.currency,e.metadata_json
+  `;
+  const where=`
+    s.solution_type='b2b'
+    AND e.source='commerce'
+    AND e.event_type IN ('b2b.lead','b2b.proposal','b2b.pilot','b2b.order','b2b.purchase','b2b.recurrence')
+  `;
+  let statement;
+  if (after) {
+    statement=env.GROWTH_DB.prepare(`
+      SELECT ${fields}
+      FROM conversions c
+      JOIN events e ON e.event_id=c.source_event_id
+      JOIN solutions s ON s.solution_id=c.solution_id
+      WHERE ${where}
+        AND (e.occurred_at > ? OR (e.occurred_at = ? AND c.conversion_id > ?))
+      ORDER BY e.occurred_at,c.conversion_id
+      LIMIT ?
+    `).bind(after,after,afterId,limit);
+  } else {
+    statement=env.GROWTH_DB.prepare(`
+      SELECT ${fields}
+      FROM conversions c
+      JOIN events e ON e.event_id=c.source_event_id
+      JOIN solutions s ON s.solution_id=c.solution_id
+      WHERE ${where}
+      ORDER BY e.occurred_at,c.conversion_id
+      LIMIT ?
+    `).bind(limit);
+  }
+  const rows=(await all(statement)).map(row=>({
+    conversion_id:row.conversion_id,
+    source_event_id:row.source_event_id,
+    solution_id:row.solution_id,
+    conversion_kind:row.conversion_kind,
+    event_type:row.event_type,
+    stage:String(row.event_type||'').replace(/^b2b\./,''),
+    occurred_at:row.occurred_at,
+    revenue_minor:row.revenue_minor,
+    currency:row.currency,
+    metadata:safeB2bMetadata(row.metadata_json)
+  }));
+  const last=rows.at(-1);
+  return json({
+    kind:'brain_b2b_feedback',
+    rows,
+    next_cursor:last ? { after:last.occurred_at, after_id:last.conversion_id } : null
   });
 }
 
@@ -522,6 +598,7 @@ export async function handleBrainControlRequest(request, env) {
   try {
     if (url.pathname === '/internal/brain/feed') return await feed(env,url);
     if (url.pathname === '/internal/brain/cash-feedback') return await cashFeedback(env,url);
+    if (url.pathname === '/internal/brain/b2b-feedback') return await b2bFeedback(env,url);
     if (url.pathname === '/internal/brain/learning') return await learningContext(env,url);
     if (url.pathname === '/internal/brain/review-queue') return await reviewQueue(env,url);
     if (url.pathname === '/internal/brain/approved-validations') return await approvedValidations(env,url);
