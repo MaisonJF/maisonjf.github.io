@@ -1,0 +1,59 @@
+{
+  "contract_version": "SOS.API.1",
+  "status": "routes_present_disabled_by_default",
+  "kill_switch": "MAISON_SOS_API_ENABLED",
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/api/sos/setup",
+      "auth": "supabase",
+      "purpose": "configure daily check-in and send trusted-contact invitation server-side"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sos/status",
+      "auth": "supabase",
+      "purpose": "read safe operational state without contact endpoint"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sos/checkin",
+      "auth": "supabase",
+      "purpose": "ESTOU AQUI",
+      "idempotency_header": "Idempotency-Key"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sos/pause",
+      "auth": "supabase",
+      "purpose": "pause and cancel pending window/actions"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sos/resume",
+      "auth": "supabase",
+      "purpose": "resume with a new daily window"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sos/delete",
+      "auth": "supabase",
+      "purpose": "delete operational account and cascaded product data",
+      "confirmation": "DELETE_SOS"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sos/contact/accept",
+      "auth": "invite_token",
+      "purpose": "explicit trusted-contact consent"
+    }
+  ],
+  "invariants": {
+    "setup_never_returns_invite_token": true,
+    "contact_endpoint_never_returned": true,
+    "mutating_routes_same_origin_when_origin_header_present": true,
+    "responses_no_store": true,
+    "no_brain_access": true,
+    "no_checkout_or_stripe": true
+  }
+}
