@@ -128,7 +128,22 @@ if discovery_builder.exists():
         else:
             ok("Derived-context --check path is non-mutating for public discovery / Knowledge Graph")
 
-# 4) Inventory direct production writes to canonical A1 events.
+# 4) A central health gate must be wired into CI, not merely exist as dead code.
+health_gate_rel = ".github/maison-growth/brain/validate_global_health_gate.py"
+if (ROOT / health_gate_rel).exists():
+    workflow_text = "\n".join(
+        p.read_text(encoding="utf-8", errors="ignore")
+        for p in (ROOT / ".github/workflows").glob("*.yml")
+    ) + "\n" + "\n".join(
+        p.read_text(encoding="utf-8", errors="ignore")
+        for p in (ROOT / ".github/workflows").glob("*.yaml")
+    )
+    if "validate_global_health_gate.py" not in workflow_text:
+        fail("Global health gate exists but no GitHub Actions workflow executes it")
+    else:
+        ok("Global health gate is wired into GitHub Actions")
+
+# 5) Inventory direct production writes to canonical A1 events.
 direct_writers: list[str] = []
 for path in ROOT.rglob("*"):
     if not path.is_file() or path.suffix not in {".js", ".mjs", ".py"}:
@@ -159,7 +174,7 @@ if unexpected:
 else:
     ok("No unexpected direct production writers into canonical A1 events")
 
-# 5) Flag brittle structural counts. These are informational until Architecture replaces them.
+# 6) Flag brittle structural counts. These are informational until Architecture replaces them.
 for rel in [
     ".github/maison-growth/vault/validate_pdi_registry.mjs",
     ".github/maison-growth/brain/test_digital_experience_coverage.py",
