@@ -298,6 +298,24 @@ services:
       - maison_model_cache:/model-cache
     command: ["python","/opt/maison-growth/brain/commercial_cycle.py"]
 
+  brain-learn-cycle:
+    profiles: ["brain-learn"]
+    build:
+      context: ../../..
+      dockerfile: .github/maison-growth/runtime/Dockerfile.brain
+    restart: "no"
+    environment:
+      BRAIN_CONTROL_API_URL: ${BRAIN_CONTROL_API_URL:?set BRAIN_CONTROL_API_URL}
+      BRAIN_CONTROL_TOKEN: ${BRAIN_CONTROL_TOKEN:?set BRAIN_CONTROL_TOKEN}
+      A11_LEARNING_WRITE_API_URL: ${A11_LEARNING_WRITE_API_URL:-${BRAIN_CONTROL_API_URL}}
+      A11_LEARNING_WRITE_TOKEN: ${A11_LEARNING_WRITE_TOKEN:?set A11_LEARNING_WRITE_TOKEN}
+      CF_ACCESS_CLIENT_ID: ${CF_ACCESS_CLIENT_ID:-}
+      CF_ACCESS_CLIENT_SECRET: ${CF_ACCESS_CLIENT_SECRET:-}
+      MAISON_A11_LEARNING_ENABLED: ${MAISON_A11_LEARNING_ENABLED:-false}
+      MAISON_A11_LEARNING_PAGE_SIZE: ${MAISON_A11_LEARNING_PAGE_SIZE:-100}
+      MAISON_A11_LEARNING_MAX_PAGES: ${MAISON_A11_LEARNING_MAX_PAGES:-20}
+    command: ["python","/opt/maison-growth/a11/runtime_cycle.py"]
+
   brain-observe-cycle:
     profiles: ["brain-observe"]
     build:
