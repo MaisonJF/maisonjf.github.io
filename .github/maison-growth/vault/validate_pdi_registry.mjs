@@ -8,12 +8,12 @@ const sources=pdiThemeSourceStats();
 const registry=listPdiThemes();
 const stats=pdiThemeRegistryStats();
 
-assert.equal(signals.length,261);
-assert.equal(sources.exactGroups,260);
-assert.equal(stats.sourceThemes,260);
-assert.equal(stats.registered,262);
+assert.equal(signals.length,292);
+assert.equal(sources.exactGroups,268);
+assert.equal(stats.sourceThemes,268);
+assert.equal(stats.registered,270);
 assert.equal(stats.curatedThemes,2);
-assert.equal(sources.ocean,111);
+assert.equal(sources.ocean,142);
 assert.equal(stats.minimumLiveQuestions,28);
 assert.equal(new Set(registry.map(x=>x.slug)).size,registry.length);
 assert.equal(getPdiTheme('relacoes')?.label,'Relações');
@@ -27,4 +27,4 @@ assert.equal(isPublicPdiTheme('amor-e-relacoes'),false);
 assert.equal(isPublicPdiTheme('relacoes'),true);
 assert.equal(isPublicPdiTheme('amor-sem-filtro'),true);
 
-console.log('PDI theme registry: OK · 260 source themes + 2 curated themes · 111 Ocean signals · legacy Amor & Relações hidden publicly');
+console.log('PDI theme registry: OK · 268 source themes + 2 curated themes · 142 Ocean signals · legacy Amor & Relações hidden publicly');
