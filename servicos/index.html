@@ -39,7 +39,10 @@
 .quiet-link:last-child{border-bottom:1px solid var(--line)}
 .quiet-link small{color:#857d73;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
 .quiet-link strong{font:400 clamp(30px,3.2vw,44px)/1 var(--serif)}
-.quiet-link span{color:#bca77d;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.quiet-link>span{color:#bca77d;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.quiet-link__meta{display:grid;gap:7px;justify-items:end;text-align:right}
+.quiet-link__meta span{color:#bca77d;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.quiet-link__meta span:first-child{color:#d8d0c2;font:400 16px/1.2 var(--serif);letter-spacing:0;text-transform:none}
 .quiet-link:hover strong{color:#f4ede1}
 .services-footer{display:flex;justify-content:space-between;gap:30px;align-items:center;padding-top:70px}
 .services-footer p{margin:0;color:#827b72}
@@ -51,14 +54,14 @@
   .primary-service__note{padding-left:0;border-left:0}
   .services-hero{min-height:auto;padding-bottom:72px}
   .services-hero__media{min-height:440px;max-width:650px}
-  .quiet-link{grid-template-columns:1fr auto;gap:14px}
+  .quiet-link{grid-template-columns:1fr auto;gap:14px}.quiet-link__meta{grid-column:2;grid-row:2;align-self:center}
   .quiet-link small{grid-column:1/-1}
 }
 @media(max-width:560px){
   .services-hero h1{font-size:clamp(54px,16vw,76px)}
   .primary-service__body{grid-template-columns:1fr;margin-top:34px;padding-top:24px}
   .primary-service__actions{align-items:flex-start;flex-direction:column}
-  .quiet-link{grid-template-columns:1fr}
+  .quiet-link{grid-template-columns:1fr}.quiet-link__meta{grid-column:1;grid-row:auto;justify-items:start;text-align:left}
   .services-footer{align-items:flex-start;flex-direction:column}
 }
 </style>
@@ -95,7 +98,7 @@
       <h2>Uma consulta. Outro ângulo.</h2>
     </div>
     <div class="primary-service__body">
-      <div class="primary-service__price">35 €</div>
+      <div class="primary-service__price" data-service-price="tarot" aria-label="Preço"></div>
       <div class="primary-service__actions">
         <button class="primary-buy" type="button" data-buy-service="tarot">Marcar consulta →</button>
         <a class="whatsapp-question" target="_blank" rel="noopener noreferrer" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Consulta%20de%20Tarot.">Tenho uma dúvida</a>
@@ -116,20 +119,20 @@
     <span id="continuidade" class="anchor-alias" aria-hidden="true"></span>
     <span id="acompanhamento" class="anchor-alias" aria-hidden="true"></span>
     <a class="quiet-link" href="../contacto/?interesse=acompanhamento">
-      <small>Continuidade</small><strong>Acompanhamento</strong><span>Falar connosco →</span>
+      <small>Continuidade</small><strong>Acompanhamento</strong><div class="quiet-link__meta"><span data-service-price="acompanhamento"></span><span>Falar connosco →</span></div>
     </a>
     <a class="quiet-link" id="mentoria" href="../contacto/?interesse=mentoria">
-      <small>Estrutura</small><strong>Mentoria</strong><span>Perceber como funciona →</span>
+      <small>Estrutura</small><strong>Mentoria</strong><div class="quiet-link__meta"><span data-service-price="mentoria"></span><span>Perceber como funciona →</span></div>
     </a>
     <a class="quiet-link" href="../portas/companhia">
-      <small>Presença</small><strong>Não quero atravessar isto sozinho.</strong><span>Descobrir →</span>
+      <small>Presença</small><strong>Não quero atravessar isto sozinho.</strong><div class="quiet-link__meta"><span data-service-price="companhia"></span><span>Descobrir →</span></div>
     </a>
     <a class="quiet-link" id="ritual-personalizado" href="../contacto/?interesse=ritual-personalizado">
-      <small>Ritual · Sob orçamento</small><strong>Ritual Personalizado</strong><span>Explicar a intenção →</span>
+      <small>Ritual</small><strong>Ritual Personalizado</strong><div class="quiet-link__meta"><span data-service-price="ritual-personalizado"></span><span>Explicar a intenção →</span></div>
     </a>
     <span id="especiais" class="anchor-alias" aria-hidden="true"></span>
     <a class="quiet-link" href="../contacto/?interesse=pedido-especial">
-      <small>Pedidos especiais</small><strong>Nem tudo vem pronto.</strong><span>Explicar o pedido →</span>
+      <small>Pedidos especiais</small><strong>Nem tudo vem pronto.</strong><div class="quiet-link__meta"><span data-service-price="pedidos-especiais"></span><span>Explicar o pedido →</span></div>
     </a>
   </section>
 
@@ -139,8 +142,14 @@
   </div>
 </main>
 
+<script src="../data/services.js?v=20260925-experience1"></script>
 <script>
 (() => {
+  document.querySelectorAll('[data-service-price]').forEach(node=>{
+    const service=window.MAISON_SERVICE_BY_SLUG?.[node.dataset.servicePrice];
+    if(service) node.textContent=service.price||'Sob orçamento';
+  });
+
   const header=document.querySelector('.site-header'),toggle=document.querySelector('.maison-menu-toggle'),menu=document.querySelector('#main-navigation');
   if(header&&toggle&&menu){
     const close=()=>{header.classList.remove('site-header--menu-open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Abrir menu')};
