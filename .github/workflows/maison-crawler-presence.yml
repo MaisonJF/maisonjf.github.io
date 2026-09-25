@@ -1,0 +1,65 @@
+name: Maison Crawler Presence Audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  crawler-presence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_READ_API_TOKEN || secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate crawler policy
+        run: |
+          node .github/maison-growth/brain/validate_crawler_policy.mjs
+          node --test .github/maison-growth/brain/test_audit_cloudflare_crawlers.mjs
+
+      - name: Guard read-only credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+
+      - name: Audit verified crawler presence
+        run: node .github/maison-growth/brain/audit_cloudflare_crawlers.mjs --output=/tmp/maison-crawler-presence.json
+
+      - name: Summarize without claiming unobservable traffic
+        shell: bash
+        run: |
+          node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          const fs=require('fs');
+          const data=JSON.parse(fs.readFileSync('/tmp/maison-crawler-presence.json','utf8'));
+          console.log('## MAISON crawler presence · read-only');
+          console.log('');
+          console.log('- Window: '+data.window.start+' → '+data.window.end);
+          console.log('- Observability: **'+data.observability+'**');
+          console.log('- PII persisted: **false**');
+          console.log('- Mutations performed: **false**');
+          if(data.observability==='available'){
+            console.log('');
+            console.log('| Crawler | Operator | Requests | Observed |');
+            console.log('|---|---|---:|---|');
+            for(const row of data.crawlers){
+              console.log('| '+row.user_agent+' | '+row.operator+' | '+row.requests+' | '+(row.observed?'yes':'no')+' |');
+            }
+            console.log('');
+            console.log('Cloudflare adaptive analytics may be sampled; counts are observational, not an indexation guarantee.');
+          }else{
+            console.log('');
+            console.log('Crawler traffic was not observable with the current Cloudflare plan/read token. No absence claim is made.');
+            console.log('');
+            console.log('Reason: `'+String(data.reason||'unknown').replace(/\`/g,'')+'`');
+          }
+          NODE
