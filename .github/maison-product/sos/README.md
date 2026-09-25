@@ -208,7 +208,7 @@ Depois desta fundação passar CI, o RIO PRODUTO DIGITAL pode construir, nesta o
 2. verificar o remetente/domínio no Brevo e criar a chave transaccional;
 3. provisionar o D1 operacional `MAISON_SOS_DB` e aplicar as duas migrations;
 4. instalar secrets e bindings sem os colocar no repositório;
-5. construir a UI/PWA principal **ESTOU AQUI** sobre a autenticação já provisionada;
+5. integrar a UI/PWA principal **ESTOU AQUI** já criada com a sessão Supabase provisionada;
 6. testar end-to-end convite → aceitação → lembrete → grace → aviso com endereços controlados;
 7. actualizar a política pública de privacidade antes de recolher dados reais;
 8. ligar a ingestão da projecção SOS apenas quando o runtime A2 canónico estiver activado;
