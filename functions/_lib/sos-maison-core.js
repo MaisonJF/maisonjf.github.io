@@ -1,3 +1,5 @@
+import { nextSosDueAt } from './sos-time.js';
+
 /* MAISON JF® · SOS Maison JF foundation core
    Pure product rules only: no network, persistence, messaging provider or PII. */
 
@@ -9,7 +11,6 @@ export const SOS_PRODUCT={
   defaultGraceMinutes:60
 };
 
-const HOUR=60*60*1000;
 const MINUTE=60*1000;
 
 function ms(value){
@@ -40,10 +41,11 @@ export function confirmPresence(snapshot={},nowIso=new Date().toISOString()){
   if(!configured(snapshot))throw new Error('sos_not_configured');
   if(snapshot.paused_at)throw new Error('sos_paused');
   const now=ms(nowIso);
-  const cadenceHours=Number.isFinite(snapshot.cadence_hours)
-    ? Math.max(1,Math.floor(snapshot.cadence_hours))
-    : SOS_PRODUCT.defaultCadenceHours;
-  const nextDue=new Date(now+(cadenceHours*HOUR)).toISOString();
+  const nextDue=nextSosDueAt({
+    afterIso:new Date(now).toISOString(),
+    timeZone:snapshot.timezone,
+    localTime:snapshot.checkin_local_time
+  });
   return {
     ...snapshot,
     last_checkin_at:new Date(now).toISOString(),
