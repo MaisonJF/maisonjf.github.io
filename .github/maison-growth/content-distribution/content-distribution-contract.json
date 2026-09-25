@@ -98,5 +98,6 @@
   },
   "event_ingestion_source": ".github/maison-growth/a2/source-registry.json",
   "operating_system_contract": ".github/maison-growth/content-distribution/operating-system-contract.json",
-  "authoring_contract": ".github/maison-growth/content-distribution/authoring-contract.json"
+  "authoring_contract": ".github/maison-growth/content-distribution/authoring-contract.json",
+  "manual_distribution_contract": ".github/maison-growth/content-distribution/manual-distribution-contract.json"
 }
