@@ -82,6 +82,7 @@ export function sosApiError(error){
     sos_invite_not_found:404,
     sos_invite_revoked:410,
     sos_invite_expired:410,
+    sos_invite_already_accepted:409,
     invalid_sos_contact_endpoint:400,
     invalid_sos_contact_kind:400,
     invalid_sos_timezone:400,
