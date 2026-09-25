@@ -39,6 +39,7 @@ class RemoteSchemaGateTests(unittest.TestCase):
         for name in (
             "brain_prebrain_feed",
             "brain_cash_feedback",
+            "brain_b2b_feedback",
             "autonomy_human_queue_current",
             "a14_approved_offers_ready_for_planning",
             "a14_validation_plans",
@@ -58,15 +59,16 @@ class RemoteSchemaGateTests(unittest.TestCase):
         self.assertIn("wrangler d1 execute", self.inspect)
         self.assertIn("--remote", self.inspect)
 
-    def test_migration_inspector_covers_complete_0001_to_0016_chain(self):
+    def test_migration_inspector_covers_complete_0001_to_0018_chain(self):
         found = re.findall(r"'(00\d{2}_[a-z0-9_]+)'", self.inspect)
         migrations = [item.split("_", 1)[0] for item in found]
         unique_migrations = list(dict.fromkeys(migrations))
         self.assertEqual(
             unique_migrations,
-            [f"{number:04d}" for number in range(1, 17)],
+            [f"{number:04d}" for number in range(1, 19)],
         )
         self.assertIn("missing_or_partial", self.inspect)
+        self.assertIn("maison-b2b", self.inspect)
 
     def test_runtime_helpers_default_to_canonical_growth_database(self):
         self.assertIn('DB_NAME="${1:-maison-growth-engine}"', self.inspect)
