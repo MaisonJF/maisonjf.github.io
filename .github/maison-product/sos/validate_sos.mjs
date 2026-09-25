@@ -14,6 +14,7 @@ const readJson=rel=>JSON.parse(fs.readFileSync(new URL(rel,root),'utf8'));
 const product=readJson('.github/maison-product/sos/product-contract.json');
 const data=readJson('.github/maison-product/sos/operational-data-contract.json');
 const brain=readJson('.github/maison-product/sos/brain-signal-contract.json');
+const projection=readJson('.github/maison-product/sos/a2-projection-contract.json');
 const sources=readJson('.github/maison-growth/a2/source-registry.json');
 
 assert.equal(product.primary_action,'ESTOU AQUI');
@@ -22,6 +23,7 @@ assert.equal(product.convergence.canonical_event_boundary,'A1/A2');
 assert.equal(product.convergence.separate_brain_created,false);
 assert.equal(data.domains.brain_projection.purpose,'aggregate product learning only');
 assert.equal(brain.aggregate_only,true);
+assert.deepEqual([...projection.signals].sort(),[...brain.signal_kinds].sort());
 
 const base={
   activated_at:'2026-09-25T08:00:00.000Z',
@@ -78,6 +80,9 @@ assert.deepEqual(
 );
 assert.equal(JSON.stringify(signal).includes('@'),false);
 assert.equal(JSON.stringify(signal).toLowerCase().includes('phone'),false);
+const pausedSignal=buildSosAggregateSignal({signalKind:'paused',count:3,cadenceBucket:'daily',deliveryOutcome:'not_applicable'});
+assert.equal(pausedSignal.metadata.signal_kind,'paused');
+assert.equal(pausedSignal.metadata.count,3);
 
 const source=sources.sources.sos_product;
 assert.ok(source,'A2 must register sos_product');
