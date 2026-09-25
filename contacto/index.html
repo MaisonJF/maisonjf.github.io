@@ -1,1 +1,79 @@
-<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Falar com a Maison | MAISON JF®</title><meta name="description" content="Fala directamente com a MAISON JF® sobre um produto, consulta, acompanhamento, Presença ou proposta profissional."><meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://maison-jf.com/contacto/"><link rel="stylesheet" href="../maison.css?v=20260922-globalgold1"><script src="../analytics.js" defer></script><style>.contact{min-height:100svh;padding:150px 0 100px;display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}.contact h1{font:400 clamp(54px,8vw,105px)/.9 var(--serif);margin:.2em 0}.contact p{color:#aaa39a;max-width:620px}.context{border:1px solid var(--line);padding:34px;background:#10100f}.context h2{font:400 34px/1.05 var(--serif);margin:.25em 0}.context__price{font:400 22px var(--serif);color:#eee9df}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.micro{font-size:.85rem;color:#777!important;margin-top:18px}.fallback{margin-top:55px;padding-top:30px;border-top:1px solid var(--line)}@media(max-width:760px){.contact{grid-template-columns:1fr;gap:40px;padding-top:115px}}</style></head><body><header class="site-header"><a class="brand" href="../">MAISON JF®</a><nav><a href="../farol">O Farol</a><a href="../teste/">Volta Para Casa</a><a href="../produtos/">Produtos</a><a href="../servicos/">Serviços</a></nav></header><main class="contact shell"><section><p class="eyebrow">Contacto directo</p><h1>Fala com<br>a Maison.</h1><p>Diz numa frase o que te trouxe aqui.</p><div class="fallback"><p>Preferes email?</p><a class="text-link" href="mailto:maisonjf@proton.me">maisonjf@proton.me</a></div></section><section class="context" id="context"><p class="eyebrow">O que escolheste</p><h2 id="title">Quero falar com a Maison</h2><p id="description">Diz em poucas palavras o que procuras.</p><p class="context__price" id="price"></p><div class="actions"><a class="button button--light" id="whatsapp" target="_blank" rel="noopener">Abrir WhatsApp</a><a class="text-link" href="../farol#farol">Ainda não sei o que procuro</a></div><p class="micro">Falar não te obriga a comprar. Preço e condições são confirmados antes.</p></section></main><script>(function(){const track=(name,data)=>window.maisonAnalytics?.track?window.maisonAnalytics.track(name,data):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([name,data]),q=new URLSearchParams(location.search),product=q.get('produto'),interest=q.get('interesse'),price=q.get('preco');const labels={'tarot-expresso':['Uma pergunta','Quero fazer uma pergunta concreta com Tarot.'],tarot:['Uma consulta','Quero olhar para uma situação com Tarot.'],'tarot-terapeutico':['Aprofundar','Quero aprofundar uma situação com mais tempo e contexto.'],'consulta-escrita-breve':['Por escrito, breve','Quero uma resposta concreta por escrito.'],'consulta-escrita-aprofundada':['Por escrito, aprofundada','Quero aprofundar uma situação por escrito.'],escuta:['Escuta Orientada','Quero saber mais sobre a Escuta Orientada.'],acompanhamento:['Acompanhamento','Quero perceber se o Acompanhamento de 4 semanas faz sentido para mim.'],mentoria:['Mentoria','Quero saber como funciona a Mentoria.'],sos:['SOS Maison','Quero saber disponibilidade e condições do SOS Maison.'],'ritual-personalizado':['Ritual Personalizado','Quero explicar o ritual ou intenção que procuro.'],'pedidos-especiais':['Pedidos Físicos','Quero pedir orçamento para um pedido físico, incluindo peças em jesmonite.'],companhia:['Presença','Quero saber disponibilidade e condições para Presença.'],'companhia-friend4rent':['Presença Social','Quero saber disponibilidade e condições para Presença Social.'],'companhia-boyfriend4rent':['Presença Próxima','Quero saber disponibilidade e condições para Presença Próxima.'],'presenca-online':['Presença Online','Quero confirmar disponibilidade para Presença Online de 60 minutos.'],'presenca-social':['Presença Social','Quero confirmar disponibilidade para Presença Social.'],'presenca-proxima':['Presença Próxima','Quero confirmar disponibilidade para Presença Próxima.'],'sos-dia':['SOS 1 dia','Quero confirmar disponibilidade para o SOS 1 dia.'],'sos-semana':['SOS 1 semana','Quero confirmar disponibilidade para o SOS 1 semana.'],b2b:['Proposta profissional / B2B','Quero falar sobre uma proposta para espaço, gabinete, spa, massagista ou loja.'],press:['Press & Media','Quero falar sobre uma entrevista, peça editorial, perfil ou pedido de imprensa.']};const productNames={'escalda-pes':'Escalda-Pés','vela-vidro':'Vela Aromática, tamanho maior','vela-pequena':'Vela Aromática, tamanho pequeno','oleo-massagem':'Óleo de Massagem','nevoa':'Névoa de Ambiente'};let title='Quero falar com a Maison',desc='Abre a conversa e explica em poucas palavras o que procuras.',message='Olá, Maison JF. Vim pelo site e queria falar convosco.';if(product&&productNames[product]){title=productNames[product];desc='Já escolheste o produto. Abre a conversa para confirmar referência, disponibilidade e próximos passos.';message=`Olá, Maison JF. Vim pelo site e tenho interesse em ${productNames[product]}${price?` (${price})`:''}.`;}else if(interest&&labels[interest]){title=labels[interest][0];desc=labels[interest][1];message=`Olá, Maison JF. Vim pelo site e tenho interesse em ${labels[interest][0]}.`;}document.getElementById('title').textContent=title;document.getElementById('description').textContent=desc;if(price)document.getElementById('price').textContent=price;const wa=document.getElementById('whatsapp');wa.href=`https://wa.me/351923318289?text=${encodeURIComponent(message)}`;wa.addEventListener('click',()=>track('contact_whatsapp_click',{product:product||'',interest:interest||'',page_path:location.pathname}));})();</script></body></html>
+<!doctype html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Falar com a Maison | MAISON JF®</title><meta name="description" content="Fala directamente com a MAISON JF® sobre um produto, consulta, acompanhamento, Presença ou proposta profissional."><meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://maison-jf.com/contacto/"><link rel="stylesheet" href="../maison.css?v=20260922-globalgold1"><script src="../analytics.js" defer></script><style>.contact{min-height:100svh;padding:150px 0 100px;display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}.contact h1{font:400 clamp(54px,8vw,105px)/.9 var(--serif);margin:.2em 0}.contact p{color:#aaa39a;max-width:620px}.context{border:1px solid var(--line);padding:34px;background:#10100f}.context h2{font:400 34px/1.05 var(--serif);margin:.25em 0}.context__price{font:400 22px var(--serif);color:#eee9df}.context__summary{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);font-size:.92rem!important;line-height:1.55;color:#9f978c!important}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.micro{font-size:.85rem;color:#777!important;margin-top:18px}.fallback{margin-top:55px;padding-top:30px;border-top:1px solid var(--line)}@media(max-width:760px){.contact{grid-template-columns:1fr;gap:40px;padding-top:115px}}</style></head><body><header class="site-header"><a class="brand" href="../">MAISON JF®</a><nav><a href="../farol">O Farol</a><a href="../teste/">Volta Para Casa</a><a href="../produtos/">Produtos</a><a href="../servicos/">Serviços</a></nav></header><main class="contact shell"><section><p class="eyebrow">Contacto directo</p><h1>Fala com<br>a Maison.</h1><p>Diz numa frase o que te trouxe aqui.</p><div class="fallback"><p>Preferes email?</p><a class="text-link" href="mailto:maisonjf@proton.me">maisonjf@proton.me</a></div></section><section class="context" id="context"><p class="eyebrow">O que escolheste</p><h2 id="title">Quero falar com a Maison</h2><p id="description">Diz em poucas palavras o que procuras.</p><p class="context__price" id="price"></p><p class="context__summary" id="b2bSummary" hidden></p><div class="actions"><a class="button button--light" id="whatsapp" target="_blank" rel="noopener">Abrir WhatsApp</a><a class="text-link" href="../farol#farol">Ainda não sei o que procuro</a></div><p class="micro">Falar não te obriga a comprar. Preço e condições são confirmados antes.</p></section></main><script>(function(){
+const track=(name,data)=>window.maisonAnalytics?.track?window.maisonAnalytics.track(name,data):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([name,data]);
+const q=new URLSearchParams(location.search),product=q.get('produto'),interest=q.get('interesse'),price=q.get('preco'),origin=q.get('origem')||'';
+const labels={
+ 'tarot-expresso':['Uma pergunta','Quero fazer uma pergunta concreta com Tarot.'],
+ tarot:['Uma consulta','Quero olhar para uma situação com Tarot.'],
+ 'tarot-terapeutico':['Aprofundar','Quero aprofundar uma situação com mais tempo e contexto.'],
+ 'consulta-escrita-breve':['Por escrito, breve','Quero uma resposta concreta por escrito.'],
+ 'consulta-escrita-aprofundada':['Por escrito, aprofundada','Quero aprofundar uma situação por escrito.'],
+ escuta:['Escuta Orientada','Quero saber mais sobre a Escuta Orientada.'],
+ acompanhamento:['Acompanhamento','Quero perceber se o Acompanhamento de 4 semanas faz sentido para mim.'],
+ mentoria:['Mentoria','Quero saber como funciona a Mentoria.'],
+ sos:['SOS Maison','Quero saber disponibilidade e condições do SOS Maison.'],
+ 'ritual-personalizado':['Ritual Personalizado','Quero explicar o ritual ou intenção que procuro.'],
+ 'pedidos-especiais':['Pedidos Físicos','Quero pedir orçamento para um pedido físico, incluindo peças em jesmonite.'],
+ companhia:['Presença','Quero saber disponibilidade e condições para Presença.'],
+ 'companhia-friend4rent':['Presença Social','Quero saber disponibilidade e condições para Presença Social.'],
+ 'companhia-boyfriend4rent':['Presença Próxima','Quero saber disponibilidade e condições para Presença Próxima.'],
+ 'presenca-online':['Presença Online','Quero confirmar disponibilidade para Presença Online de 60 minutos.'],
+ 'presenca-social':['Presença Social','Quero confirmar disponibilidade para Presença Social.'],
+ 'presenca-proxima':['Presença Próxima','Quero confirmar disponibilidade para Presença Próxima.'],
+ 'sos-dia':['SOS 1 dia','Quero confirmar disponibilidade para o SOS 1 dia.'],
+ 'sos-semana':['SOS 1 semana','Quero confirmar disponibilidade para o SOS 1 semana.'],
+ b2b:['Proposta profissional / B2B','Quero falar sobre uma proposta para o meu negócio ou organização.'],
+ 'b2b-presentes':['Presentes & gifting B2B','Quero criar uma proposta de presentes, agradecimento ou boas-vindas para clientes, hóspedes, equipa ou parceiros.'],
+ press:['Press & Media','Quero falar sobre uma entrevista, peça editorial, perfil ou pedido de imprensa.']
+};
+const productNames={'escalda-pes':'Escalda-Pés','vela-vidro':'Vela Aromática, tamanho maior','vela-pequena':'Vela Aromática, tamanho pequeno','oleo-massagem':'Óleo de Massagem','nevoa':'Névoa de Ambiente'};
+const maps={
+ business:{loja:'loja / retalho',spa:'spa / bem-estar',terapeuta:'gabinete / terapeuta',alojamento:'alojamento / hospitalidade',servico:'negócio de serviços',outro:'outro projecto'},
+ goal:{ticket:'aumentar ticket médio',recompra:'criar recompra',diferenciar:'diferenciar a experiência',continuar:'prolongar a experiência',boasvindas:'melhorar boas-vindas',testar:'testar uma linha pequena',presentear:'presentes / gifting'},
+ gap:{fim:'experiência termina cedo',extra:'pouca compra complementar',assinatura:'falta assinatura sensorial',escolha:'dúvida sobre produtos',stock:'receio de stock parado',historia:'proposta comercial pouco clara'},
+ client:{recorrente:'clientes recorrentes',ocasional:'clientes ocasionais',turista:'clientes de passagem',presente:'procura por presentes',misto:'perfil misto'},
+ model:{revenda:'revenda',uso:'uso no serviço',ambos:'uso + revenda',boasvindas:'boas-vindas / cortesia',especial:'pequena série / projecto especial',presente:'presente / agradecimento'},
+ scale:{pequeno:'começar pequeno',regular:'selecção com variedade',recorrente:'reposição recorrente',projeto:'projecto específico'},
+ start:{curadoria:'curadoria',categoria:'categoria definida',proposta:'proposta adaptada',conversa:'conversa primeiro'},
+ result:{gifting:'gifting',welcome:'boas-vindas',continuity:'continuidade',ticket:'ticket médio',signature:'assinatura sensorial',resale:'revenda',pilot:'piloto pequeno',proposal:'proposta a organizar'}
+};
+const b2b={};
+for(const key of Object.keys(maps)){
+ const value=q.get('b2b_'+key);
+ if(value&&maps[key][value])b2b[key]=value;
+}
+const summaryParts=[];
+if(b2b.business)summaryParts.push('Negócio: '+maps.business[b2b.business]);
+if(b2b.goal)summaryParts.push('Objectivo: '+maps.goal[b2b.goal]);
+if(b2b.model)summaryParts.push('Formato: '+maps.model[b2b.model]);
+if(b2b.scale)summaryParts.push('Escala: '+maps.scale[b2b.scale]);
+if(b2b.result)summaryParts.push('Resultado: '+maps.result[b2b.result]);
+
+let title='Quero falar com a Maison',desc='Abre a conversa e explica em poucas palavras o que procuras.',message='Olá, Maison JF. Vim pelo site e queria falar convosco.';
+if(product&&productNames[product]){
+ title=productNames[product];
+ desc='Já escolheste o produto. Abre a conversa para confirmar referência, disponibilidade e próximos passos.';
+ message=`Olá, Maison JF. Vim pelo site e tenho interesse em ${productNames[product]}${price?` (${price})`:''}.`;
+}else if(interest&&labels[interest]){
+ title=labels[interest][0];
+ desc=labels[interest][1];
+ message=`Olá, Maison JF. Vim pelo site e tenho interesse em ${labels[interest][0]}.`;
+ if(interest.startsWith('b2b')&&summaryParts.length){
+   desc+=' Mantivemos o contexto do diagnóstico para não teres de começar do zero.';
+   message+='\n\nContexto do diagnóstico:\n- '+summaryParts.join('\n- ');
+ }
+}
+document.getElementById('title').textContent=title;
+document.getElementById('description').textContent=desc;
+if(price)document.getElementById('price').textContent=price;
+const summary=document.getElementById('b2bSummary');
+if(interest?.startsWith('b2b')&&summaryParts.length){
+ summary.hidden=false;
+ summary.textContent=summaryParts.join(' · ');
+}
+const wa=document.getElementById('whatsapp');
+wa.href=`https://wa.me/351923318289?text=${encodeURIComponent(message)}`;
+wa.addEventListener('click',()=>track('contact_whatsapp_click',{
+ product:product||'',interest:interest||'',origin,page_path:location.pathname,
+ b2b_business:b2b.business||'',b2b_goal:b2b.goal||'',b2b_model:b2b.model||'',b2b_scale:b2b.scale||'',b2b_result:b2b.result||''
+}));
+})();</script></body></html>
