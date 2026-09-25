@@ -1,0 +1,39 @@
+name: SOS Product Guard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/maison-product/sos/**'
+      - 'functions/_lib/sos-maison-core.js'
+      - '.github/maison-growth/a2/source-registry.json'
+      - '.github/maison-growth/a2/SOURCES.md'
+      - '.github/workflows/sos-product-guard.yml'
+  pull_request:
+    paths:
+      - '.github/maison-product/sos/**'
+      - 'functions/_lib/sos-maison-core.js'
+      - '.github/maison-growth/a2/source-registry.json'
+      - '.github/maison-growth/a2/SOURCES.md'
+      - '.github/workflows/sos-product-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-sos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate SOS Maison JF foundation
+        shell: bash
+        run: |
+          node --check functions/_lib/sos-maison-core.js
+          node .github/maison-product/sos/validate_sos.mjs
