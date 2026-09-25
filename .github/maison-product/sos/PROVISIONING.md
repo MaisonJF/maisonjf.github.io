@@ -58,15 +58,17 @@ Configurar:
 Variáveis:
 
 - `MAISON_SOS_BREVO_ENABLED=true`
+- `MAISON_SOS_SCHEDULER_ENABLED=true` — apenas depois de D1 + Brevo passarem o teste fechado
+- `MAISON_SOS_MAX_ACTIONS_PER_TICK=20`
 - `MAISON_SOS_BREVO_API_KEY`
 - `MAISON_SOS_BREVO_SENDER_EMAIL`
 - `MAISON_SOS_PUBLIC_URL=https://maison-jf.com`
 
 O adapter continua desligado até remetente, domínio e mensagens estarem testados.
 
-## 4. Gates antes de criar rotas públicas
+## 4. Gates antes de activar as rotas já construídas
 
-Só criar/activar `/api/sos/*` quando todos forem verdadeiros:
+As rotas `/api/sos/*` existem em código e estão desligadas. Só definir `MAISON_SOS_API_ENABLED=true` quando todos forem verdadeiros:
 
 - Supabase Auth funcional e validado;
 - D1 criado e migrations aplicadas;
@@ -75,6 +77,7 @@ Só criar/activar `/api/sos/*` quando todos forem verdadeiros:
 - fluxo de convite consegue enviar o token directamente ao contacto;
 - o browser do utilizador **nunca recebe o token de aceitação do contacto**;
 - scheduler/outbox testado com relógio controlado;
+- hora local fixa e transições DST validadas no timezone do utilizador;
 - retry e duplicação testados;
 - página de aceitação explica claramente que SOS Maison JF não é emergência;
 - política de privacidade pública actualizada antes da recolha real de dados.
