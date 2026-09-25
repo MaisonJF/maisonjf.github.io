@@ -176,6 +176,24 @@
         "Engagement metrics do not imply economic value; A3 remains the owner of observed economics."
       ]
     },
+    "sos_product": {
+      "status": "planned",
+      "privacy_class": ["aggregated", "system"],
+      "allowed_event_prefixes": ["sos."],
+      "metadata": {
+        "product_id": {"type": "token", "maxLength": 80},
+        "signal_kind": {"type": "token", "maxLength": 120},
+        "cadence_bucket": {"type": "token", "maxLength": 40},
+        "delivery_outcome": {"type": "token", "maxLength": 40},
+        "product_version": {"type": "token", "maxLength": 40},
+        "count": {"type": "integer", "minimum": 0}
+      },
+      "notes": [
+        "SOS Maison JF contributes aggregate product signals only.",
+        "Names, contact endpoints, account identifiers, exact check-in schedules, locations, free text, reasons and message bodies must never enter Growth/Brain analytics.",
+        "Operational PII required to deliver trusted-contact notices remains in the product operational domain and is not part of this source contract."
+      ]
+    },
     "system": {
       "status": "planned",
       "privacy_class": ["system"],
