@@ -5,14 +5,14 @@ on:
     branches: [main]
     paths:
       - '.github/maison-product/sos/**'
-      - 'functions/_lib/sos-maison-core.js'
+      - 'functions/_lib/sos-*.js'
       - '.github/maison-growth/a2/source-registry.json'
       - '.github/maison-growth/a2/SOURCES.md'
       - '.github/workflows/sos-product-guard.yml'
   pull_request:
     paths:
       - '.github/maison-product/sos/**'
-      - 'functions/_lib/sos-maison-core.js'
+      - 'functions/_lib/sos-*.js'
       - '.github/maison-growth/a2/source-registry.json'
       - '.github/maison-growth/a2/SOURCES.md'
       - '.github/workflows/sos-product-guard.yml'
@@ -36,4 +36,9 @@ jobs:
         shell: bash
         run: |
           node --check functions/_lib/sos-maison-core.js
+          node --check functions/_lib/sos-auth.js
+          node --check functions/_lib/sos-crypto.js
+          node --check functions/_lib/sos-runtime.js
           node .github/maison-product/sos/validate_sos.mjs
+          node .github/maison-product/sos/validate_sos_runtime.mjs
+          python3 .github/maison-product/sos/validate_sos_schema.py
