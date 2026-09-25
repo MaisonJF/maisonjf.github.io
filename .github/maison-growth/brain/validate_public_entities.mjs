@@ -9,6 +9,8 @@ const ROOT=path.resolve(fileURLToPath(new URL('../../../',import.meta.url)));
 const ORG_ID='https://maison-jf.com/#organization';
 const SITE_ID='https://maison-jf.com/#website';
 const read=rel=>fs.readFileSync(path.join(ROOT,rel),'utf8');
+const entityEvidence=JSON.parse(read('.github/maison-growth/brain/public-entity-evidence.json'));
+const expectedSameAs=entityEvidence.same_as.map(item=>item.public_url).sort();
 
 function jsonLd(html){
   const out=[];
@@ -67,6 +69,11 @@ for(const {file,node} of organizationDefinitions){
     'https://maison-jf.com/informacao-legal#livre-resolucao',
     file+': wrong merchant return policy link'
   );
+  assert.deepEqual(
+    [...(node.sameAs||[])].sort(),
+    expectedSameAs,
+    file+': Organization sameAs must match verified public entity evidence'
+  );
 }
 assert.deepEqual(
   anonymousOrganizations.map(x=>x.file),
@@ -101,9 +108,14 @@ for(const name of hidden){
   );
 }
 
+assert.equal(entityEvidence.organization_id,ORG_ID,'entity evidence must target canonical Organization');
+for(const pending of entityEvidence.pending_not_published||[]){
+  assert(!serializedPublicSchema.includes(String(pending.public_username||'')),'pending/unverified profile leaked into public JSON-LD: '+pending.platform);
+}
+
 console.log(
   'MAISON public entity contract: OK · '+
   organizationDefinitions.length+' canonical Organization definitions · '+
   websiteDefinitions.length+' WebSite definitions · '+
-  hidden.length+' non-public services excluded'
+  hidden.length+' non-public services excluded · '+expectedSameAs.length+' verified sameAs profiles'
 );
