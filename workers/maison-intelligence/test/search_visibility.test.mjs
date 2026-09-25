@@ -26,13 +26,13 @@ test('configured Search Console exposes bounded read-only profiles',()=>{
     GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'secret',
     GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh'
   });
-  assert.equal(tasks.length,8);
+  assert.equal(tasks.length,10);
   const analytics=tasks.filter(x=>x.family==='google_search_console');
   const finalized=analytics.filter(x=>x.key!=='fresh_pages');
   const fresh=analytics.find(x=>x.key==='fresh_pages');
   const inspection=tasks.find(x=>x.family==='google_url_inspection');
   const sitemaps=tasks.find(x=>x.family==='google_sitemaps');
-  assert.deepEqual(analytics.map(x=>x.key),['pages','queries','devices','countries','appearance','fresh_pages']);
+  assert.deepEqual(analytics.map(x=>x.key),['pages','queries','devices','countries','appearance','fresh_pages','image_pages','discover_pages']);
   assert.ok(tasks.every(x=>x.providerId==='google_search_console'));
   assert.ok(tasks.every(x=>x.territoryKey==='search_visibility'));
   assert.ok(finalized.every(x=>x.days===28&&x.lagDays===3));
@@ -41,6 +41,8 @@ test('configured Search Console exposes bounded read-only profiles',()=>{
   assert.equal(fresh.lagDays,0);
   assert.equal(fresh.dataState,'all');
   assert.deepEqual(fresh.dimensions,['date','page']);
+  assert.equal(analytics.find(x=>x.key==='image_pages').type,'image');
+  assert.equal(analytics.find(x=>x.key==='discover_pages').type,'discover');
   assert.equal(inspection.key,'inspection');
   assert.equal(inspection.inspectionUrls.length,6);
   assert.equal(sitemaps.key,'sitemaps');
@@ -376,6 +378,39 @@ test('fresh Search Console profile uses Pacific dates and preserves incomplete-d
     assert.equal(payload.first_incomplete_date,'2026-09-24');
     assert.equal(payload.start_date,'2026-09-22');
     assert.equal(payload.end_date,'2026-09-24');
+  }finally{
+    globalThis.fetch=original;
+  }
+});
+
+
+test('Image and Discover Search Console profiles send their own search type',async()=>{
+  const original=globalThis.fetch;
+  const requests=[];
+  globalThis.fetch=async(url,options={})=>{
+    if(String(url).includes('oauth2.googleapis.com/token')){
+      return new Response(JSON.stringify({access_token:'type-access'}),{status:200,headers:{'content-type':'application/json'}});
+    }
+    requests.push(JSON.parse(options.body));
+    return new Response(JSON.stringify({rows:[]}),{status:200,headers:{'content-type':'application/json'}});
+  };
+  try{
+    const env={
+      SEARCH_VISIBILITY_ENABLED:'true',
+      GOOGLE_SEARCH_CONSOLE_ENABLED:'true',
+      GOOGLE_SEARCH_CONSOLE_PROPERTY:'sc-domain:maison-jf.com',
+      GOOGLE_SEARCH_CONSOLE_CLIENT_ID:'id',
+      GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'secret',
+      GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh'
+    };
+    const tasks=configuredSearchVisibilityTasks(env);
+    for(const key of ['image_pages','discover_pages']){
+      await fetchSearchVisibility(env,tasks.find(x=>x.key===key),new Date('2026-09-28T12:00:00Z'));
+    }
+    assert.equal(requests[0].type,'image');
+    assert.equal(requests[0].dataState,'final');
+    assert.equal(requests[1].type,'discover');
+    assert.equal(requests[1].dataState,'final');
   }finally{
     globalThis.fetch=original;
   }
