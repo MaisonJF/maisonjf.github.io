@@ -21,7 +21,11 @@ def contracts():
     ok(c["economic_outcomes_priority_over_clicks"] is True,"economics must dominate clicks")
     ok(c["causal_inference_authorized"] is False,"causal inference must be disabled")
     ok(c["self_reprogramming_authorized"] is False,"self-reprogramming must be disabled")
+    ok("content" in c["learning_inputs"],"content learning input missing")
+    ok(c.get("content_economics_owner")=="A3","A3 must own content economics")
+    ok(c.get("content_engagement_can_mutate_economic_confidence") is False,"engagement cannot mutate economic confidence")
     ok(p["default"]=="deny","permissions must deny by default")
+    ok("growth.content_performance.read" in p["allow"],"content performance read permission missing")
     for x in [
         "repository.write","public_site.write","hard_gates.write","permissions.write",
         "price.write","checkout.write","catalogue.write","paid_content.read",
@@ -168,12 +172,13 @@ def sql_validation():
 def main():
     contracts()
     sql_validation()
-    p=subprocess.run([sys.executable,str(ROOT/"test_a11.py")],cwd=str(ROOT),capture_output=True,text=True)
-    if p.returncode:
-        print(p.stdout)
-        print(p.stderr,file=sys.stderr)
-        raise SystemExit(p.returncode)
-    print(p.stderr,end="")
+    for test_file in ("test_a11.py","test_content_bridge.py"):
+        p=subprocess.run([sys.executable,str(ROOT/test_file)],cwd=str(ROOT),capture_output=True,text=True)
+        if p.returncode:
+            print(p.stdout)
+            print(p.stderr,file=sys.stderr)
+            raise SystemExit(p.returncode)
+        print(p.stderr,end="")
     print("A11 Learning Engine: OK")
 
 if __name__=="__main__":
