@@ -1,10 +1,15 @@
 {
-  "manifest_version": "A11.1",
+  "manifest_version": "A11.2",
   "migrations": [
     {
       "order": 9,
       "path": "migrations/0009_learning_engine.sql",
       "sha256": "d4d3cc18b8fe0ba3e2bfc07fe8811528f21577c83cbebe28763be7749d24e148"
+    },
+    {
+      "order": 19,
+      "path": "migrations/0019_content_learning_source.sql",
+      "sha256": "5e035efdf2b325fc28a2358b8c0c1301016fc5c3cff83880b07a61eada714727"
     }
   ],
   "target": "Cloudflare D1 / SQLite",
