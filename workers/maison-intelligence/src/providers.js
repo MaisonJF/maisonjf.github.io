@@ -67,6 +67,27 @@ export function isZeroCostOpenRouterModel(model) {
   return value === 'openrouter/free' || value.endsWith(':free');
 }
 
+function openRouterModels(env) {
+  const models = [];
+  const primary = String(env.OPENROUTER_MODEL ?? '').trim();
+  if (primary) models.push(primary);
+  if (env.OPENROUTER_FALLBACK_MODELS_JSON) {
+    let parsed;
+    try { parsed = JSON.parse(String(env.OPENROUTER_FALLBACK_MODELS_JSON)); }
+    catch { throw new Error('openrouter_invalid_fallback_models_json'); }
+    if (!Array.isArray(parsed)) throw new Error('openrouter_fallback_models_must_be_array');
+    for (const item of parsed) {
+      const model = String(item ?? '').trim();
+      if (model) models.push(model);
+    }
+  }
+  const unique = [...new Set(models)];
+  if (!unique.length || unique.some(model => !isZeroCostOpenRouterModel(model))) {
+    throw new Error('openrouter_paid_model_forbidden');
+  }
+  return unique;
+}
+
 export async function callOsirisGateway(env, prompt) {
   if (!env.OSIRIS_GATEWAY_API_KEY || !env.OSIRIS_GATEWAY_MODEL) throw new Error('osiris_gateway_not_configured');
   const base = String(env.OSIRIS_GATEWAY_BASE_URL || 'https://ai.osiris-code.com/v1').replace(/\/+$/, '');
@@ -95,39 +116,49 @@ export async function callOsirisGateway(env, prompt) {
 }
 
 export async function callOpenRouter(env, prompt) {
-  if (!env.OPENROUTER_API_KEY || !env.OPENROUTER_MODEL) throw new Error('openrouter_not_configured');
-  if (!isZeroCostOpenRouterModel(env.OPENROUTER_MODEL)) throw new Error('openrouter_paid_model_forbidden');
-  const data = await jsonFetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${env.OPENROUTER_API_KEY}`,
-      'Content-Type': 'application/json',
-      'HTTP-Referer': 'https://maison-jf.com',
-      'X-OpenRouter-Title': 'MAISON JF Intelligence'
-    },
-    body: JSON.stringify({
-      model: env.OPENROUTER_MODEL,
-      messages: [{ role: 'user', content: prompt }],
-      max_tokens: 1200,
-      temperature: 0.2,
-      provider: {
-        allow_fallbacks: false,
-        max_price: {
-          prompt: 0,
-          completion: 0
-        }
-      }
-    })
-  });
-  return {
-    providerId: 'openrouter',
-    modelId: data.model ?? env.OPENROUTER_MODEL,
-    sourceClass: 'ai_api',
-    text: openRouterText(data),
-    citations: [],
-    requestId: data.id ?? null,
-    usage: data.usage ?? null
-  };
+  if (!env.OPENROUTER_API_KEY) throw new Error('openrouter_not_configured');
+  const models = openRouterModels(env);
+  let lastError = null;
+
+  for (const model of models) {
+    try {
+      const data = await jsonFetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${env.OPENROUTER_API_KEY}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://maison-jf.com',
+          'X-OpenRouter-Title': 'MAISON JF Intelligence'
+        },
+        body: JSON.stringify({
+          model,
+          messages: [{ role: 'user', content: prompt }],
+          max_tokens: 1200,
+          temperature: 0.2,
+          provider: {
+            allow_fallbacks: false,
+            max_price: {
+              prompt: 0,
+              completion: 0
+            }
+          }
+        })
+      });
+      return {
+        providerId: 'openrouter',
+        modelId: data.model ?? model,
+        sourceClass: 'ai_api',
+        text: openRouterText(data),
+        citations: [],
+        requestId: data.id ?? null,
+        usage: data.usage ?? null
+      };
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError ?? new Error('openrouter_all_free_models_failed');
 }
 
 export async function callOpenAI(env, prompt) {
@@ -241,9 +272,13 @@ export function configuredProviders(env) {
   if (enabled(env.OSIRIS_GATEWAY_ENABLED) && env.OSIRIS_GATEWAY_API_KEY && env.OSIRIS_GATEWAY_MODEL) providers.push('osiris_gateway');
   if (
     enabled(env.OPENROUTER_ENABLED) &&
-    env.OPENROUTER_API_KEY &&
-    isZeroCostOpenRouterModel(env.OPENROUTER_MODEL)
-  ) providers.push('openrouter');
+    env.OPENROUTER_API_KEY
+  ) {
+    try {
+      openRouterModels(env);
+      providers.push('openrouter');
+    } catch {}
+  }
   if (enabled(env.OPENAI_ENABLED) && env.OPENAI_API_KEY && env.OPENAI_MODEL) providers.push('openai');
   if (enabled(env.GEMINI_ENABLED) && env.GEMINI_API_KEY && env.GEMINI_MODEL) providers.push('google_gemini');
   if (enabled(env.PERPLEXITY_ENABLED) && env.PERPLEXITY_API_KEY) providers.push('perplexity');
