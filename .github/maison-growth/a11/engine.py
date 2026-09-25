@@ -58,7 +58,7 @@ def _neutral(expected:int, observed:int)->bool:
     return diff <= int(POLICY["neutral_band_basis_points"])
 
 def evaluate(inp:LearningInput, *, confidence_before:int, rule_version_id:str, model_version_id:str|None=None)->LearningRecord:
-    if inp.source_kind not in {"decision","experiment","journey","conversion","promotion"}:
+    if inp.source_kind not in {"decision","experiment","journey","conversion","promotion","content"}:
         raise LearningError("unsupported source kind")
     if inp.subject_type not in {"need","intent","coverage","candidate","decision"}:
         raise LearningError("unsupported feedback target")
