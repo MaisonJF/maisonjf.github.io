@@ -64,8 +64,41 @@ class OceanEditorialContext:
     def from_file(cls, path: Path) -> "OceanEditorialContext":
         return cls(json.loads(path.read_text(encoding="utf-8")))
 
+    def _canonical_candidates(self) -> list[Mapping[str,object]]:
+        raw=self.payload.get("candidates",[]) if isinstance(self.payload,Mapping) else []
+        return [x for x in raw if isinstance(x,Mapping)] if isinstance(raw,list) else []
+
     def search(self, query: str, *, limit: int=8) -> tuple[KnowledgeRef,...]:
         rows=[]
+        candidates=self._canonical_candidates()
+        if candidates:
+            for item in candidates:
+                territory=str(item.get("territory") or item.get("id") or item.get("slug") or "").strip()
+                if not territory:
+                    continue
+                label=str(item.get("preferredLabel") or item.get("painLanguage") or territory)
+                evidence=item.get("evidence",[])
+                evidence_refs=tuple(str(x) for x in evidence if str(x).strip()) if isinstance(evidence,list) else ()
+                haystack=" ".join((
+                    territory,
+                    str(item.get("painLanguage") or ""),
+                    str(item.get("intent") or ""),
+                    str(item.get("commercialAdjacency") or ""),
+                    " ".join(str(x) for x in item.get("questionThemeCandidates",[]) if str(x).strip())
+                        if isinstance(item.get("questionThemeCandidates"),list) else "",
+                ))
+                score=_overlap(query,haystack)
+                if score<=0:
+                    continue
+                rows.append(KnowledgeRef(
+                    ref=f"ocean:{territory}",
+                    source_kind="ocean_canonical_candidate",
+                    label=label,
+                    score=score,
+                    evidence_refs=evidence_refs,
+                ))
+            return tuple(sorted(rows,key=lambda x:(-x.score,x.ref))[:limit])
+
         growth=self.payload.get("pdiGrowth",{}) if isinstance(self.payload,Mapping) else {}
         themes=growth.get("themes",[]) if isinstance(growth,Mapping) else []
         for theme in themes if isinstance(themes,list) else []:
@@ -109,7 +142,8 @@ class OceanEditorialContext:
         """
         if not 1 <= limit <= 20:
             raise ValueError("limit_must_be_1_20")
-        items=self.payload.get("items",[]) if isinstance(self.payload,Mapping) else []
+        candidates=self._canonical_candidates()
+        items=candidates if candidates else self.payload.get("items",[]) if isinstance(self.payload,Mapping) else []
         best:dict[str,OceanCommercialHint]={}
         for item in items if isinstance(items,list) else []:
             if not isinstance(item,Mapping):
