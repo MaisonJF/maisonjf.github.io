@@ -61,6 +61,16 @@ const graph={
       territories:[...(x.territories||[])],routes:[...(x.routes||[])]
     })),
     needs:(b2b.needs||[]).map(x=>({...x})),
+    professionalNetwork:{
+      ...(b2b.professionalNetwork||{}),
+      levels:(b2b.professionalNetwork?.levels||[]).map(level=>({
+        ...level,
+        can:[...(level.can||[])],
+        cannot:[...(level.cannot||[])]
+      })),
+      safeguards:{...(b2b.professionalNetwork?.safeguards||{})},
+      economicsHypotheses:[...(b2b.professionalNetwork?.economicsHypotheses||[])]
+    },
     researchCandidates:(b2b.researchCandidates||[]).map(x=>({
       ...x,
       segments:[...(x.segments||[])],
