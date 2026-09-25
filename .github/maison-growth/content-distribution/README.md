@@ -123,6 +123,31 @@ Cada observação pode transportar lineage opcional:
 
 Isto permite ao Brain distinguir desempenho da ideia, do formato e da execução sem copiar para A1 a inteligência canónica que originou a campanha.
 
+## Autoria e pacote de revisão
+
+O `authoring.py` faz a ponte entre o plano editorial e uma peça concreta.
+
+Ele não escreve por fórmula. Em vez disso:
+
+1. cria um **authoring packet** com a tensão, intenção, CTA, formato e campos que a peça precisa;
+2. recebe copy livre de um autor humano ou de um adaptador de IA autorizado;
+3. valida a copy contra a voz pública canónica;
+4. exige um brief visual mínimo;
+5. produz um **review package**;
+6. só aceita o estado `approved_for_manual_distribution` depois de existir uma referência de revisão humana.
+
+O lint bloqueia, entre outras coisas:
+
+- travessões longos/médios na copy pública;
+- linguagem interna do Brain/A7/A14;
+- placeholders;
+- falsa certeza;
+- falsa urgência ou escassez.
+
+Avisos de tom artificial não reescrevem automaticamente a voz. Servem para revisão.
+
+A aprovação é por peça e inclui conteúdo + CTA. Mesmo depois de aprovada, a peça continua com `automatic_publication=false` e `automatic_scheduling=false`.
+
 ## Formatos
 
 ### short_video
