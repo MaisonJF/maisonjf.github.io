@@ -49,6 +49,7 @@ jobs:
           node --check functions/_lib/sos-brevo.js
           node --check functions/_lib/sos-delivery.js
           node --check functions/_lib/sos-api.js
+          node --check functions/_lib/sos-brain-projection.js
           node --check functions/api/sos/setup.js
           node --check functions/api/sos/status.js
           node --check functions/api/sos/checkin.js
@@ -63,4 +64,6 @@ jobs:
           node .github/maison-product/sos/validate_sos_adapters.mjs
           node .github/maison-product/sos/validate_sos_api.mjs
           node .github/maison-product/sos/validate_sos_scheduler.mjs
+          node .github/maison-product/sos/validate_sos_projection.mjs
+          python3 .github/maison-product/sos/validate_sos_a2.py
           python3 .github/maison-product/sos/validate_sos_schema.py
