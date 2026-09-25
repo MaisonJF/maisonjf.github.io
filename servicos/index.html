@@ -11,6 +11,7 @@
 <script src="../analytics.js" defer></script>
 <style>
 .services-page{background:#070707;color:var(--maison-ivory)}
+.anchor-alias{display:block;height:0;scroll-margin-top:110px}
 .services{padding:145px 0 110px}
 .services-hero{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(44px,7vw,100px);align-items:end;min-height:72svh;padding-bottom:100px}
 .services-hero__copy{padding-bottom:10px}
@@ -88,6 +89,7 @@
   </section>
 
   <section class="primary-service" id="tarot">
+    <span id="consultas" class="anchor-alias" aria-hidden="true"></span>
     <div class="primary-service__head">
       <small>Consulta de Tarot</small>
       <h2>Uma consulta. Outro ângulo.</h2>
@@ -111,12 +113,16 @@
       <p>A Maison acompanha de outras formas quando a situação pede continuidade, presença ou um pedido específico.</p>
     </div>
 
+    <span id="continuidade" class="anchor-alias" aria-hidden="true"></span>
+    <span id="acompanhamento" class="anchor-alias" aria-hidden="true"></span>
     <a class="quiet-link" href="../contacto/?interesse=acompanhamento">
       <small>Continuidade</small><strong>Acompanhamento</strong><span>Falar connosco →</span>
     </a>
     <a class="quiet-link" href="../portas/companhia">
       <small>Presença</small><strong>Não quero atravessar isto sozinho.</strong><span>Descobrir →</span>
     </a>
+    <span id="especiais" class="anchor-alias" aria-hidden="true"></span>
+    <span id="ritual-personalizado" class="anchor-alias" aria-hidden="true"></span>
     <a class="quiet-link" href="../contacto/?interesse=pedido-especial">
       <small>Pedidos especiais</small><strong>Nem tudo vem pronto.</strong><span>Explicar o pedido →</span>
     </a>
