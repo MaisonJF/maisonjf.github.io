@@ -24,10 +24,12 @@ CONVERSION_EVENT_TYPES = {
     "service.contact": "lead",
     "b2b.order": "order",
     "b2b.lead": "lead",
-    "b2b.proposal": "proposal",
-    "b2b.pilot": "pilot",
+    # Keep A3 conversion kinds intentionally coarse and stable. The exact
+    # professional funnel stage remains observable in A1 event_type/metadata.
+    "b2b.proposal": "lead",
+    "b2b.pilot": "order",
     "b2b.purchase": "purchase",
-    "b2b.recurrence": "recurrence",
+    "b2b.recurrence": "purchase",
     "company.contact": "lead",
 }
 
