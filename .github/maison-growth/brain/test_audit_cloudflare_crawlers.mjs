@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-import {crawlerIndex,summariseCrawlerGroups} from '../brain/audit_cloudflare_crawlers.mjs';
+import {crawlerIndex,summariseCrawlerGroups,summariseReferralGroups} from '../brain/audit_cloudflare_crawlers.mjs';
 
 const policy=JSON.parse(fs.readFileSync('.github/maison-growth/brain/crawler-policy.json','utf8'));
 
@@ -27,4 +27,20 @@ test('crawler aggregation counts only verified configured discovery bots',()=>{
   assert.equal(byAgent['Bingbot'].requests,2);
   assert.equal(byAgent['PerplexityBot'].requests,0);
   assert.deepEqual(byAgent['Bingbot'].hosts,['www.maison-jf.com']);
+});
+
+
+test('AI referral aggregation keeps only operator-level host counts',()=>{
+  const rows=summariseReferralGroups([
+    {count:5,dimensions:{clientRefererHost:'chatgpt.com'}},
+    {count:2,dimensions:{clientRefererHost:'openai.com'}},
+    {count:3,dimensions:{clientRefererHost:'claude.ai'}},
+    {count:4,dimensions:{clientRefererHost:'perplexity.ai'}},
+    {count:99,dimensions:{clientRefererHost:'example.com'}}
+  ]);
+  const byOperator=Object.fromEntries(rows.map(row=>[row.operator,row]));
+  assert.equal(byOperator.OpenAI.requests,7);
+  assert.equal(byOperator.Anthropic.requests,3);
+  assert.equal(byOperator.Perplexity.requests,4);
+  assert.deepEqual(byOperator.OpenAI.hosts,['chatgpt.com','openai.com']);
 });
