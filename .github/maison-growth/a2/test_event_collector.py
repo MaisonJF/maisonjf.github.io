@@ -247,6 +247,60 @@ class CollectorUnitTests(unittest.TestCase):
             self.assertEqual(normalized["event_type"], event_type)
             self.assertEqual(normalized["solution_id"], "sol_0199a4b2-7f00-7000-8000-000000000001")
 
+    def test_site_experience_events_use_structural_metadata_only(self):
+        navigation = normalize_ingestion({
+            "contract_version": 1,
+            "source": "site",
+            "event_type": "navigation.click",
+            "occurred_at": "2026-09-26T00:30:00Z",
+            "idempotency_key": "site:navigation:fixture-1",
+            "privacy_class": "anonymous",
+            "metadata": {
+                "path": "/",
+                "navigation_id": "header:/produtos/",
+                "target_path": "/produtos/?utm_source=test#top",
+                "surface": "home",
+            },
+        })
+        self.assertEqual(navigation["metadata"]["target_path"], "/produtos/")
+
+        exposure = normalize_ingestion({
+            "contract_version": 1,
+            "source": "site",
+            "event_type": "offer.exposure",
+            "occurred_at": "2026-09-26T00:30:01Z",
+            "idempotency_key": "site:offer:fixture-1",
+            "privacy_class": "anonymous",
+            "metadata": {
+                "path": "/servicos/",
+                "surface": "servicos",
+                "offer_id": "acompanhamento",
+                "recommendation_source": "vpc",
+                "recommendation_result": "home",
+                "recommendation_route": "service",
+                "recommendation_brain": "offer-brain-v1",
+            },
+        })
+        self.assertEqual(exposure["event_type"], "offer.exposure")
+        self.assertEqual(exposure["metadata"]["offer_id"], "acompanhamento")
+
+    def test_site_event_policy_rejects_text_or_wrong_metadata(self):
+        with self.assertRaises(ValidationError):
+            normalize_ingestion({
+                "contract_version": 1,
+                "source": "site",
+                "event_type": "navigation.click",
+                "occurred_at": "2026-09-26T00:30:02Z",
+                "idempotency_key": "site:navigation:fixture-2",
+                "privacy_class": "anonymous",
+                "metadata": {
+                    "path": "/",
+                    "navigation_id": "header:/produtos/",
+                    "target_path": "/produtos/",
+                    "link_text": "Produtos",
+                },
+            })
+
     def test_gsc_raw_query_is_not_allowed(self):
         event = {
             "contract_version": 1,
