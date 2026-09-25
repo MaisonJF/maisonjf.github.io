@@ -1,0 +1,35 @@
+{
+  "schema_version": "maison_public_entity_evidence_v1",
+  "reviewed_at": "2026-09-25",
+  "organization_id": "https://maison-jf.com/#organization",
+  "same_as": [
+    {
+      "platform": "YouTube",
+      "public_url": "https://www.youtube.com/@maisonjf",
+      "evidence": "existing_public_maison_schema"
+    },
+    {
+      "platform": "Instagram",
+      "public_username": "maisonjfatelier",
+      "public_name": "João Fadario | Maison JF ®",
+      "public_url": "https://www.instagram.com/maisonjfatelier/",
+      "evidence": "connected_platform_profile_username"
+    },
+    {
+      "platform": "TikTok",
+      "public_username": "maison.jf1",
+      "public_name": "Maison JF",
+      "public_url": "https://www.tiktok.com/@maison.jf1",
+      "provider_profile_deep_link": "https://vm.tiktok.com/ZGdQG9fG3/",
+      "evidence": "connected_platform_profile_username_and_deep_link"
+    }
+  ],
+  "pending_not_published": [
+    {
+      "platform": "Threads",
+      "public_username": "maisonjfatelier",
+      "public_name": "Maison JF™ | Casa de Ritual",
+      "reason": "connector confirms identity but canonical public profile URL/domain was not independently resolved"
+    }
+  ]
+}
