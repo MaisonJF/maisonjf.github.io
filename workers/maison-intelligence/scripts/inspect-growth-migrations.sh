@@ -68,6 +68,10 @@ echo "A11 content learning schema (0019):"
 npx wrangler d1 execute "$DB_NAME" --remote --command "SELECT '0019_content_learning_source' AS migration, CASE WHEN EXISTS(SELECT 1 FROM schema_state WHERE schema_key='maison_growth_a11_schema_version' AND schema_value='A11.2') THEN 'present' ELSE 'missing_or_partial' END AS status;"
 
 echo
+echo "A11 canonical learning rule seed (0020):"
+npx wrangler d1 execute "$DB_NAME" --remote --command "SELECT '0020_learning_rule_seed' AS migration, CASE WHEN EXISTS(SELECT 1 FROM schema_state WHERE schema_key='maison_growth_a11_rule_version' AND schema_value='rul_e6217bb187b5ef0b6ee371286ed2e1e53e0d') THEN 'present' ELSE 'missing_or_partial' END AS status;"
+
+echo
 echo "Detailed state for the pending/runtime surfaces:"
 OBJECT_SQL="
 SELECT type,name
