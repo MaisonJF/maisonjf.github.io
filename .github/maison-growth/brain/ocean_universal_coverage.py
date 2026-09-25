@@ -62,6 +62,7 @@ def build_contract() -> dict[str,Any]:
             "no_private_or_paid_bodies":True,
         },
         "organs":ORGANS,
+        "ocean_ids":sorted(canonical_set),
         "summary":{
             "canonical_oceans":len(canonical),
             "graph_oceans":len(graph_ids),
