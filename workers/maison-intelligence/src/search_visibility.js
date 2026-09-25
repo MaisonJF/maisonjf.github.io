@@ -141,6 +141,14 @@ export function configuredSearchVisibilityTasks(env){
           inspectionUrls:inspect
         });
       }
+      out.push({
+        family:'google_sitemaps',
+        providerId:'google_search_console',
+        territoryKey:'search_visibility',
+        site,
+        key:'sitemaps',
+        cadenceHours:24
+      });
     }
   }
 
@@ -302,6 +310,62 @@ async function fetchGoogleInspection(env,task,scheduledDate){
   };
 }
 
+async function fetchGoogleSitemaps(env,task){
+  const token=await refreshAccessToken({
+    tokenUrl:GSC_TOKEN_URL,
+    clientId:env.GOOGLE_SEARCH_CONSOLE_CLIENT_ID,
+    clientSecret:env.GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET,
+    refreshToken:env.GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN,
+    prefix:'gsc'
+  });
+  const endpoint=GSC_API_ROOT+encodeURIComponent(task.site)+'/sitemaps';
+  const data=await jsonFetch(endpoint,{
+    method:'GET',
+    headers:{
+      'Authorization':`Bearer ${token}`,
+      'Accept':'application/json'
+    }
+  },30000,'gsc');
+
+  const sitemaps=(data.sitemap||[]).slice(0,100).map(item=>({
+    path:String(item.path||''),
+    last_submitted:item.lastSubmitted||null,
+    last_downloaded:item.lastDownloaded||null,
+    is_pending:Boolean(item.isPending),
+    is_sitemaps_index:Boolean(item.isSitemapsIndex),
+    type:item.type||null,
+    warnings:Number(item.warnings||0),
+    errors:Number(item.errors||0),
+    contents:(item.contents||[]).map(content=>({
+      type:content.type||null,
+      submitted:Number(content.submitted||0)
+    }))
+  }));
+
+  return {
+    providerId:'google_search_console',
+    modelId:null,
+    sourceClass:'search_platform',
+    text:JSON.stringify({
+      schema:'maison.search-visibility.gsc-sitemaps.v1',
+      provider:'google_search_console',
+      property:task.site,
+      retrieved_at:new Date().toISOString(),
+      sitemap_count:sitemaps.length,
+      sitemaps
+    }),
+    citations:[],
+    requestId:null,usage:null,
+    groundingState:'direct_observation',
+    confidenceClass:'high',
+    strength:95,
+    evidenceSource:'gsc',
+    evidenceKind:'coverage',
+    independentEvidenceRoots:0,
+    sourceKind:'search_visibility'
+  };
+}
+
 function bingDate(value){
   const m=String(value||'').match(/\/Date\((\d+)/);
   if(m)return new Date(Number(m[1])).toISOString();
@@ -363,6 +427,7 @@ async function fetchBing(env,task){
 export async function fetchSearchVisibility(env,task,scheduledDate=new Date()){
   if(task.family==='google_search_console')return fetchGoogle(env,task,scheduledDate);
   if(task.family==='google_url_inspection')return fetchGoogleInspection(env,task,scheduledDate);
+  if(task.family==='google_sitemaps')return fetchGoogleSitemaps(env,task);
   if(task.family==='bing_webmaster')return fetchBing(env,task);
   throw new Error('unsupported_search_visibility_family');
 }
@@ -370,5 +435,6 @@ export async function fetchSearchVisibility(env,task,scheduledDate=new Date()){
 export const SEARCH_VISIBILITY_DOCS=Object.freeze({
   google_search_console:GSC_DOC,
   google_url_inspection:'https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect',
+  google_sitemaps:'https://developers.google.com/webmaster-tools/v1/sitemaps/list',
   bing_webmaster:BING_DOC
 });
