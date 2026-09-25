@@ -2,7 +2,7 @@ import {ORACLE_TERRITORIES} from './oracle-territories.js';
 import {buildPdiThemeSourceSignals} from './pdi-theme-sources.js';
 import {VPC_OCEAN_SIGNALS,VPC_OCEAN_SIGNAL_VERSION} from './vpc-ocean-signals.generated.js';
 
-export const VPC_QUESTION_ENGINE_VERSION='2026-09-21-ocean-v1';
+export const VPC_QUESTION_ENGINE_VERSION='2026-09-25-brain-pool-v2';
 
 const AXES=['seen','attachment','self','control','belong','load','direction','security'];
 const SECONDARY={
@@ -15,7 +15,13 @@ const ATTENTION_TOPIC_STEMS=[
   label=>`O que costuma pesar mais em ti quando aparece ${lower(label)}?`,
   label=>`Quando pensas em ${lower(label)}, qual destas tensões reconheces mais depressa?`,
   label=>`Se ${lower(label)} te apanhasse num dia mais vulnerável, o que cresceria primeiro?`,
-  label=>`Por baixo de ${lower(label)}, qual destas necessidades poderia estar a pedir atenção?`
+  label=>`Por baixo de ${lower(label)}, qual destas necessidades poderia estar a pedir atenção?`,
+  label=>`Quando ${lower(label)} te acompanha durante alguns dias, o que começa a mudar primeiro em ti?`,
+  label=>`Se ninguém te pedisse para resolver ${lower(label)} já, o que continuaria a incomodar?`,
+  label=>`Quando tentas ignorar ${lower(label)}, o que acaba por aparecer por outro lado?`,
+  label=>`Em ${lower(label)}, qual destas coisas te custa mais admitir a ti próprio?`,
+  label=>`Se pudesses tirar uma camada de ${lower(label)}, o que achas que encontrarias por baixo?`,
+  label=>`Quando ${lower(label)} deixa de ser só um assunto e passa a mexer contigo, o que reconheces?`
 ];
 
 const AXIS_OPTIONS={
@@ -87,9 +93,17 @@ const AXIS_OPTIONS={
 
 const APEGO_STEMS=[
   label=>`Quando ${lower(label)} mexe numa relação importante, qual destes impulsos reconheces primeiro?`,
-  label=>`Se o tema entre vocês fosse ${lower(label)}, o que aconteceria mais depressa dentro de ti?`,
+  label=>`Se ${lower(label)} entrasse entre ti e alguém importante, o que aconteceria mais depressa dentro de ti?`,
   label=>`Quando aparece ${lower(label)}, como costumas proteger a ligação — ou proteger-te dela?`,
-  label=>`Numa relação que te importa, o que acontece contigo quando entra ${lower(label)}?`
+  label=>`Numa relação que te importa, o que acontece contigo quando ${lower(label)} ganha peso?`,
+  label=>`Se ${lower(label)} criasse alguma distância entre vocês, qual seria a tua reacção mais automática?`,
+  label=>`Quando ${lower(label)} te deixa sem saber bem onde estás com alguém, o que fazes primeiro?`,
+  label=>`Se tivesses de atravessar ${lower(label)} com alguém de quem gostas, o que te seria mais difícil?`,
+  label=>`Quando ${lower(label)} toca no medo de perder uma ligação, qual destes movimentos se parece mais contigo?`,
+  label=>`Se uma conversa importante começasse por ${lower(label)}, como tenderias a entrar nela?`,
+  label=>`Quando ${lower(label)} não se resolve depressa, o que acontece à tua forma de estar na relação?`,
+  label=>`Se ${lower(label)} te fizesse sentir exposto numa relação, como procurarias segurança?`,
+  label=>`Perante ${lower(label)}, qual destas formas de aproximação ou afastamento reconheces mais em ti?`
 ];
 const APEGO_CHOICES=[
   [
@@ -122,7 +136,15 @@ const AFETO_STEMS=[
   label=>`Quando o tema é ${lower(label)}, o que te faria sentir mais cuidado?`,
   label=>`Numa fase marcada por ${lower(label)}, que gesto te chegaria mais fundo?`,
   label=>`Se ${lower(label)} estivesse a pesar entre duas pessoas, o que faria mais diferença para ti?`,
-  label=>`Quando pensas em ${lower(label)}, qual destas formas de presença te faria sentir mais visto?`
+  label=>`Quando pensas em ${lower(label)}, qual destas formas de presença te faria sentir mais visto?`,
+  label=>`Num dia em que ${lower(label)} te tivesse mexido contigo, o que te saberia mais a cuidado?`,
+  label=>`Se alguém percebesse que ${lower(label)} te está a pesar, como gostarias que mostrasse que está contigo?`,
+  label=>`Quando atravessas ${lower(label)}, qual destes gestos fica contigo por mais tempo?`,
+  label=>`Se não tivesses de pedir, que forma de cuidado desejarias receber perante ${lower(label)}?`,
+  label=>`Quando ${lower(label)} te deixa mais vulnerável, o que te faz sentir verdadeiramente acompanhado?`,
+  label=>`Se alguém quisesse dizer “eu vejo-te” enquanto lidas com ${lower(label)}, que gesto falaria mais alto?`,
+  label=>`Perante ${lower(label)}, qual destas coisas te faria sentir lembrado e não apenas ajudado?`,
+  label=>`Quando ${lower(label)} ocupa demasiado espaço, que forma de afecto te ajuda mais a voltar a ti?`
 ];
 const AFETO_CHOICES=[
   [
@@ -163,7 +185,7 @@ export function composeVpcQuestionSet({test,seed,vaultQuestions=[]}={}){
 
   if(normalized==='attention'){
     const ocean=buildAttentionPool(rng);
-    const questions=blend(vault,ocean,12,rng,cardSignature);
+    const questions=blendAttention(vault,ocean,12,rng);
     return payload(normalized,questions,seed,vault.length);
   }
   if(normalized==='apego'){
@@ -216,10 +238,7 @@ function payload(test,questions,seed,vaultCount){
 }
 
 function buildAttentionPool(rng){
-  const topics=[
-    ...ORACLE_TERRITORIES.map(t=>({id:t.slug,label:t.label,kind:'ocean-territory'})),
-    ...VPC_OCEAN_SIGNALS.flatMap(o=>(o.themes||[]).map((theme,index)=>({id:o.id+'-'+index,label:humanize(theme),kind:'ocean-signal',oceanId:o.id})))
-  ];
+  const topics=brainTopics();
   const pool=[];
   for(const topic of shuffle(topics,rng)){
     for(let v=0;v<ATTENTION_TOPIC_STEMS.length;v++){
@@ -279,19 +298,22 @@ function buildAfetoPool(rng){
 }
 
 function relationshipTopics(){
+  // Every Brain territory may become relational in real life (money, work, home, grief, identity, etc.).
+  // Relevance is expressed by the relational wording of the question, not by discarding whole Brain domains.
+  return brainTopics();
+}
+
+function brainTopics(){
   const out=[];
   for(const t of ORACLE_TERRITORIES){
-    if(t.group==='Relações & Vínculos'||['Família & Laços','Família & Cuidado'].includes(t.group)){
-      out.push({id:t.slug,label:t.label,kind:'ocean-territory'});
-    }
+    out.push({id:t.slug,label:t.label,kind:'brain-territory'});
   }
   for(const s of VPC_OCEAN_SIGNALS){
-    if(/v[ií]nculo|rela[cç]|solid[aã]o|cuidar|silencia|perda|conex/i.test([s.id,s.intent,...(s.themes||[])].join(' '))){
-      out.push({id:s.id,label:humanize(s.themes?.[0]||s.id),kind:'ocean-signal',oceanId:s.id});
-    }
+    const themes=(s.themes||[]).length?s.themes:[s.intent||s.id];
+    themes.forEach((theme,index)=>out.push({id:s.id+'-'+index,label:humanize(theme),kind:'ocean-signal',oceanId:s.id}));
   }
   for(const s of buildPdiThemeSourceSignals()){
-    if(s.source==='pdi-conversation')out.push({id:s.slug,label:s.label,kind:'maison-conversation-seed'});
+    if(s?.label)out.push({id:s.slug||s.id||normalize(s.label),label:s.label,kind:'brain-signal'});
   }
   return uniqueBy(out,x=>normalize(x.label));
 }
@@ -310,6 +332,34 @@ function validateCard(card){
   }
   const expected=card.test==='apego'?4:5;
   return Array.isArray(card.a)&&card.a.length===expected&&card.a.every(x=>Array.isArray(x)&&x.length===2&&cleanText(x[1],180));
+}
+
+function blendAttention(vault,ocean,count,rng){
+  const approved=shuffle(dedupe(vault,cardSignature),rng);
+  const generated=shuffle(dedupe(ocean,cardSignature),rng);
+  const maxVault=Math.min(approved.length,Math.max(2,Math.floor(count*.4)));
+  const selected=approved.slice(0,maxVault);
+  const seen=new Set(selected.map(cardSignature));
+  const exposure=Object.fromEntries(AXES.map(k=>[k,0]));
+  selected.forEach(card=>(card.a||[]).forEach(x=>{if(exposure[x.p]!==undefined)exposure[x.p]++}));
+  while(selected.length<count){
+    let best=null,bestScore=-Infinity;
+    for(const card of generated){
+      const sig=cardSignature(card); if(seen.has(sig))continue;
+      const score=(card.a||[]).reduce((sum,x)=>sum+(12-(exposure[x.p]||0)),0)+rng();
+      if(score>bestScore){best=card;bestScore=score}
+    }
+    if(!best)break;
+    selected.push(best);seen.add(cardSignature(best));
+    best.a.forEach(x=>exposure[x.p]++);
+  }
+  for(const card of approved.slice(maxVault)){
+    if(selected.length>=count)break;
+    const sig=cardSignature(card);if(seen.has(sig))continue;
+    selected.push(card);seen.add(sig);
+  }
+  if(selected.length<count)throw new Error('insufficient_vpc_questions');
+  return shuffle(selected,rng);
 }
 
 function blend(vault,ocean,count,rng,signature){
