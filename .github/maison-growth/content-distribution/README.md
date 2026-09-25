@@ -231,11 +231,32 @@ Cada ideia tem:
 
 A aprendizagem pode assim distinguir “ideia” de “execução de formato”.
 
-## Calendário
+## Calendário e distribuição manual
 
 O planeador de calendário aceita apenas peças em `approved_for_manual_distribution` e com `human_review_ref`.
 
-O resultado é um plano. Não chama APIs de redes sociais, não agenda publicação e não faz POST externo.
+O `distribution.py` transforma uma peça aprovada num pacote operacional com:
+
+- copy pública;
+- brief visual;
+- CTA aprovado;
+- canal;
+- plataforma e superfície derivadas do canal;
+- data planeada;
+- referência da revisão humana;
+- lineage de campanha/comparação quando existe;
+- contexto exacto que deve regressar na medição.
+
+A taxonomia separa:
+
+- **channel**: rota concreta, por exemplo `instagram_reels`;
+- **platform**: família, por exemplo `instagram`;
+- **surface**: superfície, por exemplo `reels`;
+- **format**: tipo editorial, por exemplo `short_video`.
+
+Isto permite comparar Reels e carrossel dentro de Instagram sem confundir essa diferença com Instagram versus TikTok.
+
+O pacote continua a ser de execução manual. Não chama APIs de redes sociais, não guarda credenciais, não agenda publicação e não faz POST externo. Para `maison_site`, a escrita pública continua governada pelo A9.
 
 ## Aprendizagem
 
@@ -264,6 +285,8 @@ O feedback é produzido como input A2 `content.performance_observed`. O A2 valid
 - taxas em basis points apenas quando existe denominador real;
 - hash das referências canónicas de origem, em vez de replicar inteligência do Brain;
 - referência da revisão humana.
+
+Nas comparações editoriais, cada interpretação usa no máximo **um snapshot por variante** e exige janelas com a mesma duração. Snapshots repetidos ou sobrepostos do mesmo conteúdo não são tratados como amostras independentes. O resultado continua a ser um sinal direccional, nunca uma afirmação causal nem uma promoção automática.
 
 O A11 actual não aceita `content` como `source_kind`. Este rio não altera esse contrato, porque isso pertence à arquitectura central de aprendizagem. O ficheiro `brain-feedback-handoff.json` descreve o handoff necessário sem criar datastore, regra de confiança ou motor de aprendizagem paralelo.
 
