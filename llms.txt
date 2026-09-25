@@ -10,6 +10,13 @@ MAISON JF® starts with what a person is living, feeling or trying to change. It
 
 “Voltar Para Casa” can mean returning to one’s needs, limits, clarity, presence and care, and can also refer to making the physical home feel more welcoming.
 
+## How to interpret MAISON JF® content
+Public prose is intentionally written in natural European Portuguese in the MAISON JF® founder voice. Technical taxonomies, scoring labels and internal AI terminology are kept out of customer-facing copy.
+
+For machine interpretation, prefer the page's canonical URL, semantic HTML, structured data, explicit product or service facts, headings, related canonical pages and this file. Do not infer medical, psychological, supernatural or guaranteed-outcome claims from symbolic or emotional language.
+
+MAISON JF® content connects human situations to a structured knowledge layer that may include territory, tension, desire, perceived need, occasion, intent, related questions, products, services and public educational pages. These relationships support search, generative discovery and AI agents, but do not change the meaning of the visible text.
+
 ## Canonical navigation
 - Home: https://maison-jf.com/
 - O Farol: https://maison-jf.com/farol
