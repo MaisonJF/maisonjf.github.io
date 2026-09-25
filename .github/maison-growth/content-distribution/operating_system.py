@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Any, Mapping, Sequence
 
 from planner import (
@@ -297,65 +298,111 @@ def build_campaign_calendar(
     return plan
 
 
+def _window_seconds(start: str, end: str) -> int:
+    def parse(value: str) -> datetime:
+        raw = value[:-1] + "+00:00" if value.endswith("Z") else value
+        try:
+            dt = datetime.fromisoformat(raw)
+        except ValueError as exc:
+            raise ContentContractError("comparison_window_timestamp_invalid") from exc
+        if dt.tzinfo is None:
+            raise ContentContractError("comparison_window_timezone_required")
+        return dt
+    seconds = int((parse(end) - parse(start)).total_seconds())
+    if seconds <= 0:
+        raise ContentContractError("comparison_window_must_be_positive")
+    return seconds
+
+
 def interpret_comparison(
     comparison: Mapping[str, Any],
     observations: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """Return a directional observation without claiming causality or auto-selecting a winner."""
+    """Return a directional observation without treating repeated/overlapping snapshots as independent samples."""
     privacy_scan(comparison)
     comparison_id = _text(comparison.get("comparison_id"), "comparison_id", 100, True)
     metric = _text(comparison.get("primary_metric"), "primary_metric", 80, True)
     if metric not in OBSERVABLE_METRICS:
         raise ContentContractError("unsupported_primary_metric")
 
-    variant_ids = {
-        str(x.get("content_id"))
-        for x in comparison.get("variants", ())
+    variants_raw = comparison.get("variants", ())
+    if not isinstance(variants_raw, Sequence) or isinstance(variants_raw, (str, bytes)):
+        raise ContentContractError("comparison_variants_missing")
+    variants = {
+        str(x.get("content_id")): x
+        for x in variants_raw
         if isinstance(x, Mapping) and x.get("content_id")
     }
-    if len(variant_ids) < 2:
+    if len(variants) < 2:
         raise ContentContractError("comparison_variants_missing")
 
-    values = []
+    by_content: dict[str, dict[str, Any]] = {}
+    durations = set()
     for obs in observations:
         privacy_scan(obs)
         cid = _text(obs.get("content_id"), "content_id", 100, True)
-        if cid not in variant_ids:
+        if cid not in variants:
             raise ContentContractError("observation_not_in_comparison")
+        if cid in by_content:
+            raise ContentContractError("duplicate_snapshot_for_variant")
+
+        channel = _text(obs.get("channel"), "channel", 80, True)
+        expected_channel = str(variants[cid].get("channel") or "")
+        if channel != expected_channel:
+            raise ContentContractError("observation_channel_mismatch")
+
+        window_start = _text(obs.get("window_start"), "window_start", 80, True)
+        window_end = _text(obs.get("window_end"), "window_end", 80, True)
+        durations.add(_window_seconds(window_start, window_end))
+
         observed_metrics = obs.get("metrics")
         if not isinstance(observed_metrics, Mapping):
             raise ContentContractError("observation_metrics_required")
         value = observed_metrics.get(metric)
-        if value is None:
-            continue
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or value < 0:
+        if value is not None and (isinstance(value, bool) or not isinstance(value, (int, float)) or value < 0):
             raise ContentContractError("invalid_comparison_metric")
-        values.append((cid, value))
 
-    by_content = {}
-    for cid, value in values:
-        by_content.setdefault(cid, []).append(value)
+        by_content[cid] = {
+            "content_id": cid,
+            "channel": channel,
+            "window_start": window_start,
+            "window_end": window_end,
+            "observed_value": value,
+        }
+
+    if len(durations) > 1:
+        raise ContentContractError("comparison_requires_equal_window_duration")
 
     summaries = []
-    for cid in sorted(variant_ids):
-        sample = by_content.get(cid, [])
+    for cid in sorted(variants):
+        obs = by_content.get(cid)
         summaries.append({
             "content_id": cid,
-            "observation_count": len(sample),
-            "observed_average": None if not sample else round(sum(sample) / len(sample), 4),
+            "channel": variants[cid].get("channel"),
+            "observation_count": 0 if obs is None else 1,
+            "observed_value": None if obs is None else obs["observed_value"],
         })
 
-    available = [x for x in summaries if x["observed_average"] is not None]
+    complete = all(x["observation_count"] == 1 and x["observed_value"] is not None for x in summaries)
     directional = None
-    if len(available) >= 2:
-        ordered = sorted(available, key=lambda x: (x["observed_average"], x["content_id"]), reverse=True)
-        if ordered[0]["observed_average"] != ordered[1]["observed_average"]:
+    if complete:
+        ordered = sorted(
+            summaries,
+            key=lambda x: (x["observed_value"], x["content_id"]),
+            reverse=True,
+        )
+        if ordered[0]["observed_value"] != ordered[1]["observed_value"]:
             directional = ordered[0]["content_id"]
 
     return {
         "comparison_id": comparison_id,
         "primary_metric": metric,
         "summaries": summaries,
+        "comparability": {
+            "all_variants_observed": complete,
+            "equal_window_duration": len(durations) <= 1,
+            "one_snapshot_per_variant": True,
+        },
         "stronger_observed_variant": directional,
         "signal_kind": "directional_observation" if directional else "insufficient_or_tied",
         "causal_claim": False,
