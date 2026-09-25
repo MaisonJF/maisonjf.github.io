@@ -1,0 +1,63 @@
+{
+  "contract_version": "SOS.DATA.1",
+  "principle": "minimum data to deliver the check-in promise; operational PII never becomes Brain memory",
+  "domains": {
+    "operational_private": {
+      "purpose": "authenticate the user, schedule check-ins, verify one trusted contact and deliver notices",
+      "allowed_fields": [
+        "account_ref",
+        "timezone",
+        "cadence_hours",
+        "next_due_at",
+        "grace_minutes",
+        "last_checkin_at",
+        "reminder_receipt_ref",
+        "trusted_notice_receipt_ref",
+        "trusted_contact_private_ref",
+        "trusted_contact_verification_state",
+        "paused_at",
+        "deleted_at"
+      ],
+      "pii_storage_rules": {
+        "trusted_contact_endpoint": "encrypted_at_rest_and_never_logged_in_plaintext",
+        "account_identity": "kept_outside_growth_events",
+        "contact_consent_receipt": "required_before_notices",
+        "logs": "redact_endpoints_tokens_and_message_bodies"
+      }
+    },
+    "brain_projection": {
+      "purpose": "aggregate product learning only",
+      "allowed_fields": [
+        "product_id",
+        "signal_kind",
+        "cadence_bucket",
+        "delivery_outcome",
+        "product_version",
+        "count"
+      ],
+      "prohibited_fields": [
+        "name",
+        "email",
+        "phone",
+        "address",
+        "account_ref",
+        "user_id",
+        "contact_id",
+        "trusted_contact_private_ref",
+        "exact_schedule",
+        "next_due_at",
+        "last_checkin_at",
+        "location",
+        "reason",
+        "message",
+        "notes",
+        "free_text"
+      ]
+    }
+  },
+  "deletion": {
+    "user_can_delete_product_data": true,
+    "operational_identity_deleted_or_unlinked": true,
+    "aggregate_brain_counts_not_reidentifiable": true
+  }
+}
