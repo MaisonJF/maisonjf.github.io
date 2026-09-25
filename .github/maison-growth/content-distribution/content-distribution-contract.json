@@ -7,7 +7,7 @@
   "voice_source": "functions/_lib/maison-content-ontology.js",
   "event_envelope_source": ".github/maison-growth/a1/event-contract-v2.json",
   "brand": {
-    "principle": "PARA DE IGNORAR! Volta Para Casa.",
+    "principle": "PÁRA DE IGNORAR! Volta Para Casa.",
     "axes": ["casa", "corpo", "cabeca", "transversal"],
     "symbol": "Farol",
     "methods": [
@@ -16,7 +16,7 @@
       "Yoichi Feral",
       "Schwartz",
       "Berger",
-      "Cialdini etico"
+      "Cialdini ético"
     ]
   },
   "formats": [
