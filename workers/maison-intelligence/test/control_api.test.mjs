@@ -193,6 +193,7 @@ test('invalid pagination is rejected before D1 query', async () => {
 test('content performance feed exposes aggregated snapshots with snapshot count', async () => {
   const e=env((sql)=>{
     assert.match(sql,/maison-content-distribution/);
+    assert.match(sql,/COUNT\(DISTINCT json_extract\(prior\.metadata_json,'\$\.source_refs_hash'\)\)/);
     return [{
       event_id:'evt_12345678-1234-7123-8123-123456789012',
       payload_hash:'a'.repeat(64),
