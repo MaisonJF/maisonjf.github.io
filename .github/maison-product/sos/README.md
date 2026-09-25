@@ -2,7 +2,7 @@
 
 ## Estado desta fundação
 
-**Fase:** fundação de produto + núcleo operacional privado prontos em código, sem runtime de produção activado.
+**Fase:** fundação de produto + runtime privado + API fail-closed + scheduler + projecção A2 prontos em código, sem runtime de produção activado.
 
 A auditoria de `main` encontrou:
 
@@ -139,7 +139,7 @@ Objectivo mínimo: WCAG 2.2 AA.
 
 ## Núcleo operacional privado
 
-A segunda fundação já está implementada em código, mas deliberadamente **não exposta como API pública**.
+O núcleo operacional está implementado e as rotas `/api/sos/*` já existem no repositório, mas permanecem **fail-closed**: sem `MAISON_SOS_API_ENABLED=true` comportam-se como indisponíveis e não há recursos externos provisionados.
 
 - binding futuro dedicado: `MAISON_SOS_DB`;
 - identidade externa obrigatoriamente verificada antes de entrar no produto;
@@ -148,6 +148,8 @@ A segunda fundação já está implementada em código, mas deliberadamente **n�
 - token de convite entregue uma única vez e persistido apenas como SHA-256;
 - apenas um contacto de confiança activo por conta no MVP;
 - aceitação do contacto activa a primeira janela diária;
+- a rotina é ancorada numa hora local fixa (`HH:MM` + timezone IANA), não em “24 horas depois do último toque”;
+- o próximo prazo é calculado no calendário local, preservando a hora humana através de DST;
 - `ESTOU AQUI` exige chave de idempotência para resistir a retries da rede;
 - scheduler escreve numa outbox; não envia directamente;
 - um aviso ao contacto só pode ser criado depois do lembrete ao utilizador estar marcado como enviado;
@@ -158,17 +160,18 @@ O armazenamento operacional fica **fisicamente separado do MAISON Brain**. Esta 
 
 ## Arquitectura de execução
 
-1. futura UI envia `ESTOU AQUI` para uma API autenticada;
-2. o adaptador de autenticação entrega ao runtime um sujeito já verificado;
-3. o runtime grava apenas a referência HMAC e o estado operacional;
-4. o scheduler cria acções idempotentes na outbox;
-5. um adapter futuro de notificação reclama uma acção;
-6. o endpoint do contacto só é decifrado *just in time* para essa entrega;
-7. receipts actualizam apenas estado operacional;
-8. um agregador futuro produz os contadores sanitizados definidos em `SOS.BRAIN.1`;
-9. só esses contadores entram no collector canónico A1/A2 como `source=sos_product`.
+1. a futura UI autentica a pessoa no Supabase e chama as rotas SOS;
+2. a API valida a sessão server-side e transforma o subject numa referência HMAC;
+3. `/api/sos/setup` cifra o canal do utilizador, configura a hora local e envia o convite directamente ao contacto;
+4. a página `/sos/aceitar/` permite **ACEITAR** ou **RECUSAR** explicitamente; o token viaja no fragmento `#token=` e é removido da barra antes do POST;
+5. `/api/sos/checkin` executa **ESTOU AQUI** com chave de idempotência e mantém a hora local fixa;
+6. o Worker agendado cria/reclama acções da outbox em lotes pequenos;
+7. Brevo entrega lembretes/avisos; endpoints são decifrados apenas *just in time*;
+8. falhas temporárias têm retry limitado; falha definitiva do lembrete bloqueia a escalada ao contacto;
+9. uma projecção diária produz exclusivamente contagens agregadas;
+10. esses envelopes são validados pelo collector canónico A2 como `source=sos_product`; o SOS não cria collector próprio.
 
-Os adapters seleccionados para o primeiro MVP são **Supabase Auth** e **Brevo Transactional Email**. Ambos permanecem desligados por variáveis de ambiente e não existem rotas públicas SOS nesta fundação.
+Os adapters seleccionados para o primeiro MVP são **Supabase Auth** e **Brevo Transactional Email**. Ambos permanecem desligados por variáveis de ambiente. As rotas existem em código, mas o produto continua inactivo enquanto os gates e recursos de provisioning não forem configurados.
 
 A validação de sessão consulta directamente o endpoint de utilizador do Supabase e descarta o perfil depois de extrair apenas o subject estável e, quando já confirmado pelo fornecedor, o email necessário ao lembrete. Esse email é imediatamente cifrado no domínio operacional.
 
@@ -182,13 +185,18 @@ O Brevo recebe apenas o endereço estritamente necessário à entrega e mensagen
 - `functions/_lib/sos-maison-core.js` — máquina de estados humana, sem efeitos externos.
 - `functions/_lib/sos-auth.js` — fronteira de identidade verificada + pseudonimização HMAC.
 - `functions/_lib/sos-crypto.js` — cifra AES-GCM para campos operacionais sensíveis.
-- `functions/_lib/sos-runtime.js` — configuração, convite, aceitação, check-in, scheduler e outbox.
+- `functions/_lib/sos-runtime.js` — configuração, convite, consentimento, check-in, pausa/retoma, eliminação e outbox.
+- `functions/_lib/sos-time.js` — calendário diário por hora local fixa e timezone IANA, incluindo DST.
 - `migrations/0001_operational_core.sql` — esquema D1 operacional separado do Brain.
 - `runtime-contract.json` — bindings, secrets e gates necessários antes de qualquer activação.
 - `adapters-contract.json` — contratos Supabase/Brevo e respectivos kill switches.
 - `functions/_lib/sos-supabase-auth.js` — validação server-side da sessão sem persistir o perfil.
 - `functions/_lib/sos-brevo.js` — email transaccional factual, sem nomes nem promessa de emergência.
 - `functions/_lib/sos-delivery.js` — entrega da outbox com retry limitado.
+- `api-contract.json` + `functions/api/sos/**` — API mínima fail-closed para setup, status, **ESTOU AQUI**, pausa, retoma, eliminação e consentimento do contacto.
+- `sos/aceitar/` — superfície mínima e sem analytics para o contacto aceitar/recusar.
+- `scheduler-contract.json` + `workers/sos-runtime/` — Worker agendado sem rota HTTP pública.
+- `a2-projection-contract.json` + `sos-brain-projection.js` — contagens agregadas compatíveis com o collector A2 canónico.
 - `validate_sos.mjs` — invariantes da primeira fundação.
 - `validate_sos_runtime.mjs` + `validate_sos_schema.py` — segurança e integridade da segunda fundação.
 
@@ -199,11 +207,11 @@ Depois desta fundação passar CI, o RIO PRODUTO DIGITAL pode construir, nesta o
 1. provisionar o projecto Supabase numa região específica da UE e configurar Auth;
 2. verificar o remetente/domínio no Brevo e criar a chave transaccional;
 3. provisionar o D1 operacional `MAISON_SOS_DB` e aplicar as duas migrations;
-4. criar as rotas API autenticadas sem devolver tokens de convite ao browser;
-5. construir a página mínima de aceitação do contacto e a UI/PWA **ESTOU AQUI**;
-6. ligar scheduler/outbox ao adapter de entrega;
-7. criar agregador A1/A2 sem PII;
-8. acrescentar testes de timezone/DST, falha de fornecedor e recuperação;
-9. activar primeiro num ambiente de teste fechado.
+4. instalar secrets e bindings sem os colocar no repositório;
+5. construir a UI/PWA principal **ESTOU AQUI** sobre a autenticação já provisionada;
+6. testar end-to-end convite → aceitação → lembrete → grace → aviso com endereços controlados;
+7. actualizar a política pública de privacidade antes de recolher dados reais;
+8. ligar a ingestão da projecção SOS apenas quando o runtime A2 canónico estiver activado;
+9. iniciar um piloto humano fechado e rever falsos avisos/falhas antes de exposição pública.
 
 A monetização pode envolver este produto no futuro, mas **preço, checkout e Stripe não pertencem a esta fundação**.
