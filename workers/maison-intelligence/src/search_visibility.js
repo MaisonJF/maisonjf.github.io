@@ -89,7 +89,9 @@ const GOOGLE_PROFILES=Object.freeze([
   {key:'devices',dimensions:['device'],cadenceHours:168,rowLimit:10},
   {key:'countries',dimensions:['country'],cadenceHours:168,rowLimit:40},
   {key:'appearance',dimensions:['searchAppearance'],cadenceHours:168,rowLimit:20},
-  {key:'fresh_pages',dimensions:['date','page'],cadenceHours:24,rowLimit:40,days:3,lagDays:0,dataState:'all'}
+  {key:'fresh_pages',dimensions:['date','page'],cadenceHours:24,rowLimit:40,days:3,lagDays:0,dataState:'all'},
+  {key:'image_pages',dimensions:['page'],cadenceHours:168,rowLimit:40,type:'image'},
+  {key:'discover_pages',dimensions:['page'],cadenceHours:168,rowLimit:40,type:'discover'}
 ]);
 
 export const DEFAULT_INSPECTION_URLS=Object.freeze([
@@ -196,7 +198,7 @@ export function searchVisibilityDue(task,scheduledDate){
 export function searchVisibilityTaskIdentity(task){
   return JSON.stringify({
     family:task.family,key:task.key,site:task.site,days:task.days??null,
-    lagDays:task.lagDays??null,dataState:task.dataState??null,dimensions:task.dimensions??null,
+    lagDays:task.lagDays??null,type:task.type??'web',dataState:task.dataState??null,dimensions:task.dimensions??null,
     rowLimit:task.rowLimit??null,method:task.method??null,
     inspectionUrls:task.inspectionUrls??null
   });
@@ -223,7 +225,7 @@ async function fetchGoogle(env,task,scheduledDate){
       startDate:startDay,
       endDate:endDay,
       dimensions:task.dimensions,
-      type:'web',
+      type:task.type||'web',
       dataState:task.dataState||'final',
       rowLimit:task.rowLimit,
       startRow:0
@@ -248,6 +250,7 @@ async function fetchGoogle(env,task,scheduledDate){
       property:task.site,
       profile:task.key,
       dimensions:task.dimensions,
+      search_type:task.type||'web',
       data_state:task.dataState||'final',
       start_date:startDay,
       end_date:endDay,
