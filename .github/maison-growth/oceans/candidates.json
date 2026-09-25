@@ -2,7 +2,7 @@
   "version": "2026-09-18",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-09-25T09:00:00+01:00",
+  "last_enriched_at": "2026-09-25T08:45:00+01:00",
   "candidates": [
     {
       "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
@@ -389,6 +389,59 @@
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-25T09:00:00+01:00",
       "lastSeenAt": "2026-09-25T09:00:00+01:00"
+    },
+    {
+      "territory": "quando-o-que-funciona-na-relacao-se-torna-invisivel",
+      "painLanguage": "Quando o olhar se habitua a procurar o que faltou, os gestos que continuam a sustentar uma relação podem desaparecer do inventário: nota-se o café que não veio, mas não o lanche que apareceu; a falha ganha nome e o cuidado repetido torna-se paisagem.",
+      "intent": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+      "commercialAdjacency": "Oráculo Relações, Comunicação & Conflito, Família & Laços e Casa Partilhada; jogo/experiência digital low-ticket de reconhecimento de gestos invisíveis; ebook/guia sobre o que sustenta uma relação no quotidiano; cartões/prompts e presentes MAISON orientados a reconhecimento; bundles presente físico+experiência digital; conteúdos altamente partilháveis com CTA para nomear um gesto concreto, sem transformar gratidão em obrigação",
+      "evidence": [
+        "Personal Relationships (2023; PMID 37745832): em dois estudos diádicos, participantes tenderam a subestimar a gratidão do parceiro; perceções mais baixas de gratidão associaram-se a menor satisfação relacional — https://pubmed.ncbi.nlm.nih.gov/37745832/",
+        "Journal of Personality and Social Psychology (2012; PMID 22642482): estudos multimétodo ligaram sentir-se apreciado, apreciação pelo parceiro, responsividade e manutenção do vínculo ao longo do tempo — https://pubmed.ncbi.nlm.nih.gov/22642482/",
+        "Journal of Family Psychology (2022; PMID 35324251): dados de 886 casais encontraram satisfação associada a mais trocas positivas e menos negativas, com evidência de que trocas positivas podem amortecer o impacto das negativas — https://pubmed.ncbi.nlm.nih.gov/35324251/",
+        "Personality and Social Psychology Bulletin (2026; PMID 41342869): quatro estudos diádicos alertam que amplificar gratidão para além do que se sente pode ter custos por menor autenticidade/responsividade; reconhecimento deve ser genuíno — https://pubmed.ncbi.nlm.nih.gov/41342869/"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "ver o que falta e deixar de ver o que funciona",
+        "gestos de cuidado que viraram paisagem",
+        "sentir que o que faço nunca conta",
+        "reconhecimento concreto sem gratidão forçada",
+        "apreciação e responsividade",
+        "não usar gratidão para apagar problemas",
+        "o inventário invisível do afeto",
+        "nomear o que sustentou o dia"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-25T08:45:00+01:00",
+      "lastSeenAt": "2026-09-25T08:45:00+01:00"
+    },
+    {
+      "territory": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
+      "painLanguage": "Às vezes a pessoa não procura uma grande transformação; procura um gesto pequeno, físico e repetível que marque a passagem entre estados — chegar a casa, fechar o dia, preparar-se para sair, recuperar presença — e aroma, toque e elementos vegetais podem tornar essa mudança perceptível.",
+      "intent": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+      "commercialAdjacency": "Linha física MAISON de rituais botânicos/sensoriais: névoas, óleos, velas, escalda-pés, wax melts, saquetas/elementos aromáticos e futuros kits de gesto/ocasião; bundles físico+digital com instrução KISS; conteúdos sobre alecrim e outras plantas pela experiência sensorial, cultural e simbólica sem prometer limpeza áurica, cura ou milagres; potencial de presentes e recompra por ritual/ocasião",
+      "evidence": [
+        "Therapeutic Advances in Psychopharmacology (2012; PMID 23983963): exposição ao aroma de alecrim e níveis absorvidos de 1,8-cineole mostraram associações com desempenho cognitivo e estado subjetivo num pequeno estudo laboratorial, sem sustentar alegações de limpeza energética — https://pubmed.ncbi.nlm.nih.gov/23983963/",
+        "Nature Human Behaviour (second-order meta-analysis, 2026; PMID 42209746): síntese de intervenções baseadas na natureza encontrou efeitos favoráveis em vários resultados de bem-estar/afeto, embora com heterogeneidade e limitações metodológicas — https://pubmed.ncbi.nlm.nih.gov/42209746/",
+        "Memory (2018; PMID 28969504): experiência laboratorial encontrou odores como pistas eficazes para evocar memórias autobiográficas, apoiando o uso do aroma como marcador sensorial/associativo sem claims sobrenaturais — https://pubmed.ncbi.nlm.nih.gov/28969504/"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "um gesto para mudar de estado",
+        "chegar a casa e marcar a transição",
+        "aroma como âncora de um momento",
+        "plantas como experiência sensorial e simbólica",
+        "ritual simples sem cerimónia excessiva",
+        "quando o corpo precisa de perceber que o dia mudou",
+        "criar um ritual que dá vontade de repetir",
+        "alecrim para além da superstição"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-25T08:45:00+01:00",
+      "lastSeenAt": "2026-09-25T08:45:00+01:00"
     },
     {
       "painLanguage": "Ter muitas opções pode parecer liberdade e, ao mesmo tempo, transformar uma escolha simples num labirinto: comparar tudo, recear deixar passar a melhor alternativa e acabar cansado, menos confiante ou sem escolher.",
