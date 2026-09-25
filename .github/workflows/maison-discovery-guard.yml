@@ -218,7 +218,7 @@ jobs:
           assert visibility['summary']['unrecovered_legacy_urls']==[]
           assert visibility['summary']['recovered_legacy_urls']==visibility['summary']['legacy_observed_urls']
           assert visibility['summary']['inspection_targets']==6
-          assert visibility['summary']['google_readonly_sensor_tasks']==8
+          assert visibility['summary']['google_readonly_sensor_tasks']==10
           assert visibility['summary']['baseline_sitemap_submitted']==visibility['summary']['baseline_public_pages']
           assert visibility['summary']['baseline_sitemap_page_delta']==0
           assert visibility['summary']['ai_visibility_probes']>=6
