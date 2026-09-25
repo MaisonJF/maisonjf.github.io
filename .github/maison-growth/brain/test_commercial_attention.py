@@ -17,15 +17,18 @@ class CommercialAttentionTests(unittest.TestCase):
         cls.policy=json.loads((ROOT/"commercial-attention-policy.json").read_text(encoding="utf-8"))
         cls.assets=json.loads((ROOT/"commercial-assets.generated.json").read_text(encoding="utf-8"))
         cls.editorial=json.loads((ROOT/"editorial-queue.json").read_text(encoding="utf-8"))
+        cls.candidates=json.loads((ROOT.parent/"oceans"/"candidates.json").read_text(encoding="utf-8"))
         cls.payload=build_attention(
             policy=cls.policy,
             registry=cls.assets,
             editorial=cls.editorial,
+            candidates=cls.candidates,
         )
 
     def test_projection_is_derived_from_current_sources(self):
         self.assertEqual(self.payload["source_assets"],"commercial-assets.generated.json")
-        self.assertEqual(self.payload["source_oceans"],"editorial-queue.json")
+        self.assertEqual(self.payload["source_oceans"],"../oceans/candidates.json")
+        self.assertEqual(self.payload["source_editorial_context"],"editorial-queue.json")
         self.assertEqual(self.payload["summary"]["ranked_assets"],14)
 
     def test_attention_is_not_profit_or_execution_authority(self):
