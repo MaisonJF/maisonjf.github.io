@@ -14,7 +14,8 @@
     "reminder_before_escalation": true,
     "grace_period_required": true,
     "contact_verification_required": true,
-    "pause_supported": true
+    "pause_supported": true,
+    "schedule_anchor": "fixed local HH:MM in the user's IANA timezone"
   },
   "invariants": {
     "no_emergency_promise": true,
