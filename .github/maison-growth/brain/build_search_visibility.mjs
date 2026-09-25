@@ -86,7 +86,15 @@ export function buildSearchVisibility(){
         mode:'read_only',
         implemented:true,
         credential_gated:true,
-        profiles:['pages','queries','devices','countries','appearance']
+        profiles:['pages','queries','devices','countries','appearance','fresh_pages'],
+        fresh_data:{
+          profile:'fresh_pages',
+          data_state:'all',
+          window_days:3,
+          dimensions:['date','page'],
+          provisional_metadata_preserved:true,
+          search_console_timezone:'America/Los_Angeles'
+        }
       },
       google_url_inspection:{
         provider_id:'google_search_console',
@@ -141,7 +149,7 @@ export function buildSearchVisibility(){
       search_appearance_features:searchAppearance.length,
       product_snippet_impressions:sum(searchAppearance.filter(row=>row.feature==='PRODUCT_SNIPPETS'),'impressions'),
       inspection_targets:DEFAULT_INSPECTION_URLS.length,
-      google_readonly_sensor_tasks:7,
+      google_readonly_sensor_tasks:8,
       baseline_sitemap_submitted:Number(snapshot.sitemap?.submitted||0),
       baseline_public_pages:publicDiscovery.summary.page_count,
       baseline_sitemap_page_delta:Number(snapshot.sitemap?.submitted||0)-publicDiscovery.summary.page_count,
