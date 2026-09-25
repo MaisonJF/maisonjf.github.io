@@ -68,6 +68,13 @@ const graph={
       ...x,
       segments:[...(x.segments||[])],routes:[...(x.routes||[])],recurrence:[...(x.recurrence||[])]
     })),
+    commercialReadiness:{
+      ...(b2b.commercialReadiness||{}),
+      requiredBeforeQuote:[...(b2b.commercialReadiness?.requiredBeforeQuote||[])],
+      optionalWhenRelevant:[...(b2b.commercialReadiness?.optionalWhenRelevant||[])],
+      unknownByDefault:[...(b2b.commercialReadiness?.unknownByDefault||[])],
+      productRefs:[...(b2b.commercialReadiness?.productRefs||[])]
+    },
     recurrence:{
       ...(b2b.recurrence||{}),
       supportedNow:[...(b2b.recurrence?.supportedNow||[])],
