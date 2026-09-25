@@ -98,7 +98,7 @@ test('A11 content append persists only append-only internal rows',async()=>{
 test('A11 rejects stale confidence',async()=>{
   const db=new FakeD1({previous:{confidence_after:60}});
   await assert.rejects(
-    ()=>appendContentLearning(db,validPayload()),
+    async()=>appendContentLearning(db,await validPayload()),
     error=>error instanceof A11RuntimeError&&error.code==='stale_learning_confidence'
   );
 });
