@@ -92,8 +92,8 @@ class RemoteSchemaGateTests(unittest.TestCase):
             self.apply.index("0019_content_learning_source.sql"),
             self.apply.index("0020_learning_rule_seed.sql"),
         )
-        self.assertIn("maison_growth_a11_rule_version", self.verify)
-        self.assertIn("rul_e6217bb187b5ef0b6ee371286ed2e1e53e0d", self.verify)
+        self.assertIn("maison_growth_a11_rule_version", self.source)
+        self.assertIn("rul_e6217bb187b5ef0b6ee371286ed2e1e53e0d", self.source)
 
     def test_runtime_helpers_default_to_canonical_growth_database(self):
         self.assertIn('DB_NAME="${1:-maison-growth-engine}"', self.inspect)
