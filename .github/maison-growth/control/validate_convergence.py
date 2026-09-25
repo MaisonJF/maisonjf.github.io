@@ -30,6 +30,27 @@ def ok(message: str) -> None:
 
 
 # 1) A generated artefact that has a --check contract must actually exist.
+policy_rel = ".github/maison-growth/brain/derived-artifacts-policy.json"
+policy_text = read(policy_rel)
+if policy_text:
+    try:
+        policy = json.loads(policy_text)
+    except json.JSONDecodeError as exc:
+        fail(f"{policy_rel} is invalid JSON: {exc}")
+    else:
+        for item in policy.get("derived_artifacts", []):
+            rel = str(item.get("path") or "").strip()
+            builder_rel = str(item.get("builder") or "").strip()
+            if not rel:
+                fail(f"{policy_rel} contains a derived artefact without a path")
+                continue
+            if item.get("policy") == "generated_and_committed" and not (ROOT / rel).exists():
+                fail(f"{policy_rel} declares generated_and_committed artefact that is not tracked: {rel}")
+            if builder_rel and not (ROOT / builder_rel).exists():
+                fail(f"{policy_rel} points to a missing builder: {builder_rel}")
+        if not FAILURES:
+            ok("Derived-artifact policy paths resolve to tracked artefacts/builders")
+
 kg_builder_rel = ".github/maison-growth/brain/build_maison_knowledge_graph.mjs"
 kg_generated_rel = ".github/maison-growth/brain/maison-knowledge-graph.generated.json"
 kg_builder = read(kg_builder_rel)
