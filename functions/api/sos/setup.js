@@ -16,10 +16,11 @@ export async function onRequestPost({request,env}){
     }
     const body=await readSosJson(request);
     const timezone=String(body.timezone||'');
+    const checkinLocalTime=String(body.checkinLocalTime||'');
     const trustedContactEmail=String(body.trustedContactEmail||'');
     const graceMinutes=body.graceMinutes==null?60:Number(body.graceMinutes);
 
-    await configureSosAccount({env,identity:auth.identity,timezone,graceMinutes});
+    await configureSosAccount({env,identity:auth.identity,timezone,checkinLocalTime,graceMinutes});
     await setSosUserReminderEndpoint({env,identity:auth.identity,endpoint:auth.reminder.value});
     const invite=await createTrustedContactInvite({
       env,identity:auth.identity,endpointKind:'email',endpoint:trustedContactEmail
