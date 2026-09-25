@@ -42,6 +42,7 @@ const htmlFiles=[...new Set(discovery.pages.map(page=>page.source_file))];
 const organizationDefinitions=[];
 const websiteDefinitions=[];
 const anonymousOrganizations=[];
+const publicServiceNames=new Set();
 let serializedPublicSchema='';
 
 for(const file of htmlFiles){
@@ -54,6 +55,7 @@ for(const file of htmlFiles){
         else anonymousOrganizations.push({file,node});
       }
       if(hasType(node,'WebSite'))websiteDefinitions.push({file,node});
+      if(hasType(node,'Service')&&node.name)publicServiceNames.add(String(node.name));
     });
   }
 }
@@ -103,8 +105,8 @@ const hidden=services.filter(service=>service.public===false).map(service=>servi
 assert(hidden.length>0,'expected explicitly non-public services');
 for(const name of hidden){
   assert(
-    !serializedPublicSchema.includes(name),
-    'non-public service leaked into public JSON-LD: '+name
+    !publicServiceNames.has(name),
+    'non-public service leaked as public Service entity: '+name
   );
 }
 
