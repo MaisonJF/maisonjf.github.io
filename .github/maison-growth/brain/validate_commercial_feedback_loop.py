@@ -26,6 +26,10 @@ checks={
     "A3 recognizes confirmed purchase": (
         ".github/maison-growth/a3/journey_engine.py", ['"commerce.purchase_confirmed": "purchase"']
     ),
+    "B2B lifecycle reuses central A3": (
+        ".github/maison-growth/a3/journey_engine.py",
+        ['"b2b.lead": "lead"','"b2b.proposal": "proposal"','"b2b.pilot": "pilot"','"b2b.purchase": "purchase"','"b2b.recurrence": "recurrence"']
+    ),
     "A11 learns contextual offer funnel": (
         ".github/maison-growth/a11/engine.py", ["evaluate_offer_funnel","offer_context_key","confidence_before"]
     ),
