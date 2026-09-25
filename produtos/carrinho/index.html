@@ -70,7 +70,9 @@
   itemsHost.innerHTML='';
   if(!cart.length){
    itemsHost.innerHTML='<div class="cart__empty"><h2>O carrinho está vazio.</h2><p>Escolhe os produtos que queres juntar na mesma encomenda.</p><a class="button button--light" href="../">Ver Produtos</a></div>';
-   summary.hidden=true;return;
+   summary.hidden=true;
+   write(cart);
+   return;
   }
   summary.hidden=false;
   for(const item of cart){
