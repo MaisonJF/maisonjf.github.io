@@ -1,5 +1,6 @@
 import { sosAccountRef } from './sos-auth.js';
 import { encryptSosSecret, decryptSosSecret } from './sos-crypto.js';
+import { nextSosDueAt,validateSosLocalTime } from './sos-time.js';
 
 const HOUR=60*60*1000;
 const MINUTE=60*1000;
@@ -38,23 +39,25 @@ async function accountFor(db,accountRef){
   return await db.prepare('SELECT * FROM sos_accounts WHERE account_ref=?1 LIMIT 1').bind(accountRef).first();
 }
 
-export async function configureSosAccount({env,identity,timezone,graceMinutes=60,at=new Date().toISOString()}={}){
+export async function configureSosAccount({env,identity,timezone,checkinLocalTime,graceMinutes=60,at=new Date().toISOString()}={}){
   const db=requireSosDb(env);
   const accountRef=await sosAccountRef(env,identity);
   const when=nowIso(at);
   const tz=validateTimezone(timezone);
+  const localTime=validateSosLocalTime(checkinLocalTime);
   const grace=validateGrace(graceMinutes);
   await db.prepare(`
-    INSERT INTO sos_accounts(account_ref,timezone,cadence_hours,grace_minutes,status,created_at,updated_at)
-    VALUES(?1,?2,24,?3,'setup',?4,?4)
+    INSERT INTO sos_accounts(account_ref,timezone,checkin_local_time,cadence_hours,grace_minutes,status,created_at,updated_at)
+    VALUES(?1,?2,?3,24,?4,'setup',?5,?5)
     ON CONFLICT(account_ref) DO UPDATE SET
       timezone=excluded.timezone,
+      checkin_local_time=excluded.checkin_local_time,
       cadence_hours=24,
       grace_minutes=excluded.grace_minutes,
       status=CASE WHEN sos_accounts.status='deleted' THEN 'setup' ELSE sos_accounts.status END,
       deleted_at=CASE WHEN sos_accounts.status='deleted' THEN NULL ELSE sos_accounts.deleted_at END,
       updated_at=excluded.updated_at
-  `).bind(accountRef,tz,grace,when).run();
+  `).bind(accountRef,tz,localTime,grace,when).run();
   return {accountRef,status:(await accountFor(db,accountRef))?.status||'setup'};
 }
 
@@ -104,6 +107,7 @@ export async function getSosStatus({env,identity}={}){
     trustedContactVerified:Boolean(contact?.verified_at),
     reminderChannelVerified:Boolean(channel?.verified_at),
     timezone:account.timezone,
+    checkinLocalTime:account.checkin_local_time,
     cadenceHours:Number(account.cadence_hours||24),
     graceMinutes:Number(account.grace_minutes||60),
     nextDueAt:account.next_due_at||null,
@@ -147,7 +151,7 @@ export async function resumeSos({env,identity,at=new Date().toISOString()}={}){
   if(!contact)throw new Error('sos_trusted_contact_not_verified');
   if(!channel)throw new Error('sos_user_reminder_not_verified');
   const when=nowIso(at);
-  const dueAt=plus(when,Number(account.cadence_hours||24)*HOUR);
+  const dueAt=nextSosDueAt({afterIso:when,timeZone:account.timezone,localTime:account.checkin_local_time});
   const graceUntil=plus(dueAt,Number(account.grace_minutes||60)*MINUTE);
   const dueRef=opaqueId('sdw_');
   await db.batch([
@@ -219,7 +223,7 @@ export async function acceptTrustedContactInvite({env,token,at=new Date().toISOS
   const tokenHash=await sha256Hex(String(token||''));
   const row=await db.prepare(`
     SELECT i.invite_ref,i.expires_at,i.accepted_at,i.revoked_at,c.contact_ref,c.account_ref,c.revoked_at AS contact_revoked,
-           a.cadence_hours,a.grace_minutes,a.status
+           a.cadence_hours,a.grace_minutes,a.timezone,a.checkin_local_time,a.status
     FROM sos_contact_invites i
     JOIN sos_trusted_contacts c ON c.contact_ref=i.contact_ref
     JOIN sos_accounts a ON a.account_ref=c.account_ref
@@ -234,7 +238,7 @@ export async function acceptTrustedContactInvite({env,token,at=new Date().toISOS
     .bind(row.account_ref).first();
   if(!reminder)throw new Error('sos_user_reminder_not_verified');
 
-  const dueAt=plus(when,Number(row.cadence_hours||24)*HOUR);
+  const dueAt=nextSosDueAt({afterIso:when,timeZone:row.timezone,localTime:row.checkin_local_time});
   const graceUntil=plus(dueAt,Number(row.grace_minutes||60)*MINUTE);
   const dueRef=opaqueId('sdw_');
   await db.batch([
@@ -297,7 +301,7 @@ export async function checkInSos({
   const previous=await db.prepare(`
     SELECT due_ref FROM sos_due_windows WHERE account_ref=?1 AND due_at=?2 LIMIT 1
   `).bind(accountRef,account.next_due_at).first();
-  const nextDueAt=plus(when,Number(account.cadence_hours||24)*HOUR);
+  const nextDueAt=nextSosDueAt({afterIso:when,timeZone:account.timezone,localTime:account.checkin_local_time});
   const graceUntil=plus(nextDueAt,Number(account.grace_minutes||60)*MINUTE);
   const nextDueRef=opaqueId('sdw_');
   const checkinRef=opaqueId('sci_');
