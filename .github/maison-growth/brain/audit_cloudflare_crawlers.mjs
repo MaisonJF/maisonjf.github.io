@@ -81,6 +81,31 @@ export function summariseCrawlerGroups(policy,groups=[]){
   }));
 }
 
+export function summariseReferralGroups(groups=[]){
+  const operators={
+    OpenAI:new Set(['chatgpt.com','openai.com']),
+    Anthropic:new Set(['claude.ai','anthropic.com']),
+    Perplexity:new Set(['perplexity.ai'])
+  };
+  const totals=Object.fromEntries(Object.keys(operators).map(name=>[name,{operator:name,requests:0,hosts:new Set()}]));
+  for(const group of groups){
+    const host=String(group?.dimensions?.clientRefererHost||'').toLowerCase().replace(/^www\./,'');
+    const count=Number(group?.count||0);
+    for(const [operator,hosts] of Object.entries(operators)){
+      if(hosts.has(host)){
+        totals[operator].requests+=count;
+        totals[operator].hosts.add(host);
+      }
+    }
+  }
+  return Object.values(totals).map(row=>({
+    operator:row.operator,
+    requests:row.requests,
+    observed:row.requests>0,
+    hosts:[...row.hosts].sort()
+  }));
+}
+
 async function resolveZone(accountId){
   const url=new URL(API+'/zones');
   url.searchParams.set('name','maison-jf.com');
@@ -131,6 +156,44 @@ async function queryPresence(zoneId,policy,start,end){
   return data?.data?.viewer?.zones?.[0]?.groups||[];
 }
 
+async function queryAiReferrals(zoneId,start,end){
+  const query=`query AIReferrals($zoneTag: string, $start: Time, $end: Time) {
+    viewer {
+      zones(filter: {zoneTag: $zoneTag}) {
+        groups: httpRequestsAdaptiveGroups(
+          limit: 500
+          orderBy: [count_DESC]
+          filter: {
+            datetime_geq: $start
+            datetime_leq: $end
+            requestSource: "eyeball"
+            OR: [
+              {clientRefererHost: "chatgpt.com"}
+              {clientRefererHost: "openai.com"}
+              {clientRefererHost: "claude.ai"}
+              {clientRefererHost: "anthropic.com"}
+              {clientRefererHost: "perplexity.ai"}
+            ]
+          }
+        ) {
+          count
+          dimensions {
+            clientRefererHost
+          }
+        }
+      }
+    }
+  }`;
+  const data=await cfJson(GRAPHQL,{
+    method:'POST',
+    body:JSON.stringify({query,variables:{zoneTag:zoneId,start,end}})
+  });
+  if(Array.isArray(data.errors)&&data.errors.length){
+    throw new Error('cloudflare_referral_graphql:'+JSON.stringify(data.errors).slice(0,1000));
+  }
+  return data?.data?.viewer?.zones?.[0]?.groups||[];
+}
+
 export async function auditCrawlerPresence({output=null}={}){
   const policy=JSON.parse(fs.readFileSync(POLICY_PATH,'utf8'));
   const accountId=required('CLOUDFLARE_ACCOUNT_ID');
@@ -153,12 +216,29 @@ export async function auditCrawlerPresence({output=null}={}){
   try{
     const zoneId=await resolveZone(accountId);
     const groups=await queryPresence(zoneId,policy,start,end);
+    let aiReferrals;
+    try{
+      const referralGroups=await queryAiReferrals(zoneId,start,end);
+      aiReferrals={
+        observability:'available',
+        sources:summariseReferralGroups(referralGroups),
+        total_requests:referralGroups.reduce((sum,row)=>sum+Number(row.count||0),0)
+      };
+    }catch(referralError){
+      aiReferrals={
+        observability:'unavailable',
+        reason:String(referralError?.message||referralError).slice(0,1000),
+        sources:[],
+        note:'Referral host analytics may require a paid Cloudflare plan; no zero-referral claim is made.'
+      };
+    }
     const result={
       ...base,
       observability:'available',
       zone:'maison-jf.com',
       crawlers:summariseCrawlerGroups(policy,groups),
       total_verified_crawler_requests:groups.reduce((sum,row)=>sum+Number(row.count||0),0),
+      ai_referrals:aiReferrals,
       note:'Counts may be sampled according to Cloudflare analytics plan/dataset behaviour.'
     };
     if(output)fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n');
