@@ -6,6 +6,7 @@ import unittest
 from brain_control_client import BrainControlClient, BrainControlError, _safe_base_url
 from brain_observe_cycle import (
     _cash_context_by_territory,
+    _b2b_context_by_territory,
     _learning_context_by_territory,
     _offer_types_by_territory,
     _solutions_by_territory,
@@ -41,6 +42,16 @@ class BrainControlClientTests(unittest.TestCase):
         client.learning(limit=15)
         self.assertIn("/internal/brain/learning",captured["url"])
         self.assertIn("limit=15",captured["url"])
+
+    def test_b2b_feedback_route_is_read_only_client_call(self):
+        captured={}
+        def transport(url,**kwargs):
+            captured["url"]=url
+            return {"rows":[]}
+        client=BrainControlClient("https://brain.example","secret",transport=transport)
+        client.b2b_feedback(limit=12)
+        self.assertIn("/internal/brain/b2b-feedback",captured["url"])
+        self.assertIn("limit=12",captured["url"])
 
     def test_cloudflare_access_credentials_are_paired(self):
         with self.assertRaises(BrainControlError):
@@ -97,6 +108,22 @@ class BrainControlClientTests(unittest.TestCase):
         self.assertEqual(
             _cash_context_by_territory(cash,links),
             {"home":("a3:eva_x",)}
+        )
+
+    def test_b2b_context_uses_solution_territory_links_only(self):
+        b2b=[{
+            "conversion_id":"cnv_x",
+            "solution_id":"sol_b2b",
+            "lifecycle_stage":"pilot",
+            "business":"spa",
+        }]
+        links=[
+            {"territory_key":"body","solution_id":"sol_b2b"},
+            {"territory_key":"home","solution_id":"sol_other"},
+        ]
+        self.assertEqual(
+            _b2b_context_by_territory(b2b,links),
+            {"body":("b2b:pilot:cnv_x",)}
         )
 
     def test_offer_types_derive_from_existing_solution_types_plus_explicit_policy(self):
