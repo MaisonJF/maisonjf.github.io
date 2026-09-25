@@ -137,7 +137,7 @@ function attributedHref(raw,offerId,result,route,brainVersion){
 function offerMarkup(o,index,result,route,brainVersion){
  const label=o.slotLabel||'';
  const href=attributedHref(o.href,o.id,result,route,brainVersion);
- return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brainVersion||'fallback')+'" href="'+esc(href)+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
+ return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brainVersion||'fallback')+'" data-vpc-result="'+esc(result)+'" href="'+esc(href)+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
 }
 async function renderBrainOffers(result,ranked,route){
  const host=$('nextLinks');
@@ -151,6 +151,7 @@ async function renderBrainOffers(result,ranked,route){
   const payload=await response.json().catch(()=>({}));
   if(!response.ok||!Array.isArray(payload.offers)||!payload.offers.length)throw new Error('brain_unavailable');
   host.innerHTML=payload.offers.map((o,index)=>offerMarkup(o,index,result,route,payload.version)).join('');
+  payload.offers.forEach(o=>window.maisonAnalytics?.trackOfferExposure?.(o,{source:'vpc',result,brain:payload.version}));
   track('vpc_offer_brain_result',{result,route,brain_version:payload.version,offers:payload.offers.map(o=>o.id).join(',')});
  }catch(e){
   host.innerHTML=FALLBACK_OFFERS.map((o,index)=>offerMarkup(o,index,result,route,'fallback')).join('');
