@@ -96,6 +96,7 @@ run("bash",".github/maison-growth/brain/rebuild_commercial_context.sh","--check"
 run(sys.executable,".github/maison-growth/brain/test_schema_chain.py")
 run(sys.executable,".github/maison-growth/a2/test_event_collector.py")
 run(sys.executable,".github/maison-growth/a3/validate_a3.py")
+run("node","--test","functions/_lib/commerce-telemetry.test.mjs")
 run(sys.executable,".github/maison-growth/a11/test_a11.py")
 run(sys.executable,".github/maison-growth/brain/validate_commercial_feedback_loop.py")
 run("node",".github/maison-growth/vault/validate_pdi_registry.mjs")
