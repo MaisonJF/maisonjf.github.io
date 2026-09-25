@@ -21,7 +21,7 @@ checks={
         ".github/maison-growth/a2/source-registry.json", ['"offer."','"offer_id"','"recommendation_route"']
     ),
     "Stripe emits confirmed purchase": (
-        "functions/_lib/commerce-events.js", ["commerce.purchase_confirmed","INSERT INTO events"]
+        "functions/_lib/commerce-events.js", ["commerce.purchase_confirmed","INSERT OR IGNORE INTO events"]
     ),
     "A3 recognizes confirmed purchase": (
         ".github/maison-growth/a3/journey_engine.py", ['"commerce.purchase_confirmed": "purchase"']
