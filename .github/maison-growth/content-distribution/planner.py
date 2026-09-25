@@ -5,7 +5,6 @@ import copy
 import hashlib
 import json
 import re
-import uuid
 from typing import Any, Mapping, Sequence
 
 FORMATS = {
@@ -313,13 +312,14 @@ def _non_negative_metric(metrics: Mapping[str, Any], key: str) -> int | float | 
     return value
 
 
-def _rate(numerator: int | float | None, denominator: int | float | None) -> float | None:
+def _rate_bps(numerator: int | None, denominator: int | None) -> int | None:
     if numerator is None or denominator is None or denominator <= 0:
         return None
-    return round(float(numerator) / float(denominator), 6)
+    return round(int(numerator) * 10000 / int(denominator))
 
 
 def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]:
+    """Build an A2 ingestion payload. A2 remains the canonical A1 normalization boundary."""
     privacy_scan(observation)
     content_id = _text(observation.get("content_id"), "content_id", 100, True)
     platform = _text(observation.get("platform"), "platform", 80, True)
@@ -339,30 +339,35 @@ def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]
         "watch_seconds", "shares", "saves", "comments", "profile_visits",
         "link_clicks", "leads", "conversions",
     )
-    metrics = {key: _non_negative_metric(metrics_input, key) for key in keys}
-    metrics = {key: value for key, value in metrics.items() if value is not None}
+    metrics: dict[str, int] = {}
+    for key in keys:
+        value = _non_negative_metric(metrics_input, key)
+        if value is None:
+            continue
+        if not isinstance(value, int) or isinstance(value, bool):
+            raise ContentContractError(f"metric_must_be_integer:{key}")
+        metrics[key] = value
     if not metrics:
         raise ContentContractError("at_least_one_observed_metric_required")
 
-    rates = {
-        "completion_rate": _rate(metrics.get("completions"), metrics.get("video_starts")),
-        "save_rate": _rate(metrics.get("saves"), metrics.get("reach")),
-        "share_rate": _rate(metrics.get("shares"), metrics.get("reach")),
-        "click_rate": _rate(metrics.get("link_clicks"), metrics.get("reach")),
-        "conversion_rate": _rate(metrics.get("conversions"), metrics.get("link_clicks")),
+    rates_bps = {
+        "completion_rate_bps": _rate_bps(metrics.get("completions"), metrics.get("video_starts")),
+        "save_rate_bps": _rate_bps(metrics.get("saves"), metrics.get("reach")),
+        "share_rate_bps": _rate_bps(metrics.get("shares"), metrics.get("reach")),
+        "click_rate_bps": _rate_bps(metrics.get("link_clicks"), metrics.get("reach")),
+        "conversion_rate_bps": _rate_bps(metrics.get("conversions"), metrics.get("link_clicks")),
     }
-    rates = {key: value for key, value in rates.items() if value is not None}
+    rates_bps = {key: value for key, value in rates_bps.items() if value is not None}
 
+    source_refs_hash = _sha(list(source_refs))
     idempotency_key = _sha({
         "content_id": content_id,
         "platform": platform,
         "window_start": window_start,
         "window_end": window_end,
     })
-    event_uuid = uuid.uuid5(uuid.NAMESPACE_URL, "maison-content-performance:" + idempotency_key)
-    asset_uuid = uuid.uuid5(uuid.NAMESPACE_URL, "maison-content-asset:" + content_id)
 
-    metadata = {
+    metadata: dict[str, Any] = {
         "content_id": content_id,
         "platform": platform,
         "format": content_format,
@@ -370,36 +375,33 @@ def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]
         "window_start": window_start,
         "window_end": window_end,
         "human_review_ref": human_review_ref,
-        "source_refs": list(source_refs),
+        "source_refs_hash": source_refs_hash,
         "manual_distribution_confirmed": observation.get("manual_distribution_confirmed") is True,
-        "metrics": metrics,
-        "derived_rates": rates,
-        "combined_score": None,
-        "winner": None,
+        **metrics,
+        **rates_bps,
     }
 
-    event = {
-        "event_id": f"evt_{event_uuid}",
-        "idempotency_key": idempotency_key,
-        "occurred_at": observed_at,
-        "event_type": "content.performance_observed",
+    ingestion = {
+        "contract_version": 1,
         "source": "maison-content-distribution",
-        "schema_version": 2,
-        "asset_id": f"ast_{asset_uuid}",
+        "event_type": "content.performance_observed",
+        "occurred_at": observed_at,
+        "idempotency_key": idempotency_key,
         "privacy_class": "aggregated",
-        "payload_hash": _sha(metadata),
         "metadata": metadata,
     }
 
     return {
-        "event": event,
+        "ingestion": ingestion,
         "learning_context": {
             "content_id": content_id,
             "source_refs": list(source_refs),
+            "source_refs_hash": source_refs_hash,
             "observed_metrics": metrics,
-            "derived_rates": rates,
+            "derived_rates_bps": rates_bps,
             "causal_claim": False,
             "economic_value_inferred": False,
             "recommended_winner": None,
+            "next_boundary": "A2 -> A1; downstream Brain/A11 mapping remains governed by existing contracts",
         },
     }
