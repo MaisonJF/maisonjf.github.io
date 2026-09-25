@@ -11,6 +11,7 @@
   const ATTRIBUTION_KEY = 'maison_offer_attribution_v1';
   const ATTRIBUTION_TTL = 24 * 60 * 60 * 1000;
   const ACQUISITION_KEY = 'maison_acquisition_attribution_v1';
+  const B2B_JOURNEY_KEY = 'maison_b2b_journey_v1';
   let googleLoaded = false;
   const queuedEvents = Array.isArray(window.__maisonAnalyticsQueue) ? window.__maisonAnalyticsQueue.splice(0) : [];
 
@@ -141,6 +142,62 @@
     return { ...offerAttribution(), ...acquisitionAttribution() };
   }
 
+  function uuidv7() {
+    const b=crypto.getRandomValues(new Uint8Array(16));
+    let t=Date.now();
+    for(let i=5;i>=0;i--){b[i]=t&255;t=Math.floor(t/256);}
+    b[6]=(b[6]&15)|112;b[8]=(b[8]&63)|128;
+    const h=[...b].map(x=>x.toString(16).padStart(2,'0')).join('');
+    return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20);
+  }
+
+  function b2bJourneyId() {
+    try {
+      const current=sessionStorage.getItem(B2B_JOURNEY_KEY);
+      if (/^jrn_[0-9a-f-]{36}$/.test(current||'')) return current;
+      const created='jrn_'+uuidv7();
+      sessionStorage.setItem(B2B_JOURNEY_KEY,created);
+      return created;
+    } catch (_) {
+      return 'jrn_'+uuidv7();
+    }
+  }
+
+  function recordCanonicalCommerceSignal(name, parameters = {}) {
+    try {
+      if (name !== 'contact_whatsapp_click') return;
+      const query=new URLSearchParams(location.search);
+      const interest=String(parameters.interest || query.get('interesse') || '').trim();
+      if (!interest.startsWith('b2b')) return;
+      const read=(param,key)=>String(parameters[param] || query.get('b2b_'+key) || '').trim();
+      const metadata={
+        interest,
+        origin:String(parameters.origin || query.get('origem') || 'contacto').trim(),
+        business:read('b2b_business','business'),
+        goal:read('b2b_goal','goal'),
+        gap:read('b2b_gap','gap'),
+        client:read('b2b_client','client'),
+        model:read('b2b_model','model'),
+        scale:read('b2b_scale','scale'),
+        start:read('b2b_start','start'),
+        result_type:read('b2b_result','result')
+      };
+      for (const key of Object.keys(metadata)) if (!metadata[key]) delete metadata[key];
+      fetch('/api/commerce-event',{
+        method:'POST',
+        headers:{'content-type':'application/json'},
+        keepalive:true,
+        body:JSON.stringify({
+          event_type:'b2b.lead',
+          idempotency_key:'b2b:lead:'+uuidv7(),
+          occurred_at:new Date().toISOString(),
+          journey_id:b2bJourneyId(),
+          metadata
+        })
+      }).catch(()=>{});
+    } catch (_) {}
+  }
+
   function recordOfferEvent(eventType, offer, context = {}) {
     try {
       if (!offer?.id) return;
@@ -185,6 +242,9 @@
   }
 
   function track(name, parameters = {}) {
+    // First-party operational signals are independent from Google consent and
+    // must never block the public action when the collector is unavailable.
+    recordCanonicalCommerceSignal(name, parameters);
     if (localStorage.getItem(CONSENT_KEY) !== 'granted') return;
     loadGoogle();
     window.gtag('event', name, { ...getAttribution(), ...parameters });
