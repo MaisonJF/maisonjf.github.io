@@ -42,7 +42,7 @@ class ContentOperatingSystemTests(unittest.TestCase):
                 "campaign_id": "cmp_a",
                 "thesis_id": "ths_a",
                 "content_id": "cnt_a",
-                "platform": "instagram_reels",
+                "channel": "instagram_reels",
                 "format": "short_video",
                 "hook_family": "recognition",
                 "cta_kind": "save",
@@ -52,7 +52,7 @@ class ContentOperatingSystemTests(unittest.TestCase):
                 "campaign_id": "cmp_a",
                 "thesis_id": "ths_a",
                 "content_id": "cnt_b",
-                "platform": "instagram_reels",
+                "channel": "instagram_reels",
                 "format": "short_video",
                 "hook_family": "specific_moment",
                 "cta_kind": "save",
@@ -70,6 +70,34 @@ class ContentOperatingSystemTests(unittest.TestCase):
         self.assertFalse(plan["randomized"])
         self.assertFalse(plan["causal_claim"])
         self.assertFalse(plan["automatic_winner"])
+
+    def test_format_comparison_can_change_surface_inside_same_platform(self):
+        variants = self.variants()
+        variants[0]["hook_family"] = "recognition"
+        variants[1]["hook_family"] = "recognition"
+        variants[1]["channel"] = "instagram_feed"
+        variants[1]["format"] = "carousel_post"
+        plan = build_comparison_plan(
+            variants,
+            dimension="format",
+            primary_metric="save_rate_bps",
+        )
+        self.assertEqual(plan["variants"][0]["platform"], "instagram")
+        self.assertEqual(plan["variants"][1]["platform"], "instagram")
+        self.assertNotEqual(plan["variants"][0]["surface"], plan["variants"][1]["surface"])
+
+    def test_format_comparison_rejects_cross_platform_confounded_pair(self):
+        variants = self.variants()
+        variants[0]["hook_family"] = "recognition"
+        variants[1]["hook_family"] = "recognition"
+        variants[1]["channel"] = "youtube_shorts"
+        variants[1]["format"] = "short_video"
+        with self.assertRaises(ContentContractError):
+            build_comparison_plan(
+                variants,
+                dimension="format",
+                primary_metric="completion_rate_bps",
+            )
 
     def test_comparison_rejects_multiple_changes(self):
         variants = self.variants()
