@@ -17,6 +17,9 @@ export async function recordB2bLifecycleEvent(db,input={}){
   if(idempotencyKey.length<8||idempotencyKey.length>200||EMAIL_RE.test(idempotencyKey))throw new Error('invalid_idempotency_key');
   const journeyId=normalizeJourneyId(input.journey_id);
   const metadata=normalizeMetadata(input.metadata,allowed);
+  for(const key of eventSpec.required_metadata||[]){
+    if(metadata[key]==null||metadata[key]==='')throw new Error('missing_b2b_metadata');
+  }
   const occurredAt=normalizeTime(input.occurred_at);
   const valueMinor=input.value_minor==null?null:Number(input.value_minor);
   const currency=input.currency==null?null:String(input.currency).trim().toUpperCase();
