@@ -146,16 +146,78 @@ class ContentOperatingSystemTests(unittest.TestCase):
             primary_metric="completion_rate_bps",
         )
         result = interpret_comparison(comparison, [
-            {"content_id": "cnt_a", "metrics": {"completion_rate_bps": 3000}},
-            {"content_id": "cnt_a", "metrics": {"completion_rate_bps": 3200}},
-            {"content_id": "cnt_b", "metrics": {"completion_rate_bps": 4100}},
-            {"content_id": "cnt_b", "metrics": {"completion_rate_bps": 4300}},
+            {
+                "content_id": "cnt_a",
+                "channel": "instagram_reels",
+                "window_start": "2026-09-28T12:00:00Z",
+                "window_end": "2026-09-29T12:00:00Z",
+                "metrics": {"completion_rate_bps": 3200},
+            },
+            {
+                "content_id": "cnt_b",
+                "channel": "instagram_reels",
+                "window_start": "2026-09-29T12:00:00Z",
+                "window_end": "2026-09-30T12:00:00Z",
+                "metrics": {"completion_rate_bps": 4300},
+            },
         ])
         self.assertEqual(result["stronger_observed_variant"], "cnt_b")
         self.assertEqual(result["signal_kind"], "directional_observation")
         self.assertFalse(result["causal_claim"])
         self.assertFalse(result["automatic_winner"])
         self.assertFalse(result["automatic_promotion"])
+        self.assertTrue(result["comparability"]["equal_window_duration"])
+        self.assertTrue(result["comparability"]["one_snapshot_per_variant"])
+
+    def test_interpretation_rejects_duplicate_snapshot_for_same_variant(self):
+        comparison = build_comparison_plan(
+            self.variants(),
+            dimension="hook_family",
+            primary_metric="completion_rate_bps",
+        )
+        observations = [
+            {
+                "content_id": "cnt_a",
+                "channel": "instagram_reels",
+                "window_start": "2026-09-28T12:00:00Z",
+                "window_end": "2026-09-29T12:00:00Z",
+                "metrics": {"completion_rate_bps": 3000},
+            },
+            {
+                "content_id": "cnt_a",
+                "channel": "instagram_reels",
+                "window_start": "2026-09-29T12:00:00Z",
+                "window_end": "2026-09-30T12:00:00Z",
+                "metrics": {"completion_rate_bps": 3200},
+            },
+        ]
+        with self.assertRaisesRegex(ContentContractError, "duplicate_snapshot_for_variant"):
+            interpret_comparison(comparison, observations)
+
+    def test_interpretation_requires_equal_window_duration(self):
+        comparison = build_comparison_plan(
+            self.variants(),
+            dimension="hook_family",
+            primary_metric="completion_rate_bps",
+        )
+        observations = [
+            {
+                "content_id": "cnt_a",
+                "channel": "instagram_reels",
+                "window_start": "2026-09-28T12:00:00Z",
+                "window_end": "2026-09-29T12:00:00Z",
+                "metrics": {"completion_rate_bps": 3000},
+            },
+            {
+                "content_id": "cnt_b",
+                "channel": "instagram_reels",
+                "window_start": "2026-09-29T12:00:00Z",
+                "window_end": "2026-10-01T12:00:00Z",
+                "metrics": {"completion_rate_bps": 4300},
+            },
+        ]
+        with self.assertRaisesRegex(ContentContractError, "equal_window_duration"):
+            interpret_comparison(comparison, observations)
 
 
 if __name__ == "__main__":
