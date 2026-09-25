@@ -120,6 +120,12 @@ export async function appendContentLearning(db,input){
   if(record.economic_value_minor!=null||observed.economic_value_minor!=null){
     throw new A11RuntimeError('content_economics_require_a3_link');
   }
+  if(record.signal_class!=='insufficient'||record.confidence_delta!==0){
+    throw new A11RuntimeError('content_runtime_observation_only');
+  }
+  if(!reasonCodes.includes('INSUFFICIENT_OBSERVATIONS')&&!reasonCodes.includes('INSUFFICIENT_ECONOMIC_DATA')){
+    throw new A11RuntimeError('content_runtime_reason_mismatch');
+  }
   const before=record.confidence_before;
   const after=record.confidence_after;
   const delta=record.confidence_delta;
