@@ -28,6 +28,8 @@ const base={
   trusted_contact_verified:true,
   next_due_at:'2026-09-26T08:00:00.000Z',
   cadence_hours:24,
+  timezone:'Europe/Lisbon',
+  checkin_local_time:'20:00',
   grace_minutes:60,
   reminder_sent_for_due_at:null,
   trusted_notice_sent_for_due_at:null,
@@ -59,7 +61,7 @@ assert.equal(decideSosAction(paused,'2026-09-27T12:00:00.000Z').kind,'none');
 
 const checked=confirmPresence(base,'2026-09-25T12:00:00.000Z');
 assert.equal(checked.last_checkin_at,'2026-09-25T12:00:00.000Z');
-assert.equal(checked.next_due_at,'2026-09-26T12:00:00.000Z');
+assert.equal(checked.next_due_at,'2026-09-26T19:00:00.000Z');
 assert.equal(checked.reminder_sent_for_due_at,null);
 
 const signal=buildSosAggregateSignal({
