@@ -23,4 +23,11 @@ if [[ "$b2b_seed_count" != "1" ]]; then
   echo "Canonical Maison B2B solution seed is missing or duplicated." >&2
   exit 3
 fi
+
+a11_schema_json="$(npx wrangler d1 execute "$DB_NAME" --remote --json --command "SELECT schema_value FROM schema_state WHERE schema_key='maison_growth_a11_schema_version';")"
+a11_schema_version="$(printf '%s' "$a11_schema_json" | jq -r '.[0].results[0].schema_value // empty')"
+if [[ "$a11_schema_version" != "A11.2" ]]; then
+  echo "A11.2 content learning schema is not active." >&2
+  exit 4
+fi
 echo "Maison Growth D1 schema through Brain/A12/A14 planning/B2B feedback surfaces: OK"
