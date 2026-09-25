@@ -23,11 +23,11 @@
       "watch_seconds"
     ],
     "derived_only_when_denominator_observed": [
-      "completion_rate",
-      "save_rate",
-      "share_rate",
-      "click_rate",
-      "conversion_rate"
+      "completion_rate_bps",
+      "save_rate_bps",
+      "share_rate_bps",
+      "click_rate_bps",
+      "conversion_rate_bps"
     ]
   },
   "rules": {
@@ -39,6 +39,9 @@
     "no_winner_selection": true,
     "no_revenue_inference_from_engagement": true,
     "economic_value_owner": "A3",
-    "append_only_learning_owner": "A11"
-  }
+    "append_only_learning_owner": "A11",
+    "rates_are_integer_basis_points": true,
+    "a2_allowlist_required": true
+  },
+  "ingestion_boundary": ".github/maison-growth/a2/source-registry.json"
 }
