@@ -312,6 +312,27 @@ def normalize_ingestion(raw: Mapping[str, Any], *, source_registry: Optional[Map
     if not isinstance(metadata_raw, Mapping):
         raise ValidationError("metadata must be an object")
     _privacy_scan(metadata_raw)
+
+    event_policies = source_spec.get("events")
+    if isinstance(event_policies, Mapping):
+        event_policy = event_policies.get(event_type)
+        if event_policy is None:
+            raise ValidationError(
+                f"event_type {event_type!r} is not specifically allowlisted for source {source!r}"
+            )
+        event_allowed = set(event_policy.get("allowed_metadata", ()))
+        event_unknown = sorted(set(metadata_raw.keys()) - event_allowed)
+        if event_unknown:
+            raise ValidationError(
+                f"metadata fields not allowed for event {event_type!r}: {', '.join(event_unknown)}"
+            )
+        required_metadata = tuple(event_policy.get("required_metadata", ()))
+        missing = [key for key in required_metadata if metadata_raw.get(key) in (None, "")]
+        if missing:
+            raise ValidationError(
+                f"required metadata missing for event {event_type!r}: {', '.join(missing)}"
+            )
+
     allowed_metadata = source_spec.get("metadata", {})
     unknown_meta = sorted(set(metadata_raw.keys()) - set(allowed_metadata.keys()))
     if unknown_meta:
