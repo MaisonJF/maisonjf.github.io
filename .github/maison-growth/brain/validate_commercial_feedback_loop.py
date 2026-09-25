@@ -40,6 +40,14 @@ checks={
         ".github/maison-growth/a3/solution-contract.json",
         ['"b2b.lead"','"b2b.proposal"','"b2b.pilot"','"b2b.purchase"','"b2b.recurrence"']
     ),
+    "Brain exposes B2B lifecycle feedback": (
+        ".github/maison-growth/brain/migrations/0018_b2b_feedback.sql",
+        ["brain_b2b_feedback","b2b.lead","b2b.recurrence","lifecycle_stage"]
+    ),
+    "Brain control consumes B2B lifecycle": (
+        ".github/maison-growth/brain/brain_observe_cycle.py",
+        ["client.b2b_feedback","_b2b_context_by_territory","b2b_feedback_rows"]
+    ),
     "A11 learns contextual offer funnel": (
         ".github/maison-growth/a11/engine.py", ["evaluate_offer_funnel","offer_context_key","confidence_before"]
     ),
