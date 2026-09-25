@@ -336,6 +336,75 @@
         "Email, customer name, postal data, Stripe customer IDs and other commercial PII remain outside Growth analytics."
       ],
       "events": {
+        "commerce.purchase": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "order_ref_hash",
+            "payment_status",
+            "channel"
+          ]
+        },
+        "commerce.purchase_confirmed": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "order_ref_hash",
+            "payment_status",
+            "channel"
+          ]
+        },
+        "product.purchase": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "order_ref_hash",
+            "payment_status",
+            "channel"
+          ]
+        },
+        "service.booking": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "channel"
+          ]
+        },
+        "service.contact": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "channel"
+          ]
+        },
+        "b2b.order": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "order_ref_hash",
+            "payment_status",
+            "channel",
+            "offer_family",
+            "origin",
+            "business",
+            "goal",
+            "result_type",
+            "recurrence_type"
+          ]
+        },
+        "company.contact": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "category_id",
+            "channel"
+          ]
+        },
         "b2b.lead": {
           "required_metadata": [],
           "allowed_metadata": [
