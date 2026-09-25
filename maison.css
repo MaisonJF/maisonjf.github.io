@@ -2705,7 +2705,6 @@ a.gift-card p,
 }
 
 /* Discovery surfaces do not lead with price. Price remains on product/service detail and checkout. */
-.product-grid .price,
 .catalogue-card__price,
 .gift-card .price,
 .related-card .price,
@@ -3071,3 +3070,22 @@ body{background:var(--maison-noir);color:var(--maison-ivory)}
 .maison-consent button[data-consent="granted"]{background:var(--maison-gold);color:var(--maison-noir)}
 .maison-consent-settings{color:var(--maison-gold)}
 a:focus-visible,button:focus-visible{outline:1px solid var(--maison-gold)!important;outline-offset:4px!important}
+
+
+/* RIO EXPERIÊNCIA · catálogo físico · 2026-09-25 */
+.product-grid .price{
+  display:block!important;
+  margin:.15rem 0 .65rem;
+  color:var(--maison-ivory)!important;
+  font:400 19px/1.2 var(--serif);
+}
+.product--no-media .product__body{
+  min-height:300px;
+  justify-content:flex-start;
+}
+.product--no-media .product__actions{
+  margin-top:auto;
+}
+@media(max-width:560px){
+  .product--no-media .product__body{min-height:250px}
+}
