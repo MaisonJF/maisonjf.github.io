@@ -24,6 +24,7 @@ MIGRATIONS=(
     GROWTH/"brain/migrations/0014_brain_runtime_views.sql",
     GROWTH/"a12/migrations/0015_human_commercial_review_resolution.sql",
     GROWTH/"a14/migrations/0016_approved_validation_planning.sql",
+    GROWTH/"a3/migrations/0017_b2b_canonical_solution.sql",
 )
 
 
@@ -47,6 +48,8 @@ class GrowthSchemaChainTests(unittest.TestCase):
         }
         self.assertIn("brain_prebrain_feed",views)
         self.assertIn("brain_cash_feedback",views)
+        b2b=con.execute("SELECT solution_type,delivery_mode,capacity_class,status FROM solutions WHERE solution_key='b2b'").fetchone()
+        self.assertEqual(b2b,("b2b","human","negotiated","active"))
         self.assertIn("a14_realised_economics",views)
         self.assertIn("autonomy_human_queue_current",views)
         self.assertIn("a14_approved_offers_ready_for_planning",views)
