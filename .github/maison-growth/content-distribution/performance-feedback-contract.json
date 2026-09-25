@@ -41,7 +41,19 @@
     "economic_value_owner": "A3",
     "append_only_learning_owner": "A11",
     "rates_are_integer_basis_points": true,
-    "a2_allowlist_required": true
+    "a2_allowlist_required": true,
+    "comparison_causal_claim": false,
+    "automatic_comparison_winner": false
   },
-  "ingestion_boundary": ".github/maison-growth/a2/source-registry.json"
+  "ingestion_boundary": ".github/maison-growth/a2/source-registry.json",
+  "lineage": {
+    "optional": [
+      "campaign_id",
+      "thesis_id",
+      "comparison_id",
+      "comparison_dimension",
+      "variant_key"
+    ],
+    "purpose": "Allow downstream grouping by campaign/thesis and one-variable observational comparisons without replicating Brain intelligence."
+  }
 }
