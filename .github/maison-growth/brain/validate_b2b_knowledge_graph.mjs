@@ -26,6 +26,14 @@ assert(JSON.stringify(contractNeeds)===JSON.stringify(graphNeeds),'professional_
 assert(MAISON_B2B_BRAIN.evidencePolicy?.noSyntheticDemand,'b2b_evidence_policy_missing');
 assert(MAISON_B2B_BRAIN.routes.some(x=>x.role==='lead'),'b2b_lead_route_missing');
 assert((graph.professionalLayer.researchCandidates||[]).length===(MAISON_B2B_BRAIN.researchCandidates||[]).length,'b2b_research_candidate_projection_drift');
+assert(graph.professionalLayer.professionalNetwork,'professional_network_missing_from_graph');
+assert(graph.professionalLayer.professionalNetwork.credentialIssuer==='maison-jf','professional_network_credential_authority_drift');
+assert(graph.professionalLayer.professionalNetwork.franchiseStatus==='not_yet','professional_network_franchise_promoted_without_validation');
+assert(graph.professionalLayer.professionalNetwork.safeguards?.sublicensing===false,'professional_network_sublicensing_must_default_false');
+assert(graph.professionalLayer.professionalNetwork.safeguards?.centralCertification===true,'professional_network_certification_must_remain_central');
+const trainer=(MAISON_B2B_BRAIN.professionalNetwork?.levels||[]).find(x=>x.id==='licensed_trainer');
+assert(trainer,'licensed_trainer_level_missing');
+assert(trainer.cannot.includes('emitir_certificacao_final_em_nome_proprio'),'licensed_trainer_central_certification_guard_missing');
 for(const candidate of MAISON_B2B_BRAIN.researchCandidates||[]){
   assert(candidate.status!=='market_demand_proven','unsupported_market_demand_claim:'+candidate.id);
   assert(candidate.claimLimit,'research_candidate_claim_limit_missing:'+candidate.id);
@@ -37,4 +45,4 @@ for(const segment of MAISON_B2B_BRAIN.segments){
   assert(Array.isArray(segment.routes)&&segment.routes.length>0,'professional_segment_route_missing:'+segment.id);
 }
 
-console.log('B2B knowledge contract: OK — '+contractSegments.length+' segments, '+contractNeeds.length+' needs, '+(MAISON_B2B_BRAIN.researchCandidates||[]).length+' evidence-bounded research candidates, one shared MAISON graph.');
+console.log('B2B knowledge contract: OK — '+contractSegments.length+' segments, '+contractNeeds.length+' needs, '+(MAISON_B2B_BRAIN.professionalNetwork?.levels||[]).length+' network levels, '+(MAISON_B2B_BRAIN.researchCandidates||[]).length+' evidence-bounded research candidates, one shared MAISON graph.');
