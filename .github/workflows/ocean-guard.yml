@@ -54,6 +54,7 @@ jobs:
           node --check functions/api/create-pdi-checkout-live.js
           node --check functions/api/consultation-checkout-session-live.js
           node --check functions/_lib/offer-brain.js
+          node functions/_lib/offer-brain.test.mjs
           python3 .github/maison-growth/brain/test_schema_chain.py
           node --check functions/_lib/viral-test-policy.js
           node --check functions/api/recommend-offers.js
