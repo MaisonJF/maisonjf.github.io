@@ -17,7 +17,8 @@
     "experiment",
     "journey",
     "conversion",
-    "promotion"
+    "promotion",
+    "content"
   ],
   "signal_classes": [
     "positive",
@@ -36,5 +37,8 @@
   "causal_inference_authorized": false,
   "self_reprogramming_authorized": false,
   "sensitive_rule_changes_require_human_review": true,
-  "a12_started": false
+  "a12_started": false,
+  "content_learning_extension": "A11.2",
+  "content_economics_owner": "A3",
+  "content_engagement_can_mutate_economic_confidence": false
 }
