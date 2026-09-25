@@ -45,7 +45,10 @@
     "directional_signal_only": true,
     "human_interpretation_required": true,
     "economic_value_owner": "A3",
-    "central_learning_owner": "Brain/A11"
+    "central_learning_owner": "Brain/A11",
+    "one_snapshot_per_variant_per_interpretation": true,
+    "equal_observation_window_duration_required": true,
+    "overlapping_snapshots_not_independent_samples": true
   },
   "public_voice_owner": "functions/_lib/maison-content-ontology.js",
   "publishing_owner": "existing Maison gates / manual distribution",
