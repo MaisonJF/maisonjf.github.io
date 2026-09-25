@@ -12,14 +12,17 @@ def ok(c,m):
 def load(n):
     return json.loads((ROOT/n).read_text(encoding="utf-8"))
 
+def policy_identity():
+    pol=load("learning-policy.json")
+    canonical_policy=json.dumps(pol,sort_keys=True,separators=(",",":"),ensure_ascii=False)
+    policy_hash=hashlib.sha256(canonical_policy.encode("utf-8")).hexdigest()
+    return pol,canonical_policy,policy_hash,"rul_"+policy_hash[:36]
+
 def contracts():
     c=load("a11-contract.json")
     p=load("a11-permissions.json")
-    pol=load("learning-policy.json")
+    pol,canonical_policy,policy_hash,expected_rule_id=policy_identity()
     manifest=load("migration-manifest.json")
-    canonical_policy=json.dumps(pol,sort_keys=True,separators=(",",":"),ensure_ascii=False)
-    policy_hash=hashlib.sha256(canonical_policy.encode("utf-8")).hexdigest()
-    expected_rule_id="rul_"+policy_hash[:36]
     seed_sql=SEED.read_text(encoding="utf-8")
     ok(pol["policy_version"]=="A11.2","learning policy must be A11.2")
     ok(pol["initial_confidence"]==50,"A11 initial confidence baseline must be explicit")
@@ -55,7 +58,17 @@ def prerequisite_db():
     db=sqlite3.connect(":memory:")
     db.executescript("""PRAGMA foreign_keys=ON;
       CREATE TABLE schema_state(schema_key TEXT PRIMARY KEY,schema_value TEXT NOT NULL);
-      CREATE TABLE rule_versions(rule_version_id TEXT PRIMARY KEY);
+      CREATE TABLE rule_versions(
+        rule_version_id TEXT PRIMARY KEY,
+        family TEXT NOT NULL,
+        version_label TEXT NOT NULL,
+        definition_hash TEXT NOT NULL,
+        definition_json TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        created_by TEXT NOT NULL,
+        supersedes_rule_version_id TEXT NULL,
+        UNIQUE(family,version_label)
+      );
       CREATE TABLE model_versions(model_version_id TEXT PRIMARY KEY);
       CREATE TABLE decision_records(decision_id TEXT PRIMARY KEY);
       CREATE TABLE experiment_results(experiment_result_id TEXT PRIMARY KEY);
@@ -66,6 +79,7 @@ def prerequisite_db():
     return db
 
 def sql_validation():
+    pol,canonical_policy,policy_hash,expected_rule_id=policy_identity()
     base_sql=(ROOT/"migrations/0009_learning_engine.sql").read_text(encoding="utf-8")
     content_sql=(ROOT/"migrations/0019_content_learning_source.sql").read_text(encoding="utf-8")
     combined=base_sql+"\n"+content_sql
@@ -85,7 +99,9 @@ def sql_validation():
     dec="dec_"+"e"*36
     lsl="lsl_"+"f"*36
     lrn="lrn_"+"7"*36
-    db.execute("INSERT INTO rule_versions VALUES (?)",(rul,))
+    db.execute("""INSERT INTO rule_versions
+      (rule_version_id,family,version_label,definition_hash,definition_json,created_at,created_by,supersedes_rule_version_id)
+      VALUES (?,?,?,?,?,?,?,NULL)""",(rul,"test","v1","0"*64,"{}","2026-09-17T00:00:00Z","test"))
     db.execute("INSERT INTO decision_records VALUES (?)",(dec,))
     db.execute("""INSERT INTO learning_runs(
       learning_run_id,rule_version_id,model_version_id,policy_version,input_hash,
