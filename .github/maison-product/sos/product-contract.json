@@ -1,0 +1,50 @@
+{
+  "contract_version": "SOS.1",
+  "product_id": "sos-maison-jf",
+  "name": "SOS Maison JF®",
+  "status": "foundation_only_not_provisioned",
+  "principle": "KISS + Apple; one nuclear action: ESTOU AQUI",
+  "canonical_territory": "presenca",
+  "primary_action": "ESTOU AQUI",
+  "mvp": {
+    "trusted_contacts": 1,
+    "cadence_ui": [
+      "daily"
+    ],
+    "reminder_before_escalation": true,
+    "grace_period_required": true,
+    "contact_verification_required": true,
+    "pause_supported": true,
+    "schedule_anchor": "fixed local HH:MM in the user's IANA timezone"
+  },
+  "invariants": {
+    "no_emergency_promise": true,
+    "no_health_inference": true,
+    "no_location_tracking": true,
+    "no_free_text_required": true,
+    "no_background_sensor_inference": true,
+    "no_unverified_third_party_notice": true,
+    "one_notice_per_due_window": true,
+    "idempotent_actions_required": true
+  },
+  "human_states": [
+    "setup",
+    "safe",
+    "due",
+    "grace",
+    "contact_due",
+    "paused"
+  ],
+  "external_effects": {
+    "production_notifications_enabled": false,
+    "production_scheduler_enabled": false,
+    "provider_selected": false,
+    "deployment_requires_explicit_review": true
+  },
+  "convergence": {
+    "canonical_event_boundary": "A1/A2",
+    "source_id": "sos_product",
+    "brain_payload": "aggregate_allowlist_only",
+    "separate_brain_created": false
+  }
+}

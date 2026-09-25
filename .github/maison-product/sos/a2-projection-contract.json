@@ -1,0 +1,26 @@
+{
+  "contract_version": "SOS.A2.1",
+  "mode": "projection_only_no_ingestion_runtime",
+  "canonical_collector": ".github/maison-growth/a2/collector.py",
+  "source": "sos_product",
+  "input_contract_version": 1,
+  "privacy_class": "aggregated",
+  "cadence": "UTC daily projection",
+  "signals": [
+    "checkin_completed",
+    "reminder_sent",
+    "trusted_notice_sent",
+    "trusted_notice_failed",
+    "activated"
+  ],
+  "zero_counts_emitted": true,
+  "direct_pii": false,
+  "pseudonymous_ids": false,
+  "free_text": false,
+  "exact_schedule": false,
+  "deletion_effect": "operational deletion may reduce not-yet-projected counts; privacy takes precedence over analytics completeness",
+  "ingestion": {
+    "implemented_here": false,
+    "reason": "A2 remains the canonical validator/collector and its runtime activation is owned by the Brain/data foundation"
+  }
+}

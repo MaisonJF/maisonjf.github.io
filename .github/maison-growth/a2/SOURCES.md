@@ -11,6 +11,7 @@ All sources are **deny by default** and must be listed in `source-registry.json`
 | `commerce` | product/service/B2B conversion signals | product/category, hashed order ref, payment status, channel | email, name, address, NIF, Stripe customer identity |
 | `gsc` | aggregated discovery signals | hashed query, public page path, impressions/clicks/buckets | raw query text at A2 |
 | `bing` | aggregated discovery signals | same privacy boundary as GSC | raw query text at A2 |
+| `sos_product` | aggregate SOS Maison JF product learning | product/signal/cadence/delivery buckets and counts | names, user/contact IDs, phone/email, exact schedule, location, reasons, free text, notice body |
 | `system` | internal health/retry telemetry | component/code/attempt | user data |
 
 ## Free-text discovery language
@@ -24,3 +25,7 @@ Commerce adapters may read identifiable commerce records in their own protected 
 ## Oracle boundary
 
 The collector may receive territory/class/use/conversion analytics. It has no permission or field capable of accepting paid Oracle reading text.
+
+## SOS Maison JF boundary
+
+SOS operational delivery is deliberately separated from Growth/Brain analytics. The product may need a protected user account reference, a verified trusted-contact endpoint and delivery receipts to perform its core function. Those records stay in the product operational domain. Only aggregate allowlisted counters may cross through the canonical A1/A2 event boundary; no exact check-in timetable, missed-check-in history tied to a person, contact identity, message content, location or private reason is accepted.
