@@ -201,6 +201,31 @@ class CollectorUnitTests(unittest.TestCase):
             with self.assertRaises((PrivacyViolation, ValidationError)):
                 normalize_ingestion(event)
 
+    def test_b2b_event_specific_metadata_policy(self):
+        bad = {
+            "contract_version": 1,
+            "source": "commerce",
+            "event_type": "b2b.lead",
+            "occurred_at": "2026-09-25T12:00:00Z",
+            "idempotency_key": "b2b:lead:event-policy",
+            "privacy_class": "pseudonymous",
+            "metadata": {"interest": "b2b", "b2b_stage": "lead"},
+        }
+        with self.assertRaises(ValidationError):
+            normalize_ingestion(bad)
+
+        missing = {
+            "contract_version": 1,
+            "source": "commerce",
+            "event_type": "b2b.proposal",
+            "occurred_at": "2026-09-25T12:00:00Z",
+            "idempotency_key": "b2b:proposal:event-policy",
+            "privacy_class": "pseudonymous",
+            "metadata": {"offer_family": "gifting"},
+        }
+        with self.assertRaises(ValidationError):
+            normalize_ingestion(missing)
+
     def test_b2b_lifecycle_events_use_central_commerce_contract(self):
         cases = (
             ("b2b.proposal", {"b2b_stage": "proposal", "offer_family": "gifting"}),
