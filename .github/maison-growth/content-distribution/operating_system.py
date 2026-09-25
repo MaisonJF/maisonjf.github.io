@@ -5,6 +5,7 @@ from typing import Any, Mapping, Sequence
 
 from planner import (
     ALLOWED_CTAS,
+    CHANNELS,
     FORMATS,
     ContentContractError,
     _sha,
@@ -130,12 +131,20 @@ def build_campaign(source_brief: Mapping[str, Any], *, include_commercial_bridge
 
 
 def _variant_projection(piece: Mapping[str, Any]) -> dict[str, str]:
+    channel = _text(piece.get("channel"), "channel", 80, True)
+    if channel not in CHANNELS:
+        raise ContentContractError("comparison_unknown_channel")
+    fmt = _text(piece.get("format"), "format", 80, True)
+    if CHANNELS[channel]["format"] != fmt:
+        raise ContentContractError("comparison_channel_format_mismatch")
     return {
         "campaign_id": _text(piece.get("campaign_id"), "campaign_id", 100, True),
         "thesis_id": _text(piece.get("thesis_id"), "thesis_id", 100, True),
         "content_id": _text(piece.get("content_id"), "content_id", 100, True),
-        "platform": _text(piece.get("platform"), "platform", 80, True),
-        "format": _text(piece.get("format"), "format", 80, True),
+        "channel": channel,
+        "platform": CHANNELS[channel]["platform"],
+        "surface": CHANNELS[channel]["surface"],
+        "format": fmt,
         "hook_family": _text(piece.get("hook_family"), "hook_family", 80, True),
         "cta_kind": _text(piece.get("cta_kind"), "cta_kind", 80, True),
         "approved_destination_ref": _text(piece.get("approved_destination_ref"), "approved_destination_ref", 180, False),
@@ -173,8 +182,10 @@ def build_comparison_plan(
     if len(thesis_ids) != 1:
         raise ContentContractError("comparison_requires_same_thesis")
 
-    if dimension != "format" and len({x["platform"] for x in projected}) != 1:
-        raise ContentContractError("comparison_requires_same_platform")
+    if dimension in {"hook_family", "cta_kind"} and len({x["channel"] for x in projected}) != 1:
+        raise ContentContractError("comparison_requires_same_channel")
+    if dimension == "format" and len({x["platform"] for x in projected}) != 1:
+        raise ContentContractError("format_comparison_requires_same_platform")
 
     controlled_fields = ("format", "hook_family", "cta_kind")
     for field in controlled_fields:
@@ -215,7 +226,9 @@ def build_comparison_plan(
                     "value": x[dimension],
                 }),
                 "value": x[dimension],
+                "channel": x["channel"],
                 "platform": x["platform"],
+                "surface": x["surface"],
                 "format": x["format"],
             }
             for x in projected
