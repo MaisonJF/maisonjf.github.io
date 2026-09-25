@@ -61,6 +61,21 @@ const graph={
       territories:[...(x.territories||[])],routes:[...(x.routes||[])]
     })),
     needs:(b2b.needs||[]).map(x=>({...x})),
+    offerFamilies:(b2b.offerFamilies||[]).map(x=>({
+      ...x,
+      segments:[...(x.segments||[])],routes:[...(x.routes||[])],recurrence:[...(x.recurrence||[])]
+    })),
+    recurrence:{
+      ...(b2b.recurrence||{}),
+      supportedNow:[...(b2b.recurrence?.supportedNow||[])],
+      pilotOnly:[...(b2b.recurrence?.pilotOnly||[])],
+      futureValidation:[...(b2b.recurrence?.futureValidation||[])]
+    },
+    leadContract:{
+      ...(b2b.leadContract||{}),
+      allowedNonPii:[...(b2b.leadContract?.allowedNonPii||[])],
+      forbidden:[...(b2b.leadContract?.forbidden||[])]
+    },
     professionalNetwork:{
       ...(b2b.professionalNetwork||{}),
       levels:(b2b.professionalNetwork?.levels||[]).map(level=>({
