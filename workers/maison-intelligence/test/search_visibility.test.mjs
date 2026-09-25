@@ -26,9 +26,10 @@ test('configured Search Console exposes bounded read-only profiles',()=>{
     GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'secret',
     GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh'
   });
-  assert.equal(tasks.length,6);
+  assert.equal(tasks.length,7);
   const analytics=tasks.filter(x=>x.family==='google_search_console');
   const inspection=tasks.find(x=>x.family==='google_url_inspection');
+  const sitemaps=tasks.find(x=>x.family==='google_sitemaps');
   assert.deepEqual(analytics.map(x=>x.key),['pages','queries','devices','countries','appearance']);
   assert.ok(tasks.every(x=>x.providerId==='google_search_console'));
   assert.ok(tasks.every(x=>x.territoryKey==='search_visibility'));
@@ -36,6 +37,8 @@ test('configured Search Console exposes bounded read-only profiles',()=>{
   assert.ok(analytics.every(x=>x.rowLimit<=40));
   assert.equal(inspection.key,'inspection');
   assert.equal(inspection.inspectionUrls.length,6);
+  assert.equal(sitemaps.key,'sitemaps');
+  assert.equal(sitemaps.cadenceHours,24);
   assert.ok(inspection.inspectionUrls.every(url=>url.startsWith('https://maison-jf.com/')));
   assert.ok(searchVisibilityTaskIdentity(tasks[0]).includes('sc-domain:maison-jf.com'));
 });
@@ -260,4 +263,66 @@ test('URL Inspection rejects foreign or insecure target URLs',()=>{
     GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh',
     GOOGLE_SEARCH_CONSOLE_INSPECTION_URLS:'https://example.com/not-maison'
   }),/gsc_invalid_inspection_url/);
+});
+
+
+test('Search Console sitemap sensor keeps supported lifecycle facts and ignores deprecated indexed counts',async()=>{
+  const original=globalThis.fetch;
+  const calls=[];
+  globalThis.fetch=async(url,options={})=>{
+    calls.push({url:String(url),options});
+    if(String(url).includes('oauth2.googleapis.com/token')){
+      return new Response(JSON.stringify({access_token:'sitemap-access'}),{status:200,headers:{'content-type':'application/json'}});
+    }
+    return new Response(JSON.stringify({
+      sitemap:[{
+        path:'https://maison-jf.com/sitemap.xml',
+        lastSubmitted:'2026-09-09T16:23:09.186Z',
+        lastDownloaded:'2026-09-25T10:53:20.593Z',
+        isPending:false,
+        isSitemapsIndex:true,
+        type:'sitemapIndex',
+        warnings:'0',
+        errors:'0',
+        contents:[{
+          type:'web',
+          submitted:'151',
+          indexed:'999'
+        }]
+      }]
+    }),{status:200,headers:{'content-type':'application/json'}});
+  };
+  try{
+    const task=configuredSearchVisibilityTasks({
+      SEARCH_VISIBILITY_ENABLED:'true',
+      GOOGLE_SEARCH_CONSOLE_ENABLED:'true',
+      GOOGLE_SEARCH_CONSOLE_PROPERTY:'sc-domain:maison-jf.com',
+      GOOGLE_SEARCH_CONSOLE_CLIENT_ID:'client-id',
+      GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'client-secret',
+      GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh-secret'
+    }).find(x=>x.family==='google_sitemaps');
+
+    const result=await fetchSearchVisibility({
+      GOOGLE_SEARCH_CONSOLE_CLIENT_ID:'client-id',
+      GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'client-secret',
+      GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh-secret'
+    },task,new Date('2026-09-25T00:00:00Z'));
+
+    assert.equal(calls.length,2);
+    assert.ok(calls[1].url.includes('/sitemaps'));
+    assert.equal(calls[1].options.headers.Authorization,'Bearer sitemap-access');
+    const payload=JSON.parse(result.text);
+    assert.equal(payload.schema,'maison.search-visibility.gsc-sitemaps.v1');
+    assert.equal(payload.sitemap_count,1);
+    assert.equal(payload.sitemaps[0].warnings,0);
+    assert.equal(payload.sitemaps[0].errors,0);
+    assert.equal(payload.sitemaps[0].contents[0].submitted,151);
+    assert.equal('indexed' in payload.sitemaps[0].contents[0],false);
+    assert.equal(JSON.stringify(payload).includes('"indexed"'),false);
+    assert.equal(result.evidenceSource,'gsc');
+    assert.equal(result.evidenceKind,'coverage');
+    assert.ok(!JSON.stringify(result).includes('sitemap-access'));
+  }finally{
+    globalThis.fetch=original;
+  }
 });
