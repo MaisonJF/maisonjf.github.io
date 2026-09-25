@@ -5,10 +5,10 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Carrinho | MAISON JF®</title>
 <meta name="description" content="Revê a tua encomenda MAISON JF®, escolhe a zona de envio e vê quando os portes ficam grátis.">
-<link rel="stylesheet" href="../../maison.css">
+<link rel="stylesheet" href="../../maison.css?v=20260925-experience5">
 <script src="../../analytics.js" defer></script>
 <style>
-.cart{padding:130px 0 100px}.cart h1{font:400 clamp(52px,8vw,92px)/.92 var(--serif);margin:.2em 0}.cart__lead{max-width:680px;color:#aaa39a}.cart__grid{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;margin-top:42px}.cart__items{display:grid;gap:12px}.cart-item{border:1px solid var(--line);padding:22px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;background:#10100f}.cart-item h2{font:400 28px/1 var(--serif);margin:0 0 6px}.cart-item p{margin:0;color:#9c958b}.cart-item__controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}.cart-item button{border:1px solid var(--line);background:transparent;color:#eee9df;padding:8px 11px;cursor:pointer}.cart-item__qty{min-width:24px;text-align:center}.cart-item__remove{font-size:11px;color:#9c958b!important}.cart__summary{border:1px solid var(--line);padding:28px;background:#10100f;align-self:start;position:sticky;top:90px}.cart__summary h2{font:400 32px/1 var(--serif);margin:0 0 22px}.cart__row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}.cart__zones{display:grid;gap:8px;margin:22px 0}.cart__zone{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);padding:13px;cursor:pointer}.cart__zone input{margin-top:3px}.cart__zone small{display:block;color:#91897f;margin-top:4px}.cart__total{font:400 28px/1 var(--serif);padding-top:18px}.cart__status{min-height:1.4em;color:#aaa39a;font-size:12px;margin-top:12px}.cart__empty{border:1px solid var(--line);padding:36px;background:#10100f}.cart__empty h2{font:400 36px/1 var(--serif);margin:.1em 0 .4em}@media(max-width:800px){.cart__grid{grid-template-columns:1fr}.cart__summary{position:static}.cart-item{grid-template-columns:1fr}.cart-item__controls{justify-content:flex-start}}</style>
+.cart{padding:130px 0 100px}.cart h1{font:400 clamp(52px,8vw,92px)/.92 var(--serif);margin:.2em 0}.cart__lead{max-width:680px;color:#aaa39a}.cart__grid{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;margin-top:42px}.cart__items{display:grid;gap:12px}.cart-item{border:1px solid var(--line);padding:22px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;background:#10100f}.cart-item h2{font:400 28px/1 var(--serif);margin:0 0 6px}.cart-item p{margin:0;color:#9c958b}.cart-item__controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}.cart-item button{border:1px solid var(--line);background:transparent;color:#eee9df;padding:8px 11px;cursor:pointer}.cart-item__qty{min-width:24px;text-align:center}.cart-item__remove{font-size:11px;color:#9c958b!important}.cart__summary{border:1px solid var(--line);padding:28px;background:#10100f;align-self:start;position:sticky;top:90px}.cart__summary h2{font:400 32px/1 var(--serif);margin:0 0 22px}.cart__row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}.cart__zones{display:grid;gap:8px;margin:22px 0}.cart__zone{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);padding:13px;cursor:pointer}.cart__zone input{margin-top:3px}.cart__zone small{display:block;color:#91897f;margin-top:4px}.cart__zone:has(input:checked){border-color:rgba(210,179,111,.72);background:rgba(210,179,111,.06)}.cart__total{font:400 28px/1 var(--serif);padding-top:18px}.cart__status{min-height:1.4em;color:#aaa39a;font-size:12px;margin-top:12px}.cart__empty{border:1px solid var(--line);padding:36px;background:#10100f}.cart__empty h2{font:400 36px/1 var(--serif);margin:.1em 0 .4em}@media(max-width:800px){.cart{padding-top:112px}.cart__grid{grid-template-columns:1fr;gap:18px}.cart__summary{position:static;padding:22px}.cart-item{grid-template-columns:1fr;padding:18px}.cart-item__controls{justify-content:flex-start}.cart__zone{min-height:64px;padding:14px}.cart__summary .button{width:100%;min-height:52px;text-align:center}.cart__row{align-items:baseline}}</style>
 </head>
 <body>
 <header class="site-header"><a class="brand" href="../../">MAISON JF®</a><nav><a href="../../farol">O Farol</a><a href="../">Produtos</a><a href="../../servicos/">Serviços</a></nav></header>
@@ -28,7 +28,7 @@
     </div>
     <div class="cart__row"><span>Envio</span><strong id="shipping">Escolhe a zona</strong></div>
     <div class="cart__row cart__total"><span>Total</span><strong id="total">0 €</strong></div>
-    <button class="button button--light" id="checkout" type="button" disabled>Pagar</button>
+    <button class="button button--light" id="checkout" type="button" disabled>Escolhe a zona</button>
     <p class="cart__status" id="status" aria-live="polite"></p>
     <p><a class="text-link" href="../../envios">Ver condições de envio</a></p>
   </aside>
@@ -70,7 +70,9 @@
   itemsHost.innerHTML='';
   if(!cart.length){
    itemsHost.innerHTML='<div class="cart__empty"><h2>O carrinho está vazio.</h2><p>Escolhe os produtos que queres juntar na mesma encomenda.</p><a class="button button--light" href="../">Ver Produtos</a></div>';
-   summary.hidden=true;return;
+   summary.hidden=true;
+   write(cart);
+   return;
   }
   summary.hidden=false;
   for(const item of cart){
@@ -86,6 +88,7 @@
   shippingEl.textContent=ship===null?'Escolhe a zona':ship===0?'Grátis':money(ship);
   totalEl.textContent=money(sub+(ship||0));
   checkout.disabled=!cart.length||!zone();
+  checkout.textContent=zone()?'Continuar para pagamento':'Escolhe a zona';
  }
  itemsHost.addEventListener('click',e=>{
   const inc=e.target.closest('[data-inc]'),dec=e.target.closest('[data-dec]'),rem=e.target.closest('[data-remove]');
@@ -105,7 +108,7 @@
    if(!response.ok||!data.url)throw new Error(data.error||'Não foi possível abrir o checkout.');
    location.href=data.url;
   }catch(error){
-   checkout.disabled=false;checkout.textContent='Pagar';status.textContent=error.message||'Não foi possível abrir o checkout.';
+   checkout.disabled=false;checkout.textContent='Continuar para pagamento';status.textContent=error.message||'Não foi possível abrir o checkout.';
   }
  });
  if(new URLSearchParams(location.search).get('checkout_cancelado')==='1')status.textContent='Pagamento cancelado. O carrinho continua aqui.';

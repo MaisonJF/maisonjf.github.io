@@ -2705,7 +2705,6 @@ a.gift-card p,
 }
 
 /* Discovery surfaces do not lead with price. Price remains on product/service detail and checkout. */
-.product-grid .price,
 .catalogue-card__price,
 .gift-card .price,
 .related-card .price,
@@ -3071,3 +3070,168 @@ body{background:var(--maison-noir);color:var(--maison-ivory)}
 .maison-consent button[data-consent="granted"]{background:var(--maison-gold);color:var(--maison-noir)}
 .maison-consent-settings{color:var(--maison-gold)}
 a:focus-visible,button:focus-visible{outline:1px solid var(--maison-gold)!important;outline-offset:4px!important}
+
+
+/* RIO EXPERIÊNCIA · catálogo físico · 2026-09-25 */
+.product-grid .price{
+  display:block!important;
+  margin:.15rem 0 .65rem;
+  color:var(--maison-ivory)!important;
+  font:400 19px/1.2 var(--serif);
+}
+.product--no-media .product__body{
+  min-height:300px;
+  justify-content:flex-start;
+}
+.product--no-media .product__actions{
+  margin-top:auto;
+}
+@media(max-width:560px){
+  .product--no-media .product__body{min-height:250px}
+}
+
+
+/* RIO EXPERIÊNCIA · mobile decision hierarchy · 2026-09-25 */
+@media(max-width:430px){
+  .home-page--final .hero__choices{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .home-page--final .hero__choice--explore{grid-column:auto}
+  .home-page--final .hero__choice .button{
+    min-height:54px;
+    padding:12px 14px;
+    font-size:10.5px;
+    letter-spacing:.1em;
+  }
+  .home-page--final .hero__choice small{
+    min-height:0;
+    margin-top:6px;
+    font-size:10px;
+    line-height:1.4;
+  }
+  .home-page--final .button--explore{min-height:52px!important}
+}
+@media(max-width:560px){
+  .product-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    align-items:stretch;
+  }
+  .product-actions .button{
+    width:100%;
+    min-height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+  .product-actions [data-cart-add]{
+    min-height:44px;
+    width:100%;
+    text-align:left;
+  }
+  .filters button{
+    min-height:44px;
+    padding:10px 16px;
+  }
+}
+
+
+/* RIO EXPERIÊNCIA · assinatura cromática MAISON · 2026-09-25
+   Esmeralda e Bordeaux dão profundidade; ouro continua reservado à orientação e acção. */
+:root{
+  --maison-emerald:#0d3d2e;
+  --maison-bordeaux:#3d0d1f;
+  --maison-emerald-wash:rgba(13,61,46,.18);
+  --maison-bordeaux-wash:rgba(61,13,31,.16);
+}
+.home-page--final .home-explore{
+  position:relative;
+  background:
+    radial-gradient(circle at 8% 18%,rgba(13,61,46,.14),transparent 30%),
+    radial-gradient(circle at 92% 82%,rgba(61,13,31,.12),transparent 32%);
+}
+.home-page--final .home-explore::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--maison-emerald),var(--maison-gold),var(--maison-bordeaux),transparent);
+  opacity:.62;
+}
+.home-page--final .home-feature--professionals{
+  position:relative;
+}
+.home-page--final .home-feature--professionals::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(135deg,rgba(13,61,46,.045),transparent 42%,rgba(61,13,31,.055));
+}
+.catalogue-page{
+  background:
+    radial-gradient(circle at 6% 8%,rgba(13,61,46,.13),transparent 25%),
+    radial-gradient(circle at 96% 34%,rgba(61,13,31,.10),transparent 28%),
+    var(--maison-noir);
+}
+.catalogue-page .product-digital{
+  position:relative;
+  background:
+    linear-gradient(145deg,rgba(13,61,46,.055),rgba(61,13,31,.045) 70%,transparent);
+}
+.catalogue-page .filters button.on{
+  box-shadow:0 0 0 1px rgba(210,179,111,.24);
+}
+.services-page .primary-service{
+  position:relative;
+}
+.services-page .primary-service::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:min(180px,28vw);
+  height:1px;
+  background:linear-gradient(90deg,var(--maison-emerald),var(--maison-gold),transparent);
+  opacity:.65;
+}
+.services-page .quiet-link{
+  transition:background .22s ease,border-color .22s ease,color .22s ease;
+}
+.services-page .quiet-link:hover,
+.services-page .quiet-link:focus-visible{
+  background:linear-gradient(90deg,rgba(13,61,46,.08),transparent 48%,rgba(61,13,31,.06));
+}
+
+
+/* RIO EXPERIÊNCIA · display titles on one line · 2026-09-25 */
+/* Regra visual MAISON: títulos editoriais não partem em duas linhas.
+   A escala baixa no mobile para preservar a linha única sem scroll horizontal. */
+main h1,
+.home-page--final .hero__headline,
+.detail-title{
+  max-width:none!important;
+  white-space:nowrap!important;
+  text-wrap:nowrap!important;
+}
+@media(max-width:760px){
+  main h1,
+  .home-page--final .hero__headline,
+  .detail-title{
+    font-size:clamp(17px,6.6vw,42px)!important;
+    line-height:1!important;
+    letter-spacing:-.035em!important;
+  }
+}
+@media(max-width:430px){
+  main h1,
+  .home-page--final .hero__headline,
+  .detail-title{
+    font-size:clamp(15px,6vw,30px)!important;
+  }
+}

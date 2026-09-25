@@ -141,6 +141,7 @@
   const close=()=>{header.classList.remove('site-header--menu-open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Abrir menu')};
   toggle.addEventListener('click',()=>{const open=header.classList.toggle('site-header--menu-open');toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Fechar menu':'Abrir menu')});
   menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',close));
+  document.addEventListener('keydown',event=>{if(event.key==='Escape')close()});
   window.addEventListener('resize',()=>{if(window.innerWidth>700)close()});
 })();
 </script>

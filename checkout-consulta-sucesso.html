@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Consulta confirmada | MAISON JF®</title>
-<link rel="stylesheet" href="./maison.css">
+<link rel="stylesheet" href="./maison.css?v=20260925-experience5">
 <script src="./analytics.js" defer></script>
 <style>
 .receipt{min-height:100svh;padding:150px 0 100px;display:grid;place-items:center}
 .receipt__card{width:min(780px,100%);border:1px solid var(--line);background:#10100f;padding:clamp(30px,6vw,70px)}
 .receipt h1{font:400 clamp(48px,7vw,86px)/.94 var(--serif);margin:.2em 0}
 .receipt p{color:#aaa39a}.receipt__details{color:#e9e2d8!important}
-.receipt__actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:34px;align-items:center}
+.receipt__actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:34px;align-items:center}@media(max-width:560px){.receipt__actions{display:grid;grid-template-columns:1fr;gap:14px}.receipt__actions .button{width:100%;min-height:52px;display:flex;align-items:center;justify-content:center;text-align:center}}
 </style>
 </head>
 <body>
@@ -53,7 +53,8 @@
     .then(data=>{
       if(data.payment_status==='paid'){
         title.textContent='Pagamento confirmado.';
-        message.textContent=data.service_name+' está comprado.';
+        message.textContent='A tua compra de '+data.service_name+' ficou confirmada.';
+        document.getElementById('next').textContent='Agora fala connosco no WhatsApp para combinarmos o próximo passo.';
         const parts=[];
         if(Number.isInteger(data.amount_total))parts.push('Total: '+money(data.amount_total,data.currency));
         if(data.email)parts.push('Email: '+data.email);

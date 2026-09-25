@@ -548,3 +548,60 @@ a.territory-offer:hover,a.product-digital__card:hover,a.related-card:hover,a.jou
     padding-bottom:3.5rem!important;
   }
 }
+
+
+/* RIO EXPERIÊNCIA · assinatura cromática MAISON · 2026-09-25
+   Esmeralda + Bordeaux vivem na atmosfera. O ouro continua a orientar acções. */
+:root{
+  --maison-emerald:#0d3d2e;
+  --maison-bordeaux:#3d0d1f;
+  --maison-emerald-wash:rgba(13,61,46,.22);
+  --maison-bordeaux-wash:rgba(61,13,31,.20);
+}
+.farol-page .header{
+  position:absolute;
+  background:linear-gradient(180deg,rgba(8,8,8,.84),rgba(8,8,8,.18) 74%,transparent);
+  border-bottom:1px solid rgba(241,234,223,.10);
+}
+.farol-page .detail-hero{
+  background:
+    radial-gradient(circle at 78% 12%,var(--maison-emerald-wash),transparent 34%),
+    radial-gradient(circle at 10% 88%,var(--maison-bordeaux-wash),transparent 30%),
+    radial-gradient(circle at 66% 24%,rgba(210,179,111,.065),transparent 24%),
+    linear-gradient(180deg,#0a0a09 0%,#080808 100%);
+}
+.farol-page .farol{
+  background:
+    radial-gradient(circle at 14% 22%,rgba(13,61,46,.12),transparent 26%),
+    radial-gradient(circle at 88% 78%,rgba(61,13,31,.10),transparent 27%),
+    var(--maison-noir)!important;
+}
+.farol-page .farol__option{
+  background:
+    linear-gradient(145deg,rgba(13,61,46,.07),rgba(61,13,31,.045) 62%,rgba(16,16,15,.96));
+  border-color:rgba(210,179,111,.16);
+}
+.farol-page .farol__option:hover,
+.farol-page .farol__option:focus-visible{
+  background:
+    linear-gradient(145deg,rgba(13,61,46,.14),rgba(61,13,31,.09) 68%,rgba(20,19,15,.98));
+  border-color:rgba(210,179,111,.48);
+}
+.farol-page .farol__result{
+  background:
+    radial-gradient(circle at 8% 0%,rgba(13,61,46,.18),transparent 42%),
+    radial-gradient(circle at 96% 100%,rgba(61,13,31,.16),transparent 42%),
+    #10100f;
+  border-color:rgba(210,179,111,.34);
+}
+.farol-page .farol__progress-dot--active{
+  box-shadow:0 0 0 1px rgba(210,179,111,.18);
+}
+@media(max-width:768px){
+  .farol-page .detail-hero{
+    background:
+      radial-gradient(circle at 86% 12%,rgba(13,61,46,.18),transparent 34%),
+      radial-gradient(circle at 0% 92%,rgba(61,13,31,.14),transparent 34%),
+      #080808;
+  }
+}
