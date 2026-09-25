@@ -33,6 +33,6 @@ jobs:
       - name: Validate content distribution contracts
         run: python3 .github/maison-growth/content-distribution/validate_content_distribution.py
 
-      - name: Run content distribution tests
+      - name: Run all content distribution tests
         working-directory: .github/maison-growth/content-distribution
-        run: python3 -m unittest -v test_content_distribution.py
+        run: python3 -m unittest discover -v -p 'test_content*.py'
