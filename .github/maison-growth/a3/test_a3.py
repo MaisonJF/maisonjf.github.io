@@ -10,6 +10,7 @@ from journey_engine import (
     DuplicateConflict,
     EconomicsError,
     assess_economic_value,
+    CONVERSION_EVENT_TYPES,
     attribution_summary,
     build_journeys,
     new_journey_id,
@@ -223,6 +224,13 @@ class EconomicsTests(unittest.TestCase):
     def test_b2b_profile_supported(self):
         s = solution("b2b", "human", "negotiated", "b2b")
         self.assertEqual(validate_solution(s)["capacity_class"], "negotiated")
+
+    def test_b2b_lifecycle_reuses_canonical_conversion_kinds(self):
+        self.assertEqual(CONVERSION_EVENT_TYPES["b2b.lead"], "lead")
+        self.assertEqual(CONVERSION_EVENT_TYPES["b2b.proposal"], "lead")
+        self.assertEqual(CONVERSION_EVENT_TYPES["b2b.pilot"], "booking")
+        self.assertEqual(CONVERSION_EVENT_TYPES["b2b.purchase"], "purchase")
+        self.assertEqual(CONVERSION_EVENT_TYPES["b2b.recurrence"], "order")
 
     def test_future_collection_profile_supported(self):
         s = solution("digital_collection", "automatic", "scalable", "collection")

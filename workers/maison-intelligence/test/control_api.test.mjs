@@ -112,6 +112,34 @@ test('cash feedback exposes all A3 economics with optional A14 lineage and no cu
   assert.equal('customer_id' in body.rows[0],false);
 });
 
+test('b2b feedback exposes lifecycle without customer identity', async () => {
+  const e=env((sql)=>{
+    assert.match(sql,/FROM brain_b2b_feedback/);
+    return [{
+      conversion_id:'cnv_12345678-1234-1234-1234-123456789012',
+      source_event_id:'evt_12345678-1234-1234-1234-123456789012',
+      event_type:'b2b.lead',conversion_kind:'lead',journey_id:null,
+      solution_id:'sol_0199a4b2-7f00-7000-8000-000000000001',
+      occurred_at:'2026-09-25T12:00:00.000Z',
+      revenue_minor:null,currency:null,privacy_class:'pseudonymous',
+      lifecycle_stage:'lead',interest:'b2b',origin:'professional_test',
+      business:'spa',goal:'diferenciar',gap:'continuity',client:'recorrente',
+      model:'servico',scale:'pequeno',start:'piloto',result_type:'signature',
+      b2b_stage:null,offer_family:null,recurrence_type:null
+    }];
+  });
+  const response=await handleBrainControlRequest(req('/internal/brain/b2b-feedback?limit=10'),e);
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.kind,'brain_b2b_feedback');
+  assert.equal(body.rows[0].business,'spa');
+  assert.equal(body.rows[0].lifecycle_stage,'lead');
+  assert.equal(body.next_cursor.after_id,'cnv_12345678-1234-1234-1234-123456789012');
+  assert.equal('customer_id' in body.rows[0],false);
+  assert.equal('email' in body.rows[0],false);
+  assert.equal('free_text_message' in body.rows[0],false);
+});
+
 test('solutions expose safe commercial fields and current economics only', async () => {
   const e=env((sql,params)=>{
     assert.match(sql,/WITH ranked AS/);

@@ -65,9 +65,41 @@
         "category_id": {"type": "token", "maxLength": 120},
         "order_ref_hash": {"type": "sha256"},
         "payment_status": {"type": "token", "maxLength": 80},
-        "channel": {"type": "token", "maxLength": 80}
+        "channel": {"type": "token", "maxLength": 80},
+        "interest": {"type": "token", "maxLength": 160},
+        "origin": {"type": "token", "maxLength": 160},
+        "business": {"type": "token", "maxLength": 160},
+        "goal": {"type": "token", "maxLength": 160},
+        "gap": {"type": "token", "maxLength": 160},
+        "client": {"type": "token", "maxLength": 160},
+        "model": {"type": "token", "maxLength": 160},
+        "scale": {"type": "token", "maxLength": 160},
+        "start": {"type": "token", "maxLength": 160},
+        "result_type": {"type": "token", "maxLength": 160},
+        "b2b_stage": {"type": "token", "maxLength": 80},
+        "offer_family": {"type": "token", "maxLength": 120},
+        "recurrence_type": {"type": "token", "maxLength": 120}
       },
-      "notes": ["Email, customer name, postal data, Stripe customer IDs and other commercial PII remain outside Growth analytics."]
+      "notes": [
+        "B2B reuses the central commerce source. No CRM or parallel B2B event store is created.",
+        "b2b.lead metadata is exactly the non-PII context allowed by MAISON_B2B_BRAIN.leadContract: interest, origin, business, goal, gap, client, model, scale, start, result_type.",
+        "Name, email, phone, free_text_message, health_data and client_identity are forbidden from Growth analytics.",
+        "Email, customer name, postal data, Stripe customer IDs and other commercial PII remain outside Growth analytics."
+      ],
+      "events": {
+        "commerce.purchase": {"required_metadata": [], "allowed_metadata": ["product_id", "category_id", "order_ref_hash", "payment_status", "channel"]},
+        "commerce.purchase_confirmed": {"required_metadata": [], "allowed_metadata": ["product_id", "category_id", "order_ref_hash", "payment_status", "channel"]},
+        "product.purchase": {"required_metadata": [], "allowed_metadata": ["product_id", "category_id", "order_ref_hash", "payment_status", "channel"]},
+        "service.booking": {"required_metadata": [], "allowed_metadata": ["product_id", "category_id", "channel"]},
+        "service.contact": {"required_metadata": [], "allowed_metadata": ["product_id", "category_id", "channel"]},
+        "b2b.order": {"required_metadata": [], "allowed_metadata": ["product_id", "category_id", "order_ref_hash", "payment_status", "channel", "offer_family", "origin", "business", "goal", "result_type", "recurrence_type"]},
+        "company.contact": {"required_metadata": [], "allowed_metadata": ["category_id", "channel"]},
+        "b2b.lead": {"required_metadata": [], "allowed_metadata": ["interest", "origin", "business", "goal", "gap", "client", "model", "scale", "start", "result_type"]},
+        "b2b.proposal": {"required_metadata": ["b2b_stage"], "allowed_metadata": ["b2b_stage", "offer_family", "origin", "business", "goal", "result_type"]},
+        "b2b.pilot": {"required_metadata": ["b2b_stage"], "allowed_metadata": ["b2b_stage", "offer_family", "origin", "business", "goal", "result_type"]},
+        "b2b.purchase": {"required_metadata": ["b2b_stage"], "allowed_metadata": ["b2b_stage", "offer_family", "origin", "business", "goal", "result_type", "recurrence_type"]},
+        "b2b.recurrence": {"required_metadata": ["b2b_stage", "recurrence_type"], "allowed_metadata": ["b2b_stage", "offer_family", "origin", "business", "goal", "result_type", "recurrence_type"]}
+      }
     },
     "gsc": {
       "status": "planned",
