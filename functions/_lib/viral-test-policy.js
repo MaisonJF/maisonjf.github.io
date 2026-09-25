@@ -1,6 +1,16 @@
 export const VIRAL_TEST_POLICY={
-  version:'2026-09-20-v1',
+  version:'2026-09-25-human-voice-v2',
   purpose:'Create tests people want to finish, recognise themselves in, share, revisit and continue from without using deceptive or diagnostic framing.',
+  voice:{
+    principle:'João escreve. Brain pensa. MAISON fala.',
+    rules:[
+      'Use familiar human language, never internal construct labels in public copy.',
+      'Write as a real Portuguese person would speak or write, with João voice and Brain knowledge.',
+      'Avoid em dash and en dash. Use natural punctuation and start a new sentence when that is how a person would say it.',
+      'Avoid AI-sounding symmetry, over-explanation, jargon and polished-but-empty phrasing.',
+      'Recognition must come from a concrete human truth, not from pretending to know the person.'
+    ]
+  },
   principles:{
     appleKiss:[
       'One human tension per question.',
@@ -61,6 +71,10 @@ export const VIRAL_TEST_POLICY={
 };
 
 export function auditViralQuestion(question=''){
-  const words=String(question).trim().split(/\s+/).filter(Boolean);
-  return {ok:words.length<=VIRAL_TEST_POLICY.questionRules.maxQuestionWords,words:words.length};
+  const text=String(question).trim();
+  const words=text.split(/\s+/).filter(Boolean);
+  const errors=[];
+  if(words.length>VIRAL_TEST_POLICY.questionRules.maxQuestionWords)errors.push('too_long');
+  if(/[—–]/.test(text))errors.push('public_voice_dash_forbidden');
+  return {ok:errors.length===0,words:words.length,errors};
 }
