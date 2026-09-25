@@ -30,9 +30,20 @@ def _metadata(event: Mapping[str, Any]) -> dict[str, Any]:
     return parsed
 
 def content_learning_identity(event: Mapping[str, Any]) -> dict[str, Any]:
-    identity=content_learning_identity(event)
+    if event.get("source")!="maison-content-distribution":
+        raise LearningError("unsupported content source")
+    if event.get("event_type")!="content.performance_observed":
+        raise LearningError("unsupported content event")
+    if event.get("privacy_class")!="aggregated":
+        raise LearningError("content feedback must be aggregated")
+
     meta=_metadata(event)
-    content_id=identity["content_id"]
+    if FORBIDDEN_ECONOMIC_METADATA & set(meta):
+        raise LearningError("content metadata cannot supply economics")
+    content_id=str(meta.get("content_id") or "").strip()
+    if not content_id:
+        raise LearningError("content_id required")
+
     refs=[]
     event_id=str(event.get("event_id") or "").strip()
     if event_id:
@@ -41,6 +52,7 @@ def content_learning_identity(event: Mapping[str, Any]) -> dict[str, Any]:
     if source_hash:
         refs.append(f"content:source_refs_hash:{source_hash}")
     refs=tuple(dict.fromkeys(refs))
+
     return {
         "content_id":content_id,
         "source_id":stable_id("cnt_",{"content_id":content_id,"refs":(f"content:{content_id}",*refs)}),
@@ -63,22 +75,11 @@ def content_event_to_learning(
     non-overlapping observations. Economic fields are accepted only through an
     explicit A3-owned mapping, never from content engagement metadata.
     """
-    if event.get("source")!="maison-content-distribution":
-        raise LearningError("unsupported content source")
-    if event.get("event_type")!="content.performance_observed":
-        raise LearningError("unsupported content event")
-    if event.get("privacy_class")!="aggregated":
-        raise LearningError("content feedback must be aggregated")
+    identity=content_learning_identity(event)
     if not isinstance(independent_snapshot_count,int) or isinstance(independent_snapshot_count,bool) or independent_snapshot_count<1:
         raise LearningError("invalid independent snapshot count")
 
     meta=_metadata(event)
-    if FORBIDDEN_ECONOMIC_METADATA & set(meta):
-        raise LearningError("content metadata cannot supply economics")
-    content_id=str(meta.get("content_id") or "").strip()
-    if not content_id:
-        raise LearningError("content_id required")
-
     click_rate=meta.get("click_rate_bps")
     if click_rate is not None:
         if isinstance(click_rate,bool) or not isinstance(click_rate,int) or not 0<=click_rate<=10000:
@@ -101,10 +102,8 @@ def content_event_to_learning(
         expected=None
         observed=None
 
-    refs=list(identity["evidence_refs"])
-
     return evaluate_content_performance(
-        content_id=content_id,
+        content_id=identity["content_id"],
         observation_count=independent_snapshot_count,
         confidence_before=confidence_before,
         rule_version_id=rule_version_id,
@@ -113,5 +112,5 @@ def content_event_to_learning(
         economic_observation_count=economic_count,
         expected_click_rate_bps=None,
         observed_click_rate_bps=click_rate,
-        evidence_refs=tuple(refs),
+        evidence_refs=identity["evidence_refs"],
     )
