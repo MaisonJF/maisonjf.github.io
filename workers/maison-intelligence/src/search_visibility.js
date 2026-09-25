@@ -8,6 +8,19 @@ const BING_API_ROOT='https://www.bing.com/webmaster/api.svc/json/';
 
 function enabled(value){return String(value??'').toLowerCase()==='true'}
 function isoDay(date){return date.toISOString().slice(0,10)}
+function pacificDay(date){
+  const parts=new Intl.DateTimeFormat('en-CA',{
+    timeZone:'America/Los_Angeles',
+    year:'numeric',month:'2-digit',day:'2-digit'
+  }).formatToParts(date);
+  const values=Object.fromEntries(parts.map(part=>[part.type,part.value]));
+  return values.year+'-'+values.month+'-'+values.day;
+}
+function shiftDay(day,delta){
+  const date=new Date(day+'T12:00:00Z');
+  date.setUTCDate(date.getUTCDate()+delta);
+  return isoDay(date);
+}
 function daysBefore(date,days){return new Date(date.getTime()-days*86400000)}
 function clampInt(value,fallback,min,max){
   const n=Number.parseInt(value,10);
@@ -75,7 +88,8 @@ const GOOGLE_PROFILES=Object.freeze([
   {key:'queries',dimensions:['query'],cadenceHours:24,rowLimit:40},
   {key:'devices',dimensions:['device'],cadenceHours:168,rowLimit:10},
   {key:'countries',dimensions:['country'],cadenceHours:168,rowLimit:40},
-  {key:'appearance',dimensions:['searchAppearance'],cadenceHours:168,rowLimit:20}
+  {key:'appearance',dimensions:['searchAppearance'],cadenceHours:168,rowLimit:20},
+  {key:'fresh_pages',dimensions:['date','page'],cadenceHours:24,rowLimit:40,days:3,lagDays:0,dataState:'all'}
 ]);
 
 export const DEFAULT_INSPECTION_URLS=Object.freeze([
@@ -182,7 +196,7 @@ export function searchVisibilityDue(task,scheduledDate){
 export function searchVisibilityTaskIdentity(task){
   return JSON.stringify({
     family:task.family,key:task.key,site:task.site,days:task.days??null,
-    lagDays:task.lagDays??null,dimensions:task.dimensions??null,
+    lagDays:task.lagDays??null,dataState:task.dataState??null,dimensions:task.dimensions??null,
     rowLimit:task.rowLimit??null,method:task.method??null,
     inspectionUrls:task.inspectionUrls??null
   });
@@ -196,8 +210,8 @@ async function fetchGoogle(env,task,scheduledDate){
     refreshToken:env.GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN,
     prefix:'gsc'
   });
-  const endDate=daysBefore(scheduledDate,task.lagDays);
-  const startDate=daysBefore(endDate,task.days-1);
+  const endDay=shiftDay(pacificDay(scheduledDate),-Number(task.lagDays||0));
+  const startDay=shiftDay(endDay,-(Number(task.days||1)-1));
   const endpoint=GSC_API_ROOT+encodeURIComponent(task.site)+'/searchAnalytics/query';
   const data=await jsonFetch(endpoint,{
     method:'POST',
@@ -206,10 +220,11 @@ async function fetchGoogle(env,task,scheduledDate){
       'Content-Type':'application/json'
     },
     body:JSON.stringify({
-      startDate:isoDay(startDate),
-      endDate:isoDay(endDate),
+      startDate:startDay,
+      endDate:endDay,
       dimensions:task.dimensions,
       type:'web',
+      dataState:task.dataState||'final',
       rowLimit:task.rowLimit,
       startRow:0
     })
@@ -233,8 +248,11 @@ async function fetchGoogle(env,task,scheduledDate){
       property:task.site,
       profile:task.key,
       dimensions:task.dimensions,
-      start_date:isoDay(startDate),
-      end_date:isoDay(endDate),
+      data_state:task.dataState||'final',
+      start_date:startDay,
+      end_date:endDay,
+      first_incomplete_date:data?.metadata?.first_incomplete_date||null,
+      first_incomplete_hour:data?.metadata?.first_incomplete_hour||null,
       retrieved_at:new Date().toISOString(),
       row_count:rows.length,
       rows
