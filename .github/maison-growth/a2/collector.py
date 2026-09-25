@@ -290,6 +290,12 @@ def normalize_ingestion(raw: Mapping[str, Any], *, source_registry: Optional[Map
     prefixes = tuple(source_spec.get("allowed_event_prefixes", ()))
     if not prefixes or not event_type.startswith(prefixes):
         raise ValidationError(f"event_type {event_type!r} is not allowed for source {source!r}")
+    event_specs = source_spec.get("events")
+    event_spec = None
+    if isinstance(event_specs, Mapping):
+        event_spec = event_specs.get(event_type)
+        if event_spec is None:
+            raise ValidationError(f"event_type {event_type!r} is not declared for source {source!r}")
 
     idempotency_key_raw = raw.get("idempotency_key")
     if not isinstance(idempotency_key_raw, str):
@@ -318,6 +324,19 @@ def normalize_ingestion(raw: Mapping[str, Any], *, source_registry: Optional[Map
         raise ValidationError(
             f"metadata fields not allowlisted for source {source!r}: {', '.join(unknown_meta)}"
         )
+    if isinstance(event_spec, Mapping):
+        event_allowed = set(event_spec.get("allowed_metadata", allowed_metadata.keys()))
+        event_unknown = sorted(set(metadata_raw.keys()) - event_allowed)
+        if event_unknown:
+            raise ValidationError(
+                f"metadata fields not allowed for event_type {event_type!r}: {', '.join(event_unknown)}"
+            )
+        required_meta = tuple(event_spec.get("required_metadata", ()))
+        missing_meta = [key for key in required_meta if key not in metadata_raw]
+        if missing_meta:
+            raise ValidationError(
+                f"missing required metadata for event_type {event_type!r}: {', '.join(missing_meta)}"
+            )
     metadata: dict[str, Any] = {}
     for key in sorted(metadata_raw.keys()):
         metadata[key] = _normalize_metadata_value(
