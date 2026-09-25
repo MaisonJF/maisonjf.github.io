@@ -50,6 +50,8 @@ jobs:
           node --check functions/api/create-product-checkout-live.js
           node --check functions/api/product-checkout-session-live.js
           node --check functions/api/create-consultation-checkout-live.js
+          node --check functions/api/create-oracle-checkout-live.js
+          node --check functions/api/create-pdi-checkout-live.js
           node --check functions/api/consultation-checkout-session-live.js
           node --check functions/_lib/offer-brain.js
           python3 .github/maison-growth/brain/test_schema_chain.py
