@@ -59,5 +59,11 @@
     "commercial_identifiable_store": "outside Growth Engine",
     "oracle_paid_content": "never available to collector",
     "rejected_payloads": "never persisted raw when validation/privacy fails"
-  }
+  },
+  "private_http_endpoint_implemented": true,
+  "private_http_route": "/internal/a2/ingest",
+  "private_http_default_enabled": false,
+  "runtime_host_reused": "maison-intelligence",
+  "runtime_storage_reused": "GROWTH_DB",
+  "a2_specific_cloudflare_activation_provisioned": false
 }
