@@ -1,7 +1,7 @@
 {
   "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
-  "generatedAt": "2026-09-25T08:45:00+01:00",
+  "generatedAt": "2026-09-25T12:52:00+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
   "contract": {
     "storesPaidBodies": false,
@@ -11,19 +11,19 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 21,
-    "queueItems": 42,
-    "questionCandidates": 21,
-    "questionThemeHypotheses": 134,
-    "questionDesignSlots": 804,
+    "oceansConsidered": 22,
+    "queueItems": 44,
+    "questionCandidates": 22,
+    "questionThemeHypotheses": 142,
+    "questionDesignSlots": 852,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 261,
     "pdiThemeBacklog": 260,
     "pdiSourceDesignSlots": 1560,
     "pdiEditorialCoreTarget": 78000,
     "pdiCombinatorialTarget": 2800000,
-    "oracleCandidates": 21,
-    "oracleRoleSlots": 147
+    "oracleCandidates": 22,
+    "oracleRoleSlots": 154
   },
   "pdiGrowth": {
     "scale": {
@@ -14428,6 +14428,34 @@
       "status": "needs_editorial"
     },
     {
+      "sourceOceanId": "micro-luxo-como-recompensa-e-ritual",
+      "territory": "micro-luxo-como-recompensa-e-ritual",
+      "intent": "reconhecer pequenos luxos e mimos intencionais como momentos de recompensa, celebração, prazer e identidade no quotidiano, distinguindo uma indulgência escolhida de pressão para gastar, culpa ou consumo impulsivo sem controlo",
+      "painLanguage": "Nem todas as compras de desejo procuram resolver um problema grande. Às vezes a pessoa quer apenas marcar uma pequena vitória, tornar um dia comum mais bonito ou dar a si própria um prazer acessível que diga: isto também conta.",
+      "commercialAdjacency": "Reutilizar primeiro Oráculo €2, jogo/experiência digital €5, velas, óleos, névoas, escalda-pés, wax melts, mikados e Ritual Volta Para Casa como pequenos luxos por ocasião: pequena vitória, fim de tarefa, terça-feira que merece beleza, presente para si e celebração sem grande marco. Depois testar bundles físico+digital, formatos de descoberta/coleccionáveis, recompra por ritual e gifting. Digital recebe peso especial pela baixa fricção e escala; sem urgência, escassez ou promessa emocional/terapêutica.",
+      "evidenceCount": 3,
+      "evidence": [
+        "Circana / NCSolutions (2025; survey of 1,036 US adults): 62% considered little treats important to self-care, 50% described them as a reward, 26% named candles/incense among top non-food small rewards, and ritual pairing was a reported behaviour — https://www.circana.com/post/little-treats-statistics-trends",
+        "SurveyMonkey Treatonomics (2026; 2,038 US adults): 62% reported small affordable treats at least monthly, 52% of treaters spent $25 or less per purchase, and 35% of Gen Z/Millennials used treats to stay motivated toward larger goals — https://www.surveymonkey.com/curiosity/treatonomics-consumer-spending/",
+        "Euromonitor, World Perfumery Congress 2026: micro-indulgence, miniaturisation, discovery formats and collectability were prominent in fragrance packaging, linking accessible indulgence with objects people want to keep and show — https://www.euromonitor.com/article/reflections-from-world-perfumery-congress-2026"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial",
+      "id": "brain_oracle_micro_luxo_como_recompensa_e_ritual",
+      "type": "oracle_candidate",
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ]
+    },
+    {
       "id": "brain_oracle_perda_ambigua_sem_fecho_claro",
       "type": "oracle_candidate",
       "sourceOceanId": "perda-ambigua-sem-fecho-claro",
@@ -17859,6 +17887,333 @@
       "approvalRequired": true,
       "automaticActivation": false,
       "status": "needs_editorial"
+    },
+    {
+      "sourceOceanId": "micro-luxo-como-recompensa-e-ritual",
+      "territory": "micro-luxo-como-recompensa-e-ritual",
+      "intent": "reconhecer pequenos luxos e mimos intencionais como momentos de recompensa, celebração, prazer e identidade no quotidiano, distinguindo uma indulgência escolhida de pressão para gastar, culpa ou consumo impulsivo sem controlo",
+      "painLanguage": "Nem todas as compras de desejo procuram resolver um problema grande. Às vezes a pessoa quer apenas marcar uma pequena vitória, tornar um dia comum mais bonito ou dar a si própria um prazer acessível que diga: isto também conta.",
+      "commercialAdjacency": "Reutilizar primeiro Oráculo €2, jogo/experiência digital €5, velas, óleos, névoas, escalda-pés, wax melts, mikados e Ritual Volta Para Casa como pequenos luxos por ocasião: pequena vitória, fim de tarefa, terça-feira que merece beleza, presente para si e celebração sem grande marco. Depois testar bundles físico+digital, formatos de descoberta/coleccionáveis, recompra por ritual e gifting. Digital recebe peso especial pela baixa fricção e escala; sem urgência, escassez ou promessa emocional/terapêutica.",
+      "evidenceCount": 3,
+      "evidence": [
+        "Circana / NCSolutions (2025; survey of 1,036 US adults): 62% considered little treats important to self-care, 50% described them as a reward, 26% named candles/incense among top non-food small rewards, and ritual pairing was a reported behaviour — https://www.circana.com/post/little-treats-statistics-trends",
+        "SurveyMonkey Treatonomics (2026; 2,038 US adults): 62% reported small affordable treats at least monthly, 52% of treaters spent $25 or less per purchase, and 35% of Gen Z/Millennials used treats to stay motivated toward larger goals — https://www.surveymonkey.com/curiosity/treatonomics-consumer-spending/",
+        "Euromonitor, World Perfumery Congress 2026: micro-indulgence, miniaturisation, discovery formats and collectability were prominent in fragrance packaging, linking accessible indulgence with objects people want to keep and show — https://www.euromonitor.com/article/reflections-from-world-perfumery-congress-2026"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial",
+      "id": "brain_question_micro_luxo_como_recompensa_e_ritual",
+      "type": "question_candidate",
+      "questionThemeCandidates": [
+        "uma pequena vitória também merece ser marcada",
+        "o mimo que transforma um dia comum",
+        "recompensa sem precisar de uma grande ocasião",
+        "pequeno luxo escolhido sem culpa",
+        "rituais de recompensa que apetece repetir",
+        "comprar para si como gesto de celebração",
+        "prazer acessível vs impulso automático",
+        "objectos pequenos que dão vontade de coleccionar"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_uma_pequena_vitoria_tambem_merece_ser_marcada_open",
+          "theme": "uma pequena vitória também merece ser marcada",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_uma_pequena_vitoria_tambem_merece_ser_marcada_recognize",
+          "theme": "uma pequena vitória também merece ser marcada",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_uma_pequena_vitoria_tambem_merece_ser_marcada_deepen",
+          "theme": "uma pequena vitória também merece ser marcada",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_uma_pequena_vitoria_tambem_merece_ser_marcada_touch",
+          "theme": "uma pequena vitória também merece ser marcada",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_uma_pequena_vitoria_tambem_merece_ser_marcada_close",
+          "theme": "uma pequena vitória também merece ser marcada",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_uma_pequena_vitoria_tambem_merece_ser_marcada_signature",
+          "theme": "uma pequena vitória também merece ser marcada",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_o_mimo_que_transforma_um_dia_comum_open",
+          "theme": "o mimo que transforma um dia comum",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_o_mimo_que_transforma_um_dia_comum_recognize",
+          "theme": "o mimo que transforma um dia comum",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_o_mimo_que_transforma_um_dia_comum_deepen",
+          "theme": "o mimo que transforma um dia comum",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_o_mimo_que_transforma_um_dia_comum_touch",
+          "theme": "o mimo que transforma um dia comum",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_o_mimo_que_transforma_um_dia_comum_close",
+          "theme": "o mimo que transforma um dia comum",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_o_mimo_que_transforma_um_dia_comum_signature",
+          "theme": "o mimo que transforma um dia comum",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_recompensa_sem_precisar_de_uma_grande_ocasiao_open",
+          "theme": "recompensa sem precisar de uma grande ocasião",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_recompensa_sem_precisar_de_uma_grande_ocasiao_recognize",
+          "theme": "recompensa sem precisar de uma grande ocasião",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_recompensa_sem_precisar_de_uma_grande_ocasiao_deepen",
+          "theme": "recompensa sem precisar de uma grande ocasião",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_recompensa_sem_precisar_de_uma_grande_ocasiao_touch",
+          "theme": "recompensa sem precisar de uma grande ocasião",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_recompensa_sem_precisar_de_uma_grande_ocasiao_close",
+          "theme": "recompensa sem precisar de uma grande ocasião",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_recompensa_sem_precisar_de_uma_grande_ocasiao_signature",
+          "theme": "recompensa sem precisar de uma grande ocasião",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_pequeno_luxo_escolhido_sem_culpa_open",
+          "theme": "pequeno luxo escolhido sem culpa",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_pequeno_luxo_escolhido_sem_culpa_recognize",
+          "theme": "pequeno luxo escolhido sem culpa",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_pequeno_luxo_escolhido_sem_culpa_deepen",
+          "theme": "pequeno luxo escolhido sem culpa",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_pequeno_luxo_escolhido_sem_culpa_touch",
+          "theme": "pequeno luxo escolhido sem culpa",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_pequeno_luxo_escolhido_sem_culpa_close",
+          "theme": "pequeno luxo escolhido sem culpa",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_pequeno_luxo_escolhido_sem_culpa_signature",
+          "theme": "pequeno luxo escolhido sem culpa",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_rituais_de_recompensa_que_apetece_repetir_open",
+          "theme": "rituais de recompensa que apetece repetir",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_rituais_de_recompensa_que_apetece_repetir_recognize",
+          "theme": "rituais de recompensa que apetece repetir",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_rituais_de_recompensa_que_apetece_repetir_deepen",
+          "theme": "rituais de recompensa que apetece repetir",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_rituais_de_recompensa_que_apetece_repetir_touch",
+          "theme": "rituais de recompensa que apetece repetir",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_rituais_de_recompensa_que_apetece_repetir_close",
+          "theme": "rituais de recompensa que apetece repetir",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_rituais_de_recompensa_que_apetece_repetir_signature",
+          "theme": "rituais de recompensa que apetece repetir",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_comprar_para_si_como_gesto_de_celebracao_open",
+          "theme": "comprar para si como gesto de celebração",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_comprar_para_si_como_gesto_de_celebracao_recognize",
+          "theme": "comprar para si como gesto de celebração",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_comprar_para_si_como_gesto_de_celebracao_deepen",
+          "theme": "comprar para si como gesto de celebração",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_comprar_para_si_como_gesto_de_celebracao_touch",
+          "theme": "comprar para si como gesto de celebração",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_comprar_para_si_como_gesto_de_celebracao_close",
+          "theme": "comprar para si como gesto de celebração",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_comprar_para_si_como_gesto_de_celebracao_signature",
+          "theme": "comprar para si como gesto de celebração",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_prazer_acessivel_vs_impulso_automatico_open",
+          "theme": "prazer acessível vs impulso automático",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_prazer_acessivel_vs_impulso_automatico_recognize",
+          "theme": "prazer acessível vs impulso automático",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_prazer_acessivel_vs_impulso_automatico_deepen",
+          "theme": "prazer acessível vs impulso automático",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_prazer_acessivel_vs_impulso_automatico_touch",
+          "theme": "prazer acessível vs impulso automático",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_prazer_acessivel_vs_impulso_automatico_close",
+          "theme": "prazer acessível vs impulso automático",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_prazer_acessivel_vs_impulso_automatico_signature",
+          "theme": "prazer acessível vs impulso automático",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_objectos_pequenos_que_dao_vontade_de_coleccionar_open",
+          "theme": "objectos pequenos que dão vontade de coleccionar",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_objectos_pequenos_que_dao_vontade_de_coleccionar_recognize",
+          "theme": "objectos pequenos que dão vontade de coleccionar",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_objectos_pequenos_que_dao_vontade_de_coleccionar_deepen",
+          "theme": "objectos pequenos que dão vontade de coleccionar",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_objectos_pequenos_que_dao_vontade_de_coleccionar_touch",
+          "theme": "objectos pequenos que dão vontade de coleccionar",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_objectos_pequenos_que_dao_vontade_de_coleccionar_close",
+          "theme": "objectos pequenos que dão vontade de coleccionar",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_micro_luxo_como_recompensa_e_ritual_objectos_pequenos_que_dao_vontade_de_coleccionar_signature",
+          "theme": "objectos pequenos que dão vontade de coleccionar",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ]
     },
     {
       "id": "brain_question_perda_ambigua_sem_fecho_claro",
