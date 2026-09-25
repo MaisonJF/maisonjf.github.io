@@ -5,7 +5,7 @@ Paid question/reading bodies must not be stored here.
 */
 
 export const MAISON_CONTENT_ONTOLOGY={
-  version:'2026-09-25-human-voice-v3',
+  version:'2026-09-25-dual-surface-v4',
   types:['question','oracle_block','taxonomy','content_need'],
   lifecycleStates:['candidate','lab','vault','live','review','retired'],
   rotationStates:['new','limited','normal','review','retired'],
@@ -52,6 +52,23 @@ export const MAISON_CONTENT_ONTOLOGY={
       'Do not use jargon merely to sound sophisticated. Luxury comes from precision, restraint and desire, not difficult vocabulary.',
       'Do not fake personal knowledge, diagnosis, certainty, urgency, scarcity or intimacy.',
       'Every commercial text may have intention and conversion, but it must still sound like a person speaking to another person.'
+    ]
+  },
+  machineSurface:{
+    principle:'Humano vê João. Máquina vê estrutura. Brain compreende os dois. MAISON transforma isso em desejo, utilidade e negócio.',
+    rule:'Human-facing prose and machine-facing structure are two representations of the same MAISON intelligence. Never expose internal engine language merely to satisfy machines.',
+    consumers:['search_engines','generative_engines','ai_agents','osiris','openrouter','other_authorized_ai','maison_brain'],
+    channels:['semantic_html','json_ld','schema_org','canonical_metadata','llms_txt','sitemaps','internal_link_graph','entity_relations','intent_metadata','ocean_lineage','offer_relations','question_relations'],
+    semanticFields:['entity','territory','human_tension','desire','perceived_need','occasion','intent','audience','content_purpose','related_questions','related_offers','related_services','related_oceans','evidence','provenance','safety_scope'],
+    rules:[
+      'Human copy remains João voice even when machine metadata is richer.',
+      'Machine structure must describe what the public content genuinely says. Never create hidden claims, fake authority, fake citations or keyword stuffing.',
+      'Prefer explicit entities, relationships, provenance and useful answers over repeated keywords.',
+      'SEO, GEO and AI discovery are distribution surfaces of the same knowledge graph, not separate writing styles.',
+      'OSIRIS and authorized AI providers may enrich internal intelligence. They do not define MAISON voice.',
+      'OpenRouter is an intelligence gateway, not the Brain and not the brand voice.',
+      'New providers plug into the sensor and intelligence layer without requiring public copy to change.',
+      'Commercial structure may encode desire, need, occasion, offer, conversion and recurrence while public prose remains natural.'
     ]
   },
   eventDimensions:[
