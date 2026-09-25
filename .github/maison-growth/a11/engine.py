@@ -58,7 +58,7 @@ def _neutral(expected:int, observed:int)->bool:
     return diff <= int(POLICY["neutral_band_basis_points"])
 
 def evaluate(inp:LearningInput, *, confidence_before:int, rule_version_id:str, model_version_id:str|None=None)->LearningRecord:
-    if inp.source_kind not in {"decision","experiment","journey","conversion","promotion"}:
+    if inp.source_kind not in {"decision","experiment","journey","conversion","promotion","content"}:
         raise LearningError("unsupported source kind")
     if inp.subject_type not in {"need","intent","coverage","candidate","decision"}:
         raise LearningError("unsupported feedback target")
@@ -104,6 +104,39 @@ def evaluate(inp:LearningInput, *, confidence_before:int, rule_version_id:str, m
     ih=hashlib.sha256(canonical(payload).encode()).hexdigest()
     return LearningRecord(stable_id("lrn_",payload),signal,confidence_before,after,after-confidence_before,
         tuple(dict.fromkeys(reasons)),expected,observed,inp.evidence_refs,True,False,rule_version_id,model_version_id,ih)
+
+def evaluate_content_performance(*, content_id:str, observation_count:int,
+        confidence_before:int, rule_version_id:str,
+        expected_economic_value_minor:int|None=None,
+        observed_economic_value_minor:int|None=None,
+        economic_observation_count:int=0,
+        expected_click_rate_bps:int|None=None,
+        observed_click_rate_bps:int|None=None,
+        evidence_refs:Iterable[str]=())->LearningRecord:
+    """Map aggregated content performance into governed A11 learning.
+
+    Engagement metrics may inform context but never become economic value.
+    Economic fields must come from the A3/economic layer; without them the
+    record remains observation-only and confidence does not change.
+    """
+    validate_id(rule_version_id,"rul_")
+    if not content_id or observation_count<0 or economic_observation_count<0:
+        raise LearningError("invalid content performance")
+    refs=(f"content:{content_id}",*tuple(dict.fromkeys(str(x) for x in evidence_refs)))
+    inp=LearningInput(
+        source_kind="content",
+        source_id=stable_id("cnt_",{"content_id":content_id,"refs":refs}),
+        expected_economic_value_minor=expected_economic_value_minor,
+        observed_economic_value_minor=observed_economic_value_minor,
+        expected_ctr_bps=expected_click_rate_bps,
+        observed_ctr_bps=observed_click_rate_bps,
+        observation_count=observation_count,
+        economic_observation_count=economic_observation_count,
+        evidence_refs=refs,
+        subject_type="candidate",
+        subject_id=stable_id("can_",{"content_id":content_id})
+    )
+    return evaluate(inp,confidence_before=confidence_before,rule_version_id=rule_version_id)
 
 def feedback(record:LearningRecord)->dict[str,Any]:
     action={"positive":"increase_confidence","negative":"decrease_confidence","neutral":"hold_confidence","insufficient":"observe"}[record.signal_class]
