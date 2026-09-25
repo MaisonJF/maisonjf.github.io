@@ -10,6 +10,7 @@ case "$MODE" in
     node "$ROOT/build_vpc_ocean_signals.mjs"
     node "$ROOT/build_editorial_queue.mjs"
     node "$ROOT/build_commercial_assets.mjs"
+    node "$ROOT/build_maison_knowledge_graph.mjs"
     "$PYTHON_BIN" "$ROOT/digital_experience_coverage.py" --check
     "$PYTHON_BIN" "$ROOT/build_commercial_bundles.py"
     "$PYTHON_BIN" "$ROOT/build_commercial_attention.py" --check
@@ -18,6 +19,7 @@ case "$MODE" in
     node "$ROOT/build_vpc_ocean_signals.mjs" --check
     node "$ROOT/build_editorial_queue.mjs" --check
     node "$ROOT/build_commercial_assets.mjs" --check
+    node "$ROOT/build_maison_knowledge_graph.mjs" --check
     "$PYTHON_BIN" "$ROOT/digital_experience_coverage.py" --check
     "$PYTHON_BIN" "$ROOT/build_commercial_bundles.py" --check
     "$PYTHON_BIN" "$ROOT/build_commercial_attention.py" --check
