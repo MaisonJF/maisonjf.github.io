@@ -62,13 +62,21 @@ class RemoteSchemaGateTests(unittest.TestCase):
     def test_migration_inspector_covers_complete_0001_to_0018_chain(self):
         found = re.findall(r"'(00\d{2}_[a-z0-9_]+)'", self.inspect)
         migrations = [item.split("_", 1)[0] for item in found]
-        unique_migrations = list(dict.fromkeys(migrations))
+        unique_migrations = sorted(set(migrations))
         self.assertEqual(
             unique_migrations,
             [f"{number:04d}" for number in range(1, 19)],
         )
         self.assertIn("missing_or_partial", self.inspect)
         self.assertIn("maison-b2b", self.inspect)
+
+    def test_full_apply_orders_0017_before_0018(self):
+        self.assertIn("0017_b2b_canonical_solution.sql", self.apply)
+        self.assertIn("0018_b2b_feedback.sql", self.apply)
+        self.assertLess(
+            self.apply.index("0017_b2b_canonical_solution.sql"),
+            self.apply.index("0018_b2b_feedback.sql"),
+        )
 
     def test_runtime_helpers_default_to_canonical_growth_database(self):
         self.assertIn('DB_NAME="${1:-maison-growth-engine}"', self.inspect)
