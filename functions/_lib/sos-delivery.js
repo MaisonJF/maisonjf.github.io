@@ -28,8 +28,8 @@ export async function deliverClaimedSosAction({env,action,at=new Date().toISOStr
     throw new Error('unsupported_sos_action_kind');
   }catch(error){
     if(error?.message==='sos_delivery_temporary_failure'){
-      await releaseSosActionForRetry({env,actionRef,errorCode:'provider_temporary',at});
-      return {ok:false,retry:true};
+      const released=await releaseSosActionForRetry({env,actionRef,errorCode:'provider_temporary',at});
+      return {ok:false,retry:released.retry,terminal:released.terminal};
     }
     try{await completeSosAction({env,actionRef,outcome:'failed',errorCode:String(error?.message||'delivery_failed'),at})}catch{}
     throw error;
