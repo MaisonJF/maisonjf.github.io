@@ -261,9 +261,9 @@ def build_brief(
         },
         "learning": {
             "feedback_event_type": "content.performance_observed",
-            "canonical_envelope": "A1 v2",
+            "canonical_ingestion": "A2 v1 -> A1 v2",
             "economic_value_owner": "A3",
-            "learning_owner": "Brain/A11",
+            "learning_owner": "Brain/A11 after central mapping",
         },
     }
 
