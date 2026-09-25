@@ -3207,3 +3207,31 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--maison-gold)!import
 .services-page .quiet-link:focus-visible{
   background:linear-gradient(90deg,rgba(13,61,46,.08),transparent 48%,rgba(61,13,31,.06));
 }
+
+
+/* RIO EXPERIÊNCIA · display titles on one line · 2026-09-25 */
+/* Regra visual MAISON: títulos editoriais não partem em duas linhas.
+   A escala baixa no mobile para preservar a linha única sem scroll horizontal. */
+main h1,
+.home-page--final .hero__headline,
+.detail-title{
+  max-width:none!important;
+  white-space:nowrap!important;
+  text-wrap:nowrap!important;
+}
+@media(max-width:760px){
+  main h1,
+  .home-page--final .hero__headline,
+  .detail-title{
+    font-size:clamp(17px,6.6vw,42px)!important;
+    line-height:1!important;
+    letter-spacing:-.035em!important;
+  }
+}
+@media(max-width:430px){
+  main h1,
+  .home-page--final .hero__headline,
+  .detail-title{
+    font-size:clamp(15px,6vw,30px)!important;
+  }
+}
