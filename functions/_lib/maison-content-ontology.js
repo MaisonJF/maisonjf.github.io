@@ -5,7 +5,7 @@ Paid question/reading bodies must not be stored here.
 */
 
 export const MAISON_CONTENT_ONTOLOGY={
-  version:'2026-09-19-v2',
+  version:'2026-09-25-human-voice-v3',
   types:['question','oracle_block','taxonomy','content_need'],
   lifecycleStates:['candidate','lab','vault','live','review','retired'],
   rotationStates:['new','limited','normal','review','retired'],
@@ -39,6 +39,21 @@ export const MAISON_CONTENT_ONTOLOGY={
     'clarity','originality','safety','editorialQuality',
     'humanity','specificity','emotionalTruth','composability'
   ],
+  publicVoice:{
+    principle:'João escreve. Brain pensa. MAISON fala.',
+    scope:['site','questions','tests','digital_games','oracle','oracle_results','product_copy','service_copy','ebooks','posts','stories','reels','video_scripts','captions','cta','share_cards','emails','errors'],
+    rules:[
+      'Write in natural European Portuguese and use words ordinary people recognise immediately.',
+      'Sound like João writing with the Brain knowledge behind him, not like a system, consultant, psychology manual or AI.',
+      'Keep one clear human idea at a time. Prefer concrete situations, spoken language and recognisable feelings.',
+      'Use questions when a real person would ask a question. Let sentence length and rhythm vary naturally.',
+      'Keep technical constructs, scoring keys, taxonomy and engine language internal. Translate them into human language before public display.',
+      'Avoid em dash and en dash in public prose. Start a new sentence, use a full stop, comma, colon or a genuine question instead.',
+      'Do not use jargon merely to sound sophisticated. Luxury comes from precision, restraint and desire, not difficult vocabulary.',
+      'Do not fake personal knowledge, diagnosis, certainty, urgency, scarcity or intimacy.',
+      'Every commercial text may have intention and conversion, but it must still sound like a person speaking to another person.'
+    ]
+  },
   eventDimensions:[
     'shown','advanced','passed','shared','completed','repurchased','reopened','qualityFailed'
   ]
@@ -52,6 +67,7 @@ export function validateQuestionCard(card){
   if(!/^q_[a-z0-9_-]+$/i.test(String(card.id||'')))errors.push('invalid_id');
   if(!card.theme)errors.push('theme_required');
   if(!card.text||typeof card.text!=='string')errors.push('text_required');
+  if(typeof card.text==='string'&&/[—–]/.test(card.text))errors.push('public_voice_dash_forbidden');
   if(!MAISON_CONTENT_ONTOLOGY.question.stages.includes(card.stage))errors.push('invalid_stage');
   if(!MAISON_CONTENT_ONTOLOGY.question.classes.includes(card.class))errors.push('invalid_class');
   if(!MAISON_CONTENT_ONTOLOGY.question.intensities.includes(card.intensity))errors.push('invalid_intensity');
@@ -77,6 +93,7 @@ export function validateOracleBlock(block){
   if(!/^ob_[a-z0-9_-]+$/i.test(String(block.id||'')))errors.push('invalid_id');
   if(!block.territory)errors.push('territory_required');
   if(!block.text||typeof block.text!=='string')errors.push('text_required');
+  if(typeof block.text==='string'&&/[—–]/.test(block.text))errors.push('public_voice_dash_forbidden');
   if(!MAISON_CONTENT_ONTOLOGY.oracle.roles.includes(block.role))errors.push('invalid_role');
   if(!MAISON_CONTENT_ONTOLOGY.oracle.intensities.includes(block.intensity))errors.push('invalid_intensity');
   if(!MAISON_CONTENT_ONTOLOGY.oracle.statuses.includes(block.status))errors.push('invalid_status');
