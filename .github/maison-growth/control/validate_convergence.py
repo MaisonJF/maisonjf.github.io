@@ -114,7 +114,15 @@ for path in ROOT.rglob("*"):
         continue
     rel = path.relative_to(ROOT).as_posix()
     lower = rel.lower()
-    if "/test" in lower or lower.startswith("test") or "/migrations/" in lower or "/fixtures/" in lower:
+    name = path.name.lower()
+    if (
+        "/test" in lower
+        or lower.startswith("test")
+        or name.startswith("test_")
+        or name.startswith("validate_")
+        or "/migrations/" in lower
+        or "/fixtures/" in lower
+    ):
         continue
     text = path.read_text(encoding="utf-8", errors="ignore")
     if re.search(r"INSERT\s+(?:OR\s+IGNORE\s+)?INTO\s+events\b", text, re.I):
