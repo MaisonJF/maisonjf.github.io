@@ -168,7 +168,11 @@ O armazenamento operacional fica **fisicamente separado do MAISON Brain**. Esta 
 8. um agregador futuro produz os contadores sanitizados definidos em `SOS.BRAIN.1`;
 9. só esses contadores entram no collector canónico A1/A2 como `source=sos_product`.
 
-Nenhum fornecedor de autenticação, SMS, email ou push foi escolhido. Não há chamadas de rede nem rotas públicas nesta fundação.
+Os adapters seleccionados para o primeiro MVP são **Supabase Auth** e **Brevo Transactional Email**. Ambos permanecem desligados por variáveis de ambiente e não existem rotas públicas SOS nesta fundação.
+
+A validação de sessão consulta directamente o endpoint de utilizador do Supabase e descarta o perfil depois de extrair apenas o subject estável e, quando já confirmado pelo fornecedor, o email necessário ao lembrete. Esse email é imediatamente cifrado no domínio operacional.
+
+O Brevo recebe apenas o endereço estritamente necessário à entrega e mensagens transaccionais em texto simples. O adapter não envia nomes de destinatário nem conteúdo pessoal da utilização do SOS.
 
 ## Ficheiros desta fundação
 
@@ -181,6 +185,10 @@ Nenhum fornecedor de autenticação, SMS, email ou push foi escolhido. Não há 
 - `functions/_lib/sos-runtime.js` — configuração, convite, aceitação, check-in, scheduler e outbox.
 - `migrations/0001_operational_core.sql` — esquema D1 operacional separado do Brain.
 - `runtime-contract.json` — bindings, secrets e gates necessários antes de qualquer activação.
+- `adapters-contract.json` — contratos Supabase/Brevo e respectivos kill switches.
+- `functions/_lib/sos-supabase-auth.js` — validação server-side da sessão sem persistir o perfil.
+- `functions/_lib/sos-brevo.js` — email transaccional factual, sem nomes nem promessa de emergência.
+- `functions/_lib/sos-delivery.js` — entrega da outbox com retry limitado.
 - `validate_sos.mjs` — invariantes da primeira fundação.
 - `validate_sos_runtime.mjs` + `validate_sos_schema.py` — segurança e integridade da segunda fundação.
 
@@ -188,12 +196,14 @@ Nenhum fornecedor de autenticação, SMS, email ou push foi escolhido. Não há 
 
 Depois desta fundação passar CI, o RIO PRODUTO DIGITAL pode construir, nesta ordem:
 
-1. escolher e integrar autenticação de utilizador final;
-2. definir o primeiro canal de notificação e o respectivo fornecedor;
-3. criar as rotas API só depois de a autenticação estar resolvida;
-4. construir UI/PWA mínima em cima do runtime existente;
-5. acrescentar testes de timezone/DST, falha de fornecedor e recuperação;
-6. criar agregador A1/A2 sem PII;
-7. activar primeiro num ambiente de teste fechado.
+1. provisionar o projecto Supabase numa região específica da UE e configurar Auth;
+2. verificar o remetente/domínio no Brevo e criar a chave transaccional;
+3. provisionar o D1 operacional `MAISON_SOS_DB` e aplicar as duas migrations;
+4. criar as rotas API autenticadas sem devolver tokens de convite ao browser;
+5. construir a página mínima de aceitação do contacto e a UI/PWA **ESTOU AQUI**;
+6. ligar scheduler/outbox ao adapter de entrega;
+7. criar agregador A1/A2 sem PII;
+8. acrescentar testes de timezone/DST, falha de fornecedor e recuperação;
+9. activar primeiro num ambiente de teste fechado.
 
 A monetização pode envolver este produto no futuro, mas **preço, checkout e Stripe não pertencem a esta fundação**.
