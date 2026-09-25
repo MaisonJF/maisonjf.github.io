@@ -301,7 +301,7 @@
         }
       }
     },
-    "content": {
+    "maison-content-distribution": {
       "status": "planned",
       "privacy_class": [
         "aggregated"
@@ -312,7 +312,27 @@
       "metadata": {
         "content_id": {
           "type": "token",
-          "maxLength": 160
+          "maxLength": 100
+        },
+        "campaign_id": {
+          "type": "token",
+          "maxLength": 100
+        },
+        "thesis_id": {
+          "type": "token",
+          "maxLength": 100
+        },
+        "comparison_id": {
+          "type": "token",
+          "maxLength": 100
+        },
+        "comparison_dimension": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "variant_key": {
+          "type": "token",
+          "maxLength": 100
         },
         "channel": {
           "type": "token",
@@ -330,31 +350,37 @@
           "type": "token",
           "maxLength": 80
         },
-        "campaign_id": {
-          "type": "token",
-          "maxLength": 120
-        },
-        "thesis_id": {
-          "type": "token",
-          "maxLength": 120
-        },
-        "comparison_id": {
-          "type": "token",
-          "maxLength": 120
-        },
-        "comparison_dimension": {
+        "intent": {
           "type": "token",
           "maxLength": 80
         },
-        "variant_key": {
+        "window_start": {
           "type": "token",
           "maxLength": 80
+        },
+        "window_end": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "human_review_ref": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "source_refs_hash": {
+          "type": "sha256"
+        },
+        "manual_distribution_confirmed": {
+          "type": "boolean"
         },
         "impressions": {
           "type": "integer",
           "minimum": 0
         },
         "reach": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "video_starts": {
           "type": "integer",
           "minimum": 0
         },
@@ -366,11 +392,23 @@
           "type": "integer",
           "minimum": 0
         },
+        "watch_seconds": {
+          "type": "integer",
+          "minimum": 0
+        },
         "shares": {
           "type": "integer",
           "minimum": 0
         },
         "saves": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "comments": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "profile_visits": {
           "type": "integer",
           "minimum": 0
         },
@@ -390,6 +428,14 @@
           "type": "integer",
           "minimum": 0
         },
+        "save_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "share_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        },
         "click_rate_bps": {
           "type": "integer",
           "minimum": 0
@@ -400,9 +446,50 @@
         }
       },
       "notes": [
-        "Aggregated content performance only; no content body or direct PII.",
-        "Unknown is not zero; rates require observed denominators.",
-        "Engagement is not economic value and does not establish causality."
+        "Aggregated content-performance observations only; no captions, comments, usernames or direct PII.",
+        "Rates are integer basis points and are emitted only when their observed denominator exists and is greater than zero.",
+        "Engagement metrics do not imply economic value; A3 remains the owner of observed economics."
+      ]
+    },
+    "sos_product": {
+      "status": "planned",
+      "privacy_class": [
+        "aggregated",
+        "system"
+      ],
+      "allowed_event_prefixes": [
+        "sos."
+      ],
+      "metadata": {
+        "product_id": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "signal_kind": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "cadence_bucket": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "delivery_outcome": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "product_version": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "notes": [
+        "SOS Maison JF contributes aggregate product signals only.",
+        "Names, contact endpoints, account identifiers, exact check-in schedules, locations, free text, reasons and message bodies must never enter Growth/Brain analytics.",
+        "Operational PII required to deliver trusted-contact notices remains in the product operational domain and is not part of this source contract."
       ]
     }
   }
