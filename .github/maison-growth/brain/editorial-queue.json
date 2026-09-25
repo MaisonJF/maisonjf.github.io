@@ -18,9 +18,9 @@
     "questionDesignSlots": 852,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 292,
-    "pdiThemeBacklog": 268,
-    "pdiSourceDesignSlots": 1608,
-    "pdiEditorialCoreTarget": 80400,
+    "pdiThemeBacklog": 291,
+    "pdiSourceDesignSlots": 1746,
+    "pdiEditorialCoreTarget": 87300,
     "pdiCombinatorialTarget": 2800000,
     "oracleCandidates": 22,
     "oracleRoleSlots": 154
@@ -28,7 +28,7 @@
   "pdiGrowth": {
     "scale": {
       "activeQuestionTargetPerMatureTheme": 300,
-      "editorialCoreTarget": 80400,
+      "editorialCoreTarget": 87300,
       "combinatorialPossibilityTarget": 2800000,
       "paidBodiesStoredInRepository": false,
       "automaticActivation": false
@@ -41,7 +41,7 @@
       "maisonNative": 3,
       "pdiConversation": 28,
       "ocean": 142,
-      "exactGroups": 268
+      "exactGroups": 291
     },
     "themes": [
       {
@@ -143,6 +143,60 @@
           },
           {
             "id": "pdi_source_slot_adiamento_de_decisoes_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "alecrim-para-alem-da-supersticao",
+        "preferredLabel": "Alecrim para além da superstição",
+        "slugs": [
+          "alecrim-para-alem-da-supersticao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao:alecrim-para-alem-da-supersticao",
+            "focus": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_alecrim_para_alem_da_supersticao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_alecrim_para_alem_da_supersticao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_alecrim_para_alem_da_supersticao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_alecrim_para_alem_da_supersticao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_alecrim_para_alem_da_supersticao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_alecrim_para_alem_da_supersticao_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -693,6 +747,60 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "apreciacao-e-responsividade",
+        "preferredLabel": "Apreciação e responsividade",
+        "slugs": [
+          "apreciacao-e-responsividade"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "quando-o-que-funciona-na-relacao-se-torna-invisivel:apreciacao-e-responsividade",
+            "focus": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_apreciacao_e_responsividade_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_apreciacao_e_responsividade_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_apreciacao_e_responsividade_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_apreciacao_e_responsividade_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_apreciacao_e_responsividade_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_apreciacao_e_responsividade_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "aprender",
         "preferredLabel": "Aprender",
         "slugs": [
@@ -791,6 +899,60 @@
           },
           {
             "id": "pdi_source_slot_aprovacao_e_validacao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "aroma-como-ancora-de-um-momento",
+        "preferredLabel": "Aroma como âncora de um momento",
+        "slugs": [
+          "aroma-como-ancora-de-um-momento"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao:aroma-como-ancora-de-um-momento",
+            "focus": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_aroma_como_ancora_de_um_momento_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_aroma_como_ancora_de_um_momento_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_aroma_como_ancora_de_um_momento_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_aroma_como_ancora_de_um_momento_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_aroma_como_ancora_de_um_momento_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_aroma_como_ancora_de_um_momento_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -1557,6 +1719,60 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "celebrar-sem-provar-poder-de-compra",
+        "preferredLabel": "Celebrar sem provar poder de compra",
+        "slugs": [
+          "celebrar-sem-provar-poder-de-compra"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "pressao-social-para-gastar-e-vergonha-de-dizer-nao:celebrar-sem-provar-poder-de-compra",
+            "focus": "reconhecer quando pertença, celebração ou imagem social empurram a pessoa para gastar além do que quer ou pode, tornando legítimo estabelecer limites financeiros sem transformar orçamento em vergonha nem isolamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_celebrar_sem_provar_poder_de_compra_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_celebrar_sem_provar_poder_de_compra_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_celebrar_sem_provar_poder_de_compra_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_celebrar_sem_provar_poder_de_compra_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_celebrar_sem_provar_poder_de_compra_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_celebrar_sem_provar_poder_de_compra_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "chefia-e-autoridade",
         "preferredLabel": "Chefia & Autoridade",
         "slugs": [
@@ -1601,6 +1817,60 @@
           },
           {
             "id": "pdi_source_slot_chefia_e_autoridade_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "chegar-a-casa-e-marcar-a-transicao",
+        "preferredLabel": "Chegar a casa e marcar a transição",
+        "slugs": [
+          "chegar-a-casa-e-marcar-a-transicao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao:chegar-a-casa-e-marcar-a-transicao",
+            "focus": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_chegar_a_casa_e_marcar_a_transicao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_chegar_a_casa_e_marcar_a_transicao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_chegar_a_casa_e_marcar_a_transicao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_chegar_a_casa_e_marcar_a_transicao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_chegar_a_casa_e_marcar_a_transicao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_chegar_a_casa_e_marcar_a_transicao_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -2897,6 +3167,60 @@
           },
           {
             "id": "pdi_source_slot_corpo_em_alerta_depois_do_feed_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "criar-um-ritual-que-da-vontade-de-repetir",
+        "preferredLabel": "Criar um ritual que dá vontade de repetir",
+        "slugs": [
+          "criar-um-ritual-que-da-vontade-de-repetir"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao:criar-um-ritual-que-da-vontade-de-repetir",
+            "focus": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_criar_um_ritual_que_da_vontade_de_repetir_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_criar_um_ritual_que_da_vontade_de_repetir_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_criar_um_ritual_que_da_vontade_de_repetir_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_criar_um_ritual_que_da_vontade_de_repetir_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_criar_um_ritual_que_da_vontade_de_repetir_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_criar_um_ritual_que_da_vontade_de_repetir_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -4739,6 +5063,60 @@
           },
           {
             "id": "pdi_source_slot_dividas_e_pressao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "dizer-nao-sem-desaparecer-do-grupo",
+        "preferredLabel": "Dizer não sem desaparecer do grupo",
+        "slugs": [
+          "dizer-nao-sem-desaparecer-do-grupo"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "pressao-social-para-gastar-e-vergonha-de-dizer-nao:dizer-nao-sem-desaparecer-do-grupo",
+            "focus": "reconhecer quando pertença, celebração ou imagem social empurram a pessoa para gastar além do que quer ou pode, tornando legítimo estabelecer limites financeiros sem transformar orçamento em vergonha nem isolamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_dizer_nao_sem_desaparecer_do_grupo_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dizer_nao_sem_desaparecer_do_grupo_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dizer_nao_sem_desaparecer_do_grupo_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dizer_nao_sem_desaparecer_do_grupo_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dizer_nao_sem_desaparecer_do_grupo_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_dizer_nao_sem_desaparecer_do_grupo_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -6693,6 +7071,60 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "gastar-para-nao-ficar-de-fora",
+        "preferredLabel": "Gastar para não ficar de fora",
+        "slugs": [
+          "gastar-para-nao-ficar-de-fora"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "pressao-social-para-gastar-e-vergonha-de-dizer-nao:gastar-para-nao-ficar-de-fora",
+            "focus": "reconhecer quando pertença, celebração ou imagem social empurram a pessoa para gastar além do que quer ou pode, tornando legítimo estabelecer limites financeiros sem transformar orçamento em vergonha nem isolamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_gastar_para_nao_ficar_de_fora_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gastar_para_nao_ficar_de_fora_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gastar_para_nao_ficar_de_fora_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gastar_para_nao_ficar_de_fora_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gastar_para_nao_ficar_de_fora_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gastar_para_nao_ficar_de_fora_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "gastos-e-impulso",
         "preferredLabel": "Gastos & Impulso",
         "slugs": [
@@ -6737,6 +7169,60 @@
           },
           {
             "id": "pdi_source_slot_gastos_e_impulso_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "gestos-de-cuidado-que-viraram-paisagem",
+        "preferredLabel": "Gestos de cuidado que viraram paisagem",
+        "slugs": [
+          "gestos-de-cuidado-que-viraram-paisagem"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "quando-o-que-funciona-na-relacao-se-torna-invisivel:gestos-de-cuidado-que-viraram-paisagem",
+            "focus": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_gestos_de_cuidado_que_viraram_paisagem_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gestos_de_cuidado_que_viraram_paisagem_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gestos_de_cuidado_que_viraram_paisagem_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gestos_de_cuidado_que_viraram_paisagem_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gestos_de_cuidado_que_viraram_paisagem_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_gestos_de_cuidado_que_viraram_paisagem_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -7719,6 +8205,60 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "limites-financeiros-entre-amigos",
+        "preferredLabel": "Limites financeiros entre amigos",
+        "slugs": [
+          "limites-financeiros-entre-amigos"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "pressao-social-para-gastar-e-vergonha-de-dizer-nao:limites-financeiros-entre-amigos",
+            "focus": "reconhecer quando pertença, celebração ou imagem social empurram a pessoa para gastar além do que quer ou pode, tornando legítimo estabelecer limites financeiros sem transformar orçamento em vergonha nem isolamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_limites_financeiros_entre_amigos_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_financeiros_entre_amigos_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_financeiros_entre_amigos_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_financeiros_entre_amigos_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_financeiros_entre_amigos_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_limites_financeiros_entre_amigos_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "limites-no-cuidado",
         "preferredLabel": "Limites no cuidado",
         "slugs": [
@@ -8691,6 +9231,60 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "nao-usar-gratidao-para-apagar-problemas",
+        "preferredLabel": "Não usar gratidão para apagar problemas",
+        "slugs": [
+          "nao-usar-gratidao-para-apagar-problemas"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "quando-o-que-funciona-na-relacao-se-torna-invisivel:nao-usar-gratidao-para-apagar-problemas",
+            "focus": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_nao_usar_gratidao_para_apagar_problemas_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_usar_gratidao_para_apagar_problemas_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_usar_gratidao_para_apagar_problemas_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_usar_gratidao_para_apagar_problemas_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_usar_gratidao_para_apagar_problemas_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nao_usar_gratidao_para_apagar_problemas_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "necessidades-nao-ditas",
         "preferredLabel": "Necessidades não ditas",
         "slugs": [
@@ -8799,6 +9393,60 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "nomear-o-que-sustentou-o-dia",
+        "preferredLabel": "Nomear o que sustentou o dia",
+        "slugs": [
+          "nomear-o-que-sustentou-o-dia"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "quando-o-que-funciona-na-relacao-se-torna-invisivel:nomear-o-que-sustentou-o-dia",
+            "focus": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_nomear_o_que_sustentou_o_dia_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nomear_o_que_sustentou_o_dia_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nomear_o_que_sustentou_o_dia_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nomear_o_que_sustentou_o_dia_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nomear_o_que_sustentou_o_dia_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_nomear_o_que_sustentou_o_dia_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "normalizar-atencao-ou-carinho-insuficientes",
         "preferredLabel": "Normalizar atenção ou carinho insuficientes",
         "slugs": [
@@ -8843,6 +9491,60 @@
           },
           {
             "id": "pdi_source_slot_normalizar_atencao_ou_carinho_insuficientes_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "o-inventario-invisivel-do-afeto",
+        "preferredLabel": "O inventário invisível do afeto",
+        "slugs": [
+          "o-inventario-invisivel-do-afeto"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "quando-o-que-funciona-na-relacao-se-torna-invisivel:o-inventario-invisivel-do-afeto",
+            "focus": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_o_inventario_invisivel_do_afeto_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_inventario_invisivel_do_afeto_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_inventario_invisivel_do_afeto_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_inventario_invisivel_do_afeto_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_inventario_invisivel_do_afeto_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_inventario_invisivel_do_afeto_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -10311,6 +11013,114 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "pertenca-vs-pressao-para-gastar",
+        "preferredLabel": "Pertença vs pressão para gastar",
+        "slugs": [
+          "pertenca-vs-pressao-para-gastar"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "pressao-social-para-gastar-e-vergonha-de-dizer-nao:pertenca-vs-pressao-para-gastar",
+            "focus": "reconhecer quando pertença, celebração ou imagem social empurram a pessoa para gastar além do que quer ou pode, tornando legítimo estabelecer limites financeiros sem transformar orçamento em vergonha nem isolamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_pertenca_vs_pressao_para_gastar_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pertenca_vs_pressao_para_gastar_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pertenca_vs_pressao_para_gastar_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pertenca_vs_pressao_para_gastar_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pertenca_vs_pressao_para_gastar_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_pertenca_vs_pressao_para_gastar_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "plantas-como-experiencia-sensorial-e-simbolica",
+        "preferredLabel": "Plantas como experiência sensorial e simbólica",
+        "slugs": [
+          "plantas-como-experiencia-sensorial-e-simbolica"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao:plantas-como-experiencia-sensorial-e-simbolica",
+            "focus": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_plantas_como_experiencia_sensorial_e_simbolica_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_plantas_como_experiencia_sensorial_e_simbolica_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_plantas_como_experiencia_sensorial_e_simbolica_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_plantas_como_experiencia_sensorial_e_simbolica_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_plantas_como_experiencia_sensorial_e_simbolica_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_plantas_como_experiencia_sensorial_e_simbolica_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "poupanca-e-seguranca",
         "preferredLabel": "Poupança & Segurança",
         "slugs": [
@@ -10733,6 +11543,60 @@
           },
           {
             "id": "pdi_source_slot_presente_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "presentes-e-ocasioes-sem-competicao-de-preco",
+        "preferredLabel": "Presentes e ocasiões sem competição de preço",
+        "slugs": [
+          "presentes-e-ocasioes-sem-competicao-de-preco"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "pressao-social-para-gastar-e-vergonha-de-dizer-nao:presentes-e-ocasioes-sem-competicao-de-preco",
+            "focus": "reconhecer quando pertença, celebração ou imagem social empurram a pessoa para gastar além do que quer ou pode, tornando legítimo estabelecer limites financeiros sem transformar orçamento em vergonha nem isolamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_presentes_e_ocasioes_sem_competicao_de_preco_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presentes_e_ocasioes_sem_competicao_de_preco_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presentes_e_ocasioes_sem_competicao_de_preco_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presentes_e_ocasioes_sem_competicao_de_preco_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presentes_e_ocasioes_sem_competicao_de_preco_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_presentes_e_ocasioes_sem_competicao_de_preco_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -11175,6 +12039,60 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "quando-o-corpo-precisa-de-perceber-que-o-dia-mudou",
+        "preferredLabel": "Quando o corpo precisa de perceber que o dia mudou",
+        "slugs": [
+          "quando-o-corpo-precisa-de-perceber-que-o-dia-mudou"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao:quando-o-corpo-precisa-de-perceber-que-o-dia-mudou",
+            "focus": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "quando-o-modo-aviao-e-descanso",
         "preferredLabel": "Quando o modo avião é descanso",
         "slugs": [
@@ -11543,6 +12461,60 @@
           },
           {
             "id": "pdi_source_slot_recompensa_sem_precisar_de_uma_grande_ocasiao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "reconhecimento-concreto-sem-gratidao-forcada",
+        "preferredLabel": "Reconhecimento concreto sem gratidão forçada",
+        "slugs": [
+          "reconhecimento-concreto-sem-gratidao-forcada"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "quando-o-que-funciona-na-relacao-se-torna-invisivel:reconhecimento-concreto-sem-gratidao-forcada",
+            "focus": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_reconhecimento_concreto_sem_gratidao_forcada_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_reconhecimento_concreto_sem_gratidao_forcada_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_reconhecimento_concreto_sem_gratidao_forcada_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_reconhecimento_concreto_sem_gratidao_forcada_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_reconhecimento_concreto_sem_gratidao_forcada_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_reconhecimento_concreto_sem_gratidao_forcada_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -12201,6 +13173,60 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "ritual-simples-sem-cerimonia-excessiva",
+        "preferredLabel": "Ritual simples sem cerimónia excessiva",
+        "slugs": [
+          "ritual-simples-sem-cerimonia-excessiva"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao:ritual-simples-sem-cerimonia-excessiva",
+            "focus": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_ritual_simples_sem_cerimonia_excessiva_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ritual_simples_sem_cerimonia_excessiva_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ritual_simples_sem_cerimonia_excessiva_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ritual_simples_sem_cerimonia_excessiva_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ritual_simples_sem_cerimonia_excessiva_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ritual_simples_sem_cerimonia_excessiva_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "rotina-e-caos",
         "preferredLabel": "Rotina & Caos",
         "slugs": [
@@ -12569,6 +13595,60 @@
           },
           {
             "id": "pdi_source_slot_seguranca_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "sentir-que-o-que-faco-nunca-conta",
+        "preferredLabel": "Sentir que o que faço nunca conta",
+        "slugs": [
+          "sentir-que-o-que-faco-nunca-conta"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "quando-o-que-funciona-na-relacao-se-torna-invisivel:sentir-que-o-que-faco-nunca-conta",
+            "focus": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_sentir_que_o_que_faco_nunca_conta_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sentir_que_o_que_faco_nunca_conta_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sentir_que_o_que_faco_nunca_conta_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sentir_que_o_que_faco_nunca_conta_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sentir_que_o_que_faco_nunca_conta_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_sentir_que_o_que_faco_nunca_conta_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -13929,6 +15009,60 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "um-gesto-para-mudar-de-estado",
+        "preferredLabel": "Um gesto para mudar de estado",
+        "slugs": [
+          "um-gesto-para-mudar-de-estado"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao:um-gesto-para-mudar-de-estado",
+            "focus": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_um_gesto_para_mudar_de_estado_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_um_gesto_para_mudar_de_estado_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_um_gesto_para_mudar_de_estado_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_um_gesto_para_mudar_de_estado_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_um_gesto_para_mudar_de_estado_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_um_gesto_para_mudar_de_estado_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "uma-pequena-vitoria-tambem-merece-ser-marcada",
         "preferredLabel": "Uma pequena vitória também merece ser marcada",
         "slugs": [
@@ -14081,6 +15215,114 @@
           },
           {
             "id": "pdi_source_slot_valorizacao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "ver-o-que-falta-e-deixar-de-ver-o-que-funciona",
+        "preferredLabel": "Ver o que falta e deixar de ver o que funciona",
+        "slugs": [
+          "ver-o-que-falta-e-deixar-de-ver-o-que-funciona"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "quando-o-que-funciona-na-relacao-se-torna-invisivel:ver-o-que-falta-e-deixar-de-ver-o-que-funciona",
+            "focus": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "vergonha-de-dizer-que-nao-cabe-no-orcamento",
+        "preferredLabel": "Vergonha de dizer que não cabe no orçamento",
+        "slugs": [
+          "vergonha-de-dizer-que-nao-cabe-no-orcamento"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "pressao-social-para-gastar-e-vergonha-de-dizer-nao:vergonha-de-dizer-que-nao-cabe-no-orcamento",
+            "focus": "reconhecer quando pertença, celebração ou imagem social empurram a pessoa para gastar além do que quer ou pode, tornando legítimo estabelecer limites financeiros sem transformar orçamento em vergonha nem isolamento",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_vergonha_de_dizer_que_nao_cabe_no_orcamento_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vergonha_de_dizer_que_nao_cabe_no_orcamento_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vergonha_de_dizer_que_nao_cabe_no_orcamento_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vergonha_de_dizer_que_nao_cabe_no_orcamento_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vergonha_de_dizer_que_nao_cabe_no_orcamento_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_vergonha_de_dizer_que_nao_cabe_no_orcamento_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
