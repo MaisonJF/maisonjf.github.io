@@ -1,4 +1,4 @@
-/** MAISON JF® | O Farol — curadoria por momento humano */
+/** MAISON JF® | O Farol. curadoria por momento humano */
 (function(){
 'use strict';
 
@@ -518,7 +518,7 @@ const data={
     },
     "dinheiro_simbolico": {
       "title": "Os factos vêm primeiro. O símbolo pode vir depois.",
-      "text": "Dinheiro & Segurança é uma abertura simbólica sobre a forma como estás a viver esta questão — não uma indicação sobre onde investir, gastar ou escolher.",
+      "text": "Dinheiro & Segurança é uma abertura simbólica sobre a forma como estás a viver esta questão. não uma indicação sobre onde investir, gastar ou escolher.",
       "cta": {
         "href": "/oraculo/dinheiro",
         "text": "Dinheiro & Segurança · 2 €"
