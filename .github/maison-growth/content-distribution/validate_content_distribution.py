@@ -68,6 +68,9 @@ require(ops["comparison_rules"]["causal_claim"] is False, "observational content
 require(ops["comparison_rules"]["automatic_promotion"] is False, "content comparison cannot auto-promote")
 require(ops["cadence_rules"]["automatic_publication"] is False, "Content OS must not publish")
 require(ops["learning_rules"]["platforms_not_collapsed_into_one_score"] is True, "cross-platform content score prohibited")
+require(ops["learning_rules"]["one_snapshot_per_variant_per_interpretation"] is True, "comparison snapshots must not be double-counted")
+require(ops["learning_rules"]["equal_observation_window_duration_required"] is True, "comparison window durations must be comparable")
+require(ops["learning_rules"]["overlapping_snapshots_not_independent_samples"] is True, "overlapping snapshots cannot count as independent samples")
 
 require(authoring["voice_owner"] == "functions/_lib/maison-content-ontology.js", "authoring must reuse canonical public voice")
 require(authoring["canonical_intelligence_owner"] == "Maison Brain", "authoring Brain ownership drift")
