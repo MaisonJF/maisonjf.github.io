@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {buildPublicDiscovery} from './build_public_discovery.mjs';
+import {DEFAULT_INSPECTION_URLS} from '../../../workers/maison-intelligence/src/search_visibility.js';
+import {VISIBILITY_PROBES} from '../../../workers/maison-intelligence/src/visibility_probes.js';
 
 const ROOT=path.resolve(fileURLToPath(new URL('../../../',import.meta.url)));
 const OUTPUT=path.join(ROOT,'.github/maison-growth/brain/search-visibility.generated.json');
@@ -77,6 +79,44 @@ export function buildSearchVisibility(){
     },
     sitemap:snapshot.sitemap,
     search_appearance:searchAppearance,
+    runtime_sensors:{
+      google_search_analytics:{
+        provider_id:'google_search_console',
+        source_class:'search_platform',
+        mode:'read_only',
+        implemented:true,
+        credential_gated:true,
+        profiles:['pages','queries','devices','countries','appearance']
+      },
+      google_url_inspection:{
+        provider_id:'google_search_console',
+        source_class:'search_platform',
+        mode:'read_only',
+        implemented:true,
+        credential_gated:true,
+        rotation:'one_canonical_url_per_day',
+        targets:[...DEFAULT_INSPECTION_URLS]
+      },
+      bing_webmaster:{
+        provider_id:'bing_webmaster',
+        source_class:'search_platform',
+        mode:'read_only',
+        implemented:true,
+        credential_gated:true,
+        profiles:['traffic','pages','queries']
+      },
+      ai_visibility_probes:{
+        source_class:'ai_visibility_probe',
+        mode:'observe_only',
+        implemented:true,
+        grounded_generic_discovery_only:true,
+        probes:VISIBILITY_PROBES.map(probe=>({
+          id:probe.id,
+          kind:probe.kind,
+          requires_grounded:probe.requiresGrounded
+        }))
+      }
+    },
     summary:{
       observed_urls:pages.length,
       current_public_urls:current.length,
@@ -89,7 +129,9 @@ export function buildSearchVisibility(){
       legacy_impressions:sum(legacy,'impressions'),
       current_public_impressions:sum(current,'impressions'),
       search_appearance_features:searchAppearance.length,
-      product_snippet_impressions:sum(searchAppearance.filter(row=>row.feature==='PRODUCT_SNIPPETS'),'impressions')
+      product_snippet_impressions:sum(searchAppearance.filter(row=>row.feature==='PRODUCT_SNIPPETS'),'impressions'),
+      inspection_targets:DEFAULT_INSPECTION_URLS.length,
+      ai_visibility_probes:VISIBILITY_PROBES.length
     },
     priority_recovery:legacy
       .slice()
