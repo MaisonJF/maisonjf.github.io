@@ -7,6 +7,8 @@ on:
       - '.github/maison-growth/content-distribution/**'
       - 'functions/_lib/maison-content-ontology.js'
       - '.github/maison-growth/a1/event-contract-v2.json'
+      - '.github/maison-growth/a2/source-registry.json'
+      - '.github/maison-growth/a2/source-registry.json'
       - '.github/workflows/content-distribution-guard.yml'
   pull_request:
     paths:
@@ -24,6 +26,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Validate A2 collector after content source allowlist
+        run: python3 .github/maison-growth/a2/validate_a2.py
 
       - name: Validate content distribution contracts
         run: python3 .github/maison-growth/content-distribution/validate_content_distribution.py
