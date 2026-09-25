@@ -160,3 +160,11 @@ O B2B pode ser considerado estruturalmente fechado quando:
 - formação/rede não são vendidas como oficiais antes de validação;
 - qualquer futura ingestão de `b2b.lead` reutiliza telemetria central;
 - CI impede regressão destes contratos.
+
+
+## 10. Operação de lead → piloto
+
+A checklist operacional está em:
+`.github/maison-growth/b2b/B2B-PILOT-CHECKLIST.md`
+
+Ela reutiliza o `commercial-service-capacity.template.json`, o `manual-pilot-context.schema.json` e o dossier manual já existentes no Brain. Não cria CRM, pipeline ou base de dados paralelos.
