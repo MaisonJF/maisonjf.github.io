@@ -8,6 +8,7 @@ on:
       - 'functions/_lib/sos-*.js'
       - 'functions/api/sos/**'
       - 'sos/aceitar/**'
+      - 'workers/sos-runtime/**'
       - '.github/maison-growth/a2/source-registry.json'
       - '.github/maison-growth/a2/SOURCES.md'
       - '.github/workflows/sos-product-guard.yml'
@@ -17,6 +18,7 @@ on:
       - 'functions/_lib/sos-*.js'
       - 'functions/api/sos/**'
       - 'sos/aceitar/**'
+      - 'workers/sos-runtime/**'
       - '.github/maison-growth/a2/source-registry.json'
       - '.github/maison-growth/a2/SOURCES.md'
       - '.github/workflows/sos-product-guard.yml'
@@ -55,8 +57,10 @@ jobs:
           node --check functions/api/sos/delete.js
           node --check functions/api/sos/contact/accept.js
           node --check sos/aceitar/app.js
+          node --check workers/sos-runtime/src/index.js
           node .github/maison-product/sos/validate_sos.mjs
           node .github/maison-product/sos/validate_sos_runtime.mjs
           node .github/maison-product/sos/validate_sos_adapters.mjs
           node .github/maison-product/sos/validate_sos_api.mjs
+          node .github/maison-product/sos/validate_sos_scheduler.mjs
           python3 .github/maison-product/sos/validate_sos_schema.py
