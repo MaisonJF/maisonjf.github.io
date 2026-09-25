@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
-import re
+import json
+import sys
 import unittest
+from pathlib import Path
 
+HERE = Path(__file__).resolve().parent
+A2 = HERE.parent / "a2"
+sys.path.insert(0, str(A2))
+
+from collector import normalize_ingestion, to_a1_event
 from planner import (
     ContentContractError,
     PrivacyViolation,
@@ -84,8 +91,8 @@ class ContentDistributionTests(unittest.TestCase):
         self.assertEqual(plan[0]["execution"], "manual_only")
         self.assertFalse(plan[0]["automatic_publication"])
 
-    def test_feedback_is_a1_v2_aggregated_idempotent_and_scoreless(self):
-        observation = {
+    def observation(self):
+        return {
             "content_id": "cnt_abc",
             "platform": "instagram_reels",
             "format": "short_video",
@@ -106,34 +113,46 @@ class ContentDistributionTests(unittest.TestCase):
                 "conversions": 2,
             },
         }
-        one = build_performance_feedback(observation)
-        two = build_performance_feedback(observation)
-        event = one["event"]
-        self.assertEqual(event, two["event"])
+
+    def test_feedback_is_accepted_by_canonical_a2_and_becomes_a1_v2(self):
+        one = build_performance_feedback(self.observation())
+        two = build_performance_feedback(self.observation())
+        self.assertEqual(one["ingestion"], two["ingestion"])
+
+        raw = one["ingestion"]
+        self.assertEqual(raw["contract_version"], 1)
+        self.assertEqual(raw["source"], "maison-content-distribution")
+        self.assertEqual(raw["event_type"], "content.performance_observed")
+        self.assertEqual(raw["privacy_class"], "aggregated")
+        self.assertEqual(raw["metadata"]["completion_rate_bps"], 4000)
+        self.assertNotIn("combined_score", raw["metadata"])
+        self.assertNotIn("winner", raw["metadata"])
+
+        normalized = normalize_ingestion(raw)
+        event = to_a1_event(normalized)
         self.assertEqual(event["event_type"], "content.performance_observed")
         self.assertEqual(event["schema_version"], 2)
         self.assertEqual(event["privacy_class"], "aggregated")
-        self.assertRegex(event["event_id"], r"^evt_[0-9a-f-]{36}$")
-        self.assertRegex(event["asset_id"], r"^ast_[0-9a-f-]{36}$")
-        self.assertEqual(event["metadata"]["derived_rates"]["completion_rate"], 0.4)
-        self.assertEqual(event["metadata"]["combined_score"], None)
-        self.assertEqual(event["metadata"]["winner"], None)
+        self.assertTrue(event["event_id"].startswith("evt_"))
+        metadata = json.loads(event["metadata_json"])
+        self.assertEqual(metadata["save_rate_bps"], 700)
+        self.assertTrue(metadata["manual_distribution_confirmed"])
         self.assertFalse(one["learning_context"]["economic_value_inferred"])
 
     def test_unknown_denominator_does_not_become_zero_rate(self):
-        result = build_performance_feedback({
-            "content_id": "cnt_abc",
-            "platform": "instagram_feed",
-            "format": "carousel_post",
-            "intent": "education",
-            "observed_at": "2026-09-25T12:00:00Z",
-            "window_start": "2026-09-24T12:00:00Z",
-            "window_end": "2026-09-25T12:00:00Z",
-            "human_review_ref": "a12:review:abc",
-            "source_refs": ["a7:decision:123"],
-            "metrics": {"saves": 10},
-        })
-        self.assertNotIn("save_rate", result["event"]["metadata"]["derived_rates"])
+        observation = self.observation()
+        observation["platform"] = "instagram_feed"
+        observation["format"] = "carousel_post"
+        observation["intent"] = "education"
+        observation["metrics"] = {"saves": 10}
+        result = build_performance_feedback(observation)
+        self.assertNotIn("save_rate_bps", result["ingestion"]["metadata"])
+
+    def test_feedback_requires_integer_platform_metrics(self):
+        observation = self.observation()
+        observation["metrics"] = {"reach": 10.5}
+        with self.assertRaises(ContentContractError):
+            build_performance_feedback(observation)
 
 
 if __name__ == "__main__":
