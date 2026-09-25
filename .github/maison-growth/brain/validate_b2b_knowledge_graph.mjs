@@ -106,6 +106,8 @@ for(const segment of MAISON_B2B_BRAIN.segments){
 }
 
 const test=fs.readFileSync(path.join(repoRoot,'profissionais/teste/index.html'),'utf8');
+const pilotChecklist=fs.readFileSync(path.join(repoRoot,'.github/maison-growth/b2b/B2B-PILOT-CHECKLIST.md'),'utf8');
+const quotePlaybook=fs.readFileSync(path.join(repoRoot,'.github/maison-growth/b2b/B2B-COMMERCIAL-QUOTE-PLAYBOOK.md'),'utf8');
 const contact=fs.readFileSync(path.join(repoRoot,'contacto/index.html'),'utf8');
 const services=fs.readFileSync(path.join(repoRoot,'data/services.js'),'utf8');
 const contextScript=fs.readFileSync(path.join(repoRoot,'profissionais/b2b-context.js'),'utf8');
@@ -121,6 +123,12 @@ for(const token of ['organizacao','equipa','formacao','training_pilot']){
 }
 assert(services.includes("slug:'b2b'"),'b2b_service_catalogue_entry_missing');
 assert(services.includes('Pilotos para equipas são não-clínicos'),'b2b_service_safety_boundary_missing');
+assert(pilotChecklist.includes('Para `b2b_pilot`'),'b2b_pilot_checklist_validation_mode_drift');
+assert(!pilotChecklist.includes('manual_b2b_pilot'),'b2b_pilot_checklist_legacy_validation_mode');
+for(const field of ['MOQ','desconto B2B','margem grossista','capacidade','prazo']){
+  assert(quotePlaybook.includes(field),'b2b_quote_playbook_unknown_missing:'+field);
+}
+assert(MAISON_B2B_BRAIN.researchCandidates.some(x=>(x.evidence||[]).some(e=>e.url==='https://www.dgert.gov.pt/tipologias-de-formacao-profissional')),'b2b_dgert_evidence_url_drift');
 
 const professionalDir=path.join(repoRoot,'profissionais');
 for(const name of fs.readdirSync(professionalDir).filter(x=>x.endsWith('.html'))){
