@@ -82,6 +82,92 @@ export async function setSosUserReminderEndpoint({
   return {channelRef};
 }
 
+export async function getSosStatus({env,identity}={}){
+  const db=requireSosDb(env);
+  const accountRef=await sosAccountRef(env,identity);
+  const account=await accountFor(db,accountRef);
+  if(!account||account.status==='deleted'){
+    return {
+      configured:false,status:'setup',trustedContactVerified:false,
+      reminderChannelVerified:false,nextDueAt:null,lastCheckinAt:null
+    };
+  }
+  const [contact,channel]=await Promise.all([
+    db.prepare(`SELECT verified_at FROM sos_trusted_contacts
+      WHERE account_ref=?1 AND revoked_at IS NULL LIMIT 1`).bind(accountRef).first(),
+    db.prepare(`SELECT verified_at FROM sos_user_channels
+      WHERE account_ref=?1 AND revoked_at IS NULL LIMIT 1`).bind(accountRef).first()
+  ]);
+  return {
+    configured:true,
+    status:account.status,
+    trustedContactVerified:Boolean(contact?.verified_at),
+    reminderChannelVerified:Boolean(channel?.verified_at),
+    timezone:account.timezone,
+    cadenceHours:Number(account.cadence_hours||24),
+    graceMinutes:Number(account.grace_minutes||60),
+    nextDueAt:account.next_due_at||null,
+    lastCheckinAt:account.last_checkin_at||null,
+    paused:Boolean(account.paused_at)
+  };
+}
+
+export async function pauseSos({env,identity,at=new Date().toISOString()}={}){
+  const db=requireSosDb(env);
+  const accountRef=await sosAccountRef(env,identity);
+  const account=await accountFor(db,accountRef);
+  if(!account||account.status==='deleted')throw new Error('sos_account_not_configured');
+  if(account.status==='paused')return {ok:true,idempotent:true};
+  const when=nowIso(at);
+  await db.batch([
+    db.prepare(`UPDATE sos_accounts
+      SET status='paused',paused_at=?1,next_due_at=NULL,updated_at=?1
+      WHERE account_ref=?2 AND status<>'deleted'`).bind(when,accountRef),
+    db.prepare(`UPDATE sos_due_windows SET state='cancelled',completed_at=?1
+      WHERE account_ref=?2 AND state='open'`).bind(when,accountRef),
+    db.prepare(`UPDATE sos_outbox SET state='cancelled',updated_at=?1,claim_expires_at=NULL
+      WHERE state IN ('pending','claimed') AND due_ref IN
+        (SELECT due_ref FROM sos_due_windows WHERE account_ref=?2)`).bind(when,accountRef)
+  ]);
+  return {ok:true,idempotent:false};
+}
+
+export async function resumeSos({env,identity,at=new Date().toISOString()}={}){
+  const db=requireSosDb(env);
+  const accountRef=await sosAccountRef(env,identity);
+  const account=await accountFor(db,accountRef);
+  if(!account||account.status==='deleted')throw new Error('sos_account_not_configured');
+  if(account.status==='active'&&account.next_due_at)return {ok:true,idempotent:true,nextDueAt:account.next_due_at};
+  const [contact,channel]=await Promise.all([
+    db.prepare(`SELECT contact_ref FROM sos_trusted_contacts
+      WHERE account_ref=?1 AND verified_at IS NOT NULL AND revoked_at IS NULL LIMIT 1`).bind(accountRef).first(),
+    db.prepare(`SELECT channel_ref FROM sos_user_channels
+      WHERE account_ref=?1 AND verified_at IS NOT NULL AND revoked_at IS NULL LIMIT 1`).bind(accountRef).first()
+  ]);
+  if(!contact)throw new Error('sos_trusted_contact_not_verified');
+  if(!channel)throw new Error('sos_user_reminder_not_verified');
+  const when=nowIso(at);
+  const dueAt=plus(when,Number(account.cadence_hours||24)*HOUR);
+  const graceUntil=plus(dueAt,Number(account.grace_minutes||60)*MINUTE);
+  const dueRef=opaqueId('sdw_');
+  await db.batch([
+    db.prepare(`UPDATE sos_accounts
+      SET status='active',paused_at=NULL,activated_at=COALESCE(activated_at,?1),
+          next_due_at=?2,updated_at=?1
+      WHERE account_ref=?3 AND status<>'deleted'`).bind(when,dueAt,accountRef),
+    db.prepare(`INSERT INTO sos_due_windows(due_ref,account_ref,due_at,grace_until_at,state,created_at)
+      VALUES(?1,?2,?3,?4,'open',?5)`).bind(dueRef,accountRef,dueAt,graceUntil,when)
+  ]);
+  return {ok:true,idempotent:false,nextDueAt:dueAt};
+}
+
+export async function deleteSosAccount({env,identity}={}){
+  const db=requireSosDb(env);
+  const accountRef=await sosAccountRef(env,identity);
+  await db.prepare('DELETE FROM sos_accounts WHERE account_ref=?1').bind(accountRef).run();
+  return {ok:true};
+}
+
 export async function createTrustedContactInvite({
   env,identity,endpointKind,endpoint,at=new Date().toISOString(),ttlHours=48
 }={}){
