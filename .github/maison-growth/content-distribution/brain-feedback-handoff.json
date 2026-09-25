@@ -47,7 +47,11 @@
     "expected_behavior": "Central Brain may map A1 content.performance_observed into bounded, append-only learning using its own governed contract.",
     "automatic_confidence_mutation_required": false,
     "content_comparisons_are_causal": false,
-    "automatic_winner_selection": false
+    "automatic_winner_selection": false,
+    "one_snapshot_per_variant_per_interpretation": true,
+    "equal_observation_window_duration_required": true,
+    "overlapping_snapshots_are_not_independent": true,
+    "cross_platform_content_score": false
   },
   "prohibited_here": [
     "new_learning_database",
