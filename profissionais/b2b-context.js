@@ -1,13 +1,13 @@
 (function(){
   const allowed={
-    b2b_business:new Set(['loja','spa','terapeuta','alojamento','servico','outro']),
-    b2b_goal:new Set(['ticket','recompra','diferenciar','continuar','boasvindas','testar','presentear']),
-    b2b_gap:new Set(['fim','extra','assinatura','escolha','stock','historia']),
+    b2b_business:new Set(['loja','spa','terapeuta','alojamento','servico','organizacao','outro']),
+    b2b_goal:new Set(['ticket','recompra','diferenciar','continuar','boasvindas','testar','presentear','equipa','formacao']),
+    b2b_gap:new Set(['fim','extra','assinatura','escolha','stock','historia','consistencia','ferramentas']),
     b2b_client:new Set(['recorrente','ocasional','turista','presente','misto']),
-    b2b_model:new Set(['revenda','uso','ambos','boasvindas','especial','presente']),
+    b2b_model:new Set(['revenda','uso','ambos','boasvindas','especial','presente','workshop']),
     b2b_scale:new Set(['pequeno','regular','recorrente','projeto']),
-    b2b_start:new Set(['curadoria','categoria','proposta','conversa']),
-    b2b_result:new Set(['gifting','welcome','continuity','ticket','signature','resale','pilot','proposal'])
+    b2b_start:new Set(['curadoria','categoria','proposta','piloto','conversa']),
+    b2b_result:new Set(['gifting','welcome','continuity','ticket','signature','resale','pilot','proposal','training_pilot'])
   };
   const source=new URLSearchParams(location.search);
   const context={};
