@@ -1,0 +1,88 @@
+{
+  "contract_version": "CONTENT-DISTRIBUTION-1.0",
+  "module": "RIO CONTEUDO DISTRIBUICAO",
+  "mode": "planning_and_feedback_only",
+  "canonical_intelligence_owner": "Maison Brain",
+  "derived_artifacts_only": true,
+  "voice_source": "functions/_lib/maison-content-ontology.js",
+  "event_envelope_source": ".github/maison-growth/a1/event-contract-v2.json",
+  "brand": {
+    "principle": "PARA DE IGNORAR! Volta Para Casa.",
+    "axes": ["casa", "corpo", "cabeca", "transversal"],
+    "symbol": "Farol",
+    "methods": [
+      "KISS",
+      "Hormozi",
+      "Yoichi Feral",
+      "Schwartz",
+      "Berger",
+      "Cialdini etico"
+    ]
+  },
+  "formats": [
+    "short_video",
+    "story_sequence",
+    "carousel_post",
+    "editorial_page"
+  ],
+  "intents": [
+    "recognition",
+    "tension",
+    "reframe",
+    "education",
+    "movement",
+    "commercial"
+  ],
+  "hook_families": [
+    "recognition",
+    "pattern_break",
+    "cost_of_ignoring",
+    "specific_moment",
+    "desire"
+  ],
+  "cta_kinds": [
+    "none",
+    "save",
+    "share",
+    "reply",
+    "reflect",
+    "visit_existing_destination"
+  ],
+  "states": [
+    "brief",
+    "draft",
+    "needs_editorial_review",
+    "approved_for_manual_distribution",
+    "distributed_manually",
+    "measured",
+    "learned",
+    "retired"
+  ],
+  "principles": {
+    "one_human_idea_per_piece": true,
+    "existing_destination_only_for_commercial_cta": true,
+    "same_idea_may_be_reused_across_formats": true,
+    "format_execution_must_change_by_surface": true,
+    "unknown_metrics_remain_unknown": true,
+    "engagement_is_not_economic_value": true,
+    "no_combined_content_score": true,
+    "human_editorial_review_required": true,
+    "automatic_publication": false,
+    "automatic_scheduling": false,
+    "outbound_authorized": false,
+    "spend_authorized": false
+  },
+  "publish_boundary": {
+    "human_gate": "existing Maison A12 governance",
+    "repository_public_write": "existing A9 Publisher Gateway only",
+    "social_publication": "manual or separately authorized future adapter only",
+    "this_module_can_publish": false
+  },
+  "brain_convergence": {
+    "input": "canonical refs plus minimal derived human context",
+    "output_event_type": "content.performance_observed",
+    "output_envelope": "A1 v2",
+    "learning_consumer": "Brain/A11",
+    "parallel_intelligence_store_prohibited": true
+  }
+}
