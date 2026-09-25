@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import unittest
-from engine import LearningInput,evaluate,evaluate_offer_funnel,feedback,detect_repeated_pattern,propose_sensitive_adjustment,assert_no_protected_mutation,ProtectedMutationError
+from engine import LearningInput,evaluate,evaluate_offer_funnel,offer_context_key,feedback,detect_repeated_pattern,propose_sensitive_adjustment,assert_no_protected_mutation,ProtectedMutationError
 
 RUL="rul_"+"a"*36
 MDL="mdl_"+"b"*36
@@ -28,6 +28,15 @@ class A11Tests(unittest.TestCase):
     def test_ctr_negative_economics_positive(self):
         r=evaluate(inp(observed_economic_value_minor=1500,observed_ctr_bps=300),confidence_before=50,rule_version_id=RUL)
         self.assertEqual(r.signal_class,"positive"); self.assertIn("CTR_NEGATIVE_ECONOMIC_POSITIVE",r.reason_codes)
+    def test_offer_context_separates_need_and_route(self):
+        a=offer_context_key(offer_id="tarot",need_id="need_clarity",route="talk",source="vpc")
+        b=offer_context_key(offer_id="tarot",need_id="need_clarity",route="gift",source="vpc")
+        self.assertNotEqual(a,b); self.assertIn("need:need_clarity",a); self.assertIn("route:talk",a)
+    def test_offer_funnel_subject_is_context_specific(self):
+        a=evaluate_offer_funnel(offer_id="tarot",need_id="need_clarity",route="talk",source="vpc",exposures=20,clicks=5,conversions=1,confidence_before=60,rule_version_id=RUL,expected_conversion_bps=2000)
+        b=evaluate_offer_funnel(offer_id="tarot",need_id="need_clarity",route="gift",source="vpc",exposures=20,clicks=5,conversions=1,confidence_before=60,rule_version_id=RUL,expected_conversion_bps=2000)
+        self.assertNotEqual(a.learning_record_id,b.learning_record_id); self.assertNotEqual(a.evidence_refs,b.evidence_refs)
+
     def test_offer_funnel_negative_when_clicks_do_not_convert(self):
         r=evaluate_offer_funnel(offer_id="tarot",exposures=20,clicks=5,conversions=0,confidence_before=60,rule_version_id=RUL,expected_ctr_bps=2000,expected_conversion_bps=2000)
         self.assertEqual(r.signal_class,"negative"); self.assertLess(r.confidence_delta,0); self.assertTrue(r.correlation_only)
