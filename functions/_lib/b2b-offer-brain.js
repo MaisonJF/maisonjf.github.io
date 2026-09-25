@@ -60,6 +60,13 @@ export const MAISON_B2B_BRAIN={
       routes:['/profissionais/']
     },
     {
+      id:'organizacao',
+      label:'Equipa, organização, associação ou entidade',
+      status:'pilot_surface',
+      territories:['cabeca','presenca'],
+      routes:['/profissionais/']
+    },
+    {
       id:'outro',
       label:'Outro tipo de negócio ou projecto',
       status:'public_validated',
@@ -74,8 +81,126 @@ export const MAISON_B2B_BRAIN={
     {id:'continuar',label:'Prolongar a experiência depois da visita',opportunityType:'continuity'},
     {id:'boasvindas',label:'Melhorar chegada, oferta ou detalhe de boas-vindas',opportunityType:'welcome'},
     {id:'testar',label:'Testar uma nova linha sem começar demasiado grande',opportunityType:'pilot'},
-    {id:'presentear',label:'Criar presentes para clientes, hóspedes, equipa, parceiros ou ocasiões',opportunityType:'gifting'}
+    {id:'presentear',label:'Criar presentes para clientes, hóspedes, equipa, parceiros ou ocasiões',opportunityType:'gifting'},
+    {id:'equipa',label:'Melhorar experiência, comunicação ou consistência da equipa',opportunityType:'team_workshop'},
+    {id:'formacao',label:'Dar formação prática a equipas ou profissionais',opportunityType:'training_pilot'}
   ],
+  offerFamilies:[
+    {
+      id:'curated_resale',
+      label:'Revenda curada',
+      status:'active_quote',
+      segments:['loja','spa','terapeuta'],
+      solutionType:'b2b',validationMode:'manual_b2b_pilot',
+      routes:['/profissionais/produtos-para-revenda-em-loja','/profissionais/produtos-para-revenda-em-spa','/profissionais/velas-aromaticas-para-revenda'],
+      recurrence:['reorder'],
+      claimLimit:'Selecção, quantidades, preço e reposição são sempre confirmados numa proposta.'
+    },
+    {
+      id:'hospitality_welcome',
+      label:'Boas-vindas & hospitalidade',
+      status:'active_quote',
+      segments:['alojamento'],
+      solutionType:'b2b',validationMode:'manual_b2b_pilot',
+      routes:['/profissionais/produtos-de-boas-vindas-para-alojamento-local','/profissionais/como-criar-um-ritual-de-boas-vindas-para-clientes'],
+      recurrence:['reorder','seasonal_project'],
+      claimLimit:'Não pressupõe impacto em reviews, ocupação ou receita sem medição.'
+    },
+    {
+      id:'sensory_signature',
+      label:'Assinatura sensorial & experiência',
+      status:'active_quote',
+      segments:['spa','terapeuta','alojamento','servico'],
+      solutionType:'b2b',validationMode:'manual_b2b_pilot',
+      routes:['/profissionais/aromas-para-espacos-de-bem-estar','/profissionais/como-escolher-aromas-para-um-gabinete-de-massagem'],
+      recurrence:['reorder','repeat_project'],
+      claimLimit:'A proposta pode organizar aroma, ritual e detalhe de experiência; não promete resultados clínicos ou comerciais.'
+    },
+    {
+      id:'gifting',
+      label:'Presentes & gifting',
+      status:'manual_proposal',
+      segments:['loja','spa','terapeuta','alojamento','servico','organizacao','outro'],
+      solutionType:'b2b',validationMode:'manual_b2b_pilot',
+      routes:['/contacto/?interesse=b2b-presentes'],
+      recurrence:['occasion','seasonal_project'],
+      claimLimit:'Formato, personalização, quantidades, capacidade, prazo e preço são validados antes da proposta final.'
+    },
+    {
+      id:'small_series',
+      label:'Pequenas séries & projectos especiais',
+      status:'manual_proposal',
+      segments:['loja','spa','terapeuta','alojamento','servico','organizacao','outro'],
+      solutionType:'b2b',validationMode:'manual_b2b_pilot',
+      routes:['/contacto/?interesse=b2b'],
+      recurrence:['repeat_project'],
+      claimLimit:'Só avança após revisão de materiais, capacidade, custo, prazo e âmbito.'
+    },
+    {
+      id:'team_workshop',
+      label:'Workshop-piloto para equipas',
+      status:'pilot_by_conversation',
+      segments:['organizacao','servico'],
+      solutionType:'service',validationMode:'manual_service_pilot',
+      routes:['/contacto/?interesse=b2b-formacao'],
+      recurrence:['repeat_workshop'],
+      evidenceCandidate:'workplace_wellbeing_training',
+      claimLimit:'Piloto não-clínico. Não é psicoterapia, intervenção de saúde mental, formação oficial ou promessa de melhoria de desempenho.'
+    },
+    {
+      id:'professional_training',
+      label:'Formação profissional MAISON',
+      status:'research_validation',
+      segments:['organizacao','terapeuta','servico'],
+      solutionType:'service',validationMode:'manual_service_pilot',
+      routes:[],recurrence:['cohort','renewal'],
+      evidenceCandidate:'workplace_wellbeing_training',
+      claimLimit:'Não comercializar como certificação oficial/DGERT nem como credencial MAISON activa antes de validação jurídica, curricular, de capacidade e de procura.'
+    },
+    {
+      id:'professional_tools',
+      label:'Ferramentas profissionais MAISON',
+      status:'research_validation',
+      segments:['organizacao','terapeuta','servico','spa','alojamento'],
+      solutionType:'digital_product',validationMode:'manual_digital_validation',
+      routes:[],recurrence:['version_update'],
+      claimLimit:'Sem ferramenta pública ou gratuita adicional enquanto não existir problema e intenção de compra validados.'
+    },
+    {
+      id:'professional_digital_products',
+      label:'Produtos digitais profissionais',
+      status:'research_validation',
+      segments:['organizacao','terapeuta','servico','spa','alojamento'],
+      solutionType:'digital_product',validationMode:'manual_digital_validation',
+      routes:[],recurrence:['license_or_update'],
+      claimLimit:'Não criar catálogo digital B2B por especulação; começar por uma dor profissional validada.'
+    },
+    {
+      id:'licensed_professional_network',
+      label:'Rede profissional licenciada',
+      status:'future_validation',
+      segments:['terapeuta','servico','organizacao'],
+      solutionType:'b2b',validationMode:'manual_b2b_pilot',
+      routes:[],recurrence:['license_renewal'],
+      claimLimit:'Não é franquia activa, certificação oficial ou direito de sublicença.'
+    }
+  ],
+  recurrence:{
+    supportedNow:['reorder','repeat_project','occasion','seasonal_project'],
+    pilotOnly:['repeat_workshop'],
+    futureValidation:['cohort','renewal','license_or_update','license_renewal','version_update'],
+    rule:'Recorrência nasce de comportamento observado. Não criar subscrição, fidelização ou licença periódica apenas para fabricar receita recorrente.'
+  },
+  leadContract:{
+    canonicalEvent:'b2b.lead',
+    canonicalSolutionType:'b2b',
+    currentSurface:'/contacto/',
+    observedIntentEvent:'contact_whatsapp_click',
+    runtimeStatus:'b2b_context_ready_canonical_ingestion_owned_by_central_telemetry_or_commerce',
+    allowedNonPii:['interest','origin','business','goal','gap','client','model','scale','start','result_type'],
+    forbidden:['name','email','phone','free_text_message','health_data','client_identity'],
+    rule:'O rio B2B define e produz contexto não identificável; a persistência canónica de b2b.lead deve reutilizar a telemetria/commerce central, não criar CRM ou pipeline paralelo.'
+  },
   professionalNetwork:{
     status:'internal_model_validation_required',
     principle:'Ensinar pode ser distribuído; a chancela, o método e a autoridade de certificação permanecem MAISON.',
@@ -171,7 +296,7 @@ export const MAISON_B2B_BRAIN={
       claimLimit:'A necessidade organizacional e o enquadramento de formação não provam procura pagante pela MAISON. Antes de vender, validar comprador, formato, competência, certificação aplicável e fronteira não-clínica.'
     }
   ],
-  opportunityTypes:['welcome','continuity','ticket','signature','resale','pilot','gifting','proposal'],
+  opportunityTypes:['welcome','continuity','ticket','signature','resale','pilot','gifting','proposal','team_workshop','training_pilot'],
   routes:[
     {id:'diagnostic',href:'/profissionais/teste/',role:'recognition'},
     {id:'direct_contact',href:'/contacto/?interesse=b2b',role:'lead'},
@@ -210,6 +335,21 @@ export function maisonB2bKnowledgeContext(){
       id:x.id,label:x.label,status:x.status,territories:[...x.territories],routes:[...x.routes]
     })),
     needs:MAISON_B2B_BRAIN.needs.map(x=>({...x})),
+    offerFamilies:(MAISON_B2B_BRAIN.offerFamilies||[]).map(x=>({
+      ...x,
+      segments:[...(x.segments||[])],routes:[...(x.routes||[])],recurrence:[...(x.recurrence||[])]
+    })),
+    recurrence:{
+      ...MAISON_B2B_BRAIN.recurrence,
+      supportedNow:[...(MAISON_B2B_BRAIN.recurrence?.supportedNow||[])],
+      pilotOnly:[...(MAISON_B2B_BRAIN.recurrence?.pilotOnly||[])],
+      futureValidation:[...(MAISON_B2B_BRAIN.recurrence?.futureValidation||[])]
+    },
+    leadContract:{
+      ...MAISON_B2B_BRAIN.leadContract,
+      allowedNonPii:[...(MAISON_B2B_BRAIN.leadContract?.allowedNonPii||[])],
+      forbidden:[...(MAISON_B2B_BRAIN.leadContract?.forbidden||[])]
+    },
     professionalNetwork:{
       ...MAISON_B2B_BRAIN.professionalNetwork,
       levels:(MAISON_B2B_BRAIN.professionalNetwork?.levels||[]).map(level=>({
