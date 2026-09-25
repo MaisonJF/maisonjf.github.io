@@ -24,7 +24,7 @@ export function sosEmailCopy(kind,{env,inviteToken,expiresAt}={}){
   if(kind==='trusted_invite'){
     const token=String(inviteToken||'');
     if(token.length<20)throw new Error('sos_invite_token_missing');
-    const link=base+'/sos/aceitar?token='+encodeURIComponent(token);
+    const link=base+'/sos/aceitar#token='+encodeURIComponent(token);
     return {
       subject:'Convite · contacto de confiança SOS Maison JF',
       text:'Alguém escolheu-te como contacto de confiança no SOS Maison JF. Aceita apenas se concordares em receber um aviso quando o check-in combinado não for confirmado.\n\nAceitar: '+link+'\n\nO convite expira em '+String(expiresAt||'')+'.\n\nO SOS Maison JF não é um serviço de emergência.'
