@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from typing import Any, Mapping
 
-from engine import LearningError, LearningRecord, evaluate_content_performance
+from engine import LearningError, LearningRecord, evaluate_content_performance, stable_id
 
 FORBIDDEN_ECONOMIC_METADATA = {
     "economic_value_minor",
@@ -28,6 +28,19 @@ def _metadata(event: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(parsed,dict):
         raise LearningError("invalid content event metadata")
     return parsed
+
+def content_learning_identity(event: Mapping[str, Any]) -> dict[str, Any]:
+    identity=content_learning_identity(event)
+    meta=_metadata(event)
+    content_id=identity["content_id"]
+    refs=list(identity["evidence_refs"])
+    refs=tuple(dict.fromkeys(refs))
+    return {
+        "content_id":content_id,
+        "source_id":stable_id("cnt_",{"content_id":content_id,"refs":(f"content:{content_id}",*refs)}),
+        "subject_id":stable_id("can_",{"content_id":content_id}),
+        "evidence_refs":refs,
+    }
 
 def content_event_to_learning(
     event: Mapping[str, Any],
