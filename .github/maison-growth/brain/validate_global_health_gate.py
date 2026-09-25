@@ -59,6 +59,35 @@ if b2b_allowed!=expected_b2b:
 if "sos." not in sources["sos_product"].get("allowed_event_prefixes",[]):
     fail("A2 SOS aggregate events missing")
 
+a3_contract=json.loads((ROOT/".github/maison-growth/a3/solution-contract.json").read_text(encoding="utf-8"))
+b2b_contract=a3_contract.get("solution_types",{}).get("b2b",{})
+expected_b2b_events={"b2b.order","b2b.lead","b2b.proposal","b2b.pilot","b2b.purchase","b2b.recurrence"}
+if set(b2b_contract.get("conversion_event_types",[]))!=expected_b2b_events:
+    fail("A3 B2B lifecycle contract drift")
+expected_stage_mapping={
+    "b2b.lead":"lead","b2b.proposal":"lead","b2b.pilot":"order",
+    "b2b.order":"order","b2b.purchase":"purchase","b2b.recurrence":"purchase",
+}
+if b2b_contract.get("stage_mapping")!=expected_stage_mapping:
+    fail("A3 B2B stable conversion-kind mapping drift")
+seed=(ROOT/".github/maison-growth/a3/migrations/0017_b2b_canonical_solution.sql")
+if not seed.exists() or "catalog:service:b2b" not in seed.read_text(encoding="utf-8"):
+    fail("canonical A3 B2B solution mapping missing")
+
+commerce_adapter=(ROOT/"functions/_lib/commerce-telemetry.js").read_text(encoding="utf-8")
+for token in ("recordB2bLifecycleEvent","idempotency_registry","solution_key='b2b'","b2b.lead"):
+    if token not in commerce_adapter:
+        fail("central B2B commerce adapter missing "+token)
+public_adapter=(ROOT/"functions/api/commerce-event.js").read_text(encoding="utf-8")
+if "recordB2bLifecycleEvent" not in public_adapter or "b2b.lead" not in public_adapter:
+    fail("public fail-open B2B lead adapter missing")
+analytics=(ROOT/"analytics.js").read_text(encoding="utf-8")
+if "recordCanonicalCommerceSignal" not in analytics or "/api/commerce-event" not in analytics:
+    fail("B2B contact signal is not wired to central commerce telemetry")
+brain_control=(ROOT/"workers/maison-intelligence/src/control_api.js").read_text(encoding="utf-8")
+if "/internal/brain/b2b-feedback" not in brain_control or "brain_b2b_feedback" not in brain_control:
+    fail("Brain B2B A3 feedback surface missing")
+
 a11=(ROOT/".github/maison-growth/a11/engine.py").read_text(encoding="utf-8")
 if '"content"' not in a11:
     fail("A11 content handoff missing")
@@ -66,6 +95,7 @@ if '"content"' not in a11:
 run("bash",".github/maison-growth/brain/rebuild_commercial_context.sh","--check")
 run(sys.executable,".github/maison-growth/brain/test_schema_chain.py")
 run(sys.executable,".github/maison-growth/a2/test_event_collector.py")
+run(sys.executable,".github/maison-growth/a3/validate_a3.py")
 run(sys.executable,".github/maison-growth/a11/test_a11.py")
 run(sys.executable,".github/maison-growth/brain/validate_commercial_feedback_loop.py")
 run("node",".github/maison-growth/vault/validate_pdi_registry.mjs")
