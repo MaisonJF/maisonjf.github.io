@@ -10,7 +10,7 @@ Um brief de conteúdo é **derivado e descartável**. Não é uma nova base de c
 
 Fluxo:
 
-`Brain / oportunidade validada → brief de conteúdo → copy + revisão humana → distribuição manual → métricas agregadas → A1 event envelope → Brain / A11 learning`
+`Brain / oportunidade validada → brief de conteúdo → copy + revisão humana → distribuição manual → métricas agregadas → A2 collector → A1 event envelope → handoff ao Brain / A11`
 
 ## O que este rio cobre
 
@@ -180,15 +180,17 @@ Podem entrar:
 - leads;
 - conversões.
 
-Taxas só são calculadas quando existe denominador observado. Zero desconhecido nunca é inventado.
+Taxas só são calculadas quando existe denominador observado. Zero desconhecido nunca é inventado. As taxas seguem em basis points inteiros para caberem no contrato do colector sem floats ambíguos.
 
-O feedback sai como `content.performance_observed` no envelope A1 v2, com:
+O feedback é produzido como input A2 `content.performance_observed`. O A2 valida a fonte pela allowlist, aplica o contrato de privacidade e só depois produz o envelope A1 v2. O payload usa:
 - privacidade `aggregated`;
-- IDs pseudónimos/derivados;
-- payload hash;
-- idempotência;
-- métricas e taxas observadas;
-- referências ao conteúdo e à revisão humana.
+- idempotência determinística por conteúdo/plataforma/janela;
+- métricas inteiras observadas;
+- taxas em basis points apenas quando existe denominador real;
+- hash das referências canónicas de origem, em vez de replicar inteligência do Brain;
+- referência da revisão humana.
+
+O A11 actual não aceita `content` como `source_kind`. Este rio não altera esse contrato, porque isso pertence à arquitectura central de aprendizagem. O ficheiro `brain-feedback-handoff.json` descreve o handoff necessário sem criar datastore, regra de confiança ou motor de aprendizagem paralelo.
 
 Receita e valor económico continuam a pertencer a A3. Este rio não transforma engagement em dinheiro por estimativa.
 
