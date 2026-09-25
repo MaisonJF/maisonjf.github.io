@@ -1,3 +1,24 @@
+# SEARCH-CONSOLE-LEGACY-RECOVERY — observed 2026-09-25
+/cart /produtos/carrinho/ 301
+/collections/all /produtos/ 301
+/collections/casa-ambiente /produtos/ 301
+/policies/contact-information /contacto/ 301
+/policies/privacy-policy /informacao-legal#privacidade 301
+/policies/refund-policy /informacao-legal#livre-resolucao 301
+/policies/shipping-policy /envios 301
+/policies/terms-of-service /informacao-legal 301
+/products/acompanhamento-permanente /servicos/#continuidade 301
+/products/bain-de-pieds /produtos/escalda-pes/ 301
+/products/consulta-escrita-aprofundada /servicos/ 301
+/products/diffuseur-a-batonnets-entre-nous /produtos/ 301
+/products/fondants-parfumes-edition-doree /produtos/ 301
+/products/huile-de-massage-entre-nous /produtos/oleo-massagem/ 301
+/products/maison-todo-o-mes-a-tua-casa-outra-vez /servicos/#continuidade 301
+/products/mentoria-espiritual /contacto/?interesse=mentoria 301
+/products/tarot-expresso /servicos/tarot/ 301
+/products/virgulas-do-destino-meandros-da-vida /ebooks/virgulas-do-destino-meandros-da-vida/ 301
+/relacoes/acabou-uma-situationship-e-nao-consigo-ultrapassar /oraculo/separacao-fim 301
+
 /produtos.html /produtos/ 301
 /produtos /produtos/ 301
 /produto-bruma-ambiente.html /produtos/nevoa/ 301

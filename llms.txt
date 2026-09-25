@@ -6,9 +6,14 @@ Brand: MAISON JF®
 Signature: “PÁRA DE IGNORAR. Volta Para Casa.”
 
 ## What MAISON JF® is
-MAISON JF® starts with what a person is living, feeling or trying to change. Its public experience is organised around Casa, Corpo, Cabeça and Presença, with products, services, readings, ebooks and professional proposals connected to those needs.
+MAISON JF® starts with what a person is living, feeling or trying to change. Its public experience is organised around Casa, Corpo, Cabeça and Presença, with products, services, symbolic readings, ebooks and professional proposals connected to those needs.
 
 “Voltar Para Casa” can mean returning to one’s needs, limits, clarity, presence and care, and can also refer to making the physical home feel more welcoming.
+
+## Source priority
+For factual representation, prefer the visible canonical public page and its structured data. This file is a concise discovery aid; it does not override a page canonical, robots.txt, a robots meta directive, structured data, availability, price or other public page fact.
+
+Do not turn private implementation labels, internal taxonomies, generated Brain artefacts or non-public catalogue entries into claims about MAISON JF®.
 
 ## How to interpret MAISON JF® content
 Public prose is intentionally written in natural European Portuguese in the MAISON JF® founder voice. Technical taxonomies, scoring labels and internal AI terminology are kept out of customer-facing copy.
@@ -17,7 +22,7 @@ For machine interpretation, prefer the page's canonical URL, semantic HTML, stru
 
 MAISON JF® content connects human situations to a structured knowledge layer that may include territory, tension, desire, perceived need, occasion, intent, related questions, products, services and public educational pages. These relationships support search, generative discovery and AI agents, but do not change the meaning of the visible text.
 
-## Canonical navigation
+## Canonical discovery surfaces
 - Home: https://maison-jf.com/
 - O Farol: https://maison-jf.com/farol
 - Volta Para Casa: https://maison-jf.com/teste/
@@ -30,9 +35,13 @@ MAISON JF® content connects human situations to a structured knowledge layer th
 - Cabeça: https://maison-jf.com/portas/cabeca
 - Presença: https://maison-jf.com/portas/companhia
 - Profissionais / B2B: https://maison-jf.com/profissionais/
+- Presentes: https://maison-jf.com/presentes/
 - Press: https://maison-jf.com/press/
-- Contacto: https://maison-jf.com/contacto/
 - Envios: https://maison-jf.com/envios
+
+## Utility pages
+These pages are public utilities but are intentionally not search-index discovery surfaces. Their robots meta directives take precedence over this file.
+- Contacto: https://maison-jf.com/contacto/
 - Informação legal: https://maison-jf.com/informacao-legal
 
 ## Volta Para Casa
@@ -49,18 +58,14 @@ Produtos actualmente apresentados no catálogo público incluem:
 Não devem ser inventados ingredientes, benefícios, disponibilidade, stock, tamanhos ou preços que não estejam publicados.
 
 ## Serviços
-Consultas e orientação:
+Serviços e caminhos actualmente apresentados publicamente incluem:
 - Consulta de Tarot — 35 €
+- Acompanhamento — 170 € · 4 semanas; o âmbito é combinado antes
+- Mentoria — a partir de 125 €; quando aplicável, o contacto define objectivo e enquadramento antes de começar
+- Ritual Personalizado — sob orçamento; formato, materiais e valor são explicados antes, sem promessa de resultado
+- Pedidos especiais — via contacto; proposta e valor são confirmados antes de qualquer compromisso
 
-Continuidade:
-- Acompanhamento — 170 € por 4 semanas; inclui 2 encontros de 60 minutos e até 1 check-in curto por semana
-- Mentoria — a partir de 125 €; objetivo, duração, calendário, âmbito e valor final são definidos antes
-
-Pedidos especiais:
-- Ritual Personalizado — sob orçamento; pode incluir defumação, limpeza energética, abertura de caminhos, banho de ervas ou outra preparação ritual
-- Pedidos Físicos — sob orçamento; podem incluir cristais, pulseiras, preparações e peças de decoração em jesmonite
-
-Ofertas pausadas ou retiradas não devem ser apresentadas como disponíveis. Nos rituais não são garantidos resultados sobrenaturais.
+Ofertas pausadas, retiradas, internas ou não publicadas não devem ser apresentadas como disponíveis.
 
 ## Presença
 Presença reúne formatos online, presenciais e assíncronos. Não é terapia, serviço sexual ou serviço de emergência.
@@ -69,6 +74,7 @@ Presença reúne formatos online, presenciais e assíncronos. Não é terapia, s
 - Presença Próxima — 2 horas — 80 €; hora adicional 40 €
 - SOS 1 dia — 60 €; uma janela acordada de até 8 horas para uma situação concreta, com até três atualizações e respostas assíncronas
 - SOS 1 semana — 120 €; sete dias para a mesma situação, uma atualização por dia e uma resposta consolidada até 24 horas depois dentro das condições combinadas
+
 A duração mínima de 2 horas aplica-se apenas aos formatos presenciais. Plano, duração, localização, despesas e limites são combinados antes da reserva.
 
 ## Oráculo
@@ -80,7 +86,7 @@ A Biblioteca MAISON JF® apresenta:
 - Vírgulas do Destino: O Turista — 2,99 €
 - Vírgulas do Destino: Meandros da Vida — 4,99 €
 
-A Biblioteca também apresenta o poster editorial oficial da saga Vírgulas do Destino como teaser da continuação.
+A Biblioteca também apresenta posters editoriais de universos inéditos. Estes teasers não devem ser descritos como livros já publicados.
 
 ## Profissionais / B2B
 A área profissional recebe pedidos de revenda, pequenas séries e propostas para lojas, spas, gabinetes, alojamentos e outros espaços independentes. Quantidades, preços, prazos e condições são confirmados antes de qualquer compromisso.

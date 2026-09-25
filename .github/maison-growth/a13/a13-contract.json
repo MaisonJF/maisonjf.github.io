@@ -10,7 +10,7 @@
     "A5.1",
     "A12.1"
   ],
-  "purpose": "Treat compatible external AI systems, public web sources and explicitly user-contributed memory excerpts as sensors feeding Oceans and Brain.",
+  "purpose": "Treat compatible external AI systems, public web/search platforms and explicitly user-contributed memory excerpts as sensors feeding Oceans and Brain, including search visibility and machine representation observations.",
   "runtime_pipeline": [
     "external_sensor",
     "a13_privacy_provenance_echo_control",
@@ -23,6 +23,7 @@
     "ai_api",
     "ai_web_grounded",
     "public_web",
+    "search_platform",
     "user_contributed_memory"
   ],
   "hard_boundaries": {
@@ -51,7 +52,10 @@
     "cited_root_urls_are_canonicalized": true,
     "same_root_repeated_by_many_models_counts_once": true,
     "ungrounded_model_output_independent_evidence_count": 0,
-    "model_count_must_not_be_used_as_source_independence": true
+    "model_count_must_not_be_used_as_source_independence": true,
+    "search_platform_metrics_are_observations_not_demand": true,
+    "ai_visibility_probe_absence_is_valid_observation": true,
+    "ungrounded_brand_representation_is_not_search_ranking_evidence": true
   },
   "user_contribution": {
     "explicit_user_action_required": true,

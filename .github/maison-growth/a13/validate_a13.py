@@ -33,6 +33,8 @@ ok(contract["runtime"]["secrets_in_repository"] is False, "secrets must never be
 ok(contract["hard_boundaries"]["private_memory_scraping"] is False, "private memory scraping forbidden")
 ok(contract["hard_boundaries"]["direct_pii_persistence"] is False, "direct PII forbidden")
 ok(contract["hard_boundaries"]["external_output_can_publish"] is False, "external models may not publish")
+ok("search_platform" in contract["source_classes"], "search platform source class missing")
+ok(contract["evidence_rules"]["search_platform_metrics_are_observations_not_demand"] is True, "search metrics must remain coverage evidence")
 ok(registry["default_runtime_enabled"] is False, "providers deny by default")
 ok(all(p["runtime_enabled"] is False for p in registry["providers"]), "provider unexpectedly enabled in registry")
 ok(all(p["private_memory_access"] is False for p in registry["providers"]), "private memory access forbidden")
@@ -40,7 +42,7 @@ provider_ids={p["provider_id"] for p in registry["providers"]}
 required_provider_ids={
     "cloudflare_workers_ai","osiris_gateway","openrouter",
     "openai","anthropic","google_gemini","perplexity",
-    "public_web","user_contributed_memory"
+    "google_search_console","bing_webmaster","public_web","user_contributed_memory"
 }
 ok(required_provider_ids <= provider_ids, f"provider registry missing: {sorted(required_provider_ids-provider_ids)}")
 ok(memory["required_values"]["user_selected_content"] is True, "memory must be user selected")
@@ -87,8 +89,12 @@ commands = [
     [sys.executable, "-m", "unittest", "test_a13.py", "-v"],
     ["node", "--test", "workers/maison-intelligence/test/core.test.mjs"],
     ["node", "--test", "workers/maison-intelligence/test/providers.test.mjs"],
+    ["node", "--test", "workers/maison-intelligence/test/search_visibility.test.mjs"],
+    ["node", "--test", "workers/maison-intelligence/test/visibility_probes.test.mjs"],
     ["node", "--check", "workers/maison-intelligence/src/core.js"],
     ["node", "--check", "workers/maison-intelligence/src/providers.js"],
+    ["node", "--check", "workers/maison-intelligence/src/search_visibility.js"],
+    ["node", "--check", "workers/maison-intelligence/src/visibility_probes.js"],
     ["node", "--check", "workers/maison-intelligence/src/sources.js"],
     ["node", "--check", "workers/maison-intelligence/src/memory.js"],
     ["node", "--check", "workers/maison-intelligence/src/index.js"]

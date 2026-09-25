@@ -1,0 +1,267 @@
+name: Maison Discovery Guard
+
+on:
+  pull_request:
+    paths:
+      - 'sitemap.xml'
+      - 'sitemap-*.xml'
+      - 'robots.txt'
+      - 'llms.txt'
+      - '**/*.html'
+      - '.github/maison-growth/brain/build_public_discovery.mjs'
+      - '.github/maison-growth/brain/build_search_visibility.mjs'
+      - '.github/maison-growth/brain/build_indexnow_manifest.mjs'
+      - '.github/maison-growth/brain/submit_indexnow.mjs'
+      - '.github/maison-growth/brain/indexnow-manifest.generated.json'
+      - '8f3d6a1b9c4e72f05a18d3c6b2e9471f.txt'
+      - '.github/workflows/indexnow-submit.yml'
+      - '.github/maison-growth/brain/search-visibility-baseline.json'
+      - '.github/maison-growth/brain/validate_search_visibility_recovery.mjs'
+      - '_redirects'
+      - '.github/maison-growth/brain/public_discovery_context.py'
+      - '.github/maison-growth/brain/build_maison_knowledge_graph.mjs'
+      - '.github/maison-growth/brain/brain_mcp_server.py'
+      - '.github/maison-growth/brain/rebuild_commercial_context.sh'
+      - '.github/maison-growth/brain/validate_public_structured_data.mjs'
+      - '.github/maison-growth/brain/validate_llms_surface.mjs'
+      - '.github/maison-growth/brain/validate_public_entities.mjs'
+      - '.github/maison-growth/brain/validate_product_discovery.mjs'
+      - '.github/maison-growth/brain/validate_runtime_metadata.mjs'
+      - 'functions/_lib/public-structured-data.js'
+      - 'functions/_lib/public-structured-data-middleware.js'
+      - 'functions/oraculo/_middleware.js'
+      - 'functions/respostas/_middleware.js'
+      - 'functions/teste/_middleware.js'
+      - 'functions/ebooks/_middleware.js'
+      - 'functions/profissionais/_middleware.js'
+      - 'functions/press/_middleware.js'
+      - 'functions/trabalho/_middleware.js'
+      - 'functions/presentes/_middleware.js'
+      - 'functions/espiritualidade/_middleware.js'
+      - 'functions/envios.js'
+      - '.github/workflows/maison-discovery-guard.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'sitemap.xml'
+      - 'sitemap-*.xml'
+      - 'robots.txt'
+      - 'llms.txt'
+      - '**/*.html'
+      - '.github/maison-growth/brain/build_public_discovery.mjs'
+      - '.github/maison-growth/brain/build_search_visibility.mjs'
+      - '.github/maison-growth/brain/build_indexnow_manifest.mjs'
+      - '.github/maison-growth/brain/submit_indexnow.mjs'
+      - '.github/maison-growth/brain/indexnow-manifest.generated.json'
+      - '8f3d6a1b9c4e72f05a18d3c6b2e9471f.txt'
+      - '.github/workflows/indexnow-submit.yml'
+      - '.github/maison-growth/brain/search-visibility-baseline.json'
+      - '.github/maison-growth/brain/validate_search_visibility_recovery.mjs'
+      - '_redirects'
+      - '.github/maison-growth/brain/public_discovery_context.py'
+      - '.github/maison-growth/brain/build_maison_knowledge_graph.mjs'
+      - '.github/maison-growth/brain/brain_mcp_server.py'
+      - '.github/maison-growth/brain/rebuild_commercial_context.sh'
+      - '.github/maison-growth/brain/validate_public_structured_data.mjs'
+      - 'functions/_lib/public-structured-data.js'
+      - 'functions/_lib/public-structured-data-middleware.js'
+      - 'functions/oraculo/_middleware.js'
+      - 'functions/respostas/_middleware.js'
+      - 'functions/teste/_middleware.js'
+      - 'functions/ebooks/_middleware.js'
+      - 'functions/profissionais/_middleware.js'
+      - 'functions/press/_middleware.js'
+      - 'functions/trabalho/_middleware.js'
+      - 'functions/presentes/_middleware.js'
+      - 'functions/espiritualidade/_middleware.js'
+      - 'functions/envios.js'
+      - '.github/workflows/maison-discovery-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-discovery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate discovery builders
+        shell: bash
+        run: |
+          node --check .github/maison-growth/brain/build_public_discovery.mjs
+          node --check .github/maison-growth/brain/build_search_visibility.mjs
+          node --check .github/maison-growth/brain/build_indexnow_manifest.mjs
+          node --check .github/maison-growth/brain/build_image_sitemap.mjs
+          node --check .github/maison-growth/brain/submit_indexnow.mjs
+          node --check .github/maison-growth/brain/build_maison_knowledge_graph.mjs
+          node --check functions/_lib/public-structured-data.js
+          node --check functions/_lib/public-structured-data-middleware.js
+          node --check functions/oraculo/_middleware.js
+          node --check functions/respostas/_middleware.js
+          node --check functions/teste/_middleware.js
+          node --check functions/ebooks/_middleware.js
+          node --check functions/profissionais/_middleware.js
+          node --check functions/press/_middleware.js
+          node --check functions/trabalho/_middleware.js
+          node --check functions/presentes/_middleware.js
+          node --check functions/espiritualidade/_middleware.js
+          node --check functions/envios.js
+          node .github/maison-growth/brain/validate_public_structured_data.mjs
+          node --check .github/maison-growth/brain/validate_llms_surface.mjs
+          node .github/maison-growth/brain/validate_llms_surface.mjs
+          node --check .github/maison-growth/brain/validate_public_entities.mjs
+          node .github/maison-growth/brain/validate_public_entities.mjs
+          node --check .github/maison-growth/brain/validate_product_discovery.mjs
+          node .github/maison-growth/brain/validate_product_discovery.mjs
+          node --check .github/maison-growth/brain/validate_runtime_metadata.mjs
+          node .github/maison-growth/brain/validate_runtime_metadata.mjs
+          node --check .github/maison-growth/brain/validate_search_visibility_recovery.mjs
+          node .github/maison-growth/brain/validate_search_visibility_recovery.mjs
+          python -m py_compile .github/maison-growth/brain/public_discovery_context.py .github/maison-growth/brain/brain_mcp_server.py
+
+      - name: Build and verify image sitemap
+        shell: bash
+        run: |
+          node .github/maison-growth/brain/build_image_sitemap.mjs
+          node .github/maison-growth/brain/build_image_sitemap.mjs --check
+
+      - name: Build and verify public discovery graph
+        shell: bash
+        run: |
+          node .github/maison-growth/brain/build_public_discovery.mjs
+          node .github/maison-growth/brain/build_public_discovery.mjs --check
+
+      - name: Build and verify search visibility graph
+        shell: bash
+        run: |
+          node .github/maison-growth/brain/build_search_visibility.mjs
+          node .github/maison-growth/brain/build_search_visibility.mjs --check
+
+      - name: Build and verify IndexNow manifest
+        shell: bash
+        run: |
+          node .github/maison-growth/brain/build_indexnow_manifest.mjs
+          node .github/maison-growth/brain/build_indexnow_manifest.mjs --check
+
+      - name: Build and verify MAISON knowledge graph
+        shell: bash
+        run: |
+          node .github/maison-growth/brain/build_maison_knowledge_graph.mjs
+          node .github/maison-growth/brain/build_maison_knowledge_graph.mjs --check
+
+      - name: Assert convergence contract
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root=Path('.github/maison-growth/brain')
+          discovery=json.loads((root/'public-discovery.generated.json').read_text(encoding='utf-8'))
+          graph=json.loads((root/'maison-knowledge-graph.generated.json').read_text(encoding='utf-8'))
+          visibility=json.loads((root/'search-visibility.generated.json').read_text(encoding='utf-8'))
+          indexnow=json.loads((root/'indexnow-manifest.generated.json').read_text(encoding='utf-8'))
+
+          assert discovery['schema_version']=='maison_public_discovery_v1'
+          assert discovery['contract']['derived_from_public_surfaces_only'] is True
+          assert discovery['contract']['publication_authority'] is False
+          assert discovery['contract']['commercial_authority'] is False
+          assert discovery['contract']['effective_surface_includes_edge_derived_schema'] is True
+          assert discovery['contract']['knowledge_graph_sink']=='maison_knowledge_graph_v1'
+          assert discovery['protocols']['sitemap_declared_in_robots'] is True
+          assert discovery['protocols']['image_sitemap_declared_in_robots'] is True
+          assert discovery['protocols']['image_sitemap_url']=='https://maison-jf.com/sitemap-images.xml'
+          assert discovery['protocols']['llms_identifies_canonical_site'] is True
+          assert discovery['summary']['page_count']>0
+          assert discovery['summary']['structured_data_pages']==discovery['summary']['page_count']
+          assert discovery['summary']['structured_data_sources'].get('none',0)==0
+          assert discovery['summary']['structured_data_sources'].get('edge_derived',0)>=130
+          assert discovery['summary']['stale_edge_schema_lastmod']==[]
+          assert discovery['summary']['orphan_pages']==[]
+          assert discovery['summary']['redirecting_internal_links']==[]
+          assert discovery['summary']['missing_metadata']==[]
+          assert discovery['summary']['duplicate_titles']==[]
+          assert discovery['summary']['duplicate_descriptions']==[]
+
+          assert visibility['schema_version']=='maison_search_visibility_v1'
+          assert visibility['contract']['observational_only'] is True
+          assert visibility['contract']['publication_authority'] is False
+          assert visibility['contract']['commercial_authority'] is False
+          assert visibility['summary']['legacy_observed_urls']>0
+          assert visibility['summary']['unrecovered_legacy_urls']==[]
+          assert visibility['summary']['recovered_legacy_urls']==visibility['summary']['legacy_observed_urls']
+
+          assert indexnow['schema_version']=='maison_indexnow_manifest_v1'
+          assert indexnow['host']=='maison-jf.com'
+          assert indexnow['url_count']>0
+          assert indexnow['url_count']<=10000
+          assert indexnow['keyLocation'].startswith('https://maison-jf.com/')
+          assert all(url.startswith('https://maison-jf.com/') for url in indexnow['urlList'])
+
+          oracle=[p for p in discovery['pages'] if p['group']=='oraculo' and p['url']!='https://maison-jf.com/oraculo/']
+          answers=[p for p in discovery['pages'] if p['group']=='respostas']
+          assert oracle and all(p['structured_data']['blocks'] for p in oracle)
+          assert answers and all(p['structured_data']['blocks'] for p in answers)
+          for group in ('teste','ebooks','profissionais','press','envios','trabalho','presentes','espiritualidade'):
+              rows=[p for p in discovery['pages'] if p['group']==group]
+              assert rows and all(p['structured_data']['blocks'] for p in rows), group
+
+          public=graph.get('publicDiscovery')
+          assert public and public['schema_version']==discovery['schema_version']
+          assert public['summary']==discovery['summary']
+          assert len(public['pages'])==discovery['summary']['page_count']
+
+          search=graph.get('searchVisibility')
+          assert search and search['schema_version']==visibility['schema_version']
+          assert search['summary']==visibility['summary']
+          assert search['provenance']==visibility['provenance']
+
+          import sys
+          sys.path.insert(0,str(root))
+          from public_discovery_context import PublicDiscoveryContext
+          ctx=PublicDiscoveryContext(discovery)
+          assert ctx.search('MAISON',limit=5)
+
+          print(
+              'Discovery convergence: OK · '
+              f"{discovery['summary']['page_count']} public pages · "
+              f"{discovery['summary']['structured_data_pages']} with effective JSON-LD · "
+              f"{discovery['summary']['structured_data_sources'].get('edge_derived',0)} edge-derived · "
+              f"{discovery['summary']['internal_link_edges']} internal public edges · "
+              f"{len(discovery['summary']['orphan_pages'])} orphans · "
+              f"{visibility['summary']['legacy_observed_urls']} legacy search URLs recovered · "
+              f"{indexnow['url_count']} IndexNow URLs prepared"
+          )
+          if discovery['summary']['orphan_pages']:
+              print('Discovery orphan URLs:')
+              for url in discovery['summary']['orphan_pages']:
+                  print(' -',url)
+          if discovery['summary']['redirecting_internal_links']:
+              print('Discovery internal links through redirects:')
+              for item in discovery['summary']['redirecting_internal_links']:
+                  print(' -',item['source'],'::',item['href'],'=>',item['redirect_to'])
+          if discovery['summary']['missing_metadata']:
+              print('Discovery pages with missing metadata:')
+              for item in discovery['summary']['missing_metadata']:
+                  print(' -',item['url'])
+          if discovery['summary']['duplicate_titles']:
+              print('Discovery duplicate titles:')
+              for item in discovery['summary']['duplicate_titles']:
+                  print(' -',item['value'],'::',', '.join(item['urls']))
+          if discovery['summary']['duplicate_descriptions']:
+              print('Discovery duplicate descriptions:')
+              for item in discovery['summary']['duplicate_descriptions']:
+                  print(' -',item['value'],'::',', '.join(item['urls']))
+          PY

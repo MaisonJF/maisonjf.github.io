@@ -30,6 +30,8 @@ All three remain disabled until explicitly configured.
 
 Adapters are implemented for:
 
+- Google Search Console Search Analytics (read-only OAuth; direct visibility/coverage evidence);
+- Bing Webmaster Tools (read-only OAuth; rank/traffic, page and query observations);
 - Osiris AI Gateway (OpenAI-compatible; ungrounded unless its returned data is independently sourced);
 - OpenRouter Chat Completions (provider/model gateway; ungrounded unless a later grounded adapter is configured);
 - OpenAI Responses API + Web Search;
@@ -46,6 +48,8 @@ A provider is skipped unless its secret and required model setting are configure
 - environment `OSIRIS_ENABLED=false`;
 - environment `OSIRIS_GATEWAY_ENABLED=false`;
 - environment `OSIRIS_MEMORY_ENABLED=false`;
+- template `SEARCH_VISIBILITY_ENABLED=false` and `SEARCH_VISIBILITY_PROBES_ENABLED=false`;
+- Search Console uses the read-only `webmasters.readonly` OAuth scope and never stores access/refresh tokens in observations;
 - OSIRIS uses only an explicit passive-source allowlist; active scanner/RECON routes are not part of this Worker;
 - passive sources use conservative per-source cadences instead of polling every feed every hour;
 - database kill switch = ON after migration;
@@ -107,6 +111,12 @@ Secret names:
 - `GEMINI_API_KEY`
 - `PERPLEXITY_API_KEY`
 - `ANTHROPIC_API_KEY`
+- `GOOGLE_SEARCH_CONSOLE_CLIENT_ID`
+- `GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET`
+- `GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN`
+- `BING_WEBMASTER_CLIENT_ID`
+- `BING_WEBMASTER_CLIENT_SECRET`
+- `BING_WEBMASTER_REFRESH_TOKEN`
 
 Model vars live in `wrangler.jsonc`. Osiris Gateway deliberately has no guessed default model. OpenRouter defaults to `openrouter/free` in the template and remains disabled until explicitly enabled. Anthropic is intentionally blank in the template so no model is guessed silently.
 
@@ -150,9 +160,22 @@ WHERE control_id='global';
 
 ## Cost discipline
 
-The grounded/AI research schedule runs daily at 04:17 UTC. The passive OSIRIS schedule is hourly when explicitly enabled, with a separate per-source daily cap. With the default two AI territories and cap of two calls/provider/day, a configured AI provider can make at most two calls per UTC day. Increase only after inspecting real provider usage.
+The grounded/AI research and GEO visibility-probe schedule runs daily at 04:17 UTC. The live zero-cost profile may use a separately capped OpenRouter free-model brand-representation probe; grounded generic-discovery probes run only on providers with web grounding. Search Console snapshots use their own cap and do not consume model calls. The passive OSIRIS schedule is hourly when explicitly enabled, with a separate per-source daily cap. With the default two AI territories and cap of two calls/provider/day, a configured AI provider can make at most two calls per UTC day. Increase only after inspecting real provider usage.
 
 When a provider reports cost metadata, A13 records it in `external_intelligence_daily_usage.reported_cost_usd`. Call caps remain authoritative because not every provider reports cost in the same way.
+
+## Search visibility radar
+
+A13 can measure discovery as evidence rather than treating SEO as a static checklist.
+
+- **Google Search Console**: direct Search Analytics snapshots for pages, queries, countries and devices. These observations use `source=gsc`, `evidence_kind=coverage`, `source_class=search_platform` and are not interpreted as human demand by themselves.
+- **Bing Webmaster Tools**: read-only OAuth snapshots for daily rank/traffic and weekly top-page/top-query data. Bing observations remain `coverage` evidence and use provider provenance rather than pretending to be Google evidence.
+- **GEO/AI probes**: controlled user-like questions sent to configured model providers. Brand probes may measure ungrounded model representation; generic-discovery probes are restricted to web-grounded OpenAI, Gemini or Perplexity adapters.
+- **Absence counts**: a model not mentioning MAISON JF is a valid visibility observation. Prompts explicitly forbid forcing the brand into the answer.
+- **Echo control remains**: citations, not provider count, determine independent web evidence. An uncited OpenRouter/Osiris answer never becomes search-ranking evidence.
+- **No publication authority**: visibility data flows through the existing A13 → A4/A5 → Brain route and cannot change pages, prices, permissions or campaigns.
+
+The repository template keeps this radar off. The current live zero-cost configuration enables the probe switch but remains bounded by provider configuration, free-model enforcement and separate daily caps. Direct Search Console collection creates zero tasks until all OAuth credentials are present.
 
 ## Brain feed
 

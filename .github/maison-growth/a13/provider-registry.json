@@ -70,6 +70,28 @@
       "requires_secret": true
     },
     {
+      "provider_id": "google_search_console",
+      "source_class": [
+        "search_platform"
+      ],
+      "runtime_enabled": false,
+      "private_memory_access": false,
+      "requires_secret": true,
+      "read_only": true,
+      "oauth_scope": "https://www.googleapis.com/auth/webmasters.readonly"
+    },
+    {
+      "provider_id": "bing_webmaster",
+      "source_class": [
+        "search_platform"
+      ],
+      "runtime_enabled": false,
+      "private_memory_access": false,
+      "requires_secret": true,
+      "read_only": true,
+      "oauth_supported": true
+    },
+    {
       "provider_id": "public_web",
       "source_class": [
         "public_web"

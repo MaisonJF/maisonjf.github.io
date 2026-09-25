@@ -39,12 +39,13 @@ class BrainMCPContractTests(unittest.TestCase):
             "maison_commercial_readiness",
             "maison_osiris_search",
             "maison_semantic_search",
+            "maison_public_discovery_search",
         })
         self.assertTrue(all("write" not in name and "send" not in name and "publish" not in name for name in names))
 
     def test_all_tools_use_read_only_annotations(self):
         decorated=re.findall(r"@mcp\.tool\(([^)]*)\)",self.source)
-        self.assertEqual(len(decorated),11)
+        self.assertEqual(len(decorated),12)
         self.assertTrue(all("annotations=READ_ONLY" in x for x in decorated))
         self.assertIn("readOnlyHint=True",self.source)
         self.assertIn("destructiveHint=False",self.source)
