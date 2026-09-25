@@ -76,6 +76,49 @@ export const MAISON_B2B_BRAIN={
     {id:'testar',label:'Testar uma nova linha sem começar demasiado grande',opportunityType:'pilot'},
     {id:'presentear',label:'Criar presentes para clientes, hóspedes, equipa, parceiros ou ocasiões',opportunityType:'gifting'}
   ],
+  researchCandidates:[
+    {
+      id:'hospitality_guest_experience',
+      status:'market_activity_evidenced_validation_required',
+      segments:['alojamento'],
+      hypothesis:'Validar pequenos pilotos de boas-vindas, assinatura sensorial, gifting ou continuidade para alojamento e hospitalidade usando rotas B2B já existentes.',
+      evidence:[
+        {
+          source:'Turismo de Portugal · Overview 2025',
+          published:'2026-03-05',
+          url:'https://www.turismodeportugal.pt/en/Turismo_Portugal/visao_geral/Pages/default.aspx',
+          observation:'Portugal registou 32,5 milhões de hóspedes e 82,1 milhões de dormidas em 2025.'
+        },
+        {
+          source:'TravelBI · Short term accommodation 2025',
+          published:'2026-08-27',
+          url:'https://travelbi.turismodeportugal.pt/en/accommodation/short-term-accommodation-2025/',
+          observation:'O alojamento local com mais de 10 camas registou 5,1 milhões de hóspedes e 12,1 milhões de dormidas em 2025.'
+        }
+      ],
+      claimLimit:'Os dados provam actividade do sector, não procura específica por produtos ou serviços MAISON. Exige piloto, contacto humano e evidência de resposta antes de escalar.'
+    },
+    {
+      id:'workplace_wellbeing_training',
+      status:'problem_evidenced_buyer_demand_unverified',
+      segments:['servico','organizacoes'],
+      hypothesis:'Investigar workshops não-clínicos para equipas sobre pausa, comunicação, relações de trabalho e experiência humana, sem apresentar a MAISON como prestador de saúde mental.',
+      evidence:[
+        {
+          source:'EU-OSHA · OSH Pulse 2025',
+          published:'2025-10-10',
+          url:'https://osha.europa.eu/en/highlights/world-mental-health-day-29-eu-workers-suffer-stress-depression-or-anxiety',
+          observation:'29% dos trabalhadores da UE reportam stress, depressão ou ansiedade; mais de 40% reportam forte pressão temporal e quase 30% má comunicação ou cooperação.'
+        },
+        {
+          source:'DGERT · Tipologias de formação profissional',
+          url:'https://www.dgert.gov.pt/tipologias',
+          observation:'A formação contínua inclui competências profissionais e relacionais; o Código do Trabalho prevê um mínimo anual de 40 horas por trabalhador.'
+        }
+      ],
+      claimLimit:'A necessidade organizacional e o enquadramento de formação não provam procura pagante pela MAISON. Antes de vender, validar comprador, formato, competência, certificação aplicável e fronteira não-clínica.'
+    }
+  ],
   opportunityTypes:['welcome','continuity','ticket','signature','resale','pilot','gifting','proposal'],
   routes:[
     {id:'diagnostic',href:'/profissionais/teste/',role:'recognition'},
@@ -115,6 +158,11 @@ export function maisonB2bKnowledgeContext(){
       id:x.id,label:x.label,status:x.status,territories:[...x.territories],routes:[...x.routes]
     })),
     needs:MAISON_B2B_BRAIN.needs.map(x=>({...x})),
+    researchCandidates:(MAISON_B2B_BRAIN.researchCandidates||[]).map(x=>({
+      ...x,
+      segments:[...(x.segments||[])],
+      evidence:(x.evidence||[]).map(e=>({...e}))
+    })),
     routes:MAISON_B2B_BRAIN.routes.map(x=>({...x})),
     evidencePolicy:{...MAISON_B2B_BRAIN.evidencePolicy}
   };
