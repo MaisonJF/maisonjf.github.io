@@ -95,7 +95,7 @@ O primeiro formato deve ser o menor que permita decidir se vale a pena repetir.
 
 ## 6. Sinais canónicos do Brain
 
-Para `manual_b2b_pilot`:
+Para `b2b_pilot`:
 
 ### Continuar / aprofundar
 - pedido de reunião ou orçamento;
