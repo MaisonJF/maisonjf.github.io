@@ -4,7 +4,9 @@
   "canonical_inputs": [
     ".github/maison-growth/oceans/candidates.json",
     "functions/_lib/offer-brain.js",
-    ".github/maison-growth/a2/source-registry.json"
+    ".github/maison-growth/a2/source-registry.json",
+    "data/products.js",
+    "data/services.js"
   ],
   "derived_artifacts": [
     {
@@ -51,5 +53,13 @@
       "public discovery projection"
     ],
     "parallel_graphs_forbidden": true
+  },
+  "experience_contract": {
+    "canonical_product_catalogue": "data/products.js",
+    "canonical_service_catalogue": "data/services.js",
+    "public_site_signal_contract": ".github/maison-growth/a2/source-registry.json#sources.site",
+    "parallel_catalogues_forbidden": true,
+    "parallel_site_analytics_contracts_forbidden": true,
+    "note": "Experience/UX consumes canonical catalogues and A2 site signals; it does not own Brain, SEO, payments or telemetry architecture."
   }
 }
