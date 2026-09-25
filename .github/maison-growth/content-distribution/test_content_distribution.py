@@ -99,7 +99,7 @@ class ContentDistributionTests(unittest.TestCase):
             "comparison_id": "cpr_abc",
             "comparison_dimension": "hook_family",
             "variant_key": "var_abc",
-            "platform": "instagram_reels",
+            "channel": "instagram_reels",
             "format": "short_video",
             "intent": "recognition",
             "observed_at": "2026-09-25T12:00:00Z",
@@ -130,6 +130,9 @@ class ContentDistributionTests(unittest.TestCase):
         self.assertEqual(raw["event_type"], "content.performance_observed")
         self.assertEqual(raw["privacy_class"], "aggregated")
         self.assertEqual(raw["metadata"]["completion_rate_bps"], 4000)
+        self.assertEqual(raw["metadata"]["channel"], "instagram_reels")
+        self.assertEqual(raw["metadata"]["platform"], "instagram")
+        self.assertEqual(raw["metadata"]["surface"], "reels")
         self.assertEqual(raw["metadata"]["campaign_id"], "cmp_abc")
         self.assertEqual(raw["metadata"]["comparison_dimension"], "hook_family")
         self.assertEqual(raw["metadata"]["variant_key"], "var_abc")
@@ -149,12 +152,18 @@ class ContentDistributionTests(unittest.TestCase):
 
     def test_unknown_denominator_does_not_become_zero_rate(self):
         observation = self.observation()
-        observation["platform"] = "instagram_feed"
+        observation["channel"] = "instagram_feed"
         observation["format"] = "carousel_post"
         observation["intent"] = "education"
         observation["metrics"] = {"saves": 10}
         result = build_performance_feedback(observation)
         self.assertNotIn("save_rate_bps", result["ingestion"]["metadata"])
+
+    def test_feedback_rejects_channel_format_mismatch(self):
+        observation = self.observation()
+        observation["channel"] = "instagram_feed"
+        with self.assertRaisesRegex(ContentContractError, "channel_format_mismatch"):
+            build_performance_feedback(observation)
 
     def test_feedback_requires_integer_platform_metrics(self):
         observation = self.observation()
