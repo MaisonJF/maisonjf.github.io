@@ -63,6 +63,40 @@ class GrowthSchemaChainTests(unittest.TestCase):
         ):
             self.assertIn(expected,tables)
 
+    def test_confirmed_commerce_purchase_is_a3_conversion(self):
+        import sys
+        a3_dir=GROWTH/"a3"
+        sys.path.insert(0,str(a3_dir))
+        try:
+            from journey_engine import build_journeys
+        finally:
+            sys.path.pop(0)
+
+        event={
+            "event_id":"evt_018f4d7a-1c2b-7abc-8def-1234567890ab",
+            "idempotency_key":"checkout:cs_live_fixture",
+            "event_type":"commerce.purchase_confirmed",
+            "source":"stripe",
+            "schema_version":2,
+            "occurred_at":"2026-09-25T12:00:00Z",
+            "received_at":"2026-09-25T12:00:01Z",
+            "journey_id":None,
+            "asset_id":None,
+            "need_id":None,
+            "solution_id":"sol_018f4d7a-1c2b-7abc-8def-1234567890ac",
+            "value_minor":3500,
+            "currency":"EUR",
+            "privacy_class":"anonymous",
+            "payload_hash":"a"*64,
+            "metadata_json":"{}",
+            "rule_version_id":None,
+            "model_version_id":None,
+        }
+        result=build_journeys([event])
+        self.assertEqual(len(result.conversions),1)
+        self.assertEqual(result.conversions[0].kind,"purchase")
+        self.assertEqual(result.conversions[0].source_event_id,event["event_id"])
+
     def test_cash_feedback_accepts_unlinked_a3_economics(self):
         con=sqlite3.connect(":memory:")
         con.execute("PRAGMA foreign_keys=ON")
