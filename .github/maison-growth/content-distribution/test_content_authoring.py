@@ -118,6 +118,32 @@ class ContentAuthoringTests(unittest.TestCase):
                 approval_scope="content_and_cta",
             )
 
+    def test_all_supported_formats_can_reach_human_review(self):
+        cases = [
+            (
+                {"content_id": "cnt_short", "format": "short_video", "intent": "recognition"},
+                {"hook": "Chegaste a casa. A tua cabeça ainda não.", "spoken_body": "Às vezes o corpo chega primeiro.", "caption": "O dia pode acabar por dentro também.", "cta_text": "Guarda."},
+            ),
+            (
+                {"content_id": "cnt_story", "format": "story_sequence", "intent": "movement"},
+                {"frames": ["Chegaste a casa.", "Mas continuas a responder à conversa na tua cabeça.", "E se hoje não precisasses de resolver mais nada?"], "cta_text": "Responde quando te acontecer."},
+            ),
+            (
+                {"content_id": "cnt_carousel", "format": "carousel_post", "intent": "reframe"},
+                {"cover": "Nem tudo o que continua na cabeça precisa de solução hoje.", "slides": ["Há pensamentos que pedem atenção só porque ficaram abertos.", "Fechar o dia não é resolver tudo.", "Às vezes é decidir o que fica para amanhã."], "caption": "Uma pausa não apaga o problema. Só deixa de lhe dar a noite inteira.", "cta_text": "Guarda para mais tarde."},
+            ),
+            (
+                {"content_id": "cnt_page", "format": "editorial_page", "intent": "education"},
+                {"title": "Quando o dia acaba e a cabeça não", "opening": "Há noites em que o trabalho terminou, mas tu continuas dentro dele.", "body": "Nem todos os assuntos precisam de uma conclusão antes de dormires. Às vezes basta reconhecer que hoje já terminou.", "cta_text": "Volta a isto quando precisares."},
+            ),
+        ]
+        for piece, draft in cases:
+            with self.subTest(format=piece["format"]):
+                packet = build_authoring_packet(piece, self.context())
+                review = build_review_package(packet, draft, self.visual())
+                self.assertEqual(review["status"], "needs_human_review")
+                self.assertTrue(review["validation"]["ok"])
+
 
 if __name__ == "__main__":
     unittest.main()
