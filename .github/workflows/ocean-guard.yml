@@ -61,6 +61,7 @@ jobs:
           node --check functions/api/offer-event.js
           python3 .github/maison-growth/a2/test_event_collector.py
           python3 .github/maison-growth/a11/test_a11.py
+          python3 .github/maison-growth/brain/validate_commercial_feedback_loop.py
           node --check functions/_lib/vpc-ocean-signals.generated.js
           node --check functions/_lib/vpc-question-engine.js
           node --check functions/_lib/vpc-public-question-vault.js
