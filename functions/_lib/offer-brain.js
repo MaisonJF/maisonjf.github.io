@@ -184,7 +184,7 @@ function scoreOffer(offer,profile,territories,learning={}){
   return {offer,score,reasons:[...new Set(reasons)]};
 }
 
-function boundedLearningAdjustment(raw){
+export function boundedLearningAdjustment(raw){
   const delta=Number(raw?.confidence_delta??raw?.confidenceDelta??0);
   const observations=Number(raw?.observation_count??raw?.observationCount??0);
   if(!Number.isFinite(delta)||!Number.isFinite(observations)||observations<3)return 0;
