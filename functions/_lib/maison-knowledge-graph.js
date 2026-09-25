@@ -1,3 +1,5 @@
+import {MAISON_B2B_BRAIN,maisonB2bKnowledgeContext} from './b2b-offer-brain.js';
+
 /*
 MAISON JF® knowledge graph
 Machine-facing semantic map. Human-facing prose stays in João voice.
@@ -5,7 +7,7 @@ This file describes relationships. It must never invent claims that are not supp
 */
 
 export const MAISON_KNOWLEDGE_GRAPH={
-  version:'2026-09-25-v1',
+  version:'2026-09-25-v2',
   principle:'Humano vê João. Máquina vê estrutura. Brain compreende os dois. MAISON transforma isso em desejo, utilidade e negócio.',
   brand:{id:'maison-jf',name:'MAISON JF®',url:'https://maison-jf.com/'},
   territories:[
@@ -45,8 +47,10 @@ export const MAISON_KNOWLEDGE_GRAPH={
     {id:'services',url:'/servicos/',role:'commerce',connects:['cabeca','presenca']},
     {id:'editions',url:'/ebooks/',role:'editorial_commerce',connects:['cabeca','presenca']},
     {id:'free_tests',url:'/teste/',role:'recognition_and_routing',connects:['cabeca','presenca','corpo','casa']},
-    {id:'pdi',url:'/para-de-ignorar/',role:'conversation_product',connects:['presenca']}
+    {id:'pdi',url:'/para-de-ignorar/',role:'conversation_product',connects:['presenca']},
+    {id:MAISON_B2B_BRAIN.surface.id,url:MAISON_B2B_BRAIN.surface.url,role:MAISON_B2B_BRAIN.surface.role,connects:['casa','corpo']}
   ],
+  professionalLayer:maisonB2bKnowledgeContext(),
   intelligenceLayer:{
     sensors:['public_web','osiris','openrouter','cloudflare_workers_ai','openai','google_gemini','perplexity','anthropic','authorized_future_providers'],
     flow:['sensors','radar','oceans','brain','maison_outputs','human_and_machine_response','learning','oceans'],
