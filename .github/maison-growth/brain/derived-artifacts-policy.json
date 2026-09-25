@@ -14,9 +14,27 @@
       "manual_edits": "forbidden"
     },
     {
-      "path": ".github/maison-growth/brain/editorial-queue.generated.json",
+      "path": ".github/maison-growth/brain/editorial-queue.json",
       "builder": ".github/maison-growth/brain/build_editorial_queue.mjs",
       "policy": "generated_and_committed",
+      "manual_edits": "forbidden"
+    },
+    {
+      "path": ".github/maison-growth/brain/commercial-assets.generated.json",
+      "builder": ".github/maison-growth/brain/build_commercial_assets.mjs",
+      "policy": "generated_and_committed",
+      "manual_edits": "forbidden"
+    },
+    {
+      "path": "functions/_lib/vpc-ocean-signals.generated.js",
+      "builder": ".github/maison-growth/brain/build_vpc_ocean_signals.mjs",
+      "policy": "generated_and_committed",
+      "manual_edits": "forbidden"
+    },
+    {
+      "path": ".github/maison-growth/brain/public-discovery.generated.json",
+      "builder": ".github/maison-growth/brain/build_public_discovery.mjs",
+      "policy": "optional_when_discovery_river_present",
       "manual_edits": "forbidden"
     }
   ],
@@ -24,5 +42,14 @@
     "check": ".github/maison-growth/brain/rebuild_commercial_context.sh --check",
     "failure_means": "derived context is stale or a central contract is broken",
     "autonomy_allowed_when_stale": false
+  },
+  "integration_policy": {
+    "knowledge_graph_builder": ".github/maison-growth/brain/build_maison_knowledge_graph.mjs",
+    "single_builder_required": true,
+    "optional_river_adapters": [
+      "B2B professional projection",
+      "public discovery projection"
+    ],
+    "parallel_graphs_forbidden": true
   }
 }
