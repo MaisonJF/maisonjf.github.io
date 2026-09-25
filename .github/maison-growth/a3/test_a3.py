@@ -313,6 +313,27 @@ class RepositoryTests(unittest.TestCase):
         self.assertEqual(con.execute("SELECT immediate_contribution_minor FROM conversion_economic_assessments").fetchone()[0],180)
         self.assertEqual(con.execute("SELECT schema_value FROM schema_state WHERE schema_key='maison_growth_a3_schema_version'").fetchone()[0],"A3.1")
 
+    def test_b2b_lifecycle_persists_with_existing_conversion_schema(self):
+        con=self.make_db(); repo=SQLiteA3Repository(con)
+        s=solution("b2b","human","negotiated","b2b")
+        repo.register_solution({**s,"created_by":"test"})
+        expected={
+            "b2b.proposal":"lead",
+            "b2b.pilot":"order",
+            "b2b.recurrence":"purchase",
+        }
+        for ordinal,(event_type,kind) in enumerate(expected.items(),start=1):
+            j=new_journey_id()
+            kwargs={"value_minor":5000,"currency":"EUR"} if kind=="purchase" else {}
+            e=event(event_type,f"2026-09-25T12:0{ordinal}:00Z",journey_id=j,
+                    solution_id=s["solution_id"],source="commerce",**kwargs)
+            self.insert_event(con,e)
+            repo.persist_build(build_journeys([e]))
+            row=con.execute(
+                "SELECT conversion_kind FROM conversions WHERE source_event_id=?",(e["event_id"],)
+            ).fetchone()
+            self.assertEqual(row[0],kind)
+
     def test_derived_tables_are_immutable(self):
         con = self.make_db(); repo=SQLiteA3Repository(con); s=solution()
         repo.register_solution({**s,"created_by":"test"})
