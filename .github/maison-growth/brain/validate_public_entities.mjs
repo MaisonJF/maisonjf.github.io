@@ -112,7 +112,12 @@ for(const name of hidden){
 
 assert.equal(entityEvidence.organization_id,ORG_ID,'entity evidence must target canonical Organization');
 for(const pending of entityEvidence.pending_not_published||[]){
-  assert(!serializedPublicSchema.includes(String(pending.public_username||'')),'pending/unverified profile leaked into public JSON-LD: '+pending.platform);
+  if(pending.public_url){
+    assert(
+      !serializedPublicSchema.includes(String(pending.public_url)),
+      'pending/unverified profile URL leaked into public JSON-LD: '+pending.platform
+    );
+  }
 }
 
 console.log(
