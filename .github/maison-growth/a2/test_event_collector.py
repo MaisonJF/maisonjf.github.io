@@ -220,7 +220,7 @@ class CollectorUnitTests(unittest.TestCase):
                 "metadata": metadata,
             })
             self.assertEqual(normalized["event_type"], event_type)
-            self.assertEqual(normalized["solution_id"], "sol_0199a4b2-7f00-7000-800000000001")
+            self.assertEqual(normalized["solution_id"], "sol_0199a4b2-7f00-7000-8000-000000000001")
 
     def test_gsc_raw_query_is_not_allowed(self):
         event = {
