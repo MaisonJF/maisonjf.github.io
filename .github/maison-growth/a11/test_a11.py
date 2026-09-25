@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import unittest
-from engine import LearningInput,evaluate,feedback,detect_repeated_pattern,propose_sensitive_adjustment,assert_no_protected_mutation,ProtectedMutationError
+from engine import LearningInput,evaluate,evaluate_offer_funnel,feedback,detect_repeated_pattern,propose_sensitive_adjustment,assert_no_protected_mutation,ProtectedMutationError
 
 RUL="rul_"+"a"*36
 MDL="mdl_"+"b"*36
@@ -28,6 +28,16 @@ class A11Tests(unittest.TestCase):
     def test_ctr_negative_economics_positive(self):
         r=evaluate(inp(observed_economic_value_minor=1500,observed_ctr_bps=300),confidence_before=50,rule_version_id=RUL)
         self.assertEqual(r.signal_class,"positive"); self.assertIn("CTR_NEGATIVE_ECONOMIC_POSITIVE",r.reason_codes)
+    def test_offer_funnel_negative_when_clicks_do_not_convert(self):
+        r=evaluate_offer_funnel(offer_id="tarot",exposures=20,clicks=5,conversions=0,confidence_before=60,rule_version_id=RUL,expected_ctr_bps=2000,expected_conversion_bps=2000)
+        self.assertEqual(r.signal_class,"negative"); self.assertLess(r.confidence_delta,0); self.assertTrue(r.correlation_only)
+    def test_offer_funnel_positive_when_conversion_beats_expectation(self):
+        r=evaluate_offer_funnel(offer_id="tarot",exposures=20,clicks=5,conversions=2,confidence_before=60,rule_version_id=RUL,expected_ctr_bps=2000,expected_conversion_bps=2000)
+        self.assertEqual(r.signal_class,"positive"); self.assertGreater(r.confidence_delta,0)
+    def test_offer_funnel_waits_for_enough_evidence(self):
+        r=evaluate_offer_funnel(offer_id="tarot",exposures=2,clicks=1,conversions=0,confidence_before=60,rule_version_id=RUL,expected_conversion_bps=2000)
+        self.assertEqual(r.signal_class,"insufficient"); self.assertEqual(r.confidence_delta,0)
+
     def test_feedback(self):
         r=evaluate(inp(),confidence_before=50,rule_version_id=RUL); f=feedback(r); self.assertEqual(f["action"],"increase_confidence"); self.assertFalse(f["public_side_effects"])
     def test_all_source_kinds_supported(self):
