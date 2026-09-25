@@ -3,7 +3,7 @@ PÁRA DE IGNORAR! — internal product contract
 The public promise is intentionally smaller than the engine.
 */
 export const PARA_DE_IGNORAR_POLICY={
-  version:'2026-09-20-v4',
+  version:'2026-09-25-human-voice-v5',
   format:'digital-only',
   session:{
     cards:28,
@@ -13,6 +13,16 @@ export const PARA_DE_IGNORAR_POLICY={
     stableOnReload:true,
     revealVariability:false,
     revealPoolSize:false
+  },
+  publicVoice:{
+    principle:'João escreve. Brain pensa. MAISON fala.',
+    rules:[
+      'Questions must sound like something one person would genuinely ask another.',
+      'Use familiar words and concrete situations. Keep taxonomy and engine terminology private.',
+      'Avoid em dash and en dash in public text. Prefer a new sentence or natural punctuation.',
+      'Use Brain depth without sounding clinical, corporate, academic or AI-generated.',
+      'Do not trade humanity for intensity. Recognition comes before cleverness.'
+    ]
   },
   publicPromise:{
     title:'PÁRA DE IGNORAR!',
