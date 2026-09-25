@@ -202,6 +202,14 @@ jobs:
           assert visibility['summary']['legacy_observed_urls']>0
           assert visibility['summary']['unrecovered_legacy_urls']==[]
           assert visibility['summary']['recovered_legacy_urls']==visibility['summary']['legacy_observed_urls']
+          assert visibility['summary']['inspection_targets']==6
+          assert visibility['summary']['ai_visibility_probes']>=6
+          assert visibility['runtime_sensors']['google_url_inspection']['implemented'] is True
+          assert visibility['runtime_sensors']['google_url_inspection']['mode']=='read_only'
+          assert len(visibility['runtime_sensors']['google_url_inspection']['targets'])==6
+          assert all(url.startswith('https://maison-jf.com/') for url in visibility['runtime_sensors']['google_url_inspection']['targets'])
+          assert visibility['runtime_sensors']['bing_webmaster']['implemented'] is True
+          assert visibility['runtime_sensors']['ai_visibility_probes']['grounded_generic_discovery_only'] is True
 
           assert indexnow['schema_version']=='maison_indexnow_manifest_v1'
           assert indexnow['host']=='maison-jf.com'
