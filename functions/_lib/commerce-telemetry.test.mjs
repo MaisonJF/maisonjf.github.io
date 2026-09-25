@@ -84,6 +84,18 @@ test('same idempotency key is duplicate only for the same canonical payload',asy
   );
 });
 
+test('later B2B stages enforce required metadata from A2',async()=>{
+  const db=new FakeDB();
+  await assert.rejects(
+    ()=>recordB2bLifecycleEvent(db,{
+      event_type:'b2b.pilot',
+      idempotency_key:'b2b:pilot:test-missing',
+      metadata:{offer_family:'workshop'}
+    }),
+    /missing_b2b_metadata/
+  );
+});
+
 test('later B2B stages reuse the same adapter without customer identity',async()=>{
   const db=new FakeDB();
   const result=await recordB2bLifecycleEvent(db,{
