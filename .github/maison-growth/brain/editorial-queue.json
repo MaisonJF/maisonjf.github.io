@@ -1,7 +1,7 @@
 {
   "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
-  "generatedAt": "2026-09-25T09:00:00+01:00",
+  "generatedAt": "2026-09-25T08:45:00+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
   "contract": {
     "storesPaidBodies": false,
@@ -11,19 +11,19 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 19,
-    "queueItems": 38,
-    "questionCandidates": 19,
-    "questionThemeHypotheses": 118,
-    "questionDesignSlots": 708,
+    "oceansConsidered": 21,
+    "queueItems": 42,
+    "questionCandidates": 21,
+    "questionThemeHypotheses": 134,
+    "questionDesignSlots": 804,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 261,
     "pdiThemeBacklog": 260,
     "pdiSourceDesignSlots": 1560,
     "pdiEditorialCoreTarget": 78000,
     "pdiCombinatorialTarget": 2800000,
-    "oracleCandidates": 19,
-    "oracleRoleSlots": 133
+    "oracleCandidates": 21,
+    "oracleRoleSlots": 147
   },
   "pdiGrowth": {
     "scale": {
@@ -14539,6 +14539,63 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_oracle_quando_o_que_funciona_na_relacao_se_torna_invisivel",
+      "type": "oracle_candidate",
+      "sourceOceanId": "quando-o-que-funciona-na-relacao-se-torna-invisivel",
+      "territory": "quando-o-que-funciona-na-relacao-se-torna-invisivel",
+      "intent": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+      "painLanguage": "Quando o olhar se habitua a procurar o que faltou, os gestos que continuam a sustentar uma relação podem desaparecer do inventário: nota-se o café que não veio, mas não o lanche que apareceu; a falha ganha nome e o cuidado repetido torna-se paisagem.",
+      "commercialAdjacency": "Oráculo Relações, Comunicação & Conflito, Família & Laços e Casa Partilhada; jogo/experiência digital low-ticket de reconhecimento de gestos invisíveis; ebook/guia sobre o que sustenta uma relação no quotidiano; cartões/prompts e presentes MAISON orientados a reconhecimento; bundles presente físico+experiência digital; conteúdos altamente partilháveis com CTA para nomear um gesto concreto, sem transformar gratidão em obrigação",
+      "evidenceCount": 4,
+      "evidence": [
+        "Personal Relationships (2023; PMID 37745832): em dois estudos diádicos, participantes tenderam a subestimar a gratidão do parceiro; perceções mais baixas de gratidão associaram-se a menor satisfação relacional — https://pubmed.ncbi.nlm.nih.gov/37745832/",
+        "Journal of Personality and Social Psychology (2012; PMID 22642482): estudos multimétodo ligaram sentir-se apreciado, apreciação pelo parceiro, responsividade e manutenção do vínculo ao longo do tempo — https://pubmed.ncbi.nlm.nih.gov/22642482/",
+        "Journal of Family Psychology (2022; PMID 35324251): dados de 886 casais encontraram satisfação associada a mais trocas positivas e menos negativas, com evidência de que trocas positivas podem amortecer o impacto das negativas — https://pubmed.ncbi.nlm.nih.gov/35324251/",
+        "Personality and Social Psychology Bulletin (2026; PMID 41342869): quatro estudos diádicos alertam que amplificar gratidão para além do que se sente pode ter custos por menor autenticidade/responsividade; reconhecimento deve ser genuíno — https://pubmed.ncbi.nlm.nih.gov/41342869/"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_oracle_rituais_sensoriais_com_plantas_como_marcadores_de_transicao",
+      "type": "oracle_candidate",
+      "sourceOceanId": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
+      "territory": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
+      "intent": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+      "painLanguage": "Às vezes a pessoa não procura uma grande transformação; procura um gesto pequeno, físico e repetível que marque a passagem entre estados — chegar a casa, fechar o dia, preparar-se para sair, recuperar presença — e aroma, toque e elementos vegetais podem tornar essa mudança perceptível.",
+      "commercialAdjacency": "Linha física MAISON de rituais botânicos/sensoriais: névoas, óleos, velas, escalda-pés, wax melts, saquetas/elementos aromáticos e futuros kits de gesto/ocasião; bundles físico+digital com instrução KISS; conteúdos sobre alecrim e outras plantas pela experiência sensorial, cultural e simbólica sem prometer limpeza áurica, cura ou milagres; potencial de presentes e recompra por ritual/ocasião",
+      "evidenceCount": 3,
+      "evidence": [
+        "Therapeutic Advances in Psychopharmacology (2012; PMID 23983963): exposição ao aroma de alecrim e níveis absorvidos de 1,8-cineole mostraram associações com desempenho cognitivo e estado subjetivo num pequeno estudo laboratorial, sem sustentar alegações de limpeza energética — https://pubmed.ncbi.nlm.nih.gov/23983963/",
+        "Nature Human Behaviour (second-order meta-analysis, 2026; PMID 42209746): síntese de intervenções baseadas na natureza encontrou efeitos favoráveis em vários resultados de bem-estar/afeto, embora com heterogeneidade e limitações metodológicas — https://pubmed.ncbi.nlm.nih.gov/42209746/",
+        "Memory (2018; PMID 28969504): experiência laboratorial encontrou odores como pistas eficazes para evocar memórias autobiográficas, apoiando o uso do aroma como marcador sensorial/associativo sem claims sobrenaturais — https://pubmed.ncbi.nlm.nih.gov/28969504/"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
       "id": "brain_oracle_sobrecarga_de_escolha_quando_mais_opcoes_paralisam",
       "type": "oracle_candidate",
       "sourceOceanId": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
@@ -18842,6 +18899,661 @@
         {
           "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_presentes_e_ocasioes_sem_competicao_de_preco_signature",
           "theme": "presentes e ocasiões sem competição de preço",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_quando_o_que_funciona_na_relacao_se_torna_invisivel",
+      "type": "question_candidate",
+      "sourceOceanId": "quando-o-que-funciona-na-relacao-se-torna-invisivel",
+      "territory": "quando-o-que-funciona-na-relacao-se-torna-invisivel",
+      "intent": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+      "painLanguage": "Quando o olhar se habitua a procurar o que faltou, os gestos que continuam a sustentar uma relação podem desaparecer do inventário: nota-se o café que não veio, mas não o lanche que apareceu; a falha ganha nome e o cuidado repetido torna-se paisagem.",
+      "commercialAdjacency": "Oráculo Relações, Comunicação & Conflito, Família & Laços e Casa Partilhada; jogo/experiência digital low-ticket de reconhecimento de gestos invisíveis; ebook/guia sobre o que sustenta uma relação no quotidiano; cartões/prompts e presentes MAISON orientados a reconhecimento; bundles presente físico+experiência digital; conteúdos altamente partilháveis com CTA para nomear um gesto concreto, sem transformar gratidão em obrigação",
+      "evidenceCount": 4,
+      "evidence": [
+        "Personal Relationships (2023; PMID 37745832): em dois estudos diádicos, participantes tenderam a subestimar a gratidão do parceiro; perceções mais baixas de gratidão associaram-se a menor satisfação relacional — https://pubmed.ncbi.nlm.nih.gov/37745832/",
+        "Journal of Personality and Social Psychology (2012; PMID 22642482): estudos multimétodo ligaram sentir-se apreciado, apreciação pelo parceiro, responsividade e manutenção do vínculo ao longo do tempo — https://pubmed.ncbi.nlm.nih.gov/22642482/",
+        "Journal of Family Psychology (2022; PMID 35324251): dados de 886 casais encontraram satisfação associada a mais trocas positivas e menos negativas, com evidência de que trocas positivas podem amortecer o impacto das negativas — https://pubmed.ncbi.nlm.nih.gov/35324251/",
+        "Personality and Social Psychology Bulletin (2026; PMID 41342869): quatro estudos diádicos alertam que amplificar gratidão para além do que se sente pode ter custos por menor autenticidade/responsividade; reconhecimento deve ser genuíno — https://pubmed.ncbi.nlm.nih.gov/41342869/"
+      ],
+      "questionThemeCandidates": [
+        "ver o que falta e deixar de ver o que funciona",
+        "gestos de cuidado que viraram paisagem",
+        "sentir que o que faço nunca conta",
+        "reconhecimento concreto sem gratidão forçada",
+        "apreciação e responsividade",
+        "não usar gratidão para apagar problemas",
+        "o inventário invisível do afeto",
+        "nomear o que sustentou o dia"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_open",
+          "theme": "ver o que falta e deixar de ver o que funciona",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_recognize",
+          "theme": "ver o que falta e deixar de ver o que funciona",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_deepen",
+          "theme": "ver o que falta e deixar de ver o que funciona",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_touch",
+          "theme": "ver o que falta e deixar de ver o que funciona",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_close",
+          "theme": "ver o que falta e deixar de ver o que funciona",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_ver_o_que_falta_e_deixar_de_ver_o_que_funciona_signature",
+          "theme": "ver o que falta e deixar de ver o que funciona",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_gestos_de_cuidado_que_viraram_paisagem_open",
+          "theme": "gestos de cuidado que viraram paisagem",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_gestos_de_cuidado_que_viraram_paisagem_recognize",
+          "theme": "gestos de cuidado que viraram paisagem",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_gestos_de_cuidado_que_viraram_paisagem_deepen",
+          "theme": "gestos de cuidado que viraram paisagem",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_gestos_de_cuidado_que_viraram_paisagem_touch",
+          "theme": "gestos de cuidado que viraram paisagem",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_gestos_de_cuidado_que_viraram_paisagem_close",
+          "theme": "gestos de cuidado que viraram paisagem",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_gestos_de_cuidado_que_viraram_paisagem_signature",
+          "theme": "gestos de cuidado que viraram paisagem",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_sentir_que_o_que_faco_nunca_conta_open",
+          "theme": "sentir que o que faço nunca conta",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_sentir_que_o_que_faco_nunca_conta_recognize",
+          "theme": "sentir que o que faço nunca conta",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_sentir_que_o_que_faco_nunca_conta_deepen",
+          "theme": "sentir que o que faço nunca conta",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_sentir_que_o_que_faco_nunca_conta_touch",
+          "theme": "sentir que o que faço nunca conta",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_sentir_que_o_que_faco_nunca_conta_close",
+          "theme": "sentir que o que faço nunca conta",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_sentir_que_o_que_faco_nunca_conta_signature",
+          "theme": "sentir que o que faço nunca conta",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_reconhecimento_concreto_sem_gratidao_forcada_open",
+          "theme": "reconhecimento concreto sem gratidão forçada",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_reconhecimento_concreto_sem_gratidao_forcada_recognize",
+          "theme": "reconhecimento concreto sem gratidão forçada",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_reconhecimento_concreto_sem_gratidao_forcada_deepen",
+          "theme": "reconhecimento concreto sem gratidão forçada",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_reconhecimento_concreto_sem_gratidao_forcada_touch",
+          "theme": "reconhecimento concreto sem gratidão forçada",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_reconhecimento_concreto_sem_gratidao_forcada_close",
+          "theme": "reconhecimento concreto sem gratidão forçada",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_reconhecimento_concreto_sem_gratidao_forcada_signature",
+          "theme": "reconhecimento concreto sem gratidão forçada",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_apreciacao_e_responsividade_open",
+          "theme": "apreciação e responsividade",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_apreciacao_e_responsividade_recognize",
+          "theme": "apreciação e responsividade",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_apreciacao_e_responsividade_deepen",
+          "theme": "apreciação e responsividade",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_apreciacao_e_responsividade_touch",
+          "theme": "apreciação e responsividade",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_apreciacao_e_responsividade_close",
+          "theme": "apreciação e responsividade",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_apreciacao_e_responsividade_signature",
+          "theme": "apreciação e responsividade",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nao_usar_gratidao_para_apagar_problemas_open",
+          "theme": "não usar gratidão para apagar problemas",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nao_usar_gratidao_para_apagar_problemas_recognize",
+          "theme": "não usar gratidão para apagar problemas",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nao_usar_gratidao_para_apagar_problemas_deepen",
+          "theme": "não usar gratidão para apagar problemas",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nao_usar_gratidao_para_apagar_problemas_touch",
+          "theme": "não usar gratidão para apagar problemas",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nao_usar_gratidao_para_apagar_problemas_close",
+          "theme": "não usar gratidão para apagar problemas",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nao_usar_gratidao_para_apagar_problemas_signature",
+          "theme": "não usar gratidão para apagar problemas",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_o_inventario_invisivel_do_afeto_open",
+          "theme": "o inventário invisível do afeto",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_o_inventario_invisivel_do_afeto_recognize",
+          "theme": "o inventário invisível do afeto",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_o_inventario_invisivel_do_afeto_deepen",
+          "theme": "o inventário invisível do afeto",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_o_inventario_invisivel_do_afeto_touch",
+          "theme": "o inventário invisível do afeto",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_o_inventario_invisivel_do_afeto_close",
+          "theme": "o inventário invisível do afeto",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_o_inventario_invisivel_do_afeto_signature",
+          "theme": "o inventário invisível do afeto",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nomear_o_que_sustentou_o_dia_open",
+          "theme": "nomear o que sustentou o dia",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nomear_o_que_sustentou_o_dia_recognize",
+          "theme": "nomear o que sustentou o dia",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nomear_o_que_sustentou_o_dia_deepen",
+          "theme": "nomear o que sustentou o dia",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nomear_o_que_sustentou_o_dia_touch",
+          "theme": "nomear o que sustentou o dia",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nomear_o_que_sustentou_o_dia_close",
+          "theme": "nomear o que sustentou o dia",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_quando_o_que_funciona_na_relacao_se_torna_invisivel_nomear_o_que_sustentou_o_dia_signature",
+          "theme": "nomear o que sustentou o dia",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_rituais_sensoriais_com_plantas_como_marcadores_de_transicao",
+      "type": "question_candidate",
+      "sourceOceanId": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
+      "territory": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
+      "intent": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+      "painLanguage": "Às vezes a pessoa não procura uma grande transformação; procura um gesto pequeno, físico e repetível que marque a passagem entre estados — chegar a casa, fechar o dia, preparar-se para sair, recuperar presença — e aroma, toque e elementos vegetais podem tornar essa mudança perceptível.",
+      "commercialAdjacency": "Linha física MAISON de rituais botânicos/sensoriais: névoas, óleos, velas, escalda-pés, wax melts, saquetas/elementos aromáticos e futuros kits de gesto/ocasião; bundles físico+digital com instrução KISS; conteúdos sobre alecrim e outras plantas pela experiência sensorial, cultural e simbólica sem prometer limpeza áurica, cura ou milagres; potencial de presentes e recompra por ritual/ocasião",
+      "evidenceCount": 3,
+      "evidence": [
+        "Therapeutic Advances in Psychopharmacology (2012; PMID 23983963): exposição ao aroma de alecrim e níveis absorvidos de 1,8-cineole mostraram associações com desempenho cognitivo e estado subjetivo num pequeno estudo laboratorial, sem sustentar alegações de limpeza energética — https://pubmed.ncbi.nlm.nih.gov/23983963/",
+        "Nature Human Behaviour (second-order meta-analysis, 2026; PMID 42209746): síntese de intervenções baseadas na natureza encontrou efeitos favoráveis em vários resultados de bem-estar/afeto, embora com heterogeneidade e limitações metodológicas — https://pubmed.ncbi.nlm.nih.gov/42209746/",
+        "Memory (2018; PMID 28969504): experiência laboratorial encontrou odores como pistas eficazes para evocar memórias autobiográficas, apoiando o uso do aroma como marcador sensorial/associativo sem claims sobrenaturais — https://pubmed.ncbi.nlm.nih.gov/28969504/"
+      ],
+      "questionThemeCandidates": [
+        "um gesto para mudar de estado",
+        "chegar a casa e marcar a transição",
+        "aroma como âncora de um momento",
+        "plantas como experiência sensorial e simbólica",
+        "ritual simples sem cerimónia excessiva",
+        "quando o corpo precisa de perceber que o dia mudou",
+        "criar um ritual que dá vontade de repetir",
+        "alecrim para além da superstição"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_um_gesto_para_mudar_de_estado_open",
+          "theme": "um gesto para mudar de estado",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_um_gesto_para_mudar_de_estado_recognize",
+          "theme": "um gesto para mudar de estado",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_um_gesto_para_mudar_de_estado_deepen",
+          "theme": "um gesto para mudar de estado",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_um_gesto_para_mudar_de_estado_touch",
+          "theme": "um gesto para mudar de estado",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_um_gesto_para_mudar_de_estado_close",
+          "theme": "um gesto para mudar de estado",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_um_gesto_para_mudar_de_estado_signature",
+          "theme": "um gesto para mudar de estado",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_chegar_a_casa_e_marcar_a_transicao_open",
+          "theme": "chegar a casa e marcar a transição",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_chegar_a_casa_e_marcar_a_transicao_recognize",
+          "theme": "chegar a casa e marcar a transição",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_chegar_a_casa_e_marcar_a_transicao_deepen",
+          "theme": "chegar a casa e marcar a transição",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_chegar_a_casa_e_marcar_a_transicao_touch",
+          "theme": "chegar a casa e marcar a transição",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_chegar_a_casa_e_marcar_a_transicao_close",
+          "theme": "chegar a casa e marcar a transição",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_chegar_a_casa_e_marcar_a_transicao_signature",
+          "theme": "chegar a casa e marcar a transição",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_aroma_como_ancora_de_um_momento_open",
+          "theme": "aroma como âncora de um momento",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_aroma_como_ancora_de_um_momento_recognize",
+          "theme": "aroma como âncora de um momento",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_aroma_como_ancora_de_um_momento_deepen",
+          "theme": "aroma como âncora de um momento",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_aroma_como_ancora_de_um_momento_touch",
+          "theme": "aroma como âncora de um momento",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_aroma_como_ancora_de_um_momento_close",
+          "theme": "aroma como âncora de um momento",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_aroma_como_ancora_de_um_momento_signature",
+          "theme": "aroma como âncora de um momento",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_plantas_como_experiencia_sensorial_e_simbolica_open",
+          "theme": "plantas como experiência sensorial e simbólica",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_plantas_como_experiencia_sensorial_e_simbolica_recognize",
+          "theme": "plantas como experiência sensorial e simbólica",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_plantas_como_experiencia_sensorial_e_simbolica_deepen",
+          "theme": "plantas como experiência sensorial e simbólica",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_plantas_como_experiencia_sensorial_e_simbolica_touch",
+          "theme": "plantas como experiência sensorial e simbólica",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_plantas_como_experiencia_sensorial_e_simbolica_close",
+          "theme": "plantas como experiência sensorial e simbólica",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_plantas_como_experiencia_sensorial_e_simbolica_signature",
+          "theme": "plantas como experiência sensorial e simbólica",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_ritual_simples_sem_cerimonia_excessiva_open",
+          "theme": "ritual simples sem cerimónia excessiva",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_ritual_simples_sem_cerimonia_excessiva_recognize",
+          "theme": "ritual simples sem cerimónia excessiva",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_ritual_simples_sem_cerimonia_excessiva_deepen",
+          "theme": "ritual simples sem cerimónia excessiva",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_ritual_simples_sem_cerimonia_excessiva_touch",
+          "theme": "ritual simples sem cerimónia excessiva",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_ritual_simples_sem_cerimonia_excessiva_close",
+          "theme": "ritual simples sem cerimónia excessiva",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_ritual_simples_sem_cerimonia_excessiva_signature",
+          "theme": "ritual simples sem cerimónia excessiva",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_open",
+          "theme": "quando o corpo precisa de perceber que o dia mudou",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_recognize",
+          "theme": "quando o corpo precisa de perceber que o dia mudou",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_deepen",
+          "theme": "quando o corpo precisa de perceber que o dia mudou",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_touch",
+          "theme": "quando o corpo precisa de perceber que o dia mudou",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_close",
+          "theme": "quando o corpo precisa de perceber que o dia mudou",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_quando_o_corpo_precisa_de_perceber_que_o_dia_mudou_signature",
+          "theme": "quando o corpo precisa de perceber que o dia mudou",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_criar_um_ritual_que_da_vontade_de_repetir_open",
+          "theme": "criar um ritual que dá vontade de repetir",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_criar_um_ritual_que_da_vontade_de_repetir_recognize",
+          "theme": "criar um ritual que dá vontade de repetir",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_criar_um_ritual_que_da_vontade_de_repetir_deepen",
+          "theme": "criar um ritual que dá vontade de repetir",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_criar_um_ritual_que_da_vontade_de_repetir_touch",
+          "theme": "criar um ritual que dá vontade de repetir",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_criar_um_ritual_que_da_vontade_de_repetir_close",
+          "theme": "criar um ritual que dá vontade de repetir",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_criar_um_ritual_que_da_vontade_de_repetir_signature",
+          "theme": "criar um ritual que dá vontade de repetir",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_alecrim_para_alem_da_supersticao_open",
+          "theme": "alecrim para além da superstição",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_alecrim_para_alem_da_supersticao_recognize",
+          "theme": "alecrim para além da superstição",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_alecrim_para_alem_da_supersticao_deepen",
+          "theme": "alecrim para além da superstição",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_alecrim_para_alem_da_supersticao_touch",
+          "theme": "alecrim para além da superstição",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_alecrim_para_alem_da_supersticao_close",
+          "theme": "alecrim para além da superstição",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_rituais_sensoriais_com_plantas_como_marcadores_de_transicao_alecrim_para_alem_da_supersticao_signature",
+          "theme": "alecrim para além da superstição",
           "stage": "signature",
           "status": "needs_editorial"
         }
