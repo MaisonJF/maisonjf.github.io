@@ -1,0 +1,206 @@
+# RIO CONTEÚDO · DISTRIBUIÇÃO
+
+Camada interna e derivada da MAISON JF® para transformar inteligência já validada em peças de conteúdo distribuíveis, sem criar um segundo Brain e sem publicar automaticamente.
+
+## Regra de propriedade
+
+O Brain continua a ser a origem da inteligência. Este rio recebe apenas referências canónicas e o mínimo de contexto humano necessário para produzir um brief.
+
+Um brief de conteúdo é **derivado e descartável**. Não é uma nova base de conhecimento, não substitui Oceans, A1/A13, A5, A7, A11, A12 ou A14 e não pode tornar-se fonte canónica de verdade.
+
+Fluxo:
+
+`Brain / oportunidade validada → brief de conteúdo → copy + revisão humana → distribuição manual → métricas agregadas → A1 event envelope → Brain / A11 learning`
+
+## O que este rio cobre
+
+- Reels / Shorts / TikTok;
+- Stories;
+- posts e carrosséis;
+- páginas editoriais;
+- hooks e ângulos;
+- intenção e CTA;
+- reutilização da mesma ideia em novas superfícies;
+- calendário de distribuição manual;
+- normalização de métricas;
+- feedback de desempenho ao Brain.
+
+## O que não cobre
+
+- descoberta de novos Oceans;
+- preços, checkout ou pagamentos;
+- SEO técnico;
+- arquitectura central do Brain;
+- envio automático para redes sociais;
+- publicação automática no site;
+- contacto/outreach automático;
+- criação de um CRM ou datastore de inteligência paralelo.
+
+## Voz pública
+
+A fonte canónica de voz é `functions/_lib/maison-content-ontology.js`.
+
+Princípio já existente no repositório:
+
+> João escreve. Brain pensa. MAISON fala.
+
+Este rio acrescenta estrutura, não uma voz concorrente.
+
+Em público:
+- português europeu natural;
+- uma ideia humana de cada vez;
+- situações concretas e reconhecíveis;
+- directo, elegante e inesperado quando isso ajuda;
+- sem linguagem de sistema, consultoria, manual de psicologia ou IA;
+- sem travessão longo ou médio como vício;
+- sem falsa intimidade, diagnóstico, urgência, escassez ou certeza.
+
+## Sistema de conteúdo
+
+Cada brief tem:
+
+1. **origem** — `source_refs` canónicos;
+2. **eixo** — Casa, Corpo, Cabeça ou transversal;
+3. **intenção** — reconhecer, tensionar, reenquadrar, ensinar, mover ou converter;
+4. **uma tensão humana** — curta, legível, sem copiar a base de inteligência;
+5. **formato primário**;
+6. **família de hooks** a escrever;
+7. **estrutura narrativa mínima**;
+8. **CTA**;
+9. **plano de reutilização**;
+10. **gate editorial humano**;
+11. **contrato de feedback**.
+
+O planeador nunca inventa automaticamente a “voz do João”. Ele cria o esqueleto editorial e os requisitos da peça.
+
+## Formatos
+
+### short_video
+
+Superfícies: Instagram Reels, YouTube Shorts, TikTok.
+
+Estrutura-base:
+- hook;
+- reconhecimento;
+- viragem;
+- movimento;
+- CTA.
+
+### story_sequence
+
+Superfície: Instagram Stories.
+
+Estrutura-base:
+- cena;
+- espelho;
+- tensão;
+- gesto;
+- CTA opcional.
+
+### carousel_post
+
+Superfície principal: Instagram feed.
+
+Estrutura-base:
+- capa;
+- reconhecimento;
+- desenvolvimento;
+- viragem;
+- movimento;
+- CTA.
+
+### editorial_page
+
+Superfície: site MAISON.
+
+Estrutura-base:
+- abertura;
+- reconhecimento;
+- aprofundamento;
+- reenquadramento;
+- gesto possível;
+- CTA contextual.
+
+## Hook families
+
+O sistema não escreve frases feitas. Pede ao autor uma destas operações:
+
+- **recognition** — abrir com uma situação que a pessoa reconhece imediatamente;
+- **pattern_break** — contrariar uma leitura comum sem fabricar choque;
+- **cost_of_ignoring** — mostrar o custo real de continuar a ignorar;
+- **specific_moment** — entrar por um momento concreto, não por uma teoria;
+- **desire** — começar pelo que a pessoa quer sentir/recuperar, não pela categoria do produto.
+
+## CTA
+
+O CTA segue a intenção da peça.
+
+Pode pedir:
+- guardar;
+- partilhar;
+- responder;
+- continuar a pensar;
+- visitar um destino MAISON já existente e aprovado.
+
+Um CTA comercial exige `approved_destination_ref`. O rio não cria ofertas, preços ou promessas.
+
+## Reutilização
+
+Reutilizar não significa copiar e colar.
+
+Cada ideia tem:
+- uma peça primária;
+- derivados com a mesma tese;
+- nova entrada, ritmo e densidade por superfície;
+- lineage por `source_content_id`.
+
+A aprendizagem pode assim distinguir “ideia” de “execução de formato”.
+
+## Calendário
+
+O planeador de calendário aceita apenas peças em `approved_for_manual_distribution` e com `human_review_ref`.
+
+O resultado é um plano. Não chama APIs de redes sociais, não agenda publicação e não faz POST externo.
+
+## Aprendizagem
+
+Métricas são agregadas e normalizadas sem criar um “score mágico”.
+
+Podem entrar:
+- impressões;
+- alcance;
+- visualizações/inícios;
+- conclusões;
+- tempo visto;
+- guardados;
+- partilhas;
+- comentários;
+- visitas de perfil;
+- cliques;
+- leads;
+- conversões.
+
+Taxas só são calculadas quando existe denominador observado. Zero desconhecido nunca é inventado.
+
+O feedback sai como `content.performance_observed` no envelope A1 v2, com:
+- privacidade `aggregated`;
+- IDs pseudónimos/derivados;
+- payload hash;
+- idempotência;
+- métricas e taxas observadas;
+- referências ao conteúdo e à revisão humana.
+
+Receita e valor económico continuam a pertencer a A3. Este rio não transforma engagement em dinheiro por estimativa.
+
+## Gates
+
+Nenhum brief, calendário ou feedback concede:
+- publicação automática;
+- autorização outbound;
+- spend;
+- alteração de preço;
+- alteração de checkout;
+- alteração de catálogo;
+- bypass de A12/A9.
+
+Conteúdo público continua sujeito às gates existentes da MAISON.
