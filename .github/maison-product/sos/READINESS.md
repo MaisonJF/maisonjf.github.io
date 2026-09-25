@@ -23,7 +23,7 @@ Estado do RIO PRODUTO DIGITAL no PR #151.
 | Projecção diária agregada | ✅ Pronto | Sem IDs, PII, texto ou horários exactos |
 | Compatibilidade com collector A2 | ✅ Testada | A2 aceita agregado e rejeita PII/IDs não allowlisted |
 | Ingestão A2 live | ⏳ Dependência externa | Espera activação do runtime A2 canónico |
-| UI/PWA principal | ⏳ Próximo | Deve usar Auth provisionado e manter uma acção nuclear |
+| UI/PWA principal | ✅ Shell fail-closed criado | `/sos/` implementa experiência nuclear e permanece inactivo até integração/activação Auth |
 | E2E com emails reais controlados | ⏳ Próximo | Só após D1 + Auth + Brevo |
 | Política pública de privacidade SOS | ⏳ Antes do piloto real | Necessária antes de recolher dados reais |
 | Piloto fechado | ⏳ Depois do E2E | Rever falhas e falsos avisos |
