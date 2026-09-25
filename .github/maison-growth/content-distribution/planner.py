@@ -329,6 +329,15 @@ def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]
     window_start = _text(observation.get("window_start"), "window_start", 80, True)
     window_end = _text(observation.get("window_end"), "window_end", 80, True)
     human_review_ref = _text(observation.get("human_review_ref"), "human_review_ref", 160, True)
+    campaign_id = _text(observation.get("campaign_id"), "campaign_id", 100, False)
+    thesis_id = _text(observation.get("thesis_id"), "thesis_id", 100, False)
+    comparison_id = _text(observation.get("comparison_id"), "comparison_id", 100, False)
+    comparison_dimension = _text(observation.get("comparison_dimension"), "comparison_dimension", 80, False)
+    variant_key = _text(observation.get("variant_key"), "variant_key", 100, False)
+    if comparison_dimension and comparison_dimension not in {"hook_family", "format", "cta_kind"}:
+        raise ContentContractError("unsupported_comparison_dimension")
+    if comparison_id and not comparison_dimension:
+        raise ContentContractError("comparison_dimension_required_with_comparison_id")
     source_refs = _refs(observation.get("source_refs"))
     metrics_input = observation.get("metrics")
     if not isinstance(metrics_input, Mapping):
@@ -362,6 +371,11 @@ def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]
     source_refs_hash = _sha(list(source_refs))
     idempotency_key = _sha({
         "content_id": content_id,
+        **({"campaign_id": campaign_id} if campaign_id else {}),
+        **({"thesis_id": thesis_id} if thesis_id else {}),
+        **({"comparison_id": comparison_id} if comparison_id else {}),
+        **({"comparison_dimension": comparison_dimension} if comparison_dimension else {}),
+        **({"variant_key": variant_key} if variant_key else {}),
         "platform": platform,
         "window_start": window_start,
         "window_end": window_end,
@@ -395,6 +409,11 @@ def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]
         "ingestion": ingestion,
         "learning_context": {
             "content_id": content_id,
+            "campaign_id": campaign_id or None,
+            "thesis_id": thesis_id or None,
+            "comparison_id": comparison_id or None,
+            "comparison_dimension": comparison_dimension or None,
+            "variant_key": variant_key or None,
             "source_refs": list(source_refs),
             "source_refs_hash": source_refs_hash,
             "observed_metrics": metrics,
