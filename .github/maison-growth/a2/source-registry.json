@@ -5,51 +5,133 @@
   "sources": {
     "site": {
       "status": "planned",
-      "privacy_class": ["anonymous", "pseudonymous"],
-      "allowed_event_prefixes": ["page.", "cta.", "navigation."],
+      "privacy_class": [
+        "anonymous",
+        "pseudonymous"
+      ],
+      "allowed_event_prefixes": [
+        "page.",
+        "cta.",
+        "navigation."
+      ],
       "metadata": {
-        "path": {"type": "public_path", "maxLength": 500},
-        "referrer_host": {"type": "hostname", "maxLength": 255},
-        "cta_id": {"type": "token", "maxLength": 120},
-        "campaign_id": {"type": "token", "maxLength": 120},
-        "surface": {"type": "token", "maxLength": 80}
+        "path": {
+          "type": "public_path",
+          "maxLength": 500
+        },
+        "referrer_host": {
+          "type": "hostname",
+          "maxLength": 255
+        },
+        "cta_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "campaign_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "surface": {
+          "type": "token",
+          "maxLength": 80
+        }
       }
     },
     "internal_search": {
       "status": "planned",
-      "privacy_class": ["anonymous", "pseudonymous", "aggregated"],
-      "allowed_event_prefixes": ["internal_search."],
+      "privacy_class": [
+        "anonymous",
+        "pseudonymous",
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "internal_search."
+      ],
       "metadata": {
-        "query_hash": {"type": "sha256"},
-        "query_classification": {"type": "token", "maxLength": 120},
-        "result_count": {"type": "integer", "minimum": 0},
-        "had_results": {"type": "boolean"},
-        "surface": {"type": "token", "maxLength": 80}
+        "query_hash": {
+          "type": "sha256"
+        },
+        "query_classification": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "result_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "had_results": {
+          "type": "boolean"
+        },
+        "surface": {
+          "type": "token",
+          "maxLength": 80
+        }
       },
-      "notes": ["Raw search text is not accepted by A2. A future privacy-aware adapter must transform it before ingestion."]
+      "notes": [
+        "Raw search text is not accepted by A2. A future privacy-aware adapter must transform it before ingestion."
+      ]
     },
     "test": {
       "status": "planned",
-      "privacy_class": ["anonymous", "pseudonymous", "aggregated"],
-      "allowed_event_prefixes": ["test."],
+      "privacy_class": [
+        "anonymous",
+        "pseudonymous",
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "test."
+      ],
       "metadata": {
-        "test_id": {"type": "token", "maxLength": 120},
-        "result_id": {"type": "token", "maxLength": 120},
-        "territory_id": {"type": "token", "maxLength": 120},
-        "surface": {"type": "token", "maxLength": 80}
+        "test_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "result_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "territory_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "surface": {
+          "type": "token",
+          "maxLength": 80
+        }
       }
     },
     "oracle": {
       "status": "planned",
-      "privacy_class": ["pseudonymous", "aggregated"],
-      "allowed_event_prefixes": ["oracle."],
+      "privacy_class": [
+        "pseudonymous",
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "oracle."
+      ],
       "metadata": {
-        "territory_id": {"type": "token", "maxLength": 120},
-        "class_id": {"type": "token", "maxLength": 120},
-        "entry_source": {"type": "token", "maxLength": 120},
-        "repeat_usage": {"type": "boolean"},
-        "conversion_stage": {"type": "token", "maxLength": 80},
-        "reading_id_hash": {"type": "sha256"}
+        "territory_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "class_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "entry_source": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "repeat_usage": {
+          "type": "boolean"
+        },
+        "conversion_stage": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "reading_id_hash": {
+          "type": "sha256"
+        }
       },
       "notes": [
         "Paid Oracle text is never accepted.",
@@ -58,55 +140,264 @@
     },
     "commerce": {
       "status": "planned",
-      "privacy_class": ["pseudonymous", "aggregated"],
-      "allowed_event_prefixes": ["commerce.", "product.", "service.", "b2b.", "company."],
+      "privacy_class": [
+        "pseudonymous",
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "commerce.",
+        "product.",
+        "service.",
+        "b2b.",
+        "company."
+      ],
       "metadata": {
-        "product_id": {"type": "token", "maxLength": 160},
-        "category_id": {"type": "token", "maxLength": 120},
-        "order_ref_hash": {"type": "sha256"},
-        "payment_status": {"type": "token", "maxLength": 80},
-        "channel": {"type": "token", "maxLength": 80}
+        "product_id": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "category_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "order_ref_hash": {
+          "type": "sha256"
+        },
+        "payment_status": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "channel": {
+          "type": "token",
+          "maxLength": 80
+        }
       },
-      "notes": ["Email, customer name, postal data, Stripe customer IDs and other commercial PII remain outside Growth analytics."]
+      "notes": [
+        "Email, customer name, postal data, Stripe customer IDs and other commercial PII remain outside Growth analytics."
+      ]
     },
     "gsc": {
       "status": "planned",
-      "privacy_class": ["aggregated"],
-      "allowed_event_prefixes": ["discovery."],
+      "privacy_class": [
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "discovery."
+      ],
       "metadata": {
-        "query_hash": {"type": "sha256"},
-        "page_path": {"type": "public_path", "maxLength": 500},
-        "impressions": {"type": "integer", "minimum": 0},
-        "clicks": {"type": "integer", "minimum": 0},
-        "position_bucket": {"type": "token", "maxLength": 40},
-        "country_code": {"type": "country_code"},
-        "device_class": {"type": "token", "maxLength": 40}
+        "query_hash": {
+          "type": "sha256"
+        },
+        "page_path": {
+          "type": "public_path",
+          "maxLength": 500
+        },
+        "impressions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "clicks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "position_bucket": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "country_code": {
+          "type": "country_code"
+        },
+        "device_class": {
+          "type": "token",
+          "maxLength": 40
+        }
       },
-      "notes": ["Raw search query text is not accepted by A2; future adapters may emit privacy-reviewed derived language signals."]
+      "notes": [
+        "Raw search query text is not accepted by A2; future adapters may emit privacy-reviewed derived language signals."
+      ]
     },
     "bing": {
       "status": "planned",
-      "privacy_class": ["aggregated"],
-      "allowed_event_prefixes": ["discovery."],
+      "privacy_class": [
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "discovery."
+      ],
       "metadata": {
-        "query_hash": {"type": "sha256"},
-        "page_path": {"type": "public_path", "maxLength": 500},
-        "impressions": {"type": "integer", "minimum": 0},
-        "clicks": {"type": "integer", "minimum": 0},
-        "position_bucket": {"type": "token", "maxLength": 40},
-        "country_code": {"type": "country_code"},
-        "device_class": {"type": "token", "maxLength": 40}
+        "query_hash": {
+          "type": "sha256"
+        },
+        "page_path": {
+          "type": "public_path",
+          "maxLength": 500
+        },
+        "impressions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "clicks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "position_bucket": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "country_code": {
+          "type": "country_code"
+        },
+        "device_class": {
+          "type": "token",
+          "maxLength": 40
+        }
       }
     },
     "system": {
       "status": "planned",
-      "privacy_class": ["system"],
-      "allowed_event_prefixes": ["collector.", "system."],
+      "privacy_class": [
+        "system"
+      ],
+      "allowed_event_prefixes": [
+        "collector.",
+        "system."
+      ],
       "metadata": {
-        "component": {"type": "token", "maxLength": 120},
-        "code": {"type": "token", "maxLength": 120},
-        "attempt": {"type": "integer", "minimum": 0}
+        "component": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "code": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 0
+        }
       }
+    },
+    "maison-content-distribution": {
+      "status": "planned",
+      "privacy_class": [
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "content."
+      ],
+      "metadata": {
+        "content_id": {
+          "type": "token",
+          "maxLength": 100
+        },
+        "platform": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "format": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "intent": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "window_start": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "window_end": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "human_review_ref": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "source_refs_hash": {
+          "type": "sha256"
+        },
+        "manual_distribution_confirmed": {
+          "type": "boolean"
+        },
+        "impressions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reach": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "video_starts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "views": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "watch_seconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "shares": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "saves": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "comments": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "profile_visits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "link_clicks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "leads": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "conversions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completion_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "save_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "share_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "click_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "conversion_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "notes": [
+        "Aggregated content-performance observations only; no captions, comments, usernames or direct PII.",
+        "Rates are integer basis points and are emitted only when their observed denominator exists and is greater than zero.",
+        "Engagement metrics do not imply economic value; A3 remains the owner of observed economics."
+      ]
     }
   }
 }
