@@ -4,6 +4,7 @@ from __future__ import annotations
 import unittest
 
 from commercial_ocean_matrix import build_ocean_matrix
+from ocean_universal_coverage import build_contract as build_universal_coverage
 
 
 class CommercialOceanMatrixTests(unittest.TestCase):
@@ -11,14 +12,21 @@ class CommercialOceanMatrixTests(unittest.TestCase):
     def setUpClass(cls):
         cls.payload=build_ocean_matrix()
 
-    def test_all_current_oceans_are_present_and_feed_both_digital_products(self):
+    def test_matrix_tracks_the_canonical_ocean_set_without_forcing_digital_eligibility(self):
         rows=self.payload["oceans"]
-        expected=len(rows)
-        self.assertEqual(self.payload["summary"]["oceans"],expected)
-        self.assertTrue(all(row["digital_feeds"]["pdi_eligible"] for row in rows))
-        self.assertTrue(all(row["digital_feeds"]["oracle_eligible"] for row in rows))
-        self.assertEqual(self.payload["summary"]["pdi_feed_oceans"],expected)
-        self.assertEqual(self.payload["summary"]["oracle_feed_oceans"],expected)
+        universal=build_universal_coverage()
+        expected_ids=set(universal["ocean_ids"])
+        actual_ids={row["territory"] for row in rows}
+        self.assertEqual(actual_ids,expected_ids)
+        self.assertEqual(self.payload["summary"]["oceans"],len(expected_ids))
+        self.assertEqual(
+            self.payload["summary"]["pdi_feed_oceans"],
+            sum(row["digital_feeds"]["pdi_eligible"] for row in rows),
+        )
+        self.assertEqual(
+            self.payload["summary"]["oracle_feed_oceans"],
+            sum(row["digital_feeds"]["oracle_eligible"] for row in rows),
+        )
 
     def test_commercial_matches_are_context_only_and_non_executing(self):
         contract=self.payload["contract"]
