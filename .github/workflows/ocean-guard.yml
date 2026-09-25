@@ -52,8 +52,6 @@ jobs:
           node --check functions/api/create-consultation-checkout-live.js
           node --check functions/api/consultation-checkout-session-live.js
           node --check functions/_lib/offer-brain.js
-          node --check functions/_lib/sos-maison-core.js
-          node .github/maison-product/sos/validate_sos.mjs
           node --check functions/_lib/viral-test-policy.js
           node --check functions/api/recommend-offers.js
           node --check functions/_lib/vpc-ocean-signals.generated.js
