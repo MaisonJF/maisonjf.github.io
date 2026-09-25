@@ -30,6 +30,11 @@ assert(JSON.stringify(contractNeeds)===JSON.stringify(graphNeeds),'professional_
 assert((graph.professionalLayer.offerFamilies||[]).length===(MAISON_B2B_BRAIN.offerFamilies||[]).length,'b2b_offer_family_projection_drift');
 assert(JSON.stringify(graph.professionalLayer.diagnosticOpportunityMap)===JSON.stringify(MAISON_B2B_BRAIN.diagnosticOpportunityMap),'b2b_diagnostic_map_projection_drift');
 assert(graph.professionalLayer.leadContract?.canonicalEvent==='b2b.lead','b2b_canonical_lead_contract_missing');
+assert(graph.professionalLayer.commercialReadiness?.status==='quote_framework_ready_values_require_observation','b2b_commercial_readiness_missing');
+assert(JSON.stringify(graph.professionalLayer.commercialReadiness?.unknownByDefault)===JSON.stringify(MAISON_B2B_BRAIN.commercialReadiness.unknownByDefault),'b2b_commercial_unknowns_projection_drift');
+for(const field of ['b2b_discount','minimum_order_quantity','wholesale_margin','production_capacity','delivery_lead_time']){
+  assert(MAISON_B2B_BRAIN.commercialReadiness.unknownByDefault.includes(field),'b2b_unknown_must_remain_explicit:'+field);
+}
 assert(graph.professionalLayer.leadContract?.runtimeStatus.includes('central_telemetry_or_commerce'),'b2b_lead_contract_must_not_claim_parallel_runtime');
 assert(MAISON_B2B_BRAIN.evidencePolicy?.noSyntheticDemand,'b2b_evidence_policy_missing');
 assert(MAISON_B2B_BRAIN.routes.some(x=>x.role==='lead'),'b2b_lead_route_missing');
@@ -76,8 +81,12 @@ assert(MAISON_B2B_BRAIN.recurrence?.rule,'b2b_recurrence_rule_missing');
 assert(!MAISON_B2B_BRAIN.recurrence.supportedNow.includes('subscription'),'b2b_subscription_cannot_be_invented');
 
 assert((graph.professionalLayer.researchCandidates||[]).length===(MAISON_B2B_BRAIN.researchCandidates||[]).length,'b2b_research_candidate_projection_drift');
+const knownSegmentIds=new Set(MAISON_B2B_BRAIN.segments.map(x=>x.id));
 for(const candidate of MAISON_B2B_BRAIN.researchCandidates||[]){
   assert(candidate.status!=='market_demand_proven','unsupported_market_demand_claim:'+candidate.id);
+  for(const segmentId of candidate.segments||[]){
+    assert(knownSegmentIds.has(segmentId),'research_candidate_unknown_segment:'+candidate.id+':'+segmentId);
+  }
   assert(candidate.claimLimit,'research_candidate_claim_limit_missing:'+candidate.id);
   assert(Array.isArray(candidate.evidence)&&candidate.evidence.length>=2,'research_candidate_cross_source_evidence_missing:'+candidate.id);
 }
