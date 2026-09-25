@@ -6,14 +6,20 @@
     "site": {
       "status": "planned",
       "privacy_class": ["anonymous", "pseudonymous"],
-      "allowed_event_prefixes": ["page.", "cta.", "navigation."],
+      "allowed_event_prefixes": ["page.", "cta.", "navigation.", "offer."],
       "metadata": {
         "path": {"type": "public_path", "maxLength": 500},
         "referrer_host": {"type": "hostname", "maxLength": 255},
         "cta_id": {"type": "token", "maxLength": 120},
         "campaign_id": {"type": "token", "maxLength": 120},
-        "surface": {"type": "token", "maxLength": 80}
-      }
+        "surface": {"type": "token", "maxLength": 80},
+        "offer_id": {"type": "token", "maxLength": 120},
+        "recommendation_source": {"type": "token", "maxLength": 120},
+        "recommendation_result": {"type": "token", "maxLength": 120},
+        "recommendation_route": {"type": "token", "maxLength": 120},
+        "recommendation_brain": {"type": "token", "maxLength": 120}
+      },
+      "notes": ["Offer exposure/click events contain only first-party recommendation identifiers; no answer text or direct PII."]
     },
     "internal_search": {
       "status": "planned",
