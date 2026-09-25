@@ -2,7 +2,7 @@
   "version": "2026-09-18",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-09-25T08:45:00+01:00",
+  "last_enriched_at": "2026-09-25T12:52:00+01:00",
   "candidates": [
     {
       "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
@@ -293,6 +293,32 @@
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T23:41:00+01:00",
       "lastSeenAt": "2026-09-23T23:41:00+01:00"
+    },
+    {
+      "painLanguage": "Nem todas as compras de desejo procuram resolver um problema grande. Às vezes a pessoa quer apenas marcar uma pequena vitória, tornar um dia comum mais bonito ou dar a si própria um prazer acessível que diga: isto também conta.",
+      "territory": "micro-luxo-como-recompensa-e-ritual",
+      "intent": "reconhecer pequenos luxos e mimos intencionais como momentos de recompensa, celebração, prazer e identidade no quotidiano, distinguindo uma indulgência escolhida de pressão para gastar, culpa ou consumo impulsivo sem controlo",
+      "commercialAdjacency": "Reutilizar primeiro Oráculo €2, jogo/experiência digital €5, velas, óleos, névoas, escalda-pés, wax melts, mikados e Ritual Volta Para Casa como pequenos luxos por ocasião: pequena vitória, fim de tarefa, terça-feira que merece beleza, presente para si e celebração sem grande marco. Depois testar bundles físico+digital, formatos de descoberta/coleccionáveis, recompra por ritual e gifting. Digital recebe peso especial pela baixa fricção e escala; sem urgência, escassez ou promessa emocional/terapêutica.",
+      "evidence": [
+        "Circana / NCSolutions (2025; survey of 1,036 US adults): 62% considered little treats important to self-care, 50% described them as a reward, 26% named candles/incense among top non-food small rewards, and ritual pairing was a reported behaviour — https://www.circana.com/post/little-treats-statistics-trends",
+        "SurveyMonkey Treatonomics (2026; 2,038 US adults): 62% reported small affordable treats at least monthly, 52% of treaters spent $25 or less per purchase, and 35% of Gen Z/Millennials used treats to stay motivated toward larger goals — https://www.surveymonkey.com/curiosity/treatonomics-consumer-spending/",
+        "Euromonitor, World Perfumery Congress 2026: micro-indulgence, miniaturisation, discovery formats and collectability were prominent in fragrance packaging, linking accessible indulgence with objects people want to keep and show — https://www.euromonitor.com/article/reflections-from-world-perfumery-congress-2026"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "uma pequena vitória também merece ser marcada",
+        "o mimo que transforma um dia comum",
+        "recompensa sem precisar de uma grande ocasião",
+        "pequeno luxo escolhido sem culpa",
+        "rituais de recompensa que apetece repetir",
+        "comprar para si como gesto de celebração",
+        "prazer acessível vs impulso automático",
+        "objectos pequenos que dão vontade de coleccionar"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-09-25T12:52:00+01:00",
+      "lastSeenAt": "2026-09-25T12:52:00+01:00"
     },
     {
       "painLanguage": "Há perdas em que nada termina de forma limpa: a pessoa, o vínculo ou o papel continua presente de alguma maneira, mas já não está disponível como antes, deixando quem fica preso entre esperança, ausência e falta de certeza.",
