@@ -170,6 +170,7 @@ A13 can measure discovery as evidence rather than treating SEO as a static check
 
 - **Google Search Console**: direct Search Analytics snapshots for pages, queries, countries and devices. These observations use `source=gsc`, `evidence_kind=coverage`, `source_class=search_platform` and are not interpreted as human demand by themselves.
   A separate `fresh_pages` profile uses `dataState=all` for the latest 3 Pacific-time days and preserves Google's incomplete-data metadata; provisional rows are never labelled as final.
+  Weekly `image_pages` and `discover_pages` profiles separately observe Google Images and Discover so their visibility is not folded into ordinary Web Search.
 - **Google URL Inspection**: rotates one critical canonical MAISON URL per day and records verdict, coverage state, robots state, indexing permission, fetch result, last crawl and Google-vs-user canonical. It uses the same read-only OAuth boundary and does not request indexing.
 - **Search Console Sitemaps**: reads sitemap submission/download state, pending state, warnings/errors and submitted URL counts. The deprecated `indexed` field is intentionally discarded rather than treated as a live coverage metric.
 - **Bing Webmaster Tools**: read-only OAuth snapshots for daily rank/traffic and weekly top-page/top-query data. Bing observations remain `coverage` evidence and use provider provenance rather than pretending to be Google evidence.
