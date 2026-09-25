@@ -1,23 +1,17 @@
+import { A2_COMMERCE_B2B_EVENTS } from './a2-commerce-contract.generated.js';
+
 // Central first-party commerce telemetry adapter.
 // Reuses A1 events/idempotency_registry and the canonical A3 B2B solution.
 // It intentionally stores no customer identity, free text or B2B CRM state.
 
 const TOKEN_RE=/^[A-Za-z0-9._:/@+\-]{1,200}$/;
 const EMAIL_RE=/(?:^|[^A-Z0-9._%+\-])[A-Z0-9._%+\-]+@[A-Z0-9.\-]+\.[A-Z]{2,}(?:$|[^A-Z0-9._%+\-])/i;
-const EVENT_METADATA={
-  'b2b.lead':['interest','origin','business','goal','gap','client','model','scale','start','result_type'],
-  'b2b.proposal':['b2b_stage','offer_family','origin','business','goal','result_type'],
-  'b2b.pilot':['b2b_stage','offer_family','origin','business','goal','result_type'],
-  'b2b.order':['b2b_stage','offer_family','origin','business','goal','result_type','recurrence_type'],
-  'b2b.purchase':['b2b_stage','offer_family','origin','business','goal','result_type','recurrence_type'],
-  'b2b.recurrence':['b2b_stage','offer_family','origin','business','goal','result_type','recurrence_type']
-};
-
 export async function recordB2bLifecycleEvent(db,input={}){
   if(!db||typeof db.prepare!=='function')return {status:'ignored',reason:'growth_db_unavailable'};
   const eventType=String(input.event_type||'').trim().toLowerCase();
-  const allowed=EVENT_METADATA[eventType];
-  if(!allowed)throw new Error('unsupported_b2b_event');
+  const eventSpec=A2_COMMERCE_B2B_EVENTS[eventType];
+  const allowed=eventSpec?.allowed_metadata;
+  if(!Array.isArray(allowed))throw new Error('unsupported_b2b_event');
 
   const idempotencyKey=String(input.idempotency_key||'').trim();
   if(idempotencyKey.length<8||idempotencyKey.length>200||EMAIL_RE.test(idempotencyKey))throw new Error('invalid_idempotency_key');
