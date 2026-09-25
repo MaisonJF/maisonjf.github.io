@@ -43,6 +43,19 @@ class BrainControlClientTests(unittest.TestCase):
         self.assertIn("/internal/brain/learning",captured["url"])
         self.assertIn("limit=15",captured["url"])
 
+    def test_content_performance_and_subject_routes(self):
+        seen=[]
+        def transport(url,**kwargs):
+            seen.append(url)
+            return {"rows":[]}
+        client=BrainControlClient("https://brain.example","secret",transport=transport)
+        client.content_performance(limit=7)
+        client.learning_subject(subject_id="can_"+"a"*36,limit=1)
+        self.assertIn("/internal/brain/content-performance",seen[0])
+        self.assertIn("limit=7",seen[0])
+        self.assertIn("/internal/brain/learning-subject",seen[1])
+        self.assertIn("subject_id=can_",seen[1])
+
     def test_b2b_feedback_route_is_read_only_client_call(self):
         captured={}
         def transport(url,**kwargs):
