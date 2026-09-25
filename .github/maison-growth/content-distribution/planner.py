@@ -243,7 +243,7 @@ def build_brief(
         "reuse_plan": derivatives,
         "voice": {
             "source": "functions/_lib/maison-content-ontology.js",
-            "principle": "Joao escreve. Brain pensa. MAISON fala.",
+            "principle": "João escreve. Brain pensa. MAISON fala.",
             "pt_pt": True,
             "internal_engine_language_public": False,
             "long_dash_public": False,
