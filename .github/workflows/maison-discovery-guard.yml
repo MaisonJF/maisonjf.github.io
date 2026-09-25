@@ -30,6 +30,7 @@ on:
       - '.github/maison-growth/brain/validate_public_structured_data.mjs'
       - '.github/maison-growth/brain/validate_llms_surface.mjs'
       - '.github/maison-growth/brain/validate_public_entities.mjs'
+      - '.github/maison-growth/brain/public-entity-evidence.json'
       - '.github/maison-growth/brain/validate_product_discovery.mjs'
       - '.github/maison-growth/brain/validate_runtime_metadata.mjs'
       - 'functions/_lib/public-structured-data.js'
@@ -249,6 +250,12 @@ jobs:
           assert search and search['schema_version']==visibility['schema_version']
           assert search['summary']==visibility['summary']
           assert search['provenance']==visibility['provenance']
+
+          identity=graph.get('publicIdentity')
+          assert identity and identity['schema_version']=='maison_public_entity_evidence_v1'
+          assert identity['organization_id']=='https://maison-jf.com/#organization'
+          assert len(identity['same_as'])==3
+          assert {item['platform'] for item in identity['same_as']}=={'YouTube','Instagram','TikTok'}
 
           import sys
           sys.path.insert(0,str(root))
