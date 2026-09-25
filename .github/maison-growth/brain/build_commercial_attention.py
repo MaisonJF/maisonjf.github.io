@@ -13,6 +13,7 @@ ROOT=Path(__file__).resolve().parent
 POLICY=ROOT/"commercial-attention-policy.json"
 ASSETS=ROOT/"commercial-assets.generated.json"
 EDITORIAL=ROOT/"editorial-queue.json"
+CANDIDATES=ROOT.parent/"oceans"/"candidates.json"
 
 
 def _norm(value: object) -> str:
@@ -39,7 +40,7 @@ def _overlap(left: object,right: object) -> float:
     return len(a & b)/len(a | b)
 
 
-def _territories(editorial: Mapping[str,Any]) -> dict[str,dict[str,Any]]:
+def _territories(editorial: Mapping[str,Any], candidates: object | None=None) -> dict[str,dict[str,Any]]:
     best={}
     for raw in editorial.get("items",[]):
         if not isinstance(raw,Mapping):
@@ -58,6 +59,29 @@ def _territories(editorial: Mapping[str,Any]) -> dict[str,dict[str,Any]]:
         previous=best.get(territory)
         if previous is None or len(row["question_themes"])>len(previous["question_themes"]):
             best[territory]=row
+    rows=candidates if isinstance(candidates,list) else candidates.get("candidates",[]) if isinstance(candidates,Mapping) else []
+    for raw in rows:
+        if not isinstance(raw,Mapping):
+            continue
+        territory=str(raw.get("id") or raw.get("slug") or raw.get("territory") or "").strip()
+        if not territory:
+            continue
+        canonical={
+            "territory":territory,
+            "pain_language":str(raw.get("painLanguage") or ""),
+            "intent":str(raw.get("intent") or ""),
+            "commercial_adjacency":str(raw.get("commercialAdjacency") or ""),
+            "question_themes":[str(x) for x in raw.get("questionThemeCandidates",[]) if str(x).strip()]
+                if isinstance(raw.get("questionThemeCandidates"),list) else [],
+        }
+        previous=best.get(territory,{})
+        best[territory]={
+            "territory":territory,
+            "pain_language":canonical["pain_language"] or previous.get("pain_language",""),
+            "intent":canonical["intent"] or previous.get("intent",""),
+            "commercial_adjacency":canonical["commercial_adjacency"] or previous.get("commercial_adjacency",""),
+            "question_themes":canonical["question_themes"] or previous.get("question_themes",[]),
+        }
     return best
 
 
@@ -100,6 +124,7 @@ def build_attention(
     policy: Mapping[str,Any],
     registry: Mapping[str,Any],
     editorial: Mapping[str,Any],
+    candidates: object | None=None,
 ) -> dict[str,Any]:
     if policy.get("schema_version")!="commercial_attention_policy_v1":
         raise ValueError("unsupported_commercial_attention_policy")
@@ -108,7 +133,7 @@ def build_attention(
     weights=policy["weights"]
     barriers=policy["price_barriers_minor"]
     aliases=policy.get("direct_aliases",{})
-    territories=_territories(editorial)
+    territories=_territories(editorial,candidates)
 
     rows=[]
     for asset in registry.get("assets",[]):
@@ -206,7 +231,8 @@ def build_attention(
     return {
         "schema_version":"commercial_attention_v1",
         "source_assets":"commercial-assets.generated.json",
-        "source_oceans":"editorial-queue.json",
+        "source_oceans":"../oceans/candidates.json",
+        "source_editorial_context":"editorial-queue.json",
         "policy":"commercial-attention-policy.json",
         "contract":{
             "internal_only":True,
@@ -233,6 +259,7 @@ def load_attention() -> dict[str,Any]:
         policy=json.loads(POLICY.read_text(encoding="utf-8")),
         registry=json.loads(ASSETS.read_text(encoding="utf-8")),
         editorial=json.loads(EDITORIAL.read_text(encoding="utf-8")),
+        candidates=json.loads(CANDIDATES.read_text(encoding="utf-8")),
     )
 
 
