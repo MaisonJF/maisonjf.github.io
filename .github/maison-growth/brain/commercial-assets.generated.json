@@ -2320,7 +2320,7 @@
       ],
       "content_system": {
         "source": "functions/_lib/pdi-theme-sources.js",
-        "source_theme_count": 261,
+        "source_theme_count": 292,
         "ocean_feed": "editorial_queue.question_candidate",
         "stages": [
           "open",
