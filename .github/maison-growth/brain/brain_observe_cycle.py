@@ -123,6 +123,34 @@ def _cash_context_by_territory(
     return out
 
 
+def _b2b_context_by_territory(
+    rows: Sequence[Mapping[str,Any]],
+    links: Sequence[Mapping[str,Any]],
+) -> dict[str,tuple[str,...]]:
+    """Expose observed B2B A3 outcomes only where A4 already links that solution.
+
+    This never invents territory fit from B2B metadata. The exact funnel stage
+    remains in the authenticated Brain feedback row; the context reference is
+    only the canonical A3 conversion identifier.
+    """
+    solution_territories:dict[str,set[str]]={}
+    for row in links:
+        territory=str(row.get("territory_key") or "").strip()
+        solution_id=str(row.get("solution_id") or "").strip()
+        if territory and solution_id:
+            solution_territories.setdefault(solution_id,set()).add(territory)
+
+    out:dict[str,tuple[str,...]]={}
+    for row in rows:
+        conversion_id=str(row.get("conversion_id") or "").strip()
+        solution_id=str(row.get("solution_id") or "").strip()
+        if not conversion_id or not solution_id:
+            continue
+        for territory in solution_territories.get(solution_id,set()):
+            _append_context(out,territory,(f"a3:{conversion_id}",))
+    return out
+
+
 def _solutions_by_territory(links: Sequence[Mapping[str,Any]]) -> dict[str,tuple[str,...]]:
     out:dict[str,set[str]]={}
     for row in links:
@@ -219,6 +247,7 @@ def build_observe_output() -> dict[str,Any]:
     solutions=_rows(client.solutions(limit=100))
     links=_rows(client.solution_links(limit=100))
     cash=_rows(client.cash_feedback(limit=100))
+    b2b=_rows(client.b2b_feedback(limit=100))
     learning=_rows(client.learning(limit=100))
     policy=_explicit_policy()
 
@@ -257,6 +286,8 @@ def build_observe_output() -> dict[str,Any]:
 
     for territory,refs in _cash_context_by_territory(cash,links).items():
         _append_context(knowledge_context,territory,refs)
+    for territory,refs in _b2b_context_by_territory(b2b,links).items():
+        _append_context(knowledge_context,territory,refs)
     for territory,refs in _learning_context_by_territory(feed,learning).items():
         _append_context(knowledge_context,territory,refs)
 
@@ -292,6 +323,7 @@ def build_observe_output() -> dict[str,Any]:
         "solution_rows":len(solutions),
         "solution_links":len(links),
         "cash_feedback_rows":len(cash),
+        "b2b_feedback_rows":len(b2b),
         "learning_rows":len(learning),
         "runtime_memory_status":dict(runtime_memory.status),
         "commercial_asset_status":asset_context.summary(),
