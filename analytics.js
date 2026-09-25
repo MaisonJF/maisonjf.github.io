@@ -135,7 +135,9 @@
   }
 
   function getAttribution() {
-    if (localStorage.getItem(CONSENT_KEY) !== 'granted') return {};
+    // Offer attribution is first-party session state needed to connect a Brain
+    // recommendation to a later checkout. Acquisition attribution remains
+    // consent-gated because it is analytics/marketing measurement.
     return { ...offerAttribution(), ...acquisitionAttribution() };
   }
 
