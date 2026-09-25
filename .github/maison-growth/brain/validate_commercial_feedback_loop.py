@@ -26,9 +26,19 @@ checks={
     "A3 recognizes confirmed purchase": (
         ".github/maison-growth/a3/journey_engine.py", ['"commerce.purchase_confirmed": "purchase"']
     ),
+    "B2B public lead intake uses central commerce writer": (
+        "functions/api/b2b-lead.js", ["recordB2BEvent","b2b.lead","GROWTH_DB"]
+    ),
+    "B2B commerce writer uses canonical solution": (
+        "functions/_lib/commerce-events.js", ["recordB2BEvent","B2B_SOLUTION_ID","b2b.recurrence","pseudonymous"]
+    ),
     "B2B lifecycle reuses central A3": (
         ".github/maison-growth/a3/journey_engine.py",
-        ['"b2b.lead": "lead"','"b2b.proposal": "proposal"','"b2b.pilot": "pilot"','"b2b.purchase": "purchase"','"b2b.recurrence": "recurrence"']
+        ['"b2b.lead": "lead"','"b2b.proposal": "lead"','"b2b.pilot": "booking"','"b2b.purchase": "purchase"','"b2b.recurrence": "order"']
+    ),
+    "B2B solution contract declares lifecycle": (
+        ".github/maison-growth/a3/solution-contract.json",
+        ['"b2b.lead"','"b2b.proposal"','"b2b.pilot"','"b2b.purchase"','"b2b.recurrence"']
     ),
     "A11 learns contextual offer funnel": (
         ".github/maison-growth/a11/engine.py", ["evaluate_offer_funnel","offer_context_key","confidence_before"]
