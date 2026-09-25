@@ -25,10 +25,16 @@ assert(JSON.stringify(contractNeeds)===JSON.stringify(graphNeeds),'professional_
 
 assert(MAISON_B2B_BRAIN.evidencePolicy?.noSyntheticDemand,'b2b_evidence_policy_missing');
 assert(MAISON_B2B_BRAIN.routes.some(x=>x.role==='lead'),'b2b_lead_route_missing');
+assert((graph.professionalLayer.researchCandidates||[]).length===(MAISON_B2B_BRAIN.researchCandidates||[]).length,'b2b_research_candidate_projection_drift');
+for(const candidate of MAISON_B2B_BRAIN.researchCandidates||[]){
+  assert(candidate.status!=='market_demand_proven','unsupported_market_demand_claim:'+candidate.id);
+  assert(candidate.claimLimit,'research_candidate_claim_limit_missing:'+candidate.id);
+  assert(Array.isArray(candidate.evidence)&&candidate.evidence.length>=2,'research_candidate_cross_source_evidence_missing:'+candidate.id);
+}
 
 for(const segment of MAISON_B2B_BRAIN.segments){
   assert(segment.status==='public_validated','unexpected_professional_segment_status:'+segment.id);
   assert(Array.isArray(segment.routes)&&segment.routes.length>0,'professional_segment_route_missing:'+segment.id);
 }
 
-console.log('B2B knowledge contract: OK — '+contractSegments.length+' segments, '+contractNeeds.length+' needs, one shared MAISON graph.');
+console.log('B2B knowledge contract: OK — '+contractSegments.length+' segments, '+contractNeeds.length+' needs, '+(MAISON_B2B_BRAIN.researchCandidates||[]).length+' evidence-bounded research candidates, one shared MAISON graph.');
