@@ -169,6 +169,7 @@ When a provider reports cost metadata, A13 records it in `external_intelligence_
 A13 can measure discovery as evidence rather than treating SEO as a static checklist.
 
 - **Google Search Console**: direct Search Analytics snapshots for pages, queries, countries and devices. These observations use `source=gsc`, `evidence_kind=coverage`, `source_class=search_platform` and are not interpreted as human demand by themselves.
+- **Google URL Inspection**: rotates one critical canonical MAISON URL per day and records verdict, coverage state, robots state, indexing permission, fetch result, last crawl and Google-vs-user canonical. It uses the same read-only OAuth boundary and does not request indexing.
 - **Bing Webmaster Tools**: read-only OAuth snapshots for daily rank/traffic and weekly top-page/top-query data. Bing observations remain `coverage` evidence and use provider provenance rather than pretending to be Google evidence.
 - **GEO/AI probes**: controlled user-like questions sent to configured model providers. Brand probes may measure ungrounded model representation; generic-discovery probes are restricted to web-grounded OpenAI, Gemini or Perplexity adapters.
 - **Absence counts**: a model not mentioning MAISON JF is a valid visibility observation. Prompts explicitly forbid forcing the brand into the answer.
