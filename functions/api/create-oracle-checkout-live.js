@@ -35,6 +35,7 @@ export async function onRequestPost({ request, env }) {
     params.set('metadata[source]', 'oracle-live');
     params.set('metadata[oracle_theme]', theme);
     params.set('metadata[oracle_access]', 'single-reading');
+    appendAttribution(params,body?.attribution);
     params.set('submit_type', 'pay');
     params.set('custom_text[submit][message]', 'Ao pagar, confirmas uma abertura do Oráculo MAISON JF® e aceitas as condições em maison-jf.com/informacao-legal.html.');
 
@@ -49,6 +50,17 @@ export async function onRequestPost({ request, env }) {
     return json({ url: session.url });
   } catch {
     return json({ error: 'Não foi possível preparar o checkout.' }, 500);
+  }
+}
+function appendAttribution(params,raw){
+  const a=raw&&typeof raw==='object'?raw:{};
+  const fields={
+    recommendation_source:'rec_source',recommendation_offer:'rec_offer',recommendation_result:'rec_result',recommendation_route:'rec_route',recommendation_brain:'rec_brain',
+    acquisition_referrer:'acq_referrer',acquisition_landing:'acq_landing',acquisition_utm_source:'utm_source',acquisition_utm_medium:'utm_medium',acquisition_utm_campaign:'utm_campaign'
+  };
+  for(const [input,key] of Object.entries(fields)){
+    const value=String(a[input]||'').trim().slice(0,450);
+    if(value)params.set('metadata['+key+']',value);
   }
 }
 function json(payload,status=200){return new Response(JSON.stringify(payload),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'}})}
