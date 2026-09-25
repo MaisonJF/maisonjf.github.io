@@ -405,6 +405,18 @@
             "result_type",
             "recurrence_type"
           ]
+        },
+        "commerce.purchase": {
+          "required_metadata": [
+            "product_id"
+          ],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "order_ref_hash",
+            "payment_status",
+            "channel"
+          ]
         }
       }
     },
