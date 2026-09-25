@@ -45,6 +45,7 @@ jobs:
           node --check functions/_lib/sos-auth.js
           node --check functions/_lib/sos-crypto.js
           node --check functions/_lib/sos-runtime.js
+          node --check functions/_lib/sos-time.js
           node --check functions/_lib/sos-supabase-auth.js
           node --check functions/_lib/sos-brevo.js
           node --check functions/_lib/sos-delivery.js
@@ -61,6 +62,7 @@ jobs:
           node --check workers/sos-runtime/src/index.js
           node .github/maison-product/sos/validate_sos.mjs
           node .github/maison-product/sos/validate_sos_runtime.mjs
+          node .github/maison-product/sos/validate_sos_time.mjs
           node .github/maison-product/sos/validate_sos_adapters.mjs
           node .github/maison-product/sos/validate_sos_api.mjs
           node .github/maison-product/sos/validate_sos_scheduler.mjs
