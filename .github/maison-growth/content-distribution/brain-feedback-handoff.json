@@ -34,13 +34,20 @@
     "content_id": "derived content execution identifier",
     "source_refs_hash": "SHA-256 of ordered canonical Brain/source references",
     "human_review_ref": "reference to the approval that permitted manual distribution",
-    "raw_source_refs_replicated_in_A1_metadata": false
+    "raw_source_refs_replicated_in_A1_metadata": false,
+    "campaign_id": "derived Content OS campaign identifier; optional",
+    "thesis_id": "derived thesis identifier tied to hashed canonical source lineage; optional",
+    "comparison_id": "one-variable observational comparison identifier; optional",
+    "comparison_dimension": "hook_family, format or cta_kind; optional",
+    "variant_key": "variant lineage within a comparison; optional"
   },
   "downstream_mapping_required": {
     "current_state": "not_owned_by_this_river",
     "reason": "A11 currently supports decision, experiment, journey, conversion and promotion source kinds; changing that is central learning architecture.",
     "expected_behavior": "Central Brain may map A1 content.performance_observed into bounded, append-only learning using its own governed contract.",
-    "automatic_confidence_mutation_required": false
+    "automatic_confidence_mutation_required": false,
+    "content_comparisons_are_causal": false,
+    "automatic_winner_selection": false
   },
   "prohibited_here": [
     "new_learning_database",
