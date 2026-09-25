@@ -185,6 +185,41 @@ export const MAISON_B2B_BRAIN={
       claimLimit:'Não é franquia activa, certificação oficial ou direito de sublicença.'
     }
   ],
+  commercialReadiness:{
+    status:'quote_framework_ready_values_require_observation',
+    requiredBeforeQuote:[
+      'offer_family',
+      'target_profile',
+      'scope_or_quantity',
+      'capacity_basis',
+      'cost_basis',
+      'price_or_quote_rule',
+      'fulfilment_lead_time',
+      'evidence_refs'
+    ],
+    optionalWhenRelevant:[
+      'personalisation_scope',
+      'packaging_scope',
+      'delivery_or_collection',
+      'season_or_event_date',
+      'reorder_expectation',
+      'decision_maker_context'
+    ],
+    unknownByDefault:[
+      'b2b_discount',
+      'minimum_order_quantity',
+      'minimum_order_value',
+      'wholesale_margin',
+      'client_margin',
+      'production_capacity',
+      'delivery_lead_time',
+      'personalisation_fee'
+    ],
+    quoteRule:'Nenhum valor desconhecido é preenchido por estimativa silenciosa. A proposta só fixa preço, quantidade mínima, prazo, desconto ou margem depois de custo e capacidade observados.',
+    marginRule:'Não usar preço B2C menos uma percentagem arbitrária como preço B2B. Calcular primeiro custo real, esforço, embalagem, personalização, perdas, impostos aplicáveis e margem MAISON.',
+    pilotRule:'Quando MOQ, capacidade ou margem ainda são desconhecidos, preferir um piloto pequeno com âmbito e preço explicitamente aprovados a criar uma tabela grossista fictícia.',
+    productRefs:['MJ-VELA-170','MJ-VELA-070','MJ-OLEO-060','MJ-NEVOA-020','MJ-ESCALDA-150']
+  },
   recurrence:{
     supportedNow:['reorder','repeat_project','occasion','seasonal_project'],
     pilotOnly:['repeat_workshop'],
@@ -278,7 +313,7 @@ export const MAISON_B2B_BRAIN={
     {
       id:'workplace_wellbeing_training',
       status:'problem_evidenced_buyer_demand_unverified',
-      segments:['servico','organizacoes'],
+      segments:['servico','organizacao'],
       hypothesis:'Investigar workshops não-clínicos para equipas sobre pausa, comunicação, relações de trabalho e experiência humana, sem apresentar a MAISON como prestador de saúde mental.',
       evidence:[
         {
@@ -353,6 +388,13 @@ export function maisonB2bKnowledgeContext(){
       ...x,
       segments:[...(x.segments||[])],routes:[...(x.routes||[])],recurrence:[...(x.recurrence||[])]
     })),
+    commercialReadiness:{
+      ...MAISON_B2B_BRAIN.commercialReadiness,
+      requiredBeforeQuote:[...(MAISON_B2B_BRAIN.commercialReadiness?.requiredBeforeQuote||[])],
+      optionalWhenRelevant:[...(MAISON_B2B_BRAIN.commercialReadiness?.optionalWhenRelevant||[])],
+      unknownByDefault:[...(MAISON_B2B_BRAIN.commercialReadiness?.unknownByDefault||[])],
+      productRefs:[...(MAISON_B2B_BRAIN.commercialReadiness?.productRefs||[])]
+    },
     recurrence:{
       ...MAISON_B2B_BRAIN.recurrence,
       supportedNow:[...(MAISON_B2B_BRAIN.recurrence?.supportedNow||[])],
