@@ -162,6 +162,21 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   },
   {
+    "id": "micro-luxo-como-recompensa-e-ritual",
+    "painLanguage": "Nem todas as compras de desejo procuram resolver um problema grande. Às vezes a pessoa quer apenas marcar uma pequena vitória, tornar um dia comum mais bonito ou dar a si própria um prazer acessível que diga: isto também conta.",
+    "intent": "reconhecer pequenos luxos e mimos intencionais como momentos de recompensa, celebração, prazer e identidade no quotidiano, distinguindo uma indulgência escolhida de pressão para gastar, culpa ou consumo impulsivo sem controlo",
+    "themes": [
+      "uma pequena vitória também merece ser marcada",
+      "o mimo que transforma um dia comum",
+      "recompensa sem precisar de uma grande ocasião",
+      "pequeno luxo escolhido sem culpa",
+      "rituais de recompensa que apetece repetir",
+      "comprar para si como gesto de celebração",
+      "prazer acessível vs impulso automático",
+      "objectos pequenos que dão vontade de coleccionar"
+    ]
+  },
+  {
     "id": "perda-ambigua-sem-fecho-claro",
     "painLanguage": "Há perdas em que nada termina de forma limpa: a pessoa, o vínculo ou o papel continua presente de alguma maneira, mas já não está disponível como antes, deixando quem fica preso entre esperança, ausência e falta de certeza.",
     "intent": "reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
