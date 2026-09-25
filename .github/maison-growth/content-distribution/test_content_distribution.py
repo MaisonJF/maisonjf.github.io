@@ -94,6 +94,11 @@ class ContentDistributionTests(unittest.TestCase):
     def observation(self):
         return {
             "content_id": "cnt_abc",
+            "campaign_id": "cmp_abc",
+            "thesis_id": "ths_abc",
+            "comparison_id": "cpr_abc",
+            "comparison_dimension": "hook_family",
+            "variant_key": "var_abc",
             "platform": "instagram_reels",
             "format": "short_video",
             "intent": "recognition",
@@ -125,6 +130,9 @@ class ContentDistributionTests(unittest.TestCase):
         self.assertEqual(raw["event_type"], "content.performance_observed")
         self.assertEqual(raw["privacy_class"], "aggregated")
         self.assertEqual(raw["metadata"]["completion_rate_bps"], 4000)
+        self.assertEqual(raw["metadata"]["campaign_id"], "cmp_abc")
+        self.assertEqual(raw["metadata"]["comparison_dimension"], "hook_family")
+        self.assertEqual(raw["metadata"]["variant_key"], "var_abc")
         self.assertNotIn("combined_score", raw["metadata"])
         self.assertNotIn("winner", raw["metadata"])
 
@@ -152,6 +160,18 @@ class ContentDistributionTests(unittest.TestCase):
         observation = self.observation()
         observation["metrics"] = {"reach": 10.5}
         with self.assertRaises(ContentContractError):
+            build_performance_feedback(observation)
+
+    def test_feedback_rejects_unknown_comparison_dimension(self):
+        observation = self.observation()
+        observation["comparison_dimension"] = "caption_colour"
+        with self.assertRaisesRegex(ContentContractError, "unsupported_comparison_dimension"):
+            build_performance_feedback(observation)
+
+    def test_feedback_requires_dimension_when_comparison_id_exists(self):
+        observation = self.observation()
+        observation.pop("comparison_dimension")
+        with self.assertRaisesRegex(ContentContractError, "comparison_dimension_required"):
             build_performance_feedback(observation)
 
 
