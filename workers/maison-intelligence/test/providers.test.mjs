@@ -71,3 +71,28 @@ test('free OpenRouter route is admitted when enabled and keyed', () => {
     OPENROUTER_MODEL: 'openrouter/free'
   }), ['openrouter']);
 });
+
+
+test('free fallback model chain is accepted', () => {
+  assert.deepEqual(configuredProviders({
+    OPENROUTER_ENABLED: 'true',
+    OPENROUTER_API_KEY: 'x',
+    OPENROUTER_MODEL: 'google/gemma-4-26b-a4b-it:free',
+    OPENROUTER_FALLBACK_MODELS_JSON: JSON.stringify([
+      'qwen/qwen3.8-27b:free',
+      'nvidia/nemotron-3-super-120b-a12b:free',
+      'z-ai/glm-5.2:free'
+    ])
+  }), ['openrouter']);
+});
+
+test('paid model anywhere in OpenRouter fallback chain is refused', () => {
+  assert.deepEqual(configuredProviders({
+    OPENROUTER_ENABLED: 'true',
+    OPENROUTER_API_KEY: 'x',
+    OPENROUTER_MODEL: 'google/gemma-4-26b-a4b-it:free',
+    OPENROUTER_FALLBACK_MODELS_JSON: JSON.stringify([
+      'openai/gpt-5'
+    ])
+  }), []);
+});
