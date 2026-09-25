@@ -6,6 +6,11 @@ CREATE TABLE sos_accounts (
   account_ref TEXT PRIMARY KEY
     CHECK (length(account_ref)=40 AND substr(account_ref,1,4)='sua_'),
   timezone TEXT NOT NULL CHECK (length(timezone) BETWEEN 1 AND 80),
+  checkin_local_time TEXT NOT NULL DEFAULT '20:00' CHECK (
+    length(checkin_local_time)=5 AND substr(checkin_local_time,3,1)=':' AND
+    checkin_local_time GLOB '[0-2][0-9]:[0-5][0-9]' AND
+    CAST(substr(checkin_local_time,1,2) AS INTEGER) BETWEEN 0 AND 23
+  ),
   cadence_hours INTEGER NOT NULL DEFAULT 24 CHECK (cadence_hours=24),
   grace_minutes INTEGER NOT NULL DEFAULT 60 CHECK (grace_minutes BETWEEN 15 AND 240),
   status TEXT NOT NULL DEFAULT 'setup'
