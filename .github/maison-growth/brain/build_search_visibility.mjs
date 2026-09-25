@@ -97,6 +97,16 @@ export function buildSearchVisibility(){
         rotation:'one_canonical_url_per_day',
         targets:[...DEFAULT_INSPECTION_URLS]
       },
+      google_sitemaps:{
+        provider_id:'google_search_console',
+        source_class:'search_platform',
+        mode:'read_only',
+        implemented:true,
+        credential_gated:true,
+        cadence:'daily',
+        fields:['path','last_submitted','last_downloaded','is_pending','is_sitemaps_index','type','warnings','errors','contents.submitted'],
+        deprecated_indexed_ignored:true
+      },
       bing_webmaster:{
         provider_id:'bing_webmaster',
         source_class:'search_platform',
@@ -131,6 +141,10 @@ export function buildSearchVisibility(){
       search_appearance_features:searchAppearance.length,
       product_snippet_impressions:sum(searchAppearance.filter(row=>row.feature==='PRODUCT_SNIPPETS'),'impressions'),
       inspection_targets:DEFAULT_INSPECTION_URLS.length,
+      google_readonly_sensor_tasks:7,
+      baseline_sitemap_submitted:Number(snapshot.sitemap?.submitted||0),
+      baseline_public_pages:publicDiscovery.summary.page_count,
+      baseline_sitemap_page_delta:Number(snapshot.sitemap?.submitted||0)-publicDiscovery.summary.page_count,
       ai_visibility_probes:VISIBILITY_PROBES.length
     },
     priority_recovery:legacy
