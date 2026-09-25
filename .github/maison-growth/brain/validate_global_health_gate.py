@@ -18,6 +18,13 @@ def run(*cmd:str)->None:
         fail("failed: "+" ".join(cmd))
 
 policy=json.loads((BRAIN/"derived-artifacts-policy.json").read_text(encoding="utf-8"))
+experience=policy.get("experience_contract",{})
+if experience.get("canonical_product_catalogue")!="data/products.js":
+    fail("canonical product catalogue drift")
+if experience.get("canonical_service_catalogue")!="data/services.js":
+    fail("canonical service catalogue drift")
+if experience.get("public_site_signal_contract")!=".github/maison-growth/a2/source-registry.json#sources.site":
+    fail("canonical public-site signal contract drift")
 if policy.get("integration_policy",{}).get("single_builder_required") is not True:
     fail("single Knowledge Graph builder policy missing")
 if policy.get("integration_policy",{}).get("parallel_graphs_forbidden") is not True:
@@ -35,6 +42,10 @@ for source in ("site","commerce","maison-content-distribution","sos_product","sy
         fail("A2 canonical source missing: "+source)
 if "offer." not in sources["site"].get("allowed_event_prefixes",[]):
     fail("A2 site offer events missing")
+site_events=sources["site"].get("events",{})
+for event_type in ("page.view","cta.click","navigation.click","offer.exposure","offer.click"):
+    if event_type not in site_events:
+        fail("A2 canonical site event missing: "+event_type)
 if "content." not in sources["maison-content-distribution"].get("allowed_event_prefixes",[]):
     fail("A2 content performance events missing")
 if "sos." not in sources["sos_product"].get("allowed_event_prefixes",[]):
