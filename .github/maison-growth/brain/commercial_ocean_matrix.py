@@ -7,6 +7,7 @@ from typing import Any, Mapping
 
 from build_commercial_attention import load_attention
 from digital_experience_coverage import load_coverage
+from ocean_universal_coverage import build_contract as build_universal_coverage
 
 
 def _contextual_by_territory(row: Mapping[str,Any]) -> dict[str,float]:
@@ -30,7 +31,11 @@ def build_ocean_matrix() -> dict[str,Any]:
         for row in digital.get("oceans",[])
         if isinstance(row,Mapping) and row.get("territory")
     }
-    territories=sorted(digital_by_territory)
+    universal=build_universal_coverage()
+    territories=sorted(str(x) for x in universal.get("ocean_ids",[]) if str(x).strip())
+    if not territories:
+        # Backward-safe fallback for an older contract shape during local development.
+        territories=sorted(digital_by_territory)
 
     asset_rows=[
         row for row in attention.get("assets",[])
@@ -80,7 +85,7 @@ def build_ocean_matrix() -> dict[str,Any]:
             x["price_band"]=="low" and isinstance(x["price_minor"],int)
             for x in relations
         )
-        d=digital_by_territory[territory]
+        d=digital_by_territory.get(territory,{})
         gaps=[]
         if "physical_product" not in types:
             gaps.append("no_physical_match")
