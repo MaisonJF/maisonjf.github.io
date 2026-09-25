@@ -15,7 +15,9 @@ const TERRITORIES={
 
 function norm(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
 function uniq(xs){return [...new Set(xs.filter(Boolean))]}
-function oceanText(o){return norm([o.id,o.slug,o.territory,o.domain,o.intent,o.painLanguage,...(o.themes||[])].join(' '))}
+function oceanId(o){return o.id||o.slug||o.territory||null}
+function oceanThemes(o){return Array.isArray(o.themes)?o.themes:(Array.isArray(o.questionThemeCandidates)?o.questionThemeCandidates:[])}
+function oceanText(o){return norm([oceanId(o),o.domain,o.intent,o.painLanguage,...oceanThemes(o)].join(' '))}
 function inferredTerritories(o){
   const explicit=uniq([o.territory,o.domain].flat().map(norm).map(x=>x==='companhia'?'presenca':x).filter(x=>TERRITORIES[x]));
   if(explicit.length)return explicit;
@@ -31,7 +33,7 @@ const oceanList=Array.isArray(oceans)?oceans:(oceans.candidates||[]);
 const territories=Object.entries(TERRITORIES).map(([id,base])=>({
   id,...base,
   relatedOffers:offers.filter(o=>(o.territories||[]).includes(id)&&o.status!=='hidden').map(o=>o.id),
-  relatedOceans:oceanList.filter(o=>inferredTerritories(o).includes(id)).map(o=>o.id||o.slug).filter(Boolean)
+  relatedOceans:oceanList.filter(o=>inferredTerritories(o).includes(id)).map(o=>oceanId(o)).filter(Boolean)
 }));
 const graph={
   schema_version:'maison_knowledge_graph_v1',
@@ -51,9 +53,9 @@ const graph={
     territories:o.territories||[],axes:o.axes||[],routes:o.routes||[]
   })),
   oceans:oceanList.map(o=>({
-    id:o.id||o.slug,
+    id:oceanId(o),
     intent:o.intent||null,
-    themes:o.themes||[],
+    themes:oceanThemes(o),
     territories:inferredTerritories(o),
     visibility:'internal'
   }))
