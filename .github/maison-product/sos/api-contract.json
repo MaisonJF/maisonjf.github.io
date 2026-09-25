@@ -7,7 +7,13 @@
       "method": "POST",
       "path": "/api/sos/setup",
       "auth": "supabase",
-      "purpose": "configure daily check-in and send trusted-contact invitation server-side"
+      "purpose": "configure daily check-in and send trusted-contact invitation server-side",
+      "required_fields": [
+        "timezone",
+        "checkinLocalTime",
+        "trustedContactEmail"
+      ],
+      "schedule_rule": "next local calendar day at checkinLocalTime"
     },
     {
       "method": "GET",
