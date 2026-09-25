@@ -1150,7 +1150,7 @@ export function buildTerritoryReadings(t){
       'Em '+t.focus+', isso pode acontecer porque tens medo de '+t.hidden+'. A certeza total parece a única forma de avançar.',
       t.anchor,
       'Reduz o horizonte. '+t.move,
-      'Qual é a próxima decisão real — não a decisão de toda a tua vida?'
+      'Qual é a próxima decisão real. não a decisão de toda a tua vida?'
     ]),
     make(t,7,'A tua parte termina em algum lugar',[
       'Nem tudo nesta história depende de ti. Isso pode ser frustrante, sobretudo quando fazer mais parece oferecer algum controlo.',
@@ -1223,7 +1223,7 @@ export function buildTerritoryReadings(t){
       t.question
     ]),
     make(t,17,'Não te abandones para aliviar o desconforto',[
-      'Existe uma solução rápida para muitas tensões: seres tu a ceder primeiro. Funciona — durante algum tempo.',
+      'Existe uma solução rápida para muitas tensões: seres tu a ceder primeiro. Funciona. durante algum tempo.',
       'Em '+t.focus+', observa se estás a escolher paz imediata à custa de uma necessidade tua.',
       t.anchor,
       'O desconforto de manter uma fronteira pode ser menor do que o custo de desaparecê-la repetidamente. '+t.move,
@@ -1268,7 +1268,7 @@ export function buildTerritoryReadings(t){
       'Às vezes procuramos mais sinais quando, na verdade, já sabemos qual é a pergunta que gostaríamos que alguém respondesse por nós.',
       'Em '+t.focus+', '+t.signal+'. Repara se estás a recolher informação nova ou apenas a procurar confirmação para uma conclusão desejada.',
       t.anchor,
-      'Nomeia a confirmação que procuras. Depois pergunta se ela pode vir de factos, de uma conversa, de tempo — ou se é uma garantia que ninguém consegue dar.',
+      'Nomeia a confirmação que procuras. Depois pergunta se ela pode vir de factos, de uma conversa, de tempo. ou se é uma garantia que ninguém consegue dar.',
       t.question
     ]),
     make(t,24,'Há uma resposta que não depende de ninguém',[
