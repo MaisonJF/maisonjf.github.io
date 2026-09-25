@@ -19,6 +19,14 @@ assert.deepEqual(
 for(const forbidden of ['email','phone','name','account','contact','location','message','reason','free_text']){
   assert.equal(Object.hasOwn(event.metadata,forbidden),false);
 }
+const paused=buildSosA2AggregateEvent({
+  date:'2026-09-25',
+  signalKind:'paused',
+  count:3
+});
+assert.equal(paused.metadata.signal_kind,'paused');
+assert.equal(paused.metadata.count,3);
+
 assert.throws(()=>buildSosA2AggregateEvent({
   date:'25-09-2026',signalKind:'checkin_completed',count:1
 }),/invalid_sos_aggregate_day/);
