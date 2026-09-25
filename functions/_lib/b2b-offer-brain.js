@@ -324,7 +324,7 @@ export const MAISON_B2B_BRAIN={
         },
         {
           source:'DGERT · Tipologias de formação profissional',
-          url:'https://www.dgert.gov.pt/tipologias',
+          url:'https://www.dgert.gov.pt/tipologias-de-formacao-profissional',
           observation:'A formação contínua inclui competências profissionais e relacionais; o Código do Trabalho prevê um mínimo anual de 40 horas por trabalhador.'
         }
       ],
