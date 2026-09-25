@@ -26,6 +26,7 @@ MIGRATIONS=(
     GROWTH/"a14/migrations/0016_approved_validation_planning.sql",
     GROWTH/"a3/migrations/0017_b2b_canonical_solution.sql",
     GROWTH/"brain/migrations/0018_b2b_feedback.sql",
+    GROWTH/"a11/migrations/0019_content_learning_source.sql",
 )
 
 
@@ -41,6 +42,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
         self.assertEqual(state["maison_growth_a14_schema_version"],"A14.3")
         self.assertEqual(state["maison_brain_runtime_schema_version"],"BRAIN.1")
         self.assertEqual(state["maison_growth_a12_schema_version"],"A12.2")
+        self.assertEqual(state["maison_growth_a11_schema_version"],"A11.2")
 
         views={
             row[0] for row in con.execute(
