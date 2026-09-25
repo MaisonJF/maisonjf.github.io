@@ -161,6 +161,42 @@ async function cashFeedback(env, url) {
   });
 }
 
+async function b2bFeedback(env, url) {
+  const limit=parseLimit(url);
+  const after=parseAfter(url);
+  const afterId=parseAfterId(url,'cnv_');
+  const fields=`
+    conversion_id,source_event_id,event_type,conversion_kind,journey_id,solution_id,
+    occurred_at,revenue_minor,currency,privacy_class,lifecycle_stage,interest,origin,
+    business,goal,gap,client,model,scale,start,result_type,b2b_stage,offer_family,
+    recurrence_type
+  `;
+  let statement;
+  if (after) {
+    statement=env.GROWTH_DB.prepare(`
+      SELECT ${fields}
+      FROM brain_b2b_feedback
+      WHERE occurred_at > ? OR (occurred_at = ? AND conversion_id > ?)
+      ORDER BY occurred_at,conversion_id
+      LIMIT ?
+    `).bind(after,after,afterId,limit);
+  } else {
+    statement=env.GROWTH_DB.prepare(`
+      SELECT ${fields}
+      FROM brain_b2b_feedback
+      ORDER BY occurred_at,conversion_id
+      LIMIT ?
+    `).bind(limit);
+  }
+  const rows=await all(statement);
+  const last=rows.at(-1);
+  return json({
+    kind:'brain_b2b_feedback',
+    rows,
+    next_cursor:last ? { after:last.occurred_at, after_id:last.conversion_id } : null
+  });
+}
+
 async function learningContext(env, url) {
   const limit=parseLimit(url);
   const after=parseAfter(url);
@@ -522,6 +558,7 @@ export async function handleBrainControlRequest(request, env) {
   try {
     if (url.pathname === '/internal/brain/feed') return await feed(env,url);
     if (url.pathname === '/internal/brain/cash-feedback') return await cashFeedback(env,url);
+    if (url.pathname === '/internal/brain/b2b-feedback') return await b2bFeedback(env,url);
     if (url.pathname === '/internal/brain/learning') return await learningContext(env,url);
     if (url.pathname === '/internal/brain/review-queue') return await reviewQueue(env,url);
     if (url.pathname === '/internal/brain/approved-validations') return await approvedValidations(env,url);
