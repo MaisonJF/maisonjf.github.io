@@ -48,6 +48,14 @@ for event_type in ("page.view","cta.click","navigation.click","offer.exposure","
         fail("A2 canonical site event missing: "+event_type)
 if "content." not in sources["maison-content-distribution"].get("allowed_event_prefixes",[]):
     fail("A2 content performance events missing")
+commerce_events=sources["commerce"].get("events",{})
+for event_type in ("b2b.lead","b2b.proposal","b2b.pilot","b2b.purchase","b2b.recurrence"):
+    if event_type not in commerce_events:
+        fail("A2 canonical B2B event missing: "+event_type)
+b2b_allowed=set(commerce_events["b2b.lead"].get("allowed_metadata",[]))
+expected_b2b={"interest","origin","business","goal","gap","client","model","scale","start","result_type"}
+if b2b_allowed!=expected_b2b:
+    fail("A2 b2b.lead non-PII contract drift")
 if "sos." not in sources["sos_product"].get("allowed_event_prefixes",[]):
     fail("A2 SOS aggregate events missing")
 
