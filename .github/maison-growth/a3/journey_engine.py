@@ -9,26 +9,16 @@ import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping, Optional
+from pathlib import Path
 
 
 ALGORITHM_VERSION = "journey-attribution-v1"
 ECONOMICS_CALCULATION_VERSION = "economics-v1"
 
-CONVERSION_EVENT_TYPES = {
-    "oracle.purchase": "purchase",
-    "product.purchase": "purchase",
-    "commerce.purchase": "purchase",
-    "commerce.order": "order",
-    "service.booking": "booking",
-    "service.contact": "lead",
-    "b2b.order": "order",
-    "b2b.lead": "lead",
-    "b2b.proposal": "lead",
-    "b2b.pilot": "booking",
-    "b2b.purchase": "purchase",
-    "b2b.recurrence": "order",
-    "company.contact": "lead",
-}
+_CONVERSION_CONTRACT=json.loads(
+    (Path(__file__).resolve().parent/"conversion-event-types.json").read_text(encoding="utf-8")
+)
+CONVERSION_EVENT_TYPES=dict(_CONVERSION_CONTRACT["event_types"])
 
 SOLUTION_TYPES = {
     "oracle",
@@ -281,7 +271,8 @@ def _event_sort_key(event: Mapping[str, Any]) -> tuple[datetime, str]:
 
 
 def _conversion_id(event: Mapping[str, Any]) -> str:
-    return _new_id("cnv_")
+    # Conversion identity is the immutable source A1 event, not rebuild time.
+    return "cnv_"+_sha256({"source_event_id":event["event_id"]})[:36]
 
 
 def _attribute_touches(prior_events: list[Mapping[str, Any]]) -> tuple[Touch, ...]:
