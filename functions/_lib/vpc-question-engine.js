@@ -2,7 +2,7 @@ import {ORACLE_TERRITORIES} from './oracle-territories.js';
 import {buildPdiThemeSourceSignals} from './pdi-theme-sources.js';
 import {VPC_OCEAN_SIGNALS,VPC_OCEAN_SIGNAL_VERSION} from './vpc-ocean-signals.generated.js';
 
-export const VPC_QUESTION_ENGINE_VERSION='2026-09-25-brain-pool-v2';
+export const VPC_QUESTION_ENGINE_VERSION='2026-09-25-human-language-v3';
 
 const AXES=['seen','attachment','self','control','belong','load','direction','security'];
 const SECONDARY={
@@ -148,32 +148,32 @@ const AFETO_STEMS=[
 ];
 const AFETO_CHOICES=[
   [
-    ['palavras','Ouvir palavras específicas que mostrem que a pessoa percebeu mesmo o que estou a viver.'],
+    ['palavras','Ouvir palavras ou elogios que mostrem que a pessoa percebeu mesmo o que estou a viver.'],
     ['tempo','Ter tempo inteiro, sem pressa nem metade da atenção noutro sítio.'],
     ['gestos','Ver um cuidado concreto acontecer sem eu ter de o explicar três vezes.'],
     ['toque','Receber proximidade física segura e espontânea.'],
-    ['simbolos','Ter um detalhe escolhido porque aquela pessoa se lembrou de mim.']
+    ['presentes','Receber uma lembrança ou um pequeno presente escolhido porque aquela pessoa se lembrou de mim.']
   ],
   [
     ['palavras','Uma mensagem ou frase que eu queira guardar.'],
     ['tempo','A pessoa parar e ficar realmente comigo.'],
     ['gestos','Alguém aliviar-me uma coisa prática.'],
     ['toque','Um abraço, mão ou proximidade que me faça baixar a guarda.'],
-    ['simbolos','Um pequeno objecto, memória ou sinal com significado só nosso.']
+    ['presentes','Receber uma lembrança ou um pequeno presente com significado só nosso.']
   ],
   [
     ['palavras','Dizer claramente o que sente e o lugar que eu tenho.'],
     ['tempo','Escolher estar comigo quando podia simplesmente seguir o dia.'],
     ['gestos','Mostrar no comportamento que ouviu o que eu precisava.'],
     ['toque','Procurar contacto sem o transformar numa obrigação.'],
-    ['simbolos','Marcar aquele momento com alguma coisa que fique.']
+    ['presentes','Receber uma lembrança ou um presente que marque aquele momento.']
   ],
   [
     ['palavras','Reconhecer em voz alta aquilo que normalmente fica implícito.'],
     ['tempo','Dar-me presença sem tentar despachar a emoção.'],
     ['gestos','Fazer uma coisa pequena que melhore mesmo o meu dia.'],
     ['toque','Estar fisicamente perto no ritmo que me faz bem.'],
-    ['simbolos','Escolher um detalhe impossível de confundir com um presente genérico.']
+    ['presentes','Receber um presente ou uma lembrança escolhida mesmo a pensar em mim.']
   ]
 ];
 
@@ -217,7 +217,7 @@ export function normalizeVaultVpcRow(row){
     return {test,q,a,source};
   }
 
-  const allowed=test==='apego'?new Set(['secure','anxious','avoidant','fearful']):new Set(['palavras','tempo','gestos','toque','simbolos']);
+  const allowed=test==='apego'?new Set(['secure','anxious','avoidant','fearful']):new Set(['palavras','tempo','gestos','toque','presentes']);
   const a=vpc.choices.map(x=>[String(x?.key||''),cleanText(x?.text,180)]).filter(([key,text])=>allowed.has(key)&&text);
   const expected=test==='apego'?4:5;
   if(a.length!==expected||new Set(a.map(x=>x[0])).size!==expected)return null;
