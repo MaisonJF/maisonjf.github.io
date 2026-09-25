@@ -59,6 +59,13 @@ if b2b_allowed!=expected_b2b:
 if "sos." not in sources["sos_product"].get("allowed_event_prefixes",[]):
     fail("A2 SOS aggregate events missing")
 
+for rel in ("brain/brain_mcp_server.py","brain/brain_observe_cycle.py"):
+    consumer=(ROOT/".github/maison-growth"/rel).read_text(encoding="utf-8")
+    if "oceans" not in consumer or "candidates.json" not in consumer:
+        fail("Brain consumer must read canonical Oceans candidates: "+rel)
+    if 'OceanEditorialContext.from_file(ROOT/"editorial-queue.json")' in consumer:
+        fail("Brain consumer still treats editorial queue as Ocean truth: "+rel)
+
 a11=(ROOT/".github/maison-growth/a11/engine.py").read_text(encoding="utf-8")
 if '"content"' not in a11:
     fail("A11 content handoff missing")
