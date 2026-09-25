@@ -78,7 +78,7 @@ const GOOGLE_PROFILES=Object.freeze([
   {key:'appearance',dimensions:['searchAppearance'],cadenceHours:168,rowLimit:20}
 ]);
 
-const DEFAULT_INSPECTION_URLS=Object.freeze([
+export const DEFAULT_INSPECTION_URLS=Object.freeze([
   'https://maison-jf.com/',
   'https://maison-jf.com/servicos/tarot/',
   'https://maison-jf.com/produtos/oleo-massagem/',
