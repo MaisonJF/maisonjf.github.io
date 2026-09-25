@@ -97,6 +97,47 @@ class GrowthSchemaChainTests(unittest.TestCase):
         self.assertEqual(result.conversions[0].kind,"purchase")
         self.assertEqual(result.conversions[0].source_event_id,event["event_id"])
 
+    def test_b2b_lifecycle_is_owned_by_central_a3(self):
+        import sys
+        a3_dir=GROWTH/"a3"
+        sys.path.insert(0,str(a3_dir))
+        try:
+            from journey_engine import build_journeys
+        finally:
+            sys.path.pop(0)
+
+        kinds={
+            "b2b.lead":"lead",
+            "b2b.proposal":"proposal",
+            "b2b.pilot":"pilot",
+            "b2b.purchase":"purchase",
+            "b2b.recurrence":"recurrence",
+        }
+        for index,(event_type,expected_kind) in enumerate(kinds.items(),start=1):
+            event={
+                "event_id":"evt_"+str(index)*36,
+                "idempotency_key":"b2b:fixture:"+str(index),
+                "event_type":event_type,
+                "source":"commerce",
+                "schema_version":2,
+                "occurred_at":"2026-09-25T12:00:00Z",
+                "received_at":"2026-09-25T12:00:01Z",
+                "journey_id":None,
+                "asset_id":None,
+                "need_id":None,
+                "solution_id":"sol_"+"9"*36,
+                "value_minor":3500 if event_type in {"b2b.purchase","b2b.recurrence"} else None,
+                "currency":"EUR" if event_type in {"b2b.purchase","b2b.recurrence"} else None,
+                "privacy_class":"pseudonymous",
+                "payload_hash":"a"*64,
+                "metadata_json":"{}",
+                "rule_version_id":None,
+                "model_version_id":None,
+            }
+            result=build_journeys([event])
+            self.assertEqual(len(result.conversions),1,event_type)
+            self.assertEqual(result.conversions[0].kind,expected_kind,event_type)
+
     def test_cash_feedback_accepts_unlinked_a3_economics(self):
         con=sqlite3.connect(":memory:")
         con.execute("PRAGMA foreign_keys=ON")
