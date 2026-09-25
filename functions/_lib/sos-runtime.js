@@ -229,6 +229,10 @@ export async function acceptTrustedContactInvite({env,token,at=new Date().toISOS
   if(row.revoked_at||row.contact_revoked)throw new Error('sos_invite_revoked');
   if(Date.parse(row.expires_at)<Date.parse(when))throw new Error('sos_invite_expired');
   if(row.accepted_at)return {accepted:true,idempotent:true,inviteRef:row.invite_ref};
+  const reminder=await db.prepare(`SELECT channel_ref FROM sos_user_channels
+    WHERE account_ref=?1 AND verified_at IS NOT NULL AND revoked_at IS NULL LIMIT 1`)
+    .bind(row.account_ref).first();
+  if(!reminder)throw new Error('sos_user_reminder_not_verified');
 
   const dueAt=plus(when,Number(row.cadence_hours||24)*HOUR);
   const graceUntil=plus(dueAt,Number(row.grace_minutes||60)*MINUTE);
@@ -242,6 +246,30 @@ export async function acceptTrustedContactInvite({env,token,at=new Date().toISOS
       VALUES(?1,?2,?3,?4,'open',?5)`).bind(dueRef,row.account_ref,dueAt,graceUntil,when)
   ]);
   return {accepted:true,idempotent:false,inviteRef:row.invite_ref,nextDueAt:dueAt};
+}
+
+export async function declineTrustedContactInvite({env,token,at=new Date().toISOString()}={}){
+  const db=requireSosDb(env);
+  const when=nowIso(at);
+  const tokenHash=await sha256Hex(String(token||''));
+  const row=await db.prepare(`
+    SELECT i.invite_ref,i.accepted_at,i.revoked_at,c.contact_ref,c.account_ref,c.revoked_at AS contact_revoked
+    FROM sos_contact_invites i
+    JOIN sos_trusted_contacts c ON c.contact_ref=i.contact_ref
+    WHERE i.token_hash=?1 LIMIT 1
+  `).bind(tokenHash).first();
+  if(!row)throw new Error('sos_invite_not_found');
+  if(row.accepted_at)throw new Error('sos_invite_already_accepted');
+  if(row.revoked_at||row.contact_revoked)return {declined:true,idempotent:true};
+  await db.batch([
+    db.prepare('UPDATE sos_contact_invites SET revoked_at=?1 WHERE invite_ref=?2 AND revoked_at IS NULL')
+      .bind(when,row.invite_ref),
+    db.prepare('UPDATE sos_trusted_contacts SET revoked_at=?1,updated_at=?1 WHERE contact_ref=?2 AND revoked_at IS NULL')
+      .bind(when,row.contact_ref),
+    db.prepare(`UPDATE sos_accounts SET status='setup',activated_at=NULL,paused_at=NULL,next_due_at=NULL,updated_at=?1
+      WHERE account_ref=?2 AND status<>'deleted'`).bind(when,row.account_ref)
+  ]);
+  return {declined:true,idempotent:false};
 }
 
 export async function checkInSos({
@@ -303,6 +331,8 @@ export async function enqueueDueSosActions({env,at=new Date().toISOString(),limi
     JOIN sos_accounts a ON a.account_ref=d.account_ref
     JOIN sos_trusted_contacts c ON c.account_ref=d.account_ref
       AND c.verified_at IS NOT NULL AND c.revoked_at IS NULL
+    JOIN sos_user_channels u ON u.account_ref=d.account_ref
+      AND u.verified_at IS NOT NULL AND u.revoked_at IS NULL
     LEFT JOIN sos_outbox r ON r.due_ref=d.due_ref AND r.action_kind='user_reminder'
     LEFT JOIN sos_outbox n ON n.due_ref=d.due_ref AND n.action_kind='trusted_notice'
     WHERE d.state='open' AND a.status='active' AND d.due_at<=?1
