@@ -169,14 +169,18 @@ function wrapText(ctx,text,maxWidth){const words=text.split(/\s+/),lines=[];let 
 async function makeShareCard(){
  if(document.fonts&&document.fonts.ready)try{await document.fonts.ready}catch(e){}
  const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;const ctx=canvas.getContext('2d');
- const g=ctx.createRadialGradient(540,0,40,540,520,1300);g.addColorStop(0,'#261d17');g.addColorStop(.42,'#11100f');g.addColorStop(1,'#070707');ctx.fillStyle=g;ctx.fillRect(0,0,1080,1920);
- ctx.fillStyle='#c3a66d';ctx.fillRect(90,132,74,3);ctx.fillStyle='#f3efe7';ctx.font='700 26px Arial';ctx.fillText('MAISON JF®',90,205);
- const label=$('resultLabel').textContent.replace('O que está a pedir mais atenção · ','').toUpperCase();
- ctx.fillStyle='#9f978c';ctx.font='600 24px Arial';ctx.fillText('VOLTA PARA CASA · PORTA ATENÇÃO',90,390);
- ctx.fillStyle='#f3efe7';ctx.font='400 92px Georgia';let y=525;wrapText(ctx,label,900).forEach(line=>{ctx.fillText(line,90,y);y+=100});
- ctx.fillStyle='#d8d0c2';ctx.font='italic 400 58px Georgia';y+=85;wrapText(ctx,$('shareLine').textContent.replace(/[“”]/g,''),890).forEach(line=>{ctx.fillText(line,90,y);y+=75});
- ctx.fillStyle='#c3a66d';ctx.fillRect(90,1585,900,1);ctx.fillStyle='#f3efe7';ctx.font='400 42px Georgia';ctx.fillText('E tu? O que está a pedir mais atenção?',90,1690);ctx.font='700 42px Arial';ctx.fillText('maison-jf.com/teste/atencao',90,1760);
- ctx.fillStyle='#706a62';ctx.font='400 21px Arial';ctx.fillText('Autoconhecimento, não diagnóstico.',90,1835);
+ const g=ctx.createRadialGradient(260,120,20,540,760,1450);g.addColorStop(0,'#2d231b');g.addColorStop(.38,'#12110f');g.addColorStop(1,'#050505');ctx.fillStyle=g;ctx.fillRect(0,0,1080,1920);
+ ctx.fillStyle='#c3a66d';ctx.fillRect(84,112,58,3);ctx.fillStyle='#f4f0e8';ctx.font='700 24px Arial';ctx.fillText('MAISON JF®',84,174);
+ ctx.fillStyle='#81796f';ctx.font='600 20px Arial';ctx.fillText('VOLTA PARA CASA · ATENÇÃO',84,318);
+ const label=$('resultLabel').textContent.replace('O que está a pedir mais atenção · ','');
+ ctx.fillStyle='#f4f0e8';ctx.font='400 82px Georgia';let y=455;wrapText(ctx,label,900).slice(0,3).forEach(line=>{ctx.fillText(line,84,y);y+=94});
+ ctx.fillStyle='#c3a66d';ctx.font='400 27px Arial';ctx.fillText('ISTO ESTÁ A PEDIR ESPAÇO.',84,y+34);
+ ctx.fillStyle='#d7d0c5';ctx.font='italic 400 53px Georgia';y+=155;wrapText(ctx,$('shareLine').textContent.replace(/[“”]/g,''),900).slice(0,6).forEach(line=>{ctx.fillText(line,84,y);y+=70});
+ ctx.fillStyle='#292621';ctx.fillRect(84,1510,912,1);
+ ctx.fillStyle='#f4f0e8';ctx.font='400 38px Georgia';ctx.fillText('E tu — o que estás a tentar ignorar?',84,1612);
+ ctx.fillStyle='#aaa197';ctx.font='400 25px Arial';ctx.fillText('Faz o teste. Compara. Partilha com quem te conhece.',84,1670);
+ ctx.fillStyle='#f4f0e8';ctx.font='700 34px Arial';ctx.fillText('maison-jf.com/teste/atencao',84,1750);
+ ctx.fillStyle='#67615a';ctx.font='400 19px Arial';ctx.fillText('Autoconhecimento, não diagnóstico.',84,1828);
  return new Promise(resolve=>canvas.toBlob(resolve,'image/png',.96));
 }
 async function shareResult(){
