@@ -1,7 +1,7 @@
 {
   "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
-  "generatedAt": "2026-09-24T10:14:00+01:00",
+  "generatedAt": "2026-09-25T09:00:00+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
   "contract": {
     "storesPaidBodies": false,
@@ -11,19 +11,19 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 18,
-    "queueItems": 36,
-    "questionCandidates": 18,
-    "questionThemeHypotheses": 111,
-    "questionDesignSlots": 666,
+    "oceansConsidered": 19,
+    "queueItems": 38,
+    "questionCandidates": 19,
+    "questionThemeHypotheses": 118,
+    "questionDesignSlots": 708,
     "activeQuestionTargetPerMatureTheme": 300,
     "pdiSourceSignals": 261,
     "pdiThemeBacklog": 260,
     "pdiSourceDesignSlots": 1560,
     "pdiEditorialCoreTarget": 78000,
     "pdiCombinatorialTarget": 2800000,
-    "oracleCandidates": 18,
-    "oracleRoleSlots": 126
+    "oracleCandidates": 19,
+    "oracleRoleSlots": 133
   },
   "pdiGrowth": {
     "scale": {
@@ -14511,6 +14511,34 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_oracle_pressao_social_para_gastar_e_vergonha_de_dizer_nao",
+      "type": "oracle_candidate",
+      "sourceOceanId": "pressao-social-para-gastar-e-vergonha-de-dizer-nao",
+      "territory": "pressao-social-para-gastar-e-vergonha-de-dizer-nao",
+      "intent": "reconhecer quando pertença, celebração ou imagem social empurram a pessoa para gastar além do que quer ou pode, tornando legítimo estabelecer limites financeiros sem transformar orçamento em vergonha nem isolamento",
+      "painLanguage": "Há convívios, celebrações e planos em que o custo não está apenas no preço: dizer «não cabe no meu orçamento» pode parecer admitir fracasso, desiludir alguém ou arriscar ficar de fora, levando a gastar para proteger pertença, imagem ou vínculo.",
+      "commercialAdjacency": "Oráculo Dinheiro & Segurança, Limites & Respeito, Companhia & Pertença e Presentes; experiências digitais low-ticket sobre dizer não sem desaparecer do grupo; guias/ebooks sobre limites e ocasiões sociais; experiências e conteúdos sobre receber em casa com intenção; presentes MAISON organizados por ocasião e orçamento; bundles físico+digital e B2B gifting com escolha simples e elegante, sem aconselhamento financeiro personalizado",
+      "evidenceCount": 3,
+      "evidence": [
+        "Bank of America Better Money Habits Survey (2026): 75% da Gen Z procura formas de poupar em planos sociais, 42% pratica loud budgeting e 60% fala de dinheiro com amigos — https://newsroom.bankofamerica.com/content/newsroom/press-releases/2026/05/bofa-study-finds-fewer-gen-z-rely-on-family-for-financial-assist.html",
+        "Achieve Center for Consumer Insights, Cost of Being There survey (2024): 74% disse que celebrar grandes momentos interfere com o bem-estar financeiro; 51% sentia pelo menos alguma pressão para gastar; menos de metade sentia-se confortável em recusar por razões financeiras; entre praticantes de loud budgeting, 29% relataram crítica/ridicularização e 10% falta de respeito pelos limites — https://www.achieve.com/about/press/74-percent-of-americans-say-celebrating-lifes-big-moments-interferes-with-their-financial-well-being",
+        "MoneyHelper UK poll (2024): falar de problemas de dinheiro com amigos era mais difícil do que falar de sexo, relações ou política; 46% já ajustava planos sociais ou verbalizava não conseguir pagar — https://www.moneyhelper.org.uk/en/blog/everyday-money/what-is-loud-budgeting"
+      ],
+      "roleCandidates": [
+        "opening",
+        "recognition",
+        "tension",
+        "counterpoint",
+        "reframe",
+        "movement",
+        "close"
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
       "id": "brain_oracle_sobrecarga_de_escolha_quando_mais_opcoes_paralisam",
       "type": "oracle_candidate",
       "sourceOceanId": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
@@ -18524,6 +18552,296 @@
         {
           "id": "slot_presenca_que_ampara_sem_tentar_resolver_estar_com_alguem_sem_ter_de_salvar_tudo_signature",
           "theme": "estar com alguém sem ter de salvar tudo",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_pressao_social_para_gastar_e_vergonha_de_dizer_nao",
+      "type": "question_candidate",
+      "sourceOceanId": "pressao-social-para-gastar-e-vergonha-de-dizer-nao",
+      "territory": "pressao-social-para-gastar-e-vergonha-de-dizer-nao",
+      "intent": "reconhecer quando pertença, celebração ou imagem social empurram a pessoa para gastar além do que quer ou pode, tornando legítimo estabelecer limites financeiros sem transformar orçamento em vergonha nem isolamento",
+      "painLanguage": "Há convívios, celebrações e planos em que o custo não está apenas no preço: dizer «não cabe no meu orçamento» pode parecer admitir fracasso, desiludir alguém ou arriscar ficar de fora, levando a gastar para proteger pertença, imagem ou vínculo.",
+      "commercialAdjacency": "Oráculo Dinheiro & Segurança, Limites & Respeito, Companhia & Pertença e Presentes; experiências digitais low-ticket sobre dizer não sem desaparecer do grupo; guias/ebooks sobre limites e ocasiões sociais; experiências e conteúdos sobre receber em casa com intenção; presentes MAISON organizados por ocasião e orçamento; bundles físico+digital e B2B gifting com escolha simples e elegante, sem aconselhamento financeiro personalizado",
+      "evidenceCount": 3,
+      "evidence": [
+        "Bank of America Better Money Habits Survey (2026): 75% da Gen Z procura formas de poupar em planos sociais, 42% pratica loud budgeting e 60% fala de dinheiro com amigos — https://newsroom.bankofamerica.com/content/newsroom/press-releases/2026/05/bofa-study-finds-fewer-gen-z-rely-on-family-for-financial-assist.html",
+        "Achieve Center for Consumer Insights, Cost of Being There survey (2024): 74% disse que celebrar grandes momentos interfere com o bem-estar financeiro; 51% sentia pelo menos alguma pressão para gastar; menos de metade sentia-se confortável em recusar por razões financeiras; entre praticantes de loud budgeting, 29% relataram crítica/ridicularização e 10% falta de respeito pelos limites — https://www.achieve.com/about/press/74-percent-of-americans-say-celebrating-lifes-big-moments-interferes-with-their-financial-well-being",
+        "MoneyHelper UK poll (2024): falar de problemas de dinheiro com amigos era mais difícil do que falar de sexo, relações ou política; 46% já ajustava planos sociais ou verbalizava não conseguir pagar — https://www.moneyhelper.org.uk/en/blog/everyday-money/what-is-loud-budgeting"
+      ],
+      "questionThemeCandidates": [
+        "gastar para não ficar de fora",
+        "vergonha de dizer que não cabe no orçamento",
+        "pertença vs pressão para gastar",
+        "limites financeiros entre amigos",
+        "celebrar sem provar poder de compra",
+        "dizer não sem desaparecer do grupo",
+        "presentes e ocasiões sem competição de preço"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_gastar_para_nao_ficar_de_fora_open",
+          "theme": "gastar para não ficar de fora",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_gastar_para_nao_ficar_de_fora_recognize",
+          "theme": "gastar para não ficar de fora",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_gastar_para_nao_ficar_de_fora_deepen",
+          "theme": "gastar para não ficar de fora",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_gastar_para_nao_ficar_de_fora_touch",
+          "theme": "gastar para não ficar de fora",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_gastar_para_nao_ficar_de_fora_close",
+          "theme": "gastar para não ficar de fora",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_gastar_para_nao_ficar_de_fora_signature",
+          "theme": "gastar para não ficar de fora",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_vergonha_de_dizer_que_nao_cabe_no_orcamento_open",
+          "theme": "vergonha de dizer que não cabe no orçamento",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_vergonha_de_dizer_que_nao_cabe_no_orcamento_recognize",
+          "theme": "vergonha de dizer que não cabe no orçamento",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_vergonha_de_dizer_que_nao_cabe_no_orcamento_deepen",
+          "theme": "vergonha de dizer que não cabe no orçamento",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_vergonha_de_dizer_que_nao_cabe_no_orcamento_touch",
+          "theme": "vergonha de dizer que não cabe no orçamento",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_vergonha_de_dizer_que_nao_cabe_no_orcamento_close",
+          "theme": "vergonha de dizer que não cabe no orçamento",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_vergonha_de_dizer_que_nao_cabe_no_orcamento_signature",
+          "theme": "vergonha de dizer que não cabe no orçamento",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_pertenca_vs_pressao_para_gastar_open",
+          "theme": "pertença vs pressão para gastar",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_pertenca_vs_pressao_para_gastar_recognize",
+          "theme": "pertença vs pressão para gastar",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_pertenca_vs_pressao_para_gastar_deepen",
+          "theme": "pertença vs pressão para gastar",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_pertenca_vs_pressao_para_gastar_touch",
+          "theme": "pertença vs pressão para gastar",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_pertenca_vs_pressao_para_gastar_close",
+          "theme": "pertença vs pressão para gastar",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_pertenca_vs_pressao_para_gastar_signature",
+          "theme": "pertença vs pressão para gastar",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_limites_financeiros_entre_amigos_open",
+          "theme": "limites financeiros entre amigos",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_limites_financeiros_entre_amigos_recognize",
+          "theme": "limites financeiros entre amigos",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_limites_financeiros_entre_amigos_deepen",
+          "theme": "limites financeiros entre amigos",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_limites_financeiros_entre_amigos_touch",
+          "theme": "limites financeiros entre amigos",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_limites_financeiros_entre_amigos_close",
+          "theme": "limites financeiros entre amigos",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_limites_financeiros_entre_amigos_signature",
+          "theme": "limites financeiros entre amigos",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_celebrar_sem_provar_poder_de_compra_open",
+          "theme": "celebrar sem provar poder de compra",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_celebrar_sem_provar_poder_de_compra_recognize",
+          "theme": "celebrar sem provar poder de compra",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_celebrar_sem_provar_poder_de_compra_deepen",
+          "theme": "celebrar sem provar poder de compra",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_celebrar_sem_provar_poder_de_compra_touch",
+          "theme": "celebrar sem provar poder de compra",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_celebrar_sem_provar_poder_de_compra_close",
+          "theme": "celebrar sem provar poder de compra",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_celebrar_sem_provar_poder_de_compra_signature",
+          "theme": "celebrar sem provar poder de compra",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_dizer_nao_sem_desaparecer_do_grupo_open",
+          "theme": "dizer não sem desaparecer do grupo",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_dizer_nao_sem_desaparecer_do_grupo_recognize",
+          "theme": "dizer não sem desaparecer do grupo",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_dizer_nao_sem_desaparecer_do_grupo_deepen",
+          "theme": "dizer não sem desaparecer do grupo",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_dizer_nao_sem_desaparecer_do_grupo_touch",
+          "theme": "dizer não sem desaparecer do grupo",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_dizer_nao_sem_desaparecer_do_grupo_close",
+          "theme": "dizer não sem desaparecer do grupo",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_dizer_nao_sem_desaparecer_do_grupo_signature",
+          "theme": "dizer não sem desaparecer do grupo",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_presentes_e_ocasioes_sem_competicao_de_preco_open",
+          "theme": "presentes e ocasiões sem competição de preço",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_presentes_e_ocasioes_sem_competicao_de_preco_recognize",
+          "theme": "presentes e ocasiões sem competição de preço",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_presentes_e_ocasioes_sem_competicao_de_preco_deepen",
+          "theme": "presentes e ocasiões sem competição de preço",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_presentes_e_ocasioes_sem_competicao_de_preco_touch",
+          "theme": "presentes e ocasiões sem competição de preço",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_presentes_e_ocasioes_sem_competicao_de_preco_close",
+          "theme": "presentes e ocasiões sem competição de preço",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_pressao_social_para_gastar_e_vergonha_de_dizer_nao_presentes_e_ocasioes_sem_competicao_de_preco_signature",
+          "theme": "presentes e ocasiões sem competição de preço",
           "stage": "signature",
           "status": "needs_editorial"
         }
