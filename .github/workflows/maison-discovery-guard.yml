@@ -10,6 +10,11 @@ on:
       - '**/*.html'
       - '.github/maison-growth/brain/build_public_discovery.mjs'
       - '.github/maison-growth/brain/build_search_visibility.mjs'
+      - '.github/maison-growth/brain/crawler-policy.json'
+      - '.github/maison-growth/brain/validate_crawler_policy.mjs'
+      - '.github/maison-growth/brain/audit_cloudflare_crawlers.mjs'
+      - '.github/maison-growth/brain/test_audit_cloudflare_crawlers.mjs'
+      - '.github/workflows/maison-crawler-presence.yml'
       - '.github/maison-growth/brain/build_indexnow_manifest.mjs'
       - '.github/maison-growth/brain/submit_indexnow.mjs'
       - '.github/maison-growth/brain/indexnow-manifest.generated.json'
@@ -50,6 +55,11 @@ on:
       - '**/*.html'
       - '.github/maison-growth/brain/build_public_discovery.mjs'
       - '.github/maison-growth/brain/build_search_visibility.mjs'
+      - '.github/maison-growth/brain/crawler-policy.json'
+      - '.github/maison-growth/brain/validate_crawler_policy.mjs'
+      - '.github/maison-growth/brain/audit_cloudflare_crawlers.mjs'
+      - '.github/maison-growth/brain/test_audit_cloudflare_crawlers.mjs'
+      - '.github/workflows/maison-crawler-presence.yml'
       - '.github/maison-growth/brain/build_indexnow_manifest.mjs'
       - '.github/maison-growth/brain/submit_indexnow.mjs'
       - '.github/maison-growth/brain/indexnow-manifest.generated.json'
@@ -102,6 +112,10 @@ jobs:
         run: |
           node --check .github/maison-growth/brain/build_public_discovery.mjs
           node --check .github/maison-growth/brain/build_search_visibility.mjs
+          node --check .github/maison-growth/brain/validate_crawler_policy.mjs
+          node .github/maison-growth/brain/validate_crawler_policy.mjs
+          node --check .github/maison-growth/brain/audit_cloudflare_crawlers.mjs
+          node --test .github/maison-growth/brain/test_audit_cloudflare_crawlers.mjs
           node --check .github/maison-growth/brain/build_indexnow_manifest.mjs
           node --check .github/maison-growth/brain/build_image_sitemap.mjs
           node --check .github/maison-growth/brain/submit_indexnow.mjs
