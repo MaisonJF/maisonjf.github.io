@@ -215,6 +215,36 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   },
   {
+    "id": "quando-o-que-funciona-na-relacao-se-torna-invisivel",
+    "painLanguage": "Quando o olhar se habitua a procurar o que faltou, os gestos que continuam a sustentar uma relação podem desaparecer do inventário: nota-se o café que não veio, mas não o lanche que apareceu; a falha ganha nome e o cuidado repetido torna-se paisagem.",
+    "intent": "reconhecer quando falhas e ausências recebem mais atenção do que gestos positivos reais numa relação, recuperando apreciação e responsividade sem usar gratidão para silenciar problemas legítimos, baixar limites ou romantizar relações prejudiciais",
+    "themes": [
+      "ver o que falta e deixar de ver o que funciona",
+      "gestos de cuidado que viraram paisagem",
+      "sentir que o que faço nunca conta",
+      "reconhecimento concreto sem gratidão forçada",
+      "apreciação e responsividade",
+      "não usar gratidão para apagar problemas",
+      "o inventário invisível do afeto",
+      "nomear o que sustentou o dia"
+    ]
+  },
+  {
+    "id": "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
+    "painLanguage": "Às vezes a pessoa não procura uma grande transformação; procura um gesto pequeno, físico e repetível que marque a passagem entre estados — chegar a casa, fechar o dia, preparar-se para sair, recuperar presença — e aroma, toque e elementos vegetais podem tornar essa mudança perceptível.",
+    "intent": "explorar micro-rituais sensoriais com plantas, aroma e gesto como marcadores de transição e presença, separando experiência simbólica/sensorial de alegações de limpeza energética, cura ou eficácia médica",
+    "themes": [
+      "um gesto para mudar de estado",
+      "chegar a casa e marcar a transição",
+      "aroma como âncora de um momento",
+      "plantas como experiência sensorial e simbólica",
+      "ritual simples sem cerimónia excessiva",
+      "quando o corpo precisa de perceber que o dia mudou",
+      "criar um ritual que dá vontade de repetir",
+      "alecrim para além da superstição"
+    ]
+  },
+  {
     "id": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
     "painLanguage": "Ter muitas opções pode parecer liberdade e, ao mesmo tempo, transformar uma escolha simples num labirinto: comparar tudo, recear deixar passar a melhor alternativa e acabar cansado, menos confiante ou sem escolher.",
     "intent": "reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
