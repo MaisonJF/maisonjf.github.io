@@ -371,11 +371,6 @@ def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]
     source_refs_hash = _sha(list(source_refs))
     idempotency_key = _sha({
         "content_id": content_id,
-        **({"campaign_id": campaign_id} if campaign_id else {}),
-        **({"thesis_id": thesis_id} if thesis_id else {}),
-        **({"comparison_id": comparison_id} if comparison_id else {}),
-        **({"comparison_dimension": comparison_dimension} if comparison_dimension else {}),
-        **({"variant_key": variant_key} if variant_key else {}),
         "platform": platform,
         "window_start": window_start,
         "window_end": window_end,
@@ -383,6 +378,11 @@ def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]
 
     metadata: dict[str, Any] = {
         "content_id": content_id,
+        **({"campaign_id": campaign_id} if campaign_id else {}),
+        **({"thesis_id": thesis_id} if thesis_id else {}),
+        **({"comparison_id": comparison_id} if comparison_id else {}),
+        **({"comparison_dimension": comparison_dimension} if comparison_dimension else {}),
+        **({"variant_key": variant_key} if variant_key else {}),
         "platform": platform,
         "format": content_format,
         "intent": content_intent,
