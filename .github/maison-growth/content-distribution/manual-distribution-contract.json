@@ -1,0 +1,37 @@
+{
+  "contract_version": "CONTENT-MANUAL-DISTRIBUTION-1.0",
+  "module": "MAISON Manual Content Distribution",
+  "mode": "package_only",
+  "input_state_required": "approved_for_manual_distribution",
+  "channel_model": {
+    "channel": "concrete distribution route",
+    "platform": "provider family derived from channel",
+    "surface": "surface derived from channel",
+    "format": "must match channel"
+  },
+  "execution": {
+    "manual_operator_required": true,
+    "external_api_call": false,
+    "automatic_scheduling": false,
+    "automatic_publication": false,
+    "social_credentials_required": false,
+    "repository_public_write": false
+  },
+  "approval": {
+    "human_review_ref_required": true,
+    "approval_scope_required": "content_and_cta",
+    "approval_does_not_publish": true
+  },
+  "measurement": {
+    "content_id_required": true,
+    "channel_required": true,
+    "human_review_ref_required": true,
+    "campaign_lineage_optional": true,
+    "comparison_lineage_optional": true,
+    "feedback_boundary": "A2 -> A1 content.performance_observed"
+  },
+  "site_editorial_exception": {
+    "maison_site_is_still_not_published_here": true,
+    "public_site_write_remains_A9_governed": true
+  }
+}
