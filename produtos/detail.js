@@ -64,7 +64,7 @@
         <p>${p.description}</p>
         <div class="product-price">${p.priceNote||money(p.price)}</div>
         <div class="product-actions">
-          <button class="button button--light" data-buy type="button">Comprar agora</button>
+          <button class="button button--light" data-buy type="button">Continuar para encomenda</button>
           <button class="text-link" data-cart-add type="button" style="background:none;border:0;padding:0;cursor:pointer">Adicionar ao carrinho</button>
           <a class="text-link" data-cart-link href="${root}produtos/carrinho/">Carrinho</a>
           <a class="text-link" data-whatsapp href="${whatsapp}" target="_blank" rel="noopener noreferrer">Tenho uma dúvida</a>
