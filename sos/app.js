@@ -42,15 +42,22 @@ function showStatus(data){
   $('nextDue').textContent=data.nextDueAt?'Próximo check-in: '+new Date(data.nextDueAt).toLocaleString('pt-PT'):state==='setup'?'O contacto de confiança ainda precisa de aceitar o convite.':'';
 }
 async function refresh(){showStatus(await api('status'))}
-function consumeSessionFromUrl(){
-  const params=new URLSearchParams(location.hash.slice(1));
-  const token=params.get('access_token');
-  const expires=Number(params.get('expires_in')||0);
+async function consumeSessionFromUrl(){
+  const hash=new URLSearchParams(location.hash.slice(1));
+  let token=hash.get('access_token')||'';
+  let expires=Number(hash.get('expires_in')||0);
+  const query=new URLSearchParams(location.search);
+  const code=query.get('code')||'';
+  if(!token&&code){
+    const data=await supabase('token?grant_type=pkce',{method:'POST',body:{auth_code:code,code_verifier:sessionStorage.getItem('sos_pkce_verifier')||''}});
+    token=String(data.access_token||'');expires=Number(data.expires_in||0);
+  }
   if(!token)return false;
   accessToken=token;
   sessionStorage.setItem('sos_access_token',token);
   if(expires)sessionStorage.setItem('sos_access_expires_at',String(Date.now()+expires*1000));
-  history.replaceState(null,'',location.pathname+location.search);
+  sessionStorage.removeItem('sos_pkce_verifier');
+  history.replaceState(null,'',location.pathname);
   return true;
 }
 function restoreSession(){
@@ -62,7 +69,7 @@ function restoreSession(){
 async function boot(){
   authConfig=await publicConfig();
   if(!authConfig?.available){showOnly(offline);return}
-  consumeSessionFromUrl();
+  await consumeSessionFromUrl();
   if(!accessToken)restoreSession();
   if(!accessToken){showOnly(authView);return}
   showOnly(app);
@@ -75,7 +82,7 @@ $('authForm').addEventListener('submit',async event=>{
   event.preventDefault();authSay('A enviar o link seguro…');
   try{
     const email=$('authEmail').value.trim().toLowerCase();
-    await supabase('otp',{method:'POST',body:{email,create_user:true,options:{email_redirect_to:location.origin+'/sos/'}}});
+    await supabase('otp',{method:'POST',body:{email,create_user:true,gotrue_meta_security:{captcha_token:''},options:{email_redirect_to:location.origin+'/sos/'}}});
     authSay('Enviámos o link. Abre o email neste dispositivo para continuar.');
   }catch{authSay('Não foi possível enviar o link agora. Tenta novamente mais tarde.')}
 });
