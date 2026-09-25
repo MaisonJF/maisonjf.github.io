@@ -206,11 +206,13 @@ async function contentPerformance(env, url) {
     SELECT
       e.event_id,e.payload_hash,e.occurred_at,e.source,e.event_type,e.privacy_class,e.metadata_json,
       (
-        SELECT COUNT(*)
+        SELECT COUNT(DISTINCT json_extract(prior.metadata_json,'$.source_refs_hash'))
         FROM events prior
         WHERE prior.source='maison-content-distribution'
           AND prior.event_type='content.performance_observed'
           AND json_extract(prior.metadata_json,'$.content_id')=json_extract(e.metadata_json,'$.content_id')
+          AND json_extract(prior.metadata_json,'$.source_refs_hash') IS NOT NULL
+          AND json_extract(prior.metadata_json,'$.source_refs_hash')<>''
           AND (
             prior.occurred_at < e.occurred_at
             OR (prior.occurred_at = e.occurred_at AND prior.event_id <= e.event_id)
