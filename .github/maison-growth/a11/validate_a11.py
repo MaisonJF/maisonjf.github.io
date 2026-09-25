@@ -4,6 +4,7 @@ import json, sqlite3, subprocess, sys, hashlib
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent
+SEED=ROOT/"migrations/0020_learning_rule_seed.sql"
 
 def ok(c,m):
     if not c: raise AssertionError(m)
@@ -16,6 +17,15 @@ def contracts():
     p=load("a11-permissions.json")
     pol=load("learning-policy.json")
     manifest=load("migration-manifest.json")
+    canonical_policy=json.dumps(pol,sort_keys=True,separators=(",",":"),ensure_ascii=False)
+    policy_hash=hashlib.sha256(canonical_policy.encode("utf-8")).hexdigest()
+    expected_rule_id="rul_"+policy_hash[:36]
+    seed_sql=SEED.read_text(encoding="utf-8")
+    ok(pol["policy_version"]=="A11.2","learning policy must be A11.2")
+    ok(pol["initial_confidence"]==50,"A11 initial confidence baseline must be explicit")
+    ok(expected_rule_id in seed_sql,"A11 seed rule id does not match policy hash")
+    ok(policy_hash in seed_sql,"A11 seed definition hash does not match policy")
+    ok(canonical_policy in seed_sql,"A11 seed definition JSON does not match policy")
     ok(c["mode"]=="analysis_only","A11 must be analysis only")
     ok(c["public_write_authorized"] is False,"public write forbidden")
     ok(c["economic_outcomes_priority_over_clicks"] is True,"economics must dominate clicks")
@@ -100,8 +110,13 @@ def sql_validation():
     db.commit()
 
     db.executescript(content_sql)
+    db.executescript(SEED.read_text(encoding="utf-8"))
     ver=db.execute("SELECT schema_value FROM schema_state WHERE schema_key='maison_growth_a11_schema_version'").fetchone()
     ok(ver and ver[0]=="A11.2","A11.2 schema version missing")
+    rule=db.execute("SELECT family,version_label,definition_hash,definition_json FROM rule_versions WHERE rule_version_id=?",(expected_rule_id,)).fetchone()
+    ok(rule is not None,"canonical A11.2 learning rule missing")
+    ok(rule[0:3]==("learning","A11.2",policy_hash),"canonical A11.2 learning rule metadata mismatch")
+    ok(json.loads(rule[3])==pol,"canonical A11.2 learning rule definition mismatch")
     ok(db.execute("SELECT source_kind FROM learning_records WHERE learning_record_id=?",(lrn,)).fetchone()==("decision",),
        "A11.1 learning record was not preserved by 0019")
 
