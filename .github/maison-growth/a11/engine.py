@@ -105,15 +105,18 @@ def evaluate(inp:LearningInput, *, confidence_before:int, rule_version_id:str, m
     return LearningRecord(stable_id("lrn_",payload),signal,confidence_before,after,after-confidence_before,
         tuple(dict.fromkeys(reasons)),expected,observed,inp.evidence_refs,True,False,rule_version_id,model_version_id,ih)
 
+def offer_context_key(*, offer_id:str, need_id:str|None=None, route:str|None=None, source:str|None=None)->str:
+    parts=["offer",offer_id]
+    if need_id: parts += ["need",need_id]
+    if route: parts += ["route",route]
+    if source: parts += ["source",source]
+    return ":".join(parts)
+
 def evaluate_offer_funnel(*, offer_id:str, exposures:int, clicks:int, conversions:int,
         confidence_before:int, rule_version_id:str, expected_ctr_bps:int|None=None,
-        expected_conversion_bps:int|None=None)->LearningRecord:
-    """Turn privacy-safe Offer Brain funnel counts into bounded learning evidence.
-
-    Click/conversion rates can lower or raise confidence only after the policy's
-    minimum observation threshold. This is correlation-only and never mutates
-    catalogue, price, checkout or public promises.
-    """
+        expected_conversion_bps:int|None=None, need_id:str|None=None, route:str|None=None,
+        source:str|None=None)->LearningRecord:
+    """Turn a contextual Offer Brain funnel into bounded correlation-only learning."""
     validate_id(rule_version_id,"rul_")
     if not offer_id or exposures<0 or clicks<0 or conversions<0 or clicks>exposures or conversions>clicks:
         raise LearningError("invalid offer funnel")
@@ -121,14 +124,13 @@ def evaluate_offer_funnel(*, offer_id:str, exposures:int, clicks:int, conversion
     conversion_bps=round(conversions*10000/clicks) if clicks else 0
     expected_ctr=expected_ctr_bps if expected_ctr_bps is not None else ctr_bps
     expected_conv=expected_conversion_bps if expected_conversion_bps is not None else conversion_bps
-    # Economic proxy is conversion rate, not money: no conversion is useful
-    # negative evidence once enough exposures exist, without inventing revenue.
+    context=offer_context_key(offer_id=offer_id,need_id=need_id,route=route,source=source)
     inp=LearningInput(
-        source_kind="journey",source_id=stable_id("jns_",{"offer":offer_id,"exposures":exposures,"clicks":clicks,"conversions":conversions}),
+        source_kind="journey",source_id=stable_id("jns_",{"context":context,"exposures":exposures,"clicks":clicks,"conversions":conversions}),
         expected_economic_value_minor=expected_conv,observed_economic_value_minor=conversion_bps,
         expected_ctr_bps=expected_ctr,observed_ctr_bps=ctr_bps,observation_count=exposures,
-        economic_observation_count=clicks,evidence_refs=(f"offer:{offer_id}:exposure",f"offer:{offer_id}:click",f"offer:{offer_id}:conversion"),
-        subject_type="candidate",subject_id=stable_id("can_",{"offer":offer_id})
+        economic_observation_count=clicks,evidence_refs=(f"{context}:exposure",f"{context}:click",f"{context}:conversion"),
+        subject_type="candidate",subject_id=stable_id("can_",{"offer_context":context})
     )
     return evaluate(inp,confidence_before=confidence_before,rule_version_id=rule_version_id)
 
