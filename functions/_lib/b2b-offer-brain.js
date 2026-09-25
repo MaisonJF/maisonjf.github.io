@@ -111,7 +111,7 @@ export const MAISON_B2B_BRAIN={
       label:'Assinatura sensorial & experiência',
       status:'active_quote',
       segments:['spa','terapeuta','alojamento','servico'],
-      offerType:'personalisation',a3SolutionType:'b2b',validationMode:'b2b_pilot',
+      offerType:'b2b',a3SolutionType:'b2b',validationMode:'b2b_pilot',
       routes:['/profissionais/aromas-para-espacos-de-bem-estar','/profissionais/como-escolher-aromas-para-um-gabinete-de-massagem'],
       recurrence:['reorder','repeat_project'],
       claimLimit:'A proposta pode organizar aroma, ritual e detalhe de experiência; não promete resultados clínicos ou comerciais.'
