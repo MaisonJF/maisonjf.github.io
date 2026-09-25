@@ -162,6 +162,66 @@ class CollectorUnitTests(unittest.TestCase):
         with self.assertRaises(PrivacyViolation):
             normalize_ingestion(event)
 
+    def test_b2b_lead_accepts_only_contract_non_pii(self):
+        normalized = normalize_ingestion({
+            "contract_version": 1,
+            "source": "commerce",
+            "event_type": "b2b.lead",
+            "occurred_at": "2026-09-25T12:00:00Z",
+            "idempotency_key": "b2b:lead:fixture-1",
+            "privacy_class": "pseudonymous",
+            "metadata": {
+                "interest": "b2b",
+                "origin": "professional_test",
+                "business": "spa",
+                "goal": "diferenciar",
+                "gap": "continuity",
+                "client": "consumer",
+                "model": "service",
+                "scale": "small",
+                "start": "pilot",
+                "result_type": "signature",
+            },
+        })
+        self.assertEqual(normalized["event_type"], "b2b.lead")
+        self.assertEqual(normalized["metadata"]["business"], "spa")
+
+    def test_b2b_lead_rejects_identity_and_free_text(self):
+        base = {
+            "contract_version": 1,
+            "source": "commerce",
+            "event_type": "b2b.lead",
+            "occurred_at": "2026-09-25T12:00:00Z",
+            "idempotency_key": "b2b:lead:fixture-2",
+            "privacy_class": "pseudonymous",
+        }
+        for forbidden in ("name","email","phone","free_text_message","health_data","client_identity"):
+            event = dict(base)
+            event["metadata"] = {"business": "spa", forbidden: "forbidden-value"}
+            with self.assertRaises((PrivacyViolation, ValidationError)):
+                normalize_ingestion(event)
+
+    def test_b2b_lifecycle_events_use_central_commerce_contract(self):
+        cases = (
+            ("b2b.proposal", {"b2b_stage": "proposal", "offer_family": "gifting"}),
+            ("b2b.pilot", {"b2b_stage": "pilot", "offer_family": "sensory_signature"}),
+            ("b2b.purchase", {"b2b_stage": "purchase", "offer_family": "curated_resale"}),
+            ("b2b.recurrence", {"b2b_stage": "recurrence", "offer_family": "curated_resale", "recurrence_type": "reorder"}),
+        )
+        for i, (event_type, metadata) in enumerate(cases, start=1):
+            normalized = normalize_ingestion({
+                "contract_version": 1,
+                "source": "commerce",
+                "event_type": event_type,
+                "occurred_at": "2026-09-25T12:00:00Z",
+                "idempotency_key": f"b2b:lifecycle:fixture-{i}",
+                "privacy_class": "pseudonymous",
+                "solution_id": "sol_0199a4b2-7f00-7000-8000-000000000001",
+                "metadata": metadata,
+            })
+            self.assertEqual(normalized["event_type"], event_type)
+            self.assertEqual(normalized["solution_id"], "sol_0199a4b2-7f00-7000-800000000001")
+
     def test_gsc_raw_query_is_not_allowed(self):
         event = {
             "contract_version": 1,
