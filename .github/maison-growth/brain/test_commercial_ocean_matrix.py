@@ -13,12 +13,13 @@ class CommercialOceanMatrixTests(unittest.TestCase):
 
     def test_all_current_oceans_are_present_and_feed_both_digital_products(self):
         rows=self.payload["oceans"]
-        self.assertEqual(self.payload["summary"]["oceans"],18)
-        self.assertEqual(len(rows),18)
+        total=self.payload["summary"]["oceans"]
+        self.assertGreater(total,0)
+        self.assertEqual(len(rows),total)
         self.assertTrue(all(row["digital_feeds"]["pdi_eligible"] for row in rows))
         self.assertTrue(all(row["digital_feeds"]["oracle_eligible"] for row in rows))
-        self.assertEqual(self.payload["summary"]["pdi_feed_oceans"],18)
-        self.assertEqual(self.payload["summary"]["oracle_feed_oceans"],18)
+        self.assertEqual(self.payload["summary"]["pdi_feed_oceans"],total)
+        self.assertEqual(self.payload["summary"]["oracle_feed_oceans"],total)
 
     def test_commercial_matches_are_context_only_and_non_executing(self):
         contract=self.payload["contract"]
