@@ -96,6 +96,54 @@ class CollectorUnitTests(unittest.TestCase):
         self.assertEqual(normalized["metadata"]["offer_id"], "tarot")
         self.assertNotIn("answer", normalized["metadata"])
 
+    def test_content_performance_contract_is_accepted(self):
+        event = {
+            "contract_version": 1,
+            "source": "maison-content-distribution",
+            "event_type": "content.performance_observed",
+            "occurred_at": "2026-09-25T12:00:00Z",
+            "idempotency_key": "content:performance:fixture-1",
+            "privacy_class": "aggregated",
+            "metadata": {
+                "content_id": "cnt-fixture-1",
+                "channel": "instagram_reels",
+                "platform": "instagram",
+                "surface": "reels",
+                "format": "short_video",
+                "impressions": 100,
+                "views": 60,
+                "link_clicks": 7,
+                "conversions": 1,
+                "click_rate_bps": 700,
+                "conversion_rate_bps": 1429
+            }
+        }
+        normalized = normalize_ingestion(event)
+        self.assertEqual(normalized["source"], "maison-content-distribution")
+        self.assertEqual(normalized["event_type"], "content.performance_observed")
+        self.assertEqual(normalized["metadata"]["conversions"], 1)
+
+    def test_sos_product_contract_is_aggregate_only(self):
+        event = {
+            "contract_version": 1,
+            "source": "sos_product",
+            "event_type": "sos.checkin_summary",
+            "occurred_at": "2026-09-25T12:00:00Z",
+            "idempotency_key": "sos:summary:fixture-1",
+            "privacy_class": "aggregated",
+            "metadata": {
+                "product_id": "sos-maison",
+                "signal_kind": "checkin_completed",
+                "cadence_bucket": "daily",
+                "delivery_outcome": "completed",
+                "product_version": "v1",
+                "count": 3
+            }
+        }
+        normalized = normalize_ingestion(event)
+        self.assertEqual(normalized["source"], "sos_product")
+        self.assertEqual(normalized["metadata"]["count"], 3)
+
     def test_unknown_source_rejected(self):
         with self.assertRaises(UnknownSource):
             normalize_ingestion(valid_site(source="mystery"))
