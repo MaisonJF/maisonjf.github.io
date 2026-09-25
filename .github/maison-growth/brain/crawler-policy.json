@@ -1,0 +1,139 @@
+{
+  "schema_version": "maison_crawler_discovery_policy_v1",
+  "reviewed_at": "2026-09-25",
+  "principle": "Search/discovery access is governed separately from training and user-triggered fetchers.",
+  "search_discovery_required": [
+    {
+      "user_agent": "OAI-SearchBot",
+      "operator": "OpenAI",
+      "purpose": "ChatGPT Search",
+      "required_root_access": true,
+      "documentation": "https://developers.openai.com/api/docs/bots",
+      "verification": {
+        "method": "published_ip_ranges",
+        "url": "https://openai.com/searchbot.json"
+      },
+      "cloudflare_detection_ids": [
+        126255384,
+        33563986
+      ]
+    },
+    {
+      "user_agent": "Claude-SearchBot",
+      "operator": "Anthropic",
+      "purpose": "Claude web search",
+      "required_root_access": true,
+      "documentation": "https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+      "verification": {
+        "method": "cloudflare_verified_bot_detection"
+      },
+      "cloudflare_detection_ids": [
+        33564301
+      ]
+    },
+    {
+      "user_agent": "PerplexityBot",
+      "operator": "Perplexity",
+      "purpose": "Perplexity search index",
+      "required_root_access": true,
+      "documentation": "https://docs.perplexity.ai/guides/bots",
+      "verification": {
+        "method": "published_ip_ranges",
+        "url": "https://www.perplexity.com/perplexitybot.json"
+      },
+      "cloudflare_detection_ids": [
+        33563889
+      ]
+    },
+    {
+      "user_agent": "Googlebot",
+      "operator": "Google",
+      "purpose": "Google Search",
+      "required_root_access": true,
+      "documentation": "https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers",
+      "verification": {
+        "method": "cloudflare_verified_bot_detection"
+      },
+      "cloudflare_detection_ids": [
+        120623194,
+        33554459
+      ]
+    },
+    {
+      "user_agent": "Bingbot",
+      "operator": "Microsoft",
+      "purpose": "Bing Search",
+      "required_root_access": true,
+      "documentation": "https://www.bing.com/webmasters/help/which-crawlers-does-bing-use-8c184ec0",
+      "verification": {
+        "method": "cloudflare_verified_bot_detection"
+      },
+      "cloudflare_detection_ids": [
+        117479730,
+        33554461
+      ]
+    },
+    {
+      "user_agent": "Applebot",
+      "operator": "Apple",
+      "purpose": "Apple search/discovery",
+      "required_root_access": true,
+      "documentation": "https://support.apple.com/en-us/119829",
+      "verification": {
+        "method": "cloudflare_verified_bot_detection"
+      },
+      "cloudflare_detection_ids": [
+        120424214,
+        33563845
+      ]
+    }
+  ],
+  "nonsearch_separate_decision": [
+    {
+      "user_agent": "GPTBot",
+      "operator": "OpenAI",
+      "purpose": "foundation-model training",
+      "seo_guard_does_not_choose_allow_or_block": true
+    },
+    {
+      "user_agent": "ClaudeBot",
+      "operator": "Anthropic",
+      "purpose": "foundation-model training",
+      "seo_guard_does_not_choose_allow_or_block": true
+    },
+    {
+      "user_agent": "ChatGPT-User",
+      "operator": "OpenAI",
+      "purpose": "user-triggered fetch",
+      "seo_guard_does_not_require_robots_rule": true
+    },
+    {
+      "user_agent": "Claude-User",
+      "operator": "Anthropic",
+      "purpose": "user-triggered fetch",
+      "seo_guard_does_not_require_robots_rule": true
+    },
+    {
+      "user_agent": "Google-Extended",
+      "operator": "Google",
+      "purpose": "AI model/product control separate from Google Search",
+      "seo_guard_does_not_require_robots_rule": true
+    },
+    {
+      "user_agent": "Applebot-Extended",
+      "operator": "Apple",
+      "purpose": "AI use control separate from basic Applebot crawl",
+      "seo_guard_does_not_require_robots_rule": true
+    }
+  ],
+  "sitemap_requirements": [
+    "https://maison-jf.com/sitemap.xml",
+    "https://maison-jf.com/sitemap-images.xml"
+  ],
+  "cloudflare": {
+    "audit_mode": "read_only",
+    "lookback_days": 7,
+    "detection_ids_source": "https://developers.cloudflare.com/ai-crawl-control/reference/bots/",
+    "user_agent_alone_is_not_proof": true
+  }
+}
