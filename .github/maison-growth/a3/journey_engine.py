@@ -18,6 +18,7 @@ CONVERSION_EVENT_TYPES = {
     "oracle.purchase": "purchase",
     "product.purchase": "purchase",
     "commerce.purchase": "purchase",
+    "commerce.purchase_confirmed": "purchase",
     "commerce.order": "order",
     "service.booking": "booking",
     "service.contact": "lead",
