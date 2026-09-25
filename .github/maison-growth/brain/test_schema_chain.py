@@ -115,7 +115,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
         }
         for index,(event_type,expected_kind) in enumerate(kinds.items(),start=1):
             event={
-                "event_id":"evt_"+str(index)*36,
+                "event_id":"evt_"+f"018f4d7a-1c2b-7abc-8def-{index:012d}",
                 "idempotency_key":"b2b:fixture:"+str(index),
                 "event_type":event_type,
                 "source":"commerce",
