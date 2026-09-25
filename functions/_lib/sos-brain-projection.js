@@ -36,7 +36,7 @@ async function count(db,sql,start,end){
 export async function buildSosDailyA2Projection({env,date}={}){
   const db=requireSosDb(env);
   const window=day(date);
-  const [checkins,reminders,notices,failed,activated]=await Promise.all([
+  const [checkins,reminders,notices,failed,activated,paused]=await Promise.all([
     count(db,`SELECT COUNT(*) AS n FROM sos_checkins WHERE occurred_at>=?1 AND occurred_at<?2`,window.start,window.end),
     count(db,`SELECT COUNT(*) AS n FROM sos_outbox
       WHERE action_kind='user_reminder' AND state='sent' AND sent_at>=?1 AND sent_at<?2`,window.start,window.end),
@@ -45,7 +45,9 @@ export async function buildSosDailyA2Projection({env,date}={}){
     count(db,`SELECT COUNT(*) AS n FROM sos_outbox
       WHERE action_kind='trusted_notice' AND state='failed' AND updated_at>=?1 AND updated_at<?2`,window.start,window.end),
     count(db,`SELECT COUNT(*) AS n FROM sos_accounts
-      WHERE activated_at>=?1 AND activated_at<?2`,window.start,window.end)
+      WHERE activated_at>=?1 AND activated_at<?2`,window.start,window.end),
+    count(db,`SELECT COUNT(*) AS n FROM sos_accounts
+      WHERE paused_at>=?1 AND paused_at<?2`,window.start,window.end)
   ]);
 
   return [
@@ -53,6 +55,7 @@ export async function buildSosDailyA2Projection({env,date}={}){
     buildSosA2AggregateEvent({date,signalKind:'reminder_sent',count:reminders,deliveryOutcome:'ok'}),
     buildSosA2AggregateEvent({date,signalKind:'trusted_notice_sent',count:notices,deliveryOutcome:'ok'}),
     buildSosA2AggregateEvent({date,signalKind:'trusted_notice_failed',count:failed,deliveryOutcome:'failed'}),
-    buildSosA2AggregateEvent({date,signalKind:'activated',count:activated})
+    buildSosA2AggregateEvent({date,signalKind:'activated',count:activated}),
+    buildSosA2AggregateEvent({date,signalKind:'paused',count:paused})
   ];
 }
