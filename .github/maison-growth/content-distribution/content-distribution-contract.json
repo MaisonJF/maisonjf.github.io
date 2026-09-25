@@ -75,7 +75,9 @@
     "automatic_publication": false,
     "automatic_scheduling": false,
     "outbound_authorized": false,
-    "spend_authorized": false
+    "spend_authorized": false,
+    "campaigns_are_derived_execution_containers": true,
+    "one_variable_content_comparisons_only": true
   },
   "publish_boundary": {
     "human_gate": "existing Maison A12 governance",
@@ -92,5 +94,6 @@
     "output_envelope_after_ingestion": "A1 v2",
     "central_learning_mapping_owned_here": false
   },
-  "event_ingestion_source": ".github/maison-growth/a2/source-registry.json"
+  "event_ingestion_source": ".github/maison-growth/a2/source-registry.json",
+  "operating_system_contract": ".github/maison-growth/content-distribution/operating-system-contract.json"
 }
