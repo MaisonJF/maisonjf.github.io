@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.supabase.co; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'">
+<meta name="theme-color" content="#10291f">
+<title>SOS Maison JF®</title>
+<meta name="description" content="Um check-in simples. Uma pessoa de confiança.">
+<link rel="manifest" href="/sos/manifest.webmanifest">
+<link rel="stylesheet" href="/sos/style.css">
+<script src="/sos/app.js" defer></script>
+</head>
+<body>
+<main class="shell">
+  <section class="card" aria-labelledby="title">
+    <p class="brand">MAISON JF<sup>®</sup></p>
+    <p class="eyebrow">SOS MAISON JF</p>
+
+    <div id="offlineView">
+      <h1 id="title">ESTOU AQUI</h1>
+      <p class="lead">Um check-in simples. Uma pessoa de confiança.</p>
+      <div class="truth" role="note">
+        <p><strong>Estamos a preparar o teu SOS.</strong></p>
+        <p>O serviço ainda não está activo neste ambiente. Nenhum contacto será avisado enquanto a activação estiver fechada.</p>
+      </div>
+      <button class="primary" type="button" disabled aria-disabled="true">ESTOU AQUI</button>
+      <p class="small">SOS Maison JF não é um serviço de emergência e não substitui o 112 ou outros serviços locais.</p>
+    </div>
+
+    <div id="appView" hidden>
+      <div id="statusView">
+        <p class="state" id="stateLabel">Tudo certo</p>
+        <h1 id="statusTitle">ESTOU AQUI</h1>
+        <p class="lead" id="nextDue"></p>
+        <button class="primary" id="checkinButton" type="button">ESTOU AQUI</button>
+        <div class="secondary-actions">
+          <button class="text-button" id="pauseButton" type="button">Pausar</button>
+          <button class="text-button" id="resumeButton" type="button" hidden>Retomar</button>
+        </div>
+      </div>
+
+      <form id="setupView" hidden>
+        <h1>Configurar o teu SOS</h1>
+        <p class="lead">Três decisões. Depois, só precisas de dizer: ESTOU AQUI.</p>
+        <label>Hora diária<input id="checkinTime" name="checkinTime" type="time" required></label>
+        <label>Email do contacto de confiança<input id="contactEmail" name="contactEmail" type="email" autocomplete="email" required></label>
+        <button class="primary" type="submit">Enviar convite</button>
+        <p class="small">O contacto só fica activo depois de aceitar explicitamente.</p>
+      </form>
+
+      <div class="status" id="message" role="status" aria-live="polite"></div>
+      <details class="settings">
+        <summary>Definições</summary>
+        <button class="danger" id="deleteButton" type="button">Eliminar SOS</button>
+      </details>
+      <p class="small">SOS Maison JF não sabe onde estás e não confirma que exista uma emergência.</p>
+    </div>
+  </section>
+</main>
+</body>
+</html>
