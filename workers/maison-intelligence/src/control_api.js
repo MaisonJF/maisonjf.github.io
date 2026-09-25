@@ -197,6 +197,87 @@ async function b2bFeedback(env, url) {
   });
 }
 
+async function contentPerformance(env, url) {
+  const limit=parseLimit(url);
+  const after=parseAfter(url);
+  const afterId=parseAfterId(url,'evt_');
+  let statement;
+  const select=`
+    SELECT
+      e.event_id,e.payload_hash,e.occurred_at,e.source,e.event_type,e.privacy_class,e.metadata_json,
+      (
+        SELECT COUNT(*)
+        FROM events prior
+        WHERE prior.source='maison-content-distribution'
+          AND prior.event_type='content.performance_observed'
+          AND json_extract(prior.metadata_json,'$.content_id')=json_extract(e.metadata_json,'$.content_id')
+          AND (
+            prior.occurred_at < e.occurred_at
+            OR (prior.occurred_at = e.occurred_at AND prior.event_id <= e.event_id)
+          )
+      ) AS independent_snapshot_count
+    FROM events e
+    WHERE e.source='maison-content-distribution'
+      AND e.event_type='content.performance_observed'
+  `;
+  if (after) {
+    statement=env.GROWTH_DB.prepare(select+`
+      AND (e.occurred_at > ? OR (e.occurred_at = ? AND e.event_id > ?))
+      ORDER BY e.occurred_at,e.event_id
+      LIMIT ?
+    `).bind(after,after,afterId,limit);
+  } else {
+    statement=env.GROWTH_DB.prepare(select+`
+      ORDER BY e.occurred_at,e.event_id
+      LIMIT ?
+    `).bind(limit);
+  }
+  const rows=(await all(statement)).map(row=>({
+    event_id:row.event_id,
+    payload_hash:row.payload_hash,
+    occurred_at:row.occurred_at,
+    source:row.source,
+    event_type:row.event_type,
+    privacy_class:row.privacy_class,
+    metadata:row.metadata_json ? JSON.parse(row.metadata_json) : {},
+    independent_snapshot_count:Number(row.independent_snapshot_count||1)
+  }));
+  const last=rows.at(-1);
+  return json({
+    kind:'brain_content_performance',
+    rows,
+    next_cursor:last ? { after:last.occurred_at, after_id:last.event_id } : null
+  });
+}
+
+async function learningSubject(env, url) {
+  const limit=parseLimit(url);
+  const subjectId=url.searchParams.get('subject_id') || '';
+  if (subjectId.length!==40 || !subjectId.startsWith('can_')) throw new Error('invalid_subject_id');
+  const rows=await all(env.GROWTH_DB.prepare(`
+    SELECT learning_record_id,source_kind,source_id,subject_type,subject_id,signal_class,
+           economic_value_minor,ctr_bps,confidence_before,confidence_after,confidence_delta,
+           reason_codes_json,evidence_refs_json,correlation_only,causal_claim,created_at
+    FROM learning_records
+    WHERE subject_type='candidate' AND subject_id=?
+    ORDER BY created_at DESC,learning_record_id DESC
+    LIMIT ?
+  `).bind(subjectId,limit));
+  return json({
+    kind:'brain_learning_subject',
+    subject_id:subjectId,
+    rows:rows.map(row=>({
+      ...row,
+      reason_codes:parseJsonArray(row.reason_codes_json),
+      evidence_refs:parseJsonArray(row.evidence_refs_json),
+      reason_codes_json:undefined,
+      evidence_refs_json:undefined,
+      correlation_only:Number(row.correlation_only)===1,
+      causal_claim:Number(row.causal_claim)===1
+    }))
+  });
+}
+
 async function learningContext(env, url) {
   const limit=parseLimit(url);
   const after=parseAfter(url);
@@ -559,6 +640,8 @@ export async function handleBrainControlRequest(request, env) {
     if (url.pathname === '/internal/brain/feed') return await feed(env,url);
     if (url.pathname === '/internal/brain/cash-feedback') return await cashFeedback(env,url);
     if (url.pathname === '/internal/brain/b2b-feedback') return await b2bFeedback(env,url);
+    if (url.pathname === '/internal/brain/content-performance') return await contentPerformance(env,url);
+    if (url.pathname === '/internal/brain/learning-subject') return await learningSubject(env,url);
     if (url.pathname === '/internal/brain/learning') return await learningContext(env,url);
     if (url.pathname === '/internal/brain/review-queue') return await reviewQueue(env,url);
     if (url.pathname === '/internal/brain/approved-validations') return await approvedValidations(env,url);
