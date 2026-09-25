@@ -26,15 +26,21 @@ test('configured Search Console exposes bounded read-only profiles',()=>{
     GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'secret',
     GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh'
   });
-  assert.equal(tasks.length,7);
+  assert.equal(tasks.length,8);
   const analytics=tasks.filter(x=>x.family==='google_search_console');
+  const finalized=analytics.filter(x=>x.key!=='fresh_pages');
+  const fresh=analytics.find(x=>x.key==='fresh_pages');
   const inspection=tasks.find(x=>x.family==='google_url_inspection');
   const sitemaps=tasks.find(x=>x.family==='google_sitemaps');
-  assert.deepEqual(analytics.map(x=>x.key),['pages','queries','devices','countries','appearance']);
+  assert.deepEqual(analytics.map(x=>x.key),['pages','queries','devices','countries','appearance','fresh_pages']);
   assert.ok(tasks.every(x=>x.providerId==='google_search_console'));
   assert.ok(tasks.every(x=>x.territoryKey==='search_visibility'));
-  assert.ok(analytics.every(x=>x.days===28&&x.lagDays===3));
+  assert.ok(finalized.every(x=>x.days===28&&x.lagDays===3));
   assert.ok(analytics.every(x=>x.rowLimit<=40));
+  assert.equal(fresh.days,3);
+  assert.equal(fresh.lagDays,0);
+  assert.equal(fresh.dataState,'all');
+  assert.deepEqual(fresh.dimensions,['date','page']);
   assert.equal(inspection.key,'inspection');
   assert.equal(inspection.inspectionUrls.length,6);
   assert.equal(sitemaps.key,'sitemaps');
@@ -130,8 +136,9 @@ test('Search Console fetch uses OAuth token privately and returns direct coverag
     assert.equal(result.evidenceKind,'coverage');
     assert.equal(result.sourceKind,'search_visibility');
     const payload=JSON.parse(result.text);
-    assert.equal(payload.start_date,'2026-08-26');
-    assert.equal(payload.end_date,'2026-09-22');
+    assert.equal(payload.start_date,'2026-08-25');
+    assert.equal(payload.end_date,'2026-09-21');
+    assert.equal(payload.data_state,'final');
     assert.equal(payload.rows[0].impressions,20);
   }finally{
     globalThis.fetch=original;
@@ -322,6 +329,53 @@ test('Search Console sitemap sensor keeps supported lifecycle facts and ignores 
     assert.equal(result.evidenceSource,'gsc');
     assert.equal(result.evidenceKind,'coverage');
     assert.ok(!JSON.stringify(result).includes('sitemap-access'));
+  }finally{
+    globalThis.fetch=original;
+  }
+});
+
+
+test('fresh Search Console profile uses Pacific dates and preserves incomplete-data metadata',async()=>{
+  const original=globalThis.fetch;
+  const calls=[];
+  globalThis.fetch=async(url,options={})=>{
+    calls.push({url:String(url),options});
+    if(String(url).includes('oauth2.googleapis.com/token')){
+      return new Response(JSON.stringify({access_token:'fresh-access'}),{status:200,headers:{'content-type':'application/json'}});
+    }
+    return new Response(JSON.stringify({
+      rows:[{
+        keys:['2026-09-24','https://maison-jf.com/'],
+        clicks:1,impressions:4,ctr:.25,position:1.5
+      }],
+      metadata:{first_incomplete_date:'2026-09-24'}
+    }),{status:200,headers:{'content-type':'application/json'}});
+  };
+  try{
+    const task=configuredSearchVisibilityTasks({
+      SEARCH_VISIBILITY_ENABLED:'true',
+      GOOGLE_SEARCH_CONSOLE_ENABLED:'true',
+      GOOGLE_SEARCH_CONSOLE_PROPERTY:'sc-domain:maison-jf.com',
+      GOOGLE_SEARCH_CONSOLE_CLIENT_ID:'client-id',
+      GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'client-secret',
+      GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh-secret'
+    }).find(x=>x.key==='fresh_pages');
+
+    const result=await fetchSearchVisibility({
+      GOOGLE_SEARCH_CONSOLE_CLIENT_ID:'client-id',
+      GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'client-secret',
+      GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh-secret'
+    },task,new Date('2026-09-25T04:17:00Z'));
+
+    const request=JSON.parse(calls[1].options.body);
+    assert.equal(request.startDate,'2026-09-22');
+    assert.equal(request.endDate,'2026-09-24');
+    assert.equal(request.dataState,'all');
+    const payload=JSON.parse(result.text);
+    assert.equal(payload.data_state,'all');
+    assert.equal(payload.first_incomplete_date,'2026-09-24');
+    assert.equal(payload.start_date,'2026-09-22');
+    assert.equal(payload.end_date,'2026-09-24');
   }finally{
     globalThis.fetch=original;
   }
