@@ -8,13 +8,13 @@ on:
       - 'functions/_lib/maison-content-ontology.js'
       - '.github/maison-growth/a1/event-contract-v2.json'
       - '.github/maison-growth/a2/source-registry.json'
-      - '.github/maison-growth/a2/source-registry.json'
       - '.github/workflows/content-distribution-guard.yml'
   pull_request:
     paths:
       - '.github/maison-growth/content-distribution/**'
       - 'functions/_lib/maison-content-ontology.js'
       - '.github/maison-growth/a1/event-contract-v2.json'
+      - '.github/maison-growth/a2/source-registry.json'
       - '.github/workflows/content-distribution-guard.yml'
 
 permissions:
