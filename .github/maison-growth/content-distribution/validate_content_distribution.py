@@ -18,6 +18,7 @@ feedback = json.loads((HERE / "performance-feedback-contract.json").read_text(en
 ontology = (ROOT / "functions/_lib/maison-content-ontology.js").read_text(encoding="utf-8")
 event_contract = json.loads((ROOT / ".github/maison-growth/a1/event-contract-v2.json").read_text(encoding="utf-8"))
 source_registry = json.loads((ROOT / ".github/maison-growth/a2/source-registry.json").read_text(encoding="utf-8"))
+handoff = json.loads((HERE / "brain-feedback-handoff.json").read_text(encoding="utf-8"))
 
 require(contract["canonical_intelligence_owner"] == "Maison Brain", "Brain ownership drift")
 require(contract["derived_artifacts_only"] is True, "content artifacts must stay derived")
@@ -44,5 +45,8 @@ require(feedback["rules"]["a2_allowlist_required"] is True, "A2 convergence gate
 require(feedback["rules"]["rates_are_integer_basis_points"] is True, "content rates must remain integer bps")
 require(feedback["rules"]["no_cross_platform_score"] is True, "cross-platform score must remain prohibited")
 require(feedback["rules"]["no_revenue_inference_from_engagement"] is True, "engagement cannot imply revenue")
+require(handoff["storage"] == "none", "Brain handoff must remain stateless")
+require(handoff["downstream_mapping_required"]["automatic_confidence_mutation_required"] is False, "content metrics cannot auto-mutate confidence")
+require("A11_schema_mutation" in handoff["prohibited_here"], "A11 schema ownership boundary missing")
 
 print("RIO CONTEUDO DISTRIBUICAO: contracts OK")
