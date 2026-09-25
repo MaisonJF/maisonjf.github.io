@@ -17,6 +17,7 @@ contract = json.loads((HERE / "content-distribution-contract.json").read_text(en
 feedback = json.loads((HERE / "performance-feedback-contract.json").read_text(encoding="utf-8"))
 ontology = (ROOT / "functions/_lib/maison-content-ontology.js").read_text(encoding="utf-8")
 event_contract = json.loads((ROOT / ".github/maison-growth/a1/event-contract-v2.json").read_text(encoding="utf-8"))
+source_registry = json.loads((ROOT / ".github/maison-growth/a2/source-registry.json").read_text(encoding="utf-8"))
 
 require(contract["canonical_intelligence_owner"] == "Maison Brain", "Brain ownership drift")
 require(contract["derived_artifacts_only"] is True, "content artifacts must stay derived")
@@ -32,7 +33,15 @@ require("'posts','stories','reels','video_scripts','captions','cta'" in ontology
 
 require(event_contract["$id"] == "maison-growth-event-v2", "A1 v2 event envelope drift")
 require("aggregated" in event_contract["properties"]["privacy_class"]["enum"], "aggregated privacy class unavailable")
+source = source_registry["sources"].get("maison-content-distribution")
+require(source is not None, "content distribution source must be allowlisted in A2")
+require(source["privacy_class"] == ["aggregated"], "content distribution must remain aggregate-only")
+require(source["allowed_event_prefixes"] == ["content."], "content distribution event prefix drift")
+require("completion_rate_bps" in source["metadata"], "A2 content rate contract missing")
+
 require(feedback["event_type"] == "content.performance_observed", "feedback event type drift")
+require(feedback["rules"]["a2_allowlist_required"] is True, "A2 convergence gate required")
+require(feedback["rules"]["rates_are_integer_basis_points"] is True, "content rates must remain integer bps")
 require(feedback["rules"]["no_cross_platform_score"] is True, "cross-platform score must remain prohibited")
 require(feedback["rules"]["no_revenue_inference_from_engagement"] is True, "engagement cannot imply revenue")
 
