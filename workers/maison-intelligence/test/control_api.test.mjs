@@ -112,6 +112,35 @@ test('cash feedback exposes all A3 economics with optional A14 lineage and no cu
   assert.equal('customer_id' in body.rows[0],false);
 });
 
+test('B2B feedback reads central A3 conversions and re-allowlists metadata', async () => {
+  const e=env((sql,params)=>{
+    assert.match(sql,/FROM conversions c/);
+    assert.match(sql,/JOIN events e/);
+    assert.match(sql,/JOIN solutions s/);
+    assert.match(sql,/s\.solution_type='b2b'/);
+    assert.equal(params.at(-1),20);
+    return [{
+      conversion_id:'cnv_12345678-1234-7234-9234-123456789012',
+      source_event_id:'evt_12345678-1234-7234-9234-123456789012',
+      solution_id:'sol_12345678-1234-7234-9234-123456789012',
+      conversion_kind:'lead',event_type:'b2b.proposal',
+      occurred_at:'2026-09-25T12:00:00.000Z',
+      revenue_minor:null,currency:null,
+      metadata_json:'{"business":"spa","goal":"diferenciar","result_type":"signature","email":"must-not-leak"}'
+    }];
+  });
+  const response=await handleBrainControlRequest(req('/internal/brain/b2b-feedback?limit=20'),e);
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.kind,'brain_b2b_feedback');
+  assert.equal(body.rows[0].stage,'proposal');
+  assert.equal(body.rows[0].metadata.business,'spa');
+  assert.equal(body.rows[0].metadata.result_type,'signature');
+  assert.equal('email' in body.rows[0].metadata,false);
+  assert.equal('journey_id' in body.rows[0],false);
+  assert.equal(body.next_cursor.after_id,'cnv_12345678-1234-7234-9234-123456789012');
+});
+
 test('solutions expose safe commercial fields and current economics only', async () => {
   const e=env((sql,params)=>{
     assert.match(sql,/WITH ranked AS/);
