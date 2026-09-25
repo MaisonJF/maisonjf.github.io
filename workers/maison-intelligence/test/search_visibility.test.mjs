@@ -26,12 +26,17 @@ test('configured Search Console exposes bounded read-only profiles',()=>{
     GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'secret',
     GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh'
   });
-  assert.equal(tasks.length,5);
-  assert.deepEqual(tasks.map(x=>x.key),['pages','queries','devices','countries','appearance']);
+  assert.equal(tasks.length,6);
+  const analytics=tasks.filter(x=>x.family==='google_search_console');
+  const inspection=tasks.find(x=>x.family==='google_url_inspection');
+  assert.deepEqual(analytics.map(x=>x.key),['pages','queries','devices','countries','appearance']);
   assert.ok(tasks.every(x=>x.providerId==='google_search_console'));
   assert.ok(tasks.every(x=>x.territoryKey==='search_visibility'));
-  assert.ok(tasks.every(x=>x.days===28&&x.lagDays===3));
-  assert.ok(tasks.every(x=>x.rowLimit<=40));
+  assert.ok(analytics.every(x=>x.days===28&&x.lagDays===3));
+  assert.ok(analytics.every(x=>x.rowLimit<=40));
+  assert.equal(inspection.key,'inspection');
+  assert.equal(inspection.inspectionUrls.length,6);
+  assert.ok(inspection.inspectionUrls.every(url=>url.startsWith('https://maison-jf.com/')));
   assert.ok(searchVisibilityTaskIdentity(tasks[0]).includes('sc-domain:maison-jf.com'));
 });
 
@@ -181,4 +186,78 @@ test('Bing Webmaster fetch uses bearer OAuth privately and returns coverage evid
   }finally{
     globalThis.fetch=original;
   }
+});
+
+
+test('URL Inspection rotates one canonical Maison URL and returns index coverage facts',async()=>{
+  const original=globalThis.fetch;
+  const calls=[];
+  globalThis.fetch=async(url,options={})=>{
+    calls.push({url:String(url),options});
+    if(String(url).includes('oauth2.googleapis.com/token')){
+      return new Response(JSON.stringify({access_token:'inspection-access'}),{status:200,headers:{'content-type':'application/json'}});
+    }
+    return new Response(JSON.stringify({
+      inspectionResult:{
+        indexStatusResult:{
+          verdict:'PASS',
+          coverageState:'Submitted and indexed',
+          robotsTxtState:'ALLOWED',
+          indexingState:'INDEXING_ALLOWED',
+          lastCrawlTime:'2026-09-24T09:10:11Z',
+          pageFetchState:'SUCCESSFUL',
+          googleCanonical:'https://maison-jf.com/servicos/tarot/',
+          userCanonical:'https://maison-jf.com/servicos/tarot/',
+          crawledAs:'DESKTOP',
+          sitemap:['https://maison-jf.com/sitemap.xml']
+        }
+      }
+    }),{status:200,headers:{'content-type':'application/json'}});
+  };
+  try{
+    const task=configuredSearchVisibilityTasks({
+      SEARCH_VISIBILITY_ENABLED:'true',
+      GOOGLE_SEARCH_CONSOLE_ENABLED:'true',
+      GOOGLE_SEARCH_CONSOLE_PROPERTY:'sc-domain:maison-jf.com',
+      GOOGLE_SEARCH_CONSOLE_CLIENT_ID:'client-id',
+      GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'client-secret',
+      GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh-secret',
+      GOOGLE_SEARCH_CONSOLE_INSPECTION_URLS:'https://maison-jf.com/servicos/tarot/'
+    }).find(x=>x.family==='google_url_inspection');
+
+    const result=await fetchSearchVisibility({
+      GOOGLE_SEARCH_CONSOLE_CLIENT_ID:'client-id',
+      GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'client-secret',
+      GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh-secret'
+    },task,new Date('2026-09-25T00:00:00Z'));
+
+    assert.equal(calls.length,2);
+    assert.ok(calls[1].url.includes('urlInspection/index:inspect'));
+    const request=JSON.parse(calls[1].options.body);
+    assert.equal(request.inspectionUrl,'https://maison-jf.com/servicos/tarot/');
+    assert.equal(request.siteUrl,'sc-domain:maison-jf.com');
+    const payload=JSON.parse(result.text);
+    assert.equal(payload.schema,'maison.search-visibility.gsc-inspection.v1');
+    assert.equal(payload.verdict,'PASS');
+    assert.equal(payload.robots_txt_state,'ALLOWED');
+    assert.equal(payload.indexing_state,'INDEXING_ALLOWED');
+    assert.equal(payload.google_canonical,payload.user_canonical);
+    assert.equal(result.strength,100);
+    assert.equal(result.evidenceKind,'coverage');
+    assert.ok(!JSON.stringify(result).includes('inspection-access'));
+  }finally{
+    globalThis.fetch=original;
+  }
+});
+
+test('URL Inspection rejects foreign or insecure target URLs',()=>{
+  assert.throws(()=>configuredSearchVisibilityTasks({
+    SEARCH_VISIBILITY_ENABLED:'true',
+    GOOGLE_SEARCH_CONSOLE_ENABLED:'true',
+    GOOGLE_SEARCH_CONSOLE_PROPERTY:'sc-domain:maison-jf.com',
+    GOOGLE_SEARCH_CONSOLE_CLIENT_ID:'id',
+    GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET:'secret',
+    GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN:'refresh',
+    GOOGLE_SEARCH_CONSOLE_INSPECTION_URLS:'https://example.com/not-maison'
+  }),/gsc_invalid_inspection_url/);
 });
