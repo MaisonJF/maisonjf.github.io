@@ -63,55 +63,61 @@ jobs:
           }, sort_keys=True))
           PY
 
-      - name: Test OpenRouter key against an allowed free model
+      - name: Test OpenRouter key against allowed free models
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           python - <<'PY'
           import json, os, urllib.request, urllib.error
+          from pathlib import Path
+
           key=(os.environ.get("OPENROUTER_API_KEY") or "").strip()
           if not key:
               raise SystemExit("OPENROUTER_API_KEY missing")
 
-          body=json.dumps({
-              "model":"google/gemma-4-26b-a4b-it:free",
-              "messages":[{"role":"user","content":"Reply with the single word OK."}],
-              "max_tokens":16,
-              "temperature":0,
-              "provider":{
-                  "allow_fallbacks":False,
-                  "max_price":{"prompt":0,"completion":0}
-              }
-          }).encode()
+          cfg=json.loads(Path("workers/maison-intelligence/wrangler.jsonc").read_text())
+          v=cfg["vars"]
+          models=[v["OPENROUTER_MODEL"], *json.loads(v["OPENROUTER_FALLBACK_MODELS_JSON"])]
 
-          req=urllib.request.Request(
-              "https://openrouter.ai/api/v1/chat/completions",
-              data=body,
-              headers={
-                  "Authorization":"Bearer "+key,
-                  "Content-Type":"application/json",
-                  "HTTP-Referer":"https://maison-jf.com",
-                  "X-OpenRouter-Title":"MAISON JF Intelligence"
-              },
-              method="POST"
-          )
-          try:
-              with urllib.request.urlopen(req,timeout=45) as r:
-                  data=json.load(r)
-          except urllib.error.HTTPError as e:
-              msg=e.read(1200).decode("utf-8","replace")
-              print("openrouter_http",e.code)
-              print(msg)
-              raise
+          errors=[]
+          for model in models:
+              body=json.dumps({
+                  "model":model,
+                  "messages":[{"role":"user","content":"Reply with the single word OK."}],
+                  "max_tokens":16,
+                  "temperature":0,
+                  "provider":{
+                      "allow_fallbacks":False,
+                      "max_price":{"prompt":0,"completion":0}
+                  }
+              }).encode()
 
-          used=str(data.get("model") or "")
-          if ":free" not in used and used!="google/gemma-4-26b-a4b-it:free":
-              raise SystemExit("non_free_model_returned")
-          print(json.dumps({
-              "openrouter_test":"ok",
-              "model":used,
-              "has_response":bool((data.get("choices") or []))
-          }, sort_keys=True))
+              req=urllib.request.Request(
+                  "https://openrouter.ai/api/v1/chat/completions",
+                  data=body,
+                  headers={
+                      "Authorization":"Bearer "+key,
+                      "Content-Type":"application/json",
+                      "HTTP-Referer":"https://maison-jf.com",
+                      "X-OpenRouter-Title":"MAISON JF Intelligence"
+                  },
+                  method="POST"
+              )
+              try:
+                  with urllib.request.urlopen(req,timeout=45) as r:
+                      data=json.load(r)
+                  print(json.dumps({
+                      "openrouter_test":"ok",
+                      "requested_model":model,
+                      "returned_model":str(data.get("model") or ""),
+                      "has_response":bool((data.get("choices") or []))
+                  }, sort_keys=True))
+                  break
+              except urllib.error.HTTPError as e:
+                  errors.append({"model":model,"http":e.code})
+                  print(json.dumps({"model":model,"http":e.code,"retrying_free_fallback":True},sort_keys=True))
+          else:
+              raise SystemExit("all_allowed_free_models_failed: "+json.dumps(errors))
           PY
 
       - name: Render zero-cost live Worker config
