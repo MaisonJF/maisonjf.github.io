@@ -26,7 +26,7 @@
     "OSIRIS_MEMORY_ENABLED": "false",
     "OSIRIS_MEMORY_BRIDGE_URL": "",
     "OPENROUTER_ENABLED": "true",
-    "OPENROUTER_MODEL": "openrouter/free",
+    "OPENROUTER_MODEL": "google/gemma-4-26b-a4b-it:free",
     "OSIRIS_ENABLED": "true",
     "OSIRIS_BASE_URL": "https://osirisai.live",
     "OSIRIS_SOURCE_KEYS": "stats,flights,satellites,space_weather,earthquakes,fires,weather,air_quality,radar,conflicts,frontlines,gdelt,country_risk,news,live_news,markets,crypto,scm_suppliers,cctv,infrastructure,maritime,cyber_threats,cyber_attacks,malware",
