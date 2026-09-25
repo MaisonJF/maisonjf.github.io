@@ -75,7 +75,7 @@ if not seed.exists() or "catalog:service:b2b" not in seed.read_text(encoding="ut
     fail("canonical A3 B2B solution mapping missing")
 
 commerce_adapter=(ROOT/"functions/_lib/commerce-telemetry.js").read_text(encoding="utf-8")
-for token in ("recordB2bLifecycleEvent","idempotency_registry","solution_key='b2b'","b2b.lead"):
+for token in ("recordB2bLifecycleEvent","idempotency_registry","solution_key='b2b'","A2_COMMERCE_B2B_EVENTS"):
     if token not in commerce_adapter:
         fail("central B2B commerce adapter missing "+token)
 public_adapter=(ROOT/"functions/api/commerce-event.js").read_text(encoding="utf-8")
@@ -95,6 +95,7 @@ if '"content"' not in a11:
 run("bash",".github/maison-growth/brain/rebuild_commercial_context.sh","--check")
 run(sys.executable,".github/maison-growth/brain/test_schema_chain.py")
 run(sys.executable,".github/maison-growth/a2/test_event_collector.py")
+run("node",".github/maison-growth/a2/build_runtime_commerce_contract.mjs","--check")
 run(sys.executable,".github/maison-growth/a3/validate_a3.py")
 run("node","--test","functions/_lib/commerce-telemetry.test.mjs")
 run(sys.executable,".github/maison-growth/a11/test_a11.py")
