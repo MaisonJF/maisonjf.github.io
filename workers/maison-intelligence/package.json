@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "check": "npm run check:a2-registry && node --check src/index.js && node --check src/a2_runtime.js && node --check src/a2_source_registry.generated.js && node --check src/providers.js && node --check src/sources.js && node --check src/public_sources.js && node --check src/search_visibility.js && node --check src/visibility_probes.js && node --check src/memory.js && node --check src/core.js && node --check src/control_api.js && node --check src/proposal_api.js && node --check src/review_decision_api.js",
+    "check": "npm run check:a2-registry && node --check src/index.js && node --check src/a2_runtime.js && node --check src/a11_runtime.js && node --check src/a2_source_registry.generated.js && node --check src/providers.js && node --check src/sources.js && node --check src/public_sources.js && node --check src/search_visibility.js && node --check src/visibility_probes.js && node --check src/memory.js && node --check src/core.js && node --check src/control_api.js && node --check src/proposal_api.js && node --check src/review_decision_api.js",
     "generate:a2-registry": "node scripts/generate-a2-source-registry.mjs",
     "check:a2-registry": "node scripts/generate-a2-source-registry.mjs --check"
   },
