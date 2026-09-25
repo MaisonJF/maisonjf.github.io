@@ -141,6 +141,49 @@
     return { ...offerAttribution(), ...acquisitionAttribution() };
   }
 
+  function recordOfferEvent(eventType, offer, context = {}) {
+    try {
+      if (!offer?.id) return;
+      fetch('/api/offer-event', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        keepalive: true,
+        body: JSON.stringify({
+          event_type: eventType,
+          idempotency_key: ['offer', eventType, offer.id, Date.now(), Math.random().toString(36).slice(2, 10)].join(':'),
+          metadata: {
+            path: location.pathname,
+            surface: 'recommendation',
+            offer_id: offer.id,
+            recommendation_source: context.source || '',
+            recommendation_result: context.result || '',
+            recommendation_route: offer.route || '',
+            recommendation_brain: context.brain || ''
+          }
+        })
+      }).catch(() => {});
+    } catch (_) {}
+  }
+
+  function trackOfferExposure(offer, context = {}) {
+    recordOfferEvent('offer.exposure', offer, context);
+  }
+
+  function trackOfferClick(offer, context = {}) {
+    if (!offer?.id) return;
+    try {
+      sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify({
+        source: context.source || '',
+        offer: offer.id,
+        result: context.result || '',
+        route: offer.route || '',
+        brain: context.brain || '',
+        ts: Date.now()
+      }));
+    } catch (_) {}
+    recordOfferEvent('offer.click', offer, context);
+  }
+
   function track(name, parameters = {}) {
     if (localStorage.getItem(CONSENT_KEY) !== 'granted') return;
     loadGoogle();
@@ -149,7 +192,7 @@
 
   captureOfferAttribution();
   captureAcquisitionAttribution();
-  window.maisonAnalytics = { track, getAttribution };
+  window.maisonAnalytics = { track, getAttribution, trackOfferExposure, trackOfferClick };
   queuedEvents.forEach(([name, parameters]) => track(name, parameters));
 
   function saveConsent(value) {
