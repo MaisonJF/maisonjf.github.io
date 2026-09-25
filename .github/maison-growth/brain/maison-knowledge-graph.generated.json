@@ -31,6 +31,7 @@
         "auto-silenciamento-para-preservar-o-vinculo",
         "carga-mental-invisivel-da-casa",
         "culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido",
+        "micro-luxo-como-recompensa-e-ritual",
         "perda-ambigua-sem-fecho-claro",
         "precisar-de-solidao-para-recuperar-energia-social",
         "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
@@ -93,6 +94,7 @@
         "evitamento-financeiro-sob-escassez",
         "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
         "luto-por-um-futuro-que-deixou-de-ser-possivel",
+        "micro-luxo-como-recompensa-e-ritual",
         "quando-o-que-funciona-na-relacao-se-torna-invisivel",
         "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
         "telepressao-e-disponibilidade-permanente"
@@ -776,6 +778,25 @@
         "continuar depois de perder uma possibilidade"
       ],
       "territories": [
+        "cabeca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "micro-luxo-como-recompensa-e-ritual",
+      "intent": "reconhecer pequenos luxos e mimos intencionais como momentos de recompensa, celebração, prazer e identidade no quotidiano, distinguindo uma indulgência escolhida de pressão para gastar, culpa ou consumo impulsivo sem controlo",
+      "themes": [
+        "uma pequena vitória também merece ser marcada",
+        "o mimo que transforma um dia comum",
+        "recompensa sem precisar de uma grande ocasião",
+        "pequeno luxo escolhido sem culpa",
+        "rituais de recompensa que apetece repetir",
+        "comprar para si como gesto de celebração",
+        "prazer acessível vs impulso automático",
+        "objectos pequenos que dão vontade de coleccionar"
+      ],
+      "territories": [
+        "casa",
         "cabeca"
       ],
       "visibility": "internal"
