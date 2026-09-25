@@ -1,9 +1,25 @@
 const $=id=>document.getElementById(id);
-const offline=$('offlineView'),app=$('appView'),setup=$('setupView'),statusView=$('statusView'),message=$('message');
-let accessToken='';
+const offline=$('offlineView'),authView=$('authView'),app=$('appView'),setup=$('setupView'),statusView=$('statusView'),message=$('message'),authMessage=$('authMessage');
+let accessToken='',authConfig=null;
 
 function say(text){message.textContent=text||''}
+function authSay(text){authMessage.textContent=text||''}
 function idempotency(){return crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(16).slice(2)}
+function showOnly(view){offline.hidden=view!==offline;authView.hidden=view!==authView;app.hidden=view!==app}
+async function publicConfig(){
+  const response=await fetch('/api/sos/config',{headers:{accept:'application/json'},credentials:'same-origin'});
+  if(!response.ok)return null;
+  return response.json().catch(()=>null);
+}
+async function supabase(path,{method='GET',body,token}={}){
+  const headers={'apikey':authConfig.supabasePublishableKey};
+  if(token)headers.Authorization='Bearer '+token;
+  if(body!==undefined)headers['Content-Type']='application/json';
+  const response=await fetch(authConfig.supabaseUrl+'/auth/v1/'+path,{method,headers,body:body===undefined?undefined:JSON.stringify(body),redirect:'error'});
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw Object.assign(new Error(data.msg||data.error_description||data.error||'auth_failed'),{status:response.status});
+  return data;
+}
 async function api(path,{method='GET',body,idempotent=false}={}){
   const headers={'Authorization':'Bearer '+accessToken};
   if(body!==undefined)headers['Content-Type']='application/json';
@@ -26,10 +42,43 @@ function showStatus(data){
   $('nextDue').textContent=data.nextDueAt?'Próximo check-in: '+new Date(data.nextDueAt).toLocaleString('pt-PT'):state==='setup'?'O contacto de confiança ainda precisa de aceitar o convite.':'';
 }
 async function refresh(){showStatus(await api('status'))}
-async function boot(){
-  // A sessão Supabase será ligada aqui no ambiente fechado. Até lá, esta superfície é deliberadamente inerte.
-  offline.hidden=false;app.hidden=true;
+function consumeSessionFromUrl(){
+  const params=new URLSearchParams(location.hash.slice(1));
+  const token=params.get('access_token');
+  const expires=Number(params.get('expires_in')||0);
+  if(!token)return false;
+  accessToken=token;
+  sessionStorage.setItem('sos_access_token',token);
+  if(expires)sessionStorage.setItem('sos_access_expires_at',String(Date.now()+expires*1000));
+  history.replaceState(null,'',location.pathname+location.search);
+  return true;
 }
+function restoreSession(){
+  const token=sessionStorage.getItem('sos_access_token')||'';
+  const expiry=Number(sessionStorage.getItem('sos_access_expires_at')||0);
+  if(!token||(expiry&&Date.now()>=expiry)){sessionStorage.removeItem('sos_access_token');sessionStorage.removeItem('sos_access_expires_at');return false}
+  accessToken=token;return true;
+}
+async function boot(){
+  authConfig=await publicConfig();
+  if(!authConfig?.available){showOnly(offline);return}
+  consumeSessionFromUrl();
+  if(!accessToken)restoreSession();
+  if(!accessToken){showOnly(authView);return}
+  showOnly(app);
+  try{await refresh()}catch(error){
+    if(error.status===401){sessionStorage.clear();accessToken='';showOnly(authView);authSay('A sessão terminou. Envia um novo link.')}
+    else{say('O SOS está temporariamente indisponível.')}
+  }
+}
+$('authForm').addEventListener('submit',async event=>{
+  event.preventDefault();authSay('A enviar o link seguro…');
+  try{
+    const email=$('authEmail').value.trim().toLowerCase();
+    await supabase('otp',{method:'POST',body:{email,create_user:true,options:{email_redirect_to:location.origin+'/sos/'}}});
+    authSay('Enviámos o link. Abre o email neste dispositivo para continuar.');
+  }catch{authSay('Não foi possível enviar o link agora. Tenta novamente mais tarde.')}
+});
 $('setupView').addEventListener('submit',async event=>{
   event.preventDefault();say('A enviar convite…');
   try{
