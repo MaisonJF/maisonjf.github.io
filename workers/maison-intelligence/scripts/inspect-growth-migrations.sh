@@ -59,7 +59,7 @@ npx wrangler d1 execute "$DB_NAME" --remote --command "$SQL"
 
 
 echo
-echo "Detailed state for the pending 0012-0016 surfaces:"
+echo "Detailed state for the pending 0012-0017 surfaces:"
 OBJECT_SQL="
 SELECT type,name
 FROM sqlite_master
@@ -94,10 +94,15 @@ FROM schema_state
 WHERE schema_key IN (
   'maison_growth_a14_schema_version',
   'maison_brain_runtime_schema_version',
-  'maison_growth_a12_schema_version'
+  'maison_growth_a12_schema_version',
+  'maison_growth_b2b_solution_seed_version'
 )
 ORDER BY schema_key;
 "
 npx wrangler d1 execute "$DB_NAME" --remote --command "$STATE_SQL"
+
+echo
+echo "Canonical B2B A3 solution:"
+npx wrangler d1 execute "$DB_NAME" --remote --command "SELECT solution_id,solution_key,solution_type,delivery_mode,capacity_class,status FROM solutions WHERE solution_key='b2b';"
 
 echo "Inspection complete. This command is read-only; it does not apply migrations."
