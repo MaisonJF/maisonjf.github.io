@@ -95,6 +95,10 @@ function offerMarkup(o,index,result,brain){
   const label=o.slotLabel||'';
   return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brain||'fallback')+'" href="'+esc(attributedHref(o.href,o.id,result,brain))+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
 }
+document.addEventListener('click',event=>{
+ const link=event.target.closest?.('[data-vpc-offer]');if(!link)return;
+ window.maisonAnalytics?.trackOfferClick?.({id:link.dataset.vpcOffer,route:'test'},{source:'vpc',result:link.dataset.vpcResult||'',brain:link.dataset.vpcBrain||'fallback'});
+},{capture:true});
 async function brainOffers(result){
   const host=$('nextLinks');host.innerHTML='<p class="vpc-note">A escolher o que faz mais sentido agora…</p>';
   try{
@@ -102,6 +106,7 @@ async function brainOffers(result){
     const data=await response.json().catch(()=>({}));
     if(!response.ok||!Array.isArray(data.offers)||!data.offers.length)throw new Error('brain');
     host.innerHTML=data.offers.map((o,i)=>offerMarkup(o,i,result,data.version)).join('');
+  data.offers.forEach(o=>window.maisonAnalytics?.trackOfferExposure?.(o,{source:'vpc',result,brain:data.version}));
     track('vpc_offer_brain_result',{test:'apego',result,brain_version:data.version,offers:data.offers.map(o=>o.id).join(',')});
   }catch(_){
     const r=RESULTS[result];
