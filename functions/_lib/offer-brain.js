@@ -28,7 +28,7 @@ const TEST_PROFILES={
     tempo:{result:'belong',route:'talk',ranked:[{key:'attachment',score:7},{key:'seen',score:4}]},
     gestos:{result:'self',route:'gesture',ranked:[{key:'seen',score:6},{key:'belong',score:4}]},
     toque:{result:'belong',route:'gesture',ranked:[{key:'attachment',score:7},{key:'load',score:4}]},
-    simbolos:{result:'seen',route:'gesture',ranked:[{key:'belong',score:6},{key:'attachment',score:4}]}
+    presentes:{result:'seen',route:'gesture',ranked:[{key:'belong',score:6},{key:'attachment',score:4}]}
   }
 };
 const AXIS_TERRITORIES={
