@@ -72,6 +72,10 @@ jobs:
           MAISON_BRAIN_REVIEW_DECISION_TOKEN: ${{ secrets.MAISON_BRAIN_REVIEW_DECISION_TOKEN }}
         run: python .github/maison-growth/runtime/report_private_runtime_readiness.py
 
+      - name: Global health gate before live apply
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        run: python .github/maison-growth/brain/validate_global_health_gate.py
+
       - name: Guard live apply
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
         shell: bash
