@@ -3207,3 +3207,112 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--maison-gold)!import
 .services-page .quiet-link:focus-visible{
   background:linear-gradient(90deg,rgba(13,61,46,.08),transparent 48%,rgba(61,13,31,.06));
 }
+
+
+/* MAISON JF® — experience3 visible editorial evolution */
+.home-page--final{background:#070707}
+.home-page--final .site-header--home{
+  position:absolute;
+  padding-top:30px;padding-bottom:24px;
+  border-bottom-color:rgba(241,234,223,.18);
+  background:linear-gradient(180deg,rgba(0,0,0,.38),transparent);
+}
+.home-page--final .site-header--home .brand{font-size:13px;letter-spacing:.26em}
+.home-page--final .hero--final{min-height:100svh}
+.home-page--final .hero--final::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(5,23,17,.54) 0%,transparent 42%),
+    linear-gradient(0deg,#070707 0%,rgba(7,7,7,.72) 18%,transparent 58%),
+    radial-gradient(circle at 82% 24%,rgba(61,13,31,.24),transparent 34%);
+}
+.home-page--final .hero__copy--final{
+  z-index:3;display:grid;align-content:end;min-height:100svh;
+  padding-top:190px;padding-bottom:clamp(62px,8vh,108px);
+}
+.home-page--final .hero__identity{margin-bottom:12px}
+.home-page--final .hero__identity .eyebrow{color:rgba(241,234,223,.72);letter-spacing:.34em}
+.home-page--final .hero__headline.hero__headline--one-line{
+  max-width:9.2ch;margin:0 0 clamp(32px,5vh,58px);
+  font-size:clamp(72px,10.6vw,164px);line-height:.78;letter-spacing:-.065em;
+  text-wrap:balance;text-shadow:0 14px 48px rgba(0,0,0,.3);
+}
+.home-page--final .hero__choices{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;
+  max-width:980px;border-top:1px solid rgba(241,234,223,.28);
+}
+.home-page--final .hero__choice{padding:18px 20px 0 0}
+.home-page--final .hero__choice+.hero__choice{padding-left:20px;border-left:1px solid rgba(241,234,223,.18)}
+.home-page--final .hero__choice .button{
+  width:100%;min-height:54px;display:flex;align-items:center;justify-content:space-between;
+  border:0;border-bottom:1px solid rgba(241,234,223,.38);padding:14px 2px;
+  background:transparent;color:var(--maison-ivory);
+}
+.home-page--final .hero__choice .button img{width:20px;height:20px;object-fit:contain}
+.home-page--final .hero__choice .button span{flex:1;text-align:left;margin-left:10px}
+.home-page--final .hero__choice small{display:block;max-width:25ch;margin-top:10px;color:rgba(241,234,223,.6);font-size:11px}
+.home-page--final .doors--editorial{
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
+  width:100%;max-width:none;padding:1px 1px 0;background:rgba(241,234,223,.13);
+}
+.home-page--final .door--editorial{position:relative;min-height:min(70vw,760px);background:#090909;overflow:hidden}
+.home-page--final .door--editorial .media-slot{position:absolute;inset:0}
+.home-page--final .door--editorial .media-slot::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.84) 100%);
+}
+.home-page--final .door--editorial img{transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .8s;filter:saturate(.74) contrast(1.04)}
+.home-page--final .door--editorial:hover{transform:none}
+.home-page--final .door--editorial:hover img{transform:scale(1.025);filter:saturate(.92) contrast(1.04)}
+.home-page--final .door--editorial .door__copy{
+  position:absolute;z-index:2;inset:auto clamp(24px,4vw,64px) clamp(28px,5vw,70px);
+  padding:0;max-width:620px;
+}
+.home-page--final .door--editorial .door__copy span{color:var(--maison-gold);letter-spacing:.25em}
+.home-page--final .door--editorial h3{margin:.3em 0 .6em;font-size:clamp(40px,5vw,76px);line-height:.94;letter-spacing:-.035em}
+.home-page--final .door--editorial b{font-size:10px;letter-spacing:.2em;font-weight:600}
+.home-page--final .home-explore{
+  width:100%;max-width:none;margin:0;padding:clamp(90px,11vw,160px) max(20px,calc((100vw - var(--max))/2));
+  border-top:0;border-bottom:1px solid rgba(241,234,223,.12);
+}
+.home-page--final .home-explore h2{max-width:9ch;font-size:clamp(58px,8vw,116px);line-height:.88;letter-spacing:-.05em}
+.home-page--final .home-explore__links{margin-top:58px;border-top:1px solid rgba(241,234,223,.2)}
+.home-page--final .home-explore__links a{
+  min-height:92px;padding:24px 0;border-bottom:1px solid rgba(241,234,223,.2);
+  font:400 clamp(28px,3.2vw,48px)/1 var(--serif);text-transform:none;letter-spacing:-.02em;
+}
+.home-page--final .home-feature--professionals{
+  width:100%;max-width:none;grid-template-columns:1.08fr .92fr;gap:0;padding:0;
+  border-bottom:1px solid rgba(241,234,223,.12);
+}
+.home-page--final .home-feature--professionals .home-feature__media{min-height:720px}
+.home-page--final .home-feature--professionals .home-feature__copy{
+  display:flex;flex-direction:column;justify-content:center;padding:clamp(54px,7vw,110px);
+  background:linear-gradient(145deg,rgba(13,61,46,.22),rgba(7,7,7,.95) 48%,rgba(61,13,31,.13));
+}
+.home-page--final .home-feature--professionals h2{font-size:clamp(52px,5.5vw,84px);line-height:.92;letter-spacing:-.04em}
+@media(max-width:900px){
+  .home-page--final .hero__headline.hero__headline--one-line{font-size:clamp(64px,13vw,108px)}
+  .home-page--final .doors--editorial{grid-template-columns:1fr 1fr}
+  .home-page--final .door--editorial{min-height:72vw}
+  .home-page--final .home-feature--professionals{grid-template-columns:1fr}
+  .home-page--final .home-feature--professionals .home-feature__media{min-height:58vw}
+}
+@media(max-width:560px){
+  .home-page--final .site-header--home{padding-top:20px;padding-bottom:18px}
+  .home-page--final .hero__copy--final{padding-top:128px;padding-bottom:38px}
+  .home-page--final .hero__headline.hero__headline--one-line{max-width:7ch;font-size:clamp(58px,19vw,84px);line-height:.8}
+  .home-page--final .hero__choices{grid-template-columns:1fr;max-width:none}
+  .home-page--final .hero__choice{padding:10px 0 0}
+  .home-page--final .hero__choice+.hero__choice{padding-left:0;border-left:0}
+  .home-page--final .hero__choice small{margin:6px 0 2px}
+  .home-page--final .doors--editorial{grid-template-columns:1fr}
+  .home-page--final .door--editorial{min-height:118vw}
+  .home-page--final .door--editorial h3{font-size:clamp(38px,12vw,56px)}
+  .home-page--final .home-explore{padding-top:88px;padding-bottom:88px}
+  .home-page--final .home-explore h2{font-size:clamp(54px,17vw,76px)}
+  .home-page--final .home-explore__links{margin-top:38px}
+  .home-page--final .home-explore__links a{min-height:76px;font-size:32px}
+  .home-page--final .home-feature--professionals .home-feature__media{min-height:92vw}
+  .home-page--final .home-feature--professionals .home-feature__copy{padding:64px 22px 72px}
+}
