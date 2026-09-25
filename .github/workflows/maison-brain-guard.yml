@@ -7,6 +7,8 @@ on:
       - 'workers/maison-intelligence/**'
       - 'data/products.js'
       - 'data/services.js'
+      - 'functions/_lib/commerce-events.js'
+      - 'functions/api/b2b-lead.js'
       - '.github/workflows/maison-brain-guard.yml'
   push:
     branches:
@@ -56,6 +58,12 @@ jobs:
 
       - name: Validate Brain contracts and schema chain
         run: python .github/maison-growth/brain/validate_brain_runtime.py
+
+      - name: Validate canonical B2B feedback loop
+        run: |
+          python .github/maison-growth/brain/validate_b2b_feedback_loop.py
+          node --check functions/_lib/commerce-events.js
+          node --check functions/api/b2b-lead.js
 
       - name: Validate persistent observe runtime contracts
         run: python .github/maison-growth/runtime/validate_runtime.py
