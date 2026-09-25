@@ -30,6 +30,17 @@
       <p class="small">SOS Maison JF não é um serviço de emergência e não substitui o 112 ou outros serviços locais.</p>
     </div>
 
+    <div id="authView" hidden>
+      <h1>Entrar</h1>
+      <p class="lead">Recebe um link seguro no teu email. Sem palavra-passe.</p>
+      <form id="authForm">
+        <label>O teu email<input id="authEmail" name="email" type="email" autocomplete="email" required></label>
+        <button class="primary" type="submit">ENVIAR LINK</button>
+      </form>
+      <div class="status" id="authMessage" role="status" aria-live="polite"></div>
+      <p class="small">O link serve apenas para confirmar a tua identidade no SOS Maison JF.</p>
+    </div>
+
     <div id="appView" hidden>
       <div id="statusView">
         <p class="state" id="stateLabel">Tudo certo</p>
