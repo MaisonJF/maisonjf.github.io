@@ -177,6 +177,29 @@ class JourneyTests(unittest.TestCase):
         with self.assertRaises(A3ValidationError): build_journeys([a])
 
 
+    def test_b2b_lifecycle_uses_stable_a3_conversion_kinds(self):
+        expected = {
+            "b2b.lead": "lead",
+            "b2b.proposal": "lead",
+            "b2b.pilot": "order",
+            "b2b.order": "order",
+            "b2b.purchase": "purchase",
+            "b2b.recurrence": "purchase",
+        }
+        for event_type, kind in expected.items():
+            with self.subTest(event_type=event_type):
+                j = new_journey_id()
+                s = solution("b2b", "human", "negotiated", "b2b")
+                kwargs = {}
+                if kind == "purchase":
+                    kwargs = {"value_minor": 5000, "currency": "EUR"}
+                result = build_journeys([
+                    event(event_type, "2026-09-25T12:00:00Z", journey_id=j,
+                          solution_id=s["solution_id"], source="commerce", **kwargs)
+                ])
+                self.assertEqual(result.conversions[0].kind, kind)
+
+
 class EconomicsTests(unittest.TestCase):
     def make_conversion(self, sol, revenue):
         j = new_journey_id()
