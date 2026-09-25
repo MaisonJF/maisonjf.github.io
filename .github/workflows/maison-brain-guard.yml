@@ -83,3 +83,7 @@ jobs:
       - name: Test A13 worker
         working-directory: workers/maison-intelligence
         run: npm test
+
+      - name: Global health gate before autonomy
+        run: python .github/maison-growth/brain/validate_global_health_gate.py
+
