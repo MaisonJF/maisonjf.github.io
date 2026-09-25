@@ -82,8 +82,35 @@ if(interest?.startsWith('b2b')){
 }
 const wa=document.getElementById('whatsapp');
 wa.href=`https://wa.me/351923318289?text=${encodeURIComponent(message)}`;
-wa.addEventListener('click',()=>track('contact_whatsapp_click',{
- product:product||'',interest:interest||'',origin,page_path:location.pathname,
- b2b_business:b2b.business||'',b2b_goal:b2b.goal||'',b2b_model:b2b.model||'',b2b_scale:b2b.scale||'',b2b_result:b2b.result||''
-}));
+const b2bLeadIdempotency='b2b:lead:'+(crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(16).slice(2));
+function emitCanonicalB2BLead(){
+ if(!interest?.startsWith('b2b'))return;
+ if(localStorage.getItem('maison_analytics_consent_v1')!=='granted')return;
+ const metadata={
+   interest,
+   origin:origin||'contacto',
+   business:b2b.business||'',
+   goal:b2b.goal||'',
+   gap:b2b.gap||'',
+   client:b2b.client||'',
+   model:b2b.model||'',
+   scale:b2b.scale||'',
+   start:b2b.start||'',
+   result_type:b2b.result||''
+ };
+ for(const key of Object.keys(metadata)){if(!metadata[key])delete metadata[key]}
+ fetch('/api/b2b-lead',{
+   method:'POST',
+   headers:{'content-type':'application/json'},
+   body:JSON.stringify({event_type:'b2b.lead',idempotency_key:b2bLeadIdempotency,metadata}),
+   keepalive:true
+ }).catch(()=>{});
+}
+wa.addEventListener('click',()=>{
+ track('contact_whatsapp_click',{
+  product:product||'',interest:interest||'',origin,page_path:location.pathname,
+  b2b_business:b2b.business||'',b2b_goal:b2b.goal||'',b2b_model:b2b.model||'',b2b_scale:b2b.scale||'',b2b_result:b2b.result||''
+ });
+ emitCanonicalB2BLead();
+});
 })();</script></body></html>
