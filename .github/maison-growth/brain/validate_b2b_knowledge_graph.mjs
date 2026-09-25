@@ -86,7 +86,7 @@ const contextScript=fs.readFileSync(path.join(repoRoot,'profissionais/b2b-contex
 for(const token of ["['organizacao'","['equipa'","['formacao'","['workshop'","'training_pilot'","interesse=b2b-formacao","withB2bContext"]){
   assert(test.includes(token),'professional_test_contract_missing:'+token);
 }
-for(const token of ["'b2b-presentes'","'b2b-formacao'","b2b_business","b2b_result"]){
+for(const token of ["'b2b-presentes'","'b2b-formacao'","b2b_business","b2b_result","fallbackLink","Voltar a Profissionais"]){
   assert(contact.includes(token),'b2b_contact_handoff_missing:'+token);
 }
 for(const token of ['organizacao','equipa','formacao','training_pilot']){
