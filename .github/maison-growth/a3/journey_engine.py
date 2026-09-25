@@ -24,6 +24,10 @@ CONVERSION_EVENT_TYPES = {
     "service.contact": "lead",
     "b2b.order": "order",
     "b2b.lead": "lead",
+    "b2b.proposal": "proposal",
+    "b2b.pilot": "pilot",
+    "b2b.purchase": "purchase",
+    "b2b.recurrence": "recurrence",
     "company.contact": "lead",
 }
 
