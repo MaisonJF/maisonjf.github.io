@@ -2,7 +2,7 @@
 
 A2 is the isolated ingestion boundary for the Maison Growth Engine.
 
-It does **not** expose a public HTTP endpoint, provision a Worker/Queue/D1 binding, modify the Maison site, or become a dependency of any public runtime. The public Maison must remain fully operational if A2 is absent.
+It does **not** expose a public HTTP endpoint, modify the Maison site, or become a dependency of any public runtime. A private implementation now exists at `/internal/a2/ingest` inside the existing `maison-intelligence` Worker, but it is committed **disabled by default** and requires a dedicated secret plus explicit activation. The public Maison must remain fully operational if A2 is absent.
 
 ## Pipeline
 
@@ -13,7 +13,9 @@ The collector uses ports/adapters:
 - `EventCollector` owns validation and normalization.
 - `MemoryEventStore` supports deterministic unit tests.
 - `SQLiteA1EventStore` proves compatibility with the A1 D1/SQLite schema.
-- A future Cloudflare Worker/Queue/D1 adapter must implement the same persistence semantics rather than changing collector rules.
+- The private Cloudflare Worker adapter implements the same validation, privacy, idempotency and A1 persistence semantics.
+- Its source registry is generated from the canonical `source-registry.json`; CI rejects manual drift.
+- A Queue remains optional and, if added, may only receive already validated PII-free normalized events.
 
 ## Deny by default
 
@@ -49,4 +51,4 @@ The validator executes the automatic test suite and checks A0/A1 isolation contr
 
 ## Activation boundary
 
-A2 is repository-complete before Cloudflare activation. Future runtime activation requires a dedicated private/controlled Worker/Queue/D1 path and reviewed bindings; it must not create a hard dependency from the public site.
+A2 is repository-complete before runtime activation. The private runtime code is implemented but disabled. Activation requires the reviewed steps in `ACTIVATION.md`, a dedicated secret, and must not create a hard dependency from the public site.
