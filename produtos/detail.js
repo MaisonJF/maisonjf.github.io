@@ -17,7 +17,7 @@
     return;
   }
 
-  document.title=`${p.name} | MAISON JF®`;
+  document.title=`${p.name}${p.size?' '+p.size:''} | MAISON JF®`;
   const canonical=document.querySelector('link[rel="canonical"]');
   const productUrl='https://maison-jf.com/produtos/'+encodeURIComponent(p.slug)+'/';
   if(canonical)canonical.href=productUrl;
@@ -71,8 +71,8 @@
         </div>
         <p class="product-checkout-status" data-checkout-status aria-live="polite"></p>
         <div class="product-meta-links">
-          <a href="${root}envios.html">Envios</a>
-          <a href="${root}informacao-legal.html">Condições</a>
+          <a href="${root}envios">Envios</a>
+          <a href="${root}informacao-legal">Condições</a>
         </div>
       </div>
     </section>

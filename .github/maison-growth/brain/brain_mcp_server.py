@@ -18,6 +18,7 @@ from build_commercial_attention import load_attention as load_commercial_attenti
 from digital_experience_coverage import load_coverage as load_digital_experience_coverage
 from commercial_readiness_board import build_board
 from knowledge_context import OceanEditorialContext
+from public_discovery_context import PublicDiscoveryContext
 from local_embeddings import MultilingualE5SmallProvider
 from osiris_context import graph_search as osiris_graph_search
 from semantic_pgvector import PgvectorSemanticReader
@@ -38,7 +39,7 @@ mcp=FastMCP(
     "Maison Brain Read Context",
     instructions=(
         "Read-only Maison intelligence context. Tools may retrieve internal status, "
-        "curated Oceanos metadata, Semantic Memory projections and private Osiris graph context. "
+        "curated Oceanos metadata, public discovery graph context, Semantic Memory projections and private Osiris graph context. "
         "This server has no outreach, publishing, catalogue, price, checkout or spend tools."
     ),
     host="0.0.0.0",
@@ -64,6 +65,10 @@ def _status_text() -> str:
 
 def _ocean_context() -> OceanEditorialContext:
     return OceanEditorialContext.from_file(ROOT/"editorial-queue.json")
+
+
+def _public_discovery() -> PublicDiscoveryContext:
+    return PublicDiscoveryContext.from_file(ROOT/"public-discovery.generated.json")
 
 
 def _commercial_assets() -> CommercialAssetContext:
@@ -140,6 +145,36 @@ def maison_ocean_search(query: str, limit: int=8) -> dict[str,Any]:
                 "score":hit.score,
                 "source_kind":hit.source_kind,
                 "evidence_refs":hit.evidence_refs,
+            }
+            for hit in hits
+        ],
+    }
+
+
+@mcp.tool(annotations=READ_ONLY)
+def maison_public_discovery_search(query: str, limit: int=10) -> dict[str,Any]:
+    """Search the derived public canonical/metadata/schema/internal-link graph read-only."""
+    if not query.strip():
+        raise ValueError("query_required")
+    if not 1 <= limit <= 30:
+        raise ValueError("limit_must_be_1_30")
+    ctx=_public_discovery()
+    hits=ctx.search(query,limit=limit)
+    return {
+        "query":query,
+        "mode":"read_only",
+        "derived_from_public_surfaces_only":True,
+        "publication_authority":False,
+        "hits":[
+            {
+                "ref":hit.ref,
+                "url":hit.url,
+                "title":hit.title,
+                "description":hit.description,
+                "group":hit.group,
+                "source_file":hit.source_file,
+                "schema_types":list(hit.schema_types),
+                "score":hit.score,
             }
             for hit in hits
         ],

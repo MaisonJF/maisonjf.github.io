@@ -1,0 +1,59 @@
+{
+  "schema_version": "maison_external_entity_authority_v1",
+  "observed_at": "2026-09-25",
+  "contract": {
+    "public_profile_facts_only": true,
+    "no_audience_metrics": true,
+    "no_private_profile_data": true,
+    "advisory_only": true,
+    "publication_authority": false
+  },
+  "canonical_site": "https://maison-jf.com/",
+  "profiles": [
+    {
+      "platform": "Instagram",
+      "username": "maisonjfatelier",
+      "display_name": "João Fadario | Maison JF ®",
+      "profile_url": "https://www.instagram.com/maisonjfatelier/",
+      "bio_domain_mention": false,
+      "reciprocal_site_link": "missing",
+      "evidence": "connected Instagram profile returned website=null"
+    },
+    {
+      "platform": "Threads",
+      "username": "maisonjfatelier",
+      "display_name": "Maison JF™ | Casa de Ritual",
+      "profile_url": null,
+      "bio_domain_mention": false,
+      "reciprocal_site_link": "unknown",
+      "evidence": "connected Threads profile; canonical public profile URL not resolved"
+    },
+    {
+      "platform": "TikTok",
+      "username": "maison.jf1",
+      "display_name": "Maison JF",
+      "profile_url": "https://www.tiktok.com/@maison.jf1",
+      "provider_deep_link": "https://vm.tiktok.com/ZGdQGWUTe/",
+      "bio_domain_mention": true,
+      "reciprocal_site_link": "unknown",
+      "evidence": "connected TikTok profile bio contains maison-jf.com; connector does not expose clickable bio-link URL"
+    }
+  ],
+  "gaps": [
+    {
+      "id": "instagram_reciprocal_site_link",
+      "state": "open",
+      "recommendation": "Add https://maison-jf.com/ as the public Instagram website/profile link."
+    },
+    {
+      "id": "threads_domain_identity",
+      "state": "open",
+      "recommendation": "Add maison-jf.com to the public Threads profile when the profile allows an external link or bio update."
+    },
+    {
+      "id": "tiktok_clickable_site_link_verification",
+      "state": "open",
+      "recommendation": "Verify whether the TikTok profile exposes maison-jf.com as a clickable external link, not only bio text."
+    }
+  ]
+}

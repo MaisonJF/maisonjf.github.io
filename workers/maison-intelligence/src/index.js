@@ -6,6 +6,8 @@ import { configuredProviders, PROVIDERS } from './providers.js';
 import { configuredOsirisSources, fetchOsirisSource, sourceDefinition, osirisSourceDue } from './sources.js';
 import { mirrorToOsirisMemory } from './memory.js';
 import { configuredPublicSourceTasks, fetchPublicSource, publicSourceDue, publicTaskIdentity } from './public_sources.js';
+import { configuredSearchVisibilityTasks, fetchSearchVisibility, searchVisibilityDue, searchVisibilityTaskIdentity } from './search_visibility.js';
+import { buildVisibilityProbePrompt, decorateVisibilityResult, probesForDate, providerCanRunProbe } from './visibility_probes.js';
 import { handleBrainControlRequest } from './control_api.js';
 import { handleBrainProposalRequest } from './proposal_api.js';
 import { handleBrainReviewDecisionRequest } from './review_decision_api.js';
@@ -65,21 +67,30 @@ async function persistObservation(env, task, result) {
   const observedAt = new Date().toISOString();
   const source = `a13.${result.providerId}`.slice(0, 80);
   const idempotencyKey = task.taskKey.slice(0, 200);
-  const groundingState = citations.length ? 'grounded' : 'ungrounded';
-  const strength = citations.length >= 3 ? 80 : citations.length >= 1 ? 60 : 25;
-  const confidenceClass = citations.length >= 2 ? 'high' : citations.length >= 1 ? 'medium' : 'low';
+  const independentEvidenceRoots = Number.isInteger(result.independentEvidenceRoots)
+    ? Math.max(0,result.independentEvidenceRoots)
+    : citations.length;
+  const groundingState = result.groundingState || (citations.length ? 'grounded' : 'ungrounded');
+  const strength = Number.isFinite(Number(result.strength))
+    ? Math.max(0,Math.min(100,Number(result.strength)))
+    : citations.length >= 3 ? 80 : citations.length >= 1 ? 60 : 25;
+  const confidenceClass = result.confidenceClass || (citations.length >= 2 ? 'high' : citations.length >= 1 ? 'medium' : 'low');
+  const evidenceSource = result.evidenceSource || 'system';
+  const evidenceKind = result.evidenceKind || 'demand';
+  const sourceKind = result.sourceKind || 'external_intelligence';
   const metadata = JSON.stringify({
     a13: true, territory_key: task.territoryKey, provider_id: result.providerId,
     model_id: result.modelId, grounding_state: groundingState,
-    independent_evidence_roots: citations.length
+    independent_evidence_roots: independentEvidenceRoots,
+    source_kind: sourceKind
   });
   const evidenceFacts = JSON.stringify({
-    source_kind: 'external_intelligence',
+    source_kind: sourceKind,
     territory_key: task.territoryKey,
     provider_id: result.providerId,
     model_id: result.modelId,
     grounding_state: groundingState,
-    independent_evidence_roots: citations.length,
+    independent_evidence_roots: independentEvidenceRoots,
     normalized_language: safeText,
     citations
   });
@@ -105,9 +116,9 @@ async function persistObservation(env, task, result) {
       INSERT INTO map_evidence
         (evidence_id,source,source_event_id,journey_id,evidence_kind,observed_at,strength,
          confidence_class,payload_hash,facts_json,created_at)
-      VALUES (?,'system',?,NULL,'demand',?,?,?,?,?,?)
+      VALUES (?,?,?,NULL,?,?,?,?,?,?,?)
     `).bind(
-      evidenceId,eventId,observedAt,strength,confidenceClass,payloadHash,evidenceFacts,observedAt
+      evidenceId,evidenceSource,eventId,evidenceKind,observedAt,strength,confidenceClass,payloadHash,evidenceFacts,observedAt
     )
   ];
 
@@ -184,6 +195,49 @@ async function processPublicSourceTask(env, task) {
   return { stored: true, provider: task.providerId, territory: task.territoryKey };
 }
 
+async function processSearchVisibilityTask(env, task) {
+  const control = await controlState(env);
+  if (!control.enabled) return { skipped: control.reason };
+  if (await alreadyDone(env, task.taskKey)) return { skipped: 'duplicate_task' };
+  const day = task.day || utcDay();
+  const cap = env.MAX_DAILY_CALLS_PER_SEARCH_SOURCE || '10';
+  const usageKey = 'search:' + task.providerId;
+  if (!(await underDailyCap(env, usageKey, day, cap))) return { skipped: 'daily_cap' };
+
+  let result;
+  try {
+    result = await fetchSearchVisibility(env, task.searchTask, new Date(task.scheduledAt));
+    await markUsage(env, usageKey, day, true, result.usage);
+  } catch (error) {
+    await markUsage(env, usageKey, day, false, null);
+    throw error;
+  }
+  await persistObservation(env, task, result);
+  return { stored: true, provider: task.providerId, territory: task.territoryKey };
+}
+
+async function processVisibilityProbeTask(env, task) {
+  const control = await controlState(env);
+  if (!control.enabled) return { skipped: control.reason };
+  if (await alreadyDone(env, task.taskKey)) return { skipped: 'duplicate_task' };
+  const day = task.day || utcDay();
+  const cap = env.MAX_DAILY_CALLS_PER_VISIBILITY_PROVIDER || '2';
+  const usageKey = 'visibility:' + task.providerId;
+  if (!(await underDailyCap(env, usageKey, day, cap))) return { skipped: 'daily_cap' };
+  const caller = PROVIDERS[task.providerId];
+  if (!caller) return { skipped: 'unknown_provider' };
+
+  let result;
+  try {
+    result = decorateVisibilityResult(await caller(env, task.prompt), task.probe);
+    await markUsage(env, usageKey, day, true, result.usage);
+  } catch (error) {
+    await markUsage(env, usageKey, day, false, null);
+    throw error;
+  }
+  await persistObservation(env, task, result);
+  return { stored: true, provider: task.providerId, territory: task.territoryKey, probe: task.probe.id };
+}
 async function processTask(env, task) {
   const control = await controlState(env);
   if (!control.enabled) return { skipped: control.reason };
@@ -270,6 +324,71 @@ async function enqueuePublicSourceRun(env, scheduledDate) {
   return { queued: messages.length, configured: configured.length };
 }
 
+async function enqueueSearchVisibilityRun(env, scheduledDate) {
+  const control = await controlState(env);
+  if (!control.enabled) return { queued: 0, reason: control.reason };
+  const configured = configuredSearchVisibilityTasks(env);
+  if (!configured.length) return { queued: 0, reason: 'search_visibility_disabled_or_unconfigured' };
+
+  const day = utcDay(scheduledDate);
+  const hour = scheduledDate.toISOString().slice(0, 13);
+  const messages = [];
+  for (const searchTask of configured) {
+    if (!searchVisibilityDue(searchTask, scheduledDate)) continue;
+    const usageKey = 'search:' + searchTask.providerId;
+    const cap = env.MAX_DAILY_CALLS_PER_SEARCH_SOURCE || '10';
+    if (!(await underDailyCap(env, usageKey, day, cap))) continue;
+    const promptFingerprint = await sha256Hex(searchVisibilityTaskIdentity(searchTask));
+    messages.push({ body: {
+      kind: 'search_visibility_snapshot',
+      day,
+      providerId: searchTask.providerId,
+      territoryKey: searchTask.territoryKey,
+      prompt: 'Search visibility snapshot: ' + searchTask.key,
+      promptFingerprint,
+      taskKey: hour + ':search:' + searchTask.providerId + ':' + searchTask.key,
+      scheduledAt: scheduledDate.toISOString(),
+      searchTask
+    }});
+  }
+  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0, 100));
+  return { queued: messages.length, configured: configured.length };
+}
+
+async function enqueueVisibilityProbeRun(env, scheduledDate) {
+  const control = await controlState(env);
+  if (!control.enabled) return { queued: 0, reason: control.reason };
+  if (!isTrue(env.SEARCH_VISIBILITY_PROBES_ENABLED)) return { queued: 0, reason: 'visibility_probes_disabled' };
+  const providers = configuredProviders(env);
+  if (!providers.length) return { queued: 0, reason: 'no_provider_secrets_configured' };
+
+  const count = clampInt(env.VISIBILITY_PROBES_PER_RUN, 2, 1, 4);
+  const probes = probesForDate(scheduledDate, count);
+  const day = utcDay(scheduledDate);
+  const messages = [];
+  for (const probe of probes) {
+    const prompt = buildVisibilityProbePrompt(probe);
+    const promptFingerprint = await sha256Hex(prompt);
+    for (const providerId of providers) {
+      if (!providerCanRunProbe(providerId, probe)) continue;
+      const usageKey = 'visibility:' + providerId;
+      const cap = env.MAX_DAILY_CALLS_PER_VISIBILITY_PROVIDER || '2';
+      if (!(await underDailyCap(env, usageKey, day, cap))) continue;
+      messages.push({ body: {
+        kind: 'visibility_probe',
+        day,
+        providerId,
+        territoryKey: 'search_visibility',
+        prompt,
+        promptFingerprint,
+        taskKey: day + ':visibility:' + providerId + ':' + probe.id + ':' + promptFingerprint.slice(0, 16),
+        probe
+      }});
+    }
+  }
+  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0, 100));
+  return { queued: messages.length, providers: providers.length, probes: probes.length };
+}
 async function enqueueRun(env, scheduledDate) {
   const control = await controlState(env);
   if (!control.enabled) return { queued: 0, reason: control.reason };
@@ -312,18 +431,27 @@ export default {
 
   async scheduled(controller, env, ctx) {
     const when = new Date(controller.scheduledTime);
-    const jobs = [enqueueOsirisRun(env, when), enqueuePublicSourceRun(env, when)];
-    if (controller.cron === '17 0 * * *') jobs.push(enqueueRun(env, when));
+    const jobs = [
+      enqueueOsirisRun(env, when),
+      enqueuePublicSourceRun(env, when),
+      enqueueSearchVisibilityRun(env, when)
+    ];
+    if (controller.cron === '17 4 * * *') {
+      jobs.push(enqueueRun(env, when));
+      jobs.push(enqueueVisibilityProbeRun(env, when));
+    }
     ctx.waitUntil(Promise.all(jobs));
   },
 
   async queue(batch, env) {
     for (const message of batch.messages) {
       const task = message.body;
-      if (!task || !['sensor_query','source_snapshot','public_source_snapshot'].includes(task.kind)) { message.ack(); continue; }
+      if (!task || !['sensor_query','source_snapshot','public_source_snapshot','search_visibility_snapshot','visibility_probe'].includes(task.kind)) { message.ack(); continue; }
       try {
         if (task.kind === 'source_snapshot') await processSourceTask(env, task);
         else if (task.kind === 'public_source_snapshot') await processPublicSourceTask(env, task);
+        else if (task.kind === 'search_visibility_snapshot') await processSearchVisibilityTask(env, task);
+        else if (task.kind === 'visibility_probe') await processVisibilityProbeTask(env, task);
         else await processTask(env, task);
         message.ack();
       } catch (error) {

@@ -7,7 +7,8 @@
   "preview_urls": false,
   "triggers": {
     "crons": [
-      "17 0 * * *"
+      "0 * * * *",
+      "17 4 * * *"
     ]
   },
   "vars": {
@@ -50,7 +51,18 @@
     "ANTHROPIC_MODEL": "",
     "ZERO_COST_MODE": "true",
     "ZERO_COST_OBSERVE_ACTIVATION": "true",
-    "OPENROUTER_FALLBACK_MODELS_JSON": "[\"qwen/qwen3.8-27b:free\",\"nvidia/nemotron-3-super-120b-a12b:free\",\"nvidia/nemotron-3-ultra-550b-a55b:free\",\"z-ai/glm-5.2:free\",\"thinkingmachines/inkling-small:free\",\"nex-agi/nex-n2.5-pro:free\",\"inclusionai/ling-3.0-flash-fin:free\",\"poolside/laguna-s-2.1:free\"]"
+    "OPENROUTER_FALLBACK_MODELS_JSON": "[\"qwen/qwen3.8-27b:free\",\"nvidia/nemotron-3-super-120b-a12b:free\",\"nvidia/nemotron-3-ultra-550b-a55b:free\",\"z-ai/glm-5.2:free\",\"thinkingmachines/inkling-small:free\",\"nex-agi/nex-n2.5-pro:free\",\"inclusionai/ling-3.0-flash-fin:free\",\"poolside/laguna-s-2.1:free\"]",
+    "SEARCH_VISIBILITY_ENABLED": "true",
+    "GOOGLE_SEARCH_CONSOLE_ENABLED": "true",
+    "GOOGLE_SEARCH_CONSOLE_PROPERTY": "sc-domain:maison-jf.com",
+    "GOOGLE_SEARCH_CONSOLE_WINDOW_DAYS": "28",
+    "GOOGLE_SEARCH_CONSOLE_LAG_DAYS": "3",
+    "MAX_DAILY_CALLS_PER_SEARCH_SOURCE": "10",
+    "SEARCH_VISIBILITY_PROBES_ENABLED": "true",
+    "VISIBILITY_PROBES_PER_RUN": "2",
+    "MAX_DAILY_CALLS_PER_VISIBILITY_PROVIDER": "1",
+    "BING_WEBMASTER_ENABLED": "false",
+    "BING_WEBMASTER_SITE_URL": "https://maison-jf.com/"
   },
   "ai": {
     "binding": "AI"

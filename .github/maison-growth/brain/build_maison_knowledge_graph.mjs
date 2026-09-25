@@ -1,10 +1,16 @@
 import fs from 'node:fs';
+import {buildPublicDiscovery} from './build_public_discovery.mjs';
+import {buildSearchVisibility} from './build_search_visibility.mjs';
 
 const oceans=JSON.parse(fs.readFileSync(new URL('../oceans/candidates.json',import.meta.url),'utf8'));
 const source=fs.readFileSync(new URL('../../../functions/_lib/offer-brain.js',import.meta.url),'utf8');
 const match=source.match(/export const MAISON_OFFER_CATALOGUE=(\[[\s\S]*?\n\]);\n\nexport function/);
 if(!match)throw new Error('offer_catalogue_not_found');
 const offers=Function('"use strict";return ('+match[1]+')')();
+const discovery=buildPublicDiscovery();
+const searchVisibility=buildSearchVisibility();
+const publicIdentity=JSON.parse(fs.readFileSync(new URL('public-entity-evidence.json',import.meta.url),'utf8'));
+const externalEntityAuthority=JSON.parse(fs.readFileSync(new URL('external-entity-authority.json',import.meta.url),'utf8'));
 
 const TERRITORIES={
   casa:{label:'Casa',url:'/portas/casa'},
@@ -37,7 +43,7 @@ const territories=Object.entries(TERRITORIES).map(([id,base])=>({
 }));
 const graph={
   schema_version:'maison_knowledge_graph_v1',
-  generated_from:['.github/maison-growth/oceans/candidates.json','functions/_lib/offer-brain.js'],
+  generated_from:['.github/maison-growth/oceans/candidates.json','functions/_lib/offer-brain.js','sitemap.xml','robots.txt','llms.txt','public HTML backing files','.github/maison-growth/brain/search-visibility-baseline.json','.github/maison-growth/brain/public-entity-evidence.json','.github/maison-growth/brain/external-entity-authority.json','_redirects'],
   principle:'Humano vê João. Máquina vê estrutura. Brain compreende os dois. MAISON transforma isso em desejo, utilidade e negócio.',
   contract:{
     machine_facing:true,
@@ -48,6 +54,50 @@ const graph={
     providers_do_not_define_voice:true
   },
   territories,
+  publicDiscovery:{
+    schema_version:discovery.schema_version,
+    protocols:discovery.protocols,
+    summary:discovery.summary,
+    pages:discovery.pages.map(page=>({
+      url:page.url,
+      source_file:page.source_file,
+      group:page.group,
+      title:page.title,
+      structured_data_types:page.structured_data.types,
+      internal_links:page.internal_links,
+      internal_link_in_degree:page.internal_link_in_degree,
+      internal_link_out_degree:page.internal_link_out_degree
+    }))
+  },
+  publicIdentity:{
+    schema_version:publicIdentity.schema_version,
+    organization_id:publicIdentity.organization_id,
+    same_as:publicIdentity.same_as.map(item=>({
+      platform:item.platform,
+      public_url:item.public_url
+    })),
+    external_authority:{
+      schema_version:externalEntityAuthority.schema_version,
+      observed_at:externalEntityAuthority.observed_at,
+      profiles:externalEntityAuthority.profiles.map(profile=>({
+        platform:profile.platform,
+        username:profile.username,
+        bio_domain_mention:profile.bio_domain_mention,
+        reciprocal_site_link:profile.reciprocal_site_link
+      })),
+      gaps:externalEntityAuthority.gaps
+    }
+  },
+  searchVisibility:{
+    schema_version:searchVisibility.schema_version,
+    provenance:searchVisibility.provenance,
+    contract:searchVisibility.contract,
+    sitemap:searchVisibility.sitemap,
+    search_appearance:searchVisibility.search_appearance,
+    summary:searchVisibility.summary,
+    priority_recovery:searchVisibility.priority_recovery,
+    pages:searchVisibility.pages
+  },
   offers:offers.filter(o=>o.status!=='hidden').map(o=>({
     id:o.id,title:o.title,href:o.href,format:o.format,family:o.family,stage:o.stage,
     territories:o.territories||[],axes:o.axes||[],routes:o.routes||[]

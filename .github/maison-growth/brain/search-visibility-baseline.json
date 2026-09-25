@@ -1,0 +1,207 @@
+{
+  "schema": "maison.search-visibility.snapshot.v1",
+  "observed_at": "2026-09-25",
+  "provider_id": "google_search_console",
+  "collector": "windsor_ai",
+  "property": "sc-domain:maison-jf.com",
+  "window": "last_90d",
+  "notes": [
+    "Search Analytics API may omit low-volume query rows for privacy; page observations are used for legacy recovery.",
+    "Sitemap indexed count is deprecated and is not used as a coverage metric."
+  ],
+  "sitemap": {
+    "url": "https://maison-jf.com/sitemap.xml",
+    "is_sitemaps_index": true,
+    "last_submitted": "2026-09-09T16:23:09.186Z",
+    "last_downloaded": "2026-09-25T10:53:20.593Z",
+    "submitted": 151,
+    "warnings": 0,
+    "errors": 0
+  },
+  "pages": [
+    {
+      "url": "https://maison-jf.com/",
+      "clicks": 28,
+      "impressions": 56,
+      "ctr": 0.5,
+      "position": 1.6964
+    },
+    {
+      "url": "https://maison-jf.com/cabeca/porque-volto-sempre-aos-mesmos-padroes",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5
+    },
+    {
+      "url": "https://maison-jf.com/cart",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3
+    },
+    {
+      "url": "https://maison-jf.com/collections/all",
+      "clicks": 0,
+      "impressions": 35,
+      "ctr": 0,
+      "position": 3.3714
+    },
+    {
+      "url": "https://maison-jf.com/collections/casa-ambiente",
+      "clicks": 0,
+      "impressions": 25,
+      "ctr": 0,
+      "position": 5.24
+    },
+    {
+      "url": "https://maison-jf.com/espiritualidade/como-me-proteger-de-energias-negativas",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "url": "https://maison-jf.com/espiritualidade/como-me-proteger-de-energias-negativas.html",
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 2.75
+    },
+    {
+      "url": "https://maison-jf.com/policies/contact-information",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "url": "https://maison-jf.com/policies/privacy-policy",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 4
+    },
+    {
+      "url": "https://maison-jf.com/policies/refund-policy",
+      "clicks": 0,
+      "impressions": 21,
+      "ctr": 0,
+      "position": 4.9524
+    },
+    {
+      "url": "https://maison-jf.com/policies/shipping-policy",
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "url": "https://maison-jf.com/policies/terms-of-service",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 6.6667
+    },
+    {
+      "url": "https://maison-jf.com/products/acompanhamento-permanente",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 4
+    },
+    {
+      "url": "https://maison-jf.com/products/bain-de-pieds",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "url": "https://maison-jf.com/products/consulta-escrita-aprofundada",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 8.5
+    },
+    {
+      "url": "https://maison-jf.com/products/diffuseur-a-batonnets-entre-nous",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3
+    },
+    {
+      "url": "https://maison-jf.com/products/fondants-parfumes-edition-doree",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "url": "https://maison-jf.com/products/huile-de-massage-entre-nous",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "url": "https://maison-jf.com/products/maison-todo-o-mes-a-tua-casa-outra-vez",
+      "clicks": 0,
+      "impressions": 14,
+      "ctr": 0,
+      "position": 5.7143
+    },
+    {
+      "url": "https://maison-jf.com/products/mentoria-espiritual",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 5
+    },
+    {
+      "url": "https://maison-jf.com/products/tarot-expresso",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 8.3333
+    },
+    {
+      "url": "https://maison-jf.com/products/virgulas-do-destino-meandros-da-vida",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "url": "https://maison-jf.com/relacoes/acabou-uma-situationship-e-nao-consigo-ultrapassar",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3
+    },
+    {
+      "url": "https://maison-jf.com/relacoes/nao-consigo-confiar-por-causa-do-que-vivi-antes.html",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "url": "https://maison-jf.com/servicos/",
+      "clicks": 0,
+      "impressions": 19,
+      "ctr": 0,
+      "position": 3.9474
+    }
+  ],
+  "search_appearance": [
+    {
+      "feature": "PRODUCT_SNIPPETS",
+      "clicks": 0,
+      "impressions": 15,
+      "ctr": 0,
+      "position": 6.2667
+    }
+  ]
+}

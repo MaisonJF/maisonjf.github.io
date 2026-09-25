@@ -32,3 +32,4 @@ User-agent: DuckDuckBot
 Allow: /
 
 Sitemap: https://maison-jf.com/sitemap.xml
+Sitemap: https://maison-jf.com/sitemap-images.xml

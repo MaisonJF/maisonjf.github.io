@@ -1,0 +1,52 @@
+name: Maison IndexNow Notify
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'sitemap.xml'
+      - 'sitemap-*.xml'
+      - '_redirects'
+      - '**/*.html'
+      - '8f3d6a1b9c4e72f05a18d3c6b2e9471f.txt'
+      - '.github/maison-growth/brain/build_indexnow_manifest.mjs'
+      - '.github/maison-growth/brain/submit_indexnow.mjs'
+      - '.github/workflows/indexnow-submit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  notify-indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build deterministic changed-URL manifest
+        run: |
+          node .github/maison-growth/brain/build_indexnow_manifest.mjs
+          node .github/maison-growth/brain/build_indexnow_manifest.mjs --check
+
+      - name: Verify public IndexNow ownership key
+        id: keycheck
+        shell: bash
+        run: |
+          set +e
+          LIVE="$(curl -fsS --max-time 15 'https://maison-jf.com/8f3d6a1b9c4e72f05a18d3c6b2e9471f.txt' 2>/dev/null)"
+          if [ "$LIVE" = '8f3d6a1b9c4e72f05a18d3c6b2e9471f' ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            echo "IndexNow ownership key is live."
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "IndexNow key is not live yet; skipping notification safely."
+          fi
+
+      - name: Notify IndexNow participants
+        if: steps.keycheck.outputs.ready == 'true'
+        env:
+          INDEXNOW_SUBMIT_ENABLED: 'true'
+        run: node .github/maison-growth/brain/submit_indexnow.mjs

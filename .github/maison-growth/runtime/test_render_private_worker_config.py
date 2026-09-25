@@ -38,6 +38,10 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["KILL_SWITCH"], "true")
         self.assertEqual(vars_["OSIRIS_ENABLED"], "false")
         self.assertEqual(vars_["PUBLIC_DATA_ENABLED"], "false")
+        self.assertEqual(vars_["SEARCH_VISIBILITY_ENABLED"], "false")
+        self.assertEqual(vars_["GOOGLE_SEARCH_CONSOLE_ENABLED"], "false")
+        self.assertEqual(vars_["BING_WEBMASTER_ENABLED"], "false")
+        self.assertEqual(vars_["SEARCH_VISIBILITY_PROBES_ENABLED"], "false")
         for key in (
             "WORKERS_AI_ENABLED","OSIRIS_GATEWAY_ENABLED","OPENROUTER_ENABLED",
             "OPENAI_ENABLED","GEMINI_ENABLED","PERPLEXITY_ENABLED","ANTHROPIC_ENABLED",

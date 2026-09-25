@@ -20,7 +20,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Osiris AI Gateway | READY optional adapter | DISABLED / config+secret required |
 | Osiris Memory write mirror | READY authenticated bridge using Osiris Actions Waist | PRIVATE STACK PREPARED / NOT STARTED |
 | Osiris Memory read context | READY MCP graph_search adapter + smoke profile | NOT STARTED |
-| Maison Brain MCP | READY read-only tools: status/Oceanos/catalogue assets/commercial attention/Oráculo+PDI coverage/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
+| Maison Brain MCP | READY 12 read-only tools: status/Oceanos/public discovery/catalogue assets/commercial attention/Oráculo+PDI coverage/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
 | A1/A13/D1 canonical evidence | READY schema/contracts + canonical `maison-growth-engine` binding | REMOTE 0001→0016 SCHEMA NOT YET VERIFIED |
 | Cloudflare D1/Queue bindings | READY canonical D1 + intelligence queue/DLQ configuration in Wrangler | REMOTE RESOURCE STATE NOT YET VERIFIED |
 | Brain Control API | READY GET-only feed/solutions/economics/A11 learning + A5 mappings | DISABLED |
@@ -45,6 +45,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Runtime Semantic + Osiris context | READY bounded read-only context adapters | DISABLED BY DEFAULT |
 | A5 semantic interpretation | READY existing contract | analysis/runtime activation separate |
 | Oceanos curated context | READY read-only editorial metadata adapter | repository context available |
+| Public discovery graph | READY deterministic sitemap→canonical/effective metadata/JSON-LD/internal-link projection; canonical entity, llms, product and runtime-metadata guards; converges into MAISON Knowledge Graph and Brain MCP with no publication authority | CI-VERIFIED / 151 PUBLIC PAGES · 151 EFFECTIVE JSON-LD · 494 INTERNAL LINKS · 0 ORPHANS |
 | Commercial Asset Context | READY generated catalogue registry for physical products, services and 2 canonical digital products + optional evidence-backed private overlay | CATALOGUE READY / PRIVATE OPERATIONAL OVERLAY NOT LOADED |
 | Ocean → commercial routing | READY Ocean pain/intent/adjacency metadata enriches catalogue lookup as supporting context only | CODE-READY |
 | Physical bundle hypotheses | READY 4 internal drafts from current catalogue subtotals; no automatic price/publication authority and no discount mechanism | COST + REPLENISHMENT + HUMAN PRICE FACTS REQUIRED |
@@ -83,6 +84,8 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 ## Current internal flow
 
 `A13/A1 evidence → A5 mapping → Pre-Brain/context → Scout → Critic → Foundry → A14 → A12 human review → A14 validation plan → (manual pilot OR A7 hard-gated CTA decision → A8 draft) → future authorized execution → A3 → A11 → feedback`
+
+Public discovery flow: `public site → sitemap/canonical/metadata/schema/internal links → Public Discovery Graph → MAISON Knowledge Graph → Brain MCP read-only search`.
 
 ## Memory ownership
 
