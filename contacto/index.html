@@ -23,18 +23,19 @@ const labels={
  'sos-semana':['SOS 1 semana','Quero confirmar disponibilidade para o SOS 1 semana.'],
  b2b:['Proposta profissional / B2B','Quero falar sobre uma proposta para o meu negócio ou organização.'],
  'b2b-presentes':['Presentes & gifting B2B','Quero criar uma proposta de presentes, agradecimento ou boas-vindas para clientes, hóspedes, equipa ou parceiros.'],
+ 'b2b-formacao':['Workshop-piloto / formação B2B','Quero explorar um workshop-piloto ou formação prática para uma equipa ou grupo profissional.'],
  press:['Press & Media','Quero falar sobre uma entrevista, peça editorial, perfil ou pedido de imprensa.']
 };
 const productNames={'escalda-pes':'Escalda-Pés','vela-vidro':'Vela Aromática, tamanho maior','vela-pequena':'Vela Aromática, tamanho pequeno','oleo-massagem':'Óleo de Massagem','nevoa':'Névoa de Ambiente'};
 const maps={
- business:{loja:'loja / retalho',spa:'spa / bem-estar',terapeuta:'gabinete / terapeuta',alojamento:'alojamento / hospitalidade',servico:'negócio de serviços',outro:'outro projecto'},
- goal:{ticket:'aumentar ticket médio',recompra:'criar recompra',diferenciar:'diferenciar a experiência',continuar:'prolongar a experiência',boasvindas:'melhorar boas-vindas',testar:'testar uma linha pequena',presentear:'presentes / gifting'},
- gap:{fim:'experiência termina cedo',extra:'pouca compra complementar',assinatura:'falta assinatura sensorial',escolha:'dúvida sobre produtos',stock:'receio de stock parado',historia:'proposta comercial pouco clara'},
+ business:{loja:'loja / retalho',spa:'spa / bem-estar',terapeuta:'gabinete / terapeuta',alojamento:'alojamento / hospitalidade',servico:'negócio de serviços',organizacao:'equipa / organização',outro:'outro projecto'},
+ goal:{ticket:'aumentar ticket médio',recompra:'criar recompra',diferenciar:'diferenciar a experiência',continuar:'prolongar a experiência',boasvindas:'melhorar boas-vindas',testar:'testar uma linha pequena',presentear:'presentes / gifting',equipa:'melhorar experiência / consistência da equipa',formacao:'formação prática'},
+ gap:{fim:'experiência termina cedo',extra:'pouca compra complementar',assinatura:'falta assinatura sensorial',escolha:'dúvida sobre produtos',stock:'receio de stock parado',historia:'proposta comercial pouco clara',consistencia:'experiência inconsistente entre pessoas',ferramentas:'faltam ferramentas simples'},
  client:{recorrente:'clientes recorrentes',ocasional:'clientes ocasionais',turista:'clientes de passagem',presente:'procura por presentes',misto:'perfil misto'},
- model:{revenda:'revenda',uso:'uso no serviço',ambos:'uso + revenda',boasvindas:'boas-vindas / cortesia',especial:'pequena série / projecto especial',presente:'presente / agradecimento'},
+ model:{revenda:'revenda',uso:'uso no serviço',ambos:'uso + revenda',boasvindas:'boas-vindas / cortesia',especial:'pequena série / projecto especial',presente:'presente / agradecimento',workshop:'workshop / formação'},
  scale:{pequeno:'começar pequeno',regular:'selecção com variedade',recorrente:'reposição recorrente',projeto:'projecto específico'},
- start:{curadoria:'curadoria',categoria:'categoria definida',proposta:'proposta adaptada',conversa:'conversa primeiro'},
- result:{gifting:'gifting',welcome:'boas-vindas',continuity:'continuidade',ticket:'ticket médio',signature:'assinatura sensorial',resale:'revenda',pilot:'piloto pequeno',proposal:'proposta a organizar'}
+ start:{curadoria:'curadoria',categoria:'categoria definida',proposta:'proposta adaptada',piloto:'piloto pequeno',conversa:'conversa primeiro'},
+ result:{gifting:'gifting',welcome:'boas-vindas',continuity:'continuidade',ticket:'ticket médio',signature:'assinatura sensorial',resale:'revenda',pilot:'piloto pequeno',proposal:'proposta a organizar',training_pilot:'workshop / formação em piloto'}
 };
 const b2b={};
 for(const key of Object.keys(maps)){
