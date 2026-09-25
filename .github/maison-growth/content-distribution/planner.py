@@ -29,6 +29,14 @@ FORMATS = {
         "reuse": ("carousel_post", "short_video", "story_sequence"),
     },
 }
+CHANNELS = {
+    "instagram_reels": {"platform": "instagram", "surface": "reels", "format": "short_video"},
+    "youtube_shorts": {"platform": "youtube", "surface": "shorts", "format": "short_video"},
+    "tiktok": {"platform": "tiktok", "surface": "video", "format": "short_video"},
+    "instagram_stories": {"platform": "instagram", "surface": "stories", "format": "story_sequence"},
+    "instagram_feed": {"platform": "instagram", "surface": "feed", "format": "carousel_post"},
+    "maison_site": {"platform": "maison_site", "surface": "editorial", "format": "editorial_page"},
+}
 
 INTENT_PRIMARY = {
     "recognition": "short_video",
@@ -322,8 +330,14 @@ def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]
     """Build an A2 ingestion payload. A2 remains the canonical A1 normalization boundary."""
     privacy_scan(observation)
     content_id = _text(observation.get("content_id"), "content_id", 100, True)
-    platform = _text(observation.get("platform"), "platform", 80, True)
+    channel = _text(observation.get("channel"), "channel", 80, True)
+    if channel not in CHANNELS:
+        raise ContentContractError("unsupported_distribution_channel")
+    platform = CHANNELS[channel]["platform"]
+    surface = CHANNELS[channel]["surface"]
     content_format = _text(observation.get("format"), "format", 80, True)
+    if CHANNELS[channel]["format"] != content_format:
+        raise ContentContractError("channel_format_mismatch")
     content_intent = _text(observation.get("intent"), "intent", 80, True)
     observed_at = _text(observation.get("observed_at"), "observed_at", 80, True)
     window_start = _text(observation.get("window_start"), "window_start", 80, True)
@@ -371,7 +385,9 @@ def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]
     source_refs_hash = _sha(list(source_refs))
     idempotency_key = _sha({
         "content_id": content_id,
+        "channel": channel,
         "platform": platform,
+        "surface": surface,
         "window_start": window_start,
         "window_end": window_end,
     })
@@ -383,7 +399,9 @@ def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]
         **({"comparison_id": comparison_id} if comparison_id else {}),
         **({"comparison_dimension": comparison_dimension} if comparison_dimension else {}),
         **({"variant_key": variant_key} if variant_key else {}),
+        "channel": channel,
         "platform": platform,
+        "surface": surface,
         "format": content_format,
         "intent": content_intent,
         "window_start": window_start,
@@ -409,6 +427,9 @@ def build_performance_feedback(observation: Mapping[str, Any]) -> dict[str, Any]
         "ingestion": ingestion,
         "learning_context": {
             "content_id": content_id,
+            "channel": channel,
+            "platform": platform,
+            "surface": surface,
             "campaign_id": campaign_id or None,
             "thesis_id": thesis_id or None,
             "comparison_id": comparison_id or None,
