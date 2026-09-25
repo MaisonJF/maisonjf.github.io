@@ -24,6 +24,8 @@ MIGRATIONS=(
     GROWTH/"brain/migrations/0014_brain_runtime_views.sql",
     GROWTH/"a12/migrations/0015_human_commercial_review_resolution.sql",
     GROWTH/"a14/migrations/0016_approved_validation_planning.sql",
+    GROWTH/"a3/migrations/0017_b2b_canonical_solution.sql",
+    GROWTH/"brain/migrations/0018_b2b_feedback.sql",
 )
 
 
@@ -47,6 +49,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
         }
         self.assertIn("brain_prebrain_feed",views)
         self.assertIn("brain_cash_feedback",views)
+        self.assertIn("brain_b2b_feedback",views)
         self.assertIn("a14_realised_economics",views)
         self.assertIn("autonomy_human_queue_current",views)
         self.assertIn("a14_approved_offers_ready_for_planning",views)
@@ -108,10 +111,10 @@ class GrowthSchemaChainTests(unittest.TestCase):
 
         kinds={
             "b2b.lead":"lead",
-            "b2b.proposal":"proposal",
-            "b2b.pilot":"pilot",
+            "b2b.proposal":"lead",
+            "b2b.pilot":"booking",
             "b2b.purchase":"purchase",
-            "b2b.recurrence":"recurrence",
+            "b2b.recurrence":"order",
         }
         for index,(event_type,expected_kind) in enumerate(kinds.items(),start=1):
             event={
@@ -137,6 +140,32 @@ class GrowthSchemaChainTests(unittest.TestCase):
             result=build_journeys([event])
             self.assertEqual(len(result.conversions),1,event_type)
             self.assertEqual(result.conversions[0].kind,expected_kind,event_type)
+
+    def test_b2b_feedback_projects_non_pii_lifecycle(self):
+        con=sqlite3.connect(":memory:")
+        con.execute("PRAGMA foreign_keys=ON")
+        for path in MIGRATIONS:
+            con.executescript(path.read_text(encoding="utf-8"))
+
+        solution_id="sol_0199a4b2-7f00-7000-8000-000000000001"
+        event_id="evt_018f4d7a-1c2b-7abc-8def-123456789001"
+        conversion_id="cnv_018f4d7a-1c2b-7abc-8def-123456789002"
+        con.execute("""INSERT INTO events
+          (event_id,idempotency_key,event_type,source,schema_version,occurred_at,
+           solution_id,privacy_class,payload_hash,metadata_json)
+          VALUES (?,?,?,?,?,?,?,?,?,?)""",
+          (event_id,"b2b:lead:test","b2b.lead","commerce",2,
+           "2026-09-25T12:00:00Z",solution_id,"pseudonymous","a"*64,
+           '{"interest":"b2b","business":"spa","goal":"diferenciar","result_type":"signature"}'))
+        con.execute("""INSERT INTO conversions
+          (conversion_id,source_event_id,journey_id,solution_id,conversion_kind,occurred_at,
+           revenue_minor,currency,economic_profile_required)
+          VALUES (?,?,?,?,?,?,?,?,?)""",
+          (conversion_id,event_id,None,solution_id,"lead","2026-09-25T12:00:00Z",None,None,0))
+
+        row=con.execute("""SELECT lifecycle_stage,business,goal,result_type,privacy_class
+                          FROM brain_b2b_feedback""").fetchone()
+        self.assertEqual(row,("lead","spa","diferenciar","signature","pseudonymous"))
 
     def test_cash_feedback_accepts_unlinked_a3_economics(self):
         con=sqlite3.connect(":memory:")
