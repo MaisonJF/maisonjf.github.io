@@ -168,3 +168,11 @@ A checklist operacional está em:
 `.github/maison-growth/b2b/B2B-PILOT-CHECKLIST.md`
 
 Ela reutiliza o `commercial-service-capacity.template.json`, o `manual-pilot-context.schema.json` e o dossier manual já existentes no Brain. Não cria CRM, pipeline ou base de dados paralelos.
+
+
+## 11. Propostas comerciais
+
+A estrutura de orçamento/proposta está em:
+`.github/maison-growth/b2b/B2B-COMMERCIAL-QUOTE-PLAYBOOK.md`
+
+MOQ, desconto B2B, margem grossista, capacidade, prazo e fee de personalização permanecem UNKNOWN até existirem custos/capacidade observados e aprovação humana. O preço B2C nunca é convertido automaticamente em preço B2B por desconto arbitrário.
