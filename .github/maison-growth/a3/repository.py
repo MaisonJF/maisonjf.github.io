@@ -122,7 +122,8 @@ class SQLiteA3Repository:
                     (
                         conversion.conversion_id, conversion.source_event_id, conversion.journey_id,
                         conversion.solution_id, conversion.kind, conversion.occurred_at,
-                        conversion.revenue_minor, conversion.currency, 1,
+                        conversion.revenue_minor, conversion.currency,
+                        1 if conversion.revenue_minor is not None else 0,
                     ),
                 )
                 for touch in conversion.touches:
