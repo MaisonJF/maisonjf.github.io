@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import unittest
-from engine import LearningInput,evaluate,feedback,detect_repeated_pattern,propose_sensitive_adjustment,assert_no_protected_mutation,ProtectedMutationError
+from engine import evaluate_content_performance,LearningInput,evaluate,feedback,detect_repeated_pattern,propose_sensitive_adjustment,assert_no_protected_mutation,ProtectedMutationError
 
 RUL="rul_"+"a"*36
 MDL="mdl_"+"b"*36
