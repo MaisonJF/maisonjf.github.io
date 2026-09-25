@@ -30,8 +30,33 @@ class A11Tests(unittest.TestCase):
         self.assertEqual(r.signal_class,"positive"); self.assertIn("CTR_NEGATIVE_ECONOMIC_POSITIVE",r.reason_codes)
     def test_feedback(self):
         r=evaluate(inp(),confidence_before=50,rule_version_id=RUL); f=feedback(r); self.assertEqual(f["action"],"increase_confidence"); self.assertFalse(f["public_side_effects"])
+    def test_content_engagement_without_a3_economics_is_observe_only(self):
+        r=evaluate_content_performance(
+            content_id="reel-001",observation_count=100,confidence_before=60,
+            rule_version_id=RUL,expected_click_rate_bps=500,observed_click_rate_bps=900,
+            evidence_refs=("a1:event:content-performance",)
+        )
+        self.assertEqual(r.signal_class,"insufficient")
+        self.assertEqual(r.confidence_delta,0)
+        self.assertIn("INSUFFICIENT_ECONOMIC_DATA",r.reason_codes)
+
+    def test_content_can_learn_when_a3_supplies_economics(self):
+        r=evaluate_content_performance(
+            content_id="reel-001",observation_count=100,confidence_before=60,
+            rule_version_id=RUL,expected_economic_value_minor=1000,
+            observed_economic_value_minor=1500,economic_observation_count=3,
+            expected_click_rate_bps=500,observed_click_rate_bps=900,
+            evidence_refs=("a3:economics:fixture",)
+        )
+        self.assertEqual(r.signal_class,"positive")
+        self.assertGreater(r.confidence_delta,0)
+        self.assertTrue(r.correlation_only)
+        self.assertIn("content:reel-001",r.evidence_refs)
+
+    def test_feedback(self):
+        r=evaluate(inp(),confidence_before=50,rule_version_id=RUL); f=feedback(r); self.assertEqual(f["action"],"increase_confidence"); self.assertFalse(f["public_side_effects"])
     def test_all_source_kinds_supported(self):
-        source_ids={"decision":"dec_"+"1"*36,"experiment":"xrs_"+"2"*36,"journey":"jns_"+"3"*36,"conversion":"cnv_"+"4"*36,"promotion":"opm_"+"5"*36}
+        source_ids={"decision":"dec_"+"1"*36,"experiment":"xrs_"+"2"*36,"journey":"jns_"+"3"*36,"conversion":"cnv_"+"4"*36,"promotion":"opm_"+"5"*36,"content":"cnt_"+"6"*36}
         for kind,sid in source_ids.items():
             r=evaluate(inp(source_kind=kind,source_id=sid),confidence_before=50,rule_version_id=RUL)
             self.assertEqual(r.signal_class,"positive")
