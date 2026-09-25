@@ -11,6 +11,8 @@ const ctx=maisonB2bKnowledgeContext();
 const graph=MAISON_KNOWLEDGE_GRAPH;
 const surface=graph.surfaces.find(x=>x.id===ctx.surface.id);
 
+const repoRoot=path.resolve(path.dirname(new URL(import.meta.url).pathname),'../../..');
+
 assert(surface,'professional_surface_missing_from_knowledge_graph');
 assert(surface.url===ctx.surface.url,'professional_surface_url_mismatch');
 assert(surface.role===ctx.surface.role,'professional_surface_role_mismatch');
@@ -31,10 +33,22 @@ assert(graph.professionalLayer.leadContract?.runtimeStatus.includes('central_tel
 assert(MAISON_B2B_BRAIN.evidencePolicy?.noSyntheticDemand,'b2b_evidence_policy_missing');
 assert(MAISON_B2B_BRAIN.routes.some(x=>x.role==='lead'),'b2b_lead_route_missing');
 
+function routeBackingFile(route){
+  const pathname=new URL(route,'https://maison-jf.com').pathname;
+  if(pathname==='/')return path.join(repoRoot,'index.html');
+  if(pathname.endsWith('/'))return path.join(repoRoot,pathname.slice(1),'index.html');
+  const direct=path.join(repoRoot,pathname.slice(1));
+  if(fs.existsSync(direct))return direct;
+  return direct+'.html';
+}
+
 for(const offer of MAISON_B2B_BRAIN.offerFamilies||[]){
   assert(offer.claimLimit,'b2b_offer_claim_limit_missing:'+offer.id);
   if(['active_quote','manual_proposal','pilot_by_conversation'].includes(offer.status)){
     assert(Array.isArray(offer.routes)&&offer.routes.length>0,'b2b_offer_route_missing:'+offer.id);
+    for(const route of offer.routes){
+      assert(fs.existsSync(routeBackingFile(route)),'b2b_offer_public_route_missing:'+offer.id+':'+route);
+    }
   }
   if(['research_validation','future_validation'].includes(offer.status)){
     assert((offer.routes||[]).length===0,'unvalidated_b2b_offer_must_not_have_public_route:'+offer.id);
@@ -64,7 +78,6 @@ for(const segment of MAISON_B2B_BRAIN.segments){
   assert(Array.isArray(segment.routes)&&segment.routes.length>0,'professional_segment_route_missing:'+segment.id);
 }
 
-const repoRoot=path.resolve(path.dirname(new URL(import.meta.url).pathname),'../../..');
 const test=fs.readFileSync(path.join(repoRoot,'profissionais/teste/index.html'),'utf8');
 const contact=fs.readFileSync(path.join(repoRoot,'contacto/index.html'),'utf8');
 const services=fs.readFileSync(path.join(repoRoot,'data/services.js'),'utf8');
