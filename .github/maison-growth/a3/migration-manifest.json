@@ -6,6 +6,11 @@
       "version": "0002",
       "file": "migrations/0002_journeys_economics.sql",
       "sha256": "ab7f734d89746c244008c069f85c116bec8a56d529fa94fe3d7e7e5c93bd9154"
+    },
+    {
+      "version": "0017",
+      "file": "migrations/0017_b2b_canonical_solution.sql",
+      "sha256": "5ec2f04d2e983320f2b392a825ac64f599c9fc6a455a206404d7bd555db61524"
     }
   ]
 }
