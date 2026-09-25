@@ -73,6 +73,56 @@ Cada brief tem:
 
 O planeador nunca inventa automaticamente a “voz do João”. Ele cria o esqueleto editorial e os requisitos da peça.
 
+## Content Operating System
+
+O `operating_system.py` organiza uma oportunidade editorial já validada sem se tornar uma nova fonte de inteligência.
+
+### Campanha e coorte
+
+Uma campanha é um **contentor de execução derivado** em torno de uma única tensão humana validada. Não é uma base de conhecimento.
+
+A sequência-base pode criar até cinco papéis editoriais:
+
+- **recognise** — fazer a pessoa reconhecer-se;
+- **cost_of_ignoring** — tornar visível o custo de continuar a ignorar;
+- **reframe** — oferecer uma leitura nova sem fabricar certeza;
+- **movement** — propor um gesto ou próximo passo;
+- **commercial_bridge** — ligar a um destino MAISON já aprovado, quando existe.
+
+Cada peça continua a exigir revisão humana própria. A campanha não concede publicação, scheduling ou aprovação em bloco.
+
+### Comparações editoriais
+
+O sistema pode preparar comparações de:
+
+- `hook_family`;
+- `format`;
+- `cta_kind`.
+
+A regra é simples: **muda uma variável de cada vez**.
+
+Estas comparações são observacionais, porque a distribuição continua manual e não existe randomização controlada neste rio. Por isso o sistema pode dizer que uma variante teve um sinal observado mais forte numa métrica declarada previamente, mas não pode afirmar causalidade, eleger automaticamente um vencedor ou promover conteúdo sozinho.
+
+Mudanças de destino comercial de CTA continuam a pertencer ao A8. Este rio não usa uma comparação editorial para contornar o Experiment Manager.
+
+### Cadência
+
+A cadência nasce de slots explícitos. O Content OS pode ligar peças já aprovadas a datas e canais, mas:
+
+- não publica;
+- não agenda APIs externas;
+- não aceita a mesma peça no mesmo canal e dia duas vezes;
+- não transforma frequência em regra de inteligência;
+- não aprova conteúdo por pertença a uma campanha.
+
+### Aprendizagem por desempenho
+
+Cada observação pode transportar lineage opcional:
+
+`campaign_id → thesis_id → comparison_id → comparison_dimension → variant_key`
+
+Isto permite ao Brain distinguir desempenho da ideia, do formato e da execução sem copiar para A1 a inteligência canónica que originou a campanha.
+
 ## Formatos
 
 ### short_video
