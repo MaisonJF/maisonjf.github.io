@@ -56,6 +56,9 @@ const graph={
     serviceAssetRef:b2b.serviceAssetRef,
     dimensions:[...(b2b.dimensions||[])],
     opportunityTypes:[...(b2b.opportunityTypes||[])],
+    diagnosticOpportunityMap:Object.fromEntries(
+      Object.entries(b2b.diagnosticOpportunityMap||{}).map(([key,value])=>[key,[...value]])
+    ),
     segments:(b2b.segments||[]).map(x=>({
       id:x.id,label:x.label,status:x.status,
       territories:[...(x.territories||[])],routes:[...(x.routes||[])]
