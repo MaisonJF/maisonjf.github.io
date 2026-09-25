@@ -11,7 +11,8 @@
     "growth.economics.read",
     "growth.decisions.read",
     "growth.experiments.read",
-    "growth.promotions.read"
+    "growth.promotions.read",
+    "growth.content_performance.read"
   ],
   "deny": [
     "repository.write",
