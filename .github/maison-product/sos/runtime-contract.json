@@ -1,0 +1,43 @@
+{
+  "contract_version": "SOS.RUNTIME.1",
+  "state": "code_ready_not_provisioned",
+  "binding": "MAISON_SOS_DB",
+  "isolation": {
+    "separate_from_maison_brain_db": true,
+    "reason": "trusted-contact operational PII must not enter Brain storage",
+    "brain_receives_only": "SOS.BRAIN.1 aggregate projection"
+  },
+  "auth_boundary": {
+    "upstream_verified_identity_required": true,
+    "public_auth_provider_selected": false,
+    "raw_identity_persisted": false,
+    "account_ref": "HMAC-SHA256(provider + subject) with MAISON_SOS_SUBJECT_PEPPER"
+  },
+  "secrets": {
+    "MAISON_SOS_SUBJECT_PEPPER": "minimum 32 characters; secret only",
+    "MAISON_SOS_DATA_KEY_B64": "32-byte AES-256 key encoded as base64; secret only"
+  },
+  "contact_security": {
+    "one_live_contact_per_account": true,
+    "endpoint_encryption": "AES-GCM",
+    "invite_token_stored_raw": false,
+    "invite_token_hash": "SHA-256",
+    "invite_default_ttl_hours": 48
+  },
+  "scheduler": {
+    "outbox_pattern": true,
+    "reminder_must_be_sent_before_trusted_notice": true,
+    "claimed_action_lease_minutes": 5,
+    "unique_action_per_due_window_and_kind": true,
+    "production_scheduler_enabled": false
+  },
+  "routing": {
+    "public_api_routes_created": false,
+    "reason": "end-user authentication adapter is not yet selected"
+  },
+  "external_effects": {
+    "notification_provider_selected": false,
+    "notification_delivery_enabled": false,
+    "deployment_enabled": false
+  }
+}
