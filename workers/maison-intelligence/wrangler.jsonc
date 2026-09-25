@@ -50,7 +50,7 @@
     "ANTHROPIC_MODEL": "",
     "ZERO_COST_MODE": "true",
     "ZERO_COST_OBSERVE_ACTIVATION": "true",
-    "OPENROUTER_FALLBACK_MODELS_JSON": "[\"qwen/qwen3.8-27b:free\",\"nvidia/nemotron-3-super-120b-a12b:free\",\"nvidia/nemotron-3-ultra-550b-a55b:free\",\"thinkingmachines/inkling:free\",\"nex-agi/nex-n2.5-pro:free\",\"inclusionai/ling-3.0-flash-fin:free\",\"poolside/laguna-s-2.1:free\"]"
+    "OPENROUTER_FALLBACK_MODELS_JSON": "[\"qwen/qwen3.8-27b:free\",\"nvidia/nemotron-3-super-120b-a12b:free\",\"nvidia/nemotron-3-ultra-550b-a55b:free\",\"z-ai/glm-5.2:free\",\"thinkingmachines/inkling-small:free\",\"nex-agi/nex-n2.5-pro:free\",\"inclusionai/ling-3.0-flash-fin:free\",\"poolside/laguna-s-2.1:free\"]"
   },
   "ai": {
     "binding": "AI"
