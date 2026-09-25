@@ -1,25 +1,36 @@
 # Cloudflare activation boundary
 
-Nothing in A2 provisions or changes Cloudflare resources.
+A2 now has a **private runtime implementation** inside the existing `maison-intelligence` Worker.
 
-When runtime activation is approved later, the expected mapping is:
+It remains **disabled by default** and does not expose a public ingestion endpoint.
 
-1. a private/controlled collector Worker implements the A2 ingestion contract;
-2. a Queue may buffer validated events;
-3. a dedicated Growth D1 uses the A1 migrations;
-4. Queue retry/DLQ behavior follows `retry-policy.json`;
-5. no public Maison page/function depends synchronously on collector availability.
+## Implemented, not activated
 
-Required checks before activation:
+- private route: `/internal/a2/ingest`;
+- host: existing `maison-intelligence` Worker;
+- storage: existing canonical `GROWTH_DB`;
+- source policy: generated from the canonical `source-registry.json`;
+- authentication: dedicated bearer secret `A2_INGEST_TOKEN`;
+- activation flag: `A2_INGEST_API_ENABLED`, committed as `false`;
+- persistence: A1 `events` + `idempotency_registry` only;
+- rejected raw PII is never persisted;
+- no public Maison page depends synchronously on A2.
 
-- provision D1 from A1;
-- apply A1 migrations;
-- create Worker/Queue only with explicit approval;
-- bind only the Growth resources;
-- keep public commerce/Oracle runtimes independent;
-- test collector outage while public Maison remains healthy;
-- test Queue duplicate delivery and D1 idempotency;
-- test DLQ contains no raw rejected PII payload;
-- test no `oracle.content.read` capability exists.
+The runtime code may be deployed while remaining unreachable because the activation flag is false.
 
-A2 repository work does not require any of these resources to exist.
+## Activation checklist
+
+Activation is a separate operational decision. Before setting `A2_INGEST_API_ENABLED=true`:
+
+1. verify the canonical Growth D1 contains the current A1 schema;
+2. verify the generated Worker registry is in sync with `source-registry.json`;
+3. create/install a dedicated `A2_INGEST_TOKEN` secret;
+4. run duplicate-delivery and idempotency-conflict tests against a controlled environment;
+5. verify rejected PII leaves no raw payload in events, logs or dead-letter storage;
+6. verify public site, commerce, Oracle and SOS flows remain healthy while A2 is unavailable;
+7. verify each producer is fail-open/asynchronous with respect to analytics ingestion;
+8. only then enable the private route.
+
+A Queue can later buffer **already validated, PII-free** normalized events. It is optional for the first private runtime and must never become a place where rejected raw payloads are stored.
+
+Brain execution authority and the Brain database kill switch are independent from A2 ingestion. Enabling A2 must not enable autonomous Brain execution.
