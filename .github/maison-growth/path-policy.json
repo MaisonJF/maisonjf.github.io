@@ -1,5 +1,5 @@
 {
-  "policy_version": "A0.2",
+  "policy_version": "A0.3",
   "default_repo_write": "deny",
   "precedence": "deny_overrides_allow",
   "protected_paths": [
@@ -99,6 +99,29 @@
       "requires_hard_gates_pass": true,
       "requires_evidence_sources_min": 2,
       "requires_oceans_guard_pass": true
+    },
+    "ocean_intelligence_persist": {
+      "repo_write": "scheduled_internal_queue_only",
+      "allowed_paths": [
+        ".github/maison-growth/oceans/candidates.json",
+        ".github/maison-growth/brain/editorial-queue.json",
+        "functions/_lib/vpc-ocean-signals.generated.js"
+      ],
+      "authority": "permanent_human_authorization_2026-09-25",
+      "duplicate_strategy": "semantic_merge_before_create",
+      "constraints": [
+        "analyse_existing_oceans_before_write",
+        "if_semantically_similar_enrich_canonical_ocean_instead_of_creating_clone",
+        "preserve_existing_human_review_state",
+        "minimum_independent_evidence_sources_2_for_new_ocean",
+        "deduplicate_evidence_and_theme_candidates",
+        "no_personal_or_sensitive_data",
+        "no_private_conversation_content",
+        "no_paid_body_content_in_repo",
+        "no_automatic_publication",
+        "post_write_readback_verification",
+        "retry_after_fresh_read_on_sha_conflict"
+      ]
     }
   },
   "protected_path_exceptions": [
