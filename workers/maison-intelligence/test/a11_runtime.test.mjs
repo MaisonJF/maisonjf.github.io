@@ -115,6 +115,29 @@ test('A11 rejects invented Content economics',async()=>{
   );
 });
 
+test('A11 rejects confidence mutation before explicit A3 economics link',async()=>{
+  const db=new FakeD1();
+  const payload=await validPayload();
+  payload.record.signal_class='positive';
+  payload.record.confidence_after=60;
+  payload.record.confidence_delta=10;
+  payload.record.reason_codes=['ECONOMIC_OUTCOME_ABOVE_EXPECTATION'];
+  await assert.rejects(
+    ()=>appendContentLearning(db,payload),
+    error=>error instanceof A11RuntimeError&&error.code==='content_runtime_observation_only'
+  );
+});
+
+test('A11 rejects unsupported observation-only reason codes',async()=>{
+  const db=new FakeD1();
+  const payload=await validPayload();
+  payload.record.reason_codes=['ECONOMIC_OUTCOME_ABOVE_EXPECTATION'];
+  await assert.rejects(
+    ()=>appendContentLearning(db,payload),
+    error=>error instanceof A11RuntimeError&&error.code==='content_runtime_reason_mismatch'
+  );
+});
+
 test('A11 detects already learned source snapshot before new confidence mutation',async()=>{
   const db=new FakeD1({previous:{confidence_after:80},duplicate:{learning_record_id:'lrn_'+'9'.repeat(36),input_hash:'d'.repeat(64)}});
   const result=await appendContentLearning(db,await validPayload());
