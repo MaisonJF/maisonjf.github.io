@@ -146,7 +146,7 @@
       const response=await fetch('/api/create-pdi-checkout-live',{
         method:'POST',
         headers:{'content-type':'application/json'},
-        body:JSON.stringify({theme})
+        body:JSON.stringify({theme,attribution:window.maisonAnalytics?.getAttribution?.()||{}})
       });
       const payload=await response.json().catch(()=>({}));
       if(!response.ok||!payload.url)throw new Error();
