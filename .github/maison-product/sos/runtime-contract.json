@@ -1,21 +1,34 @@
 {
-  "contract_version": "SOS.RUNTIME.1",
-  "state": "code_ready_not_provisioned",
+  "contract_version": "SOS.RUNTIME.2",
+  "state": "provisioned_closed_test",
   "binding": "MAISON_SOS_DB",
+  "database": {
+    "provider": "cloudflare_d1",
+    "resource": "maison-sos-operational",
+    "schema": "SOS.OP.2",
+    "production_public_use_authorized": false
+  },
   "isolation": {
     "separate_from_maison_brain_db": true,
     "reason": "trusted-contact operational PII must not enter Brain storage",
-    "brain_receives_only": "SOS.BRAIN.1 aggregate projection"
+    "brain_receives_only": "SOS.BRAIN.1 aggregate projection",
+    "preview_production_crypto_isolation_required_before_real_data": true
   },
   "auth_boundary": {
     "upstream_verified_identity_required": true,
-    "public_auth_provider_selected": false,
+    "public_auth_provider_selected": true,
+    "provider": "supabase_auth",
+    "eu_project_provisioned": true,
+    "server_side_validation": "GET /auth/v1/user",
+    "server_side_e2e_status": "diagnostic_pending",
     "raw_identity_persisted": false,
     "account_ref": "HMAC-SHA256(provider + subject) with MAISON_SOS_SUBJECT_PEPPER"
   },
   "secrets": {
     "MAISON_SOS_SUBJECT_PEPPER": "minimum 32 characters; secret only",
-    "MAISON_SOS_DATA_KEY_B64": "32-byte AES-256 key encoded as base64; secret only"
+    "MAISON_SOS_DATA_KEY_B64": "32-byte AES-256 key encoded as base64; secret only",
+    "MAISON_SOS_SUPABASE_PUBLISHABLE_KEY": "publishable client key; environment variable",
+    "MAISON_SOS_RESEND_API_KEY": "secret only"
   },
   "contact_security": {
     "one_live_contact_per_account": true,
@@ -29,15 +42,22 @@
     "reminder_must_be_sent_before_trusted_notice": true,
     "claimed_action_lease_minutes": 5,
     "unique_action_per_due_window_and_kind": true,
-    "production_scheduler_enabled": false
+    "production_scheduler_enabled": false,
+    "closed_test_status": "not_authorized_until_auth_and_resend_e2e_pass"
   },
   "routing": {
-    "public_api_routes_created": false,
-    "reason": "end-user authentication adapter is not yet selected"
+    "public_api_routes_created": true,
+    "prefix": "/api/sos/",
+    "fail_closed": true,
+    "api_gate": "MAISON_SOS_API_ENABLED",
+    "auth_gate": "MAISON_SOS_AUTH_ENABLED"
   },
   "external_effects": {
-    "notification_provider_selected": false,
+    "notification_provider_selected": true,
+    "notification_provider": "resend",
     "notification_delivery_enabled": false,
-    "deployment_enabled": false
+    "notification_gate": "MAISON_SOS_RESEND_ENABLED",
+    "deployment_enabled": true,
+    "public_product_activation_authorized": false
   }
 }
