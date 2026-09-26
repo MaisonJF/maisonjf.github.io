@@ -16,6 +16,21 @@ test('territory rotation is deterministic', () => {
   assert.deepEqual(a,b);
 });
 
+test('organic discovery is always the first sensing priority', () => {
+  const selected = territoriesForDate(new Date('2026-09-26T00:00:00Z'), 2);
+  assert.equal(selected[0].key, 'organic_discovery');
+});
+
+test('organic discovery prompt enforces zero-cost latent-demand acquisition', () => {
+  const territory = territoriesForDate(new Date('2026-09-26T00:00:00Z'), 1)[0];
+  const prompt = buildSensorPrompt(territory);
+  assert.match(prompt, /do not yet know MAISON JF/i);
+  assert.match(prompt, /Zero-cost first/i);
+  assert.match(prompt, /this is about me/i);
+  assert.match(prompt, /qualified organic visits/i);
+  assert.match(prompt, /do not publish, contact anyone, spend money/i);
+});
+
 test('sensor prompt forbids personal identifiers', () => {
   assert.match(buildSensorPrompt({query:'work'}), /Do not collect names/i);
 });
