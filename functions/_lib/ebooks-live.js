@@ -7,7 +7,7 @@ export const EBOOKS = {
     key: 'ebooks/virgulas-do-destino-o-turista.pdf',
     filename: 'Virgulas-do-Destino-O-Turista.pdf'
   },
-  paraDeIgnorar: {
+  'para-de-ignorar': {
     slug: 'para-de-ignorar',
     title: 'Pára de Ignorar!',
     priceId: 'price_1UJtIN5H3wYRPmPVvIrLnAhO',
