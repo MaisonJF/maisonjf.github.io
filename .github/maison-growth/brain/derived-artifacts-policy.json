@@ -17,7 +17,8 @@
       "path": ".github/maison-growth/brain/maison-knowledge-graph.generated.json",
       "builder": ".github/maison-growth/brain/build_maison_knowledge_graph.mjs",
       "policy": "generated_and_committed",
-      "manual_edits": "forbidden"
+      "manual_edits": "forbidden",
+      "note": "Committed file is the canonical core snapshot (Oceans, offers, B2B professional). Discovery Guard may generate a full enriched workspace snapshot with publicDiscovery/publicIdentity/searchVisibility; --check accepts either exact core or exact enriched output."
     },
     {
       "path": ".github/maison-growth/brain/editorial-queue.json",
