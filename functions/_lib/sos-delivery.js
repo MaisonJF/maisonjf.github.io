@@ -1,4 +1,4 @@
-import { sendSosResendEmail } from './sos-brevo.js';
+import { sendSosResendEmail } from './sos-resend.js';
 import {
   trustedContactTargetForAction,
   userReminderTargetForAction,
