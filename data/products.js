@@ -6,9 +6,9 @@ Supported media roles: hero, packshot, detail, texture, ritual, use, ambience, p
 */
 window.MAISON_PRODUCTS=[
 {
- slug:'vela-vidro',sku:'MJ-VELA-170',name:'Vela Aromática',size:'170 g',category:'Casa',price:14,currency:'EUR',availability:'in_stock',condition:'new',productImage:null,
+ slug:'vela-vidro',sku:'MJ-VELA-170',name:'Vela Aromática',size:'170 g',category:'Casa',price:14,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/cinematic/casa.avif',
  description:'Luz e aroma para mudar o ritmo de um espaço.',
- media:[],
+ media:[{role:'hero',src:'../images/cinematic/casa.avif',alt:'Vela Aromática MAISON JF em ambiente editorial',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/cinematic/hero.avif',alt:'Atmosfera MAISON JF para a casa',aspect:'portrait',editorial:true}],
  ritual:{title:'Acende para mudar de ritmo.',text:'A luz baixa. O aroma fica. E a casa percebe que o dia mudou de lugar.'},
  cta:'Quero levar para casa'
 },
@@ -20,9 +20,9 @@ window.MAISON_PRODUCTS=[
  cta:'Quero levar para casa'
 },
 {
- slug:'oleo-massagem',sku:'MJ-OLEO-060',name:'Óleo de Massagem',size:'60 ml',category:'Corpo',price:12,currency:'EUR',availability:'in_stock',condition:'new',productImage:null,
+ slug:'oleo-massagem',sku:'MJ-OLEO-060',name:'Óleo de Massagem',size:'60 ml',category:'Corpo',price:12,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/cinematic/ritual.avif',
  description:'Toque e pausa num ritual simples de massagem.',
- media:[{role:'hero',src:'../images/cinematic/ritual.avif',alt:'Atmosfera editorial MAISON JF de toque e pausa',aspect:'portrait',editorial:true}],
+ media:[{role:'hero',src:'../images/cinematic/ritual.avif',alt:'Óleo de Massagem MAISON JF em ritual de corpo',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/cinematic/corpo.avif',alt:'Atmosfera editorial MAISON JF para o corpo',aspect:'portrait',editorial:true}],
  ritual:{title:'O corpo percebe o toque antes da explicação.',text:'Alguns minutos de massagem podem ser uma forma simples de devolver presença ao corpo.'},
  cta:'Quero saber mais'
 },
