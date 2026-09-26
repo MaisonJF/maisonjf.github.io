@@ -28,6 +28,7 @@ MIGRATIONS=(
     GROWTH/"brain/migrations/0018_b2b_feedback.sql",
     GROWTH/"a11/migrations/0019_content_learning_source.sql",
     GROWTH/"a11/migrations/0020_learning_rule_seed.sql",
+    GROWTH/"a3/migrations/0021_commerce_solution_families.sql",
 )
 
 
@@ -45,6 +46,14 @@ class GrowthSchemaChainTests(unittest.TestCase):
         self.assertEqual(state["maison_growth_a12_schema_version"],"A12.2")
         self.assertEqual(state["maison_growth_a11_schema_version"],"A11.2")
         self.assertEqual(state["maison_growth_a11_rule_version"],"rul_e6217bb187b5ef0b6ee371286ed2e1e53e0d")
+        self.assertEqual(state["maison_growth_commerce_solution_seed_version"],"0021")
+        seeded=dict(con.execute("SELECT solution_key,solution_id FROM solutions WHERE solution_key LIKE 'maison-%'"))
+        self.assertEqual(seeded["maison-oracle"],"sol_0199a4b2-7f00-7000-8000-000000000002")
+        self.assertEqual(seeded["maison-pdi"],"sol_0199a4b2-7f00-7000-8000-000000000003")
+        self.assertEqual(seeded["maison-physical-products"],"sol_0199a4b2-7f00-7000-8000-000000000004")
+        self.assertEqual(seeded["maison-consultation"],"sol_0199a4b2-7f00-7000-8000-000000000005")
+        self.assertEqual(seeded["maison-ebooks"],"sol_0199a4b2-7f00-7000-8000-000000000006")
+        self.assertEqual(seeded["maison-commerce-unmapped"],"sol_0199a4b2-7f00-7000-8000-000000000007")
 
         views={
             row[0] for row in con.execute(
