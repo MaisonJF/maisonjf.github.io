@@ -45,6 +45,9 @@ jobs:
           node --check functions/api/pdi-admin-import.js
           node --check functions/api/pdi-themes-live.js
           node --check functions/api/pdi-product-live.js
+          node --check functions/_lib/checkout-attribution.js
+          node functions/_lib/checkout-attribution.test.mjs
+          node --check functions/api/create-oracle-checkout-live.js
           node --check functions/api/create-pdi-checkout-live.js
           node --check functions/api/create-product-checkout-live.js
           node --check functions/api/product-checkout-session-live.js
