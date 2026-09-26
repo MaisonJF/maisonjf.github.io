@@ -1,4 +1,14 @@
 export const EBOOKS = {
+  para-de-ignorar: {
+    slug: 'para-de-ignorar',
+    title: 'PÁRA DE IGNORAR!',
+    priceId: 'price_1UJtIN5H3wYRPmPVvIrLnAhO',
+    unitCents: 599,
+    files: {
+      epub: { key: 'ebooks/para-de-ignorar.epub', filename: 'PARA-DE-IGNORAR-Joao-Fadario.epub', contentType: 'application/epub+zip' },
+      pdf: { key: 'ebooks/para-de-ignorar.pdf', filename: 'PARA-DE-IGNORAR-Joao-Fadario.pdf', contentType: 'application/pdf' }
+    }
+  },
   turista: {
     slug: 'virgulas-do-destino-o-turista',
     title: 'Vírgulas do Destino: O Turista',

@@ -17,6 +17,15 @@ window.MAISON_EBOOKS=[
     description:'Tarot, perda, desejo e recomeço. Caim viaja para Portugal depois de uma tragédia pessoal e encontra mais do que estava à procura.',
     price:4.99,currency:'EUR',cover:'/images/ebooks/meandros-da-vida.webp',media:[{role:'cover',src:'/images/ebooks/meandros-da-vida.webp',alt:'Capa do ebook Vírgulas do Destino: Meandros da Vida',aspect:'book',caption:'Vírgulas do Destino · Meandros da Vida'}],purchaseUrl:null,featured:true
   }
+  ,{
+    slug:'para-de-ignorar',
+    checkoutId:'para-de-ignorar',
+    title:'PÁRA DE IGNORAR!',
+    collection:'Colecção MAISON JF®',
+    language:'pt-PT',format:'ebook',status:'published',
+    description:'Há coisas que não desaparecem só porque deixamos de olhar para elas. Um livro curto, directo e humano sobre aquilo que vemos, normalizamos e continuamos a ignorar.',
+    price:5.99,currency:'EUR',cover:'/images/ebooks/para-de-ignorar.svg',media:[{role:'cover',src:'/images/ebooks/para-de-ignorar.svg',alt:'Capa do ebook PÁRA DE IGNORAR! de João Fadario',aspect:'book',caption:'PÁRA DE IGNORAR! · João Fadario'}],purchaseUrl:null,featured:true
+  }
 ];
 window.MAISON_PUBLISHED_EBOOKS=window.MAISON_EBOOKS.filter(book=>book.status==='published');
 window.MAISON_EBOOK_BY_SLUG=Object.fromEntries(window.MAISON_EBOOKS.map(book=>[book.slug,book]));
