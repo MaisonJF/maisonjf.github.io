@@ -99,6 +99,7 @@ export const DEFAULT_INSPECTION_URLS=Object.freeze([
   'https://maison-jf.com/servicos/tarot/',
   'https://maison-jf.com/produtos/oleo-massagem/',
   'https://maison-jf.com/profissionais/',
+  'https://maison-jf.com/ebooks/para-de-ignorar/',
   'https://maison-jf.com/ebooks/virgulas-do-destino-o-turista/',
   'https://maison-jf.com/oraculo/ansiedade-antecipacao'
 ]);
