@@ -5,5 +5,69 @@
     <link>https://maison-jf.com/</link>
     <description>Produtos físicos MAISON JF® para Google Merchant Center. Só entram referências com fotografia real de produto.</description>
 
+    <item>
+      <g:id>MJ-VELA-170</g:id>
+      <g:title>Vela Aromática 170 g</g:title>
+      <g:description>Luz e aroma para mudar o ritmo de um espaço.</g:description>
+      <g:link>https://maison-jf.com/produtos/vela-vidro/</g:link>
+      <g:image_link>https://maison-jf.com/images/cinematic/casa.avif</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>14.00 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:brand>MAISON JF®</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+    </item>
+
+    <item>
+      <g:id>MJ-VELA-070</g:id>
+      <g:title>Vela Aromática 70 g</g:title>
+      <g:description>Luz e aroma num formato mais pequeno.</g:description>
+      <g:link>https://maison-jf.com/produtos/vela-pequena/</g:link>
+      <g:image_link>https://maison-jf.com/images/products/vela-pequena/hero.webp</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>8.00 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:brand>MAISON JF®</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+    </item>
+
+    <item>
+      <g:id>MJ-OLEO-060</g:id>
+      <g:title>Óleo de Massagem 60 ml</g:title>
+      <g:description>Toque e pausa num ritual simples de massagem.</g:description>
+      <g:link>https://maison-jf.com/produtos/oleo-massagem/</g:link>
+      <g:image_link>https://maison-jf.com/images/cinematic/ritual.avif</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>12.00 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:brand>MAISON JF®</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+    </item>
+
+    <item>
+      <g:id>MJ-NEVOA-020</g:id>
+      <g:title>Névoa de Ambiente 20 ml</g:title>
+      <g:description>Uma forma rápida de mudar o ambiente através do aroma.</g:description>
+      <g:link>https://maison-jf.com/produtos/nevoa/</g:link>
+      <g:image_link>https://maison-jf.com/images/products/nevoa/hero.webp</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>7.00 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:brand>MAISON JF®</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+    </item>
+
+    <item>
+      <g:id>MJ-ESCALDA-150</g:id>
+      <g:title>Escalda-Pés 150 g</g:title>
+      <g:description>Um gesto simples para parar, aquecer e criar um momento para os pés.</g:description>
+      <g:link>https://maison-jf.com/produtos/escalda-pes/</g:link>
+      <g:image_link>https://maison-jf.com/images/products/escalda-pes/hero.webp</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>5.00 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:brand>MAISON JF®</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+    </item>
   </channel>
 </rss>
