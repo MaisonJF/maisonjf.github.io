@@ -7,6 +7,11 @@ const source=fs.readFileSync(new URL('../../../functions/_lib/offer-brain.js',im
 const match=source.match(/export const MAISON_OFFER_CATALOGUE=(\[[\s\S]*?\n\]);\n\nexport function/);
 if(!match)throw new Error('offer_catalogue_not_found');
 const offers=Function('"use strict";return ('+match[1]+')')();
+
+const b2bSource=fs.readFileSync(new URL('../../../functions/_lib/b2b-offer-brain.js',import.meta.url),'utf8');
+const b2bMatch=b2bSource.match(/export const MAISON_B2B_BRAIN=(\{[\s\S]*?\n\});\n\nexport function/);
+if(!b2bMatch)throw new Error('b2b_brain_not_found');
+const b2b=Function('"use strict";return ('+b2bMatch[1]+')')();
 const discovery=buildPublicDiscovery();
 const searchVisibility=buildSearchVisibility();
 const publicIdentity=JSON.parse(fs.readFileSync(new URL('public-entity-evidence.json',import.meta.url),'utf8'));
@@ -43,7 +48,7 @@ const territories=Object.entries(TERRITORIES).map(([id,base])=>({
 }));
 const graph={
   schema_version:'maison_knowledge_graph_v1',
-  generated_from:['.github/maison-growth/oceans/candidates.json','functions/_lib/offer-brain.js','sitemap.xml','robots.txt','llms.txt','public HTML backing files','.github/maison-growth/brain/search-visibility-baseline.json','.github/maison-growth/brain/public-entity-evidence.json','.github/maison-growth/brain/external-entity-authority.json','_redirects'],
+  generated_from:['.github/maison-growth/oceans/candidates.json','functions/_lib/offer-brain.js','functions/_lib/b2b-offer-brain.js','sitemap.xml','robots.txt','llms.txt','public HTML backing files','.github/maison-growth/brain/search-visibility-baseline.json','.github/maison-growth/brain/public-entity-evidence.json','.github/maison-growth/brain/external-entity-authority.json','_redirects'],
   principle:'Humano vê João. Máquina vê estrutura. Brain compreende os dois. MAISON transforma isso em desejo, utilidade e negócio.',
   contract:{
     machine_facing:true,
@@ -54,6 +59,59 @@ const graph={
     providers_do_not_define_voice:true
   },
   territories,
+  professional:{
+    surface:{...b2b.surface},
+    serviceAssetRef:b2b.serviceAssetRef,
+    dimensions:[...(b2b.dimensions||[])],
+    opportunityTypes:[...(b2b.opportunityTypes||[])],
+    diagnosticOpportunityMap:Object.fromEntries(
+      Object.entries(b2b.diagnosticOpportunityMap||{}).map(([key,value])=>[key,[...value]])
+    ),
+    segments:(b2b.segments||[]).map(x=>({
+      id:x.id,label:x.label,status:x.status,
+      territories:[...(x.territories||[])],routes:[...(x.routes||[])]
+    })),
+    needs:(b2b.needs||[]).map(x=>({...x})),
+    offerFamilies:(b2b.offerFamilies||[]).map(x=>({
+      ...x,
+      segments:[...(x.segments||[])],routes:[...(x.routes||[])],recurrence:[...(x.recurrence||[])]
+    })),
+    commercialReadiness:{
+      ...(b2b.commercialReadiness||{}),
+      requiredBeforeQuote:[...(b2b.commercialReadiness?.requiredBeforeQuote||[])],
+      optionalWhenRelevant:[...(b2b.commercialReadiness?.optionalWhenRelevant||[])],
+      unknownByDefault:[...(b2b.commercialReadiness?.unknownByDefault||[])],
+      productRefs:[...(b2b.commercialReadiness?.productRefs||[])]
+    },
+    recurrence:{
+      ...(b2b.recurrence||{}),
+      supportedNow:[...(b2b.recurrence?.supportedNow||[])],
+      pilotOnly:[...(b2b.recurrence?.pilotOnly||[])],
+      futureValidation:[...(b2b.recurrence?.futureValidation||[])]
+    },
+    leadContract:{
+      ...(b2b.leadContract||{}),
+      allowedNonPii:[...(b2b.leadContract?.allowedNonPii||[])],
+      forbidden:[...(b2b.leadContract?.forbidden||[])]
+    },
+    professionalNetwork:{
+      ...(b2b.professionalNetwork||{}),
+      levels:(b2b.professionalNetwork?.levels||[]).map(level=>({
+        ...level,
+        can:[...(level.can||[])],
+        cannot:[...(level.cannot||[])]
+      })),
+      safeguards:{...(b2b.professionalNetwork?.safeguards||{})},
+      economicsHypotheses:[...(b2b.professionalNetwork?.economicsHypotheses||[])]
+    },
+    researchCandidates:(b2b.researchCandidates||[]).map(x=>({
+      ...x,
+      segments:[...(x.segments||[])],
+      evidence:(x.evidence||[]).map(e=>({...e}))
+    })),
+    routes:(b2b.routes||[]).map(x=>({...x})),
+    evidencePolicy:{...(b2b.evidencePolicy||{})}
+  },
   publicDiscovery:{
     schema_version:discovery.schema_version,
     protocols:discovery.protocols,
@@ -120,5 +178,5 @@ if(process.argv.includes('--check')){
   console.log('MAISON knowledge graph: OK');
 }else{
   fs.writeFileSync(outputUrl,out);
-  console.log('Wrote MAISON knowledge graph with '+territories.length+' territories, '+graph.offers.length+' offers and '+graph.oceans.length+' Oceans');
+  console.log('Wrote MAISON knowledge graph with '+territories.length+' territories, '+graph.offers.length+' offers, '+graph.professional.segments.length+' professional segments and '+graph.oceans.length+' Oceans');
 }
