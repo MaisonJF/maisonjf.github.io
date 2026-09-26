@@ -1,4 +1,5 @@
 import { ORACLE_TERRITORIES } from '../_lib/oracle-territories.js';
+import { appendCheckoutAttribution } from '../_lib/checkout-attribution.js';
 
 const TERRITORIES=Object.fromEntries(
   ORACLE_TERRITORIES.map(t=>[t.slug,{label:t.label,page:t.slug+'.html'}])
@@ -35,6 +36,7 @@ export async function onRequestPost({ request, env }) {
     params.set('metadata[source]', 'oracle-live');
     params.set('metadata[oracle_theme]', theme);
     params.set('metadata[oracle_access]', 'single-reading');
+    appendCheckoutAttribution(params,body?.attribution,request.headers.get('Referer')||'',origin);
     params.set('submit_type', 'pay');
     params.set('custom_text[submit][message]', 'Ao pagar, confirmas uma abertura do Oráculo MAISON JF® e aceitas as condições em maison-jf.com/informacao-legal.html.');
 
