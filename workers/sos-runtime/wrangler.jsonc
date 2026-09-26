@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "maison-sos-runtime",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-25",
+  "triggers": {
+    "crons": ["* * * * *"]
+  },
+  "vars": {
+    "MAISON_SOS_SCHEDULER_ENABLED": "false",
+    "MAISON_SOS_RESEND_ENABLED": "false",
+    "MAISON_SOS_MAX_ACTIONS_PER_TICK": "20",
+    "MAISON_SOS_RESEND_SENDER_EMAIL": "sos@maison-jf.com",
+    "MAISON_SOS_PUBLIC_URL": "https://maison-jf.com"
+  }
+}
