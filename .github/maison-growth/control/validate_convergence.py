@@ -47,7 +47,7 @@ else:
         line=raw.strip()
         if not line or line.startswith("#") or "ocean_universal_coverage.py" in line:
             continue
-        if "build_" in line and (".mjs" in line or ".py" in line) and "--check" not in line:
+        if "build_" in line and (".mjs" in line or ".py" in line) and "--check" not in line and "--validate" not in line:
             mutating.append(line)
     if mutating:
         fail("derived-context check mutates before validating: "+" | ".join(mutating))
@@ -141,7 +141,10 @@ for rel in (
     ".github/maison-growth/brain/test_digital_experience_coverage.py",
 ):
     body=read(rel)
-    if body and re.search(r"(signals\.length|registered|summary\[["']oceans["']\])\s*[,=)]\s*\d+",body):
+    if body and (
+        re.search(r"signals\.length\s*[,=)]\s*\d+",body)
+        or re.search(r"registered\s*[,=)]\s*\d+",body)
+    ):
         warn(rel+" may still contain a brittle structural count")
 
 print("MAISON CONVERGENCE AUDIT")
