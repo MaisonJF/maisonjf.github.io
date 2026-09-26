@@ -58,6 +58,9 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Validate global health gate
+        run: python .github/maison-growth/brain/validate_global_health_gate.py
+
       - name: Report first-stage credential readiness
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         env:
