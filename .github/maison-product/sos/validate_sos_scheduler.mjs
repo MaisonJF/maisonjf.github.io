@@ -33,7 +33,7 @@ assert.ok(delivery.includes('releaseSosActionForRetry'));
 assert.ok(delivery.includes("outcome:'failed'"));
 assert.ok(runtime.includes("state='pending'"));
 assert.ok(runtime.includes("state='claimed'"));
-assert.ok(runtime.includes('lease_until'));
+assert.ok(runtime.includes('claim_expires_at'));
 assert.ok(runtime.includes('attempt_count'));
 assert.ok(runtime.includes('provider_temporary'));
 
