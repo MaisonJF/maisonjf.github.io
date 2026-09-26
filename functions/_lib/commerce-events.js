@@ -3,12 +3,21 @@ export async function recordStripePurchase(db,session){
   const metadata=session.metadata&&typeof session.metadata==='object'?session.metadata:{};
   const eventType='commerce.purchase_confirmed';
   const source='stripe';
-  const idempotencyKey='checkout:'+String(session.id);
+  const rawSessionId=String(session.id);
+  const sessionRefHash=await sha256(rawSessionId);
+  const idempotencyKey='checkout:'+sessionRefHash;
+  const legacyIdempotencyKey='checkout:'+rawSessionId;
+  const existing=await db.prepare(
+    `SELECT event_id FROM events
+     WHERE source=?1 AND (idempotency_key=?2 OR idempotency_key=?3)
+     LIMIT 1`
+  ).bind(source,idempotencyKey,legacyIdempotencyKey).first();
+  if(existing)return true;
   const occurredAt=new Date(Number(session.created||Math.floor(Date.now()/1000))*1000).toISOString();
   const valueMinor=Number.isInteger(session.amount_total)?session.amount_total:null;
   const currency=valueMinor!=null?String(session.currency||'EUR').toUpperCase():null;
   const safeMetadata={
-    stripe_session_id:String(session.id),
+    stripe_session_ref_hash:sessionRefHash,
     checkout_source:String(metadata.source||'').slice(0,120),
     product_slug:String(metadata.product_slug||'').slice(0,120),
     product_items:String(metadata.product_items||'').slice(0,450),
@@ -31,7 +40,7 @@ export async function recordStripePurchase(db,session){
   await db.prepare(
     `INSERT OR IGNORE INTO events
       (event_id,idempotency_key,event_type,source,schema_version,occurred_at,value_minor,currency,privacy_class,payload_hash,metadata_json)
-     VALUES(?1,?2,?3,?4,2,?5,?6,?7,'anonymous',?8,?9)`
+     VALUES(?1,?2,?3,?4,2,?5,?6,?7,'pseudonymous',?8,?9)`
   ).bind(eventId,idempotencyKey,eventType,source,occurredAt,valueMinor,currency,digest,metadataJson).run();
   return true;
 }
