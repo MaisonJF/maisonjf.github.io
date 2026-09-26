@@ -11,8 +11,7 @@
     "reminder_sent",
     "trusted_notice_sent",
     "trusted_notice_failed",
-    "activated",
-    "paused"
+    "activated"
   ],
   "zero_counts_emitted": true,
   "direct_pii": false,
