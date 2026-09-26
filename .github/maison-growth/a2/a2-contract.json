@@ -11,7 +11,14 @@
     "cloudflare_worker_required_now": false,
     "queue_required_now": false,
     "d1_required_now": false,
-    "adapters": "storage and retry transport are ports; local SQLite/memory adapters validate behavior before Cloudflare activation"
+    "adapters": "Python remains the reference contract/test adapter; the private Worker adapter implements the same validation, privacy, idempotency and A1 persistence semantics.",
+    "private_runtime_implemented": true,
+    "private_runtime_route": "/internal/a2/ingest",
+    "private_runtime_host": "existing maison-intelligence Worker",
+    "private_runtime_default_enabled": false,
+    "canonical_registry_delivery": "generated from source-registry.json; CI rejects drift",
+    "storage_binding": "existing GROWTH_DB",
+    "public_http_endpoint": false
   },
   "ingestion": {
     "accepted_contract_versions": [
@@ -22,7 +29,8 @@
     "unknown_field": "reject",
     "idempotency_scope": "source + idempotency_key",
     "same_key_same_payload": "return original event as duplicate",
-    "same_key_different_payload": "reject idempotency_conflict"
+    "same_key_different_payload": "reject idempotency_conflict",
+    "event_specific_metadata_policy": "enforced when a source declares an events map"
   },
   "privacy": {
     "deny_by_default": true,
@@ -34,6 +42,7 @@
   "completion": {
     "repository_complete_when": "collector, contracts, adapters, tests and validator pass locally and PR checks pass",
     "cloudflare_activation_deferred": true,
-    "a3_must_not_start_implicitly": true
+    "a3_must_not_start_implicitly": true,
+    "private_runtime_code_complete": true
   }
 }

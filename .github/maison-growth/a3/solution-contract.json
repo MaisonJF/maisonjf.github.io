@@ -31,9 +31,14 @@
     "b2b": {
       "conversion_event_types": [
         "b2b.order",
-        "b2b.lead"
+        "b2b.lead",
+        "b2b.proposal",
+        "b2b.pilot",
+        "b2b.purchase",
+        "b2b.recurrence"
       ],
-      "future_source": "commerce"
+      "future_source": "commerce",
+      "notes": "B2B lifecycle reuses canonical A3 conversion kinds: lead→lead, proposal→lead, pilot→booking, purchase→purchase, recurrence→order. The immutable A1 event preserves the original stage."
     },
     "company": {
       "conversion_event_types": [

@@ -50,16 +50,19 @@ assert economics["principles"]["reference_price_is_not_realised_revenue"] is Tru
 assert economics["principles"]["unknown_is_not_zero"] is True
 assert economics["principles"]["confidence_must_be_carried_with_estimates"] is True
 
-migration_entry = manifest["migrations"][0]
-migration_path = ROOT / migration_entry["file"]
-migration = migration_path.read_text(encoding="utf-8")
-assert hashlib.sha256(migration.encode("utf-8")).hexdigest() == migration_entry["sha256"]
-assert "maison_growth_a3_schema_version" in migration
-assert "first_last" in migration
-assert "DROP TABLE" not in migration.upper()
-assert "ALTER TABLE EVENTS" not in migration.upper()
-assert "UPDATE EVENTS" not in migration.upper()
-assert "DELETE FROM EVENTS" not in migration.upper()
+migrations = []
+for migration_entry in manifest["migrations"]:
+    migration_path = ROOT / migration_entry["file"]
+    migration = migration_path.read_text(encoding="utf-8")
+    assert hashlib.sha256(migration.encode("utf-8")).hexdigest() == migration_entry["sha256"]
+    assert "ALTER TABLE EVENTS" not in migration.upper()
+    assert "UPDATE EVENTS" not in migration.upper()
+    assert "DELETE FROM EVENTS" not in migration.upper()
+    migrations.append(migration)
+assert "maison_growth_a3_schema_version" in migrations[0]
+assert "first_last" in migrations[0]
+assert "maison-b2b" in "\n".join(migrations)
+assert "catalog:service:b2b" in "\n".join(migrations)
 
 py_compile.compile(str(ROOT / "journey_engine.py"), doraise=True)
 py_compile.compile(str(ROOT / "repository.py"), doraise=True)
@@ -70,11 +73,15 @@ if a1_schema.exists():
     con = sqlite3.connect(":memory:")
     con.execute("PRAGMA foreign_keys=ON")
     con.executescript(a1_schema.read_text(encoding="utf-8"))
-    con.executescript(migration)
+    for migration in migrations:
+        con.executescript(migration)
     assert list(con.execute("PRAGMA foreign_key_check")) == []
     assert con.execute(
         "SELECT schema_value FROM schema_state WHERE schema_key='maison_growth_a3_schema_version'"
     ).fetchone() == ("A3.1",)
+    assert con.execute(
+        "SELECT solution_type,delivery_mode,capacity_class FROM solutions WHERE solution_key='maison-b2b'"
+    ).fetchone() == ("b2b","human","negotiated")
 
 result = subprocess.run(
     [sys.executable, str(ROOT / "test_a3.py")],

@@ -1,0 +1,21 @@
+{
+  "contract_version": "SOS.SCHEDULER.1",
+  "state": "code_ready_not_provisioned",
+  "runtime": "Cloudflare Worker scheduled handler",
+  "public_fetch_handler": false,
+  "enabled_by": "MAISON_SOS_SCHEDULER_ENABLED",
+  "default_enabled": false,
+  "suggested_cron": "once per minute",
+  "max_actions_per_tick": {
+    "default": 20,
+    "hard_cap": 50
+  },
+  "rules": {
+    "reminder_before_trusted_notice": true,
+    "permanent_reminder_failure_blocks_escalation": true,
+    "temporary_delivery_retries_bounded": true,
+    "no_location_or_sensor_reads": true,
+    "no_brain_db_access": true,
+    "no_checkout_or_stripe": true
+  }
+}

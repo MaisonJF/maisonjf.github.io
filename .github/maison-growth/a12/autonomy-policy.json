@@ -64,5 +64,7 @@
     "commercial_promises",
     "protected_architecture",
     "public_authorization"
-  ]
+  ],
+  "global_health_gate_required": true,
+  "global_health_gate": ".github/maison-growth/brain/validate_global_health_gate.py"
 }

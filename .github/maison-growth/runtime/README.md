@@ -154,6 +154,35 @@ docker compose \
 Do not enable the remote Brain Control API merely to run this command until its HTTPS/private-access boundary has been configured and explicitly authorised.
 
 
+## Governed A11 Content learning cycle
+
+The optional `brain-learn` profile is separate from `brain-observe`.
+
+It reads canonical aggregated `content.performance_observed` events through the read-only Brain Control API, evaluates them with the Python A11 engine, and appends only governed internal A11 rows through the dedicated private write route.
+
+Safety properties:
+
+- `brain-observe` remains zero-write;
+- `MAISON_A11_LEARNING_ENABLED=false` by default on the client;
+- `A11_LEARNING_WRITE_API_ENABLED=false` by default on the Worker;
+- the write API uses a dedicated `A11_LEARNING_WRITE_TOKEN`;
+- the Worker verifies the canonical A11.2 rule seed and current `confidence_before` directly in D1;
+- a Content source snapshot can be learned only once;
+- Content engagement cannot provide economic value;
+- without an explicit A3 economic link, Content learning remains observation-only and cannot mutate confidence;
+- no public, catalogue, checkout, pricing, outreach or spend capability is granted.
+
+Manual invocation, only after the private write surface has been explicitly enabled and the A11.2 schema/rule seed verified:
+
+```bash
+docker compose \
+  --env-file .env.observe \
+  -f .github/maison-growth/runtime/docker-compose.observe.yml \
+  --profile brain-learn run --rm brain-learn-cycle
+```
+
+This profile is not scheduled or started by repository changes.
+
 ## Manual Semantic projection sync
 
 The optional `semantic-sync` profile incrementally projects selected canonical A13 observations from D1 into pgvector. It is a rebuildable index, not a second source of truth.

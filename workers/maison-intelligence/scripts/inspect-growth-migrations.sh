@@ -38,7 +38,8 @@ WITH expected(migration, name) AS (
     ('0015_human_commercial_review_resolution', 'autonomy_human_queue_current'),
     ('0016_approved_validation_planning', 'a14_validation_plans'),
     ('0016_approved_validation_planning', 'a14_validation_plan_a8_links'),
-    ('0016_approved_validation_planning', 'a14_approved_offers_ready_for_planning')
+    ('0016_approved_validation_planning', 'a14_approved_offers_ready_for_planning'),
+    ('0018_b2b_feedback', 'brain_b2b_feedback')
 )
 SELECT
   e.migration,
@@ -59,7 +60,19 @@ npx wrangler d1 execute "$DB_NAME" --remote --command "$SQL"
 
 
 echo
-echo "Detailed state for the pending 0012-0016 surfaces:"
+echo "Canonical B2B solution seed (0017):"
+npx wrangler d1 execute "$DB_NAME" --remote --command "SELECT '0017_b2b_canonical_solution' AS migration, CASE WHEN EXISTS(SELECT 1 FROM solutions WHERE solution_key='maison-b2b' AND solution_id='sol_0199a4b2-7f00-7000-8000-000000000001') THEN 'present' ELSE 'missing_or_partial' END AS status;"
+
+echo
+echo "A11 content learning schema (0019):"
+npx wrangler d1 execute "$DB_NAME" --remote --command "SELECT '0019_content_learning_source' AS migration, CASE WHEN EXISTS(SELECT 1 FROM schema_state WHERE schema_key='maison_growth_a11_schema_version' AND schema_value='A11.2') THEN 'present' ELSE 'missing_or_partial' END AS status;"
+
+echo
+echo "A11 canonical learning rule seed (0020):"
+npx wrangler d1 execute "$DB_NAME" --remote --command "SELECT '0020_learning_rule_seed' AS migration, CASE WHEN EXISTS(SELECT 1 FROM schema_state WHERE schema_key='maison_growth_a11_rule_version' AND schema_value='rul_e6217bb187b5ef0b6ee371286ed2e1e53e0d') THEN 'present' ELSE 'missing_or_partial' END AS status;"
+
+echo
+echo "Detailed state for the pending/runtime surfaces:"
 OBJECT_SQL="
 SELECT type,name
 FROM sqlite_master
@@ -94,7 +107,8 @@ FROM schema_state
 WHERE schema_key IN (
   'maison_growth_a14_schema_version',
   'maison_brain_runtime_schema_version',
-  'maison_growth_a12_schema_version'
+  'maison_growth_a12_schema_version',
+  'maison_brain_b2b_feedback_schema_version'
 )
 ORDER BY schema_key;
 "

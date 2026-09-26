@@ -30,6 +30,11 @@ assert a2["runtime_isolation"]["public_site_write"] is False
 assert a2["runtime_isolation"]["cloudflare_worker_required_now"] is False
 assert a2["runtime_isolation"]["queue_required_now"] is False
 assert a2["runtime_isolation"]["d1_required_now"] is False
+assert a2["runtime_isolation"]["private_runtime_implemented"] is True
+assert a2["runtime_isolation"]["private_runtime_default_enabled"] is False
+assert a2["runtime_isolation"]["private_runtime_route"] == "/internal/a2/ingest"
+assert a2["runtime_isolation"]["public_http_endpoint"] is False
+assert a2["completion"]["private_runtime_code_complete"] is True
 assert a2["completion"]["a3_must_not_start_implicitly"] is True
 
 assert permissions["default"] == "deny"
@@ -37,6 +42,10 @@ assert permissions["public_site_write"] is False
 assert permissions["public_runtime_dependency"] is False
 assert permissions["public_http_endpoint_provisioned"] is False
 assert permissions["cloudflare_resources_provisioned"] is False
+assert permissions["private_http_endpoint_implemented"] is True
+assert permissions["private_http_default_enabled"] is False
+assert permissions["private_http_route"] == "/internal/a2/ingest"
+assert permissions["a2_specific_cloudflare_activation_provisioned"] is False
 for role in permissions["roles"].values():
     assert "public_site.write" in role["forbidden"]
     assert "repository.write" in role["forbidden"]
@@ -75,6 +84,18 @@ required = [
 ]
 for name in required:
     assert (HERE / name).exists(), name
+
+worker_root = HERE.parents[2] / "workers" / "maison-intelligence"
+for relative in [
+    "src/a2_runtime.js",
+    "src/a2_source_registry.generated.js",
+    "scripts/generate-a2-source-registry.mjs",
+    "test/a2_runtime.test.mjs",
+]:
+    assert (worker_root / relative).exists(), relative
+wrangler = (worker_root / "wrangler.jsonc").read_text(encoding="utf-8")
+assert '"A2_INGEST_API_ENABLED": "false"' in wrangler
+assert "A2_INGEST_TOKEN" not in wrangler
 
 proc = subprocess.run(
     [sys.executable, str(HERE / "test_event_collector.py")],

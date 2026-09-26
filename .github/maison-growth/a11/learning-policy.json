@@ -1,5 +1,5 @@
 {
-  "policy_version": "A11.1",
+  "policy_version": "A11.2",
   "mode": "analysis_only",
   "economic_priority": true,
   "minimum_observation_count": 3,
@@ -55,5 +55,6 @@
     "EXPECTED_OBSERVED_MATCH",
     "EXPECTED_OBSERVED_DIVERGENCE",
     "SENSITIVE_RULE_CHANGE_REQUIRES_HUMAN"
-  ]
+  ],
+  "initial_confidence": 50
 }

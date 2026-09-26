@@ -1,0 +1,43 @@
+{
+  "contract_version": "SOS.BRAIN.1",
+  "source": "sos_product",
+  "event_boundary": "maison-growth-event-v2",
+  "privacy_class": [
+    "aggregated",
+    "system"
+  ],
+  "allowed_event_prefixes": [
+    "sos."
+  ],
+  "aggregate_only": true,
+  "allowed_metadata": [
+    "product_id",
+    "signal_kind",
+    "cadence_bucket",
+    "delivery_outcome",
+    "product_version",
+    "count"
+  ],
+  "signal_kinds": [
+    "checkin_completed",
+    "reminder_sent",
+    "trusted_notice_sent",
+    "trusted_notice_failed",
+    "activated",
+    "paused"
+  ],
+  "forbidden": [
+    "direct_pii",
+    "pseudonymous_user_or_contact_ids",
+    "exact_checkin_time",
+    "exact_due_time",
+    "location",
+    "free_text",
+    "reason_for_use",
+    "message_body",
+    "contact_endpoint",
+    "private_confession",
+    "health_or_emergency_inference"
+  ],
+  "rule": "If a useful product insight cannot be expressed through this aggregate allowlist, it does not enter Brain."
+}

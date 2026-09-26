@@ -2774,13 +2774,13 @@
       "currency": "EUR",
       "catalogue_availability": null,
       "condition": null,
-      "description": "Produtos e propostas para o teu espaço.",
+      "description": "Revenda, experiência, gifting, pequenas séries e pilotos profissionais por proposta.",
       "search_context": [
         "profissional",
         "Profissional",
         "Maison para profissionais",
-        "Produtos e propostas para o teu espaço.",
-        "A proposta e o preço dependem das necessidades, quantidades e contexto profissional."
+        "Revenda, experiência, gifting, pequenas séries e pilotos profissionais por proposta.",
+        "Formato, preço, quantidades, capacidade, prazo e enquadramento são confirmados antes. Pilotos para equipas são não-clínicos e não são apresentados como formação oficial ou certificação pública."
       ],
       "operational": {
         "capacity_units_per_period": null,

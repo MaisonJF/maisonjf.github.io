@@ -15,7 +15,7 @@ window.MAISON_SERVICES=[
 
 {slug:'companhia',kind:'companhia',door:'Presença',name:'Presença',price:'desde 35 €',description:'Online. Presencial. SOS.',limits:'Inclui Presença Online, Presença Social, Presença Próxima, SOS 1 dia e SOS 1 semana. Não é um serviço sexual nem um serviço de emergência.',media:[{role:'ambience',src:'../images/root/companhia-cafe-fixed.webp?v=20260916-1532-fixed',alt:'Mesa com café como imagem de tempo partilhado',aspect:'portrait'}],formats:['Presença Online · 35 €','Presença Social · 80 €','Presença Próxima · 80 €','SOS 1 dia · 60 €','SOS 1 semana · 120 €'],cta:'Descobrir Presença',next:{slug:'acompanhamento',label:'Se procuras continuidade por mais tempo, ver Acompanhamento'}},
 
-{slug:'b2b',kind:'profissional',door:'Profissional',name:'Maison para profissionais',price:null,description:'Produtos e propostas para o teu espaço.',limits:'A proposta e o preço dependem das necessidades, quantidades e contexto profissional.',media:[],cta:'Quero uma proposta B2B'}
+{slug:'b2b',kind:'profissional',door:'Profissional',name:'Maison para profissionais',price:null,description:'Revenda, experiência, gifting, pequenas séries e pilotos profissionais por proposta.',limits:'Formato, preço, quantidades, capacidade, prazo e enquadramento são confirmados antes. Pilotos para equipas são não-clínicos e não são apresentados como formação oficial ou certificação pública.',media:[],cta:'Quero uma proposta B2B'}
 ];
 window.MAISON_SERVICE_BY_SLUG=Object.fromEntries(window.MAISON_SERVICES.map(service=>[service.slug,service]));
 window.MAISON_SERVICES_BY_KIND=window.MAISON_SERVICES.reduce((groups,service)=>{(groups[service.kind]??=[]).push(service);return groups;},{});

@@ -1,0 +1,67 @@
+{
+  "contract_version": "CONTENT-PERFORMANCE-1.0",
+  "event_type": "content.performance_observed",
+  "privacy_class": "aggregated",
+  "collection": "manual_or_separately_authorized_import",
+  "canonical_event_envelope": ".github/maison-growth/a1/event-contract-v2.json",
+  "metrics": {
+    "counts": [
+      "impressions",
+      "reach",
+      "video_starts",
+      "views",
+      "completions",
+      "shares",
+      "saves",
+      "comments",
+      "profile_visits",
+      "link_clicks",
+      "leads",
+      "conversions"
+    ],
+    "durations": [
+      "watch_seconds"
+    ],
+    "derived_only_when_denominator_observed": [
+      "completion_rate_bps",
+      "save_rate_bps",
+      "share_rate_bps",
+      "click_rate_bps",
+      "conversion_rate_bps"
+    ]
+  },
+  "rules": {
+    "direct_pii": false,
+    "paid_content_bodies": false,
+    "unknown_is_not_zero": true,
+    "no_platform_metric_invention": true,
+    "no_cross_platform_score": true,
+    "no_winner_selection": true,
+    "no_revenue_inference_from_engagement": true,
+    "economic_value_owner": "A3",
+    "append_only_learning_owner": "A11",
+    "rates_are_integer_basis_points": true,
+    "a2_allowlist_required": true,
+    "comparison_causal_claim": false,
+    "automatic_comparison_winner": false,
+    "platform_and_surface_derived_from_channel": true,
+    "channel_must_match_format": true
+  },
+  "ingestion_boundary": ".github/maison-growth/a2/source-registry.json",
+  "lineage": {
+    "optional": [
+      "campaign_id",
+      "thesis_id",
+      "comparison_id",
+      "comparison_dimension",
+      "variant_key"
+    ],
+    "purpose": "Allow downstream grouping by campaign/thesis and one-variable observational comparisons without replicating Brain intelligence."
+  },
+  "distribution_dimensions": {
+    "channel": "Concrete MAISON distribution route, e.g. instagram_reels.",
+    "platform": "Provider family derived from channel, e.g. instagram.",
+    "surface": "Surface derived from channel, e.g. reels.",
+    "format": "Content format validated against the channel."
+  }
+}

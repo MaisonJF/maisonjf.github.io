@@ -156,6 +156,38 @@ class BrainControlClient:
             "limit":limit,"after":after,"after_id":after_id
         })
 
+    def b2b_feedback(
+        self,
+        *,
+        limit: int=100,
+        after: Optional[str]=None,
+        after_id: Optional[str]=None,
+    ) -> Mapping[str,Any]:
+        return self._get("/internal/brain/b2b-feedback",{
+            "limit":limit,"after":after,"after_id":after_id
+        })
+
+    def content_performance(
+        self,
+        *,
+        limit: int=100,
+        after: Optional[str]=None,
+        after_id: Optional[str]=None,
+    ) -> Mapping[str,Any]:
+        return self._get("/internal/brain/content-performance",{
+            "limit":limit,"after":after,"after_id":after_id
+        })
+
+    def learning_subject(
+        self,
+        *,
+        subject_id: str,
+        limit: int=1,
+    ) -> Mapping[str,Any]:
+        return self._get("/internal/brain/learning-subject",{
+            "subject_id":subject_id,"limit":limit
+        })
+
     def learning(
         self,
         *,

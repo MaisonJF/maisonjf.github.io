@@ -1,0 +1,32 @@
+{
+  "contract_version": "SOS.ADAPTERS.1",
+  "status": "code_ready_disabled",
+  "auth": {
+    "provider": "supabase",
+    "method": "server-side access-token validation through /auth/v1/user",
+    "env_gate": "MAISON_SOS_AUTH_ENABLED",
+    "project_url_env": "MAISON_SOS_SUPABASE_URL",
+    "publishable_key_env": "MAISON_SOS_SUPABASE_PUBLISHABLE_KEY",
+    "persisted_from_profile": [
+      "stable subject HMAC only",
+      "confirmed reminder email encrypted only"
+    ],
+    "discarded_profile_fields": "all other Supabase user fields"
+  },
+  "notification": {
+    "provider": "brevo",
+    "channel": "transactional email",
+    "env_gate": "MAISON_SOS_BREVO_ENABLED",
+    "api_key_env": "MAISON_SOS_BREVO_API_KEY",
+    "sender_env": "MAISON_SOS_BREVO_SENDER_EMAIL",
+    "public_url_env": "MAISON_SOS_PUBLIC_URL",
+    "message_format": "plain text",
+    "recipient_name_sent": false,
+    "emergency_claims_forbidden": true
+  },
+  "activation": {
+    "public_routes_created": false,
+    "credentials_committed": false,
+    "providers_enabled_in_repository": false
+  }
+}

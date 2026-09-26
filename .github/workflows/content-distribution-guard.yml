@@ -1,0 +1,38 @@
+name: Content Distribution Guard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/maison-growth/content-distribution/**'
+      - 'functions/_lib/maison-content-ontology.js'
+      - '.github/maison-growth/a1/event-contract-v2.json'
+      - '.github/maison-growth/a2/source-registry.json'
+      - '.github/workflows/content-distribution-guard.yml'
+  pull_request:
+    paths:
+      - '.github/maison-growth/content-distribution/**'
+      - 'functions/_lib/maison-content-ontology.js'
+      - '.github/maison-growth/a1/event-contract-v2.json'
+      - '.github/maison-growth/a2/source-registry.json'
+      - '.github/workflows/content-distribution-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-content-distribution:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate A2 collector after content source allowlist
+        run: python3 .github/maison-growth/a2/validate_a2.py
+
+      - name: Validate content distribution contracts
+        run: python3 .github/maison-growth/content-distribution/validate_content_distribution.py
+
+      - name: Run all content distribution tests
+        working-directory: .github/maison-growth/content-distribution
+        run: python3 -m unittest discover -v -p 'test_content*.py'

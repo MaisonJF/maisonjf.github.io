@@ -1,0 +1,66 @@
+{
+  "contract_version": "CONTENT-BRAIN-HANDOFF-1.0",
+  "owner": "RIO CONTEUDO DISTRIBUICAO",
+  "purpose": "Describe the stateless boundary between observed content performance and the central Maison learning architecture.",
+  "canonical_path": {
+    "producer": "content-distribution",
+    "collector": "A2",
+    "event_store": "A1",
+    "event_type": "content.performance_observed",
+    "privacy_class": "aggregated",
+    "downstream_owner": "Maison Brain / A11"
+  },
+  "available_observations": [
+    "impressions",
+    "reach",
+    "video_starts",
+    "views",
+    "completions",
+    "watch_seconds",
+    "shares",
+    "saves",
+    "comments",
+    "profile_visits",
+    "link_clicks",
+    "leads",
+    "conversions",
+    "completion_rate_bps",
+    "save_rate_bps",
+    "share_rate_bps",
+    "click_rate_bps",
+    "conversion_rate_bps"
+  ],
+  "lineage": {
+    "content_id": "derived content execution identifier",
+    "source_refs_hash": "SHA-256 of ordered canonical Brain/source references",
+    "human_review_ref": "reference to the approval that permitted manual distribution",
+    "raw_source_refs_replicated_in_A1_metadata": false,
+    "campaign_id": "derived Content OS campaign identifier; optional",
+    "thesis_id": "derived thesis identifier tied to hashed canonical source lineage; optional",
+    "comparison_id": "one-variable observational comparison identifier; optional",
+    "comparison_dimension": "hook_family, format or cta_kind; optional",
+    "variant_key": "variant lineage within a comparison; optional"
+  },
+  "downstream_mapping_required": {
+    "current_state": "not_owned_by_this_river",
+    "reason": "A11 currently supports decision, experiment, journey, conversion and promotion source kinds; changing that is central learning architecture.",
+    "expected_behavior": "Central Brain may map A1 content.performance_observed into bounded, append-only learning using its own governed contract.",
+    "automatic_confidence_mutation_required": false,
+    "content_comparisons_are_causal": false,
+    "automatic_winner_selection": false,
+    "one_snapshot_per_variant_per_interpretation": true,
+    "equal_observation_window_duration_required": true,
+    "overlapping_snapshots_are_not_independent": true,
+    "cross_platform_content_score": false
+  },
+  "prohibited_here": [
+    "new_learning_database",
+    "A11_schema_mutation",
+    "central_Brain_architecture_change",
+    "causal_claim_from_engagement",
+    "cross_platform_winner_score",
+    "economic_value_inference_from_engagement",
+    "automatic_publication"
+  ],
+  "storage": "none"
+}

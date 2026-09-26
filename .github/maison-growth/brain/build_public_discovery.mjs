@@ -262,8 +262,12 @@ export function buildPublicDiscovery(){
     pages
   };
 }
-export function writePublicDiscovery({check=false}={}){
+export function writePublicDiscovery({check=false,validate=false}={}){
   const out=JSON.stringify(buildPublicDiscovery(),null,2)+'\n';
+  if(validate){
+    console.log('MAISON public discovery graph: validated in memory');
+    return true;
+  }
   if(check){
     if(!fs.existsSync(OUTPUT)||fs.readFileSync(OUTPUT,'utf8')!==out){
       console.error('public-discovery.generated.json is stale; run build_public_discovery.mjs');
@@ -278,6 +282,9 @@ export function writePublicDiscovery({check=false}={}){
 }
 const self=fileURLToPath(import.meta.url);
 if(process.argv[1]&&path.resolve(process.argv[1])===self){
-  const ok=writePublicDiscovery({check:process.argv.includes('--check')});
+  const ok=writePublicDiscovery({
+    check:process.argv.includes('--check'),
+    validate:process.argv.includes('--validate')
+  });
   if(!ok)process.exit(1);
 }

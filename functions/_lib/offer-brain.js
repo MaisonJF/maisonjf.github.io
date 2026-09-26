@@ -80,12 +80,12 @@ export const MAISON_OFFER_CATALOGUE=[
   {id:'sos',family:'presence',stage:'continuity',format:'service',title:'SOS Maison',description:'Uma janela de presença assíncrona para uma situação que ainda está a acontecer.',href:'/portas/companhia#sos',amount:6000,priceLabel:'desde 60 €',axes:['attachment','belong','load','security'],territories:['presenca','corpo','cabeca'],routes:['continuity','talk'],base:5}
 ];
 
-export function recommendMaisonOffers(signal={}){
+export function recommendMaisonOffers(signal={}, learning={}){
   const profile=normalizeProfile(signal);
   const territories=AXIS_TERRITORIES[profile.result]||[];
   const scored=MAISON_OFFER_CATALOGUE
     .filter(o=>o.status!=='hidden' && o.stage!=='continuity')
-    .map(offer=>scoreOffer(offer,profile,territories))
+    .map(offer=>scoreOffer(offer,profile,territories,learning))
     .sort((a,b)=>b.score-a.score || compareAmount(a.offer.amount,b.offer.amount));
 
   const groups=['oracle','game','physical','gift','consultation'];
@@ -159,7 +159,7 @@ function normalizeProfile(signal){
   return {result,route,rankedAxes,test,testResult};
 }
 
-function scoreOffer(offer,profile,territories){
+function scoreOffer(offer,profile,territories,learning={}){
   let score=Number(offer.base||0);
   const reasons=[];
   if(offer.axes.includes(profile.result)){score+=20;reasons.push('primary_axis');}
@@ -178,7 +178,18 @@ function scoreOffer(offer,profile,territories){
   if(profile.route==='talk' && ['conversation','service','game'].includes(offer.format)){score+=3;}
   if(profile.route==='gesture' && ['physical','game','oracle'].includes(offer.format)){score+=3;}
 
+  const learned=boundedLearningAdjustment(learning?.[offer.id]);
+  if(learned!==0){score+=learned;reasons.push(learned>0?'learned_positive':'learned_negative');}
+
   return {offer,score,reasons:[...new Set(reasons)]};
+}
+
+export function boundedLearningAdjustment(raw){
+  const delta=Number(raw?.confidence_delta??raw?.confidenceDelta??0);
+  const observations=Number(raw?.observation_count??raw?.observationCount??0);
+  if(!Number.isFinite(delta)||!Number.isFinite(observations)||observations<3)return 0;
+  // Learning refines ranking within a narrow bound; semantic fit remains primary.
+  return Math.max(-6,Math.min(6,Math.round(delta/2)));
 }
 
 function diversityOk(offer,selected){

@@ -1,0 +1,56 @@
+{
+  "contract_version": "CONTENT-OPS-1.0",
+  "module": "MAISON Content Operating System",
+  "mode": "planning_observation_and_manual_learning",
+  "canonical_intelligence_owner": "Maison Brain",
+  "campaigns_are": "derived execution containers",
+  "campaigns_are_not": "knowledge or intelligence stores",
+  "unit_of_thought": "one validated human tension / thesis",
+  "campaign_roles": [
+    "recognise",
+    "cost_of_ignoring",
+    "reframe",
+    "movement",
+    "commercial_bridge"
+  ],
+  "comparison_dimensions": [
+    "hook_family",
+    "format",
+    "cta_kind"
+  ],
+  "comparison_rules": {
+    "change_one_dimension_at_a_time": true,
+    "same_campaign_required": true,
+    "same_thesis_required": true,
+    "commercial_destination_routing_owned_by_A8": true,
+    "randomized_experiment_claim": false,
+    "causal_claim": false,
+    "automatic_winner": false,
+    "automatic_promotion": false,
+    "same_channel_required_for_hook_and_cta": true,
+    "same_platform_required_for_format": true,
+    "cross_platform_comparison_forbidden": true
+  },
+  "cadence_rules": {
+    "manual_slots_only": true,
+    "same_content_same_channel_same_day_duplicate": false,
+    "automatic_scheduling": false,
+    "automatic_publication": false
+  },
+  "learning_rules": {
+    "compare_like_with_like": true,
+    "platforms_not_collapsed_into_one_score": true,
+    "primary_metric_declared_before_observation": true,
+    "unknown_is_not_zero": true,
+    "directional_signal_only": true,
+    "human_interpretation_required": true,
+    "economic_value_owner": "A3",
+    "central_learning_owner": "Brain/A11",
+    "one_snapshot_per_variant_per_interpretation": true,
+    "equal_observation_window_duration_required": true,
+    "overlapping_snapshots_not_independent_samples": true
+  },
+  "public_voice_owner": "functions/_lib/maison-content-ontology.js",
+  "publishing_owner": "existing Maison gates / manual distribution",
+  "public_side_effects": false
+}

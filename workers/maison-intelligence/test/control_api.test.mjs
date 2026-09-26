@@ -112,6 +112,34 @@ test('cash feedback exposes all A3 economics with optional A14 lineage and no cu
   assert.equal('customer_id' in body.rows[0],false);
 });
 
+test('b2b feedback exposes lifecycle without customer identity', async () => {
+  const e=env((sql)=>{
+    assert.match(sql,/FROM brain_b2b_feedback/);
+    return [{
+      conversion_id:'cnv_12345678-1234-1234-1234-123456789012',
+      source_event_id:'evt_12345678-1234-1234-1234-123456789012',
+      event_type:'b2b.lead',conversion_kind:'lead',journey_id:null,
+      solution_id:'sol_0199a4b2-7f00-7000-8000-000000000001',
+      occurred_at:'2026-09-25T12:00:00.000Z',
+      revenue_minor:null,currency:null,privacy_class:'pseudonymous',
+      lifecycle_stage:'lead',interest:'b2b',origin:'professional_test',
+      business:'spa',goal:'diferenciar',gap:'continuity',client:'recorrente',
+      model:'servico',scale:'pequeno',start:'piloto',result_type:'signature',
+      b2b_stage:null,offer_family:null,recurrence_type:null
+    }];
+  });
+  const response=await handleBrainControlRequest(req('/internal/brain/b2b-feedback?limit=10'),e);
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.kind,'brain_b2b_feedback');
+  assert.equal(body.rows[0].business,'spa');
+  assert.equal(body.rows[0].lifecycle_stage,'lead');
+  assert.equal(body.next_cursor.after_id,'cnv_12345678-1234-1234-1234-123456789012');
+  assert.equal('customer_id' in body.rows[0],false);
+  assert.equal('email' in body.rows[0],false);
+  assert.equal('free_text_message' in body.rows[0],false);
+});
+
 test('solutions expose safe commercial fields and current economics only', async () => {
   const e=env((sql,params)=>{
     assert.match(sql,/WITH ranked AS/);
@@ -161,6 +189,54 @@ test('invalid pagination is rejected before D1 query', async () => {
   assert.equal((await response.json()).error,'invalid_limit');
 });
 
+
+test('content performance feed exposes aggregated snapshots with snapshot count', async () => {
+  const e=env((sql)=>{
+    assert.match(sql,/maison-content-distribution/);
+    assert.match(sql,/COUNT\(DISTINCT json_extract\(prior\.metadata_json,'\$\.source_refs_hash'\)\)/);
+    return [{
+      event_id:'evt_12345678-1234-7123-8123-123456789012',
+      payload_hash:'a'.repeat(64),
+      occurred_at:'2026-09-26T00:00:00.000Z',
+      source:'maison-content-distribution',
+      event_type:'content.performance_observed',
+      privacy_class:'aggregated',
+      metadata_json:'{"content_id":"cnt-piece-001","reach":1200}',
+      independent_snapshot_count:3
+    }];
+  });
+  const response=await handleBrainControlRequest(req('/internal/brain/content-performance?limit=10'),e);
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.kind,'brain_content_performance');
+  assert.equal(body.rows[0].privacy_class,'aggregated');
+  assert.equal(body.rows[0].metadata.content_id,'cnt-piece-001');
+  assert.equal(body.rows[0].independent_snapshot_count,3);
+});
+
+test('learning subject returns latest candidate learning context', async () => {
+  const e=env((sql)=>{
+    assert.match(sql,/subject_type='candidate'/);
+    return [{
+      learning_record_id:'lrn_12345678-1234-1234-1234-123456789012',
+      source_kind:'content',source_id:'cnt_12345678-1234-1234-1234-123456789012',
+      subject_type:'candidate',subject_id:'can_12345678-1234-1234-1234-123456789012',
+      signal_class:'insufficient',economic_value_minor:null,ctr_bps:700,
+      confidence_before:50,confidence_after:50,confidence_delta:0,
+      reason_codes_json:'["INSUFFICIENT_ECONOMIC_DATA"]',
+      evidence_refs_json:'["a1:event:evt_x"]',
+      correlation_only:1,causal_claim:0,created_at:'2026-09-26T00:00:00Z'
+    }];
+  });
+  const response=await handleBrainControlRequest(
+    req('/internal/brain/learning-subject?subject_id=can_12345678-1234-1234-1234-123456789012&limit=1'),e
+  );
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.kind,'brain_learning_subject');
+  assert.equal(body.rows[0].confidence_after,50);
+  assert.equal(body.rows[0].causal_claim,false);
+});
 
 test('learning context remains correlation-only and excludes policy mutation fields', async () => {
   const e=env((sql)=>{

@@ -1,0 +1,776 @@
+// GENERATED from .github/maison-growth/a2/source-registry.json
+// Do not edit by hand. Run scripts/generate-a2-source-registry.mjs.
+export const A2_SOURCE_REGISTRY={
+  "contract_version": "A2.1",
+  "default": "deny",
+  "unknown_sources": "reject",
+  "sources": {
+    "site": {
+      "status": "planned",
+      "privacy_class": [
+        "anonymous",
+        "pseudonymous"
+      ],
+      "allowed_event_prefixes": [
+        "page.",
+        "cta.",
+        "navigation.",
+        "offer."
+      ],
+      "metadata": {
+        "path": {
+          "type": "public_path",
+          "maxLength": 500
+        },
+        "referrer_host": {
+          "type": "hostname",
+          "maxLength": 255
+        },
+        "cta_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "campaign_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "surface": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "offer_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "recommendation_source": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "recommendation_result": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "recommendation_route": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "recommendation_brain": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "navigation_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "target_path": {
+          "type": "public_path",
+          "maxLength": 500
+        }
+      },
+      "notes": [
+        "This is the canonical contract for public-site signals returning to A2/Brain; the Experience river must consume it rather than define a parallel analytics schema.",
+        "Only structural interaction metadata is accepted; link text, answers, free text and direct PII are forbidden.",
+        "Offer exposure/click events contain only first-party recommendation identifiers; no answer text or direct PII.",
+        "Google Analytics is not the Brain contract and must not be treated as the canonical source of Maison learning."
+      ],
+      "events": {
+        "page.view": {
+          "required_metadata": [
+            "path"
+          ],
+          "allowed_metadata": [
+            "path",
+            "referrer_host",
+            "campaign_id",
+            "surface"
+          ]
+        },
+        "cta.click": {
+          "required_metadata": [
+            "path",
+            "cta_id"
+          ],
+          "allowed_metadata": [
+            "path",
+            "cta_id",
+            "campaign_id",
+            "surface"
+          ]
+        },
+        "navigation.click": {
+          "required_metadata": [
+            "path",
+            "navigation_id",
+            "target_path"
+          ],
+          "allowed_metadata": [
+            "path",
+            "navigation_id",
+            "target_path",
+            "surface"
+          ]
+        },
+        "offer.exposure": {
+          "required_metadata": [
+            "path",
+            "surface",
+            "offer_id"
+          ],
+          "allowed_metadata": [
+            "path",
+            "surface",
+            "offer_id",
+            "recommendation_source",
+            "recommendation_result",
+            "recommendation_route",
+            "recommendation_brain"
+          ]
+        },
+        "offer.click": {
+          "required_metadata": [
+            "path",
+            "surface",
+            "offer_id"
+          ],
+          "allowed_metadata": [
+            "path",
+            "surface",
+            "offer_id",
+            "recommendation_source",
+            "recommendation_result",
+            "recommendation_route",
+            "recommendation_brain"
+          ]
+        }
+      }
+    },
+    "internal_search": {
+      "status": "planned",
+      "privacy_class": [
+        "anonymous",
+        "pseudonymous",
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "internal_search."
+      ],
+      "metadata": {
+        "query_hash": {
+          "type": "sha256"
+        },
+        "query_classification": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "result_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "had_results": {
+          "type": "boolean"
+        },
+        "surface": {
+          "type": "token",
+          "maxLength": 80
+        }
+      },
+      "notes": [
+        "Raw search text is not accepted by A2. A future privacy-aware adapter must transform it before ingestion."
+      ]
+    },
+    "test": {
+      "status": "planned",
+      "privacy_class": [
+        "anonymous",
+        "pseudonymous",
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "test."
+      ],
+      "metadata": {
+        "test_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "result_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "territory_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "surface": {
+          "type": "token",
+          "maxLength": 80
+        }
+      }
+    },
+    "oracle": {
+      "status": "planned",
+      "privacy_class": [
+        "pseudonymous",
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "oracle."
+      ],
+      "metadata": {
+        "territory_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "class_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "entry_source": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "repeat_usage": {
+          "type": "boolean"
+        },
+        "conversion_stage": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "reading_id_hash": {
+          "type": "sha256"
+        }
+      },
+      "notes": [
+        "Paid Oracle text is never accepted.",
+        "Only aggregate or pseudonymous analytics may cross into the Growth Engine."
+      ]
+    },
+    "commerce": {
+      "status": "planned",
+      "privacy_class": [
+        "pseudonymous",
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "commerce.",
+        "product.",
+        "service.",
+        "b2b.",
+        "company."
+      ],
+      "metadata": {
+        "product_id": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "category_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "order_ref_hash": {
+          "type": "sha256"
+        },
+        "payment_status": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "channel": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "interest": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "origin": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "business": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "goal": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "gap": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "client": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "model": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "scale": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "start": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "result_type": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "b2b_stage": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "offer_family": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "recurrence_type": {
+          "type": "token",
+          "maxLength": 120
+        }
+      },
+      "notes": [
+        "B2B reuses the central commerce source. No CRM or parallel B2B event store is created.",
+        "b2b.lead metadata is exactly the non-PII context allowed by MAISON_B2B_BRAIN.leadContract: interest, origin, business, goal, gap, client, model, scale, start, result_type.",
+        "Name, email, phone, free_text_message, health_data and client_identity are forbidden from Growth analytics.",
+        "Email, customer name, postal data, Stripe customer IDs and other commercial PII remain outside Growth analytics."
+      ],
+      "events": {
+        "commerce.purchase": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "order_ref_hash",
+            "payment_status",
+            "channel"
+          ]
+        },
+        "commerce.purchase_confirmed": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "order_ref_hash",
+            "payment_status",
+            "channel"
+          ]
+        },
+        "product.purchase": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "order_ref_hash",
+            "payment_status",
+            "channel"
+          ]
+        },
+        "service.booking": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "channel"
+          ]
+        },
+        "service.contact": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "channel"
+          ]
+        },
+        "b2b.order": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "product_id",
+            "category_id",
+            "order_ref_hash",
+            "payment_status",
+            "channel",
+            "offer_family",
+            "origin",
+            "business",
+            "goal",
+            "result_type",
+            "recurrence_type"
+          ]
+        },
+        "company.contact": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "category_id",
+            "channel"
+          ]
+        },
+        "b2b.lead": {
+          "required_metadata": [],
+          "allowed_metadata": [
+            "interest",
+            "origin",
+            "business",
+            "goal",
+            "gap",
+            "client",
+            "model",
+            "scale",
+            "start",
+            "result_type"
+          ]
+        },
+        "b2b.proposal": {
+          "required_metadata": [
+            "b2b_stage"
+          ],
+          "allowed_metadata": [
+            "b2b_stage",
+            "offer_family",
+            "origin",
+            "business",
+            "goal",
+            "result_type"
+          ]
+        },
+        "b2b.pilot": {
+          "required_metadata": [
+            "b2b_stage"
+          ],
+          "allowed_metadata": [
+            "b2b_stage",
+            "offer_family",
+            "origin",
+            "business",
+            "goal",
+            "result_type"
+          ]
+        },
+        "b2b.purchase": {
+          "required_metadata": [
+            "b2b_stage"
+          ],
+          "allowed_metadata": [
+            "b2b_stage",
+            "offer_family",
+            "origin",
+            "business",
+            "goal",
+            "result_type",
+            "recurrence_type"
+          ]
+        },
+        "b2b.recurrence": {
+          "required_metadata": [
+            "b2b_stage",
+            "recurrence_type"
+          ],
+          "allowed_metadata": [
+            "b2b_stage",
+            "offer_family",
+            "origin",
+            "business",
+            "goal",
+            "result_type",
+            "recurrence_type"
+          ]
+        }
+      }
+    },
+    "gsc": {
+      "status": "planned",
+      "privacy_class": [
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "discovery."
+      ],
+      "metadata": {
+        "query_hash": {
+          "type": "sha256"
+        },
+        "page_path": {
+          "type": "public_path",
+          "maxLength": 500
+        },
+        "impressions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "clicks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "position_bucket": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "country_code": {
+          "type": "country_code"
+        },
+        "device_class": {
+          "type": "token",
+          "maxLength": 40
+        }
+      },
+      "notes": [
+        "Raw search query text is not accepted by A2; future adapters may emit privacy-reviewed derived language signals."
+      ]
+    },
+    "bing": {
+      "status": "planned",
+      "privacy_class": [
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "discovery."
+      ],
+      "metadata": {
+        "query_hash": {
+          "type": "sha256"
+        },
+        "page_path": {
+          "type": "public_path",
+          "maxLength": 500
+        },
+        "impressions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "clicks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "position_bucket": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "country_code": {
+          "type": "country_code"
+        },
+        "device_class": {
+          "type": "token",
+          "maxLength": 40
+        }
+      }
+    },
+    "maison-content-distribution": {
+      "status": "planned",
+      "privacy_class": [
+        "aggregated"
+      ],
+      "allowed_event_prefixes": [
+        "content."
+      ],
+      "metadata": {
+        "content_id": {
+          "type": "token",
+          "maxLength": 100
+        },
+        "campaign_id": {
+          "type": "token",
+          "maxLength": 100
+        },
+        "thesis_id": {
+          "type": "token",
+          "maxLength": 100
+        },
+        "comparison_id": {
+          "type": "token",
+          "maxLength": 100
+        },
+        "comparison_dimension": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "variant_key": {
+          "type": "token",
+          "maxLength": 100
+        },
+        "channel": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "platform": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "surface": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "format": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "intent": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "window_start": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "window_end": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "human_review_ref": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "source_refs_hash": {
+          "type": "sha256"
+        },
+        "manual_distribution_confirmed": {
+          "type": "boolean"
+        },
+        "impressions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reach": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "video_starts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "views": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "watch_seconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "shares": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "saves": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "comments": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "profile_visits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "link_clicks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "leads": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "conversions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completion_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "save_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "share_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "click_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "conversion_rate_bps": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "notes": [
+        "Aggregated content-performance observations only; no captions, comments, usernames or direct PII.",
+        "Rates are integer basis points and are emitted only when their observed denominator exists and is greater than zero.",
+        "Engagement metrics do not imply economic value; A3 remains the owner of observed economics."
+      ]
+    },
+    "sos_product": {
+      "status": "planned",
+      "privacy_class": [
+        "aggregated",
+        "system"
+      ],
+      "allowed_event_prefixes": [
+        "sos."
+      ],
+      "metadata": {
+        "product_id": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "signal_kind": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "cadence_bucket": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "delivery_outcome": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "product_version": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "notes": [
+        "SOS Maison JF contributes aggregate product signals only.",
+        "Names, contact endpoints, account identifiers, exact check-in schedules, locations, free text, reasons and message bodies must never enter Growth/Brain analytics.",
+        "Operational PII required to deliver trusted-contact notices remains in the product operational domain and is not part of this source contract."
+      ]
+    },
+    "system": {
+      "status": "planned",
+      "privacy_class": [
+        "system"
+      ],
+      "allowed_event_prefixes": [
+        "collector.",
+        "system."
+      ],
+      "metadata": {
+        "component": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "code": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+};
+export default A2_SOURCE_REGISTRY;
