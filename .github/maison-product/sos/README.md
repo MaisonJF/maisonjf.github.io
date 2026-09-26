@@ -166,16 +166,16 @@ O armazenamento operacional fica **fisicamente separado do MAISON Brain**. Esta 
 4. a página `/sos/aceitar/` permite **ACEITAR** ou **RECUSAR** explicitamente; o token viaja no fragmento `#token=` e é removido da barra antes do POST;
 5. `/api/sos/checkin` executa **ESTOU AQUI** com chave de idempotência e mantém a hora local fixa;
 6. o Worker agendado cria/reclama acções da outbox em lotes pequenos;
-7. Brevo entrega lembretes/avisos; endpoints são decifrados apenas *just in time*;
+7. Resend entrega lembretes/avisos; endpoints são decifrados apenas *just in time*;
 8. falhas temporárias têm retry limitado; falha definitiva do lembrete bloqueia a escalada ao contacto;
 9. uma projecção diária produz exclusivamente contagens agregadas;
 10. esses envelopes são validados pelo collector canónico A2 como `source=sos_product`; o SOS não cria collector próprio.
 
-Os adapters seleccionados para o primeiro MVP são **Supabase Auth** e **Brevo Transactional Email**. Supabase Auth já está provisionado para o teste fechado; a validação E2E server-side ainda está em diagnóstico. Brevo e o scheduler permanecem desligados até existir remetente/chave e o circuito controlado passar.
+Os adapters seleccionados para o primeiro MVP são **Supabase Auth** e **Resend Transactional Email**. Supabase Auth já está provisionado para o teste fechado; a validação E2E server-side ainda está em diagnóstico. Resend e o scheduler permanecem desligados até existir remetente/chave e o circuito controlado passar.
 
 A validação de sessão consulta directamente o endpoint de utilizador do Supabase e descarta o perfil depois de extrair apenas o subject estável e, quando já confirmado pelo fornecedor, o email necessário ao lembrete. Esse email é imediatamente cifrado no domínio operacional.
 
-O Brevo recebe apenas o endereço estritamente necessário à entrega e mensagens transaccionais em texto simples. O adapter não envia nomes de destinatário nem conteúdo pessoal da utilização do SOS.
+O Resend recebe apenas o endereço estritamente necessário à entrega e mensagens transaccionais em texto simples. O adapter não envia nomes de destinatário nem conteúdo pessoal da utilização do SOS.
 
 ## Ficheiros desta fundação
 
@@ -189,9 +189,9 @@ O Brevo recebe apenas o endereço estritamente necessário à entrega e mensagen
 - `functions/_lib/sos-time.js` — calendário diário por hora local fixa e timezone IANA, incluindo DST.
 - `migrations/0001_operational_core.sql` — esquema D1 operacional separado do Brain.
 - `runtime-contract.json` — bindings, secrets e gates necessários antes de qualquer activação.
-- `adapters-contract.json` — contratos Supabase/Brevo e respectivos kill switches.
+- `adapters-contract.json` — contratos Supabase/Resend e respectivos kill switches.
 - `functions/_lib/sos-supabase-auth.js` — validação server-side da sessão sem persistir o perfil.
-- `functions/_lib/sos-brevo.js` — email transaccional factual, sem nomes nem promessa de emergência.
+- `functions/_lib/sos-resend.js` — email transaccional factual, sem nomes nem promessa de emergência.
 - `functions/_lib/sos-delivery.js` — entrega da outbox com retry limitado.
 - `api-contract.json` + `functions/api/sos/**` — API mínima fail-closed para setup, status, **ESTOU AQUI**, pausa, retoma, eliminação e consentimento do contacto.
 - `sos/aceitar/` — superfície mínima e sem analytics para o contacto aceitar/recusar.
@@ -205,7 +205,7 @@ O Brevo recebe apenas o endereço estritamente necessário à entrega e mensagen
 Com Supabase UE, D1 e migrations já provisionados, a sequência restante é:
 
 1. fechar o diagnóstico E2E da sessão Supabase na API;
-2. verificar o remetente/domínio no Brevo e criar a chave transaccional;
+2. validar o primeiro envio transaccional Resend com endereço controlado;
 3. testar end-to-end convite → aceitação → lembrete → grace → aviso com endereços controlados;
 4. validar scheduler/outbox, retry/duplicação e DST com relógio controlado;
 5. actualizar a política pública de privacidade antes de recolher dados reais;
