@@ -7,18 +7,18 @@ Estado do RIO PRODUTO DIGITAL no PR #151.
 | Princípio KISS + **ESTOU AQUI** | ✅ Pronto | Sem questionários, feed, gamificação ou inferência emocional |
 | Máquina de estados | ✅ Pronto | setup / safe / due / grace / contact_due / paused |
 | Hora diária fixa + timezone/DST | ✅ Pronto | Hora humana não deriva com o momento do toque |
-| D1 operacional separado do Brain | ✅ Código pronto | Falta criar recurso e aplicar migrations |
+| D1 operacional separado do Brain | ✅ Provisionado | `maison-sos-operational`; migrations aplicadas; schema `SOS.OP.2` |
 | Pseudonimização da identidade | ✅ Pronto | HMAC; subject bruto não é persistido |
 | Cifra de endpoints | ✅ Pronto | AES-256-GCM; chave apenas em secret |
 | Contacto de confiança | ✅ Pronto | Um contacto; convite com hash; aceitar/recusar explícito |
 | Página de consentimento do contacto | ✅ Pronto | Sem analytics; token em fragmento e removido da URL |
-| Supabase Auth adapter | ✅ Código pronto / 🔒 desligado | Falta projecto UE/configuração |
+| Supabase Auth adapter | 🟡 Provisionado / diagnóstico E2E pendente | Projecto UE criado; Preview chega ao fluxo autenticado, mas validação server-side `/status` ainda requer diagnóstico final |
 | Brevo transactional adapter | ✅ Código pronto / 🔒 desligado | Falta domínio/remetente/chave |
-| API `/api/sos/*` | ✅ Código pronto / 🔒 fail-closed | Kill switch `MAISON_SOS_API_ENABLED` |
+| API `/api/sos/*` | 🟡 Preview activado / fail-closed | Kill switch `MAISON_SOS_API_ENABLED`; `/status` autenticado ainda em diagnóstico |
 | **ESTOU AQUI** idempotente | ✅ Pronto | Header `Idempotency-Key` obrigatório |
 | Pause / resume / delete | ✅ Pronto | Pause cancela pendentes; delete faz cascade operacional |
 | Outbox + retry | ✅ Pronto | Lease + retry limitado; sem loops infinitos |
-| Scheduler Worker | ✅ Código pronto / 🔒 desligado | Sem endpoint HTTP público; falta binding/deploy |
+| Scheduler Worker | ✅ Código pronto / 🔒 desligado | Sem endpoint HTTP público; manter desligado até Brevo + E2E controlado |
 | Regra anti-falso-alarme | ✅ Pronto | Falha definitiva do lembrete impede aviso ao contacto |
 | Projecção diária agregada | ✅ Pronto | Sem IDs, PII, texto ou horários exactos |
 | Compatibilidade com collector A2 | ✅ Testada | A2 aceita agregado e rejeita PII/IDs não allowlisted |
@@ -42,15 +42,16 @@ Todos têm de ser tratados como **false por defeito**.
 
 ## Bloqueio actual
 
-O próximo salto já não é uma decisão de arquitectura. É provisioning externo:
+A fundação externa já avançou: Supabase UE e D1 dedicado estão provisionados. O caminho restante para piloto é:
 
-1. projecto Supabase em região UE;
-2. D1 operacional dedicado;
-3. domínio/remetente Brevo verificado;
-4. secrets/bindings;
-5. teste fechado.
+1. fechar o diagnóstico E2E da validação server-side Supabase no Preview;
+2. resolver o isolamento criptográfico/D1 entre Preview e Production antes de gravar dados reais;
+3. provisionar domínio/remetente/chave Brevo;
+4. executar testes controlados de scheduler/outbox, DST, retry e duplicação;
+5. publicar política de privacidade SOS;
+6. executar piloto fechado e rever falhas/falsos avisos.
 
-Até isso existir, a UI principal não deve fingir que o SOS está operacional.
+Até estes gates passarem, Brevo e scheduler permanecem desligados e a UI não deve declarar o SOS operacional.
 
 
 <!-- closed-test redeploy trigger: auth diagnostics -->
