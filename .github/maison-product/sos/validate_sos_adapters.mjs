@@ -28,10 +28,29 @@ const auth=await authenticateSosRequest({
 assert.equal(auth.identity.provider,'supabase');
 assert.equal(auth.identity.verified,true);
 assert.equal(auth.reminder.value,'person@example.com');
+assert.equal(authCall.init.headers.apikey,authEnv.MAISON_SOS_SUPABASE_PUBLISHABLE_KEY);
+assert.equal(authCall.init.headers.authorization,'Bearer '+('x'.repeat(40)));
 assert.deepEqual(Object.keys(auth).sort(),['identity','reminder']);
 assert.ok(authCall.url.endsWith('/auth/v1/user'));
 assert.ok(!JSON.stringify(auth).includes('+351'));
 assert.ok(!JSON.stringify(auth).includes('must-not-leak'));
+
+await assert.rejects(
+  authenticateSosRequest({
+    request,env:authEnv,
+    fetchImpl:async ()=>new Response('{}',{status:401})
+  }),
+  /sos_auth_unauthorized/
+);
+for(const [status,expected] of [[403,'sos_auth_upstream_403'],[404,'sos_auth_upstream_404'],[429,'sos_auth_upstream_429'],[503,'sos_auth_upstream_5xx']]){
+  await assert.rejects(
+    authenticateSosRequest({
+      request,env:authEnv,
+      fetchImpl:async ()=>new Response('{}',{status})
+    }),
+    new RegExp(expected)
+  );
+}
 
 const env={
   MAISON_SOS_BREVO_ENABLED:'true',
