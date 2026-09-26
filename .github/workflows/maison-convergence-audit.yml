@@ -1,0 +1,49 @@
+name: Maison Convergence Audit
+
+on:
+  pull_request:
+    paths:
+      - '.github/maison-growth/**'
+      - '.github/maison-product/**'
+      - 'functions/**'
+      - 'workers/**'
+      - 'contacto/**'
+      - 'profissionais/**'
+      - '.github/workflows/maison-convergence-audit.yml'
+  push:
+    branches: [main]
+    paths:
+      - '.github/maison-growth/**'
+      - '.github/maison-product/**'
+      - 'functions/**'
+      - 'workers/**'
+      - 'contacto/**'
+      - 'profissionais/**'
+      - '.github/workflows/maison-convergence-audit.yml'
+  workflow_dispatch:
+    inputs:
+      enforce:
+        description: 'Fail when a convergence invariant is broken'
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  audit-convergence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Audit cross-river convergence
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.enforce }}" != "true" ]]; then
+            python3 .github/maison-growth/control/validate_convergence.py
+          else
+            python3 .github/maison-growth/control/validate_convergence.py --enforce
+          fi
