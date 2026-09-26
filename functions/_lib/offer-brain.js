@@ -1,5 +1,5 @@
 export const MAISON_OFFER_BRAIN={
-  version:'2026-09-22-v6',
+  version:'2026-09-26-v7',
   freeOnly:'/teste/',
   maxOffers:4,
   principles:{
@@ -62,6 +62,7 @@ export const MAISON_OFFER_CATALOGUE=[
 
   {id:'pdi-relacoes',family:'pdi',stage:'now',format:'game',title:'PÁRA DE IGNORAR!',description:'28 perguntas para duas pessoas abrirem uma conversa que nem sempre sabe começar sozinha.',href:'/para-de-ignorar/',amount:500,priceLabel:'5 €',axes:['attachment','belong','seen'],territories:['presenca'],routes:['talk','gesture','selfpaced'],base:6},
 
+  {id:'ebook-para-de-ignorar',family:'editions',stage:'deeper',format:'ebook',title:'Pára de Ignorar! · Livro',description:'Um livro para parar de passar por cima do que já sabes que está a pedir atenção — para ler, escrever e voltar quando precisares.',href:'/ebooks/para-de-ignorar/',amount:599,priceLabel:'5,99 €',axes:['self','control','direction','seen','load'],territories:['casa','corpo','cabeca','presenca'],routes:['selfpaced','default'],base:6},
   {id:'ebook-turista',family:'editions',stage:'deeper',format:'ebook',title:'Vírgulas do Destino · O Turista',description:'Desejo, destino, mistério e um encontro que continua a fazer perguntas depois da última página.',href:'/ebooks/virgulas-do-destino-o-turista/',amount:299,priceLabel:'2,99 €',axes:['attachment','belong','direction'],territories:['presenca','cabeca'],routes:['selfpaced'],base:1},
   {id:'ebook-meandros',family:'editions',stage:'deeper',format:'ebook',title:'Vírgulas do Destino · Meandros da Vida',description:'Tarot, perda, desejo e recomeço numa história para quando preferes entrar por uma narrativa.',href:'/ebooks/virgulas-do-destino-meandros-da-vida/',amount:499,priceLabel:'4,99 €',axes:['attachment','direction','self'],territories:['presenca','cabeca'],routes:['selfpaced'],base:2},
 
@@ -88,7 +89,7 @@ export function recommendMaisonOffers(signal={}, learning={}){
     .map(offer=>scoreOffer(offer,profile,territories,learning))
     .sort((a,b)=>b.score-a.score || compareAmount(a.offer.amount,b.offer.amount));
 
-  const groups=['oracle','game','physical','gift','consultation'];
+  const groups=['oracle','game','physical','gift','editions','consultation'];
   const bestByGroup=new Map();
   for(const group of groups){
     const candidate=scored.find(entry=>offerGroup(entry.offer)===group);
@@ -104,7 +105,7 @@ export function recommendMaisonOffers(signal={}, learning={}){
   addGroup('oracle');
   addGroup('consultation');
 
-  const flexible=['game','physical','gift']
+  const flexible=['game','physical','gift','editions']
     .map(group=>({group,candidate:bestByGroup.get(group)}))
     .filter(x=>x.candidate)
     .sort((a,b)=>b.candidate.score-a.candidate.score || compareAmount(a.candidate.offer.amount,b.candidate.offer.amount));
@@ -123,7 +124,7 @@ export function recommendMaisonOffers(signal={}, learning={}){
     }
   }
 
-  const order={oracle:0,game:1,physical:2,gift:3,consultation:4};
+  const order={oracle:0,game:1,physical:2,gift:3,editions:4,consultation:5};
   selected.sort((a,b)=>(order[offerGroup(a.offer)]??9)-(order[offerGroup(b.offer)]??9));
 
   return {
@@ -138,6 +139,7 @@ function offerGroup(offer){
   if(offer.family==='oracle'||offer.format==='oracle')return 'oracle';
   if(offer.family==='pdi'||offer.format==='game')return 'game';
   if(offer.family==='gift'||offer.format==='gift')return 'gift';
+  if(offer.family==='editions'||offer.format==='ebook')return 'editions';
   if(offer.format==='physical'||String(offer.family||'').startsWith('physical-'))return 'physical';
   if(['consultation','written','conversation','presence'].includes(offer.family)||['service','written','conversation'].includes(offer.format))return 'consultation';
   return String(offer.family||offer.format||'other');
@@ -207,6 +209,7 @@ function publicOffer(entry,index){
     game:'Para abrir conversa',
     physical:'Um gesto concreto',
     gift:'Para oferecer',
+    editions:'Para ler e voltar',
     consultation:'Quero ir mais fundo'
   };
   return {

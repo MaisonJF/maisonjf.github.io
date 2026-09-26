@@ -45,7 +45,7 @@ export async function onRequestGet({ request, env }) {
       name: session.customer_details?.name || null,
       nif: nifField?.numeric?.value || nifField?.text?.value || null,
       ebook_ids: session.payment_status === 'paid' ? ebookIds : [],
-      ebooks: session.payment_status === 'paid' ? ebookIds.map(id => ({ id, title: EBOOKS[id].title })) : [],
+      ebooks: session.payment_status === 'paid' ? ebookIds.map(id => ({ id, title: EBOOKS[id].title, formats: EBOOKS[id].formats ? Object.keys(EBOOKS[id].formats) : ['pdf'] })) : [],
       environment: 'live'
     });
   } catch {

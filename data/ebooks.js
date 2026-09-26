@@ -1,5 +1,14 @@
 window.MAISON_EBOOKS=[
   {
+    slug:'para-de-ignorar',
+    checkoutId:'para-de-ignorar',
+    title:'Pára de Ignorar!',
+    collection:'Éditions Maison JF',
+    language:'pt-PT',format:'ebook',formats:['pdf','epub'],status:'published',
+    description:'Um livro para parar de passar por cima do que já sabes que está a pedir atenção. Casa, Corpo, Cabeça e Presença encontram-se aqui sem receitas rápidas: para ler, escrever, voltar atrás e finalmente olhar.',
+    price:5.99,currency:'EUR',cover:null,media:[],purchaseUrl:null,featured:true
+  },
+  {
     slug:'virgulas-do-destino-o-turista',
     checkoutId:'turista',
     title:'Vírgulas do Destino: O Turista',
