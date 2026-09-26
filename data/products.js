@@ -20,9 +20,9 @@ window.MAISON_PRODUCTS=[
  cta:'Quero levar para casa'
 },
 {
- slug:'oleo-massagem',sku:'MJ-OLEO-060',name:'Óleo de Massagem',size:'60 ml',category:'Corpo',price:12,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/cinematic/ritual.avif',
+ slug:'oleo-massagem',sku:'MJ-OLEO-060',name:'Óleo de Massagem',size:'60 ml',category:'Corpo',price:12,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/oleo-massagem/oleo-massagem-hero.webp',
  description:'Toque e pausa num ritual simples de massagem.',
- media:[{role:'hero',src:'../images/cinematic/ritual.avif',alt:'Óleo de Massagem MAISON JF em ritual de corpo',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/cinematic/corpo.avif',alt:'Atmosfera editorial MAISON JF para o corpo',aspect:'portrait',editorial:true}],
+ media:[{role:'hero',src:'../images/products/oleo-massagem/oleo-massagem-hero.webp',alt:'Óleo de Massagem MAISON JF, fotografia editorial',aspect:'portrait',editorial:true},{role:'use',src:'../images/products/oleo-massagem/oleo-massagem-uso.webp',alt:'Óleo de Massagem MAISON JF em utilização',aspect:'portrait',editorial:true},{role:'detail',src:'../images/products/oleo-massagem/oleo-massagem-editorial.webp',alt:'Óleo de Massagem MAISON JF em composição editorial',aspect:'portrait',editorial:true},{role:'ritual',src:'../images/products/oleo-massagem/oleo-massagem-massagem.webp',alt:'Ritual de massagem MAISON JF',aspect:'portrait',editorial:true}],
  ritual:{title:'O corpo percebe o toque antes da explicação.',text:'Alguns minutos de massagem podem ser uma forma simples de devolver presença ao corpo.'},
  cta:'Quero saber mais'
 },
