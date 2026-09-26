@@ -135,7 +135,9 @@
   }
 
   function getAttribution() {
-    if (localStorage.getItem(CONSENT_KEY) !== 'granted') return {};
+    // Recommendation attribution is first-party session state used to connect a
+    // MAISON recommendation to a later checkout. Acquisition/marketing fields
+    // remain consent-gated inside acquisitionAttribution().
     return { ...offerAttribution(), ...acquisitionAttribution() };
   }
 
