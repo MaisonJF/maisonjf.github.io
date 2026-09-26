@@ -1,4 +1,5 @@
 import { pdiThemeAvailability } from '../_lib/pdi-theme-catalogue.js';
+import { appendCheckoutAttribution } from '../_lib/checkout-attribution.js';
 
 export async function onRequestPost({request,env}){
   try{
@@ -29,6 +30,7 @@ export async function onRequestPost({request,env}){
     params.set('metadata[source]','para-de-ignorar-live');
     params.set('metadata[pdi_access]','single-session');
     params.set('metadata[pdi_theme]',product.slug);
+    appendCheckoutAttribution(params,body?.attribution,request.headers.get('Referer')||'',url.origin);
 
     const stripeResponse=await fetch('https://api.stripe.com/v1/checkout/sessions',{
       method:'POST',
