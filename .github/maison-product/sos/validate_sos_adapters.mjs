@@ -68,7 +68,7 @@ const receipt=await sendSosResendEmail({
   env,to:'contact@example.com',kind:'trusted_notice',
   fetchImpl:async (url,init)=>{
     mailCall={url,init};
-    return new Response(JSON.stringify({messageId:'msg-123'}),{status:201,headers:{'content-type':'application/json'}});
+    return new Response(JSON.stringify({id:'msg-123'}),{status:201,headers:{'content-type':'application/json'}});
   }
 });
 assert.equal(receipt.messageId,'msg-123');
