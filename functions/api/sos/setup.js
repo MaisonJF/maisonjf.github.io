@@ -4,7 +4,7 @@ import {
 import {
   configureSosAccount,setSosUserReminderEndpoint,createTrustedContactInvite
 } from '../../_lib/sos-runtime.js';
-import { sendSosResendEmail } from '../../_lib/sos-brevo.js';
+import { sendSosResendEmail } from '../../_lib/sos-resend.js';
 
 export async function onRequestPost({request,env}){
   return withSosApi(async ()=>{
