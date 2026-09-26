@@ -4,7 +4,7 @@ import {
 import {
   configureSosAccount,setSosUserReminderEndpoint,createTrustedContactInvite
 } from '../../_lib/sos-runtime.js';
-import { sendSosBrevoEmail } from '../../_lib/sos-brevo.js';
+import { sendSosResendEmail } from '../../_lib/sos-resend.js';
 
 export async function onRequestPost({request,env}){
   return withSosApi(async ()=>{
@@ -13,6 +13,9 @@ export async function onRequestPost({request,env}){
     const auth=await requireSosAuth(request,env);
     if(!auth.reminder?.verified||auth.reminder.kind!=='email'){
       return jsonSos({ok:false,error:'confirmed_email_required'},409);
+    }
+    if(String(env?.MAISON_SOS_RESEND_ENABLED||'').toLowerCase()!=='true'){
+      return jsonSos({ok:false,error:'sos_delivery_unavailable'},503);
     }
     const body=await readSosJson(request);
     const timezone=String(body.timezone||'');
@@ -26,7 +29,7 @@ export async function onRequestPost({request,env}){
       env,identity:auth.identity,endpointKind:'email',endpoint:trustedContactEmail
     });
 
-    await sendSosBrevoEmail({
+    await sendSosResendEmail({
       env,to:trustedContactEmail,kind:'trusted_invite',
       inviteToken:invite.token,expiresAt:invite.expiresAt
     });
