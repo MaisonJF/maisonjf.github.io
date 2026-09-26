@@ -51,8 +51,10 @@ for token in ("emitCanonicalB2BLead","/api/b2b-lead","maison_analytics_consent_v
     assert token in CONTACT
 assert "free_text_message" not in CONTACT
 assert "message:" not in CONTACT.split("emitCanonicalB2BLead",1)[1]
-for token in ("withB2bContext","b2b_business","b2b_goal","b2b_gap","b2b_client","b2b_model","b2b_scale","b2b_start","b2b_result"):
-    assert token in PRO_TEST
+assert "withB2bContext" in PRO_TEST
+assert "const contextFields=['business','goal','gap','client','model','scale','start'];" in PRO_TEST
+assert "url.searchParams.set('b2b_'+key,state[key])" in PRO_TEST
+assert "url.searchParams.set('b2b_result',type)" in PRO_TEST
 
 for token in ("brain_b2b_feedback","b2b.lead","b2b.recurrence","lifecycle_stage"):
     assert token in B2B_VIEW
