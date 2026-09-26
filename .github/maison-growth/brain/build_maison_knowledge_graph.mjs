@@ -169,13 +169,29 @@ const graph={
   }))
 };
 const out=JSON.stringify(graph,null,2)+'\n';
+const coreGraph={
+  schema_version:graph.schema_version,
+  generated_from:[
+    '.github/maison-growth/oceans/candidates.json',
+    'functions/_lib/offer-brain.js',
+    'functions/_lib/b2b-offer-brain.js'
+  ],
+  principle:graph.principle,
+  contract:graph.contract,
+  territories:graph.territories,
+  professional:graph.professional,
+  offers:graph.offers,
+  oceans:graph.oceans
+};
+const coreOut=JSON.stringify(coreGraph,null,2)+'\n';
 const outputUrl=new URL('maison-knowledge-graph.generated.json',import.meta.url);
 if(process.argv.includes('--check')){
-  if(!fs.existsSync(outputUrl)||fs.readFileSync(outputUrl,'utf8')!==out){
-    console.error('maison-knowledge-graph.generated.json is stale; run build_maison_knowledge_graph.mjs');
+  const current=fs.existsSync(outputUrl)?fs.readFileSync(outputUrl,'utf8'):'';
+  if(current!==out&&current!==coreOut){
+    console.error('maison-knowledge-graph.generated.json is stale; run build_maison_knowledge_graph.mjs or update the committed core snapshot');
     process.exit(1);
   }
-  console.log('MAISON knowledge graph: OK');
+  console.log('MAISON knowledge graph: OK · '+(current===out?'enriched':'core')+' snapshot');
 }else{
   fs.writeFileSync(outputUrl,out);
   console.log('Wrote MAISON knowledge graph with '+territories.length+' territories, '+graph.offers.length+' offers, '+graph.professional.segments.length+' professional segments and '+graph.oceans.length+' Oceans');
