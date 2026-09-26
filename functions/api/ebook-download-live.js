@@ -14,9 +14,15 @@ export async function onRequestGet({ request, env }) {
     const url = new URL(request.url);
     const sessionId = String(url.searchParams.get('session_id') || '');
     const ebookId = String(url.searchParams.get('ebook') || '');
+    const requestedFormat = String(url.searchParams.get('format') || 'pdf').toLowerCase();
     const ebook = isEbookId(ebookId) ? EBOOKS[ebookId] : null;
+    const file = ebook?.files
+      ? ebook.files[requestedFormat]
+      : requestedFormat === 'pdf' && ebook
+        ? { key: ebook.key, filename: ebook.filename, contentType: 'application/pdf' }
+        : null;
 
-    if (!/^cs_live_[A-Za-z0-9]+$/.test(sessionId) || !ebook) {
+    if (!/^cs_live_[A-Za-z0-9]+$/.test(sessionId) || !ebook || !file) {
       return json({ error: 'Pedido de download inválido.' }, 400);
     }
 
@@ -48,15 +54,15 @@ export async function onRequestGet({ request, env }) {
       return json({ error: 'O acesso automático expirou. Contacta a MAISON JF® para receberes um novo acesso.' }, 410);
     }
 
-    const object = await env.EBOOKS.get(ebook.key);
+    const object = await env.EBOOKS.get(file.key);
     if (!object) {
       return json({ error: 'O ficheiro não está disponível no armazenamento privado.' }, 404);
     }
 
     const headers = new Headers();
     object.writeHttpMetadata(headers);
-    headers.set('content-type', 'application/pdf');
-    headers.set('content-disposition', 'attachment; filename="' + ebook.filename + '"');
+    headers.set('content-type', file.contentType || 'application/octet-stream');
+    headers.set('content-disposition', 'attachment; filename="' + file.filename + '"');
     headers.set('cache-control', 'private, no-store, max-age=0');
     headers.set('x-content-type-options', 'nosniff');
     return new Response(object.body, { headers });
