@@ -11,6 +11,11 @@
       "version": "0017",
       "file": "migrations/0017_b2b_canonical_solution.sql",
       "sha256": "db86f802a38f753b1a8273dc5ed630fe11f04aaae931761a46b688f15197241a"
+    },
+    {
+      "version": "0021",
+      "file": "migrations/0021_commerce_solution_families.sql",
+      "sha256": "3d5b01369b2d8cb1486899087cdab97b39df6d032bc53b1265a459ed3ff4fad1"
     }
   ]
 }
