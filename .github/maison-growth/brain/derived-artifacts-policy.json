@@ -40,14 +40,16 @@
     {
       "path": ".github/maison-growth/brain/public-discovery.generated.json",
       "builder": ".github/maison-growth/brain/build_public_discovery.mjs",
-      "policy": "generated_and_committed",
-      "manual_edits": "forbidden"
+      "policy": "ephemeral_composed",
+      "manual_edits": "forbidden",
+      "note": "Validated in memory; canonical committed sink is maison-knowledge-graph.generated.json."
     },
     {
       "path": ".github/maison-growth/brain/search-visibility.generated.json",
       "builder": ".github/maison-growth/brain/build_search_visibility.mjs",
-      "policy": "generated_and_committed",
-      "manual_edits": "forbidden"
+      "policy": "ephemeral_composed",
+      "manual_edits": "forbidden",
+      "note": "Validated in memory; canonical committed sink is maison-knowledge-graph.generated.json."
     }
   ],
   "gate": {
