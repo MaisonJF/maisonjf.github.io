@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
   requireSosApiEnabled,requireSameOrigin,readSosJson,requireIdempotencyKey
 } from '../../../functions/_lib/sos-api.js';
-import { sosEmailCopy } from '../../../functions/_lib/sos-brevo.js';
+import { sosEmailCopy } from '../../../functions/_lib/sos-resend.js';
 
 const root=new URL('../../../',import.meta.url);
 const contract=JSON.parse(fs.readFileSync(new URL('.github/maison-product/sos/api-contract.json',root),'utf8'));
