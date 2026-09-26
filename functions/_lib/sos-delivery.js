@@ -1,4 +1,4 @@
-import { sendSosBrevoEmail } from './sos-brevo.js';
+import { sendSosResendEmail } from './sos-resend.js';
 import {
   trustedContactTargetForAction,
   userReminderTargetForAction,
@@ -14,14 +14,14 @@ export async function deliverClaimedSosAction({env,action,at=new Date().toISOStr
     if(kind==='user_reminder'){
       const target=await userReminderTargetForAction({env,actionRef});
       if(target.endpointKind!=='email')throw new Error('sos_user_delivery_channel_unsupported');
-      const receipt=await sendSosBrevoEmail({env,to:target.endpoint,kind:'user_reminder',fetchImpl});
+      const receipt=await sendSosResendEmail({env,to:target.endpoint,kind:'user_reminder',fetchImpl});
       await completeSosAction({env,actionRef,outcome:'sent',providerReceiptRef:receipt.messageId,at});
       return {ok:true,provider:receipt.provider};
     }
     if(kind==='trusted_notice'){
       const target=await trustedContactTargetForAction({env,actionRef});
       if(target.endpointKind!=='email')throw new Error('sos_contact_delivery_channel_unsupported');
-      const receipt=await sendSosBrevoEmail({env,to:target.endpoint,kind:'trusted_notice',fetchImpl});
+      const receipt=await sendSosResendEmail({env,to:target.endpoint,kind:'trusted_notice',fetchImpl});
       await completeSosAction({env,actionRef,outcome:'sent',providerReceiptRef:receipt.messageId,at});
       return {ok:true,provider:receipt.provider};
     }
