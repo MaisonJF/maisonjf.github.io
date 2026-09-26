@@ -24,7 +24,7 @@ window.MAISON_EBOOKS=[
     collection:'Colecção MAISON JF®',
     language:'pt-PT',format:'ebook',status:'published',
     description:'Há coisas que não desaparecem só porque deixamos de olhar para elas. Um livro curto, directo e humano sobre aquilo que vemos, normalizamos e continuamos a ignorar.',
-    price:5.99,currency:'EUR',cover:'/images/ebooks/para-de-ignorar.svg',media:[{role:'cover',src:'/images/ebooks/para-de-ignorar.svg',alt:'Capa do ebook PÁRA DE IGNORAR! de João Fadario',aspect:'book',caption:'PÁRA DE IGNORAR! · João Fadario'}],purchaseUrl:null,featured:true
+    price:5.99,currency:'EUR',cover:null,media:[],purchaseUrl:null,featured:true
   }
 ];
 window.MAISON_PUBLISHED_EBOOKS=window.MAISON_EBOOKS.filter(book=>book.status==='published');
