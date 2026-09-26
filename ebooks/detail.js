@@ -9,6 +9,7 @@
  const description=host.querySelector('[data-description]');
  const price=host.querySelector('[data-price]');
  const buy=host.querySelector('[data-buy]');
+ const coverTarget=host.querySelector('[data-cover]');
  if(title)title.textContent=book.title;
  if(description)description.textContent=book.description||'';
  if(price)price.textContent=book.price==null?'':Number(book.price).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
@@ -19,10 +20,16 @@
  document.title=book.title+' | MAISON JF®';
 
  const media=(book.media&&book.media.length)?book.media:(book.cover?[{role:'cover',src:book.cover,alt:'Capa de '+book.title,aspect:'book'}]:[]);
- if(media.length){
+ const coverMedia=media.find(m=>m.role==='cover'||m.aspect==='book');
+ if(coverTarget&&coverMedia){
+   coverTarget.src=coverMedia.src;
+   coverTarget.alt=coverMedia.alt||('Capa de '+book.title);
+ }
+ const essayMedia=coverTarget?media.filter(m=>m!==coverMedia):media;
+ if(essayMedia.length){
    const section=document.createElement('section');section.className='editorial-essay library-essay';
    const grid=document.createElement('div');grid.className='essay-grid';
-   media.forEach(function(m,i){
+   essayMedia.forEach(function(m,i){
      const fig=document.createElement('figure');
      const aspect=m.aspect||((i%3===0)?'wide':'portrait');
      const isCover=m.role==='cover'||aspect==='book';
