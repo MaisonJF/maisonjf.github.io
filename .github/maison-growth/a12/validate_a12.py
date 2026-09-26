@@ -45,6 +45,8 @@ def contracts():
 
     ok(policy["global_kill_switch_default"] is True,"kill switch must default on")
     ok(policy["public_autonomy_enabled"] is False,"public autonomy must be false")
+    ok(policy["global_health_gate_required"] is True,"global health gate must be required")
+    ok(policy["global_health_gate"]==".github/maison-growth/brain/validate_global_health_gate.py","global health gate path drift")
     ok(policy["risk_rules"]["commercial_opportunity_review"]=="medium","commercial review risk drift")
 
     ok(manifest["contract_version"]=="A12.2","A12 migration manifest must be A12.2")
