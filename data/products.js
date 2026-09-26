@@ -29,7 +29,7 @@ window.MAISON_PRODUCTS=[
 {
  slug:'nevoa',sku:'MJ-NEVOA-020',name:'Névoa de Ambiente',size:'20 ml',category:'Casa',price:7,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/nevoa/hero.webp',
  description:'Uma forma rápida de mudar o ambiente através do aroma.',
- media:[{role:'hero',src:'../images/products/nevoa/hero.webp',alt:'Névoa de Ambiente MAISON JF, fotografia editorial',aspect:'portrait',editorial:true},{role:'use',src:'../images/products/nevoa/nevoa-maison-jf-use.webp',alt:'Névoa de Ambiente MAISON JF em utilização',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/products/nevoa/ambience.webp',alt:'Névoa de Ambiente MAISON JF num interior quente',aspect:'portrait',editorial:true}],
+ media:[{role:'hero',src:'../images/products/nevoa/hero.webp',alt:'Névoa de Ambiente MAISON JF, fotografia editorial',aspect:'portrait',editorial:true},{role:'use',src:'../images/products/nevoa/nevoa-maison-jf-use-final.webp',alt:'Névoa de Ambiente MAISON JF em utilização',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/products/nevoa/ambience.webp',alt:'Névoa de Ambiente MAISON JF num interior quente',aspect:'portrait',editorial:true}],
  ritual:{title:'Muda o ar antes de mudares tudo.',text:'Um gesto no espaço pode bastar para marcar a passagem entre o que veio de fora e o tempo que agora é teu.'},
  cta:'Quero escolher'
 },
