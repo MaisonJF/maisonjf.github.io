@@ -139,9 +139,9 @@ Objectivo mínimo: WCAG 2.2 AA.
 
 ## Núcleo operacional privado
 
-O núcleo operacional está implementado e as rotas `/api/sos/*` já existem no repositório, mas permanecem **fail-closed**: sem `MAISON_SOS_API_ENABLED=true` comportam-se como indisponíveis e não há recursos externos provisionados.
+O núcleo operacional está implementado e as rotas `/api/sos/*` já existem. O D1 dedicado e o projecto Supabase UE estão provisionados; as rotas continuam **fail-closed** sempre que os respectivos kill switches estejam desligados.
 
-- binding futuro dedicado: `MAISON_SOS_DB`;
+- binding dedicado: `MAISON_SOS_DB` → D1 `maison-sos-operational` (schema `SOS.OP.2`);
 - identidade externa obrigatoriamente verificada antes de entrar no produto;
 - sujeito de autenticação transformado num `account_ref` estável por HMAC — o identificador bruto não é persistido;
 - endpoint do contacto cifrado em repouso com AES-256-GCM;
@@ -171,7 +171,7 @@ O armazenamento operacional fica **fisicamente separado do MAISON Brain**. Esta 
 9. uma projecção diária produz exclusivamente contagens agregadas;
 10. esses envelopes são validados pelo collector canónico A2 como `source=sos_product`; o SOS não cria collector próprio.
 
-Os adapters seleccionados para o primeiro MVP são **Supabase Auth** e **Brevo Transactional Email**. Ambos permanecem desligados por variáveis de ambiente. As rotas existem em código, mas o produto continua inactivo enquanto os gates e recursos de provisioning não forem configurados.
+Os adapters seleccionados para o primeiro MVP são **Supabase Auth** e **Brevo Transactional Email**. Supabase Auth já está provisionado para o teste fechado; a validação E2E server-side ainda está em diagnóstico. Brevo e o scheduler permanecem desligados até existir remetente/chave e o circuito controlado passar.
 
 A validação de sessão consulta directamente o endpoint de utilizador do Supabase e descarta o perfil depois de extrair apenas o subject estável e, quando já confirmado pelo fornecedor, o email necessário ao lembrete. Esse email é imediatamente cifrado no domínio operacional.
 
@@ -202,16 +202,14 @@ O Brevo recebe apenas o endereço estritamente necessário à entrega e mensagen
 
 ## Próximos incrementos permitidos
 
-Depois desta fundação passar CI, o RIO PRODUTO DIGITAL pode construir, nesta ordem:
+Com Supabase UE, D1 e migrations já provisionados, a sequência restante é:
 
-1. provisionar o projecto Supabase numa região específica da UE e configurar Auth;
+1. fechar o diagnóstico E2E da sessão Supabase na API;
 2. verificar o remetente/domínio no Brevo e criar a chave transaccional;
-3. provisionar o D1 operacional `MAISON_SOS_DB` e aplicar as duas migrations;
-4. instalar secrets e bindings sem os colocar no repositório;
-5. integrar a UI/PWA principal **ESTOU AQUI** já criada com a sessão Supabase provisionada;
-6. testar end-to-end convite → aceitação → lembrete → grace → aviso com endereços controlados;
-7. actualizar a política pública de privacidade antes de recolher dados reais;
-8. ligar a ingestão da projecção SOS apenas quando o runtime A2 canónico estiver activado;
-9. iniciar um piloto humano fechado e rever falsos avisos/falhas antes de exposição pública.
+3. testar end-to-end convite → aceitação → lembrete → grace → aviso com endereços controlados;
+4. validar scheduler/outbox, retry/duplicação e DST com relógio controlado;
+5. actualizar a política pública de privacidade antes de recolher dados reais;
+6. ligar a ingestão da projecção SOS apenas quando o runtime A2 canónico estiver activado;
+7. iniciar um piloto humano fechado e rever falsos avisos/falhas antes de exposição pública.
 
 A monetização pode envolver este produto no futuro, mas **preço, checkout e Stripe não pertencem a esta fundação**.
