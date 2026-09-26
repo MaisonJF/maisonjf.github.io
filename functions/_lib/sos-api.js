@@ -89,8 +89,9 @@ export function sosApiError(error){
     invalid_sos_local_time:400,
     invalid_sos_grace_minutes:400,
     invalid_sos_idempotency_key:400,
-    sos_brevo_disabled:503,
-    sos_brevo_key_missing:503,
+    sos_resend_disabled:503,
+    sos_resend_key_missing:503,
+    sos_resend_sender_missing:503,
     sos_delivery_temporary_failure:503,
     sos_delivery_permanent_failure:502,
     sos_db_unavailable:503
