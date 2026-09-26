@@ -151,8 +151,8 @@ for raw in match.group(1).splitlines():
         # ocean_universal_coverage is a read-only validator despite its historical name.
         if "ocean_universal_coverage.py" in line:
             continue
-        if "--check" not in line:
-            fail("derived-context --check mutates before checking: "+line)
+        if "--check" not in line and "--validate" not in line:
+            fail("derived-context check mutates before validating: "+line)
 
 run("bash",".github/maison-growth/brain/rebuild_commercial_context.sh","--check")
 run(sys.executable,".github/maison-growth/brain/test_schema_chain.py")
