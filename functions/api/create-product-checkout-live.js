@@ -1,3 +1,5 @@
+import { appendCheckoutAttribution } from '../_lib/checkout-attribution.js';
+
 const PRODUCTS={
   'vela-vidro':{name:'Vela Aromática MAISON JF® 170 g',price:'price_1UEoZT5H3wYRPmPV4hXuKvbZ',unitCents:1400,max:10},
   'vela-pequena':{name:'Vela Aromática MAISON JF® 70 g',price:'price_1UHlIA5H3wYRPmPV3sMw6cZU',unitCents:800,max:10},
@@ -56,7 +58,7 @@ export async function onRequestPost({request,env}){
     params.set('metadata[shipping_zone_label]',shipping.name);
     params.set('metadata[shipping_cents]',String(shippingCents));
     params.set('metadata[shipping_free_threshold_cents]',String(shipping.threshold));
-    appendAttribution(params,body?.attribution);
+    appendCheckoutAttribution(params,body?.attribution,request.headers.get('Referer')||'',origin);
 
     params.set('custom_fields[0][key]','nif');
     params.set('custom_fields[0][label][type]','custom');
@@ -124,18 +126,6 @@ function normaliseItems(body){
     quantities.set(slug,Math.min(product.max,(quantities.get(slug)||0)+quantity));
   }
   return [...quantities.entries()].map(([slug,quantity])=>({slug,quantity}));
-}
-
-function appendAttribution(params,raw){
-  const a=raw&&typeof raw==='object'?raw:{};
-  const fields={
-    recommendation_source:'rec_source',recommendation_offer:'rec_offer',recommendation_result:'rec_result',recommendation_route:'rec_route',recommendation_brain:'rec_brain',
-    acquisition_referrer:'acq_referrer',acquisition_landing:'acq_landing',acquisition_utm_source:'utm_source',acquisition_utm_medium:'utm_medium',acquisition_utm_campaign:'utm_campaign'
-  };
-  for(const [input,key] of Object.entries(fields)){
-    const value=String(a[input]||'').trim().slice(0,450);
-    if(value)params.set('metadata['+key+']',value);
-  }
 }
 
 function json(payload,status=200){
