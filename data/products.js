@@ -6,37 +6,37 @@ Supported media roles: hero, packshot, detail, texture, ritual, use, ambience, p
 */
 window.MAISON_PRODUCTS=[
 {
- slug:'vela-vidro',sku:'MJ-VELA-170',name:'Vela Aromática',size:'170 g',category:'Casa',price:14,currency:'EUR',availability:'in_stock',condition:'new',productImage:null,
+ slug:'vela-vidro',sku:'MJ-VELA-170',name:'Vela Aromática',size:'170 g',category:'Casa',price:14,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/cinematic/casa.avif',
  description:'Luz e aroma para mudar o ritmo de um espaço.',
- media:[],
+ media:[{role:'hero',src:'../images/cinematic/casa.avif',alt:'Vela Aromática MAISON JF em ambiente editorial',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/cinematic/hero.avif',alt:'Atmosfera MAISON JF para a casa',aspect:'portrait',editorial:true}],
  ritual:{title:'Acende para mudar de ritmo.',text:'A luz baixa. O aroma fica. E a casa percebe que o dia mudou de lugar.'},
  cta:'Quero levar para casa'
 },
 {
- slug:'vela-pequena',sku:'MJ-VELA-070',name:'Vela Aromática',size:'70 g',category:'Casa',price:8,currency:'EUR',availability:'in_stock',condition:'new',productImage:null,
+ slug:'vela-pequena',sku:'MJ-VELA-070',name:'Vela Aromática',size:'70 g',category:'Casa',price:8,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/vela-pequena/hero.webp',
  description:'Luz e aroma num formato mais pequeno.',
- media:[],
+ media:[{role:'hero',src:'../images/products/vela-pequena/hero.webp',alt:'Vela Aromática MAISON JF em lata de cobre, fotografia editorial',aspect:'portrait',editorial:true},{role:'packshot',src:'../images/products/vela-pequena/packshot.webp',alt:'Vela Aromática MAISON JF em lata de cobre',aspect:'portrait',editorial:true},{role:'interior',src:'../images/products/vela-pequena/interior.webp',alt:'Vela Aromática MAISON JF integrada num interior quente',aspect:'portrait',editorial:true},{role:'detail',src:'../images/products/vela-pequena/detail.webp',alt:'Detalhe da cera e botânicos da Vela Aromática MAISON JF',aspect:'portrait',editorial:true},{role:'lit',src:'../images/products/vela-pequena/lit.webp',alt:'Vela Aromática MAISON JF acesa',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/products/vela-pequena/ambience.webp',alt:'Ambiente editorial com Vela Aromática MAISON JF',aspect:'portrait',editorial:true}],
  ritual:{title:'Um gesto pequeno também conta.',text:'Um ponto de luz pode chegar para marcar alguns minutos que não precisam de servir para mais nada.'},
  cta:'Quero levar para casa'
 },
 {
- slug:'oleo-massagem',sku:'MJ-OLEO-060',name:'Óleo de Massagem',size:'60 ml',category:'Corpo',price:12,currency:'EUR',availability:'in_stock',condition:'new',productImage:null,
+ slug:'oleo-massagem',sku:'MJ-OLEO-060',name:'Óleo de Massagem',size:'60 ml',category:'Corpo',price:12,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/cinematic/ritual.avif',
  description:'Toque e pausa num ritual simples de massagem.',
- media:[{role:'hero',src:'../images/cinematic/ritual.avif',alt:'Atmosfera editorial MAISON JF de toque e pausa',aspect:'portrait',editorial:true}],
+ media:[{role:'hero',src:'../images/cinematic/ritual.avif',alt:'Óleo de Massagem MAISON JF em ritual de corpo',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/cinematic/corpo.avif',alt:'Atmosfera editorial MAISON JF para o corpo',aspect:'portrait',editorial:true}],
  ritual:{title:'O corpo percebe o toque antes da explicação.',text:'Alguns minutos de massagem podem ser uma forma simples de devolver presença ao corpo.'},
  cta:'Quero saber mais'
 },
 {
- slug:'nevoa',sku:'MJ-NEVOA-020',name:'Névoa de Ambiente',size:'20 ml',category:'Casa',price:7,currency:'EUR',availability:'in_stock',condition:'new',productImage:null,
+ slug:'nevoa',sku:'MJ-NEVOA-020',name:'Névoa de Ambiente',size:'20 ml',category:'Casa',price:7,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/nevoa/hero.webp',
  description:'Uma forma rápida de mudar o ambiente através do aroma.',
- media:[],
+ media:[{role:'hero',src:'../images/products/nevoa/hero.webp',alt:'Névoa de Ambiente MAISON JF, fotografia editorial',aspect:'portrait',editorial:true},{role:'packshot',src:'../images/products/nevoa/packshot.webp',alt:'Frasco da Névoa de Ambiente MAISON JF',aspect:'portrait',editorial:true},{role:'detail',src:'../images/products/nevoa/detail.webp',alt:'Detalhe da Névoa de Ambiente MAISON JF',aspect:'portrait',editorial:true},{role:'use',src:'../images/products/nevoa/use.webp',alt:'Névoa de Ambiente MAISON JF em utilização',aspect:'portrait',editorial:true},{role:'texture',src:'../images/products/nevoa/texture.webp',alt:'Textura e atmosfera da Névoa de Ambiente MAISON JF',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/products/nevoa/ambience.webp',alt:'Névoa de Ambiente MAISON JF num interior quente',aspect:'portrait',editorial:true}],
  ritual:{title:'Muda o ar antes de mudares tudo.',text:'Um gesto no espaço pode bastar para marcar a passagem entre o que veio de fora e o tempo que agora é teu.'},
  cta:'Quero escolher'
 },
 {
- slug:'escalda-pes',sku:'MJ-ESCALDA-150',name:'Escalda-Pés',size:'150 g',category:'Corpo',price:5,currency:'EUR',availability:'in_stock',condition:'new',productImage:null,
+ slug:'escalda-pes',sku:'MJ-ESCALDA-150',name:'Escalda-Pés',size:'150 g',category:'Corpo',price:5,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/escalda-pes/hero.webp',
  description:'Um gesto simples para parar, aquecer e criar um momento para os pés.',
- media:[],
+ media:[{role:'hero',src:'../images/products/escalda-pes/hero.webp',alt:'Escalda-Pés MAISON JF, fotografia editorial',aspect:'portrait',editorial:true},{role:'packshot',src:'../images/products/escalda-pes/packshot.webp',alt:'Embalagem de Escalda-Pés MAISON JF',aspect:'portrait',editorial:true},{role:'detail',src:'../images/products/escalda-pes/detail.webp',alt:'Detalhe botânico do Escalda-Pés MAISON JF',aspect:'portrait',editorial:true},{role:'texture',src:'../images/products/escalda-pes/texture.webp',alt:'Textura do Escalda-Pés MAISON JF',aspect:'portrait',editorial:true},{role:'ritual',src:'../images/products/escalda-pes/ritual.webp',alt:'Ritual de Escalda-Pés MAISON JF',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/products/escalda-pes/ambience.webp',alt:'Escalda-Pés MAISON JF em ambiente editorial',aspect:'portrait',editorial:true}],
  ritual:{title:'Não compliques a pausa.',text:'Água morna, aroma e alguns minutos em que ninguém te pede nada.'},
  cta:'Quero criar este momento'
 }
