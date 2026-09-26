@@ -42,10 +42,15 @@ if policy.get("gate",{}).get("check_must_be_non_mutating") is not True:
 for item in policy.get("derived_artifacts",[]):
     rel=str(item.get("path") or "")
     builder=str(item.get("builder") or "")
-    if not rel or not (ROOT/rel).exists():
-        fail("missing derived artifact: "+rel)
+    mode=str(item.get("policy") or "")
+    if not rel:
+        fail("derived artifact entry missing path")
     if not builder or not (ROOT/builder).exists():
         fail("missing derived builder: "+builder)
+    if mode=="generated_and_committed" and not (ROOT/rel).exists():
+        fail("missing committed derived artifact: "+rel)
+    if mode not in {"generated_and_committed","ephemeral_composed"}:
+        fail("unsupported derived artifact policy: "+mode)
     if item.get("manual_edits")!="forbidden":
         fail("manual edits must be forbidden for derived artifact: "+rel)
 
