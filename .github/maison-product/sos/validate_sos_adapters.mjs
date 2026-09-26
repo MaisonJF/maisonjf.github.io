@@ -82,4 +82,20 @@ for(const path of ['functions/_lib/sos-supabase-auth.js','functions/_lib/sos-res
   const source=fs.readFileSync(new URL(path,new URL('../../../',import.meta.url)),'utf8');
   assert.equal(source.includes('console.log'),false,path+' must not log');
 }
+
+const root=new URL('../../../',import.meta.url);
+const adapters=JSON.parse(fs.readFileSync(new URL('.github/maison-product/sos/adapters-contract.json',root),'utf8'));
+assert.equal(adapters.notification.provider,'resend');
+assert.equal(adapters.activation.public_routes_created,true);
+assert.equal(adapters.activation.public_routes_fail_closed,true);
+assert.equal(adapters.activation.public_product_activation_authorized,false);
+for(const path of [
+  '.github/maison-product/sos/PROVISIONING.md',
+  'workers/sos-runtime/wrangler.example.jsonc',
+  'functions/_lib/sos-api.js'
+]){
+  const source=fs.readFileSync(new URL(path,root),'utf8');
+  assert.equal(/BREVO|sos_brevo/i.test(source),false,path+' must not retain stale Brevo configuration');
+}
+
 console.log('SOS provider adapters: OK');

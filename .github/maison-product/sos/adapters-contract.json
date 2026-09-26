@@ -1,6 +1,6 @@
 {
-  "contract_version": "SOS.ADAPTERS.1",
-  "status": "code_ready_disabled",
+  "contract_version": "SOS.ADAPTERS.2",
+  "status": "provisioned_closed_test",
   "auth": {
     "provider": "supabase",
     "method": "server-side access-token validation through /auth/v1/user",
@@ -25,8 +25,10 @@
     "emergency_claims_forbidden": true
   },
   "activation": {
-    "public_routes_created": false,
+    "public_routes_created": true,
+    "public_routes_fail_closed": true,
     "credentials_committed": false,
-    "providers_enabled_in_repository": false
+    "providers_enabled_in_repository": false,
+    "public_product_activation_authorized": false
   }
 }
