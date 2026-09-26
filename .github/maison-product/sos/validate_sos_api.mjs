@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
   requireSosApiEnabled,requireSameOrigin,readSosJson,requireIdempotencyKey
 } from '../../../functions/_lib/sos-api.js';
-import { sosEmailCopy } from '../../../functions/_lib/sos-brevo.js';
+import { sosEmailCopy } from '../../../functions/_lib/sos-resend.js';
 
 const root=new URL('../../../',import.meta.url);
 const contract=JSON.parse(fs.readFileSync(new URL('.github/maison-product/sos/api-contract.json',root),'utf8'));
@@ -48,6 +48,9 @@ for(const path of routePaths){
 }
 const setup=fs.readFileSync(new URL('functions/api/sos/setup.js',root),'utf8');
 assert.ok(setup.includes('inviteToken:invite.token'),'setup must send token server-side');
+const resendGate=setup.indexOf("String(env?.MAISON_SOS_RESEND_ENABLED");
+const firstWrite=setup.indexOf('await configureSosAccount');
+assert.ok(resendGate>=0 && firstWrite>=0 && resendGate < firstWrite,'setup must fail before operational writes when delivery is disabled');
 assert.ok(setup.includes("status:'contact_pending'"));
 assert.equal(setup.includes('token:invite.token'),false,'setup response must never expose invite token');
 

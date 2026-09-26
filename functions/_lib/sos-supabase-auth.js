@@ -40,7 +40,14 @@ export async function authenticateSosRequest({request,env,fetchImpl=fetch}={}){
   }finally{
     clearTimeout(timer);
   }
-  if(!response.ok)throw new Error(response.status===401?'sos_auth_unauthorized':'sos_auth_unavailable');
+  if(!response.ok){
+    if(response.status===401)throw new Error('sos_auth_unauthorized');
+    if(response.status===403)throw new Error('sos_auth_upstream_403');
+    if(response.status===404)throw new Error('sos_auth_upstream_404');
+    if(response.status===429)throw new Error('sos_auth_upstream_429');
+    if(response.status>=500)throw new Error('sos_auth_upstream_5xx');
+    throw new Error('sos_auth_upstream_'+response.status);
+  }
   const user=await response.json().catch(()=>null);
   const subject=String(user?.id||'').trim();
   if(subject.length<8||subject.length>200)throw new Error('sos_auth_subject_invalid');
