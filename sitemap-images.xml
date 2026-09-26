@@ -56,8 +56,4 @@
     <loc>https://maison-jf.com/produtos/oleo-massagem/</loc>
     <image:image><image:loc>https://maison-jf.com/images/cinematic/ritual.avif</image:loc></image:image>
   </url>
-  <url>
-    <loc>https://maison-jf.com/ebooks/para-de-ignorar/</loc>
-    <image:image><image:loc>https://maison-jf.com/images/ebooks/para-de-ignorar.svg</image:loc></image:image>
-  </url>
 </urlset>
