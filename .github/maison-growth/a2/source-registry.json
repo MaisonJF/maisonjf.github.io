@@ -5,14 +5,141 @@
   "sources": {
     "site": {
       "status": "planned",
-      "privacy_class": ["anonymous", "pseudonymous"],
-      "allowed_event_prefixes": ["page.", "cta.", "navigation."],
+      "privacy_class": [
+        "anonymous",
+        "pseudonymous"
+      ],
+      "allowed_event_prefixes": [
+        "page.",
+        "cta.",
+        "navigation.",
+        "offer."
+      ],
       "metadata": {
-        "path": {"type": "public_path", "maxLength": 500},
-        "referrer_host": {"type": "hostname", "maxLength": 255},
-        "cta_id": {"type": "token", "maxLength": 120},
-        "campaign_id": {"type": "token", "maxLength": 120},
-        "surface": {"type": "token", "maxLength": 80}
+        "path": {
+          "type": "public_path",
+          "maxLength": 500
+        },
+        "referrer_host": {
+          "type": "hostname",
+          "maxLength": 255
+        },
+        "cta_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "campaign_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "surface": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "offer_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "recommendation_source": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "recommendation_result": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "recommendation_route": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "recommendation_brain": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "navigation_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "target_path": {
+          "type": "public_path",
+          "maxLength": 500
+        }
+      },
+      "notes": [
+        "This is the canonical contract for public-site signals returning to A2/Brain; the Experience river must consume it rather than define a parallel analytics schema.",
+        "Only structural interaction metadata is accepted; link text, answers, free text and direct PII are forbidden.",
+        "Offer exposure/click events contain only first-party recommendation identifiers; no answer text or direct PII.",
+        "Google Analytics is not the Brain contract and must not be treated as the canonical source of Maison learning."
+      ],
+      "events": {
+        "page.view": {
+          "required_metadata": [
+            "path"
+          ],
+          "allowed_metadata": [
+            "path",
+            "referrer_host",
+            "campaign_id",
+            "surface"
+          ]
+        },
+        "cta.click": {
+          "required_metadata": [
+            "path",
+            "cta_id"
+          ],
+          "allowed_metadata": [
+            "path",
+            "cta_id",
+            "campaign_id",
+            "surface"
+          ]
+        },
+        "navigation.click": {
+          "required_metadata": [
+            "path",
+            "navigation_id",
+            "target_path"
+          ],
+          "allowed_metadata": [
+            "path",
+            "navigation_id",
+            "target_path",
+            "surface"
+          ]
+        },
+        "offer.exposure": {
+          "required_metadata": [
+            "path",
+            "surface",
+            "offer_id"
+          ],
+          "allowed_metadata": [
+            "path",
+            "surface",
+            "offer_id",
+            "recommendation_source",
+            "recommendation_result",
+            "recommendation_route",
+            "recommendation_brain"
+          ]
+        },
+        "offer.click": {
+          "required_metadata": [
+            "path",
+            "surface",
+            "offer_id"
+          ],
+          "allowed_metadata": [
+            "path",
+            "surface",
+            "offer_id",
+            "recommendation_source",
+            "recommendation_result",
+            "recommendation_route",
+            "recommendation_brain"
+          ]
+        }
       }
     },
     "internal_search": {
