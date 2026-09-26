@@ -3,6 +3,8 @@ const TRACKING_PARAMS = new Set([
   'gclid','fbclid','mc_cid','mc_eid','ref','ref_src'
 ]);
 
+export const DISCOVERY_TERRITORY = { key: 'organic_discovery', query: 'free, scalable organic discovery for MAISON JF: places, searches, conversations, formats and distribution surfaces where people who do not yet know the brand can recognise themselves in a Maison idea before purchase intent exists' };
+
 export const TERRITORIES = [
   { key: 'relationships', query: 'relationships, loneliness, dating, attachment, communication and emotional disconnection' },
   { key: 'work', query: 'work, job search, career uncertainty, burnout, workplace frustration and career change' },
@@ -57,6 +59,22 @@ export function privacySafeText(text, maxChars = 9000) {
 }
 
 export function buildSensorPrompt(territory) {
+  if (territory.key === DISCOVERY_TERRITORY.key) {
+    return [
+      'Act as a read-only organic-discovery research sensor for MAISON JF. Use the freshest public information available to your system.',
+      'Mission: find free and scalable places, moments, searches, conversations and formats where people who do not yet know MAISON JF could recognise themselves in a Maison idea before they have purchase intent.',
+      'Do not assume the person already wants tarot, an ebook, mentoring, rituals, aromas or any named Maison product. Look for latent needs, tensions, desires, contradictions, behaviours and language that can produce the reaction: this is about me.',
+      'Prioritise observable attention and distribution surfaces capable of sending qualified organic visits to maison-jf.com. Prefer opportunities with repeatable or compounding reach over one-off link placement.',
+      'Zero-cost first: do not propose paid advertising, sponsorship, paid placement or a new paid tool.',
+      'Existing-assets first: identify the human signal and discovery surface; do not invent a new Maison product when an existing page, test, ebook, game, service, product or piece of content could answer it.',
+      'For every useful signal distinguish: observed evidence; interpretation; where the attention exists; why a person may identify; a zero-cost way MAISON could appear there; the most appropriate type of existing Maison destination; and how real traffic/outcome could be measured.',
+      'Look globally. Pay special attention to Portuguese, Brazilian Portuguese, Spanish and English-language public sources, while keeping unusually strong signals from other languages.',
+      'Prefer primary sources, reputable reporting, search/trend evidence and direct public discussions. Never treat an uncited model assertion as proof of demand.',
+      'Do not collect names, handles, emails, phone numbers, private conversations or other personal identifiers.',
+      'Return a concise synthesis (max 900 words). Cite public URLs whenever your system supports citations.',
+      'Do not publish, contact anyone, spend money, change the site, catalogue, prices or checkout. You are a sensor only.'
+    ].join('\\n');
+  }
   return [
     'Act as a research sensor for MAISON JF. Search or use the freshest public information available to your system.',
     `Territory: ${territory.query}.`,
@@ -71,8 +89,10 @@ export function buildSensorPrompt(territory) {
 
 export function territoriesForDate(date = new Date(), count = 2) {
   const day = Math.floor(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()) / 86400000);
-  const selected = [];
-  for (let i = 0; i < Math.min(count, TERRITORIES.length); i++) {
+  const limit = Math.max(0, Math.min(count, TERRITORIES.length + 1));
+  if (!limit) return [];
+  const selected = [DISCOVERY_TERRITORY];
+  for (let i = 0; i < Math.min(limit - 1, TERRITORIES.length); i++) {
     selected.push(TERRITORIES[(day + i * 3) % TERRITORIES.length]);
   }
   return selected;
