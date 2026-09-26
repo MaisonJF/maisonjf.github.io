@@ -51,3 +51,6 @@ O próximo salto já não é uma decisão de arquitectura. É provisioning exter
 5. teste fechado.
 
 Até isso existir, a UI principal não deve fingir que o SOS está operacional.
+
+
+<!-- closed-test redeploy trigger: auth diagnostics -->
