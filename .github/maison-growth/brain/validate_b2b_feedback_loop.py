@@ -14,6 +14,8 @@ CONTROL=(ROOT/"workers/maison-intelligence/src/control_api.js").read_text(encodi
 OBSERVE=(ROOT/".github/maison-growth/brain/brain_observe_cycle.py").read_text(encoding="utf-8")
 B2B_VIEW=(ROOT/".github/maison-growth/brain/migrations/0018_b2b_feedback.sql").read_text(encoding="utf-8")
 B2B_SEED=(ROOT/".github/maison-growth/a3/migrations/0017_b2b_canonical_solution.sql").read_text(encoding="utf-8")
+CONTACT=(ROOT/"contacto/index.html").read_text(encoding="utf-8")
+PRO_TEST=(ROOT/"profissionais/teste/index.html").read_text(encoding="utf-8")
 
 commerce=A2["sources"]["commerce"]
 lead_fields={"interest","origin","business","goal","gap","client","model","scale","start","result_type"}
@@ -44,6 +46,13 @@ for token in ("recordB2BEvent","eventType!=='b2b.lead'","GROWTH_DB"):
     assert token in LEAD
 assert "free_text_message" not in LEAD
 assert "customer_id" not in LEAD
+
+for token in ("emitCanonicalB2BLead","/api/b2b-lead","maison_analytics_consent_v1","b2b_result"):
+    assert token in CONTACT
+assert "free_text_message" not in CONTACT
+assert "message:" not in CONTACT.split("emitCanonicalB2BLead",1)[1]
+for token in ("withB2bContext","b2b_business","b2b_goal","b2b_gap","b2b_client","b2b_model","b2b_scale","b2b_start","b2b_result"):
+    assert token in PRO_TEST
 
 for token in ("brain_b2b_feedback","b2b.lead","b2b.recurrence","lifecycle_stage"):
     assert token in B2B_VIEW
