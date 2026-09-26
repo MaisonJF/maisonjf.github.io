@@ -47,7 +47,7 @@ jobs:
           node --check functions/_lib/sos-runtime.js
           node --check functions/_lib/sos-time.js
           node --check functions/_lib/sos-supabase-auth.js
-          node --check functions/_lib/sos-brevo.js
+          node --check functions/_lib/sos-resend.js
           node --check functions/_lib/sos-delivery.js
           node --check functions/_lib/sos-api.js
           node --check functions/_lib/sos-brain-projection.js
