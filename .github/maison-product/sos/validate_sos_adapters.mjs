@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { authenticateSosRequest } from '../../../functions/_lib/sos-supabase-auth.js';
-import { sosEmailCopy, sendSosResendEmail } from '../../../functions/_lib/sos-brevo.js';
+import { sosEmailCopy, sendSosResendEmail } from '../../../functions/_lib/sos-resend.js';
 
 const request=new Request('https://maison-jf.com/api/sos/test',{
   headers:{Authorization:'Bearer '+('x'.repeat(40))}
@@ -78,7 +78,7 @@ assert.deepEqual(sent.to,['contact@example.com']);
 assert.equal(sent.from,'SOS Maison JF <sos@maison-jf.com>');
 assert.equal(JSON.stringify(sent).includes('re_'),false);
 
-for(const path of ['functions/_lib/sos-supabase-auth.js','functions/_lib/sos-brevo.js','functions/_lib/sos-delivery.js']){
+for(const path of ['functions/_lib/sos-supabase-auth.js','functions/_lib/sos-resend.js','functions/_lib/sos-delivery.js']){
   const source=fs.readFileSync(new URL(path,new URL('../../../',import.meta.url)),'utf8');
   assert.equal(source.includes('console.log'),false,path+' must not log');
 }
