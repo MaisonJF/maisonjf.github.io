@@ -1,6 +1,6 @@
 {
   "contract_version": "SOS.RUNTIME.1",
-  "state": "code_ready_not_provisioned",
+  "state": "provisioned_closed_test",
   "binding": "MAISON_SOS_DB",
   "isolation": {
     "separate_from_maison_brain_db": true,
@@ -9,7 +9,7 @@
   },
   "auth_boundary": {
     "upstream_verified_identity_required": true,
-    "public_auth_provider_selected": false,
+    "public_auth_provider_selected": true,
     "raw_identity_persisted": false,
     "account_ref": "HMAC-SHA256(provider + subject) with MAISON_SOS_SUBJECT_PEPPER"
   },
@@ -32,11 +32,11 @@
     "production_scheduler_enabled": false
   },
   "routing": {
-    "public_api_routes_created": false,
-    "reason": "end-user authentication adapter is not yet selected"
+    "public_api_routes_created": true,
+    "reason": "routes exist and remain controlled by fail-closed activation gates"
   },
   "external_effects": {
-    "notification_provider_selected": false,
+    "notification_provider_selected": true,
     "notification_delivery_enabled": false,
     "deployment_enabled": false
   }
