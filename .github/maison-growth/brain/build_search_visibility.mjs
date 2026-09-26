@@ -163,8 +163,12 @@ export function buildSearchVisibility(){
   };
 }
 
-export function writeSearchVisibility({check=false}={}){
+export function writeSearchVisibility({check=false,validate=false}={}){
   const out=JSON.stringify(buildSearchVisibility(),null,2)+'\n';
+  if(validate){
+    console.log('MAISON search visibility graph: validated in memory');
+    return true;
+  }
   if(check){
     if(!fs.existsSync(OUTPUT)||fs.readFileSync(OUTPUT,'utf8')!==out){
       console.error('search-visibility.generated.json is stale; run build_search_visibility.mjs');
@@ -180,6 +184,9 @@ export function writeSearchVisibility({check=false}={}){
 
 const self=fileURLToPath(import.meta.url);
 if(process.argv[1]&&path.resolve(process.argv[1])===self){
-  const ok=writeSearchVisibility({check:process.argv.includes('--check')});
+  const ok=writeSearchVisibility({
+    check:process.argv.includes('--check'),
+    validate:process.argv.includes('--validate')
+  });
   if(!ok)process.exit(1);
 }
