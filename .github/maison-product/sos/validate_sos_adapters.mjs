@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { authenticateSosRequest } from '../../../functions/_lib/sos-supabase-auth.js';
-import { sosEmailCopy, sendSosBrevoEmail } from '../../../functions/_lib/sos-brevo.js';
+import { sosEmailCopy, sendSosResendEmail } from '../../../functions/_lib/sos-brevo.js';
 
 const request=new Request('https://maison-jf.com/api/sos/test',{
   headers:{Authorization:'Bearer '+('x'.repeat(40))}
@@ -53,9 +53,9 @@ for(const [status,expected] of [[403,'sos_auth_upstream_403'],[404,'sos_auth_ups
 }
 
 const env={
-  MAISON_SOS_BREVO_ENABLED:'true',
-  MAISON_SOS_BREVO_API_KEY:'xkeysib-'+'x'.repeat(40),
-  MAISON_SOS_BREVO_SENDER_EMAIL:'sos@maison-jf.com',
+  MAISON_SOS_RESEND_ENABLED:'true',
+  MAISON_SOS_RESEND_API_KEY:'re_'+'x'.repeat(40),
+  MAISON_SOS_RESEND_SENDER_EMAIL:'sos@maison-jf.com',
   MAISON_SOS_PUBLIC_URL:'https://maison-jf.com'
 };
 const notice=sosEmailCopy('trusted_notice',{env});
@@ -64,7 +64,7 @@ assert.match(notice.text,/não significa necessariamente/i);
 assert.doesNotMatch(notice.text,/desaparecid|inconsciente|socorro garantido|em perigo/i);
 
 let mailCall;
-const receipt=await sendSosBrevoEmail({
+const receipt=await sendSosResendEmail({
   env,to:'contact@example.com',kind:'trusted_notice',
   fetchImpl:async (url,init)=>{
     mailCall={url,init};
@@ -72,11 +72,11 @@ const receipt=await sendSosBrevoEmail({
   }
 });
 assert.equal(receipt.messageId,'msg-123');
-assert.equal(mailCall.url,'https://api.brevo.com/v3/smtp/email');
+assert.equal(mailCall.url,'https://api.resend.com/emails');
 const sent=JSON.parse(mailCall.init.body);
-assert.deepEqual(sent.to,[{email:'contact@example.com'}]);
-assert.equal(Object.hasOwn(sent.to[0],'name'),false);
-assert.equal(JSON.stringify(sent).includes('xkeysib-'),false);
+assert.deepEqual(sent.to,['contact@example.com']);
+assert.equal(sent.from,'SOS Maison JF <sos@maison-jf.com>');
+assert.equal(JSON.stringify(sent).includes('re_'),false);
 
 for(const path of ['functions/_lib/sos-supabase-auth.js','functions/_lib/sos-brevo.js','functions/_lib/sos-delivery.js']){
   const source=fs.readFileSync(new URL(path,new URL('../../../',import.meta.url)),'utf8');
