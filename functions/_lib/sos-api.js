@@ -59,6 +59,9 @@ export async function requireSosAuth(request,env,fetchImpl=fetch){
       throw Object.assign(new Error('sos_unauthorized'),{status:401});
     }
     if(code==='sos_auth_disabled')throw Object.assign(new Error('sos_auth_unavailable'),{status:503});
+    if(/^sos_auth_upstream_(403|404|429|5xx|[2-5][0-9][0-9])$/.test(code)){
+      throw Object.assign(new Error(code),{status:503});
+    }
     throw Object.assign(new Error('sos_auth_unavailable'),{status:503});
   }
 }
