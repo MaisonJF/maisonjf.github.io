@@ -9,7 +9,14 @@ const runtime=fs.readFileSync(new URL('functions/_lib/sos-runtime.js',root),'utf
 
 assert.equal(contract.binding,'MAISON_SOS_DB');
 assert.equal(contract.isolation.separate_from_maison_brain_db,true);
-assert.equal(contract.routing.public_api_routes_created,false);
+assert.equal(contract.routing.public_api_routes_created,true);
+assert.equal(contract.routing.fail_closed,true);
+assert.equal(contract.routing.api_gate,'MAISON_SOS_API_ENABLED');
+assert.equal(contract.routing.auth_gate,'MAISON_SOS_AUTH_ENABLED');
+assert.equal(contract.auth_boundary.provider,'supabase_auth');
+assert.equal(contract.auth_boundary.raw_identity_persisted,false);
+assert.equal(contract.external_effects.notification_provider,'resend');
+assert.equal(contract.external_effects.public_product_activation_authorized,false);
 assert.equal(contract.external_effects.notification_delivery_enabled,false);
 assert.equal(runtime.includes('MAISON_BRAIN_DB'),false);
 assert.equal(runtime.includes('fetch('),false);
