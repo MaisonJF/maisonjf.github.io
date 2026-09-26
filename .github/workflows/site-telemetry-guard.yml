@@ -1,0 +1,57 @@
+name: Site Telemetry Guard
+
+on:
+  pull_request:
+    paths:
+      - 'analytics.js'
+      - 'functions/_lib/site-telemetry.js'
+      - 'functions/api/site-event.js'
+      - '.github/maison-growth/site-telemetry/**'
+      - '.github/maison-growth/a2/source-registry.json'
+      - '.github/maison-growth/a2/collector.py'
+      - '.github/maison-growth/a2/test_event_collector.py'
+      - 'workers/maison-intelligence/src/a2_source_registry.generated.js'
+      - 'workers/maison-intelligence/scripts/generate-a2-source-registry.mjs'
+      - '.github/workflows/site-telemetry-guard.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'analytics.js'
+      - 'functions/_lib/site-telemetry.js'
+      - 'functions/api/site-event.js'
+      - '.github/maison-growth/site-telemetry/**'
+      - '.github/maison-growth/a2/source-registry.json'
+      - '.github/maison-growth/a2/collector.py'
+      - '.github/maison-growth/a2/test_event_collector.py'
+      - 'workers/maison-intelligence/src/a2_source_registry.generated.js'
+      - 'workers/maison-intelligence/scripts/generate-a2-source-registry.mjs'
+      - '.github/workflows/site-telemetry-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-site-telemetry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate canonical Site telemetry
+        run: |
+          node --check analytics.js
+          node --check functions/_lib/site-telemetry.js
+          node --check functions/api/site-event.js
+          node workers/maison-intelligence/scripts/generate-a2-source-registry.mjs --check
+          node .github/maison-growth/site-telemetry/validate_site_telemetry.mjs
+          python .github/maison-growth/a2/validate_a2.py
