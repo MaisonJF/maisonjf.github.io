@@ -14,6 +14,9 @@ export async function onRequestPost({request,env}){
     if(!auth.reminder?.verified||auth.reminder.kind!=='email'){
       return jsonSos({ok:false,error:'confirmed_email_required'},409);
     }
+    if(String(env?.MAISON_SOS_BREVO_ENABLED||'').toLowerCase()!=='true'){
+      return jsonSos({ok:false,error:'sos_delivery_unavailable'},503);
+    }
     const body=await readSosJson(request);
     const timezone=String(body.timezone||'');
     const checkinLocalTime=String(body.checkinLocalTime||'');
