@@ -61,9 +61,6 @@ export const MAISON_OFFER_CATALOGUE=[
   {id:'oracle-security',family:'oracle',stage:'now',format:'oracle',title:'Oráculo · Medo do Futuro',description:'Uma abertura para a parte de ti que continua a preparar-se para perder chão.',href:'/oraculo/medo-futuro',amount:200,priceLabel:'2 €',axes:['security'],territories:['cabeca','casa'],routes:['selfpaced'],base:4},
 
   {id:'pdi-relacoes',family:'pdi',stage:'now',format:'game',title:'PÁRA DE IGNORAR!',description:'28 perguntas para duas pessoas abrirem uma conversa que nem sempre sabe começar sozinha.',href:'/para-de-ignorar/',amount:500,priceLabel:'5 €',axes:['attachment','belong','seen'],territories:['presenca'],routes:['talk','gesture','selfpaced'],base:6},
-
-  {id:'ebook-para-de-ignorar',family:'editions',stage:'now',format:'ebook',title:'PÁRA DE IGNORAR!',description:'Um livro curto, directo e humano sobre aquilo que vemos, normalizamos e continuamos a ignorar.',href:'/ebooks/para-de-ignorar/',amount:599,priceLabel:'5,99 €',axes:['self','seen','direction'],territories:['presenca','cabeca','casa','corpo'],routes:['selfpaced'],base:6},
-
   {id:'ebook-turista',family:'editions',stage:'deeper',format:'ebook',title:'Vírgulas do Destino · O Turista',description:'Desejo, destino, mistério e um encontro que continua a fazer perguntas depois da última página.',href:'/ebooks/virgulas-do-destino-o-turista/',amount:299,priceLabel:'2,99 €',axes:['attachment','belong','direction'],territories:['presenca','cabeca'],routes:['selfpaced'],base:1},
   {id:'ebook-meandros',family:'editions',stage:'deeper',format:'ebook',title:'Vírgulas do Destino · Meandros da Vida',description:'Tarot, perda, desejo e recomeço numa história para quando preferes entrar por uma narrativa.',href:'/ebooks/virgulas-do-destino-meandros-da-vida/',amount:499,priceLabel:'4,99 €',axes:['attachment','direction','self'],territories:['presenca','cabeca'],routes:['selfpaced'],base:2},
 
