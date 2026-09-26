@@ -65,6 +65,11 @@ jobs:
           node --check functions/_lib/commerce-events.js
           node --check functions/api/b2b-lead.js
 
+      - name: Validate bounded offer learning
+        run: |
+          node functions/_lib/offer-brain.test.mjs
+          node --check functions/api/recommend-offers.js
+
       - name: Validate global health gate
         run: python .github/maison-growth/brain/validate_global_health_gate.py
 
