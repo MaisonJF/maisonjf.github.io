@@ -3,6 +3,13 @@
   "name": "maison-sos-runtime",
   "main": "src/index.js",
   "compatibility_date": "2026-09-25",
+  "d1_databases": [
+    {
+      "binding": "MAISON_SOS_DB",
+      "database_name": "maison-sos-operational",
+      "database_id": "69bd373f-43be-4955-ac82-ac87d667d9f1"
+    }
+  ],
   "triggers": {
     "crons": ["* * * * *"]
   },
