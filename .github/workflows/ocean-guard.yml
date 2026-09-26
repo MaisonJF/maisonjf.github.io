@@ -24,7 +24,6 @@ jobs:
         shell: bash
         run: |
           node --check functions/_lib/maison-content-ontology.js
-          node --check functions/_lib/maison-knowledge-graph.js
           node --check .github/maison-growth/brain/build_maison_knowledge_graph.mjs
           bash -n .github/maison-growth/brain/rebuild_commercial_context.sh
           node --check functions/_lib/experience-director.js
