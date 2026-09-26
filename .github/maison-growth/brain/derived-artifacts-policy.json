@@ -1,0 +1,93 @@
+{
+  "contract_version": "MAISON-DERIVED-ARTIFACTS-2.0",
+  "principle": "Canonical inputs are authored; derived artifacts are rebuilt and checked, never hand-maintained.",
+  "canonical_inputs": [
+    ".github/maison-growth/oceans/candidates.json",
+    "functions/_lib/offer-brain.js",
+    "functions/_lib/b2b-offer-brain.js",
+    ".github/maison-growth/a2/source-registry.json",
+    "data/products.js",
+    "data/services.js",
+    "sitemap.xml",
+    ".github/maison-growth/brain/public-entity-evidence.json",
+    ".github/maison-growth/brain/external-entity-authority.json"
+  ],
+  "derived_artifacts": [
+    {
+      "path": ".github/maison-growth/brain/maison-knowledge-graph.generated.json",
+      "builder": ".github/maison-growth/brain/build_maison_knowledge_graph.mjs",
+      "policy": "generated_and_committed",
+      "manual_edits": "forbidden"
+    },
+    {
+      "path": ".github/maison-growth/brain/editorial-queue.json",
+      "builder": ".github/maison-growth/brain/build_editorial_queue.mjs",
+      "policy": "generated_and_committed",
+      "manual_edits": "forbidden"
+    },
+    {
+      "path": ".github/maison-growth/brain/commercial-assets.generated.json",
+      "builder": ".github/maison-growth/brain/build_commercial_assets.mjs",
+      "policy": "generated_and_committed",
+      "manual_edits": "forbidden"
+    },
+    {
+      "path": "functions/_lib/vpc-ocean-signals.generated.js",
+      "builder": ".github/maison-growth/brain/build_vpc_ocean_signals.mjs",
+      "policy": "generated_and_committed",
+      "manual_edits": "forbidden"
+    },
+    {
+      "path": ".github/maison-growth/brain/public-discovery.generated.json",
+      "builder": ".github/maison-growth/brain/build_public_discovery.mjs",
+      "policy": "generated_and_committed",
+      "manual_edits": "forbidden"
+    },
+    {
+      "path": ".github/maison-growth/brain/search-visibility.generated.json",
+      "builder": ".github/maison-growth/brain/build_search_visibility.mjs",
+      "policy": "generated_and_committed",
+      "manual_edits": "forbidden"
+    }
+  ],
+  "gate": {
+    "check": ".github/maison-growth/brain/rebuild_commercial_context.sh --check",
+    "check_must_be_non_mutating": true,
+    "failure_means": "derived context is stale or a canonical contract is broken",
+    "autonomy_allowed_when_stale": false
+  },
+  "integration_policy": {
+    "knowledge_graph_builder": ".github/maison-growth/brain/build_maison_knowledge_graph.mjs",
+    "single_builder_required": true,
+    "composed_domains": [
+      "oceans",
+      "offers",
+      "b2b_professionals",
+      "public_discovery",
+      "public_identity",
+      "search_visibility"
+    ],
+    "parallel_graphs_forbidden": true
+  },
+  "experience_contract": {
+    "canonical_product_catalogue": "data/products.js",
+    "canonical_service_catalogue": "data/services.js",
+    "public_site_signal_contract": ".github/maison-growth/a2/source-registry.json#sources.site",
+    "parallel_catalogues_forbidden": true,
+    "parallel_site_analytics_contracts_forbidden": true
+  },
+  "private_runtime_contract": {
+    "a2": {
+      "host": "maison-intelligence",
+      "route": "/internal/a2/ingest",
+      "default_enabled": false,
+      "storage": "GROWTH_DB"
+    },
+    "a11": {
+      "host": "maison-intelligence",
+      "route": "/internal/a11/content-learning",
+      "default_enabled": false,
+      "storage": "GROWTH_DB"
+    }
+  }
+}
