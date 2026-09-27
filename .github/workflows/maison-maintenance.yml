@@ -11,6 +11,7 @@ on:
           - apply_b2b_seed_0017
           - apply_b2b_feedback_0018
           - apply_commercial_recovery_0021
+          - apply_content_learning_a11_0019_0020
           - rebuild_commercial_context
           - validate_global_health
       confirm_write:
@@ -63,6 +64,25 @@ jobs:
           SQL="$(sed '/^[[:space:]]*--/d' ../../.github/maison-growth/brain/migrations/0018_b2b_feedback.sql)"
           test -n "$SQL"
           npx wrangler d1 execute maison-growth-engine --remote --command="$SQL"
+          bash scripts/verify-growth-schema.sh maison-growth-engine
+
+      - name: Apply reviewed A11.2 content learning migrations 0019 and 0020
+        if: ${{ inputs.operation == 'apply_content_learning_a11_0019_0020' }}
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          test "${{ inputs.confirm_write }}" = "true"
+          npm install --ignore-scripts
+          for migration in \
+            ../../.github/maison-growth/a11/migrations/0019_content_learning_source.sql \
+            ../../.github/maison-growth/a11/migrations/0020_learning_rule_seed.sql; do
+            SQL="$(sed '/^[[:space:]]*--/d' "$migration")"
+            test -n "$SQL"
+            npx wrangler d1 execute maison-growth-engine --remote --command="$SQL"
+          done
           bash scripts/verify-growth-schema.sh maison-growth-engine
 
       - name: Apply reviewed commercial recovery migration 0021
