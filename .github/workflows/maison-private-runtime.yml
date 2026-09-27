@@ -193,3 +193,41 @@ jobs:
           CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
         run: python .github/maison-growth/runtime/verify_private_brain_boundary.py "$RUNTIME_STAGE"
+
+      - name: Verify video generation health
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        shell: bash
+        env:
+          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          VIDEO_GENERATION_TOKEN: ${{ secrets.VIDEO_GENERATION_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+          test -n "$MAISON_BRAIN_PRIVATE_URL"
+          test -n "$VIDEO_GENERATION_TOKEN"
+          test -n "$CF_ACCESS_CLIENT_ID"
+          test -n "$CF_ACCESS_CLIENT_SECRET"
+          base="${MAISON_BRAIN_PRIVATE_URL%/}"
+          body="$(mktemp)"
+          status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' \
+            --header "Authorization: Bearer $VIDEO_GENERATION_TOKEN" \
+            --header "CF-Access-Client-Id: $CF_ACCESS_CLIENT_ID" \
+            --header "CF-Access-Client-Secret: $CF_ACCESS_CLIENT_SECRET" \
+            "$base/internal/video/health")"
+          if [[ "$status" != "200" ]]; then
+            echo "Video health failed with HTTP $status"
+            cat "$body"
+            exit 1
+          fi
+          python - "$body" <<'PY'
+          import json, sys
+          with open(sys.argv[1], encoding="utf-8") as fh:
+              payload=json.load(fh)
+          assert payload.get("service") == "maison_short_video", payload
+          assert payload.get("enabled") is True, payload
+          assert payload.get("mode") == "zero_cost_only", payload
+          assert payload.get("billing_allowed") is False, payload
+          print("Maison short-video health: OK")
+          print("Providers:", ", ".join(payload.get("providers", [])))
+          PY
