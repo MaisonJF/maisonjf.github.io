@@ -27,7 +27,8 @@
     "public_availability_does_not_equal_reuse_permission",
     "daily_short_video_zero_cost_first",
     "video_generation_must_fail_closed_before_paid_compute",
-    "video_generation_provider_is_replaceable_system_capability_is_maison_owned"
+    "video_generation_provider_is_replaceable_system_capability_is_maison_owned",
+    "all_maison_videos_display_maison_jf_com_on_screen"
   ],
   "entries": [
     {
@@ -57,7 +58,7 @@
         "Content",
         "social publishing"
       ],
-      "notes": "System-wide capability, not a one-off Reel tool. Current bridge is disabled by default until secret/deploy/end-to-end validation. Hard rule: no automatic purchase, paid credits, paid inference endpoint or billing credential. Prefer 1–3 second generated shots, assemble 6–12 second Reels, use Farol as Maison symbol, and fall back to Maison-owned assets when free generation is unavailable. Provider may rotate; Maison workflow and editorial intelligence remain canonical."
+      "notes": "System-wide capability, not a one-off Reel tool. Current bridge is disabled by default until secret/deploy/end-to-end validation. Hard rule: no automatic purchase, paid credits, paid inference endpoint or billing credential. Every Maison JF video must display maison-jf.com on-screen as a persistent or clearly visible branded URL; the Farol remains the Maison symbol. Prefer 1–3 second generated shots, assemble 6–12 second Reels, and fall back to Maison-owned assets when free generation is unavailable. Provider may rotate; Maison workflow and editorial intelligence remain canonical."
     },
     {
       "id": "maison-commercial-recovery-journal",
