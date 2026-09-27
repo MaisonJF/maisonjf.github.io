@@ -8,7 +8,8 @@ const DEFAULTS = [
 
 function on(v){ return String(v ?? '').toLowerCase() === 'true'; }
 function json(body,status=200){return new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});}
-function auth(req,env){return !!env.VIDEO_GENERATION_TOKEN && req.headers.get('Authorization')===`Bearer ${env.VIDEO_GENERATION_TOKEN}`;}
+// Keep the app credential separate from Authorization: Cloudflare Access uses that header during service-token authentication before the request reaches the Worker.
+function auth(req,env){return !!env.VIDEO_GENERATION_TOKEN && req.headers.get('X-Maison-Video-Token')===env.VIDEO_GENERATION_TOKEN;}
 function providers(env){
   if(!env.VIDEO_ZERO_COST_PROVIDERS_JSON) return DEFAULTS;
   let p; try{p=JSON.parse(env.VIDEO_ZERO_COST_PROVIDERS_JSON);}catch{throw new Error('invalid_video_provider_registry');}
