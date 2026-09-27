@@ -258,7 +258,7 @@ jobs:
           VIDEO_GENERATION_TOKEN: ${{ secrets.VIDEO_GENERATION_TOKEN }}
           CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
-        run: |
+        id: video_smoke\n        run: |
           set -euo pipefail
           base="${MAISON_BRAIN_PRIVATE_URL%/}"
           access_id="$CF_ACCESS_CLIENT_ID"
@@ -285,4 +285,71 @@ jobs:
           print("Provider:", p.get("provider"))
           print("Job ID:", p.get("job_id"))
           print("Result path:", p.get("result_path"))
+          with open(__import__("os").environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"provider={p['provider']}\\njob_id={p['job_id']}\\n")
           PY
+
+      - name: Collect one-second video result
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        shell: bash
+        env:
+          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          VIDEO_GENERATION_TOKEN: ${{ secrets.VIDEO_GENERATION_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+          VIDEO_PROVIDER: ${{ steps.video_smoke.outputs.provider }}
+          VIDEO_JOB_ID: ${{ steps.video_smoke.outputs.job_id }}
+        run: |
+          set -euo pipefail
+          base="${MAISON_BRAIN_PRIVATE_URL%/}"
+          access_id="$CF_ACCESS_CLIENT_ID"
+          access_secret="$CF_ACCESS_CLIENT_SECRET"
+          shopt -s nocasematch
+          if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then access_id="${BASH_REMATCH[1]}"; fi
+          if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then access_secret="${BASH_REMATCH[1]}"; fi
+          shopt -u nocasematch
+          result="$(mktemp)"
+          curl --fail --silent --show-error \
+            --header "Accept: text/event-stream" \
+            --header "X-Maison-Video-Token: $VIDEO_GENERATION_TOKEN" \
+            --header "CF-Access-Client-Id: $access_id" \
+            --header "CF-Access-Client-Secret: $access_secret" \
+            "$base/internal/video/result?provider=$VIDEO_PROVIDER&job_id=$VIDEO_JOB_ID" > "$result"
+          cat "$result"
+          video_url="$(python - "$result" <<'PY'
+          import json, re, sys
+          text=open(sys.argv[1], encoding="utf-8").read()
+          urls=[]
+          for line in text.splitlines():
+              if line.startswith("data:"):
+                  raw=line[5:].strip()
+                  try:
+                      obj=json.loads(raw)
+                      def walk(x):
+                          if isinstance(x,dict):
+                              for k,v in x.items():
+                                  if k in ("url","path") and isinstance(v,str) and v.startswith("http"): urls.append(v)
+                                  walk(v)
+                          elif isinstance(x,list):
+                              for v in x: walk(v)
+                      walk(obj)
+                  except Exception:
+                      urls += re.findall(r'https://[^"\\s]+', raw)
+          candidates=[u for u in urls if ".mp4" in u.lower() or "video" in u.lower()]
+          if candidates: print(candidates[-1])
+          PY
+          )"
+          test -n "$video_url"
+          mkdir -p video-output
+          curl --fail --location --silent --show-error "$video_url" --output video-output/casos-cinzentos-smoke-test.mp4
+          test -s video-output/casos-cinzentos-smoke-test.mp4
+          echo "MP4 collected successfully"
+
+      - name: Upload video smoke-test artifact
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: casos-cinzentos-video-smoke-test
+          path: video-output/casos-cinzentos-smoke-test.mp4
+          if-no-files-found: error
+          retention-days: 7
