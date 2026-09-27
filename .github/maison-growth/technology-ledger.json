@@ -24,9 +24,41 @@
     "derived_indexes_should_be_rebuildable",
     "semantic_similarity_is_not_independent_evidence",
     "a12_is_central_autonomy_risk_and_human_approval_policy",
-    "public_availability_does_not_equal_reuse_permission"
+    "public_availability_does_not_equal_reuse_permission",
+    "daily_short_video_zero_cost_first",
+    "video_generation_must_fail_closed_before_paid_compute",
+    "video_generation_provider_is_replaceable_system_capability_is_maison_owned"
   ],
   "entries": [
+    {
+      "id": "maison-zero-cost-short-video",
+      "type": "internal_component",
+      "name": "Maison Zero-Cost Short Video Engine",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "shared Maison capability for daily 9:16 micro-Reels using short generated clips and Maison-controlled assembly",
+      "sense": "Oceanos/Brain insight → short-form video",
+      "cost": "€0 target; unauthenticated public ZeroGPU only in first adapter; no billing authority",
+      "license": "Maison repo + external model/provider terms",
+      "self_hosted": false,
+      "depends_on": [
+        "Brain/Oceanos editorial intent",
+        "Maison Intelligence Worker",
+        "replaceable zero-cost video provider",
+        "Maison-owned post-production"
+      ],
+      "serves": [
+        "Brain",
+        "Oceanos",
+        "OSIRIS",
+        "Foundry",
+        "Atelier",
+        "Content",
+        "social publishing"
+      ],
+      "notes": "System-wide capability, not a one-off Reel tool. Current bridge is disabled by default until secret/deploy/end-to-end validation. Hard rule: no automatic purchase, paid credits, paid inference endpoint or billing credential. Prefer 1–3 second generated shots, assemble 6–12 second Reels, use Farol as Maison symbol, and fall back to Maison-owned assets when free generation is unavailable. Provider may rotate; Maison workflow and editorial intelligence remain canonical."
+    },
     {
       "id": "maison-commercial-recovery-journal",
       "type": "internal_component",
