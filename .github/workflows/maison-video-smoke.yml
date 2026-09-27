@@ -8,8 +8,6 @@ on:
       - main
     paths:
       - '.github/workflows/maison-video-smoke.yml'
-      - 'workers/maison-intelligence/src/video_generation.js'
-      - 'workers/maison-intelligence/test/video_generation.test.mjs'
 
 permissions:
   contents: read
@@ -17,184 +15,79 @@ permissions:
 jobs:
   smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
-      - name: Checkout current main
-        uses: actions/checkout@v4
-        with:
-          ref: refs/heads/main
-
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Set up Node 22
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
+      - name: Install official Gradio client
+        run: python -m pip install --disable-pip-version-check --quiet gradio_client
 
-      - name: Render private Worker config
-        env:
-          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-        run: |
-          python .github/maison-growth/runtime/render_private_worker_config.py \
-            private_brain_read_candidate \
-            --template workers/maison-intelligence/wrangler.jsonc \
-            --private-url "$BRAIN_CONTROL_API_URL" \
-            --output workers/maison-intelligence/wrangler.private.runtime.jsonc
-
-      - name: Validate and deploy current video Worker
-        working-directory: workers/maison-intelligence
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          npm install --ignore-scripts
-          npm test
-          npm run check
-          npx wrangler deploy --config wrangler.private.runtime.jsonc
-
-      - name: Wait for deployed video surface
+      - name: Generate one-second Casos Cinzentos MP4
         shell: bash
-        env:
-          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-          VIDEO_GENERATION_TOKEN: ${{ secrets.VIDEO_GENERATION_TOKEN }}
-          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
-          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
         run: |
           set -euo pipefail
-          base="${MAISON_BRAIN_PRIVATE_URL%/}"
-          access_id="$CF_ACCESS_CLIENT_ID"
-          access_secret="$CF_ACCESS_CLIENT_SECRET"
-          shopt -s nocasematch
-          if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then access_id="${BASH_REMATCH[1]}"; fi
-          if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then access_secret="${BASH_REMATCH[1]}"; fi
-          shopt -u nocasematch
-          for attempt in {1..12}; do
-            body="$(mktemp)"
-            status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' \
-              --header "Accept: application/json" \
-              --header "X-Maison-Video-Token: $VIDEO_GENERATION_TOKEN" \
-              --header "CF-Access-Client-Id: $access_id" \
-              --header "CF-Access-Client-Secret: $access_secret" \
-              "$base/internal/video/health")"
-            if [[ "$status" == "200" ]] && grep -q 'wan22-aoti-fast' "$body"; then
-              cat "$body"
-              exit 0
-            fi
-            sleep 5
-          done
-          echo "Video surface did not become ready."
-          cat "$body"
-          exit 1
+          python - <<'PY'
+          import os, shutil
+          from pathlib import Path
+          from gradio_client import Client, handle_file
 
-      - name: Generate one-second video
-        id: generate
-        shell: bash
-        env:
-          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-          VIDEO_GENERATION_TOKEN: ${{ secrets.VIDEO_GENERATION_TOKEN }}
-          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
-          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
-        run: |
-          set -euo pipefail
-          base="${MAISON_BRAIN_PRIVATE_URL%/}"
-          access_id="$CF_ACCESS_CLIENT_ID"
-          access_secret="$CF_ACCESS_CLIENT_SECRET"
-          shopt -s nocasematch
-          if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then access_id="${BASH_REMATCH[1]}"; fi
-          if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then access_secret="${BASH_REMATCH[1]}"; fi
-          shopt -u nocasematch
+          source = "https://maison-jf.com/images/ebooks/posters/casos_cinzentos_poster.webp"
+          prompt = (
+              "Subtle cinematic noir motion only: warm desk-lamp flicker, faint drifting atmosphere, "
+              "gentle parallax across investigation photographs and red strings, distant harbour lights "
+              "shimmering. Preserve poster composition and typography."
+          )
+          negative = "low quality, blurry, distorted, deformed, static frame, text artifacts, watermark"
 
-          payload='{"image_url":"https://maison-jf.com/images/ebooks/posters/casos_cinzentos_poster.webp","prompt":"Subtle cinematic noir motion only: warm desk-lamp flicker, faint drifting atmosphere, gentle parallax across investigation photographs and red strings, distant harbour lights shimmering. Preserve poster composition and typography.","duration_seconds":1,"steps":4,"seed":42,"randomize_seed":false}'
-          body="$(mktemp)"
-          status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' --request POST \
-            --header "Accept: application/json" \
-            --header "Content-Type: application/json" \
-            --header "X-Maison-Video-Token: $VIDEO_GENERATION_TOKEN" \
-            --header "CF-Access-Client-Id: $access_id" \
-            --header "CF-Access-Client-Secret: $access_secret" \
-            --data "$payload" "$base/internal/video/generate")"
-          cat "$body"
-          if [[ "$status" != "202" ]]; then exit 1; fi
+          # Use Gradio's official client so upload, queue protocol, FileData handling,
+          # result streaming, and output download are handled by the provider's own API client.
+          client = Client(
+              "zerogpu-aoti/wan2-2-fp8da-aoti-faster",
+              download_files=True,
+              verbose=False,
+          )
+          result = client.predict(
+              handle_file(source),
+              prompt,
+              4,
+              negative,
+              1.0,
+              1.0,
+              1.0,
+              42,
+              False,
+              api_name="/generate_video",
+          )
 
-          python - "$body" <<'PY'
-          import json, os, sys
-          with open(sys.argv[1], encoding="utf-8") as fh:
-              p=json.load(fh)
-          assert p.get("state") == "queued", p
-          assert p.get("billing_allowed") is False, p
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
-              out.write(f"provider={p['provider']}\n")
-              out.write(f"job_id={p['job_id']}\n")
-          print("Provider:", p["provider"])
-          print("Job ID:", p["job_id"])
-          PY
+          print("Gradio result type:", type(result).__name__)
+          print("Gradio result:", result)
 
-      - name: Collect MP4
-        shell: bash
-        env:
-          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-          VIDEO_GENERATION_TOKEN: ${{ secrets.VIDEO_GENERATION_TOKEN }}
-          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
-          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
-          VIDEO_PROVIDER: ${{ steps.generate.outputs.provider }}
-          VIDEO_JOB_ID: ${{ steps.generate.outputs.job_id }}
-        run: |
-          set -euo pipefail
-          base="${MAISON_BRAIN_PRIVATE_URL%/}"
-          access_id="$CF_ACCESS_CLIENT_ID"
-          access_secret="$CF_ACCESS_CLIENT_SECRET"
-          shopt -s nocasematch
-          if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then access_id="${BASH_REMATCH[1]}"; fi
-          if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then access_secret="${BASH_REMATCH[1]}"; fi
-          shopt -u nocasematch
-
-          result="$(mktemp)"
-          curl --fail --silent --show-error \
-            --header "Accept: text/event-stream" \
-            --header "X-Maison-Video-Token: $VIDEO_GENERATION_TOKEN" \
-            --header "CF-Access-Client-Id: $access_id" \
-            --header "CF-Access-Client-Secret: $access_secret" \
-            "$base/internal/video/result?provider=$VIDEO_PROVIDER&job_id=$VIDEO_JOB_ID" > "$result"
-          cat "$result"
-
-          if grep -q '^event: error' "$result"; then
-            echo "Provider reported an execution error."
-            exit 1
-          fi
-
-          video_url="$(python - "$result" <<'PY'
-          import json, re, sys
-          text=open(sys.argv[1], encoding="utf-8").read()
-          urls=[]
-          def walk(x):
-              if isinstance(x,dict):
-                  for k,v in x.items():
-                      if k in ("url","path") and isinstance(v,str) and v.startswith("http"):
-                          urls.append(v)
+          candidates = []
+          def walk(value):
+              if isinstance(value, str):
+                  if value.lower().endswith(".mp4") and os.path.exists(value):
+                      candidates.append(value)
+              elif isinstance(value, dict):
+                  for v in value.values():
                       walk(v)
-              elif isinstance(x,list):
-                  for v in x: walk(v)
-          for line in text.splitlines():
-              if not line.startswith("data:"):
-                  continue
-              raw=line[5:].strip()
-              try:
-                  walk(json.loads(raw))
-              except Exception:
-                  urls += re.findall(r'https://[^"\\s]+', raw)
-          candidates=[u for u in urls if ".mp4" in u.lower() or "video" in u.lower()]
-          if candidates:
-              print(candidates[-1])
+              elif isinstance(value, (list, tuple)):
+                  for v in value:
+                      walk(v)
+
+          walk(result)
+          if not candidates:
+              raise RuntimeError("No downloaded MP4 returned by Gradio client")
+
+          out = Path("video-output/casos-cinzentos-smoke-test.mp4")
+          out.parent.mkdir(parents=True, exist_ok=True)
+          shutil.copy2(candidates[0], out)
+          if out.stat().st_size <= 0:
+              raise RuntimeError("Generated MP4 is empty")
+          print(f"MP4 ready: {out} ({out.stat().st_size} bytes)")
           PY
-          )"
-          test -n "$video_url"
-          mkdir -p video-output
-          curl --fail --location --silent --show-error "$video_url" --output video-output/casos-cinzentos-smoke-test.mp4
-          test -s video-output/casos-cinzentos-smoke-test.mp4
-          echo "MP4 collected successfully"
 
       - name: Upload MP4 artifact
         uses: actions/upload-artifact@v4
