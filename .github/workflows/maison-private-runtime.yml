@@ -258,7 +258,8 @@ jobs:
           VIDEO_GENERATION_TOKEN: ${{ secrets.VIDEO_GENERATION_TOKEN }}
           CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
-        id: video_smoke\n        run: |
+        id: video_smoke
+        run: |
           set -euo pipefail
           base="${MAISON_BRAIN_PRIVATE_URL%/}"
           access_id="$CF_ACCESS_CLIENT_ID"
