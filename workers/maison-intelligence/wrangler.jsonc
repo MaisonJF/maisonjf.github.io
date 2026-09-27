@@ -18,7 +18,7 @@
     "A11_LEARNING_WRITE_API_ENABLED": "false",
     "BRAIN_PROPOSAL_API_ENABLED": "false",
     "COMMERCIAL_RECOVERY_API_ENABLED": "false",
-    "VIDEO_GENERATION_ENABLED": "false",
+    "VIDEO_GENERATION_ENABLED": "true",
     "VIDEO_ZERO_COST_PROVIDERS_JSON": "[{\"id\":\"wan22-tinchote\",\"base\":\"https://tinchote-wan-2-2-14b-image-to-video.hf.space\",\"api\":\"generate_video\"}]",
     "BRAIN_REVIEW_DECISION_ENABLED": "false",
     "KILL_SWITCH": "false",
