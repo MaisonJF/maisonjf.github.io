@@ -12,6 +12,7 @@ SELECT queue_id,effective_status,review_resolution_id FROM autonomy_human_queue_
 SELECT opportunity_id,offer_hypothesis_id,review_resolution_id FROM a14_approved_offers_ready_for_planning LIMIT 0;
 SELECT validation_plan_id,review_resolution_id,state FROM a14_validation_plans LIMIT 0;
 SELECT experiment_version_id FROM a14_validation_plan_a8_links LIMIT 0;
+SELECT recovery_id,state,attempt_count FROM commercial_recovery_journal LIMIT 0;
 "
 
 echo "Verifying Maison Growth D1 schema on: $DB_NAME"
@@ -37,4 +38,4 @@ if [[ "$a11_rule_version" != "rul_e6217bb187b5ef0b6ee371286ed2e1e53e0d" ]]; then
   echo "Canonical A11.2 learning rule is not active." >&2
   exit 5
 fi
-echo "Maison Growth D1 schema through Brain/A12/A14 planning/B2B feedback surfaces: OK"
+echo "Maison Growth D1 schema through Brain/A12/A14 planning/B2B feedback/commercial recovery surfaces: OK"
