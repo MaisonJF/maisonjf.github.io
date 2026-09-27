@@ -10,6 +10,7 @@ import { configuredSearchVisibilityTasks, fetchSearchVisibility, searchVisibilit
 import { buildVisibilityProbePrompt, decorateVisibilityResult, probesForDate, providerCanRunProbe } from './visibility_probes.js';
 import { handleBrainControlRequest } from './control_api.js';
 import { handleBrainProposalRequest } from './proposal_api.js';
+import { handleCommercialRecoveryRequest } from './commercial_recovery_api.js';
 import { handleBrainReviewDecisionRequest } from './review_decision_api.js';
 import { handleA2IngestRequest } from './a2_runtime.js';
 import { handleA11LearningRequest } from './a11_runtime.js';
@@ -425,6 +426,8 @@ export default {
     if (a2) return a2;
     const reviewDecision = await handleBrainReviewDecisionRequest(request, env);
     if (reviewDecision) return reviewDecision;
+    const recovery = await handleCommercialRecoveryRequest(request, env);
+    if (recovery) return recovery;
     const proposal = await handleBrainProposalRequest(request, env);
     if (proposal) return proposal;
     const internal = await handleBrainControlRequest(request, env);
