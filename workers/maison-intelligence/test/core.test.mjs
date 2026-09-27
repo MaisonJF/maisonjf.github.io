@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { canonicalizeUrl, uniqueCanonicalUrls, territoriesForDate, buildSensorPrompt, privacySafeText } from '../src/core.js';
+import { canonicalizeUrl, uniqueCanonicalUrls, territoriesForDate, buildSensorPrompt, privacySafeText, ATELIER_TERRITORY } from '../src/core.js';
 
 test('canonical URLs collapse tracking variants', () => {
   assert.equal(canonicalizeUrl('https://www.Example.com/a/?utm_source=x&b=2'), 'https://example.com/a?b=2');
@@ -39,4 +39,14 @@ test('PII-looking contact details are redacted', () => {
   const s=privacySafeText('mail a@b.com or +351 912 345 678');
   assert.ok(!s.includes('a@b.com'));
   assert.ok(!s.includes('912 345 678'));
+});
+
+test('Atelier prompt studies transferable excellence without copying', () => {
+  const prompt = buildSensorPrompt(ATELIER_TERRITORY);
+  assert.match(prompt, /Study excellence, not audience demand/i);
+  assert.match(prompt, /Martha Stewart/i);
+  assert.match(prompt, /Fame is not evidence of excellence/i);
+  assert.match(prompt, /Never copy voice/i);
+  assert.match(prompt, /measurable hypothesis/i);
+  assert.match(prompt, /Zero-cost first/i);
 });
