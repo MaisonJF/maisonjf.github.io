@@ -8,6 +8,7 @@ on:
         required: true
         type: choice
         options:
+          - apply_b2b_seed_0017
           - apply_b2b_feedback_0018
           - apply_commercial_recovery_0021
           - rebuild_commercial_context
@@ -33,6 +34,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Apply canonical Maison B2B solution seed 0017
+        if: ${{ inputs.operation == 'apply_b2b_seed_0017' }}
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          test "${{ inputs.confirm_write }}" = "true"
+          npm install --ignore-scripts
+          SQL="$(sed '/^[[:space:]]*--/d' ../../.github/maison-growth/a3/migrations/0017_b2b_canonical_solution.sql)"
+          test -n "$SQL"
+          npx wrangler d1 execute maison-growth-engine --remote --command="$SQL"
+          bash scripts/verify-growth-schema.sh maison-growth-engine
 
       - name: Apply reviewed B2B feedback migration 0018
         if: ${{ inputs.operation == 'apply_b2b_feedback_0018' }}
