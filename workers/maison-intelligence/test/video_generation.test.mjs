@@ -20,14 +20,26 @@ test('provider registry refuses non-Hugging-Face endpoints',async()=>{
 });
 
 
-test('default Wan2.2 provider payload matches the live 9-input Gradio contract',async()=>{
+test('default Wan2.2 provider uploads the image and matches the live 9-input Gradio contract',async()=>{
  const originalFetch=globalThis.fetch;
  let captured=null;
- let target='';
- globalThis.fetch=async(url,init)=>{
-   target=String(url);
-   captured=JSON.parse(init.body);
-   return new Response(JSON.stringify({event_id:'abcdef123456'}),{status:200,headers:{'Content-Type':'application/json'}});
+ const targets=[];
+ globalThis.fetch=async(url,init={})=>{
+   const target=String(url);
+   targets.push(target);
+   if(target==='https://maison-jf.com/images/ebooks/posters/casos-cinzentos.webp'){
+     return new Response(new Blob(['fake-image'],{type:'image/webp'}),{status:200,headers:{'Content-Type':'image/webp'}});
+   }
+   if(target.endsWith('/gradio_api/upload')){
+     assert.equal(init.method,'POST');
+     assert.ok(init.body instanceof FormData);
+     return new Response(JSON.stringify(['/tmp/gradio/abc123/maison-source.webp']),{status:200,headers:{'Content-Type':'application/json'}});
+   }
+   if(target.endsWith('/gradio_api/call/generate_video')){
+     captured=JSON.parse(init.body);
+     return new Response(JSON.stringify({event_id:'abcdef123456'}),{status:200,headers:{'Content-Type':'application/json'}});
+   }
+   throw new Error('unexpected_fetch_'+target);
  };
  try{
    const r=await handleVideoGenerationRequest(req('/internal/video/generate',{
@@ -41,8 +53,12 @@ test('default Wan2.2 provider payload matches the live 9-input Gradio contract',
    const b=await r.json();
    assert.equal(r.status,202);
    assert.equal(b.provider,'wan22-aoti-fast');
-   assert.match(target,/zerogpu-aoti-wan2-2-fp8da-aoti-faster\.hf\.space\/gradio_api\/call\/generate_video$/);
+   assert.equal(targets.length,3);
+   assert.match(targets[1],/zerogpu-aoti-wan2-2-fp8da-aoti-faster\.hf\.space\/gradio_api\/upload$/);
+   assert.match(targets[2],/zerogpu-aoti-wan2-2-fp8da-aoti-faster\.hf\.space\/gradio_api\/call\/generate_video$/);
    assert.equal(captured.data.length,9);
+   assert.equal(captured.data[0].path,'/tmp/gradio/abc123/maison-source.webp');
+   assert.equal(captured.data[0].meta._type,'gradio.FileData');
    assert.equal(captured.data[1],'Subtle cinematic noir motion');
    assert.equal(captured.data[2],4);
    assert.equal(captured.data[4],1);
