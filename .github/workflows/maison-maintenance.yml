@@ -79,7 +79,9 @@ jobs:
           for migration in \
             ../../.github/maison-growth/a11/migrations/0019_content_learning_source.sql \
             ../../.github/maison-growth/a11/migrations/0020_learning_rule_seed.sql; do
-            SQL="$(sed '/^[[:space:]]*--/d' "$migration")"
+            # D1 remote rejects client-issued BEGIN/COMMIT and PRAGMA statements.
+            # Preserve every schema and seed statement from the reviewed migration.
+            SQL="$(sed -E '/^[[:space:]]*--/d; /^[[:space:]]*(PRAGMA foreign_keys|BEGIN IMMEDIATE|COMMIT)/d' "$migration")"
             test -n "$SQL"
             npx wrangler d1 execute maison-growth-engine --remote --command="$SQL"
           done
