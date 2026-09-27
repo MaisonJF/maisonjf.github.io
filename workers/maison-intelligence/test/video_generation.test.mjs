@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { handleVideoGenerationRequest } from '../src/video_generation.js';
 
 const env={VIDEO_GENERATION_ENABLED:'true',VIDEO_GENERATION_TOKEN:'video-secret'};
-const req=(path,body,method='POST')=>new Request('https://worker.example'+path,{method,headers:{Authorization:'Bearer video-secret','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
+const req=(path,body,method='POST')=>new Request('https://worker.example'+path,{method,headers:{'X-Maison-Video-Token':'video-secret','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
 
 test('health declares a hard zero-cost boundary',async()=>{
  const r=await handleVideoGenerationRequest(req('/internal/video/health',null,'GET'),env);
