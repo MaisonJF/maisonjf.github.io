@@ -215,7 +215,7 @@ jobs:
           test -n "$CF_ACCESS_CLIENT_SECRET"
           base="${MAISON_BRAIN_PRIVATE_URL%/}"
           body="$(mktemp)"
-          status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' \
+          status="$(curl --silent --show-error --location --max-redirs 2 --output "$body" --write-out '%{http_code}' \
             --header "Authorization: Bearer $VIDEO_GENERATION_TOKEN" \
             --header "CF-Access-Client-Id: $CF_ACCESS_CLIENT_ID" \
             --header "CF-Access-Client-Secret: $CF_ACCESS_CLIENT_SECRET" \
