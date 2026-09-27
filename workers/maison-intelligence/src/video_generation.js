@@ -59,6 +59,19 @@ async function uploadImageToProvider(p,url){
   const path=Array.isArray(paths)?String(paths[0]||''):'';
   if(!path) throw new Error('zerogpu_upload_missing_path');
 
+  // Recent Gradio releases can return the upload path before the backing file
+  // is actually readable by the app. Wait for the provider to expose it before
+  // submitting the queued generation job, otherwise preprocessing can fail
+  // immediately with a provider-side 404.
+  const fileUrl=`${p.base}/gradio_api/file=${encodeURIComponent(path)}`;
+  let ready=false;
+  for(let attempt=0;attempt<12;attempt++){
+    const probe=await fetch(fileUrl,{headers:{Range:'bytes=0-0'}});
+    if(probe.ok||probe.status===206){ready=true;break;}
+    await new Promise(resolve=>setTimeout(resolve,500));
+  }
+  if(!ready) throw new Error('zerogpu_uploaded_file_not_ready');
+
   return {path,orig_name:'maison-source.webp',mime_type:type,meta:{_type:'gradio.FileData'}};
 }
 function buildPayload(p,body,image){
