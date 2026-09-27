@@ -26,6 +26,8 @@ class ScoutOpportunity:
     confidence: float
     status: str
     reason_codes: tuple[str,...]
+    acquisition_requirements: tuple[str,...]=()
+    reuse_routes: tuple[str,...]=()
 
 
 def discover(
@@ -48,6 +50,19 @@ def discover(
         reasons.append("existing_asset_first")
     if any(ref.startswith("asset:") for ref in contexts):
         reasons.append("existing_catalogue_asset_context")
+    acquisition_requirements=()
+    reuse_routes=()
+    if group.territory_key == "organic_discovery":
+        reasons.extend(("organic_acquisition_candidate","zero_cost_first","scale_before_vanity"))
+        acquisition_requirements=(
+            "attention_evidence","distribution_surface","audience_or_human_signal",
+            "identification_trigger","zero_cost_route","maison_destination",
+            "scale_or_propagation_mechanism","measurement_plan",
+        )
+        reuse_routes=(
+            "content","game_question","oracle_situation","test_dimension",
+            "guide_or_ebook","trend_or_concept","foundry_candidate",
+        )
     if len(group.independent_roots) < 2:
         reasons.append("weak_source_independence")
     status="observe"
@@ -67,4 +82,6 @@ def discover(
         confidence=group.confidence,
         status=status,
         reason_codes=tuple(reasons),
+        acquisition_requirements=acquisition_requirements,
+        reuse_routes=reuse_routes,
     )
