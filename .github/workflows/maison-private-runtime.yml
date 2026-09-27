@@ -214,13 +214,24 @@ jobs:
           test -n "$CF_ACCESS_CLIENT_ID"
           test -n "$CF_ACCESS_CLIENT_SECRET"
           base="${MAISON_BRAIN_PRIVATE_URL%/}"
+          # Normalize either raw credentials or Cloudflare's copied "Header-Name: value" form.
+          access_id="$CF_ACCESS_CLIENT_ID"
+          access_secret="$CF_ACCESS_CLIENT_SECRET"
+          shopt -s nocasematch
+          if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then
+            access_id="${BASH_REMATCH[1]}"
+          fi
+          if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then
+            access_secret="${BASH_REMATCH[1]}"
+          fi
+          shopt -u nocasematch
           body="$(mktemp)"
           status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' \
             --header "Accept: application/json" \
             --header "User-Agent: MAISON-JF-Brain/1.0" \
             --header "X-Maison-Video-Token: $VIDEO_GENERATION_TOKEN" \
-            --header "CF-Access-Client-Id: $CF_ACCESS_CLIENT_ID" \
-            --header "CF-Access-Client-Secret: $CF_ACCESS_CLIENT_SECRET" \
+            --header "CF-Access-Client-Id: $access_id" \
+            --header "CF-Access-Client-Secret: $access_secret" \
             "$base/internal/video/health")"
           if [[ "$status" != "200" ]]; then
             echo "Video health failed with HTTP $status"
