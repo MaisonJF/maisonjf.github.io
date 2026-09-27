@@ -11,7 +11,6 @@ on:
           - apply_b2b_feedback_0018
           - rebuild_commercial_context
           - validate_global_health
-          - deploy_private_runtime
       confirm_write:
         description: Confirm write operation when applicable
         required: true
@@ -44,7 +43,9 @@ jobs:
           set -euo pipefail
           test "${{ inputs.confirm_write }}" = "true"
           npm install --ignore-scripts
-          npx wrangler d1 execute maison-growth-engine --remote --file="../../.github/maison-growth/brain/migrations/0018_b2b_feedback.sql"
+          SQL="$(sed '/^[[:space:]]*--/d' ../../.github/maison-growth/brain/migrations/0018_b2b_feedback.sql)"
+          test -n "$SQL"
+          npx wrangler d1 execute maison-growth-engine --remote --command="$SQL"
           bash scripts/verify-growth-schema.sh maison-growth-engine
 
       - name: Rebuild commercial context
@@ -57,9 +58,3 @@ jobs:
       - name: Validate global health
         if: ${{ inputs.operation == 'validate_global_health' }}
         run: python .github/maison-growth/brain/validate_global_health_gate.py
-
-      - name: Deploy private runtime
-        if: ${{ inputs.operation == 'deploy_private_runtime' }}
-        run: |
-          echo "Use Maison Private Runtime Deploy for deployment so its Access, schema and boundary guards remain authoritative."
-          exit 1
