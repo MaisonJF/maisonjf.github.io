@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-09-24",
+  "updated_at": "2026-09-27",
   "authority": "Maison JF Technology Ledger",
   "rule": "If it is not recorded here, it has not entered the Maison project.",
   "statuses": [
@@ -27,6 +27,31 @@
     "public_availability_does_not_equal_reuse_permission"
   ],
   "entries": [
+    {
+      "id": "maison-commercial-recovery-journal",
+      "type": "internal_component",
+      "name": "Maison Commercial Recovery Journal",
+      "status": "AGORA",
+      "priority": "P0",
+      "verification": "VERIFIED_IN_REPO",
+      "role": "append-only preservation of commercial integration intent before downstream writes, with retry and readback-gated completion",
+      "sense": "commercial continuity / no-loss recovery",
+      "cost": "existing runtime storage; no API cost",
+      "license": "Maison repo",
+      "self_hosted": true,
+      "depends_on": [
+        "A12",
+        "A14",
+        "canonical product/service catalogues"
+      ],
+      "serves": [
+        "Brain",
+        "Foundry",
+        "Oceanos",
+        "commercial integration"
+      ],
+      "notes": "Not a parallel catalogue and grants no launch, price, checkout or public-write authority. Capture precedes downstream mutation; failures remain pending_write; integration requires destination readback. Sensitive payload classes are rejected."
+    },
     {
       "id": "maison-a8-draft-planning",
       "type": "internal_component",
