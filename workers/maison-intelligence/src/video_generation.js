@@ -38,20 +38,36 @@ function providers(env){
     };
   });
 }
-function fileData(url){
+async function uploadImageToProvider(p,url){
   const u=new URL(url);
   if(u.protocol!=='https:') throw new Error('image_url_must_be_https');
-  return {path:u.href,url:u.href,orig_name:'maison-source.webp',meta:{_type:'gradio.FileData'}};
+
+  const source=await fetch(u.href,{headers:{Accept:'image/*'}});
+  if(!source.ok) throw new Error(`image_fetch_http_${source.status}`);
+  const type=source.headers.get('Content-Type')||'application/octet-stream';
+  if(!type.toLowerCase().startsWith('image/')) throw new Error('image_source_not_image');
+
+  const blob=await source.blob();
+  if(!blob.size) throw new Error('image_source_empty');
+  if(blob.size>12*1024*1024) throw new Error('image_source_too_large');
+
+  const form=new FormData();
+  form.append('files',blob,'maison-source.webp');
+  const uploaded=await fetch(`${p.base}/gradio_api/upload`,{method:'POST',body:form});
+  if(!uploaded.ok) throw new Error(`zerogpu_upload_http_${uploaded.status}`);
+  const paths=await uploaded.json();
+  const path=Array.isArray(paths)?String(paths[0]||''):'';
+  if(!path) throw new Error('zerogpu_upload_missing_path');
+
+  return {path,orig_name:'maison-source.webp',mime_type:type,meta:{_type:'gradio.FileData'}};
 }
-function buildPayload(p,body){
+function buildPayload(p,body,image){
   const duration=Math.min(3,Math.max(1,Number(body.duration_seconds||2)));
   const steps=Math.min(4,Math.max(1,Number(body.steps||4)));
   const seed=Number.isInteger(body.seed)?body.seed:42;
   const randomize=body.randomize_seed!==false;
   const prompt=String(body.prompt||'');
   if(!prompt.trim()) throw new Error('prompt_required');
-  const image=fileData(body.image_url);
-
   // The current Wan2.2 AoT public ZeroGPU app exposes Gradio inputs in this order:
   // image, prompt, steps, negative_prompt, duration, guidance_1, guidance_2, seed, randomize_seed.
   if(p.protocol==='wan22_aoti_9'){
@@ -63,7 +79,10 @@ function buildPayload(p,body){
   return {data:[image,prompt,duration,steps,seed,randomize]};
 }
 async function submit(p,body){
-  const payload=buildPayload(p,body);
+  // Gradio image inputs require a file uploaded to that Space first. Passing a
+  // third-party URL as FileData is accepted by the queue but fails during preprocessing.
+  const image=await uploadImageToProvider(p,body.image_url);
+  const payload=buildPayload(p,body,image);
   const r=await fetch(`${p.base}/gradio_api/call/${encodeURIComponent(p.api)}`,{
     method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)
   });
