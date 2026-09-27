@@ -99,6 +99,7 @@ def run_brain_cycle(
     economics_by_territory: Mapping[str,Mapping[str,Mapping[str,int|None]]],
     validation_modes: Mapping[str,str],
     operational_constraints_by_territory: Mapping[str,Mapping[str,object|None]],
+    acquisition_context_by_territory: Optional[Mapping[str,Mapping[str,object]]]=None,
 ) -> tuple[BrainOpportunityPacket,...]:
     materialized_rows=tuple(dict(row) for row in rows)
     rows_by_signal_id={
@@ -140,12 +141,15 @@ def run_brain_cycle(
             values=[v.get(key) for v in known_econ if v.get(key) is not None]
             if values:
                 flattened[key]=max(values) if key=="expected_contribution_minor" else min(values)
+        acquisition_contexts=acquisition_context_by_territory or {}
         critic=challenge(
             evidence_refs=scout.evidence_refs,
             independent_root_count=len(scout.independent_roots),
             existing_solution_ids=existing,
             claimed_economics=flattened,
             operational_constraints=operational_constraints_by_territory.get(group.territory_key,{}),
+            territory_key=group.territory_key,
+            acquisition_context=acquisition_contexts.get(group.territory_key,{}),
         )
         concepts=()
         if critic.safe_to_forward:
