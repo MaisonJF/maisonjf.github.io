@@ -22,6 +22,8 @@ def challenge(
     claimed_economics: Mapping[str, Optional[int]],
     operational_constraints: Mapping[str, Optional[object]],
     contradiction_refs: Sequence[str]=(),
+    territory_key: Optional[str]=None,
+    acquisition_context: Optional[Mapping[str,object]]=None,
 ) -> CriticVerdict:
     objections=[]
     missing=[]
@@ -39,6 +41,22 @@ def challenge(
 
     if existing_solution_ids:
         objections.append("must_compare_existing_assets_before_new_creation")
+
+    if territory_key == "organic_discovery":
+        ctx=acquisition_context or {}
+        required=(
+            "attention_evidence","distribution_surface","audience_or_human_signal",
+            "identification_trigger","zero_cost_route","maison_destination",
+            "scale_or_propagation_mechanism","measurement_plan",
+        )
+        for key in required:
+            value=ctx.get(key)
+            if value is None or value is False or value == "" or value == () or value == []:
+                missing.append("acquisition:"+key)
+        if ctx.get("zero_cost_route") is False:
+            objections.append("paid_route_not_first_choice")
+        if ctx.get("scale_or_propagation_mechanism") is False:
+            objections.append("no_scale_or_propagation_mechanism")
 
     for key in ("capacity","stock","legal_or_safety_review","delivery_feasibility"):
         if operational_constraints.get(key) is None:
