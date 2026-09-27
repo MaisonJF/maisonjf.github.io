@@ -1,0 +1,43 @@
+{
+  "contract_version": "MAISON-COMMERCIAL-RECOVERY-1.0",
+  "purpose": "Preserve internal commercial work before downstream catalogue or derived-artifact writes are attempted.",
+  "principle": "A failed write may delay integration; it must never erase a commercial candidate.",
+  "authority": {
+    "internal_preservation": true,
+    "catalogue_write": false,
+    "price_write": false,
+    "checkout_write": false,
+    "public_write": false,
+    "launch_authorized": false,
+    "human_decision_automated": false
+  },
+  "canonical_catalogues": {
+    "products": "data/products.js",
+    "services": "data/services.js",
+    "parallel_catalogues_forbidden": true
+  },
+  "journal": {
+    "kind": "append_only_recovery_journal",
+    "states": ["captured", "pending_write", "integrated", "superseded", "rejected"],
+    "terminal_states": ["integrated", "superseded", "rejected"],
+    "required_fields": ["recovery_id", "kind", "payload", "intended_destination", "state", "created_at", "updated_at"],
+    "optional_fields": ["source_ref", "evidence_refs", "attempt_count", "last_error", "integrated_ref"],
+    "forbidden_payloads": ["pii", "private_conversations", "paid_content_body", "credentials", "payment_data"]
+  },
+  "write_protocol": [
+    "capture_before_downstream_write",
+    "attempt_only_pre_authorized_destination",
+    "on_failure_keep_pending_write_and_record_error",
+    "retry_from_same_recovery_id",
+    "after_success_read_back_destination",
+    "mark_integrated_only_after_readback",
+    "never_delete_unresolved_record"
+  ],
+  "reconciliation": {
+    "compare_pending_records_with_canonical_destinations": true,
+    "missing_destination_keeps_pending": true,
+    "matching_destination_marks_integrated": true,
+    "conflicting_destination_requires_review": true
+  },
+  "relationship_to_a14": "A14 offer hypotheses remain analytical opportunity records. This contract preserves intended commercial integration work and does not replace A14, A12, product/service catalogues, or the Knowledge Graph."
+}
