@@ -770,6 +770,55 @@ export const A2_SOURCE_REGISTRY={
           "minimum": 0
         }
       }
+    },
+    "tiktok-creator-search-insights": {
+      "status": "planned_manual_capture",
+      "privacy_class": [
+        "aggregated",
+        "public_web"
+      ],
+      "allowed_event_prefixes": [
+        "discovery."
+      ],
+      "metadata": {
+        "topic_id": {
+          "type": "token",
+          "maxLength": 160
+        },
+        "territory_id": {
+          "type": "token",
+          "maxLength": 120
+        },
+        "signal_kind": {
+          "type": "token",
+          "maxLength": 80
+        },
+        "demand_bucket": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "growth_bucket": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "content_gap": {
+          "type": "boolean"
+        },
+        "observed_at": {
+          "type": "token",
+          "maxLength": 40
+        },
+        "source_ref_hash": {
+          "type": "sha256"
+        }
+      },
+      "notes": [
+        "TikTok Creator Search Insights is a discovery-demand source for public/aggregated topic signals, including content-gap and growth indications.",
+        "Use as evidence to compare against every canonical Ocean before proposing novelty; matching signals enrich the existing Ocean.",
+        "A TikTok trend alone never creates a new Ocean. New Oceans still require material semantic distinction and at least two independent evidence signals.",
+        "No usernames, comments, private account data, raw personal search history or direct PII may enter A2/Brain.",
+        "Initial capture is manual/privacy-reviewed until a supported authenticated adapter exists."
+      ]
     }
   }
 };
