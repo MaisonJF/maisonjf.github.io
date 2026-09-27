@@ -1,0 +1,133 @@
+name: Maison Video Smoke Test
+run-name: Maison Video Smoke Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/maison-video-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Generate one-second video
+        id: generate
+        shell: bash
+        env:
+          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          VIDEO_GENERATION_TOKEN: ${{ secrets.VIDEO_GENERATION_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+          base="${MAISON_BRAIN_PRIVATE_URL%/}"
+          access_id="$CF_ACCESS_CLIENT_ID"
+          access_secret="$CF_ACCESS_CLIENT_SECRET"
+          shopt -s nocasematch
+          if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then access_id="${BASH_REMATCH[1]}"; fi
+          if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then access_secret="${BASH_REMATCH[1]}"; fi
+          shopt -u nocasematch
+
+          payload='{"image_url":"https://maison-jf.com/images/ebooks/posters/casos_cinzentos_poster.webp","prompt":"Subtle cinematic noir motion only: warm desk-lamp flicker, faint drifting atmosphere, gentle parallax across investigation photographs and red strings, distant harbour lights shimmering. Preserve poster composition and typography.","duration_seconds":1,"steps":4,"seed":42,"randomize_seed":false}'
+          body="$(mktemp)"
+          status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' --request POST \
+            --header "Accept: application/json" \
+            --header "Content-Type: application/json" \
+            --header "X-Maison-Video-Token: $VIDEO_GENERATION_TOKEN" \
+            --header "CF-Access-Client-Id: $access_id" \
+            --header "CF-Access-Client-Secret: $access_secret" \
+            --data "$payload" "$base/internal/video/generate")"
+          cat "$body"
+          if [[ "$status" != "202" ]]; then exit 1; fi
+
+          python - "$body" <<'PY'
+          import json, os, sys
+          with open(sys.argv[1], encoding="utf-8") as fh:
+              p=json.load(fh)
+          assert p.get("state") == "queued", p
+          assert p.get("billing_allowed") is False, p
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"provider={p['provider']}\n")
+              out.write(f"job_id={p['job_id']}\n")
+          print("Provider:", p["provider"])
+          print("Job ID:", p["job_id"])
+          PY
+
+      - name: Collect MP4
+        shell: bash
+        env:
+          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          VIDEO_GENERATION_TOKEN: ${{ secrets.VIDEO_GENERATION_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+          VIDEO_PROVIDER: ${{ steps.generate.outputs.provider }}
+          VIDEO_JOB_ID: ${{ steps.generate.outputs.job_id }}
+        run: |
+          set -euo pipefail
+          base="${MAISON_BRAIN_PRIVATE_URL%/}"
+          access_id="$CF_ACCESS_CLIENT_ID"
+          access_secret="$CF_ACCESS_CLIENT_SECRET"
+          shopt -s nocasematch
+          if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then access_id="${BASH_REMATCH[1]}"; fi
+          if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then access_secret="${BASH_REMATCH[1]}"; fi
+          shopt -u nocasematch
+
+          result="$(mktemp)"
+          curl --fail --silent --show-error \
+            --header "Accept: text/event-stream" \
+            --header "X-Maison-Video-Token: $VIDEO_GENERATION_TOKEN" \
+            --header "CF-Access-Client-Id: $access_id" \
+            --header "CF-Access-Client-Secret: $access_secret" \
+            "$base/internal/video/result?provider=$VIDEO_PROVIDER&job_id=$VIDEO_JOB_ID" > "$result"
+          cat "$result"
+
+          if grep -q '^event: error' "$result"; then
+            echo "Provider reported an execution error."
+            exit 1
+          fi
+
+          video_url="$(python - "$result" <<'PY'
+          import json, re, sys
+          text=open(sys.argv[1], encoding="utf-8").read()
+          urls=[]
+          def walk(x):
+              if isinstance(x,dict):
+                  for k,v in x.items():
+                      if k in ("url","path") and isinstance(v,str) and v.startswith("http"):
+                          urls.append(v)
+                      walk(v)
+              elif isinstance(x,list):
+                  for v in x: walk(v)
+          for line in text.splitlines():
+              if not line.startswith("data:"):
+                  continue
+              raw=line[5:].strip()
+              try:
+                  walk(json.loads(raw))
+              except Exception:
+                  urls += re.findall(r'https://[^"\\s]+', raw)
+          candidates=[u for u in urls if ".mp4" in u.lower() or "video" in u.lower()]
+          if candidates:
+              print(candidates[-1])
+          PY
+          )"
+          test -n "$video_url"
+          mkdir -p video-output
+          curl --fail --location --silent --show-error "$video_url" --output video-output/casos-cinzentos-smoke-test.mp4
+          test -s video-output/casos-cinzentos-smoke-test.mp4
+          echo "MP4 collected successfully"
+
+      - name: Upload MP4 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: casos-cinzentos-video-smoke-test
+          path: video-output/casos-cinzentos-smoke-test.mp4
+          if-no-files-found: error
+          retention-days: 7
