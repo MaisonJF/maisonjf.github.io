@@ -122,6 +122,24 @@
         "post_write_readback_verification",
         "retry_after_fresh_read_on_sha_conflict"
       ]
+    },
+    "commercial_recovery_capture": {
+      "repo_write": "internal_recovery_only",
+      "allowed_paths": [
+        ".github/maison-growth/brain/commercial-recovery-contract.json"
+      ],
+      "authority": "explicit_human_authorization_2026-09-27",
+      "constraints": [
+        "preservation_only_not_catalogue_authority",
+        "capture_before_downstream_write",
+        "no_public_write",
+        "no_price_checkout_payment_or_legal_change",
+        "no_personal_or_sensitive_data",
+        "no_private_conversation_content",
+        "no_paid_body_content",
+        "retry_unresolved_without_erasing_payload",
+        "mark_integrated_only_after_destination_readback"
+      ]
     }
   },
   "protected_path_exceptions": [
