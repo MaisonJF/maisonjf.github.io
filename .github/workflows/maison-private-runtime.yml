@@ -58,6 +58,11 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Refresh derived editorial context for manual apply
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        run: |
+          node .github/maison-growth/brain/build_editorial_queue.mjs
+
       - name: Validate global health gate
         run: python .github/maison-growth/brain/validate_global_health_gate.py
 
