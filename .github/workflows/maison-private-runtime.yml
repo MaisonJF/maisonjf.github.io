@@ -218,7 +218,7 @@ jobs:
           status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' \
             --header "Accept: application/json" \
             --header "User-Agent: MAISON-JF-Brain/1.0" \
-            --header "X-Maison-Video-Token: $VIDEO_GENERATION_TOKEN" \
+            --header "Authorization: Bearer $VIDEO_GENERATION_TOKEN" \
             --header "CF-Access-Client-Id: $CF_ACCESS_CLIENT_ID" \
             --header "CF-Access-Client-Secret: $CF_ACCESS_CLIENT_SECRET" \
             "$base/internal/video/health")"
