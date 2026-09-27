@@ -2,8 +2,21 @@
 // This bridge deliberately uses only unauthenticated public ZeroGPU Spaces.
 // No HF token, billing credential, paid inference endpoint or automatic purchase is accepted.
 
+const DEFAULT_NEGATIVE_PROMPT = 'low quality, blurry, distorted, deformed, static frame, text artifacts, watermark';
+
 const DEFAULTS = [
-  { id: 'wan22-tinchote', base: 'https://tinchote-wan-2-2-14b-image-to-video.hf.space', api: 'generate_video' }
+  {
+    id: 'wan22-aoti-fast',
+    base: 'https://zerogpu-aoti-wan2-2-fp8da-aoti-faster.hf.space',
+    api: 'generate_video',
+    protocol: 'wan22_aoti_9'
+  },
+  {
+    id: 'wan22-r3gm-preview',
+    base: 'https://r3gm-wan2-2-fp8da-aoti-preview.hf.space',
+    api: 'generate_video',
+    protocol: 'wan22_aoti_9'
+  }
 ];
 
 function on(v){ return String(v ?? '').toLowerCase() === 'true'; }
@@ -17,7 +30,12 @@ function providers(env){
   return p.map(x=>{
     const base=String(x.base||'').replace(/\/+$/,'');
     if(!/^https:\/\/[a-z0-9-]+\.hf\.space$/i.test(base)) throw new Error('video_provider_must_be_public_hf_space');
-    return {id:String(x.id||''),base,api:String(x.api||'generate_video')};
+    return {
+      id:String(x.id||''),
+      base,
+      api:String(x.api||'generate_video'),
+      protocol:String(x.protocol||'legacy_6')
+    };
   });
 }
 function fileData(url){
@@ -25,12 +43,27 @@ function fileData(url){
   if(u.protocol!=='https:') throw new Error('image_url_must_be_https');
   return {path:u.href,url:u.href,orig_name:'maison-source.webp',meta:{_type:'gradio.FileData'}};
 }
-async function submit(p,body){
+function buildPayload(p,body){
   const duration=Math.min(3,Math.max(1,Number(body.duration_seconds||2)));
   const steps=Math.min(4,Math.max(1,Number(body.steps||4)));
   const seed=Number.isInteger(body.seed)?body.seed:42;
-  const payload={data:[fileData(body.image_url),String(body.prompt||''),duration,steps,seed,body.randomize_seed!==false]};
-  if(!payload.data[1].trim()) throw new Error('prompt_required');
+  const randomize=body.randomize_seed!==false;
+  const prompt=String(body.prompt||'');
+  if(!prompt.trim()) throw new Error('prompt_required');
+  const image=fileData(body.image_url);
+
+  // The current Wan2.2 AoT public ZeroGPU app exposes Gradio inputs in this order:
+  // image, prompt, steps, negative_prompt, duration, guidance_1, guidance_2, seed, randomize_seed.
+  if(p.protocol==='wan22_aoti_9'){
+    const negative=String(body.negative_prompt||DEFAULT_NEGATIVE_PROMPT);
+    return {data:[image,prompt,steps,negative,duration,1,1,seed,randomize]};
+  }
+
+  // Backward-compatible adapter for explicitly configured legacy providers only.
+  return {data:[image,prompt,duration,steps,seed,randomize]};
+}
+async function submit(p,body){
+  const payload=buildPayload(p,body);
   const r=await fetch(`${p.base}/gradio_api/call/${encodeURIComponent(p.api)}`,{
     method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)
   });
