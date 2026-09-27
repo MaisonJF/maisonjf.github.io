@@ -296,6 +296,35 @@ export const VPC_OCEAN_SIGNALS=[
       "limites digitais",
       "estar presente sem estar sempre alcançável"
     ]
+  },
+  {
+    "id": "descoberta-organica-e-reconhecimento-da-maison",
+    "painLanguage": "A Maison pode ter respostas, produtos, experiências e linguagem relevantes e, ainda assim, permanecer invisível para pessoas que já procuram exactamente esses temas. O problema não é apenas converter quem entra: é ser descoberta, reconhecida e lembrada antes da intenção de compra.",
+    "intent": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
+    "themes": [
+      "onde estão as pessoas que a Maison já consegue ajudar",
+      "o que procuram antes de conhecer a Maison",
+      "onde essas conversas acontecem publicamente",
+      "que superfícies gratuitas podem apresentar a Maison",
+      "como gerar reconhecimento antes da compra",
+      "que activos Maison já respondem à procura observada",
+      "como transformar descoberta em visita sem publicidade paga"
+    ]
+  },
+  {
+    "id": "atelier-principios-transferiveis-e-dna-maison",
+    "painLanguage": "A Maison não precisa de inventar do zero todos os mecanismos de atenção, desejo, identificação, memória, participação e propagação. Séculos de psicologia, cultura, publicidade, entretenimento, luxo, design, retalho e construção de marcas contêm mecanismos observáveis que podem ser estudados, testados e reinterpretados sem copiar a expressão de quem os dominou.",
+    "intent": "estudar continuamente casos de excelência e mecanismos psicológicos, culturais, criativos e comerciais transferíveis para a Maison JF; descobrir também novos mestres históricos ou actuais; converter observação em princípios, hipóteses mensuráveis e aprendizagem proprietária Maison",
+    "themes": [
+      "porque é que isto prende a atenção",
+      "porque é que isto parece falar comigo",
+      "como se transforma uma ideia num acontecimento",
+      "como se constrói desejo sem explicar demais",
+      "o que torna um conceito repetível e transmissível",
+      "que mecanismos fazem uma marca entrar na cultura",
+      "quem resolveu extraordinariamente bem um problema que a Maison também enfrenta",
+      "como combinar mecanismos sem perder o ADN Maison"
+    ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-09-18";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-09-27";
