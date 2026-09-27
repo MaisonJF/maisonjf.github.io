@@ -8,6 +8,8 @@ on:
       - main
     paths:
       - '.github/workflows/maison-video-smoke.yml'
+      - 'workers/maison-intelligence/src/video_generation.js'
+      - 'workers/maison-intelligence/test/video_generation.test.mjs'
 
 permissions:
   contents: read
@@ -17,6 +19,76 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: refs/heads/main
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Render private Worker config
+        env:
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+        run: |
+          python .github/maison-growth/runtime/render_private_worker_config.py \
+            private_brain_read_candidate \
+            --template workers/maison-intelligence/wrangler.jsonc \
+            --private-url "$BRAIN_CONTROL_API_URL" \
+            --output workers/maison-intelligence/wrangler.private.runtime.jsonc
+
+      - name: Validate and deploy current video Worker
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npm install --ignore-scripts
+          npm test
+          npm run check
+          npx wrangler deploy --config wrangler.private.runtime.jsonc
+
+      - name: Wait for deployed video surface
+        shell: bash
+        env:
+          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          VIDEO_GENERATION_TOKEN: ${{ secrets.VIDEO_GENERATION_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+          base="${MAISON_BRAIN_PRIVATE_URL%/}"
+          access_id="$CF_ACCESS_CLIENT_ID"
+          access_secret="$CF_ACCESS_CLIENT_SECRET"
+          shopt -s nocasematch
+          if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then access_id="${BASH_REMATCH[1]}"; fi
+          if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then access_secret="${BASH_REMATCH[1]}"; fi
+          shopt -u nocasematch
+          for attempt in {1..12}; do
+            body="$(mktemp)"
+            status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' \
+              --header "Accept: application/json" \
+              --header "X-Maison-Video-Token: $VIDEO_GENERATION_TOKEN" \
+              --header "CF-Access-Client-Id: $access_id" \
+              --header "CF-Access-Client-Secret: $access_secret" \
+              "$base/internal/video/health")"
+            if [[ "$status" == "200" ]] && grep -q 'wan22-aoti-fast' "$body"; then
+              cat "$body"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Video surface did not become ready."
+          cat "$body"
+          exit 1
+
       - name: Generate one-second video
         id: generate
         shell: bash
