@@ -288,7 +288,8 @@ jobs:
           print("Job ID:", p.get("job_id"))
           print("Result path:", p.get("result_path"))
           with open(__import__("os").environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
-              out.write(f"provider={p['provider']}\\njob_id={p['job_id']}\\n")
+              out.write(f"provider={p['provider']}\n")
+              out.write(f"job_id={p['job_id']}\n")
           PY
 
       - name: Collect one-second video result
