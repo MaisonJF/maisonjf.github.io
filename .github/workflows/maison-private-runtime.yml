@@ -229,33 +229,46 @@ jobs:
           fi
           shopt -u nocasematch
           body="$(mktemp)"
-          status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' \
-            --header "Accept: application/json" \
-            --header "User-Agent: MAISON-JF-Brain/1.0" \
-            --header "X-Maison-Video-Token: $VIDEO_GENERATION_TOKEN" \
-            --header "CF-Access-Client-Id: $access_id" \
-            --header "CF-Access-Client-Secret: $access_secret" \
-            "$base/internal/video/health")"
-          if [[ "$status" != "200" ]]; then
-            echo "Video health failed with HTTP $status"
-            cat "$body"
-            exit 1
-          fi
-          python - "$body" <<'PY'
+          ready=0
+          for attempt in {1..12}; do
+            status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' \
+              --header "Accept: application/json" \
+              --header "User-Agent: MAISON-JF-Brain/1.0" \
+              --header "X-Maison-Video-Token: $VIDEO_GENERATION_TOKEN" \
+              --header "CF-Access-Client-Id: $access_id" \
+              --header "CF-Access-Client-Secret: $access_secret" \
+              "$base/internal/video/health")"
+            if [[ "$status" == "200" ]] && python - "$body" <<'PY'
           import json, sys
           with open(sys.argv[1], encoding="utf-8") as fh:
               payload=json.load(fh)
-          assert payload.get("service") == "maison_short_video", payload
-          assert payload.get("enabled") is True, payload
-          assert payload.get("mode") == "zero_cost_only", payload
-          assert payload.get("billing_allowed") is False, payload
           providers=payload.get("providers", [])
-          assert "wan22-tinchote" not in providers, payload
-          assert "wan22-aoti-fast" in providers, payload
-          assert "wan22-r3gm-preview" in providers, payload
+          ok=(
+              payload.get("service") == "maison_short_video"
+              and payload.get("enabled") is True
+              and payload.get("mode") == "zero_cost_only"
+              and payload.get("billing_allowed") is False
+              and "wan22-tinchote" not in providers
+              and "wan22-aoti-fast" in providers
+              and "wan22-r3gm-preview" in providers
+          )
+          if not ok:
+              raise SystemExit(1)
           print("Maison short-video health: OK")
           print("Providers:", ", ".join(providers))
           PY
+            then
+              ready=1
+              break
+            fi
+            echo "Waiting for current video registry to propagate (attempt $attempt/12)..."
+            sleep 5
+          done
+          if [[ "$ready" != "1" ]]; then
+            echo "Video health did not converge to the current provider registry."
+            cat "$body"
+            exit 1
+          fi
 
       - name: Generate one-second video smoke test
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
