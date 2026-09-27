@@ -1,0 +1,65 @@
+name: Maison Maintenance
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Authorised maintenance operation
+        required: true
+        type: choice
+        options:
+          - apply_b2b_feedback_0018
+          - rebuild_commercial_context
+          - validate_global_health
+          - deploy_private_runtime
+      confirm_write:
+        description: Confirm write operation when applicable
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Apply reviewed B2B feedback migration 0018
+        if: ${{ inputs.operation == 'apply_b2b_feedback_0018' }}
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          test "${{ inputs.confirm_write }}" = "true"
+          npm install --ignore-scripts
+          npx wrangler d1 execute maison-growth-engine --remote --file="../../.github/maison-growth/brain/migrations/0018_b2b_feedback.sql"
+          bash scripts/verify-growth-schema.sh maison-growth-engine
+
+      - name: Rebuild commercial context
+        if: ${{ inputs.operation == 'rebuild_commercial_context' }}
+        run: |
+          set -euo pipefail
+          bash .github/maison-growth/brain/rebuild_commercial_context.sh --write
+          bash .github/maison-growth/brain/rebuild_commercial_context.sh --check
+
+      - name: Validate global health
+        if: ${{ inputs.operation == 'validate_global_health' }}
+        run: python .github/maison-growth/brain/validate_global_health_gate.py
+
+      - name: Deploy private runtime
+        if: ${{ inputs.operation == 'deploy_private_runtime' }}
+        run: |
+          echo "Use Maison Private Runtime Deploy for deployment so its Access, schema and boundary guards remain authoritative."
+          exit 1
