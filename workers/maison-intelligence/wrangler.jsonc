@@ -19,7 +19,7 @@
     "BRAIN_PROPOSAL_API_ENABLED": "false",
     "COMMERCIAL_RECOVERY_API_ENABLED": "false",
     "VIDEO_GENERATION_ENABLED": "true",
-    "VIDEO_ZERO_COST_PROVIDERS_JSON": "[{\"id\":\"wan22-tinchote\",\"base\":\"https://tinchote-wan-2-2-14b-image-to-video.hf.space\",\"api\":\"generate_video\"}]",
+    "VIDEO_ZERO_COST_PROVIDERS_JSON": "[{\"id\":\"wan22-aoti-fast\",\"base\":\"https://zerogpu-aoti-wan2-2-fp8da-aoti-faster.hf.space\",\"api\":\"generate_video\",\"protocol\":\"wan22_aoti_9\"},{\"id\":\"wan22-r3gm-preview\",\"base\":\"https://r3gm-wan2-2-fp8da-aoti-preview.hf.space\",\"api\":\"generate_video\",\"protocol\":\"wan22_aoti_9\"}]",
     "BRAIN_REVIEW_DECISION_ENABLED": "false",
     "KILL_SWITCH": "false",
     "PROMPTS_PER_RUN": "2",
