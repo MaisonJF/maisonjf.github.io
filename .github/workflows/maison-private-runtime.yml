@@ -288,7 +288,7 @@ jobs:
           if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then access_id="${BASH_REMATCH[1]}"; fi
           if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then access_secret="${BASH_REMATCH[1]}"; fi
           shopt -u nocasematch
-          payload='{"image_url":"https://maison-jf.com/images/ebooks/posters/casos-cinzentos.webp","prompt":"Subtle cinematic noir motion only: warm desk-lamp flicker, faint drifting atmosphere, gentle parallax across investigation photographs and red strings, distant harbour lights shimmering. Preserve poster composition and typography.","duration_seconds":1,"steps":4,"seed":42,"randomize_seed":false}'
+          payload='{"image_url":"https://maison-jf.com/images/ebooks/posters/casos_cinzentos_poster.webp","prompt":"Subtle cinematic noir motion only: warm desk-lamp flicker, faint drifting atmosphere, gentle parallax across investigation photographs and red strings, distant harbour lights shimmering. Preserve poster composition and typography.","duration_seconds":1,"steps":4,"seed":42,"randomize_seed":false}'
           body="$(mktemp)"
           status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' --request POST \
             --header "Accept: application/json" --header "Content-Type: application/json" \
