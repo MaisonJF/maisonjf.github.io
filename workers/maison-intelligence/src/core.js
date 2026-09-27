@@ -5,6 +5,8 @@ const TRACKING_PARAMS = new Set([
 
 export const DISCOVERY_TERRITORY = { key: 'organic_discovery', query: 'free, scalable organic discovery for MAISON JF: places, searches, conversations, formats and distribution surfaces where people who do not yet know the brand can recognise themselves in a Maison idea before purchase intent exists' };
 
+export const ATELIER_TERRITORY = { key: 'atelier', query: 'transferable mechanisms of excellence in psychology, behaviour, culture, advertising, entertainment, luxury, design, retail, storytelling, UX, virality and brand building that MAISON JF can reinterpret and test without copying expression or identity' };
+
 export const TERRITORIES = [
   { key: 'relationships', query: 'relationships, loneliness, dating, attachment, communication and emotional disconnection' },
   { key: 'work', query: 'work, job search, career uncertainty, burnout, workplace frustration and career change' },
@@ -59,6 +61,20 @@ export function privacySafeText(text, maxChars = 9000) {
 }
 
 export function buildSensorPrompt(territory) {
+  if (territory.key === ATELIER_TERRITORY.key) {
+    return [
+      'Act as a read-only Atelier research sensor for MAISON JF. Study excellence, not audience demand.',
+      'Mission: find documented mechanisms of attention, identification, memory, desire, participation, propagation, conversion and cultural meaning that MAISON JF can understand, reinterpret and test.',
+      'Starting references may include Barnum/Forer and other psychology or behavioural mechanisms; P. T. Barnum where relevant; Martha Stewart; Alex Hormozi; Dior; Saint Laurent; Tom Ford; Apple. Do not limit discovery to these names, industries, countries or eras.',
+      'Fame is not evidence of excellence. Prefer documented cases, primary material, reputable research and observable outcomes. Discover lesser-known masters when they solved a Maison-relevant problem exceptionally well.',
+      'Never copy voice, protected expression, identity or surface aesthetics. Extract the mechanism and transferable principle, then propose a distinctly Maison hypothesis.',
+      'For every useful case distinguish: master/case; observed evidence; mechanism; why it may work; transferable principle; possible Maison application; measurable hypothesis; risks or counter-evidence.',
+      'Psychological mechanisms may be combined. Treat them as testable hypotheses, not magic tricks or universal truths.',
+      'Zero-cost first and existing-assets first. Prefer applications that can improve current discovery, content, Jogo, Oráculo, tests, ebooks, guides, products or experiences before proposing new infrastructure.',
+      'Do not collect personal identifiers. Return a concise synthesis (max 900 words) with public citations whenever supported.',
+      'Do not publish, contact anyone, spend money, change the site, catalogue, prices or checkout. You are a sensor only.'
+    ].join('\\n');
+  }
   if (territory.key === DISCOVERY_TERRITORY.key) {
     return [
       'Act as a read-only organic-discovery research sensor for MAISON JF. Use the freshest public information available to your system.',
