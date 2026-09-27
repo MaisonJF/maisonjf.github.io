@@ -48,6 +48,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Manual deploys must use the current main head, not a stale workflow-dispatch revision.
+          ref: ${{ github.event_name == 'workflow_dispatch' && 'refs/heads/main' || github.sha }}
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -246,8 +249,12 @@ jobs:
           assert payload.get("enabled") is True, payload
           assert payload.get("mode") == "zero_cost_only", payload
           assert payload.get("billing_allowed") is False, payload
+          providers=payload.get("providers", [])
+          assert "wan22-tinchote" not in providers, payload
+          assert "wan22-aoti-fast" in providers, payload
+          assert "wan22-r3gm-preview" in providers, payload
           print("Maison short-video health: OK")
-          print("Providers:", ", ".join(payload.get("providers", [])))
+          print("Providers:", ", ".join(providers))
           PY
 
       - name: Generate one-second video smoke test
