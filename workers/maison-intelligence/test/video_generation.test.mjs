@@ -35,6 +35,10 @@ test('default Wan2.2 provider uploads the image and matches the live 9-input Gra
      assert.ok(init.body instanceof FormData);
      return new Response(JSON.stringify(['/tmp/gradio/abc123/maison-source.webp']),{status:200,headers:{'Content-Type':'application/json'}});
    }
+   if(target.includes('/gradio_api/file=%2Ftmp%2Fgradio%2Fabc123%2Fmaison-source.webp')){
+     assert.equal(init.headers.Range,'bytes=0-0');
+     return new Response('x',{status:206,headers:{'Content-Range':'bytes 0-0/1'}});
+   }
    if(target.endsWith('/gradio_api/call/generate_video')){
      captured=JSON.parse(init.body);
      return new Response(JSON.stringify({event_id:'abcdef123456'}),{status:200,headers:{'Content-Type':'application/json'}});
@@ -53,9 +57,10 @@ test('default Wan2.2 provider uploads the image and matches the live 9-input Gra
    const b=await r.json();
    assert.equal(r.status,202);
    assert.equal(b.provider,'wan22-aoti-fast');
-   assert.equal(targets.length,3);
+   assert.equal(targets.length,4);
    assert.match(targets[1],/zerogpu-aoti-wan2-2-fp8da-aoti-faster\.hf\.space\/gradio_api\/upload$/);
-   assert.match(targets[2],/zerogpu-aoti-wan2-2-fp8da-aoti-faster\.hf\.space\/gradio_api\/call\/generate_video$/);
+   assert.match(targets[2],/zerogpu-aoti-wan2-2-fp8da-aoti-faster\.hf\.space\/gradio_api\/file=%2Ftmp%2Fgradio%2Fabc123%2Fmaison-source\.webp$/);
+   assert.match(targets[3],/zerogpu-aoti-wan2-2-fp8da-aoti-faster\.hf\.space\/gradio_api\/call\/generate_video$/);
    assert.equal(captured.data.length,9);
    assert.equal(captured.data[0].path,'/tmp/gradio/abc123/maison-source.webp');
    assert.equal(captured.data[0].meta._type,'gradio.FileData');
