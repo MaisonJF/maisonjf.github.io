@@ -1,4 +1,5 @@
-name: Maison Private Runtime Deploy\nrun-name: Maison Private Runtime Deploy
+name: Maison Private Runtime Deploy
+run-name: Maison Private Runtime Deploy
 
 on:
   pull_request:
