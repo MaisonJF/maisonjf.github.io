@@ -800,12 +800,12 @@ const DOOR_PRESENCA={
     'Combinamos tempo, lugar e limites.':'Combinamos tempo, lugar e limites.',
     'Só então pagas.':'Só então você paga.',
     'Ver condições':'Ver condições',
-    "'FALAR SOBRE PRESENÇA':'FALAR SOBRE PRESENÇA',
+    'FALAR SOBRE PRESENÇA':'FALAR SOBRE PRESENÇA',
     'Presença Online. 60 minutos por voz ou vídeo. Valor: 35 €. Data e hora são confirmadas antes. Não é consulta nem Escuta Orientada.':'Presença Online. 60 minutos por voz ou vídeo. Valor: 35 €. Data e hora são confirmadas antes. Não é consulta nem Escuta Orientada.',
     'Presença Social e Presença Próxima. Mínimo de 2 horas. Valor: 80 € · 2 horas. Hora adicional 40 €. O plano, o local, as despesas e deslocações extraordinárias são combinados antes. Intimidade não faz parte do serviço e os limites combinados não mudam.':'Presença Social e Presença Próxima. Mínimo de 2 horas. Valor: 80 € · 2 horas. Hora adicional 40 €. O plano, o local, as despesas e deslocações extraordinárias são combinados antes. Intimidade não faz parte do serviço e os limites combinados não mudam.',
     'SOS 1 dia. Valor: 60 €. Janela acordada de até 8 horas para uma situação concreta. Até três atualizações por texto ou áudio. As respostas são assíncronas e não existe promessa de resposta imediata.':'SOS 1 dia. Valor: 60 €. Janela acordada de até 8 horas para uma situação concreta. Até três atualizações por texto ou áudio. As respostas são assíncronas e não existe promessa de resposta imediata.',
     'SOS 1 semana. Valor: 120 €. Sete dias para a mesma situação. Uma atualização por dia e uma resposta consolidada até 24 horas depois, dentro das condições combinadas. Atualizações não utilizadas não acumulam.':'SOS 1 semana. Valor: 120 €. Sete dias para a mesma situação. Uma atualização por dia e uma resposta consolidada até 24 horas depois, dentro das condições combinadas. Atualizações não utilizadas não acumulam.',
-    'Presença é para adultos. Não é um serviço sexual, psicoterapia, tratamento clínico, linha de crise ou serviço de emergência. O SOS não funciona como apoio 24 horas.':'Presença é para adultos. Não é um serviço sexual, psicoterapia, tratamento clínico, linha de crise ou serviço de emergência. O SOS não funciona como apoio 24 horas.'"
+    'Presença é para adultos. Não é um serviço sexual, psicoterapia, tratamento clínico, linha de crise ou serviço de emergência. O SOS não funciona como apoio 24 horas.':'Presença é para adultos. Não é um serviço sexual, psicoterapia, tratamento clínico, linha de crise ou serviço de emergência. O SOS não funciona como apoio 24 horas.'
   },
   en:{
     'Presença | MAISON JF®':'Presence | MAISON JF®',
@@ -837,12 +837,12 @@ const DOOR_PRESENCA={
     'Combinamos tempo, lugar e limites.':'We agree the time, place and boundaries.',
     'Só então pagas.':'Only then do you pay.',
     'Ver condições':'View terms',
-    "'FALAR SOBRE PRESENÇA':'TALK ABOUT PRESENCE',
+    'FALAR SOBRE PRESENÇA':'TALK ABOUT PRESENCE',
     'Presença Online. 60 minutos por voz ou vídeo. Valor: 35 €. Data e hora são confirmadas antes. Não é consulta nem Escuta Orientada.':'Online Presence. 60 minutes by voice or video. Price: €35. Date and time are confirmed beforehand. It is not a consultation or Guided Listening.',
     'Presença Social e Presença Próxima. Mínimo de 2 horas. Valor: 80 € · 2 horas. Hora adicional 40 €. O plano, o local, as despesas e deslocações extraordinárias são combinados antes. Intimidade não faz parte do serviço e os limites combinados não mudam.':'Social Presence and Close Presence. Minimum 2 hours. Price: €80 · 2 hours. Additional hour €40. The plan, location, expenses and extraordinary travel are agreed beforehand. Intimacy is not part of the service and agreed boundaries do not change.',
     'SOS 1 dia. Valor: 60 €. Janela acordada de até 8 horas para uma situação concreta. Até três atualizações por texto ou áudio. As respostas são assíncronas e não existe promessa de resposta imediata.':'SOS 1 day. Price: €60. An agreed window of up to 8 hours for one specific situation. Up to three text or audio updates. Replies are asynchronous and there is no promise of an immediate response.',
     'SOS 1 semana. Valor: 120 €. Sete dias para a mesma situação. Uma atualização por dia e uma resposta consolidada até 24 horas depois, dentro das condições combinadas. Atualizações não utilizadas não acumulam.':'SOS 1 week. Price: €120. Seven days for the same situation. One update per day and one consolidated reply within 24 hours, within the agreed conditions. Unused updates do not roll over.',
-    'Presença é para adultos. Não é um serviço sexual, psicoterapia, tratamento clínico, linha de crise ou serviço de emergência. O SOS não funciona como apoio 24 horas.':'Presence is for adults. It is not a sexual service, psychotherapy, clinical treatment, crisis line or emergency service. SOS is not 24-hour support.'"
+    'Presença é para adultos. Não é um serviço sexual, psicoterapia, tratamento clínico, linha de crise ou serviço de emergência. O SOS não funciona como apoio 24 horas.':'Presence is for adults. It is not a sexual service, psychotherapy, clinical treatment, crisis line or emergency service. SOS is not 24-hour support.'
   },
   es:{
     'Presença | MAISON JF®':'Presencia | MAISON JF®',
@@ -874,12 +874,12 @@ const DOOR_PRESENCA={
     'Combinamos tempo, lugar e limites.':'Acordamos tiempo, lugar y límites.',
     'Só então pagas.':'Solo entonces pagas.',
     'Ver condições':'Ver condiciones',
-    "'FALAR SOBRE PRESENÇA':'HABLAR SOBRE PRESENCIA',
+    'FALAR SOBRE PRESENÇA':'HABLAR SOBRE PRESENCIA',
     'Presença Online. 60 minutos por voz ou vídeo. Valor: 35 €. Data e hora são confirmadas antes. Não é consulta nem Escuta Orientada.':'Presencia Online. 60 minutos por voz o vídeo. Precio: 35 €. La fecha y la hora se confirman antes. No es una consulta ni Escucha Orientada.',
     'Presença Social e Presença Próxima. Mínimo de 2 horas. Valor: 80 € · 2 horas. Hora adicional 40 €. O plano, o local, as despesas e deslocações extraordinárias são combinados antes. Intimidade não faz parte do serviço e os limites combinados não mudam.':'Presencia Social y Presencia Cercana. Mínimo de 2 horas. Precio: 80 € · 2 horas. Hora adicional 40 €. El plan, el lugar, los gastos y desplazamientos extraordinarios se acuerdan antes. La intimidad no forma parte del servicio y los límites acordados no cambian.',
     'SOS 1 dia. Valor: 60 €. Janela acordada de até 8 horas para uma situação concreta. Até três atualizações por texto ou áudio. As respostas são assíncronas e não existe promessa de resposta imediata.':'SOS 1 día. Precio: 60 €. Ventana acordada de hasta 8 horas para una situación concreta. Hasta tres actualizaciones por texto o audio. Las respuestas son asíncronas y no se promete una respuesta inmediata.',
     'SOS 1 semana. Valor: 120 €. Sete dias para a mesma situação. Uma atualização por dia e uma resposta consolidada até 24 horas depois, dentro das condições combinadas. Atualizações não utilizadas não acumulam.':'SOS 1 semana. Precio: 120 €. Siete días para la misma situación. Una actualización al día y una respuesta consolidada hasta 24 horas después, dentro de las condiciones acordadas. Las actualizaciones no utilizadas no se acumulan.',
-    'Presença é para adultos. Não é um serviço sexual, psicoterapia, tratamento clínico, linha de crise ou serviço de emergência. O SOS não funciona como apoio 24 horas.':'Presencia es para adultos. No es un servicio sexual, psicoterapia, tratamiento clínico, línea de crisis ni servicio de emergencia. El SOS no funciona como apoyo 24 horas.'"
+    'Presença é para adultos. Não é um serviço sexual, psicoterapia, tratamento clínico, linha de crise ou serviço de emergência. O SOS não funciona como apoio 24 horas.':'Presencia es para adultos. No es un servicio sexual, psicoterapia, tratamiento clínico, línea de crisis ni servicio de emergencia. El SOS no funciona como apoyo 24 horas.'
   }
 };
 
