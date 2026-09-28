@@ -501,6 +501,78 @@ const FAROL={
 };
 
 
+
+const EBOOKS={
+  'pt-BR':{
+    'Universos MAISON JF®: obras publicadas e sagas inéditas das Éditions Maison JF.':'Universos MAISON JF®: obras publicadas e sagas inéditas das Éditions Maison JF.',
+    'Universos.':'Universos.',
+    'Histórias que continuam depois da última página.':'Histórias que continuam depois da última página.',
+    'Já publicados':'Já publicados',
+    'Livros publicados':'Livros publicados',
+    'Éditions Maison JF apresenta':'Éditions Maison JF apresenta',
+    'Universos por revelar.':'Universos por revelar.',
+    'Histórias, experiências e livros que continuam depois da última página.':'Histórias, experiências e livros que continuam depois da última página.',
+    'Ficção':'Ficção',
+    'Sagas e histórias que atravessam mundos.':'Sagas e histórias que atravessam mundos.',
+    'Clica nos posters para saberes mais sobre cada saga!':'Clique nos pôsteres para saber mais sobre cada saga!',
+    'Livros Interactivos':'Livros Interativos',
+    'Casos, decisões e múltiplos caminhos.':'Casos, decisões e múltiplos caminhos.',
+    'Sem Filtros':'Sem Filtros',
+    'Livros sobre aquilo que pensamos, sentimos e fazemos. Sem fingir que é tudo bonito.':'Livros sobre aquilo que pensamos, sentimos e fazemos. Sem fingir que é tudo bonito.',
+    'Descobrir →':'Descobrir →',
+    'Éditions Maison JF · Brevemente':'Éditions Maison JF · Em breve',
+    'Ampliar 100%':'Ampliar 100%',
+    'Fechar poster ampliado':'Fechar pôster ampliado',
+    'Imagem ampliada; use as setas para percorrer':'Imagem ampliada; use as setas para percorrer'
+  },
+  en:{
+    'Universos | MAISON JF®':'Universes | MAISON JF®',
+    'Universos MAISON JF®: obras publicadas e sagas inéditas das Éditions Maison JF.':'MAISON JF® universes: published works and unreleased sagas from Éditions Maison JF.',
+    'Universos.':'Universes.',
+    'Histórias que continuam depois da última página.':'Stories that continue after the last page.',
+    'Já publicados':'Published',
+    'Livros publicados':'Published books',
+    'Éditions Maison JF apresenta':'Éditions Maison JF presents',
+    'Universos por revelar.':'Universes yet to be revealed.',
+    'Histórias, experiências e livros que continuam depois da última página.':'Stories, experiences and books that continue after the last page.',
+    'Ficção':'Fiction',
+    'Sagas e histórias que atravessam mundos.':'Sagas and stories that cross worlds.',
+    'Clica nos posters para saberes mais sobre cada saga!':'Click the posters to discover more about each saga!',
+    'Livros Interactivos':'Interactive Books',
+    'Casos, decisões e múltiplos caminhos.':'Cases, decisions and multiple paths.',
+    'Sem Filtros':'Unfiltered',
+    'Livros sobre aquilo que pensamos, sentimos e fazemos. Sem fingir que é tudo bonito.':'Books about what we think, feel and do. Without pretending everything is beautiful.',
+    'Descobrir →':'Discover →',
+    'Éditions Maison JF · Brevemente':'Éditions Maison JF · Coming soon',
+    'Ampliar 100%':'Zoom 100%',
+    'Fechar poster ampliado':'Close enlarged poster',
+    'Imagem ampliada; use as setas para percorrer':'Enlarged image; use the arrow keys to move around'
+  },
+  es:{
+    'Universos | MAISON JF®':'Universos | MAISON JF®',
+    'Universos MAISON JF®: obras publicadas e sagas inéditas das Éditions Maison JF.':'Universos MAISON JF®: obras publicadas y sagas inéditas de Éditions Maison JF.',
+    'Universos.':'Universos.',
+    'Histórias que continuam depois da última página.':'Historias que continúan después de la última página.',
+    'Já publicados':'Ya publicados',
+    'Livros publicados':'Libros publicados',
+    'Éditions Maison JF apresenta':'Éditions Maison JF presenta',
+    'Universos por revelar.':'Universos por revelar.',
+    'Histórias, experiências e livros que continuam depois da última página.':'Historias, experiencias y libros que continúan después de la última página.',
+    'Ficção':'Ficción',
+    'Sagas e histórias que atravessam mundos.':'Sagas e historias que atraviesan mundos.',
+    'Clica nos posters para saberes mais sobre cada saga!':'¡Haz clic en los pósteres para saber más sobre cada saga!',
+    'Livros Interactivos':'Libros Interactivos',
+    'Casos, decisões e múltiplos caminhos.':'Casos, decisiones y múltiples caminos.',
+    'Sem Filtros':'Sin Filtros',
+    'Livros sobre aquilo que pensamos, sentimos e fazemos. Sem fingir que é tudo bonito.':'Libros sobre lo que pensamos, sentimos y hacemos. Sin fingir que todo es bonito.',
+    'Descobrir →':'Descubrir →',
+    'Éditions Maison JF · Brevemente':'Éditions Maison JF · Próximamente',
+    'Ampliar 100%':'Ampliar 100%',
+    'Fechar poster ampliado':'Cerrar póster ampliado',
+    'Imagem ampliada; use as setas para percorrer':'Imagen ampliada; usa las flechas para desplazarte'
+  }
+};
+
 const DOOR_CASA={
   'pt-BR':{
     'A Porta Casa da MAISON JF® para quando queres voltar a sentir que chegaste a algum lado teu.':'A Porta Casa da MAISON JF® para quando você quer voltar a sentir que chegou a um lugar seu.',
@@ -815,6 +887,7 @@ const PAGE_MAP={
   '/teste/':TESTE,
   '/produtos/':PRODUCTS,
   '/servicos/':SERVICES,
+  '/ebooks/':EBOOKS,
   '/portas/casa':DOOR_CASA,
   '/portas/corpo':DOOR_CORPO,
   '/portas/cabeca':DOOR_CABECA,
