@@ -10,12 +10,14 @@ from typing import Any, Mapping
 ROOT=Path(__file__).resolve().parent
 QUEUE=ROOT/"editorial-queue.json"
 ASSETS=ROOT/"commercial-assets.generated.json"
+OCEANS=ROOT.parent/"oceans"/"candidates.json"
 
 
 def build_coverage(
     *,
     queue: Mapping[str,Any],
     registry: Mapping[str,Any],
+    canonical_oceans: Mapping[str,Any] | None = None,
 ) -> dict[str,Any]:
     assets={
         str(row.get("asset_ref")):dict(row)
@@ -40,26 +42,47 @@ def build_coverage(
         if raw.get("type")=="oracle_candidate":
             oracle_items[territory]=dict(raw)
 
-    territories=sorted(set(question_items)|set(oracle_items))
+    canonical_rows={}
+    if canonical_oceans is not None:
+        source_rows=canonical_oceans.get("candidates",[]) if isinstance(canonical_oceans,Mapping) else []
+        for raw in source_rows:
+            if not isinstance(raw,Mapping):
+                continue
+            territory=str(raw.get("territory") or raw.get("id") or raw.get("slug") or "").strip()
+            if territory:
+                canonical_rows[territory]=dict(raw)
+
+    territories=sorted(set(canonical_rows)|set(question_items)|set(oracle_items))
     rows=[]
     for territory in territories:
         q=question_items.get(territory)
         o=oracle_items.get(territory)
+        canonical=canonical_rows.get(territory)
+        expected_pdi=bool(canonical.get("questionPotential") is True) if canonical is not None else q is not None
+        expected_oracle=bool(canonical.get("oraclePotential") is True) if canonical is not None else o is not None
         themes=list(q.get("questionThemeCandidates",[])) if q else []
         stages=list(q.get("stageCandidates",[])) if q else []
         question_slots=list(q.get("questionDesignSlots",[])) if q else []
         roles=list(o.get("roleCandidates",[])) if o else []
         gaps=[]
-        if q is None:
+        if expected_pdi and q is None:
             gaps.append("pdi_feed_missing")
-        if o is None:
+        if not expected_pdi and q is not None:
+            gaps.append("pdi_feed_unexpected")
+        if expected_oracle and o is None:
             gaps.append("oracle_feed_missing")
+        if not expected_oracle and o is not None:
+            gaps.append("oracle_feed_unexpected")
         if q is not None and len(question_slots)!=len(themes)*len(stages):
             gaps.append("pdi_slot_contract_mismatch")
         if o is not None and len(roles)!=7:
             gaps.append("oracle_role_contract_mismatch")
         row={
             "territory":territory,
+            "expected":{
+                "pdi":expected_pdi,
+                "oracle":expected_oracle,
+            },
             "pdi":{
                 "asset_ref":pdi_asset["asset_ref"],
                 "eligible":q is not None,
@@ -92,7 +115,7 @@ def build_coverage(
     return {
         "schema_version":"digital_experience_coverage_v1",
         "visibility":"internal_brain",
-        "sources":["editorial-queue.json","commercial-assets.generated.json"],
+        "sources":["../oceans/candidates.json","editorial-queue.json","commercial-assets.generated.json"],
         "contract":{
             "paid_bodies_stored":False,
             "automatic_publication":False,
@@ -122,6 +145,8 @@ def build_coverage(
         },
         "summary":{
             "oceans":len(territories),
+            "expected_pdi_oceans":sum(row["expected"]["pdi"] for row in rows),
+            "expected_oracle_oceans":sum(row["expected"]["oracle"] for row in rows),
             "pdi_oceans":sum(row["pdi"]["eligible"] for row in rows),
             "oracle_oceans":sum(row["oracle"]["eligible"] for row in rows),
             "pdi_theme_hypotheses":sum(row["pdi"]["theme_hypotheses"] for row in rows),
@@ -137,6 +162,7 @@ def load_coverage() -> dict[str,Any]:
     return build_coverage(
         queue=json.loads(QUEUE.read_text(encoding="utf-8")),
         registry=json.loads(ASSETS.read_text(encoding="utf-8")),
+        canonical_oceans=json.loads(OCEANS.read_text(encoding="utf-8")),
     )
 
 
