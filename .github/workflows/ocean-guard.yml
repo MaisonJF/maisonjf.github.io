@@ -32,6 +32,12 @@ jobs:
           node .github/maison-growth/vault/validate_oracle_composer.mjs
           node --check functions/_lib/maison-locales.js
           node --check functions/_lib/maison-localized-content.js
+          node --check functions/_lib/site-i18n.js
+          node --check functions/_lib/site-localizer.js
+          node --check functions/en/[[path]].js
+          node --check functions/es/[[path]].js
+          node --check functions/pt-br/[[path]].js
+          node .github/maison-growth/validate_site_i18n.mjs
           node --check functions/_lib/maison-vault.js
           node --check functions/_lib/maison-vault-v2.js
           node --check functions/_lib/taxonomy-gate.js
