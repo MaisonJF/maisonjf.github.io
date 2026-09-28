@@ -1,6 +1,13 @@
 const LOCALES=['pt-BR','en','es'];
 const QUALITY_VERSION='vault-localizer-v1';
 
+function safeJson(payload,status=200){
+  return new Response(JSON.stringify(payload),{
+    status,
+    headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}
+  });
+}
+
 function enabled(value){return String(value??'').toLowerCase()==='true';}
 function clamp(value,fallback,min,max){
   const n=Number(value);
@@ -243,7 +250,30 @@ async function runLocalizationRounds(env,locale){
 }
 
 export default {
-  async fetch(){return new Response('Not Found',{status:404});},
+  async fetch(request,env){
+    const url=new URL(request.url);
+    if(url.pathname!=='/diagnostic'||request.method!=='POST'||!enabled(env.LOCALIZER_DIAGNOSTIC_ENABLED)){
+      return new Response('Not Found',{status:404});
+    }
+    const locale=LOCALES.includes(String(env.LOCALIZER_LOCALE||''))?String(env.LOCALIZER_LOCALE):'pt-BR';
+    try{
+      const result=await runVaultLocalization(env,{locale});
+      return safeJson({
+        ok:true,
+        locale,
+        activated:result?.results?.[0]||{},
+        pending:result?.pending||{}
+      });
+    }catch(error){
+      return safeJson({
+        ok:false,
+        error:{
+          name:String(error?.name||'Error'),
+          message:String(error?.message||'localizer_failed').slice(0,500)
+        }
+      },500);
+    }
+  },
   async scheduled(controller,env,ctx){
     const locale=localeForSchedule(controller,env);
     ctx.waitUntil(
