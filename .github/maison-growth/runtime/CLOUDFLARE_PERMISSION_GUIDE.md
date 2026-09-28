@@ -1,73 +1,72 @@
-# Cloudflare Permission Guide — Maison Private Brain
+# Cloudflare Permission Guide — Maison Private Runtime
 
-Last reviewed against Cloudflare documentation on 2026-09-24.
+Last reviewed against the Maison runtime architecture on 2026-09-28.
 
-The goal is least privilege: inspection, deployment, D1 mutation and Access administration are separate capabilities.
+The operator-facing goal is deliberately simple: **one manual workflow, one Brain root token, one Cloudflare Access service token pair**. Internal proposal/review credentials are derived at runtime and are never additional operator-managed GitHub secrets.
 
-## GitHub secrets used by the prepared workflows
+## Required GitHub secrets
 
-First private-read activation:
+The one-button `Maison Private Runtime` workflow requires:
 
 - `CLOUDFLARE_ACCOUNT_ID`
-- `CLOUDFLARE_API_TOKEN` — deployment token
-- `MAISON_BRAIN_PRIVATE_URL`
-- `MAISON_BRAIN_CONTROL_TOKEN`
-
-Optional but recommended:
-
-- `CLOUDFLARE_READ_API_TOKEN` — read-only inspection token; the inspect workflow falls back to `CLOUDFLARE_API_TOKEN` when absent
+- `CLOUDFLARE_API_TOKEN` — Worker deployment/custom-domain token
+- `MAISON_BRAIN_PRIVATE_URL` — HTTPS origin for the private Worker
+- `MAISON_BRAIN_CONTROL_TOKEN` — single Maison private-runtime root token
 - `MAISON_CF_ACCESS_CLIENT_ID`
 - `MAISON_CF_ACCESS_CLIENT_SECRET`
 
-Later stages only:
+Optional:
 
-- `MAISON_BRAIN_PROPOSAL_TOKEN`
-- `MAISON_BRAIN_REVIEW_DECISION_TOKEN`
+- `CLOUDFLARE_READ_API_TOKEN` — dedicated read-only D1 inspection token; the workflow falls back to the deployment token for schema verification when absent
+
+Do **not** create separate `MAISON_BRAIN_PROPOSAL_TOKEN` or `MAISON_BRAIN_REVIEW_DECISION_TOKEN` secrets for normal operation. Scoped proposal/review tokens are deterministically derived from the existing Brain root token immediately before deployment. The derived values remain distinct and are masked in GitHub Actions.
 
 ## Permission separation
 
-### 1. Read-only inspection
+### Read-only D1 inspection
 
-The manual `Maison Cloudflare Read-Only Inspect` workflow needs to:
+Read-only inspection needs to read D1 metadata and execute SELECT-only schema checks against `maison-growth-engine`. Prefer `CLOUDFLARE_READ_API_TOKEN` when practical. No D1 write permission is needed for normal private-runtime deployment.
 
-- read D1 metadata for `maison-growth-engine`;
-- run read-only SELECT statements against D1;
-- attempt to list deployments for `maison-intelligence`.
+### Worker deployment and Custom Domain
 
-Prefer a dedicated read token when practical. It does not need route changes, Worker deployment, D1 writes or Access administration.
+The deployment token must be able to deploy `maison-intelligence` and configure its exact Custom Domain. The runtime workflow never enables `workers.dev` or preview URLs.
 
-### 2. Existing Worker deployment
+### D1 schema changes
 
-Cloudflare documents **Editor** access for deploying an existing Worker. The Maison live workflow also configures an exact Custom Domain, so the token needs **Workers Routes Write** on the affected zone when that domain connection is added or changed.
+Schema mutation remains separate from normal runtime activation. The one-button workflow verifies the remote schema and refuses deployment if required schema is missing; it does not apply migrations.
 
-If the read-only inspection cannot confirm that `maison-intelligence` already exists, do not assume Editor is sufficient: Cloudflare documents product-level **Admin** for creating a new Worker. Use that elevated capability only for initial creation if it is actually required.
+### Cloudflare Access
 
-### 3. D1 schema changes
+Cloudflare Access is mandatory for the live private runtime. The workflow requires the service-token ID/secret pair and then verifies both authentication layers after deployment:
 
-The normal private deployment workflow only **reads** the D1 schema and refuses to continue when required Brain/A12/A14 surfaces are missing.
+1. requests without Cloudflare Access are rejected at the edge;
+2. requests with Access but without the Maison bearer token are rejected by the Worker;
+3. fully authenticated Brain reads succeed in `read_only` mode.
 
-Applying missing migrations is a separate operator action. Cloudflare requires **D1 Edit** for database writes. Do not add D1 Edit merely to make the read-only inspection pass.
+The workflow does not create or weaken the Zero Trust application itself.
 
-### 4. Cloudflare Access
+## Runtime boundary
 
-The repository workflow does not create or weaken a Zero Trust Access application. Access protection is configured separately for the private hostname. Cloudflare supports protecting a specific Custom Domain/hostname with Access.
-
-The Access service-token ID/secret used by Brain clients are application credentials; they are not substitutes for the permissions needed to administer Access itself.
-
-## Current Maison deployment boundary
-
-The live private renderer keeps:
+The private deployment hard-locks:
 
 - `workers_dev=false`;
-- preview URLs disabled;
+- preview URLs OFF;
 - cron triggers removed;
 - Queue bindings removed;
 - Workers AI binding removed;
 - external collection OFF;
-- D1 as the canonical data binding;
-- Brain Control enabled only for the chosen private stage.
+- `WORKER_ENABLED=false`;
+- `KILL_SWITCH=true`;
+- public write OFF;
+- outbound OFF;
+- spend OFF;
+- experiment execution OFF.
 
-A valid Cloudflare token never overrides these repository guards.
+Brain read, proposal materialization and human-review decision surfaces can all be privately available while those external authority switches remain OFF.
+
+## Operator rule
+
+For normal operation, use **Actions → Maison Private Runtime → Run workflow**. There are no stage, apply or Access-confirmation inputs. The workflow validates prerequisites itself and either completes fully or fails closed.
 
 ## Official references
 
@@ -75,4 +74,3 @@ A valid Cloudflare token never overrides these repository guards.
 - https://developers.cloudflare.com/workers/configuration/routing/custom-domains/
 - https://developers.cloudflare.com/workers/configuration/cloudflare-access/
 - https://developers.cloudflare.com/d1/wrangler-commands/
-- https://developers.cloudflare.com/d1/platform/release-notes/
