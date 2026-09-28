@@ -1,5 +1,5 @@
 {
-  "policy_version": "A0.3",
+  "policy_version": "A0.4",
   "default_repo_write": "deny",
   "precedence": "deny_overrides_allow",
   "protected_paths": [
@@ -30,23 +30,18 @@
       "allowed_paths": []
     },
     "internal_candidate_create": {
-      "repo_write": "scheduled_internal_queue_only",
-      "allowed_paths": [
-        ".github/maison-growth/oceans/candidates.json",
-        ".github/maison-growth/brain/editorial-queue.json",
-        "functions/_lib/vpc-ocean-signals.generated.js"
-      ],
+      "repo_write": false,
+      "runtime_store": "D1:ocean_memory_signals/ocean_memory_state",
+      "github_role": "derived_snapshot_only",
+      "entry_policy": "persist_first_filter_later",
       "constraints": [
         "no_public_page_creation",
         "no_sitemap_or_navigation_change",
         "no_personal_or_sensitive_data",
         "no_private_conversation_content",
         "no_paid_oracle_content",
-        "deduplicate_before_write",
-        "minimum_independent_evidence_sources_2",
         "no_paid_body_content_in_repo",
-        "editorial_queue_requires_human_approval",
-        "generated_signal_bridge_only"
+        "automatic_publication_forbidden"
       ]
     },
     "commercial_candidate_create": {
@@ -101,26 +96,22 @@
       "requires_oceans_guard_pass": true
     },
     "ocean_intelligence_persist": {
-      "repo_write": "scheduled_internal_queue_only",
-      "allowed_paths": [
-        ".github/maison-growth/oceans/candidates.json",
-        ".github/maison-growth/brain/editorial-queue.json",
-        "functions/_lib/vpc-ocean-signals.generated.js"
-      ],
+      "repo_write": false,
+      "runtime_store": "D1:ocean_memory_signals/ocean_memory_state/ocean_memory_alerts",
       "authority": "permanent_human_authorization_2026-09-25",
-      "duplicate_strategy": "semantic_merge_before_create",
+      "github_role": "asynchronous_snapshot_and_audit_only",
+      "entry_policy": "persist_first_filter_later",
+      "canonical_promotion_policy": "downstream_gate",
       "constraints": [
-        "analyse_existing_oceans_before_write",
+        "analyse_existing_oceans_after_ingest_before_canonical_promotion",
         "if_semantically_similar_enrich_canonical_ocean_instead_of_creating_clone",
         "preserve_existing_human_review_state",
-        "minimum_independent_evidence_sources_2_for_new_ocean",
-        "deduplicate_evidence_and_theme_candidates",
+        "minimum_independent_evidence_sources_2_for_canonical_promotion_not_ingest",
+        "deduplicate_evidence_and_theme_candidates_before_promotion",
         "no_personal_or_sensitive_data",
         "no_private_conversation_content",
-        "no_paid_body_content_in_repo",
-        "no_automatic_publication",
-        "post_write_readback_verification",
-        "retry_after_fresh_read_on_sha_conflict"
+        "no_paid_body_content",
+        "no_automatic_publication"
       ]
     },
     "commercial_recovery_capture": {
@@ -139,6 +130,37 @@
         "no_paid_body_content",
         "retry_unresolved_without_erasing_payload",
         "mark_integrated_only_after_destination_readback"
+      ]
+    },
+    "ocean_signal_ingest": {
+      "repo_write": false,
+      "runtime_store": "D1:ocean_memory_signals",
+      "authority": "automatic_internal_observation",
+      "evidence_minimum_to_store": 1,
+      "duplicate_strategy": "idempotent_payload_hash",
+      "constraints": [
+        "privacy_safe_payload_only",
+        "no_private_conversation_content",
+        "no_paid_oracle_content",
+        "no_public_write",
+        "no_spend",
+        "no_outbound_contact"
+      ]
+    },
+    "ocean_snapshot_export": {
+      "repo_write": "scheduled_internal_queue_only",
+      "allowed_paths": [
+        ".github/maison-growth/oceans/candidates.json",
+        ".github/maison-growth/brain/editorial-queue.json",
+        "functions/_lib/vpc-ocean-signals.generated.js"
+      ],
+      "source": "D1:ocean_memory_state",
+      "failure_policy": "retry_without_blocking_ingest_alerts_or_brain",
+      "constraints": [
+        "derived_snapshot_only",
+        "post_write_readback_verification",
+        "retry_after_fresh_read_on_sha_conflict",
+        "no_publication_side_effect"
       ]
     }
   },

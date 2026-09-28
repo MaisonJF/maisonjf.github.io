@@ -28,6 +28,8 @@ MIGRATIONS=(
     GROWTH/"brain/migrations/0018_b2b_feedback.sql",
     GROWTH/"a11/migrations/0019_content_learning_source.sql",
     GROWTH/"a11/migrations/0020_learning_rule_seed.sql",
+    GROWTH/"brain/migrations/0021_commercial_recovery_journal.sql",
+    GROWTH/"brain/migrations/0022_ocean_working_memory.sql",
 )
 
 
@@ -57,16 +59,23 @@ class GrowthSchemaChainTests(unittest.TestCase):
         self.assertIn("a14_realised_economics",views)
         self.assertIn("autonomy_human_queue_current",views)
         self.assertIn("a14_approved_offers_ready_for_planning",views)
+        self.assertIn("brain_ocean_memory_feed",views)
 
         tables={
             row[0] for row in con.execute(
                 "SELECT name FROM sqlite_master WHERE type='table'"
             )
         }
+        self.assertEqual(state["maison_ocean_memory_schema_version"],"OCEAN.1")
+
         for expected in (
             "a14_validation_plans",
             "a14_validation_plan_a7_links",
             "a14_validation_plan_a8_links",
+            "commercial_recovery_journal",
+            "ocean_memory_signals",
+            "ocean_memory_state",
+            "ocean_memory_alerts",
         ):
             self.assertIn(expected,tables)
 

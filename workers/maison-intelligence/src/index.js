@@ -15,6 +15,7 @@ import { handleBrainReviewDecisionRequest } from './review_decision_api.js';
 import { handleA2IngestRequest } from './a2_runtime.js';
 import { handleA11LearningRequest } from './a11_runtime.js';
 import { handleVideoGenerationRequest } from './video_generation.js';
+import { handleOceanMemoryRequest } from './ocean_memory.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -421,6 +422,8 @@ async function enqueueRun(env, scheduledDate) {
 
 export default {
   async fetch(request, env) {
+    const oceans = await handleOceanMemoryRequest(request, env);
+    if (oceans) return oceans;
     const video = await handleVideoGenerationRequest(request, env);
     if (video) return video;
     const a11 = await handleA11LearningRequest(request, env);

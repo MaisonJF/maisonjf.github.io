@@ -33,6 +33,7 @@ files=(
   ".github/maison-growth/a11/migrations/0019_content_learning_source.sql"
   ".github/maison-growth/a11/migrations/0020_learning_rule_seed.sql"
   ".github/maison-growth/brain/migrations/0021_commercial_recovery_journal.sql"
+  ".github/maison-growth/brain/migrations/0022_ocean_working_memory.sql"
 )
 
 for file in "${files[@]}"; do
@@ -40,4 +41,4 @@ for file in "${files[@]}"; do
   npx wrangler d1 execute "$DB_NAME" --remote --file="$ROOT/$file"
 done
 
-echo "Growth D1 schema includes Brain runtime views with canonical B2B solution + Brain lifecycle feedback through 0021, including durable commercial recovery. A13 collection/spend remains disabled by its kill switches; A14 has no outbound authority."
+echo "Growth D1 schema includes Brain runtime views with canonical B2B solution + Brain lifecycle feedback through 0022, including durable commercial recovery and D1 Ocean working memory. A13 collection/spend remains disabled by its kill switches; A14 has no outbound authority."

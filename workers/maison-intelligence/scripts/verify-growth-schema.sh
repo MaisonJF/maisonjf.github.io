@@ -13,6 +13,8 @@ SELECT opportunity_id,offer_hypothesis_id,review_resolution_id FROM a14_approved
 SELECT validation_plan_id,review_resolution_id,state FROM a14_validation_plans LIMIT 0;
 SELECT experiment_version_id FROM a14_validation_plan_a8_links LIMIT 0;
 SELECT recovery_id,state,attempt_count FROM commercial_recovery_journal LIMIT 0;
+SELECT ocean_key,lifecycle_state,pending_alert_count FROM brain_ocean_memory_feed LIMIT 0;
+SELECT alert_id,ocean_key,delivery_state FROM ocean_memory_alerts LIMIT 0;
 "
 
 echo "Verifying Maison Growth D1 schema on: $DB_NAME"
@@ -38,4 +40,10 @@ if [[ "$a11_rule_version" != "rul_e6217bb187b5ef0b6ee371286ed2e1e53e0d" ]]; then
   echo "Canonical A11.2 learning rule is not active." >&2
   exit 5
 fi
-echo "Maison Growth D1 schema through Brain/A12/A14 planning/B2B feedback/commercial recovery surfaces: OK"
+ocean_schema_json="$(npx wrangler d1 execute "$DB_NAME" --remote --json --command "SELECT schema_value FROM schema_state WHERE schema_key='maison_ocean_memory_schema_version';")"
+ocean_schema_version="$(printf '%s' "$ocean_schema_json" | jq -r '.[0].results[0].schema_value // empty')"
+if [[ "$ocean_schema_version" != "OCEAN.1" ]]; then
+  echo "OCEAN.1 working-memory schema is not active." >&2
+  exit 6
+fi
+echo "Maison Growth D1 schema through Brain/A12/A14 planning/B2B feedback/commercial recovery/Ocean memory surfaces: OK"
