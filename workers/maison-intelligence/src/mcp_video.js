@@ -1,3 +1,4 @@
+import { handleVideoGenerationRequest } from './video_generation.js';
 // MAISON JF · minimal Streamable HTTP MCP bridge for the short-video engine
 // Initial scope is intentionally narrow: health, generate, result.
 // VIDEO_GENERATION_TOKEN never leaves the Worker.
@@ -48,10 +49,14 @@ function tools(){
 
 async function internal(request,env,path,init={}){
   if(!env.VIDEO_GENERATION_TOKEN) throw new Error('video_generation_token_missing');
-  const u=new URL(request.url); u.pathname=path; u.search='';
+  const u=new URL(request.url);
+  const target=new URL(path,u.origin);
   const headers=new Headers(init.headers||{});
   headers.set('X-Maison-Video-Token',env.VIDEO_GENERATION_TOKEN);
-  return fetch(new Request(u.toString(),{...init,headers}));
+  const forwarded=new Request(target.toString(),{...init,headers});
+  const response=await handleVideoGenerationRequest(forwarded,env);
+  if(!response) throw new Error('video_route_unavailable');
+  return response;
 }
 async function callTool(request,env,name,args){
   if(name==='maison_video_health'){
