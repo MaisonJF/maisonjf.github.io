@@ -7,8 +7,14 @@ const JSON_HEADERS = {'content-type':'application/json','cache-control':'no-stor
 const MCP_VERSION = '2025-06-18';
 const MCP_SCOPE = 'openid email profile';
 
+function mcpConfig(env){
+  const raw=String(env.MAISON_MCP_CONFIG||'').trim();
+  if(!raw) return {};
+  try{const parsed=JSON.parse(raw);return parsed&&typeof parsed==='object'?parsed:{}}catch{return {}}
+}
+
 function supabaseOrigin(env){
-  const raw=String(env.MAISON_MCP_SUPABASE_URL||'').trim().replace(/\/+$/,'');
+  const cfg=mcpConfig(env);\n  const raw=String(cfg.supabase_url||'').trim().replace(/\/+$/,'');
   if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(raw)) throw new Error('mcp_supabase_url_missing');
   return raw;
 }
@@ -18,8 +24,7 @@ async function authenticate(request,env){
   const auth=String(request.headers.get('Authorization')||'');
   if(!auth.startsWith('Bearer ')) return null;
   const token=auth.slice(7).trim();
-  const key=String(env.MAISON_MCP_SUPABASE_PUBLISHABLE_KEY||'').trim();
-  const allowed=String(env.MAISON_MCP_ALLOWED_SUBJECT||'').trim();
+  const cfg=mcpConfig(env);\n  const key=String(cfg.supabase_publishable_key||'').trim();\n  const allowed=String(cfg.allowed_subject||'').trim();
   if(!token||!key||!allowed) return null;
   const r=await fetch(supabaseOrigin(env)+'/auth/v1/user',{headers:{apikey:key,Authorization:'Bearer '+token}});
   if(!r.ok) return null;
