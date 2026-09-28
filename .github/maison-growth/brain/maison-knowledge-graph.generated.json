@@ -21,6 +21,7 @@
       "url": "/portas/casa",
       "relatedOffers": [
         "oracle-security",
+        "ebook-para-de-ignorar",
         "nevoa",
         "vela-pequena",
         "presentes-intencao"
@@ -35,7 +36,8 @@
         "perda-ambigua-sem-fecho-claro",
         "precisar-de-solidao-para-recuperar-energia-social",
         "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
-        "solidao-com-contacto-sem-conexao-de-qualidade"
+        "solidao-com-contacto-sem-conexao-de-qualidade",
+        "atelier-principios-transferiveis-e-dna-maison"
       ]
     },
     {
@@ -45,6 +47,7 @@
       "relatedOffers": [
         "oracle-self",
         "oracle-load",
+        "ebook-para-de-ignorar",
         "escalda-pes",
         "oleo-massagem",
         "presentes-intencao",
@@ -74,6 +77,7 @@
         "oracle-control",
         "oracle-direction",
         "oracle-security",
+        "ebook-para-de-ignorar",
         "ebook-turista",
         "ebook-meandros",
         "tarot",
@@ -97,7 +101,8 @@
         "micro-luxo-como-recompensa-e-ritual",
         "quando-o-que-funciona-na-relacao-se-torna-invisivel",
         "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-        "telepressao-e-disponibilidade-permanente"
+        "telepressao-e-disponibilidade-permanente",
+        "atelier-principios-transferiveis-e-dna-maison"
       ]
     },
     {
@@ -110,6 +115,7 @@
         "oracle-self-worth",
         "oracle-belong",
         "pdi-relacoes",
+        "ebook-para-de-ignorar",
         "ebook-turista",
         "ebook-meandros",
         "presentes-intencao",
@@ -131,7 +137,8 @@
         "quando-o-que-funciona-na-relacao-se-torna-invisivel",
         "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
         "solidao-com-contacto-sem-conexao-de-qualidade",
-        "telepressao-e-disponibilidade-permanente"
+        "telepressao-e-disponibilidade-permanente",
+        "descoberta-organica-e-reconhecimento-da-maison"
       ]
     }
   ],
@@ -974,6 +981,31 @@
       ]
     },
     {
+      "id": "ebook-para-de-ignorar",
+      "title": "Pára de Ignorar! · Livro",
+      "href": "/ebooks/para-de-ignorar/",
+      "format": "ebook",
+      "family": "editions",
+      "stage": "deeper",
+      "territories": [
+        "casa",
+        "corpo",
+        "cabeca",
+        "presenca"
+      ],
+      "axes": [
+        "self",
+        "control",
+        "direction",
+        "seen",
+        "load"
+      ],
+      "routes": [
+        "selfpaced",
+        "default"
+      ]
+    },
+    {
       "id": "ebook-turista",
       "title": "Vírgulas do Destino · O Turista",
       "href": "/ebooks/virgulas-do-destino-o-turista/",
@@ -1605,6 +1637,42 @@
       "territories": [
         "cabeca",
         "presenca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "descoberta-organica-e-reconhecimento-da-maison",
+      "intent": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
+      "themes": [
+        "onde estão as pessoas que a Maison já consegue ajudar",
+        "o que procuram antes de conhecer a Maison",
+        "onde essas conversas acontecem publicamente",
+        "que superfícies gratuitas podem apresentar a Maison",
+        "como gerar reconhecimento antes da compra",
+        "que activos Maison já respondem à procura observada",
+        "como transformar descoberta em visita sem publicidade paga"
+      ],
+      "territories": [
+        "presenca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "atelier-principios-transferiveis-e-dna-maison",
+      "intent": "estudar continuamente casos de excelência e mecanismos psicológicos, culturais, criativos e comerciais transferíveis para a Maison JF; descobrir também novos mestres históricos ou actuais; converter observação em princípios, hipóteses mensuráveis e aprendizagem proprietária Maison",
+      "themes": [
+        "porque é que isto prende a atenção",
+        "porque é que isto parece falar comigo",
+        "como se transforma uma ideia num acontecimento",
+        "como se constrói desejo sem explicar demais",
+        "o que torna um conceito repetível e transmissível",
+        "que mecanismos fazem uma marca entrar na cultura",
+        "quem resolveu extraordinariamente bem um problema que a Maison também enfrenta",
+        "como combinar mecanismos sem perder o ADN Maison"
+      ],
+      "territories": [
+        "casa",
+        "cabeca"
       ],
       "visibility": "internal"
     }
