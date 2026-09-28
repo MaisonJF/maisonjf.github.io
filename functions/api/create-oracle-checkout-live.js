@@ -1,11 +1,16 @@
 import { ORACLE_TERRITORIES } from '../_lib/oracle-territories.js';
 import { requireMaisonVault } from '../_lib/maison-vault.js';
 import { oracleRoleCoverageForLocale } from '../_lib/maison-localized-content.js';
-import { normalizeMaisonLocale, stripeLocaleForMaison, publicLangForMaison } from '../_lib/maison-locales.js';
+import { normalizeMaisonLocale, stripeLocaleForMaison } from '../_lib/maison-locales.js';
+import { localizeOracleLabel } from '../_lib/oracle-public-locales.js';
 
 const TERRITORIES=Object.fromEntries(
   ORACLE_TERRITORIES.map(t=>[t.slug,{label:t.label,page:t.slug+'.html'}])
 );
+
+function publicPrefix(locale){
+  return locale==='pt-BR'?'/pt-br':locale==='en'?'/en':locale==='es'?'/es':'';
+}
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -33,13 +38,13 @@ export async function onRequestPost({ request, env }) {
     const params = new URLSearchParams();
     params.set('mode', 'payment');
     params.set('success_url', successUrl);
-    params.set('cancel_url', origin + '/oraculo/' + territory.page + '?checkout_cancelado=1&lang=' + encodeURIComponent(publicLangForMaison(locale)));
+    params.set('cancel_url', origin + publicPrefix(locale) + '/oraculo/' + theme + '?checkout_cancelado=1');
     params.set('locale', stripeLocaleForMaison(locale));
     params.set('customer_creation', 'always');
     params.set('billing_address_collection', 'auto');
     params.set('line_items[0][price_data][currency]', 'eur');
     params.set('line_items[0][price_data][unit_amount]', '200');
-    params.set('line_items[0][price_data][product_data][name]', 'Oráculo MAISON JF® | ' + territory.label);
+    params.set('line_items[0][price_data][product_data][name]', 'Oráculo MAISON JF® | ' + localizeOracleLabel(territory.label,locale));
     const copy={
       'pt-PT':{description:'Uma abertura simbólica. Uma leitura.',legal:'Ao pagar, confirmas uma abertura do Oráculo MAISON JF® e aceitas as condições em maison-jf.com/informacao-legal.html.'},
       'pt-BR':{description:'Uma abertura simbólica. Uma leitura.',legal:'Ao pagar, você confirma uma abertura do Oráculo MAISON JF® e aceita as condições em maison-jf.com/informacao-legal.html.'},
