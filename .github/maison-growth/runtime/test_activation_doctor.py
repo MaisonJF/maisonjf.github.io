@@ -49,12 +49,14 @@ class ActivationDoctorTests(unittest.TestCase):
             "run_cloudflare_read_only_inspect",
         )
 
-    def test_complete_first_stage_advances_to_private_brain_preflight(self):
+    def test_complete_runtime_advances_to_one_button_activation(self):
         values = {
             "CLOUDFLARE_API_TOKEN": "deploy-secret-value",
             "CLOUDFLARE_ACCOUNT_ID": "account-id",
             "MAISON_BRAIN_PRIVATE_URL": "https://brain.example.test",
             "MAISON_BRAIN_CONTROL_TOKEN": "brain-control-secret-value",
+            "MAISON_CF_ACCESS_CLIENT_ID": "example-token.access",
+            "MAISON_CF_ACCESS_CLIENT_SECRET": "cfast_abcdefghijklmnopqrstuvwxyz0123456789",
         }
         result = assemble_report(
             values,
@@ -63,7 +65,7 @@ class ActivationDoctorTests(unittest.TestCase):
         )
         self.assertEqual(
             result["recommended_next_step"],
-            "run_private_brain_read_preflight",
+            "run_maison_private_runtime",
         )
 
     def test_partial_access_pair_is_called_out_before_activation(self):
@@ -78,7 +80,7 @@ class ActivationDoctorTests(unittest.TestCase):
                 env_file_present=True,
                 host_ready=True,
             ),
-            "complete_or_remove_partial_access_pair",
+            "complete_cloudflare_access_pair",
         )
 
     def test_report_never_echoes_secret_values(self):
