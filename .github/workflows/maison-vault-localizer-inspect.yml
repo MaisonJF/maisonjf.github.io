@@ -1,0 +1,39 @@
+name: Maison Vault Localizer Inspect
+
+on:
+  push:
+    branches:
+      - rio-produto-digital/vault-localizer
+    paths:
+      - '.github/workflows/maison-vault-localizer-inspect.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Inspect localization counts only
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          db="fb49d911-fed3-4c50-8424-231aae391814"
+          endpoint="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/d1/database/$db/query"
+          auth=(-H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json")
+          query () { jq -n --arg sql "$1" '{sql:$sql}' | curl -fsS "${auth[@]}" --data-binary @- "$endpoint"; }
+
+          q="$(query "SELECT locale,status,COUNT(*) AS count FROM vault_question_translations GROUP BY locale,status ORDER BY locale,status;")"
+          o="$(query "SELECT locale,status,COUNT(*) AS count FROM vault_oracle_block_translations GROUP BY locale,status ORDER BY locale,status;")"
+          schema="$(query "SELECT meta_value FROM vault_meta WHERE meta_key='schema_version' LIMIT 1;")"
+
+          echo "Schema: $(jq -r '.result[0].results[0].meta_value // "unknown"' <<<"$schema")"
+          echo "Question translations:"
+          jq -r '.result[0].results[]? | .locale+" | "+.status+" | "+(.count|tostring)' <<<"$q"
+          echo "Oracle translations:"
+          jq -r '.result[0].results[]? | .locale+" | "+.status+" | "+(.count|tostring)' <<<"$o"
