@@ -1,0 +1,136 @@
+name: Maison Ocean Memory Deploy
+run-name: Maison Ocean Memory Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/maison-growth/brain/migrations/0022_ocean_working_memory.sql'
+      - '.github/maison-growth/path-policy.json'
+      - '.github/maison-growth/brain/derived-artifacts-policy.json'
+      - 'functions/_lib/ocean-discovery-bridge.js'
+      - 'workers/maison-intelligence/src/ocean_memory.js'
+      - 'workers/maison-intelligence/src/index.js'
+      - 'workers/maison-intelligence/test/ocean_memory.test.mjs'
+      - 'workers/maison-intelligence/scripts/seed-ocean-memory.mjs'
+      - 'workers/maison-intelligence/scripts/verify-growth-schema.sh'
+      - 'workers/maison-intelligence/wrangler.jsonc'
+      - '.github/workflows/maison-ocean-memory-deploy.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: maison-ocean-memory-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: refs/heads/main
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Worker tooling
+        working-directory: workers/maison-intelligence
+        run: npm install --ignore-scripts
+
+      - name: Validate Ocean memory and Worker
+        working-directory: workers/maison-intelligence
+        run: |
+          npm test
+          npm run check
+          python ../../.github/maison-growth/brain/test_schema_chain.py
+
+      - name: Apply Ocean memory migration
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx wrangler d1 execute maison-growth-engine --remote \
+            --file=../../.github/maison-growth/brain/migrations/0022_ocean_working_memory.sql
+
+      - name: Seed existing Oceans into D1 memory
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          node scripts/seed-ocean-memory.mjs > /tmp/seed-ocean-memory.sql
+          npx wrangler d1 execute maison-growth-engine --remote --file=/tmp/seed-ocean-memory.sql
+
+      - name: Verify remote D1 schema
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_READ_API_TOKEN || secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: bash scripts/verify-growth-schema.sh maison-growth-engine
+
+      - name: Render live private Worker config
+        env:
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+        run: |
+          python .github/maison-growth/runtime/render_private_worker_config.py \
+            private_brain_read_candidate \
+            --template workers/maison-intelligence/wrangler.jsonc \
+            --private-url "$BRAIN_CONTROL_API_URL" \
+            --output workers/maison-intelligence/wrangler.private.runtime.jsonc
+
+      - name: Deploy Ocean memory runtime
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy --config wrangler.private.runtime.jsonc
+
+      - name: Verify live Ocean memory
+        shell: bash
+        env:
+          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+          base="${MAISON_BRAIN_PRIVATE_URL%/}"
+          access_id="$CF_ACCESS_CLIENT_ID"
+          access_secret="$CF_ACCESS_CLIENT_SECRET"
+          shopt -s nocasematch
+          if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then access_id="${BASH_REMATCH[1]}"; fi
+          if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then access_secret="${BASH_REMATCH[1]}"; fi
+          shopt -u nocasematch
+
+          body="$(mktemp)"
+          status="$(curl --silent --show-error --output "$body" --write-out '%{http_code}' \
+            --header "Accept: application/json" \
+            --header "Authorization: Bearer $BRAIN_CONTROL_TOKEN" \
+            --header "CF-Access-Client-Id: $access_id" \
+            --header "CF-Access-Client-Secret: $access_secret" \
+            "$base/internal/oceans/memory?limit=1")"
+          cat "$body"
+          test "$status" = "200"
+          python - "$body" <<'PY'
+          import json,sys
+          with open(sys.argv[1],encoding='utf-8') as fh:
+              payload=json.load(fh)
+          assert payload.get('kind')=='ocean_working_memory',payload
+          assert payload.get('storage')=='D1',payload
+          assert payload.get('github_role')=='snapshot_only',payload
+          print('Live Ocean memory: OK')
+          PY
