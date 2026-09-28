@@ -163,12 +163,12 @@ async function storeOracle(db,locale,source,translated){
   return writes.length;
 }
 
-async function localizeLocale(env,locale,limit){
+async function localizeLocale(env,locale,{questionLimit,oracleLimit}){
   const db=env.GROWTH_DB;
   await activateApproved(db,locale);
   const [questions,oracle]=await Promise.all([
-    questionBatch(db,locale,limit),
-    oracleBatch(db,locale,Math.min(limit,14))
+    questionLimit>0?questionBatch(db,locale,questionLimit):Promise.resolve([]),
+    oracleLimit>0?oracleBatch(db,locale,oracleLimit):Promise.resolve([])
   ]);
   let questionsActivated=0,oracleActivated=0;
   if(questions.length){
@@ -214,9 +214,11 @@ async function pendingCounts(db){
 
 export async function runVaultLocalization(env,{locale}={}){
   if(!enabled(env.LOCALIZER_ENABLED))return {skipped:'disabled'};
-  const limit=clamp(env.LOCALIZER_BATCH_SIZE,12,1,24);
+  const legacyLimit=clamp(env.LOCALIZER_BATCH_SIZE,12,1,24);
+  const questionLimit=clamp(env.LOCALIZER_QUESTION_BATCH_SIZE,legacyLimit,0,24);
+  const oracleLimit=clamp(env.LOCALIZER_ORACLE_BATCH_SIZE,2,0,8);
   const chosen=LOCALES.includes(locale)?locale:LOCALES[0];
-  const result=await localizeLocale(env,chosen,limit);
+  const result=await localizeLocale(env,chosen,{questionLimit,oracleLimit});
   return {results:[result],pending:await pendingCounts(env.GROWTH_DB)};
 }
 
