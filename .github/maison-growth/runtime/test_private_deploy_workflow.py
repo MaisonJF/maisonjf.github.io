@@ -66,22 +66,27 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
 
     def test_live_apply_checks_schema_before_deploy(self):
         schema = self.source.index("- name: Verify remote D1 schema")
-        deploy = self.source.index("- name: Bootstrap/deploy private surface")
+        deploy = self.source.index("- name: Deploy private surface with stage secrets")
         self.assertLess(schema, deploy)
         self.assertIn("verify-growth-schema.sh maison-growth-engine", self.source)
 
-    def test_live_apply_bootstraps_worker_before_installing_secrets(self):
-        deploy = self.source.index("- name: Bootstrap/deploy private surface")
-        secrets = self.source.index("- name: Install private Worker secrets")
+    def test_live_apply_deploys_code_and_stage_secrets_together(self):
+        deploy = self.source.index("- name: Deploy private surface with stage secrets")
+        verify = self.source.index("- name: Verify Worker deployment exists")
         health = self.source.index("- name: Verify deployed private Brain health")
-        self.assertLess(deploy, secrets)
-        self.assertLess(secrets, health)
+        block = self.source[deploy:verify]
+        self.assertIn('--secrets-file "$secrets_file"', block)
+        self.assertIn("BRAIN_CONTROL_TOKEN", block)
+        self.assertNotIn("wrangler secret put", block)
+        self.assertLess(deploy, verify)
+        self.assertLess(verify, health)
 
     def test_live_apply_verifies_read_only_health_after_deploy(self):
-        deploy = self.source.index("- name: Bootstrap/deploy private surface")
+        deploy = self.source.index("- name: Deploy private surface with stage secrets")
         health = self.source.index("- name: Verify deployed private Brain health")
         self.assertLess(deploy, health)
         self.assertIn("verify_private_brain_health.py", self.source)
+        self.assertIn("for attempt in $(seq 1 12)", self.source)
 
     def test_live_apply_verifies_private_boundary_after_health(self):
         health = self.source.index("- name: Verify deployed private Brain health")
@@ -89,6 +94,7 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
         self.assertLess(health, boundary)
         block = self.source[boundary:boundary + 650]
         self.assertIn('verify_private_brain_boundary.py "$RUNTIME_STAGE"', block)
+        self.assertIn("for attempt in $(seq 1 8)", self.source)
         self.assertIn("MAISON_BRAIN_PRIVATE_URL", block)
         self.assertIn("MAISON_BRAIN_CONTROL_TOKEN", block)
 
