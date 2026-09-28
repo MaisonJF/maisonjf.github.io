@@ -54,3 +54,7 @@ jobs:
       - name: Deploy production localizer
         working-directory: workers/maison-intelligence
         run: npx wrangler deploy --config ../maison-vault-localizer/wrangler.jsonc
+      - name: Report count-only Vault localization telemetry
+        working-directory: workers/maison-intelligence
+        run: |
+          npx wrangler d1 execute maison-growth-engine --remote --command="SELECT updated_at,last_locale,pending_total,pending_questions_pt_br,pending_questions_en,pending_questions_es,pending_oracle_pt_br,pending_oracle_en,pending_oracle_es FROM vault_localizer_telemetry WHERE singleton_id=1;"
