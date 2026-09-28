@@ -21,20 +21,20 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Osiris Memory write mirror | READY authenticated bridge using Osiris Actions Waist | PRIVATE STACK PREPARED / NOT STARTED |
 | Osiris Memory read context | READY MCP graph_search adapter + smoke profile | NOT STARTED |
 | Maison Brain MCP | READY 12 read-only tools: status/Oceanos/public discovery/catalogue assets/commercial attention/Oráculo+PDI coverage/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
-| A1/A13/D1 canonical evidence | READY schema/contracts + canonical `maison-growth-engine` binding | REMOTE 0001→0022 SCHEMA NOT YET VERIFIED |
+| A1/A13/D1 canonical evidence | READY schema/contracts + canonical `maison-growth-engine` binding | REMOTE 0001→0022 VERIFIED 2026-09-28 |
 | Cloudflare D1/Queue bindings | READY canonical D1 + intelligence queue/DLQ configuration in Wrangler | REMOTE RESOURCE STATE NOT YET VERIFIED |
-| Brain Control API | READY GET-only feed/solutions/economics/A11 learning + A5 mappings | DISABLED |
+| Brain Control API | READY GET-only feed/solutions/economics/A11 learning + A5 mappings | LIVE PRIVATE · HEALTH `ok` / `read_only` VERIFIED 2026-09-28 |
 | Canonical observe cycle | READY A5→Pre-Brain→Scout→Critic→Foundry→A14 preview + A3/A11 feedback context | OPTIONAL / NOT STARTED |
 | Persistent observe runtime | READY Docker Compose: pgvector/Postgres + Redis + Osiris + authenticated bridge + healthchecks | NOT STARTED |
 | Observe host preflight | READY no-start secret/port/Docker-Compose/disk checks; CI also expands full Compose config | NOT RUN ON PRIVATE HOST |
 | Activation doctor | READY combined names-only credential + host readiness; recommends one next safe gate; no service start/remote write | NOT RUN ON PRIVATE HOST |
-| Private activation preflight | READY stage-aware HTTPS/secret/token/authority checks + runbook | NOT RUN |
-| Private Worker deploy gate | READY automatic secret-free dry-run + manual live workflow + minimal D1-only private renderer | DRY-RUN VERIFIED ON `main` @ `5e6c2c90` |
-| Private credential readiness | READY names-only report distinguishes read-only inspection credentials from full first-stage deploy credentials | CHECKED 2026-09-28: first-stage credentials present; read-only inspection credentials present; Cloudflare Access pair present + shape-valid; later-stage proposal/review tokens not configured |
-| Private custom-domain route | READY exact HTTPS Custom Domain from `MAISON_BRAIN_PRIVATE_URL`; workers.dev/previews/cron/queue/AI stripped | CONFIG PRESENT / LIVE ROUTE + ACCESS REACHABILITY NOT YET VERIFIED |
-| Cloudflare read-only inspect | READY manual workflow; optional dedicated read token; D1 reachability + Worker-presence probe + 0001→0022 inspector; no deploy/write commands | PRIOR 2026-09-24 RUN PREDATES CURRENT SCHEMA / RERUN REQUIRED |
-| Private deploy verification | READY remote D1 schema gate + boundary verifier: unauthenticated denial, authenticated read-only health, false action authority and hidden proposal/review write surfaces in private-read stage | NOT RUN LIVE |
-| Private commercial preview | READY manual Brain-Control-only workflow; materialization/memory backends OFF; counts/authority output only | NOT RUN |
+| Private activation preflight | READY one-button full private planning/governance surface with fail-closed authority checks | LIVE PREFLIGHT PASSED 2026-09-28 |
+| Private Worker deploy gate | READY automatic secret-free dry-run + one-button manual live workflow + D1-only private renderer | LIVE DEPLOY VERIFIED · RUN `36417753631` |
+| Private credential readiness | READY one Brain root token + Cloudflare Access pair; scoped proposal/review tokens derived at runtime | LIVE CREDENTIAL PATH VERIFIED 2026-09-28 |
+| Private custom-domain route | READY exact HTTPS Custom Domain from `MAISON_BRAIN_PRIVATE_URL`; workers.dev/previews/cron/queue/AI stripped | LIVE ROUTE + CLOUDFLARE ACCESS VERIFIED 2026-09-28 |
+| Cloudflare read-only inspect | READY manual diagnostic workflow; D1 reachability + 0001→0022 inspector; no deploy/write commands | VERIFIED 2026-09-28 · D1 CURRENT THROUGH 0022 |
+| Private deploy verification | READY remote D1 schema gate + two-layer boundary verifier + authenticated no-write surface probes | LIVE VERIFIED 2026-09-28 · ACCESS + BEARER + AUTHORITY GATES PASS |
+| Private commercial preview | READY identifier-free Brain-Control preview; no materialization | LIVE PASSED 2026-09-28 · 0 A14 PREVIEWS SELECTED |
 | Pre-Brain | READY analysis core | NOT PROVISIONED |
 | DuckDB | READY optional analytical adapter | PACKAGE/HOST NOT PROVISIONED |
 | Polars | READY optional analytical adapter | PACKAGE/HOST NOT PROVISIONED |
@@ -66,11 +66,11 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Foundry | READY multi-format concept engine | analysis only |
 | A7 Commercial Discovery | READY existing module | analysis only |
 | A14 Universal Opportunity + Earned Distribution | READY A14.3 + deterministic IDs + review→validation planning | analysis/planning only |
-| A14 materialization | READY narrow proposal API + manual runtime profile | DISABLED |
-| Commercial human inbox | READY read-only A12 inbox + Commercial Action Inbox operator CLI | AVAILABLE WHEN PRIVATE READ ENABLED |
+| A14 materialization | READY narrow authenticated proposal API + manual runtime profile | PRIVATE API LIVE · NO MATERIALIZATION PERFORMED |
+| Commercial human inbox | READY read-only A12 inbox + Commercial Action Inbox operator CLI | PRIVATE READ LIVE · NO NEW REAL INBOX ENTRY YET |
 | Private commercial cycle | READY one-shot observe → optional A14 materialize → A12 inbox refresh; never self-approves | NOT STARTED |
 | Offline commercial golden path | READY canonical evidence → Brain → A14 review preview → proposal-only write → A12 inbox; authority guards asserted | CI-VERIFIED |
-| Human review decision | READY A12.2 planning-only append-only decision API | DISABLED |
+| Human review decision | READY A12.2 planning-only append-only decision API | PRIVATE API LIVE · HUMAN-GATED |
 | Approved validation planning | READY A14.3 behaviour-matched manual/B2B/physical/service/CTA plans | DISABLED / PREVIEW-FIRST |
 | Manual pilot prerequisites | READY plan-kind reason codes require evidence-backed cost/replenishment or capacity/effort/quote/consent facts before human execution; finished stock count is not a structural physical readiness gate | HUMAN-GATED |
 | Manual pilot dossiers | READY read-only operator dossiers + safe identifier-free summary + evidence-backed private pilot context; physical/service readiness still requires one complete real candidate | AVAILABLE AFTER PRIVATE READ + APPROVED PLANS; PRIVATE INPUTS NOT LOADED |
@@ -80,6 +80,12 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | A3 journeys/economics/attribution | READY existing module | runtime depends on event flow |
 | A11 learning | READY existing module | analysis only |
 | Cash & Profit mode | READY | begins measuring when A3 receives real conversions |
+
+## Live private runtime activation — 2026-09-28
+
+GitHub Actions run `36417753631` completed successfully against production Cloudflare. The canonical D1 schema passed through 0022, `maison-intelligence` deployed, health returned `status=ok` / `mode=read_only`, the Cloudflare Access edge and Maison bearer boundary both passed, and the authenticated proposal + human-review surfaces passed no-write probes.
+
+The commercial preview also passed but selected **0 A14 previews**, so activation itself is complete while the broader operational milestone of creating the first real A12 human-review inbox entry is still outstanding. Public write, outbound, spend and experiment execution remain false.
 
 ## Current internal flow
 
