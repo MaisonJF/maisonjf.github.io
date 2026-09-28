@@ -230,8 +230,16 @@ async function runLocalizationRounds(env){
 export default {
   async fetch(){return new Response('Not Found',{status:404});},
   async scheduled(_controller,env,ctx){
-    ctx.waitUntil(runLocalizationRounds(env).catch(error=>
-      console.error('Scheduled Vault localizer failed',String(error?.message||error))
-    ));
+    ctx.waitUntil(
+      runLocalizationRounds(env).then(result=>{
+        const pending=result?.pending||{};
+        console.log('Vault localizer completed',JSON.stringify({
+          pendingTotal:Number(pending.total||0),
+          pendingQuestions:pending.questions||{},
+          pendingOracle:pending.oracle||{}
+        }));
+        return result;
+      })
+    );
   }
 };
