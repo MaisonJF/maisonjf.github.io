@@ -14,7 +14,8 @@ function mcpConfig(env){
 }
 
 function supabaseOrigin(env){
-  const cfg=mcpConfig(env);\n  const raw=String(cfg.supabase_url||'').trim().replace(/\/+$/,'');
+  const cfg=mcpConfig(env);
+  const raw=String(cfg.supabase_url||'').trim().replace(/\/+$/,'');
   if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(raw)) throw new Error('mcp_supabase_url_missing');
   return raw;
 }
@@ -24,7 +25,9 @@ async function authenticate(request,env){
   const auth=String(request.headers.get('Authorization')||'');
   if(!auth.startsWith('Bearer ')) return null;
   const token=auth.slice(7).trim();
-  const cfg=mcpConfig(env);\n  const key=String(cfg.supabase_publishable_key||'').trim();\n  const allowed=String(cfg.allowed_subject||'').trim();
+  const cfg=mcpConfig(env);
+  const key=String(cfg.supabase_publishable_key||'').trim();
+  const allowed=String(cfg.allowed_subject||'').trim();
   if(!token||!key||!allowed) return null;
   const r=await fetch(supabaseOrigin(env)+'/auth/v1/user',{headers:{apikey:key,Authorization:'Bearer '+token}});
   if(!r.ok) return null;
