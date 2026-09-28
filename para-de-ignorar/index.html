@@ -96,27 +96,68 @@
 
 <script>
 (async()=>{
+  const locale=String(window.MAISON_LOCALE||document.documentElement.lang||'pt-PT');
+  const copy={
+    'pt-PT':{
+      newThemes:'Novos temas estão a ser preparados.',unavailable:'Indisponível',
+      later:'Volta dentro de momentos.',loadFail:'Os temas não carregaram agora.',
+      confirmFail:'Não foi possível confirmar a disponibilidade agora.',
+      preparing:'Em preparação',more:'Há mais perguntas a caminho.',soon:'Volta em breve.',
+      questions:'28 perguntas',play:'Jogar',opening:'A abrir pagamento…',
+      payFail:'Não foi possível abrir o pagamento. Tenta novamente.'
+    },
+    'pt-BR':{
+      newThemes:'Novos temas estão sendo preparados.',unavailable:'Indisponível',
+      later:'Volte em alguns instantes.',loadFail:'Os temas não carregaram agora.',
+      confirmFail:'Não foi possível confirmar a disponibilidade agora.',
+      preparing:'Em preparação',more:'Há mais perguntas a caminho.',soon:'Volte em breve.',
+      questions:'28 perguntas',play:'Jogar',opening:'Abrindo pagamento…',
+      payFail:'Não foi possível abrir o pagamento. Tente novamente.'
+    },
+    en:{
+      newThemes:'New themes are being prepared.',unavailable:'Unavailable',
+      later:'Come back in a moment.',loadFail:'The themes could not be loaded right now.',
+      confirmFail:'Availability could not be confirmed right now.',
+      preparing:'In preparation',more:'More questions are on the way.',soon:'Come back soon.',
+      questions:'28 questions',play:'Play',opening:'Opening payment…',
+      payFail:'Could not open payment. Please try again.'
+    },
+    es:{
+      newThemes:'Se están preparando nuevos temas.',unavailable:'No disponible',
+      later:'Vuelve en unos momentos.',loadFail:'Los temas no se han podido cargar ahora.',
+      confirmFail:'No se pudo confirmar la disponibilidad ahora.',
+      preparing:'En preparación',more:'Hay más preguntas en camino.',soon:'Vuelve pronto.',
+      questions:'28 preguntas',play:'Jugar',opening:'Abriendo pago…',
+      payFail:'No se pudo abrir el pago. Inténtalo de nuevo.'
+    }
+  }[locale]||null;
+  const t=copy||{
+    newThemes:'Novos temas estão a ser preparados.',unavailable:'Indisponível',
+    later:'Volta dentro de momentos.',loadFail:'Os temas não carregaram agora.',
+    confirmFail:'Não foi possível confirmar a disponibilidade agora.',
+    preparing:'Em preparação',more:'Há mais perguntas a caminho.',soon:'Volta em breve.',
+    questions:'28 perguntas',play:'Jogar',opening:'A abrir pagamento…',
+    payFail:'Não foi possível abrir o pagamento. Tenta novamente.'
+  };
   const status=document.getElementById('pdi-status');
   const grid=document.getElementById('pdi-theme-grid');
   let available=new Map();
 
   try{
-    const response=await fetch('/api/pdi-themes-live',{cache:'no-store'});
+    const response=await fetch('/api/pdi-themes-live?locale='+encodeURIComponent(locale),{cache:'no-store'});
     const data=await response.json().catch(()=>({themes:[]}));
     if(!response.ok||!Array.isArray(data.themes))throw new Error();
     available=new Map(data.themes.map(x=>[x.slug,x]));
     render(data.themes);
-    if(!data.themes.length){
-      status.textContent='Novos temas estão a ser preparados.';
-    }
+    if(!data.themes.length)status.textContent=t.newThemes;
   }catch{
-    grid.innerHTML='<article class="pdi-theme"><small>Indisponível</small><h3>Volta dentro de momentos.</h3><p>Os temas não carregaram agora.</p></article>';
-    status.textContent='Não foi possível confirmar a disponibilidade agora.';
+    grid.innerHTML='<article class="pdi-theme"><small>'+t.unavailable+'</small><h3>'+t.later+'</h3><p>'+t.loadFail+'</p></article>';
+    status.textContent=t.confirmFail;
   }
 
   function render(themes){
     if(!themes.length){
-      grid.innerHTML='<article class="pdi-theme"><small>Em preparação</small><h3>Há mais perguntas a caminho.</h3><p>Volta em breve.</p></article>';
+      grid.innerHTML='<article class="pdi-theme"><small>'+t.preparing+'</small><h3>'+t.more+'</h3><p>'+t.soon+'</p></article>';
       return;
     }
     grid.innerHTML='';
@@ -125,10 +166,10 @@
       card.className='pdi-theme';
       const small=document.createElement('small');small.textContent=theme.family||'PÁRA DE IGNORAR!';
       const h=document.createElement('h3');h.textContent=theme.label;
-      const p=document.createElement('p');p.textContent='28 perguntas';
+      const p=document.createElement('p');p.textContent=t.questions;
       const button=document.createElement('button');
       button.className='pdi-buy';button.type='button';button.dataset.theme=theme.slug;
-      button.textContent='Jogar';
+      button.textContent=t.play;
       card.append(small,h,p,button);grid.append(card);
     }
   }
@@ -140,19 +181,19 @@
     all.forEach(b=>b.disabled=true);
     button.setAttribute('aria-busy','true');
     const original=button.textContent;
-    button.textContent='A abrir pagamento…';
-    window.maisonAnalytics?.track?.('pdi_purchase_intent',{theme,page_path:location.pathname});
+    button.textContent=t.opening;
+    window.maisonAnalytics?.track?.('pdi_purchase_intent',{theme,locale,page_path:location.pathname});
     try{
       const response=await fetch('/api/create-pdi-checkout-live',{
         method:'POST',
         headers:{'content-type':'application/json'},
-        body:JSON.stringify({theme})
+        body:JSON.stringify({theme,locale})
       });
       const payload=await response.json().catch(()=>({}));
       if(!response.ok||!payload.url)throw new Error();
       location.href=payload.url;
     }catch{
-      status.textContent='Não foi possível abrir o pagamento. Tenta novamente.';
+      status.textContent=t.payFail;
       all.forEach(b=>b.disabled=false);
       button.removeAttribute('aria-busy');button.textContent=original;
     }
