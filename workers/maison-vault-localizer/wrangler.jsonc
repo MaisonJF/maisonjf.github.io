@@ -14,7 +14,9 @@
     "LOCALIZER_ENABLED": "true",
     "LOCALIZER_MODEL": "@cf/zai-org/glm-4.7-flash",
     "LOCALIZER_BATCH_SIZE": "12",
-    "LOCALIZER_ROUNDS_PER_CRON": "1"
+    "LOCALIZER_ROUNDS_PER_CRON": "1",
+    "LOCALIZER_QUESTION_BATCH_SIZE": "12",
+    "LOCALIZER_ORACLE_BATCH_SIZE": "2"
   },
   "ai": {
     "binding": "AI"
