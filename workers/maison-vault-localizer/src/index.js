@@ -261,11 +261,6 @@ async function pendingCounts(db){
   };
 }
 
-async function persistTelemetry(db,{locale,questionsActivated=0,oracleActivated=0,pending}){
-  await db.prepare("CREATE TABLE IF NOT EXISTS vault_localizer_telemetry (singleton_id INTEGER PRIMARY KEY,updated_at TEXT NOT NULL,last_locale TEXT,last_status TEXT NOT NULL,last_questions_activated INTEGER NOT NULL DEFAULT 0,last_oracle_activated INTEGER NOT NULL DEFAULT 0,pending_total INTEGER NOT NULL DEFAULT 0,pending_questions_pt_br INTEGER NOT NULL DEFAULT 0,pending_questions_en INTEGER NOT NULL DEFAULT 0,pending_questions_es INTEGER NOT NULL DEFAULT 0,pending_oracle_pt_br INTEGER NOT NULL DEFAULT 0,pending_oracle_en INTEGER NOT NULL DEFAULT 0,pending_oracle_es INTEGER NOT NULL DEFAULT 0)").run();
-  await db.prepare("INSERT INTO vault_localizer_telemetry (singleton_id,updated_at,last_locale,last_status,last_questions_activated,last_oracle_activated,pending_total,pending_questions_pt_br,pending_questions_en,pending_questions_es,pending_oracle_pt_br,pending_oracle_en,pending_oracle_es) VALUES (1,strftime('%Y-%m-%dT%H:%M:%fZ','now'),?1,'success',?2,?3,?4,?5,?6,?7,?8,?9,?10,?11) ON CONFLICT(singleton_id) DO UPDATE SET updated_at=excluded.updated_at,last_locale=excluded.last_locale,last_status=excluded.last_status,last_questions_activated=excluded.last_questions_activated,last_oracle_activated=excluded.last_oracle_activated,pending_total=excluded.pending_total,pending_questions_pt_br=excluded.pending_questions_pt_br,pending_questions_en=excluded.pending_questions_en,pending_questions_es=excluded.pending_questions_es,pending_oracle_pt_br=excluded.pending_oracle_pt_br,pending_oracle_en=excluded.pending_oracle_en,pending_oracle_es=excluded.pending_oracle_es").bind(locale,questionsActivated,oracleActivated,pending.total,pending.questions['pt-BR'],pending.questions.en,pending.questions.es,pending.oracle['pt-BR'],pending.oracle.en,pending.oracle.es).run();
-}
-
 export async function runVaultLocalization(env,{locale}={}){
   if(!enabled(env.LOCALIZER_ENABLED))return {skipped:'disabled'};
   const legacyLimit=clamp(env.LOCALIZER_BATCH_SIZE,12,1,24);
