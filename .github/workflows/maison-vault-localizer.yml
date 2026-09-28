@@ -1,0 +1,56 @@
+name: Maison Vault Localizer
+
+on:
+  pull_request:
+    paths:
+      - 'workers/maison-vault-localizer/**'
+      - '.github/workflows/maison-vault-localizer.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'workers/maison-vault-localizer/**'
+      - '.github/workflows/maison-vault-localizer.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate localizer syntax
+        run: node --check workers/maison-vault-localizer/src/index.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Wrangler
+        working-directory: workers/maison-intelligence
+        run: npm install --ignore-scripts
+      - name: Validate Worker bundle
+        working-directory: workers/maison-intelligence
+        run: npx wrangler deploy --dry-run --config ../maison-vault-localizer/wrangler.jsonc
+
+  deploy-production:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Guard Cloudflare credentials
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+      - name: Install Wrangler
+        working-directory: workers/maison-intelligence
+        run: npm install --ignore-scripts
+      - name: Deploy production localizer
+        working-directory: workers/maison-intelligence
+        run: npx wrangler deploy --config ../maison-vault-localizer/wrangler.jsonc
