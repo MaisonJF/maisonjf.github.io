@@ -26,6 +26,9 @@ class PrivateRuntimeReadinessTests(unittest.TestCase):
         self.assertEqual(result["read_only_inspection_token_source"],"deployment_fallback")
         self.assertTrue(result["access_boundary_pair_present"])
         self.assertFalse(result["access_boundary_pair_partial"])
+        self.assertTrue(result["scoped_write_tokens_ready"])
+        self.assertEqual(result["scoped_write_tokens_source"],"derived_from_control_root")
+        self.assertFalse(result["operator_one_button_ready"])
         self.assertFalse(result["secrets_printed"])
 
     def test_missing_first_stage_inputs_do_not_fail_the_report(self):
@@ -63,6 +66,19 @@ class PrivateRuntimeReadinessTests(unittest.TestCase):
         self.assertFalse(result["access_boundary_pair_present"])
         self.assertTrue(result["access_boundary_pair_partial"])
 
+
+    def test_one_button_ready_when_root_and_access_pair_are_shape_valid(self):
+        result = summarize({
+            "CLOUDFLARE_API_TOKEN": "token-secret-value-abcdefghijklmnopqrstuvwxyz",
+            "CLOUDFLARE_ACCOUNT_ID": "account-secret-value",
+            "MAISON_BRAIN_PRIVATE_URL": "https://brain.private.test",
+            "MAISON_BRAIN_CONTROL_TOKEN": "brain-secret-value-abcdefghijklmnopqrstuvwxyz",
+            "MAISON_CF_ACCESS_CLIENT_ID": "example-token.access",
+            "MAISON_CF_ACCESS_CLIENT_SECRET": "cfast_abcdefghijklmnopqrstuvwxyz0123456789",
+        })
+        self.assertTrue(result["operator_one_button_ready"])
+        self.assertTrue(result["scoped_write_tokens_ready"])
+        self.assertEqual(result["scoped_write_token_scopes"],["proposal","review"])
 
     def test_prefixed_cloudflare_access_values_are_normalized_before_shape_check(self):
         result = summarize({
