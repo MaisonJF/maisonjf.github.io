@@ -54,6 +54,11 @@ jobs:
       - name: Deploy production localizer
         working-directory: workers/maison-intelligence
         run: npx wrangler deploy --config ../maison-vault-localizer/wrangler.jsonc
+      - name: Capture one scheduled execution
+        working-directory: workers/maison-intelligence
+        run: |
+          timeout 90s npx wrangler tail maison-vault-localizer --format pretty --status error --status ok || code=$?
+          if [ "${code:-0}" -ne 0 ] && [ "${code:-0}" -ne 124 ]; then exit "$code"; fi
       - name: Report direct Vault localization pending counts
         working-directory: workers/maison-intelligence
         run: |
