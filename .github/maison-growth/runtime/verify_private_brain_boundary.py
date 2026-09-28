@@ -119,6 +119,18 @@ def validate_results(
         if review_probe is None or review_probe.status!=404:
             raise BoundaryVerificationError("review_surface_must_be_hidden_in_private_read_stage")
         write_surfaces="hidden_404"
+    elif stage=="proposal_materialization_candidate":
+        if proposal_probe is None or proposal_probe.status!=405:
+            raise BoundaryVerificationError("proposal_surface_not_enabled_or_authenticated")
+        if review_probe is None or review_probe.status!=404:
+            raise BoundaryVerificationError("review_surface_must_be_hidden_before_review_stage")
+        write_surfaces="proposal_enabled_no_write_probe"
+    elif stage=="human_review_decision_candidate":
+        if proposal_probe is None or proposal_probe.status!=405:
+            raise BoundaryVerificationError("proposal_surface_not_enabled_or_authenticated")
+        if review_probe is None or review_probe.status!=405:
+            raise BoundaryVerificationError("review_surface_not_enabled_or_authenticated")
+        write_surfaces="proposal_and_review_enabled_no_write_probe"
 
     return {
         "kind":"maison_private_brain_boundary_verification",
@@ -150,8 +162,23 @@ def verify_live(stage:str,values:Mapping[str,str])->dict[str,Any]:
     inbox=_request(base,"/internal/brain/action-inbox?limit=1",bearer=token,access_client_id=access_id,access_client_secret=access_secret)
     proposal=review=None
     if stage=="private_brain_read_candidate":
-        proposal=_request(base,"/internal/proposals/a14",method="POST",bearer=token,access_client_id=access_id,access_client_secret=access_secret)
-        review=_request(base,"/internal/reviews/a12",method="POST",bearer=token,access_client_id=access_id,access_client_secret=access_secret)
+        proposal=_request(base,"/internal/proposals/a14",method="GET",bearer=token,access_client_id=access_id,access_client_secret=access_secret)
+        review=_request(base,"/internal/reviews/a12",method="GET",bearer=token,access_client_id=access_id,access_client_secret=access_secret)
+    elif stage=="proposal_materialization_candidate":
+        proposal_token=values.get("BRAIN_PROPOSAL_TOKEN","").strip()
+        if not proposal_token:
+            raise BoundaryVerificationError("brain_proposal_token_required")
+        proposal=_request(base,"/internal/proposals/a14",method="GET",bearer=proposal_token,access_client_id=access_id,access_client_secret=access_secret)
+        review=_request(base,"/internal/reviews/a12",method="GET",bearer=token,access_client_id=access_id,access_client_secret=access_secret)
+    elif stage=="human_review_decision_candidate":
+        proposal_token=values.get("BRAIN_PROPOSAL_TOKEN","").strip()
+        review_token=values.get("BRAIN_REVIEW_DECISION_TOKEN","").strip()
+        if not proposal_token:
+            raise BoundaryVerificationError("brain_proposal_token_required")
+        if not review_token:
+            raise BoundaryVerificationError("brain_review_decision_token_required")
+        proposal=_request(base,"/internal/proposals/a14",method="GET",bearer=proposal_token,access_client_id=access_id,access_client_secret=access_secret)
+        review=_request(base,"/internal/reviews/a12",method="GET",bearer=review_token,access_client_id=access_id,access_client_secret=access_secret)
     return validate_results(
         stage=stage,
         edge_unauth_health=edge_unauth,
