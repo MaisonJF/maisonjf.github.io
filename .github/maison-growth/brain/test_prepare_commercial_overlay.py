@@ -82,6 +82,31 @@ class PrepareCommercialOverlayTests(unittest.TestCase):
         self.assertNotIn("reserved_quantity",row["operational"])
         self.assertEqual(row["operational"]["batch_capacity_units"],30)
 
+    def test_digital_operations_template_builds_overlay(self):
+        digital={
+            "target_overlay_schema":"commercial_asset_overlay_v1",
+            "assets":[{
+                "asset_ref":"catalog:digital:oracle",
+                "source":"manual_digital_delivery_review",
+                "operational":{
+                    "human_effort_minutes":0,
+                    "variable_cost_minor":0,
+                    "delivery_lead_days":0,
+                },
+                "evidence_refs":["manual:digital-delivery:oracle:2026-09-28"],
+            }],
+        }
+        payload=build_overlay(
+            templates=(digital,),
+            observed_at="2026-09-28T18:55:31+01:00",
+        )
+        row=payload["assets"][0]
+        self.assertEqual(row["asset_ref"],"catalog:digital:oracle")
+        self.assertEqual(row["source"],"manual_digital_delivery_review")
+        self.assertEqual(row["operational"]["variable_cost_minor"],0)
+        self.assertEqual(row["operational"]["human_effort_minutes"],0)
+        self.assertEqual(row["operational"]["delivery_lead_days"],0)
+
     def test_operations_summary_exposes_presence_not_private_values(self):
         overlay={
             "schema_version":"commercial_asset_overlay_v1",
