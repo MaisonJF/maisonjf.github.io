@@ -327,4 +327,4 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-09-27";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-09-28";
