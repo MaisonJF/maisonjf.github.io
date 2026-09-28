@@ -62,12 +62,18 @@ jobs:
             sleep 1
           done
           test "$ready" = "1"
-          response="$(curl -fsS --max-time 240             'http://127.0.0.1:8787/cdn-cgi/local/scheduled?format=json&cron=*+*+*+*+*')"
-          echo "$response" | jq '{outcome,noRetry}'
-          outcome="$(jq -r '.outcome // empty' <<<"$response")"
+          response_file=/tmp/scheduled-response.json
+          http_code="$(curl -sS --max-time 240 -o "$response_file" -w '%{http_code}'             'http://127.0.0.1:8787/cdn-cgi/local/scheduled?format=json&cron=*+*+*+*+*' || true)"
+          echo "Scheduled HTTP: $http_code"
+          if jq -e . "$response_file" >/dev/null 2>&1; then
+            jq '{outcome,noRetry}' "$response_file"
+            outcome="$(jq -r '.outcome // empty' "$response_file")"
+          else
+            outcome=""
+          fi
           echo "Sanitized localizer diagnostics:"
-          grep -E 'Vault localizer completed|Scheduled Vault localizer failed|localizer_|AI|D1|Error|exception' /tmp/vault-localizer-dev.log | tail -n 80 || true
-          if [[ "$outcome" != "ok" ]]; then
+          grep -E 'Vault localizer completed|Scheduled Vault localizer failed|localizer_|AI|D1|Error|exception|RangeError|TypeError' /tmp/vault-localizer-dev.log | tail -n 120 || true
+          if [[ "$http_code" != "200" || "$outcome" != "ok" ]]; then
             echo "Scheduled smoke did not complete successfully."
             exit 1
           fi
