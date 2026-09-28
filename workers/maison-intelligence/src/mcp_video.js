@@ -131,3 +131,4 @@ export async function handleMaisonMcpRequest(request,env){
     return rpcError(id,-32601,'Method not found');
   }catch(e){return rpc(id,toolText({error:e?.message||'mcp_tool_failed'},true));}
 }
+
