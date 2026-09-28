@@ -30,6 +30,9 @@ jobs:
           node --check functions/_lib/experience-quality.js
           node --check functions/_lib/oracle-composer.js
           node .github/maison-growth/vault/validate_oracle_composer.mjs
+          node --check functions/_lib/maison-locales.js
+          node --check functions/_lib/maison-localized-content.js
+          node --check functions/_lib/maison-vault.js
           node --check functions/_lib/maison-vault-v2.js
           node --check functions/_lib/taxonomy-gate.js
           node --check functions/_lib/content-gap-detector.js
@@ -46,6 +49,7 @@ jobs:
           node --check functions/api/pdi-themes-live.js
           node --check functions/api/pdi-product-live.js
           node --check functions/api/create-pdi-checkout-live.js
+          node --check functions/api/create-oracle-checkout-live.js
           node --check functions/api/create-product-checkout-live.js
           node --check functions/api/product-checkout-session-live.js
           node --check functions/api/create-consultation-checkout-live.js
