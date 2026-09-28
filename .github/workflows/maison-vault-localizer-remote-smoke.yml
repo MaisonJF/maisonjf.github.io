@@ -41,8 +41,11 @@ jobs:
           cfg=json.loads(src.read_text())
           cfg['triggers']={'crons':[]}
           cfg['vars']['LOCALIZER_ENABLED']='true'
-          cfg['vars']['LOCALIZER_BATCH_SIZE']='4'
+          cfg['vars']['LOCALIZER_BATCH_SIZE']='1'
+          cfg['vars']['LOCALIZER_QUESTION_BATCH_SIZE']='1'
+          cfg['vars']['LOCALIZER_ORACLE_BATCH_SIZE']='0'
           cfg['vars']['LOCALIZER_ROUNDS_PER_CRON']='1'
+          cfg['vars']['LOCALIZER_LOCALE']='pt-BR'
           cfg['ai']['remote']=True
           for db in cfg['d1_databases']:
               db['remote']=True
