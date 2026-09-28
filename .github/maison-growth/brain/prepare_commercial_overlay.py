@@ -16,6 +16,7 @@ TEMPLATE_SCHEMAS={
     "commercial_operations_facts_template_v1",
     "commercial_stocktake_template_v1",
     "commercial_service_capacity_template_v1",
+    "commercial_digital_operations_template_v1",
 }
 
 
@@ -33,7 +34,16 @@ def build_overlay(
     rows=[]
     seen=set()
     for template in templates:
-        if template.get("schema_version") not in TEMPLATE_SCHEMAS:
+        schema_name=template.get("schema_version") or template.get("template_schema")
+        if schema_name is None and template.get("target_overlay_schema")=="commercial_asset_overlay_v1":
+            sources={
+                str(row.get("source") or "")
+                for row in template.get("assets",[])
+                if isinstance(row,Mapping)
+            }
+            if sources=={"manual_digital_delivery_review"}:
+                schema_name="commercial_digital_operations_template_v1"
+        if schema_name not in TEMPLATE_SCHEMAS:
             raise ValueError("unsupported_commercial_template_schema")
         for raw in template.get("assets",[]):
             if not isinstance(raw,Mapping):
@@ -91,6 +101,7 @@ def main() -> None:
     parser.add_argument("--operations",type=Path,help="Preferred physical operations-facts template.")
     parser.add_argument("--stocktake",type=Path,help="Legacy compatibility input; prefer --operations.")
     parser.add_argument("--services",type=Path)
+    parser.add_argument("--digital",type=Path)
     parser.add_argument("--observed-at",required=True)
     parser.add_argument("--evidence-ref",action="append",default=[])
     parser.add_argument("--output",type=Path,required=True)
@@ -98,9 +109,9 @@ def main() -> None:
 
     if args.operations is not None and args.stocktake is not None:
         raise SystemExit("use either --operations or legacy --stocktake, not both")
-    inputs=[x for x in (args.operations,args.stocktake,args.services) if x is not None]
+    inputs=[x for x in (args.operations,args.stocktake,args.services,args.digital) if x is not None]
     if not inputs:
-        raise SystemExit("at least one of --operations, --stocktake or --services is required")
+        raise SystemExit("at least one of --operations, --stocktake, --services or --digital is required")
     if not _outside_repo(args.output):
         raise SystemExit("refusing to write a private commercial overlay inside the repository")
 
