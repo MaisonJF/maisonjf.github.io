@@ -1,4 +1,5 @@
 name: Maison Vault Localizer Inspect
+# final count-only inspection before cleanup
 
 on:
   push:
