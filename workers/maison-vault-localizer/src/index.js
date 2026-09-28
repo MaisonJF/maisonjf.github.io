@@ -217,10 +217,20 @@ export async function runVaultLocalization(env){
   return {results,pending:await pendingCounts(env.GROWTH_DB)};
 }
 
+async function runLocalizationRounds(env){
+  const rounds=clamp(env.LOCALIZER_ROUNDS_PER_CRON,1,1,4);
+  let last=null;
+  for(let i=0;i<rounds;i++){
+    last=await runVaultLocalization(env);
+    if(last?.pending?.total===0)break;
+  }
+  return last;
+}
+
 export default {
   async fetch(){return new Response('Not Found',{status:404});},
   async scheduled(_controller,env,ctx){
-    ctx.waitUntil(runVaultLocalization(env).catch(error=>
+    ctx.waitUntil(runLocalizationRounds(env).catch(error=>
       console.error('Scheduled Vault localizer failed',String(error?.message||error))
     ));
   }
