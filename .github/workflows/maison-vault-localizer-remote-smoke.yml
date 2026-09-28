@@ -5,6 +5,7 @@ on:
     branches:
       - rio-produto-digital/vault-localizer
     paths:
+      - 'workers/maison-vault-localizer/**'
       - '.github/workflows/maison-vault-localizer-remote-smoke.yml'
 
 permissions:
@@ -63,8 +64,14 @@ jobs:
           test "$ready" = "1"
           response="$(curl -fsS --max-time 240             'http://127.0.0.1:8787/cdn-cgi/local/scheduled?format=json&cron=*+*+*+*+*')"
           echo "$response" | jq '{outcome,noRetry}'
-          if [[ "$(jq -r '.outcome // empty' <<<"$response")" != "ok" ]]; then
+          outcome="$(jq -r '.outcome // empty' <<<"$response")"
+          echo "Sanitized localizer diagnostics:"
+          grep -E 'Vault localizer completed|Scheduled Vault localizer failed|localizer_|AI|D1|Error|exception' /tmp/vault-localizer-dev.log | tail -n 80 || true
+          if [[ "$outcome" != "ok" ]]; then
             echo "Scheduled smoke did not complete successfully."
-            sed -E 's/(INPUT:).*/\1 [redacted]/' /tmp/vault-localizer-dev.log | tail -n 80
+            exit 1
+          fi
+          if ! grep -q 'Vault localizer completed' /tmp/vault-localizer-dev.log; then
+            echo "Scheduled handler returned ok but did not report a completed localization round."
             exit 1
           fi
