@@ -101,5 +101,16 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
             self.assertIn(condition, tail, step)
 
 
+    def test_video_smoke_is_not_coupled_to_brain_deploy(self):
+        for forbidden in (
+            "VIDEO_GENERATION_TOKEN",
+            "Verify video generation health",
+            "Generate one-second video smoke test",
+            "Collect one-second video result",
+            "casos-cinzentos-video-smoke-test",
+        ):
+            self.assertNotIn(forbidden, self.source)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
