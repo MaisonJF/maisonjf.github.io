@@ -5,10 +5,33 @@ import { handleVideoGenerationRequest } from './video_generation.js';
 
 const JSON_HEADERS = {'content-type':'application/json','cache-control':'no-store','x-content-type-options':'nosniff'};
 const MCP_VERSION = '2025-06-18';
+const MCP_SCOPE = 'openid email profile';
+
+function supabaseOrigin(env){
+  const raw=String(env.MAISON_MCP_SUPABASE_URL||'').trim().replace(/\\/+$/,'');
+  if(!/^https:\/\/[a-z0-9-]+\\.supabase\\.co$/i.test(raw)) throw new Error('mcp_supabase_url_missing');
+  return raw;
+}
+function resourceUrl(request){const u=new URL(request.url);return u.origin+'/mcp';}
+function challenge(request){return `Bearer resource_metadata="${new URL('/.well-known/oauth-protected-resource',request.url).toString()}", error="invalid_token", error_description="Maison JF authentication required"`;}
+async function authenticate(request,env){
+  const auth=String(request.headers.get('Authorization')||'');
+  if(!auth.startsWith('Bearer ')) return null;
+  const token=auth.slice(7).trim();
+  const key=String(env.MAISON_MCP_SUPABASE_PUBLISHABLE_KEY||'').trim();
+  const allowed=String(env.MAISON_MCP_ALLOWED_SUBJECT||'').trim();
+  if(!token||!key||!allowed) return null;
+  const r=await fetch(supabaseOrigin(env)+'/auth/v1/user',{headers:{apikey:key,Authorization:'Bearer '+token}});
+  if(!r.ok) return null;
+  const user=await r.json().catch(()=>null);
+  if(!user?.id||String(user.id)!==allowed) return null;
+  return {id:String(user.id)};
+}
+function authError(request){return toolText({error:'authentication_required'},true,{ 'mcp/www_authenticate':[challenge(request)] });}
 
 function rpc(id,result){return new Response(JSON.stringify({jsonrpc:'2.0',id,result}),{headers:JSON_HEADERS});}
 function rpcError(id,code,message){return new Response(JSON.stringify({jsonrpc:'2.0',id,error:{code,message}}),{headers:JSON_HEADERS});}
-function toolText(payload,isError=false){return {content:[{type:'text',text:JSON.stringify(payload)}],structuredContent:payload,isError};}
+function toolText(payload,isError=false,meta=null){const out={content:[{type:'text',text:JSON.stringify(payload)}],structuredContent:payload,isError};if(meta)out._meta=meta;return out;}
 
 function tools(){
   return [
@@ -17,7 +40,8 @@ function tools(){
       title:'Maison video health',
       description:'Check the MAISON JF zero-cost short-video engine health and configured providers.',
       inputSchema:{type:'object',properties:{},additionalProperties:false},
-      annotations:{readOnlyHint:true,destructiveHint:false,idempotentHint:true,openWorldHint:false}
+      annotations:{readOnlyHint:true,destructiveHint:false,idempotentHint:true,openWorldHint:false},
+      securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
     },
     {
       name:'maison_generate_video',
@@ -32,7 +56,8 @@ function tools(){
         seed:{type:'integer'},
         randomize_seed:{type:'boolean',default:true}
       },additionalProperties:false},
-      annotations:{readOnlyHint:false,destructiveHint:false,idempotentHint:false,openWorldHint:true}
+      annotations:{readOnlyHint:false,destructiveHint:false,idempotentHint:false,openWorldHint:true},
+      securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
     },
     {
       name:'maison_video_result',
@@ -42,7 +67,8 @@ function tools(){
         provider:{type:'string',enum:['wan22-aoti-fast','wan22-r3gm-preview']},
         job_id:{type:'string',minLength:6,maxLength:200}
       },additionalProperties:false},
-      annotations:{readOnlyHint:true,destructiveHint:false,idempotentHint:true,openWorldHint:true}
+      annotations:{readOnlyHint:true,destructiveHint:false,idempotentHint:true,openWorldHint:true},
+      securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
     }
   ];
 }
@@ -81,6 +107,10 @@ async function callTool(request,env,name,args){
 
 export async function handleMaisonMcpRequest(request,env){
   const url=new URL(request.url);
+  if(url.pathname==='/.well-known/oauth-protected-resource'){
+    let issuer;try{issuer=supabaseOrigin(env)+'/auth/v1';}catch{return new Response(JSON.stringify({error:'mcp_auth_not_configured'}),{status:503,headers:JSON_HEADERS});}
+    return new Response(JSON.stringify({resource:resourceUrl(request),authorization_servers:[issuer],scopes_supported:MCP_SCOPE.split(' '),resource_documentation:'https://maison-jf.com/'}),{headers:JSON_HEADERS});
+  }
   if(url.pathname!=='/mcp') return null;
   if(request.method==='GET') return new Response(JSON.stringify({service:'maison-jf-mcp',transport:'streamable-http',protocol:MCP_VERSION}),{headers:JSON_HEADERS});
   if(request.method!=='POST') return new Response('Method Not Allowed',{status:405,headers:{Allow:'GET, POST'}});
@@ -92,6 +122,8 @@ export async function handleMaisonMcpRequest(request,env){
     if(msg.method==='ping') return rpc(id,{});
     if(msg.method==='tools/list') return rpc(id,{tools:tools()});
     if(msg.method==='tools/call'){
+      const identity=await authenticate(request,env);
+      if(!identity) return rpc(id,authError(request));
       const name=String(msg.params?.name||'');
       const args=msg.params?.arguments||{};
       return rpc(id,await callTool(request,env,name,args));
