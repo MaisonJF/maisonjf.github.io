@@ -1,4 +1,7 @@
 import { ORACLE_TERRITORIES } from '../_lib/oracle-territories.js';
+import { requireMaisonVault } from '../_lib/maison-vault.js';
+import { oracleRoleCoverageForLocale } from '../_lib/maison-localized-content.js';
+import { normalizeMaisonLocale, stripeLocaleForMaison, publicLangForMaison } from '../_lib/maison-locales.js';
 
 const TERRITORIES=Object.fromEntries(
   ORACLE_TERRITORIES.map(t=>[t.slug,{label:t.label,page:t.slug+'.html'}])
@@ -15,28 +18,42 @@ export async function onRequestPost({ request, env }) {
     const theme=String(body?.theme||'');
     const territory=TERRITORIES[theme];
     if (!territory) return json({ error: 'Este território ainda não está disponível.' }, 400);
+    const rawLocale=body?.locale??body?.lang??'pt-PT';
+    const locale=normalizeMaisonLocale(rawLocale,{fallback:null});
+    if(!locale)return json({error:'Idioma inválido.'},400);
+    if(locale!=='pt-PT'){
+      const db=requireMaisonVault(env);
+      const coverage=await oracleRoleCoverageForLocale(db,theme,locale);
+      if(!coverage.complete)return json({error:'Este território ainda não está disponível neste idioma.'},409);
+    }
 
     const origin = new URL(request.url).origin;
-    const successUrl = origin + '/oraculo/leitura.html?theme=' + encodeURIComponent(theme) + '&session_id={CHECKOUT_SESSION_ID}';
+    const successUrl = origin + '/oraculo/leitura.html?theme=' + encodeURIComponent(theme) + '&session_id={CHECKOUT_SESSION_ID}&locale=' + encodeURIComponent(locale);
 
     const params = new URLSearchParams();
     params.set('mode', 'payment');
     params.set('success_url', successUrl);
-    params.set('cancel_url', origin + '/oraculo/' + territory.page + '?checkout_cancelado=1');
-    params.set('locale', 'pt');
+    params.set('cancel_url', origin + '/oraculo/' + territory.page + '?checkout_cancelado=1&lang=' + encodeURIComponent(publicLangForMaison(locale)));
+    params.set('locale', stripeLocaleForMaison(locale));
     params.set('customer_creation', 'always');
     params.set('billing_address_collection', 'auto');
     params.set('line_items[0][price_data][currency]', 'eur');
     params.set('line_items[0][price_data][unit_amount]', '200');
     params.set('line_items[0][price_data][product_data][name]', 'Oráculo MAISON JF® | ' + territory.label);
-    params.set('line_items[0][price_data][product_data][description]', 'Uma abertura simbólica. Uma leitura.');
+    const copy={
+      'pt-PT':{description:'Uma abertura simbólica. Uma leitura.',legal:'Ao pagar, confirmas uma abertura do Oráculo MAISON JF® e aceitas as condições em maison-jf.com/informacao-legal.html.'},
+      en:{description:'One symbolic opening. One reading.',legal:'By paying, you confirm one MAISON JF® Oracle reading and accept the terms at maison-jf.com/informacao-legal.html.'},
+      es:{description:'Una apertura simbólica. Una lectura.',legal:'Al pagar, confirmas una lectura del Oráculo MAISON JF® y aceptas las condiciones en maison-jf.com/informacao-legal.html.'}
+    }[locale];
+    params.set('line_items[0][price_data][product_data][description]', copy.description);
     params.set('line_items[0][quantity]', '1');
     params.set('metadata[environment]', 'maison-jf-live');
     params.set('metadata[source]', 'oracle-live');
     params.set('metadata[oracle_theme]', theme);
+    params.set('metadata[oracle_locale]', locale);
     params.set('metadata[oracle_access]', 'single-reading');
     params.set('submit_type', 'pay');
-    params.set('custom_text[submit][message]', 'Ao pagar, confirmas uma abertura do Oráculo MAISON JF® e aceitas as condições em maison-jf.com/informacao-legal.html.');
+    params.set('custom_text[submit][message]', copy.legal);
 
     const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method:'POST',

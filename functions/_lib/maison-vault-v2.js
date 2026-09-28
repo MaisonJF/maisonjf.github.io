@@ -1,35 +1,63 @@
 /*
-MAISON JF® · Private Brain Vault v2 helpers
-Only call v2 queries after vaultExperienceEngineReady() returns true.
+MAISON JF® · Private Brain Vault v2/v3 helpers
+Only call experience-engine queries after vaultExperienceEngineReady() returns true.
 */
+import { normalizeMaisonLocale } from './maison-locales.js';
+import { vaultLocalizationReady } from './maison-localized-content.js';
+
 
 export async function vaultExperienceEngineReady(db){
   try{
     const row=await db.prepare("SELECT meta_value FROM vault_meta WHERE meta_key='schema_version' LIMIT 1").first();
-    return row?.meta_value==='vault_v2';
+    return ['vault_v2','vault_v3'].includes(row?.meta_value);
   }catch{return false}
 }
 
-export async function listActiveOracleBlocks(db,territory){
-  const result=await db.prepare(
-    `SELECT b.block_id AS id,b.canonical_key,b.territory,b.role,b.intensity,b.text,b.title,
-            b.pain_family,b.subterritory,b.tone,b.emotional_function,b.semantic_fingerprint,
-            b.tags_json,b.compatibility_json,b.scores_json,b.product_fit_json,
-            b.lifecycle_state,b.rotation_state,b.rarity,b.source_ocean_id,b.quality_version,
-            coalesce(m.served_count,0) AS served_count,
-            coalesce(m.completed_count,0) AS completed_count,
-            coalesce(m.reopened_count,0) AS reopened_count,
-            coalesce(m.shared_count,0) AS shared_count,
-            coalesce(m.quality_failure_count,0) AS quality_failure_count,
-            b.status
-       FROM vault_oracle_blocks b
-       LEFT JOIN vault_oracle_block_metrics m ON m.block_id=b.block_id
-      WHERE b.status='active'
-        AND b.lifecycle_state='live'
-        AND b.rotation_state IN ('new','limited','normal')
-        AND b.territory IN (?1,'global')
-      ORDER BY b.role,b.block_id`
-  ).bind(territory).all();
+export async function listActiveOracleBlocks(db,territory,locale='pt-PT'){
+  const selectedLocale=normalizeMaisonLocale(locale);
+  const localized=selectedLocale!=='pt-PT';
+  if(localized&&!await vaultLocalizationReady(db))return [];
+  const result=localized
+    ? await db.prepare(
+      `SELECT b.block_id AS id,b.canonical_key,b.territory,b.role,b.intensity,t.text,t.title,
+              b.pain_family,b.subterritory,b.tone,b.emotional_function,b.semantic_fingerprint,
+              b.tags_json,b.compatibility_json,b.scores_json,b.product_fit_json,
+              b.lifecycle_state,b.rotation_state,b.rarity,b.source_ocean_id,b.quality_version,
+              coalesce(m.served_count,0) AS served_count,
+              coalesce(m.completed_count,0) AS completed_count,
+              coalesce(m.reopened_count,0) AS reopened_count,
+              coalesce(m.shared_count,0) AS shared_count,
+              coalesce(m.quality_failure_count,0) AS quality_failure_count,
+              b.status
+         FROM vault_oracle_blocks b
+         JOIN vault_oracle_block_translations t
+           ON t.block_id=b.block_id AND t.locale=?2 AND t.status='active'
+         LEFT JOIN vault_oracle_block_metrics m ON m.block_id=b.block_id
+        WHERE b.status='active'
+          AND b.lifecycle_state='live'
+          AND b.rotation_state IN ('new','limited','normal')
+          AND b.territory IN (?1,'global')
+        ORDER BY b.role,b.block_id`
+    ).bind(territory,selectedLocale).all()
+    : await db.prepare(
+      `SELECT b.block_id AS id,b.canonical_key,b.territory,b.role,b.intensity,b.text,b.title,
+              b.pain_family,b.subterritory,b.tone,b.emotional_function,b.semantic_fingerprint,
+              b.tags_json,b.compatibility_json,b.scores_json,b.product_fit_json,
+              b.lifecycle_state,b.rotation_state,b.rarity,b.source_ocean_id,b.quality_version,
+              coalesce(m.served_count,0) AS served_count,
+              coalesce(m.completed_count,0) AS completed_count,
+              coalesce(m.reopened_count,0) AS reopened_count,
+              coalesce(m.shared_count,0) AS shared_count,
+              coalesce(m.quality_failure_count,0) AS quality_failure_count,
+              b.status
+         FROM vault_oracle_blocks b
+         LEFT JOIN vault_oracle_block_metrics m ON m.block_id=b.block_id
+        WHERE b.status='active'
+          AND b.lifecycle_state='live'
+          AND b.rotation_state IN ('new','limited','normal')
+          AND b.territory IN (?1,'global')
+        ORDER BY b.role,b.block_id`
+    ).bind(territory).all();
   return (result.results||[]).map(row=>({
     id:row.id,
     canonicalKey:row.canonical_key,
@@ -53,6 +81,7 @@ export async function listActiveOracleBlocks(db,territory){
     sourceOceanId:row.source_ocean_id||undefined,
     qualityVersion:row.quality_version||undefined,
     status:row.status,
+    locale:selectedLocale,
     metrics:{
       served:Number(row.served_count||0),
       completed:Number(row.completed_count||0),
@@ -74,16 +103,35 @@ export async function listSeenOracleBlockIds(db,buyerKey,territory){
 }
 
 export async function findOracleSessionByStripe(db,stripeSessionId){
-  return await db.prepare(
-    `SELECT oracle_session_id,stripe_session_id,buyer_key,territory,seed,trajectory,tone,intensity,
-            director_version,composer_version,quality_version,quality_json,status,created_at,completed_at
-       FROM vault_oracle_sessions WHERE stripe_session_id=?1 LIMIT 1`
-  ).bind(stripeSessionId).first();
+  const localized=await vaultLocalizationReady(db);
+  const select=localized
+    ? `SELECT oracle_session_id,stripe_session_id,buyer_key,territory,locale,seed,trajectory,tone,intensity,
+              director_version,composer_version,quality_version,quality_json,status,created_at,completed_at
+         FROM vault_oracle_sessions WHERE stripe_session_id=?1 LIMIT 1`
+    : `SELECT oracle_session_id,stripe_session_id,buyer_key,territory,seed,trajectory,tone,intensity,
+              director_version,composer_version,quality_version,quality_json,status,created_at,completed_at
+         FROM vault_oracle_sessions WHERE stripe_session_id=?1 LIMIT 1`;
+  const row=await db.prepare(select).bind(stripeSessionId).first();
+  if(row&&!row.locale)row.locale='pt-PT';
+  return row;
 }
 
-export async function createOracleSession(db,{oracleSessionId,stripeSessionId,buyerKey,composed}){
-  const statements=[
-    db.prepare(
+export async function createOracleSession(db,{oracleSessionId,stripeSessionId,buyerKey,composed,locale='pt-PT'}){
+  const selectedLocale=normalizeMaisonLocale(locale);
+  const localizedSchema=await vaultLocalizationReady(db);
+  if(selectedLocale!=='pt-PT'&&!localizedSchema)throw new Error('localized_vault_not_ready');
+  const sessionInsert=localizedSchema
+    ? db.prepare(
+      `INSERT INTO vault_oracle_sessions
+       (oracle_session_id,stripe_session_id,buyer_key,territory,locale,seed,trajectory,tone,intensity,
+        director_version,composer_version,quality_version,quality_json,status)
+       VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,'active')`
+    ).bind(
+      oracleSessionId,stripeSessionId,buyerKey,composed.territory,selectedLocale,composed.seed,composed.trajectory,
+      composed.tone,composed.intensity,composed.directorVersion,composed.engineVersion,
+      composed.qualityVersion,JSON.stringify(composed.quality||{})
+    )
+    : db.prepare(
       `INSERT INTO vault_oracle_sessions
        (oracle_session_id,stripe_session_id,buyer_key,territory,seed,trajectory,tone,intensity,
         director_version,composer_version,quality_version,quality_json,status)
@@ -92,8 +140,8 @@ export async function createOracleSession(db,{oracleSessionId,stripeSessionId,bu
       oracleSessionId,stripeSessionId,buyerKey,composed.territory,composed.seed,composed.trajectory,
       composed.tone,composed.intensity,composed.directorVersion,composed.engineVersion,
       composed.qualityVersion,JSON.stringify(composed.quality||{})
-    )
-  ];
+    );
+  const statements=[sessionInsert];
   composed.blocks.forEach((block,index)=>{
     statements.push(
       db.prepare(
@@ -120,6 +168,7 @@ export async function createOracleSession(db,{oracleSessionId,stripeSessionId,bu
       contentId:oracleSessionId,
       buyerKey,
       territory:composed.territory,
+      metadata:{locale:selectedLocale},
       signalKey:['oracle','served','session',oracleSessionId].join('|')
     });
     for(const block of composed.blocks){
@@ -130,6 +179,7 @@ export async function createOracleSession(db,{oracleSessionId,stripeSessionId,bu
         contentId:block.id,
         buyerKey,
         territory:composed.territory,
+        metadata:{locale:selectedLocale},
         signalKey:['oracle','served',oracleSessionId,block.id].join('|')
       });
     }
@@ -138,28 +188,48 @@ export async function createOracleSession(db,{oracleSessionId,stripeSessionId,bu
 }
 
 export async function readOracleSession(db,oracleSessionId){
+  const localizedSchema=await vaultLocalizationReady(db);
   const session=await db.prepare(
-    `SELECT oracle_session_id,territory,trajectory,tone,intensity,director_version,composer_version,
-            quality_version,quality_json,status,created_at,completed_at
-       FROM vault_oracle_sessions WHERE oracle_session_id=?1 LIMIT 1`
+    localizedSchema
+      ? `SELECT oracle_session_id,territory,locale,trajectory,tone,intensity,director_version,composer_version,
+                quality_version,quality_json,status,created_at,completed_at
+           FROM vault_oracle_sessions WHERE oracle_session_id=?1 LIMIT 1`
+      : `SELECT oracle_session_id,territory,trajectory,tone,intensity,director_version,composer_version,
+                quality_version,quality_json,status,created_at,completed_at
+           FROM vault_oracle_sessions WHERE oracle_session_id=?1 LIMIT 1`
   ).bind(oracleSessionId).first();
   if(!session)return null;
-  const rows=await db.prepare(
-    `SELECT sb.position,sb.role,b.block_id AS id,b.title,b.text,b.intensity
-       FROM vault_oracle_session_blocks sb
-       JOIN vault_oracle_blocks b ON b.block_id=sb.block_id
-      WHERE sb.oracle_session_id=?1 ORDER BY sb.position`
-  ).bind(oracleSessionId).all();
+  const locale=normalizeMaisonLocale(session.locale||'pt-PT');
+  let rows;
+  if(locale==='pt-PT'){
+    rows=await db.prepare(
+      `SELECT sb.position,sb.role,b.block_id AS id,b.title,b.text,b.intensity
+         FROM vault_oracle_session_blocks sb
+         JOIN vault_oracle_blocks b ON b.block_id=sb.block_id
+        WHERE sb.oracle_session_id=?1 ORDER BY sb.position`
+    ).bind(oracleSessionId).all();
+  }else{
+    rows=await db.prepare(
+      `SELECT sb.position,sb.role,b.block_id AS id,t.title,t.text,b.intensity
+         FROM vault_oracle_session_blocks sb
+         JOIN vault_oracle_blocks b ON b.block_id=sb.block_id
+         JOIN vault_oracle_block_translations t
+           ON t.block_id=b.block_id AND t.locale=?2
+        WHERE sb.oracle_session_id=?1 ORDER BY sb.position`
+    ).bind(oracleSessionId,locale).all();
+  }
   const blocks=(rows.results||[]).map(row=>({
     id:row.id,title:row.title||undefined,text:row.text,role:row.role,
     intensity:Number(row.intensity),position:Number(row.position)
   }));
+  const fallbackTitle={en:'A reading',es:'Una apertura','pt-PT':'Uma abertura'}[locale]||'Uma abertura';
   return {
     ...session,
+    locale,
     quality:parseJson(session.quality_json,{}),
     reading:{
       id:session.oracle_session_id,
-      title:blocks.find(x=>x.role==='opening')?.title||'Uma abertura',
+      title:blocks.find(x=>x.role==='opening')?.title||fallbackTitle,
       text:blocks.map(x=>String(x.text||'').trim()).filter(Boolean).join('\n\n')
     },
     blocks

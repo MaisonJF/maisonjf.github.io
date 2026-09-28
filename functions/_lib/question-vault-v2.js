@@ -1,31 +1,59 @@
 /*
-MAISON JF® · PÁRA DE IGNORAR! Vault v2 reader
+MAISON JF® · PÁRA DE IGNORAR! Vault v2/v3 reader
 Returns private question bodies only to server-side composition code.
 */
+import { normalizeMaisonLocale } from './maison-locales.js';
 
-export async function listActivePaidQuestionsV2(db,theme){
-  const result=await db.prepare(
-    `SELECT q.question_id AS id,q.theme,q.text,q.subthemes_json,q.class,q.stage,q.intensity,
-            q.direction,q.time_scope,q.exposure,q.status,q.scores_json,q.viral_json,
-            q.conflicts_json,q.pairs_json,q.similarity_group,
-            q.pain_family,q.subterritory,q.target,q.emotional_function,
-            q.cognitive_load,q.vulnerability,q.conflict_potential,q.playfulness,
-            q.semantic_fingerprint,q.compatibility_json,q.product_fit_json,
-            q.lifecycle_state,q.rotation_state,q.source_ocean_id,q.quality_version,
-            coalesce(m.shown_count,0) AS shown_count,
-            coalesce(m.advanced_count,0) AS advanced_count,
-            coalesce(m.passed_count,0) AS passed_count,
-            coalesce(m.shared_count,0) AS shared_count,
-            coalesce(m.completed_session_count,0) AS completed_session_count
-       FROM vault_questions q
-       LEFT JOIN vault_question_metrics m ON m.question_id=q.question_id
-      WHERE q.theme=?1
-        AND q.status='active'
-        AND q.exposure='paid'
-        AND q.lifecycle_state='live'
-        AND q.rotation_state IN ('new','limited','normal')
-      ORDER BY q.question_id`
-  ).bind(theme).all();
+export async function listActivePaidQuestionsV2(db,theme,locale='pt-PT'){
+  const selectedLocale=normalizeMaisonLocale(locale);
+  const localized=selectedLocale!=='pt-PT';
+  const result=localized
+    ? await db.prepare(
+      `SELECT q.question_id AS id,q.theme,t.text,q.subthemes_json,q.class,q.stage,q.intensity,
+              q.direction,q.time_scope,q.exposure,q.status,q.scores_json,q.viral_json,
+              q.conflicts_json,q.pairs_json,q.similarity_group,
+              q.pain_family,q.subterritory,q.target,q.emotional_function,
+              q.cognitive_load,q.vulnerability,q.conflict_potential,q.playfulness,
+              q.semantic_fingerprint,q.compatibility_json,q.product_fit_json,
+              q.lifecycle_state,q.rotation_state,q.source_ocean_id,q.quality_version,
+              coalesce(m.shown_count,0) AS shown_count,
+              coalesce(m.advanced_count,0) AS advanced_count,
+              coalesce(m.passed_count,0) AS passed_count,
+              coalesce(m.shared_count,0) AS shared_count,
+              coalesce(m.completed_session_count,0) AS completed_session_count
+         FROM vault_questions q
+         JOIN vault_question_translations t
+           ON t.question_id=q.question_id AND t.locale=?2 AND t.status='active'
+         LEFT JOIN vault_question_metrics m ON m.question_id=q.question_id
+        WHERE q.theme=?1
+          AND q.status='active'
+          AND q.exposure='paid'
+          AND q.lifecycle_state='live'
+          AND q.rotation_state IN ('new','limited','normal')
+        ORDER BY q.question_id`
+    ).bind(theme,selectedLocale).all()
+    : await db.prepare(
+      `SELECT q.question_id AS id,q.theme,q.text,q.subthemes_json,q.class,q.stage,q.intensity,
+              q.direction,q.time_scope,q.exposure,q.status,q.scores_json,q.viral_json,
+              q.conflicts_json,q.pairs_json,q.similarity_group,
+              q.pain_family,q.subterritory,q.target,q.emotional_function,
+              q.cognitive_load,q.vulnerability,q.conflict_potential,q.playfulness,
+              q.semantic_fingerprint,q.compatibility_json,q.product_fit_json,
+              q.lifecycle_state,q.rotation_state,q.source_ocean_id,q.quality_version,
+              coalesce(m.shown_count,0) AS shown_count,
+              coalesce(m.advanced_count,0) AS advanced_count,
+              coalesce(m.passed_count,0) AS passed_count,
+              coalesce(m.shared_count,0) AS shared_count,
+              coalesce(m.completed_session_count,0) AS completed_session_count
+         FROM vault_questions q
+         LEFT JOIN vault_question_metrics m ON m.question_id=q.question_id
+        WHERE q.theme=?1
+          AND q.status='active'
+          AND q.exposure='paid'
+          AND q.lifecycle_state='live'
+          AND q.rotation_state IN ('new','limited','normal')
+        ORDER BY q.question_id`
+    ).bind(theme).all();
 
   return (result.results||[]).map(row=>({
     id:row.id,
@@ -59,6 +87,7 @@ export async function listActivePaidQuestionsV2(db,theme){
     conflictsWith:parseJson(row.conflicts_json,[]),
     pairsWellWith:parseJson(row.pairs_json,[]),
     similarityGroup:row.similarity_group||undefined,
+    locale:selectedLocale,
     metrics:{
       shown:Number(row.shown_count||0),
       advanced:Number(row.advanced_count||0),

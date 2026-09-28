@@ -3,6 +3,7 @@ import { vaultExperienceEngineReady, listActiveOracleBlocks, summarizeExperience
 import { listActivePaidQuestionsV2 } from '../_lib/question-vault-v2.js';
 import { composeQuestionSession } from '../_lib/question-composer.js';
 import { composeOracleReading } from '../_lib/oracle-composer.js';
+import { vaultLocalizationReady } from '../_lib/maison-localized-content.js';
 
 const ORACLE_ROLES=['opening','recognition','tension','counterpoint','reframe','movement','close'];
 
@@ -10,10 +11,11 @@ export async function onRequestGet({env}){
   const started=Date.now();
   try{
     const db=requireMaisonVault(env);
-    const schemaV2=await vaultExperienceEngineReady(db);
-    if(!schemaV2){
-      return json({ok:false,schema:'not_vault_v2',latency_ms:Date.now()-started},503);
+    const schemaReady=await vaultExperienceEngineReady(db);
+    if(!schemaReady){
+      return json({ok:false,schema:'not_vault_v2_or_v3',latency_ms:Date.now()-started},503);
     }
+    const localized=await vaultLocalizationReady(db);
 
     const pdi=await checkPdi(db);
     const oracleAmor=await checkOracleAmor(db);
@@ -21,7 +23,8 @@ export async function onRequestGet({env}){
 
     return json({
       ok:pdi.ok&&oracleAmor.ok,
-      schema:'vault_v2',
+      schema:localized?'vault_v3':'vault_v2',
+      localization:{ready:localized,source_locale:'pt-PT',target_locales:['en','es']},
       pdi,
       oracle:{
         amor:oracleAmor,

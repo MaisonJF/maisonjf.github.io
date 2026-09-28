@@ -19,6 +19,7 @@ import {
   upsertContentNeed
 } from '../_lib/maison-vault-v2.js';
 import { detectOracleContentNeeds } from '../_lib/content-gap-detector.js';
+import { normalizeMaisonLocale } from '../_lib/maison-locales.js';
 
 const AUTHORED_READINGS={
   amor:ORACLE_AMOR_READINGS,
@@ -57,29 +58,36 @@ export async function onRequestGet({ request, env }) {
     if (!stripeResponse.ok) return json({ error:'Não foi possível confirmar esta sessão.' },stripeResponse.status);
 
     const sessionTheme=String(session.metadata?.oracle_theme||'');
+    const sessionLocale=normalizeMaisonLocale(session.metadata?.oracle_locale||'pt-PT');
     const requestedTheme=String(url.searchParams.get('theme')||'');
+    const rawRequestedLocale=url.searchParams.get('locale')||url.searchParams.get('lang');
+    const requestedLocale=rawRequestedLocale==null?null:normalizeMaisonLocale(rawRequestedLocale,{fallback:null});
+    if(rawRequestedLocale!=null&&!requestedLocale)return json({error:'Idioma inválido.'},400);
     const theme=requestedTheme||sessionTheme;
-    const readings=readingsFor(theme);
+    const locale=requestedLocale||sessionLocale;
+    const readings=locale==='pt-PT'?readingsFor(theme):null;
 
     const valid =
-      !!readings &&
+      !!TERRITORIES[theme] &&
       session.livemode === true &&
       session.payment_status === 'paid' &&
       session.metadata?.environment === 'maison-jf-live' &&
       session.metadata?.source === 'oracle-live' &&
       sessionTheme === theme &&
       (!requestedTheme || requestedTheme === sessionTheme) &&
+      locale===sessionLocale &&
       session.metadata?.oracle_access === 'single-reading' &&
       session.amount_total === 200 &&
       session.currency === 'eur';
 
     if (!valid) return json({ error:'Esta sessão não dá acesso a esta abertura.' },403);
 
-    const composed=await tryComposedReading({env,session,theme}).catch(()=>null);
+    const composed=await tryComposedReading({env,session,theme,locale}).catch(()=>null);
     if(composed?.reading?.text){
       return json({
         paid:true,
         theme,
+        locale,
         session_id:session.id,
         reading:composed.reading,
         amount_total:200,
@@ -87,13 +95,15 @@ export async function onRequestGet({ request, env }) {
       });
     }
 
-    if (!readings.length) return json({ error:'O Oráculo ficou temporariamente em silêncio.' },503);
+    if(locale!=='pt-PT')return json({error:'Esta abertura ainda não está disponível neste idioma.'},503);
+    if (!readings?.length) return json({ error:'O Oráculo ficou temporariamente em silêncio.' },503);
     const index = await readingIndex(theme, sessionId, readings.length);
     const selected = readings[index];
 
     return json({
       paid:true,
       theme,
+      locale,
       session_id:session.id,
       reading:{ id:selected.id, title:selected.title, text:selected.text },
       amount_total:200,
@@ -104,13 +114,14 @@ export async function onRequestGet({ request, env }) {
   }
 }
 
-async function tryComposedReading({env,session,theme}){
+async function tryComposedReading({env,session,theme,locale='pt-PT'}){
   const db=requireMaisonVault(env);
   if(!await vaultExperienceEngineReady(db))return null;
 
   const existing=await findOracleSessionByStripe(db,session.id);
   if(existing){
     if(existing.territory!==theme)return null;
+    if(normalizeMaisonLocale(existing.locale||'pt-PT')!==normalizeMaisonLocale(locale))return null;
     await recordOracleSessionReopenedV2(db,{
       oracleSessionId:existing.oracle_session_id,
       buyerKey:existing.buyer_key,
@@ -122,7 +133,7 @@ async function tryComposedReading({env,session,theme}){
   const email=String(session.customer_details?.email||session.customer_email||'');
   const buyerKey=await pseudonymousBuyerKey({env,email,stripeSessionId:session.id});
   const [blocks,seenIds]=await Promise.all([
-    listActiveOracleBlocks(db,theme),
+    listActiveOracleBlocks(db,theme,locale),
     listSeenOracleBlockIds(db,buyerKey,theme)
   ]);
 
@@ -146,7 +157,8 @@ async function tryComposedReading({env,session,theme}){
     oracleSessionId,
     stripeSessionId:session.id,
     buyerKey,
-    composed
+    composed,
+    locale
   });
   if(seenIds.length){
     await recordExperienceSignal(db,{

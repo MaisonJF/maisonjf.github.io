@@ -1,8 +1,13 @@
 import { listAvailablePdiThemes } from '../_lib/pdi-theme-catalogue.js';
+import { normalizeMaisonLocale } from '../_lib/maison-locales.js';
 
-export async function onRequestGet({env}){
+export async function onRequestGet({request,env}){
   try{
-    const themes=await listAvailablePdiThemes(env);
+    const url=new URL(request.url);
+    const rawLocale=url.searchParams.get('locale')||url.searchParams.get('lang')||'pt-PT';
+    const locale=normalizeMaisonLocale(rawLocale,{fallback:null});
+    if(!locale)return json({themes:[],error:'invalid_locale'},400);
+    const themes=await listAvailablePdiThemes(env,locale);
     return json({
       themes:themes.map(item=>({
         slug:item.slug,
@@ -11,18 +16,20 @@ export async function onRequestGet({env}){
         available:true,
         currency:'EUR',
         amount_cents:item.amount,
-        display_price:formatEUR(item.amount)
-      }))
+        display_price:formatEUR(item.amount,locale)
+      })),
+      locale
     });
   }catch{
     return json({themes:[]},503);
   }
 }
 
-function formatEUR(cents){
+function formatEUR(cents,locale='pt-PT'){
   const value=Number(cents||0)/100;
   const whole=Number.isInteger(value);
-  return new Intl.NumberFormat('pt-PT',{
+  const intlLocale=locale==='pt-PT'?'pt-PT':locale==='es'?'es-ES':'en-IE';
+  return new Intl.NumberFormat(intlLocale,{
     style:'currency',
     currency:'EUR',
     minimumFractionDigits:whole?0:2,
