@@ -88,14 +88,17 @@ def _request(
 def validate_results(
     *,
     stage:str,
-    unauth_health:HttpResult,
+    edge_unauth_health:HttpResult,
+    app_unauth_health:HttpResult,
     auth_health:HttpResult,
     action_inbox:HttpResult,
     proposal_probe:HttpResult|None,
     review_probe:HttpResult|None,
 )->dict[str,Any]:
-    if unauth_health.status not in {401,403}:
-        raise BoundaryVerificationError(f"unauthenticated_health_not_denied:{unauth_health.status}")
+    if edge_unauth_health.status not in {302,401,403}:
+        raise BoundaryVerificationError(f"cloudflare_access_edge_not_enforced:{edge_unauth_health.status}")
+    if app_unauth_health.status not in {401,403}:
+        raise BoundaryVerificationError(f"worker_bearer_not_enforced:{app_unauth_health.status}")
     if auth_health.status!=200 or auth_health.body is None:
         raise BoundaryVerificationError(f"authenticated_health_failed:{auth_health.status}")
     if auth_health.body.get("status")!="ok" or auth_health.body.get("mode")!="read_only":
@@ -121,7 +124,8 @@ def validate_results(
         "kind":"maison_private_brain_boundary_verification",
         "stage":stage,
         "status":"ok",
-        "unauthenticated_health_denied":True,
+        "cloudflare_access_edge_denied":True,
+        "worker_bearer_denied":True,
         "authenticated_health_read_only":True,
         "action_inbox_authority_all_false":True,
         "write_surfaces":write_surfaces,
@@ -140,7 +144,8 @@ def verify_live(stage:str,values:Mapping[str,str])->dict[str,Any]:
     access_secret=_normalize_access_credential(values.get("CF_ACCESS_CLIENT_SECRET"),"CF-Access-Client-Secret")
     if (access_id is None)!=(access_secret is None):
         raise BoundaryVerificationError("cloudflare_access_credentials_must_be_paired")
-    unauth=_request(base,"/internal/brain/health",access_client_id=access_id,access_client_secret=access_secret)
+    edge_unauth=_request(base,"/internal/brain/health")
+    app_unauth=_request(base,"/internal/brain/health",access_client_id=access_id,access_client_secret=access_secret)
     auth=_request(base,"/internal/brain/health",bearer=token,access_client_id=access_id,access_client_secret=access_secret)
     inbox=_request(base,"/internal/brain/action-inbox?limit=1",bearer=token,access_client_id=access_id,access_client_secret=access_secret)
     proposal=review=None
@@ -149,7 +154,8 @@ def verify_live(stage:str,values:Mapping[str,str])->dict[str,Any]:
         review=_request(base,"/internal/reviews/a12",method="POST",bearer=token,access_client_id=access_id,access_client_secret=access_secret)
     return validate_results(
         stage=stage,
-        unauth_health=unauth,
+        edge_unauth_health=edge_unauth,
+        app_unauth_health=app_unauth,
         auth_health=auth,
         action_inbox=inbox,
         proposal_probe=proposal,
