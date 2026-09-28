@@ -1,5 +1,6 @@
 import {
   MAISON_LANGUAGE_SWITCHER_CSS,
+  hasLocalizedSiteCoverage,
   localeAlternates,
   localeSwitcherHtml,
   normalizePublicSitePath
@@ -45,6 +46,7 @@ export async function onRequest(context){
   if(!htmlResponse(response))return response;
 
   const sourcePath=normalizePublicSitePath(requestUrl.pathname);
+  if(!hasLocalizedSiteCoverage(sourcePath))return response;
   let html=await response.text();
 
   html=html.replace(/\s*<link\s+rel=(["'])alternate\1[^>]*hreflang=[^>]*>/gi,'');
@@ -52,7 +54,7 @@ export async function onRequest(context){
     /<\/head>/i,
     alternatesMarkup(sourcePath)+
     '<style id="maison-language-switcher-style">'+MAISON_LANGUAGE_SWITCHER_CSS+'</style>'+
-    '<script>window.MAISON_LOCALE="pt-PT";</script></head>'
+    '<script>window.MAISON_LOCALE="pt-PT";window.MAISON_I18N_AVAILABLE=true;</script></head>'
   );
   if(!html.includes('class="maison-language-switcher"')){
     html=html.replace(/<body\b([^>]*)>/i,'<body$1>'+localeSwitcherHtml(sourcePath,'pt-PT'));
