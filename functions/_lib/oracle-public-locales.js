@@ -5,6 +5,7 @@ Canonical territory identity stays Portuguese/slug-based. Only public labels cha
 
 const LABELS={
   'pt-BR':{
+    'Amor, Trabalho & Vida Prática':'Amor, Trabalho & Vida Prática',
     'Amor & Relações':'Amor & Relações','Trabalho & Caminho':'Trabalho & Caminho','Dinheiro & Segurança':'Dinheiro & Segurança',
     'Família & Laços':'Família & Laços','Escolhas & Mudança':'Escolhas & Mudança','Eu & Padrões':'Eu & Padrões',
     'Relações & Vínculos':'Relações & Vínculos','Amizade & Reciprocidade':'Amizade & Reciprocidade','Solidão & Companhia':'Solidão & Companhia',
@@ -43,6 +44,7 @@ const LABELS={
     'Sentido & Espiritualidade':'Sentido & Espiritualidade','Propósito & Sentido':'Propósito & Sentido','Fé & Dúvida':'Fé & Dúvida','Intuição & Sinais':'Intuição & Sinais'
   },
   en:{
+    'Amor, Trabalho & Vida Prática':'Love, Work & Practical Life',
     'Amor & Relações':'Love & Relationships','Trabalho & Caminho':'Work & Path','Dinheiro & Segurança':'Money & Security',
     'Família & Laços':'Family & Bonds','Escolhas & Mudança':'Choices & Change','Eu & Padrões':'Self & Patterns',
     'Relações & Vínculos':'Relationships & Bonds','Amizade & Reciprocidade':'Friendship & Reciprocity','Solidão & Companhia':'Loneliness & Company',
@@ -81,6 +83,7 @@ const LABELS={
     'Sentido & Espiritualidade':'Meaning & Spirituality','Propósito & Sentido':'Purpose & Meaning','Fé & Dúvida':'Faith & Doubt','Intuição & Sinais':'Intuition & Signs'
   },
   es:{
+    'Amor, Trabalho & Vida Prática':'Amor, Trabajo & Vida Práctica',
     'Amor & Relações':'Amor & Relaciones','Trabalho & Caminho':'Trabajo & Camino','Dinheiro & Segurança':'Dinero & Seguridad',
     'Família & Laços':'Familia & Lazos','Escolhas & Mudança':'Elecciones & Cambio','Eu & Padrões':'Yo & Patrones',
     'Relações & Vínculos':'Relaciones & Vínculos','Amizade & Reciprocidade':'Amistad & Reciprocidad','Solidão & Companhia':'Soledad & Compañía',
@@ -129,7 +132,7 @@ export const ORACLE_PUBLIC_COPY=Object.freeze({
     landingTitle:'Não digas qual é a pergunta.',landingLead:'Pensa na tua pergunta dentro deste território. Não precisas de a explicar. Guarda-a contigo e deixa o território apenas dar-lhe contexto.',
     ready:'Quando estiveres pronto, abre.',readingPrice:'Uma leitura · 2 €',open:'Abrir o Oráculo',
     disclaimer:'Leitura simbólica. Não lê pensamentos, não prevê o futuro e não decide por ti.',
-    back:'← Escolher outro território',cancelled:'A abertura não foi cobrada. Podes voltar quando quiseres.',
+    back:'← Escolher outro território',indexDisclaimer:'A leitura é simbólica. O Oráculo não determina o futuro, não garante acontecimentos e não substitui cuidados profissionais quando são necessários.',cancelled:'A abertura não foi cobrada. Podes voltar quando quiseres.',
     preparing:'A preparar a tua abertura...',paymentError:'Não foi possível abrir o pagamento. Tenta novamente.'
   },
   'pt-BR':{
@@ -140,7 +143,7 @@ export const ORACLE_PUBLIC_COPY=Object.freeze({
     landingTitle:'Não diga qual é a pergunta.',landingLead:'Pense na sua pergunta dentro deste território. Você não precisa explicá-la. Guarde-a com você e deixe o território apenas dar contexto.',
     ready:'Quando estiver pronto, abra.',readingPrice:'Uma leitura · 2 €',open:'Abrir o Oráculo',
     disclaimer:'Leitura simbólica. Não lê pensamentos, não prevê o futuro e não decide por você.',
-    back:'← Escolher outro território',cancelled:'A abertura não foi cobrada. Você pode voltar quando quiser.',
+    back:'← Escolher outro território',indexDisclaimer:'A leitura é simbólica. O Oráculo não determina o futuro, não garante acontecimentos e não substitui cuidados profissionais quando são necessários.',cancelled:'A abertura não foi cobrada. Você pode voltar quando quiser.',
     preparing:'Preparando sua abertura...',paymentError:'Não foi possível abrir o pagamento. Tente novamente.'
   },
   en:{
@@ -151,7 +154,7 @@ export const ORACLE_PUBLIC_COPY=Object.freeze({
     landingTitle:'Do not say what the question is.',landingLead:'Think about your question within this territory. You do not need to explain it. Keep it with you and let the territory simply give it context.',
     ready:'When you are ready, open.',readingPrice:'One reading · €2',open:'Open the Oracle',
     disclaimer:'Symbolic reading. It does not read minds, predict the future or decide for you.',
-    back:'← Choose another territory',cancelled:'The opening was not charged. You can come back whenever you want.',
+    back:'← Choose another territory',indexDisclaimer:'The reading is symbolic. The Oracle does not determine the future, guarantee events or replace professional care when it is needed.',cancelled:'The opening was not charged. You can come back whenever you want.',
     preparing:'Preparing your opening...',paymentError:'Could not open the payment. Please try again.'
   },
   es:{
@@ -162,7 +165,7 @@ export const ORACLE_PUBLIC_COPY=Object.freeze({
     landingTitle:'No digas cuál es la pregunta.',landingLead:'Piensa en tu pregunta dentro de este territorio. No necesitas explicarla. Guárdala contigo y deja que el territorio simplemente le dé contexto.',
     ready:'Cuando estés listo, abre.',readingPrice:'Una lectura · 2 €',open:'Abrir el Oráculo',
     disclaimer:'Lectura simbólica. No lee pensamientos, no predice el futuro ni decide por ti.',
-    back:'← Elegir otro territorio',cancelled:'La apertura no se cobró. Puedes volver cuando quieras.',
+    back:'← Elegir otro territorio',indexDisclaimer:'La lectura es simbólica. El Oráculo no determina el futuro, no garantiza acontecimientos ni sustituye la atención profesional cuando es necesaria.',cancelled:'La apertura no se cobró. Puedes volver cuando quieras.',
     preparing:'Preparando tu apertura...',paymentError:'No se pudo abrir el pago. Inténtalo de nuevo.'
   }
 });
