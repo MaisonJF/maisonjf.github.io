@@ -55,7 +55,12 @@ async function callTranslator(env,{locale,kind,items}){
     JSON.stringify(payload)
   ].join('\n');
   const data=await env.AI.run(env.LOCALIZER_MODEL||'@cf/google/gemma-4-26b-a4b-it',{
-    prompt,max_tokens:4096,temperature:0.1
+    messages:[
+      {role:'system',content:'You are a precise private localization engine. Return only the requested JSON.'},
+      {role:'user',content:prompt}
+    ],
+    max_tokens:4096,
+    temperature:0.1
   });
   return parseArray(aiText(data));
 }
@@ -213,7 +218,10 @@ async function pendingCounts(db){
 export async function runVaultLocalization(env){
   if(!enabled(env.LOCALIZER_ENABLED))return {skipped:'disabled'};
   const limit=clamp(env.LOCALIZER_BATCH_SIZE,24,4,40);
-  const results=await Promise.all(LOCALES.map(locale=>localizeLocale(env,locale,limit)));
+  const results=[];
+  for(const locale of LOCALES){
+    results.push(await localizeLocale(env,locale,limit));
+  }
   return {results,pending:await pendingCounts(env.GROWTH_DB)};
 }
 
