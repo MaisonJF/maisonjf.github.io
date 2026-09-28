@@ -146,15 +146,48 @@
 <script src="../data/services.js?v=20260925-experience1"></script>
 <script>
 (() => {
+  const locale=String(window.MAISON_LOCALE||document.documentElement.lang||'pt-PT');
+  const copy={
+    'pt-PT':{
+      quote:'Sob orçamento',open:'Abrir menu',close:'Fechar menu',opening:'A abrir pagamento…',
+      error:'Não foi possível abrir o pagamento.',
+      whatsapp:'Olá Maison JF. Tenho uma dúvida sobre a Consulta de Tarot.'
+    },
+    'pt-BR':{
+      quote:'Sob orçamento',open:'Abrir menu',close:'Fechar menu',opening:'Abrindo pagamento…',
+      error:'Não foi possível abrir o pagamento.',
+      whatsapp:'Olá Maison JF. Tenho uma dúvida sobre a Consulta de Tarot.'
+    },
+    en:{
+      quote:'By quote',open:'Open menu',close:'Close menu',opening:'Opening payment…',
+      error:'Could not open payment.',
+      whatsapp:'Hello Maison JF. I have a question about the Tarot Consultation.'
+    },
+    es:{
+      quote:'Bajo presupuesto',open:'Abrir menú',close:'Cerrar menú',opening:'Abriendo pago…',
+      error:'No se pudo abrir el pago.',
+      whatsapp:'Hola Maison JF. Tengo una duda sobre la Consulta de Tarot.'
+    }
+  }[locale]||null;
+  const t=copy||{
+    quote:'Sob orçamento',open:'Abrir menu',close:'Fechar menu',opening:'A abrir pagamento…',
+    error:'Não foi possível abrir o pagamento.',
+    whatsapp:'Olá Maison JF. Tenho uma dúvida sobre a Consulta de Tarot.'
+  };
+
   document.querySelectorAll('[data-service-price]').forEach(node=>{
     const service=window.MAISON_SERVICE_BY_SLUG?.[node.dataset.servicePrice];
-    if(service) node.textContent=service.price||'Sob orçamento';
+    if(service) node.textContent=service.price||t.quote;
   });
+
+  const whatsapp=document.querySelector('.whatsapp-question');
+  if(whatsapp)whatsapp.href='https://wa.me/351923318289?text='+encodeURIComponent(t.whatsapp);
 
   const header=document.querySelector('.site-header'),toggle=document.querySelector('.maison-menu-toggle'),menu=document.querySelector('#main-navigation');
   if(header&&toggle&&menu){
-    const close=()=>{header.classList.remove('site-header--menu-open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Abrir menu')};
-    toggle.addEventListener('click',()=>{const open=header.classList.toggle('site-header--menu-open');toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Fechar menu':'Abrir menu')});
+    const close=()=>{header.classList.remove('site-header--menu-open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label',t.open)};
+    toggle.setAttribute('aria-label',t.open);
+    toggle.addEventListener('click',()=>{const open=header.classList.toggle('site-header--menu-open');toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?t.close:t.open)});
     menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',close));
     document.addEventListener('keydown',event=>{if(event.key==='Escape')close()});
     window.addEventListener('resize',()=>{if(window.innerWidth>700)close()});
@@ -163,16 +196,20 @@
     const b=e.target.closest('[data-buy-service]');
     if(!b)return;
     const status=document.getElementById('checkout-status'),old=b.textContent;
-    b.disabled=true;b.textContent='A abrir pagamento…';
-    window.maisonAnalytics?.track?.('consultation_purchase_intent',{service:'tarot',source:'services',page_path:location.pathname});
+    b.disabled=true;b.textContent=t.opening;
+    window.maisonAnalytics?.track?.('consultation_purchase_intent',{service:'tarot',source:'services',locale,page_path:location.pathname});
     try{
-      const response=await fetch('/api/create-consultation-checkout-live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:'tarot',attribution:window.maisonAnalytics?.getAttribution?.()||{}})});
+      const response=await fetch('/api/create-consultation-checkout-live',{
+        method:'POST',
+        headers:{'content-type':'application/json'},
+        body:JSON.stringify({slug:'tarot',locale,attribution:window.maisonAnalytics?.getAttribution?.()||{}})
+      });
       const data=await response.json().catch(()=>({}));
-      if(!response.ok||!data.url)throw new Error(data.error||'Não foi possível abrir o pagamento.');
+      if(!response.ok||!data.url)throw new Error(data.error||t.error);
       location.href=data.url;
     }catch(error){
       b.disabled=false;b.textContent=old;
-      if(status)status.textContent=error.message||'Não foi possível abrir o pagamento.';
+      if(status)status.textContent=error.message||t.error;
     }
   });
 })();
