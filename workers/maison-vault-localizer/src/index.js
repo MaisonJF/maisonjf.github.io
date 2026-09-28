@@ -268,7 +268,7 @@ export async function runVaultLocalization(env,{locale}={}){
   const oracleLimit=clamp(env.LOCALIZER_ORACLE_BATCH_SIZE,2,0,8);
   const chosen=LOCALES.includes(locale)?locale:LOCALES[0];
   const result=await localizeLocale(env,chosen,{questionLimit,oracleLimit});
-  const pending=await pendingCounts(env.GROWTH_DB);\n  await persistTelemetry(env.GROWTH_DB,{locale:chosen,questionsActivated:result.questionsActivated,oracleActivated:result.oracleActivated,pending});\n  return {results:[result],pending};
+  return {results:[result],pending:await pendingCounts(env.GROWTH_DB)};
 }
 
 function localeForSchedule(controller,env){
