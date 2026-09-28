@@ -53,6 +53,16 @@ for(let i=0;i<20;i++){
   }
 }
 
+const brazilianPortuguese=composeOracleReading({
+  territory:'amor',
+  seed:'pt-br-title-fallback',
+  locale:'pt-BR',
+  blocks:specific.map(b=>({...b,title:undefined}))
+});
+if(brazilianPortuguese.title!=='Uma leitura'){
+  throw new Error('PT-BR Oracle title must use a Brazilian Portuguese fallback');
+}
+
 const noMovement=specific.filter(b=>b.role!=='movement');
 let sawGlobalMovement=false;
 for(let i=0;i<30;i++){
@@ -70,4 +80,4 @@ for(let i=0;i<30;i++){
 }
 if(!sawGlobalMovement)throw new Error('did not exercise global movement fallback');
 
-console.log('Oracle composer territory priority + global fallback: OK');
+console.log('Oracle composer territory priority + global fallback + PT-BR title fallback: OK');
