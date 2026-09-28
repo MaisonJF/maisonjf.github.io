@@ -78,7 +78,7 @@ npx wrangler login
 bash scripts/inspect-growth-migrations.sh maison-growth-engine
 ```
 
-The inspector is read-only and reports migration sentinels from `0001` through `0016`.
+The inspector is read-only and reports migration sentinels from `0001` through `0022`, including B2B/A11 seeds, commercial recovery and Ocean working memory.
 
 For a completely fresh environment only, create the resources explicitly and then update a deployment copy of `wrangler.jsonc` with the returned D1 ID.
 
