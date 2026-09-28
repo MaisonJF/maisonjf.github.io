@@ -1,5 +1,5 @@
-name: Maison Private Runtime Deploy
-run-name: Maison Private Runtime Deploy
+name: Maison Private Runtime
+run-name: Maison Private Runtime
 
 on:
   pull_request:
@@ -15,25 +15,6 @@ on:
       - 'workers/maison-intelligence/**'
       - '.github/workflows/maison-private-runtime.yml'
   workflow_dispatch:
-    inputs:
-      stage:
-        description: Private Brain surface to deploy
-        required: true
-        type: choice
-        options:
-          - private_brain_read_candidate
-          - proposal_materialization_candidate
-          - human_review_decision_candidate
-      apply:
-        description: Apply to Cloudflare (false = dry-run only)
-        required: true
-        default: false
-        type: boolean
-      access_boundary_confirmed:
-        description: Confirm authenticated HTTPS/Access boundary is already configured
-        required: true
-        default: false
-        type: boolean
 
 permissions:
   contents: read
@@ -43,13 +24,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      RUNTIME_STAGE: ${{ github.event_name == 'workflow_dispatch' && inputs.stage || 'private_brain_read_candidate' }}
+      # One operator-facing mode: the complete private Brain surface.
+      # Public write, outbound, spend and experiment execution remain forbidden.
+      RUNTIME_STAGE: human_review_decision_candidate
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # Manual deploys must use the current main head, not a stale workflow-dispatch revision.
           ref: ${{ github.event_name == 'workflow_dispatch' && 'refs/heads/main' || github.sha }}
 
       - name: Set up Python 3.12
@@ -63,13 +45,12 @@ jobs:
           node-version: '22'
 
       - name: Refresh derived commercial context
-        run: |
-          bash .github/maison-growth/brain/rebuild_commercial_context.sh --write
+        run: bash .github/maison-growth/brain/rebuild_commercial_context.sh --write
 
       - name: Validate global health gate
         run: python .github/maison-growth/brain/validate_global_health_gate.py
 
-      - name: Report first-stage credential readiness
+      - name: Report private runtime readiness
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -79,68 +60,64 @@ jobs:
           MAISON_BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
           MAISON_CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           MAISON_CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
-          MAISON_BRAIN_PROPOSAL_TOKEN: ${{ secrets.MAISON_BRAIN_PROPOSAL_TOKEN }}
-          MAISON_BRAIN_REVIEW_DECISION_TOKEN: ${{ secrets.MAISON_BRAIN_REVIEW_DECISION_TOKEN }}
         run: python .github/maison-growth/runtime/report_private_runtime_readiness.py
 
-      - name: Guard live apply
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+      - name: Guard manual private activation
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
         run: |
           set -euo pipefail
-          if [[ "${{ inputs.access_boundary_confirmed }}" != "true" ]]; then
-            echo "Refusing apply: authenticated HTTPS/Access boundary was not confirmed."
-            exit 1
-          fi
           test -n "$CLOUDFLARE_API_TOKEN"
           test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$BRAIN_CONTROL_API_URL"
+          test -n "$BRAIN_CONTROL_TOKEN"
+          test -n "$CF_ACCESS_CLIENT_ID"
+          test -n "$CF_ACCESS_CLIENT_SECRET"
 
-      - name: Private-stage preflight
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+      - name: Prepare scoped private credentials
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          MAISON_BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+        run: python .github/maison-growth/runtime/private_runtime_tokens.py --github-env "$GITHUB_ENV"
+
+      - name: Private runtime preflight
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
           BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
           BRAIN_PROPOSAL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-          BRAIN_PROPOSAL_TOKEN: ${{ secrets.MAISON_BRAIN_PROPOSAL_TOKEN }}
           BRAIN_REVIEW_DECISION_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
-          BRAIN_REVIEW_DECISION_TOKEN: ${{ secrets.MAISON_BRAIN_REVIEW_DECISION_TOKEN }}
           CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
-        run: |
-          python .github/maison-growth/runtime/preflight_private_runtime.py "$RUNTIME_STAGE"
+        run: python .github/maison-growth/runtime/preflight_private_runtime.py "$RUNTIME_STAGE"
 
       - name: Render temporary Wrangler config (dry-run)
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.apply }}
+        if: ${{ github.event_name != 'workflow_dispatch' }}
         run: |
-          python .github/maison-growth/runtime/render_private_worker_config.py \
-            "$RUNTIME_STAGE" \
-            --template workers/maison-intelligence/wrangler.jsonc \
-            --output workers/maison-intelligence/wrangler.private.runtime.jsonc
+          python .github/maison-growth/runtime/render_private_worker_config.py             "$RUNTIME_STAGE"             --template workers/maison-intelligence/wrangler.jsonc             --output workers/maison-intelligence/wrangler.private.runtime.jsonc
 
       - name: Render temporary Wrangler config (live custom domain)
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
         run: |
-          python .github/maison-growth/runtime/render_private_worker_config.py \
-            "$RUNTIME_STAGE" \
-            --template workers/maison-intelligence/wrangler.jsonc \
-            --private-url "$BRAIN_CONTROL_API_URL" \
-            --output workers/maison-intelligence/wrangler.private.runtime.jsonc
+          python .github/maison-growth/runtime/render_private_worker_config.py             "$RUNTIME_STAGE"             --template workers/maison-intelligence/wrangler.jsonc             --private-url "$BRAIN_CONTROL_API_URL"             --output workers/maison-intelligence/wrangler.private.runtime.jsonc
 
       - name: Install Worker tooling
         working-directory: workers/maison-intelligence
         run: npm install --ignore-scripts
 
       - name: Verify remote D1 schema
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         working-directory: workers/maison-intelligence
         env:
-          # D1 schema verification is read-only. Prefer the dedicated D1 read token;
-          # fall back to the deploy token only if the read token is unavailable.
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_READ_API_TOKEN || secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: bash scripts/verify-growth-schema.sh maison-growth-engine
@@ -152,16 +129,14 @@ jobs:
           npm run check
           npx wrangler deploy --dry-run --config wrangler.private.runtime.jsonc
 
-      - name: Deploy private surface with stage secrets
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+      - name: Deploy complete private surface
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         working-directory: workers/maison-intelligence
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
-          BRAIN_PROPOSAL_TOKEN: ${{ secrets.MAISON_BRAIN_PROPOSAL_TOKEN }}
-          BRAIN_REVIEW_DECISION_TOKEN: ${{ secrets.MAISON_BRAIN_REVIEW_DECISION_TOKEN }}
         run: |
           set -euo pipefail
           secrets_file="$(mktemp)"
@@ -172,30 +147,20 @@ jobs:
           import os
           from pathlib import Path
 
-          stage = os.environ["RUNTIME_STAGE"]
           secrets = {
               "BRAIN_CONTROL_TOKEN": os.environ["BRAIN_CONTROL_TOKEN"],
+              "BRAIN_PROPOSAL_TOKEN": os.environ["BRAIN_PROPOSAL_TOKEN"],
+              "BRAIN_REVIEW_DECISION_TOKEN": os.environ["BRAIN_REVIEW_DECISION_TOKEN"],
           }
-          if stage in {"proposal_materialization_candidate", "human_review_decision_candidate"}:
-              token = os.environ.get("BRAIN_PROPOSAL_TOKEN", "")
-              if not token:
-                  raise SystemExit("BRAIN_PROPOSAL_TOKEN is required for this stage")
-              secrets["BRAIN_PROPOSAL_TOKEN"] = token
-          if stage == "human_review_decision_candidate":
-              token = os.environ.get("BRAIN_REVIEW_DECISION_TOKEN", "")
-              if not token:
-                  raise SystemExit("BRAIN_REVIEW_DECISION_TOKEN is required for this stage")
-              secrets["BRAIN_REVIEW_DECISION_TOKEN"] = token
-
           path = Path(os.environ["MAISON_PRIVATE_SECRETS_FILE"])
           path.write_text(json.dumps(secrets), encoding="utf-8")
           path.chmod(0o600)
-          print("Prepared stage-scoped Worker secrets file; values not printed.")
+          print("Prepared one-shot private Worker deployment credentials; values not printed.")
           PY
           npx wrangler deploy             --secrets-file "$secrets_file"             --config wrangler.private.runtime.jsonc
 
       - name: Verify Worker deployment exists
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         working-directory: workers/maison-intelligence
         shell: bash
         env:
@@ -215,7 +180,7 @@ jobs:
           PY
 
       - name: Verify deployed private Brain health
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
           BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
@@ -236,8 +201,8 @@ jobs:
             sleep 5
           done
 
-      - name: Verify deployed private Brain boundary
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+      - name: Verify two-layer private boundary
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
           BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
@@ -257,3 +222,31 @@ jobs:
             echo "Private Brain boundary not ready yet (attempt $attempt/8); retrying..."
             sleep 5
           done
+
+      - name: Run private commercial preview
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+          MAISON_A14_MATERIALIZE_ENABLED: 'false'
+          MAISON_SEMANTIC_CONTEXT_ENABLED: 'false'
+          MAISON_OSIRIS_CONTEXT_ENABLED: 'false'
+        run: python .github/maison-growth/brain/private_commercial_preview.py
+
+      - name: Summarize private activation
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          {
+            echo "## Maison Private Runtime"
+            echo "- Worker deployment: confirmed"
+            echo "- D1 schema: verified"
+            echo "- Cloudflare Access edge: enforced"
+            echo "- Brain bearer boundary: enforced"
+            echo "- Brain Control API: healthy/read-only"
+            echo "- Proposal surface: enabled, authenticated, no-write probe passed"
+            echo "- Human review surface: enabled, authenticated, no-write probe passed"
+            echo "- Commercial preview: passed"
+            echo "- Public write/outbound/spend/experiment execution: not authorized"
+          } >> "$GITHUB_STEP_SUMMARY"
