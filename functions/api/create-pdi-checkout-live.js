@@ -1,5 +1,16 @@
 import { pdiThemeAvailability } from '../_lib/pdi-theme-catalogue.js';
-import { normalizeMaisonLocale, stripeLocaleForMaison, publicLangForMaison } from '../_lib/maison-locales.js';
+import { normalizeMaisonLocale, stripeLocaleForMaison } from '../_lib/maison-locales.js';
+
+const PDI_PRODUCT_NAME={
+  'pt-PT':'PÁRA DE IGNORAR!',
+  'pt-BR':'PARE DE IGNORAR!',
+  en:'STOP IGNORING IT!',
+  es:'¡DEJA DE IGNORARLO!'
+};
+
+function publicPrefix(locale){
+  return locale==='pt-BR'?'/pt-br':locale==='en'?'/en':locale==='es'?'/es':'';
+}
 
 export async function onRequestPost({request,env}){
   try{
@@ -27,9 +38,9 @@ export async function onRequestPost({request,env}){
     params.set('line_items[0][quantity]','1');
     params.set('line_items[0][price_data][currency]',String(product.currency||'eur'));
     params.set('line_items[0][price_data][unit_amount]',String(product.amount));
-    params.set('line_items[0][price_data][product_data][name]','PÁRA DE IGNORAR! · '+product.label);
+    params.set('line_items[0][price_data][product_data][name]',(PDI_PRODUCT_NAME[locale]||PDI_PRODUCT_NAME['pt-PT'])+' · '+product.label);
     params.set('success_url',url.origin+'/para-de-ignorar/jogar.html?session_id={CHECKOUT_SESSION_ID}&theme='+encodeURIComponent(product.slug)+'&locale='+encodeURIComponent(locale));
-    params.set('cancel_url',url.origin+'/para-de-ignorar/?theme='+encodeURIComponent(product.slug)+'&lang='+encodeURIComponent(publicLangForMaison(locale)));
+    params.set('cancel_url',url.origin+publicPrefix(locale)+'/para-de-ignorar/?theme='+encodeURIComponent(product.slug));
     params.set('metadata[environment]','maison-jf-live');
     params.set('metadata[source]','para-de-ignorar-live');
     params.set('metadata[pdi_access]','single-session');
