@@ -43,6 +43,24 @@ class PrivateBrainHealthTests(unittest.TestCase):
         self.assertTrue(result["worker_bearer_denied"])
         self.assertFalse(result["writes_performed"])
 
+    def test_full_private_runtime_accepts_enabled_write_surfaces_without_writing(self):
+        result=validate_results(
+            stage="human_review_decision_candidate",
+            edge_unauth_health=HttpResult(403,None),
+            app_unauth_health=HttpResult(401,{"error":"unauthorized"}),
+            auth_health=HttpResult(200,{"status":"ok","mode":"read_only"}),
+            action_inbox=HttpResult(200,{"authority":{
+                "public_write_authorized":False,
+                "outbound_authorized":False,
+                "spend_authorized":False,
+                "experiment_execution_authorized":False,
+            }}),
+            proposal_probe=HttpResult(405,{"error":"method_not_allowed"}),
+            review_probe=HttpResult(405,{"error":"method_not_allowed"}),
+        )
+        self.assertEqual(result["write_surfaces"],"proposal_and_review_enabled_no_write_probe")
+        self.assertFalse(result["writes_performed"])
+
     def test_boundary_rejects_missing_worker_bearer_boundary(self):
         safe_inbox=HttpResult(200,{"authority":{
             "public_write_authorized":False,
