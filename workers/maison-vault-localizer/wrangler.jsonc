@@ -12,7 +12,7 @@
   },
   "vars": {
     "LOCALIZER_ENABLED": "true",
-    "LOCALIZER_MODEL": "@cf/zai-org/glm-4.7-flash",
+    "LOCALIZER_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
     "LOCALIZER_BATCH_SIZE": "12",
     "LOCALIZER_ROUNDS_PER_CRON": "1",
     "LOCALIZER_QUESTION_BATCH_SIZE": "12",
