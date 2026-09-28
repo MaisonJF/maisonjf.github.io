@@ -26,7 +26,8 @@ class PrivateBrainHealthTests(unittest.TestCase):
     def test_boundary_requires_denied_unauthenticated_health_and_false_authority(self):
         result=validate_results(
             stage="private_brain_read_candidate",
-            unauth_health=HttpResult(401,{"error":"unauthorized"}),
+            edge_unauth_health=HttpResult(302,None),
+            app_unauth_health=HttpResult(401,{"error":"unauthorized"}),
             auth_health=HttpResult(200,{"status":"ok","mode":"read_only"}),
             action_inbox=HttpResult(200,{"authority":{
                 "public_write_authorized":False,
@@ -38,7 +39,27 @@ class PrivateBrainHealthTests(unittest.TestCase):
             review_probe=HttpResult(404,{"error":"not_found"}),
         )
         self.assertEqual(result["write_surfaces"],"hidden_404")
+        self.assertTrue(result["cloudflare_access_edge_denied"])
+        self.assertTrue(result["worker_bearer_denied"])
         self.assertFalse(result["writes_performed"])
+
+    def test_boundary_rejects_missing_worker_bearer_boundary(self):
+        safe_inbox=HttpResult(200,{"authority":{
+            "public_write_authorized":False,
+            "outbound_authorized":False,
+            "spend_authorized":False,
+            "experiment_execution_authorized":False,
+        }})
+        with self.assertRaisesRegex(BoundaryVerificationError,"worker_bearer_not_enforced"):
+            validate_results(
+                stage="private_brain_read_candidate",
+                edge_unauth_health=HttpResult(403,None),
+                app_unauth_health=HttpResult(200,{"status":"ok","mode":"read_only"}),
+                auth_health=HttpResult(200,{"status":"ok","mode":"read_only"}),
+                action_inbox=safe_inbox,
+                proposal_probe=HttpResult(404,None),
+                review_probe=HttpResult(404,None),
+            )
 
     def test_boundary_rejects_public_health_or_authority_drift(self):
         safe_inbox=HttpResult(200,{"authority":{
@@ -47,10 +68,11 @@ class PrivateBrainHealthTests(unittest.TestCase):
             "spend_authorized":False,
             "experiment_execution_authorized":False,
         }})
-        with self.assertRaisesRegex(BoundaryVerificationError,"unauthenticated_health_not_denied"):
+        with self.assertRaisesRegex(BoundaryVerificationError,"cloudflare_access_edge_not_enforced"):
             validate_results(
                 stage="private_brain_read_candidate",
-                unauth_health=HttpResult(200,{"status":"ok"}),
+                edge_unauth_health=HttpResult(200,{"status":"ok"}),
+                app_unauth_health=HttpResult(401,None),
                 auth_health=HttpResult(200,{"status":"ok","mode":"read_only"}),
                 action_inbox=safe_inbox,
                 proposal_probe=HttpResult(404,None),
@@ -59,7 +81,8 @@ class PrivateBrainHealthTests(unittest.TestCase):
         with self.assertRaisesRegex(BoundaryVerificationError,"action_inbox_authority_drift"):
             validate_results(
                 stage="private_brain_read_candidate",
-                unauth_health=HttpResult(403,None),
+                edge_unauth_health=HttpResult(403,None),
+                app_unauth_health=HttpResult(401,None),
                 auth_health=HttpResult(200,{"status":"ok","mode":"read_only"}),
                 action_inbox=HttpResult(200,{"authority":{
                     "public_write_authorized":False,
