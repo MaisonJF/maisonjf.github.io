@@ -20,10 +20,11 @@ Apply migrations in order:
 
 1. `0001_private_content_vault.sql`
 2. `0002_experience_engine.sql`
+3. `0003_localized_content.sql`
 
-Migration v2 changes `vault_meta.schema_version` to `vault_v2`. Runtime code checks this marker before using v2-only columns or tables.
+Migration v2 changes `vault_meta.schema_version` to `vault_v2`. Migration v3 upgrades it to `vault_v3` and adds EN/ES renderings without duplicating canonical content identity. PT-PT remains the editorial source body; English and Spanish live in translation tables keyed by the same question/block IDs. Existing sessions default to `pt-PT`.
 
-The production Oráculo is deliberately backward-compatible: if v2 is not present, if there are not enough approved live blocks, or if the compositional engine cannot produce a valid reading, the existing authored 28-reading system remains available.
+The production Oráculo is deliberately backward-compatible in PT-PT: if v2/v3 composition is unavailable, incomplete or fails quality, the existing authored reading system remains available. EN/ES never fall back to Portuguese; a localized checkout is blocked until that locale has complete active coverage.
 
 ## Architecture
 
@@ -66,6 +67,19 @@ Private blocks use the roles:
 A reading does not have to contain every role. The Experience Director selects one of a small number of coherent trajectories first; the Composer then selects compatible blocks for that route.
 
 Selection considers quality, compatibility, trajectory fit, freshness, anti-repetition, rotation state and silent rarity. The browser receives only the final reading, never the private repertoire or scoring metadata.
+
+## Localized paid content
+
+The multilingual contract is deliberately narrow:
+
+`one canonical ID → PT-PT source + EN rendering + ES rendering`
+
+- Question logic, stage, intensity, scores, compatibility, metrics and session position belong to the canonical question ID.
+- Oracle role, intensity, compatibility, metrics and session position belong to the canonical block ID.
+- Only localized text/title changes by locale.
+- Paid sessions persist the purchased locale so reloads cannot silently switch language.
+- EN/ES content must be active before checkout; missing translations never fall back to PT-PT inside a paid experience.
+- Future languages can be added as additional renderings without cloning the product logic.
 
 ## PÁRA DE IGNORAR!
 
@@ -120,7 +134,7 @@ Rules:
 
 ## Production runtime guardrails (2026-09-19)
 
-- Production D1 has been reconciled from the early partial vault and upgraded to `vault_v2`.
+- Production D1 must be upgraded in order. The repository now defines `vault_v3`; until `0003_localized_content.sql` is applied remotely, PT-PT continues to work through the v2-compatible runtime and EN/ES remain unavailable.
 - PÁRA DE IGNORAR! uses the v2 question reader when the schema is ready; its paid checkout remains fixed at EUR 5.00 and the API verifies amount + currency.
 - PDI interaction signals record only product events/IDs (served, advanced, passed, completed, repurchased). Answer text and private conversation content are never sent to the signal endpoint.
 - Signal/gap-learning writes are fail-open: analytics or learning failures must never block a paid experience.
