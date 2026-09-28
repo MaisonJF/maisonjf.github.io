@@ -220,7 +220,8 @@ const HOME={
 const TESTE={
   'pt-BR':{
     'Volta Para Casa é uma experiência MAISON JF® com três portas: Atenção, Apego e Afecto. Escolhe a que mais te chama, descobre o teu resultado e continua pelo que fizer sentido.':'Volta Para Casa é uma experiência MAISON JF® com três portas: Atenção, Apego e Afeto. Escolha a que mais chama você, descubra seu resultado e continue pelo que fizer sentido.',
-    'Já estás em Casa.<br>Escolhe uma porta.':'Você já está em Casa.<br>Escolha uma porta.',
+    'Já estás em Casa.':'Você já está em Casa.',
+    'Escolhe uma porta.':'Escolha uma porta.',
     'A que te chamar primeiro.':'A que chamar você primeiro.',
     'As três portas de Volta Para Casa':'As três portas de Volta Para Casa',
     'PORTA · ATENÇÃO':'PORTA · ATENÇÃO',
@@ -237,7 +238,8 @@ const TESTE={
     'Volta Para Casa | MAISON JF®':'Come Back Home | MAISON JF®',
     'Volta Para Casa é uma experiência MAISON JF® com três portas: Atenção, Apego e Afecto. Escolhe a que mais te chama, descobre o teu resultado e continua pelo que fizer sentido.':'Come Back Home is a MAISON JF® experience with three doors: Attention, Attachment and Affection. Choose the one that calls to you first, discover your result and continue with what makes sense.',
     'VOLTA PARA CASA':'COME BACK HOME',
-    'Já estás em Casa.<br>Escolhe uma porta.':'You are already Home.<br>Choose a door.',
+    'Já estás em Casa.':'You are already Home.',
+    'Escolhe uma porta.':'Choose a door.',
     'A que te chamar primeiro.':'Whichever calls to you first.',
     'As três portas de Volta Para Casa':'The three doors of Come Back Home',
     'PORTA · ATENÇÃO':'DOOR · ATTENTION',
@@ -254,7 +256,8 @@ const TESTE={
     'Volta Para Casa | MAISON JF®':'Vuelve a Casa | MAISON JF®',
     'Volta Para Casa é uma experiência MAISON JF® com três portas: Atenção, Apego e Afecto. Escolhe a que mais te chama, descobre o teu resultado e continua pelo que fizer sentido.':'Vuelve a Casa es una experiencia MAISON JF® con tres puertas: Atención, Apego y Afecto. Elige la que más te llame, descubre tu resultado y continúa por donde tenga sentido.',
     'VOLTA PARA CASA':'VUELVE A CASA',
-    'Já estás em Casa.<br>Escolhe uma porta.':'Ya estás en Casa.<br>Elige una puerta.',
+    'Já estás em Casa.':'Ya estás en Casa.',
+    'Escolhe uma porta.':'Elige una puerta.',
     'A que te chamar primeiro.':'La que te llame primero.',
     'As três portas de Volta Para Casa':'Las tres puertas de Vuelve a Casa',
     'PORTA · ATENÇÃO':'PUERTA · ATENCIÓN',
@@ -273,7 +276,8 @@ const PRODUCTS={
   'pt-BR':{
     'Produtos MAISON JF® físicos e digitais para Casa, Corpo, Cabeça e Presença.':'Produtos MAISON JF® físicos e digitais para Casa, Corpo, Mente e Presença.',
     'Casa · Corpo · Cabeça · Presença':'Casa · Corpo · Mente · Presença',
-    'Há coisas que se sentem<br>antes de se explicarem.':'Há coisas que se sentem<br>antes de serem explicadas.',
+    'Há coisas que se sentem':'Há coisas que se sentem',
+    'antes de se explicarem.':'antes de serem explicadas.',
     'Escolhe pelo que queres sentir agora.':'Escolha pelo que você quer sentir agora.',
     'Produtos digitais':'Produtos digitais',
     'Também há coisas que não chegam numa caixa.':'Também há coisas que não chegam em uma caixa.',
@@ -302,7 +306,8 @@ const PRODUCTS={
     'Produtos | MAISON JF®':'Products | MAISON JF®',
     'Produtos MAISON JF® físicos e digitais para Casa, Corpo, Cabeça e Presença.':'Physical and digital MAISON JF® products for Home, Body, Mind and Presence.',
     'Casa · Corpo · Cabeça · Presença':'Home · Body · Mind · Presence',
-    'Há coisas que se sentem<br>antes de se explicarem.':'Some things are felt<br>before they can be explained.',
+    'Há coisas que se sentem':'Some things are felt',
+    'antes de se explicarem.':'before they can be explained.',
     'Escolhe pelo que queres sentir agora.':'Choose by what you want to feel right now.',
     'Produtos digitais':'Digital products',
     'Também há coisas que não chegam numa caixa.':'Some things do not arrive in a box.',
@@ -332,7 +337,8 @@ const PRODUCTS={
     'Produtos | MAISON JF®':'Productos | MAISON JF®',
     'Produtos MAISON JF® físicos e digitais para Casa, Corpo, Cabeça e Presença.':'Productos físicos y digitales MAISON JF® para Casa, Cuerpo, Mente y Presencia.',
     'Casa · Corpo · Cabeça · Presença':'Casa · Cuerpo · Mente · Presencia',
-    'Há coisas que se sentem<br>antes de se explicarem.':'Hay cosas que se sienten<br>antes de poder explicarlas.',
+    'Há coisas que se sentem':'Hay cosas que se sienten',
+    'antes de se explicarem.':'antes de poder explicarlas.',
     'Escolhe pelo que queres sentir agora.':'Elige por lo que quieres sentir ahora.',
     'Produtos digitais':'Productos digitales',
     'Também há coisas que não chegam numa caixa.':'También hay cosas que no llegan en una caja.',
@@ -529,9 +535,48 @@ export function translationMapFor(locale,sourcePath){
   };
 }
 
+function mapJsonValue(value,map){
+  if(typeof value==='string')return applyMap(value,map);
+  if(Array.isArray(value))return value.map(item=>mapJsonValue(item,map));
+  if(value&&typeof value==='object'){
+    return Object.fromEntries(Object.entries(value).map(([key,item])=>[key,mapJsonValue(item,map)]));
+  }
+  return value;
+}
+
+function localizeJsonLdBlocks(html,map){
+  return String(html).replace(
+    /<script\\b([^>]*\\btype=(["'])application\\/ld\\+json\\2[^>]*)>([\\s\\S]*?)<\\/script>/gi,
+    (full,attrs,_quote,body)=>{
+      try{
+        const parsed=JSON.parse(body);
+        const localized=mapJsonValue(parsed,map);
+        return '<script'+attrs+'>'+JSON.stringify(localized)+'</script>';
+      }catch(_){
+        return full;
+      }
+    }
+  );
+}
+
 export function translateMaisonHtml(html,locale,sourcePath){
   if(locale==='pt-PT')return String(html);
-  return applyMap(html,translationMapFor(locale,sourcePath));
+  const map=translationMapFor(locale,sourcePath);
+  let source=localizeJsonLdBlocks(String(html),map);
+  const protectedBlocks=[];
+  source=source.replace(
+    /<(script|style|noscript|code|pre|textarea)\\b[\\s\\S]*?<\\/\\1>/gi,
+    block=>{
+      const marker='__MAISON_I18N_PROTECTED_'+protectedBlocks.length+'__';
+      protectedBlocks.push(block);
+      return marker;
+    }
+  );
+  source=applyMap(source,map);
+  protectedBlocks.forEach((block,index)=>{
+    source=source.replace('__MAISON_I18N_PROTECTED_'+index+'__',block);
+  });
+  return source;
 }
 
 export function localeSwitcherHtml(sourcePath,currentLocale){
