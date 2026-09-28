@@ -29,10 +29,10 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Observe host preflight | READY no-start secret/port/Docker-Compose/disk checks; CI also expands full Compose config | NOT RUN ON PRIVATE HOST |
 | Activation doctor | READY combined names-only credential + host readiness; recommends one next safe gate; no service start/remote write | NOT RUN ON PRIVATE HOST |
 | Private activation preflight | READY stage-aware HTTPS/secret/token/authority checks + runbook | NOT RUN |
-| Private Worker deploy gate | READY automatic secret-free dry-run + manual live workflow + minimal D1-only private renderer | DRY-RUN VERIFIED ON `main` @ `5b4bb1e6` |
-| Private credential readiness | READY names-only report distinguishes read-only inspection credentials from full first-stage deploy credentials | CHECKED: first-stage secrets currently missing |
-| Private custom-domain route | READY exact HTTPS Custom Domain from `MAISON_BRAIN_PRIVATE_URL`; workers.dev/previews/cron/queue/AI stripped | BLOCKED: private URL + Cloudflare credentials not configured |
-| Cloudflare read-only inspect | READY manual workflow; optional dedicated read token; D1 reachability + Worker-presence probe + 0001→0022 inspector; no deploy/write commands | NOT RUN |
+| Private Worker deploy gate | READY automatic secret-free dry-run + manual live workflow + minimal D1-only private renderer | DRY-RUN VERIFIED ON `main` @ `5e6c2c90` |
+| Private credential readiness | READY names-only report distinguishes read-only inspection credentials from full first-stage deploy credentials | CHECKED 2026-09-28: first-stage credentials present; read-only inspection credentials present; Cloudflare Access pair present + shape-valid; later-stage proposal/review tokens not configured |
+| Private custom-domain route | READY exact HTTPS Custom Domain from `MAISON_BRAIN_PRIVATE_URL`; workers.dev/previews/cron/queue/AI stripped | CONFIG PRESENT / LIVE ROUTE + ACCESS REACHABILITY NOT YET VERIFIED |
+| Cloudflare read-only inspect | READY manual workflow; optional dedicated read token; D1 reachability + Worker-presence probe + 0001→0022 inspector; no deploy/write commands | PRIOR 2026-09-24 RUN PREDATES CURRENT SCHEMA / RERUN REQUIRED |
 | Private deploy verification | READY remote D1 schema gate + boundary verifier: unauthenticated denial, authenticated read-only health, false action authority and hidden proposal/review write surfaces in private-read stage | NOT RUN LIVE |
 | Private commercial preview | READY manual Brain-Control-only workflow; materialization/memory backends OFF; counts/authority output only | NOT RUN |
 | Pre-Brain | READY analysis core | NOT PROVISIONED |
