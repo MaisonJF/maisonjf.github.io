@@ -21,6 +21,7 @@ Use the current operator templates when possible:
 
 - `commercial-operations-facts.template.json` — preferred physical-products template; unit cost + replenishment capacity are structural facts and finished stock is optional/volatile;
 - `commercial-service-capacity.template.json` — active public service/B2B entries;
+- `commercial-digital-operations.template.json` — Oráculo and PÁRA DE IGNORAR! delivery effort, variable cost and delivery lead time;
 - `commercial-stocktake.template.json` — legacy compatibility input only.
 
 Never fill private quantities/costs inside the git repository. The Brain directory also ignores `*.private.json`, but the overlay builder goes further and refuses to write its final private overlay anywhere inside the repository.
@@ -44,6 +45,12 @@ Services support:
 - `variable_cost_minor`;
 - `delivery_lead_days`.
 
+Digital products support:
+
+- `human_effort_minutes`;
+- `variable_cost_minor`;
+- `delivery_lead_days`.
+
 Unknown values stay `null`. Do not infer counted stock from the public `in_stock` catalogue flag.
 
 Every filled row needs an evidence reference such as a dated manual stocktake or cost/capacity review.
@@ -56,6 +63,7 @@ Example:
 python .github/maison-growth/brain/prepare_commercial_overlay.py \
   --operations /private/path/operations-facts.json \
   --services /private/path/services.json \
+  --digital /private/path/digital-operations.json \
   --observed-at "<ISO-8601 timestamp>" \
   --evidence-ref "manual:operations:<date>" \
   --output /private/path/maison-commercial-overlay.private.json
