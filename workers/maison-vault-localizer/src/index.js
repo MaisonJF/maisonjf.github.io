@@ -140,7 +140,7 @@ async function questionBatch(db,locale,limit){
         ON t.question_id=q.question_id AND t.locale=?1
      WHERE q.status='active' AND q.exposure='paid' AND q.lifecycle_state='live'
        AND q.rotation_state IN ('new','limited','normal')
-       AND (t.question_id IS NULL OR t.status IN ('candidate','review'))
+       AND (t.question_id IS NULL OR t.status <> 'active')
      ORDER BY q.question_id
      LIMIT ?2`).bind(locale,limit).all();
   return result.results||[];
@@ -178,7 +178,7 @@ async function storeQuestions(db,locale,source,translated){
       ON CONFLICT(question_id,locale) DO UPDATE SET
         text=excluded.text,status='active',source_kind=excluded.source_kind,
         quality_version=excluded.quality_version,activated_at=excluded.activated_at
-      WHERE vault_question_translations.status IN ('candidate','review')`)
+      WHERE vault_question_translations.status <> 'active'`)
       .bind(id,locale,text,QUALITY_VERSION));
   }
   for(let i=0;i<writes.length;i+=50)await db.batch(writes.slice(i,i+50));
