@@ -54,12 +54,9 @@ async function callTranslator(env,{locale,kind,items}){
     'INPUT:',
     JSON.stringify(payload)
   ].join('\n');
-  const data=await env.AI.run(env.LOCALIZER_MODEL||'@cf/google/gemma-4-26b-a4b-it',{
-    messages:[
-      {role:'system',content:'You are a precise private localization engine. Return only the requested JSON.'},
-      {role:'user',content:prompt}
-    ],
-    max_tokens:4096,
+  const data=await env.AI.run(env.LOCALIZER_MODEL||'@cf/zai-org/glm-4.7-flash',{
+    prompt,
+    max_completion_tokens:3072,
     temperature:0.1
   });
   return parseArray(aiText(data));
@@ -215,31 +212,40 @@ async function pendingCounts(db){
   };
 }
 
-export async function runVaultLocalization(env){
+export async function runVaultLocalization(env,{locale}={}){
   if(!enabled(env.LOCALIZER_ENABLED))return {skipped:'disabled'};
-  const limit=clamp(env.LOCALIZER_BATCH_SIZE,24,4,40);
-  const results=[];
-  for(const locale of LOCALES){
-    results.push(await localizeLocale(env,locale,limit));
-  }
-  return {results,pending:await pendingCounts(env.GROWTH_DB)};
+  const limit=clamp(env.LOCALIZER_BATCH_SIZE,12,1,24);
+  const chosen=LOCALES.includes(locale)?locale:LOCALES[0];
+  const result=await localizeLocale(env,chosen,limit);
+  return {results:[result],pending:await pendingCounts(env.GROWTH_DB)};
 }
 
-async function runLocalizationRounds(env){
-  const rounds=clamp(env.LOCALIZER_ROUNDS_PER_CRON,1,1,4);
+function localeForSchedule(controller,env){
+  const forced=String(env.LOCALIZER_LOCALE||'').trim();
+  if(LOCALES.includes(forced))return forced;
+  const when=Number(controller?.scheduledTime||Date.now());
+  const minute=new Date(when).getUTCMinutes();
+  return LOCALES[minute%LOCALES.length];
+}
+
+async function runLocalizationRounds(env,locale){
+  const rounds=clamp(env.LOCALIZER_ROUNDS_PER_CRON,1,1,2);
   let last=null;
   for(let i=0;i<rounds;i++){
-    last=await runVaultLocalization(env);
-    if(last?.pending?.total===0)break;
+    last=await runVaultLocalization(env,{locale});
+    const q=Number(last?.pending?.questions?.[locale]||0);
+    const o=Number(last?.pending?.oracle?.[locale]||0);
+    if(q+o===0)break;
   }
   return last;
 }
 
 export default {
   async fetch(){return new Response('Not Found',{status:404});},
-  async scheduled(_controller,env,ctx){
+  async scheduled(controller,env,ctx){
+    const locale=localeForSchedule(controller,env);
     ctx.waitUntil(
-      runLocalizationRounds(env).then(result=>{
+      runLocalizationRounds(env,locale).then(result=>{
         const pending=result?.pending||{};
         console.log('Vault localizer completed',JSON.stringify({
           pendingTotal:Number(pending.total||0),
