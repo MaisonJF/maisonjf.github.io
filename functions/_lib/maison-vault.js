@@ -3,6 +3,8 @@ MAISON JF® · Private Brain Vault
 Requires a Cloudflare D1 binding named MAISON_BRAIN_DB.
 No paid question/oracle bodies belong in the public repository.
 */
+import { normalizeMaisonLocale } from './maison-locales.js';
+import { vaultLocalizationReady } from './maison-localized-content.js';
 
 export function requireMaisonVault(env){
   const db=env?.MAISON_BRAIN_DB;
@@ -68,20 +70,33 @@ export async function listSeenQuestionIds(db,buyerKey,theme){
 }
 
 export async function findGameSessionByStripe(db,stripeSessionId){
-  return await db.prepare(
-    `SELECT game_session_id,stripe_session_id,buyer_key,theme,seed,engine_version,status,created_at,completed_at
-       FROM vault_game_sessions WHERE stripe_session_id=?1 LIMIT 1`
-  ).bind(stripeSessionId).first();
+  const localized=await vaultLocalizationReady(db);
+  const select=localized
+    ? `SELECT game_session_id,stripe_session_id,buyer_key,theme,locale,seed,engine_version,status,created_at,completed_at
+         FROM vault_game_sessions WHERE stripe_session_id=?1 LIMIT 1`
+    : `SELECT game_session_id,stripe_session_id,buyer_key,theme,seed,engine_version,status,created_at,completed_at
+         FROM vault_game_sessions WHERE stripe_session_id=?1 LIMIT 1`;
+  const row=await db.prepare(select).bind(stripeSessionId).first();
+  if(row&&!row.locale)row.locale='pt-PT';
+  return row;
 }
 
-export async function createGameSession(db,{gameSessionId,stripeSessionId,buyerKey,theme,seed,engineVersion,packA,packB}){
-  const statements=[
-    db.prepare(
+export async function createGameSession(db,{gameSessionId,stripeSessionId,buyerKey,theme,locale='pt-PT',seed,engineVersion,packA,packB}){
+  const selectedLocale=normalizeMaisonLocale(locale);
+  const localizedSchema=await vaultLocalizationReady(db);
+  if(selectedLocale!=='pt-PT'&&!localizedSchema)throw new Error('localized_vault_not_ready');
+  const sessionInsert=localizedSchema
+    ? db.prepare(
+      `INSERT INTO vault_game_sessions
+       (game_session_id,stripe_session_id,buyer_key,theme,locale,seed,engine_version,status)
+       VALUES(?1,?2,?3,?4,?5,?6,?7,'active')`
+    ).bind(gameSessionId,stripeSessionId,buyerKey,theme,selectedLocale,seed,engineVersion)
+    : db.prepare(
       `INSERT INTO vault_game_sessions
        (game_session_id,stripe_session_id,buyer_key,theme,seed,engine_version,status)
        VALUES(?1,?2,?3,?4,?5,?6,'active')`
-    ).bind(gameSessionId,stripeSessionId,buyerKey,theme,seed,engineVersion)
-  ];
+    ).bind(gameSessionId,stripeSessionId,buyerKey,theme,seed,engineVersion);
+  const statements=[sessionInsert];
   for(const [pack,cards] of [['A',packA],['B',packB]]){
     cards.forEach((card,index)=>{
       statements.push(
@@ -97,18 +112,36 @@ export async function createGameSession(db,{gameSessionId,stripeSessionId,buyerK
 }
 
 export async function readGameSession(db,gameSessionId){
+  const localizedSchema=await vaultLocalizationReady(db);
   const session=await db.prepare(
-    `SELECT game_session_id,theme,engine_version,status,created_at,completed_at
-       FROM vault_game_sessions WHERE game_session_id=?1 LIMIT 1`
+    localizedSchema
+      ? `SELECT game_session_id,theme,locale,engine_version,status,created_at,completed_at
+           FROM vault_game_sessions WHERE game_session_id=?1 LIMIT 1`
+      : `SELECT game_session_id,theme,engine_version,status,created_at,completed_at
+           FROM vault_game_sessions WHERE game_session_id=?1 LIMIT 1`
   ).bind(gameSessionId).first();
   if(!session)return null;
-  const cards=await db.prepare(
-    `SELECT c.pack,c.position,q.question_id AS id,q.text,q.theme,q.class,q.stage,q.intensity
-       FROM vault_game_session_cards c
-       JOIN vault_questions q ON q.question_id=c.question_id
-      WHERE c.game_session_id=?1
-      ORDER BY CASE c.pack WHEN 'A' THEN 0 ELSE 1 END,c.position`
-  ).bind(gameSessionId).all();
+  const locale=normalizeMaisonLocale(session.locale||'pt-PT');
+  let cards;
+  if(locale==='pt-PT'){
+    cards=await db.prepare(
+      `SELECT c.pack,c.position,q.question_id AS id,q.text,q.theme,q.class,q.stage,q.intensity
+         FROM vault_game_session_cards c
+         JOIN vault_questions q ON q.question_id=c.question_id
+        WHERE c.game_session_id=?1
+        ORDER BY CASE c.pack WHEN 'A' THEN 0 ELSE 1 END,c.position`
+    ).bind(gameSessionId).all();
+  }else{
+    cards=await db.prepare(
+      `SELECT c.pack,c.position,q.question_id AS id,t.text,q.theme,q.class,q.stage,q.intensity
+         FROM vault_game_session_cards c
+         JOIN vault_questions q ON q.question_id=c.question_id
+         JOIN vault_question_translations t
+           ON t.question_id=q.question_id AND t.locale=?2
+        WHERE c.game_session_id=?1
+        ORDER BY CASE c.pack WHEN 'A' THEN 0 ELSE 1 END,c.position`
+    ).bind(gameSessionId,locale).all();
+  }
   const packA=[],packB=[];
   for(const card of (cards.results||[])){
     const clean={
@@ -117,7 +150,7 @@ export async function readGameSession(db,gameSessionId){
     };
     (card.pack==='A'?packA:packB).push(clean);
   }
-  return {...session,packA,packB};
+  return {...session,locale,packA,packB};
 }
 
 export async function incrementQuestionMetric(db,questionId,event){
