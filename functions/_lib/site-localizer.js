@@ -1,3 +1,5 @@
+import { ORACLE_TERRITORIES } from './oracle-territories.js';
+import { ORACLE_PUBLIC_COPY, localizeOracleLabel } from './oracle-public-locales.js';
 import {
   MAISON_SITE_LOCALES,
   MAISON_LANGUAGE_SWITCHER_CSS,
@@ -69,6 +71,94 @@ function rewriteMetadata(html,sourcePath,locale){
   out=out.replace(/<\/head>/i,headLocaleMarkup(sourcePath,locale)+'</head>');
   const switcher=localeSwitcherHtml(sourcePath,locale);
   out=out.replace(/<body\b([^>]*)>/i,'<body$1>'+switcher);
+  return out;
+}
+
+
+const ORACLE_BY_SLUG=new Map(ORACLE_TERRITORIES.map(item=>[String(item.slug),item]));
+
+function escapeText(value){
+  return String(value??'')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+function oracleTerritorySlug(sourcePath){
+  const path=normalizePublicSitePath(sourcePath);
+  const match=path.match(/^\/oraculo\/([^/]+)$/);
+  return match&&ORACLE_BY_SLUG.has(match[1])?match[1]:null;
+}
+
+function renderLocalizedOracleTerritory(html,locale,sourcePath){
+  const slug=oracleTerritorySlug(sourcePath);
+  if(!slug)return html;
+  const territory=ORACLE_BY_SLUG.get(slug);
+  const copy=ORACLE_PUBLIC_COPY[locale]||ORACLE_PUBLIC_COPY['pt-PT'];
+  const label=localizeOracleLabel(territory.label,locale);
+  const title=label+' | '+copy.title+' MAISON JF®';
+  const description=copy.description+' '+label+'.';
+
+  let out=String(html);
+  out=out.replace(/<title>[\s\S]*?<\/title>/i,'<title>'+escapeText(title)+'</title>');
+  out=out.replace(
+    /<meta\s+name=(["'])description\1\s+content=(["'])[^"']*\2\s*\/?\s*>/i,
+    '<meta name="description" content="'+escapeText(description)+'">'
+  );
+
+  const main='<main class="oracle"><div class="box">'+
+    '<p class="eyebrow">MAISON JF® · '+escapeText(copy.title.toUpperCase())+' · '+escapeText(label.toUpperCase())+'</p>'+
+    '<h1 class="title">'+escapeText(copy.landingTitle)+'</h1>'+
+    '<p class="lead">'+escapeText(copy.landingLead)+'</p>'+
+    '<p class="lead">'+escapeText(copy.ready)+'</p>'+
+    '<div class="price">'+escapeText(copy.readingPrice)+'</div>'+
+    '<button class="start" id="open">'+escapeText(copy.open)+'</button>'+
+    '<p class="small status" id="status" aria-live="polite"></p>'+
+    '<p class="small">'+escapeText(copy.disclaimer)+'</p>'+
+    '<a class="back" href="./">'+escapeText(copy.back)+'</a>'+
+    '</div></main>';
+
+  const runtime=`<script>
+(() => {
+  const THEME=${JSON.stringify(slug)};
+  const LOCALE=${JSON.stringify(locale)};
+  const COPY=${JSON.stringify({
+    cancelled:copy.cancelled,
+    preparing:copy.preparing,
+    paymentError:copy.paymentError
+  })};
+  const track=(name,data)=>window.maisonAnalytics?.track
+    ? window.maisonAnalytics.track(name,data)
+    : (window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([name,data]);
+  const open=document.getElementById('open');
+  const status=document.getElementById('status');
+  if(new URLSearchParams(location.search).get('checkout_cancelado')==='1')status.textContent=COPY.cancelled;
+  open.addEventListener('click',async()=>{
+    open.disabled=true;
+    status.textContent=COPY.preparing;
+    track('oracle_checkout_start',{theme:THEME,locale:LOCALE,price:2,page_path:location.pathname});
+    try{
+      const response=await fetch('/api/create-oracle-checkout-live',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({theme:THEME,locale:LOCALE})
+      });
+      const data=await response.json().catch(()=>({}));
+      if(!response.ok||!data.url)throw new Error(COPY.paymentError);
+      location.href=data.url;
+    }catch(_){
+      status.textContent=COPY.paymentError;
+      open.disabled=false;
+      track('oracle_checkout_error',{theme:THEME,locale:LOCALE,page_path:location.pathname});
+    }
+  });
+})();
+</script>`;
+
+  const block=/<main\s+class=(["'])oracle\1>[\s\S]*?<\/main>\s*<script>[\s\S]*?create-oracle-checkout-live[\s\S]*?<\/script>/i;
+  if(!block.test(out))throw new Error('oracle_territory_template_not_found:'+slug);
+  out=out.replace(block,main+runtime);
   return out;
 }
 
@@ -150,6 +240,7 @@ export async function serveLocalizedPage(context,locale){
 
   const sourceCanonicalPath=normalizePublicSitePath(sourcePath);
   let html=await response.text();
+  html=renderLocalizedOracleTerritory(html,locale,sourceCanonicalPath);
   html=translateMaisonHtml(html,locale,sourceCanonicalPath);
   html=rewriteMetadata(html,sourceCanonicalPath,locale);
 
