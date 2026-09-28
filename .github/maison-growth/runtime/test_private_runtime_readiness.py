@@ -64,5 +64,21 @@ class PrivateRuntimeReadinessTests(unittest.TestCase):
         self.assertTrue(result["access_boundary_pair_partial"])
 
 
+    def test_prefixed_cloudflare_access_values_are_normalized_before_shape_check(self):
+        result = summarize({
+            "MAISON_CF_ACCESS_CLIENT_ID": "CF-Access-Client-Id: example-token.access",
+            "MAISON_CF_ACCESS_CLIENT_SECRET": "CF-Access-Client-Secret: cfast_abcdefghijklmnopqrstuvwxyz0123456789",
+        })
+        self.assertTrue(result["access_boundary_pair_present"])
+        self.assertTrue(result["access_client_id_shape_ok"])
+        self.assertTrue(result["access_client_secret_shape_ok"])
+        self.assertTrue(result["access_pair_shape_ok"])
+        self.assertEqual(result["access_client_id_length"], len("example-token.access"))
+        self.assertEqual(
+            result["access_client_secret_length"],
+            len("cfast_abcdefghijklmnopqrstuvwxyz0123456789"),
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
