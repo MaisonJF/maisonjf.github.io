@@ -24,7 +24,7 @@ export async function onRequestGet({env}){
     return json({
       ok:pdi.ok&&oracleAmor.ok,
       schema:localized?'vault_v3':'vault_v2',
-      localization:{ready:localized,source_locale:'pt-PT',target_locales:['en','es']},
+      localization:{ready:localized,source_locale:'pt-PT',target_locales:['pt-BR','en','es']},
       pdi,
       oracle:{
         amor:oracleAmor,
