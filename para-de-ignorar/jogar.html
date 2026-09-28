@@ -98,25 +98,50 @@ window.addEventListener('DOMContentLoaded',async()=>{
  const params=new URLSearchParams(location.search);
  const sessionId=params.get('session_id')||'';
  const theme=params.get('theme')||'';
+ const requestedLocale=params.get('locale')||'pt-PT';
+ const LOCALES=['pt-PT','pt-BR','en','es'];
+ const locale=LOCALES.includes(requestedLocale)?requestedLocale:'pt-PT';
+ const COPY={
+  'pt-PT':{brand:'PÁRA DE IGNORAR!',loading:'A abrir a tua sessão.',headline:'28 perguntas.<br>Duas pessoas.',one:'Uma pergunta de cada vez.',rule:'Podem passar. Sem explicar.',start:'Começar',pass:'Passar',next:'Seguinte →',swap:'TROQUEM.',swapText:'Agora pergunta a outra pessoa.',cont:'Continuar',finish:'Fica entre vocês.',finishText:'Não precisamos de saber o que disseram.',back:'Voltar à Maison',invalid:'Não encontrei uma sessão paga válida.',openFail:'Não foi possível abrir esta sessão.',pack:'PACK'},
+  'pt-BR':{brand:'PARE DE IGNORAR!',loading:'Abrindo sua sessão.',headline:'28 perguntas.<br>Duas pessoas.',one:'Uma pergunta de cada vez.',rule:'Vocês podem passar. Sem explicar.',start:'Começar',pass:'Passar',next:'Seguinte →',swap:'TROQUEM.',swapText:'Agora pergunte à outra pessoa.',cont:'Continuar',finish:'Fica entre vocês.',finishText:'Não precisamos saber o que vocês disseram.',back:'Voltar à Maison',invalid:'Não encontrei uma sessão paga válida.',openFail:'Não foi possível abrir esta sessão.',pack:'PACK'},
+  en:{brand:'STOP IGNORING IT!',loading:'Opening your session.',headline:'28 questions.<br>Two people.',one:'One question at a time.',rule:'You can pass. No explanation needed.',start:'Start',pass:'Pass',next:'Next →',swap:'SWITCH.',swapText:'Now ask the other person.',cont:'Continue',finish:'It stays between you.',finishText:'We do not need to know what you said.',back:'Back to Maison',invalid:'I could not find a valid paid session.',openFail:'This session could not be opened.',pack:'PACK'},
+  es:{brand:'¡DEJA DE IGNORARLO!',loading:'Abriendo tu sesión.',headline:'28 preguntas.<br>Dos personas.',one:'Una pregunta cada vez.',rule:'Podéis pasar. Sin explicar.',start:'Empezar',pass:'Pasar',next:'Siguiente →',swap:'CAMBIAD.',swapText:'Ahora pregunta a la otra persona.',cont:'Continuar',finish:'Queda entre vosotros.',finishText:'No necesitamos saber lo que habéis dicho.',back:'Volver a Maison',invalid:'No he encontrado una sesión pagada válida.',openFail:'No se pudo abrir esta sesión.',pack:'PACK'}
+ }[locale];
+ document.documentElement.lang=locale;
  const track=(name,data)=>window.maisonAnalytics?.track?window.maisonAnalytics.track(name,data):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([name,data]);
  const screens=[...document.querySelectorAll('.screen')];
  const show=id=>{screens.forEach(x=>x.classList.toggle('is-active',x.id===id));window.scrollTo({top:0,behavior:'instant'})};
- const fail=message=>{document.getElementById('error').innerHTML='<p>'+escapeHtml(message)+'</p><a href="../">Voltar à Maison</a>';show('error')};
+ const fail=message=>{document.getElementById('error').innerHTML='<p>'+escapeHtml(message)+'</p><a href="../">'+escapeHtml(COPY.back)+'</a>';show('error')};
  const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
- if(!/^cs_live_[A-Za-z0-9]+$/.test(sessionId)){fail('Não encontrei uma sessão paga válida.');return}
+ if(!/^cs_live_[A-Za-z0-9]+$/.test(sessionId)){fail(COPY.invalid);return}
 
  let payload;
  try{
-   const url='/api/pdi-session-live?session_id='+encodeURIComponent(sessionId)+(theme?'&theme='+encodeURIComponent(theme):'');
+   const url='/api/pdi-session-live?session_id='+encodeURIComponent(sessionId)+(theme?'&theme='+encodeURIComponent(theme):'')+'&locale='+encodeURIComponent(locale);
    const response=await fetch(url,{headers:{Accept:'application/json'},cache:'no-store'});
    payload=await response.json().catch(()=>({}));
-   if(!response.ok||!payload?.paid||!payload?.packs?.A||!payload?.packs?.B)throw new Error(payload?.error||'Não foi possível abrir esta sessão.');
- }catch(error){fail(error?.message||'Não foi possível abrir esta sessão.');return}
+   if(!response.ok||!payload?.paid||!payload?.packs?.A||!payload?.packs?.B)throw new Error(COPY.openFail);
+ }catch(error){fail(error?.message||COPY.openFail);return}
 
  const label=String(payload.label||'Relações');
- document.getElementById('theme-label').textContent='PÁRA DE IGNORAR! · '+label.toUpperCase();
+ document.title=COPY.brand+' | MAISON JF®';
+ document.getElementById('theme-label').textContent=COPY.brand+' · '+label.toUpperCase();
  document.getElementById('intro-theme').textContent=label.toUpperCase();
+ document.querySelector('#loading .intro__mark').textContent=COPY.brand;
+ document.querySelector('#loading .rule').textContent=COPY.loading;
+ document.querySelector('#intro h1').innerHTML=COPY.headline;
+ document.querySelector('#intro > p:not(.intro__mark):not(.rule)').textContent=COPY.one;
+ document.querySelector('#intro .rule').textContent=COPY.rule;
+ document.getElementById('start').textContent=COPY.start;
+ document.getElementById('pass').textContent=COPY.pass;
+ document.getElementById('next').textContent=COPY.next;
+ document.querySelector('#swap h1').textContent=COPY.swap;
+ document.querySelector('#swap > p:not(.intro__mark)').textContent=COPY.swapText;
+ document.getElementById('continue').textContent=COPY.cont;
+ document.querySelector('#finish .intro__mark').textContent=COPY.brand;
+ document.querySelector('#finish h1').textContent=COPY.finish;
+ document.querySelector('#finish > p:not(.intro__mark)').textContent=COPY.finishText;
 
  const packs={A:payload.packs.A,B:payload.packs.B};
  const sendEvent=(event,questionId='')=>{
@@ -146,29 +171,29 @@ window.addEventListener('DOMContentLoaded',async()=>{
    const cards=packs[state.pack];
    const card=cards[state.index];
    if(!card){finish();return}
-   document.getElementById('pack-label').textContent='PACK '+state.pack;
+   document.getElementById('pack-label').textContent=COPY.pack+' '+state.pack;
    document.getElementById('counter').textContent=(state.index+1)+' / 14';
    document.getElementById('question').textContent=card.text;
    show('card');
-   track('pdi_card_view',{theme:payload.theme,pack:state.pack,position:state.index+1,page_path:location.pathname});
+   track('pdi_card_view',{theme:payload.theme,locale,pack:state.pack,position:state.index+1,page_path:location.pathname});
  }
  function advance(kind){
    const wasLast=state.index>=13;
    const currentCard=packs[state.pack]?.[state.index];
-   track(kind==='pass'?'pdi_card_pass':'pdi_card_advance',{theme:payload.theme,pack:state.pack,position:state.index+1,page_path:location.pathname});
+   track(kind==='pass'?'pdi_card_pass':'pdi_card_advance',{theme:payload.theme,locale,pack:state.pack,position:state.index+1,page_path:location.pathname});
    if(currentCard?.id)sendEvent(kind==='pass'?'passed':'advanced',currentCard.id);
    if(!wasLast){state.index+=1;save();renderCard();return}
-   if(state.pack==='A'){state.swapped=true;save();show('swap');track('pdi_swap_reached',{theme:payload.theme,page_path:location.pathname});return}
+   if(state.pack==='A'){state.swapped=true;save();show('swap');track('pdi_swap_reached',{theme:payload.theme,locale,page_path:location.pathname});return}
    finish();
  }
  function finish(){
    state.finished=true;state.pack='B';state.index=13;save();show('finish');
-   track('pdi_session_complete',{theme:payload.theme,page_path:location.pathname});
+   track('pdi_session_complete',{theme:payload.theme,locale,page_path:location.pathname});
    sendEvent('completed');
  }
 
  document.getElementById('start').addEventListener('click',()=>{
-   state.started=true;save();renderCard();track('pdi_session_start',{theme:payload.theme,page_path:location.pathname});
+   state.started=true;save();renderCard();track('pdi_session_start',{theme:payload.theme,locale,page_path:location.pathname});
  });
  document.getElementById('next').addEventListener('click',()=>advance('next'));
  document.getElementById('pass').addEventListener('click',()=>advance('pass'));
