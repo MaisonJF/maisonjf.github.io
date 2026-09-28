@@ -5,7 +5,7 @@ A13.2 contains a production-shaped Cloudflare Worker implementation, but reposit
 ## Safe activation order
 
 1. For the existing Maison environment, verify the canonical `maison-growth-engine` D1/Queue bindings already versioned in `workers/maison-intelligence/wrangler.jsonc`; do not create duplicate resources.
-2. Run `workers/maison-intelligence/scripts/inspect-growth-migrations.sh maison-growth-engine` to inspect the remote schema read-only through migration `0016`.
+2. Run `workers/maison-intelligence/scripts/inspect-growth-migrations.sh maison-growth-engine` to inspect the remote schema read-only through migration `0022`.
 3. If the database is fresh, apply the complete migration chain; if it is existing, apply only reviewed missing migrations.
 4. Keep `WORKER_ENABLED=false` and `KILL_SWITCH=true`.
 5. Bring up the private Brain read surface before A13 collection; its private renderer strips cron, Queue and Workers AI bindings.
