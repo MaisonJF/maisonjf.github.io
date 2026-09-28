@@ -13,21 +13,54 @@ function clamp(value,fallback,min,max){
   const n=Number(value);
   return Number.isFinite(n)?Math.max(min,Math.min(max,Math.trunc(n))):fallback;
 }
-function aiText(data){
-  return (typeof data==='string'&&data)||
-    (typeof data?.response==='string'&&data.response)||
-    (typeof data?.result?.response==='string'&&data.result.response)||
-    (typeof data?.choices?.[0]?.message?.content==='string'&&data.choices[0].message.content)||
-    (typeof data?.choices?.[0]?.text==='string'&&data.choices[0].text)||
-    (typeof data?.result==='string'&&data.result)||'';
+function structuredItems(data){
+  const candidates=[
+    data?.response,
+    data?.result?.response,
+    data?.choices?.[0]?.message?.parsed,
+    data?.choices?.[0]?.message?.content,
+    data?.choices?.[0]?.text,
+    data
+  ];
+  for(const candidate of candidates){
+    if(candidate&&typeof candidate==='object'&&Array.isArray(candidate.items))return candidate.items;
+    if(typeof candidate!=='string')continue;
+    let raw=candidate.trim().replace(/^\`\`\`(?:json)?\s*/i,'').replace(/\s*\`\`\`$/,'');
+    try{
+      const parsed=JSON.parse(raw);
+      if(Array.isArray(parsed?.items))return parsed.items;
+      if(Array.isArray(parsed))return parsed;
+    }catch{}
+    const start=raw.indexOf('{'),end=raw.lastIndexOf('}');
+    if(start>=0&&end>start){
+      try{
+        const parsed=JSON.parse(raw.slice(start,end+1));
+        if(Array.isArray(parsed?.items))return parsed.items;
+      }catch{}
+    }
+  }
+  throw new Error('localizer_invalid_structured_output');
 }
-function parseArray(text){
-  let raw=String(text||'').trim().replace(/^\`\`\`(?:json)?\s*/i,'').replace(/\s*\`\`\`$/,'');
-  const start=raw.indexOf('['),end=raw.lastIndexOf(']');
-  if(start<0||end<=start)throw new Error('localizer_invalid_json');
-  const parsed=JSON.parse(raw.slice(start,end+1));
-  if(!Array.isArray(parsed))throw new Error('localizer_array_required');
-  return parsed;
+function translationSchema(kind){
+  const properties=kind==='question'
+    ? {id:{type:'string'},text:{type:'string'}}
+    : {id:{type:'string'},title:{type:['string','null']},text:{type:'string'}};
+  return {
+    type:'object',
+    properties:{
+      items:{
+        type:'array',
+        items:{
+          type:'object',
+          properties,
+          required:kind==='question'?['id','text']:['id','title','text'],
+          additionalProperties:false
+        }
+      }
+    },
+    required:['items'],
+    additionalProperties:false
+  };
 }
 function normalizeText(value,max){
   const text=String(value??'').replace(/\r\n?/g,'\n').trim();
@@ -47,28 +80,42 @@ function localeInstruction(locale){
 async function callTranslator(env,{locale,kind,items}){
   if(!env.AI)throw new Error('workers_ai_binding_missing');
   if(!items.length)return [];
-  const payload=items.map(x=>kind==='question'?{id:x.id,text:x.text}:{id:x.id,title:x.title||null,text:x.text});
-  const prompt=[
+  const payload=items.map(x=>kind==='question'
+    ? {id:x.id,text:x.text}
+    : {id:x.id,title:x.title||null,text:x.text}
+  );
+  const system=[
     'You are the private localization engine for MAISON JF paid reflective editorial content.',
-    'Source language: European Portuguese (pt-PT). Target locale: '+locale+'.',
-    localeInstruction(locale),
+    'Source language is European Portuguese (pt-PT).',
     'Preserve meaning, emotional precision, ambiguity, intensity, punctuation and direct address.',
     'Do not add explanations, diagnoses, predictions, advice, disclaimers or new facts.',
     'Do not translate MAISON JF brand names. Keep every ID exactly unchanged.',
     kind==='question'
       ? 'Each item is a standalone reflective question. Keep it concise and preserve a final question mark when present.'
-      : 'Each item is an Oracle editorial block. Preserve paragraph breaks and translate the title when present.',
-    'Return ONLY valid JSON, as an array in the same order.',
-    kind==='question'?'Schema: [{"id":"...","text":"..."}]':'Schema: [{"id":"...","title":"..." or null,"text":"..."}]',
+      : 'Each item is an Oracle editorial block. Preserve paragraph breaks. Translate title only when one exists; otherwise return null.'
+  ].join(' ');
+  const user=[
+    'Target locale: '+locale+'.',
+    localeInstruction(locale),
+    'Translate every input item exactly once and return only the structured result.',
     'INPUT:',
     JSON.stringify(payload)
   ].join('\n');
-  const data=await env.AI.run(env.LOCALIZER_MODEL||'@cf/zai-org/glm-4.7-flash',{
-    prompt,
-    max_completion_tokens:3072,
+  const data=await env.AI.run(env.LOCALIZER_MODEL||'@cf/meta/llama-3.3-70b-instruct-fp8-fast',{
+    messages:[
+      {role:'system',content:system},
+      {role:'user',content:user}
+    ],
+    response_format:{
+      type:'json_schema',
+      json_schema:translationSchema(kind)
+    },
+    max_tokens:3072,
     temperature:0.1
   });
-  return parseArray(aiText(data));
+  const translated=structuredItems(data);
+  if(translated.length!==items.length)throw new Error('localizer_item_count_mismatch');
+  return translated;
 }
 
 async function activateApproved(db,locale){
