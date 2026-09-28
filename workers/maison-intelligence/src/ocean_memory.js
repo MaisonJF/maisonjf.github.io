@@ -157,6 +157,10 @@ async function ingest(env,raw){
   ).run();
 
   const roots=await readEvidenceRoots(env,input.oceanKey);
+  const priorState=await env.GROWTH_DB.prepare(
+    `SELECT independent_evidence_count,signal_count,max_relevance_score,max_commercial_score,first_seen_at,canonical_ocean_id
+     FROM ocean_memory_state WHERE ocean_key=? LIMIT 1`
+  ).bind(input.oceanKey).first();
   const aggregate=await env.GROWTH_DB.prepare(`
     SELECT COUNT(*) AS signal_count,
            MAX(relevance_score) AS max_relevance,
@@ -165,11 +169,13 @@ async function ingest(env,raw){
            MAX(observed_at) AS last_seen
     FROM ocean_memory_signals WHERE ocean_key=?
   `).bind(input.oceanKey).first();
-  const maxRelevance=Math.max(Number(aggregate?.max_relevance||0),input.relevanceScore);
-  const maxCommercial=Math.max(Number(aggregate?.max_commercial||0),input.commercialScore);
+  const independentEvidenceCount=Math.max(roots.size,Number(priorState?.independent_evidence_count||0));
+  const canonicalOceanId=input.canonicalOceanId||priorState?.canonical_ocean_id||null;
+  const maxRelevance=Math.max(Number(priorState?.max_relevance_score||0),Number(aggregate?.max_relevance||0),input.relevanceScore);
+  const maxCommercial=Math.max(Number(priorState?.max_commercial_score||0),Number(aggregate?.max_commercial||0),input.commercialScore);
   const gate=oceanGate({
-    canonicalOceanId:input.canonicalOceanId,
-    independentEvidenceCount:roots.size,
+    canonicalOceanId,
+    independentEvidenceCount,
     relevanceScore:maxRelevance
   });
 
@@ -195,7 +201,7 @@ async function ingest(env,raw){
       snapshot_state='pending',
       updated_at=excluded.updated_at
   `).bind(
-    input.oceanKey,input.canonicalOceanId,gate.lifecycleState,Number(aggregate?.signal_count||1),roots.size,
+    input.oceanKey,canonicalOceanId,gate.lifecycleState,Math.max(Number(priorState?.signal_count||0)+1,Number(aggregate?.signal_count||1)),independentEvidenceCount,
     maxRelevance,maxCommercial,input.summary,JSON.stringify(input.themeCandidates),
     JSON.stringify(input.commercialAdjacency),aggregate?.first_seen||input.observedAt,
     aggregate?.last_seen||input.observedAt,gate.promotionGateState,now
@@ -203,7 +209,7 @@ async function ingest(env,raw){
 
   let alertId=null;
   if(shouldAlert({
-    kind:input.kind,independentEvidenceCount:roots.size,
+    kind:input.kind,independentEvidenceCount,
     relevanceScore:maxRelevance,commercialScore:maxCommercial
   })){
     alertId=id('oma_');
@@ -217,7 +223,7 @@ async function ingest(env,raw){
       JSON.stringify({
         summary:input.summary,
         signal_kind:input.kind,
-        independent_evidence_count:roots.size,
+        independent_evidence_count:independentEvidenceCount,
         relevance_score:maxRelevance,
         commercial_score:maxCommercial,
         promotion_gate_state:gate.promotionGateState,
@@ -229,7 +235,7 @@ async function ingest(env,raw){
   return {
     duplicate:false,signal_id:signalId,alert_id:alertId,ocean_key:input.oceanKey,
     lifecycle_state:gate.lifecycleState,promotion_gate_state:gate.promotionGateState,
-    independent_evidence_count:roots.size,snapshot_state:'pending',
+    independent_evidence_count:independentEvidenceCount,snapshot_state:'pending',
     github_required_for_persistence:false
   };
 }
