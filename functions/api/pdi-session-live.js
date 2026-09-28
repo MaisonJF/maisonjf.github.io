@@ -1,6 +1,7 @@
 import { getOrCreateQuestionSession } from '../_lib/para-de-ignorar-session.js';
 import { getPdiTheme } from '../_lib/pdi-theme-registry.js';
 import { normalizeMaisonLocale } from '../_lib/maison-locales.js';
+import { pdiThemeAvailability } from '../_lib/pdi-theme-catalogue.js';
 
 export async function onRequestGet({request,env}){
   try{
@@ -53,6 +54,7 @@ export async function onRequestGet({request,env}){
       return json({error:'Esta compra não dá acesso a esta sessão.'},403);
     }
 
+    const localizedProduct=await pdiThemeAvailability(env,theme,locale);
     const frozen=await getOrCreateQuestionSession({env,stripeSession,theme,locale});
     if(!frozen||frozen.packA?.length!==14||frozen.packB?.length!==14){
       return json({error:'Não foi possível preparar esta sessão.'},503);
@@ -62,7 +64,7 @@ export async function onRequestGet({request,env}){
       paid:true,
       theme,
       locale,
-      label:product.label,
+      label:localizedProduct?.label||product.label,
       session_id:stripeSession.id,
       game_session_id:frozen.game_session_id,
       packs:{
