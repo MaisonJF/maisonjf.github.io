@@ -7,11 +7,13 @@
   document.head.appendChild(languageScript);
 
   const MEASUREMENT_ID = 'G-3W8B4L5QWP';
+  const CLARITY_PROJECT_ID = 'yphxw9gkyr';
   const CONSENT_KEY = 'maison_analytics_consent_v1';
   const ATTRIBUTION_KEY = 'maison_offer_attribution_v1';
   const ATTRIBUTION_TTL = 24 * 60 * 60 * 1000;
   const ACQUISITION_KEY = 'maison_acquisition_attribution_v1';
   let googleLoaded = false;
+  let clarityLoaded = false;
   const queuedEvents = Array.isArray(window.__maisonAnalyticsQueue) ? window.__maisonAnalyticsQueue.splice(0) : [];
 
   window.dataLayer = window.dataLayer || [];
@@ -59,6 +61,48 @@
       allow_google_signals: false,
       allow_ad_personalization_signals: false
     });
+  }
+
+  function ensureClarityQueue() {
+    if (typeof window.clarity !== 'function') {
+      window.clarity = function clarity() {
+        (window.clarity.q = window.clarity.q || []).push(arguments);
+      };
+    }
+    return window.clarity;
+  }
+
+  function setClarityConsent(analyticsStorage) {
+    const clarity = ensureClarityQueue();
+    clarity('consentv2', {
+      ad_Storage: 'denied',
+      analytics_Storage: analyticsStorage
+    });
+  }
+
+  function loadClarity() {
+    if (clarityLoaded) {
+      setClarityConsent('granted');
+      return;
+    }
+    clarityLoaded = true;
+    setClarityConsent('granted');
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.clarity.ms/tag/' + CLARITY_PROJECT_ID;
+    script.setAttribute('data-maison-analytics', 'clarity');
+    document.head.appendChild(script);
+  }
+
+  function revokeClarity() {
+    if (typeof window.clarity !== 'function' && !clarityLoaded) return;
+    const clarity = ensureClarityQueue();
+    clarity('consentv2', {
+      ad_Storage: 'denied',
+      analytics_Storage: 'denied'
+    });
+    clarity('consent', false);
   }
 
   function captureOfferAttribution() {
@@ -357,8 +401,11 @@
 
   function saveConsent(value) {
     localStorage.setItem(CONSENT_KEY, value);
-    if (value === 'granted') { loadGoogle(); captureAcquisitionAttribution(); startGrowthTelemetry(); }
-    else window.gtag('consent', 'update', { analytics_storage: 'denied' });
+    if (value === 'granted') { loadGoogle(); loadClarity(); captureAcquisitionAttribution(); startGrowthTelemetry(); }
+    else {
+      window.gtag('consent', 'update', { analytics_storage: 'denied' });
+      revokeClarity();
+    }
     document.querySelector('.maison-consent')?.remove();
     showPreferencesControl();
   }
@@ -516,7 +563,7 @@
     observer.observe(document.documentElement, { childList: true, subtree: true });
 
     const consent = localStorage.getItem(CONSENT_KEY);
-    if (consent === 'granted') { loadGoogle(); startGrowthTelemetry(); }
+    if (consent === 'granted') { loadGoogle(); loadClarity(); startGrowthTelemetry(); }
     else if (consent !== 'denied') showConsent();
     if (consent === 'granted' || consent === 'denied') showPreferencesControl();
 
