@@ -34,6 +34,31 @@ jobs:
         with:
           node-version: '22'
 
+      - name: E2E recovery probe
+        if: github.event_name == 'push' && contains(github.event.head_commit.message, '[ocean-e2e]')
+        shell: bash
+        env:
+          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+          base="${MAISON_BRAIN_PRIVATE_URL%/}"
+          access_id="$CF_ACCESS_CLIENT_ID"
+          access_secret="$CF_ACCESS_CLIENT_SECRET"
+          shopt -s nocasematch
+          if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then access_id="${BASH_REMATCH[1]}"; fi
+          if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then access_secret="${BASH_REMATCH[1]}"; fi
+          shopt -u nocasematch
+          curl --fail --silent --show-error \
+            --header "Content-Type: application/json" \
+            --header "Authorization: Bearer $BRAIN_CONTROL_TOKEN" \
+            --header "CF-Access-Client-Id: $access_id" \
+            --header "CF-Access-Client-Secret: $access_secret" \
+            --data '{"ocean_keys":["atelier-principios-transferiveis-e-dna-maison"],"state":"error"}' \
+            "$base/internal/oceans/snapshot/mark"
+
       - name: Read pending Ocean snapshots
         id: feed
         shell: bash
