@@ -8,8 +8,8 @@ const MCP_VERSION = '2025-06-18';
 const MCP_SCOPE = 'openid email profile';
 
 function supabaseOrigin(env){
-  const raw=String(env.MAISON_MCP_SUPABASE_URL||'').trim().replace(/\\/+$/,'');
-  if(!/^https:\/\/[a-z0-9-]+\\.supabase\\.co$/i.test(raw)) throw new Error('mcp_supabase_url_missing');
+  const raw=String(env.MAISON_MCP_SUPABASE_URL||'').trim().replace(/\/+$/,'');
+  if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(raw)) throw new Error('mcp_supabase_url_missing');
   return raw;
 }
 function resourceUrl(request){const u=new URL(request.url);return u.origin+'/mcp';}
