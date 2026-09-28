@@ -1,207 +1,72 @@
-# Maison private commercial runtime — activation runbook
+# Maison Private Runtime — operator runbook
 
-This runbook is the bridge between **code-ready** and **privately usable**. It does not grant public execution authority.
+The operator path is intentionally one button.
 
-## Target
+## Normal activation
 
-Bring the private runtime online in the narrowest useful order:
+Open GitHub Actions and run:
 
-`D1 canonical data → private Brain read → A14 preview → proposal materialization → A12 Commercial Action Inbox`
+**Maison Private Runtime → Run workflow**
 
-Throughout this runbook:
+There are no stage, apply or Access-confirmation inputs.
+
+A manual run performs, in order:
+
+1. repository/global-health validation;
+2. Cloudflare credential and Access-pair guard;
+3. derivation of scoped proposal/review credentials from the single Brain root token;
+4. full private-runtime preflight;
+5. exact private Custom Domain render;
+6. read-only remote D1 schema verification;
+7. Worker test/check/dry-run;
+8. one-shot Worker deploy with all private runtime credentials;
+9. deployment-presence verification;
+10. health verification with propagation retries;
+11. two-layer authentication verification;
+12. no-write probes confirming proposal and human-review surfaces are privately enabled;
+13. identifier-free commercial preview.
+
+A green run means the private operating surface is live and usable.
+
+## What remains OFF
+
+Even with the complete private runtime online:
 
 - public write = OFF;
 - outbound = OFF;
 - spend = OFF;
 - experiment execution = OFF;
-- A8, when used later, stops at `draft`.
-
-## First command: readiness doctor
-
-After creating `.env.observe`, run the combined no-start/no-write doctor before any Cloudflare action or container start:
-
-```bash
-python .github/maison-growth/runtime/activation_doctor.py \
-  --env-file .env.observe
-```
-
-It reports names-only credential readiness plus host/Compose readiness and points to exactly one next gate. It never deploys, changes D1, starts services, prints secret values or grants execution authority.
-
-## 0. Local/private dependencies
-
-Copy the example environment and replace placeholders locally. Do not commit it.
-
-```bash
-cp .github/maison-growth/runtime/.env.observe.example .env.observe
-```
-
-Start the private persistence dependencies:
-
-```bash
-docker compose \
-  --env-file .env.observe \
-  -f .github/maison-growth/runtime/docker-compose.observe.yml \
-  up -d postgres redis osiris-init osiris-mcp maison-osiris-bridge
-```
-
-Run repository/runtime validation:
-
-```bash
-docker compose \
-  --env-file .env.observe \
-  -f .github/maison-growth/runtime/docker-compose.observe.yml \
-  --profile brain-validation run --rm brain-validate
-```
-
-## Optional GitHub deployment gate
-
-`.github/workflows/maison-private-runtime.yml` automatically runs a **secret-free dry-run** on relevant pull requests and pushes to `main`, using `private_brain_read_candidate` as the safe default stage. A live apply remains manual-only through `workflow_dispatch`, requires `apply=true` plus `access_boundary_confirmed=true`, and receives Cloudflare/Brain secrets only inside the live-only steps. Automatic CI never receives those repository secrets.
-
-Repository/Actions secrets expected by that workflow:
-
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
-- `MAISON_BRAIN_PRIVATE_URL`
-- `MAISON_BRAIN_CONTROL_TOKEN`
-- `MAISON_BRAIN_PROPOSAL_TOKEN` for proposal stages
-- `MAISON_BRAIN_REVIEW_DECISION_TOKEN` for human-decision stage
-- optional paired `MAISON_CF_ACCESS_CLIENT_ID` + `MAISON_CF_ACCESS_CLIENT_SECRET`
-
-The renderer reuses the canonical Maison Growth D1 binding already versioned in `workers/maison-intelligence/wrangler.jsonc` and hard-locks `WORKER_ENABLED=false`, `KILL_SWITCH=true`, OSIRIS/public sensors/model gateways OFF. The workflow cannot be used to turn collection on.
-
-For a live apply, the renderer also converts `MAISON_BRAIN_PRIVATE_URL` into the Worker's exact **Custom Domain** binding. The URL must be an HTTPS origin only (no path, query, credentials or custom port). The private config disables `workers.dev` and preview URLs and strips cron triggers, Queue bindings and the Workers AI binding, leaving the private HTTP surfaces plus the canonical D1 binding. Automatic dry-runs intentionally contain no live route and receive no private URL secret.
-
-Before a live apply, the workflow also runs the read-only `scripts/verify-growth-schema.sh` check against `maison-growth-engine`. It references the Brain/A12/A14 planning tables and views with `LIMIT 0`; a missing migration blocks deployment without mutating D1.
-
-A separate manual workflow, `.github/workflows/maison-cloudflare-readonly-inspect.yml`, is available for the first Cloudflare session. It prefers the optional `CLOUDFLARE_READ_API_TOKEN` and falls back to `CLOUDFLARE_API_TOKEN`; it also needs `CLOUDFLARE_ACCOUNT_ID`. It verifies that `maison-growth-engine` is reachable, attempts to confirm whether the `maison-intelligence` Worker already exists, runs the `0001→0022` migration inspector, and contains no deploy, secret-write or D1 mutation command.
-
-Use `CLOUDFLARE_PERMISSION_GUIDE.md` when creating tokens. In particular, keep D1 Edit separate from ordinary inspection, and remember that creating a new Worker needs more privilege than deploying an existing one.
-
-After deployment, it performs an authenticated GET against `/internal/brain/health` and requires `status=ok` plus `mode=read_only`. A deployment that cannot be reached through the configured private boundary is therefore treated as incomplete.
-
-The private Brain deploy intentionally does not run video generation checks. Video smoke testing remains isolated in the separate `Maison Video Smoke Test` workflow, so video credentials or provider availability cannot invalidate Brain activation.
-
-Once the private read surface is healthy, run the separate manual `Maison Private Commercial Preview` workflow before enabling proposal writes. It uses only the Brain Control token, forces `MAISON_A14_MATERIALIZE_ENABLED=false`, disables Semantic/Osiris runtime context for this first smoke, and prints counts/authority only — no opportunity, queue or experiment identifiers.
-
-## 1. Private Brain read
-
-Before changing any remote switch:
-
-```bash
-python .github/maison-growth/runtime/preflight_private_runtime.py \
-  private_brain_read_candidate \
-  --env-file .env.observe
-```
-
-The target remote Worker state is:
-
-- `BRAIN_CONTROL_API_ENABLED=true`;
+- external collection = OFF;
 - `WORKER_ENABLED=false`;
-- `KILL_SWITCH=true`;
-- `OSIRIS_ENABLED=false`;
-- proposal and review-decision APIs still OFF.
+- `KILL_SWITCH=true`.
 
-The Brain Control endpoint must be behind authenticated HTTPS. The bearer token is mandatory; Cloudflare Access service-token headers are supported as an additional boundary.
+Proposal materialization and human-review decisions are internal planning/governance capabilities. Enabling their authenticated private endpoints does not authorize publication, outreach, spend or experiment execution.
 
-Verify health, then run one observe cycle:
+## Credentials
 
-```bash
-docker compose \
-  --env-file .env.observe \
-  -f .github/maison-growth/runtime/docker-compose.observe.yml \
-  --profile brain-observe run --rm brain-observe-cycle
-```
+Normal operation requires only:
 
-That cycle performs zero writes.
+- `CLOUDFLARE_ACCOUNT_ID`;
+- `CLOUDFLARE_API_TOKEN`;
+- `MAISON_BRAIN_PRIVATE_URL`;
+- `MAISON_BRAIN_CONTROL_TOKEN`;
+- `MAISON_CF_ACCESS_CLIENT_ID`;
+- `MAISON_CF_ACCESS_CLIENT_SECRET`.
 
-## 2. Proposal materialization — first real inbox entries
+`CLOUDFLARE_READ_API_TOKEN` is optional and preferred for read-only schema inspection.
 
-Only after the private read path works:
+Proposal and review tokens are derived automatically from `MAISON_BRAIN_CONTROL_TOKEN`; they are not separate operator-managed secrets.
 
-```bash
-python .github/maison-growth/runtime/preflight_private_runtime.py \
-  proposal_materialization_candidate \
-  --env-file .env.observe
-```
+## Diagnostic workflow
 
-Target remote state adds only:
+`Maison Cloudflare Read-Only Inspect` remains available as a diagnostic tool. It performs no deploy and no D1 mutation. Use it only when the one-button runtime reports a D1/resource problem or when remote state needs to be inspected independently.
 
-- `BRAIN_PROPOSAL_API_ENABLED=true`;
-- a **separate** `BRAIN_PROPOSAL_TOKEN`.
+## Internal stages
 
-Keep `WORKER_ENABLED=false`, `KILL_SWITCH=true`, external sensors/model providers OFF.
+The policy still contains internal stages such as `private_brain_read_candidate`, `proposal_materialization_candidate` and `human_review_decision_candidate` because they are useful for tests and fail-closed policy definitions.
 
-First run materialization in preview mode:
-
-```bash
-docker compose \
-  --env-file .env.observe \
-  -f .github/maison-growth/runtime/docker-compose.observe.yml \
-  --profile a14-materialize run --rm a14-materialize
-```
-
-When the selected previews are legitimate evidence-backed opportunities, set locally:
-
-```text
-MAISON_A14_MATERIALIZE_ENABLED=true
-```
-
-and rerun the same profile. This writes A14 commercial hypotheses and queues only `human_review_preview` offers for A12. It does **not** execute an experiment or contact anyone.
-
-Read the working inbox:
-
-```bash
-docker compose \
-  --env-file .env.observe \
-  -f .github/maison-growth/runtime/docker-compose.observe.yml \
-  --profile commercial-inbox run --rm commercial-inbox
-```
-
-The output separates:
-
-- `decide` — human commercial decisions;
-- `manual_pilots` — approved plans that require a human-operated test;
-- `a8_drafts` — CTA experiments that exist only as drafts.
-
-### One-command cycle after both private surfaces are ready
-
-The separate observe/materialize/inbox commands above remain the clearest activation path. After they have passed once, the same loop can be run as one private operation:
-
-```bash
-docker compose \
-  --env-file .env.observe \
-  -f .github/maison-growth/runtime/docker-compose.observe.yml \
-  --profile commercial-cycle run --rm commercial-cycle
-```
-
-The cycle reads the inbox before and after the Brain pass. It only materializes A14/A12 proposals when `MAISON_A14_MATERIALIZE_ENABLED=true`; it never approves its own proposals.
-
-## 3. Human decisions
-
-Enable the review-decision surface only when a real queue item is ready for a human decision:
-
-```bash
-python .github/maison-growth/runtime/preflight_private_runtime.py \
-  human_review_decision_candidate \
-  --env-file .env.observe
-```
-
-A recorded approval means **experiment planning only**. It does not authorize publication, outreach, spend or execution.
-
-## 4. A8 draft path
-
-Only CTA validation against an existing canonical Maison solution can enter A8. It additionally requires the private CTA context file and a passed canonical A7 `test_cta` decision.
-
-Preflight:
-
-```bash
-python .github/maison-growth/runtime/preflight_private_runtime.py \
-  a8_draft_candidate \
-  --env-file .env.observe
-```
-
-The resulting A8 state is `draft` only.
+They are **not operator choices** in normal production operation. The one-button workflow deploys the complete private planning/governance surface while preserving the no-public-authority invariants above.
 
 ## Stop condition
 
-If any preflight returns `ready=false`, do not compensate by weakening a guard. Fix the named prerequisite and rerun the same stage.
+If the one-button workflow fails, fix the specific failed gate. Do not weaken the guard and do not manually skip forward. A successful run must finish health, boundary and commercial-preview verification.
