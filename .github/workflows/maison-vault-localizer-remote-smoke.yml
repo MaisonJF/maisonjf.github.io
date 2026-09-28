@@ -1,0 +1,70 @@
+name: Maison Vault Localizer Remote Smoke
+
+on:
+  push:
+    branches:
+      - rio-produto-digital/vault-localizer
+    paths:
+      - '.github/workflows/maison-vault-localizer-remote-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Guard Cloudflare credentials
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+      - name: Install Wrangler
+        working-directory: workers/maison-intelligence
+        run: npm install --ignore-scripts
+      - name: Render one-off remote-binding config
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          src=Path('workers/maison-vault-localizer/wrangler.jsonc')
+          out=Path('workers/maison-vault-localizer/wrangler.remote-smoke.jsonc')
+          cfg=json.loads(src.read_text())
+          cfg['triggers']={'crons':[]}
+          cfg['vars']['LOCALIZER_ENABLED']='true'
+          cfg['vars']['LOCALIZER_BATCH_SIZE']='4'
+          cfg['vars']['LOCALIZER_ROUNDS_PER_CRON']='1'
+          cfg['ai']['remote']=True
+          for db in cfg['d1_databases']:
+              db['remote']=True
+          out.write_text(json.dumps(cfg,indent=2)+'\n')
+          PY
+      - name: Invoke scheduled handler once against remote bindings
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd workers/maison-intelligence
+          npx wrangler dev --config ../maison-vault-localizer/wrangler.remote-smoke.jsonc             --test-scheduled --port 8787 > /tmp/vault-localizer-dev.log 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          ready=0
+          for i in $(seq 1 40); do
+            if curl -sS -o /dev/null "http://127.0.0.1:8787/"; then ready=1; break; fi
+            sleep 1
+          done
+          test "$ready" = "1"
+          response="$(curl -fsS --max-time 240             'http://127.0.0.1:8787/cdn-cgi/local/scheduled?format=json&cron=*+*+*+*+*')"
+          echo "$response" | jq '{outcome,noRetry}'
+          if [[ "$(jq -r '.outcome // empty' <<<"$response")" != "ok" ]]; then
+            echo "Scheduled smoke did not complete successfully."
+            sed -E 's/(INPUT:).*/\1 [redacted]/' /tmp/vault-localizer-dev.log | tail -n 80
+            exit 1
+          fi
