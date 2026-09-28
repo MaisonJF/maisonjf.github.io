@@ -12,9 +12,9 @@
   },
   "vars": {
     "LOCALIZER_ENABLED": "true",
-    "LOCALIZER_MODEL": "@cf/google/gemma-4-26b-a4b-it",
-    "LOCALIZER_BATCH_SIZE": "32",
-    "LOCALIZER_ROUNDS_PER_CRON": "4"
+    "LOCALIZER_MODEL": "@cf/zai-org/glm-4.7-flash",
+    "LOCALIZER_BATCH_SIZE": "12",
+    "LOCALIZER_ROUNDS_PER_CRON": "1"
   },
   "ai": {
     "binding": "AI"
