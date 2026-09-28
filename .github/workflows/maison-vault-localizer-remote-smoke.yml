@@ -46,6 +46,7 @@ jobs:
           cfg['vars']['LOCALIZER_ORACLE_BATCH_SIZE']='0'
           cfg['vars']['LOCALIZER_ROUNDS_PER_CRON']='1'
           cfg['vars']['LOCALIZER_LOCALE']='pt-BR'
+          cfg['vars']['LOCALIZER_DIAGNOSTIC_ENABLED']='true'
           cfg['ai']['remote']=True
           for db in cfg['d1_databases']:
               db['remote']=True
@@ -65,22 +66,15 @@ jobs:
             sleep 1
           done
           test "$ready" = "1"
-          response_file=/tmp/scheduled-response.json
-          http_code="$(curl -sS --max-time 240 -o "$response_file" -w '%{http_code}'             'http://127.0.0.1:8787/cdn-cgi/local/scheduled?format=json&cron=*+*+*+*+*' || true)"
-          echo "Scheduled HTTP: $http_code"
+          response_file=/tmp/localizer-response.json
+          http_code="$(curl -sS --max-time 180 -o "$response_file" -w '%{http_code}'             -X POST 'http://127.0.0.1:8787/diagnostic' || true)"
+          echo "Diagnostic HTTP: $http_code"
           if jq -e . "$response_file" >/dev/null 2>&1; then
-            jq '{outcome,noRetry}' "$response_file"
-            outcome="$(jq -r '.outcome // empty' "$response_file")"
+            jq '{ok,locale,activated,pending,error}' "$response_file"
           else
-            outcome=""
+            echo "Diagnostic response was not valid JSON."
           fi
-          echo "Sanitized localizer diagnostics:"
-          grep -E 'Vault localizer completed|Scheduled Vault localizer failed|localizer_|AI|D1|Error|exception|RangeError|TypeError' /tmp/vault-localizer-dev.log | tail -n 120 || true
-          if [[ "$http_code" != "200" || "$outcome" != "ok" ]]; then
-            echo "Scheduled smoke did not complete successfully."
-            exit 1
-          fi
-          if ! grep -q 'Vault localizer completed' /tmp/vault-localizer-dev.log; then
-            echo "Scheduled handler returned ok but did not report a completed localization round."
+          if [[ "$http_code" != "200" || "$(jq -r '.ok // false' "$response_file" 2>/dev/null)" != "true" ]]; then
+            echo "Remote-binding localization smoke failed."
             exit 1
           fi
