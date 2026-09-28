@@ -39,7 +39,12 @@ WITH expected(migration, name) AS (
     ('0016_approved_validation_planning', 'a14_validation_plans'),
     ('0016_approved_validation_planning', 'a14_validation_plan_a8_links'),
     ('0016_approved_validation_planning', 'a14_approved_offers_ready_for_planning'),
-    ('0018_b2b_feedback', 'brain_b2b_feedback')
+    ('0018_b2b_feedback', 'brain_b2b_feedback'),
+    ('0021_commercial_recovery_journal', 'commercial_recovery_journal'),
+    ('0022_ocean_working_memory', 'ocean_memory_signals'),
+    ('0022_ocean_working_memory', 'ocean_memory_state'),
+    ('0022_ocean_working_memory', 'ocean_memory_alerts'),
+    ('0022_ocean_working_memory', 'brain_ocean_memory_feed')
 )
 SELECT
   e.migration,
@@ -93,7 +98,12 @@ WHERE name IN (
   'a14_validation_plans',
   'a14_validation_plan_a7_links',
   'a14_validation_plan_a8_links',
-  'a14_approved_offers_ready_for_planning'
+  'a14_approved_offers_ready_for_planning',
+  'commercial_recovery_journal',
+  'ocean_memory_signals',
+  'ocean_memory_state',
+  'ocean_memory_alerts',
+  'brain_ocean_memory_feed'
 )
 ORDER BY type,name;
 "
@@ -108,7 +118,8 @@ WHERE schema_key IN (
   'maison_growth_a14_schema_version',
   'maison_brain_runtime_schema_version',
   'maison_growth_a12_schema_version',
-  'maison_brain_b2b_feedback_schema_version'
+  'maison_brain_b2b_feedback_schema_version',
+  'maison_ocean_memory_schema_version'
 )
 ORDER BY schema_key;
 "
