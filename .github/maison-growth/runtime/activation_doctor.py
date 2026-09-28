@@ -56,12 +56,16 @@ def recommend_next_step(
     if host_ready is None:
         return "run_observe_host_preflight"
     if bool(credentials.get("access_boundary_pair_partial")):
-        return "complete_or_remove_partial_access_pair"
+        return "complete_cloudflare_access_pair"
     if not bool(credentials.get("read_only_inspection_credentials_present")):
         return "configure_read_only_cloudflare_credentials"
     if not bool(credentials.get("first_stage_credentials_present")):
         return "run_cloudflare_read_only_inspect"
-    return "run_private_brain_read_preflight"
+    if not bool(credentials.get("access_pair_shape_ok")):
+        return "configure_cloudflare_access_boundary"
+    if bool(credentials.get("operator_one_button_ready")):
+        return "run_maison_private_runtime"
+    return "fix_private_runtime_credentials"
 
 
 def assemble_report(
