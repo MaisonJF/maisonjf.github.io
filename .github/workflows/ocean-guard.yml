@@ -36,6 +36,7 @@ jobs:
           node --check functions/_lib/maison-vault-v2.js
           node --check functions/_lib/taxonomy-gate.js
           node --check functions/_lib/content-gap-detector.js
+          node .github/maison-growth/vault/validate_continuous_growth.mjs
           node --check functions/_lib/question-vault-v2.js
           node --check functions/_lib/question-composer.js
           node --check functions/_lib/para-de-ignorar-session.js
