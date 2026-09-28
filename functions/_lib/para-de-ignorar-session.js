@@ -11,20 +11,26 @@ import {
 import { vaultExperienceEngineReady, recordQuestionSessionServedV2, recordExperienceSignal, upsertContentNeed } from './maison-vault-v2.js';
 import { detectQuestionContentNeeds } from './content-gap-detector.js';
 import { listActivePaidQuestionsV2 } from './question-vault-v2.js';
+import { normalizeMaisonLocale } from './maison-locales.js';
+import { vaultLocalizationReady } from './maison-localized-content.js';
 
 /*
 Creates one stable 28-card paid session.
 This module never receives or stores players' answer text.
 Stripe payment validation belongs in the API route that calls this module.
 */
-export async function getOrCreateQuestionSession({env,stripeSession,theme}={}){
+export async function getOrCreateQuestionSession({env,stripeSession,theme,locale='pt-PT'}={}){
   if(!stripeSession?.id)throw new Error('stripe_session_required');
   if(!theme)throw new Error('theme_required');
 
   const db=requireMaisonVault(env);
+  const selectedLocale=normalizeMaisonLocale(locale);
+  const localeReady=await vaultLocalizationReady(db);
+  if(selectedLocale!=='pt-PT'&&!localeReady)throw new Error('localized_vault_not_ready');
   const existing=await findGameSessionByStripe(db,stripeSession.id);
   if(existing){
     if(existing.theme!==theme)throw new Error('session_theme_mismatch');
+    if(normalizeMaisonLocale(existing.locale||'pt-PT')!==selectedLocale)throw new Error('session_locale_mismatch');
     return await readGameSession(db,existing.game_session_id);
   }
 
@@ -35,7 +41,7 @@ export async function getOrCreateQuestionSession({env,stripeSession,theme}={}){
 
   const useV2=await vaultExperienceEngineReady(db);
   const [questions,seenIds]=await Promise.all([
-    useV2?listActivePaidQuestionsV2(db,theme):listActivePaidQuestions(db,theme),
+    useV2?listActivePaidQuestionsV2(db,theme,selectedLocale):listActivePaidQuestions(db,theme),
     listSeenQuestionIds(db,buyerKey,theme)
   ]);
 
@@ -60,6 +66,7 @@ export async function getOrCreateQuestionSession({env,stripeSession,theme}={}){
     stripeSessionId:stripeSession.id,
     buyerKey,
     theme,
+    locale:selectedLocale,
     seed,
     engineVersion:composed.engineVersion,
     packA:composed.packA,
