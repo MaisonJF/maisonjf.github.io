@@ -509,6 +509,11 @@ const PAGE_MAP={
   '/servicos/':SERVICES
 };
 
+export function hasLocalizedSiteCoverage(sourcePath){
+  const path=normalizePublicSitePath(sourcePath);
+  return Boolean(PAGE_MAP[path]);
+}
+
 function escapeAmp(value){
   return String(value).replace(/&(?![A-Za-z0-9#]+;)/g,'&amp;');
 }
