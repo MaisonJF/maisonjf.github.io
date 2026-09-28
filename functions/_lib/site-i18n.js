@@ -1,3 +1,6 @@
+import { ORACLE_TERRITORIES } from './oracle-territories.js';
+import { ORACLE_PUBLIC_COPY, oracleLocaleTermMap } from './oracle-public-locales.js';
+
 /*
 MAISON JF® · Public-site localization contract
 PT-PT remains the canonical editorial source. PT-BR, EN and ES are localized
@@ -880,6 +883,25 @@ const DOOR_PRESENCA={
   }
 };
 
+
+const ORACLE_TERRITORY_SLUGS=new Set(ORACLE_TERRITORIES.map(item=>String(item.slug)));
+
+function oracleIndexTranslationMap(locale){
+  if(locale==='pt-PT')return {};
+  const source=ORACLE_PUBLIC_COPY['pt-PT'];
+  const target=ORACLE_PUBLIC_COPY[locale]||source;
+  const ui=Object.fromEntries(
+    Object.keys(source).map(key=>[String(source[key]),String(target[key]??source[key])])
+  );
+  return {...oracleLocaleTermMap(locale),...ui};
+}
+
+export function isLocalizedOracleTerritoryPath(sourcePath){
+  const path=normalizePublicSitePath(sourcePath);
+  const match=path.match(/^\/oraculo\/([^/]+)$/);
+  return Boolean(match&&ORACLE_TERRITORY_SLUGS.has(match[1]));
+}
+
 const PAGE_MAP={
   '/':HOME,
   '/farol':FAROL,
@@ -888,6 +910,7 @@ const PAGE_MAP={
   '/produtos/':PRODUCTS,
   '/servicos/':SERVICES,
   '/ebooks/':EBOOKS,
+  '/oraculo/':{},
   '/portas/casa':DOOR_CASA,
   '/portas/corpo':DOOR_CORPO,
   '/portas/cabeca':DOOR_CABECA,
@@ -896,7 +919,7 @@ const PAGE_MAP={
 
 export function hasLocalizedSiteCoverage(sourcePath){
   const path=normalizePublicSitePath(sourcePath);
-  return Boolean(PAGE_MAP[path]);
+  return Object.prototype.hasOwnProperty.call(PAGE_MAP,path)||isLocalizedOracleTerritoryPath(path);
 }
 
 function escapeAmp(value){
@@ -919,8 +942,12 @@ function applyMap(value,map){
 export function translationMapFor(locale,sourcePath){
   if(locale==='pt-PT')return {};
   const path=normalizePublicSitePath(sourcePath);
+  const oracleMap=path==='/oraculo/'||isLocalizedOracleTerritoryPath(path)
+    ? oracleIndexTranslationMap(locale)
+    : {};
   return {
     ...(COMMON[locale]||{}),
+    ...oracleMap,
     ...((PAGE_MAP[path]||{})[locale]||{})
   };
 }
