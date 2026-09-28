@@ -99,7 +99,20 @@ No answer text is requested or stored.
 - `subterritory`
 - `depth`
 
-`content-gap-detector.js` detects minimum healthy coverage by role/stage. These values are **floors, never catalogue caps**. The purpose is to tell the Brain/Oceans where depth is missing instead of endlessly generating more of what is already abundant.
+`content-gap-detector.js` detects minimum healthy coverage by role/stage. These values are **floors, never catalogue caps**. Below a floor, real coverage gaps take priority. Once a floor is reached, the detector opens the next bounded depth milestone with `reason_code=continuous_depth`, so Brain/Oceans keep expanding mature territories without ever treating 300 questions, or any later milestone, as a final catalogue size.
+
+## Continuous growth contract
+
+The private catalogue is intentionally open-ended.
+
+- PT-PT remains the canonical editorial source.
+- Every mature question theme keeps receiving new depth milestones after its 300-question healthy floor.
+- Every mature Oracle territory keeps receiving new role-depth milestones after its healthy role floors.
+- There is no numeric hard cap: `catalogueCap=null` is emitted in growth needs.
+- Real gaps outrank expansion work; continuous growth does not justify duplicate or low-quality content.
+- New canonical IDs still pass taxonomy, semantic deduplication, ontology/editorial and quality gates before live serving.
+- Each newly live canonical ID creates localization work for PT-BR, EN and ES, preserving one identity across languages.
+- The goal is a continuously compounding private corpus: thousands, then tens of thousands of distinct canonical pieces, while session composition exposes only a tiny relevant subset.
 
 ## Volta Para Casa · Ocean/Vault question loop
 
