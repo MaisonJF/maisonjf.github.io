@@ -17,6 +17,8 @@ function aiText(data){
   return (typeof data==='string'&&data)||
     (typeof data?.response==='string'&&data.response)||
     (typeof data?.result?.response==='string'&&data.result.response)||
+    (typeof data?.choices?.[0]?.message?.content==='string'&&data.choices[0].message.content)||
+    (typeof data?.choices?.[0]?.text==='string'&&data.choices[0].text)||
     (typeof data?.result==='string'&&data.result)||'';
 }
 function parseArray(text){
