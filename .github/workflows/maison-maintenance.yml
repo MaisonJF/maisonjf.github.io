@@ -12,6 +12,7 @@ on:
           - apply_b2b_feedback_0018
           - apply_commercial_recovery_0021
           - apply_content_learning_a11_0019_0020
+          - apply_vault_localizer_telemetry_0004
           - rebuild_commercial_context
           - validate_global_health
       confirm_write:
@@ -101,6 +102,21 @@ jobs:
           test -n "$SQL"
           npx wrangler d1 execute maison-growth-engine --remote --command="$SQL"
           bash scripts/verify-growth-schema.sh maison-growth-engine
+
+      - name: Apply Vault localizer telemetry migration 0004
+        if: ${{ inputs.operation == 'apply_vault_localizer_telemetry_0004' }}
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          test "${{ inputs.confirm_write }}" = "true"
+          npm install --ignore-scripts
+          SQL="$(sed -E '/^[[:space:]]*--/d; /^[[:space:]]*PRAGMA foreign_keys/d' ../../.github/maison-growth/vault/0004_localizer_telemetry.sql)"
+          test -n "$SQL"
+          npx wrangler d1 execute maison-growth-engine --remote --command="$SQL"
+          npx wrangler d1 execute maison-growth-engine --remote --command="SELECT name FROM sqlite_master WHERE type='table' AND name='vault_localizer_telemetry';"
 
       - name: Rebuild commercial context
         if: ${{ inputs.operation == 'rebuild_commercial_context' }}
