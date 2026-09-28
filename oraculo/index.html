@@ -138,6 +138,13 @@
 
 </div></main>
 <script>
+const locale=String(window.MAISON_LOCALE||document.documentElement.lang||'pt-PT');
+const copy={
+ 'pt-PT':{prompt:'Escolhe um território ou escreve uma palavra.',one:'caminho encontrado',many:'caminhos encontrados',none:'Experimenta outra palavra.'},
+ 'pt-BR':{prompt:'Escolha um território ou escreva uma palavra.',one:'caminho encontrado',many:'caminhos encontrados',none:'Tente outra palavra.'},
+ en:{prompt:'Choose a territory or type one word.',one:'path found',many:'paths found',none:'Try another word.'},
+ es:{prompt:'Elige un territorio o escribe una palabra.',one:'camino encontrado',many:'caminos encontrados',none:'Prueba con otra palabra.'}
+}[locale]||{prompt:'Escolhe um território ou escreve uma palavra.',one:'caminho encontrado',many:'caminhos encontrados',none:'Experimenta outra palavra.'};
 const norm=s=>(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 const search=document.getElementById('oracle-search'),count=document.getElementById('oracle-count');
 const cards=[...document.querySelectorAll('.oracle-card')],groups=[...document.querySelectorAll('.oracle-group')];
@@ -146,17 +153,17 @@ function filter(){
  if(!q){
   cards.forEach(card=>card.hidden=false);
   groups.forEach(group=>{group.hidden=false;group.open=false});
-  count.textContent='Escolhe um território ou escreve uma palavra.';
+  count.textContent=copy.prompt;
   return;
  }
- cards.forEach(card=>{card.hidden=!norm(card.dataset.search+' '+card.textContent).includes(q)});
+ cards.forEach(card=>{card.hidden=!norm((card.dataset.search||'')+' '+card.textContent).includes(q)});
  groups.forEach(group=>{
   const any=[...group.querySelectorAll('.oracle-card')].some(c=>!c.hidden);
   group.hidden=!any;
   group.open=any;
  });
  const visible=cards.filter(card=>!card.hidden).length;
- count.textContent=visible?visible+' caminho'+(visible===1?'':'s')+' encontrado'+(visible===1?'':'s'):'Experimenta outra palavra.';
+ count.textContent=visible?(visible+' '+(visible===1?copy.one:copy.many)):copy.none;
 }
 groups.forEach(group=>group.addEventListener('toggle',()=>{
  if(group.open && !search.value.trim()){
@@ -165,6 +172,6 @@ groups.forEach(group=>group.addEventListener('toggle',()=>{
 }));
 search.addEventListener('input',filter);
 filter();
-document.querySelectorAll('[data-theme]').forEach(a=>a.addEventListener('click',()=>window.maisonAnalytics?.track?.('oracle_theme_select',{theme:a.dataset.theme,page_path:location.pathname})));
+document.querySelectorAll('[data-theme]').forEach(a=>a.addEventListener('click',()=>window.maisonAnalytics?.track?.('oracle_theme_select',{theme:a.dataset.theme,locale,page_path:location.pathname})));
 </script>
 </body></html>
