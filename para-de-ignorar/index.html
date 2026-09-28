@@ -98,13 +98,10 @@
 (async()=>{
   const status=document.getElementById('pdi-status');
   const grid=document.getElementById('pdi-theme-grid');
-  const pageParams=new URLSearchParams(location.search);
-  const rawLocale=String(pageParams.get('locale')||pageParams.get('lang')||'pt-PT').toLowerCase();
-  const locale=rawLocale.startsWith('en')?'en':rawLocale.startsWith('es')?'es':'pt-PT';
   let available=new Map();
 
   try{
-    const response=await fetch('/api/pdi-themes-live?locale='+encodeURIComponent(locale),{cache:'no-store'});
+    const response=await fetch('/api/pdi-themes-live',{cache:'no-store'});
     const data=await response.json().catch(()=>({themes:[]}));
     if(!response.ok||!Array.isArray(data.themes))throw new Error();
     available=new Map(data.themes.map(x=>[x.slug,x]));
@@ -144,12 +141,12 @@
     button.setAttribute('aria-busy','true');
     const original=button.textContent;
     button.textContent='A abrir pagamento…';
-    window.maisonAnalytics?.track?.('pdi_purchase_intent',{theme,locale,page_path:location.pathname});
+    window.maisonAnalytics?.track?.('pdi_purchase_intent',{theme,page_path:location.pathname});
     try{
       const response=await fetch('/api/create-pdi-checkout-live',{
         method:'POST',
         headers:{'content-type':'application/json'},
-        body:JSON.stringify({theme,locale})
+        body:JSON.stringify({theme})
       });
       const payload=await response.json().catch(()=>({}));
       if(!response.ok||!payload.url)throw new Error();
