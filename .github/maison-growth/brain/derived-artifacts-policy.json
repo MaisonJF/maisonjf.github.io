@@ -1,6 +1,6 @@
 {
-  "contract_version": "MAISON-DERIVED-ARTIFACTS-2.0",
-  "principle": "Canonical inputs are authored; derived artifacts are rebuilt and checked, never hand-maintained.",
+  "contract_version": "MAISON-DERIVED-ARTIFACTS-2.1",
+  "principle": "Live Ocean memory is canonical in D1; repository Ocean files are exported snapshots used by build-time derivatives. Other authored inputs remain canonical in Git.",
   "canonical_inputs": [
     ".github/maison-growth/oceans/candidates.json",
     "functions/_lib/offer-brain.js",
@@ -91,6 +91,31 @@
       "route": "/internal/a11/content-learning",
       "default_enabled": false,
       "storage": "GROWTH_DB"
+    },
+    "oceans": {
+      "host": "maison-intelligence",
+      "ingest_route": "/internal/oceans/ingest",
+      "memory_route": "/internal/oceans/memory",
+      "alert_route": "/internal/oceans/alerts",
+      "default_enabled": false,
+      "live_enabled": true,
+      "storage": "GROWTH_DB",
+      "github_dependency": false
+    }
+  },
+  "runtime_canonical_inputs": {
+    "oceans": "D1:ocean_memory_signals/ocean_memory_state/ocean_memory_alerts",
+    "external_intelligence": "D1:external_intelligence_observations",
+    "github_ocean_snapshot": ".github/maison-growth/oceans/candidates.json",
+    "github_failure_blocks_runtime": false
+  },
+  "repository_snapshot_policy": {
+    ".github/maison-growth/oceans/candidates.json": {
+      "source": "D1:ocean_memory_state",
+      "role": "build_snapshot_and_audit",
+      "may_lag_runtime": true,
+      "failure_blocks_ingest": false,
+      "failure_blocks_alerts": false
     }
   }
 }
