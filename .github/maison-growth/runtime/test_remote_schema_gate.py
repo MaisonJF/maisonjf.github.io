@@ -44,6 +44,9 @@ class RemoteSchemaGateTests(unittest.TestCase):
             "a14_approved_offers_ready_for_planning",
             "a14_validation_plans",
             "a14_validation_plan_a8_links",
+            "commercial_recovery_journal",
+            "brain_ocean_memory_feed",
+            "ocean_memory_alerts",
         ):
             self.assertRegex(self.source, rf"\b{re.escape(name)}\b")
 
@@ -59,16 +62,19 @@ class RemoteSchemaGateTests(unittest.TestCase):
         self.assertIn("wrangler d1 execute", self.inspect)
         self.assertIn("--remote", self.inspect)
 
-    def test_migration_inspector_covers_complete_0001_to_0020_chain(self):
+    def test_migration_inspector_covers_complete_0001_to_0022_chain(self):
         found = re.findall(r"'(00\d{2}_[a-z0-9_]+)'", self.inspect)
         migrations = [item.split("_", 1)[0] for item in found]
         unique_migrations = sorted(set(migrations))
         self.assertEqual(
             unique_migrations,
-            [f"{number:04d}" for number in range(1, 21)],
+            [f"{number:04d}" for number in range(1, 23)],
         )
         self.assertIn("missing_or_partial", self.inspect)
         self.assertIn("maison-b2b", self.inspect)
+        self.assertIn("commercial_recovery_journal", self.inspect)
+        self.assertIn("maison_ocean_memory_schema_version", self.inspect)
+        self.assertIn("brain_ocean_memory_feed", self.inspect)
 
     def test_full_apply_orders_0017_before_0018(self):
         self.assertIn("0017_b2b_canonical_solution.sql", self.apply)
