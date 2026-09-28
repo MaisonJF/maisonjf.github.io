@@ -551,7 +551,7 @@ function mapJsonValue(value,map){
 
 function localizeJsonLdBlocks(html,map){
   return String(html).replace(
-    /<script\\b([^>]*\\btype=(["'])application\\/ld\\+json\\2[^>]*)>([\\s\\S]*?)<\\/script>/gi,
+    /<script\b([^>]*\btype=(["'])application\/ld\+json\2[^>]*)>([\s\S]*?)<\/script>/gi,
     (full,attrs,_quote,body)=>{
       try{
         const parsed=JSON.parse(body);
@@ -570,7 +570,7 @@ export function translateMaisonHtml(html,locale,sourcePath){
   let source=localizeJsonLdBlocks(String(html),map);
   const protectedBlocks=[];
   source=source.replace(
-    /<(script|style|noscript|code|pre|textarea)\\b[\\s\\S]*?<\\/\\1>/gi,
+    /<(script|style|noscript|code|pre|textarea)\b[\s\S]*?<\/\1>/gi,
     block=>{
       const marker='__MAISON_I18N_PROTECTED_'+protectedBlocks.length+'__';
       protectedBlocks.push(block);
