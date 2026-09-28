@@ -48,7 +48,8 @@ const MAISON_SERVICE_LOCALES={
   }
 };
 function maisonServiceLocale(){
-  const raw=String(window.MAISON_LOCALE||document?.documentElement?.lang||'pt-PT').toLowerCase();
+  const htmlLang=typeof document!=='undefined'&&document.documentElement?document.documentElement.lang:'';
+  const raw=String(window.MAISON_LOCALE||htmlLang||'pt-PT').toLowerCase();
   if(raw.startsWith('pt-br'))return 'pt-BR';
   if(raw.startsWith('en'))return 'en';
   if(raw.startsWith('es'))return 'es';
