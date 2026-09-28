@@ -1,0 +1,96 @@
+name: Maison Ocean Snapshot Sync
+run-name: Maison Ocean Snapshot Sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: maison-ocean-snapshot-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Read pending Ocean snapshots
+        id: feed
+        shell: bash
+        env:
+          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+          base="${MAISON_BRAIN_PRIVATE_URL%/}"
+          curl --fail --silent --show-error \
+            --header "Authorization: Bearer $BRAIN_CONTROL_TOKEN" \
+            --header "CF-Access-Client-Id: $CF_ACCESS_CLIENT_ID" \
+            --header "CF-Access-Client-Secret: $CF_ACCESS_CLIENT_SECRET" \
+            "$base/internal/oceans/snapshot?limit=100" > /tmp/ocean-feed.json
+          count="$(node -e "const x=require('/tmp/ocean-feed.json'); process.stdout.write(String((x.rows||[]).length))")"
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+
+      - name: Export and rebuild allowed Ocean derivatives
+        if: steps.feed.outputs.count != '0'
+        run: |
+          node workers/maison-intelligence/scripts/export-ocean-snapshot.mjs \
+            /tmp/ocean-feed.json .github/maison-growth/oceans/candidates.json > /tmp/ocean-sync.json
+          node .github/maison-growth/brain/build_editorial_queue.mjs
+          node .github/maison-growth/brain/build_editorial_queue.mjs --check
+
+      - name: Commit snapshot atomically
+        if: steps.feed.outputs.count != '0'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "maison-oceans-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -- \
+            .github/maison-growth/oceans/candidates.json \
+            .github/maison-growth/brain/editorial-queue.json \
+            functions/_lib/vpc-ocean-signals.generated.js
+          if git diff --cached --quiet; then
+            echo "No repository delta; D1 can still be acknowledged."
+          else
+            git commit -m "chore(oceans): sync D1 snapshot"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+          git fetch origin main
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
+          node .github/maison-growth/brain/build_editorial_queue.mjs --check
+
+      - name: Acknowledge D1 snapshot
+        if: steps.feed.outputs.count != '0'
+        shell: bash
+        env:
+          MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+          base="${MAISON_BRAIN_PRIVATE_URL%/}"
+          keys="$(node -e "const x=require('/tmp/ocean-sync.json'); process.stdout.write(JSON.stringify({ocean_keys:x.synced,state:'synced'}))")"
+          curl --fail --silent --show-error \
+            --header "Content-Type: application/json" \
+            --header "Authorization: Bearer $BRAIN_CONTROL_TOKEN" \
+            --header "CF-Access-Client-Id: $CF_ACCESS_CLIENT_ID" \
+            --header "CF-Access-Client-Secret: $CF_ACCESS_CLIENT_SECRET" \
+            --data "$keys" "$base/internal/oceans/snapshot/mark"

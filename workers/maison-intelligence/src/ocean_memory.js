@@ -253,6 +253,44 @@ async function memoryFeed(env,url){
   `).bind(limit));
   return json({kind:'ocean_working_memory',storage:'D1',github_role:'snapshot_only',rows});
 }
+async function snapshotFeed(env,url){
+  const limit=parseLimit(url);
+  const states=await all(env.GROWTH_DB.prepare(`
+    SELECT * FROM ocean_memory_state
+    WHERE snapshot_state IN ('pending','error')
+    ORDER BY updated_at,ocean_key
+    LIMIT ?
+  `).bind(limit));
+  const rows=[];
+  for(const state of states){
+    const signals=await all(env.GROWTH_DB.prepare(`
+      SELECT signal_id,signal_kind,source_ref,summary,evidence_roots_json,theme_candidates_json,
+             commercial_adjacency_json,relevance_score,commercial_score,observed_at
+      FROM ocean_memory_signals WHERE ocean_key=? ORDER BY observed_at,signal_id
+    `).bind(state.ocean_key));
+    rows.push({...state,signals:signals.map(signal=>({
+      ...signal,
+      evidence_roots:JSON.parse(signal.evidence_roots_json||'[]'),
+      theme_candidates:JSON.parse(signal.theme_candidates_json||'[]'),
+      commercial_adjacency:JSON.parse(signal.commercial_adjacency_json||'[]'),
+      evidence_roots_json:undefined,theme_candidates_json:undefined,commercial_adjacency_json:undefined
+    }))});
+  }
+  return json({kind:'ocean_snapshot_feed',storage:'D1',github_role:'snapshot_only',rows});
+}
+async function markSnapshot(env,body){
+  const keys=stringArray(body?.ocean_keys,'ocean_keys',100).map(cleanKey);
+  if(!keys.length) throw new Error('invalid_ocean_keys');
+  const state=String(body?.state??'synced');
+  if(!['synced','error'].includes(state)) throw new Error('invalid_snapshot_state');
+  const now=new Date().toISOString();
+  for(const key of keys){
+    await env.GROWTH_DB.prepare(`
+      UPDATE ocean_memory_state SET snapshot_state=?,updated_at=? WHERE ocean_key=?
+    `).bind(state,now,key).run();
+  }
+  return json({ok:true,ocean_keys:keys,state});
+}
 async function alerts(env,url){
   const limit=parseLimit(url);
   const state=url.searchParams.get('state')||'pending';
@@ -296,6 +334,8 @@ export async function handleOceanMemoryRequest(request,env){
       return json(await ingest(env,JSON.parse(text)));
     }
     if(url.pathname==='/internal/oceans/memory'&&request.method==='GET') return await memoryFeed(env,url);
+    if(url.pathname==='/internal/oceans/snapshot'&&request.method==='GET') return await snapshotFeed(env,url);
+    if(url.pathname==='/internal/oceans/snapshot/mark'&&request.method==='POST') return await markSnapshot(env,await request.json());
     if(url.pathname==='/internal/oceans/alerts'&&request.method==='GET') return await alerts(env,url);
     if(url.pathname==='/internal/oceans/alerts/mark'&&request.method==='POST'){
       return await markDelivered(env,await request.json());
