@@ -17,7 +17,7 @@ function iso(value,fallback){
   return Number.isNaN(d.getTime())?fallback:d.toISOString();
 }
 const now=new Date().toISOString();
-const lines=['BEGIN TRANSACTION;'];
+const lines=[];
 for(const row of candidates){
   const key=String(row.territory||'').trim().toLowerCase();
   if(!/^[a-z0-9][a-z0-9._:-]{1,159}$/.test(key)) continue;
@@ -45,5 +45,4 @@ ON CONFLICT(ocean_key) DO UPDATE SET
   last_seen_at=MAX(ocean_memory_state.last_seen_at,excluded.last_seen_at),
   updated_at=excluded.updated_at;`);
 }
-lines.push('COMMIT;');
 process.stdout.write(lines.join('\n')+'\n');
