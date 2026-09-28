@@ -20,7 +20,8 @@
     const value=Number(product.price);
     if(!Number.isFinite(value)) return '';
     try{
-      return new Intl.NumberFormat('pt-PT',{style:'currency',currency:product.currency||'EUR'}).format(value);
+      const locale=document.documentElement.lang||'pt-PT';
+      return new Intl.NumberFormat(locale,{style:'currency',currency:product.currency||'EUR'}).format(value);
     }catch(_){
       return value.toFixed(2).replace('.',',')+' '+(product.currency||'EUR');
     }
@@ -35,10 +36,18 @@
       el.className='product'+(hero?'':' product--no-media');
       const media=hero?`<div class="product__media"><img src="${hero.src}" alt="${hero.alt||product.name}" loading="lazy"></div>`:'';
       const price=formatPrice(product);
-      el.innerHTML=`${media}<div class="product__body"><small>${product.category}</small><h2>${product.name}${product.size?` <span style="font-size:.45em">${product.size}</span>`:''}</h2>${price?`<div class="price">${price}</div>`:''}<p>${product.description}</p><div class="product__actions"><a class="text-link" data-product="${product.slug}" href="./${encodeURIComponent(product.slug)}/">${product.cta||'Descobrir'}</a></div></div>`;
+      el.innerHTML=`${media}<div class="product__body"><small>${product.categoryLabel||product.category}</small><h2>${product.name}${product.size?` <span style="font-size:.45em">${product.size}</span>`:''}</h2>${price?`<div class="price">${price}</div>`:''}<p>${product.description}</p><div class="product__actions"><a class="text-link" data-product="${product.slug}" href="./${encodeURIComponent(product.slug)}/">${product.cta||({en:'Discover',es:'Descubrir','pt-BR':'Descobrir'}[document.documentElement.lang]||'Descobrir')}</a></div></div>`;
       root.append(el);
     });
-    if(count) count.textContent=visible.length+' '+(visible.length===1?'produto apresentado.':'produtos apresentados.');
+    if(count){
+      const lang=document.documentElement.lang||'pt-PT';
+      const copy={
+        en:[visible.length===1?'product shown.':'products shown.'],
+        es:[visible.length===1?'producto mostrado.':'productos mostrados.'],
+        'pt-BR':[visible.length===1?'produto exibido.':'produtos exibidos.']
+      };
+      count.textContent=visible.length+' '+((copy[lang]||[visible.length===1?'produto apresentado.':'produtos apresentados.'])[0]);
+    }
   }
 
   draw();
