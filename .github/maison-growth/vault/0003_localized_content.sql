@@ -5,7 +5,7 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS vault_question_translations (
   question_id TEXT NOT NULL REFERENCES vault_questions(question_id) ON DELETE CASCADE,
-  locale TEXT NOT NULL CHECK (locale IN ('en','es')),
+  locale TEXT NOT NULL,
   text TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'candidate' CHECK (status IN ('candidate','review','approved','active','retired')),
   source_kind TEXT NOT NULL DEFAULT 'brain_localization',
@@ -28,7 +28,7 @@ END;
 
 CREATE TABLE IF NOT EXISTS vault_oracle_block_translations (
   block_id TEXT NOT NULL REFERENCES vault_oracle_blocks(block_id) ON DELETE CASCADE,
-  locale TEXT NOT NULL CHECK (locale IN ('en','es')),
+  locale TEXT NOT NULL,
   title TEXT NULL,
   text TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'candidate' CHECK (status IN ('candidate','review','approved','active','retired')),
@@ -52,12 +52,10 @@ BEGIN
 END;
 
 ALTER TABLE vault_game_sessions
-  ADD COLUMN locale TEXT NOT NULL DEFAULT 'pt-PT'
-  CHECK (locale IN ('pt-PT','en','es'));
+  ADD COLUMN locale TEXT NOT NULL DEFAULT 'pt-PT';
 
 ALTER TABLE vault_oracle_sessions
-  ADD COLUMN locale TEXT NOT NULL DEFAULT 'pt-PT'
-  CHECK (locale IN ('pt-PT','en','es'));
+  ADD COLUMN locale TEXT NOT NULL DEFAULT 'pt-PT';
 
 CREATE INDEX IF NOT EXISTS idx_vault_game_sessions_locale
   ON vault_game_sessions(locale,theme,created_at);
