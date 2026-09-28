@@ -294,7 +294,7 @@ export async function runVaultLocalization(env,{locale}={}){
 async function runQuestionBackfill(env,locale){
   const db=env.GROWTH_DB;
   await activateApproved(db,locale);
-  const candidates=await questionBatch(db,locale,250);
+  const candidates=await questionBatch(db,locale,500);
   let questionsActivated=0,failedBatches=0;
   for(let i=0;i<candidates.length;i+=25){
     const batch=candidates.slice(i,i+25);
