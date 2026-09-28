@@ -2,9 +2,45 @@ import { requireMaisonVault } from './maison-vault.js';
 import { getPdiTheme, listPdiThemes, PDI_MINIMUM_LIVE_QUESTIONS } from './pdi-theme-registry.js';
 import { normalizeMaisonLocale } from './maison-locales.js';
 import { countLiveQuestionsForLocale, vaultLocalizationReady } from './maison-localized-content.js';
+import { localizeOracleLabel } from './oracle-public-locales.js';
 
 export const PDI_PUBLIC_HIDDEN_THEME_SLUGS=Object.freeze(['amor-e-relacoes']);
 const HIDDEN_PUBLIC_THEMES=new Set(PDI_PUBLIC_HIDDEN_THEME_SLUGS);
+
+const PDI_LABELS={
+  'pt-BR':{
+    'Relações':'Relações','Amor sem Filtro':'Amor sem Filtro',
+    'Momento humano':'Momento humano','Dor dominante':'Dor dominante',
+    'Conversa a dois':'Conversa a dois','Não dito':'Não dito','Ocean MAISON':'Ocean MAISON',
+    'Maison':'Maison'
+  },
+  en:{
+    'Relações':'Relationships','Amor sem Filtro':'Love Unfiltered',
+    'Momento humano':'Human moment','Dor dominante':'Dominant pain',
+    'Conversa a dois':'Conversation for two','Não dito':'Unsaid','Ocean MAISON':'MAISON Ocean',
+    'Maison':'Maison'
+  },
+  es:{
+    'Relações':'Relaciones','Amor sem Filtro':'Amor sin Filtros',
+    'Momento humano':'Momento humano','Dor dominante':'Dolor dominante',
+    'Conversa a dois':'Conversación de dos','Não dito':'Lo no dicho','Ocean MAISON':'Océano MAISON',
+    'Maison':'Maison'
+  }
+};
+
+function localizePdiText(value,locale){
+  const text=String(value||'');
+  if(locale==='pt-PT')return text;
+  return PDI_LABELS[locale]?.[text]||localizeOracleLabel(text,locale)||text;
+}
+
+function localizePdiTheme(item,locale){
+  return {
+    ...item,
+    label:localizePdiText(item.label,locale),
+    family:localizePdiText(item.family,locale)
+  };
+}
 
 export function isPublicPdiTheme(slug){
   return !HIDDEN_PUBLIC_THEMES.has(String(slug||'').trim());
@@ -21,7 +57,7 @@ export async function pdiThemeAvailability(env,theme,locale='pt-PT'){
   const selectedLocale=normalizeMaisonLocale(locale);
   const liveQuestions=await countLivePdiQuestions(db,item.slug,selectedLocale);
   return {
-    ...item,
+    ...localizePdiTheme(item,selectedLocale),
     locale:selectedLocale,
     available:liveQuestions>=PDI_MINIMUM_LIVE_QUESTIONS,
     liveQuestions
@@ -61,6 +97,10 @@ export async function listAvailablePdiThemes(env,locale='pt-PT'){
   const counts=new Map((rows.results||[]).map(row=>[String(row.theme),Number(row.count||0)]));
   return listPdiThemes()
     .filter(item=>isPublicPdiTheme(item.slug))
-    .map(item=>({...item,locale:selectedLocale,liveQuestions:counts.get(item.slug)||0}))
+    .map(item=>({
+      ...localizePdiTheme(item,selectedLocale),
+      locale:selectedLocale,
+      liveQuestions:counts.get(item.slug)||0
+    }))
     .filter(item=>item.liveQuestions>=PDI_MINIMUM_LIVE_QUESTIONS);
 }
