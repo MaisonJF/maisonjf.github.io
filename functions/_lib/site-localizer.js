@@ -95,6 +95,7 @@ function localizeAnchorUrl(value,sourcePath,locale){
     const resolved=new URL(value,base);
     if(resolved.origin!==ORIGIN)return value;
     if(resolved.pathname.startsWith('/api/'))return resolved.pathname+resolved.search+resolved.hash;
+    if(!hasLocalizedSiteCoverage(resolved.pathname))return resolved.pathname+resolved.search+resolved.hash;
     return localizedPath(resolved.pathname,locale)+resolved.search+resolved.hash;
   }catch(_){
     return value;
