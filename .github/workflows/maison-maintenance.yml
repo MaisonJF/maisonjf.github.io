@@ -13,6 +13,7 @@ on:
           - apply_commercial_recovery_0021
           - apply_content_learning_a11_0019_0020
           - apply_vault_localizer_telemetry_0004
+          - read_vault_localizer_telemetry
           - rebuild_commercial_context
           - validate_global_health
       confirm_write:
@@ -117,6 +118,17 @@ jobs:
           test -n "$SQL"
           npx wrangler d1 execute maison-growth-engine --remote --command="$SQL"
           npx wrangler d1 execute maison-growth-engine --remote --command="SELECT name FROM sqlite_master WHERE type='table' AND name='vault_localizer_telemetry';"
+
+      - name: Read Vault localizer telemetry
+        if: ${{ inputs.operation == 'read_vault_localizer_telemetry' }}
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          npm install --ignore-scripts
+          npx wrangler d1 execute maison-growth-engine --remote --command="SELECT updated_at,last_locale,last_status,last_questions_activated,last_oracle_activated,pending_total,pending_questions_pt_br,pending_questions_en,pending_questions_es,pending_oracle_pt_br,pending_oracle_en,pending_oracle_es FROM vault_localizer_telemetry WHERE singleton_id=1;"
 
       - name: Rebuild commercial context
         if: ${{ inputs.operation == 'rebuild_commercial_context' }}
