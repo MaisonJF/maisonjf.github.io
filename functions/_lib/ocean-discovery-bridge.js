@@ -1,5 +1,5 @@
 export const OCEAN_DISCOVERY_BRIDGE={
-  version:'2026-09-25',
+  version:'2026-09-28',
   principle:'Oceans enrich the Maison internally; only deliberate canonical surfaces become public.',
   publicSinks:{
     pillars:'functions/_lib/seo-pillars-2026.js',
@@ -21,22 +21,30 @@ export const OCEAN_DISCOVERY_BRIDGE={
   },
   persistence:{
     authorization:'permanent_human_authorization_2026-09-25',
-    canonicalStore:'.github/maison-growth/oceans/candidates.json',
+    liveStore:'D1:ocean_memory_signals/ocean_memory_state/ocean_memory_alerts',
+    liveRoute:'/internal/oceans/ingest',
+    memoryRoute:'/internal/oceans/memory',
+    alertRoute:'/internal/oceans/alerts',
+    repositorySnapshot:'.github/maison-growth/oceans/candidates.json',
     derivedStores:[
       '.github/maison-growth/brain/editorial-queue.json',
       'functions/_lib/vpc-ocean-signals.generated.js'
     ],
-    duplicateRule:'Analyse the canonical Oceans before every write. A materially distinct human territory may be added; a semantically similar signal must enrich the existing canonical Ocean instead of creating a clone.',
-    enrichmentRule:'For a similar signal, merge only new independent evidence, useful theme candidates and materially additive commercial adjacency; preserve firstSeenAt and human/editorial state, and advance lastSeenAt.',
-    newOceanEvidenceMinimum:2,
-    conflictRecovery:'On a stale-SHA/write conflict, refetch the canonical file, repeat duplicate analysis against the fresh state, reapply the merge/create operation, then retry. Never overwrite a concurrent human decision.',
-    verification:'A write is successful only after candidates, editorial queue and generated signal bridge are read back and agree on the canonical Ocean set.',
+    entryRule:'Persist privacy-safe signals immediately. One independent source is enough to remember a signal; filtering, semantic merging and confidence gates happen downstream.',
+    duplicateRule:'Payload hashes prevent duplicate signal rows. Semantic duplicate analysis happens after persistence, before a provisional hypothesis can become a canonical Ocean.',
+    enrichmentRule:'Signals may enrich an existing Ocean automatically. Preserve human/editorial state; stronger evidence increases confidence instead of blocking intake.',
+    newOceanEvidenceMinimumToStore:1,
+    newOceanEvidenceMinimumToPromote:2,
+    promotionRule:'A provisional Ocean requires downstream evidence and review gates before canonical promotion. Public publication remains separately gated.',
+    snapshotRule:'GitHub is an asynchronous snapshot/audit sink only. A Git failure must never block D1 persistence, Brain visibility or alerts.',
+    conflictRecovery:'Retry repository snapshots after a fresh read. Never roll back live D1 memory because a snapshot failed.',
+    verification:'Live persistence is successful when D1 readback succeeds. Repository/derived agreement is a later snapshot-health concern, not an ingestion precondition.',
     publicWrite:false,
     paidBodies:false,
     pii:false
   },
   discovery:{
-    internal:'Scheduled enrichment may add or refine candidates every six hours when evidence justifies it. Similar discoveries deepen the canonical Ocean; they do not inflate Ocean counts.',
+    internal:'Scheduled enrichment writes privacy-safe signals into D1 as soon as they are observed. Similar discoveries deepen state downstream; GitHub snapshots are secondary and may lag without blocking the Brain.',
     google:'Only deliberate canonical public surfaces belong in public sitemaps.',
     bingAndIndexNowParticipants:'IndexNow submits public sitemap URLs only.',
     aiSearch:'Public canonical surfaces may be crawled; the internal Ocean candidate store is not a public-content surface.',
