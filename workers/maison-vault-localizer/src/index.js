@@ -247,6 +247,12 @@ export default {
           pendingOracle:pending.oracle||{}
         }));
         return result;
+      }).catch(error=>{
+        console.error('Vault localizer exception',JSON.stringify({
+          name:String(error?.name||'Error'),
+          message:String(error?.message||'localizer_failed').slice(0,500)
+        }));
+        throw error;
       })
     );
   }
