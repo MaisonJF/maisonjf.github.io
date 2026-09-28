@@ -291,6 +291,30 @@ export async function runVaultLocalization(env,{locale}={}){
   return {results:[result],pending};
 }
 
+async function runQuestionBackfill(env,locale){
+  const db=env.GROWTH_DB;
+  await activateApproved(db,locale);
+  const candidates=await questionBatch(db,locale,250);
+  let questionsActivated=0,failedBatches=0;
+  for(let i=0;i<candidates.length;i+=25){
+    const batch=candidates.slice(i,i+25);
+    try{
+      const translated=await callTranslator(env,{locale,kind:'question',items:batch});
+      questionsActivated+=await storeQuestions(db,locale,batch,translated);
+    }catch(error){
+      failedBatches++;
+      console.error('Vault backfill batch failed',JSON.stringify({
+        locale,batchStart:i,batchSize:batch.length,
+        name:String(error?.name||'Error'),
+        message:String(error?.message||'backfill_batch_failed').slice(0,500)
+      }));
+    }
+  }
+  const pending=await pendingCounts(db);
+  await persistTelemetry(db,{locale,questionsActivated,oracleActivated:0,pending});
+  return {locale,questionsActivated,failedBatches,attempted:candidates.length,pending};
+}
+
 function localeForSchedule(controller,env){
   const forced=String(env.LOCALIZER_LOCALE||'').trim();
   if(LOCALES.includes(forced))return forced;
@@ -316,10 +340,13 @@ export default {
   async scheduled(controller,env,ctx){
     const locale=localeForSchedule(controller,env);
     ctx.waitUntil(
-      runLocalizationRounds(env,locale).then(result=>{
+      runQuestionBackfill(env,locale).then(result=>{
         const pending=result?.pending||{};
-        console.log('Vault localizer completed',JSON.stringify({
+        console.log('Vault question backfill completed',JSON.stringify({
           locale,
+          attempted:Number(result?.attempted||0),
+          questionsActivated:Number(result?.questionsActivated||0),
+          failedBatches:Number(result?.failedBatches||0),
           pendingTotal:Number(pending.total||0),
           pendingQuestions:pending.questions||{},
           pendingOracle:pending.oracle||{}
