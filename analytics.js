@@ -2,7 +2,7 @@
   'use strict';
 
   const languageScript = document.createElement('script');
-  languageScript.src = '/maison-language.js?v=20260920-pre90';
+  languageScript.src = '/maison-language.js?v=20260928-i18n1';
   languageScript.defer = true;
   document.head.appendChild(languageScript);
 
