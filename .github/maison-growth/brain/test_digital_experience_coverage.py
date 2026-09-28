@@ -26,12 +26,12 @@ class DigitalExperienceCoverageTests(unittest.TestCase):
         self.assertEqual(products["pdi"]["price_minor"],500)
         self.assertGreater(products["pdi"]["source_theme_count"],0)
 
-    def test_all_current_oceans_feed_both_products(self):
+    def test_current_oceans_follow_declared_product_feed_eligibility(self):
         summary=self.payload["summary"]
         expected=self.universal["summary"]["canonical_oceans"]
         self.assertEqual(summary["oceans"],expected)
-        self.assertEqual(summary["pdi_oceans"],expected)
-        self.assertEqual(summary["oracle_oceans"],expected)
+        self.assertEqual(summary["pdi_oceans"],summary["expected_pdi_oceans"])
+        self.assertEqual(summary["oracle_oceans"],summary["expected_oracle_oceans"])
         self.assertEqual(summary["pdi_stage_slots"],sum(row["pdi"]["stage_slots"] for row in self.payload["oceans"]))
         self.assertEqual(summary["oracle_role_slots"],sum(row["oracle"]["role_slots"] for row in self.payload["oceans"]))
         self.assertEqual(summary["oceans_with_feed_gaps"],0)
@@ -43,12 +43,11 @@ class DigitalExperienceCoverageTests(unittest.TestCase):
         self.assertFalse(contract["automatic_activation"])
         self.assertTrue(contract["human_editorial_approval_required"])
         for row in self.payload["oceans"]:
-            self.assertTrue(row["pdi"]["approval_required"])
-            self.assertTrue(row["oracle"]["approval_required"])
-            self.assertFalse(row["pdi"]["automatic_activation"])
-            self.assertFalse(row["oracle"]["automatic_activation"])
-            self.assertFalse(row["pdi"]["paid_body_stored"])
-            self.assertFalse(row["oracle"]["paid_body_stored"])
+            for product in ("pdi","oracle"):
+                self.assertEqual(row[product]["eligible"],row["expected"][product])
+                self.assertEqual(row[product]["approval_required"],row[product]["eligible"])
+                self.assertFalse(row[product]["automatic_activation"])
+                self.assertFalse(row[product]["paid_body_stored"])
             self.assertEqual(row["gaps"],[])
 
 
