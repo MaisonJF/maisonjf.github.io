@@ -66,12 +66,19 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
 
     def test_live_apply_checks_schema_before_deploy(self):
         schema = self.source.index("- name: Verify remote D1 schema")
-        deploy = self.source.index("- name: Deploy private surface")
+        deploy = self.source.index("- name: Bootstrap/deploy private surface")
         self.assertLess(schema, deploy)
         self.assertIn("verify-growth-schema.sh maison-growth-engine", self.source)
 
+    def test_live_apply_bootstraps_worker_before_installing_secrets(self):
+        deploy = self.source.index("- name: Bootstrap/deploy private surface")
+        secrets = self.source.index("- name: Install private Worker secrets")
+        health = self.source.index("- name: Verify deployed private Brain health")
+        self.assertLess(deploy, secrets)
+        self.assertLess(secrets, health)
+
     def test_live_apply_verifies_read_only_health_after_deploy(self):
-        deploy = self.source.index("- name: Deploy private surface")
+        deploy = self.source.index("- name: Bootstrap/deploy private surface")
         health = self.source.index("- name: Verify deployed private Brain health")
         self.assertLess(deploy, health)
         self.assertIn("verify_private_brain_health.py", self.source)
@@ -92,7 +99,7 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
             "Private-stage preflight",
             "Verify remote D1 schema",
             "Install private Worker secrets",
-            "Deploy private surface",
+            "Bootstrap/deploy private surface",
             "Verify deployed private Brain health",
             "Verify deployed private Brain boundary",
         ):
