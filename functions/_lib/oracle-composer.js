@@ -1,10 +1,11 @@
 import { validateOracleBlock } from './maison-content-ontology.js';
 import { directOracleExperience } from './experience-director.js';
 import { qualityCheckOracle } from './experience-quality.js';
+import { normalizeMaisonLocale } from './maison-locales.js';
 
-export const ORACLE_COMPOSER_VERSION='oracle-composer-v1';
+export const ORACLE_COMPOSER_VERSION='oracle-composer-v2';
 
-export function composeOracleReading({territory,seed,blocks,seenIds=[],requestedTone,requestedIntensity,maxAttempts=12}={}){
+export function composeOracleReading({territory,seed,blocks,seenIds=[],requestedTone,requestedIntensity,locale='pt-PT',maxAttempts=12}={}){
   if(!territory)throw new Error('territory_required');
   if(!seed)throw new Error('seed_required');
   if(!Array.isArray(blocks))throw new Error('oracle_blocks_required');
@@ -29,10 +30,10 @@ export function composeOracleReading({territory,seed,blocks,seenIds=[],requested
       const quality=qualityCheckOracle({blocks:picked,plan});
       const candidate={plan,blocks:picked,quality};
       if(!best||quality.score>best.quality.score)best=candidate;
-      if(quality.ok)return finish(candidate,territory,seed);
+      if(quality.ok)return finish(candidate,territory,seed,locale);
     }catch{}
   }
-  if(best?.quality?.score>=.72)return finish(best,territory,seed);
+  if(best?.quality?.score>=.72)return finish(best,territory,seed,locale);
   throw new Error('oracle_quality_gate_failed');
 }
 
@@ -106,8 +107,10 @@ function blockWeight(block,{seen,targetIntensity,plan}){
   return Math.max(.001,quality*intensityFit*toneFit*seenWeight*freshness*rotation*rarity);
 }
 
-function finish(candidate,territory,seed){
-  const title=candidate.blocks.find(x=>x.role==='opening')?.title||'Uma abertura';
+function finish(candidate,territory,seed,locale='pt-PT'){
+  const normalizedLocale=normalizeMaisonLocale(locale);
+  const fallbackTitle={'pt-PT':'Uma abertura','pt-BR':'Uma leitura',en:'A reading',es:'Una apertura'}[normalizedLocale]||'Uma leitura';
+  const title=candidate.blocks.find(x=>x.role==='opening')?.title||fallbackTitle;
   return {
     engineVersion:ORACLE_COMPOSER_VERSION,
     directorVersion:candidate.plan.directorVersion,

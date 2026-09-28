@@ -42,6 +42,7 @@ export async function onRequestPost({ request, env }) {
     params.set('line_items[0][price_data][product_data][name]', 'Oráculo MAISON JF® | ' + territory.label);
     const copy={
       'pt-PT':{description:'Uma abertura simbólica. Uma leitura.',legal:'Ao pagar, confirmas uma abertura do Oráculo MAISON JF® e aceitas as condições em maison-jf.com/informacao-legal.html.'},
+      'pt-BR':{description:'Uma abertura simbólica. Uma leitura.',legal:'Ao pagar, você confirma uma abertura do Oráculo MAISON JF® e aceita as condições em maison-jf.com/informacao-legal.html.'},
       en:{description:'One symbolic opening. One reading.',legal:'By paying, you confirm one MAISON JF® Oracle reading and accept the terms at maison-jf.com/informacao-legal.html.'},
       es:{description:'Una apertura simbólica. Una lectura.',legal:'Al pagar, confirmas una lectura del Oráculo MAISON JF® y aceptas las condiciones en maison-jf.com/informacao-legal.html.'}
     }[locale];

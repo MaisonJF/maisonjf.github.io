@@ -151,7 +151,7 @@ async function tryComposedReading({env,session,theme,locale='pt-PT'}){
   if(!requiredRoles.every(role=>specificRoles.has(role)))return null;
 
   const seed=await stableSeed('maison-jf-oracle-v3|'+theme+'|'+session.id);
-  const composed=composeOracleReading({territory:theme,seed,blocks,seenIds});
+  const composed=composeOracleReading({territory:theme,seed,blocks,seenIds,locale});
   const oracleSessionId='orc_'+crypto.randomUUID().replace(/-/g,'');
   await createOracleSession(db,{
     oracleSessionId,

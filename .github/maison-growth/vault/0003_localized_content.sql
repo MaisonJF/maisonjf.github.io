@@ -1,5 +1,5 @@
 -- MAISON JF® · Localized paid content / Private Brain Vault v3
--- Keeps one canonical content identity and attaches EN/ES renderings to it.
+-- Keeps one canonical content identity and attaches PT-BR/EN/ES renderings to it.
 -- Existing PT-PT bodies remain canonical in vault_questions.text / vault_oracle_blocks.text.
 PRAGMA foreign_keys = ON;
 

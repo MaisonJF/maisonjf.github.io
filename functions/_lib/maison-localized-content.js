@@ -1,6 +1,7 @@
 /*
 MAISON JF® · Localized paid-content helpers
-The source editorial body remains PT-PT. EN/ES rows are renderings of the same canonical IDs.
+The source editorial body remains PT-PT. PT-BR, EN and ES rows are renderings of the same canonical IDs.
+The schema can be ready while a target locale still lacks active editorial coverage.
 */
 import { normalizeMaisonLocale } from './maison-locales.js';
 
