@@ -25,6 +25,14 @@ ZERO_COST_OPTIONAL = (
 )
 
 
+def _normalize_access_credential(raw: str, header_name: str) -> str:
+    value = str(raw or "").strip()
+    prefix = f"{header_name}:"
+    if value.lower().startswith(prefix.lower()):
+        value = value[len(prefix):].strip()
+    return value
+
+
 def summarize(values: Mapping[str, str]) -> dict[str, object]:
     def present(name: str) -> bool:
         return bool(str(values.get(name, "") or "").strip())
@@ -32,8 +40,14 @@ def summarize(values: Mapping[str, str]) -> dict[str, object]:
     configured = [name for name in FIRST_STAGE_REQUIRED if present(name)]
     missing = [name for name in FIRST_STAGE_REQUIRED if not present(name)]
     access = [present(name) for name in ACCESS_PAIR]
-    access_client_id = str(values.get("MAISON_CF_ACCESS_CLIENT_ID", "") or "").strip()
-    access_client_secret = str(values.get("MAISON_CF_ACCESS_CLIENT_SECRET", "") or "").strip()
+    access_client_id = _normalize_access_credential(
+        str(values.get("MAISON_CF_ACCESS_CLIENT_ID", "") or ""),
+        "CF-Access-Client-Id",
+    )
+    access_client_secret = _normalize_access_credential(
+        str(values.get("MAISON_CF_ACCESS_CLIENT_SECRET", "") or ""),
+        "CF-Access-Client-Secret",
+    )
     access_client_id_shape_ok = bool(access_client_id) and access_client_id.endswith(".access")
     access_client_secret_shape_ok = bool(access_client_secret) and (
         access_client_secret.startswith("cfast_")
