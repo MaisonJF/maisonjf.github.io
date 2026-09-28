@@ -25,9 +25,19 @@ test('MCP exposes only the three bounded video tools',async()=>{
   assert.equal(generate.annotations.destructiveHint,false);
   assert.equal(generate.inputSchema.properties.duration_seconds.maximum,3);
   assert.equal(generate.inputSchema.properties.steps.maximum,4);
+  assert.equal(generate.securitySchemes[0].type,'oauth2');
 });
 
 test('non-MCP paths fall through',async()=>{
   const r=await handleMaisonMcpRequest(new Request('https://maison.example/internal/video/health'),{});
   assert.equal(r,null);
+});
+
+
+test('protected resource metadata points to Supabase OAuth issuer',async()=>{
+  const r=await handleMaisonMcpRequest(new Request('https://mcp.maison-jf.com/.well-known/oauth-protected-resource'),{MAISON_MCP_SUPABASE_URL:'https://example.supabase.co'});
+  assert.equal(r.status,200);
+  const body=await r.json();
+  assert.equal(body.resource,'https://mcp.maison-jf.com/mcp');
+  assert.deepEqual(body.authorization_servers,['https://example.supabase.co/auth/v1']);
 });
