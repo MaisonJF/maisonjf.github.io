@@ -74,7 +74,41 @@
 </section>
 </main>
 <script src="../data/ebooks.js"></script>
-<script>(function(){const published=(window.MAISON_EBOOKS||[]).filter(b=>b.status==='published');function card(book){const el=document.createElement('article');el.className='ebook-card';const link=document.createElement('a');link.href='./'+encodeURIComponent(book.slug)+'/';const cover=document.createElement('div');cover.className='cover';const coverMedia=(book.media||[]).find(m=>m.role==='cover')||(book.media||[])[0];const coverSrc=book.cover||(coverMedia&&coverMedia.src);if(coverSrc){const img=document.createElement('img');img.src=coverSrc;img.alt=(coverMedia&&coverMedia.alt)||('Capa de '+book.title);img.loading='lazy';cover.appendChild(img)}else{cover.classList.add('cover--placeholder');const mark=document.createElement('div');mark.className='cover__mark';const label=document.createElement('small');label.textContent='Éditions Maison JF';const name=document.createElement('span');name.textContent=book.title;mark.append(label,name);cover.appendChild(mark)}link.appendChild(cover);const title=document.createElement('h2');title.textContent=book.title;const meta=document.createElement('p');meta.className='meta';meta.textContent=book.collection||'';el.append(link,title,meta);const discover=document.createElement('a');discover.className='text-link buy';discover.href='./'+encodeURIComponent(book.slug)+'/';discover.innerHTML='<span>Descobrir</span><span aria-hidden="true">→</span>'; el.appendChild(discover);return el}published.forEach(b=>document.getElementById('publishedGrid').appendChild(card(b)))})();</script>
+<script>(function(){
+const locale=String(window.MAISON_LOCALE||document.documentElement.lang||'pt-PT');
+const copy={
+  'pt-PT':{discover:'Descobrir',cover:'Capa de '},
+  'pt-BR':{discover:'Descobrir',cover:'Capa de '},
+  en:{discover:'Discover',cover:'Cover of '},
+  es:{discover:'Descubrir',cover:'Portada de '}
+}[locale]||{discover:'Descobrir',cover:'Capa de '};
+const published=(window.MAISON_EBOOKS||[]).filter(b=>b.status==='published');
+function card(book){
+  const el=document.createElement('article');el.className='ebook-card';
+  const link=document.createElement('a');link.href='./'+encodeURIComponent(book.slug)+'/';
+  const cover=document.createElement('div');cover.className='cover';
+  const coverMedia=(book.media||[]).find(m=>m.role==='cover')||(book.media||[])[0];
+  const coverSrc=book.cover||(coverMedia&&coverMedia.src);
+  if(coverSrc){
+    const img=document.createElement('img');img.src=coverSrc;
+    img.alt=(coverMedia&&coverMedia.alt)||copy.cover+book.title;img.loading='lazy';cover.appendChild(img);
+  }else{
+    cover.classList.add('cover--placeholder');
+    const mark=document.createElement('div');mark.className='cover__mark';
+    const label=document.createElement('small');label.textContent='Éditions Maison JF';
+    const name=document.createElement('span');name.textContent=book.title;mark.append(label,name);cover.appendChild(mark);
+  }
+  link.appendChild(cover);
+  const title=document.createElement('h2');title.textContent=book.title;
+  const meta=document.createElement('p');meta.className='meta';meta.textContent=book.collection||'';
+  el.append(link,title,meta);
+  const discover=document.createElement('a');discover.className='text-link buy';
+  discover.href='./'+encodeURIComponent(book.slug)+'/';
+  discover.innerHTML='<span>'+copy.discover+'</span><span aria-hidden="true">→</span>';
+  el.appendChild(discover);return el;
+}
+published.forEach(b=>document.getElementById('publishedGrid').appendChild(card(b)));
+})();</script>
 
 
 <dialog class="poster-viewer" id="poster-viewer" aria-labelledby="poster-viewer-title">
@@ -97,10 +131,17 @@
   const close=document.getElementById('poster-close');
   const stage=viewer.querySelector('.poster-viewer__stage');
   let opener=null,previousOverflow='';
+  const locale=String(window.MAISON_LOCALE||document.documentElement.lang||'pt-PT');
+  const zoomCopy={
+    'pt-PT':{fit:'Ajustar ao ecrã',zoom:'Ampliar 100%'},
+    'pt-BR':{fit:'Ajustar à tela',zoom:'Ampliar 100%'},
+    en:{fit:'Fit to screen',zoom:'Zoom 100%'},
+    es:{fit:'Ajustar a pantalla',zoom:'Ampliar 100%'}
+  }[locale]||{fit:'Ajustar ao ecrã',zoom:'Ampliar 100%'};
   function setZoom(on){
     viewer.classList.toggle('is-zoomed',on);
     zoom.setAttribute('aria-pressed',String(on));
-    zoom.textContent=on?'Ajustar ao ecrã':'Ampliar 100%';
+    zoom.textContent=on?zoomCopy.fit:zoomCopy.zoom;
     stage.scrollTo(0,0);
   }
   document.querySelectorAll('.poster-open').forEach(function(link){
