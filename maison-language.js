@@ -35,6 +35,7 @@
   }
 
   function ensureLanguageSwitcher(){
+    if(!window.MAISON_I18N_AVAILABLE)return;
     if(document.querySelector('.maison-language-switcher'))return;
     const style=document.createElement('style');
     style.id='maison-language-switcher-style-client';
