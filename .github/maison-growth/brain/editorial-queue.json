@@ -1,7 +1,7 @@
 {
   "version": "2026-09-20-v5",
   "visibility": "internal-editorial",
-  "generatedAt": "2026-09-25T12:52:00+01:00",
+  "generatedAt": "2026-09-27T01:00:00+01:00",
   "source": ".github/maison-growth/oceans/candidates.json",
   "contract": {
     "storesPaidBodies": false,
@@ -11,16 +11,16 @@
     "minimumIndependentEvidenceSources": 2
   },
   "summary": {
-    "oceansConsidered": 22,
-    "queueItems": 44,
-    "questionCandidates": 22,
-    "questionThemeHypotheses": 142,
-    "questionDesignSlots": 852,
+    "oceansConsidered": 24,
+    "queueItems": 46,
+    "questionCandidates": 24,
+    "questionThemeHypotheses": 157,
+    "questionDesignSlots": 942,
     "activeQuestionTargetPerMatureTheme": 300,
-    "pdiSourceSignals": 292,
-    "pdiThemeBacklog": 291,
-    "pdiSourceDesignSlots": 1746,
-    "pdiEditorialCoreTarget": 87300,
+    "pdiSourceSignals": 307,
+    "pdiThemeBacklog": 306,
+    "pdiSourceDesignSlots": 1836,
+    "pdiEditorialCoreTarget": 91800,
     "pdiCombinatorialTarget": 2800000,
     "oracleCandidates": 22,
     "oracleRoleSlots": 154
@@ -28,20 +28,20 @@
   "pdiGrowth": {
     "scale": {
       "activeQuestionTargetPerMatureTheme": 300,
-      "editorialCoreTarget": 87300,
+      "editorialCoreTarget": 91800,
       "combinatorialPossibilityTarget": 2800000,
       "paidBodiesStoredInRepository": false,
       "automaticActivation": false
     },
     "sourceStats": {
-      "totalSignals": 292,
+      "totalSignals": 307,
       "oracle": 100,
       "farol": 11,
       "voltaParaCasa": 8,
       "maisonNative": 3,
       "pdiConversation": 28,
-      "ocean": 142,
-      "exactGroups": 291
+      "ocean": 157,
+      "exactGroups": 306
     },
     "themes": [
       {
@@ -1989,6 +1989,114 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "como-combinar-mecanismos-sem-perder-o-adn-maison",
+        "preferredLabel": "Como combinar mecanismos sem perder o ADN Maison",
+        "slugs": [
+          "como-combinar-mecanismos-sem-perder-o-adn-maison"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atelier-principios-transferiveis-e-dna-maison:como-combinar-mecanismos-sem-perder-o-adn-maison",
+            "focus": "estudar continuamente casos de excelência e mecanismos psicológicos, culturais, criativos e comerciais transferíveis para a Maison JF; descobrir também novos mestres históricos ou actuais; converter observação em princípios, hipóteses mensuráveis e aprendizagem proprietária Maison",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_como_combinar_mecanismos_sem_perder_o_adn_maison_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_combinar_mecanismos_sem_perder_o_adn_maison_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_combinar_mecanismos_sem_perder_o_adn_maison_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_combinar_mecanismos_sem_perder_o_adn_maison_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_combinar_mecanismos_sem_perder_o_adn_maison_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_combinar_mecanismos_sem_perder_o_adn_maison_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "como-gerar-reconhecimento-antes-da-compra",
+        "preferredLabel": "Como gerar reconhecimento antes da compra",
+        "slugs": [
+          "como-gerar-reconhecimento-antes-da-compra"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "descoberta-organica-e-reconhecimento-da-maison:como-gerar-reconhecimento-antes-da-compra",
+            "focus": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_como_gerar_reconhecimento_antes_da_compra_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_gerar_reconhecimento_antes_da_compra_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_gerar_reconhecimento_antes_da_compra_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_gerar_reconhecimento_antes_da_compra_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_gerar_reconhecimento_antes_da_compra_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_gerar_reconhecimento_antes_da_compra_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "como-gosto-de-ser-cuidado",
         "preferredLabel": "Como Gosto de Ser Cuidado",
         "slugs": [
@@ -2033,6 +2141,168 @@
           },
           {
             "id": "pdi_source_slot_como_gosto_de_ser_cuidado_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "como-se-constroi-desejo-sem-explicar-demais",
+        "preferredLabel": "Como se constrói desejo sem explicar demais",
+        "slugs": [
+          "como-se-constroi-desejo-sem-explicar-demais"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atelier-principios-transferiveis-e-dna-maison:como-se-constroi-desejo-sem-explicar-demais",
+            "focus": "estudar continuamente casos de excelência e mecanismos psicológicos, culturais, criativos e comerciais transferíveis para a Maison JF; descobrir também novos mestres históricos ou actuais; converter observação em princípios, hipóteses mensuráveis e aprendizagem proprietária Maison",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_como_se_constroi_desejo_sem_explicar_demais_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_se_constroi_desejo_sem_explicar_demais_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_se_constroi_desejo_sem_explicar_demais_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_se_constroi_desejo_sem_explicar_demais_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_se_constroi_desejo_sem_explicar_demais_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_se_constroi_desejo_sem_explicar_demais_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "como-se-transforma-uma-ideia-num-acontecimento",
+        "preferredLabel": "Como se transforma uma ideia num acontecimento",
+        "slugs": [
+          "como-se-transforma-uma-ideia-num-acontecimento"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atelier-principios-transferiveis-e-dna-maison:como-se-transforma-uma-ideia-num-acontecimento",
+            "focus": "estudar continuamente casos de excelência e mecanismos psicológicos, culturais, criativos e comerciais transferíveis para a Maison JF; descobrir também novos mestres históricos ou actuais; converter observação em princípios, hipóteses mensuráveis e aprendizagem proprietária Maison",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_como_se_transforma_uma_ideia_num_acontecimento_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_se_transforma_uma_ideia_num_acontecimento_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_se_transforma_uma_ideia_num_acontecimento_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_se_transforma_uma_ideia_num_acontecimento_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_se_transforma_uma_ideia_num_acontecimento_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_se_transforma_uma_ideia_num_acontecimento_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "como-transformar-descoberta-em-visita-sem-publicidade-paga",
+        "preferredLabel": "Como transformar descoberta em visita sem publicidade paga",
+        "slugs": [
+          "como-transformar-descoberta-em-visita-sem-publicidade-paga"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "descoberta-organica-e-reconhecimento-da-maison:como-transformar-descoberta-em-visita-sem-publicidade-paga",
+            "focus": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_como_transformar_descoberta_em_visita_sem_publicidade_paga_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_transformar_descoberta_em_visita_sem_publicidade_paga_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_transformar_descoberta_em_visita_sem_publicidade_paga_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_transformar_descoberta_em_visita_sem_publicidade_paga_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_transformar_descoberta_em_visita_sem_publicidade_paga_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_como_transformar_descoberta_em_visita_sem_publicidade_paga_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -9825,6 +10095,114 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "o-que-procuram-antes-de-conhecer-a-maison",
+        "preferredLabel": "O que procuram antes de conhecer a Maison",
+        "slugs": [
+          "o-que-procuram-antes-de-conhecer-a-maison"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "descoberta-organica-e-reconhecimento-da-maison:o-que-procuram-antes-de-conhecer-a-maison",
+            "focus": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_o_que_procuram_antes_de_conhecer_a_maison_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_procuram_antes_de_conhecer_a_maison_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_procuram_antes_de_conhecer_a_maison_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_procuram_antes_de_conhecer_a_maison_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_procuram_antes_de_conhecer_a_maison_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_procuram_antes_de_conhecer_a_maison_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "o-que-torna-um-conceito-repetivel-e-transmissivel",
+        "preferredLabel": "O que torna um conceito repetível e transmissível",
+        "slugs": [
+          "o-que-torna-um-conceito-repetivel-e-transmissivel"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atelier-principios-transferiveis-e-dna-maison:o-que-torna-um-conceito-repetivel-e-transmissivel",
+            "focus": "estudar continuamente casos de excelência e mecanismos psicológicos, culturais, criativos e comerciais transferíveis para a Maison JF; descobrir também novos mestres históricos ou actuais; converter observação em princípios, hipóteses mensuráveis e aprendizagem proprietária Maison",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_o_que_torna_um_conceito_repetivel_e_transmissivel_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_torna_um_conceito_repetivel_e_transmissivel_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_torna_um_conceito_repetivel_e_transmissivel_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_torna_um_conceito_repetivel_e_transmissivel_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_torna_um_conceito_repetivel_e_transmissivel_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_o_que_torna_um_conceito_repetivel_e_transmissivel_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "objectos-pequenos-que-dao-vontade-de-coleccionar",
         "preferredLabel": "Objectos pequenos que dão vontade de coleccionar",
         "slugs": [
@@ -9869,6 +10247,114 @@
           },
           {
             "id": "pdi_source_slot_objectos_pequenos_que_dao_vontade_de_coleccionar_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "onde-essas-conversas-acontecem-publicamente",
+        "preferredLabel": "Onde essas conversas acontecem publicamente",
+        "slugs": [
+          "onde-essas-conversas-acontecem-publicamente"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "descoberta-organica-e-reconhecimento-da-maison:onde-essas-conversas-acontecem-publicamente",
+            "focus": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_onde_essas_conversas_acontecem_publicamente_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_onde_essas_conversas_acontecem_publicamente_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_onde_essas_conversas_acontecem_publicamente_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_onde_essas_conversas_acontecem_publicamente_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_onde_essas_conversas_acontecem_publicamente_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_onde_essas_conversas_acontecem_publicamente_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "onde-estao-as-pessoas-que-a-maison-ja-consegue-ajudar",
+        "preferredLabel": "Onde estão as pessoas que a Maison já consegue ajudar",
+        "slugs": [
+          "onde-estao-as-pessoas-que-a-maison-ja-consegue-ajudar"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "descoberta-organica-e-reconhecimento-da-maison:onde-estao-as-pessoas-que-a-maison-ja-consegue-ajudar",
+            "focus": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -11121,6 +11607,114 @@
         "status": "needs_editorial"
       },
       {
+        "candidateKey": "porque-e-que-isto-parece-falar-comigo",
+        "preferredLabel": "Porque é que isto parece falar comigo",
+        "slugs": [
+          "porque-e-que-isto-parece-falar-comigo"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atelier-principios-transferiveis-e-dna-maison:porque-e-que-isto-parece-falar-comigo",
+            "focus": "estudar continuamente casos de excelência e mecanismos psicológicos, culturais, criativos e comerciais transferíveis para a Maison JF; descobrir também novos mestres históricos ou actuais; converter observação em princípios, hipóteses mensuráveis e aprendizagem proprietária Maison",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_parece_falar_comigo_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_parece_falar_comigo_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_parece_falar_comigo_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_parece_falar_comigo_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_parece_falar_comigo_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_parece_falar_comigo_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "porque-e-que-isto-prende-a-atencao",
+        "preferredLabel": "Porque é que isto prende a atenção",
+        "slugs": [
+          "porque-e-que-isto-prende-a-atencao"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atelier-principios-transferiveis-e-dna-maison:porque-e-que-isto-prende-a-atencao",
+            "focus": "estudar continuamente casos de excelência e mecanismos psicológicos, culturais, criativos e comerciais transferíveis para a Maison JF; descobrir também novos mestres históricos ou actuais; converter observação em princípios, hipóteses mensuráveis e aprendizagem proprietária Maison",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_prende_a_atencao_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_prende_a_atencao_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_prende_a_atencao_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_prende_a_atencao_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_prende_a_atencao_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_porque_e_que_isto_prende_a_atencao_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
         "candidateKey": "poupanca-e-seguranca",
         "preferredLabel": "Poupança & Segurança",
         "slugs": [
@@ -12299,6 +12893,222 @@
           },
           {
             "id": "pdi_source_slot_quando_preciso_de_espaco_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "que-activos-maison-ja-respondem-a-procura-observada",
+        "preferredLabel": "Que activos Maison já respondem à procura observada",
+        "slugs": [
+          "que-activos-maison-ja-respondem-a-procura-observada"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "descoberta-organica-e-reconhecimento-da-maison:que-activos-maison-ja-respondem-a-procura-observada",
+            "focus": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_que_activos_maison_ja_respondem_a_procura_observada_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_activos_maison_ja_respondem_a_procura_observada_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_activos_maison_ja_respondem_a_procura_observada_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_activos_maison_ja_respondem_a_procura_observada_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_activos_maison_ja_respondem_a_procura_observada_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_activos_maison_ja_respondem_a_procura_observada_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "que-mecanismos-fazem-uma-marca-entrar-na-cultura",
+        "preferredLabel": "Que mecanismos fazem uma marca entrar na cultura",
+        "slugs": [
+          "que-mecanismos-fazem-uma-marca-entrar-na-cultura"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atelier-principios-transferiveis-e-dna-maison:que-mecanismos-fazem-uma-marca-entrar-na-cultura",
+            "focus": "estudar continuamente casos de excelência e mecanismos psicológicos, culturais, criativos e comerciais transferíveis para a Maison JF; descobrir também novos mestres históricos ou actuais; converter observação em princípios, hipóteses mensuráveis e aprendizagem proprietária Maison",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_que_mecanismos_fazem_uma_marca_entrar_na_cultura_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_mecanismos_fazem_uma_marca_entrar_na_cultura_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_mecanismos_fazem_uma_marca_entrar_na_cultura_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_mecanismos_fazem_uma_marca_entrar_na_cultura_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_mecanismos_fazem_uma_marca_entrar_na_cultura_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_mecanismos_fazem_uma_marca_entrar_na_cultura_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "que-superficies-gratuitas-podem-apresentar-a-maison",
+        "preferredLabel": "Que superfícies gratuitas podem apresentar a Maison",
+        "slugs": [
+          "que-superficies-gratuitas-podem-apresentar-a-maison"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "descoberta-organica-e-reconhecimento-da-maison:que-superficies-gratuitas-podem-apresentar-a-maison",
+            "focus": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_que_superficies_gratuitas_podem_apresentar_a_maison_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_superficies_gratuitas_podem_apresentar_a_maison_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_superficies_gratuitas_podem_apresentar_a_maison_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_superficies_gratuitas_podem_apresentar_a_maison_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_superficies_gratuitas_podem_apresentar_a_maison_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_que_superficies_gratuitas_podem_apresentar_a_maison_signature",
+            "stage": "signature",
+            "status": "needs_editorial"
+          }
+        ],
+        "bodyStored": false,
+        "approvalRequired": true,
+        "automaticActivation": false,
+        "status": "needs_editorial"
+      },
+      {
+        "candidateKey": "quem-resolveu-extraordinariamente-bem-um-problema-que-a-maison-tambem-enfrenta",
+        "preferredLabel": "Quem resolveu extraordinariamente bem um problema que a Maison também enfrenta",
+        "slugs": [
+          "quem-resolveu-extraordinariamente-bem-um-problema-que-a-maison-tambem-enfrenta"
+        ],
+        "sources": [
+          "ocean"
+        ],
+        "evidence": [
+          {
+            "source": "ocean",
+            "sourceId": "atelier-principios-transferiveis-e-dna-maison:quem-resolveu-extraordinariamente-bem-um-problema-que-a-maison-tambem-enfrenta",
+            "focus": "estudar continuamente casos de excelência e mecanismos psicológicos, culturais, criativos e comerciais transferíveis para a Maison JF; descobrir também novos mestres históricos ou actuais; converter observação em princípios, hipóteses mensuráveis e aprendizagem proprietária Maison",
+            "family": "Ocean MAISON"
+          }
+        ],
+        "questionDesignSlots": [
+          {
+            "id": "pdi_source_slot_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_open",
+            "stage": "open",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_recognize",
+            "stage": "recognize",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_deepen",
+            "stage": "deepen",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_touch",
+            "stage": "touch",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_close",
+            "stage": "close",
+            "status": "needs_editorial"
+          },
+          {
+            "id": "pdi_source_slot_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_signature",
             "stage": "signature",
             "status": "needs_editorial"
           }
@@ -16047,6 +16857,8 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_oracle_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante",
+      "type": "oracle_candidate",
       "sourceOceanId": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
       "territory": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
       "intent": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
@@ -16057,12 +16869,6 @@
         "American Psychological Association, Speaking of Psychology: a investigação de Kate Sweeny sobre espera por notícias importantes descreve a combinação de incerteza e falta de controlo como particularmente stressante, estudada em candidatos a emprego, resultados de exames e resultados médicos — https://www.apa.org/news/podcasts/speaking-of-psychology/waiting-stress",
         "Frontiers in Radiology / PMC (2026; PMID 41717567): revisão narrativa sobre “waiting anxiety” identifica incerteza sobre resultados e perda de controlo como mecanismos relevantes durante períodos de espera, com evidência de ansiedade persistente enquanto se aguardam exames/resultados — https://pmc.ncbi.nlm.nih.gov/articles/PMC12913184/"
       ],
-      "bodyStored": false,
-      "approvalRequired": true,
-      "automaticActivation": false,
-      "status": "needs_editorial",
-      "id": "brain_oracle_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante",
-      "type": "oracle_candidate",
       "roleCandidates": [
         "opening",
         "recognition",
@@ -16071,7 +16877,11 @@
         "reframe",
         "movement",
         "close"
-      ]
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
     },
     {
       "id": "brain_oracle_luto_por_um_futuro_que_deixou_de_ser_possivel",
@@ -16102,6 +16912,8 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_oracle_micro_luxo_como_recompensa_e_ritual",
+      "type": "oracle_candidate",
       "sourceOceanId": "micro-luxo-como-recompensa-e-ritual",
       "territory": "micro-luxo-como-recompensa-e-ritual",
       "intent": "reconhecer pequenos luxos e mimos intencionais como momentos de recompensa, celebração, prazer e identidade no quotidiano, distinguindo uma indulgência escolhida de pressão para gastar, culpa ou consumo impulsivo sem controlo",
@@ -16113,12 +16925,6 @@
         "SurveyMonkey Treatonomics (2026; 2,038 US adults): 62% reported small affordable treats at least monthly, 52% of treaters spent $25 or less per purchase, and 35% of Gen Z/Millennials used treats to stay motivated toward larger goals — https://www.surveymonkey.com/curiosity/treatonomics-consumer-spending/",
         "Euromonitor, World Perfumery Congress 2026: micro-indulgence, miniaturisation, discovery formats and collectability were prominent in fragrance packaging, linking accessible indulgence with objects people want to keep and show — https://www.euromonitor.com/article/reflections-from-world-perfumery-congress-2026"
       ],
-      "bodyStored": false,
-      "approvalRequired": true,
-      "automaticActivation": false,
-      "status": "needs_editorial",
-      "id": "brain_oracle_micro_luxo_como_recompensa_e_ritual",
-      "type": "oracle_candidate",
       "roleCandidates": [
         "opening",
         "recognition",
@@ -16127,7 +16933,11 @@
         "reframe",
         "movement",
         "close"
-      ]
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
     },
     {
       "id": "brain_oracle_perda_ambigua_sem_fecho_claro",
@@ -16876,6 +17686,333 @@
         {
           "id": "slot_ansiedade_antecipatoria_na_transicao_domingo_semana_preparar_sem_perder_o_presente_signature",
           "theme": "preparar sem perder o presente",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
+      "id": "brain_question_atelier_principios_transferiveis_e_dna_maison",
+      "type": "question_candidate",
+      "sourceOceanId": "atelier-principios-transferiveis-e-dna-maison",
+      "territory": "atelier-principios-transferiveis-e-dna-maison",
+      "intent": "estudar continuamente casos de excelência e mecanismos psicológicos, culturais, criativos e comerciais transferíveis para a Maison JF; descobrir também novos mestres históricos ou actuais; converter observação em princípios, hipóteses mensuráveis e aprendizagem proprietária Maison",
+      "painLanguage": "A Maison não precisa de inventar do zero todos os mecanismos de atenção, desejo, identificação, memória, participação e propagação. Séculos de psicologia, cultura, publicidade, entretenimento, luxo, design, retalho e construção de marcas contêm mecanismos observáveis que podem ser estudados, testados e reinterpretados sem copiar a expressão de quem os dominou.",
+      "commercialAdjacency": "Aquisição orgânica, linguagem Maison, conteúdos, Jogo, Oráculo, testes, ebooks, guias, produtos, experiências, apresentação, desejo, conversão e criação de conceitos ou formatos capazes de gerar nova procura.",
+      "evidenceCount": 3,
+      "evidence": [
+        "Hipótese estratégica autorizada por João Fadario em 2026-09-27: criar um Oceano Atelier que estude excelência transferível e alimente o Brain sem se limitar a uma lista fixa de referências.",
+        "Referências iniciais autorizadas para investigação: Barnum/Forer e outros mecanismos de psicologia e comportamento; P. T. Barnum quando relevante; Martha Stewart; Alex Hormozi; Dior; Saint Laurent; Tom Ford; Apple; e novos mestres descobertos por evidência.",
+        "Regra Maison: extrair mecanismo e princípio transferível, não copiar voz, obra, identidade ou expressão; medir aplicações pela atenção, identificação, propagação, tráfego, conversão e aprendizagem que produzam."
+      ],
+      "questionThemeCandidates": [
+        "porque é que isto prende a atenção",
+        "porque é que isto parece falar comigo",
+        "como se transforma uma ideia num acontecimento",
+        "como se constrói desejo sem explicar demais",
+        "o que torna um conceito repetível e transmissível",
+        "que mecanismos fazem uma marca entrar na cultura",
+        "quem resolveu extraordinariamente bem um problema que a Maison também enfrenta",
+        "como combinar mecanismos sem perder o ADN Maison"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_prende_a_atencao_open",
+          "theme": "porque é que isto prende a atenção",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_prende_a_atencao_recognize",
+          "theme": "porque é que isto prende a atenção",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_prende_a_atencao_deepen",
+          "theme": "porque é que isto prende a atenção",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_prende_a_atencao_touch",
+          "theme": "porque é que isto prende a atenção",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_prende_a_atencao_close",
+          "theme": "porque é que isto prende a atenção",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_prende_a_atencao_signature",
+          "theme": "porque é que isto prende a atenção",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_parece_falar_comigo_open",
+          "theme": "porque é que isto parece falar comigo",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_parece_falar_comigo_recognize",
+          "theme": "porque é que isto parece falar comigo",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_parece_falar_comigo_deepen",
+          "theme": "porque é que isto parece falar comigo",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_parece_falar_comigo_touch",
+          "theme": "porque é que isto parece falar comigo",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_parece_falar_comigo_close",
+          "theme": "porque é que isto parece falar comigo",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_porque_e_que_isto_parece_falar_comigo_signature",
+          "theme": "porque é que isto parece falar comigo",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_transforma_uma_ideia_num_acontecimento_open",
+          "theme": "como se transforma uma ideia num acontecimento",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_transforma_uma_ideia_num_acontecimento_recognize",
+          "theme": "como se transforma uma ideia num acontecimento",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_transforma_uma_ideia_num_acontecimento_deepen",
+          "theme": "como se transforma uma ideia num acontecimento",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_transforma_uma_ideia_num_acontecimento_touch",
+          "theme": "como se transforma uma ideia num acontecimento",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_transforma_uma_ideia_num_acontecimento_close",
+          "theme": "como se transforma uma ideia num acontecimento",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_transforma_uma_ideia_num_acontecimento_signature",
+          "theme": "como se transforma uma ideia num acontecimento",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_constroi_desejo_sem_explicar_demais_open",
+          "theme": "como se constrói desejo sem explicar demais",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_constroi_desejo_sem_explicar_demais_recognize",
+          "theme": "como se constrói desejo sem explicar demais",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_constroi_desejo_sem_explicar_demais_deepen",
+          "theme": "como se constrói desejo sem explicar demais",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_constroi_desejo_sem_explicar_demais_touch",
+          "theme": "como se constrói desejo sem explicar demais",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_constroi_desejo_sem_explicar_demais_close",
+          "theme": "como se constrói desejo sem explicar demais",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_se_constroi_desejo_sem_explicar_demais_signature",
+          "theme": "como se constrói desejo sem explicar demais",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_o_que_torna_um_conceito_repetivel_e_transmissivel_open",
+          "theme": "o que torna um conceito repetível e transmissível",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_o_que_torna_um_conceito_repetivel_e_transmissivel_recognize",
+          "theme": "o que torna um conceito repetível e transmissível",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_o_que_torna_um_conceito_repetivel_e_transmissivel_deepen",
+          "theme": "o que torna um conceito repetível e transmissível",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_o_que_torna_um_conceito_repetivel_e_transmissivel_touch",
+          "theme": "o que torna um conceito repetível e transmissível",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_o_que_torna_um_conceito_repetivel_e_transmissivel_close",
+          "theme": "o que torna um conceito repetível e transmissível",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_o_que_torna_um_conceito_repetivel_e_transmissivel_signature",
+          "theme": "o que torna um conceito repetível e transmissível",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_que_mecanismos_fazem_uma_marca_entrar_na_cultura_open",
+          "theme": "que mecanismos fazem uma marca entrar na cultura",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_que_mecanismos_fazem_uma_marca_entrar_na_cultura_recognize",
+          "theme": "que mecanismos fazem uma marca entrar na cultura",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_que_mecanismos_fazem_uma_marca_entrar_na_cultura_deepen",
+          "theme": "que mecanismos fazem uma marca entrar na cultura",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_que_mecanismos_fazem_uma_marca_entrar_na_cultura_touch",
+          "theme": "que mecanismos fazem uma marca entrar na cultura",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_que_mecanismos_fazem_uma_marca_entrar_na_cultura_close",
+          "theme": "que mecanismos fazem uma marca entrar na cultura",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_que_mecanismos_fazem_uma_marca_entrar_na_cultura_signature",
+          "theme": "que mecanismos fazem uma marca entrar na cultura",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_open",
+          "theme": "quem resolveu extraordinariamente bem um problema que a Maison também enfrenta",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_recognize",
+          "theme": "quem resolveu extraordinariamente bem um problema que a Maison também enfrenta",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_deepen",
+          "theme": "quem resolveu extraordinariamente bem um problema que a Maison também enfrenta",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_touch",
+          "theme": "quem resolveu extraordinariamente bem um problema que a Maison também enfrenta",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_close",
+          "theme": "quem resolveu extraordinariamente bem um problema que a Maison também enfrenta",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_quem_resolveu_extraordinariamente_bem_um_problema_que_a_maison_tambem_enfrenta_signature",
+          "theme": "quem resolveu extraordinariamente bem um problema que a Maison também enfrenta",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_combinar_mecanismos_sem_perder_o_adn_maison_open",
+          "theme": "como combinar mecanismos sem perder o ADN Maison",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_combinar_mecanismos_sem_perder_o_adn_maison_recognize",
+          "theme": "como combinar mecanismos sem perder o ADN Maison",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_combinar_mecanismos_sem_perder_o_adn_maison_deepen",
+          "theme": "como combinar mecanismos sem perder o ADN Maison",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_combinar_mecanismos_sem_perder_o_adn_maison_touch",
+          "theme": "como combinar mecanismos sem perder o ADN Maison",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_combinar_mecanismos_sem_perder_o_adn_maison_close",
+          "theme": "como combinar mecanismos sem perder o ADN Maison",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_atelier_principios_transferiveis_e_dna_maison_como_combinar_mecanismos_sem_perder_o_adn_maison_signature",
+          "theme": "como combinar mecanismos sem perder o ADN Maison",
           "stage": "signature",
           "status": "needs_editorial"
         }
@@ -18589,6 +19726,296 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_question_descoberta_organica_e_reconhecimento_da_maison",
+      "type": "question_candidate",
+      "sourceOceanId": "descoberta-organica-e-reconhecimento-da-maison",
+      "territory": "descoberta-organica-e-reconhecimento-da-maison",
+      "intent": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
+      "painLanguage": "A Maison pode ter respostas, produtos, experiências e linguagem relevantes e, ainda assim, permanecer invisível para pessoas que já procuram exactamente esses temas. O problema não é apenas converter quem entra: é ser descoberta, reconhecida e lembrada antes da intenção de compra.",
+      "commercialAdjacency": "Toda a oferta Maison JF já existente — ebooks, jogo, testes gratuitos, Oráculo/Tarot, mentorias, rituais, aromas, produtos físicos e experiências — priorizando primeiro a correspondência entre procura real e activos existentes, sem inventar novos produtos nem depender de publicidade paga.",
+      "evidenceCount": 3,
+      "evidence": [
+        "Hipótese estratégica autorizada por João Fadario em 2026-09-26: o gargalo prioritário a investigar é descoberta/reconhecimento — trazer mais pessoas adequadas à Maison antes de optimizar conversão.",
+        "Public discovery graph interno Maison: sitemap, canonical/effective metadata, JSON-LD e internal-link projection já convergem para o Knowledge Graph e Brain; usar esta base para relacionar superfícies públicas com activos existentes.",
+        "A13/OSIRIS OSINT e fontes públicas gratuitas devem fornecer evidência externa e proveniência antes de qualquer recomendação; sinais sem evidência não devem ser tratados como oportunidade confirmada."
+      ],
+      "questionThemeCandidates": [
+        "onde estão as pessoas que a Maison já consegue ajudar",
+        "o que procuram antes de conhecer a Maison",
+        "onde essas conversas acontecem publicamente",
+        "que superfícies gratuitas podem apresentar a Maison",
+        "como gerar reconhecimento antes da compra",
+        "que activos Maison já respondem à procura observada",
+        "como transformar descoberta em visita sem publicidade paga"
+      ],
+      "stageCandidates": [
+        "open",
+        "recognize",
+        "deepen",
+        "touch",
+        "close",
+        "signature"
+      ],
+      "questionDesignSlots": [
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_open",
+          "theme": "onde estão as pessoas que a Maison já consegue ajudar",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_recognize",
+          "theme": "onde estão as pessoas que a Maison já consegue ajudar",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_deepen",
+          "theme": "onde estão as pessoas que a Maison já consegue ajudar",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_touch",
+          "theme": "onde estão as pessoas que a Maison já consegue ajudar",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_close",
+          "theme": "onde estão as pessoas que a Maison já consegue ajudar",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_estao_as_pessoas_que_a_maison_ja_consegue_ajudar_signature",
+          "theme": "onde estão as pessoas que a Maison já consegue ajudar",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_o_que_procuram_antes_de_conhecer_a_maison_open",
+          "theme": "o que procuram antes de conhecer a Maison",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_o_que_procuram_antes_de_conhecer_a_maison_recognize",
+          "theme": "o que procuram antes de conhecer a Maison",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_o_que_procuram_antes_de_conhecer_a_maison_deepen",
+          "theme": "o que procuram antes de conhecer a Maison",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_o_que_procuram_antes_de_conhecer_a_maison_touch",
+          "theme": "o que procuram antes de conhecer a Maison",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_o_que_procuram_antes_de_conhecer_a_maison_close",
+          "theme": "o que procuram antes de conhecer a Maison",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_o_que_procuram_antes_de_conhecer_a_maison_signature",
+          "theme": "o que procuram antes de conhecer a Maison",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_essas_conversas_acontecem_publicamente_open",
+          "theme": "onde essas conversas acontecem publicamente",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_essas_conversas_acontecem_publicamente_recognize",
+          "theme": "onde essas conversas acontecem publicamente",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_essas_conversas_acontecem_publicamente_deepen",
+          "theme": "onde essas conversas acontecem publicamente",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_essas_conversas_acontecem_publicamente_touch",
+          "theme": "onde essas conversas acontecem publicamente",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_essas_conversas_acontecem_publicamente_close",
+          "theme": "onde essas conversas acontecem publicamente",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_onde_essas_conversas_acontecem_publicamente_signature",
+          "theme": "onde essas conversas acontecem publicamente",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_superficies_gratuitas_podem_apresentar_a_maison_open",
+          "theme": "que superfícies gratuitas podem apresentar a Maison",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_superficies_gratuitas_podem_apresentar_a_maison_recognize",
+          "theme": "que superfícies gratuitas podem apresentar a Maison",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_superficies_gratuitas_podem_apresentar_a_maison_deepen",
+          "theme": "que superfícies gratuitas podem apresentar a Maison",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_superficies_gratuitas_podem_apresentar_a_maison_touch",
+          "theme": "que superfícies gratuitas podem apresentar a Maison",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_superficies_gratuitas_podem_apresentar_a_maison_close",
+          "theme": "que superfícies gratuitas podem apresentar a Maison",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_superficies_gratuitas_podem_apresentar_a_maison_signature",
+          "theme": "que superfícies gratuitas podem apresentar a Maison",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_gerar_reconhecimento_antes_da_compra_open",
+          "theme": "como gerar reconhecimento antes da compra",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_gerar_reconhecimento_antes_da_compra_recognize",
+          "theme": "como gerar reconhecimento antes da compra",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_gerar_reconhecimento_antes_da_compra_deepen",
+          "theme": "como gerar reconhecimento antes da compra",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_gerar_reconhecimento_antes_da_compra_touch",
+          "theme": "como gerar reconhecimento antes da compra",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_gerar_reconhecimento_antes_da_compra_close",
+          "theme": "como gerar reconhecimento antes da compra",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_gerar_reconhecimento_antes_da_compra_signature",
+          "theme": "como gerar reconhecimento antes da compra",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_activos_maison_ja_respondem_a_procura_observada_open",
+          "theme": "que activos Maison já respondem à procura observada",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_activos_maison_ja_respondem_a_procura_observada_recognize",
+          "theme": "que activos Maison já respondem à procura observada",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_activos_maison_ja_respondem_a_procura_observada_deepen",
+          "theme": "que activos Maison já respondem à procura observada",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_activos_maison_ja_respondem_a_procura_observada_touch",
+          "theme": "que activos Maison já respondem à procura observada",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_activos_maison_ja_respondem_a_procura_observada_close",
+          "theme": "que activos Maison já respondem à procura observada",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_que_activos_maison_ja_respondem_a_procura_observada_signature",
+          "theme": "que activos Maison já respondem à procura observada",
+          "stage": "signature",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_transformar_descoberta_em_visita_sem_publicidade_paga_open",
+          "theme": "como transformar descoberta em visita sem publicidade paga",
+          "stage": "open",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_transformar_descoberta_em_visita_sem_publicidade_paga_recognize",
+          "theme": "como transformar descoberta em visita sem publicidade paga",
+          "stage": "recognize",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_transformar_descoberta_em_visita_sem_publicidade_paga_deepen",
+          "theme": "como transformar descoberta em visita sem publicidade paga",
+          "stage": "deepen",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_transformar_descoberta_em_visita_sem_publicidade_paga_touch",
+          "theme": "como transformar descoberta em visita sem publicidade paga",
+          "stage": "touch",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_transformar_descoberta_em_visita_sem_publicidade_paga_close",
+          "theme": "como transformar descoberta em visita sem publicidade paga",
+          "stage": "close",
+          "status": "needs_editorial"
+        },
+        {
+          "id": "slot_descoberta_organica_e_reconhecimento_da_maison_como_transformar_descoberta_em_visita_sem_publicidade_paga_signature",
+          "theme": "como transformar descoberta em visita sem publicidade paga",
+          "stage": "signature",
+          "status": "needs_editorial"
+        }
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
+    },
+    {
       "id": "brain_question_doomscrolling_para_tentar_reduzir_incerteza",
       "type": "question_candidate",
       "sourceOceanId": "doomscrolling-para-tentar-reduzir-incerteza",
@@ -19058,6 +20485,8 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_question_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante",
+      "type": "question_candidate",
       "sourceOceanId": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
       "territory": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
       "intent": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
@@ -19068,12 +20497,6 @@
         "American Psychological Association, Speaking of Psychology: a investigação de Kate Sweeny sobre espera por notícias importantes descreve a combinação de incerteza e falta de controlo como particularmente stressante, estudada em candidatos a emprego, resultados de exames e resultados médicos — https://www.apa.org/news/podcasts/speaking-of-psychology/waiting-stress",
         "Frontiers in Radiology / PMC (2026; PMID 41717567): revisão narrativa sobre “waiting anxiety” identifica incerteza sobre resultados e perda de controlo como mecanismos relevantes durante períodos de espera, com evidência de ansiedade persistente enquanto se aguardam exames/resultados — https://pmc.ncbi.nlm.nih.gov/articles/PMC12913184/"
       ],
-      "bodyStored": false,
-      "approvalRequired": true,
-      "automaticActivation": false,
-      "status": "needs_editorial",
-      "id": "brain_question_ficar_em_suspenso_enquanto_se_espera_uma_resposta_importante",
-      "type": "question_candidate",
       "questionThemeCandidates": [
         "vida em suspenso",
         "esperar por uma resposta",
@@ -19307,7 +20730,11 @@
           "stage": "signature",
           "status": "needs_editorial"
         }
-      ]
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
     },
     {
       "id": "brain_question_luto_por_um_futuro_que_deixou_de_ser_possivel",
@@ -19563,6 +20990,8 @@
       "status": "needs_editorial"
     },
     {
+      "id": "brain_question_micro_luxo_como_recompensa_e_ritual",
+      "type": "question_candidate",
       "sourceOceanId": "micro-luxo-como-recompensa-e-ritual",
       "territory": "micro-luxo-como-recompensa-e-ritual",
       "intent": "reconhecer pequenos luxos e mimos intencionais como momentos de recompensa, celebração, prazer e identidade no quotidiano, distinguindo uma indulgência escolhida de pressão para gastar, culpa ou consumo impulsivo sem controlo",
@@ -19574,12 +21003,6 @@
         "SurveyMonkey Treatonomics (2026; 2,038 US adults): 62% reported small affordable treats at least monthly, 52% of treaters spent $25 or less per purchase, and 35% of Gen Z/Millennials used treats to stay motivated toward larger goals — https://www.surveymonkey.com/curiosity/treatonomics-consumer-spending/",
         "Euromonitor, World Perfumery Congress 2026: micro-indulgence, miniaturisation, discovery formats and collectability were prominent in fragrance packaging, linking accessible indulgence with objects people want to keep and show — https://www.euromonitor.com/article/reflections-from-world-perfumery-congress-2026"
       ],
-      "bodyStored": false,
-      "approvalRequired": true,
-      "automaticActivation": false,
-      "status": "needs_editorial",
-      "id": "brain_question_micro_luxo_como_recompensa_e_ritual",
-      "type": "question_candidate",
       "questionThemeCandidates": [
         "uma pequena vitória também merece ser marcada",
         "o mimo que transforma um dia comum",
@@ -19887,7 +21310,11 @@
           "stage": "signature",
           "status": "needs_editorial"
         }
-      ]
+      ],
+      "bodyStored": false,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "status": "needs_editorial"
     },
     {
       "id": "brain_question_perda_ambigua_sem_fecho_claro",
