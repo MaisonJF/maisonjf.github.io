@@ -41,6 +41,49 @@ window.MAISON_PRODUCTS=[
  cta:'Quero criar este momento'
 }
 ];
+
+const MAISON_PRODUCT_LOCALES={
+  'pt-BR':{
+    'vela-vidro':{name:'Vela Aromática',category:'Casa',description:'Luz e aroma para mudar o ritmo de um espaço.',ritual:{title:'Acenda para mudar de ritmo.',text:'A luz baixa. O aroma fica. E a casa percebe que o dia mudou de lugar.'},cta:'Quero levar para casa'},
+    'vela-pequena':{name:'Vela Aromática',category:'Casa',description:'Luz e aroma em um formato menor.',ritual:{title:'Um gesto pequeno também conta.',text:'Um ponto de luz pode bastar para marcar alguns minutos que não precisam servir para mais nada.'},cta:'Quero levar para casa'},
+    'oleo-massagem':{name:'Óleo de Massagem',category:'Corpo',description:'Toque e pausa em um ritual simples de massagem.',ritual:{title:'O corpo percebe o toque antes da explicação.',text:'Alguns minutos de massagem podem ser uma forma simples de devolver presença ao corpo.'},cta:'Quero saber mais'},
+    nevoa:{name:'Névoa de Ambiente',category:'Casa',description:'Uma forma rápida de mudar o ambiente através do aroma.',ritual:{title:'Mude o ar antes de mudar tudo.',text:'Um gesto no espaço pode bastar para marcar a passagem entre o que veio de fora e o tempo que agora é seu.'},cta:'Quero escolher'},
+    'escalda-pes':{name:'Escalda-Pés',category:'Corpo',description:'Um gesto simples para parar, aquecer e criar um momento para os pés.',ritual:{title:'Não complique a pausa.',text:'Água morna, aroma e alguns minutos em que ninguém pede nada a você.'},cta:'Quero criar este momento'}
+  },
+  en:{
+    'vela-vidro':{name:'Scented Candle',category:'Home',description:'Light and scent to change the rhythm of a space.',ritual:{title:'Light it to change the rhythm.',text:'The light drops. The scent remains. And home understands that the day has shifted.'},cta:'Take it home'},
+    'vela-pequena':{name:'Scented Candle',category:'Home',description:'Light and scent in a smaller format.',ritual:{title:'A small gesture still counts.',text:'A point of light can be enough to mark a few minutes that do not need to serve any other purpose.'},cta:'Take it home'},
+    'oleo-massagem':{name:'Massage Oil',category:'Body',description:'Touch and pause in a simple massage ritual.',ritual:{title:'The body understands touch before explanation.',text:'A few minutes of massage can be a simple way to bring presence back to the body.'},cta:'Learn more'},
+    nevoa:{name:'Room Mist',category:'Home',description:'A quick way to change the atmosphere through scent.',ritual:{title:'Change the air before changing everything.',text:'One gesture in the room can mark the passage between what came from outside and the time that is now yours.'},cta:'Choose yours'},
+    'escalda-pes':{name:'Foot Soak',category:'Body',description:'A simple gesture to stop, warm up and make a little time for your feet.',ritual:{title:"Don't complicate the pause.",text:'Warm water, scent and a few minutes in which nobody asks anything of you.'},cta:'Create this moment'}
+  },
+  es:{
+    'vela-vidro':{name:'Vela Aromática',category:'Casa',description:'Luz y aroma para cambiar el ritmo de un espacio.',ritual:{title:'Enciéndela para cambiar de ritmo.',text:'La luz baja. El aroma se queda. Y la casa entiende que el día ha cambiado de lugar.'},cta:'Quiero llevarla a casa'},
+    'vela-pequena':{name:'Vela Aromática',category:'Casa',description:'Luz y aroma en un formato más pequeño.',ritual:{title:'Un gesto pequeño también cuenta.',text:'Un punto de luz puede bastar para marcar unos minutos que no necesitan servir para nada más.'},cta:'Quiero llevarla a casa'},
+    'oleo-massagem':{name:'Aceite de Masaje',category:'Cuerpo',description:'Tacto y pausa en un ritual sencillo de masaje.',ritual:{title:'El cuerpo entiende el tacto antes que la explicación.',text:'Unos minutos de masaje pueden ser una forma sencilla de devolver presencia al cuerpo.'},cta:'Quiero saber más'},
+    nevoa:{name:'Bruma de Ambiente',category:'Casa',description:'Una forma rápida de cambiar el ambiente a través del aroma.',ritual:{title:'Cambia el aire antes de cambiarlo todo.',text:'Un gesto en el espacio puede bastar para marcar el paso entre lo que vino de fuera y el tiempo que ahora es tuyo.'},cta:'Quiero elegir'},
+    'escalda-pes':{name:'Baño de Pies',category:'Cuerpo',description:'Un gesto sencillo para parar, entrar en calor y crear un momento para tus pies.',ritual:{title:'No compliques la pausa.',text:'Agua tibia, aroma y unos minutos en los que nadie te pide nada.'},cta:'Quiero crear este momento'}
+  }
+};
+function maisonProductLocale(){
+  const raw=String(window.MAISON_LOCALE||document?.documentElement?.lang||'pt-PT').toLowerCase();
+  if(raw.startsWith('pt-br'))return 'pt-BR';
+  if(raw.startsWith('en'))return 'en';
+  if(raw.startsWith('es'))return 'es';
+  return 'pt-PT';
+}
+{
+  const locale=maisonProductLocale();
+  const translations=MAISON_PRODUCT_LOCALES[locale]||{};
+  if(locale!=='pt-PT'){
+    window.MAISON_PRODUCTS=window.MAISON_PRODUCTS.map(product=>{
+      const copy=translations[product.slug];
+      if(!copy)return product;
+      return {...product,...copy,ritual:copy.ritual?{...product.ritual,...copy.ritual}:product.ritual};
+    });
+  }
+}
+
 window.MAISON_PRODUCT_FUTURE=[
 {slug:null,name:'Água Perfumada',workingName:true,status:'future',note:'Nome comercial por definir'},
 {slug:'sais-de-banho',name:'Sais de Banho',status:'future'}
