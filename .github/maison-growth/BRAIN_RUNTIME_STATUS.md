@@ -21,7 +21,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Osiris Memory write mirror | READY authenticated bridge using Osiris Actions Waist | PRIVATE STACK PREPARED / NOT STARTED |
 | Osiris Memory read context | READY MCP graph_search adapter + smoke profile | NOT STARTED |
 | Maison Brain MCP | READY 12 read-only tools: status/Oceanos/public discovery/catalogue assets/commercial attention/Oráculo+PDI coverage/Osiris/Semantic | OPTIONAL PROFILE / NOT STARTED |
-| A1/A13/D1 canonical evidence | READY schema/contracts + canonical `maison-growth-engine` binding | REMOTE 0001→0016 SCHEMA NOT YET VERIFIED |
+| A1/A13/D1 canonical evidence | READY schema/contracts + canonical `maison-growth-engine` binding | REMOTE 0001→0022 SCHEMA NOT YET VERIFIED |
 | Cloudflare D1/Queue bindings | READY canonical D1 + intelligence queue/DLQ configuration in Wrangler | REMOTE RESOURCE STATE NOT YET VERIFIED |
 | Brain Control API | READY GET-only feed/solutions/economics/A11 learning + A5 mappings | DISABLED |
 | Canonical observe cycle | READY A5→Pre-Brain→Scout→Critic→Foundry→A14 preview + A3/A11 feedback context | OPTIONAL / NOT STARTED |
@@ -32,7 +32,7 @@ Canonical implementation status for the Maison intelligence/commercial brain.
 | Private Worker deploy gate | READY automatic secret-free dry-run + manual live workflow + minimal D1-only private renderer | DRY-RUN VERIFIED ON `main` @ `5b4bb1e6` |
 | Private credential readiness | READY names-only report distinguishes read-only inspection credentials from full first-stage deploy credentials | CHECKED: first-stage secrets currently missing |
 | Private custom-domain route | READY exact HTTPS Custom Domain from `MAISON_BRAIN_PRIVATE_URL`; workers.dev/previews/cron/queue/AI stripped | BLOCKED: private URL + Cloudflare credentials not configured |
-| Cloudflare read-only inspect | READY manual workflow; optional dedicated read token; D1 reachability + Worker-presence probe + 0001→0016 inspector; no deploy/write commands | NOT RUN |
+| Cloudflare read-only inspect | READY manual workflow; optional dedicated read token; D1 reachability + Worker-presence probe + 0001→0022 inspector; no deploy/write commands | NOT RUN |
 | Private deploy verification | READY remote D1 schema gate + boundary verifier: unauthenticated denial, authenticated read-only health, false action authority and hidden proposal/review write surfaces in private-read stage | NOT RUN LIVE |
 | Private commercial preview | READY manual Brain-Control-only workflow; materialization/memory backends OFF; counts/authority output only | NOT RUN |
 | Pre-Brain | READY analysis core | NOT PROVISIONED |
@@ -104,7 +104,7 @@ No layer should become a copy of every other layer.
 2. Run the prepared persistent observe stack locally/private-only and pass its smoke tests; this still does not activate A13 external collection.
 3. If explicitly authorised, expose only the private Brain Control API first (sensors still off) behind authenticated HTTPS and test the canonical read cycle.
 4. Run the manual allowlisted semantic projection sync only after the private read path is verified.
-5. Verify the existing D1/Queue bindings remotely, apply any missing schema migration through 0016, then connect the private memory bridge.
+5. Verify the existing D1/Queue bindings remotely, apply any missing schema migration through 0022, then connect the private memory bridge.
 6. Configure only selected zero/low-cost providers.
 7. Start A13 in observe-only with kill switches and conservative caps.
 8. Feed observed A13 evidence through A5/Pre-Brain/Scout/Critic/A14.
