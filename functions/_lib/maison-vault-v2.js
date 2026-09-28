@@ -222,7 +222,7 @@ export async function readOracleSession(db,oracleSessionId){
     id:row.id,title:row.title||undefined,text:row.text,role:row.role,
     intensity:Number(row.intensity),position:Number(row.position)
   }));
-  const fallbackTitle={en:'A reading',es:'Una apertura','pt-PT':'Uma abertura'}[locale]||'Uma abertura';
+  const fallbackTitle={en:'A reading',es:'Una apertura','pt-PT':'Uma abertura','pt-BR':'Uma leitura'}[locale]||'Uma leitura';
   return {
     ...session,
     locale,
