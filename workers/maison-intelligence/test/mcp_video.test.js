@@ -35,9 +35,15 @@ test('non-MCP paths fall through',async()=>{
 
 
 test('protected resource metadata points to Supabase OAuth issuer',async()=>{
-  const r=await handleMaisonMcpRequest(new Request('https://mcp.maison-jf.com/.well-known/oauth-protected-resource'),{MAISON_MCP_SUPABASE_URL:'https://example.supabase.co'});
+  const r=await handleMaisonMcpRequest(new Request('https://mcp.maison-jf.com/.well-known/oauth-protected-resource'),{MAISON_MCP_CONFIG:JSON.stringify({supabase_url:'https://example.supabase.co'})});
   assert.equal(r.status,200);
   const body=await r.json();
   assert.equal(body.resource,'https://mcp.maison-jf.com/mcp');
   assert.deepEqual(body.authorization_servers,['https://example.supabase.co/auth/v1']);
+});
+
+
+test('compact MCP config fails closed when malformed',async()=>{
+  const r=await handleMaisonMcpRequest(new Request('https://mcp.maison-jf.com/.well-known/oauth-protected-resource'),{MAISON_MCP_CONFIG:'{bad'});
+  assert.equal(r.status,503);
 });
