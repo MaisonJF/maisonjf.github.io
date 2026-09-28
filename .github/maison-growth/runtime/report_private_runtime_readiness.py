@@ -16,9 +16,9 @@ ACCESS_PAIR = (
     "MAISON_CF_ACCESS_CLIENT_ID",
     "MAISON_CF_ACCESS_CLIENT_SECRET",
 )
-LATER_STAGE = (
-    "MAISON_BRAIN_PROPOSAL_TOKEN",
-    "MAISON_BRAIN_REVIEW_DECISION_TOKEN",
+DERIVED_SCOPES = (
+    "proposal",
+    "review",
 )
 ZERO_COST_OPTIONAL = (
     "OPENROUTER_API_KEY",
@@ -79,12 +79,14 @@ def summarize(values: Mapping[str, str]) -> dict[str, object]:
         "access_pair_shape_ok": access_client_id_shape_ok and access_client_secret_shape_ok,
         "access_client_id_length": len(access_client_id),
         "access_client_secret_length": len(access_client_secret),
-        "later_stage_configured": [name for name in LATER_STAGE if present(name)],
-        "later_stage_missing": [name for name in LATER_STAGE if not present(name)],
+        "scoped_write_tokens_source": "derived_from_control_root" if present("MAISON_BRAIN_CONTROL_TOKEN") else "unavailable",
+        "scoped_write_tokens_ready": present("MAISON_BRAIN_CONTROL_TOKEN"),
+        "scoped_write_token_scopes": list(DERIVED_SCOPES),
+        "operator_one_button_ready": (not missing) and access_client_id_shape_ok and access_client_secret_shape_ok,
         "zero_cost_optional_configured": [name for name in ZERO_COST_OPTIONAL if present(name)],
         "zero_cost_optional_missing": [name for name in ZERO_COST_OPTIONAL if not present(name)],
         "secrets_printed": False,
-        "note": "Presence only. This does not verify Cloudflare access, route reachability, D1 schema, or Brain health.",
+        "note": "Presence only. Proposal/review credentials are derived from the Brain control root at runtime; this does not verify live route reachability, D1 schema, or Brain health.",
     }
 
 
