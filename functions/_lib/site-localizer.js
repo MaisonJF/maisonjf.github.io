@@ -1,6 +1,7 @@
 import {
   MAISON_SITE_LOCALES,
   MAISON_LANGUAGE_SWITCHER_CSS,
+  hasLocalizedSiteCoverage,
   localizedAbsoluteUrl,
   localizedPath,
   localeAlternates,
@@ -46,7 +47,7 @@ function headLocaleMarkup(sourcePath,locale){
     alternates,
     '<meta property="og:locale" content="'+config.ogLocale+'">',
     '<style id="maison-language-switcher-style">'+MAISON_LANGUAGE_SWITCHER_CSS+'</style>',
-    '<script>window.MAISON_LOCALE='+JSON.stringify(locale)+';</script>'
+    '<script>window.MAISON_LOCALE='+JSON.stringify(locale)+';window.MAISON_I18N_AVAILABLE=true;</script>'
   ].join('');
 }
 
@@ -132,7 +133,7 @@ export async function serveLocalizedPage(context,locale){
 
   const incoming=new URL(context.request.url);
   const sourcePath=sourcePathFromLocalized(incoming.pathname,locale);
-  if(!localizable(sourcePath))return new Response('Not found',{status:404});
+  if(!localizable(sourcePath)||!hasLocalizedSiteCoverage(sourcePath))return new Response('Not found',{status:404});
 
   const sourceUrl=new URL(sourcePath+incoming.search,ORIGIN);
   let response=await context.env.ASSETS.fetch(new Request(sourceUrl.toString(),{
