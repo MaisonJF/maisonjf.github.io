@@ -1,0 +1,34 @@
+name: Maison Video MCP Guard
+
+on:
+  pull_request:
+    paths:
+      - 'workers/maison-intelligence/src/mcp_video.js'
+      - 'workers/maison-intelligence/src/video_generation.js'
+      - 'workers/maison-intelligence/src/index.js'
+      - 'workers/maison-intelligence/test/mcp_video.test.js'
+      - 'workers/maison-intelligence/package.json'
+      - '.github/workflows/maison-video-mcp-guard.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-video-mcp:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: workers/maison-intelligence
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax
+        run: |
+          node --check src/video_generation.js
+          node --check src/mcp_video.js
+          node --check src/index.js
+      - name: MCP contract tests
+        run: node --test test/mcp_video.test.js
