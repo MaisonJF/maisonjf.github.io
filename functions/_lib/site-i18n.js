@@ -1,0 +1,551 @@
+/*
+MAISON JF® · Public-site localization contract
+PT-PT remains the canonical editorial source. PT-BR, EN and ES are localized
+renderings served at real locale-prefixed URLs by Cloudflare Pages middleware.
+No automatic machine translation occurs at request time.
+*/
+
+export const MAISON_SITE_LOCALES=Object.freeze({
+  'pt-PT':{prefix:'',label:'PT',htmlLang:'pt-PT',ogLocale:'pt_PT'},
+  'pt-BR':{prefix:'/pt-br',label:'BR',htmlLang:'pt-BR',ogLocale:'pt_BR'},
+  en:{prefix:'/en',label:'EN',htmlLang:'en',ogLocale:'en_US'},
+  es:{prefix:'/es',label:'ES',htmlLang:'es',ogLocale:'es_ES'}
+});
+
+export const MAISON_SITE_TARGET_LOCALES=Object.freeze(['pt-BR','en','es']);
+
+export function normalizePublicSitePath(pathname='/'){
+  let path=String(pathname||'/').split('?')[0].split('#')[0]||'/';
+  path=path.replace(/\/index\.html$/i,'/');
+  path=path.replace(/\.html$/i,'');
+  if(!path.startsWith('/'))path='/'+path;
+  path=path.replace(/\/{2,}/g,'/');
+  if(path!=='/'&&path.endsWith('/'))return path;
+  return path;
+}
+
+export function splitMaisonLocalePath(pathname='/'){
+  const path=String(pathname||'/');
+  for(const [locale,config] of Object.entries(MAISON_SITE_LOCALES)){
+    if(!config.prefix)continue;
+    if(path===config.prefix||path===config.prefix+'/'){
+      return {locale,sourcePath:'/',localized:true};
+    }
+    if(path.startsWith(config.prefix+'/')){
+      const stripped=path.slice(config.prefix.length)||'/';
+      return {locale,sourcePath:stripped,localized:true};
+    }
+  }
+  return {locale:'pt-PT',sourcePath:path||'/',localized:false};
+}
+
+export function localizedPath(sourcePath,locale){
+  const config=MAISON_SITE_LOCALES[locale]||MAISON_SITE_LOCALES['pt-PT'];
+  const clean=normalizePublicSitePath(sourcePath);
+  if(locale==='pt-PT')return clean;
+  return config.prefix+(clean==='/'?'/':clean);
+}
+
+export function localizedAbsoluteUrl(sourcePath,locale,origin='https://maison-jf.com'){
+  return String(origin).replace(/\/$/,'')+localizedPath(sourcePath,locale);
+}
+
+export function localeAlternates(sourcePath,origin='https://maison-jf.com'){
+  return [
+    ['pt-PT',localizedAbsoluteUrl(sourcePath,'pt-PT',origin)],
+    ['pt-BR',localizedAbsoluteUrl(sourcePath,'pt-BR',origin)],
+    ['en',localizedAbsoluteUrl(sourcePath,'en',origin)],
+    ['es',localizedAbsoluteUrl(sourcePath,'es',origin)],
+    ['x-default',localizedAbsoluteUrl(sourcePath,'pt-PT',origin)]
+  ];
+}
+
+const COMMON={
+  'pt-BR':{
+    'O Farol':'O Farol',
+    'Volta Para Casa':'Volta Para Casa',
+    'Produtos':'Produtos',
+    'Serviços':'Serviços',
+    'Profissionais':'Profissionais',
+    'Contacto':'Contato',
+    'Envios':'Envios',
+    'Legal & Privacidade':'Legal & Privacidade',
+    'Informação Legal':'Informação Legal',
+    'Explorar':'Explorar',
+    'Presença':'Presença',
+    'Casa':'Casa',
+    'Corpo':'Corpo',
+    'Cabeça':'Mente',
+    'SEGUE O FAROL':'SIGA O FAROL',
+    'Descobrir →':'Descobrir →',
+    'Abrir →':'Abrir →',
+    'Voltar':'Voltar',
+    'Fechar ×':'Fechar ×',
+    'Marca registada na União Europeia':'Marca registrada na União Europeia',
+    'Todos os direitos reservados.':'Todos os direitos reservados.'
+  },
+  en:{
+    'O Farol':'The Lighthouse',
+    'Volta Para Casa':'Come Back Home',
+    'Produtos':'Products',
+    'Serviços':'Services',
+    'Profissionais':'Professionals',
+    'Contacto':'Contact',
+    'Envios':'Shipping',
+    'Legal & Privacidade':'Legal & Privacy',
+    'Informação Legal':'Legal Information',
+    'Explorar':'Explore',
+    'Maison':'Maison',
+    'Presença':'Presence',
+    'Casa':'Home',
+    'Corpo':'Body',
+    'Cabeça':'Mind',
+    'SEGUE O FAROL':'FOLLOW THE LIGHTHOUSE',
+    'PROFISSIONAIS →':'PROFESSIONALS →',
+    'Descobrir →':'Discover →',
+    'Abrir →':'Open →',
+    'ENTRAR →':'ENTER →',
+    'COMEÇAR →':'START →',
+    'Ver disponibilidade':'Check availability',
+    'Voltar':'Back',
+    'Recomeçar':'Start again',
+    'Fechar ×':'Close ×',
+    'Informação útil':'Useful information',
+    'Marca registada na União Europeia':'Registered trademark in the European Union',
+    'Todos os direitos reservados.':'All rights reserved.'
+  },
+  es:{
+    'O Farol':'El Faro',
+    'Volta Para Casa':'Vuelve a Casa',
+    'Produtos':'Productos',
+    'Serviços':'Servicios',
+    'Profissionais':'Profesionales',
+    'Contacto':'Contacto',
+    'Envios':'Envíos',
+    'Legal & Privacidade':'Legal y Privacidad',
+    'Informação Legal':'Información Legal',
+    'Explorar':'Explorar',
+    'Maison':'Maison',
+    'Presença':'Presencia',
+    'Casa':'Casa',
+    'Corpo':'Cuerpo',
+    'Cabeça':'Mente',
+    'SEGUE O FAROL':'SIGUE EL FARO',
+    'PROFISSIONAIS →':'PROFESIONALES →',
+    'Descobrir →':'Descubrir →',
+    'Abrir →':'Abrir →',
+    'ENTRAR →':'ENTRAR →',
+    'COMEÇAR →':'EMPEZAR →',
+    'Ver disponibilidade':'Ver disponibilidad',
+    'Voltar':'Volver',
+    'Recomeçar':'Empezar de nuevo',
+    'Fechar ×':'Cerrar ×',
+    'Informação útil':'Información útil',
+    'Marca registada na União Europeia':'Marca registrada en la Unión Europea',
+    'Todos os direitos reservados.':'Todos los derechos reservados.'
+  }
+};
+
+const HOME={
+  'pt-BR':{
+    'MAISON JF® | PÁRA DE IGNORAR! Volta Para Casa.':'MAISON JF® | PARE DE IGNORAR! Volte Para Casa.',
+    'O que estás a ignorar? Entra na MAISON JF® por Casa, Corpo, Cabeça ou Presença. PÁRA DE IGNORAR. Volta Para Casa.':'O que você está ignorando? Entre na MAISON JF® por Casa, Corpo, Mente ou Presença. PARE DE IGNORAR. Volte Para Casa.',
+    'O QUE ESTÁS A IGNORAR?':'O QUE VOCÊ ESTÁ IGNORANDO?',
+    'Não sei por onde começar.':'Não sei por onde começar.',
+    'Quero perceber o que se passa comigo.':'Quero entender o que está acontecendo comigo.',
+    'EXPLORA A MAISON':'EXPLORE A MAISON',
+    'Já sei o que procuro.':'Já sei o que procuro.',
+    'As quatro portas da Maison':'As quatro portas da Maison',
+    'Quero voltar a gostar de chegar a casa.':'Quero voltar a gostar de chegar em casa.',
+    'O meu corpo está a pedir que eu pare.':'Meu corpo está pedindo para eu parar.',
+    'Preciso de perceber o que fazer com isto.':'Preciso entender o que fazer com isso.',
+    'Não quero passar por isto sozinho.':'Não quero passar por isso sozinho.',
+    'Explora a Maison':'Explore a Maison',
+    'Já sabes o que procuras?':'Já sabe o que procura?',
+    'O teu cliente sente o espaço antes de comprar.':'Seu cliente sente o espaço antes de comprar.',
+    'Aroma, toque e pequenos rituais para criar uma experiência que fica.':'Aroma, toque e pequenos rituais para criar uma experiência que permanece.',
+    'PÁRA DE IGNORAR.':'PARE DE IGNORAR.',
+    'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Marca registrada na União Europeia · Certificação PME pelo IAPMEI.'
+  },
+  en:{
+    'MAISON JF® | PÁRA DE IGNORAR! Volta Para Casa.':'MAISON JF® | STOP IGNORING IT. Come Back Home.',
+    'O que estás a ignorar? Entra na MAISON JF® por Casa, Corpo, Cabeça ou Presença. PÁRA DE IGNORAR. Volta Para Casa.':'What are you ignoring? Enter MAISON JF® through Home, Body, Mind or Presence. STOP IGNORING IT. Come Back Home.',
+    'O QUE ESTÁS A IGNORAR?':'WHAT ARE YOU IGNORING?',
+    'SEGUE O FAROL':'FOLLOW THE LIGHTHOUSE',
+    'Não sei por onde começar.':"I don't know where to start.",
+    'VOLTA PARA CASA':'COME BACK HOME',
+    'Quero perceber o que se passa comigo.':'I want to understand what is going on with me.',
+    'EXPLORA A MAISON':'EXPLORE THE MAISON',
+    'Já sei o que procuro.':'I already know what I am looking for.',
+    'As quatro portas da Maison':'The four doors of the Maison',
+    'Quero voltar a gostar de chegar a casa.':'I want to enjoy coming home again.',
+    'O meu corpo está a pedir que eu pare.':'My body is asking me to stop.',
+    'Preciso de perceber o que fazer com isto.':'I need to understand what to do with this.',
+    'Não quero passar por isto sozinho.':"I don't want to go through this alone.",
+    'Explora a Maison':'Explore the Maison',
+    'Já sabes o que procuras?':'Do you already know what you are looking for?',
+    'Profissionais · B2B':'Professionals · B2B',
+    'O teu cliente sente o espaço antes de comprar.':'Your client feels the space before they buy.',
+    'Aroma, toque e pequenos rituais para criar uma experiência que fica.':'Scent, touch and small rituals that create an experience that stays with them.',
+    'VER B2B':'VIEW B2B',
+    'PÁRA DE IGNORAR.':'STOP IGNORING IT.',
+    'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Registered trademark in the European Union · SME certification by IAPMEI.'
+  },
+  es:{
+    'MAISON JF® | PÁRA DE IGNORAR! Volta Para Casa.':'MAISON JF® | DEJA DE IGNORARLO. Vuelve a Casa.',
+    'O que estás a ignorar? Entra na MAISON JF® por Casa, Corpo, Cabeça ou Presença. PÁRA DE IGNORAR. Volta Para Casa.':'¿Qué estás ignorando? Entra en MAISON JF® por Casa, Cuerpo, Mente o Presencia. DEJA DE IGNORARLO. Vuelve a Casa.',
+    'O QUE ESTÁS A IGNORAR?':'¿QUÉ ESTÁS IGNORANDO?',
+    'SEGUE O FAROL':'SIGUE EL FARO',
+    'Não sei por onde começar.':'No sé por dónde empezar.',
+    'VOLTA PARA CASA':'VUELVE A CASA',
+    'Quero perceber o que se passa comigo.':'Quiero entender qué me está pasando.',
+    'EXPLORA A MAISON':'EXPLORA LA MAISON',
+    'Já sei o que procuro.':'Ya sé lo que busco.',
+    'As quatro portas da Maison':'Las cuatro puertas de la Maison',
+    'Quero voltar a gostar de chegar a casa.':'Quiero volver a disfrutar de llegar a casa.',
+    'O meu corpo está a pedir que eu pare.':'Mi cuerpo me está pidiendo que pare.',
+    'Preciso de perceber o que fazer com isto.':'Necesito entender qué hacer con esto.',
+    'Não quero passar por isto sozinho.':'No quiero pasar por esto solo.',
+    'Explora a Maison':'Explora la Maison',
+    'Já sabes o que procuras?':'¿Ya sabes lo que buscas?',
+    'Profissionais · B2B':'Profesionales · B2B',
+    'O teu cliente sente o espaço antes de comprar.':'Tu cliente siente el espacio antes de comprar.',
+    'Aroma, toque e pequenos rituais para criar uma experiência que fica.':'Aroma, tacto y pequeños rituales para crear una experiencia que permanece.',
+    'VER B2B':'VER B2B',
+    'PÁRA DE IGNORAR.':'DEJA DE IGNORARLO.',
+    'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Marca registrada en la Unión Europea · Certificación PME por IAPMEI.'
+  }
+};
+
+const TESTE={
+  'pt-BR':{
+    'Volta Para Casa é uma experiência MAISON JF® com três portas: Atenção, Apego e Afecto. Escolhe a que mais te chama, descobre o teu resultado e continua pelo que fizer sentido.':'Volta Para Casa é uma experiência MAISON JF® com três portas: Atenção, Apego e Afeto. Escolha a que mais chama você, descubra seu resultado e continue pelo que fizer sentido.',
+    'Já estás em Casa.<br>Escolhe uma porta.':'Você já está em Casa.<br>Escolha uma porta.',
+    'A que te chamar primeiro.':'A que chamar você primeiro.',
+    'As três portas de Volta Para Casa':'As três portas de Volta Para Casa',
+    'PORTA · ATENÇÃO':'PORTA · ATENÇÃO',
+    'O que está a pedir mais atenção?':'O que está pedindo mais atenção?',
+    'O que pesa. O que insiste. O que pede espaço.':'O que pesa. O que insiste. O que pede espaço.',
+    'PORTA · APEGO':'PORTA · APEGO',
+    'O que fazes quando alguém te importa?':'O que você faz quando alguém importa para você?',
+    'Proximidade. Distância. Medo de perder.':'Proximidade. Distância. Medo de perder.',
+    'PORTA · AFECTO':'PORTA · AFETO',
+    'Como reconheces que alguém gosta de ti?':'Como você reconhece que alguém gosta de você?',
+    'Palavras. Tempo. Gestos. Presença.':'Palavras. Tempo. Gestos. Presença.'
+  },
+  en:{
+    'Volta Para Casa | MAISON JF®':'Come Back Home | MAISON JF®',
+    'Volta Para Casa é uma experiência MAISON JF® com três portas: Atenção, Apego e Afecto. Escolhe a que mais te chama, descobre o teu resultado e continua pelo que fizer sentido.':'Come Back Home is a MAISON JF® experience with three doors: Attention, Attachment and Affection. Choose the one that calls to you first, discover your result and continue with what makes sense.',
+    'VOLTA PARA CASA':'COME BACK HOME',
+    'Já estás em Casa.<br>Escolhe uma porta.':'You are already Home.<br>Choose a door.',
+    'A que te chamar primeiro.':'Whichever calls to you first.',
+    'As três portas de Volta Para Casa':'The three doors of Come Back Home',
+    'PORTA · ATENÇÃO':'DOOR · ATTENTION',
+    'O que está a pedir mais atenção?':'What is asking for more attention?',
+    'O que pesa. O que insiste. O que pede espaço.':'What weighs on you. What keeps returning. What needs space.',
+    'PORTA · APEGO':'DOOR · ATTACHMENT',
+    'O que fazes quando alguém te importa?':'What do you do when someone matters to you?',
+    'Proximidade. Distância. Medo de perder.':'Closeness. Distance. Fear of losing.',
+    'PORTA · AFECTO':'DOOR · AFFECTION',
+    'Como reconheces que alguém gosta de ti?':'How do you recognise that someone cares about you?',
+    'Palavras. Tempo. Gestos. Presença.':'Words. Time. Gestures. Presence.'
+  },
+  es:{
+    'Volta Para Casa | MAISON JF®':'Vuelve a Casa | MAISON JF®',
+    'Volta Para Casa é uma experiência MAISON JF® com três portas: Atenção, Apego e Afecto. Escolhe a que mais te chama, descobre o teu resultado e continua pelo que fizer sentido.':'Vuelve a Casa es una experiencia MAISON JF® con tres puertas: Atención, Apego y Afecto. Elige la que más te llame, descubre tu resultado y continúa por donde tenga sentido.',
+    'VOLTA PARA CASA':'VUELVE A CASA',
+    'Já estás em Casa.<br>Escolhe uma porta.':'Ya estás en Casa.<br>Elige una puerta.',
+    'A que te chamar primeiro.':'La que te llame primero.',
+    'As três portas de Volta Para Casa':'Las tres puertas de Vuelve a Casa',
+    'PORTA · ATENÇÃO':'PUERTA · ATENCIÓN',
+    'O que está a pedir mais atenção?':'¿Qué está pidiendo más atención?',
+    'O que pesa. O que insiste. O que pede espaço.':'Lo que pesa. Lo que insiste. Lo que pide espacio.',
+    'PORTA · APEGO':'PUERTA · APEGO',
+    'O que fazes quando alguém te importa?':'¿Qué haces cuando alguien te importa?',
+    'Proximidade. Distância. Medo de perder.':'Cercanía. Distancia. Miedo a perder.',
+    'PORTA · AFECTO':'PUERTA · AFECTO',
+    'Como reconheces que alguém gosta de ti?':'¿Cómo reconoces que alguien te quiere?',
+    'Palavras. Tempo. Gestos. Presença.':'Palabras. Tiempo. Gestos. Presencia.'
+  }
+};
+
+const PRODUCTS={
+  'pt-BR':{
+    'Produtos MAISON JF® físicos e digitais para Casa, Corpo, Cabeça e Presença.':'Produtos MAISON JF® físicos e digitais para Casa, Corpo, Mente e Presença.',
+    'Casa · Corpo · Cabeça · Presença':'Casa · Corpo · Mente · Presença',
+    'Há coisas que se sentem<br>antes de se explicarem.':'Há coisas que se sentem<br>antes de serem explicadas.',
+    'Escolhe pelo que queres sentir agora.':'Escolha pelo que você quer sentir agora.',
+    'Produtos digitais':'Produtos digitais',
+    'Também há coisas que não chegam numa caixa.':'Também há coisas que não chegam em uma caixa.',
+    'Jogo digital':'Jogo digital',
+    '28 perguntas. Duas pessoas. O que ainda não perguntaste.':'28 perguntas. Duas pessoas. O que você ainda não perguntou.',
+    'Ver o jogo →':'Ver o jogo →',
+    'Produto digital':'Produto digital',
+    'Pensa na pergunta. Escolhe o território. Abre outra perspectiva.':'Pense na pergunta. Escolha o território. Abra outra perspectiva.',
+    'Abrir o Oráculo →':'Abrir o Oráculo →',
+    'Biblioteca · ebooks':'Biblioteca · ebooks',
+    'Para ler e voltar.':'Para ler e voltar.',
+    'Histórias e livros para quando não queres uma resposta rápida.':'Histórias e livros para quando você não quer uma resposta rápida.',
+    'Entrar na Biblioteca →':'Entrar na Biblioteca →',
+    'Ver carrinho':'Ver carrinho',
+    'Todos':'Todos',
+    'Curadoria Maison':'Curadoria Maison',
+    'Coisas que pertencem ao nosso universo.':'Coisas que pertencem ao nosso universo.',
+    'Peças, matérias e pequenos objetos escolhidos pela Maison. Algumas existem em poucas unidades. Outras nascem apenas por encomenda.':'Peças, materiais e pequenos objetos escolhidos pela Maison. Algumas existem em poucas unidades. Outras nascem apenas sob encomenda.',
+    'Ainda não sabes?':'Ainda não sabe?',
+    'Não escolhas à força.':'Não escolha à força.',
+    'Diz ao Farol o que queres sentir.':'Diga ao Farol o que você quer sentir.',
+    'Envios e portes':'Envios e frete',
+    'Condições da Maison':'Condições da Maison'
+  },
+  en:{
+    'Produtos | MAISON JF®':'Products | MAISON JF®',
+    'Produtos MAISON JF® físicos e digitais para Casa, Corpo, Cabeça e Presença.':'Physical and digital MAISON JF® products for Home, Body, Mind and Presence.',
+    'Casa · Corpo · Cabeça · Presença':'Home · Body · Mind · Presence',
+    'Há coisas que se sentem<br>antes de se explicarem.':'Some things are felt<br>before they can be explained.',
+    'Escolhe pelo que queres sentir agora.':'Choose by what you want to feel right now.',
+    'Produtos digitais':'Digital products',
+    'Também há coisas que não chegam numa caixa.':'Some things do not arrive in a box.',
+    'Jogo digital':'Digital game',
+    '28 perguntas. Duas pessoas. O que ainda não perguntaste.':'28 questions. Two people. What you still have not asked.',
+    'Ver o jogo →':'See the game →',
+    'Produto digital':'Digital product',
+    'Pensa na pergunta. Escolhe o território. Abre outra perspectiva.':'Think of the question. Choose the territory. Open another perspective.',
+    'Abrir o Oráculo →':'Open the Oracle →',
+    'Biblioteca · ebooks':'Library · ebooks',
+    'Para ler e voltar.':'To read and return to.',
+    'Histórias e livros para quando não queres uma resposta rápida.':'Stories and books for when you do not want a quick answer.',
+    'Entrar na Biblioteca →':'Enter the Library →',
+    'Ver carrinho':'View cart',
+    'Todos':'All',
+    'Curadoria Maison':'Maison Curatorship',
+    'Coisas que pertencem ao nosso universo.':'Things that belong in our universe.',
+    'Peças, matérias e pequenos objetos escolhidos pela Maison. Algumas existem em poucas unidades. Outras nascem apenas por encomenda.':'Pieces, materials and small objects chosen by the Maison. Some exist in very limited quantities. Others are made only to order.',
+    'A começar pela Jesmonite. Depois, cristais, pulseiras e outras peças que fizerem sentido aqui — sem as transformar em produtos de fabrico Maison.':'Starting with Jesmonite. Then crystals, bracelets and other pieces that belong here, without turning them into Maison-manufactured products.',
+    'Ainda não sabes?':'Still not sure?',
+    'Não escolhas à força.':"Don't force the choice.",
+    'Diz ao Farol o que queres sentir.':'Tell the Lighthouse what you want to feel.',
+    'Envios e portes':'Shipping',
+    'Condições da Maison':'Maison terms'
+  },
+  es:{
+    'Produtos | MAISON JF®':'Productos | MAISON JF®',
+    'Produtos MAISON JF® físicos e digitais para Casa, Corpo, Cabeça e Presença.':'Productos físicos y digitales MAISON JF® para Casa, Cuerpo, Mente y Presencia.',
+    'Casa · Corpo · Cabeça · Presença':'Casa · Cuerpo · Mente · Presencia',
+    'Há coisas que se sentem<br>antes de se explicarem.':'Hay cosas que se sienten<br>antes de poder explicarlas.',
+    'Escolhe pelo que queres sentir agora.':'Elige por lo que quieres sentir ahora.',
+    'Produtos digitais':'Productos digitales',
+    'Também há coisas que não chegam numa caixa.':'También hay cosas que no llegan en una caja.',
+    'Jogo digital':'Juego digital',
+    '28 perguntas. Duas pessoas. O que ainda não perguntaste.':'28 preguntas. Dos personas. Lo que todavía no has preguntado.',
+    'Ver o jogo →':'Ver el juego →',
+    'Produto digital':'Producto digital',
+    'Pensa na pergunta. Escolhe o território. Abre outra perspectiva.':'Piensa en la pregunta. Elige el territorio. Abre otra perspectiva.',
+    'Abrir o Oráculo →':'Abrir el Oráculo →',
+    'Biblioteca · ebooks':'Biblioteca · ebooks',
+    'Para ler e voltar.':'Para leer y volver.',
+    'Histórias e livros para quando não queres uma resposta rápida.':'Historias y libros para cuando no quieres una respuesta rápida.',
+    'Entrar na Biblioteca →':'Entrar en la Biblioteca →',
+    'Ver carrinho':'Ver carrito',
+    'Todos':'Todos',
+    'Curadoria Maison':'Curaduría Maison',
+    'Coisas que pertencem ao nosso universo.':'Cosas que pertenecen a nuestro universo.',
+    'Peças, matérias e pequenos objetos escolhidos pela Maison. Algumas existem em poucas unidades. Outras nascem apenas por encomenda.':'Piezas, materiales y pequeños objetos elegidos por la Maison. Algunos existen en pocas unidades. Otros nacen únicamente por encargo.',
+    'A começar pela Jesmonite. Depois, cristais, pulseiras e outras peças que fizerem sentido aqui — sem as transformar em produtos de fabrico Maison.':'Empezando por Jesmonite. Después, cristales, pulseras y otras piezas que tengan sentido aquí, sin convertirlas en productos fabricados por la Maison.',
+    'Ainda não sabes?':'¿Todavía no lo sabes?',
+    'Não escolhas à força.':'No elijas a la fuerza.',
+    'Diz ao Farol o que queres sentir.':'Dile al Faro lo que quieres sentir.',
+    'Envios e portes':'Envíos',
+    'Condições da Maison':'Condiciones de la Maison'
+  }
+};
+
+const SERVICES={
+  'pt-BR':{
+    'Consulta de Tarot, Acompanhamento, Presença e pedidos personalizados MAISON JF®.':'Consulta de Tarot, Acompanhamento, Presença e pedidos personalizados MAISON JF®.',
+    'Há qualquer coisa que ainda está contigo.':'Há alguma coisa que ainda está com você.',
+    'Começa pelo que já sabes que te trouxe aqui.':'Comece pelo que você já sabe que trouxe você até aqui.',
+    'Consulta de Tarot':'Consulta de Tarot',
+    'Uma consulta. Outro ângulo.':'Uma consulta. Outro ângulo.',
+    'Marcar consulta →':'Agendar consulta →',
+    'Tenho uma dúvida':'Tenho uma dúvida',
+    'Uma consulta para trazer contexto à tua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.':'Uma consulta para trazer contexto à sua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.',
+    'O Tarot é usado como ferramenta de reflexão e orientação. Não decide por ti, não garante acontecimentos futuros e não substitui acompanhamento clínico quando necessário.':'O Tarot é usado como ferramenta de reflexão e orientação. Não decide por você, não garante acontecimentos futuros e não substitui acompanhamento clínico quando necessário.',
+    'Outros caminhos':'Outros caminhos',
+    'Só quando fazem sentido.':'Só quando fizerem sentido.',
+    'A Maison acompanha de outras formas quando a situação pede continuidade, presença ou um pedido específico.':'A Maison acompanha de outras formas quando a situação pede continuidade, presença ou um pedido específico.',
+    'Continuidade':'Continuidade',
+    'Acompanhamento':'Acompanhamento',
+    'Falar connosco →':'Falar conosco →',
+    'Estrutura':'Estrutura',
+    'Mentoria':'Mentoria',
+    'Perceber como funciona →':'Entender como funciona →',
+    'Não quero atravessar isto sozinho.':'Não quero atravessar isso sozinho.',
+    'Ritual Personalizado':'Ritual Personalizado',
+    'Explicar a intenção →':'Explicar a intenção →',
+    'Pedidos especiais':'Pedidos especiais',
+    'Nem tudo vem pronto.':'Nem tudo vem pronto.',
+    'Explicar o pedido →':'Explicar o pedido →'
+  },
+  en:{
+    'Serviços | MAISON JF®':'Services | MAISON JF®',
+    'Consulta de Tarot, Acompanhamento, Presença e pedidos personalizados MAISON JF®.':'Tarot consultations, ongoing support, Presence and personalised MAISON JF® requests.',
+    'Serviços · MAISON JF®':'Services · MAISON JF®',
+    'Há qualquer coisa que ainda está contigo.':'Something is still with you.',
+    'Começa pelo que já sabes que te trouxe aqui.':'Start with what you already know brought you here.',
+    'Consulta de Tarot':'Tarot Consultation',
+    'Uma consulta. Outro ângulo.':'One consultation. Another angle.',
+    'Marcar consulta →':'Book a consultation →',
+    'Tenho uma dúvida':'I have a question',
+    'Uma consulta para trazer contexto à tua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.':'A consultation to bring context to your question, organise what feels tangled and open other ways of looking at the situation.',
+    'O Tarot é usado como ferramenta de reflexão e orientação. Não decide por ti, não garante acontecimentos futuros e não substitui acompanhamento clínico quando necessário.':'Tarot is used as a tool for reflection and orientation. It does not decide for you, guarantee future events or replace clinical care when needed.',
+    'Outros caminhos':'Other paths',
+    'Só quando fazem sentido.':'Only when they make sense.',
+    'A Maison acompanha de outras formas quando a situação pede continuidade, presença ou um pedido específico.':'The Maison can accompany you in other ways when the situation calls for continuity, presence or a specific request.',
+    'Continuidade':'Continuity',
+    'Acompanhamento':'Ongoing Support',
+    'Falar connosco →':'Talk to us →',
+    'Estrutura':'Structure',
+    'Mentoria':'Mentoring',
+    'Perceber como funciona →':'See how it works →',
+    'Não quero atravessar isto sozinho.':"I don't want to go through this alone.",
+    'Ritual':'Ritual',
+    'Ritual Personalizado':'Personalised Ritual',
+    'Explicar a intenção →':'Explain the intention →',
+    'Pedidos especiais':'Special requests',
+    'Nem tudo vem pronto.':'Not everything comes ready-made.',
+    'Explicar o pedido →':'Explain the request →'
+  },
+  es:{
+    'Serviços | MAISON JF®':'Servicios | MAISON JF®',
+    'Consulta de Tarot, Acompanhamento, Presença e pedidos personalizados MAISON JF®.':'Consulta de Tarot, acompañamiento, Presencia y pedidos personalizados MAISON JF®.',
+    'Serviços · MAISON JF®':'Servicios · MAISON JF®',
+    'Há qualquer coisa que ainda está contigo.':'Hay algo que todavía sigue contigo.',
+    'Começa pelo que já sabes que te trouxe aqui.':'Empieza por lo que ya sabes que te ha traído hasta aquí.',
+    'Consulta de Tarot':'Consulta de Tarot',
+    'Uma consulta. Outro ângulo.':'Una consulta. Otro ángulo.',
+    'Marcar consulta →':'Reservar consulta →',
+    'Tenho uma dúvida':'Tengo una duda',
+    'Uma consulta para trazer contexto à tua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.':'Una consulta para dar contexto a tu pregunta, ordenar lo que está mezclado y abrir otras formas de mirar la situación.',
+    'O Tarot é usado como ferramenta de reflexão e orientação. Não decide por ti, não garante acontecimentos futuros e não substitui acompanhamento clínico quando necessário.':'El Tarot se utiliza como herramienta de reflexión y orientación. No decide por ti, no garantiza acontecimientos futuros ni sustituye la atención clínica cuando sea necesaria.',
+    'Outros caminhos':'Otros caminos',
+    'Só quando fazem sentido.':'Solo cuando tienen sentido.',
+    'A Maison acompanha de outras formas quando a situação pede continuidade, presença ou um pedido específico.':'La Maison acompaña de otras formas cuando la situación pide continuidad, presencia o una petición concreta.',
+    'Continuidade':'Continuidad',
+    'Acompanhamento':'Acompañamiento',
+    'Falar connosco →':'Hablar con nosotros →',
+    'Estrutura':'Estructura',
+    'Mentoria':'Mentoría',
+    'Perceber como funciona →':'Ver cómo funciona →',
+    'Não quero atravessar isto sozinho.':'No quiero atravesar esto solo.',
+    'Ritual Personalizado':'Ritual Personalizado',
+    'Explicar a intenção →':'Explicar la intención →',
+    'Pedidos especiais':'Pedidos especiales',
+    'Nem tudo vem pronto.':'No todo viene ya hecho.',
+    'Explicar o pedido →':'Explicar el pedido →'
+  }
+};
+
+const FAROL={
+  'pt-BR':{
+    'O Farol | Encontra o próximo passo | MAISON JF®':'O Farol | Encontre o próximo passo | MAISON JF®',
+    'Não sabes o que precisas? Começa pelo que não te deixa em paz. O Farol parte daquilo que estás a viver e orienta-te para o objecto, leitura, experiência ou serviço MAISON JF® que pode fazer sentido agora.':'Não sabe do que precisa? Comece pelo que não deixa você em paz. O Farol parte do que você está vivendo e orienta para o objeto, leitura, experiência ou serviço MAISON JF® que pode fazer sentido agora.',
+    '← Voltar à MAISON JF®':'← Voltar à MAISON JF®',
+    'Não tens de saber o que procuras. Basta saber o que não te larga.':'Você não precisa saber o que procura. Basta saber o que não larga você.',
+    'Escolhe a frase que já te passou pela cabeça. O resto vem depois.':'Escolha a frase que já passou pela sua cabeça. O resto vem depois.',
+    'Seguir o Farol':'Seguir o Farol',
+    'Já sei o que procuro →':'Já sei o que procuro →',
+    'Qual destas frases podia ser tua?':'Qual destas frases poderia ser sua?',
+    'Não procures a resposta certa. Escolhe a que te apanhou.':'Não procure a resposta certa. Escolha a que pegou em você.',
+    'É outra coisa →':'É outra coisa →',
+    'Vamos perceber melhor.':'Vamos entender melhor.',
+    'O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.':'O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.',
+    'Volta Para Casa.':'Volte Para Casa.'
+  },
+  en:{
+    'O Farol | Encontra o próximo passo | MAISON JF®':'The Lighthouse | Find the next step | MAISON JF®',
+    'Não sabes o que precisas? Começa pelo que não te deixa em paz. O Farol parte daquilo que estás a viver e orienta-te para o objecto, leitura, experiência ou serviço MAISON JF® que pode fazer sentido agora.':'Not sure what you need? Start with what will not leave you alone. The Lighthouse begins with what you are living through and points you towards the MAISON JF® object, reading, experience or service that may make sense now.',
+    '← Voltar à MAISON JF®':'← Back to MAISON JF®',
+    'Não tens de saber o que procuras. Basta saber o que não te larga.':"You don't have to know what you are looking for. You only need to know what will not let go.",
+    'Escolhe a frase que já te passou pela cabeça. O resto vem depois.':'Choose the sentence that has already crossed your mind. The rest comes later.',
+    'Seguir o Farol':'Follow the Lighthouse',
+    'Já sei o que procuro →':'I already know what I need →',
+    'Qual destas frases podia ser tua?':'Which of these could have been yours?',
+    'Não procures a resposta certa. Escolhe a que te apanhou.':"Don't look for the right answer. Choose the one that caught you.",
+    'É outra coisa →':'It is something else →',
+    'Vamos perceber melhor.':"Let's understand it better.",
+    'O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.':'The Lighthouse offers orientation. It does not diagnose or replace professional support when needed.',
+    'Volta Para Casa.':'Come Back Home.'
+  },
+  es:{
+    'O Farol | Encontra o próximo passo | MAISON JF®':'El Faro | Encuentra el siguiente paso | MAISON JF®',
+    'Não sabes o que precisas? Começa pelo que não te deixa em paz. O Farol parte daquilo que estás a viver e orienta-te para o objecto, leitura, experiência ou serviço MAISON JF® que pode fazer sentido agora.':'¿No sabes qué necesitas? Empieza por lo que no te deja en paz. El Faro parte de lo que estás viviendo y te orienta hacia el objeto, lectura, experiencia o servicio MAISON JF® que puede tener sentido ahora.',
+    '← Voltar à MAISON JF®':'← Volver a MAISON JF®',
+    'Não tens de saber o que procuras. Basta saber o que não te larga.':'No tienes que saber qué buscas. Basta con saber qué no te suelta.',
+    'Escolhe a frase que já te passou pela cabeça. O resto vem depois.':'Elige la frase que ya te ha pasado por la cabeza. El resto viene después.',
+    'Seguir o Farol':'Seguir el Faro',
+    'Já sei o que procuro →':'Ya sé lo que busco →',
+    'Qual destas frases podia ser tua?':'¿Cuál de estas frases podría ser tuya?',
+    'Não procures a resposta certa. Escolhe a que te apanhou.':'No busques la respuesta correcta. Elige la que te atrapó.',
+    'É outra coisa →':'Es otra cosa →',
+    'Vamos perceber melhor.':'Vamos a entenderlo mejor.',
+    'O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.':'El Faro orienta. No diagnostica ni sustituye el apoyo profesional cuando sea necesario.',
+    'Volta Para Casa.':'Vuelve a Casa.'
+  }
+};
+
+const PAGE_MAP={
+  '/':HOME,
+  '/farol':FAROL,
+  '/farol/':FAROL,
+  '/teste/':TESTE,
+  '/produtos/':PRODUCTS,
+  '/servicos/':SERVICES
+};
+
+function escapeAmp(value){
+  return String(value).replace(/&(?![A-Za-z0-9#]+;)/g,'&amp;');
+}
+
+function applyMap(value,map){
+  let out=String(value);
+  const entries=Object.entries(map||{}).sort((a,b)=>b[0].length-a[0].length);
+  for(const [source,target] of entries){
+    out=out.split(source).join(target);
+    const sourceEscaped=escapeAmp(source);
+    if(sourceEscaped!==source){
+      out=out.split(sourceEscaped).join(escapeAmp(target));
+    }
+  }
+  return out;
+}
+
+export function translationMapFor(locale,sourcePath){
+  if(locale==='pt-PT')return {};
+  const path=normalizePublicSitePath(sourcePath);
+  return {
+    ...(COMMON[locale]||{}),
+    ...((PAGE_MAP[path]||{})[locale]||{})
+  };
+}
+
+export function translateMaisonHtml(html,locale,sourcePath){
+  if(locale==='pt-PT')return String(html);
+  return applyMap(html,translationMapFor(locale,sourcePath));
+}
+
+export function localeSwitcherHtml(sourcePath,currentLocale){
+  const links=Object.entries(MAISON_SITE_LOCALES).map(([locale,config])=>{
+    const current=locale===currentLocale?' aria-current="page"':'';
+    const href=localizedPath(sourcePath,locale);
+    return '<a href="'+href+'" hreflang="'+locale+'" lang="'+config.htmlLang+'"'+current+'>'+config.label+'</a>';
+  }).join('');
+  return '<nav class="maison-language-switcher" aria-label="Language">'+links+'</nav>';
+}
+
+export const MAISON_LANGUAGE_SWITCHER_CSS=`
+.maison-language-switcher{position:fixed;z-index:2147483000;top:18px;right:18px;display:flex;gap:2px;padding:3px;border:1px solid rgba(199,170,115,.26);background:rgba(7,7,7,.76);backdrop-filter:blur(14px);border-radius:999px}
+.maison-language-switcher a{display:grid;place-items:center;min-width:31px;height:27px;padding:0 7px;border-radius:999px;color:rgba(245,241,233,.68);font:600 9px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.08em;text-decoration:none}
+.maison-language-switcher a:hover,.maison-language-switcher a:focus-visible,.maison-language-switcher a[aria-current="page"]{background:rgba(199,170,115,.16);color:#f5f1e9;outline:none}
+@media(max-width:700px){.maison-language-switcher{top:12px;right:12px}.maison-language-switcher a{min-width:29px;height:25px;padding:0 6px}}
+`;
