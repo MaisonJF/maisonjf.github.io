@@ -152,6 +152,14 @@ jobs:
           npm run check
           npx wrangler deploy --dry-run --config wrangler.private.runtime.jsonc
 
+      - name: Bootstrap/deploy private surface
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy --config wrangler.private.runtime.jsonc
+
       - name: Install private Worker secrets
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
         working-directory: workers/maison-intelligence
@@ -175,14 +183,6 @@ jobs:
             test -n "$BRAIN_REVIEW_DECISION_TOKEN"
             printf '%s' "$BRAIN_REVIEW_DECISION_TOKEN" | npx wrangler secret put BRAIN_REVIEW_DECISION_TOKEN --config wrangler.private.runtime.jsonc
           fi
-
-      - name: Deploy private surface
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
-        working-directory: workers/maison-intelligence
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx wrangler deploy --config wrangler.private.runtime.jsonc
 
       - name: Verify deployed private Brain health
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.apply }}
