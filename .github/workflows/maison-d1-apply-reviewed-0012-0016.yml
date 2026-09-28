@@ -45,7 +45,7 @@ jobs:
         working-directory: workers/maison-intelligence
         run: bash scripts/apply-reviewed-0012-0016.sh maison-growth-engine --confirm-reviewed-0012-0016
 
-      - name: Verify complete 0001-0016 schema read-only
+      - name: Verify current canonical schema read-only
         working-directory: workers/maison-intelligence
         run: bash scripts/inspect-growth-migrations.sh maison-growth-engine
 
