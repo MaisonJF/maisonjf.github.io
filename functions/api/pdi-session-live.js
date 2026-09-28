@@ -1,5 +1,6 @@
 import { getOrCreateQuestionSession } from '../_lib/para-de-ignorar-session.js';
 import { getPdiTheme } from '../_lib/pdi-theme-registry.js';
+import { normalizeMaisonLocale } from '../_lib/maison-locales.js';
 
 export async function onRequestGet({request,env}){
   try{
@@ -15,6 +16,11 @@ export async function onRequestGet({request,env}){
 
     const sessionId=String(url.searchParams.get('session_id')||'');
     const requestedTheme=String(url.searchParams.get('theme')||'');
+    const rawRequestedLocale=url.searchParams.get('locale')||url.searchParams.get('lang');
+    const requestedLocale=rawRequestedLocale==null?null:normalizeMaisonLocale(rawRequestedLocale,{fallback:null});
+    if(rawRequestedLocale!=null&&!requestedLocale){
+      return json({error:'Idioma inválido.'},400);
+    }
     if(!/^cs_live_[A-Za-z0-9]+$/.test(sessionId)){
       return json({error:'Sessão inválida.'},400);
     }
@@ -29,6 +35,7 @@ export async function onRequestGet({request,env}){
     }
 
     const theme=String(stripeSession.metadata?.pdi_theme||'');
+    const locale=normalizeMaisonLocale(stripeSession.metadata?.pdi_locale||'pt-PT');
     const product=getPdiTheme(theme);
     const valid=
       product &&
@@ -39,13 +46,14 @@ export async function onRequestGet({request,env}){
       stripeSession.metadata?.pdi_access==='single-session' &&
       stripeSession.amount_total===product.amount &&
       stripeSession.currency===String(product.currency||'eur') &&
-      (!requestedTheme||requestedTheme===theme);
+      (!requestedTheme||requestedTheme===theme) &&
+      (!requestedLocale||requestedLocale===locale);
 
     if(!valid){
       return json({error:'Esta compra não dá acesso a esta sessão.'},403);
     }
 
-    const frozen=await getOrCreateQuestionSession({env,stripeSession,theme});
+    const frozen=await getOrCreateQuestionSession({env,stripeSession,theme,locale});
     if(!frozen||frozen.packA?.length!==14||frozen.packB?.length!==14){
       return json({error:'Não foi possível preparar esta sessão.'},503);
     }
@@ -53,6 +61,7 @@ export async function onRequestGet({request,env}){
     return json({
       paid:true,
       theme,
+      locale,
       label:product.label,
       session_id:stripeSession.id,
       game_session_id:frozen.game_session_id,
