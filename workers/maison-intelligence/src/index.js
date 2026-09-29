@@ -483,7 +483,7 @@ export default {
       enqueuePublicSourceRun(env,when,getControl),
       enqueueSearchVisibilityRun(env,when,getControl)
     ];
-    if (controller.cron==='17 4 * * *') {
+    if (when.getUTCHours()===3 && when.getUTCMinutes()===0) {
       jobs.push(enqueueRun(env,when,getControl));
       jobs.push(enqueueVisibilityProbeRun(env,when,getControl));
     }
