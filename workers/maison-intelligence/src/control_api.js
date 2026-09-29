@@ -75,25 +75,31 @@ async function feed(env, url) {
   let statement;
   if (after) {
     statement=env.GROWTH_DB.prepare(`
-      SELECT observation_id,event_id,territory_key,provider_id,model_id,source_class,
-             grounding_state,response_excerpt,observed_at,evidence_id,strength,
-             confidence_class,confidence,semantic_observation_id,need_id,intent_id,
-             semantic_confidence_score,semantic_ambiguity,semantic_provider_name,
-             semantic_provider_version,independent_roots_json,evidence_refs_json
-      FROM brain_prebrain_feed
-      WHERE observed_at > ? OR (observed_at = ? AND observation_id > ?)
-      ORDER BY observed_at,observation_id
+      SELECT f.observation_id,f.event_id,f.territory_key,f.provider_id,f.model_id,f.source_class,
+             f.grounding_state,f.response_excerpt,f.observed_at,f.evidence_id,f.strength,
+             f.confidence_class,f.confidence,f.semantic_observation_id,f.need_id,f.intent_id,
+             f.semantic_confidence_score,f.semantic_ambiguity,f.semantic_provider_name,
+             f.semantic_provider_version,f.independent_roots_json,f.evidence_refs_json,
+             json_extract(e.metadata_json,'$.content_proposal') AS content_proposal_json,
+             json_extract(e.metadata_json,'$.ocean_context') AS ocean_context_json
+      FROM brain_prebrain_feed f
+      LEFT JOIN events e ON e.event_id=f.event_id
+      WHERE f.observed_at > ? OR (f.observed_at = ? AND f.observation_id > ?)
+      ORDER BY f.observed_at,f.observation_id
       LIMIT ?
     `).bind(after,after,afterId,limit);
   } else {
     statement=env.GROWTH_DB.prepare(`
-      SELECT observation_id,event_id,territory_key,provider_id,model_id,source_class,
-             grounding_state,response_excerpt,observed_at,evidence_id,strength,
-             confidence_class,confidence,semantic_observation_id,need_id,intent_id,
-             semantic_confidence_score,semantic_ambiguity,semantic_provider_name,
-             semantic_provider_version,independent_roots_json,evidence_refs_json
-      FROM brain_prebrain_feed
-      ORDER BY observed_at,observation_id
+      SELECT f.observation_id,f.event_id,f.territory_key,f.provider_id,f.model_id,f.source_class,
+             f.grounding_state,f.response_excerpt,f.observed_at,f.evidence_id,f.strength,
+             f.confidence_class,f.confidence,f.semantic_observation_id,f.need_id,f.intent_id,
+             f.semantic_confidence_score,f.semantic_ambiguity,f.semantic_provider_name,
+             f.semantic_provider_version,f.independent_roots_json,f.evidence_refs_json,
+             json_extract(e.metadata_json,'$.content_proposal') AS content_proposal_json,
+             json_extract(e.metadata_json,'$.ocean_context') AS ocean_context_json
+      FROM brain_prebrain_feed f
+      LEFT JOIN events e ON e.event_id=f.event_id
+      ORDER BY f.observed_at,f.observation_id
       LIMIT ?
     `).bind(limit);
   }
@@ -101,8 +107,12 @@ async function feed(env, url) {
     ...row,
     independent_roots:parseJsonArray(row.independent_roots_json),
     evidence_refs:parseJsonArray(row.evidence_refs_json),
+    content_proposal:row.content_proposal_json ? JSON.parse(row.content_proposal_json) : null,
+    ocean_context:row.ocean_context_json ? JSON.parse(row.ocean_context_json) : null,
     independent_roots_json:undefined,
-    evidence_refs_json:undefined
+    evidence_refs_json:undefined,
+    content_proposal_json:undefined,
+    ocean_context_json:undefined
   }));
   const last=rows.at(-1);
   return json({
