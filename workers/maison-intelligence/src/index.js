@@ -30,12 +30,32 @@ async function controlState(env) {
   return { enabled: true, observeOnly: Number(row.observe_only) !== 0 };
 }
 
-async function underDailyCap(env, providerId, day, requestedCap = null) {
-  const cap = clampInt(requestedCap ?? env.MAX_DAILY_CALLS_PER_PROVIDER, 2, 1, 200);
-  const row = await env.GROWTH_DB.prepare(
-    `SELECT calls FROM external_intelligence_daily_usage WHERE usage_date=? AND provider_id=?`
-  ).bind(day, providerId).first();
-  return Number(row?.calls ?? 0) < cap;
+async function taskGate(env,{taskKey,providerId,day,requestedCap=null}) {
+  if (isTrue(env.KILL_SWITCH) || !isTrue(env.WORKER_ENABLED)) {
+    return { enabled:false, reason:'environment_disabled' };
+  }
+  const cap=clampInt(requestedCap ?? env.MAX_DAILY_CALLS_PER_PROVIDER,2,1,200);
+  const row=await env.GROWTH_DB.prepare(`
+    SELECT
+      c.kill_switch,
+      c.observe_only,
+      EXISTS(
+        SELECT 1 FROM external_intelligence_observations o
+        WHERE o.task_key=?1 LIMIT 1
+      ) AS already_done,
+      COALESCE((
+        SELECT u.calls FROM external_intelligence_daily_usage u
+        WHERE u.usage_date=?2 AND u.provider_id=?3
+        LIMIT 1
+      ),0) AS calls
+    FROM external_intelligence_control c
+    WHERE c.control_id='global'
+    LIMIT 1
+  `).bind(taskKey,day,providerId).first();
+  if (!row || Number(row.kill_switch)===1) return { enabled:false, reason:'database_kill_switch' };
+  if (Number(row.already_done)===1) return { enabled:false, reason:'duplicate_task' };
+  if (Number(row.calls||0)>=cap) return { enabled:false, reason:'daily_cap' };
+  return { enabled:true, observeOnly:Number(row.observe_only)!==0 };
 }
 
 async function markUsage(env, providerId, day, ok, usage) {
@@ -50,12 +70,6 @@ async function markUsage(env, providerId, day, ok, usage) {
       reported_cost_usd=reported_cost_usd+excluded.reported_cost_usd,
       updated_at=datetime('now')
   `).bind(day, providerId, ok ? 0 : 1, reportedCost).run();
-}
-
-async function alreadyDone(env, taskKey) {
-  return !!(await env.GROWTH_DB.prepare(
-    `SELECT observation_id FROM external_intelligence_observations WHERE task_key=? LIMIT 1`
-  ).bind(taskKey).first());
 }
 
 async function persistObservation(env, task, result) {
@@ -161,12 +175,14 @@ async function persistObservation(env, task, result) {
 }
 
 async function processSourceTask(env, task) {
-  const control = await controlState(env);
-  if (!control.enabled) return { skipped: control.reason };
-  if (await alreadyDone(env, task.taskKey)) return { skipped: 'duplicate_task' };
-  const day = task.day || utcDay();
-  const cap = env.MAX_DAILY_CALLS_PER_OSIRIS_SOURCE || '24';
-  if (!(await underDailyCap(env, task.providerId, day, cap))) return { skipped: 'daily_cap' };
+  const day=task.day || utcDay();
+  const gate=await taskGate(env,{
+    taskKey:task.taskKey,
+    providerId:task.providerId,
+    day,
+    requestedCap:env.MAX_DAILY_CALLS_PER_OSIRIS_SOURCE || '24'
+  });
+  if (!gate.enabled) return { skipped:gate.reason };
 
   let result;
   try {
@@ -182,12 +198,14 @@ async function processSourceTask(env, task) {
 }
 
 async function processPublicSourceTask(env, task) {
-  const control = await controlState(env);
-  if (!control.enabled) return { skipped: control.reason };
-  if (await alreadyDone(env, task.taskKey)) return { skipped: 'duplicate_task' };
-  const day = task.day || utcDay();
-  const cap = env.MAX_DAILY_CALLS_PER_PUBLIC_SOURCE || '4';
-  if (!(await underDailyCap(env, task.providerId, day, cap))) return { skipped: 'daily_cap' };
+  const day=task.day || utcDay();
+  const gate=await taskGate(env,{
+    taskKey:task.taskKey,
+    providerId:task.providerId,
+    day,
+    requestedCap:env.MAX_DAILY_CALLS_PER_PUBLIC_SOURCE || '4'
+  });
+  if (!gate.enabled) return { skipped:gate.reason };
 
   let result;
   try {
@@ -202,13 +220,15 @@ async function processPublicSourceTask(env, task) {
 }
 
 async function processSearchVisibilityTask(env, task) {
-  const control = await controlState(env);
-  if (!control.enabled) return { skipped: control.reason };
-  if (await alreadyDone(env, task.taskKey)) return { skipped: 'duplicate_task' };
-  const day = task.day || utcDay();
-  const cap = env.MAX_DAILY_CALLS_PER_SEARCH_SOURCE || '10';
-  const usageKey = 'search:' + task.providerId;
-  if (!(await underDailyCap(env, usageKey, day, cap))) return { skipped: 'daily_cap' };
+  const day=task.day || utcDay();
+  const usageKey='search:'+task.providerId;
+  const gate=await taskGate(env,{
+    taskKey:task.taskKey,
+    providerId:usageKey,
+    day,
+    requestedCap:env.MAX_DAILY_CALLS_PER_SEARCH_SOURCE || '10'
+  });
+  if (!gate.enabled) return { skipped:gate.reason };
 
   let result;
   try {
@@ -223,13 +243,15 @@ async function processSearchVisibilityTask(env, task) {
 }
 
 async function processVisibilityProbeTask(env, task) {
-  const control = await controlState(env);
-  if (!control.enabled) return { skipped: control.reason };
-  if (await alreadyDone(env, task.taskKey)) return { skipped: 'duplicate_task' };
-  const day = task.day || utcDay();
-  const cap = env.MAX_DAILY_CALLS_PER_VISIBILITY_PROVIDER || '2';
-  const usageKey = 'visibility:' + task.providerId;
-  if (!(await underDailyCap(env, usageKey, day, cap))) return { skipped: 'daily_cap' };
+  const day=task.day || utcDay();
+  const usageKey='visibility:'+task.providerId;
+  const gate=await taskGate(env,{
+    taskKey:task.taskKey,
+    providerId:usageKey,
+    day,
+    requestedCap:env.MAX_DAILY_CALLS_PER_VISIBILITY_PROVIDER || '2'
+  });
+  if (!gate.enabled) return { skipped:gate.reason };
   const caller = PROVIDERS[task.providerId];
   if (!caller) return { skipped: 'unknown_provider' };
 
@@ -245,11 +267,13 @@ async function processVisibilityProbeTask(env, task) {
   return { stored: true, provider: task.providerId, territory: task.territoryKey, probe: task.probe.id };
 }
 async function processTask(env, task) {
-  const control = await controlState(env);
-  if (!control.enabled) return { skipped: control.reason };
-  if (await alreadyDone(env, task.taskKey)) return { skipped: 'duplicate_task' };
-  const day = task.day || utcDay();
-  if (!(await underDailyCap(env, task.providerId, day))) return { skipped: 'daily_cap' };
+  const day=task.day || utcDay();
+  const gate=await taskGate(env,{
+    taskKey:task.taskKey,
+    providerId:task.providerId,
+    day
+  });
+  if (!gate.enabled) return { skipped:gate.reason };
   const caller = PROVIDERS[task.providerId];
   if (!caller) return { skipped: 'unknown_provider' };
 
@@ -265,162 +289,157 @@ async function processTask(env, task) {
   return { stored: true, provider: task.providerId, territory: task.territoryKey };
 }
 
-async function enqueueOsirisRun(env, scheduledDate) {
-  const control = await controlState(env);
-  if (!control.enabled) return { queued: 0, reason: control.reason };
+async function enqueueOsirisRun(env,scheduledDate,getControl=()=>controlState(env)) {
+  const sourceKeys=configuredOsirisSources(env);
+  if (!sourceKeys.length) return { queued:0,reason:'osiris_disabled_or_no_sources' };
+  const due=sourceKeys.filter(sourceKey=>{
+    const def=sourceDefinition(sourceKey);
+    return Boolean(def && osirisSourceDue(env,sourceKey,scheduledDate));
+  });
+  if (!due.length) return { queued:0,reason:'no_sources_due',sources:sourceKeys.length };
 
-  const sourceKeys = configuredOsirisSources(env);
-  if (!sourceKeys.length) return { queued: 0, reason: 'osiris_disabled_or_no_sources' };
+  const control=await getControl();
+  if (!control.enabled) return { queued:0,reason:control.reason };
 
-  const day = utcDay(scheduledDate);
-  const hour = scheduledDate.toISOString().slice(0, 13);
-  const messages = [];
-
-  for (const sourceKey of sourceKeys) {
-    const def = sourceDefinition(sourceKey);
-    if (!def || !osirisSourceDue(env, sourceKey, scheduledDate)) continue;
-    const providerId = `osiris_${sourceKey}`;
-    const cap = env.MAX_DAILY_CALLS_PER_OSIRIS_SOURCE || '24';
-    if (!(await underDailyCap(env, providerId, day, cap))) continue;
-    const promptFingerprint = await sha256Hex(`${env.OSIRIS_BASE_URL || 'https://osirisai.live'}${def.path}`);
-    messages.push({ body: {
-      kind: 'source_snapshot',
+  const day=utcDay(scheduledDate);
+  const hour=scheduledDate.toISOString().slice(0,13);
+  const messages=[];
+  for (const sourceKey of due) {
+    const def=sourceDefinition(sourceKey);
+    const providerId=`osiris_${sourceKey}`;
+    const promptFingerprint=await sha256Hex(`${env.OSIRIS_BASE_URL || 'https://osirisai.live'}${def.path}`);
+    messages.push({body:{
+      kind:'source_snapshot',
       day,
       providerId,
       sourceKey,
-      territoryKey: def.territoryKey,
-      prompt: `Passive OSIRIS source snapshot: ${sourceKey}`,
+      territoryKey:def.territoryKey,
+      prompt:`Passive OSIRIS source snapshot: ${sourceKey}`,
       promptFingerprint,
-      taskKey: `${hour}:osiris:${sourceKey}`
+      taskKey:`${hour}:osiris:${sourceKey}`
     }});
   }
-
-  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0, 100));
-  return { queued: messages.length, sources: sourceKeys.length };
+  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0,100));
+  return { queued:messages.length,sources:sourceKeys.length,due:due.length };
 }
+async function enqueuePublicSourceRun(env,scheduledDate,getControl=()=>controlState(env)) {
+  const configured=configuredPublicSourceTasks(env);
+  if (!configured.length) return { queued:0,reason:'public_sources_disabled_or_unconfigured' };
+  const due=configured.filter(task=>publicSourceDue(task,scheduledDate));
+  if (!due.length) return { queued:0,reason:'no_public_sources_due',configured:configured.length };
 
-async function enqueuePublicSourceRun(env, scheduledDate) {
-  const control = await controlState(env);
-  if (!control.enabled) return { queued: 0, reason: control.reason };
+  const control=await getControl();
+  if (!control.enabled) return { queued:0,reason:control.reason };
 
-  const configured = configuredPublicSourceTasks(env);
-  if (!configured.length) return { queued: 0, reason: 'public_sources_disabled_or_unconfigured' };
-
-  const day = utcDay(scheduledDate);
-  const hour = scheduledDate.toISOString().slice(0, 13);
-  const messages = [];
-  for (const publicTask of configured) {
-    if (!publicSourceDue(publicTask, scheduledDate)) continue;
-    const providerId = publicTask.providerId;
-    const cap = env.MAX_DAILY_CALLS_PER_PUBLIC_SOURCE || '4';
-    if (!(await underDailyCap(env, providerId, day, cap))) continue;
-    const promptFingerprint = await sha256Hex(publicTaskIdentity(publicTask));
-    messages.push({ body: {
-      kind: 'public_source_snapshot',
+  const day=utcDay(scheduledDate);
+  const hour=scheduledDate.toISOString().slice(0,13);
+  const messages=[];
+  for (const publicTask of due) {
+    const providerId=publicTask.providerId;
+    const promptFingerprint=await sha256Hex(publicTaskIdentity(publicTask));
+    messages.push({body:{
+      kind:'public_source_snapshot',
       day,
       providerId,
-      territoryKey: publicTask.territoryKey,
-      prompt: `Public source snapshot: ${publicTask.family}/${publicTask.key}`,
+      territoryKey:publicTask.territoryKey,
+      prompt:`Public source snapshot: ${publicTask.family}/${publicTask.key}`,
       promptFingerprint,
-      taskKey: `${hour}:public:${publicTask.family}:${publicTask.key}`,
+      taskKey:`${hour}:public:${publicTask.family}:${publicTask.key}`,
       publicTask
     }});
   }
-  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0, 100));
-  return { queued: messages.length, configured: configured.length };
+  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0,100));
+  return { queued:messages.length,configured:configured.length,due:due.length };
 }
+async function enqueueSearchVisibilityRun(env,scheduledDate,getControl=()=>controlState(env)) {
+  const configured=configuredSearchVisibilityTasks(env);
+  if (!configured.length) return { queued:0,reason:'search_visibility_disabled_or_unconfigured' };
+  const due=configured.filter(task=>searchVisibilityDue(task,scheduledDate));
+  if (!due.length) return { queued:0,reason:'no_search_visibility_due',configured:configured.length };
 
-async function enqueueSearchVisibilityRun(env, scheduledDate) {
-  const control = await controlState(env);
-  if (!control.enabled) return { queued: 0, reason: control.reason };
-  const configured = configuredSearchVisibilityTasks(env);
-  if (!configured.length) return { queued: 0, reason: 'search_visibility_disabled_or_unconfigured' };
+  const control=await getControl();
+  if (!control.enabled) return { queued:0,reason:control.reason };
 
-  const day = utcDay(scheduledDate);
-  const hour = scheduledDate.toISOString().slice(0, 13);
-  const messages = [];
-  for (const searchTask of configured) {
-    if (!searchVisibilityDue(searchTask, scheduledDate)) continue;
-    const usageKey = 'search:' + searchTask.providerId;
-    const cap = env.MAX_DAILY_CALLS_PER_SEARCH_SOURCE || '10';
-    if (!(await underDailyCap(env, usageKey, day, cap))) continue;
-    const promptFingerprint = await sha256Hex(searchVisibilityTaskIdentity(searchTask));
-    messages.push({ body: {
-      kind: 'search_visibility_snapshot',
+  const day=utcDay(scheduledDate);
+  const hour=scheduledDate.toISOString().slice(0,13);
+  const messages=[];
+  for (const searchTask of due) {
+    const promptFingerprint=await sha256Hex(searchVisibilityTaskIdentity(searchTask));
+    messages.push({body:{
+      kind:'search_visibility_snapshot',
       day,
-      providerId: searchTask.providerId,
-      territoryKey: searchTask.territoryKey,
-      prompt: 'Search visibility snapshot: ' + searchTask.key,
+      providerId:searchTask.providerId,
+      territoryKey:searchTask.territoryKey,
+      prompt:'Search visibility snapshot: '+searchTask.key,
       promptFingerprint,
-      taskKey: hour + ':search:' + searchTask.providerId + ':' + searchTask.key,
-      scheduledAt: scheduledDate.toISOString(),
+      taskKey:hour+':search:'+searchTask.providerId+':'+searchTask.key,
+      scheduledAt:scheduledDate.toISOString(),
       searchTask
     }});
   }
-  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0, 100));
-  return { queued: messages.length, configured: configured.length };
+  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0,100));
+  return { queued:messages.length,configured:configured.length,due:due.length };
 }
+async function enqueueVisibilityProbeRun(env,scheduledDate,getControl=()=>controlState(env)) {
+  if (!isTrue(env.SEARCH_VISIBILITY_PROBES_ENABLED)) return { queued:0,reason:'visibility_probes_disabled' };
+  const providers=configuredProviders(env);
+  if (!providers.length) return { queued:0,reason:'no_provider_secrets_configured' };
 
-async function enqueueVisibilityProbeRun(env, scheduledDate) {
-  const control = await controlState(env);
-  if (!control.enabled) return { queued: 0, reason: control.reason };
-  if (!isTrue(env.SEARCH_VISIBILITY_PROBES_ENABLED)) return { queued: 0, reason: 'visibility_probes_disabled' };
-  const providers = configuredProviders(env);
-  if (!providers.length) return { queued: 0, reason: 'no_provider_secrets_configured' };
-
-  const count = clampInt(env.VISIBILITY_PROBES_PER_RUN, 2, 1, 4);
-  const probes = probesForDate(scheduledDate, count);
-  const day = utcDay(scheduledDate);
-  const messages = [];
+  const count=clampInt(env.VISIBILITY_PROBES_PER_RUN,2,1,4);
+  const probes=probesForDate(scheduledDate,count);
+  const eligible=[];
   for (const probe of probes) {
-    const prompt = buildVisibilityProbePrompt(probe);
-    const promptFingerprint = await sha256Hex(prompt);
+    const prompt=buildVisibilityProbePrompt(probe);
+    const promptFingerprint=await sha256Hex(prompt);
     for (const providerId of providers) {
-      if (!providerCanRunProbe(providerId, probe)) continue;
-      const usageKey = 'visibility:' + providerId;
-      const cap = env.MAX_DAILY_CALLS_PER_VISIBILITY_PROVIDER || '2';
-      if (!(await underDailyCap(env, usageKey, day, cap))) continue;
-      messages.push({ body: {
-        kind: 'visibility_probe',
-        day,
-        providerId,
-        territoryKey: 'search_visibility',
-        prompt,
-        promptFingerprint,
-        taskKey: day + ':visibility:' + providerId + ':' + probe.id + ':' + promptFingerprint.slice(0, 16),
-        probe
-      }});
+      if (!providerCanRunProbe(providerId,probe)) continue;
+      eligible.push({probe,prompt,promptFingerprint,providerId});
     }
   }
-  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0, 100));
-  return { queued: messages.length, providers: providers.length, probes: probes.length };
-}
-async function enqueueRun(env, scheduledDate) {
-  const control = await controlState(env);
-  if (!control.enabled) return { queued: 0, reason: control.reason };
-  const providers = configuredProviders(env);
-  if (!providers.length) return { queued: 0, reason: 'no_provider_secrets_configured' };
+  if (!eligible.length) return { queued:0,reason:'no_eligible_visibility_probes',providers:providers.length,probes:probes.length };
 
-  const promptCount = clampInt(env.PROMPTS_PER_RUN, 2, 1, 4);
-  const territories = territoriesForDate(scheduledDate, promptCount);
-  const day = utcDay(scheduledDate);
-  const messages = [];
+  const control=await getControl();
+  if (!control.enabled) return { queued:0,reason:control.reason };
+
+  const day=utcDay(scheduledDate);
+  const messages=eligible.map(({probe,prompt,promptFingerprint,providerId})=>({body:{
+    kind:'visibility_probe',
+    day,
+    providerId,
+    territoryKey:'search_visibility',
+    prompt,
+    promptFingerprint,
+    taskKey:day+':visibility:'+providerId+':'+probe.id+':'+promptFingerprint.slice(0,16),
+    probe
+  }}));
+  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0,100));
+  return { queued:messages.length,providers:providers.length,probes:probes.length };
+}
+async function enqueueRun(env,scheduledDate,getControl=()=>controlState(env)) {
+  const providers=configuredProviders(env);
+  if (!providers.length) return { queued:0,reason:'no_provider_secrets_configured' };
+
+  const control=await getControl();
+  if (!control.enabled) return { queued:0,reason:control.reason };
+
+  const promptCount=clampInt(env.PROMPTS_PER_RUN,2,1,4);
+  const territories=territoriesForDate(scheduledDate,promptCount);
+  const day=utcDay(scheduledDate);
+  const messages=[];
   for (const territory of territories) {
-    const prompt = buildSensorPrompt(territory);
-    const promptFingerprint = await sha256Hex(prompt);
+    const prompt=buildSensorPrompt(territory);
+    const promptFingerprint=await sha256Hex(prompt);
     for (const providerId of providers) {
-      if (!(await underDailyCap(env, providerId, day))) continue;
-      messages.push({ body: {
-        kind: 'sensor_query', day, providerId, territoryKey: territory.key,
-        prompt, promptFingerprint,
-        taskKey: `${day}:${providerId}:${territory.key}:${promptFingerprint.slice(0, 24)}`
+      messages.push({body:{
+        kind:'sensor_query',day,providerId,territoryKey:territory.key,
+        prompt,promptFingerprint,
+        taskKey:`${day}:${providerId}:${territory.key}:${promptFingerprint.slice(0,24)}`
       }});
     }
   }
-  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0, 100));
-  return { queued: messages.length, providers: providers.length, territories: territories.length };
+  if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0,100));
+  return { queued:messages.length,providers:providers.length,territories:territories.length };
 }
-
 export default {
   async fetch(request, env) {
     const mcp = await handleMaisonMcpRequest(request, env);
@@ -448,15 +467,17 @@ export default {
   },
 
   async scheduled(controller, env, ctx) {
-    const when = new Date(controller.scheduledTime);
-    const jobs = [
-      enqueueOsirisRun(env, when),
-      enqueuePublicSourceRun(env, when),
-      enqueueSearchVisibilityRun(env, when)
+    const when=new Date(controller.scheduledTime);
+    let controlPromise=null;
+    const getControl=()=>controlPromise ||= controlState(env);
+    const jobs=[
+      enqueueOsirisRun(env,when,getControl),
+      enqueuePublicSourceRun(env,when,getControl),
+      enqueueSearchVisibilityRun(env,when,getControl)
     ];
-    if (controller.cron === '17 4 * * *') {
-      jobs.push(enqueueRun(env, when));
-      jobs.push(enqueueVisibilityProbeRun(env, when));
+    if (controller.cron==='17 4 * * *') {
+      jobs.push(enqueueRun(env,when,getControl));
+      jobs.push(enqueueVisibilityProbeRun(env,when,getControl));
     }
     ctx.waitUntil(Promise.all(jobs));
   },
