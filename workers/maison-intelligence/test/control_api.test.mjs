@@ -52,7 +52,8 @@ test('control API is GET-only', async () => {
 
 test('feed returns canonical evidence roots and composite cursor', async () => {
   const e=env((sql,params)=>{
-    assert.match(sql,/FROM brain_prebrain_feed/);
+    assert.match(sql,/FROM brain_prebrain_feed f/);
+    assert.match(sql,/LEFT JOIN events e ON e.event_id=f.event_id/);
     assert.equal(params.at(-1),25);
     return [{
       observation_id:'obs_12345678-1234-1234-1234-123456789012',
@@ -69,7 +70,9 @@ test('feed returns canonical evidence roots and composite cursor', async () => {
       confidence_class:'high',
       confidence:0.8,
       independent_roots_json:'["https://example.org/a"]',
-      evidence_refs_json:'["evd_x"]'
+      evidence_refs_json:'["evd_x"]',
+      content_proposal_json:'{"proposal_id":"cntp_demo","state":"ready_for_editorial_review"}',
+      ocean_context_json:'{"ocean_key":"adiar-o-sono-para-recuperar-autonomia"}'
     }];
   });
   const response=await handleBrainControlRequest(req('/internal/brain/feed?limit=25'),e);
@@ -77,6 +80,8 @@ test('feed returns canonical evidence roots and composite cursor', async () => {
   const body=await response.json();
   assert.deepEqual(body.rows[0].independent_roots,['https://example.org/a']);
   assert.deepEqual(body.rows[0].evidence_refs,['evd_x']);
+  assert.equal(body.rows[0].content_proposal.proposal_id,'cntp_demo');
+  assert.equal(body.rows[0].ocean_context.ocean_key,'adiar-o-sono-para-recuperar-autonomia');
   assert.equal(body.next_cursor.after_id,'obs_12345678-1234-1234-1234-123456789012');
   assert.equal('independent_roots_json' in body.rows[0],false);
 });
