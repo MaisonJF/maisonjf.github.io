@@ -18,6 +18,7 @@ import { handleVideoGenerationRequest } from './video_generation.js';
 import { handleMaisonMcpRequest } from './mcp_video.js';
 import { handleOceanMemoryRequest, ingestOceanMemory } from './ocean_memory.js';
 import { routeOceanContext } from './ocean_context.js';
+import { buildEditorialProposal } from './content_proposal.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -234,12 +235,25 @@ async function persistObservation(env, task, result) {
     }
   }
 
+  const brainAlert=oceanMemory?.brain_alert || null;
+  const contentProposal=await buildEditorialProposal({brainAlert,oceanContext});
+  if(contentProposal){
+    console.info('MAISON_CONTENT_PROPOSAL',JSON.stringify({
+      proposal_id:contentProposal.proposal_id,
+      ocean_key:oceanContext.oceanKey,
+      priority:contentProposal.source.priority,
+      priority_band:contentProposal.editorial_decision.priority_band,
+      format:contentProposal.editorial_decision.format
+    }));
+  }
+
   return {
     observationId,eventId,evidenceId,
     territoryKey:brainTerritoryKey,
     sourceTerritoryKey:task.territoryKey,
     oceanContext,
-    brainAlert:oceanMemory?.brain_alert || null
+    brainAlert,
+    contentProposal
   };
 }
 
@@ -265,7 +279,9 @@ async function processSourceTask(env, task) {
   const persisted=await persistObservation(env,task,result);
   return {
     stored:true,provider:task.providerId,territory:persisted.territoryKey,
-    sourceTerritory:persisted.sourceTerritoryKey,brainAlert:persisted.brainAlert
+    sourceTerritory:persisted.sourceTerritoryKey,
+    brainAlert:persisted.brainAlert,
+    contentProposal:persisted.contentProposal
   };
 }
 
@@ -344,7 +360,10 @@ async function processVisibilityProbeTask(env, task) {
   const persisted=await persistObservation(env,task,result);
   return {
     stored:true,provider:task.providerId,territory:persisted.territoryKey,
-    sourceTerritory:persisted.sourceTerritoryKey,probe:task.probe.id,brainAlert:persisted.brainAlert
+    sourceTerritory:persisted.sourceTerritoryKey,
+    probe:task.probe.id,
+    brainAlert:persisted.brainAlert,
+    contentProposal:persisted.contentProposal
   };
 }
 async function processTask(env, task) {
@@ -582,7 +601,9 @@ export default {
             territory:outcome.territory,
             source_territory:outcome.sourceTerritory,
             alert_kind:outcome.brainAlert.ocean_alert_kind,
-            priority:outcome.brainAlert.ocean_alert_priority
+            priority:outcome.brainAlert.ocean_alert_priority,
+            content_proposal_id:outcome.contentProposal?.proposal_id || null,
+            content_priority_band:outcome.contentProposal?.editorial_decision?.priority_band || null
           }));
         }
         message.ack();
