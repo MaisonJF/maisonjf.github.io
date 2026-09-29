@@ -13,8 +13,18 @@ export const EBOOKS = {
     priceId: 'price_1UJtIN5H3wYRPmPVvIrLnAhO',
     unitCents: 599,
     formats: {
-      pdf: { key: 'ebooks/para-de-ignorar/para-de-ignorar.pdf', filename: 'Para-de-Ignorar.pdf', contentType: 'application/pdf' },
-      epub: { key: 'ebooks/para-de-ignorar/para-de-ignorar.epub', filename: 'Para-de-Ignorar.epub', contentType: 'application/epub+zip' }
+      pdf: { key: 'ebooks/para-de-ignorar/PARA_DE_IGNORAR_Maison_JF_FINAL.pdf', filename: 'Para-de-Ignorar.pdf', contentType: 'application/pdf' },
+      epub: { key: 'ebooks/para-de-ignorar/PARA_DE_IGNORAR_Maison_JF_FINAL.epub', filename: 'Para-de-Ignorar.epub', contentType: 'application/epub+zip' }
+    }
+  },
+  'raio-azul': {
+    slug: 'raio-azul',
+    title: 'Raio Azul',
+    priceId: 'price_1UKzoT5H3wYRPmPVu5txzx35',
+    unitCents: 350,
+    formats: {
+      pdf: { key: 'ebooks/raio-azul/RAIO_AZUL_Ebook_Completo.pdf', filename: 'Raio-Azul.pdf', contentType: 'application/pdf' },
+      epub: { key: 'ebooks/raio-azul/RAIO_AZUL_Ebook_Completo.epub', filename: 'Raio-Azul.epub', contentType: 'application/epub+zip' }
     }
   },
   meandros: {
