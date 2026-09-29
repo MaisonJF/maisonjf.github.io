@@ -28,6 +28,10 @@ on:
         default: true
         type: boolean
 
+concurrency:
+  group: maison-convergence-audit-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
