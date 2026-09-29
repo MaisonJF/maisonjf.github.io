@@ -344,6 +344,9 @@ async function runQuestionBackfill(env,locale){
       if(isResourceLimit(error)){resourceLimited=true;break;}
     }
   }
+  if(resourceLimited){
+    return {locale,questionsActivated,failedBatches,attempted,resourceLimited,pending:null};
+  }
   const previous=await readPendingTelemetry(db);
   const pending=decrementPending(previous,locale,questionsActivated);
   if(pending)await persistTelemetry(db,{locale,questionsActivated,oracleActivated:0,pending});
