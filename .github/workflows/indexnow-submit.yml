@@ -14,6 +14,10 @@ on:
       - '.github/maison-growth/brain/submit_indexnow.mjs'
       - '.github/workflows/indexnow-submit.yml'
 
+concurrency:
+  group: maison-indexnow-notify-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
