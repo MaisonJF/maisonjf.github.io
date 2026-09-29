@@ -11,7 +11,7 @@ const read=rel=>fs.readFileSync(path.join(ROOT,rel),'utf8');
 function languageConvert(){
   const sandbox={
     window:{},
-    document:{readyState:'loading',addEventListener(){}}
+    document:{readyState:'loading',documentElement:{lang:'pt-PT'},addEventListener(){}}
   };
   vm.runInNewContext(read('maison-language.js'),sandbox,{filename:'maison-language.js'});
   assert.equal(typeof sandbox.window.MaisonLanguage?.convert,'function');
