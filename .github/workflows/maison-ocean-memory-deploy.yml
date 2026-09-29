@@ -87,12 +87,21 @@ jobs:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
         run: |
           python .github/maison-growth/runtime/render_private_worker_config.py \
-            private_brain_read_candidate \
+            private_observe_candidate \
             --template workers/maison-intelligence/wrangler.jsonc \
             --private-url "$BRAIN_CONTROL_API_URL" \
             --output workers/maison-intelligence/wrangler.private.runtime.jsonc
 
-      - name: Deploy Ocean memory runtime
+      - name: Verify autonomous observe credentials
+        shell: bash
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$OPENROUTER_API_KEY"
+          echo "OpenRouter credential present (value not printed)."
+
+      - name: Deploy Ocean memory + autonomous observe runtime
         working-directory: workers/maison-intelligence
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
