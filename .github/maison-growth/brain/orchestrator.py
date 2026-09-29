@@ -9,6 +9,7 @@ from critic import CriticVerdict, challenge
 from foundry import OfferConcept, propose
 from prebrain import Signal, SignalGroup, converge_signals, normalize_a13_observation
 from scout import ScoutOpportunity, discover
+from autonomous_growth import route_growth_packet
 
 
 @dataclass(frozen=True)
@@ -180,4 +181,5 @@ def packet_to_dict(packet: BrainOpportunityPacket) -> dict:
         "offer_concepts":[asdict(x) for x in packet.offer_concepts],
         "a14_ready":packet.a14_ready,
         "reason_codes":packet.reason_codes,
+        "growth_factory":route_growth_packet(packet),
     }
