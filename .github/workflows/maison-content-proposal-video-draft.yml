@@ -1,0 +1,123 @@
+name: Maison Content Proposal Video Draft
+run-name: Maison Content Proposal Video Draft
+
+on:
+  workflow_dispatch:
+    inputs:
+      proposal_json:
+        description: 'Optional raw Brain content_proposal JSON. Leave empty to select the strongest ready proposal from private Brain feed.'
+        required: false
+        type: string
+      proposal_id:
+        description: 'Optional proposal_id to select from Brain feed.'
+        required: false
+        type: string
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/maison-content-proposal-video-draft.yml'
+      - '.github/maison-growth/content-distribution/proposal_video_draft.py'
+      - '.github/maison-growth/content-distribution/test_content_proposal_video_draft.py'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: maison-content-proposal-video-draft-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate proposal video draft bridge
+        working-directory: .github/maison-growth/content-distribution
+        run: python3 -m unittest -v test_content_proposal_video_draft.py
+
+      - name: Validate content distribution contracts
+        run: python3 .github/maison-growth/content-distribution/validate_content_distribution.py
+
+  build-review-draft:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: refs/heads/main
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install video tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --disable-pip-version-check --quiet gradio_client
+
+      - name: Resolve content proposal
+        shell: bash
+        env:
+          PROPOSAL_JSON: ${{ inputs.proposal_json }}
+          PROPOSAL_ID: ${{ inputs.proposal_id }}
+          BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+          CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+          mkdir -p video-output
+          if [[ -n "${PROPOSAL_JSON}" ]]; then
+            printf '%s' "$PROPOSAL_JSON" > /tmp/maison-content-proposal.json
+          else
+            test -n "$BRAIN_CONTROL_API_URL"
+            test -n "$BRAIN_CONTROL_TOKEN"
+            test -n "$CF_ACCESS_CLIENT_ID"
+            test -n "$CF_ACCESS_CLIENT_SECRET"
+            curl --fail --silent --show-error \
+              -H "Authorization: Bearer ${BRAIN_CONTROL_TOKEN}" \
+              -H "CF-Access-Client-Id: ${CF_ACCESS_CLIENT_ID}" \
+              -H "CF-Access-Client-Secret: ${CF_ACCESS_CLIENT_SECRET}" \
+              "${BRAIN_CONTROL_API_URL%/}/internal/brain/feed?limit=100" \
+              > /tmp/maison-brain-feed.json
+            python .github/maison-growth/content-distribution/proposal_video_draft.py \
+              select \
+              --input /tmp/maison-brain-feed.json \
+              --output /tmp/maison-content-proposal.json \
+              ${PROPOSAL_ID:+--proposal-id "$PROPOSAL_ID"}
+          fi
+          python .github/maison-growth/content-distribution/proposal_video_draft.py \
+            manifest \
+            --proposal /tmp/maison-content-proposal.json \
+            --output video-output/proposal-manifest-preflight.json
+
+      - name: Generate MP4 review draft
+        run: |
+          python .github/maison-growth/content-distribution/proposal_video_draft.py \
+            render \
+            --proposal /tmp/maison-content-proposal.json \
+            --output-dir video-output
+
+      - name: Upload MP4 review draft
+        uses: actions/upload-artifact@v4
+        with:
+          name: maison-content-proposal-video-draft
+          path: |
+            video-output/*.mp4
+            video-output/*.json
+          if-no-files-found: error
+          retention-days: 7
