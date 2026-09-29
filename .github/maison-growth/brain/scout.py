@@ -62,6 +62,8 @@ def discover(
         reuse_routes=(
             "content","game_question","oracle_situation","test_dimension",
             "guide_or_ebook","trend_or_concept","foundry_candidate",
+            "seo_opportunity","geo_aeo_answer","social_post","short_video",
+            "product_extension","new_product_candidate",
         )
     if len(group.independent_roots) < 2:
         reasons.append("weak_source_independence")
