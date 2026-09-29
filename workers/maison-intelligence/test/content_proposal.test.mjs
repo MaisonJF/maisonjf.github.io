@@ -27,6 +27,10 @@ test('strong Brain alert becomes a ready short-video proposal without publishing
   assert.equal(proposal.editorial_decision.priority_band,'today');
   assert.equal(proposal.draft.on_screen_url,'maison-jf.com');
   assert.equal(proposal.destination.approved_existing_path,'/teste/');
+  assert.equal(proposal.video_draft_plan.engine,'maison_short_video_zero_cost');
+  assert.equal(proposal.video_draft_plan.shots.length,3);
+  assert.equal(proposal.video_draft_plan.overlays.persistent_url,'maison-jf.com');
+  assert.equal(proposal.video_draft_plan.execution_gate.automatic_generation,false);
   assert.equal(proposal.gates.automatic_publication,false);
   assert.equal(proposal.gates.spend_authorized,false);
   assert.equal(/[—–]/.test(proposal.draft.hook),false);
