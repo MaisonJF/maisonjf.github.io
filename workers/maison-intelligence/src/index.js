@@ -18,7 +18,7 @@ import { handleVideoGenerationRequest } from './video_generation.js';
 import { handleMaisonMcpRequest } from './mcp_video.js';
 import { handleOceanMemoryRequest, ingestOceanMemory } from './ocean_memory.js';
 import { routeOceanContext } from './ocean_context.js';
-import { buildEditorialProposal } from './content_proposal.js';
+import { buildEditorialProposal, buildInlineBrainAlert } from './content_proposal.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -115,6 +115,17 @@ async function persistObservation(env, task, result) {
   const evidenceSource = result.evidenceSource || 'system';
   const evidenceKind = result.evidenceKind || 'demand';
   const sourceKind = result.sourceKind || 'external_intelligence';
+  const inlineBrainAlert=buildInlineBrainAlert({
+    oceanContext,
+    observationId,
+    evidenceId,
+    summary:safeText,
+    observedAt
+  });
+  const inlineContentProposal=await buildEditorialProposal({
+    brainAlert:inlineBrainAlert,
+    oceanContext
+  });
   const metadata = JSON.stringify({
     a13:true,
     territory_key:brainTerritoryKey,
@@ -129,7 +140,8 @@ async function persistObservation(env, task, result) {
       match_terms:oceanContext.matchedTerms,
       relevance_score:oceanContext.relevanceScore,
       commercial_score:oceanContext.commercialScore
-    } : null
+    } : null,
+    content_proposal:inlineContentProposal
   });
   const evidenceFacts = JSON.stringify({
     source_kind: sourceKind,
@@ -235,8 +247,8 @@ async function persistObservation(env, task, result) {
     }
   }
 
-  const brainAlert=oceanMemory?.brain_alert || null;
-  const contentProposal=await buildEditorialProposal({brainAlert,oceanContext});
+  const brainAlert=oceanMemory?.brain_alert || inlineBrainAlert || null;
+  const contentProposal=inlineContentProposal;
   if(contentProposal){
     console.info('MAISON_CONTENT_PROPOSAL',JSON.stringify({
       proposal_id:contentProposal.proposal_id,
