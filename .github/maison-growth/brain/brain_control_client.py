@@ -140,13 +140,9 @@ class BrainControlClient:
         limit: int=100,
         after: Optional[str]=None,
         after_id: Optional[str]=None,
-        include_ocean_alerts: bool=False,
     ) -> Mapping[str,Any]:
         return self._get("/internal/brain/feed",{
-            "limit":limit,
-            "after":after,
-            "after_id":after_id,
-            "include_ocean_alerts":1 if include_ocean_alerts else None,
+            "limit":limit,"after":after,"after_id":after_id
         })
 
     def cash_feedback(
