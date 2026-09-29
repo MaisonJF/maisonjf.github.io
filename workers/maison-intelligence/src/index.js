@@ -21,6 +21,14 @@ import { handleOceanMemoryRequest } from './ocean_memory.js';
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
 
+function d1QuotaExhausted(error) {
+  const message=String(error?.message || error || '').toLowerCase();
+  return message.includes('7500')
+    || message.includes('free tier daily row read limit')
+    || message.includes('exceeded d1')
+    || message.includes('d1 quota');
+}
+
 async function controlState(env) {
   if (isTrue(env.KILL_SWITCH) || !isTrue(env.WORKER_ENABLED)) return { enabled: false, reason: 'environment_disabled' };
   const row = await env.GROWTH_DB.prepare(
@@ -495,6 +503,11 @@ export default {
         message.ack();
       } catch (error) {
         console.error('A13 sensor task failed', task.providerId, task.territoryKey, error?.message ?? error);
+        if (d1QuotaExhausted(error)) {
+          console.warn('A13 task dropped until next natural cadence because D1 daily quota is exhausted.');
+          message.ack();
+          continue;
+        }
         message.retry({ delaySeconds: 300 });
       }
     }
