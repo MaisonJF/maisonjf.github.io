@@ -111,18 +111,6 @@ async function all(stmt){
   const out=await stmt.all();
   return Array.isArray(out?.results)?out.results:[];
 }
-async function readEvidenceRoots(env,oceanKey){
-  const rows=await all(env.GROWTH_DB.prepare(
-    `SELECT evidence_roots_json FROM ocean_memory_signals WHERE ocean_key=?`
-  ).bind(oceanKey));
-  const roots=new Set();
-  for(const row of rows){
-    try{
-      for(const item of JSON.parse(row.evidence_roots_json||'[]')) if(item) roots.add(String(item));
-    }catch{}
-  }
-  return roots;
-}
 async function ingest(env,raw){
   const input=normalizeOceanInput(raw);
   const hash=await sha256Hex(JSON.stringify({
@@ -131,20 +119,11 @@ async function ingest(env,raw){
     evidence_roots:input.evidenceRoots,theme_candidates:input.themeCandidates,
     commercial_adjacency:input.commercialAdjacency,observed_at:input.observedAt
   }));
-  const existing=await env.GROWTH_DB.prepare(
-    `SELECT signal_id FROM ocean_memory_signals WHERE payload_hash=? LIMIT 1`
-  ).bind(hash).first();
-  if(existing){
-    const state=await env.GROWTH_DB.prepare(
-      `SELECT * FROM brain_ocean_memory_feed WHERE ocean_key=? LIMIT 1`
-    ).bind(input.oceanKey).first();
-    return {duplicate:true,signal_id:existing.signal_id,state};
-  }
 
   const signalId=id('oms_');
   const now=new Date().toISOString();
-  await env.GROWTH_DB.prepare(`
-    INSERT INTO ocean_memory_signals
+  const signalWrite=await env.GROWTH_DB.prepare(`
+    INSERT OR IGNORE INTO ocean_memory_signals
       (signal_id,ocean_key,canonical_ocean_id,signal_kind,source_ref,source_observation_id,
        summary,evidence_roots_json,theme_candidates_json,commercial_adjacency_json,
        relevance_score,commercial_score,payload_hash,observed_at,created_at)
@@ -156,25 +135,26 @@ async function ingest(env,raw){
     hash,input.observedAt,now
   ).run();
 
-  const roots=await readEvidenceRoots(env,input.oceanKey);
-  const priorState=await env.GROWTH_DB.prepare(
-    `SELECT independent_evidence_count,signal_count,max_relevance_score,max_commercial_score,first_seen_at,canonical_ocean_id
-     FROM ocean_memory_state WHERE ocean_key=? LIMIT 1`
-  ).bind(input.oceanKey).first();
-  const aggregate=await env.GROWTH_DB.prepare(`
-    SELECT COUNT(*) AS signal_count,
-           MAX(relevance_score) AS max_relevance,
-           MAX(commercial_score) AS max_commercial,
-           MIN(observed_at) AS first_seen,
-           MAX(observed_at) AS last_seen
-    FROM ocean_memory_signals WHERE ocean_key=?
-  `).bind(input.oceanKey).first();
-  const independentEvidenceCount=Math.max(roots.size,Number(priorState?.independent_evidence_count||0));
-  const canonicalOceanId=input.canonicalOceanId||priorState?.canonical_ocean_id||null;
-  const maxRelevance=Math.max(Number(priorState?.max_relevance_score||0),Number(aggregate?.max_relevance||0),input.relevanceScore);
-  const maxCommercial=Math.max(Number(priorState?.max_commercial_score||0),Number(aggregate?.max_commercial||0),input.commercialScore);
+  // Idempotency is resolved by the UNIQUE payload_hash. No D1 read is needed.
+  const inserted=Number(signalWrite?.meta?.changes ?? 1) > 0;
+  if(!inserted){
+    return {
+      duplicate:true,
+      payload_hash:hash,
+      ocean_key:input.oceanKey,
+      brain_alert:null,
+      delivery_mode:'inline_no_poll',
+      d1_reads_per_ingest:0
+    };
+  }
+
+  // Intake gates use only the evidence already carried by this signal. Accumulated
+  // state is maintained by SQL MAX/+1 operations; we never reread the Ocean here.
+  const independentEvidenceCount=input.evidenceRoots.length;
+  const maxRelevance=input.relevanceScore;
+  const maxCommercial=input.commercialScore;
   const gate=oceanGate({
-    canonicalOceanId,
+    canonicalOceanId:input.canonicalOceanId,
     independentEvidenceCount,
     relevanceScore:maxRelevance
   });
@@ -188,55 +168,106 @@ async function ingest(env,raw){
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,'pending',?)
     ON CONFLICT(ocean_key) DO UPDATE SET
       canonical_ocean_id=COALESCE(excluded.canonical_ocean_id,ocean_memory_state.canonical_ocean_id),
-      lifecycle_state=excluded.lifecycle_state,
-      signal_count=excluded.signal_count,
-      independent_evidence_count=excluded.independent_evidence_count,
+      lifecycle_state=CASE
+        WHEN ocean_memory_state.lifecycle_state='reinforced' THEN 'reinforced'
+        WHEN excluded.lifecycle_state='reinforced' THEN 'reinforced'
+        WHEN ocean_memory_state.lifecycle_state='review_ready' AND excluded.lifecycle_state='provisional' THEN 'review_ready'
+        WHEN ocean_memory_state.lifecycle_state='existing' AND excluded.lifecycle_state='provisional' THEN 'existing'
+        ELSE excluded.lifecycle_state
+      END,
+      signal_count=ocean_memory_state.signal_count+1,
+      independent_evidence_count=MAX(ocean_memory_state.independent_evidence_count,excluded.independent_evidence_count),
       max_relevance_score=MAX(ocean_memory_state.max_relevance_score,excluded.max_relevance_score),
       max_commercial_score=MAX(ocean_memory_state.max_commercial_score,excluded.max_commercial_score),
       latest_summary=excluded.latest_summary,
       latest_theme_candidates_json=excluded.latest_theme_candidates_json,
       latest_commercial_adjacency_json=excluded.latest_commercial_adjacency_json,
+      first_seen_at=MIN(ocean_memory_state.first_seen_at,excluded.first_seen_at),
       last_seen_at=MAX(ocean_memory_state.last_seen_at,excluded.last_seen_at),
-      promotion_gate_state=excluded.promotion_gate_state,
+      promotion_gate_state=CASE
+        WHEN ocean_memory_state.promotion_gate_state='eligible' OR excluded.promotion_gate_state='eligible' THEN 'eligible'
+        WHEN ocean_memory_state.promotion_gate_state='review' OR excluded.promotion_gate_state='review' THEN 'review'
+        ELSE 'observe'
+      END,
       snapshot_state='pending',
       updated_at=excluded.updated_at
   `).bind(
-    input.oceanKey,canonicalOceanId,gate.lifecycleState,Math.max(Number(priorState?.signal_count||0)+1,Number(aggregate?.signal_count||1)),independentEvidenceCount,
+    input.oceanKey,input.canonicalOceanId,gate.lifecycleState,1,independentEvidenceCount,
     maxRelevance,maxCommercial,input.summary,JSON.stringify(input.themeCandidates),
-    JSON.stringify(input.commercialAdjacency),aggregate?.first_seen||input.observedAt,
-    aggregate?.last_seen||input.observedAt,gate.promotionGateState,now
+    JSON.stringify(input.commercialAdjacency),input.observedAt,input.observedAt,
+    gate.promotionGateState,now
   ).run();
 
   let alertId=null;
+  let brainAlert=null;
   if(shouldAlert({
     kind:input.kind,independentEvidenceCount,
     relevanceScore:maxRelevance,commercialScore:maxCommercial
   })){
     alertId=id('oma_');
-    const priority=Math.max(maxRelevance,maxCommercial,roots.size>=2?70:0);
+    const priority=Math.max(maxRelevance,maxCommercial,independentEvidenceCount>=2?70:0);
+    const kind=alertKind(input,gate);
+    const payload={
+      summary:input.summary,
+      signal_kind:input.kind,
+      independent_evidence_count:independentEvidenceCount,
+      relevance_score:maxRelevance,
+      commercial_score:maxCommercial,
+      promotion_gate_state:gate.promotionGateState,
+      snapshot_required:true
+    };
+    // The ingest response itself is the delivery channel. Store only an audit row;
+    // do not create a polling queue that must be reread later.
     await env.GROWTH_DB.prepare(`
       INSERT INTO ocean_memory_alerts
-        (alert_id,ocean_key,signal_id,alert_kind,priority,payload_json,delivery_state,created_at)
-      VALUES (?,?,?,?,?,?,'pending',?)
+        (alert_id,ocean_key,signal_id,alert_kind,priority,payload_json,delivery_state,created_at,delivered_at)
+      VALUES (?,?,?,?,?,?,'delivered',?,?)
     `).bind(
-      alertId,input.oceanKey,signalId,alertKind(input,gate),priority,
-      JSON.stringify({
-        summary:input.summary,
-        signal_kind:input.kind,
-        independent_evidence_count:independentEvidenceCount,
-        relevance_score:maxRelevance,
-        commercial_score:maxCommercial,
-        promotion_gate_state:gate.promotionGateState,
-        snapshot_required:true
-      }),now
+      alertId,input.oceanKey,signalId,kind,priority,JSON.stringify(payload),now,now
     ).run();
+
+    brainAlert={
+      observation_id:alertId,
+      event_id:null,
+      territory_key:input.oceanKey,
+      provider_id:'ocean_memory',
+      model_id:null,
+      source_class:'public_web',
+      grounding_state:independentEvidenceCount>0?'grounded':'ungrounded',
+      response_excerpt:input.summary,
+      observed_at:now,
+      evidence_id:signalId,
+      strength:priority,
+      confidence_class:priority>=80?'high':priority>=60?'medium':'low',
+      confidence:priority/100,
+      semantic_observation_id:null,
+      need_id:null,
+      intent_id:null,
+      semantic_confidence_score:null,
+      semantic_ambiguity:0,
+      semantic_provider_name:null,
+      semantic_provider_version:null,
+      independent_roots:input.evidenceRoots,
+      evidence_refs:[signalId],
+      ocean_alert_kind:kind,
+      ocean_alert_priority:priority,
+      ocean_independent_evidence_count:independentEvidenceCount
+    };
   }
 
   return {
-    duplicate:false,signal_id:signalId,alert_id:alertId,ocean_key:input.oceanKey,
-    lifecycle_state:gate.lifecycleState,promotion_gate_state:gate.promotionGateState,
-    independent_evidence_count:independentEvidenceCount,snapshot_state:'pending',
-    github_required_for_persistence:false
+    duplicate:false,
+    signal_id:signalId,
+    alert_id:alertId,
+    ocean_key:input.oceanKey,
+    lifecycle_state:gate.lifecycleState,
+    promotion_gate_state:gate.promotionGateState,
+    independent_evidence_count:independentEvidenceCount,
+    snapshot_state:'pending',
+    github_required_for_persistence:false,
+    brain_alert:brainAlert,
+    delivery_mode:'inline_no_poll',
+    d1_reads_per_ingest:0
   };
 }
 function parseLimit(url){
