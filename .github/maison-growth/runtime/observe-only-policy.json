@@ -1,6 +1,6 @@
 {
   "policy_version": "observe_only_v1",
-  "current_stage": "private_observe_candidate",
+  "current_stage": "infra_only",
   "stages": {
     "infra_only": {
       "worker_enabled": false,
