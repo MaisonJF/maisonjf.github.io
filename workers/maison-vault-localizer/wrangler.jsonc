@@ -7,16 +7,18 @@
   "preview_urls": false,
   "triggers": {
     "crons": [
-      "* * * * *"
+      "17 0 * * *"
     ]
   },
   "vars": {
     "LOCALIZER_ENABLED": "true",
     "LOCALIZER_MODEL": "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
     "LOCALIZER_BATCH_SIZE": "24",
-    "LOCALIZER_ROUNDS_PER_CRON": "2",
+    "LOCALIZER_ROUNDS_PER_CRON": "1",
     "LOCALIZER_QUESTION_BATCH_SIZE": "24",
-    "LOCALIZER_ORACLE_BATCH_SIZE": "8"
+    "LOCALIZER_ORACLE_BATCH_SIZE": "8",
+    "LOCALIZER_BACKFILL_SIZE": "500",
+    "LOCALIZER_AI_CHUNK_SIZE": "25"
   },
   "ai": {
     "binding": "AI"

@@ -291,13 +291,46 @@ export async function runVaultLocalization(env,{locale}={}){
   return {results:[result],pending};
 }
 
+function isResourceLimit(error){
+  const message=String(error?.message||'').toLowerCase();
+  return message.includes('4006')||
+    message.includes('daily free allocation')||
+    message.includes('free tier daily row read limit')||
+    message.includes('exceeded d1')||
+    message.includes('rate limit')||
+    message.includes('quota');
+}
+
+async function readPendingTelemetry(db){
+  const row=await db.prepare(`
+    SELECT pending_total,pending_questions_pt_br,pending_questions_en,pending_questions_es,
+           pending_oracle_pt_br,pending_oracle_en,pending_oracle_es
+      FROM vault_localizer_telemetry WHERE singleton_id=1 LIMIT 1`).first();
+  if(!row)return null;
+  return {
+    total:Number(row.pending_total||0),
+    questions:{'pt-BR':Number(row.pending_questions_pt_br||0),en:Number(row.pending_questions_en||0),es:Number(row.pending_questions_es||0)},
+    oracle:{'pt-BR':Number(row.pending_oracle_pt_br||0),en:Number(row.pending_oracle_en||0),es:Number(row.pending_oracle_es||0)}
+  };
+}
+
+function decrementPending(snapshot,locale,questionsActivated){
+  if(!snapshot)return null;
+  const pending=structuredClone(snapshot);
+  pending.questions[locale]=Math.max(0,Number(pending.questions[locale]||0)-questionsActivated);
+  pending.total=Object.values(pending.questions).reduce((a,b)=>a+b,0)+Object.values(pending.oracle).reduce((a,b)=>a+b,0);
+  return pending;
+}
+
 async function runQuestionBackfill(env,locale){
   const db=env.GROWTH_DB;
-  await activateApproved(db,locale);
-  const candidates=await questionBatch(db,locale,500);
-  let questionsActivated=0,failedBatches=0;
-  for(let i=0;i<candidates.length;i+=25){
-    const batch=candidates.slice(i,i+25);
+  const limit=clamp(env.LOCALIZER_BACKFILL_SIZE,500,25,500);
+  const chunk=clamp(env.LOCALIZER_AI_CHUNK_SIZE,25,5,25);
+  const candidates=await questionBatch(db,locale,limit);
+  let questionsActivated=0,failedBatches=0,resourceLimited=false,attempted=0;
+  for(let i=0;i<candidates.length;i+=chunk){
+    const batch=candidates.slice(i,i+chunk);
+    attempted+=batch.length;
     try{
       const translated=await callTranslator(env,{locale,kind:'question',items:batch});
       questionsActivated+=await storeQuestions(db,locale,batch,translated);
@@ -308,11 +341,13 @@ async function runQuestionBackfill(env,locale){
         name:String(error?.name||'Error'),
         message:String(error?.message||'backfill_batch_failed').slice(0,500)
       }));
+      if(isResourceLimit(error)){resourceLimited=true;break;}
     }
   }
-  const pending=await pendingCounts(db);
-  await persistTelemetry(db,{locale,questionsActivated,oracleActivated:0,pending});
-  return {locale,questionsActivated,failedBatches,attempted:candidates.length,pending};
+  const previous=await readPendingTelemetry(db);
+  const pending=decrementPending(previous,locale,questionsActivated);
+  if(pending)await persistTelemetry(db,{locale,questionsActivated,oracleActivated:0,pending});
+  return {locale,questionsActivated,failedBatches,attempted,resourceLimited,pending};
 }
 
 function localeForSchedule(controller,env){
@@ -347,9 +382,10 @@ export default {
           attempted:Number(result?.attempted||0),
           questionsActivated:Number(result?.questionsActivated||0),
           failedBatches:Number(result?.failedBatches||0),
-          pendingTotal:Number(pending.total||0),
-          pendingQuestions:pending.questions||{},
-          pendingOracle:pending.oracle||{}
+          resourceLimited:Boolean(result?.resourceLimited),
+          pendingTotal:pending?Number(pending.total||0):null,
+          pendingQuestions:pending?.questions||null,
+          pendingOracle:pending?.oracle||null
         }));
         return result;
       }).catch(error=>{
