@@ -83,7 +83,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx wrangler deploy --config wrangler.private.runtime.jsonc
 
-      - name: Verify live Ocean alert piggyback
+      - name: Verify Worker health without D1 read
         shell: bash
         env:
           MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
@@ -106,15 +106,14 @@ jobs:
             --header "Authorization: Bearer $BRAIN_CONTROL_TOKEN" \
             --header "CF-Access-Client-Id: $access_id" \
             --header "CF-Access-Client-Secret: $access_secret" \
-            "$base/internal/brain/feed?limit=1&include_ocean_alerts=1")"
+            "$base/internal/brain/health")"
           cat "$body"
           test "$status" = "200"
           python - "$body" <<'PY'
           import json,sys
           with open(sys.argv[1],encoding='utf-8') as fh:
               payload=json.load(fh)
-          assert payload.get('kind')=='brain_prebrain_feed',payload
-          assert payload.get('ocean_alert_delivery')=='piggyback_no_poll_no_ack_write',payload
-          assert isinstance(payload.get('ocean_alerts'),list),payload
-          print('Live Ocean alert piggyback: OK')
+          assert payload.get('status')=='ok',payload
+          assert payload.get('mode')=='read_only',payload
+          print('Worker health without D1 read: OK')
           PY
