@@ -122,11 +122,10 @@ async function persistObservation(env, task, result) {
     summary:safeText,
     observedAt
   });
-  const inlineContentProposal=await buildEditorialProposal({
-    brainAlert:inlineBrainAlert,
-    oceanContext
-  });
-  const metadata = JSON.stringify({
+  // Build the editorial proposal only after Ocean Memory has applied its alert
+  // gate. This keeps OSIRIS -> Oceans -> Brain -> Content as one inline push path
+  // and prevents pre-gate proposals from being persisted accidentally.
+  const metadataBase={
     a13:true,
     territory_key:brainTerritoryKey,
     source_territory_key:task.territoryKey,
@@ -140,8 +139,11 @@ async function persistObservation(env, task, result) {
       match_terms:oceanContext.matchedTerms,
       relevance_score:oceanContext.relevanceScore,
       commercial_score:oceanContext.commercialScore
-    } : null,
-    content_proposal:inlineContentProposal
+    } : null
+  };
+  const metadata = JSON.stringify({
+    ...metadataBase,
+    content_proposal:null
   });
   const evidenceFacts = JSON.stringify({
     source_kind: sourceKind,
@@ -248,8 +250,21 @@ async function persistObservation(env, task, result) {
   }
 
   const brainAlert=oceanMemory?.brain_alert || inlineBrainAlert || null;
-  const contentProposal=inlineContentProposal;
+  const contentProposal=await buildEditorialProposal({
+    brainAlert,
+    oceanContext
+  });
   if(contentProposal){
+    // Persist the proposal onto the event Brain already reads. This is one small
+    // UPDATE in the same producer execution, not a new queue, cron or D1 poll.
+    await env.GROWTH_DB.prepare(`
+      UPDATE events
+      SET metadata_json=?
+      WHERE event_id=?
+    `).bind(JSON.stringify({
+      ...metadataBase,
+      content_proposal:contentProposal
+    }),eventId).run();
     console.info('MAISON_CONTENT_PROPOSAL',JSON.stringify({
       proposal_id:contentProposal.proposal_id,
       ocean_key:oceanContext.oceanKey,

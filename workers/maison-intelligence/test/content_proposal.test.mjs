@@ -64,3 +64,19 @@ test('physical ritual opportunity points only to an existing product destination
   assert.equal(proposal.destination.approved_existing_path,'/produtos/');
   assert.equal(proposal.destination.may_create_new_offer,false);
 });
+
+test('today proposal is still internal and cannot auto-publish or spend',async()=>{
+  const proposal=await buildEditorialProposal({
+    brainAlert:alert({ocean_alert_priority:94}),
+    oceanContext:{
+      oceanKey:'micro-luxo-como-recompensa-e-ritual',
+      matchedTerms:['little treat']
+    }
+  });
+  assert.equal(proposal.editorial_decision.worth_attention_today,true);
+  assert.equal(proposal.gates.human_editorial_review_required,true);
+  assert.equal(proposal.gates.automatic_publication,false);
+  assert.equal(proposal.gates.automatic_scheduling,false);
+  assert.equal(proposal.gates.spend_authorized,false);
+});
+
