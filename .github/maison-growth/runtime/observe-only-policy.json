@@ -1,6 +1,6 @@
 {
   "policy_version": "observe_only_v1",
-  "current_stage": "infra_only",
+  "current_stage": "private_observe_candidate",
   "stages": {
     "infra_only": {
       "worker_enabled": false,
@@ -106,6 +106,24 @@
       "experiment_execution_authorized": false,
       "requires_private_https_access": true,
       "requires_private_cta_context": true,
+      "requires_explicit_activation": true
+    },
+    "private_observe_candidate": {
+      "worker_enabled": true,
+      "kill_switch": false,
+      "osiris_osint_enabled": true,
+      "osiris_memory_enabled": false,
+      "brain_control_api_enabled": true,
+      "brain_proposal_api_enabled": false,
+      "brain_review_decision_enabled": false,
+      "model_providers_enabled": [
+        "openrouter_zero_cost"
+      ],
+      "outbound_authorized": false,
+      "spend_authorized": false,
+      "public_write_authorized": false,
+      "experiment_execution_authorized": false,
+      "requires_private_https_access": true,
       "requires_explicit_activation": true
     }
   },
