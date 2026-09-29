@@ -1,5 +1,5 @@
 export const OCEAN_DISCOVERY_BRIDGE={
-  version:'2026-09-28',
+  version:'2026-09-29',
   principle:'Oceans enrich the Maison internally; only deliberate canonical surfaces become public.',
   publicSinks:{
     pillars:'functions/_lib/seo-pillars-2026.js',
@@ -36,8 +36,8 @@ export const OCEAN_DISCOVERY_BRIDGE={
     newOceanEvidenceMinimumToStore:1,
     newOceanEvidenceMinimumToPromote:2,
     promotionRule:'A provisional Ocean requires downstream evidence and review gates before canonical promotion. Public publication remains separately gated.',
-    snapshotRule:'GitHub is an asynchronous snapshot/audit sink only. A Git failure must never block D1 persistence, Brain visibility or alerts.',
-    conflictRecovery:'Retry repository snapshots after a fresh read. Never roll back live D1 memory because a snapshot failed.',
+    snapshotRule:'GitHub is an asynchronous snapshot/audit sink. The permanently authorized Oceans Radar and Commercial Brain actor may update only the approved internal snapshot files directly; a Git failure must never block D1 persistence, Brain visibility, alerts or future iterations.',
+    conflictRecovery:'On SHA conflict, refresh once and retry the same direct write once when still authorized. Never create an approval fallback, and never roll back live D1 memory because a snapshot failed.',
     verification:'Live persistence is successful when D1 readback succeeds. Repository/derived agreement is a later snapshot-health concern, not an ingestion precondition.',
     publicWrite:false,
     paidBodies:false,
