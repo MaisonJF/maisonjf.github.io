@@ -216,16 +216,8 @@ async function ingest(env,raw){
       promotion_gate_state:gate.promotionGateState,
       snapshot_required:true
     };
-    // The ingest response itself is the delivery channel. Store only an audit row;
-    // do not create a polling queue that must be reread later.
-    await env.GROWTH_DB.prepare(`
-      INSERT INTO ocean_memory_alerts
-        (alert_id,ocean_key,signal_id,alert_kind,priority,payload_json,delivery_state,created_at,delivered_at)
-      VALUES (?,?,?,?,?,?,'delivered',?,?)
-    `).bind(
-      alertId,input.oceanKey,signalId,kind,priority,JSON.stringify(payload),now,now
-    ).run();
-
+    // Delivery is inline in this response. The persisted signal/state already form
+    // the audit trail, so no third D1 write is spent on a separate alert row.
     brainAlert={
       observation_id:alertId,
       event_id:null,
@@ -267,7 +259,8 @@ async function ingest(env,raw){
     github_required_for_persistence:false,
     brain_alert:brainAlert,
     delivery_mode:'inline_no_poll',
-    d1_reads_per_ingest:0
+    d1_reads_per_ingest:0,
+    d1_writes_per_unique_ingest:2
   };
 }
 function parseLimit(url){
@@ -286,28 +279,53 @@ async function memoryFeed(env,url){
 }
 async function snapshotFeed(env,url){
   const limit=parseLimit(url);
-  const states=await all(env.GROWTH_DB.prepare(`
-    SELECT * FROM ocean_memory_state
-    WHERE snapshot_state IN ('pending','error')
-    ORDER BY updated_at,ocean_key
+  const rows=await all(env.GROWTH_DB.prepare(`
+    SELECT
+      st.*,
+      sg.signal_id,sg.signal_kind,sg.source_ref,sg.summary AS signal_summary,
+      sg.evidence_roots_json,sg.theme_candidates_json,sg.commercial_adjacency_json,
+      sg.relevance_score AS signal_relevance_score,
+      sg.commercial_score AS signal_commercial_score,
+      sg.observed_at AS signal_observed_at
+    FROM ocean_memory_state st
+    LEFT JOIN ocean_memory_signals sg ON sg.signal_id=(
+      SELECT s2.signal_id
+      FROM ocean_memory_signals s2
+      WHERE s2.ocean_key=st.ocean_key
+      ORDER BY s2.observed_at DESC,s2.signal_id DESC
+      LIMIT 1
+    )
+    WHERE st.snapshot_state IN ('pending','error')
+    ORDER BY st.updated_at,st.ocean_key
     LIMIT ?
   `).bind(limit));
-  const rows=[];
-  for(const state of states){
-    const signals=await all(env.GROWTH_DB.prepare(`
-      SELECT signal_id,signal_kind,source_ref,summary,evidence_roots_json,theme_candidates_json,
-             commercial_adjacency_json,relevance_score,commercial_score,observed_at
-      FROM ocean_memory_signals WHERE ocean_key=? ORDER BY observed_at,signal_id
-    `).bind(state.ocean_key));
-    rows.push({...state,signals:signals.map(signal=>({
-      ...signal,
-      evidence_roots:JSON.parse(signal.evidence_roots_json||'[]'),
-      theme_candidates:JSON.parse(signal.theme_candidates_json||'[]'),
-      commercial_adjacency:JSON.parse(signal.commercial_adjacency_json||'[]'),
-      evidence_roots_json:undefined,theme_candidates_json:undefined,commercial_adjacency_json:undefined
-    }))});
-  }
-  return json({kind:'ocean_snapshot_feed',storage:'D1',github_role:'snapshot_only',rows});
+  const shaped=rows.map(row=>{
+    const signal=row.signal_id ? [{
+      signal_id:row.signal_id,
+      signal_kind:row.signal_kind,
+      source_ref:row.source_ref,
+      summary:row.signal_summary,
+      evidence_roots:parseJsonArray(row.evidence_roots_json),
+      theme_candidates:parseJsonArray(row.theme_candidates_json),
+      commercial_adjacency:parseJsonArray(row.commercial_adjacency_json),
+      relevance_score:row.signal_relevance_score,
+      commercial_score:row.signal_commercial_score,
+      observed_at:row.signal_observed_at
+    }] : [];
+    const {
+      signal_id,signal_kind,source_ref,signal_summary,evidence_roots_json,
+      theme_candidates_json,commercial_adjacency_json,signal_relevance_score,
+      signal_commercial_score,signal_observed_at,...state
+    }=row;
+    return {...state,signals:signal};
+  });
+  return json({
+    kind:'ocean_snapshot_feed',
+    storage:'D1',
+    github_role:'snapshot_only',
+    snapshot_mode:'latest_signal_only',
+    rows:shaped
+  });
 }
 async function markSnapshot(env,body){
   const keys=stringArray(body?.ocean_keys,'ocean_keys',100).map(cleanKey);
@@ -315,11 +333,12 @@ async function markSnapshot(env,body){
   const state=String(body?.state??'synced');
   if(!['synced','error'].includes(state)) throw new Error('invalid_snapshot_state');
   const now=new Date().toISOString();
-  for(const key of keys){
-    await env.GROWTH_DB.prepare(`
-      UPDATE ocean_memory_state SET snapshot_state=?,updated_at=? WHERE ocean_key=?
-    `).bind(state,now,key).run();
-  }
+  const placeholders=keys.map(()=>'?').join(',');
+  await env.GROWTH_DB.prepare(`
+    UPDATE ocean_memory_state
+    SET snapshot_state=?,updated_at=?
+    WHERE ocean_key IN (${placeholders})
+  `).bind(state,now,...keys).run();
   return json({ok:true,ocean_keys:keys,state});
 }
 async function alerts(env,url){
