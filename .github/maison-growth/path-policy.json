@@ -1,5 +1,5 @@
 {
-  "policy_version": "A0.4",
+  "policy_version": "A0.5",
   "default_repo_write": "deny",
   "precedence": "deny_overrides_allow",
   "protected_paths": [
@@ -96,7 +96,7 @@
       "requires_oceans_guard_pass": true
     },
     "ocean_intelligence_persist": {
-      "repo_write": false,
+      "repo_write": "authorized_internal_intelligence",
       "runtime_store": "D1:ocean_memory_signals/ocean_memory_state/ocean_memory_alerts",
       "authority": "permanent_human_authorization_2026-09-25",
       "github_role": "asynchronous_snapshot_and_audit_only",
@@ -112,10 +112,16 @@
         "no_private_conversation_content",
         "no_paid_body_content",
         "no_automatic_publication"
-      ]
+      ],
+      "allowed_paths": [
+        ".github/maison-growth/oceans/candidates.json",
+        ".github/maison-growth/brain/editorial-queue.json",
+        "functions/_lib/vpc-ocean-signals.generated.js"
+      ],
+      "failure_policy": "continue_intelligence_retry_persistence_next_iteration"
     },
     "commercial_recovery_capture": {
-      "repo_write": "internal_recovery_only",
+      "repo_write": "authorized_internal_intelligence",
       "allowed_paths": [
         ".github/maison-growth/brain/commercial-recovery-contract.json"
       ],
@@ -130,7 +136,8 @@
         "no_paid_body_content",
         "retry_unresolved_without_erasing_payload",
         "mark_integrated_only_after_destination_readback"
-      ]
+      ],
+      "failure_policy": "retry_next_iteration_without_blocking_brain"
     },
     "ocean_signal_ingest": {
       "repo_write": false,
@@ -148,7 +155,7 @@
       ]
     },
     "ocean_snapshot_export": {
-      "repo_write": "scheduled_internal_queue_only",
+      "repo_write": "authorized_internal_intelligence",
       "allowed_paths": [
         ".github/maison-growth/oceans/candidates.json",
         ".github/maison-growth/brain/editorial-queue.json",
@@ -157,11 +164,23 @@
       "source": "D1:ocean_memory_state",
       "failure_policy": "retry_without_blocking_ingest_alerts_or_brain",
       "constraints": [
+        "internal_intelligence_only",
         "derived_snapshot_only",
+        "read_before_write_with_current_blob_sha",
+        "preserve_human_review_and_editorial_state",
+        "deduplicate_before_write",
         "post_write_readback_verification",
-        "retry_after_fresh_read_on_sha_conflict",
-        "no_publication_side_effect"
-      ]
+        "retry_once_after_fresh_read_on_sha_conflict",
+        "never_block_future_research_analysis_or_ingest",
+        "no_branch_pr_issue_or_approval_fallback",
+        "no_publication_side_effect",
+        "no_price_discount_checkout_payment_legal_or_infrastructure_change",
+        "no_paid_body_content",
+        "no_personal_sensitive_or_private_conversation_data"
+      ],
+      "authority": "permanent_human_authorization_2026-09-25",
+      "actor_scope": "oceans_radar_and_commercial_brain",
+      "write_mode": "direct_existing_file_update_only"
     }
   },
   "protected_path_exceptions": [
