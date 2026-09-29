@@ -81,6 +81,54 @@ test('feed returns canonical evidence roots and composite cursor', async () => {
   assert.equal('independent_roots_json' in body.rows[0],false);
 });
 
+test('feed piggybacks bounded Ocean alerts only when explicitly requested', async () => {
+  const e=env((sql,params)=>{
+    if (/FROM brain_prebrain_feed/.test(sql)) return [{
+      observation_id:'obs_12345678-1234-1234-1234-123456789012',
+      event_id:'evt_x',
+      territory_key:'work',
+      provider_id:'osiris_news',
+      model_id:null,
+      source_class:'public_web',
+      grounding_state:'grounded',
+      response_excerpt:'base signal',
+      observed_at:'2026-09-29T08:00:00.000Z',
+      evidence_id:'evd_x',
+      strength:70,
+      confidence_class:'medium',
+      confidence:0.7,
+      independent_roots_json:'["https://example.org/base"]',
+      evidence_refs_json:'["evd_x"]'
+    }];
+    assert.match(sql,/FROM ocean_memory_alerts/);
+    assert.match(sql,/datetime\('now','-72 hours'\)/);
+    assert.equal(params.at(-1),20);
+    return [{
+      alert_id:'oma_12345678-1234-1234-1234-123456789012',
+      ocean_key:'adiar-o-sono-para-recuperar-autonomia',
+      signal_id:'oms_12345678-1234-1234-1234-123456789012',
+      alert_kind:'reinforced',
+      priority:82,
+      created_at:'2026-09-29T08:10:00.000Z',
+      payload_json:'{"summary":"tempo próprio nocturno reforçado"}',
+      evidence_roots_json:'["https://example.org/a","https://example.org/b"]',
+      independent_evidence_count:3
+    }];
+  });
+  const response=await handleBrainControlRequest(
+    req('/internal/brain/feed?limit=25&include_ocean_alerts=1'),
+    {...e,OCEAN_MEMORY_ENABLED:'true'}
+  );
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.ocean_alert_delivery,'piggyback_no_poll_no_ack_write');
+  assert.equal(body.ocean_alerts.length,1);
+  assert.equal(body.ocean_alerts[0].provider_id,'ocean_memory');
+  assert.equal(body.ocean_alerts[0].confidence,0.82);
+  assert.equal(body.ocean_alerts[0].ocean_independent_evidence_count,3);
+  assert.deepEqual(body.ocean_alerts[0].independent_roots,['https://example.org/a','https://example.org/b']);
+});
+
 test('cash feedback exposes all A3 economics with optional A14 lineage and no customer identity', async () => {
   const e=env((sql)=>{
     assert.match(sql,/FROM brain_cash_feedback/);
