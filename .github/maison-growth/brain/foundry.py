@@ -8,7 +8,9 @@ from typing import Mapping, Optional, Sequence
 ALLOWED_OFFER_TYPES={
     "physical_product","digital_product","ebook","service","workshop","experience",
     "b2b","wholesale","white_label","licensing","subscription","bundle",
-    "partnership","personalisation","corporate_gifting","ip_content_licensing","oracle"
+    "partnership","personalisation","corporate_gifting","ip_content_licensing","oracle",
+    "game_question","oracle_block","social_post","short_video","editorial_page",
+    "seo_opportunity","geo_aeo_answer"
 }
 
 
