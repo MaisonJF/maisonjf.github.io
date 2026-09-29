@@ -13,6 +13,7 @@ PRIVATE_STAGES = (
     "private_brain_read_candidate",
     "proposal_materialization_candidate",
     "human_review_decision_candidate",
+    "private_observe_candidate",
 )
 
 
@@ -46,10 +47,19 @@ def render_private_worker_config(
         raise ValueError("private_worker_stage_not_allowed")
     stage = policy["stages"][stage_name]
 
-    if stage.get("worker_enabled") is not False or stage.get("kill_switch") is not True:
-        raise ValueError("private_surface_stage_must_keep_collection_killed")
-    if stage.get("osiris_osint_enabled") is not False or stage.get("osiris_memory_enabled") is not False:
-        raise ValueError("private_surface_stage_must_keep_osiris_off")
+    observe_stage = stage_name == "private_observe_candidate"
+    if observe_stage:
+        if stage.get("worker_enabled") is not True or stage.get("kill_switch") is not False:
+            raise ValueError("private_observe_stage_must_enable_collection")
+        if stage.get("osiris_osint_enabled") is not True or stage.get("osiris_memory_enabled") is not False:
+            raise ValueError("private_observe_stage_requires_osiris_without_memory_mirror")
+        if stage.get("model_providers_enabled") != ["openrouter_zero_cost"]:
+            raise ValueError("private_observe_stage_only_allows_zero_cost_openrouter")
+    else:
+        if stage.get("worker_enabled") is not False or stage.get("kill_switch") is not True:
+            raise ValueError("private_surface_stage_must_keep_collection_killed")
+        if stage.get("osiris_osint_enabled") is not False or stage.get("osiris_memory_enabled") is not False:
+            raise ValueError("private_surface_stage_must_keep_osiris_off")
     for key in ("outbound_authorized", "spend_authorized", "public_write_authorized"):
         if stage.get(key) is not False:
             raise ValueError(f"private_surface_stage_{key}_must_be_false")
@@ -58,9 +68,11 @@ def render_private_worker_config(
 
     config = json.loads(json.dumps(template))
 
-    # Private Brain bring-up is HTTP + D1 only. Do not inherit collection/event
-    # triggers or model/queue bindings from the wider intelligence Worker.
-    for key in ("route", "routes", "triggers", "queues", "ai"):
+    # Read-only private surfaces strip autonomous execution. The explicitly
+    # authorised observe profile keeps cron + queue so OSIRIS/OpenRouter can
+    # collect into D1 while public writes, spend and experiments remain off.
+    strip_keys = ("route", "routes") if observe_stage else ("route", "routes", "triggers", "queues", "ai")
+    for key in strip_keys:
         config.pop(key, None)
     config["workers_dev"] = False
     config["preview_urls"] = False
@@ -71,13 +83,13 @@ def render_private_worker_config(
 
     vars_ = config.setdefault("vars", {})
     vars_.update({
-        "WORKER_ENABLED": "false",
-        "KILL_SWITCH": "true",
-        "OSIRIS_ENABLED": "false",
+        "WORKER_ENABLED": "true" if observe_stage else "false",
+        "KILL_SWITCH": "false" if observe_stage else "true",
+        "OSIRIS_ENABLED": "true" if observe_stage else "false",
         "OSIRIS_MEMORY_ENABLED": "false",
         "WORKERS_AI_ENABLED": "false",
         "OSIRIS_GATEWAY_ENABLED": "false",
-        "OPENROUTER_ENABLED": "false",
+        "OPENROUTER_ENABLED": "true" if observe_stage else "false",
         "OPENAI_ENABLED": "false",
         "GEMINI_ENABLED": "false",
         "PERPLEXITY_ENABLED": "false",
@@ -86,7 +98,7 @@ def render_private_worker_config(
         "SEARCH_VISIBILITY_ENABLED": "false",
         "GOOGLE_SEARCH_CONSOLE_ENABLED": "false",
         "BING_WEBMASTER_ENABLED": "false",
-        "SEARCH_VISIBILITY_PROBES_ENABLED": "false",
+        "SEARCH_VISIBILITY_PROBES_ENABLED": "true" if observe_stage else "false",
         "EUROSTAT_ENABLED": "false",
         "BASE_PT_ENABLED": "false",
         "OPENALEX_ENABLED": "false",
@@ -144,10 +156,10 @@ def main() -> None:
         "private_custom_domain_configured": hostname is not None,
         "private_hostname": hostname,
         "workers_dev_enabled": False,
-        "scheduled_triggers_present": False,
-        "queue_bindings_present": False,
-        "ai_binding_present": False,
-        "collection_enabled": False,
+        "scheduled_triggers_present": "triggers" in config,
+        "queue_bindings_present": "queues" in config,
+        "ai_binding_present": "ai" in config,
+        "collection_enabled": observe_stage,
         "public_write_authorized": False,
         "outbound_authorized": False,
         "spend_authorized": False,
