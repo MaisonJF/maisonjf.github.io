@@ -160,7 +160,7 @@ WHERE control_id='global';
 
 ## Cost discipline
 
-The grounded/AI research and GEO visibility-probe schedule runs daily at 04:17 UTC. The live zero-cost profile may use a separately capped OpenRouter free-model brand-representation probe; grounded generic-discovery probes run only on providers with web grounding. Search Console snapshots use their own cap and do not consume model calls. The passive OSIRIS scheduler wakes every three hours in the live zero-cost profile; source-specific cadences remain 3/6/12/24 hours with a separate per-source daily cap. With the default two AI territories and cap of two calls/provider/day, a configured AI provider can make at most two calls per UTC day. Increase only after inspecting real provider usage.
+The grounded/AI research and GEO visibility-probe work piggybacks on the 03:00 UTC three-hour scheduler tick instead of using a separate cron. The live zero-cost profile may use a separately capped OpenRouter free-model brand-representation probe; grounded generic-discovery probes run only on providers with web grounding. Search Console snapshots use their own cap and do not consume model calls. The passive OSIRIS scheduler wakes every three hours in the live zero-cost profile; source-specific cadences remain 3/6/12/24 hours with a separate per-source daily cap. With the default two AI territories and cap of two calls/provider/day, a configured AI provider can make at most two calls per UTC day. Increase only after inspecting real provider usage.
 
 When a provider reports cost metadata, A13 records it in `external_intelligence_daily_usage.reported_cost_usd`. Call caps remain authoritative because not every provider reports cost in the same way.
 
