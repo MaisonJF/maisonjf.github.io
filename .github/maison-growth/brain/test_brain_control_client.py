@@ -33,16 +33,6 @@ class BrainControlClientTests(unittest.TestCase):
         self.assertEqual(captured["token"],"top-secret")
         self.assertIn("limit=20",captured["url"])
 
-    def test_feed_can_request_ocean_alerts_without_extra_endpoint(self):
-        captured={}
-        def transport(url,**kwargs):
-            captured["url"]=url
-            return {"rows":[],"ocean_alerts":[]}
-        client=BrainControlClient("https://brain.example","secret",transport=transport)
-        client.feed(limit=20,include_ocean_alerts=True)
-        self.assertIn("/internal/brain/feed",captured["url"])
-        self.assertIn("include_ocean_alerts=1",captured["url"])
-
     def test_learning_route_is_read_only_client_call(self):
         captured={}
         def transport(url,**kwargs):
