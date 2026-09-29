@@ -29,6 +29,15 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           npx wrangler d1 execute maison-growth-engine --remote --command "
+          SELECT observation_id,event_id,territory_key,provider_id,model_id,source_class,
+                 grounding_state,response_excerpt,observed_at,evidence_id,strength,
+                 confidence_class,confidence,semantic_observation_id,need_id,intent_id,
+                 semantic_confidence_score,semantic_ambiguity,semantic_provider_name,
+                 semantic_provider_version,independent_roots_json,evidence_refs_json
+          FROM brain_prebrain_feed
+          ORDER BY observed_at,observation_id
+          LIMIT 1;
+
           SELECT
             a.alert_id,a.ocean_key,a.signal_id,a.alert_kind,a.priority,a.created_at,
             a.payload_json,s.evidence_roots_json,st.independent_evidence_count
