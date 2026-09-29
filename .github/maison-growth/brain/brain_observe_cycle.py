@@ -243,16 +243,7 @@ def build_observe_output() -> dict[str,Any]:
         access_client_secret=os.environ.get("CF_ACCESS_CLIENT_SECRET"),
     )
 
-    feed_payload=client.feed(limit=100,include_ocean_alerts=True)
-    feed=_rows(feed_payload)
-    ocean_alerts=[
-        dict(x) for x in feed_payload.get("ocean_alerts",[])
-        if isinstance(x,Mapping)
-    ] if isinstance(feed_payload.get("ocean_alerts",[]),list) else []
-    # Ocean alerts are already privacy-filtered and evidence-backed. Fold them into
-    # the same observe-only signal stream so Brain sees them without a separate
-    # poller, queue consumer or acknowledgement write.
-    feed.extend(ocean_alerts)
+    feed=_rows(client.feed(limit=100))
     solutions=_rows(client.solutions(limit=100))
     links=_rows(client.solution_links(limit=100))
     cash=_rows(client.cash_feedback(limit=100))
@@ -329,7 +320,6 @@ def build_observe_output() -> dict[str,Any]:
         "mode":"observe_only",
         "source":"authenticated_brain_control_api",
         "feed_rows":len(feed),
-        "ocean_alert_rows":len(ocean_alerts),
         "solution_rows":len(solutions),
         "solution_links":len(links),
         "cash_feedback_rows":len(cash),
