@@ -16,6 +16,10 @@ on:
       - '.github/workflows/maison-private-runtime.yml'
   workflow_dispatch:
 
+concurrency:
+  group: maison-private-runtime-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
