@@ -7,21 +7,9 @@ on:
     branches:
       - main
     paths:
-      - '.github/maison-growth/brain/migrations/0022_ocean_working_memory.sql'
-      - '.github/maison-growth/path-policy.json'
-      - '.github/maison-growth/brain/derived-artifacts-policy.json'
-      - 'functions/_lib/ocean-discovery-bridge.js'
-      - 'workers/maison-intelligence/src/ocean_memory.js'
-      - 'workers/maison-intelligence/src/index.js'
-      - 'workers/maison-intelligence/test/ocean_memory.test.mjs'
-      - 'workers/maison-intelligence/scripts/seed-ocean-memory.mjs'
-      - 'workers/maison-intelligence/scripts/verify-growth-schema.sh'
+      - 'workers/maison-intelligence/src/**'
       - 'workers/maison-intelligence/wrangler.jsonc'
-      - 'workers/maison-intelligence/src/control_api.js'
-      - 'workers/maison-intelligence/test/control_api.test.mjs'
-      - '.github/maison-growth/brain/brain_control_client.py'
-      - '.github/maison-growth/brain/brain_observe_cycle.py'
-      - '.github/maison-growth/brain/test_brain_control_client.py'
+      - 'workers/maison-intelligence/package.json'
       - '.github/workflows/maison-ocean-memory-deploy.yml'
 
 permissions:
