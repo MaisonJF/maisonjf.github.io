@@ -87,6 +87,7 @@ test('relevant Ocean ingest delivers Brain alert inline with zero D1 reads',asyn
   assert.equal(body.brain_alert.provider_id,'ocean_memory');
   assert.equal(body.brain_alert.territory_key,'adiar-o-sono-para-recuperar-autonomia');
   assert.equal(body.brain_alert.ocean_alert_kind,'commercial_opportunity');
-  assert.equal(db.writes.length,3);
+  assert.equal(db.writes.length,2);
+  assert.equal(body.d1_writes_per_unique_ingest,2);
 });
 
