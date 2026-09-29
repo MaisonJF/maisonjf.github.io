@@ -195,6 +195,48 @@ const EDITORIAL=Object.freeze({
   }
 });
 
+export function buildInlineBrainAlert({oceanContext,observationId,evidenceId,summary,observedAt}={}){
+  if(!oceanContext||!observationId||!evidenceId)return null;
+  const roots=[...(oceanContext.evidenceRoots||[])];
+  const relevance=Math.max(0,Math.min(100,Number(oceanContext.relevanceScore||0)));
+  const commercial=Math.max(0,Math.min(100,Number(oceanContext.commercialScore||0)));
+  const independent=roots.length;
+  const priority=Math.max(relevance,commercial,independent>=2?70:0);
+  if(priority<70)return null;
+  const kind=commercial>=70
+    ? 'commercial_opportunity'
+    : independent>=2
+      ? 'reinforced'
+      : 'enrichment';
+  return {
+    observation_id:observationId,
+    event_id:null,
+    territory_key:oceanContext.oceanKey,
+    provider_id:'ocean_context',
+    model_id:null,
+    source_class:'public_web',
+    grounding_state:independent>0?'grounded':'ungrounded',
+    response_excerpt:String(summary||'').slice(0,9000),
+    observed_at:observedAt||new Date().toISOString(),
+    evidence_id:evidenceId,
+    strength:priority,
+    confidence_class:priority>=80?'high':priority>=60?'medium':'low',
+    confidence:priority/100,
+    semantic_observation_id:null,
+    need_id:null,
+    intent_id:null,
+    semantic_confidence_score:null,
+    semantic_ambiguity:0,
+    semantic_provider_name:null,
+    semantic_provider_version:null,
+    independent_roots:roots,
+    evidence_refs:[evidenceId],
+    ocean_alert_kind:kind,
+    ocean_alert_priority:priority,
+    ocean_independent_evidence_count:independent
+  };
+}
+
 function priority(alert){
   return Math.max(0,Math.min(100,Number(alert?.ocean_alert_priority ?? alert?.strength ?? 0)));
 }
