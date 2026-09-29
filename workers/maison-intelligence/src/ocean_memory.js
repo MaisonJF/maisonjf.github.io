@@ -111,7 +111,7 @@ async function all(stmt){
   const out=await stmt.all();
   return Array.isArray(out?.results)?out.results:[];
 }
-async function ingest(env,raw){
+export async function ingestOceanMemory(env,raw){
   const input=normalizeOceanInput(raw);
   const hash=await sha256Hex(JSON.stringify({
     ocean_key:input.oceanKey,kind:input.kind,source_ref:input.sourceRef,
@@ -381,7 +381,7 @@ export async function handleOceanMemoryRequest(request,env){
     if(url.pathname==='/internal/oceans/ingest'&&request.method==='POST'){
       const text=await request.text();
       if(text.length>25000) return json({error:'payload_too_large'},413);
-      return json(await ingest(env,JSON.parse(text)));
+      return json(await ingestOceanMemory(env,JSON.parse(text)));
     }
     if(url.pathname==='/internal/oceans/memory'&&request.method==='GET') return await memoryFeed(env,url);
     if(url.pathname==='/internal/oceans/snapshot'&&request.method==='GET') return await snapshotFeed(env,url);
