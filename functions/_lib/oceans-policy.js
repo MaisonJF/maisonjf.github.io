@@ -1,14 +1,14 @@
 export const OCEANS_POLICY={
-  version:'2026-09-18',
+  version:'2026-09-29',
   growth:'unbounded',
-  growthCadence:'PT6H',
+  growthCadence:'adaptive-scheduled',
   defaultVisibility:'internal',
   defaultRobots:'noindex,nofollow',
   internalCandidateStore:'.github/maison-growth/oceans/candidates.json',
   publicPromotionSource:'functions/_lib/seo-pillars-2026.js',
   rules:[
     'New Oceans are internal by default.',
-    'Internal Ocean candidates may be enriched every six hours, but only when a genuinely distinct pain, intent or commercial adjacency is evidenced.',
+    'Internal Ocean candidates may be enriched on any authorized scheduled iteration when materially useful independent evidence, human language, moments, themes or commercial adjacency is found; never advance timestamps merely to prove activity.',
     'New Oceans must not enter a public sitemap automatically.',
     'New Oceans must not appear in public browse lists automatically.',
     'Respostas is not a public Ocean catalogue.',
