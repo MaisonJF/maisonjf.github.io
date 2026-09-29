@@ -10,9 +10,6 @@
       "database_id": "69bd373f-43be-4955-ac82-ac87d667d9f1"
     }
   ],
-  "triggers": {
-    "crons": ["* * * * *"]
-  },
   "vars": {
     "MAISON_SOS_SCHEDULER_ENABLED": "false",
     "MAISON_SOS_RESEND_ENABLED": "false",
