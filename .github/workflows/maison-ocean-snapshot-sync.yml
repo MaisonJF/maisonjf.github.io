@@ -3,15 +3,8 @@ run-name: Maison Ocean Snapshot Sync
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/maison-ocean-snapshot-sync.yml'
-      - 'workers/maison-intelligence/src/ocean_memory.js'
-      - 'workers/maison-intelligence/scripts/export-ocean-snapshot.mjs'
   schedule:
-    - cron: '23 * * * *'
+    - cron: '23 3 * * *'
 
 permissions:
   contents: write
