@@ -24,7 +24,7 @@
     "VIDEO_ZERO_COST_PROVIDERS_JSON": "[{\"id\":\"wan22-aoti-fast\",\"base\":\"https://zerogpu-aoti-wan2-2-fp8da-aoti-faster.hf.space\",\"api\":\"generate_video\",\"protocol\":\"wan22_aoti_9\"},{\"id\":\"wan22-r3gm-preview\",\"base\":\"https://r3gm-wan2-2-fp8da-aoti-preview.hf.space\",\"api\":\"generate_video\",\"protocol\":\"wan22_aoti_9\"}]",
     "BRAIN_REVIEW_DECISION_ENABLED": "false",
     "KILL_SWITCH": "false",
-    "PROMPTS_PER_RUN": "2",
+    "PROMPTS_PER_RUN": "1",
     "MAX_DAILY_CALLS_PER_PROVIDER": "1",
     "WORKERS_AI_ENABLED": "false",
     "WORKERS_AI_MODEL": "@cf/google/gemma-4-26b-a4b-it",
@@ -66,7 +66,7 @@
     "GOOGLE_SEARCH_CONSOLE_LAG_DAYS": "3",
     "MAX_DAILY_CALLS_PER_SEARCH_SOURCE": "10",
     "SEARCH_VISIBILITY_PROBES_ENABLED": "true",
-    "VISIBILITY_PROBES_PER_RUN": "2",
+    "VISIBILITY_PROBES_PER_RUN": "1",
     "MAX_DAILY_CALLS_PER_VISIBILITY_PROVIDER": "1",
     "BING_WEBMASTER_ENABLED": "false",
     "BING_WEBMASTER_SITE_URL": "https://maison-jf.com/"
