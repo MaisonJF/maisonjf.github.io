@@ -104,10 +104,66 @@ async function feed(env, url) {
     independent_roots_json:undefined,
     evidence_refs_json:undefined
   }));
+
+  // Low-cost Ocean alert hand-off: only piggyback on a Brain feed request when
+  // explicitly requested. No cron, no queue message, no delivery-state write.
+  let oceanAlerts=[];
+  if (url.searchParams.get('include_ocean_alerts') === '1' && enabled(env.OCEAN_MEMORY_ENABLED)) {
+    const alertLimit=Math.min(20,limit);
+    const alertRows=await all(env.GROWTH_DB.prepare(`
+      SELECT
+        a.alert_id,a.ocean_key,a.signal_id,a.alert_kind,a.priority,a.created_at,
+        a.payload_json,s.evidence_roots_json,st.independent_evidence_count
+      FROM ocean_memory_alerts a
+      JOIN ocean_memory_signals s ON s.signal_id=a.signal_id
+      JOIN ocean_memory_state st ON st.ocean_key=a.ocean_key
+      WHERE a.delivery_state='pending'
+        AND a.created_at >= datetime('now','-72 hours')
+      ORDER BY a.priority DESC,a.created_at DESC,a.alert_id DESC
+      LIMIT ?
+    `).bind(alertLimit));
+    oceanAlerts=alertRows.map(row=>{
+      let payload={};
+      try { payload=JSON.parse(row.payload_json || '{}'); } catch {}
+      const roots=parseJsonArray(row.evidence_roots_json);
+      const priority=Math.max(0,Math.min(100,Number(row.priority||0)));
+      const independentCount=Math.max(roots.length,Number(row.independent_evidence_count||0));
+      return {
+        observation_id:row.alert_id,
+        event_id:null,
+        territory_key:row.ocean_key,
+        provider_id:'ocean_memory',
+        model_id:null,
+        source_class:'public_web',
+        grounding_state:independentCount > 0 ? 'grounded' : 'ungrounded',
+        response_excerpt:String(payload.summary || '').slice(0,9000),
+        observed_at:row.created_at,
+        evidence_id:row.signal_id,
+        strength:priority,
+        confidence_class:priority >= 80 ? 'high' : priority >= 60 ? 'medium' : 'low',
+        confidence:priority/100,
+        semantic_observation_id:null,
+        need_id:null,
+        intent_id:null,
+        semantic_confidence_score:null,
+        semantic_ambiguity:0,
+        semantic_provider_name:null,
+        semantic_provider_version:null,
+        independent_roots:roots,
+        evidence_refs:[row.signal_id],
+        ocean_alert_kind:row.alert_kind,
+        ocean_alert_priority:priority,
+        ocean_independent_evidence_count:independentCount
+      };
+    }).filter(row=>row.response_excerpt);
+  }
+
   const last=rows.at(-1);
   return json({
     kind:'brain_prebrain_feed',
     rows,
+    ocean_alerts:oceanAlerts,
+    ocean_alert_delivery:'piggyback_no_poll_no_ack_write',
     next_cursor:last ? { after:last.observed_at, after_id:last.observation_id } : null
   });
 }
