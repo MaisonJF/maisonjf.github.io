@@ -324,7 +324,7 @@ function decrementPending(snapshot,locale,questionsActivated){
 
 async function runQuestionBackfill(env,locale){
   const db=env.GROWTH_DB;
-  const limit=clamp(env.LOCALIZER_BACKFILL_SIZE,500,25,500);
+  const limit=clamp(env.LOCALIZER_BACKFILL_SIZE,60,20,120);
   const chunk=clamp(env.LOCALIZER_AI_CHUNK_SIZE,25,5,25);
   const candidates=await questionBatch(db,locale,limit);
   let questionsActivated=0,failedBatches=0,resourceLimited=false,attempted=0;
@@ -357,8 +357,8 @@ function localeForSchedule(controller,env){
   const forced=String(env.LOCALIZER_LOCALE||'').trim();
   if(LOCALES.includes(forced))return forced;
   const when=Number(controller?.scheduledTime||Date.now());
-  const minute=new Date(when).getUTCMinutes();
-  return LOCALES[minute%LOCALES.length];
+  const utcDayIndex=Math.floor(when/86400000);
+  return LOCALES[((utcDayIndex%LOCALES.length)+LOCALES.length)%LOCALES.length];
 }
 
 async function runLocalizationRounds(env,locale){
