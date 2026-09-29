@@ -6,6 +6,21 @@ import { localizeOracleLabel } from './oracle-public-locales.js';
 
 export const PDI_PUBLIC_HIDDEN_THEME_SLUGS=Object.freeze(['amor-e-relacoes']);
 const HIDDEN_PUBLIC_THEMES=new Set(PDI_PUBLIC_HIDDEN_THEME_SLUGS);
+const PDI_CATALOGUE_CACHE_TTL_MS=5*60*1000;
+const PDI_CATALOGUE_CACHE=new Map();
+
+function cachedCatalogue(key){
+  const hit=PDI_CATALOGUE_CACHE.get(key);
+  if(!hit||hit.expiresAt<=Date.now()){
+    if(hit)PDI_CATALOGUE_CACHE.delete(key);
+    return null;
+  }
+  return structuredClone(hit.value);
+}
+function storeCatalogue(key,value){
+  PDI_CATALOGUE_CACHE.set(key,{value:structuredClone(value),expiresAt:Date.now()+PDI_CATALOGUE_CACHE_TTL_MS});
+  return value;
+}
 
 const PDI_LABELS={
   'pt-BR':{
@@ -53,19 +68,25 @@ export async function countLivePdiQuestions(db,theme,locale='pt-PT'){
 export async function pdiThemeAvailability(env,theme,locale='pt-PT'){
   const item=getPdiTheme(theme);
   if(!item||!isPublicPdiTheme(item.slug))return null;
-  const db=requireMaisonVault(env);
   const selectedLocale=normalizeMaisonLocale(locale);
+  const cacheKey='availability:'+selectedLocale+':'+item.slug;
+  const cached=cachedCatalogue(cacheKey);
+  if(cached)return cached;
+  const db=requireMaisonVault(env);
   const liveQuestions=await countLivePdiQuestions(db,item.slug,selectedLocale);
-  return {
+  return storeCatalogue(cacheKey,{
     ...localizePdiTheme(item,selectedLocale),
     locale:selectedLocale,
     available:liveQuestions>=PDI_MINIMUM_LIVE_QUESTIONS,
     liveQuestions
-  };
+  });
 }
 
 export async function listAvailablePdiThemes(env,locale='pt-PT'){
   const selectedLocale=normalizeMaisonLocale(locale);
+  const cacheKey='list:'+selectedLocale;
+  const cached=cachedCatalogue(cacheKey);
+  if(cached)return cached;
   const db=requireMaisonVault(env);
   let rows;
   if(selectedLocale==='pt-PT'){
@@ -95,7 +116,7 @@ export async function listAvailablePdiThemes(env,locale='pt-PT'){
     ).bind(selectedLocale).all();
   }
   const counts=new Map((rows.results||[]).map(row=>[String(row.theme),Number(row.count||0)]));
-  return listPdiThemes()
+  const themes=listPdiThemes()
     .filter(item=>isPublicPdiTheme(item.slug))
     .map(item=>({
       ...localizePdiTheme(item,selectedLocale),
@@ -103,4 +124,5 @@ export async function listAvailablePdiThemes(env,locale='pt-PT'){
       liveQuestions:counts.get(item.slug)||0
     }))
     .filter(item=>item.liveQuestions>=PDI_MINIMUM_LIVE_QUESTIONS);
+  return storeCatalogue(cacheKey,themes);
 }

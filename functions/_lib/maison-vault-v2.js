@@ -5,12 +5,22 @@ Only call experience-engine queries after vaultExperienceEngineReady() returns t
 import { normalizeMaisonLocale } from './maison-locales.js';
 import { vaultLocalizationReady } from './maison-localized-content.js';
 
+const EXPERIENCE_READY_TTL_MS=60*1000;
+const EXPERIENCE_READY_CACHE=new WeakMap();
 
 export async function vaultExperienceEngineReady(db){
+  const now=Date.now();
+  const cached=EXPERIENCE_READY_CACHE.get(db);
+  if(cached&&cached.expiresAt>now)return cached.value;
   try{
     const row=await db.prepare("SELECT meta_value FROM vault_meta WHERE meta_key='schema_version' LIMIT 1").first();
-    return ['vault_v2','vault_v3'].includes(row?.meta_value);
-  }catch{return false}
+    const value=['vault_v2','vault_v3'].includes(row?.meta_value);
+    EXPERIENCE_READY_CACHE.set(db,{value,expiresAt:now+EXPERIENCE_READY_TTL_MS});
+    return value;
+  }catch{
+    EXPERIENCE_READY_CACHE.set(db,{value:false,expiresAt:now+5000});
+    return false;
+  }
 }
 
 export async function listActiveOracleBlocks(db,territory,locale='pt-PT'){

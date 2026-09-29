@@ -1,8 +1,13 @@
 import {normalizeVaultVpcRow} from './vpc-question-engine.js';
 
+const PUBLIC_VPC_CACHE_TTL_MS=5*60*1000;
+const PUBLIC_VPC_CACHE=new Map();
+
 export async function listActivePublicVpcQuestions(db,test){
   const theme=themeForTest(test);
   if(!theme)return [];
+  const cached=PUBLIC_VPC_CACHE.get(theme);
+  if(cached&&cached.expiresAt>Date.now())return structuredClone(cached.rows);
   try{
     const result=await db.prepare(
       `SELECT question_id,text,theme,product_fit_json,source_ocean_id,status,exposure,lifecycle_state,rotation_state
@@ -15,9 +20,11 @@ export async function listActivePublicVpcQuestions(db,test){
         ORDER BY question_id`
     ).bind(theme).all();
 
-    return (result.results||[])
+    const rows=(result.results||[])
       .map(normalizeVaultVpcRow)
       .filter(Boolean);
+    PUBLIC_VPC_CACHE.set(theme,{rows,expiresAt:Date.now()+PUBLIC_VPC_CACHE_TTL_MS});
+    return structuredClone(rows);
   }catch{
     return [];
   }

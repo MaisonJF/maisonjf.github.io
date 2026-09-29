@@ -37,7 +37,9 @@ function json(payload,status=200){
     status,
     headers:{
       'content-type':'application/json; charset=utf-8',
-      'cache-control':'no-store',
+      'cache-control':status===200
+        ? 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400'
+        : 'no-store',
       'x-content-type-options':'nosniff'
     }
   });

@@ -9,11 +9,22 @@ export const ORACLE_REQUIRED_ROLES=Object.freeze([
   'opening','recognition','tension','counterpoint','reframe','movement','close'
 ]);
 
+const LOCALIZATION_READY_TTL_MS=60*1000;
+const LOCALIZATION_READY_CACHE=new WeakMap();
+
 export async function vaultLocalizationReady(db){
+  const now=Date.now();
+  const cached=LOCALIZATION_READY_CACHE.get(db);
+  if(cached&&cached.expiresAt>now)return cached.value;
   try{
     const row=await db.prepare("SELECT meta_value FROM vault_meta WHERE meta_key='schema_version' LIMIT 1").first();
-    return row?.meta_value==='vault_v3';
-  }catch{return false}
+    const value=row?.meta_value==='vault_v3';
+    LOCALIZATION_READY_CACHE.set(db,{value,expiresAt:now+LOCALIZATION_READY_TTL_MS});
+    return value;
+  }catch{
+    LOCALIZATION_READY_CACHE.set(db,{value:false,expiresAt:now+5000});
+    return false;
+  }
 }
 
 export async function countLiveQuestionsForLocale(db,theme,locale='pt-PT'){
