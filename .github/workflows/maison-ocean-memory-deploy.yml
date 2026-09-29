@@ -76,31 +76,14 @@ jobs:
             --private-url "$BRAIN_CONTROL_API_URL" \
             --output workers/maison-intelligence/wrangler.private.runtime.jsonc
 
-      - name: Verify autonomous observe credentials
-        shell: bash
-        env:
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: |
-          set -euo pipefail
-          test -n "$OPENROUTER_API_KEY"
-          echo "OpenRouter credential present (value not printed)."
-
-      - name: Deploy Ocean memory + autonomous observe runtime
+      - name: Deploy Ocean memory + alert piggyback runtime
         working-directory: workers/maison-intelligence
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx wrangler deploy --config wrangler.private.runtime.jsonc
 
-      - name: Sync OpenRouter secret to Worker
-        working-directory: workers/maison-intelligence
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: printf '%s' "$OPENROUTER_API_KEY" | npx wrangler secret put OPENROUTER_API_KEY --config wrangler.private.runtime.jsonc
-
-      - name: Verify live Ocean memory
+      - name: Verify live Ocean alert piggyback
         shell: bash
         env:
           MAISON_BRAIN_PRIVATE_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
@@ -123,15 +106,15 @@ jobs:
             --header "Authorization: Bearer $BRAIN_CONTROL_TOKEN" \
             --header "CF-Access-Client-Id: $access_id" \
             --header "CF-Access-Client-Secret: $access_secret" \
-            "$base/internal/oceans/memory?limit=1")"
+            "$base/internal/brain/feed?limit=1&include_ocean_alerts=1")"
           cat "$body"
           test "$status" = "200"
           python - "$body" <<'PY'
           import json,sys
           with open(sys.argv[1],encoding='utf-8') as fh:
               payload=json.load(fh)
-          assert payload.get('kind')=='ocean_working_memory',payload
-          assert payload.get('storage')=='D1',payload
-          assert payload.get('github_role')=='snapshot_only',payload
-          print('Live Ocean memory: OK')
+          assert payload.get('kind')=='brain_prebrain_feed',payload
+          assert payload.get('ocean_alert_delivery')=='piggyback_no_poll_no_ack_write',payload
+          assert isinstance(payload.get('ocean_alerts'),list),payload
+          print('Live Ocean alert piggyback: OK')
           PY
