@@ -9,6 +9,15 @@ window.MAISON_EBOOKS=[
     price:5.99,currency:'EUR',cover:'/images/ebooks/para-de-ignorar-final.webp',media:[{role:'cover',src:'/images/ebooks/para-de-ignorar-final.webp',alt:'Capa do ebook Pára de Ignorar!, de João Fadario',aspect:'book',caption:'Pára de Ignorar! · João Fadario'}],purchaseUrl:null,featured:true
   },
   {
+    slug:'raio-azul',
+    checkoutId:'raio-azul',
+    title:'Raio Azul',
+    collection:'Espiritualidade · Colecção Os Sete Raios · Éditions Maison JF',
+    language:'pt-PT',format:'ebook',formats:['pdf','epub'],status:'published',
+    description:'Vontade, protecção e direcção sem fazer guerra à própria vida. O primeiro volume da Colecção Os Sete Raios aproxima tradição espiritual, reflexão e prática com linguagem humana.',
+    price:3.50,currency:'EUR',cover:'/images/ebooks/raio-azul.svg',media:[{role:'cover',src:'/images/ebooks/raio-azul.svg',alt:'Capa do ebook Raio Azul, de João Fadario',aspect:'book',caption:'Colecção Os Sete Raios · Raio Azul'}],purchaseUrl:null,featured:true
+  },
+  {
     slug:'virgulas-do-destino-o-turista',
     checkoutId:'turista',
     title:'Vírgulas do Destino: O Turista',
