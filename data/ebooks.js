@@ -15,7 +15,7 @@ window.MAISON_EBOOKS=[
     collection:'Espiritualidade · Colecção Os Sete Raios · Éditions Maison JF',
     language:'pt-PT',format:'ebook',formats:['pdf','epub'],status:'published',
     description:'Vontade, protecção e direcção sem fazer guerra à própria vida. O primeiro volume da Colecção Os Sete Raios aproxima tradição espiritual, reflexão e prática com linguagem humana.',
-    price:3.50,currency:'EUR',cover:'/images/ebooks/raio-azul.svg',media:[{role:'cover',src:'/images/ebooks/raio-azul.svg',alt:'Capa do ebook Raio Azul, de João Fadario',aspect:'book',caption:'Colecção Os Sete Raios · Raio Azul'}],purchaseUrl:null,featured:true
+    price:3.50,currency:'EUR',cover:'/images/ebooks/raio-azul.webp',media:[{role:'cover',src:'/images/ebooks/raio-azul.webp',alt:'Capa do ebook Raio Azul, de João Fadario',aspect:'book',caption:'Colecção Os Sete Raios · Raio Azul'}],purchaseUrl:null,featured:true
   },
   {
     slug:'virgulas-do-destino-o-turista',
