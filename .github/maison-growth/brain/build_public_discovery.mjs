@@ -278,6 +278,7 @@ export function writePublicDiscovery({check=false,validate=false}={}){
   }
   fs.writeFileSync(OUTPUT,out);
   console.log('Wrote MAISON public discovery graph');
+  console.log('DEBUG_ORPHANS '+JSON.stringify(buildPublicDiscovery().summary.orphan_pages));
   return true;
 }
 const self=fileURLToPath(import.meta.url);
