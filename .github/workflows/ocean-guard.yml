@@ -3,7 +3,23 @@ name: Oceans Guard
 on:
   push:
     branches: [main]
+    paths:
+      - '.github/maison-growth/**'
+      - 'functions/**'
+      - 'data/**'
+      - 'workers/maison-vault-localizer/**'
+      - '.github/workflows/ocean-guard.yml'
   pull_request:
+    paths:
+      - '.github/maison-growth/**'
+      - 'functions/**'
+      - 'data/**'
+      - 'workers/maison-vault-localizer/**'
+      - '.github/workflows/ocean-guard.yml'
+
+concurrency:
+  group: oceans-guard-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
