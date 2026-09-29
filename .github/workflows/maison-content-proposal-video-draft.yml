@@ -94,11 +94,15 @@ jobs:
               -H "CF-Access-Client-Secret: ${CF_ACCESS_CLIENT_SECRET}" \
               "${BRAIN_CONTROL_API_URL%/}/internal/brain/feed?limit=100" \
               > /tmp/maison-brain-feed.json
-            python .github/maison-growth/content-distribution/proposal_video_draft.py \
-              select \
-              --input /tmp/maison-brain-feed.json \
-              --output /tmp/maison-content-proposal.json \
-              ${PROPOSAL_ID:+--proposal-id "$PROPOSAL_ID"}
+            select_args=(
+              select
+              --input /tmp/maison-brain-feed.json
+              --output /tmp/maison-content-proposal.json
+            )
+            if [[ -n "$PROPOSAL_ID" ]]; then
+              select_args+=(--proposal-id "$PROPOSAL_ID")
+            fi
+            python .github/maison-growth/content-distribution/proposal_video_draft.py "${select_args[@]}"
           fi
           python .github/maison-growth/content-distribution/proposal_video_draft.py \
             manifest \
