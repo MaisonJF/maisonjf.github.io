@@ -116,6 +116,28 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["OPENROUTER_ENABLED"], "false")
         self.assertEqual(vars_["OSIRIS_GATEWAY_ENABLED"], "false")
 
+
+    def test_private_observe_keeps_osiris_openrouter_cron_and_queue_alive(self):
+        cfg = render_private_worker_config(
+            stage_name="private_observe_candidate",
+            template=self.live_config,
+            database_id=self.database_id,
+            private_url="https://brain.private.test/",
+        )
+        vars_ = cfg["vars"]
+        self.assertEqual(vars_["WORKER_ENABLED"], "true")
+        self.assertEqual(vars_["KILL_SWITCH"], "false")
+        self.assertEqual(vars_["OSIRIS_ENABLED"], "true")
+        self.assertEqual(vars_["OPENROUTER_ENABLED"], "true")
+        self.assertEqual(vars_["BRAIN_CONTROL_API_ENABLED"], "true")
+        self.assertEqual(vars_["BRAIN_PROPOSAL_API_ENABLED"], "false")
+        self.assertEqual(vars_["BRAIN_REVIEW_DECISION_ENABLED"], "false")
+        self.assertEqual(vars_["OSIRIS_MEMORY_ENABLED"], "false")
+        self.assertIn("triggers", cfg)
+        self.assertIn("queues", cfg)
+        self.assertIn("ai", cfg)
+        self.assertEqual(cfg["routes"], [{"pattern": "brain.private.test", "custom_domain": True}])
+
     def test_existing_database_id_is_preserved_without_override(self):
         expected = self.live_config["d1_databases"][0]["database_id"]
         cfg = render_private_worker_config(
