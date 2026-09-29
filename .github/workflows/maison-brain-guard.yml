@@ -21,6 +21,10 @@ on:
       - '.github/workflows/maison-brain-guard.yml'
   workflow_dispatch:
 
+concurrency:
+  group: maison-brain-guard-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
