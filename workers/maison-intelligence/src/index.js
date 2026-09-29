@@ -16,7 +16,8 @@ import { handleA2IngestRequest } from './a2_runtime.js';
 import { handleA11LearningRequest } from './a11_runtime.js';
 import { handleVideoGenerationRequest } from './video_generation.js';
 import { handleMaisonMcpRequest } from './mcp_video.js';
-import { handleOceanMemoryRequest } from './ocean_memory.js';
+import { handleOceanMemoryRequest, ingestOceanMemory } from './ocean_memory.js';
+import { routeOceanContext } from './ocean_context.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -84,10 +85,17 @@ async function persistObservation(env, task, result) {
   const safeText = privacySafeText(result.text);
   if (!safeText) throw new Error('empty_provider_response');
   const citations = uniqueCanonicalUrls(result.citations ?? []);
+  const oceanContext=routeOceanContext({
+    text:safeText,
+    territoryKey:task.territoryKey,
+    providerId:result.providerId,
+    citations
+  });
+  const brainTerritoryKey=oceanContext?.oceanKey || task.territoryKey;
   const responseHash = await sha256Hex(safeText);
   const payloadHash = await sha256Hex(JSON.stringify({
-    provider: result.providerId, model: result.modelId, territory: task.territoryKey,
-    responseHash, citations
+    provider: result.providerId, model: result.modelId, territory: brainTerritoryKey,
+    sourceTerritory:task.territoryKey,responseHash, citations
   }));
   const eventId = id('evt_');
   const observationId = id('obs_');
@@ -107,14 +115,25 @@ async function persistObservation(env, task, result) {
   const evidenceKind = result.evidenceKind || 'demand';
   const sourceKind = result.sourceKind || 'external_intelligence';
   const metadata = JSON.stringify({
-    a13: true, territory_key: task.territoryKey, provider_id: result.providerId,
-    model_id: result.modelId, grounding_state: groundingState,
-    independent_evidence_roots: independentEvidenceRoots,
-    source_kind: sourceKind
+    a13:true,
+    territory_key:brainTerritoryKey,
+    source_territory_key:task.territoryKey,
+    provider_id:result.providerId,
+    model_id:result.modelId,
+    grounding_state:groundingState,
+    independent_evidence_roots:independentEvidenceRoots,
+    source_kind:sourceKind,
+    ocean_context:oceanContext ? {
+      ocean_key:oceanContext.oceanKey,
+      match_terms:oceanContext.matchedTerms,
+      relevance_score:oceanContext.relevanceScore,
+      commercial_score:oceanContext.commercialScore
+    } : null
   });
   const evidenceFacts = JSON.stringify({
     source_kind: sourceKind,
-    territory_key: task.territoryKey,
+    territory_key: brainTerritoryKey,
+    source_territory_key: task.territoryKey,
     provider_id: result.providerId,
     model_id: result.modelId,
     grounding_state: groundingState,
@@ -137,7 +156,7 @@ async function persistObservation(env, task, result) {
       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     `).bind(
       observationId,eventId,task.taskKey,result.providerId,result.modelId ?? null,result.sourceClass,
-      task.territoryKey,task.promptFingerprint,responseHash,groundingState,safeText,
+      brainTerritoryKey,task.promptFingerprint,responseHash,groundingState,safeText,
       JSON.stringify(citations),JSON.stringify(result.usage ?? {}),result.requestId ?? null,observedAt
     ),
     env.GROWTH_DB.prepare(`
@@ -180,6 +199,48 @@ async function persistObservation(env, task, result) {
   } catch (error) {
     console.error('Osiris Memory mirror failed', observationId, error?.message ?? error);
   }
+
+  let oceanMemory=null;
+  if(oceanContext && String(env.OCEAN_MEMORY_ENABLED ?? '').toLowerCase()==='true'){
+    try{
+      oceanMemory=await ingestOceanMemory(env,{
+        kind:oceanContext.kind,
+        ocean_key:oceanContext.oceanKey,
+        canonical_ocean_id:oceanContext.canonicalOceanId,
+        source_ref:'a13:'+observationId,
+        source_observation_id:observationId,
+        summary:safeText.slice(0,4000),
+        evidence_roots:oceanContext.evidenceRoots,
+        theme_candidates:oceanContext.matchedTerms,
+        commercial_adjacency:[{
+          source:'live_intelligence',
+          provider_id:result.providerId,
+          source_territory:task.territoryKey
+        }],
+        relevance_score:oceanContext.relevanceScore,
+        commercial_score:oceanContext.commercialScore,
+        observed_at:observedAt
+      });
+      if(oceanMemory?.brain_alert){
+        console.info('MAISON_BRAIN_ALERT',JSON.stringify({
+          ocean_key:oceanContext.oceanKey,
+          priority:oceanMemory.brain_alert.ocean_alert_priority,
+          alert_kind:oceanMemory.brain_alert.ocean_alert_kind,
+          observation_id:observationId
+        }));
+      }
+    }catch(error){
+      console.error('Ocean inline context failed',observationId,error?.message ?? error);
+    }
+  }
+
+  return {
+    observationId,eventId,evidenceId,
+    territoryKey:brainTerritoryKey,
+    sourceTerritoryKey:task.territoryKey,
+    oceanContext,
+    brainAlert:oceanMemory?.brain_alert || null
+  };
 }
 
 async function processSourceTask(env, task) {
@@ -201,8 +262,11 @@ async function processSourceTask(env, task) {
     throw error;
   }
 
-  await persistObservation(env, task, result);
-  return { stored: true, provider: task.providerId, territory: task.territoryKey };
+  const persisted=await persistObservation(env,task,result);
+  return {
+    stored:true,provider:task.providerId,territory:persisted.territoryKey,
+    sourceTerritory:persisted.sourceTerritoryKey,brainAlert:persisted.brainAlert
+  };
 }
 
 async function processPublicSourceTask(env, task) {
@@ -223,8 +287,11 @@ async function processPublicSourceTask(env, task) {
     await markUsage(env, task.providerId, day, false, null);
     throw error;
   }
-  await persistObservation(env, task, result);
-  return { stored: true, provider: task.providerId, territory: task.territoryKey };
+  const persisted=await persistObservation(env,task,result);
+  return {
+    stored:true,provider:task.providerId,territory:persisted.territoryKey,
+    sourceTerritory:persisted.sourceTerritoryKey,brainAlert:persisted.brainAlert
+  };
 }
 
 async function processSearchVisibilityTask(env, task) {
@@ -246,8 +313,11 @@ async function processSearchVisibilityTask(env, task) {
     await markUsage(env, usageKey, day, false, null);
     throw error;
   }
-  await persistObservation(env, task, result);
-  return { stored: true, provider: task.providerId, territory: task.territoryKey };
+  const persisted=await persistObservation(env,task,result);
+  return {
+    stored:true,provider:task.providerId,territory:persisted.territoryKey,
+    sourceTerritory:persisted.sourceTerritoryKey,brainAlert:persisted.brainAlert
+  };
 }
 
 async function processVisibilityProbeTask(env, task) {
@@ -271,8 +341,11 @@ async function processVisibilityProbeTask(env, task) {
     await markUsage(env, usageKey, day, false, null);
     throw error;
   }
-  await persistObservation(env, task, result);
-  return { stored: true, provider: task.providerId, territory: task.territoryKey, probe: task.probe.id };
+  const persisted=await persistObservation(env,task,result);
+  return {
+    stored:true,provider:task.providerId,territory:persisted.territoryKey,
+    sourceTerritory:persisted.sourceTerritoryKey,probe:task.probe.id,brainAlert:persisted.brainAlert
+  };
 }
 async function processTask(env, task) {
   const day=task.day || utcDay();
@@ -293,8 +366,11 @@ async function processTask(env, task) {
     await markUsage(env, task.providerId, day, false, null);
     throw error;
   }
-  await persistObservation(env, task, result);
-  return { stored: true, provider: task.providerId, territory: task.territoryKey };
+  const persisted=await persistObservation(env,task,result);
+  return {
+    stored:true,provider:task.providerId,territory:persisted.territoryKey,
+    sourceTerritory:persisted.sourceTerritoryKey,brainAlert:persisted.brainAlert
+  };
 }
 
 async function enqueueOsirisRun(env,scheduledDate,getControl=()=>controlState(env)) {
@@ -495,11 +571,20 @@ export default {
       const task = message.body;
       if (!task || !['sensor_query','source_snapshot','public_source_snapshot','search_visibility_snapshot','visibility_probe'].includes(task.kind)) { message.ack(); continue; }
       try {
-        if (task.kind === 'source_snapshot') await processSourceTask(env, task);
-        else if (task.kind === 'public_source_snapshot') await processPublicSourceTask(env, task);
-        else if (task.kind === 'search_visibility_snapshot') await processSearchVisibilityTask(env, task);
-        else if (task.kind === 'visibility_probe') await processVisibilityProbeTask(env, task);
-        else await processTask(env, task);
+        let outcome;
+        if (task.kind === 'source_snapshot') outcome=await processSourceTask(env,task);
+        else if (task.kind === 'public_source_snapshot') outcome=await processPublicSourceTask(env,task);
+        else if (task.kind === 'search_visibility_snapshot') outcome=await processSearchVisibilityTask(env,task);
+        else if (task.kind === 'visibility_probe') outcome=await processVisibilityProbeTask(env,task);
+        else outcome=await processTask(env,task);
+        if(outcome?.brainAlert){
+          console.info('MAISON_BRAIN_INLINE_DELIVERY',JSON.stringify({
+            territory:outcome.territory,
+            source_territory:outcome.sourceTerritory,
+            alert_kind:outcome.brainAlert.ocean_alert_kind,
+            priority:outcome.brainAlert.ocean_alert_priority
+          }));
+        }
         message.ack();
       } catch (error) {
         console.error('A13 sensor task failed', task.providerId, task.territoryKey, error?.message ?? error);
