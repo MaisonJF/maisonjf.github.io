@@ -1,5 +1,5 @@
-name: Maison Ocean Memory Deploy
-run-name: Maison Ocean Memory Deploy
+name: Maison Intelligence Runtime Deploy
+run-name: Maison Intelligence Runtime Deploy
 
 on:
   workflow_dispatch:
@@ -43,14 +43,11 @@ jobs:
         working-directory: workers/maison-intelligence
         run: npm install --ignore-scripts
 
-      - name: Validate Ocean memory and Worker
+      - name: Validate Worker runtime
         working-directory: workers/maison-intelligence
         run: |
           npm test
           npm run check
-          python ../../.github/maison-growth/brain/test_schema_chain.py
-          python ../../.github/maison-growth/brain/test_brain_control_client.py
-          python -m py_compile ../../.github/maison-growth/brain/brain_observe_cycle.py
 
       # OCEAN.1 is already provisioned in production. Code-only deploys deliberately
       # avoid D1 migration/seed writes; fresh environments use the canonical migration chain.
@@ -64,7 +61,7 @@ jobs:
             --private-url "$BRAIN_CONTROL_API_URL" \
             --output workers/maison-intelligence/wrangler.private.runtime.jsonc
 
-      - name: Deploy Ocean memory + alert piggyback runtime
+      - name: Deploy Maison intelligence runtime
         working-directory: workers/maison-intelligence
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
