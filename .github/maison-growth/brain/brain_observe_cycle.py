@@ -295,6 +295,20 @@ def build_observe_output() -> dict[str,Any]:
     for territory,refs in runtime_memory.refs_by_territory.items():
         _append_context(knowledge_context,territory,refs)
 
+    content_proposals=[
+        dict(row.get("content_proposal"))
+        for row in feed
+        if isinstance(row.get("content_proposal"),Mapping)
+        and row.get("content_proposal",{}).get("state")=="ready_for_editorial_review"
+    ]
+    content_proposals.sort(
+        key=lambda item:(
+            0 if item.get("editorial_decision",{}).get("priority_band")=="today" else 1,
+            -int(item.get("source",{}).get("priority") or 0),
+            str(item.get("proposal_id") or "")
+        )
+    )
+
     packets=run_brain_cycle(
         rows=feed,
         similarity_threshold=float(os.environ.get("MAISON_PREBRAIN_SIMILARITY","0.45")),
@@ -328,6 +342,8 @@ def build_observe_output() -> dict[str,Any]:
         "runtime_memory_status":dict(runtime_memory.status),
         "commercial_asset_status":asset_context.summary(),
         "ocean_commercial_hint_matches":ocean_commercial_hint_matches,
+        "content_proposal_rows":len(content_proposals),
+        "content_proposals":content_proposals,
         "packets":[packet_to_dict(x) for x in packets],
         "a14_previews":[preview_to_dict(x) for x in a14_previews],
         "writes_performed":False,
