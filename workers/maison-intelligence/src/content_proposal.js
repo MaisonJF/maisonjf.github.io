@@ -240,6 +240,57 @@ export function buildInlineBrainAlert({oceanContext,observationId,evidenceId,sum
 function priority(alert){
   return Math.max(0,Math.min(100,Number(alert?.ocean_alert_priority ?? alert?.strength ?? 0)));
 }
+function sourceImageFor(axis){
+  if(axis==='casa')return 'https://maison-jf.com/images/maison-jf-casa-amigos-hq.jpg';
+  if(axis==='corpo')return 'https://maison-jf.com/images/maison-jf-corpo-homem-hq.jpg';
+  if(axis==='cabeca')return 'https://maison-jf.com/images/cabeca-mulher-q94.jpg';
+  return 'https://maison-jf.com/images/maison-jf-hero-hq.jpg';
+}
+function videoDraftPlan(card){
+  const sourceImage=sourceImageFor(card.axis);
+  return {
+    state:'ready_after_editorial_review',
+    engine:'maison_short_video_zero_cost',
+    source_image_url:sourceImage,
+    aspect_ratio:'9:16',
+    target_seconds:8,
+    shots:[
+      {
+        duration_seconds:2,
+        image_url:sourceImage,
+        motion_prompt:'Subtle cinematic push-in, natural micro movement, realistic light shift, premium restrained atmosphere, no generated text.'
+      },
+      {
+        duration_seconds:3,
+        image_url:sourceImage,
+        motion_prompt:'Gentle lateral parallax and shallow depth of field, intimate Maison editorial mood, realistic motion only, no generated text.'
+      },
+      {
+        duration_seconds:3,
+        image_url:sourceImage,
+        motion_prompt:'Slow settling movement and soft light transition, calm premium finish, leave visual breathing room for final overlay, no generated text.'
+      }
+    ],
+    overlays:{
+      hook_from_draft:true,
+      closing_cta:'maison-jf.com',
+      persistent_url:'maison-jf.com',
+      farol_symbol:true
+    },
+    assembly:{
+      captions:true,
+      generated_text_inside_video_provider:false,
+      music_required:false
+    },
+    execution_gate:{
+      human_editorial_review_required:true,
+      automatic_generation:false,
+      automatic_publication:false,
+      spend_authorized:false
+    }
+  };
+}
+
 function safeText(value,max=600){
   return String(value||'').replace(/[—–]/g,',').replace(/\s+/g,' ').trim().slice(0,max);
 }
@@ -292,6 +343,7 @@ export async function buildEditorialProposal({brainAlert,oceanContext}={}){
       farol_symbol:true,
       persistent_brand_url:'maison-jf.com'
     },
+    video_draft_plan:videoDraftPlan(card),
     destination:{
       approved_existing_path:card.destination,
       may_create_new_offer:false
