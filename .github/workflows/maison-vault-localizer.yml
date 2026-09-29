@@ -12,6 +12,10 @@ on:
       - 'workers/maison-vault-localizer/**'
       - '.github/workflows/maison-vault-localizer.yml'
 
+concurrency:
+  group: maison-vault-localizer-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
