@@ -159,7 +159,7 @@ def main() -> None:
         "scheduled_triggers_present": "triggers" in config,
         "queue_bindings_present": "queues" in config,
         "ai_binding_present": "ai" in config,
-        "collection_enabled": observe_stage,
+        "collection_enabled": config.get("vars", {}).get("WORKER_ENABLED") == "true",
         "public_write_authorized": False,
         "outbound_authorized": False,
         "spend_authorized": False,
