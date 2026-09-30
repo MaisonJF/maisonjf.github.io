@@ -27,7 +27,7 @@ test('default Wan2.2 provider uploads the image and matches the live 9-input Gra
  globalThis.fetch=async(url,init={})=>{
    const target=String(url);
    targets.push(target);
-   if(target==='https://maison-jf.com/images/ebooks/posters/casos_cinzentos_poster.webp'){
+   if(target==='https://maison-jf.com/images/ebooks/posters/casos-cinzentos.webp'){
      return new Response(new Blob(['fake-image'],{type:'image/webp'}),{status:200,headers:{'Content-Type':'image/webp'}});
    }
    if(target.endsWith('/gradio_api/upload')){
@@ -47,7 +47,7 @@ test('default Wan2.2 provider uploads the image and matches the live 9-input Gra
  };
  try{
    const r=await handleVideoGenerationRequest(req('/internal/video/generate',{
-     image_url:'https://maison-jf.com/images/ebooks/posters/casos_cinzentos_poster.webp',
+     image_url:'https://maison-jf.com/images/ebooks/posters/casos-cinzentos.webp',
      prompt:'Subtle cinematic noir motion',
      duration_seconds:1,
      steps:4,
