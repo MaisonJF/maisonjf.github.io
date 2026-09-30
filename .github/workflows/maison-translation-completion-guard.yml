@@ -1,0 +1,49 @@
+name: Maison Translation Completion Guard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/maison-growth/translation-completion.json'
+      - 'workers/maison-vault-localizer/**'
+      - 'functions/_lib/site-i18n.js'
+      - '.github/maison-growth/validate_site_i18n.mjs'
+      - '.github/workflows/maison-translation-completion-guard.yml'
+  pull_request:
+    paths:
+      - '.github/maison-growth/translation-completion.json'
+      - 'workers/maison-vault-localizer/**'
+      - 'functions/_lib/site-i18n.js'
+      - '.github/maison-growth/validate_site_i18n.mjs'
+      - '.github/workflows/maison-translation-completion-guard.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate completion contract
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='.github/maison-growth/translation-completion.json';
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          const expected=['pt-BR','en','es'];
+          if(JSON.stringify(x.targetLocales)!==JSON.stringify(expected)) throw new Error('translation_locale_contract_drift');
+          if(x.sourceLocale!=='pt-PT') throw new Error('translation_source_locale_drift');
+          if(x.scopes?.paidVault?.completion!=='pending.total === 0 for all target locales after a fresh D1 census') throw new Error('vault_completion_gate_weakened');
+          const profiles=x.scopes?.editorialPublications?.profiles||{};
+          for(const key of ['linear_ebook','interactive_book']) if(!Array.isArray(profiles[key])||!profiles[key].length) throw new Error('missing_translation_profile:'+key);
+          console.log('Translation completion contract: OK');
+          NODE
+      - name: Validate public site i18n
+        run: node .github/maison-growth/validate_site_i18n.mjs
+      - name: Validate Vault localizer syntax
+        run: node --check workers/maison-vault-localizer/src/index.js
