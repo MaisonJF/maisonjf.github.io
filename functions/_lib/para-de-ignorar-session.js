@@ -31,7 +31,9 @@ export async function getOrCreateQuestionSession({env,stripeSession,theme,locale
   if(existing){
     if(existing.theme!==theme)throw new Error('session_theme_mismatch');
     if(normalizeMaisonLocale(existing.locale||'pt-PT')!==selectedLocale)throw new Error('session_locale_mismatch');
-    return await readGameSession(db,existing.game_session_id);
+    const restored=await readGameSession(db,existing.game_session_id);
+    assertPlayableLocalizedSession(restored,selectedLocale);
+    return restored;
   }
 
   const email=String(stripeSession.customer_details?.email||stripeSession.customer_email||'');
@@ -93,7 +95,23 @@ export async function getOrCreateQuestionSession({env,stripeSession,theme,locale
       }
     }catch{}
   }
-  return await readGameSession(db,gameSessionId);
+  const created=await readGameSession(db,gameSessionId);
+  assertPlayableLocalizedSession(created,selectedLocale);
+  return created;
+}
+
+function assertPlayableLocalizedSession(session,locale){
+  if(!session)throw new Error('pdi_session_readback_missing');
+  const selectedLocale=normalizeMaisonLocale(locale);
+  if(normalizeMaisonLocale(session.locale||'pt-PT')!==selectedLocale)throw new Error('pdi_session_locale_integrity_failed');
+  const packA=Array.isArray(session.packA)?session.packA:[];
+  const packB=Array.isArray(session.packB)?session.packB:[];
+  if(packA.length!==14||packB.length!==14)throw new Error('pdi_session_card_count_integrity_failed');
+  const cards=[...packA,...packB];
+  const ids=cards.map(card=>String(card?.id||''));
+  if(ids.some(id=>!id)||new Set(ids).size!==28)throw new Error('pdi_session_question_identity_integrity_failed');
+  if(cards.some(card=>typeof card?.text!=='string'||card.text.trim().length<2))throw new Error('pdi_session_localized_text_missing');
+  return true;
 }
 
 async function stableSeed(input){
