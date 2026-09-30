@@ -382,29 +382,45 @@ async function runLocalizationRounds(env,locale){
 export default {
   async fetch(){return new Response('Not Found',{status:404});},
   async scheduled(controller,env,ctx){
-    const locale=localeForSchedule(controller,env);
-    ctx.waitUntil(
-      runQuestionBackfill(env,locale).then(result=>{
-        const pending=result?.pending||{};
-        console.log('Vault question backfill completed',JSON.stringify({
-          locale,
-          attempted:Number(result?.attempted||0),
-          questionsActivated:Number(result?.questionsActivated||0),
-          failedBatches:Number(result?.failedBatches||0),
-          resourceLimited:Boolean(result?.resourceLimited),
-          pendingTotal:pending?Number(pending.total||0):null,
-          pendingQuestions:pending?.questions||null,
-          pendingOracle:pending?.oracle||null
-        }));
-        return result;
-      }).catch(error=>{
-        console.error('Vault localizer exception',JSON.stringify({
-          locale,
-          name:String(error?.name||'Error'),
-          message:String(error?.message||'localizer_failed').slice(0,500)
-        }));
-        throw error;
-      })
-    );
+    ctx.waitUntil((async()=>{
+      const results=[];
+      for(const locale of LOCALES){
+        try{
+          const backfill=await runQuestionBackfill(env,locale);
+          let maintenance=null;
+          if(!backfill.resourceLimited){
+            maintenance=await runLocalizationRounds(env,locale);
+          }
+          results.push({locale,ok:true,backfill,maintenance});
+        }catch(error){
+          console.error('Vault localizer locale failed',JSON.stringify({
+            locale,
+            name:String(error?.name||'Error'),
+            message:String(error?.message||'localizer_failed').slice(0,500)
+          }));
+          results.push({locale,ok:false,error:String(error?.message||'localizer_failed').slice(0,500)});
+        }
+      }
+      let pending=null;
+      try{
+        pending=await pendingCounts(env.GROWTH_DB);
+        await persistTelemetry(env.GROWTH_DB,{
+          locale:'all',
+          questionsActivated:results.reduce((n,x)=>n+Number(x?.backfill?.questionsActivated||0)+Number(x?.maintenance?.results?.[0]?.questionsActivated||0),0),
+          oracleActivated:results.reduce((n,x)=>n+Number(x?.maintenance?.results?.[0]?.oracleActivated||0),0),
+          pending
+        });
+      }catch(error){
+        console.error('Vault localizer completion census failed',String(error?.message||error).slice(0,500));
+      }
+      console.log('Vault localization sweep completed',JSON.stringify({
+        status:pending&&pending.total===0?'complete':'in_progress',
+        pendingTotal:pending?.total??null,
+        pendingQuestions:pending?.questions||null,
+        pendingOracle:pending?.oracle||null,
+        locales:results.map(x=>({locale:x.locale,ok:x.ok,resourceLimited:Boolean(x?.backfill?.resourceLimited)}))
+      }));
+      return {status:pending&&pending.total===0?'complete':'in_progress',pending,results};
+    })());
   }
 };
