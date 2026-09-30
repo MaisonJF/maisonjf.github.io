@@ -34,7 +34,7 @@ jobs:
           from pathlib import Path
           from gradio_client import Client, handle_file
 
-          source = "https://maison-jf.com/images/ebooks/posters/casos_cinzentos_poster.webp"
+          source = "https://maison-jf.com/images/ebooks/posters/casos-cinzentos.webp"
           prompt = (
               "Subtle cinematic noir motion only: warm desk-lamp flicker, faint drifting atmosphere, "
               "gentle parallax across investigation photographs and red strings, distant harbour lights "
