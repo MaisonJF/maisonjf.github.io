@@ -4,8 +4,10 @@ export const EBOOKS = {
     title: 'Vírgulas do Destino: O Turista',
     priceId: 'price_1UEoZP5H3wYRPmPVLTG7nmwl',
     unitCents: 299,
-    key: 'ebooks/virgulas-do-destino-o-turista.pdf',
-    filename: 'Virgulas-do-Destino-O-Turista.pdf'
+    formats: {
+      pdf: { key: 'ebooks/o-turista/O_Turista_Ebook_Final_Maison_JF.pdf', filename: 'O-Turista.pdf', contentType: 'application/pdf' },
+      epub: { key: 'ebooks/o-turista/O_Turista_Ebook_Final_Maison_JF.epub', filename: 'O-Turista.epub', contentType: 'application/epub+zip' }
+    }
   },
   'para-de-ignorar': {
     slug: 'para-de-ignorar',
@@ -32,8 +34,10 @@ export const EBOOKS = {
     title: 'Vírgulas do Destino: Meandros da Vida',
     priceId: 'price_1UEoWC5H3wYRPmPVFiVh4xT8',
     unitCents: 499,
-    key: 'ebooks/virgulas-do-destino-meandros-da-vida.pdf',
-    filename: 'Virgulas-do-Destino-Meandros-da-Vida.pdf'
+    formats: {
+      pdf: { key: 'ebooks/meandros-da-vida/Meandros_da_Vida_Ebook_Final_Maison_JF.pdf', filename: 'Meandros-da-Vida.pdf', contentType: 'application/pdf' },
+      epub: { key: 'ebooks/meandros-da-vida/Meandros_da_Vida_Ebook_Final_Maison_JF.epub', filename: 'Meandros-da-Vida.epub', contentType: 'application/epub+zip' }
+    }
   }
 };
 
