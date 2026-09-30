@@ -1,12 +1,16 @@
 // R2 binding: EBOOKS
 const EBOOKS = {
   turista: {
-    key: 'ebooks/virgulas-do-destino-o-turista.pdf',
-    filename: 'Virgulas-do-Destino-O-Turista.pdf'
+    formats: {
+      pdf: { key: 'ebooks/o-turista/O_Turista_Ebook_Final_Maison_JF.pdf', filename: 'O-Turista.pdf', contentType: 'application/pdf' },
+      epub: { key: 'ebooks/o-turista/O_Turista_Ebook_Final_Maison_JF.epub', filename: 'O-Turista.epub', contentType: 'application/epub+zip' }
+    }
   },
   meandros: {
-    key: 'ebooks/virgulas-do-destino-meandros-da-vida.pdf',
-    filename: 'Virgulas-do-Destino-Meandros-da-Vida.pdf'
+    formats: {
+      pdf: { key: 'ebooks/meandros-da-vida/Meandros_da_Vida_Ebook_Final_Maison_JF.pdf', filename: 'Meandros-da-Vida.pdf', contentType: 'application/pdf' },
+      epub: { key: 'ebooks/meandros-da-vida/Meandros_da_Vida_Ebook_Final_Maison_JF.epub', filename: 'Meandros-da-Vida.epub', contentType: 'application/epub+zip' }
+    }
   }
 };
 
@@ -25,8 +29,10 @@ export async function onRequestGet({ request, env }) {
     const sessionId = String(url.searchParams.get('session_id') || '');
     const ebookId = String(url.searchParams.get('ebook') || '');
     const ebook = EBOOKS[ebookId];
+    const requestedFormat = String(url.searchParams.get('format') || 'pdf').toLowerCase();
+    const file = ebook?.formats?.[requestedFormat] || null;
 
-    if (!/^cs_(test|live)_[A-Za-z0-9]+$/.test(sessionId) || !ebook) {
+    if (!/^cs_(test|live)_[A-Za-z0-9]+$/.test(sessionId) || !ebook || !file) {
       return json({ error: 'Pedido de download inválido.' }, 400);
     }
 
@@ -55,15 +61,15 @@ export async function onRequestGet({ request, env }) {
       return json({ error: 'O acesso automático expirou. Contacta a MAISON JF® para receberes um novo acesso.' }, 410);
     }
 
-    const object = await env.EBOOKS.get(ebook.key);
+    const object = await env.EBOOKS.get(file.key);
     if (!object) {
       return json({ error: 'O ficheiro ainda não está disponível no armazenamento privado.' }, 404);
     }
 
     const headers = new Headers();
     object.writeHttpMetadata(headers);
-    headers.set('content-type', 'application/pdf');
-    headers.set('content-disposition', `attachment; filename="${ebook.filename}"`);
+    headers.set('content-type', file.contentType);
+    headers.set('content-disposition', `attachment; filename="${file.filename}"`);
     headers.set('cache-control', 'private, no-store, max-age=0');
     headers.set('x-content-type-options', 'nosniff');
     return new Response(object.body, { headers });
