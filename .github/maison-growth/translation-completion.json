@@ -1,0 +1,62 @@
+{
+  "version": "2026-09-30-v1",
+  "purpose": "Canonical completion contract for MAISON JF internationalization. This file tracks work classes and completion criteria, not paid/private content bodies.",
+  "sourceLocale": "pt-PT",
+  "targetLocales": [
+    "pt-BR",
+    "en",
+    "es"
+  ],
+  "globalRule": "No translation programme is complete until every required scope is complete for every target locale. A failed run never marks work complete and never removes it from the pending set.",
+  "scopes": {
+    "paidVault": {
+      "authority": "Cloudflare D1 maison-growth-engine",
+      "engine": "workers/maison-vault-localizer/src/index.js",
+      "required": [
+        "vault_questions",
+        "vault_oracle_blocks"
+      ],
+      "completion": "pending.total === 0 for all target locales after a fresh D1 census",
+      "resume": "hourly cron sweeps every target locale; partial locale failure does not stop remaining locales",
+      "fallback": "PT-BR/EN/ES paid experiences never silently fall back to pt-PT"
+    },
+    "publicSite": {
+      "authority": "functions/_lib/site-i18n.js",
+      "validator": ".github/maison-growth/validate_site_i18n.mjs",
+      "completion": "validator passes for pt-PT, pt-BR, en and es contracts",
+      "note": "This validates site localization mechanics and contracted copy, not book manuscript completion."
+    },
+    "editorialPublications": {
+      "authority": "translation manifest entries",
+      "items": [],
+      "completion": "Each publication must be explicitly registered with source artifact, required target locales, output artifacts and validation profile. Absence from this manifest is not evidence of completion.",
+      "profiles": {
+        "linear_ebook": [
+          "source_complete",
+          "target_artifact_exists",
+          "no_unresolved_translation_markers",
+          "structure_preserved",
+          "links_validated",
+          "human_or_declared_quality_gate_passed"
+        ],
+        "interactive_book": [
+          "source_complete",
+          "target_artifact_exists",
+          "no_unresolved_translation_markers",
+          "branch_graph_preserved",
+          "internal_links_preserved",
+          "codes_and_clues_preserved",
+          "endings_reachable",
+          "fair_play_review_passed",
+          "human_or_declared_quality_gate_passed"
+        ]
+      }
+    }
+  },
+  "statusSemantics": {
+    "pending": "required work exists but has not started or cannot yet be verified",
+    "in_progress": "work exists and is not yet fully validated",
+    "blocked": "work cannot progress automatically; blocker must be named and work remains pending",
+    "complete": "all declared completion gates pass on fresh evidence"
+  }
+}
