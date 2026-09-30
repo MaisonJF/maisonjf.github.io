@@ -32,8 +32,8 @@ export const EBOOKS = {
   meandros: {
     slug: 'virgulas-do-destino-meandros-da-vida',
     title: 'Vírgulas do Destino: Meandros da Vida',
-    priceId: 'price_1UEoWC5H3wYRPmPVFiVh4xT8',
-    unitCents: 499,
+    priceId: 'price_1ULKLx5H3wYRPmPVWaNfTQWB',
+    unitCents: 350,
     formats: {
       pdf: { key: 'ebooks/meandros-da-vida/Meandros_da_Vida_Ebook_Final_Maison_JF.pdf', filename: 'Meandros-da-Vida.pdf', contentType: 'application/pdf' },
       epub: { key: 'ebooks/meandros-da-vida/Meandros_da_Vida_Ebook_Final_Maison_JF.epub', filename: 'Meandros-da-Vida.epub', contentType: 'application/epub+zip' }
