@@ -261,7 +261,26 @@ async function pendingCounts(db){
   };
 }
 
+async function ensureTelemetrySchema(db){
+  await db.prepare(`CREATE TABLE IF NOT EXISTS vault_localizer_telemetry (
+    singleton_id INTEGER PRIMARY KEY CHECK (singleton_id = 1),
+    updated_at TEXT NOT NULL,
+    last_locale TEXT NOT NULL,
+    last_status TEXT NOT NULL CHECK (last_status IN ('success','error')),
+    last_questions_activated INTEGER NOT NULL DEFAULT 0,
+    last_oracle_activated INTEGER NOT NULL DEFAULT 0,
+    pending_total INTEGER NOT NULL DEFAULT 0,
+    pending_questions_pt_br INTEGER NOT NULL DEFAULT 0,
+    pending_questions_en INTEGER NOT NULL DEFAULT 0,
+    pending_questions_es INTEGER NOT NULL DEFAULT 0,
+    pending_oracle_pt_br INTEGER NOT NULL DEFAULT 0,
+    pending_oracle_en INTEGER NOT NULL DEFAULT 0,
+    pending_oracle_es INTEGER NOT NULL DEFAULT 0
+  )`).run();
+}
+
 async function persistTelemetry(db,{locale,questionsActivated=0,oracleActivated=0,pending}) {
+  await ensureTelemetrySchema(db);
   await db.prepare(`INSERT INTO vault_localizer_telemetry (
     singleton_id,updated_at,last_locale,last_status,last_questions_activated,last_oracle_activated,
     pending_total,pending_questions_pt_br,pending_questions_en,pending_questions_es,
@@ -302,6 +321,7 @@ function isResourceLimit(error){
 }
 
 async function readPendingTelemetry(db){
+  await ensureTelemetrySchema(db);
   const row=await db.prepare(`
     SELECT pending_total,pending_questions_pt_br,pending_questions_en,pending_questions_es,
            pending_oracle_pt_br,pending_oracle_en,pending_oracle_es
