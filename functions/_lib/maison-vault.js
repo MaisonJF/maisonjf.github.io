@@ -137,7 +137,7 @@ export async function readGameSession(db,gameSessionId){
          FROM vault_game_session_cards c
          JOIN vault_questions q ON q.question_id=c.question_id
          JOIN vault_question_translations t
-           ON t.question_id=q.question_id AND t.locale=?2
+           ON t.question_id=q.question_id AND t.locale=?2 AND t.status='active'
         WHERE c.game_session_id=?1
         ORDER BY CASE c.pack WHEN 'A' THEN 0 ELSE 1 END,c.position`
     ).bind(gameSessionId,locale).all();
