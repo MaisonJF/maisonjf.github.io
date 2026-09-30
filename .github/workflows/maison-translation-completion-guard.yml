@@ -7,6 +7,10 @@ on:
       - '.github/maison-growth/translation-completion.json'
       - 'workers/maison-vault-localizer/**'
       - 'functions/_lib/site-i18n.js'
+      - 'functions/_lib/maison-vault.js'
+      - 'functions/_lib/para-de-ignorar-session.js'
+      - 'functions/_lib/maison-vault.js'
+      - 'functions/_lib/para-de-ignorar-session.js'
       - '.github/maison-growth/validate_site_i18n.mjs'
       - '.github/workflows/maison-translation-completion-guard.yml'
   pull_request:
@@ -45,5 +49,24 @@ jobs:
           NODE
       - name: Validate public site i18n
         run: node .github/maison-growth/validate_site_i18n.mjs
-      - name: Validate Vault localizer syntax
-        run: node --check workers/maison-vault-localizer/src/index.js
+      - name: Validate Vault and PDI runtime syntax
+        run: |
+          node --check workers/maison-vault-localizer/src/index.js
+          node --check functions/_lib/maison-vault.js
+          node --check functions/_lib/para-de-ignorar-session.js
+      - name: Guard PDI localized fail-closed invariants
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const vault=fs.readFileSync('functions/_lib/maison-vault.js','utf8');
+          const pdi=fs.readFileSync('functions/_lib/para-de-ignorar-session.js','utf8');
+          if(!vault.includes("t.locale=?2 AND t.status='active'")) throw new Error('pdi_active_translation_gate_missing');
+          for(const invariant of [
+            "pdi_session_locale_integrity_failed",
+            "pdi_session_card_count_integrity_failed",
+            "pdi_session_question_identity_integrity_failed",
+            "pdi_session_localized_text_missing"
+          ]) if(!pdi.includes(invariant)) throw new Error('pdi_integrity_guard_missing:'+invariant);
+          if(!pdi.includes("packA.length!==14||packB.length!==14")) throw new Error('pdi_14_plus_14_gate_missing');
+          console.log('PDI localized end-to-end invariants: OK');
+          NODE
