@@ -33,7 +33,7 @@ window.MAISON_EBOOKS=[
     collection:'Ficção · Vírgulas do Destino · Éditions Maison JF',
     language:'pt-PT',format:'ebook',formats:['pdf','epub'],status:'published',
     description:'Tarot, perda, desejo e recomeço. Caim viaja para Portugal depois de uma tragédia pessoal e encontra mais do que estava à procura.',
-    price:4.99,currency:'EUR',cover:'/images/ebooks/meandros-da-vida.webp',media:[{role:'cover',src:'/images/ebooks/meandros-da-vida.webp',alt:'Capa do ebook Vírgulas do Destino: Meandros da Vida',aspect:'book',caption:'Vírgulas do Destino · Meandros da Vida'}],purchaseUrl:null,featured:true
+    price:3.50,currency:'EUR',cover:'/images/ebooks/meandros-da-vida.webp',media:[{role:'cover',src:'/images/ebooks/meandros-da-vida.webp',alt:'Capa do ebook Vírgulas do Destino: Meandros da Vida',aspect:'book',caption:'Vírgulas do Destino · Meandros da Vida'}],purchaseUrl:null,featured:true
   }
 ];
 window.MAISON_PUBLISHED_EBOOKS=window.MAISON_EBOOKS.filter(book=>book.status==='published');
