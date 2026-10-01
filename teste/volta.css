@@ -178,3 +178,51 @@
   }
   .vpc-part b{padding-top:20px}
 }
+
+
+/* VOLTA PARA CASA · MOBILE-FIRST BASELINE · 2026-10-01 */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media(max-width:760px){
+  .vpc-shell{width:min(100% - 32px,1080px)}
+  .vpc-back,
+  .vpc-actions .button,
+  .vpc-choice,
+  .vpc-scope__options button,
+  .vpc-convert__links a,
+  .vpc-share button,
+  .vpc-share a,
+  .vpc-offer,
+  .vpc-report .button,
+  .vpc-specific-tests a{
+    min-height:48px;
+  }
+  .vpc-back,
+  .vpc-share button,
+  .vpc-share a,
+  .vpc-specific-tests a{
+    display:inline-flex;
+    align-items:center;
+  }
+  .vpc-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    width:100%;
+  }
+  .vpc-actions .button{width:100%;justify-content:center;text-align:center}
+  .vpc-choice{font-size:17px}
+  .vpc-question{font-size:clamp(29px,8vw,42px)}
+  .vpc-progress__meta{font-size:11px;line-height:1.4}
+}
+@supports(padding:max(0px)){
+  @media(max-width:760px){
+    .vpc-test,.vpc-hero,.vpc-service-hero{
+      padding-left:env(safe-area-inset-left);
+      padding-right:env(safe-area-inset-right);
+    }
+    .vpc-page{padding-bottom:env(safe-area-inset-bottom)}
+  }
+}
+@media(hover:none) and (pointer:coarse){
+  .vpc-page a,.vpc-page button{-webkit-tap-highlight-color:rgba(210,179,111,.18)}
+  .vpc-card:hover,.vpc-choice:hover,.vpc-offer:hover,.vpc-part:hover{transform:none!important}
+}
