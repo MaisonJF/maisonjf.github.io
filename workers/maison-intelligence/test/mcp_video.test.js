@@ -15,17 +15,72 @@ test('MCP initializes with tools capability',async()=>{
   assert.deepEqual(body.result.capabilities,{tools:{listChanged:false}});
 });
 
-test('MCP exposes only the three bounded video tools',async()=>{
+test('MCP exposes bounded video tools plus direct Ocean D1 ingest',async()=>{
   const r=await handleMaisonMcpRequest(post('tools/list',{}),{});
   const body=await r.json();
   assert.deepEqual(body.result.tools.map(x=>x.name),[
-    'maison_video_health','maison_generate_video','maison_video_result'
+    'maison_video_health','maison_generate_video','maison_ingest_ocean_signal','maison_video_result'
   ]);
   const generate=body.result.tools.find(x=>x.name==='maison_generate_video');
   assert.equal(generate.annotations.destructiveHint,false);
   assert.equal(generate.inputSchema.properties.duration_seconds.maximum,3);
   assert.equal(generate.inputSchema.properties.steps.maximum,4);
   assert.equal(generate.securitySchemes[0].type,'oauth2');
+  const ocean=body.result.tools.find(x=>x.name==='maison_ingest_ocean_signal');
+  assert.deepEqual(ocean.inputSchema.required,['ocean_key','source_ref','summary']);
+  assert.equal(ocean.annotations.openWorldHint,false);
+  assert.equal(ocean.securitySchemes[0].type,'oauth2');
+});
+
+test('MCP Ocean tool authenticates and persists directly to D1',async()=>{
+  class Statement{
+    constructor(db,sql){this.db=db;this.sql=sql;this.params=[];}
+    bind(...params){this.params=params;return this;}
+    async run(){this.db.writes.push({sql:this.sql,params:this.params});return {success:true,meta:{changes:1}};}
+  }
+  class DB{
+    constructor(){this.writes=[];}
+    prepare(sql){return new Statement(this,sql);}
+  }
+  const originalFetch=globalThis.fetch;
+  globalThis.fetch=async()=>new Response(JSON.stringify({id:'user-1'}),{status:200,headers:{'content-type':'application/json'}});
+  try{
+    const db=new DB();
+    const request=new Request('https://maison.example/mcp',{
+      method:'POST',
+      headers:{'content-type':'application/json',Authorization:'Bearer oauth-token'},
+      body:JSON.stringify({jsonrpc:'2.0',id:7,method:'tools/call',params:{
+        name:'maison_ingest_ocean_signal',
+        arguments:{
+          kind:'hypothesis',
+          ocean_key:'teste-mcp-ocean',
+          source_ref:'radar:test',
+          summary:'Sinal de teste do Radar gravado diretamente no D1.',
+          evidence_roots:['https://example.org/a'],
+          relevance_score:64,
+          commercial_score:35,
+          observed_at:'2026-10-01T18:00:00.000Z'
+        }
+      }})
+    });
+    const response=await handleMaisonMcpRequest(request,{
+      OCEAN_MEMORY_ENABLED:'true',
+      GROWTH_DB:db,
+      MAISON_MCP_CONFIG:JSON.stringify({
+        supabase_url:'https://example.supabase.co',
+        supabase_publishable_key:'public-key',
+        allowed_subject:'user-1'
+      })
+    });
+    const body=await response.json();
+    assert.equal(body.result.isError,false);
+    assert.equal(body.result.structuredContent.ocean_key,'teste-mcp-ocean');
+    assert.equal(body.result.structuredContent.github_required_for_persistence,false);
+    assert.equal(body.result.structuredContent.d1_writes_per_unique_ingest,2);
+    assert.equal(db.writes.length,2);
+  }finally{
+    globalThis.fetch=originalFetch;
+  }
 });
 
 test('non-MCP paths fall through',async()=>{
