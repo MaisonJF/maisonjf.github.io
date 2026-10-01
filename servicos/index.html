@@ -71,7 +71,7 @@
   .services-footer{align-items:flex-start;flex-direction:column}
 }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://maison-jf.com/servicos/#page","url":"https://maison-jf.com/servicos/","name":"Serviços | MAISON JF®","description":"Consulta de Tarot, Acompanhamento, Presença e pedidos personalizados MAISON JF®.","inLanguage":"pt-PT","isPartOf":{"@id":"https://maison-jf.com/#website"},"about":[{"@id":"https://maison-jf.com/#organization"},{"@type":"Thing","name":"serviços MAISON JF®"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":"https://maison-jf.com/servicos/#page","url":"https://maison-jf.com/servicos/","name":"Serviços | MAISON JF®","description":"Consulta de Tarot, Acompanhamento, Presença e pedidos personalizados MAISON JF®.","inLanguage":"pt-PT","isPartOf":{"@id":"https://maison-jf.com/#website"},"about":[{"@id":"https://maison-jf.com/#organization"},{"@id":"https://maison-jf.com/servicos/#tarot"},{"@id":"https://maison-jf.com/servicos/#acompanhamento"},{"@id":"https://maison-jf.com/servicos/#mentoria"},{"@id":"https://maison-jf.com/servicos/#ritual"}]},{"@type":"Service","@id":"https://maison-jf.com/servicos/#tarot","name":"Consulta de Tarot","description":"Uma consulta para trazer contexto à tua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.","provider":{"@id":"https://maison-jf.com/#organization"},"url":"https://maison-jf.com/servicos/#tarot","offers":{"@type":"Offer","price":"35.00","priceCurrency":"EUR","url":"https://maison-jf.com/servicos/#tarot","availability":"https://schema.org/InStock"}},{"@type":"Service","@id":"https://maison-jf.com/servicos/#acompanhamento","name":"Acompanhamento","description":"Continuidade durante 4 semanas, com 2 encontros de 60 minutos e até 1 check-in curto por semana.","provider":{"@id":"https://maison-jf.com/#organization"},"url":"https://maison-jf.com/servicos/#acompanhamento","offers":{"@type":"Offer","price":"170.00","priceCurrency":"EUR","url":"https://maison-jf.com/servicos/#acompanhamento"}},{"@type":"Service","@id":"https://maison-jf.com/servicos/#mentoria","name":"Mentoria","description":"Mentoria com objetivo, duração, calendário, âmbito e valor final definidos antes de começar.","provider":{"@id":"https://maison-jf.com/#organization"},"url":"https://maison-jf.com/servicos/#mentoria","offers":{"@type":"AggregateOffer","lowPrice":"125.00","priceCurrency":"EUR","offerCount":"1","url":"https://maison-jf.com/servicos/#mentoria"}},{"@type":"Service","@id":"https://maison-jf.com/servicos/#ritual","name":"Ritual Personalizado","description":"Trabalho simbólico e ritual personalizado, com formato, materiais e valor apresentados antes e sem promessa de resultado.","provider":{"@id":"https://maison-jf.com/#organization"},"url":"https://maison-jf.com/servicos/#ritual-personalizado"}]}</script>
 </head>
 <body class="services-page">
 <header class="site-header">
@@ -107,7 +107,7 @@
       <h2>Uma consulta. Outro ângulo.</h2>
     </div>
     <div class="primary-service__body">
-      <div class="primary-service__price" data-service-price="tarot" aria-label="Preço"></div>
+      <div class="primary-service__price" data-service-price="tarot" aria-label="Preço">35 €</div>
       <div class="primary-service__actions">
         <button class="primary-buy" type="button" data-buy-service="tarot">Marcar consulta →</button>
         <a class="whatsapp-question" target="_blank" rel="noopener noreferrer" href="https://wa.me/351923318289?text=Ol%C3%A1%2C%20Jo%C3%A3o.%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Consulta%20de%20Tarot.">Tenho uma dúvida</a>
@@ -128,20 +128,20 @@
     <span id="continuidade" class="anchor-alias" aria-hidden="true"></span>
     <span id="acompanhamento" class="anchor-alias" aria-hidden="true"></span>
     <a class="quiet-link" href="../contacto/?interesse=acompanhamento">
-      <small>Continuidade</small><strong>Acompanhamento</strong><div class="quiet-link__meta"><span data-service-price="acompanhamento"></span><span>Falar comigo →</span></div>
+      <small>Continuidade</small><strong>Acompanhamento</strong><div class="quiet-link__meta"><span data-service-price="acompanhamento">170 € · 4 semanas</span><span>Falar comigo →</span></div>
     </a>
     <a class="quiet-link" id="mentoria" href="../contacto/?interesse=mentoria">
-      <small>Estrutura</small><strong>Mentoria</strong><div class="quiet-link__meta"><span data-service-price="mentoria"></span><span>Quero perceber como funciona →</span></div>
+      <small>Estrutura</small><strong>Mentoria</strong><div class="quiet-link__meta"><span data-service-price="mentoria">a partir de 125 €</span><span>Quero perceber como funciona →</span></div>
     </a>
     <a class="quiet-link" href="../portas/companhia">
-      <small>Presença</small><strong>Não quero atravessar isto sozinho.</strong><div class="quiet-link__meta"><span data-service-price="companhia"></span><span>Ver como funciona →</span></div>
+      <small>Presença</small><strong>Não quero atravessar isto sozinho.</strong><div class="quiet-link__meta"><span data-service-price="companhia">desde 35 €</span><span>Ver como funciona →</span></div>
     </a>
     <a class="quiet-link" id="ritual-personalizado" href="../contacto/?interesse=ritual-personalizado">
-      <small>Ritual</small><strong>Ritual Personalizado</strong><div class="quiet-link__meta"><span data-service-price="ritual-personalizado"></span><span>Quero explicar a intenção →</span></div>
+      <small>Ritual</small><strong>Ritual Personalizado</strong><div class="quiet-link__meta"><span data-service-price="ritual-personalizado">Sob orçamento</span><span>Quero explicar a intenção →</span></div>
     </a>
     <span id="especiais" class="anchor-alias" aria-hidden="true"></span>
     <a class="quiet-link" href="../contacto/?interesse=pedido-especial">
-      <small>Pedidos especiais</small><strong>Nem tudo vem pronto.</strong><div class="quiet-link__meta"><span data-service-price="pedidos-especiais"></span><span>Quero explicar o pedido →</span></div>
+      <small>Pedidos especiais</small><strong>Nem tudo vem pronto.</strong><div class="quiet-link__meta"><span data-service-price="pedidos-especiais">Sob orçamento</span><span>Quero explicar o pedido →</span></div>
     </a>
   </section>
 
