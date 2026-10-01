@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { ingestCandidateInbox, listCandidateInbox } from '../src/candidate_inbox.js';
+import { decideCandidateInbox, ingestCandidateInbox, listCandidateInbox } from '../src/candidate_inbox.js';
 
 class Statement{
   constructor(db,sql){this.db=db;this.sql=sql;this.params=[];}
@@ -96,4 +96,21 @@ test('candidate inbox returns parsed private rows',async()=>{
   assert.equal(rows[0].payload.hook,'Chegaste.');
   assert.deepEqual(rows[0].related_assets,['Névoa']);
   assert.equal(rows[0].payload_json,undefined);
+});
+
+
+test('human decision is append-only and never makes a candidate live',async()=>{
+  const db=new DB();
+  db.duplicateRow={candidate_id:'mci_demo'};
+  const out=await decideCandidateInbox({GROWTH_DB:db},{
+    candidate_id:'mci_demo',
+    decision:'develop',
+    reason:'Vale desenvolver esta proposta.'
+  });
+  assert.equal(out.decision,'develop');
+  assert.equal(out.live,false);
+  assert.equal(out.automatic_activation,false);
+  assert.equal(out.public_side_effects,false);
+  assert.equal(db.writes.length,1);
+  assert.match(db.writes[0].sql,/INSERT INTO maison_candidate_decisions/);
 });
