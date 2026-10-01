@@ -1,5 +1,6 @@
 import { handleVideoGenerationRequest } from './video_generation.js';
 import { ingestOceanMemory } from './ocean_memory.js';
+import { ingestVaultCandidate } from './vault_candidates.js';
 // MAISON JF · minimal Streamable HTTP MCP bridge for the short-video engine
 // Initial scope is intentionally narrow: health, generate, result.
 // VIDEO_GENERATION_TOKEN never leaves the Worker.
@@ -90,6 +91,46 @@ function tools(){
       securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
     },
     {
+      name:'maison_ingest_vault_candidate',
+      title:'Ingest Maison editorial candidate',
+      description:'Store one question or Oracle block as a private D1 editorial candidate. This tool cannot approve, activate or make content live.',
+      inputSchema:{type:'object',required:['content_type','source_ocean_id','text'],properties:{
+        content_type:{type:'string',enum:['question','oracle_block']},
+        source_ocean_id:{type:'string',minLength:2,maxLength:160},
+        id:{type:'string',maxLength:183},
+        canonical_key:{type:'string',maxLength:160},
+        text:{type:'string',minLength:8,maxLength:4000},
+        theme:{type:'string',minLength:2,maxLength:120},
+        stage:{type:'string',enum:['open','recognize','deepen','touch','close','signature']},
+        direction:{type:'string',enum:['me_to_you','you_to_me','mutual','either']},
+        time_scope:{type:'string',enum:['past','present','future','timeless']},
+        exposure:{type:'string',enum:['paid','public_social','reward','internal_test']},
+        target:{type:'string',enum:['self','partner','both','prediction']},
+        class:{type:'string',maxLength:80},
+        subthemes:{type:'array',maxItems:12,items:{type:'string',maxLength:120}},
+        similarity_group:{type:'string',maxLength:120},
+        territory:{type:'string',minLength:2,maxLength:120},
+        role:{type:'string',enum:['opening','recognition','tension','counterpoint','reframe','movement','close']},
+        title:{type:'string',maxLength:180},
+        tone:{type:'string',enum:['gentle','direct','intimate','clear','confrontational']},
+        rarity:{type:'string',enum:['common','uncommon','rare']},
+        tags:{type:'array',maxItems:20,items:{type:'string',maxLength:80}},
+        pain_family:{type:'string',maxLength:120},
+        subterritory:{type:'string',maxLength:120},
+        emotional_function:{type:'string',maxLength:120},
+        intensity:{type:'integer',minimum:1,maximum:4},
+        cognitive_load:{type:'integer',minimum:1,maximum:5},
+        vulnerability:{type:'integer',minimum:1,maximum:5},
+        conflict_potential:{type:'integer',minimum:1,maximum:5},
+        playfulness:{type:'integer',minimum:1,maximum:5},
+        scores:{type:'object'},
+        compatibility:{type:'object'},
+        product_fit:{type:'object'}
+      },additionalProperties:false},
+      annotations:{readOnlyHint:false,destructiveHint:false,idempotentHint:false,openWorldHint:false},
+      securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
+    },
+    {
       name:'maison_video_result',
       title:'Maison video result',
       description:'Read the provider result stream for a previously queued MAISON JF video job.',
@@ -136,6 +177,11 @@ async function callTool(request,env,name,args){
     if(String(env.OCEAN_MEMORY_ENABLED??'').toLowerCase()!=='true') return toolText({error:'ocean_memory_disabled'},true);
     if(!env.GROWTH_DB) return toolText({error:'growth_db_missing'},true);
     const body=await ingestOceanMemory(env,args||{});
+    return toolText(body,false);
+  }
+  if(name==='maison_ingest_vault_candidate'){
+    if(!env.GROWTH_DB) return toolText({error:'growth_db_missing'},true);
+    const body=await ingestVaultCandidate(env,args||{});
     return toolText(body,false);
   }
   return toolText({error:'unknown_tool'},true);
