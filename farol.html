@@ -205,7 +205,7 @@
   ]
 }
   </script>
-  <script src="analytics.js?v=20260920-consent3" defer></script>
+  <script src="analytics.js?v=20261001-perf2" defer></script>
 </head>
 <body class="detail-page farol-page">
 
@@ -226,7 +226,7 @@
     </div>
   </header>
 
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true" inert>
     <button class="mobile-menu__close" id="menuClose" aria-label="Fechar menu">
       <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
@@ -241,8 +241,8 @@
       <div class="detail-hero__inner">
         <a href="./" class="detail-back">← Voltar à MAISON JF®</a>
         <p class="detail-eyebrow">O Farol</p>
-        <h1 class="detail-title">Há uma coisa que não te larga. Começa por aí.</h1>
-        <p class="detail-lead">Não precisas de saber o que procuras. Diz-me só o que anda a ocupar-te a cabeça.</p>
+        <h1 class="detail-title">Há uma coisa que não te larga.</h1>
+        <p class="detail-lead">Começa por aí. Não precisas de saber o que procuras. Diz-me só o que anda a ocupar-te a cabeça.</p>
         <div class="detail-actions">
           <a href="#farol" class="btn btn--primary">COMEÇAR →</a>
           <a href="./#explorar-maison" class="btn btn--ghost">Já sei o que procuro →</a>
@@ -257,7 +257,7 @@
       <p class="farol__subtitle">Não procures a resposta certa. Escolhe a que te apanhou.</p>
     </div>
     <div class="farol__container">
-      <div class="farol__progress" id="farolProgress" aria-hidden="true">
+      <div class="farol__progress" id="farolProgress" role="progressbar" aria-label="Passo 1 de 3" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1">
         <span class="farol__progress-dot farol__progress-dot--active"></span>
         <span class="farol__progress-dot"></span>
         <span class="farol__progress-dot"></span>
@@ -281,14 +281,14 @@
       </div>
 
       <div class="farol__step" id="farolStep2" data-step="2">
-        <h3 class="farol__question" id="farolStep2Question">Vamos perceber melhor.</h3>
+        <h3 class="farol__question" id="farolStep2Question" tabindex="-1">Vamos perceber melhor.</h3>
         <div class="farol__options" id="farolStep2Options" role="group"></div>
         <button class="farol__back" id="farolBack2" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Voltar</button>
       </div>
 
       <div class="farol__step" id="farolStep3" data-step="3">
-        <div class="farol__result" id="farolResult"></div>
-        <button class="farol__back" id="farolBack3" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Recomeçar</button>
+        <div class="farol__result" id="farolResult" aria-live="polite"></div>
+        <div class="farol__back-row"><button class="farol__back" id="farolBack3" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Mudar a resposta</button><button class="farol__restart" id="farolRestart" type="button">Recomeçar</button></div>
       </div>
     </div>
     <p class="detail-note farol__disclaimer">O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.</p>
