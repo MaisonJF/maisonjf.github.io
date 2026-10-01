@@ -1,0 +1,31 @@
+name: Core UX Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/core-ux-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  core-mobile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for production
+        run: sleep 45
+      - name: Audit core journeys
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://maison-jf.com/
+            https://maison-jf.com/farol
+            https://maison-jf.com/teste/
+            https://maison-jf.com/teste/atencao/
+            https://maison-jf.com/produtos/
+            https://maison-jf.com/servicos/
+          uploadArtifacts: true
+          temporaryPublicStorage: false
