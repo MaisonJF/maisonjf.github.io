@@ -79,8 +79,9 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
      content_type:x.dataset.type,content_id:x.dataset.id
    }));
  }
+ function updateCount(){count.textContent=rows.length+' itens · '+selected().length+' selecionados'}
  function render(){
-   count.textContent=rows.length+' itens · '+selected().length+' selecionados';
+   updateCount();
    list.innerHTML='';
    if(!rows.length){list.innerHTML='<div class="empty">Não há material neste filtro.</div>';return}
    for(const x of rows){
@@ -88,7 +89,7 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
      card.className='card';
      const pick=document.createElement('input');
      pick.type='checkbox';pick.className='pick';pick.dataset.type=x.content_type;pick.dataset.id=x.content_id;
-     pick.addEventListener('change',()=>count.textContent=rows.length+' itens · '+selected().length+' selecionados');
+     pick.addEventListener('change',updateCount);
      const wrap=document.createElement('div');
      const h=document.createElement('h3');
      h.textContent=(x.content_type==='question'?'PERGUNTA':'ORÁCULO')+' · '+x.area+' · '+x.stage_or_role;
@@ -114,8 +115,8 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
    }catch(e){note(e.message,'warning')}
  }
  $('load').addEventListener('click',load);
- $('select-all').addEventListener('click',()=>{document.querySelectorAll('.pick').forEach(x=>x.checked=true);render()});
- $('clear').addEventListener('click',()=>{document.querySelectorAll('.pick').forEach(x=>x.checked=false);render()});
+ $('select-all').addEventListener('click',()=>{document.querySelectorAll('.pick').forEach(x=>x.checked=true);updateCount()});
+ $('clear').addEventListener('click',()=>{document.querySelectorAll('.pick').forEach(x=>x.checked=false);updateCount()});
  $('approve').addEventListener('click',()=>{
    const items=selected();
    if(items.length && confirm('Aprovar '+items.length+' itens e torná-los live?'))apply('activate',items);
