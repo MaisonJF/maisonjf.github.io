@@ -213,62 +213,62 @@
 
   const pageConfig = {
     'index.html': {
-      label: 'Falar com a Maison',
-      message: 'Olá Maison JF. Vim do site e quero ajuda a escolher a opção certa.',
+      label: 'Falar comigo',
+      message: 'Olá, João. Vim do site e quero ajuda a escolher a opção certa.',
       secondHref: 'farol.html',
       secondText: 'Seguir o Farol'
     },
     'produtos.html': {
       label: 'Ajuda a escolher',
-      message: 'Olá Maison JF. Estou a ver os Produtos e quero ajuda a escolher o mais indicado para mim.',
+      message: 'Olá, João. Estou a ver os Produtos e quero ajuda a escolher o mais indicado para mim.',
       secondHref: 'farol.html',
       secondText: 'Usar o Farol'
     },
     'produto-bruma-ambiente.html': {
       label: 'Pedir Névoa · 7 €',
-      message: 'Olá Maison JF. Quero pedir uma Névoa de Ambiente de 20 mL por 7 €. Que opções estão disponíveis?',
+      message: 'Olá, João. Quero pedir uma Névoa de Ambiente de 20 mL por 7 €. Que opções estão disponíveis?',
       secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
     'produto-escalda-pes.html': {
       label: 'Pedir Escalda-Pés · 5 €',
-      message: 'Olá Maison JF. Quero pedir um Escalda-Pés de 150 g por 5 €. Que referências estão disponíveis?',
+      message: 'Olá, João. Quero pedir um Escalda-Pés de 150 g por 5 €. Que referências estão disponíveis?',
       secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
     'produto-oleo-massagem.html': {
       label: 'Pedir Óleo · 12 €',
-      message: 'Olá Maison JF. Quero pedir o Óleo de Massagem de 60 mL por 12 €. Está disponível?',
+      message: 'Olá, João. Quero pedir o Óleo de Massagem de 60 mL por 12 €. Está disponível?',
       secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
     'produto-vela-aromatica.html': {
       label: 'Pedir Vela · 14 €',
-      message: 'Olá Maison JF. Quero pedir uma Vela Aromática de 170 g por 14 €. Que referências estão disponíveis?',
+      message: 'Olá, João. Quero pedir uma Vela Aromática de 170 g por 14 €. Que referências estão disponíveis?',
       secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
     'servicos.html': {
       label: 'Marcar ou perguntar',
-      message: 'Olá Maison JF. Estou a ver os Serviços e quero ajuda para perceber qual faz mais sentido para mim.',
+      message: 'Olá, João. Estou a ver os Serviços e quero ajuda para perceber qual faz mais sentido para mim.',
       secondHref: 'farol.html',
       secondText: 'Usar o Farol'
     },
     'companhia.html': {
       label: 'Ver disponibilidade',
-      message: 'Olá Maison JF. Estou a ver a área de Presença e quero saber qual opção faz mais sentido e a disponibilidade.',
+      message: 'Olá, João. Estou a ver a área de Presença e quero saber qual opção faz mais sentido e a disponibilidade.',
       secondHref: 'farol.html',
       secondText: 'Usar o Farol'
     },
     'profissionais.html': {
       label: 'Falar de parceria',
-      message: 'Olá Maison JF. Estou na área Profissional e quero falar sobre revenda, parceria ou fornecimento.',
+      message: 'Olá, João. Estou na área Profissional e quero falar sobre revenda, parceria ou fornecimento.',
       secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
     'editions.html': {
       label: 'Pedir uma edição',
-      message: 'Olá Maison JF. Estou a ver as Edições e quero saber o que está disponível.',
+      message: 'Olá, João. Estou a ver as Edições e quero saber o que está disponível.',
       secondHref: 'index.html#explorar',
       secondText: 'Explorar a Maison'
     }
@@ -314,7 +314,7 @@
 
       const whatsapp = document.createElement('a');
       whatsapp.className = 'farol__whatsapp-link';
-      whatsapp.href = waUrl(`Olá Maison JF. Fiz o Farol e o resultado foi: "${title.textContent.trim()}". Quero ajuda para avançar.`);
+      whatsapp.href = waUrl(`Olá, João. Fiz o Farol e o resultado foi: "${title.textContent.trim()}". Quero ajuda para avançar.`);
       whatsapp.target = '_blank';
       whatsapp.rel = 'noopener noreferrer';
       whatsapp.textContent = 'Prefiro falar com a Maison no WhatsApp →';
@@ -370,7 +370,7 @@
       trust.innerHTML = `
         <div class="conversion-trust__inner">
           <a class="conversion-trust__item" href="index.html#joao" style="color:inherit;text-decoration:none">Marca registada na União Europeia</a>
-          <a class="conversion-trust__item" href="${waUrl('Olá Maison JF. Vim do site e quero falar diretamente com a Maison.')}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">Contacto direto com a Maison</a>
+          <a class="conversion-trust__item" href="${waUrl('Olá, João. Vim do site e quero falar diretamente com a Maison.')}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">Contacto direto com a Maison</a>
           <a class="conversion-trust__item" href="farol.html" style="color:inherit;text-decoration:none">O Farol ajuda-te a escolher</a>
         </div>`;
       hero.insertAdjacentElement('afterend', trust);
