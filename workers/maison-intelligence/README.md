@@ -43,14 +43,14 @@ A provider is skipped unless its secret and required model setting are configure
 
 ## Daily zero-cost Expansion Foundry
 
-The Worker can run one private expansion pass per UTC day across **every model explicitly admitted as zero-cost**.
+The Worker runs one private expansion pass per UTC day across **every route that can be hard-gated to zero API cost**.
 
 Current live intent:
 
 - every configured OpenRouter route must be `openrouter/free` or end in `:free`; requests hard-set provider max price to zero;
 - each configured free OpenRouter model is called independently, not merely used as a fallback;
-- Cloudflare Workers AI can be isolated to Foundry-only use with `WORKERS_AI_FOUNDRY_ENABLED=true` plus `WORKERS_AI_ZERO_COST=true`;
-- Osiris Gateway, OpenAI, Gemini, Perplexity and Anthropic join the Foundry only when both their normal enable flag **and** an explicit provider-specific `*_ZERO_COST=true` flag are present with credentials;
+- Cloudflare Workers AI joins the Foundry through the existing `ZERO_COST_MODE=true` profile and its Workers AI binding, while remaining outside continuous sensing unless `WORKERS_AI_ENABLED=true`;
+- paid-capable API providers such as Osiris Gateway, OpenAI, Gemini, Perplexity and Anthropic are **not** assumed free merely because a key or trial exists; they remain available to the sensor mesh when explicitly configured, but do not enter the zero-cost Foundry until their route has a hard no-charge contract;
 - OSIRIS OSINT continues to supply world signals separately; it is not treated as a generative model.
 
 The Foundry reads recent Ocean working-memory signals and existing Maison assets, then proposes private candidates such as questions, Oracle blocks, tests, Farol paths, Reels, Posts, Stories, carousels, video scripts, physical/digital products, bundles, services, experiences, ebooks, campaigns, B2B offers, seasonal offers and experiments.
