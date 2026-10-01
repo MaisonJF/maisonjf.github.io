@@ -1,0 +1,26 @@
+name: Production Lighthouse Report
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/production-lighthouse-report.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for production deploy
+        run: sleep 45
+      - name: Lighthouse production
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://maison-jf.com/
+          uploadArtifacts: true
+          temporaryPublicStorage: false
