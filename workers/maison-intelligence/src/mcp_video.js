@@ -1,7 +1,7 @@
 import { handleVideoGenerationRequest } from './video_generation.js';
 import { ingestOceanMemory } from './ocean_memory.js';
 import { ingestVaultCandidate } from './vault_candidates.js';
-import { ingestCandidateInbox, listCandidateInbox } from './candidate_inbox.js';
+import { decideCandidateInbox, ingestCandidateInbox, listCandidateInbox } from './candidate_inbox.js';
 // MAISON JF · minimal Streamable HTTP MCP bridge for the short-video engine
 // Initial scope is intentionally narrow: health, generate, result.
 // VIDEO_GENERATION_TOKEN never leaves the Worker.
@@ -171,6 +171,18 @@ function tools(){
       securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
     },
     {
+      name:'maison_decide_candidate',
+      title:'Decide Maison candidate',
+      description:'Append a human review decision for one private candidate. Approval does not publish, activate, price or launch anything.',
+      inputSchema:{type:'object',required:['candidate_id','decision'],properties:{
+        candidate_id:{type:'string',minLength:5,maxLength:80},
+        decision:{type:'string',enum:['approve','reject','archive','defer','develop']},
+        reason:{type:'string',maxLength:2000}
+      },additionalProperties:false},
+      annotations:{readOnlyHint:false,destructiveHint:false,idempotentHint:false,openWorldHint:false},
+      securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
+    },
+    {
       name:'maison_video_result',
       title:'Maison video result',
       description:'Read the provider result stream for a previously queued MAISON JF video job.',
@@ -233,6 +245,11 @@ async function callTool(request,env,name,args){
     if(!env.GROWTH_DB) return toolText({error:'growth_db_missing'},true);
     const rows=await listCandidateInbox(env,args||{});
     return toolText({count:rows.length,candidates:rows},false);
+  }
+  if(name==='maison_decide_candidate'){
+    if(!env.GROWTH_DB) return toolText({error:'growth_db_missing'},true);
+    const body=await decideCandidateInbox(env,{...(args||{}),actor:'human_mcp'});
+    return toolText(body,false);
   }
   return toolText({error:'unknown_tool'},true);
 }
