@@ -19,6 +19,7 @@ import { handleMaisonMcpRequest } from './mcp_video.js';
 import { handleOceanMemoryRequest, ingestOceanMemory } from './ocean_memory.js';
 import { routeOceanContext } from './ocean_context.js';
 import { buildEditorialProposal, buildInlineBrainAlert } from './content_proposal.js';
+import { generateEditorialCandidates } from './editorial_candidate_generation.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -80,6 +81,53 @@ async function markUsage(env, providerId, day, ok, usage) {
       reported_cost_usd=reported_cost_usd+excluded.reported_cost_usd,
       updated_at=datetime('now')
   `).bind(day, providerId, ok ? 0 : 1, reportedCost).run();
+}
+
+async function maybeGenerateEditorialCandidates(env,{oceanContext,brainAlert,observedAt}={}) {
+  if (!isTrue(env.EDITORIAL_CANDIDATE_GENERATION_ENABLED)) return { skipped:'editorial_generation_disabled' };
+  if (!oceanContext || !brainAlert) return { skipped:'no_ocean_alert' };
+  const priority=Number(brainAlert.ocean_alert_priority ?? brainAlert.strength ?? 0);
+  if (!Number.isFinite(priority) || priority < 70) return { skipped:'below_editorial_threshold' };
+  if (['descoberta-organica-e-reconhecimento-da-maison','atelier-principios-transferiveis-e-dna-maison'].includes(oceanContext.oceanKey)) {
+    return { skipped:'strategic_ocean_no_paid_body' };
+  }
+  if (!isTrue(env.OPENROUTER_ENABLED) || !env.OPENROUTER_API_KEY || !PROVIDERS.openrouter) {
+    return { skipped:'zero_cost_editorial_provider_unavailable' };
+  }
+
+  const day=utcDay(observedAt ? new Date(observedAt) : new Date());
+  const usageKey='editorial_candidates:openrouter';
+  const cap=clampInt(env.MAX_DAILY_EDITORIAL_CANDIDATE_CALLS,2,1,6);
+  const row=await env.GROWTH_DB.prepare(`
+    SELECT calls
+    FROM external_intelligence_daily_usage
+    WHERE usage_date=? AND provider_id=?
+    LIMIT 1
+  `).bind(day,usageKey).first();
+  if (Number(row?.calls||0) >= cap) return { skipped:'editorial_daily_cap' };
+
+  try {
+    const outcome=await generateEditorialCandidates(env,{
+      caller:PROVIDERS.openrouter,
+      oceanContext,
+      brainAlert,
+      providerId:'openrouter'
+    });
+    await markUsage(env,usageKey,day,true,outcome.usage);
+    console.info('MAISON_EDITORIAL_CANDIDATES',JSON.stringify({
+      ocean_key:oceanContext.oceanKey,
+      stored:outcome.stored,
+      duplicates:outcome.duplicates,
+      rejected:outcome.rejected,
+      provider:outcome.provider_id,
+      model:outcome.model_id
+    }));
+    return outcome;
+  } catch (error) {
+    try { await markUsage(env,usageKey,day,false,null); } catch {}
+    console.error('MAISON_EDITORIAL_CANDIDATE_GENERATION_FAILED',oceanContext.oceanKey,error?.message??error);
+    return { failed:true,error:error?.message||'editorial_candidate_generation_failed' };
+  }
 }
 
 async function persistObservation(env, task, result) {
@@ -274,13 +322,20 @@ async function persistObservation(env, task, result) {
     }));
   }
 
+  const editorialCandidates=await maybeGenerateEditorialCandidates(env,{
+    oceanContext,
+    brainAlert,
+    observedAt
+  });
+
   return {
     observationId,eventId,evidenceId,
     territoryKey:brainTerritoryKey,
     sourceTerritoryKey:task.territoryKey,
     oceanContext,
     brainAlert,
-    contentProposal
+    contentProposal,
+    editorialCandidates
   };
 }
 
