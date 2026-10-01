@@ -2,7 +2,7 @@ import {
   buildSensorPrompt, clampInt, domainOf, isTrue, privacySafeText,
   sha256Hex, territoriesForDate, uniqueCanonicalUrls
 } from './core.js';
-import { configuredProviders, PROVIDERS } from './providers.js';
+import { configuredProviders, configuredZeroCostModelSpecs, PROVIDERS } from './providers.js';
 import { configuredOsirisSources, fetchOsirisSource, sourceDefinition, osirisSourceDue } from './sources.js';
 import { mirrorToOsirisMemory } from './memory.js';
 import { configuredPublicSourceTasks, fetchPublicSource, publicSourceDue, publicTaskIdentity } from './public_sources.js';
@@ -20,6 +20,7 @@ import { handleOceanMemoryRequest, ingestOceanMemory } from './ocean_memory.js';
 import { routeOceanContext } from './ocean_context.js';
 import { buildEditorialProposal, buildInlineBrainAlert } from './content_proposal.js';
 import { generateEditorialCandidates } from './editorial_candidate_generation.js';
+import { runExpansionFoundry } from './expansion_foundry.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -81,6 +82,41 @@ async function markUsage(env, providerId, day, ok, usage) {
       reported_cost_usd=reported_cost_usd+excluded.reported_cost_usd,
       updated_at=datetime('now')
   `).bind(day, providerId, ok ? 0 : 1, reportedCost).run();
+}
+
+async function processExpansionFoundryTask(env,task) {
+  if (!isTrue(env.EXPANSION_FOUNDRY_ENABLED)) return { skipped:'expansion_foundry_disabled' };
+  const control=await controlState(env);
+  if (!control.enabled) return { skipped:control.reason };
+
+  const day=task.day||utcDay();
+  const usageKey=('foundry:'+String(task.modelKey||task.providerId||'model')).slice(0,120);
+  const cap=clampInt(env.MAX_DAILY_FOUNDRY_CALLS_PER_MODEL,1,1,4);
+  const row=await env.GROWTH_DB.prepare(`
+    SELECT calls FROM external_intelligence_daily_usage
+    WHERE usage_date=?1 AND provider_id=?2
+    LIMIT 1
+  `).bind(day,usageKey).first();
+  if(Number(row?.calls||0)>=cap)return { skipped:'foundry_daily_cap',modelKey:task.modelKey };
+
+  let outcome;
+  try{
+    outcome=await runExpansionFoundry(env,{spec:task.spec});
+    await markUsage(env,usageKey,day,true,outcome.usage);
+  }catch(error){
+    try{await markUsage(env,usageKey,day,false,null);}catch{}
+    throw error;
+  }
+  return {
+    stored:true,
+    provider:outcome.provider_id,
+    model:outcome.model_id,
+    modelKey:outcome.model_key,
+    lens:outcome.lens,
+    candidates:outcome.stored,
+    duplicates:outcome.duplicates,
+    rejected:outcome.rejected
+  };
 }
 
 async function maybeGenerateEditorialCandidates(env,{oceanContext,brainAlert,observedAt}={}) {
@@ -600,6 +636,33 @@ async function enqueueVisibilityProbeRun(env,scheduledDate,getControl=()=>contro
   if (messages.length) await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0,100));
   return { queued:messages.length,providers:providers.length,probes:probes.length };
 }
+async function enqueueDailyExpansionRun(env,scheduledDate,getControl=()=>controlState(env)) {
+  if (!isTrue(env.EXPANSION_FOUNDRY_ENABLED)) return { queued:0,reason:'expansion_foundry_disabled' };
+  const specs=configuredZeroCostModelSpecs(env);
+  if (!specs.length) return { queued:0,reason:'no_zero_cost_models_configured' };
+
+  const control=await getControl();
+  if (!control.enabled) return { queued:0,reason:control.reason };
+
+  const day=utcDay(scheduledDate);
+  const messages=[];
+  for(const spec of specs){
+    const fingerprint=await sha256Hex(spec.key);
+    messages.push({body:{
+      kind:'expansion_foundry',
+      day,
+      providerId:spec.providerId,
+      modelKey:spec.key,
+      spec,
+      territoryKey:'maison_expansion',
+      promptFingerprint:fingerprint,
+      taskKey:`${day}:foundry:${fingerprint.slice(0,24)}`
+    }});
+  }
+  if(messages.length)await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0,100));
+  return {queued:messages.length,models:specs.length};
+}
+
 async function enqueueRun(env,scheduledDate,getControl=()=>controlState(env)) {
   const providers=configuredProviders(env);
   if (!providers.length) return { queued:0,reason:'no_provider_secrets_configured' };
@@ -669,16 +732,22 @@ export default {
     if (when.getUTCHours()===3 && when.getUTCMinutes()===0) {
       jobs.push(enqueueVisibilityProbeRun(env,when,getControl));
     }
+    // Once per day, every explicitly zero-cost model gets one independent
+    // Foundry pass. Outputs remain private candidates and never self-publish.
+    if (when.getUTCHours()===6 && when.getUTCMinutes()===0) {
+      jobs.push(enqueueDailyExpansionRun(env,when,getControl));
+    }
     ctx.waitUntil(Promise.all(jobs));
   },
 
   async queue(batch, env) {
     for (const message of batch.messages) {
       const task = message.body;
-      if (!task || !['sensor_query','source_snapshot','public_source_snapshot','search_visibility_snapshot','visibility_probe'].includes(task.kind)) { message.ack(); continue; }
+      if (!task || !['sensor_query','source_snapshot','public_source_snapshot','search_visibility_snapshot','visibility_probe','expansion_foundry'].includes(task.kind)) { message.ack(); continue; }
       try {
         let outcome;
         if (task.kind === 'source_snapshot') outcome=await processSourceTask(env,task);
+        else if (task.kind === 'expansion_foundry') outcome=await processExpansionFoundryTask(env,task);
         else if (task.kind === 'public_source_snapshot') outcome=await processPublicSourceTask(env,task);
         else if (task.kind === 'search_visibility_snapshot') outcome=await processSearchVisibilityTask(env,task);
         else if (task.kind === 'visibility_probe') outcome=await processVisibilityProbeTask(env,task);
