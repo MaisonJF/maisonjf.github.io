@@ -3503,12 +3503,12 @@ main h1,
 }
 @media(max-width:900px){
   .home-page--final .hero--final .media-slot--hero{
-    height:clamp(380px,58vw,540px);
+    height:clamp(340px,48vw,460px);
   }
 }
 @media(max-width:700px){
   .home-page--final .hero--final .media-slot--hero{
-    height:clamp(360px,58svh,500px);
+    height:clamp(300px,42svh,380px);
     aspect-ratio:auto;
   }
 }
@@ -3566,5 +3566,23 @@ main h1,
   .product-gallery__item{
     margin:0 0 14px!important;
     aspect-ratio:auto!important;
+  }
+}
+
+
+/* Mobile consent compacting 2026-10-01 */
+@media(max-width:760px){
+  .maison-consent{
+    gap:.55rem;
+    padding:.7rem .8rem;
+  }
+  .maison-consent__copy span{
+    font-size:.78rem;
+    line-height:1.35;
+  }
+  .maison-consent__actions{gap:.5rem}
+  .maison-consent button{
+    min-height:44px;
+    padding:.5rem .6rem;
   }
 }
