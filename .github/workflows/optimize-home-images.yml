@@ -34,10 +34,10 @@ jobs:
 
           jobs = {
               'images/maison-jf-hero-hq.jpg': ('hero', [640, 960, 1280, 1672], 82),
-              'images/maison-jf-casa-amigos-hq.jpg': ('casa', [480, 768, 1080], 80),
-              'images/maison-jf-corpo-homem-hq.jpg': ('corpo', [480, 768, 1080], 80),
-              'images/cabeca-mulher-q94.jpg': ('cabeca', [480, 768, 1080], 80),
-              'images/maison-jf-companhia-hq.jpg': ('presenca', [480, 768, 1080], 80),
+              'images/maison-jf-casa-amigos-hq.jpg': ('casa', [480, 640, 768, 1080], 80),
+              'images/maison-jf-corpo-homem-hq.jpg': ('corpo', [480, 640, 768, 1080], 80),
+              'images/cabeca-mulher-q94.jpg': ('cabeca', [480, 640, 768, 1080], 80),
+              'images/maison-jf-companhia-hq.jpg': ('presenca', [480, 640, 768, 1080], 80),
               'images/maison-jf-b2b-office-hq.jpg': ('b2b', [640, 960, 1280], 80),
           }
 
