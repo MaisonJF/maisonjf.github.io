@@ -255,7 +255,7 @@
     const close = $('.fecho');
     if (close) {
       setText('.fecho__title', 'Chegaste até aqui. O que te trouxe ainda está à espera de resposta.', close);
-      setText('.fecho__text', 'Se já sabes o que queres, escolhe. Se não sabes, usa o Farol. Se nada encaixar, fala connosco.', close);
+      setText('.fecho__text', 'Se já sabes o que queres, escolhe. Se não sabes, usa o Farol. Se nada encaixar, fala comigo.', close);
     }
 
     const share = $('.share');
