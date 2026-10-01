@@ -11,6 +11,7 @@ on:
       - 'workers/maison-intelligence/wrangler.jsonc'
       - 'workers/maison-intelligence/package.json'
       - '.github/workflows/maison-ocean-memory-deploy.yml'
+      - '.github/maison-growth/brain/migrations/0023_candidate_inbox.sql'
 
 permissions:
   contents: read
@@ -49,8 +50,22 @@ jobs:
           npm test
           npm run check
 
-      # OCEAN.1 is already provisioned in production. Code-only deploys deliberately
-      # avoid D1 migration/seed writes; fresh environments use the canonical migration chain.
+      # Candidate Inbox 0023 is an idempotent runtime dependency for the Foundry.
+      # Apply only this reviewed CREATE IF NOT EXISTS migration before code deploy.
+      - name: Ensure Candidate Inbox schema 0023
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp)"
+          trap 'rm -f "$tmp"' EXIT
+          sed -E '/^[[:space:]]*--/d; /^[[:space:]]*PRAGMA foreign_keys/d' \
+            ../../.github/maison-growth/brain/migrations/0023_candidate_inbox.sql > "$tmp"
+          npx wrangler d1 execute maison-growth-engine --remote --file="$tmp"
+          npx wrangler d1 execute maison-growth-engine --remote --command="SELECT schema_value FROM schema_state WHERE schema_key='maison_candidate_inbox_schema_version';"
+
       - name: Render live private Worker config
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
@@ -119,7 +134,7 @@ jobs:
           with open(sys.argv[1],encoding='utf-8') as fh:
               payload=json.load(fh)
           names={tool.get('name') for tool in payload.get('result',{}).get('tools',[])}
-          required={'maison_ingest_ocean_signal','maison_ingest_vault_candidate'}
+          required={'maison_ingest_ocean_signal','maison_ingest_vault_candidate','maison_ingest_candidate','maison_list_candidates','maison_decide_candidate'}
           missing=required-names
           assert not missing,{'missing_mcp_tools':sorted(missing),'available':sorted(names)}
           print('Live MCP D1 tools: OK')
