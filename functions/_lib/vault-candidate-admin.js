@@ -82,6 +82,35 @@ async function listOracle(db,state,limit){
   return (result.results||[]).map(rowToItem);
 }
 
+export async function vaultCandidateStats(db){
+  const row=await db.prepare(`
+    SELECT
+      (SELECT COUNT(*) FROM vault_questions) AS all_questions,
+      (SELECT COUNT(*) FROM vault_oracle_blocks) AS all_oracle_blocks,
+      (SELECT COUNT(*) FROM vault_questions
+        WHERE source_kind IN ('ocean_mcp_candidate','ocean_seed_candidate')
+          AND status='candidate' AND lifecycle_state='candidate') AS question_candidates,
+      (SELECT COUNT(*) FROM vault_oracle_blocks
+        WHERE source_kind IN ('ocean_mcp_candidate','ocean_seed_candidate')
+          AND status='candidate' AND lifecycle_state='candidate') AS oracle_candidates,
+      (SELECT COUNT(*) FROM vault_questions
+        WHERE status='review' AND lifecycle_state='review') AS question_review,
+      (SELECT COUNT(*) FROM vault_oracle_blocks
+        WHERE status='review' AND lifecycle_state='review') AS oracle_review,
+      (SELECT COUNT(*) FROM vault_questions
+        WHERE status='active' AND lifecycle_state='live') AS question_live,
+      (SELECT COUNT(*) FROM vault_oracle_blocks
+        WHERE status='active' AND lifecycle_state='live') AS oracle_live
+  `).first();
+  const out={};
+  for(const [key,value] of Object.entries(row||{}))out[key]=Number(value||0);
+  out.total=(out.all_questions||0)+(out.all_oracle_blocks||0);
+  out.candidates=(out.question_candidates||0)+(out.oracle_candidates||0);
+  out.review=(out.question_review||0)+(out.oracle_review||0);
+  out.live=(out.question_live||0)+(out.oracle_live||0);
+  return {ok:true,...out};
+}
+
 export async function listOceanVaultCandidates(db,{type='all',state='candidate',limit=100}={}){
   const safeType=normalizeType(type);
   const safeState=normalizeState(state);
