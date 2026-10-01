@@ -44,7 +44,9 @@ WITH expected(migration, name) AS (
     ('0022_ocean_working_memory', 'ocean_memory_signals'),
     ('0022_ocean_working_memory', 'ocean_memory_state'),
     ('0022_ocean_working_memory', 'ocean_memory_alerts'),
-    ('0022_ocean_working_memory', 'brain_ocean_memory_feed')
+    ('0022_ocean_working_memory', 'brain_ocean_memory_feed'),
+    ('0023_candidate_inbox', 'maison_candidate_inbox'),
+    ('0023_candidate_inbox', 'maison_candidate_review_queue')
 )
 SELECT
   e.migration,
@@ -103,7 +105,10 @@ WHERE name IN (
   'ocean_memory_signals',
   'ocean_memory_state',
   'ocean_memory_alerts',
-  'brain_ocean_memory_feed'
+  'brain_ocean_memory_feed',
+  'maison_candidate_inbox',
+  'maison_candidate_decisions',
+  'maison_candidate_review_queue'
 )
 ORDER BY type,name;
 "
@@ -119,7 +124,8 @@ WHERE schema_key IN (
   'maison_brain_runtime_schema_version',
   'maison_growth_a12_schema_version',
   'maison_brain_b2b_feedback_schema_version',
-  'maison_ocean_memory_schema_version'
+  'maison_ocean_memory_schema_version',
+  'maison_candidate_inbox_schema_version'
 )
 ORDER BY schema_key;
 "
