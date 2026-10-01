@@ -41,6 +41,28 @@ Adapters are implemented for:
 
 A provider is skipped unless its secret and required model setting are configured.
 
+## Daily zero-cost Expansion Foundry
+
+The Worker can run one private expansion pass per UTC day across **every model explicitly admitted as zero-cost**.
+
+Current live intent:
+
+- every configured OpenRouter route must be `openrouter/free` or end in `:free`; requests hard-set provider max price to zero;
+- each configured free OpenRouter model is called independently, not merely used as a fallback;
+- Cloudflare Workers AI can be isolated to Foundry-only use with `WORKERS_AI_FOUNDRY_ENABLED=true` plus `WORKERS_AI_ZERO_COST=true`;
+- Osiris Gateway, OpenAI, Gemini, Perplexity and Anthropic join the Foundry only when both their normal enable flag **and** an explicit provider-specific `*_ZERO_COST=true` flag are present with credentials;
+- OSIRIS OSINT continues to supply world signals separately; it is not treated as a generative model.
+
+The Foundry reads recent Ocean working-memory signals and existing Maison assets, then proposes private candidates such as questions, Oracle blocks, tests, Farol paths, Reels, Posts, Stories, carousels, video scripts, physical/digital products, bundles, services, experiences, ebooks, campaigns, B2B offers, seasonal offers and experiments.
+
+All non-editorial expansion material is stored in `maison_candidate_inbox`. Question and Oracle candidates keep using their dedicated private Vault tables. Every result remains `candidate → new`, requires human review and has no publication, pricing, launch, checkout or catalogue authority.
+
+The private MCP also exposes:
+
+- `maison_ingest_candidate` — add a private expansion candidate;
+- `maison_list_candidates` — read the review inbox;
+- `maison_decide_candidate` — append a human decision such as develop, approve, defer, archive or reject. Approval still does **not** put anything live.
+
 ## Safety defaults
 
 - environment `WORKER_ENABLED=false`;
