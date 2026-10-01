@@ -23,7 +23,7 @@
 <h1 id="title">A confirmar a compra…</h1>
 <p id="message">Só um instante.</p>
 <p class="receipt__details" id="details"></p>
-<p>Quando a encomenda for expedida, receberás a informação de acompanhamento disponível.</p>
+<p>Quando a encomenda sair, recebes a informação de acompanhamento disponível.</p>
 <div class="receipt__actions">
 <a class="button button--light" href="./produtos/">VOLTAR AOS PRODUTOS</a>
 <a class="text-link" id="help" target="_blank" rel="noopener noreferrer">Tenho uma dúvida</a>
@@ -38,7 +38,7 @@
   const sessionId=new URLSearchParams(location.search).get('session_id');
   const money=(amount,currency='eur')=>new Intl.NumberFormat('pt-PT',{style:'currency',currency:currency.toUpperCase()}).format(amount/100);
   const help=document.getElementById('help');
-  help.href='https://wa.me/351923318289?text='+encodeURIComponent('Olá Maison JF. Tenho uma dúvida sobre uma encomenda feita no site.');
+  help.href='https://wa.me/351923318289?text='+encodeURIComponent('Olá, João. Tenho uma dúvida sobre uma encomenda feita no site.');
   if(!sessionId){
     title.textContent='Não encontrei a compra.';
     message.textContent='Volta aos Produtos e inicia o pagamento novamente.';
@@ -53,7 +53,7 @@
     .then(data=>{
       if(data.payment_status==='paid'){
         title.textContent='Pagamento confirmado.';
-        message.textContent=data.items&&data.items.length>1?'A tua encomenda ficou registada.':'A tua encomenda de '+data.product_name+' ficou registada.';
+        message.textContent=data.items&&data.items.length>1?'Já tenho a tua encomenda.':'Já tenho a tua encomenda de '+data.product_name+'.';
         const parts=[];
         if(Number.isInteger(data.amount_total))parts.push('Total: '+money(data.amount_total,data.currency));
         if(data.email)parts.push('Email: '+data.email);
