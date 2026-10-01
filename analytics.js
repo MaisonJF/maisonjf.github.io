@@ -570,31 +570,19 @@
     element.style.setProperty('text-wrap', 'nowrap', 'important');
     element.style.setProperty('overflow-wrap', 'normal', 'important');
     element.style.setProperty('line-height', '1', 'important');
-
     element.style.setProperty('font-size', max + 'px', 'important');
 
     const rect = element.getBoundingClientRect();
     const viewportRight = document.documentElement.clientWidth - 16;
-    const availableFromViewport = Math.max(120, viewportRight - rect.left);
-    const parent = element.parentElement;
-    const parentWidth = parent ? parent.getBoundingClientRect().width : rect.width;
-    const available = Math.max(120, Math.min(parentWidth || availableFromViewport, availableFromViewport));
+    const parentWidth = element.parentElement?.getBoundingClientRect().width || rect.width;
+    const available = Math.max(120, Math.min(parentWidth, viewportRight - rect.left));
+    const measured = element.scrollWidth;
 
-    if (element.scrollWidth <= available + 1) {
-      element.dataset.maisonTitleFit = '1';
-      return;
+    if (measured > available + 1) {
+      const fitted = Math.max(min, Math.min(max, max * (available / measured) * .985));
+      element.style.setProperty('font-size', fitted.toFixed(2) + 'px', 'important');
     }
 
-    let low = min;
-    let high = max;
-    for (let i = 0; i < 10; i += 1) {
-      const mid = (low + high) / 2;
-      element.style.setProperty('font-size', mid.toFixed(2) + 'px', 'important');
-      if (element.scrollWidth <= available + 1) low = mid;
-      else high = mid;
-    }
-
-    element.style.setProperty('font-size', Math.max(min, low).toFixed(2) + 'px', 'important');
     element.dataset.maisonTitleFit = '1';
   }
 
