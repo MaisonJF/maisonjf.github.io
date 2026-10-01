@@ -62,19 +62,21 @@ class RemoteSchemaGateTests(unittest.TestCase):
         self.assertIn("wrangler d1 execute", self.inspect)
         self.assertIn("--remote", self.inspect)
 
-    def test_migration_inspector_covers_complete_0001_to_0022_chain(self):
+    def test_migration_inspector_covers_complete_0001_to_0023_chain(self):
         found = re.findall(r"'(00\d{2}_[a-z0-9_]+)'", self.inspect)
         migrations = [item.split("_", 1)[0] for item in found]
         unique_migrations = sorted(set(migrations))
         self.assertEqual(
             unique_migrations,
-            [f"{number:04d}" for number in range(1, 23)],
+            [f"{number:04d}" for number in range(1, 24)],
         )
         self.assertIn("missing_or_partial", self.inspect)
         self.assertIn("maison-b2b", self.inspect)
         self.assertIn("commercial_recovery_journal", self.inspect)
         self.assertIn("maison_ocean_memory_schema_version", self.inspect)
         self.assertIn("brain_ocean_memory_feed", self.inspect)
+        self.assertIn("maison_candidate_inbox_schema_version", self.inspect)
+        self.assertIn("maison_candidate_review_queue", self.inspect)
 
     def test_full_apply_orders_0017_before_0018(self):
         self.assertIn("0017_b2b_canonical_solution.sql", self.apply)
