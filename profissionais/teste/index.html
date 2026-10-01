@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,follow">
 <title>O QUE O TEU NEGÓCIO ESTÁ A IGNORAR? | MAISON JF®</title>
-<meta name="description" content="Diagnóstico profissional MAISON JF®: oito perguntas para identificar oportunidades de revenda, experiência, continuidade e diferenciação.">
+<meta name="description" content="Teste profissional MAISON JF®: oito perguntas para encontrares um ponto de entrada comercial no teu negócio.">
 <link rel="canonical" href="https://maison-jf.com/profissionais/teste/">
 <link rel="stylesheet" href="../../maison.css?v=20260922-globalgold1">
 <script src="../../analytics.js?v=20260921-footer2" defer></script>
@@ -30,11 +30,11 @@
 </style>
 </head>
 <body>
-<header class="site-header"><a class="brand" href="../">MAISON JF® · PROFISSIONAIS</a><nav><a href="../">Profissionais</a><a href="../../contacto/?interesse=b2b">Contacto B2B</a></nav></header>
+<header class="site-header"><a class="brand" href="../">MAISON JF® · PROFISSIONAIS</a><nav><a href="../">Profissionais</a><a href="../../contacto/?interesse=b2b">Falar comigo</a></nav></header>
 <main class="b2b-test"><div class="box">
-<section id="intro" class="step on"><p class="eyebrow">≈ 2 minutos · 8 perguntas · gratuito</p><h1 class="title">O QUE O TEU NEGÓCIO ESTÁ A IGNORAR?</h1><p>Talvez haja dinheiro escondido numa parte da experiência que hoje parece apenas rotina. Este diagnóstico não promete receitas mágicas: ajuda-nos a perceber onde existe uma oportunidade comercial que vale a pena explorar.</p><button class="button button--light" id="start">Começar</button></section>
+<section id="intro" class="step on"><p class="eyebrow">≈ 2 minutos · 8 perguntas · gratuito</p><h1 class="title">O QUE O TEU NEGÓCIO ESTÁ A IGNORAR?</h1><p>Talvez haja dinheiro escondido numa parte da experiência que hoje parece apenas rotina. Em oito perguntas, ajudo-te a perceber onde pode estar uma oportunidade que vale a pena explorar. Sem receitas mágicas.</p><button class="button button--light" id="start">Começar</button></section>
 <section id="questions" class="step"><div class="progress" id="progress"></div><div class="progressbar"><span id="bar"></span></div><div class="q" id="question" tabindex="-1"></div><div class="choices" id="choices"></div></section>
-<section id="result" class="step"><p class="eyebrow">Oportunidade detectada</p><h1 class="title" id="resultTitle" tabindex="-1"></h1><p class="result-copy" id="resultText"></p><div class="result-meta" id="resultMeta"></div><div class="offer"><p class="eyebrow">Próximo passo</p><h2 id="offerTitle"></h2><p id="offerText"></p><a class="button button--light" id="offerCta"></a><div class="offer-options" id="offerOptions"></div></div><button class="restart" id="restart">Refazer o diagnóstico</button></section>
+<section id="result" class="step"><p class="eyebrow">Isto chamou-me a atenção</p><h1 class="title" id="resultTitle" tabindex="-1"></h1><p class="result-copy" id="resultText"></p><div class="result-meta" id="resultMeta"></div><div class="offer"><p class="eyebrow">Próximo passo</p><h2 id="offerTitle"></h2><p id="offerText"></p><a class="button button--light" id="offerCta"></a><div class="offer-options" id="offerOptions"></div></div><button class="restart" id="restart">Fazer outra vez</button></section>
 </div></main>
 <script>
 const $=id=>document.getElementById(id);
@@ -60,7 +60,7 @@ const scales=[
  ['pequeno','Quero começar pequeno e validar.'],['regular','Consigo testar uma selecção com alguma variedade.'],['recorrente','Procuro algo que possa repor regularmente.'],['projeto','Tenho um projecto específico e quero discutir quantidades e condições.']
 ];
 const starts=[
- ['curadoria','Quero que me recomendem um ponto de partida.'],['categoria','Já tenho uma categoria de produto em mente.'],['proposta','Quero receber uma proposta adaptada ao meu contexto.'],['piloto','Quero testar um piloto pequeno antes de decidir.'],['conversa','Prefiro falar primeiro e perceber se existe encaixe.']
+ ['curadoria','Quero que me recomendes um ponto de partida.'],['categoria','Já tenho uma categoria de produto em mente.'],['proposta','Quero receber uma proposta adaptada ao meu contexto.'],['piloto','Quero testar um piloto pequeno antes de decidir.'],['conversa','Prefiro falar primeiro e perceber se existe encaixe.']
 ];
 const giftConfessions=[
  ['cliente','“Quero oferecer alguma coisa aos clientes que pareça pensada, não promocional.”'],
@@ -170,7 +170,7 @@ function offers(type){
  else if(state.business==='alojamento')second=offer('../como-criar-um-ritual-de-boas-vindas-para-clientes.html','Criar um ritual de boas-vindas','explorar');
  else second=offer('../o-que-posso-oferecer-de-diferente-aos-meus-clientes.html','Explorar diferenciação','explorar');
  const contactInterest=type==='gifting'?'b2b-presentes':type==='training_pilot'?'b2b-formacao':'b2b';
- const contact=offer('../../contacto/?interesse='+contactInterest+'&origem=teste-profissional','Abrir conversa B2B','conversa');
+ const contact=offer('../../contacto/?interesse='+contactInterest+'&origem=teste-profissional','Falar contigo','conversa');
  return [main,second,contact].filter((x,i,a)=>a.findIndex(y=>y.href===x.href)===i).slice(0,3);
 }
 function finish(){
