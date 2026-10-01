@@ -90,7 +90,10 @@
     document.body.style.overflow='hidden';
     lightboxClose?.focus();
     const piece=(img.alt||'Peça da Curadoria Maison').split(' — ')[0];
-    lightboxOrder?.setAttribute('href','../contactos/?assunto='+encodeURIComponent('Encomenda A Floressência — '+piece));
+    const orderMessage=`Olá Maison JF. Quero encomendar a peça “${piece}” d’A Floressência. Podem indicar-me as opções disponíveis, personalização, preço e prazo?`;
+    lightboxOrder?.setAttribute('href','https://wa.me/351923318289?text='+encodeURIComponent(orderMessage));
+    lightboxOrder?.setAttribute('target','_blank');
+    lightboxOrder?.setAttribute('rel','noopener noreferrer');
     lightboxOrder?.setAttribute('data-piece',piece);
     window.maisonAnalytics?.track?.('curadoria_image_expand',{image:img.src.split('/').pop(),piece,page_path:location.pathname});
   });
