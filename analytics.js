@@ -72,6 +72,69 @@
     });
   }
 
+  function enhanceSiteHeaderNavigation() {
+    const header = document.querySelector('.site-header');
+    const nav = header?.querySelector('nav');
+    if (!header || !nav) return;
+
+    const normalizePath = value => {
+      try {
+        const url = new URL(value, window.location.href);
+        return url.pathname.replace(/\/(index\.html)?$/, '/').replace(/\.html$/, '').replace(/\/$/, '') || '/';
+      } catch (_) {
+        return '';
+      }
+    };
+
+    const currentPath = normalizePath(window.location.href);
+    nav.querySelectorAll('a[href]').forEach(link => {
+      const linkPath = normalizePath(link.href);
+      if (linkPath && linkPath === currentPath) link.setAttribute('aria-current', 'page');
+    });
+
+    if (!nav.id) nav.id = 'main-navigation';
+    if (header.querySelector('.maison-menu-toggle')) return;
+
+    const lang = String(document.documentElement.lang || 'pt-PT').toLowerCase();
+    const labels = lang.startsWith('en')
+      ? { open: 'Open menu', close: 'Close menu' }
+      : lang.startsWith('es')
+        ? { open: 'Abrir menú', close: 'Cerrar menú' }
+        : { open: 'Abrir menu', close: 'Fechar menu' };
+
+    const toggle = document.createElement('button');
+    toggle.className = 'maison-menu-toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-controls', nav.id);
+    toggle.setAttribute('aria-label', labels.open);
+    toggle.innerHTML = '<span aria-hidden="true"></span>';
+    header.appendChild(toggle);
+
+    const close = (restoreFocus = false) => {
+      header.classList.remove('site-header--menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', labels.open);
+      if (restoreFocus) toggle.focus();
+    };
+
+    toggle.addEventListener('click', () => {
+      const open = header.classList.toggle('site-header--menu-open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? labels.close : labels.open);
+    });
+
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => close(false)));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && header.classList.contains('site-header--menu-open')) close(true);
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 700 && header.classList.contains('site-header--menu-open')) close(false);
+    }, { passive: true });
+  }
+
+  enhanceSiteHeaderNavigation();
+
   function loadGoogle() {
     if (googleLoaded) return;
     googleLoaded = true;
