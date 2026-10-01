@@ -89,7 +89,7 @@
         <p class="eyebrow">Não é isto?</p>
         <h2>Não adivinhes.</h2>
         <p>Entra pelo que queres sentir.</p>
-        <a class="text-link" href="${root}farol#farol">Seguir o Farol →</a>
+        <a class="text-link" href="${root}farol">Seguir o Farol →</a>
       </div>
     </section>
 
