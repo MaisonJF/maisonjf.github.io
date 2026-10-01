@@ -2,7 +2,8 @@ import { requireMaisonVault } from '../_lib/maison-vault.js';
 import {
   listOceanVaultCandidates,
   activateOceanVaultCandidates,
-  reviewOceanVaultCandidates
+  reviewOceanVaultCandidates,
+  seedOceanVaultCandidates
 } from '../_lib/vault-candidate-admin.js';
 
 export async function onRequestPost({request,env}){
@@ -37,6 +38,9 @@ export async function onRequestPost({request,env}){
     }
     if(action==='review'){
       return json(await reviewOceanVaultCandidates(db,{items:body.items}));
+    }
+    if(action==='seed'){
+      return json(await seedOceanVaultCandidates(db));
     }
     return json({error:'Ação inválida.'},400);
   }catch(error){
