@@ -1,0 +1,78 @@
+name: Optimize catalogue images
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/optimize-catalogue-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  optimize-catalogue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check pillow
+      - name: Build catalogue thumbnails
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+
+          jobs = {
+              'images/products/vela-vidro/vela-170g-produto.webp': ('product-vela-vidro', [360, 520], 78),
+              'images/products/vela-pequena/hero.webp': ('product-vela-pequena', [360, 520], 78),
+              'images/products/oleo-massagem/oleo-massagem-hero.webp': ('product-oleo-massagem', [360, 520], 78),
+              'images/products/nevoa/hero.webp': ('product-nevoa', [360, 520], 78),
+              'images/products/escalda-pes/hero.webp': ('product-escalda-pes', [360, 520], 78),
+              'images/cinematic/editorial.avif': ('services-editorial', [480, 768, 1100], 80),
+          }
+
+          jesmonite = [
+              'bandeja-terra-nova','bandeja-oval-terra-nova','vaso-canelado','tigela-concha',
+              'bandeja-organica','carrossel','prato-ondulado','vasinho-borda-ondulada',
+              'potiche-canelado-com-bandeja','tigela-canelada','prato-marmorizado',
+              'porta-objetos-de-nichos','tigela-lisa'
+          ]
+          for name in jesmonite:
+              jobs[f'images/products/jesmonite/{name}.webp']=(f'jesmonite-{name}', [360, 520], 78)
+
+          out=Path('images/perf/catalogue')
+          out.mkdir(parents=True,exist_ok=True)
+
+          for src,(name,widths,quality) in jobs.items():
+              path=Path(src)
+              if not path.exists():
+                  print('missing',src)
+                  continue
+              with Image.open(path) as im:
+                  im=im.convert('RGB')
+                  ow,oh=im.size
+                  for width in widths:
+                      width=min(width,ow)
+                      height=round(oh*width/ow)
+                      target=out/f'{name}-{width}.webp'
+                      resized=im if width==ow else im.resize((width,height),Image.Resampling.LANCZOS)
+                      resized.save(target,'WEBP',quality=quality,method=6,optimize=True)
+                      print(f'{target}: {width}x{height} · {target.stat().st_size/1024:.1f} KB')
+          PY
+      - name: Commit optimized images
+        shell: bash
+        run: |
+          if git diff --quiet -- images/perf/catalogue && [ -z "$(git ls-files --others --exclude-standard images/perf/catalogue)" ]; then
+            echo "No image changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/perf/catalogue
+          git commit -m "Gera imagens leves para catálogo e serviços"
+          git push
