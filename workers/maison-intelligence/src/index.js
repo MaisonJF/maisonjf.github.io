@@ -84,7 +84,7 @@ async function markUsage(env, providerId, day, ok, usage) {
 }
 
 async function maybeGenerateEditorialCandidates(env,{oceanContext,brainAlert,observedAt}={}) {
-  if (!isTrue(env.EDITORIAL_CANDIDATE_GENERATION_ENABLED)) return { skipped:'editorial_generation_disabled' };
+  if (!isTrue(env.OCEAN_MEMORY_ENABLED)) return { skipped:'ocean_memory_disabled' };
   if (!oceanContext || !brainAlert) return { skipped:'no_ocean_alert' };
   const priority=Number(brainAlert.ocean_alert_priority ?? brainAlert.strength ?? 0);
   if (!Number.isFinite(priority) || priority < 70) return { skipped:'below_editorial_threshold' };
@@ -97,7 +97,7 @@ async function maybeGenerateEditorialCandidates(env,{oceanContext,brainAlert,obs
 
   const day=utcDay(observedAt ? new Date(observedAt) : new Date());
   const usageKey='editorial_candidates:openrouter';
-  const cap=clampInt(env.MAX_DAILY_EDITORIAL_CANDIDATE_CALLS,2,1,6);
+  const cap=2;
   const row=await env.GROWTH_DB.prepare(`
     SELECT calls
     FROM external_intelligence_daily_usage
