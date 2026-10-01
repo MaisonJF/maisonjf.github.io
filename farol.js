@@ -734,7 +734,7 @@ const data={
     },
     "presente_especial": {
       "title": "Então não escolhas da prateleira.",
-      "text": "Explica-nos para quem é, o momento e o que queres que a pessoa sinta. Vemos se existe um pedido especial que a Maison consiga fazer sem inventar promessas.",
+      "text": "Explica-me para quem é, o momento e o que queres que a pessoa sinta. Vejo contigo se existe um pedido especial que faça sentido sem inventar promessas.",
       "cta": {
         "href": "/contacto/?interesse=pedidos-especiais",
         "text": "Criar um pedido especial"
@@ -752,10 +752,10 @@ const data={
     },
     "outro_falar": {
       "title": "Às vezes escolher começa por dizer a frase inteira.",
-      "text": "Conta-nos o que se passa. Se a Maison tiver um caminho que faça sentido, mostramos-to. Se não tiver, não inventamos.",
+      "text": "Conta-me o que se passa. Se eu tiver um caminho que faça sentido, mostro-to. Se não tiver, não invento.",
       "cta": {
         "href": "/contacto/",
-        "text": "Falar com a Maison"
+        "text": "Falar comigo"
       },
       "cta2": null
     }
@@ -776,23 +776,52 @@ const opts=document.getElementById('farolStep2Options');
 const out=document.getElementById('farolResult');
 const back2=document.getElementById('farolBack2');
 const back3=document.getElementById('farolBack3');
+const restart=document.getElementById('farolRestart');
+const progressEl=document.getElementById('farolProgress');
+const reducedMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function progress(step){
   dots.forEach((dot,i)=>dot.classList.toggle('farol__progress-dot--active',i<step));
+  if(progressEl){
+    progressEl.setAttribute('aria-valuenow',String(step));
+    progressEl.setAttribute('aria-label','Passo '+step+' de 3');
+  }
 }
 
-function show(step){
+function focusStep(step){
+  const active=steps[step];
+  if(!active)return;
+  const target=step===2?q:step===3?out:active;
+  window.requestAnimationFrame(()=>{
+    active.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'});
+    window.setTimeout(()=>{
+      const focusTarget=step===3?out.querySelector('.farol__result-title'):target;
+      if(focusTarget){
+        if(!focusTarget.hasAttribute('tabindex'))focusTarget.setAttribute('tabindex','-1');
+        focusTarget.focus({preventScroll:true});
+      }
+    },reducedMotion?0:260);
+  });
+}
+
+function show(step,{move=true}={}){
   Object.values(steps).forEach(el=>el&&el.classList.remove('farol__step--active'));
   if(!steps[step])return;
   steps[step].classList.add('farol__step--active');
   currentStep=step;
   progress(step);
+  if(move)focusStep(step);
 }
 
 function build(key){
   const d=data.step1[key];
   if(!d||!q||!opts)return;
   step1Choice=key;
+  steps[1]?.querySelectorAll('[data-farol]').forEach(button=>{
+    const selected=button.getAttribute('data-farol')===key;
+    button.classList.toggle('farol__option--selected',selected);
+    button.setAttribute('aria-pressed',String(selected));
+  });
   track('farol_start',{theme:key,page_path:location.pathname});
   q.textContent=d.question;
   opts.innerHTML='';
@@ -863,7 +892,8 @@ if(out){
   });
 }
 if(back2)back2.addEventListener('click',()=>show(1));
-if(back3)back3.addEventListener('click',reset);
+if(back3)back3.addEventListener('click',()=>show(2));
+if(restart)restart.addEventListener('click',reset);
 
 window.Farol={
   data,
