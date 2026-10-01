@@ -106,7 +106,7 @@ export function buildSensorPrompt(territory) {
 export function territoriesForDate(date = new Date(), count = 2) {
   // Rotate by scheduled 3-hour slot, not only by UTC day. This keeps the
   // intelligence loop continuously fed while deterministically covering every
-  // human territory. Discovery remains a permanent cross-cutting sensor.
+  // human territory. Discovery and Atelier stay in the bounded rotation pool.
   const slot = Math.floor(date.getTime() / (3 * 3600000));
   const limit = Math.max(0, Math.min(count, TERRITORIES.length + 2));
   if (!limit) return [];
