@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
     paths:
+      - 'scripts/audit-public-site.py'
+      - 'produtos/**'
+      - 'ebooks/**'
       - '.github/maison-growth/**'
       - 'functions/**'
       - 'data/**'
@@ -12,6 +15,9 @@ on:
       - '.github/workflows/ocean-guard.yml'
   pull_request:
     paths:
+      - 'scripts/audit-public-site.py'
+      - 'produtos/**'
+      - 'ebooks/**'
       - '.github/maison-growth/**'
       - 'functions/**'
       - 'data/**'
