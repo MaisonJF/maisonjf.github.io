@@ -43,7 +43,7 @@
   const root=location.pathname.includes('/produtos/'+p.slug+'/')?'../../':'../';
   const hero=media.find(m=>m.role==='hero')||media[0]||null;
   const rest=hero?media.filter(m=>m!==hero):media;
-  const whatsapp=`https://wa.me/351923318289?text=${encodeURIComponent(`Olá Maison JF. Tenho uma dúvida sobre ${p.name}${p.size?' '+p.size:''}.`)}`;
+  const whatsapp=`https://wa.me/351923318289?text=${encodeURIComponent(`Olá, João. Tenho uma dúvida sobre ${p.name}${p.size?' '+p.size:''}.`)}`;
   const ritual=p.ritual||{title:'Leva o ritual para casa.',text:'Um gesto pequeno pode mudar a forma como o momento se sente.'};
   const complementary={Corpo:['vela-vidro','nevoa'],Casa:['escalda-pes','oleo-massagem']}[p.category]||[];
   const related=(p.related||complementary).map(s=>all.find(x=>x.slug===s)).filter(Boolean).slice(0,2);
@@ -93,7 +93,7 @@
       </div>
     </section>
 
-    ${related.length?`<section class="related"><p class="eyebrow">Pode fazer sentido contigo</p><h2>Continua o ritual.</h2><div class="related-grid">${related.map(r=>`<a class="related-card" data-related="${r.slug}" href="${root}produtos/${r.slug}/"><small>${r.category}</small><strong>${r.name}${r.size?` · ${r.size}`:''}</strong><span>${r.priceNote||money(r.price)} · Ver</span></a>`).join('')}</div></section>`:''}
+    ${related.length?`<section class="related"><p class="eyebrow">Se quiseres continuar</p><h2>Talvez isto faça sentido contigo.</h2><div class="related-grid">${related.map(r=>`<a class="related-card" data-related="${r.slug}" href="${root}produtos/${r.slug}/"><small>${r.category}</small><strong>${r.name}${r.size?` · ${r.size}`:''}</strong><span>${r.priceNote||money(r.price)} · Ver</span></a>`).join('')}</div></section>`:''}
   `;
 
   track('maison_product_view',{product:p.slug,price:p.price,page_path:location.pathname});
