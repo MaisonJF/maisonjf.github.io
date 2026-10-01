@@ -605,3 +605,91 @@ a.territory-offer:hover,a.product-digital__card:hover,a.related-card:hover,a.jou
       #080808;
   }
 }
+
+
+/* FAROL UX pass 2026-10-01 */
+.farol-page .detail-back{color:rgba(245,241,233,.62)!important}
+.farol__step{scroll-margin-top:96px}
+.farol__option--selected{
+  border-color:rgba(210,179,111,.72)!important;
+  background:rgba(210,179,111,.07)!important;
+  box-shadow:inset 3px 0 0 rgba(210,179,111,.72)!important;
+}
+.farol__option--selected .farol__option-arrow{stroke:var(--ambre)!important;opacity:1!important}
+.farol__back-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+.farol__back-row .farol__back{margin-top:0}
+.farol__restart{
+  min-height:44px;
+  padding:10px 14px;
+  border:0;
+  background:transparent;
+  color:rgba(245,241,233,.56);
+  cursor:pointer;
+  font:500 .75rem/1 var(--fonte-funcional);
+  letter-spacing:.04em;
+}
+.farol__restart:hover,.farol__restart:focus-visible{color:#fff}
+.farol__result-title:focus,.farol__question:focus{outline:none}
+.footer--modern .footer__copyright{color:#918a81!important}
+
+@media(max-width:768px){
+  .farol-page .detail-hero__inner{padding-bottom:56px!important}
+  .farol-page .detail-lead{max-width:34rem}
+  .farol{padding-top:3.8rem!important;padding-bottom:4.2rem!important}
+  .farol__header{margin-bottom:2rem!important;padding-inline:18px}
+  .farol__progress{margin-bottom:1.5rem!important}
+  .farol__question{
+    margin-bottom:1.3rem!important;
+    font-size:clamp(1.55rem,7vw,2rem)!important;
+  }
+  .farol__container{padding-inline:14px!important}
+  .farol__options{gap:9px!important}
+  .farol__option{
+    min-height:64px!important;
+    padding:14px 15px!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    gap:12px!important;
+    border-radius:14px!important;
+  }
+  .farol__option-text{
+    font-size:.91rem!important;
+    line-height:1.42!important;
+  }
+  .farol__option-arrow,
+  .farol__option>span[aria-hidden="true"]:last-child{
+    flex:0 0 auto;
+    margin-left:auto;
+  }
+  .farol__other{margin-top:10px!important}
+  .farol__other .btn{width:100%}
+  .farol__result{
+    padding:24px 18px!important;
+    border-radius:18px!important;
+  }
+  .farol__result-actions{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+  }
+  .farol__result-actions .btn{
+    width:100%;
+    min-height:48px!important;
+  }
+  .farol__back-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:4px;
+  }
+  .farol__back,.farol__restart{
+    width:100%;
+    justify-content:center;
+    min-height:44px;
+  }
+}
