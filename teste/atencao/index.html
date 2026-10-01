@@ -14,9 +14,9 @@
 <a class="vpc-back" href="../">← Volta Para Casa</a>
 <section class="vpc-stage" id="intro">
 <p class="vpc-kicker">VOLTA PARA CASA · PORTA ATENÇÃO</p>
-<h1 class="vpc-title">Há qualquer coisa<br>a pedir a tua atenção.</h1>
+<h1 class="vpc-title">Há qualquer coisa<br>a pedir a tua atenção.</h1><p class="vpc-intro">Não tentes escolher a resposta certa. Escolhe aquela que te custa mais ignorar.</p>
 <div class="vpc-actions"><button class="button button--light" id="start">Começar</button></div>
-<p class="vpc-note">Autoconhecimento, não diagnóstico.</p>
+<p class="vpc-note">Isto ajuda-te a olhar. Não é um diagnóstico.</p>
 </section>
 
 <section class="vpc-stage" id="quiz" hidden>
@@ -45,7 +45,7 @@
 <section class="vpc-report" aria-labelledby="reportTitle">
 <p class="vpc-kicker">Viste uma parte</p>
 <h2 id="reportTitle">O resto também conta.</h2>
-<p>O relatório junta as peças das tuas respostas.</p>
+<p>Se quiseres ver o resto, junto as peças das tuas respostas num relatório mais completo.</p>
 <a class="button" id="reportLink" href="../relatorio/">Ver o meu relatório completo →</a>
 </section>
 
@@ -180,7 +180,7 @@ async function makeShareCard(){
  ctx.fillStyle='#f4f0e8';ctx.font='400 38px Georgia';ctx.fillText('E tu? O que estás a tentar ignorar?',84,1612);
  ctx.fillStyle='#aaa197';ctx.font='400 25px Arial';ctx.fillText('Faz o teste. Compara. Partilha com quem te conhece.',84,1670);
  ctx.fillStyle='#f4f0e8';ctx.font='700 34px Arial';ctx.fillText('maison-jf.com/teste/atencao',84,1750);
- ctx.fillStyle='#67615a';ctx.font='400 19px Arial';ctx.fillText('Autoconhecimento, não diagnóstico.',84,1828);
+ ctx.fillStyle='#67615a';ctx.font='400 19px Arial';ctx.fillText('Isto ajuda-te a olhar. Não é um diagnóstico.',84,1828);
  return new Promise(resolve=>canvas.toBlob(resolve,'image/png',.96));
 }
 async function shareResult(){
