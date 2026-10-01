@@ -84,8 +84,28 @@
   "publish_boundary": {
     "human_gate": "existing Maison A12 governance",
     "repository_public_write": "existing A9 Publisher Gateway only",
-    "social_publication": "manual or separately authorized future adapter only",
-    "this_module_can_publish": false
+    "social_publication": "Metricool adapter authorized for Instagram and TikTok autopublish under the bounded social policy; core Brain/content module still does not publish directly",
+    "this_module_can_publish": false,
+    "authorized_social_adapter": {
+      "adapter": "metricool",
+      "brand": "maison.jf1",
+      "timezone": "Europe/Lisbon",
+      "networks": [
+        "instagram",
+        "tiktok"
+      ],
+      "automatic_scheduling": true,
+      "automatic_publication": true,
+      "paid_boosting": false,
+      "outbound_dm": false,
+      "catalogue_write": false,
+      "price_write": false,
+      "product_launch": false,
+      "commercial_cta_rule": "existing public Maison destinations only; current public price/availability only",
+      "ai_media_declaration_required": true,
+      "duplicate_check_required": true,
+      "best_time_scheduling": true
+    }
   },
   "brain_convergence": {
     "input": "canonical refs plus minimal derived human context",
