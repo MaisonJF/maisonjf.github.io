@@ -5,7 +5,8 @@
 <title>Como gostas de receber amor? | MAISON JF®</title>
 <meta name="description" content="Teste MAISON JF® de preferências de afeto: palavras, tempo, gestos, toque e símbolos. Descobre o que pesa mais para ti e partilha o resultado.">
 <meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://maison-jf.com/teste/afeto/">
-<link rel="stylesheet" href="../../maison.css?v=20260922-globalgold1"><link rel="stylesheet" href="../volta.css?v=20260920-resultgold1"><script src="../../analytics.js?v=20260920-consent3" defer></script>
+<link rel="stylesheet" href="../../maison.css?v=20260922-globalgold1"><link rel="stylesheet" href="../volta.css?v=20261001-ux1"><script src="../../analytics.js?v=20261001-perf2" defer></script>
+<script src="../volta-ux.js?v=20261001-ux1" defer></script>
 </head>
 <body class="vpc-page">
 <header class="site-header"><a class="brand" href="../../">MAISON JF®</a><nav><a href="../">Volta Para Casa</a><a href="../../farol">O Farol</a><a href="../../produtos/">Produtos</a><a href="../../servicos/">Serviços</a></nav></header>
@@ -70,7 +71,7 @@ if(QUESTIONS.length!==10)throw new Error('question_bank_unavailable');
 async function hydrateOceanQuestions(){
  try{
   const seed=(globalThis.crypto?.randomUUID?.()||String(Date.now())+'-'+Math.random()).slice(0,120);
-  const response=await fetch('/api/vpc-question-set?test=afeto&seed='+encodeURIComponent(seed),{cache:'no-store'});
+  const signal=globalThis.AbortSignal?.timeout?AbortSignal.timeout(4500):undefined;const response=await fetch('/api/vpc-question-set?test=afeto&seed='+encodeURIComponent(seed),{cache:'no-store',signal});
   const payload=await response.json().catch(()=>({}));
   if(!response.ok||!Array.isArray(payload.questions)||payload.questions.length!==10)throw new Error('question_engine');
   QUESTIONS=payload.questions;
