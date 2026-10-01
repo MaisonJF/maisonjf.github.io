@@ -596,6 +596,7 @@ const PDI={
     'Entre vocês':'Entre vocês',
     'Tens coragem de jogar isto comigo?':'Você tem coragem de jogar isso comigo?',
     'O que disserem fica entre vocês. A Maison não pede nem guarda as respostas.':'O que vocês disserem fica entre vocês. A Maison não pede nem guarda as respostas.',
+    'O que disserem fica entre vocês. Eu não peço nem guardo as respostas.':'O que vocês disserem fica entre vocês. Eu não peço nem guardo as respostas.',
     'Privacidade →':'Privacidade →'
   },
   en:{
@@ -630,6 +631,7 @@ const PDI={
     'Entre vocês':'Between you',
     'Tens coragem de jogar isto comigo?':'Do you dare to play this with me?',
     'O que disserem fica entre vocês. A Maison não pede nem guarda as respostas.':'What you say stays between you. The Maison does not ask for or store your answers.',
+    'O que disserem fica entre vocês. Eu não peço nem guardo as respostas.':'What you say stays between you. I do not ask for or store your answers.',
     'Privacidade →':'Privacy →'
   },
   es:{
@@ -664,6 +666,7 @@ const PDI={
     'Entre vocês':'Entre vosotros',
     'Tens coragem de jogar isto comigo?':'¿Te atreves a jugar esto conmigo?',
     'O que disserem fica entre vocês. A Maison não pede nem guarda as respostas.':'Lo que digáis queda entre vosotros. La Maison no pide ni guarda las respuestas.',
+    'O que disserem fica entre vocês. Eu não peço nem guardo as respostas.':'Lo que digáis queda entre vosotros. Yo no pido ni guardo vuestras respuestas.',
     'Privacidade →':'Privacidad →'
   }
 };
