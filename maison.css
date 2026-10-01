@@ -3358,3 +3358,21 @@ main h1,
   .editorial-page__copy p{font-size:19px;line-height:1.58}
   .editorial-page__copy blockquote{font-size:34px;margin:40px 0}
 }
+
+
+/* Homepage performance */
+.home-page--final .doors--editorial,
+.home-page--final .home-explore,
+.home-page--final .home-feature,
+.home-page--final .home-ending{
+  content-visibility:auto;
+}
+.home-page--final .doors--editorial{contain-intrinsic-size:auto 900px}
+.home-page--final .home-explore{contain-intrinsic-size:auto 420px}
+.home-page--final .home-feature{contain-intrinsic-size:auto 760px}
+.home-page--final .home-ending{contain-intrinsic-size:auto 560px}
+@media(max-width:760px){
+  .home-page--final .doors--editorial{contain-intrinsic-size:auto 2200px}
+  .home-page--final .home-feature{contain-intrinsic-size:auto 980px}
+  .home-page--final .home-ending{contain-intrinsic-size:auto 620px}
+}
