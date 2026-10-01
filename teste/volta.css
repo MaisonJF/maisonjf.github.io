@@ -149,3 +149,32 @@
 .vpc-offer:hover small,.vpc-offer:focus-visible small{color:#e0c48b}
 .vpc-offer:hover,.vpc-offer:focus-visible{border-color:rgba(199,170,115,.48)}
 @media(max-width:760px){.vpc-offer{min-height:0}}
+
+
+/* Volta Para Casa UX pass 2026-10-01 */
+.vpc-stage{scroll-margin-top:92px}
+.vpc-question:focus,.vpc-result h1:focus,.vpc-stage>h1:focus{outline:none}
+.vpc-actions .button[aria-busy="true"]{opacity:.72}
+.vpc-choice:disabled{cursor:default;transform:none!important}
+@media(max-width:760px){
+  .vpc-test{padding-top:96px}
+  .vpc-choice{
+    min-height:72px;
+    padding:16px 17px;
+    line-height:1.42;
+  }
+}
+@media(max-width:560px){
+  .vpc-service-hero{padding-top:102px}
+  .vpc-service-hero h1{font-size:clamp(44px,13vw,62px)}
+  .vpc-parts{gap:10px}
+  .vpc-part{
+    min-height:220px;
+    padding:24px;
+  }
+  .vpc-part strong{
+    margin:16px 0 12px;
+    font-size:clamp(30px,9vw,39px);
+  }
+  .vpc-part b{padding-top:20px}
+}
