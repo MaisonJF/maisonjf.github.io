@@ -54,7 +54,7 @@
       if(data.payment_status==='paid'){
         title.textContent='Pagamento confirmado.';
         message.textContent='A tua compra de '+data.service_name+' ficou confirmada.';
-        document.getElementById('next').textContent='Agora fala connosco no WhatsApp para combinarmos o próximo passo.';
+        document.getElementById('next').textContent='Agora fala comigo no WhatsApp para combinarmos o próximo passo.';
         const parts=[];
         if(Number.isInteger(data.amount_total))parts.push('Total: '+money(data.amount_total,data.currency));
         if(data.email)parts.push('Email: '+data.email);
