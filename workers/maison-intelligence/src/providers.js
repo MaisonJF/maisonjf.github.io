@@ -279,6 +279,8 @@ export function configuredProviders(env) {
 
 export function configuredZeroCostModelSpecs(env) {
   const specs=[];
+  if (!enabled(env.ZERO_COST_MODE)) return specs;
+
   if (enabled(env.OPENROUTER_ENABLED) && env.OPENROUTER_API_KEY) {
     try {
       for (const model of openRouterZeroCostModels(env)) {
@@ -286,25 +288,20 @@ export function configuredZeroCostModelSpecs(env) {
       }
     } catch {}
   }
-  if ((enabled(env.WORKERS_AI_FOUNDRY_ENABLED) || enabled(env.WORKERS_AI_ENABLED)) && enabled(env.WORKERS_AI_ZERO_COST) && env.AI && env.WORKERS_AI_MODEL) {
-    specs.push({key:`cloudflare_workers_ai:${env.WORKERS_AI_MODEL}`,providerId:'cloudflare_workers_ai',modelId:env.WORKERS_AI_MODEL});
+
+  // Cloudflare Workers AI is admitted through the account's included allocation.
+  // It stays out of continuous sensing unless WORKERS_AI_ENABLED is separately true.
+  if (env.AI && env.WORKERS_AI_MODEL) {
+    specs.push({
+      key:`cloudflare_workers_ai:${env.WORKERS_AI_MODEL}`,
+      providerId:'cloudflare_workers_ai',
+      modelId:env.WORKERS_AI_MODEL
+    });
   }
-  if (enabled(env.OSIRIS_GATEWAY_ENABLED) && enabled(env.OSIRIS_GATEWAY_ZERO_COST) && env.OSIRIS_GATEWAY_API_KEY && env.OSIRIS_GATEWAY_MODEL) {
-    specs.push({key:`osiris_gateway:${env.OSIRIS_GATEWAY_MODEL}`,providerId:'osiris_gateway',modelId:env.OSIRIS_GATEWAY_MODEL});
-  }
-  if (enabled(env.OPENAI_ENABLED) && enabled(env.OPENAI_ZERO_COST) && env.OPENAI_API_KEY && env.OPENAI_MODEL) {
-    specs.push({key:`openai:${env.OPENAI_MODEL}`,providerId:'openai',modelId:env.OPENAI_MODEL});
-  }
-  if (enabled(env.GEMINI_ENABLED) && enabled(env.GEMINI_ZERO_COST) && env.GEMINI_API_KEY && env.GEMINI_MODEL) {
-    specs.push({key:`google_gemini:${env.GEMINI_MODEL}`,providerId:'google_gemini',modelId:env.GEMINI_MODEL});
-  }
-  if (enabled(env.PERPLEXITY_ENABLED) && enabled(env.PERPLEXITY_ZERO_COST) && env.PERPLEXITY_API_KEY) {
-    const model=env.PERPLEXITY_MODEL||'sonar';
-    specs.push({key:`perplexity:${model}`,providerId:'perplexity',modelId:model});
-  }
-  if (enabled(env.ANTHROPIC_ENABLED) && enabled(env.ANTHROPIC_ZERO_COST) && env.ANTHROPIC_API_KEY && env.ANTHROPIC_MODEL) {
-    specs.push({key:`anthropic:${env.ANTHROPIC_MODEL}`,providerId:'anthropic',modelId:env.ANTHROPIC_MODEL});
-  }
+
+  // Paid-capable API providers are deliberately excluded here. They remain
+  // available to the normal sensor mesh when explicitly enabled, but the
+  // zero-cost Foundry never assumes that a key or trial credit means free use.
   return specs;
 }
 
