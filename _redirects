@@ -1,4 +1,6 @@
 # SEARCH-CONSOLE-LEGACY-RECOVERY — observed 2026-09-25
+/farol /farol.html 200
+/envios /envios.html 200
 /cart /produtos/carrinho/ 301
 /collections/all /produtos/ 301
 /collections/casa-ambiente /produtos/ 301
@@ -509,4 +511,3 @@
 /casa/ /farol 301
 /corpo/ /farol 301
 /decisoes/ /farol 301
-
