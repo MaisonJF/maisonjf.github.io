@@ -1,6 +1,7 @@
 import { handleVideoGenerationRequest } from './video_generation.js';
 import { ingestOceanMemory } from './ocean_memory.js';
 import { ingestVaultCandidate } from './vault_candidates.js';
+import { ingestCandidateInbox, listCandidateInbox } from './candidate_inbox.js';
 // MAISON JF · minimal Streamable HTTP MCP bridge for the short-video engine
 // Initial scope is intentionally narrow: health, generate, result.
 // VIDEO_GENERATION_TOKEN never leaves the Worker.
@@ -131,6 +132,45 @@ function tools(){
       securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
     },
     {
+      name:'maison_ingest_candidate',
+      title:'Ingest Maison expansion candidate',
+      description:'Store one private candidate for content, product, service, experience, campaign, test, Farol or other Maison expansion work. Candidate only: no approval, publication, price or launch authority.',
+      inputSchema:{type:'object',required:['candidate_type','source_ocean_id','title','body','rationale'],properties:{
+        candidate_type:{type:'string',enum:['test','farol_path','reel','post','story','carousel','video_script','physical_product','digital_product','bundle','service','experience','ebook','campaign','b2b','seasonal_offer','experiment']},
+        source_ocean_id:{type:'string',minLength:2,maxLength:160},
+        source_observation_id:{type:'string',maxLength:160},
+        provider_id:{type:'string',maxLength:120},
+        model_id:{type:'string',maxLength:240},
+        territory:{type:'string',maxLength:120},
+        title:{type:'string',minLength:1,maxLength:240},
+        body:{type:'string',minLength:1,maxLength:5000},
+        rationale:{type:'string',minLength:1,maxLength:2000},
+        related_assets:{type:'array',maxItems:20,items:{type:'string',maxLength:240}},
+        evidence_refs:{type:'array',maxItems:30,items:{type:'string',format:'uri'}},
+        novelty_score:{type:'integer',minimum:0,maximum:100},
+        maison_fit_score:{type:'integer',minimum:0,maximum:100},
+        feasibility_score:{type:'integer',minimum:0,maximum:100},
+        demand_score:{type:'integer',minimum:0,maximum:100},
+        commercial_score:{type:'integer',minimum:0,maximum:100},
+        reuse_existing_score:{type:'integer',minimum:0,maximum:100},
+        payload:{type:'object'}
+      },additionalProperties:false},
+      annotations:{readOnlyHint:false,destructiveHint:false,idempotentHint:false,openWorldHint:false},
+      securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
+    },
+    {
+      name:'maison_list_candidates',
+      title:'List Maison candidate inbox',
+      description:'Read private D1 expansion candidates for human review.',
+      inputSchema:{type:'object',properties:{
+        limit:{type:'integer',minimum:1,maximum:100,default:50},
+        type:{type:'string'},
+        decision:{type:'string',enum:['pending','approve','reject','archive','defer','develop','all'],default:'pending'}
+      },additionalProperties:false},
+      annotations:{readOnlyHint:true,destructiveHint:false,idempotentHint:true,openWorldHint:false},
+      securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
+    },
+    {
       name:'maison_video_result',
       title:'Maison video result',
       description:'Read the provider result stream for a previously queued MAISON JF video job.',
@@ -183,6 +223,16 @@ async function callTool(request,env,name,args){
     if(!env.GROWTH_DB) return toolText({error:'growth_db_missing'},true);
     const body=await ingestVaultCandidate(env,args||{});
     return toolText(body,false);
+  }
+  if(name==='maison_ingest_candidate'){
+    if(!env.GROWTH_DB) return toolText({error:'growth_db_missing'},true);
+    const body=await ingestCandidateInbox(env,args||{});
+    return toolText(body,false);
+  }
+  if(name==='maison_list_candidates'){
+    if(!env.GROWTH_DB) return toolText({error:'growth_db_missing'},true);
+    const rows=await listCandidateInbox(env,args||{});
+    return toolText({count:rows.length,candidates:rows},false);
   }
   return toolText({error:'unknown_tool'},true);
 }
