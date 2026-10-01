@@ -21,6 +21,7 @@ import { routeOceanContext } from './ocean_context.js';
 import { buildEditorialProposal, buildInlineBrainAlert } from './content_proposal.js';
 import { generateEditorialCandidates } from './editorial_candidate_generation.js';
 import { runExpansionFoundry } from './expansion_foundry.js';
+import { runFeedbackCouncil } from './feedback_council.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -729,6 +730,7 @@ export default {
     // is continuous, while search-presence measurement stays daily.
     if (when.getUTCHours()===3 && when.getUTCMinutes()===0) {
       jobs.push(enqueueVisibilityProbeRun(env,when,getControl));
+      if (isTrue(env.FEEDBACK_COUNCIL_ENABLED)) jobs.push(runFeedbackCouncil(env,{date:when,reviews:env.FEEDBACK_COUNCIL_REVIEWS_PER_DAY||2}));
     }
     // Every scheduler tick may ask the zero-cost Foundry to run. The per-model
     // daily usage gate keeps this to at most the configured daily cap, so a
