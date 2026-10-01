@@ -8,6 +8,7 @@ on:
       - 'functions/**'
       - 'data/**'
       - 'workers/maison-vault-localizer/**'
+      - 'editorial-vault/**'
       - '.github/workflows/ocean-guard.yml'
   pull_request:
     paths:
@@ -15,6 +16,7 @@ on:
       - 'functions/**'
       - 'data/**'
       - 'workers/maison-vault-localizer/**'
+      - 'editorial-vault/**'
       - '.github/workflows/ocean-guard.yml'
 
 concurrency:
@@ -66,6 +68,8 @@ jobs:
           node --check functions/_lib/pdi-theme-registry.js
           node --check functions/_lib/pdi-theme-catalogue.js
           node --check functions/_lib/pdi-vault-admin.js
+          node --check functions/_lib/vault-candidate-admin.js
+          node --check functions/api/vault-candidate-admin.js
           node .github/maison-growth/vault/validate_pdi_import_insert.mjs
           node .github/maison-growth/vault/validate_pdi_registry.mjs
           node --check functions/api/pdi-admin-import.js
