@@ -14,7 +14,7 @@
 <header class="site-header"><a class="brand" href="../../">MAISON JF®</a><nav><a href="../../farol">O Farol</a><a href="../">Produtos</a><a href="../../servicos/">Serviços</a></nav></header>
 <main class="cart shell">
 <p class="eyebrow">Encomenda</p><h1>O teu carrinho.</h1>
-<p class="cart__lead">Escolhe os produtos. Escolhe a zona. O checkout faz as contas.</p>
+<p class="cart__lead">Confirma o que escolheste, diz-me para onde vai e eu faço as contas.</p>
 <div class="cart__grid" id="cartGrid">
   <section class="cart__items" id="cartItems" aria-live="polite"></section>
   <aside class="cart__summary" id="cartSummary">
@@ -69,7 +69,7 @@
  function render(){
   itemsHost.innerHTML='';
   if(!cart.length){
-   itemsHost.innerHTML='<div class="cart__empty"><h2>O carrinho está vazio.</h2><p>Escolhe os produtos que queres juntar na mesma encomenda.</p><a class="button button--light" href="../">Ver Produtos</a></div>';
+   itemsHost.innerHTML='<div class="cart__empty"><h2>O carrinho está vazio.</h2><p>Ainda não escolheste nada. Quando escolheres, fica tudo aqui.</p><a class="button button--light" href="../">Ver Produtos</a></div>';
    summary.hidden=true;
    write(cart);
    return;
