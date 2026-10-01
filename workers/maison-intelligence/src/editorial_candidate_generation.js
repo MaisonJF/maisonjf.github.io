@@ -19,10 +19,10 @@ function candidatePrompt({oceanContext,brainAlert}){
     `Observed public-language summary: ${summary}`,
     `Useful theme terms: ${terms.join(' | ')||'none'}`,
     '',
-    'questions: 0 to 4 genuinely distinct questions. Prefer different moments/contexts, not synonyms. Use fields: theme, text, stage, exposure, intensity, target, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness, subthemes.',
+    'questions: aim for 4 genuinely distinct questions when the signal supports them; never pad with synonyms. Prefer different moments/contexts and different stages. Use fields: theme, text, stage, exposure, intensity, target, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness, subthemes.',
     'Allowed stage: open, recognize, deepen, touch, close, signature. exposure: paid or public_social. intensity: 1-4. target: self, partner, both, prediction.',
-    'Paid questions may fit PÁRA DE IGNORAR!. public_social questions must be safe for a free Volta Para Casa test and must not reveal or recycle a paid body.',
-    'oracle_blocks: 0 to 2 original generic reflection blocks, never a final personalized reading. Use fields: territory, role, title, text, intensity, tone, rarity, pain_family, subterritory, emotional_function, tags.',
+    'When safe and genuinely supported, include at least 2 paid questions for PÁRA DE IGNORAR! and at least 1 separate public_social question for a free Volta Para Casa test. Never reveal or recycle a paid body into the free question.',
+    'oracle_blocks: aim for 2 original generic reflection blocks with different useful roles when the signal supports them; never a final personalized reading. Use fields: territory, role, title, text, intensity, tone, rarity, pain_family, subterritory, emotional_function, tags.',
     'Allowed Oracle role: opening, recognition, tension, counterpoint, reframe, movement, close. intensity: 1-4. tone: gentle, direct, intimate, clear, confrontational. rarity: common, uncommon, rare.',
     'Keep every item useful on its own and recognizably MAISON: direct, intimate, elegant, simple, not clinical.'
   ].join('\n');

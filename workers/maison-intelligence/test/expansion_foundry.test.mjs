@@ -39,3 +39,8 @@ test('model lenses are deterministic',()=>{
 test('Workers AI receives the daily-content lens',()=>{
   assert.equal(modelLens({key:'cloudflare_workers_ai:x',providerId:'cloudflare_workers_ai',modelId:'x'}),'daily_content');
 });
+
+test('an explicit safe Foundry lens overrides the provider default',()=>{
+  assert.equal(modelLens({key:'cloudflare_workers_ai:x',providerId:'cloudflare_workers_ai',modelId:'x',lens:'editorial_experience'}),'editorial_experience');
+  assert.equal(modelLens({key:'cloudflare_workers_ai:x',providerId:'cloudflare_workers_ai',modelId:'x',lens:'commercial_reuse'}),'commercial_reuse');
+});

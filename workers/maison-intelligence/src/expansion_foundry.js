@@ -29,6 +29,8 @@ function parseJsonObject(raw){
   return parsed;
 }
 function modelLens(spec){
+  const explicit=String(spec?.lens||'').trim();
+  if(['daily_content','commercial_reuse','editorial_experience','mixed_growth'].includes(explicit))return explicit;
   if(spec?.providerId==='cloudflare_workers_ai')return 'daily_content';
   const seed=[...String(spec?.key||'')].reduce((n,ch)=>n+ch.charCodeAt(0),0)%4;
   return ['daily_content','commercial_reuse','editorial_experience','mixed_growth'][seed];

@@ -1,0 +1,71 @@
+name: Maison Editorial Growth Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'workers/maison-editorial-growth/**'
+      - 'workers/maison-intelligence/src/editorial_candidate_generation.js'
+      - 'workers/maison-intelligence/src/expansion_foundry.js'
+      - 'workers/maison-intelligence/src/vault_candidates.js'
+      - 'workers/maison-intelligence/src/candidate_inbox.js'
+      - 'workers/maison-intelligence/src/providers.js'
+      - 'workers/maison-intelligence/src/core.js'
+      - '.github/workflows/maison-editorial-growth-deploy.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: maison-editorial-growth-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install editorial growth tooling
+        working-directory: workers/maison-editorial-growth
+        run: npm install --ignore-scripts
+
+      - name: Validate scheduled editorial growth
+        working-directory: workers/maison-editorial-growth
+        run: |
+          npm test
+          npm run check
+
+      - name: Validate shared candidate engines
+        run: |
+          node --test             workers/maison-intelligence/test/editorial_candidate_generation.test.mjs             workers/maison-intelligence/test/expansion_foundry.test.mjs             workers/maison-intelligence/test/vault_candidates.test.mjs             workers/maison-intelligence/test/candidate_inbox.test.mjs
+
+      - name: Deploy autonomous editorial growth
+        working-directory: workers/maison-editorial-growth
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy
+
+      - name: Verify deployment exists
+        working-directory: workers/maison-editorial-growth
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx wrangler deployments list --name maison-editorial-growth --json > /tmp/editorial-growth-deployments.json
+          node - <<'NODE'
+          const fs=require('fs');
+          const rows=JSON.parse(fs.readFileSync('/tmp/editorial-growth-deployments.json','utf8'));
+          if(!Array.isArray(rows)||!rows.length)throw new Error('editorial_growth_deployment_missing');
+          console.log('Maison editorial growth deployment: OK');
+          NODE
