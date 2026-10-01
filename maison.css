@@ -3590,3 +3590,7 @@ main h1,
 
 /* UX contrast pass 2026-10-01 */
 .home-footer__legal{color:#918a81!important}
+
+
+/* Current location in global navigation */
+.site-header nav a[aria-current="page"]{color:var(--maison-gold)!important}
