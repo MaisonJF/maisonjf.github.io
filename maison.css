@@ -3664,3 +3664,23 @@ main,section,article,nav,header,footer,.shell{min-width:0}
   a,button,[role="button"],summary{-webkit-tap-highlight-color:rgba(210,179,111,.18)}
   .door:hover,.door--editorial:hover{transform:none}
 }
+
+/* MAISON JF® · editorial identity pages */
+.editorial-page--manifesto .editorial-page__main>.eyebrow,
+.editorial-page--about .editorial-page__main>.eyebrow,
+.editorial-page--manifesto .editorial-page__main>h1,
+.editorial-page--about .editorial-page__main>h1{
+  color:var(--maison-gold)!important;
+}
+.editorial-page--manifesto .editorial-page__copy,
+.editorial-page--about .editorial-page__copy,
+.editorial-page--manifesto .editorial-page__copy p,
+.editorial-page--about .editorial-page__copy p{
+  color:var(--maison-ivory)!important;
+}
+.editorial-page--manifesto .editorial-page__copy strong,
+.editorial-page--about .editorial-page__copy strong,
+.editorial-page--manifesto .editorial-page__copy blockquote,
+.editorial-page--about .editorial-page__copy blockquote{
+  color:var(--maison-gold)!important;
+}
