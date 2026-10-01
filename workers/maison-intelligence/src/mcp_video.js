@@ -1,4 +1,5 @@
 import { handleVideoGenerationRequest } from './video_generation.js';
+import { ingestOceanMemory } from './ocean_memory.js';
 // MAISON JF · minimal Streamable HTTP MCP bridge for the short-video engine
 // Initial scope is intentionally narrow: health, generate, result.
 // VIDEO_GENERATION_TOKEN never leaves the Worker.
@@ -65,6 +66,96 @@ function tools(){
         randomize_seed:{type:'boolean',default:true}
       },additionalProperties:false},
       annotations:{readOnlyHint:false,destructiveHint:false,idempotentHint:false,openWorldHint:true},
+      securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
+    },
+    {
+      name:'maison_ingest_ocean_signal',
+      title:'Ingest Maison Ocean signal',
+      description:'Persist one privacy-reviewed Ocean signal directly into the MAISON JF D1 working memory. GitHub is not required for persistence.',
+      inputSchema:{type:'object',required:['ocean_key','source_ref','summary'],properties:{
+        kind:{type:'string',enum:['signal','enrichment','hypothesis'],default:'signal'},
+        ocean_key:{type:'string',minLength:2,maxLength:160,pattern:'^[a-z0-9][a-z0-9._:-]{1,159}
+  ];
+}
+
+async function internal(request,env,path,init={}){
+  if(!env.VIDEO_GENERATION_TOKEN) throw new Error('video_generation_token_missing');
+  const u=new URL(request.url);
+  const target=new URL(path,u.origin);
+  const headers=new Headers(init.headers||{});
+  headers.set('X-Maison-Video-Token',env.VIDEO_GENERATION_TOKEN);
+  const forwarded=new Request(target.toString(),{...init,headers});
+  const response=await handleVideoGenerationRequest(forwarded,env);
+  if(!response) throw new Error('video_route_unavailable');
+  return response;
+}
+async function callTool(request,env,name,args){
+  if(name==='maison_video_health'){
+    const r=await internal(request,env,'/internal/video/health');
+    const body=await r.json().catch(()=>({error:'invalid_health_response'}));
+    return toolText(body,!r.ok);
+  }
+  if(name==='maison_generate_video'){
+    const r=await internal(request,env,'/internal/video/generate',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(args||{})});
+    const body=await r.json().catch(()=>({error:'invalid_generate_response'}));
+    return toolText(body,!r.ok);
+  }
+  if(name==='maison_video_result'){
+    const p=encodeURIComponent(String(args?.provider||''));
+    const j=encodeURIComponent(String(args?.job_id||''));
+    const r=await internal(request,env,`/internal/video/result?provider=${p}&job_id=${j}`);
+    const text=await r.text();
+    return toolText({provider:args?.provider,job_id:args?.job_id,state:r.ok?'provider_response':'provider_error',status:r.status,event_stream:text},!r.ok);
+  }
+  if(name==='maison_ingest_ocean_signal'){
+    if(String(env.OCEAN_MEMORY_ENABLED??'').toLowerCase()!=='true') return toolText({error:'ocean_memory_disabled'},true);
+    if(!env.GROWTH_DB) return toolText({error:'growth_db_missing'},true);
+    const body=await ingestOceanMemory(env,args||{});
+    return toolText(body,false);
+  }
+  return toolText({error:'unknown_tool'},true);
+}
+
+export async function handleMaisonMcpRequest(request,env){
+  const url=new URL(request.url);
+  if(url.pathname==='/.well-known/oauth-protected-resource'){
+    let issuer;try{issuer=supabaseOrigin(env)+'/auth/v1';}catch{return new Response(JSON.stringify({error:'mcp_auth_not_configured'}),{status:503,headers:JSON_HEADERS});}
+    return new Response(JSON.stringify({resource:resourceUrl(request),authorization_servers:[issuer],scopes_supported:MCP_SCOPE.split(' '),resource_documentation:'https://maison-jf.com/'}),{headers:JSON_HEADERS});
+  }
+  if(url.pathname!=='/mcp') return null;
+  if(request.method==='GET') return new Response(JSON.stringify({service:'maison-jf-mcp',transport:'streamable-http',protocol:MCP_VERSION}),{headers:JSON_HEADERS});
+  if(request.method!=='POST') return new Response('Method Not Allowed',{status:405,headers:{Allow:'GET, POST'}});
+  let msg; try{msg=await request.json();}catch{return rpcError(null,-32700,'Parse error');}
+  const id=msg.id??null;
+  try{
+    if(msg.method==='initialize') return rpc(id,{protocolVersion:MCP_VERSION,capabilities:{tools:{listChanged:false}},serverInfo:{name:'maison-jf',version:'0.1.0'}});
+    if(msg.method==='notifications/initialized') return new Response(null,{status:202});
+    if(msg.method==='ping') return rpc(id,{});
+    if(msg.method==='tools/list') return rpc(id,{tools:tools()});
+    if(msg.method==='tools/call'){
+      const identity=await authenticate(request,env);
+      if(!identity) return rpc(id,authError(request));
+      const name=String(msg.params?.name||'');
+      const args=msg.params?.arguments||{};
+      return rpc(id,await callTool(request,env,name,args));
+    }
+    return rpcError(id,-32601,'Method not found');
+  }catch(e){return rpc(id,toolText({error:e?.message||'mcp_tool_failed'},true));}
+}
+
+},
+        canonical_ocean_id:{type:'string',minLength:2,maxLength:160},
+        source_ref:{type:'string',minLength:1,maxLength:2048},
+        source_observation_id:{type:'string',minLength:40,maxLength:40},
+        summary:{type:'string',minLength:1,maxLength:4000},
+        evidence_roots:{type:'array',maxItems:30,items:{type:'string',minLength:1}},
+        theme_candidates:{type:'array',maxItems:30,items:{type:'string',minLength:1}},
+        commercial_adjacency:{type:'array',maxItems:30,items:{type:'object'}},
+        relevance_score:{type:'integer',minimum:0,maximum:100,default:0},
+        commercial_score:{type:'integer',minimum:0,maximum:100,default:0},
+        observed_at:{type:'string',format:'date-time'}
+      },additionalProperties:false},
+      annotations:{readOnlyHint:false,destructiveHint:false,idempotentHint:false,openWorldHint:false},
       securitySchemes:[{type:'oauth2',scopes:['openid','email','profile']}]
     },
     {
