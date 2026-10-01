@@ -52,5 +52,15 @@
   },
   "public_voice_owner": "functions/_lib/maison-content-ontology.js",
   "publishing_owner": "existing Maison gates / manual distribution",
-  "public_side_effects": false
+  "public_side_effects": false,
+  "surface_rules": {
+    "mobile_first": true,
+    "short_video": "9:16 1080x1920",
+    "instagram_feed": "4:5 1080x1350 preferred",
+    "instagram_story": "9:16 1080x1920",
+    "tiktok": "9:16 1080x1920 preferred",
+    "safe_zone_required": true,
+    "tiny_text_forbidden": true,
+    "captions_or_subtitles_required_for_spoken_content": true
+  }
 }
