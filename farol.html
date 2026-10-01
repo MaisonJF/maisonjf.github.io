@@ -48,6 +48,24 @@
       font-size:.82rem;
       color:rgba(245,241,233,.5);
     }
+
+    /* Farol · título principal numa única linha */
+    .farol-page .detail-title{
+      max-width:none!important;
+      white-space:nowrap!important;
+      text-wrap:nowrap!important;
+      overflow-wrap:normal!important;
+      font-size:clamp(12px,2.9vw,48px)!important;
+      line-height:1!important;
+      letter-spacing:-.035em!important;
+    }
+    @media(max-width:760px){
+      .farol-page .detail-title{
+        font-size:clamp(11px,3.2vw,24px)!important;
+        letter-spacing:-.045em!important;
+      }
+    }
+
   </style>
   <script type="application/ld+json">
 {
