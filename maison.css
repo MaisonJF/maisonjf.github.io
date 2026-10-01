@@ -3300,13 +3300,17 @@ main h1,
   letter-spacing:.03em;
 }
 .editorial-page__main>h1{
-  max-width:12ch;
+  width:min(100%,850px);
+  max-width:100%;
   margin:.18em 0 clamp(58px,7vw,90px);
   color:var(--maison-ivory);
-  font:400 clamp(54px,8vw,108px)/.9 var(--serif);
-  letter-spacing:-.045em;
+  font:400 clamp(48px,5.8vw,82px)/.94 var(--serif);
+  letter-spacing:-.04em;
+  white-space:normal;
+  overflow-wrap:normal;
+  text-wrap:balance;
 }
-.editorial-page--about .editorial-page__main>h1{max-width:9ch}
+.editorial-page--about .editorial-page__main>h1{width:min(100%,620px)}
 .editorial-page__copy{
   width:min(700px,100%);
   margin-left:auto;
@@ -3354,7 +3358,7 @@ main h1,
 @media(max-width:700px){
   .editorial-page__main{width:min(calc(100% - 32px),980px);padding-top:112px;padding-bottom:80px}
   .editorial-page__back{margin-bottom:56px}
-  .editorial-page__main>h1{font-size:clamp(48px,15vw,72px);margin-bottom:54px}
+  .editorial-page__main>h1{font-size:clamp(42px,11vw,62px);line-height:.98;margin-bottom:54px}
   .editorial-page__copy p{font-size:19px;line-height:1.58}
   .editorial-page__copy blockquote{font-size:34px;margin:40px 0}
 }
