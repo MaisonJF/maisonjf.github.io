@@ -1,0 +1,26 @@
+name: Farol UX Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/farol-ux-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  farol-mobile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for production
+        run: sleep 35
+      - name: Lighthouse Farol
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://maison-jf.com/farol
+          uploadArtifacts: true
+          temporaryPublicStorage: false
