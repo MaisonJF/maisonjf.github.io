@@ -514,7 +514,111 @@
     }
   }
 
+
+  /* MAISON JF · one-line display title system · 2026-10-01 */
+  const MAISON_DISPLAY_TITLE_SELECTOR = [
+    'main h1',
+    '.detail-title',
+    '.home-page--final .hero__headline',
+    '.home-page--final .home-feature__copy h2',
+    '.home-page--final .home-ending h2',
+    '.home-page--final .home-section-head h2',
+    '.manifesto blockquote',
+    '.essay-copy h2',
+    '.territory-offers__head h2',
+    '.detail-section__title',
+    '.farol__title',
+    '.presence-intro h2',
+    '.presence-sos h2',
+    '.presence-rules h2',
+    '.conversation h2',
+    '.pro-diagnostic h2',
+    '.curadoria__head h2',
+    '.continue h2'
+  ].join(',');
+
+  function maisonTitleTier(element) {
+    if (element.matches('main h1,.detail-title,.home-page--final .hero__headline')) return 'primary';
+    return 'secondary';
+  }
+
+  function maisonTitleLimits(element) {
+    const mobile = window.innerWidth <= 760;
+    const tier = maisonTitleTier(element);
+    if (tier === 'primary') {
+      return mobile ? { min: 12, max: 30 } : { min: 18, max: 56 };
+    }
+    return mobile ? { min: 10, max: 23 } : { min: 14, max: 38 };
+  }
+
+  function maisonTitleHasIntentionalBreak(element) {
+    if (element.querySelector('br')) return true;
+    return Array.from(element.children).some(child => {
+      const display = getComputedStyle(child).display;
+      return display === 'block' || display === 'flex' || display === 'grid';
+    });
+  }
+
+  function fitMaisonDisplayTitle(element) {
+    if (!(element instanceof HTMLElement) || maisonTitleHasIntentionalBreak(element)) return;
+    if (!element.textContent || !element.textContent.trim()) return;
+
+    const { min, max } = maisonTitleLimits(element);
+
+    element.style.setProperty('max-width', 'none', 'important');
+    element.style.setProperty('white-space', 'nowrap', 'important');
+    element.style.setProperty('text-wrap', 'nowrap', 'important');
+    element.style.setProperty('overflow-wrap', 'normal', 'important');
+    element.style.setProperty('line-height', '1', 'important');
+
+    element.style.setProperty('font-size', max + 'px', 'important');
+
+    const rect = element.getBoundingClientRect();
+    const viewportRight = document.documentElement.clientWidth - 16;
+    const availableFromViewport = Math.max(120, viewportRight - rect.left);
+    const parent = element.parentElement;
+    const parentWidth = parent ? parent.getBoundingClientRect().width : rect.width;
+    const available = Math.max(120, Math.min(parentWidth || availableFromViewport, availableFromViewport));
+
+    if (element.scrollWidth <= available + 1) {
+      element.dataset.maisonTitleFit = '1';
+      return;
+    }
+
+    let low = min;
+    let high = max;
+    for (let i = 0; i < 10; i += 1) {
+      const mid = (low + high) / 2;
+      element.style.setProperty('font-size', mid.toFixed(2) + 'px', 'important');
+      if (element.scrollWidth <= available + 1) low = mid;
+      else high = mid;
+    }
+
+    element.style.setProperty('font-size', Math.max(min, low).toFixed(2) + 'px', 'important');
+    element.dataset.maisonTitleFit = '1';
+  }
+
+  function fitMaisonDisplayTitles(root = document) {
+    const elements = [];
+    if (root instanceof Element && root.matches(MAISON_DISPLAY_TITLE_SELECTOR)) elements.push(root);
+    if (root.querySelectorAll) elements.push(...root.querySelectorAll(MAISON_DISPLAY_TITLE_SELECTOR));
+    [...new Set(elements)].forEach(fitMaisonDisplayTitle);
+  }
+
+  let maisonTitleResizeFrame = 0;
+  function initMaisonTitleFit() {
+    fitMaisonDisplayTitles();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => fitMaisonDisplayTitles()).catch(() => {});
+    }
+    window.addEventListener('resize', () => {
+      cancelAnimationFrame(maisonTitleResizeFrame);
+      maisonTitleResizeFrame = requestAnimationFrame(() => fitMaisonDisplayTitles());
+    }, { passive: true });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
+    initMaisonTitleFit();
     normalizeInternalLinks();
 
     // Maison mobile navigation: progressive enhancement, no page-specific markup required.
@@ -557,6 +661,7 @@
             if (clean && clean !== current) node.setAttribute('href', clean);
           }
           normalizeInternalLinks(node);
+          fitMaisonDisplayTitles(node);
         }
       }));
     });
