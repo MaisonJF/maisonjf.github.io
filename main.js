@@ -42,25 +42,30 @@
 
   function openMenu() {
     if (!mobileMenu || !menuToggle) return;
+    mobileMenu.removeAttribute('inert');
     mobileMenu.classList.add('mobile-menu--open');
     mobileMenu.setAttribute('aria-hidden', 'false');
     menuToggle.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
+    window.setTimeout(() => menuClose?.focus(), 0);
   }
 
-  function closeMenu() {
+  function closeMenu(restoreFocus = true) {
     if (!mobileMenu || !menuToggle) return;
     mobileMenu.classList.remove('mobile-menu--open');
     mobileMenu.setAttribute('aria-hidden', 'true');
+    mobileMenu.setAttribute('inert', '');
     menuToggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    if (restoreFocus) menuToggle.focus();
   }
 
+  if (mobileMenu && !mobileMenu.classList.contains('mobile-menu--open')) mobileMenu.setAttribute('inert', '');
   if (menuToggle) menuToggle.addEventListener('click', openMenu);
-  if (menuClose) menuClose.addEventListener('click', closeMenu);
+  if (menuClose) menuClose.addEventListener('click', () => closeMenu(true));
 
   mobileLinks.forEach(link => {
-    link.addEventListener('click', closeMenu);
+    link.addEventListener('click', () => closeMenu(false));
   });
 
   document.addEventListener('keydown', (e) => {
@@ -317,7 +322,7 @@
       whatsapp.href = waUrl(`Olá, João. Fiz o Farol e o resultado foi: "${title.textContent.trim()}". Quero ajuda para avançar.`);
       whatsapp.target = '_blank';
       whatsapp.rel = 'noopener noreferrer';
-      whatsapp.textContent = 'Prefiro falar com a Maison no WhatsApp →';
+      whatsapp.textContent = 'Prefiro falar contigo no WhatsApp →';
       whatsapp.addEventListener('click', () => rememberIntent('farol-whatsapp'));
       actions.insertAdjacentElement('afterend', whatsapp);
       resultBox.dataset.conversionEnhanced = '1';
