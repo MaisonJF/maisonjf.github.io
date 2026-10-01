@@ -100,6 +100,7 @@ test('paid model anywhere in OpenRouter fallback chain is refused', () => {
 
 test('zero-cost Foundry expands every configured OpenRouter free model independently', () => {
   const specs=configuredZeroCostModelSpecs({
+    ZERO_COST_MODE:'true',
     OPENROUTER_ENABLED:'true',
     OPENROUTER_API_KEY:'x',
     OPENROUTER_MODEL:'google/gemma-4-26b-a4b-it:free',
