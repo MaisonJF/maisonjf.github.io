@@ -66,6 +66,25 @@ jobs:
           npx wrangler d1 execute maison-growth-engine --remote --file="$tmp"
           npx wrangler d1 execute maison-growth-engine --remote --command="SELECT schema_value FROM schema_state WHERE schema_key='maison_candidate_inbox_schema_version';"
 
+      - name: Seed Editorial Vault from existing Oceans
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp)"
+          trap 'rm -f "$tmp"' EXIT
+          node scripts/seed-editorial-vault-existing-oceans.mjs > "$tmp"
+          npx wrangler d1 execute maison-growth-engine --remote --file="$tmp"
+          npx wrangler d1 execute maison-growth-engine --remote --command="
+            SELECT
+              (SELECT COUNT(*) FROM vault_questions WHERE source_kind IN ('ocean_seed_candidate','ocean_mcp_candidate') AND status='candidate' AND lifecycle_state='candidate') AS question_candidates,
+              (SELECT COUNT(*) FROM vault_oracle_blocks WHERE source_kind IN ('ocean_seed_candidate','ocean_mcp_candidate') AND status='candidate' AND lifecycle_state='candidate') AS oracle_candidates,
+              (SELECT COUNT(*) FROM vault_questions) AS all_questions,
+              (SELECT COUNT(*) FROM vault_oracle_blocks) AS all_oracle_blocks;
+          "
+
       - name: Render live private Worker config
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
