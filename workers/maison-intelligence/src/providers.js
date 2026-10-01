@@ -286,7 +286,7 @@ export function configuredZeroCostModelSpecs(env) {
       }
     } catch {}
   }
-  if (enabled(env.WORKERS_AI_ENABLED) && enabled(env.WORKERS_AI_ZERO_COST) && env.AI && env.WORKERS_AI_MODEL) {
+  if ((enabled(env.WORKERS_AI_FOUNDRY_ENABLED) || enabled(env.WORKERS_AI_ENABLED)) && enabled(env.WORKERS_AI_ZERO_COST) && env.AI && env.WORKERS_AI_MODEL) {
     specs.push({key:`cloudflare_workers_ai:${env.WORKERS_AI_MODEL}`,providerId:'cloudflare_workers_ai',modelId:env.WORKERS_AI_MODEL});
   }
   if (enabled(env.OSIRIS_GATEWAY_ENABLED) && enabled(env.OSIRIS_GATEWAY_ZERO_COST) && env.OSIRIS_GATEWAY_API_KEY && env.OSIRIS_GATEWAY_MODEL) {
