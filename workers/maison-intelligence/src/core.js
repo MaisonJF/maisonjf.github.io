@@ -104,14 +104,18 @@ export function buildSensorPrompt(territory) {
 }
 
 export function territoriesForDate(date = new Date(), count = 2) {
-  const day = Math.floor(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()) / 86400000);
-  const limit = Math.max(0, Math.min(count, TERRITORIES.length + 1));
+  // Rotate by scheduled 3-hour slot, not only by UTC day. This keeps the
+  // intelligence loop continuously fed while deterministically covering every
+  // human territory. Discovery remains a permanent cross-cutting sensor.
+  const slot = Math.floor(date.getTime() / (3 * 3600000));
+  const limit = Math.max(0, Math.min(count, TERRITORIES.length + 2));
   if (!limit) return [];
   const selected = [DISCOVERY_TERRITORY];
-  for (let i = 0; i < Math.min(limit - 1, TERRITORIES.length); i++) {
-    selected.push(TERRITORIES[(day + i * 3) % TERRITORIES.length]);
+  if (limit > 1) selected.push(ATELIER_TERRITORY);
+  for (let i = 0; i < Math.min(limit - selected.length, TERRITORIES.length); i++) {
+    selected.push(TERRITORIES[(slot + i * 3) % TERRITORIES.length]);
   }
-  return selected;
+  return selected.slice(0,limit);
 }
 
 export function isTrue(value) {
