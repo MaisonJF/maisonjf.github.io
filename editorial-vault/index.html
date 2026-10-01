@@ -38,6 +38,7 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
   </div>
 
   <div class="toolbar">
+    <button id="seed">Puxar Oceans agora</button>
     <button id="select-all">Selecionar visíveis</button>
     <button id="clear">Limpar seleção</button>
     <button id="approve" class="primary">Aprovar selecionados</button>
@@ -115,6 +116,16 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
    }catch(e){note(e.message,'warning')}
  }
  $('load').addEventListener('click',load);
+ $('seed').addEventListener('click',async()=>{
+   if(!confirm('Criar agora candidatos privados a partir dos Oceans existentes? Nada será publicado automaticamente.'))return;
+   try{
+     note('A puxar os Oceans para o Vault…');
+     const r=await call('seed');
+     note(r,'ok');
+     state.value='candidate';type.value='all';
+     await load();
+   }catch(e){note(e.message,'warning')}
+ });
  $('select-all').addEventListener('click',()=>{document.querySelectorAll('.pick').forEach(x=>x.checked=true);updateCount()});
  $('clear').addEventListener('click',()=>{document.querySelectorAll('.pick').forEach(x=>x.checked=false);updateCount()});
  $('approve').addEventListener('click',()=>{
