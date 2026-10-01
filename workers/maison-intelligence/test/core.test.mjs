@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { canonicalizeUrl, uniqueCanonicalUrls, territoriesForDate, buildSensorPrompt, privacySafeText, ATELIER_TERRITORY } from '../src/core.js';
+import { canonicalizeUrl, uniqueCanonicalUrls, territoriesForDate, buildSensorPrompt, privacySafeText, ATELIER_TERRITORY, DISCOVERY_TERRITORY } from '../src/core.js';
 
 test('canonical URLs collapse tracking variants', () => {
   assert.equal(canonicalizeUrl('https://www.Example.com/a/?utm_source=x&b=2'), 'https://example.com/a?b=2');
@@ -10,20 +10,20 @@ test('echo roots are deduplicated', () => {
   assert.deepEqual(uniqueCanonicalUrls(['https://example.com/x?utm_source=a','https://www.example.com/x']), ['https://example.com/x']);
 });
 
-test('territory rotation is deterministic', () => {
+test('territory rotation is deterministic inside each 3-hour slot', () => {
   const a = territoriesForDate(new Date('2026-09-22T00:00:00Z'), 2);
-  const b = territoriesForDate(new Date('2026-09-22T23:59:00Z'), 2);
+  const b = territoriesForDate(new Date('2026-09-22T02:59:00Z'), 2);
   assert.deepEqual(a,b);
 });
 
-test('organic discovery is always the first sensing priority', () => {
-  const selected = territoriesForDate(new Date('2026-09-26T00:00:00Z'), 2);
-  assert.equal(selected[0].key, 'organic_discovery');
+test('territory rotation advances between 3-hour slots', () => {
+  const a = territoriesForDate(new Date('2026-09-22T00:00:00Z'), 2);
+  const b = territoriesForDate(new Date('2026-09-22T03:00:00Z'), 2);
+  assert.notDeepEqual(a,b);
 });
 
 test('organic discovery prompt enforces zero-cost latent-demand acquisition', () => {
-  const territory = territoriesForDate(new Date('2026-09-26T00:00:00Z'), 1)[0];
-  const prompt = buildSensorPrompt(territory);
+  const prompt = buildSensorPrompt(DISCOVERY_TERRITORY);
   assert.match(prompt, /do not yet know MAISON JF/i);
   assert.match(prompt, /Zero-cost first/i);
   assert.match(prompt, /this is about me/i);
