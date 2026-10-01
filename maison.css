@@ -3586,3 +3586,7 @@ main h1,
     padding:.5rem .6rem;
   }
 }
+
+
+/* UX contrast pass 2026-10-01 */
+.home-footer__legal{color:#918a81!important}
