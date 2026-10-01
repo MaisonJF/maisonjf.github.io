@@ -85,13 +85,12 @@ async function markUsage(env, providerId, day, ok, usage) {
 }
 
 async function processExpansionFoundryTask(env,task) {
-  if (!isTrue(env.EXPANSION_FOUNDRY_ENABLED)) return { skipped:'expansion_foundry_disabled' };
   const control=await controlState(env);
   if (!control.enabled) return { skipped:control.reason };
 
   const day=task.day||utcDay();
   const usageKey=('foundry:'+String(task.modelKey||task.providerId||'model')).slice(0,120);
-  const cap=clampInt(env.MAX_DAILY_FOUNDRY_CALLS_PER_MODEL,1,1,4);
+  const cap=1;
   const row=await env.GROWTH_DB.prepare(`
     SELECT calls FROM external_intelligence_daily_usage
     WHERE usage_date=?1 AND provider_id=?2
@@ -637,7 +636,6 @@ async function enqueueVisibilityProbeRun(env,scheduledDate,getControl=()=>contro
   return { queued:messages.length,providers:providers.length,probes:probes.length };
 }
 async function enqueueDailyExpansionRun(env,scheduledDate,getControl=()=>controlState(env)) {
-  if (!isTrue(env.EXPANSION_FOUNDRY_ENABLED)) return { queued:0,reason:'expansion_foundry_disabled' };
   const specs=configuredZeroCostModelSpecs(env);
   if (!specs.length) return { queued:0,reason:'no_zero_cost_models_configured' };
 
