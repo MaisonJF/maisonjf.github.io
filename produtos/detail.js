@@ -55,7 +55,7 @@
 
   page.innerHTML=`
     <section class="product-hero ${hero?'':'product-hero--no-media'}">
-      ${hero?`<div class="media-slot media-slot--portrait product-hero__media ${hero.editorial?'product-hero__media--editorial':''}">
+      ${hero?`<div class="media-slot media-slot--${hero.aspect||'portrait'} product-hero__media ${hero.editorial?'product-hero__media--editorial':''}">
         <img src="${root}${hero.src.replace(/^\.\.\//,'')}" alt="${hero.alt||p.name}">
       </div>`:''}
       <div class="product-hero__copy">
