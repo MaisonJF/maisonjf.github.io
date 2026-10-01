@@ -108,7 +108,7 @@
         inner.innerHTML = `
           <span class="conversion-trust__item">Marca registada na União Europeia</span>
           <span class="conversion-trust__item">Condições claras antes de pagar</span>
-          <a class="conversion-trust__item" href="https://wa.me/351923318289" target="_blank" rel="noopener">Contacto directo com a Maison</a>`;
+          <a class="conversion-trust__item" href="https://wa.me/351923318289" target="_blank" rel="noopener">Falar directamente comigo</a>`;
       }
     }
 
@@ -511,7 +511,7 @@
       setText('.detail-copy', 'Se conseguirmos fazer bem, dizemos como. Se não, também dizemos.', convergence);
       const action = $('.btn--primary', convergence);
       if (action) {
-        action.textContent = 'Falar com a Maison';
+        action.textContent = 'Falar comigo';
         action.href = 'https://wa.me/351923318289?text=' + encodeURIComponent('Olá Maison JF. Procuro uma solução diferente para o meu espaço: ');
       }
     }
