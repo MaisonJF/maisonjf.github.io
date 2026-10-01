@@ -605,8 +605,13 @@ export default {
       enqueuePublicSourceRun(env,when,getControl),
       enqueueSearchVisibilityRun(env,when,getControl)
     ];
+    // The Worker itself already runs every three hours. Feed the human/Ocean
+    // research loop on every natural cadence instead of once per day; task keys
+    // and provider caps remain the idempotency/cost gates.
+    jobs.push(enqueueRun(env,when,getControl));
+    // Visibility probes are deliberately lower cadence: discovery/content growth
+    // is continuous, while search-presence measurement stays daily.
     if (when.getUTCHours()===3 && when.getUTCMinutes()===0) {
-      jobs.push(enqueueRun(env,when,getControl));
       jobs.push(enqueueVisibilityProbeRun(env,when,getControl));
     }
     ctx.waitUntil(Promise.all(jobs));
