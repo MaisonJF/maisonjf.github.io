@@ -19,7 +19,8 @@ test('MCP exposes bounded video, Ocean and private editorial candidate tools',as
   const r=await handleMaisonMcpRequest(post('tools/list',{}),{});
   const body=await r.json();
   assert.deepEqual(body.result.tools.map(x=>x.name),[
-    'maison_video_health','maison_generate_video','maison_ingest_ocean_signal','maison_ingest_vault_candidate','maison_video_result'
+    'maison_video_health','maison_generate_video','maison_ingest_ocean_signal','maison_ingest_vault_candidate',
+    'maison_ingest_candidate','maison_list_candidates','maison_video_result'
   ]);
   const generate=body.result.tools.find(x=>x.name==='maison_generate_video');
   assert.equal(generate.annotations.destructiveHint,false);
@@ -35,6 +36,11 @@ test('MCP exposes bounded video, Ocean and private editorial candidate tools',as
   assert.equal(vault.annotations.destructiveHint,false);
   assert.equal(vault.annotations.openWorldHint,false);
   assert.equal(vault.securitySchemes[0].type,'oauth2');
+  const candidate=body.result.tools.find(x=>x.name==='maison_ingest_candidate');
+  assert.deepEqual(candidate.inputSchema.required,['candidate_type','source_ocean_id','title','body','rationale']);
+  assert.equal(candidate.annotations.openWorldHint,false);
+  const list=body.result.tools.find(x=>x.name==='maison_list_candidates');
+  assert.equal(list.annotations.readOnlyHint,true);
 });
 
 test('MCP Ocean tool authenticates and persists directly to D1',async()=>{
