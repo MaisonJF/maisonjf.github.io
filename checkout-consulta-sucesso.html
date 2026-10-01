@@ -38,7 +38,7 @@
   const whatsapp=document.getElementById('whatsapp');
   const sessionId=new URLSearchParams(location.search).get('session_id');
   const money=(amount,currency='eur')=>new Intl.NumberFormat('pt-PT',{style:'currency',currency:currency.toUpperCase(),minimumFractionDigits:0,maximumFractionDigits:2}).format(amount/100);
-  whatsapp.href='https://wa.me/351923318289?text='+encodeURIComponent('Olá Maison JF. Acabei de concluir o pagamento de uma consulta no site e quero combinar o próximo passo.');
+  whatsapp.href='https://wa.me/351923318289?text='+encodeURIComponent('Olá, João. Acabei de concluir o pagamento de uma consulta no site e quero combinar o próximo passo.');
   if(!sessionId){
     title.textContent='Não encontrei a compra.';
     message.textContent='Volta aos Serviços e inicia o pagamento novamente.';
@@ -53,7 +53,7 @@
     .then(data=>{
       if(data.payment_status==='paid'){
         title.textContent='Pagamento confirmado.';
-        message.textContent='A tua compra de '+data.service_name+' ficou confirmada.';
+        message.textContent='Já tenho a confirmação de '+data.service_name+'.';
         document.getElementById('next').textContent='Agora fala comigo no WhatsApp para combinarmos o próximo passo.';
         const parts=[];
         if(Number.isInteger(data.amount_total))parts.push('Total: '+money(data.amount_total,data.currency));
