@@ -3413,3 +3413,82 @@ main h1,
 .home-feature__media>picture{display:block;width:100%;height:100%}
 .media-slot>picture>img,
 .home-feature__media>picture>img{display:block;width:100%;height:100%;object-fit:cover}
+
+
+/* PORTAS · títulos sempre numa só linha · 2026-10-01 */
+.door-page .hero h1,
+.door-page .manifesto blockquote,
+.door-page .essay-copy h2,
+.door-page .territory-offers__head h2,
+.door-page .presence-intro h2,
+.door-page .presence-sos h2,
+.door-page .presence-rules h2{
+  max-width:none!important;
+  white-space:nowrap!important;
+  text-wrap:nowrap!important;
+  overflow-wrap:normal!important;
+  line-height:1!important;
+  letter-spacing:-.035em!important;
+}
+
+/* Hero: escala por comprimento da frase para nunca cortar à direita. */
+.door-page--casa .hero h1{font-size:clamp(26px,4.1vw,70px)!important}
+.door-page--corpo .hero h1{font-size:clamp(27px,4.35vw,74px)!important}
+.door-page--cabeca .hero h1{font-size:clamp(24px,3.55vw,60px)!important}
+.door-page--companhia .hero h1{font-size:clamp(18px,2.75vw,46px)!important}
+
+/* Manifestos: uma linha, mesmo nas frases longas. */
+.door-page--casa .manifesto blockquote{font-size:clamp(16px,1.85vw,31px)!important}
+.door-page--corpo .manifesto blockquote{font-size:clamp(18px,2.6vw,44px)!important}
+.door-page--cabeca .manifesto blockquote{font-size:clamp(20px,3vw,50px)!important}
+
+/* Títulos editoriais intermédios. */
+.door-page--casa .essay-copy h2{font-size:clamp(17px,2.05vw,34px)!important}
+.door-page--corpo .essay-copy h2{font-size:clamp(22px,3vw,50px)!important}
+.door-page--cabeca .essay-copy h2{font-size:clamp(17px,2vw,33px)!important}
+
+/* Cabeçalhos das escolhas/ofertas. */
+.door-page--casa .territory-offers__head{max-width:none!important}
+.door-page--corpo .territory-offers__head{max-width:none!important}
+.door-page--cabeca .territory-offers__head{max-width:none!important}
+.door-page--casa .territory-offers__head h2{font-size:clamp(17px,2.35vw,39px)!important}
+.door-page--corpo .territory-offers__head h2{font-size:clamp(16px,2.15vw,36px)!important}
+.door-page--cabeca .territory-offers__head h2{font-size:clamp(14px,1.72vw,29px)!important}
+
+/* Presença. */
+.door-page--companhia .presence-intro h2{font-size:clamp(24px,4vw,64px)!important}
+.door-page--companhia .presence-sos h2,
+.door-page--companhia .presence-rules h2{font-size:clamp(24px,4vw,60px)!important}
+
+@media(max-width:760px){
+  .door-page .hero h1,
+  .door-page .manifesto blockquote,
+  .door-page .essay-copy h2,
+  .door-page .territory-offers__head h2,
+  .door-page .presence-intro h2,
+  .door-page .presence-sos h2,
+  .door-page .presence-rules h2{
+    letter-spacing:-.045em!important;
+  }
+
+  .door-page--casa .hero h1{font-size:clamp(16px,5.7vw,30px)!important}
+  .door-page--corpo .hero h1{font-size:clamp(16px,5.9vw,31px)!important}
+  .door-page--cabeca .hero h1{font-size:clamp(14px,4.8vw,26px)!important}
+  .door-page--companhia .hero h1{font-size:clamp(11px,3.65vw,20px)!important}
+
+  .door-page--casa .manifesto blockquote{font-size:clamp(10px,2.8vw,16px)!important}
+  .door-page--corpo .manifesto blockquote{font-size:clamp(12px,3.7vw,20px)!important}
+  .door-page--cabeca .manifesto blockquote{font-size:clamp(14px,4.8vw,25px)!important}
+
+  .door-page--casa .essay-copy h2{font-size:clamp(10px,3vw,17px)!important}
+  .door-page--corpo .essay-copy h2{font-size:clamp(16px,5.2vw,28px)!important}
+  .door-page--cabeca .essay-copy h2{font-size:clamp(10px,2.95vw,17px)!important}
+
+  .door-page--casa .territory-offers__head h2{font-size:clamp(10px,3.05vw,17px)!important}
+  .door-page--corpo .territory-offers__head h2{font-size:clamp(10px,2.85vw,16px)!important}
+  .door-page--cabeca .territory-offers__head h2{font-size:clamp(9px,2.15vw,13px)!important}
+
+  .door-page--companhia .presence-intro h2{font-size:clamp(16px,5.5vw,29px)!important}
+  .door-page--companhia .presence-sos h2,
+  .door-page--companhia .presence-rules h2{font-size:clamp(17px,6vw,31px)!important}
+}
