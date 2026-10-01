@@ -3284,6 +3284,32 @@ main h1,
 }
 
 
+/* Homepage · títulos numa só linha · 2026-10-01 */
+.home-page--final #profissionais .home-feature__copy{max-width:none}
+.home-page--final #profissionais .home-feature__copy h2{
+  max-width:none!important;
+  font-size:clamp(16px,1.55vw,27px)!important;
+  line-height:1!important;
+  letter-spacing:-.025em!important;
+  white-space:nowrap!important;
+  text-wrap:nowrap!important;
+}
+.home-page--final .home-ending h2{
+  max-width:none!important;
+  font-size:clamp(28px,3vw,48px)!important;
+  line-height:1!important;
+  letter-spacing:-.035em!important;
+  white-space:nowrap!important;
+  text-wrap:nowrap!important;
+}
+@media(max-width:900px){
+  .home-page--final #profissionais .home-feature__copy h2{font-size:clamp(18px,3vw,26px)!important}
+}
+@media(max-width:760px){
+  .home-page--final #profissionais .home-feature__copy h2{font-size:clamp(13px,3.4vw,24px)!important}
+  .home-page--final .home-ending h2{font-size:clamp(16px,5.2vw,32px)!important}
+}
+
 /* Manifesto + Sobre */
 .editorial-page{background:#080808;color:var(--maison-ivory)}
 .editorial-page__main{
