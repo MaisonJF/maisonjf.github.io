@@ -110,12 +110,14 @@ export function territoriesForDate(date = new Date(), count = 2) {
   const slot = Math.floor(date.getTime() / (3 * 3600000));
   const limit = Math.max(0, Math.min(count, TERRITORIES.length + 2));
   if (!limit) return [];
-  const selected = [DISCOVERY_TERRITORY];
-  if (limit > 1) selected.push(ATELIER_TERRITORY);
-  for (let i = 0; i < Math.min(limit - selected.length, TERRITORIES.length); i++) {
-    selected.push(TERRITORIES[(slot + i * 3) % TERRITORIES.length]);
+  // Human pain territories are the first-class feed for PDI/Oráculo. Discovery
+  // and Atelier get deterministic rotating slots instead of consuming every run.
+  const pool=[...TERRITORIES,DISCOVERY_TERRITORY,ATELIER_TERRITORY];
+  const selected=[];
+  for(let i=0;i<Math.min(limit,pool.length);i++){
+    selected.push(pool[(slot+i*3)%pool.length]);
   }
-  return selected.slice(0,limit);
+  return selected;
 }
 
 export function isTrue(value) {
