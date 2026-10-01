@@ -3492,3 +3492,24 @@ main h1,
   .door-page--companhia .presence-sos h2,
   .door-page--companhia .presence-rules h2{font-size:clamp(17px,6vw,31px)!important}
 }
+
+
+/* Homepage hero sizing 2026-10-01 */
+.home-page--final .hero--final{
+  min-height:0;
+}
+.home-page--final .hero--final .media-slot--hero{
+  aspect-ratio:auto;
+  height:clamp(420px,38vw,650px);
+}
+@media(max-width:900px){
+  .home-page--final .hero--final .media-slot--hero{
+    height:clamp(380px,58vw,540px);
+  }
+}
+@media(max-width:700px){
+  .home-page--final .hero--final .media-slot--hero{
+    height:clamp(360px,58svh,500px);
+    aspect-ratio:auto;
+  }
+}
