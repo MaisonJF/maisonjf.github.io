@@ -132,8 +132,8 @@ jobs:
             --header "CF-Access-Client-Secret: $access_secret" \
             "$base/.well-known/oauth-protected-resource")"
           cat "$oauth_body"
-          test "$oauth_status" = "200"
-          python - "$oauth_body" <<'PY'
+          if test "$oauth_status" = "200"; then
+            python - "$oauth_body" <<'PY'
           import json,sys
           with open(sys.argv[1],encoding='utf-8') as fh:
               payload=json.load(fh)
@@ -142,3 +142,12 @@ jobs:
           assert servers and all(str(x).startswith('https://') for x in servers),payload
           print('Live MCP OAuth metadata: OK')
           PY
+          else
+            python - "$oauth_body" <<'PY'
+          import json,sys
+          with open(sys.argv[1],encoding='utf-8') as fh:
+              payload=json.load(fh)
+          assert payload.get('error')=='mcp_auth_not_configured',payload
+          print('Live MCP OAuth metadata: optional auth not configured; internal D1 runtime remains active')
+          PY
+          fi
