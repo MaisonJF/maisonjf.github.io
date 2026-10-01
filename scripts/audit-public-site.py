@@ -124,6 +124,12 @@ def main():
             issues.append((url,f'HTML não analisável: {exc}'))
             continue
 
+        viewport=attrs_meta(parser,'viewport').lower().replace(' ','')
+        if 'width=device-width' not in viewport or 'initial-scale=1' not in viewport:
+            issues.append((url,'viewport mobile-first em falta ou incompleto'))
+        if 'user-scalable=no' in viewport or 'maximum-scale=1' in viewport:
+            issues.append((url,'viewport bloqueia zoom no telemóvel'))
+
         if len(parser.title.strip())<3:
             issues.append((url,'title em falta'))
         desc=attrs_meta(parser,'description')
