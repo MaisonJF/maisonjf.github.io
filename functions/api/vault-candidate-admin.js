@@ -1,0 +1,74 @@
+import { requireMaisonVault } from '../_lib/maison-vault.js';
+import {
+  listOceanVaultCandidates,
+  activateOceanVaultCandidates,
+  reviewOceanVaultCandidates
+} from '../_lib/vault-candidate-admin.js';
+
+export async function onRequestPost({request,env}){
+  try{
+    const url=new URL(request.url);
+    const origin=request.headers.get('Origin');
+    if(origin && new URL(origin).origin!==url.origin)return json({error:'Origem não autorizada.'},403);
+
+    const configured=String(env?.MAISON_VAULT_ADMIN_SECRET||env?.MAISON_PDI_IMPORT_SECRET||'');
+    if(configured.length<24)return json({error:'Admin editorial privado não configurado.'},503);
+    const supplied=String(request.headers.get('x-maison-admin-key')||'');
+    if(!(await secureEqual(configured,supplied)))return json({error:'Não autorizado.'},401);
+
+    const body=await request.json().catch(()=>null);
+    if(!body||typeof body!=='object')return json({error:'Pedido inválido.'},400);
+    const db=requireMaisonVault(env);
+    const action=String(body.action||'');
+
+    if(action==='list'){
+      return json(await listOceanVaultCandidates(db,{
+        type:body.type,
+        state:body.state,
+        limit:body.limit
+      }));
+    }
+    if(action==='activate'){
+      return json(await activateOceanVaultCandidates(db,{
+        items:body.items,
+        all:body.all===true,
+        type:body.type
+      }));
+    }
+    if(action==='review'){
+      return json(await reviewOceanVaultCandidates(db,{items:body.items}));
+    }
+    return json({error:'Ação inválida.'},400);
+  }catch(error){
+    const code=String(error?.message||'vault_candidate_admin_failed');
+    const status=/required|invalid|too_many/.test(code)?400:500;
+    return json({error:code},status);
+  }
+}
+
+export async function onRequestGet(){
+  return json({error:'Método não permitido.'},405);
+}
+
+async function secureEqual(expected,actual){
+  if(!actual)return false;
+  const [a,b]=await Promise.all([digest(expected),digest(actual)]);
+  if(a.length!==b.length)return false;
+  let diff=0;
+  for(let i=0;i<a.length;i++)diff|=a[i]^b[i];
+  return diff===0;
+}
+async function digest(value){
+  return new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(value))));
+}
+function json(payload,status=200){
+  return new Response(JSON.stringify(payload),{
+    status,
+    headers:{
+      'content-type':'application/json; charset=utf-8',
+      'cache-control':'private, no-store, max-age=0',
+      'x-content-type-options':'nosniff',
+      'referrer-policy':'no-referrer'
+    }
+  });
+}
