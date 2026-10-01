@@ -1,5 +1,7 @@
 import { sha256Hex, uniqueCanonicalUrls } from './core.js';
 
+const CANDIDATE_DECISIONS=new Set(['approve','reject','archive','defer','develop']);
+
 export const CANDIDATE_TYPES=new Set([
   'question','oracle_block','test','farol_path',
   'reel','post','story','carousel','video_script',
@@ -155,4 +157,29 @@ export async function listCandidateInbox(env,{limit=50,type=null,decision='pendi
     related_assets:JSON.parse(row.related_assets_json||'[]'),
     payload_json:undefined,evidence_refs_json:undefined,related_assets_json:undefined
   }));
+}
+
+
+export async function decideCandidateInbox(env,raw){
+  if(!env?.GROWTH_DB)throw new Error('growth_db_missing');
+  assertObject(raw,'candidate_decision');
+  const candidateId=cleanText(raw.candidate_id,'candidate_id',5,80);
+  const decision=String(raw.decision||'').trim();
+  if(!CANDIDATE_DECISIONS.has(decision))throw new Error('invalid_candidate_decision');
+  const reason=String(raw.reason??'').replace(/\s+/g,' ').trim().slice(0,2000);
+  if(EMAIL_RE.test(reason)||PHONE_RE.test(reason))throw new Error('candidate_pii_detected');
+  const actor=cleanText(raw.actor||'human','actor',1,120);
+  const exists=await env.GROWTH_DB.prepare(
+    'SELECT candidate_id FROM maison_candidate_inbox WHERE candidate_id=?1 LIMIT 1'
+  ).bind(candidateId).first();
+  if(!exists)throw new Error('candidate_not_found');
+  const decisionId='mcd_'+crypto.randomUUID();
+  await env.GROWTH_DB.prepare(`
+    INSERT INTO maison_candidate_decisions(decision_id,candidate_id,decision,reason,actor)
+    VALUES(?1,?2,?3,?4,?5)
+  `).bind(decisionId,candidateId,decision,reason,actor).run();
+  return {
+    ok:true,decision_id:decisionId,candidate_id:candidateId,decision,
+    live:false,automatic_activation:false,public_side_effects:false
+  };
 }
