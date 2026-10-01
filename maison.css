@@ -3288,9 +3288,9 @@ main h1,
 .home-page--final #profissionais .home-feature__copy{max-width:none}
 .home-page--final #profissionais .home-feature__copy h2{
   max-width:none!important;
-  font-size:clamp(18px,1.78vw,31px)!important;
+  font-size:clamp(18px,1.70vw,29px)!important;
   line-height:1!important;
-  letter-spacing:-.03em!important;
+  letter-spacing:-.035em!important;
   white-space:nowrap!important;
   text-wrap:nowrap!important;
 }
