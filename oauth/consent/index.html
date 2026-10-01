@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>MAISON JF® · Autorizar ligação</title>
+  <style>
+    :root{color-scheme:dark;background:#090909;color:#f7f4ee;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 20%,#242018 0,#090909 45%)}
+    main{width:min(560px,100%);border:1px solid #3b352b;background:rgba(12,12,12,.92);padding:34px;border-radius:24px;box-shadow:0 30px 90px #0009}
+    .mark{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#cbb98d} h1{font-size:clamp(30px,7vw,48px);line-height:1;margin:.5em 0 .35em}
+    p{color:#c9c4bb;line-height:1.55}.scope{border:1px solid #2b2925;border-radius:16px;padding:16px;margin:20px 0;background:#10100f}
+    label{display:block;font-size:13px;margin-bottom:8px;color:#d8d2c8} input{width:100%;padding:14px 15px;border-radius:12px;border:1px solid #3d3932;background:#171614;color:#fff;font:inherit}
+    button{border:0;border-radius:999px;padding:13px 20px;font:600 15px/1 inherit;cursor:pointer}.primary{background:#f1e8d4;color:#111}.secondary{background:#24221e;color:#eee}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.hidden{display:none!important}.status{min-height:24px;margin-top:14px;color:#d6c79f}
+    small{color:#8f8a80;display:block;margin-top:20px;line-height:1.5}
+  </style>
+</head>
+<body>
+<main>
+  <div class="mark">MAISON JF® · PÁRA DE IGNORAR!</div>
+  <h1>Autorizar a ligação</h1>
+  <p id="intro">Esta ligação permite ao teu ChatGPT alimentar o cérebro editorial privado da MAISON.</p>
+  <section id="loginBox" class="hidden">
+    <div class="scope"><strong>Conta MAISON autorizada</strong><p>Entra com o email autorizado. Receberás um link seguro; não há password para partilhar.</p></div>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+      <div class="actions"><button class="primary" type="submit">Enviar link seguro</button></div>
+    </form>
+  </section>
+
+  <section id="consentBox" class="hidden">
+    <div class="scope">
+      <strong id="clientName">ChatGPT</strong>
+      <p id="clientText">pede autorização para usar as ferramentas editoriais privadas.</p>
+      <p id="scopeText"></p>
+    </div>
+    <div class="actions">
+      <button id="approve" class="primary" type="button">Autorizar</button>
+      <button id="deny" class="secondary" type="button">Recusar</button>
+    </div>
+  </section>
+
+  <p id="status" class="status"></p>
+  <small>A ligação só pode criar sinais de Ocean e candidatos editoriais no D1. Não pode aprovar, publicar, alterar preços, checkout, pagamentos ou tornar conteúdo live.</small>
+</main>
+<script type="module" src="/oauth/consent/app.js"></script>
+</body>
+</html>
