@@ -1,6 +1,7 @@
 import { requireMaisonVault } from '../_lib/maison-vault.js';
 import {
   listOceanVaultCandidates,
+  vaultCandidateStats,
   activateOceanVaultCandidates,
   reviewOceanVaultCandidates,
   seedOceanVaultCandidates
@@ -22,6 +23,9 @@ export async function onRequestPost({request,env}){
     const db=requireMaisonVault(env);
     const action=String(body.action||'');
 
+    if(action==='stats'){
+      return json(await vaultCandidateStats(db));
+    }
     if(action==='list'){
       return json(await listOceanVaultCandidates(db,{
         type:body.type,
