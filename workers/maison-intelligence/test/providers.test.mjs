@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { configuredProviders, isZeroCostOpenRouterModel } from '../src/providers.js';
+import { configuredProviders, configuredZeroCostModelSpecs, isZeroCostOpenRouterModel } from '../src/providers.js';
 
 test('all AI providers are opt-in even when bindings or model names exist', () => {
   const env = {
@@ -95,4 +95,34 @@ test('paid model anywhere in OpenRouter fallback chain is refused', () => {
       'openai/gpt-5'
     ])
   }), []);
+});
+
+
+test('zero-cost Foundry expands every configured OpenRouter free model independently', () => {
+  const specs=configuredZeroCostModelSpecs({
+    OPENROUTER_ENABLED:'true',
+    OPENROUTER_API_KEY:'x',
+    OPENROUTER_MODEL:'google/gemma-4-26b-a4b-it:free',
+    OPENROUTER_FALLBACK_MODELS_JSON:JSON.stringify([
+      'qwen/qwen3.8-27b:free',
+      'z-ai/glm-5.2:free'
+    ])
+  });
+  assert.deepEqual(specs.map(x=>x.key),[
+    'openrouter:google/gemma-4-26b-a4b-it:free',
+    'openrouter:qwen/qwen3.8-27b:free',
+    'openrouter:z-ai/glm-5.2:free'
+  ]);
+});
+
+test('Workers AI can be isolated to the Foundry without joining continuous sensing', () => {
+  const env={
+    AI:{run(){}},
+    WORKERS_AI_ENABLED:'false',
+    WORKERS_AI_FOUNDRY_ENABLED:'true',
+    WORKERS_AI_ZERO_COST:'true',
+    WORKERS_AI_MODEL:'@cf/test/model'
+  };
+  assert.deepEqual(configuredProviders(env),[]);
+  assert.equal(configuredZeroCostModelSpecs(env)[0].providerId,'cloudflare_workers_ai');
 });
