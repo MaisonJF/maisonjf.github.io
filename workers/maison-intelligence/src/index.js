@@ -732,11 +732,11 @@ export default {
     if (when.getUTCHours()===3 && when.getUTCMinutes()===0) {
       jobs.push(enqueueVisibilityProbeRun(env,when,getControl));
     }
-    // Once per day, every explicitly zero-cost model gets one independent
-    // Foundry pass. Outputs remain private candidates and never self-publish.
-    if (when.getUTCHours()===6 && when.getUTCMinutes()===0) {
-      jobs.push(enqueueDailyExpansionRun(env,when,getControl));
-    }
+    // Every scheduler tick may ask the zero-cost Foundry to run. The per-model
+    // daily usage gate keeps this to at most the configured daily cap, so a
+    // deployment after 06:00 UTC no longer leaves the Vault empty until tomorrow.
+    // Outputs remain private candidates and never self-publish.
+    jobs.push(enqueueDailyExpansionRun(env,when,getControl));
     ctx.waitUntil(Promise.all(jobs));
   },
 
