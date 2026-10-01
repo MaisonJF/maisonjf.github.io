@@ -266,7 +266,7 @@ const data={
   "results": {
     "decisao_perspectiva": {
       "title": "Talvez não precises de pensar mais. Precises de outro espaço para olhar.",
-      "text": "Uma consulta pode fazer sentido aqui. Dentro de Consultas, escolhes o formato que te serve melhor.",
+      "text": "Uma consulta pode fazer sentido aqui. Vês os formatos e escolhes o que te serve melhor.",
       "cta": {
         "href": "/servicos/#consultas",
         "text": "Explorar Consultas"
@@ -278,7 +278,7 @@ const data={
     },
     "decisao_falar": {
       "title": "Já tens opiniões suficientes.",
-      "text": "Talvez precises de um espaço onde possas trazer o caso como ele é. Em Consultas, escolhes como queres fazê-lo.",
+      "text": "Talvez precises de um espaço onde possas trazer o caso como ele é. Eu mostro-te as opções e escolhes como queres fazê-lo.",
       "cta": {
         "href": "/servicos/#consultas",
         "text": "Explorar Consultas"
@@ -320,7 +320,7 @@ const data={
     },
     "relacao_fundo": {
       "title": "Não é só sobre essa pessoa. É sobre o lugar onde isto te deixou.",
-      "text": "Se queres olhar para esta história com mais contexto, entra em Consultas e escolhe a forma que te serve.",
+      "text": "Se queres olhar para esta história com mais contexto, vê as Consultas e escolhe a forma que te serve.",
       "cta": {
         "href": "/servicos/#consultas",
         "text": "Explorar Consultas"
@@ -341,7 +341,7 @@ const data={
     },
     "relacao_historia": {
       "title": "Se a tua cabeça insiste numa história, dá-lhe outra.",
-      "text": "A Biblioteca reúne as histórias disponíveis na Maison. Entra sem saber ainda qual te vai prender primeiro.",
+      "text": "Na Biblioteca tens as histórias que já publiquei. Entra sem saber ainda qual te vai prender primeiro.",
       "cta": {
         "href": "/ebooks/",
         "text": "Entrar na Biblioteca"
@@ -395,7 +395,7 @@ const data={
     },
     "cansaco_historia": {
       "title": "Talvez descansar hoje seja deixar outra vida ocupar a tua cabeça.",
-      "text": "Há noites em que descansar é sair da tua própria história por umas páginas. A Biblioteca está aí para isso.",
+      "text": "Há noites em que descansar é sair da tua própria história por umas páginas. Foi também para isso que fiz a Biblioteca.",
       "cta": {
         "href": "/ebooks/",
         "text": "Abrir a Biblioteca"
@@ -404,7 +404,7 @@ const data={
     },
     "cansaco_continua": {
       "title": "Quando o cansaço deixa de ser só de hoje, um ritual pode não chegar.",
-      "text": "O Acompanhamento existe para aquilo que continua entre uma decisão e a seguinte. O âmbito é combinado antes.",
+      "text": "Se isto continua entre uma decisão e a seguinte, posso acompanhar-te durante mais tempo. Combinamos o âmbito antes.",
       "cta": {
         "href": "/contacto/?interesse=acompanhamento",
         "text": "Acompanhamento · 170 € · 4 semanas"
@@ -458,7 +458,7 @@ const data={
     },
     "trabalho_escolher": {
       "title": "Mais uma lista talvez não seja o que falta.",
-      "text": "Uma consulta pode ajudar-te a olhar para a decisão de outra maneira. Dentro de Consultas, a escolha do formato é tua.",
+      "text": "Uma consulta pode ajudar-te a olhar para a decisão de outra maneira. Eu mostro-te os formatos; a escolha continua a ser tua.",
       "cta": {
         "href": "/servicos/#consultas",
         "text": "Explorar Consultas"
@@ -488,7 +488,7 @@ const data={
     },
     "trabalho_projeto": {
       "title": "O projecto não precisa de mais uma pasta chamada “um dia”.",
-      "text": "A Mentoria serve para aprender, estruturar e avançar com objectivos e acompanhamento durante um período definido.",
+      "text": "Na Mentoria, ajudo-te a aprender, estruturar e avançar durante um período definido.",
       "cta": {
         "href": "/contacto/?interesse=mentoria",
         "text": "Mentoria · a partir de 125 €"
@@ -548,7 +548,7 @@ const data={
     },
     "eu_aprovacao": {
       "title": "Se só fica certo depois de alguém confirmar, a dúvida já está a cobrar renda.",
-      "text": "Podes começar pela abertura simbólica. Se preferires levar a questão para um espaço mais teu, entra em Consultas e escolhe o formato.",
+      "text": "Podes começar pela abertura simbólica. Se preferires levar a questão para uma conversa mais tua, vê as Consultas e escolhe o formato.",
       "cta": {
         "href": "/oraculo/necessidade-aprovacao",
         "text": "Aprovação & Validação · 2 €"
@@ -644,7 +644,7 @@ const data={
     },
     "aprender_tarot": {
       "title": "Não queres decorar 78 cartas. Queres conseguir lê-las.",
-      "text": "A Mentoria dá estrutura, prática e acompanhamento para aprender Tarot a sério, com objectivos definidos antes de começar.",
+      "text": "Na Mentoria, ensino-te Tarot com estrutura, prática e objectivos definidos antes de começarmos.",
       "cta": {
         "href": "/contacto/?interesse=mentoria",
         "text": "Mentoria · a partir de 125 €"
@@ -725,7 +725,7 @@ const data={
     },
     "presente_historia": {
       "title": "Há presentes que continuam depois de serem abertos.",
-      "text": "Escolhe uma história que diga qualquer coisa sobre quem vai recebê-la. A Biblioteca cresce; deixa o livro certo aparecer lá dentro.",
+      "text": "Escolhe uma história que diga qualquer coisa sobre quem vai recebê-la. A Biblioteca vai crescendo; talvez o livro certo já esteja lá.",
       "cta": {
         "href": "/ebooks/",
         "text": "Escolher na Biblioteca"
