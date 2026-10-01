@@ -104,7 +104,9 @@
       "commercial_cta_rule": "existing public Maison destinations only; current public price/availability only",
       "ai_media_declaration_required": true,
       "duplicate_check_required": true,
-      "best_time_scheduling": true
+      "best_time_scheduling": true,
+      "mobile_first_required": true,
+      "cross_platform_vertical_preferred": true
     }
   },
   "brain_convergence": {
@@ -119,5 +121,38 @@
   "event_ingestion_source": ".github/maison-growth/a2/source-registry.json",
   "operating_system_contract": ".github/maison-growth/content-distribution/operating-system-contract.json",
   "authoring_contract": ".github/maison-growth/content-distribution/authoring-contract.json",
-  "manual_distribution_contract": ".github/maison-growth/content-distribution/manual-distribution-contract.json"
+  "manual_distribution_contract": ".github/maison-growth/content-distribution/manual-distribution-contract.json",
+  "mobile_first": {
+    "primary_device": "phone",
+    "short_video": {
+      "aspect_ratio": "9:16",
+      "canvas_px": "1080x1920",
+      "text_safe_zone": {
+        "left_px": 72,
+        "right_px": 72,
+        "top_px": 220,
+        "bottom_px": 320
+      },
+      "max_hook_lines": 4,
+      "minimum_hook_font_px": 50,
+      "minimum_url_font_px": 34,
+      "subtitles_required_when_speech_or_voiceover": true,
+      "tiny_text_forbidden": true
+    },
+    "instagram_feed": {
+      "preferred_aspect_ratio": "4:5",
+      "preferred_canvas_px": "1080x1350",
+      "square_allowed_when_asset_demands_it": true
+    },
+    "instagram_story": {
+      "aspect_ratio": "9:16",
+      "canvas_px": "1080x1920"
+    },
+    "tiktok": {
+      "preferred_aspect_ratio": "9:16",
+      "preferred_canvas_px": "1080x1920"
+    },
+    "cross_platform_rule": "For a single shared Instagram/TikTok asset, prefer 9:16 and keep all essential text/content inside the mobile safe zone.",
+    "legibility": "No essential copy may rely on captions embedded in tiny type or on desktop-only composition."
+  }
 }
