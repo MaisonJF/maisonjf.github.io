@@ -693,3 +693,59 @@ a.territory-offer:hover,a.product-digital__card:hover,a.related-card:hover,a.jou
     min-height:44px;
   }
 }
+
+
+/* FAROL · MOBILE-FIRST BASELINE · 2026-10-01 */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.farol-page img,.farol-page svg{max-width:100%}
+@media(max-width:768px){
+  .farol-page .header__menu-toggle,
+  .farol-page .mobile-menu__close,
+  .farol-page .mobile-menu__link,
+  .farol-page .btn,
+  .farol-page .farol__option,
+  .farol-page .farol__back,
+  .farol-page .farol__restart{
+    min-height:48px!important;
+  }
+  .farol-page .header__menu-toggle,
+  .farol-page .mobile-menu__close{
+    min-width:48px!important;
+  }
+  .farol-page .mobile-menu__link{
+    display:flex;
+    align-items:center;
+  }
+  .farol-page input,
+  .farol-page select,
+  .farol-page textarea{
+    font-size:16px!important;
+  }
+  .farol-page .detail-actions{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    width:100%;
+  }
+  .farol-page .detail-actions .btn{
+    width:100%;
+    justify-content:center;
+    text-align:center;
+  }
+}
+@supports(padding:max(0px)){
+  @media(max-width:768px){
+    .farol-page .header__inner{
+      padding-left:max(16px,env(safe-area-inset-left));
+      padding-right:max(16px,env(safe-area-inset-right));
+    }
+    .farol-page .mobile-menu{
+      padding-left:max(20px,env(safe-area-inset-left));
+      padding-right:max(20px,env(safe-area-inset-right));
+      padding-bottom:max(24px,env(safe-area-inset-bottom));
+    }
+  }
+}
+@media(hover:none) and (pointer:coarse){
+  .farol-page button,.farol-page a{-webkit-tap-highlight-color:rgba(210,179,111,.18)}
+  .farol-page .farol__option:hover{transform:none!important}
+}
