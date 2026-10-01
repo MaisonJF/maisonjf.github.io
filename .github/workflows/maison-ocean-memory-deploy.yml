@@ -102,3 +102,25 @@ jobs:
           assert payload.get('mode')=='read_only',payload
           print('Worker health without D1 read: OK')
           PY
+
+          mcp_body="$(mktemp)"
+          mcp_status="$(curl --silent --show-error --output "$mcp_body" --write-out '%{http_code}' \
+            --request POST \
+            --header "Accept: application/json" \
+            --header "Content-Type: application/json" \
+            --header "CF-Access-Client-Id: $access_id" \
+            --header "CF-Access-Client-Secret: $access_secret" \
+            --data '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' \
+            "$base/mcp")"
+          cat "$mcp_body"
+          test "$mcp_status" = "200"
+          python - "$mcp_body" <<'PY'
+          import json,sys
+          with open(sys.argv[1],encoding='utf-8') as fh:
+              payload=json.load(fh)
+          names={tool.get('name') for tool in payload.get('result',{}).get('tools',[])}
+          required={'maison_ingest_ocean_signal','maison_ingest_vault_candidate'}
+          missing=required-names
+          assert not missing,{'missing_mcp_tools':sorted(missing),'available':sorted(names)}
+          print('Live MCP D1 tools: OK')
+          PY
