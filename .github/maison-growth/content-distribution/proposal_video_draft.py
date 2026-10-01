@@ -7,6 +7,7 @@ import os
 import re
 import shutil
 import subprocess
+import textwrap
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -204,10 +205,22 @@ def generate_raw_clip(recipe: Mapping[str, Any], output_dir: Path) -> Path:
     return raw
 
 
+def _mobile_overlay_text(value: str, *, width: int = 28, max_lines: int = 4) -> str:
+    text = re.sub(r"\\s+", " ", str(value or "").replace("—", ",").replace("–", ",")).strip()
+    if not text:
+        return ""
+    lines = textwrap.wrap(text, width=width, break_long_words=False, break_on_hyphens=False)
+    if len(lines) > max_lines:
+        kept = lines[:max_lines]
+        kept[-1] = kept[-1].rstrip(" .,!?:;")[: max(1, width - 1)].rstrip() + "…"
+        lines = kept
+    return "\n".join(lines)
+
+
 def write_overlay_texts(recipe: Mapping[str, Any], output_dir: Path) -> tuple[Path, Path]:
     hook_file = output_dir / "hook.txt"
     url_file = output_dir / "url.txt"
-    hook_file.write_text(str(recipe["hook"]).replace("—", ",").replace("–", ","), encoding="utf-8")
+    hook_file.write_text(_mobile_overlay_text(recipe["hook"]), encoding="utf-8")
     url_file.write_text(str(recipe["persistent_url"] or "maison-jf.com"), encoding="utf-8")
     return hook_file, url_file
 
@@ -228,10 +241,10 @@ def render_final_mp4(raw_clip: Path, recipe: Mapping[str, Any], output_dir: Path
         "crop=1080:1920,"
         "drawbox=x=0:y=0:w=iw:h=ih:color=black@0.10:t=fill,"
         f"drawtext=fontfile='{fontfile}':textfile='{hook_file}':"
-        "x=64:y=h-th-360:fontsize=54:fontcolor=white:"
-        "line_spacing=10:box=1:boxcolor=black@0.46:boxborderw=26,"
+        "x=72:y=h-th-520:fontsize=50:fontcolor=white:"
+        "line_spacing=12:box=1:boxcolor=black@0.46:boxborderw=28,"
         f"drawtext=fontfile='{fontfile}':textfile='{url_file}':"
-        "x=64:y=h-130:fontsize=34:fontcolor=white:"
+        "x=72:y=h-260:fontsize=34:fontcolor=white:"
         "box=1:boxcolor=black@0.35:boxborderw=18"
     )
     cmd = [
