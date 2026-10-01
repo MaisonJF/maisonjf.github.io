@@ -642,6 +642,53 @@ async function solutionLinks(env, url) {
   return json({ kind:'brain_solution_links', rows });
 }
 
+async function overview(env) {
+  const [
+    observations,oceanSignals,oceanState,oceanAlerts,candidates,contentCandidates,usage
+  ]=await Promise.all([
+    env.GROWTH_DB.prepare(`SELECT COUNT(*) AS count,MAX(observed_at) AS latest FROM external_intelligence_observations`).first(),
+    env.GROWTH_DB.prepare(`SELECT COUNT(*) AS count,MAX(observed_at) AS latest FROM ocean_memory_signals`).first(),
+    env.GROWTH_DB.prepare(`SELECT COUNT(*) AS oceans,MAX(last_seen_at) AS latest,SUM(signal_count) AS signals,SUM(pending_alert_count) AS pending_alerts FROM brain_ocean_memory_feed`).first(),
+    env.GROWTH_DB.prepare(`SELECT delivery_state,COUNT(*) AS count,MAX(created_at) AS latest FROM ocean_memory_alerts GROUP BY delivery_state`).all(),
+    env.GROWTH_DB.prepare(`SELECT COUNT(*) AS count,MAX(created_at) AS latest FROM maison_candidate_inbox`).first(),
+    env.GROWTH_DB.prepare(`
+      SELECT candidate_type,COUNT(*) AS count,MAX(created_at) AS latest
+      FROM maison_candidate_inbox
+      WHERE candidate_type IN ('reel','post','story','carousel','video_script','campaign')
+      GROUP BY candidate_type ORDER BY candidate_type
+    `).all(),
+    env.GROWTH_DB.prepare(`
+      SELECT usage_date,provider_id,calls,failures,reported_cost_usd,updated_at
+      FROM external_intelligence_daily_usage
+      ORDER BY usage_date DESC,updated_at DESC LIMIT 20
+    `).all()
+  ]);
+  const recentContent=await all(env.GROWTH_DB.prepare(`
+    SELECT candidate_id,candidate_type,source_ocean_id,territory,title,rationale,
+           novelty_score,maison_fit_score,demand_score,commercial_score,created_at
+    FROM maison_candidate_inbox
+    WHERE candidate_type IN ('reel','post','story','carousel','video_script','campaign')
+    ORDER BY created_at DESC LIMIT 20
+  `));
+  return json({
+    kind:'maison_intelligence_overview',
+    generated_at:new Date().toISOString(),
+    observations,
+    oceans:{
+      state:oceanState,
+      ingested_signals:oceanSignals,
+      alerts:Array.isArray(oceanAlerts?.results)?oceanAlerts.results:[]
+    },
+    candidates:{
+      total:candidates,
+      content:Array.isArray(contentCandidates?.results)?contentCandidates.results:[],
+      recent_content:recentContent
+    },
+    usage:Array.isArray(usage?.results)?usage.results:[],
+    authority:{read_only:true,public_write_authorized:false}
+  });
+}
+
 async function candidateInbox(env,url) {
   const limit=parseLimit(url);
   const type=url.searchParams.get('type')||null;
@@ -659,6 +706,7 @@ export async function handleBrainControlRequest(request, env) {
   if (request.method !== 'GET') return json({ error:'method_not_allowed' },405);
 
   try {
+    if (url.pathname === '/internal/brain/overview') return await overview(env);
     if (url.pathname === '/internal/brain/feed') return await feed(env,url);
     if (url.pathname === '/internal/brain/cash-feedback') return await cashFeedback(env,url);
     if (url.pathname === '/internal/brain/b2b-feedback') return await b2bFeedback(env,url);
