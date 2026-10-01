@@ -43,7 +43,7 @@
 .vpc-convert__links small{color:#7f786f;text-transform:uppercase;letter-spacing:.1em}
 .vpc-share{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
 .vpc-share button{background:none;border:0;color:#9a9288;text-decoration:underline;cursor:pointer;padding:0}
-.vpc-note{margin-top:28px;color:#6f6962;font-size:12px;max-width:720px}
+.vpc-note{margin-top:28px;color:#918a81;font-size:12px;max-width:720px}
 @media(max-width:760px){
   .vpc-hero{padding:118px 0 62px}
   .vpc-grid{grid-template-columns:1fr;padding-bottom:82px}
