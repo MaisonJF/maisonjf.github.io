@@ -124,3 +124,21 @@ jobs:
           assert not missing,{'missing_mcp_tools':sorted(missing),'available':sorted(names)}
           print('Live MCP D1 tools: OK')
           PY
+
+          oauth_body="$(mktemp)"
+          oauth_status="$(curl --silent --show-error --output "$oauth_body" --write-out '%{http_code}' \
+            --header "Accept: application/json" \
+            --header "CF-Access-Client-Id: $access_id" \
+            --header "CF-Access-Client-Secret: $access_secret" \
+            "$base/.well-known/oauth-protected-resource")"
+          cat "$oauth_body"
+          test "$oauth_status" = "200"
+          python - "$oauth_body" <<'PY'
+          import json,sys
+          with open(sys.argv[1],encoding='utf-8') as fh:
+              payload=json.load(fh)
+          assert payload.get('resource','').endswith('/mcp'),payload
+          servers=payload.get('authorization_servers') or []
+          assert servers and all(str(x).startswith('https://') for x in servers),payload
+          print('Live MCP OAuth metadata: OK')
+          PY
