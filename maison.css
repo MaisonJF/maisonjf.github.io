@@ -3512,3 +3512,59 @@ main h1,
     aspect-ratio:auto;
   }
 }
+
+
+/* PRODUCT MEDIA · framing audit · 2026-10-01 */
+/* Preserve the composition of product photography instead of forcing every image into the same crop. */
+.product-hero__media{
+  background:#0d0d0d;
+}
+.product-hero__media img{
+  object-fit:cover;
+  object-position:center;
+}
+
+/* Product detail galleries: two clean columns, no artificial aspect-ratio crop. */
+.product-gallery{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:14px!important;
+  align-items:start!important;
+}
+.product-gallery__item,
+.product-gallery__item:nth-child(3n),
+.product-gallery__item:nth-child(3n+1),
+.product-gallery__item:nth-child(3n+2){
+  grid-column:auto!important;
+  aspect-ratio:auto!important;
+}
+.product-gallery__item img{
+  display:block;
+  width:100%;
+  height:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+
+/* A Floressência / Jhonata: the source cards already include their own editorial framing and caption. */
+.curadoria__gallery figure{
+  min-width:0;
+}
+.curadoria__gallery img{
+  display:block;
+  width:100%;
+  height:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+
+@media(max-width:700px){
+  .product-gallery,
+  .curadoria__gallery{
+    grid-template-columns:1fr!important;
+  }
+  .product-gallery__item{
+    margin:0 0 14px!important;
+    aspect-ratio:auto!important;
+  }
+}
