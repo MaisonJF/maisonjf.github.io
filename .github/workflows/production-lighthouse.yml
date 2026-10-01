@@ -1,0 +1,26 @@
+name: Production Lighthouse Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/production-lighthouse.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for production deploy
+        run: sleep 45
+      - name: Lighthouse mobile and desktop
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://maison-jf.com/
+          uploadArtifacts: false
+          temporaryPublicStorage: false
