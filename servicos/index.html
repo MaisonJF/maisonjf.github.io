@@ -58,10 +58,14 @@
   .quiet-link small{grid-column:1/-1}
 }
 @media(max-width:560px){
+  .services-hero{gap:28px;padding-bottom:56px}
+  .services-hero__media{min-height:320px}
   .services-hero h1{font-size:clamp(18px,5.7vw,30px)}
   .quiet-paths__head h2{font-size:clamp(24px,7.2vw,38px)}
   .primary-service__body{grid-template-columns:1fr;margin-top:34px;padding-top:24px}
-  .primary-service__actions{align-items:flex-start;flex-direction:column}
+  .primary-service__actions{align-items:stretch;flex-direction:column;width:100%}
+  .primary-buy{width:100%;min-height:52px}
+  .whatsapp-question{display:inline-flex;min-height:44px;align-items:center}
   .quiet-link{grid-template-columns:1fr}.quiet-link__meta{grid-column:1;grid-row:auto;justify-items:start;text-align:left}
   .services-footer{align-items:flex-start;flex-direction:column}
 }
@@ -102,7 +106,7 @@
       <div class="primary-service__price" data-service-price="tarot" aria-label="Preço"></div>
       <div class="primary-service__actions">
         <button class="primary-buy" type="button" data-buy-service="tarot">Marcar consulta →</button>
-        <a class="whatsapp-question" target="_blank" rel="noopener noreferrer" href="https://wa.me/351923318289?text=Ol%C3%A1%20Maison%20JF.%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Consulta%20de%20Tarot.">Tenho uma dúvida</a>
+        <a class="whatsapp-question" target="_blank" rel="noopener noreferrer" href="https://wa.me/351923318289?text=Ol%C3%A1%2C%20Jo%C3%A3o.%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Consulta%20de%20Tarot.">Tenho uma dúvida</a>
       </div>
       <p id="checkout-status" class="checkout-status" aria-live="polite"></p>
       <p class="primary-service__description">Uma consulta para trazer contexto à tua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.</p>
@@ -161,12 +165,12 @@
     en:{
       quote:'By quote',open:'Open menu',close:'Close menu',opening:'Opening payment…',
       error:'Could not open payment.',
-      whatsapp:'Hello Maison JF. I have a question about the Tarot Consultation.'
+      whatsapp:'Hello, João. I have a question about the Tarot Consultation.'
     },
     es:{
       quote:'Bajo presupuesto',open:'Abrir menú',close:'Cerrar menú',opening:'Abriendo pago…',
       error:'No se pudo abrir el pago.',
-      whatsapp:'Hola Maison JF. Tengo una duda sobre la Consulta de Tarot.'
+      whatsapp:'Hola, João. Tengo una duda sobre la Consulta de Tarot.'
     }
   }[locale]||null;
   const t=copy||{
@@ -199,10 +203,12 @@
     b.disabled=true;b.textContent=t.opening;
     window.maisonAnalytics?.track?.('consultation_purchase_intent',{service:'tarot',source:'services',locale,page_path:location.pathname});
     try{
+      const signal=globalThis.AbortSignal?.timeout?AbortSignal.timeout(10000):undefined;
       const response=await fetch('/api/create-consultation-checkout-live',{
         method:'POST',
         headers:{'content-type':'application/json'},
-        body:JSON.stringify({slug:'tarot',locale,attribution:window.maisonAnalytics?.getAttribution?.()||{}})
+        body:JSON.stringify({slug:'tarot',locale,attribution:window.maisonAnalytics?.getAttribution?.()||{}}),
+        signal
       });
       const data=await response.json().catch(()=>({}));
       if(!response.ok||!data.url)throw new Error(data.error||t.error);
