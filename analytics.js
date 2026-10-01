@@ -1,6 +1,31 @@
 (() => {
   'use strict';
 
+  const MAISON_FONT_URL = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Inter:wght@300;400;500;600&display=swap';
+
+  function loadMaisonFonts() {
+    if (document.querySelector('link[data-maison-fonts]')) return;
+
+    const google = document.createElement('link');
+    google.rel = 'preconnect';
+    google.href = 'https://fonts.googleapis.com';
+    document.head.appendChild(google);
+
+    const gstatic = document.createElement('link');
+    gstatic.rel = 'preconnect';
+    gstatic.href = 'https://fonts.gstatic.com';
+    gstatic.crossOrigin = 'anonymous';
+    document.head.appendChild(gstatic);
+
+    const fonts = document.createElement('link');
+    fonts.rel = 'stylesheet';
+    fonts.href = MAISON_FONT_URL;
+    fonts.dataset.maisonFonts = '1';
+    document.head.appendChild(fonts);
+  }
+
+  loadMaisonFonts();
+
   const languageScript = document.createElement('script');
   languageScript.src = '/maison-language.js?v=20260928-i18n1';
   languageScript.defer = true;
