@@ -3594,3 +3594,73 @@ main h1,
 
 /* Current location in global navigation */
 .site-header nav a[aria-current="page"]{color:var(--maison-gold)!important}
+
+
+/* MOBILE-FIRST BASELINE · 2026-10-01 */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img,video,canvas,svg{max-width:100%}
+button,input,select,textarea{font:inherit}
+main,section,article,nav,header,footer,.shell{min-width:0}
+[id]{scroll-margin-top:88px}
+
+@supports(padding:max(0px)){
+  .site-header{
+    padding-left:max(20px,env(safe-area-inset-left));
+    padding-right:max(20px,env(safe-area-inset-right));
+  }
+  .maison-consent{
+    left:max(1rem,env(safe-area-inset-left));
+    right:max(1rem,env(safe-area-inset-right));
+    bottom:max(1rem,env(safe-area-inset-bottom));
+  }
+  .home-footer,.site-footer,footer{
+    padding-bottom:max(70px,calc(32px + env(safe-area-inset-bottom)));
+  }
+}
+
+@media(max-width:700px){
+  .shell{width:min(calc(100% - 32px),var(--max))}
+  .site-header{
+    padding-left:max(16px,env(safe-area-inset-left));
+    padding-right:max(16px,env(safe-area-inset-right));
+  }
+  .button,.btn,.cta,.pdi-buy,
+  .product-actions a,.product-actions button,
+  .actions a,.actions button,
+  .home-explore__links a,.home-ending__links a,
+  .filters button,.vpc-scope__options button,
+  .maison-menu-toggle{
+    min-height:48px;
+  }
+  .site-header nav a{
+    min-height:44px;
+    display:flex;
+    align-items:center;
+  }
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,textarea{
+    min-height:48px;
+    font-size:16px!important;
+  }
+  textarea{min-height:120px}
+  .maison-consent{
+    align-items:stretch;
+    flex-direction:column;
+    gap:.8rem;
+    padding:.85rem;
+  }
+  .maison-consent__actions{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .maison-consent button{
+    width:100%;
+    min-height:48px;
+  }
+}
+
+@media(hover:none) and (pointer:coarse){
+  a,button,[role="button"],summary{-webkit-tap-highlight-color:rgba(210,179,111,.18)}
+  .door:hover,.door--editorial:hover{transform:none}
+}
