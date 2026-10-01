@@ -46,7 +46,8 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
     <button id="review">Guardar para rever</button>
   </div>
 
-  <div class="muted" id="count">0 itens</div>
+  <div class="muted" id="vault-summary">Vault: a verificar…</div>
+  <div class="muted" id="count">0 itens neste filtro</div>
   <div class="status" id="status"></div>
   <div class="list" id="list"></div>
 </section>
@@ -54,7 +55,7 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
 <script>
 (()=>{
  const $=id=>document.getElementById(id);
- const secret=$('secret'),type=$('type'),state=$('state'),list=$('list'),status=$('status'),count=$('count');
+ const secret=$('secret'),type=$('type'),state=$('state'),list=$('list'),status=$('status'),count=$('count'),vaultSummary=$('vault-summary');
  let rows=[];
  secret.value=sessionStorage.getItem('maisonVaultAdminSecret')||'';
 
@@ -80,7 +81,12 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
      content_type:x.dataset.type,content_id:x.dataset.id
    }));
  }
- function updateCount(){count.textContent=rows.length+' itens · '+selected().length+' selecionados'}
+ function updateCount(){count.textContent=rows.length+' itens neste filtro · '+selected().length+' selecionados'}
+ async function loadStats(){
+   const r=await call('stats');
+   vaultSummary.textContent='Vault total: '+r.total+' · candidatos: '+r.candidates+' · revisão: '+r.review+' · live: '+r.live+
+     ' · perguntas: '+r.all_questions+' · Oráculo: '+r.all_oracle_blocks;
+ }
  function render(){
    updateCount();
    list.innerHTML='';
@@ -103,8 +109,9 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
  async function load(){
    try{
      note('A carregar…');
+     await loadStats();
      const r=await call('list',{type:type.value,state:state.value,limit:500});
-     rows=r.items||[];render();note('Carregado. O material continua guardado até decidires.','ok');
+     rows=r.items||[];render();note('Carregado. O número acima mostra o Vault inteiro; a lista mostra apenas o filtro escolhido.','ok');
    }catch(e){note(e.message,'warning')}
  }
  async function apply(action,items){
