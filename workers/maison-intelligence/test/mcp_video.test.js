@@ -20,7 +20,7 @@ test('MCP exposes bounded video, Ocean and private editorial candidate tools',as
   const body=await r.json();
   assert.deepEqual(body.result.tools.map(x=>x.name),[
     'maison_video_health','maison_generate_video','maison_ingest_ocean_signal','maison_ingest_vault_candidate',
-    'maison_ingest_candidate','maison_list_candidates','maison_video_result'
+    'maison_ingest_candidate','maison_list_candidates','maison_decide_candidate','maison_video_result'
   ]);
   const generate=body.result.tools.find(x=>x.name==='maison_generate_video');
   assert.equal(generate.annotations.destructiveHint,false);
@@ -41,6 +41,9 @@ test('MCP exposes bounded video, Ocean and private editorial candidate tools',as
   assert.equal(candidate.annotations.openWorldHint,false);
   const list=body.result.tools.find(x=>x.name==='maison_list_candidates');
   assert.equal(list.annotations.readOnlyHint,true);
+  const decide=body.result.tools.find(x=>x.name==='maison_decide_candidate');
+  assert.deepEqual(decide.inputSchema.required,['candidate_id','decision']);
+  assert.equal(decide.annotations.openWorldHint,false);
 });
 
 test('MCP Ocean tool authenticates and persists directly to D1',async()=>{
