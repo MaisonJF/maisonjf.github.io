@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Editorial Vault | MAISON JF®</title>
+<link rel="stylesheet" href="../maison.css">
+<style>
+body{background:#080808}.admin{width:min(1120px,calc(100% - 28px));margin:0 auto;padding:64px 0 120px}
+.admin h1{font:400 clamp(42px,6vw,76px)/.95 var(--serif);margin:.15em 0}.admin p{color:#aaa39a}
+.panel{border:1px solid var(--line);padding:22px;margin-top:22px;background:#10100f}
+.top{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end}
+.field{display:grid;gap:7px}.field label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9b948a}
+.field input,.field select{width:100%;padding:12px;border:1px solid var(--line);background:#090909;color:#eee}
+button{padding:12px 15px;border:1px solid #d8d0c2;background:transparent;color:#eee;cursor:pointer;font:600 10px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.muted{color:#827b72;font-size:12px}
+.list{display:grid;gap:10px}.card{border:1px solid #282522;background:#0b0b0a;padding:16px;display:grid;grid-template-columns:auto 1fr;gap:14px}
+.card h3{margin:0 0 7px;font-size:12px;letter-spacing:.06em}.meta{font-size:11px;color:#8f887f;margin-bottom:8px}.body{font:16px/1.5 var(--serif);color:#eee9e0}
+.empty{padding:28px;text-align:center;color:#8f887f;border:1px dashed #2b2825}.status{font-family:ui-monospace,Consolas,monospace;font-size:12px;white-space:pre-wrap;color:#cfc7bb}
+.ok{color:#b8c8ae}.warning{color:#d1a66a}
+@media(max-width:760px){.top{grid-template-columns:1fr}.toolbar button{flex:1 1 45%}}
+</style>
+</head>
+<body>
+<main class="admin">
+<p class="eyebrow">MAISON JF® · privado</p>
+<h1>Editorial Vault</h1>
+<p>Os Oceans podem guardar material. Só tu o tornas live. Nada é apagado aqui: o que não aprovares fica candidato ou vai para revisão.</p>
+
+<section class="panel">
+  <div class="top">
+    <div class="field"><label for="secret">Chave privada</label><input id="secret" type="password" autocomplete="off" placeholder="Secret do Vault"></div>
+    <div class="field"><label for="type">Tipo</label><select id="type"><option value="all">Tudo</option><option value="question">Perguntas</option><option value="oracle_block">Oráculo</option></select></div>
+    <div class="field"><label for="state">Estado</label><select id="state"><option value="candidate">Candidatos</option><option value="review">Em revisão</option><option value="all">Candidatos + revisão</option></select></div>
+    <button id="load" class="primary">Carregar</button>
+  </div>
+
+  <div class="toolbar">
+    <button id="select-all">Selecionar visíveis</button>
+    <button id="clear">Limpar seleção</button>
+    <button id="approve" class="primary">Aprovar selecionados</button>
+    <button id="approve-all">Aprovar TODOS</button>
+    <button id="review">Guardar para rever</button>
+  </div>
+
+  <div class="muted" id="count">0 itens</div>
+  <div class="status" id="status"></div>
+  <div class="list" id="list"></div>
+</section>
+</main>
+<script>
+(()=>{
+ const $=id=>document.getElementById(id);
+ const secret=$('secret'),type=$('type'),state=$('state'),list=$('list'),status=$('status'),count=$('count');
+ let rows=[];
+ secret.value=sessionStorage.getItem('maisonVaultAdminSecret')||'';
+
+ function note(value,cls=''){
+   status.className='status '+cls;
+   status.textContent=typeof value==='string'?value:JSON.stringify(value,null,2);
+ }
+ async function call(action,extra={}){
+   const key=secret.value.trim();
+   if(!key)throw new Error('Escreve a chave privada.');
+   sessionStorage.setItem('maisonVaultAdminSecret',key);
+   const r=await fetch('/api/vault-candidate-admin',{
+     method:'POST',
+     headers:{'content-type':'application/json','x-maison-admin-key':key},
+     body:JSON.stringify({action,...extra})
+   });
+   const body=await r.json().catch(()=>({error:'Resposta inválida.'}));
+   if(!r.ok)throw new Error(body.error||('HTTP '+r.status));
+   return body;
+ }
+ function selected(){
+   return [...document.querySelectorAll('.pick:checked')].map(x=>({
+     content_type:x.dataset.type,content_id:x.dataset.id
+   }));
+ }
+ function render(){
+   count.textContent=rows.length+' itens · '+selected().length+' selecionados';
+   list.innerHTML='';
+   if(!rows.length){list.innerHTML='<div class="empty">Não há material neste filtro.</div>';return}
+   for(const x of rows){
+     const card=document.createElement('label');
+     card.className='card';
+     const pick=document.createElement('input');
+     pick.type='checkbox';pick.className='pick';pick.dataset.type=x.content_type;pick.dataset.id=x.content_id;
+     pick.addEventListener('change',()=>count.textContent=rows.length+' itens · '+selected().length+' selecionados');
+     const wrap=document.createElement('div');
+     const h=document.createElement('h3');
+     h.textContent=(x.content_type==='question'?'PERGUNTA':'ORÁCULO')+' · '+x.area+' · '+x.stage_or_role;
+     const meta=document.createElement('div');meta.className='meta';
+     meta.textContent=[x.exposure,x.source_ocean_id,x.status,x.created_at].filter(Boolean).join(' · ');
+     const body=document.createElement('div');body.className='body';body.textContent=x.text;
+     wrap.append(h,meta,body);card.append(pick,wrap);list.append(card);
+   }
+ }
+ async function load(){
+   try{
+     note('A carregar…');
+     const r=await call('list',{type:type.value,state:state.value,limit:500});
+     rows=r.items||[];render();note('Carregado. O material continua guardado até decidires.','ok');
+   }catch(e){note(e.message,'warning')}
+ }
+ async function apply(action,items){
+   if(!items.length)return note('Seleciona pelo menos um item.','warning');
+   try{
+     note('A gravar decisão…');
+     const r=await call(action,{items});
+     note(r,'ok');await load();
+   }catch(e){note(e.message,'warning')}
+ }
+ $('load').addEventListener('click',load);
+ $('select-all').addEventListener('click',()=>{document.querySelectorAll('.pick').forEach(x=>x.checked=true);render()});
+ $('clear').addEventListener('click',()=>{document.querySelectorAll('.pick').forEach(x=>x.checked=false);render()});
+ $('approve').addEventListener('click',()=>{
+   const items=selected();
+   if(items.length && confirm('Aprovar '+items.length+' itens e torná-los live?'))apply('activate',items);
+ });
+ $('review').addEventListener('click',()=>{
+   const items=selected();
+   if(items.length && confirm('Guardar '+items.length+' itens para revisão? Nada será apagado.'))apply('review',items);
+ });
+ $('approve-all').addEventListener('click',async()=>{
+   if(!confirm('Aprovar TODOS os candidatos Ocean elegíveis deste tipo?'))return;
+   try{
+     note('A aprovar em lote…');
+     const r=await call('activate',{all:true,type:type.value});
+     note(r,'ok');await load();
+   }catch(e){note(e.message,'warning')}
+ });
+ if(secret.value)load();
+})();
+</script>
+</body>
+</html>
