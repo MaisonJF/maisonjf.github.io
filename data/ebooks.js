@@ -2,7 +2,7 @@ window.MAISON_EBOOKS=[
   {
     slug:'para-de-ignorar',
     checkoutId:'para-de-ignorar',
-    title:'Pára de Ignorar!',
+    title:'Pára de Ignorar! · Livro',
     collection:'Sem Filtros · Éditions Maison JF',
     language:'pt-PT',format:'ebook',formats:['pdf','epub'],status:'published',
     description:'Um livro para parar de passar por cima do que já sabes que está a pedir atenção. Para reconhecer o que tens ignorado e finalmente olhar.',
