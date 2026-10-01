@@ -59,8 +59,10 @@ Não inventes cliques, páginas, preços ou experiências que não estejam no co
 }
 export async function runFeedbackCouncil(env,{date=new Date(),reviews=2}={}){
   if(String(env.ZERO_COST_MODE||'').toLowerCase()!=='true')return {skipped:'zero_cost_mode_required'};
-  const specs=configuredZeroCostModelSpecs(env);
-  if(!specs.length)return {skipped:'no_zero_cost_model'};
+  const specs=configuredZeroCostModelSpecs(env).filter(spec=>spec.providerId==='openrouter');
+  // Council is stricter than the general zero-cost Foundry: only OpenRouter models
+  // carrying the explicit :free contract are admitted. If none is available, skip.
+  if(!specs.length)return {skipped:'no_explicitly_free_model'};
   await ensureSchema(env.GROWTH_DB);
   const dateKey=date.toISOString().slice(0,10), base=dayIndex(date);
   const count=Math.max(1,Math.min(2,Number(reviews)||2)), stored=[];
