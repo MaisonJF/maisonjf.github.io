@@ -843,8 +843,8 @@ function choose(key){
   if(!r){
     render({
       title:'Não te vou inventar uma resposta.',
-      text:'Explica-nos o que procuras. Se houver uma solução real, dizemos-te qual.',
-      cta:{href:'/contacto/',text:'Falar com a Maison'},
+      text:'Explica-me o que procuras. Se houver uma solução real, digo-te qual.',
+      cta:{href:'/contacto/',text:'Falar comigo'},
       cta2:null
     });
     return;
@@ -869,11 +869,16 @@ function reset(){
   track('farol_restart',{page_path:location.pathname});
   step1Choice=null;
   step2Choice=null;
+  steps[1]?.querySelectorAll('[data-farol]').forEach(button=>{
+    button.classList.remove('farol__option--selected');
+    button.setAttribute('aria-pressed','false');
+  });
   show(1);
 }
 
 if(steps[1]){
   steps[1].querySelectorAll('[data-farol]').forEach(b=>{
+    b.setAttribute('aria-pressed','false');
     b.addEventListener('click',()=>build(b.getAttribute('data-farol')));
   });
 }
