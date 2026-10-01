@@ -1,3 +1,5 @@
+import { listCandidateInbox } from './candidate_inbox.js';
+
 function enabled(value) {
   return String(value ?? '').toLowerCase() === 'true';
 }
@@ -640,6 +642,14 @@ async function solutionLinks(env, url) {
   return json({ kind:'brain_solution_links', rows });
 }
 
+async function candidateInbox(env,url) {
+  const limit=parseLimit(url);
+  const type=url.searchParams.get('type')||null;
+  const decision=url.searchParams.get('decision')||'pending';
+  const rows=await listCandidateInbox(env,{limit,type,decision});
+  return json({kind:'maison_candidate_inbox',count:rows.length,rows});
+}
+
 export async function handleBrainControlRequest(request, env) {
   const url=new URL(request.url);
   if (!url.pathname.startsWith('/internal/brain/')) return null;
@@ -660,6 +670,7 @@ export async function handleBrainControlRequest(request, env) {
     if (url.pathname === '/internal/brain/validation-plans') return await validationPlans(env,url);
     if (url.pathname === '/internal/brain/a7-decisions') return await a7Decisions(env,url);
     if (url.pathname === '/internal/brain/action-inbox') return await commercialActionInbox(env,url);
+    if (url.pathname === '/internal/brain/candidates') return await candidateInbox(env,url);
     if (url.pathname === '/internal/brain/solutions') return await solutions(env,url);
     if (url.pathname === '/internal/brain/solution-links') return await solutionLinks(env,url);
     if (url.pathname === '/internal/brain/health') return json({ status:'ok',mode:'read_only' });
