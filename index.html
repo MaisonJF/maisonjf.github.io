@@ -20,6 +20,13 @@
 .home-feature--ebooks .home-feature__media img{object-fit:contain;background:#060606}
 @media(max-width:900px){.home-page--final .home-feature--ebooks .home-feature__media{aspect-ratio:2/3;max-width:620px;margin-inline:auto}}
 </style>
+
+<style>
+.home-clair{margin-top:70px;display:grid;grid-template-columns:minmax(260px,.72fr) minmax(0,1fr);gap:clamp(30px,6vw,90px);align-items:center;padding-top:70px;border-top:1px solid var(--line)}
+.home-clair__media{display:block;overflow:hidden;background:#080706}.home-clair__media img{display:block;width:100%;height:auto;transition:transform .7s ease}.home-clair__media:hover img{transform:scale(1.015)}
+.home-clair__copy h2{font:400 clamp(42px,6vw,76px)/.95 var(--serif);margin:.2em 0}.home-clair__copy p{max-width:520px;color:#aaa39a}.home-clair__copy .text-link{color:var(--maison-gold,#c7aa73)}
+@media(max-width:760px){.home-clair{grid-template-columns:1fr}.home-clair__media{max-width:520px}}
+</style>
 </head>
 <body class="home-page home-page--final">
 <header class="site-header site-header--home">
@@ -93,6 +100,12 @@
     </nav>
   </section>
 
+
+
+  <section class="home-clair shell" aria-labelledby="clair-home-title">
+    <a class="home-clair__media" href="./clair-obscur/" aria-label="Descobrir Clair Obscur : Instants"><img src="./images/clair-obscur-instants.webp" width="640" height="960" loading="lazy" decoding="async" alt="Clair Obscur : Instants, brevemente"></a>
+    <div class="home-clair__copy"><p class="eyebrow">BREVEMENTE</p><h2 id="clair-home-title">Clair Obscur : Instants</h2><p>Algumas coisas não foram feitas para ficar para sempre.</p><a class="text-link" href="./clair-obscur/">DESCOBRIR →</a></div>
+  </section>
 
   <section class="home-feature home-feature--professionals shell" id="profissionais">
     <div class="home-feature__media">
