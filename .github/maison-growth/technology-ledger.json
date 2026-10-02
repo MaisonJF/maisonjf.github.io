@@ -211,7 +211,7 @@
         "Foundry",
         "A14"
       ],
-      "notes": "Generated registry currently derives 19 commercial assets: 5 active public physical products, 2 future physical products, 9 services, 1 B2B service and 2 active public digital products. Catalogue availability is not counted inventory. Physical structural readiness uses evidence-backed unit cost plus practical replenishment capacity; finished stock is an optional volatile snapshot. Service/digital capacity, effort, delivery and variable-cost facts remain UNKNOWN unless supplied in an evidence-backed private overlay kept outside git."
+      "notes": "Generated registry currently derives 20 commercial assets: 6 active public physical products, 2 future physical products, 9 services, 1 B2B service and 2 active public digital products. Catalogue availability is not counted inventory. Physical structural readiness uses evidence-backed unit cost plus practical replenishment capacity; finished stock is an optional volatile snapshot. Service/digital capacity, effort, delivery and variable-cost facts remain UNKNOWN unless supplied in an evidence-backed private overlay kept outside git."
     },
     {
       "id": "maison-semantic-sync",
