@@ -3,7 +3,7 @@ const PRODUCTS={
   'vela-pequena':{name:'Vela Aromática MAISON JF® 70 g',price:'price_1UHlIA5H3wYRPmPV3sMw6cZU',unitCents:800,max:10},
   'oleo-massagem':{name:'Óleo de Massagem MAISON JF® 60 ml',price:'price_1UEoZd5H3wYRPmPVVyUiS0MX',unitCents:1200,max:10},
   'nevoa':{name:'Névoa de Ambiente MAISON JF® 20 ml',price:'price_1UHlo65H3wYRPmPVQsQBBDOU',unitCents:700,max:10},
-  'escalda-pes':{name:'Escalda-Pés MAISON JF® 150 g',price:'price_1UHlHp5H3wYRPmPVWJX7cZGi',unitCents:500,max:10}
+  'escalda-pes':{name:'Escalda-Pés MAISON JF® 280 g',unitCents:950,max:10}
 };
 
 const EU_COUNTRIES=['ES','FR','BE','NL','LU','DE','IT','IE','AT','DK','SE','FI','PL','CZ','SK','SI','HR','GR','HU','RO','BG','EE','LV','LT','CY','MT'];
@@ -83,7 +83,13 @@ export async function onRequestPost({request,env}){
 
     items.forEach((item,i)=>{
       const product=PRODUCTS[item.slug];
-      params.set('line_items['+i+'][price]',product.price);
+      if(product.price){
+        params.set('line_items['+i+'][price]',product.price);
+      }else{
+        params.set('line_items['+i+'][price_data][currency]','eur');
+        params.set('line_items['+i+'][price_data][unit_amount]',String(product.unitCents));
+        params.set('line_items['+i+'][price_data][product_data][name]',product.name);
+      }
       params.set('line_items['+i+'][quantity]',String(item.quantity));
     });
 
