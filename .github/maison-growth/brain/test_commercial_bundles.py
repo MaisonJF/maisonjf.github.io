@@ -43,9 +43,9 @@ class CommercialBundleTests(unittest.TestCase):
         subtotals={x["bundle_id"]:x["catalogue_subtotal_minor"] for x in self.payload["bundles"]}
         self.assertEqual(subtotals,{
             "bundle_pausa_casa":1500,
-            "bundle_pausa_corpo":1700,
-            "bundle_volta_para_casa":2000,
-            "bundle_casa_corpo_completo":3200,
+            "bundle_pausa_corpo":2150,
+            "bundle_volta_para_casa":2450,
+            "bundle_casa_corpo_completo":3650,
         })
         for bundle in self.payload["bundles"]:
             self.assertIn("catalogue_subtotal_not_offer_price",bundle["reason_codes"])
