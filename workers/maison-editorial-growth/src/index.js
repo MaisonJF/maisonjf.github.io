@@ -84,7 +84,7 @@ export async function runEditorialGrowth(env,date=new Date()){
 export default {
   async fetch(request,env){
     const url=new URL(request.url);
-    const token=String(request.headers.get('authorization')||'').replace(/^Bearer\s+/i,'').trim();
+    const token=String(request.headers.get('x-maison-growth-test')||'').trim();
     if(url.pathname!=='/__editorial_growth_test'||!env.EDITORIAL_GROWTH_TEST_TOKEN||token!==env.EDITORIAL_GROWTH_TEST_TOKEN){
       return new Response('Not Found',{status:404,headers:{'Cache-Control':'no-store'}});
     }
