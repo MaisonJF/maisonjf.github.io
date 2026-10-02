@@ -7,8 +7,7 @@
   "preview_urls": false,
   "triggers": {
     "crons": [
-      "0 */3 * * *",
-      "* * * * *"
+      "0 */3 * * *"
     ]
   },
   "vars": {

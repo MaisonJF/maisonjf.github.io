@@ -662,6 +662,20 @@ async function enqueueDailyExpansionRun(env,scheduledDate,getControl=()=>control
   return {queued:messages.length,models:specs.length};
 }
 
+async function enqueueFeedbackCouncilRun(env,scheduledDate,getControl=()=>controlState(env)) {
+  if(!isTrue(env.FEEDBACK_COUNCIL_ENABLED))return {queued:0,reason:'feedback_council_disabled'};
+  const control=await getControl();
+  if(!control.enabled)return {queued:0,reason:control.reason};
+  const day=utcDay(scheduledDate);
+  const slot=Math.floor(scheduledDate.getUTCHours()/3);
+  const reviews=clampInt(env.FEEDBACK_COUNCIL_REVIEWS_PER_RUN||env.FEEDBACK_COUNCIL_REVIEWS_PER_DAY,2,1,4);
+  await env.INTELLIGENCE_QUEUE.sendBatch([{body:{
+    kind:'feedback_council',day,slot,reviews,
+    taskKey:`${day}:feedback_council:${slot}`
+  }}]);
+  return {queued:1,slot,reviews};
+}
+
 async function enqueueRun(env,scheduledDate,getControl=()=>controlState(env)) {
   const providers=configuredProviders(env);
   if (!providers.length) return { queued:0,reason:'no_provider_secrets_configured' };
@@ -715,12 +729,6 @@ export default {
 
   async scheduled(controller, env, ctx) {
     const when=new Date(controller.scheduledTime);
-    if(controller.cron==='* * * * *'){
-      if(isTrue(env.FEEDBACK_COUNCIL_ENABLED)){
-        ctx.waitUntil(runFeedbackCouncil(env,{date:when,reviews:4}));
-      }
-      return;
-    }
     let controlPromise=null;
     const getControl=()=>controlPromise ||= controlState(env);
     const jobs=[
@@ -737,9 +745,7 @@ export default {
     if (when.getUTCHours()===3 && when.getUTCMinutes()===0) {
       jobs.push(enqueueVisibilityProbeRun(env,when,getControl));
     }
-    if (isTrue(env.FEEDBACK_COUNCIL_ENABLED)) {
-      jobs.push(runFeedbackCouncil(env,{date:when,reviews:env.FEEDBACK_COUNCIL_REVIEWS_PER_RUN||env.FEEDBACK_COUNCIL_REVIEWS_PER_DAY||2}));
-    }
+    jobs.push(enqueueFeedbackCouncilRun(env,when,getControl));
     // Every scheduler tick may ask the zero-cost Foundry to run. The per-model
     // daily usage gate keeps this to at most the configured daily cap, so a
     // deployment after 06:00 UTC no longer leaves the Vault empty until tomorrow.
@@ -751,11 +757,17 @@ export default {
   async queue(batch, env) {
     for (const message of batch.messages) {
       const task = message.body;
-      if (!task || !['sensor_query','source_snapshot','public_source_snapshot','search_visibility_snapshot','visibility_probe','expansion_foundry'].includes(task.kind)) { message.ack(); continue; }
+      if (!task || !['sensor_query','source_snapshot','public_source_snapshot','search_visibility_snapshot','visibility_probe','expansion_foundry','feedback_council'].includes(task.kind)) { message.ack(); continue; }
       try {
         let outcome;
         if (task.kind === 'source_snapshot') outcome=await processSourceTask(env,task);
         else if (task.kind === 'expansion_foundry') outcome=await processExpansionFoundryTask(env,task);
+        else if (task.kind === 'feedback_council') {
+          const hour=Math.max(0,Math.min(21,(Number(task.slot)||0)*3));
+          const when=new Date(`${task.day||utcDay()}T${String(hour).padStart(2,'0')}:00:00Z`);
+          outcome=await runFeedbackCouncil(env,{date:when,reviews:task.reviews||2});
+          console.info('MAISON_FEEDBACK_COUNCIL',JSON.stringify(outcome));
+        }
         else if (task.kind === 'public_source_snapshot') outcome=await processPublicSourceTask(env,task);
         else if (task.kind === 'search_visibility_snapshot') outcome=await processSearchVisibilityTask(env,task);
         else if (task.kind === 'visibility_probe') outcome=await processVisibilityProbeTask(env,task);
