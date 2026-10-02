@@ -3,7 +3,7 @@ const PRODUCTS={
   'vela-pequena':'Vela Aromática 70 g',
   'oleo-massagem':'Óleo de Massagem 60 ml',
   'nevoa':'Névoa de Ambiente 20 ml',
-  'escalda-pes':'Escalda-Pés 150 g'
+  'escalda-pes':'Escalda-Pés 280 g'
 };
 
 export async function onRequestGet({request,env}){
