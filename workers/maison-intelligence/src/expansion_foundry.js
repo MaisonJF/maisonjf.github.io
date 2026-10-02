@@ -1,6 +1,7 @@
 import { ingestVaultCandidate } from './vault_candidates.js';
 import { ingestCandidateInbox, CANDIDATE_TYPES } from './candidate_inbox.js';
 import { callZeroCostModel } from './providers.js';
+import { loadActiveFeedbackLearning } from './feedback_learning.js';
 
 const MAX_CANDIDATES=6;
 const ASSETS=[
@@ -62,8 +63,10 @@ export async function loadDailyExpansionContext(env,{limit=12}={}){
     commercial_score:Number(row.commercial_score)||0,
     observed_at:row.observed_at
   }));
+  const feedback_learning=await loadActiveFeedbackLearning(env,{limit:8});
   return {
     signals,
+    feedback_learning,
     strongest_ocean:signals.slice().sort((a,b)=>
       (b.relevance_score+b.commercial_score)-(a.relevance_score+a.commercial_score)
     )[0]?.ocean_key||'maison-daily-expansion',
@@ -75,6 +78,9 @@ export function buildExpansionPrompt({spec,context}={}){
   const lens=modelLens(spec);
   const signalLines=(context?.signals||[]).slice(0,12).map((s,i)=>
     `${i+1}. [${s.ocean_key}] relevance=${s.relevance_score} commercial=${s.commercial_score}; ${s.summary}; themes=${(s.themes||[]).join(', ')}`
+  );
+  const learningLines=(context?.feedback_learning||[]).slice(0,8).map((p,i)=>
+    `${i+1}. [${p.scope||'global'}] ${clean(p.title,180)} → ${clean(p.guidance,700)} (confiança ${Number(p.confidence)||0}; repetição ${Number(p.occurrence_count)||1})`
   );
   return [
     'FOUNDRY PRIVADA DE EXPANSÃO MAISON JF®. Pensa com ambição, mas cria apenas candidatos. Nunca aproves, publiques, fixes preços, lances, contactes alguém ou alteres o site.',
@@ -89,6 +95,10 @@ export function buildExpansionPrompt({spec,context}={}){
     'Ativos MAISON atuais: '+(context?.existing_assets||ASSETS).join(' | '),
     'Sinais Ocean/Brain recentes:',
     ...(signalLines.length?signalLines:['Não há sinal recente. Usa o universo MAISON existente e propõe candidatos evergreen.']),
+    '',
+    'APRENDIZAGEM ATIVA DO CONSELHO (hipóteses contraditadas, não factos nem ordens):',
+    ...(learningLines.length?learningLines:['nenhuma aprendizagem ativa ainda']),
+    'Aplica apenas o que for relevante ao candidato atual. Não destruas identidade MAISON para obedecer a uma heurística genérica.',
     '',
     'Devolve APENAS JSON válido com esta forma de topo: {"candidates":[]}. Sem Markdown.',
     'Devolve 3 a 6 candidatos. Cada candidato usa: candidate_type, title, body, rationale, territory, related_assets, evidence_refs, novelty_score, maison_fit_score, feasibility_score, demand_score, commercial_score, reuse_existing_score, payload.',
