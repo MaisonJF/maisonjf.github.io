@@ -233,6 +233,115 @@ function validSubset(values,allowed,max=20){
   return out;
 }
 
+function normalizedConfidence(value){
+  const n=Number(value);
+  if(!Number.isFinite(n))return 50;
+  if(n>=0&&n<=10)return clamp(n*10,0,100,50);
+  return clamp(n,0,100,50);
+}
+
+const STOPWORDS=new Set([
+  'para','com','sem','uma','uns','umas','que','dos','das','do','da','de','e','em','ao','aos','as','os',
+  'por','mais','menos','como','entre','sobre','ser','estar','ter','sua','seu','suas','seus','maison','jf'
+]);
+function tokenSet(value){
+  return new Set(
+    String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+      .replace(/[^a-z0-9]+/g,' ').split(/\s+/)
+      .filter(x=>x.length>=3&&!STOPWORDS.has(x))
+  );
+}
+function similarity(a,b){
+  const A=tokenSet(a),B=tokenSet(b);
+  if(!A.size||!B.size)return 0;
+  let intersection=0;
+  for(const token of A)if(B.has(token))intersection++;
+  const union=A.size+B.size-intersection;
+  return union?intersection/union:0;
+}
+function patternLike(a,b){
+  const keyA=normalizePatternKey(a.pattern_key||a.title);
+  const keyB=normalizePatternKey(b.pattern_key||b.title);
+  if(keyA&&keyA===keyB)return true;
+  const scopeA=ALLOWED_SCOPES.has(String(a.scope||''))?String(a.scope):'global';
+  const scopeB=ALLOWED_SCOPES.has(String(b.scope||''))?String(b.scope):'global';
+  if(scopeA!==scopeB)return false;
+  return similarity(`${a.title||''} ${a.guidance||''}`,`${b.title||''} ${b.guidance||''}`)>=0.30;
+}
+
+export function synthesizePatternsFromReviews(reviews,{feedbackIds=[],osirisIds=[],existing=[]}={}){
+  const validFeedback=new Set(feedbackIds);
+  const validOsiris=new Set(osirisIds);
+  const clusters=[];
+
+  for(const review of Array.isArray(reviews)?reviews:[]){
+    const role=String(review?.role||'').trim();
+    const claims=Array.isArray(review?.payload?.claims)?review.payload.claims:[];
+    for(const raw of claims){
+      if(!raw||typeof raw!=='object'||Array.isArray(raw))continue;
+      const stance=['support','challenge','reject'].includes(String(raw.stance||''))?String(raw.stance):'challenge';
+      const claim={
+        role,
+        stance,
+        pattern_key:normalizePatternKey(raw.pattern_key||raw.title),
+        scope:ALLOWED_SCOPES.has(String(raw.scope||''))?String(raw.scope):'global',
+        title:clean(raw.title,240),
+        guidance:clean(raw.guidance,1600),
+        reason:clean(raw.reason,1200),
+        confidence:normalizedConfidence(raw.confidence),
+        feedback_ids:validSubset(raw.feedback_ids,validFeedback,20),
+        osiris_refs:validSubset(raw.osiris_refs,validOsiris,12)
+      };
+      if(!claim.pattern_key||!claim.title||!claim.guidance)continue;
+      let cluster=clusters.find(x=>patternLike(x.representative,claim));
+      if(!cluster){
+        cluster={representative:claim,claims:[]};
+        clusters.push(cluster);
+      }
+      cluster.claims.push(claim);
+    }
+  }
+
+  const out=[];
+  for(const cluster of clusters){
+    const positive=cluster.claims.filter(x=>x.stance==='support'||x.stance==='challenge');
+    const roles=[...new Set(positive.map(x=>x.role).filter(Boolean))];
+    if(roles.length<2)continue;
+    const evidence=[...new Set(positive.flatMap(x=>x.feedback_ids))];
+    const osiris=[...new Set(positive.flatMap(x=>x.osiris_refs))];
+    const ranked=positive.slice().sort((a,b)=>{
+      const stanceScore=x=>x.stance==='support'?10:0;
+      return (b.confidence+stanceScore(b))-(a.confidence+stanceScore(a));
+    });
+    const best=ranked[0];
+    const confidence=Math.round(positive.reduce((sum,x)=>sum+x.confidence,0)/positive.length);
+    const dissent=cluster.claims
+      .filter(x=>x.stance!=='support')
+      .map(x=>clean(`${x.role}: ${x.reason||x.stance}`,500))
+      .filter(Boolean)
+      .slice(0,8);
+    const rationale=positive.map(x=>x.reason).filter(Boolean).slice(0,3).join(' | ');
+    let key=best.pattern_key;
+    const known=(existing||[]).find(x=>patternLike(x,best));
+    if(known?.pattern_key)key=String(known.pattern_key);
+
+    out.push({
+      pattern_key:key,
+      scope:best.scope,
+      title:best.title,
+      guidance:best.guidance,
+      rationale:rationale||'Padrão convergente entre revisores independentes.',
+      confidence,
+      supporting_roles:roles,
+      feedback_ids:evidence,
+      osiris_refs:osiris,
+      dissent
+    });
+    if(out.length>=8)break;
+  }
+  return out;
+}
+
 export function promoteLearningStatus({existingOccurrence=0,supportingRoles=0,evidenceCount=0,confidence=0}={}){
   const occurrence=Number(existingOccurrence||0)+1;
   if(supportingRoles>=3&&evidenceCount>=3&&confidence>=80)return 'active';
@@ -247,8 +356,8 @@ async function storePattern(db,{item,runId,validRoles,feedbackIds,osirisIds}){
   const roles=validSubset(item.supporting_roles,new Set(validRoles),8);
   const evidence=validSubset(item.feedback_ids,new Set(feedbackIds),20);
   const osirisRefs=validSubset(item.osiris_refs,new Set(osirisIds),12);
-  const confidence=clamp(item.confidence,0,100,50);
-  if(roles.length<2||evidence.length<2||confidence<60)return null;
+  const confidence=normalizedConfidence(item.confidence);
+  if(roles.length<2||evidence.length<1||confidence<60)return null;
 
   const existing=await db.prepare('SELECT pattern_id,status,occurrence_count FROM maison_feedback_learning_patterns WHERE pattern_key=?1').bind(key).first();
   const status=existing?.status==='active'?'active':promoteLearningStatus({
@@ -317,7 +426,35 @@ export async function runFeedbackLearning(env,{date=new Date(),feedbackLimit=12}
   const inputHash=await sha256(JSON.stringify(packet.map(x=>[x.feedback_id,x.persona_id,x.page_key])));
 
   const duplicate=await env.GROWTH_DB.prepare('SELECT learning_run_id,status FROM maison_feedback_learning_runs WHERE input_hash=?1').bind(inputHash).first();
-  if(duplicate)return {skipped:'feedback_learning_duplicate',learning_run_id:duplicate.learning_run_id,status:duplicate.status};
+  if(duplicate){
+    if(duplicate.status==='started'){
+      const rows=await env.GROWTH_DB.prepare(`
+        SELECT role,provider_id,model_id,payload_json
+          FROM maison_feedback_learning_reviews
+         WHERE learning_run_id=?1
+         ORDER BY created_at ASC
+      `).bind(duplicate.learning_run_id).all();
+      const resumedReviews=(rows?.results||[]).map(row=>({
+        role:row.role,
+        provider_id:row.provider_id,
+        model_id:row.model_id,
+        payload:parseJsonObject(row.payload_json)
+      }));
+      if(resumedReviews.length>=2){
+        return await finalizeLearningRun(env,{
+          runId:duplicate.learning_run_id,
+          packet,
+          osiris,
+          reviews:resumedReviews,
+          errors:[],
+          existing,
+          resumed:true
+        });
+      }
+      return {skipped:'feedback_learning_in_progress',learning_run_id:duplicate.learning_run_id,status:duplicate.status};
+    }
+    return {skipped:'feedback_learning_duplicate',learning_run_id:duplicate.learning_run_id,status:duplicate.status};
+  }
 
   const runId='fbl_'+crypto.randomUUID();
   await env.GROWTH_DB.prepare(`
@@ -372,24 +509,14 @@ export async function runFeedbackLearning(env,{date=new Date(),feedbackLimit=12}
     return {learning_run_id:runId,stored:0,active:0,candidate:0,reviewers:reviews.length,errors:errors.length,status:'failed'};
   }
 
-  let synthesis;
-  try{
-    const synth=await callFreeJson(env,models,base+4,buildSynthesisPrompt({
-      reviews,
-      feedbackIds:packet.map(x=>x.feedback_id),
-      osirisIds:osiris.map(x=>x.observation_id),
-      existing
-    }));
-    synthesis=synth.payload;
-  }catch(error){
-    errors.push({role:'synthesizer',error:clean(error?.message||error,500)});
-    synthesis={patterns:[]};
-  }
+  return await finalizeLearningRun(env,{runId,packet,osiris,reviews,errors,existing,resumed:false});
+}
 
-  const patterns=Array.isArray(synthesis.patterns)?synthesis.patterns.slice(0,8):[];
+async function finalizeLearningRun(env,{runId,packet,osiris,reviews,errors=[],existing=[],resumed=false}){
   const validRoles=reviews.map(x=>x.role);
   const feedbackIds=packet.map(x=>x.feedback_id);
   const osirisIds=osiris.map(x=>x.observation_id);
+  const patterns=synthesizePatternsFromReviews(reviews,{feedbackIds,osirisIds,existing});
   const stored=[];
   for(const item of patterns){
     try{
@@ -403,6 +530,8 @@ export async function runFeedbackLearning(env,{date=new Date(),feedbackLimit=12}
   const detail=JSON.stringify({
     review_roles:validRoles,
     errors,
+    resumed,
+    synthesis:'deterministic_consensus_v1',
     osiris_osint_refs:osirisIds,
     osiris_gateway_used:validRoles.includes('osiris_gateway_challenger'),
     osiris_memory_configured:enabled(env.OSIRIS_MEMORY_ENABLED)&&Boolean(env.OSIRIS_MEMORY_BRIDGE_URL)&&Boolean(env.OSIRIS_MEMORY_BRIDGE_TOKEN)
@@ -424,6 +553,7 @@ export async function runFeedbackLearning(env,{date=new Date(),feedbackLimit=12}
     active,
     candidate,
     errors:errors.length,
+    resumed,
     patterns:stored
   };
 }
@@ -433,5 +563,6 @@ export {
   buildReviewerPrompt,
   buildSynthesisPrompt,
   normalizePatternKey,
-  parseJsonObject
+  parseJsonObject,
+  synthesizePatternsFromReviews
 };
