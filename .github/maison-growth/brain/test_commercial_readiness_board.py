@@ -14,7 +14,7 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         board=build_board()
         self.assertEqual(board["kind"],"maison_commercial_readiness_board")
         self.assertFalse(board["overlay_loaded"])
-        self.assertEqual(board["summary"]["assets"],14)
+        self.assertEqual(board["summary"]["assets"],15)
         self.assertEqual(board["summary"]["manual_validation_ready"],0)
         self.assertEqual(board["summary"]["unit_economics_known"],0)
         self.assertFalse(any(board["authority"].values()))
