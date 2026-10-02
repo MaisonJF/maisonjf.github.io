@@ -85,8 +85,8 @@
         {
           "asset_ref": "catalog:product:escalda-pes",
           "name": "Escalda-Pés",
-          "sku": "MJ-ESCALDA-150",
-          "price_minor": 500,
+          "sku": "MJ-ESCALDA-280",
+          "price_minor": 950,
           "currency": "EUR"
         },
         {
@@ -102,7 +102,7 @@
         "precisar-de-solidao-para-recuperar-energia-social",
         "doomscrolling-para-tentar-reduzir-incerteza"
       ],
-      "catalogue_subtotal_minor": 1700,
+      "catalogue_subtotal_minor": 2150,
       "currency": "EUR",
       "bundle_price_minor": null,
       "operational_readiness": {
@@ -154,8 +154,8 @@
         {
           "asset_ref": "catalog:product:escalda-pes",
           "name": "Escalda-Pés",
-          "sku": "MJ-ESCALDA-150",
-          "price_minor": 500,
+          "sku": "MJ-ESCALDA-280",
+          "price_minor": 950,
           "currency": "EUR"
         }
       ],
@@ -164,7 +164,7 @@
         "presenca-que-ampara-sem-tentar-resolver",
         "adiar-o-sono-para-recuperar-autonomia"
       ],
-      "catalogue_subtotal_minor": 2000,
+      "catalogue_subtotal_minor": 2450,
       "currency": "EUR",
       "bundle_price_minor": null,
       "operational_readiness": {
@@ -217,8 +217,8 @@
         {
           "asset_ref": "catalog:product:escalda-pes",
           "name": "Escalda-Pés",
-          "sku": "MJ-ESCALDA-150",
-          "price_minor": 500,
+          "sku": "MJ-ESCALDA-280",
+          "price_minor": 950,
           "currency": "EUR"
         },
         {
@@ -233,7 +233,7 @@
         "presenca-que-ampara-sem-tentar-resolver",
         "precisar-de-solidao-para-recuperar-energia-social"
       ],
-      "catalogue_subtotal_minor": 3200,
+      "catalogue_subtotal_minor": 3650,
       "currency": "EUR",
       "bundle_price_minor": null,
       "operational_readiness": {
