@@ -20,7 +20,7 @@ class CommercialAssetTests(unittest.TestCase):
     def test_generated_registry_has_real_catalogue_and_unknown_operations(self):
         ctx=CommercialAssetContext(self.registry())
         summary=ctx.summary()
-        self.assertEqual(summary["asset_count"],19)
+        self.assertEqual(summary["asset_count"],20)
         self.assertFalse(summary["private_overlay_loaded"])
         self.assertEqual(summary["known_operational_fields"],0)
         self.assertGreater(summary["unknown_operational_fields"],0)
