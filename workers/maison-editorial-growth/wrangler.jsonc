@@ -6,7 +6,7 @@
   "workers_dev": false,
   "preview_urls": false,
   "triggers": {
-    "crons": ["* * * * *"]
+    "crons": ["0 */6 * * *"]
   },
   "vars": {
     "EDITORIAL_GROWTH_ENABLED": "true",
