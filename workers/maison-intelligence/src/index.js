@@ -22,6 +22,7 @@ import { buildEditorialProposal, buildInlineBrainAlert } from './content_proposa
 import { generateEditorialCandidates } from './editorial_candidate_generation.js';
 import { runExpansionFoundry } from './expansion_foundry.js';
 import { runFeedbackCouncil } from './feedback_council.js';
+import { runFeedbackLearning } from './feedback_learning.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -676,6 +677,19 @@ async function enqueueFeedbackCouncilRun(env,scheduledDate,getControl=()=>contro
   return {queued:1,slot,reviews};
 }
 
+async function enqueueFeedbackLearningRun(env,scheduledDate,getControl=()=>controlState(env)) {
+  if(!isTrue(env.FEEDBACK_LEARNING_ENABLED))return {queued:0,reason:'feedback_learning_disabled'};
+  const control=await getControl();
+  if(!control.enabled)return {queued:0,reason:control.reason};
+  const day=utcDay(scheduledDate);
+  await env.INTELLIGENCE_QUEUE.sendBatch([{body:{
+    kind:'feedback_learning',
+    day,
+    taskKey:`${day}:feedback_learning`
+  }}]);
+  return {queued:1};
+}
+
 async function enqueueRun(env,scheduledDate,getControl=()=>controlState(env)) {
   const providers=configuredProviders(env);
   if (!providers.length) return { queued:0,reason:'no_provider_secrets_configured' };
@@ -746,6 +760,9 @@ export default {
       jobs.push(enqueueVisibilityProbeRun(env,when,getControl));
     }
     jobs.push(enqueueFeedbackCouncilRun(env,when,getControl));
+    if (when.getUTCHours()===21 && when.getUTCMinutes()===0) {
+      jobs.push(enqueueFeedbackLearningRun(env,when,getControl));
+    }
     // Every scheduler tick may ask the zero-cost Foundry to run. The per-model
     // daily usage gate keeps this to at most the configured daily cap, so a
     // deployment after 06:00 UTC no longer leaves the Vault empty until tomorrow.
@@ -757,7 +774,7 @@ export default {
   async queue(batch, env) {
     for (const message of batch.messages) {
       const task = message.body;
-      if (!task || !['sensor_query','source_snapshot','public_source_snapshot','search_visibility_snapshot','visibility_probe','expansion_foundry','feedback_council'].includes(task.kind)) { message.ack(); continue; }
+      if (!task || !['sensor_query','source_snapshot','public_source_snapshot','search_visibility_snapshot','visibility_probe','expansion_foundry','feedback_council','feedback_learning'].includes(task.kind)) { message.ack(); continue; }
       try {
         let outcome;
         if (task.kind === 'source_snapshot') outcome=await processSourceTask(env,task);
@@ -768,6 +785,11 @@ export default {
           const reviewCount=clampInt(task.reviews,2,1,2);
           outcome=await runFeedbackCouncil(env,{date:when,reviews:reviewCount});
           console.info('MAISON_FEEDBACK_COUNCIL',JSON.stringify(outcome));
+        }
+        else if (task.kind === 'feedback_learning') {
+          const when=new Date(`${task.day||utcDay()}T21:00:00Z`);
+          outcome=await runFeedbackLearning(env,{date:when,feedbackLimit:12});
+          console.info('MAISON_FEEDBACK_LEARNING',JSON.stringify(outcome));
         }
         else if (task.kind === 'public_source_snapshot') outcome=await processPublicSourceTask(env,task);
         else if (task.kind === 'search_visibility_snapshot') outcome=await processSearchVisibilityTask(env,task);
