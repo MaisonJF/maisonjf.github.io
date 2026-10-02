@@ -9,40 +9,40 @@ window.MAISON_PRODUCTS=[
  slug:'maison-jf-bundles',sku:'MJ-BUNDLES',name:'Maison JF Bundles',category:'Casa',price:10,priceNote:'Desde 10 €',currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/maison-jf-bundles.webp.webp',
  description:'Diferentes gestos da Maison reunidos num só ritual, para oferecer ou para seres tu a aproveitar.',
  media:[{role:'hero',src:'../images/maison-jf-bundles.webp.webp',alt:'Maison JF Bundles — Essencial, Corpo & Alma e Completo',aspect:'portrait',editorial:true}],
- ritual:{title:'Porque cuidas de tanta coisa. Também podes ser uma delas.',text:'Escalda-Pés, aroma, toque e luz combinam-se de formas diferentes em cada seleção. Escolhe o teu pelo momento, não pela quantidade.'},
+ ritual:{title:'Porque cuidas de tanta coisa. Também mereces cuidar de ti.',text:'Escalda-Pés, aroma, toque e luz combinam-se de formas diferentes em cada seleção. Escolhe o teu pelo momento, não pela quantidade.'},
  cta:'Descobrir os Bundles'
 },
 {
  slug:'vela-vidro',sku:'MJ-VELA-170',name:'Vela Aromática',size:'170 g',category:'Casa',price:14,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/vela-vidro/vela-170g-produto.webp',
- description:'Bourbon, âmbar oriental e rosa marinha. Uma vela de presença quente para baixar a luz e mudar o ritmo da casa.',
+ description:'Mais de 30 horas de luz e aroma. Cera vegetal de soja e coco, com bourbon, âmbar oriental e rosa marinha. Para aqueles dias em que chegar a casa já é um plano.',
  media:[{role:'hero',src:'../images/products/vela-vidro/vela-170g-acesa.webp',alt:'Vela Aromática MAISON JF 170 g acesa',aspect:'landscape',editorial:true},{role:'ritual',src:'../images/products/vela-vidro/vela-170g-fumo.webp',alt:'Vela Aromática MAISON JF 170 g após apagar, com fumo',aspect:'square',editorial:true},{role:'ambience',src:'../images/products/vela-vidro/vela-170g-universo-olfativo.webp',alt:'Universo olfativo da Vela Aromática MAISON JF',aspect:'landscape',editorial:true},{role:'packshot',src:'../images/products/vela-vidro/vela-170g-produto.webp',alt:'Vela Aromática MAISON JF 170 g',aspect:'portrait',editorial:true}],
  ritual:{title:'Acende para mudar de ritmo.',text:'A luz baixa. O aroma fica. E a casa percebe que o dia mudou de lugar.'},
  cta:'Quero levar para casa'
 },
 {
  slug:'vela-pequena',sku:'MJ-VELA-070',name:'Vela Aromática',size:'70 g',category:'Casa',price:8,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/vela-pequena/hero.webp',
- description:'O mesmo universo quente da Maison num formato mais pequeno, para acender onde o momento pedir.',
+ description:'Pequena, artesanal e pronta a acender. Porque nem todos os luxos precisam de ser grandes.',
  media:[{role:'hero',src:'../images/products/vela-pequena/hero.webp',alt:'Vela Aromática MAISON JF em lata de cobre, fotografia editorial',aspect:'portrait',editorial:true},{role:'detail',src:'../images/products/vela-pequena/detail.webp',alt:'Detalhe da cera e botânicos da Vela Aromática MAISON JF',aspect:'portrait',editorial:true},{role:'lit',src:'../images/products/vela-pequena/lit.webp',alt:'Vela Aromática MAISON JF acesa',aspect:'portrait',editorial:true}],
  ritual:{title:'Um gesto pequeno também conta.',text:'Um ponto de luz pode chegar para marcar alguns minutos que não precisam de servir para mais nada.'},
  cta:'Quero levar para casa'
 },
 {
  slug:'oleo-massagem',sku:'MJ-OLEO-060',name:'Óleo de Massagem',size:'60 ml',category:'Corpo',price:12,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/oleo-massagem/oleo-massagem-hero.webp',
- description:'Óleo de massagem com o universo olfativo da Maison. Desliza sobre a pele e transforma o toque num momento mais demorado.',
+ description:'Jojoba, vitamina E e uma das assinaturas olfativas de Claire Obscur. Há dias em que cinco minutos de toque sabem a muito mais.',
  media:[{role:'hero',src:'../images/products/oleo-massagem/oleo-massagem-hero.webp',alt:'Óleo de Massagem MAISON JF, fotografia editorial',aspect:'square',editorial:true},{role:'use',src:'../images/products/oleo-massagem/oleo-massagem-uso.webp',alt:'Óleo de Massagem MAISON JF em utilização',aspect:'square',editorial:true},{role:'detail',src:'../images/products/oleo-massagem/oleo-massagem-editorial.webp',alt:'Óleo de Massagem MAISON JF em composição editorial',aspect:'square',editorial:true},{role:'ritual',src:'../images/products/oleo-massagem/oleo-massagem-massagem.webp',alt:'Ritual de massagem MAISON JF',aspect:'square',editorial:true}],
  ritual:{title:'O corpo percebe o toque antes da explicação.',text:'Alguns minutos de massagem podem ser uma forma simples de devolver presença ao corpo.'},
  cta:'Quero saber mais'
 },
 {
  slug:'nevoa',sku:'MJ-NEVOA-020',name:'Névoa de Ambiente',size:'20 ml',category:'Casa',price:7,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/nevoa/nevoa-maison-jf-use-final.webp',
- description:'Uma névoa aromática para mudar o ambiente num gesto. Pulveriza no espaço e deixa o aroma marcar a passagem para outro ritmo.',
+ description:'Há casas que reconhecemos pelo cheiro. Algumas pulverizações revelam um dos aromas de Claire Obscur. Talvez o teu fique por aqui.',
  media:[{role:'hero',src:'../images/products/nevoa/hero.webp',alt:'Névoa de Ambiente MAISON JF, fotografia editorial',aspect:'portrait',editorial:true},{role:'use',src:'../images/products/nevoa/nevoa-maison-jf-use-final.webp',alt:'Névoa de Ambiente MAISON JF em utilização',aspect:'landscape',editorial:true},{role:'ambience',src:'../images/products/nevoa/ambience.webp',alt:'Névoa de Ambiente MAISON JF num interior quente',aspect:'portrait',editorial:true}],
  ritual:{title:'Muda o ar antes de mudares tudo.',text:'Um gesto no espaço pode bastar para marcar a passagem entre o que veio de fora e o tempo que agora é teu.'},
  cta:'Quero escolher'
 },
 {
  slug:'escalda-pes',sku:'MJ-ESCALDA-280',name:'Escalda-Pés',size:'280 g',category:'Corpo',price:9.5,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/escalda-pes/01-hero-packshot-editorial.webp',
- description:'Sais de escalda-pés com bourbon, âmbar oriental, rosa marinha e limão, enriquecidos com pétalas de rosa e jasmim. Água morna, aroma e uma pausa que começa pelos pés.',
+ description:'Água morna. Dez minutos. Hoje já fizeste o suficiente.',
  media:[{role:'hero',src:'../images/products/escalda-pes/01-hero-packshot-editorial.webp',alt:'Escalda-Pés MAISON JF, fotografia editorial de produto',aspect:'portrait',editorial:true},{role:'texture',src:'../images/products/escalda-pes/02-macro-materia.webp',alt:'Textura do Escalda-Pés MAISON JF com sal grosso e pétalas secas',aspect:'portrait',editorial:true},{role:'detail',src:'../images/products/escalda-pes/03-abertura-saco.webp',alt:'Saco aberto do Escalda-Pés MAISON JF com mistura visível',aspect:'portrait',editorial:true},{role:'ritual',src:'../images/products/escalda-pes/04-pour-ritual.webp',alt:'Ritual de Escalda-Pés MAISON JF a ser vertido para a água',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/products/escalda-pes/05-experiencia-desejo.webp',alt:'Experiência de Escalda-Pés MAISON JF em bacia com água',aspect:'portrait',editorial:true}],
  ritual:{title:'Não compliques a pausa.',text:'Água morna, aroma e alguns minutos em que ninguém te pede nada.'},
  cta:'Quero criar este momento'
