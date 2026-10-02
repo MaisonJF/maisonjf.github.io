@@ -29,7 +29,7 @@ class CommercialAttentionTests(unittest.TestCase):
         self.assertEqual(self.payload["source_assets"],"commercial-assets.generated.json")
         self.assertEqual(self.payload["source_oceans"],"../oceans/candidates.json")
         self.assertEqual(self.payload["source_editorial_context"],"editorial-queue.json")
-        self.assertEqual(self.payload["summary"]["ranked_assets"],14)
+        self.assertEqual(self.payload["summary"]["ranked_assets"],15)
 
     def test_attention_is_not_profit_or_execution_authority(self):
         self.assertTrue(self.payload["contract"]["attention_score_is_not_profit_score"])
