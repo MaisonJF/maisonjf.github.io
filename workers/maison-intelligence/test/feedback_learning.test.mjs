@@ -4,7 +4,8 @@ import {
   REVIEWER_ROLES,
   buildReviewerPrompt,
   normalizePatternKey,
-  promoteLearningStatus
+  promoteLearningStatus,
+  synthesizePatternsFromReviews
 } from '../src/feedback_learning.js';
 import { candidatePrompt } from '../src/editorial_candidate_generation.js';
 import { buildExpansionPrompt } from '../src/expansion_foundry.js';
@@ -80,4 +81,45 @@ test('active learning is injected into Foundry without overriding Maison identit
   assert.match(prompt,/APRENDIZAGEM ATIVA DO CONSELHO/i);
   assert.match(prompt,/Próximo passo explícito/i);
   assert.match(prompt,/Não destruas identidade MAISON/i);
+});
+
+
+test('deterministic synthesis merges equivalent keys and normalizes 8/9 confidence to 80/90',()=>{
+  const feedbackIds=['fb_one'];
+  const reviews=[
+    {
+      role:'evidence_auditor',
+      payload:{claims:[{
+        pattern_key:'excesso_texto_mobile',
+        scope:'mobile',
+        title:'Excesso de texto em mobile',
+        guidance:'Reduzir densidade e melhorar hierarquia visual.',
+        stance:'support',
+        confidence:8,
+        feedback_ids:['fb_one'],
+        osiris_refs:[],
+        reason:'Leitura difícil.'
+      }]}
+    },
+    {
+      role:'maison_guardian',
+      payload:{claims:[{
+        pattern_key:'excesso-texto-mobile',
+        scope:'mobile',
+        title:'Excesso de texto em mobile',
+        guidance:'Dar prioridade ao essencial sem perder a voz.',
+        stance:'support',
+        confidence:9,
+        feedback_ids:['fb_one'],
+        osiris_refs:[],
+        reason:'A crítica é útil sem pedir uma estética genérica.'
+      }]}
+    }
+  ];
+  const patterns=synthesizePatternsFromReviews(reviews,{feedbackIds,osirisIds:[],existing:[]});
+  assert.equal(patterns.length,1);
+  assert.equal(patterns[0].pattern_key,'excesso-texto-mobile');
+  assert.deepEqual(patterns[0].supporting_roles,['evidence_auditor','maison_guardian']);
+  assert.equal(patterns[0].confidence,85);
+  assert.deepEqual(patterns[0].feedback_ids,['fb_one']);
 });
