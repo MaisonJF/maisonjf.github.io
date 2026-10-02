@@ -563,6 +563,5 @@ export {
   buildReviewerPrompt,
   buildSynthesisPrompt,
   normalizePatternKey,
-  parseJsonObject,
-  synthesizePatternsFromReviews
+  parseJsonObject
 };
