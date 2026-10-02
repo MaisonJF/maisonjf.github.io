@@ -765,7 +765,8 @@ export default {
         else if (task.kind === 'feedback_council') {
           const hour=Math.max(0,Math.min(21,(Number(task.slot)||0)*3));
           const when=new Date(`${task.day||utcDay()}T${String(hour).padStart(2,'0')}:00:00Z`);
-          outcome=await runFeedbackCouncil(env,{date:when,reviews:task.reviews||2});
+          const reviewCount=clampInt(task.reviews,2,1,2);
+          outcome=await runFeedbackCouncil(env,{date:when,reviews:reviewCount});
           console.info('MAISON_FEEDBACK_COUNCIL',JSON.stringify(outcome));
         }
         else if (task.kind === 'public_source_snapshot') outcome=await processPublicSourceTask(env,task);

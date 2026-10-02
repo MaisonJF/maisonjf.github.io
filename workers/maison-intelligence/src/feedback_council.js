@@ -115,11 +115,14 @@ export async function runFeedbackCouncil(env,{date=new Date(),reviews=2}={}){
       if(!text)throw new Error('feedback_page_empty');
       let result=null,lastError=null;
       for(const spec of rotateSpecs(specs,modelOffset)){
-        try{result=await callZeroCostModel(env,spec,promptFor(persona,page,text));break;}catch(error){lastError=error;}
+        try{
+          const candidate=await callZeroCostModel(env,spec,promptFor(persona,page,text));
+          if(String(candidate?.text||'').trim()){result=candidate;break;}
+          lastError=new Error('feedback_empty_opinion');
+        }catch(error){lastError=error;}
       }
       if(!result)throw (lastError||new Error('feedback_no_free_model_response'));
       const opinion=String(result.text||'').trim().slice(0,6000);
-      if(!opinion)throw new Error('feedback_empty_opinion');
       const id='fb_'+crypto.randomUUID();
       await env.GROWTH_DB.prepare(`INSERT INTO maison_synthetic_feedback
         (feedback_id,run_date,persona_id,persona_label,page_key,page_url,provider_id,model_id,opinion_text)
