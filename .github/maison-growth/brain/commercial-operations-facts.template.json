@@ -101,6 +101,24 @@
         "supplier_lead_days": null
       },
       "evidence_refs": []
+    },
+    {
+      "asset_ref": "catalog:product:maison-jf-bundles",
+      "sku": "MJ-BUNDLES",
+      "name": "Maison JF Bundles",
+      "source": "manual_operations_review",
+      "operational": {
+        "unit_material_cost_minor": null,
+        "packaging_cost_minor": null,
+        "production_minutes_per_unit": null,
+        "batch_capacity_units": null,
+        "inventory_quantity": null,
+        "reserved_quantity": null,
+        "moq_units": null,
+        "shelf_life_days": null,
+        "supplier_lead_days": null
+      },
+      "evidence_refs": []
     }
   ]
 }
