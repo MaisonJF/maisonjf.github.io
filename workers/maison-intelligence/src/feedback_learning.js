@@ -232,6 +232,15 @@ function validSubset(values,allowed,max=20){
   }
   return out;
 }
+function jsonArray(raw){
+  try{
+    const parsed=JSON.parse(String(raw??'[]'));
+    return Array.isArray(parsed)?parsed:[];
+  }catch{return [];}
+}
+function mergeUnique(...lists){
+  return [...new Set(lists.flat().map(x=>String(x||'').trim()).filter(Boolean))];
+}
 
 function normalizedConfidence(value){
   const n=Number(value);
@@ -359,18 +368,38 @@ async function storePattern(db,{item,runId,validRoles,feedbackIds,osirisIds}){
   const confidence=normalizedConfidence(item.confidence);
   if(roles.length<2||evidence.length<1||confidence<60)return null;
 
-  const existing=await db.prepare('SELECT pattern_id,status,occurrence_count FROM maison_feedback_learning_patterns WHERE pattern_key=?1').bind(key).first();
-  const status=existing?.status==='active'?'active':promoteLearningStatus({
-    existingOccurrence:Number(existing?.occurrence_count||0),
-    supportingRoles:roles.length,
-    evidenceCount:evidence.length,
-    confidence
-  });
+  const existing=await db.prepare(`
+    SELECT pattern_id,status,occurrence_count,confidence,
+           evidence_feedback_ids_json,supporting_roles_json,dissent_json,osiris_context_refs_json
+      FROM maison_feedback_learning_patterns
+     WHERE pattern_key=?1
+  `).bind(key).first();
   const title=clean(item.title||key,240);
   const guidance=clean(item.guidance,1800);
   const rationale=clean(item.rationale,1800);
   if(!guidance||!rationale)return null;
   const dissent=(Array.isArray(item.dissent)?item.dissent:[]).map(x=>clean(x,500)).filter(Boolean).slice(0,8);
+
+  const mergedEvidence=existing
+    ? mergeUnique(jsonArray(existing.evidence_feedback_ids_json),evidence).slice(0,40)
+    : evidence;
+  const mergedRoles=existing
+    ? mergeUnique(jsonArray(existing.supporting_roles_json),roles).slice(0,12)
+    : roles;
+  const mergedDissent=existing
+    ? mergeUnique(jsonArray(existing.dissent_json),dissent).slice(0,12)
+    : dissent;
+  const mergedOsiris=existing
+    ? mergeUnique(jsonArray(existing.osiris_context_refs_json),osirisRefs).slice(0,20)
+    : osirisRefs;
+  const mergedConfidence=Math.max(Number(existing?.confidence||0),confidence);
+
+  const status=existing?.status==='active'?'active':promoteLearningStatus({
+    existingOccurrence:Number(existing?.occurrence_count||0),
+    supportingRoles:mergedRoles.length,
+    evidenceCount:mergedEvidence.length,
+    confidence:mergedConfidence
+  });
 
   if(existing){
     await db.prepare(`
@@ -380,7 +409,7 @@ async function storePattern(db,{item,runId,validRoles,feedbackIds,osirisIds}){
              evidence_feedback_ids_json=?8,supporting_roles_json=?9,dissent_json=?10,
              osiris_context_refs_json=?11,source_run_id=?12,last_seen_at=datetime('now'),updated_at=datetime('now')
        WHERE pattern_key=?1
-    `).bind(key,scope,title,guidance,rationale,confidence,status,JSON.stringify(evidence),JSON.stringify(roles),JSON.stringify(dissent),JSON.stringify(osirisRefs),runId).run();
+    `).bind(key,scope,title,guidance,rationale,mergedConfidence,status,JSON.stringify(mergedEvidence),JSON.stringify(mergedRoles),JSON.stringify(mergedDissent),JSON.stringify(mergedOsiris),runId).run();
     return {pattern_id:existing.pattern_id,pattern_key:key,status,updated:true};
   }
 
