@@ -19,10 +19,10 @@ function candidatePrompt({oceanContext,brainAlert}){
     `Observed public-language summary: ${summary}`,
     `Useful theme terms: ${terms.join(' | ')||'none'}`,
     '',
-    'questions: aim for 4 genuinely distinct questions when the signal supports them; never pad with synonyms. Prefer different moments/contexts and different stages. Use fields: theme, text, stage, exposure, intensity, target, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness, subthemes.',
-    'Allowed stage: open, recognize, deepen, touch, close, signature. exposure: paid or public_social. intensity: 1-4. target: self, partner, both, prediction.',
-    'When safe and genuinely supported, include at least 2 paid questions for PÁRA DE IGNORAR! and at least 1 separate public_social question for a free Volta Para Casa test. Never reveal or recycle a paid body into the free question.',
-    'oracle_blocks: aim for 2 original generic reflection blocks with different useful roles when the signal supports them; never a final personalized reading. Use fields: territory, role, title, text, intensity, tone, rarity, pain_family, subterritory, emotional_function, tags.',
+    'questions: return exactly 4 genuinely distinct questions when the signal supports them; never pad with synonyms. Prefer different moments/contexts and different stages. Use fields: theme, text, stage, exposure, intensity, target, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness, subthemes.',
+    'Allowed stage: open, recognize, deepen, touch, close, signature. exposure: paid or public_social. intensity: integer 1-4. target: self, partner, both, prediction. cognitive_load, vulnerability, conflict_potential and playfulness MUST be integers 1-5, never words.',
+    'Among those 4 questions, include at least 2 paid questions for PÁRA DE IGNORAR! and at least 1 separate public_social question for a free Volta Para Casa test when safe and supported. Never reveal or recycle a paid body into the free question.',
+    'oracle_blocks: return exactly 2 original generic reflection blocks with different useful roles when the signal supports them; never a final personalized reading. Use fields: territory, role, title, text, intensity, tone, rarity, pain_family, subterritory, emotional_function, tags.',
     'Allowed Oracle role: opening, recognition, tension, counterpoint, reframe, movement, close. intensity: 1-4. tone: gentle, direct, intimate, clear, confrontational. rarity: common, uncommon, rare.',
     'Keep every item useful on its own and recognizably MAISON: direct, intimate, elegant, simple, not clinical.'
   ].join('\n');
@@ -38,6 +38,24 @@ function parseJsonObject(raw){
 }
 function rows(value,max){
   return Array.isArray(value)?value.filter(x=>x&&typeof x==='object'&&!Array.isArray(x)).slice(0,max):[];
+}
+function questionRows(value,max){
+  const all=Array.isArray(value)?value.filter(x=>x&&typeof x==='object'&&!Array.isArray(x)):[];
+  const selected=all.slice(0,max);
+  if(selected.length&& !selected.some(x=>x.exposure==='public_social')){
+    const publicItem=all.find(x=>x.exposure==='public_social');
+    if(publicItem)selected[selected.length-1]=publicItem;
+  }
+  return selected;
+}
+function score1to5(value,fallback=2){
+  const n=Number(value);
+  if(Number.isInteger(n)&&n>=1&&n<=5)return n;
+  const s=String(value??'').trim().toLowerCase();
+  if(['baixo','baixa','low'].includes(s))return 1;
+  if(['moderado','moderada','médio','media','média','medium'].includes(s))return 3;
+  if(['alto','alta','high'].includes(s))return 5;
+  return fallback;
 }
 function fallbackTheme(oceanContext){
   return clean(oceanContext?.matchedTerms?.[0]||oceanContext?.oceanKey||'maison',120);
@@ -58,7 +76,7 @@ export async function generateEditorialCandidates(env,{caller,oceanContext,brain
   if(!oceanContext?.oceanKey||!brainAlert) return {called:false,stored:0,duplicates:0,rejected:0,results:[],usage:null};
   const generated=await caller(env,candidatePrompt({oceanContext,brainAlert}));
   const payload=parseJsonObject(generated?.text);
-  const questions=rows(payload.questions,MAX_QUESTIONS);
+  const questions=questionRows(payload.questions,MAX_QUESTIONS);
   const oracleBlocks=rows(payload.oracle_blocks,MAX_ORACLE_BLOCKS);
   const results=[];
   let rejected=0;
@@ -69,7 +87,11 @@ export async function generateEditorialCandidates(env,{caller,oceanContext,brain
         content_type:'question',
         source_ocean_id:oceanContext.oceanKey,
         theme:item.theme||fallbackTheme(oceanContext),
-        exposure:item.exposure==='public_social'?'public_social':'paid'
+        exposure:item.exposure==='public_social'?'public_social':'paid',
+        cognitive_load:score1to5(item.cognitive_load,2),
+        vulnerability:score1to5(item.vulnerability,2),
+        conflict_potential:score1to5(item.conflict_potential,2),
+        playfulness:score1to5(item.playfulness,2)
       });
       results.push(publicResult(result));
     }catch(error){

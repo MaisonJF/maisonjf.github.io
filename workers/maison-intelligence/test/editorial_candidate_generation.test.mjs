@@ -97,6 +97,32 @@ test('bad generated item is rejected without blocking valid siblings',async()=>{
   assert.equal(db.batches.length,1);
 });
 
+test('model drift is normalized and free-test coverage survives the four-question cap',async()=>{
+  const db=new DB();
+  const caller=async()=>({
+    providerId:'cloudflare_workers_ai',
+    modelId:'llama-test',
+    text:JSON.stringify({
+      questions:[
+        {theme:'escolha',text:'Que escolha tens adiado porque nenhuma opção te parece suficientemente segura?',stage:'open',exposure:'paid',cognitive_load:'alto',vulnerability:'moderado',conflict_potential:'baixo',playfulness:'baixo'},
+        {theme:'escolha',text:'Quando aparecem demasiadas opções, qual é a primeira coisa em ti que deixa de confiar?',stage:'recognize',exposure:'paid',cognitive_load:'alto',vulnerability:'alto',conflict_potential:'moderado',playfulness:'baixo'},
+        {theme:'escolha',text:'O que mudaria se hoje aceitasses escolher algo apenas suficientemente bom?',stage:'deepen',exposure:'paid',cognitive_load:'moderado',vulnerability:'moderado',conflict_potential:'baixo',playfulness:'moderado'},
+        {theme:'escolha',text:'Que decisão estás a transformar num teste à tua própria competência?',stage:'touch',exposure:'paid',cognitive_load:'alto',vulnerability:'alto',conflict_potential:'alto',playfulness:'baixo'},
+        {theme:'escolha',text:'Quando tens opções a mais, o que te ajudaria a voltar ao essencial?',stage:'open',exposure:'public_social',cognitive_load:'baixo',vulnerability:'baixo',conflict_potential:'baixo',playfulness:'moderado'}
+      ],
+      oracle_blocks:[]
+    })
+  });
+  const out=await generateEditorialCandidates({GROWTH_DB:db},{caller,oceanContext,brainAlert});
+  assert.equal(out.stored,4);
+  assert.equal(out.rejected,0);
+  assert.equal(db.batches.length,4);
+  assert.ok(db.batches.some(batch=>batch[0].params[10]==='public_social'));
+  for(const batch of db.batches){
+    for(const index of [17,18,19,20]) assert.equal(typeof batch[0].params[index],'number');
+  }
+});
+
 test('candidate parser accepts fenced JSON but rejects missing JSON',()=>{
   assert.deepEqual(parseJsonObject('\\`\\`\\`json\n{"questions":[],"oracle_blocks":[]}\n\\`\\`\\`'),{
     questions:[],oracle_blocks:[]
