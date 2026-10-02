@@ -6,6 +6,19 @@
     <description>Produtos físicos MAISON JF® para Google Merchant Center. Só entram referências com fotografia real de produto.</description>
 
     <item>
+      <g:id>MJ-BUNDLES</g:id>
+      <g:title>Maison JF Bundles</g:title>
+      <g:description>Diferentes gestos da Maison reunidos num só ritual, para oferecer ou para seres tu a aproveitar.</g:description>
+      <g:link>https://maison-jf.com/produtos/maison-jf-bundles/</g:link>
+      <g:image_link>https://maison-jf.com/images/maison-jf-bundles.webp.webp</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>10.00 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:brand>MAISON JF®</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+    </item>
+
+    <item>
       <g:id>MJ-VELA-170</g:id>
       <g:title>Vela Aromática 170 g</g:title>
       <g:description>Luz e aroma para mudar o ritmo de um espaço.</g:description>
