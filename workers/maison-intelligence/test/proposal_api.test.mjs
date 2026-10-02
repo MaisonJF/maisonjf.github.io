@@ -221,6 +221,62 @@ test('analysis-only persistence creates no A12 queue', async () => {
   assert.equal(e.tables.autonomy_human_queue.size,0);
 });
 
+test('A14 preview envelope materializes through the same guarded path', async () => {
+  const e=env();
+  const base=basePayload();
+  const response=await handleBrainProposalRequest(request({
+    schema:'maison.a14-preview-materialize.v1',
+    preview:{
+      state:'human_review_preview',
+      opportunity:base.opportunity,
+      offer_hypotheses:base.offer_hypotheses,
+      distribution_matches:base.distribution_matches,
+      a12_review_payloads:base.a12_review_payloads
+    }
+  },{path:'/internal/proposals/a14-preview'}),e);
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.source_schema,'maison.a14-preview-materialize.v1');
+  assert.equal(body.source_state,'human_review_preview');
+  assert.equal(body.mode,'analysis_and_human_review_only');
+  assert.equal(body.public_write_authorized,false);
+  assert.equal(body.outbound_authorized,false);
+  assert.equal(body.spend_authorized,false);
+  assert.equal(body.experiment_authorized,false);
+  assert.equal(e.tables.opportunity_hypotheses.size,1);
+  assert.equal(e.tables.autonomy_human_queue.size,1);
+});
+
+test('observe output envelope can select one preview to materialize', async () => {
+  const e=env();
+  const base=basePayload();
+  const response=await handleBrainProposalRequest(request({
+    schema:'maison.a14-observe-output-materialize.v1',
+    preview_index:1,
+    observe_output:{
+      feed_rows:2,
+      packets:[{a14_ready:true}],
+      a14_previews:[
+        {state:'enrichment_required',opportunity:null,offer_hypotheses:[]},
+        {
+          state:'human_review_preview',
+          opportunity:base.opportunity,
+          offer_hypotheses:base.offer_hypotheses,
+          distribution_matches:base.distribution_matches,
+          a12_review_payloads:base.a12_review_payloads
+        }
+      ]
+    }
+  }),e);
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.source_schema,'maison.a14-observe-output-materialize.v1');
+  assert.equal(body.source_state,'human_review_preview');
+  assert.equal(body.human_reviews,1);
+  assert.equal(e.tables.opportunity_offer_hypotheses.size,1);
+  assert.equal(e.tables.autonomy_human_queue.size,1);
+});
+
 test('same semantic proposal is idempotent', async () => {
   const e=env();
   let response=await handleBrainProposalRequest(request(basePayload()),e);
