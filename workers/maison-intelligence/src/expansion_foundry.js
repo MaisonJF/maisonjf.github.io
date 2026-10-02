@@ -5,7 +5,7 @@ import { callZeroCostModel } from './providers.js';
 const MAX_CANDIDATES=6;
 const ASSETS=[
   'Vela Aromática 170 g','Vela Aromática 70 g','Névoa de Ambiente 20 ml',
-  'Óleo de Massagem 60 ml','Escalda-Pés 150 g','Curadoria A Floressência',
+  'Óleo de Massagem 60 ml','Escalda-Pés 280 g','Curadoria A Floressência',
   'PÁRA DE IGNORAR!','Oráculo MAISON JF®','Volta Para Casa','O Farol',
   'ebooks / Éditions Maison JF','Serviços e Presença','B2B / Profissionais'
 ];
