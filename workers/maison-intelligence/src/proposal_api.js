@@ -786,6 +786,50 @@ async function allRows(env, sql, ...params) {
   return Array.isArray(out?.results) ? out.results : [];
 }
 
+function normalizeA14MaterializePayload(payload, path) {
+  if (payload?.schema==='maison.a14-materialize.v1') {
+    return {payload,source_schema:payload.schema};
+  }
+  if (
+    path==='/internal/proposals/a14' &&
+    payload?.schema!=='maison.a14-preview-materialize.v1' &&
+    payload?.schema!=='maison.a14-observe-output-materialize.v1'
+  ) {
+    throw new Error('unsupported_proposal_schema');
+  }
+
+  let preview;
+  if (payload?.schema==='maison.a14-preview-materialize.v1') {
+    preview=payload.preview;
+  } else if (payload?.schema==='maison.a14-observe-output-materialize.v1') {
+    const previews=payload.observe_output?.a14_previews;
+    assert(Array.isArray(previews),'invalid_a14_previews');
+    const index=payload.preview_index ?? 0;
+    assert(Number.isInteger(index) && index>=0 && index<previews.length,'invalid_preview_index');
+    preview=previews[index];
+  } else {
+    throw new Error('unsupported_proposal_schema');
+  }
+
+  assert(preview && typeof preview==='object' && !Array.isArray(preview),'invalid_a14_preview');
+  const allowedStates=new Set(['enrichment_required','human_review_preview']);
+  assert(allowedStates.has(preview.state),'unsupported_a14_preview_state');
+  const queueForHuman=payload.queue_for_human ?? (preview.state==='human_review_preview');
+  assert(queueForHuman===true || queueForHuman===false,'queue_for_human_required');
+  return {
+    payload:{
+      schema:'maison.a14-materialize.v1',
+      queue_for_human:queueForHuman,
+      opportunity:preview.opportunity,
+      offer_hypotheses:preview.offer_hypotheses ?? [],
+      distribution_matches:preview.distribution_matches ?? [],
+      a12_review_payloads:preview.a12_review_payloads ?? []
+    },
+    source_schema:payload.schema,
+    source_state:preview.state
+  };
+}
+
 
 export async function handleBrainProposalRequest(request, env) {
   const url=new URL(request.url);
@@ -794,7 +838,7 @@ export async function handleBrainProposalRequest(request, env) {
   if (!env.BRAIN_PROPOSAL_TOKEN) return json({error:'proposal_api_misconfigured'},503);
   if (!constantTimeEqual(bearer(request),env.BRAIN_PROPOSAL_TOKEN)) return json({error:'unauthorized'},401);
   if (request.method!=='POST') return json({error:'method_not_allowed'},405);
-  if (!['/internal/proposals/a14','/internal/proposals/validation-plan','/internal/proposals/a8-draft'].includes(url.pathname)) {
+  if (!['/internal/proposals/a14','/internal/proposals/a14-preview','/internal/proposals/validation-plan','/internal/proposals/a8-draft'].includes(url.pathname)) {
     return json({error:'not_found'},404);
   }
 
@@ -840,23 +884,24 @@ export async function handleBrainProposalRequest(request, env) {
       });
     }
 
-    assert(payload?.schema==='maison.a14-materialize.v1','unsupported_proposal_schema');
-    validateOpportunity(payload.opportunity);
-    const offers=assertArray(payload.offer_hypotheses ?? [],'invalid_offer_hypotheses',MAX_OFFERS);
-    offers.forEach(x=>validateOffer(x,payload.opportunity.opportunity_id));
+    const normalized=normalizeA14MaterializePayload(payload,url.pathname);
+    const materialize=normalized.payload;
+    validateOpportunity(materialize.opportunity);
+    const offers=assertArray(materialize.offer_hypotheses ?? [],'invalid_offer_hypotheses',MAX_OFFERS);
+    offers.forEach(x=>validateOffer(x,materialize.opportunity.opportunity_id));
     const offerIds=new Set(offers.map(x=>x.offer_hypothesis_id));
-    const matches=assertArray(payload.distribution_matches ?? [],'invalid_distribution_matches',MAX_MATCHES);
+    const matches=assertArray(materialize.distribution_matches ?? [],'invalid_distribution_matches',MAX_MATCHES);
     matches.forEach(x=>validateMatch(x,offerIds));
-    const queueForHuman=payload.queue_for_human===true;
-    assert(payload.queue_for_human===true || payload.queue_for_human===false,'queue_for_human_required');
-    const reviews=assertArray(payload.a12_review_payloads ?? [],'invalid_a12_reviews',MAX_OFFERS);
-    reviews.forEach(x=>validateReview(x,payload.opportunity.opportunity_id,offerIds));
+    const queueForHuman=materialize.queue_for_human===true;
+    assert(materialize.queue_for_human===true || materialize.queue_for_human===false,'queue_for_human_required');
+    const reviews=assertArray(materialize.a12_review_payloads ?? [],'invalid_a12_reviews',MAX_OFFERS);
+    reviews.forEach(x=>validateReview(x,materialize.opportunity.opportunity_id,offerIds));
     if (queueForHuman) assert(reviews.length===offers.length,'every_offer_requires_a12_review');
     else assert(reviews.length===0,'analysis_only_proposal_cannot_create_human_reviews');
 
-    const hypothesisStatements=await preflight(env,payload.opportunity,offers,matches);
+    const hypothesisStatements=await preflight(env,materialize.opportunity,offers,matches);
     const now=new Date().toISOString();
-    const governance=await reviewStatements(env,payload.opportunity,reviews,now);
+    const governance=await reviewStatements(env,materialize.opportunity,reviews,now);
     const statements=[...hypothesisStatements,...governance.inserts,...governance.links];
 
     if (statements.length) await env.GROWTH_DB.batch(statements);
@@ -864,11 +909,13 @@ export async function handleBrainProposalRequest(request, env) {
     return json({
       stored:true,
       mode:queueForHuman ? 'analysis_and_human_review_only' : 'analysis_only',
-      opportunity_id:payload.opportunity.opportunity_id,
+      opportunity_id:materialize.opportunity.opportunity_id,
       offer_hypotheses:offers.length,
       distribution_matches:matches.length,
       human_reviews:reviews.length,
       inserted_statements:statements.length,
+      source_schema:normalized.source_schema,
+      source_state:normalized.source_state ?? null,
       outbound_authorized:false,
       spend_authorized:false,
       public_write_authorized:false,
