@@ -60,6 +60,14 @@ async function ensureSchema(db){
     UNIQUE(run_date,persona_id,page_key)
   )`).run();
   await db.prepare('CREATE INDEX IF NOT EXISTS idx_maison_feedback_date ON maison_synthetic_feedback(run_date,created_at)').run();
+  await db.prepare(`CREATE TABLE IF NOT EXISTS maison_synthetic_feedback_runs (
+    run_id TEXT PRIMARY KEY, run_date TEXT NOT NULL, slot INTEGER NOT NULL,
+    requested_reviews INTEGER NOT NULL, attempted_reviews INTEGER NOT NULL DEFAULT 0,
+    stored_reviews INTEGER NOT NULL DEFAULT 0, error_count INTEGER NOT NULL DEFAULT 0,
+    status TEXT NOT NULL, detail_json TEXT NOT NULL DEFAULT '{}',
+    created_at TEXT NOT NULL DEFAULT (datetime('now')), completed_at TEXT
+  )`).run();
+  await db.prepare('CREATE INDEX IF NOT EXISTS idx_maison_feedback_runs_date ON maison_synthetic_feedback_runs(run_date,created_at)').run();
 }
 async function pageText(page){
   const response=await fetch(page[1],{headers:{'User-Agent':'MaisonJF-Internal-Feedback/1.0'}});
@@ -85,30 +93,47 @@ Não inventes cliques, páginas, preços ou experiências que não estejam no co
 export async function runFeedbackCouncil(env,{date=new Date(),reviews=2}={}){
   if(String(env.ZERO_COST_MODE||'').toLowerCase()!=='true')return {skipped:'zero_cost_mode_required'};
   const specs=configuredZeroCostModelSpecs(env).filter(spec=>spec.providerId==='openrouter');
-  // Council is stricter than the general zero-cost Foundry: only OpenRouter models
-  // carrying the explicit :free contract are admitted. If none is available, skip.
   if(!specs.length)return {skipped:'no_explicitly_free_model'};
   await ensureSchema(env.GROWTH_DB);
-  const dateKey=date.toISOString().slice(0,10), stored=[];
+  const dateKey=date.toISOString().slice(0,10);
+  const slot=Math.floor(date.getUTCHours()/3);
   const assignments=councilAssignmentsForDate(date,reviews);
+  const runId='fbr_'+crypto.randomUUID();
+  await env.GROWTH_DB.prepare(`INSERT INTO maison_synthetic_feedback_runs
+    (run_id,run_date,slot,requested_reviews,status)
+    VALUES(?1,?2,?3,?4,'started')`).bind(runId,dateKey,slot,assignments.length).run();
+
+  const stored=[],errors=[],skipped=[];
+  let attempted=0;
   for(const assignment of assignments){
     const {persona,page,modelOffset}=assignment;
-    const exists=await env.GROWTH_DB.prepare('SELECT feedback_id FROM maison_synthetic_feedback WHERE run_date=?1 AND persona_id=?2 AND page_key=?3').bind(dateKey,persona.id,page[0]).first();
-    if(exists)continue;
-    const text=await pageText(page);
-    if(!text)continue;
-    let result=null,lastError=null;
-    for(const spec of rotateSpecs(specs,modelOffset)){
-      try{result=await callZeroCostModel(env,spec,promptFor(persona,page,text));break;}catch(error){lastError=error;}
+    try{
+      const exists=await env.GROWTH_DB.prepare('SELECT feedback_id FROM maison_synthetic_feedback WHERE run_date=?1 AND persona_id=?2 AND page_key=?3').bind(dateKey,persona.id,page[0]).first();
+      if(exists){skipped.push({persona:persona.id,page:page[0],reason:'already_reviewed'});continue;}
+      attempted+=1;
+      const text=await pageText(page);
+      if(!text)throw new Error('feedback_page_empty');
+      let result=null,lastError=null;
+      for(const spec of rotateSpecs(specs,modelOffset)){
+        try{result=await callZeroCostModel(env,spec,promptFor(persona,page,text));break;}catch(error){lastError=error;}
+      }
+      if(!result)throw (lastError||new Error('feedback_no_free_model_response'));
+      const opinion=String(result.text||'').trim().slice(0,6000);
+      if(!opinion)throw new Error('feedback_empty_opinion');
+      const id='fb_'+crypto.randomUUID();
+      await env.GROWTH_DB.prepare(`INSERT INTO maison_synthetic_feedback
+        (feedback_id,run_date,persona_id,persona_label,page_key,page_url,provider_id,model_id,opinion_text)
+        VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9)`).bind(id,dateKey,persona.id,persona.label,page[0],page[1],result.providerId,result.modelId||null,opinion).run();
+      stored.push({id,persona:persona.id,page:page[0],provider:result.providerId,model:result.modelId||null});
+    }catch(error){
+      const message=String(error?.message||error||'feedback_unknown_error').slice(0,500);
+      errors.push({persona:persona.id,page:page[0],error:message});
+      console.warn('MAISON_FEEDBACK_COUNCIL_REVIEW_FAILED',persona.id,page[0],message);
     }
-    if(!result){console.warn('MAISON_FEEDBACK_COUNCIL_NO_FREE_MODEL',lastError?.message||'unknown');continue;}
-    const opinion=String(result.text||'').trim().slice(0,6000);
-    if(!opinion)continue;
-    const id='fb_'+crypto.randomUUID();
-    await env.GROWTH_DB.prepare(`INSERT INTO maison_synthetic_feedback
-      (feedback_id,run_date,persona_id,persona_label,page_key,page_url,provider_id,model_id,opinion_text)
-      VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9)`).bind(id,dateKey,persona.id,persona.label,page[0],page[1],result.providerId,result.modelId||null,opinion).run();
-    stored.push({id,persona:persona.id,page:page[0],provider:result.providerId,model:result.modelId||null});
   }
-  return {stored:stored.length,reviews:stored};
+  const detail=JSON.stringify({stored,errors,skipped}).slice(0,12000);
+  await env.GROWTH_DB.prepare(`UPDATE maison_synthetic_feedback_runs
+    SET attempted_reviews=?2,stored_reviews=?3,error_count=?4,status='completed',detail_json=?5,completed_at=datetime('now')
+    WHERE run_id=?1`).bind(runId,attempted,stored.length,errors.length,detail).run();
+  return {run_id:runId,stored:stored.length,attempted,errors:errors.length,skipped:skipped.length,reviews:stored};
 }
