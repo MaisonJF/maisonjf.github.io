@@ -689,6 +689,18 @@ async function enqueueRun(env,scheduledDate,getControl=()=>controlState(env)) {
 }
 export default {
   async fetch(request, env) {
+    const requestUrl=new URL(request.url);
+    if(requestUrl.pathname==='/__feedback_council_test'){
+      const token=String(request.headers.get('x-maison-feedback-test')||'').trim();
+      if(!env.FEEDBACK_COUNCIL_TEST_TOKEN||token!==env.FEEDBACK_COUNCIL_TEST_TOKEN){
+        return new Response('Not Found',{status:404,headers:{'Cache-Control':'no-store'}});
+      }
+      const slot=Math.max(0,Math.min(7,Number.parseInt(requestUrl.searchParams.get('slot')||'0',10)||0));
+      const when=new Date();
+      when.setUTCHours(slot*3,0,0,0);
+      const outcome=await runFeedbackCouncil(env,{date:when,reviews:4});
+      return Response.json(outcome,{headers:{'Cache-Control':'no-store'}});
+    }
     const mcp = await handleMaisonMcpRequest(request, env);
     if (mcp) return mcp;
     const oceans = await handleOceanMemoryRequest(request, env);
@@ -730,7 +742,9 @@ export default {
     // is continuous, while search-presence measurement stays daily.
     if (when.getUTCHours()===3 && when.getUTCMinutes()===0) {
       jobs.push(enqueueVisibilityProbeRun(env,when,getControl));
-      if (isTrue(env.FEEDBACK_COUNCIL_ENABLED)) jobs.push(runFeedbackCouncil(env,{date:when,reviews:env.FEEDBACK_COUNCIL_REVIEWS_PER_DAY||2}));
+    }
+    if (isTrue(env.FEEDBACK_COUNCIL_ENABLED)) {
+      jobs.push(runFeedbackCouncil(env,{date:when,reviews:env.FEEDBACK_COUNCIL_REVIEWS_PER_RUN||env.FEEDBACK_COUNCIL_REVIEWS_PER_DAY||2}));
     }
     // Every scheduler tick may ask the zero-cost Foundry to run. The per-model
     // daily usage gate keeps this to at most the configured daily cap, so a

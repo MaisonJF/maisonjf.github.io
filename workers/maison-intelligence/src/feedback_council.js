@@ -32,6 +32,21 @@ const PAGES=[
 ];
 
 function dayIndex(date){return Math.floor(Date.UTC(date.getUTCFullYear(),date.getUTCMonth(),date.getUTCDate())/86400000);}
+export function councilAssignmentsForDate(date,reviews=2){
+  const count=Math.max(1,Math.min(4,Number(reviews)||2));
+  const base=dayIndex(date);
+  const slot=Math.floor(date.getUTCHours()/3);
+  return Array.from({length:count},(_,i)=>({
+    persona:FEEDBACK_PERSONAS[(base*count+slot*count+i)%FEEDBACK_PERSONAS.length],
+    page:PAGES[(base+slot+i)%PAGES.length],
+    modelOffset:base+slot+i
+  }));
+}
+function rotateSpecs(specs,offset){
+  if(!specs.length)return specs;
+  const start=((Number(offset)||0)%specs.length+specs.length)%specs.length;
+  return specs.slice(start).concat(specs.slice(0,start));
+}
 function stripHtml(html){
   return String(html||'').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,' ').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,' ')
     .replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"')
@@ -74,17 +89,16 @@ export async function runFeedbackCouncil(env,{date=new Date(),reviews=2}={}){
   // carrying the explicit :free contract are admitted. If none is available, skip.
   if(!specs.length)return {skipped:'no_explicitly_free_model'};
   await ensureSchema(env.GROWTH_DB);
-  const dateKey=date.toISOString().slice(0,10), base=dayIndex(date);
-  const count=Math.max(1,Math.min(2,Number(reviews)||2)), stored=[];
-  for(let i=0;i<count;i++){
-    const persona=FEEDBACK_PERSONAS[(base*count+i)%FEEDBACK_PERSONAS.length];
-    const page=PAGES[(base+i)%PAGES.length];
+  const dateKey=date.toISOString().slice(0,10), stored=[];
+  const assignments=councilAssignmentsForDate(date,reviews);
+  for(const assignment of assignments){
+    const {persona,page,modelOffset}=assignment;
     const exists=await env.GROWTH_DB.prepare('SELECT feedback_id FROM maison_synthetic_feedback WHERE run_date=?1 AND persona_id=?2 AND page_key=?3').bind(dateKey,persona.id,page[0]).first();
     if(exists)continue;
     const text=await pageText(page);
     if(!text)continue;
     let result=null,lastError=null;
-    for(const spec of specs){
+    for(const spec of rotateSpecs(specs,modelOffset)){
       try{result=await callZeroCostModel(env,spec,promptFor(persona,page,text));break;}catch(error){lastError=error;}
     }
     if(!result){console.warn('MAISON_FEEDBACK_COUNCIL_NO_FREE_MODEL',lastError?.message||'unknown');continue;}
