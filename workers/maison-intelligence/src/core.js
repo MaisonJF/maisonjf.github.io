@@ -1,3 +1,5 @@
+import { VPC_OCEAN_SIGNALS } from '../../../functions/_lib/vpc-ocean-signals.generated.js';
+
 const TRACKING_PARAMS = new Set([
   'utm_source','utm_medium','utm_campaign','utm_term','utm_content',
   'gclid','fbclid','mc_cid','mc_eid','ref','ref_src'
@@ -7,16 +9,16 @@ export const DISCOVERY_TERRITORY = { key: 'organic_discovery', query: 'free, sca
 
 export const ATELIER_TERRITORY = { key: 'atelier', query: 'transferable mechanisms of excellence in psychology, behaviour, culture, advertising, entertainment, luxury, design, retail, storytelling, UX, virality and brand building that MAISON JF can reinterpret and test without copying expression or identity' };
 
-export const TERRITORIES = [
-  { key: 'relationships', query: 'relationships, loneliness, dating, attachment, communication and emotional disconnection' },
-  { key: 'work', query: 'work, job search, career uncertainty, burnout, workplace frustration and career change' },
-  { key: 'money', query: 'money pressure, cost of living, debt stress, spending decisions and financial uncertainty' },
-  { key: 'head', query: 'decision paralysis, overthinking, uncertainty, life direction and the language people use when they feel stuck' },
-  { key: 'home', query: 'home overwhelm, moving, decluttering, domestic stress, creating safety and feeling at home' },
-  { key: 'small_business', query: 'small-business owners, solo professionals, customer acquisition, visibility, pricing anxiety and operational overwhelm' },
-  { key: 'spirituality', query: 'spiritual practice, tarot, ritual, meaning-making, uncertainty and what people seek from symbolic guidance' },
-  { key: 'self_reconnection', query: 'self-reconnection, identity change, starting over, boundaries, confidence and rebuilding daily life' }
-];
+export const TERRITORIES = VPC_OCEAN_SIGNALS
+  .filter(ocean=>ocean?.id&&!['descoberta-organica-e-reconhecimento-da-maison','atelier-principios-transferiveis-e-dna-maison'].includes(String(ocean.id)))
+  .map(ocean=>({
+    key:String(ocean.id),
+    query:[
+      String(ocean.painLanguage||'').trim(),
+      String(ocean.intent||'').trim(),
+      Array.isArray(ocean.themes)&&ocean.themes.length?`Related language/themes: ${ocean.themes.slice(0,12).join(', ')}`:''
+    ].filter(Boolean).join(' ')
+  }));
 
 export function canonicalizeUrl(value) {
   const url = new URL(String(value).trim());
