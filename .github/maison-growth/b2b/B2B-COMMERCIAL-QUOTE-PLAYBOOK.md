@@ -29,7 +29,7 @@ Referências canónicas do catálogo:
 - MJ-VELA-070 · Vela Aromática 70 g;
 - MJ-OLEO-060 · Óleo de Massagem 60 ml;
 - MJ-NEVOA-020 · Névoa de Ambiente 20 ml;
-- MJ-ESCALDA-150 · Escalda-Pés 150 g.
+- MJ-ESCALDA-280 · Escalda-Pés 280 g.
 
 O preço B2C público não constitui preço grossista nem prova margem disponível para revenda.
 
