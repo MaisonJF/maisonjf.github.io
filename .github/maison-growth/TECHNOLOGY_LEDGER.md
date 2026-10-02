@@ -125,7 +125,7 @@ Maison Semantic Memory is rebuildable. The manual `semantic-sync` profile reads 
 
 Existing-asset-first cannot rely only on A3 solution IDs because the Maison commercial surface already contains physical products, services and canonical digital products that are not necessarily mapped to canonical A3 solutions. A deterministic registry is therefore generated from `data/products.js`, `data/services.js` and the Offer Brain and used as **supporting context**, never as a new transactional source of truth.
 
-The registry currently sees 19 commercial assets: 5 active public physical products, 2 future physical products, 9 services, 1 B2B service and 2 active public digital products (Oráculo and PÁRA DE IGNORAR!). Public `in_stock` is only a catalogue availability signal; it is never interpreted as a counted stock quantity.
+The registry currently sees 20 commercial assets: 6 active public physical products, 2 future physical products, 9 services, 1 B2B service and 2 active public digital products (Oráculo and PÁRA DE IGNORAR!). Public `in_stock` is only a catalogue availability signal; it is never interpreted as a counted stock quantity.
 
 Private operational facts stay UNKNOWN until supplied through the evidence-backed private overlay contract, which is intentionally kept outside git. For physical products, unit cost plus practical replenishment capacity are structural readiness facts; finished-stock quantities are optional timestamped snapshots. Services and digital products use evidence-backed capacity/effort/cost/delivery facts appropriate to their fulfilment model.
 
