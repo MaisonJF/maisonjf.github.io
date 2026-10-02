@@ -237,7 +237,7 @@
     },
     'produto-escalda-pes.html': {
       label: 'Pedir Escalda-Pés · 5 €',
-      message: 'Olá, João. Quero pedir um Escalda-Pés de 150 g por 5 €. Que referências estão disponíveis?',
+      message: 'Olá, João. Quero pedir um Escalda-Pés de 280 g por 5 €. Que referências estão disponíveis?',
       secondHref: '/produtos/',
       secondText: 'Ver Produtos'
     },
