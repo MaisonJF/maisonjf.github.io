@@ -82,7 +82,22 @@ export async function runEditorialGrowth(env,date=new Date()){
 }
 
 export default {
-  async fetch(){return new Response('Not Found',{status:404,headers:{'Cache-Control':'no-store'}});},
+  async fetch(request,env){
+    const url=new URL(request.url);
+    const token=String(request.headers.get('authorization')||'').replace(/^Bearer\s+/i,'').trim();
+    if(url.pathname!=='/__editorial_growth_test'||!env.EDITORIAL_GROWTH_TEST_TOKEN||token!==env.EDITORIAL_GROWTH_TEST_TOKEN){
+      return new Response('Not Found',{status:404,headers:{'Cache-Control':'no-store'}});
+    }
+    const when=new Date();
+    const mode=String(url.searchParams.get('mode')||'editorial');
+    when.setUTCHours(mode==='foundry'?18:12,0,0,0);
+    try{
+      const result=await runEditorialGrowth(env,when);
+      return Response.json(result,{headers:{'Cache-Control':'no-store'}});
+    }catch(error){
+      return Response.json({error:String(error?.message||error)},{status:500,headers:{'Cache-Control':'no-store'}});
+    }
+  },
   async scheduled(controller,env,ctx){
     const when=new Date(controller.scheduledTime);
     ctx.waitUntil(runEditorialGrowth(env,when).then(result=>{
