@@ -1,4 +1,5 @@
 import { ingestVaultCandidate } from './vault_candidates.js';
+import { loadActiveFeedbackLearning } from './feedback_learning.js';
 
 const MAX_QUESTIONS=4;
 const MAX_ORACLE_BLOCKS=2;
@@ -6,10 +7,13 @@ const MAX_ORACLE_BLOCKS=2;
 function clean(value,max=2400){
   return String(value??'').replace(/\s+/g,' ').trim().slice(0,max);
 }
-function candidatePrompt({oceanContext,brainAlert}){
+function candidatePrompt({oceanContext,brainAlert,learningPatterns=[]}){
   const ocean=clean(oceanContext?.oceanKey,160);
   const summary=clean(brainAlert?.response_excerpt,2400);
   const terms=(oceanContext?.matchedTerms||[]).map(x=>clean(x,100)).filter(Boolean).slice(0,8);
+  const learning=(learningPatterns||[]).slice(0,8).map((p,i)=>
+    `${i+1}. [${p.scope||'global'}] ${clean(p.title,180)} → ${clean(p.guidance,700)} (confiança ${Number(p.confidence)||0}; repetição ${Number(p.occurrence_count)||1})`
+  );
   return [
     'LABORATÓRIO EDITORIAL PRIVADO MAISON JF®. Produz apenas candidatos; nunca aproves, atives nem publiques.',
     'ESCREVE TODO O CONTEÚDO HUMANO EM PORTUGUÊS EUROPEU (PT-PT). Isto inclui text, title, theme, territory, pain_family, subterritory e emotional_function. Não devolvas inglês nem PT-BR. Traduz mentalmente antes de devolver o JSON.',
@@ -19,6 +23,10 @@ function candidatePrompt({oceanContext,brainAlert}){
     `Ocean key: ${ocean}`,
     `Observed public-language summary: ${summary}`,
     `Useful theme terms: ${terms.join(' | ')||'none'}`,
+    '',
+    'APRENDIZAGEM EDITORIAL ATIVA (hipóteses vindas de contraditório sintético; não são factos nem ordens de publicação):',
+    ...(learning.length?learning:['nenhuma aprendizagem ativa ainda']),
+    'Usa esta aprendizagem apenas quando for relevante ao Ocean atual. Não sacrifiques identidade MAISON por uma regra genérica e não inventes prova que não esteja no sinal.',
     '',
     'questions: devolve exatamente 4 perguntas genuinamente distintas quando o sinal o suportar; nunca enchas com sinónimos. Usa momentos/contextos e estágios diferentes. Campos: theme, text, stage, exposure, intensity, target, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness, subthemes.',
     'A pergunta deve ser feita diretamente à pessoa e fazê-la reconhecer-se; não peças conselhos, estratégias ou ajuda do tipo “como posso…?”. Evita linguagem clínica, terapêutica ou de autoajuda genérica.',
@@ -76,7 +84,8 @@ function publicResult(result){
 export async function generateEditorialCandidates(env,{caller,oceanContext,brainAlert,providerId='openrouter'}={}){
   if(typeof caller!=='function')throw new Error('editorial_candidate_provider_missing');
   if(!oceanContext?.oceanKey||!brainAlert) return {called:false,stored:0,duplicates:0,rejected:0,results:[],usage:null};
-  const generated=await caller(env,candidatePrompt({oceanContext,brainAlert}));
+  const learningPatterns=await loadActiveFeedbackLearning(env,{limit:8});
+  const generated=await caller(env,candidatePrompt({oceanContext,brainAlert,learningPatterns}));
   const payload=parseJsonObject(generated?.text);
   const questions=questionRows(payload.questions,MAX_QUESTIONS);
   const oracleBlocks=rows(payload.oracle_blocks,MAX_ORACLE_BLOCKS);
