@@ -6,6 +6,13 @@ Supported media roles: hero, packshot, detail, texture, ritual, use, ambience, p
 */
 window.MAISON_PRODUCTS=[
 {
+ slug:'maison-jf-bundles',sku:'MJ-BUNDLES',name:'Maison JF Bundles',category:'Casa',price:10,priceNote:'Desde 10 €',currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/maison-jf-bundles.webp.webp',
+ description:'Diferentes gestos da Maison reunidos num só ritual, para oferecer ou para seres tu a aproveitar.',
+ media:[{role:'hero',src:'../images/maison-jf-bundles.webp.webp',alt:'Maison JF Bundles — Essencial, Corpo & Alma e Completo',aspect:'portrait',editorial:true}],
+ ritual:{title:'Porque cuidas de tanta coisa. Também podes ser uma delas.',text:'Escalda-Pés, aroma, toque e luz combinam-se de formas diferentes em cada seleção. Escolhe o teu pelo momento, não pela quantidade.'},
+ cta:'Descobrir os Bundles'
+},
+{
  slug:'vela-vidro',sku:'MJ-VELA-170',name:'Vela Aromática',size:'170 g',category:'Casa',price:14,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/vela-vidro/vela-170g-produto.webp',
  description:'Luz e aroma para mudar o ritmo de um espaço.',
  media:[{role:'hero',src:'../images/products/vela-vidro/vela-170g-acesa.webp',alt:'Vela Aromática MAISON JF 170 g acesa',aspect:'landscape',editorial:true},{role:'ritual',src:'../images/products/vela-vidro/vela-170g-fumo.webp',alt:'Vela Aromática MAISON JF 170 g após apagar, com fumo',aspect:'square',editorial:true},{role:'ambience',src:'../images/products/vela-vidro/vela-170g-universo-olfativo.webp',alt:'Universo olfativo da Vela Aromática MAISON JF',aspect:'landscape',editorial:true},{role:'packshot',src:'../images/products/vela-vidro/vela-170g-produto.webp',alt:'Vela Aromática MAISON JF 170 g',aspect:'portrait',editorial:true}],
