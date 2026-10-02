@@ -15,14 +15,16 @@ const context={
   }]
 };
 
-test('Foundry prompt is candidate-only and existing-assets first',()=>{
+test('Foundry prompt is candidate-only, PT-PT and existing-assets first',()=>{
   const prompt=buildExpansionPrompt({spec:{key:'openrouter:test:free',providerId:'openrouter',modelId:'test:free'},context});
-  assert.match(prompt,/PRIVATE EXPANSION FOUNDRY/i);
-  assert.match(prompt,/Never approve, publish, price, launch/i);
-  assert.match(prompt,/existing Maison assets/i);
+  assert.match(prompt,/FOUNDRY PRIVADA DE EXPANSÃO/i);
+  assert.match(prompt,/nunca aproves, publiques, fixes preços, lances/i);
+  assert.match(prompt,/PORTUGUÊS EUROPEU/i);
+  assert.match(prompt,/REUTILIZA PRIMEIRO/i);
+  assert.match(prompt,/Não proponhas “coaching”/i);
   assert.match(prompt,/reel/i);
   assert.match(prompt,/physical_product/i);
-  assert.match(prompt,/human review/i);
+  assert.match(prompt,/revisão humana/i);
 });
 
 test('Foundry parser accepts strict candidate envelope',()=>{

@@ -36,10 +36,10 @@ function modelLens(spec){
   return ['daily_content','commercial_reuse','editorial_experience','mixed_growth'][seed];
 }
 function lensInstruction(lens){
-  if(lens==='daily_content')return 'Prioritise daily public content: at least one reel and one post. Add a story, carousel or video_script only when distinct. Hooks must be concrete and immediately usable.';
-  if(lens==='commercial_reuse')return 'Prioritise commercial expansion using existing assets first: bundles, physical/digital products, services, seasonal offers, B2B or campaigns. Avoid ideas that require major new stock or paid infrastructure unless evidence is unusually strong.';
-  if(lens==='editorial_experience')return 'Prioritise editorial and experience expansion: questions, Oracle blocks, tests, Farol paths, ebooks, digital products and experiences. Do not recycle paid question bodies or pretend certainty.';
-  return 'Produce a balanced growth set: one content candidate, one commercial candidate, one experience/editorial candidate and one experiment or campaign when useful.';
+  if(lens==='daily_content')return 'Prioriza conteúdo público diário: pelo menos um reel e um post. Acrescenta story, carousel ou video_script apenas quando forem realmente distintos. Os hooks têm de ser concretos e imediatamente utilizáveis.';
+  if(lens==='commercial_reuse')return 'Prioriza expansão comercial usando PRIMEIRO ativos existentes: bundles, digitais, serviços existentes, ofertas sazonais, B2B ou campanhas. Só propõe novo produto físico se explicares por que razão nenhum ativo existente resolve a oportunidade.';
+  if(lens==='editorial_experience')return 'Prioriza expansão editorial e de experiência: questions, Oracle blocks, tests, Farol paths, ebooks, digitais e experiências. Não recicles corpos pagos nem finjas certezas.';
+  return 'Produz um conjunto equilibrado: um candidato de conteúdo, um comercial, um editorial/experiência e um experimento/campanha quando útil.';
 }
 
 export async function loadDailyExpansionContext(env,{limit=12}={}){
@@ -77,26 +77,29 @@ export function buildExpansionPrompt({spec,context}={}){
     `${i+1}. [${s.ocean_key}] relevance=${s.relevance_score} commercial=${s.commercial_score}; ${s.summary}; themes=${(s.themes||[]).join(', ')}`
   );
   return [
-    'MAISON JF® PRIVATE EXPANSION FOUNDRY. Think boldly, but create candidates only. Never approve, publish, price, launch, contact anyone or change the site.',
-    'Everything you return goes to a private D1 Candidate Inbox with human review required.',
-    'Use original European Portuguese. No personal data, medical claims, supernatural certainty, manipulative urgency or invented evidence.',
-    'Prefer what can reuse or recombine existing Maison assets before proposing new stock, suppliers, tools or paid acquisition.',
-    'Do not merely paraphrase the signals. Convert them into useful, distinct opportunities that feel like MAISON JF.',
-    `Your assigned lens: ${lens}. ${lensInstruction(lens)}`,
-    'Current Maison assets: '+(context?.existing_assets||ASSETS).join(' | '),
-    'Recent Ocean/Brain signals:',
-    ...(signalLines.length?signalLines:['No recent signal available. Use the existing Maison universe and propose evergreen candidates.']),
+    'FOUNDRY PRIVADA DE EXPANSÃO MAISON JF®. Pensa com ambição, mas cria apenas candidatos. Nunca aproves, publiques, fixes preços, lances, contactes alguém ou alteres o site.',
+    'Tudo o que devolves entra num Candidate Inbox D1 privado e exige revisão humana.',
+    'ESCREVE TODO O CONTEÚDO HUMANO EM PORTUGUÊS EUROPEU (PT-PT). Isto inclui title, body, rationale, territory, hook, angle, CTA e texto dentro de payload. Não devolvas inglês nem PT-BR.',
+    'Sem dados pessoais, alegações médicas, certezas sobrenaturais, urgência manipuladora ou evidência inventada.',
+    'REUTILIZA PRIMEIRO o ecossistema MAISON existente. Antes de inventar um produto novo, procura nova utilização, bundle, ponte digital, cross-sell, upsell, recompra, recorrência, presente, B2B ou experiência usando ativos já existentes.',
+    'Não proponhas “coaching”, “assessoria”, “consultoria genérica” ou “kit de autoconhecimento” como novidade. Se propuseres um bundle/kit, lista componentes MAISON existentes concretos. Se propuseres serviço, parte de Tarot, mentoria, Serviços e Presença ou B2B já existentes.',
+    'Novo produto físico só quando houver uma lacuna material que os ativos atuais não consigam responder; explica essa lacuna no rationale.',
+    'Não parafraseies apenas os sinais. Converte-os em oportunidades distintas, concretas e reconhecivelmente MAISON JF.',
+    `Lente atribuída: ${lens}. ${lensInstruction(lens)}`,
+    'Ativos MAISON atuais: '+(context?.existing_assets||ASSETS).join(' | '),
+    'Sinais Ocean/Brain recentes:',
+    ...(signalLines.length?signalLines:['Não há sinal recente. Usa o universo MAISON existente e propõe candidatos evergreen.']),
     '',
-    'Return STRICT JSON only with this exact top-level shape: {"candidates":[]}. No Markdown.',
-    'Return 3 to 6 candidates. Each candidate uses: candidate_type, title, body, rationale, territory, related_assets, evidence_refs, novelty_score, maison_fit_score, feasibility_score, demand_score, commercial_score, reuse_existing_score, payload.',
-    'Allowed candidate_type: question, oracle_block, test, farol_path, reel, post, story, carousel, video_script, physical_product, digital_product, bundle, service, experience, ebook, campaign, b2b, seasonal_offer, experiment.',
-    'Scores are integers 0-100 and are hypotheses, not facts.',
-    'For reel/post/story/carousel/video_script, payload may include hook, angle, objective, CTA, platform and reuse_from.',
-    'For products/bundles/services/experiences, payload may include components, estimated_effort, price_hypothesis_range_eur, why_now and validation_test. Price is a hypothesis only.',
-    'For question, payload must include theme, stage, exposure, target, intensity and may include subthemes, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness.',
-    'For oracle_block, payload must include territory, role, intensity, tone, rarity and may include tags, pain_family, subterritory, emotional_function.',
-    'For test/farol_path, explain what human tension it helps recognise and what existing Maison destination it could lead to.',
-    'Daily content should be useful even without selling. Commercial candidates should state how they reuse existing assets whenever possible.'
+    'Devolve APENAS JSON válido com esta forma de topo: {"candidates":[]}. Sem Markdown.',
+    'Devolve 3 a 6 candidatos. Cada candidato usa: candidate_type, title, body, rationale, territory, related_assets, evidence_refs, novelty_score, maison_fit_score, feasibility_score, demand_score, commercial_score, reuse_existing_score, payload.',
+    'candidate_type permitido: question, oracle_block, test, farol_path, reel, post, story, carousel, video_script, physical_product, digital_product, bundle, service, experience, ebook, campaign, b2b, seasonal_offer, experiment.',
+    'Os scores são inteiros 0-100 e são hipóteses, não factos.',
+    'Para reel/post/story/carousel/video_script, payload pode incluir hook, angle, objective, CTA, platform e reuse_from.',
+    'Para produtos/bundles/serviços/experiências, payload pode incluir components, estimated_effort, price_hypothesis_range_eur, why_now e validation_test. O preço é só hipótese.',
+    'Para question, payload tem de incluir theme, stage, exposure, target, intensity e pode incluir subthemes, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness.',
+    'Para oracle_block, payload tem de incluir territory, role, intensity, tone, rarity e pode incluir tags, pain_family, subterritory, emotional_function.',
+    'Para test/farol_path, explica que tensão humana ajuda a reconhecer e para que destino MAISON já existente pode encaminhar.',
+    'Conteúdo diário deve ser útil mesmo sem venda. Candidatos comerciais devem declarar concretamente como reutilizam ativos MAISON existentes.'
   ].join('\n');
 }
 

@@ -11,20 +11,22 @@ function candidatePrompt({oceanContext,brainAlert}){
   const summary=clean(brainAlert?.response_excerpt,2400);
   const terms=(oceanContext?.matchedTerms||[]).map(x=>clean(x,100)).filter(Boolean).slice(0,8);
   return [
-    'MAISON JF® PRIVATE EDITORIAL LAB. Produce candidate material only; never approve, activate or publish it.',
-    'Write original European Portuguese. Do not quote sources, include names/usernames, personal confessions, contact details, medical diagnosis, supernatural certainty, false urgency or manipulative claims.',
-    'The material will enter a private D1 Vault as candidate and will still require human/editorial review.',
-    'Return STRICT JSON only, with exactly this top-level shape: {"questions":[],"oracle_blocks":[]}. No Markdown or commentary.',
+    'LABORATÓRIO EDITORIAL PRIVADO MAISON JF®. Produz apenas candidatos; nunca aproves, atives nem publiques.',
+    'ESCREVE TODO O CONTEÚDO HUMANO EM PORTUGUÊS EUROPEU (PT-PT). Isto inclui text, title, theme, territory, pain_family, subterritory e emotional_function. Não devolvas inglês nem PT-BR. Traduz mentalmente antes de devolver o JSON.',
+    'Não cites fontes nem incluas nomes/usernames, confissões pessoais, contactos, diagnóstico médico, certezas sobrenaturais, urgência falsa ou manipulação.',
+    'O material entra num Vault D1 privado como candidate e continua sujeito a revisão humana/editorial.',
+    'Devolve APENAS JSON válido, com exatamente esta forma de topo: {"questions":[],"oracle_blocks":[]}. Sem Markdown nem comentário.',
     `Ocean key: ${ocean}`,
     `Observed public-language summary: ${summary}`,
     `Useful theme terms: ${terms.join(' | ')||'none'}`,
     '',
-    'questions: return exactly 4 genuinely distinct questions when the signal supports them; never pad with synonyms. Prefer different moments/contexts and different stages. Use fields: theme, text, stage, exposure, intensity, target, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness, subthemes.',
-    'Allowed stage: open, recognize, deepen, touch, close, signature. exposure: paid or public_social. intensity: integer 1-4. target: self, partner, both, prediction. cognitive_load, vulnerability, conflict_potential and playfulness MUST be integers 1-5, never words.',
-    'Among those 4 questions, include at least 2 paid questions for PÁRA DE IGNORAR! and at least 1 separate public_social question for a free Volta Para Casa test when safe and supported. Never reveal or recycle a paid body into the free question.',
-    'oracle_blocks: return exactly 2 original generic reflection blocks with different useful roles when the signal supports them; never a final personalized reading. Use fields: territory, role, title, text, intensity, tone, rarity, pain_family, subterritory, emotional_function, tags.',
-    'Allowed Oracle role: opening, recognition, tension, counterpoint, reframe, movement, close. intensity: 1-4. tone: gentle, direct, intimate, clear, confrontational. rarity: common, uncommon, rare.',
-    'Keep every item useful on its own and recognizably MAISON: direct, intimate, elegant, simple, not clinical.'
+    'questions: devolve exatamente 4 perguntas genuinamente distintas quando o sinal o suportar; nunca enchas com sinónimos. Usa momentos/contextos e estágios diferentes. Campos: theme, text, stage, exposure, intensity, target, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness, subthemes.',
+    'A pergunta deve ser feita diretamente à pessoa e fazê-la reconhecer-se; não peças conselhos, estratégias ou ajuda do tipo “como posso…?”. Evita linguagem clínica, terapêutica ou de autoajuda genérica.',
+    'stage permitido: open, recognize, deepen, touch, close, signature. exposure: paid ou public_social. intensity: inteiro 1-4. target: self, partner, both, prediction. cognitive_load, vulnerability, conflict_potential e playfulness TÊM de ser inteiros 1-5, nunca palavras.',
+    'Das 4 perguntas, inclui pelo menos 2 paid para PÁRA DE IGNORAR! e pelo menos 1 public_social separada para um teste Volta Para Casa, quando for seguro e sustentado. Nunca recicles uma pergunta paga no gratuito.',
+    'oracle_blocks: devolve exatamente 2 blocos genéricos de reflexão, originais e com papéis diferentes quando o sinal o suportar; nunca uma leitura personalizada final. Campos: territory, role, title, text, intensity, tone, rarity, pain_family, subterritory, emotional_function, tags.',
+    'role permitido: opening, recognition, tension, counterpoint, reframe, movement, close. intensity: 1-4. tone: gentle, direct, intimate, clear, confrontational. rarity: common, uncommon, rare.',
+    'Cada item deve funcionar sozinho e soar reconhecivelmente MAISON: íntimo, direto, elegante, simples e humano.'
   ].join('\n');
 }
 function parseJsonObject(raw){

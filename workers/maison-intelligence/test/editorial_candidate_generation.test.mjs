@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { generateEditorialCandidates, parseJsonObject } from '../src/editorial_candidate_generation.js';
+import { generateEditorialCandidates, candidatePrompt, parseJsonObject } from '../src/editorial_candidate_generation.js';
 
 class Statement{
   constructor(db,sql){this.db=db;this.sql=sql;this.params=[];}
@@ -121,6 +121,14 @@ test('model drift is normalized and free-test coverage survives the four-questio
   for(const batch of db.batches){
     for(const index of [17,18,19,20]) assert.equal(typeof batch[0].params[index],'number');
   }
+});
+
+test('editorial prompt requires PT-PT and direct recognition questions',()=>{
+  const prompt=candidatePrompt({oceanContext,brainAlert});
+  assert.match(prompt,/PORTUGUÊS EUROPEU/i);
+  assert.match(prompt,/não peças conselhos, estratégias ou ajuda/i);
+  assert.match(prompt,/public_social/i);
+  assert.match(prompt,/PÁRA DE IGNORAR!/i);
 });
 
 test('candidate parser accepts fenced JSON but rejects missing JSON',()=>{
