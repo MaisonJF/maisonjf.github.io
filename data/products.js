@@ -34,9 +34,9 @@ window.MAISON_PRODUCTS=[
  cta:'Quero escolher'
 },
 {
- slug:'escalda-pes',sku:'MJ-ESCALDA-280',name:'Escalda-Pés',size:'280 g',category:'Corpo',price:9.5,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/escalda-pes/hero.webp',
+ slug:'escalda-pes',sku:'MJ-ESCALDA-280',name:'Escalda-Pés',size:'280 g',category:'Corpo',price:9.5,currency:'EUR',availability:'in_stock',condition:'new',productImage:'../images/products/escalda-pes/01-hero-packshot-editorial.webp',
  description:'Sais para escalda-pés com pétalas secas de jasmim e notas de bourbon, limão e âmbar oriental, para transformar a pausa num ritual sensorial.',
- media:[{role:'hero',src:'../images/products/escalda-pes/hero.webp',alt:'Escalda-Pés MAISON JF, fotografia editorial',aspect:'portrait',editorial:true},{role:'detail',src:'../images/products/escalda-pes/detail.webp',alt:'Detalhe botânico do Escalda-Pés MAISON JF',aspect:'portrait',editorial:true},{role:'ritual',src:'../images/products/escalda-pes/ritual.webp',alt:'Ritual de Escalda-Pés MAISON JF',aspect:'portrait',editorial:true}],
+ media:[{role:'hero',src:'../images/products/escalda-pes/01-hero-packshot-editorial.webp',alt:'Escalda-Pés MAISON JF, fotografia editorial de produto',aspect:'portrait',editorial:true},{role:'texture',src:'../images/products/escalda-pes/02-macro-materia.webp',alt:'Textura do Escalda-Pés MAISON JF com sal grosso e pétalas secas',aspect:'portrait',editorial:true},{role:'detail',src:'../images/products/escalda-pes/03-abertura-saco.webp',alt:'Saco aberto do Escalda-Pés MAISON JF com mistura visível',aspect:'portrait',editorial:true},{role:'ritual',src:'../images/products/escalda-pes/04-pour-ritual.webp',alt:'Ritual de Escalda-Pés MAISON JF a ser vertido para a água',aspect:'portrait',editorial:true},{role:'ambience',src:'../images/products/escalda-pes/05-experiencia-desejo.webp',alt:'Experiência de Escalda-Pés MAISON JF em bacia com água',aspect:'portrait',editorial:true}],
  ritual:{title:'Não compliques a pausa.',text:'Água morna, aroma e alguns minutos em que ninguém te pede nada.'},
  cta:'Quero criar este momento'
 }
