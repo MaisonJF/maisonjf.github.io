@@ -425,9 +425,11 @@ export async function runFeedbackLearning(env,{date=new Date(),feedbackLimit=12}
   const existing=await loadExistingPatterns(env.GROWTH_DB,20);
   const inputHash=await sha256(JSON.stringify(packet.map(x=>[x.feedback_id,x.persona_id,x.page_key])));
 
-  const duplicate=await env.GROWTH_DB.prepare('SELECT learning_run_id,status FROM maison_feedback_learning_runs WHERE input_hash=?1').bind(inputHash).first();
+  const duplicate=await env.GROWTH_DB.prepare('SELECT learning_run_id,status,stored_patterns FROM maison_feedback_learning_runs WHERE input_hash=?1').bind(inputHash).first();
   if(duplicate){
-    if(duplicate.status==='started'){
+    const recoverable=duplicate.status==='started'
+      || (duplicate.status==='completed'&&Number(duplicate.stored_patterns||0)===0);
+    if(recoverable){
       const rows=await env.GROWTH_DB.prepare(`
         SELECT role,provider_id,model_id,payload_json
           FROM maison_feedback_learning_reviews
@@ -451,7 +453,9 @@ export async function runFeedbackLearning(env,{date=new Date(),feedbackLimit=12}
           resumed:true
         });
       }
-      return {skipped:'feedback_learning_in_progress',learning_run_id:duplicate.learning_run_id,status:duplicate.status};
+      if(duplicate.status==='started'){
+        return {skipped:'feedback_learning_in_progress',learning_run_id:duplicate.learning_run_id,status:duplicate.status};
+      }
     }
     return {skipped:'feedback_learning_duplicate',learning_run_id:duplicate.learning_run_id,status:duplicate.status};
   }
