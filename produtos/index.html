@@ -45,7 +45,7 @@
       el.className='product'+(catalogue?'':' product--no-media');
       const thumb=CATALOGUE_THUMBS[product.slug];
       const media=catalogue?`<div class="product__media"><img src="${thumb?.src||catalogue.src}"${thumb?` srcset="${thumb.srcset}" sizes="(max-width:520px) 100vw, (max-width:800px) 50vw, 33vw"`:''} alt="${catalogue.alt||product.name}" loading="lazy" decoding="async" fetchpriority="low"></div>`:'';
-      const price=formatPrice(product);
+      const price=product.priceNote||formatPrice(product);
       el.innerHTML=`${media}<div class="product__body"><small>${product.categoryLabel||product.category}</small><h2>${product.name}${product.size?` <span style="font-size:.45em">${product.size}</span>`:''}</h2>${price?`<div class="price">${price}</div>`:''}<p>${product.description}</p><div class="product__actions"><a class="text-link" data-product="${product.slug}" href="./${encodeURIComponent(product.slug)}/">${product.cta||({en:'Discover',es:'Descubrir','pt-BR':'Descobrir'}[document.documentElement.lang]||'Descobrir')}</a></div></div>`;
       root.append(el);
     });
