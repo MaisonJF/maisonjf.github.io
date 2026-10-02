@@ -40,20 +40,25 @@ export async function callCloudflareWorkersAI(env, prompt) {
   if (!env.AI || !env.WORKERS_AI_MODEL) throw new Error('cloudflare_workers_ai_not_configured');
   const data = await env.AI.run(env.WORKERS_AI_MODEL, {
     prompt,
-    max_tokens: 1600
+    max_tokens: 1800,
+    temperature: 0.2,
+    response_format: { type: 'json_object' }
   });
   const text =
     (typeof data === 'string' && data) ||
     (typeof data?.response === 'string' && data.response) ||
     (typeof data?.result?.response === 'string' && data.result.response) ||
+    (typeof data?.choices?.[0]?.message?.content === 'string' && data.choices[0].message.content) ||
+    (typeof data?.choices?.[0]?.text === 'string' && data.choices[0].text) ||
     '';
+  if (!text.trim()) throw new Error('cloudflare_workers_ai_empty_response');
   return {
     providerId: 'cloudflare_workers_ai',
     modelId: env.WORKERS_AI_MODEL,
     sourceClass: 'ai_api',
     text,
     citations: [],
-    requestId: null,
+    requestId: data?.id ?? null,
     usage: data?.usage ?? null
   };
 }
