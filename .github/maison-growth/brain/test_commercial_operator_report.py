@@ -15,7 +15,7 @@ class CommercialOperatorReportTests(unittest.TestCase):
         self.assertFalse(report["overlay_loaded"])
         self.assertTrue(report["attention_score_is_not_profit_score"])
         self.assertFalse(any(report["authority"].values()))
-        self.assertEqual(report["summary"]["ranked_assets"],14)
+        self.assertEqual(report["summary"]["ranked_assets"],15)
         self.assertEqual(report["summary"]["operationally_complete_assets"],0)
         self.assertEqual(report["summary"]["unit_economics_known_assets"],0)
         self.assertEqual(report["summary"]["manual_validation_ready_assets"],0)
