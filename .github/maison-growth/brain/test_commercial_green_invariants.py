@@ -91,12 +91,12 @@ class CommercialGreenInvariantTests(unittest.TestCase):
         registry=json.loads((ROOT/"commercial-assets.generated.json").read_text(encoding="utf-8"))
         ledger=json.loads((GROWTH/"technology-ledger.json").read_text(encoding="utf-8"))
         entry=next(x for x in ledger["entries"] if x["id"]=="maison-commercial-assets-context")
-        self.assertEqual(len(registry["assets"]),19)
+        self.assertEqual(len(registry["assets"]),20)
         self.assertIn("functions/_lib/offer-brain.js",entry["depends_on"])
-        self.assertIn("19 commercial assets",entry["notes"])
+        self.assertIn("20 commercial assets",entry["notes"])
         self.assertIn("finished stock is an optional volatile snapshot",entry["notes"])
         markdown=(GROWTH/"TECHNOLOGY_LEDGER.md").read_text(encoding="utf-8")
-        self.assertIn("19 commercial assets",markdown)
+        self.assertIn("20 commercial assets",markdown)
         self.assertNotIn("17 catalogue assets",markdown)
 
     def test_status_and_runbook_do_not_regress_to_old_stock_gate_language(self):
