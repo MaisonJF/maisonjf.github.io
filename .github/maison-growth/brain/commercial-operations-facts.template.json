@@ -14,7 +14,7 @@
   "assets": [
     {
       "asset_ref": "catalog:product:escalda-pes",
-      "sku": "MJ-ESCALDA-150",
+      "sku": "MJ-ESCALDA-280",
       "name": "Escalda-Pés",
       "source": "manual_operations_review",
       "operational": {
