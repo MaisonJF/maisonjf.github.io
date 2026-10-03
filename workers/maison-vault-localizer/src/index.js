@@ -1,6 +1,7 @@
 const LOCALES=['pt-BR','en','es'];
+const LOCALIZATION_PRIORITY=['en','es','pt-BR'];
 const QUALITY_VERSION='vault-localizer-v1';
-const VPC_QUALITY_VERSION='vpc-public-localizer-v1';
+const VPC_QUALITY_VERSION='vpc-public-localizer-v2';
 
 function enabled(value){return String(value??'').toLowerCase()==='true';}
 function clamp(value,fallback,min,max){
@@ -502,7 +503,7 @@ export default {
   async scheduled(controller,env,ctx){
     ctx.waitUntil((async()=>{
       const results=[];
-      for(const locale of LOCALES){
+      for(const locale of LOCALIZATION_PRIORITY){
         try{
           const vpc=await runVpcRounds(env,locale);
           const backfill=await runQuestionBackfill(env,locale);
