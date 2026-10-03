@@ -185,6 +185,9 @@ function localizeAnchorUrl(value,sourcePath,locale){
     const resolved=new URL(value,base);
     if(resolved.origin!==ORIGIN)return value;
     if(resolved.pathname.startsWith('/api/'))return resolved.pathname+resolved.search+resolved.hash;
+    // Media/download anchors are assets, not localized pages. Keep them on the
+    // canonical root so /en/, /es/ and /pt-br/ never manufacture /<locale>/images/…
+    if(isAssetLike(resolved.pathname))return resolved.pathname+resolved.search+resolved.hash;
     if(!hasLocalizedSiteCoverage(resolved.pathname))return resolved.pathname+resolved.search+resolved.hash;
     return localizedPath(resolved.pathname,locale)+resolved.search+resolved.hash;
   }catch(_){
@@ -192,11 +195,32 @@ function localizeAnchorUrl(value,sourcePath,locale){
   }
 }
 
+function rewriteSrcset(value,sourcePath,locale){
+  if(!value)return value;
+  return String(value).split(',').map(candidate=>{
+    const item=candidate.trim();
+    if(!item)return item;
+    const match=item.match(/^(\S+)(\s+.+)?$/);
+    if(!match)return item;
+    const next=stripLocaleFromAssetUrl(match[1],sourcePath,locale);
+    return next+(match[2]||'');
+  }).join(', ');
+}
+
 class AssetHandler{
   constructor(attr,sourcePath,locale){this.attr=attr;this.sourcePath=sourcePath;this.locale=locale}
   element(el){
     const value=el.getAttribute(this.attr);
     const next=stripLocaleFromAssetUrl(value,this.sourcePath,this.locale);
+    if(next&&next!==value)el.setAttribute(this.attr,next);
+  }
+}
+
+class SrcsetHandler{
+  constructor(attr,sourcePath,locale){this.attr=attr;this.sourcePath=sourcePath;this.locale=locale}
+  element(el){
+    const value=el.getAttribute(this.attr);
+    const next=rewriteSrcset(value,this.sourcePath,this.locale);
     if(next&&next!==value)el.setAttribute(this.attr,next);
   }
 }
@@ -256,9 +280,14 @@ export async function serveLocalizedPage(context,locale){
     .on('form[action]',new FormHandler(sourceCanonicalPath,locale))
     .on('script[src]',new AssetHandler('src',sourceCanonicalPath,locale))
     .on('img[src]',new AssetHandler('src',sourceCanonicalPath,locale))
+    .on('img[srcset]',new SrcsetHandler('srcset',sourceCanonicalPath,locale))
+    .on('img[data-full]',new AssetHandler('data-full',sourceCanonicalPath,locale))
     .on('source[src]',new AssetHandler('src',sourceCanonicalPath,locale))
+    .on('source[srcset]',new SrcsetHandler('srcset',sourceCanonicalPath,locale))
+    .on('video[poster]',new AssetHandler('poster',sourceCanonicalPath,locale))
     .on('link[rel="stylesheet"][href]',new AssetHandler('href',sourceCanonicalPath,locale))
     .on('link[rel="preload"][href]',new AssetHandler('href',sourceCanonicalPath,locale))
+    .on('link[rel="preload"][imagesrcset]',new SrcsetHandler('imagesrcset',sourceCanonicalPath,locale))
     .on('link[rel="icon"][href]',new AssetHandler('href',sourceCanonicalPath,locale))
     .transform(response);
 }
