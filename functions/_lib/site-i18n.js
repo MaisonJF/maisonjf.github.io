@@ -90,6 +90,9 @@ const COMMON={
     'Condições':'Condições',
     'Voltar':'Voltar',
     'Fechar ×':'Fechar ×',
+    'Homem num refúgio costeiro MAISON JF, à noite, com o Farol sobre o oceano':'Homem em um refúgio costeiro MAISON JF, à noite, com o Farol sobre o oceano',
+    'Escritório contemporâneo e editorial MAISON JF para profissionais':'Escritório contemporâneo e editorial MAISON JF para profissionais',
+    'Farol nocturno MAISON JF sobre o oceano':'Farol noturno MAISON JF sobre o oceano',
     'Marca registada na União Europeia':'Marca registrada na União Europeia',
     'Todos os direitos reservados.':'Todos os direitos reservados.'
   },
@@ -126,6 +129,9 @@ const COMMON={
     'Recomeçar':'Start again',
     'Fechar ×':'Close ×',
     'Informação útil':'Useful information',
+    'Homem num refúgio costeiro MAISON JF, à noite, com o Farol sobre o oceano':'Man in a MAISON JF coastal retreat at night, with the Lighthouse over the ocean',
+    'Escritório contemporâneo e editorial MAISON JF para profissionais':'Contemporary MAISON JF editorial office for professionals',
+    'Farol nocturno MAISON JF sobre o oceano':'MAISON JF nighttime lighthouse over the ocean',
     'Marca registada na União Europeia':'Registered trademark in the European Union',
     'Todos os direitos reservados.':'All rights reserved.'
   },
@@ -161,6 +167,9 @@ const COMMON={
     'Recomeçar':'Empezar de nuevo',
     'Fechar ×':'Cerrar ×',
     'Informação útil':'Información útil',
+    'Homem num refúgio costeiro MAISON JF, à noite, com o Farol sobre o oceano':'Hombre en un refugio costero MAISON JF, de noche, con el Faro sobre el océano',
+    'Escritório contemporâneo e editorial MAISON JF para profissionais':'Oficina editorial contemporánea MAISON JF para profesionales',
+    'Farol nocturno MAISON JF sobre o oceano':'Faro nocturno MAISON JF sobre el océano',
     'Marca registada na União Europeia':'Marca registrada en la Unión Europea',
     'Todos os direitos reservados.':'Todos los derechos reservados.'
   }
@@ -216,8 +225,6 @@ const HOME={
     'Já sei o que procuro.':'I already know what I am looking for.',
     'As quatro portas da Maison':'The four doors of the Maison',
     'Escolhe uma porta':'Choose a door',
-    'Homem num refúgio costeiro MAISON JF, à noite, com o Farol sobre o oceano':'Man in a MAISON JF coastal retreat at night, with the Lighthouse over the ocean',
-    'Escritório contemporâneo e editorial MAISON JF para profissionais':'Contemporary MAISON JF editorial office for professionals',
     'Quero voltar a gostar de chegar a casa.':'I want to enjoy coming home again.',
     'O meu corpo está a pedir que eu pare.':'My body is asking me to stop.',
     'Preciso de perceber o que fazer com isto.':'I need to understand what to do with this.',
