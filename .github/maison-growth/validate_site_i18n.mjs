@@ -37,14 +37,24 @@ assert(es.includes('Productos'),'common_es_translation_missing');
 
 const br=translateMaisonHtml(home,'pt-BR','/');
 assert(br.includes('O QUE VOCÊ ESTÁ IGNORANDO?'),'home_pt_br_translation_missing');
-assert(en.includes('This did not come out of nowhere.'),'home_en_story_translation_missing');
-assert(en.includes('READ THE MANIFESTO'),'home_en_manifesto_cta_translation_missing');
+const homeStory='<section><h2>Isto não apareceu do nada.</h2><a>LER O MANIFESTO</a></section>';
+const homeStoryEn=translateMaisonHtml(homeStory,'en','/');
+assert(homeStoryEn.includes('This did not come out of nowhere.'),'home_en_story_translation_missing');
+assert(homeStoryEn.includes('READ THE MANIFESTO'),'home_en_manifesto_cta_translation_missing');
 assert(hasLocalizedSiteCoverage('/manifesto/'),'manifesto_i18n_coverage_missing');
 assert(hasLocalizedSiteCoverage('/sobre/'),'about_i18n_coverage_missing');
+assert(hasLocalizedSiteCoverage('/contacto/'),'contact_i18n_coverage_missing');
+assert(hasLocalizedSiteCoverage('/profissionais/'),'professionals_i18n_coverage_missing');
+assert(hasLocalizedSiteCoverage('/produtos/nevoa/'),'product_detail_i18n_coverage_missing');
+assert(hasLocalizedSiteCoverage('/sos/'),'sos_i18n_coverage_missing');
 const manifesto='<h1>NÃO VOU DIZER-TE QUE VAI FICAR TUDO BEM.</h1><p>Talvez fique. Talvez não.</p>';
 assert(translateMaisonHtml(manifesto,'en','/manifesto/').includes("I'M NOT GOING TO TELL YOU EVERYTHING WILL BE FINE."),'manifesto_en_translation_missing');
 const about='<h1>Eu sou o João.</h1><p>Não criei isto porque tenha todas as respostas.</p>';
 assert(translateMaisonHtml(about,'en','/sobre/').includes("I'm João."),'about_en_translation_missing');
+const contact='<h1>Conta-me.</h1><p>Diz-me numa frase o que te trouxe aqui.</p>';
+assert(translateMaisonHtml(contact,'en','/contacto/').includes('Tell me in one sentence'),'contact_en_translation_missing');
+const product='<h1>Névoa de Ambiente </h1><p>Muda o ar antes de mudares tudo.</p>';
+assert(translateMaisonHtml(product,'en','/produtos/nevoa/').includes('Room Mist'),'product_detail_en_translation_missing');
 
 const products='<h1>Há coisas que se sentem<br>antes de se explicarem.</h1><p>Escolhe pelo que queres sentir agora.</p>';
 assert(translateMaisonHtml(products,'en','/produtos/').includes('Some things are felt'),'products_en_translation_missing');

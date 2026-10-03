@@ -14,7 +14,7 @@ import {
 
 const ORIGIN='https://maison-jf.com';
 const BLOCKED_PREFIXES=[
-  '/api/','/sos/','/checkout-','/para-de-ignorar/admin-import',
+  '/api/','/checkout-','/para-de-ignorar/admin-import',
   '/para-de-ignorar/preview-','/para-de-ignorar/relacoes-preview-'
 ];
 

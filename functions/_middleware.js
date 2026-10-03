@@ -8,7 +8,7 @@ import {
 
 const ORIGIN='https://maison-jf.com';
 const SKIP_PREFIXES=[
-  '/api/','/en/','/es/','/pt-br/','/sos/',
+  '/api/','/en/','/es/','/pt-br/',
   '/checkout-','/para-de-ignorar/admin-import',
   '/para-de-ignorar/preview-','/para-de-ignorar/relacoes-preview-'
 ];
