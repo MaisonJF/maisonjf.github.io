@@ -1,5 +1,6 @@
 const LOCALES=['pt-BR','en','es'];
 const QUALITY_VERSION='vault-localizer-v1';
+const VPC_QUALITY_VERSION='vpc-public-localizer-v1';
 
 function enabled(value){return String(value??'').toLowerCase()==='true';}
 function clamp(value,fallback,min,max){
@@ -109,6 +110,82 @@ async function callTranslator(env,{locale,kind,items}){
   const translated=structuredItems(data);
   if(translated.length!==items.length)throw new Error('localizer_item_count_mismatch');
   return translated;
+}
+
+
+function vpcTranslationSchema(){
+  return {
+    type:'object',
+    properties:{items:{type:'array',items:{type:'object',properties:{
+      id:{type:'string'},text:{type:'string'},
+      choices:{type:'array',items:{type:'object',properties:{key:{type:'string'},text:{type:'string'}},required:['key','text'],additionalProperties:false}}
+    },required:['id','text','choices'],additionalProperties:false}}},
+    required:['items'],additionalProperties:false
+  };
+}
+async function callVpcTranslator(env,{locale,items}){
+  if(!env.AI)throw new Error('workers_ai_binding_missing');
+  const payload=items.map(x=>({id:x.id,text:x.text,choices:JSON.parse(x.choices_json||'[]')}));
+  const data=await env.AI.run(env.LOCALIZER_MODEL||'@cf/meta/llama-3.3-70b-instruct-fp8-fast',{
+    messages:[
+      {role:'system',content:[
+        'You are the private localization engine for MAISON JF public reflective tests.',
+        'Source language is European Portuguese (pt-PT).',
+        'Translate only human-facing text. Keep every ID and every choice key exactly unchanged.',
+        'Preserve meaning, emotional precision, ambiguity, intimacy, punctuation and direct address.',
+        'Do not add diagnoses, predictions, advice, explanations, disclaimers or new facts.'
+      ].join(' ')},
+      {role:'user',content:'Target locale: '+locale+'.\n'+localeInstruction(locale)+'\nTranslate every question and every choice exactly once. Return only the structured result.\nINPUT:\n'+JSON.stringify(payload)}
+    ],
+    response_format:{type:'json_schema',json_schema:vpcTranslationSchema()},
+    max_tokens:4096,temperature:0.1
+  });
+  const translated=structuredItems(data);
+  if(translated.length!==items.length)throw new Error('vpc_localizer_item_count_mismatch');
+  return translated;
+}
+async function vpcBatch(db,locale,limit){
+  const result=await db.prepare(`
+    SELECT q.source_id AS id,q.question_text AS text,q.choices_json
+      FROM vpc_public_questions q
+      LEFT JOIN vpc_public_question_translations t
+        ON t.source_id=q.source_id AND t.locale=?1 AND t.status='active'
+     WHERE q.status='active' AND t.source_id IS NULL
+     ORDER BY q.source_id LIMIT ?2`).bind(locale,limit).all();
+  return result.results||[];
+}
+async function storeVpc(db,locale,source,translated){
+  const byId=new Map(source.map(x=>[String(x.id),x])),writes=[];
+  for(const item of translated){
+    const id=String(item?.id||''),original=byId.get(id);
+    if(!original)continue;
+    const text=normalizeText(item.text,800);
+    const sourceChoices=JSON.parse(original.choices_json||'[]');
+    const choices=Array.isArray(item.choices)?item.choices:[];
+    if(!text||choices.length!==sourceChoices.length)continue;
+    const sourceKeys=sourceChoices.map(x=>String(x.key));
+    const translatedKeys=choices.map(x=>String(x?.key||''));
+    if(sourceKeys.some((key,i)=>key!==translatedKeys[i]))continue;
+    const clean=choices.map(x=>({key:String(x.key),text:normalizeText(x.text,800)}));
+    if(clean.some(x=>!x.text))continue;
+    writes.push(db.prepare(`
+      INSERT INTO vpc_public_question_translations
+        (source_id,locale,question_text,choices_json,status,source_kind,quality_version,activated_at)
+      VALUES(?1,?2,?3,?4,'active','brain_localization',?5,strftime('%Y-%m-%dT%H:%M:%fZ','now'))
+      ON CONFLICT(source_id,locale) DO UPDATE SET
+        question_text=excluded.question_text,choices_json=excluded.choices_json,status='active',
+        source_kind=excluded.source_kind,quality_version=excluded.quality_version,activated_at=excluded.activated_at
+      WHERE vpc_public_question_translations.status <> 'active'`)
+      .bind(id,locale,text,JSON.stringify(clean),VPC_QUALITY_VERSION));
+  }
+  for(let i=0;i<writes.length;i+=40)await db.batch(writes.slice(i,i+40));
+  return writes.length;
+}
+async function localizeVpc(env,locale,limit){
+  const source=await vpcBatch(env.GROWTH_DB,locale,limit);
+  if(!source.length)return {locale,vpcActivated:0};
+  const translated=await callVpcTranslator(env,{locale,items:source});
+  return {locale,vpcActivated:await storeVpc(env.GROWTH_DB,locale,source,translated)};
 }
 
 async function activateApproved(db,locale){
@@ -303,11 +380,13 @@ export async function runVaultLocalization(env,{locale}={}){
   const legacyLimit=clamp(env.LOCALIZER_BATCH_SIZE,12,1,24);
   const questionLimit=clamp(env.LOCALIZER_QUESTION_BATCH_SIZE,legacyLimit,0,24);
   const oracleLimit=clamp(env.LOCALIZER_ORACLE_BATCH_SIZE,2,0,8);
+  const vpcLimit=clamp(env.LOCALIZER_VPC_BATCH_SIZE,24,0,24);
   const chosen=LOCALES.includes(locale)?locale:LOCALES[0];
   const result=await localizeLocale(env,chosen,{questionLimit,oracleLimit});
+  const vpc=await localizeVpc(env,chosen,vpcLimit);
   const pending=await pendingCounts(env.GROWTH_DB);
   await persistTelemetry(env.GROWTH_DB,{locale:chosen,questionsActivated:result.questionsActivated,oracleActivated:result.oracleActivated,pending});
-  return {results:[result],pending};
+  return {results:[{...result,...vpc}],pending};
 }
 
 function isResourceLimit(error){
