@@ -69,16 +69,20 @@ security:{label:'Segurança',title:'Mesmo quando hoje está tudo bem, uma parte 
 
 const QUESTION_BANK=window.MAISON_TEST_QUESTION_BANK;
 let QUESTIONS=QUESTION_BANK?.pick('attention-core',12)||[];
-const ROUTE_QUESTIONS=QUESTION_BANK?.pick('attention-route',2)||[];
+let ROUTE_QUESTIONS=QUESTION_BANK?.pick('attention-route',2)||[];
 if(QUESTIONS.length!==12||ROUTE_QUESTIONS.length!==2)throw new Error('question_bank_unavailable');
 
+function maisonLocale(){const x=location.pathname.split('/').filter(Boolean)[0]||'';return x==='pt-br'?'pt-BR':(x==='en'||x==='es'?x:'pt-PT')}
 async function hydrateOceanQuestions(){
  try{
   const seed=(globalThis.crypto?.randomUUID?.()||String(Date.now())+'-'+Math.random()).slice(0,120);
-  const signal=globalThis.AbortSignal?.timeout?AbortSignal.timeout(4500):undefined;const response=await fetch('/api/vpc-question-set?test=attention&seed='+encodeURIComponent(seed),{cache:'no-store',signal});
+  const signal=globalThis.AbortSignal?.timeout?AbortSignal.timeout(4500):undefined;
+  const locale=maisonLocale();
+  const response=await fetch('/api/vpc-question-set?test=attention&seed='+encodeURIComponent(seed)+'&locale='+encodeURIComponent(locale),{cache:'no-store',signal});
   const payload=await response.json().catch(()=>({}));
   if(!response.ok||!Array.isArray(payload.questions)||payload.questions.length!==12)throw new Error('question_engine');
   QUESTIONS=payload.questions;
+  if(locale!=='pt-PT'&&Array.isArray(payload.routeQuestions)&&payload.routeQuestions.length===2)ROUTE_QUESTIONS=payload.routeQuestions;
   track('vpc_question_set',{test:'attention',engine_version:payload.version||'',ocean_version:payload.oceanVersion||'',sources:(payload.sources||[]).join(','),vault_candidates:payload.approvedVaultCandidates||0});
  }catch(_){
   track('vpc_question_set_fallback',{test:'attention'});
