@@ -72,6 +72,8 @@ const MAISON_PRODUCT_LOCALES={
     'escalda-pes':{name:'Baño de Pies',categoryLabel:'Cuerpo',description:'Sales para baño de pies con notas de bourbon, ámbar oriental, rose marine y un toque de limón, con pétalos secos de rosa y jazmín y un agente saponificante para una experiencia sensorial más envolvente.',ritual:{title:'No compliques la pausa.',text:'Agua tibia, aroma y unos minutos en los que nadie te pide nada.'},cta:'Quiero crear este momento'}
   }
 };
+const MAISON_PRODUCT_MEDIA_ALT_EN={"maison-jf-bundles":["Maison JF Bundles — Essential, Body & Soul and Complete"],"vela-vidro":["MAISON JF 170 g Scented Candle lit","MAISON JF 170 g Scented Candle after extinguishing, with smoke","Olfactory universe of the MAISON JF Scented Candle","Hand lighting the MAISON JF 170 g Scented Candle"],"vela-pequena":["MAISON JF Scented Candle in a copper tin, editorial photograph","Detail of the wax and botanicals in the MAISON JF Scented Candle","MAISON JF Scented Candle lit"],"oleo-massagem":["MAISON JF Massage Oil, editorial photograph","MAISON JF Massage Oil in use","MAISON JF Massage Oil in an editorial composition","MAISON JF massage ritual"],"nevoa":["MAISON JF Room Mist, editorial photograph","MAISON JF Room Mist in use","MAISON JF Room Mist in a warm interior"],"escalda-pes":["MAISON JF Foot Soak, editorial product photograph","Texture of the MAISON JF Foot Soak with coarse salt and dried petals","Open MAISON JF Foot Soak pouch with the blend visible","MAISON JF Foot Soak being poured from the top of the pouch into water","MAISON JF Foot Soak experience in a basin of water"]};
+
 function maisonProductLocale(){
   const htmlLang=typeof document!=='undefined'&&document.documentElement?document.documentElement.lang:'';
   const raw=String(window.MAISON_LOCALE||htmlLang||'pt-PT').toLowerCase();
@@ -87,7 +89,10 @@ function maisonProductLocale(){
     window.MAISON_PRODUCTS=window.MAISON_PRODUCTS.map(product=>{
       const copy=translations[product.slug];
       if(!copy)return product;
-      return {...product,...copy,ritual:copy.ritual?{...product.ritual,...copy.ritual}:product.ritual};
+      const media=locale==='en'&&Array.isArray(MAISON_PRODUCT_MEDIA_ALT_EN[product.slug])
+        ?(product.media||[]).map((item,index)=>({...item,alt:MAISON_PRODUCT_MEDIA_ALT_EN[product.slug][index]||item.alt}))
+        :product.media;
+      return {...product,...copy,media,ritual:copy.ritual?{...product.ritual,...copy.ritual}:product.ritual};
     });
   }
 }
