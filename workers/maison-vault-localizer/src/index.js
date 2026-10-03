@@ -168,6 +168,15 @@ async function storeVpc(db,locale,source,translated){
     if(sourceKeys.some((key,i)=>key!==translatedKeys[i]))continue;
     const clean=choices.map(x=>({key:String(x.key),text:normalizeText(x.text,800)}));
     if(clean.some(x=>!x.text))continue;
+    if(clean.some(x=>sameText(x.text,text)))continue;
+    if(locale==='en'||locale==='es'){
+      if(sameText(original.text,text))continue;
+      if(clean.some((x,i)=>sameText(x.text,sourceChoices[i]?.text)))continue;
+    }
+    if(locale==='pt-BR'){
+      const europeanMarker=/\\b(?:tu|te|ti|teu|teus|tua|tuas|contigo|estás|tens|queres|gostas|fazes|podes|precisas|recebes|sentes|vais|pensas)\\b/i;
+      if(europeanMarker.test(text)||clean.some(x=>europeanMarker.test(x.text)))continue;
+    }
     writes.push(db.prepare(`
       INSERT INTO vpc_public_question_translations
         (source_id,locale,question_text,choices_json,status,source_kind,quality_version,activated_at)
