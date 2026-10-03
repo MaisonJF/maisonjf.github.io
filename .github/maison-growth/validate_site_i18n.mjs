@@ -56,6 +56,34 @@ assert(translateMaisonHtml(contact,'en','/contacto/').includes('Tell me in one s
 const product='<h1>Névoa de Ambiente </h1><p>Muda o ar antes de mudares tudo.</p>';
 assert(translateMaisonHtml(product,'en','/produtos/nevoa/').includes('Room Mist'),'product_detail_en_translation_missing');
 
+const englishCoverageRoutes=[
+  '/envios','/informacao-legal',
+  '/trabalho/tenho-medo-de-falar-com-o-meu-chefe',
+  '/trabalho/o-conflito-no-trabalho-vem-comigo-para-casa',
+  '/trabalho/estou-desempregado-e-sinto-que-a-minha-vida-parou',
+  '/trabalho/estou-farto-de-enviar-candidaturas-e-nao-ter-resposta',
+  '/profissionais/produtos-para-revenda-em-spa',
+  '/profissionais/produtos-para-revenda-em-loja',
+  '/profissionais/aromas-para-espacos-de-bem-estar',
+  '/profissionais/produtos-de-boas-vindas-para-alojamento-local',
+  '/profissionais/velas-aromaticas-para-revenda',
+  '/profissionais/como-escolher-produtos-para-um-spa-ou-gabinete',
+  '/profissionais/como-escolher-aromas-para-um-gabinete-de-massagem',
+  '/profissionais/como-criar-um-ritual-de-boas-vindas-para-clientes',
+  '/profissionais/o-que-posso-oferecer-de-diferente-aos-meus-clientes',
+  '/espiritualidade/protecao-energetica'
+];
+for(const route of englishCoverageRoutes)assert(hasLocalizedSiteCoverage(route),'english_route_coverage_missing:'+route);
+const neverEnough='<h1>Porque é que<br>nunca chega?</h1><p>Quando estás num dia péssimo, o que te faria sentir mais amado?</p><button>A pessoa largar o telemóvel e ficar realmente comigo.</button>';
+const neverEnoughEn=translateMaisonHtml(neverEnough,'en','/teste/nunca-chega/');
+assert(neverEnoughEn.includes('Why does it<br>never feel like enough?'),'never_en_title_missing');
+assert(neverEnoughEn.includes('When you are having an awful day'),'never_en_question_missing');
+assert(neverEnoughEn.includes('put down their phone'),'never_en_choice_missing');
+const shipping='<h1>Envios e portes</h1><p>O produto vai. E tu sabes onde ele está.</p>';
+assert(translateMaisonHtml(shipping,'en','/envios').includes('Shipping & delivery'),'shipping_en_translation_missing');
+const legal='<h1>Informação Legal</h1><p>Quem está por trás da Maison. Sem esconder nada.</p>';
+assert(translateMaisonHtml(legal,'en','/informacao-legal').includes('Legal Information'),'legal_en_translation_missing');
+
 const products='<h1>Há coisas que se sentem<br>antes de se explicarem.</h1><p>Escolhe pelo que queres sentir agora.</p>';
 assert(translateMaisonHtml(products,'en','/produtos/').includes('Some things are felt'),'products_en_translation_missing');
 assert(translateMaisonHtml(products,'es','/produtos/').includes('Hay cosas que se sienten'),'products_es_translation_missing');
