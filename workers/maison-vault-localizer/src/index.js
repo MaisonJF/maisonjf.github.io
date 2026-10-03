@@ -466,6 +466,16 @@ function localeForSchedule(controller,env){
   return LOCALES[((utcHourIndex%LOCALES.length)+LOCALES.length)%LOCALES.length];
 }
 
+async function runVpcRounds(env,locale){
+  let vpcActivated=0;
+  for(let i=0;i<5;i++){
+    const result=await localizeVpc(env,locale,24);
+    vpcActivated+=Number(result.vpcActivated||0);
+    if(Number(result.vpcActivated||0)<24)break;
+  }
+  return {locale,vpcActivated};
+}
+
 async function runLocalizationRounds(env,locale){
   const rounds=clamp(env.LOCALIZER_ROUNDS_PER_CRON,1,1,2);
   let last=null;
@@ -485,12 +495,13 @@ export default {
       const results=[];
       for(const locale of LOCALES){
         try{
+          const vpc=await runVpcRounds(env,locale);
           const backfill=await runQuestionBackfill(env,locale);
           let maintenance=null;
           if(!backfill.resourceLimited){
             maintenance=await runLocalizationRounds(env,locale);
           }
-          results.push({locale,ok:true,backfill,maintenance});
+          results.push({locale,ok:true,vpc,backfill,maintenance});
         }catch(error){
           console.error('Vault localizer locale failed',JSON.stringify({
             locale,
