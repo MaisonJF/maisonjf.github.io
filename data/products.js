@@ -87,12 +87,13 @@ function maisonProductLocale(){
   const translations=MAISON_PRODUCT_LOCALES[locale]||{};
   if(locale!=='pt-PT'){
     window.MAISON_PRODUCTS=window.MAISON_PRODUCTS.map(product=>{
-      const copy=translations[product.slug];
-      if(!copy)return product;
-      const media=locale==='en'&&Array.isArray(MAISON_PRODUCT_MEDIA_ALT_EN[product.slug])
+      const copy=translations[product.slug]||null;
+      const hasEnglishMedia=locale==='en'&&Array.isArray(MAISON_PRODUCT_MEDIA_ALT_EN[product.slug]);
+      if(!copy&&!hasEnglishMedia)return product;
+      const media=hasEnglishMedia
         ?(product.media||[]).map((item,index)=>({...item,alt:MAISON_PRODUCT_MEDIA_ALT_EN[product.slug][index]||item.alt}))
         :product.media;
-      return {...product,...copy,media,ritual:copy.ritual?{...product.ritual,...copy.ritual}:product.ritual};
+      return {...product,...(copy||{}),media,ritual:copy?.ritual?{...product.ritual,...copy.ritual}:product.ritual};
     });
   }
 }
