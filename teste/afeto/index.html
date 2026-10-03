@@ -68,10 +68,11 @@ const QUESTION_BANK=window.MAISON_TEST_QUESTION_BANK;
 let QUESTIONS=QUESTION_BANK?.pick('afeto',10)||[];
 if(QUESTIONS.length!==10)throw new Error('question_bank_unavailable');
 
+function maisonLocale(){const x=location.pathname.split('/').filter(Boolean)[0]||'';return x==='pt-br'?'pt-BR':(x==='en'||x==='es'?x:'pt-PT')}
 async function hydrateOceanQuestions(){
  try{
   const seed=(globalThis.crypto?.randomUUID?.()||String(Date.now())+'-'+Math.random()).slice(0,120);
-  const signal=globalThis.AbortSignal?.timeout?AbortSignal.timeout(4500):undefined;const response=await fetch('/api/vpc-question-set?test=afeto&seed='+encodeURIComponent(seed),{cache:'no-store',signal});
+  const signal=globalThis.AbortSignal?.timeout?AbortSignal.timeout(4500):undefined;const response=await fetch('/api/vpc-question-set?test=afeto&seed='+encodeURIComponent(seed)+'&locale='+encodeURIComponent(maisonLocale()),{cache:'no-store',signal});
   const payload=await response.json().catch(()=>({}));
   if(!response.ok||!Array.isArray(payload.questions)||payload.questions.length!==10)throw new Error('question_engine');
   QUESTIONS=payload.questions;
