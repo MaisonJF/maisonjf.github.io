@@ -48,6 +48,7 @@
   if(!schema.isConnected)document.head.appendChild(schema);
   const media=p.media||[];
   const root=location.pathname.includes('/produtos/'+p.slug+'/')?'../../':'../';
+  const mediaSrc=src=>String(src||'').startsWith('/')?String(src):root+String(src||'').replace(/^\.\.\//,'');
   const hero=media.find(m=>m.role==='hero')||media[0]||null;
   const rest=hero?media.filter(m=>m!==hero):media;
   const whatsapp=`https://wa.me/351923318289?text=${encodeURIComponent(`${t.question} ${p.name}${p.size?' '+p.size:''}.`)}`;
@@ -57,13 +58,13 @@
 
   const mediaMarkup=rest.length?`
     <section class="product-gallery" aria-label="${t.gallery} ${p.name}">
-      ${rest.map((m,i)=>`<figure class="product-gallery__item product-gallery__item--${m.aspect||'portrait'}" data-role="${m.role||'editorial'}"><img src="${root}${m.src.replace(/^\.\.\//,'')}" alt="${m.alt||p.name}" loading="lazy"></figure>`).join('')}
+      ${rest.map((m,i)=>`<figure class="product-gallery__item product-gallery__item--${m.aspect||'portrait'}" data-role="${m.role||'editorial'}"><img src="${mediaSrc(m.src)}" alt="${m.alt||p.name}" loading="lazy"></figure>`).join('')}
     </section>`: '';
 
   page.innerHTML=`
     <section class="product-hero ${hero?'':'product-hero--no-media'}">
       ${hero?`<div class="media-slot media-slot--${hero.aspect||'portrait'} product-hero__media ${hero.editorial?'product-hero__media--editorial':''}">
-        <img src="${root}${hero.src.replace(/^\.\.\//,'')}" alt="${hero.alt||p.name}">
+        <img src="${mediaSrc(hero.src)}" alt="${hero.alt||p.name}">
       </div>`:''}
       <div class="product-hero__copy">
         <p class="eyebrow">${p.category} · MAISON JF®</p>
