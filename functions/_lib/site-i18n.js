@@ -1839,6 +1839,11 @@ const COMMERCE={
     'Condições da Maison':'Condições da Maison'
   },
   en:{
+    'Revê a tua encomenda MAISON JF®, escolhe a zona de envio e vê quando os portes ficam grátis.':'Review your MAISON JF® order, choose the shipping zone and see when shipping becomes free.',
+    'Zona de envio':'Shipping zone',
+    'Grátis':'Free',
+    'Continuar para pagamento':'Continue to payment',
+    'Não foi possível abrir o checkout.':'The checkout could not be opened.',
     'Carrinho | MAISON JF®':'Cart | MAISON JF®',
     'Encomenda':'Order',
     'O teu carrinho.':'Your cart.',
