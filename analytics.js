@@ -516,6 +516,14 @@
     document.head.appendChild(style);
   }
 
+  function consentLocaleCopy() {
+    const first = location.pathname.split('/').filter(Boolean)[0] || '';
+    if (first === 'en') return {preferences:'Cookie preferences',change:'Change cookie preferences',message:'We use measurement cookies only with your permission.',privacy:'Privacy',deny:'Decline',allow:'Accept'};
+    if (first === 'es') return {preferences:'Preferencias de cookies',change:'Cambiar preferencias de cookies',message:'Usamos cookies de medición solo con tu autorización.',privacy:'Privacidad',deny:'Rechazar',allow:'Aceptar'};
+    if (first === 'pt-br') return {preferences:'Preferências de cookies',change:'Alterar preferências de cookies',message:'Usamos cookies de medição apenas com a sua autorização.',privacy:'Privacidade',deny:'Recusar',allow:'Aceitar'};
+    return {preferences:'Preferências de cookies',change:'Alterar preferências de cookies',message:'Usamos cookies de medição apenas com a tua autorização.',privacy:'Privacidade',deny:'Recusar',allow:'Aceitar'};
+  }
+
   function showPreferencesControl() {
     if (document.querySelector('.maison-consent-settings')) return;
     ensurePreferencesControlStyles();
@@ -523,8 +531,9 @@
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'maison-consent-settings';
-    button.textContent = 'Preferências de cookies';
-    button.setAttribute('aria-label', 'Alterar preferências de cookies');
+    const copy = consentLocaleCopy();
+    button.textContent = copy.preferences;
+    button.setAttribute('aria-label', copy.change);
     button.addEventListener('click', () => {
       localStorage.removeItem(CONSENT_KEY);
       const item = button.closest('.maison-consent-settings-item');
@@ -566,7 +575,8 @@
     const banner = document.createElement('aside');
     banner.className = 'maison-consent';
     banner.setAttribute('aria-label', 'Cookies');
-    banner.innerHTML = '<div class="maison-consent__copy"><span>Usamos cookies de medição apenas com a tua autorização. <a href="/informacao-legal#privacidade">Privacidade</a></span></div><div class="maison-consent__actions"><button type="button" data-consent="denied">Recusar</button><button type="button" data-consent="granted">Aceitar</button></div>';
+    const copy = consentLocaleCopy();
+    banner.innerHTML = '<div class="maison-consent__copy"><span>'+copy.message+' <a href="/informacao-legal#privacidade">'+copy.privacy+'</a></span></div><div class="maison-consent__actions"><button type="button" data-consent="denied">'+copy.deny+'</button><button type="button" data-consent="granted">'+copy.allow+'</button></div>';
     banner.addEventListener('click', event => {
       const button = event.target.closest('[data-consent]');
       if (button) saveConsent(button.dataset.consent);
