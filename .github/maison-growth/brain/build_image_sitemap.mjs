@@ -39,7 +39,7 @@ const SURFACES=[
     ]
   ],
   [
-    "https://maison-jf.com/portas/companhia",
+    "https://maison-jf.com/portas/presenca",
     [
       "/images/cinematic/companhia.avif"
     ]
