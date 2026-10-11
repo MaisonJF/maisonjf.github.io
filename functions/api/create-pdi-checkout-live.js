@@ -60,7 +60,12 @@ export async function onRequestPost({request,env}){
       return json({error:'Não foi possível iniciar o checkout.'},stripeResponse.status||502);
     }
     return json({url:session.url});
-  }catch{
+  }catch(error){
+    console.error('[create-pdi-checkout-live] checkout_failed',{
+      name:String(error?.name||'Error'),
+      code:String(error?.code||''),
+      message:String(error?.message||'unknown').slice(0,180)
+    });
     return json({error:'Não foi possível iniciar o checkout.'},500);
   }
 }
