@@ -81,7 +81,40 @@ const SURFACES=[
   [
     "https://maison-jf.com/produtos/oleo-massagem/",
     [
-      "/images/cinematic/ritual.avif"
+      "/images/products/oleo-massagem/oleo-massagem-hero.webp"
+    ]
+  ],
+  [
+    "https://maison-jf.com/produtos/vela-vidro/",
+    [
+      "/images/products/vela-vidro/vela-170g-produto.webp"
+    ]
+  ],
+  [
+    "https://maison-jf.com/produtos/vela-pequena/",
+    [
+      "/images/products/vela-pequena/hero.webp"
+    ]
+  ],
+  [
+    "https://maison-jf.com/produtos/nevoa/",
+    [
+      "/images/products/nevoa/hero.webp"
+    ]
+  ],
+  [
+    "https://maison-jf.com/produtos/escalda-pes/",
+    [
+      "/images/products/escalda-pes/01-hero-packshot-editorial.webp"
+    ]
+  ],
+  [
+    "https://maison-jf.com/produtos/maison-jf-bundles/",
+    [
+      "/images/products/escalda-pes/01-hero-packshot-editorial.webp",
+      "/images/products/nevoa/hero.webp",
+      "/images/products/vela-pequena/hero.webp",
+      "/images/products/oleo-massagem/oleo-massagem-hero.webp"
     ]
   ]
 ];
