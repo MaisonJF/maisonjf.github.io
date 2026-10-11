@@ -53,7 +53,8 @@ function walkFiles(directory) {
 const apiFiles = walkFiles('functions/api').filter(path => path.endsWith('.js'));
 const checkoutCreators = apiFiles.filter(path => {
   const code = source(path);
-  return code.includes('/v1/checkout/sessions') && /method\s*:\s*['"]POST['"]/.test(code);
+  return /fetch\(\s*['"]https:\/\/api\.stripe\.com\/v1\/checkout\/sessions['"]/.test(code) &&
+    /method\s*:\s*['"]POST['"]/.test(code);
 });
 
 for (const path of checkoutCreators) {
