@@ -3,6 +3,7 @@ import { requireMaisonVault } from '../_lib/maison-vault.js';
 import { oracleRoleCoverageForLocale } from '../_lib/maison-localized-content.js';
 import { normalizeMaisonLocale, stripeLocaleForMaison } from '../_lib/maison-locales.js';
 import { localizeOracleLabel } from '../_lib/oracle-public-locales.js';
+import { brazilMarketAccessResponse } from '../_lib/brazil-market.js';
 
 const TERRITORIES=Object.fromEntries(
   ORACLE_TERRITORIES.map(t=>[t.slug,{label:t.label,page:t.slug+'.html'}])
@@ -26,6 +27,8 @@ export async function onRequestPost({ request, env }) {
     const rawLocale=body?.locale??body?.lang??'pt-PT';
     const locale=normalizeMaisonLocale(rawLocale,{fallback:null});
     if(!locale)return json({error:'Idioma inválido.'},400);
+    const marketError = brazilMarketAccessResponse(request, locale);
+    if (marketError) return marketError;
     if(locale!=='pt-PT'){
       const db=requireMaisonVault(env);
       const coverage=await oracleRoleCoverageForLocale(db,theme,locale);
@@ -41,7 +44,7 @@ export async function onRequestPost({ request, env }) {
     params.set('cancel_url', origin + publicPrefix(locale) + '/oraculo/' + theme + '?checkout_cancelado=1');
     params.set('locale', stripeLocaleForMaison(locale));
     params.set('customer_creation', 'always');
-    params.set('billing_address_collection', 'auto');
+    params.set('billing_address_collection', locale === 'pt-BR' ? 'required' : 'auto');
     const amount = locale==='pt-BR' ? 990 : 200;
     const currency = locale==='pt-BR' ? 'brl' : 'eur';
     params.set('line_items[0][price_data][currency]', currency);
