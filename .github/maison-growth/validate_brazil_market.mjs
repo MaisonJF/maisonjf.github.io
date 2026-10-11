@@ -6,6 +6,7 @@ import {
   hasBrazilBillingAddress,
   hasEligibleBrazilSession
 } from '../../functions/_lib/brazil-market.js';
+import { expectedEbookSessionAmount } from '../../functions/_lib/ebooks-live.js';
 
 function requestFrom(country) {
   const request = new Request('https://maison-jf.com/api/test', { method: 'POST' });
@@ -52,7 +53,17 @@ for (const [path, token] of [
   assert.ok(source(path).includes(token), `${path} must enforce the Brazil eligibility helper`);
 }
 
+assert.equal(expectedEbookSessionAmount({
+  currency: 'brl', amount_total: 2190, metadata: { expected_amount_total: '2190' }
+}, ['para-de-ignorar'], 'pt-BR'), 2190);
+assert.equal(expectedEbookSessionAmount({
+  currency: 'brl', amount_total: 2490, metadata: {}
+}, ['para-de-ignorar'], 'pt-BR'), 2490);
+assert.equal(expectedEbookSessionAmount({
+  currency: 'brl', amount_total: 9990, metadata: {}
+}, ['para-de-ignorar'], 'pt-BR'), null);
 assert.ok(source('functions/_lib/ebooks-live.js').includes('brlCents: 2190'));
+assert.ok(source('functions/_lib/ebooks-live.js').includes('legacyBrlCents: [2490]'));
 assert.ok(source('data/ebooks.js').includes('brlPrice:21.90'));
 assert.ok(source('functions/_lib/site-localizer.js').includes("'/ebooks/para-de-ignorar': '21.90'"));
 assert.ok(source('functions/_lib/offer-brain.js').includes("'ebook-para-de-ignorar':'R$ 21,90'"));
