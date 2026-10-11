@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/audit-public-site.py'
+      - 'scripts/check-product-price-consistency.py'
       - 'produtos/**'
       - 'ebooks/**'
       - '.github/maison-growth/**'
@@ -185,6 +186,10 @@ jobs:
                   raise SystemExit(f'Missing final catalogue requirement: {token}')
           print('Final public service catalogue is locked.')
           PY
+
+      - name: Check catalogue, product pages and checkout prices
+        shell: bash
+        run: python3 scripts/check-product-price-consistency.py
 
       - name: Guard shipping prices and free thresholds
         shell: bash
