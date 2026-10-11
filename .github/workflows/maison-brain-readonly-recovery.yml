@@ -39,7 +39,7 @@ jobs:
           import { gzipSync } from 'node:zlib';
           import { writeFileSync } from 'node:fs';
 
-          const publicKey = "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAYEAitzZrAg28RnIh75ufZRn\nwhPV0C7yKIAlW7cAlGxVg/5/WTpRRYOF4oxj0UrPasGhjrYhc3AcDSDMi/dFmB4z\nwh5yglwRtCCFTbG0i8EaSH8ORa4inJugvdqh8Gl4GYaCBtWtGpuNN0EQYVuMgesR\n1bbJYlW6ztLh+/kefkqQlutXzY+wFCV4MISm5YCxJ3vidnNpABVi2vPCu6gov5bU\nJaegjO9evL7C55PJBkK5WUJ8Cg5lSWFEZ6AXNDypYBV/oBOsMfg8X+CuFo5Z0USF\nYsv5QlyhcWUUbGs6tciooj+U9/8wezbub/Y846P67T/yQUYJ8eBY3iqGuN5kJddn\nF8Brtj5sCTtZQHo5E2gsC/dy9fdgzutoTsiLDvSfMSFBmzs9rgG4uI1nvx9NgCwy\ncwLGwhw/5/dLAHgjxKHEVDQm8pPMQMNjhdrHcDY6FciOCpGqo4eVFe817FcYgz6Y\nzFNsA0Io2n7vBePY/lQQoOIPbcSePawaBJZIe2wBhdZ/AgMBAAE=\n-----END PUBLIC KEY-----";
+          const publicKey = "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAitzZrAg28RnIh75ufZRn\nwhPV0C7yKIAlW7cAlGxVg/5/WTpRRYOF4oxj0UrPasGhjrYhc3AcDSDMi/dFmB4z\nwh5yglwRtCCFTbG0i8EaSH8ORa4inJugvdqh8Gl4GYaCBtWtGpuNN0EQYVuMgesR\n1bbJYlW6ztLh+/kefkqQlutXzY+wFCV4MISm5YCxJ3vidnNpABVi2vPCu6gov5bU\nJaegjO9evL7C55PJBkK5WUJ8Cg5lSWFEZ6AXNDypYBV/oBOsMfg8X+CuFo5Z0USF\nYsv5QlyhcWUUbGs6tciooj+U9/8wezbub/Y846P67T/yQUYJ8eBY3iqGuN5kJddn\nF8Brtj5sCTtZQHo5E2gsC/dy9fdgzutoTsiLDvSfMSFBmzs9rgG4uI1nvx9NgCwy\ncwLGwhw/5/dLAHgjxKHEVDQm8pPMQMNjhdrHcDY6FciOCpGqo4eVFe817FcYgz6Y\nzFNsA0Io2n7vBePY/lQQoOIPbcSePawaBJZIe2wBhdZ/AgMBAAE=\n-----END PUBLIC KEY-----";
           const baseRaw = String(process.env.BRAIN_CONTROL_API_URL || '').trim();
           const baseUrl = new URL(baseRaw);
           if (baseUrl.protocol !== 'https:' || baseUrl.username || baseUrl.password) {
