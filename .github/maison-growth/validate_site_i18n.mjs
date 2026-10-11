@@ -89,7 +89,10 @@ const products='<h1>Há coisas que se sentem<br>antes de se explicarem.</h1><p>E
 assert(translateMaisonHtml(products,'en','/produtos/').includes('Some things are felt'),'products_en_translation_missing');
 assert(translateMaisonHtml(products,'es','/produtos/').includes('Hay cosas que se sienten'),'products_es_translation_missing');
 
-console.log('Maison public-site localization contract: OK');
+const pdiPriceNote='<p>Cada tema · 28 perguntas · pagamento único</p>';
+assert(translateMaisonHtml(pdiPriceNote,'pt-BR','/para-de-ignorar/').includes('pagamento único'),'pdi_price_note_pt_br_missing');
+assert(translateMaisonHtml(pdiPriceNote,'en','/para-de-ignorar/').includes('one-time payment'),'pdi_price_note_en_missing');
+assert(translateMaisonHtml(pdiPriceNote,'es','/para-de-ignorar/').includes('pago único'),'pdi_price_note_es_missing');
 
 const pdiSchema='<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"PÁRA DE IGNORAR! · Jogo digital","offers":{"@type":"Offer","priceCurrency":"EUR","price":"5.00","url":"https://maison-jf.com/para-de-ignorar/"}}</script>';
 const pdiBrazilSchema=rewritePdiProductPriceSchema(pdiSchema,'/para-de-ignorar/','pt-BR');
@@ -100,3 +103,5 @@ assert(pdiPortugalSchema.includes('"priceCurrency":"EUR"')&&pdiPortugalSchema.in
 const pdiOtherRouteSchema=rewritePdiProductPriceSchema(pdiSchema,'/produtos/','pt-BR');
 assert(pdiOtherRouteSchema.includes('"priceCurrency":"EUR"'),'pdi_unrelated_schema_changed');
 
+
+console.log('Maison public-site localization contract: OK');
