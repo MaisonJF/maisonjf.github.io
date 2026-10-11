@@ -14,9 +14,9 @@ export async function onRequestGet({request,env}){
         label:item.label,
         family:item.family,
         available:true,
-        currency:'EUR',
+        currency:String(item.currency||'eur').toUpperCase(),
         amount_cents:item.amount,
-        display_price:formatEUR(item.amount,locale)
+        display_price:formatPrice(item.amount,item.currency,locale)
       })),
       locale
     });
@@ -30,13 +30,13 @@ export async function onRequestGet({request,env}){
   }
 }
 
-function formatEUR(cents,locale='pt-PT'){
+function formatPrice(cents,currency='eur',locale='pt-PT'){
   const value=Number(cents||0)/100;
   const whole=Number.isInteger(value);
-  const intlLocale=locale==='pt-PT'?'pt-PT':locale==='es'?'es-ES':'en-IE';
+  const intlLocale=locale==='pt-PT'?'pt-PT':locale==='pt-BR'?'pt-BR':locale==='es'?'es-ES':'en-IE';
   return new Intl.NumberFormat(intlLocale,{
     style:'currency',
-    currency:'EUR',
+    currency:String(currency||'eur').toUpperCase(),
     minimumFractionDigits:whole?0:2,
     maximumFractionDigits:whole?0:2
   }).format(value);
