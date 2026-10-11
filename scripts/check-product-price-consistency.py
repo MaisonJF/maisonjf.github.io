@@ -92,6 +92,11 @@ for slug, (name, amount_cents, display_price, cart_slug) in BUNDLES.items():
     if display_price not in BUNDLE_PAGE:
         fail(f"{slug}: visible bundle price missing from public page")
 
+if "Vela Aromática 70 g" not in BUNDLE_PAGE or "Vela Aromática 70 g" not in CART or "Vela Aromática 70 g" not in CHECKOUT:
+    fail("bundle-completo: small 70 g candle must be named consistently on page, cart and checkout")
+if "images/products/vela-pequena/hero.webp" not in BUNDLE_PAGE:
+    fail("bundle-completo: public page must use the existing 70 g candle product image")
+
 if errors:
     print("PRODUCT PRICE CONSISTENCY FAILED")
     for error in errors:
