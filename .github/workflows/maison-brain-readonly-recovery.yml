@@ -192,7 +192,7 @@ jobs:
             osiris_openrouter: {
               matching_observation_count_scanned: relevant.length,
               provider_counts: providerCounts,
-              rows: relevant.slice(0, 150)
+              rows: relevant
             },
             recent_candidate_inbox: {
               count_returned: candidates.length,
