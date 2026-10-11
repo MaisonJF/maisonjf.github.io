@@ -1,3 +1,4 @@
+// BRAZIL_MARKET_FULFILLMENT_EXEMPT: sandbox session confirmation for test-only Stripe payments; it does not authorize production digital purchases.
 export async function onRequestGet({ request, env }) {
   try {
     if (!env.STRIPE_SECRET_KEY) {
