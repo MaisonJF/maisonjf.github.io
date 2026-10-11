@@ -33,7 +33,7 @@ MAISON JF® content connects human situations to a structured knowledge layer th
 - Casa: https://maison-jf.com/portas/casa
 - Corpo: https://maison-jf.com/portas/corpo
 - Cabeça: https://maison-jf.com/portas/cabeca
-- Presença: https://maison-jf.com/portas/companhia
+- Presença: https://maison-jf.com/portas/presenca
 - Profissionais / B2B: https://maison-jf.com/profissionais/
 - Presentes: https://maison-jf.com/presentes/
 - Press: https://maison-jf.com/press/
