@@ -37,7 +37,7 @@ for line in CATALOGUE.splitlines():
     slug_match = re.search(r"slug:'([^']+)'", line)
     price_match = re.search(r"price:([0-9]+(?:\.[0-9]+)?)", line)
     if slug_match and price_match:
-        catalogue_prices[slug_match.group(1)] = cents(price_match.group(2))
+        catalogue_prices[slug_match.group(1)] = cents(price_match.group(1))
 
 for slug, relative_path in PAGES.items():
     if slug not in catalogue_prices:
