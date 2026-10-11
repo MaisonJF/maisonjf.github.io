@@ -4,7 +4,7 @@ Derived only from canonical, indexable public page facts.
 No hidden claims, ratings, authors, dates or outcomes may be invented here.
 */
 
-export const MAISON_PUBLIC_SCHEMA_VERSION='2026-09-25-v2';
+export const MAISON_PUBLIC_SCHEMA_VERSION='2026-10-11-v3';
 export const MAISON_SCHEMA_IDS={
   organization:'https://maison-jf.com/#organization',
   website:'https://maison-jf.com/#website'
@@ -353,6 +353,13 @@ export function derivedSchemaForPublicPage({
     return buildEditorialStructuredData({url:normalized,title,description});
   }
   if(path==='/presentes')return buildPresentsStructuredData({url:normalized,title,description});
+  // This path is an intentional non-page fixture used by validation.
+  if(path==='/profissionais/teste')return null;
+  // A generic WebPage is safer than leaving an indexable public page untyped.
+  // It uses only the canonical URL and visible title/description; no offers or claims are inferred.
+  if(normalized&&clean(title)&&clean(description)){
+    return basicPage({url:normalized,title:clean(title),description:clean(description)});
+  }
   return null;
 }
 
