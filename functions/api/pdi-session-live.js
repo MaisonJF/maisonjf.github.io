@@ -72,7 +72,12 @@ export async function onRequestGet({request,env}){
         B:frozen.packB.map(card=>({id:card.id,position:card.position,text:card.text}))
       }
     });
-  }catch{
+  }catch(error){
+    console.error('[pdi-session-live] session_failed',{
+      name:String(error?.name||'Error'),
+      code:String(error?.code||''),
+      message:String(error?.message||'unknown').slice(0,180)
+    });
     return json({error:'Não foi possível abrir esta sessão.'},500);
   }
 }
