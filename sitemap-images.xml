@@ -54,6 +54,17 @@
   </url>
   <url>
     <loc>https://maison-jf.com/produtos/oleo-massagem/</loc>
-    <image:image><image:loc>https://maison-jf.com/images/cinematic/ritual.avif</image:loc></image:image>
+    <image:image><image:loc>https://maison-jf.com/images/products/oleo-massagem/oleo-massagem-hero.webp</image:loc></image:image>
+  </url>
+  <url><loc>https://maison-jf.com/produtos/vela-vidro/</loc><image:image><image:loc>https://maison-jf.com/images/products/vela-vidro/vela-170g-produto.webp</image:loc></image:image></url>
+  <url><loc>https://maison-jf.com/produtos/vela-pequena/</loc><image:image><image:loc>https://maison-jf.com/images/products/vela-pequena/hero.webp</image:loc></image:image></url>
+  <url><loc>https://maison-jf.com/produtos/nevoa/</loc><image:image><image:loc>https://maison-jf.com/images/products/nevoa/hero.webp</image:loc></image:image></url>
+  <url><loc>https://maison-jf.com/produtos/escalda-pes/</loc><image:image><image:loc>https://maison-jf.com/images/products/escalda-pes/01-hero-packshot-editorial.webp</image:loc></image:image></url>
+  <url>
+    <loc>https://maison-jf.com/produtos/maison-jf-bundles/</loc>
+    <image:image><image:loc>https://maison-jf.com/images/products/escalda-pes/01-hero-packshot-editorial.webp</image:loc></image:image>
+    <image:image><image:loc>https://maison-jf.com/images/products/nevoa/hero.webp</image:loc></image:image>
+    <image:image><image:loc>https://maison-jf.com/images/products/vela-pequena/hero.webp</image:loc></image:image>
+    <image:image><image:loc>https://maison-jf.com/images/products/oleo-massagem/oleo-massagem-hero.webp</image:loc></image:image>
   </url>
 </urlset>
