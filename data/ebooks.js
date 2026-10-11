@@ -6,7 +6,7 @@ window.MAISON_EBOOKS=[
     collection:'Sem Filtros · Éditions Maison JF',
     language:'pt-PT',format:'ebook',formats:['pdf','epub'],status:'published',
     description:'Um livro para parar de passar por cima do que já sabes que está a pedir atenção. Para reconhecer o que tens ignorado e finalmente olhar.',
-    price:5.99,currency:'EUR',cover:'/images/ebooks/para-de-ignorar.webp?v=20260930-farol',media:[{role:'cover',src:'/images/ebooks/para-de-ignorar.webp?v=20260930-farol',alt:'Capa do ebook Pára de Ignorar!, de João Fadario',aspect:'book',caption:'Pára de Ignorar! · João Fadario'}],purchaseUrl:null,featured:true
+    price:5.99,brlPrice:24.90,currency:'EUR',cover:'/images/ebooks/para-de-ignorar.webp?v=20260930-farol',media:[{role:'cover',src:'/images/ebooks/para-de-ignorar.webp?v=20260930-farol',alt:'Capa do ebook Pára de Ignorar!, de João Fadario',aspect:'book',caption:'Pára de Ignorar! · João Fadario'}],purchaseUrl:null,featured:true
   },
   {
     slug:'raio-azul',
@@ -15,7 +15,7 @@ window.MAISON_EBOOKS=[
     collection:'Espiritualidade · Colecção Os Sete Raios · Éditions Maison JF',
     language:'pt-PT',format:'ebook',formats:['pdf','epub'],status:'published',
     description:'Vontade, protecção e direcção sem fazer guerra à própria vida. O primeiro volume da Colecção Os Sete Raios aproxima tradição espiritual, reflexão e prática com linguagem humana.',
-    price:3.50,currency:'EUR',cover:'/images/ebooks/raio-azul.webp?v=20260929-final',media:[{role:'cover',src:'/images/ebooks/raio-azul.webp?v=20260929-final',alt:'Capa do ebook Raio Azul, de João Fadario',aspect:'book',caption:'Colecção Os Sete Raios · Raio Azul'}],purchaseUrl:null,featured:true
+    price:3.50,brlPrice:14.90,currency:'EUR',cover:'/images/ebooks/raio-azul.webp?v=20260929-final',media:[{role:'cover',src:'/images/ebooks/raio-azul.webp?v=20260929-final',alt:'Capa do ebook Raio Azul, de João Fadario',aspect:'book',caption:'Colecção Os Sete Raios · Raio Azul'}],purchaseUrl:null,featured:true
   },
   {
     slug:'virgulas-do-destino-o-turista',
@@ -24,7 +24,7 @@ window.MAISON_EBOOKS=[
     collection:'Ficção · Vírgulas do Destino · Éditions Maison JF',
     language:'pt-PT',format:'ebook',formats:['pdf','epub'],status:'published',
     description:'O primeiro livro da saga Vírgulas do Destino. Desejo, destino, mistério e um encontro que continua a fazer perguntas depois da última página.',
-    price:2.99,currency:'EUR',cover:'/images/ebooks/o-turista.webp',media:[{role:'cover',src:'/images/ebooks/o-turista.webp',alt:'Capa do ebook Vírgulas do Destino: O Turista',aspect:'book',caption:'Vírgulas do Destino · O Turista'}],purchaseUrl:null,featured:true
+    price:2.99,brlPrice:12.90,currency:'EUR',cover:'/images/ebooks/o-turista.webp',media:[{role:'cover',src:'/images/ebooks/o-turista.webp',alt:'Capa do ebook Vírgulas do Destino: O Turista',aspect:'book',caption:'Vírgulas do Destino · O Turista'}],purchaseUrl:null,featured:true
   },
   {
     slug:'virgulas-do-destino-meandros-da-vida',
