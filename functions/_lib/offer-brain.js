@@ -1,3 +1,5 @@
+import { normalizeMaisonLocale } from './maison-locales.js';
+
 export const MAISON_OFFER_BRAIN={
   version:'2026-09-26-v7',
   freeOnly:'/teste/',
@@ -83,9 +85,11 @@ export const MAISON_OFFER_CATALOGUE=[
 
 export function recommendMaisonOffers(signal={}, learning={}){
   const profile=normalizeProfile(signal);
+  const locale=normalizeMaisonLocale(signal.locale||signal.lang||'pt-PT');
   const territories=AXIS_TERRITORIES[profile.result]||[];
   const scored=MAISON_OFFER_CATALOGUE
     .filter(o=>o.status!=='hidden' && o.stage!=='continuity')
+    .filter(o=>locale!=='pt-BR'||!(o.format==='physical'||String(o.family||'').startsWith('physical-')))
     .map(offer=>scoreOffer(offer,profile,territories,learning))
     .sort((a,b)=>b.score-a.score || compareAmount(a.offer.amount,b.offer.amount));
 
@@ -131,7 +135,7 @@ export function recommendMaisonOffers(signal={}, learning={}){
     version:MAISON_OFFER_BRAIN.version,
     result:profile.result,
     route:profile.route,
-    offers:selected.slice(0,MAISON_OFFER_BRAIN.maxOffers).map((entry,index)=>publicOffer(entry,index))
+    offers:selected.slice(0,MAISON_OFFER_BRAIN.maxOffers).map((entry,index)=>publicOffer(entry,index,locale))
   };
 }
 
@@ -201,8 +205,15 @@ function diversityOk(offer,selected){
   return true;
 }
 
-function publicOffer(entry,index){
+function publicOffer(entry,index,locale='pt-PT'){
   const o=entry.offer;
+  const brazilPrices={
+    'oracle-seen':'R$ 9,90','oracle-attachment':'R$ 9,90','oracle-self':'R$ 9,90',
+    'oracle-self-worth':'R$ 9,90','oracle-control':'R$ 9,90','oracle-belong':'R$ 9,90',
+    'oracle-load':'R$ 9,90','oracle-direction':'R$ 9,90','oracle-security':'R$ 9,90',
+    'pdi-relacoes':'R$ 19,90','ebook-para-de-ignorar':'R$ 24,90',
+    'ebook-turista':'R$ 12,90','ebook-meandros':'R$ 14,90'
+  };
   const group=offerGroup(o);
   const labels={
     oracle:'Outra perspectiva',
@@ -219,7 +230,7 @@ function publicOffer(entry,index){
     title:o.title,
     description:o.description,
     href:o.href,
-    priceLabel:o.priceLabel||'',
+    priceLabel:locale==='pt-BR'?(brazilPrices[o.id]||''):o.priceLabel||'',
     format:o.format,
     score:entry.score,
     reasonCodes:entry.reasons
