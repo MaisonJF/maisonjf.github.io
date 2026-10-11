@@ -137,11 +137,11 @@ export const ORACLE_PUBLIC_COPY=Object.freeze({
   },
   'pt-BR':{
     title:'Oráculo',description:'Oráculo MAISON JF®: territórios simbólicos de reflexão. Escolha apenas onde a pergunta vive.',
-    question:'Não diga a pergunta. Pense nela.',word:'Agora escreva uma palavra.',price:'Uma abertura. Uma leitura.',
+    question:'Não diga a pergunta. Pense nela.',word:'Agora escreva uma palavra.',price:'Uma abertura · R$ 9,90. Uma leitura.',
     choose:'ESCOLHER TERRITÓRIO',placeholder:'amor, trabalho, dinheiro, saudade…',prompt:'Escolha um território ou escreva uma palavra.',
     noResult:'Tente outra palavra.',pathSingular:'caminho encontrado',pathPlural:'caminhos encontrados',
     landingTitle:'Não diga qual é a pergunta.',landingLead:'Pense na sua pergunta dentro deste território. Você não precisa explicá-la. Guarde-a com você e deixe o território apenas dar contexto.',
-    ready:'Quando estiver pronto, abra.',readingPrice:'Uma leitura · 2 €',open:'Abrir o Oráculo',
+    ready:'Quando estiver pronto, abra.',readingPrice:'Uma leitura · R$ 9,90',open:'Abrir o Oráculo',
     disclaimer:'Leitura simbólica. Não lê pensamentos, não prevê o futuro e não decide por você.',
     back:'← Escolher outro território',indexDisclaimer:'A leitura é simbólica. O Oráculo não determina o futuro, não garante acontecimentos e não substitui cuidados profissionais quando são necessários.',cancelled:'A abertura não foi cobrada. Você pode voltar quando quiser.',
     preparing:'Preparando sua abertura...',paymentError:'Não foi possível abrir o pagamento. Tente novamente.'
