@@ -26,6 +26,11 @@
       <label class="cart__zone"><input type="radio" name="shipping" value="eu"><span><strong>União Europeia</strong><small>17,90 € · grátis a partir de 99 €</small></span></label>
       <label class="cart__zone"><input type="radio" name="shipping" value="world"><span><strong>Resto do mundo</strong><small>29,90 € · grátis a partir de 149 €</small></span></label>
     </div>
+    <div class="cart__zones" id="ptPostcodeWrap" hidden>
+      <label for="ptPostcode"><strong>Código postal português</strong></label>
+      <input id="ptPostcode" name="ptPostcode" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="Ex.: 4000-123" maxlength="8" aria-describedby="ptPostcodeHelp" style="width:100%;padding:14px;background:#10100f;color:#eee9df;border:1px solid var(--line);font:inherit">
+      <small id="ptPostcodeHelp" style="color:#aaa39a">Usamos o código postal para confirmar se os portes são do Continente ou das ilhas. Introduz o mesmo código postal que vais usar na morada de entrega.</small>
+    </div>
     <div class="cart__row"><span>Envio</span><strong id="shipping">Escolhe a zona</strong></div>
     <div class="cart__row cart__total"><span>Total</span><strong id="total">0 €</strong></div>
     <button class="button button--light" id="checkout" type="button" disabled>Escolhe a zona</button>
@@ -45,7 +50,7 @@
   eu:{amount:17.90,threshold:99},
   world:{amount:29.90,threshold:149}
  };
- const itemsHost=document.getElementById('cartItems'),summary=document.getElementById('cartSummary'),subtotalEl=document.getElementById('subtotal'),shippingEl=document.getElementById('shipping'),totalEl=document.getElementById('total'),checkout=document.getElementById('checkout'),status=document.getElementById('status');
+ const itemsHost=document.getElementById('cartItems'),summary=document.getElementById('cartSummary'),subtotalEl=document.getElementById('subtotal'),shippingEl=document.getElementById('shipping'),totalEl=document.getElementById('total'),checkout=document.getElementById('checkout'),status=document.getElementById('status'),ptPostcodeWrap=document.getElementById('ptPostcodeWrap'),ptPostcode=document.getElementById('ptPostcode');
  const money=n=>new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR',minimumFractionDigits:Number.isInteger(n)?0:2,maximumFractionDigits:2}).format(n);
  const read=()=>{try{const raw=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(raw)?raw:[]}catch{return[]}};
  const write=items=>localStorage.setItem(KEY,JSON.stringify(items.filter(x=>x.quantity>0)));
@@ -66,6 +71,17 @@
   const z=zone(); if(!z)return null;
   const r=rates[z],sub=subtotal(); return sub>=r.threshold?0:r.amount;
  }
+ function portuguesePostcodeStatus(){
+  const z=zone();
+  if(z!=='mainland'&&z!=='islands')return {required:false,valid:true,message:''};
+  const value=ptPostcode.value.trim();
+  if(!/^\d{4}-?\d{3}$/.test(value))return {required:true,valid:false,message:value?'Introduz um código postal válido, no formato 4000-123.':'Indica o código postal da morada de entrega.'};
+  const prefix=Number(value.replace('-','').slice(0,4));
+  if(prefix<1000||prefix>9999)return {required:true,valid:false,message:'Confirma o código postal português.'};
+  const inferredZone=prefix>=9000?'islands':'mainland';
+  if(inferredZone!==z)return {required:true,valid:false,message:inferredZone==='islands'?'Este código postal parece ser dos Açores ou da Madeira. Seleciona essa zona.':'Este código postal parece ser do Continente. Seleciona Portugal Continental.'};
+  return {required:true,valid:true,message:''};
+ }
  function render(){
   itemsHost.innerHTML='';
   if(!cart.length){
@@ -83,12 +99,15 @@
   updateTotals();write(cart);
  }
  function updateTotals(){
-  const sub=subtotal(),ship=shippingCost();
+  const sub=subtotal(),ship=shippingCost(),z=zone(),postcode=portuguesePostcodeStatus();
+  ptPostcodeWrap.hidden=!(z==='mainland'||z==='islands');
   subtotalEl.textContent=money(sub);
   shippingEl.textContent=ship===null?'Escolhe a zona':ship===0?'Grátis':money(ship);
   totalEl.textContent=money(sub+(ship||0));
-  checkout.disabled=!cart.length||!zone();
-  checkout.textContent=zone()?'Continuar para pagamento':'Escolhe a zona';
+  checkout.disabled=!cart.length||!z||!postcode.valid;
+  checkout.textContent=!z?'Escolhe a zona':!postcode.valid?'Confirma o código postal':'Continuar para pagamento';
+  if((z==='mainland'||z==='islands')&&!postcode.valid)status.textContent=postcode.message;
+  else if(status.textContent.includes('código postal')||status.textContent.includes('código postal português'))status.textContent='';
  }
  itemsHost.addEventListener('click',e=>{
   const inc=e.target.closest('[data-inc]'),dec=e.target.closest('[data-dec]'),rem=e.target.closest('[data-remove]');
@@ -98,12 +117,13 @@
   render();
  });
  document.querySelectorAll('input[name="shipping"]').forEach(input=>input.addEventListener('change',updateTotals));
+ ptPostcode.addEventListener('input',updateTotals);
  checkout.addEventListener('click',async()=>{
-  const z=zone();if(!z||!cart.length)return;
+  const z=zone(),postcode=portuguesePostcodeStatus();if(!z||!cart.length||!postcode.valid){updateTotals();return;}
   checkout.disabled=true;checkout.textContent='A abrir pagamento…';status.textContent='';
   window.maisonAnalytics?.track?.('physical_cart_checkout_intent',{items:cart,subtotal:subtotal(),shipping_zone:z,page_path:location.pathname});
   try{
-   const response=await fetch('/api/create-product-checkout-live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({items:cart,shipping_zone:z,attribution:window.maisonAnalytics?.getAttribution?.()||{}})});
+   const response=await fetch('/api/create-product-checkout-live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({items:cart,shipping_zone:z,shipping_postal_code:ptPostcode.value.trim(),attribution:window.maisonAnalytics?.getAttribution?.()||{}})});
    const data=await response.json().catch(()=>({}));
    if(!response.ok||!data.url)throw new Error(data.error||'Não foi possível abrir o checkout.');
    location.href=data.url;
