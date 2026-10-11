@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import {
   brazilMarketAccessResponse,
   brazilSessionEligibilityResponse,
@@ -41,6 +42,51 @@ assert.equal(brazilSessionEligibilityResponse(eligibleSession, 'pt-PT', 2190), n
 
 // Guard against accidentally wiring only the checkout-creation side.
 const source = path => readFileSync(path, 'utf8');
+
+function walkFiles(directory) {
+  return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+    const path = join(directory, entry.name);
+    return entry.isDirectory() ? walkFiles(path) : [path];
+  });
+}
+
+const apiFiles = walkFiles('functions/api').filter(path => path.endsWith('.js'));
+const checkoutCreators = apiFiles.filter(path => {
+  const code = source(path);
+  return code.includes('/v1/checkout/sessions') && /method\s*:\s*['"]POST['"]/.test(code);
+});
+
+for (const path of checkoutCreators) {
+  const code = source(path);
+  const hasMarketGate = code.includes('brazilMarketAccessResponse');
+  const hasReasonedExemption = /BRAZIL_MARKET_EXEMPT:\s*[^\n]{20,}/.test(code);
+  assert.ok(
+    hasMarketGate || hasReasonedExemption,
+    `${path} creates Stripe Checkout but has neither the Brazil-market eligibility gate nor a reasoned BRAZIL_MARKET_EXEMPT exception. See .github/maison-growth/commerce/BRAZIL-MARKET-PRICING-POLICY.md`
+  );
+}
+
+const paidSessionResolvers = apiFiles.filter(path => {
+  const code = source(path);
+  return code.includes('/v1/checkout/sessions/') && code.includes('payment_status');
+});
+
+for (const path of paidSessionResolvers) {
+  const code = source(path);
+  const hasDeliveryGate = code.includes('brazilSessionEligibilityResponse');
+  const hasReasonedExemption = /BRAZIL_MARKET_FULFILLMENT_EXEMPT:\s*[^\n]{20,}/.test(code);
+  assert.ok(
+    hasDeliveryGate || hasReasonedExemption,
+    `${path} reads paid Stripe sessions but has neither Brazil digital-fulfillment validation nor a reasoned BRAZIL_MARKET_FULFILLMENT_EXEMPT exception. See .github/maison-growth/commerce/BRAZIL-MARKET-PRICING-POLICY.md`
+  );
+}
+
+const policy = source('.github/maison-growth/commerce/BRAZIL-MARKET-PRICING-POLICY.md');
+assert.ok(policy.includes('Idioma não é elegibilidade.'));
+assert.ok(policy.includes('Validação antes da entrega.'));
+assert.ok(policy.includes('VPNs e moradas falsas'));
+assert.ok(source('functions/_lib/offer-brain.js').includes('brazilDigitalMarket:'));
+
 for (const [path, token] of [
   ['functions/api/create-checkout-live.js', 'brazilMarketAccessResponse'],
   ['functions/api/create-oracle-checkout-live.js', 'brazilMarketAccessResponse'],
