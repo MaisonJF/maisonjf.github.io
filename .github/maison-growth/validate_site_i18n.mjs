@@ -6,6 +6,7 @@ import {
   hasLocalizedSiteCoverage,
   translateMaisonHtml
 } from '../../functions/_lib/site-i18n.js';
+import { rewritePdiProductPriceSchema } from '../../functions/_lib/site-localizer.js';
 
 function assert(condition,message){
   if(!condition)throw new Error(message);
@@ -89,3 +90,13 @@ assert(translateMaisonHtml(products,'en','/produtos/').includes('Some things are
 assert(translateMaisonHtml(products,'es','/produtos/').includes('Hay cosas que se sienten'),'products_es_translation_missing');
 
 console.log('Maison public-site localization contract: OK');
+
+const pdiSchema='<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"PÁRA DE IGNORAR! · Jogo digital","offers":{"@type":"Offer","priceCurrency":"EUR","price":"5.00","url":"https://maison-jf.com/para-de-ignorar/"}}</script>';
+const pdiBrazilSchema=rewritePdiProductPriceSchema(pdiSchema,'/para-de-ignorar/','pt-BR');
+assert(pdiBrazilSchema.includes('"priceCurrency":"BRL"'),'pdi_brazil_schema_currency_missing');
+assert(pdiBrazilSchema.includes('"price":"19.90"'),'pdi_brazil_schema_price_missing');
+const pdiPortugalSchema=rewritePdiProductPriceSchema(pdiSchema,'/para-de-ignorar/','pt-PT');
+assert(pdiPortugalSchema.includes('"priceCurrency":"EUR"')&&pdiPortugalSchema.includes('"price":"5.00"'),'pdi_portugal_schema_price_changed');
+const pdiOtherRouteSchema=rewritePdiProductPriceSchema(pdiSchema,'/produtos/','pt-BR');
+assert(pdiOtherRouteSchema.includes('"priceCurrency":"EUR"'),'pdi_unrelated_schema_changed');
+
