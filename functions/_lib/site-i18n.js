@@ -677,7 +677,7 @@ const PDI={
     'Sem justificações.':'Sem justificativas.',
     'Troquem.':'Troquem.',
     'Agora é a vez do outro.':'Agora é a vez da outra pessoa.',
-    'Cada tema · 28 perguntas · 5 €':'Cada tema · 28 perguntas · 5 €',
+    'Cada tema · 28 perguntas · 5 €':'Cada tema · 28 perguntas · R$ 19,90',
     'Escolhe por onde entrar':'Escolha por onde entrar',
     'Escolhe onde dói.':'Escolha onde dói.',
     'Ou onde tens curiosidade.':'Ou onde você tem curiosidade.',
