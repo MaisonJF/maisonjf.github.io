@@ -1,5 +1,6 @@
 import { pdiThemeAvailability } from '../_lib/pdi-theme-catalogue.js';
 import { normalizeMaisonLocale, stripeLocaleForMaison } from '../_lib/maison-locales.js';
+import { brazilMarketAccessResponse } from '../_lib/brazil-market.js';
 
 const PDI_PRODUCT_NAME={
   'pt-PT':'PÁRA DE IGNORAR!',
@@ -28,6 +29,8 @@ export async function onRequestPost({request,env}){
     const rawLocale=body?.locale??body?.lang??'pt-PT';
     const locale=normalizeMaisonLocale(rawLocale,{fallback:null});
     if(!locale)return json({error:'Idioma inválido.'},400);
+    const marketError = brazilMarketAccessResponse(request, locale);
+    if (marketError) return marketError;
     const product=await pdiThemeAvailability(env,theme,locale);
     if(!product)return json({error:'Produto inválido.'},400);
     if(!product.available)return json({error:'Este tema ainda não está disponível neste idioma.'},409);
@@ -35,6 +38,7 @@ export async function onRequestPost({request,env}){
     const params=new URLSearchParams();
     params.set('mode','payment');
     params.set('locale',stripeLocaleForMaison(locale));
+    params.set('billing_address_collection',locale==='pt-BR'?'required':'auto');
     params.set('line_items[0][quantity]','1');
     params.set('line_items[0][price_data][currency]',String(product.currency||'eur'));
     params.set('line_items[0][price_data][unit_amount]',String(product.amount));
