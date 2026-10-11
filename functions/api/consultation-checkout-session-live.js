@@ -1,3 +1,4 @@
+// BRAZIL_MARKET_FULFILLMENT_EXEMPT: consultation services currently use EUR in every locale and are arranged manually; apply Brazil eligibility validation before introducing a BRL price.
 const SERVICES={
   'tarot':'Tarot · Uma consulta',
   'consulta-escrita-breve':'Por escrito · Breve',
