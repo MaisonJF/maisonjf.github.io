@@ -14,6 +14,7 @@ export async function onRequestGet({request,env}){
         label:item.label,
         family:item.family,
         available:true,
+        live_questions:item.liveQuestions,
         currency:String(item.currency||'eur').toUpperCase(),
         amount_cents:item.amount,
         display_price:formatPrice(item.amount,item.currency,locale)
