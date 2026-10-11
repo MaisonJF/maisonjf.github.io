@@ -374,7 +374,7 @@
     }
   }
 
-  /* COMPANHIA */
+  /* PRESENÇA */
   if (page === 'presenca.html') {
     setText('.detail-hero .detail-title', 'Já deixaste de ir porque não tinhas com quem.');
     setText('.detail-hero .detail-lead', 'O plano continua a apetecer-te. A falta de companhia não tem de decidir por ti.');
