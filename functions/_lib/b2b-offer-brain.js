@@ -218,7 +218,7 @@ export const MAISON_B2B_BRAIN={
     quoteRule:'Nenhum valor desconhecido é preenchido por estimativa silenciosa. A proposta só fixa preço, quantidade mínima, prazo, desconto ou margem depois de custo e capacidade observados.',
     marginRule:'Não usar preço B2C menos uma percentagem arbitrária como preço B2B. Calcular primeiro custo real, esforço, embalagem, personalização, perdas, impostos aplicáveis e margem MAISON.',
     pilotRule:'Quando MOQ, capacidade ou margem ainda são desconhecidos, preferir um piloto pequeno com âmbito e preço explicitamente aprovados a criar uma tabela grossista fictícia.',
-    productRefs:['MJ-VELA-170','MJ-VELA-070','MJ-OLEO-060','MJ-NEVOA-020','MJ-ESCALDA-150']
+    productRefs:['MJ-VELA-170','MJ-VELA-070','MJ-OLEO-060','MJ-NEVOA-020','MJ-ESCALDA-280']
   },
   recurrence:{
     supportedNow:['reorder','repeat_project','occasion','seasonal_project'],
