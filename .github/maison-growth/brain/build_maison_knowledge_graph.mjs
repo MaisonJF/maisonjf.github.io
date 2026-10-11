@@ -21,7 +21,7 @@ const TERRITORIES={
   casa:{label:'Casa',url:'/portas/casa'},
   corpo:{label:'Corpo',url:'/portas/corpo'},
   cabeca:{label:'Cabeça',url:'/portas/cabeca'},
-  presenca:{label:'Presença',url:'/portas/companhia'}
+  presenca:{label:'Presença',url:'/portas/presenca'}
 };
 
 function norm(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
