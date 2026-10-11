@@ -76,7 +76,7 @@ export function rewriteBrazilEbookPriceSchema(html,sourcePath,locale){
   if(locale!=='pt-BR')return String(html);
   const source=normalizePublicSitePath(sourcePath).replace(/\/$/,'');
   const prices={
-    '/ebooks/para-de-ignorar': '24.90',
+    '/ebooks/para-de-ignorar': '21.90',
     '/ebooks/raio-azul': '14.90',
     '/ebooks/virgulas-do-destino-o-turista': '12.90',
     '/ebooks/virgulas-do-destino-meandros-da-vida': '14.90'
