@@ -44,6 +44,12 @@
 (()=>{
  const KEY='maisonPhysicalCartV1';
  const products=Object.fromEntries((window.MAISON_PRODUCTS||[]).map(p=>[p.slug,p]));
+ const bundles={
+  'bundle-essencial':{slug:'bundle-essencial',name:'Maison JF Bundle Essencial',size:'Escalda-Pés + Névoa',price:10,category:'Casa'},
+  'bundle-corpo-alma':{slug:'bundle-corpo-alma',name:'Maison JF Bundle Corpo & Alma',size:'Escalda-Pés + Óleo de Massagem',price:15,category:'Corpo'},
+  'bundle-completo':{slug:'bundle-completo',name:'Maison JF Bundle Completo',size:'Escalda-Pés + Névoa + Vela + Óleo de Massagem',price:29,category:'Casa'}
+ };
+ Object.assign(products,bundles);
  const rates={
   mainland:{amount:5.90,threshold:49},
   islands:{amount:11.90,threshold:79},
@@ -55,6 +61,12 @@
  const read=()=>{try{const raw=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(raw)?raw:[]}catch{return[]}};
  const write=items=>localStorage.setItem(KEY,JSON.stringify(items.filter(x=>x.quantity>0)));
  let cart=normalise(read());
+ const requestedBundle=new URLSearchParams(location.search).get('add');
+ if(bundles[requestedBundle]){
+  cart=normalise([...cart,{slug:requestedBundle,quantity:1}]);
+  write(cart);
+  history.replaceState({},'',location.pathname);
+ }
 
  function normalise(list){
   const map=new Map();
