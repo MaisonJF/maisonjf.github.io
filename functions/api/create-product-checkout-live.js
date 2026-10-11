@@ -33,6 +33,14 @@ export async function onRequestPost({request,env}){
     const zoneKey=String(body?.shipping_zone||'');
     const shipping=SHIPPING[zoneKey];
     if(!shipping)return json({error:'Escolhe a zona de envio antes de pagar.'},400);
+    if(zoneKey==='mainland'||zoneKey==='islands'){
+      const postalCode=String(body?.shipping_postal_code||'').trim();
+      if(!/^\d{4}-?\d{3}$/.test(postalCode))return json({error:'Indica um código postal português válido para confirmar a zona de envio.'},400);
+      const prefix=Number(postalCode.replace('-','').slice(0,4));
+      if(prefix<1000||prefix>9999)return json({error:'Confirma o código postal português.'},400);
+      const inferredZone=prefix>=9000?'islands':'mainland';
+      if(inferredZone!==zoneKey)return json({error:inferredZone==='islands'?'O código postal indicado corresponde aos Açores ou à Madeira. Seleciona essa zona.':'O código postal indicado corresponde a Portugal Continental. Seleciona essa zona.'},400);
+    }
 
     const subtotalCents=items.reduce((sum,item)=>sum+PRODUCTS[item.slug].unitCents*item.quantity,0);
     const shippingCents=subtotalCents>=shipping.threshold?0:shipping.amount;
@@ -66,7 +74,7 @@ export async function onRequestPost({request,env}){
     params.set('custom_fields[0][numeric][minimum_length]','9');
     params.set('custom_fields[0][numeric][maximum_length]','9');
 
-    params.set('custom_text[submit][message]','Confirma que a zona de envio escolhida corresponde à tua morada. Ao pagar, aceitas as condições, envios e devoluções da MAISON JF®.');
+    params.set('custom_text[submit][message]','Confirma que a zona de envio e o código postal indicados no carrinho correspondem à morada que vais introduzir. Ao pagar, aceitas as condições, envios e devoluções da MAISON JF®.');
 
     shipping.countries.forEach((country,i)=>{
       params.set('shipping_address_collection[allowed_countries]['+i+']',country);
