@@ -50,7 +50,8 @@ assert(/noindex/i.test(read('informacao-legal.html')),'legal utility must remain
 const products=loadBrowserData('data/products.js','MAISON_PRODUCTS');
 assert(Array.isArray(products)&&products.length>0);
 for(const product of products){
-  const line='- '+product.name+' — '+product.size+' — '+euro(product.price)+' €';
+  const size=product.size||(product.slug==='maison-jf-bundles'?'3 seleções':'formato por definir');
+  const line='- '+product.name+' — '+size+' — '+euro(product.price)+' €';
   assert(llms.includes(line),'llms product fact drift: '+line);
 }
 
