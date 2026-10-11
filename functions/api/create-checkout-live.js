@@ -1,4 +1,5 @@
 import { EBOOKS, isEbookId } from '../_lib/ebooks-live.js';
+import { normalizeMaisonLocale, stripeLocaleForMaison } from '../_lib/maison-locales.js';
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -33,31 +34,45 @@ export async function onRequestPost({ request, env }) {
     if (!items.length) return json({ error: 'Escolhe pelo menos um ebook.' }, 400);
 
     const ebookIds = items.map(item => item.id);
+    const locale = normalizeMaisonLocale(body?.locale ?? 'pt-PT');
+    const isBrazil = locale === 'pt-BR';
+    const currency = isBrazil ? 'brl' : 'eur';
     const origin = new URL(request.url).origin;
     const params = new URLSearchParams();
 
     params.set('mode', 'payment');
-    params.set('success_url', origin + '/checkout-sucesso-live.html?session_id={CHECKOUT_SESSION_ID}');
-    params.set('cancel_url', origin + '/ebooks/?checkout_cancelado=1');
+    params.set('success_url', origin + '/checkout-sucesso-live.html?session_id={CHECKOUT_SESSION_ID}&locale=' + encodeURIComponent(locale));
+    params.set('cancel_url', origin + (isBrazil ? '/pt-br/ebooks/' : '/ebooks/') + '?checkout_cancelado=1');
     params.set('customer_creation', 'always');
     params.set('billing_address_collection', 'auto');
-    params.set('locale', 'pt');
+    params.set('locale', stripeLocaleForMaison(locale));
     params.set('custom_fields[0][key]', 'nif');
     params.set('custom_fields[0][label][type]', 'custom');
-    params.set('custom_fields[0][label][custom]', 'NIF (opcional, para faturação)');
+    params.set('custom_fields[0][label][custom]', isBrazil ? 'CPF (opcional, para faturamento)' : 'NIF (opcional, para faturação)');
     params.set('custom_fields[0][type]', 'numeric');
     params.set('custom_fields[0][optional]', 'true');
-    params.set('custom_fields[0][numeric][minimum_length]', '9');
-    params.set('custom_fields[0][numeric][maximum_length]', '9');
-    params.set('custom_text[submit][message]', 'Ao pagar, confirmas a compra e aceitas as condições da MAISON JF®: https://maison-jf.com/informacao-legal.html. O download fica disponível após confirmação do pagamento. A fatura fiscal é emitida pela MAISON JF® separadamente.');
+    params.set('custom_fields[0][numeric][minimum_length]', isBrazil ? '11' : '9');
+    params.set('custom_fields[0][numeric][maximum_length]', isBrazil ? '11' : '9');
+    params.set('custom_text[submit][message]', isBrazil
+      ? 'Ao pagar, você confirma a compra e aceita as condições da MAISON JF®: https://maison-jf.com/informacao-legal.html. O download fica disponível após a confirmação do pagamento. O documento fiscal é emitido separadamente.'
+      : 'Ao pagar, confirmas a compra e aceitas as condições da MAISON JF®: https://maison-jf.com/informacao-legal.html. O download fica disponível após confirmação do pagamento. A fatura fiscal é emitida pela MAISON JF® separadamente.');
     params.set('submit_type', 'pay');
     params.set('metadata[environment]', 'maison-jf-live');
     params.set('metadata[source]', 'ebooks-live');
     params.set('metadata[has_physical]', '0');
     params.set('metadata[ebook_ids]', ebookIds.join(','));
+    params.set('metadata[ebook_locale]', locale);
+    params.set('metadata[checkout_currency]', currency);
 
     items.forEach((item, index) => {
-      params.set('line_items[' + index + '][price]', EBOOKS[item.id].priceId);
+      const ebook = EBOOKS[item.id];
+      if (isBrazil) {
+        params.set('line_items[' + index + '][price_data][currency]', 'brl');
+        params.set('line_items[' + index + '][price_data][unit_amount]', String(ebook.brlCents));
+        params.set('line_items[' + index + '][price_data][product_data][name]', ebook.title);
+      } else {
+        params.set('line_items[' + index + '][price]', ebook.priceId);
+      }
       params.set('line_items[' + index + '][quantity]', String(item.quantity));
     });
 
