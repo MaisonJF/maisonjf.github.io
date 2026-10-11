@@ -12,7 +12,10 @@
  const coverTarget=host.querySelector('[data-cover]');
  if(title)title.textContent=book.title;
  if(description)description.textContent=book.description||'';
- if(price)price.textContent=book.price==null?'':Number(book.price).toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+ const rawLocale=String(window.MAISON_LOCALE||document.documentElement.lang||'pt-PT').toLowerCase();
+ const isBrazil=rawLocale==='pt-br'||rawLocale.startsWith('pt-br-');
+ const displayAmount=isBrazil?(book.brlPrice??null):book.price;
+ if(price)price.textContent=displayAmount==null?'':(isBrazil?'R$ ':'')+Number(displayAmount).toLocaleString(isBrazil?'pt-BR':'pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2})+(isBrazil?'':' €');
  if(buy&&book.checkoutId&&book.price!=null){
    buy.hidden=false;buy.dataset.buyEbook=book.checkoutId;
    buy.textContent='Comprar agora';
