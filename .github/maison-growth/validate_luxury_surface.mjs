@@ -21,7 +21,14 @@ if(/presence-price/.test(presence))fail('presence_price_card_returned');
 if(/[?&]preco=/.test(presence))fail('presence_price_query_returned');
 
 for(const p of ['produtos/index.html','presentes/index.html','ebooks/index.html','oraculo/index.html']){
-  if(read(p).includes('€'))fail('discovery_price_returned:'+p);
+  const html=read(p);
+  if(p==='produtos/index.html'){
+    const approvedBundlePrice='Três combinações de produtos para oferecer ou criar o teu próprio momento, desde 10 €.';
+    if(!html.includes(approvedBundlePrice))fail('bundle_offer_price_contract_missing');
+    if(html.replace(approvedBundlePrice,'').includes('€'))fail('discovery_price_returned:'+p);
+  }else if(html.includes('€')){
+    fail('discovery_price_returned:'+p);
+  }
 }
 
 const css=read('maison.css');

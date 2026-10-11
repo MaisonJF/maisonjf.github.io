@@ -1,5 +1,5 @@
 import { requireMaisonVault } from './maison-vault.js';
-import { getPdiTheme, listPdiThemes, PDI_MINIMUM_LIVE_QUESTIONS } from './pdi-theme-registry.js';
+import { getPdiTheme, listPdiThemes, getPdiPriceForLocale, PDI_MINIMUM_LIVE_QUESTIONS } from './pdi-theme-registry.js';
 import { normalizeMaisonLocale } from './maison-locales.js';
 import { countLiveQuestionsForLocale, vaultLocalizationReady } from './maison-localized-content.js';
 import { localizeOracleLabel } from './oracle-public-locales.js';
@@ -50,10 +50,12 @@ function localizePdiText(value,locale){
 }
 
 function localizePdiTheme(item,locale){
+  const price=getPdiPriceForLocale(locale);
   return {
     ...item,
     label:localizePdiText(item.label,locale),
-    family:localizePdiText(item.family,locale)
+    family:localizePdiText(item.family,locale),
+    ...price
   };
 }
 

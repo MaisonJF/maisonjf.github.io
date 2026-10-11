@@ -1,4 +1,5 @@
 import { groupExactThemeSignals } from './pdi-theme-sources.js';
+import { normalizeMaisonLocale } from './maison-locales.js';
 
 const DEFAULT_AMOUNT=500;
 const MINIMUM_LIVE_QUESTIONS=28;
@@ -43,6 +44,13 @@ for(const group of groupExactThemeSignals()){
 
 export const PDI_THEME_REGISTRY=Object.freeze(themes);
 export const PDI_MINIMUM_LIVE_QUESTIONS=MINIMUM_LIVE_QUESTIONS;
+
+export function getPdiPriceForLocale(locale='pt-PT'){
+  const selected=normalizeMaisonLocale(locale);
+  return selected==='pt-BR'
+    ? {amount:1990,currency:'brl'}
+    : {amount:DEFAULT_AMOUNT,currency:'eur'};
+}
 
 export function getPdiTheme(slug){
   const key=String(slug||'').trim();

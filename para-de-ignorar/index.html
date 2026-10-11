@@ -34,7 +34,7 @@
 .pdi-theme small{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#8f887e}
 .pdi-theme h3{font:400 30px/1 var(--serif);margin:14px 0 10px}
 .pdi-theme p{font-size:14px;margin:0}
-.pdi-theme .pdi-buy{margin-top:auto;align-self:flex-start}
+.pdi-theme .pdi-theme__price{font:400 25px/1 var(--serif);color:#d8d0c2;margin:17px 0 24px}.pdi-theme .pdi-buy{margin-top:auto;align-self:flex-start}
 @media(max-width:900px){.pdi-theme-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){.pdi-sale{padding-top:110px}.pdi-sale__grid,.pdi-sale__promise,.pdi-theme-grid{grid-template-columns:1fr}.pdi-sale__promise{gap:30px}.pdi-sale__card{min-height:170px}.pdi-theme{min-height:180px}}
 </style>
@@ -66,7 +66,7 @@
     <article class="pdi-sale__card"><small>02</small><h2>Responde. Ou passa.</h2><p>Sem justificações.</p></article>
     <article class="pdi-sale__card"><small>03</small><h2>Troquem.</h2><p>Agora é a vez do outro.</p></article>
   </section>
-  <p class="pdi-sale__micro" style="text-align:center;margin-top:22px">Cada tema · 28 perguntas · 5 €</p>
+  <p class="pdi-sale__micro" style="text-align:center;margin-top:22px">Cada tema · 28 perguntas · pagamento único</p>
 
   <section class="pdi-themes" id="temas">
     <p class="eyebrow">Escolhe por onde entrar</p>
@@ -167,10 +167,11 @@
       const small=document.createElement('small');small.textContent=theme.family||'PÁRA DE IGNORAR!';
       const h=document.createElement('h3');h.textContent=theme.label;
       const p=document.createElement('p');p.textContent=t.questions;
+      const price=document.createElement('p');price.className='pdi-theme__price';price.textContent=theme.display_price||'';
       const button=document.createElement('button');
       button.className='pdi-buy';button.type='button';button.dataset.theme=theme.slug;
       button.textContent=t.play;
-      card.append(small,h,p,button);grid.append(card);
+      card.append(small,h,p,price,button);grid.append(card);
     }
   }
 

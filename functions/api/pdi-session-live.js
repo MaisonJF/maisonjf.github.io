@@ -1,5 +1,5 @@
 import { getOrCreateQuestionSession } from '../_lib/para-de-ignorar-session.js';
-import { getPdiTheme } from '../_lib/pdi-theme-registry.js';
+import { getPdiTheme, getPdiPriceForLocale } from '../_lib/pdi-theme-registry.js';
 import { normalizeMaisonLocale } from '../_lib/maison-locales.js';
 import { pdiThemeAvailability } from '../_lib/pdi-theme-catalogue.js';
 
@@ -38,6 +38,7 @@ export async function onRequestGet({request,env}){
     const theme=String(stripeSession.metadata?.pdi_theme||'');
     const locale=normalizeMaisonLocale(stripeSession.metadata?.pdi_locale||'pt-PT');
     const product=getPdiTheme(theme);
+    const expectedPrice=getPdiPriceForLocale(locale);
     const valid=
       product &&
       stripeSession.livemode===true &&
@@ -45,8 +46,8 @@ export async function onRequestGet({request,env}){
       stripeSession.metadata?.environment==='maison-jf-live' &&
       stripeSession.metadata?.source==='para-de-ignorar-live' &&
       stripeSession.metadata?.pdi_access==='single-session' &&
-      stripeSession.amount_total===product.amount &&
-      stripeSession.currency===String(product.currency||'eur') &&
+      stripeSession.amount_total===expectedPrice.amount &&
+      stripeSession.currency===expectedPrice.currency &&
       (!requestedTheme||requestedTheme===theme) &&
       (!requestedLocale||requestedLocale===locale);
 
