@@ -3,7 +3,10 @@ const PRODUCTS={
   'vela-pequena':{name:'Vela Aromática MAISON JF® 70 g',price:'price_1UHlIA5H3wYRPmPV3sMw6cZU',unitCents:800,max:10},
   'oleo-massagem':{name:'Óleo de Massagem MAISON JF® 60 ml',price:'price_1UEoZd5H3wYRPmPVVyUiS0MX',unitCents:1200,max:10},
   'nevoa':{name:'Névoa de Ambiente MAISON JF® 20 ml',price:'price_1UHlo65H3wYRPmPVQsQBBDOU',unitCents:700,max:10},
-  'escalda-pes':{name:'Escalda-Pés MAISON JF® 280 g',unitCents:950,max:10}
+  'escalda-pes':{name:'Escalda-Pés MAISON JF® 280 g',unitCents:950,max:10},
+  'bundle-essencial':{name:'Maison JF Bundle Essencial · Escalda-Pés + Névoa',unitCents:1000,max:10},
+  'bundle-corpo-alma':{name:'Maison JF Bundle Corpo & Alma · Escalda-Pés + Óleo de Massagem',unitCents:1500,max:10},
+  'bundle-completo':{name:'Maison JF Bundle Completo · Escalda-Pés + Névoa + Vela + Óleo de Massagem',unitCents:2900,max:10}
 };
 
 const EU_COUNTRIES=['ES','FR','BE','NL','LU','DE','IT','IE','AT','DK','SE','FI','PL','CZ','SK','SI','HR','GR','HU','RO','BG','EE','LV','LT','CY','MT'];
