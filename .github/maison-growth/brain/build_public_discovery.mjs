@@ -197,6 +197,8 @@ export function buildPublicDiscovery(){
   const redirectingInternalLinks=pages.flatMap(page=>
     page.redirecting_internal_links.map(link=>({source:page.url,...link}))
   );
+  if(orphanPages.length)console.error('orphan_public_pages:',JSON.stringify(orphanPages));
+  if(redirectingInternalLinks.length)console.error('redirecting_public_links:',JSON.stringify(redirectingInternalLinks));
   const missingMetadata=pages
     .filter(page=>!page.title||!page.description)
     .map(page=>({url:page.url,title:page.title,description:page.description}));
