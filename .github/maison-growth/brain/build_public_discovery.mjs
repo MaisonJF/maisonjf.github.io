@@ -219,6 +219,9 @@ export function buildPublicDiscovery(){
   const staleEdgeSchemaLastmod=pages
     .filter(page=>page.structured_data.source==='edge_derived'&&schemaRevision&&String(page.lastmod||'')<schemaRevision)
     .map(page=>page.url).sort();
+  if(staleEdgeSchemaLastmod.length){
+    console.error('stale_edge_schema_lastmod_pages:',JSON.stringify(staleEdgeSchemaLastmod));
+  }
   const robots=read('robots.txt'), llms=read('llms.txt');
   return {
     schema_version:'maison_public_discovery_v1',
