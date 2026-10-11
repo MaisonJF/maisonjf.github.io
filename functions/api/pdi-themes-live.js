@@ -20,7 +20,12 @@ export async function onRequestGet({request,env}){
       })),
       locale
     });
-  }catch{
+  }catch(error){
+    console.error('[pdi-themes-live] catalogue_failed',{
+      name:String(error?.name||'Error'),
+      code:String(error?.code||''),
+      message:String(error?.message||'unknown').slice(0,180)
+    });
     return json({themes:[]},503);
   }
 }
