@@ -74,7 +74,7 @@ export function rewritePdiProductPriceSchema(html,sourcePath,locale){
 
 export function rewriteBrazilEbookPriceSchema(html,sourcePath,locale){
   if(locale!=='pt-BR')return String(html);
-  const source=normalizePublicSitePath(sourcePath).replace(/\\/$/,'');
+  const source=normalizePublicSitePath(sourcePath).replace(/\/$/,'');
   const prices={
     '/ebooks/para-de-ignorar': '24.90',
     '/ebooks/raio-azul': '14.90',
@@ -84,7 +84,7 @@ export function rewriteBrazilEbookPriceSchema(html,sourcePath,locale){
   const price=prices[source];
   if(!price)return String(html);
   return String(html).replace(
-    /<script\\b([^>]*\\btype=(["'])application\\/ld\\+json\\2[^>]*)>([\\s\\S]*?)<\\/script>/gi,
+    /<script\b([^>]*\btype=(["'])application\/ld\+json\2[^>]*)>([\s\S]*?)<\/script>/gi,
     (full,attrs,_quote,body)=>{
       try{
         const parsed=JSON.parse(body);
@@ -102,7 +102,7 @@ function rewriteMetadata(html,sourcePath,locale){
   let out=rewritePdiProductPriceSchema(html,sourcePath,locale);
   out=rewriteBrazilEbookPriceSchema(out,sourcePath,locale);
   if(locale==='pt-BR'&&normalizePublicSitePath(sourcePath)==='/oraculo/'){
-    out=out.replace(/(<p class=["']oracle__price["']>)[\\s\\S]*?(<\\/p>)/i,'$1Uma abertura · R$ 9,90. Uma leitura.$2');
+    out=out.replace(/(<p class=["']oracle__price["']>)[\s\S]*?(<\/p>)/i,'$1Uma abertura · R$ 9,90. Uma leitura.$2');
   }
   out=out.replace(/<html\b([^>]*)\blang=(["'])[^"']*\2([^>]*)>/i,'<html$1lang="'+config.htmlLang+'"$3>');
   if(!/<html\b[^>]*\blang=/i.test(out))out=out.replace(/<html\b([^>]*)>/i,'<html$1 lang="'+config.htmlLang+'">');
