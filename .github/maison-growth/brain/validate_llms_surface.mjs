@@ -78,7 +78,7 @@ const ritual=read('espiritualidade/protecao-energetica.html');
 assert(/ritual personalizado/i.test(ritual)&&/Sob orçamento/i.test(ritual));
 assert(llms.includes('- Ritual Personalizado — sob orçamento'));
 
-const presence=read('portas/companhia.html');
+const presence=read('portas/presenca.html');
 const presenceFacts=[
   ['Presença Online','60 minutos','35 €','- Presença Online — 60 min — 35 €'],
   ['Presença Social','80 € · 2 horas','Hora adicional 40 €','- Presença Social — 2 horas — 80 €; hora adicional 40 €'],
