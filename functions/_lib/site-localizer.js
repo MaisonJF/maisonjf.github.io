@@ -53,9 +53,28 @@ function headLocaleMarkup(sourcePath,locale){
   ].join('');
 }
 
+export function rewritePdiProductPriceSchema(html,sourcePath,locale){
+  const source=normalizePublicSitePath(sourcePath);
+  if(source!=='/para-de-ignorar/'||locale!=='pt-BR')return String(html);
+  return String(html).replace(
+    /<script\b([^>]*\btype=(["'])application\/ld\+json\2[^>]*)>([\s\S]*?)<\/script>/gi,
+    (full,attrs,_quote,body)=>{
+      try{
+        const parsed=JSON.parse(body);
+        if(parsed?.['@type']!=='Product'||!parsed.offers||typeof parsed.offers!=='object')return full;
+        parsed.offers.priceCurrency='BRL';
+        parsed.offers.price='19.90';
+        return '<script'+attrs+'>'+JSON.stringify(parsed)+'</script>';
+      }catch(_){
+        return full;
+      }
+    }
+  );
+}
+
 function rewriteMetadata(html,sourcePath,locale){
   const config=MAISON_SITE_LOCALES[locale];
-  let out=String(html);
+  let out=rewritePdiProductPriceSchema(html,sourcePath,locale);
   out=out.replace(/<html\b([^>]*)\blang=(["'])[^"']*\2([^>]*)>/i,'<html$1lang="'+config.htmlLang+'"$3>');
   if(!/<html\b[^>]*\blang=/i.test(out))out=out.replace(/<html\b([^>]*)>/i,'<html$1 lang="'+config.htmlLang+'">');
 
