@@ -42,8 +42,10 @@ export async function onRequestPost({ request, env }) {
     params.set('locale', stripeLocaleForMaison(locale));
     params.set('customer_creation', 'always');
     params.set('billing_address_collection', 'auto');
-    params.set('line_items[0][price_data][currency]', 'eur');
-    params.set('line_items[0][price_data][unit_amount]', '200');
+    const amount = locale==='pt-BR' ? 990 : 200;
+    const currency = locale==='pt-BR' ? 'brl' : 'eur';
+    params.set('line_items[0][price_data][currency]', currency);
+    params.set('line_items[0][price_data][unit_amount]', String(amount));
     params.set('line_items[0][price_data][product_data][name]', 'Oráculo MAISON JF® | ' + localizeOracleLabel(territory.label,locale));
     const copy={
       'pt-PT':{description:'Uma abertura simbólica. Uma leitura.',legal:'Ao pagar, confirmas uma abertura do Oráculo MAISON JF® e aceitas as condições em maison-jf.com/informacao-legal.html.'},
@@ -58,6 +60,8 @@ export async function onRequestPost({ request, env }) {
     params.set('metadata[oracle_theme]', theme);
     params.set('metadata[oracle_locale]', locale);
     params.set('metadata[oracle_access]', 'single-reading');
+    params.set('metadata[oracle_currency]', currency);
+    params.set('metadata[oracle_amount]', String(amount));
     params.set('submit_type', 'pay');
     params.set('custom_text[submit][message]', copy.legal);
 
