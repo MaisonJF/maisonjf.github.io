@@ -23,8 +23,9 @@ const DELIVERY = {
 
 export async function onRequestPost({ request, env }) {
   try {
-    if (!env.STRIPE_SECRET_KEY) {
-      return json({ error: 'Falta configurar a chave Stripe do ambiente de teste no Cloudflare.' }, 503);
+    const stripeSecret = String(env.STRIPE_SECRET_KEY || '');
+    if (!/^(?:sk|rk)_test_/.test(stripeSecret)) {
+      return json({ error: 'O checkout de teste exige uma chave Stripe em modo de teste.' }, 503);
     }
 
     let body;
