@@ -1,4 +1,5 @@
 import {normalizeMaisonLocale,stripeLocaleForMaison} from '../_lib/maison-locales.js';
+// BRAZIL_MARKET_EXEMPT: these services currently charge EUR in every locale. Remove this exemption and apply the Brazil market gate plus fulfillment validation before introducing any BRL-localized price.
 
 const SERVICES={
   'tarot':{name:'Tarot · Uma consulta',amount:3500},
