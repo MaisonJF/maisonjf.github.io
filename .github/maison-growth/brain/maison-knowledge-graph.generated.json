@@ -108,7 +108,7 @@
     {
       "id": "presenca",
       "label": "Presença",
-      "url": "/portas/companhia",
+      "url": "/portas/presenca",
       "relatedOffers": [
         "oracle-seen",
         "oracle-attachment",
@@ -1166,7 +1166,7 @@
     {
       "id": "presenca",
       "title": "Presença",
-      "href": "/portas/companhia#formatos",
+      "href": "/portas/presenca#formatos",
       "format": "service",
       "family": "presence",
       "stage": "deeper",
@@ -1231,7 +1231,7 @@
     {
       "id": "sos",
       "title": "SOS Maison",
-      "href": "/portas/companhia#sos",
+      "href": "/portas/presenca#sos",
       "format": "service",
       "family": "presence",
       "stage": "continuity",

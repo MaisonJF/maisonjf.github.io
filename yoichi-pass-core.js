@@ -9,7 +9,7 @@
     if (routePath === '/produtos') return '/produtos/';
     if (routePath === '/servicos' || routePath === '/servicos.html') return 'servicos.html';
     if (routePath === '/profissionais' || routePath === '/profissionais.html') return 'profissionais.html';
-    if (routePath === '/portas/companhia' || routePath === '/portas/companhia.html' || routePath === '/companhia.html') return 'companhia.html';
+    if (routePath === '/portas/presenca' || routePath === '/portas/presenca.html' || routePath === '/companhia.html') return 'presenca.html';
     return routePath.split('/').filter(Boolean).pop() || 'index.html';
   })();
   document.body.dataset.yoichiPage = page;
@@ -171,7 +171,7 @@
           title: '“Quantas vezes mais vou desistir só porque não tenho com quem ir?”',
           desc: 'O plano continua a apetecer-te. Só não queres vivê-lo sem ninguém ao lado.',
           cta: 'Quero conhecer Presença',
-          href: '/portas/companhia.html'
+          href: '/portas/presenca.html'
         }
       ];
 
@@ -374,8 +374,8 @@
     }
   }
 
-  /* COMPANHIA */
-  if (page === 'companhia.html') {
+  /* PRESENÇA */
+  if (page === 'presenca.html') {
     setText('.detail-hero .detail-title', 'Já deixaste de ir porque não tinhas com quem.');
     setText('.detail-hero .detail-lead', 'O plano continua a apetecer-te. A falta de companhia não tem de decidir por ti.');
 

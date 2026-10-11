@@ -1,3 +1,6 @@
+/portas/companhia /portas/presenca 301
+/portas/companhia.html /portas/presenca 301
+
 # SEARCH-CONSOLE-LEGACY-RECOVERY — observed 2026-09-25
 /cart /produtos/carrinho/ 301
 /collections/all /produtos/ 301
@@ -33,8 +36,8 @@
 /produto-aguas-lencois /produtos/ 301
 /servicos.html /servicos/ 301
 /servicos /servicos/ 301
-/companhia.html /portas/companhia 301
-/companhia /portas/companhia 301
+/companhia.html /portas/presenca 301
+/companhia /portas/presenca 301
 /maison-todo-o-mes.html /servicos/#continuidade 301
 /maison-todo-o-mes /servicos/#continuidade 301
 /editions.html /ebooks/ 301
@@ -124,18 +127,18 @@
 /casa/como-tirar-cheiro-a-comida-de-casa /produtos/nevoa/ 301
 /casa/como-tornar-a-casa-mais-acolhedora.html /produtos/vela-vidro/ 301
 /casa/como-tornar-a-casa-mais-acolhedora /produtos/vela-vidro/ 301
-/companhia/companhia-para-jantar.html /portas/companhia 301
-/companhia/companhia-para-jantar /portas/companhia 301
-/companhia/nao-quero-ir-sozinho-a-um-evento.html /portas/companhia 301
-/companhia/nao-quero-ir-sozinho-a-um-evento /portas/companhia 301
-/companhia/porque-me-sinto-obrigado-a-preencher-todos-os-silencios.html /portas/companhia 301
-/companhia/porque-me-sinto-obrigado-a-preencher-todos-os-silencios /portas/companhia 301
-/companhia/preciso-de-companhia-para-sair.html /portas/companhia 301
-/companhia/preciso-de-companhia-para-sair /portas/companhia 301
-/companhia/queria-fazer-um-plano-mas-nao-tenho-com-quem-ir.html /portas/companhia 301
-/companhia/queria-fazer-um-plano-mas-nao-tenho-com-quem-ir /portas/companhia 301
-/companhia/quero-companhia-sem-ser-um-encontro-romantico.html /portas/companhia 301
-/companhia/quero-companhia-sem-ser-um-encontro-romantico /portas/companhia 301
+/companhia/companhia-para-jantar.html /portas/presenca 301
+/companhia/companhia-para-jantar /portas/presenca 301
+/companhia/nao-quero-ir-sozinho-a-um-evento.html /portas/presenca 301
+/companhia/nao-quero-ir-sozinho-a-um-evento /portas/presenca 301
+/companhia/porque-me-sinto-obrigado-a-preencher-todos-os-silencios.html /portas/presenca 301
+/companhia/porque-me-sinto-obrigado-a-preencher-todos-os-silencios /portas/presenca 301
+/companhia/preciso-de-companhia-para-sair.html /portas/presenca 301
+/companhia/preciso-de-companhia-para-sair /portas/presenca 301
+/companhia/queria-fazer-um-plano-mas-nao-tenho-com-quem-ir.html /portas/presenca 301
+/companhia/queria-fazer-um-plano-mas-nao-tenho-com-quem-ir /portas/presenca 301
+/companhia/quero-companhia-sem-ser-um-encontro-romantico.html /portas/presenca 301
+/companhia/quero-companhia-sem-ser-um-encontro-romantico /portas/presenca 301
 /corpo/como-criar-um-ritual-de-transicao-ao-fim-do-dia.html /farol 301
 /corpo/como-criar-um-ritual-de-transicao-ao-fim-do-dia /farol 301
 /corpo/como-desligar-do-trabalho-quando-chego-a-casa.html /farol 301

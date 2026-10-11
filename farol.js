@@ -352,7 +352,7 @@ const data={
       "title": "Talvez hoje não precises de interpretar nada.",
       "text": "Se o que te falta é alguém contigo num café, passeio, evento ou momento combinado, entra em Presença. Os limites são definidos antes.",
       "cta": {
-        "href": "/portas/companhia",
+        "href": "/portas/presenca",
         "text": "Descobrir Presença"
       },
       "cta2": null
@@ -637,7 +637,7 @@ const data={
       "title": "Há noites em que distração não chega. Queres alguém ali.",
       "text": "Presença é tempo partilhado combinado antes: café, jantar, passeio, evento ou outro plano, com formato e limites claros.",
       "cta": {
-        "href": "/portas/companhia",
+        "href": "/portas/presenca",
         "text": "Descobrir Presença"
       },
       "cta2": null
@@ -664,7 +664,7 @@ const data={
       "title": "O convite já existe. Falta não chegares sozinho(a).",
       "text": "Presença pode acompanhar um evento ou plano previamente combinado. Formato, duração, despesas e limites ficam claros antes.",
       "cta": {
-        "href": "/portas/companhia",
+        "href": "/portas/presenca",
         "text": "Quero Presença"
       },
       "cta2": null
@@ -673,7 +673,7 @@ const data={
       "title": "Não queres entretenimento. Queres presença sem performance.",
       "text": "Um café, passeio ou tempo partilhado pode ser exactamente isso. Entra em Presença e vê os formatos.",
       "cta": {
-        "href": "/portas/companhia",
+        "href": "/portas/presenca",
         "text": "Descobrir Presença"
       },
       "cta2": null
@@ -682,7 +682,7 @@ const data={
       "title": "Queres proximidade. Então os limites precisam de ser ainda mais claros.",
       "text": "Vê Presença Próxima. É proximidade afetiva combinada antes, dentro de limites claros.",
       "cta": {
-        "href": "/portas/companhia",
+        "href": "/portas/presenca",
         "text": "Ver Presença"
       },
       "cta2": null
@@ -695,7 +695,7 @@ const data={
         "text": "Acompanhamento · 170 € · 4 semanas"
       },
       "cta2": {
-        "href": "/portas/companhia",
+        "href": "/portas/presenca",
         "text": "Hoje quero Presença"
       }
     },

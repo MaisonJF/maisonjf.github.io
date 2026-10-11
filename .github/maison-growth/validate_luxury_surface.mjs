@@ -16,7 +16,7 @@ for(const p of ['portas/casa.html','portas/corpo.html','portas/cabeca.html']){
   if(/maison\.css\?v=20260920-architecture1/.test(html))fail('stale_porta_css:'+p);
 }
 
-const presence=read('portas/companhia.html');
+const presence=read('portas/presenca.html');
 if(/presence-price/.test(presence))fail('presence_price_card_returned');
 if(/[?&]preco=/.test(presence))fail('presence_price_query_returned');
 

@@ -74,11 +74,11 @@ export const MAISON_OFFER_CATALOGUE=[
   {id:'consulta-escrita-breve',status:'hidden',family:'written',stage:'deeper',format:'written',title:'Consulta por escrito · Breve',description:'Uma resposta concreta para leres agora e voltares quando precisares.',href:'/servicos/#consulta-escrita-breve',amount:2500,priceLabel:'25 €',axes:['control','direction','attachment','seen','self','security'],territories:['cabeca','presenca'],routes:['selfpaced'],base:5},
   {id:'tarot',family:'consultation',stage:'deeper',format:'service',title:'Consulta de Tarot',description:'Mais contexto para quando a pergunta parece simples, mas há outras coisas por baixo.',href:'/servicos/tarot/',amount:3500,priceLabel:'35 €',axes:['control','direction','attachment','seen','security'],territories:['cabeca','presenca'],routes:['talk'],base:5},
   {id:'escuta',status:'hidden',family:'conversation',stage:'deeper',format:'conversation',title:'Escuta Orientada',description:'Dizes tudo. Pomos ordem no que está misturado. Depois vemos o que faz sentido fazer a seguir.',href:'/servicos/#escuta',amount:6000,priceLabel:'60 €',axes:['attachment','belong','self','control','direction'],territories:['presenca','cabeca'],routes:['talk'],base:7},
-  {id:'presenca',family:'presence',stage:'deeper',format:'service',title:'Presença',description:'Quando queres alguém contigo, à distância, presencialmente ou enquanto uma situação ainda está a acontecer.',href:'/portas/companhia#formatos',amount:3500,priceLabel:'desde 35 €',axes:['belong','attachment'],territories:['presenca'],routes:['talk','gesture'],base:5},
+  {id:'presenca',family:'presence',stage:'deeper',format:'service',title:'Presença',description:'Quando queres alguém contigo, à distância, presencialmente ou enquanto uma situação ainda está a acontecer.',href:'/portas/presenca#formatos',amount:3500,priceLabel:'desde 35 €',axes:['belong','attachment'],territories:['presenca'],routes:['talk','gesture'],base:5},
 
   {id:'acompanhamento',family:'continuity',stage:'continuity',format:'continuity',title:'Acompanhamento',description:'Quatro semanas para uma situação que precisa de continuidade sem recomeçar do zero.',href:'/servicos/#acompanhamento',amount:17000,priceLabel:'170 € · 4 semanas',axes:['seen','attachment','self','control','belong','load','direction','security'],territories:['cabeca','presenca','corpo'],routes:['continuity'],base:6},
   {id:'mentoria',family:'mentoring',stage:'continuity',format:'continuity',title:'Mentoria',description:'Estrutura e acompanhamento ajustados ao objetivo e ao percurso definido antes de começar.',href:'/servicos/#mentoria',amount:12500,priceLabel:'a partir de 125 €',axes:['direction','control','self'],territories:['cabeca'],routes:['continuity','talk'],base:4},
-  {id:'sos',family:'presence',stage:'continuity',format:'service',title:'SOS Maison',description:'Uma janela de presença assíncrona para uma situação que ainda está a acontecer.',href:'/portas/companhia#sos',amount:6000,priceLabel:'desde 60 €',axes:['attachment','belong','load','security'],territories:['presenca','corpo','cabeca'],routes:['continuity','talk'],base:5}
+  {id:'sos',family:'presence',stage:'continuity',format:'service',title:'SOS Maison',description:'Uma janela de presença assíncrona para uma situação que ainda está a acontecer.',href:'/portas/presenca#sos',amount:6000,priceLabel:'desde 60 €',axes:['attachment','belong','load','security'],territories:['presenca','corpo','cabeca'],routes:['continuity','talk'],base:5}
 ];
 
 export function recommendMaisonOffers(signal={}, learning={}){
@@ -237,7 +237,7 @@ export function routeMaisonOffer(signal={}){
   const domain=String(signal.domain||'');
   if(domain==='casa')return {destination:'/produtos/',ladder:'home'};
   if(domain==='corpo')return {destination:'/produtos/',ladder:'body'};
-  if(domain==='companhia'||domain==='presenca')return {destination:'/portas/companhia',ladder:'presence'};
+  if(domain==='companhia'||domain==='presenca')return {destination:'/portas/presenca',ladder:'presence'};
   if(String(signal.format||'')==='falar')return {destination:'/servicos/#escuta',ladder:'clarity'};
   return {destination:'/oraculo/',ladder:'clarity'};
 }
