@@ -26,7 +26,7 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
-        body: JSON.stringify({ items: [{ id, quantity: 1 }] })
+        body: JSON.stringify({ items: [{ id, quantity: 1 }], locale: window.MAISON_LOCALE || document.documentElement.lang || 'pt-PT' })
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.url) throw new Error(data.error || 'Não foi possível abrir o pagamento.');
