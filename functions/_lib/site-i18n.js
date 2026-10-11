@@ -2128,7 +2128,7 @@ const PAGE_MAP={
   '/portas/casa':DOOR_CASA,
   '/portas/corpo':DOOR_CORPO,
   '/portas/cabeca':DOOR_CABECA,
-  '/portas/companhia':DOOR_PRESENCA,
+  '/portas/presenca':DOOR_PRESENCA,
   '/informacao-legal':LEGAL_EN,
   '/informacao-legal/':LEGAL_EN,
   '/envios':SEO_EN,
