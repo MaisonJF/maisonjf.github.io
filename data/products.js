@@ -6,7 +6,7 @@ Supported media roles: hero, packshot, detail, texture, ritual, use, ambience, p
 */
 window.MAISON_PRODUCTS=[
 {
- slug:'maison-jf-bundles',sku:'MJ-BUNDLES',name:'Maison JF Bundles',category:'Casa',price:10,priceNote:'Desde 10 €',currency:'EUR',availability:'in_stock',condition:'new',productImage:'/images/maison-jf-bundles.webp.webp',
+ slug:'maison-jf-bundles',sku:'MJ-BUNDLES',name:'Maison JF Bundles',size:'3 seleções',category:'Casa',price:10,priceNote:'Desde 10 €',currency:'EUR',availability:'in_stock',condition:'new',productImage:'/images/maison-jf-bundles.webp.webp',
  description:'Diferentes gestos da Maison reunidos num só ritual, para oferecer ou para seres tu a aproveitar.',
  media:[{role:'hero',src:'/images/maison-jf-bundles.webp.webp',alt:'Maison JF Bundles — Essencial, Corpo & Alma e Completo',aspect:'portrait',editorial:true}],
  ritual:{title:'Porque cuidas de tanta coisa. Também mereces cuidar de ti.',text:'Escalda-Pés, aroma, toque e luz combinam-se de formas diferentes em cada seleção. Escolhe o teu pelo momento, não pela quantidade.'},
