@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { buildPdiThemeSourceSignals, pdiThemeSourceStats } from '../../../functions/_lib/pdi-theme-sources.js';
-import { listPdiThemes, getPdiTheme, pdiThemeRegistryStats } from '../../../functions/_lib/pdi-theme-registry.js';
+import { listPdiThemes, getPdiTheme, getPdiPriceForLocale, pdiThemeRegistryStats } from '../../../functions/_lib/pdi-theme-registry.js';
 import { isPublicPdiTheme, PDI_PUBLIC_HIDDEN_THEME_SLUGS } from '../../../functions/_lib/pdi-theme-catalogue.js';
 
 const signals=buildPdiThemeSourceSignals();
@@ -15,6 +15,11 @@ assert.equal(stats.registered,308);
 assert.equal(stats.curatedThemes,2);
 assert.equal(sources.ocean,157);
 assert.equal(stats.minimumLiveQuestions,28);
+assert.deepEqual(getPdiPriceForLocale('pt-PT'),{amount:500,currency:'eur'});
+assert.deepEqual(getPdiPriceForLocale('pt-BR'),{amount:1990,currency:'brl'});
+assert.deepEqual(getPdiPriceForLocale('en'),{amount:500,currency:'eur'});
+assert.deepEqual(getPdiPriceForLocale('es'),{amount:500,currency:'eur'});
+assert.deepEqual(getPdiPriceForLocale('pt-br'),{amount:1990,currency:'brl'});
 assert.equal(new Set(registry.map(x=>x.slug)).size,registry.length);
 assert.equal(getPdiTheme('relacoes')?.label,'Relações');
 assert.ok(getPdiTheme('trabalho'));
