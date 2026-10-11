@@ -259,7 +259,7 @@
       secondHref: 'farol.html',
       secondText: 'Usar o Farol'
     },
-    'companhia.html': {
+    'presenca.html': {
       label: 'Ver disponibilidade',
       message: 'Olá, João. Estou a ver a área de Presença e quero saber qual opção faz mais sentido e a disponibilidade.',
       secondHref: 'farol.html',
