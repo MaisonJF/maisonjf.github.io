@@ -1,5 +1,6 @@
 import { EBOOKS, isEbookId } from '../_lib/ebooks-live.js';
 import { normalizeMaisonLocale, stripeLocaleForMaison } from '../_lib/maison-locales.js';
+import { brazilMarketAccessResponse } from '../_lib/brazil-market.js';
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -36,6 +37,8 @@ export async function onRequestPost({ request, env }) {
     const ebookIds = items.map(item => item.id);
     const locale = normalizeMaisonLocale(body?.locale ?? 'pt-PT');
     const isBrazil = locale === 'pt-BR';
+    const marketError = brazilMarketAccessResponse(request, locale);
+    if (marketError) return marketError;
     const currency = isBrazil ? 'brl' : 'eur';
     const origin = new URL(request.url).origin;
     const params = new URLSearchParams();
@@ -44,7 +47,7 @@ export async function onRequestPost({ request, env }) {
     params.set('success_url', origin + '/checkout-sucesso-live.html?session_id={CHECKOUT_SESSION_ID}&locale=' + encodeURIComponent(locale));
     params.set('cancel_url', origin + (isBrazil ? '/pt-br/ebooks/' : '/ebooks/') + '?checkout_cancelado=1');
     params.set('customer_creation', 'always');
-    params.set('billing_address_collection', 'auto');
+    params.set('billing_address_collection', isBrazil ? 'required' : 'auto');
     params.set('locale', stripeLocaleForMaison(locale));
     params.set('custom_fields[0][key]', 'nif');
     params.set('custom_fields[0][label][type]', 'custom');

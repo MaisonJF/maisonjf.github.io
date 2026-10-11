@@ -211,7 +211,7 @@ function publicOffer(entry,index,locale='pt-PT'){
     'oracle-seen':'R$ 9,90','oracle-attachment':'R$ 9,90','oracle-self':'R$ 9,90',
     'oracle-self-worth':'R$ 9,90','oracle-control':'R$ 9,90','oracle-belong':'R$ 9,90',
     'oracle-load':'R$ 9,90','oracle-direction':'R$ 9,90','oracle-security':'R$ 9,90',
-    'pdi-relacoes':'R$ 19,90','ebook-para-de-ignorar':'R$ 24,90',
+    'pdi-relacoes':'R$ 19,90','ebook-para-de-ignorar':'R$ 21,90',
     'ebook-turista':'R$ 12,90','ebook-meandros':'R$ 14,90'
   };
   const group=offerGroup(o);

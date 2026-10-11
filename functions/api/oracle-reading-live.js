@@ -20,6 +20,7 @@ import {
 } from '../_lib/maison-vault-v2.js';
 import { detectOracleContentNeeds } from '../_lib/content-gap-detector.js';
 import { normalizeMaisonLocale } from '../_lib/maison-locales.js';
+import { brazilSessionEligibilityResponse } from '../_lib/brazil-market.js';
 
 const AUTHORED_READINGS={
   amor:ORACLE_AMOR_READINGS,
@@ -66,6 +67,10 @@ export async function onRequestGet({ request, env }) {
     const theme=requestedTheme||sessionTheme;
     const locale=requestedLocale||sessionLocale;
     const readings=locale==='pt-PT'?readingsFor(theme):null;
+    const expectedAmount=sessionLocale==='pt-BR'?990:200;
+    const expectedCurrency=sessionLocale==='pt-BR'?'brl':'eur';
+    const marketError=brazilSessionEligibilityResponse(session,sessionLocale,expectedAmount);
+    if(marketError)return marketError;
 
     const valid =
       !!TERRITORIES[theme] &&
@@ -77,8 +82,8 @@ export async function onRequestGet({ request, env }) {
       (!requestedTheme || requestedTheme === sessionTheme) &&
       locale===sessionLocale &&
       session.metadata?.oracle_access === 'single-reading' &&
-      session.amount_total === 200 &&
-      session.currency === 'eur';
+      session.amount_total === expectedAmount &&
+      session.currency === expectedCurrency;
 
     if (!valid) return json({ error:'Esta sessão não dá acesso a esta abertura.' },403);
 
@@ -90,8 +95,8 @@ export async function onRequestGet({ request, env }) {
         locale,
         session_id:session.id,
         reading:composed.reading,
-        amount_total:200,
-        currency:'eur'
+        amount_total:expectedAmount,
+        currency:expectedCurrency
       });
     }
 
@@ -106,8 +111,8 @@ export async function onRequestGet({ request, env }) {
       locale,
       session_id:session.id,
       reading:{ id:selected.id, title:selected.title, text:selected.text },
-      amount_total:200,
-      currency:'eur'
+      amount_total:expectedAmount,
+      currency:expectedCurrency
     });
   } catch {
     return json({ error:'Não foi possível abrir esta leitura.' },500);

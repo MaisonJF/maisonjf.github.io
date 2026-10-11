@@ -15,7 +15,7 @@ export const EBOOKS = {
     title: 'Pára de Ignorar!',
     priceId: 'price_1UJtIN5H3wYRPmPVvIrLnAhO',
     unitCents: 599,
-    brlCents: 2490,
+    brlCents: 2190,
     formats: {
       pdf: { key: 'ebooks/para-de-ignorar/PARA_DE_IGNORAR_Maison_JF_FINAL.pdf', filename: 'Para-de-Ignorar.pdf', contentType: 'application/pdf' },
       epub: { key: 'ebooks/para-de-ignorar/PARA_DE_IGNORAR_Maison_JF_FINAL.epub', filename: 'Para-de-Ignorar.epub', contentType: 'application/epub+zip' }
