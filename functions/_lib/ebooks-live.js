@@ -16,6 +16,8 @@ export const EBOOKS = {
     priceId: 'price_1UJtIN5H3wYRPmPVvIrLnAhO',
     unitCents: 599,
     brlCents: 2190,
+    // Keep older paid/in-flight sessions valid after the price change; used only for verification, never new checkout creation.
+    legacyBrlCents: [2490],
     formats: {
       pdf: { key: 'ebooks/para-de-ignorar/PARA_DE_IGNORAR_Maison_JF_FINAL.pdf', filename: 'Para-de-Ignorar.pdf', contentType: 'application/pdf' },
       epub: { key: 'ebooks/para-de-ignorar/PARA_DE_IGNORAR_Maison_JF_FINAL.epub', filename: 'Para-de-Ignorar.epub', contentType: 'application/epub+zip' }
@@ -47,3 +49,42 @@ export const EBOOKS = {
 
 export const EBOOK_IDS = Object.keys(EBOOKS);
 export const isEbookId = id => Object.prototype.hasOwnProperty.call(EBOOKS, id);
+
+/**
+ * Returns the amount that should be used to validate a Stripe ebook session.
+ * New sessions record their server-calculated expected total in metadata.
+ * Older sessions (created before that field existed) may match a known
+ * historical Brazilian catalog total, so repricing never invalidates a valid
+ * purchase that is still inside its access window.
+ */
+export function expectedEbookSessionAmount(session, ebookIds, locale) {
+  if (!Array.isArray(ebookIds) || !ebookIds.length || !ebookIds.every(isEbookId)) return null;
+
+  const isBrazil = locale === 'pt-BR';
+  const currentTotal = ebookIds.reduce((total, id) => {
+    const item = EBOOKS[id];
+    return total + (isBrazil ? item.brlCents : item.unitCents);
+  }, 0);
+  const allowedTotals = [currentTotal];
+
+  if (isBrazil) {
+    const historicalTotal = ebookIds.reduce((total, id) => {
+      const item = EBOOKS[id];
+      const history = Array.isArray(item.legacyBrlCents) ? item.legacyBrlCents : [];
+      return total + (history[0] ?? item.brlCents);
+    }, 0);
+    if (!allowedTotals.includes(historicalTotal)) allowedTotals.push(historicalTotal);
+  }
+
+  const metadataValue = session?.metadata?.expected_amount_total;
+  if (metadataValue !== undefined && metadataValue !== null && metadataValue !== '') {
+    const recordedTotal = Number(metadataValue);
+    return Number.isInteger(recordedTotal) &&
+      allowedTotals.includes(recordedTotal) &&
+      session?.amount_total === recordedTotal
+      ? recordedTotal
+      : null;
+  }
+
+  return allowedTotals.includes(session?.amount_total) ? session.amount_total : null;
+}

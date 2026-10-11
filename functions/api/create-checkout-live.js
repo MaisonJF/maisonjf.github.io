@@ -66,6 +66,7 @@ export async function onRequestPost({ request, env }) {
     params.set('metadata[ebook_ids]', ebookIds.join(','));
     params.set('metadata[ebook_locale]', locale);
     params.set('metadata[checkout_currency]', currency);
+    params.set('metadata[expected_amount_total]', String(ebookIds.reduce((total, id) => total + (isBrazil ? EBOOKS[id].brlCents : EBOOKS[id].unitCents), 0)));
 
     items.forEach((item, index) => {
       const ebook = EBOOKS[item.id];
