@@ -138,7 +138,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           files=[
-              'portas/companhia.html','servicos/index.html','data/services.js',
+              'portas/presenca.html','servicos/index.html','data/services.js',
               'farol.js','contacto/index.html','index.html','teste/index.html','llms.txt'
           ]
           forbidden=('Friend4Rent','Boyfriend4Rent','Descobrir Companhia')
@@ -147,7 +147,7 @@ jobs:
               for token in forbidden:
                   if token in text:
                       raise SystemExit(f'{token} must not appear in public Presença surfaces: {name}')
-          presence=Path('portas/companhia.html').read_text(encoding='utf-8')
+          presence=Path('portas/presenca.html').read_text(encoding='utf-8')
           required=('Presença Online','Presença Social','Presença Próxima','SOS 1 dia','SOS 1 semana','35 €','60 €','80 €','120 €')
           for token in required:
               if token not in presence:
