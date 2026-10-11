@@ -2,6 +2,7 @@ import { getOrCreateQuestionSession } from '../_lib/para-de-ignorar-session.js';
 import { getPdiTheme, getPdiPriceForLocale } from '../_lib/pdi-theme-registry.js';
 import { normalizeMaisonLocale } from '../_lib/maison-locales.js';
 import { pdiThemeAvailability } from '../_lib/pdi-theme-catalogue.js';
+import { brazilSessionEligibilityResponse } from '../_lib/brazil-market.js';
 
 export async function onRequestGet({request,env}){
   try{
@@ -39,6 +40,8 @@ export async function onRequestGet({request,env}){
     const locale=normalizeMaisonLocale(stripeSession.metadata?.pdi_locale||'pt-PT');
     const product=getPdiTheme(theme);
     const expectedPrice=getPdiPriceForLocale(locale);
+    const marketError=brazilSessionEligibilityResponse(stripeSession,locale,expectedPrice.amount);
+    if(marketError)return marketError;
     const valid=
       product &&
       stripeSession.livemode===true &&
