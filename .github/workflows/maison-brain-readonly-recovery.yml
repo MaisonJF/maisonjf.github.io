@@ -1,0 +1,268 @@
+name: Maison Brain Read-only Recovery (One-shot)
+run-name: Maison Brain Read-only Recovery (One-shot)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/maison-brain-readonly-recovery.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    if: contains(github.event.head_commit.message, '[brain-recovery-once]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+      BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+      CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
+      CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+    steps:
+      - name: Guard private read credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$BRAIN_CONTROL_API_URL"
+          test -n "$BRAIN_CONTROL_TOKEN"
+          test -n "$CF_ACCESS_CLIENT_ID"
+          test -n "$CF_ACCESS_CLIENT_SECRET"
+
+      - name: Fetch Brain read-only data and encrypt it for this session
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { createCipheriv, publicEncrypt, randomBytes, constants } from 'node:crypto';
+          import { gzipSync } from 'node:zlib';
+          import { writeFileSync } from 'node:fs';
+
+          const publicKey = "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAitzZrAg28RnIh75ufZRn\nwhPV0C7yKIAlW7cAlGxVg/5/WTpRRYOF4oxj0UrPasGhjrYhc3AcDSDMi/dFmB4z\nwh5yglwRtCCFTbG0i8EaSH8ORa4inJugvdqh8Gl4GYaCBtWtGpuNN0EQYVuMgesR\n1bbJYlW6ztLh+/kefkqQlutXzY+wFCV4MISm5YCxJ3vidnNpABVi2vPCu6gov5bU\nJaegjO9evL7C55PJBkK5WUJ8Cg5lSWFEZ6AXNDypYBV/oBOsMfg8X+CuFo5Z0USF\nYsv5QlyhcWUUbGs6tciooj+U9/8wezbub/Y846P67T/yQUYJ8eBY3iqGuN5kJddn\nF8Brtj5sCTtZQHo5E2gsC/dy9fdgzutoTsiLDvSfMSFBmzs9rgG4uI1nvx9NgCwy\ncwLGwhw/5/dLAHgjxKHEVDQm8pPMQMNjhdrHcDY6FciOCpGqo4eVFe817FcYgz6Y\nzFNsA0Io2n7vBePY/lQQoOIPbcSePawaBJZIe2wBhdZ/AgMBAAE=\n-----END PUBLIC KEY-----";
+          const baseRaw = String(process.env.BRAIN_CONTROL_API_URL || '').trim();
+          const baseUrl = new URL(baseRaw);
+          if (baseUrl.protocol !== 'https:' || baseUrl.username || baseUrl.password) {
+            throw new Error('recovery_private_url_invalid');
+          }
+          const stripHeader = (raw, name) => {
+            const value = String(raw || '').trim();
+            const prefix = name + ':';
+            return value.toLowerCase().startsWith(prefix.toLowerCase()) ? value.slice(prefix.length).trim() : value;
+          };
+          const token = String(process.env.BRAIN_CONTROL_TOKEN || '').trim();
+          const accessId = stripHeader(process.env.CF_ACCESS_CLIENT_ID, 'CF-Access-Client-Id');
+          const accessSecret = stripHeader(process.env.CF_ACCESS_CLIENT_SECRET, 'CF-Access-Client-Secret');
+          if (!token || !accessId || !accessSecret) throw new Error('recovery_credentials_missing');
+
+          async function getJson(path) {
+            const url = new URL(path.replace(/^\//, ''), baseUrl.toString().replace(/\/?$/, '/'));
+            const response = await fetch(url, {
+              method: 'GET',
+              headers: {
+                Accept: 'application/json',
+                Authorization: 'Bearer ' + token,
+                'CF-Access-Client-Id': accessId,
+                'CF-Access-Client-Secret': accessSecret
+              },
+              signal: AbortSignal.timeout(20000),
+              cache: 'no-store'
+            });
+            const text = await response.text();
+            let payload;
+            try { payload = JSON.parse(text); } catch { throw new Error('recovery_json_invalid_' + response.status); }
+            if (!response.ok) throw new Error('recovery_http_' + response.status + '_' + path.replace(/[^a-z0-9/_-]/gi, '').slice(0, 60));
+            return payload;
+          }
+
+          const health = await getJson('/internal/brain/health');
+          if (health.status !== 'ok' || health.mode !== 'read_only') throw new Error('recovery_brain_health_not_read_only');
+
+          const [overview, inbox] = await Promise.all([
+            getJson('/internal/brain/overview'),
+            getJson('/internal/brain/candidates?limit=100&decision=all')
+          ]);
+
+          const start = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
+          let learningAfter = start;
+          let learningAfterId = '';
+          let learningPages = 0;
+          let learningTruncated = false;
+          const learningRows = [];
+          for (let page = 0; page < 10; page++) {
+            const query = new URLSearchParams({ limit: '100', after: learningAfter });
+            if (learningAfterId) query.set('after_id', learningAfterId);
+            const result = await getJson('/internal/brain/learning?' + query.toString());
+            const rows = Array.isArray(result.rows) ? result.rows : [];
+            learningPages++;
+            learningRows.push(...rows);
+            if (!rows.length || !result.next_cursor) break;
+            learningAfter = result.next_cursor.after;
+            learningAfterId = result.next_cursor.after_id;
+            if (page === 9) learningTruncated = true;
+          }
+
+          let after = start;
+          let afterId = '';
+          let pages = 0;
+          let scanned = 0;
+          let truncated = false;
+          const relevant = [];
+          const providerCounts = {};
+          for (let page = 0; page < 30; page++) {
+            const query = new URLSearchParams({ limit: '100', after });
+            if (afterId) query.set('after_id', afterId);
+            const result = await getJson('/internal/brain/feed?' + query.toString());
+            const rows = Array.isArray(result.rows) ? result.rows : [];
+            pages++;
+            scanned += rows.length;
+            for (const row of rows) {
+              const provider = String(row.provider_id || '');
+              const isOsiris = /^osiris_/i.test(provider);
+              const isOpenRouter = /openrouter/i.test(provider) || /openrouter/i.test(String(row.model_id || ''));
+              if (!isOsiris && !isOpenRouter) continue;
+              providerCounts[provider] = (providerCounts[provider] || 0) + 1;
+              relevant.push({
+                observation_id: row.observation_id,
+                provider_id: provider,
+                model_id: row.model_id || null,
+                territory_key: row.territory_key || null,
+                source_class: row.source_class || null,
+                grounding_state: row.grounding_state || null,
+                strength: row.strength ?? null,
+                confidence_class: row.confidence_class || null,
+                observed_at: row.observed_at || null,
+                independent_roots: Array.isArray(row.independent_roots) ? row.independent_roots : [],
+                evidence_refs: Array.isArray(row.evidence_refs) ? row.evidence_refs : [],
+                ocean_context: row.ocean_context || null,
+                content_proposal: row.content_proposal || null,
+                response_excerpt: String(row.response_excerpt || '').slice(0, 3000)
+              });
+            }
+            if (!rows.length || !result.next_cursor) break;
+            after = result.next_cursor.after;
+            afterId = result.next_cursor.after_id;
+            if (page === 29) truncated = true;
+          }
+
+          relevant.sort((a, b) => String(b.observed_at || '').localeCompare(String(a.observed_at || '')));
+          const candidates = (Array.isArray(inbox.rows) ? inbox.rows : []).map(row => ({
+            candidate_id: row.candidate_id,
+            candidate_type: row.candidate_type,
+            source_ocean_id: row.source_ocean_id,
+            provider_id: row.provider_id,
+            model_id: row.model_id,
+            territory: row.territory,
+            title: String(row.title || '').slice(0, 240),
+            body: String(row.body || '').slice(0, 3500),
+            rationale: String(row.rationale || '').slice(0, 1200),
+            evidence_refs: Array.isArray(row.evidence_refs) ? row.evidence_refs : [],
+            novelty_score: row.novelty_score,
+            maison_fit_score: row.maison_fit_score,
+            feasibility_score: row.feasibility_score,
+            demand_score: row.demand_score,
+            commercial_score: row.commercial_score,
+            created_at: row.created_at,
+            latest_decision: row.latest_decision || null,
+            latest_decision_at: row.latest_decision_at || null
+          }));
+          const candidateProviderCounts = {};
+          for (const row of candidates) {
+            const p = String(row.provider_id || 'unknown');
+            candidateProviderCounts[p] = (candidateProviderCounts[p] || 0) + 1;
+          }
+
+          const report = {
+            schema: 'maison-brain-readonly-recovery-v1',
+            retrieved_at: new Date().toISOString(),
+            mode: 'read_only',
+            health,
+            window: { from: start, days: 14, feed_pages_scanned: pages, feed_rows_scanned: scanned, pagination_truncated: truncated },
+            overview: {
+              generated_at: overview.generated_at || null,
+              observations: overview.observations || null,
+              oceans: overview.oceans || null,
+              usage: Array.isArray(overview.usage) ? overview.usage : [],
+              candidates: overview.candidates ? {
+                total: overview.candidates.total || null,
+                content_counts: overview.candidates.content || [],
+                recent_content: Array.isArray(overview.candidates.recent_content) ? overview.candidates.recent_content : []
+              } : null
+            },
+            osiris_openrouter: {
+              matching_observation_count_scanned: relevant.length,
+              provider_counts: providerCounts,
+              rows: relevant.slice(0, 150)
+            },
+            recent_candidate_inbox: {
+              count_returned: candidates.length,
+              provider_counts: candidateProviderCounts,
+              rows: candidates
+            },
+            learning: {
+              window_from: start,
+              pages_scanned: learningPages,
+              rows_scanned: learningRows.length,
+              pagination_truncated: learningTruncated,
+              rows: learningRows
+            }
+          };
+
+          const compressed = gzipSync(Buffer.from(JSON.stringify(report), 'utf8'), { level: 9 });
+          const aesKey = randomBytes(32);
+          const iv = randomBytes(12);
+          const cipher = createCipheriv('aes-256-gcm', aesKey, iv);
+          const ciphertext = Buffer.concat([cipher.update(compressed), cipher.final()]);
+          const tag = cipher.getAuthTag();
+          const wrappedKey = publicEncrypt({
+            key: publicKey,
+            padding: constants.RSA_PKCS1_OAEP_PADDING,
+            oaepHash: 'sha256'
+          }, aesKey);
+          const envelope = {
+            version: 1,
+            encryption: 'RSA-OAEP-SHA256 + AES-256-GCM + gzip',
+            key: wrappedKey.toString('base64'),
+            iv: iv.toString('base64'),
+            tag: tag.toString('base64'),
+            ciphertext: ciphertext.toString('base64')
+          };
+          writeFileSync('/tmp/maison-brain-recovery.encrypted.json', JSON.stringify(envelope));
+          const counts = report.osiris_openrouter.provider_counts;
+          console.log(JSON.stringify({
+            recovery: 'completed',
+            encrypted: true,
+            plaintext_logged: false,
+            brain_health: report.health.status + '/' + report.health.mode,
+            observation_count_total: report.overview.observations?.count ?? null,
+            latest_observation: report.overview.observations?.latest ?? null,
+            feed_window_days: 14,
+            feed_pages_scanned: pages,
+            feed_rows_scanned: scanned,
+            osiris_openrouter_matches: relevant.length,
+            osiris_openrouter_provider_counts: counts,
+            candidate_inbox_records: candidates.length,
+            learning_records: report.learning.rows.length,
+            usage_rows: report.overview.usage.length,
+            pagination_truncated: truncated
+          }));
+          NODE
+
+      - name: Store encrypted recovery payload (no plaintext artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: maison-brain-recovery-encrypted
+          path: /tmp/maison-brain-recovery.encrypted.json
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Report recovery status only
+        if: success()
+        shell: bash
+        run: |
+          {
+            echo '## Maison Brain read-only recovery'
+            echo '- Reads only authenticated GET endpoints; no writes or activation.'
+            echo '- Returned data is encrypted for a one-session public key before artifact storage.'
+            echo '- Plaintext observations, candidates, tokens and credentials are never written to logs.'
+          } >> "$GITHUB_STEP_SUMMARY"
