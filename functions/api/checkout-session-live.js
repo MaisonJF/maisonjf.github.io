@@ -1,4 +1,4 @@
-import { EBOOKS, isEbookId } from '../_lib/ebooks-live.js';
+import { EBOOKS, isEbookId, expectedEbookSessionAmount } from '../_lib/ebooks-live.js';
 import { normalizeMaisonLocale } from '../_lib/maison-locales.js';
 import { brazilSessionEligibilityResponse } from '../_lib/brazil-market.js';
 
@@ -39,8 +39,8 @@ export async function onRequestGet({ request, env }) {
     const locale = normalizeMaisonLocale(session.metadata?.ebook_locale || 'pt-PT');
     const isBrazil = locale === 'pt-BR';
     const expectedCurrency = isBrazil ? 'brl' : 'eur';
-    const expectedAmount = ebookIds.reduce((total, id) => total + (isBrazil ? EBOOKS[id].brlCents : EBOOKS[id].unitCents), 0);
-    if (session.currency !== expectedCurrency || session.amount_total !== expectedAmount) {
+    const expectedAmount = expectedEbookSessionAmount(session, ebookIds, locale);
+    if (session.currency !== expectedCurrency || expectedAmount === null || session.amount_total !== expectedAmount) {
       return json({ error: 'O valor ou a moeda da sessão não correspondem ao catálogo.' }, 403);
     }
     const marketError = brazilSessionEligibilityResponse(session, locale, expectedAmount);
