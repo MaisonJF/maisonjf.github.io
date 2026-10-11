@@ -1,3 +1,4 @@
+// BRAZIL_MARKET_FULFILLMENT_EXEMPT: physical orders are fulfilled through shipping and never unlock localized digital content or BRL prices.
 const PRODUCTS={
   'vela-vidro':'Vela Aromática 170 g',
   'vela-pequena':'Vela Aromática 70 g',
