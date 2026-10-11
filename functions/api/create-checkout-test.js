@@ -1,3 +1,4 @@
+// BRAZIL_MARKET_EXEMPT: sandbox/test checkout only; uses a dedicated test Stripe key and EUR-only fixture prices, not a live localized BRL offer.
 import { calculateShipping } from '../_lib/shipping-test.js';
 
 const PRODUCTS = {
