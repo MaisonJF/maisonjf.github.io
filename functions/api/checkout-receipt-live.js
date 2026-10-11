@@ -1,4 +1,5 @@
 import { recordStripePurchase } from '../_lib/commerce-events.js';
+// BRAZIL_MARKET_FULFILLMENT_EXEMPT: this endpoint records a paid transaction and configures a receipt email; it does not grant access to digital content.
 export async function onRequestPost({ request, env }) {
   try {
     if (!env.STRIPE_LIVE_SECRET_KEY) {

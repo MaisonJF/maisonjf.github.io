@@ -1,7 +1,9 @@
+// BRAZIL_MARKET_FULFILLMENT_EXEMPT: sandbox receipt handler for test-only Stripe payments; it does not grant production digital content access.
 export async function onRequestPost({ request, env }) {
   try {
-    if (!env.STRIPE_SECRET_KEY) {
-      return json({ error: 'Stripe não configurada neste ambiente.' }, 503);
+    const stripeSecret = String(env.STRIPE_SECRET_KEY || '');
+    if (!/^(?:sk|rk)_test_/.test(stripeSecret)) {
+      return json({ error: 'O recibo de teste exige uma chave Stripe em modo de teste.' }, 503);
     }
 
     let body;
@@ -24,6 +26,9 @@ export async function onRequestPost({ request, env }) {
 
     if (!sessionResponse.ok) {
       return json({ error: 'Não foi possível confirmar a sessão.' }, sessionResponse.status);
+    }
+    if (session.livemode !== false || session.metadata?.environment !== 'maison-jf-sandbox') {
+      return json({ error: 'Esta rota só aceita sessões de teste da MAISON JF®.' }, 403);
     }
     if (session.payment_status !== 'paid') {
       return json({ error: 'O pagamento ainda não está confirmado.' }, 409);

@@ -1,3 +1,4 @@
+// BRAZIL_MARKET_FULFILLMENT_EXEMPT: sandbox/test download endpoint for the legacy test catalog; it does not serve live commerce sessions.
 // R2 binding: EBOOKS
 const EBOOKS = {
   turista: {
@@ -18,8 +19,9 @@ const ACCESS_SECONDS = 7 * 24 * 60 * 60;
 
 export async function onRequestGet({ request, env }) {
   try {
-    if (!env.STRIPE_SECRET_KEY) {
-      return json({ error: 'Stripe não configurada neste ambiente.' }, 503);
+    const stripeSecret = String(env.STRIPE_SECRET_KEY || '');
+    if (!/^(?:sk|rk)_test_/.test(stripeSecret)) {
+      return json({ error: 'O download de teste exige uma chave Stripe em modo de teste.' }, 503);
     }
     if (!env.EBOOKS) {
       return json({ error: 'O armazenamento privado dos ebooks ainda não está ligado a este ambiente.' }, 503);
@@ -42,8 +44,8 @@ export async function onRequestGet({ request, env }) {
     );
     const session = await stripeResponse.json().catch(() => ({}));
 
-    if (!stripeResponse.ok || session.payment_status !== 'paid') {
-      return json({ error: 'Não existe um pagamento confirmado para este download.' }, 403);
+    if (!stripeResponse.ok || session.livemode !== false || session.metadata?.environment !== 'maison-jf-sandbox' || session.metadata?.source !== 'site-cart-test' || session.payment_status !== 'paid') {
+      return json({ error: 'Não existe um pagamento de teste confirmado para este download.' }, 403);
     }
 
     const bought = String(session.metadata?.ebook_ids || '')

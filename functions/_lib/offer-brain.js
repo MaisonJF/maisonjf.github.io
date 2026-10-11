@@ -1,7 +1,7 @@
 import { normalizeMaisonLocale } from './maison-locales.js';
 
 export const MAISON_OFFER_BRAIN={
-  version:'2026-09-26-v7',
+  version:'2026-10-11-v8',
   freeOnly:'/teste/',
   maxOffers:4,
   principles:{
@@ -10,7 +10,8 @@ export const MAISON_OFFER_BRAIN={
     territories:'Casa, Corpo, Cabeça e Presença descrevem a necessidade humana; produto e serviço descrevem o formato comercial.',
     catalogue:'Novas ofertas entram no mesmo motor através de metadados. O teste não precisa de regras novas por produto.',
     learning:'Recomendação, clique e compra podem ser medidos por offer_id, resultado e versão do Brain sem guardar respostas do teste.',
-    noDarkPatterns:'Não inventar urgência, escassez, diagnóstico, medo ou promessa de resultado para provocar compra.'
+    noDarkPatterns:'Não inventar urgência, escassez, diagnóstico, medo ou promessa de resultado para provocar compra.',
+    brazilDigitalMarket:'Preços BRL de produtos digitais são preços locais definidos manualmente para compradores elegíveis no Brasil; idioma e URL nunca autorizam o preço. Validar o país no servidor, a morada de faturação Stripe, a moeda e o valor exato antes de entregar o conteúdo. Novos checkouts têm de cumprir a política permanente .github/maison-growth/commerce/BRAZIL-MARKET-PRICING-POLICY.md.'
   },
   dimensions:['result','rankedAxes','route','territories','format','stage','priceBarrier'],
   stages:['now','deeper','continuity']

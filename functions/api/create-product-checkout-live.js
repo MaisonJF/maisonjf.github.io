@@ -1,3 +1,4 @@
+// BRAZIL_MARKET_EXEMPT: this endpoint sells physical goods in EUR with destination-based shipping; it does not offer BRL-localized digital prices.
 const PRODUCTS={
   'vela-vidro':{name:'Vela Aromática MAISON JF® 170 g',price:'price_1UEoZT5H3wYRPmPV4hXuKvbZ',unitCents:1400,max:10},
   'vela-pequena':{name:'Vela Aromática MAISON JF® 70 g',price:'price_1UHlIA5H3wYRPmPV3sMw6cZU',unitCents:800,max:10},
