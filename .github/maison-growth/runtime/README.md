@@ -350,3 +350,12 @@ When explicitly enabled, the command may persist an A8 experiment **only in `dra
 The draft path structurally requires a canonical A7 `test_cta` decision with passed hard gates and the same treatment solution. It writes append-only A14↔A7↔A8 lineage.
 
 It does **not** capture the pre-change public snapshot, claim `ready`, assign traffic, run the experiment, publish anything, contact anyone, spend money or alter catalogue/price/checkout. Those remain later A8/A9/A12 steps and require separate authority.
+
+
+## Cloudflare Worker variable budget
+
+The private Worker deployment must stay within the Cloudflare Free-tier limit of 64 combined text variables and secrets. On 2026-10-12, production deployment exposed this limit when the rendered Worker config reached 65 variables. The redundant `PERPLEXITY_MODEL` entry was removed because the provider already defaults to `sonar`; the deployment then passed without a plan upgrade.
+
+The `maison-ocean-memory-deploy.yml` workflow now counts the rendered top-level `vars` entries before deployment, prints their names, and fails early if there are more than 64. It also warns when the count reaches 61 or more. Remember that secrets also consume the platform limit, so leave capacity for them.
+
+Keep feature flags as individually named Worker environment variables for compatibility: code reads `env.FLAG_NAME` throughout the Worker. Do not replace them with a single `APP_FLAGS` JSON variable unless a deliberate migration updates every consumer or adds and tests a compatibility layer.
