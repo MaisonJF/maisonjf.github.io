@@ -123,6 +123,32 @@ jobs:
             --private-url "$BRAIN_CONTROL_API_URL" \
             --output workers/maison-intelligence/wrangler.private.runtime.jsonc
 
+      - name: Guard Cloudflare Workers variable limit
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("workers/maison-intelligence/wrangler.private.runtime.jsonc")
+          config = json.loads(path.read_text(encoding="utf-8"))
+          variables = config.get("vars", {})
+          if not isinstance(variables, dict):
+              raise SystemExit("Worker config 'vars' must be a JSON object")
+
+          count = len(variables)
+          limit = 64
+          print(f"Worker text variables: {count}/{limit}")
+          print("Configured variable names: " + ", ".join(sorted(variables)))
+          if count > limit:
+              raise SystemExit(
+                  f"Cloudflare Workers Free limit exceeded: {count} text variables; "
+                  f"reduce to {limit} or fewer before deployment. Secrets also count toward "
+                  "the account limit."
+              )
+          if count >= 61:
+              print("::warning::Worker config is near the 64-variable limit; keep room for secrets.")
+          PY
+
       - name: Deploy Maison intelligence runtime
         working-directory: workers/maison-intelligence
         env:
