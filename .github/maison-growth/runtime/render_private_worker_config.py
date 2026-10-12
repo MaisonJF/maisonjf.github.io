@@ -82,6 +82,10 @@ def render_private_worker_config(
         config["routes"] = [{"pattern": hostname, "custom_domain": True}]
 
     vars_ = config.setdefault("vars", {})
+    # Keep runtime switches as individually named env vars: Worker consumers read
+    # env.FLAG_NAME throughout the codebase, so APP_FLAGS would not be a drop-in
+    # replacement without a deliberate compatibility migration. The deploy
+    # workflow guards the Cloudflare Free-tier 64-variable limit before publishing.
     vars_.update({
         "WORKER_ENABLED": "true" if observe_stage else "false",
         "KILL_SWITCH": "false" if observe_stage else "true",
