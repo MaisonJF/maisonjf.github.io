@@ -401,10 +401,11 @@ export async function handleOceanMemoryRequest(request,env){
     }
     return json({error:'method_not_allowed'},405);
   }catch(error){
+    const errorId=crypto.randomUUID();
     const message=String(error?.message||'bad_request');
-    if(message.startsWith('invalid_')||message.startsWith('forbidden_payload_key')) return json({error:message},400);
-    if(error instanceof SyntaxError) return json({error:'invalid_json'},400);
-    console.error('Ocean memory error',message);
-    return json({error:'internal_error'},500);
+    console.error('Ocean memory error',{errorId,message,stack:error?.stack});
+    if(message.startsWith('invalid_')||message.startsWith('forbidden_payload_key')) return json({error:message,error_id:errorId},400);
+    if(error instanceof SyntaxError) return json({error:'invalid_json',error_id:errorId},400);
+    return json({error:'internal_error',error_id:errorId},500);
   }
 }
