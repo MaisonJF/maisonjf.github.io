@@ -50,7 +50,6 @@
     "GEMINI_ENABLED": "false",
     "GEMINI_MODEL": "gemini-2.5-flash",
     "PERPLEXITY_ENABLED": "false",
-    "PERPLEXITY_MODEL": "sonar",
     "ANTHROPIC_ENABLED": "false",
     "ZERO_COST_MODE": "true",
     "ZERO_COST_OBSERVE_ACTIVATION": "true",
