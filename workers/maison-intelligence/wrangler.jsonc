@@ -32,6 +32,7 @@
     "OPENROUTER_ENABLED": "true",
     "OPENROUTER_MODEL": "google/gemma-4-26b-a4b-it:free",
     "OSIRIS_ENABLED": "true",
+    "OSIRIS_COUNCIL_ENABLED": "true",
     "OSIRIS_BASE_URL": "https://osirisai.live",
     "OSIRIS_SOURCE_KEYS": "stats,flights,satellites,space_weather,earthquakes,fires,weather,air_quality,radar,conflicts,frontlines,gdelt,country_risk,news,live_news,markets,crypto,scm_suppliers,cctv,infrastructure,maritime,cyber_threats,cyber_attacks,malware",
     "OSIRIS_SOURCE_CADENCES_JSON": "{\"stats\":24,\"flights\":6,\"satellites\":12,\"space_weather\":6,\"earthquakes\":3,\"fires\":6,\"weather\":3,\"air_quality\":6,\"radar\":6,\"conflicts\":6,\"frontlines\":12,\"gdelt\":6,\"country_risk\":24,\"news\":3,\"live_news\":3,\"markets\":3,\"crypto\":3,\"scm_suppliers\":24,\"cctv\":12,\"infrastructure\":12,\"maritime\":6,\"cyber_threats\":6,\"cyber_attacks\":6,\"malware\":6}",
