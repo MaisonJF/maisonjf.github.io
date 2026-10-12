@@ -2,6 +2,15 @@ import { sha256Hex } from './core.js';
 
 function enabled(value){ return String(value ?? '').toLowerCase()==='true'; }
 function id(prefix){ return prefix+crypto.randomUUID(); }
+function parseJsonArray(raw){
+  if(raw==null||raw==='') return [];
+  try{
+    const value=typeof raw==='string'?JSON.parse(raw):raw;
+    return Array.isArray(value)?value:[];
+  }catch{
+    throw new Error('invalid_stored_json_array');
+  }
+}
 function json(body,status=200){
   return new Response(JSON.stringify(body),{
     status,
