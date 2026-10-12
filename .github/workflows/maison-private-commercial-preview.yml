@@ -8,13 +8,12 @@ permissions:
 
 jobs:
   preview:
-    if: >-
-      ${
-        secrets.MAISON_BRAIN_PRIVATE_URL != '' &&
-        secrets.MAISON_BRAIN_CONTROL_TOKEN != '' &&
-        secrets.MAISON_CF_ACCESS_CLIENT_ID != '' &&
-        secrets.MAISON_CF_ACCESS_CLIENT_SECRET != ''
-      }}
+    if: ${{
+      secrets.MAISON_BRAIN_PRIVATE_URL != '' &&
+      secrets.MAISON_BRAIN_CONTROL_TOKEN != '' &&
+      secrets.MAISON_CF_ACCESS_CLIENT_ID != '' &&
+      secrets.MAISON_CF_ACCESS_CLIENT_SECRET != ''
+    }}
     runs-on: ubuntu-latest
     environment: private-preview
     timeout-minutes: 10
@@ -52,13 +51,12 @@ jobs:
         run: python .github/maison-growth/brain/private_commercial_preview.py
 
   preview_skipped:
-    if: >-
-      ${
-        secrets.MAISON_BRAIN_PRIVATE_URL == '' ||
-        secrets.MAISON_BRAIN_CONTROL_TOKEN == '' ||
-        secrets.MAISON_CF_ACCESS_CLIENT_ID == '' ||
-        secrets.MAISON_CF_ACCESS_CLIENT_SECRET == ''
-      }}
+    if: ${{
+      secrets.MAISON_BRAIN_PRIVATE_URL == '' ||
+      secrets.MAISON_BRAIN_CONTROL_TOKEN == '' ||
+      secrets.MAISON_CF_ACCESS_CLIENT_ID == '' ||
+      secrets.MAISON_CF_ACCESS_CLIENT_SECRET == ''
+    }}
     runs-on: ubuntu-latest
     steps:
       - name: Skip private preview without required secrets
