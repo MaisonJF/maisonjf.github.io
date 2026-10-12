@@ -8,16 +8,21 @@ permissions:
 
 jobs:
   preview:
+    if: >-
+      ${
+        secrets.MAISON_BRAIN_PRIVATE_URL != '' &&
+        secrets.MAISON_BRAIN_CONTROL_TOKEN != '' &&
+        secrets.MAISON_CF_ACCESS_CLIENT_ID != '' &&
+        secrets.MAISON_CF_ACCESS_CLIENT_SECRET != ''
+      }}
     runs-on: ubuntu-latest
+    environment: private-preview
     timeout-minutes: 10
     env:
       BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
       BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
       CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
       CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
-      MAISON_A14_MATERIALIZE_ENABLED: 'false'
-      MAISON_SEMANTIC_CONTEXT_ENABLED: 'false'
-      MAISON_OSIRIS_CONTEXT_ENABLED: 'false'
 
     steps:
       - name: Checkout
@@ -28,23 +33,14 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Verify required private preview secrets are configured
+      - name: Sanity-check required runtime env
         shell: bash
         run: |
           set -euo pipefail
-          missing=0
-          for key in BRAIN_CONTROL_API_URL BRAIN_CONTROL_TOKEN CF_ACCESS_CLIENT_ID CF_ACCESS_CLIENT_SECRET; do
-            if [ -z "${!key:-}" ]; then
-              echo "Missing required secret/env: $key"
-              missing=1
-            fi
-          done
-
-          if [ "$missing" -ne 0 ]; then
-            echo "Private preview is skipped because required secrets are not configured for this repository or environment."
-            echo "Add MAISON_BRAIN_PRIVATE_URL, MAISON_BRAIN_CONTROL_TOKEN, MAISON_CF_ACCESS_CLIENT_ID, and MAISON_CF_ACCESS_CLIENT_SECRET to the repository or environment secrets."
-            exit 0
-          fi
+          : "${BRAIN_CONTROL_API_URL:?missing BRAIN_CONTROL_API_URL}"
+          : "${BRAIN_CONTROL_TOKEN:?missing BRAIN_CONTROL_TOKEN}"
+          : "${CF_ACCESS_CLIENT_ID:?missing CF_ACCESS_CLIENT_ID}"
+          : "${CF_ACCESS_CLIENT_SECRET:?missing CF_ACCESS_CLIENT_SECRET}"
 
       - name: Preflight private read surface
         run: python .github/maison-growth/runtime/preflight_private_runtime.py private_brain_read_candidate
@@ -54,3 +50,16 @@ jobs:
 
       - name: Run identifier-free commercial preview
         run: python .github/maison-growth/brain/private_commercial_preview.py
+
+  preview_skipped:
+    if: >-
+      ${
+        secrets.MAISON_BRAIN_PRIVATE_URL == '' ||
+        secrets.MAISON_BRAIN_CONTROL_TOKEN == '' ||
+        secrets.MAISON_CF_ACCESS_CLIENT_ID == '' ||
+        secrets.MAISON_CF_ACCESS_CLIENT_SECRET == ''
+      }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip private preview without required secrets
+        run: echo "Skipping Private Preview: required secrets are not configured."
