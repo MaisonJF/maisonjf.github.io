@@ -80,12 +80,38 @@ jobs:
           if [[ "$access_id" =~ ^CF-Access-Client-Id:[[:space:]]*(.*)$ ]]; then access_id="${BASH_REMATCH[1]}"; fi
           if [[ "$access_secret" =~ ^CF-Access-Client-Secret:[[:space:]]*(.*)$ ]]; then access_secret="${BASH_REMATCH[1]}"; fi
           shopt -u nocasematch
-          curl --fail --silent --show-error \
-            --header "Authorization: Bearer $BRAIN_CONTROL_TOKEN" \
-            --header "CF-Access-Client-Id: $access_id" \
-            --header "CF-Access-Client-Secret: $access_secret" \
-            "$base/internal/oceans/snapshot?limit=100" > /tmp/ocean-feed.json
-          count="$(node -e "const x=require('/tmp/ocean-feed.json'); process.stdout.write(String((x.rows||[]).length))")"
+          url="$base/internal/oceans/snapshot?limit=100"
+          out="/tmp/ocean-feed.json"
+          max_attempts=5
+          attempt=1
+          status="000"
+
+          test -n "$MAISON_BRAIN_PRIVATE_URL" || { echo "::error::MAISON_BRAIN_PRIVATE_URL is empty"; exit 1; }
+          test -n "$BRAIN_CONTROL_TOKEN" || { echo "::error::BRAIN_CONTROL_TOKEN is empty"; exit 1; }
+          test -n "$access_id" || { echo "::error::CF Access client ID is empty"; exit 1; }
+          test -n "$access_secret" || { echo "::error::CF Access client secret is empty"; exit 1; }
+
+          while (( attempt <= max_attempts )); do
+            echo "Ocean snapshot request attempt $attempt/$max_attempts"
+            status="$(curl --silent --show-error --output "$out" --write-out '%{http_code}'               --connect-timeout 10 --max-time 30               --header "Accept: application/json"               --header "Authorization: Bearer $BRAIN_CONTROL_TOKEN"               --header "CF-Access-Client-Id: $access_id"               --header "CF-Access-Client-Secret: $access_secret"               "$url" || true)"
+            echo "HTTP status: $status"
+
+            if [[ "$status" == "200" ]]; then break; fi
+            if [[ "$status" =~ ^5 ]] && (( attempt < max_attempts )); then
+              delay=$((2 ** attempt))
+              echo "Server error $status; retrying in ${delay}s"
+              sleep "$delay"
+              attempt=$((attempt + 1))
+              continue
+            fi
+
+            echo "::error::Ocean snapshot endpoint failed with HTTP $status"
+            echo "Response body:"
+            cat "$out" || true
+            exit 1
+          done
+
+          count="$(node -e "const x=require('/tmp/ocean-feed.json'); if(!Array.isArray(x.rows)) process.exit(2); process.stdout.write(String(x.rows.length))")"
           echo "count=$count" >> "$GITHUB_OUTPUT"
 
       - name: Export and rebuild allowed Ocean derivatives
