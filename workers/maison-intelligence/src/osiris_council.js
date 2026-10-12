@@ -123,7 +123,10 @@ async function callRoleWithFallback(env, prompt, models, preferredIndex) {
   for (let offset = 0; offset < attempts; offset++) {
     const model = models[(preferredIndex + offset) % models.length];
     try {
-      return await callOpenRouterModel(env, prompt, model);
+      const result = await callOpenRouterModel(env, prompt, model);
+      // Treat malformed/empty model output as a failed attempt and try another free model.
+      const payload = parseJson(result.text);
+      return { result, payload };
     } catch (error) {
       lastError = error;
     }
@@ -203,22 +206,23 @@ export async function runOsirisCouncil(env, { date = new Date() } = {}) {
     const role = OSIRIS_ROLES[i];
     try {
       const prompt = buildPrompt(role, context.observations, context.patterns, outputs);
-      const result = await callRoleWithFallback(env, prompt, models, i % models.length);
-      const payload = parseJson(result.text);
+      const { result, payload } = await callRoleWithFallback(env, prompt, models, i % models.length);
       payload.priority = Math.max(0, Math.min(100, Number(payload.priority) || 0));
       payload.confidence = Math.max(0, Math.min(100, Number(payload.confidence) || 0));
       if (role.id === 'osiris_03_strategist') {
         payload.prioritized_market = 'Portugal';
         payload.market_sequence = MARKET_SEQUENCE.map(market => market.label);
-        if (!payload.market_adaptation || typeof payload.market_adaptation !== 'object') {
+        if (!payload.market_adaptation || typeof payload.market_adaptation !== 'object' || Array.isArray(payload.market_adaptation)) {
           payload.market_adaptation = {};
         }
+        payload.next_action_pt = clean(payload.next_action_pt || payload.action || 'Validar uma única mensagem/oferta em Portugal e medir a passagem até à compra.', 1000);
+        payload.action = payload.next_action_pt;
         for (const market of MARKET_SEQUENCE) {
           if (!payload.market_adaptation[market.id] || typeof payload.market_adaptation[market.id] !== 'object') {
             payload.market_adaptation[market.id] = {
               readiness: 'unknown',
-              adaptation: 'Insufficient evidence; assess only after Portugal-first action is measured.',
-              main_risk: 'Insufficient evidence',
+              adaptation: 'Evidência insuficiente; avaliar depois de medir a primeira ação em Portugal.',
+              main_risk: 'Evidência insuficiente',
               evidence_level: 'unknown'
             };
           }
@@ -229,8 +233,8 @@ export async function runOsirisCouncil(env, { date = new Date() } = {}) {
         `INSERT INTO maison_osiris_council_outputs
           (output_id,run_id,role_id,provider_id,model_id,payload_json)
          VALUES(?1,?2,?3,?4,?5,?6)`
-      ).bind(outputId, runId, role.id, result.providerId, result.modelId || model, JSON.stringify(payload)).run();
-      outputs.push({ output_id: outputId, role_id: role.id, model_id: result.modelId || model, payload });
+      ).bind(outputId, runId, role.id, result.providerId, result.modelId || 'unknown', JSON.stringify(payload)).run();
+      outputs.push({ output_id: outputId, role_id: role.id, model_id: result.modelId || 'unknown', payload });
     } catch (error) {
       errors.push({ role_id: role.id, error: clean(error?.message || error, 500) });
     }
