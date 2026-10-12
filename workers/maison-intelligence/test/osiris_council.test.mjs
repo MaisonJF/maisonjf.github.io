@@ -124,7 +124,7 @@ function modelReply(roleId) {
       brazil: { readiness: 'unknown', adaptation: 'Português brasileiro e BRL', main_risk: 'Logística e preço local', evidence_level: 'unknown' },
       world: { readiness: 'unknown', adaptation: 'Localização e distribuição', main_risk: 'Falta de validação nos mercados anteriores', evidence_level: 'unknown' }
     },
-    next_action_pt: 'Validar mensagem e conversão em Portugal',
+    next_action_pt: 'Lançar primeiro no Brasil',
     success_metric: 'Conversão qualificada',
     evidence_gaps: ['Vendas reais não foram fornecidas'],
     gate_for_expansion: 'Não avançar sem medir a ação em Portugal'
@@ -144,6 +144,8 @@ test('council exposes three specialist roles and the required market order', () 
   assert.match(OSIRIS_ROLES[1].lenses.join(' '), /YSL/);
   assert.match(OSIRIS_ROLES[1].lenses.join(' '), /DIOR/);
   assert.match(OSIRIS_ROLES[1].lenses.join(' '), /CHANEL/);
+  assert.match(OSIRIS_ROLES[1].lenses.join(' '), /CIALDINI/);
+  assert.match(OSIRIS_ROLES[1].lenses.join(' '), /JOBS-TO-BE-DONE/);
 });
 
 test('all three roles write D1 outputs, with handoff to strategist and free-model fallback', async () => {
@@ -204,6 +206,8 @@ test('all three roles write D1 outputs, with handoff to strategist and free-mode
 
     const storedStrategist = JSON.parse(d1.outputs.find(item => item.role_id === 'osiris_03_strategist').payload_json);
     assert.equal(storedStrategist.prioritized_market, 'Portugal');
+    assert.match(storedStrategist.next_action_pt, /Portugal/);
+    assert.equal(storedStrategist.action, storedStrategist.next_action_pt);
     assert.deepEqual(storedStrategist.market_sequence, ['Portugal', 'Europa', 'Brasil', 'Mundo']);
     assert.deepEqual(Object.keys(storedStrategist.market_adaptation), ['portugal', 'europe', 'brazil', 'world']);
     const psychology = requests.find(request => request.prompt.includes('OSIRIS 02 — PSICOLOGIA & CONVERSÃO'));
