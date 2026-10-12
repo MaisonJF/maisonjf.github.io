@@ -198,15 +198,19 @@ test('all three roles write D1 outputs, with handoff to strategist and free-mode
     const strategist = requests.find(request => request.prompt.includes('OSIRIS 03 — ESTRATEGISTA'));
     assert.ok(strategist.prompt.includes('osiris_01_radar'));
     assert.ok(strategist.prompt.includes('osiris_02_psychology_conversion'));
-    assert.ok(strategist.prompt.includes('RADAR_TEST_SIGNAL'));
+    assert.ok(strategist.prompt.includes('osiris_01_radar_TEST_SIGNAL'));
     assert.ok(strategist.prompt.includes('osiris_02_psychology_conversion_TEST_SIGNAL'));
-    assert.ok(strategist.prompt.includes('Portugal → Europa → Brasil → Mundo'));
+    assert.match(strategist.prompt, /Portugal.*Europa.*Brasil.*Mundo/);
 
     const storedStrategist = JSON.parse(d1.outputs.find(item => item.role_id === 'osiris_03_strategist').payload_json);
     assert.equal(storedStrategist.prioritized_market, 'Portugal');
     assert.deepEqual(storedStrategist.market_sequence, ['Portugal', 'Europa', 'Brasil', 'Mundo']);
     assert.deepEqual(Object.keys(storedStrategist.market_adaptation), ['portugal', 'europe', 'brazil', 'world']);
-    assert.ok(requests.every(request => /BARNUM|HORMOZI|TOM FORD|CHANEL/.test(request.prompt)));
+    const psychology = requests.find(request => request.prompt.includes('OSIRIS 02 — PSICOLOGIA & CONVERSÃO'));
+    for (const lens of ['BARNUM', 'HORMOZI', 'TOM FORD', 'YSL', 'DIOR', 'CHANEL', 'YOICHI FERAL']) {
+      assert.ok(psychology.prompt.includes(lens), 'psychology prompt should include ' + lens);
+    }
+    assert.ok(requests.every(request => /Portugal.*Europa.*Brasil.*Mundo/.test(request.prompt)));
   } finally {
     globalThis.fetch = previousFetch;
   }
