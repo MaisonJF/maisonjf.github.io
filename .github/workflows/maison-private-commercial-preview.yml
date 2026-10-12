@@ -22,6 +22,9 @@ jobs:
       BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN }}
       CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
       CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+      MAISON_A14_MATERIALIZE_ENABLED: 'false'
+      MAISON_SEMANTIC_CONTEXT_ENABLED: 'false'
+      MAISON_OSIRIS_CONTEXT_ENABLED: 'false'
 
     steps:
       - name: Checkout
@@ -32,23 +35,52 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Sanity-check required runtime env
+      - name: Install Python dependencies
         shell: bash
         run: |
           set -euo pipefail
-          : "${BRAIN_CONTROL_API_URL:?missing BRAIN_CONTROL_API_URL}"
-          : "${BRAIN_CONTROL_TOKEN:?missing BRAIN_CONTROL_TOKEN}"
-          : "${CF_ACCESS_CLIENT_ID:?missing CF_ACCESS_CLIENT_ID}"
-          : "${CF_ACCESS_CLIENT_SECRET:?missing CF_ACCESS_CLIENT_SECRET}"
+          if [ -f requirements.txt ]; then
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt --no-cache-dir
+          else
+            echo "requirements.txt not found, skipping dependency install."
+          fi
+
+      - name: Validate required private brain secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(BRAIN_CONTROL_API_URL BRAIN_CONTROL_TOKEN CF_ACCESS_CLIENT_ID CF_ACCESS_CLIENT_SECRET)
+          missing=0
+          for v in "${required[@]}"; do
+            if [ -z "${!v:-}" ]; then
+              echo "ERROR: $v is missing or empty"
+              missing=1
+            fi
+          done
+          if [ $missing -eq 1 ]; then
+            echo "One or more required secrets are missing. Set them in Settings → Secrets and variables → Actions."
+            exit 2
+          fi
+
+          if [[ "${BRAIN_CONTROL_API_URL}" != https://* ]]; then
+            echo "ERROR: BRAIN_CONTROL_API_URL must be an HTTPS URL"
+            exit 2
+          fi
+
+          if [[ "${BRAIN_CONTROL_TOKEN}" =~ (CHANGE_ME|REPLACE_WITH_|example|placeholder) ]]; then
+            echo "ERROR: BRAIN_CONTROL_TOKEN looks like a placeholder"
+            exit 2
+          fi
 
       - name: Preflight private read surface
-        run: python .github/maison-growth/runtime/preflight_private_runtime.py private_brain_read_candidate
+        run: python -u .github/maison-growth/runtime/preflight_private_runtime.py private_brain_read_candidate
 
       - name: Verify private Brain health
-        run: python .github/maison-growth/runtime/verify_private_brain_health.py
+        run: python -u .github/maison-growth/runtime/verify_private_brain_health.py
 
       - name: Run identifier-free commercial preview
-        run: python .github/maison-growth/brain/private_commercial_preview.py
+        run: python -u .github/maison-growth/brain/private_commercial_preview.py
 
   preview_skipped:
     if: ${{
