@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { isDeepStrictEqual } from 'node:util';
 import { contentCandidatesFromSignal } from '../../../functions/_lib/maison-brain-bridge.js';
 import { groupExactThemeSignals, pdiThemeSourceStats } from '../../../functions/_lib/pdi-theme-sources.js';
 
@@ -15,6 +14,27 @@ const ROLES=['opening','recognition','tension','counterpoint','reframe','movemen
 const STAGES=['open','recognize','deepen','touch','close','signature'];
 const QUESTION_TARGET_PER_MATURE_THEME=300;
 const COMBINATORIAL_TARGET=2800000;
+
+const stableStringify=(value, seen=new WeakSet())=>{
+  if (value === null || typeof value !== 'object') return JSON.stringify(value);
+  if (seen.has(value)) return JSON.stringify('[Circular]');
+  seen.add(value);
+  if (Array.isArray(value)) {
+    return '[' + value.map(item => stableStringify(item, seen)).join(',') + ']';
+  }
+  const keys=Object.keys(value).sort();
+  return '{' + keys.map(key => `${JSON.stringify(key)}:${stableStringify(value[key], seen)}`).join(',') + '}';
+};
+
+const normalizeForCheck=(value)=>{
+  if (Array.isArray(value)) return value.map(normalizeForCheck);
+  if (value && typeof value === 'object') {
+    const out={};
+    for (const key of Object.keys(value).sort()) out[key]=normalizeForCheck(value[key]);
+    return out;
+  }
+  return value;
+};
 
 const slug=value=>String(value||'')
   .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
@@ -172,10 +192,15 @@ const out={
   },
   items
 };
-const rendered=JSON.stringify(out,null,2)+'\n';
+const rendered=stableStringify(out)+'\n';
 if(CHECK){
   const current=JSON.parse(fs.readFileSync(QUEUE,'utf8'));
-  if(!isDeepStrictEqual(current,out))throw new Error('editorial_queue_out_of_sync');
+  const currentNormalized=normalizeForCheck(current);
+  const outNormalized=normalizeForCheck(out);
+  if(stableStringify(currentNormalized)!==stableStringify(outNormalized)){
+    console.error('Maison Brain editorial queue is out of sync. Update .github/maison-growth/brain/editorial-queue.json to match the generated output.');
+    throw new Error('editorial_queue_out_of_sync');
+  }
   console.log('Maison Brain editorial queue: OK');
 }else{
   fs.writeFileSync(QUEUE,rendered);
