@@ -33,6 +33,8 @@ export const OSIRIS_ROLES = Object.freeze([
       'DIOR: narrativa, património, detalhe, desejo e sofisticação.',
       'CHANEL: códigos de marca, consistência, intemporalidade e edição.',
       'APPLE + KISS: experiência simples, poucos obstáculos e clareza.',
+      'CIALDINI: prova social, autoridade, reciprocidade e compromisso; escassez/urgência apenas quando reais e verificáveis.',
+      'JOBS-TO-BE-DONE + AIDA: compreender o progresso desejado e ligar atenção, interesse, desejo, ação e experiência posterior.',
       'CRO/psicologia comportamental: CTA, prova, confiança, fricção, abandono, recompra e recomendação.'
     ],
     outputContract: 'Acrescenta attention_hook, identification_angle, desire_driver, offer_diagnosis, trust_and_friction, conversion_path, repeat_purchase_loop e test_hypothesis. As marcas são lentes analíticas, não modelos a copiar.'
@@ -215,7 +217,10 @@ export async function runOsirisCouncil(env, { date = new Date() } = {}) {
         if (!payload.market_adaptation || typeof payload.market_adaptation !== 'object' || Array.isArray(payload.market_adaptation)) {
           payload.market_adaptation = {};
         }
-        payload.next_action_pt = clean(payload.next_action_pt || payload.action || 'Validar uma única mensagem/oferta em Portugal e medir a passagem até à compra.', 1000);
+        const proposedPortugalAction = clean(payload.next_action_pt || '', 1000);
+        payload.next_action_pt = proposedPortugalAction && /portugal/i.test(proposedPortugalAction)
+          ? proposedPortugalAction
+          : 'Validar uma única mensagem/oferta em Portugal e medir a passagem até à compra.';
         payload.action = payload.next_action_pt;
         for (const market of MARKET_SEQUENCE) {
           if (!payload.market_adaptation[market.id] || typeof payload.market_adaptation[market.id] !== 'object') {
