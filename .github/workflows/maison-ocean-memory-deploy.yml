@@ -50,6 +50,34 @@ jobs:
           npm test
           npm run check
 
+      # Ocean working memory 0022 is a hard runtime dependency of /internal/oceans/snapshot.
+      # Re-apply the idempotent migration before every deploy so a fresh/partial D1
+      # cannot receive code that expects missing Ocean tables/views.
+      - name: Ensure Ocean working memory schema 0022
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp)"
+          trap 'rm -f "$tmp"' EXIT
+          sed -E '/^[[:space:]]*--/d; /^[[:space:]]*PRAGMA foreign_keys/d'             ../../.github/maison-growth/brain/migrations/0022_ocean_working_memory.sql > "$tmp"
+          npx wrangler d1 execute maison-growth-engine --remote --file="$tmp"
+          npx wrangler d1 execute maison-growth-engine --remote --command="
+            SELECT
+              CASE
+                WHEN EXISTS(SELECT 1 FROM sqlite_master WHERE type='table' AND name='ocean_memory_signals')
+                 AND EXISTS(SELECT 1 FROM sqlite_master WHERE type='table' AND name='ocean_memory_state')
+                 AND EXISTS(SELECT 1 FROM sqlite_master WHERE type='table' AND name='ocean_memory_alerts')
+                 AND EXISTS(SELECT 1 FROM sqlite_master WHERE type='view' AND name='brain_ocean_memory_feed')
+                 AND EXISTS(SELECT 1 FROM schema_state WHERE schema_key='maison_ocean_memory_schema_version' AND schema_value='OCEAN.1')
+                THEN 'OCEAN.1_READY'
+                ELSE 'OCEAN.1_MISSING'
+              END AS ocean_schema_status;
+          " | tee /tmp/ocean-schema-check.txt
+          grep -q 'OCEAN.1_READY' /tmp/ocean-schema-check.txt
+
       # Candidate Inbox 0023 is an idempotent runtime dependency for the Foundry.
       # Apply only this reviewed CREATE IF NOT EXISTS migration before code deploy.
       - name: Ensure Candidate Inbox schema 0023
