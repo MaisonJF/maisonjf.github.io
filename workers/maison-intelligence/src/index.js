@@ -23,6 +23,7 @@ import { generateEditorialCandidates } from './editorial_candidate_generation.js
 import { runExpansionFoundry } from './expansion_foundry.js';
 import { runFeedbackCouncil } from './feedback_council.js';
 import { runFeedbackLearning } from './feedback_learning.js';
+import { runOsirisCouncil } from './osiris_council.js';
 
 function id(prefix) { return `${prefix}${crypto.randomUUID()}`; }
 function utcDay(date = new Date()) { return date.toISOString().slice(0, 10); }
@@ -760,6 +761,7 @@ export default {
       jobs.push(enqueueVisibilityProbeRun(env,when,getControl));
     }
     jobs.push(enqueueFeedbackCouncilRun(env,when,getControl));
+    // The three commercial OSIRIS roles run once per scheduler slot; D1 makes the slot idempotent.\n    if (isTrue(env.OSIRIS_COUNCIL_ENABLED)) jobs.push(runOsirisCouncil(env,{date:when}));
     if (when.getUTCHours()===21 && when.getUTCMinutes()===0) {
       jobs.push(enqueueFeedbackLearningRun(env,when,getControl));
     }
