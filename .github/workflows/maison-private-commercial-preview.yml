@@ -28,6 +28,24 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Verify required private preview secrets are configured
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=0
+          for key in BRAIN_CONTROL_API_URL BRAIN_CONTROL_TOKEN CF_ACCESS_CLIENT_ID CF_ACCESS_CLIENT_SECRET; do
+            if [ -z "${!key:-}" ]; then
+              echo "Missing required secret/env: $key"
+              missing=1
+            fi
+          done
+
+          if [ "$missing" -ne 0 ]; then
+            echo "Private preview is skipped because required secrets are not configured for this repository or environment."
+            echo "Add MAISON_BRAIN_PRIVATE_URL, MAISON_BRAIN_CONTROL_TOKEN, MAISON_CF_ACCESS_CLIENT_ID, and MAISON_CF_ACCESS_CLIENT_SECRET to the repository or environment secrets."
+            exit 0
+          fi
+
       - name: Preflight private read surface
         run: python .github/maison-growth/runtime/preflight_private_runtime.py private_brain_read_candidate
 
