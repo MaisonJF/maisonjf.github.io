@@ -1,14 +1,14 @@
 {
-  "version": "2026-10-12",
+  "version": "2026-10-13",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-10-12T21:51:38.200Z",
+  "last_enriched_at": "2026-10-13T02:36:06.118Z",
   "candidates": [
     {
       "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
       "territory": "adiar-o-sono-para-recuperar-autonomia",
       "intent": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
-      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre transição entre obrigação, tempo próprio e descanso, sem claims médicos ou promessas sobre sono; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre transição entre obrigação, tempo próprio e descanso, sem claims médicos ou promessas sobre sono; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}",
       "evidence": [
         "International Journal of Behavioral Medicine (daily diary study, 2024): higher daily stress was associated with more bedtime procrastination, which in turn was associated with shorter sleep duration and poorer sleep quality — https://doi.org/10.1007/s12529-023-10206-3",
         "Current Psychology / academic literature on revenge bedtime procrastination (2026): examines intentional delay of bedtime to reclaim leisure or personal time not available during the day, reinforcing autonomy/time-recovery as a distinct behavioural framing — https://link.springer.com/",
@@ -24,12 +24,14 @@
         "transição entre obrigação e descanso",
         "revenge bedtime",
         "bedtime procrastination",
-        "adiar o sono"
+        "adiar o sono",
+        "stay up late",
+        "staying up late"
       ],
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T21:07:00+01:00",
-      "lastSeenAt": "2026-10-10T00:02:54.477Z"
+      "lastSeenAt": "2026-10-13T00:03:26.480Z"
     },
     {
       "painLanguage": "O domingo ainda não acabou, mas a cabeça já começou a viver a segunda-feira: tarefas, mensagens, reuniões e obrigações entram mentalmente antes de o tempo de descanso terminar, roubando presença ao fim do fim-de-semana.",
@@ -89,7 +91,7 @@
       "painLanguage": "Às vezes, manter a paz parece exigir engolir opiniões, necessidades ou desconforto. A relação continua, mas a pessoa começa a dividir-se entre aquilo que sente por dentro e aquilo que se permite mostrar para não arriscar conflito, rejeição ou perda.",
       "territory": "auto-silenciamento-para-preservar-o-vinculo",
       "intent": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
-      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; experiências reflexivas sobre voz, segurança relacional, necessidades e reciprocidade, sem substituir apoio clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}",
+      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; experiências reflexivas sobre voz, segurança relacional, necessidades e reciprocidade, sem substituir apoio clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}",
       "evidence": [
         "Behavioral Sciences (2026; PMID 42352796): estudo qualitativo encontrou auto-silenciamento específico de cada relação, associado sobretudo à segurança percebida; a supressão repetida da expressão para preservar vínculos apresentou custos psicológicos cumulativos — https://pubmed.ncbi.nlm.nih.gov/42352796/",
         "International Journal of Social Psychiatry (2023; PMID 35102764): em adultos em relações, o auto-silenciamento mediou a associação entre dimensões de apego inseguro e sintomas depressivos — https://pubmed.ncbi.nlm.nih.gov/35102764/",
@@ -106,12 +108,13 @@
         "baixar a régua para não perder o vínculo",
         "pedir menos para não parecer exigente",
         "normalizar atenção ou carinho insuficientes",
-        "self silencing"
+        "self silencing",
+        "people pleasing"
       ],
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-20T08:14:28+01:00",
-      "lastSeenAt": "2026-10-07T00:07:58.605Z"
+      "lastSeenAt": "2026-10-13T00:03:51.062Z"
     },
     {
       "painLanguage": "Às vezes ninguém diz “não podes”. Mas a escolha deixa de parecer livre quando a pessoa já sabe que, se sair, disser não, pedir espaço ou escolher por si, pode encontrar silêncio, frieza, culpa, tensão ou outra reacção que funciona como preço a pagar.",
@@ -169,7 +172,7 @@
       "painLanguage": "Cuidar de alguém pode nascer do amor e, ainda assim, ocupar tanto espaço que descansar, pedir ajuda ou proteger uma parte da própria vida começa a parecer egoísmo, abandono ou falha moral.",
       "territory": "cuidar-sem-desaparecer-no-papel-de-cuidador",
       "intent": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
-      "commercialAdjacency": "Oráculo Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas para cuidadores informais sobre culpa, agência, partilha de responsabilidade e preservação de identidade, sem aconselhamento clínico ou de cuidados; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}",
+      "commercialAdjacency": "Oráculo Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas para cuidadores informais sobre culpa, agência, partilha de responsabilidade e preservação de identidade, sem aconselhamento clínico ou de cuidados; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}",
       "evidence": [
         "Stress and Health (systematic review and meta-analysis, 2024): subjective caregiver burden is highly prevalent in family carers; dysfunctional coping was associated with higher burden and active coping with lower burden — https://doi.org/10.1002/smi.3395",
         "BMC Palliative Care (scoping review, 2026): caregiver guilt recurred around perceived inadequacy, difficult care decisions, self-care and competing family responsibilities, with action-oriented and identity-oriented guilt identified as distinct dimensions — https://doi.org/10.1186/s12904-026-02203-z",
@@ -185,12 +188,13 @@
         "escolha e obrigação no cuidar",
         "family caregiver",
         "cuidador",
-        "cuidar sem desaparecer"
+        "cuidar sem desaparecer",
+        "caregiving"
       ],
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-19T20:13:36+01:00",
-      "lastSeenAt": "2026-10-10T00:03:30.660Z"
+      "lastSeenAt": "2026-10-13T00:04:09.267Z"
     },
     {
       "painLanguage": "Mesmo quando existe tempo para parar, descansar pode trazer culpa, inquietação ou a sensação de estar a desperdiçar tempo. A pessoa pára por fora, mas por dentro continua a medir o próprio valor pelo que ainda devia estar a produzir.",
@@ -663,7 +667,7 @@
       "territory": "comparacao-social-que-transforma-vida-em-atraso",
       "painLanguage": "**Synthesis of Transferable Mechanisms for MAISON JF** *(≈560 words; public citations in brackets)* | Master / Case | Observed Evidence | Core Mechanism | Why It May Work | Transferable Principle | Possible Maison JF Application | Measurable Hypothesis | Risks / Counter‑Evidence | |---|---|---|---|---|---|---|---| | **P. T. Barnum – “Barnum/Forer effect”** (1886) | Audiences accepted vague personality sketches as highly personal. | **Identification via self‑referential vagueness** – statements that are broadly true feel uniquely applicable when framed as personal. | People seek validation of self‑concept; ambiguous cues allow projection. | Offer modular, adaptable language (e.g., product descriptions, guide prompts) that lets users map their own aspirations onto the brand. | Rewrite e‑book intros with “you may find…”, “if you’ve ever felt…”, then A/B test engagement. | ↑ Time‑on‑page + 15 % vs. fixed‑copy control (n = 500). | Over‑use can feel manipulative; requires genuine relevance to avoid backlash (see [1]). | | **Martha Stewart – Lifestyle Aspiration** (1990s‑2000s) | TV shows & magazines turned everyday cooking into aspirational ritual, boosting product sales. | **Desire via aspirational scripting** – presenting ordinary acts as elite performance creates vicarious desire. | Viewers infer that owning the tools enables the ideal self; social comparison fuels want. | Pair product tutorials with “day‑in‑the‑life” vignettes that show the item enabling a coveted routine. | Produce short “Oráculo” videos where a JF artisan uses a guide to craft a piece, highlighting the transformation. | ↑ Click‑through to product page + 20 % after vignette (pre‑post). | If the aspirational gap is too large, viewers may feel alienated (see [2]). | | **Alex Hormozi – Offer Stacking & Guarantees** (2021) | “Grand Slam Offer” increased conversion by bundling core product, bonuses, risk‑reversal. | **Conversion via perceived value & loss aversion** – stacking bonuses raises subjective value; guarantees reduce perceived risk. | Decision‑making shifts from cost‑benefit to gain‑maximization when the downside is mitigated. | Create a “JF Starter Kit”: core guide + exclusive template + 30‑day satisfaction guarantee. | A/B test checkout with vs. without kit; measure conversion lift. | ↑ Conversion + 12 % (baseline 3 % → 3.4 %). | Guarantees must be honourable; excessive bonuses can dilute brand prestige (see [3]). | | **Christian Dior – The “New Look” (1947)** | Post‑war silhouette redefined femininity, generating massive press and sales. | **Cultural meaning via mythmaking** – linking product to a broader societal rebirth narrative. | Consumers buy into the story, not just the garment; the product becomes a symbol of renewal. | Frame JF releases as “chapters” in a cultural renewal (e.g., “Artisan Revival” series) tied to moments of societal shift. | Launch limited‑edition line coinciding with a local arts festival; track press mentions & sentiment. | ↑ Earned media impressions + 30 % vs. baseline; sentiment score ↑ 0.2. | If the narrative feels forced, authenticity suffers (see [4]). | | **Yves Saint Laurent – Le Smoking Tuxedo (1966)** | Women’s tuxedo blurred gender norms, creating iconic identity statement. | **Identification via symbolic appropriation** – wearing the item signals alignment with a valued social group (empowered women). | Symbolic consumption lets consumers express identity without verbal declaration. | Offer unisex pieces that carry a clear symbolic cue (e.g., a signature lapel pin) and invite customers to declare affiliation. | Release a signature cuff; measure uptake of associated hashtag #JFCuff. | ↑ Hashtag usage + 25 % in first month; correlation with repeat purchase r = 0.42. | Over‑exposure can dilute symbolic power; need controlled scarcity (see [5]). | | **Tom Ford – Sensory Retail (2005‑present)** | Flagship stores use scent, lighting, music to create immersive brand experience. | **Attention & memory via multisensory encod",
       "intent": "**Synthesis of Transferable Mechanisms for MAISON JF** *(≈560 words; public citations in brackets)* | Master / Case | Observed Evidence | Core Mechanism | Why It May Work | Transferable Principle | Possible Maison JF Application | Measurable Hypothesis | Risks / Counter‑Evidence | |---|---|---|---|---|---|---|---| | **P. T. Barnum – “Barnum/Forer effect”** (1886) | Audiences accepted vague personality sketches as highly personal. | **Identification via self‑referential vagueness** – statements that are broadly true feel uniquely applicable when framed as personal. | People seek validation of self‑concept; ambiguous cues allow projection. | Offer modular, adaptable language (e.g., product descriptions, guide prompts) that lets users map their own aspirations onto the brand. | Rewrite e‑book intros with “you may find…”, “if you’ve ever felt…”, then A/B test engagement. | ↑ Time‑on‑page + 15 % vs. fixed‑copy control (n = 500). | Over‑use can feel manipulative; requires genuine relevance to avoid backlash (see [1]). | | **Martha Stewart – Lifestyle Aspiration** (1990s‑2000s) | TV shows & magazines turned everyday cooking into aspirational ritual, boosting product sales. | **Desire via aspirational scripting** – presenting ordinary acts as elite performance creates vicarious desire. | Viewers infer that owning the tools enables the ideal self; social comparison fuels want. | Pair product tutorials with “day‑in‑the‑life” vignettes that show the item enabling a coveted routine. | Produce short “Oráculo” videos where a JF artisan uses a guide to craft a piece, highlighting the transformation. | ↑ Click‑through to product page + 20 % after vignette (pre‑post). | If the aspirational gap is too large, viewers may feel alienated (see [2]). | | **Alex Hormozi – Offer Stacking & Guarantees** (2021) | “Grand Slam Offer” increased conversion by bundling core product, bonuses, risk‑reversal. | **Conversion via perceived value & loss aversion** – stacking bonuses raises subjective value; guarantees reduce perceived risk. | Decision‑making shifts from cost‑benefit to gain‑maximization when the downside is mitigated. | Create a “JF Starter Kit”: core guide + exclusive template + 30‑day satisfaction guarantee. | A/B test checkout with vs. without kit; measure conversion lift. | ↑ Conversion + 12 % (baseline 3 % → 3.4 %). | Guarantees must be honourable; excessive bonuses can dilute brand prestige (see [3]). | | **Christian Dior – The “New Look” (1947)** | Post‑war silhouette redefined femininity, generating massive press and sales. | **Cultural meaning via mythmaking** – linking product to a broader societal rebirth narrative. | Consumers buy into the story, not just the garment; the product becomes a symbol of renewal. | Frame JF releases as “chapters” in a cultural renewal (e.g., “Artisan Revival” series) tied to moments of societal shift. | Launch limited‑edition line coinciding with a local arts festival; track press mentions & sentiment. | ↑ Earned media impressions + 30 % vs. baseline; sentiment score ↑ 0.2. | If the narrative feels forced, authenticity suffers (see [4]). | | **Yves Saint Laurent – Le Smoking Tuxedo (1966)** | Women’s tuxedo blurred gender norms, creating iconic identity statement. | **Identification via symbolic appropriation** – wearing the item signals alignment with a valued social group (empowered women). | Symbolic consumption lets consumers express identity without verbal declaration. | Offer unisex pieces that carry a clear symbolic cue (e.g., a signature lapel pin) and invite customers to declare affiliation. | Release a signature cuff; measure uptake of associated hashtag #JFCuff. | ↑ Hashtag usage + 25 % in first month; correlation with repeat purchase r = 0.42. | Over‑exposure can dilute symbolic power; need controlled scarcity (see [5]). | | **Tom Ford – Sensory Retail (2005‑present)** | Flagship stores use scent, lighting, music to create immersive brand experience. | **Attention & memory via multisensory encod",
-      "commercialAdjacency": "{\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"atelier\"}",
+      "commercialAdjacency": "{\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"atelier\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"comparacao-social-que-transforma-vida-em-atraso\"}",
       "evidence": [],
       "questionPotential": true,
       "questionThemeCandidates": [
@@ -672,7 +676,7 @@
       "oraclePotential": false,
       "status": "internal_candidate",
       "firstSeenAt": "2026-10-02T09:00:45.036Z",
-      "lastSeenAt": "2026-10-12T03:03:34.620Z"
+      "lastSeenAt": "2026-10-13T00:02:31.752Z"
     }
   ]
 }

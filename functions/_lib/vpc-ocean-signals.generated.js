@@ -14,7 +14,9 @@ export const VPC_OCEAN_SIGNALS=[
       "transição entre obrigação e descanso",
       "revenge bedtime",
       "bedtime procrastination",
-      "adiar o sono"
+      "adiar o sono",
+      "stay up late",
+      "staying up late"
     ]
   },
   {
@@ -64,7 +66,8 @@ export const VPC_OCEAN_SIGNALS=[
       "baixar a régua para não perder o vínculo",
       "pedir menos para não parecer exigente",
       "normalizar atenção ou carinho insuficientes",
-      "self silencing"
+      "self silencing",
+      "people pleasing"
     ]
   },
   {
@@ -110,7 +113,8 @@ export const VPC_OCEAN_SIGNALS=[
       "escolha e obrigação no cuidar",
       "family caregiver",
       "cuidador",
-      "cuidar sem desaparecer"
+      "cuidar sem desaparecer",
+      "caregiving"
     ]
   },
   {
@@ -390,4 +394,4 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-10-12";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-10-13";
