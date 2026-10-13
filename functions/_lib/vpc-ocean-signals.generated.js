@@ -83,7 +83,9 @@ export const VPC_OCEAN_SIGNALS=[
       "desacordo vs controlo",
       "escolher sem pedir permissão emocional",
       "silent treatment",
-      "medo da reacção"
+      "medo da reacção",
+      "coercive control",
+      "emotional punishment"
     ]
   },
   {
@@ -129,7 +131,8 @@ export const VPC_OCEAN_SIGNALS=[
       "tempo livre que parece desperdício",
       "tarefas inacabadas durante a pausa",
       "permitir-se não produzir",
-      "productivity guilt"
+      "productivity guilt",
+      "guilt when resting"
     ]
   },
   {
@@ -351,7 +354,8 @@ export const VPC_OCEAN_SIGNALS=[
       "como gerar reconhecimento antes da compra",
       "que activos Maison já respondem à procura observada",
       "como transformar descoberta em visita sem publicidade paga",
-      "search visibility"
+      "search visibility",
+      "organic discovery"
     ]
   },
   {
