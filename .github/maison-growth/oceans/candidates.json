@@ -2,7 +2,7 @@
   "version": "2026-10-14",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-10-14T00:20:06.235Z",
+  "last_enriched_at": "2026-10-14T05:02:40.380Z",
   "candidates": [
     {
       "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
@@ -176,7 +176,7 @@
       "painLanguage": "Cuidar de alguém pode nascer do amor e, ainda assim, ocupar tanto espaço que descansar, pedir ajuda ou proteger uma parte da própria vida começa a parecer egoísmo, abandono ou falha moral.",
       "territory": "cuidar-sem-desaparecer-no-papel-de-cuidador",
       "intent": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
-      "commercialAdjacency": "Oráculo Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas para cuidadores informais sobre culpa, agência, partilha de responsabilidade e preservação de identidade, sem aconselhamento clínico ou de cuidados; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}",
+      "commercialAdjacency": "Oráculo Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas para cuidadores informais sobre culpa, agência, partilha de responsabilidade e preservação de identidade, sem aconselhamento clínico ou de cuidados; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}",
       "evidence": [
         "Stress and Health (systematic review and meta-analysis, 2024): subjective caregiver burden is highly prevalent in family carers; dysfunctional coping was associated with higher burden and active coping with lower burden — https://doi.org/10.1002/smi.3395",
         "BMC Palliative Care (scoping review, 2026): caregiver guilt recurred around perceived inadequacy, difficult care decisions, self-care and competing family responsibilities, with action-oriented and identity-oriented guilt identified as distinct dimensions — https://doi.org/10.1186/s12904-026-02203-z",
@@ -198,7 +198,7 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-19T20:13:36+01:00",
-      "lastSeenAt": "2026-10-13T00:04:09.267Z"
+      "lastSeenAt": "2026-10-14T03:02:01.501Z"
     },
     {
       "painLanguage": "Mesmo quando existe tempo para parar, descansar pode trazer culpa, inquietação ou a sensação de estar a desperdiçar tempo. A pessoa pára por fora, mas por dentro continua a medir o próprio valor pelo que ainda devia estar a produzir.",
@@ -258,7 +258,7 @@
       "painLanguage": "Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
       "territory": "evitamento-financeiro-sob-escassez",
       "intent": "compreender e interromper o ciclo entre sensação de escassez, sobrecarga cognitiva e evitamento de decisões financeiras",
-      "commercialAdjacency": "Oráculo Dinheiro & Segurança; experiências reflexivas de decisão e clareza financeira sem aconselhamento financeiro personalizado; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"evitamento-financeiro-sob-escassez\"}",
+      "commercialAdjacency": "Oráculo Dinheiro & Segurança; experiências reflexivas de decisão e clareza financeira sem aconselhamento financeiro personalizado; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"evitamento-financeiro-sob-escassez\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"evitamento-financeiro-sob-escassez\"}",
       "evidence": [
         "Journal of Economic Psychology (longitudinal, 2021): financial scarcity predicted later financial avoidance, and avoidance predicted later scarcity — https://doi.org/10.1016/j.joep.2021.102459",
         "Journal of Economic Psychology (meta-analysis, 2024): across 29 datasets/111,852 respondents, financial scarcity showed a detrimental association with cognitive performance — https://doi.org/10.1016/j.joep.2024.102702",
@@ -277,7 +277,7 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-19T02:09:33+01:00",
-      "lastSeenAt": "2026-10-11T03:00:50.278Z"
+      "lastSeenAt": "2026-10-14T03:02:24.232Z"
     },
     {
       "painLanguage": "Há esperas em que a vida parece ficar em suspenso: depois de enviar uma candidatura, fazer um exame, ter uma conversa importante ou entregar algo decisivo, já não há muito para fazer — mas a resposta ainda não chegou, e a cabeça continua a voltar ao assunto como se vigiar pudesse acelerar o desfecho.",
@@ -331,7 +331,7 @@
       "painLanguage": "Nem todas as compras de desejo procuram resolver um problema grande. Às vezes a pessoa quer apenas marcar uma pequena vitória, tornar um dia comum mais bonito ou dar a si própria um prazer acessível que diga: isto também conta.",
       "territory": "micro-luxo-como-recompensa-e-ritual",
       "intent": "reconhecer pequenos luxos e mimos intencionais como momentos de recompensa, celebração, prazer e identidade no quotidiano, distinguindo uma indulgência escolhida de pressão para gastar, culpa ou consumo impulsivo sem controlo",
-      "commercialAdjacency": "Reutilizar primeiro Oráculo €2, jogo/experiência digital €5, velas, óleos, névoas, escalda-pés, wax melts, mikados e Ritual Volta Para Casa como pequenos luxos por ocasião: pequena vitória, fim de tarefa, terça-feira que merece beleza, presente para si e celebração sem grande marco. Depois testar bundles físico+digital, formatos de descoberta/coleccionáveis, recompra por ritual e gifting. Digital recebe peso especial pela baixa fricção e escala; sem urgência, escassez ou promessa emocional/terapêutica.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"micro-luxo-como-recompensa-e-ritual\"}",
+      "commercialAdjacency": "Reutilizar primeiro Oráculo €2, jogo/experiência digital €5, velas, óleos, névoas, escalda-pés, wax melts, mikados e Ritual Volta Para Casa como pequenos luxos por ocasião: pequena vitória, fim de tarefa, terça-feira que merece beleza, presente para si e celebração sem grande marco. Depois testar bundles físico+digital, formatos de descoberta/coleccionáveis, recompra por ritual e gifting. Digital recebe peso especial pela baixa fricção e escala; sem urgência, escassez ou promessa emocional/terapêutica.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"micro-luxo-como-recompensa-e-ritual\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"micro-luxo-como-recompensa-e-ritual\"}",
       "evidence": [
         "Circana / NCSolutions (2025; survey of 1,036 US adults): 62% considered little treats important to self-care, 50% described them as a reward, 26% named candles/incense among top non-food small rewards, and ritual pairing was a reported behaviour — https://www.circana.com/post/little-treats-statistics-trends",
         "SurveyMonkey Treatonomics (2026; 2,038 US adults): 62% reported small affordable treats at least monthly, 52% of treaters spent $25 or less per purchase, and 35% of Gen Z/Millennials used treats to stay motivated toward larger goals — https://www.surveymonkey.com/curiosity/treatonomics-consumer-spending/",
@@ -350,12 +350,14 @@
         "small luxury",
         "micro luxury",
         "reward ritual",
-        "pequena vitória"
+        "pequena vitória",
+        "treat yourself",
+        "pequeno luxo"
       ],
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-25T12:52:00+01:00",
-      "lastSeenAt": "2026-10-11T03:01:10.401Z"
+      "lastSeenAt": "2026-10-14T03:02:51.652Z"
     },
     {
       "painLanguage": "Há perdas em que nada termina de forma limpa: a pessoa, o vínculo ou o papel continua presente de alguma maneira, mas já não está disponível como antes, deixando quem fica preso entre esperança, ausência e falta de certeza.",
@@ -590,7 +592,7 @@
       "painLanguage": "A Maison pode ter respostas, produtos, experiências e linguagem relevantes e, ainda assim, permanecer invisível para pessoas que já procuram exactamente esses temas. O problema não é apenas converter quem entra: é ser descoberta, reconhecida e lembrada antes da intenção de compra.",
       "territory": "descoberta-organica-e-reconhecimento-da-maison",
       "intent": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
-      "commercialAdjacency": "Toda a oferta Maison JF já existente — ebooks, jogo, testes gratuitos, Oráculo/Tarot, mentorias, rituais, aromas, produtos físicos e experiências — priorizando primeiro a correspondência entre procura real e activos existentes, sem inventar novos produtos nem depender de publicidade paga.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}",
+      "commercialAdjacency": "Toda a oferta Maison JF já existente — ebooks, jogo, testes gratuitos, Oráculo/Tarot, mentorias, rituais, aromas, produtos físicos e experiências — priorizando primeiro a correspondência entre procura real e activos existentes, sem inventar novos produtos nem depender de publicidade paga.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}",
       "evidence": [
         "Hipótese estratégica autorizada por João Fadario em 2026-09-26: o gargalo prioritário a investigar é descoberta/reconhecimento — trazer mais pessoas adequadas à Maison antes de optimizar conversão.",
         "Public discovery graph interno Maison: sitemap, canonical/effective metadata, JSON-LD e internal-link projection já convergem para o Knowledge Graph e Brain; usar esta base para relacionar superfícies públicas com activos existentes.",
@@ -611,7 +613,7 @@
       "oraclePotential": false,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-26T22:00:00+01:00",
-      "lastSeenAt": "2026-10-13T03:02:23.549Z"
+      "lastSeenAt": "2026-10-14T03:01:26.621Z"
     },
     {
       "painLanguage": "A Maison não precisa de inventar do zero todos os mecanismos de atenção, desejo, identificação, memória, participação e propagação. Séculos de psicologia, cultura, publicidade, entretenimento, luxo, design, retalho e construção de marcas contêm mecanismos observáveis que podem ser estudados, testados e reinterpretados sem copiar a expressão de quem os dominou.",
