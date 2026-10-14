@@ -99,7 +99,9 @@ export const VPC_OCEAN_SIGNALS=[
       "antecipar necessidades de todos",
       "delegar também é trabalho",
       "partilhar responsabilidade mental",
-      "invisible labor"
+      "invisible labor",
+      "mental load",
+      "carga mental"
     ]
   },
   {
@@ -398,4 +400,4 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-10-13";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-10-14";
