@@ -1,14 +1,14 @@
 {
-  "version": "2026-10-15",
+  "version": "2026-10-16",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-10-15T04:48:25.951Z",
+  "last_enriched_at": "2026-10-16T04:38:34.523Z",
   "candidates": [
     {
       "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
       "territory": "adiar-o-sono-para-recuperar-autonomia",
       "intent": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
-      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre transição entre obrigação, tempo próprio e descanso, sem claims médicos ou promessas sobre sono; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre transição entre obrigação, tempo próprio e descanso, sem claims médicos ou promessas sobre sono; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}",
       "evidence": [
         "International Journal of Behavioral Medicine (daily diary study, 2024): higher daily stress was associated with more bedtime procrastination, which in turn was associated with shorter sleep duration and poorer sleep quality — https://doi.org/10.1007/s12529-023-10206-3",
         "Current Psychology / academic literature on revenge bedtime procrastination (2026): examines intentional delay of bedtime to reclaim leisure or personal time not available during the day, reinforcing autonomy/time-recovery as a distinct behavioural framing — https://link.springer.com/",
@@ -31,7 +31,7 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T21:07:00+01:00",
-      "lastSeenAt": "2026-10-13T00:03:26.480Z"
+      "lastSeenAt": "2026-10-16T00:05:21.975Z"
     },
     {
       "painLanguage": "O domingo ainda não acabou, mas a cabeça já começou a viver a segunda-feira: tarefas, mensagens, reuniões e obrigações entram mentalmente antes de o tempo de descanso terminar, roubando presença ao fim do fim-de-semana.",
@@ -91,7 +91,7 @@
       "painLanguage": "Às vezes, manter a paz parece exigir engolir opiniões, necessidades ou desconforto. A relação continua, mas a pessoa começa a dividir-se entre aquilo que sente por dentro e aquilo que se permite mostrar para não arriscar conflito, rejeição ou perda.",
       "territory": "auto-silenciamento-para-preservar-o-vinculo",
       "intent": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
-      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; experiências reflexivas sobre voz, segurança relacional, necessidades e reciprocidade, sem substituir apoio clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}",
+      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; experiências reflexivas sobre voz, segurança relacional, necessidades e reciprocidade, sem substituir apoio clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}",
       "evidence": [
         "Behavioral Sciences (2026; PMID 42352796): estudo qualitativo encontrou auto-silenciamento específico de cada relação, associado sobretudo à segurança percebida; a supressão repetida da expressão para preservar vínculos apresentou custos psicológicos cumulativos — https://pubmed.ncbi.nlm.nih.gov/42352796/",
         "International Journal of Social Psychiatry (2023; PMID 35102764): em adultos em relações, o auto-silenciamento mediou a associação entre dimensões de apego inseguro e sintomas depressivos — https://pubmed.ncbi.nlm.nih.gov/35102764/",
@@ -114,7 +114,7 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-20T08:14:28+01:00",
-      "lastSeenAt": "2026-10-13T00:03:51.062Z"
+      "lastSeenAt": "2026-10-16T00:05:59.728Z"
     },
     {
       "painLanguage": "Às vezes ninguém diz “não podes”. Mas a escolha deixa de parecer livre quando a pessoa já sabe que, se sair, disser não, pedir espaço ou escolher por si, pode encontrar silêncio, frieza, culpa, tensão ou outra reacção que funciona como preço a pagar.",
@@ -149,7 +149,7 @@
       "painLanguage": "Numa casa, fazer a tarefa é só uma parte do trabalho. Há também quem se lembre do que falta, antecipe necessidades, marque, planeie, confirme, delegue e mantenha dezenas de pequenas coisas mentalmente abertas — um trabalho que muitas vezes só se nota quando deixa de ser feito.",
       "territory": "carga-mental-invisivel-da-casa",
       "intent": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
-      "commercialAdjacency": "Oráculo Casa Partilhada, Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas sobre responsabilidade invisível, acordos domésticos e repartição de carga, sem aconselhamento clínico ou familiar; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"quando-o-que-funciona-na-relacao-se-torna-invisivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"carga-mental-invisivel-da-casa\"}",
+      "commercialAdjacency": "Oráculo Casa Partilhada, Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas sobre responsabilidade invisível, acordos domésticos e repartição de carga, sem aconselhamento clínico ou familiar; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"quando-o-que-funciona-na-relacao-se-torna-invisivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"carga-mental-invisivel-da-casa\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"telepressao-e-disponibilidade-permanente\"}",
       "evidence": [
         "Archives of Women's Mental Health (2025; PMID 38951218): em 322 mães de crianças pequenas, a carga cognitiva doméstica — planear, antecipar e delegar — foi mais desigual do que a execução física e associou-se a stress, burnout, saúde mental e funcionamento relacional; população específica, não generalizável automaticamente a todas as casas — https://doi.org/10.1007/s00737-024-01490-w",
         "Personality and Social Psychology Bulletin (2026; PMID 42630014): em dois estudos sobre relações heterossexuais, maior partilha da carga mental associou-se a maior satisfação relacional e sexual das mulheres, sendo a carga mental um preditor distinto da divisão do trabalho físico — https://doi.org/10.1177/01461672261474320",
@@ -170,7 +170,7 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T22:46:00+01:00",
-      "lastSeenAt": "2026-10-14T00:03:12.064Z"
+      "lastSeenAt": "2026-10-16T00:10:12.394Z"
     },
     {
       "painLanguage": "Cuidar de alguém pode nascer do amor e, ainda assim, ocupar tanto espaço que descansar, pedir ajuda ou proteger uma parte da própria vida começa a parecer egoísmo, abandono ou falha moral.",
@@ -595,7 +595,7 @@
       "painLanguage": "A Maison pode ter respostas, produtos, experiências e linguagem relevantes e, ainda assim, permanecer invisível para pessoas que já procuram exactamente esses temas. O problema não é apenas converter quem entra: é ser descoberta, reconhecida e lembrada antes da intenção de compra.",
       "territory": "descoberta-organica-e-reconhecimento-da-maison",
       "intent": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
-      "commercialAdjacency": "Toda a oferta Maison JF já existente — ebooks, jogo, testes gratuitos, Oráculo/Tarot, mentorias, rituais, aromas, produtos físicos e experiências — priorizando primeiro a correspondência entre procura real e activos existentes, sem inventar novos produtos nem depender de publicidade paga.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}",
+      "commercialAdjacency": "Toda a oferta Maison JF já existente — ebooks, jogo, testes gratuitos, Oráculo/Tarot, mentorias, rituais, aromas, produtos físicos e experiências — priorizando primeiro a correspondência entre procura real e activos existentes, sem inventar novos produtos nem depender de publicidade paga.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}",
       "evidence": [
         "Hipótese estratégica autorizada por João Fadario em 2026-09-26: o gargalo prioritário a investigar é descoberta/reconhecimento — trazer mais pessoas adequadas à Maison antes de optimizar conversão.",
         "Public discovery graph interno Maison: sitemap, canonical/effective metadata, JSON-LD e internal-link projection já convergem para o Knowledge Graph e Brain; usar esta base para relacionar superfícies públicas com activos existentes.",
@@ -611,12 +611,13 @@
         "que activos Maison já respondem à procura observada",
         "como transformar descoberta em visita sem publicidade paga",
         "search visibility",
-        "organic discovery"
+        "organic discovery",
+        "organic traffic"
       ],
       "oraclePotential": false,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-26T22:00:00+01:00",
-      "lastSeenAt": "2026-10-15T03:03:46.813Z"
+      "lastSeenAt": "2026-10-16T03:04:15.121Z"
     },
     {
       "painLanguage": "A Maison não precisa de inventar do zero todos os mecanismos de atenção, desejo, identificação, memória, participação e propagação. Séculos de psicologia, cultura, publicidade, entretenimento, luxo, design, retalho e construção de marcas contêm mecanismos observáveis que podem ser estudados, testados e reinterpretados sem copiar a expressão de quem os dominou.",
@@ -648,7 +649,7 @@
       "territory": "identidade-em-transicao-quando-a-versao-antiga-ja-nao-serve",
       "painLanguage": "**Observed Evidence (last ≈ 30 days – based on the most recent public sources available to the model)** | Theme / Language | Recurring question / phrase (verbatim or paraphrased) | Source type & URL (accessed ≤ 30 days) | |------------------|--------------------------------------------------------|----------------------------------------| | **Self‑reconnection / Identity change** | “How do I rediscover who I am after a long‑term relationship ends?” | Reddit – r/selfimprovement, thread *“Reconnecting with myself after a breakup”* (2024‑08‑12) <https://www.reddit.com/r/selfimprovement/comments/1e9z4k2/reconnecting_with_myself_after_a_breakup/> | | | “Como me reconectar comigo mesma depois de anos cuidando só da família?” (Portuguese) | Sapo Blogs – post *“Redescobrir a identidade após o vazio do ninho”* (2024‑09‑03) <https://blogs.sapo.pt/redescobrir-identidade> | | | “¿Cómo volver a encontrar mi propósito tras un cambio de carrera?” (Spanish) | Forocoches – thread *“Reinventarse profesionalmente a los 40”* (2024‑08‑27) <https://www.forocoches.com/foro/showthread.php?t=7891234> | | **Starting over / Rebuilding daily life** | “What are the first concrete steps to start over after moving to a new country?” | Expat Forum – InterNations discussion *“First 30 days in Lisbon: practical checklist”* (2024‑09‑10) <https://www.internations.org/forum/expat-tips/starting-over-in-lisbon> | | | “Por onde recomeçar depois de perder o emprego e ter que mudar de cidade?” (Brazilian Portuguese) | Quora pt – question *“Como recomeçar após demissão e mudança de cidade?”* (2024‑08‑15) <https://www.quora.com/Por-onde-recomeçar-depois-de-perder-o-emprego-e-ter-que-mudar-de-cidade> | | | “¿Cómo crear una rutina diaria cuando todo se ha derrumbado?” (Spanish) | Blog *Vida Saludable* – article *“Rutinas para reconstruir la vida tras una crisis”* (2024‑09‑05) <https://www.vidasaludable.es/rutinas-reconstruir-vida> | | **Boundaries** | “How do I set boundaries at work without feeling guilty?” | Harvard Business Review – article *“Setting Boundaries Without Guilt”* (2024‑08‑22) <https://hbr.org/2024/08/setting-boundaries-without-guilt> | | | “Como dizer ‘não’ no trabalho sem parecer desinteressado?” (Portuguese) | LinkedIn Portugal – post *“Dizer não no trabalho: estratégias práticas”* (2024‑09‑02) <https://www.linkedin.com/pulse/dizer-não-trabalho-estratégias-práticas> | | | “¿Cómo establecer límites con familiares tóxicos sin romper la relación?” (Spanish) | Psicología y Mente – forum thread *“Límites familiares tóxicos”* (2024‑08‑18) <https://www.psicologiaymente.net/foro/limites-familiares> | | **Confidence / Self‑",
       "intent": "**Observed Evidence (last ≈ 30 days – based on the most recent public sources available to the model)** | Theme / Language | Recurring question / phrase (verbatim or paraphrased) | Source type & URL (accessed ≤ 30 days) | |------------------|--------------------------------------------------------|----------------------------------------| | **Self‑reconnection / Identity change** | “How do I rediscover who I am after a long‑term relationship ends?” | Reddit – r/selfimprovement, thread *“Reconnecting with myself after a breakup”* (2024‑08‑12) <https://www.reddit.com/r/selfimprovement/comments/1e9z4k2/reconnecting_with_myself_after_a_breakup/> | | | “Como me reconectar comigo mesma depois de anos cuidando só da família?” (Portuguese) | Sapo Blogs – post *“Redescobrir a identidade após o vazio do ninho”* (2024‑09‑03) <https://blogs.sapo.pt/redescobrir-identidade> | | | “¿Cómo volver a encontrar mi propósito tras un cambio de carrera?” (Spanish) | Forocoches – thread *“Reinventarse profesionalmente a los 40”* (2024‑08‑27) <https://www.forocoches.com/foro/showthread.php?t=7891234> | | **Starting over / Rebuilding daily life** | “What are the first concrete steps to start over after moving to a new country?” | Expat Forum – InterNations discussion *“First 30 days in Lisbon: practical checklist”* (2024‑09‑10) <https://www.internations.org/forum/expat-tips/starting-over-in-lisbon> | | | “Por onde recomeçar depois de perder o emprego e ter que mudar de cidade?” (Brazilian Portuguese) | Quora pt – question *“Como recomeçar após demissão e mudança de cidade?”* (2024‑08‑15) <https://www.quora.com/Por-onde-recomeçar-depois-de-perder-o-emprego-e-ter-que-mudar-de-cidade> | | | “¿Cómo crear una rutina diaria cuando todo se ha derrumbado?” (Spanish) | Blog *Vida Saludable* – article *“Rutinas para reconstruir la vida tras una crisis”* (2024‑09‑05) <https://www.vidasaludable.es/rutinas-reconstruir-vida> | | **Boundaries** | “How do I set boundaries at work without feeling guilty?” | Harvard Business Review – article *“Setting Boundaries Without Guilt”* (2024‑08‑22) <https://hbr.org/2024/08/setting-boundaries-without-guilt> | | | “Como dizer ‘não’ no trabalho sem parecer desinteressado?” (Portuguese) | LinkedIn Portugal – post *“Dizer não no trabalho: estratégias práticas”* (2024‑09‑02) <https://www.linkedin.com/pulse/dizer-não-trabalho-estratégias-práticas> | | | “¿Cómo establecer límites con familiares tóxicos sin romper la relación?” (Spanish) | Psicología y Mente – forum thread *“Límites familiares tóxicos”* (2024‑08‑18) <https://www.psicologiaymente.net/foro/limites-familiares> | | **Confidence / Self‑",
-      "commercialAdjacency": "{\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"self_reconnection\"}",
+      "commercialAdjacency": "{\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"self_reconnection\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"identidade-em-transicao-quando-a-versao-antiga-ja-nao-serve\"}",
       "evidence": [],
       "questionPotential": true,
       "questionThemeCandidates": [
@@ -657,7 +658,7 @@
       "oraclePotential": false,
       "status": "internal_candidate",
       "firstSeenAt": "2026-10-02T09:00:45.036Z",
-      "lastSeenAt": "2026-10-02T09:03:04.299Z"
+      "lastSeenAt": "2026-10-16T03:02:16.255Z"
     },
     {
       "territory": "vergonha-financeira-e-medo-de-olhar-para-os-numeros",

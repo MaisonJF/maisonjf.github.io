@@ -360,7 +360,8 @@ export const VPC_OCEAN_SIGNALS=[
       "que activos Maison já respondem à procura observada",
       "como transformar descoberta em visita sem publicidade paga",
       "search visibility",
-      "organic discovery"
+      "organic discovery",
+      "organic traffic"
     ]
   },
   {
@@ -404,4 +405,4 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-10-15";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-10-16";
