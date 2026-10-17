@@ -1,8 +1,8 @@
 {
-  "version": "2026-10-16",
+  "version": "2026-10-17",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-10-16T04:38:34.523Z",
+  "last_enriched_at": "2026-10-17T04:35:44.796Z",
   "candidates": [
     {
       "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
@@ -63,7 +63,7 @@
       "painLanguage": "Às vezes o problema não é passar horas no telemóvel, mas nunca conseguir ficar tempo suficiente numa coisa só: uma notificação, um ping, uma janela, outra tarefa — e cada pequena interrupção obriga a cabeça a abandonar e reconstruir o fio outra vez.",
       "territory": "atencao-fragmentada-por-interrupcoes-digitais",
       "intent": "reconhecer quando interrupções frequentes e mudanças constantes de contexto fragmentam a atenção e dificultam retomar tarefas, distinguindo tempo total de ecrã da frequência com que a atenção é capturada e redireccionada",
-      "commercialAdjacency": "Oráculo Cabeça, Eu & Padrões e Trabalho & Caminho; Ritual Volta Para Casa e experiências digitais sobre foco, pausa e recuperação atencional, sem claims médicos, diagnóstico ou promessa de melhoria clínica; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"atencao-fragmentada-por-interrupcoes-digitais\"}",
+      "commercialAdjacency": "Oráculo Cabeça, Eu & Padrões e Trabalho & Caminho; Ritual Volta Para Casa e experiências digitais sobre foco, pausa e recuperação atencional, sem claims médicos, diagnóstico ou promessa de melhoria clínica; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"atencao-fragmentada-por-interrupcoes-digitais\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"atencao-fragmentada-por-interrupcoes-digitais\"}",
       "evidence": [
         "Computers in Human Behavior (2026): experiência com notificações tipo smartphone encontrou abrandamento transitório do processamento cognitivo por cerca de sete segundos após notificações, com maior perturbação associada à relevância percebida e à frequência habitual de interacção com o smartphone — https://doi.org/10.1016/j.chb.2026.108926",
         "BMC Psychology (2026; PMID 42192465): estudo mixed-methods em adultos indianos de 18–45 anos encontrou associação entre maior uso de redes sociais, fragmentação da atenção e distress emocional; o desenho é associativo e a população é específica, pelo que não estabelece causalidade universal — https://doi.org/10.1186/s40359-026-04846-2",
@@ -80,18 +80,20 @@
         "notifications",
         "attention fragmentation",
         "interrupções digitais",
-        "perder o fio"
+        "perder o fio",
+        "digital interruption",
+        "distraction"
       ],
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T22:46:00+01:00",
-      "lastSeenAt": "2026-10-12T03:04:07.643Z"
+      "lastSeenAt": "2026-10-17T00:03:33.088Z"
     },
     {
       "painLanguage": "Às vezes, manter a paz parece exigir engolir opiniões, necessidades ou desconforto. A relação continua, mas a pessoa começa a dividir-se entre aquilo que sente por dentro e aquilo que se permite mostrar para não arriscar conflito, rejeição ou perda.",
       "territory": "auto-silenciamento-para-preservar-o-vinculo",
       "intent": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
-      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; experiências reflexivas sobre voz, segurança relacional, necessidades e reciprocidade, sem substituir apoio clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}",
+      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; experiências reflexivas sobre voz, segurança relacional, necessidades e reciprocidade, sem substituir apoio clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}",
       "evidence": [
         "Behavioral Sciences (2026; PMID 42352796): estudo qualitativo encontrou auto-silenciamento específico de cada relação, associado sobretudo à segurança percebida; a supressão repetida da expressão para preservar vínculos apresentou custos psicológicos cumulativos — https://pubmed.ncbi.nlm.nih.gov/42352796/",
         "International Journal of Social Psychiatry (2023; PMID 35102764): em adultos em relações, o auto-silenciamento mediou a associação entre dimensões de apego inseguro e sintomas depressivos — https://pubmed.ncbi.nlm.nih.gov/35102764/",
@@ -114,7 +116,7 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-20T08:14:28+01:00",
-      "lastSeenAt": "2026-10-16T00:05:59.728Z"
+      "lastSeenAt": "2026-10-17T03:02:32.776Z"
     },
     {
       "painLanguage": "Às vezes ninguém diz “não podes”. Mas a escolha deixa de parecer livre quando a pessoa já sabe que, se sair, disser não, pedir espaço ou escolher por si, pode encontrar silêncio, frieza, culpa, tensão ou outra reacção que funciona como preço a pagar.",
@@ -149,7 +151,7 @@
       "painLanguage": "Numa casa, fazer a tarefa é só uma parte do trabalho. Há também quem se lembre do que falta, antecipe necessidades, marque, planeie, confirme, delegue e mantenha dezenas de pequenas coisas mentalmente abertas — um trabalho que muitas vezes só se nota quando deixa de ser feito.",
       "territory": "carga-mental-invisivel-da-casa",
       "intent": "dar linguagem ao trabalho cognitivo invisível de gerir uma casa ou família — antecipar, planear, lembrar e acompanhar — distinguindo execução visível de responsabilidade mental contínua e tornando possível reconhecer, discutir e repartir essa carga",
-      "commercialAdjacency": "Oráculo Casa Partilhada, Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas sobre responsabilidade invisível, acordos domésticos e repartição de carga, sem aconselhamento clínico ou familiar; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"quando-o-que-funciona-na-relacao-se-torna-invisivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"carga-mental-invisivel-da-casa\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"telepressao-e-disponibilidade-permanente\"}",
+      "commercialAdjacency": "Oráculo Casa Partilhada, Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas sobre responsabilidade invisível, acordos domésticos e repartição de carga, sem aconselhamento clínico ou familiar; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"quando-o-que-funciona-na-relacao-se-torna-invisivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"carga-mental-invisivel-da-casa\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"telepressao-e-disponibilidade-permanente\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"carga-mental-invisivel-da-casa\"}",
       "evidence": [
         "Archives of Women's Mental Health (2025; PMID 38951218): em 322 mães de crianças pequenas, a carga cognitiva doméstica — planear, antecipar e delegar — foi mais desigual do que a execução física e associou-se a stress, burnout, saúde mental e funcionamento relacional; população específica, não generalizável automaticamente a todas as casas — https://doi.org/10.1007/s00737-024-01490-w",
         "Personality and Social Psychology Bulletin (2026; PMID 42630014): em dois estudos sobre relações heterossexuais, maior partilha da carga mental associou-se a maior satisfação relacional e sexual das mulheres, sendo a carga mental um preditor distinto da divisão do trabalho físico — https://doi.org/10.1177/01461672261474320",
@@ -170,13 +172,13 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T22:46:00+01:00",
-      "lastSeenAt": "2026-10-16T00:10:12.394Z"
+      "lastSeenAt": "2026-10-17T00:16:20.189Z"
     },
     {
       "painLanguage": "Cuidar de alguém pode nascer do amor e, ainda assim, ocupar tanto espaço que descansar, pedir ajuda ou proteger uma parte da própria vida começa a parecer egoísmo, abandono ou falha moral.",
       "territory": "cuidar-sem-desaparecer-no-papel-de-cuidador",
       "intent": "reconhecer quando responsabilidade e afecto se transformam em culpa, perda de escolha ou absorção da identidade pelo papel de cuidador, recuperando limites e agência sem negar o vínculo",
-      "commercialAdjacency": "Oráculo Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas para cuidadores informais sobre culpa, agência, partilha de responsabilidade e preservação de identidade, sem aconselhamento clínico ou de cuidados; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}",
+      "commercialAdjacency": "Oráculo Família & Laços, Limites & Respeito e Eu & Padrões; experiências reflexivas para cuidadores informais sobre culpa, agência, partilha de responsabilidade e preservação de identidade, sem aconselhamento clínico ou de cuidados; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"cuidar-sem-desaparecer-no-papel-de-cuidador\"}",
       "evidence": [
         "Stress and Health (systematic review and meta-analysis, 2024): subjective caregiver burden is highly prevalent in family carers; dysfunctional coping was associated with higher burden and active coping with lower burden — https://doi.org/10.1002/smi.3395",
         "BMC Palliative Care (scoping review, 2026): caregiver guilt recurred around perceived inadequacy, difficult care decisions, self-care and competing family responsibilities, with action-oriented and identity-oriented guilt identified as distinct dimensions — https://doi.org/10.1186/s12904-026-02203-z",
@@ -198,7 +200,7 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-19T20:13:36+01:00",
-      "lastSeenAt": "2026-10-14T03:02:01.501Z"
+      "lastSeenAt": "2026-10-17T03:03:13.609Z"
     },
     {
       "painLanguage": "Mesmo quando existe tempo para parar, descansar pode trazer culpa, inquietação ou a sensação de estar a desperdiçar tempo. A pessoa pára por fora, mas por dentro continua a medir o próprio valor pelo que ainda devia estar a produzir.",
@@ -231,7 +233,7 @@
       "painLanguage": "Há momentos em que a pessoa abre o telemóvel para perceber o que se passa e acaba presa numa corrente de notícias negativas: sabe que aquilo a está a desgastar, mas continuar a procurar parece uma forma de não ser apanhada desprevenida.",
       "territory": "doomscrolling-para-tentar-reduzir-incerteza",
       "intent": "reconhecer quando procurar informação deixa de ajudar a compreender o mundo e passa a alimentar um ciclo de alerta, repetição e dificuldade em desligar, distinguindo estar informado de permanecer preso a conteúdo negativo sem transformar o comportamento em diagnóstico",
-      "commercialAdjacency": "Oráculo Eu & Padrões, Segurança e Cabeça; Ritual Volta Para Casa e futuras experiências digitais sobre pausa, atenção e relação com o feed, sem claims médicos ou promessa de tratamento; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"doomscrolling-para-tentar-reduzir-incerteza\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"doomscrolling-para-tentar-reduzir-incerteza\"}",
+      "commercialAdjacency": "Oráculo Eu & Padrões, Segurança e Cabeça; Ritual Volta Para Casa e futuras experiências digitais sobre pausa, atenção e relação com o feed, sem claims médicos ou promessa de tratamento; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"doomscrolling-para-tentar-reduzir-incerteza\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"doomscrolling-para-tentar-reduzir-incerteza\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"doomscrolling-para-tentar-reduzir-incerteza\"}",
       "evidence": [
         "Frontiers in Psychology (systematic review and meta-analysis, 2026): across 44 unique studies, doomscrolling showed correlational associations with greater anxiety, depression and psychological distress and with lower wellbeing and life satisfaction; certainty was rated very low and causality was not established — https://doi.org/10.3389/fpsyg.2026.1893800",
         "Personality and Individual Differences (2025): a study of 443 participants examined doomscrolling in relation to trait anxiety, intolerance of uncertainty and psychological resilience, supporting uncertainty as a relevant mechanism in persistent negative-news consumption — https://doi.org/10.1016/j.paid.2024.112919",
@@ -252,7 +254,7 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T22:31:00+01:00",
-      "lastSeenAt": "2026-10-14T00:03:37.849Z"
+      "lastSeenAt": "2026-10-17T00:04:58.551Z"
     },
     {
       "painLanguage": "Quando o dinheiro aperta, olhar para contas, decisões e próximos passos pode tornar-se tão pesado que a pessoa adia precisamente aquilo que precisava de enfrentar.",
@@ -306,7 +308,7 @@
       "painLanguage": "Há futuros que não acabam porque aconteceram; acabam porque deixaram de poder acontecer. Às vezes a pessoa só percebe tarde que queria um filho, uma vida, um caminho ou uma possibilidade que durante anos parecia disponível — e precisa de fazer luto por algo que nunca chegou a existir.",
       "territory": "luto-por-um-futuro-que-deixou-de-ser-possivel",
       "intent": "dar linguagem ao luto por possibilidades de vida que se tornam inalcançáveis com o tempo, distinguindo arrependimento, perda de esperança e reconstrução de significado sem tratar como falha moral o facto de o desejo ter mudado ou chegado tarde",
-      "commercialAdjacency": "Oráculo Luto & Perda, Parentalidade & Escolha, Escolhas & Mudança e Propósito & Sentido; experiências reflexivas sobre futuros não vividos, irreversibilidade e reconstrução de significado, sem aconselhamento médico, reprodutivo ou clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}",
+      "commercialAdjacency": "Oráculo Luto & Perda, Parentalidade & Escolha, Escolhas & Mudança e Propósito & Sentido; experiências reflexivas sobre futuros não vividos, irreversibilidade e reconstrução de significado, sem aconselhamento médico, reprodutivo ou clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}",
       "evidence": [
         "Humanities and Social Sciences Communications (2024; PMID 39003684): estudo clínico/qualitativo com seis mulheres involuntariamente sem filhos descreveu luto persistente, perda do plano de ter filhos e dificuldade em integrar uma vida sem o futuro imaginado; amostra pequena e específica — https://pubmed.ncbi.nlm.nih.gov/39003684/",
         "Human Reproduction (2020; PMID 32268357): entrevistas aprofundadas com 12 mulheres britânicas de meia-idade involuntariamente sem filhos encontraram luto ambíguo e intangível pela perda de esperança de maternidade, com necessidade de apoio a longo prazo; população específica — https://pubmed.ncbi.nlm.nih.gov/32268357/",
@@ -320,12 +322,13 @@
         "irreversibilidade e arrependimento",
         "futuro imaginado que fechou",
         "continuar depois de perder uma possibilidade",
-        "futuro que deixou"
+        "futuro que deixou",
+        "grief for future"
       ],
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T23:41:00+01:00",
-      "lastSeenAt": "2026-10-14T00:04:01.449Z"
+      "lastSeenAt": "2026-10-17T00:06:07.545Z"
     },
     {
       "painLanguage": "Nem todas as compras de desejo procuram resolver um problema grande. Às vezes a pessoa quer apenas marcar uma pequena vitória, tornar um dia comum mais bonito ou dar a si própria um prazer acessível que diga: isto também conta.",
@@ -595,7 +598,7 @@
       "painLanguage": "A Maison pode ter respostas, produtos, experiências e linguagem relevantes e, ainda assim, permanecer invisível para pessoas que já procuram exactamente esses temas. O problema não é apenas converter quem entra: é ser descoberta, reconhecida e lembrada antes da intenção de compra.",
       "territory": "descoberta-organica-e-reconhecimento-da-maison",
       "intent": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
-      "commercialAdjacency": "Toda a oferta Maison JF já existente — ebooks, jogo, testes gratuitos, Oráculo/Tarot, mentorias, rituais, aromas, produtos físicos e experiências — priorizando primeiro a correspondência entre procura real e activos existentes, sem inventar novos produtos nem depender de publicidade paga.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}",
+      "commercialAdjacency": "Toda a oferta Maison JF já existente — ebooks, jogo, testes gratuitos, Oráculo/Tarot, mentorias, rituais, aromas, produtos físicos e experiências — priorizando primeiro a correspondência entre procura real e activos existentes, sem inventar novos produtos nem depender de publicidade paga.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}",
       "evidence": [
         "Hipótese estratégica autorizada por João Fadario em 2026-09-26: o gargalo prioritário a investigar é descoberta/reconhecimento — trazer mais pessoas adequadas à Maison antes de optimizar conversão.",
         "Public discovery graph interno Maison: sitemap, canonical/effective metadata, JSON-LD e internal-link projection já convergem para o Knowledge Graph e Brain; usar esta base para relacionar superfícies públicas com activos existentes.",
@@ -617,7 +620,7 @@
       "oraclePotential": false,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-26T22:00:00+01:00",
-      "lastSeenAt": "2026-10-16T03:04:15.121Z"
+      "lastSeenAt": "2026-10-17T03:00:47.037Z"
     },
     {
       "painLanguage": "A Maison não precisa de inventar do zero todos os mecanismos de atenção, desejo, identificação, memória, participação e propagação. Séculos de psicologia, cultura, publicidade, entretenimento, luxo, design, retalho e construção de marcas contêm mecanismos observáveis que podem ser estudados, testados e reinterpretados sem copiar a expressão de quem os dominou.",

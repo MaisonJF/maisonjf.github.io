@@ -49,7 +49,9 @@ export const VPC_OCEAN_SIGNALS=[
       "notifications",
       "attention fragmentation",
       "interrupções digitais",
-      "perder o fio"
+      "perder o fio",
+      "digital interruption",
+      "distraction"
     ]
   },
   {
@@ -191,7 +193,8 @@ export const VPC_OCEAN_SIGNALS=[
       "irreversibilidade e arrependimento",
       "futuro imaginado que fechou",
       "continuar depois de perder uma possibilidade",
-      "futuro que deixou"
+      "futuro que deixou",
+      "grief for future"
     ]
   },
   {
@@ -405,4 +408,4 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-10-16";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-10-17";
