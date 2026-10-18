@@ -218,6 +218,8 @@ for(const s of services.MAISON_SERVICES||[]){
 const oracleOffers=MAISON_OFFER_CATALOGUE.filter(x=>x.family==='oracle'&&x.status!=='hidden');
 const pdiOffers=MAISON_OFFER_CATALOGUE.filter(x=>x.family==='pdi'&&x.status!=='hidden');
 const pdiSignals=buildPdiThemeSourceSignals();
+const editorialQueue=JSON.parse(fs.readFileSync(new URL('editorial-queue.json',import.meta.url),'utf8'));
+const ebookProposals=Array.isArray(editorialQueue.ebookProposals)?editorialQueue.ebookProposals:[];
 
 function commonFixedAmount(offers,label){
   const amounts=[...new Set(offers.map(x=>x.amount).filter(Number.isInteger))];
@@ -253,7 +255,9 @@ assets.push({
     territory_count:ORACLE_TERRITORIES.length,
     ocean_feed:'editorial_queue.oracle_candidate',
     roles:['opening','recognition','tension','counterpoint','reframe','movement','close'],
-    paid_bodies_in_git:false
+    paid_bodies_in_git:false,
+    ebook_proposal_count:ebookProposals.length,
+    ebook_proposal_feed:'editorial_queue.ebookProposals'
   },
   operational:digitalOperationalUnknowns(),
   price_kind:'fixed',
@@ -303,7 +307,14 @@ assets.sort((a,b)=>a.asset_ref.localeCompare(b.asset_ref));
 
 const payload={
   schema_version:'commercial_assets_v1',
-  sources:['data/products.js','data/services.js','functions/_lib/offer-brain.js'],
+  sources:['data/products.js','data/services.js','functions/_lib/offer-brain.js','.github/maison-growth/brain/editorial-queue.json'],
+  content_linkage:{
+    oceans_to_editorial_queue:true,
+    editorial_queue_to_commercial_assets:true,
+    ebook_proposals:ebookProposals.length,
+    proposals_require_human_approval:true,
+    automatic_publication:false
+  },
   contract:{
     derived_projection:true,
     canonical_catalogues_unchanged:true,
