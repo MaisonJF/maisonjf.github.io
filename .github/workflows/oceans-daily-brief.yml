@@ -2,6 +2,11 @@ name: Maison JF Oceans Daily Brief
 run-name: Maison JF Oceans Daily Brief
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/oceans-daily-brief.mjs'
+      - '.github/workflows/oceans-daily-brief.yml'
   schedule:
     # Run at both UTC hours that correspond to 08:00 in Europe/Lisbon in winter/summer.
     # The script exits on the non-matching tick; only one email is sent per local day.
@@ -22,7 +27,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  validate:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax check daily brief
+        run: node --check scripts/oceans-daily-brief.mjs
+
   brief:
+    if: ${{ github.event_name != 'push' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
