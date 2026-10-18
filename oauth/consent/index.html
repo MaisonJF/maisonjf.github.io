@@ -15,6 +15,7 @@
     button{border:0;border-radius:999px;padding:13px 20px;font:600 15px/1 inherit;cursor:pointer}.primary{background:#f1e8d4;color:#111}.secondary{background:#24221e;color:#eee}
     .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.hidden{display:none!important}.status{min-height:24px;margin-top:14px;color:#d6c79f}
     small{color:#8f8a80;display:block;margin-top:20px;line-height:1.5}
+    .manage-link{margin:18px 0 0;text-align:center;font-size:13px}.manage-link a{color:#d6c79f;text-decoration:underline}
   </style>
 </head>
 <body>
@@ -45,6 +46,7 @@
 
   <p id="status" class="status"></p>
   <small>A ligação só pode criar sinais de Ocean e candidatos editoriais no D1. Não pode aprovar, publicar, alterar preços, checkout, pagamentos ou tornar conteúdo live.</small>
+  <p class="manage-link"><a href="/oauth/manage/">Gerir e revogar autorizações antigas</a></p>
 </main>
 <script type="module" src="/oauth/consent/app.js"></script>
 </body>
