@@ -207,16 +207,18 @@ const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
   if(/vela|aroma|n[eé]voa|ritual|escalda-p[eé]s|sensorial/i.test(adjacency))relatedAssets.push('Rituais sensoriais MAISON JF');
   if(/ebook|e-book|guia|digital|conte[uú]do digital/i.test(adjacency))relatedAssets.push('Éditions Maison JF');
   if(!relatedAssets.length)relatedAssets.push('Explorar a oferta MAISON JF');
-  const formats=[
-    {format:'post',angle:'reconhecimento_e_reflexao',hook:'E se '+topic.toLocaleLowerCase('pt-PT')+' não fosse uma falha tua, mas um sinal de uma necessidade por compreender?',body:'Há momentos em que '+pain.charAt(0).toLocaleLowerCase('pt-PT')+pain.slice(1)+'\n\nEm vez de te julgares, experimenta parar e perguntar: de que preciso agora — clareza, espaço, descanso, uma conversa ou um próximo passo pequeno?\n\nNão há uma resposta universal. Começa por observar o que se passa contigo, sem te obrigares a chegar já a uma conclusão.',cta:'Se quiseres explorar este tema com a MAISON JF, descobre: '+relatedAssets[0]+'.'},
-    {format:'reel',angle:'hook_pergunta_mais_microacao',hook:'Antes de te criticares por '+topic.toLocaleLowerCase('pt-PT')+', faz esta pergunta.',body:'O que aconteceu? O que precisavas naquele momento? Que pequeno passo estaria ao teu alcance — sem resolver a vida inteira hoje?\n\nUma pergunta honesta pode abrir espaço para uma escolha mais consciente. Guarda este vídeo para voltares a estas perguntas quando te fizerem sentido.',cta:'Explora a experiência MAISON JF relacionada: '+relatedAssets[0]+'.'}
+  const themes=[...new Set((ocean.questionThemeCandidates||[]).map(x=>String(x||'').trim()).filter(Boolean))].slice(0,3);
+  if(!themes.length)themes.push(topic);
+  const formatsForTheme=theme=>[
+    {format:'post',angle:'reconhecimento_e_reflexao',hook:'E se '+theme.toLocaleLowerCase('pt-PT')+' fosse uma necessidade a compreender, em vez de mais uma coisa para te julgares?',body:'Há momentos em que '+pain.charAt(0).toLocaleLowerCase('pt-PT')+pain.slice(1)+'\n\nQuando este tema aparece, experimenta perguntar: o que preciso agora — clareza, espaço, descanso, uma conversa ou um próximo passo pequeno?\n\nNão há uma resposta universal. Começa por observar o que se passa contigo, sem te obrigares a chegar já a uma conclusão.',cta:'Se quiseres explorar este tema com a MAISON JF, descobre: '+relatedAssets[0]+'.'},
+    {format:'reel',angle:'hook_pergunta_mais_microacao',hook:'Antes de reagires a '+theme.toLocaleLowerCase('pt-PT')+', faz esta pergunta.',body:'O que aconteceu? O que precisavas naquele momento? Qual seria um pequeno passo ao teu alcance — sem resolver a vida inteira hoje?\n\nUma pergunta honesta pode abrir espaço para uma escolha mais consciente. Guarda este vídeo para voltares a estas perguntas quando te fizerem sentido.',cta:'Explora a experiência MAISON JF relacionada: '+relatedAssets[0]+'.'}
   ];
-  return formats.map(item=>{
-    const id=sourceId+'_'+item.format;
+  return themes.flatMap(theme=>formatsForTheme(theme).map(item=>{
+    const id=sourceId+'_'+slug(theme)+'_'+item.format;
     const prior=previousDailyById.get(id)||{};
     return {
-      id,type:'daily_content_candidate',format:item.format,sourceOceanId:territory,territory,
-      workingTitle:topic+' — '+(item.format==='reel'?'Reel':'Post'),
+      id,type:'daily_content_candidate',format:item.format,sourceOceanId:territory,territory,theme,
+      workingTitle:topic+' — '+theme+' — '+(item.format==='reel'?'Reel':'Post'),
       audienceNeed:need.slice(0,600),editorialAngle:item.angle,hook:item.hook,body:item.body,cta:item.cta,
       relatedAssets,evidenceCount:evidence.length,evidence,
       status:prior.status||'needs_editorial',
@@ -224,7 +226,7 @@ const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
       ...(prior.reviewNote?{reviewNote:prior.reviewNote}:{}),
       draftOnly:true,approvalRequired:true,automaticPublication:false,automaticActivation:false
     };
-  });
+  }))
 }).sort((a,b)=>a.id.localeCompare(b.id));
 
 for(const draft of dailyContentCandidates){
