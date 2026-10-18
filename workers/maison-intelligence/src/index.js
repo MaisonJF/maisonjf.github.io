@@ -135,7 +135,7 @@ async function maybeGenerateEditorialCandidates(env,{oceanContext,brainAlert,obs
 
   const day=utcDay(observedAt ? new Date(observedAt) : new Date());
   const usageKey='editorial_candidates:openrouter';
-  const cap=2;
+  const cap=4;
   const row=await env.GROWTH_DB.prepare(`
     SELECT calls
     FROM external_intelligence_daily_usage
