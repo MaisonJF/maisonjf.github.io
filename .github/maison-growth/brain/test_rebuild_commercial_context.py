@@ -60,6 +60,28 @@ class RebuildCommercialContextTests(unittest.TestCase):
         self.assertIn("automatic_publication:false",assets_builder)
         self.assertIn("proposals_require_human_approval:true",assets_builder)
 
+    def test_daily_content_candidates_scale_from_distinct_evidence_backed_ocean_themes(self):
+        queue_builder=(ROOT/"build_editorial_queue.mjs").read_text(encoding="utf-8")
+        for contract in (
+            "dailyContentCandidates",
+            "questionThemeCandidates",
+            "slice(0,3)",
+            "format:'post'",
+            "format:'reel'",
+            "evidenceCount:evidence.length",
+            "draftOnly:true",
+            "approvalRequired:true",
+            "automaticPublication:false",
+            "automaticActivation:false",
+        ):
+            self.assertIn(contract,queue_builder)
+
+    def test_daily_content_candidates_flow_into_commercial_context(self):
+        assets_builder=(ROOT/"build_commercial_assets.mjs").read_text(encoding="utf-8")
+        self.assertIn("editorialQueue.dailyContentCandidates",assets_builder)
+        self.assertIn("daily_content_candidates:dailyContentCandidates.length",assets_builder)
+        self.assertIn("daily_content_requires_human_approval",assets_builder)
+
     def test_script_has_no_deploy_or_write_to_external_systems(self):
         lowered=self.source.lower()
         for forbidden in (
