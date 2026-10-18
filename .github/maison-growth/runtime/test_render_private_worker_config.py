@@ -114,6 +114,7 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["WORKER_ENABLED"], "false")
         self.assertEqual(vars_["KILL_SWITCH"], "true")
         self.assertEqual(vars_["OPENROUTER_ENABLED"], "false")
+        self.assertEqual(vars_["ZERO_COST_MODE"], "false")
         self.assertEqual(vars_["OSIRIS_GATEWAY_ENABLED"], "false")
 
 
@@ -133,6 +134,9 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["BRAIN_PROPOSAL_API_ENABLED"], "false")
         self.assertEqual(vars_["BRAIN_REVIEW_DECISION_ENABLED"], "false")
         self.assertEqual(vars_["OSIRIS_MEMORY_ENABLED"], "false")
+        self.assertEqual(vars_["ZERO_COST_MODE"], "true")
+        self.assertEqual(vars_["MAX_DAILY_CALLS_PER_PROVIDER"], "4")
+        self.assertEqual(vars_["WORKERS_AI_MODEL"], "")
         self.assertIn("triggers", cfg)
         self.assertIn("queues", cfg)
         self.assertIn("ai", cfg)
