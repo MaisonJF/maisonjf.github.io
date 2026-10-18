@@ -39,6 +39,26 @@ class RebuildCommercialContextTests(unittest.TestCase):
             line=next(line for line in check_block.splitlines() if name in line)
             self.assertIn("--check",line)
 
+    def test_oceans_feed_evidence_backed_ebook_proposals(self):
+        queue_builder=(ROOT/"build_editorial_queue.mjs").read_text(encoding="utf-8")
+        for contract in (
+            "previous.ebookProposals",
+            "ebook_proposals",
+            "evidence.length<2",
+            "approvalRequired:true",
+            "automaticPublication:false",
+            "automaticActivation:false",
+            "proposedOutline",
+        ):
+            self.assertIn(contract,queue_builder)
+
+    def test_ebook_proposals_flow_into_commercial_assets(self):
+        assets_builder=(ROOT/"build_commercial_assets.mjs").read_text(encoding="utf-8")
+        self.assertIn("editorialQueue.ebookProposals",assets_builder)
+        self.assertIn("editorial_queue.ebookProposals",assets_builder)
+        self.assertIn("automatic_publication:false",assets_builder)
+        self.assertIn("proposals_require_human_approval:true",assets_builder)
+
     def test_script_has_no_deploy_or_write_to_external_systems(self):
         lowered=self.source.lower()
         for forbidden in (
