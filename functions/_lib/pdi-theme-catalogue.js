@@ -49,6 +49,30 @@ function localizePdiText(value,locale){
   return PDI_LABELS[locale]?.[text]||localizeOracleLabel(text,locale)||text;
 }
 
+function safeThemeSlug(value){
+  return String(value||'')
+    .normalize('NFD').replace(/[\\u0300-\\u036f]/g,'')
+    .toLowerCase().replace(/&/g,' e ')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')
+    .replace(/-+/g,'-');
+}
+function validDynamicThemeSlug(value){
+  const slug=String(value||'');
+  return slug.length>=2 && slug.length<=120
+    && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)
+    && safeThemeSlug(slug)===slug;
+}
+function dynamicTheme(slug){
+  if(!validDynamicThemeSlug(slug))return null;
+  const words=slug.split('-');
+  const label=words.map(word=>word.charAt(0).toLocaleUpperCase('pt-PT')+word.slice(1)).join(' ');
+  return {
+    slug,label,family:'Novos temas MAISON',focus:'',
+    source:'vault-dynamic',aliases:[],
+    amount:500,currency:'eur'
+  };
+}
+
 function localizePdiTheme(item,locale){
   const price=getPdiPriceForLocale(locale);
   return {
@@ -118,13 +142,27 @@ export async function listAvailablePdiThemes(env,locale='pt-PT'){
     ).bind(selectedLocale).all();
   }
   const counts=new Map((rows.results||[]).map(row=>[String(row.theme),Number(row.count||0)]));
-  const themes=listPdiThemes()
+  const registered=listPdiThemes()
     .filter(item=>isPublicPdiTheme(item.slug))
     .map(item=>({
       ...localizePdiTheme(item,selectedLocale),
       locale:selectedLocale,
       liveQuestions:counts.get(item.slug)||0
-    }))
-    .filter(item=>item.liveQuestions>=PDI_MINIMUM_LIVE_QUESTIONS);
+    }));
+  const known=new Set(registered.map(item=>item.slug));
+  const discovered=[];
+  for(const [slug,count] of counts){
+    if(known.has(slug)||!isPublicPdiTheme(slug)||!validDynamicThemeSlug(slug))continue;
+    const item=dynamicTheme(slug);
+    if(!item)continue;
+    discovered.push({
+      ...localizePdiTheme(item,selectedLocale),
+      locale:selectedLocale,
+      liveQuestions:count
+    });
+  }
+  const themes=[...registered,...discovered]
+    .filter(item=>item.liveQuestions>=PDI_MINIMUM_LIVE_QUESTIONS)
+    .sort((a,b)=>a.label.localeCompare(b.label,selectedLocale));
   return storeCatalogue(cacheKey,themes);
 }
