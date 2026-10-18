@@ -7,6 +7,7 @@ on:
       - 'workers/maison-intelligence/test/**'
       - 'workers/maison-intelligence/package.json'
       - '.github/workflows/pdi-exponential-growth-check.yml'
+      - '.github/maison-growth/vault/validate_pdi_registry.mjs'
   workflow_dispatch:
 
 permissions:
@@ -29,6 +30,7 @@ jobs:
         run: npm test
       - name: Check changed JavaScript syntax
         run: |
+          node .github/maison-growth/vault/validate_pdi_registry.mjs
           node --check functions/_lib/pdi-theme-catalogue.js
           node --check workers/maison-intelligence/src/vault_candidates.js
           node --check workers/maison-intelligence/src/editorial_candidate_generation.js
