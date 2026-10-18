@@ -51,7 +51,7 @@ function localizePdiText(value,locale){
 
 function safeThemeSlug(value){
   return String(value||'')
-    .normalize('NFD').replace(/[\\u0300-\\u036f]/g,'')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
     .toLowerCase().replace(/&/g,' e ')
     .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')
     .replace(/-+/g,'-');
@@ -92,13 +92,25 @@ export async function countLivePdiQuestions(db,theme,locale='pt-PT'){
 }
 
 export async function pdiThemeAvailability(env,theme,locale='pt-PT'){
-  const item=getPdiTheme(theme);
-  if(!item||!isPublicPdiTheme(item.slug))return null;
   const selectedLocale=normalizeMaisonLocale(locale);
+  const db=requireMaisonVault(env);
+  let item=getPdiTheme(theme);
+  if(!item){
+    const candidate=dynamicTheme(theme);
+    if(candidate){
+      const row=await db.prepare(
+        `SELECT theme FROM vault_questions
+          WHERE theme=?1 AND status='active' AND exposure='paid'
+            AND lifecycle_state='live'
+          LIMIT 1`
+      ).bind(candidate.slug).first();
+      if(row)item=candidate;
+    }
+  }
+  if(!item||!isPublicPdiTheme(item.slug))return null;
   const cacheKey='availability:'+selectedLocale+':'+item.slug;
   const cached=cachedCatalogue(cacheKey);
   if(cached)return cached;
-  const db=requireMaisonVault(env);
   const liveQuestions=await countLivePdiQuestions(db,item.slug,selectedLocale);
   return storeCatalogue(cacheKey,{
     ...localizePdiTheme(item,selectedLocale),
