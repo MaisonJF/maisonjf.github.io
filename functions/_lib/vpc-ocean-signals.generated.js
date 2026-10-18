@@ -179,7 +179,9 @@ export const VPC_OCEAN_SIGNALS=[
       "incerteza fora do meu controlo",
       "vigiar não acelera o resultado",
       "entre fazer tudo e não poder fazer mais",
-      "voltar à vida enquanto a resposta não chega"
+      "voltar à vida enquanto a resposta não chega",
+      "waiting anxiety",
+      "life on hold"
     ]
   },
   {
@@ -227,7 +229,8 @@ export const VPC_OCEAN_SIGNALS=[
       "vínculo que mudou sem desaparecer",
       "continuar sem fecho",
       "ambiguous loss",
-      "perda ambígua"
+      "perda ambígua",
+      "unresolved loss"
     ]
   },
   {
@@ -322,7 +325,8 @@ export const VPC_OCEAN_SIGNALS=[
       "compromisso com uma decisão",
       "choice overload",
       "analysis paralysis",
-      "too many options"
+      "too many options",
+      "decision paralysis"
     ]
   },
   {
@@ -408,4 +412,4 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-10-17";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-10-18";

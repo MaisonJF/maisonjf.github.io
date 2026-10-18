@@ -1,8 +1,8 @@
 {
-  "version": "2026-10-17",
+  "version": "2026-10-18",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-10-17T04:35:44.796Z",
+  "last_enriched_at": "2026-10-18T04:41:13.031Z",
   "candidates": [
     {
       "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
@@ -285,7 +285,7 @@
       "painLanguage": "Há esperas em que a vida parece ficar em suspenso: depois de enviar uma candidatura, fazer um exame, ter uma conversa importante ou entregar algo decisivo, já não há muito para fazer — mas a resposta ainda não chegou, e a cabeça continua a voltar ao assunto como se vigiar pudesse acelerar o desfecho.",
       "territory": "ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante",
       "intent": "dar linguagem ao desconforto de esperar por informação importante quando o resultado já está fora do controlo imediato, distinguindo preparação útil de ruminação, vigilância repetida e sensação de vida suspensa",
-      "commercialAdjacency": "Experiências Digitais Personalizadas Intermédias; Oráculo Decisões & Caminhos, Trabalho & Caminho e Eu & Padrões; Ritual Volta Para Casa para momentos de espera; conteúdos/ebooks/guias reflexivos sobre incerteza e controlo, sem aconselhamento clínico ou promessas de resultado; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante\"}",
+      "commercialAdjacency": "Experiências Digitais Personalizadas Intermédias; Oráculo Decisões & Caminhos, Trabalho & Caminho e Eu & Padrões; Ritual Volta Para Casa para momentos de espera; conteúdos/ebooks/guias reflexivos sobre incerteza e controlo, sem aconselhamento clínico ou promessas de resultado; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante\"}",
       "evidence": [
         "American Psychological Association, Speaking of Psychology: a investigação de Kate Sweeny sobre espera por notícias importantes descreve a combinação de incerteza e falta de controlo como particularmente stressante, estudada em candidatos a emprego, resultados de exames e resultados médicos — https://www.apa.org/news/podcasts/speaking-of-psychology/waiting-stress",
         "Frontiers in Radiology / PMC (2026; PMID 41717567): revisão narrativa sobre “waiting anxiety” identifica incerteza sobre resultados e perda de controlo como mecanismos relevantes durante períodos de espera, com evidência de ansiedade persistente enquanto se aguardam exames/resultados — https://pmc.ncbi.nlm.nih.gov/articles/PMC12913184/"
@@ -297,18 +297,20 @@
         "incerteza fora do meu controlo",
         "vigiar não acelera o resultado",
         "entre fazer tudo e não poder fazer mais",
-        "voltar à vida enquanto a resposta não chega"
+        "voltar à vida enquanto a resposta não chega",
+        "waiting anxiety",
+        "life on hold"
       ],
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-24T10:14:00+01:00",
-      "lastSeenAt": "2026-10-10T03:02:14.585Z"
+      "lastSeenAt": "2026-10-18T00:01:27.061Z"
     },
     {
       "painLanguage": "Há futuros que não acabam porque aconteceram; acabam porque deixaram de poder acontecer. Às vezes a pessoa só percebe tarde que queria um filho, uma vida, um caminho ou uma possibilidade que durante anos parecia disponível — e precisa de fazer luto por algo que nunca chegou a existir.",
       "territory": "luto-por-um-futuro-que-deixou-de-ser-possivel",
       "intent": "dar linguagem ao luto por possibilidades de vida que se tornam inalcançáveis com o tempo, distinguindo arrependimento, perda de esperança e reconstrução de significado sem tratar como falha moral o facto de o desejo ter mudado ou chegado tarde",
-      "commercialAdjacency": "Oráculo Luto & Perda, Parentalidade & Escolha, Escolhas & Mudança e Propósito & Sentido; experiências reflexivas sobre futuros não vividos, irreversibilidade e reconstrução de significado, sem aconselhamento médico, reprodutivo ou clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}",
+      "commercialAdjacency": "Oráculo Luto & Perda, Parentalidade & Escolha, Escolhas & Mudança e Propósito & Sentido; experiências reflexivas sobre futuros não vividos, irreversibilidade e reconstrução de significado, sem aconselhamento médico, reprodutivo ou clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"luto-por-um-futuro-que-deixou-de-ser-possivel\"}",
       "evidence": [
         "Humanities and Social Sciences Communications (2024; PMID 39003684): estudo clínico/qualitativo com seis mulheres involuntariamente sem filhos descreveu luto persistente, perda do plano de ter filhos e dificuldade em integrar uma vida sem o futuro imaginado; amostra pequena e específica — https://pubmed.ncbi.nlm.nih.gov/39003684/",
         "Human Reproduction (2020; PMID 32268357): entrevistas aprofundadas com 12 mulheres britânicas de meia-idade involuntariamente sem filhos encontraram luto ambíguo e intangível pela perda de esperança de maternidade, com necessidade de apoio a longo prazo; população específica — https://pubmed.ncbi.nlm.nih.gov/32268357/",
@@ -328,7 +330,7 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T23:41:00+01:00",
-      "lastSeenAt": "2026-10-17T00:06:07.545Z"
+      "lastSeenAt": "2026-10-18T03:01:23.514Z"
     },
     {
       "painLanguage": "Nem todas as compras de desejo procuram resolver um problema grande. Às vezes a pessoa quer apenas marcar uma pequena vitória, tornar um dia comum mais bonito ou dar a si própria um prazer acessível que diga: isto também conta.",
@@ -366,7 +368,7 @@
       "painLanguage": "Há perdas em que nada termina de forma limpa: a pessoa, o vínculo ou o papel continua presente de alguma maneira, mas já não está disponível como antes, deixando quem fica preso entre esperança, ausência e falta de certeza.",
       "territory": "perda-ambigua-sem-fecho-claro",
       "intent": "reconhecer e dar linguagem à experiência de perda sem resolução clara, distinguindo a necessidade de certeza da possibilidade de continuar a viver com ambiguidade",
-      "commercialAdjacency": "Oráculo Luto & Perda, Separação & Fim e transições; experiências reflexivas sobre ausência, mudança de vínculo e reconstrução de significado, sem substituir apoio clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"perda-ambigua-sem-fecho-claro\"}",
+      "commercialAdjacency": "Oráculo Luto & Perda, Separação & Fim e transições; experiências reflexivas sobre ausência, mudança de vínculo e reconstrução de significado, sem substituir apoio clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"perda-ambigua-sem-fecho-claro\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"perda-ambigua-sem-fecho-claro\"}",
       "evidence": [
         "American Psychological Association (2024): descreve a perda ambígua como particularmente difícil quando alguém permanece fisicamente presente mas psicologicamente/cognitivamente ausente, salientando ausência de resolução, ambivalência, culpa e raiva — https://www.apa.org/monitor/2024/10/alzheimers-dementia-grief",
         "Psychological Trauma (2025; PMID 39347732): estudo mixed-methods sobre perda ambígua encontrou incerteza e ambivalência como temas centrais e associação entre respostas à perda ambígua e sintomas de stress pós-traumático — https://pubmed.ncbi.nlm.nih.gov/39347732/"
@@ -379,12 +381,13 @@
         "vínculo que mudou sem desaparecer",
         "continuar sem fecho",
         "ambiguous loss",
-        "perda ambígua"
+        "perda ambígua",
+        "unresolved loss"
       ],
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-19T08:12:55+01:00",
-      "lastSeenAt": "2026-10-15T00:03:51.819Z"
+      "lastSeenAt": "2026-10-18T00:08:25.210Z"
     },
     {
       "painLanguage": "Há dias em que o silêncio não é solidão nem rejeição: é recuperação. A pessoa gosta da família, dos amigos ou de quem vive com ela e, ainda assim, só de imaginar mais conversa, chamadas, visitas ou jantares sente que já não tem energia social para dar.",
@@ -442,7 +445,7 @@
       "painLanguage": "Há convívios, celebrações e planos em que o custo não está apenas no preço: dizer «não cabe no meu orçamento» pode parecer admitir fracasso, desiludir alguém ou arriscar ficar de fora, levando a gastar para proteger pertença, imagem ou vínculo.",
       "territory": "pressao-social-para-gastar-e-vergonha-de-dizer-nao",
       "intent": "reconhecer quando pertença, celebração ou imagem social empurram a pessoa para gastar além do que quer ou pode, tornando legítimo estabelecer limites financeiros sem transformar orçamento em vergonha nem isolamento",
-      "commercialAdjacency": "Oráculo Dinheiro & Segurança, Limites & Respeito, Companhia & Pertença e Presentes; experiências digitais low-ticket sobre dizer não sem desaparecer do grupo; guias/ebooks sobre limites e ocasiões sociais; experiências e conteúdos sobre receber em casa com intenção; presentes MAISON organizados por ocasião e orçamento; bundles físico+digital e B2B gifting com escolha simples e elegante, sem aconselhamento financeiro personalizado; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"pressao-social-para-gastar-e-vergonha-de-dizer-nao\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"pressao-social-para-gastar-e-vergonha-de-dizer-nao\"}",
+      "commercialAdjacency": "Oráculo Dinheiro & Segurança, Limites & Respeito, Companhia & Pertença e Presentes; experiências digitais low-ticket sobre dizer não sem desaparecer do grupo; guias/ebooks sobre limites e ocasiões sociais; experiências e conteúdos sobre receber em casa com intenção; presentes MAISON organizados por ocasião e orçamento; bundles físico+digital e B2B gifting com escolha simples e elegante, sem aconselhamento financeiro personalizado; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"pressao-social-para-gastar-e-vergonha-de-dizer-nao\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"pressao-social-para-gastar-e-vergonha-de-dizer-nao\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"pressao-social-para-gastar-e-vergonha-de-dizer-nao\"}",
       "evidence": [
         "Bank of America Better Money Habits Survey (2026): 75% da Gen Z procura formas de poupar em planos sociais, 42% pratica loud budgeting e 60% fala de dinheiro com amigos — https://newsroom.bankofamerica.com/content/newsroom/press-releases/2026/05/bofa-study-finds-fewer-gen-z-rely-on-family-for-financial-assist.html",
         "Achieve Center for Consumer Insights, Cost of Being There survey (2024): 74% disse que celebrar grandes momentos interfere com o bem-estar financeiro; 51% sentia pelo menos alguma pressão para gastar; menos de metade sentia-se confortável em recusar por razões financeiras; entre praticantes de loud budgeting, 29% relataram crítica/ridicularização e 10% falta de respeito pelos limites — https://www.achieve.com/about/press/74-percent-of-americans-say-celebrating-lifes-big-moments-interferes-with-their-financial-well-being",
@@ -463,7 +466,7 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-25T09:00:00+01:00",
-      "lastSeenAt": "2026-10-15T00:04:18.239Z"
+      "lastSeenAt": "2026-10-18T00:02:58.755Z"
     },
     {
       "territory": "quando-o-que-funciona-na-relacao-se-torna-invisivel",
@@ -525,7 +528,7 @@
       "painLanguage": "Ter muitas opções pode parecer liberdade e, ao mesmo tempo, transformar uma escolha simples num labirinto: comparar tudo, recear deixar passar a melhor alternativa e acabar cansado, menos confiante ou sem escolher.",
       "territory": "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
       "intent": "reconhecer quando a abundância e a complexidade das alternativas deixam de aumentar autonomia e começam a dificultar decisão, confiança e satisfação com a escolha",
-      "commercialAdjacency": "Oráculo Decisões & Caminhos; experiências reflexivas sobre critérios, suficiente-bom, renúncia e compromisso com escolhas, sem aconselhamento financeiro, clínico ou profissional personalizado; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"sobrecarga-de-escolha-quando-mais-opcoes-paralisam\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"sobrecarga-de-escolha-quando-mais-opcoes-paralisam\"}",
+      "commercialAdjacency": "Oráculo Decisões & Caminhos; experiências reflexivas sobre critérios, suficiente-bom, renúncia e compromisso com escolhas, sem aconselhamento financeiro, clínico ou profissional personalizado; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"sobrecarga-de-escolha-quando-mais-opcoes-paralisam\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"sobrecarga-de-escolha-quando-mais-opcoes-paralisam\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"sobrecarga-de-escolha-quando-mais-opcoes-paralisam\"}",
       "evidence": [
         "Biological Psychology (2019; PMID 30951804): em dois estudos, escolher entre muitas opções esteve associado a maior envolvimento mas também a respostas compatíveis com maior ameaça e menor percepção de recursos para gerir a decisão — https://pubmed.ncbi.nlm.nih.gov/30951804/",
         "Acta Psychologica (2010; PMID 19766972): dois experimentos mostraram que o efeito de excesso de escolha depende da complexidade; muitas alternativas reduziram satisfação quando também exigiam comparar muitos atributos — https://pubmed.ncbi.nlm.nih.gov/19766972/",
@@ -541,12 +544,13 @@
         "compromisso com uma decisão",
         "choice overload",
         "analysis paralysis",
-        "too many options"
+        "too many options",
+        "decision paralysis"
       ],
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-20T02:13:56+01:00",
-      "lastSeenAt": "2026-10-15T00:04:44.962Z"
+      "lastSeenAt": "2026-10-18T00:09:50.558Z"
     },
     {
       "painLanguage": "É possível falar com pessoas, trocar mensagens e até ter relações por perto e, ainda assim, sentir que falta ligação real: quantidade de contacto não garante apoio, intimidade nem a sensação de ser visto.",
@@ -598,7 +602,7 @@
       "painLanguage": "A Maison pode ter respostas, produtos, experiências e linguagem relevantes e, ainda assim, permanecer invisível para pessoas que já procuram exactamente esses temas. O problema não é apenas converter quem entra: é ser descoberta, reconhecida e lembrada antes da intenção de compra.",
       "territory": "descoberta-organica-e-reconhecimento-da-maison",
       "intent": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
-      "commercialAdjacency": "Toda a oferta Maison JF já existente — ebooks, jogo, testes gratuitos, Oráculo/Tarot, mentorias, rituais, aromas, produtos físicos e experiências — priorizando primeiro a correspondência entre procura real e activos existentes, sem inventar novos produtos nem depender de publicidade paga.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}",
+      "commercialAdjacency": "Toda a oferta Maison JF já existente — ebooks, jogo, testes gratuitos, Oráculo/Tarot, mentorias, rituais, aromas, produtos físicos e experiências — priorizando primeiro a correspondência entre procura real e activos existentes, sem inventar novos produtos nem depender de publicidade paga.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}",
       "evidence": [
         "Hipótese estratégica autorizada por João Fadario em 2026-09-26: o gargalo prioritário a investigar é descoberta/reconhecimento — trazer mais pessoas adequadas à Maison antes de optimizar conversão.",
         "Public discovery graph interno Maison: sitemap, canonical/effective metadata, JSON-LD e internal-link projection já convergem para o Knowledge Graph e Brain; usar esta base para relacionar superfícies públicas com activos existentes.",
@@ -620,7 +624,7 @@
       "oraclePotential": false,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-26T22:00:00+01:00",
-      "lastSeenAt": "2026-10-17T03:00:47.037Z"
+      "lastSeenAt": "2026-10-18T03:04:21.018Z"
     },
     {
       "painLanguage": "A Maison não precisa de inventar do zero todos os mecanismos de atenção, desejo, identificação, memória, participação e propagação. Séculos de psicologia, cultura, publicidade, entretenimento, luxo, design, retalho e construção de marcas contêm mecanismos observáveis que podem ser estudados, testados e reinterpretados sem copiar a expressão de quem os dominou.",
