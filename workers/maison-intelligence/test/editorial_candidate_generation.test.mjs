@@ -97,7 +97,7 @@ test('bad generated item is rejected without blocking valid siblings',async()=>{
   assert.equal(db.batches.length,1);
 });
 
-test('model drift is normalized and free-test coverage survives the four-question cap',async()=>{
+test('model drift is normalized and free-test coverage survives the expanded six-question cap',async()=>{
   const db=new DB();
   const caller=async()=>({
     providerId:'cloudflare_workers_ai',
@@ -114,9 +114,9 @@ test('model drift is normalized and free-test coverage survives the four-questio
     })
   });
   const out=await generateEditorialCandidates({GROWTH_DB:db},{caller,oceanContext,brainAlert});
-  assert.equal(out.stored,4);
+  assert.equal(out.stored,5);
   assert.equal(out.rejected,0);
-  assert.equal(db.batches.length,4);
+  assert.equal(db.batches.length,5);
   assert.ok(db.batches.some(batch=>batch[0].params[10]==='public_social'));
   for(const batch of db.batches){
     for(const index of [17,18,19,20]) assert.equal(typeof batch[0].params[index],'number');
@@ -129,6 +129,8 @@ test('editorial prompt requires PT-PT and direct recognition questions',()=>{
   assert.match(prompt,/não peças conselhos, estratégias ou ajuda/i);
   assert.match(prompt,/public_social/i);
   assert.match(prompt,/PÁRA DE IGNORAR!/i);
+  assert.match(prompt,/UM ÚNICO tema canónico estável/i);
+  assert.match(prompt,/slug estável em minúsculas/i);
 });
 
 test('candidate parser accepts fenced JSON but rejects missing JSON',()=>{
