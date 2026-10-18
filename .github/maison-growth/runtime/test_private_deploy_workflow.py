@@ -13,10 +13,16 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
     def setUpClass(cls):
         cls.source = WORKFLOW.read_text(encoding="utf-8")
 
-    def test_manual_activation_is_one_button(self):
+    def test_manual_activation_has_explicit_safe_stage_choice(self):
         self.assertIn("  workflow_dispatch:\n", self.source)
-        self.assertNotIn("    inputs:", self.source)
-        self.assertIn("RUNTIME_STAGE: human_review_decision_candidate", self.source)
+        self.assertIn("    inputs:", self.source)
+        self.assertIn("default: private_observe_candidate", self.source)
+        self.assertIn("- private_observe_candidate", self.source)
+        self.assertIn("- human_review_decision_candidate", self.source)
+        self.assertIn("inputs.runtime_stage", self.source)
+        self.assertIn("Private observe requires the OpenRouter key", self.source)
+        self.assertIn("OPENROUTER_API_KEY", self.source)
+        self.assertNotIn("- memory_mirror_candidate", self.source)
 
     def test_runtime_changes_still_get_secret_free_dry_run(self):
         self.assertIn("  pull_request:\n", self.source)
