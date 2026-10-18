@@ -15,6 +15,15 @@ on:
       - 'workers/maison-intelligence/**'
       - '.github/workflows/maison-private-runtime.yml'
   workflow_dispatch:
+    inputs:
+      runtime_stage:
+        description: "Estágio privado a ativar; observação recolhe sinais, sem memória remota, publicações ou despesas autorizadas."
+        type: choice
+        required: true
+        default: private_observe_candidate
+        options:
+          - private_observe_candidate
+          - human_review_decision_candidate
 
 concurrency:
   group: maison-private-runtime-${{ github.ref }}
@@ -30,7 +39,7 @@ jobs:
     env:
       # One operator-facing mode: the complete private Brain surface.
       # Public write, outbound, spend and experiment execution remain forbidden.
-      RUNTIME_STAGE: human_review_decision_candidate
+      RUNTIME_STAGE: ${{ github.event_name == 'workflow_dispatch' && inputs.runtime_stage || 'human_review_decision_candidate' }}
 
     steps:
       - name: Checkout
@@ -76,8 +85,12 @@ jobs:
           BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
           CF_ACCESS_CLIENT_ID: ${{ secrets.MAISON_CF_ACCESS_CLIENT_ID }}
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           set -euo pipefail
+          if [[ "$RUNTIME_STAGE" == "private_observe_candidate" ]]; then
+            test -n "$OPENROUTER_API_KEY" || { echo "::error::Private observe requires the OpenRouter key; value is never printed."; exit 1; }
+          fi
           test -n "$CLOUDFLARE_API_TOKEN"
           test -n "$CLOUDFLARE_ACCOUNT_ID"
           test -n "$BRAIN_CONTROL_API_URL"
@@ -141,6 +154,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           BRAIN_CONTROL_TOKEN: ${{ secrets.MAISON_BRAIN_CONTROL_TOKEN || secrets.BRAIN_CONTROL_TOKEN }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           set -euo pipefail
           secrets_file="$(mktemp)"
@@ -156,6 +170,11 @@ jobs:
               "BRAIN_PROPOSAL_TOKEN": os.environ["BRAIN_PROPOSAL_TOKEN"],
               "BRAIN_REVIEW_DECISION_TOKEN": os.environ["BRAIN_REVIEW_DECISION_TOKEN"],
           }
+          if os.environ.get("RUNTIME_STAGE") == "private_observe_candidate":
+              key = os.environ.get("OPENROUTER_API_KEY", "").strip()
+              if not key:
+                  raise SystemExit("OpenRouter key missing for zero-cost observe stage")
+              secrets["OPENROUTER_API_KEY"] = key
           path = Path(os.environ["MAISON_PRIVATE_SECRETS_FILE"])
           path.write_text(json.dumps(secrets), encoding="utf-8")
           path.chmod(0o600)
