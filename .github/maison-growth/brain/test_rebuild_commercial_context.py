@@ -43,7 +43,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
         queue_builder=(ROOT/"build_editorial_queue.mjs").read_text(encoding="utf-8")
         for contract in (
             "previous.ebookProposals",
-            "ebook_proposals",
+            "ebookProposals",
             "evidence.length<2",
             "approvalRequired:true",
             "automaticPublication:false",
