@@ -88,7 +88,7 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
          'MAISON_VAULT_ADMIN_SECRET reconhecido: '+(d.adminSecretPresent?'sim':'não'),
          'MAISON_PDI_IMPORT_SECRET disponível: '+(d.pdiSecretPresent?'sim':'não')
        ];
-       throw new Error(lines.join('\\n'));
+       throw new Error(lines.join('\n'));
      }
      throw new Error(body.error||('HTTP '+r.status));
    }
