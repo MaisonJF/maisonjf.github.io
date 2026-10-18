@@ -14,6 +14,7 @@ on:
       - main
     paths:
       - 'workers/maison-intelligence/src/**'
+      - 'workers/maison-intelligence/test/**'
       - 'workers/maison-intelligence/wrangler.jsonc'
       - 'workers/maison-intelligence/package.json'
       - '.github/workflows/maison-ocean-memory-deploy.yml'
