@@ -190,6 +190,50 @@ for(const proposal of ebookProposals){
   }
 }
 
+const previousDailyById=new Map((previous.dailyContentCandidates||[]).map(x=>[x.id,x]));
+const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
+  const evidence=[...new Set((ocean.evidence||[]).filter(x=>typeof x==='string'&&x.trim()))];
+  if(evidence.length<2)return [];
+  const territory=String(ocean.territory||'').trim();
+  if(!territory)return [];
+  const topic=humanizeTerritory(territory);
+  const need=String(ocean.intent||'').trim();
+  const pain=String(ocean.painLanguage||'').trim();
+  const adjacency=String(ocean.commercialAdjacency||'').trim();
+  const sourceId='brain_daily_'+slug(territory);
+  const relatedAssets=[];
+  if(/p[aá]ra de ignorar|jogo|perguntas|decis[oõ]es|aten[cç][aã]o/i.test(adjacency))relatedAssets.push('PÁRA DE IGNORAR!');
+  if(/or[aá]culo|tarot|rela[cç][oõ]es|padr[oõ]es|caminho/i.test(adjacency))relatedAssets.push('Oráculo MAISON JF®');
+  if(/vela|aroma|n[eé]voa|ritual|escalda-p[eé]s|sensorial/i.test(adjacency))relatedAssets.push('Rituais sensoriais MAISON JF');
+  if(/ebook|e-book|guia|digital|conte[uú]do digital/i.test(adjacency))relatedAssets.push('Éditions Maison JF');
+  if(!relatedAssets.length)relatedAssets.push('Explorar a oferta MAISON JF');
+  const formats=[
+    {format:'post',angle:'reconhecimento_e_reflexao',hook:'E se '+topic.toLocaleLowerCase('pt-PT')+' não fosse uma falha tua, mas um sinal de uma necessidade por compreender?',body:'Há momentos em que '+pain.charAt(0).toLocaleLowerCase('pt-PT')+pain.slice(1)+'\n\nEm vez de te julgares, experimenta parar e perguntar: de que preciso agora — clareza, espaço, descanso, uma conversa ou um próximo passo pequeno?\n\nNão há uma resposta universal. Começa por observar o que se passa contigo, sem te obrigares a chegar já a uma conclusão.',cta:'Se quiseres explorar este tema com a MAISON JF, descobre: '+relatedAssets[0]+'.'},
+    {format:'reel',angle:'hook_pergunta_mais_microacao',hook:'Antes de te criticares por '+topic.toLocaleLowerCase('pt-PT')+', faz esta pergunta.',body:'O que aconteceu? O que precisavas naquele momento? Que pequeno passo estaria ao teu alcance — sem resolver a vida inteira hoje?\n\nUma pergunta honesta pode abrir espaço para uma escolha mais consciente. Guarda este vídeo para voltares a estas perguntas quando te fizerem sentido.',cta:'Explora a experiência MAISON JF relacionada: '+relatedAssets[0]+'.'}
+  ];
+  return formats.map(item=>{
+    const id=sourceId+'_'+item.format;
+    const prior=previousDailyById.get(id)||{};
+    return {
+      id,type:'daily_content_candidate',format:item.format,sourceOceanId:territory,territory,
+      workingTitle:topic+' — '+(item.format==='reel'?'Reel':'Post'),
+      audienceNeed:need.slice(0,600),editorialAngle:item.angle,hook:item.hook,body:item.body,cta:item.cta,
+      relatedAssets,evidenceCount:evidence.length,evidence,
+      status:prior.status||'needs_editorial',
+      ...(prior.reviewedAt?{reviewedAt:prior.reviewedAt}:{}),
+      ...(prior.reviewNote?{reviewNote:prior.reviewNote}:{}),
+      draftOnly:true,approvalRequired:true,automaticPublication:false,automaticActivation:false
+    };
+  });
+}).sort((a,b)=>a.id.localeCompare(b.id));
+
+for(const draft of dailyContentCandidates){
+  if(draft.evidenceCount<2||!draft.hook||!draft.body||!draft.cta)throw new Error('daily_content_quality_gate:'+draft.id);
+  if(draft.draftOnly!==true||draft.approvalRequired!==true||draft.automaticPublication!==false||draft.automaticActivation!==false){
+    throw new Error('unsafe_daily_content_contract:'+draft.id);
+  }
+}
+
 const ids=new Set();
 for(const item of items){
   if(ids.has(item.id))throw new Error('duplicate_queue_id:'+item.id);
@@ -230,7 +274,11 @@ const out={
     oracleCandidates:oracleItems.length,
     oracleRoleSlots:oracleItems.reduce((n,x)=>n+(x.roleCandidates||[]).length,0),
     ebookProposals:ebookProposals.length,
-    ebookProposalsRequiringEditorialApproval:ebookProposals.filter(x=>x.approvalRequired).length
+    ebookProposalsRequiringEditorialApproval:ebookProposals.filter(x=>x.approvalRequired).length,
+    dailyContentCandidates:dailyContentCandidates.length,
+    dailyPostCandidates:dailyContentCandidates.filter(x=>x.format==='post').length,
+    dailyReelCandidates:dailyContentCandidates.filter(x=>x.format==='reel').length,
+    dailyContentRequiringEditorialApproval:dailyContentCandidates.filter(x=>x.approvalRequired).length
   },
   pdiGrowth:{
     scale:{
@@ -244,7 +292,8 @@ const out={
     themes:pdiGrowthThemes
   },
   items,
-  ebookProposals
+  ebookProposals,
+  dailyContentCandidates
 };
 const rendered=stableStringify(out)+'\n';
 if(CHECK){
