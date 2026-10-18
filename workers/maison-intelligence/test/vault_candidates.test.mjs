@@ -114,3 +114,17 @@ test('semantic duplicate is returned without another insert',async()=>{
   assert.equal(out.content_id,'q_existing');
   assert.equal(db.batches.length,0);
 });
+
+test('question themes are normalized to stable accent-free slugs for dynamic catalog discovery',async()=>{
+  const db=new DB();
+  await ingestVaultCandidate({GROWTH_DB:db},{
+    content_type:'question',
+    source_ocean_id:'novo-ocean-maison',
+    theme:'Relações & Intimidade',
+    text:'Que parte da tua intimidade continua à espera de uma conversa mais honesta?',
+    stage:'deepen',
+    exposure:'paid'
+  });
+  assert.equal(db.batches.length,1);
+  assert.equal(db.batches[0][0].params[2],'relacoes-e-intimidade');
+});
