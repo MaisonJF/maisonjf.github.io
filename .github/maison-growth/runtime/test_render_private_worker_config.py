@@ -115,6 +115,7 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["KILL_SWITCH"], "true")
         self.assertEqual(vars_["OPENROUTER_ENABLED"], "false")
         self.assertEqual(vars_["ZERO_COST_MODE"], "false")
+        self.assertEqual(vars_["OSIRIS_COUNCIL_ENABLED"], "false")
         self.assertEqual(vars_["OSIRIS_GATEWAY_ENABLED"], "false")
 
 
@@ -137,6 +138,9 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["ZERO_COST_MODE"], "true")
         self.assertEqual(vars_["MAX_DAILY_CALLS_PER_PROVIDER"], "4")
         self.assertEqual(vars_["WORKERS_AI_MODEL"], "")
+        self.assertEqual(vars_["OPENROUTER_MODEL"], "openrouter/free")
+        self.assertEqual(vars_["OPENROUTER_FALLBACK_MODELS_JSON"], "[]")
+        self.assertEqual(vars_["OSIRIS_COUNCIL_ENABLED"], "true")
         self.assertIn("triggers", cfg)
         self.assertIn("queues", cfg)
         self.assertIn("ai", cfg)
