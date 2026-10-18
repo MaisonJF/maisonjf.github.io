@@ -18,7 +18,7 @@ class RuntimeContractTests(unittest.TestCase):
         self.assertIn("- human_review_decision_candidate",workflow)
         self.assertIn("secrets.OPENROUTER_API_KEY",workflow)
         self.assertIn("Private observe requires the OpenRouter key",workflow)
-        self.assertIn("OPENROUTER_API_KEY"] = key",workflow)
+        self.assertIn('OPENROUTER_API_KEY"] = key',workflow)
 
     def test_foundry_daily_cap_is_bounded_to_four_zero_cost_calls(self):
         worker=(ROOT.parents[2]/"workers"/"maison-intelligence"/"src"/"index.js").read_text(encoding="utf-8")
