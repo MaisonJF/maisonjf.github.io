@@ -1,7 +1,7 @@
 import { ingestVaultCandidate } from './vault_candidates.js';
 import { loadActiveFeedbackLearning } from './feedback_learning.js';
 
-const MAX_QUESTIONS=4;
+const MAX_QUESTIONS=6;
 const MAX_ORACLE_BLOCKS=2;
 
 function clean(value,max=2400){
@@ -28,7 +28,7 @@ function candidatePrompt({oceanContext,brainAlert,learningPatterns=[]}){
     ...(learning.length?learning:['nenhuma aprendizagem ativa ainda']),
     'Usa esta aprendizagem apenas quando for relevante ao Ocean atual. Não sacrifiques identidade MAISON por uma regra genérica e não inventes prova que não esteja no sinal.',
     '',
-    'questions: devolve exatamente 4 perguntas genuinamente distintas quando o sinal o suportar; nunca enchas com sinónimos. Usa momentos/contextos e estágios diferentes. Campos: theme, text, stage, exposure, intensity, target, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness, subthemes.',
+    'questions: devolve exatamente 6 perguntas genuinamente distintas quando o sinal o suportar; nunca enchas com sinónimos. As 6 perguntas deste lote têm de partilhar UM ÚNICO tema canónico estável, para construir massa crítica e evitar fragmentação do catálogo. Usa momentos/contextos e estágios diferentes. O campo theme deve ser um slug estável em minúsculas, sem acentos, com palavras separadas por hífen (ex.: relacoes-e-intimidade). Não mudes o tema entre perguntas do mesmo lote. Campos: theme, text, stage, exposure, intensity, target, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness, subthemes.',
     'A pergunta deve ser feita diretamente à pessoa e fazê-la reconhecer-se; não peças conselhos, estratégias ou ajuda do tipo “como posso…?”. Evita linguagem clínica, terapêutica ou de autoajuda genérica.',
     'stage permitido: open, recognize, deepen, touch, close, signature. exposure: paid ou public_social. intensity: inteiro 1-4. target: self, partner, both, prediction. cognitive_load, vulnerability, conflict_potential e playfulness TÊM de ser inteiros 1-5, nunca palavras.',
     'Das 4 perguntas, inclui pelo menos 2 paid para PÁRA DE IGNORAR! e pelo menos 1 public_social separada para um teste Volta Para Casa, quando for seguro e sustentado. Nunca recicles uma pergunta paga no gratuito.',
