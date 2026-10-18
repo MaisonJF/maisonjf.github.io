@@ -78,6 +78,13 @@ function id(prefix,value){
 async function fingerprint(value){
   return (await sha256Hex(String(value).normalize('NFKC').toLowerCase().replace(/\s+/g,' ').trim())).slice(0,40);
 }
+function normalizeThemeSlug(value){
+  return String(value||'')
+    .normalize('NFD').replace(/[\\u0300-\\u036f]/g,'')
+    .toLowerCase().replace(/&/g,' e ')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')
+    .replace(/-+/g,'-');
+}
 function sourceOcean(raw){
   return cleanKey(raw?.source_ocean_id,'source_ocean_id',160);
 }
