@@ -239,8 +239,8 @@ async function main() {
   }
   const recipient = required("OCEAN_BRIEFING_EMAIL_TO");
   const sender = required("OCEAN_BRIEFING_EMAIL_FROM");
-  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(recipient)) throw new Error("OCEAN_BRIEFING_EMAIL_TO is not a valid email address.");
-  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(sender)) throw new Error("OCEAN_BRIEFING_EMAIL_FROM is not a valid email address.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient)) throw new Error("OCEAN_BRIEFING_EMAIL_TO is not a valid email address.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sender)) throw new Error("OCEAN_BRIEFING_EMAIL_FROM is not a valid email address.");
   const resendKey = required("OCEAN_BRIEFING_RESEND_API_KEY");
   await sendEmail(resendKey,recipient,sender,report);
   console.log("Daily briefing sent via Resend. Body withheld from logs. "+JSON.stringify({date:report.date,counts:report.counts}));
