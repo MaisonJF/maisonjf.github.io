@@ -143,6 +143,51 @@ for(const ocean of oceans.candidates||[]){
   }
 }
 
+const humanizeTerritory=value=>String(value||'').split(/[-_]+/).filter(Boolean).map(word=>word.charAt(0).toUpperCase()+word.slice(1)).join(' ');
+const previousEbookById=new Map((previous.ebookProposals||[]).map(x=>[x.id,x]));
+const ebookProposals=(oceans.candidates||[]).flatMap(ocean=>{
+  const evidence=[...new Set((ocean.evidence||[]).filter(x=>typeof x==='string'&&x.trim()))];
+  const adjacency=String(ocean.commercialAdjacency||'');
+  if(evidence.length<2||!/(ebook|e-book|guia|digital|experi[eê]ncias digitais|conte[uú]do digital|produto digital)/i.test(adjacency))return [];
+  const id='brain_ebook_'+slug(ocean.territory);
+  const prior=previousEbookById.get(id)||{};
+  const topic=humanizeTerritory(ocean.territory);
+  return [{
+    id,
+    type:'ebook_proposal',
+    sourceOceanId:ocean.territory,
+    territory:ocean.territory,
+    workingTitle:'Guia MAISON JF: '+topic,
+    readerNeed:String(ocean.intent||'').slice(0,500),
+    editorialAngle:String(ocean.painLanguage||'').slice(0,500),
+    commercialAdjacency:adjacency.slice(0,800),
+    evidenceCount:evidence.length,
+    evidence,
+    proposedOutline:[
+      {chapter:1,role:'compreender_o_tema',brief:'Contextualizar o tema sem o transformar num diagnóstico.'},
+      {chapter:2,role:'reconhecer_padroes',brief:'Distinguir situações, necessidades e sinais observáveis.'},
+      {chapter:3,role:'perguntas_de_reflexao',brief:'Exercícios e perguntas originais para reflexão pessoal.'},
+      {chapter:4,role:'experiencias_pequenas',brief:'Experiências práticas de baixo risco, sem promessas clínicas.'},
+      {chapter:5,role:'integracao_no_quotidiano',brief:'Plano de continuidade e recursos MAISON JF relevantes, sem pressão comercial.'}
+    ],
+    relatedDigitalExperiences:['PÁRA DE IGNORAR!','Oráculo MAISON JF'],
+    status:prior.status||'needs_editorial',
+    ...(prior.reviewedAt?{reviewedAt:prior.reviewedAt}:{}),
+    ...(prior.reviewNote?{reviewNote:prior.reviewNote}:{}),
+    bodyStored:false,
+    approvalRequired:true,
+    automaticPublication:false,
+    automaticActivation:false
+  }];
+}).sort((a,b)=>a.id.localeCompare(b.id));
+
+for(const proposal of ebookProposals){
+  if(proposal.evidenceCount<2)throw new Error('insufficient_ebook_evidence:'+proposal.id);
+  if(proposal.bodyStored!==false||proposal.approvalRequired!==true||proposal.automaticPublication!==false||proposal.automaticActivation!==false){
+    throw new Error('unsafe_ebook_proposal_contract:'+proposal.id);
+  }
+}
+
 const ids=new Set();
 for(const item of items){
   if(ids.has(item.id))throw new Error('duplicate_queue_id:'+item.id);
@@ -181,7 +226,9 @@ const out={
     pdiEditorialCoreTarget:pdiGrowthThemes.length*QUESTION_TARGET_PER_MATURE_THEME,
     pdiCombinatorialTarget:COMBINATORIAL_TARGET,
     oracleCandidates:oracleItems.length,
-    oracleRoleSlots:oracleItems.reduce((n,x)=>n+(x.roleCandidates||[]).length,0)
+    oracleRoleSlots:oracleItems.reduce((n,x)=>n+(x.roleCandidates||[]).length,0),
+    ebookProposals:ebookProposals.length,
+    ebookProposalsRequiringEditorialApproval:ebookProposals.filter(x=>x.approvalRequired).length
   },
   pdiGrowth:{
     scale:{
@@ -194,7 +241,8 @@ const out={
     sourceStats:pdiSourceStats,
     themes:pdiGrowthThemes
   },
-  items
+  items,
+  ebookProposals
 };
 const rendered=stableStringify(out)+'\n';
 if(CHECK){
