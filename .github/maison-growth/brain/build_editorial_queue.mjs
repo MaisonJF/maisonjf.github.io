@@ -20,10 +20,14 @@ const stableStringify=(value, seen=new WeakSet())=>{
   if (seen.has(value)) return JSON.stringify('[Circular]');
   seen.add(value);
   if (Array.isArray(value)) {
-    return '[' + value.map(item => stableStringify(item, seen)).join(',') + ']';
+    const result='[' + value.map(item => stableStringify(item, seen)).join(',') + ']';
+    seen.delete(value);
+    return result;
   }
   const keys=Object.keys(value).sort();
-  return '{' + keys.map(key => `${JSON.stringify(key)}:${stableStringify(value[key], seen)}`).join(',') + '}';
+  const result='{' + keys.map(key => `${JSON.stringify(key)}:${stableStringify(value[key], seen)}`).join(',') + '}';
+  seen.delete(value);
+  return result;
 };
 
 const normalizeForCheck=(value)=>{
