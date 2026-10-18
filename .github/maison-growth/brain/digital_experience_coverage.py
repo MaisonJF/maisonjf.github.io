@@ -58,8 +58,10 @@ def build_coverage(
         q=question_items.get(territory)
         o=oracle_items.get(territory)
         canonical=canonical_rows.get(territory)
-        expected_pdi=bool(canonical.get("questionPotential") is True) if canonical is not None else q is not None
-        expected_oracle=bool(canonical.get("oraclePotential") is True) if canonical is not None else o is not None
+        independent_evidence={item.strip() for item in (canonical or {}).get("evidence",[]) if isinstance(item,str) and item.strip()}
+        quality_eligible=len(independent_evidence)>=2
+        expected_pdi=bool(canonical.get("questionPotential") is True and quality_eligible) if canonical is not None else q is not None
+        expected_oracle=bool(canonical.get("oraclePotential") is True and quality_eligible) if canonical is not None else o is not None
         themes=list(q.get("questionThemeCandidates",[])) if q else []
         stages=list(q.get("stageCandidates",[])) if q else []
         question_slots=list(q.get("questionDesignSlots",[])) if q else []
@@ -73,7 +75,8 @@ def build_coverage(
             gaps.append("oracle_feed_missing")
         if not expected_oracle and o is not None:
             gaps.append("oracle_feed_unexpected")
-        if q is not None and len(question_slots)!=len(themes)*len(stages):
+        design_stage_count=len(pdi_system.get("stages",[]))
+        if q is not None and len(question_slots)!=len(themes)*design_stage_count:
             gaps.append("pdi_slot_contract_mismatch")
         if o is not None and len(roles)!=7:
             gaps.append("oracle_role_contract_mismatch")
