@@ -1,0 +1,35 @@
+name: PDI Exponential Growth Checks
+on:
+  pull_request:
+    paths:
+      - 'functions/_lib/pdi-theme-catalogue.js'
+      - 'workers/maison-intelligence/src/**'
+      - 'workers/maison-intelligence/test/**'
+      - 'workers/maison-intelligence/package.json'
+      - '.github/workflows/pdi-exponential-growth-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-pdi-growth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Worker tooling
+        working-directory: workers/maison-intelligence
+        run: npm install --ignore-scripts
+      - name: Run Maison Intelligence tests
+        working-directory: workers/maison-intelligence
+        run: npm test
+      - name: Check changed JavaScript syntax
+        run: |
+          node --check functions/_lib/pdi-theme-catalogue.js
+          node --check workers/maison-intelligence/src/vault_candidates.js
+          node --check workers/maison-intelligence/src/editorial_candidate_generation.js
+          node --check workers/maison-intelligence/src/index.js
