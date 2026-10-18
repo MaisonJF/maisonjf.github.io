@@ -148,7 +148,9 @@ const previousEbookById=new Map((previous.ebookProposals||[]).map(x=>[x.id,x]));
 const ebookProposals=(oceans.candidates||[]).flatMap(ocean=>{
   const evidence=[...new Set((ocean.evidence||[]).filter(x=>typeof x==='string'&&x.trim()))];
   const adjacency=String(ocean.commercialAdjacency||'');
-  if(evidence.length<2||!/(ebook|e-book|guia|digital|experi[eê]ncias digitais|conte[uú]do digital|produto digital)/i.test(adjacency))return [];
+  const topicText=[ocean.territory,ocean.intent,ocean.painLanguage,adjacency].join(' ');
+  const internalOperations=/(dna maison|princ[ií]pios transfer[ií]veis|mestres hist[oó]ricos|aquisi[cç][aã]o org[aâ]nica|reconhecimento da maison|tr[aá]fego qualificado|estrat[eé]gia comercial da maison)/i.test(topicText);
+  if(evidence.length<2||internalOperations||!/(ebook|e-book|guia|digital|experi[eê]ncias digitais|conte[uú]do digital|produto digital)/i.test(adjacency))return [];
   const id='brain_ebook_'+slug(ocean.territory);
   const prior=previousEbookById.get(id)||{};
   const topic=humanizeTerritory(ocean.territory);
