@@ -3,8 +3,16 @@
   "sources": [
     "data/products.js",
     "data/services.js",
-    "functions/_lib/offer-brain.js"
+    "functions/_lib/offer-brain.js",
+    ".github/maison-growth/brain/editorial-queue.json"
   ],
+  "content_linkage": {
+    "oceans_to_editorial_queue": true,
+    "editorial_queue_to_commercial_assets": true,
+    "ebook_proposals": 14,
+    "proposals_require_human_approval": true,
+    "automatic_publication": false
+  },
   "contract": {
     "derived_projection": true,
     "canonical_catalogues_unchanged": true,
@@ -1025,7 +1033,9 @@
           "movement",
           "close"
         ],
-        "paid_bodies_in_git": false
+        "paid_bodies_in_git": false,
+        "ebook_proposal_count": 14,
+        "ebook_proposal_feed": "editorial_queue.ebookProposals"
       },
       "operational": {
         "capacity_units_per_period": null,
