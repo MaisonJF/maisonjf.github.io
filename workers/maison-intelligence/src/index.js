@@ -93,7 +93,7 @@ async function processExpansionFoundryTask(env,task) {
 
   const day=task.day||utcDay();
   const usageKey=('foundry:'+String(task.modelKey||task.providerId||'model')).slice(0,120);
-  const cap=1;
+  const cap=clampInt(env.MAX_DAILY_CALLS_PER_PROVIDER,4,1,4);
   const row=await env.GROWTH_DB.prepare(`
     SELECT calls FROM external_intelligence_daily_usage
     WHERE usage_date=?1 AND provider_id=?2
