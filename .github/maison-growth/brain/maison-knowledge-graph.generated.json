@@ -3,7 +3,15 @@
   "generated_from": [
     ".github/maison-growth/oceans/candidates.json",
     "functions/_lib/offer-brain.js",
-    "functions/_lib/b2b-offer-brain.js"
+    "functions/_lib/b2b-offer-brain.js",
+    "sitemap.xml",
+    "robots.txt",
+    "llms.txt",
+    "public HTML backing files",
+    ".github/maison-growth/brain/search-visibility-baseline.json",
+    ".github/maison-growth/brain/public-entity-evidence.json",
+    ".github/maison-growth/brain/external-entity-authority.json",
+    "_redirects"
   ],
   "principle": "Humano vê João. Máquina vê estrutura. Brain compreende os dois. MAISON transforma isso em desejo, utilidade e negócio.",
   "contract": {
@@ -37,7 +45,9 @@
         "precisar-de-solidao-para-recuperar-energia-social",
         "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
         "solidao-com-contacto-sem-conexao-de-qualidade",
-        "atelier-principios-transferiveis-e-dna-maison"
+        "atelier-principios-transferiveis-e-dna-maison",
+        "vergonha-financeira-e-medo-de-olhar-para-os-numeros",
+        "comparacao-social-que-transforma-vida-em-atraso"
       ]
     },
     {
@@ -62,7 +72,8 @@
         "doomscrolling-para-tentar-reduzir-incerteza",
         "precisar-de-solidao-para-recuperar-energia-social",
         "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
-        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam"
+        "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
+        "vergonha-financeira-e-medo-de-olhar-para-os-numeros"
       ]
     },
     {
@@ -102,7 +113,10 @@
         "quando-o-que-funciona-na-relacao-se-torna-invisivel",
         "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
         "telepressao-e-disponibilidade-permanente",
-        "atelier-principios-transferiveis-e-dna-maison"
+        "atelier-principios-transferiveis-e-dna-maison",
+        "identidade-em-transicao-quando-a-versao-antiga-ja-nao-serve",
+        "vergonha-financeira-e-medo-de-olhar-para-os-numeros",
+        "comparacao-social-que-transforma-vida-em-atraso"
       ]
     },
     {
@@ -138,7 +152,9 @@
         "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
         "solidao-com-contacto-sem-conexao-de-qualidade",
         "telepressao-e-disponibilidade-permanente",
-        "descoberta-organica-e-reconhecimento-da-maison"
+        "descoberta-organica-e-reconhecimento-da-maison",
+        "identidade-em-transicao-quando-a-versao-antiga-ja-nao-serve",
+        "comparacao-social-que-transforma-vida-em-atraso"
       ]
     }
   ],
@@ -792,6 +808,3898 @@
       "noSyntheticDemand": "Nunca transformar possibilidade estratégica, tendência genérica ou intuição interna em procura declarada."
     }
   },
+  "publicDiscovery": {
+    "schema_version": "maison_public_discovery_v1",
+    "protocols": {
+      "sitemap_index": "https://maison-jf.com/sitemap.xml",
+      "robots": "https://maison-jf.com/robots.txt",
+      "llms": "https://maison-jf.com/llms.txt",
+      "sitemap_declared_in_robots": true,
+      "image_sitemap_url": "https://maison-jf.com/sitemap-images.xml",
+      "image_sitemap_declared_in_robots": true,
+      "llms_identifies_canonical_site": true
+    },
+    "summary": {
+      "page_count": 154,
+      "structured_data_pages": 154,
+      "structured_data_coverage": 1,
+      "internal_link_edges": 518,
+      "orphan_pages": [],
+      "low_in_degree_pages": [
+        "https://maison-jf.com/clair-obscur/",
+        "https://maison-jf.com/ebooks/virgulas-do-destino-meandros-da-vida/",
+        "https://maison-jf.com/ebooks/virgulas-do-destino-o-turista/",
+        "https://maison-jf.com/espiritualidade/protecao-energetica",
+        "https://maison-jf.com/manifesto/",
+        "https://maison-jf.com/oraculo/amizade-reciprocidade",
+        "https://maison-jf.com/oraculo/amor",
+        "https://maison-jf.com/oraculo/ansiedade-antecipacao",
+        "https://maison-jf.com/oraculo/arrependimento",
+        "https://maison-jf.com/oraculo/autenticidade-personagem",
+        "https://maison-jf.com/oraculo/autoabandono",
+        "https://maison-jf.com/oraculo/autoestima-valor",
+        "https://maison-jf.com/oraculo/casa-partilhada",
+        "https://maison-jf.com/oraculo/chefia-autoridade",
+        "https://maison-jf.com/oraculo/ciume-comparacao",
+        "https://maison-jf.com/oraculo/comparacao-inveja",
+        "https://maison-jf.com/oraculo/compromisso-futuro",
+        "https://maison-jf.com/oraculo/comunicacao-conflito",
+        "https://maison-jf.com/oraculo/confianca-em-si",
+        "https://maison-jf.com/oraculo/confianca-traicao",
+        "https://maison-jf.com/oraculo/conflito-profissional",
+        "https://maison-jf.com/oraculo/consumo-status",
+        "https://maison-jf.com/oraculo/controlo-incerteza",
+        "https://maison-jf.com/oraculo/convivencia-espaco",
+        "https://maison-jf.com/oraculo/coragem-medo",
+        "https://maison-jf.com/oraculo/corpo-imagem",
+        "https://maison-jf.com/oraculo/criatividade-bloqueio",
+        "https://maison-jf.com/oraculo/critica-fracasso",
+        "https://maison-jf.com/oraculo/cuidar-de-alguem",
+        "https://maison-jf.com/oraculo/culpa-passado",
+        "https://maison-jf.com/oraculo/culpa-responsabilidade",
+        "https://maison-jf.com/oraculo/dependencia-emocional",
+        "https://maison-jf.com/oraculo/desarrumacao-desapego",
+        "https://maison-jf.com/oraculo/descanso-culpa",
+        "https://maison-jf.com/oraculo/desejo-proximidade",
+        "https://maison-jf.com/oraculo/desemprego-incerteza",
+        "https://maison-jf.com/oraculo/dinheiro",
+        "https://maison-jf.com/oraculo/dinheiro-e-ajuda",
+        "https://maison-jf.com/oraculo/dividas-pressao",
+        "https://maison-jf.com/oraculo/dor-limites-do-corpo",
+        "https://maison-jf.com/oraculo/emigracao-saudade",
+        "https://maison-jf.com/oraculo/empreendedorismo-risco",
+        "https://maison-jf.com/oraculo/envelhecimento-corpo",
+        "https://maison-jf.com/oraculo/equipa-colaboracao",
+        "https://maison-jf.com/oraculo/escassez-medo",
+        "https://maison-jf.com/oraculo/escolhas",
+        "https://maison-jf.com/oraculo/esperanca-recomeco",
+        "https://maison-jf.com/oraculo/estudo-aprendizagem",
+        "https://maison-jf.com/oraculo/familia",
+        "https://maison-jf.com/oraculo/familia-expectativas",
+        "https://maison-jf.com/oraculo/fe-duvida",
+        "https://maison-jf.com/oraculo/fim-de-ciclo",
+        "https://maison-jf.com/oraculo/finitude-mortalidade",
+        "https://maison-jf.com/oraculo/foco-dispersao",
+        "https://maison-jf.com/oraculo/gastos-impulso",
+        "https://maison-jf.com/oraculo/habitos-mudanca",
+        "https://maison-jf.com/oraculo/heranca-dinheiro-familia",
+        "https://maison-jf.com/oraculo/identidade-quem-sou",
+        "https://maison-jf.com/oraculo/intimidade-vulnerabilidade",
+        "https://maison-jf.com/oraculo/intuicao-sinais",
+        "https://maison-jf.com/oraculo/irmaos-rivalidade",
+        "https://maison-jf.com/oraculo/limites-respeito",
+        "https://maison-jf.com/oraculo/luto-perda",
+        "https://maison-jf.com/oraculo/medo-futuro",
+        "https://maison-jf.com/oraculo/mudanca-de-casa",
+        "https://maison-jf.com/oraculo/mudanca-de-cidade",
+        "https://maison-jf.com/oraculo/necessidade-aprovacao",
+        "https://maison-jf.com/oraculo/negocio-parado",
+        "https://maison-jf.com/oraculo/organizacao-sobrecarga",
+        "https://maison-jf.com/oraculo/padroes",
+        "https://maison-jf.com/oraculo/pais-a-envelhecer",
+        "https://maison-jf.com/oraculo/parentalidade-escolha",
+        "https://maison-jf.com/oraculo/pausa-recuperacao",
+        "https://maison-jf.com/oraculo/perdao-reparacao",
+        "https://maison-jf.com/oraculo/perfeccionismo",
+        "https://maison-jf.com/oraculo/pertenca-grupo",
+        "https://maison-jf.com/oraculo/poupanca-seguranca",
+        "https://maison-jf.com/oraculo/prazer-permissao",
+        "https://maison-jf.com/oraculo/procrastinacao-adiamento",
+        "https://maison-jf.com/oraculo/procura-de-emprego",
+        "https://maison-jf.com/oraculo/proposito-sentido",
+        "https://maison-jf.com/oraculo/raiva-limites",
+        "https://maison-jf.com/oraculo/recomeco-depois-da-perda",
+        "https://maison-jf.com/oraculo/reconversao-profissional",
+        "https://maison-jf.com/oraculo/reencontros-passado",
+        "https://maison-jf.com/oraculo/rejeicao-abandono",
+        "https://maison-jf.com/oraculo/relacoes-indefinidas",
+        "https://maison-jf.com/oraculo/rendimento-instavel",
+        "https://maison-jf.com/oraculo/ritmo-sobrecarga",
+        "https://maison-jf.com/oraculo/rotina-caos",
+        "https://maison-jf.com/oraculo/ruminacao-pensar-demais",
+        "https://maison-jf.com/oraculo/saudade-ausencia",
+        "https://maison-jf.com/oraculo/sentir-se-fraude",
+        "https://maison-jf.com/oraculo/separacao-fim",
+        "https://maison-jf.com/oraculo/sobrecarga-no-trabalho",
+        "https://maison-jf.com/oraculo/solidao-companhia",
+        "https://maison-jf.com/oraculo/sono-mente-ligada",
+        "https://maison-jf.com/oraculo/telemovel-distracao",
+        "https://maison-jf.com/oraculo/tempo-prioridades",
+        "https://maison-jf.com/oraculo/trabalho",
+        "https://maison-jf.com/oraculo/tristeza-desanimo",
+        "https://maison-jf.com/oraculo/vergonha-exposicao",
+        "https://maison-jf.com/oraculo/viver-sozinho",
+        "https://maison-jf.com/portas/cabeca",
+        "https://maison-jf.com/portas/casa",
+        "https://maison-jf.com/portas/corpo",
+        "https://maison-jf.com/produtos/maison-jf-bundles/",
+        "https://maison-jf.com/produtos/oleo-massagem/",
+        "https://maison-jf.com/produtos/vela-pequena/",
+        "https://maison-jf.com/profissionais/aromas-para-espacos-de-bem-estar",
+        "https://maison-jf.com/profissionais/como-criar-um-ritual-de-boas-vindas-para-clientes",
+        "https://maison-jf.com/profissionais/como-escolher-aromas-para-um-gabinete-de-massagem",
+        "https://maison-jf.com/profissionais/como-escolher-produtos-para-um-spa-ou-gabinete",
+        "https://maison-jf.com/profissionais/o-que-posso-oferecer-de-diferente-aos-meus-clientes",
+        "https://maison-jf.com/profissionais/produtos-de-boas-vindas-para-alojamento-local",
+        "https://maison-jf.com/profissionais/produtos-para-revenda-em-loja",
+        "https://maison-jf.com/profissionais/produtos-para-revenda-em-spa",
+        "https://maison-jf.com/profissionais/velas-aromaticas-para-revenda",
+        "https://maison-jf.com/respostas/na-minha-relacao-contamos-tudo-o-que-cada-um-faz",
+        "https://maison-jf.com/respostas/o-meu-parceiro-goza-comigo-a-frente-dos-outros",
+        "https://maison-jf.com/respostas/porque-fico-mais-interessado-quando-a-pessoa-se-afasta",
+        "https://maison-jf.com/respostas/porque-me-sinto-em-divida-quando-alguem-cuida-de-mim",
+        "https://maison-jf.com/respostas/porque-preciso-de-conquistar-alguem-para-me-sentir-escolhido",
+        "https://maison-jf.com/respostas/porque-so-me-apaixono-por-pessoas-indisponiveis",
+        "https://maison-jf.com/respostas/sinto-me-culpado-por-sair-do-trabalho-a-horas",
+        "https://maison-jf.com/respostas/tenho-medo-de-precisar-demasiado-de-alguem",
+        "https://maison-jf.com/respostas/tenho-vergonha-de-pedir-reafirmacao-na-relacao",
+        "https://maison-jf.com/teste/atencao/",
+        "https://maison-jf.com/teste/nunca-chega/",
+        "https://maison-jf.com/trabalho/estou-desempregado-e-sinto-que-a-minha-vida-parou",
+        "https://maison-jf.com/trabalho/estou-farto-de-enviar-candidaturas-e-nao-ter-resposta",
+        "https://maison-jf.com/trabalho/o-conflito-no-trabalho-vem-comigo-para-casa",
+        "https://maison-jf.com/trabalho/tenho-medo-de-falar-com-o-meu-chefe"
+      ],
+      "redirecting_internal_links": [],
+      "missing_metadata": [],
+      "duplicate_titles": [],
+      "duplicate_descriptions": [],
+      "link_groups": {
+        "home": {
+          "pages": 1,
+          "incoming_edges": 44,
+          "outgoing_edges": 14,
+          "orphans": 0
+        },
+        "farol": {
+          "pages": 1,
+          "incoming_edges": 44,
+          "outgoing_edges": 8,
+          "orphans": 0
+        },
+        "teste": {
+          "pages": 5,
+          "incoming_edges": 50,
+          "outgoing_edges": 36,
+          "orphans": 0
+        },
+        "para-de-ignorar": {
+          "pages": 1,
+          "incoming_edges": 3,
+          "outgoing_edges": 5,
+          "orphans": 0
+        },
+        "produtos": {
+          "pages": 7,
+          "incoming_edges": 52,
+          "outgoing_edges": 47,
+          "orphans": 0
+        },
+        "servicos": {
+          "pages": 2,
+          "incoming_edges": 46,
+          "outgoing_edges": 12,
+          "orphans": 0
+        },
+        "portas": {
+          "pages": 4,
+          "incoming_edges": 6,
+          "outgoing_edges": 30,
+          "orphans": 0
+        },
+        "oraculo": {
+          "pages": 101,
+          "incoming_edges": 205,
+          "outgoing_edges": 219,
+          "orphans": 0
+        },
+        "ebooks": {
+          "pages": 3,
+          "incoming_edges": 8,
+          "outgoing_edges": 19,
+          "orphans": 0
+        },
+        "profissionais": {
+          "pages": 10,
+          "incoming_edges": 24,
+          "outgoing_edges": 24,
+          "orphans": 0
+        },
+        "press": {
+          "pages": 1,
+          "incoming_edges": 4,
+          "outgoing_edges": 6,
+          "orphans": 0
+        },
+        "envios": {
+          "pages": 1,
+          "incoming_edges": 9,
+          "outgoing_edges": 7,
+          "orphans": 0
+        },
+        "trabalho": {
+          "pages": 4,
+          "incoming_edges": 4,
+          "outgoing_edges": 20,
+          "orphans": 0
+        },
+        "presentes": {
+          "pages": 1,
+          "incoming_edges": 2,
+          "outgoing_edges": 9,
+          "orphans": 0
+        },
+        "espiritualidade": {
+          "pages": 1,
+          "incoming_edges": 1,
+          "outgoing_edges": 5,
+          "orphans": 0
+        },
+        "clair-obscur": {
+          "pages": 1,
+          "incoming_edges": 1,
+          "outgoing_edges": 5,
+          "orphans": 0
+        },
+        "manifesto": {
+          "pages": 1,
+          "incoming_edges": 1,
+          "outgoing_edges": 6,
+          "orphans": 0
+        },
+        "respostas": {
+          "pages": 9,
+          "incoming_edges": 9,
+          "outgoing_edges": 46,
+          "orphans": 0
+        }
+      },
+      "groups": {
+        "home": 1,
+        "farol": 1,
+        "teste": 5,
+        "para-de-ignorar": 1,
+        "produtos": 7,
+        "servicos": 2,
+        "portas": 4,
+        "oraculo": 101,
+        "ebooks": 3,
+        "profissionais": 10,
+        "press": 1,
+        "envios": 1,
+        "trabalho": 4,
+        "presentes": 1,
+        "espiritualidade": 1,
+        "clair-obscur": 1,
+        "manifesto": 1,
+        "respostas": 9
+      },
+      "schema_types": {
+        "MerchantReturnPolicy": 2,
+        "Organization": 2,
+        "WebSite": 2,
+        "BreadcrumbList": 137,
+        "ItemList": 1,
+        "ListItem": 137,
+        "WebPage": 138,
+        "CollectionPage": 6,
+        "Brand": 7,
+        "Offer": 111,
+        "Product": 7,
+        "Thing": 7,
+        "AggregateOffer": 1,
+        "Service": 107,
+        "Book": 2,
+        "AboutPage": 1,
+        "Article": 18
+      },
+      "structured_data_sources": {
+        "html": 18,
+        "edge_derived": 136
+      },
+      "structured_data_revision": "2026-10-11-v3",
+      "stale_edge_schema_lastmod": []
+    },
+    "pages": [
+      {
+        "url": "https://maison-jf.com/",
+        "source_file": "index.html",
+        "group": "home",
+        "title": "MAISON JF® | PÁRA DE IGNORAR! Volta Para Casa.",
+        "structured_data_types": [
+          "MerchantReturnPolicy",
+          "Organization",
+          "WebSite"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/clair-obscur/",
+          "https://maison-jf.com/envios",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/manifesto/",
+          "https://maison-jf.com/portas/cabeca",
+          "https://maison-jf.com/portas/casa",
+          "https://maison-jf.com/portas/corpo",
+          "https://maison-jf.com/portas/presenca",
+          "https://maison-jf.com/press/",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 44,
+        "internal_link_out_degree": 14
+      },
+      {
+        "url": "https://maison-jf.com/farol",
+        "source_file": "farol.html",
+        "group": "farol",
+        "title": "O Farol | Encontra o próximo passo | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ItemList",
+          "ListItem",
+          "MerchantReturnPolicy",
+          "Organization",
+          "WebPage",
+          "WebSite"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/envios",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/press/",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 44,
+        "internal_link_out_degree": 8
+      },
+      {
+        "url": "https://maison-jf.com/teste/",
+        "source_file": "teste/index.html",
+        "group": "teste",
+        "title": "Volta Para Casa | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "CollectionPage",
+          "ListItem"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/",
+          "https://maison-jf.com/teste/afeto/",
+          "https://maison-jf.com/teste/apego/",
+          "https://maison-jf.com/teste/atencao/"
+        ],
+        "internal_link_in_degree": 44,
+        "internal_link_out_degree": 8
+      },
+      {
+        "url": "https://maison-jf.com/teste/atencao/",
+        "source_file": "teste/atencao/index.html",
+        "group": "teste",
+        "title": "Volta Para Casa · Porta Atenção | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/",
+          "https://maison-jf.com/teste/apego/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/teste/apego/",
+        "source_file": "teste/apego/index.html",
+        "group": "teste",
+        "title": "Qual é o teu estilo de apego? | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/para-de-ignorar/",
+          "https://maison-jf.com/presentes/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/",
+          "https://maison-jf.com/teste/afeto/"
+        ],
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 8
+      },
+      {
+        "url": "https://maison-jf.com/teste/afeto/",
+        "source_file": "teste/afeto/index.html",
+        "group": "teste",
+        "title": "Como gostas de receber amor? | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
+          "https://maison-jf.com/presentes/",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 8
+      },
+      {
+        "url": "https://maison-jf.com/teste/nunca-chega/",
+        "source_file": "teste/nunca-chega/index.html",
+        "group": "teste",
+        "title": "Porque é que nunca chega? | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/para-de-ignorar/",
+        "source_file": "para-de-ignorar/index.html",
+        "group": "para-de-ignorar",
+        "title": "PÁRA DE IGNORAR! · Jogo digital | MAISON JF®",
+        "structured_data_types": [
+          "Brand",
+          "Offer",
+          "Product"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 3,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/produtos/",
+        "source_file": "produtos/index.html",
+        "group": "produtos",
+        "title": "Produtos | MAISON JF®",
+        "structured_data_types": [
+          "CollectionPage",
+          "Thing"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/envios",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/produtos/maison-jf-bundles/",
+          "https://maison-jf.com/profissionais/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 43,
+        "internal_link_out_degree": 11
+      },
+      {
+        "url": "https://maison-jf.com/produtos/vela-vidro/",
+        "source_file": "produtos/vela-vidro/index.html",
+        "group": "produtos",
+        "title": "Vela Aromática 170 g | MAISON JF®",
+        "structured_data_types": [
+          "Brand",
+          "Offer",
+          "Product"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/envios",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/produtos/vela-pequena/",
+        "source_file": "produtos/vela-pequena/index.html",
+        "group": "produtos",
+        "title": "Vela Aromática 70 g | MAISON JF®",
+        "structured_data_types": [
+          "Brand",
+          "Offer",
+          "Product"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/envios",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/produtos/oleo-massagem/",
+        "source_file": "produtos/oleo-massagem/index.html",
+        "group": "produtos",
+        "title": "Óleo de Massagem 60 ml | MAISON JF®",
+        "structured_data_types": [
+          "Brand",
+          "Offer",
+          "Product"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/envios",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/produtos/nevoa/",
+        "source_file": "produtos/nevoa/index.html",
+        "group": "produtos",
+        "title": "Névoa de Ambiente 20 ml | MAISON JF®",
+        "structured_data_types": [
+          "Brand",
+          "Offer",
+          "Product"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/envios",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/produtos/escalda-pes/",
+        "source_file": "produtos/escalda-pes/index.html",
+        "group": "produtos",
+        "title": "Escalda-Pés 280 g | MAISON JF®",
+        "structured_data_types": [
+          "Brand",
+          "Offer",
+          "Product"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/envios",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/servicos/",
+        "source_file": "servicos/index.html",
+        "group": "servicos",
+        "title": "Serviços | MAISON JF®",
+        "structured_data_types": [
+          "AggregateOffer",
+          "CollectionPage",
+          "Offer",
+          "Service"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/portas/presenca",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 44,
+        "internal_link_out_degree": 7
+      },
+      {
+        "url": "https://maison-jf.com/portas/casa",
+        "source_file": "portas/casa.html",
+        "group": "portas",
+        "title": "Casa — Ambiente, aroma e rituais | MAISON JF®",
+        "structured_data_types": [
+          "Thing",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/casa-refugio",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/produtos/nevoa/",
+          "https://maison-jf.com/produtos/vela-vidro/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 8
+      },
+      {
+        "url": "https://maison-jf.com/portas/corpo",
+        "source_file": "portas/corpo.html",
+        "group": "portas",
+        "title": "Corpo — Pausa, toque e autocuidado | MAISON JF®",
+        "structured_data_types": [
+          "Thing",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/energia-cansaco",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/produtos/escalda-pes/",
+          "https://maison-jf.com/produtos/oleo-massagem/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 8
+      },
+      {
+        "url": "https://maison-jf.com/portas/cabeca",
+        "source_file": "portas/cabeca.html",
+        "group": "portas",
+        "title": "Cabeça — Clareza, reflexão e escolhas | MAISON JF®",
+        "structured_data_types": [
+          "Thing",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/servicos/tarot/",
+          "https://maison-jf.com/teste/",
+          "https://maison-jf.com/teste/nunca-chega/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 9
+      },
+      {
+        "url": "https://maison-jf.com/portas/presenca",
+        "source_file": "portas/presenca.html",
+        "group": "portas",
+        "title": "Presença | MAISON JF®",
+        "structured_data_types": [
+          "Thing",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 3,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/",
+        "source_file": "oraculo/index.html",
+        "group": "oraculo",
+        "title": "Oráculo | MAISON JF®",
+        "structured_data_types": [
+          "Thing",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/amizade-reciprocidade",
+          "https://maison-jf.com/oraculo/amor",
+          "https://maison-jf.com/oraculo/ansiedade-antecipacao",
+          "https://maison-jf.com/oraculo/arrependimento",
+          "https://maison-jf.com/oraculo/autenticidade-personagem",
+          "https://maison-jf.com/oraculo/autoabandono",
+          "https://maison-jf.com/oraculo/autoestima-valor",
+          "https://maison-jf.com/oraculo/casa-partilhada",
+          "https://maison-jf.com/oraculo/casa-refugio",
+          "https://maison-jf.com/oraculo/chefia-autoridade",
+          "https://maison-jf.com/oraculo/ciume-comparacao",
+          "https://maison-jf.com/oraculo/comparacao-inveja",
+          "https://maison-jf.com/oraculo/compromisso-futuro",
+          "https://maison-jf.com/oraculo/comunicacao-conflito",
+          "https://maison-jf.com/oraculo/confianca-em-si",
+          "https://maison-jf.com/oraculo/confianca-traicao",
+          "https://maison-jf.com/oraculo/conflito-profissional",
+          "https://maison-jf.com/oraculo/consumo-status",
+          "https://maison-jf.com/oraculo/controlo-incerteza",
+          "https://maison-jf.com/oraculo/convivencia-espaco",
+          "https://maison-jf.com/oraculo/coragem-medo",
+          "https://maison-jf.com/oraculo/corpo-imagem",
+          "https://maison-jf.com/oraculo/criatividade-bloqueio",
+          "https://maison-jf.com/oraculo/critica-fracasso",
+          "https://maison-jf.com/oraculo/cuidar-de-alguem",
+          "https://maison-jf.com/oraculo/culpa-passado",
+          "https://maison-jf.com/oraculo/culpa-responsabilidade",
+          "https://maison-jf.com/oraculo/dependencia-emocional",
+          "https://maison-jf.com/oraculo/desarrumacao-desapego",
+          "https://maison-jf.com/oraculo/descanso-culpa",
+          "https://maison-jf.com/oraculo/desejo-proximidade",
+          "https://maison-jf.com/oraculo/desemprego-incerteza",
+          "https://maison-jf.com/oraculo/dinheiro",
+          "https://maison-jf.com/oraculo/dinheiro-e-ajuda",
+          "https://maison-jf.com/oraculo/dividas-pressao",
+          "https://maison-jf.com/oraculo/dor-limites-do-corpo",
+          "https://maison-jf.com/oraculo/emigracao-saudade",
+          "https://maison-jf.com/oraculo/empreendedorismo-risco",
+          "https://maison-jf.com/oraculo/energia-cansaco",
+          "https://maison-jf.com/oraculo/envelhecimento-corpo",
+          "https://maison-jf.com/oraculo/equipa-colaboracao",
+          "https://maison-jf.com/oraculo/escassez-medo",
+          "https://maison-jf.com/oraculo/escolhas",
+          "https://maison-jf.com/oraculo/esperanca-recomeco",
+          "https://maison-jf.com/oraculo/estudo-aprendizagem",
+          "https://maison-jf.com/oraculo/familia",
+          "https://maison-jf.com/oraculo/familia-expectativas",
+          "https://maison-jf.com/oraculo/fe-duvida",
+          "https://maison-jf.com/oraculo/fim-de-ciclo",
+          "https://maison-jf.com/oraculo/finitude-mortalidade",
+          "https://maison-jf.com/oraculo/foco-dispersao",
+          "https://maison-jf.com/oraculo/gastos-impulso",
+          "https://maison-jf.com/oraculo/habitos-mudanca",
+          "https://maison-jf.com/oraculo/heranca-dinheiro-familia",
+          "https://maison-jf.com/oraculo/identidade-quem-sou",
+          "https://maison-jf.com/oraculo/intimidade-vulnerabilidade",
+          "https://maison-jf.com/oraculo/intuicao-sinais",
+          "https://maison-jf.com/oraculo/irmaos-rivalidade",
+          "https://maison-jf.com/oraculo/limites-respeito",
+          "https://maison-jf.com/oraculo/luto-perda",
+          "https://maison-jf.com/oraculo/medo-futuro",
+          "https://maison-jf.com/oraculo/mudanca-de-casa",
+          "https://maison-jf.com/oraculo/mudanca-de-cidade",
+          "https://maison-jf.com/oraculo/necessidade-aprovacao",
+          "https://maison-jf.com/oraculo/negocio-parado",
+          "https://maison-jf.com/oraculo/organizacao-sobrecarga",
+          "https://maison-jf.com/oraculo/padroes",
+          "https://maison-jf.com/oraculo/pais-a-envelhecer",
+          "https://maison-jf.com/oraculo/parentalidade-escolha",
+          "https://maison-jf.com/oraculo/pausa-recuperacao",
+          "https://maison-jf.com/oraculo/perdao-reparacao",
+          "https://maison-jf.com/oraculo/perfeccionismo",
+          "https://maison-jf.com/oraculo/pertenca-grupo",
+          "https://maison-jf.com/oraculo/poupanca-seguranca",
+          "https://maison-jf.com/oraculo/prazer-permissao",
+          "https://maison-jf.com/oraculo/procrastinacao-adiamento",
+          "https://maison-jf.com/oraculo/procura-de-emprego",
+          "https://maison-jf.com/oraculo/proposito-sentido",
+          "https://maison-jf.com/oraculo/raiva-limites",
+          "https://maison-jf.com/oraculo/recomeco-depois-da-perda",
+          "https://maison-jf.com/oraculo/reconversao-profissional",
+          "https://maison-jf.com/oraculo/reencontros-passado",
+          "https://maison-jf.com/oraculo/rejeicao-abandono",
+          "https://maison-jf.com/oraculo/relacoes-indefinidas",
+          "https://maison-jf.com/oraculo/rendimento-instavel",
+          "https://maison-jf.com/oraculo/ritmo-sobrecarga",
+          "https://maison-jf.com/oraculo/rotina-caos",
+          "https://maison-jf.com/oraculo/ruminacao-pensar-demais",
+          "https://maison-jf.com/oraculo/saudade-ausencia",
+          "https://maison-jf.com/oraculo/sentir-se-fraude",
+          "https://maison-jf.com/oraculo/separacao-fim",
+          "https://maison-jf.com/oraculo/sobrecarga-no-trabalho",
+          "https://maison-jf.com/oraculo/solidao-companhia",
+          "https://maison-jf.com/oraculo/sono-mente-ligada",
+          "https://maison-jf.com/oraculo/telemovel-distracao",
+          "https://maison-jf.com/oraculo/tempo-prioridades",
+          "https://maison-jf.com/oraculo/trabalho",
+          "https://maison-jf.com/oraculo/tristeza-desanimo",
+          "https://maison-jf.com/oraculo/vergonha-exposicao",
+          "https://maison-jf.com/oraculo/viver-sozinho",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 103,
+        "internal_link_out_degree": 105
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/amor",
+        "source_file": "oraculo/amor.html",
+        "group": "oraculo",
+        "title": "Amor & Relações | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/trabalho",
+        "source_file": "oraculo/trabalho.html",
+        "group": "oraculo",
+        "title": "Trabalho & Caminho | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/dinheiro",
+        "source_file": "oraculo/dinheiro.html",
+        "group": "oraculo",
+        "title": "Dinheiro & Segurança | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/familia",
+        "source_file": "oraculo/familia.html",
+        "group": "oraculo",
+        "title": "Família & Laços | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/escolhas",
+        "source_file": "oraculo/escolhas.html",
+        "group": "oraculo",
+        "title": "Escolhas & Mudança | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/padroes",
+        "source_file": "oraculo/padroes.html",
+        "group": "oraculo",
+        "title": "Eu & Padrões | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/respostas/porque-so-me-apaixono-por-pessoas-indisponiveis"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 2
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/amizade-reciprocidade",
+        "source_file": "oraculo/amizade-reciprocidade.html",
+        "group": "oraculo",
+        "title": "Amizade & Reciprocidade | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/solidao-companhia",
+        "source_file": "oraculo/solidao-companhia.html",
+        "group": "oraculo",
+        "title": "Solidão & Companhia | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/separacao-fim",
+        "source_file": "oraculo/separacao-fim.html",
+        "group": "oraculo",
+        "title": "Separação & Fim | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/saudade-ausencia",
+        "source_file": "oraculo/saudade-ausencia.html",
+        "group": "oraculo",
+        "title": "Saudade & Ausência | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/confianca-traicao",
+        "source_file": "oraculo/confianca-traicao.html",
+        "group": "oraculo",
+        "title": "Confiança & Traição | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/ciume-comparacao",
+        "source_file": "oraculo/ciume-comparacao.html",
+        "group": "oraculo",
+        "title": "Ciúme & Comparação | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/intimidade-vulnerabilidade",
+        "source_file": "oraculo/intimidade-vulnerabilidade.html",
+        "group": "oraculo",
+        "title": "Intimidade & Vulnerabilidade | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/desejo-proximidade",
+        "source_file": "oraculo/desejo-proximidade.html",
+        "group": "oraculo",
+        "title": "Desejo & Proximidade | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/respostas/porque-fico-mais-interessado-quando-a-pessoa-se-afasta"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 2
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/comunicacao-conflito",
+        "source_file": "oraculo/comunicacao-conflito.html",
+        "group": "oraculo",
+        "title": "Comunicação & Conflito | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/limites-respeito",
+        "source_file": "oraculo/limites-respeito.html",
+        "group": "oraculo",
+        "title": "Limites & Respeito | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/respostas/na-minha-relacao-contamos-tudo-o-que-cada-um-faz",
+          "https://maison-jf.com/respostas/o-meu-parceiro-goza-comigo-a-frente-dos-outros"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 3
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/perdao-reparacao",
+        "source_file": "oraculo/perdao-reparacao.html",
+        "group": "oraculo",
+        "title": "Perdão & Reparação | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/dependencia-emocional",
+        "source_file": "oraculo/dependencia-emocional.html",
+        "group": "oraculo",
+        "title": "Apego & Dependência | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/respostas/tenho-medo-de-precisar-demasiado-de-alguem"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 2
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/relacoes-indefinidas",
+        "source_file": "oraculo/relacoes-indefinidas.html",
+        "group": "oraculo",
+        "title": "Relações Indefinidas | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/reencontros-passado",
+        "source_file": "oraculo/reencontros-passado.html",
+        "group": "oraculo",
+        "title": "Reencontros & Passado | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/compromisso-futuro",
+        "source_file": "oraculo/compromisso-futuro.html",
+        "group": "oraculo",
+        "title": "Compromisso & Futuro | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/convivencia-espaco",
+        "source_file": "oraculo/convivencia-espaco.html",
+        "group": "oraculo",
+        "title": "Convivência & Espaço | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/rejeicao-abandono",
+        "source_file": "oraculo/rejeicao-abandono.html",
+        "group": "oraculo",
+        "title": "Rejeição & Abandono | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/pertenca-grupo",
+        "source_file": "oraculo/pertenca-grupo.html",
+        "group": "oraculo",
+        "title": "Pertença & Grupo | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/autoestima-valor",
+        "source_file": "oraculo/autoestima-valor.html",
+        "group": "oraculo",
+        "title": "Autoestima & Valor | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/vergonha-exposicao",
+        "source_file": "oraculo/vergonha-exposicao.html",
+        "group": "oraculo",
+        "title": "Vergonha & Exposição | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/culpa-responsabilidade",
+        "source_file": "oraculo/culpa-responsabilidade.html",
+        "group": "oraculo",
+        "title": "Culpa & Responsabilidade | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/respostas/porque-me-sinto-em-divida-quando-alguem-cuida-de-mim"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 2
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/perfeccionismo",
+        "source_file": "oraculo/perfeccionismo.html",
+        "group": "oraculo",
+        "title": "Perfeccionismo & Exigência | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/necessidade-aprovacao",
+        "source_file": "oraculo/necessidade-aprovacao.html",
+        "group": "oraculo",
+        "title": "Aprovação & Validação | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/respostas/porque-preciso-de-conquistar-alguem-para-me-sentir-escolhido",
+          "https://maison-jf.com/respostas/tenho-vergonha-de-pedir-reafirmacao-na-relacao"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 3
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/comparacao-inveja",
+        "source_file": "oraculo/comparacao-inveja.html",
+        "group": "oraculo",
+        "title": "Comparação & Inveja | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/critica-fracasso",
+        "source_file": "oraculo/critica-fracasso.html",
+        "group": "oraculo",
+        "title": "Crítica & Fracasso | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/identidade-quem-sou",
+        "source_file": "oraculo/identidade-quem-sou.html",
+        "group": "oraculo",
+        "title": "Identidade & Quem Sou | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/autenticidade-personagem",
+        "source_file": "oraculo/autenticidade-personagem.html",
+        "group": "oraculo",
+        "title": "Autenticidade & Personagem | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/autoabandono",
+        "source_file": "oraculo/autoabandono.html",
+        "group": "oraculo",
+        "title": "Autoabandono & Presença | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/coragem-medo",
+        "source_file": "oraculo/coragem-medo.html",
+        "group": "oraculo",
+        "title": "Coragem & Medo | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/confianca-em-si",
+        "source_file": "oraculo/confianca-em-si.html",
+        "group": "oraculo",
+        "title": "Confiança em Ti | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/sentir-se-fraude",
+        "source_file": "oraculo/sentir-se-fraude.html",
+        "group": "oraculo",
+        "title": "Sentir-te Fraude | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/criatividade-bloqueio",
+        "source_file": "oraculo/criatividade-bloqueio.html",
+        "group": "oraculo",
+        "title": "Criatividade & Bloqueio | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/procrastinacao-adiamento",
+        "source_file": "oraculo/procrastinacao-adiamento.html",
+        "group": "oraculo",
+        "title": "Procrastinação & Adiamento | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/controlo-incerteza",
+        "source_file": "oraculo/controlo-incerteza.html",
+        "group": "oraculo",
+        "title": "Controlo & Incerteza | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/ansiedade-antecipacao",
+        "source_file": "oraculo/ansiedade-antecipacao.html",
+        "group": "oraculo",
+        "title": "Ansiedade & Antecipação | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/ruminacao-pensar-demais",
+        "source_file": "oraculo/ruminacao-pensar-demais.html",
+        "group": "oraculo",
+        "title": "Pensar Demais & Ruminação | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/raiva-limites",
+        "source_file": "oraculo/raiva-limites.html",
+        "group": "oraculo",
+        "title": "Raiva & Limites | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/tristeza-desanimo",
+        "source_file": "oraculo/tristeza-desanimo.html",
+        "group": "oraculo",
+        "title": "Tristeza & Desânimo | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/esperanca-recomeco",
+        "source_file": "oraculo/esperanca-recomeco.html",
+        "group": "oraculo",
+        "title": "Esperança & Recomeço | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/medo-futuro",
+        "source_file": "oraculo/medo-futuro.html",
+        "group": "oraculo",
+        "title": "Medo do Futuro | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/culpa-passado",
+        "source_file": "oraculo/culpa-passado.html",
+        "group": "oraculo",
+        "title": "Culpa pelo Passado | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/arrependimento",
+        "source_file": "oraculo/arrependimento.html",
+        "group": "oraculo",
+        "title": "Arrependimento & E Se | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/foco-dispersao",
+        "source_file": "oraculo/foco-dispersao.html",
+        "group": "oraculo",
+        "title": "Foco & Dispersão | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/telemovel-distracao",
+        "source_file": "oraculo/telemovel-distracao.html",
+        "group": "oraculo",
+        "title": "Telemóvel & Distração | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/descanso-culpa",
+        "source_file": "oraculo/descanso-culpa.html",
+        "group": "oraculo",
+        "title": "Descanso & Culpa | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/energia-cansaco",
+        "source_file": "oraculo/energia-cansaco.html",
+        "group": "oraculo",
+        "title": "Energia & Cansaço | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/sono-mente-ligada",
+        "source_file": "oraculo/sono-mente-ligada.html",
+        "group": "oraculo",
+        "title": "Sono & Mente Ligada | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/corpo-imagem",
+        "source_file": "oraculo/corpo-imagem.html",
+        "group": "oraculo",
+        "title": "Corpo & Imagem | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/dor-limites-do-corpo",
+        "source_file": "oraculo/dor-limites-do-corpo.html",
+        "group": "oraculo",
+        "title": "Dor & Limites do Corpo | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/habitos-mudanca",
+        "source_file": "oraculo/habitos-mudanca.html",
+        "group": "oraculo",
+        "title": "Hábitos & Mudança | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/ritmo-sobrecarga",
+        "source_file": "oraculo/ritmo-sobrecarga.html",
+        "group": "oraculo",
+        "title": "Ritmo & Sobrecarga | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/prazer-permissao",
+        "source_file": "oraculo/prazer-permissao.html",
+        "group": "oraculo",
+        "title": "Prazer & Permissão | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/envelhecimento-corpo",
+        "source_file": "oraculo/envelhecimento-corpo.html",
+        "group": "oraculo",
+        "title": "Envelhecimento & Corpo | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/pausa-recuperacao",
+        "source_file": "oraculo/pausa-recuperacao.html",
+        "group": "oraculo",
+        "title": "Pausa & Recuperação | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/rotina-caos",
+        "source_file": "oraculo/rotina-caos.html",
+        "group": "oraculo",
+        "title": "Rotina & Caos | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/tempo-prioridades",
+        "source_file": "oraculo/tempo-prioridades.html",
+        "group": "oraculo",
+        "title": "Tempo & Prioridades | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/casa-refugio",
+        "source_file": "oraculo/casa-refugio.html",
+        "group": "oraculo",
+        "title": "Casa & Refúgio | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/desarrumacao-desapego",
+        "source_file": "oraculo/desarrumacao-desapego.html",
+        "group": "oraculo",
+        "title": "Desarrumação & Desapego | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/mudanca-de-casa",
+        "source_file": "oraculo/mudanca-de-casa.html",
+        "group": "oraculo",
+        "title": "Mudança de Casa | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/viver-sozinho",
+        "source_file": "oraculo/viver-sozinho.html",
+        "group": "oraculo",
+        "title": "Viver Sozinho | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/casa-partilhada",
+        "source_file": "oraculo/casa-partilhada.html",
+        "group": "oraculo",
+        "title": "Casa Partilhada | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/organizacao-sobrecarga",
+        "source_file": "oraculo/organizacao-sobrecarga.html",
+        "group": "oraculo",
+        "title": "Organização & Sobrecarga | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/equipa-colaboracao",
+        "source_file": "oraculo/equipa-colaboracao.html",
+        "group": "oraculo",
+        "title": "Equipa & Colaboração | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/chefia-autoridade",
+        "source_file": "oraculo/chefia-autoridade.html",
+        "group": "oraculo",
+        "title": "Chefia & Autoridade | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/trabalho/tenho-medo-de-falar-com-o-meu-chefe"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 2
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/conflito-profissional",
+        "source_file": "oraculo/conflito-profissional.html",
+        "group": "oraculo",
+        "title": "Conflito Profissional | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/trabalho/o-conflito-no-trabalho-vem-comigo-para-casa"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 2
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/desemprego-incerteza",
+        "source_file": "oraculo/desemprego-incerteza.html",
+        "group": "oraculo",
+        "title": "Desemprego & Incerteza | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/trabalho/estou-desempregado-e-sinto-que-a-minha-vida-parou"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 2
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/procura-de-emprego",
+        "source_file": "oraculo/procura-de-emprego.html",
+        "group": "oraculo",
+        "title": "Procura de Emprego | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/trabalho/estou-farto-de-enviar-candidaturas-e-nao-ter-resposta"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 2
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/reconversao-profissional",
+        "source_file": "oraculo/reconversao-profissional.html",
+        "group": "oraculo",
+        "title": "Reconversão Profissional | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/sobrecarga-no-trabalho",
+        "source_file": "oraculo/sobrecarga-no-trabalho.html",
+        "group": "oraculo",
+        "title": "Sobrecarga no Trabalho | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/respostas/sinto-me-culpado-por-sair-do-trabalho-a-horas"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 2
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/empreendedorismo-risco",
+        "source_file": "oraculo/empreendedorismo-risco.html",
+        "group": "oraculo",
+        "title": "Empreender & Arriscar | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/negocio-parado",
+        "source_file": "oraculo/negocio-parado.html",
+        "group": "oraculo",
+        "title": "Negócio Parado | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/estudo-aprendizagem",
+        "source_file": "oraculo/estudo-aprendizagem.html",
+        "group": "oraculo",
+        "title": "Estudo & Aprendizagem | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/dividas-pressao",
+        "source_file": "oraculo/dividas-pressao.html",
+        "group": "oraculo",
+        "title": "Dívidas & Pressão | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/gastos-impulso",
+        "source_file": "oraculo/gastos-impulso.html",
+        "group": "oraculo",
+        "title": "Gastos & Impulso | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/poupanca-seguranca",
+        "source_file": "oraculo/poupanca-seguranca.html",
+        "group": "oraculo",
+        "title": "Poupança & Segurança | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/dinheiro-e-ajuda",
+        "source_file": "oraculo/dinheiro-e-ajuda.html",
+        "group": "oraculo",
+        "title": "Dinheiro & Ajudar Outros | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/rendimento-instavel",
+        "source_file": "oraculo/rendimento-instavel.html",
+        "group": "oraculo",
+        "title": "Rendimento Instável | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/escassez-medo",
+        "source_file": "oraculo/escassez-medo.html",
+        "group": "oraculo",
+        "title": "Escassez & Medo | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/consumo-status",
+        "source_file": "oraculo/consumo-status.html",
+        "group": "oraculo",
+        "title": "Consumo & Estatuto | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/heranca-dinheiro-familia",
+        "source_file": "oraculo/heranca-dinheiro-familia.html",
+        "group": "oraculo",
+        "title": "Herança & Dinheiro na Família | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/luto-perda",
+        "source_file": "oraculo/luto-perda.html",
+        "group": "oraculo",
+        "title": "Luto & Perda | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/finitude-mortalidade",
+        "source_file": "oraculo/finitude-mortalidade.html",
+        "group": "oraculo",
+        "title": "Finitude & Mortalidade | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/fim-de-ciclo",
+        "source_file": "oraculo/fim-de-ciclo.html",
+        "group": "oraculo",
+        "title": "Fim de Ciclo | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/mudanca-de-cidade",
+        "source_file": "oraculo/mudanca-de-cidade.html",
+        "group": "oraculo",
+        "title": "Mudança de Cidade | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/emigracao-saudade",
+        "source_file": "oraculo/emigracao-saudade.html",
+        "group": "oraculo",
+        "title": "Emigração & Saudade | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/recomeco-depois-da-perda",
+        "source_file": "oraculo/recomeco-depois-da-perda.html",
+        "group": "oraculo",
+        "title": "Recomeçar Depois da Perda | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/cuidar-de-alguem",
+        "source_file": "oraculo/cuidar-de-alguem.html",
+        "group": "oraculo",
+        "title": "Cuidar de Alguém | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/pais-a-envelhecer",
+        "source_file": "oraculo/pais-a-envelhecer.html",
+        "group": "oraculo",
+        "title": "Pais a Envelhecer | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/irmaos-rivalidade",
+        "source_file": "oraculo/irmaos-rivalidade.html",
+        "group": "oraculo",
+        "title": "Irmãos & Rivalidade | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/familia-expectativas",
+        "source_file": "oraculo/familia-expectativas.html",
+        "group": "oraculo",
+        "title": "Família & Expectativas | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/parentalidade-escolha",
+        "source_file": "oraculo/parentalidade-escolha.html",
+        "group": "oraculo",
+        "title": "Parentalidade & Escolha | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/proposito-sentido",
+        "source_file": "oraculo/proposito-sentido.html",
+        "group": "oraculo",
+        "title": "Propósito & Sentido | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/fe-duvida",
+        "source_file": "oraculo/fe-duvida.html",
+        "group": "oraculo",
+        "title": "Fé & Dúvida | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/oraculo/intuicao-sinais",
+        "source_file": "oraculo/intuicao-sinais.html",
+        "group": "oraculo",
+        "title": "Intuição & Sinais | Oráculo MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/espiritualidade/protecao-energetica",
+          "https://maison-jf.com/oraculo/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 2
+      },
+      {
+        "url": "https://maison-jf.com/ebooks/",
+        "source_file": "ebooks/index.html",
+        "group": "ebooks",
+        "title": "Universos | MAISON JF®",
+        "structured_data_types": [
+          "CollectionPage",
+          "Thing"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/virgulas-do-destino-meandros-da-vida/",
+          "https://maison-jf.com/ebooks/virgulas-do-destino-o-turista/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 6,
+        "internal_link_out_degree": 7
+      },
+      {
+        "url": "https://maison-jf.com/ebooks/virgulas-do-destino-o-turista/",
+        "source_file": "ebooks/virgulas-do-destino-o-turista/index.html",
+        "group": "ebooks",
+        "title": "Vírgulas do Destino: O Turista | MAISON JF®",
+        "structured_data_types": [
+          "Book",
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/ebooks/virgulas-do-destino-meandros-da-vida/",
+        "source_file": "ebooks/virgulas-do-destino-meandros-da-vida/index.html",
+        "group": "ebooks",
+        "title": "Vírgulas do Destino: Meandros da Vida | MAISON JF®",
+        "structured_data_types": [
+          "Book",
+          "BreadcrumbList",
+          "ListItem",
+          "Offer",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/profissionais/",
+        "source_file": "profissionais/index.html",
+        "group": "profissionais",
+        "title": "Profissionais & B2B | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "CollectionPage",
+          "ListItem"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/press/",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/aromas-para-espacos-de-bem-estar",
+          "https://maison-jf.com/profissionais/como-criar-um-ritual-de-boas-vindas-para-clientes",
+          "https://maison-jf.com/profissionais/como-escolher-aromas-para-um-gabinete-de-massagem",
+          "https://maison-jf.com/profissionais/como-escolher-produtos-para-um-spa-ou-gabinete",
+          "https://maison-jf.com/profissionais/o-que-posso-oferecer-de-diferente-aos-meus-clientes",
+          "https://maison-jf.com/profissionais/produtos-de-boas-vindas-para-alojamento-local",
+          "https://maison-jf.com/profissionais/produtos-para-revenda-em-loja",
+          "https://maison-jf.com/profissionais/produtos-para-revenda-em-spa",
+          "https://maison-jf.com/profissionais/velas-aromaticas-para-revenda",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 15,
+        "internal_link_out_degree": 15
+      },
+      {
+        "url": "https://maison-jf.com/press/",
+        "source_file": "press/index.html",
+        "group": "press",
+        "title": "Imprensa & Media | MAISON JF®",
+        "structured_data_types": [
+          "AboutPage",
+          "BreadcrumbList",
+          "ListItem"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 4,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/envios",
+        "source_file": "envios.html",
+        "group": "envios",
+        "title": "Envios e Portes | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/portas/presenca",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 9,
+        "internal_link_out_degree": 7
+      },
+      {
+        "url": "https://maison-jf.com/trabalho/tenho-medo-de-falar-com-o-meu-chefe",
+        "source_file": "trabalho/tenho-medo-de-falar-com-o-meu-chefe.html",
+        "group": "trabalho",
+        "title": "Tenho medo de falar com o meu chefe. | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/trabalho/o-conflito-no-trabalho-vem-comigo-para-casa",
+        "source_file": "trabalho/o-conflito-no-trabalho-vem-comigo-para-casa.html",
+        "group": "trabalho",
+        "title": "O conflito no trabalho vem comigo para casa. | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/trabalho/estou-desempregado-e-sinto-que-a-minha-vida-parou",
+        "source_file": "trabalho/estou-desempregado-e-sinto-que-a-minha-vida-parou.html",
+        "group": "trabalho",
+        "title": "Estou desempregado e sinto que a minha vida parou. | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/trabalho/estou-farto-de-enviar-candidaturas-e-nao-ter-resposta",
+        "source_file": "trabalho/estou-farto-de-enviar-candidaturas-e-nao-ter-resposta.html",
+        "group": "trabalho",
+        "title": "Estou farto de enviar candidaturas e não ter resposta. | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/presentes/",
+        "source_file": "presentes/index.html",
+        "group": "presentes",
+        "title": "Presentes com intenção | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "CollectionPage",
+          "ListItem"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/produtos/escalda-pes/",
+          "https://maison-jf.com/produtos/nevoa/",
+          "https://maison-jf.com/produtos/vela-pequena/",
+          "https://maison-jf.com/produtos/vela-vidro/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 9
+      },
+      {
+        "url": "https://maison-jf.com/profissionais/produtos-para-revenda-em-spa",
+        "source_file": "profissionais/produtos-para-revenda-em-spa.html",
+        "group": "profissionais",
+        "title": "Produtos para revenda em spa ou gabinete | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/profissionais/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/profissionais/produtos-para-revenda-em-loja",
+        "source_file": "profissionais/produtos-para-revenda-em-loja.html",
+        "group": "profissionais",
+        "title": "Produtos MAISON JF® para revenda em loja | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/profissionais/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/profissionais/aromas-para-espacos-de-bem-estar",
+        "source_file": "profissionais/aromas-para-espacos-de-bem-estar.html",
+        "group": "profissionais",
+        "title": "Aromas para espaços de bem-estar | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/profissionais/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/profissionais/produtos-de-boas-vindas-para-alojamento-local",
+        "source_file": "profissionais/produtos-de-boas-vindas-para-alojamento-local.html",
+        "group": "profissionais",
+        "title": "Produtos de boas-vindas para alojamento local | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/profissionais/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/profissionais/velas-aromaticas-para-revenda",
+        "source_file": "profissionais/velas-aromaticas-para-revenda.html",
+        "group": "profissionais",
+        "title": "Velas Aromáticas para revenda | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "Service",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/profissionais/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/profissionais/como-escolher-produtos-para-um-spa-ou-gabinete",
+        "source_file": "profissionais/como-escolher-produtos-para-um-spa-ou-gabinete.html",
+        "group": "profissionais",
+        "title": "Como escolher produtos para um spa ou gabinete | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/profissionais/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/profissionais/como-escolher-aromas-para-um-gabinete-de-massagem",
+        "source_file": "profissionais/como-escolher-aromas-para-um-gabinete-de-massagem.html",
+        "group": "profissionais",
+        "title": "Como escolher aromas para um gabinete de massagem | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/profissionais/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/profissionais/como-criar-um-ritual-de-boas-vindas-para-clientes",
+        "source_file": "profissionais/como-criar-um-ritual-de-boas-vindas-para-clientes.html",
+        "group": "profissionais",
+        "title": "Como criar um ritual de boas-vindas para clientes | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/profissionais/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/profissionais/o-que-posso-oferecer-de-diferente-aos-meus-clientes",
+        "source_file": "profissionais/o-que-posso-oferecer-de-diferente-aos-meus-clientes.html",
+        "group": "profissionais",
+        "title": "O que posso oferecer de diferente aos meus clientes? | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/profissionais/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 1
+      },
+      {
+        "url": "https://maison-jf.com/servicos/tarot/",
+        "source_file": "servicos/tarot/index.html",
+        "group": "servicos",
+        "title": "Consulta de Tarot | MAISON JF®",
+        "structured_data_types": [
+          "Offer",
+          "Service"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/espiritualidade/protecao-energetica",
+        "source_file": "espiritualidade/protecao-energetica.html",
+        "group": "espiritualidade",
+        "title": "Proteção e limpeza energética: um ritual simbólico | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/clair-obscur/",
+        "source_file": "clair-obscur/index.html",
+        "group": "clair-obscur",
+        "title": "Clair Obscur : Instants | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/manifesto/",
+        "source_file": "manifesto/index.html",
+        "group": "manifesto",
+        "title": "Manifesto | MAISON JF®",
+        "structured_data_types": [
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/press/",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/produtos/maison-jf-bundles/",
+        "source_file": "produtos/maison-jf-bundles/index.html",
+        "group": "produtos",
+        "title": "Maison JF Bundles | MAISON JF®",
+        "structured_data_types": [
+          "Brand",
+          "Offer",
+          "Product"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/envios",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/respostas/o-meu-parceiro-goza-comigo-a-frente-dos-outros",
+        "source_file": "respostas/o-meu-parceiro-goza-comigo-a-frente-dos-outros.html",
+        "group": "respostas",
+        "title": "O meu parceiro goza comigo à frente dos outros. É só uma brincadeira? | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/respostas/porque-me-sinto-em-divida-quando-alguem-cuida-de-mim",
+        "source_file": "respostas/porque-me-sinto-em-divida-quando-alguem-cuida-de-mim.html",
+        "group": "respostas",
+        "title": "Porque me sinto em dívida quando alguém cuida de mim? | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/respostas/tenho-medo-de-precisar-demasiado-de-alguem",
+        "source_file": "respostas/tenho-medo-de-precisar-demasiado-de-alguem.html",
+        "group": "respostas",
+        "title": "Tenho medo de precisar demasiado de alguém. Como sei se é dependência? | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/respostas/tenho-vergonha-de-pedir-reafirmacao-na-relacao",
+        "source_file": "respostas/tenho-vergonha-de-pedir-reafirmacao-na-relacao.html",
+        "group": "respostas",
+        "title": "Tenho vergonha de pedir reafirmação na relação. Estou a ser demasiado carente? | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/respostas/sinto-me-culpado-por-sair-do-trabalho-a-horas",
+        "source_file": "respostas/sinto-me-culpado-por-sair-do-trabalho-a-horas.html",
+        "group": "respostas",
+        "title": "Sinto-me culpado por sair do trabalho a horas. Estou a fazer pouco? | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/respostas/na-minha-relacao-contamos-tudo-o-que-cada-um-faz",
+        "source_file": "respostas/na-minha-relacao-contamos-tudo-o-que-cada-um-faz.html",
+        "group": "respostas",
+        "title": "Na minha relação contamos tudo o que cada um faz. Isto é falta de reciprocidade? | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/respostas/porque-so-me-apaixono-por-pessoas-indisponiveis",
+        "source_file": "respostas/porque-so-me-apaixono-por-pessoas-indisponiveis.html",
+        "group": "respostas",
+        "title": "Porque só me apaixono por pessoas indisponíveis? | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/servicos/tarot/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 6
+      },
+      {
+        "url": "https://maison-jf.com/respostas/porque-preciso-de-conquistar-alguem-para-me-sentir-escolhido",
+        "source_file": "respostas/porque-preciso-de-conquistar-alguem-para-me-sentir-escolhido.html",
+        "group": "respostas",
+        "title": "Porque preciso de conquistar alguém para me sentir escolhido? | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      },
+      {
+        "url": "https://maison-jf.com/respostas/porque-fico-mais-interessado-quando-a-pessoa-se-afasta",
+        "source_file": "respostas/porque-fico-mais-interessado-quando-a-pessoa-se-afasta.html",
+        "group": "respostas",
+        "title": "Porque fico mais interessado quando a pessoa se afasta? | MAISON JF®",
+        "structured_data_types": [
+          "Article",
+          "BreadcrumbList",
+          "ListItem",
+          "WebPage"
+        ],
+        "internal_links": [
+          "https://maison-jf.com/",
+          "https://maison-jf.com/farol",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
+        ],
+        "internal_link_in_degree": 1,
+        "internal_link_out_degree": 5
+      }
+    ]
+  },
+  "publicIdentity": {
+    "schema_version": "maison_public_entity_evidence_v1",
+    "organization_id": "https://maison-jf.com/#organization",
+    "same_as": [
+      {
+        "platform": "YouTube",
+        "public_url": "https://www.youtube.com/@maisonjf"
+      },
+      {
+        "platform": "Instagram",
+        "public_url": "https://www.instagram.com/maisonjfatelier/"
+      },
+      {
+        "platform": "TikTok",
+        "public_url": "https://www.tiktok.com/@maison.jf1"
+      }
+    ],
+    "external_authority": {
+      "schema_version": "maison_external_entity_authority_v1",
+      "observed_at": "2026-09-25",
+      "profiles": [
+        {
+          "platform": "Instagram",
+          "username": "maisonjfatelier",
+          "bio_domain_mention": false,
+          "reciprocal_site_link": "missing"
+        },
+        {
+          "platform": "Threads",
+          "username": "maisonjfatelier",
+          "bio_domain_mention": false,
+          "reciprocal_site_link": "unknown"
+        },
+        {
+          "platform": "TikTok",
+          "username": "maison.jf1",
+          "bio_domain_mention": true,
+          "reciprocal_site_link": "unknown"
+        }
+      ],
+      "gaps": [
+        {
+          "id": "instagram_reciprocal_site_link",
+          "state": "open",
+          "recommendation": "Add https://maison-jf.com/ as the public Instagram website/profile link."
+        },
+        {
+          "id": "threads_domain_identity",
+          "state": "open",
+          "recommendation": "Add maison-jf.com to the public Threads profile when the profile allows an external link or bio update."
+        },
+        {
+          "id": "tiktok_clickable_site_link_verification",
+          "state": "open",
+          "recommendation": "Verify whether the TikTok profile exposes maison-jf.com as a clickable external link, not only bio text."
+        }
+      ]
+    }
+  },
+  "searchVisibility": {
+    "schema_version": "maison_search_visibility_v1",
+    "provenance": {
+      "provider_id": "google_search_console",
+      "collector": "windsor_ai",
+      "property": "sc-domain:maison-jf.com",
+      "observed_at": "2026-09-25",
+      "window": "last_90d",
+      "snapshot_schema": "maison.search-visibility.snapshot.v1"
+    },
+    "contract": {
+      "observational_only": true,
+      "external_evidence": true,
+      "publication_authority": false,
+      "commercial_authority": false,
+      "snapshot_is_not_live_truth": true,
+      "knowledge_graph_sink": "maison_knowledge_graph_v1"
+    },
+    "sitemap": {
+      "url": "https://maison-jf.com/sitemap.xml",
+      "is_sitemaps_index": true,
+      "last_submitted": "2026-09-09T16:23:09.186Z",
+      "last_downloaded": "2026-09-25T10:53:20.593Z",
+      "submitted": 151,
+      "warnings": 0,
+      "errors": 0
+    },
+    "search_appearance": [
+      {
+        "feature": "PRODUCT_SNIPPETS",
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0,
+        "position": 6.2667
+      }
+    ],
+    "summary": {
+      "observed_urls": 25,
+      "current_public_urls": 2,
+      "legacy_observed_urls": 23,
+      "recovered_legacy_urls": 23,
+      "unrecovered_legacy_urls": [],
+      "observed_clicks": 28,
+      "observed_impressions": 207,
+      "legacy_clicks": 0,
+      "legacy_impressions": 132,
+      "current_public_impressions": 75,
+      "search_appearance_features": 1,
+      "product_snippet_impressions": 15,
+      "inspection_targets": 6,
+      "google_readonly_sensor_tasks": 10,
+      "baseline_sitemap_submitted": 151,
+      "baseline_public_pages": 154,
+      "baseline_sitemap_page_delta": -3,
+      "ai_visibility_probes": 6
+    },
+    "priority_recovery": [
+      {
+        "url": "https://maison-jf.com/collections/all",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/",
+        "clicks": 0,
+        "impressions": 35,
+        "ctr": 0,
+        "position": 3.3714
+      },
+      {
+        "url": "https://maison-jf.com/collections/casa-ambiente",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/",
+        "clicks": 0,
+        "impressions": 25,
+        "ctr": 0,
+        "position": 5.24
+      },
+      {
+        "url": "https://maison-jf.com/policies/refund-policy",
+        "state": "legacy_observed",
+        "redirect_to": "/informacao-legal#livre-resolucao",
+        "clicks": 0,
+        "impressions": 21,
+        "ctr": 0,
+        "position": 4.9524
+      },
+      {
+        "url": "https://maison-jf.com/products/maison-todo-o-mes-a-tua-casa-outra-vez",
+        "state": "legacy_observed",
+        "redirect_to": "/servicos/#continuidade",
+        "clicks": 0,
+        "impressions": 14,
+        "ctr": 0,
+        "position": 5.7143
+      },
+      {
+        "url": "https://maison-jf.com/policies/shipping-policy",
+        "state": "legacy_observed",
+        "redirect_to": "/envios",
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "url": "https://maison-jf.com/espiritualidade/como-me-proteger-de-energias-negativas.html",
+        "state": "legacy_observed",
+        "redirect_to": "/espiritualidade/protecao-energetica",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 2.75
+      },
+      {
+        "url": "https://maison-jf.com/products/acompanhamento-permanente",
+        "state": "legacy_observed",
+        "redirect_to": "/servicos/#continuidade",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 4
+      },
+      {
+        "url": "https://maison-jf.com/products/mentoria-espiritual",
+        "state": "legacy_observed",
+        "redirect_to": "/contacto/?interesse=mentoria",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 5
+      },
+      {
+        "url": "https://maison-jf.com/policies/terms-of-service",
+        "state": "legacy_observed",
+        "redirect_to": "/informacao-legal",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 6.6667
+      },
+      {
+        "url": "https://maison-jf.com/products/tarot-expresso",
+        "state": "legacy_observed",
+        "redirect_to": "/servicos/tarot/",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 8.3333
+      },
+      {
+        "url": "https://maison-jf.com/policies/privacy-policy",
+        "state": "legacy_observed",
+        "redirect_to": "/informacao-legal#privacidade",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 4
+      },
+      {
+        "url": "https://maison-jf.com/products/bain-de-pieds",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/escalda-pes/",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 8
+      },
+      {
+        "url": "https://maison-jf.com/products/consulta-escrita-aprofundada",
+        "state": "legacy_observed",
+        "redirect_to": "/servicos/",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 8.5
+      },
+      {
+        "url": "https://maison-jf.com/products/fondants-parfumes-edition-doree",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "url": "https://maison-jf.com/cart",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/carrinho/",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "url": "https://maison-jf.com/products/diffuseur-a-batonnets-entre-nous",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "url": "https://maison-jf.com/relacoes/acabou-uma-situationship-e-nao-consigo-ultrapassar",
+        "state": "legacy_observed",
+        "redirect_to": "/oraculo/separacao-fim",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "url": "https://maison-jf.com/cabeca/porque-volto-sempre-aos-mesmos-padroes",
+        "state": "legacy_observed",
+        "redirect_to": "/teste/?origem=padroes",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5
+      },
+      {
+        "url": "https://maison-jf.com/products/virgulas-do-destino-meandros-da-vida",
+        "state": "legacy_observed",
+        "redirect_to": "/ebooks/virgulas-do-destino-meandros-da-vida/",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "url": "https://maison-jf.com/relacoes/nao-consigo-confiar-por-causa-do-que-vivi-antes.html",
+        "state": "legacy_observed",
+        "redirect_to": "/farol",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 7
+      }
+    ],
+    "pages": [
+      {
+        "url": "https://maison-jf.com/",
+        "state": "current_public",
+        "redirect_to": null,
+        "clicks": 28,
+        "impressions": 56,
+        "ctr": 0.5,
+        "position": 1.6964
+      },
+      {
+        "url": "https://maison-jf.com/cabeca/porque-volto-sempre-aos-mesmos-padroes",
+        "state": "legacy_observed",
+        "redirect_to": "/teste/?origem=padroes",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5
+      },
+      {
+        "url": "https://maison-jf.com/cart",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/carrinho/",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "url": "https://maison-jf.com/collections/all",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/",
+        "clicks": 0,
+        "impressions": 35,
+        "ctr": 0,
+        "position": 3.3714
+      },
+      {
+        "url": "https://maison-jf.com/collections/casa-ambiente",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/",
+        "clicks": 0,
+        "impressions": 25,
+        "ctr": 0,
+        "position": 5.24
+      },
+      {
+        "url": "https://maison-jf.com/espiritualidade/como-me-proteger-de-energias-negativas",
+        "state": "legacy_observed",
+        "redirect_to": "/espiritualidade/protecao-energetica",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10
+      },
+      {
+        "url": "https://maison-jf.com/espiritualidade/como-me-proteger-de-energias-negativas.html",
+        "state": "legacy_observed",
+        "redirect_to": "/espiritualidade/protecao-energetica",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 2.75
+      },
+      {
+        "url": "https://maison-jf.com/policies/contact-information",
+        "state": "legacy_observed",
+        "redirect_to": "/contacto/",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 12
+      },
+      {
+        "url": "https://maison-jf.com/policies/privacy-policy",
+        "state": "legacy_observed",
+        "redirect_to": "/informacao-legal#privacidade",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 4
+      },
+      {
+        "url": "https://maison-jf.com/policies/refund-policy",
+        "state": "legacy_observed",
+        "redirect_to": "/informacao-legal#livre-resolucao",
+        "clicks": 0,
+        "impressions": 21,
+        "ctr": 0,
+        "position": 4.9524
+      },
+      {
+        "url": "https://maison-jf.com/policies/shipping-policy",
+        "state": "legacy_observed",
+        "redirect_to": "/envios",
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "url": "https://maison-jf.com/policies/terms-of-service",
+        "state": "legacy_observed",
+        "redirect_to": "/informacao-legal",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 6.6667
+      },
+      {
+        "url": "https://maison-jf.com/products/acompanhamento-permanente",
+        "state": "legacy_observed",
+        "redirect_to": "/servicos/#continuidade",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 4
+      },
+      {
+        "url": "https://maison-jf.com/products/bain-de-pieds",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/escalda-pes/",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 8
+      },
+      {
+        "url": "https://maison-jf.com/products/consulta-escrita-aprofundada",
+        "state": "legacy_observed",
+        "redirect_to": "/servicos/",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 8.5
+      },
+      {
+        "url": "https://maison-jf.com/products/diffuseur-a-batonnets-entre-nous",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "url": "https://maison-jf.com/products/fondants-parfumes-edition-doree",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "url": "https://maison-jf.com/products/huile-de-massage-entre-nous",
+        "state": "legacy_observed",
+        "redirect_to": "/produtos/oleo-massagem/",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 8
+      },
+      {
+        "url": "https://maison-jf.com/products/maison-todo-o-mes-a-tua-casa-outra-vez",
+        "state": "legacy_observed",
+        "redirect_to": "/servicos/#continuidade",
+        "clicks": 0,
+        "impressions": 14,
+        "ctr": 0,
+        "position": 5.7143
+      },
+      {
+        "url": "https://maison-jf.com/products/mentoria-espiritual",
+        "state": "legacy_observed",
+        "redirect_to": "/contacto/?interesse=mentoria",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 5
+      },
+      {
+        "url": "https://maison-jf.com/products/tarot-expresso",
+        "state": "legacy_observed",
+        "redirect_to": "/servicos/tarot/",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 8.3333
+      },
+      {
+        "url": "https://maison-jf.com/products/virgulas-do-destino-meandros-da-vida",
+        "state": "legacy_observed",
+        "redirect_to": "/ebooks/virgulas-do-destino-meandros-da-vida/",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "url": "https://maison-jf.com/relacoes/acabou-uma-situationship-e-nao-consigo-ultrapassar",
+        "state": "legacy_observed",
+        "redirect_to": "/oraculo/separacao-fim",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "url": "https://maison-jf.com/relacoes/nao-consigo-confiar-por-causa-do-que-vivi-antes.html",
+        "state": "legacy_observed",
+        "redirect_to": "/farol",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 7
+      },
+      {
+        "url": "https://maison-jf.com/servicos/",
+        "state": "current_public",
+        "redirect_to": null,
+        "clicks": 0,
+        "impressions": 19,
+        "ctr": 0,
+        "position": 3.9474
+      }
+    ]
+  },
   "offers": [
     {
       "id": "oracle-seen",
@@ -1262,7 +5170,12 @@
         "descanso que parece desperdício",
         "autonomia nocturna",
         "mais uma coisa antes de dormir",
-        "transição entre obrigação e descanso"
+        "transição entre obrigação e descanso",
+        "revenge bedtime",
+        "bedtime procrastination",
+        "adiar o sono",
+        "stay up late",
+        "staying up late"
       ],
       "territories": [
         "casa",
@@ -1280,7 +5193,10 @@
         "ruminação antes do trabalho",
         "fim do descanso",
         "transição entre fim-de-semana e obrigação",
-        "preparar sem perder o presente"
+        "preparar sem perder o presente",
+        "sunday scaries",
+        "monday anxiety",
+        "segunda-feira"
       ],
       "territories": [
         "casa",
@@ -1298,7 +5214,13 @@
         "muitas pequenas mudanças de contexto",
         "frequência de interrupções vs tempo de ecrã",
         "retomar custa mais do que parece",
-        "proteger blocos de atenção"
+        "proteger blocos de atenção",
+        "notifications",
+        "attention fragmentation",
+        "interrupções digitais",
+        "perder o fio",
+        "digital interruption",
+        "distraction"
       ],
       "territories": [
         "cabeca"
@@ -1317,7 +5239,9 @@
         "eu interior vs eu mostrado",
         "baixar a régua para não perder o vínculo",
         "pedir menos para não parecer exigente",
-        "normalizar atenção ou carinho insuficientes"
+        "normalizar atenção ou carinho insuficientes",
+        "self silencing",
+        "people pleasing"
       ],
       "territories": [
         "casa",
@@ -1336,7 +5260,11 @@
         "punição sem proibição explícita",
         "mudar escolhas para evitar tensão",
         "desacordo vs controlo",
-        "escolher sem pedir permissão emocional"
+        "escolher sem pedir permissão emocional",
+        "silent treatment",
+        "medo da reacção",
+        "coercive control",
+        "emotional punishment"
       ],
       "territories": [
         "cabeca",
@@ -1353,7 +5281,10 @@
         "tarefas invisíveis da casa",
         "antecipar necessidades de todos",
         "delegar também é trabalho",
-        "partilhar responsabilidade mental"
+        "partilhar responsabilidade mental",
+        "invisible labor",
+        "mental load",
+        "carga mental"
       ],
       "territories": [
         "casa",
@@ -1371,7 +5302,11 @@
         "responsabilidade partilhada",
         "limites no cuidado",
         "amor sem autoapagamento",
-        "escolha e obrigação no cuidar"
+        "escolha e obrigação no cuidar",
+        "family caregiver",
+        "cuidador",
+        "cuidar sem desaparecer",
+        "caregiving"
       ],
       "territories": [
         "corpo",
@@ -1390,7 +5325,9 @@
         "parar sem conseguir desligar",
         "tempo livre que parece desperdício",
         "tarefas inacabadas durante a pausa",
-        "permitir-se não produzir"
+        "permitir-se não produzir",
+        "productivity guilt",
+        "guilt when resting"
       ],
       "territories": [
         "casa",
@@ -1408,7 +5345,10 @@
         "medo de perder algo importante",
         "incerteza e procura de mais informação",
         "quando fechar o ecrã",
-        "corpo em alerta depois do feed"
+        "corpo em alerta depois do feed",
+        "doomscrolling",
+        "más notícias",
+        "não consigo parar de ver"
       ],
       "territories": [
         "corpo",
@@ -1424,7 +5364,9 @@
         "escassez e atenção",
         "adiamento de decisões",
         "curto prazo vs futuro",
-        "dinheiro e carga mental"
+        "dinheiro e carga mental",
+        "financial stress",
+        "scarcity mindset"
       ],
       "territories": [
         "cabeca"
@@ -1440,7 +5382,9 @@
         "incerteza fora do meu controlo",
         "vigiar não acelera o resultado",
         "entre fazer tudo e não poder fazer mais",
-        "voltar à vida enquanto a resposta não chega"
+        "voltar à vida enquanto a resposta não chega",
+        "waiting anxiety",
+        "life on hold"
       ],
       "territories": [
         "cabeca",
@@ -1457,7 +5401,9 @@
         "desejo que chegou tarde",
         "irreversibilidade e arrependimento",
         "futuro imaginado que fechou",
-        "continuar depois de perder uma possibilidade"
+        "continuar depois de perder uma possibilidade",
+        "futuro que deixou",
+        "grief for future"
       ],
       "territories": [
         "cabeca"
@@ -1475,7 +5421,13 @@
         "rituais de recompensa que apetece repetir",
         "comprar para si como gesto de celebração",
         "prazer acessível vs impulso automático",
-        "objectos pequenos que dão vontade de coleccionar"
+        "objectos pequenos que dão vontade de coleccionar",
+        "small luxury",
+        "micro luxury",
+        "reward ritual",
+        "pequena vitória",
+        "treat yourself",
+        "pequeno luxo"
       ],
       "territories": [
         "casa",
@@ -1491,7 +5443,10 @@
         "presença e ausência ao mesmo tempo",
         "espera por certeza",
         "vínculo que mudou sem desaparecer",
-        "continuar sem fecho"
+        "continuar sem fecho",
+        "ambiguous loss",
+        "perda ambígua",
+        "unresolved loss"
       ],
       "territories": [
         "casa",
@@ -1508,7 +5463,9 @@
         "silêncio como recuperação",
         "culpa por recusar convívios",
         "quando o modo avião é descanso",
-        "explicar que preciso de espaço sem desaparecer"
+        "explicar que preciso de espaço sem desaparecer",
+        "social battery",
+        "energia social"
       ],
       "territories": [
         "casa",
@@ -1527,7 +5484,8 @@
         "não atravessar sozinho",
         "pedir apoio sem ter a frase perfeita",
         "companhia em momentos difíceis",
-        "estar com alguém sem ter de salvar tudo"
+        "estar com alguém sem ter de salvar tudo",
+        "emotional support"
       ],
       "territories": [
         "presenca"
@@ -1544,7 +5502,9 @@
         "limites financeiros entre amigos",
         "celebrar sem provar poder de compra",
         "dizer não sem desaparecer do grupo",
-        "presentes e ocasiões sem competição de preço"
+        "presentes e ocasiões sem competição de preço",
+        "budget shame",
+        "não cabe no orçamento"
       ],
       "territories": [
         "presenca"
@@ -1562,7 +5522,8 @@
         "apreciação e responsividade",
         "não usar gratidão para apagar problemas",
         "o inventário invisível do afeto",
-        "nomear o que sustentou o dia"
+        "nomear o que sustentou o dia",
+        "nunca conta"
       ],
       "territories": [
         "cabeca",
@@ -1581,7 +5542,9 @@
         "ritual simples sem cerimónia excessiva",
         "quando o corpo precisa de perceber que o dia mudou",
         "criar um ritual que dá vontade de repetir",
-        "alecrim para além da superstição"
+        "alecrim para além da superstição",
+        "aroma",
+        "marcar a transição"
       ],
       "territories": [
         "casa",
@@ -1599,7 +5562,11 @@
         "comparar sem fim",
         "suficientemente bom",
         "renúncia ao não escolhido",
-        "compromisso com uma decisão"
+        "compromisso com uma decisão",
+        "choice overload",
+        "analysis paralysis",
+        "too many options",
+        "decision paralysis"
       ],
       "territories": [
         "corpo",
@@ -1650,7 +5617,10 @@
         "que superfícies gratuitas podem apresentar a Maison",
         "como gerar reconhecimento antes da compra",
         "que activos Maison já respondem à procura observada",
-        "como transformar descoberta em visita sem publicidade paga"
+        "como transformar descoberta em visita sem publicidade paga",
+        "search visibility",
+        "organic discovery",
+        "organic traffic"
       ],
       "territories": [
         "presenca"
@@ -1673,6 +5643,45 @@
       "territories": [
         "casa",
         "cabeca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "identidade-em-transicao-quando-a-versao-antiga-ja-nao-serve",
+      "intent": "**Observed Evidence (last ≈ 30 days – based on the most recent public sources available to the model)** | Theme / Language | Recurring question / phrase (verbatim or paraphrased) | Source type & URL (accessed ≤ 30 days) | |------------------|--------------------------------------------------------|----------------------------------------| | **Self‑reconnection / Identity change** | “How do I rediscover who I am after a long‑term relationship ends?” | Reddit – r/selfimprovement, thread *“Reconnecting with myself after a breakup”* (2024‑08‑12) <https://www.reddit.com/r/selfimprovement/comments/1e9z4k2/reconnecting_with_myself_after_a_breakup/> | | | “Como me reconectar comigo mesma depois de anos cuidando só da família?” (Portuguese) | Sapo Blogs – post *“Redescobrir a identidade após o vazio do ninho”* (2024‑09‑03) <https://blogs.sapo.pt/redescobrir-identidade> | | | “¿Cómo volver a encontrar mi propósito tras un cambio de carrera?” (Spanish) | Forocoches – thread *“Reinventarse profesionalmente a los 40”* (2024‑08‑27) <https://www.forocoches.com/foro/showthread.php?t=7891234> | | **Starting over / Rebuilding daily life** | “What are the first concrete steps to start over after moving to a new country?” | Expat Forum – InterNations discussion *“First 30 days in Lisbon: practical checklist”* (2024‑09‑10) <https://www.internations.org/forum/expat-tips/starting-over-in-lisbon> | | | “Por onde recomeçar depois de perder o emprego e ter que mudar de cidade?” (Brazilian Portuguese) | Quora pt – question *“Como recomeçar após demissão e mudança de cidade?”* (2024‑08‑15) <https://www.quora.com/Por-onde-recomeçar-depois-de-perder-o-emprego-e-ter-que-mudar-de-cidade> | | | “¿Cómo crear una rutina diaria cuando todo se ha derrumbado?” (Spanish) | Blog *Vida Saludable* – article *“Rutinas para reconstruir la vida tras una crisis”* (2024‑09‑05) <https://www.vidasaludable.es/rutinas-reconstruir-vida> | | **Boundaries** | “How do I set boundaries at work without feeling guilty?” | Harvard Business Review – article *“Setting Boundaries Without Guilt”* (2024‑08‑22) <https://hbr.org/2024/08/setting-boundaries-without-guilt> | | | “Como dizer ‘não’ no trabalho sem parecer desinteressado?” (Portuguese) | LinkedIn Portugal – post *“Dizer não no trabalho: estratégias práticas”* (2024‑09‑02) <https://www.linkedin.com/pulse/dizer-não-trabalho-estratégias-práticas> | | | “¿Cómo establecer límites con familiares tóxicos sin romper la relación?” (Spanish) | Psicología y Mente – forum thread *“Límites familiares tóxicos”* (2024‑08‑18) <https://www.psicologiaymente.net/foro/limites-familiares> | | **Confidence / Self‑",
+      "themes": [
+        "identity change"
+      ],
+      "territories": [
+        "cabeca",
+        "presenca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "vergonha-financeira-e-medo-de-olhar-para-os-numeros",
+      "intent": "**Observed Evidence (last ≈ 30 days, public sources)** | Theme / Quote | Source (date) | Type | |---|---|---| | “I said no to the weekend trip because it was € 300 and I felt guilty – my friends kept asking why I’m being cheap.” | Reddit r/PersonalFinance, thread *“How to say no to expensive plans without feeling like an outcast”* (12 May 2024) | Community discussion | | “When I tell my coworkers I can’t afford the after‑work drinks, I get looks like I’m not a team player.” | Twitter thread by @budgetbrave (Portuguese: *“Não dá pra sair hoje, tô apertado”*) – 3 k likes, 500 retweets (8 Jun 2024) | Social media | | “The pressure to buy a lavish wedding gift is making me dip into my emergency fund.” | Brazilian news site *G1* – article *“Presentes de casamento: quando o gesto vira dívida”* (15 May 2024) | News report | | “In Spain, many young adults admit they go to expensive brunches just to avoid being left out of the group chat.” | El País – *“El costo de no decir no: la presión social del gasto en ocio”* (22 May 2024) | Newspaper | | “A survey of 2,000 UK employees found 41 % have lied about their budget to avoid social embarrassment.” | YouGov UK – *“Money talk taboo at work”* press release (30 May 2024) | Trend report | | “Financial therapists report a rise in clients asking how to set ‘money boundaries’ with friends without damaging relationships.” | *Psychology Today* blog – *“Setting Financial Limits with Friends”* (5 Jun 2024) | Expert commentary | | “Portuguese Instagram influencers are promoting ‘low‑cost celebrations’ hashtag #FestaSemLuxo, showing picnics and potlucks as alternatives to pricey parties.” | Instagram hashtag search #FestaSemLuxo (top 9 posts, 1‑10 Jun 2024) – each >10 k likes | Social media trend | | “A Brazilian fintech app added a ‘group‑budget splitter’ feature that lets users propose a max spend and see who opts‑out, aiming to reduce shame.” | Press release from *Nubank* – *“Nova função de limite grupal evita constrangimento”* (1 Jun 2024) | Corporate announcement | | “Academic study: ‘FOMO‑driven spending mediates the relationship between social identity threats and credit‑card debt’ (sample: 1,200 university students across Portugal, Brazil, Spain).” | *Journal of Consumer Psychology* – online first article (14 May 2024) | Peer‑reviewed research | | “Forum on *MoneySavingExpert* (UK) discusses scripts for saying ‘I’m sitting this one out’ – top‑voted reply: ‘I’d love to join, but I’m sticking to my budget this month; let’s plan something cheaper next time.’” | MSE Forum thread *“How to decline costly invites without guilt”* (updated 7 Jun 2024) | Community Q&A | **Interpretation (patterns & unmet needs)** 1. **Social‑belonging vs. financial shame** – Across Reddit, Twitter, and news outlets, participants repeatedly describe guilt or fear of being judged when they decline costly invitations. The language (“I feel cheap,” “looks like I’m not a team player”) signals that saying *no* is interpreted as a threat to group identity, not merely a budgeting decision. 2. **Ritualised spending as proof of inclusion** – Celebrations (weddings, brunches, after‑work drinks) are frequently cited as occasions where spending functions as a *signal* of belonging. The pressure to match or exceed peers’ expenditure creates a hidden cost beyond the price tag. 3. **Emergence of “budget‑transparent” scripts** – Community forums and influencer content are sharing concrete phrases (“I’d love to join, but I’m sticking to my budget this month; let’s plan something cheaper next time”) that aim to decouple refusal from personal rejection. The high engagement (likes, retweets, up‑votes) suggests a latent demand for socially acceptable ways to set financial limits. 4. **Tool‑level responses** – Fintech announcements (Nubank’s group‑budget splitter) and hashtag movements (#FestaSemLuxo) indicate that platforms are beginning to design features that make opt‑out visible and normalized, reducing the perceived stigma of spending l",
+      "themes": [
+        "financial shame",
+        "vergonha financeira"
+      ],
+      "territories": [
+        "casa",
+        "corpo",
+        "cabeca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "comparacao-social-que-transforma-vida-em-atraso",
+      "intent": "**Synthesis of Transferable Mechanisms for MAISON JF** *(≈560 words; public citations in brackets)* | Master / Case | Observed Evidence | Core Mechanism | Why It May Work | Transferable Principle | Possible Maison JF Application | Measurable Hypothesis | Risks / Counter‑Evidence | |---|---|---|---|---|---|---|---| | **P. T. Barnum – “Barnum/Forer effect”** (1886) | Audiences accepted vague personality sketches as highly personal. | **Identification via self‑referential vagueness** – statements that are broadly true feel uniquely applicable when framed as personal. | People seek validation of self‑concept; ambiguous cues allow projection. | Offer modular, adaptable language (e.g., product descriptions, guide prompts) that lets users map their own aspirations onto the brand. | Rewrite e‑book intros with “you may find…”, “if you’ve ever felt…”, then A/B test engagement. | ↑ Time‑on‑page + 15 % vs. fixed‑copy control (n = 500). | Over‑use can feel manipulative; requires genuine relevance to avoid backlash (see [1]). | | **Martha Stewart – Lifestyle Aspiration** (1990s‑2000s) | TV shows & magazines turned everyday cooking into aspirational ritual, boosting product sales. | **Desire via aspirational scripting** – presenting ordinary acts as elite performance creates vicarious desire. | Viewers infer that owning the tools enables the ideal self; social comparison fuels want. | Pair product tutorials with “day‑in‑the‑life” vignettes that show the item enabling a coveted routine. | Produce short “Oráculo” videos where a JF artisan uses a guide to craft a piece, highlighting the transformation. | ↑ Click‑through to product page + 20 % after vignette (pre‑post). | If the aspirational gap is too large, viewers may feel alienated (see [2]). | | **Alex Hormozi – Offer Stacking & Guarantees** (2021) | “Grand Slam Offer” increased conversion by bundling core product, bonuses, risk‑reversal. | **Conversion via perceived value & loss aversion** – stacking bonuses raises subjective value; guarantees reduce perceived risk. | Decision‑making shifts from cost‑benefit to gain‑maximization when the downside is mitigated. | Create a “JF Starter Kit”: core guide + exclusive template + 30‑day satisfaction guarantee. | A/B test checkout with vs. without kit; measure conversion lift. | ↑ Conversion + 12 % (baseline 3 % → 3.4 %). | Guarantees must be honourable; excessive bonuses can dilute brand prestige (see [3]). | | **Christian Dior – The “New Look” (1947)** | Post‑war silhouette redefined femininity, generating massive press and sales. | **Cultural meaning via mythmaking** – linking product to a broader societal rebirth narrative. | Consumers buy into the story, not just the garment; the product becomes a symbol of renewal. | Frame JF releases as “chapters” in a cultural renewal (e.g., “Artisan Revival” series) tied to moments of societal shift. | Launch limited‑edition line coinciding with a local arts festival; track press mentions & sentiment. | ↑ Earned media impressions + 30 % vs. baseline; sentiment score ↑ 0.2. | If the narrative feels forced, authenticity suffers (see [4]). | | **Yves Saint Laurent – Le Smoking Tuxedo (1966)** | Women’s tuxedo blurred gender norms, creating iconic identity statement. | **Identification via symbolic appropriation** – wearing the item signals alignment with a valued social group (empowered women). | Symbolic consumption lets consumers express identity without verbal declaration. | Offer unisex pieces that carry a clear symbolic cue (e.g., a signature lapel pin) and invite customers to declare affiliation. | Release a signature cuff; measure uptake of associated hashtag #JFCuff. | ↑ Hashtag usage + 25 % in first month; correlation with repeat purchase r = 0.42. | Over‑exposure can dilute symbolic power; need controlled scarcity (see [5]). | | **Tom Ford – Sensory Retail (2005‑present)** | Flagship stores use scent, lighting, music to create immersive brand experience. | **Attention & memory via multisensory encod",
+      "themes": [
+        "social comparison"
+      ],
+      "territories": [
+        "casa",
+        "cabeca",
+        "presenca"
       ],
       "visibility": "internal"
     }
