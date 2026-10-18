@@ -220,6 +220,7 @@ const pdiOffers=MAISON_OFFER_CATALOGUE.filter(x=>x.family==='pdi'&&x.status!=='h
 const pdiSignals=buildPdiThemeSourceSignals();
 const editorialQueue=JSON.parse(fs.readFileSync(new URL('editorial-queue.json',import.meta.url),'utf8'));
 const ebookProposals=Array.isArray(editorialQueue.ebookProposals)?editorialQueue.ebookProposals:[];
+const dailyContentCandidates=Array.isArray(editorialQueue.dailyContentCandidates)?editorialQueue.dailyContentCandidates:[];
 
 function commonFixedAmount(offers,label){
   const amounts=[...new Set(offers.map(x=>x.amount).filter(Number.isInteger))];
@@ -312,6 +313,10 @@ const payload={
     oceans_to_editorial_queue:true,
     editorial_queue_to_commercial_assets:true,
     ebook_proposals:ebookProposals.length,
+    daily_content_candidates:dailyContentCandidates.length,
+    daily_post_candidates:dailyContentCandidates.filter(x=>x.format==='post').length,
+    daily_reel_candidates:dailyContentCandidates.filter(x=>x.format==='reel').length,
+    daily_content_requires_human_approval:dailyContentCandidates.every(x=>x.approvalRequired===true),
     proposals_require_human_approval:true,
     automatic_publication:false
   },
