@@ -75,7 +75,7 @@ def build_coverage(
             gaps.append("oracle_feed_missing")
         if not expected_oracle and o is not None:
             gaps.append("oracle_feed_unexpected")
-        design_stage_count=len(pdi_system.get("stages",[]))
+        design_stage_count=len(pdi_asset.get("content_system",{}).get("stages",[]))
         if q is not None and len(question_slots)!=len(themes)*design_stage_count:
             gaps.append("pdi_slot_contract_mismatch")
         if o is not None and len(roles)!=7:
