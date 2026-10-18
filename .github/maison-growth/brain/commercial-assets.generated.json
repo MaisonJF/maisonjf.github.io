@@ -9,7 +9,7 @@
   "content_linkage": {
     "oceans_to_editorial_queue": true,
     "editorial_queue_to_commercial_assets": true,
-    "ebook_proposals": 14,
+    "ebook_proposals": 12,
     "proposals_require_human_approval": true,
     "automatic_publication": false
   },
@@ -1034,7 +1034,7 @@
           "close"
         ],
         "paid_bodies_in_git": false,
-        "ebook_proposal_count": 14,
+        "ebook_proposal_count": 12,
         "ebook_proposal_feed": "editorial_queue.ebookProposals"
       },
       "operational": {
