@@ -9,6 +9,8 @@ import { decideCandidateInbox, ingestCandidateInbox, listCandidateInbox } from '
 const JSON_HEADERS = {'content-type':'application/json','cache-control':'no-store','x-content-type-options':'nosniff'};
 const MCP_VERSION = '2025-06-18';
 const MCP_SCOPE = 'openid email profile';
+// Server-side denylist for the retired legacy ChatGPT identity.
+const RETIRED_OPERATOR_EMAIL = 'maisonjf@proton.me';
 
 function mcpConfig(env){
   const raw=String(env.MAISON_MCP_CONFIG||'').trim();
@@ -35,7 +37,8 @@ async function authenticate(request,env){
   const r=await fetch(supabaseOrigin(env)+'/auth/v1/user',{headers:{apikey:key,Authorization:'Bearer '+token}});
   if(!r.ok) return null;
   const user=await r.json().catch(()=>null);
-  if(!user?.id||String(user.id)!==allowed) return null;
+  const email=String(user?.email||'').trim().toLowerCase();
+  if(!user?.id||String(user.id)!==allowed||!email||email===RETIRED_OPERATOR_EMAIL) return null;
   return {id:String(user.id)};
 }
 function authError(request){return toolText({error:'authentication_required'},true,{ 'mcp/www_authenticate':[challenge(request)] });}

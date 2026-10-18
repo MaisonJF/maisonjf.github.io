@@ -21,20 +21,24 @@ function post(method,params,token=''){
 test('public Maison MCP exposes only bounded D1 ingest tools',()=>{
   assert.deepEqual(maisonEditorialTools().map(x=>x.name),['maison_ingest_ocean_signal','maison_ingest_vault_candidate']);
 });
-test('public Maison MCP authenticates allowed operator and writes Ocean to D1',async()=>{
+test('public Maison MCP blocks the retired ChatGPT identity before Supabase or D1 access',async()=>{
+  let externalAuthCalled=false;
   const originalFetch=globalThis.fetch;
-  globalThis.fetch=async()=>new Response(JSON.stringify({
-    id:'operator-1',email:'maisonjf@proton.me',email_confirmed_at:'2026-10-01T00:00:00Z'
-  }),{status:200,headers:{'content-type':'application/json'}});
+  globalThis.fetch=async()=>{
+    externalAuthCalled=true;
+    return new Response(JSON.stringify({
+      id:'operator-1',email:'maisonjf@proton.me',email_confirmed_at:'2026-10-01T00:00:00Z'
+    }),{status:200,headers:{'content-type':'application/json'}});
+  };
   try{
     const db=new DB();
     const response=await handleMaisonEditorialMcp(post('tools/call',{
       name:'maison_ingest_ocean_signal',
       arguments:{
-        kind:'hypothesis',ocean_key:'mcp-pages-test',source_ref:'test:pages-mcp',
-        summary:'Sinal seguro de teste para validar a ponte Pages MCP para D1.',
-        evidence_roots:['https://example.org/a'],theme_candidates:['presença sem atenção'],
-        commercial_adjacency:[{offer:'para-de-ignorar'}],relevance_score:64,commercial_score:55,
+        kind:'hypothesis',ocean_key:'mcp-pages-retired-test',source_ref:'test:retired-account',
+        summary:'Este teste confirma que a identidade antiga já não pode escrever no D1.',
+        evidence_roots:['https://example.org/a'],theme_candidates:['desativação segura'],
+        commercial_adjacency:[],relevance_score:10,commercial_score:10,
         observed_at:'2026-10-01T19:00:00.000Z'
       }
     },'oauth-token'),{
@@ -42,12 +46,9 @@ test('public Maison MCP authenticates allowed operator and writes Ocean to D1',a
       MAISON_SOS_SUPABASE_PUBLISHABLE_KEY:'sb_publishable_'+'x'.repeat(30),
       MAISON_BRAIN_DB:db
     });
-    assert.equal(response.status,200);
-    const body=await response.json();
-    assert.equal(body.result.isError,false);
-    assert.equal(body.result.structuredContent.ocean_key,'mcp-pages-test');
-    assert.equal(body.result.structuredContent.d1_writes_per_unique_ingest,2);
-    assert.equal(db.writes.length,2);
+    assert.equal(response.status,401);
+    assert.equal(externalAuthCalled,false);
+    assert.equal(db.writes.length,0);
   }finally{globalThis.fetch=originalFetch;}
 });
 test('public Maison MCP rejects a different Supabase account',async()=>{

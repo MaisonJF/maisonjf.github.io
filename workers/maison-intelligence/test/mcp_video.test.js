@@ -57,7 +57,7 @@ test('MCP Ocean tool authenticates and persists directly to D1',async()=>{
     prepare(sql){return new Statement(this,sql);}
   }
   const originalFetch=globalThis.fetch;
-  globalThis.fetch=async()=>new Response(JSON.stringify({id:'user-1'}),{status:200,headers:{'content-type':'application/json'}});
+  globalThis.fetch=async()=>new Response(JSON.stringify({id:'user-1',email:'replacement-operator@example.com'}),{status:200,headers:{'content-type':'application/json'}});
   try{
     const db=new DB();
     const request=new Request('https://maison.example/mcp',{
@@ -95,6 +95,41 @@ test('MCP Ocean tool authenticates and persists directly to D1',async()=>{
   }finally{
     globalThis.fetch=originalFetch;
   }
+});
+
+test('Worker MCP rejects the retired Maison email even when the Supabase subject matches',async()=>{
+  const originalFetch=globalThis.fetch;
+  globalThis.fetch=async()=>new Response(JSON.stringify({
+    id:'user-1',email:'maisonjf@proton.me'
+  }),{status:200,headers:{'content-type':'application/json'}});
+  try{
+    const db={writes:[],prepare(){throw new Error('D1 must not be reached');}};
+    const request=new Request('https://maison.example/mcp',{
+      method:'POST',
+      headers:{'content-type':'application/json',Authorization:'Bearer oauth-token'},
+      body:JSON.stringify({jsonrpc:'2.0',id:8,method:'tools/call',params:{
+        name:'maison_ingest_ocean_signal',
+        arguments:{
+          kind:'hypothesis',ocean_key:'retired-account-test',source_ref:'test:retired',
+          summary:'O acesso da conta antiga deve ser bloqueado.',
+          evidence_roots:[],theme_candidates:[],commercial_adjacency:[],
+          relevance_score:0,commercial_score:0
+        }
+      }})
+    });
+    const response=await handleMaisonMcpRequest(request,{
+      OCEAN_MEMORY_ENABLED:'true',
+      GROWTH_DB:db,
+      MAISON_MCP_CONFIG:JSON.stringify({
+        supabase_url:'https://example.supabase.co',
+        supabase_publishable_key:'public-key',
+        allowed_subject:'user-1'
+      })
+    });
+    const body=await response.json();
+    assert.equal(body.error?.code,-32001);
+    assert.equal(body.error?.message,'Authentication required');
+  }finally{globalThis.fetch=originalFetch;}
 });
 
 test('non-MCP paths fall through',async()=>{

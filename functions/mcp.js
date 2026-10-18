@@ -3,7 +3,8 @@ import { ingestVaultCandidate } from '../workers/maison-intelligence/src/vault_c
 
 const JSON_HEADERS={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'};
 const MCP_VERSION='2025-06-18';
-const ALLOWED_EMAIL_SHA256='0f63626f4bb200dcea81d29de36dd74809ead3260de742f69c41465085815dd8';
+// Legacy ChatGPT identity retired; no email identity is authorized until a new explicit allowlist is configured.
+const ALLOWED_EMAIL_SHA256='';
 const SCOPES=['openid','email','profile'];
 
 function cors(extra={}){return {...JSON_HEADERS,'access-control-allow-origin':'*','access-control-allow-headers':'authorization,content-type','access-control-allow-methods':'GET,POST,OPTIONS',...extra};}
@@ -22,6 +23,7 @@ function authConfig(env){
 }
 async function sha256(value){const data=new TextEncoder().encode(String(value));const digest=await crypto.subtle.digest('SHA-256',data);return [...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('');}
 async function authenticate(request,env){
+  if(!ALLOWED_EMAIL_SHA256) return null;
   const auth=String(request.headers.get('authorization')||'');
   if(!auth.startsWith('Bearer ')) return null;
   const token=auth.slice(7).trim();

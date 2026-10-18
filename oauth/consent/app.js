@@ -1,6 +1,7 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const ALLOWED_EMAIL_SHA256='0f63626f4bb200dcea81d29de36dd74809ead3260de742f69c41465085815dd8';
+// Legacy ChatGPT identity retired; require an explicit new allowlist before re-enabling this consent flow.
+const ALLOWED_EMAIL_SHA256='';
 const $=id=>document.getElementById(id);
 const status=$('status'),loginBox=$('loginBox'),consentBox=$('consentBox');
 const authorizationId=new URL(location.href).searchParams.get('authorization_id')||'';
@@ -15,6 +16,7 @@ async function sha256(value){
 }
 
 async function boot(){
+  if(!ALLOWED_EMAIL_SHA256){hide(loginBox);hide(consentBox);say('A ligação antiga ao MCP da MAISON foi desativada.');return}
   if(!authorizationId){say('Pedido de autorização inválido ou expirado.');return}
   const config=await fetch('/api/sos/config',{headers:{accept:'application/json'},credentials:'same-origin'}).then(r=>r.ok?r.json():null).catch(()=>null);
   if(!config?.available){say('A autenticação MAISON está temporariamente indisponível.');return}

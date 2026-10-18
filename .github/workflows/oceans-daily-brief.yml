@@ -1,0 +1,50 @@
+name: Maison JF Oceans Daily Brief
+run-name: Maison JF Oceans Daily Brief
+
+on:
+  schedule:
+    # Run at both UTC hours that correspond to 08:00 in Europe/Lisbon in winter/summer.
+    # The script exits on the non-matching tick; only one email is sent per local day.
+    - cron: '0 7,8 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Generate and validate the report without sending email"
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: maison-oceans-daily-brief
+  cancel-in-progress: false
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_READ_API_TOKEN: ${{ secrets.CLOUDFLARE_READ_API_TOKEN }}
+      OCEAN_BRIEFING_RESEND_API_KEY: ${{ secrets.OCEAN_BRIEFING_RESEND_API_KEY }}
+      OCEAN_BRIEFING_EMAIL_TO: ${{ vars.OCEAN_BRIEFING_EMAIL_TO }}
+      OCEAN_BRIEFING_EMAIL_FROM: ${{ vars.OCEAN_BRIEFING_EMAIL_FROM }}
+      OCEAN_BRIEFING_ENABLED: ${{ vars.OCEAN_BRIEFING_ENABLED }}
+      GITHUB_EVENT_NAME: ${{ github.event_name }}
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || 'false' }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax check
+        run: node --check scripts/oceans-daily-brief.mjs
+
+      - name: Build report and deliver only when explicitly enabled
+        run: node scripts/oceans-daily-brief.mjs
