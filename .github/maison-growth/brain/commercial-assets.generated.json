@@ -10,9 +10,9 @@
     "oceans_to_editorial_queue": true,
     "editorial_queue_to_commercial_assets": true,
     "ebook_proposals": 12,
-    "daily_content_candidates": 48,
-    "daily_post_candidates": 24,
-    "daily_reel_candidates": 24,
+    "daily_content_candidates": 144,
+    "daily_post_candidates": 72,
+    "daily_reel_candidates": 72,
     "daily_content_requires_human_approval": true,
     "proposals_require_human_approval": true,
     "automatic_publication": false
