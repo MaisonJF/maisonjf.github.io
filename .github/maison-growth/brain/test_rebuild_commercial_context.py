@@ -49,6 +49,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
             "automaticPublication:false",
             "automaticActivation:false",
             "proposedOutline",
+            "internalOperations",
         ):
             self.assertIn(contract,queue_builder)
 
