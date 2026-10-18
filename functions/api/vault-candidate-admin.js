@@ -13,10 +13,39 @@ export async function onRequestPost({request,env}){
     const origin=request.headers.get('Origin');
     if(origin && new URL(origin).origin!==url.origin)return json({error:'Origem não autorizada.'},403);
 
-    const configured=String(env?.MAISON_VAULT_ADMIN_SECRET||env?.MAISON_PDI_IMPORT_SECRET||'');
-    if(configured.length<24)return json({error:'Admin editorial privado não configurado.'},503);
-    const supplied=String(request.headers.get('x-maison-admin-key')||'');
-    if(!(await secureEqual(configured,supplied)))return json({error:'Não autorizado.'},401);
+    // Normalize accidental leading/trailing whitespace in Cloudflare secret values.
+    // TEMPORARY AUTH DIAGNOSTICS: exposes metadata only, never secret values.
+    const adminRaw=String(env?.MAISON_VAULT_ADMIN_SECRET||'');
+    const pdiRaw=String(env?.MAISON_PDI_IMPORT_SECRET||'');
+    const adminSecret=adminRaw.trim();
+    const pdiSecret=pdiRaw.trim();
+    const configuredSource=adminSecret?'MAISON_VAULT_ADMIN_SECRET':pdiSecret?'MAISON_PDI_IMPORT_SECRET':'nenhuma';
+    const configuredRaw=adminSecret?adminRaw:pdiSecret?pdiRaw:'';
+    const configured=configuredRaw.trim();
+    const diagnostic={
+      requestHost:url.host,
+      requestPath:url.pathname,
+      configuredSource,
+      configuredChars:configured.length,
+      configuredRawChars:configuredRaw.length,
+      configuredOuterWhitespace:configuredRaw!==configured,
+      adminSecretPresent:Boolean(adminSecret),
+      pdiSecretPresent:Boolean(pdiSecret)
+    };
+    if(configured.length<24)return json({error:'Admin editorial privado não configurado.',diagnostic},503);
+    const suppliedRaw=String(request.headers.get('x-maison-admin-key')||'');
+    const supplied=suppliedRaw.trim();
+    if(!(await secureEqual(configured,supplied))){
+      return json({
+        error:'Não autorizado.',
+        diagnostic:{
+          ...diagnostic,
+          receivedChars:supplied.length,
+          receivedRawChars:suppliedRaw.length,
+          receivedOuterWhitespace:suppliedRaw!==supplied
+        }
+      },401);
+    }
 
     const body=await request.json().catch(()=>null);
     if(!body||typeof body!=='object')return json({error:'Pedido inválido.'},400);

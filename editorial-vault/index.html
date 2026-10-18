@@ -73,7 +73,25 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
      body:JSON.stringify({action,...extra})
    });
    const body=await r.json().catch(()=>({error:'Resposta inválida.'}));
-   if(!r.ok)throw new Error(body.error||('HTTP '+r.status));
+   if(!r.ok){
+     if(body.diagnostic){
+       const d=body.diagnostic;
+       const lines=[
+         body.error||('HTTP '+r.status),
+         'DIAGNÓSTICO TEMPORÁRIO (não revela a chave):',
+         'API chamada em: '+(d.requestHost||'desconhecido')+(d.requestPath||''),
+         'Variável usada: '+(d.configuredSource||'desconhecida'),
+         'Segredo configurado: '+(Number.isInteger(d.configuredChars)?d.configuredChars:'?')+' caracteres; valor guardado bruto: '+(Number.isInteger(d.configuredRawChars)?d.configuredRawChars:'?'),
+         'Espaços exteriores no segredo configurado: '+(d.configuredOuterWhitespace?'sim':'não'),
+         'Chave enviada: '+(Number.isInteger(d.receivedChars)?d.receivedChars+' caracteres':'não disponível')+(Number.isInteger(d.receivedRawChars)?'; valor bruto: '+d.receivedRawChars:''),
+         'Espaços exteriores na chave enviada: '+(d.receivedOuterWhitespace?'sim':'não'),
+         'MAISON_VAULT_ADMIN_SECRET reconhecido: '+(d.adminSecretPresent?'sim':'não'),
+         'MAISON_PDI_IMPORT_SECRET disponível: '+(d.pdiSecretPresent?'sim':'não')
+       ];
+       throw new Error(lines.join('\\n'));
+     }
+     throw new Error(body.error||('HTTP '+r.status));
+   }
    return body;
  }
  function selected(){
