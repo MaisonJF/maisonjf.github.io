@@ -127,8 +127,8 @@ test('Worker MCP rejects the retired Maison email even when the Supabase subject
       })
     });
     const body=await response.json();
-    assert.equal(body.error?.code,-32001);
-    assert.equal(body.error?.message,'Authentication required');
+    assert.equal(body.result?.isError,true);
+    assert.equal(body.result?.structuredContent?.error,'authentication_required');
   }finally{globalThis.fetch=originalFetch;}
 });
 
