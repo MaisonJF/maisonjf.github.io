@@ -118,6 +118,9 @@ def render_private_worker_config(
         "BRAIN_PROPOSAL_API_ENABLED": str(bool(stage.get("brain_proposal_api_enabled", False))).lower(),
         "BRAIN_REVIEW_DECISION_ENABLED": str(bool(stage.get("brain_review_decision_enabled", False))).lower(),
     })
+    # Gemini is disabled in every private stage; omit its unused model variable to
+    # stay under Cloudflare's 64-variable cap after previously configured secrets.
+    vars_.pop("GEMINI_MODEL", None)
 
     databases = config.get("d1_databases")
     if not isinstance(databases, list) or len(databases) != 1:
