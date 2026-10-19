@@ -121,14 +121,46 @@ jobs:
               (SELECT COUNT(*) FROM vault_oracle_blocks) AS all_oracle_blocks;
           "
 
+      - name: Non-writing OSIRIS Memory bridge smoke test
+        id: osiris_bridge
+        env:
+          OSIRIS_MEMORY_BRIDGE_URL: ${{ secrets.MAISON_OSIRIS_MEMORY_BRIDGE_URL }}
+          MAISON_OSIRIS_BRIDGE_TOKEN: ${{ secrets.MAISON_OSIRIS_BRIDGE_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "$OSIRIS_MEMORY_BRIDGE_URL" || -z "$MAISON_OSIRIS_BRIDGE_TOKEN" ]]; then
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::OSIRIS Memory bridge credentials are not configured; keeping remote Memory disabled."
+            echo "- OSIRIS Memory: disabled (bridge credentials not configured)." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if python .github/maison-growth/runtime/smoke_osiris_memory_bridge.py; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "- OSIRIS Memory: HTTPS/Bearer smoke test passed; the invalid test envelope was rejected without a write." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::OSIRIS Memory bridge smoke test did not pass; keeping remote Memory disabled."
+            echo "- OSIRIS Memory: disabled (non-writing bridge smoke test failed)." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Render live private Worker config
         env:
           BRAIN_CONTROL_API_URL: ${{ secrets.MAISON_BRAIN_PRIVATE_URL }}
+          OSIRIS_MEMORY_BRIDGE_URL: ${{ secrets.MAISON_OSIRIS_MEMORY_BRIDGE_URL }}
+          OSIRIS_BRIDGE_ENABLED: ${{ steps.osiris_bridge.outputs.enabled }}
+        shell: bash
         run: |
+          set -euo pipefail
+          bridge_args=()
+          if [[ "$OSIRIS_BRIDGE_ENABLED" == "true" ]]; then
+            bridge_args+=(--bridge-smoke-test-passed --osiris-memory-bridge-url "$OSIRIS_MEMORY_BRIDGE_URL")
+          fi
           python .github/maison-growth/runtime/render_private_worker_config.py \
             private_observe_candidate \
             --template workers/maison-intelligence/wrangler.jsonc \
             --private-url "$BRAIN_CONTROL_API_URL" \
+            "${bridge_args[@]}" \
             --output workers/maison-intelligence/wrangler.private.runtime.jsonc
 
       - name: Guard Cloudflare Workers variable limit
@@ -162,7 +194,16 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx wrangler deploy --config wrangler.private.runtime.jsonc
+          OSIRIS_MEMORY_BRIDGE_TOKEN: ${{ secrets.MAISON_OSIRIS_BRIDGE_TOKEN }}
+          OSIRIS_BRIDGE_ENABLED: ${{ steps.osiris_bridge.outputs.enabled }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$OSIRIS_BRIDGE_ENABLED" == "true" ]]; then
+            test -n "$OSIRIS_MEMORY_BRIDGE_TOKEN"
+            printf '%s' "$OSIRIS_MEMORY_BRIDGE_TOKEN" | npx wrangler secret put OSIRIS_MEMORY_BRIDGE_TOKEN
+          fi
+          npx wrangler deploy --config wrangler.private.runtime.jsonc
 
       - name: Verify Worker health without D1 read
         shell: bash
