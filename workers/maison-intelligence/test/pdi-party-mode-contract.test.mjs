@@ -50,6 +50,29 @@ test('group play rotates numbered participants and adds optional party challenge
   assert.doesNotMatch(script,/playerName|answerText|answer_text|responseText/);
 });
 
+test('party mode has 24 varied challenges per locale with session-specific rotation',()=>{
+  const html=read('para-de-ignorar/jogar.html');
+  const start=html.lastIndexOf('<script>');
+  const end=html.indexOf('</script>',start);
+  const script=html.slice(start+'<script>'.length,end);
+  const startDeck=script.indexOf('const GROUP_CHALLENGES={');
+  const endDeck=script.indexOf('document.documentElement.lang=locale',startDeck);
+  const deck=script.slice(startDeck,endDeck);
+  const locales=[
+    [/'pt-PT':\\[([\\s\\S]*?)\\n  \\],\\n  'pt-BR':/.exec(deck),'pt-PT'],
+    [/'pt-BR':\\[([\\s\\S]*?)\\n  \\],\\n  en:/.exec(deck),'pt-BR'],
+    [/\\n  en:\\[([\\s\\S]*?)\\n  \\],\\n  es:/.exec(deck),'en'],
+    [/\\n  es:\\[([\\s\\S]*?)\\n  \\]/.exec(deck),'es']
+  ];
+  for(const [match,locale] of locales){
+    assert.ok(match,locale+' challenge deck exists');
+    assert.equal((match[1].match(/\\{title:/g)||[]).length,24,locale+' challenge count');
+  }
+  assert.match(script,/function challengeOffsetFor\\(value,size\\)/);
+  assert.match(script,/challengeOffset:challengeOffsetFor\\(sessionId,GROUP_CHALLENGES\\[locale\\]\\.length\\)/);
+  assert.match(script,/state\\.challengeOffset\\+Math\\.floor\\(\\(absolute-1\\)\\/4\\)/);
+});
+
 test('sales page sends the selected mode into checkout while keeping answer privacy visible',()=>{
   const page=read('para-de-ignorar/index.html');
   assert.match(page,/data-mode="duo"/);
