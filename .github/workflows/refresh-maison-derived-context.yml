@@ -1,6 +1,7 @@
 name: Refresh Maison Derived Context (Growth Branch)
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - feat/pdi-exponential-growth
