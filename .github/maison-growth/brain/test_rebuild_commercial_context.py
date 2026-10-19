@@ -147,6 +147,55 @@ class RebuildCommercialContextTests(unittest.TestCase):
         self.assertIn('git push origin "HEAD:${GITHUB_REF_NAME}"',workflow)
         self.assertIn("if: github.actor != 'github-actions[bot]'",workflow)
 
+    def test_pdi_expansion_queue_scales_game_questions_oracle_and_ebook_concepts(self):
+        builder=(ROOT/"build_pdi_expansion_queue.mjs").read_text(encoding="utf-8")
+        assets=(ROOT/"build_commercial_assets.mjs").read_text(encoding="utf-8")
+        for contract in (
+            "buildPdiThemeSourceSignals",
+            "groupExactThemeSignals",
+            "const duoTemplates=",
+            "const groupTemplates=",
+            "type:'pdi_question_draft'",
+            "mode==='group'",
+            "ORACLE_TERRITORIES.flatMap",
+            "const bookConceptSpecs=",
+            "marketDemandValidated:false",
+            "readerResearchRequired:true",
+            "approvalRequired:true",
+            "automaticActivation:false",
+            "publiclyAvailable:false",
+            "readyForComposer:false",
+            "pdi_expansion_queue_out_of_sync",
+        ):
+            self.assertIn(contract,builder)
+        self.assertIn("build_pdi_expansion_queue.mjs",self.source)
+        self.assertIn("build_pdi_expansion_queue.mjs --check",self.source)
+        self.assertIn("pdi_question_drafts:expansionQueue.summary.questionDrafts",assets)
+        self.assertIn("oracle_role_briefs:expansionQueue.summary.oracleRoleBriefs",assets)
+        self.assertIn("ebook_concept_seeds:expansionQueue.summary.ebookConceptSeeds",assets)
+
+    def test_ai_reader_panel_is_transparent_and_never_fabricates_customer_testimonials(self):
+        builder=(ROOT/"build_ai_reader_panel.mjs").read_text(encoding="utf-8")
+        assets=(ROOT/"build_commercial_assets.mjs").read_text(encoding="utf-8")
+        for contract in (
+            "SIMULAÇÃO EDITORIAL GERADA POR IA",
+            "fullManuscriptReviewed:false",
+            "actualReader:false",
+            "verifiedPurchase:false",
+            "realCustomer:false",
+            "testimonial:false",
+            "starRating:null",
+            "publicDisplayAllowed:false",
+            "disclosureRequired:true",
+            "humanReviewRequired:true",
+            "data/ebooks.js catalogue description only",
+        ):
+            self.assertIn(contract,builder)
+        self.assertIn("build_ai_reader_panel.mjs",self.source)
+        self.assertIn("build_ai_reader_panel.mjs --check",self.source)
+        self.assertIn("ai_reader_assessments_are_testimonials:false",assets)
+        self.assertIn("ai_reader_assessments_public:false",assets)
+
     def test_script_has_no_deploy_or_write_to_external_systems(self):
         lowered=self.source.lower()
         for forbidden in (
