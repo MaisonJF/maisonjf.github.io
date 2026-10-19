@@ -125,6 +125,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
     def test_daily_content_candidates_flow_into_commercial_context(self):
         assets_builder=(ROOT/"build_commercial_assets.mjs").read_text(encoding="utf-8")
         self.assertIn("editorialQueue.dailyContentCandidates",assets_builder)
+        self.assertIn("daily_content_candidates:dailyContentCandidates,",assets_builder)
         self.assertIn("daily_content_candidates:dailyContentCandidates.length",assets_builder)
         self.assertIn("daily_content_requires_human_approval",assets_builder)
         self.assertIn("daily_themes_per_ocean_cap:editorialQueue.summary?.dailyThemesPerOceanCap||0",assets_builder)
