@@ -4,7 +4,9 @@
     "data/products.js",
     "data/services.js",
     "functions/_lib/offer-brain.js",
-    ".github/maison-growth/brain/editorial-queue.json"
+    ".github/maison-growth/brain/editorial-queue.json",
+    ".github/maison-growth/brain/pdi-expansion-queue.generated.json",
+    ".github/maison-growth/brain/ai-reader-panel.generated.json"
   ],
   "content_linkage": {
     "oceans_to_editorial_queue": true,
@@ -19,6 +21,16 @@
     "daily_human_need_clusters": 10,
     "daily_solution_linked_candidates": 524,
     "daily_content_requires_human_approval": true,
+    "pdi_question_drafts": 3632,
+    "pdi_duo_question_drafts": 2960,
+    "pdi_group_question_drafts": 672,
+    "oracle_role_briefs": 700,
+    "ebook_concept_seeds": 12,
+    "ai_reader_assessments": 18,
+    "ai_reader_assessments_are_testimonials": false,
+    "ai_reader_assessments_public": false,
+    "question_briefs_require_approval": true,
+    "oracle_briefs_require_approval": true,
     "proposals_require_human_approval": true,
     "automatic_publication": false
   },
@@ -1044,6 +1056,10 @@
         ],
         "paid_bodies_in_git": false,
         "ebook_proposal_count": 12,
+        "ebook_concept_seed_count": 12,
+        "oracle_role_brief_count": 700,
+        "ai_reader_assessment_count": 18,
+        "ai_reader_assessments_internal_only": true,
         "ebook_proposal_feed": "editorial_queue.ebookProposals"
       },
       "operational": {
@@ -3013,7 +3029,12 @@
           "close",
           "signature"
         ],
-        "paid_bodies_in_git": false
+        "paid_bodies_in_git": false,
+        "duo_question_draft_count": 2960,
+        "group_question_draft_count": 672,
+        "question_expansion_feed": "pdi-expansion-queue.generated.json.questions",
+        "human_approval_required": true,
+        "public_activation": false
       },
       "operational": {
         "capacity_units_per_period": null,
