@@ -64,26 +64,53 @@ class RebuildCommercialContextTests(unittest.TestCase):
         queue_builder=(ROOT/"build_editorial_queue.mjs").read_text(encoding="utf-8")
         for contract in (
             "dailyContentCandidates",
-            "maisonBridge",
-            "PÁRA DE IGNORAR! propõe perguntas interativas",
-            "Os rituais sensoriais MAISON JF podem marcar uma pausa",
+            "classifyHumanNeed(ocean)",
+            "maisonSolutionForNeed(humanNeed.id,adjacency)",
+            "humanNeedCluster:humanNeed.id",
+            "humanNeedLabel:humanNeed.label",
             "questionThemeCandidates",
             "slice(0,3)",
             "format:'post'",
             "format:'reel'",
+            "format:'carousel'",
+            "format:'story'",
+            "pollOptions",
             "evidenceCount:evidence.length",
             "draftOnly:true",
             "approvalRequired:true",
             "automaticPublication:false",
             "automaticActivation:false",
+            "internalOperations",
+            "Só considera um produto pago se ele te fizer sentido",
+            "sem pressão para comprar",
         ):
             self.assertIn(contract,queue_builder)
+
+    def test_human_need_drafts_offer_only_relevant_existing_maison_assets(self):
+        queue_builder=(ROOT/"build_editorial_queue.mjs").read_text(encoding="utf-8")
+        assets=(ROOT/"build_commercial_assets.mjs").read_text(encoding="utf-8")
+        for need in (
+            "autonomia_descanso_transicao",
+            "limites_escolhas_agencia",
+            "ligacao_pertença",
+            "clareza_incerteza",
+            "atencao_informacao",
+            "valor_autoconhecimento",
+            "seguranca_financeira",
+            "rituais_sensoriais",
+            "presenca_apoio",
+        ):
+            self.assertIn(need,queue_builder)
+        self.assertIn("daily_solution_linked_candidates",assets)
+        self.assertIn("daily_human_need_clusters",assets)
 
     def test_daily_content_candidates_flow_into_commercial_context(self):
         assets_builder=(ROOT/"build_commercial_assets.mjs").read_text(encoding="utf-8")
         self.assertIn("editorialQueue.dailyContentCandidates",assets_builder)
         self.assertIn("daily_content_candidates:dailyContentCandidates.length",assets_builder)
         self.assertIn("daily_content_requires_human_approval",assets_builder)
+        self.assertIn("daily_carousel_candidates",assets_builder)
+        self.assertIn("daily_story_candidates",assets_builder)
 
     def test_script_has_no_deploy_or_write_to_external_systems(self):
         lowered=self.source.lower()
