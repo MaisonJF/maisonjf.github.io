@@ -116,7 +116,7 @@ test('zero-cost Foundry expands every configured OpenRouter free model independe
   ]);
 });
 
-test('Workers AI can join zero-cost Foundry without joining continuous sensing', () => {
+test('Workers AI stays out of zero-cost Foundry unless separately authorized', () => {
   const env={
     AI:{run(){}},
     ZERO_COST_MODE:'true',
@@ -124,7 +124,10 @@ test('Workers AI can join zero-cost Foundry without joining continuous sensing',
     WORKERS_AI_MODEL:'@cf/test/model'
   };
   assert.deepEqual(configuredProviders(env),[]);
-  assert.equal(configuredZeroCostModelSpecs(env)[0].providerId,'cloudflare_workers_ai');
+  assert.deepEqual(configuredZeroCostModelSpecs(env),[]);
+  assert.deepEqual(configuredZeroCostModelSpecs({...env,ZERO_COST_WORKERS_AI_FOUNDRY_ENABLED:'true'}),[
+    {key:'cloudflare_workers_ai:@cf/test/model',providerId:'cloudflare_workers_ai',modelId:'@cf/test/model'}
+  ]);
 });
 
 test('zero-cost Foundry stays off when ZERO_COST_MODE is false', () => {
