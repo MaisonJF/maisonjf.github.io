@@ -294,9 +294,10 @@ export function configuredZeroCostModelSpecs(env) {
     } catch {}
   }
 
-  // Cloudflare Workers AI is admitted through the account's included allocation.
-  // It stays out of continuous sensing unless WORKERS_AI_ENABLED is separately true.
-  if (env.AI && env.WORKERS_AI_MODEL) {
+  // Workers AI can have overage billing beyond included allocations. Keep it
+  // out of Foundry by default even when the binding/model are present; require a
+  // dedicated operator opt-in separate from continuous sensing.
+  if (enabled(env.ZERO_COST_WORKERS_AI_FOUNDRY_ENABLED) && env.AI && env.WORKERS_AI_MODEL) {
     specs.push({
       key:`cloudflare_workers_ai:${env.WORKERS_AI_MODEL}`,
       providerId:'cloudflare_workers_ai',
