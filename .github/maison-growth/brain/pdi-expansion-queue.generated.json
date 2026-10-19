@@ -14,14 +14,14 @@
     "publicPublication": false
   },
   "summary": {
-    "exactThemeGroups": 426,
-    "duoQuestionDrafts": 2960,
+    "exactThemeGroups": 427,
+    "duoQuestionDrafts": 2968,
     "groupQuestionDrafts": 672,
-    "questionDrafts": 3632,
+    "questionDrafts": 3640,
     "oracleTerritories": 100,
     "oracleRoleBriefs": 700,
     "ebookConceptSeeds": 12,
-    "questionsRequiringEditorialApproval": 3632,
+    "questionsRequiringEditorialApproval": 3640,
     "oracleBriefsRequiringEditorialApproval": 700,
     "ebookConceptsRequiringHumanReview": 12
   },
@@ -62624,6 +62624,206 @@
       ],
       "sourceSignalRefs": [
         "ocean:evitamento-financeiro-sob-escassez:scarcity-mindset"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_scent_ritual_01",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Scent ritual",
+      "themeKey": "scent-ritual",
+      "title": "Scent ritual · A dois · 01",
+      "stage": "open",
+      "editorialFunction": "abrir",
+      "text": "Quando surge o tema de scent ritual, o que gostarias que eu percebesse sem teres de repetir?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:rituais-sensoriais-com-plantas-como-marcadores-de-transicao:scent-ritual"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_scent_ritual_02",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Scent ritual",
+      "themeKey": "scent-ritual",
+      "title": "Scent ritual · A dois · 02",
+      "stage": "recognize",
+      "editorialFunction": "reconhecer",
+      "text": "Que gesto concreto poderia tornar o tema de scent ritual mais leve entre nós?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:rituais-sensoriais-com-plantas-como-marcadores-de-transicao:scent-ritual"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_scent_ritual_03",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Scent ritual",
+      "themeKey": "scent-ritual",
+      "title": "Scent ritual · A dois · 03",
+      "stage": "deepen",
+      "editorialFunction": "clarificar",
+      "text": "O que é fácil interpretar mal quando falamos sobre scent ritual?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:rituais-sensoriais-com-plantas-como-marcadores-de-transicao:scent-ritual"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_scent_ritual_04",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Scent ritual",
+      "themeKey": "scent-ritual",
+      "title": "Scent ritual · A dois · 04",
+      "stage": "touch",
+      "editorialFunction": "perguntar",
+      "text": "Que pergunta sobre scent ritual nunca encontrámos o momento certo para fazer?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:rituais-sensoriais-com-plantas-como-marcadores-de-transicao:scent-ritual"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_scent_ritual_05",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Scent ritual",
+      "themeKey": "scent-ritual",
+      "title": "Scent ritual · A dois · 05",
+      "stage": "close",
+      "editorialFunction": "concretizar",
+      "text": "Que exemplo concreto te ajudaria a explicar como vives scent ritual?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:rituais-sensoriais-com-plantas-como-marcadores-de-transicao:scent-ritual"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_scent_ritual_06",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Scent ritual",
+      "themeKey": "scent-ritual",
+      "title": "Scent ritual · A dois · 06",
+      "stage": "signature",
+      "editorialFunction": "reavaliar",
+      "text": "O que gostarias de preservar e o que já poderia mudar em relação a scent ritual?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:rituais-sensoriais-com-plantas-como-marcadores-de-transicao:scent-ritual"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_scent_ritual_07",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Scent ritual",
+      "themeKey": "scent-ritual",
+      "title": "Scent ritual · A dois · 07",
+      "stage": "open",
+      "editorialFunction": "aprofundar",
+      "text": "Que parte de scent ritual preferes explorar devagar, sem pressão para responder já?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:rituais-sensoriais-com-plantas-como-marcadores-de-transicao:scent-ritual"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_scent_ritual_08",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Scent ritual",
+      "themeKey": "scent-ritual",
+      "title": "Scent ritual · A dois · 08",
+      "stage": "recognize",
+      "editorialFunction": "mover",
+      "text": "Qual seria um próximo passo pequeno e realista para conversarmos melhor sobre scent ritual?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:rituais-sensoriais-com-plantas-como-marcadores-de-transicao:scent-ritual"
       ],
       "sourceBasis": "internal_theme_catalogue",
       "independentlyVerifiedDemand": false,

@@ -309,7 +309,8 @@ export const VPC_OCEAN_SIGNALS=[
       "criar um ritual que dá vontade de repetir",
       "alecrim para além da superstição",
       "aroma",
-      "marcar a transição"
+      "marcar a transição",
+      "scent ritual"
     ]
   },
   {
@@ -412,4 +413,4 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-10-18";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-10-19";
