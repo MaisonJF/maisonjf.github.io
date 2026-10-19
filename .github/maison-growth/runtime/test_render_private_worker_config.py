@@ -174,6 +174,7 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["OSIRIS_COUNCIL_ENABLED"], "true")
         self.assertEqual(vars_["OSIRIS_MEMORY_ENABLED"], "true")
         self.assertEqual(vars_["OSIRIS_MEMORY_BRIDGE_URL"], "https://memory.osiris.test/ingest/a13")
+        self.assertLessEqual(len(vars_), 57)
         self.assertEqual(vars_["OSIRIS_GATEWAY_ENABLED"], "false")
         self.assertEqual(vars_["ZERO_COST_MODE"], "true")
 
