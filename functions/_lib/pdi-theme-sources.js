@@ -113,7 +113,8 @@ const PDI_GROUP_SEEDS=[
   {slug:'o-concurso-dos-slogans',label:'O Concurso dos Slogans',focus:'criar slogans rápidos para objetos, hábitos e ideias inventadas e votar no mais inesperado'},
   {slug:'mapa-de-aventuras-locais',label:'Mapa de Aventuras Locais',focus:'inventar pequenas aventuras de baixo custo para descobrir lugares e experiências perto do grupo'},
   {slug:'historia-com-reviravolta',label:'História com Reviravolta',focus:'construir uma história coletiva em que cada pessoa acrescenta uma frase e uma reviravolta'},
-  {slug:'o-conselho-de-personagens',label:'O Conselho de Personagens',focus:'pedir conselhos imaginários a personagens fictícias para dilemas triviais e divertidos'}
+  {slug:'o-conselho-de-personagens',label:'O Conselho de Personagens',focus:'pedir conselhos imaginários a personagens fictícias para dilemas triviais e divertidos'},
+  {slug:'noticias-do-futuro',label:'Notícias do Futuro',focus:'inventar manchetes absurdas sobre o grupo daqui a dez anos sem fazer previsões pessoais invasivas'}
 ];
 
 const MAISON_NATIVE_SEEDS=[
