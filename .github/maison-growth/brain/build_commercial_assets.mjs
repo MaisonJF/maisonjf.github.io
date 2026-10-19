@@ -316,6 +316,10 @@ const payload={
     daily_content_candidates:dailyContentCandidates.length,
     daily_post_candidates:dailyContentCandidates.filter(x=>x.format==='post').length,
     daily_reel_candidates:dailyContentCandidates.filter(x=>x.format==='reel').length,
+    daily_carousel_candidates:dailyContentCandidates.filter(x=>x.format==='carousel').length,
+    daily_story_candidates:dailyContentCandidates.filter(x=>x.format==='story').length,
+    daily_human_need_clusters:[...new Set(dailyContentCandidates.map(x=>x.humanNeedCluster).filter(Boolean))].length,
+    daily_solution_linked_candidates:dailyContentCandidates.filter(x=>Array.isArray(x.maisonSolutionAssets)&&x.maisonSolutionAssets.length>0).length,
     daily_content_requires_human_approval:dailyContentCandidates.every(x=>x.approvalRequired===true),
     proposals_require_human_approval:true,
     automatic_publication:false
