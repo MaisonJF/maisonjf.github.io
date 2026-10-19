@@ -47,6 +47,28 @@ const bookPerspectives={
     {id:'story-structure',label:'Leitor atento à estrutura',appeal:'A viagem para Portugal após uma tragédia pessoal oferece um ponto de partida concreto e um movimento narrativo reconhecível.',question:'Antes de recomendar a amigos, este perfil procuraria perceber o conflito principal e o grau de autonomia deste volume em relação aos restantes livros.'}
   ]
 };
+const READER_VOICES={
+  'para-de-ignorar:practical-reflection':'A ideia de deixar de passar por cima daquilo que já sei que me está a pedir atenção é forte. Quero ver se o livro me dá perguntas e exercícios que consiga levar para a vida real.',
+  'para-de-ignorar:time-poor-reader':'O título prende-me logo, e gosto da promessa direta. Antes de comprar, gostava de espreitar a estrutura: prefiro um livro que vá ao assunto e me deixe alguma coisa prática.',
+  'para-de-ignorar:self-help-sceptic':'O tema interessa-me, mas tenho pouca paciência para fórmulas universais. Convencia-me mais ver exemplos concretos e uma voz que não culpabilize quem está a passar por coisas difíceis.',
+  'raio-azul:spiritual-practice':'A combinação de vontade, proteção e direção parece-me interessante sem vender a ideia de que basta pensar positivo. Gostava de perceber que práticas concretas o livro propõe.',
+  'raio-azul:human-language':'Gosto quando a espiritualidade fala como gente, sem complicar tudo com palavras grandiosas. Uma amostra ajudava-me a ver se o conteúdo mantém essa clareza.',
+  'raio-azul:careful-sceptic':'Posso explorar simbolismo sem precisar de aceitar tudo literalmente; só quero ver as fronteiras entre tradição, reflexão e afirmações factuais bem cuidadas.',
+  'virgulas-do-destino-o-turista:mystery-reader':'Desejo, destino, mistério e encontro — já me deixam curioso. Eu queria uma sinopse um bocadinho mais concreta, sem me estragar as surpresas.',
+  'virgulas-do-destino-o-turista:character-driven':'Gosto de histórias que continuam a levantar perguntas depois do fim. Quero conhecer um pouco da personagem e do conflito para perceber se me vai agarrar.',
+  'virgulas-do-destino-o-turista:new-series-reader':'A ideia de entrar no primeiro livro de uma saga atrai-me. Só gostava de saber se esta primeira história oferece uma conclusão satisfatória ou me deixa apenas à espera da próxima.',
+  'virgulas-do-destino-meandros-da-vida:emotional-fiction':'Perda, desejo e recomeço dão-me vontade de perceber como o personagem é transformado por uma tragédia. Um excerto mostraria-me a voz narrativa.',
+  'virgulas-do-destino-meandros-da-vida:symbolic-reader':'Gosto quando o simbolismo aparece dentro da história e não apenas como decoração. Queria saber como o Tarot participa na viagem de Caim.',
+  'virgulas-do-destino-meandros-da-vida:story-structure':'A viagem para Portugal depois de uma tragédia abre logo possibilidades. Preciso de perceber como a história avança e se este volume funciona sem precisar já do resto da saga.',
+  'para-de-ignorar:party-host':'Isto parece-me uma forma fácil de pôr a mesa a rir sem precisar de materiais. Quero ver uma ronda completa e perceber quanto conteúdo já está desbloqueado.',
+  'para-de-ignorar:quiet-group':'Gosto da opção de passar e de não exigir histórias pessoais. Para mim, um jogo de festa tem de deixar toda a gente confortável, não transformar ninguém no alvo da noite.',
+  'para-de-ignorar:duo-conversation':'Perguntas alternadas podem fazer uma conversa sair do automático. Gostava de experimentar algumas de amostra para ver o tom antes de escolher.',
+  'oraculo-maison-jf:symbolic-reflection':'A divisão por territórios ajuda a escolher uma questão de cada vez; é mais interessante do que uma frase genérica. Só não quero que o texto me diga o que devo fazer como se fosse uma sentença.',
+  'oraculo-maison-jf:practical-reader':'Se as perguntas me ajudarem a olhar de outro ângulo, já vale; quero perceber como a resposta se liga à minha pergunta inicial.',
+  'oraculo-maison-jf:careful-reader':'Gosto da possibilidade de refletir sem ter de tratar a resposta como verdade absoluta. A descrição podia deixar esse limite ainda mais claro.'
+};
+const readerVoice=(assetSlug,profile,fallback)=>READER_VOICES[assetSlug+':'+profile.id]||fallback;
+
 const assessments=[];
 for(const book of ebooks.filter(x=>x.status==='published')){
   const profiles=bookPerspectives[book.slug]||[
@@ -60,7 +82,7 @@ for(const book of ebooks.filter(x=>x.status==='published')){
       id,type:'simulated_editorial_reading',
       assetType:'ebook',assetSlug:book.slug,assetTitle:book.title,
       simulatedProfile:profile.label,
-      simulatedComment:'O que me atrai nesta proposta é isto: '+profile.appeal+' Antes de decidir, eu ainda gostava de perceber: '+profile.question,
+      simulatedComment:readerVoice(book.slug,profile,'O tema desperta-me curiosidade. Antes de decidir, gostava de perceber: '+profile.question),
       editorialNote:profile.appeal,
       constructiveQuestion:profile.question,
       sourceBasis:'data/ebooks.js catalogue description only',
@@ -95,7 +117,7 @@ for(const asset of productPerspectives){
     assessments.push(preserve(id,{
       id,type:'simulated_editorial_reading',
       assetType:asset.assetType,assetSlug:asset.slug,assetTitle:asset.title,
-      simulatedProfile:profile.label,simulatedComment:'O que me atrai nesta proposta é isto: '+profile.appeal+' Antes de decidir, eu ainda gostava de perceber: '+profile.question,editorialNote:profile.appeal,constructiveQuestion:profile.question,
+      simulatedProfile:profile.label,simulatedComment:readerVoice(asset.slug,profile,'O tema desperta-me curiosidade. Antes de decidir, gostava de perceber: '+profile.question),editorialNote:profile.appeal,constructiveQuestion:profile.question,
       sourceBasis:asset.sourceBasis,sourceExcerpt:asset.excerpt,
       fullManuscriptReviewed:false,actualReader:false,verifiedPurchase:false,realCustomer:false,
       testimonial:false,starRating:null,
