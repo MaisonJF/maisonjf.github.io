@@ -60,6 +60,7 @@ for(const book of ebooks.filter(x=>x.status==='published')){
       id,type:'simulated_editorial_reading',
       assetType:'ebook',assetSlug:book.slug,assetTitle:book.title,
       simulatedProfile:profile.label,
+      simulatedComment:'Ao ler apenas a descrição disponível, o que me chama a atenção é: '+profile.appeal+' A minha dúvida antes de comprar seria: '+profile.question,
       editorialNote:profile.appeal,
       constructiveQuestion:profile.question,
       sourceBasis:'data/ebooks.js catalogue description only',
@@ -94,7 +95,7 @@ for(const asset of productPerspectives){
     assessments.push(preserve(id,{
       id,type:'simulated_editorial_reading',
       assetType:asset.assetType,assetSlug:asset.slug,assetTitle:asset.title,
-      simulatedProfile:profile.label,editorialNote:profile.appeal,constructiveQuestion:profile.question,
+      simulatedProfile:profile.label,simulatedComment:'Ao ler apenas a descrição disponível, o que me chama a atenção é: '+profile.appeal+' A minha dúvida antes de comprar seria: '+profile.question,editorialNote:profile.appeal,constructiveQuestion:profile.question,
       sourceBasis:asset.sourceBasis,sourceExcerpt:asset.excerpt,
       fullManuscriptReviewed:false,actualReader:false,verifiedPurchase:false,realCustomer:false,
       testimonial:false,starRating:null,
