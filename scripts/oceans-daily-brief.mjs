@@ -237,7 +237,11 @@ async function main() {
     console.log(JSON.stringify({date:report.date,counts:report.counts,send:false}));
     return;
   }
-  const recipient = required("OCEAN_BRIEFING_EMAIL_TO");
+  const configuredRecipient = required("OCEAN_BRIEFING_EMAIL_TO");
+  // Fail-safe redirect: a stale repository variable must never send Radar reports to the retired inbox.
+  const recipient = configuredRecipient.toLowerCase() === "maisonjf@proton.me"
+    ? "jfadario@pm.me"
+    : configuredRecipient;
   const sender = required("OCEAN_BRIEFING_EMAIL_FROM");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient)) throw new Error("OCEAN_BRIEFING_EMAIL_TO is not a valid email address.");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sender)) throw new Error("OCEAN_BRIEFING_EMAIL_FROM is not a valid email address.");
