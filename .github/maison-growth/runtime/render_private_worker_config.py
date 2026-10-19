@@ -35,12 +35,25 @@ def _private_hostname(private_url: str) -> str:
     return host.encode("idna").decode("ascii")
 
 
+def _osiris_memory_bridge_url(raw: str) -> str:
+    parsed = urlparse(raw.strip())
+    if parsed.scheme != "https" or not parsed.hostname:
+        raise ValueError("osiris_memory_bridge_https_required")
+    if parsed.username or parsed.password or parsed.params or parsed.query or parsed.fragment:
+        raise ValueError("osiris_memory_bridge_url_invalid")
+    if not parsed.path.rstrip("/").endswith("/ingest/a13"):
+        raise ValueError("osiris_memory_bridge_must_target_ingest_endpoint")
+    return raw.strip()
+
+
 def render_private_worker_config(
     *,
     stage_name: str,
     template: dict[str, Any],
     database_id: str | None = None,
     private_url: str | None = None,
+    bridge_smoke_test_passed: bool = False,
+    osiris_memory_bridge_url: str | None = None,
 ) -> dict[str, Any]:
     policy = json.loads(POLICY_PATH.read_text(encoding="utf-8"))
     if stage_name not in PRIVATE_STAGES:
@@ -55,6 +68,14 @@ def render_private_worker_config(
             raise ValueError("private_observe_stage_requires_osiris_without_memory_mirror")
         if stage.get("model_providers_enabled") != ["openrouter_zero_cost"]:
             raise ValueError("private_observe_stage_only_allows_zero_cost_openrouter")
+        if bridge_smoke_test_passed:
+            if stage.get("requires_https_bridge_smoke_test") is not True:
+                raise ValueError("private_observe_stage_memory_mirror_not_policy_authorized")
+            if not osiris_memory_bridge_url:
+                raise ValueError("osiris_memory_bridge_url_required_after_smoke_test")
+            osiris_memory_bridge_url = _osiris_memory_bridge_url(osiris_memory_bridge_url)
+        elif osiris_memory_bridge_url:
+            raise ValueError("osiris_memory_bridge_url_requires_successful_smoke_test")
     else:
         if stage.get("worker_enabled") is not False or stage.get("kill_switch") is not True:
             raise ValueError("private_surface_stage_must_keep_collection_killed")
@@ -90,10 +111,9 @@ def render_private_worker_config(
         "WORKER_ENABLED": "true" if observe_stage else "false",
         "KILL_SWITCH": "false" if observe_stage else "true",
         "OSIRIS_ENABLED": "true" if observe_stage else "false",
-        "OSIRIS_MEMORY_ENABLED": "false",
+        "OSIRIS_MEMORY_ENABLED": "true" if (observe_stage and bridge_smoke_test_passed) else "false",
         "WORKERS_AI_ENABLED": "false",
         "ZERO_COST_WORKERS_AI_FOUNDRY_ENABLED": "false",
-        "WORKERS_AI_MODEL": "",
         "OSIRIS_GATEWAY_ENABLED": "false",
         "OPENROUTER_ENABLED": "true" if observe_stage else "false",
         "OPENROUTER_MODEL": "openrouter/free" if observe_stage else str(vars_.get("OPENROUTER_MODEL", "")),
@@ -118,9 +138,13 @@ def render_private_worker_config(
         "BRAIN_PROPOSAL_API_ENABLED": str(bool(stage.get("brain_proposal_api_enabled", False))).lower(),
         "BRAIN_REVIEW_DECISION_ENABLED": str(bool(stage.get("brain_review_decision_enabled", False))).lower(),
     })
-    # Gemini is disabled in every private stage; omit its unused model variable to
-    # stay under Cloudflare's 64-variable cap after previously configured secrets.
-    vars_.pop("GEMINI_MODEL", None)
+    if observe_stage and bridge_smoke_test_passed:
+        vars_["OSIRIS_MEMORY_BRIDGE_URL"] = osiris_memory_bridge_url
+
+    # Disabled providers have no model value to read; omit unused model variables
+    # to stay below Cloudflare's combined variable/secret limit.
+    for unused_model_var in ("GEMINI_MODEL", "OPENAI_MODEL", "WORKERS_AI_MODEL"):
+        vars_.pop(unused_model_var, None)
 
     databases = config.get("d1_databases")
     if not isinstance(databases, list) or len(databases) != 1:
@@ -149,6 +173,8 @@ def main() -> None:
     parser.add_argument("--template", type=Path, required=True)
     parser.add_argument("--database-id")
     parser.add_argument("--private-url")
+    parser.add_argument("--bridge-smoke-test-passed", action="store_true")
+    parser.add_argument("--osiris-memory-bridge-url")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
@@ -158,6 +184,8 @@ def main() -> None:
         template=template,
         database_id=args.database_id,
         private_url=args.private_url,
+        bridge_smoke_test_passed=args.bridge_smoke_test_passed,
+        osiris_memory_bridge_url=args.osiris_memory_bridge_url,
     )
     hostname = None
     routes = config.get("routes")
@@ -175,6 +203,8 @@ def main() -> None:
         "queue_bindings_present": "queues" in config,
         "ai_binding_present": "ai" in config,
         "collection_enabled": config.get("vars", {}).get("WORKER_ENABLED") == "true",
+        "osiris_memory_enabled": config.get("vars", {}).get("OSIRIS_MEMORY_ENABLED") == "true",
+        "osiris_memory_bridge_configured": bool(config.get("vars", {}).get("OSIRIS_MEMORY_BRIDGE_URL")),
         "public_write_authorized": False,
         "outbound_authorized": False,
         "spend_authorized": False,
