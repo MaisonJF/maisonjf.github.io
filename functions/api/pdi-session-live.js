@@ -38,6 +38,8 @@ export async function onRequestGet({request,env}){
 
     const theme=String(stripeSession.metadata?.pdi_theme||'');
     const locale=normalizeMaisonLocale(stripeSession.metadata?.pdi_locale||'pt-PT');
+    const storedMode=String(stripeSession.metadata?.pdi_mode||'duo');
+    const mode=['duo','group'].includes(storedMode)?storedMode:'invalid';
     const product=getPdiTheme(theme);
     const expectedPrice=getPdiPriceForLocale(locale);
     const marketError=brazilSessionEligibilityResponse(stripeSession,locale,expectedPrice.amount);
@@ -49,6 +51,7 @@ export async function onRequestGet({request,env}){
       stripeSession.metadata?.environment==='maison-jf-live' &&
       stripeSession.metadata?.source==='para-de-ignorar-live' &&
       stripeSession.metadata?.pdi_access==='single-session' &&
+      mode!=='invalid' &&
       stripeSession.amount_total===expectedPrice.amount &&
       stripeSession.currency===expectedPrice.currency &&
       (!requestedTheme||requestedTheme===theme) &&
@@ -68,6 +71,7 @@ export async function onRequestGet({request,env}){
       paid:true,
       theme,
       locale,
+      mode,
       label:localizedProduct?.label||product.label,
       session_id:stripeSession.id,
       game_session_id:frozen.game_session_id,

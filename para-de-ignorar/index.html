@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>PÁRA DE IGNORAR! · Jogo digital | MAISON JF®</title>
-<meta name="description" content="PÁRA DE IGNORAR! · Jogo digital: 28 perguntas. Duas pessoas. Aquilo que sempre quiseste saber, sem saber como perguntar.">
+<meta name="description" content="PÁRA DE IGNORAR! · Jogo digital: 28 perguntas, em modo a dois ou em grupo. Conversas, curiosidade e jogo sem obrigação de responder.">
 <meta name="robots" content="index,follow,max-snippet:-1">
 <link rel="canonical" href="https://maison-jf.com/para-de-ignorar/">
 <link rel="stylesheet" href="../maison.css?v=20260922-globalgold1">
 <script src="../analytics.js" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"PÁRA DE IGNORAR! · Jogo digital","description":"28 perguntas. Duas pessoas. Aquilo que sempre quiseste saber, sem saber como perguntar.","brand":{"@type":"Brand","name":"MAISON JF®"},"offers":{"@type":"Offer","priceCurrency":"EUR","price":"5.00","availability":"https://schema.org/InStock","url":"https://maison-jf.com/para-de-ignorar/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"PÁRA DE IGNORAR! · Jogo digital","description":"28 perguntas. Modo a dois ou em grupo. Conversas, curiosidade e jogo sem obrigação de responder.","brand":{"@type":"Brand","name":"MAISON JF®"},"offers":{"@type":"Offer","priceCurrency":"EUR","price":"5.00","availability":"https://schema.org/InStock","url":"https://maison-jf.com/para-de-ignorar/"}}</script>
 <style>
 .pdi-sale{padding:145px 0 110px}
 .pdi-sale__hero{min-height:72svh;display:grid;place-items:center;text-align:center;padding:50px 0}
@@ -25,6 +25,10 @@
 .pdi-sale__promise{margin-top:95px;border-top:1px solid var(--line);padding-top:75px;display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:start}
 .pdi-sale__promise h2,.pdi-themes h2{font:400 clamp(42px,6vw,72px)/.95 var(--serif);margin:.12em 0}
 .pdi-sale__promise p,.pdi-themes p{color:#aaa39a;max-width:650px}
+.pdi-mode-choice{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:24px auto 0}
+.pdi-mode-option{appearance:none;border:1px solid var(--line);background:#10100f;color:#c6bdb1;padding:13px 18px;font:600 10px/1 var(--sans);text-transform:uppercase;letter-spacing:.12em;cursor:pointer}
+.pdi-mode-option[aria-pressed="true"]{background:#e9e0d2;color:#0b0b0c;border-color:#e9e0d2}
+.pdi-mode-copy{font-size:13px;line-height:1.6;color:#aaa39a;margin:14px auto 0;max-width:560px}
 .pdi-buy{appearance:none;border:1px solid #f5f1e9;background:#f5f1e9;color:#0b0b0c;padding:16px 24px;text-transform:uppercase;letter-spacing:.12em;font:600 11px/1 var(--sans);cursor:pointer;margin-top:28px;text-decoration:none;display:inline-block}
 .pdi-buy[aria-busy="true"],.pdi-buy:disabled{opacity:.55;cursor:not-allowed}
 .pdi-status{font-size:11px;color:#8f887e;margin-top:13px}
@@ -53,10 +57,15 @@
 <main class="pdi-sale shell">
   <section class="pdi-sale__hero">
     <div>
-      <p class="eyebrow">28 perguntas · duas pessoas</p>
+      <p class="eyebrow" id="pdi-promise">28 perguntas · duas pessoas</p>
       <h1>PÁRA DE<br>IGNORAR!</h1>
       <p class="pdi-sale__lead">Aquilo que sempre quiseste saber.<br>Sem saber como perguntar.</p>
       <a class="pdi-buy" id="pdi-choose" href="#temas">Escolher tema</a>
+      <div class="pdi-mode-choice" role="group" aria-label="Modo de jogo">
+        <button class="pdi-mode-option" type="button" data-mode="duo" aria-pressed="true" id="pdi-mode-duo">A dois</button>
+        <button class="pdi-mode-option" type="button" data-mode="group" aria-pressed="false" id="pdi-mode-group">Grupo &amp; festa</button>
+      </div>
+      <p class="pdi-mode-copy" id="pdi-mode-copy">28 perguntas para uma conversa a dois. Uma pergunta de cada vez.</p>
       <p class="pdi-status" id="pdi-status">Uma sessão. Uma conversa que pode mudar qualquer coisa.</p>
     </div>
   </section>
@@ -64,14 +73,14 @@
   <section class="pdi-sale__grid" aria-label="Como funciona">
     <article class="pdi-sale__card"><small>01</small><h2>Pergunta.</h2><p>Não prepares a resposta.</p></article>
     <article class="pdi-sale__card"><small>02</small><h2>Responde. Ou passa.</h2><p>Sem justificações.</p></article>
-    <article class="pdi-sale__card"><small>03</small><h2>Troquem.</h2><p>Agora é a vez do outro.</p></article>
+    <article class="pdi-sale__card"><small>03</small><h2>A vez roda.</h2><p>Conversem, riam ou passem. Sem obrigação de responder.</p></article>
   </section>
   <p class="pdi-sale__micro" style="text-align:center;margin-top:22px">Cada tema · 28 perguntas · pagamento único</p>
 
   <section class="pdi-themes" id="temas">
     <p class="eyebrow">Escolhe por onde entrar</p>
     <h2>Escolhe onde dói.<br>Ou onde tens curiosidade.</h2>
-    <p>Uma conversa de cada vez.</p>
+    <p id="pdi-theme-intro">Uma conversa de cada vez.</p>
     <div class="pdi-theme-grid" id="pdi-theme-grid" aria-live="polite">
       <article class="pdi-theme"><small>A carregar</small><h3>Relações</h3><p>Só um instante…</p></article>
     </div>
@@ -103,7 +112,11 @@
       later:'Volta dentro de momentos.',loadFail:'Os temas não carregaram agora.',
       confirmFail:'Não foi possível confirmar a disponibilidade agora.',
       preparing:'Em preparação',more:'Há mais perguntas a caminho.',soon:'Volta em breve.',
-      questions:'28 perguntas',play:'Jogar',opening:'A abrir pagamento…',
+      questions:'28 perguntas',play:'Jogar',playDuo:'Jogar a dois',playGroup:'Jogar em grupo',opening:'A abrir pagamento…',
+      modeDuo:'28 perguntas para uma conversa a dois. Uma pergunta de cada vez.',
+      modeGroup:'28 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',groupEmpty:'Os packs de Amigos & Festas só aparecem quando houver 28 perguntas aprovadas num tema.',
+      promiseDuo:'28 perguntas · duas pessoas',promiseGroup:'28 perguntas · 3 a 12 pessoas',
+      themeDuo:'Escolhe onde dói. Ou onde tens curiosidade.',themeGroup:'Escolhe o tema da mesa. Os novos packs de Amigos & Festas entram quando tiverem 28 perguntas aprovadas.',
       payFail:'Não foi possível abrir o pagamento. Tenta novamente.'
     },
     'pt-BR':{
@@ -111,7 +124,11 @@
       later:'Volte em alguns instantes.',loadFail:'Os temas não carregaram agora.',
       confirmFail:'Não foi possível confirmar a disponibilidade agora.',
       preparing:'Em preparação',more:'Há mais perguntas a caminho.',soon:'Volte em breve.',
-      questions:'28 perguntas',play:'Jogar',opening:'Abrindo pagamento…',
+      questions:'28 perguntas',play:'Jogar',playDuo:'Jogar a dois',playGroup:'Jogar em grupo',opening:'Abrindo pagamento…',
+      modeDuo:'28 perguntas para uma conversa a dois. Uma pergunta de cada vez.',
+      modeGroup:'28 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',groupEmpty:'Os packs de Amigos & Festas só aparecem quando houver 28 perguntas aprovadas num tema.',
+      promiseDuo:'28 perguntas · duas pessoas',promiseGroup:'28 perguntas · 3 a 12 pessoas',
+      themeDuo:'Escolha onde dói. Ou onde há curiosidade.',themeGroup:'Escolha o tema da mesa. Os novos packs de Amigos & Festas entram quando tiverem 28 perguntas aprovadas.',
       payFail:'Não foi possível abrir o pagamento. Tente novamente.'
     },
     en:{
@@ -119,7 +136,11 @@
       later:'Come back in a moment.',loadFail:'The themes could not be loaded right now.',
       confirmFail:'Availability could not be confirmed right now.',
       preparing:'In preparation',more:'More questions are on the way.',soon:'Come back soon.',
-      questions:'28 questions',play:'Play',opening:'Opening payment…',
+      questions:'28 questions',play:'Play',playDuo:'Play as two',playGroup:'Play in a group',opening:'Opening payment…',
+      modeDuo:'28 questions for a conversation between two people. One question at a time.',
+      modeGroup:'28 questions for 3 to 12 people. Turns rotate, party challenges appear, and anyone can pass.',groupEmpty:'Friends & Party packs appear once a theme has 28 approved live questions.',
+      promiseDuo:'28 questions · two people',promiseGroup:'28 questions · 3 to 12 people',
+      themeDuo:'Choose what hurts. Or what you are curious about.',themeGroup:'Choose a table-friendly theme. New Friends & Party packs appear when 28 questions have passed review.',
       payFail:'Could not open payment. Please try again.'
     },
     es:{
@@ -127,7 +148,11 @@
       later:'Vuelve en unos momentos.',loadFail:'Los temas no se han podido cargar ahora.',
       confirmFail:'No se pudo confirmar la disponibilidad ahora.',
       preparing:'En preparación',more:'Hay más preguntas en camino.',soon:'Vuelve pronto.',
-      questions:'28 preguntas',play:'Jugar',opening:'Abriendo pago…',
+      questions:'28 preguntas',play:'Jugar',playDuo:'Jugar en pareja',playGroup:'Jugar en grupo',opening:'Abriendo pago…',
+      modeDuo:'28 preguntas para una conversación entre dos personas. Una pregunta cada vez.',
+      modeGroup:'28 preguntas para 3 a 12 personas. Los turnos rotan, hay retos de fiesta y cualquiera puede pasar.',groupEmpty:'Los packs de Amigos y Fiesta aparecerán cuando un tema tenga 28 preguntas activas y aprobadas.',
+      promiseDuo:'28 preguntas · dos personas',promiseGroup:'28 preguntas · 3 a 12 personas',
+      themeDuo:'Elige lo que duele. O lo que te da curiosidad.',themeGroup:'Elige un tema apropiado para la mesa. Los nuevos packs de Amigos y Fiesta estarán disponibles cuando tengan 28 preguntas aprobadas.',
       payFail:'No se pudo abrir el pago. Inténtalo de nuevo.'
     }
   }[locale]||null;
@@ -136,32 +161,67 @@
     later:'Volta dentro de momentos.',loadFail:'Os temas não carregaram agora.',
     confirmFail:'Não foi possível confirmar a disponibilidade agora.',
     preparing:'Em preparação',more:'Há mais perguntas a caminho.',soon:'Volta em breve.',
-    questions:'28 perguntas',play:'Jogar',opening:'A abrir pagamento…',
+    questions:'28 perguntas',play:'Jogar',playDuo:'Jogar a dois',playGroup:'Jogar em grupo',opening:'A abrir pagamento…',
+    modeDuo:'28 perguntas para uma conversa a dois. Uma pergunta de cada vez.',
+    modeGroup:'28 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',
+    groupEmpty:'Os packs de Amigos & Festas só aparecem quando houver 28 perguntas aprovadas num tema.',
+    promiseDuo:'28 perguntas · duas pessoas',promiseGroup:'28 perguntas · 3 a 12 pessoas',
+    themeDuo:'Escolhe onde dói. Ou onde tens curiosidade.',themeGroup:'Escolhe o tema da mesa. Os novos packs de Amigos & Festas entram quando tiverem 28 perguntas aprovadas.',
     payFail:'Não foi possível abrir o pagamento. Tenta novamente.'
   };
   const status=document.getElementById('pdi-status');
   const grid=document.getElementById('pdi-theme-grid');
+  const modeButtons=[...document.querySelectorAll('[data-mode]')];
+  const modeCopy=document.getElementById('pdi-mode-copy');
+  const promise=document.getElementById('pdi-promise');
+  const themeIntro=document.getElementById('pdi-theme-intro');
+  let mode=new URLSearchParams(location.search).get('mode')==='group'?'group':'duo';
   let available=new Map();
+  let themeInventory=[];
+
+  function setMode(next){
+    if(!['duo','group'].includes(next))return;
+    mode=next;
+    modeButtons.forEach(button=>{
+      const active=button.dataset.mode===mode;
+      button.setAttribute('aria-pressed',String(active));
+    });
+    modeCopy.textContent=mode==='group'?t.modeGroup:t.modeDuo;
+    promise.textContent=mode==='group'?t.promiseGroup:t.promiseDuo;
+    themeIntro.textContent=mode==='group'?t.themeGroup:t.themeDuo;
+    for(const button of grid.querySelectorAll('.pdi-buy')){
+      button.textContent=mode==='group'?t.playGroup:t.playDuo;
+    }
+    if(themeInventory.length)render(themeInventory);
+  }
+  modeButtons.forEach(button=>button.addEventListener('click',()=>setMode(button.dataset.mode)));
+  setMode(mode);
 
   try{
     const response=await fetch('/api/pdi-themes-live?locale='+encodeURIComponent(locale),{cache:'no-store'});
     const data=await response.json().catch(()=>({themes:[]}));
     if(!response.ok||!Array.isArray(data.themes))throw new Error();
-    available=new Map(data.themes.map(x=>[x.slug,x]));
-    render(data.themes);
-    if(!data.themes.length)status.textContent=t.newThemes;
+    themeInventory=data.themes;
+    render(themeInventory);
+    if(!themeInventory.length)status.textContent=t.newThemes;
   }catch{
     grid.innerHTML='<article class="pdi-theme"><small>'+t.unavailable+'</small><h3>'+t.later+'</h3><p>'+t.loadFail+'</p></article>';
     status.textContent=t.confirmFail;
   }
 
   function render(themes){
-    if(!themes.length){
-      grid.innerHTML='<article class="pdi-theme"><small>'+t.preparing+'</small><h3>'+t.more+'</h3><p>'+t.soon+'</p></article>';
+    const visibleThemes=mode==='group'
+      ?themes.filter(theme=>theme.family==='Amigos, Grupos & Festas')
+      :themes.filter(theme=>theme.family!=='Amigos, Grupos & Festas');
+    available=new Map(visibleThemes.map(theme=>[theme.slug,theme]));
+    if(!visibleThemes.length){
+      const message=mode==='group'?t.groupEmpty:t.soon;
+      grid.innerHTML='<article class="pdi-theme"><small>'+t.preparing+'</small><h3>'+t.more+'</h3><p>'+message+'</p></article>';
+      if(mode==='group')status.textContent=t.groupEmpty;
       return;
     }
     grid.innerHTML='';
-    for(const theme of themes){
+    for(const theme of visibleThemes){
       const card=document.createElement('article');
       card.className='pdi-theme';
       const small=document.createElement('small');small.textContent=theme.family||'PÁRA DE IGNORAR!';
@@ -170,7 +230,7 @@
       const price=document.createElement('p');price.className='pdi-theme__price';price.textContent=theme.display_price||'';
       const button=document.createElement('button');
       button.className='pdi-buy';button.type='button';button.dataset.theme=theme.slug;
-      button.textContent=t.play;
+      button.textContent=mode==='group'?t.playGroup:t.playDuo;
       card.append(small,h,p,price,button);grid.append(card);
     }
   }
@@ -183,12 +243,12 @@
     button.setAttribute('aria-busy','true');
     const original=button.textContent;
     button.textContent=t.opening;
-    window.maisonAnalytics?.track?.('pdi_purchase_intent',{theme,locale,page_path:location.pathname});
+    window.maisonAnalytics?.track?.('pdi_purchase_intent',{theme,locale,mode,page_path:location.pathname});
     try{
       const response=await fetch('/api/create-pdi-checkout-live',{
         method:'POST',
         headers:{'content-type':'application/json'},
-        body:JSON.stringify({theme,locale})
+        body:JSON.stringify({theme,locale,mode})
       });
       const payload=await response.json().catch(()=>({}));
       if(!response.ok||!payload.url)throw new Error();

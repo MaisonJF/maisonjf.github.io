@@ -32,6 +32,14 @@ linear-gradient(#080807,#030303);color:#eee9df}
 .card{text-align:left;transform:translateY(-4svh)}
 .card__meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:42px;font:500 10px/1 Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#766f66}
 .card__question{font:400 clamp(34px,8vw,66px)/1.08 var(--serif);letter-spacing:-.025em;color:#eee8dd;margin:0;max-width:690px}
+.group-setup{margin:24px auto 0;max-width:360px;text-align:left}
+.group-setup[hidden],.group-challenge[hidden]{display:none!important}
+.group-setup label{display:block;color:#b9afa1;font:600 10px/1.4 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.group-setup select{width:100%;background:#10100f;color:#eee8dc;border:1px solid rgba(225,216,202,.3);padding:13px;font:500 14px Arial,sans-serif}
+.group-setup p{font:400 12px/1.6 Arial,sans-serif!important;color:#827a70!important;margin:10px auto 0!important}
+.group-challenge{margin:28px auto 0;padding:20px 18px;border:1px solid rgba(183,154,98,.42);background:rgba(183,154,98,.07);text-align:left}
+.group-challenge small{display:block;color:#b9a37d;font:600 9px/1.4 Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase;margin-bottom:9px}
+.group-challenge p{margin:0;color:#d2c7b8;font:400 15px/1.55 var(--serif)}
 .card__controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:52px}
 .next{appearance:none;border:0;background:none;color:#ded6ca;font:600 11px/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:12px 0;cursor:pointer}
 .pass{appearance:none;border:0;background:none;color:#716b63;font:500 10px/1 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:12px 0;cursor:pointer}
@@ -63,12 +71,27 @@ linear-gradient(#080807,#030303);color:#eee9df}
         <h1>28 perguntas.<br>Duas pessoas.</h1>
         <p>Uma pergunta de cada vez.</p>
         <p class="rule">Podem passar. Sem explicar.</p>
+        <div class="group-setup" id="group-setup" hidden>
+          <label for="group-size" id="group-setup-label">Quantas pessoas vão jogar?</label>
+          <select id="group-size" name="group-size">
+            <option value="3">3 pessoas</option><option value="4" selected>4 pessoas</option>
+            <option value="5">5 pessoas</option><option value="6">6 pessoas</option>
+            <option value="7">7 pessoas</option><option value="8">8 pessoas</option>
+            <option value="9">9 pessoas</option><option value="10">10 pessoas</option>
+            <option value="11">11 pessoas</option><option value="12">12 pessoas</option>
+          </select>
+          <p id="group-setup-note">Não precisamos dos nomes. As respostas ficam fora do jogo.</p>
+        </div>
         <button class="action action--solid" id="start" type="button">Começar</button>
       </div>
 
       <div class="screen card" id="card" aria-live="polite">
         <div class="card__meta"><span id="pack-label">PACK A</span><span id="counter">1 / 14</span></div>
         <p class="card__question" id="question"></p>
+        <div class="group-challenge" id="group-challenge" hidden>
+          <small id="group-challenge-title">DESAFIO DE FESTA</small>
+          <p id="group-challenge-text"></p>
+        </div>
         <div class="card__controls">
           <button class="pass" id="pass" type="button">Passar</button>
           <button class="next" id="next" type="button">Seguinte →</button>
@@ -102,37 +125,116 @@ window.addEventListener('DOMContentLoaded',async()=>{
  const LOCALES=['pt-PT','pt-BR','en','es'];
  const locale=LOCALES.includes(requestedLocale)?requestedLocale:'pt-PT';
  const COPY={
-  'pt-PT':{brand:'PÁRA DE IGNORAR!',loading:'A abrir a tua sessão.',headline:'28 perguntas.<br>Duas pessoas.',one:'Uma pergunta de cada vez.',rule:'Podem passar. Sem explicar.',start:'Começar',pass:'Passar',next:'Seguinte →',swap:'TROQUEM.',swapText:'Agora pergunta a outra pessoa.',cont:'Continuar',finish:'Fica entre vocês.',finishText:'Não preciso de saber o que disseram.',back:'Voltar à Maison',invalid:'Não encontrei uma sessão paga válida.',openFail:'Não foi possível abrir esta sessão.',pack:'PACK'},
-  'pt-BR':{brand:'PARE DE IGNORAR!',loading:'Abrindo sua sessão.',headline:'28 perguntas.<br>Duas pessoas.',one:'Uma pergunta de cada vez.',rule:'Vocês podem passar. Sem explicar.',start:'Começar',pass:'Passar',next:'Seguinte →',swap:'TROQUEM.',swapText:'Agora pergunte à outra pessoa.',cont:'Continuar',finish:'Fica entre vocês.',finishText:'Não preciso saber o que vocês disseram.',back:'Voltar à Maison',invalid:'Não encontrei uma sessão paga válida.',openFail:'Não foi possível abrir esta sessão.',pack:'PACK'},
-  en:{brand:'STOP IGNORING IT!',loading:'Opening your session.',headline:'28 questions.<br>Two people.',one:'One question at a time.',rule:'You can pass. No explanation needed.',start:'Start',pass:'Pass',next:'Next →',swap:'SWITCH.',swapText:'Now ask the other person.',cont:'Continue',finish:'It stays between you.',finishText:'I do not need to know what you said.',back:'Back to Maison',invalid:'I could not find a valid paid session.',openFail:'This session could not be opened.',pack:'PACK'},
-  es:{brand:'¡DEJA DE IGNORARLO!',loading:'Abriendo tu sesión.',headline:'28 preguntas.<br>Dos personas.',one:'Una pregunta cada vez.',rule:'Podéis pasar. Sin explicar.',start:'Empezar',pass:'Pasar',next:'Siguiente →',swap:'CAMBIAD.',swapText:'Ahora pregunta a la otra persona.',cont:'Continuar',finish:'Queda entre vosotros.',finishText:'No necesito saber lo que habéis dicho.',back:'Volver a Maison',invalid:'No he encontrado una sesión pagada válida.',openFail:'No se pudo abrir esta sesión.',pack:'PACK'}
+  'pt-PT':{
+   brand:'PÁRA DE IGNORAR!',loading:'A abrir a tua sessão.',headline:'28 perguntas.<br>Duas pessoas.',groupHeadline:'28 perguntas.<br>Um grupo inteiro.',
+   one:'Uma pergunta de cada vez.',groupOne:'A vez roda. Responde, passa ou lança a conversa ao grupo.',
+   rule:'Podem passar. Sem explicar.',groupRule:'3 a 12 pessoas. Podem passar. Não guardamos respostas.',
+   start:'Começar',pass:'Passar',next:'Seguinte →',swap:'TROQUEM.',swapText:'Agora pergunta a outra pessoa.',cont:'Continuar',
+   finish:'Fica entre vocês.',groupFinish:'A conversa continua.',finishText:'Não preciso de saber o que disseram.',groupFinishText:'28 perguntas. As respostas ficam fora do jogo.',
+   back:'Voltar à Maison',invalid:'Não encontrei uma sessão paga válida.',openFail:'Não foi possível abrir esta sessão.',pack:'PACK',
+   groupSetupLabel:'Quantas pessoas vão jogar?',groupSetupNote:'Não precisamos dos nomes. As respostas ficam fora do jogo.',
+   player:'PESSOA',round:'RODA',challenge:'DESAFIO DE FESTA'
+  },
+  'pt-BR':{
+   brand:'PARE DE IGNORAR!',loading:'Abrindo sua sessão.',headline:'28 perguntas.<br>Duas pessoas.',groupHeadline:'28 perguntas.<br>Um grupo inteiro.',
+   one:'Uma pergunta de cada vez.',groupOne:'A vez roda. Responda, passe ou lance a conversa para o grupo.',
+   rule:'Vocês podem passar. Sem explicar.',groupRule:'3 a 12 pessoas. Passar é permitido. As respostas não são guardadas.',
+   start:'Começar',pass:'Passar',next:'Seguinte →',swap:'TROQUEM.',swapText:'Agora pergunte à outra pessoa.',cont:'Continuar',
+   finish:'Fica entre vocês.',groupFinish:'A conversa continua.',finishText:'Não preciso saber o que vocês disseram.',groupFinishText:'28 perguntas. As respostas ficam fora do jogo.',
+   back:'Voltar à Maison',invalid:'Não encontrei uma sessão paga válida.',openFail:'Não foi possível abrir esta sessão.',pack:'PACK',
+   groupSetupLabel:'Quantas pessoas vão jogar?',groupSetupNote:'Não precisamos dos nomes. As respostas ficam fora do jogo.',
+   player:'PESSOA',round:'RODA',challenge:'DESAFIO DE FESTA'
+  },
+  en:{
+   brand:'STOP IGNORING IT!',loading:'Opening your session.',headline:'28 questions.<br>Two people.',groupHeadline:'28 questions.<br>A whole group.',
+   one:'One question at a time.',groupOne:'Turns rotate. Answer, pass, or bring the group into the conversation.',
+   rule:'You can pass. No explanation needed.',groupRule:'3 to 12 people. Anyone can pass. Answers are never stored.',
+   start:'Start',pass:'Pass',next:'Next →',swap:'SWITCH.',swapText:'Now ask the other person.',cont:'Continue',
+   finish:'It stays between you.',groupFinish:'The conversation carries on.',finishText:'I do not need to know what you said.',groupFinishText:'28 questions. Answers stay out of the game.',
+   back:'Back to Maison',invalid:'I could not find a valid paid session.',openFail:'This session could not be opened.',pack:'PACK',
+   groupSetupLabel:'How many people are playing?',groupSetupNote:'No names needed. Answers stay out of the game.',
+   player:'PLAYER',round:'ROUND',challenge:'PARTY CHALLENGE'
+  },
+  es:{
+   brand:'¡DEJA DE IGNORARLO!',loading:'Abriendo tu sesión.',headline:'28 preguntas.<br>Dos personas.',groupHeadline:'28 preguntas.<br>Todo el grupo.',
+   one:'Una pregunta cada vez.',groupOne:'Los turnos rotan. Responde, pasa o incorpora al grupo a la conversación.',
+   rule:'Podéis pasar. Sin explicar.',groupRule:'De 3 a 12 personas. Cualquiera puede pasar. No guardamos respuestas.',
+   start:'Empezar',pass:'Pasar',next:'Siguiente →',swap:'CAMBIAD.',swapText:'Ahora pregunta a la otra persona.',cont:'Continuar',
+   finish:'Queda entre vosotros.',groupFinish:'La conversación continúa.',finishText:'No necesito saber lo que habéis dicho.',groupFinishText:'28 preguntas. Las respuestas no se guardan.',
+   back:'Volver a Maison',invalid:'No he encontrado una sesión pagada válida.',openFail:'No se pudo abrir esta sesión.',pack:'PACK',
+   groupSetupLabel:'¿Cuántas personas van a jugar?',groupSetupNote:'No necesitamos los nombres. Las respuestas no se guardan.',
+   player:'PERSONA',round:'RONDA',challenge:'RETO DE FIESTA'
+  }
  }[locale];
+ const GROUP_CHALLENGES={
+  'pt-PT':[
+   {title:'VOTAÇÃO DE MESA',text:'Sem combinar: apontem para quem improvisaria melhor uma viagem sem plano.'},
+   {title:'HISTÓRIA RELÂMPAGO',text:'Conta uma história engraçada e leve que queiras partilhar. Ou passa, sem explicar.'},
+   {title:'DEFESA IMPROVÁVEL',text:'Tens 15 segundos para defender um gosto inofensivo de que gostas mais do que admites.'},
+   {title:'BANDA SONORA',text:'Que música entrava agora como banda sonora desta noite? Cada pessoa pode propor uma.'},
+   {title:'PONTO EM COMUM',text:'O grupo tem 10 segundos para encontrar uma coisa em comum entre três pessoas à mesa.'},
+   {title:'ELENCO DA NOITE',text:'Escolham quem seria o navegador, quem escolhia a música e quem chegava com snacks.'},
+   {title:'DILEMA EXPRESSO',text:'Preferiam uma semana sem streaming ou uma semana sem comida de entrega? Votem ao mesmo tempo.'},
+   {title:'TÍTULO DE FILME',text:'Inventem um título de filme para esta noite. O grupo escolhe o mais certeiro.'}
+  ],
+  'pt-BR':[
+   {title:'VOTAÇÃO DA MESA',text:'Sem combinar: apontem quem improvisaria melhor uma viagem sem plano.'},
+   {title:'HISTÓRIA RELÂMPAGO',text:'Conte uma história engraçada e leve que queira compartilhar. Ou passe, sem explicar.'},
+   {title:'DEFESA IMPROVÁVEL',text:'Você tem 15 segundos para defender um gosto inofensivo de que gosta mais do que admite.'},
+   {title:'TRILHA SONORA',text:'Que música entraria agora como trilha sonora desta noite? Cada pessoa pode sugerir uma.'},
+   {title:'PONTO EM COMUM',text:'O grupo tem 10 segundos para encontrar algo em comum entre três pessoas à mesa.'},
+   {title:'ELENCO DA NOITE',text:'Escolham quem seria o navegador, quem escolheria a música e quem chegaria com petiscos.'},
+   {title:'DILEMA EXPRESSO',text:'Preferiam uma semana sem streaming ou uma semana sem delivery? Votem ao mesmo tempo.'},
+   {title:'TÍTULO DE FILME',text:'Inventem um título de filme para esta noite. O grupo escolhe o mais certeiro.'}
+  ],
+  en:[
+   {title:'TABLE VOTE',text:'Without discussing it first, point to whoever would improvise best on a trip with no plan.'},
+   {title:'QUICK STORY',text:'Share a funny, harmless story you feel like telling. Or pass, no explanation needed.'},
+   {title:'UNLIKELY DEFENCE',text:'You have 15 seconds to defend a harmless guilty pleasure you like more than you admit.'},
+   {title:'SOUNDTRACK',text:'What song would be the soundtrack to this moment? Everyone can suggest one.'},
+   {title:'COMMON GROUND',text:'The group has 10 seconds to find one thing three people at the table have in common.'},
+   {title:'CAST OF THE NIGHT',text:'Choose who would navigate, who would pick the music, and who would arrive with snacks.'},
+   {title:'QUICK DILEMMA',text:'One week without streaming or one week without takeout? Vote at the same time.'},
+   {title:'MOVIE TITLE',text:'Invent a movie title for this night. The group picks the most accurate one.'}
+  ],
+  es:[
+   {title:'VOTACIÓN DE MESA',text:'Sin hablarlo antes, señalad quién improvisaría mejor un viaje sin plan.'},
+   {title:'HISTORIA RELÁMPAGO',text:'Cuenta una historia divertida y ligera que quieras compartir. O pasa, sin explicar.'},
+   {title:'DEFENSA IMPROBABLE',text:'Tienes 15 segundos para defender un gusto inofensivo que te encanta más de lo que admites.'},
+   {title:'BANDA SONORA',text:'¿Qué canción sería la banda sonora de este momento? Cada persona puede proponer una.'},
+   {title:'PUNTO EN COMÚN',text:'El grupo tiene 10 segundos para encontrar algo en común entre tres personas de la mesa.'},
+   {title:'REPARTO DE LA NOCHE',text:'Elegid quién navegaría, quién pondría la música y quién llegaría con aperitivos.'},
+   {title:'DILEMA RÁPIDO',text:'¿Una semana sin streaming o una semana sin comida a domicilio? Votad a la vez.'},
+   {title:'TÍTULO DE PELÍCULA',text:'Inventad un título de película para esta noche. El grupo elige el más acertado.'}
+  ]
+ };
  document.documentElement.lang=locale;
  const track=(name,data)=>window.maisonAnalytics?.track?window.maisonAnalytics.track(name,data):(window.__maisonAnalyticsQueue=window.__maisonAnalyticsQueue||[]).push([name,data]);
  const screens=[...document.querySelectorAll('.screen')];
  const show=id=>{screens.forEach(x=>x.classList.toggle('is-active',x.id===id));window.scrollTo({top:0,behavior:'instant'})};
  const fail=message=>{document.getElementById('error').innerHTML='<p>'+escapeHtml(message)+'</p><a href="../">'+escapeHtml(COPY.back)+'</a>';show('error')};
  const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-
  if(!/^cs_live_[A-Za-z0-9]+$/.test(sessionId)){fail(COPY.invalid);return}
 
  let payload;
  try{
-   const url='/api/pdi-session-live?session_id='+encodeURIComponent(sessionId)+(theme?'&theme='+encodeURIComponent(theme):'')+'&locale='+encodeURIComponent(locale);
-   const response=await fetch(url,{headers:{Accept:'application/json'},cache:'no-store'});
-   payload=await response.json().catch(()=>({}));
-   if(!response.ok||!payload?.paid||!payload?.packs?.A||!payload?.packs?.B)throw new Error(COPY.openFail);
+  const url='/api/pdi-session-live?session_id='+encodeURIComponent(sessionId)+(theme?'&theme='+encodeURIComponent(theme):'')+'&locale='+encodeURIComponent(locale);
+  const response=await fetch(url,{headers:{Accept:'application/json'},cache:'no-store'});
+  payload=await response.json().catch(()=>({}));
+  if(!response.ok||!payload?.paid||!payload?.packs?.A||!payload?.packs?.B)throw new Error(COPY.openFail);
  }catch(error){fail(error?.message||COPY.openFail);return}
 
+ const mode=payload.mode==='group'?'group':'duo';
+ const groupMode=mode==='group';
  const label=String(payload.label||'Relações');
  document.title=COPY.brand+' | MAISON JF®';
  document.getElementById('theme-label').textContent=COPY.brand+' · '+label.toUpperCase();
  document.getElementById('intro-theme').textContent=label.toUpperCase();
  document.querySelector('#loading .intro__mark').textContent=COPY.brand;
  document.querySelector('#loading .rule').textContent=COPY.loading;
- document.querySelector('#intro h1').innerHTML=COPY.headline;
- document.querySelector('#intro > p:not(.intro__mark):not(.rule)').textContent=COPY.one;
- document.querySelector('#intro .rule').textContent=COPY.rule;
+ document.querySelector('#intro h1').innerHTML=groupMode?COPY.groupHeadline:COPY.headline;
+ document.querySelector('#intro > p:not(.intro__mark):not(.rule)').textContent=groupMode?COPY.groupOne:COPY.one;
+ document.querySelector('#intro .rule').textContent=groupMode?COPY.groupRule:COPY.rule;
  document.getElementById('start').textContent=COPY.start;
  document.getElementById('pass').textContent=COPY.pass;
  document.getElementById('next').textContent=COPY.next;
@@ -140,73 +242,99 @@ window.addEventListener('DOMContentLoaded',async()=>{
  document.querySelector('#swap > p:not(.intro__mark)').textContent=COPY.swapText;
  document.getElementById('continue').textContent=COPY.cont;
  document.querySelector('#finish .intro__mark').textContent=COPY.brand;
- document.querySelector('#finish h1').textContent=COPY.finish;
- document.querySelector('#finish > p:not(.intro__mark)').textContent=COPY.finishText;
+ document.querySelector('#finish h1').textContent=groupMode?COPY.groupFinish:COPY.finish;
+ document.querySelector('#finish > p:not(.intro__mark)').textContent=groupMode?COPY.groupFinishText:COPY.finishText;
+ document.getElementById('group-setup-label').textContent=COPY.groupSetupLabel;
+ document.getElementById('group-setup-note').textContent=COPY.groupSetupNote;
+ document.getElementById('group-setup').hidden=!groupMode;
 
  const packs={A:payload.packs.A,B:payload.packs.B};
- const sendEvent=(event,questionId='')=>{
-   const body={
-     session_id:sessionId,
-     game_session_id:String(payload.game_session_id||''),
-     event
-   };
-   if(questionId)body.question_id=questionId;
-   fetch('/api/pdi-event-live',{
-     method:'POST',
-     headers:{'content-type':'application/json'},
-     body:JSON.stringify(body),
-     keepalive:true,
-     cache:'no-store'
-   }).catch(()=>{});
- };
- const storageKey='maison_pdi_progress_'+sessionId;
- let state={pack:'A',index:0,started:false,swapped:false,finished:false};
+ const storageKey='maison_pdi_progress_'+sessionId+'_'+mode;
+ let state={pack:'A',index:0,started:false,swapped:false,finished:false,players:4};
  try{
-   const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
-   if(saved&&['A','B'].includes(saved.pack)&&Number.isInteger(saved.index))state={...state,...saved};
+  const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
+  if(saved&&['A','B'].includes(saved.pack)&&Number.isInteger(saved.index)&&saved.index>=0&&saved.index<14){
+    state={...state,...saved};
+  }
  }catch{}
-
+ if(!Number.isInteger(state.players)||state.players<3||state.players>12)state.players=4;
+ const playerSelect=document.getElementById('group-size');
+ playerSelect.value=String(state.players);
+ playerSelect.addEventListener('change',()=>{
+  const count=Number(playerSelect.value);
+  if(Number.isInteger(count)&&count>=3&&count<=12){state.players=count;save();}
+ });
  function save(){try{localStorage.setItem(storageKey,JSON.stringify(state))}catch{}}
+ function position(){return (state.pack==='A'?0:14)+state.index+1}
+ const challengeBox=document.getElementById('group-challenge');
  function renderCard(){
-   const cards=packs[state.pack];
-   const card=cards[state.index];
-   if(!card){finish();return}
-   document.getElementById('pack-label').textContent=COPY.pack+' '+state.pack;
-   document.getElementById('counter').textContent=(state.index+1)+' / 14';
-   document.getElementById('question').textContent=card.text;
-   show('card');
-   track('pdi_card_view',{theme:payload.theme,locale,pack:state.pack,position:state.index+1,page_path:location.pathname});
+  const cards=packs[state.pack];
+  const card=cards[state.index];
+  if(!card){finish();return}
+  const absolute=position();
+  const player=((absolute-1)%state.players)+1;
+  document.getElementById('pack-label').textContent=groupMode
+    ?COPY.round+' '+Math.ceil(absolute/14)+' · '+COPY.player+' '+player
+    :COPY.pack+' '+state.pack;
+  document.getElementById('counter').textContent=groupMode?absolute+' / 28':(state.index+1)+' / 14';
+  document.getElementById('question').textContent=card.text;
+  if(groupMode&&absolute%4===0){
+    const challenge=GROUP_CHALLENGES[locale][Math.floor((absolute-1)/4)%GROUP_CHALLENGES[locale].length];
+    document.getElementById('group-challenge-title').textContent=COPY.challenge+' · '+challenge.title;
+    document.getElementById('group-challenge-text').textContent=challenge.text;
+    challengeBox.hidden=false;
+  }else challengeBox.hidden=true;
+  document.getElementById('group-setup').hidden=!groupMode||state.started;
+  show('card');
+  track('pdi_card_view',{theme:payload.theme,locale,mode,pack:state.pack,position:absolute,...(groupMode?{player_turn:player,group_size:state.players}:{}),page_path:location.pathname});
  }
+ const sendEvent=(event,questionId='')=>{
+  const body={session_id:sessionId,game_session_id:String(payload.game_session_id||''),event};
+  if(questionId)body.question_id=questionId;
+  fetch('/api/pdi-event-live',{
+   method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),
+   keepalive:true,cache:'no-store'
+  }).catch(()=>{});
+ };
  function advance(kind){
-   const wasLast=state.index>=13;
-   const currentCard=packs[state.pack]?.[state.index];
-   track(kind==='pass'?'pdi_card_pass':'pdi_card_advance',{theme:payload.theme,locale,pack:state.pack,position:state.index+1,page_path:location.pathname});
-   if(currentCard?.id)sendEvent(kind==='pass'?'passed':'advanced',currentCard.id);
-   if(!wasLast){state.index+=1;save();renderCard();return}
-   if(state.pack==='A'){state.swapped=true;save();show('swap');track('pdi_swap_reached',{theme:payload.theme,locale,page_path:location.pathname});return}
-   finish();
+  const wasLast=state.index>=13;
+  const absolute=position();
+  const currentCard=packs[state.pack]?.[state.index];
+  const player=((absolute-1)%state.players)+1;
+  track(kind==='pass'?'pdi_card_pass':'pdi_card_advance',{theme:payload.theme,locale,mode,pack:state.pack,position:absolute,...(groupMode?{player_turn:player,group_size:state.players}:{}),page_path:location.pathname});
+  if(currentCard?.id)sendEvent(kind==='pass'?'passed':'advanced',currentCard.id);
+  if(!wasLast){state.index+=1;save();renderCard();return}
+  if(state.pack==='A'&&groupMode){
+    state.pack='B';state.index=0;state.swapped=false;save();
+    track('pdi_group_round_transition',{theme:payload.theme,locale,mode,group_size:state.players,page_path:location.pathname});
+    renderCard();return;
+  }
+  if(state.pack==='A'){state.swapped=true;save();show('swap');track('pdi_swap_reached',{theme:payload.theme,locale,mode,page_path:location.pathname});return}
+  finish();
  }
  function finish(){
-   state.finished=true;state.pack='B';state.index=13;save();show('finish');
-   track('pdi_session_complete',{theme:payload.theme,locale,page_path:location.pathname});
-   sendEvent('completed');
+  state.finished=true;state.pack='B';state.index=13;save();show('finish');
+  track('pdi_session_complete',{theme:payload.theme,locale,mode,...(groupMode?{group_size:state.players}:{}),page_path:location.pathname});
+  sendEvent('completed');
  }
-
  document.getElementById('start').addEventListener('click',()=>{
-   state.started=true;save();renderCard();track('pdi_session_start',{theme:payload.theme,locale,page_path:location.pathname});
+  if(groupMode)state.players=Number(playerSelect.value)||4;
+  state.started=true;save();renderCard();
+  track('pdi_session_start',{theme:payload.theme,locale,mode,...(groupMode?{group_size:state.players}:{}),page_path:location.pathname});
  });
  document.getElementById('next').addEventListener('click',()=>advance('next'));
  document.getElementById('pass').addEventListener('click',()=>advance('pass'));
  document.getElementById('continue').addEventListener('click',()=>{
-   state.pack='B';state.index=0;state.swapped=false;save();renderCard();
+  state.pack='B';state.index=0;state.swapped=false;save();renderCard();
  });
-
  if(state.finished){show('finish')}
+ else if(state.started&&groupMode){renderCard()}
  else if(state.started&&state.pack==='B'){renderCard()}
  else if(state.started&&state.swapped){show('swap')}
  else if(state.started){renderCard()}
  else show('intro');
 });
+
 </script>
 </body>
 </html>

@@ -113,6 +113,7 @@
       "kill_switch": false,
       "osiris_osint_enabled": true,
       "osiris_memory_enabled": false,
+      "requires_https_bridge_smoke_test": true,
       "brain_control_api_enabled": true,
       "brain_proposal_api_enabled": false,
       "brain_review_decision_enabled": false,
