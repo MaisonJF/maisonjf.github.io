@@ -314,6 +314,7 @@ const payload={
     editorial_queue_to_commercial_assets:true,
     ebook_proposals:ebookProposals.length,
     daily_content_candidates:dailyContentCandidates.length,
+    daily_themes_per_ocean_cap:editorialQueue.summary?.dailyThemesPerOceanCap||0,
     daily_post_candidates:dailyContentCandidates.filter(x=>x.format==='post').length,
     daily_reel_candidates:dailyContentCandidates.filter(x=>x.format==='reel').length,
     daily_carousel_candidates:dailyContentCandidates.filter(x=>x.format==='carousel').length,
