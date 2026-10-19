@@ -64,6 +64,9 @@ class RebuildCommercialContextTests(unittest.TestCase):
         queue_builder=(ROOT/"build_editorial_queue.mjs").read_text(encoding="utf-8")
         for contract in (
             "dailyContentCandidates",
+            "maisonBridge",
+            "PÁRA DE IGNORAR! propõe perguntas interativas",
+            "Os rituais sensoriais MAISON JF podem marcar uma pausa",
             "questionThemeCandidates",
             "slice(0,3)",
             "format:'post'",
