@@ -77,6 +77,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
             "normalizeHumanTheme",
             "ENGLISH_THEME_TRANSLATIONS",
             "UNKNOWN_ENGLISH_THEME",
+            "dailyThemesPerOceanCap:MAX_DAILY_THEMES_PER_OCEAN",
             "format:'post'",
             "format:'reel'",
             "format:'carousel'",
@@ -124,6 +125,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
         self.assertIn("editorialQueue.dailyContentCandidates",assets_builder)
         self.assertIn("daily_content_candidates:dailyContentCandidates.length",assets_builder)
         self.assertIn("daily_content_requires_human_approval",assets_builder)
+        self.assertIn("daily_themes_per_ocean_cap:editorialQueue.summary?.dailyThemesPerOceanCap||0",assets_builder)
         self.assertIn("daily_carousel_candidates",assets_builder)
         self.assertIn("daily_story_candidates",assets_builder)
 
