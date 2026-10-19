@@ -39,7 +39,7 @@ class OsirisBridgeContractTests(unittest.TestCase):
         self.assertIn("osiris_memory_bridge_https_required",smoke)
         self.assertIn("osiris_memory_bridge_authentication_failed",smoke)
         self.assertIn("unsupported_envelope",smoke)
-        self.assertIn("write_performed\\\":False",smoke)
+        self.assertIn('"write_performed":False',smoke)
         self.assertIn("Deliberately invalid schema",smoke)
 
     def test_osiris_context_uses_pinned_mcp_sdk(self):
