@@ -68,7 +68,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
             "maisonSolutionForNeed(humanNeed.id,adjacency)",
             "humanNeedAction(humanNeed.id)",
             "const text=[ocean.territory,ocean.intent,ocean.painLanguage",
-            "commercial adjacency must never be allowed to make unrelated human needs look like product demand",
+            "Commercial adjacency is deliberately excluded",
             "humanNeedCluster:humanNeed.id",
             "humanNeedLabel:humanNeed.label",
             "questionThemeCandidates",
