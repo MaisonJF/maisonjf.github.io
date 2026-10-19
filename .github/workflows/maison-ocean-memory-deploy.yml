@@ -152,16 +152,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          bridge_args=()
+          render_cmd=(
+            python .github/maison-growth/runtime/render_private_worker_config.py
+            private_observe_candidate
+            --template workers/maison-intelligence/wrangler.jsonc
+            --private-url "$BRAIN_CONTROL_API_URL"
+          )
           if [[ "$OSIRIS_BRIDGE_ENABLED" == "true" ]]; then
-            bridge_args+=(--bridge-smoke-test-passed --osiris-memory-bridge-url "$OSIRIS_MEMORY_BRIDGE_URL")
+            render_cmd+=(--bridge-smoke-test-passed --osiris-memory-bridge-url "$OSIRIS_MEMORY_BRIDGE_URL")
           fi
-          python .github/maison-growth/runtime/render_private_worker_config.py \
-            private_observe_candidate \
-            --template workers/maison-intelligence/wrangler.jsonc \
-            --private-url "$BRAIN_CONTROL_API_URL" \
-            "${bridge_args[@]}" \
-            --output workers/maison-intelligence/wrangler.private.runtime.jsonc
+          render_cmd+=(--output workers/maison-intelligence/wrangler.private.runtime.jsonc)
+          "${render_cmd[@]}"
 
       - name: Guard Cloudflare Workers variable limit
         run: |
