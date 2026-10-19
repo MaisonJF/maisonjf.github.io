@@ -193,18 +193,36 @@ for(const proposal of ebookProposals){
 const previousDailyById=new Map((previous.dailyContentCandidates||[]).map(x=>[x.id,x]));
 function classifyHumanNeed(ocean){
   const text=[ocean.territory,ocean.intent,ocean.painLanguage,ocean.commercialAdjacency,...(ocean.questionThemeCandidates||[])].join(' ').toLocaleLowerCase('pt-PT');
+  // Put narrow, commercially sensitive needs first so broad words such as
+  // "autonomy", "pause" or "company" cannot swallow distinct categories.
   const rules=[
-    {id:'autonomia_descanso_transicao',label:'Autonomia, descanso e transições',pattern:/adiar o sono|descanso|descansar|tempo pr[oó]prio|autonomia|domingo|segunda-feira|transi[cç][aã]o|fim do dia|obriga[cç][oõ]es|culpa ao descansar|recuperar tempo/},
-    {id:'limites_escolhas_agencia',label:'Limites, escolhas e autonomia',pattern:/limite|dizer n[aã]o|medo da rea[cç][aã]o|rea[cç][aã]o do outro|press[aã]o social|escolha aut[oó]noma|controlo|controle|autonomia condicionada/},
-    {id:'ligacao_pertença',label:'Ligação, pertença e relações',pattern:/rela[cç][aã]o|apego|afeto|afeto|solid[aã]o|companhia|perten[cç]a|espera uma resposta|resposta importante|gestos invis[ií]veis|presen[cç]a que ampara|conversa|comunica[cç][aã]o/},
-    {id:'clareza_incerteza',label:'Clareza perante a incerteza',pattern:/incerteza|incertezas|decis[aã]o|decidir|futuro|suspenso|esperar|rumina[cç][aã]o|n[aã]o consegues perceber|caminho|mudan[cç]a/},
-    {id:'atencao_informacao',label:'Atenção e relação com a informação',pattern:/aten[cç][aã]o|fragmentada|interrup[cç][oõ]es digitais|doomscroll|scroll|feed|telem[oó]vel|ecr[aã]|informa[cç][aã]o|foco/},
-    {id:'valor_autoconhecimento',label:'Valor pessoal e reconhecimento de padrões',pattern:/autoestima|valor pessoal|reconhecimento|autoabandono|padr[oõ]es|vergonha|auto[jj]ulgamento|merecido|merecer|identidade/},
-    {id:'seguranca_financeira',label:'Segurança financeira e pressão para gastar',pattern:/dinheiro|financeir|gastar|gasto|consumo|or[cç]amento|vergonha de dizer n[aã]o|press[aã]o.*gastar/},
-    {id:'rituais_sensoriais',label:'Rituais sensoriais e passagem de momento',pattern:/sensorial|aroma|plantas|ritual|casa|corpo|marcadores de transi[cç][aã]o|gesto|toque|pausa/},
-    {id:'presenca_apoio',label:'Presença e apoio sem tentar resolver tudo',pattern:/ampara|apoio|escuta|presen[cç]a|acompanhar|companhia|atravessar um momento/}
+    {id:'seguranca_financeira',label:'Segurança financeira e pressão para gastar',pattern:/dinheiro|financeir|gastar|gasto|consumo|or[cç]amento|press[aã]o.{0,24}gastar|vergonha de dizer n[aã]o/},
+    {id:'rituais_sensoriais',label:'Rituais sensoriais e passagem de momento',pattern:/sensorial|aroma|plantas|ritual|marcadores de transi[cç][aã]o|toque|escalda-p[eé]s|vela arom[aá]tica|n[eé]voa de ambiente/},
+    {id:'atencao_informacao',label:'Atenção e relação com a informação',pattern:/aten[cç][aã]o fragmentada|interrup[cç][oõ]es digitais|doomscroll|scroll|feed|telem[oó]vel|ecr[aã]|informa[cç][aã]o|foco|mudan[cç]as constantes de contexto/},
+    {id:'presenca_apoio',label:'Presença e apoio sem tentar resolver tudo',pattern:/presen[cç]a que ampara|apoio sem tentar resolver|escuta orientada|companhia|acompanhar|atravessar um momento|precisa de presen[cç]a/},
+    {id:'limites_escolhas_agencia',label:'Limites, escolhas e autonomia',pattern:/limite|dizer n[aã]o|medo da rea[cç][aã]o|rea[cç][aã]o do outro|escolha aut[oó]noma|autonomia condicionada|puni[cç][aã]o|retirada ou press[aã]o/},
+    {id:'ligacao_pertença',label:'Ligação, pertença e relações',pattern:/rela[cç][aã]o|apego|afeto|solid[aã]o|perten[cç]a|espera uma resposta|resposta importante|gestos invis[ií]veis|conversa|comunica[cç][aã]o/},
+    {id:'clareza_incerteza',label:'Clareza perante a incerteza',pattern:/incerteza|decis[aã]o|decidir|futuro|ficar em suspenso|esperar por informa[cç][aã]o|rumina[cç][aã]o|n[aã]o consegues perceber|caminho|mudan[cç]a/},
+    {id:'valor_autoconhecimento',label:'Valor pessoal e reconhecimento de padrões',pattern:/autoestima|valor pessoal|reconhecimento|autoabandono|padr[oõ]es|vergonha|auto[jj]ulgamento|merecido|merecer|identidade|o que funciona na rela[cç][aã]o/},
+    {id:'autonomia_descanso_transicao',label:'Autonomia, descanso e transições',pattern:/adiar o sono|bedtime procrastination|descanso|descansar|tempo pr[oó]prio|domingo|segunda-feira|fim do dia|obriga[cç][oõ]es|culpa ao descansar|recuperar tempo|prolongar a noite/}
   ];
   return rules.find(rule=>rule.pattern.test(text))||{id:'reflexao_pessoal',label:'Autoconhecimento e reflexão pessoal'};
+}
+
+function humanNeedAction(cluster){
+  const actions={
+    seguranca_financeira:'Antes de assumires uma despesa, define o limite que queres proteger. Podes dizer: “Desta vez não consigo gastar esse valor; quero estar presente, mas preciso de respeitar o meu orçamento.”',
+    rituais_sensoriais:'Escolhe um gesto sensorial simples — água morna, luz suave ou um aroma de que gostes — para assinalar a passagem entre tarefas. O gesto é um marcador, não uma cura.',
+    atencao_informacao:'Escolhe uma tarefa pequena, afasta uma interrupção durante dez minutos e decide quando voltas a consultar mensagens ou notícias. Experimenta sem exigir foco perfeito.',
+    presenca_apoio:'Pede o tipo de presença de que precisas: “Podes ouvir-me durante dez minutos sem tentares resolver?” ou “Podes ajudar-me com uma tarefa concreta?”',
+    limites_escolhas_agencia:'Escreve uma frase de limite que possas dizer sem atacar: “Preciso de tempo para pensar e respondo-te amanhã.” Um limite não controla a reação da outra pessoa.',
+    ligacao_pertença:'Experimenta perguntar à outra pessoa: “Queres que te ouça, que pensemos numa solução ou que te faça companhia?” Não assumes que sabes do que ela precisa.',
+    clareza_incerteza:'Divide uma folha em duas colunas: “o que sei” e “o que ainda não sei”. Escolhe apenas uma ação útil para a parte que está ao teu alcance.',
+    valor_autoconhecimento:'Separa o acontecimento da conclusão sobre ti: escreve o que ocorreu, a história que contaste a ti próprio e uma segunda explicação possível.',
+    autonomia_descanso_transicao:'Reserva um intervalo pequeno e realista que seja teu, mesmo que sejam dez minutos. Decide o que queres fazer com esse tempo, em vez de o deixar desaparecer entre obrigações.',
+    reflexao_pessoal:'Pergunta-te o que aconteceu, que necessidade pode estar presente e qual seria um próximo passo pequeno e realista.'
+  };
+  return actions[cluster]||actions.reflexao_pessoal;
 }
 
 function maisonSolutionForNeed(cluster,adjacency){
@@ -259,6 +277,7 @@ const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
   const internalOperations=/(dna maison|princ[ií]pios transfer[ií]veis|mestres hist[oó]ricos|aquisi[cç][aã]o org[aâ]nica|reconhecimento da maison|tr[aá]fego qualificado|estrat[eé]gia comercial da maison)/i.test([territory,need,pain,adjacency].join(' '));
   if(internalOperations)return [];
   const humanNeed=classifyHumanNeed(ocean);
+  const helpfulAction=humanNeedAction(humanNeed.id);
   const solution=maisonSolutionForNeed(humanNeed.id,adjacency);
   const sourceId='brain_daily_'+slug(territory);
   const themes=[...new Set((ocean.questionThemeCandidates||[]).map(x=>String(x||'').trim()).filter(Boolean))].slice(0,3);
@@ -267,13 +286,13 @@ const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
     {
       format:'post',angle:'reconhecimento_e_microacao',
       hook:'Não tens de resolver tudo hoje. Começa por perceber o que '+theme.toLocaleLowerCase('pt-PT')+' te está a pedir.',
-      body:'Uma situação pode pesar por mais do que uma razão. '+pain+'\n\nExperimenta três passos: dá um nome ao que está a acontecer; pergunta-te de que precisas; escolhe uma ação pequena e realista para hoje. Não precisas de transformar uma sensação numa identidade nem de chegar já a uma conclusão.\n\n'+solution.bridge,
+      body:'Uma situação pode pesar por mais do que uma razão. '+pain+'\n\nExperimenta este passo concreto: '+helpfulAction+'\n\nNão precisas de transformar uma sensação numa identidade nem de chegar já a uma conclusão.\n\n'+solution.bridge,
       cta:solution.cta
     },
     {
       format:'reel',angle:'hook_nomear_escolher',
       hook:'Uma pergunta para levares contigo quando aparece '+theme.toLocaleLowerCase('pt-PT')+'.',
-      body:'Pára por um momento. O que aconteceu, sem interpretações? O que sentiste ou precisaste? Qual é o próximo passo mais pequeno que está ao teu alcance?\n\nIsto não resolve tudo; pode apenas ajudar-te a começar por uma coisa de cada vez.\n\n'+solution.bridge,
+      body:'Pára por um momento. '+helpfulAction+'\n\nIsto não resolve tudo; pode apenas ajudar-te a começar por uma coisa de cada vez.\n\n'+solution.bridge,
       cta:solution.cta
     },
     {
@@ -282,7 +301,7 @@ const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
       slides:[
         '1/4 — OBSERVA: o que aconteceu, concretamente?',
         '2/4 — NOMEIA: que necessidade pode estar presente — espaço, clareza, ligação, descanso ou segurança?',
-        '3/4 — ESCOLHE: que passo pequeno e realista podes experimentar, sem te exigires uma mudança total?',
+        '3/4 — EXPERIMENTA: '+helpfulAction,
         '4/4 — REVÊ: o que ajudou, o que não ajudou e de que apoio precisas a seguir?'
       ],
       body:'Um pequeno roteiro de reflexão sobre '+theme+'.\n\n'+solution.bridge,
@@ -292,7 +311,7 @@ const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
       format:'story',angle:'pergunta_interativa_sem_pressao',
       hook:'O que te ajudaria mais neste momento?',
       pollQuestion:'Quando aparece '+theme.toLocaleLowerCase('pt-PT')+', de que precisas primeiro?',
-      pollOptions:['Clareza','Espaço ou descanso','Uma conversa','Um próximo passo'],
+      pollOptions:humanNeed.id==='seguranca_financeira'?['Proteger o orçamento','Dizer não','Pedir tempo','Uma alternativa gratuita']:humanNeed.id==='ligacao_pertença'||humanNeed.id==='presenca_apoio'?['Ser ouvido','Uma conversa','Companhia','Ajuda prática']:humanNeed.id==='limites_escolhas_agencia'?['Dizer não','Pedir tempo','Definir um limite','Adiar a resposta']:humanNeed.id==='autonomia_descanso_transicao'||humanNeed.id==='rituais_sensoriais'?['Uma pausa','Tempo meu','Um ritual simples','Ajuda prática']:humanNeed.id==='atencao_informacao'?['Menos interrupções','Uma pausa','Priorizar','Desligar um pouco']:['Clareza','Separar factos de receios','Uma conversa','Um próximo passo'],
       body:'Não existe uma resposta certa para toda a gente. Escolhe a opção que mais se aproxima do que precisas hoje — ou ignora a pergunta se não te servir.',
       cta:solution.cta
     }
@@ -303,7 +322,7 @@ const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
     return {
       id,type:'daily_content_candidate',format:item.format,sourceOceanId:territory,territory,theme,
       workingTitle:topic+' — '+theme+' — '+({post:'Post',reel:'Reel',carousel:'Carrossel',story:'Story'}[item.format]),
-      audienceNeed:need.slice(0,600),humanNeedCluster:humanNeed.id,humanNeedLabel:humanNeed.label,
+      audienceNeed:need.slice(0,600),humanNeedCluster:humanNeed.id,humanNeedLabel:humanNeed.label,helpfulAction,
       editorialAngle:item.angle,hook:item.hook,body:item.body,
       ...(item.slides?{slides:item.slides}:{}),
       ...(item.pollQuestion?{pollQuestion:item.pollQuestion,pollOptions:item.pollOptions}:{}),
