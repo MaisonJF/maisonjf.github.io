@@ -1,9 +1,10 @@
-name: Refresh Maison Derived Context (Growth Branch)
+name: Refresh Maison Derived Context
 
 on:
   workflow_dispatch:
   push:
     branches:
+      - main
       - feat/pdi-exponential-growth
     paths:
       - '.github/maison-growth/brain/**'
@@ -19,7 +20,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: maison-derived-refresh-growth-branch
+  group: maison-derived-refresh-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -28,10 +29,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Checkout growth branch
+      - name: Checkout triggering branch
         uses: actions/checkout@v4
         with:
-          ref: refs/heads/feat/pdi-exponential-growth
+          ref: ${{ github.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-python@v5
         with:
@@ -43,7 +44,7 @@ jobs:
         run: bash .github/maison-growth/brain/rebuild_commercial_context.sh --write
       - name: Validate regenerated context
         run: bash .github/maison-growth/brain/rebuild_commercial_context.sh --check
-      - name: Commit generated projections on this branch only
+      - name: Commit generated projections on the triggering branch
         shell: bash
         run: |
           set -euo pipefail
@@ -56,5 +57,5 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(brain): refresh derived context on growth branch"
-          git push origin HEAD:feat/pdi-exponential-growth
+          git commit -m "chore(brain): refresh derived context"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
