@@ -358,6 +358,9 @@ const payload={
     commercial_pii:false,
     digital_assets_from_offer_brain:true
   },
+  // Carry the actual reviewable drafts forward, not only their counts.
+  // Candidates remain internal editorial material and cannot auto-publish.
+  daily_content_candidates:dailyContentCandidates,
   summary:{
     total:assets.length,
     active_physical_products:assets.filter(x=>x.asset_type==='physical_product'&&x.lifecycle_status==='active').length,
