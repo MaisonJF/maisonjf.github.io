@@ -138,6 +138,7 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["ZERO_COST_MODE"], "true")
         self.assertEqual(vars_["MAX_DAILY_CALLS_PER_PROVIDER"], "4")
         self.assertEqual(vars_["WORKERS_AI_MODEL"], "")
+        self.assertEqual(vars_["ZERO_COST_WORKERS_AI_FOUNDRY_ENABLED"], "false")
         self.assertEqual(vars_["OPENROUTER_MODEL"], "openrouter/free")
         self.assertEqual(vars_["OPENROUTER_FALLBACK_MODELS_JSON"], "[]")
         self.assertEqual(vars_["OSIRIS_COUNCIL_ENABLED"], "true")
