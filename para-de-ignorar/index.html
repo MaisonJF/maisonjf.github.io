@@ -114,7 +114,7 @@
       preparing:'Em preparação',more:'Há mais perguntas a caminho.',soon:'Volta em breve.',
       questions:'28 perguntas',play:'Jogar',playDuo:'Jogar a dois',playGroup:'Jogar em grupo',opening:'A abrir pagamento…',
       modeDuo:'28 perguntas para uma conversa a dois. Uma pergunta de cada vez.',
-      modeGroup:'28 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',
+      modeGroup:'28 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',groupEmpty:'Os packs de Amigos & Festas só aparecem quando houver 28 perguntas aprovadas num tema.',
       promiseDuo:'28 perguntas · duas pessoas',promiseGroup:'28 perguntas · 3 a 12 pessoas',
       themeDuo:'Escolhe onde dói. Ou onde tens curiosidade.',themeGroup:'Escolhe o tema da mesa. Os novos packs de Amigos & Festas entram quando tiverem 28 perguntas aprovadas.',
       payFail:'Não foi possível abrir o pagamento. Tenta novamente.'
@@ -126,7 +126,7 @@
       preparing:'Em preparação',more:'Há mais perguntas a caminho.',soon:'Volte em breve.',
       questions:'28 perguntas',play:'Jogar',playDuo:'Jogar a dois',playGroup:'Jogar em grupo',opening:'Abrindo pagamento…',
       modeDuo:'28 perguntas para uma conversa a dois. Uma pergunta de cada vez.',
-      modeGroup:'28 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',
+      modeGroup:'28 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',groupEmpty:'Os packs de Amigos & Festas só aparecem quando houver 28 perguntas aprovadas num tema.',
       promiseDuo:'28 perguntas · duas pessoas',promiseGroup:'28 perguntas · 3 a 12 pessoas',
       themeDuo:'Escolha onde dói. Ou onde há curiosidade.',themeGroup:'Escolha o tema da mesa. Os novos packs de Amigos & Festas entram quando tiverem 28 perguntas aprovadas.',
       payFail:'Não foi possível abrir o pagamento. Tente novamente.'
@@ -138,7 +138,7 @@
       preparing:'In preparation',more:'More questions are on the way.',soon:'Come back soon.',
       questions:'28 questions',play:'Play',playDuo:'Play as two',playGroup:'Play in a group',opening:'Opening payment…',
       modeDuo:'28 questions for a conversation between two people. One question at a time.',
-      modeGroup:'28 questions for 3 to 12 people. Turns rotate, party challenges appear, and anyone can pass.',
+      modeGroup:'28 questions for 3 to 12 people. Turns rotate, party challenges appear, and anyone can pass.',groupEmpty:'Friends & Party packs appear once a theme has 28 approved live questions.',
       promiseDuo:'28 questions · two people',promiseGroup:'28 questions · 3 to 12 people',
       themeDuo:'Choose what hurts. Or what you are curious about.',themeGroup:'Choose a table-friendly theme. New Friends & Party packs appear when 28 questions have passed review.',
       payFail:'Could not open payment. Please try again.'
@@ -150,7 +150,7 @@
       preparing:'En preparación',more:'Hay más preguntas en camino.',soon:'Vuelve pronto.',
       questions:'28 preguntas',play:'Jugar',playDuo:'Jugar en pareja',playGroup:'Jugar en grupo',opening:'Abriendo pago…',
       modeDuo:'28 preguntas para una conversación entre dos personas. Una pregunta cada vez.',
-      modeGroup:'28 preguntas para 3 a 12 personas. Los turnos rotan, hay retos de fiesta y cualquiera puede pasar.',
+      modeGroup:'28 preguntas para 3 a 12 personas. Los turnos rotan, hay retos de fiesta y cualquiera puede pasar.',groupEmpty:'Los packs de Amigos y Fiesta aparecerán cuando un tema tenga 28 preguntas activas y aprobadas.',
       promiseDuo:'28 preguntas · dos personas',promiseGroup:'28 preguntas · 3 a 12 personas',
       themeDuo:'Elige lo que duele. O lo que te da curiosidad.',themeGroup:'Elige un tema apropiado para la mesa. Los nuevos packs de Amigos y Fiesta estarán disponibles cuando tengan 28 preguntas aprobadas.',
       payFail:'No se pudo abrir el pago. Inténtalo de nuevo.'
@@ -176,6 +176,7 @@
   const themeIntro=document.getElementById('pdi-theme-intro');
   let mode=new URLSearchParams(location.search).get('mode')==='group'?'group':'duo';
   let available=new Map();
+  let themeInventory=[];
 
   function setMode(next){
     if(!['duo','group'].includes(next))return;
@@ -190,6 +191,7 @@
     for(const button of grid.querySelectorAll('.pdi-buy')){
       button.textContent=mode==='group'?t.playGroup:t.playDuo;
     }
+    if(themeInventory.length)render(themeInventory);
   }
   modeButtons.forEach(button=>button.addEventListener('click',()=>setMode(button.dataset.mode)));
   setMode(mode);
@@ -198,21 +200,27 @@
     const response=await fetch('/api/pdi-themes-live?locale='+encodeURIComponent(locale),{cache:'no-store'});
     const data=await response.json().catch(()=>({themes:[]}));
     if(!response.ok||!Array.isArray(data.themes))throw new Error();
-    available=new Map(data.themes.map(x=>[x.slug,x]));
-    render(data.themes);
-    if(!data.themes.length)status.textContent=t.newThemes;
+    themeInventory=data.themes;
+    render(themeInventory);
+    if(!themeInventory.length)status.textContent=t.newThemes;
   }catch{
     grid.innerHTML='<article class="pdi-theme"><small>'+t.unavailable+'</small><h3>'+t.later+'</h3><p>'+t.loadFail+'</p></article>';
     status.textContent=t.confirmFail;
   }
 
   function render(themes){
-    if(!themes.length){
-      grid.innerHTML='<article class="pdi-theme"><small>'+t.preparing+'</small><h3>'+t.more+'</h3><p>'+t.soon+'</p></article>';
+    const visibleThemes=mode==='group'
+      ?themes.filter(theme=>theme.family==='Amigos, Grupos & Festas')
+      :themes.filter(theme=>theme.family!=='Amigos, Grupos & Festas');
+    available=new Map(visibleThemes.map(theme=>[theme.slug,theme]));
+    if(!visibleThemes.length){
+      const message=mode==='group'?t.groupEmpty:t.soon;
+      grid.innerHTML='<article class="pdi-theme"><small>'+t.preparing+'</small><h3>'+t.more+'</h3><p>'+message+'</p></article>';
+      if(mode==='group')status.textContent=t.groupEmpty;
       return;
     }
     grid.innerHTML='';
-    for(const theme of themes){
+    for(const theme of visibleThemes){
       const card=document.createElement('article');
       card.className='pdi-theme';
       const small=document.createElement('small');small.textContent=theme.family||'PÁRA DE IGNORAR!';
