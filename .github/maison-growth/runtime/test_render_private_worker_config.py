@@ -24,6 +24,16 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         )
         cls.database_id = "0123456789abcdef0123456789abcdef"
 
+    def test_production_config_uses_free_openrouter_and_excludes_workers_ai_foundry(self):
+        vars_=self.live_config["vars"]
+        self.assertEqual(vars_["ZERO_COST_MODE"], "true")
+        self.assertEqual(vars_["OPENROUTER_ENABLED"], "true")
+        self.assertTrue(vars_["OPENROUTER_MODEL"].endswith(":free") or vars_["OPENROUTER_MODEL"]=="openrouter/free")
+        self.assertEqual(vars_["WORKERS_AI_ENABLED"], "false")
+        self.assertEqual(vars_["ZERO_COST_WORKERS_AI_FOUNDRY_ENABLED"], "false")
+        fallback=json.loads(vars_["OPENROUTER_FALLBACK_MODELS_JSON"])
+        self.assertTrue(all(model.endswith(":free") or model=="openrouter/free" for model in fallback))
+
     def test_private_read_only_enables_control_api_only(self):
         cfg = render_private_worker_config(
             stage_name="private_brain_read_candidate",
