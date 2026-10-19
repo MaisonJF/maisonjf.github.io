@@ -17,6 +17,7 @@
     "PROMPTS_PER_RUN": "1",
     "MAX_DAILY_CALLS_PER_PROVIDER": "2",
     "WORKERS_AI_ENABLED": "false",
+    "ZERO_COST_WORKERS_AI_FOUNDRY_ENABLED": "false",
     "WORKERS_AI_MODEL": "@cf/google/gemma-4-26b-a4b-it",
     "OSIRIS_GATEWAY_ENABLED": "false",
     "OSIRIS_GATEWAY_BASE_URL": "https://ai.osiris-code.com/v1",
