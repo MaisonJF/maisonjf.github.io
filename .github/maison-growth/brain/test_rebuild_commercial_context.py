@@ -181,6 +181,8 @@ class RebuildCommercialContextTests(unittest.TestCase):
         assets=(ROOT/"build_commercial_assets.mjs").read_text(encoding="utf-8")
         for contract in (
             "SIMULAÇÃO EDITORIAL GERADA POR IA",
+            "simulatedComment:",
+            "A dúvida antes de comprar seria:",
             "fullManuscriptReviewed:false",
             "actualReader:false",
             "verifiedPurchase:false",
