@@ -129,6 +129,15 @@ class RebuildCommercialContextTests(unittest.TestCase):
         self.assertIn("daily_carousel_candidates",assets_builder)
         self.assertIn("daily_story_candidates",assets_builder)
 
+    def test_ocean_snapshot_sync_reports_rows_and_rebuilds_all_derived_organs(self):
+        workflow=(ROOT.parents[1]/"workflows"/"maison-ocean-snapshot-sync.yml").read_text(encoding="utf-8")
+        self.assertIn("Report Ocean snapshot intake count",workflow)
+        self.assertIn("Pending Ocean snapshot rows returned by D1",workflow)
+        self.assertIn("rebuild_commercial_context.sh --write",workflow)
+        self.assertIn("rebuild_commercial_context.sh --check",workflow)
+        self.assertIn(".github/maison-growth/brain/",workflow)
+        self.assertIn("Acknowledge D1 snapshot",workflow)
+
     def test_script_has_no_deploy_or_write_to_external_systems(self):
         lowered=self.source.lower()
         for forbidden in (
