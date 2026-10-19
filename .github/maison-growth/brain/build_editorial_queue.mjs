@@ -192,25 +192,30 @@ for(const proposal of ebookProposals){
 
 const previousDailyById=new Map((previous.dailyContentCandidates||[]).map(x=>[x.id,x]));
 function classifyHumanNeed(ocean){
-  const text=[ocean.territory,ocean.intent,ocean.painLanguage,ocean.commercialAdjacency,...(ocean.questionThemeCandidates||[])].join(' ').toLocaleLowerCase('pt-PT');
-  // Put narrow, commercially sensitive needs first so broad words such as
-  // "autonomy", "pause" or "company" cannot swallow distinct categories.
+  // Classify the human topic, not product keywords repeated in commercial adjacency.
+  const text=[ocean.territory,ocean.intent,ocean.painLanguage,...(ocean.questionThemeCandidates||[])].join(' ').toLocaleLowerCase('pt-PT');
   const rules=[
-    {id:'seguranca_financeira',label:'Segurança financeira e pressão para gastar',pattern:/dinheiro|financeir|gastar|gasto|consumo|or[cç]amento|press[aã]o.{0,24}gastar|vergonha de dizer n[aã]o/},
-    {id:'rituais_sensoriais',label:'Rituais sensoriais e passagem de momento',pattern:/sensorial|aroma|plantas|ritual|marcadores de transi[cç][aã]o|toque|escalda-p[eé]s|vela arom[aá]tica|n[eé]voa de ambiente/},
-    {id:'atencao_informacao',label:'Atenção e relação com a informação',pattern:/aten[cç][aã]o fragmentada|interrup[cç][oõ]es digitais|doomscroll|scroll|feed|telem[oó]vel|ecr[aã]|informa[cç][aã]o|foco|mudan[cç]as constantes de contexto/},
-    {id:'presenca_apoio',label:'Presença e apoio sem tentar resolver tudo',pattern:/presen[cç]a que ampara|apoio sem tentar resolver|escuta orientada|companhia|acompanhar|atravessar um momento|precisa de presen[cç]a/},
-    {id:'limites_escolhas_agencia',label:'Limites, escolhas e autonomia',pattern:/limite|dizer n[aã]o|medo da rea[cç][aã]o|rea[cç][aã]o do outro|escolha aut[oó]noma|autonomia condicionada|puni[cç][aã]o|retirada ou press[aã]o/},
-    {id:'ligacao_pertença',label:'Ligação, pertença e relações',pattern:/rela[cç][aã]o|apego|afeto|solid[aã]o|perten[cç]a|espera uma resposta|resposta importante|gestos invis[ií]veis|conversa|comunica[cç][aã]o/},
-    {id:'clareza_incerteza',label:'Clareza perante a incerteza',pattern:/incerteza|decis[aã]o|decidir|futuro|ficar em suspenso|esperar por informa[cç][aã]o|rumina[cç][aã]o|n[aã]o consegues perceber|caminho|mudan[cç]a/},
-    {id:'valor_autoconhecimento',label:'Valor pessoal e reconhecimento de padrões',pattern:/autoestima|valor pessoal|reconhecimento|autoabandono|padr[oõ]es|vergonha|auto[jj]ulgamento|merecido|merecer|identidade|o que funciona na rela[cç][aã]o/},
-    {id:'autonomia_descanso_transicao',label:'Autonomia, descanso e transições',pattern:/adiar o sono|bedtime procrastination|descanso|descansar|tempo pr[oó]prio|domingo|segunda-feira|fim do dia|obriga[cç][oõ]es|culpa ao descansar|recuperar tempo|prolongar a noite/}
+    {id:'luto_perda_significado',label:'Perda, luto e reconstrução de significado',pattern:/luto|perda amb[ií]gua|perda sem resolu[cç][aã]o|futuro que deixou de ser poss[ií]vel|futuro n[aã]o vivido|possibilidades de vida|irreversibilidade/},
+    {id:'carga_mental_cuidado',label:'Carga mental e cuidado sem autoapagamento',pattern:/carga mental|trabalho cognitivo invis[ií]vel|responsabilidade mental|papel de cuidador|cuidar sem desaparecer|lembrar e acompanhar|reparti[cç][aã]o de carga/},
+    {id:'prazer_celebracao',label:'Prazer, celebração e pequenos rituais',pattern:/micro-luxo|pequeno luxo|pequenas vit[oó]rias|recompensa|celebra[cç][aã]o|mimo|prazer acess[ií]vel|marcar uma pequena vit[oó]ria/},
+    {id:'seguranca_financeira',label:'Segurança financeira e pressão para gastar',pattern:/evitamento financeiro|vergonha financeira|medo de olhar para os n[uú]meros|press[aã]o social para gastar|n[aã]o cabe no or[cç]amento|or[cç]amento|contas financeiras|escassez financeira|dinheiro aperta/},
+    {id:'atencao_informacao',label:'Atenção e relação com a informação',pattern:/aten[cç][aã]o fragmentada|interrup[cç][oõ]es digitais|doomscroll|scroll|feed|telem[oó]vel|ecr[aã]|informa[cç][aã]o|foco|mudan[cç]as constantes de contexto|notifica[cç][aã]o/},
+    {id:'presenca_apoio',label:'Presença e apoio sem tentar resolver tudo',pattern:/presen[cç]a que ampara|apoio sem tentar resolver|escuta orientada|atravessar um momento|precisa de presen[cç]a|algu[eé]m ficar quando/},
+    {id:'limites_escolhas_agencia',label:'Limites, escolhas e autonomia',pattern:/limite|dizer n[aã]o|medo da rea[cç][aã]o|rea[cç][aã]o do outro|escolha aut[oó]noma|autonomia condicionada|puni[cç][aã]o|retirada ou press[aã]o|auto-silenciamento|telepress[aã]o|disponibilidade permanente/},
+    {id:'ligacao_pertença',label:'Ligação, pertença e relações',pattern:/rela[cç][aã]o|apego|afeto|solid[aã]o com contacto|perten[cç]a|espera uma resposta|resposta importante|gestos invis[ií]veis|conversa|comunica[cç][aã]o|qualidade dos v[ií]nculos/},
+    {id:'clareza_incerteza',label:'Clareza perante a incerteza',pattern:/incerteza|decis[aã]o|decidir|futuro|ficar em suspenso|esperar por informa[cç][aã]o|rumina[cç][aã]o|n[aã]o consegues perceber|caminho|mudan[cç]a|sobrecarga de escolha|demasiadas op[cç][oõ]es/},
+    {id:'valor_autoconhecimento',label:'Valor pessoal e reconhecimento de padrões',pattern:/autoestima|valor pessoal|reconhecimento|autoabandono|padr[oõ]es|vergonha|auto[jj]ulgamento|merecido|merecer|identidade|o que funciona na rela[cç][aã]o|compara[cç][aã]o social/},
+    {id:'rituais_sensoriais',label:'Rituais sensoriais e passagem de momento',pattern:/rituais sensoriais|sensorial|aroma|plantas|ritual|marcadores de transi[cç][aã]o|toque|escalda-p[eé]s|vela arom[aá]tica|n[eé]voa de ambiente/},
+    {id:'autonomia_descanso_transicao',label:'Autonomia, descanso e transições',pattern:/adiar o sono|bedtime procrastination|descanso|descansar|tempo pr[oó]prio|domingo|segunda-feira|fim do dia|obriga[cç][oõ]es|culpa ao descansar|recuperar tempo|prolongar a noite|energia social|precisar de solid[aã]o/}
   ];
   return rules.find(rule=>rule.pattern.test(text))||{id:'reflexao_pessoal',label:'Autoconhecimento e reflexão pessoal'};
 }
 
 function humanNeedAction(cluster){
   const actions={
+    luto_perda_significado:'Dá nome ao que foi perdido — incluindo uma possibilidade que nunca chegou a acontecer. Podes escrever o que terminou, o que continua a ter significado e de que apoio precisas agora. Não tens de encontrar já um sentido.',
+    carga_mental_cuidado:'Escolhe uma tarefa invisível e torna-a explícita: quem se lembra, planeia, confirma e acompanha? Se for seguro, combina quem assume a responsabilidade completa, não apenas a execução.',
+    prazer_celebracao:'Escolhe uma forma de assinalar a pequena vitória que caiba no teu orçamento: uma pausa, uma música, uma mensagem a alguém ou um gesto sensorial que já tenhas em casa. Um mimo não tem de ser uma compra.',
     seguranca_financeira:'Antes de assumires uma despesa, define o limite que queres proteger. Podes dizer: “Desta vez não consigo gastar esse valor; quero estar presente, mas preciso de respeitar o meu orçamento.”',
     rituais_sensoriais:'Escolhe um gesto sensorial simples — água morna, luz suave ou um aroma de que gostes — para assinalar a passagem entre tarefas. O gesto é um marcador, não uma cura.',
     atencao_informacao:'Escolhe uma tarefa pequena, afasta uma interrupção durante dez minutos e decide quando voltas a consultar mensagens ou notícias. Experimenta sem exigir foco perfeito.',
@@ -228,7 +233,16 @@ function humanNeedAction(cluster){
 function maisonSolutionForNeed(cluster,adjacency){
   const related=String(adjacency||'').toLocaleLowerCase('pt-PT');
   const result={assets:[],bridge:'',cta:'Explora a opção MAISON JF que faça sentido para ti — sem pressão para comprar.'};
-  if(cluster==='autonomia_descanso_transicao'||cluster==='rituais_sensoriais'){
+  if(cluster==='luto_perda_significado'){
+    result.assets=['Oráculo MAISON JF®','Éditions Maison JF','Serviços e Presença'];
+    result.bridge='O Oráculo e as Éditions podem oferecer perguntas e leitura para explorar uma perda ou mudança de significado. A oferta Presença é uma opção de companhia com limites explícitos; nenhuma destas opções é psicoterapia, tratamento ou serviço de emergência.';
+  }else if(cluster==='carga_mental_cuidado'){
+    result.assets=['PÁRA DE IGNORAR!','Oráculo MAISON JF®'];
+    result.bridge='PÁRA DE IGNORAR! oferece perguntas para abrir uma conversa entre duas pessoas sobre o que costuma ficar invisível; o Oráculo pode ajudar a formular a pergunta. A responsabilidade tem de ser negociada entre as pessoas, não delegada a um produto.';
+  }else if(cluster==='prazer_celebracao'){
+    result.assets=['Vela Aromática','Escalda-Pés','Névoa de Ambiente'];
+    result.bridge='A Maison tem pequenos produtos sensoriais para quem escolhe marcar uma pausa ou uma conquista através do ambiente. Também podes fazer isso sem comprar nada: o produto é uma opção de ritual, não uma condição para merecer prazer.';
+  }else if(cluster==='autonomia_descanso_transicao'||cluster==='rituais_sensoriais'){
     result.assets=['Escalda-Pés','Vela Aromática','Névoa de Ambiente'];
     result.bridge='A MAISON JF oferece pequenos objetos e rituais sensoriais que podem marcar uma pausa ou a passagem entre momentos do dia. São gestos de ambiente e autocuidado, não tratamentos nem soluções para problemas de saúde.';
   }else if(cluster==='limites_escolhas_agencia'){
