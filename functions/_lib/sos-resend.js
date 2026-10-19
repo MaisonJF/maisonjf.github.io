@@ -40,6 +40,7 @@ export async function sendSosResendEmail({env,to,kind,inviteToken=null,expiresAt
   if(apiKey.length<20)throw new Error('sos_resend_key_missing');
   const sender=cleanEmail(env?.MAISON_SOS_RESEND_SENDER_EMAIL||'sos@maison-jf.com');
   const recipient=cleanEmail(to);
+  if(recipient==="maisonjf@proton.me") throw new Error("retired_recipient_blocked");
   const copy=sosEmailCopy(kind,{env,inviteToken,expiresAt});
   const controller=new AbortController();
   const timer=setTimeout(()=>controller.abort(),8000);
