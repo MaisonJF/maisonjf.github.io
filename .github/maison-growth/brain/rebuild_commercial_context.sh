@@ -9,6 +9,8 @@ case "$MODE" in
   --write)
     node "$ROOT/build_vpc_ocean_signals.mjs"
     node "$ROOT/build_editorial_queue.mjs"
+    node "$ROOT/build_pdi_expansion_queue.mjs"
+    node "$ROOT/build_ai_reader_panel.mjs"
     node "$ROOT/build_commercial_assets.mjs"
     node "$ROOT/build_public_discovery.mjs"
     node "$ROOT/build_search_visibility.mjs"
@@ -21,6 +23,8 @@ case "$MODE" in
   --check)
     node "$ROOT/build_vpc_ocean_signals.mjs" --check
     node "$ROOT/build_editorial_queue.mjs" --check
+    node "$ROOT/build_pdi_expansion_queue.mjs" --check
+    node "$ROOT/build_ai_reader_panel.mjs" --check
     node "$ROOT/build_commercial_assets.mjs" --check
     node "$ROOT/build_public_discovery.mjs" --validate
     node "$ROOT/build_search_visibility.mjs" --validate
