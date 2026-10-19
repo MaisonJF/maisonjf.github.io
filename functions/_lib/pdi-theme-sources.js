@@ -58,6 +58,37 @@ const PDI_CONVERSATION_SEEDS=[
   {slug:'perguntas-que-nunca-fiz',label:'Perguntas que Nunca Fiz',focus:'curiosidades honestas que ficaram adiadas porque nunca apareceu o momento certo'}
 ];
 
+const PDI_GROUP_SEEDS=[
+  {slug:'quem-conhece-quem',label:'Quem Conhece Quem?',focus:'o grupo tenta adivinhar preferências, hábitos e pequenas surpresas de quem está a jogar'},
+  {slug:'historias-de-festa',label:'Histórias de Festa',focus:'histórias leves de saídas, encontros e planos inesperados, sem expor terceiros'},
+  {slug:'confissoes-leves',label:'Confissões Leves',focus:'admissões inofensivas e engraçadas, com liberdade para passar'},
+  {slug:'quem-faria-isso',label:'Quem Faria Isso?',focus:'situações hipotéticas e cómicas sobre improviso, viagens, atrasos e pequenas manias'},
+  {slug:'memorias-e-nostalgia',label:'Memórias & Nostalgia',focus:'músicas, objetos, modas e momentos que cada pessoa associa a diferentes fases da vida'},
+  {slug:'gostos-impopulares',label:'Gostos Impopulares',focus:'preferências pessoais divertidas, sem transformar discordância em ataque'},
+  {slug:'opinioes-que-defendo',label:'Opiniões que Defendo',focus:'paixões e opiniões inofensivas que cada pessoa defenderia num debate de 30 segundos'},
+  {slug:'dilemas-absurdos',label:'Dilemas Absurdos',focus:'escolhas imaginárias, contraditórias e cómicas sem consequências reais'},
+  {slug:'viagens-improvaveis',label:'Viagens Improváveis',focus:'destinos, planos e companheiros ideais para uma escapadinha improvisada'},
+  {slug:'planos-de-ultima-hora',label:'Planos de Última Hora',focus:'como cada pessoa improvisa, organiza, se atrasa ou salva um plano de grupo'},
+  {slug:'musica-cinema-series',label:'Música, Cinema & Séries',focus:'bandas sonoras, guilty pleasures, papéis e universos da cultura pop que unem o grupo'},
+  {slug:'talentos-inuteis',label:'Talentos Inúteis',focus:'competências sem utilidade prática, truques parvos e especialidades improváveis'},
+  {slug:'pequenas-vergonhas',label:'Pequenas Vergonhas',focus:'momentos embaraçosos leves que a própria pessoa escolhe contar ou passar'},
+  {slug:'escolhas-impossiveis',label:'Escolhas Impossíveis',focus:'dilemas divertidos entre duas opções estranhas, sem respostas certas'},
+  {slug:'primeira-impressao-do-grupo',label:'Primeira Impressão do Grupo',focus:'o que cada pessoa reparou primeiro e como essa impressão mudou com o tempo'},
+  {slug:'amigos-sem-filtro',label:'Amigos sem Filtro',focus:'perguntas honestas entre amigos com espaço para humor, cuidado e passar sem explicações'},
+  {slug:'energia-de-festa',label:'Energia de Festa',focus:'como cada pessoa contribui para a energia da noite, escolhe música ou muda os planos'},
+  {slug:'adivinha-a-resposta',label:'Adivinha a Resposta',focus:'o grupo tenta prever respostas leves antes de quem recebe a pergunta falar'},
+  {slug:'conselhos-que-ninguem-pediu',label:'Conselhos que Ninguém Pediu',focus:'conselhos cómicos e não solicitados sobre situações pequenas e imaginárias'},
+  {slug:'se-eu-fosse',label:'Se Eu Fosse...',focus:'identidades hipotéticas, profissões, personagens e versões exageradas de si'},
+  {slug:'o-nosso-grupo-em-filme',label:'O Nosso Grupo em Filme',focus:'elenco, títulos, géneros e cenas inventadas para a história do grupo'},
+  {slug:'competicao-sem-importancia',label:'Competição sem Importância',focus:'mini disputas verbais e votações leves em que não há vencedores importantes'},
+  {slug:'a-proxima-aventura',label:'A Próxima Aventura',focus:'ideias de passeios, desafios e experiências acessíveis que o grupo gostaria de fazer'},
+  {slug:'prazeres-secretos',label:'Prazeres Secretos',focus:'músicas, snacks, programas e hábitos inofensivos de que cada pessoa gosta sem grande defesa'},
+  {slug:'conversas-de-mesa',label:'Conversas de Mesa',focus:'perguntas curiosas e rápidas para manter a conversa viva numa mesa ou festa'},
+  {slug:'o-que-nos-une',label:'O que nos Une',focus:'pequenas coincidências, gostos partilhados e diferenças que tornam o grupo interessante'},
+  {slug:'historias-em-30-segundos',label:'Histórias em 30 Segundos',focus:'relatos curtos, humorísticos e voluntários em que ninguém precisa de revelar segredos'},
+  {slug:'amigos-em-modo-caos',label:'Amigos em Modo Caos',focus:'cenários absurdos, planos impossíveis e papéis cómicos para imaginar em conjunto'}
+];
+
 const MAISON_NATIVE_SEEDS=[
   {
     slug:'o-que-nunca-te-perguntei',
@@ -121,6 +152,17 @@ export function buildPdiThemeSourceSignals(){
       slug:seed.slug,
       label:seed.label,
       family:'Conversa a dois',
+      focus:seed.focus
+    });
+  }
+
+  for(const seed of PDI_GROUP_SEEDS){
+    signals.push({
+      source:'pdi-group',
+      sourceId:seed.slug,
+      slug:seed.slug,
+      label:seed.label,
+      family:'Amigos, Grupos & Festas',
       focus:seed.focus
     });
   }
