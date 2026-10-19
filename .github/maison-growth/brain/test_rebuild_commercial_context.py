@@ -138,6 +138,15 @@ class RebuildCommercialContextTests(unittest.TestCase):
         self.assertIn(".github/maison-growth/brain/",workflow)
         self.assertIn("Acknowledge D1 snapshot",workflow)
 
+    def test_refresh_context_tracks_main_and_growth_branch_sources(self):
+        workflow=(ROOT.parents[1]/"workflows"/"refresh-maison-derived-context.yml").read_text(encoding="utf-8")
+        self.assertIn("      - main",workflow)
+        self.assertIn("      - feat/pdi-exponential-growth",workflow)
+        self.assertIn("'functions/_lib/pdi-theme-sources.js'",workflow)
+        self.assertIn("ref: ${{ github.ref }}",workflow)
+        self.assertIn('git push origin "HEAD:${GITHUB_REF_NAME}"',workflow)
+        self.assertIn("if: github.actor != 'github-actions[bot]'",workflow)
+
     def test_script_has_no_deploy_or_write_to_external_systems(self):
         lowered=self.source.lower()
         for forbidden in (
