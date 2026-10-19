@@ -7,6 +7,11 @@ export const PARA_DE_IGNORAR_POLICY={
   format:'digital-only',
   session:{
     cards:28,
+    modes:{
+      duo:{players:2,turnStyle:'alternate_at_pack_boundary'},
+      group:{minimumPlayers:3,maximumPlayers:12,turnStyle:'rotate_each_question',partyChallengesEvery:4,participantNamesStored:false}
+    },
+    groupThemes:{family:'Amigos, Grupos & Festas',editorialSeedCount:28,publicAvailabilityGate:'minimum_28_active_approved_questions_per_theme'},
     packs:2,
     cardsPerPack:14,
     responseContentStored:false,
@@ -26,8 +31,8 @@ export const PARA_DE_IGNORAR_POLICY={
   },
   publicPromise:{
     title:'PÁRA DE IGNORAR!',
-    line:'28 perguntas. Duas pessoas.',
-    explanation:'O resto acontece na conversa.'
+    line:'28 perguntas. A dois ou em grupo.',
+    explanation:'A versão a dois alterna a vez. A versão de grupo roda a vez entre 3 e 12 pessoas e intercala desafios de festa. O resto acontece na conversa.'
   },
   privacy:{
     storeAnswerText:false,
