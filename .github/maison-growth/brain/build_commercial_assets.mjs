@@ -221,6 +221,8 @@ const pdiSignals=buildPdiThemeSourceSignals();
 const editorialQueue=JSON.parse(fs.readFileSync(new URL('editorial-queue.json',import.meta.url),'utf8'));
 const ebookProposals=Array.isArray(editorialQueue.ebookProposals)?editorialQueue.ebookProposals:[];
 const dailyContentCandidates=Array.isArray(editorialQueue.dailyContentCandidates)?editorialQueue.dailyContentCandidates:[];
+const expansionQueue=JSON.parse(fs.readFileSync(new URL('pdi-expansion-queue.generated.json',import.meta.url),'utf8'));
+const aiReaderPanel=JSON.parse(fs.readFileSync(new URL('ai-reader-panel.generated.json',import.meta.url),'utf8'));
 
 function commonFixedAmount(offers,label){
   const amounts=[...new Set(offers.map(x=>x.amount).filter(Number.isInteger))];
@@ -258,6 +260,10 @@ assets.push({
     roles:['opening','recognition','tension','counterpoint','reframe','movement','close'],
     paid_bodies_in_git:false,
     ebook_proposal_count:ebookProposals.length,
+    ebook_concept_seed_count:expansionQueue.bookConceptIdeas.length,
+    oracle_role_brief_count:expansionQueue.oracleRoleBriefs.length,
+    ai_reader_assessment_count:aiReaderPanel.assessments.length,
+    ai_reader_assessments_internal_only:true,
     ebook_proposal_feed:'editorial_queue.ebookProposals'
   },
   operational:digitalOperationalUnknowns(),
@@ -295,7 +301,12 @@ assets.push({
     source_theme_count:pdiSignals.length,
     ocean_feed:'editorial_queue.question_candidate',
     stages:['open','recognize','deepen','touch','close','signature'],
-    paid_bodies_in_git:false
+    paid_bodies_in_git:false,
+    duo_question_draft_count:expansionQueue.summary.duoQuestionDrafts,
+    group_question_draft_count:expansionQueue.summary.groupQuestionDrafts,
+    question_expansion_feed:'pdi-expansion-queue.generated.json.questions',
+    human_approval_required:true,
+    public_activation:false
   },
   operational:digitalOperationalUnknowns(),
   price_kind:'fixed',
@@ -308,7 +319,7 @@ assets.sort((a,b)=>a.asset_ref.localeCompare(b.asset_ref));
 
 const payload={
   schema_version:'commercial_assets_v1',
-  sources:['data/products.js','data/services.js','functions/_lib/offer-brain.js','.github/maison-growth/brain/editorial-queue.json'],
+  sources:['data/products.js','data/services.js','functions/_lib/offer-brain.js','.github/maison-growth/brain/editorial-queue.json','.github/maison-growth/brain/pdi-expansion-queue.generated.json','.github/maison-growth/brain/ai-reader-panel.generated.json'],
   content_linkage:{
     oceans_to_editorial_queue:true,
     editorial_queue_to_commercial_assets:true,
@@ -322,6 +333,16 @@ const payload={
     daily_human_need_clusters:[...new Set(dailyContentCandidates.map(x=>x.humanNeedCluster).filter(Boolean))].length,
     daily_solution_linked_candidates:dailyContentCandidates.filter(x=>Array.isArray(x.maisonSolutionAssets)&&x.maisonSolutionAssets.length>0).length,
     daily_content_requires_human_approval:dailyContentCandidates.every(x=>x.approvalRequired===true),
+    pdi_question_drafts:expansionQueue.summary.questionDrafts,
+    pdi_duo_question_drafts:expansionQueue.summary.duoQuestionDrafts,
+    pdi_group_question_drafts:expansionQueue.summary.groupQuestionDrafts,
+    oracle_role_briefs:expansionQueue.summary.oracleRoleBriefs,
+    ebook_concept_seeds:expansionQueue.summary.ebookConceptSeeds,
+    ai_reader_assessments:aiReaderPanel.summary.assessments,
+    ai_reader_assessments_are_testimonials:false,
+    ai_reader_assessments_public:false,
+    question_briefs_require_approval:true,
+    oracle_briefs_require_approval:true,
     proposals_require_human_approval:true,
     automatic_publication:false
   },
