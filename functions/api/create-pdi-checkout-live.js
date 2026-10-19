@@ -26,6 +26,10 @@ export async function onRequestPost({request,env}){
 
     const body=await request.json().catch(()=>({}));
     const theme=String(body?.theme||'relacoes');
+    const mode=String(body?.mode||'duo');
+    if(!['duo','group'].includes(mode)){
+      return json({error:'Modo de jogo inválido.'},400);
+    }
     const rawLocale=body?.locale??body?.lang??'pt-PT';
     const locale=normalizeMaisonLocale(rawLocale,{fallback:null});
     if(!locale)return json({error:'Idioma inválido.'},400);
@@ -42,14 +46,15 @@ export async function onRequestPost({request,env}){
     params.set('line_items[0][quantity]','1');
     params.set('line_items[0][price_data][currency]',String(product.currency||'eur'));
     params.set('line_items[0][price_data][unit_amount]',String(product.amount));
-    params.set('line_items[0][price_data][product_data][name]',(PDI_PRODUCT_NAME[locale]||PDI_PRODUCT_NAME['pt-PT'])+' · '+product.label);
-    params.set('success_url',url.origin+'/para-de-ignorar/jogar.html?session_id={CHECKOUT_SESSION_ID}&theme='+encodeURIComponent(product.slug)+'&locale='+encodeURIComponent(locale));
+    params.set('line_items[0][price_data][product_data][name]',(PDI_PRODUCT_NAME[locale]||PDI_PRODUCT_NAME['pt-PT'])+' · '+product.label+(mode==='group'?' · Grupo & Festa':' · A Dois'));
+    params.set('success_url',url.origin+'/para-de-ignorar/jogar.html?session_id={CHECKOUT_SESSION_ID}&theme='+encodeURIComponent(product.slug)+'&locale='+encodeURIComponent(locale)+'&mode='+encodeURIComponent(mode));
     params.set('cancel_url',url.origin+publicPrefix(locale)+'/para-de-ignorar/?theme='+encodeURIComponent(product.slug));
     params.set('metadata[environment]','maison-jf-live');
     params.set('metadata[source]','para-de-ignorar-live');
     params.set('metadata[pdi_access]','single-session');
     params.set('metadata[pdi_theme]',product.slug);
     params.set('metadata[pdi_locale]',locale);
+    params.set('metadata[pdi_mode]',mode);
 
     const stripeResponse=await fetch('https://api.stripe.com/v1/checkout/sessions',{
       method:'POST',
