@@ -14,6 +14,7 @@ const ROLES=['opening','recognition','tension','counterpoint','reframe','movemen
 const STAGES=['open','recognize','deepen','touch','close','signature'];
 const QUESTION_TARGET_PER_MATURE_THEME=300;
 const COMBINATORIAL_TARGET=2800000;
+const MAX_DAILY_THEMES_PER_OCEAN=6;
 
 const stableStringify=(value, seen=new WeakSet())=>{
   if (value === null || typeof value !== 'object') return JSON.stringify(value);
@@ -279,6 +280,56 @@ function maisonSolutionForNeed(cluster,adjacency){
   return result;
 }
 
+const ENGLISH_THEME_TRANSLATIONS=new Map(Object.entries({
+  'revenge bedtime':'adiar o sono para recuperar tempo próprio',
+  'bedtime procrastination':'adiar a hora de dormir',
+  'stay up late':'ficar acordado até tarde',
+  'staying up late':'ficar acordado até tarde',
+  'sunday scaries':'receio do regresso à semana',
+  'monday anxiety':'ansiedade antes do regresso à semana',
+  'notifications':'notificações digitais',
+  'attention fragmentation':'atenção fragmentada',
+  'digital interruption':'interrupções digitais',
+  'distraction':'distração digital',
+  'self silencing':'calar o que preciso para preservar a relação',
+  'people pleasing':'agradar para evitar conflito',
+  'silent treatment':'silêncio usado para pressionar',
+  'coercive control':'padrões de controlo e perda de autonomia',
+  'emotional punishment':'punição emocional',
+  'family caregiver':'cuidador familiar',
+  'mental load':'carga mental',
+  'caregiving':'cuidar sem desaparecer de si',
+  'productivity guilt':'culpa ligada à produtividade',
+  'guilt when resting':'culpa ao descansar',
+  'financial stress':'pressão financeira',
+  'scarcity mindset':'sensação de escassez',
+  'waiting anxiety':'desconforto de esperar por uma resposta',
+  'life on hold':'vida em suspenso',
+  'grief for future':'luto por um futuro não vivido',
+  'small luxury':'pequeno luxo escolhido',
+  'micro luxury':'micro-luxo como ritual',
+  'reward ritual':'ritual de recompensa',
+  'treat yourself':'um gesto de cuidado escolhido',
+  'ambiguous loss':'perda ambígua',
+  'unresolved loss':'perda sem resolução',
+  'social battery':'energia social',
+  'emotional support':'apoio emocional',
+  'budget shame':'vergonha ligada ao orçamento',
+  'choice overload':'sobrecarga de escolha',
+  'analysis paralysis':'paralisia perante opções',
+  'too many options':'demasiadas opções',
+  'decision paralysis':'dificuldade em escolher'
+}));
+const UNKNOWN_ENGLISH_THEME=/\\b(?:bedtime|staying up|stay up|sunday scaries|monday anxiety|notifications?|attention fragmentation|digital interruption|distraction|self[- ]silencing|people pleasing|silent treatment|coercive control|emotional punishment|family caregiver|mental load|caregiving|productivity guilt|guilt when resting|financial stress|scarcity mindset|waiting anxiety|life on hold|grief for future|small luxury|micro luxury|reward ritual|treat yourself|ambiguous loss|unresolved loss|social battery|emotional support|budget shame|choice overload|analysis paralysis|too many options|decision paralysis)\\b/i;
+function normalizeHumanTheme(value){
+  const raw=String(value||'').replace(/\\s+/g,' ').trim();
+  if(!raw)return '';
+  const key=raw.toLocaleLowerCase('pt-PT');
+  if(ENGLISH_THEME_TRANSLATIONS.has(key))return ENGLISH_THEME_TRANSLATIONS.get(key);
+  if(UNKNOWN_ENGLISH_THEME.test(raw))return '';
+  return raw;
+}
+
 const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
   const evidence=[...new Set((ocean.evidence||[]).filter(x=>typeof x==='string'&&x.trim()))];
   if(evidence.length<2)return [];
@@ -294,7 +345,7 @@ const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
   const helpfulAction=humanNeedAction(humanNeed.id);
   const solution=maisonSolutionForNeed(humanNeed.id,adjacency);
   const sourceId='brain_daily_'+slug(territory);
-  const themes=[...new Set((ocean.questionThemeCandidates||[]).map(x=>String(x||'').trim()).filter(Boolean))].slice(0,3);
+  const themes=[...new Set((ocean.questionThemeCandidates||[]).map(normalizeHumanTheme).filter(Boolean))].slice(0,MAX_DAILY_THEMES_PER_OCEAN);
   if(!themes.length)themes.push(topic);
   const formatsForTheme=theme=>[
     {
@@ -399,6 +450,7 @@ const out={
     ebookProposals:ebookProposals.length,
     ebookProposalsRequiringEditorialApproval:ebookProposals.filter(x=>x.approvalRequired).length,
     dailyContentCandidates:dailyContentCandidates.length,
+    dailyThemesPerOceanCap:MAX_DAILY_THEMES_PER_OCEAN,
     dailyPostCandidates:dailyContentCandidates.filter(x=>x.format==='post').length,
     dailyReelCandidates:dailyContentCandidates.filter(x=>x.format==='reel').length,
     dailyCarouselCandidates:dailyContentCandidates.filter(x=>x.format==='carousel').length,
