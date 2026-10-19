@@ -177,16 +177,19 @@ jobs:
 
           count = len(variables)
           limit = 64
-          print(f"Worker text variables: {count}/{limit}")
+          # The current private runtime already has six worker secrets. The gated
+          # OSIRIS Memory profile may add one bridge token, so budget seven slots.
+          reserved_secret_slots = 7
+          estimated_total = count + reserved_secret_slots
+          print(f"Worker text variables: {count}; reserved secret slots: {reserved_secret_slots}; estimated combined total: {estimated_total}/{limit}")
           print("Configured variable names: " + ", ".join(sorted(variables)))
-          if count > limit:
+          if estimated_total > limit:
               raise SystemExit(
-                  f"Cloudflare Workers Free limit exceeded: {count} text variables; "
-                  f"reduce to {limit} or fewer before deployment. Secrets also count toward "
-                  "the account limit."
+                  f"Cloudflare Workers Free limit exceeded: estimated {estimated_total} variables/secrets; "
+                  f"reduce the configuration to {limit - reserved_secret_slots} text variables or fewer."
               )
-          if count >= 61:
-              print("::warning::Worker config is near the 64-variable limit; keep room for secrets.")
+          if estimated_total >= 63:
+              print("::warning::Worker config is near the combined 64-variable limit; review secret additions before deployment.")
           PY
 
       - name: Deploy Maison intelligence runtime
@@ -201,7 +204,7 @@ jobs:
           set -euo pipefail
           if [[ "$OSIRIS_BRIDGE_ENABLED" == "true" ]]; then
             test -n "$OSIRIS_MEMORY_BRIDGE_TOKEN"
-            printf '%s' "$OSIRIS_MEMORY_BRIDGE_TOKEN" | npx wrangler secret put OSIRIS_MEMORY_BRIDGE_TOKEN
+            printf '%s' "$OSIRIS_MEMORY_BRIDGE_TOKEN" | npx wrangler secret put OSIRIS_MEMORY_BRIDGE_TOKEN --config wrangler.private.runtime.jsonc
           fi
           npx wrangler deploy --config wrangler.private.runtime.jsonc
 
