@@ -30,7 +30,7 @@ test('group and party themes enter the editorial backlog but are not exposed bef
   assert.match(catalogue,/liveQuestions>=PDI_MINIMUM_LIVE_QUESTIONS/);
   assert.match(policy,/minimum_28_active_approved_questions_per_theme/);
   const groupSeedBlock=sources.slice(sources.indexOf('const PDI_GROUP_SEEDS=['),sources.indexOf('const MAISON_NATIVE_SEEDS='));
-  assert.equal((groupSeedBlock.match(/\{slug:/g)||[]).length,28);
+  assert.equal((groupSeedBlock.match(/\{slug:/g)||[]).length,56);
 });
 
 test('group play rotates numbered participants and adds optional party challenges without collecting names or answers',()=>{
