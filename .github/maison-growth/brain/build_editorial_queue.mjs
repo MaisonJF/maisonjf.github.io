@@ -320,9 +320,9 @@ const ENGLISH_THEME_TRANSLATIONS=new Map(Object.entries({
   'too many options':'demasiadas opções',
   'decision paralysis':'dificuldade em escolher'
 }));
-const UNKNOWN_ENGLISH_THEME=/\\b(?:bedtime|staying up|stay up|sunday scaries|monday anxiety|notifications?|attention fragmentation|digital interruption|distraction|self[- ]silencing|people pleasing|silent treatment|coercive control|emotional punishment|family caregiver|mental load|caregiving|productivity guilt|guilt when resting|financial stress|scarcity mindset|waiting anxiety|life on hold|grief for future|small luxury|micro luxury|reward ritual|treat yourself|ambiguous loss|unresolved loss|social battery|emotional support|budget shame|choice overload|analysis paralysis|too many options|decision paralysis)\\b/i;
+const UNKNOWN_ENGLISH_THEME=/\b(?:bedtime|staying up|stay up|sunday scaries|monday anxiety|notifications?|attention fragmentation|digital interruption|distraction|self[- ]silencing|people pleasing|silent treatment|coercive control|emotional punishment|family caregiver|mental load|caregiving|productivity guilt|guilt when resting|financial stress|scarcity mindset|waiting anxiety|life on hold|grief for future|small luxury|micro luxury|reward ritual|treat yourself|ambiguous loss|unresolved loss|social battery|emotional support|budget shame|choice overload|analysis paralysis|too many options|decision paralysis)\b/i;
 function normalizeHumanTheme(value){
-  const raw=String(value||'').replace(/\\s+/g,' ').trim();
+  const raw=String(value||'').replace(/\s+/g,' ').trim();
   if(!raw)return '';
   const key=raw.toLocaleLowerCase('pt-PT');
   if(ENGLISH_THEME_TRANSLATIONS.has(key))return ENGLISH_THEME_TRANSLATIONS.get(key);
