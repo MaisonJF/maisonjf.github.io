@@ -48,7 +48,7 @@ export async function onRequestPost({request,env}){
     params.set('line_items[0][price_data][unit_amount]',String(product.amount));
     params.set('line_items[0][price_data][product_data][name]',(PDI_PRODUCT_NAME[locale]||PDI_PRODUCT_NAME['pt-PT'])+' · '+product.label+(mode==='group'?' · Grupo & Festa':' · A Dois'));
     params.set('success_url',url.origin+'/para-de-ignorar/jogar.html?session_id={CHECKOUT_SESSION_ID}&theme='+encodeURIComponent(product.slug)+'&locale='+encodeURIComponent(locale)+'&mode='+encodeURIComponent(mode));
-    params.set('cancel_url',url.origin+publicPrefix(locale)+'/para-de-ignorar/?theme='+encodeURIComponent(product.slug));
+    params.set('cancel_url',url.origin+publicPrefix(locale)+'/para-de-ignorar/?theme='+encodeURIComponent(product.slug)+'&mode='+encodeURIComponent(mode));
     params.set('metadata[environment]','maison-jf-live');
     params.set('metadata[source]','para-de-ignorar-live');
     params.set('metadata[pdi_access]','single-session');
