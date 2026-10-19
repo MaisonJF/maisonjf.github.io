@@ -115,6 +115,22 @@ jobs:
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.MAISON_CF_ACCESS_CLIENT_SECRET }}
         run: python .github/maison-growth/runtime/preflight_private_runtime.py "$RUNTIME_STAGE"
 
+      - name: Optional non-writing OSIRIS Memory bridge smoke test
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          OSIRIS_MEMORY_BRIDGE_URL: ${{ secrets.MAISON_OSIRIS_MEMORY_BRIDGE_URL }}
+          MAISON_OSIRIS_BRIDGE_TOKEN: ${{ secrets.MAISON_OSIRIS_BRIDGE_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "$OSIRIS_MEMORY_BRIDGE_URL" || -z "$MAISON_OSIRIS_BRIDGE_TOKEN" ]]; then
+            echo "::warning::OSIRIS Memory bridge URL/token not configured; Memory remains disabled."
+            echo "- OSIRIS Memory bridge smoke test: skipped (credentials not configured); Memory remains disabled." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          python .github/maison-growth/runtime/smoke_osiris_memory_bridge.py
+          echo "- OSIRIS Memory bridge smoke test: HTTPS + bearer auth passed; no synthetic memory written." >> "$GITHUB_STEP_SUMMARY"
+
       - name: Render temporary Wrangler config (dry-run)
         if: ${{ github.event_name != 'workflow_dispatch' }}
         run: |
