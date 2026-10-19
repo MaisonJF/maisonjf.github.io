@@ -207,11 +207,20 @@ const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
   if(/vela|aroma|n[eé]voa|ritual|escalda-p[eé]s|sensorial/i.test(adjacency))relatedAssets.push('Rituais sensoriais MAISON JF');
   if(/ebook|e-book|guia|digital|conte[uú]do digital/i.test(adjacency))relatedAssets.push('Éditions Maison JF');
   if(!relatedAssets.length)relatedAssets.push('Explorar a oferta MAISON JF');
+  const maisonBridge=relatedAssets[0]==='PÁRA DE IGNORAR!'
+    ?'PÁRA DE IGNORAR! propõe perguntas interativas para reconhecer padrões e experimentar pequenas mudanças, sem prometer transformação automática.'
+    :relatedAssets[0]==='Oráculo MAISON JF®'
+      ?'O Oráculo MAISON JF oferece perguntas simbólicas para explorar perspectivas e decisões; não prevê resultados nem substitui apoio profissional.'
+      :relatedAssets[0]==='Rituais sensoriais MAISON JF'
+        ?'Os rituais sensoriais MAISON JF podem marcar uma pausa e uma transição no quotidiano; não são tratamento médico.'
+        :relatedAssets[0]==='Éditions Maison JF'
+          ?'As Éditions Maison JF oferecem leituras e exercícios para explorar o tema ao teu ritmo.'
+          :'A MAISON JF reúne experiências editoriais, simbólicas e sensoriais que podem ajudar-te a explorar o tema ao teu ritmo.';
   const themes=[...new Set((ocean.questionThemeCandidates||[]).map(x=>String(x||'').trim()).filter(Boolean))].slice(0,3);
   if(!themes.length)themes.push(topic);
   const formatsForTheme=theme=>[
-    {format:'post',angle:'reconhecimento_e_reflexao',hook:'E se '+theme.toLocaleLowerCase('pt-PT')+' fosse uma necessidade a compreender, em vez de mais uma coisa para te julgares?',body:'Há momentos em que '+pain.charAt(0).toLocaleLowerCase('pt-PT')+pain.slice(1)+'\n\nQuando este tema aparece, experimenta perguntar: o que preciso agora — clareza, espaço, descanso, uma conversa ou um próximo passo pequeno?\n\nNão há uma resposta universal. Começa por observar o que se passa contigo, sem te obrigares a chegar já a uma conclusão.',cta:'Se quiseres explorar este tema com a MAISON JF, descobre: '+relatedAssets[0]+'.'},
-    {format:'reel',angle:'hook_pergunta_mais_microacao',hook:'Antes de reagires a '+theme.toLocaleLowerCase('pt-PT')+', faz esta pergunta.',body:'O que aconteceu? O que precisavas naquele momento? Qual seria um pequeno passo ao teu alcance — sem resolver a vida inteira hoje?\n\nUma pergunta honesta pode abrir espaço para uma escolha mais consciente. Guarda este vídeo para voltares a estas perguntas quando te fizerem sentido.',cta:'Explora a experiência MAISON JF relacionada: '+relatedAssets[0]+'.'}
+    {format:'post',angle:'reconhecimento_e_reflexao',hook:'E se '+theme.toLocaleLowerCase('pt-PT')+' fosse uma necessidade a compreender, em vez de mais uma coisa para te julgares?',body:'Há momentos em que '+pain.charAt(0).toLocaleLowerCase('pt-PT')+pain.slice(1)+'\n\nQuando este tema aparece, experimenta perguntar: o que preciso agora — clareza, espaço, descanso, uma conversa ou um próximo passo pequeno?\n\nNão há uma resposta universal. Começa por observar o que se passa contigo, sem te obrigares a chegar já a uma conclusão.\n\n'+maisonBridge,cta:'Se quiseres explorar este tema com a MAISON JF, descobre: '+relatedAssets[0]+'.'},
+    {format:'reel',angle:'hook_pergunta_mais_microacao',hook:'Antes de reagires a '+theme.toLocaleLowerCase('pt-PT')+', faz esta pergunta.',body:'O que aconteceu? O que precisavas naquele momento? Qual seria um pequeno passo ao teu alcance — sem resolver a vida inteira hoje?\n\nUma pergunta honesta pode abrir espaço para uma escolha mais consciente. Guarda este vídeo para voltares a estas perguntas quando te fizerem sentido.\n\n'+maisonBridge,cta:'Explora a experiência MAISON JF relacionada: '+relatedAssets[0]+'.'}
   ];
   return themes.flatMap(theme=>formatsForTheme(theme).map(item=>{
     const id=sourceId+'_'+slug(theme)+'_'+item.format;
@@ -219,7 +228,7 @@ const dailyContentCandidates=(oceans.candidates||[]).flatMap(ocean=>{
     return {
       id,type:'daily_content_candidate',format:item.format,sourceOceanId:territory,territory,theme,
       workingTitle:topic+' — '+theme+' — '+(item.format==='reel'?'Reel':'Post'),
-      audienceNeed:need.slice(0,600),editorialAngle:item.angle,hook:item.hook,body:item.body,cta:item.cta,
+      audienceNeed:need.slice(0,600),editorialAngle:item.angle,hook:item.hook,body:item.body,maisonBridge,cta:item.cta,
       relatedAssets,evidenceCount:evidence.length,evidence,
       status:prior.status||'needs_editorial',
       ...(prior.reviewedAt?{reviewedAt:prior.reviewedAt}:{}),
