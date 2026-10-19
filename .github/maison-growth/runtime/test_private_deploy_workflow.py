@@ -23,6 +23,9 @@ class PrivateDeployWorkflowTests(unittest.TestCase):
         self.assertIn("Private observe requires the OpenRouter key", self.source)
         self.assertIn("OPENROUTER_API_KEY", self.source)
         self.assertNotIn("- memory_mirror_candidate", self.source)
+        self.assertIn("Optional non-writing OSIRIS Memory bridge smoke test", self.source)
+        self.assertIn("smoke_osiris_memory_bridge.py", self.source)
+        self.assertIn("Memory remains disabled", self.source)
 
     def test_runtime_changes_still_get_secret_free_dry_run(self):
         self.assertIn("  pull_request:\n", self.source)
