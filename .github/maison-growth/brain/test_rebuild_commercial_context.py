@@ -182,7 +182,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
         for contract in (
             "SIMULAÇÃO EDITORIAL GERADA POR IA",
             "simulatedComment:",
-            "A dúvida antes de comprar seria:",
+            "Antes de decidir, eu ainda gostava de perceber:",
             "fullManuscriptReviewed:false",
             "actualReader:false",
             "verifiedPurchase:false",
