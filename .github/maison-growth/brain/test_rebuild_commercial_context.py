@@ -171,7 +171,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
         ):
             self.assertIn(contract,builder)
         self.assertIn("build_pdi_expansion_queue.mjs",self.source)
-        self.assertIn("build_pdi_expansion_queue.mjs --check",self.source)
+        self.assertIn('node "$ROOT/build_pdi_expansion_queue.mjs" --check',self.source)
         self.assertIn("pdi_question_drafts:expansionQueue.summary.questionDrafts",assets)
         self.assertIn("oracle_role_briefs:expansionQueue.summary.oracleRoleBriefs",assets)
         self.assertIn("ebook_concept_seeds:expansionQueue.summary.ebookConceptSeeds",assets)
@@ -194,7 +194,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
         ):
             self.assertIn(contract,builder)
         self.assertIn("build_ai_reader_panel.mjs",self.source)
-        self.assertIn("build_ai_reader_panel.mjs --check",self.source)
+        self.assertIn('node "$ROOT/build_ai_reader_panel.mjs" --check',self.source)
         self.assertIn("ai_reader_assessments_are_testimonials:false",assets)
         self.assertIn("ai_reader_assessments_public:false",assets)
 
