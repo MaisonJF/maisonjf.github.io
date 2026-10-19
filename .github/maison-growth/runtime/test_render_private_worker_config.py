@@ -147,7 +147,9 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["OSIRIS_MEMORY_ENABLED"], "false")
         self.assertEqual(vars_["ZERO_COST_MODE"], "true")
         self.assertEqual(vars_["MAX_DAILY_CALLS_PER_PROVIDER"], "4")
-        self.assertEqual(vars_["WORKERS_AI_MODEL"], "")
+        self.assertNotIn("WORKERS_AI_MODEL", vars_)
+        self.assertNotIn("GEMINI_MODEL", vars_)
+        self.assertNotIn("OPENAI_MODEL", vars_)
         self.assertEqual(vars_["ZERO_COST_WORKERS_AI_FOUNDRY_ENABLED"], "false")
         self.assertEqual(vars_["OPENROUTER_MODEL"], "openrouter/free")
         self.assertEqual(vars_["OPENROUTER_FALLBACK_MODELS_JSON"], "[]")
@@ -157,6 +159,58 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertIn("queues", cfg)
         self.assertIn("ai", cfg)
         self.assertEqual(cfg["routes"], [{"pattern": "brain.private.test", "custom_domain": True}])
+
+    def test_osiris_memory_requires_successful_nonwriting_bridge_smoke(self):
+        cfg = render_private_worker_config(
+            stage_name="private_observe_candidate",
+            template=self.live_config,
+            database_id=self.database_id,
+            private_url="https://brain.private.test/",
+            bridge_smoke_test_passed=True,
+            osiris_memory_bridge_url="https://memory.osiris.test/ingest/a13",
+        )
+        vars_ = cfg["vars"]
+        self.assertEqual(vars_["OSIRIS_ENABLED"], "true")
+        self.assertEqual(vars_["OSIRIS_COUNCIL_ENABLED"], "true")
+        self.assertEqual(vars_["OSIRIS_MEMORY_ENABLED"], "true")
+        self.assertEqual(vars_["OSIRIS_MEMORY_BRIDGE_URL"], "https://memory.osiris.test/ingest/a13")
+        self.assertEqual(vars_["OSIRIS_GATEWAY_ENABLED"], "false")
+        self.assertEqual(vars_["ZERO_COST_MODE"], "true")
+
+    def test_osiris_memory_cannot_be_activated_without_smoke_test_and_url(self):
+        with self.assertRaisesRegex(ValueError, "osiris_memory_bridge_url_required_after_smoke_test"):
+            render_private_worker_config(
+                stage_name="private_observe_candidate",
+                template=self.live_config,
+                database_id=self.database_id,
+                private_url="https://brain.private.test/",
+                bridge_smoke_test_passed=True,
+            )
+        with self.assertRaisesRegex(ValueError, "osiris_memory_bridge_url_requires_successful_smoke_test"):
+            render_private_worker_config(
+                stage_name="private_observe_candidate",
+                template=self.live_config,
+                database_id=self.database_id,
+                private_url="https://brain.private.test/",
+                osiris_memory_bridge_url="https://memory.osiris.test/ingest/a13",
+            )
+
+    def test_osiris_memory_bridge_url_must_be_https_and_target_a13_ingest(self):
+        for bridge_url, expected in (
+            ("http://memory.osiris.test/ingest/a13", "osiris_memory_bridge_https_required"),
+            ("https://memory.osiris.test/other", "osiris_memory_bridge_must_target_ingest_endpoint"),
+            ("https://user:pass@memory.osiris.test/ingest/a13", "osiris_memory_bridge_url_invalid"),
+        ):
+            with self.subTest(bridge_url=bridge_url):
+                with self.assertRaisesRegex(ValueError, expected):
+                    render_private_worker_config(
+                        stage_name="private_observe_candidate",
+                        template=self.live_config,
+                        database_id=self.database_id,
+                        private_url="https://brain.private.test/",
+                        bridge_smoke_test_passed=True,
+                        osiris_memory_bridge_url=bridge_url,
+                    )
 
     def test_existing_database_id_is_preserved_without_override(self):
         expected = self.live_config["d1_databases"][0]["database_id"]
