@@ -15,7 +15,7 @@
     "daily_reel_candidates": 66,
     "daily_carousel_candidates": 66,
     "daily_story_candidates": 66,
-    "daily_human_need_clusters": 5,
+    "daily_human_need_clusters": 10,
     "daily_solution_linked_candidates": 264,
     "daily_content_requires_human_approval": true,
     "proposals_require_human_approval": true,
