@@ -92,6 +92,7 @@ def render_private_worker_config(
         "OSIRIS_ENABLED": "true" if observe_stage else "false",
         "OSIRIS_MEMORY_ENABLED": "false",
         "WORKERS_AI_ENABLED": "false",
+        "ZERO_COST_WORKERS_AI_FOUNDRY_ENABLED": "false",
         "WORKERS_AI_MODEL": "",
         "OSIRIS_GATEWAY_ENABLED": "false",
         "OPENROUTER_ENABLED": "true" if observe_stage else "false",
