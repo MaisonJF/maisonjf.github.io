@@ -60,7 +60,7 @@ for(const book of ebooks.filter(x=>x.status==='published')){
       id,type:'simulated_editorial_reading',
       assetType:'ebook',assetSlug:book.slug,assetTitle:book.title,
       simulatedProfile:profile.label,
-      simulatedComment:'Ao ler apenas a descrição disponível, o que me chama a atenção é: '+profile.appeal+' A minha dúvida antes de comprar seria: '+profile.question,
+      simulatedComment:'O que me atrai nesta proposta é isto: '+profile.appeal+' Antes de decidir, eu ainda gostava de perceber: '+profile.question,
       editorialNote:profile.appeal,
       constructiveQuestion:profile.question,
       sourceBasis:'data/ebooks.js catalogue description only',
