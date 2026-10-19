@@ -24,6 +24,16 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         )
         cls.database_id = "0123456789abcdef0123456789abcdef"
 
+    def test_production_config_uses_free_openrouter_and_excludes_workers_ai_foundry(self):
+        vars_=self.live_config["vars"]
+        self.assertEqual(vars_["ZERO_COST_MODE"], "true")
+        self.assertEqual(vars_["OPENROUTER_ENABLED"], "true")
+        self.assertTrue(vars_["OPENROUTER_MODEL"].endswith(":free") or vars_["OPENROUTER_MODEL"]=="openrouter/free")
+        self.assertEqual(vars_["WORKERS_AI_ENABLED"], "false")
+        self.assertEqual(vars_["ZERO_COST_WORKERS_AI_FOUNDRY_ENABLED"], "false")
+        fallback=json.loads(vars_["OPENROUTER_FALLBACK_MODELS_JSON"])
+        self.assertTrue(all(model.endswith(":free") or model=="openrouter/free" for model in fallback))
+
     def test_private_read_only_enables_control_api_only(self):
         cfg = render_private_worker_config(
             stage_name="private_brain_read_candidate",
@@ -114,6 +124,8 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["WORKER_ENABLED"], "false")
         self.assertEqual(vars_["KILL_SWITCH"], "true")
         self.assertEqual(vars_["OPENROUTER_ENABLED"], "false")
+        self.assertEqual(vars_["ZERO_COST_MODE"], "false")
+        self.assertEqual(vars_["OSIRIS_COUNCIL_ENABLED"], "false")
         self.assertEqual(vars_["OSIRIS_GATEWAY_ENABLED"], "false")
 
 
@@ -133,6 +145,13 @@ class RenderPrivateWorkerConfigTests(unittest.TestCase):
         self.assertEqual(vars_["BRAIN_PROPOSAL_API_ENABLED"], "false")
         self.assertEqual(vars_["BRAIN_REVIEW_DECISION_ENABLED"], "false")
         self.assertEqual(vars_["OSIRIS_MEMORY_ENABLED"], "false")
+        self.assertEqual(vars_["ZERO_COST_MODE"], "true")
+        self.assertEqual(vars_["MAX_DAILY_CALLS_PER_PROVIDER"], "4")
+        self.assertEqual(vars_["WORKERS_AI_MODEL"], "")
+        self.assertEqual(vars_["ZERO_COST_WORKERS_AI_FOUNDRY_ENABLED"], "false")
+        self.assertEqual(vars_["OPENROUTER_MODEL"], "openrouter/free")
+        self.assertEqual(vars_["OPENROUTER_FALLBACK_MODELS_JSON"], "[]")
+        self.assertEqual(vars_["OSIRIS_COUNCIL_ENABLED"], "true")
         self.assertIn("triggers", cfg)
         self.assertIn("queues", cfg)
         self.assertIn("ai", cfg)

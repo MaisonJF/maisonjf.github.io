@@ -36,6 +36,14 @@ class DigitalExperienceCoverageTests(unittest.TestCase):
         self.assertEqual(summary["oracle_role_slots"],sum(row["oracle"]["role_slots"] for row in self.payload["oceans"]))
         self.assertEqual(summary["oceans_with_feed_gaps"],0)
 
+
+    def test_editorial_queue_serializes_reused_role_lists_without_circular_placeholders(self):
+        for row in self.payload["oceans"]:
+            if row["oracle"]["eligible"]:
+                self.assertEqual(row["oracle"]["role_slots"],7)
+                self.assertEqual(len(row["oracle"]["roles"]),7)
+                self.assertFalse(isinstance(row["oracle"]["roles"],str))
+
     def test_feed_contract_never_stores_or_auto_activates_paid_bodies(self):
         contract=self.payload["contract"]
         self.assertFalse(contract["paid_bodies_stored"])

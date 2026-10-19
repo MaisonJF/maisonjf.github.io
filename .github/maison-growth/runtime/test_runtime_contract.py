@@ -11,6 +11,20 @@ ROOT=Path(__file__).resolve().parent
 
 
 class RuntimeContractTests(unittest.TestCase):
+    def test_manual_activation_exposes_only_safe_private_stages_and_requires_free_key(self):
+        workflow=(ROOT.parents[1]/"workflows"/"maison-private-runtime.yml").read_text(encoding="utf-8")
+        self.assertIn("default: private_observe_candidate",workflow)
+        self.assertIn("- private_observe_candidate",workflow)
+        self.assertIn("- human_review_decision_candidate",workflow)
+        self.assertIn("secrets.OPENROUTER_API_KEY",workflow)
+        self.assertIn("Private observe requires the OpenRouter key",workflow)
+        self.assertIn('OPENROUTER_API_KEY"] = key',workflow)
+
+    def test_foundry_daily_cap_is_bounded_to_four_zero_cost_calls(self):
+        worker=(ROOT.parents[2]/"workers"/"maison-intelligence"/"src"/"index.js").read_text(encoding="utf-8")
+        self.assertIn("const cap=clampInt(env.MAX_DAILY_CALLS_PER_PROVIDER,4,1,4)",worker)
+        self.assertIn("ZERO_COST_MODE",(ROOT.parents[2]/"workers"/"maison-intelligence"/"src"/"providers.js").read_text(encoding="utf-8"))
+
     def test_repository_stage_is_infra_only(self):
         p=json.loads((ROOT/"observe-only-policy.json").read_text())
         self.assertEqual(p["current_stage"],"infra_only")

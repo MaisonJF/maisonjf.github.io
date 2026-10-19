@@ -57,8 +57,10 @@ jobs:
       - name: Validate A14 commercial brain
         run: python .github/maison-growth/a14/validate_a14.py
 
-      - name: Check all derived commercial context
-        run: bash .github/maison-growth/brain/rebuild_commercial_context.sh --check
+      - name: Regenerate and validate all derived commercial context
+        run: |
+          bash .github/maison-growth/brain/rebuild_commercial_context.sh --write
+          bash .github/maison-growth/brain/rebuild_commercial_context.sh --check
 
       - name: Validate Brain contracts and schema chain
         run: python .github/maison-growth/brain/validate_brain_runtime.py

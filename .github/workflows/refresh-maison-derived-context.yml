@@ -1,0 +1,60 @@
+name: Refresh Maison Derived Context (Growth Branch)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/pdi-exponential-growth
+    paths:
+      - '.github/maison-growth/brain/**'
+      - '.github/maison-growth/oceans/**'
+      - 'data/products.js'
+      - 'data/services.js'
+      - 'functions/_lib/offer-brain.js'
+      - 'functions/_lib/oracle-territories.js'
+      - 'functions/_lib/pdi-theme-sources.js'
+      - '.github/workflows/refresh-maison-derived-context.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: maison-derived-refresh-growth-branch
+  cancel-in-progress: true
+
+jobs:
+  refresh-derived-context:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout growth branch
+        uses: actions/checkout@v4
+        with:
+          ref: refs/heads/feat/pdi-exponential-growth
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Rebuild all derived commercial context
+        run: bash .github/maison-growth/brain/rebuild_commercial_context.sh --write
+      - name: Validate regenerated context
+        run: bash .github/maison-growth/brain/rebuild_commercial_context.sh --check
+      - name: Commit generated projections on this branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add .github/maison-growth/brain/*.generated.json
+          git add .github/maison-growth/brain/editorial-queue.json
+          git add functions/_lib/vpc-ocean-signals.generated.js
+          if git diff --cached --quiet; then
+            echo "Derived context already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(brain): refresh derived context on growth branch"
+          git push origin HEAD:feat/pdi-exponential-growth

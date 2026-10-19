@@ -34,6 +34,14 @@ class OsirisBridgeContractTests(unittest.TestCase):
         self.assertTrue(published)
         self.assertTrue(all('"127.0.0.1:' in line for line in published))
 
+    def test_https_bridge_smoke_authenticates_without_writing_synthetic_memory(self):
+        smoke=(ROOT/"smoke_osiris_memory_bridge.py").read_text(encoding="utf-8")
+        self.assertIn("osiris_memory_bridge_https_required",smoke)
+        self.assertIn("osiris_memory_bridge_authentication_failed",smoke)
+        self.assertIn("unsupported_envelope",smoke)
+        self.assertIn('"write_performed":False',smoke)
+        self.assertIn("Deliberately invalid schema",smoke)
+
     def test_osiris_context_uses_pinned_mcp_sdk(self):
         self.assertIn("mcp==1.28.1",self.requirements)
         self.assertIn("osiris-context-smoke:",self.compose)

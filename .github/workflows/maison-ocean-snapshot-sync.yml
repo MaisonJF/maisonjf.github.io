@@ -30,17 +30,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Rebuild deterministic Ocean derivatives
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild the complete Ocean-to-Brain-to-commercial pipeline
         run: |
           set -euo pipefail
-          node .github/maison-growth/brain/build_editorial_queue.mjs
-          node .github/maison-growth/brain/build_editorial_queue.mjs --check
+          PYTHON=python3 bash .github/maison-growth/brain/rebuild_commercial_context.sh --write
+          PYTHON=python3 bash .github/maison-growth/brain/rebuild_commercial_context.sh --check
       - name: Commit derived files if changed
         run: |
           set -euo pipefail
           git config user.name "maison-oceans-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add -- .github/maison-growth/brain/editorial-queue.json functions/_lib/vpc-ocean-signals.generated.js
+          git add -- .github/maison-growth/brain/ .github/maison-growth/oceans/candidates.json functions/_lib/vpc-ocean-signals.generated.js
           if git diff --cached --quiet; then
             echo "Ocean derivatives already coherent."
             exit 0
@@ -62,6 +65,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
       - name: Read pending Ocean snapshots
         id: feed
@@ -114,13 +120,35 @@ jobs:
           count="$(node -e "const x=require('/tmp/ocean-feed.json'); if(!Array.isArray(x.rows)) process.exit(2); process.stdout.write(String(x.rows.length))")"
           echo "count=$count" >> "$GITHUB_OUTPUT"
 
-      - name: Export and rebuild allowed Ocean derivatives
+      - name: Report Ocean snapshot intake count
+        if: always()
+        env:
+          SNAPSHOT_COUNT: ${{ steps.feed.outputs.count }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          count="${SNAPSHOT_COUNT:-not_reported}"
+          echo "Pending Ocean snapshot rows returned by D1: $count"
+          {
+            echo "## Ocean snapshot intake"
+            echo "- Pending Ocean snapshot rows returned by D1: $count"
+            if [[ "$count" == "0" ]]; then
+              echo "- No pending rows were available; export/rebuild/acknowledgement were correctly skipped."
+            elif [[ "$count" == "not_reported" ]]; then
+              echo "- The fetch step did not provide a count; inspect that step's logs."
+            else
+              echo "- The downstream steps will export these rows, rebuild every derived organ, and acknowledge the snapshot after the repository commit succeeds."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Export Ocean snapshot and rebuild all derived organs
         if: steps.feed.outputs.count != '0'
         run: |
+          set -euo pipefail
           node workers/maison-intelligence/scripts/export-ocean-snapshot.mjs \
             /tmp/ocean-feed.json .github/maison-growth/oceans/candidates.json > /tmp/ocean-sync.json
-          node .github/maison-growth/brain/build_editorial_queue.mjs
-          node .github/maison-growth/brain/build_editorial_queue.mjs --check
+          PYTHON=python3 bash .github/maison-growth/brain/rebuild_commercial_context.sh --write
+          PYTHON=python3 bash .github/maison-growth/brain/rebuild_commercial_context.sh --check
 
       - name: Commit snapshot atomically
         if: steps.feed.outputs.count != '0'
@@ -131,7 +159,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add -- \
             .github/maison-growth/oceans/candidates.json \
-            .github/maison-growth/brain/editorial-queue.json \
+            .github/maison-growth/brain/ \
             functions/_lib/vpc-ocean-signals.generated.js
           if git diff --cached --quiet; then
             echo "No repository delta; D1 can still be acknowledged."
@@ -142,7 +170,7 @@ jobs:
           fi
           git fetch origin main
           test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
-          node .github/maison-growth/brain/build_editorial_queue.mjs --check
+          PYTHON=python3 bash .github/maison-growth/brain/rebuild_commercial_context.sh --check
 
       - name: Acknowledge D1 snapshot
         if: steps.feed.outputs.count != '0'

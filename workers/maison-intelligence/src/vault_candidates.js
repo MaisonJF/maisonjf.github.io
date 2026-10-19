@@ -78,6 +78,13 @@ function id(prefix,value){
 async function fingerprint(value){
   return (await sha256Hex(String(value).normalize('NFKC').toLowerCase().replace(/\s+/g,' ').trim())).slice(0,40);
 }
+function normalizeThemeSlug(value){
+  return String(value||'')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase().replace(/&/g,' e ')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')
+    .replace(/-+/g,'-');
+}
 function sourceOcean(raw){
   return cleanKey(raw?.source_ocean_id,'source_ocean_id',160);
 }
@@ -106,7 +113,9 @@ async function questionCandidate(env,raw){
   const db=env.GROWTH_DB;
   const questionId=id('q_',raw.id);
   const oceanKey=sourceOcean(raw);
-  const theme=text(raw.theme,'theme',2,120);
+  const themeLabel=text(raw.theme,'theme',2,120);
+  const theme=normalizeThemeSlug(themeLabel);
+  if(theme.length<2||theme.length>120)throw new Error('invalid_theme');
   const body=text(raw.text,'text',8,500);
   const fp=await fingerprint(body);
   const existing=await duplicate(db,'vault_questions','question_id',questionId,fp);
@@ -120,8 +129,8 @@ async function questionCandidate(env,raw){
   const intensity=intRange(raw.intensity,'intensity',1,4,2);
   const canonicalKey=optionalText(raw.canonical_key,'canonical_key',160)||questionId.slice(2);
   const subthemes=strings(raw.subthemes,'subthemes');
-  const painFamily=optionalText(raw.pain_family,'pain_family',120)||theme;
-  const subterritory=optionalText(raw.subterritory,'subterritory',120)||(subthemes[0]||theme);
+  const painFamily=optionalText(raw.pain_family,'pain_family',120)||themeLabel;
+  const subterritory=optionalText(raw.subterritory,'subterritory',120)||(subthemes[0]||themeLabel);
   const similarityGroup=optionalText(raw.similarity_group,'similarity_group',120)||subterritory;
   const emotionalFunction=optionalText(raw.emotional_function,'emotional_function',120)||'discovery';
   const cognitiveLoad=intRange(raw.cognitive_load,'cognitive_load',1,5,2);
