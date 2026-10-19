@@ -184,7 +184,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
             "simulatedComment:",
             "READER_VOICES",
             "A ideia de deixar de passar por cima daquilo que já sei",
-            "Gosto da opção de passar e de não exigir histórias pessoais",,
+            "Gosto da opção de passar e de não exigir histórias pessoais",
             "fullManuscriptReviewed:false",
             "actualReader:false",
             "verifiedPurchase:false",
