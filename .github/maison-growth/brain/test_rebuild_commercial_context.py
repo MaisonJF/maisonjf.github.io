@@ -31,6 +31,8 @@ class RebuildCommercialContextTests(unittest.TestCase):
         for name in (
             "build_vpc_ocean_signals.mjs",
             "build_editorial_queue.mjs",
+            "build_pdi_expansion_queue.mjs",
+            "build_ai_reader_panel.mjs",
             "build_commercial_assets.mjs",
             "digital_experience_coverage.py",
             "build_commercial_bundles.py",
