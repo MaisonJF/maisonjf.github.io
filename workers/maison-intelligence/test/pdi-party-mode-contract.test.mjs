@@ -43,7 +43,7 @@ test('group play rotates numbered participants and adds optional party challenge
   assert.match(html,/id="group-size"/);
   assert.match(html,/option value="12">12 pessoas/);
   assert.match(script,/payload\.mode==='group'/);
-  assert.match(script,/\(absolute-1\)%state\.players\+1/);
+  assert.match(script,/\(\(absolute-1\)%state\.players\)\+1/);
   assert.match(script,/absolute%4===0/);
   assert.match(script,/pdi_group_round_transition/);
   assert.match(script,/group_size:state\.players/);
@@ -54,6 +54,8 @@ test('sales page sends the selected mode into checkout while keeping answer priv
   const page=read('para-de-ignorar/index.html');
   assert.match(page,/data-mode="duo"/);
   assert.match(page,/data-mode="group"/);
+  assert.match(page,/theme.family==='Amigos, Grupos & Festas'/);
+  assert.match(page,/t.groupEmpty/);
   assert.match(page,/JSON\.stringify\(\{theme,locale,mode\}\)/);
   assert.match(page,/os novos packs de Amigos & Festas/i);
   assert.match(page,/Nunca as respostas/);
