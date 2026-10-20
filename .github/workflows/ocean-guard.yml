@@ -138,31 +138,29 @@ jobs:
           print('Global navigation remains structural: Farol / Volta Para Casa / Produtos / Serviços.')
           PY
 
-      - name: Guard Presença public naming
+      - name: Guard withdrawn companionship offer
         shell: bash
         run: |
-          python3 - <<'PY'
+          python - <<'PY'
           from pathlib import Path
-          files=[
+          public_files = [
               'portas/presenca.html','servicos/index.html','data/services.js',
-              'farol.js','contacto/index.html','index.html','teste/index.html','llms.txt'
+              'farol.js','farol.html','contacto/index.html','index.html','llms.txt'
           ]
-          forbidden=('Friend4Rent','Boyfriend4Rent','Descobrir Companhia')
-          for name in files:
-              text=Path(name).read_text(encoding='utf-8')
+          forbidden = ('Friend4Rent','Boyfriend4Rent','Descobrir Companhia','Presença Social','Presença Próxima','SOS 1 dia','SOS 1 semana','presenca-online','presenca-social','presenca-proxima','sos-dia','sos-semana')
+          for name in public_files:
+              text = Path(name).read_text(encoding='utf-8')
               for token in forbidden:
                   if token in text:
-                      raise SystemExit(f'{token} must not appear in public Presença surfaces: {name}')
-          presence=Path('portas/presenca.html').read_text(encoding='utf-8')
-          required=('Presença Online','Presença Social','Presença Próxima','SOS 1 dia','SOS 1 semana','35 €','60 €','80 €','120 €')
-          for token in required:
-              if token not in presence:
-                  raise SystemExit(f'Missing required Presença offer or condition price: {token}')
-          if 'presence-price' in presence or '?interesse=' in presence and '&preco=' in presence:
-              raise SystemExit('Presence prices must live in the conditions, not discovery cards or CTA query strings')
-          if '3, 7, 14, 21 ou 28' in Path('llms.txt').read_text(encoding='utf-8'):
-              raise SystemExit('Old SOS duration ladder is still documented')
-          print('Presença naming and prices are consistent; prices stay inside conditions, not discovery cards.')
+                      raise SystemExit(f'{token} must not appear in withdrawn companionship offer surface: {name}')
+          catalogue = Path('data/services.js').read_text(encoding='utf-8')
+          brain = Path('functions/_lib/offer-brain.js').read_text(encoding='utf-8')
+          if "slug:'companhia'" in catalogue or "id:'presenca',family:'presence'" in brain or "id:'sos',family:'presence'" in brain:
+              raise SystemExit('Withdrawn companionship offer remains in canonical commercial catalogue')
+          page = Path('portas/presenca.html').read_text(encoding='utf-8')
+          if 'noindex,nofollow' not in page or "location.replace('/servicos/')" not in page:
+              raise SystemExit('Retired Presença URL must redirect and remain non-indexable')
+          print('Withdrawn companionship offer is absent from public commercial surfaces and canonical catalogues.')
           PY
 
       - name: Guard final public service catalogue
