@@ -27,6 +27,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          LOCAL_HOUR="$(TZ=Europe/Lisbon date +%H)"
+          if [ "$LOCAL_HOUR" != "08" ]; then
+            echo "Not the 08:30 Lisbon watchdog tick; skipping this UTC schedule entry."
+            echo "sent=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           TODAY="$(TZ=Europe/Lisbon date +%F)"
           RUN_IDS="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/oceans-daily-brief.yml/runs?per_page=100" --jq ".workflow_runs[] | select(.created_at | startswith(\"$TODAY\")) | select(.conclusion == \"success\") | .id")"
           SENT=false
