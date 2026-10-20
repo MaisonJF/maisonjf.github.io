@@ -16,9 +16,8 @@ for(const p of ['portas/casa.html','portas/corpo.html','portas/cabeca.html']){
   if(/maison\.css\?v=20260920-architecture1/.test(html))fail('stale_porta_css:'+p);
 }
 
-const presence=read('portas/presenca.html');
-if(/presence-price/.test(presence))fail('presence_price_card_returned');
-if(/[?&]preco=/.test(presence))fail('presence_price_query_returned');
+const retiredPresence=read('portas/presenca.html');
+if(!/noindex,nofollow/.test(retiredPresence)||!/location\.replace\('\/servicos\/'\)/.test(retiredPresence))fail('retired_presence_route_must_redirect');
 
 for(const p of ['produtos/index.html','presentes/index.html','ebooks/index.html','oraculo/index.html']){
   const html=read(p);
