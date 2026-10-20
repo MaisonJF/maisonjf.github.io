@@ -43,12 +43,10 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         self.assertFalse(row["readiness"]["manual_validation_ready"])
         self.assertFalse(any(row["authority"].values()))
 
-    def test_multi_format_service_requires_human_price_selection(self):
+    def test_withdrawn_presence_service_is_not_in_commercial_readiness_board(self):
         board=build_board()
-        row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:service:companhia")
-        self.assertTrue(row["pricing"]["price_selection_required"])
-        self.assertEqual(row["next_action"]["code"],"select_concrete_price")
-        self.assertIsNone(row["pricing"]["selected_price_minor"])
+        refs={row["asset_ref"] for row in board["rows"]}
+        self.assertNotIn("catalog:service:companhia",refs)
 
     def test_private_overlay_can_change_readiness_without_changing_authority(self):
         overlay={
