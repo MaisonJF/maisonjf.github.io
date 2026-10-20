@@ -49,15 +49,10 @@ class CommercialOceanMatrixTests(unittest.TestCase):
         for row in self.payload["oceans"]:
             self.assertTrue(set(row["structural_gaps"]) <= allowed)
 
-    def test_presence_ocean_recognises_existing_presence_service(self):
-        row=next(
-            x for x in self.payload["oceans"]
-            if x["territory"]=="presenca-que-ampara-sem-tentar-resolver"
-        )
+    def test_presence_ocean_has_no_withdrawn_service_offer(self):
+        row=next(x for x in self.payload["rows"] if x["territory"]=="presenca-que-ampara-sem-tentar-resolver")
         refs={x["asset_ref"] for x in row["commercial_matches"]}
-        self.assertIn("catalog:service:companhia",refs)
-        self.assertTrue(row["digital_feeds"]["oracle_eligible"])
-        self.assertTrue(row["digital_feeds"]["pdi_eligible"])
+        self.assertNotIn("catalog:service:companhia",refs)
 
 
 if __name__=="__main__":
