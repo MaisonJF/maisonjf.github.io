@@ -1,0 +1,54 @@
+name: Maison JF Oceans Daily Brief Watchdog
+run-name: Maison JF Oceans Daily Brief Watchdog
+
+on:
+  schedule:
+    # Lisbon 08:30: 07:30 UTC in summer, 08:30 UTC in winter.
+    - cron: '30 7,8 * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: maison-oceans-daily-brief-watchdog
+  cancel-in-progress: false
+
+jobs:
+  verify-and-recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check whether today's briefing was actually sent
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TODAY="$(TZ=Europe/Lisbon date +%F)"
+          RUN_IDS="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/oceans-daily-brief.yml/runs?per_page=100" --jq ".workflow_runs[] | select(.created_at | startswith(\"$TODAY\")) | select(.conclusion == \"success\") | .id")"
+          SENT=false
+          while IFS= read -r RUN_ID; do
+            [ -n "$RUN_ID" ] || continue
+            if gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --log 2>/dev/null | grep -q "Daily briefing sent via Resend"; then
+              SENT=true
+              echo "Found confirmed Resend acceptance in run $RUN_ID."
+              break
+            fi
+          done <<< "$RUN_IDS"
+          echo "sent=$SENT" >> "$GITHUB_OUTPUT"
+          if [ "$SENT" = true ]; then
+            echo "Today's briefing has already been accepted by Resend; no recovery send needed."
+          else
+            echo "No successful send marker found for $TODAY; recovery dispatch required."
+          fi
+
+      - name: Trigger recovery send if the morning send is missing
+        if: steps.check.outputs.sent != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run oceans-daily-brief.yml --repo "$GITHUB_REPOSITORY" --ref main -f dry_run=false
+          echo "Recovery run dispatched. Check the Oceans Daily Brief workflow logs for the Resend result."
