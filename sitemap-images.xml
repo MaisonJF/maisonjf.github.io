@@ -6,7 +6,7 @@
     <image:image><image:loc>https://maison-jf.com/images/maison-jf-casa-amigos-hq.jpg</image:loc></image:image>
     <image:image><image:loc>https://maison-jf.com/images/maison-jf-corpo-homem-hq.jpg</image:loc></image:image>
     <image:image><image:loc>https://maison-jf.com/images/cabeca-mulher-q94.jpg</image:loc></image:image>
-    <image:image><image:loc>https://maison-jf.com/images/maison-jf-companhia-hq.jpg</image:loc></image:image>
+    
     <image:image><image:loc>https://maison-jf.com/images/maison-jf-b2b-office-hq.jpg</image:loc></image:image>
   </url>
   <url>
@@ -23,10 +23,6 @@
     <loc>https://maison-jf.com/portas/cabeca</loc>
     <image:image><image:loc>https://maison-jf.com/images/cabeca-mulher-q94.jpg</image:loc></image:image>
     <image:image><image:loc>https://maison-jf.com/images/cabeca-perspectiva-final.jpg</image:loc></image:image>
-  </url>
-  <url>
-    <loc>https://maison-jf.com/portas/presenca</loc>
-    <image:image><image:loc>https://maison-jf.com/images/cinematic/companhia.avif</image:loc></image:image>
   </url>
   <url>
     <loc>https://maison-jf.com/ebooks/</loc>

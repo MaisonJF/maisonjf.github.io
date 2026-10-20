@@ -14,7 +14,7 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         board=build_board()
         self.assertEqual(board["kind"],"maison_commercial_readiness_board")
         self.assertFalse(board["overlay_loaded"])
-        self.assertEqual(board["summary"]["assets"],15)
+        self.assertEqual(board["summary"]["assets"],14)
         self.assertEqual(board["summary"]["manual_validation_ready"],0)
         self.assertEqual(board["summary"]["unit_economics_known"],0)
         self.assertFalse(any(board["authority"].values()))
@@ -43,12 +43,10 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         self.assertFalse(row["readiness"]["manual_validation_ready"])
         self.assertFalse(any(row["authority"].values()))
 
-    def test_multi_format_service_requires_human_price_selection(self):
+    def test_withdrawn_presence_service_is_not_in_commercial_readiness_board(self):
         board=build_board()
-        row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:service:companhia")
-        self.assertTrue(row["pricing"]["price_selection_required"])
-        self.assertEqual(row["next_action"]["code"],"select_concrete_price")
-        self.assertIsNone(row["pricing"]["selected_price_minor"])
+        refs={row["asset_ref"] for row in board["rows"]}
+        self.assertNotIn("catalog:service:companhia",refs)
 
     def test_private_overlay_can_change_readiness_without_changing_authority(self):
         overlay={
@@ -130,13 +128,6 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         self.assertFalse(row["fulfilment"]["stock_snapshot_is_readiness_gate"])
         self.assertFalse(any(row["authority"].values()))
 
-    def test_selected_catalogue_service_option_is_visible_but_still_human_gated(self):
-        board=build_board(selected_service_prices={"catalog:service:companhia":3500})
-        row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:service:companhia")
-        self.assertEqual(row["pricing"]["selected_price_minor"],3500)
-        self.assertFalse(row["pricing"]["price_selection_required"])
-        self.assertEqual(row["next_action"]["code"],"verify_service_capacity")
-        self.assertFalse(any(row["authority"].values()))
 
 
 if __name__=="__main__":

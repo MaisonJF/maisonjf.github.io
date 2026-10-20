@@ -9,7 +9,6 @@
     if (routePath === '/produtos') return '/produtos/';
     if (routePath === '/servicos' || routePath === '/servicos.html') return 'servicos.html';
     if (routePath === '/profissionais' || routePath === '/profissionais.html') return 'profissionais.html';
-    if (routePath === '/portas/presenca' || routePath === '/portas/presenca.html' || routePath === '/companhia.html') return 'presenca.html';
     return routePath.split('/').filter(Boolean).pop() || 'index.html';
   })();
   document.body.dataset.yoichiPage = page;
@@ -166,13 +165,6 @@
           cta: 'Quero mudar o ambiente',
           href: '/produtos/nevoa/'
         },
-        {
-          tag: 'Presença',
-          title: '“Quantas vezes mais vou desistir só porque não tenho com quem ir?”',
-          desc: 'O plano continua a apetecer-te. Só não queres vivê-lo sem ninguém ao lado.',
-          cta: 'Quero conhecer Presença',
-          href: '/portas/presenca.html'
-        }
       ];
 
       cards.forEach((card, index) => {
@@ -365,64 +357,7 @@
     const especiais = document.getElementById('sob-consulta');
     if (especiais) especiais.remove();
 
-    const companhiaSection = $$('.detail-section').find(section =>
-      $('.detail-section__title', section)?.textContent.trim() === 'Também prestamos Companhia'
-    );
-    if (companhiaSection) {
-      setText('.detail-section__title', 'O que te falta não é orientação. É alguém contigo.', companhiaSection);
-      setText('.detail-copy', 'Se queres presença para um jantar, passeio, evento ou outro plano, vê os formatos de Presença.', companhiaSection);
-    }
-  }
 
-  /* PRESENÇA */
-  if (page === 'presenca.html') {
-    setText('.detail-hero .detail-title', 'Já deixaste de ir porque não tinhas com quem.');
-    setText('.detail-hero .detail-lead', 'O plano continua a apetecer-te. A falta de companhia não tem de decidir por ti.');
-
-    const formatos = document.getElementById('formatos');
-    if (formatos) setText('.detail-section__title', 'Escolhe o tipo de presença que queres.', formatos);
-
-    const friend = document.getElementById('friend4rent');
-    if (friend) {
-      const ps = $$('p:not(.detail-kicker)', friend);
-      if (ps[0]) ps[0].textContent = 'Jantar, cinema, concerto, passeio, compras ou conversa. Presença social sem romance.';
-      if (ps[1]) ps[1].textContent = 'Escolhes o plano. Combinamos tudo antes. Depois vais com companhia.';
-    }
-
-    const boyfriend = document.getElementById('boyfriend4rent');
-    if (boyfriend) {
-      const ps = $$('p:not(.detail-kicker)', boyfriend);
-      if (ps[0]) ps[0].innerHTML = '<strong>Não queres necessariamente uma relação. Hoje só gostavas de sentir proximidade.</strong>';
-      if (ps[1]) ps[1].textContent = 'Pode incluir mão dada, abraço, conversa íntima, carinho leve e beijos leves quando isso tiver sido combinado antes.';
-    }
-
-    const how = document.getElementById('como-funciona');
-    if (how) {
-      setText('.detail-section__title', 'Tudo combinado antes. Nada decidido à pressão no encontro.', how);
-      rewriteCard(how, 'Mínimo de 2 horas', 'A reserva mínima é de 2 horas. A duração total fica fechada antes.');
-      rewriteCard(how, 'Pagamento Antecipado', 'A reserva só fica confirmada depois do pagamento.');
-      rewriteCard(how, 'Despesas a Cargo de Quem Contrata', 'Deslocação, refeições, bilhetes e outras despesas ficam definidas ou estimadas antes.');
-      rewriteCard(how, 'Tudo Definido Antes', 'Data, horário, local, actividade, limites e despesas ficam combinados antes.');
-      practicalNote($('.detail-grid', how), 'Antes de pagar, recebes o valor total da reserva e as despesas previsíveis.');
-    }
-
-    const limites = document.getElementById('limites');
-    if (limites) {
-      setText('.detail-section__title', 'Proximidade não significa ambiguidade.', limites);
-      rewriteCard(limites, 'Presença Social', 'Tempo partilhado para planos sociais, sem romance.');
-      rewriteCard(limites, 'Presença Próxima', 'Proximidade afetiva dentro do que ficou combinado antes.');
-      rewriteCard(limites, 'Não é Acompanhamento Permanente', 'É presença social ou afectiva. Não substitui cuidados psicológicos, médicos ou sociais especializados.');
-      rewriteCard(limites, 'Queres Juntar Acompanhamento?', 'Podes juntar Escuta ou Acompanhamento se ficar combinado antes, com valor separado.');
-      rewriteCard(limites, 'O Âmbito Não Muda Durante a Reserva', 'Nada de extras sexuais ou mudanças de âmbito durante o encontro.');
-    }
-
-    const reserve = $$('.detail-section').find(section =>
-      $('.detail-kicker', section)?.textContent.trim() === 'Reserva'
-    );
-    if (reserve) {
-      setText('.detail-section__title', 'Diz-me o plano. O resto fica fechado antes de saíres de casa.', reserve);
-      setText('.detail-copy', 'Envia data, local, duração e o tipo de companhia que procuras. Confirmamos disponibilidade, valor e limites antes do pagamento.', reserve);
-    }
   }
 
   /* MAISON TODO O MÊS */

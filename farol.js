@@ -350,10 +350,10 @@ const data={
     },
     "relacao_presenca": {
       "title": "Talvez hoje não precises de interpretar nada.",
-      "text": "Se o que te falta é alguém contigo num café, passeio, evento ou momento combinado, entra em Presença. Os limites são definidos antes.",
+      "text": "Se procuras apoio estruturado, consulta os serviços disponíveis e escolhe o formato adequado.",
       "cta": {
-        "href": "/portas/presenca",
-        "text": "Descobrir Presença"
+        "href": "/servicos/",
+        "text": "Ver serviços disponíveis"
       },
       "cta2": null
     },
@@ -635,10 +635,10 @@ const data={
     },
     "desligar_presenca": {
       "title": "Há noites em que distração não chega. Queres alguém ali.",
-      "text": "Presença é tempo partilhado combinado antes: café, jantar, passeio, evento ou outro plano, com formato e limites claros.",
+      "text": "Consulta os serviços disponíveis e confirma o âmbito de cada formato antes de avançar.",
       "cta": {
-        "href": "/portas/presenca",
-        "text": "Descobrir Presença"
+        "href": "/servicos/",
+        "text": "Ver serviços disponíveis"
       },
       "cta2": null
     },
@@ -662,27 +662,27 @@ const data={
     },
     "companhia_evento": {
       "title": "O convite já existe. Falta não chegares sozinho(a).",
-      "text": "Presença pode acompanhar um evento ou plano previamente combinado. Formato, duração, despesas e limites ficam claros antes.",
+      "text": "Consulta os serviços disponíveis para conhecer os formatos actualmente oferecidos.",
       "cta": {
-        "href": "/portas/presenca",
-        "text": "Quero Presença"
+        "href": "/servicos/",
+        "text": "Ver serviços disponíveis"
       },
       "cta2": null
     },
     "companhia_conversa": {
       "title": "Não queres entretenimento. Queres presença sem performance.",
-      "text": "Um café, passeio ou tempo partilhado pode ser exactamente isso. Entra em Presença e vê os formatos.",
+      "text": "Podes explorar os serviços disponíveis e escolher o formato que corresponde ao que procuras.",
       "cta": {
-        "href": "/portas/presenca",
-        "text": "Descobrir Presença"
+        "href": "/servicos/",
+        "text": "Ver serviços disponíveis"
       },
       "cta2": null
     },
     "companhia_afecto": {
       "title": "Queres proximidade. Então os limites precisam de ser ainda mais claros.",
-      "text": "Vê Presença Próxima. É proximidade afetiva combinada antes, dentro de limites claros.",
+      "text": "Explora os serviços disponíveis e confirma as condições de cada um.",
       "cta": {
-        "href": "/portas/presenca",
+        "href": "/servicos/",
         "text": "Ver Presença"
       },
       "cta2": null
@@ -695,7 +695,7 @@ const data={
         "text": "Acompanhamento · 170 € · 4 semanas"
       },
       "cta2": {
-        "href": "/portas/presenca",
+        "href": "/servicos/",
         "text": "Hoje quero Presença"
       }
     },

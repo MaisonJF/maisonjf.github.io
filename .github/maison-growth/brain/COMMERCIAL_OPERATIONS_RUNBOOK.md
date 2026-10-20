@@ -91,7 +91,6 @@ The attention score is never treated as a profit forecast.
 The catalogue projection preserves the difference between:
 
 - fixed prices;
-- multi-format prices such as Presença;
 - `a partir de` prices;
 - quote-only services.
 
@@ -100,7 +99,7 @@ The system never silently flattens these into one price. For a multi-format serv
 ```bash
 python .github/maison-growth/brain/commercial_operator_report.py \
   --overlay /private/path/maison-commercial-overlay.private.json \
-  --service-price catalog:service:companhia=3500
+  --service-price catalog:service:mentoria=12500
 ```
 
 For `starting_from` services, the human-selected value must be at or above the catalogue minimum. Quote-only services accept a concrete human-approved quote for evaluation. This is calculation only; it does not change the public catalogue.
@@ -132,7 +131,7 @@ For multi-format or quote/starting-from services, pass only a human-selected con
 ```bash
 python .github/maison-growth/brain/commercial_readiness_board.py \
   --overlay /private/path/maison-commercial-overlay.private.json \
-  --service-price catalog:service:companhia=3500
+  --service-price catalog:service:mentoria=12500
 ```
 
 Each row keeps Ocean context, catalogue pricing, operational/economic blockers and one explicit next human action together. Attention is never presented as profit, catalogue `in_stock` is never treated as counted inventory, and every external authority remains false.

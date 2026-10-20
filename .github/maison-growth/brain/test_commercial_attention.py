@@ -29,7 +29,7 @@ class CommercialAttentionTests(unittest.TestCase):
         self.assertEqual(self.payload["source_assets"],"commercial-assets.generated.json")
         self.assertEqual(self.payload["source_oceans"],"../oceans/candidates.json")
         self.assertEqual(self.payload["source_editorial_context"],"editorial-queue.json")
-        self.assertEqual(self.payload["summary"]["ranked_assets"],15)
+        self.assertEqual(self.payload["summary"]["ranked_assets"],14)
 
     def test_attention_is_not_profit_or_execution_authority(self):
         self.assertTrue(self.payload["contract"]["attention_score_is_not_profit_score"])
@@ -80,20 +80,9 @@ class CommercialAttentionTests(unittest.TestCase):
         self.assertGreater(oracle["attention_score"],0)
         self.assertGreater(pdi["attention_score"],0)
 
-    def test_presence_service_is_linked_to_relevant_ocean_territories(self):
-        row=next(
-            item for item in self.payload["assets"]
-            if item["asset_ref"]=="catalog:service:companhia"
-        )
-        self.assertIn(
-            "solidao-com-contacto-sem-conexao-de-qualidade",
-            row["direct_ocean_territories"],
-        )
-        self.assertIn(
-            "presenca-que-ampara-sem-tentar-resolver",
-            row["direct_ocean_territories"],
-        )
-        self.assertIn("capacity_unknown",row["operational_blockers"])
+    def test_withdrawn_presence_offer_is_absent_from_attention_projection(self):
+        refs={item["asset_ref"] for item in self.payload["assets"]}
+        self.assertNotIn("catalog:service:companhia",refs)
 
 
 if __name__=="__main__":

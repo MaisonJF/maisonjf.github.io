@@ -39,11 +39,10 @@ class CommercialFactCollectionPlanTests(unittest.TestCase):
         )
         self.assertTrue(all(x["value"] is None for x in task["fields"]))
 
-    def test_service_without_concrete_price_asks_human_to_select_price(self):
+    def test_withdrawn_presence_offer_is_not_in_fact_collection_plan(self):
         plan=build_plan()
-        task=next(x for x in plan["tasks"] if x["asset_ref"]=="catalog:service:companhia")
-        self.assertEqual(task["next_action"],"select_concrete_price")
-        self.assertEqual([x["field"] for x in task["fields"]],["selected_price_minor"])
+        refs={task["asset_ref"] for task in plan["tasks"]}
+        self.assertNotIn("catalog:service:companhia",refs)
 
     def test_digital_overlay_advances_from_delivery_to_variable_cost(self):
         overlay={

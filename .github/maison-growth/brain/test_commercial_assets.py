@@ -20,7 +20,7 @@ class CommercialAssetTests(unittest.TestCase):
     def test_generated_registry_has_real_catalogue_and_unknown_operations(self):
         ctx=CommercialAssetContext(self.registry())
         summary=ctx.summary()
-        self.assertEqual(summary["asset_count"],20)
+        self.assertEqual(summary["asset_count"],19)
         self.assertFalse(summary["private_overlay_loaded"])
         self.assertEqual(summary["known_operational_fields"],0)
         self.assertGreater(summary["unknown_operational_fields"],0)
@@ -41,15 +41,7 @@ class CommercialAssetTests(unittest.TestCase):
         self.assertEqual(acompanhamento["price_minor"],17000)
         self.assertEqual(acompanhamento["price_source"],"price_label")
 
-        presenca=by_ref["catalog:service:companhia"]
-        self.assertEqual(presenca["price_kind"],"multi_format")
-        self.assertIsNone(presenca["price_minor"])
-        self.assertEqual(presenca["minimum_price_minor"],3500)
-        self.assertEqual(len(presenca["price_options"]),5)
-        self.assertIn(
-            {"label":"Presença Online","amount_minor":3500},
-            presenca["price_options"],
-        )
+        self.assertNotIn("catalog:service:companhia",by_ref)
 
         mentoria=by_ref["catalog:service:mentoria"]
         self.assertEqual(mentoria["price_kind"],"starting_from")
@@ -84,7 +76,6 @@ class CommercialAssetTests(unittest.TestCase):
         self.assertEqual(refs,{
             "catalog:service:acompanhamento",
             "catalog:service:b2b",
-            "catalog:service:companhia",
             "catalog:service:mentoria",
             "catalog:service:pedidos-especiais",
             "catalog:service:ritual-personalizado",
