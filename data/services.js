@@ -12,8 +12,7 @@ window.MAISON_SERVICES=[
 
 {slug:'ritual-personalizado',kind:'especial',door:'Ritual · Sob orçamento',name:'Ritual Personalizado',price:null,description:'Quando o pedido é demasiado teu para vir pronto.',limits:'O formato, materiais e valor são apresentados antes. Trabalho simbólico e ritual, sem promessa de resultado.',media:[],cta:'Quero explicar o pedido'},
 {slug:'pedidos-especiais',kind:'especial',door:'Pedido físico · Sob orçamento',name:'Pedidos Físicos',price:null,description:'Quando queres uma peça pensada para ti. Cristais, pulseiras, preparações ou jesmonite.',limits:'Materiais, dimensões, acabamento, prazo, disponibilidade e valor são confirmados antes.',media:[],cta:'Quero pedir orçamento'},
-
-{slug:'companhia',kind:'companhia',door:'Presença',name:'Presença',price:'desde 35 €',description:'Online. Presencial. SOS.',limits:'Inclui Presença Online, Presença Social, Presença Próxima, SOS 1 dia e SOS 1 semana. Não é um serviço sexual nem um serviço de emergência.',media:[{role:'ambience',src:'../images/root/companhia-cafe-fixed.webp?v=20260916-1532-fixed',alt:'Mesa com café como imagem de tempo partilhado',aspect:'portrait'}],formats:['Presença Online · 35 €','Presença Social · 80 €','Presença Próxima · 80 €','SOS 1 dia · 60 €','SOS 1 semana · 120 €'],cta:'Descobrir Presença',next:{slug:'acompanhamento',label:'Se procuras continuidade por mais tempo, ver Acompanhamento'}},
+ 
 
 {slug:'b2b',kind:'profissional',door:'Profissional',name:'Maison para profissionais',price:null,description:'Revenda, experiência, gifting, pequenas séries e pilotos profissionais por proposta.',limits:'Formato, preço, quantidades, capacidade, prazo e enquadramento são confirmados antes. Pilotos para equipas são não-clínicos e não são apresentados como formação oficial ou certificação pública.',media:[],cta:'Quero uma proposta B2B'}
 ];
@@ -25,7 +24,7 @@ const MAISON_SERVICE_LOCALES={
     mentoria:{door:'Continuidade',name:'Mentoria',price:'a partir de 125 €',description:'Quando você sabe onde quer chegar, mas não quer fazer o caminho sozinho.',limits:'Objetivo, duração, calendário, escopo e valor final são definidos antes de começar.',cta:'Quero saber como funciona'},
     'ritual-personalizado':{door:'Ritual · Sob orçamento',name:'Ritual Personalizado',description:'Quando o pedido é pessoal demais para vir pronto.',limits:'O formato, materiais e valor são apresentados antes. Trabalho simbólico e ritual, sem promessa de resultado.',cta:'Quero explicar o pedido'},
     'pedidos-especiais':{door:'Pedido físico · Sob orçamento',name:'Pedidos Físicos',description:'Quando você quer uma peça pensada para você. Cristais, pulseiras, preparações ou jesmonite.',limits:'Materiais, dimensões, acabamento, prazo, disponibilidade e valor são confirmados antes.',cta:'Quero pedir orçamento'},
-    companhia:{door:'Presença',name:'Presença',price:'desde 35 €',description:'Online. Presencial. SOS.',limits:'Inclui Presença Online, Presença Social, Presença Próxima, SOS 1 dia e SOS 1 semana. Não é um serviço sexual nem um serviço de emergência.',formats:['Presença Online · 35 €','Presença Social · 80 €','Presença Próxima · 80 €','SOS 1 dia · 60 €','SOS 1 semana · 120 €'],cta:'Descobrir Presença'},
+
     b2b:{door:'Profissional',name:'Maison para profissionais',description:'Revenda, experiência, gifting, pequenas séries e pilotos profissionais por proposta.',limits:'Formato, preço, quantidades, capacidade, prazo e enquadramento são confirmados antes.',cta:'Quero uma proposta B2B'}
   },
   en:{
