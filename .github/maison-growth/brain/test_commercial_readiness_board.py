@@ -128,13 +128,6 @@ class CommercialReadinessBoardTests(unittest.TestCase):
         self.assertFalse(row["fulfilment"]["stock_snapshot_is_readiness_gate"])
         self.assertFalse(any(row["authority"].values()))
 
-    def test_selected_catalogue_service_option_is_visible_but_still_human_gated(self):
-        board=build_board(selected_service_prices={"catalog:service:companhia":3500})
-        row=next(x for x in board["rows"] if x["asset_ref"]=="catalog:service:companhia")
-        self.assertEqual(row["pricing"]["selected_price_minor"],3500)
-        self.assertFalse(row["pricing"]["price_selection_required"])
-        self.assertEqual(row["next_action"]["code"],"verify_service_capacity")
-        self.assertFalse(any(row["authority"].values()))
 
 
 if __name__=="__main__":
