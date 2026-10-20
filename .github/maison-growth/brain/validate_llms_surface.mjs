@@ -79,18 +79,10 @@ const ritual=read('espiritualidade/protecao-energetica.html');
 assert(/ritual personalizado/i.test(ritual)&&/Sob orçamento/i.test(ritual));
 assert(llms.includes('- Ritual Personalizado — sob orçamento'));
 
-const presence=read('portas/presenca.html');
-const presenceFacts=[
-  ['Presença Online','60 minutos','35 €','- Presença Online — 60 min — 35 €'],
-  ['Presença Social','80 € · 2 horas','Hora adicional 40 €','- Presença Social — 2 horas — 80 €; hora adicional 40 €'],
-  ['Presença Próxima','80 € · 2 horas','Hora adicional 40 €','- Presença Próxima — 2 horas — 80 €; hora adicional 40 €'],
-  ['SOS 1 dia','60 €','Até três atualizações','- SOS 1 dia — 60 €'],
-  ['SOS 1 semana','120 €','Uma atualização por dia','- SOS 1 semana — 120 €']
-];
-for(const [name,a,b,llmsLine] of presenceFacts){
-  assert(presence.includes(name)&&presence.includes(a)&&presence.includes(b),'public presence fact missing: '+name);
-  assert(llms.includes(llmsLine),'llms presence fact drift: '+name);
-}
+const retiredPresence=read('portas/presenca.html');
+assert(retiredPresence.includes('noindex,nofollow'),'retired service URL must be noindex');
+assert(retiredPresence.includes("location.replace('/servicos/')"),'retired service URL must redirect to services');
+assert(!llms.includes('https://maison-jf.com/portas/presenca'),'retired service must not be listed in llms.txt');
 
 for(const forbidden of [
   '2 encontros de 60 minutos',
