@@ -42,7 +42,7 @@ const MAISON_SERVICE_LOCALES={
     mentoria:{door:'Continuidad',name:'Mentoría',price:'desde 125 €',description:'Cuando sabes dónde quieres llegar, pero no quieres hacer el camino solo.',limits:'Objetivo, duración, calendario, alcance y precio final se definen antes de empezar.',cta:'Quiero saber cómo funciona'},
     'ritual-personalizado':{door:'Ritual · Bajo presupuesto',name:'Ritual Personalizado',description:'Cuando la petición es demasiado tuya para venir ya hecha.',limits:'El formato, los materiales y el precio se presentan antes. Trabajo simbólico y ritual, sin promesa de resultado.',cta:'Quiero explicar la petición'},
     'pedidos-especiais':{door:'Pedido físico · Bajo presupuesto',name:'Pedidos Físicos',description:'Cuando quieres una pieza pensada para ti. Cristales, pulseras, preparaciones o Jesmonite.',limits:'Materiales, dimensiones, acabado, plazo, disponibilidad y precio se confirman antes.',cta:'Quiero pedir presupuesto'},
-    companhia:{door:'Presencia',name:'Presencia',price:'desde 35 €',description:'Online. Presencial. SOS.',limits:'Incluye Presencia Online, Presencia Social, Presencia Próxima, SOS 1 día y SOS 1 semana. No es un servicio sexual ni un servicio de emergencia.',formats:['Presencia Online · 35 €','Presencia Social · 80 €','Presencia Próxima · 80 €','SOS 1 día · 60 €','SOS 1 semana · 120 €'],cta:'Descubrir Presencia'},
+
     b2b:{door:'Profesional',name:'Maison para profesionales',description:'Reventa, experiencia, gifting, pequeñas series y pilotos profesionales mediante propuesta.',limits:'Formato, precio, cantidades, capacidad, plazo y encuadre se confirman antes.',cta:'Quiero una propuesta B2B'}
   }
 };
