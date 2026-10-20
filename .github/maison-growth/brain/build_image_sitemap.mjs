@@ -39,12 +39,6 @@ const SURFACES=[
     ]
   ],
   [
-    "https://maison-jf.com/portas/presenca",
-    [
-      "/images/cinematic/companhia.avif"
-    ]
-  ],
-  [
     "https://maison-jf.com/ebooks/",
     [
       "/images/ebooks/posters/virgulas-do-destino.webp",
