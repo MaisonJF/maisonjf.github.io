@@ -235,8 +235,8 @@ function maisonSolutionForNeed(cluster,adjacency){
   const related=String(adjacency||'').toLocaleLowerCase('pt-PT');
   const result={assets:[],bridge:'',cta:'Explora a opção MAISON JF que faça sentido para ti — sem pressão para comprar.'};
   if(cluster==='luto_perda_significado'){
-    result.assets=['Oráculo MAISON JF®','Éditions Maison JF','Serviços e Presença'];
-    result.bridge='O Oráculo e as Éditions podem oferecer perguntas e leitura para explorar uma perda ou mudança de significado. A oferta Presença é uma opção de companhia com limites explícitos; nenhuma destas opções é psicoterapia, tratamento ou serviço de emergência.';
+    result.assets=['Oráculo MAISON JF®','Éditions Maison JF','Volta Para Casa'];
+    result.bridge='O Oráculo e as Éditions podem oferecer perguntas e leitura para explorar uma perda ou mudança de significado. Volta Para Casa oferece experiências digitais de reflexão. Nenhuma destas opções é psicoterapia, tratamento ou serviço de emergência.';
   }else if(cluster==='carga_mental_cuidado'){
     result.assets=['PÁRA DE IGNORAR!','Oráculo MAISON JF®'];
     result.bridge='PÁRA DE IGNORAR! oferece perguntas para abrir uma conversa entre duas pessoas sobre o que costuma ficar invisível; o Oráculo pode ajudar a formular a pergunta. A responsabilidade tem de ser negociada entre as pessoas, não delegada a um produto.';
@@ -250,8 +250,8 @@ function maisonSolutionForNeed(cluster,adjacency){
     result.assets=['PÁRA DE IGNORAR!','Oráculo MAISON JF®'];
     result.bridge='PÁRA DE IGNORAR! abre espaço para perguntas entre duas pessoas; o Oráculo oferece perguntas simbólicas para explorar escolhas e limites. Nenhum deles decide por ti ou garante a reação de outra pessoa.';
   }else if(cluster==='ligacao_pertença'){
-    result.assets=['PÁRA DE IGNORAR!','Oráculo MAISON JF®','Serviços e Presença'];
-    result.bridge='PÁRA DE IGNORAR! propõe perguntas para iniciar conversas; o Oráculo ajuda a explorar outra perspetiva. A oferta Presença pode ser considerada quando procuras companhia humana, respeitando os limites descritos no serviço.';
+    result.assets=['PÁRA DE IGNORAR!','Oráculo MAISON JF®','Éditions Maison JF'];
+    result.bridge='PÁRA DE IGNORAR! propõe perguntas para iniciar conversas; o Oráculo ajuda a explorar outra perspetiva. As Éditions oferecem uma forma de aprofundar o tema ao teu ritmo.';
   }else if(cluster==='clareza_incerteza'){
     result.assets=['Oráculo MAISON JF®','Consulta de Tarot','Éditions Maison JF'];
     result.bridge='O Oráculo e a Consulta de Tarot são formatos de reflexão sobre uma pergunta, sem prever resultados nem decidir por ti. As Éditions permitem explorar temas através da leitura e da escrita.';
@@ -266,15 +266,15 @@ function maisonSolutionForNeed(cluster,adjacency){
     result.bridge='Neste tema, a primeira ajuda tem de ser gratuita: nomeia o limite que queres respeitar e experimenta uma frase para dizer não. Só considera um produto pago se ele te fizer sentido e couber no teu orçamento.';
     result.cta='Guarda esta pergunta e usa-a gratuitamente. Não precisas de comprar nada para começares a definir um limite.';
   }else if(cluster==='presenca_apoio'){
-    result.assets=['Serviços e Presença','Oráculo MAISON JF®'];
-    result.bridge='A oferta Presença é uma opção de companhia com limites explícitos; o Oráculo pode ajudar a organizar uma pergunta. Nenhum é um serviço de emergência nem substitui apoio clínico.';
+    result.assets=['Oráculo MAISON JF®','Volta Para Casa'];
+    result.bridge='O Oráculo pode ajudar a organizar uma pergunta; Volta Para Casa oferece experiências digitais de reflexão. Nenhum substitui apoio clínico ou serviços de emergência.';
   }else{
     result.assets=['Oráculo MAISON JF®','Éditions Maison JF','PÁRA DE IGNORAR!'];
     result.bridge='A Maison JF reúne perguntas simbólicas, experiências de conversa e conteúdos editoriais para explorar necessidades e perspetivas. Escolhe apenas o formato que realmente te é útil.';
   }
   // If the Ocean already names a clear commercial fit, put that fit first only when
   // it is a known Maison asset; otherwise retain the need-first mapping above.
-  const known=['PÁRA DE IGNORAR!','Oráculo MAISON JF®','Éditions Maison JF','Serviços e Presença','Escalda-Pés','Vela Aromática','Névoa de Ambiente','Consulta de Tarot','Volta Para Casa'];
+  const known=['PÁRA DE IGNORAR!','Oráculo MAISON JF®','Éditions Maison JF','Volta Para Casa','Escalda-Pés','Vela Aromática','Névoa de Ambiente','Consulta de Tarot','Volta Para Casa'];
   const named=known.find(asset=>related.includes(asset.toLocaleLowerCase('pt-PT')));
   if(named&&result.assets.includes(named))result.assets=[named,...result.assets.filter(x=>x!==named)];
   return result;
