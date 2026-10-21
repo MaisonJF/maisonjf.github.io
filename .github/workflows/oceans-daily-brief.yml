@@ -68,3 +68,5 @@ jobs:
 
       - name: Build report and deliver only when explicitly enabled
         run: node scripts/oceans-daily-brief.mjs
+
+# Manual live-send trigger support: commits marked [send-daily-brief] are intentional.
