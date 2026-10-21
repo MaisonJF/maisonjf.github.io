@@ -9,7 +9,7 @@ on:
       - '.github/workflows/oceans-daily-brief.yml'
   schedule:
     # Run at both UTC hours that correspond to 08:00 in Europe/Lisbon in winter/summer.
-    # The script exits on the non-matching tick; only one email is sent per local day.
+    # Delayed starts are allowed; Resend's date-based idempotency key prevents duplicate sends.
     - cron: '0 7,8 * * *'
   workflow_dispatch:
     inputs:
