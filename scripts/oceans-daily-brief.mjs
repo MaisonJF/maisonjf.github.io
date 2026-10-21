@@ -193,6 +193,7 @@ async function sendEmail(apiKey, recipient, sender, report) {
   if (!response.ok) throw new Error("resend_delivery_failed_http_" + response.status);
   const receipt = await response.json().catch(() => ({}));
   if (!receipt.id) throw new Error("resend_delivery_receipt_missing");
+  return receipt.id;
 }
 async function main() {
   const eventName = String(process.env.GITHUB_EVENT_NAME || "workflow_dispatch");
@@ -200,9 +201,10 @@ async function main() {
   const enabled = String(process.env.OCEAN_BRIEFING_ENABLED || "").toLowerCase() === "true";
   const now = new Date();
   const local = lisbonParts(now);
-  if (eventName === "schedule" && Number(local.hour) !== 8) {
-    console.log("Skipped: this UTC tick is not 08:00 in Europe/Lisbon.");
-    return;
+  if (eventName === "schedule") {
+    console.log("Scheduled briefing trigger accepted. " +
+      "Lisbon local time: " + local.date + " " + local.hour + ":" + local.minute +
+      ". The daily Resend idempotency key prevents duplicate delivery.");
   }
   if (eventName === "schedule" && !enabled) {
     console.log("Skipped: daily delivery is disabled until OCEAN_BRIEFING_ENABLED=true.");
@@ -246,8 +248,8 @@ async function main() {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient)) throw new Error("OCEAN_BRIEFING_EMAIL_TO is not a valid email address.");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sender)) throw new Error("OCEAN_BRIEFING_EMAIL_FROM is not a valid email address.");
   const resendKey = required("OCEAN_BRIEFING_RESEND_API_KEY");
-  await sendEmail(resendKey,recipient,sender,report);
-  console.log("Daily briefing sent via Resend. Body withheld from logs. "+JSON.stringify({date:report.date,counts:report.counts}));
+  const resendId = await sendEmail(resendKey,recipient,sender,report);
+  console.log("Daily briefing accepted by Resend. Body withheld from logs. "+JSON.stringify({date:report.date,resendId,counts:report.counts}));
 }
 main().catch(error=>{
   console.error("Oceans daily briefing failed: "+String(error?.message||"unknown_error").slice(0,180));

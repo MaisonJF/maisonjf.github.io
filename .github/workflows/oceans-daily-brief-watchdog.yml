@@ -3,7 +3,8 @@ run-name: Maison JF Oceans Daily Brief Watchdog
 
 on:
   schedule:
-    # Lisbon 08:30: 07:30 UTC in summer, 08:30 UTC in winter.
+    # Recovery checkpoint after 08:30 Lisbon: 07:30 UTC in summer, 08:30 UTC in winter.
+    # The script tolerates delayed cron execution and only skips runs before 08:30 local.
     - cron: '30 7,8 * * *'
   workflow_dispatch:
 
@@ -28,19 +29,26 @@ jobs:
         run: |
           set -euo pipefail
           LOCAL_HOUR="$(TZ=Europe/Lisbon date +%H)"
-          if [ "$LOCAL_HOUR" != "08" ]; then
-            echo "Not the 08:30 Lisbon watchdog tick; skipping this UTC schedule entry."
+          LOCAL_MINUTE="$(TZ=Europe/Lisbon date +%M)"
+          # Run only after the intended 08:30 Lisbon checkpoint, but tolerate
+          # GitHub's delayed cron execution rather than requiring an exact hour.
+          if [ "$LOCAL_HOUR" -lt 8 ] || { [ "$LOCAL_HOUR" -eq 8 ] && [ "$LOCAL_MINUTE" -lt 30 ]; }; then
+            echo "Before the 08:30 Lisbon recovery checkpoint; skipping this schedule entry."
             echo "sent=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           TODAY="$(TZ=Europe/Lisbon date +%F)"
-          RUN_IDS="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/oceans-daily-brief.yml/runs?per_page=100" --jq ".workflow_runs[] | select(.created_at | startswith(\"$TODAY\")) | select(.conclusion == \"success\") | .id")"
+          YESTERDAY="$(TZ=Europe/Lisbon date -d 'yesterday' +%F)"
+          # Include the previous local date because a delayed GitHub run can start
+          # after midnight even when its scheduled event was created the day before.
+          RUN_IDS="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/oceans-daily-brief.yml/runs" -f per_page=100 -f created=">=$YESTERDAY" --jq '.workflow_runs[] | select(.conclusion == "success") | .id')"
           SENT=false
           while IFS= read -r RUN_ID; do
             [ -n "$RUN_ID" ] || continue
-            if gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --log 2>/dev/null | grep -q "Daily briefing sent via Resend"; then
+            LOG="$(gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --log 2>/dev/null || true)"
+            if grep -Fq "Daily briefing accepted by Resend" <<< "$LOG" && grep -Fq "\"date\":\"$TODAY\"" <<< "$LOG"; then
               SENT=true
-              echo "Found confirmed Resend acceptance in run $RUN_ID."
+              echo "Found Resend acceptance for local date $TODAY in run $RUN_ID."
               break
             fi
           done <<< "$RUN_IDS"
