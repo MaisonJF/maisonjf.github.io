@@ -116,6 +116,36 @@ function makeReport({now, observations, signals, states, stats, usage}) {
   } else {
     lines.push("OCEANS ATUALIZADOS", "Não foram encontrados estados de Ocean atualizados nas últimas 24 horas.", "");
   }
+  const ideaSignals = rankedSignals.filter(row =>
+    Math.max(score(row.relevance_score), score(row.commercial_score)) >= 35
+  ).slice(0,5);
+  lines.push("IDEIAS E PRÓXIMAS AÇÕES");
+  if (ideaSignals.length) {
+    for (const [index,row] of ideaSignals.entries()) {
+      const themes = jsonArray(row.theme_candidates_json).map(x=>cleanText(x,100)).filter(Boolean).slice(0,3);
+      const roots = urlList(row.evidence_roots_json,3);
+      lines.push((index+1)+". "+cleanText(row.ocean_key,140)+
+        " · relevância "+score(row.relevance_score)+"/100 · comercial "+score(row.commercial_score)+"/100");
+      lines.push("   Sinal observado: "+cleanText(row.summary,420));
+      if (themes.length) lines.push("   Ângulos possíveis: "+themes.join(" · "));
+      lines.push("   Próximo passo: confirmar o sinal em pelo menos duas fontes independentes; identificar público afetado, problema concreto e uma proposta de conteúdo ou serviço antes de investir.");
+      if (roots.length) lines.push("   Evidência registada: "+roots.join(" | "));
+      lines.push("");
+    }
+  } else {
+    const grounded = rankedObservations.filter(row => row.grounding_state === "grounded").slice(0,3);
+    if (grounded.length) {
+      lines.push("Ainda não há sinais de memória suficientemente pontuados. Pistas exploratórias para validação:");
+      for (const [index,row] of grounded.entries()) {
+        lines.push((index+1)+". "+cleanText(row.territory_key,100)+" — "+cleanText(row.response_excerpt,300));
+        const citations = urlList(row.citations_json,2);
+        if (citations.length) lines.push("   Confirmar: "+citations.join(" | "));
+      }
+      lines.push("   Não tratar estas pistas como oportunidades validadas; cruzar fontes independentes antes de publicar ou gastar dinheiro.","");
+    } else {
+      lines.push("Sem sinais suficientemente sustentados nesta janela. Verificar a recolha, as fontes e a memória antes de concluir que não existem oportunidades.","");
+    }
+  }
   if (commercial.length) {
     lines.push("SINAIS COM POSSÍVEL RELEVÂNCIA COMERCIAL");
     for (const [index,row] of commercial.entries()) {
@@ -240,10 +270,11 @@ async function main() {
     return;
   }
   const configuredRecipient = required("OCEAN_BRIEFING_EMAIL_TO");
-  // Fail-safe redirect: a stale repository variable must never send Radar reports to the retired inbox.
-  const recipient = configuredRecipient.toLowerCase() === "maisonjf@proton.me"
-    ? "jfadario@pm.me"
-    : configuredRecipient;
+  // Radar delivery is intentionally restricted to the active inbox. Never send to the retired Maison JF inbox.
+  const recipient = "jfadario@pm.me";
+  if (configuredRecipient.toLowerCase() !== recipient) {
+    console.warn("Configured recipient differs from the approved Radar inbox; safely routing only to jfadario@pm.me.");
+  }
   const sender = required("OCEAN_BRIEFING_EMAIL_FROM");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient)) throw new Error("OCEAN_BRIEFING_EMAIL_TO is not a valid email address.");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sender)) throw new Error("OCEAN_BRIEFING_EMAIL_FROM is not a valid email address.");
