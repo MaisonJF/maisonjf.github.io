@@ -290,3 +290,4 @@ main().catch(error=>{
   console.error("Oceans daily briefing failed: "+String(error?.message||"unknown_error").slice(0,180));
   process.exitCode=1;
 });
+// Manual one-off send trigger marker; no runtime behavior change.
