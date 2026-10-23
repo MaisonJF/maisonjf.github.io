@@ -204,14 +204,14 @@ function makeReport({now, observations, signals, states, stats, usage}) {
     usageRows:usage.length
   }};
 }
-async function sendEmail(apiKey, recipient, sender, report) {
+async function sendEmail(apiKey, recipient, sender, report, idempotencyKey) {
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       "authorization": "Bearer " + apiKey,
       "content-type": "application/json",
       "accept": "application/json",
-      "Idempotency-Key": "maison-oceans-daily-brief-" + report.date
+      "Idempotency-Key": idempotencyKey
     },
     body: JSON.stringify({
       from: "MAISON JF Oceans Radar <" + sender + ">",
@@ -283,7 +283,10 @@ async function main() {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient)) throw new Error("OCEAN_BRIEFING_EMAIL_TO is not a valid email address.");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sender)) throw new Error("OCEAN_BRIEFING_EMAIL_FROM is not a valid email address.");
   const resendKey = required("OCEAN_BRIEFING_RESEND_API_KEY");
-  const resendId = await sendEmail(resendKey,recipient,sender,report);
+  // A deliberate manual push gets a unique key so a corrected report can be resent without weakening scheduled deduplication.
+  const idempotencyKey = "maison-oceans-daily-brief-" + report.date +
+    (eventName === "push" ? "-manual-" + String(process.env.GITHUB_SHA || "manual").slice(0,12) : "");
+  const resendId = await sendEmail(resendKey,recipient,sender,report,idempotencyKey);
   console.log("Daily briefing accepted by Resend. Body withheld from logs. "+JSON.stringify({date:report.date,resendId,counts:report.counts}));
 }
 main().catch(error=>{
