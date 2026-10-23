@@ -7,6 +7,11 @@ on:
     paths:
       - 'scripts/oceans-daily-brief.mjs'
       - '.github/workflows/oceans-daily-brief.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/oceans-daily-brief.mjs'
+      - '.github/workflows/oceans-daily-brief.yml'
   schedule:
     # Run at both UTC hours that correspond to 08:00 in Europe/Lisbon in winter/summer.
     # Delayed starts are allowed; Resend's date-based idempotency key prevents duplicate sends.
@@ -28,7 +33,7 @@ concurrency:
 
 jobs:
   validate:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -42,7 +47,7 @@ jobs:
 
   brief:
     # A commit explicitly marked [send-daily-brief] performs a one-off live send.
-    if: ${{ github.event_name != 'push' || contains(github.event.head_commit.message, '[send-daily-brief]') }}
+    if: ${{ github.event_name != 'pull_request' && (github.event_name != 'push' || contains(github.event.head_commit.message, '[send-daily-brief]')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
