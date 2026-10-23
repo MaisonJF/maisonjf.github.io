@@ -1,8 +1,8 @@
 {
   "version": "2026-10-22",
   "visibility": "internal-site",
-  "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-10-22T04:57:16.017Z",
+  "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only. New candidates remain provisional until evidence and semantic-distinction review.",
+  "last_enriched_at": "2026-10-23T12:00:00.000Z",
   "candidates": [
     {
       "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
@@ -698,6 +698,156 @@
       "status": "internal_candidate",
       "firstSeenAt": "2026-10-02T09:00:45.036Z",
       "lastSeenAt": "2026-10-15T00:05:04.358Z"
+    },
+    {
+      "territory": "fadiga-de-decidir-em-escolhas-pequenas",
+      "painLanguage": "Depois de um dia cheio de decisões, até escolher o que comer, vestir ou ver pode parecer mais uma tarefa. A pessoa adia escolhas pequenas, procura alguém que decida por ela ou sente irritação com opções que normalmente seriam simples.",
+      "intent": "explorar a fadiga associada à acumulação de decisões quotidianas e a sobrecarga de escolha, distinguindo excesso de opções, incerteza sobre preferências e cansaço geral sem transformar o tema em diagnóstico",
+      "commercialAdjacency": "Oráculo Eu & Padrões e Trabalho & Caminho; experiências digitais curtas de simplificação de escolhas; conteúdos sobre reduzir fricção em rotinas; sem promessas clínicas",
+      "evidence": [
+        "Misuraca et al. (2024), revisão sobre vantagens e desvantagens da escolha e moderadores de choice overload — https://pubmed.ncbi.nlm.nih.gov/38784631/",
+        "Jacob (2024), revisão da investigação sobre choice overload e agenda de investigação — https://onlinelibrary.wiley.com/doi/full/10.1111/ijcs.13029"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "decidir até cansa",
+        "demasiadas opções",
+        "adiar pequenas escolhas",
+        "procurar que alguém decida",
+        "medo de escolher mal",
+        "preferência pouco clara",
+        "choice overload",
+        "decision fatigue"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-10-23T12:00:00+01:00",
+      "lastSeenAt": "2026-10-23T12:00:00+01:00"
+    },
+    {
+      "territory": "trabalho-emocional-de-regular-o-clima-da-relacao",
+      "painLanguage": "Numa relação, uma pessoa pode sentir que lhe cabe perceber o ambiente, iniciar conversas difíceis, suavizar tensões e garantir que ninguém fica magoado. O esforço passa despercebido porque, quando resulta, parece que não aconteceu nada.",
+      "intent": "investigar a distribuição do trabalho emocional nas relações e o esforço de regular o clima relacional, distinguindo cuidado recíproco de responsabilidade unilateral e sem presumir que todos os casais funcionam da mesma forma",
+      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito e Intimidade & Vulnerabilidade; experiências reflexivas sobre reciprocidade e reparação; sem substituir apoio profissional",
+      "evidence": [
+        "The third shift: Addressing emotion work in couple therapy (2023), análise conceptual do trabalho emocional nas relações íntimas — https://pubmed.ncbi.nlm.nih.gov/37323080/",
+        "Moreira & Tavares (2026), estudo com 149 casais portugueses sobre trabalho emocional, satisfação e conflito relacional — https://pubmed.ncbi.nlm.nih.gov/42657872/"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "ser quem mantém a paz",
+        "antecipar a tensão",
+        "regular o ambiente emocional",
+        "iniciar sempre a reparação",
+        "cuidado recíproco",
+        "esforço que ninguém vê",
+        "emotion work",
+        "relational emotional labour"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-10-23T12:00:00+01:00",
+      "lastSeenAt": "2026-10-23T12:00:00+01:00"
+    },
+    {
+      "territory": "identidade-apos-mudanca-de-papel-profissional",
+      "painLanguage": "Quando muda o trabalho, termina uma função ou deixa de ser a pessoa a quem todos recorrem, pode surgir um vazio inesperado: a rotina mudou, mas também mudou a forma como a pessoa se reconhece e percebe o seu lugar.",
+      "intent": "explorar mudanças de identidade e pertença associadas a transições profissionais ou à perda de um papel, distinguindo adaptação prática, luto por uma versão anterior de si e descoberta de novas referências",
+      "commercialAdjacency": "Oráculo Trabalho & Caminho e Eu & Padrões; percursos do Farol e experiências digitais de transição; sem prometer orientação clínica ou resultados profissionais",
+      "evidence": [
+        "OECD Employment Outlook 2025, enquadramento das transições profissionais, responsabilidades e desigualdades no trabalho — https://www.oecd.org/en/publications/oecd-employment-outlook-2025_194a947b-en.html",
+        "WHO Commission on Social Connection (2025), relatório que identifica mudanças de vida como mudança de emprego, reforma e outras transições entre factores que podem alterar a ligação social — https://www.who.int/publications/i/item/978240112360"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "quem sou fora da função",
+        "perder o papel de referência",
+        "mudança de trabalho",
+        "a versão antiga já não serve",
+        "pertença depois da mudança",
+        "rotina sem identidade",
+        "career transition",
+        "role identity"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-10-23T12:00:00+01:00",
+      "lastSeenAt": "2026-10-23T12:00:00+01:00"
+    },
+    {
+      "territory": "dificuldade-em-receber-sem-sentir-divida",
+      "painLanguage": "Receber ajuda, atenção ou um presente pode trazer alegria e, ao mesmo tempo, uma obrigação imediata de retribuir. Em vez de simplesmente aceitar, a pessoa começa a calcular o que deve, como compensar ou se ficou em falta.",
+      "intent": "explorar a dificuldade em receber cuidado, ajuda ou generosidade sem sentir uma dívida imediata, distinguindo reciprocidade escolhida de obrigação percebida e evitando generalizações sobre personalidade ou história pessoal",
+      "commercialAdjacency": "Oráculo Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; conteúdos sobre reciprocidade e receber com presença; experiências de oferta e ritual sem pressão comercial",
+      "evidence": [
+        "OECD, Social Connections and Loneliness in OECD Countries, relatório sobre apoio recebido, apoio dado e qualidade das relações — https://www.oecd.org/en/publications/social-connections-and-loneliness-in-oecd-countries_6df2d6a0-en.html",
+        "WHO Commission on Social Connection (2025), enquadramento da função e qualidade do apoio trocado nas relações — https://www.who.int/news-room/questions-and-answers/item/social-connection"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "aceitar sem compensar",
+        "sentir que fiquei a dever",
+        "receber cuidado",
+        "retribuir imediatamente",
+        "reciprocidade ou obrigação",
+        "dizer obrigado e ficar",
+        "receiving support",
+        "reciprocity"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-10-23T12:00:00+01:00",
+      "lastSeenAt": "2026-10-23T12:00:00+01:00"
+    },
+    {
+      "territory": "ressaca-emocional-depois-de-um-conflito",
+      "painLanguage": "A conversa terminou e, à superfície, ficou tudo resolvido. Ainda assim, a pessoa continua a rever frases, a antecipar uma nova discussão ou a sentir-se distante, como se o corpo e a confiança não tivessem acompanhado o fim do conflito.",
+      "intent": "explorar o intervalo entre resolução verbal e recuperação de segurança ou proximidade depois de um conflito, distinguindo desacordo pontual, reparação incompleta e padrões recorrentes sem presumir abuso ou diagnóstico",
+      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito e Intimidade & Vulnerabilidade; conteúdos de reparação e regresso à proximidade; sem substituir apoio clínico",
+      "evidence": [
+        "The third shift: Addressing emotion work in couple therapy (2023), sobre trabalho emocional e dinâmica relacional — https://pubmed.ncbi.nlm.nih.gov/37323080/",
+        "WHO, Social Connection (2025), distingue qualidade positiva, tensão, conflito e apoio nas relações — https://www.who.int/news-room/questions-and-answers/item/social-connection"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "a conversa acabou mas não passou",
+        "rever o que foi dito",
+        "voltar a confiar depois da tensão",
+        "reparação incompleta",
+        "distância depois de resolver",
+        "proximidade depois do conflito",
+        "conflict recovery",
+        "relational repair"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-10-23T12:00:00+01:00",
+      "lastSeenAt": "2026-10-23T12:00:00+01:00"
+    },
+    {
+      "territory": "paralisia-entre-compromissos-que-ja-nao-fazem-sentido",
+      "painLanguage": "A pessoa continua a cumprir um compromisso porque já investiu tempo, dinheiro, reputação ou expectativas alheias. Mesmo quando percebe que deixou de fazer sentido, sair parece significar admitir desperdício ou desiludir alguém.",
+      "intent": "explorar a tensão entre persistir num compromisso e rever uma escolha à luz de novas informações, distinguindo perseverança útil, custo afundado e receio de desapontar sem prescrever decisões individuais",
+      "commercialAdjacency": "Oráculo Trabalho & Caminho, Eu & Padrões e Limites & Respeito; percursos do Farol e experiências de clarificação de escolhas; sem prometer resultados",
+      "evidence": [
+        "Misuraca et al. (2024), revisão sobre escolha, evitamento de decisões e arrependimento — https://pubmed.ncbi.nlm.nih.gov/38784631/",
+        "Jacob (2024), revisão sobre sobrecarga de escolha, contexto decisório e incerteza de preferências — https://onlinelibrary.wiley.com/doi/full/10.1111/ijcs.13029"
+      ],
+      "questionPotential": true,
+      "questionThemeCandidates": [
+        "continuar porque já investi",
+        "medo de admitir que mudou",
+        "desiludir alguém ao sair",
+        "persistir ou rever",
+        "compromisso sem sentido atual",
+        "custo do que já passou",
+        "sunk cost",
+        "commitment reconsideration"
+      ],
+      "oraclePotential": true,
+      "status": "internal_candidate",
+      "firstSeenAt": "2026-10-23T12:00:00+01:00",
+      "lastSeenAt": "2026-10-23T12:00:00+01:00"
     }
   ]
 }
