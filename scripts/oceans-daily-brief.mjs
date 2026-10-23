@@ -269,11 +269,11 @@ async function main() {
     console.log(JSON.stringify({date:report.date,counts:report.counts,send:false}));
     return;
   }
-  const configuredRecipient = required("OCEAN_BRIEFING_EMAIL_TO");
+  const configuredRecipient = String(process.env.OCEAN_BRIEFING_EMAIL_TO || "").trim();
   // Radar delivery is intentionally restricted to the active inbox. Never send to the retired Maison JF inbox.
   const recipient = "jfadario@pm.me";
   if (configuredRecipient.toLowerCase() !== recipient) {
-    console.warn("Configured recipient differs from the approved Radar inbox; safely routing only to jfadario@pm.me.");
+    console.warn("Configured recipient is blank or differs from the approved Radar inbox; safely routing only to jfadario@pm.me.");
   }
   const sender = required("OCEAN_BRIEFING_EMAIL_FROM");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient)) throw new Error("OCEAN_BRIEFING_EMAIL_TO is not a valid email address.");
