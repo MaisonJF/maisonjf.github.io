@@ -41,8 +41,9 @@
 }
 </style>
 <style>
-.home-page--final .hero__slogan{margin:14px 0 22px;color:var(--maison-gold,#c7aa73);font-size:clamp(11px,1.1vw,14px);font-weight:600;letter-spacing:.13em;line-height:1.45;text-transform:uppercase}
-@media(max-width:760px){.home-page--final .hero__slogan{font-size:11px;letter-spacing:.09em;margin:12px 0 18px}}
+.home-page--final .home-footer__signature{grid-column:1/-1;margin:8px 0 0;padding:clamp(24px,4vw,48px) 0 8px;border-top:1px solid var(--line);font:400 clamp(30px,5vw,70px)/.95 var(--serif);letter-spacing:-.035em;text-transform:uppercase}
+.home-page--final .home-footer__signature .home-footer__gold{display:block;margin-top:8px;color:var(--maison-gold,#c7aa73)}
+@media(max-width:700px){.home-page--final .home-footer__signature{font-size:clamp(30px,9vw,44px);line-height:.98}}
 </style>
 </head>
 <body class="home-page home-page--final">
@@ -68,8 +69,7 @@
     <div class="hero__copy hero__copy--final">
       <div class="hero__identity"><p class="eyebrow">MAISON JF®</p></div>
       <h1 class="hero__headline hero__headline--one-line">O QUE ESTÁS A IGNORAR?</h1>
-      <p class="hero__slogan">PÁRA DE IGNORAR! VOLTA PARA CASA.</p>
-      <p class="hero__positioning">Uma loja online de produtos para casa e corpo, jogos, ebooks e consultas de Tarot para reflexão e orientação.</p>
+      <p class="hero__positioning">Produtos sensoriais, rituais de cuidado e experiências de reflexão — para casa, corpo e mente.</p>
       <div class="hero__choices" aria-label="Escolhe por onde começar">
         <div class="hero__choice">
           <a class="button button--light" href="./produtos/#fisicos"><span>EXPLORAR PRODUTOS</span> <b aria-hidden="true">→</b></a>
@@ -145,9 +145,10 @@
 
 <footer class="home-footer">
   <div class="shell home-footer__grid">
-    <div class="home-footer__brand"><strong>MAISON JF®</strong><p>PÁRA DE IGNORAR.<br><span class="home-footer__gold">Volta Para Casa.</span></p></div>
+    <div class="home-footer__brand"><strong>MAISON JF®</strong></div>
     <div class="home-footer__group"><span>Explorar</span><nav aria-label="Explorar"><a href="./farol">O Farol</a><a href="./teste/">Volta Para Casa</a><a href="./produtos/">Produtos</a><a href="./servicos/">Serviços</a></nav></div>
     <div class="home-footer__group"><span>Maison</span><nav aria-label="Maison"><a href="./profissionais/">Profissionais</a><a href="./manifesto/">Manifesto</a><a href="./sobre/">Sobre mim</a><a href="./press/">Imprensa</a><a href="./contacto/">Contacto</a><a href="./envios">Envios</a><a href="./informacao-legal">Legal & Privacidade</a></nav></div>
+    <p class="home-footer__signature">PÁRA DE IGNORAR!<span class="home-footer__gold">VOLTA PARA CASA.</span></p>
     <p class="home-footer__legal">Marca registada na União Europeia · Certificação PME pelo IAPMEI.</p>
   </div>
 </footer>
