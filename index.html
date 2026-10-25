@@ -41,9 +41,37 @@
 }
 </style>
 <style>
-.home-page--final .home-footer__signature{grid-column:1/-1;margin:8px 0 0;padding:clamp(24px,4vw,48px) 0 8px;border-top:1px solid var(--line);font:400 clamp(30px,5vw,70px)/.95 var(--serif);letter-spacing:-.035em;text-transform:uppercase}
-.home-page--final .home-footer__signature .home-footer__gold{display:block;margin-top:8px;color:var(--maison-gold,#c7aa73)}
-@media(max-width:700px){.home-page--final .home-footer__signature{font-size:clamp(30px,9vw,44px);line-height:.98}}
+.home-page--final .home-footer__signature{grid-column:1/-1;margin:18px 0 0;padding:clamp(34px,5vw,64px) 0 clamp(30px,4vw,48px);border-top:1px solid rgba(210,179,111,.45);font:500 clamp(32px,5.4vw,76px)/.92 var(--serif);letter-spacing:-.035em;text-transform:uppercase;color:var(--maison-ivory,#f3efe7)}
+.home-page--final .home-footer__signature .home-footer__gold{display:block;margin-top:10px;color:var(--maison-gold,#d2b36f);font-weight:500}
+@media(max-width:700px){.home-page--final .home-footer__signature{font-size:clamp(30px,8.6vw,42px);line-height:.95;padding-top:34px;padding-bottom:30px}}
+</style>
+<style>
+/* Mobile QA: balanced positioning copy and above-the-fold entry paths. */
+@media(max-width:430px){
+  .home-page--final .hero__headline--one-line{
+    width:max-content!important;
+    max-width:calc(100vw - 28px)!important;
+    font-size:clamp(24px,7.1vw,29px)!important;
+    letter-spacing:-.045em!important;
+  }
+  .home-page--final .hero__positioning{
+    max-width:min(38ch,100%)!important;
+    text-wrap:balance;
+    margin-bottom:18px;
+  }
+  .home-page--final .hero__choices{margin-top:14px;gap:10px}
+  .home-page--final .hero__choice .button{min-height:48px}
+  .home-page--final .hero__choice small{font-size:10px;line-height:1.25}
+}
+@media(max-width:430px) and (max-height:760px){
+  .home-page--final .hero--home .media-slot--hero{aspect-ratio:16/9}
+  .home-page--final .hero__copy--final{padding-top:18px!important;padding-bottom:22px!important}
+  .home-page--final .hero__identity{margin-bottom:8px}
+  .home-page--final .hero__positioning{font-size:13px;line-height:1.35;margin-bottom:14px}
+  .home-page--final .hero__choices{margin-top:10px;gap:8px}
+  .home-page--final .hero__choice .button{min-height:46px}
+  .home-page--final .hero__choice small{margin-top:4px;font-size:9px;line-height:1.2}
+}
 </style>
 </head>
 <body class="home-page home-page--final">
@@ -148,8 +176,8 @@
     <div class="home-footer__brand"><strong>MAISON JF®</strong></div>
     <div class="home-footer__group"><span>Explorar</span><nav aria-label="Explorar"><a href="./farol">O Farol</a><a href="./teste/">Volta Para Casa</a><a href="./produtos/">Produtos</a><a href="./portas/casa">Casa</a><a href="./portas/corpo">Corpo</a><a href="./portas/cabeca">Cabeça</a><a href="./servicos/">Serviços</a></nav></div>
     <div class="home-footer__group"><span>Maison</span><nav aria-label="Maison"><a href="./profissionais/">Profissionais</a><a href="./manifesto/">Manifesto</a><a href="./sobre/">Sobre mim</a><a href="./press/">Imprensa</a><a href="./contacto/">Contacto</a><a href="./envios">Envios</a><a href="./informacao-legal">Legal & Privacidade</a></nav></div>
-    <p class="home-footer__signature">PÁRA DE IGNORAR!<span class="home-footer__gold">VOLTA PARA CASA.</span></p>
     <p class="home-footer__legal">Marca registada na União Europeia · Certificação PME pelo IAPMEI.</p>
+    <p class="home-footer__signature">PÁRA DE IGNORAR!<span class="home-footer__gold">VOLTA PARA CASA.</span></p>
   </div>
 </footer>
 <script>
