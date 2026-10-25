@@ -27,6 +27,19 @@
 .home-clair__copy h2{font:400 clamp(42px,6vw,76px)/.95 var(--serif);margin:.2em 0}.home-clair__copy p{max-width:520px;color:#aaa39a}.home-clair__copy .text-link{color:var(--maison-gold,#c7aa73)}
 @media(max-width:760px){.home-clair{grid-template-columns:1fr}.home-clair__media{max-width:520px}}
 </style>
+<style>
+/* Homepage conversion paths: keep the three decisions clear on touch screens. */
+.home-page--final .home-pathways .door__copy{display:flex;flex-direction:column;align-items:flex-start}
+.home-page--final .home-pathways .door__copy b{display:inline-flex;align-items:center;min-height:44px;margin-top:10px}
+@media(max-width:760px){
+  .home-page--final .hero__choices{display:grid;grid-template-columns:1fr;gap:12px}
+  .home-page--final .hero__choice .button{display:flex;justify-content:space-between;align-items:center;min-height:48px;width:100%;gap:12px}
+  .home-page--final .home-pathways .doors--editorial{grid-template-columns:1fr;gap:14px}
+  .home-page--final .home-pathways .door--editorial{min-width:0}
+  .home-page--final .home-pathways .door__copy{padding:22px 20px 24px}
+  .home-page--final .home-pathways .door__copy b{min-height:48px}
+}
+</style>
 </head>
 <body class="home-page home-page--final">
 <header class="site-header site-header--home">
