@@ -46,6 +46,20 @@
 @media(max-width:700px){.home-page--final .home-footer__signature{font-size:clamp(30px,8.6vw,42px);line-height:.95;padding-top:34px;padding-bottom:30px}}
 </style>
 <style>
+/* Digital offer visibility: a direct entry without replacing Casa, Corpo and Cabeça. */
+.home-digital{margin:clamp(42px,6vw,88px) auto;padding:clamp(24px,4.8vw,56px);border:1px solid var(--line);background:linear-gradient(125deg,rgba(210,179,111,.07),rgba(15,14,13,.92) 44%,#080808);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,54px);align-items:center}
+.home-digital__copy h2{font:400 clamp(34px,4.6vw,60px)/.98 var(--serif);letter-spacing:-.025em;margin:.2em 0 .32em;max-width:16ch}
+.home-digital__copy>p:not(.eyebrow){max-width:470px;color:#aaa39a;line-height:1.6}
+.home-digital__copy .button{display:inline-flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;margin-top:12px;max-width:100%;white-space:normal}
+.home-digital__links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.home-digital__link{min-width:0;min-height:112px;padding:17px;display:flex;flex-direction:column;justify-content:flex-start;gap:8px;border:1px solid var(--line);text-decoration:none;background:rgba(0,0,0,.22)}
+.home-digital__link small{font-size:9px;letter-spacing:.14em;color:var(--maison-gold,#d2b36f)}
+.home-digital__link strong{font:400 clamp(17px,1.65vw,22px)/1.15 var(--serif);color:#eee9df}
+.home-digital__link span{font-size:12px;line-height:1.45;color:#aaa39a}
+.home-digital__link:hover,.home-digital__link:focus-visible{border-color:rgba(210,179,111,.62);outline:none}
+@media(max-width:760px){.home-digital{grid-template-columns:1fr;gap:24px}.home-digital__copy h2{max-width:19ch}.home-digital__links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){.home-digital{padding:22px 18px;margin:40px auto}.home-digital__links{grid-template-columns:1fr}.home-digital__link{min-height:92px}.home-digital__copy .button{width:100%;font-size:10px;letter-spacing:.08em}}
+
 /* Mobile QA: balanced positioning copy and above-the-fold entry paths. */
 @media(max-width:430px){
   .home-page--final .hero__headline--one-line{
@@ -79,7 +93,7 @@
   <a class="brand" href="./">MAISON JF®</a>
   <nav id="main-navigation" aria-label="Navegação principal">
     <a href="./farol">O Farol</a>
-    <a href="./produtos/#fisicos">Produtos</a>
+    <a href="./produtos/">Produtos</a>
     <a href="./servicos/tarot/">Cabeça · Tarot</a>
     <a href="./contacto/?interesse=outras-opcoes">Contacto</a>
   </nav>
@@ -100,7 +114,7 @@
       <p class="hero__positioning">Uma curadoria de objetos sensoriais, rituais de cuidado e experiências de reflexão — para casa, corpo e mente.</p>
       <div class="hero__choices" aria-label="Escolhe por onde começar">
         <div class="hero__choice">
-          <a class="button button--light" href="./produtos/#fisicos"><span>EXPLORAR PRODUTOS</span> <b aria-hidden="true">→</b></a>
+          <a class="button button--light" href="./produtos/"><span>EXPLORAR PRODUTOS</span> <b aria-hidden="true">→</b></a>
           <small>Casa, corpo e bem-estar sensorial.</small>
         </div>
         <div class="hero__choice">
@@ -139,6 +153,21 @@
   
 
 
+
+  <section class="home-digital shell" id="experiencias-digitais" aria-labelledby="home-digital-title">
+    <div class="home-digital__copy">
+      <p class="eyebrow">EXPERIÊNCIAS DIGITAIS</p>
+      <h2 id="home-digital-title">Também há coisas que não chegam numa caixa.</h2>
+      <p>Jogos, Oráculo, ebooks e experiências de reflexão para explorar ao teu ritmo.</p>
+      <a class="button button--light" href="./produtos/#digitais"><span>VER TODAS AS EXPERIÊNCIAS DIGITAIS</span><b aria-hidden="true">→</b></a>
+    </div>
+    <div class="home-digital__links" aria-label="Explora as experiências digitais">
+      <a class="home-digital__link" href="./para-de-ignorar/"><small>JOGO DIGITAL</small><strong>PÁRA DE IGNORAR! · Jogo</strong><span>28 perguntas. Duas pessoas.</span></a>
+      <a class="home-digital__link" href="./oraculo/"><small>FERRAMENTA DIGITAL</small><strong>Oráculo MAISON JF®</strong><span>Abre outra perspetiva.</span></a>
+      <a class="home-digital__link" href="./ebooks/"><small>BIBLIOTECA</small><strong>Ebooks</strong><span>Histórias e livros para ler ao teu ritmo.</span></a>
+      <a class="home-digital__link" href="./teste/"><small>EXPERIÊNCIA GRATUITA</small><strong>Volta Para Casa</strong><span>Percebe o que te está a acontecer.</span></a>
+    </div>
+  </section>
 
   <section class="home-clair shell" aria-labelledby="clair-home-title">
     <a class="home-clair__media" href="./clair-obscur/" aria-label="Descobrir Clair Obscur : Instants"><img src="./images/clair-obscur-instants.webp" width="640" height="960" loading="lazy" decoding="async" alt="Clair Obscur : Instants, brevemente"></a>
