@@ -338,6 +338,8 @@ const HOME={
     'PÁRA DE IGNORAR.':'PARE DE IGNORAR.',
     'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Marca registrada na União Europeia · Certificação PME pelo IAPMEI.',
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.": "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o dia a dia.",
+    "Uma loja online de produtos para casa e corpo, jogos, ebooks e consultas de Tarot para reflexão e orientação.": "Uma loja online de produtos para casa e corpo, jogos, e-books e consultas de Tarot para reflexão e orientação.",
+    "PÁRA DE IGNORAR! VOLTA PARA CASA.": "PARE DE IGNORAR! VOLTE PARA CASA.",
 
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão. Explora a MAISON JF® ou segue O Farol para encontrar o próximo passo.": "Produtos sensoriais, experiências digitais e ferramentas de reflexão. Explore a MAISON JF® ou siga O Farol para encontrar o próximo passo.",
     "Ambiente acolhedor MAISON JF": "Ambiente acolhedor MAISON JF",
@@ -379,6 +381,8 @@ const HOME={
     'PÁRA DE IGNORAR.':'STOP IGNORING IT.',
     'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Registered trademark in the European Union · SME certification by IAPMEI.',
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.": "Sensory products, digital experiences and tools for reflection in everyday life.",
+    "Uma loja online de produtos para casa e corpo, jogos, ebooks e consultas de Tarot para reflexão e orientação.": "An online shop for home and body products, games, ebooks and Tarot consultations for reflection and guidance.",
+    "PÁRA DE IGNORAR! VOLTA PARA CASA.": "STOP IGNORING IT! COME BACK HOME.",
 
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão. Explora a MAISON JF® ou segue O Farol para encontrar o próximo passo.": "Sensory products, digital experiences and tools for reflection. Explore MAISON JF® or follow The Lighthouse to find your next step.",
     "Ambiente acolhedor MAISON JF": "A welcoming MAISON JF atmosphere",
@@ -419,6 +423,8 @@ const HOME={
     'PÁRA DE IGNORAR.':'DEJA DE IGNORARLO.',
     'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Marca registrada en la Unión Europea · Certificación PME por IAPMEI.',
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.": "Productos sensoriales, experiencias digitales y herramientas de reflexión para el día a día.",
+    "Uma loja online de produtos para casa e corpo, jogos, ebooks e consultas de Tarot para reflexão e orientação.": "Tienda online de productos para el hogar y el cuerpo, juegos, ebooks y consultas de Tarot para reflexionar y orientarse.",
+    "PÁRA DE IGNORAR! VOLTA PARA CASA.": "¡DEJA DE IGNORARLO! VUELVE A CASA.",
 
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão. Explora a MAISON JF® ou segue O Farol para encontrar o próximo passo.": "Productos sensoriales, experiencias digitales y herramientas de reflexión. Explora MAISON JF® o sigue El Faro para encontrar el siguiente paso.",
     "Ambiente acolhedor MAISON JF": "Ambiente acogedor MAISON JF",
