@@ -717,6 +717,7 @@ const PRODUCTS={
     "Escolhidas para viver contigo. Pequenas séries, acabamentos únicos e criações feitas por encomenda.": "Escolhidas para fazer parte da sua vida. Pequenas séries, acabamentos únicos e peças feitas sob encomenda.",
     "Para te conheceres melhor, abrires conversas ou simplesmente te divertires.": "Para se conhecer melhor, abrir conversas ou simplesmente se divertir.",
     "Explora a atenção, o apego e o afeto para perceberes melhor o que sentes.": "Explore a atenção, o apego e o afeto para entender melhor o que sente.",
+    "Três combinações de produtos para oferecer ou criar o teu próprio momento, desde 10 €.": "Três combinações de produtos para presentear ou criar seu próprio momento, a partir de 10 €.",
   },
   en:{
     'Produtos | MAISON JF®':'Products | MAISON JF®',
@@ -768,6 +769,7 @@ const PRODUCTS={
     "Escolhidas para viver contigo. Pequenas séries, acabamentos únicos e criações feitas por encomenda.": "Chosen to live with you. Small runs, distinctive finishes and pieces made to order.",
     "Para te conheceres melhor, abrires conversas ou simplesmente te divertires.": "To get to know yourself better, open conversations or simply have fun.",
     "Explora a atenção, o apego e o afeto para perceberes melhor o que sentes.": "Explore attention, attachment and affection to better understand what you feel.",
+    "Três combinações de produtos para oferecer ou criar o teu próprio momento, desde 10 €.": "Three product combinations to give as a gift or create your own moment, from €10.",
   },
   es:{
     'Produtos | MAISON JF®':'Productos | MAISON JF®',
@@ -819,6 +821,7 @@ const PRODUCTS={
     "Escolhidas para viver contigo. Pequenas séries, acabamentos únicos e criações feitas por encomenda.": "Elegidas para acompañarte. Series pequeñas, acabados únicos y piezas hechas por encargo.",
     "Para te conheceres melhor, abrires conversas ou simplesmente te divertires.": "Para conocerte mejor, abrir conversaciones o simplemente divertirte.",
     "Explora a atenção, o apego e o afeto para perceberes melhor o que sentes.": "Explora la atención, el apego y el afecto para comprender mejor lo que sientes.",
+    "Três combinações de produtos para oferecer ou criar o teu próprio momento, desde 10 €.": "Tres combinaciones de productos para regalar o crear tu propio momento, desde 10 €.",
   }
 };
 
