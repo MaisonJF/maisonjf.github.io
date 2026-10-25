@@ -339,6 +339,10 @@ const HOME={
     'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Marca registrada na União Europeia · Certificação PME pelo IAPMEI.'
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.": "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o dia a dia.",
 
+    "Produtos sensoriais, experiências digitais e ferramentas de reflexão. Explora a MAISON JF® ou segue O Farol para encontrar o próximo passo.": "Produtos sensoriais, experiências digitais e ferramentas de reflexão. Explore a MAISON JF® ou siga O Farol para encontrar o próximo passo.",
+    "Ambiente acolhedor MAISON JF": "Ambiente acolhedor MAISON JF",
+    "Momento de reflexão e clareza junto ao oceano": "Momento de reflexão e clareza junto ao oceano",
+
   },
   en:{
     "BREVEMENTE":"COMING SOON",
@@ -376,6 +380,10 @@ const HOME={
     'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Registered trademark in the European Union · SME certification by IAPMEI.'
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.": "Sensory products, digital experiences and tools for reflection in everyday life.",
 
+    "Produtos sensoriais, experiências digitais e ferramentas de reflexão. Explora a MAISON JF® ou segue O Farol para encontrar o próximo passo.": "Sensory products, digital experiences and tools for reflection. Explore MAISON JF® or follow The Lighthouse to find your next step.",
+    "Ambiente acolhedor MAISON JF": "A welcoming MAISON JF atmosphere",
+    "Momento de reflexão e clareza junto ao oceano": "A moment of reflection and clarity by the ocean",
+
   },
   es:{
     "BREVEMENTE":"PRÓXIMAMENTE",
@@ -411,6 +419,10 @@ const HOME={
     'PÁRA DE IGNORAR.':'DEJA DE IGNORARLO.',
     'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Marca registrada en la Unión Europea · Certificación PME por IAPMEI.'
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.": "Productos sensoriales, experiencias digitales y herramientas de reflexión para el día a día.",
+
+    "Produtos sensoriais, experiências digitais e ferramentas de reflexão. Explora a MAISON JF® ou segue O Farol para encontrar o próximo passo.": "Productos sensoriales, experiencias digitales y herramientas de reflexión. Explora MAISON JF® o sigue El Faro para encontrar el siguiente paso.",
+    "Ambiente acolhedor MAISON JF": "Ambiente acogedor MAISON JF",
+    "Momento de reflexão e clareza junto ao oceano": "Un momento de reflexión y claridad junto al océano",
 
   }
 };
