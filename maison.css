@@ -3684,3 +3684,95 @@ main,section,article,nav,header,footer,.shell{min-width:0}
 .editorial-page--about .editorial-page__copy blockquote{
   color:var(--maison-gold)!important;
 }
+
+
+/* MAISON JF® — B2C architecture, desktop + mobile · 2026-10-25 */
+.home-page--final .hero__positioning{max-width:660px;font-size:clamp(15px,1.35vw,19px);line-height:1.5}
+.home-page--final .hero__choices{max-width:620px;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.home-page--final .hero__choice .button{min-height:52px}
+.home-pathways{padding-top:52px;padding-bottom:64px}
+.home-pathways__head{margin:0 0 22px}
+.home-pathways__head h2{font:400 clamp(30px,4vw,48px)/1.02 var(--serif);letter-spacing:-.025em;margin:.12em 0}
+.home-pathways .doors--editorial{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:0;margin:0}
+.home-pathways .door--editorial{min-height:0!important;display:flex;flex-direction:column;background:#10100f}
+.home-pathways .door--editorial .media-slot{aspect-ratio:4/3;overflow:hidden}
+.home-pathways .door--editorial .media-slot img{display:block;width:100%;height:100%;object-fit:cover}
+.home-pathways .door__copy{padding:18px 18px 20px;display:flex;flex:1;flex-direction:column}
+.home-pathways .door__copy h3{font-size:clamp(22px,2.1vw,29px)!important;line-height:1.04!important;margin:.5em 0!important}
+.home-pathways .door__copy p{margin:.2em 0 1.1em;font-size:13px;line-height:1.45;color:#aaa39a}
+.home-pathways .door__copy b{display:block;margin-top:auto;font-size:10px;letter-spacing:.11em;color:var(--maison-gold,#c7aa73)}
+.home-pathways .door--digital .media-slot--digital{display:grid;place-items:center;padding:18px;background:radial-gradient(circle at 70% 28%,rgba(210,179,111,.22),transparent 33%),linear-gradient(135deg,#191815,#070707);color:#eee9df}
+.home-pathways .media-slot--digital span{display:grid;gap:13px;text-align:center;font:500 15px/1.2 var(--sans);letter-spacing:.18em}
+.home-pathways .media-slot--digital span b{font:400 clamp(32px,5vw,58px)/.9 var(--serif);letter-spacing:-.03em;color:var(--maison-gold,#d2b36f)}
+.home-pathways .door--tarot .door__copy span{color:var(--maison-gold,#d2b36f)}
+.catalogue-intro{padding-bottom:28px}
+.catalogue-intro h1{margin-bottom:.16em!important}
+.catalogue-section-head{margin:26px 0 8px}
+.catalogue-section-head h2{font:400 clamp(30px,3.6vw,48px)/1.05 var(--serif);margin:.15em 0 .35em}
+.catalogue-physical{scroll-margin-top:24px}
+.catalogue-physical .filters{margin-top:18px}
+.catalogue-cart-link{text-align:right;margin:10px 0 0}
+.catalogue-cart-link .text-link{margin-top:0}
+.catalogue-tarot{margin:70px 0;padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.catalogue-tarot h2{font:400 clamp(30px,4vw,48px)/1.02 var(--serif);margin:.25em 0}
+.catalogue-tarot p:not(.eyebrow){color:#aaa39a;margin:.25em 0}
+.catalogue-tarot__action{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:22px}
+.catalogue-tarot__action>span{font:400 24px/1.2 var(--serif)}
+.catalogue-tarot__action .button{min-width:210px;text-align:center}
+.product-digital{scroll-margin-top:24px}
+.product-digital__head h2{font:400 clamp(30px,4vw,48px)/1.02 var(--serif);margin:.2em 0}
+.product-digital__head p:not(.eyebrow){color:#aaa39a;margin:.3em 0}
+.product-digital__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.product-digital__card{min-width:0}
+@media(max-width:900px){
+ .home-pathways .doors--editorial{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .home-pathways .door--editorial:last-child{grid-column:1/-1}
+ .product-digital__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+ .home-page--final .hero__positioning{max-width:38ch;font-size:14px;line-height:1.45}
+ .home-page--final .hero__choices{grid-template-columns:1fr;gap:8px;margin-top:20px}
+ .home-page--final .hero__choice .button{min-height:48px;font-size:10px;letter-spacing:.1em}
+ .home-page--final .hero__choice small{margin-top:5px}
+ .home-pathways{padding-top:32px;padding-bottom:42px}
+ .home-pathways__head{margin-bottom:14px}
+ .home-pathways .doors--editorial{grid-template-columns:1fr;gap:10px}
+ .home-pathways .door--editorial:last-child{grid-column:auto}
+ .home-pathways .door--editorial{display:grid;grid-template-columns:minmax(104px,.72fr) minmax(0,1fr);align-items:stretch}
+ .home-pathways .door--editorial .media-slot{aspect-ratio:3/4;min-width:0;min-height:0}
+ .home-pathways .door__copy{padding:13px 14px}
+ .home-pathways .door__copy h3{font-size:clamp(20px,5.2vw,25px)!important}
+ .home-pathways .door__copy p{font-size:12px;margin:.2em 0 .65em}
+ .home-pathways .door__copy b{font-size:9px;letter-spacing:.08em}
+ .home-pathways .door--digital .media-slot--digital span{font-size:10px;letter-spacing:.12em}
+ .home-pathways .door--digital .media-slot--digital span b{font-size:30px}
+ .catalogue{padding:100px 0 60px!important}
+ .catalogue-intro h1{font-size:clamp(40px,11vw,58px)!important;line-height:.98!important}
+ .catalogue-section-head{margin-top:16px}
+ .catalogue-section-head h2{font-size:32px}
+ .catalogue-physical .filters{display:flex;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+ .catalogue-physical .filters button{flex:0 0 auto;min-height:44px}
+ .catalogue-page .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px}
+ .catalogue-page .product__body{padding:13px 12px 14px}
+ .catalogue-page .product h2{font-size:21px!important;line-height:1.03!important}
+ .catalogue-page .product p{font-size:12px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ .catalogue-page .product__body small{font-size:9px;letter-spacing:.1em}
+ .catalogue-page .product__actions .text-link{display:flex;align-items:center;min-height:42px;font-size:9px;letter-spacing:.07em;margin-top:0}
+ .catalogue-cart-link{margin-top:6px}
+ .bundle-feature{margin-top:32px;padding:24px 18px}
+ .curadoria{margin-top:44px;padding:38px 0}
+ .product-digital{margin-top:42px}
+ .product-digital__grid{grid-template-columns:1fr 1fr;gap:10px}
+ .product-digital__card{padding:16px!important}
+ .catalogue-tarot{margin:44px 0;padding:25px 0}
+ .catalogue-tarot__action{align-items:stretch;flex-direction:column;gap:13px}
+ .catalogue-tarot__action .button{width:100%;min-height:48px}
+ .continue{margin-top:44px;padding:38px 0;gap:26px}
+}
+@media(max-width:360px){
+ .home-pathways .door--editorial{grid-template-columns:1fr}
+ .home-pathways .door--editorial .media-slot{aspect-ratio:16/8}
+ .catalogue-page .product-grid{grid-template-columns:1fr}
+ .product-digital__grid{grid-template-columns:1fr}
+ .catalogue-tarot__action>span{font-size:21px}
+}
