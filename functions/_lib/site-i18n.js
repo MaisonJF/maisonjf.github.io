@@ -411,6 +411,7 @@ const HOME={
     "Ensaios e histórias para guardar, sublinhar e revisitar.": "Ensaios e histórias para guardar, sublinhar e revisitar.",
     "Tudo aqui é um caminho de regresso.": "Tudo aqui é um caminho de volta para casa.",
     "CASA · CORPO · CABEÇA": "CASA · CORPO · MENTE",
+    "Objetos sensoriais para o teu espaço, rituais de pausa para o teu corpo e mecanismos de clareza para a tua mente.": "Objetos sensoriais para o seu espaço, rituais de pausa para o corpo e mecanismos de clareza para a mente.",
   },
   en:{
     "BREVEMENTE":"COMING SOON",
@@ -520,6 +521,7 @@ const HOME={
     "Ensaios e histórias para guardar, sublinhar e revisitar.": "Essays and stories to keep, underline and return to.",
     "Tudo aqui é um caminho de regresso.": "Everything here is a way back home.",
     "CASA · CORPO · CABEÇA": "HOME · BODY · MIND",
+    "Objetos sensoriais para o teu espaço, rituais de pausa para o teu corpo e mecanismos de clareza para a tua mente.": "Sensory objects for your space, rituals to pause and reconnect with your body, and tools for clarity of mind.",
   },
   es:{
     "BREVEMENTE":"PRÓXIMAMENTE",
@@ -628,6 +630,7 @@ const HOME={
     "Ensaios e histórias para guardar, sublinhar e revisitar.": "Ensayos e historias para guardar, subrayar y volver a leer.",
     "Tudo aqui é um caminho de regresso.": "Todo aquí es un camino de regreso a casa.",
     "CASA · CORPO · CABEÇA": "CASA · CUERPO · MENTE",
+    "Objetos sensoriais para o teu espaço, rituais de pausa para o teu corpo e mecanismos de clareza para a tua mente.": "Objetos sensoriales para tu espacio, rituales de pausa para el cuerpo y herramientas de claridad para la mente.",
   }
 };
 
