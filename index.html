@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MAISON JF® | PÁRA DE IGNORAR! Volta Para Casa.</title>
-<meta name="description" content="Produtos sensoriais, experiências digitais e ferramentas de reflexão. Explora a MAISON JF® ou segue O Farol para encontrar o próximo passo.">
+<meta name="description" content="Objetos sensoriais, rituais de pausa e mecanismos de clareza para casa, corpo e mente. Tudo para o mesmo regresso.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <link rel="canonical" href="https://maison-jf.com/">
 <link rel="icon" href="./maison-jf-mark.svg" type="image/svg+xml">
@@ -33,8 +33,9 @@
 .home-page--final .home-pathways .door--editorial{height:100%;min-width:0}
 .home-page--final .home-pathways .door__copy{display:flex;flex-direction:column;align-items:flex-start}
 .home-page--final .home-pathways .door__copy b{display:inline-flex;align-items:center;min-height:44px;margin-top:auto}
-.home-page--final .home-pathways .door__actions{display:grid;grid-template-columns:max-content max-content;align-items:center;gap:0 12px;width:100%;margin-top:auto;padding-top:8px}
-.home-page--final .home-pathways .door__action{display:inline-flex;align-items:center;min-height:44px;white-space:nowrap;color:var(--maison-gold,#d2b36f);font:600 9px/1 var(--sans);letter-spacing:.07em;text-transform:uppercase;text-decoration:none}
+.home-page--final .home-pathways .door__actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;gap:12px;width:100%;margin-top:auto;padding-top:8px}
+.home-page--final .home-pathways .door__action{display:flex;align-items:center;min-width:0;min-height:44px;white-space:normal;line-height:1.25;color:var(--maison-gold,#d2b36f);font:600 9px/1.25 var(--sans);letter-spacing:.045em;text-transform:uppercase;text-decoration:none}
+.home-page--final .home-pathways .door__action:focus-visible{outline:2px solid var(--maison-gold,#d2b36f);outline-offset:3px}
 .home-page--final .home-pathways .door__action:focus-visible{outline:2px solid var(--maison-gold,#d2b36f);outline-offset:3px}
 @media(max-width:760px){
   .home-page--final .hero__choices{display:grid;grid-template-columns:1fr;gap:12px}
@@ -43,7 +44,7 @@
   .home-page--final .home-pathways .door--editorial{min-width:0}
   .home-page--final .home-pathways .door__copy{padding:22px 20px 24px}
   .home-page--final .home-pathways .door__copy b{min-height:48px}
-  .home-page--final .home-pathways .door__actions{grid-template-columns:max-content max-content;gap:0 16px;padding-top:4px}
+  .home-page--final .home-pathways .door__actions{grid-template-columns:1fr;gap:12px;padding-top:8px}
   .home-page--final .home-pathways .door__action{min-height:48px}
 }
 </style>
@@ -56,13 +57,13 @@
 /* Digital offers: a quiet editorial row, not a second catalogue panel. */
 .home-digital{margin:8px auto 70px;padding:34px 0 0;border:0;border-top:1px solid var(--line);background:none;display:block}
 .home-digital__head{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(220px,.75fr);gap:clamp(24px,4vw,52px);align-items:end}
-.home-digital__copy h2{font:400 clamp(30px,3.7vw,48px)/.98 var(--serif);letter-spacing:-.025em;margin:.2em 0 .12em;max-width:19ch}
+.home-digital__copy h2{font:400 clamp(30px,3.7vw,48px)/.98 var(--serif);letter-spacing:-.025em;margin:.2em 0 .12em;max-width:22ch}
 .home-digital__intro{max-width:440px;color:#aaa39a;line-height:1.6;font-size:14px;margin:0 0 5px}
 .home-digital__links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--line);margin-top:27px}
-.home-digital__link{position:relative;min-width:0;min-height:112px;padding:17px 14px 14px 0;display:flex;flex-direction:column;align-items:flex-start;gap:7px;border:0;border-right:1px solid var(--line);text-decoration:none;background:none}
+.home-digital__link{position:relative;min-width:0;min-height:130px;padding:18px 16px 16px 0;display:flex;flex-direction:column;align-items:flex-start;gap:8px;border:0;border-right:1px solid var(--line);text-decoration:none;background:none}
 .home-digital__link:not(:first-child){padding-left:16px}
 .home-digital__link:last-child{border-right:0;padding-right:0}
-.home-digital__link small{font-size:9px;line-height:1.3;letter-spacing:.12em;color:var(--maison-gold,#d2b36f)}
+.home-digital__link small{font-size:9px;line-height:1.3;letter-spacing:.14em;color:var(--maison-gold,#d2b36f)}
 .home-digital__link strong{font:400 clamp(17px,1.55vw,21px)/1.15 var(--serif);color:#eee9df}
 .home-digital__link span{font-size:12px;line-height:1.45;color:#aaa39a}
 .home-digital__link:after{content:"↗";display:block;margin-top:auto;padding-top:8px;font-size:12px;color:var(--maison-gold,#d2b36f)}
@@ -82,6 +83,7 @@
   .home-digital__intro{font-size:13px;max-width:44ch;margin:0}
   .home-digital__links{margin-top:20px}
   .home-digital__link{min-height:84px;padding:14px 10px 12px 0;gap:6px}
+  .home-digital__link:focus-visible{outline-offset:2px}
   .home-digital__link:not(:first-child){padding-left:12px}
   .home-digital__link:nth-child(2n){padding-left:12px;padding-right:0}
   .home-digital__link small{font-size:8px;letter-spacing:.08em}
@@ -140,10 +142,10 @@
     <div class="hero__copy hero__copy--final">
       <div class="hero__identity"><p class="eyebrow">MAISON JF®</p></div>
       <h1 class="hero__headline hero__headline--one-line">O QUE ESTÁS A IGNORAR?</h1>
-      <p class="hero__positioning">Uma curadoria de objetos sensoriais, rituais de cuidado e experiências de reflexão — para casa, corpo e mente.</p>
+      <p class="hero__positioning">Objetos sensoriais para o teu espaço, rituais de pausa para o teu corpo e mecanismos de clareza para a tua mente. Tudo para o mesmo regresso.</p>
       <div class="hero__choices" aria-label="Escolhe por onde começar">
         <div class="hero__choice">
-          <a class="button button--light" href="./produtos/"><span>EXPLORAR PRODUTOS</span> <b aria-hidden="true">→</b></a>
+          <a class="button button--light" href="#portas"><span>EXPLORAR A MAISON</span> <b aria-hidden="true">→</b></a>
           <small>Velas, aromas e rituais para casa e corpo.</small>
         </div>
         <div class="hero__choice">
@@ -164,17 +166,17 @@
         <div class="media-slot">
           <picture><source type="image/webp" srcset="./images/perf/home/casa-480.webp 480w, ./images/perf/home/casa-640.webp 640w, ./images/perf/home/casa-768.webp 768w, ./images/perf/home/casa-1080.webp 1080w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw"><img src="./images/maison-jf-casa-amigos-hq.jpg" width="1080" height="810" alt="Ambiente acolhedor MAISON JF" loading="lazy" decoding="async" fetchpriority="low"></picture>
         </div>
-        <div class="door__copy"><span>CASA</span><h3>Aroma, ambiente e presença.</h3><p>Velas e aromas para criar o ambiente certo, incluindo Balsam Wood.</p><b>VER VELAS & AROMAS →</b></div>
+        <div class="door__copy"><span>CASA</span><h3>Aroma, presença e atmosfera.</h3><p>Velas e rituais de ambiente para transformar o refúgio onde vives.</p><b>VER VELAS & AROMAS →</b></div>
       </a>
       <a class="door door--editorial door--digital" href="./produtos/#fisicos">
         <div class="media-slot media-slot--digital" aria-hidden="true"><span>MAISON JF® <b>RITUAL</b></span></div>
-        <div class="door__copy"><span>CORPO</span><h3>Toque, cuidado e pausa.</h3><p>Rituais de cuidado para abrandares o ritmo e voltares ao corpo.</p><b>VER RITUAIS FÍSICOS →</b></div>
+        <div class="door__copy"><span>CORPO</span><h3>Toque, cuidado e pausa.</h3><p>Rituais de textura e pausa para recuperares a presença no corpo.</p><b>VER RITUAIS FÍSICOS →</b></div>
       </a>
       <div class="door door--editorial door--tarot">
         <div class="media-slot">
           <picture><source type="image/webp" srcset="./images/perf/home/cabeca-480.webp 480w, ./images/perf/home/cabeca-640.webp 640w, ./images/perf/home/cabeca-768.webp 768w, ./images/perf/home/cabeca-1080.webp 1080w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw"><img src="./images/cabeca-mulher-q94.jpg" width="1080" height="810" alt="Momento de reflexão e clareza junto ao oceano" loading="lazy" decoding="async" fetchpriority="low"></picture>
         </div>
-        <div class="door__copy"><span>CABEÇA · TAROT &amp; REFLEXÃO</span><h3>Tarot e autoconhecimento.</h3><p>Uma consulta para explorar a tua pergunta; testes para te compreenderes melhor.</p><div class="door__actions"><a class="door__action" href="./servicos/tarot/">CONSULTA · 35 € →</a><a class="door__action" href="./teste/">VER TESTES →</a></div></div>
+        <div class="door__copy"><span>CABEÇA · TAROT &amp; REFLEXÃO</span><h3>Perguntas diretas.</h3><p>Recebes as respostas. O que fazes com elas? É contigo.</p><div class="door__actions"><a class="door__action" href="./servicos/tarot/">CONSULTA TAROT · 35 € →</a><a class="door__action" href="./teste/">TESTES DE REFLEXÃO →</a></div></div>
       </div>
     </div>
   </section>
@@ -187,15 +189,15 @@
     <div class="home-digital__head">
       <div class="home-digital__copy">
         <p class="eyebrow">FERRAMENTAS DIGITAIS</p>
-        <h2 id="home-digital-title">Para te perceberes melhor. Ou só para te divertires.</h2>
+        <h2 id="home-digital-title">Mecanismos de perspetiva, diálogo e clareza.</h2>
       </div>
-      <p class="home-digital__intro">Testes para te conheceres melhor. Jogos para conversar ou divertir-te. Um Oráculo e ebooks para explorares ao teu ritmo.</p>
+      <p class="home-digital__intro">Um espelho. Uma conversa honesta. Uma paragem. Ao teu tempo, onde quer que estejas.</p>
     </div>
-    <nav class="home-digital__links" aria-label="Explora as experiências digitais">
-      <a class="home-digital__link" href="./teste/"><small>TESTES DE REFLEXÃO</small><strong>Volta Para Casa</strong><span>Explora a atenção, o apego e o afeto para perceberes melhor o que sentes.</span></a>
-      <a class="home-digital__link" href="./para-de-ignorar/"><small>JOGO A DOIS OU EM GRUPO</small><strong>PÁRA DE IGNORAR! · Jogo</strong><span>28 perguntas para abrir conversas, descobrir coisas novas e divertir-te pelo caminho.</span></a>
-      <a class="home-digital__link" href="./oraculo/"><small>FERRAMENTA DIGITAL</small><strong>Oráculo MAISON JF®</strong><span>Escolhe um território. Explora outra perspetiva.</span></a>
-      <a class="home-digital__link" href="./ebooks/"><small>BIBLIOTECA</small><strong>Ebooks</strong><span>Histórias e livros para ler ao teu ritmo.</span></a>
+    <nav class="home-digital__links" aria-label="Explora as ferramentas digitais">
+      <a class="home-digital__link" href="./teste/"><small>O MAPEAMENTO</small><strong>Volta Para Casa</strong><span>Atenção, apego e afeto. Reconhece o que se repete.</span></a>
+      <a class="home-digital__link" href="./para-de-ignorar/"><small>A PROVOCAÇÃO</small><strong>PÁRA DE IGNORAR! · O Jogo</strong><span>28 perguntas para ir além da conversa de superfície.</span></a>
+      <a class="home-digital__link" href="./oraculo/"><small>A PARAGEM</small><strong>Oráculo MAISON JF®</strong><span>Uma nova perspetiva sobre a mesma questão.</span></a>
+      <a class="home-digital__link" href="./ebooks/"><small>A LEITURA</small><strong>Ebooks &amp; textos</strong><span>Ensaios e histórias para guardar, sublinhar e revisitar.</span></a>
     </nav>
   </section>
 
