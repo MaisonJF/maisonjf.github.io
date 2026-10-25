@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="preload" as="image" href="./images/perf/home/hero-1280.webp" imagesrcset="./images/perf/home/hero-640.webp 640w, ./images/perf/home/hero-960.webp 960w, ./images/perf/home/hero-1280.webp 1280w, ./images/perf/home/hero-1672.webp 1672w" imagesizes="100vw" type="image/webp" fetchpriority="high">
-<link rel="stylesheet" href="./maison.min.css?v=20261001-mobile1">
-<script src="./analytics.js?v=20261001-ux2" defer></script>
+<link rel="stylesheet" href="./maison.min.css?v=20261025-b2c1">
+<script src="./analytics.js?v=20261025-b2c1" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://maison-jf.com/#organization","name":"MAISON JF®","url":"https://maison-jf.com/","logo":"https://maison-jf.com/maison-jf-mark.svg","sameAs":["https://www.youtube.com/@maisonjf","https://www.instagram.com/maisonjfatelier/","https://www.tiktok.com/@maison.jf1"],"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","merchantReturnLink":"https://maison-jf.com/informacao-legal#livre-resolucao"}},{"@type":"WebSite","@id":"https://maison-jf.com/#website","url":"https://maison-jf.com/","name":"MAISON JF®","publisher":{"@id":"https://maison-jf.com/#organization"},"inLanguage":"pt-PT"}]}</script>
 <style>
 .home-feature--ebooks .home-feature__media{aspect-ratio:2/3;max-height:680px;background:#060606}
@@ -31,13 +31,11 @@
 <body class="home-page home-page--final">
 <header class="site-header site-header--home">
   <a class="brand" href="./">MAISON JF®</a>
-  <nav id="main-navigation" aria-label="Principal">
-    <a href="./farol">O Farol</a>
-    <a href="./teste/">Volta Para Casa</a>
-    
-    <a href="./produtos/">Produtos</a>
-    <a href="./servicos/">Serviços</a>
-    
+  <nav id="main-navigation" aria-label="Navegação principal">
+    <a href="/farol">O Farol</a>
+    <a href="/produtos/#fisicos">Produtos</a>
+    <a href="/servicos/tarot/">Cabeça · Tarot</a>
+    <a href="/contacto/?interesse=outras-opcoes">Contacto</a>
   </nav>
   <button class="maison-menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" aria-label="Abrir menu"><span aria-hidden="true"></span></button>
 </header>
@@ -52,49 +50,47 @@
     </div>
     <div class="hero__copy hero__copy--final">
       <div class="hero__identity"><p class="eyebrow">MAISON JF®</p></div>
-      <p class="hero__positioning">Crio produtos e serviços para te ajudar a perceber o que se passa contigo. E o que podes fazer depois de saberes isso.</p>
+      <p class="hero__positioning">Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.</p>
       <h1 class="hero__headline hero__headline--one-line">O QUE ESTÁS A IGNORAR?</h1>
-      <div class="hero__choices" aria-label="Escolhe como queres entrar">
+      <div class="hero__choices" aria-label="Escolhe por onde começar">
         <div class="hero__choice">
-          <a class="button button--light button--farol" href="./farol"><img src="./farol-icon.svg" alt="" aria-hidden="true"> <span>SEGUE O FAROL</span> <b aria-hidden="true">→</b></a>
-          <small>Não sei por onde começar.</small>
+          <a class="button button--light" href="./produtos/#fisicos"><span>EXPLORAR PRODUTOS</span> <b aria-hidden="true">→</b></a>
+          <small>Casa, corpo e bem-estar sensorial.</small>
         </div>
         <div class="hero__choice">
-          <a class="button button--vpc" href="./teste/"><img src="./compass-icon.svg" alt="" aria-hidden="true"> <span>VOLTA PARA CASA</span> <b aria-hidden="true">→</b></a>
-          <small>Quero perceber o que se passa comigo.</small>
-        </div>
-        <div class="hero__choice hero__choice--explore">
-          <a class="button button--explore" href="#explorar-maison"><span>EXPLORA A MAISON</span> <b aria-hidden="true">→</b></a>
-          <small>Já sei o que procuro.</small>
+          <a class="button button--vpc" href="./farol"><img src="./farol-icon.svg" alt="" aria-hidden="true"> <span>SEGUE O FAROL</span> <b aria-hidden="true">→</b></a>
+          <small>Não sabes por onde começar?</small>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="doors doors--editorial shell" id="portas" aria-label="As quatro portas da Maison"><h2 class="sr-only">Escolhe uma porta</h2>
-    <a class="door door--editorial" href="./portas/casa">
-      <div class="media-slot"><picture><source type="image/webp" srcset="./images/perf/home/casa-480.webp 480w, ./images/perf/home/casa-640.webp 640w, ./images/perf/home/casa-768.webp 768w, ./images/perf/home/casa-1080.webp 1080w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 25vw"><img src="./images/maison-jf-casa-amigos-hq.jpg" width="1080" height="810" alt="Amigos reunidos num ambiente acolhedor MAISON JF" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
-      <div class="door__copy"><span>Casa</span><h3>Quero voltar a gostar de chegar a casa.</h3><b>ENTRAR →</b></div>
-    </a>
-    <a class="door door--editorial" href="./portas/corpo">
-      <div class="media-slot"><picture><source type="image/webp" srcset="./images/perf/home/corpo-480.webp 480w, ./images/perf/home/corpo-640.webp 640w, ./images/perf/home/corpo-768.webp 768w, ./images/perf/home/corpo-1080.webp 1080w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 25vw"><img src="./images/maison-jf-corpo-homem-hq.jpg" width="1080" height="810" alt="Homem num ritual de pausa e cuidado corporal MAISON JF" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
-      <div class="door__copy"><span>Corpo</span><h3>O meu corpo está a pedir que eu pare.</h3><b>ENTRAR →</b></div>
-    </a>
-    <a class="door door--editorial" href="./portas/cabeca">
-      <div class="media-slot"><picture><source type="image/webp" srcset="./images/perf/home/cabeca-480.webp 480w, ./images/perf/home/cabeca-640.webp 640w, ./images/perf/home/cabeca-768.webp 768w, ./images/perf/home/cabeca-1080.webp 1080w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 25vw"><img src="./images/cabeca-mulher-q94.jpg" width="1080" height="810" alt="Mulher num momento silencioso de reflexão e clareza junto ao oceano" loading="lazy" decoding="async" fetchpriority="low"></picture></div>
-      <div class="door__copy"><span>Cabeça</span><h3>Preciso de perceber o que fazer com isto.</h3><b>ENTRAR →</b></div>
-    </a> 
-</section>
-
-  <section class="home-explore shell" id="explorar-maison">
-    <p class="eyebrow">Explora a Maison</p>
-    <h2>Já sabes o que procuras?</h2>
-    <p>Então não te vou fazer perder tempo.</p>
-    <nav class="home-explore__links" aria-label="Explorar a Maison">
-      <a href="./produtos/">Produtos <span aria-hidden="true">→</span></a>
-      <a href="./servicos/">Serviços <span aria-hidden="true">→</span></a>
-    </nav>
+  <section class="home-pathways shell" id="portas" aria-label="Explora a Maison JF">
+    <div class="home-pathways__head">
+      <p class="eyebrow">MAISON JF®</p>
+      <h2>Escolhe por onde começar.</h2>
+    </div>
+    <div class="doors doors--editorial">
+      <a class="door door--editorial" href="./produtos/#fisicos">
+        <div class="media-slot">
+          <picture><source type="image/webp" srcset="./images/perf/home/casa-480.webp 480w, ./images/perf/home/casa-640.webp 640w, ./images/perf/home/casa-768.webp 768w, ./images/perf/home/casa-1080.webp 1080w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw"><img src="./images/maison-jf-casa-amigos-hq.jpg" width="1080" height="810" alt="Ambiente acolhedor MAISON JF" loading="lazy" decoding="async" fetchpriority="low"></picture>
+        </div>
+        <div class="door__copy"><span>CASA & CORPO</span><h3>Velas, aromas e cuidado corporal.</h3><p>Produtos físicos para o quotidiano.</p><b>EXPLORAR PRODUTOS →</b></div>
+      </a>
+      <a class="door door--editorial door--digital" href="./produtos/#digitais">
+        <div class="media-slot media-slot--digital" aria-hidden="true"><span>MAISON JF® <b>DIGITAL</b></span></div>
+        <div class="door__copy"><span>EXPERIÊNCIAS DIGITAIS</span><h3>Jogos. Oráculo. Ebooks.</h3><p>Ferramentas digitais para explorar e refletir.</p><b>DESCOBRIR →</b></div>
+      </a>
+      <a class="door door--editorial door--tarot" href="./servicos/tarot/">
+        <div class="media-slot">
+          <picture><source type="image/webp" srcset="./images/perf/home/cabeca-480.webp 480w, ./images/perf/home/cabeca-640.webp 640w, ./images/perf/home/cabeca-768.webp 768w, ./images/perf/home/cabeca-1080.webp 1080w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw"><img src="./images/cabeca-mulher-q94.jpg" width="1080" height="810" alt="Momento de reflexão e clareza junto ao oceano" loading="lazy" decoding="async" fetchpriority="low"></picture>
+        </div>
+        <div class="door__copy"><span>CABEÇA · TAROT</span><h3>Perguntas. Recebes as respostas.</h3><p>O que fazes com elas? É contigo.</p><b>CONSULTA · 35 € →</b></div>
+      </a>
+    </div>
   </section>
+
+  
 
 
 
@@ -123,8 +119,8 @@
       <h2>Isto não apareceu do nada.</h2>
     </div>
     <nav class="home-ending__links" aria-label="Conhecer a Maison">
-      <a href="./manifesto/" style="color:var(--maison-gold)">LER O MANIFESTO <span aria-hidden="true">→</span></a>
-      <a href="./sobre/" style="color:var(--maison-gold)">QUEM SOU EU <span aria-hidden="true">→</span></a>
+      <a href="./sobre/" style="color:var(--maison-gold)">O QUE É A MAISON JF? <span aria-hidden="true">→</span></a>
+      <a href="./manifesto/" style="color:var(--maison-gold)">O MANIFESTO <span aria-hidden="true">→</span></a>
     </nav>
   </section>
 </main>
