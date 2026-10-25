@@ -338,7 +338,7 @@ const HOME={
     'PÁRA DE IGNORAR.':'PARE DE IGNORAR.',
     'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Marca registrada na União Europeia · Certificação PME pelo IAPMEI.',
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.": "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o dia a dia.",
-    "Produtos sensoriais, rituais de cuidado e experiências de reflexão — para casa, corpo e mente.": "Produtos sensoriais, rituais de cuidado e experiências de reflexão — para casa, corpo e mente.",
+    "Uma curadoria de objetos sensoriais, rituais de cuidado e experiências de reflexão — para casa, corpo e mente.": "Uma curadoria de objetos sensoriais, rituais de cuidado e experiências de reflexão — para casa, corpo e mente.",
     "PÁRA DE IGNORAR!": "PARE DE IGNORAR!",
     "VOLTA PARA CASA.": "VOLTE PARA CASA.",
 
@@ -382,7 +382,7 @@ const HOME={
     'PÁRA DE IGNORAR.':'STOP IGNORING IT.',
     'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Registered trademark in the European Union · SME certification by IAPMEI.',
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.": "Sensory products, digital experiences and tools for reflection in everyday life.",
-    "Produtos sensoriais, rituais de cuidado e experiências de reflexão — para casa, corpo e mente.": "Sensory products, care rituals and reflective experiences — for home, body and mind.",
+    "Uma curadoria de objetos sensoriais, rituais de cuidado e experiências de reflexão — para casa, corpo e mente.": "A curated selection of sensory objects, care rituals and reflective experiences — for home, body and mind.",
     "PÁRA DE IGNORAR!": "STOP IGNORING IT!",
     "VOLTA PARA CASA.": "COME BACK HOME.",
 
@@ -425,7 +425,7 @@ const HOME={
     'PÁRA DE IGNORAR.':'DEJA DE IGNORARLO.',
     'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Marca registrada en la Unión Europea · Certificación PME por IAPMEI.',
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.": "Productos sensoriales, experiencias digitales y herramientas de reflexión para el día a día.",
-    "Produtos sensoriais, rituais de cuidado e experiências de reflexão — para casa, corpo e mente.": "Productos sensoriales, rituales de cuidado y experiencias de reflexión: para el hogar, el cuerpo y la mente.",
+    "Uma curadoria de objetos sensoriais, rituais de cuidado e experiências de reflexão — para casa, corpo e mente.": "Una selección curada de objetos sensoriales, rituales de cuidado y experiencias de reflexión: para el hogar, el cuerpo y la mente.",
     "PÁRA DE IGNORAR!": "¡DEJA DE IGNORARLO!",
     "VOLTA PARA CASA.": "VUELVE A CASA.",
 
