@@ -177,7 +177,7 @@ const COMMON={
     'Escritório contemporâneo e editorial MAISON JF para profissionais':'Contemporary MAISON JF editorial office for professionals',
     'Farol nocturno MAISON JF sobre o oceano':'MAISON JF nighttime lighthouse over the ocean',
     'Marca registada na União Europeia':'Registered trademark in the European Union',
-    'Todos os direitos reservados.':'All rights reserved.'
+    'Todos os direitos reservados.':'All rights reserved.',
     "Cabeça · Tarot": "Mind · Tarot",
     "CABEÇA · TAROT": "MIND · TAROT",
     "CASA & CORPO": "HOME & BODY",
@@ -259,7 +259,7 @@ const COMMON={
     'Escritório contemporâneo e editorial MAISON JF para profissionais':'Oficina editorial contemporánea MAISON JF para profesionales',
     'Farol nocturno MAISON JF sobre o oceano':'Faro nocturno MAISON JF sobre el océano',
     'Marca registada na União Europeia':'Marca registrada en la Unión Europea',
-    'Todos os direitos reservados.':'Todos los derechos reservados.'
+    'Todos os direitos reservados.':'Todos los derechos reservados.',
     "Cabeça · Tarot": "Mente · Tarot",
     "CABEÇA · TAROT": "MENTE · TAROT",
     "CASA & CORPO": "CASA Y CUERPO",
@@ -377,7 +377,7 @@ const HOME={
     'QUERO SABER MAIS →':'I WANT TO KNOW MORE →',
     'VER B2B':'VIEW B2B',
     'PÁRA DE IGNORAR.':'STOP IGNORING IT.',
-    'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Registered trademark in the European Union · SME certification by IAPMEI.'
+    'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Registered trademark in the European Union · SME certification by IAPMEI.',
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.": "Sensory products, digital experiences and tools for reflection in everyday life.",
 
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão. Explora a MAISON JF® ou segue O Farol para encontrar o próximo passo.": "Sensory products, digital experiences and tools for reflection. Explore MAISON JF® or follow The Lighthouse to find your next step.",
@@ -417,7 +417,7 @@ const HOME={
     'QUERO SABER MAIS →':'QUIERO SABER MÁS →',
     'VER B2B':'VER B2B',
     'PÁRA DE IGNORAR.':'DEJA DE IGNORARLO.',
-    'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Marca registrada en la Unión Europea · Certificación PME por IAPMEI.'
+    'Marca registada na União Europeia · Certificação PME pelo IAPMEI.':'Marca registrada en la Unión Europea · Certificación PME por IAPMEI.',
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão para o quotidiano.": "Productos sensoriales, experiencias digitales y herramientas de reflexión para el día a día.",
 
     "Produtos sensoriais, experiências digitais e ferramentas de reflexão. Explora a MAISON JF® ou segue O Farol para encontrar o próximo passo.": "Productos sensoriales, experiencias digitales y herramientas de reflexión. Explora MAISON JF® o sigue El Faro para encontrar el siguiente paso.",
@@ -569,7 +569,7 @@ const PRODUCTS={
     'Não escolhas à força.':'Não escolha à força.',
     'Diz ao Farol o que queres sentir.':'Diga ao Farol o que você quer sentir.',
     'Envios e portes':'Envios e frete',
-    'Condições da Maison':'Condições da Maison'
+    'Condições da Maison':'Condições da Maison',
     "Produtos MAISON JF® físicos e digitais para Casa, Corpo, Cabeça e Presença.": "Produtos MAISON JF® físicos e digitais para Casa, Corpo, Mente e Presença.",
     "Velas, aromas, óleos, rituais de cuidado, jogos, oráculo e ebooks MAISON JF®.": "Velas, aromas, óleos, rituais de cuidado, jogos, oráculo e ebooks MAISON JF®.",
 
@@ -647,7 +647,7 @@ const PRODUCTS={
     'Não escolhas à força.':'No elijas a la fuerza.',
     'Diz ao Farol o que queres sentir.':'Dile al Faro lo que quieres sentir.',
     'Envios e portes':'Envíos',
-    'Condições da Maison':'Condiciones de la Maison'
+    'Condições da Maison':'Condiciones de la Maison',
     "Produtos MAISON JF® físicos e digitais para Casa, Corpo, Cabeça e Presença.": "Productos físicos y digitales MAISON JF® para Casa, Cuerpo, Mente y Presencia.",
     "Velas, aromas, óleos, rituais de cuidado, jogos, oráculo e ebooks MAISON JF®.": "Velas, aromas, aceites, rituales de cuidado, juegos, oráculo y ebooks MAISON JF®.",
 
@@ -686,7 +686,7 @@ const SERVICES={
     'Explicar a intenção →':'Explicar a intenção →',
     'Pedidos especiais':'Pedidos especiais',
     'Nem tudo vem pronto.':'Nem tudo vem pronto.',
-    'Explicar o pedido →':'Explicar o pedido →'
+    'Explicar o pedido →':'Explicar o pedido →',
     "Consulta de Tarot MAISON JF® por 35 €. Para mentorias, acompanhamento e pedidos personalizados, contacta a Maison.": "Consulta de Tarot MAISON JF® por 35 €. Para mentorias, acompanhamento e pedidos personalizados, entre em contato com a Maison.",
     "Uma pergunta central. Uma leitura para examinar a situação por outro ângulo, sem promessas nem certezas fabricadas.": "Uma pergunta central. Uma leitura para examinar a situação por outro ângulo, sem promessas nem certezas fabricadas.",
 
@@ -725,7 +725,7 @@ const SERVICES={
     'Explicar a intenção →':'Explain the intention →',
     'Pedidos especiais':'Special requests',
     'Nem tudo vem pronto.':'Not everything comes ready-made.',
-    'Explicar o pedido →':'Explain the request →'
+    'Explicar o pedido →':'Explain the request →',
     "Consulta de Tarot MAISON JF® por 35 €. Para mentorias, acompanhamento e pedidos personalizados, contacta a Maison.": "MAISON JF® Tarot consultation for €35. For mentoring, ongoing support and custom requests, contact the Maison.",
     "Uma pergunta central. Uma leitura para examinar a situação por outro ângulo, sem promessas nem certezas fabricadas.": "One central question. A reading to examine the situation from another angle, without promises or manufactured certainties.",
 
@@ -786,7 +786,7 @@ const FAROL={
     'É outra coisa →':'É outra coisa →',
     'Vamos perceber melhor.':'Vamos entender melhor.',
     'O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.':'O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.',
-    'Volta Para Casa.':'Volte Para Casa.'
+    'Volta Para Casa.':'Volte Para Casa.',
     "Já sei o que procuro? Ver produtos →": "Já sei o que procuro? Ver produtos →",
 
   },
@@ -805,7 +805,7 @@ const FAROL={
     'É outra coisa →':'It is something else →',
     'Vamos perceber melhor.':"Let's understand it better.",
     'O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.':'The Lighthouse offers orientation. It does not diagnose or replace professional support when needed.',
-    'Volta Para Casa.':'Come Back Home.'
+    'Volta Para Casa.':'Come Back Home.',
     "Já sei o que procuro? Ver produtos →": "Already know what you need? Browse products →",
 
   },
@@ -2075,7 +2075,7 @@ const TAROT_SERVICE={
     'Tenho uma dúvida':'Tenho uma dúvida',
     'Uma consulta para trazer contexto à tua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.':'Uma consulta para trazer contexto à sua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.',
     'Uso o Tarot como ferramenta de reflexão e orientação. Não decide por ti, não garante acontecimentos futuros e não substitui cuidados de saúde mental ou acompanhamento clínico quando necessários.':'Uso o Tarot como ferramenta de reflexão e orientação. Não decide por você, não garante acontecimentos futuros e não substitui cuidados de saúde mental ou acompanhamento clínico quando necessários.',
-    'Todos os Serviços →':'Todos os Serviços →'
+    'Todos os Serviços →':'Todos os Serviços →',
     "Consulta de Tarot MAISON JF® · 35 €. Perguntas. Recebes as respostas. O que fazes com elas? É contigo.": "Consulta de Tarot MAISON JF® · 35 €. Perguntas. Você recebe as respostas. O que você faz com elas? É com você.",
 
   },
@@ -2088,7 +2088,7 @@ const TAROT_SERVICE={
     'Tenho uma dúvida':'I have a question',
     'Uma consulta para trazer contexto à tua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.':'A reading to bring context to your question, organise what is mixed together and open other ways of looking at the situation.',
     'Uso o Tarot como ferramenta de reflexão e orientação. Não decide por ti, não garante acontecimentos futuros e não substitui cuidados de saúde mental ou acompanhamento clínico quando necessários.':'I use Tarot as a tool for reflection and orientation. It does not decide for you, guarantee future events or replace mental health care or clinical support when needed.',
-    'Todos os Serviços →':'All Services →'
+    'Todos os Serviços →':'All Services →',
     "Consulta de Tarot MAISON JF® · 35 €. Perguntas. Recebes as respostas. O que fazes com elas? É contigo.": "MAISON JF® Tarot consultation · €35. Questions. You get the answers. What you do with them is up to you.",
 
   },
