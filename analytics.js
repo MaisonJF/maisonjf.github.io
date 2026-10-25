@@ -707,37 +707,54 @@
     initMaisonTitleFit();
     normalizeInternalLinks();
 
-    // Maison mobile navigation: progressive enhancement, no page-specific markup required.
+    // MAISON JF® global navigation: one commercial hierarchy across desktop and mobile.
     const header = document.querySelector('.site-header');
-    if (header && !header.querySelector('.maison-menu-toggle')) {
+    if (header) {
       const nav = header.querySelector('nav');
       if (nav) {
-        const toggle = document.createElement('button');
+        nav.id = 'main-navigation';
+        nav.setAttribute('aria-label', 'Navegação principal');
+        nav.innerHTML = [
+          '<a href="/farol">O Farol</a>',
+          '<a href="/produtos/#fisicos">Produtos</a>',
+          '<a href="/servicos/tarot/">Cabeça · Tarot</a>',
+          '<a href="/contacto/?interesse=outras-opcoes">Contacto</a>'
+        ].join('');
+      }
+      let toggle = header.querySelector('.maison-menu-toggle');
+      if (!toggle && nav) {
+        toggle = document.createElement('button');
         toggle.type = 'button';
         toggle.className = 'maison-menu-toggle';
         toggle.setAttribute('aria-label', 'Abrir menu');
         toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-controls', 'main-navigation');
         toggle.innerHTML = '<span aria-hidden="true"></span>';
         header.insertBefore(toggle, nav);
-
-        const closeMenu = () => {
-          header.classList.remove('site-header--menu-open');
-          toggle.setAttribute('aria-expanded', 'false');
-          toggle.setAttribute('aria-label', 'Abrir menu');
-        };
         toggle.addEventListener('click', () => {
           const open = header.classList.toggle('site-header--menu-open');
           toggle.setAttribute('aria-expanded', String(open));
           toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
         });
-        nav.addEventListener('click', event => {
-          if (event.target.closest('a')) closeMenu();
-        });
-        document.addEventListener('keydown', event => {
-          if (event.key === 'Escape') closeMenu();
-        });
-      }
+      } else if (toggle) toggle.setAttribute('aria-controls', 'main-navigation');
+      const closeMenu = () => {
+        header.classList.remove('site-header--menu-open');
+        if (toggle) {
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Abrir menu');
+        }
+      };
+      if (nav) nav.addEventListener('click', event => {
+        if (event.target.closest('a')) closeMenu();
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeMenu();
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 700) closeMenu();
+      }, { passive: true });
     }
+
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => mutation.addedNodes.forEach(node => {
         if (node.nodeType === 1) {
