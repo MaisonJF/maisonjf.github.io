@@ -707,18 +707,34 @@
     initMaisonTitleFit();
     normalizeInternalLinks();
 
-    // MAISON JF® global navigation: one commercial hierarchy across desktop and mobile.
+    // MAISON JF® global navigation: locale-aware and consistent on desktop/mobile.
     const header = document.querySelector('.site-header');
     if (header) {
       const nav = header.querySelector('nav');
+      const path = window.location.pathname || '/';
+      const prefix = path === '/en' || path.startsWith('/en/') ? '/en'
+        : path === '/es' || path.startsWith('/es/') ? '/es'
+        : path === '/pt-br' || path.startsWith('/pt-br/') ? '/pt-br' : '';
+      const locale = prefix === '/en' ? 'en'
+        : prefix === '/es' ? 'es'
+        : prefix === '/pt-br' ? 'pt-BR'
+        : (document.documentElement.lang || 'pt-PT');
+      const navLabels = locale === 'en'
+        ? ['The Lighthouse', 'Products', 'Mind · Tarot', 'Contact']
+        : locale === 'es'
+          ? ['El Faro', 'Productos', 'Mente · Tarot', 'Contacto']
+          : String(locale).toLowerCase() === 'pt-br'
+            ? ['O Farol', 'Produtos', 'Mente · Tarot', 'Contato']
+            : ['O Farol', 'Produtos', 'Cabeça · Tarot', 'Contacto'];
+      const localPath = target => prefix + target;
       if (nav) {
         nav.id = 'main-navigation';
-        nav.setAttribute('aria-label', 'Navegação principal');
+        nav.setAttribute('aria-label', locale === 'en' ? 'Main navigation' : locale === 'es' ? 'Navegación principal' : 'Navegação principal');
         nav.innerHTML = [
-          '<a href="/farol">O Farol</a>',
-          '<a href="/produtos/#fisicos">Produtos</a>',
-          '<a href="/servicos/tarot/">Cabeça · Tarot</a>',
-          '<a href="/contacto/?interesse=outras-opcoes">Contacto</a>'
+          '<a href="' + localPath('/farol') + '">' + navLabels[0] + '</a>',
+          '<a href="' + localPath('/produtos/#fisicos') + '">' + navLabels[1] + '</a>',
+          '<a href="' + localPath('/servicos/tarot/') + '">' + navLabels[2] + '</a>',
+          '<a href="' + localPath('/contacto/?interesse=outras-opcoes') + '">' + navLabels[3] + '</a>'
         ].join('');
       }
       let toggle = header.querySelector('.maison-menu-toggle');
@@ -726,7 +742,7 @@
         toggle = document.createElement('button');
         toggle.type = 'button';
         toggle.className = 'maison-menu-toggle';
-        toggle.setAttribute('aria-label', 'Abrir menu');
+        toggle.setAttribute('aria-label', locale === 'en' ? 'Open menu' : locale === 'es' ? 'Abrir menú' : 'Abrir menu');
         toggle.setAttribute('aria-expanded', 'false');
         toggle.setAttribute('aria-controls', 'main-navigation');
         toggle.innerHTML = '<span aria-hidden="true"></span>';
@@ -734,14 +750,16 @@
         toggle.addEventListener('click', () => {
           const open = header.classList.toggle('site-header--menu-open');
           toggle.setAttribute('aria-expanded', String(open));
-          toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+          toggle.setAttribute('aria-label', open ? (locale === 'en' ? 'Close menu' : locale === 'es' ? 'Cerrar menú' : 'Fechar menu') : (locale === 'en' ? 'Open menu' : locale === 'es' ? 'Abrir menú' : 'Abrir menu'));
         });
-      } else if (toggle) toggle.setAttribute('aria-controls', 'main-navigation');
+      } else if (toggle) {
+        toggle.setAttribute('aria-controls', 'main-navigation');
+      }
       const closeMenu = () => {
         header.classList.remove('site-header--menu-open');
         if (toggle) {
           toggle.setAttribute('aria-expanded', 'false');
-          toggle.setAttribute('aria-label', 'Abrir menu');
+          toggle.setAttribute('aria-label', locale === 'en' ? 'Open menu' : locale === 'es' ? 'Abrir menú' : 'Abrir menu');
         }
       };
       if (nav) nav.addEventListener('click', event => {
