@@ -370,6 +370,9 @@ const HOME={
     "Histórias e livros para ler ao teu ritmo.": "Histórias e livros para ler no seu ritmo.",
     "TESTES DE REFLEXÃO": "TESTES DE REFLEXÃO",
     "Atenção, apego, afeto e aquilo que continua a fazer-te falta.": "Atenção, apego, afeto e aquilo que continua fazendo falta.",
+    "Tarot e autoconhecimento.": "Tarot e autoconhecimento.",
+    "Consulta de Tarot e testes de reflexão.": "Consulta de Tarô e testes de reflexão.",
+    "Testes de reflexão, jogos para abrir conversas, Oráculo e ebooks — cada um ao teu ritmo.": "Testes de reflexão, jogos para abrir conversas, Oráculo e ebooks — cada um no seu ritmo.",
   },
   en:{
     "BREVEMENTE":"COMING SOON",
@@ -438,6 +441,9 @@ const HOME={
     "Histórias e livros para ler ao teu ritmo.": "Stories and books to read at your own pace.",
     "TESTES DE REFLEXÃO": "REFLECTION TESTS",
     "Atenção, apego, afeto e aquilo que continua a fazer-te falta.": "Attention, attachment, affection, and what you still find yourself missing.",
+    "Tarot e autoconhecimento.": "Tarot and self-reflection.",
+    "Consulta de Tarot e testes de reflexão.": "Tarot readings and reflection tests.",
+    "Testes de reflexão, jogos para abrir conversas, Oráculo e ebooks — cada um ao teu ritmo.": "Reflection tests, conversation games, the Oracle and ebooks — each at your own pace.",
   },
   es:{
     "BREVEMENTE":"PRÓXIMAMENTE",
@@ -505,6 +511,9 @@ const HOME={
     "Histórias e livros para ler ao teu ritmo.": "Historias y libros para leer a tu ritmo.",
     "TESTES DE REFLEXÃO": "PRUEBAS DE REFLEXIÓN",
     "Atenção, apego, afeto e aquilo que continua a fazer-te falta.": "Atención, apego, afecto y eso que sigues echando de menos.",
+    "Tarot e autoconhecimento.": "Tarot y autoconocimiento.",
+    "Consulta de Tarot e testes de reflexão.": "Consultas de Tarot y pruebas de reflexión.",
+    "Testes de reflexão, jogos para abrir conversas, Oráculo e ebooks — cada um ao teu ritmo.": "Pruebas de reflexión, juegos para abrir conversaciones, Oráculo y ebooks: cada uno a tu ritmo.",
   }
 };
 
