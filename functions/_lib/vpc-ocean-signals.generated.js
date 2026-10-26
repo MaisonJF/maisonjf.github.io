@@ -413,4 +413,4 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-10-24";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-10-26";
