@@ -2,11 +2,28 @@
 .product__body small{color:var(--ak-accent,#c7aa73)!important}
 .filters button:not(.on){color:var(--ak-accent,#c7aa73)!important}
 </style><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://maison-jf.com/produtos/#page","url":"https://maison-jf.com/produtos/","name":"Produtos | MAISON JF®","description":"Velas, aromas, óleos, rituais de cuidado, jogos, oráculo e ebooks MAISON JF®.","inLanguage":"pt-PT","isPartOf":{"@id":"https://maison-jf.com/#website"},"about":[{"@id":"https://maison-jf.com/#organization"},{"@type":"Thing","name":"produtos físicos e digitais MAISON JF®"}]}</script>
+
+<style>
+/* MASTER COPY 2026-10-26 */
+.catalogue-intro__paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:28px 0 8px}.catalogue-intro__path{min-width:0;padding:22px;border:1px solid var(--line,rgba(241,234,223,.14));background:rgba(255,255,255,.015)}.catalogue-intro__path .eyebrow{margin:0 0 12px;font-size:10px;letter-spacing:.14em;line-height:1.5}.catalogue-intro__path>p:not(.eyebrow){margin:0 0 16px;color:var(--maison-muted,#b9afa1);font-size:14px;line-height:1.6}.catalogue-intro__path .text-link{display:inline-flex;align-items:center;min-height:44px;margin:0;font-size:10px}@media(max-width:650px){.catalogue-intro__paths{grid-template-columns:1fr;gap:10px;margin-top:20px}.catalogue-intro__path{padding:18px}.catalogue-intro__path>p:not(.eyebrow){font-size:13px}}
+</style>
 </head><body class="catalogue-page"><header class="site-header"><a class="brand" href="../">MAISON JF®</a><nav id="main-navigation" aria-label="Navegação principal"><a href="../farol">O Farol</a><a href="./#fisicos">Produtos</a><a href="../servicos/tarot/">Cabeça · Tarot</a><a href="../contacto/?interesse=outras-opcoes">Contacto</a></nav></header><main class="catalogue shell">
   <section class="catalogue-intro">
-    <p class="eyebrow">CASA & CORPO</p>
-    <h1>Produtos sensoriais.</h1>
-    <p class="catalogue__intro">Velas, aromas, óleos e rituais de cuidado.</p>
+    <p class="eyebrow">OS PRODUTOS</p>
+    <h1>O teu espaço não é neutro. Ou acalma-te, ou esgota-te.</h1>
+    <p class="catalogue__intro">A MAISON JF® não vende enfeites para encher prateleiras. Criamos objetos e rituais físicos desenhados para mudar o peso de uma divisão e obrigar-te a desacelerar no final do dia.</p>
+ <div class="catalogue-intro__paths" aria-label="Explora Casa e Corpo">
+   <article class="catalogue-intro__path">
+     <p class="eyebrow">CASA · AMBIENTE &amp; PRESENÇA</p>
+     <p>Velas de autor e aromas densos criados para cortar a energia de fora. Sem essências baratas. Sem fumo inútil. Apenas presença.</p>
+     <a class="text-link" href="#fisicos" data-filter-route="Casa">VER VELAS &amp; AROMAS →</a>
+   </article>
+   <article class="catalogue-intro__path">
+     <p class="eyebrow">CORPO · TOQUE &amp; DESACELERAÇÃO</p>
+     <p>Rituais físicos para o momento em que o corpo desliga a corda mas a cabeça continua a correr. Interrompe o hábito de transformar o descanso numa tarefa.</p>
+     <a class="text-link" href="#fisicos" data-filter-route="Corpo">VER RITUAIS FÍSICOS →</a>
+   </article>
+ </div>
   </section>
   <section class="catalogue-physical" id="fisicos" aria-labelledby="physical-title">
     <div class="catalogue-section-head">
@@ -193,4 +210,7 @@
     if(link) window.maisonAnalytics?.track?.('product_interest',{product:link.dataset.product,source:'catalogue',page_path:location.pathname});
   });
 })();
-</script></body></html>
+</script><script>
+document.querySelectorAll('[data-filter-route]').forEach(function(link){link.addEventListener('click',function(){var filter=document.querySelector('.filters [data-filter="'+link.dataset.filterRoute+'"]');if(filter)filter.click();});});
+</script>
+</body></html>
