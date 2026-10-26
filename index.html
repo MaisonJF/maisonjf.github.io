@@ -127,6 +127,26 @@
   .home-page--final .hero__choice small{margin-top:4px;font-size:9px;line-height:1.2}
 }
 
+
+/* Mobile spacing QA: keep the hero content 16px from narrow viewport edges. */
+@media(max-width:700px){
+  .home-page--final .hero__copy--final{
+    width:calc(100% - 32px);
+  }
+  .home-page--final .hero__choices{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+  .home-page--final .hero__choice{
+    min-width:0;
+    width:100%;
+  }
+  .home-page--final .hero__choice > .button{
+    width:100%;
+    max-width:100%;
+  }
+}
+
 /* Hero CTA parity: both entry buttons use identical outer dimensions at each breakpoint. */
 .home-page--final .hero__choices .hero__choice > .button{
   box-sizing:border-box;
