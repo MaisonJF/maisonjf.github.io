@@ -218,3 +218,27 @@ main,section,article,nav,header,footer,.shell{min-width:0}
   .tarot-hero__inner{width:calc(100% - 32px)}
   .tarot-hero h1{font-size:clamp(38px,10.5vw,42px)}
 }
+
+
+/* MASTER COPY 2026-10-26 — mobile safety and touch spacing */
+@media(max-width:700px){
+  .site-header{
+    padding-left:max(16px,env(safe-area-inset-left));
+    padding-right:max(16px,env(safe-area-inset-right));
+  }
+  .shell{
+    width:min(calc(100% - 32px),var(--max));
+  }
+  .button,.btn,.cta,.pdi-buy,
+  .product-actions a,.product-actions button,
+  .actions a,.actions button,
+  .tarot-hero .detail-actions .btn,
+  .tarot-actions>.tarot-buy,.tarot-actions>.text-link{
+    min-height:44px;
+  }
+  .card-actions,.hero-actions{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+}
