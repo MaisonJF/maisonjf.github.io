@@ -12,11 +12,13 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Consulta de Tarot MAISON JF®","provider":{"@id":"https://maison-jf.com/#organization"},"url":"https://maison-jf.com/servicos/tarot/","description":"Leitura de Tarot para reflexão e orientação, sem transformar possibilidades em certezas.","offers":{"@type":"Offer","name":"Consulta de Tarot","price":"35.00","priceCurrency":"EUR"}}</script>
 <style>
 .tarot-page{background:#070707;color:var(--maison-ivory)}
-.tarot-hero{min-height:84svh;display:flex;align-items:flex-end;padding-top:110px;border-bottom:1px solid var(--line);background:radial-gradient(circle at 76% 35%,rgba(194,162,101,.09),transparent 28%),#070707}
-.tarot-hero__inner{width:min(calc(100% - 40px),var(--max));margin:0 auto;padding:80px 0 68px}
+.tarot-hero{min-height:min(720px,78svh);display:flex;align-items:flex-end;padding-top:120px;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 78% 28%,rgba(194,162,101,.14),transparent 38%),linear-gradient(135deg,#0c0b09 0%,#070707 62%)}
+.tarot-hero__inner{width:min(calc(100% - 48px),var(--max));margin:0 auto;padding:100px 0 64px}
 .tarot-hero .eyebrow{color:#bda97f}
-.tarot-hero h1{max-width:100%;margin:.2em 0 .22em;font:500 clamp(58px,9vw,132px)/.88 var(--serif);letter-spacing:-.045em}
-.tarot-hero__lead{max-width:650px;margin:0;color:#bbb2a6;font-size:clamp(17px,1.6vw,21px);line-height:1.65}
+.tarot-hero h1{max-width:12ch;margin:.32em 0 .28em;font:500 clamp(48px,6.4vw,88px)/.96 var(--serif);letter-spacing:-.04em;text-wrap:balance}
+.tarot-hero__lead{max-width:560px;margin:0;color:#bbb2a6;font-size:clamp(16px,1.4vw,19px);line-height:1.6}
+.tarot-hero .detail-actions{margin-top:24px}
+.tarot-hero .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:14px 20px;text-align:center;line-height:1.25}
 .tarot-offer{padding:clamp(85px,10vw,145px) 0}
 .tarot-offer__grid{display:block}
 .tarot-offer__title small{display:block;margin-bottom:18px;color:#9e8b67;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
@@ -31,14 +33,32 @@
 .tarot-footer{padding:50px 0 64px;border-top:1px solid var(--line)}
 .tarot-footer .shell{display:flex;justify-content:space-between;gap:24px}
 @media(max-width:760px){
-  .tarot-hero{min-height:76svh}
-  .tarot-hero h1{font-size:clamp(44px,12.5vw,68px);line-height:.94;max-width:100%}
-  .tarot-offer__title h2{white-space:normal}
-  .tarot-offer__body{grid-template-columns:1fr 1fr;gap:30px 42px}
+  .tarot-hero{min-height: min(680px,78svh);padding-top:100px}
+  .tarot-hero__inner{width:calc(100% - 32px);padding:74px 0 42px}
+  .tarot-hero h1{font-size:clamp(42px,9.5vw,64px);line-height:.98;max-width:12ch;letter-spacing:-.035em}
+  .tarot-hero__lead{font-size:16px;line-height:1.55;max-width:36ch}
+  .tarot-hero .detail-actions{margin-top:22px}
+  .tarot-hero .btn{width:100%;max-width:360px;min-height:52px}
+  .tarot-offer{padding:76px 0}
+  .tarot-offer__title h2{white-space:normal;font-size:clamp(38px,8.5vw,58px);line-height:.98;max-width:14ch}
+  .tarot-offer__body{grid-template-columns:1fr 1fr;gap:24px;margin-top:30px;padding-top:24px}
+  .tarot-actions{gap:14px}
+  .tarot-buy{width:100%;min-height:50px;padding:14px}
+  .tarot-actions>.text-link{min-height:44px;display:inline-flex;align-items:center}
   .tarot-rule{padding-left:0;border-left:0}
   .tarot-footer .shell{flex-direction:column}
 }
-@media(max-width:560px){.tarot-offer__body{grid-template-columns:1fr;margin-top:34px;padding-top:24px}}
+@media(max-width:560px){
+  .tarot-offer__body{grid-template-columns:1fr;margin-top:28px;padding-top:22px}
+  .tarot-price{font-size:48px}
+  .tarot-description,.tarot-rule{max-width:52ch}
+}
+@media(max-width:380px){
+  .tarot-hero__inner{width:calc(100% - 28px)}
+  .tarot-hero h1{font-size:40px}
+  .tarot-hero .btn{font-size:10px;padding-inline:12px}
+}
+
 </style>
 </head>
 <body class="tarot-page">
