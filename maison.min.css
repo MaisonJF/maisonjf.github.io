@@ -160,3 +160,61 @@ main,section,article,nav,header,footer,.shell{min-width:0}
  .product-digital__grid{grid-template-columns:1fr}
  .catalogue-tarot__action>span{font-size:21px}
 }
+
+
+/* MOBILE COMMERCIAL QA — Maison JF — 2026-10-26 */
+@media(max-width:700px){
+  .site-header{
+    padding-left:max(16px,env(safe-area-inset-left));
+    padding-right:max(16px,env(safe-area-inset-right));
+  }
+  .shell,
+  .home-page--final .hero__copy--final{
+    width:min(calc(100% - 32px),var(--max));
+  }
+  .home-page--final .hero__choices{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .home-page--final .hero__choice>.button{
+    min-height:48px;
+  }
+  .tarot-hero__inner{
+    width:calc(100% - 32px);
+  }
+  .tarot-hero h1{
+    font-size:clamp(42px,9.5vw,64px);
+    line-height:.98;
+    max-width:12ch;
+    text-wrap:balance;
+  }
+  .tarot-hero .detail-actions{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:12px;
+  }
+  .tarot-hero .detail-actions .btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    max-width:360px;
+    min-height:52px;
+  }
+  .tarot-actions{
+    align-items:stretch;
+    gap:12px;
+  }
+  .tarot-actions>.text-link,
+  .tarot-actions>.tarot-buy{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:48px;
+  }
+}
+@media(max-width:380px){
+  .tarot-hero__inner{width:calc(100% - 32px)}
+  .tarot-hero h1{font-size:clamp(38px,10.5vw,42px)}
+}
