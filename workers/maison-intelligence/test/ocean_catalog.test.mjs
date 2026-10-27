@@ -16,11 +16,13 @@ test('foundational Ocean catalogue has unique, valid keys and covers every pilla
   assert.ok(OCEAN_CATALOG.length>=100);
   const keys=OCEAN_CATALOG.map(ocean=>ocean.ocean_key);
   assert.equal(new Set(keys).size,keys.length,'Ocean keys must be unique');
+  const knownKeys=new Set(keys);
   for(const ocean of OCEAN_CATALOG){
     assert.ok(isValidOceanKey(ocean.ocean_key),ocean.ocean_key);
     assert.ok(ocean.display_name.length>=3,ocean.ocean_key);
     assert.ok(ocean.mission.length>=20,ocean.ocean_key);
     assert.ok(OCEAN_PILLARS.some(pillar=>pillar.key===ocean.pillar_key),ocean.ocean_key);
+    for(const link of ocean.connections)assert.ok(knownKeys.has(link),`${ocean.ocean_key} -> ${link}`);
     assert.equal(ocean.lifecycle_state,'open');
   }
   for(const pillar of OCEAN_PILLARS){
