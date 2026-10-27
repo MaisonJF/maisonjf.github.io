@@ -1,4 +1,5 @@
 import { sha256Hex, uniqueCanonicalUrls } from './core.js';
+import { loadActiveOceanRegistry, validateOceanProposal } from './ocean_catalog.js';
 
 const CANDIDATE_DECISIONS=new Set(['approve','reject','archive','defer','develop']);
 
@@ -6,7 +7,7 @@ export const CANDIDATE_TYPES=new Set([
   'question','oracle_block','test','farol_path',
   'reel','post','story','carousel','video_script',
   'physical_product','digital_product','bundle','service','experience',
-  'ebook','campaign','b2b','seasonal_offer','experiment'
+  'ebook','campaign','b2b','seasonal_offer','experiment','ocean_proposal'
 ]);
 
 const AUTHORITY_KEYS=new Set([
@@ -170,16 +171,45 @@ export async function decideCandidateInbox(env,raw){
   if(EMAIL_RE.test(reason)||PHONE_RE.test(reason))throw new Error('candidate_pii_detected');
   const actor=cleanText(raw.actor||'human','actor',1,120);
   const exists=await env.GROWTH_DB.prepare(
-    'SELECT candidate_id FROM maison_candidate_inbox WHERE candidate_id=?1 LIMIT 1'
+    'SELECT candidate_id,candidate_type,title,body,payload_json FROM maison_candidate_inbox WHERE candidate_id=?1 LIMIT 1'
   ).bind(candidateId).first();
   if(!exists)throw new Error('candidate_not_found');
+  let proposedOcean=null;
+  if(decision==='approve'&&exists.candidate_type==='ocean_proposal'){
+    const prior=await env.GROWTH_DB.prepare(
+      'SELECT ocean_key FROM ocean_specialist_registry WHERE source_candidate_id=?1 LIMIT 1'
+    ).bind(candidateId).first();
+    if(prior){
+      proposedOcean={ocean_key:String(prior.ocean_key),already_registered:true};
+    }else{
+      let payload;
+      try{payload=JSON.parse(exists.payload_json||'{}');}catch{throw new Error('invalid_ocean_proposal_payload');}
+      const activeRegistry=await loadActiveOceanRegistry(env);
+      proposedOcean={...validateOceanProposal(payload,activeRegistry),already_registered:false};
+    }
+  }
   const decisionId='mcd_'+crypto.randomUUID();
-  await env.GROWTH_DB.prepare(`
+  const statements=[env.GROWTH_DB.prepare(`
     INSERT INTO maison_candidate_decisions(decision_id,candidate_id,decision,reason,actor)
     VALUES(?1,?2,?3,?4,?5)
-  `).bind(decisionId,candidateId,decision,reason,actor).run();
+  `).bind(decisionId,candidateId,decision,reason,actor)];
+  if(proposedOcean&&!proposedOcean.already_registered){
+    const now=new Date().toISOString();
+    statements.push(env.GROWTH_DB.prepare(`
+      INSERT INTO ocean_specialist_registry(
+        ocean_key,display_name,pillar_key,mission,focus_json,connections_json,
+        lifecycle_state,source_candidate_id,created_at,updated_at
+      ) VALUES(?,?,?,?,?,?,'open',?,?,?)
+    `).bind(
+      proposedOcean.ocean_key,proposedOcean.display_name,proposedOcean.pillar_key,proposedOcean.mission,
+      JSON.stringify(proposedOcean.focus),JSON.stringify(proposedOcean.connections),candidateId,now,now
+    ));
+  }
+  await env.GROWTH_DB.batch(statements);
   return {
     ok:true,decision_id:decisionId,candidate_id:candidateId,decision,
+    ocean_registered:proposedOcean?.ocean_key||null,
+    ocean_lifecycle_state:proposedOcean?'open':null,
     live:false,automatic_activation:false,public_side_effects:false
   };
 }
