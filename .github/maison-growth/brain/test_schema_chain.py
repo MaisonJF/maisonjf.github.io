@@ -30,6 +30,7 @@ MIGRATIONS=(
     GROWTH/"a11/migrations/0020_learning_rule_seed.sql",
     GROWTH/"brain/migrations/0021_commercial_recovery_journal.sql",
     GROWTH/"brain/migrations/0022_ocean_working_memory.sql",
+    GROWTH/"brain/migrations/0023_candidate_inbox.sql",
     GROWTH/"brain/migrations/0024_ocean_specialist_registry.sql",
 )
 
