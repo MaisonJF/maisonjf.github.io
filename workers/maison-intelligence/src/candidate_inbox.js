@@ -1,5 +1,4 @@
 import { sha256Hex, uniqueCanonicalUrls } from './core.js';
-import { loadActiveOceanRegistry, validateOceanProposal } from './ocean_catalog.js';
 
 const CANDIDATE_DECISIONS=new Set(['approve','reject','archive','defer','develop']);
 
@@ -7,7 +6,7 @@ export const CANDIDATE_TYPES=new Set([
   'question','oracle_block','test','farol_path',
   'reel','post','story','carousel','video_script',
   'physical_product','digital_product','bundle','service','experience',
-  'ebook','campaign','b2b','seasonal_offer','experiment','ocean_proposal'
+  'ebook','campaign','b2b','seasonal_offer','experiment'
 ]);
 
 const AUTHORITY_KEYS=new Set([
@@ -175,17 +174,20 @@ export async function decideCandidateInbox(env,raw){
   ).bind(candidateId).first();
   if(!exists)throw new Error('candidate_not_found');
   let proposedOcean=null;
-  if(decision==='approve'&&exists.candidate_type==='ocean_proposal'){
-    const prior=await env.GROWTH_DB.prepare(
-      'SELECT ocean_key FROM ocean_specialist_registry WHERE source_candidate_id=?1 LIMIT 1'
-    ).bind(candidateId).first();
-    if(prior){
-      proposedOcean={ocean_key:String(prior.ocean_key),already_registered:true};
-    }else{
-      let payload;
-      try{payload=JSON.parse(exists.payload_json||'{}');}catch{throw new Error('invalid_ocean_proposal_payload');}
-      const activeRegistry=await loadActiveOceanRegistry(env);
-      proposedOcean={...validateOceanProposal(payload,activeRegistry),already_registered:false};
+  if(decision==='approve'&&exists.candidate_type==='experiment'){
+    let payload;
+    try{payload=JSON.parse(exists.payload_json||'{}');}catch{throw new Error('invalid_ocean_proposal_payload');}
+    if(payload.proposal_kind==='ocean_proposal'){
+      const prior=await env.GROWTH_DB.prepare(
+        'SELECT ocean_key FROM ocean_specialist_registry WHERE source_candidate_id=?1 LIMIT 1'
+      ).bind(candidateId).first();
+      if(prior){
+        proposedOcean={ocean_key:String(prior.ocean_key),already_registered:true};
+      }else{
+        const {loadActiveOceanRegistry,validateOceanProposal}=await import('./ocean_catalog.js');
+        const activeRegistry=await loadActiveOceanRegistry(env);
+        proposedOcean={...validateOceanProposal(payload,activeRegistry),already_registered:false};
+      }
     }
   }
   const decisionId='mcd_'+crypto.randomUUID();
