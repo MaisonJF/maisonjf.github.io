@@ -128,7 +128,7 @@ export function buildExpansionPrompt({spec,context}={}){
     'Para question, payload tem de incluir theme, stage, exposure, target, intensity e pode incluir subthemes, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness.',
     'Para oracle_block, payload tem de incluir territory, role, intensity, tone, rarity e pode incluir tags, pain_family, subterritory, emotional_function.',
     'Para ocean_proposal, payload tem de incluir proposed_ocean_key, display_name, pillar_key, mission, focus (array com pelo menos dois pontos) e connections; propõe apenas territórios realmente distintos, ligados a uma das 11 áreas existentes e sem duplicar Oceans registados. Estes candidatos exigem aprovação humana antes de serem abertos.',
-    'source_ocean_id deve ser uma chave listada nesta ronda ou uma chave de Ocean observada nos sinais. related_ocean_keys deve conter apenas chaves válidas, para tornar explícitas as ligações sem inventar registos.',
+    'source_ocean_id deve ser uma chave válida do catálogo de Oceans (preferir os Oceans em foco) ou uma chave de Ocean observada nos sinais. related_ocean_keys só pode incluir chaves existentes no catálogo.',
     'Não inventes fontes, tendências, fórmulas testadas, preços, procura nem a inexistência de concorrentes em Portugal. Distingue hipótese, observação e validação. Cada ideia deve ter uma razão de novidade e não pode ser uma reformulação cosmética de candidato anterior.',
     'Conteúdo diário deve ser útil mesmo sem venda. Candidatos comerciais devem declarar concretamente como reutilizam ativos MAISON existentes.'
   ].join('\n');
