@@ -745,7 +745,7 @@ const data={
       "title": "Sem mapa. Só as portas.",
       "text": "Entra na Maison pelo que já sabes que queres: objecto, experiência, leitura ou serviço.",
       "cta": {
-        "href": "./produtos/#fisicos",
+        "href": "/produtos/#fisicos",
         "text": "Explorar produtos"
       },
       "cta2": null
