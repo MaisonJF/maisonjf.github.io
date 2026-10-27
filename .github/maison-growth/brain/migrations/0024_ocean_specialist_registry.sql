@@ -23,3 +23,5 @@ CREATE INDEX IF NOT EXISTS idx_ocean_specialist_registry_pillar_state
 INSERT INTO schema_state(schema_key,schema_value)
 VALUES('maison_ocean_specialist_registry_schema_version','OCEAN.2')
 ON CONFLICT(schema_key) DO UPDATE SET schema_value=excluded.schema_value;
+
+-- Candidate schema extensions are handled in 0025_expand_candidate_types.sql.
