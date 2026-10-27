@@ -341,8 +341,9 @@ export function selectOceanFocus({catalog = OCEANS, runKey = '', limit = 16} = {
       used.add(ocean.ocean_key);
     }
   }
+  const knownKeys = new Set((catalog || []).map(ocean => ocean?.ocean_key).filter(Boolean));
   return selected.slice(0, max).map(ocean => {
-    const links = [...new Set((ocean.connections || []).filter(key => key !== ocean.ocean_key))].slice(0, 8);
+    const links = [...new Set((ocean.connections || []).filter(key => key !== ocean.ocean_key && knownKeys.has(key)))].slice(0, 8);
     const focus = Array.isArray(ocean.focus) ? ocean.focus : [];
     return {
       ocean_key: ocean.ocean_key,
