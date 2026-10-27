@@ -14,14 +14,14 @@
     "publicPublication": false
   },
   "summary": {
-    "exactThemeGroups": 429,
+    "exactThemeGroups": 439,
     "duoQuestionDrafts": 2984,
-    "groupQuestionDrafts": 672,
-    "questionDrafts": 3656,
+    "groupQuestionDrafts": 792,
+    "questionDrafts": 3776,
     "oracleTerritories": 100,
     "oracleRoleBriefs": 700,
     "ebookConceptSeeds": 12,
-    "questionsRequiringEditorialApproval": 3656,
+    "questionsRequiringEditorialApproval": 3776,
     "oracleBriefsRequiringEditorialApproval": 700,
     "ebookConceptsRequiringHumanReview": 12
   },
@@ -74635,6 +74635,306 @@
       "publiclyAvailable": false
     },
     {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_01",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 01",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “A Moral & o Julgamento” fosse uma prova de festa, qual seria a regra mais absurda e inofensiva?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_02",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 02",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que título de filme dariam a uma ronda sobre “A Moral & o Julgamento”? Vale uma versão completamente disparatada.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_03",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 03",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem um anúncio de 15 segundos para uma versão imaginária de “A Moral & o Julgamento”.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_04",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 04",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que música seria a banda sonora de “A Moral & o Julgamento” nesta festa? Cada pessoa pode propor uma.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_05",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 05",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Transformem “A Moral & o Julgamento” num superpoder inútil: qual seria o nome e qual seria a limitação?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_06",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 06",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “A Moral & o Julgamento” fosse um reality fictício, que prova segura e ridícula apareceria no episódio?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_07",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 07",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem um slogan para “A Moral & o Julgamento” como se fosse um produto absurdo que ninguém precisa de comprar.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_08",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 08",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que conselho um extraterrestre daria ao grupo sobre “A Moral & o Julgamento” para sobreviver a esta noite?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_09",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 09",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem uma manchete positiva e absurda sobre “A Moral & o Julgamento” daqui a dez anos.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_10",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 10",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Cada pessoa inventa uma solução disparatada para um dilema fictício ligado a “A Moral & o Julgamento”. Qual dá a melhor história?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_11",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 11",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem uma tradição de grupo ligada a “A Moral & o Julgamento” que seja fácil, barata e opcional.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_moral_e_o_julgamento_12",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Moral & o Julgamento",
+      "themeKey": "a-moral-e-o-julgamento",
+      "title": "A Moral & o Julgamento · Grupo · 12",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que mini-aventura gratuita de 30 minutos poderiam inventar a partir de “A Moral & o Julgamento”?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-e-moral-julgamento"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
       "id": "pdi_qdraft_group_a_proxima_aventura_01",
       "type": "pdi_question_draft",
       "mode": "group",
@@ -74924,6 +75224,606 @@
       ],
       "sourceSignalRefs": [
         "pdi-group:a-proxima-aventura"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_01",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 01",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “A Trapaça & a Manipulação” fosse uma prova de festa, qual seria a regra mais absurda e inofensiva?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_02",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 02",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que título de filme dariam a uma ronda sobre “A Trapaça & a Manipulação”? Vale uma versão completamente disparatada.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_03",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 03",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem um anúncio de 15 segundos para uma versão imaginária de “A Trapaça & a Manipulação”.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_04",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 04",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que música seria a banda sonora de “A Trapaça & a Manipulação” nesta festa? Cada pessoa pode propor uma.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_05",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 05",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Transformem “A Trapaça & a Manipulação” num superpoder inútil: qual seria o nome e qual seria a limitação?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_06",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 06",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “A Trapaça & a Manipulação” fosse um reality fictício, que prova segura e ridícula apareceria no episódio?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_07",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 07",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem um slogan para “A Trapaça & a Manipulação” como se fosse um produto absurdo que ninguém precisa de comprar.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_08",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 08",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que conselho um extraterrestre daria ao grupo sobre “A Trapaça & a Manipulação” para sobreviver a esta noite?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_09",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 09",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem uma manchete positiva e absurda sobre “A Trapaça & a Manipulação” daqui a dez anos.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_10",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 10",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Cada pessoa inventa uma solução disparatada para um dilema fictício ligado a “A Trapaça & a Manipulação”. Qual dá a melhor história?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_11",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 11",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem uma tradição de grupo ligada a “A Trapaça & a Manipulação” que seja fácil, barata e opcional.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_trapaca_e_a_manipulacao_12",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Trapaça & a Manipulação",
+      "themeKey": "a-trapaca-e-a-manipulacao",
+      "title": "A Trapaça & a Manipulação · Grupo · 12",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que mini-aventura gratuita de 30 minutos poderiam inventar a partir de “A Trapaça & a Manipulação”?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-f-trapaca-manipulacao"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_01",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 01",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “A Verdade Nua e Crua” fosse uma prova de festa, qual seria a regra mais absurda e inofensiva?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_02",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 02",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que título de filme dariam a uma ronda sobre “A Verdade Nua e Crua”? Vale uma versão completamente disparatada.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_03",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 03",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem um anúncio de 15 segundos para uma versão imaginária de “A Verdade Nua e Crua”.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_04",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 04",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que música seria a banda sonora de “A Verdade Nua e Crua” nesta festa? Cada pessoa pode propor uma.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_05",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 05",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Transformem “A Verdade Nua e Crua” num superpoder inútil: qual seria o nome e qual seria a limitação?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_06",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 06",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “A Verdade Nua e Crua” fosse um reality fictício, que prova segura e ridícula apareceria no episódio?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_07",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 07",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem um slogan para “A Verdade Nua e Crua” como se fosse um produto absurdo que ninguém precisa de comprar.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_08",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 08",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que conselho um extraterrestre daria ao grupo sobre “A Verdade Nua e Crua” para sobreviver a esta noite?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_09",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 09",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem uma manchete positiva e absurda sobre “A Verdade Nua e Crua” daqui a dez anos.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_10",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 10",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Cada pessoa inventa uma solução disparatada para um dilema fictício ligado a “A Verdade Nua e Crua”. Qual dá a melhor história?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_11",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 11",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem uma tradição de grupo ligada a “A Verdade Nua e Crua” que seja fácil, barata e opcional.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_a_verdade_nua_e_crua_12",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "A Verdade Nua e Crua",
+      "themeKey": "a-verdade-nua-e-crua",
+      "title": "A Verdade Nua e Crua · Grupo · 12",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que mini-aventura gratuita de 30 minutos poderiam inventar a partir de “A Verdade Nua e Crua”?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-j-verdade-nua-crua"
       ],
       "sourceBasis": "internal_theme_catalogue",
       "independentlyVerifiedDemand": false,
@@ -75824,6 +76724,606 @@
       ],
       "sourceSignalRefs": [
         "pdi-group:amigos-sem-filtro"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_01",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 01",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “As Feridas da Infância e da Família” fosse uma prova de festa, qual seria a regra mais absurda e inofensiva?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_02",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 02",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que título de filme dariam a uma ronda sobre “As Feridas da Infância e da Família”? Vale uma versão completamente disparatada.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_03",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 03",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem um anúncio de 15 segundos para uma versão imaginária de “As Feridas da Infância e da Família”.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_04",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 04",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que música seria a banda sonora de “As Feridas da Infância e da Família” nesta festa? Cada pessoa pode propor uma.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_05",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 05",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Transformem “As Feridas da Infância e da Família” num superpoder inútil: qual seria o nome e qual seria a limitação?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_06",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 06",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “As Feridas da Infância e da Família” fosse um reality fictício, que prova segura e ridícula apareceria no episódio?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_07",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 07",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem um slogan para “As Feridas da Infância e da Família” como se fosse um produto absurdo que ninguém precisa de comprar.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_08",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 08",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que conselho um extraterrestre daria ao grupo sobre “As Feridas da Infância e da Família” para sobreviver a esta noite?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_09",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 09",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem uma manchete positiva e absurda sobre “As Feridas da Infância e da Família” daqui a dez anos.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_10",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 10",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Cada pessoa inventa uma solução disparatada para um dilema fictício ligado a “As Feridas da Infância e da Família”. Qual dá a melhor história?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_11",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 11",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem uma tradição de grupo ligada a “As Feridas da Infância e da Família” que seja fácil, barata e opcional.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_feridas_da_infancia_e_da_familia_12",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Feridas da Infância e da Família",
+      "themeKey": "as-feridas-da-infancia-e-da-familia",
+      "title": "As Feridas da Infância e da Família · Grupo · 12",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que mini-aventura gratuita de 30 minutos poderiam inventar a partir de “As Feridas da Infância e da Família”?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-h-infancia-familia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_01",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 01",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “As Relações & Os Fantasmas” fosse uma prova de festa, qual seria a regra mais absurda e inofensiva?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_02",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 02",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que título de filme dariam a uma ronda sobre “As Relações & Os Fantasmas”? Vale uma versão completamente disparatada.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_03",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 03",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem um anúncio de 15 segundos para uma versão imaginária de “As Relações & Os Fantasmas”.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_04",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 04",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que música seria a banda sonora de “As Relações & Os Fantasmas” nesta festa? Cada pessoa pode propor uma.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_05",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 05",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Transformem “As Relações & Os Fantasmas” num superpoder inútil: qual seria o nome e qual seria a limitação?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_06",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 06",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “As Relações & Os Fantasmas” fosse um reality fictício, que prova segura e ridícula apareceria no episódio?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_07",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 07",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem um slogan para “As Relações & Os Fantasmas” como se fosse um produto absurdo que ninguém precisa de comprar.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_08",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 08",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que conselho um extraterrestre daria ao grupo sobre “As Relações & Os Fantasmas” para sobreviver a esta noite?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_09",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 09",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem uma manchete positiva e absurda sobre “As Relações & Os Fantasmas” daqui a dez anos.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_10",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 10",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Cada pessoa inventa uma solução disparatada para um dilema fictício ligado a “As Relações & Os Fantasmas”. Qual dá a melhor história?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_11",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 11",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem uma tradição de grupo ligada a “As Relações & Os Fantasmas” que seja fácil, barata e opcional.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_as_relacoes_e_os_fantasmas_12",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "As Relações & Os Fantasmas",
+      "themeKey": "as-relacoes-e-os-fantasmas",
+      "title": "As Relações & Os Fantasmas · Grupo · 12",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que mini-aventura gratuita de 30 minutos poderiam inventar a partir de “As Relações & Os Fantasmas”?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-b-relacoes-fantasmas"
       ],
       "sourceBasis": "internal_theme_catalogue",
       "independentlyVerifiedDemand": false,
@@ -84835,6 +86335,1206 @@
       "publiclyAvailable": false
     },
     {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_01",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 01",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “O Corpo & a Intimidade” fosse uma prova de festa, qual seria a regra mais absurda e inofensiva?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_02",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 02",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que título de filme dariam a uma ronda sobre “O Corpo & a Intimidade”? Vale uma versão completamente disparatada.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_03",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 03",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem um anúncio de 15 segundos para uma versão imaginária de “O Corpo & a Intimidade”.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_04",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 04",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que música seria a banda sonora de “O Corpo & a Intimidade” nesta festa? Cada pessoa pode propor uma.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_05",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 05",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Transformem “O Corpo & a Intimidade” num superpoder inútil: qual seria o nome e qual seria a limitação?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_06",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 06",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “O Corpo & a Intimidade” fosse um reality fictício, que prova segura e ridícula apareceria no episódio?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_07",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 07",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem um slogan para “O Corpo & a Intimidade” como se fosse um produto absurdo que ninguém precisa de comprar.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_08",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 08",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que conselho um extraterrestre daria ao grupo sobre “O Corpo & a Intimidade” para sobreviver a esta noite?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_09",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 09",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem uma manchete positiva e absurda sobre “O Corpo & a Intimidade” daqui a dez anos.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_10",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 10",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Cada pessoa inventa uma solução disparatada para um dilema fictício ligado a “O Corpo & a Intimidade”. Qual dá a melhor história?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_11",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 11",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem uma tradição de grupo ligada a “O Corpo & a Intimidade” que seja fácil, barata e opcional.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_corpo_e_a_intimidade_12",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Corpo & a Intimidade",
+      "themeKey": "o-corpo-e-a-intimidade",
+      "title": "O Corpo & a Intimidade · Grupo · 12",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que mini-aventura gratuita de 30 minutos poderiam inventar a partir de “O Corpo & a Intimidade”?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-d-corpo-intimidade"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_01",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 01",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “O Dinheiro, o Status & o Ego” fosse uma prova de festa, qual seria a regra mais absurda e inofensiva?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_02",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 02",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que título de filme dariam a uma ronda sobre “O Dinheiro, o Status & o Ego”? Vale uma versão completamente disparatada.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_03",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 03",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem um anúncio de 15 segundos para uma versão imaginária de “O Dinheiro, o Status & o Ego”.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_04",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 04",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que música seria a banda sonora de “O Dinheiro, o Status & o Ego” nesta festa? Cada pessoa pode propor uma.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_05",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 05",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Transformem “O Dinheiro, o Status & o Ego” num superpoder inútil: qual seria o nome e qual seria a limitação?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_06",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 06",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “O Dinheiro, o Status & o Ego” fosse um reality fictício, que prova segura e ridícula apareceria no episódio?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_07",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 07",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem um slogan para “O Dinheiro, o Status & o Ego” como se fosse um produto absurdo que ninguém precisa de comprar.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_08",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 08",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que conselho um extraterrestre daria ao grupo sobre “O Dinheiro, o Status & o Ego” para sobreviver a esta noite?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_09",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 09",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem uma manchete positiva e absurda sobre “O Dinheiro, o Status & o Ego” daqui a dez anos.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_10",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 10",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Cada pessoa inventa uma solução disparatada para um dilema fictício ligado a “O Dinheiro, o Status & o Ego”. Qual dá a melhor história?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_11",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 11",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem uma tradição de grupo ligada a “O Dinheiro, o Status & o Ego” que seja fácil, barata e opcional.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_dinheiro_o_status_e_o_ego_12",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Dinheiro, o Status & o Ego",
+      "themeKey": "o-dinheiro-o-status-e-o-ego",
+      "title": "O Dinheiro, o Status & o Ego · Grupo · 12",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que mini-aventura gratuita de 30 minutos poderiam inventar a partir de “O Dinheiro, o Status & o Ego”?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-c-dinheiro-status-ego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_01",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 01",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “O Espelho do Grupo” fosse uma prova de festa, qual seria a regra mais absurda e inofensiva?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_02",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 02",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que título de filme dariam a uma ronda sobre “O Espelho do Grupo”? Vale uma versão completamente disparatada.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_03",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 03",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem um anúncio de 15 segundos para uma versão imaginária de “O Espelho do Grupo”.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_04",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 04",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que música seria a banda sonora de “O Espelho do Grupo” nesta festa? Cada pessoa pode propor uma.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_05",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 05",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Transformem “O Espelho do Grupo” num superpoder inútil: qual seria o nome e qual seria a limitação?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_06",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 06",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “O Espelho do Grupo” fosse um reality fictício, que prova segura e ridícula apareceria no episódio?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_07",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 07",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem um slogan para “O Espelho do Grupo” como se fosse um produto absurdo que ninguém precisa de comprar.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_08",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 08",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que conselho um extraterrestre daria ao grupo sobre “O Espelho do Grupo” para sobreviver a esta noite?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_09",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 09",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem uma manchete positiva e absurda sobre “O Espelho do Grupo” daqui a dez anos.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_10",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 10",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Cada pessoa inventa uma solução disparatada para um dilema fictício ligado a “O Espelho do Grupo”. Qual dá a melhor história?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_11",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 11",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem uma tradição de grupo ligada a “O Espelho do Grupo” que seja fácil, barata e opcional.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_espelho_do_grupo_12",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Espelho do Grupo",
+      "themeKey": "o-espelho-do-grupo",
+      "title": "O Espelho do Grupo · Grupo · 12",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que mini-aventura gratuita de 30 minutos poderiam inventar a partir de “O Espelho do Grupo”?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-i-espelho-grupo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_01",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 01",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “O Futuro & a Apatia” fosse uma prova de festa, qual seria a regra mais absurda e inofensiva?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_02",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 02",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que título de filme dariam a uma ronda sobre “O Futuro & a Apatia”? Vale uma versão completamente disparatada.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_03",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 03",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem um anúncio de 15 segundos para uma versão imaginária de “O Futuro & a Apatia”.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_04",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 04",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que música seria a banda sonora de “O Futuro & a Apatia” nesta festa? Cada pessoa pode propor uma.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_05",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 05",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Transformem “O Futuro & a Apatia” num superpoder inútil: qual seria o nome e qual seria a limitação?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_06",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 06",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “O Futuro & a Apatia” fosse um reality fictício, que prova segura e ridícula apareceria no episódio?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_07",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 07",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem um slogan para “O Futuro & a Apatia” como se fosse um produto absurdo que ninguém precisa de comprar.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_08",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 08",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que conselho um extraterrestre daria ao grupo sobre “O Futuro & a Apatia” para sobreviver a esta noite?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_09",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 09",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem uma manchete positiva e absurda sobre “O Futuro & a Apatia” daqui a dez anos.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_10",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 10",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Cada pessoa inventa uma solução disparatada para um dilema fictício ligado a “O Futuro & a Apatia”. Qual dá a melhor história?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_11",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 11",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem uma tradição de grupo ligada a “O Futuro & a Apatia” que seja fácil, barata e opcional.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_futuro_e_a_apatia_12",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Futuro & a Apatia",
+      "themeKey": "o-futuro-e-a-apatia",
+      "title": "O Futuro & a Apatia · Grupo · 12",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que mini-aventura gratuita de 30 minutos poderiam inventar a partir de “O Futuro & a Apatia”?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-g-futuro-apatia"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
       "id": "pdi_qdraft_group_o_nosso_grupo_em_filme_01",
       "type": "pdi_question_draft",
       "mode": "group",
@@ -85724,6 +88424,306 @@
       ],
       "sourceSignalRefs": [
         "pdi-group:o-pior-melhor-plano"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_01",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 01",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “O Ponto Cego” fosse uma prova de festa, qual seria a regra mais absurda e inofensiva?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_02",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 02",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que título de filme dariam a uma ronda sobre “O Ponto Cego”? Vale uma versão completamente disparatada.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_03",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 03",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem um anúncio de 15 segundos para uma versão imaginária de “O Ponto Cego”.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_04",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 04",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que música seria a banda sonora de “O Ponto Cego” nesta festa? Cada pessoa pode propor uma.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_05",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 05",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Transformem “O Ponto Cego” num superpoder inútil: qual seria o nome e qual seria a limitação?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_06",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 06",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Se “O Ponto Cego” fosse um reality fictício, que prova segura e ridícula apareceria no episódio?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_07",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 07",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem um slogan para “O Ponto Cego” como se fosse um produto absurdo que ninguém precisa de comprar.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_08",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 08",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que conselho um extraterrestre daria ao grupo sobre “O Ponto Cego” para sobreviver a esta noite?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_09",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 09",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Inventem uma manchete positiva e absurda sobre “O Ponto Cego” daqui a dez anos.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_10",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 10",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Cada pessoa inventa uma solução disparatada para um dilema fictício ligado a “O Ponto Cego”. Qual dá a melhor história?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_11",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 11",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Criem uma tradição de grupo ligada a “O Ponto Cego” que seja fácil, barata e opcional.",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_group_o_ponto_cego_12",
+      "type": "pdi_question_draft",
+      "mode": "group",
+      "theme": "O Ponto Cego",
+      "themeKey": "o-ponto-cego",
+      "title": "O Ponto Cego · Grupo · 12",
+      "stage": "open",
+      "editorialFunction": "humor_improviso_convivio",
+      "text": "Que mini-aventura gratuita de 30 minutos poderiam inventar a partir de “O Ponto Cego”?",
+      "sourceKinds": [
+        "pdi-group"
+      ],
+      "sourceSignalRefs": [
+        "pdi-group:deck-a-ponto-cego"
       ],
       "sourceBasis": "internal_theme_catalogue",
       "independentlyVerifiedDemand": false,

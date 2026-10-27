@@ -819,7 +819,7 @@
       "page_count": 153,
       "structured_data_pages": 153,
       "structured_data_coverage": 1,
-      "internal_link_edges": 510,
+      "internal_link_edges": 513,
       "orphan_pages": [],
       "low_in_degree_pages": [
         "https://maison-jf.com/clair-obscur/",
@@ -964,37 +964,37 @@
         "home": {
           "pages": 1,
           "incoming_edges": 43,
-          "outgoing_edges": 13,
+          "outgoing_edges": 17,
           "orphans": 0
         },
         "farol": {
           "pages": 1,
           "incoming_edges": 43,
-          "outgoing_edges": 8,
+          "outgoing_edges": 9,
           "orphans": 0
         },
         "teste": {
           "pages": 5,
-          "incoming_edges": 49,
+          "incoming_edges": 47,
           "outgoing_edges": 36,
           "orphans": 0
         },
         "para-de-ignorar": {
           "pages": 1,
-          "incoming_edges": 3,
+          "incoming_edges": 4,
           "outgoing_edges": 5,
           "orphans": 0
         },
         "produtos": {
           "pages": 7,
           "incoming_edges": 51,
-          "outgoing_edges": 47,
+          "outgoing_edges": 46,
           "orphans": 0
         },
         "servicos": {
           "pages": 2,
-          "incoming_edges": 45,
-          "outgoing_edges": 11,
+          "incoming_edges": 48,
+          "outgoing_edges": 10,
           "orphans": 0
         },
         "portas": {
@@ -1005,19 +1005,19 @@
         },
         "oraculo": {
           "pages": 101,
-          "incoming_edges": 205,
+          "incoming_edges": 206,
           "outgoing_edges": 219,
           "orphans": 0
         },
         "ebooks": {
           "pages": 3,
-          "incoming_edges": 8,
+          "incoming_edges": 9,
           "outgoing_edges": 19,
           "orphans": 0
         },
         "profissionais": {
           "pages": 10,
-          "incoming_edges": 24,
+          "incoming_edges": 23,
           "outgoing_edges": 24,
           "orphans": 0
         },
@@ -1103,7 +1103,6 @@
         "Offer": 111,
         "Product": 7,
         "Thing": 6,
-        "AggregateOffer": 1,
         "Service": 107,
         "Book": 2,
         "AboutPage": 1,
@@ -1130,9 +1129,12 @@
         "internal_links": [
           "https://maison-jf.com/",
           "https://maison-jf.com/clair-obscur/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/envios",
           "https://maison-jf.com/farol",
           "https://maison-jf.com/manifesto/",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/portas/cabeca",
           "https://maison-jf.com/portas/casa",
           "https://maison-jf.com/portas/corpo",
@@ -1140,10 +1142,11 @@
           "https://maison-jf.com/produtos/",
           "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/servicos/tarot/",
           "https://maison-jf.com/teste/"
         ],
         "internal_link_in_degree": 43,
-        "internal_link_out_degree": 13
+        "internal_link_out_degree": 17
       },
       {
         "url": "https://maison-jf.com/farol",
@@ -1167,10 +1170,11 @@
           "https://maison-jf.com/produtos/",
           "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/servicos/tarot/",
           "https://maison-jf.com/teste/"
         ],
         "internal_link_in_degree": 43,
-        "internal_link_out_degree": 8
+        "internal_link_out_degree": 9
       },
       {
         "url": "https://maison-jf.com/teste/",
@@ -1192,7 +1196,7 @@
           "https://maison-jf.com/teste/apego/",
           "https://maison-jf.com/teste/atencao/"
         ],
-        "internal_link_in_degree": 43,
+        "internal_link_in_degree": 41,
         "internal_link_out_degree": 8
       },
       {
@@ -1300,7 +1304,7 @@
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 3,
+        "internal_link_in_degree": 4,
         "internal_link_out_degree": 5
       },
       {
@@ -1321,12 +1325,11 @@
           "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
           "https://maison-jf.com/produtos/maison-jf-bundles/",
-          "https://maison-jf.com/profissionais/",
-          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/servicos/tarot/",
           "https://maison-jf.com/teste/"
         ],
         "internal_link_in_degree": 42,
-        "internal_link_out_degree": 11
+        "internal_link_out_degree": 10
       },
       {
         "url": "https://maison-jf.com/produtos/vela-vidro/",
@@ -1439,7 +1442,6 @@
         "group": "servicos",
         "title": "Serviços | MAISON JF®",
         "structured_data_types": [
-          "AggregateOffer",
           "CollectionPage",
           "Offer",
           "Service"
@@ -1449,11 +1451,10 @@
           "https://maison-jf.com/farol",
           "https://maison-jf.com/produtos/",
           "https://maison-jf.com/profissionais/",
-          "https://maison-jf.com/servicos/",
-          "https://maison-jf.com/teste/"
+          "https://maison-jf.com/servicos/tarot/"
         ],
-        "internal_link_in_degree": 43,
-        "internal_link_out_degree": 6
+        "internal_link_in_degree": 42,
+        "internal_link_out_degree": 5
       },
       {
         "url": "https://maison-jf.com/portas/casa",
@@ -1638,7 +1639,7 @@
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 103,
+        "internal_link_in_degree": 104,
         "internal_link_out_degree": 105
       },
       {
@@ -3459,7 +3460,7 @@
         "url": "https://maison-jf.com/ebooks/",
         "source_file": "ebooks/index.html",
         "group": "ebooks",
-        "title": "Universos | MAISON JF®",
+        "title": "Éditions Maison JF® · Biblioteca de Autor | MAISON JF®",
         "structured_data_types": [
           "CollectionPage",
           "Thing"
@@ -3473,7 +3474,7 @@
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 6,
+        "internal_link_in_degree": 7,
         "internal_link_out_degree": 7
       },
       {
@@ -3549,7 +3550,7 @@
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 15,
+        "internal_link_in_degree": 14,
         "internal_link_out_degree": 15
       },
       {
@@ -3859,7 +3860,7 @@
         "url": "https://maison-jf.com/servicos/tarot/",
         "source_file": "servicos/tarot/index.html",
         "group": "servicos",
-        "title": "Consulta de Tarot | MAISON JF®",
+        "title": "Cabeça · Consulta de Tarot | MAISON JF®",
         "structured_data_types": [
           "Offer",
           "Service"
@@ -3869,9 +3870,9 @@
           "https://maison-jf.com/farol",
           "https://maison-jf.com/produtos/",
           "https://maison-jf.com/servicos/",
-          "https://maison-jf.com/teste/"
+          "https://maison-jf.com/servicos/tarot/"
         ],
-        "internal_link_in_degree": 2,
+        "internal_link_in_degree": 6,
         "internal_link_out_degree": 5
       },
       {
