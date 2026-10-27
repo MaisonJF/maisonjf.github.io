@@ -21,6 +21,7 @@ class Statement{
 class DB{
   constructor(){this.reads=[];this.writes=[];this.rows=[];this.duplicateRow=null;}
   prepare(sql){return new Statement(this,sql);}
+  async batch(statements){return Promise.all(statements.map(statement=>statement.run()));}
 }
 
 test('generic expansion candidate stays private and review-only',async()=>{
