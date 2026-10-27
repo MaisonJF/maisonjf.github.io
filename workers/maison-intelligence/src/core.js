@@ -75,7 +75,7 @@ export function buildSensorPrompt(territory) {
       'Zero-cost first and existing-assets first. Prefer applications that can improve current discovery, content, Jogo, Oráculo, tests, ebooks, guides, products or experiences before proposing new infrastructure.',
       'Do not collect personal identifiers. Return a concise synthesis (max 900 words) with public citations whenever supported.',
       'Do not publish, contact anyone, spend money, change the site, catalogue, prices or checkout. You are a sensor only.'
-    ].join('\\n');
+    ].join('\n');
   }
   if (territory.specialistOcean) {
     const ocean=territory.specialistOcean;
@@ -91,7 +91,7 @@ export function buildSensorPrompt(territory) {
       'For supplier or Portugal-market questions, record the exact geography, price/conditions where available, source and observation date. For scent formulas, distinguish an idea from a physically tested formula and from a safety-validated product.',
       'Do not copy a brand’s protected expression or identity. Do not collect personal identifiers or private conversations.',
       'Return a concise synthesis (max 700 words). Do not publish, contact anyone, spend money or alter any public system. You are a sensor only.'
-    ].join('\\n');
+    ].join('\n');
   }
   if (territory.key === DISCOVERY_TERRITORY.key) {
     return [
@@ -107,7 +107,7 @@ export function buildSensorPrompt(territory) {
       'Do not collect names, handles, emails, phone numbers, private conversations or other personal identifiers.',
       'Return a concise synthesis (max 900 words). Cite public URLs whenever your system supports citations.',
       'Do not publish, contact anyone, spend money, change the site, catalogue, prices or checkout. You are a sensor only.'
-    ].join('\\n');
+    ].join('\n');
   }
   return [
     'Act as a research sensor for MAISON JF. Search or use the freshest public information available to your system.',
