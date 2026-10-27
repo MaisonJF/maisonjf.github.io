@@ -17,6 +17,7 @@ import { handleA11LearningRequest } from './a11_runtime.js';
 import { handleVideoGenerationRequest } from './video_generation.js';
 import { handleMaisonMcpRequest } from './mcp_video.js';
 import { handleOceanMemoryRequest, ingestOceanMemory } from './ocean_memory.js';
+import { handleOceanCatalogRequest, loadActiveOceanRegistry } from './ocean_catalog.js';
 import { routeOceanContext } from './ocean_context.js';
 import { buildEditorialProposal, buildInlineBrainAlert } from './content_proposal.js';
 import { generateEditorialCandidates } from './editorial_candidate_generation.js';
@@ -103,10 +104,20 @@ async function processExpansionFoundryTask(env,task) {
 
   let outcome;
   try{
-    outcome=await runExpansionFoundry(env,{spec:task.spec});
+    const globalKey='foundry:global';
+    const globalCap=clampInt(env.OCEAN_DISCOVERY_RUNS_PER_DAY,2,1,2);
+    const globalRow=await env.GROWTH_DB.prepare(`
+      SELECT calls FROM external_intelligence_daily_usage
+      WHERE usage_date=?1 AND provider_id=?2 LIMIT 1
+    `).bind(day,globalKey).first();
+    if(Number(globalRow?.calls||0)>=globalCap)return { skipped:'foundry_global_daily_cap',modelKey:task.modelKey };
+    const candidateLimit=clampInt(env.OCEAN_DISCOVERY_CANDIDATES_PER_RUN,12,8,16);
+    outcome=await runExpansionFoundry(env,{spec:task.spec,runKey:task.taskKey,candidateLimit});
     await markUsage(env,usageKey,day,true,outcome.usage);
+    await markUsage(env,globalKey,day,true,outcome.usage);
   }catch(error){
     try{await markUsage(env,usageKey,day,false,null);}catch{}
+    try{await markUsage(env,'foundry:global',day,false,null);}catch{}
     throw error;
   }
   return {
@@ -172,12 +183,25 @@ async function persistObservation(env, task, result) {
   const safeText = privacySafeText(result.text);
   if (!safeText) throw new Error('empty_provider_response');
   const citations = uniqueCanonicalUrls(result.citations ?? []);
-  const oceanContext=routeOceanContext({
+  const routedOceanContext=routeOceanContext({
     text:safeText,
     territoryKey:task.territoryKey,
     providerId:result.providerId,
     citations
   });
+  const specialist=task.specialistOcean&&typeof task.specialistOcean==='object'?task.specialistOcean:null;
+  const specialistRoots=new Set(citations.map(url=>{try{return domainOf(url);}catch{return url;}}));
+  const oceanContext=specialist?.ocean_key?{
+    oceanKey:String(specialist.ocean_key),
+    canonicalOceanId:String(specialist.ocean_key),
+    kind:citations.length?'enrichment':'hypothesis',
+    relevanceScore:citations.length?Math.max(58,Math.min(94,54+Math.min(specialistRoots.size,5)*8)):45,
+    commercialScore:55,
+    matchedTerms:[String(specialist.display_name||specialist.ocean_key)],
+    evidenceRoots:citations,
+    sourceTerritory:String(task.territoryKey||''),
+    providerId:String(result.providerId||'')
+  }:routedOceanContext;
   const brainTerritoryKey=oceanContext?.oceanKey || task.territoryKey;
   const responseHash = await sha256Hex(safeText);
   const payloadHash = await sha256Hex(JSON.stringify({
@@ -642,26 +666,27 @@ async function enqueueDailyExpansionRun(env,scheduledDate,getControl=()=>control
   const specs=configuredZeroCostModelSpecs(env);
   if (!specs.length) return { queued:0,reason:'no_zero_cost_models_configured' };
 
+  const rawHours=String(env.OCEAN_DISCOVERY_RUN_HOURS_UTC||'03,15');
+  const runHours=[...new Set(rawHours.split(',').map(x=>Number.parseInt(x.trim(),10)).filter(x=>Number.isInteger(x)&&x>=0&&x<=23))].sort((a,b)=>a-b);
+  if(!runHours.length)runHours.push(3,15);
+  const hour=scheduledDate.getUTCHours();
+  const slot=runHours.indexOf(hour);
+  if(slot<0||scheduledDate.getUTCMinutes()!==0)return {queued:0,reason:'outside_ocean_discovery_window'};
+
   const control=await getControl();
   if (!control.enabled) return { queued:0,reason:control.reason };
 
   const day=utcDay(scheduledDate);
-  const messages=[];
-  for(const spec of specs){
-    const fingerprint=await sha256Hex(spec.key);
-    messages.push({body:{
-      kind:'expansion_foundry',
-      day,
-      providerId:spec.providerId,
-      modelKey:spec.key,
-      spec,
-      territoryKey:'maison_expansion',
-      promptFingerprint:fingerprint,
-      taskKey:`${day}:foundry:${fingerprint.slice(0,24)}`
-    }});
-  }
-  if(messages.length)await env.INTELLIGENCE_QUEUE.sendBatch(messages.slice(0,100));
-  return {queued:messages.length,models:specs.length};
+  const ordinal=Math.floor(Date.UTC(scheduledDate.getUTCFullYear(),scheduledDate.getUTCMonth(),scheduledDate.getUTCDate())/86400000);
+  const spec=specs[(ordinal*runHours.length+slot)%specs.length];
+  const fingerprint=await sha256Hex(spec.key);
+  const taskKey=`${day}:foundry:${String(hour).padStart(2,'0')}:${fingerprint.slice(0,24)}`;
+  await env.INTELLIGENCE_QUEUE.sendBatch([{body:{
+    kind:'expansion_foundry',day,slot,providerId:spec.providerId,modelKey:spec.key,spec,
+    candidateLimit:clampInt(env.OCEAN_DISCOVERY_CANDIDATES_PER_RUN,12,8,16),
+    territoryKey:'maison_expansion',promptFingerprint:fingerprint,taskKey
+  }}]);
+  return {queued:1,models:specs.length,selectedModel:spec.key,hour,candidateLimit:clampInt(env.OCEAN_DISCOVERY_CANDIDATES_PER_RUN,12,8,16)};
 }
 
 async function enqueueFeedbackCouncilRun(env,scheduledDate,getControl=()=>controlState(env)) {
@@ -701,13 +726,15 @@ async function enqueueRun(env,scheduledDate,getControl=()=>controlState(env)) {
   const promptCount=clampInt(env.PROMPTS_PER_RUN,2,1,4);
   const territories=territoriesForDate(scheduledDate,promptCount);
   const day=utcDay(scheduledDate);
+  const activeOceans=await loadActiveOceanRegistry(env);
   const messages=[];
-  for (const territory of territories) {
+  for (const territory of territoriesForDate(scheduledDate,promptCount,activeOceans)) {
     const prompt=buildSensorPrompt(territory);
     const promptFingerprint=await sha256Hex(prompt);
     for (const providerId of providers) {
       messages.push({body:{
         kind:'sensor_query',day,providerId,territoryKey:territory.key,
+        specialistOcean:territory.specialistOcean||null,
         prompt,promptFingerprint,
         taskKey:`${day}:${providerId}:${territory.key}:${promptFingerprint.slice(0,24)}`
       }});
@@ -720,6 +747,8 @@ export default {
   async fetch(request, env) {
     const mcp = await handleMaisonMcpRequest(request, env);
     if (mcp) return mcp;
+    const oceanCatalog = await handleOceanCatalogRequest(request, env);
+    if (oceanCatalog) return oceanCatalog;
     const oceans = await handleOceanMemoryRequest(request, env);
     if (oceans) return oceans;
     const video = await handleVideoGenerationRequest(request, env);
