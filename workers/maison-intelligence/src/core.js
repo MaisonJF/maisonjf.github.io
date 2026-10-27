@@ -105,19 +105,35 @@ export function buildSensorPrompt(territory) {
   ].join('\n');
 }
 
-export function territoriesForDate(date = new Date(), count = 2) {
-  // Rotate by scheduled 3-hour slot, not only by UTC day. This keeps the
-  // intelligence loop continuously fed while deterministically covering every
-  // human territory. Discovery and Atelier stay in the bounded rotation pool.
+export function territoriesForDate(date = new Date(), count = 2, specialistOceans = []) {
+  // The legacy human-signal pool continues to feed PDI/Oráculo and discovery.
+  // Half the bounded sensor slots now rotate through dedicated specialist Oceans;
+  // this adds a new research lane without replacing the existing human-signal mesh.
   const slot = Math.floor(date.getTime() / (3 * 3600000));
-  const limit = Math.max(0, Math.min(count, TERRITORIES.length + 2));
+  const limit = Math.max(0, Math.min(count, TERRITORIES.length + 2 + specialistOceans.length));
   if (!limit) return [];
-  // Human pain territories are the first-class feed for PDI/Oráculo. Discovery
-  // and Atelier get deterministic rotating slots instead of consuming every run.
   const pool=[...TERRITORIES,DISCOVERY_TERRITORY,ATELIER_TERRITORY];
+  const specialistCount=specialistOceans.length?Math.min(limit,Math.max(1,Math.floor(limit/2))):0;
+  const baseCount=limit-specialistCount;
   const selected=[];
-  for(let i=0;i<Math.min(limit,pool.length);i++){
+  for(let i=0;i<Math.min(baseCount,pool.length);i++){
     selected.push(pool[(slot+i*3)%pool.length]);
+  }
+  for(let i=0;i<specialistCount;i++){
+    const ocean=specialistOceans[(slot*specialistCount+i)%specialistOceans.length];
+    if(!ocean)continue;
+    selected.push({
+      key:ocean.ocean_key,
+      query:[ocean.display_name,ocean.mission,`Focus: ${(ocean.focus||[]).slice(0,8).join(', ')}`].filter(Boolean).join('. '),
+      specialistOcean:{
+        ocean_key:ocean.ocean_key,
+        display_name:ocean.display_name,
+        pillar_key:ocean.pillar_key,
+        mission:ocean.mission,
+        focus:Array.isArray(ocean.focus)?ocean.focus.slice(0,12):[],
+        connections:Array.isArray(ocean.connections)?ocean.connections.slice(0,12):[]
+      }
+    });
   }
   return selected;
 }
