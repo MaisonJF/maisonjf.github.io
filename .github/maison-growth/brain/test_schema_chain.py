@@ -30,6 +30,7 @@ MIGRATIONS=(
     GROWTH/"a11/migrations/0020_learning_rule_seed.sql",
     GROWTH/"brain/migrations/0021_commercial_recovery_journal.sql",
     GROWTH/"brain/migrations/0022_ocean_working_memory.sql",
+    GROWTH/"brain/migrations/0024_ocean_specialist_registry.sql",
 )
 
 
@@ -67,6 +68,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
             )
         }
         self.assertEqual(state["maison_ocean_memory_schema_version"],"OCEAN.1")
+        self.assertEqual(state["maison_ocean_specialist_registry_schema_version"],"OCEAN.2")
 
         for expected in (
             "a14_validation_plans",
@@ -76,6 +78,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
             "ocean_memory_signals",
             "ocean_memory_state",
             "ocean_memory_alerts",
+            "ocean_specialist_registry",
         ):
             self.assertIn(expected,tables)
 
