@@ -30,7 +30,13 @@ test('group and party themes enter the editorial backlog but are not exposed bef
   assert.match(catalogue,/liveQuestions>=PDI_MINIMUM_LIVE_QUESTIONS/);
   assert.match(policy,/minimum_28_active_approved_questions_per_theme/);
   const groupSeedBlock=sources.slice(sources.indexOf('const PDI_GROUP_SEEDS=['),sources.indexOf('const MAISON_NATIVE_SEEDS='));
-  assert.equal((groupSeedBlock.match(/\{slug:/g)||[]).length,56);
+  assert.equal((groupSeedBlock.match(/\{slug:/g)||[]).length,66);
+  for(const label of [
+    'O Ponto Cego','As Relações & Os Fantasmas','O Dinheiro, o Status & o Ego',
+    'O Corpo & a Intimidade','A Moral & o Julgamento','A Trapaça & a Manipulação',
+    'O Futuro & a Apatia','As Feridas da Infância e da Família',
+    'O Espelho do Grupo','A Verdade Nua e Crua'
+  ]) assert.ok(groupSeedBlock.includes("label:'"+label+"'"),'missing deck theme: '+label);
 });
 
 test('group play rotates numbered participants and adds optional party challenges without collecting names or answers',()=>{
