@@ -4,19 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-<title>Consulta de Tarot | MAISON JF®</title>
-<meta name="description" content="Consulta de Tarot MAISON JF® por 35 €. Uma leitura para olhar para a tua pergunta com mais clareza, sem transformar possibilidades em certezas.">
+<title>Cabeça · Consulta de Tarot | MAISON JF®</title>
+<meta name="description" content="Consulta individual de Tarot MAISON JF® · 35 €. Uma leitura direta, sem previsões vagas nem promessas fabricadas.">
 <link rel="canonical" href="https://maison-jf.com/servicos/tarot/">
-<link rel="stylesheet" href="../../maison.css?v=20260925-experience5">
-<script src="../../analytics.js" defer></script>
+<link rel="stylesheet" href="../../maison.css?v=20261026-master-copy">
+<script src="../../analytics.js?v=20261025-b2c1" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Consulta de Tarot MAISON JF®","provider":{"@id":"https://maison-jf.com/#organization"},"url":"https://maison-jf.com/servicos/tarot/","description":"Leitura de Tarot para reflexão e orientação, sem transformar possibilidades em certezas.","offers":{"@type":"Offer","name":"Consulta de Tarot","price":"35.00","priceCurrency":"EUR"}}</script>
 <style>
 .tarot-page{background:#070707;color:var(--maison-ivory)}
-.tarot-hero{min-height:84svh;display:flex;align-items:flex-end;padding-top:110px;border-bottom:1px solid var(--line);background:radial-gradient(circle at 76% 35%,rgba(194,162,101,.09),transparent 28%),#070707}
-.tarot-hero__inner{width:min(calc(100% - 40px),var(--max));margin:0 auto;padding:80px 0 68px}
+.tarot-hero{min-height:min(720px,78svh);display:flex;align-items:flex-end;padding-top:120px;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 78% 28%,rgba(194,162,101,.14),transparent 38%),linear-gradient(135deg,#0c0b09 0%,#070707 62%)}
+.tarot-hero__inner{width:min(calc(100% - 48px),var(--max));margin:0 auto;padding:100px 0 64px}
 .tarot-hero .eyebrow{color:#bda97f}
-.tarot-hero h1{max-width:9ch;margin:.2em 0 .22em;font:500 clamp(72px,11vw,154px)/.82 var(--serif);letter-spacing:-.055em}
-.tarot-hero__lead{max-width:650px;margin:0;color:#bbb2a6;font-size:clamp(17px,1.6vw,21px);line-height:1.65}
+.tarot-hero h1{max-width:12ch;margin:.32em 0 .28em;font:500 clamp(48px,6.4vw,88px)/.96 var(--serif);letter-spacing:-.04em;text-wrap:balance}
+.tarot-hero__lead{max-width:560px;margin:0;color:#bbb2a6;font-size:clamp(16px,1.4vw,19px);line-height:1.6}
+.tarot-hero .detail-actions{margin-top:24px}
+.tarot-hero .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:14px 20px;text-align:center;line-height:1.25}
 .tarot-offer{padding:clamp(85px,10vw,145px) 0}
 .tarot-offer__grid{display:block}
 .tarot-offer__title small{display:block;margin-bottom:18px;color:#9e8b67;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
@@ -31,24 +33,47 @@
 .tarot-footer{padding:50px 0 64px;border-top:1px solid var(--line)}
 .tarot-footer .shell{display:flex;justify-content:space-between;gap:24px}
 @media(max-width:760px){
-  .tarot-hero{min-height:76svh}
-  .tarot-hero h1{font-size:clamp(60px,18vw,86px)}
-  .tarot-offer__title h2{white-space:normal}
-  .tarot-offer__body{grid-template-columns:1fr 1fr;gap:30px 42px}
+  .tarot-hero{min-height: min(680px,78svh);padding-top:100px}
+  .tarot-hero__inner{width:calc(100% - 32px);padding:74px 0 42px}
+  .tarot-hero h1{font-size:clamp(42px,9.5vw,64px);line-height:.98;max-width:12ch;letter-spacing:-.035em}
+  .tarot-hero__lead{font-size:16px;line-height:1.55;max-width:36ch}
+  .tarot-hero .detail-actions{margin-top:22px}
+  .tarot-hero .btn{width:100%;max-width:360px;min-height:52px}
+  .tarot-offer{padding:76px 0}
+  .tarot-offer__title h2{white-space:normal;font-size:clamp(38px,8.5vw,58px);line-height:.98;max-width:14ch}
+  .tarot-offer__body{grid-template-columns:1fr 1fr;gap:24px;margin-top:30px;padding-top:24px}
+  .tarot-actions{gap:12px}
+  .tarot-buy{width:100%;min-height:50px;padding:14px}
+  .tarot-actions>.text-link{min-height:44px;display:inline-flex;align-items:center}
   .tarot-rule{padding-left:0;border-left:0}
   .tarot-footer .shell{flex-direction:column}
 }
-@media(max-width:560px){.tarot-offer__body{grid-template-columns:1fr;margin-top:34px;padding-top:24px}}
+@media(max-width:560px){
+  .tarot-offer__body{grid-template-columns:1fr;margin-top:28px;padding-top:22px}
+  .tarot-price{font-size:48px}
+  .tarot-description,.tarot-rule{max-width:52ch}
+}
+@media(max-width:380px){
+  .tarot-hero__inner{width:calc(100% - 28px)}
+  .tarot-hero h1{font-size:40px}
+  .tarot-hero .btn{font-size:10px;padding-inline:12px}
+}
+
+</style>
+
+<style>
+/* MASTER COPY 2026-10-26 */
+.tarot-hero__lead{max-width:760px}.tarot-hero h1{max-width:13ch;font-size:clamp(44px,7.8vw,96px);line-height:.96;text-wrap:balance}.tarot-points{margin:20px 0 0;padding-left:20px;color:#c4bcb0;font-size:14px;line-height:1.75}.tarot-points li+li{margin-top:5px}.tarot-slot-note{max-width:320px;margin:0;color:#aaa299;font-size:11px;line-height:1.5}@media(max-width:760px){.tarot-hero h1{font-size:clamp(40px,9.2vw,62px);line-height:.98;max-width:12ch}.tarot-hero__inner{width:calc(100% - 32px)}.tarot-hero .detail-actions .btn{width:100%;max-width:360px;min-height:52px;display:flex;align-items:center;justify-content:center;text-align:center}.tarot-actions{align-items:stretch;gap:12px}.tarot-actions>.tarot-buy,.tarot-actions>.text-link{display:inline-flex;justify-content:center;align-items:center;min-height:48px}}@media(max-width:380px){.tarot-hero h1{font-size:39px}}
 </style>
 </head>
 <body class="tarot-page">
 <header class="site-header">
   <a class="brand" href="../../">MAISON JF®</a>
-  <nav id="main-navigation" aria-label="Principal">
+  <nav id="main-navigation" aria-label="Navegação principal">
     <a href="../../farol">O Farol</a>
-    <a href="../../teste/">Volta Para Casa</a>
-    <a href="../../produtos/">Produtos</a>
-    <a href="../">Serviços</a>
+    <a href="../../produtos/#fisicos">Produtos</a>
+    <a href="./">Cabeça · Tarot</a>
+    <a href="../../contacto/?interesse=outras-opcoes">Contacto</a>
   </nav>
   <button class="maison-menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" aria-label="Abrir menu"><span aria-hidden="true"></span></button>
 </header>
@@ -56,26 +81,29 @@
 <main>
   <section class="tarot-hero">
     <div class="tarot-hero__inner">
-      <p class="eyebrow">MAISON JF® · TAROT</p>
-      <h1>Há uma pergunta que continua a voltar.</h1>
-      <p class="tarot-hero__lead">Olha para ela de outro ângulo. Sem promessas. Sem certezas fabricadas. Uma consulta, uma pergunta central e espaço para aquilo que ainda não estás a conseguir ver.</p>
+      <p class="eyebrow">CABEÇA · CONSULTA DE TAROT</p>
+      <h1>Tens a pergunta na ponta da língua há meses. Sabes bem qual é.</h1>
+      <p class="tarot-hero__lead">Isto não é adivinhação de revista cor-de-rosa para te fazer sentir bem ou dizer que o universo vai resolver os teus problemas. É uma leitura direta, fria e sem filtros sobre os teus padrões, os teus bloqueios e as escolhas cegas que continuas a fazer.</p>
+      <div class="detail-actions"><a href="#consulta" class="btn btn--primary">AGENDAR CONSULTA INDIVIDUAL · 35 € →</a></div>
     </div>
   </section>
 
-  <section class="tarot-offer">
+  <section class="tarot-offer" id="consulta">
     <div class="tarot-offer__grid shell">
       <div class="tarot-offer__title">
         <small>Consulta de Tarot</small>
-        <h2>Uma escolha. Sem ruído.</h2>
+        <h2>Uma leitura. Outra perspetiva.</h2>
       </div>
       <div class="tarot-offer__body">
         <div class="tarot-price">35 €</div>
         <div class="tarot-actions">
-          <button class="tarot-buy" type="button" data-buy-service="tarot">Marcar consulta →</button>
+          <button class="tarot-buy" type="button" data-buy-service="tarot">Agendar consulta individual · 35 € →</button>
           <a class="text-link" target="_blank" rel="noopener noreferrer" href="https://wa.me/351923318289?text=Ol%C3%A1%2C%20Jo%C3%A3o.%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Consulta%20de%20Tarot.">Tenho uma dúvida</a>
         </div>
+<p class="tarot-slot-note">Vagas semanais limitadas para garantir foco absoluto em cada leitura.</p>
         <p id="checkout-status" class="tarot-status" aria-live="polite"></p>
-        <p class="tarot-description">Uma consulta para trazer contexto à tua pergunta, organizar o que está misturado e abrir outras formas de olhar para a situação.</p>
+        <p class="tarot-description">Perguntas diretas. Recebes as respostas. O que fazes com elas? É contigo.</p>
+<ul class="tarot-points"><li>Sem adivinhos de feira.</li><li>Sem previsões vagas.</li><li>Perguntas diretas. Recebes as respostas. O que fazes com elas? É contigo.</li></ul>
         <p class="tarot-rule">Uso o Tarot como ferramenta de reflexão e orientação. Não decide por ti, não garante acontecimentos futuros e não substitui cuidados de saúde mental ou acompanhamento clínico quando necessários.</p>
       </div>
     </div>

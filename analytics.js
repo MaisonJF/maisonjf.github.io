@@ -707,37 +707,72 @@
     initMaisonTitleFit();
     normalizeInternalLinks();
 
-    // Maison mobile navigation: progressive enhancement, no page-specific markup required.
+    // MAISON JF® global navigation: locale-aware and consistent on desktop/mobile.
     const header = document.querySelector('.site-header');
-    if (header && !header.querySelector('.maison-menu-toggle')) {
+    if (header) {
       const nav = header.querySelector('nav');
+      const path = window.location.pathname || '/';
+      const prefix = path === '/en' || path.startsWith('/en/') ? '/en'
+        : path === '/es' || path.startsWith('/es/') ? '/es'
+        : path === '/pt-br' || path.startsWith('/pt-br/') ? '/pt-br' : '';
+      const locale = prefix === '/en' ? 'en'
+        : prefix === '/es' ? 'es'
+        : prefix === '/pt-br' ? 'pt-BR'
+        : (document.documentElement.lang || 'pt-PT');
+      const navLabels = locale === 'en'
+        ? ['The Lighthouse', 'Products', 'Mind · Tarot', 'Contact']
+        : locale === 'es'
+          ? ['El Faro', 'Productos', 'Mente · Tarot', 'Contacto']
+          : String(locale).toLowerCase() === 'pt-br'
+            ? ['O Farol', 'Produtos', 'Mente · Tarot', 'Contato']
+            : ['O Farol', 'Produtos', 'Cabeça · Tarot', 'Contacto'];
+      const localPath = target => prefix + target;
       if (nav) {
-        const toggle = document.createElement('button');
+        nav.id = 'main-navigation';
+        nav.setAttribute('aria-label', locale === 'en' ? 'Main navigation' : locale === 'es' ? 'Navegación principal' : 'Navegação principal');
+        nav.innerHTML = [
+          '<a href="' + localPath('/farol') + '">' + navLabels[0] + '</a>',
+          '<a href="' + localPath('/produtos/#fisicos') + '">' + navLabels[1] + '</a>',
+          '<a href="' + localPath('/servicos/tarot/') + '">' + navLabels[2] + '</a>',
+          '<a href="' + localPath('/contacto/?interesse=outras-opcoes') + '">' + navLabels[3] + '</a>'
+        ].join('');
+      }
+      let toggle = header.querySelector('.maison-menu-toggle');
+      if (!toggle && nav) {
+        toggle = document.createElement('button');
         toggle.type = 'button';
         toggle.className = 'maison-menu-toggle';
-        toggle.setAttribute('aria-label', 'Abrir menu');
+        toggle.setAttribute('aria-label', locale === 'en' ? 'Open menu' : locale === 'es' ? 'Abrir menú' : 'Abrir menu');
         toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-controls', 'main-navigation');
         toggle.innerHTML = '<span aria-hidden="true"></span>';
         header.insertBefore(toggle, nav);
-
-        const closeMenu = () => {
-          header.classList.remove('site-header--menu-open');
-          toggle.setAttribute('aria-expanded', 'false');
-          toggle.setAttribute('aria-label', 'Abrir menu');
-        };
         toggle.addEventListener('click', () => {
           const open = header.classList.toggle('site-header--menu-open');
           toggle.setAttribute('aria-expanded', String(open));
-          toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+          toggle.setAttribute('aria-label', open ? (locale === 'en' ? 'Close menu' : locale === 'es' ? 'Cerrar menú' : 'Fechar menu') : (locale === 'en' ? 'Open menu' : locale === 'es' ? 'Abrir menú' : 'Abrir menu'));
         });
-        nav.addEventListener('click', event => {
-          if (event.target.closest('a')) closeMenu();
-        });
-        document.addEventListener('keydown', event => {
-          if (event.key === 'Escape') closeMenu();
-        });
+      } else if (toggle) {
+        toggle.setAttribute('aria-controls', 'main-navigation');
       }
+      const closeMenu = () => {
+        header.classList.remove('site-header--menu-open');
+        if (toggle) {
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', locale === 'en' ? 'Open menu' : locale === 'es' ? 'Abrir menú' : 'Abrir menu');
+        }
+      };
+      if (nav) nav.addEventListener('click', event => {
+        if (event.target.closest('a')) closeMenu();
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeMenu();
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 700) closeMenu();
+      }, { passive: true });
     }
+
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => mutation.addedNodes.forEach(node => {
         if (node.nodeType === 1) {
