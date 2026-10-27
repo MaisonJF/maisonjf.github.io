@@ -13,17 +13,17 @@ const PILLARS = [
 ];
 
 const CORE_LINKS = {
-  'scent-product-formulation': ['suppliers-production', 'human-needs-buying-motives', 'portugal-market-opportunity', 'growth-innovation-safety-learning'],
-  'suppliers-production': ['scent-product-formulation', 'portugal-market-opportunity', 'growth-innovation-safety-learning'],
-  'portugal-market-opportunity': ['human-needs-buying-motives', 'customer-search-language', 'supplier-intelligence', 'market-gaps-competitor-weaknesses'],
-  'luxury-brand-intelligence': ['scent-product-formulation', 'maison-philosophy', 'visual-sensory-design', 'portugal-market-opportunity'],
+  'scent-product-formulation': ['fragrance-suppliers', 'human-needs-buying-motivations', 'portugal-market-white-space', 'product-safety-regulatory'],
+  'suppliers-production': ['fragrance-formulation-lab', 'portugal-market-white-space', 'procurement-economics', 'supplier-reliability'],
+  'portugal-market-opportunity': ['human-needs-buying-motivations', 'customer-search-language', 'supplier-intelligence', 'market-gaps-competitor-weaknesses'],
+  'luxury-brand-intelligence': ['fragrance-formulation-lab', 'maison-philosophy', 'visual-sensory-design', 'portugal-market-white-space'],
   'symbolic-systems-audience-entry': ['ebooks-themes', 'digital-game-concepts', 'human-needs-buying-motivations', 'creator-intelligence'],
   'ebooks-interactive-publishing': ['interactive-book-games', 'digital-game-concepts', 'reader-demand', 'story-worlds-spin-offs'],
   'digital-games-experiences': ['interactive-book-games', 'human-needs-buying-motivations', 'copywriting-conversion', 'story-worlds-spin-offs'],
-  'human-needs-buying-motives': ['scent-product-formulation', 'digital-game-concepts', 'customer-search-language', 'copywriting-conversion'],
+  'human-needs-buying-motives': ['fragrance-formulation-lab', 'digital-game-concepts', 'customer-search-language', 'copywriting-conversion'],
   'maison-philosophy-conversion': ['brand-positioning', 'human-needs-buying-motivations', 'customer-research', 'failed-ideas-negative-results'],
-  'creators-partnerships-distribution': ['portugal-market-opportunity', 'creator-intelligence', 'community-building', 'retail-distribution'],
-  'growth-innovation-safety-learning': ['portugal-market-opportunity', 'supplier-intelligence', 'product-safety-regulatory', 'failed-ideas-negative-results', 'unexplored-territories']
+  'creators-partnerships-distribution': ['portugal-market-white-space', 'creator-intelligence', 'community-building', 'retail-distribution'],
+  'growth-innovation-safety-learning': ['portugal-market-white-space', 'supplier-intelligence', 'product-safety-regulatory', 'failed-ideas-negative-results', 'unexplored-territories']
 };
 
 function makeOcean(key, name, pillar, mission, focus = [], connections = []) {
@@ -223,6 +223,11 @@ const OCEANS = [
   makeOcean('unexplored-territories', 'Unexplored Territories', 'growth-innovation-safety-learning', 'Procurar perguntas, necessidades e territórios que não encaixam nos Oceans existentes e propor novos Oceans quando merecido.', ['lacunas de cobertura', 'perguntas sem dono', 'novos territórios', 'propostas de Ocean com evidência']),
   makeOcean('product-safety-regulatory', 'Product Safety & Regulatory Intelligence', 'growth-innovation-safety-learning', 'Identificar requisitos legais, documentação e lacunas de segurança por categoria de produto, encaminhando validações para responsáveis competentes.', ['cosméticos e produtos aromáticos', 'rotulagem e documentação', 'restrições de uso', 'validação por responsável competente'])
 ];
+
+const FOUNDATIONAL_KEYS = new Set(OCEANS.map(ocean => ocean.ocean_key));
+for (const ocean of OCEANS) {
+  ocean.connections = [...new Set((ocean.connections || []).filter(key => key !== ocean.ocean_key && FOUNDATIONAL_KEYS.has(key)))];
+}
 
 const KEY_RE = /^[a-z0-9][a-z0-9._:-]{1,159}$/;
 const PILLAR_BY_KEY = new Map(PILLARS.map(p => [p.key, p]));
