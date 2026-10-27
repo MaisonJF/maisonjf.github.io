@@ -96,7 +96,7 @@ export async function ingestCandidateInbox(env,raw){
   }));
   const candidateId=idFromFingerprint(fp);
   const existing=await env.GROWTH_DB.prepare(
-    'SELECT candidate_id FROM maison_candidate_inbox WHERE candidate_type=?1 AND semantic_fingerprint=?2 LIMIT 1'
+    'SELECT candidate_id FROM maison_candidate_inbox_v2 WHERE candidate_type=?1 AND semantic_fingerprint=?2 LIMIT 1'
   ).bind(type,fp).first();
   if(existing){
     return {
@@ -107,7 +107,7 @@ export async function ingestCandidateInbox(env,raw){
   }
 
   await env.GROWTH_DB.prepare(`
-    INSERT INTO maison_candidate_inbox
+    INSERT INTO maison_candidate_inbox_v2
       (candidate_id,candidate_type,source_ocean_id,source_observation_id,provider_id,model_id,
        territory,title,body,rationale,payload_json,evidence_refs_json,related_assets_json,
        novelty_score,maison_fit_score,feasibility_score,demand_score,commercial_score,
@@ -148,7 +148,7 @@ export async function listCandidateInbox(env,{limit=50,type=null,decision='pendi
            payload_json,evidence_refs_json,related_assets_json,
            novelty_score,maison_fit_score,feasibility_score,demand_score,commercial_score,reuse_existing_score,
            created_at,latest_decision,latest_decision_at
-      FROM maison_candidate_review_queue
+      FROM maison_candidate_review_queue_v2
       ${where}
      ORDER BY created_at DESC
      LIMIT ${safeLimit}
@@ -175,7 +175,7 @@ export async function decideCandidateInbox(env,raw){
   if(EMAIL_RE.test(reason)||PHONE_RE.test(reason))throw new Error('candidate_pii_detected');
   const actor=cleanText(raw.actor||'human','actor',1,120);
   const exists=await env.GROWTH_DB.prepare(
-    'SELECT candidate_id,candidate_type,title,body,payload_json FROM maison_candidate_inbox WHERE candidate_id=?1 LIMIT 1'
+    'SELECT candidate_id,candidate_type,title,body,payload_json FROM maison_candidate_inbox_v2 WHERE candidate_id=?1 LIMIT 1'
   ).bind(candidateId).first();
   if(!exists)throw new Error('candidate_not_found');
   let proposedOcean=null;
@@ -196,7 +196,7 @@ export async function decideCandidateInbox(env,raw){
   }
   const decisionId='mcd_'+crypto.randomUUID();
   const statements=[env.GROWTH_DB.prepare(`
-    INSERT INTO maison_candidate_decisions(decision_id,candidate_id,decision,reason,actor)
+    INSERT INTO maison_candidate_decisions_v2(decision_id,candidate_id,decision,reason,actor)
     VALUES(?1,?2,?3,?4,?5)
   `).bind(decisionId,candidateId,decision,reason,actor)];
   if(proposedOcean&&!proposedOcean.already_registered){
