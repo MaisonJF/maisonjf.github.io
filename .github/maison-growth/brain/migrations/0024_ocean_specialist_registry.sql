@@ -67,3 +67,60 @@ CREATE INDEX IF NOT EXISTS idx_maison_candidate_inbox_v2_ocean ON maison_candida
 CREATE INDEX IF NOT EXISTS idx_maison_candidate_inbox_v2_provider ON maison_candidate_inbox_v2(provider_id,model_id,created_at DESC);
 
 
+-- Backfill the expanded queue and decisions. INSERT OR IGNORE keeps this safe
+-- when the deployment workflow reapplies the migration on later deploys.
+INSERT OR IGNORE INTO maison_candidate_inbox_v2(
+  candidate_id,candidate_type,source_ocean_id,source_observation_id,provider_id,model_id,
+  territory,title,body,rationale,payload_json,evidence_refs_json,related_assets_json,
+  novelty_score,maison_fit_score,feasibility_score,demand_score,commercial_score,
+  reuse_existing_score,semantic_fingerprint,status,lifecycle_state,rotation_state,
+  human_review_required,automatic_activation,public_side_effects,created_at
+)
+SELECT candidate_id,candidate_type,source_ocean_id,source_observation_id,provider_id,model_id,
+  territory,title,body,rationale,payload_json,evidence_refs_json,related_assets_json,
+  novelty_score,maison_fit_score,feasibility_score,demand_score,commercial_score,
+  reuse_existing_score,semantic_fingerprint,status,lifecycle_state,rotation_state,
+  human_review_required,automatic_activation,public_side_effects,created_at
+FROM maison_candidate_inbox;
+
+CREATE TABLE IF NOT EXISTS maison_candidate_decisions_v2 (
+  decision_id TEXT PRIMARY KEY CHECK(length(decision_id)=40 AND substr(decision_id,1,4)='mcd_'),
+  candidate_id TEXT NOT NULL REFERENCES maison_candidate_inbox_v2(candidate_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  decision TEXT NOT NULL CHECK(decision IN ('approve','reject','archive','defer','develop')),
+  reason TEXT NOT NULL DEFAULT '' CHECK(length(reason)<=2000),
+  actor TEXT NOT NULL DEFAULT 'human' CHECK(length(trim(actor)) BETWEEN 1 AND 120),
+  created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
+);
+INSERT OR IGNORE INTO maison_candidate_decisions_v2(decision_id,candidate_id,decision,reason,actor,created_at)
+SELECT d.decision_id,d.candidate_id,d.decision,d.reason,d.actor,d.created_at
+FROM maison_candidate_decisions d
+JOIN maison_candidate_inbox_v2 c ON c.candidate_id=d.candidate_id;
+CREATE INDEX IF NOT EXISTS idx_maison_candidate_decisions_v2_candidate
+  ON maison_candidate_decisions_v2(candidate_id,created_at DESC);
+
+CREATE VIEW IF NOT EXISTS maison_candidate_review_queue_v2 AS
+SELECT c.*,
+  (SELECT d.decision FROM maison_candidate_decisions_v2 d
+   WHERE d.candidate_id=c.candidate_id
+   ORDER BY d.created_at DESC,d.decision_id DESC LIMIT 1) AS latest_decision,
+  (SELECT d.created_at FROM maison_candidate_decisions_v2 d
+   WHERE d.candidate_id=c.candidate_id
+   ORDER BY d.created_at DESC,d.decision_id DESC LIMIT 1) AS latest_decision_at
+FROM maison_candidate_inbox_v2 c;
+
+CREATE TRIGGER IF NOT EXISTS trg_maison_candidate_inbox_v2_no_update
+BEFORE UPDATE ON maison_candidate_inbox_v2
+BEGIN SELECT RAISE(ABORT,'Candidate proposals are immutable; append a decision.'); END;
+CREATE TRIGGER IF NOT EXISTS trg_maison_candidate_inbox_v2_no_delete
+BEFORE DELETE ON maison_candidate_inbox_v2
+BEGIN SELECT RAISE(ABORT,'Candidate proposals are immutable.'); END;
+CREATE TRIGGER IF NOT EXISTS trg_maison_candidate_decisions_v2_no_update
+BEFORE UPDATE ON maison_candidate_decisions_v2
+BEGIN SELECT RAISE(ABORT,'Candidate decisions are append-only.'); END;
+CREATE TRIGGER IF NOT EXISTS trg_maison_candidate_decisions_v2_no_delete
+BEFORE DELETE ON maison_candidate_decisions_v2
+BEGIN SELECT RAISE(ABORT,'Candidate decisions are append-only.'); END;
+
+INSERT INTO schema_state(schema_key,schema_value)
+VALUES('maison_candidate_inbox_schema_version','CANDIDATE.2')
+ON CONFLICT(schema_key) DO UPDATE SET schema_value='CANDIDATE.2';
