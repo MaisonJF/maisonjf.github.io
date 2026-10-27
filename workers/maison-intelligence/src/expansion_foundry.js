@@ -121,7 +121,7 @@ export function buildExpansionPrompt({spec,context}={}){
     '',
     'Devolve APENAS JSON válido com esta forma de topo: {"candidates":[]}. Sem Markdown.',
     `Devolve entre ${minCandidates} e ${candidateLimit} candidatos distintos. Cada candidato usa: candidate_type, title, body, rationale, territory, source_ocean_id, related_ocean_keys, related_assets, evidence_refs, novelty_score, maison_fit_score, feasibility_score, demand_score, commercial_score, reuse_existing_score, payload.`,
-    'candidate_type permitido: question, oracle_block, test, farol_path, reel, post, story, carousel, video_script, physical_product, digital_product, bundle, service, experience, ebook, campaign, b2b, seasonal_offer, experiment, ocean_proposal.',
+    'candidate_type permitido: question, oracle_block, test, farol_path, reel, post, story, carousel, video_script, physical_product, digital_product, bundle, service, experience, ebook, campaign, b2b, seasonal_offer, experiment, game_concept, interactive_book_game, game_expansion, scent_formula, supplier_opportunity, market_opportunity, brand_intelligence, creator_opportunity, ocean_proposal, content_series, digital_experience, research_brief, aroma_test.',
     'Os scores são inteiros 0-100 e são hipóteses, não factos.',
     'Para reel/post/story/carousel/video_script, payload pode incluir hook, angle, objective, CTA, platform e reuse_from.',
     'Para produtos/bundles/serviços/experiências, payload pode incluir components, estimated_effort, price_hypothesis_range_eur, why_now e validation_test. O preço é só hipótese.',
