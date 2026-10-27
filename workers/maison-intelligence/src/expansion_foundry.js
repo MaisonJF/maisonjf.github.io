@@ -162,10 +162,12 @@ function relatedOceanKeys(item,context){
 
 async function storeCandidate(env,{item,spec,context}){
   const type=clean(item?.candidate_type||item?.content_type,80);
-  if(!CANDIDATE_TYPES.has(type))throw new Error('foundry_candidate_type_invalid');
+  const isOceanProposal=type==='ocean_proposal';
+  if(!CANDIDATE_TYPES.has(type)&&!isOceanProposal)throw new Error('foundry_candidate_type_invalid');
   const rawPayload=item?.payload&&typeof item.payload==='object'&&!Array.isArray(item.payload)?item.payload:{};
-  const payload=type==='ocean_proposal'
+  const payload=isOceanProposal
     ? (()=>{const p=validateOceanProposal(rawPayload,context?.ocean_catalog?.length?context.ocean_catalog:OCEAN_CATALOG);return {
+        proposal_kind:'ocean_proposal',
         proposed_ocean_key:p.ocean_key,display_name:p.display_name,pillar_key:p.pillar_key,mission:p.mission,
         focus:p.focus,connections:p.connections,
         distinct_rationale:clean(rawPayload.distinct_rationale||item?.rationale,1000),
@@ -216,7 +218,10 @@ async function storeCandidate(env,{item,spec,context}){
   }
 
   return await ingestCandidateInbox(env,{
-    candidate_type:type,
+    // The current D1 CHECK constraint permits only established candidate types.
+    // Store Ocean proposals as experiments with proposal_kind metadata until the
+    // schema deliberately evolves; human approval is still required to register them.
+    candidate_type:isOceanProposal?'experiment':type,
     source_ocean_id:ocean,
     provider_id:spec.providerId,
     model_id:spec.modelId,
