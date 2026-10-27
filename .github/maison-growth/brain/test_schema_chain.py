@@ -163,5 +163,59 @@ class GrowthSchemaChainTests(unittest.TestCase):
         self.assertEqual(row[2],"[]")
 
 
+    def test_expanded_candidate_inbox_preserves_legacy_review_and_accepts_new_types(self):
+        con=sqlite3.connect(":memory:")
+        con.execute("PRAGMA foreign_keys=ON")
+        for path in MIGRATIONS[:-1]:
+            con.executescript(path.read_text(encoding="utf-8"))
+
+        legacy_id="mci_"+"a"*36
+        decision_id="mcd_"+"b"*36
+        con.execute("""INSERT INTO maison_candidate_inbox(
+          candidate_id,candidate_type,source_ocean_id,provider_id,model_id,territory,
+          title,body,rationale,semantic_fingerprint
+        ) VALUES(?,?,?,?,?,?,?,?,?,?)""",(
+          legacy_id,"experiment","legacy-ocean","test","test-model","legacy",
+          "Legacy candidate","A candidate from before the expanded registry.",
+          "Used to verify migration preservation.","a"*64
+        ))
+        con.execute("""INSERT INTO maison_candidate_decisions(
+          decision_id,candidate_id,decision,reason,actor
+        ) VALUES(?,?,?,?,?)""",(
+          decision_id,legacy_id,"develop","Keep for later development.","human"
+        ))
+
+        migration=MIGRATIONS[-1].read_text(encoding="utf-8")
+        con.executescript(migration)
+        # The migration is deliberately repeatable because the deploy workflow reapplies it.
+        con.executescript(migration)
+
+        migrated=con.execute("""SELECT candidate_type,title FROM maison_candidate_inbox_v2
+                                WHERE candidate_id=?""",(legacy_id,)).fetchone()
+        self.assertEqual(migrated,("experiment","Legacy candidate"))
+        decision=con.execute("""SELECT decision,reason FROM maison_candidate_decisions_v2
+                                WHERE decision_id=?""",(decision_id,)).fetchone()
+        self.assertEqual(decision,("develop","Keep for later development."))
+
+        for index,candidate_type in enumerate((
+            "game_concept","interactive_book_game","game_expansion","scent_formula",
+            "supplier_opportunity","market_opportunity","brand_intelligence",
+            "creator_opportunity","ocean_proposal","content_series","digital_experience",
+            "research_brief","aroma_test"
+        ),start=1):
+            con.execute("""INSERT INTO maison_candidate_inbox_v2(
+              candidate_id,candidate_type,source_ocean_id,provider_id,territory,
+              title,body,rationale,semantic_fingerprint
+            ) VALUES(?,?,?,?,?,?,?,?,?)""",(
+              "mci_"+str(index).zfill(36),candidate_type,"growth-ocean","test",
+              "expansion",candidate_type,"Candidate type schema test.",
+              "Explicit schema acceptance test.",format(index,"064x")
+            ))
+
+        count=con.execute("SELECT COUNT(*) FROM maison_candidate_inbox_v2").fetchone()[0]
+        self.assertEqual(count,14)
+        self.assertEqual(con.execute("PRAGMA foreign_key_check").fetchall(),[])
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
