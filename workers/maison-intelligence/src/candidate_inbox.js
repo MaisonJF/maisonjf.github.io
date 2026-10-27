@@ -7,7 +7,11 @@ export const CANDIDATE_TYPES=new Set([
   'question','oracle_block','test','farol_path',
   'reel','post','story','carousel','video_script',
   'physical_product','digital_product','bundle','service','experience',
-  'ebook','campaign','b2b','seasonal_offer','experiment'
+  'ebook','campaign','b2b','seasonal_offer','experiment',
+  'game_concept','interactive_book_game','game_expansion','scent_formula',
+  'supplier_opportunity','market_opportunity','brand_intelligence',
+  'creator_opportunity','ocean_proposal','content_series','digital_experience',
+  'research_brief','aroma_test'
 ]);
 
 const AUTHORITY_KEYS=new Set([
@@ -175,10 +179,10 @@ export async function decideCandidateInbox(env,raw){
   ).bind(candidateId).first();
   if(!exists)throw new Error('candidate_not_found');
   let proposedOcean=null;
-  if(decision==='approve'&&exists.candidate_type==='experiment'){
+  if(decision==='approve'&&exists.candidate_type==='ocean_proposal'){
     let payload;
     try{payload=JSON.parse(exists.payload_json||'{}');}catch{throw new Error('invalid_ocean_proposal_payload');}
-    if(payload.proposal_kind==='ocean_proposal'){
+    {
       const prior=await env.GROWTH_DB.prepare(
         'SELECT ocean_key FROM ocean_specialist_registry WHERE source_candidate_id=?1 LIMIT 1'
       ).bind(candidateId).first();
