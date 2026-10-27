@@ -1,4 +1,5 @@
 import { sha256Hex, uniqueCanonicalUrls } from './core.js';
+import { loadActiveOceanRegistry, validateOceanProposal } from './ocean_catalog.js';
 
 const CANDIDATE_DECISIONS=new Set(['approve','reject','archive','defer','develop']);
 
@@ -184,7 +185,6 @@ export async function decideCandidateInbox(env,raw){
       if(prior){
         proposedOcean={ocean_key:String(prior.ocean_key),already_registered:true};
       }else{
-        const {loadActiveOceanRegistry,validateOceanProposal}=await import('./ocean_catalog.js');
         const activeRegistry=await loadActiveOceanRegistry(env);
         proposedOcean={...validateOceanProposal(payload,activeRegistry),already_registered:false};
       }
