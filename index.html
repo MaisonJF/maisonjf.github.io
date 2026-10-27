@@ -61,7 +61,7 @@
 .home-digital__head{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(220px,.75fr);gap:clamp(24px,4vw,52px);align-items:end}
 .home-digital__copy h2{font:400 clamp(30px,3.7vw,48px)/.98 var(--serif);letter-spacing:-.025em;margin:.2em 0 .12em;max-width:22ch}
 .home-digital__intro{max-width:440px;color:#aaa39a;line-height:1.6;font-size:14px;margin:0 0 5px}
-.home-digital__links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--line);margin-top:27px}
+.home-digital__links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line);margin-top:27px}
 .home-digital__link{position:relative;min-width:0;min-height:156px;padding:18px 16px 16px 0;display:flex;flex-direction:column;align-items:flex-start;gap:8px;border:0;border-right:1px solid var(--line);text-decoration:none;background:none}
 .home-digital__link:not(:first-child){padding-left:16px}
 .home-digital__link:last-child{border-right:0;padding-right:0}
@@ -78,7 +78,7 @@
   .home-digital__links{grid-template-columns:repeat(2,minmax(0,1fr))}
   .home-digital__link{padding:16px 16px 14px 0;border-bottom:1px solid var(--line)}
   .home-digital__link:nth-child(2n){padding-left:16px;padding-right:0;border-right:0}
-  .home-digital__link:nth-last-child(-n+2){border-bottom:0}
+  .home-digital__link:last-child{border-bottom:0}
 }
 @media(max-width:700px){
   .home-digital{margin:0 auto 48px;padding-top:27px}
@@ -95,6 +95,7 @@
   .home-digital__link span{display:block;font-size:11px;line-height:1.4}
   .home-digital__cta{font-size:8px;letter-spacing:.045em;min-height:36px}
 }
+.home-editions{margin-top:0}.home-editions__action{margin:16px 0 0}.home-editions__action .home-digital__cta{margin-top:0;padding-top:0}
 /* The longer headline wraps deliberately; supporting copy stays readable on mobile. */
 .home-page--final .hero__headline--conversion{max-width:18ch;font:400 clamp(42px,6.6vw,92px)/.94 var(--serif);letter-spacing:-.045em;text-wrap:balance}
 .home-page--final .hero__positioning{max-width:760px;margin:20px 0 0!important;font-size:clamp(14px,1.1vw,16px);line-height:1.55}
@@ -271,14 +272,25 @@
         <p class="eyebrow">FERRAMENTAS DIGITAIS</p>
         <h2 id="home-digital-title">Para aquilo que não te sai da cabeça.</h2>
       </div>
-      <p class="home-digital__intro">Aqui cabem dois lados: ferramentas práticas para mapear padrões, refletir e decidir; e novelas e textos de autor que te prendem a uma história. Testes, Jogo e Oráculo não prometem milagres — dão-te material para pensar e agir.</p>
+      <p class="home-digital__intro">Ferramentas práticas para mapear padrões, refletir e decidir. Testes, Jogo e Oráculo não prometem milagres — dão-te material para pensar e agir.</p>
     </div>
     <nav class="home-digital__links" aria-label="Explora as ferramentas digitais">
       <a class="home-digital__link" href="./teste/"><small>O MAPEAMENTO</small><strong>Volta Para Casa</strong><span>Atenção, apego e afeto. Um teste para veres os padrões que continuas a repetir nas tuas relações.</span><b class="home-digital__cta">INICIAR TESTE →</b></a>
       <a class="home-digital__link" href="./para-de-ignorar/"><small>A PROVOCAÇÃO</small><strong>O Jogo Pára de Ignorar!</strong><span>Versão para 2 e versão para grupos. 28 perguntas diretas para levar a conversa para onde raramente vai.</span><b class="home-digital__cta">VER O JOGO →</b></a>
       <a class="home-digital__link" href="./oraculo/"><small>A PARAGEM</small><strong>Oráculo MAISON JF®</strong><span>Uma leitura simbólica para olhar para a mesma questão de outro ângulo.</span><b class="home-digital__cta">CONSULTAR ORÁCULO →</b></a>
-      <a class="home-digital__link" href="./ebooks/"><small>A LEITURA</small><strong>Novelas &amp; Textos de Autor</strong><span>Histórias que não servem para passar o tempo. Servem para prender-te.</span><b class="home-digital__cta">VER BIBLIOTECA →</b></a>
+      
     </nav>
+  </section>
+
+  <section class="home-digital home-editions shell" id="editions-maison-jf" aria-labelledby="home-editions-title">
+    <div class="home-digital__head">
+      <div class="home-digital__copy">
+        <p class="eyebrow">A BIBLIOTECA · ÉDITIONS MAISON JF®</p>
+        <h2 id="home-editions-title">Histórias que não servem para passar o tempo. Servem para prender-te.</h2>
+      </div>
+      <p class="home-digital__intro">Novelas de autor, ficção literária, espiritualidade e livros de pragmatismo. Sem moralismos, sem finais edulcorados. Apenas boa literatura e confronto direto.</p>
+    </div>
+    <p class="home-editions__action"><a class="home-digital__cta" href="./ebooks/">EXPLORAR AS ÉDITIONS →</a></p>
   </section>
 
   <section class="home-clair shell" aria-labelledby="clair-home-title">
