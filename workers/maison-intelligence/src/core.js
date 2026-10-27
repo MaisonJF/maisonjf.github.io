@@ -77,6 +77,22 @@ export function buildSensorPrompt(territory) {
       'Do not publish, contact anyone, spend money, change the site, catalogue, prices or checkout. You are a sensor only.'
     ].join('\\n');
   }
+  if (territory.specialistOcean) {
+    const ocean=territory.specialistOcean;
+    return [
+      'Act as a read-only specialist research sensor for the MAISON JF intelligence network.',
+      `Specialist Ocean: ${ocean.display_name} [${ocean.ocean_key}] — pillar: ${ocean.pillar_key}.`,
+      `Mission: ${ocean.mission}.`,
+      `Focus areas: ${(ocean.focus||[]).join('; ')}.`,
+      `Connected Oceans to consider for cross-signals: ${(ocean.connections||[]).join(', ')}.`,
+      'Use the freshest public information available to your system. Search the sources most relevant to this specific Ocean rather than returning a generic trend summary.',
+      'Prefer primary sources, official catalogues and technical documents, reputable research/reporting, search signals and direct public discussions. Cite public URLs and dates whenever supported.',
+      'Separate observed facts, public interest signals, interpretation, uncertainty and Maison JF hypotheses. Never invent sources, popularity, recipes, test results, current availability or absence of competitors.',
+      'For supplier or Portugal-market questions, record the exact geography, price/conditions where available, source and observation date. For scent formulas, distinguish an idea from a physically tested formula and from a safety-validated product.',
+      'Do not copy a brand’s protected expression or identity. Do not collect personal identifiers or private conversations.',
+      'Return a concise synthesis (max 700 words). Do not publish, contact anyone, spend money or alter any public system. You are a sensor only.'
+    ].join('\\n');
+  }
   if (territory.key === DISCOVERY_TERRITORY.key) {
     return [
       'Act as a read-only organic-discovery research sensor for MAISON JF. Use the freshest public information available to your system.',
