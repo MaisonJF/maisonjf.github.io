@@ -99,6 +99,52 @@ test('candidate inbox returns parsed private rows',async()=>{
 });
 
 
+class OceanProposalStatement extends Statement {
+  async first() {
+    this.db.reads.push({sql:this.sql,params:this.params});
+    if (this.sql.includes('SELECT candidate_id,candidate_type,title,body,payload_json FROM maison_candidate_inbox')) return this.db.proposal;
+    if (this.sql.includes('SELECT ocean_key FROM ocean_specialist_registry')) return null;
+    return null;
+  }
+}
+
+class OceanProposalDB extends DB {
+  constructor(proposal) { super(); this.proposal=proposal; this.batchCalls=[]; }
+  prepare(sql) { return new OceanProposalStatement(this,sql); }
+  async batch(statements) {
+    this.batchCalls.push(...statements.map(statement=>({sql:statement.sql,params:statement.params})));
+    return Promise.all(statements.map(statement=>statement.run()));
+  }
+}
+
+test('approving an Ocean-proposal experiment opens a specialist Ocean only after human review',async()=>{
+  const payload={
+    proposal_kind:'ocean_proposal',
+    proposed_ocean_key:'seasonal-room-scent-gifting',
+    display_name:'Seasonal Room Scent & Gifting',
+    pillar_key:'scent-product-formulation',
+    mission:'Investigar ocasiões sazonais em que uma experiência aromática possa ser descoberta, oferecida ou combinada com outros produtos.',
+    focus:['datas e ocasiões','aromas de oferta','conjuntos e apresentação'],
+    connections:['home-fragrance','supplier-intelligence','emotional-gifting']
+  };
+  const db=new OceanProposalDB({
+    candidate_id:'mci_demo',candidate_type:'experiment',
+    title:'Proposta de novo Ocean: Seasonal Room Scent & Gifting',
+    body:payload.mission,payload_json:JSON.stringify(payload)
+  });
+  const out=await decideCandidateInbox({GROWTH_DB:db},{
+    candidate_id:'mci_demo',decision:'approve',
+    reason:'Território distinto com âmbito e ligações claros.'
+  });
+  assert.equal(out.ocean_registered,'seasonal-room-scent-gifting');
+  assert.equal(out.ocean_lifecycle_state,'open');
+  assert.equal(out.live,false);
+  assert.equal(out.automatic_activation,false);
+  assert.equal(out.public_side_effects,false);
+  assert.ok(db.batchCalls.some(item=>item.sql.includes('INSERT INTO maison_candidate_decisions')));
+  assert.ok(db.batchCalls.some(item=>item.sql.includes('INSERT INTO ocean_specialist_registry')));
+});
+
 test('human decision is append-only and never makes a candidate live',async()=>{
   const db=new DB();
   db.duplicateRow={candidate_id:'mci_demo'};
