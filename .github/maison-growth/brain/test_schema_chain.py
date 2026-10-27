@@ -62,6 +62,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
         self.assertIn("autonomy_human_queue_current",views)
         self.assertIn("a14_approved_offers_ready_for_planning",views)
         self.assertIn("brain_ocean_memory_feed",views)
+        self.assertIn("maison_candidate_review_queue_v2",views)
 
         tables={
             row[0] for row in con.execute(
@@ -70,6 +71,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
         }
         self.assertEqual(state["maison_ocean_memory_schema_version"],"OCEAN.1")
         self.assertEqual(state["maison_ocean_specialist_registry_schema_version"],"OCEAN.2")
+        self.assertEqual(state["maison_candidate_inbox_schema_version"],"CANDIDATE.2")
 
         for expected in (
             "a14_validation_plans",
@@ -80,6 +82,8 @@ class GrowthSchemaChainTests(unittest.TestCase):
             "ocean_memory_state",
             "ocean_memory_alerts",
             "ocean_specialist_registry",
+            "maison_candidate_inbox_v2",
+            "maison_candidate_decisions_v2",
         ):
             self.assertIn(expected,tables)
 
