@@ -25,6 +25,10 @@ test('Foundry prompt is candidate-only, PT-PT and existing-assets first',()=>{
   assert.match(prompt,/reel/i);
   assert.match(prompt,/physical_product/i);
   assert.match(prompt,/revisão humana/i);
+  assert.match(prompt,/OCEANS ESPECIALIZADOS ACTIVOS/i);
+  assert.match(prompt,/ocean_proposal/i);
+  assert.match(prompt,/related_ocean_keys/i);
+  assert.match(prompt,/não inventes fontes/i);
 });
 
 test('Foundry parser accepts strict candidate envelope',()=>{
