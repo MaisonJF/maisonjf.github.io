@@ -114,7 +114,17 @@ const PDI_GROUP_SEEDS=[
   {slug:'mapa-de-aventuras-locais',label:'Mapa de Aventuras Locais',focus:'inventar pequenas aventuras de baixo custo para descobrir lugares e experiências perto do grupo'},
   {slug:'historia-com-reviravolta',label:'História com Reviravolta',focus:'construir uma história coletiva em que cada pessoa acrescenta uma frase e uma reviravolta'},
   {slug:'o-conselho-de-personagens',label:'O Conselho de Personagens',focus:'pedir conselhos imaginários a personagens fictícias para dilemas triviais e divertidos'},
-  {slug:'noticias-do-futuro',label:'Notícias do Futuro',focus:'inventar manchetes absurdas sobre o grupo daqui a dez anos sem fazer previsões pessoais invasivas'}
+  {slug:'noticias-do-futuro',label:'Notícias do Futuro',focus:'inventar manchetes absurdas sobre o grupo daqui a dez anos sem fazer previsões pessoais invasivas'},
+{slug:'deck-a-ponto-cego',label:'O Ponto Cego',focus:'fachada pessoal, incoerências, ego e pontos cegos em conversas de grupo'},
+  {slug:'deck-b-relacoes-fantasmas',label:'As Relações & Os Fantasmas',focus:'amizade, vínculos, ex-relacionamentos, limites e padrões afetivos em formato de confronto voluntário'},
+  {slug:'deck-c-dinheiro-status-ego',label:'O Dinheiro, o Status & o Ego',focus:'dinheiro, estatuto, ambição, comparação e escolhas financeiras sem exigir divulgação de valores'},
+  {slug:'deck-d-corpo-intimidade',label:'O Corpo & a Intimidade',focus:'imagem corporal, desejo, conforto e limites, com resposta sempre voluntária e sem exigir detalhes íntimos'},
+  {slug:'deck-e-moral-julgamento',label:'A Moral & o Julgamento',focus:'valores, incoerências, responsabilidade, empatia e julgamentos quotidianos'},
+  {slug:'deck-f-trapaca-manipulacao',label:'A Trapaça & a Manipulação',focus:'honestidade, influência, limites, reparação e responsabilidade nos conflitos'},
+  {slug:'deck-g-futuro-apatia',label:'O Futuro & a Apatia',focus:'sonhos adiados, hábitos, coragem, propósito e escolhas futuras'},
+  {slug:'deck-h-infancia-familia',label:'As Feridas da Infância e da Família',focus:'história familiar, padrões aprendidos e memórias sensíveis sem pressão para revelar trauma'},
+  {slug:'deck-i-espelho-grupo',label:'O Espelho do Grupo',focus:'dinâmicas do grupo e feedback respeitoso sem votação humilhante nem ataques pessoais'},
+  {slug:'deck-j-verdade-nua-crua',label:'A Verdade Nua e Crua',focus:'arrependimento, honestidade, solidão, sentido e reflexão final com autonomia para passar'}
 ];
 
 const MAISON_NATIVE_SEEDS=[
