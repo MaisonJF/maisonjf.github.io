@@ -5259,7 +5259,9 @@
         "tarefas inacabadas durante a pausa",
         "permitir-se não produzir",
         "productivity guilt",
-        "guilt when resting"
+        "guilt when resting",
+        "rest guilt",
+        "guilty for resting"
       ],
       "territories": [
         "casa",

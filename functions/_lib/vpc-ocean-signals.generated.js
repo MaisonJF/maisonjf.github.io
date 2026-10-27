@@ -136,7 +136,9 @@ export const VPC_OCEAN_SIGNALS=[
       "tarefas inacabadas durante a pausa",
       "permitir-se não produzir",
       "productivity guilt",
-      "guilt when resting"
+      "guilt when resting",
+      "rest guilt",
+      "guilty for resting"
     ]
   },
   {
@@ -413,4 +415,4 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-10-26";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-10-27";

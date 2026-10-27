@@ -14,14 +14,14 @@
     "publicPublication": false
   },
   "summary": {
-    "exactThemeGroups": 427,
-    "duoQuestionDrafts": 2968,
+    "exactThemeGroups": 429,
+    "duoQuestionDrafts": 2984,
     "groupQuestionDrafts": 672,
-    "questionDrafts": 3640,
+    "questionDrafts": 3656,
     "oracleTerritories": 100,
     "oracleRoleBriefs": 700,
     "ebookConceptSeeds": 12,
-    "questionsRequiringEditorialApproval": 3640,
+    "questionsRequiringEditorialApproval": 3656,
     "oracleBriefsRequiringEditorialApproval": 700,
     "ebookConceptsRequiringHumanReview": 12
   },
@@ -33035,6 +33035,206 @@
       "publiclyAvailable": false
     },
     {
+      "id": "pdi_qdraft_duo_guilty_for_resting_01",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Guilty for resting",
+      "themeKey": "guilty-for-resting",
+      "title": "Guilty for resting · A dois · 01",
+      "stage": "open",
+      "editorialFunction": "abrir",
+      "text": "Quando surge o tema de guilty for resting, o que gostarias que eu percebesse sem teres de repetir?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:guilty-for-resting"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_guilty_for_resting_02",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Guilty for resting",
+      "themeKey": "guilty-for-resting",
+      "title": "Guilty for resting · A dois · 02",
+      "stage": "recognize",
+      "editorialFunction": "reconhecer",
+      "text": "Que gesto concreto poderia tornar o tema de guilty for resting mais leve entre nós?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:guilty-for-resting"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_guilty_for_resting_03",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Guilty for resting",
+      "themeKey": "guilty-for-resting",
+      "title": "Guilty for resting · A dois · 03",
+      "stage": "deepen",
+      "editorialFunction": "clarificar",
+      "text": "O que é fácil interpretar mal quando falamos sobre guilty for resting?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:guilty-for-resting"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_guilty_for_resting_04",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Guilty for resting",
+      "themeKey": "guilty-for-resting",
+      "title": "Guilty for resting · A dois · 04",
+      "stage": "touch",
+      "editorialFunction": "perguntar",
+      "text": "Que pergunta sobre guilty for resting nunca encontrámos o momento certo para fazer?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:guilty-for-resting"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_guilty_for_resting_05",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Guilty for resting",
+      "themeKey": "guilty-for-resting",
+      "title": "Guilty for resting · A dois · 05",
+      "stage": "close",
+      "editorialFunction": "concretizar",
+      "text": "Que exemplo concreto te ajudaria a explicar como vives guilty for resting?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:guilty-for-resting"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_guilty_for_resting_06",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Guilty for resting",
+      "themeKey": "guilty-for-resting",
+      "title": "Guilty for resting · A dois · 06",
+      "stage": "signature",
+      "editorialFunction": "reavaliar",
+      "text": "O que gostarias de preservar e o que já poderia mudar em relação a guilty for resting?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:guilty-for-resting"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_guilty_for_resting_07",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Guilty for resting",
+      "themeKey": "guilty-for-resting",
+      "title": "Guilty for resting · A dois · 07",
+      "stage": "open",
+      "editorialFunction": "aprofundar",
+      "text": "Que parte de guilty for resting preferes explorar devagar, sem pressão para responder já?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:guilty-for-resting"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_guilty_for_resting_08",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Guilty for resting",
+      "themeKey": "guilty-for-resting",
+      "title": "Guilty for resting · A dois · 08",
+      "stage": "recognize",
+      "editorialFunction": "mover",
+      "text": "Qual seria um próximo passo pequeno e realista para conversarmos melhor sobre guilty for resting?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:guilty-for-resting"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
       "id": "pdi_qdraft_duo_habitos_e_mudanca_01",
       "type": "pdi_question_draft",
       "mode": "duo",
@@ -60224,6 +60424,206 @@
       ],
       "sourceSignalRefs": [
         "ocean:cuidar-sem-desaparecer-no-papel-de-cuidador:responsabilidade-partilhada"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_rest_guilt_01",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Rest guilt",
+      "themeKey": "rest-guilt",
+      "title": "Rest guilt · A dois · 01",
+      "stage": "open",
+      "editorialFunction": "abrir",
+      "text": "Quando surge o tema de rest guilt, o que gostarias que eu percebesse sem teres de repetir?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:rest-guilt"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_rest_guilt_02",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Rest guilt",
+      "themeKey": "rest-guilt",
+      "title": "Rest guilt · A dois · 02",
+      "stage": "recognize",
+      "editorialFunction": "reconhecer",
+      "text": "Que gesto concreto poderia tornar o tema de rest guilt mais leve entre nós?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:rest-guilt"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_rest_guilt_03",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Rest guilt",
+      "themeKey": "rest-guilt",
+      "title": "Rest guilt · A dois · 03",
+      "stage": "deepen",
+      "editorialFunction": "clarificar",
+      "text": "O que é fácil interpretar mal quando falamos sobre rest guilt?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:rest-guilt"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_rest_guilt_04",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Rest guilt",
+      "themeKey": "rest-guilt",
+      "title": "Rest guilt · A dois · 04",
+      "stage": "touch",
+      "editorialFunction": "perguntar",
+      "text": "Que pergunta sobre rest guilt nunca encontrámos o momento certo para fazer?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:rest-guilt"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_rest_guilt_05",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Rest guilt",
+      "themeKey": "rest-guilt",
+      "title": "Rest guilt · A dois · 05",
+      "stage": "close",
+      "editorialFunction": "concretizar",
+      "text": "Que exemplo concreto te ajudaria a explicar como vives rest guilt?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:rest-guilt"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_rest_guilt_06",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Rest guilt",
+      "themeKey": "rest-guilt",
+      "title": "Rest guilt · A dois · 06",
+      "stage": "signature",
+      "editorialFunction": "reavaliar",
+      "text": "O que gostarias de preservar e o que já poderia mudar em relação a rest guilt?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:rest-guilt"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_rest_guilt_07",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Rest guilt",
+      "themeKey": "rest-guilt",
+      "title": "Rest guilt · A dois · 07",
+      "stage": "open",
+      "editorialFunction": "aprofundar",
+      "text": "Que parte de rest guilt preferes explorar devagar, sem pressão para responder já?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:rest-guilt"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_rest_guilt_08",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Rest guilt",
+      "themeKey": "rest-guilt",
+      "title": "Rest guilt · A dois · 08",
+      "stage": "recognize",
+      "editorialFunction": "mover",
+      "text": "Qual seria um próximo passo pequeno e realista para conversarmos melhor sobre rest guilt?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido:rest-guilt"
       ],
       "sourceBasis": "internal_theme_catalogue",
       "independentlyVerifiedDemand": false,
