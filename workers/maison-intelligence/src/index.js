@@ -724,11 +724,11 @@ async function enqueueRun(env,scheduledDate,getControl=()=>controlState(env)) {
   if (!control.enabled) return { queued:0,reason:control.reason };
 
   const promptCount=clampInt(env.PROMPTS_PER_RUN,2,1,4);
-  const territories=territoriesForDate(scheduledDate,promptCount);
   const day=utcDay(scheduledDate);
   const activeOceans=await loadActiveOceanRegistry(env);
+  const territories=territoriesForDate(scheduledDate,promptCount,activeOceans);
   const messages=[];
-  for (const territory of territoriesForDate(scheduledDate,promptCount,activeOceans)) {
+  for (const territory of territories) {
     const prompt=buildSensorPrompt(territory);
     const promptFingerprint=await sha256Hex(prompt);
     for (const providerId of providers) {
