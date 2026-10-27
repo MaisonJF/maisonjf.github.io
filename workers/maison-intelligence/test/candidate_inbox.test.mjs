@@ -102,7 +102,7 @@ test('candidate inbox returns parsed private rows',async()=>{
 class OceanProposalStatement extends Statement {
   async first() {
     this.db.reads.push({sql:this.sql,params:this.params});
-    if (this.sql.includes('SELECT candidate_id,candidate_type,title,body,payload_json FROM maison_candidate_inbox')) return this.db.proposal;
+    if (this.sql.includes('SELECT candidate_id,candidate_type,title,body,payload_json FROM maison_candidate_inbox_v2')) return this.db.proposal;
     if (this.sql.includes('SELECT ocean_key FROM ocean_specialist_registry')) return null;
     return null;
   }
@@ -117,7 +117,7 @@ class OceanProposalDB extends DB {
   }
 }
 
-test('approving an Ocean-proposal experiment opens a specialist Ocean only after human review',async()=>{
+test('approving a first-class Ocean proposal opens a specialist Ocean only after human review',async()=>{
   const payload={
     proposal_kind:'ocean_proposal',
     proposed_ocean_key:'seasonal-room-scent-gifting',
@@ -128,7 +128,7 @@ test('approving an Ocean-proposal experiment opens a specialist Ocean only after
     connections:['home-fragrance','supplier-intelligence','emotional-gifting']
   };
   const db=new OceanProposalDB({
-    candidate_id:'mci_demo',candidate_type:'experiment',
+    candidate_id:'mci_demo',candidate_type:'ocean_proposal',
     title:'Proposta de novo Ocean: Seasonal Room Scent & Gifting',
     body:payload.mission,payload_json:JSON.stringify(payload)
   });
