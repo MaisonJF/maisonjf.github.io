@@ -145,6 +145,41 @@ test('approving a first-class Ocean proposal opens a specialist Ocean only after
   assert.ok(db.batchCalls.some(item=>item.sql.includes('INSERT INTO ocean_specialist_registry')));
 });
 
+test('expanded candidate types include games, interactive books, scent, suppliers and new Oceans',async()=>{
+  const types=[
+    'game_concept','interactive_book_game','game_expansion','scent_formula',
+    'supplier_opportunity','market_opportunity','brand_intelligence',
+    'creator_opportunity','ocean_proposal','content_series','digital_experience',
+    'research_brief','aroma_test'
+  ];
+  for(const [index,candidate_type] of types.entries()){
+    const db=new DB();
+    const out=await ingestCandidateInbox({GROWTH_DB:db},{
+      candidate_type,
+      source_ocean_id:'specialist-test',
+      provider_id:'test',
+      territory:'expansion',
+      title:'Candidato '+candidate_type,
+      body:'Candidato privado para revisão humana.',
+      rationale:'O tipo deve ser aceite pela fila expandida.',
+      payload:candidate_type==='ocean_proposal'?{
+        proposal_kind:'ocean_proposal',
+        proposed_ocean_key:'test-ocean-'+index,
+        display_name:'Test Ocean '+index,
+        pillar_key:'scent-product-formulation',
+        mission:'Investigar um território distinto com utilidade clara para a Maison JF.',
+        focus:['tema A','tema B'],
+        connections:[]
+      }:{}
+    });
+    assert.equal(out.candidate_type,candidate_type);
+    assert.equal(out.automatic_activation,false);
+    assert.equal(out.public_side_effects,false);
+    assert.equal(db.writes.length,1);
+    assert.match(db.writes[0].sql,/INSERT INTO maison_candidate_inbox_v2/);
+  }
+});
+
 test('human decision is append-only and never makes a candidate live',async()=>{
   const db=new DB();
   db.duplicateRow={candidate_id:'mci_demo'};
