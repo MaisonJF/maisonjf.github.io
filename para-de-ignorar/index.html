@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>PÁRA DE IGNORAR! · Jogo digital | MAISON JF®</title>
-<meta name="description" content="PÁRA DE IGNORAR! · Jogo digital: 28 perguntas, em modo a dois ou em grupo. Conversas, curiosidade e jogo sem obrigação de responder.">
+<meta name="description" content="PÁRA DE IGNORAR! · Jogo digital: 16 perguntas, em modo a dois ou em grupo. Conversas, curiosidade e jogo sem obrigação de responder.">
 <meta name="robots" content="index,follow,max-snippet:-1">
 <link rel="canonical" href="https://maison-jf.com/para-de-ignorar/">
 <link rel="stylesheet" href="../maison.css?v=20261027-r1">
 <script src="../analytics.js?v=20261027-r1" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"PÁRA DE IGNORAR! · Jogo digital","description":"28 perguntas. Modo a dois ou em grupo. Conversas, curiosidade e jogo sem obrigação de responder.","brand":{"@type":"Brand","name":"MAISON JF®"},"offers":{"@type":"Offer","priceCurrency":"EUR","price":"5.00","availability":"https://schema.org/InStock","url":"https://maison-jf.com/para-de-ignorar/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"PÁRA DE IGNORAR! · Jogo digital","description":"16 perguntas. Modo a dois ou em grupo. Conversas, curiosidade e jogo sem obrigação de responder.","brand":{"@type":"Brand","name":"MAISON JF®"},"offers":{"@type":"Offer","priceCurrency":"EUR","price":"5.00","availability":"https://schema.org/InStock","url":"https://maison-jf.com/para-de-ignorar/"}}</script>
 <style>
 .pdi-sale{padding:145px 0 110px}
 .pdi-sale__hero{min-height:72svh;display:grid;place-items:center;text-align:center;padding:50px 0}
@@ -48,7 +48,7 @@
 <main class="pdi-sale shell">
   <section class="pdi-sale__hero">
     <div>
-      <p class="eyebrow" id="pdi-promise">28 perguntas · duas pessoas</p>
+      <p class="eyebrow" id="pdi-promise">16 perguntas · duas pessoas</p>
       <h1>PÁRA DE<br>IGNORAR!</h1>
       <p class="pdi-sale__lead">Aquilo que sempre quiseste saber.<br>Sem saber como perguntar.</p>
       <button class="pdi-buy" id="pdi-start" type="button">Começar</button>
@@ -56,7 +56,7 @@
         <button class="pdi-mode-option" type="button" data-mode="duo" aria-pressed="true" id="pdi-mode-duo">A dois</button>
         <button class="pdi-mode-option" type="button" data-mode="group" aria-pressed="false" id="pdi-mode-group">Grupo &amp; festa</button>
       </div>
-      <p class="pdi-mode-copy" id="pdi-mode-copy">28 perguntas para uma conversa a dois. Uma pergunta de cada vez.</p>
+      <p class="pdi-mode-copy" id="pdi-mode-copy">16 perguntas para uma conversa a dois. Uma pergunta de cada vez.</p>
       <p class="pdi-status" id="pdi-status">Uma sessão. Uma conversa que pode mudar qualquer coisa.</p>
     </div>
   </section>
@@ -66,7 +66,7 @@
     <article class="pdi-sale__card"><small>02</small><h2>Responde. Ou passa.</h2><p>Sem justificações.</p></article>
     <article class="pdi-sale__card"><small>03</small><h2>A vez roda.</h2><p>Conversem, riam ou passem. Sem obrigação de responder.</p></article>
   </section>
-  <p class="pdi-sale__micro" style="text-align:center;margin-top:22px">28 perguntas · pagamento único</p>
+  <p class="pdi-sale__micro" style="text-align:center;margin-top:22px">16 perguntas · pagamento único</p>
 
   <section class="pdi-sale__promise">
     <div>
@@ -89,10 +89,10 @@
 (async()=>{
   const locale=String(window.MAISON_LOCALE||document.documentElement.lang||'pt-PT');
   const copy={
-    'pt-PT':{duo:'Uma sessão para duas pessoas. Uma pergunta de cada vez.',group:'Para 3 a 12 pessoas. A vez roda e há desafios de festa.',start:'Começar',opening:'A preparar…',fail:'Não foi possível iniciar o jogo. Tenta novamente.',promiseDuo:'A dois',promiseGroup:'Grupo & festa'},
+    'pt-PT':{duo:'16 perguntas para duas pessoas. Uma pergunta de cada vez.',group:'16 perguntas para 3 a 12 pessoas. A vez roda e há desafios de festa.',start:'Começar',opening:'A preparar…',fail:'Não foi possível iniciar o jogo. Tenta novamente.',promiseDuo:'A dois',promiseGroup:'Grupo & festa'},
     'pt-BR':{duo:'Uma sessão para duas pessoas. Uma pergunta de cada vez.',group:'Para 3 a 12 pessoas. A vez roda e há desafios de festa.',start:'Começar',opening:'Preparando…',fail:'Não foi possível iniciar o jogo. Tente novamente.',promiseDuo:'A dois',promiseGroup:'Grupo & festa'},
-    en:{duo:'A session for two. One question at a time.',group:'For 3 to 12 people. Turns rotate, with party challenges.',start:'Start playing',opening:'Preparing…',fail:'Could not start the game. Please try again.',promiseDuo:'Two players',promiseGroup:'Group & party'},
-    es:{duo:'Una sesión para dos. Una pregunta cada vez.',group:'Para 3 a 12 personas. Los turnos rotan y hay retos de fiesta.',start:'Empezar',opening:'Preparando…',fail:'No se pudo iniciar el juego. Inténtalo de nuevo.',promiseDuo:'Dos personas',promiseGroup:'Grupo y fiesta'}
+    en:{duo:'A session of 16 questions for two. One question at a time.',group:'16 questions for 3 to 12 people. Turns rotate, with party challenges.',start:'Start playing',opening:'Preparing…',fail:'Could not start the game. Please try again.',promiseDuo:'Two players',promiseGroup:'Group & party'},
+    es:{duo:'16 preguntas para dos personas. Una pregunta cada vez.',group:'16 preguntas para 3 a 12 personas. Los turnos rotan y hay retos de fiesta.',start:'Empezar',opening:'Preparando…',fail:'No se pudo iniciar el juego. Inténtalo de nuevo.',promiseDuo:'Dos personas',promiseGroup:'Grupo y fiesta'}
   }[locale]||{duo:'Uma sessão para duas pessoas. Uma pergunta de cada vez.',group:'Para 3 a 12 pessoas. A vez roda e há desafios de festa.',start:'Começar',opening:'A preparar…',fail:'Não foi possível iniciar o jogo. Tenta novamente.',promiseDuo:'A dois',promiseGroup:'Grupo & festa'};
   const button=document.getElementById('pdi-start');
   const status=document.getElementById('pdi-status');
