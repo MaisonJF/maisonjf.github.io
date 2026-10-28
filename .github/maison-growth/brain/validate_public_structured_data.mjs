@@ -125,7 +125,7 @@ assert.equal(derivedSchemaForPublicPage({
 const genericPage=derivedSchemaForPublicPage({
   url:'https://maison-jf.com/para-de-ignorar/',
   title:'PÁRA DE IGNORAR! | MAISON JF®',
-  description:'Um jogo digital de 28 perguntas para duas pessoas.',
+  description:'Um jogo digital de 16 perguntas para duas pessoas.',
   robots:'index,follow'
 });
 assert(genericPage);
