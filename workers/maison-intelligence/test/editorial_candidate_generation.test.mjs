@@ -31,6 +31,7 @@ test('editorial generation stores bounded question and Oracle candidates only',a
     modelId:'free-model',
     usage:{total_tokens:120},
     text:JSON.stringify({
+      classification:{eligible_destinations:['pdi_game','vpc_test','oracle'],reason_code:'human_lived_experience',reason:'O sinal descreve uma experiência humana concreta.'},
       questions:[
         {
           theme:'relacoes',
@@ -84,6 +85,7 @@ test('bad generated item is rejected without blocking valid siblings',async()=>{
   const caller=async()=>({
     providerId:'openrouter',
     text:JSON.stringify({
+      classification:{eligible_destinations:['pdi_game','vpc_test','oracle'],reason_code:'human_lived_experience',reason:'O sinal descreve uma experiência humana concreta.'},
       questions:[
         {theme:'relacoes',text:'Contacta pessoa@example.com para explicar o que sentes.',stage:'open'},
         {theme:'relacoes',text:'Que conversa continuas a adiar mesmo sabendo que precisas de a ter?',stage:'touch'}
@@ -103,6 +105,7 @@ test('model drift is normalized and free-test coverage survives the expanded six
     providerId:'cloudflare_workers_ai',
     modelId:'llama-test',
     text:JSON.stringify({
+      classification:{eligible_destinations:['pdi_game','vpc_test','oracle'],reason_code:'human_lived_experience',reason:'O sinal descreve uma experiência humana concreta.'},
       questions:[
         {theme:'escolha',text:'Que escolha tens adiado porque nenhuma opção te parece suficientemente segura?',stage:'open',exposure:'paid',cognitive_load:'alto',vulnerability:'moderado',conflict_potential:'baixo',playfulness:'baixo'},
         {theme:'escolha',text:'Quando aparecem demasiadas opções, qual é a primeira coisa em ti que deixa de confiar?',stage:'recognize',exposure:'paid',cognitive_load:'alto',vulnerability:'alto',conflict_potential:'moderado',playfulness:'baixo'},
@@ -129,8 +132,47 @@ test('editorial prompt requires PT-PT and direct recognition questions',()=>{
   assert.match(prompt,/não peças conselhos, estratégias ou ajuda/i);
   assert.match(prompt,/public_social/i);
   assert.match(prompt,/PÁRA DE IGNORAR!/i);
-  assert.match(prompt,/UM ÚNICO tema canónico estável/i);
+  assert.match(prompt,/tema canónico estável/i);
+  assert.match(prompt,/classifica o destino antes de criares conteúdo/i);
+  assert.match(prompt,/zero perguntas e zero blocos de Oráculo/i);
+  assert.match(prompt,/Não forces uma pergunta gratuita/i);
   assert.match(prompt,/slug estável em minúsculas/i);
+});
+
+test('ecommerce signal is blocked before a model can write game or Oracle content',async()=>{
+  const db=new DB();
+  let providerCalled=false;
+  const out=await generateEditorialCandidates({GROWTH_DB:db},{
+    caller:async()=>{providerCalled=true;throw new Error('provider_should_not_be_called')},
+    oceanContext:{oceanKey:'customer-journey',matchedTerms:['checkout','conversion']},
+    brainAlert:{response_excerpt:'Analisar fricção no checkout e melhorar a conversão da loja online.'}
+  });
+  assert.equal(providerCalled,false);
+  assert.equal(out.called,false);
+  assert.equal(out.skipped,true);
+  assert.equal(out.reason_code,'ecommerce_operations');
+  assert.equal(out.stored,0);
+  assert.equal(db.batches.length,0);
+});
+
+test('explicit no-destination classification stores no questions or Oracle blocks',async()=>{
+  const db=new DB();
+  const out=await generateEditorialCandidates({GROWTH_DB:db},{
+    caller:async()=>({
+      text:JSON.stringify({
+        classification:{eligible_destinations:['other_maison_asset'],reason_code:'business_operational',reason:'É um tema de ecommerce.'},
+        questions:[{theme:'customer-journey',text:'Como aumentas a conversão do checkout?',stage:'open',exposure:'paid'}],
+        oracle_blocks:[{territory:'ecommerce',role:'recognition',title:'A conversão',text:'A tua loja pede clareza para vender mais.',intensity:2,tone:'direct',rarity:'common'}]
+      })
+    }),
+    oceanContext:{oceanKey:'strategy-maison',matchedTerms:['commerce']},
+    brainAlert:{response_excerpt:'Sinal de operação comercial.'}
+  });
+  assert.equal(out.called,true);
+  assert.equal(out.skipped,true);
+  assert.equal(out.reason_code,'business_operational');
+  assert.equal(out.stored,0);
+  assert.equal(db.batches.length,0);
 });
 
 test('candidate parser accepts fenced JSON but rejects missing JSON',()=>{
