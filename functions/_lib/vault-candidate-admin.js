@@ -97,7 +97,7 @@ export async function listEditorialAuditContent(db,{type='all',state='candidate'
 
 export async function retireEditorialContent(db,{items,reason='Retirado após auditoria editorial'}={}){
   const normalized=normalizeItems(items);
-  const editorialReason=String(reason||'Retirado após auditoria editorial').replace(/\\s+/g,' ').trim().slice(0,1000)||'Retirado após auditoria editorial';
+  const editorialReason=String(reason||'Retirado após auditoria editorial').replace(/\s+/g,' ').trim().slice(0,1000)||'Retirado após auditoria editorial';
   const eligible=[];
   for(const item of normalized){
     const table=item.content_type==='question'?'vault_questions':'vault_oracle_blocks';
