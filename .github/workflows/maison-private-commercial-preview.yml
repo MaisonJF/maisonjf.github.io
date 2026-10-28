@@ -8,12 +8,6 @@ permissions:
 
 jobs:
   preview:
-    if: ${{
-      secrets.MAISON_BRAIN_PRIVATE_URL != '' &&
-      secrets.MAISON_BRAIN_CONTROL_TOKEN != '' &&
-      secrets.MAISON_CF_ACCESS_CLIENT_ID != '' &&
-      secrets.MAISON_CF_ACCESS_CLIENT_SECRET != ''
-    }}
     runs-on: ubuntu-latest
     environment: private-preview
     timeout-minutes: 10
@@ -27,15 +21,58 @@ jobs:
       MAISON_OSIRIS_CONTEXT_ENABLED: 'false'
 
     steps:
+      - name: Check private preview configuration without exposing secrets
+        id: config
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(BRAIN_CONTROL_API_URL BRAIN_CONTROL_TOKEN CF_ACCESS_CLIENT_ID CF_ACCESS_CLIENT_SECRET)
+          missing=()
+          present=0
+          for v in "${required[@]}"; do
+            if [ -n "${!v:-}" ]; then
+              present=$((present + 1))
+            else
+              missing+=("$v")
+            fi
+          done
+
+          if [ "$present" -eq 0 ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping private preview: private Brain/Cloudflare Access secrets are not configured in the private-preview environment."
+            exit 0
+          fi
+
+          if [ "${#missing[@]}" -gt 0 ]; then
+            printf 'ERROR: incomplete private preview configuration; missing variable names: %s\n' "${missing[*]}"
+            exit 2
+          fi
+
+          if [[ "$BRAIN_CONTROL_API_URL" != https://* ]]; then
+            echo "ERROR: BRAIN_CONTROL_API_URL must be an HTTPS URL"
+            exit 2
+          fi
+
+          if [[ "$BRAIN_CONTROL_TOKEN" =~ (CHANGE_ME|REPLACE_WITH_|example|placeholder) ]]; then
+            echo "ERROR: BRAIN_CONTROL_TOKEN looks like a placeholder"
+            exit 2
+          fi
+
+          echo "configured=true" >> "$GITHUB_OUTPUT"
+          echo "Private preview configuration is present and structurally valid."
+
       - name: Checkout
+        if: steps.config.outputs.configured == 'true'
         uses: actions/checkout@v4
 
       - name: Set up Python 3.12
+        if: steps.config.outputs.configured == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Install Python dependencies
+        if: steps.config.outputs.configured == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -46,50 +83,18 @@ jobs:
             echo "requirements.txt not found, skipping dependency install."
           fi
 
-      - name: Validate required private brain secrets
-        shell: bash
-        run: |
-          set -euo pipefail
-          required=(BRAIN_CONTROL_API_URL BRAIN_CONTROL_TOKEN CF_ACCESS_CLIENT_ID CF_ACCESS_CLIENT_SECRET)
-          missing=0
-          for v in "${required[@]}"; do
-            if [ -z "${!v:-}" ]; then
-              echo "ERROR: $v is missing or empty"
-              missing=1
-            fi
-          done
-          if [ $missing -eq 1 ]; then
-            echo "One or more required secrets are missing. Set them in Settings → Secrets and variables → Actions."
-            exit 2
-          fi
-
-          if [[ "${BRAIN_CONTROL_API_URL}" != https://* ]]; then
-            echo "ERROR: BRAIN_CONTROL_API_URL must be an HTTPS URL"
-            exit 2
-          fi
-
-          if [[ "${BRAIN_CONTROL_TOKEN}" =~ (CHANGE_ME|REPLACE_WITH_|example|placeholder) ]]; then
-            echo "ERROR: BRAIN_CONTROL_TOKEN looks like a placeholder"
-            exit 2
-          fi
-
       - name: Preflight private read surface
+        if: steps.config.outputs.configured == 'true'
         run: python -u .github/maison-growth/runtime/preflight_private_runtime.py private_brain_read_candidate
 
       - name: Verify private Brain health
+        if: steps.config.outputs.configured == 'true'
         run: python -u .github/maison-growth/runtime/verify_private_brain_health.py
 
       - name: Run identifier-free commercial preview
+        if: steps.config.outputs.configured == 'true'
         run: python -u .github/maison-growth/brain/private_commercial_preview.py
 
-  preview_skipped:
-    if: ${{
-      secrets.MAISON_BRAIN_PRIVATE_URL == '' ||
-      secrets.MAISON_BRAIN_CONTROL_TOKEN == '' ||
-      secrets.MAISON_CF_ACCESS_CLIENT_ID == '' ||
-      secrets.MAISON_CF_ACCESS_CLIENT_SECRET == ''
-    }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Skip private preview without required secrets
-        run: echo "Skipping Private Preview: required secrets are not configured."
+      - name: Report intentional skip when no secrets are configured
+        if: steps.config.outputs.configured == 'false'
+        run: echo "Private commercial preview was skipped because the required private credentials are not configured."
