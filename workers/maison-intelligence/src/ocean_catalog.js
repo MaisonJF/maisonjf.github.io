@@ -673,6 +673,54 @@ export function selectOceanFocus({catalog = OCEANS, pillars = PILLARS, runKey = 
   }));
 }
 
+export function selectPillarFocus({pillars = PILLARS, focusOceans = [], runKey = '', limit = 48} = {}) {
+  const max=Math.max(1,Math.min(128,Number.parseInt(limit,10)||48));
+  const active=[...(pillars||PILLARS)].filter(p=>p&&p.lifecycle_state!=='paused'&&p.lifecycle_state!=='archived');
+  const byKey=new Map(active.map(p=>[p.key,p]));
+  const selected=[];
+  const selectedKeys=new Set();
+  const add=key=>{
+    const item=byKey.get(key);
+    if(item&&!selectedKeys.has(item.key)&&selected.length<max){
+      selected.push(item);
+      selectedKeys.add(item.key);
+      return true;
+    }
+    return false;
+  };
+  // Local graph neighbourhood first: the current Ocean focuses and their linked pillars.
+  const seeds=[];
+  for(const ocean of focusOceans||[]){
+    if(ocean?.pillar_key&&!seeds.includes(ocean.pillar_key))seeds.push(ocean.pillar_key);
+  }
+  for(const key of seeds)add(key);
+  let frontier=[...selected];
+  for(let depth=0;depth<2&&selected.length<max;depth++){
+    const next=[];
+    for(const pillar of frontier){
+      for(const linked of [...(pillar.connections||[]),...(pillar.parent_pillars||[])]){
+        if(add(linked))next.push(byKey.get(linked));
+      }
+    }
+    frontier=next;
+  }
+  // Then explore the broader network with a deterministic rotating window,
+  // avoiding a permanent bias toward the first alphabetic/database records.
+  const seed=[...String(runKey||new Date().toISOString().slice(0,10))]
+    .reduce((n,char)=>(n*31+char.charCodeAt(0))>>>0,7);
+  if(active.length){
+    const start=seed%active.length;
+    for(let i=0;selected.length<max&&i<active.length;i++){
+      add(active[(start+i)%active.length].key);
+    }
+  }
+  return selected.slice(0,max).map(p=>({
+    ...p,
+    connections:[...(p.connections||[])],
+    parent_pillars:[...(p.parent_pillars||[])]
+  }));
+}
+
 export function validateOceanProposal(raw, catalog = OCEANS, pillars = PILLARS) {
   const key = normaliseKey(raw?.proposed_ocean_key);
   if (!KEY_RE.test(key)) throw new Error('invalid_ocean_proposal_key');
