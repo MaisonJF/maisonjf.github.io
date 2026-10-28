@@ -4,9 +4,12 @@ Returns private question bodies only to server-side composition code.
 */
 import { normalizeMaisonLocale } from './maison-locales.js';
 
-export async function listActivePaidQuestionsV2(db,theme,locale='pt-PT'){
+export async function listActivePaidQuestionsV2(db,theme,locale='pt-PT',themeAliases=[]){
   const selectedLocale=normalizeMaisonLocale(locale);
   const localized=selectedLocale!=='pt-PT';
+  const themes=[...new Set([theme,...(Array.isArray(themeAliases)?themeAliases:[])].map(value=>String(value||'').trim()).filter(Boolean))];
+  const placeholders=themes.map((_,index)=>'?'+(index+1)).join(',');
+  const localePlaceholder='?'+(themes.length+1);
   const result=localized
     ? await db.prepare(
       `SELECT q.question_id AS id,q.theme,t.text,q.subthemes_json,q.class,q.stage,q.intensity,
@@ -23,15 +26,15 @@ export async function listActivePaidQuestionsV2(db,theme,locale='pt-PT'){
               coalesce(m.completed_session_count,0) AS completed_session_count
          FROM vault_questions q
          JOIN vault_question_translations t
-           ON t.question_id=q.question_id AND t.locale=?2 AND t.status='active'
+           ON t.question_id=q.question_id AND t.locale=${localePlaceholder} AND t.status='active'
          LEFT JOIN vault_question_metrics m ON m.question_id=q.question_id
-        WHERE q.theme=?1
+        WHERE q.theme IN (${placeholders})
           AND q.status='active'
           AND q.exposure='paid'
           AND q.lifecycle_state='live'
           AND q.rotation_state IN ('new','limited','normal')
         ORDER BY q.question_id`
-    ).bind(theme,selectedLocale).all()
+    ).bind(...themes,selectedLocale).all()
     : await db.prepare(
       `SELECT q.question_id AS id,q.theme,q.text,q.subthemes_json,q.class,q.stage,q.intensity,
               q.direction,q.time_scope,q.exposure,q.status,q.scores_json,q.viral_json,
@@ -47,17 +50,17 @@ export async function listActivePaidQuestionsV2(db,theme,locale='pt-PT'){
               coalesce(m.completed_session_count,0) AS completed_session_count
          FROM vault_questions q
          LEFT JOIN vault_question_metrics m ON m.question_id=q.question_id
-        WHERE q.theme=?1
+        WHERE q.theme IN (${placeholders})
           AND q.status='active'
           AND q.exposure='paid'
           AND q.lifecycle_state='live'
           AND q.rotation_state IN ('new','limited','normal')
         ORDER BY q.question_id`
-    ).bind(theme).all();
+    ).bind(...themes).all();
 
   return (result.results||[]).map(row=>({
     id:row.id,
-    theme:row.theme,
+    theme,
     text:row.text,
     subthemes:parseJson(row.subthemes_json,[]),
     class:row.class,
