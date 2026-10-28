@@ -258,7 +258,7 @@ def build_observe_output() -> dict[str,Any]:
     )
 
     # Oceanos and commercial assets contribute supporting context refs, never independent evidence roots.
-    ocean=OceanEditorialContext.from_file(ROOT/"editorial-queue.json")
+    ocean=OceanEditorialContext.from_files(ROOT/"editorial-queue.json", ROOT/"ocean-catalog.generated.json")
     knowledge_context:dict[str,tuple[str,...]]={}
     ocean_commercial_hint_matches=0
     for row in feed:
