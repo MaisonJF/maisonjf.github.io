@@ -39,7 +39,7 @@ function candidatePrompt({oceanContext,brainAlert,learningPatterns=[]}={}){
     'oracle_blocks: devolve entre 0 e 2 afirmações reflexivas originais apenas quando classification inclui oracle. Os blocos têm de desempenhar papéis diferentes, ser úteis sem contexto privado, admitir incerteza e devolver agência à pessoa. Não são previsões, diagnósticos ou certezas.',
     'Campos de bloco: territory, role, title, text, intensity, tone, rarity, pain_family, subterritory, emotional_function, tags. role: opening, recognition, tension, counterpoint, reframe, movement, close. intensity: 1-4. tone: gentle, direct, intimate, clear, confrontational. rarity: common, uncommon, rare.',
     'A ausência de conteúdo é melhor do que conteúdo absurdo, redundante, vazio ou sem destino. Cada item que produzires tem de soar reconhecivelmente MAISON: íntimo, directo, elegante, simples e humano.'
-  ].join('\\n');
+  ].join('\n');
 }
 function parseJsonObject(raw){
   const text=String(raw??'').trim().replace(/^\`\`\`(?:json)?\s*/i,'').replace(/\s*\`\`\`$/,'');
