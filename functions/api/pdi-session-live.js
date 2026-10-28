@@ -40,12 +40,12 @@ export async function onRequestGet({request,env}){
     const locale=normalizeMaisonLocale(stripeSession.metadata?.pdi_locale||'pt-PT');
     const storedMode=String(stripeSession.metadata?.pdi_mode||'duo');
     const mode=['duo','group'].includes(storedMode)?storedMode:'invalid';
-    const product=getPdiTheme(theme);
+    const registeredProduct=getPdiTheme(theme);
     const expectedPrice=getPdiPriceForLocale(locale);
     const marketError=brazilSessionEligibilityResponse(stripeSession,locale,expectedPrice.amount);
     if(marketError)return marketError;
     const valid=
-      product &&
+      theme.length>=2 &&
       stripeSession.livemode===true &&
       stripeSession.payment_status==='paid' &&
       stripeSession.metadata?.environment==='maison-jf-live' &&
@@ -62,6 +62,15 @@ export async function onRequestGet({request,env}){
     }
 
     const localizedProduct=await pdiThemeAvailability(env,theme,locale);
+    if(!localizedProduct?.available){
+      return json({error:'Este jogo já não está disponível para iniciar uma sessão.'},409);
+    }
+    const product=registeredProduct||localizedProduct;
+    const canonicalFamily=String(registeredProduct?.family||localizedProduct.family||'');
+    if((mode==='group')!==(canonicalFamily==='Amigos, Grupos & Festas')){
+      return json({error:'O modo comprado não corresponde a esta sessão.'},403);
+    }
+
     const frozen=await getOrCreateQuestionSession({env,stripeSession,theme,locale});
     if(!frozen||frozen.packA?.length!==8||frozen.packB?.length!==8){
       return json({error:'Não foi possível preparar esta sessão.'},503);
