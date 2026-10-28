@@ -1451,7 +1451,7 @@ const EBOOKS={
     'Éditions Maison JF · Brevemente':'Éditions Maison JF · Em breve',
     'Ampliar 100%':'Ampliar 100%',
     'Fechar poster ampliado':'Fechar pôster ampliado',
-    'Imagem ampliada; use as setas para percorrer':'Imagem ampliada; use as setas para percorrer'
+    'Imagem ampliada; use as setas para percorrer':'Imagem ampliada; use as setas para percorrer',
     "Éditions Maison JF®: novelas, ficção literária, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis.": "Éditions Maison JF®: novelas, ficção literária, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis.",
     "Histórias que ficam depois da última página.": "Histórias que ficam depois da última página.",
     "Ficção literária, novelas, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis. Escolhe uma leitura. Vê onde te leva.": "Ficção literária, novelas, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis. Escolha uma leitura. Veja aonde ela leva você.",
