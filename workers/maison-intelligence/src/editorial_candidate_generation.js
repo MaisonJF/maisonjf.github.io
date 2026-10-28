@@ -1,5 +1,6 @@
 import { ingestVaultCandidate } from './vault_candidates.js';
 import { loadActiveFeedbackLearning } from './feedback_learning.js';
+import { detectOperationalCommercialTopic, editorialDestinationDecision } from './content_suitability.js';
 
 const MAX_QUESTIONS=6;
 const MAX_ORACLE_BLOCKS=2;
@@ -7,7 +8,7 @@ const MAX_ORACLE_BLOCKS=2;
 function clean(value,max=2400){
   return String(value??'').replace(/\s+/g,' ').trim().slice(0,max);
 }
-function candidatePrompt({oceanContext,brainAlert,learningPatterns=[]}){
+function candidatePrompt({oceanContext,brainAlert,learningPatterns=[]}={}){
   const ocean=clean(oceanContext?.oceanKey,160);
   const summary=clean(brainAlert?.response_excerpt,2400);
   const terms=(oceanContext?.matchedTerms||[]).map(x=>clean(x,100)).filter(Boolean).slice(0,8);
@@ -16,10 +17,15 @@ function candidatePrompt({oceanContext,brainAlert,learningPatterns=[]}){
   );
   return [
     'LABORATÓRIO EDITORIAL PRIVADO MAISON JF®. Produz apenas candidatos; nunca aproves, atives nem publiques.',
-    'ESCREVE TODO O CONTEÚDO HUMANO EM PORTUGUÊS EUROPEU (PT-PT). Isto inclui text, title, theme, territory, pain_family, subterritory e emotional_function. Não devolvas inglês nem PT-BR. Traduz mentalmente antes de devolver o JSON.',
+    'ESCREVE TODO O CONTEÚDO HUMANO EM PORTUGUÊS EUROPEU (PT-PT). Não devolvas inglês nem PT-BR.',
     'Não cites fontes nem incluas nomes/usernames, confissões pessoais, contactos, diagnóstico médico, certezas sobrenaturais, urgência falsa ou manipulação.',
-    'O material entra num Vault D1 privado como candidate e continua sujeito a revisão humana/editorial.',
-    'Devolve APENAS JSON válido, com exatamente esta forma de topo: {"questions":[],"oracle_blocks":[]}. Sem Markdown nem comentário.',
+    'O material que for aprovado para revisão entra num Vault D1 privado como candidate. A aprovação humana continua obrigatória.',
+    'Antes de criares conteúdo, classifica o destino. Devolve APENAS JSON válido com esta forma: {"classification":{"eligible_destinations":[],"reason_code":"","reason":""},"questions":[],"oracle_blocks":[]}.',
+    'eligible_destinations só pode conter: pdi_game, vpc_test, oracle, other_maison_asset, none. Se o sinal não servir de forma clara para um destino, usa other_maison_asset ou none e devolve arrays vazios. É perfeitamente correcto devolver zero perguntas e zero blocos de Oráculo.',
+    'NÃO transformes sinais comerciais, técnicos ou operacionais em perguntas de jogo nem em afirmações de Oráculo. Ecommerce, customer journey, SEO, checkout, conversão, análise de vendas, UX do site, fornecedores, preço, stock, logística, integrações, código, deployment, métricas e estratégia comercial pertencem a outros destinos MAISON.',
+    'Não uses o Oráculo como depósito de frases reflexivas genéricas. Só escolhe oracle quando existe uma tensão humana clara que beneficie de uma afirmação prudente, aberta e não preditiva. Não escrevas uma leitura pessoal como se conhecesses a pessoa.',
+    'Só escolhe pdi_game (PÁRA DE IGNORAR!) quando a pergunta abre uma conversa real a dois ou num grupo e é adequada ao tema, modo e pack. Só escolhe vpc_test quando a pergunta mede ou explora uma experiência humana coerente com um teste de reflexão. Não forces uma pergunta gratuita para preencher cobertura.',
+    'A pergunta deve ser feita diretamente à pessoa, num contexto reconhecível, sem pedir conselhos, estratégias ou ajuda do tipo “como posso…?”. Evita linguagem clínica ou de autoajuda genérica. O tema deve ser um slug estável em minúsculas, sem acentos, com palavras separadas por hífen.',
     `Ocean key: ${ocean}`,
     `Observed public-language summary: ${summary}`,
     `Useful theme terms: ${terms.join(' | ')||'none'}`,
@@ -28,13 +34,11 @@ function candidatePrompt({oceanContext,brainAlert,learningPatterns=[]}){
     ...(learning.length?learning:['nenhuma aprendizagem ativa ainda']),
     'Usa esta aprendizagem apenas quando for relevante ao Ocean atual. Não sacrifiques identidade MAISON por uma regra genérica e não inventes prova que não esteja no sinal.',
     '',
-    'questions: devolve exatamente 6 perguntas genuinamente distintas quando o sinal o suportar; nunca enchas com sinónimos. As 6 perguntas deste lote têm de partilhar UM ÚNICO tema canónico estável, para construir massa crítica e evitar fragmentação do catálogo. Usa momentos/contextos e estágios diferentes. O campo theme deve ser um slug estável em minúsculas, sem acentos, com palavras separadas por hífen (ex.: relacoes-e-intimidade). Não mudes o tema entre perguntas do mesmo lote. Campos: theme, text, stage, exposure, intensity, target, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness, subthemes.',
-    'A pergunta deve ser feita diretamente à pessoa e fazê-la reconhecer-se; não peças conselhos, estratégias ou ajuda do tipo “como posso…?”. Evita linguagem clínica, terapêutica ou de autoajuda genérica.',
-    'stage permitido: open, recognize, deepen, touch, close, signature. exposure: paid ou public_social. intensity: inteiro 1-4. target: self, partner, both, prediction. cognitive_load, vulnerability, conflict_potential e playfulness TÊM de ser inteiros 1-5, nunca palavras.',
-    'Das 4 perguntas, inclui pelo menos 2 paid para PÁRA DE IGNORAR! e pelo menos 1 public_social separada para um teste Volta Para Casa, quando for seguro e sustentado. Nunca recicles uma pergunta paga no gratuito.',
-    'oracle_blocks: devolve exatamente 2 blocos genéricos de reflexão, originais e com papéis diferentes quando o sinal o suportar; nunca uma leitura personalizada final. Campos: territory, role, title, text, intensity, tone, rarity, pain_family, subterritory, emotional_function, tags.',
-    'role permitido: opening, recognition, tension, counterpoint, reframe, movement, close. intensity: 1-4. tone: gentle, direct, intimate, clear, confrontational. rarity: common, uncommon, rare.',
-    'Cada item deve funcionar sozinho e soar reconhecivelmente MAISON: íntimo, direto, elegante, simples e humano.'
+    'questions: devolve entre 0 e 6 perguntas originais, apenas quando classification inclui pdi_game e/ou vpc_test. Nunca enchas com sinónimos. Cada pergunta tem de ter um destino claro: exposure=paid apenas para pdi_game; exposure=public_social apenas para vpc_test. Não mistures destinos nem recicles uma pergunta paga no gratuito. As perguntas de cada lote devem partilhar um tema canónico estável se fizerem realmente parte do mesmo tema.',
+    'Campos de pergunta: theme, text, stage, exposure, intensity, target, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness, subthemes. stage: open, recognize, deepen, touch, close, signature. exposure: paid ou public_social. intensity: inteiro 1-4. target: self, partner, both, prediction. cognitive_load, vulnerability, conflict_potential e playfulness: inteiros 1-5.',
+    'oracle_blocks: devolve entre 0 e 2 afirmações reflexivas originais apenas quando classification inclui oracle. Os blocos têm de desempenhar papéis diferentes, ser úteis sem contexto privado, admitir incerteza e devolver agência à pessoa. Não são previsões, diagnósticos ou certezas.',
+    'Campos de bloco: territory, role, title, text, intensity, tone, rarity, pain_family, subterritory, emotional_function, tags. role: opening, recognition, tension, counterpoint, reframe, movement, close. intensity: 1-4. tone: gentle, direct, intimate, clear, confrontational. rarity: common, uncommon, rare.',
+    'A ausência de conteúdo é melhor do que conteúdo absurdo, redundante, vazio ou sem destino. Cada item que produzires tem de soar reconhecivelmente MAISON: íntimo, directo, elegante, simples e humano.'
   ].join('\n');
 }
 function parseJsonObject(raw){
@@ -48,15 +52,6 @@ function parseJsonObject(raw){
 }
 function rows(value,max){
   return Array.isArray(value)?value.filter(x=>x&&typeof x==='object'&&!Array.isArray(x)).slice(0,max):[];
-}
-function questionRows(value,max){
-  const all=Array.isArray(value)?value.filter(x=>x&&typeof x==='object'&&!Array.isArray(x)):[];
-  const selected=all.slice(0,max);
-  if(selected.length&& !selected.some(x=>x.exposure==='public_social')){
-    const publicItem=all.find(x=>x.exposure==='public_social');
-    if(publicItem)selected[selected.length-1]=publicItem;
-  }
-  return selected;
 }
 function score1to5(value,fallback=2){
   const n=Number(value);
@@ -84,21 +79,68 @@ function publicResult(result){
 export async function generateEditorialCandidates(env,{caller,oceanContext,brainAlert,providerId='openrouter'}={}){
   if(typeof caller!=='function')throw new Error('editorial_candidate_provider_missing');
   if(!oceanContext?.oceanKey||!brainAlert) return {called:false,stored:0,duplicates:0,rejected:0,results:[],usage:null};
+  const screening=detectOperationalCommercialTopic({
+    sourceKey:oceanContext.oceanKey,
+    sourceTitle:oceanContext.displayName||oceanContext.title||oceanContext.label||'',
+    sourceSummary:brainAlert.response_excerpt,
+    sourceTerms:oceanContext.matchedTerms||[]
+  });
+  if(!screening.eligibleForQuestionOrOracle){
+    return {called:false,skipped:true,reason_code:screening.reasonCode,stored:0,duplicates:0,rejected:0,results:[],usage:null};
+  }
   const learningPatterns=await loadActiveFeedbackLearning(env,{limit:8});
   const generated=await caller(env,candidatePrompt({oceanContext,brainAlert,learningPatterns}));
   const payload=parseJsonObject(generated?.text);
-  const questions=questionRows(payload.questions,MAX_QUESTIONS);
-  const oracleBlocks=rows(payload.oracle_blocks,MAX_ORACLE_BLOCKS);
+  const destination=editorialDestinationDecision(payload?.classification?.eligible_destinations);
+  if(!destination.valid){
+    return {called:true,skipped:true,reason_code:'editorial_classification_missing_or_invalid',stored:0,duplicates:0,rejected:0,results:[],usage:generated?.usage||null};
+  }
+  const destinations=new Set(destination.destinations);
+  if(destinations.size===0){
+    return {
+      called:true,skipped:true,
+      reason_code:clean(payload.classification?.reason_code||'no_suitable_destination',120),
+      reason:clean(payload.classification?.reason||'',400),
+      stored:0,duplicates:0,rejected:0,results:[],usage:generated?.usage||null
+    };
+  }
+  const questions=(destinations.has('pdi_game')||destinations.has('vpc_test'))?rows(payload.questions,MAX_QUESTIONS):[];
+  const oracleBlocks=destinations.has('oracle')?rows(payload.oracle_blocks,MAX_ORACLE_BLOCKS):[];
   const results=[];
   let rejected=0;
   for(const item of questions){
     try{
+      const exposure=item.exposure==='public_social'?'public_social':'paid';
+      if(exposure==='paid'&&!destinations.has('pdi_game')){
+        rejected++;
+        continue;
+      }
+      if(exposure==='public_social'&&!destinations.has('vpc_test')){
+        rejected++;
+        continue;
+      }
+      const screening=detectOperationalCommercialTopic({
+        sourceKey:oceanContext.oceanKey,
+        sourceTitle:oceanContext.displayName||oceanContext.title||oceanContext.label||'',
+        sourceSummary:brainAlert.response_excerpt,
+        sourceTerms:oceanContext.matchedTerms||[],
+        candidateTitle:item.title||'',
+        candidateBody:item.text||''
+      });
+      if(!screening.eligibleForQuestionOrOracle){
+        rejected++;
+        continue;
+      }
       const result=await ingestVaultCandidate(env,{
         ...item,
         content_type:'question',
         source_ocean_id:oceanContext.oceanKey,
         theme:item.theme||fallbackTheme(oceanContext),
-        exposure:item.exposure==='public_social'?'public_social':'paid',
+        exposure,
+        product_fit:{
+          ...(item.product_fit&&typeof item.product_fit==='object'?item.product_fit:{}),
+          ...(exposure==='paid'?{para_de_ignorar:1}:{volta_para_casa:1})
+        },
         cognitive_load:score1to5(item.cognitive_load,2),
         vulnerability:score1to5(item.vulnerability,2),
         conflict_potential:score1to5(item.conflict_potential,2),
@@ -112,6 +154,18 @@ export async function generateEditorialCandidates(env,{caller,oceanContext,brain
   }
   for(const item of oracleBlocks){
     try{
+      const screening=detectOperationalCommercialTopic({
+        sourceKey:oceanContext.oceanKey,
+        sourceTitle:oceanContext.displayName||oceanContext.title||oceanContext.label||'',
+        sourceSummary:brainAlert.response_excerpt,
+        sourceTerms:oceanContext.matchedTerms||[],
+        candidateTitle:item.title||'',
+        candidateBody:item.text||''
+      });
+      if(!screening.eligibleForQuestionOrOracle){
+        rejected++;
+        continue;
+      }
       const result=await ingestVaultCandidate(env,{
         ...item,
         content_type:'oracle_block',

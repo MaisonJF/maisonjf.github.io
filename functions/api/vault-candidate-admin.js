@@ -4,7 +4,9 @@ import {
   vaultCandidateStats,
   activateOceanVaultCandidates,
   reviewOceanVaultCandidates,
-  seedOceanVaultCandidates
+  seedOceanVaultCandidates,
+  listEditorialAuditContent,
+  retireEditorialContent
 } from '../_lib/vault-candidate-admin.js';
 
 export async function onRequestPost({request,env}){
@@ -33,6 +35,17 @@ export async function onRequestPost({request,env}){
         state:body.state,
         limit:body.limit
       }));
+    }
+    if(action==='audit-list'){
+      return json(await listEditorialAuditContent(db,{
+        type:body.type,
+        state:body.state,
+        limit:body.limit,
+        offset:body.offset
+      }));
+    }
+    if(action==='retire'){
+      return json(await retireEditorialContent(db,{items:body.items,reason:body.reason}));
     }
     if(action==='activate'){
       return json(await activateOceanVaultCandidates(db,{

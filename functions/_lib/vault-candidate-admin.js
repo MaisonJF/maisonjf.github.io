@@ -1,9 +1,6 @@
-import { VPC_OCEAN_SIGNALS } from './vpc-ocean-signals.generated.js';
-
 const SOURCE_KINDS=['ocean_mcp_candidate','ocean_seed_candidate'];
 const MAX_LIST=500;
 const MAX_ACTION=1000;
-const ORACLE_IDS=new Set(["adiar-o-sono-para-recuperar-autonomia","ansiedade-antecipatoria-na-transicao-domingo-semana","atencao-fragmentada-por-interrupcoes-digitais","auto-silenciamento-para-preservar-o-vinculo","autonomia-condicionada-pelo-medo-da-reaccao","carga-mental-invisivel-da-casa","cuidar-sem-desaparecer-no-papel-de-cuidador","culpa-ao-descansar-como-se-o-descanso-tivesse-de-ser-merecido","doomscrolling-para-tentar-reduzir-incerteza","evitamento-financeiro-sob-escassez","ficar-em-suspenso-enquanto-se-espera-uma-resposta-importante","luto-por-um-futuro-que-deixou-de-ser-possivel","micro-luxo-como-recompensa-e-ritual","perda-ambigua-sem-fecho-claro","precisar-de-solidao-para-recuperar-energia-social","presenca-que-ampara-sem-tentar-resolver","pressao-social-para-gastar-e-vergonha-de-dizer-nao","quando-o-que-funciona-na-relacao-se-torna-invisivel","rituais-sensoriais-com-plantas-como-marcadores-de-transicao","sobrecarga-de-escolha-quando-mais-opcoes-paralisam","solidao-com-contacto-sem-conexao-de-qualidade","telepressao-e-disponibilidade-permanente"]);
 
 function clampLimit(value){
   const n=Number(value||100);
@@ -45,10 +42,92 @@ function rowToItem(row){
     text:String(row.text||''),
     exposure:row.exposure==null?null:String(row.exposure),
     source_ocean_id:row.source_ocean_id==null?null:String(row.source_ocean_id),
+    source_kind:row.source_kind==null?'':String(row.source_kind),
+    quality_version:row.quality_version==null?'':String(row.quality_version),
     status:String(row.status||''),
     lifecycle_state:String(row.lifecycle_state||''),
     rotation_state:String(row.rotation_state||''),
     created_at:String(row.created_at||'')
+  };
+}
+
+function normalizeAuditState(value){
+  const state=String(value||'candidate').trim();
+  if(!['candidate','review','candidate-review','live','retired','all'].includes(state))throw new Error('invalid_audit_state');
+  return state;
+}
+function auditStateWhere(state){
+  if(state==='candidate')return "status='candidate' AND lifecycle_state='candidate'";
+  if(state==='review')return "status='review' AND lifecycle_state='review'";
+  if(state==='candidate-review')return "status IN ('candidate','review') AND lifecycle_state IN ('candidate','review')";
+  if(state==='live')return "status IN ('active','approved') AND lifecycle_state='live'";
+  if(state==='retired')return "status='retired' OR lifecycle_state='retired'";
+  return '1=1';
+}
+
+export async function listEditorialAuditContent(db,{type='all',state='candidate',limit=100,offset=0}={}){
+  const safeType=normalizeType(type);
+  const safeState=normalizeAuditState(state);
+  const safeLimit=Math.max(1,Math.min(100,Math.floor(Number(limit)||100)));
+  const safeOffset=Math.max(0,Math.min(20000,Math.floor(Number(offset)||0)));
+  const filter=auditStateWhere(safeState);
+  const selects=[];
+  if(safeType!=='oracle_block'){
+    selects.push(`SELECT 'question' AS content_type,question_id AS content_id,theme AS area,stage AS stage_or_role,
+      text,exposure,source_ocean_id,source_kind,quality_version,status,lifecycle_state,rotation_state,created_at
+      FROM vault_questions WHERE (${filter})`);
+  }
+  if(safeType!=='question'){
+    selects.push(`SELECT 'oracle_block' AS content_type,block_id AS content_id,territory AS area,role AS stage_or_role,
+      text,NULL AS exposure,source_ocean_id,source_kind,quality_version,status,lifecycle_state,rotation_state,created_at
+      FROM vault_oracle_blocks WHERE (${filter})`);
+  }
+  const union=selects.join(' UNION ALL ');
+  const totalRow=await db.prepare(`SELECT COUNT(*) AS total FROM (${union}) AS editorial_audit`).first();
+  const result=await db.prepare(`SELECT * FROM (${union}) AS editorial_audit
+    ORDER BY created_at DESC,content_id ASC LIMIT ?1 OFFSET ?2`).bind(safeLimit,safeOffset).all();
+  const total=Number(totalRow?.total||0);
+  return {
+    ok:true,type:safeType,state:safeState,
+    limit:safeLimit,offset:safeOffset,total,
+    hasMore:safeOffset+((result.results||[]).length)<total,
+    items:(result.results||[]).map(rowToItem)
+  };
+}
+
+export async function retireEditorialContent(db,{items,reason='Retirado após auditoria editorial'}={}){
+  const normalized=normalizeItems(items);
+  const editorialReason=String(reason||'Retirado após auditoria editorial').replace(/\s+/g,' ').trim().slice(0,1000)||'Retirado após auditoria editorial';
+  const eligible=[];
+  for(const item of normalized){
+    const table=item.content_type==='question'?'vault_questions':'vault_oracle_blocks';
+    const idCol=item.content_type==='question'?'question_id':'block_id';
+    const row=await db.prepare(`SELECT ${idCol} AS id,status,lifecycle_state FROM ${table} WHERE ${idCol}=?1 LIMIT 1`).bind(item.content_id).first();
+    if(!row)continue;
+    if(String(row.status)==='retired'&&String(row.lifecycle_state)==='retired')continue;
+    eligible.push(item);
+  }
+  for(let i=0;i<eligible.length;i+=50){
+    const statements=[];
+    for(const item of eligible.slice(i,i+50)){
+      const table=item.content_type==='question'?'vault_questions':'vault_oracle_blocks';
+      const idCol=item.content_type==='question'?'question_id':'block_id';
+      statements.push(db.prepare(`UPDATE ${table}
+        SET status='retired',lifecycle_state='retired',rotation_state='retired'
+        WHERE ${idCol}=?1 AND NOT(status='retired' AND lifecycle_state='retired')`).bind(item.content_id));
+      statements.push(db.prepare(`INSERT INTO vault_editorial_decisions
+        (decision_id,content_type,content_id,decision,reason_code,details_json,engine_version)
+        VALUES(?1,?2,?3,'retire','human_editorial_audit_retirement',?4,'vault-content-audit-v1')`).bind(
+          'dec_'+crypto.randomUUID(),item.content_type,item.content_id,
+          JSON.stringify({source:'editorial_vault_audit',action:'retire_preserving_history',reason:editorialReason})
+        ));
+    }
+    if(statements.length)await db.batch(statements);
+  }
+  return {
+    ok:true,requested:normalized.length,retired:eligible.length,reason:editorialReason,
+    retiredItems:eligible,physicalDeletion:false,
+    note:'Conteúdo retirado da selecção futura; o registo e a decisão editorial foram preservados.'
   };
 }
 function whereForState(state){
@@ -217,96 +296,13 @@ async function apply(db,rawItems,mode){
   return {ok:true,requested:items.length,changed:eligible.length,mode};
 }
 
-async function sha40(value){
-  const bytes=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(value).normalize('NFKC').toLowerCase().replace(/\s+/g,' ').trim())));
-  return [...bytes].map(x=>x.toString(16).padStart(2,'0')).join('').slice(0,40);
-}
-function seedQuestionText(theme,variant){
-  const t=String(theme||'o que está a acontecer').trim();
-  if(variant===1)return `Quando aparece a sensação de «${t}», o que costumas fazer primeiro — aproximar-te do que precisas ou afastar-te disso?`;
-  return `Se «${t}» não precisasse de ser resolvido já, o que gostarias de perceber melhor sobre ti nessa situação?`;
-}
-function seedOracleText(signal){
-  const pain=String(signal?.painLanguage||'').trim();
-  return `${pain} Antes de tentares resolver isto, repara no que estás a proteger, no que estás a adiar e no que já sabes mas tens evitado nomear. O movimento não é forçar uma resposta; é tornar mais claro o lugar de onde estás a escolher.`;
-}
-async function existsByIdOrFingerprint(db,table,idColumn,id,fp){
-  return await db.prepare(
-    `SELECT ${idColumn} AS id FROM ${table} WHERE ${idColumn}=?1 OR semantic_fingerprint=?2 LIMIT 1`
-  ).bind(id,fp).first();
-}
-async function seedQuestion(db,signal,variant){
-  const ocean=String(signal.id);
-  const theme=String(signal.themes?.[variant-1]||signal.themes?.[0]||ocean).slice(0,120);
-  const text=seedQuestionText(theme,variant);
-  const fp=await sha40(text);
-  const id='q_seed_'+ocean+'_'+variant;
-  if(await existsByIdOrFingerprint(db,'vault_questions','question_id',id,fp))return false;
-  const stage=variant===1?'recognize':'deepen';
-  const insert=db.prepare(
-    `INSERT INTO vault_questions
-      (question_id,canonical_key,theme,text,subthemes_json,class,stage,intensity,direction,time_scope,
-       exposure,status,scores_json,viral_json,conflicts_json,pairs_json,similarity_group,source_kind,
-       pain_family,subterritory,target,emotional_function,cognitive_load,vulnerability,conflict_potential,
-       playfulness,semantic_fingerprint,compatibility_json,product_fit_json,lifecycle_state,rotation_state,
-       source_ocean_id,quality_version)
-     VALUES(?1,?2,?3,?4,?5,'mirror',?6,2,'either','timeless','paid','candidate',?7,'{}','[]','[]',?8,
-            'ocean_seed_candidate',?9,?10,'both','discovery',2,2,2,2,?11,'{}',?12,'candidate','new',?13,'ocean-seed-v1')`
-  ).bind(
-    id,'seed:'+ocean+':q'+variant,theme,text,JSON.stringify((signal.themes||[]).slice(0,8)),stage,
-    JSON.stringify({clarity:4,conversationValue:4,safety:5,editorialQuality:3,humanity:4,composability:4}),
-    ocean,theme,theme,fp,JSON.stringify({para_de_ignorar:1,source:'ocean_seed'}),ocean
-  );
-  const decision=db.prepare(
-    `INSERT INTO vault_editorial_decisions
-      (decision_id,content_type,content_id,decision,reason_code,details_json,engine_version)
-     VALUES(?1,'question',?2,'propose','ocean_seed_candidate',?3,'ocean-seed-v1')`
-  ).bind('dec_'+crypto.randomUUID(),id,JSON.stringify({source_ocean_id:ocean,seed:true}));
-  await db.batch([insert,decision]);
-  return true;
-}
-async function seedOracle(db,signal,index){
-  const ocean=String(signal.id);
-  const text=seedOracleText(signal);
-  const fp=await sha40(text);
-  const id='ob_seed_'+ocean;
-  if(await existsByIdOrFingerprint(db,'vault_oracle_blocks','block_id',id,fp))return false;
-  const role=index%2===0?'recognition':'reframe';
-  const title=String(signal.themes?.[0]||ocean).slice(0,180);
-  const insert=db.prepare(
-    `INSERT INTO vault_oracle_blocks
-      (block_id,canonical_key,territory,role,intensity,text,status,compatibility_json,scores_json,source_kind,
-       title,pain_family,subterritory,tone,emotional_function,semantic_fingerprint,tags_json,product_fit_json,
-       lifecycle_state,rotation_state,rarity,source_ocean_id,quality_version)
-     VALUES(?1,?2,?3,?4,2,?5,'candidate','{}',?6,'ocean_seed_candidate',?7,?8,?9,'intimate','recognition',
-            ?10,?11,?12,'candidate','new','common',?13,'ocean-seed-v1')`
-  ).bind(
-    id,'seed:'+ocean+':oracle',ocean,role,text,
-    JSON.stringify({clarity:4,safety:5,editorialQuality:3,humanity:4,composability:4}),
-    title,ocean,title,fp,JSON.stringify((signal.themes||[]).slice(0,12)),
-    JSON.stringify({oracle:1,source:'ocean_seed'}),ocean
-  );
-  const decision=db.prepare(
-    `INSERT INTO vault_editorial_decisions
-      (decision_id,content_type,content_id,decision,reason_code,details_json,engine_version)
-     VALUES(?1,'oracle_block',?2,'propose','ocean_seed_candidate',?3,'ocean-seed-v1')`
-  ).bind('dec_'+crypto.randomUUID(),id,JSON.stringify({source_ocean_id:ocean,seed:true}));
-  await db.batch([insert,decision]);
-  return true;
-}
-
-export async function seedOceanVaultCandidates(db){
-  let questions=0,oracleBlocks=0,skipped=0;
-  for(let i=0;i<VPC_OCEAN_SIGNALS.length;i++){
-    const signal=VPC_OCEAN_SIGNALS[i];
-    for(const variant of [1,2]){
-      if(await seedQuestion(db,signal,variant))questions++; else skipped++;
-    }
-    if(ORACLE_IDS.has(String(signal.id))){
-      if(await seedOracle(db,signal,i))oracleBlocks++; else skipped++;
-    }
-  }
-  return {ok:true,questions,oracle_blocks:oracleBlocks,created:questions+oracleBlocks,skipped,source:'existing_oceans'};
+export async function seedOceanVaultCandidates(){
+  return {
+    ok:true,disabled:true,questions:0,oracle_blocks:0,created:0,skipped:0,
+    source:'existing_oceans',
+    reason:'generic_ocean_seed_disabled',
+    message:'A criação automática de perguntas e afirmações genéricas foi desativada. Os sinais dos Oceans devem passar por classificação editorial e só gerar conteúdo quando houver adequação real.'
+  };
 }
 
 export async function activateOceanVaultCandidates(db,{items,all=false,type='all'}={}){
