@@ -163,7 +163,7 @@ function relatedOceanKeys(item,context){
   return [...new Set(raw.map(x=>clean(x,160)).filter(x=>known.has(x)))].slice(0,8);
 }
 
-async function storeCandidate(env,{item,spec,context}){
+export async function storeCandidate(env,{item,spec,context}){
   const type=clean(item?.candidate_type||item?.content_type,80);
   const isOceanProposal=type==='ocean_proposal';
   if(!CANDIDATE_TYPES.has(type))throw new Error('foundry_candidate_type_invalid');
