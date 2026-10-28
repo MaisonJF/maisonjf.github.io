@@ -17,7 +17,7 @@ from commercial_ocean_matrix import build_ocean_matrix
 from build_commercial_attention import load_attention as load_commercial_attention
 from digital_experience_coverage import load_coverage as load_digital_experience_coverage
 from commercial_readiness_board import build_board
-from knowledge_context import OceanEditorialContext
+from knowledge_context import OceanEditorialContext, fetch_runtime_specialist_catalog
 from public_discovery_context import PublicDiscoveryContext
 from local_embeddings import MultilingualE5SmallProvider
 from osiris_context import graph_search as osiris_graph_search
@@ -65,7 +65,7 @@ def _status_text() -> str:
 
 def _ocean_context() -> OceanEditorialContext:
     # Canonical Ocean source. Editorial queue is a derived workflow hand-off, not Brain truth.
-    return OceanEditorialContext.from_files(GROWTH/"oceans/candidates.json", ROOT/"ocean-catalog.generated.json")
+    return OceanEditorialContext.from_files(GROWTH/"oceans/candidates.json", ROOT/"ocean-catalog.generated.json", runtime_catalog=fetch_runtime_specialist_catalog())
 
 
 def _public_discovery() -> PublicDiscoveryContext:
