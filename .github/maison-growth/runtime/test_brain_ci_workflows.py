@@ -16,8 +16,8 @@ class BrainCiWorkflowTests(unittest.TestCase):
         cls.preview=(WORKFLOWS/"maison-private-commercial-preview.yml").read_text(encoding="utf-8")
 
     def test_brain_guard_validates_relevant_main_pushes(self):
-        self.assertIn("  push:\\n",self.guard)
-        self.assertIn("      - main\\n",self.guard)
+        self.assertIn("  push:\n",self.guard)
+        self.assertIn("      - main\n",self.guard)
         self.assertIn(
             "bash .github/maison-growth/brain/rebuild_commercial_context.sh --check",
             self.guard,
@@ -34,9 +34,9 @@ class BrainCiWorkflowTests(unittest.TestCase):
         self.assertNotIn("docker compose up",self.guard)
 
     def test_private_commercial_preview_is_manual_only(self):
-        self.assertIn("  workflow_dispatch:\\n",self.preview)
-        self.assertNotIn("  pull_request:\\n",self.preview)
-        self.assertNotIn("  push:\\n",self.preview)
+        self.assertIn("  workflow_dispatch:\n",self.preview)
+        self.assertNotIn("  pull_request:\n",self.preview)
+        self.assertNotIn("  push:\n",self.preview)
 
     def test_private_commercial_preview_gates_steps_without_job_level_secret_condition(self):
         self.assertIn("id: config",self.preview)
