@@ -2206,15 +2206,6 @@ const CONTACT={
     'Abrir WhatsApp':'Abrir WhatsApp',
     'Ainda não sei o que procuro':'Ainda não sei o que procuro',
     'Falar comigo não te obriga a comprar. Se houver preço ou condições a confirmar, digo-te antes de avançarmos.':'Falar comigo não obriga você a comprar. Se houver preço ou condições a confirmar, eu digo antes de avançarmos.'
-    "Outras vezes tens uma hipótese. Só ainda não sabes o que fazer com ela.": "Em outros momentos, você tem uma hipótese. Só ainda não sabe o que fazer com ela.",
-    "Um teste que começa por brincadeira e te deixa uma pergunta melhor para levares contigo.": "Um teste que começa como brincadeira e deixa uma pergunta melhor para levar com você.",
-    "Espera. Nunca tinha visto isto assim.": "Espere. Nunca tinha visto isso por esse ângulo.",
-    "Não sei o que se passa contigo.": "Não sei o que está acontecendo com você.",
-    "E não preciso de fingir que sei.": "E não preciso fingir que sei.",
-    "Uma boa pergunta não te define. Dá-te outra perspetiva.": "Uma boa pergunta não define você. Ela oferece outra perspectiva.",
-    "O que fazes com aquilo que encontraste?": "O que você faz com aquilo que encontrou?",
-    "Essa parte continua a ser tua.": "Essa parte continua sendo sua.",
-    "Ou pode ser uma pergunta que merece ficar contigo mais um bocado.": "Ou pode ser uma pergunta que merece ficar com você por mais um tempo.",
   },
   en:{
     'Falar comigo | MAISON JF®':'Talk to me | MAISON JF®',
