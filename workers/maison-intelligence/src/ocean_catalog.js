@@ -478,7 +478,11 @@ for (const ocean of OCEANS) {
   if (target) ocean.pillar_key = target;
 }
 for (const ocean of OCEANS) {
-  const related = [...(PILLAR_LINKS[ocean.pillar_key] || [])].filter(key => key !== ocean.ocean_key);
+  const related = [...new Set((PILLAR_LINKS[ocean.pillar_key] || []).flatMap(pillarKey =>
+    OCEANS.filter(candidate => candidate.pillar_key === pillarKey && candidate.ocean_key !== ocean.ocean_key)
+      .slice(0, 2)
+      .map(candidate => candidate.ocean_key)
+  ))];
   ocean.connections = [...new Set([...(ocean.connections || []), ...related])];
 }
 // Materialize typed cross-links on each pillar for downstream graph consumers.
