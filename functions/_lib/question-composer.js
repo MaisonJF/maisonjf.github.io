@@ -6,10 +6,10 @@ import { qualityCheckQuestionPacks } from './experience-quality.js';
 /*
 Question Composer
 - deterministic for a given seed + repertoire + seen history
-- composes two balanced 14-card packs
+- composes two balanced 8-card packs
 - randomizes only inside editorial constraints
 - never stores or needs answer text
-- validates the complete 28-card experience before returning it
+- validates the complete 16-card experience before returning it
 */
 
 export function composeQuestionSession({
@@ -35,7 +35,7 @@ export function composeQuestionSession({
       !['review','retired'].includes(card.rotationState||'normal') &&
       !['review','retired'].includes(card.lifecycleState||'live');
   });
-  if(valid.length<28)throw new Error('insufficient_active_paid_questions');
+  if(valid.length<16)throw new Error('insufficient_active_paid_questions');
 
   const director=directQuestionExperience({theme,seed,mode});
   let best=null;

@@ -89,7 +89,7 @@ const products='<h1>Há coisas que se sentem<br>antes de se explicarem.</h1><p>E
 assert(translateMaisonHtml(products,'en','/produtos/').includes('Some things are felt'),'products_en_translation_missing');
 assert(translateMaisonHtml(products,'es','/produtos/').includes('Hay cosas que se sienten'),'products_es_translation_missing');
 
-const pdiPriceNote='<p>Cada tema · 28 perguntas · pagamento único</p>';
+const pdiPriceNote='<p>16 perguntas · pagamento único</p>';
 assert(translateMaisonHtml(pdiPriceNote,'pt-BR','/para-de-ignorar/').includes('pagamento único'),'pdi_price_note_pt_br_missing');
 assert(translateMaisonHtml(pdiPriceNote,'en','/para-de-ignorar/').includes('one-time payment'),'pdi_price_note_en_missing');
 assert(translateMaisonHtml(pdiPriceNote,'es','/para-de-ignorar/').includes('pago único'),'pdi_price_note_es_missing');

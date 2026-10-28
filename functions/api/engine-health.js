@@ -59,7 +59,7 @@ async function checkPdi(db){
       seenIds:[]
     });
     return {
-      ok:composed?.packA?.length===14&&composed?.packB?.length===14,
+      ok:composed?.packA?.length===8&&composed?.packB?.length===8,
       active_questions:questions.length,
       composed_cards:(composed?.packA?.length||0)+(composed?.packB?.length||0),
       engine_version:composed?.engineVersion||null,

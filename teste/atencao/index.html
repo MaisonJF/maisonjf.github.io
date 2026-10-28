@@ -125,7 +125,7 @@ function rankedAxes(){const exposure=Object.fromEntries(Object.keys(AXES).map(k=
 function routeMode(){const ranked=Object.entries(routeScores).sort((a,b)=>b[1]-a[1]);return ranked[0][1]===ranked[1][1]?'default':ranked[0][0]}
 const FALLBACK_OFFERS=[
  {id:'oracle-fallback',slot:'oracle',slotLabel:'Outra perspectiva',title:'Oráculo MAISON JF®',description:'Uma abertura simbólica para olhares para isto de outro ângulo.',href:'../../oraculo/',priceLabel:'2 €'},
- {id:'pdi-fallback',slot:'game',slotLabel:'Para abrir conversa',title:'PÁRA DE IGNORAR!',description:'28 perguntas para duas pessoas abrirem uma conversa que nem sempre sabe começar sozinha.',href:'../../para-de-ignorar/',priceLabel:'5 €'},
+ {id:'pdi-fallback',slot:'game',slotLabel:'Para abrir conversa',title:'PÁRA DE IGNORAR!',description:'16 perguntas para duas pessoas abrirem uma conversa que nem sempre sabe começar sozinha.',href:'../../para-de-ignorar/',priceLabel:'5 €'},
  {id:'physical-fallback',slot:'physical',slotLabel:'Um gesto concreto',title:'Produtos físicos',description:'Pausa, toque e aroma para transformar o que sentiste num gesto simples.',href:'../../produtos/',priceLabel:'Desde 7 €'},
  {id:'consultation-fallback',slot:'consultation',slotLabel:'Quero ir mais fundo',title:'Consulta de Tarot',description:'Uma leitura individual para explorar a situação por outro ângulo.',href:'../../servicos/',priceLabel:'35 €'}
 ];

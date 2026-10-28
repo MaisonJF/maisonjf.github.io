@@ -290,9 +290,9 @@ assets.push({
   currency:'EUR',
   catalogue_availability:null,
   condition:null,
-  description:'28 perguntas. Duas pessoas. Uma conversa que não precisa de guardar respostas.',
+  description:'16 perguntas. A dois ou em grupo. Uma conversa que não precisa de guardar respostas.',
   search_context:[
-    'pdi','pára de ignorar','para de ignorar','jogo digital','28 perguntas','duas pessoas','conversa',
+    'pdi','pára de ignorar','para de ignorar','jogo digital','16 perguntas','duas pessoas','conversa',
     ...pdiOffers.flatMap(x=>[x.title,x.description,...(x.axes||[]),...(x.territories||[]),...(x.routes||[])]),
     ...pdiSignals.flatMap(x=>[x.slug,x.label,x.family,x.focus,x.signal,x.hidden])
   ].filter(Boolean),

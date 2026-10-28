@@ -1,55 +1,10 @@
-import { listAvailablePdiThemes } from '../_lib/pdi-theme-catalogue.js';
-import { normalizeMaisonLocale } from '../_lib/maison-locales.js';
-
-export async function onRequestGet({request,env}){
-  try{
-    const url=new URL(request.url);
-    const rawLocale=url.searchParams.get('locale')||url.searchParams.get('lang')||'pt-PT';
-    const locale=normalizeMaisonLocale(rawLocale,{fallback:null});
-    if(!locale)return json({themes:[],error:'invalid_locale'},400);
-    const themes=await listAvailablePdiThemes(env,locale);
-    return json({
-      themes:themes.map(item=>({
-        slug:item.slug,
-        label:item.label,
-        family:item.family,
-        available:true,
-        live_questions:item.liveQuestions,
-        currency:String(item.currency||'eur').toUpperCase(),
-        amount_cents:item.amount,
-        display_price:formatPrice(item.amount,item.currency,locale)
-      })),
-      locale
-    });
-  }catch(error){
-    console.error('[pdi-themes-live] catalogue_failed',{
-      name:String(error?.name||'Error'),
-      code:String(error?.code||''),
-      message:String(error?.message||'unknown').slice(0,180)
-    });
-    return json({themes:[]},503);
-  }
-}
-
-function formatPrice(cents,currency='eur',locale='pt-PT'){
-  const value=Number(cents||0)/100;
-  const whole=Number.isInteger(value);
-  const intlLocale=locale==='pt-PT'?'pt-PT':locale==='pt-BR'?'pt-BR':locale==='es'?'es-ES':'en-IE';
-  return new Intl.NumberFormat(intlLocale,{
-    style:'currency',
-    currency:String(currency||'eur').toUpperCase(),
-    minimumFractionDigits:whole?0:2,
-    maximumFractionDigits:whole?0:2
-  }).format(value);
-}
-function json(payload,status=200){
-  return new Response(JSON.stringify(payload),{
-    status,
+// Public theme catalogues are intentionally not exposed. Theme selection is server-side.
+export async function onRequestGet(){
+  return new Response(JSON.stringify({error:'not_found'}),{
+    status:404,
     headers:{
       'content-type':'application/json; charset=utf-8',
-      'cache-control':status===200
-        ? 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400'
-        : 'no-store',
+      'cache-control':'no-store',
       'x-content-type-options':'nosniff'
     }
   });

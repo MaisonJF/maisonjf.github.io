@@ -1,4 +1,5 @@
-import { pdiThemeAvailability } from '../_lib/pdi-theme-catalogue.js';
+import { listAvailablePdiThemes } from '../_lib/pdi-theme-catalogue.js';
+import { getPdiTheme } from '../_lib/pdi-theme-registry.js';
 import { normalizeMaisonLocale, stripeLocaleForMaison } from '../_lib/maison-locales.js';
 import { brazilMarketAccessResponse } from '../_lib/brazil-market.js';
 
@@ -25,7 +26,6 @@ export async function onRequestPost({request,env}){
     }
 
     const body=await request.json().catch(()=>({}));
-    const theme=String(body?.theme||'relacoes');
     const mode=String(body?.mode||'duo');
     if(!['duo','group'].includes(mode)){
       return json({error:'Modo de jogo inválido.'},400);
@@ -35,9 +35,14 @@ export async function onRequestPost({request,env}){
     if(!locale)return json({error:'Idioma inválido.'},400);
     const marketError = brazilMarketAccessResponse(request, locale);
     if (marketError) return marketError;
-    const product=await pdiThemeAvailability(env,theme,locale);
-    if(!product)return json({error:'Produto inválido.'},400);
-    if(!product.available)return json({error:'Este tema ainda não está disponível neste idioma.'},409);
+    const availableThemes=(await listAvailablePdiThemes(env,locale)).filter(item=>{
+      const canonicalFamily=String(getPdiTheme(item.slug)?.family||item.family||'');
+      return mode==='group'
+        ? canonicalFamily==='Amigos, Grupos & Festas'
+        : canonicalFamily!=='Amigos, Grupos & Festas';
+    });
+    const product=availableThemes[Math.floor(Math.random()*availableThemes.length)];
+    if(!product)return json({error:'O jogo está temporariamente indisponível neste modo. Tenta novamente mais tarde.'},409);
 
     const params=new URLSearchParams();
     params.set('mode','payment');
@@ -46,9 +51,9 @@ export async function onRequestPost({request,env}){
     params.set('line_items[0][quantity]','1');
     params.set('line_items[0][price_data][currency]',String(product.currency||'eur'));
     params.set('line_items[0][price_data][unit_amount]',String(product.amount));
-    params.set('line_items[0][price_data][product_data][name]',(PDI_PRODUCT_NAME[locale]||PDI_PRODUCT_NAME['pt-PT'])+' · '+product.label+(mode==='group'?' · Grupo & Festa':' · A Dois'));
+    params.set('line_items[0][price_data][product_data][name]',(PDI_PRODUCT_NAME[locale]||PDI_PRODUCT_NAME['pt-PT'])+(mode==='group'?' · Grupo & Festa':' · A Dois'));
     params.set('success_url',url.origin+'/para-de-ignorar/jogar.html?session_id={CHECKOUT_SESSION_ID}&theme='+encodeURIComponent(product.slug)+'&locale='+encodeURIComponent(locale)+'&mode='+encodeURIComponent(mode));
-    params.set('cancel_url',url.origin+publicPrefix(locale)+'/para-de-ignorar/?theme='+encodeURIComponent(product.slug)+'&mode='+encodeURIComponent(mode));
+    params.set('cancel_url',url.origin+publicPrefix(locale)+'/para-de-ignorar/?mode='+encodeURIComponent(mode));
     params.set('metadata[environment]','maison-jf-live');
     params.set('metadata[source]','para-de-ignorar-live');
     params.set('metadata[pdi_access]','single-session');

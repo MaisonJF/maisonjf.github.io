@@ -16,7 +16,7 @@ import { vaultLocalizationReady } from './maison-localized-content.js';
 import { getPdiTheme } from './pdi-theme-registry.js';
 
 /*
-Creates one stable 28-card paid session.
+Creates one stable 16-card paid session.
 This module never receives or stores players' answer text.
 Stripe payment validation belongs in the API route that calls this module.
 */
@@ -111,10 +111,10 @@ function assertPlayableLocalizedSession(session,locale){
   if(normalizeMaisonLocale(session.locale||'pt-PT')!==selectedLocale)throw new Error('pdi_session_locale_integrity_failed');
   const packA=Array.isArray(session.packA)?session.packA:[];
   const packB=Array.isArray(session.packB)?session.packB:[];
-  if(packA.length!==14||packB.length!==14)throw new Error('pdi_session_card_count_integrity_failed');
+  if(packA.length!==8||packB.length!==8)throw new Error('pdi_session_card_count_integrity_failed');
   const cards=[...packA,...packB];
   const ids=cards.map(card=>String(card?.id||''));
-  if(ids.some(id=>!id)||new Set(ids).size!==28)throw new Error('pdi_session_question_identity_integrity_failed');
+  if(ids.some(id=>!id)||new Set(ids).size!==16)throw new Error('pdi_session_question_identity_integrity_failed');
   if(cards.some(card=>typeof card?.text!=='string'||card.text.trim().length<2))throw new Error('pdi_session_localized_text_missing');
   return true;
 }

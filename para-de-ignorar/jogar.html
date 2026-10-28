@@ -68,7 +68,7 @@ linear-gradient(#080807,#030303);color:#eee9df}
 
       <div class="screen intro" id="intro">
         <p class="intro__mark">PÁRA DE IGNORAR! · <span id="intro-theme">RELAÇÕES</span></p>
-        <h1>28 perguntas.<br>Duas pessoas.</h1>
+        <h1>16 perguntas.<br>Duas pessoas.</h1>
         <p>Uma pergunta de cada vez.</p>
         <p class="rule">Podem passar. Sem explicar.</p>
         <div class="group-setup" id="group-setup" hidden>
@@ -86,7 +86,7 @@ linear-gradient(#080807,#030303);color:#eee9df}
       </div>
 
       <div class="screen card" id="card" aria-live="polite">
-        <div class="card__meta"><span id="pack-label">PACK A</span><span id="counter">1 / 14</span></div>
+        <div class="card__meta"><span id="pack-label">PACK A</span><span id="counter">1 / 8</span></div>
         <p class="card__question" id="question"></p>
         <div class="group-challenge" id="group-challenge" hidden>
           <small id="group-challenge-title">DESAFIO DE FESTA</small>
@@ -99,7 +99,7 @@ linear-gradient(#080807,#030303);color:#eee9df}
       </div>
 
       <div class="screen swap" id="swap">
-        <p class="intro__mark">14 / 28</p>
+        <p class="intro__mark">8 / 16</p>
         <h1>TROQUEM.</h1>
         <p>Agora pergunta a outra pessoa.</p>
         <button class="action action--solid" id="continue" type="button">Continuar</button>
@@ -126,41 +126,41 @@ window.addEventListener('DOMContentLoaded',async()=>{
  const locale=LOCALES.includes(requestedLocale)?requestedLocale:'pt-PT';
  const COPY={
   'pt-PT':{
-   brand:'PÁRA DE IGNORAR!',loading:'A abrir a tua sessão.',headline:'28 perguntas.<br>Duas pessoas.',groupHeadline:'28 perguntas.<br>Um grupo inteiro.',
+   brand:'PÁRA DE IGNORAR!',loading:'A abrir a tua sessão.',headline:'16 perguntas.<br>Duas pessoas.',groupHeadline:'16 perguntas.<br>Um grupo inteiro.',
    one:'Uma pergunta de cada vez.',groupOne:'A vez roda. Responde, passa ou lança a conversa ao grupo.',
    rule:'Podem passar. Sem explicar.',groupRule:'3 a 12 pessoas. Podem passar. Não guardamos respostas.',
    start:'Começar',pass:'Passar',next:'Seguinte →',swap:'TROQUEM.',swapText:'Agora pergunta a outra pessoa.',cont:'Continuar',
-   finish:'Fica entre vocês.',groupFinish:'A conversa continua.',finishText:'Não preciso de saber o que disseram.',groupFinishText:'28 perguntas. As respostas ficam fora do jogo.',
+   finish:'Fica entre vocês.',groupFinish:'A conversa continua.',finishText:'Não preciso de saber o que disseram.',groupFinishText:'16 perguntas. As respostas ficam fora do jogo.',
    back:'Voltar à Maison',invalid:'Não encontrei uma sessão paga válida.',openFail:'Não foi possível abrir esta sessão.',pack:'PACK',
    groupSetupLabel:'Quantas pessoas vão jogar?',groupSetupNote:'Não precisamos dos nomes. As respostas ficam fora do jogo.',
    player:'PESSOA',round:'RODA',challenge:'DESAFIO DE FESTA'
   },
   'pt-BR':{
-   brand:'PARE DE IGNORAR!',loading:'Abrindo sua sessão.',headline:'28 perguntas.<br>Duas pessoas.',groupHeadline:'28 perguntas.<br>Um grupo inteiro.',
+   brand:'PARE DE IGNORAR!',loading:'Abrindo sua sessão.',headline:'16 perguntas.<br>Duas pessoas.',groupHeadline:'16 perguntas.<br>Um grupo inteiro.',
    one:'Uma pergunta de cada vez.',groupOne:'A vez roda. Responda, passe ou lance a conversa para o grupo.',
    rule:'Vocês podem passar. Sem explicar.',groupRule:'3 a 12 pessoas. Passar é permitido. As respostas não são guardadas.',
    start:'Começar',pass:'Passar',next:'Seguinte →',swap:'TROQUEM.',swapText:'Agora pergunte à outra pessoa.',cont:'Continuar',
-   finish:'Fica entre vocês.',groupFinish:'A conversa continua.',finishText:'Não preciso saber o que vocês disseram.',groupFinishText:'28 perguntas. As respostas ficam fora do jogo.',
+   finish:'Fica entre vocês.',groupFinish:'A conversa continua.',finishText:'Não preciso saber o que vocês disseram.',groupFinishText:'16 perguntas. As respostas ficam fora do jogo.',
    back:'Voltar à Maison',invalid:'Não encontrei uma sessão paga válida.',openFail:'Não foi possível abrir esta sessão.',pack:'PACK',
    groupSetupLabel:'Quantas pessoas vão jogar?',groupSetupNote:'Não precisamos dos nomes. As respostas ficam fora do jogo.',
    player:'PESSOA',round:'RODA',challenge:'DESAFIO DE FESTA'
   },
   en:{
-   brand:'STOP IGNORING IT!',loading:'Opening your session.',headline:'28 questions.<br>Two people.',groupHeadline:'28 questions.<br>A whole group.',
+   brand:'STOP IGNORING IT!',loading:'Opening your session.',headline:'16 questions.<br>Two people.',groupHeadline:'16 questions.<br>A whole group.',
    one:'One question at a time.',groupOne:'Turns rotate. Answer, pass, or bring the group into the conversation.',
    rule:'You can pass. No explanation needed.',groupRule:'3 to 12 people. Anyone can pass. Answers are never stored.',
    start:'Start',pass:'Pass',next:'Next →',swap:'SWITCH.',swapText:'Now ask the other person.',cont:'Continue',
-   finish:'It stays between you.',groupFinish:'The conversation carries on.',finishText:'I do not need to know what you said.',groupFinishText:'28 questions. Answers stay out of the game.',
+   finish:'It stays between you.',groupFinish:'The conversation carries on.',finishText:'I do not need to know what you said.',groupFinishText:'16 questions. Answers stay out of the game.',
    back:'Back to Maison',invalid:'I could not find a valid paid session.',openFail:'This session could not be opened.',pack:'PACK',
    groupSetupLabel:'How many people are playing?',groupSetupNote:'No names needed. Answers stay out of the game.',
    player:'PLAYER',round:'ROUND',challenge:'PARTY CHALLENGE'
   },
   es:{
-   brand:'¡DEJA DE IGNORARLO!',loading:'Abriendo tu sesión.',headline:'28 preguntas.<br>Dos personas.',groupHeadline:'28 preguntas.<br>Todo el grupo.',
+   brand:'¡DEJA DE IGNORARLO!',loading:'Abriendo tu sesión.',headline:'16 preguntas.<br>Dos personas.',groupHeadline:'16 preguntas.<br>Todo el grupo.',
    one:'Una pregunta cada vez.',groupOne:'Los turnos rotan. Responde, pasa o incorpora al grupo a la conversación.',
    rule:'Podéis pasar. Sin explicar.',groupRule:'De 3 a 12 personas. Cualquiera puede pasar. No guardamos respuestas.',
    start:'Empezar',pass:'Pasar',next:'Siguiente →',swap:'CAMBIAD.',swapText:'Ahora pregunta a la otra persona.',cont:'Continuar',
-   finish:'Queda entre vosotros.',groupFinish:'La conversación continúa.',finishText:'No necesito saber lo que habéis dicho.',groupFinishText:'28 preguntas. Las respuestas no se guardan.',
+   finish:'Queda entre vosotros.',groupFinish:'La conversación continúa.',finishText:'No necesito saber lo que habéis dicho.',groupFinishText:'16 preguntas. Las respuestas no se guardan.',
    back:'Volver a Maison',invalid:'No he encontrado una sesión pagada válida.',openFail:'No se pudo abrir esta sesión.',pack:'PACK',
    groupSetupLabel:'¿Cuántas personas van a jugar?',groupSetupNote:'No necesitamos los nombres. Las respuestas no se guardan.',
    player:'PERSONA',round:'RONDA',challenge:'RETO DE FIESTA'
@@ -323,7 +323,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
  let state={pack:'A',index:0,started:false,swapped:false,finished:false,players:4,challengeOffset:challengeOffsetFor(sessionId,GROUP_CHALLENGES[locale].length)};
  try{
   const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
-  if(saved&&['A','B'].includes(saved.pack)&&Number.isInteger(saved.index)&&saved.index>=0&&saved.index<14){
+  if(saved&&['A','B'].includes(saved.pack)&&Number.isInteger(saved.index)&&saved.index>=0&&saved.index<8){
     state={...state,...saved};
   }
  }catch{}
@@ -336,7 +336,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
   if(Number.isInteger(count)&&count>=3&&count<=12){state.players=count;save();}
  });
  function save(){try{localStorage.setItem(storageKey,JSON.stringify(state))}catch{}}
- function position(){return (state.pack==='A'?0:14)+state.index+1}
+ function position(){return (state.pack==='A'?0:8)+state.index+1}
  const challengeBox=document.getElementById('group-challenge');
  function renderCard(){
   const cards=packs[state.pack];
@@ -345,9 +345,9 @@ window.addEventListener('DOMContentLoaded',async()=>{
   const absolute=position();
   const player=((absolute-1)%state.players)+1;
   document.getElementById('pack-label').textContent=groupMode
-    ?COPY.round+' '+Math.ceil(absolute/14)+' · '+COPY.player+' '+player
+    ?COPY.round+' '+Math.ceil(absolute/8)+' · '+COPY.player+' '+player
     :COPY.pack+' '+state.pack;
-  document.getElementById('counter').textContent=groupMode?absolute+' / 28':(state.index+1)+' / 14';
+  document.getElementById('counter').textContent=groupMode?absolute+' / 16':(state.index+1)+' / 8';
   document.getElementById('question').textContent=card.text;
   if(groupMode&&absolute%4===0){
     const challenge=GROUP_CHALLENGES[locale][(state.challengeOffset+Math.floor((absolute-1)/4))%GROUP_CHALLENGES[locale].length];
@@ -368,7 +368,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
   }).catch(()=>{});
  };
  function advance(kind){
-  const wasLast=state.index>=13;
+  const wasLast=state.index>=7;
   const absolute=position();
   const currentCard=packs[state.pack]?.[state.index];
   const player=((absolute-1)%state.players)+1;
@@ -384,7 +384,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
   finish();
  }
  function finish(){
-  state.finished=true;state.pack='B';state.index=13;save();show('finish');
+  state.finished=true;state.pack='B';state.index=7;save();show('finish');
   track('pdi_session_complete',{theme:payload.theme,locale,mode,...(groupMode?{group_size:state.players}:{}),page_path:location.pathname});
   sendEvent('completed');
  }
