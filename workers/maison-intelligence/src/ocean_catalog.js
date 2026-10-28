@@ -497,7 +497,9 @@ const OCEAN_BY_KEY = new Map(OCEANS.map(o => [o.ocean_key, o]));
 const BRAND_OCEANS = OCEANS.filter(o => o.ocean_key.startsWith('brand-'));
 const NON_BRAND_PILLARS = PILLARS.filter(p => p.key !== 'luxury-brand-intelligence');
 
-export const OCEAN_CATALOG_VERSION = 'JF-OCEANS-2026.10.1';
+export const OCEAN_CATALOG_VERSION = 'JF-OCEANS-2026.10.2';
+const PILLAR_KEY_RE = /^[a-z0-9][a-z0-9._:-]{1,159}$/;
+const normaliseKey = value => String(value ?? '').trim().toLowerCase();
 export const OCEAN_PILLARS = PILLARS;
 export const OCEAN_CATALOG = OCEANS;
 
@@ -541,19 +543,61 @@ function normalizedDynamicRow(row) {
   };
 }
 
+function normalisedDynamicPillar(row) {
+  return {
+    key: String(row.pillar_key),
+    name: String(row.display_name),
+    mission: String(row.mission),
+    connections: parseJsonArray(row.connections_json),
+    parent_pillars: parseJsonArray(row.parent_pillars_json),
+    lifecycle_state: String(row.lifecycle_state || 'open'),
+    origin: 'human_approved_dynamic',
+    source_candidate_id: row.source_candidate_id || null
+  };
+}
+
+export async function loadActivePillarRegistry(env) {
+  const registry = [...PILLARS.map(p => ({ ...p }))];
+  if (!env?.GROWTH_DB) return registry;
+  const result = await env.GROWTH_DB.prepare(`
+    SELECT pillar_key,display_name,mission,connections_json,parent_pillars_json,lifecycle_state,source_candidate_id
+      FROM ocean_pillar_registry
+     WHERE lifecycle_state='open'
+     ORDER BY created_at,pillar_key
+  `).all();
+  const known = new Set(registry.map(p => p.key));
+  for (const row of result?.results || []) {
+    const item = normalisedDynamicPillar(row);
+    if (!known.has(item.key)) {
+      registry.push(item);
+      known.add(item.key);
+    }
+  }
+  const allKeys = new Set(registry.map(p => p.key));
+  for (const pillar of registry) {
+    pillar.connections = [...new Set((pillar.connections || []).filter(key => key !== pillar.key && allKeys.has(key)))];
+    pillar.parent_pillars = [...new Set((pillar.parent_pillars || []).filter(key => key !== pillar.key && allKeys.has(key)))];
+  }
+  return registry;
+}
+
 export async function loadActiveOceanRegistry(env) {
   const registry = [...OCEANS];
   if (!env?.GROWTH_DB) return registry;
-  const result = await env.GROWTH_DB.prepare(`
-    SELECT ocean_key,display_name,pillar_key,mission,focus_json,connections_json,lifecycle_state,source_candidate_id
-      FROM ocean_specialist_registry
-     WHERE lifecycle_state='open'
-     ORDER BY created_at,ocean_key
-  `).all();
+  const [result, pillars] = await Promise.all([
+    env.GROWTH_DB.prepare(`
+      SELECT ocean_key,display_name,pillar_key,mission,focus_json,connections_json,lifecycle_state,source_candidate_id
+        FROM ocean_specialist_registry
+       WHERE lifecycle_state='open'
+       ORDER BY created_at,ocean_key
+    `).all(),
+    loadActivePillarRegistry(env)
+  ]);
   const known = new Set(registry.map(o => o.ocean_key));
+  const knownPillars = new Set(pillars.map(p => p.key));
   for (const row of result?.results || []) {
     const item = normalizedDynamicRow(row);
-    if (!known.has(item.ocean_key)) {
+    if (!known.has(item.ocean_key) && knownPillars.has(item.pillar_key)) {
       registry.push(item);
       known.add(item.ocean_key);
     }
@@ -561,47 +605,44 @@ export async function loadActiveOceanRegistry(env) {
   return registry;
 }
 
-export function selectOceanFocus({catalog = OCEANS, runKey = '', limit = 16} = {}) {
-  const max = Math.max(1, Math.min(24, Number.parseInt(limit, 10) || 16));
-  const byPillar = new Map(PILLARS.map(p => [p.key, []]));
-  const dynamic = [];
+export function selectOceanFocus({catalog = OCEANS, pillars = PILLARS, runKey = '', limit = 16} = {}) {
+  const max = Math.max(1, Math.min(128, Number.parseInt(limit, 10) || 16));
+  const activePillars = [...(pillars || PILLARS)].filter(p => p && p.lifecycle_state !== 'paused' && p.lifecycle_state !== 'archived');
+  const byPillar = new Map(activePillars.map(p => [p.key, []]));
+  const unclassified = [];
   for (const ocean of catalog || []) {
     if (!ocean || ocean.lifecycle_state === 'paused' || ocean.lifecycle_state === 'archived') continue;
     if (byPillar.has(ocean.pillar_key)) byPillar.get(ocean.pillar_key).push(ocean);
-    else dynamic.push(ocean);
+    else unclassified.push(ocean);
   }
   for (const group of byPillar.values()) group.sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
-  dynamic.sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
+  unclassified.sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
   const seed = [...String(runKey || new Date().toISOString().slice(0, 10))]
     .reduce((n, char) => (n * 31 + char.charCodeAt(0)) >>> 0, 7);
+  const activeWithOceans = activePillars.filter(p => (byPillar.get(p.key) || []).length > 0);
+  const rotation = activeWithOceans.length ? seed % activeWithOceans.length : 0;
+  const orderedPillars = [...activeWithOceans.slice(rotation), ...activeWithOceans.slice(0, rotation)];
   const selected = [];
-  for (const pillar of PILLARS) {
+  for (const pillar of orderedPillars) {
+    if (selected.length >= max) break;
     const group = byPillar.get(pillar.key) || [];
     if (!group.length) continue;
-    if (pillar.key === 'luxury-brand-intelligence') {
-      selected.push(group[seed % group.length]);
-    } else {
-      const offset = Math.floor(seed / 11) % group.length;
-      selected.push(group[offset]);
-    }
+    const offset = Math.floor(seed / 11) % group.length;
+    selected.push((pillar.key.includes('brand') || pillar.key.includes('perfumery') || pillar.key.includes('maison'))
+      ? group[(seed + selected.length * 7) % group.length]
+      : group[offset]);
   }
-  const brandPool = [...BRAND_OCEANS].sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
+  const all = [...(catalog || [])].filter(o => o && o.lifecycle_state !== 'paused' && o.lifecycle_state !== 'archived')
+    .sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
   const used = new Set(selected.map(o => o.ocean_key));
-  for (let i = 0; selected.length < max && i < max * 4; i++) {
-    let next;
-    if (brandPool.length && i < Math.max(0, max - PILLARS.length)) {
-      next = brandPool[(seed + i * 7) % brandPool.length];
-    } else {
-      const all = [...catalog].sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
-      if (!all.length) break;
-      next = all[(seed + i * 13) % all.length];
-    }
+  for (let i = 0; selected.length < max && i < max * 6; i++) {
+    const next = all.length ? all[(seed + i * 13) % all.length] : null;
     if (next && !used.has(next.ocean_key)) {
       selected.push(next);
       used.add(next.ocean_key);
     }
   }
-  for (const ocean of dynamic) {
+  for (const ocean of unclassified) {
     if (selected.length >= max) break;
     if (!used.has(ocean.ocean_key)) {
       selected.push(ocean);
@@ -609,26 +650,24 @@ export function selectOceanFocus({catalog = OCEANS, runKey = '', limit = 16} = {
     }
   }
   const knownKeys = new Set((catalog || []).map(ocean => ocean?.ocean_key).filter(Boolean));
-  return selected.slice(0, max).map(ocean => {
-    const links = [...new Set((ocean.connections || []).filter(key => key !== ocean.ocean_key && knownKeys.has(key)))].slice(0, 8);
-    const focus = Array.isArray(ocean.focus) ? ocean.focus : [];
-    return {
-      ocean_key: ocean.ocean_key,
-      display_name: ocean.display_name,
-      pillar_key: ocean.pillar_key,
-      mission: ocean.mission,
-      focus,
-      connections: links
-    };
-  });
+  const knownPillarKeys = new Set(activePillars.map(p => p.key));
+  return selected.slice(0, max).map(ocean => ({
+    ocean_key: ocean.ocean_key,
+    display_name: ocean.display_name,
+    pillar_key: ocean.pillar_key,
+    mission: ocean.mission,
+    focus: Array.isArray(ocean.focus) ? ocean.focus : [],
+    connections: [...new Set((ocean.connections || []).filter(key => key !== ocean.ocean_key && knownKeys.has(key)))].slice(0, 12),
+    connected_pillars: [...new Set((activePillars.find(p => p.key === ocean.pillar_key)?.connections || []).filter(key => key !== ocean.pillar_key && knownPillarKeys.has(key)))].slice(0, 12)
+  }));
 }
 
-export function validateOceanProposal(raw, catalog = OCEANS) {
-  const key = String(raw?.proposed_ocean_key ?? '').trim().toLowerCase();
+export function validateOceanProposal(raw, catalog = OCEANS, pillars = PILLARS) {
+  const key = normaliseKey(raw?.proposed_ocean_key);
   if (!KEY_RE.test(key)) throw new Error('invalid_ocean_proposal_key');
   if (catalog.some(o => o.ocean_key === key)) throw new Error('ocean_proposal_key_exists');
-  const pillar = String(raw?.pillar_key ?? '').trim().toLowerCase();
-  if (!PILLAR_BY_KEY.has(pillar)) throw new Error('invalid_ocean_proposal_pillar');
+  const pillar = normaliseKey(raw?.pillar_key);
+  if (!(pillars || PILLARS).some(p => p.key === pillar)) throw new Error('invalid_ocean_proposal_pillar');
   const displayName = String(raw?.display_name ?? '').trim().replace(/\s+/g, ' ').slice(0, 120);
   const mission = String(raw?.mission ?? '').trim().replace(/\s+/g, ' ').slice(0, 1200);
   if (displayName.length < 3) throw new Error('invalid_ocean_proposal_name');
@@ -636,8 +675,25 @@ export function validateOceanProposal(raw, catalog = OCEANS) {
   const focus = parseJsonArray(raw?.focus).map(x => String(x).trim().replace(/\s+/g, ' ').slice(0, 200)).filter(Boolean).slice(0, 12);
   if (focus.length < 2) throw new Error('invalid_ocean_proposal_focus');
   const known = new Set(catalog.map(o => o.ocean_key));
-  const connections = parseJsonArray(raw?.connections).map(x => String(x).trim().toLowerCase()).filter(x => known.has(x) && x !== key).slice(0, 12);
+  const connections = [...new Set(parseJsonArray(raw?.connections).map(normaliseKey).filter(key => known.has(key) && key !== key))].slice(0, 12);
   return { ocean_key: key, display_name: displayName, pillar_key: pillar, mission, focus, connections };
+}
+
+export function validatePillarProposal(raw, pillars = PILLARS) {
+  const key = normaliseKey(raw?.proposed_pillar_key);
+  if (!PILLAR_KEY_RE.test(key)) throw new Error('invalid_pillar_proposal_key');
+  if ((pillars || PILLARS).some(p => p.key === key)) throw new Error('pillar_proposal_key_exists');
+  const displayName = String(raw?.display_name ?? '').trim().replace(/\s+/g, ' ').slice(0, 120);
+  const mission = String(raw?.mission ?? '').trim().replace(/\s+/g, ' ').slice(0, 1200);
+  if (displayName.length < 3) throw new Error('invalid_pillar_proposal_name');
+  if (mission.length < 30) throw new Error('invalid_pillar_proposal_mission');
+  const known = new Set((pillars || PILLARS).map(p => p.key));
+  const connections = [...new Set(parseJsonArray(raw?.connections).map(normaliseKey).filter(connected => known.has(connected) && connected !== key))].slice(0, 12);
+  const parents = [...new Set(parseJsonArray(raw?.parent_pillars).map(normaliseKey).filter(parent => known.has(parent) && parent !== key))].slice(0, 8);
+  if (!connections.length && !parents.length) throw new Error('pillar_proposal_requires_links');
+  const focus = parseJsonArray(raw?.focus).map(x => String(x).trim().replace(/\s+/g, ' ').slice(0, 200)).filter(Boolean).slice(0, 12);
+  if (focus.length < 2) throw new Error('invalid_pillar_proposal_focus');
+  return { key, display_name: displayName, mission, connections, parent_pillars: parents, focus };
 }
 
 export async function handleOceanCatalogRequest(request, env) {
