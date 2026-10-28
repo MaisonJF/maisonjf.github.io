@@ -101,13 +101,13 @@ test('party mode has 24 varied challenges per locale with session-specific rotat
   assert.match(script,/state\.challengeOffset\+Math\.floor\(\(absolute-1\)\/4\)/);
 });
 
-test('sales page sends the selected mode into checkout while keeping answer privacy visible',()=>{
+test('sales page offers only two modes and sends no public theme choice to checkout',()=>{
   const page=read('para-de-ignorar/index.html');
   assert.match(page,/data-mode="duo"/);
   assert.match(page,/data-mode="group"/);
-  assert.match(page,/theme.family==='Amigos, Grupos & Festas'/);
-  assert.match(page,/t.groupEmpty/);
-  assert.match(page,/JSON\.stringify\(\{theme,locale,mode\}\)/);
-  assert.match(page,/os novos packs de Amigos & Festas/i);
+  assert.match(page,/16 perguntas/);
+  assert.match(page,/JSON\.stringify\(\{locale,mode\}\)/);
+  assert.doesNotMatch(page,/theme\.family==='Amigos, Grupos & Festas'/);
+  assert.doesNotMatch(page,/groupEmpty|Escolher tema|Procurar tema|Filtrar por categoria/);
   assert.match(page,/nunca as tuas respostas/i);
 });
