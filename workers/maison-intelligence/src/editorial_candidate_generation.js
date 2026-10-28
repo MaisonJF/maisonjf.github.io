@@ -104,7 +104,7 @@ export async function generateEditorialCandidates(env,{caller,oceanContext,brain
       stored:0,duplicates:0,rejected:0,results:[],usage:generated?.usage||null
     };
   }
-  const questions=rows(payload.questions,MAX_QUESTIONS);
+  const questions=(destinations.has('pdi_game')||destinations.has('vpc_test'))?rows(payload.questions,MAX_QUESTIONS):[];
   const oracleBlocks=destinations.has('oracle')?rows(payload.oracle_blocks,MAX_ORACLE_BLOCKS):[];
   const results=[];
   let rejected=0;
