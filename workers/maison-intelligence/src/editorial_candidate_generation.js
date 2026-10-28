@@ -25,7 +25,7 @@ function candidatePrompt({oceanContext,brainAlert,learningPatterns=[]}={}){
     'NÃO transformes sinais comerciais, técnicos ou operacionais em perguntas de jogo nem em afirmações de Oráculo. Ecommerce, customer journey, SEO, checkout, conversão, análise de vendas, UX do site, fornecedores, preço, stock, logística, integrações, código, deployment, métricas e estratégia comercial pertencem a outros destinos MAISON.',
     'Não uses o Oráculo como depósito de frases reflexivas genéricas. Só escolhe oracle quando existe uma tensão humana clara que beneficie de uma afirmação prudente, aberta e não preditiva. Não escrevas uma leitura pessoal como se conhecesses a pessoa.',
     'Só escolhe pdi_game (PÁRA DE IGNORAR!) quando a pergunta abre uma conversa real a dois ou num grupo e é adequada ao tema, modo e pack. Só escolhe vpc_test quando a pergunta mede ou explora uma experiência humana coerente com um teste de reflexão. Não forces uma pergunta gratuita para preencher cobertura.',
-    'A pergunta deve ser feita diretamente à pessoa, num contexto reconhecível, sem pedir conselhos, estratégias ou ajuda do tipo “como posso…?”. Evita linguagem clínica ou de autoajuda genérica. O tema deve ser um slug estável em minúsculas, sem acentos, com palavras separadas por hífen.';
+    'A pergunta deve ser feita diretamente à pessoa, num contexto reconhecível, sem pedir conselhos, estratégias ou ajuda do tipo “como posso…?”. Evita linguagem clínica ou de autoajuda genérica. O tema deve ser um slug estável em minúsculas, sem acentos, com palavras separadas por hífen.',
     `Ocean key: ${ocean}`,
     `Observed public-language summary: ${summary}`,
     `Useful theme terms: ${terms.join(' | ')||'none'}`,
