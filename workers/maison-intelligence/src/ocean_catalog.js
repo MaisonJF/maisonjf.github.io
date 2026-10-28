@@ -343,7 +343,7 @@ const OCEAN_PILLAR_OVERRIDES = {
   'stress-overload-digital-fatigue':'wellbeing-human-needs',
   'personal-rewards':'customer-motivations-gifting',
   'quiet-social-experiences':'relationships-social-connection',
-  'maison-philosophy':'maison-identity-positioning',
+  'maison-philosophy':'maison-philosophy-conversion',
   'brand-positioning':'maison-identity-positioning',
   'copywriting-conversion':'conversion-growth-experiments',
   'offer-architecture':'bundles-revenue-ecosystems',
