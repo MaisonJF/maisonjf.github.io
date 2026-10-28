@@ -214,8 +214,9 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
    try{
      const raw=JSON.parse(await file.text());
      const schemas={
-       'maison-vault-proposed-retirement-v1':{action:'retire',label:'retirada da seleção live'},
-       'maison-vault-proposed-quarantine-v1':{action:'quarantine',label:'suspensão temporária para revisão'}
+       'maison-vault-proposed-retirement-v1':{action:'retire',label:'retirada da seleção live',sourceKind:'ocean_seed_candidate',qualityVersion:''},
+       'maison-vault-proposed-quarantine-v1':{action:'quarantine',label:'suspensão temporária para revisão',sourceKind:'ocean_mcp_candidate',qualityVersion:''},
+       'maison-vault-proposed-quarantine-import-batch-v1':{action:'quarantine',label:'suspensão do lote amor-001 para revisão',sourceKind:'maison_private_import',qualityVersion:'private-import:amor-001:v1'}
      };
      const selectedSchema=schemas[raw.schema];
      if(!selectedSchema)throw new Error('Esquema do plano não reconhecido.');
@@ -223,11 +224,14 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
      if(!Array.isArray(raw.items)||!raw.items.length)throw new Error('O plano não contém registos.');
      if(raw.items.length>1000)throw new Error('O plano excede o limite seguro de 1000 registos.');
      if(Number(raw.total)!==raw.items.length)throw new Error('A contagem do plano não coincide com os registos.');
-     const expectedSource=raw.schema==='maison-vault-proposed-retirement-v1'?'ocean_seed_candidate':'ocean_mcp_candidate';
+     const expectedSource=selectedSchema.sourceKind;
+     const expectedQualityVersion=selectedSchema.qualityVersion||'';
      const seen=new Set(),normalized=[];
      for(const item of raw.items){
-       if(item?.source_kind!==expectedSource||item?.status!=='active'||item?.lifecycle_state!=='live'){
-         throw new Error('O plano contém um registo fora do âmbito previsto ('+expectedSource+', active/live).');
+       if(item?.source_kind!==expectedSource||item?.status!=='active'||item?.lifecycle_state!=='live'||
+          (expectedQualityVersion&&item?.quality_version!==expectedQualityVersion)){
+         throw new Error('O plano contém um registo fora do âmbito previsto ('+expectedSource+
+           (expectedQualityVersion?' / '+expectedQualityVersion:'')+', active/live).');
        }
        const type=String(item?.content_type||'');
        const id=String(item?.content_id||'').trim();
@@ -237,6 +241,7 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
        if(!seen.has(key)){seen.add(key);normalized.push({content_type:type,content_id:id});}
      }
      loadedPlan={action:selectedSchema.action,label:selectedSchema.label,items:normalized,
+       sourceKind:selectedSchema.sourceKind,qualityVersion:selectedSchema.qualityVersion||'',
        reason:String(raw.reason||'Plano de triagem MAISON JF').slice(0,1000),schema:raw.schema};
      $('apply-plan').disabled=false;
      $('plan-summary').textContent=normalized.length+' registos · '+selectedSchema.label+' · '+file.name;
@@ -254,7 +259,7 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
    if(!confirm(confirmText))return;
    try{
      note('A aplicar plano: '+loadedPlan.items.length+' registos…');
-     const result=await call(loadedPlan.action,{items:loadedPlan.items,reason:loadedPlan.reason});
+     const result=await call(loadedPlan.action,{items:loadedPlan.items,reason:loadedPlan.reason,sourceKind:loadedPlan.sourceKind,qualityVersion:loadedPlan.qualityVersion});
      loadedPlan=null;$('apply-plan').disabled=true;$('plan-file').value='';
      $('plan-summary').textContent='Plano aplicado; carrega o próximo ficheiro se necessário.';
      note(result,'ok');
