@@ -20,6 +20,26 @@ test('PÁRA DE IGNORAR exposes a separately signed two-player or group mode',()=
   assert.match(session,/mode,/);
 });
 
+test('group themes retain canonical and legacy Vault keys, and existing live questions remain discoverable',()=>{
+  const sources=read('functions/_lib/pdi-theme-sources.js');
+  const registry=read('functions/_lib/pdi-theme-registry.js');
+  const catalogue=read('functions/_lib/pdi-theme-catalogue.js');
+  const localized=read('functions/_lib/maison-localized-content.js');
+  const vaultV1=read('functions/_lib/maison-vault.js');
+  const vaultV2=read('functions/_lib/question-vault-v2.js');
+  const session=read('functions/_lib/para-de-ignorar-session.js');
+  assert.match(sources,/label:signal\.label\|\|''/);
+  assert.match(registry,/find\(item=>item\.source==='pdi-group'\)/);
+  assert.match(registry,/groupEvidence\?\.sourceId\|\|stableThemeSlug\(label\)/);
+  assert.match(registry,/family:String\(groupEvidence\?\.family\|\|evidence\.family\|\|'Maison'\)/);
+  assert.match(registry,/item\.slug===key\|\|item\.aliases\.includes\(key\)/);
+  assert.match(catalogue,/keys\.reduce\(\(total,key\)=>total\+\(counts\.get\(key\)\|\|0\),0\)/);
+  assert.match(localized,/WHERE theme IN \(\$\{placeholders\}\)/);
+  assert.match(vaultV1,/WHERE theme IN \(\$\{placeholders\}\)/);
+  assert.match(vaultV2,/WHERE q\.theme IN \(\$\{placeholders\}\)/);
+  assert.match(session,/registeredTheme\?\.aliases/);
+});
+
 test('group and party themes enter the editorial backlog but are not exposed before 28 live questions',()=>{
   const sources=read('functions/_lib/pdi-theme-sources.js');
   const catalogue=read('functions/_lib/pdi-theme-catalogue.js');
