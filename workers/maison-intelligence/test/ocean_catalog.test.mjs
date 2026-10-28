@@ -38,7 +38,8 @@ test('dedicated brand, interactive book, games and Feral voice Oceans remain dis
     'first-thirteen-book-cycle','future-book-universes',
     'interactive-book-games','digital-game-concepts',
     'two-player-games','group-party-games','brand-voice-feral-frontality',
-    'proven-aroma-formulas','supplier-intelligence','unexplored-territories'
+    'proven-aroma-formulas','supplier-intelligence','unexplored-territories',
+    'geo-synthetic-search-visibility'
   ]){
     assert.ok(isFoundationalOceanKey(key),key);
   }
@@ -47,6 +48,12 @@ test('dedicated brand, interactive book, games and Feral voice Oceans remain dis
   const feral=OCEAN_CATALOG.find(ocean=>ocean.ocean_key==='brand-voice-feral-frontality');
   assert.match(feral.mission,/irreverência/);
   assert.match(feral.mission,/sem copiar/);
+  const geo=OCEAN_CATALOG.find(ocean=>ocean.ocean_key==='geo-synthetic-search-visibility');
+  assert.equal(geo.pillar_key,'search-visibility-authority');
+  assert.match(geo.mission,/sistemas de resposta por IA/);
+  assert.ok(geo.connections.includes('customer-search-language'));
+  const searchPillar=OCEAN_PILLARS.find(pillar=>pillar.key==='search-visibility-authority');
+  assert.ok(searchPillar.connections.includes('conversion-growth-experiments'));
 });
 
 test('focus selection covers all pillars, returns only valid Ocean cross-links, and rotates brand study',()=>{
