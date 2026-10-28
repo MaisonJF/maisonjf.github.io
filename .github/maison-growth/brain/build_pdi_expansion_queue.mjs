@@ -44,6 +44,23 @@ const groupTemplates=[
   (t)=>'Cada pessoa inventa uma solução disparatada para um dilema fictício ligado a “'+t+'”. Qual dá a melhor história?',
   (t)=>'Criem uma tradição de grupo ligada a “'+t+'” que seja fácil, barata e opcional.',
   (t)=>'Que mini-aventura gratuita de 30 minutos poderiam inventar a partir de “'+t+'”?'
+,
+(t)=>'Qual seria o premio mais absurdo para quem domina '+t+'?',
+  (t)=>'Inventem um slogan curto para uma ronda de '+t+'.',
+  (t)=>'Que personagem ficticia seria pessima em '+t+'?',
+  (t)=>'Cada pessoa escolhe uma palavra para resumir '+t+'.',
+  (t)=>'Criem uma noticia absurda sobre '+t+' daqui a dez anos.',
+  (t)=>'Que objeto banal seria essencial numa versao de '+t+'?',
+  (t)=>'Transformem '+t+' num superpoder inutil.',
+  (t)=>'Inventem uma tradicao de grupo ligada a '+t+'.',
+  (t)=>'Que musica abriria uma ronda sobre '+t+'?',
+  (t)=>'Criem uma mini-historia sobre '+t+' em tres frases.',
+  (t)=>'Que regra disparatada tornaria '+t+' mais divertido?',
+  (t)=>'Descrevam '+t+' como o trailer de um filme.',
+  (t)=>'Que desafio de 30 segundos combina com '+t+'?',
+  (t)=>'Que conselho daria um alien sobre '+t+'?',
+  (t)=>'Inventem um premio simbolico ligado a '+t+'.',
+  (t)=>'Qual a combinacao mais improvavel que representa '+t+'?'
 ];
 const questions=[];
 const seenText=new Set();
