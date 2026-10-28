@@ -275,6 +275,7 @@
   let growthStarted = false;
   let growthPageViewSent = false;
   const growthOfferExposureSent = new Set();
+  let growthOfferObserver = null;
 
   function growthToken(value, maxLength = 120) {
     const token = String(value || '').trim();
@@ -323,6 +324,7 @@
     const attribution = offerAttribution();
     const dataOffer = growthToken(
       element?.dataset?.maisonOfferId ||
+      element?.dataset?.vpcOffer ||
       element?.closest?.('[data-maison-offer-id]')?.dataset?.maisonOfferId ||
       ''
     );
@@ -339,10 +341,10 @@
       offer_id: offerId
     };
     const optional = {
-      recommendation_source: attribution.recommendation_source,
-      recommendation_result: attribution.recommendation_result,
-      recommendation_route: attribution.recommendation_route,
-      recommendation_brain: attribution.recommendation_brain
+      recommendation_source: element?.dataset?.vpcSource || attribution.recommendation_source,
+      recommendation_result: element?.dataset?.vpcResult || attribution.recommendation_result,
+      recommendation_route: element?.dataset?.vpcRoute || attribution.recommendation_route,
+      recommendation_brain: element?.dataset?.vpcBrain || attribution.recommendation_brain
     };
     Object.entries(optional).forEach(([key, value]) => {
       const safe = growthToken(value || '');
@@ -398,19 +400,29 @@
     }
   }
 
-  function observeGrowthOffers() {
+  function observeGrowthOffers(root = document) {
     if (!('IntersectionObserver' in window)) return;
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting || entry.intersectionRatio < 0.5) return;
-        const offer = growthOfferContext(entry.target);
-        if (!offer || growthOfferExposureSent.has(offer.offer_id)) return;
-        trackGrowth('offer.exposure', offer);
-        growthOfferExposureSent.add(offer.offer_id);
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('[data-maison-offer-id]').forEach(element => observer.observe(element));
+    if (!growthOfferObserver) {
+      growthOfferObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting || entry.intersectionRatio < 0.5) return;
+          const offer = growthOfferContext(entry.target);
+          if (!offer || growthOfferExposureSent.has(offer.offer_id)) return;
+          trackGrowth('offer.exposure', offer);
+          growthOfferExposureSent.add(offer.offer_id);
+          growthOfferObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.5 });
+    }
+
+    const elements = [];
+    if (root?.nodeType === 1 && root.matches?.('[data-maison-offer-id]')) elements.push(root);
+    root?.querySelectorAll?.('[data-maison-offer-id]').forEach(element => elements.push(element));
+    elements.forEach(element => {
+      if (!growthOfferExposureSent.has(element.dataset.maisonOfferId || '')) {
+        growthOfferObserver.observe(element);
+      }
+    });
   }
 
   function startGrowthTelemetry() {
@@ -783,6 +795,7 @@
           }
           normalizeInternalLinks(node);
           fitMaisonDisplayTitles(node);
+          if (growthStarted) observeGrowthOffers(node);
         }
       }));
     });
