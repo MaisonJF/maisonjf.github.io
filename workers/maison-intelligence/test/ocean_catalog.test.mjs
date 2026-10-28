@@ -7,12 +7,13 @@ import {
   isFoundationalOceanKey,
   isValidOceanKey,
   selectOceanFocus,
-  validateOceanProposal
+  validateOceanProposal,
+  validatePillarProposal
 } from '../src/ocean_catalog.js';
 
 test('foundational Ocean catalogue has unique, valid keys and covers every pillar',()=>{
   assert.match(OCEAN_CATALOG_VERSION,/^JF-OCEANS-/);
-  assert.ok(OCEAN_PILLARS.length>=11);
+  assert.ok(OCEAN_PILLARS.length>=40,'the network must support a broad specialist pillar map');
   assert.ok(OCEAN_CATALOG.length>=100);
   const keys=OCEAN_CATALOG.map(ocean=>ocean.ocean_key);
   assert.equal(new Set(keys).size,keys.length,'Ocean keys must be unique');
@@ -48,12 +49,15 @@ test('dedicated brand, interactive book, games and Feral voice Oceans remain dis
 });
 
 test('focus selection covers all pillars, returns only valid Ocean cross-links, and rotates brand study',()=>{
-  const first=selectOceanFocus({runKey:'2026-10-27:03:00:openrouter-a',limit:16});
-  const second=selectOceanFocus({runKey:'2026-10-27:15:00:openrouter-b',limit:16});
+  const first=selectOceanFocus({catalog:OCEAN_CATALOG,pillars:OCEAN_PILLARS,runKey:'2026-10-27:03:00:openrouter-a',limit:16});
+  const second=selectOceanFocus({catalog:OCEAN_CATALOG,pillars:OCEAN_PILLARS,runKey:'2026-10-27:15:00:openrouter-b',limit:16});
+  const fullPillarSweep=selectOceanFocus({catalog:OCEAN_CATALOG,pillars:OCEAN_PILLARS,runKey:'all-pillars-validation',limit:OCEAN_PILLARS.length});
   assert.equal(first.length,16);
   assert.equal(second.length,16);
+  assert.equal(fullPillarSweep.length,OCEAN_PILLARS.length);
   for(const pillar of OCEAN_PILLARS){
-    assert.ok(first.some(ocean=>ocean.pillar_key===pillar.key),pillar.key);
+    assert.ok(fullPillarSweep.some(ocean=>ocean.pillar_key===pillar.key),pillar.key);
+    assert.ok(OCEAN_CATALOG.some(ocean=>ocean.pillar_key===pillar.key),`pillar with no foundational Ocean: ${pillar.key}`);
   }
   const known=new Set(OCEAN_CATALOG.map(ocean=>ocean.ocean_key));
   for(const ocean of [...first,...second]){
@@ -65,6 +69,25 @@ test('focus selection covers all pillars, returns only valid Ocean cross-links, 
   assert.ok(brandsA.length>=1);
   assert.ok(brandsB.length>=1);
   assert.notDeepEqual(brandsA,brandsB,'brand research should rotate with the run key');
+});
+
+test('pillar proposals are connected, distinct, and human-governed before registry insertion',()=>{
+  const proposal={
+    proposed_pillar_key:'neuroaesthetics-sensory-environments',
+    display_name:'Neuroaesthetics & Sensory Environments',
+    mission:'Investigar relações entre percepção, ambiente, experiência estética e escolhas de design com evidência e limitações explícitas.',
+    focus:['percepção do espaço','experiência estética','ambiente e atenção'],
+    connections:['scent-science-research','visual-sensory-design','research-evidence-analytics'],
+    parent_pillars:['scent-science-research']
+  };
+  const clean=validatePillarProposal(proposal,OCEAN_PILLARS);
+  assert.equal(clean.key,proposal.proposed_pillar_key);
+  assert.equal(clean.display_name,proposal.display_name);
+  assert.deepEqual(clean.connections,proposal.connections);
+  assert.deepEqual(clean.parent_pillars,proposal.parent_pillars);
+  assert.throws(()=>validatePillarProposal({...proposal,proposed_pillar_key:'scent-science-research'},OCEAN_PILLARS),/pillar_proposal_key_exists/);
+  assert.throws(()=>validatePillarProposal({...proposal,connections:[],parent_pillars:[]},OCEAN_PILLARS),/pillar_proposal_requires_links/);
+  assert.throws(()=>validatePillarProposal({...proposal,focus:['only one']},OCEAN_PILLARS),/invalid_pillar_proposal_focus/);
 });
 
 test('new Ocean proposals require a new valid key, pillar, mission and focus',()=>{
