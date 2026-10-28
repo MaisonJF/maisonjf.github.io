@@ -114,7 +114,7 @@ function attributedHref(raw,offerId,result,brainVersion){
 function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
 function offerMarkup(o,index,result,brain){
  const label=o.slotLabel||'';
- return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brain||'fallback')+'" href="'+esc(attributedHref(o.href,o.id,result,brain))+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
+ return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brain||'fallback')+'" href="'+esc(attributedHref(o.href,o.id,result,brain))+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><b class="vpc-offer__price'+(o.priceLabel?'':' vpc-offer__price--browse')+'">'+esc(o.priceLabel||'Ver opções e preços')+'</b><span>'+esc(o.description||'')+'</span></a>';
 }
 async function brainOffers(result){
  const host=$('nextLinks');host.innerHTML='<p class="vpc-note">A escolher o que faz mais sentido agora…</p>';
@@ -125,7 +125,7 @@ async function brainOffers(result){
   host.innerHTML=data.offers.map((o,i)=>offerMarkup(o,i,result,data.version)).join('');
   track('vpc_offer_brain_result',{result,brain_version:data.version,offers:data.offers.map(o=>o.id).join(',')});
  }catch(_){
-  host.innerHTML='<a class="vpc-offer vpc-offer--primary" href="../../oraculo/"><small>Outra perspectiva</small><strong>Oráculo MAISON JF® →</strong><span>Abre outra perspectiva sobre aquilo que apareceu.</span></a><a class="vpc-offer" href="../../para-de-ignorar/"><small>Para abrir conversa</small><strong>PÁRA DE IGNORAR! →</strong><span>28 perguntas para duas pessoas transformarem afeto em conversa.</span></a><a class="vpc-offer" href="../../presentes/"><small>Para oferecer</small><strong>Presentes com intenção →</strong><span>Quando carinho, memória ou cuidado pedem um gesto concreto.</span></a><a class="vpc-offer" href="../../servicos/"><small>Quero ir mais fundo</small><strong>Consultas →</strong><span>Quando queres contexto, leitura e uma conversa mais funda.</span></a>';
+  host.innerHTML='<a class="vpc-offer vpc-offer--primary" href="../../oraculo/"><small>Outra perspectiva</small><strong>Oráculo MAISON JF® →</strong><b class="vpc-offer__price">2 €</b><span>Abre outra perspectiva sobre aquilo que apareceu.</span></a><a class="vpc-offer" href="../../para-de-ignorar/"><small>Para abrir conversa</small><strong>PÁRA DE IGNORAR! →</strong><b class="vpc-offer__price">5 €</b><span>28 perguntas para duas pessoas transformarem afeto em conversa.</span></a><a class="vpc-offer" href="../../ebooks/para-de-ignorar/"><small>Para ler e voltar</small><strong>Pára de Ignorar! · Livro →</strong><b class="vpc-offer__price">5,99 €</b><span>Um livro para parar de passar por cima do que já sabes que está a pedir atenção — para ler, escrever e voltar quando precisares.</span></a><a class="vpc-offer" href="../../servicos/"><small>Quero ir mais fundo</small><strong>Consulta de Tarot →</strong><b class="vpc-offer__price">35 €</b><span>Uma leitura individual para explorar a situação por outro ângulo.</span></a>';
  }
 }
 async function makeShareCard(key){
