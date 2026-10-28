@@ -1,4 +1,5 @@
 import { listAvailablePdiThemes } from '../_lib/pdi-theme-catalogue.js';
+import { getPdiTheme } from '../_lib/pdi-theme-registry.js';
 import { normalizeMaisonLocale, stripeLocaleForMaison } from '../_lib/maison-locales.js';
 import { brazilMarketAccessResponse } from '../_lib/brazil-market.js';
 
@@ -34,9 +35,12 @@ export async function onRequestPost({request,env}){
     if(!locale)return json({error:'Idioma inválido.'},400);
     const marketError = brazilMarketAccessResponse(request, locale);
     if (marketError) return marketError;
-    const availableThemes=(await listAvailablePdiThemes(env,locale)).filter(item=>
-      mode==='group' ? item.family==='Amigos, Grupos & Festas' : item.family!=='Amigos, Grupos & Festas'
-    );
+    const availableThemes=(await listAvailablePdiThemes(env,locale)).filter(item=>{
+      const canonicalFamily=String(getPdiTheme(item.slug)?.family||item.family||'');
+      return mode==='group'
+        ? canonicalFamily==='Amigos, Grupos & Festas'
+        : canonicalFamily!=='Amigos, Grupos & Festas';
+    });
     const product=availableThemes[Math.floor(Math.random()*availableThemes.length)];
     if(!product)return json({error:'O jogo está temporariamente indisponível neste modo. Tenta novamente mais tarde.'},409);
 
