@@ -142,7 +142,7 @@ function attributedHref(raw,offerId,result,route,brainVersion){
 function offerMarkup(o,index,result,route,brainVersion){
  const label=o.slotLabel||'';
  const href=attributedHref(o.href,o.id,result,route,brainVersion);
- return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brainVersion||'fallback')+'" href="'+esc(href)+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
+ return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-maison-offer-id="'+esc(o.id)+'" data-maison-surface="vpc-result" data-vpc-source="vpc" data-vpc-result="'+esc(result)+'" data-vpc-route="'+esc(route||'')+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brainVersion||'fallback')+'" href="'+esc(href)+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
 }
 async function renderBrainOffers(result,ranked,route){
  const host=$('nextLinks');
