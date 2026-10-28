@@ -76,8 +76,9 @@ export async function loadDailyExpansionContext(env,{limit=12,runKey='',candidat
     signals,
     feedback_learning,
     ocean_catalog,
+    pillar_registry:all_pillars,
     pillar_catalog,
-    pillar_count:pillar_catalog.length,
+    pillar_count:all_pillars.length,
     focus_oceans,
     candidate_limit:boundedCandidateLimit,
     strongest_ocean:signals.slice().sort((a,b)=>
@@ -184,7 +185,7 @@ async function storeCandidate(env,{item,spec,context}){
   const rawPayload=item?.payload&&typeof item.payload==='object'&&!Array.isArray(item.payload)?item.payload:{};
   const payload=isOceanProposal
     ? (()=> {
-        const pillars=context?.pillar_catalog?.length?context.pillar_catalog:undefined;
+        const pillars=context?.pillar_registry?.length?context.pillar_registry:(context?.pillar_catalog?.length?context.pillar_catalog:undefined);
         if(rawPayload.proposal_kind==='pillar_proposal'){
           const p=validatePillarProposal(rawPayload,pillars);
           return {
