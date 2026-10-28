@@ -44,7 +44,7 @@ test('retirement preserves bodies and decisions instead of deleting content',()=
   assert.match(lib,/export async function quarantineOceanEditorialContent/);
   assert.match(lib,/allowedOcean=requestedSource==='ocean_mcp_candidate'/);
   assert.match(lib,/allowedAmor001=requestedSource==='maison_private_import'/);
-  assert.match(lib,/source_kind=\\?2/);
+  assert.match(lib,/source_kind=\?2/);
   assert.match(lib,/ocean_candidate_quarantine/);
   assert.doesNotMatch(lib,/DELETE\s+FROM\s+vault_questions/i);
   assert.doesNotMatch(lib,/DELETE\s+FROM\s+vault_oracle_blocks/i);
