@@ -13,6 +13,7 @@ import { detectQuestionContentNeeds } from './content-gap-detector.js';
 import { listActivePaidQuestionsV2 } from './question-vault-v2.js';
 import { normalizeMaisonLocale } from './maison-locales.js';
 import { vaultLocalizationReady } from './maison-localized-content.js';
+import { getPdiTheme } from './pdi-theme-registry.js';
 
 /*
 Creates one stable 28-card paid session.
@@ -42,8 +43,12 @@ export async function getOrCreateQuestionSession({env,stripeSession,theme,locale
   });
 
   const useV2=await vaultExperienceEngineReady(db);
+  const registeredTheme=getPdiTheme(theme);
+  const themeKeys=[...new Set([theme,...(registeredTheme?.aliases||[])].map(value=>String(value||'').trim()).filter(Boolean))];
   const [questions,seenIds]=await Promise.all([
-    useV2?listActivePaidQuestionsV2(db,theme,selectedLocale):listActivePaidQuestions(db,theme),
+    useV2
+      ?listActivePaidQuestionsV2(db,theme,selectedLocale,themeKeys)
+      :listActivePaidQuestions(db,theme,themeKeys),
     listSeenQuestionIds(db,buyerKey,theme)
   ]);
 
