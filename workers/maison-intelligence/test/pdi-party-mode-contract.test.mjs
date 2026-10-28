@@ -142,3 +142,13 @@ test('sales page sends the selected mode into checkout while keeping answer priv
   assert.match(page,/os novos packs de Amigos & Festas/i);
   assert.match(page,/nunca as tuas respostas/i);
 });
+
+test('paid PDI session records its purchase only after validating Stripe payment',()=>{
+  const session=read('functions/api/pdi-session-live.js');
+  const invalidGate=session.indexOf('if(!valid)');
+  const recording=session.indexOf('await recordPaidPdiPurchase(env,stripeSession)');
+  assert.ok(invalidGate>=0&&recording>invalidGate,'purchase recording must occur after payment validation');
+  assert.match(session,/import \{ recordStripePurchase \} from '\.\.\/\_lib\/commerce-events\.js'/);
+  assert.match(session,/env\?\.GROWTH_DB/);
+  assert.match(session,/env\?\.MAISON_BRAIN_DB/);
+});
