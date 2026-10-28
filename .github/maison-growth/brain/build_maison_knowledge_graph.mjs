@@ -3,6 +3,7 @@ import {buildPublicDiscovery} from './build_public_discovery.mjs';
 import {buildSearchVisibility} from './build_search_visibility.mjs';
 
 const oceans=JSON.parse(fs.readFileSync(new URL('../oceans/candidates.json',import.meta.url),'utf8'));
+const specialistOceanNetwork=JSON.parse(fs.readFileSync(new URL('ocean-catalog.generated.json',import.meta.url),'utf8'));
 const source=fs.readFileSync(new URL('../../../functions/_lib/offer-brain.js',import.meta.url),'utf8');
 const match=source.match(/export const MAISON_OFFER_CATALOGUE=(\[[\s\S]*?\n\]);\n\nexport function/);
 if(!match)throw new Error('offer_catalogue_not_found');
@@ -48,7 +49,7 @@ const territories=Object.entries(TERRITORIES).map(([id,base])=>({
 }));
 const graph={
   schema_version:'maison_knowledge_graph_v1',
-  generated_from:['.github/maison-growth/oceans/candidates.json','functions/_lib/offer-brain.js','functions/_lib/b2b-offer-brain.js','sitemap.xml','robots.txt','llms.txt','public HTML backing files','.github/maison-growth/brain/search-visibility-baseline.json','.github/maison-growth/brain/public-entity-evidence.json','.github/maison-growth/brain/external-entity-authority.json','_redirects'],
+  generated_from:['.github/maison-growth/oceans/candidates.json','workers/maison-intelligence/src/ocean_catalog.js','.github/maison-growth/brain/ocean-catalog.generated.json','functions/_lib/offer-brain.js','functions/_lib/b2b-offer-brain.js','sitemap.xml','robots.txt','llms.txt','public HTML backing files','.github/maison-growth/brain/search-visibility-baseline.json','.github/maison-growth/brain/public-entity-evidence.json','.github/maison-growth/brain/external-entity-authority.json','_redirects'],
   principle:'Humano vê João. Máquina vê estrutura. Brain compreende os dois. MAISON transforma isso em desejo, utilidade e negócio.',
   contract:{
     machine_facing:true,
@@ -166,7 +167,16 @@ const graph={
     themes:oceanThemes(o),
     territories:inferredTerritories(o),
     visibility:'internal'
-  }))
+  })),
+  specialistOceanNetwork:{
+    schema_version:specialistOceanNetwork.schema_version,
+    catalog_version:specialistOceanNetwork.catalog_version,
+    principle:specialistOceanNetwork.principle,
+    expansion_contract:specialistOceanNetwork.expansion_contract,
+    summary:specialistOceanNetwork.summary,
+    pillars:specialistOceanNetwork.pillars,
+    oceans:specialistOceanNetwork.oceans
+  }
 };
 const out=JSON.stringify(graph,null,2)+'\n';
 const coreGraph={
@@ -181,7 +191,8 @@ const coreGraph={
   territories:graph.territories,
   professional:graph.professional,
   offers:graph.offers,
-  oceans:graph.oceans
+  oceans:graph.oceans,
+  specialistOceanNetwork:graph.specialistOceanNetwork
 };
 const coreOut=JSON.stringify(coreGraph,null,2)+'\n';
 const outputUrl=new URL('maison-knowledge-graph.generated.json',import.meta.url);
