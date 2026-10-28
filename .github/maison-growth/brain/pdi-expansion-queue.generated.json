@@ -14,14 +14,14 @@
     "publicPublication": false
   },
   "summary": {
-    "exactThemeGroups": 385,
-    "duoQuestionDrafts": 2984,
+    "exactThemeGroups": 387,
+    "duoQuestionDrafts": 3000,
     "groupQuestionDrafts": 336,
-    "questionDrafts": 3320,
+    "questionDrafts": 3336,
     "oracleTerritories": 100,
     "oracleRoleBriefs": 700,
     "ebookConceptSeeds": 12,
-    "questionsRequiringEditorialApproval": 3320,
+    "questionsRequiringEditorialApproval": 3336,
     "oracleBriefsRequiringEditorialApproval": 700,
     "ebookConceptsRequiringHumanReview": 12
   },
@@ -17424,6 +17424,206 @@
       ],
       "sourceSignalRefs": [
         "ocean:evitamento-financeiro-sob-escassez:curto-prazo-vs-futuro"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_customer_journey_01",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Customer Journey",
+      "themeKey": "customer-journey",
+      "title": "Customer Journey · A dois · 01",
+      "stage": "open",
+      "editorialFunction": "abrir",
+      "text": "Quando surge o tema de customer journey, o que gostarias que eu percebesse sem teres de repetir?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:customer-journey:customer-journey"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_customer_journey_02",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Customer Journey",
+      "themeKey": "customer-journey",
+      "title": "Customer Journey · A dois · 02",
+      "stage": "recognize",
+      "editorialFunction": "reconhecer",
+      "text": "Que gesto concreto poderia tornar o tema de customer journey mais leve entre nós?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:customer-journey:customer-journey"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_customer_journey_03",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Customer Journey",
+      "themeKey": "customer-journey",
+      "title": "Customer Journey · A dois · 03",
+      "stage": "deepen",
+      "editorialFunction": "clarificar",
+      "text": "O que é fácil interpretar mal quando falamos sobre customer journey?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:customer-journey:customer-journey"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_customer_journey_04",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Customer Journey",
+      "themeKey": "customer-journey",
+      "title": "Customer Journey · A dois · 04",
+      "stage": "touch",
+      "editorialFunction": "perguntar",
+      "text": "Que pergunta sobre customer journey nunca encontrámos o momento certo para fazer?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:customer-journey:customer-journey"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_customer_journey_05",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Customer Journey",
+      "themeKey": "customer-journey",
+      "title": "Customer Journey · A dois · 05",
+      "stage": "close",
+      "editorialFunction": "concretizar",
+      "text": "Que exemplo concreto te ajudaria a explicar como vives customer journey?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:customer-journey:customer-journey"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_customer_journey_06",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Customer Journey",
+      "themeKey": "customer-journey",
+      "title": "Customer Journey · A dois · 06",
+      "stage": "signature",
+      "editorialFunction": "reavaliar",
+      "text": "O que gostarias de preservar e o que já poderia mudar em relação a customer journey?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:customer-journey:customer-journey"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_customer_journey_07",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Customer Journey",
+      "themeKey": "customer-journey",
+      "title": "Customer Journey · A dois · 07",
+      "stage": "open",
+      "editorialFunction": "aprofundar",
+      "text": "Que parte de customer journey preferes explorar devagar, sem pressão para responder já?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:customer-journey:customer-journey"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_customer_journey_08",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Customer Journey",
+      "themeKey": "customer-journey",
+      "title": "Customer Journey · A dois · 08",
+      "stage": "recognize",
+      "editorialFunction": "mover",
+      "text": "Qual seria um próximo passo pequeno e realista para conversarmos melhor sobre customer journey?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:customer-journey:customer-journey"
       ],
       "sourceBasis": "internal_theme_catalogue",
       "independentlyVerifiedDemand": false,
@@ -40824,6 +41024,206 @@
       ],
       "sourceSignalRefs": [
         "ocean:micro-luxo-como-recompensa-e-ritual:micro-luxury"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_mobile_commerce_01",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Mobile Commerce",
+      "themeKey": "mobile-commerce",
+      "title": "Mobile Commerce · A dois · 01",
+      "stage": "open",
+      "editorialFunction": "abrir",
+      "text": "Quando surge o tema de mobile commerce, o que gostarias que eu percebesse sem teres de repetir?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:mobile-commerce:mobile-commerce"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_mobile_commerce_02",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Mobile Commerce",
+      "themeKey": "mobile-commerce",
+      "title": "Mobile Commerce · A dois · 02",
+      "stage": "recognize",
+      "editorialFunction": "reconhecer",
+      "text": "Que gesto concreto poderia tornar o tema de mobile commerce mais leve entre nós?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:mobile-commerce:mobile-commerce"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_mobile_commerce_03",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Mobile Commerce",
+      "themeKey": "mobile-commerce",
+      "title": "Mobile Commerce · A dois · 03",
+      "stage": "deepen",
+      "editorialFunction": "clarificar",
+      "text": "O que é fácil interpretar mal quando falamos sobre mobile commerce?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:mobile-commerce:mobile-commerce"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_mobile_commerce_04",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Mobile Commerce",
+      "themeKey": "mobile-commerce",
+      "title": "Mobile Commerce · A dois · 04",
+      "stage": "touch",
+      "editorialFunction": "perguntar",
+      "text": "Que pergunta sobre mobile commerce nunca encontrámos o momento certo para fazer?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:mobile-commerce:mobile-commerce"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_mobile_commerce_05",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Mobile Commerce",
+      "themeKey": "mobile-commerce",
+      "title": "Mobile Commerce · A dois · 05",
+      "stage": "close",
+      "editorialFunction": "concretizar",
+      "text": "Que exemplo concreto te ajudaria a explicar como vives mobile commerce?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:mobile-commerce:mobile-commerce"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_mobile_commerce_06",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Mobile Commerce",
+      "themeKey": "mobile-commerce",
+      "title": "Mobile Commerce · A dois · 06",
+      "stage": "signature",
+      "editorialFunction": "reavaliar",
+      "text": "O que gostarias de preservar e o que já poderia mudar em relação a mobile commerce?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:mobile-commerce:mobile-commerce"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_mobile_commerce_07",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Mobile Commerce",
+      "themeKey": "mobile-commerce",
+      "title": "Mobile Commerce · A dois · 07",
+      "stage": "open",
+      "editorialFunction": "aprofundar",
+      "text": "Que parte de mobile commerce preferes explorar devagar, sem pressão para responder já?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:mobile-commerce:mobile-commerce"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_mobile_commerce_08",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Mobile Commerce",
+      "themeKey": "mobile-commerce",
+      "title": "Mobile Commerce · A dois · 08",
+      "stage": "recognize",
+      "editorialFunction": "mover",
+      "text": "Qual seria um próximo passo pequeno e realista para conversarmos melhor sobre mobile commerce?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:mobile-commerce:mobile-commerce"
       ],
       "sourceBasis": "internal_theme_catalogue",
       "independentlyVerifiedDemand": false,
