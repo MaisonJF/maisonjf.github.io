@@ -1484,7 +1484,7 @@ const EBOOKS={
     'Éditions Maison JF · Brevemente':'Éditions Maison JF · Coming soon',
     'Ampliar 100%':'Zoom 100%',
     'Fechar poster ampliado':'Close enlarged poster',
-    'Imagem ampliada; use as setas para percorrer':'Enlarged image; use the arrow keys to move around'
+    'Imagem ampliada; use as setas para percorrer':'Enlarged image; use the arrow keys to move around',
     "Éditions Maison JF®: novelas, ficção literária, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis.": "Éditions Maison JF®: novellas, literary fiction, spirituality and practical books. Stories and ideas without moralising or easy formulas.",
     "Histórias que ficam depois da última página.": "Stories that stay with you after the last page.",
     "Ficção literária, novelas, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis. Escolhe uma leitura. Vê onde te leva.": "Literary fiction, novellas, spirituality and practical books. Stories and ideas without moralising or easy formulas. Choose a read. See where it takes you.",
@@ -1517,7 +1517,7 @@ const EBOOKS={
     'Éditions Maison JF · Brevemente':'Éditions Maison JF · Próximamente',
     'Ampliar 100%':'Ampliar 100%',
     'Fechar poster ampliado':'Cerrar póster ampliado',
-    'Imagem ampliada; use as setas para percorrer':'Imagen ampliada; usa las flechas para desplazarte'
+    'Imagem ampliada; use as setas para percorrer':'Imagen ampliada; usa las flechas para desplazarte',
     "Éditions Maison JF®: novelas, ficção literária, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis.": "Éditions Maison JF®: novelas, ficción literaria, espiritualidad y libros de pragmatismo. Historias e ideas sin moralismos ni fórmulas fáciles.",
     "Histórias que ficam depois da última página.": "Historias que permanecen después de la última página.",
     "Ficção literária, novelas, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis. Escolhe uma leitura. Vê onde te leva.": "Ficción literaria, novelas, espiritualidad y libros de pragmatismo. Historias e ideas sin moralismos ni fórmulas fáciles. Elige una lectura. Descubre adónde te lleva.",
