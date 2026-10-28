@@ -4,6 +4,14 @@ import { normalizeMaisonLocale } from './maison-locales.js';
 const DEFAULT_AMOUNT=500;
 const MINIMUM_LIVE_QUESTIONS=28;
 
+function stableThemeSlug(value){
+  return String(value||'')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase().replace(/&/g,' e ')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')
+    .replace(/-+/g,'-');
+}
+
 const curated=[
   {
     slug:'relacoes',
@@ -30,13 +38,25 @@ const curated=[
 const themes=[...curated];
 for(const group of groupExactThemeSignals()){
   const evidence=group.evidence?.[0]||{};
+  const groupEvidence=(group.evidence||[]).find(item=>item.source==='pdi-group')||null;
+  const label=String(groupEvidence?.label||group.preferredLabel||group.candidateKey);
+  // Keep the published PDI group slug as the canonical key, while retaining
+  // older labels/keys as aliases so existing Vault questions remain usable.
+  const slug=String(groupEvidence?.sourceId||stableThemeSlug(label)||group.candidateKey);
+  const aliases=[...new Set([
+    group.candidateKey,
+    group.preferredLabel,
+    ...(group.slugs||[]),
+    ...((group.evidence||[]).map(item=>item.sourceId)),
+    ...((group.evidence||[]).map(item=>item.label))
+  ].map(value=>String(value||'').trim()).filter(Boolean))].filter(value=>value!==slug);
   themes.push({
-    slug:String(group.candidateKey),
-    label:String(group.preferredLabel||group.candidateKey),
-    family:String(evidence.family||'Maison'),
-    focus:String(evidence.focus||''),
+    slug,
+    label,
+    family:String(groupEvidence?.family||evidence.family||'Maison'),
+    focus:String(groupEvidence?.focus||evidence.focus||''),
     source:(group.sources||[]).join('+')||'brain',
-    aliases:[...(group.slugs||[])],
+    aliases,
     amount:DEFAULT_AMOUNT,
     currency:'eur'
   });
@@ -54,18 +74,19 @@ export function getPdiPriceForLocale(locale='pt-PT'){
 
 export function getPdiTheme(slug){
   const key=String(slug||'').trim();
-  return PDI_THEME_REGISTRY.find(x=>x.slug===key)||null;
+  return PDI_THEME_REGISTRY.find(item=>item.slug===key||item.aliases.includes(key))||null;
 }
 
 export function listPdiThemes(){
-  return PDI_THEME_REGISTRY.map(x=>({...x,aliases:[...(x.aliases||[])]}));
+  return PDI_THEME_REGISTRY.map(item=>({...item,aliases:[...(item.aliases||[])]}));
 }
 
 export function pdiThemeRegistryStats(){
   return {
     registered:PDI_THEME_REGISTRY.length,
-    sourceThemes:PDI_THEME_REGISTRY.filter(x=>x.source!=='curated').length,
-    curatedThemes:PDI_THEME_REGISTRY.filter(x=>x.source==='curated').length,
+    sourceThemes:PDI_THEME_REGISTRY.filter(item=>item.source!=='curated').length,
+    curatedThemes:PDI_THEME_REGISTRY.filter(item=>item.source==='curated').length,
+    groupThemes:PDI_THEME_REGISTRY.filter(item=>item.family==='Amigos, Grupos & Festas').length,
     minimumLiveQuestions:MINIMUM_LIVE_QUESTIONS,
     priceCents:DEFAULT_AMOUNT
   };
