@@ -323,7 +323,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
  let state={pack:'A',index:0,started:false,swapped:false,finished:false,players:4,challengeOffset:challengeOffsetFor(sessionId,GROUP_CHALLENGES[locale].length)};
  try{
   const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
-  if(saved&&['A','B'].includes(saved.pack)&&Number.isInteger(saved.index)&&saved.index>=0&&saved.index<14){
+  if(saved&&['A','B'].includes(saved.pack)&&Number.isInteger(saved.index)&&saved.index>=0&&saved.index<8){
     state={...state,...saved};
   }
  }catch{}
@@ -347,7 +347,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
   document.getElementById('pack-label').textContent=groupMode
     ?COPY.round+' '+Math.ceil(absolute/8)+' · '+COPY.player+' '+player
     :COPY.pack+' '+state.pack;
-  document.getElementById('counter').textContent=groupMode?absolute+' / 28':(state.index+1)+' / 14';
+  document.getElementById('counter').textContent=groupMode?absolute+' / 16':(state.index+1)+' / 8';
   document.getElementById('question').textContent=card.text;
   if(groupMode&&absolute%4===0){
     const challenge=GROUP_CHALLENGES[locale][(state.challengeOffset+Math.floor((absolute-1)/4))%GROUP_CHALLENGES[locale].length];
