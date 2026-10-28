@@ -12,11 +12,11 @@
     "graph_edges_preserve_source_identity": true
   },
   "summary": {
-    "foundational_pillars": 47,
-    "foundational_oceans": 166,
+    "foundational_pillars": 48,
+    "foundational_oceans": 167,
     "individual_brand_oceans": 53,
-    "ocean_to_ocean_edges": 1790,
-    "pillar_to_pillar_edges": 150
+    "ocean_to_ocean_edges": 1838,
+    "pillar_to_pillar_edges": 158
   },
   "pillars": [
     {
@@ -196,7 +196,8 @@
         "customer-motivations-gifting",
         "conversion-growth-experiments",
         "creator-influence-intelligence",
-        "research-evidence-analytics"
+        "research-evidence-analytics",
+        "search-visibility-authority"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog"
@@ -263,7 +264,8 @@
         "editorial-narrative-publishing",
         "game-design-social-play",
         "creator-influence-intelligence",
-        "ethics-trust-human-impact"
+        "ethics-trust-human-impact",
+        "search-visibility-authority"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog"
@@ -277,7 +279,8 @@
         "relationships-social-connection",
         "symbolic-traditions",
         "ethics-trust-human-impact",
-        "game-design-social-play"
+        "game-design-social-play",
+        "search-visibility-authority"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog"
@@ -290,7 +293,8 @@
         "game-design-social-play",
         "symbolic-traditions",
         "community-audience-development",
-        "customer-motivations-gifting"
+        "customer-motivations-gifting",
+        "search-visibility-authority"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog"
@@ -382,7 +386,8 @@
         "maison-identity-positioning",
         "editorial-narrative-publishing",
         "creator-influence-intelligence",
-        "visual-sensory-design"
+        "visual-sensory-design",
+        "search-visibility-authority"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog"
@@ -395,8 +400,17 @@
         "research-evidence-analytics",
         "market-competition-discovery",
         "customer-motivations-gifting",
-        "maison-internal-growth"
+        "maison-internal-growth",
+        "search-visibility-authority"
       ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "search-visibility-authority",
+      "name": "SEO, GEO, autoridade e descoberta sintética",
+      "mission": "Tornar a Maison mais compreensível e encontrável em motores de pesquisa e sistemas de resposta por IA através de informação útil, evidência, entidades consistentes e experiência real — sem prometer citações nem manipular sistemas.",
+      "connections": [],
       "lifecycle_state": "open",
       "origin": "foundational_catalog"
     },
@@ -434,7 +448,8 @@
         "relationships-social-connection",
         "game-design-social-play",
         "editorial-narrative-publishing",
-        "creator-influence-intelligence"
+        "creator-influence-intelligence",
+        "search-visibility-authority"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog"
@@ -524,7 +539,8 @@
         "market-competition-discovery",
         "conversion-growth-experiments",
         "product-quality-safety-regulatory",
-        "maison-internal-growth"
+        "maison-internal-growth",
+        "search-visibility-authority"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog"
@@ -1178,7 +1194,8 @@
         "fragrance-creators",
         "tarot-astrology-creators",
         "experiments-conversion-learning",
-        "customer-research"
+        "customer-research",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -1208,7 +1225,8 @@
         "fragrance-creators",
         "tarot-astrology-creators",
         "experiments-conversion-learning",
-        "customer-research"
+        "customer-research",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -1239,7 +1257,8 @@
         "fragrance-creators",
         "tarot-astrology-creators",
         "experiments-conversion-learning",
-        "customer-research"
+        "customer-research",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -2749,7 +2768,8 @@
         "group-party-games",
         "fragrance-creators",
         "tarot-astrology-creators",
-        "ethical-persuasion"
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -2779,7 +2799,8 @@
         "group-party-games",
         "fragrance-creators",
         "tarot-astrology-creators",
-        "ethical-persuasion"
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -2809,7 +2830,8 @@
         "group-party-games",
         "fragrance-creators",
         "tarot-astrology-creators",
-        "ethical-persuasion"
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -2839,7 +2861,8 @@
         "group-party-games",
         "fragrance-creators",
         "tarot-astrology-creators",
-        "ethical-persuasion"
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -2869,7 +2892,8 @@
         "group-party-games",
         "fragrance-creators",
         "tarot-astrology-creators",
-        "ethical-persuasion"
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -2899,7 +2923,8 @@
         "group-party-games",
         "fragrance-creators",
         "tarot-astrology-creators",
-        "ethical-persuasion"
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -2929,7 +2954,8 @@
         "group-party-games",
         "fragrance-creators",
         "tarot-astrology-creators",
-        "ethical-persuasion"
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -2959,7 +2985,8 @@
         "group-party-games",
         "fragrance-creators",
         "tarot-astrology-creators",
-        "ethical-persuasion"
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3017,7 +3044,8 @@
         "sidereal-astrology",
         "ethical-persuasion",
         "two-player-games",
-        "group-party-games"
+        "group-party-games",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3047,7 +3075,8 @@
         "sidereal-astrology",
         "ethical-persuasion",
         "two-player-games",
-        "group-party-games"
+        "group-party-games",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3097,7 +3126,8 @@
         "retention-loyalty",
         "book-game-communities",
         "emotional-gifting",
-        "identity-self-expression"
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3125,7 +3155,8 @@
         "retention-loyalty",
         "book-game-communities",
         "emotional-gifting",
-        "identity-self-expression"
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3154,7 +3185,8 @@
         "retention-loyalty",
         "book-game-communities",
         "emotional-gifting",
-        "identity-self-expression"
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3183,7 +3215,8 @@
         "retention-loyalty",
         "book-game-communities",
         "emotional-gifting",
-        "identity-self-expression"
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3212,7 +3245,8 @@
         "retention-loyalty",
         "book-game-communities",
         "emotional-gifting",
-        "identity-self-expression"
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3241,7 +3275,8 @@
         "retention-loyalty",
         "book-game-communities",
         "emotional-gifting",
-        "identity-self-expression"
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3269,7 +3304,8 @@
         "retention-loyalty",
         "book-game-communities",
         "emotional-gifting",
-        "identity-self-expression"
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3298,7 +3334,8 @@
         "retention-loyalty",
         "book-game-communities",
         "emotional-gifting",
-        "identity-self-expression"
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3327,7 +3364,8 @@
         "retention-loyalty",
         "book-game-communities",
         "emotional-gifting",
-        "identity-self-expression"
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -3355,7 +3393,8 @@
         "retention-loyalty",
         "book-game-communities",
         "emotional-gifting",
-        "identity-self-expression"
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -4153,7 +4192,8 @@
         "customer-search-language",
         "emotional-gifting",
         "identity-self-expression",
-        "maison-internal-growth"
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -4237,7 +4277,8 @@
         "customer-search-language",
         "emotional-gifting",
         "identity-self-expression",
-        "maison-internal-growth"
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -4264,7 +4305,8 @@
         "customer-search-language",
         "emotional-gifting",
         "identity-self-expression",
-        "maison-internal-growth"
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -4292,7 +4334,8 @@
         "fragrance-creators",
         "tarot-astrology-creators",
         "experience-design",
-        "visual-sensory-design"
+        "visual-sensory-design",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -4320,7 +4363,8 @@
         "fragrance-creators",
         "tarot-astrology-creators",
         "experience-design",
-        "visual-sensory-design"
+        "visual-sensory-design",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -4349,7 +4393,8 @@
         "interactive-fiction",
         "interactive-book-games",
         "fragrance-creators",
-        "tarot-astrology-creators"
+        "tarot-astrology-creators",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -4377,7 +4422,8 @@
         "customer-journey",
         "product-quality-customer-feedback",
         "product-safety-regulatory",
-        "maison-internal-growth"
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -4433,7 +4479,8 @@
         "customer-search-language",
         "emotional-gifting",
         "identity-self-expression",
-        "maison-internal-growth"
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -4460,7 +4507,41 @@
         "customer-journey",
         "product-quality-customer-feedback",
         "product-safety-regulatory",
-        "maison-internal-growth"
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "geo-synthetic-search-visibility",
+      "display_name": "GEO & Synthetic Search Visibility",
+      "pillar_key": "search-visibility-authority",
+      "mission": "Investigar como a Maison JF, as três portas Volta Para Casa, os livros-jogo e as consultas são descobertos em pesquisa tradicional e em sistemas de resposta por IA; traduzir evidência de pesquisa, desempenho e perguntas reais em melhorias claras e verificáveis.",
+      "focus": [
+        "SEO técnico: rastreio, indexação, URLs canónicas, títulos e ligações internas",
+        "GEO e pesquisa sintética: prompts de referência, citações, menções e proveniência",
+        "Dados estruturados Schema.org alinhados com conteúdo visível e verdadeiro",
+        "Intenção de pesquisa e palavras-chave de cauda longa em português europeu",
+        "E-E-A-T: autoria, experiência demonstrável, fontes e confiança",
+        "Medição de impressões, cliques, conversões e referências de pesquisa",
+        "Conteúdo citável e útil sobre Atenção, Apego, Afecto, livros-jogo e Tarot"
+      ],
+      "connections": [
+        "customer-search-language",
+        "copywriting-conversion",
+        "experiments-conversion-learning",
+        "brand-positioning",
+        "storytelling",
+        "reader-demand",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "tarot-oracles",
+        "archetypes-mythology",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -4649,7 +4730,8 @@
         "interactive-fiction",
         "interactive-book-games",
         "fragrance-creators",
-        "tarot-astrology-creators"
+        "tarot-astrology-creators",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -4785,7 +4867,8 @@
         "interactive-fiction",
         "interactive-book-games",
         "fragrance-creators",
-        "tarot-astrology-creators"
+        "tarot-astrology-creators",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
@@ -5094,7 +5177,8 @@
         "copywriting-conversion",
         "customer-journey",
         "product-quality-customer-feedback",
-        "maison-internal-growth"
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
       ],
       "lifecycle_state": "open",
       "origin": "foundational_catalog",
