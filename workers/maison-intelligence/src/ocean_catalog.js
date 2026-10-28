@@ -552,6 +552,7 @@ function normalisedDynamicPillar(row) {
     key: String(row.pillar_key),
     name: String(row.display_name),
     mission: String(row.mission),
+    focus: parseJsonArray(row.focus_json),
     connections: parseJsonArray(row.connections_json),
     parent_pillars: parseJsonArray(row.parent_pillars_json),
     lifecycle_state: String(row.lifecycle_state || 'open'),
