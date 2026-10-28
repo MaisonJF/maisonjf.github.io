@@ -65,23 +65,66 @@ class OceanEditorialContext:
         return cls(json.loads(path.read_text(encoding="utf-8")))
 
     @classmethod
-    def from_files(cls, canonical_path: Path, specialist_path: Path | None = None) -> "OceanEditorialContext":
-        """Join the existing canonical signal set with the specialist Ocean graph.
+    def from_files(
+        cls,
+        canonical_path: Path,
+        specialist_path: Path | None = None,
+        *,
+        runtime_catalog: Mapping[str,object] | None = None,
+    ) -> "OceanEditorialContext":
+        """Join canonical candidate signals and the specialist Ocean graph.
 
-        The two catalogues have different purposes and identities; this adapter joins
-        them for retrieval without merging their evidence or lifecycle authority.
+        Static catalogue data guarantees a deterministic fallback. A validated private
+        runtime catalogue can overlay that snapshot and supply human-approved D1 records.
+        The merge is by stable key; evidence and lifecycle authority remain separate.
         """
         payload=json.loads(canonical_path.read_text(encoding="utf-8"))
         if not isinstance(payload,dict):
             payload={"candidates":payload if isinstance(payload,list) else []}
+        specialist={}
         if specialist_path is not None and specialist_path.exists():
-            specialist=json.loads(specialist_path.read_text(encoding="utf-8"))
-            if isinstance(specialist,Mapping):
-                payload={**payload,
-                    "specialistOceans":specialist.get("oceans",[]),
-                    "specialistPillars":specialist.get("pillars",[]),
-                    "specialistCatalogVersion":specialist.get("catalog_version"),
-                }
+            loaded=json.loads(specialist_path.read_text(encoding="utf-8"))
+            if isinstance(loaded,Mapping):
+                specialist=dict(loaded)
+
+        static_oceans=specialist.get("oceans",[]) if isinstance(specialist.get("oceans",[]),list) else []
+        static_pillars=specialist.get("pillars",[]) if isinstance(specialist.get("pillars",[]),list) else []
+        ocean_map={
+            str(row.get("ocean_key") or row.get("id") or "").strip():dict(row)
+            for row in static_oceans if isinstance(row,Mapping) and str(row.get("ocean_key") or row.get("id") or "").strip()
+        }
+        pillar_map={
+            str(row.get("key") or row.get("pillar_key") or "").strip():dict(row)
+            for row in static_pillars if isinstance(row,Mapping) and str(row.get("key") or row.get("pillar_key") or "").strip()
+        }
+        catalog_version=specialist.get("catalog_version")
+        runtime_loaded=False
+        if isinstance(runtime_catalog,Mapping) and runtime_catalog.get("kind")=="ocean_specialist_catalog":
+            runtime_rows=runtime_catalog.get("rows",[])
+            runtime_pillars=runtime_catalog.get("pillars",[])
+            if isinstance(runtime_rows,list) and isinstance(runtime_pillars,list):
+                for row in runtime_rows:
+                    if not isinstance(row,Mapping):
+                        continue
+                    key=str(row.get("ocean_key") or row.get("id") or "").strip()
+                    if key:
+                        ocean_map[key]={**ocean_map.get(key,{}),**dict(row)}
+                for row in runtime_pillars:
+                    if not isinstance(row,Mapping):
+                        continue
+                    key=str(row.get("key") or row.get("pillar_key") or "").strip()
+                    if key:
+                        pillar_map[key]={**pillar_map.get(key,{}),**dict(row)}
+                catalog_version=runtime_catalog.get("version") or catalog_version
+                runtime_loaded=True
+
+        payload={**payload,
+            "specialistOceans":list(ocean_map.values()),
+            "specialistPillars":list(pillar_map.values()),
+            "specialistCatalogVersion":catalog_version,
+            "specialistCatalogSource":"private_runtime_plus_snapshot" if runtime_loaded else "snapshot",
+            "specialistRuntimeLoaded":runtime_loaded,
+        }
         return cls(payload)
 
     def _specialist_oceans(self) -> list[Mapping[str,object]]:
