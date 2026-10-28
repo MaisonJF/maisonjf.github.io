@@ -22,6 +22,8 @@ ORGANS={
     "site_conversion":{"contract":"knowledge_graph","mode":"relevance"},
     "bundles_offers":{"contract":"commercial_context","mode":"relevance"},
     "future_products":{"contract":"knowledge_graph","mode":"relevance"},
+    "maison_internal_growth":{"contract":"knowledge_graph","mode":"internal_relevance"},
+    "founder_personal_growth":{"contract":"knowledge_graph","mode":"private_opt_in_context"},
 }
 
 def _rows(payload: Any) -> list[Mapping[str,Any]]:
@@ -48,7 +50,7 @@ def build_contract() -> dict[str,Any]:
     duplicate_graph=len(graph_ids)!=len(graph_set)
 
     return {
-        "schema_version":"ocean_universal_coverage_v1",
+        "schema_version":"ocean_universal_coverage_v2",
         "kind":"maison_ocean_capability_contract",
         "mode":"derived_at_read_time",
         "principle":"Every canonical Ocean is addressable by every MAISON organ through shared contracts; relevance is decided downstream and is never forced.",
@@ -62,6 +64,28 @@ def build_contract() -> dict[str,Any]:
             "no_private_or_paid_bodies":True,
         },
         "organs":ORGANS,
+        "growth_layers":{
+            "maison_internal":{
+                "route":"maison_internal_growth",
+                "purpose":"Use relevant Ocean evidence to improve the Maison's internal strategy, operations, systems, capability and decisions.",
+                "source_of_truth":"existing Maison Brain and its canonical growth framework",
+                "subpoint_matching":"Resolve against the existing canonical subpoints; do not create a parallel taxonomy from an Ocean alone.",
+                "human_review_required":True,
+                "automatic_execution":False,
+            },
+            "founder_personal":{
+                "route":"founder_personal_growth",
+                "purpose":"Offer relevant reflection, learning and decision-support to the founder when explicitly useful.",
+                "source_of_truth":"existing private founder-growth context and its canonical subpoints",
+                "subpoint_matching":"Match only to the existing framework; preserve unmatched signals as internal context candidates.",
+                "opt_in_context_only":True,
+                "human_confirmation_required":True,
+                "infer_founder_traits_from_generic_ocean":False,
+                "public_personalisation":False,
+                "personal_data_in_public_ocean_snapshot":False,
+                "automatic_execution":False,
+            },
+        },
         "ocean_ids":sorted(canonical_set),
         "summary":{
             "canonical_oceans":len(canonical),
