@@ -2,6 +2,7 @@ import { ingestVaultCandidate } from './vault_candidates.js';
 import { ingestCandidateInbox, CANDIDATE_TYPES } from './candidate_inbox.js';
 import { callZeroCostModel } from './providers.js';
 import { loadActiveFeedbackLearning } from './feedback_learning.js';
+import { detectOperationalCommercialTopic } from './content_suitability.js';
 import { OCEAN_CATALOG, loadActiveOceanRegistry, selectOceanFocus, validateOceanProposal } from './ocean_catalog.js';
 
 const MAX_CANDIDATES=16;
@@ -126,6 +127,8 @@ export function buildExpansionPrompt({spec,context}={}){
     'Para reel/post/story/carousel/video_script, payload pode incluir hook, angle, objective, CTA, platform e reuse_from.',
     'Para produtos/bundles/serviços/experiências, payload pode incluir components, estimated_effort, price_hypothesis_range_eur, why_now e validation_test. O preço é só hipótese.',
     'Para question, payload tem de incluir theme, stage, exposure, target, intensity e pode incluir subthemes, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness.',
+    'Só classifica como question ou oracle_block quando a origem é uma experiência humana vivida e o texto serve realmente esse produto. Ecommerce, customer journey, checkout, SEO, conversão, métricas, UX do site, fornecedores, preços, stock, logística, desenvolvimento e estratégia comercial nunca entram como pergunta do jogo nem como afirmação do Oráculo. Encaminha-os para brand_intelligence, research_brief ou outro tipo adequado. Não fabriques conteúdo para preencher a Vault.',
+    'É preferível propor zero perguntas e zero blocos de Oráculo a criar conteúdo absurdo, redundante, genérico ou sem destino editorial claro.',
     'Para oracle_block, payload tem de incluir territory, role, intensity, tone, rarity e pode incluir tags, pain_family, subterritory, emotional_function.',
     'Para ocean_proposal, payload tem de incluir proposed_ocean_key, display_name, pillar_key, mission, focus (array com pelo menos dois pontos) e connections; propõe apenas territórios realmente distintos, ligados a uma das 11 áreas existentes e sem duplicar Oceans registados. Estes candidatos exigem aprovação humana antes de serem abertos.',
     'source_ocean_id deve ser uma chave válida do catálogo de Oceans (preferir os Oceans em foco) ou uma chave de Ocean observada nos sinais. related_ocean_keys só pode incluir chaves existentes no catálogo.',
@@ -179,6 +182,51 @@ async function storeCandidate(env,{item,spec,context}){
   const evidence=Array.isArray(item?.evidence_refs)&&item.evidence_refs.length?item.evidence_refs:globalEvidence(context);
   const ocean=sourceOcean(item,context);
   const territory=type==='ocean_proposal'?payload.proposed_ocean_key:fallbackTerritory(item,context);
+
+  if(type==='question'||type==='oracle_block'){
+    const sourceSignal=(context?.signals||[]).find(signal=>signal.ocean_key===ocean)||{};
+    const sourceOcean=[...(context?.focus_oceans||[]),...(context?.ocean_catalog||OCEAN_CATALOG)].find(entry=>entry.ocean_key===ocean)||{};
+    const suitability=detectOperationalCommercialTopic({
+      sourceKey:ocean,
+      sourceTitle:sourceOcean.display_name||sourceOcean.name||'',
+      sourceSummary:sourceSignal.summary||sourceOcean.mission||'',
+      sourceTerms:sourceSignal.themes||[],
+      territory,
+      focus:sourceOcean.focus||[],
+      candidateTitle:item.title||'',
+      candidateBody:item.body||''
+    });
+    if(!suitability.eligibleForQuestionOrOracle){
+      return await ingestCandidateInbox(env,{
+        candidate_type:'brand_intelligence',
+        source_ocean_id:ocean,
+        provider_id:spec.providerId,
+        model_id:spec.modelId,
+        territory,
+        title:clean('Reclassificar para inteligência MAISON: '+(item.title||type),240),
+        body:clean(item.body||item.title,5000),
+        rationale:clean('Bloqueado o encaminhamento automático para pergunta do jogo/Oráculo porque o tema é operacional ou comercial ('+suitability.reasonCode+'). Conteúdo preservado para triagem de negócio. '+(item.rationale||''),2000),
+        related_assets:Array.isArray(item.related_assets)?item.related_assets:[],
+        evidence_refs:evidence,
+        novelty_score:item.novelty_score,
+        maison_fit_score:item.maison_fit_score,
+        feasibility_score:item.feasibility_score,
+        demand_score:item.demand_score,
+        commercial_score:item.commercial_score,
+        reuse_existing_score:item.reuse_existing_score,
+        payload:{
+          ...rawPayload,
+          requested_candidate_type:type,
+          editorial_gate:{
+            eligible_for_question_or_oracle:false,
+            reason_code:suitability.reasonCode,
+            matched_in:suitability.matchedIn,
+            review_required:true
+          }
+        }
+      });
+    }
+  }
 
   if(type==='question'){
     return await ingestVaultCandidate(env,{
