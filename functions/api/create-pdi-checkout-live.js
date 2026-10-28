@@ -55,6 +55,7 @@ export async function onRequestPost({request,env}){
     params.set('metadata[pdi_theme]',product.slug);
     params.set('metadata[pdi_locale]',locale);
     params.set('metadata[pdi_mode]',mode);
+    appendAttribution(params,body?.attribution);
 
     const stripeResponse=await fetch('https://api.stripe.com/v1/checkout/sessions',{
       method:'POST',
@@ -81,6 +82,27 @@ export async function onRequestPost({request,env}){
 
 export async function onRequestGet(){
   return json({error:'Método não permitido.'},405);
+}
+
+
+function appendAttribution(params, raw) {
+  const a = raw && typeof raw === 'object' ? raw : {};
+  const fields = {
+    recommendation_source: 'rec_source',
+    recommendation_offer: 'rec_offer',
+    recommendation_result: 'rec_result',
+    recommendation_route: 'rec_route',
+    recommendation_brain: 'rec_brain',
+    acquisition_referrer: 'acq_referrer',
+    acquisition_landing: 'acq_landing',
+    acquisition_utm_source: 'utm_source',
+    acquisition_utm_medium: 'utm_medium',
+    acquisition_utm_campaign: 'utm_campaign'
+  };
+  for (const [input, key] of Object.entries(fields)) {
+    const value = String(a[input] || '').trim().slice(0, 450);
+    if (value) params.set('metadata[' + key + ']', value);
+  }
 }
 
 function json(payload,status=200){

@@ -485,6 +485,45 @@
   captureOfferAttribution();
   captureAcquisitionAttribution();
   window.maisonAnalytics = { track, getAttribution };
+
+  // Consent-aware attribution for the three digital checkout endpoints.
+  // Their many page-level entry points share this layer, so attribution stays
+  // consistent without duplicating checkout payload logic across every page.
+  const DIGITAL_CHECKOUT_PATHS = new Set([
+    '/api/create-checkout-live',
+    '/api/create-oracle-checkout-live',
+    '/api/create-pdi-checkout-live'
+  ]);
+  const maisonNativeFetch = window.fetch.bind(window);
+  window.fetch = function maisonCheckoutAttributionFetch(input, init) {
+    const options = init && typeof init === 'object' ? init : {};
+    const method = String(options.method || (input && input.method) || 'GET').toUpperCase();
+    if (method !== 'POST' || typeof options.body !== 'string') {
+      return maisonNativeFetch(input, init);
+    }
+
+    try {
+      const rawUrl = typeof input === 'string' ? input : input instanceof URL ? input.href : input?.url;
+      const url = new URL(rawUrl, window.location.href);
+      if (url.origin !== window.location.origin || !DIGITAL_CHECKOUT_PATHS.has(url.pathname)) {
+        return maisonNativeFetch(input, init);
+      }
+
+      const payload = JSON.parse(options.body);
+      if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+        return maisonNativeFetch(input, init);
+      }
+      const collected = window.maisonAnalytics?.getAttribution?.() || {};
+      const explicit = payload.attribution && typeof payload.attribution === 'object'
+        ? payload.attribution
+        : {};
+      const body = JSON.stringify({ ...payload, attribution: { ...collected, ...explicit } });
+      return maisonNativeFetch(input, { ...options, body });
+    } catch (_) {
+      return maisonNativeFetch(input, init);
+    }
+  };
+
   queuedEvents.forEach(([name, parameters]) => track(name, parameters));
 
   function saveConsent(value) {
