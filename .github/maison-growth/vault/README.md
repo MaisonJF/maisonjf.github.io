@@ -85,9 +85,9 @@ The multilingual contract is deliberately narrow:
 
 A paid session remains:
 
-**28 perguntas. Duas pessoas.**
+**16 perguntas. A dois ou em grupo.**
 
-The server composes two stable 14-card packs and now validates the full 28-question experience before returning it. V2 metadata can express target, emotional function, cognitive/emotional load, semantic fingerprint, compatibility and lifecycle state.
+The server composes two stable 8-card packs and now validates the full 16-question experience before returning it. V2 metadata can express target, emotional function, cognitive/emotional load, semantic fingerprint, compatibility and lifecycle state.
 
 No answer text is requested or stored.
 
