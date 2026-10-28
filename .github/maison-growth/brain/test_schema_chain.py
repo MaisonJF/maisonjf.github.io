@@ -188,10 +188,13 @@ class GrowthSchemaChainTests(unittest.TestCase):
           decision_id,legacy_id,"develop","Keep for later development.","human"
         ))
 
-        migration=MIGRATIONS[-1].read_text(encoding="utf-8")
-        con.executescript(migration)
-        # The migration is deliberately repeatable because the deploy workflow reapplies it.
-        con.executescript(migration)
+        candidate_migration=MIGRATIONS[-2].read_text(encoding="utf-8")
+        con.executescript(candidate_migration)
+        # The candidate migration is deliberately repeatable because the deploy workflow reapplies it.
+        con.executescript(candidate_migration)
+        pillar_migration=MIGRATIONS[-1].read_text(encoding="utf-8")
+        con.executescript(pillar_migration)
+        con.executescript(pillar_migration)
 
         migrated=con.execute("""SELECT candidate_type,title FROM maison_candidate_inbox_v2
                                 WHERE candidate_id=?""",(legacy_id,)).fetchone()
