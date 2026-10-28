@@ -253,6 +253,7 @@ export function groupExactThemeSignals(signals=buildPdiThemeSourceSignals()){
     item.evidence.push({
       source:signal.source,
       sourceId:signal.sourceId,
+      label:signal.label||'',
       focus:signal.focus||'',
       family:signal.family||''
     });

@@ -45,33 +45,38 @@ export async function vaultLocalizationReady(db){
 
 export async function countLiveQuestionsForLocale(db,theme,locale='pt-PT'){
   const selected=normalizeMaisonLocale(locale);
-  return await cachedContentStatus(db,'question-count:'+selected+':'+theme,async()=>{
+  const themes=[...new Set((Array.isArray(theme)?theme:[theme]).map(value=>String(value||'').trim()).filter(Boolean))].sort();
+  if(!themes.length)return 0;
+  const cacheKey='question-count:'+selected+':'+themes.join('|');
+  return await cachedContentStatus(db,cacheKey,async()=>{
+    const placeholders=themes.map((_,index)=>'?'+(index+1)).join(',');
     if(selected==='pt-PT'){
       const row=await db.prepare(
         `SELECT COUNT(*) AS count
            FROM vault_questions
-          WHERE theme=?1
+          WHERE theme IN (${placeholders})
             AND status='active'
             AND exposure='paid'
             AND lifecycle_state='live'
             AND rotation_state IN ('new','limited','normal')`
-      ).bind(theme).first();
+      ).bind(...themes).first();
       return Number(row?.count||0);
     }
     if(!await vaultLocalizationReady(db))return 0;
+    const localePlaceholder='?'+(themes.length+1);
     const row=await db.prepare(
       `SELECT COUNT(*) AS count
          FROM vault_questions q
          JOIN vault_question_translations t
            ON t.question_id=q.question_id
-          AND t.locale=?2
+          AND t.locale=${localePlaceholder}
           AND t.status='active'
-        WHERE q.theme=?1
+        WHERE q.theme IN (${placeholders})
           AND q.status='active'
           AND q.exposure='paid'
           AND q.lifecycle_state='live'
           AND q.rotation_state IN ('new','limited','normal')`
-    ).bind(theme,selected).first();
+    ).bind(...themes,selected).first();
     return Number(row?.count||0);
   });
 }
