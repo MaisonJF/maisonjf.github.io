@@ -99,4 +99,7 @@ BEGIN SELECT RAISE(ABORT,'Candidate decisions are append-only.'); END;
 
 INSERT INTO schema_state(schema_key,schema_value)
 VALUES('maison_candidate_inbox_schema_version','CANDIDATE.1')
-ON CONFLICT(schema_key) DO UPDATE SET schema_value=excluded.schema_value;
+ON CONFLICT(schema_key) DO UPDATE SET schema_value=CASE
+  WHEN schema_state.schema_value='CANDIDATE.2' THEN schema_state.schema_value
+  ELSE excluded.schema_value
+END;

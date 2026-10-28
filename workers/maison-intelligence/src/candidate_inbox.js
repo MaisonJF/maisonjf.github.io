@@ -1,4 +1,5 @@
 import { sha256Hex, uniqueCanonicalUrls } from './core.js';
+import { loadActiveOceanRegistry, validateOceanProposal } from './ocean_catalog.js';
 
 const CANDIDATE_DECISIONS=new Set(['approve','reject','archive','defer','develop']);
 
@@ -6,7 +7,11 @@ export const CANDIDATE_TYPES=new Set([
   'question','oracle_block','test','farol_path',
   'reel','post','story','carousel','video_script',
   'physical_product','digital_product','bundle','service','experience',
-  'ebook','campaign','b2b','seasonal_offer','experiment'
+  'ebook','campaign','b2b','seasonal_offer','experiment',
+  'game_concept','interactive_book_game','game_expansion','scent_formula',
+  'supplier_opportunity','market_opportunity','brand_intelligence',
+  'creator_opportunity','ocean_proposal','content_series','digital_experience',
+  'research_brief','aroma_test'
 ]);
 
 const AUTHORITY_KEYS=new Set([
@@ -91,7 +96,7 @@ export async function ingestCandidateInbox(env,raw){
   }));
   const candidateId=idFromFingerprint(fp);
   const existing=await env.GROWTH_DB.prepare(
-    'SELECT candidate_id FROM maison_candidate_inbox WHERE candidate_type=?1 AND semantic_fingerprint=?2 LIMIT 1'
+    'SELECT candidate_id FROM maison_candidate_inbox_v2 WHERE candidate_type=?1 AND semantic_fingerprint=?2 LIMIT 1'
   ).bind(type,fp).first();
   if(existing){
     return {
@@ -102,7 +107,7 @@ export async function ingestCandidateInbox(env,raw){
   }
 
   await env.GROWTH_DB.prepare(`
-    INSERT INTO maison_candidate_inbox
+    INSERT INTO maison_candidate_inbox_v2
       (candidate_id,candidate_type,source_ocean_id,source_observation_id,provider_id,model_id,
        territory,title,body,rationale,payload_json,evidence_refs_json,related_assets_json,
        novelty_score,maison_fit_score,feasibility_score,demand_score,commercial_score,
@@ -143,7 +148,7 @@ export async function listCandidateInbox(env,{limit=50,type=null,decision='pendi
            payload_json,evidence_refs_json,related_assets_json,
            novelty_score,maison_fit_score,feasibility_score,demand_score,commercial_score,reuse_existing_score,
            created_at,latest_decision,latest_decision_at
-      FROM maison_candidate_review_queue
+      FROM maison_candidate_review_queue_v2
       ${where}
      ORDER BY created_at DESC
      LIMIT ${safeLimit}
@@ -170,16 +175,47 @@ export async function decideCandidateInbox(env,raw){
   if(EMAIL_RE.test(reason)||PHONE_RE.test(reason))throw new Error('candidate_pii_detected');
   const actor=cleanText(raw.actor||'human','actor',1,120);
   const exists=await env.GROWTH_DB.prepare(
-    'SELECT candidate_id FROM maison_candidate_inbox WHERE candidate_id=?1 LIMIT 1'
+    'SELECT candidate_id,candidate_type,title,body,payload_json FROM maison_candidate_inbox_v2 WHERE candidate_id=?1 LIMIT 1'
   ).bind(candidateId).first();
   if(!exists)throw new Error('candidate_not_found');
+  let proposedOcean=null;
+  if(decision==='approve'&&exists.candidate_type==='ocean_proposal'){
+    let payload;
+    try{payload=JSON.parse(exists.payload_json||'{}');}catch{throw new Error('invalid_ocean_proposal_payload');}
+    {
+      const prior=await env.GROWTH_DB.prepare(
+        'SELECT ocean_key FROM ocean_specialist_registry WHERE source_candidate_id=?1 LIMIT 1'
+      ).bind(candidateId).first();
+      if(prior){
+        proposedOcean={ocean_key:String(prior.ocean_key),already_registered:true};
+      }else{
+        const activeRegistry=await loadActiveOceanRegistry(env);
+        proposedOcean={...validateOceanProposal(payload,activeRegistry),already_registered:false};
+      }
+    }
+  }
   const decisionId='mcd_'+crypto.randomUUID();
-  await env.GROWTH_DB.prepare(`
-    INSERT INTO maison_candidate_decisions(decision_id,candidate_id,decision,reason,actor)
+  const statements=[env.GROWTH_DB.prepare(`
+    INSERT INTO maison_candidate_decisions_v2(decision_id,candidate_id,decision,reason,actor)
     VALUES(?1,?2,?3,?4,?5)
-  `).bind(decisionId,candidateId,decision,reason,actor).run();
+  `).bind(decisionId,candidateId,decision,reason,actor)];
+  if(proposedOcean&&!proposedOcean.already_registered){
+    const now=new Date().toISOString();
+    statements.push(env.GROWTH_DB.prepare(`
+      INSERT INTO ocean_specialist_registry(
+        ocean_key,display_name,pillar_key,mission,focus_json,connections_json,
+        lifecycle_state,source_candidate_id,created_at,updated_at
+      ) VALUES(?,?,?,?,?,?,'open',?,?,?)
+    `).bind(
+      proposedOcean.ocean_key,proposedOcean.display_name,proposedOcean.pillar_key,proposedOcean.mission,
+      JSON.stringify(proposedOcean.focus),JSON.stringify(proposedOcean.connections),candidateId,now,now
+    ));
+  }
+  await env.GROWTH_DB.batch(statements);
   return {
     ok:true,decision_id:decisionId,candidate_id:candidateId,decision,
+    ocean_registered:proposedOcean?.ocean_key||null,
+    ocean_lifecycle_state:proposedOcean?'open':null,
     live:false,automatic_activation:false,public_side_effects:false
   };
 }

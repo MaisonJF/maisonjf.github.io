@@ -75,7 +75,23 @@ export function buildSensorPrompt(territory) {
       'Zero-cost first and existing-assets first. Prefer applications that can improve current discovery, content, Jogo, Oráculo, tests, ebooks, guides, products or experiences before proposing new infrastructure.',
       'Do not collect personal identifiers. Return a concise synthesis (max 900 words) with public citations whenever supported.',
       'Do not publish, contact anyone, spend money, change the site, catalogue, prices or checkout. You are a sensor only.'
-    ].join('\\n');
+    ].join('\n');
+  }
+  if (territory.specialistOcean) {
+    const ocean=territory.specialistOcean;
+    return [
+      'Act as a read-only specialist research sensor for the MAISON JF intelligence network.',
+      `Specialist Ocean: ${ocean.display_name} [${ocean.ocean_key}] — pillar: ${ocean.pillar_key}.`,
+      `Mission: ${ocean.mission}.`,
+      `Focus areas: ${(ocean.focus||[]).join('; ')}.`,
+      `Connected Oceans to consider for cross-signals: ${(ocean.connections||[]).join(', ')}.`,
+      'Use the freshest public information available to your system. Search the sources most relevant to this specific Ocean rather than returning a generic trend summary.',
+      'Prefer primary sources, official catalogues and technical documents, reputable research/reporting, search signals and direct public discussions. Cite public URLs and dates whenever supported.',
+      'Separate observed facts, public interest signals, interpretation, uncertainty and Maison JF hypotheses. Never invent sources, popularity, recipes, test results, current availability or absence of competitors.',
+      'For supplier or Portugal-market questions, record the exact geography, price/conditions where available, source and observation date. For scent formulas, distinguish an idea from a physically tested formula and from a safety-validated product.',
+      'Do not copy a brand’s protected expression or identity. Do not collect personal identifiers or private conversations.',
+      'Return a concise synthesis (max 700 words). Do not publish, contact anyone, spend money or alter any public system. You are a sensor only.'
+    ].join('\n');
   }
   if (territory.key === DISCOVERY_TERRITORY.key) {
     return [
@@ -91,7 +107,7 @@ export function buildSensorPrompt(territory) {
       'Do not collect names, handles, emails, phone numbers, private conversations or other personal identifiers.',
       'Return a concise synthesis (max 900 words). Cite public URLs whenever your system supports citations.',
       'Do not publish, contact anyone, spend money, change the site, catalogue, prices or checkout. You are a sensor only.'
-    ].join('\\n');
+    ].join('\n');
   }
   return [
     'Act as a research sensor for MAISON JF. Search or use the freshest public information available to your system.',
@@ -105,19 +121,35 @@ export function buildSensorPrompt(territory) {
   ].join('\n');
 }
 
-export function territoriesForDate(date = new Date(), count = 2) {
-  // Rotate by scheduled 3-hour slot, not only by UTC day. This keeps the
-  // intelligence loop continuously fed while deterministically covering every
-  // human territory. Discovery and Atelier stay in the bounded rotation pool.
+export function territoriesForDate(date = new Date(), count = 2, specialistOceans = []) {
+  // The legacy human-signal pool continues to feed PDI/Oráculo and discovery.
+  // Half the bounded sensor slots now rotate through dedicated specialist Oceans;
+  // this adds a new research lane without replacing the existing human-signal mesh.
   const slot = Math.floor(date.getTime() / (3 * 3600000));
-  const limit = Math.max(0, Math.min(count, TERRITORIES.length + 2));
+  const limit = Math.max(0, Math.min(count, TERRITORIES.length + 2 + specialistOceans.length));
   if (!limit) return [];
-  // Human pain territories are the first-class feed for PDI/Oráculo. Discovery
-  // and Atelier get deterministic rotating slots instead of consuming every run.
   const pool=[...TERRITORIES,DISCOVERY_TERRITORY,ATELIER_TERRITORY];
+  const specialistCount=specialistOceans.length?Math.min(limit,Math.max(1,Math.floor(limit/2))):0;
+  const baseCount=limit-specialistCount;
   const selected=[];
-  for(let i=0;i<Math.min(limit,pool.length);i++){
+  for(let i=0;i<Math.min(baseCount,pool.length);i++){
     selected.push(pool[(slot+i*3)%pool.length]);
+  }
+  for(let i=0;i<specialistCount;i++){
+    const ocean=specialistOceans[(slot*specialistCount+i)%specialistOceans.length];
+    if(!ocean)continue;
+    selected.push({
+      key:ocean.ocean_key,
+      query:[ocean.display_name,ocean.mission,`Focus: ${(ocean.focus||[]).slice(0,8).join(', ')}`].filter(Boolean).join('. '),
+      specialistOcean:{
+        ocean_key:ocean.ocean_key,
+        display_name:ocean.display_name,
+        pillar_key:ocean.pillar_key,
+        mission:ocean.mission,
+        focus:Array.isArray(ocean.focus)?ocean.focus.slice(0,12):[],
+        connections:Array.isArray(ocean.connections)?ocean.connections.slice(0,12):[]
+      }
+    });
   }
   return selected;
 }

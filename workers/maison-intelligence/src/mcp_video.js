@@ -137,9 +137,9 @@ function tools(){
     {
       name:'maison_ingest_candidate',
       title:'Ingest Maison expansion candidate',
-      description:'Store one private candidate for content, product, service, experience, campaign, test, Farol or other Maison expansion work. Candidate only: no approval, publication, price or launch authority.',
+      description:'Store one private candidate for content, new digital games, interactive-book games, scent formulas, suppliers, market and creator opportunities, new Oceans and other Maison expansion work. Candidate only: no approval, publication, price or launch authority.',
       inputSchema:{type:'object',required:['candidate_type','source_ocean_id','title','body','rationale'],properties:{
-        candidate_type:{type:'string',enum:['test','farol_path','reel','post','story','carousel','video_script','physical_product','digital_product','bundle','service','experience','ebook','campaign','b2b','seasonal_offer','experiment']},
+        candidate_type:{type:'string',enum:['question','oracle_block','test','farol_path','reel','post','story','carousel','video_script','physical_product','digital_product','bundle','service','experience','ebook','campaign','b2b','seasonal_offer','experiment','game_concept','interactive_book_game','game_expansion','scent_formula','supplier_opportunity','market_opportunity','brand_intelligence','creator_opportunity','ocean_proposal','content_series','digital_experience','research_brief','aroma_test']},
         source_ocean_id:{type:'string',minLength:2,maxLength:160},
         source_observation_id:{type:'string',maxLength:160},
         provider_id:{type:'string',maxLength:120},

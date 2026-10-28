@@ -21,6 +21,7 @@ class Statement{
 class DB{
   constructor(){this.reads=[];this.writes=[];this.rows=[];this.duplicateRow=null;}
   prepare(sql){return new Statement(this,sql);}
+  async batch(statements){return Promise.all(statements.map(statement=>statement.run()));}
 }
 
 test('generic expansion candidate stays private and review-only',async()=>{
@@ -98,6 +99,87 @@ test('candidate inbox returns parsed private rows',async()=>{
   assert.equal(rows[0].payload_json,undefined);
 });
 
+
+class OceanProposalStatement extends Statement {
+  async first() {
+    this.db.reads.push({sql:this.sql,params:this.params});
+    if (this.sql.includes('SELECT candidate_id,candidate_type,title,body,payload_json FROM maison_candidate_inbox_v2')) return this.db.proposal;
+    if (this.sql.includes('SELECT ocean_key FROM ocean_specialist_registry')) return null;
+    return null;
+  }
+}
+
+class OceanProposalDB extends DB {
+  constructor(proposal) { super(); this.proposal=proposal; this.batchCalls=[]; }
+  prepare(sql) { return new OceanProposalStatement(this,sql); }
+  async batch(statements) {
+    this.batchCalls.push(...statements.map(statement=>({sql:statement.sql,params:statement.params})));
+    return Promise.all(statements.map(statement=>statement.run()));
+  }
+}
+
+test('approving a first-class Ocean proposal opens a specialist Ocean only after human review',async()=>{
+  const payload={
+    proposal_kind:'ocean_proposal',
+    proposed_ocean_key:'seasonal-room-scent-gifting',
+    display_name:'Seasonal Room Scent & Gifting',
+    pillar_key:'scent-product-formulation',
+    mission:'Investigar ocasiões sazonais em que uma experiência aromática possa ser descoberta, oferecida ou combinada com outros produtos.',
+    focus:['datas e ocasiões','aromas de oferta','conjuntos e apresentação'],
+    connections:['home-fragrance','supplier-intelligence','emotional-gifting']
+  };
+  const db=new OceanProposalDB({
+    candidate_id:'mci_demo',candidate_type:'ocean_proposal',
+    title:'Proposta de novo Ocean: Seasonal Room Scent & Gifting',
+    body:payload.mission,payload_json:JSON.stringify(payload)
+  });
+  const out=await decideCandidateInbox({GROWTH_DB:db},{
+    candidate_id:'mci_demo',decision:'approve',
+    reason:'Território distinto com âmbito e ligações claros.'
+  });
+  assert.equal(out.ocean_registered,'seasonal-room-scent-gifting');
+  assert.equal(out.ocean_lifecycle_state,'open');
+  assert.equal(out.live,false);
+  assert.equal(out.automatic_activation,false);
+  assert.equal(out.public_side_effects,false);
+  assert.ok(db.batchCalls.some(item=>item.sql.includes('INSERT INTO maison_candidate_decisions')));
+  assert.ok(db.batchCalls.some(item=>item.sql.includes('INSERT INTO ocean_specialist_registry')));
+});
+
+test('expanded candidate types include games, interactive books, scent, suppliers and new Oceans',async()=>{
+  const types=[
+    'game_concept','interactive_book_game','game_expansion','scent_formula',
+    'supplier_opportunity','market_opportunity','brand_intelligence',
+    'creator_opportunity','ocean_proposal','content_series','digital_experience',
+    'research_brief','aroma_test'
+  ];
+  for(const [index,candidate_type] of types.entries()){
+    const db=new DB();
+    const out=await ingestCandidateInbox({GROWTH_DB:db},{
+      candidate_type,
+      source_ocean_id:'specialist-test',
+      provider_id:'test',
+      territory:'expansion',
+      title:'Candidato '+candidate_type,
+      body:'Candidato privado para revisão humana.',
+      rationale:'O tipo deve ser aceite pela fila expandida.',
+      payload:candidate_type==='ocean_proposal'?{
+        proposal_kind:'ocean_proposal',
+        proposed_ocean_key:'test-ocean-'+index,
+        display_name:'Test Ocean '+index,
+        pillar_key:'scent-product-formulation',
+        mission:'Investigar um território distinto com utilidade clara para a Maison JF.',
+        focus:['tema A','tema B'],
+        connections:[]
+      }:{}
+    });
+    assert.equal(out.candidate_type,candidate_type);
+    assert.equal(out.automatic_activation,false);
+    assert.equal(out.public_side_effects,false);
+    assert.equal(db.writes.length,1);
+    assert.match(db.writes[0].sql,/INSERT INTO maison_candidate_inbox_v2/);
+  }
+});
 
 test('human decision is append-only and never makes a candidate live',async()=>{
   const db=new DB();

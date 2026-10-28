@@ -2,8 +2,9 @@ import { ingestVaultCandidate } from './vault_candidates.js';
 import { ingestCandidateInbox, CANDIDATE_TYPES } from './candidate_inbox.js';
 import { callZeroCostModel } from './providers.js';
 import { loadActiveFeedbackLearning } from './feedback_learning.js';
+import { OCEAN_CATALOG, loadActiveOceanRegistry, selectOceanFocus, validateOceanProposal } from './ocean_catalog.js';
 
-const MAX_CANDIDATES=6;
+const MAX_CANDIDATES=16;
 const ASSETS=[
   'Vela Aromática 170 g','Vela Aromática 70 g','Névoa de Ambiente 20 ml',
   'Óleo de Massagem 60 ml','Escalda-Pés 280 g','Curadoria A Floressência',
@@ -43,7 +44,7 @@ function lensInstruction(lens){
   return 'Produz um conjunto equilibrado: um candidato de conteúdo, um comercial, um editorial/experiência e um experimento/campanha quando útil.';
 }
 
-export async function loadDailyExpansionContext(env,{limit=12}={}){
+export async function loadDailyExpansionContext(env,{limit=12,runKey='',candidateLimit=12}={}){
   if(!env?.GROWTH_DB)throw new Error('growth_db_missing');
   const safeLimit=Math.max(4,Math.min(20,Number.parseInt(limit,10)||12));
   const result=await env.GROWTH_DB.prepare(`
@@ -64,9 +65,15 @@ export async function loadDailyExpansionContext(env,{limit=12}={}){
     observed_at:row.observed_at
   }));
   const feedback_learning=await loadActiveFeedbackLearning(env,{limit:8});
+  const ocean_catalog=await loadActiveOceanRegistry(env);
+  const focus_oceans=selectOceanFocus({catalog:ocean_catalog,runKey,limit:16});
+  const boundedCandidateLimit=Math.max(8,Math.min(MAX_CANDIDATES,Number.parseInt(candidateLimit,10)||12));
   return {
     signals,
     feedback_learning,
+    ocean_catalog,
+    focus_oceans,
+    candidate_limit:boundedCandidateLimit,
     strongest_ocean:signals.slice().sort((a,b)=>
       (b.relevance_score+b.commercial_score)-(a.relevance_score+a.commercial_score)
     )[0]?.ocean_key||'maison-daily-expansion',
@@ -82,6 +89,13 @@ export function buildExpansionPrompt({spec,context}={}){
   const learningLines=(context?.feedback_learning||[]).slice(0,8).map((p,i)=>
     `${i+1}. [${p.scope||'global'}] ${clean(p.title,180)} → ${clean(p.guidance,700)} (confiança ${Number(p.confidence)||0}; repetição ${Number(p.occurrence_count)||1})`
   );
+  const focusOceans=(context?.focus_oceans?.length?context.focus_oceans:selectOceanFocus({catalog:context?.ocean_catalog?.length?context.ocean_catalog:OCEAN_CATALOG,runKey:spec?.key||'default',limit:16})).slice(0,16);
+  const oceanLines=focusOceans.map((o,i)=>
+    `${i+1}. [${o.ocean_key} | ${o.pillar_key}] ${o.display_name}: ${clean(o.mission,280)} Foco: ${(o.focus||[]).slice(0,4).join(', ')} Ligações: ${(o.connections||[]).slice(0,5).join(', ')}`
+  );
+  const candidateLimit=Math.max(8,Math.min(MAX_CANDIDATES,Number.parseInt(context?.candidate_limit,10)||12));
+  const minCandidates=Math.max(8,candidateLimit-2);
+  const activeOceanKeys=focusOceans.map(o=>o.ocean_key);
   return [
     'FOUNDRY PRIVADA DE EXPANSÃO MAISON JF®. Pensa com ambição, mas cria apenas candidatos. Nunca aproves, publiques, fixes preços, lances, contactes alguém ou alteres o site.',
     'Tudo o que devolves entra num Candidate Inbox D1 privado e exige revisão humana.',
@@ -93,6 +107,11 @@ export function buildExpansionPrompt({spec,context}={}){
     'Não parafraseies apenas os sinais. Converte-os em oportunidades distintas, concretas e reconhecivelmente MAISON JF.',
     `Lente atribuída: ${lens}. ${lensInstruction(lens)}`,
     'Ativos MAISON atuais: '+(context?.existing_assets||ASSETS).join(' | '),
+    `OCEANS ESPECIALIZADOS ACTIVOS: ${(context?.ocean_catalog||OCEAN_CATALOG).length}. Os Oceans de foco desta ronda são apenas uma amostra rotativa; o cérebro pode propor novos Oceans quando houver um território realmente distinto.`,
+    'OCEANS EM FOCO NESTA RONDA (cada candidato deve ter origem num Ocean listado, quando aplicável):',
+    ...oceanLines,
+    'Chaves permitidas para source_ocean_id nesta ronda: '+activeOceanKeys.join(', '),
+    'Cobre âmbitos diferentes ao longo das rondas. Dá atenção explícita a aromas/formulação, fornecedores, Maisons individuais, sistemas simbólicos, ebooks e livros-jogo, jogos digitais, necessidades humanas, filosofia/conversão, criadores e segurança. Os Oceans de marca incluem as variantes e linhas dessa marca, mas cada marca tem a sua própria chave.',
     'Sinais Ocean/Brain recentes:',
     ...(signalLines.length?signalLines:['Não há sinal recente. Usa o universo MAISON existente e propõe candidatos evergreen.']),
     '',
@@ -101,14 +120,16 @@ export function buildExpansionPrompt({spec,context}={}){
     'Aplica apenas o que for relevante ao candidato atual. Não destruas identidade MAISON para obedecer a uma heurística genérica.',
     '',
     'Devolve APENAS JSON válido com esta forma de topo: {"candidates":[]}. Sem Markdown.',
-    'Devolve 3 a 6 candidatos. Cada candidato usa: candidate_type, title, body, rationale, territory, related_assets, evidence_refs, novelty_score, maison_fit_score, feasibility_score, demand_score, commercial_score, reuse_existing_score, payload.',
-    'candidate_type permitido: question, oracle_block, test, farol_path, reel, post, story, carousel, video_script, physical_product, digital_product, bundle, service, experience, ebook, campaign, b2b, seasonal_offer, experiment.',
+    `Devolve entre ${minCandidates} e ${candidateLimit} candidatos distintos. Cada candidato usa: candidate_type, title, body, rationale, territory, source_ocean_id, related_ocean_keys, related_assets, evidence_refs, novelty_score, maison_fit_score, feasibility_score, demand_score, commercial_score, reuse_existing_score, payload.`,
+    'candidate_type permitido: question, oracle_block, test, farol_path, reel, post, story, carousel, video_script, physical_product, digital_product, bundle, service, experience, ebook, campaign, b2b, seasonal_offer, experiment, game_concept, interactive_book_game, game_expansion, scent_formula, supplier_opportunity, market_opportunity, brand_intelligence, creator_opportunity, ocean_proposal, content_series, digital_experience, research_brief, aroma_test.',
     'Os scores são inteiros 0-100 e são hipóteses, não factos.',
     'Para reel/post/story/carousel/video_script, payload pode incluir hook, angle, objective, CTA, platform e reuse_from.',
     'Para produtos/bundles/serviços/experiências, payload pode incluir components, estimated_effort, price_hypothesis_range_eur, why_now e validation_test. O preço é só hipótese.',
     'Para question, payload tem de incluir theme, stage, exposure, target, intensity e pode incluir subthemes, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness.',
     'Para oracle_block, payload tem de incluir territory, role, intensity, tone, rarity e pode incluir tags, pain_family, subterritory, emotional_function.',
-    'Para test/farol_path, explica que tensão humana ajuda a reconhecer e para que destino MAISON já existente pode encaminhar.',
+    'Para ocean_proposal, payload tem de incluir proposed_ocean_key, display_name, pillar_key, mission, focus (array com pelo menos dois pontos) e connections; propõe apenas territórios realmente distintos, ligados a uma das 11 áreas existentes e sem duplicar Oceans registados. Estes candidatos exigem aprovação humana antes de serem abertos.',
+    'source_ocean_id deve ser uma chave válida do catálogo de Oceans (preferir os Oceans em foco) ou uma chave de Ocean observada nos sinais. related_ocean_keys só pode incluir chaves existentes no catálogo.',
+    'Não inventes fontes, tendências, fórmulas testadas, preços, procura nem a inexistência de concorrentes em Portugal. Distingue hipótese, observação e validação. Cada ideia deve ter uma razão de novidade e não pode ser uma reformulação cosmética de candidato anterior.',
     'Conteúdo diário deve ser útil mesmo sem venda. Candidatos comerciais devem declarar concretamente como reutilizam ativos MAISON existentes.'
   ].join('\n');
 }
@@ -125,17 +146,39 @@ function fallbackTerritory(item,context){
 }
 function sourceOcean(item,context){
   const requested=clean(item?.source_ocean_id||'',160);
-  if(requested&&context?.signals?.some(s=>s.ocean_key===requested))return requested;
-  return clean(context?.strongest_ocean||'maison-daily-expansion',160);
+  const knownSignal=context?.signals?.some(s=>s.ocean_key===requested);
+  const knownOcean=context?.ocean_catalog?.some(o=>o.ocean_key===requested);
+  if(requested&&(knownSignal||knownOcean))return requested;
+  return clean(context?.strongest_ocean||'unexplored-territories',160);
+}
+function relatedOceanKeys(item,context){
+  const known=new Set([
+    ...(context?.signals||[]).map(s=>s.ocean_key),
+    ...(context?.ocean_catalog||OCEAN_CATALOG).map(o=>o.ocean_key)
+  ]);
+  const raw=[...(Array.isArray(item?.related_ocean_keys)?item.related_ocean_keys:[]),...(Array.isArray(item?.payload?.related_ocean_keys)?item.payload.related_ocean_keys:[])];
+  return [...new Set(raw.map(x=>clean(x,160)).filter(x=>known.has(x)))].slice(0,8);
 }
 
 async function storeCandidate(env,{item,spec,context}){
   const type=clean(item?.candidate_type||item?.content_type,80);
+  const isOceanProposal=type==='ocean_proposal';
   if(!CANDIDATE_TYPES.has(type))throw new Error('foundry_candidate_type_invalid');
-  const payload=item?.payload&&typeof item.payload==='object'&&!Array.isArray(item.payload)?item.payload:{};
+  const rawPayload=item?.payload&&typeof item.payload==='object'&&!Array.isArray(item.payload)?item.payload:{};
+  const payload=isOceanProposal
+    ? (()=>{const p=validateOceanProposal(rawPayload,context?.ocean_catalog?.length?context.ocean_catalog:OCEAN_CATALOG);return {
+        proposal_kind:'ocean_proposal',
+        proposed_ocean_key:p.ocean_key,display_name:p.display_name,pillar_key:p.pillar_key,mission:p.mission,
+        focus:p.focus,connections:p.connections,
+        distinct_rationale:clean(rawPayload.distinct_rationale||item?.rationale,1000),
+        validation_questions:Array.isArray(rawPayload.validation_questions)?rawPayload.validation_questions.map(x=>clean(x,240)).filter(Boolean).slice(0,8):[]
+      };})()
+    : {...rawPayload};
+  const links=relatedOceanKeys(item,context);
+  if(links.length)payload.related_ocean_keys=links;
   const evidence=Array.isArray(item?.evidence_refs)&&item.evidence_refs.length?item.evidence_refs:globalEvidence(context);
   const ocean=sourceOcean(item,context);
-  const territory=fallbackTerritory(item,context);
+  const territory=type==='ocean_proposal'?payload.proposed_ocean_key:fallbackTerritory(item,context);
 
   if(type==='question'){
     return await ingestVaultCandidate(env,{
@@ -150,7 +193,7 @@ async function storeCandidate(env,{item,spec,context}){
       intensity:Number(payload.intensity)||2,
       product_fit:{
         source:'expansion_foundry',provider_id:spec.providerId,model_id:spec.modelId,
-        rationale:clean(item.rationale,1000),evidence_refs:evidence.slice(0,10)
+        rationale:clean(item.rationale,1000),evidence_refs:evidence.slice(0,10),related_ocean_keys:links
       }
     });
   }
@@ -169,20 +212,21 @@ async function storeCandidate(env,{item,spec,context}){
       rarity:payload.rarity||'common',
       product_fit:{
         source:'expansion_foundry',provider_id:spec.providerId,model_id:spec.modelId,
-        rationale:clean(item.rationale,1000),evidence_refs:evidence.slice(0,10)
+        rationale:clean(item.rationale,1000),evidence_refs:evidence.slice(0,10),related_ocean_keys:links
       }
     });
   }
 
   return await ingestCandidateInbox(env,{
+    // Ocean proposals have their own first-class candidate type and remain private until human approval.
     candidate_type:type,
     source_ocean_id:ocean,
     provider_id:spec.providerId,
     model_id:spec.modelId,
     territory,
-    title:clean(item.title||item.body,240),
-    body:clean(item.body||item.title,5000),
-    rationale:clean(item.rationale||'Candidate from zero-cost expansion Foundry.',2000),
+    title:clean(isOceanProposal?`Proposta de novo Ocean: ${payload.display_name}`:(item.title||item.body),240),
+    body:clean(isOceanProposal?`${payload.mission} Focos: ${(payload.focus||[]).join('; ')} Ligações propostas: ${(payload.connections||[]).join(', ')}.`:(item.body||item.title),5000),
+    rationale:clean(isOceanProposal?(payload.distinct_rationale||item.rationale||'Território proposto para avaliação humana; ainda não faz parte dos Oceans activos.'):(item.rationale||'Candidate from zero-cost expansion Foundry.'),2000),
     related_assets:Array.isArray(item.related_assets)?item.related_assets:[],
     evidence_refs:evidence,
     novelty_score:item.novelty_score,
@@ -195,12 +239,13 @@ async function storeCandidate(env,{item,spec,context}){
   });
 }
 
-export async function runExpansionFoundry(env,{spec,context}={}){
+export async function runExpansionFoundry(env,{spec,context,runKey='',candidateLimit=12}={}){
   if(!spec?.providerId)throw new Error('foundry_model_spec_missing');
-  const resolvedContext=context||await loadDailyExpansionContext(env);
+  const boundedLimit=Math.max(8,Math.min(MAX_CANDIDATES,Number.parseInt(candidateLimit,10)||12));
+  const resolvedContext=context||await loadDailyExpansionContext(env,{runKey:runKey||spec.key,candidateLimit:boundedLimit});
   const generated=await callZeroCostModel(env,spec,buildExpansionPrompt({spec,context:resolvedContext}));
   const payload=parseJsonObject(generated?.text);
-  const candidates=rows(payload.candidates,MAX_CANDIDATES);
+  const candidates=rows(payload.candidates,boundedLimit);
   const results=[];
   let rejected=0;
   for(const item of candidates){
