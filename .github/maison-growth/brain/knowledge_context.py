@@ -2,7 +2,10 @@
 from __future__ import annotations
 
 import json
+import os
 import re
+import threading
+import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Mapping, Sequence
@@ -32,6 +35,45 @@ class OceanCommercialHint:
     intent: str
     pain_language: str
     question_theme_candidates: tuple[str,...]
+
+
+_RUNTIME_OCEAN_CACHE: dict[str,object] = {"fetched_at":0.0,"payload":None}
+_RUNTIME_OCEAN_CACHE_LOCK=threading.Lock()
+
+
+def fetch_runtime_specialist_catalog(*,refresh_seconds:float=45.0) -> Mapping[str,object] | None:
+    """Read approved dynamic specialist records from the authenticated private Worker.
+
+    Repository snapshot remains the deterministic fallback. Errors never expose token
+    values or prevent the Brain from answering from its local context.
+    """
+    base_url=(os.environ.get("BRAIN_CONTROL_API_URL") or os.environ.get("MAISON_BRAIN_PRIVATE_URL") or "").strip()
+    token=(os.environ.get("BRAIN_CONTROL_TOKEN") or os.environ.get("MAISON_BRAIN_CONTROL_TOKEN") or "").strip()
+    if not base_url or not token:
+        return None
+
+    now=time.monotonic()
+    with _RUNTIME_OCEAN_CACHE_LOCK:
+        cached_at=float(_RUNTIME_OCEAN_CACHE.get("fetched_at") or 0.0)
+        cached=_RUNTIME_OCEAN_CACHE.get("payload")
+        if now-cached_at<max(0.0,refresh_seconds):
+            return cached if isinstance(cached,Mapping) else None
+        try:
+            from brain_control_client import BrainControlClient
+            client=BrainControlClient(
+                base_url=base_url,
+                token=token,
+                access_client_id=os.environ.get("CF_ACCESS_CLIENT_ID") or os.environ.get("MAISON_CF_ACCESS_CLIENT_ID"),
+                access_client_secret=os.environ.get("CF_ACCESS_CLIENT_SECRET") or os.environ.get("MAISON_CF_ACCESS_CLIENT_SECRET"),
+                timeout=3.0,
+                max_bytes=2_000_000,
+            )
+            payload=client.ocean_catalog()
+            _RUNTIME_OCEAN_CACHE.update({"fetched_at":now,"payload":payload})
+            return payload
+        except Exception:
+            _RUNTIME_OCEAN_CACHE.update({"fetched_at":now,"payload":None})
+            return None
 
 
 def _tokens(text: str) -> frozenset[str]:
