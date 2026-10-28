@@ -131,6 +131,17 @@ class BrainControlClient:
             max_bytes=self.max_bytes,
         )
 
+    def ocean_catalog(self) -> Mapping[str,Any]:
+        """Read the internal specialist Ocean/pillar catalogue; never mutate it."""
+        payload=self._get("/internal/oceans/catalog")
+        if payload.get("kind")!="ocean_specialist_catalog":
+            raise BrainControlError("brain_control_invalid_ocean_catalog")
+        rows=payload.get("rows")
+        pillars=payload.get("pillars")
+        if not isinstance(rows,list) or not isinstance(pillars,list):
+            raise BrainControlError("brain_control_invalid_ocean_catalog")
+        return payload
+
     def health(self) -> Mapping[str,Any]:
         return self._get("/internal/brain/health")
 
