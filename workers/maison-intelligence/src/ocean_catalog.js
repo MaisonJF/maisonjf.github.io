@@ -632,6 +632,12 @@ export function selectOceanFocus({catalog = OCEANS, pillars = PILLARS, runKey = 
       ? group[(seed + selected.length * 7) % group.length]
       : group[offset]);
   }
+  const brandPool = [...(catalog || [])].filter(o => o?.ocean_key?.startsWith('brand-'))
+    .sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
+  if (max >= 8 && brandPool.length && !selected.some(o => o.ocean_key.startsWith('brand-'))) {
+    const brand = brandPool[seed % brandPool.length];
+    if (!selected.some(o => o.ocean_key === brand.ocean_key) && selected.length) selected[selected.length - 1] = brand;
+  }
   const all = [...(catalog || [])].filter(o => o && o.lifecycle_state !== 'paused' && o.lifecycle_state !== 'archived')
     .sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
   const used = new Set(selected.map(o => o.ocean_key));
