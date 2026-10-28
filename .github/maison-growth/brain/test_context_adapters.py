@@ -23,6 +23,37 @@ class ContextAdapterTests(unittest.TestCase):
         self.assertEqual(hits[0].ref,"ocean:dinheiro-e-seguranca")
         self.assertNotIn("body",hits[0].label.lower())
 
+    def test_specialist_oceans_and_pillars_are_searchable_without_becoming_evidence(self):
+        ctx=OceanEditorialContext({
+            "candidates":[
+                {"id":"human-signal-one","preferredLabel":"descanso e pausa","painLanguage":"procurar tranquilidade em casa"}
+            ],
+            "specialistOceans":[{
+                "ocean_key":"brand-tom-ford",
+                "display_name":"Tom Ford",
+                "pillar_key":"designer-luxury-houses",
+                "mission":"Estudar catálogo, variantes, campanhas, posicionamento e princípios transferíveis de uma Maison.",
+                "focus":["perfumaria","campanhas","variantes"],
+                "connections":["brand-dior","brand-yves-saint-laurent"],
+                "visibility":"internal"
+            }],
+            "specialistPillars":[{
+                "key":"designer-luxury-houses",
+                "name":"Maisons de moda e luxo",
+                "mission":"Estudar casas de moda e luxo individualmente, incluindo linhas, variantes, códigos de marca e posicionamento.",
+                "connections":["storytelling-brand-voice","visual-sensory-design"],
+                "origin":"foundational_catalog"
+            }]
+        })
+        hits=ctx.search("Tom Ford campanhas variantes perfumaria",limit=12)
+        ocean=next(hit for hit in hits if hit.ref=="specialist-ocean:brand-tom-ford")
+        self.assertEqual(ocean.source_kind,"ocean_specialist_metadata")
+        self.assertEqual(ocean.evidence_refs,())
+        pillar_hits=ctx.search("Maisons luxo posicionamento códigos de marca",limit=12)
+        pillar=next(hit for hit in pillar_hits if hit.ref=="specialist-pillar:designer-luxury-houses")
+        self.assertEqual(pillar.source_kind,"ocean_pillar_metadata")
+        self.assertEqual(pillar.evidence_refs,())
+
     def test_ocean_commercial_hints_deduplicate_question_and_oracle_rows(self):
         ctx=OceanEditorialContext({
             "items":[
