@@ -471,6 +471,7 @@ const PILLAR_LINKS = {
   'culture-seasonality-expansion':['home-scent-products','symbolic-traditions','customer-motivations-gifting','portugal-market-opportunity'],
   'market-innovation-opportunities':['market-competition-discovery','scent-science-research','culture-seasonality-expansion','research-evidence-analytics'],
   'research-evidence-analytics':['market-competition-discovery','conversion-growth-experiments','product-quality-safety-regulatory','maison-internal-growth','search-visibility-authority'],
+  'search-visibility-authority':['conversion-growth-experiments','market-competition-discovery','research-evidence-analytics','storytelling-brand-voice','community-audience-development','symbolic-traditions','reflection-tests','editorial-narrative-publishing'],
   'operations-production-scale':['supplier-materials-packaging','procurement-economics','product-quality-safety-regulatory','sustainability-circular-design'],
   'maison-internal-growth':['research-evidence-analytics','operations-production-scale','conversion-growth-experiments','bundles-revenue-ecosystems'],
   'founder-personal-growth':['maison-internal-growth','research-evidence-analytics','ethics-trust-human-impact'],
@@ -504,7 +505,7 @@ const OCEAN_BY_KEY = new Map(OCEANS.map(o => [o.ocean_key, o]));
 const BRAND_OCEANS = OCEANS.filter(o => o.ocean_key.startsWith('brand-'));
 const NON_BRAND_PILLARS = PILLARS.filter(p => p.key !== 'luxury-brand-intelligence');
 
-export const OCEAN_CATALOG_VERSION = 'JF-OCEANS-2026.10.2';
+export const OCEAN_CATALOG_VERSION = 'JF-OCEANS-2026.10.3';
 const PILLAR_KEY_RE = /^[a-z0-9][a-z0-9._:-]{1,159}$/;
 const normaliseKey = value => String(value ?? '').trim().toLowerCase();
 export const OCEAN_PILLARS = PILLARS;
