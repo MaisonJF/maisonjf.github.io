@@ -159,7 +159,13 @@ def validate(payload: Mapping[str,Any]) -> None:
     if network["duplicate_ocean_keys"] or network["duplicate_pillar_keys"]:
         raise SystemExit("ocean_specialist_network_duplicate_id")
     if network["broken_ocean_links"] or network["broken_pillar_links"] or network["oceans_without_known_pillar"] or network["pillars_without_ocean"]:
-        raise SystemExit("ocean_specialist_network_link_gap")
+        details={
+            "broken_ocean_links":network["broken_ocean_links"][:20],
+            "broken_pillar_links":network["broken_pillar_links"][:20],
+            "oceans_without_known_pillar":network["oceans_without_known_pillar"][:20],
+            "pillars_without_ocean":network["pillars_without_ocean"][:20],
+        }
+        raise SystemExit("ocean_specialist_network_link_gap:"+json.dumps(details,ensure_ascii=False))
     s=payload["summary"]
     if s["missing_from_graph"] or s["orphaned_in_graph"]:
         raise SystemExit("ocean_universal_coverage_graph_gap")
