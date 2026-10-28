@@ -1,4 +1,5 @@
 import { recommendMaisonOffers, MAISON_OFFER_BRAIN } from '../_lib/offer-brain.js';
+import { deriveOfferTelemetryLearning } from '../_lib/offer-telemetry-learning.js';
 
 export async function onRequestPost({request,env}){
   try{
@@ -24,6 +25,7 @@ export async function onRequestPost({request,env}){
 
 async function loadOfferLearning(db,signal){
   if(!db||typeof db.prepare!=='function')return {};
+  const out={};
   try{
     const rows=await db.prepare(
       `SELECT subject_id,confidence_delta,observed_json,evidence_refs_json,created_at
@@ -31,7 +33,6 @@ async function loadOfferLearning(db,signal){
        WHERE subject_type='candidate' AND signal_class IN ('positive','negative','neutral')
        ORDER BY created_at DESC LIMIT 250`
     ).all();
-    const out={};
     for(const row of rows?.results||[]){
       let refs=[];let observed={};
       try{refs=JSON.parse(row.evidence_refs_json||'[]')}catch{}
@@ -47,10 +48,49 @@ async function loadOfferLearning(db,signal){
         observation_count:Number(observed.observation_count||0)
       };
     }
-    return out;
   }catch{
-    // Recommendation remains available when learning storage is absent/stale.
-    return {};
+    // Validated learning records are optional; aggregate telemetry can still be used.
+  }
+
+  try{
+    const cutoff=new Date(Date.now()-90*24*60*60*1000).toISOString();
+    const [interactionRows,purchaseRows]=await Promise.all([
+      db.prepare(
+        `SELECT event_type,
+                json_extract(metadata_json,'$.offer_id') AS offer_id,
+                COALESCE(json_extract(metadata_json,'$.recommendation_route'),'') AS route,
+                COUNT(*) AS count
+           FROM events
+          WHERE source='site'
+            AND event_type IN ('offer.exposure','offer.click')
+            AND occurred_at>=?1
+            AND json_extract(metadata_json,'$.offer_id') IS NOT NULL
+          GROUP BY event_type,
+                   json_extract(metadata_json,'$.offer_id'),
+                   COALESCE(json_extract(metadata_json,'$.recommendation_route'),'')`
+      ).bind(cutoff).all(),
+      db.prepare(
+        `SELECT json_extract(metadata_json,'$.recommendation_offer') AS offer_id,
+                COALESCE(json_extract(metadata_json,'$.recommendation_route'),'') AS route,
+                COUNT(*) AS count
+           FROM events
+          WHERE source='stripe'
+            AND event_type='commerce.purchase_confirmed'
+            AND occurred_at>=?1
+            AND COALESCE(json_extract(metadata_json,'$.recommendation_offer'),'')<>''
+          GROUP BY json_extract(metadata_json,'$.recommendation_offer'),
+                   COALESCE(json_extract(metadata_json,'$.recommendation_route'),'')`
+      ).bind(cutoff).all()
+    ]);
+    return deriveOfferTelemetryLearning({
+      interactionRows:interactionRows?.results||[],
+      purchaseRows:purchaseRows?.results||[],
+      existing:out,
+      route:signal?.route
+    });
+  }catch{
+    // Recommendation stays available when event telemetry or its schema is absent.
+    return out;
   }
 }
 
