@@ -111,6 +111,8 @@ def build_contract() -> dict[str,Any]:
         },
         "specialist_ocean_ids":sorted(specialist_ocean_set),
         "specialist_pillar_ids":sorted(specialist_pillar_set),
+        "all_ocean_ids":sorted(canonical_set|specialist_ocean_set),
+        "all_addressable_ocean_count":len(canonical_set|specialist_ocean_set),
         "growth_layers":{
             "maison_internal":{
                 "route":"maison_internal_growth",
@@ -142,6 +144,9 @@ def build_contract() -> dict[str,Any]:
             "orphaned_in_graph":len(orphaned),
             "duplicate_canonical_ids":duplicate_canonical,
             "duplicate_graph_ids":duplicate_graph,
+            "specialist_pillars":len(specialist_pillar_set),
+            "specialist_oceans":len(specialist_ocean_set),
+            "all_addressable_oceans":len(canonical_set|specialist_ocean_set),
         },
         "gaps":{
             "missing_from_graph":missing,
