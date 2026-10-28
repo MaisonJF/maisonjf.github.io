@@ -27,6 +27,8 @@ test('Vault audit lists old, candidate, live and retired content without exposin
   assert.match(html,/id="apply-plan"/);
   assert.match(html,/maison-vault-proposed-retirement-v1/);
   assert.match(html,/maison-vault-proposed-quarantine-v1/);
+  assert.match(html,/expectedSource/);
+  assert.match(html,/A contagem do plano não coincide/);
   assert.match(html,/noindex,nofollow,noarchive/);
 });
 
