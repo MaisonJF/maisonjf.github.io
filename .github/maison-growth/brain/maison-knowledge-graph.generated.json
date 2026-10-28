@@ -47,7 +47,10 @@
         "solidao-com-contacto-sem-conexao-de-qualidade",
         "atelier-principios-transferiveis-e-dna-maison",
         "vergonha-financeira-e-medo-de-olhar-para-os-numeros",
-        "comparacao-social-que-transforma-vida-em-atraso"
+        "comparacao-social-que-transforma-vida-em-atraso",
+        "fadiga-de-decidir-em-escolhas-pequenas",
+        "trabalho-emocional-de-regular-o-clima-da-relacao",
+        "dificuldade-em-receber-sem-sentir-divida"
       ]
     },
     {
@@ -72,7 +75,9 @@
         "precisar-de-solidao-para-recuperar-energia-social",
         "rituais-sensoriais-com-plantas-como-marcadores-de-transicao",
         "sobrecarga-de-escolha-quando-mais-opcoes-paralisam",
-        "vergonha-financeira-e-medo-de-olhar-para-os-numeros"
+        "vergonha-financeira-e-medo-de-olhar-para-os-numeros",
+        "fadiga-de-decidir-em-escolhas-pequenas",
+        "ressaca-emocional-depois-de-um-conflito"
       ]
     },
     {
@@ -114,7 +119,12 @@
         "atelier-principios-transferiveis-e-dna-maison",
         "identidade-em-transicao-quando-a-versao-antiga-ja-nao-serve",
         "vergonha-financeira-e-medo-de-olhar-para-os-numeros",
-        "comparacao-social-que-transforma-vida-em-atraso"
+        "comparacao-social-que-transforma-vida-em-atraso",
+        "fadiga-de-decidir-em-escolhas-pequenas",
+        "trabalho-emocional-de-regular-o-clima-da-relacao",
+        "identidade-apos-mudanca-de-papel-profissional",
+        "dificuldade-em-receber-sem-sentir-divida",
+        "paralisia-entre-compromissos-que-ja-nao-fazem-sentido"
       ]
     },
     {
@@ -150,7 +160,10 @@
         "telepressao-e-disponibilidade-permanente",
         "descoberta-organica-e-reconhecimento-da-maison",
         "identidade-em-transicao-quando-a-versao-antiga-ja-nao-serve",
-        "comparacao-social-que-transforma-vida-em-atraso"
+        "comparacao-social-que-transforma-vida-em-atraso",
+        "trabalho-emocional-de-regular-o-clima-da-relacao",
+        "dificuldade-em-receber-sem-sentir-divida",
+        "ressaca-emocional-depois-de-um-conflito"
       ]
     }
   ],
@@ -5618,6 +5631,121 @@
         "casa",
         "cabeca",
         "presenca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "fadiga-de-decidir-em-escolhas-pequenas",
+      "intent": "explorar a fadiga associada à acumulação de decisões quotidianas e a sobrecarga de escolha, distinguindo excesso de opções, incerteza sobre preferências e cansaço geral sem transformar o tema em diagnóstico",
+      "themes": [
+        "decidir até cansa",
+        "demasiadas opções",
+        "adiar pequenas escolhas",
+        "procurar que alguém decida",
+        "medo de escolher mal",
+        "preferência pouco clara",
+        "choice overload",
+        "decision fatigue"
+      ],
+      "territories": [
+        "casa",
+        "corpo",
+        "cabeca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "trabalho-emocional-de-regular-o-clima-da-relacao",
+      "intent": "investigar a distribuição do trabalho emocional nas relações e o esforço de regular o clima relacional, distinguindo cuidado recíproco de responsabilidade unilateral e sem presumir que todos os casais funcionam da mesma forma",
+      "themes": [
+        "ser quem mantém a paz",
+        "antecipar a tensão",
+        "regular o ambiente emocional",
+        "iniciar sempre a reparação",
+        "cuidado recíproco",
+        "esforço que ninguém vê",
+        "emotion work",
+        "relational emotional labour"
+      ],
+      "territories": [
+        "casa",
+        "cabeca",
+        "presenca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "identidade-apos-mudanca-de-papel-profissional",
+      "intent": "explorar mudanças de identidade e pertença associadas a transições profissionais ou à perda de um papel, distinguindo adaptação prática, luto por uma versão anterior de si e descoberta de novas referências",
+      "themes": [
+        "quem sou fora da função",
+        "perder o papel de referência",
+        "mudança de trabalho",
+        "a versão antiga já não serve",
+        "pertença depois da mudança",
+        "rotina sem identidade",
+        "career transition",
+        "role identity"
+      ],
+      "territories": [
+        "cabeca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "dificuldade-em-receber-sem-sentir-divida",
+      "intent": "explorar a dificuldade em receber cuidado, ajuda ou generosidade sem sentir uma dívida imediata, distinguindo reciprocidade escolhida de obrigação percebida e evitando generalizações sobre personalidade ou história pessoal",
+      "themes": [
+        "aceitar sem compensar",
+        "sentir que fiquei a dever",
+        "receber cuidado",
+        "retribuir imediatamente",
+        "reciprocidade ou obrigação",
+        "dizer obrigado e ficar",
+        "receiving support",
+        "reciprocity"
+      ],
+      "territories": [
+        "casa",
+        "cabeca",
+        "presenca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "ressaca-emocional-depois-de-um-conflito",
+      "intent": "explorar o intervalo entre resolução verbal e recuperação de segurança ou proximidade depois de um conflito, distinguindo desacordo pontual, reparação incompleta e padrões recorrentes sem presumir abuso ou diagnóstico",
+      "themes": [
+        "a conversa acabou mas não passou",
+        "rever o que foi dito",
+        "voltar a confiar depois da tensão",
+        "reparação incompleta",
+        "distância depois de resolver",
+        "proximidade depois do conflito",
+        "conflict recovery",
+        "relational repair"
+      ],
+      "territories": [
+        "corpo",
+        "presenca"
+      ],
+      "visibility": "internal"
+    },
+    {
+      "id": "paralisia-entre-compromissos-que-ja-nao-fazem-sentido",
+      "intent": "explorar a tensão entre persistir num compromisso e rever uma escolha à luz de novas informações, distinguindo perseverança útil, custo afundado e receio de desapontar sem prescrever decisões individuais",
+      "themes": [
+        "continuar porque já investi",
+        "medo de admitir que mudou",
+        "desiludir alguém ao sair",
+        "persistir ou rever",
+        "compromisso sem sentido atual",
+        "custo do que já passou",
+        "sunk cost",
+        "commitment reconsideration"
+      ],
+      "territories": [
+        "cabeca"
       ],
       "visibility": "internal"
     }
