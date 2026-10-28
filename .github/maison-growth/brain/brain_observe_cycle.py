@@ -10,7 +10,7 @@ from typing import Any, Mapping, Sequence
 from a14_projection import preview_to_dict, project_packet_to_a14
 from brain_control_client import BrainControlClient
 from commercial_assets import CommercialAssetContext
-from knowledge_context import OceanEditorialContext
+from knowledge_context import OceanEditorialContext, fetch_runtime_specialist_catalog
 from orchestrator import packet_to_dict, run_brain_cycle
 from runtime_memory_context import collect_runtime_memory_context
 
@@ -258,7 +258,7 @@ def build_observe_output() -> dict[str,Any]:
     )
 
     # Oceanos and commercial assets contribute supporting context refs, never independent evidence roots.
-    ocean=OceanEditorialContext.from_files(ROOT/"editorial-queue.json", ROOT/"ocean-catalog.generated.json")
+    ocean=OceanEditorialContext.from_files(ROOT/"editorial-queue.json", ROOT/"ocean-catalog.generated.json", runtime_catalog=fetch_runtime_specialist_catalog())
     knowledge_context:dict[str,tuple[str,...]]={}
     ocean_commercial_hint_matches=0
     for row in feed:
