@@ -222,8 +222,13 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
      if(raw.status!=='PROPOSTA_NAO_APLICADA')throw new Error('O ficheiro não está identificado como proposta pendente.');
      if(!Array.isArray(raw.items)||!raw.items.length)throw new Error('O plano não contém registos.');
      if(raw.items.length>1000)throw new Error('O plano excede o limite seguro de 1000 registos.');
+     if(Number(raw.total)!==raw.items.length)throw new Error('A contagem do plano não coincide com os registos.');
+     const expectedSource=raw.schema==='maison-vault-proposed-retirement-v1'?'ocean_seed_candidate':'ocean_mcp_candidate';
      const seen=new Set(),normalized=[];
      for(const item of raw.items){
+       if(item?.source_kind!==expectedSource||item?.status!=='active'||item?.lifecycle_state!=='live'){
+         throw new Error('O plano contém um registo fora do âmbito previsto ('+expectedSource+', active/live).');
+       }
        const type=String(item?.content_type||'');
        const id=String(item?.content_id||'').trim();
        const valid=type==='question'?/^q_[A-Za-z0-9_-]{4,180}$/.test(id):type==='oracle_block'?/^ob_[A-Za-z0-9_-]{4,180}$/.test(id):false;
