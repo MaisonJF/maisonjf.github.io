@@ -87,5 +87,5 @@ test('sales page sends the selected mode into checkout while keeping answer priv
   assert.match(page,/t.groupEmpty/);
   assert.match(page,/JSON\.stringify\(\{theme,locale,mode\}\)/);
   assert.match(page,/os novos packs de Amigos & Festas/i);
-  assert.match(page,/Nunca as respostas/);
+  assert.match(page,/nunca as tuas respostas/i);
 });
