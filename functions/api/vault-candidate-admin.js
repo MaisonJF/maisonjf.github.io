@@ -45,7 +45,7 @@ export async function onRequestPost({request,env}){
       }));
     }
     if(action==='retire'){
-      return json(await retireEditorialContent(db,{items:body.items}));
+      return json(await retireEditorialContent(db,{items:body.items,reason:body.reason}));
     }
     if(action==='activate'){
       return json(await activateOceanVaultCandidates(db,{
