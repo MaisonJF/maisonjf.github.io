@@ -7,8 +7,8 @@
 <meta name="description" content="PÁRA DE IGNORAR! · Jogo digital: 28 perguntas, em modo a dois ou em grupo. Conversas, curiosidade e jogo sem obrigação de responder.">
 <meta name="robots" content="index,follow,max-snippet:-1">
 <link rel="canonical" href="https://maison-jf.com/para-de-ignorar/">
-<link rel="stylesheet" href="../maison.css?v=20260922-globalgold1">
-<script src="../analytics.js" defer></script>
+<link rel="stylesheet" href="../maison.css?v=20261027-r1">
+<script src="../analytics.js?v=20261027-r1" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"PÁRA DE IGNORAR! · Jogo digital","description":"28 perguntas. Modo a dois ou em grupo. Conversas, curiosidade e jogo sem obrigação de responder.","brand":{"@type":"Brand","name":"MAISON JF®"},"offers":{"@type":"Offer","priceCurrency":"EUR","price":"5.00","availability":"https://schema.org/InStock","url":"https://maison-jf.com/para-de-ignorar/"}}</script>
 <style>
 .pdi-sale{padding:145px 0 110px}
@@ -41,6 +41,16 @@
 .pdi-theme .pdi-theme__price{font:400 25px/1 var(--serif);color:#d8d0c2;margin:17px 0 24px}.pdi-theme .pdi-buy{margin-top:auto;align-self:flex-start}
 @media(max-width:900px){.pdi-theme-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){.pdi-sale{padding-top:110px}.pdi-sale__grid,.pdi-sale__promise,.pdi-theme-grid{grid-template-columns:1fr}.pdi-sale__promise{gap:30px}.pdi-sale__card{min-height:170px}.pdi-theme{min-height:180px}}
+
+.pdi-theme-filters{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(210px,1fr);gap:12px;max-width:900px;margin:28px 0 0}
+.pdi-theme-search,.pdi-theme-family{width:100%;min-width:0;min-height:48px;padding:13px 15px;border:1px solid var(--line);border-radius:0;background:#0c0b0a;color:#eee9df;font:16px var(--sans)}
+.pdi-theme-search:focus-visible,.pdi-theme-family:focus-visible{outline:2px solid var(--maison-gold,#c7aa73);outline-offset:2px}
+.pdi-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.pdi-no-results{margin-top:22px;color:#c1b9ad}
+.pdi-mode-option{min-height:48px;font-size:11px}
+.pdi-buy{min-height:48px;font-size:11px;display:inline-flex;align-items:center;justify-content:center}
+@media(max-width:760px){.pdi-theme-filters{grid-template-columns:1fr}.pdi-mode-option{padding:13px 14px}.pdi-buy{width:100%;align-self:stretch}}
+
 </style>
 </head>
 <body>
@@ -81,6 +91,13 @@
     <p class="eyebrow">Escolhe por onde entrar</p>
     <h2>Escolhe onde dói.<br>Ou onde tens curiosidade.</h2>
     <p id="pdi-theme-intro">Uma conversa de cada vez.</p>
+    <div class="pdi-theme-filters" role="search" aria-label="Procurar temas">
+      <label class="pdi-visually-hidden" for="pdi-theme-search">Procurar tema</label>
+      <input class="pdi-theme-search" id="pdi-theme-search" type="search" placeholder="Procurar tema..." autocomplete="off">
+      <label class="pdi-visually-hidden" for="pdi-theme-family">Filtrar por categoria</label>
+      <select class="pdi-theme-family" id="pdi-theme-family"><option value="">Todas as categorias</option></select>
+    </div>
+    <p class="pdi-no-results" id="pdi-no-results" hidden>Não encontrámos temas com estes critérios. Experimenta outra pesquisa.</p>
     <div class="pdi-theme-grid" id="pdi-theme-grid" aria-live="polite">
       <article class="pdi-theme"><small>A carregar</small><h3>Relações</h3><p>Só um instante…</p></article>
     </div>
@@ -90,9 +107,9 @@
     <div>
       <p class="eyebrow">A promessa do jogo</p>
       <h2>Outra vez. Outra conversa.</h2>
-      <p>Quando voltas, o jogo procura primeiro perguntas que ainda não viste.</p>
-      <p><strong>Guarda o caminho. Nunca as respostas.</strong></p>
-      <p>Há sempre alguma coisa que ainda não perguntaste.</p>
+      <p>Na próxima compra, usa o mesmo e-mail. Quando escolheres novamente este tema, damos prioridade às perguntas que ainda não viste.</p>
+      <p>Se ainda não existirem 28 perguntas inéditas suficientes neste tema, algumas poderão repetir-se. O repertório cresce continuamente para tornar cada regresso diferente.</p>
+      <p><strong>Guardamos o caminho das perguntas, nunca as tuas respostas.</strong></p>
     </div>
     <div>
       <p class="eyebrow">Entre vocês</p>
@@ -115,6 +132,7 @@
       questions:'28 perguntas',play:'Jogar',playDuo:'Jogar a dois',playGroup:'Jogar em grupo',opening:'A abrir pagamento…',
       modeDuo:'28 perguntas para uma conversa a dois. Uma pergunta de cada vez.',
       modeGroup:'28 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',groupEmpty:'Os packs de Amigos & Festas só aparecem quando houver 28 perguntas aprovadas num tema.',
+      searchTheme:'Procurar tema...',allThemes:'Todas as categorias',familyLabel:'Filtrar por categoria',
       promiseDuo:'28 perguntas · duas pessoas',promiseGroup:'28 perguntas · 3 a 12 pessoas',
       themeDuo:'Escolhe onde dói. Ou onde tens curiosidade.',themeGroup:'Escolhe o tema da mesa. Os novos packs de Amigos & Festas entram quando tiverem 28 perguntas aprovadas.',
       payFail:'Não foi possível abrir o pagamento. Tenta novamente.'
@@ -127,6 +145,7 @@
       questions:'28 perguntas',play:'Jogar',playDuo:'Jogar a dois',playGroup:'Jogar em grupo',opening:'Abrindo pagamento…',
       modeDuo:'28 perguntas para uma conversa a dois. Uma pergunta de cada vez.',
       modeGroup:'28 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',groupEmpty:'Os packs de Amigos & Festas só aparecem quando houver 28 perguntas aprovadas num tema.',
+      searchTheme:'Procurar tema...',allThemes:'Todas as categorias',familyLabel:'Filtrar por categoria',
       promiseDuo:'28 perguntas · duas pessoas',promiseGroup:'28 perguntas · 3 a 12 pessoas',
       themeDuo:'Escolha onde dói. Ou onde há curiosidade.',themeGroup:'Escolha o tema da mesa. Os novos packs de Amigos & Festas entram quando tiverem 28 perguntas aprovadas.',
       payFail:'Não foi possível abrir o pagamento. Tente novamente.'
@@ -139,6 +158,7 @@
       questions:'28 questions',play:'Play',playDuo:'Play as two',playGroup:'Play in a group',opening:'Opening payment…',
       modeDuo:'28 questions for a conversation between two people. One question at a time.',
       modeGroup:'28 questions for 3 to 12 people. Turns rotate, party challenges appear, and anyone can pass.',groupEmpty:'Friends & Party packs appear once a theme has 28 approved live questions.',
+      searchTheme:'Search themes...',allThemes:'All categories',familyLabel:'Filter by category',
       promiseDuo:'28 questions · two people',promiseGroup:'28 questions · 3 to 12 people',
       themeDuo:'Choose what hurts. Or what you are curious about.',themeGroup:'Choose a table-friendly theme. New Friends & Party packs appear when 28 questions have passed review.',
       payFail:'Could not open payment. Please try again.'
@@ -151,6 +171,7 @@
       questions:'28 preguntas',play:'Jugar',playDuo:'Jugar en pareja',playGroup:'Jugar en grupo',opening:'Abriendo pago…',
       modeDuo:'28 preguntas para una conversación entre dos personas. Una pregunta cada vez.',
       modeGroup:'28 preguntas para 3 a 12 personas. Los turnos rotan, hay retos de fiesta y cualquiera puede pasar.',groupEmpty:'Los packs de Amigos y Fiesta aparecerán cuando un tema tenga 28 preguntas activas y aprobadas.',
+      searchTheme:'Buscar tema...',allThemes:'Todas las categorías',familyLabel:'Filtrar por categoría',
       promiseDuo:'28 preguntas · dos personas',promiseGroup:'28 preguntas · 3 a 12 personas',
       themeDuo:'Elige lo que duele. O lo que te da curiosidad.',themeGroup:'Elige un tema apropiado para la mesa. Los nuevos packs de Amigos y Fiesta estarán disponibles cuando tengan 28 preguntas aprobadas.',
       payFail:'No se pudo abrir el pago. Inténtalo de nuevo.'
@@ -165,6 +186,7 @@
     modeDuo:'28 perguntas para uma conversa a dois. Uma pergunta de cada vez.',
     modeGroup:'28 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',
     groupEmpty:'Os packs de Amigos & Festas só aparecem quando houver 28 perguntas aprovadas num tema.',
+      searchTheme:'Procurar tema...',allThemes:'Todas as categorias',familyLabel:'Filtrar por categoria',
     promiseDuo:'28 perguntas · duas pessoas',promiseGroup:'28 perguntas · 3 a 12 pessoas',
     themeDuo:'Escolhe onde dói. Ou onde tens curiosidade.',themeGroup:'Escolhe o tema da mesa. Os novos packs de Amigos & Festas entram quando tiverem 28 perguntas aprovadas.',
     payFail:'Não foi possível abrir o pagamento. Tenta novamente.'
@@ -175,6 +197,9 @@
   const modeCopy=document.getElementById('pdi-mode-copy');
   const promise=document.getElementById('pdi-promise');
   const themeIntro=document.getElementById('pdi-theme-intro');
+  const themeSearch=document.getElementById('pdi-theme-search');
+  const themeFamily=document.getElementById('pdi-theme-family');
+  const noResults=document.getElementById('pdi-no-results');
   let mode=new URLSearchParams(location.search).get('mode')==='group'?'group':'duo';
   let available=new Map();
   let themeInventory=[];
@@ -192,9 +217,11 @@
     for(const button of grid.querySelectorAll('.pdi-buy')){
       button.textContent=mode==='group'?t.playGroup:t.playDuo;
     }
-    if(themeInventory.length)render(themeInventory);
+    if(themeInventory.length){syncFamilyOptions(themeInventory);render(themeInventory);}
   }
   modeButtons.forEach(button=>button.addEventListener('click',()=>setMode(button.dataset.mode)));
+  themeSearch.addEventListener('input',()=>render(themeInventory));
+  themeFamily.addEventListener('change',()=>render(themeInventory));
   setMode(mode);
 
   try{
@@ -202,6 +229,7 @@
     const data=await response.json().catch(()=>({themes:[]}));
     if(!response.ok||!Array.isArray(data.themes))throw new Error();
     themeInventory=data.themes;
+    syncFamilyOptions(themeInventory);
     render(themeInventory);
     if(!themeInventory.length)status.textContent=t.newThemes;
   }catch{
@@ -209,17 +237,44 @@
     status.textContent=t.confirmFail;
   }
 
-  function render(themes){
-    const visibleThemes=mode==='group'
+  function syncFamilyOptions(themes){
+    const inMode=mode==='group'
       ?themes.filter(theme=>theme.family==='Amigos, Grupos & Festas')
       :themes.filter(theme=>theme.family!=='Amigos, Grupos & Festas');
-    available=new Map(visibleThemes.map(theme=>[theme.slug,theme]));
-    if(!visibleThemes.length){
+    const current=themeFamily.value;
+    const families=[...new Set(inMode.map(theme=>theme.family).filter(Boolean))].sort((a,b)=>a.localeCompare(b,locale));
+    themeFamily.replaceChildren(new Option(t.allThemes,''),...families.map(family=>new Option(family,family)));
+    themeFamily.value=families.includes(current)?current:'';
+    themeSearch.placeholder=t.searchTheme;
+    themeFamily.setAttribute('aria-label',t.familyLabel);
+  }
+
+  function render(themes){
+    const inMode=mode==='group'
+      ?themes.filter(theme=>theme.family==='Amigos, Grupos & Festas')
+      :themes.filter(theme=>theme.family!=='Amigos, Grupos & Festas');
+    if(!inMode.length){
+      available=new Map();
+      if(noResults)noResults.hidden=true;
       const message=mode==='group'?t.groupEmpty:t.soon;
       grid.innerHTML='<article class="pdi-theme"><small>'+t.preparing+'</small><h3>'+t.more+'</h3><p>'+message+'</p></article>';
       if(mode==='group')status.textContent=t.groupEmpty;
       return;
     }
+    const query=String(themeSearch.value||'').trim().toLocaleLowerCase(locale);
+    const family=String(themeFamily.value||'');
+    const visibleThemes=inMode.filter(theme=>{
+      const matchesFamily=!family||theme.family===family;
+      const haystack=(String(theme.label||'')+' '+String(theme.family||'')).toLocaleLowerCase(locale);
+      return matchesFamily&&(!query||haystack.includes(query));
+    });
+    available=new Map(visibleThemes.map(theme=>[theme.slug,theme]));
+    if(!visibleThemes.length){
+      grid.innerHTML='';
+      if(noResults)noResults.hidden=false;
+      return;
+    }
+    if(noResults)noResults.hidden=true;
     grid.innerHTML='';
     for(const theme of visibleThemes){
       const card=document.createElement('article');
