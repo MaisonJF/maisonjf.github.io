@@ -16,8 +16,8 @@ class BrainCiWorkflowTests(unittest.TestCase):
         cls.preview=(WORKFLOWS/"maison-private-commercial-preview.yml").read_text(encoding="utf-8")
 
     def test_brain_guard_validates_relevant_main_pushes(self):
-        self.assertIn("  push:\n",self.guard)
-        self.assertIn("      - main\n",self.guard)
+        self.assertIn("  push:\\n",self.guard)
+        self.assertIn("      - main\\n",self.guard)
         self.assertIn(
             "bash .github/maison-growth/brain/rebuild_commercial_context.sh --check",
             self.guard,
@@ -34,9 +34,18 @@ class BrainCiWorkflowTests(unittest.TestCase):
         self.assertNotIn("docker compose up",self.guard)
 
     def test_private_commercial_preview_is_manual_only(self):
-        self.assertIn("  workflow_dispatch:\n",self.preview)
-        self.assertNotIn("  pull_request:\n",self.preview)
-        self.assertNotIn("  push:\n",self.preview)
+        self.assertIn("  workflow_dispatch:\\n",self.preview)
+        self.assertNotIn("  pull_request:\\n",self.preview)
+        self.assertNotIn("  push:\\n",self.preview)
+
+    def test_private_commercial_preview_gates_steps_without_job_level_secret_condition(self):
+        self.assertIn("id: config",self.preview)
+        self.assertIn("steps.config.outputs.configured == 'true'",self.preview)
+        self.assertIn("steps.config.outputs.configured == 'false'",self.preview)
+        self.assertNotIn("secrets.MAISON_BRAIN_PRIVATE_URL != ''",self.preview)
+        self.assertNotIn("secrets.MAISON_BRAIN_CONTROL_TOKEN != ''",self.preview)
+        self.assertNotIn("secrets.MAISON_CF_ACCESS_CLIENT_ID != ''",self.preview)
+        self.assertNotIn("secrets.MAISON_CF_ACCESS_CLIENT_SECRET != ''",self.preview)
 
     def test_private_commercial_preview_cannot_materialize(self):
         self.assertIn("MAISON_A14_MATERIALIZE_ENABLED: 'false'",self.preview)
