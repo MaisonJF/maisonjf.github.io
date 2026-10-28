@@ -130,6 +130,45 @@ export async function retireEditorialContent(db,{items,reason='Retirado após au
     note:'Conteúdo retirado da selecção futura; o registo e a decisão editorial foram preservados.'
   };
 }
+export async function quarantineOceanEditorialContent(db,{items,reason='Conteúdo Ocean suspenso até revisão editorial'}={}){
+  const normalized=normalizeItems(items);
+  const editorialReason=String(reason||'Conteúdo Ocean suspenso até revisão editorial').replace(/\s+/g,' ').trim().slice(0,1000)||'Conteúdo Ocean suspenso até revisão editorial';
+  const eligible=[];
+  for(const item of normalized){
+    const table=item.content_type==='question'?'vault_questions':'vault_oracle_blocks';
+    const idCol=item.content_type==='question'?'question_id':'block_id';
+    const row=await db.prepare(`SELECT ${idCol} AS id,source_kind,status,lifecycle_state
+      FROM ${table} WHERE ${idCol}=?1 LIMIT 1`).bind(item.content_id).first();
+    if(!row)continue;
+    if(String(row.source_kind)!=='ocean_mcp_candidate')continue;
+    if(String(row.status)!=='active'||String(row.lifecycle_state)!=='live')continue;
+    eligible.push(item);
+  }
+  for(let i=0;i<eligible.length;i+=50){
+    const statements=[];
+    for(const item of eligible.slice(i,i+50)){
+      const table=item.content_type==='question'?'vault_questions':'vault_oracle_blocks';
+      const idCol=item.content_type==='question'?'question_id':'block_id';
+      statements.push(db.prepare(`UPDATE ${table}
+        SET status='review',lifecycle_state='review',rotation_state='review'
+        WHERE ${idCol}=?1 AND source_kind='ocean_mcp_candidate'
+          AND status='active' AND lifecycle_state='live'`).bind(item.content_id));
+      statements.push(db.prepare(`INSERT INTO vault_editorial_decisions
+        (decision_id,content_type,content_id,decision,reason_code,details_json,engine_version)
+        VALUES(?1,?2,?3,'review','ocean_candidate_quarantine',?4,'vault-content-audit-v1')`).bind(
+          'dec_'+crypto.randomUUID(),item.content_type,item.content_id,
+          JSON.stringify({source:'editorial_vault_audit',action:'quarantine_until_human_review',reason:editorialReason})
+        ));
+    }
+    if(statements.length)await db.batch(statements);
+  }
+  return {
+    ok:true,requested:normalized.length,quarantined:eligible.length,reason:editorialReason,
+    quarantinedItems:eligible,physicalDeletion:false,
+    note:'Candidatos Ocean movidos para revisão; texto e histórico preservados. Podem ser reativados apenas após aprovação editorial.'
+  };
+}
+
 function whereForState(state){
   if(state==='candidate')return "status='candidate' AND lifecycle_state='candidate'";
   if(state==='review')return "status='review' AND lifecycle_state='review'";
