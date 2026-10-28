@@ -47,6 +47,20 @@ class CommercialOceanMatrixTests(unittest.TestCase):
             self.assertIn("contract",route)
             self.assertIn("mode",route)
 
+    def test_expanded_specialist_network_is_large_connected_and_open_cardinality(self):
+        universal=build_universal_coverage()
+        network=universal["specialist_network"]
+        self.assertGreaterEqual(network["foundational_pillars"],40)
+        self.assertGreaterEqual(network["foundational_oceans"],100)
+        self.assertGreaterEqual(network["brand_oceans"],45)
+        self.assertGreater(network["ocean_to_ocean_edges"],network["foundational_oceans"])
+        self.assertGreater(network["pillar_to_pillar_edges"],0)
+        self.assertTrue(network["all_links_resolve"])
+        self.assertEqual(network["broken_ocean_links"],[])
+        self.assertEqual(network["broken_pillar_links"],[])
+        self.assertEqual(network["oceans_without_known_pillar"],[])
+        self.assertEqual(network["pillars_without_ocean"],[])
+
     def test_commercial_matches_are_context_only_and_non_executing(self):
         contract=self.payload["contract"]
         self.assertTrue(contract["ocean_metadata_is_context_not_external_evidence"])
