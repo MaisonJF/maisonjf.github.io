@@ -197,6 +197,21 @@
     try {
       const query = new URLSearchParams(window.location.search);
       if (query.get('mj_source') !== 'vpc') return;
+
+      // A click handler may already have stored a richer, private in-session
+      // attribution object before navigation. Do not overwrite its result/route
+      // with a less-specific URL payload.
+      const existingRaw = sessionStorage.getItem(ATTRIBUTION_KEY);
+      if (existingRaw) {
+        try {
+          const existing = JSON.parse(existingRaw);
+          if (existing && existing.source === 'vpc' && existing.offer &&
+              Number(existing.ts) > 0 && Date.now() - Number(existing.ts) <= ATTRIBUTION_TTL) {
+            return;
+          }
+        } catch (_) {}
+      }
+
       const payload = {
         source: 'vpc',
         offer: String(query.get('mj_offer') || '').slice(0, 80),
