@@ -121,10 +121,10 @@
         body:JSON.stringify({locale,mode})
       });
       const payload=await response.json().catch(()=>({}));
-      if(!response.ok||!payload.url)throw new Error('checkout_unavailable');
+      if(!response.ok||!payload.url)throw new Error(String(payload.error||copy.fail));
       location.href=payload.url;
-    }catch{
-      status.textContent=copy.fail;
+    }catch(error){
+      status.textContent=String(error?.message||copy.fail);
       button.disabled=false;
       button.removeAttribute('aria-busy');
       button.textContent=copy.start;
