@@ -5768,7 +5768,7 @@
       "foundational_pillars": 47,
       "foundational_oceans": 166,
       "individual_brand_oceans": 53,
-      "ocean_to_ocean_edges": 1772,
+      "ocean_to_ocean_edges": 1790,
       "pillar_to_pillar_edges": 150
     },
     "pillars": [
@@ -6161,7 +6161,7 @@
           "community-audience-development",
           "partnerships-distribution-retail",
           "market-competition-discovery",
-          "content-discovery"
+          "storytelling-brand-voice"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog"
@@ -6263,8 +6263,8 @@
         "connections": [
           "market-competition-discovery",
           "scent-science-research",
-          "emerging-markets-languages",
-          "unexplored-territories"
+          "culture-seasonality-expansion",
+          "research-evidence-analytics"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog"
@@ -7021,7 +7021,8 @@
           "brand-voice-feral-frontality",
           "storytelling",
           "experience-design",
-          "brand-positioning"
+          "brand-positioning",
+          "transferable-excellence-atelier"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -7050,7 +7051,8 @@
           "brand-voice-feral-frontality",
           "storytelling",
           "experience-design",
-          "brand-positioning"
+          "brand-positioning",
+          "transferable-excellence-atelier"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -7079,7 +7081,8 @@
           "brand-voice-feral-frontality",
           "storytelling",
           "experience-design",
-          "brand-positioning"
+          "brand-positioning",
+          "transferable-excellence-atelier"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -7129,7 +7132,8 @@
           "brand-voice-feral-frontality",
           "storytelling",
           "experience-design",
-          "brand-positioning"
+          "brand-positioning",
+          "transferable-excellence-atelier"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -7300,7 +7304,8 @@
           "brand-voice-feral-frontality",
           "storytelling",
           "experience-design",
-          "brand-positioning"
+          "brand-positioning",
+          "transferable-excellence-atelier"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -7329,7 +7334,8 @@
           "brand-voice-feral-frontality",
           "storytelling",
           "experience-design",
-          "brand-positioning"
+          "brand-positioning",
+          "transferable-excellence-atelier"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -7358,7 +7364,8 @@
           "brand-voice-feral-frontality",
           "storytelling",
           "experience-design",
-          "brand-positioning"
+          "brand-positioning",
+          "transferable-excellence-atelier"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -7387,7 +7394,8 @@
           "brand-voice-feral-frontality",
           "storytelling",
           "experience-design",
-          "brand-positioning"
+          "brand-positioning",
+          "transferable-excellence-atelier"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -7416,7 +7424,8 @@
           "brand-voice-feral-frontality",
           "storytelling",
           "experience-design",
-          "brand-positioning"
+          "brand-positioning",
+          "transferable-excellence-atelier"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -7445,7 +7454,8 @@
           "brand-voice-feral-frontality",
           "storytelling",
           "experience-design",
-          "brand-positioning"
+          "brand-positioning",
+          "transferable-excellence-atelier"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -7474,7 +7484,8 @@
           "brand-voice-feral-frontality",
           "storytelling",
           "experience-design",
-          "brand-positioning"
+          "brand-positioning",
+          "transferable-excellence-atelier"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -9829,7 +9840,7 @@
       {
         "ocean_key": "maison-philosophy",
         "display_name": "Maison JF Philosophy",
-        "pillar_key": "maison-identity-positioning",
+        "pillar_key": "maison-philosophy-conversion",
         "mission": "Evoluir os princípios da Maison JF com coerência, aprendizagem e uma linguagem cada vez mais clara e própria.",
         "focus": [
           "filosofia e princípios",
@@ -9841,14 +9852,7 @@
           "brand-positioning",
           "human-needs-buying-motivations",
           "customer-research",
-          "failed-ideas-negative-results",
-          "brand-voice-feral-frontality",
-          "storytelling",
-          "copywriting-conversion",
-          "customer-journey",
-          "brand-tom-ford",
-          "brand-dior",
-          "experiments-conversion-learning"
+          "failed-ideas-negative-results"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -10035,7 +10039,7 @@
           "human-needs-buying-motivations",
           "customer-research",
           "failed-ideas-negative-results",
-          "maison-philosophy",
+          "transferable-excellence-atelier",
           "interactive-fiction",
           "interactive-book-games",
           "fragrance-creators",
@@ -10063,7 +10067,7 @@
           "human-needs-buying-motivations",
           "customer-research",
           "failed-ideas-negative-results",
-          "maison-philosophy",
+          "transferable-excellence-atelier",
           "interactive-fiction",
           "interactive-book-games",
           "fragrance-creators",
@@ -10339,7 +10343,9 @@
           "book-game-communities",
           "collaboration-opportunities",
           "market-gaps-competitor-weaknesses",
-          "customer-search-language"
+          "customer-search-language",
+          "brand-voice-feral-frontality",
+          "storytelling"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -10365,7 +10371,9 @@
           "book-game-communities",
           "collaboration-opportunities",
           "market-gaps-competitor-weaknesses",
-          "customer-search-language"
+          "customer-search-language",
+          "brand-voice-feral-frontality",
+          "storytelling"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -10420,7 +10428,9 @@
           "book-game-communities",
           "collaboration-opportunities",
           "market-gaps-competitor-weaknesses",
-          "customer-search-language"
+          "customer-search-language",
+          "brand-voice-feral-frontality",
+          "storytelling"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -10776,7 +10786,11 @@
           "market-gaps-competitor-weaknesses",
           "customer-search-language",
           "olfactory-universe",
-          "proven-aroma-formulas"
+          "proven-aroma-formulas",
+          "seasonal-rituals",
+          "portuguese-culture-sensory-identity",
+          "experiments-conversion-learning",
+          "customer-research"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
@@ -10802,7 +10816,11 @@
           "market-gaps-competitor-weaknesses",
           "customer-search-language",
           "olfactory-universe",
-          "proven-aroma-formulas"
+          "proven-aroma-formulas",
+          "seasonal-rituals",
+          "portuguese-culture-sensory-identity",
+          "experiments-conversion-learning",
+          "customer-research"
         ],
         "lifecycle_state": "open",
         "origin": "foundational_catalog",
