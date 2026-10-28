@@ -133,7 +133,7 @@ test('editorial prompt requires PT-PT and direct recognition questions',()=>{
   assert.match(prompt,/public_social/i);
   assert.match(prompt,/PÁRA DE IGNORAR!/i);
   assert.match(prompt,/tema canónico estável/i);
-  assert.match(prompt,/classifica o destino antes de criares conteúdo/i);
+  assert.match(prompt,/Antes de criares conteúdo, classifica o destino/i);
   assert.match(prompt,/zero perguntas e zero blocos de Oráculo/i);
   assert.match(prompt,/Não forces uma pergunta gratuita/i);
   assert.match(prompt,/slug estável em minúsculas/i);
