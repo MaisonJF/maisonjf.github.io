@@ -2,7 +2,7 @@ import { ingestVaultCandidate } from './vault_candidates.js';
 import { ingestCandidateInbox, CANDIDATE_TYPES } from './candidate_inbox.js';
 import { callZeroCostModel } from './providers.js';
 import { loadActiveFeedbackLearning } from './feedback_learning.js';
-import { OCEAN_CATALOG, loadActiveOceanRegistry, loadActivePillarRegistry, selectOceanFocus, validateOceanProposal, validatePillarProposal } from './ocean_catalog.js';
+import { OCEAN_CATALOG, loadActiveOceanRegistry, loadActivePillarRegistry, selectOceanFocus, selectPillarFocus, validateOceanProposal, validatePillarProposal } from './ocean_catalog.js';
 
 const MAX_CANDIDATES=16;
 const ASSETS=[
@@ -65,11 +65,12 @@ export async function loadDailyExpansionContext(env,{limit=12,runKey='',candidat
     observed_at:row.observed_at
   }));
   const feedback_learning=await loadActiveFeedbackLearning(env,{limit:8});
-  const [ocean_catalog,pillar_catalog]=await Promise.all([
+  const [ocean_catalog,all_pillars]=await Promise.all([
     loadActiveOceanRegistry(env),
     loadActivePillarRegistry(env)
   ]);
-  const focus_oceans=selectOceanFocus({catalog:ocean_catalog,pillars:pillar_catalog,runKey,limit:16});
+  const focus_oceans=selectOceanFocus({catalog:ocean_catalog,pillars:all_pillars,runKey,limit:16});
+  const pillar_catalog=selectPillarFocus({pillars:all_pillars,focusOceans:focus_oceans,runKey,limit:80});
   const boundedCandidateLimit=Math.max(8,Math.min(MAX_CANDIDATES,Number.parseInt(candidateLimit,10)||12));
   return {
     signals,
