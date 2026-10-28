@@ -531,6 +531,7 @@ const HOME={
     "Novelas, ficção literária e livros de autor. Sem moralismos nem finais adoçados.": "Novelas, ficção literária e livros de autor. Sem moralismos nem finais açucarados.",
     "O teu cliente sente o espaço antes de comprar.": "Seu cliente sente o espaço antes de comprar.",
     "Aroma, textura e pequenos rituais para criar uma experiência alinhada com a tua marca e fácil de recordar.": "Aroma, textura e pequenos rituais para criar uma experiência alinhada à sua marca e fácil de lembrar.",
+    "Perguntas para duas pessoas ou grupos. Humor, curiosidade e conversas que vão além do habitual.": "Perguntas para duas pessoas ou grupos. Humor, curiosidade e conversas que vão além do óbvio.",
   },
   en:{
     "BREVEMENTE":"COMING SOON",
@@ -679,6 +680,7 @@ const HOME={
     "Novelas, ficção literária e livros de autor. Sem moralismos nem finais adoçados.": "Novels, literary fiction and books by independent authors. No moralising, no softened endings.",
     "O teu cliente sente o espaço antes de comprar.": "Your customer feels the space before they buy.",
     "Aroma, textura e pequenos rituais para criar uma experiência alinhada com a tua marca e fácil de recordar.": "Scent, texture and small rituals to create an experience that feels true to your brand and is easy to remember.",
+    "Perguntas para duas pessoas ou grupos. Humor, curiosidade e conversas que vão além do habitual.": "Questions for two people or groups. Humour, curiosity and conversations that go beyond the usual.",
   },
   es:{
     "BREVEMENTE":"PRÓXIMAMENTE",
@@ -826,6 +828,7 @@ const HOME={
     "Novelas, ficção literária e livros de autor. Sem moralismos nem finais adoçados.": "Novelas, ficción literaria y libros de autor. Sin moralismos ni finales edulcorados.",
     "O teu cliente sente o espaço antes de comprar.": "Tu cliente siente el espacio antes de comprar.",
     "Aroma, textura e pequenos rituais para criar uma experiência alinhada com a tua marca e fácil de recordar.": "Aroma, textura y pequeños rituales para crear una experiencia coherente con tu marca y fácil de recordar.",
+    "Perguntas para duas pessoas ou grupos. Humor, curiosidade e conversas que vão além do habitual.": "Preguntas para dos personas o grupos. Humor, curiosidad y conversaciones que van más allá de lo habitual.",
   }
 };
 
@@ -993,6 +996,7 @@ const PRODUCTS={
     "Velas, aromas, rituais de cuidado, jogos, testes, Oráculo, Tarot e livros. Escolhe o que faz sentido para ti agora.": "Velas, aromas, rituais de cuidado, jogos, testes, Oráculo, Tarot e livros. Escolha o que faz sentido para você agora.",
     "Velas e aromas para criar um ambiente que reconheces como teu. Escolhe pela fragrância e pelo espaço onde os vais usar.": "Velas e aromas para criar um ambiente que você reconheça como seu. Escolha pela fragrância e pelo espaço onde vai usar.",
     "Rituais de cuidado para abrandar o ritmo e prestar atenção ao corpo. Escolhe o formato que se adapta ao tempo que tens.": "Rituais de cuidado para desacelerar e prestar atenção ao corpo. Escolha o formato que se adapta ao tempo que você tem.",
+    "Perguntas para duas pessoas ou grupos. Humor, curiosidade e conversas que vão além do habitual.": "Perguntas para duas pessoas ou grupos. Humor, curiosidade e conversas que vão além do óbvio.",
   },
   en:{
     'Produtos | MAISON JF®':'Products | MAISON JF®',
@@ -1050,6 +1054,7 @@ const PRODUCTS={
     "Velas, aromas, rituais de cuidado, jogos, testes, Oráculo, Tarot e livros. Escolhe o que faz sentido para ti agora.": "Candles, scents, care rituals, games, tests, an Oracle, Tarot and books. Choose what makes sense for you right now.",
     "Velas e aromas para criar um ambiente que reconheces como teu. Escolhe pela fragrância e pelo espaço onde os vais usar.": "Candles and scents to create an atmosphere that feels like yours. Choose by fragrance and by where you plan to use them.",
     "Rituais de cuidado para abrandar o ritmo e prestar atenção ao corpo. Escolhe o formato que se adapta ao tempo que tens.": "Care rituals to slow down and pay attention to your body. Choose the format that fits the time you have.",
+    "Perguntas para duas pessoas ou grupos. Humor, curiosidade e conversas que vão além do habitual.": "Questions for two people or groups. Humour, curiosity and conversations that go beyond the usual.",
   },
   es:{
     'Produtos | MAISON JF®':'Productos | MAISON JF®',
@@ -1107,6 +1112,7 @@ const PRODUCTS={
     "Velas, aromas, rituais de cuidado, jogos, testes, Oráculo, Tarot e livros. Escolhe o que faz sentido para ti agora.": "Velas, aromas, rituales de cuidado, juegos, tests, Oráculo, Tarot y libros. Elige lo que tiene sentido para ti ahora.",
     "Velas e aromas para criar um ambiente que reconheces como teu. Escolhe pela fragrância e pelo espaço onde os vais usar.": "Velas y aromas para crear un ambiente que sientas como propio. Elige según la fragancia y el espacio donde vayas a usarlos.",
     "Rituais de cuidado para abrandar o ritmo e prestar atenção ao corpo. Escolhe o formato que se adapta ao tempo que tens.": "Rituales de cuidado para bajar el ritmo y prestar atención al cuerpo. Elige el formato que se adapte al tiempo que tienes.",
+    "Perguntas para duas pessoas ou grupos. Humor, curiosidade e conversas que vão além do habitual.": "Preguntas para dos personas o grupos. Humor, curiosidad y conversaciones que van más allá de lo habitual.",
   }
 };
 
