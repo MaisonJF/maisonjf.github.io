@@ -1,4 +1,4 @@
-import { groupExactThemeSignals } from './pdi-theme-sources.js';
+import { groupExactThemeSignals, PDI_GROUP_QUESTION_REUSE } from './pdi-theme-sources.js';
 import { normalizeMaisonLocale } from './maison-locales.js';
 
 const DEFAULT_AMOUNT=500;
@@ -43,12 +43,16 @@ for(const group of groupExactThemeSignals()){
   // Keep the published PDI group slug as the canonical key, while retaining
   // older labels/keys as aliases so existing Vault questions remain usable.
   const slug=String(groupEvidence?.sourceId||stableThemeSlug(label)||group.candidateKey);
+  const reusedQuestionThemeKeys=groupEvidence
+    ?(PDI_GROUP_QUESTION_REUSE[groupEvidence.sourceId]||[])
+    :[];
   const aliases=[...new Set([
     group.candidateKey,
     group.preferredLabel,
     ...(group.slugs||[]),
     ...((group.evidence||[]).map(item=>item.sourceId)),
-    ...((group.evidence||[]).map(item=>item.label))
+    ...((group.evidence||[]).map(item=>item.label)),
+    ...reusedQuestionThemeKeys
   ].map(value=>String(value||'').trim()).filter(Boolean))].filter(value=>value!==slug);
   themes.push({
     slug,
@@ -57,6 +61,7 @@ for(const group of groupExactThemeSignals()){
     focus:String(groupEvidence?.focus||evidence.focus||''),
     source:(group.sources||[]).join('+')||'brain',
     aliases,
+    questionReuseSourceKeys:reusedQuestionThemeKeys,
     amount:DEFAULT_AMOUNT,
     currency:'eur'
   });
