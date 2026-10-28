@@ -65,7 +65,7 @@ def _status_text() -> str:
 
 def _ocean_context() -> OceanEditorialContext:
     # Canonical Ocean source. Editorial queue is a derived workflow hand-off, not Brain truth.
-    return OceanEditorialContext.from_file(GROWTH/"oceans/candidates.json")
+    return OceanEditorialContext.from_files(GROWTH/"oceans/candidates.json", ROOT/"ocean-catalog.generated.json")
 
 
 def _public_discovery() -> PublicDiscoveryContext:
