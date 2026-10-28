@@ -95,8 +95,9 @@ export async function listEditorialAuditContent(db,{type='all',state='candidate'
   };
 }
 
-export async function retireEditorialContent(db,{items}={}){
+export async function retireEditorialContent(db,{items,reason='Retirado após auditoria editorial'}={}){
   const normalized=normalizeItems(items);
+  const editorialReason=String(reason||'Retirado após auditoria editorial').replace(/\\s+/g,' ').trim().slice(0,1000)||'Retirado após auditoria editorial';
   const eligible=[];
   for(const item of normalized){
     const table=item.content_type==='question'?'vault_questions':'vault_oracle_blocks';
@@ -118,13 +119,13 @@ export async function retireEditorialContent(db,{items}={}){
         (decision_id,content_type,content_id,decision,reason_code,details_json,engine_version)
         VALUES(?1,?2,?3,'retire','human_editorial_audit_retirement',?4,'vault-content-audit-v1')`).bind(
           'dec_'+crypto.randomUUID(),item.content_type,item.content_id,
-          JSON.stringify({source:'editorial_vault_audit',action:'retire_preserving_history'})
+          JSON.stringify({source:'editorial_vault_audit',action:'retire_preserving_history',reason:editorialReason})
         ));
     }
     if(statements.length)await db.batch(statements);
   }
   return {
-    ok:true,requested:normalized.length,retired:eligible.length,
+    ok:true,requested:normalized.length,retired:eligible.length,reason:editorialReason,
     retiredItems:eligible,physicalDeletion:false,
     note:'Conteúdo retirado da selecção futura; o registo e a decisão editorial foram preservados.'
   };
