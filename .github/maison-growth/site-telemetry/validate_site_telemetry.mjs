@@ -11,6 +11,11 @@ import { onRequestPost } from '../../../functions/api/site-event.js';
 const root=new URL('../../../',import.meta.url);
 const analytics=fs.readFileSync(new URL('analytics.js',root),'utf8');
 const registry=JSON.parse(fs.readFileSync(new URL('.github/maison-growth/a2/source-registry.json',root),'utf8'));
+const publicTestPages=[
+  'teste/atencao/index.html',
+  'teste/apego/index.html',
+  'teste/afeto/index.html'
+].map(path=>({path,content:fs.readFileSync(new URL(path,root),'utf8')}));
 
 const expectedEvents=['page.view','cta.click','navigation.click','offer.exposure','offer.click'];
 const site=registry.sources.site;
@@ -95,5 +100,13 @@ assert.ok(analytics.includes("localStorage.getItem(CONSENT_KEY) !== 'granted'"))
 assert.ok(analytics.includes("fetch('/api/site-event'"));
 assert.equal(/trackGrowth\([^\n]*link_text/.test(analytics),false);
 assert.equal(analytics.includes('A2_INGEST_TOKEN'),false);
+assert.ok(analytics.includes("element?.dataset?.vpcOffer"),'test offers must share the canonical offer identifier');
+assert.ok(analytics.includes("if (growthStarted) observeGrowthOffers(node)"),'dynamically inserted recommendations must be observed');
+
+for(const page of publicTestPages){
+  assert.ok(page.content.includes('data-maison-offer-id='),page.path+' must expose recommendation IDs to the Brain');
+  assert.ok(page.content.includes('data-maison-surface="vpc-result"'),page.path+' must identify its result surface');
+  assert.ok(page.content.includes('data-vpc-source="vpc"'),page.path+' must preserve recommendation source');
+}
 
 console.log('Site telemetry -> canonical A2: OK');

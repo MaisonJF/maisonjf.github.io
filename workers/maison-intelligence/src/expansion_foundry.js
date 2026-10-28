@@ -2,7 +2,7 @@ import { ingestVaultCandidate } from './vault_candidates.js';
 import { ingestCandidateInbox, CANDIDATE_TYPES } from './candidate_inbox.js';
 import { callZeroCostModel } from './providers.js';
 import { loadActiveFeedbackLearning } from './feedback_learning.js';
-import { OCEAN_CATALOG, loadActiveOceanRegistry, selectOceanFocus, validateOceanProposal } from './ocean_catalog.js';
+import { OCEAN_CATALOG, loadActiveOceanRegistry, loadActivePillarRegistry, selectOceanFocus, selectPillarFocus, validateOceanProposal, validatePillarProposal } from './ocean_catalog.js';
 
 const MAX_CANDIDATES=16;
 const ASSETS=[
@@ -65,13 +65,20 @@ export async function loadDailyExpansionContext(env,{limit=12,runKey='',candidat
     observed_at:row.observed_at
   }));
   const feedback_learning=await loadActiveFeedbackLearning(env,{limit:8});
-  const ocean_catalog=await loadActiveOceanRegistry(env);
-  const focus_oceans=selectOceanFocus({catalog:ocean_catalog,runKey,limit:16});
+  const [ocean_catalog,all_pillars]=await Promise.all([
+    loadActiveOceanRegistry(env),
+    loadActivePillarRegistry(env)
+  ]);
+  const focus_oceans=selectOceanFocus({catalog:ocean_catalog,pillars:all_pillars,runKey,limit:16});
+  const pillar_catalog=selectPillarFocus({pillars:all_pillars,focusOceans:focus_oceans,runKey,limit:80});
   const boundedCandidateLimit=Math.max(8,Math.min(MAX_CANDIDATES,Number.parseInt(candidateLimit,10)||12));
   return {
     signals,
     feedback_learning,
     ocean_catalog,
+    pillar_registry:all_pillars,
+    pillar_catalog,
+    pillar_count:all_pillars.length,
     focus_oceans,
     candidate_limit:boundedCandidateLimit,
     strongest_ocean:signals.slice().sort((a,b)=>
@@ -89,9 +96,14 @@ export function buildExpansionPrompt({spec,context}={}){
   const learningLines=(context?.feedback_learning||[]).slice(0,8).map((p,i)=>
     `${i+1}. [${p.scope||'global'}] ${clean(p.title,180)} → ${clean(p.guidance,700)} (confiança ${Number(p.confidence)||0}; repetição ${Number(p.occurrence_count)||1})`
   );
-  const focusOceans=(context?.focus_oceans?.length?context.focus_oceans:selectOceanFocus({catalog:context?.ocean_catalog?.length?context.ocean_catalog:OCEAN_CATALOG,runKey:spec?.key||'default',limit:16})).slice(0,16);
+  const pillarCatalog=(context?.pillar_catalog||[]).slice(0,80);
+  const focusOceans=(context?.focus_oceans?.length?context.focus_oceans:selectOceanFocus({catalog:context?.ocean_catalog?.length?context.ocean_catalog:OCEAN_CATALOG,pillars:pillarCatalog.length?pillarCatalog:undefined,runKey:spec?.key||'default',limit:16})).slice(0,16);
   const oceanLines=focusOceans.map((o,i)=>
-    `${i+1}. [${o.ocean_key} | ${o.pillar_key}] ${o.display_name}: ${clean(o.mission,280)} Foco: ${(o.focus||[]).slice(0,4).join(', ')} Ligações: ${(o.connections||[]).slice(0,5).join(', ')}`
+    `${i+1}. [${o.ocean_key} | ${o.pillar_key}] ${o.display_name}: ${clean(o.mission,280)} Foco: ${(o.focus||[]).slice(0,4).join(', ')} Ligações Ocean: ${(o.connections||[]).slice(0,5).join(', ')} Ligações Pilar: ${(o.connected_pillars||[]).slice(0,5).join(', ')}`
+  );
+
+  const pillarLines=pillarCatalog.map((p,i)=>
+    `${i+1}. [${p.key}] ${p.name}: ${clean(p.mission,220)} Ligações: ${(p.connections||[]).slice(0,6).join(', ')}`
   );
   const candidateLimit=Math.max(8,Math.min(MAX_CANDIDATES,Number.parseInt(context?.candidate_limit,10)||12));
   const minCandidates=Math.max(8,candidateLimit-2);
@@ -107,7 +119,10 @@ export function buildExpansionPrompt({spec,context}={}){
     'Não parafraseies apenas os sinais. Converte-os em oportunidades distintas, concretas e reconhecivelmente MAISON JF.',
     `Lente atribuída: ${lens}. ${lensInstruction(lens)}`,
     'Ativos MAISON atuais: '+(context?.existing_assets||ASSETS).join(' | '),
-    `OCEANS ESPECIALIZADOS ACTIVOS: ${(context?.ocean_catalog||OCEAN_CATALOG).length}. Os Oceans de foco desta ronda são apenas uma amostra rotativa; o cérebro pode propor novos Oceans quando houver um território realmente distinto.`,
+    `OCEANS ESPECIALIZADOS ACTIVOS: ${(context?.ocean_catalog||OCEAN_CATALOG).length}. Os Oceans de foco desta ronda são uma amostra rotativa; o catálogo completo mantém-se disponível para ligações e validação.`,
+    `PILARES ACTIVOS: ${context?.pillar_count||pillarCatalog.length||0}. Os pilares organizam, não limitam, os fluxos. Pilares novos podem ser propostos quando há um domínio distinto que se liga ao grafo existente.`,
+    'CATÁLOGO DE PILARES (usar IDs exactos nas ligações):',
+    ...(pillarLines.length?pillarLines:['catálogo de pilares não carregado']),
     'OCEANS EM FOCO NESTA RONDA (cada candidato deve ter origem num Ocean listado, quando aplicável):',
     ...oceanLines,
     'Chaves permitidas para source_ocean_id nesta ronda: '+activeOceanKeys.join(', '),
@@ -119,6 +134,9 @@ export function buildExpansionPrompt({spec,context}={}){
     ...(learningLines.length?learningLines:['nenhuma aprendizagem ativa ainda']),
     'Aplica apenas o que for relevante ao candidato atual. Não destruas identidade MAISON para obedecer a uma heurística genérica.',
     '',
+    'Para criar um novo PILAR, usa candidate_type ocean_proposal com payload.proposal_kind="pillar_proposal", proposed_pillar_key, display_name, mission, focus (pelo menos 2), connections (IDs de pilares existentes) e parent_pillars opcional. O pilar tem de representar um domínio realmente distinto e ligado ao grafo, não uma variação cosmética.',
+    'Para criar um novo OCEAN, usa candidate_type ocean_proposal com payload.proposal_kind="ocean_proposal", proposed_ocean_key, display_name, pillar_key (fundacional ou dinâmico já aprovado), mission, focus (pelo menos 2) e connections (IDs de Oceans existentes).',
+    'Pilares e Oceans propostos permanecem privados e exigem aprovação humana; nunca declares activação, publicação ou execução no candidato.',
     'Devolve APENAS JSON válido com esta forma de topo: {"candidates":[]}. Sem Markdown.',
     `Devolve entre ${minCandidates} e ${candidateLimit} candidatos distintos. Cada candidato usa: candidate_type, title, body, rationale, territory, source_ocean_id, related_ocean_keys, related_assets, evidence_refs, novelty_score, maison_fit_score, feasibility_score, demand_score, commercial_score, reuse_existing_score, payload.`,
     'candidate_type permitido: question, oracle_block, test, farol_path, reel, post, story, carousel, video_script, physical_product, digital_product, bundle, service, experience, ebook, campaign, b2b, seasonal_offer, experiment, game_concept, interactive_book_game, game_expansion, scent_formula, supplier_opportunity, market_opportunity, brand_intelligence, creator_opportunity, ocean_proposal, content_series, digital_experience, research_brief, aroma_test.',
@@ -127,7 +145,7 @@ export function buildExpansionPrompt({spec,context}={}){
     'Para produtos/bundles/serviços/experiências, payload pode incluir components, estimated_effort, price_hypothesis_range_eur, why_now e validation_test. O preço é só hipótese.',
     'Para question, payload tem de incluir theme, stage, exposure, target, intensity e pode incluir subthemes, pain_family, subterritory, emotional_function, cognitive_load, vulnerability, conflict_potential, playfulness.',
     'Para oracle_block, payload tem de incluir territory, role, intensity, tone, rarity e pode incluir tags, pain_family, subterritory, emotional_function.',
-    'Para ocean_proposal, payload tem de incluir proposed_ocean_key, display_name, pillar_key, mission, focus (array com pelo menos dois pontos) e connections; propõe apenas territórios realmente distintos, ligados a uma das 11 áreas existentes e sem duplicar Oceans registados. Estes candidatos exigem aprovação humana antes de serem abertos.',
+    'Para ocean_proposal, usa apenas um dos dois formatos de payload de pilar ou Ocean definidos acima. Ligações e missão devem ser explícitas e não duplicar o catálogo existente.',
     'source_ocean_id deve ser uma chave válida do catálogo de Oceans (preferir os Oceans em foco) ou uma chave de Ocean observada nos sinais. related_ocean_keys só pode incluir chaves existentes no catálogo.',
     'Não inventes fontes, tendências, fórmulas testadas, preços, procura nem a inexistência de concorrentes em Portugal. Distingue hipótese, observação e validação. Cada ideia deve ter uma razão de novidade e não pode ser uma reformulação cosmética de candidato anterior.',
     'Conteúdo diário deve ser útil mesmo sem venda. Candidatos comerciais devem declarar concretamente como reutilizam ativos MAISON existentes.'
@@ -166,19 +184,33 @@ async function storeCandidate(env,{item,spec,context}){
   if(!CANDIDATE_TYPES.has(type))throw new Error('foundry_candidate_type_invalid');
   const rawPayload=item?.payload&&typeof item.payload==='object'&&!Array.isArray(item.payload)?item.payload:{};
   const payload=isOceanProposal
-    ? (()=>{const p=validateOceanProposal(rawPayload,context?.ocean_catalog?.length?context.ocean_catalog:OCEAN_CATALOG);return {
-        proposal_kind:'ocean_proposal',
-        proposed_ocean_key:p.ocean_key,display_name:p.display_name,pillar_key:p.pillar_key,mission:p.mission,
-        focus:p.focus,connections:p.connections,
-        distinct_rationale:clean(rawPayload.distinct_rationale||item?.rationale,1000),
-        validation_questions:Array.isArray(rawPayload.validation_questions)?rawPayload.validation_questions.map(x=>clean(x,240)).filter(Boolean).slice(0,8):[]
-      };})()
+    ? (()=> {
+        const pillars=context?.pillar_registry?.length?context.pillar_registry:(context?.pillar_catalog?.length?context.pillar_catalog:undefined);
+        if(rawPayload.proposal_kind==='pillar_proposal'){
+          const p=validatePillarProposal(rawPayload,pillars);
+          return {
+            proposal_kind:'pillar_proposal',
+            proposed_pillar_key:p.key,display_name:p.display_name,mission:p.mission,
+            focus:p.focus,connections:p.connections,parent_pillars:p.parent_pillars,
+            distinct_rationale:clean(rawPayload.distinct_rationale||item?.rationale,1000),
+            validation_questions:Array.isArray(rawPayload.validation_questions)?rawPayload.validation_questions.map(x=>clean(x,240)).filter(Boolean).slice(0,8):[]
+          };
+        }
+        const p=validateOceanProposal(rawPayload,context?.ocean_catalog?.length?context.ocean_catalog:OCEAN_CATALOG,pillars);
+        return {
+          proposal_kind:'ocean_proposal',
+          proposed_ocean_key:p.ocean_key,display_name:p.display_name,pillar_key:p.pillar_key,mission:p.mission,
+          focus:p.focus,connections:p.connections,
+          distinct_rationale:clean(rawPayload.distinct_rationale||item?.rationale,1000),
+          validation_questions:Array.isArray(rawPayload.validation_questions)?rawPayload.validation_questions.map(x=>clean(x,240)).filter(Boolean).slice(0,8):[]
+        };
+      })()
     : {...rawPayload};
   const links=relatedOceanKeys(item,context);
   if(links.length)payload.related_ocean_keys=links;
   const evidence=Array.isArray(item?.evidence_refs)&&item.evidence_refs.length?item.evidence_refs:globalEvidence(context);
   const ocean=sourceOcean(item,context);
-  const territory=type==='ocean_proposal'?payload.proposed_ocean_key:fallbackTerritory(item,context);
+  const territory=type==='ocean_proposal'?(payload.proposed_pillar_key||payload.proposed_ocean_key||fallbackTerritory(item,context)):fallbackTerritory(item,context);
 
   if(type==='question'){
     return await ingestVaultCandidate(env,{

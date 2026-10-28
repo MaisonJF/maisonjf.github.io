@@ -29,6 +29,7 @@ class RebuildCommercialContextTests(unittest.TestCase):
     def test_check_mode_checks_every_derived_projection(self):
         check_block=self.source.split("  --check)",1)[1].split("  *)",1)[0]
         for name in (
+            "build_ocean_catalog_snapshot.mjs",
             "build_vpc_ocean_signals.mjs",
             "build_editorial_queue.mjs",
             "build_pdi_expansion_queue.mjs",

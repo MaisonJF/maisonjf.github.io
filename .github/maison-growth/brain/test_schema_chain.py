@@ -32,6 +32,7 @@ MIGRATIONS=(
     GROWTH/"brain/migrations/0022_ocean_working_memory.sql",
     GROWTH/"brain/migrations/0023_candidate_inbox.sql",
     GROWTH/"brain/migrations/0024_ocean_specialist_registry.sql",
+    GROWTH/"brain/migrations/0025_ocean_pillar_registry.sql",
 )
 
 
@@ -71,6 +72,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
         }
         self.assertEqual(state["maison_ocean_memory_schema_version"],"OCEAN.1")
         self.assertEqual(state["maison_ocean_specialist_registry_schema_version"],"OCEAN.2")
+        self.assertEqual(state["maison_ocean_pillar_registry_schema_version"],"PILLAR.1")
         self.assertEqual(state["maison_candidate_inbox_schema_version"],"CANDIDATE.2")
 
         for expected in (
@@ -82,6 +84,7 @@ class GrowthSchemaChainTests(unittest.TestCase):
             "ocean_memory_state",
             "ocean_memory_alerts",
             "ocean_specialist_registry",
+            "ocean_pillar_registry",
             "maison_candidate_inbox_v2",
             "maison_candidate_decisions_v2",
         ):
@@ -185,10 +188,13 @@ class GrowthSchemaChainTests(unittest.TestCase):
           decision_id,legacy_id,"develop","Keep for later development.","human"
         ))
 
-        migration=MIGRATIONS[-1].read_text(encoding="utf-8")
-        con.executescript(migration)
-        # The migration is deliberately repeatable because the deploy workflow reapplies it.
-        con.executescript(migration)
+        candidate_migration=MIGRATIONS[-2].read_text(encoding="utf-8")
+        con.executescript(candidate_migration)
+        # The candidate migration is deliberately repeatable because the deploy workflow reapplies it.
+        con.executescript(candidate_migration)
+        pillar_migration=MIGRATIONS[-1].read_text(encoding="utf-8")
+        con.executescript(pillar_migration)
+        con.executescript(pillar_migration)
 
         migrated=con.execute("""SELECT candidate_type,title FROM maison_candidate_inbox_v2
                                 WHERE candidate_id=?""",(legacy_id,)).fetchone()

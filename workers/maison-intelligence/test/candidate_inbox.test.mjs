@@ -146,6 +146,38 @@ test('approving a first-class Ocean proposal opens a specialist Ocean only after
   assert.ok(db.batchCalls.some(item=>item.sql.includes('INSERT INTO ocean_specialist_registry')));
 });
 
+test('approving a connected pillar proposal stores it in the private specialist registry',async()=>{
+  const payload={
+    proposal_kind:'pillar_proposal',
+    proposed_pillar_key:'neuroaesthetics-sensory-environments',
+    display_name:'Neuroaesthetics & Sensory Environments',
+    mission:'Investigar relações entre percepção, ambiente, experiência estética e escolhas de design com evidência e limitações explícitas.',
+    focus:['percepção do espaço','experiência estética','ambiente e atenção'],
+    connections:['scent-science-research','visual-sensory-design','research-evidence-analytics'],
+    parent_pillars:['scent-science-research']
+  };
+  const db=new OceanProposalDB({
+    candidate_id:'mci_pillar_demo',candidate_type:'ocean_proposal',
+    title:'Proposta de novo pilar: Neuroaesthetics & Sensory Environments',
+    body:payload.mission,payload_json:JSON.stringify(payload)
+  });
+  const out=await decideCandidateInbox({GROWTH_DB:db},{
+    candidate_id:'mci_pillar_demo',decision:'approve',
+    reason:'Território transversal distinto com ligações verificáveis.'
+  });
+  assert.equal(out.pillar_registered,payload.proposed_pillar_key);
+  assert.equal(out.pillar_lifecycle_state,'open');
+  assert.equal(out.ocean_registered,null);
+  assert.equal(out.live,false);
+  assert.equal(out.automatic_activation,false);
+  assert.equal(out.public_side_effects,false);
+  assert.ok(db.batchCalls.some(item=>item.sql.includes('INSERT INTO maison_candidate_decisions_v2')));
+  const row=db.batchCalls.find(item=>item.sql.includes('INSERT INTO ocean_pillar_registry'));
+  assert.ok(row,'approved pillar must be persisted');
+  assert.ok(row.params.includes(payload.proposed_pillar_key));
+  assert.ok(row.params.includes(JSON.stringify(payload.connections)));
+});
+
 test('expanded candidate types include games, interactive books, scent, suppliers and new Oceans',async()=>{
   const types=[
     'game_concept','interactive_book_game','game_expansion','scent_formula',

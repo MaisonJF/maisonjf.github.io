@@ -1,5 +1,5 @@
 {
-  "contract_version": "MAISON-DERIVED-ARTIFACTS-2.1",
+  "contract_version": "MAISON-DERIVED-ARTIFACTS-2.2",
   "principle": "Live Ocean memory is canonical in D1; repository Ocean files are exported snapshots used by build-time derivatives. Other authored inputs remain canonical in Git.",
   "canonical_inputs": [
     ".github/maison-growth/oceans/candidates.json",
@@ -10,9 +10,17 @@
     "data/services.js",
     "sitemap.xml",
     ".github/maison-growth/brain/public-entity-evidence.json",
-    ".github/maison-growth/brain/external-entity-authority.json"
+    ".github/maison-growth/brain/external-entity-authority.json",
+    "workers/maison-intelligence/src/ocean_catalog.js"
   ],
   "derived_artifacts": [
+    {
+      "path": ".github/maison-growth/brain/ocean-catalog.generated.json",
+      "builder": ".github/maison-growth/brain/build_ocean_catalog_snapshot.mjs",
+      "policy": "generated_and_committed",
+      "manual_edits": "forbidden",
+      "note": "Internal-only registry snapshot of foundational specialist Oceans and cross-linked pillars, used by the Brain knowledge context. Dynamic approved records remain canonical in the Worker D1 registry."
+    },
     {
       "path": ".github/maison-growth/brain/maison-knowledge-graph.generated.json",
       "builder": ".github/maison-growth/brain/build_maison_knowledge_graph.mjs",
@@ -68,7 +76,10 @@
       "b2b_professionals",
       "public_discovery",
       "public_identity",
-      "search_visibility"
+      "search_visibility",
+      "specialist_ocean_network",
+      "ocean_to_ocean_edges",
+      "pillar_to_pillar_edges"
     ],
     "parallel_graphs_forbidden": true
   },
@@ -107,7 +118,9 @@
     "oceans": "D1:ocean_memory_signals/ocean_memory_state/ocean_memory_alerts",
     "external_intelligence": "D1:external_intelligence_observations",
     "github_ocean_snapshot": ".github/maison-growth/oceans/candidates.json",
-    "github_failure_blocks_runtime": false
+    "github_failure_blocks_runtime": false,
+    "ocean_specialist_catalog": "D1:ocean_specialist_registry",
+    "ocean_pillar_catalog": "D1:ocean_pillar_registry"
   },
   "repository_snapshot_policy": {
     ".github/maison-growth/oceans/candidates.json": {

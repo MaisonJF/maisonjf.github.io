@@ -1,0 +1,5282 @@
+{
+  "schema_version": "maison_ocean_network_catalog_v1",
+  "catalog_version": "JF-OCEANS-2026.10.2",
+  "generated_from": "workers/maison-intelligence/src/ocean_catalog.js",
+  "principle": "Every Ocean is an individual knowledge territory. Pillars organize the graph; cross-links let relevant knowledge travel across the whole Maison Brain and, through private opt-in routing, founder growth.",
+  "expansion_contract": {
+    "dynamic_pillars_supported": true,
+    "dynamic_oceans_supported": true,
+    "human_approval_required": true,
+    "public_publication_by_default": false,
+    "relevance_routing_not_forced": true,
+    "graph_edges_preserve_source_identity": true
+  },
+  "summary": {
+    "foundational_pillars": 48,
+    "foundational_oceans": 167,
+    "individual_brand_oceans": 53,
+    "ocean_to_ocean_edges": 1838,
+    "pillar_to_pillar_edges": 158
+  },
+  "pillars": [
+    {
+      "key": "scent-product-formulation",
+      "name": "Aromas, essências e formulação — núcleo",
+      "mission": "Núcleo de compatibilidade para a ciência olfactiva e a formulação de produtos.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "suppliers-production",
+      "name": "Fornecedores e produção — núcleo",
+      "mission": "Núcleo de compatibilidade para aquisição, matérias-primas e produção.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "portugal-market-opportunity",
+      "name": "Mercado português — núcleo",
+      "mission": "Núcleo de compatibilidade para mercado, concorrência e oportunidades em Portugal.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "luxury-brand-intelligence",
+      "name": "Maisons e marcas — núcleo",
+      "mission": "Núcleo de compatibilidade para inteligência individual de marcas e as suas variantes.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "symbolic-systems-audience-entry",
+      "name": "Sistemas simbólicos — núcleo",
+      "mission": "Núcleo de compatibilidade para sistemas simbólicos e novas portas de entrada.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "ebooks-interactive-publishing",
+      "name": "Edição e publicação — núcleo",
+      "mission": "Núcleo de compatibilidade para ebooks, livros e publicação interactiva.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "digital-games-experiences",
+      "name": "Jogos digitais — núcleo",
+      "mission": "Núcleo de compatibilidade para jogos digitais e experiências interactivas.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "human-needs-buying-motives",
+      "name": "Necessidades humanas — núcleo",
+      "mission": "Núcleo de compatibilidade para necessidades humanas e motivações de compra.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "maison-philosophy-conversion",
+      "name": "Filosofia e conversão — núcleo",
+      "mission": "Núcleo de compatibilidade para filosofia, comunicação e conversão da Maison.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "creators-partnerships-distribution",
+      "name": "Criadores e distribuição — núcleo",
+      "mission": "Núcleo de compatibilidade para criadores, parcerias e distribuição.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "growth-innovation-safety-learning",
+      "name": "Crescimento e aprendizagem — núcleo",
+      "mission": "Núcleo de compatibilidade para inovação, segurança, aprendizagem e novos territórios.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "scent-science-research",
+      "name": "Ciência olfactiva e investigação",
+      "mission": "Investigar famílias olfactivas, matérias aromáticas, percepção, desempenho e evidência sensorial.",
+      "connections": [
+        "home-scent-products",
+        "personal-perfumery-formats",
+        "supplier-materials-packaging",
+        "wellbeing-human-needs",
+        "product-quality-safety-regulatory",
+        "research-evidence-analytics"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "home-scent-products",
+      "name": "Perfumação de espaços e têxteis",
+      "mission": "Especializar conhecimento sobre névoas, águas perfumadas, águas de lençóis, velas e formatos para o lar.",
+      "connections": [
+        "scent-science-research",
+        "sensory-ritual-experiences",
+        "supplier-materials-packaging",
+        "wellbeing-human-needs",
+        "customer-motivations-gifting",
+        "portugal-market-opportunity"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "personal-perfumery-formats",
+      "name": "Perfumaria pessoal",
+      "mission": "Estudar perfumes pessoais, concentrações, evolução na pele, formatos, colecções e descoberta.",
+      "connections": [
+        "scent-science-research",
+        "designer-luxury-houses",
+        "heritage-sensory-houses",
+        "independent-niche-perfumery",
+        "arabian-fragrance-houses",
+        "customer-motivations-gifting"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "sensory-ritual-experiences",
+      "name": "Rituais sensoriais e experiências de cuidado",
+      "mission": "Ligar aromas, materiais e ocasiões a experiências sensoriais para casa, corpo e presença.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "supplier-materials-packaging",
+      "name": "Matérias-primas, fornecedores e embalagem",
+      "mission": "Encontrar, avaliar e comparar ingredientes, ceras, recipientes, sais, embalagens, ferramentas e fornecedores.",
+      "connections": [
+        "procurement-economics",
+        "operations-production-scale",
+        "product-quality-safety-regulatory",
+        "sustainability-circular-design",
+        "scent-science-research"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "procurement-economics",
+      "name": "Aquisição, custos e economia unitária",
+      "mission": "Comparar custo entregue, portes, impostos aplicáveis, mínimos, desperdício, margens e capacidade de reposição.",
+      "connections": [
+        "supplier-materials-packaging",
+        "bundles-revenue-ecosystems",
+        "customer-motivations-gifting",
+        "operations-production-scale"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "market-competition-discovery",
+      "name": "Mercado, concorrência e descoberta",
+      "mission": "Investigar procura, concorrência, linguagem do público e lacunas de mercado com fontes datadas.",
+      "connections": [
+        "market-innovation-opportunities",
+        "customer-motivations-gifting",
+        "conversion-growth-experiments",
+        "creator-influence-intelligence",
+        "research-evidence-analytics",
+        "search-visibility-authority"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "designer-luxury-houses",
+      "name": "Maisons de moda e luxo",
+      "mission": "Estudar casas de moda e luxo individualmente, incluindo linhas, variantes, códigos de marca, campanhas e posicionamento.",
+      "connections": [
+        "heritage-sensory-houses",
+        "independent-niche-perfumery",
+        "storytelling-brand-voice",
+        "visual-sensory-design",
+        "maison-identity-positioning"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "heritage-sensory-houses",
+      "name": "Casas históricas e património sensorial",
+      "mission": "Investigar casas de perfumaria e design com património, artesanato, rituais e identidade sensorial distintivos.",
+      "connections": [
+        "designer-luxury-houses",
+        "independent-niche-perfumery",
+        "visual-sensory-design",
+        "scent-science-research"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "independent-niche-perfumery",
+      "name": "Perfumaria independente e de nicho",
+      "mission": "Estudar casas independentes e de nicho, perfumistas, composições, públicos e estratégias sem imitação.",
+      "connections": [
+        "arabian-fragrance-houses",
+        "scent-science-research",
+        "designer-luxury-houses",
+        "customer-motivations-gifting"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "arabian-fragrance-houses",
+      "name": "Casas de perfumaria árabe e mercados relacionados",
+      "mission": "Investigar marcas, tradições, catálogos, ingredientes e públicos de perfumaria árabe com contexto cultural.",
+      "connections": [
+        "independent-niche-perfumery",
+        "scent-science-research",
+        "symbolic-traditions",
+        "customer-motivations-gifting"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "symbolic-traditions",
+      "name": "Tradições simbólicas e sistemas culturais",
+      "mission": "Explorar Tarot, astrologias ocidental, sideral e védica, numerologias, tradições chinesas e vietnamitas e simbolismo.",
+      "connections": [
+        "reflection-tests",
+        "editorial-narrative-publishing",
+        "game-design-social-play",
+        "creator-influence-intelligence",
+        "ethics-trust-human-impact",
+        "search-visibility-authority"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "reflection-tests",
+      "name": "Reflexão, personalidade e testes",
+      "mission": "Investigar formatos de reflexão e testes sobre atenção, apego, afecto e relações sem os apresentar como diagnóstico clínico.",
+      "connections": [
+        "wellbeing-human-needs",
+        "relationships-social-connection",
+        "symbolic-traditions",
+        "ethics-trust-human-impact",
+        "game-design-social-play",
+        "search-visibility-authority"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "editorial-narrative-publishing",
+      "name": "Universos editoriais e narrativa interactiva",
+      "mission": "Descobrir temas editoriais, livros-jogo, universos narrativos, séries e mecânicas de publicação.",
+      "connections": [
+        "game-design-social-play",
+        "symbolic-traditions",
+        "community-audience-development",
+        "customer-motivations-gifting",
+        "search-visibility-authority"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "game-design-social-play",
+      "name": "Design de jogos e experiência social",
+      "mission": "Investigar jogos para duas pessoas, grupos, convívio, descoberta social, mistério, escolhas e repetição.",
+      "connections": [
+        "relationships-social-connection",
+        "reflection-tests",
+        "editorial-narrative-publishing",
+        "game-growth-economics",
+        "community-audience-development"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "game-growth-economics",
+      "name": "Economia, crescimento e ecossistemas de jogos",
+      "mission": "Estudar monetização, expansões, retenção, ligação entre jogos e livros e viabilidade de experiências digitais.",
+      "connections": [
+        "bundles-revenue-ecosystems",
+        "editorial-narrative-publishing",
+        "conversion-growth-experiments",
+        "community-audience-development"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "wellbeing-human-needs",
+      "name": "Bem-estar, descanso e necessidades humanas",
+      "mission": "Investigar como as pessoas procuram calma, conforto, descanso, pausa, prazer sensorial e regresso a casa.",
+      "connections": [
+        "sensory-ritual-experiences",
+        "home-scent-products",
+        "customer-motivations-gifting",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "relationships-social-connection",
+      "name": "Relações, intimidade e conexão social",
+      "mission": "Compreender necessidades de proximidade, amizade, intimidade, presença e experiências sociais seguras.",
+      "connections": [
+        "reflection-tests",
+        "game-design-social-play",
+        "community-audience-development",
+        "founder-personal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "customer-motivations-gifting",
+      "name": "Motivações de compra, presentes e identidade",
+      "mission": "Investigar descoberta, recompensa, luxo acessível, colecção, expressão pessoal, oferta e razões reais de compra.",
+      "connections": [
+        "wellbeing-human-needs",
+        "visual-sensory-design",
+        "bundles-revenue-ecosystems",
+        "conversion-growth-experiments"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "maison-identity-positioning",
+      "name": "Identidade, filosofia e posicionamento Maison",
+      "mission": "Evoluir a filosofia, os princípios, a proposta de valor e o posicionamento da Maison JF sem perder identidade.",
+      "connections": [
+        "storytelling-brand-voice",
+        "conversion-growth-experiments",
+        "designer-luxury-houses",
+        "research-evidence-analytics"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "storytelling-brand-voice",
+      "name": "Voz da marca, storytelling e referências criativas",
+      "mission": "Melhorar voz, narrativa e referências transferíveis, sem copiar obras protegidas nem perder autenticidade.",
+      "connections": [
+        "maison-identity-positioning",
+        "editorial-narrative-publishing",
+        "creator-influence-intelligence",
+        "visual-sensory-design",
+        "search-visibility-authority"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "conversion-growth-experiments",
+      "name": "Conversão, experiência comercial e experimentação",
+      "mission": "Melhorar descoberta, páginas, navegação, ofertas, conversão, retenção e aprendizagem através de testes.",
+      "connections": [
+        "research-evidence-analytics",
+        "market-competition-discovery",
+        "customer-motivations-gifting",
+        "maison-internal-growth",
+        "search-visibility-authority"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "search-visibility-authority",
+      "name": "SEO, GEO, autoridade e descoberta sintética",
+      "mission": "Tornar a Maison mais compreensível e encontrável em motores de pesquisa e sistemas de resposta por IA através de informação útil, evidência, entidades consistentes e experiência real — sem prometer citações nem manipular sistemas.",
+      "connections": [],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "creator-influence-intelligence",
+      "name": "Criadores e influência",
+      "mission": "Descobrir criadores e comunidades influentes pela adequação, qualidade do público, afinidade e potencial real.",
+      "connections": [
+        "community-audience-development",
+        "partnerships-distribution-retail",
+        "market-competition-discovery",
+        "storytelling-brand-voice"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "partnerships-distribution-retail",
+      "name": "Parcerias, distribuição e canais físicos",
+      "mission": "Encontrar lojas, concept stores, retalho, hotelaria, spas, colaborações e canais de distribuição relevantes.",
+      "connections": [
+        "creator-influence-intelligence",
+        "bundles-revenue-ecosystems",
+        "operations-production-scale",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "community-audience-development",
+      "name": "Comunidade e desenvolvimento de públicos",
+      "mission": "Construir relações duradouras com comunidades, públicos, leitores, jogadores e pessoas que acompanham a Maison.",
+      "connections": [
+        "relationships-social-connection",
+        "game-design-social-play",
+        "editorial-narrative-publishing",
+        "creator-influence-intelligence",
+        "search-visibility-authority"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "product-quality-safety-regulatory",
+      "name": "Qualidade, segurança e conformidade",
+      "mission": "Acompanhar qualidade, documentação, segurança de produto e requisitos legais, assinalando lacunas para validação competente.",
+      "connections": [
+        "supplier-materials-packaging",
+        "scent-science-research",
+        "ethics-trust-human-impact",
+        "research-evidence-analytics"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "sustainability-circular-design",
+      "name": "Sustentabilidade e desenho circular",
+      "mission": "Investigar reutilização, recargas, materiais, desperdício e escolhas sustentáveis apenas quando apoiadas por evidência.",
+      "connections": [
+        "supplier-materials-packaging",
+        "visual-sensory-design",
+        "operations-production-scale"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "bundles-revenue-ecosystems",
+      "name": "Conjuntos, ecossistemas e novos modelos de receita",
+      "mission": "Encontrar combinações de activos, ofertas, receitas e ecossistemas viáveis considerando custos, margens e capacidade.",
+      "connections": [
+        "procurement-economics",
+        "customer-motivations-gifting",
+        "conversion-growth-experiments",
+        "game-growth-economics"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "visual-sensory-design",
+      "name": "Design visual e experiência sensorial",
+      "mission": "Estudar cor, materiais, embalagem, fotografia, tipografia, objectos e coerência entre experiência física e digital.",
+      "connections": [
+        "storytelling-brand-voice",
+        "designer-luxury-houses",
+        "home-scent-products",
+        "sustainability-circular-design"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "culture-seasonality-expansion",
+      "name": "Cultura portuguesa, sazonalidade e ocasiões",
+      "mission": "Transformar cultura, estações, datas e ocasiões em oportunidades relevantes, respeitando contexto e originalidade.",
+      "connections": [
+        "home-scent-products",
+        "symbolic-traditions",
+        "customer-motivations-gifting",
+        "portugal-market-opportunity"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "market-innovation-opportunities",
+      "name": "Inovação, espaços por explorar e novos mercados",
+      "mission": "Identificar necessidades não servidas, conceitos emergentes e oportunidades pioneiras com verificação de mercado explícita.",
+      "connections": [
+        "market-competition-discovery",
+        "scent-science-research",
+        "culture-seasonality-expansion",
+        "research-evidence-analytics"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "research-evidence-analytics",
+      "name": "Investigação, evidência, dados e análise",
+      "mission": "Avaliar fontes, confiança, novidade, resultados, métricas e hipóteses, distinguindo correlação, inferência e evidência.",
+      "connections": [
+        "market-competition-discovery",
+        "conversion-growth-experiments",
+        "product-quality-safety-regulatory",
+        "maison-internal-growth",
+        "search-visibility-authority"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "operations-production-scale",
+      "name": "Operações, produção e capacidade de escala",
+      "mission": "Melhorar processos, equipamentos, repetibilidade, capacidade, dependências e eficiência operacional.",
+      "connections": [
+        "supplier-materials-packaging",
+        "procurement-economics",
+        "product-quality-safety-regulatory",
+        "sustainability-circular-design"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "maison-internal-growth",
+      "name": "Crescimento interno da Maison",
+      "mission": "Apoiar estratégia interna, sistemas, operações, capacidades e decisões da Maison através do quadro canónico de crescimento.",
+      "connections": [
+        "research-evidence-analytics",
+        "operations-production-scale",
+        "conversion-growth-experiments",
+        "bundles-revenue-ecosystems"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "founder-personal-growth",
+      "name": "Desenvolvimento pessoal do fundador",
+      "mission": "Disponibilizar aprendizagem relevante e opt-in ao fundador, protegendo privacidade, autonomia e contexto pessoal.",
+      "connections": [
+        "maison-internal-growth",
+        "research-evidence-analytics",
+        "ethics-trust-human-impact"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    },
+    {
+      "key": "ethics-trust-human-impact",
+      "name": "Ética, confiança e impacto humano",
+      "mission": "Avaliar limites éticos, privacidade, persuasão responsável, impacto humano e confiança nas decisões do sistema.",
+      "connections": [
+        "product-quality-safety-regulatory",
+        "reflection-tests",
+        "symbolic-traditions",
+        "founder-personal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog"
+    }
+  ],
+  "oceans": [
+    {
+      "ocean_key": "olfactory-universe",
+      "display_name": "Olfactory Universe",
+      "pillar_key": "scent-science-research",
+      "mission": "Construir conhecimento sobre famílias olfativas, notas, acordes, matérias aromáticas e percepção sensorial.",
+      "focus": [
+        "famílias olfativas",
+        "notas e acordes",
+        "contrastes e texturas",
+        "evolução e percepção do aroma"
+      ],
+      "connections": [
+        "fragrance-suppliers",
+        "human-needs-buying-motivations",
+        "portugal-market-white-space",
+        "product-safety-regulatory",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "personal-perfumery",
+        "waxes-candle-materials",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "product-quality-customer-feedback",
+        "experiments-conversion-learning",
+        "customer-research"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "fragrance-formulation-lab",
+      "display_name": "Fragrance Formulation Lab",
+      "pillar_key": "scent-product-formulation",
+      "mission": "Desenvolver combinações aromáticas originais e acompanhar a passagem de hipótese a fórmula testada.",
+      "focus": [
+        "compatibilidade entre fragrâncias",
+        "proporções e diluições",
+        "testes documentados",
+        "estabilidade e desempenho"
+      ],
+      "connections": [
+        "fragrance-suppliers",
+        "human-needs-buying-motivations",
+        "portugal-market-white-space",
+        "product-safety-regulatory"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "home-fragrance",
+      "display_name": "Home Fragrance",
+      "pillar_key": "home-scent-products",
+      "mission": "Investigar névoas de ambiente, difusores, águas perfumadas e outros formatos de perfumação de espaços.",
+      "focus": [
+        "névoas de ambiente",
+        "águas perfumadas",
+        "difusão e intensidade",
+        "formatos e ocasiões"
+      ],
+      "connections": [
+        "fragrance-suppliers",
+        "human-needs-buying-motivations",
+        "portugal-market-white-space",
+        "product-safety-regulatory",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "massage-body-rituals",
+        "scent-layering",
+        "waxes-candle-materials",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "linen-textile-fragrance",
+      "display_name": "Linen & Textile Fragrance",
+      "pillar_key": "home-scent-products",
+      "mission": "Investigar águas de lençóis e perfumação têxtil, separando ideias olfativas de compatibilidade e segurança de uso.",
+      "focus": [
+        "águas de lençóis",
+        "brumas têxteis",
+        "tecidos e materiais",
+        "manchas, estabilidade e segurança"
+      ],
+      "connections": [
+        "fragrance-suppliers",
+        "human-needs-buying-motivations",
+        "portugal-market-white-space",
+        "product-safety-regulatory",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "massage-body-rituals",
+        "scent-layering",
+        "waxes-candle-materials",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "scented-candles",
+      "display_name": "Scented Candles",
+      "pillar_key": "home-scent-products",
+      "mission": "Melhorar velas aromáticas, considerando cera, pavio, recipiente, combustão e desempenho olfativo.",
+      "focus": [
+        "difusão a frio e a quente",
+        "ceras e pavios",
+        "recipientes e combustão",
+        "testes reprodutíveis"
+      ],
+      "connections": [
+        "fragrance-suppliers",
+        "human-needs-buying-motivations",
+        "portugal-market-white-space",
+        "product-safety-regulatory",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "massage-body-rituals",
+        "scent-layering",
+        "waxes-candle-materials",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "personal-perfumery",
+      "display_name": "Personal Perfumery",
+      "pillar_key": "personal-perfumery-formats",
+      "mission": "Explorar perfumes pessoais, concentrações, evolução na pele, famílias olfativas e formatos de descoberta.",
+      "focus": [
+        "perfumes pessoais",
+        "concentrações",
+        "fixação e evolução",
+        "amostras e discovery sets"
+      ],
+      "connections": [
+        "fragrance-suppliers",
+        "human-needs-buying-motivations",
+        "portugal-market-white-space",
+        "product-safety-regulatory",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-amouage",
+        "brand-montale",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "massage-body-rituals",
+      "display_name": "Massage & Body Rituals",
+      "pillar_key": "sensory-ritual-experiences",
+      "mission": "Investigar óleos de massagem e experiências perfumadas para o corpo com requisitos de segurança específicos.",
+      "focus": [
+        "óleos de massagem",
+        "rituais de cuidado",
+        "compatibilidade de bases",
+        "documentação de segurança"
+      ],
+      "connections": [
+        "fragrance-suppliers",
+        "human-needs-buying-motivations",
+        "portugal-market-white-space",
+        "product-safety-regulatory"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "scent-layering",
+      "display_name": "Scent Layering",
+      "pillar_key": "sensory-ritual-experiences",
+      "mission": "Testar combinações entre aromas de corpo, ambiente e objectos, registando resultados em vez de presumir compatibilidade.",
+      "focus": [
+        "combinar fragrâncias",
+        "famílias complementares",
+        "contrastes olfativos",
+        "experiências por camadas"
+      ],
+      "connections": [
+        "fragrance-suppliers",
+        "human-needs-buying-motivations",
+        "portugal-market-white-space",
+        "product-safety-regulatory"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "aroma-by-occasion",
+      "display_name": "Aroma by Occasion",
+      "pillar_key": "sensory-ritual-experiences",
+      "mission": "Relacionar experiências olfativas com ocasiões como chegar a casa, descansar, receber pessoas ou oferecer.",
+      "focus": [
+        "chegar a casa",
+        "pausa e descanso",
+        "receber convidados",
+        "presentes e datas"
+      ],
+      "connections": [
+        "fragrance-suppliers",
+        "human-needs-buying-motivations",
+        "portugal-market-white-space",
+        "product-safety-regulatory"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "sensory-innovation",
+      "display_name": "Sensory Innovation",
+      "pillar_key": "sensory-ritual-experiences",
+      "mission": "Descobrir formatos sensoriais originais, objectos aromáticos, sólidos perfumados, kits e experiências.",
+      "focus": [
+        "novos formatos",
+        "objectos aromáticos",
+        "kits de descoberta",
+        "experiências multissensoriais"
+      ],
+      "connections": [
+        "fragrance-suppliers",
+        "human-needs-buying-motivations",
+        "portugal-market-white-space",
+        "product-safety-regulatory"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "proven-aroma-formulas",
+      "display_name": "Proven Aroma Formulas",
+      "pillar_key": "scent-science-research",
+      "mission": "Manter um laboratório de fórmulas com resultados observados, condições de teste, limitações, custos e validação por aplicação.",
+      "focus": [
+        "receitas e acordes testados",
+        "registo de resultados",
+        "custo por unidade",
+        "separação entre hipótese e fórmula validada"
+      ],
+      "connections": [
+        "fragrance-suppliers",
+        "human-needs-buying-motivations",
+        "portugal-market-white-space",
+        "product-safety-regulatory",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "personal-perfumery",
+        "waxes-candle-materials",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "product-quality-customer-feedback",
+        "experiments-conversion-learning",
+        "customer-research"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "supplier-intelligence",
+      "display_name": "Supplier Intelligence",
+      "pillar_key": "suppliers-production",
+      "mission": "Descobrir, comparar e acompanhar fornecedores por qualidade, fiabilidade, documentação, mínimos e custo entregue em Portugal.",
+      "focus": [
+        "fornecedores europeus",
+        "preços e portes",
+        "quantidades mínimas",
+        "fiabilidade e alternativas"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "portugal-market-white-space",
+        "procurement-economics",
+        "supplier-reliability"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "waxes-candle-materials",
+      "display_name": "Waxes & Candle Materials",
+      "pillar_key": "supplier-materials-packaging",
+      "mission": "Comparar ceras e materiais de vela por especificações técnicas, desempenho, preço, disponibilidade e custo logístico.",
+      "focus": [
+        "cera de coco",
+        "soja e colza",
+        "ponto de fusão",
+        "mínimos e custo entregue"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "portugal-market-white-space",
+        "procurement-economics",
+        "supplier-reliability",
+        "pricing-value",
+        "production-equipment",
+        "product-quality-customer-feedback",
+        "product-safety-regulatory",
+        "sustainability-circular-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "fragrance-suppliers",
+      "display_name": "Fragrance Suppliers",
+      "pillar_key": "supplier-materials-packaging",
+      "mission": "Avaliar fornecedores de fragrâncias, amostras, catálogos, documentação técnica e adequação às aplicações pretendidas.",
+      "focus": [
+        "catálogos e amostras",
+        "certificados e fichas",
+        "limites de utilização",
+        "consistência entre lotes"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "portugal-market-white-space",
+        "procurement-economics",
+        "supplier-reliability",
+        "pricing-value",
+        "production-equipment",
+        "product-quality-customer-feedback",
+        "product-safety-regulatory",
+        "sustainability-circular-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "containers-vessels",
+      "display_name": "Containers & Vessels",
+      "pillar_key": "supplier-materials-packaging",
+      "mission": "Encontrar recipientes e componentes compatíveis com estética, segurança, dimensões e custos da Maison.",
+      "focus": [
+        "frascos e recipientes",
+        "pulverizadores e tampas",
+        "recipientes para velas",
+        "mínimos e personalização"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "portugal-market-white-space",
+        "procurement-economics",
+        "supplier-reliability",
+        "pricing-value",
+        "production-equipment",
+        "product-quality-customer-feedback",
+        "product-safety-regulatory",
+        "sustainability-circular-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "salts-botanical-materials",
+      "display_name": "Salts & Botanical Materials",
+      "pillar_key": "supplier-materials-packaging",
+      "mission": "Pesquisar sais e matérias botânicas, qualidade, documentação, conservação e utilização pretendida.",
+      "focus": [
+        "sais para rituais",
+        "matérias botânicas",
+        "fornecedores",
+        "armazenamento e qualidade"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "portugal-market-white-space",
+        "procurement-economics",
+        "supplier-reliability",
+        "pricing-value",
+        "production-equipment",
+        "product-quality-customer-feedback",
+        "product-safety-regulatory",
+        "sustainability-circular-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "packaging-printing",
+      "display_name": "Packaging & Printing",
+      "pillar_key": "supplier-materials-packaging",
+      "mission": "Comparar etiquetas, caixas, impressão, acabamentos, materiais e opções de embalagem por escala e custo.",
+      "focus": [
+        "etiquetas",
+        "caixas e impressão",
+        "acabamentos",
+        "embalagem de oferta"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "portugal-market-white-space",
+        "procurement-economics",
+        "supplier-reliability",
+        "pricing-value",
+        "production-equipment",
+        "product-quality-customer-feedback",
+        "product-safety-regulatory",
+        "sustainability-circular-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "production-equipment",
+      "display_name": "Production Equipment",
+      "pillar_key": "operations-production-scale",
+      "mission": "Identificar ferramentas e equipamentos que melhorem a repetibilidade, segurança e eficiência de produção.",
+      "focus": [
+        "balanças e termómetros",
+        "ferramentas",
+        "controlo de qualidade",
+        "processos repetíveis"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "portugal-market-white-space",
+        "procurement-economics",
+        "supplier-reliability",
+        "waxes-candle-materials",
+        "fragrance-suppliers",
+        "pricing-value",
+        "product-quality-customer-feedback",
+        "product-safety-regulatory",
+        "sustainability-circular-design"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "procurement-economics",
+      "display_name": "Procurement Economics",
+      "pillar_key": "procurement-economics",
+      "mission": "Calcular custo total de compra, impostos aplicáveis, transporte, mínimos, desperdício e custo real por unidade.",
+      "focus": [
+        "custo entregue",
+        "portes e impostos",
+        "custo por unidade",
+        "cenários de compra"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "portugal-market-white-space",
+        "supplier-reliability",
+        "waxes-candle-materials",
+        "fragrance-suppliers",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "emotional-gifting",
+        "identity-self-expression",
+        "production-equipment"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "supplier-reliability",
+      "display_name": "Supplier Reliability",
+      "pillar_key": "suppliers-production",
+      "mission": "Acompanhar atrasos, alterações de catálogo, qualidade e risco de dependência de fornecedores.",
+      "focus": [
+        "prazos e disponibilidade",
+        "qualidade por lote",
+        "alternativas",
+        "risco de fornecimento"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "portugal-market-white-space",
+        "procurement-economics"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "european-sourcing",
+      "display_name": "European Sourcing",
+      "pillar_key": "supplier-materials-packaging",
+      "mission": "Encontrar opções europeias que reduzam fricção logística sem sacrificar qualidade, documentação ou custo.",
+      "focus": [
+        "fornecedores na Europa",
+        "alternativas locais",
+        "prazos",
+        "custo logístico"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "portugal-market-white-space",
+        "procurement-economics",
+        "supplier-reliability",
+        "pricing-value",
+        "production-equipment",
+        "product-quality-customer-feedback",
+        "product-safety-regulatory",
+        "sustainability-circular-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "portugal-market-white-space",
+      "display_name": "Portuguese Market White Space",
+      "pillar_key": "portugal-market-opportunity",
+      "mission": "Procurar conceitos e produtos pouco explorados em Portugal, verificando concorrência, procura e datas das pesquisas.",
+      "focus": [
+        "presença no mercado português",
+        "concorrência e disponibilidade",
+        "sinais de procura",
+        "oportunidades pioneiras verificáveis"
+      ],
+      "connections": [
+        "human-needs-buying-motivations",
+        "customer-search-language",
+        "supplier-intelligence",
+        "market-gaps-competitor-weaknesses"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "market-gaps-competitor-weaknesses",
+      "display_name": "Market Gaps & Competitor Weaknesses",
+      "pillar_key": "market-competition-discovery",
+      "mission": "Encontrar necessidades mal servidas, fricções e espaços de diferenciação sem presumir que a ausência de resultados prova ausência de oferta.",
+      "focus": [
+        "reclamações públicas",
+        "lacunas de experiência",
+        "oferta insuficiente",
+        "alternativas existentes"
+      ],
+      "connections": [
+        "human-needs-buying-motivations",
+        "customer-search-language",
+        "supplier-intelligence",
+        "emerging-creators-ideas",
+        "emerging-markets-languages",
+        "emotional-gifting",
+        "identity-self-expression",
+        "copywriting-conversion",
+        "customer-journey",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "experiments-conversion-learning",
+        "customer-research",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "customer-search-language",
+      "display_name": "Customer Search & Language",
+      "pillar_key": "market-competition-discovery",
+      "mission": "Recolher linguagem pública usada pelas pessoas para procurar produtos, descrever desejos e explicar problemas.",
+      "focus": [
+        "termos de pesquisa",
+        "linguagem de clientes",
+        "perguntas recorrentes",
+        "idiomas e variações locais"
+      ],
+      "connections": [
+        "human-needs-buying-motivations",
+        "supplier-intelligence",
+        "market-gaps-competitor-weaknesses",
+        "emerging-creators-ideas",
+        "emerging-markets-languages",
+        "emotional-gifting",
+        "identity-self-expression",
+        "copywriting-conversion",
+        "customer-journey",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "experiments-conversion-learning",
+        "customer-research",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "competitor-price-intelligence",
+      "display_name": "Competitor & Price Intelligence",
+      "pillar_key": "market-competition-discovery",
+      "mission": "Acompanhar preços, formatos, disponibilidade e posicionamento de alternativas comparáveis com fontes datadas.",
+      "focus": [
+        "preços públicos",
+        "formatos e tamanhos",
+        "disponibilidade",
+        "comparabilidade real"
+      ],
+      "connections": [
+        "human-needs-buying-motivations",
+        "customer-search-language",
+        "supplier-intelligence",
+        "market-gaps-competitor-weaknesses",
+        "emerging-creators-ideas",
+        "emerging-markets-languages",
+        "emotional-gifting",
+        "identity-self-expression",
+        "copywriting-conversion",
+        "customer-journey",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "experiments-conversion-learning",
+        "customer-research",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-tom-ford",
+      "display_name": "Tom Ford",
+      "pillar_key": "designer-luxury-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "experience-design",
+        "brand-positioning",
+        "transferable-excellence-atelier"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-dior",
+      "display_name": "Dior",
+      "pillar_key": "designer-luxury-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "experience-design",
+        "brand-positioning",
+        "transferable-excellence-atelier"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-yves-saint-laurent",
+      "display_name": "Yves Saint Laurent / YSL Beauty",
+      "pillar_key": "designer-luxury-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "experience-design",
+        "brand-positioning",
+        "transferable-excellence-atelier"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-chanel",
+      "display_name": "Chanel",
+      "pillar_key": "luxury-brand-intelligence",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-hermes",
+      "display_name": "Hermès",
+      "pillar_key": "designer-luxury-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "experience-design",
+        "brand-positioning",
+        "transferable-excellence-atelier"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-guerlain",
+      "display_name": "Guerlain",
+      "pillar_key": "heritage-sensory-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-tom-ford",
+        "brand-dior",
+        "brand-byredo",
+        "brand-le-labo",
+        "experience-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-jo-malone-london",
+      "display_name": "Jo Malone London",
+      "pillar_key": "heritage-sensory-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-tom-ford",
+        "brand-dior",
+        "brand-byredo",
+        "brand-le-labo",
+        "experience-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-diptyque",
+      "display_name": "Diptyque",
+      "pillar_key": "heritage-sensory-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-tom-ford",
+        "brand-dior",
+        "brand-byredo",
+        "brand-le-labo",
+        "experience-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-byredo",
+      "display_name": "Byredo",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-le-labo",
+      "display_name": "Le Labo",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-maison-margiela-fragrances",
+      "display_name": "Maison Margiela Fragrances",
+      "pillar_key": "designer-luxury-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "experience-design",
+        "brand-positioning",
+        "transferable-excellence-atelier"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-loewe",
+      "display_name": "Loewe",
+      "pillar_key": "designer-luxury-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "experience-design",
+        "brand-positioning",
+        "transferable-excellence-atelier"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-prada",
+      "display_name": "Prada",
+      "pillar_key": "designer-luxury-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "experience-design",
+        "brand-positioning",
+        "transferable-excellence-atelier"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-giorgio-armani-prive",
+      "display_name": "Giorgio Armani Privé",
+      "pillar_key": "designer-luxury-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "experience-design",
+        "brand-positioning",
+        "transferable-excellence-atelier"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-gucci-beauty",
+      "display_name": "Gucci Beauty",
+      "pillar_key": "designer-luxury-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "experience-design",
+        "brand-positioning",
+        "transferable-excellence-atelier"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-valentino-beauty",
+      "display_name": "Valentino Beauty",
+      "pillar_key": "designer-luxury-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "experience-design",
+        "brand-positioning",
+        "transferable-excellence-atelier"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-narciso-rodriguez",
+      "display_name": "Narciso Rodriguez",
+      "pillar_key": "designer-luxury-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-guerlain",
+        "brand-jo-malone-london",
+        "brand-byredo",
+        "brand-le-labo",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "experience-design",
+        "brand-positioning",
+        "transferable-excellence-atelier"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-maison-francis-kurkdjian",
+      "display_name": "Maison Francis Kurkdjian",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-kilian-paris",
+      "display_name": "Kilian Paris",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-amouage",
+      "display_name": "Amouage",
+      "pillar_key": "arabian-fragrance-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-byredo",
+        "brand-le-labo",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "western-astrology",
+        "sidereal-astrology",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-creed",
+      "display_name": "Creed",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-parfums-de-marly",
+      "display_name": "Parfums de Marly",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-xerjoff",
+      "display_name": "Xerjoff",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-initio-parfums-prives",
+      "display_name": "Initio Parfums Privés",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-serge-lutens",
+      "display_name": "Serge Lutens",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-frederic-malle",
+      "display_name": "Éditions de Parfums Frédéric Malle",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-bdk-parfums",
+      "display_name": "BDK Parfums",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-essential-parfums",
+      "display_name": "Essential Parfums",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-juliette-has-a-gun",
+      "display_name": "Juliette Has a Gun",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-escentric-molecules",
+      "display_name": "Escentric Molecules",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-artisan-parfumeur",
+      "display_name": "L'Artisan Parfumeur",
+      "pillar_key": "luxury-brand-intelligence",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-acqua-di-parma",
+      "display_name": "Acqua di Parma",
+      "pillar_key": "heritage-sensory-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-tom-ford",
+        "brand-dior",
+        "brand-byredo",
+        "brand-le-labo",
+        "experience-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-penhaligons",
+      "display_name": "Penhaligon's",
+      "pillar_key": "luxury-brand-intelligence",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-floris-london",
+      "display_name": "Floris London",
+      "pillar_key": "heritage-sensory-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-tom-ford",
+        "brand-dior",
+        "brand-byredo",
+        "brand-le-labo",
+        "experience-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-aesop",
+      "display_name": "Aesop",
+      "pillar_key": "heritage-sensory-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-tom-ford",
+        "brand-dior",
+        "brand-byredo",
+        "brand-le-labo",
+        "experience-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-santa-maria-novella",
+      "display_name": "Santa Maria Novella",
+      "pillar_key": "heritage-sensory-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-tom-ford",
+        "brand-dior",
+        "brand-byredo",
+        "brand-le-labo",
+        "experience-design",
+        "olfactory-universe",
+        "proven-aroma-formulas"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-orto-parisi",
+      "display_name": "Orto Parisi",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-tiziana-terenzi",
+      "display_name": "Tiziana Terenzi",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-montale",
+      "display_name": "Montale",
+      "pillar_key": "arabian-fragrance-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-byredo",
+        "brand-le-labo",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "western-astrology",
+        "sidereal-astrology",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-mancera",
+      "display_name": "Mancera",
+      "pillar_key": "arabian-fragrance-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-byredo",
+        "brand-le-labo",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "western-astrology",
+        "sidereal-astrology",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-lattafa",
+      "display_name": "Lattafa",
+      "pillar_key": "arabian-fragrance-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-byredo",
+        "brand-le-labo",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "western-astrology",
+        "sidereal-astrology",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-swiss-arabian",
+      "display_name": "Swiss Arabian",
+      "pillar_key": "arabian-fragrance-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-byredo",
+        "brand-le-labo",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "western-astrology",
+        "sidereal-astrology",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-arabian-oud",
+      "display_name": "Arabian Oud",
+      "pillar_key": "arabian-fragrance-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-byredo",
+        "brand-le-labo",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "western-astrology",
+        "sidereal-astrology",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-ajmal",
+      "display_name": "Ajmal",
+      "pillar_key": "arabian-fragrance-houses",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-byredo",
+        "brand-le-labo",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "western-astrology",
+        "sidereal-astrology",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-maison-crivelli",
+      "display_name": "Maison Crivelli",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-nishane",
+      "display_name": "Nishane",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-goldfield-and-banks",
+      "display_name": "Goldfield & Banks",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-ds-and-durga",
+      "display_name": "D.S. & Durga",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-commodity",
+      "display_name": "Commodity",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-imaginary-authors",
+      "display_name": "Imaginary Authors",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-zoologist-perfumes",
+      "display_name": "Zoologist Perfumes",
+      "pillar_key": "independent-niche-perfumery",
+      "mission": "Estudar esta marca como território independente: catálogo, linhas, variantes/flankers, colecções, lançamentos, preços públicos, campanhas, códigos sensoriais, experiência e recepção. Extrair princípios transferíveis sem copiar identidade nem expressão.",
+      "focus": [
+        "todas as linhas e variantes públicas",
+        "novos lançamentos e evolução de catálogo",
+        "preços, campanhas e distribuição",
+        "princípios transferíveis para MAISON JF"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "maison-philosophy",
+        "visual-sensory-design",
+        "portugal-market-white-space",
+        "brand-amouage",
+        "brand-montale",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "brand-tom-ford",
+        "brand-dior",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "tarot-oracles",
+      "display_name": "Tarot & Oracles",
+      "pillar_key": "symbolic-systems-audience-entry",
+      "mission": "Descobrir formatos, perguntas, experiências e públicos ligados ao Tarot e a oráculos, distinguindo tradição, interpretação e entretenimento.",
+      "focus": [
+        "formatos de leitura",
+        "perguntas e temas",
+        "experiência de consulta",
+        "comunidades públicas"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "western-astrology",
+      "display_name": "Western Astrology",
+      "pillar_key": "symbolic-traditions",
+      "mission": "Investigar astrologia ocidental, linguagem, ciclos e formatos editoriais como possíveis portas de entrada para a Maison.",
+      "focus": [
+        "mapas e ciclos",
+        "conteúdos editoriais",
+        "perguntas recorrentes",
+        "ocasiões de procura"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "interactive-book-games",
+        "two-player-games",
+        "group-party-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "sidereal-astrology",
+      "display_name": "Sidereal Astrology",
+      "pillar_key": "symbolic-traditions",
+      "mission": "Explorar astrologia sideral, diferenças de enquadramento, vocabulário e públicos sem a confundir com outros sistemas.",
+      "focus": [
+        "zodíaco sideral",
+        "diferenças de sistemas",
+        "conteúdos e comunidades",
+        "contextualização cultural"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "interactive-book-games",
+        "two-player-games",
+        "group-party-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "vedic-astrology-jyotisha",
+      "display_name": "Vedic Astrology / Jyotisha",
+      "pillar_key": "symbolic-traditions",
+      "mission": "Investigar Jyotisha com respeito pelo seu contexto cultural, distinguindo fontes tradicionais, interpretação e alegações verificáveis.",
+      "focus": [
+        "fontes tradicionais",
+        "vocabulário e práticas",
+        "interesse do público",
+        "contexto cultural"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "interactive-book-games",
+        "two-player-games",
+        "group-party-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "chinese-metaphysics",
+      "display_name": "Chinese Metaphysics",
+      "pillar_key": "symbolic-traditions",
+      "mission": "Explorar tradições e sistemas simbólicos chineses relevantes, com rigor cultural e sem os reduzir a tendências superficiais.",
+      "focus": [
+        "calendários e símbolos",
+        "sistemas tradicionais",
+        "públicos e conteúdos",
+        "contexto histórico"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "interactive-book-games",
+        "two-player-games",
+        "group-party-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "vietnamese-zodiac-traditions",
+      "display_name": "Vietnamese Zodiac & Traditions",
+      "pillar_key": "symbolic-traditions",
+      "mission": "Pesquisar tradições zodiacais vietnamitas e as suas particularidades culturais antes de propor experiências ou conteúdos.",
+      "focus": [
+        "zodíaco vietnamita",
+        "diferenças regionais",
+        "fontes culturais",
+        "oportunidades editoriais"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "interactive-book-games",
+        "two-player-games",
+        "group-party-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "numerology",
+      "display_name": "Numerology",
+      "pillar_key": "symbolic-traditions",
+      "mission": "Investigar sistemas numerológicos, formatos de participação e procura pública sem os apresentar como instrumentos científicos de previsão.",
+      "focus": [
+        "sistemas numerológicos",
+        "conteúdos interactivos",
+        "perguntas do público",
+        "contextualização e limites"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "interactive-book-games",
+        "two-player-games",
+        "group-party-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "dreams-symbolism",
+      "display_name": "Dreams & Symbolism",
+      "pillar_key": "symbolic-traditions",
+      "mission": "Explorar sonhos e símbolos como temas culturais, narrativos e de reflexão, sem alegações diagnósticas.",
+      "focus": [
+        "símbolos recorrentes",
+        "narrativas",
+        "perguntas para reflexão",
+        "fontes culturais"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "interactive-book-games",
+        "two-player-games",
+        "group-party-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "archetypes-mythology",
+      "display_name": "Archetypes & Mythology",
+      "pillar_key": "symbolic-traditions",
+      "mission": "Investigar arquétipos, mitologias e narrativas que possam inspirar experiências originais e bem contextualizadas.",
+      "focus": [
+        "arquétipos",
+        "mitologias",
+        "estruturas narrativas",
+        "referências culturais"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "interactive-book-games",
+        "two-player-games",
+        "group-party-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "ethical-persuasion",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "seasonal-rituals",
+      "display_name": "Seasonal Rituals",
+      "pillar_key": "culture-seasonality-expansion",
+      "mission": "Descobrir rituais e conteúdos ligados às estações e a momentos do ano, respeitando contexto e diversidade cultural.",
+      "focus": [
+        "estações do ano",
+        "ciclos e ocasiões",
+        "rituais contemporâneos",
+        "conteúdos sazonais"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "western-astrology",
+        "sidereal-astrology",
+        "emotional-gifting",
+        "identity-self-expression",
+        "portugal-market-white-space"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "personal-reflection",
+      "display_name": "Personal Reflection",
+      "pillar_key": "reflection-tests",
+      "mission": "Desenvolver perguntas e experiências de reflexão pessoal que sejam claras, voluntárias e não clínicas.",
+      "focus": [
+        "perguntas de reflexão",
+        "clareza pessoal",
+        "experiências guiadas",
+        "linguagem acessível"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "connection-intimacy",
+        "quiet-social-experiences",
+        "western-astrology",
+        "sidereal-astrology",
+        "ethical-persuasion",
+        "two-player-games",
+        "group-party-games",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "personality-relationship-tests",
+      "display_name": "Personality & Relationship Tests",
+      "pillar_key": "reflection-tests",
+      "mission": "Investigar testes sobre atenção, apego, afeto e relações, diferenciando entretenimento de instrumentos psicométricos validados.",
+      "focus": [
+        "testes de entretenimento",
+        "atenção, apego e afeto",
+        "experiências partilhadas",
+        "limites de interpretação"
+      ],
+      "connections": [
+        "ebooks-themes",
+        "digital-game-concepts",
+        "human-needs-buying-motivations",
+        "creator-intelligence",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "connection-intimacy",
+        "quiet-social-experiences",
+        "western-astrology",
+        "sidereal-astrology",
+        "ethical-persuasion",
+        "two-player-games",
+        "group-party-games",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "ebooks-themes",
+      "display_name": "Ebook Themes",
+      "pillar_key": "ebooks-interactive-publishing",
+      "mission": "Descobrir temas para ebooks com sinais de interesse, utilidade concreta, diferenciação e potencial editorial.",
+      "focus": [
+        "problemas e perguntas reais",
+        "nichos editoriais",
+        "promessa e formato",
+        "procura e disposição para pagar"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "digital-game-concepts",
+        "reader-demand",
+        "story-worlds-spin-offs"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "interactive-fiction",
+      "display_name": "Interactive Fiction",
+      "pillar_key": "editorial-narrative-publishing",
+      "mission": "Explorar ficção interactiva com escolhas, consequências, caminhos alternativos e finais diferentes.",
+      "focus": [
+        "escolhas narrativas",
+        "consequências",
+        "ramificações",
+        "repetição e replay"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "digital-game-concepts",
+        "reader-demand",
+        "story-worlds-spin-offs",
+        "two-player-games",
+        "group-party-games",
+        "western-astrology",
+        "sidereal-astrology",
+        "retention-loyalty",
+        "book-game-communities",
+        "emotional-gifting",
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "interactive-book-games",
+      "display_name": "Interactive Book Games",
+      "pillar_key": "editorial-narrative-publishing",
+      "mission": "Desenvolver mecânicas para livros-jogo interactivos, incluindo regras, decisões, pistas, missões e progressão.",
+      "focus": [
+        "mecânicas de livro-jogo",
+        "decisões e consequências",
+        "pistas e missões",
+        "experiência de leitura"
+      ],
+      "connections": [
+        "digital-game-concepts",
+        "reader-demand",
+        "story-worlds-spin-offs",
+        "two-player-games",
+        "group-party-games",
+        "western-astrology",
+        "sidereal-astrology",
+        "retention-loyalty",
+        "book-game-communities",
+        "emotional-gifting",
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "editorial-series-development",
+      "display_name": "Editorial Series Development",
+      "pillar_key": "editorial-narrative-publishing",
+      "mission": "Descobrir e avaliar séries editoriais, universos narrativos e ciclos com espaço para evolução.",
+      "focus": [
+        "séries e colecções",
+        "coerência de universo",
+        "progressão entre volumes",
+        "potencial de continuidade"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "digital-game-concepts",
+        "reader-demand",
+        "story-worlds-spin-offs",
+        "two-player-games",
+        "group-party-games",
+        "western-astrology",
+        "sidereal-astrology",
+        "retention-loyalty",
+        "book-game-communities",
+        "emotional-gifting",
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "first-thirteen-book-cycle",
+      "display_name": "First Interactive Book Cycle — 12 + 1",
+      "pillar_key": "editorial-narrative-publishing",
+      "mission": "Apoiar a primeira série já definida: 12 livros e um 13.º volume para fechar o ciclo, sem misturar futuras séries com este plano.",
+      "focus": [
+        "continuidade dos 12 volumes",
+        "livro final de fecho",
+        "consistência interna",
+        "controlo de continuidade"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "digital-game-concepts",
+        "reader-demand",
+        "story-worlds-spin-offs",
+        "two-player-games",
+        "group-party-games",
+        "western-astrology",
+        "sidereal-astrology",
+        "retention-loyalty",
+        "book-game-communities",
+        "emotional-gifting",
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "future-book-universes",
+      "display_name": "Future Book Universes",
+      "pillar_key": "editorial-narrative-publishing",
+      "mission": "Descobrir temas e universos independentes para futuras séries de livros-jogo, sem depender do ciclo actual.",
+      "focus": [
+        "novas temáticas",
+        "universos e personagens",
+        "séries posteriores",
+        "diferenciação editorial"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "digital-game-concepts",
+        "reader-demand",
+        "story-worlds-spin-offs",
+        "two-player-games",
+        "group-party-games",
+        "western-astrology",
+        "sidereal-astrology",
+        "retention-loyalty",
+        "book-game-communities",
+        "emotional-gifting",
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "interactive-narrative-mechanics",
+      "display_name": "Interactive Narrative Mechanics",
+      "pillar_key": "editorial-narrative-publishing",
+      "mission": "Pesquisar mecanismos de participação, enigmas, decisões, inventários, pistas, estados e desfechos.",
+      "focus": [
+        "mecânicas narrativas",
+        "puzzles e pistas",
+        "decisões significativas",
+        "complexidade e acessibilidade"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "digital-game-concepts",
+        "reader-demand",
+        "story-worlds-spin-offs",
+        "two-player-games",
+        "group-party-games",
+        "western-astrology",
+        "sidereal-astrology",
+        "retention-loyalty",
+        "book-game-communities",
+        "emotional-gifting",
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "reader-demand",
+      "display_name": "Reader Demand",
+      "pillar_key": "editorial-narrative-publishing",
+      "mission": "Investigar procura pública, avaliações, recomendações, formatos de leitura e necessidades editoriais.",
+      "focus": [
+        "perguntas de leitores",
+        "géneros e subgéneros",
+        "avaliações públicas",
+        "barreiras à compra"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "digital-game-concepts",
+        "story-worlds-spin-offs",
+        "two-player-games",
+        "group-party-games",
+        "western-astrology",
+        "sidereal-astrology",
+        "retention-loyalty",
+        "book-game-communities",
+        "emotional-gifting",
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "book-packaging-positioning",
+      "display_name": "Book Packaging & Positioning",
+      "pillar_key": "editorial-narrative-publishing",
+      "mission": "Estudar títulos, capas, descrição, amostras, formatos, preço e apresentação comercial de livros.",
+      "focus": [
+        "títulos e capas",
+        "descrições e amostras",
+        "formato e preço",
+        "página de venda"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "digital-game-concepts",
+        "reader-demand",
+        "story-worlds-spin-offs",
+        "two-player-games",
+        "group-party-games",
+        "western-astrology",
+        "sidereal-astrology",
+        "retention-loyalty",
+        "book-game-communities",
+        "emotional-gifting",
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "publishing-opportunities",
+      "display_name": "Publishing Opportunities",
+      "pillar_key": "editorial-narrative-publishing",
+      "mission": "Avaliar formatos, canais, colecções e oportunidades de publicação viáveis para a Maison.",
+      "focus": [
+        "ebooks e formatos digitais",
+        "colecções",
+        "canais de publicação",
+        "custos e margens"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "digital-game-concepts",
+        "reader-demand",
+        "story-worlds-spin-offs",
+        "two-player-games",
+        "group-party-games",
+        "western-astrology",
+        "sidereal-astrology",
+        "retention-loyalty",
+        "book-game-communities",
+        "emotional-gifting",
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "story-worlds-spin-offs",
+      "display_name": "Story Worlds & Spin-offs",
+      "pillar_key": "editorial-narrative-publishing",
+      "mission": "Descobrir quando uma ideia pode crescer de um livro para um universo editorial ou experiência interactiva mais ampla.",
+      "focus": [
+        "spin-offs e expansões",
+        "universos partilhados",
+        "livro para jogo",
+        "coerência entre formatos"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "digital-game-concepts",
+        "reader-demand",
+        "two-player-games",
+        "group-party-games",
+        "western-astrology",
+        "sidereal-astrology",
+        "retention-loyalty",
+        "book-game-communities",
+        "emotional-gifting",
+        "identity-self-expression",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "digital-game-concepts",
+      "display_name": "Digital Game Concepts",
+      "pillar_key": "digital-games-experiences",
+      "mission": "Descobrir conceitos de jogos digitais independentes e necessidades de utilização ainda não respondidas.",
+      "focus": [
+        "novos conceitos",
+        "público e ocasião",
+        "mecânicas centrais",
+        "validação de interesse"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "human-needs-buying-motivations",
+        "copywriting-conversion",
+        "story-worlds-spin-offs"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "two-player-games",
+      "display_name": "Two-Player Games",
+      "pillar_key": "game-design-social-play",
+      "mission": "Explorar jogos digitais para duas pessoas em diferentes contextos, com variedade entre intimidade, humor e descoberta.",
+      "focus": [
+        "jogos a dois",
+        "perguntas e desafios",
+        "dinâmicas de relação",
+        "repetição e partilha"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "human-needs-buying-motivations",
+        "copywriting-conversion",
+        "story-worlds-spin-offs",
+        "connection-intimacy",
+        "quiet-social-experiences",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "replayability-expansions",
+        "game-monetisation",
+        "retention-loyalty",
+        "book-game-communities"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "group-party-games",
+      "display_name": "Group & Party Games",
+      "pillar_key": "game-design-social-play",
+      "mission": "Criar hipóteses para jogos de grupo, festas, convívios e quebra-gelos, incluindo experiências rápidas e escaláveis.",
+      "focus": [
+        "jogos de grupo",
+        "festas e convívios",
+        "quebra-gelos",
+        "regras simples"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "human-needs-buying-motivations",
+        "copywriting-conversion",
+        "story-worlds-spin-offs",
+        "connection-intimacy",
+        "quiet-social-experiences",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "replayability-expansions",
+        "game-monetisation",
+        "retention-loyalty",
+        "book-game-communities"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "couples-connection-games",
+      "display_name": "Couples & Connection Games",
+      "pillar_key": "game-design-social-play",
+      "mission": "Investigar jogos para comunicação, cumplicidade e descoberta entre parceiros, sem pressupor um único modelo de relação.",
+      "focus": [
+        "comunicação",
+        "intimidade e cumplicidade",
+        "humor e vulnerabilidade",
+        "limites e consentimento"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "human-needs-buying-motivations",
+        "copywriting-conversion",
+        "story-worlds-spin-offs",
+        "connection-intimacy",
+        "quiet-social-experiences",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "replayability-expansions",
+        "game-monetisation",
+        "retention-loyalty",
+        "book-game-communities"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "social-discovery-games",
+      "display_name": "Social Discovery Games",
+      "pillar_key": "game-design-social-play",
+      "mission": "Descobrir jogos que ajudem amigos ou desconhecidos a conhecer-se de formas interessantes e voluntárias.",
+      "focus": [
+        "conhecer pessoas",
+        "perguntas progressivas",
+        "icebreakers",
+        "contexto de utilização"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "human-needs-buying-motivations",
+        "copywriting-conversion",
+        "story-worlds-spin-offs",
+        "connection-intimacy",
+        "quiet-social-experiences",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "replayability-expansions",
+        "game-monetisation",
+        "retention-loyalty",
+        "book-game-communities"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "mystery-investigation-games",
+      "display_name": "Mystery & Investigation Games",
+      "pillar_key": "game-design-social-play",
+      "mission": "Explorar jogos digitais de mistério, investigação, dedução, pistas e resolução de problemas.",
+      "focus": [
+        "mistério e investigação",
+        "pistas",
+        "dedução",
+        "estruturas de jogo"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "human-needs-buying-motivations",
+        "copywriting-conversion",
+        "story-worlds-spin-offs",
+        "connection-intimacy",
+        "quiet-social-experiences",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "replayability-expansions",
+        "game-monetisation",
+        "retention-loyalty",
+        "book-game-communities"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "choice-based-games",
+      "display_name": "Choice-Based Games",
+      "pillar_key": "game-design-social-play",
+      "mission": "Pesquisar jogos em que as escolhas alteram a experiência, a narrativa ou os resultados.",
+      "focus": [
+        "escolhas e consequências",
+        "finais alternativos",
+        "ramificação",
+        "agência do jogador"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "human-needs-buying-motivations",
+        "copywriting-conversion",
+        "story-worlds-spin-offs",
+        "connection-intimacy",
+        "quiet-social-experiences",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "interactive-fiction",
+        "replayability-expansions",
+        "game-monetisation",
+        "retention-loyalty",
+        "book-game-communities"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "replayability-expansions",
+      "display_name": "Replayability & Expansions",
+      "pillar_key": "game-growth-economics",
+      "mission": "Encontrar formas de renovar jogos existentes sem produzir variações superficiais ou conteúdo repetido.",
+      "focus": [
+        "repetibilidade",
+        "novas regras",
+        "expansões",
+        "conteúdo temático"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "human-needs-buying-motivations",
+        "copywriting-conversion",
+        "story-worlds-spin-offs",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "interactive-fiction",
+        "customer-journey",
+        "retention-loyalty",
+        "book-game-communities"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "game-monetisation",
+      "display_name": "Game Monetisation",
+      "pillar_key": "game-growth-economics",
+      "mission": "Avaliar modelos comerciais de jogos, preço, versões, expansões e conjuntos segundo valor real e viabilidade.",
+      "focus": [
+        "preço e modelos",
+        "versões e expansões",
+        "pacotes",
+        "margem e conversão"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "human-needs-buying-motivations",
+        "copywriting-conversion",
+        "story-worlds-spin-offs",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "interactive-fiction",
+        "customer-journey",
+        "retention-loyalty",
+        "book-game-communities"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "game-book-ecosystems",
+      "display_name": "Game-to-Book Ecosystems",
+      "pillar_key": "game-growth-economics",
+      "mission": "Encontrar ligações com sentido entre jogos digitais, livros-jogo, testes, Oráculo e universos narrativos.",
+      "focus": [
+        "livro e jogo",
+        "experiências cruzadas",
+        "universos narrativos",
+        "continuidade entre produtos"
+      ],
+      "connections": [
+        "interactive-book-games",
+        "human-needs-buying-motivations",
+        "copywriting-conversion",
+        "story-worlds-spin-offs",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "interactive-fiction",
+        "customer-journey",
+        "retention-loyalty",
+        "book-game-communities"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "human-needs-buying-motivations",
+      "display_name": "Human Needs & Buying Motivations",
+      "pillar_key": "human-needs-buying-motives",
+      "mission": "Investigar o resultado que as pessoas procuram obter quando compram um produto ou procuram uma experiência.",
+      "focus": [
+        "necessidade por trás da compra",
+        "ocasiões e contexto",
+        "critérios de escolha",
+        "evidência de comportamento"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "calm-unwinding",
+      "display_name": "Calm & Unwinding",
+      "pillar_key": "wellbeing-human-needs",
+      "mission": "Investigar como as pessoas procuram desacelerar, fazer uma pausa e reduzir a sensação de sobrecarga, sem promessas clínicas.",
+      "focus": [
+        "desacelerar",
+        "pausas",
+        "rituais simples",
+        "experiências sensoriais"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "massage-body-rituals",
+        "scent-layering",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "emotional-gifting",
+        "identity-self-expression",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "homecoming-comfort",
+      "display_name": "Homecoming & Comfort",
+      "pillar_key": "wellbeing-human-needs",
+      "mission": "Explorar o desejo de gostar de regressar a casa e sentir o espaço como próprio, confortável e acolhedor.",
+      "focus": [
+        "regresso a casa",
+        "conforto e pertença",
+        "atmosfera do espaço",
+        "rituais de transição"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "massage-body-rituals",
+        "scent-layering",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "emotional-gifting",
+        "identity-self-expression",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "sleep-evening-rituals",
+      "display_name": "Sleep & Evening Rituals",
+      "pillar_key": "wellbeing-human-needs",
+      "mission": "Investigar rotinas e ambientes de fim de dia sem prometer tratar insónia ou condições médicas.",
+      "focus": [
+        "rotinas de noite",
+        "ambiente do quarto",
+        "desligar do trabalho",
+        "fricções e hábitos"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "massage-body-rituals",
+        "scent-layering",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "emotional-gifting",
+        "identity-self-expression",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "emotional-gifting",
+      "display_name": "Emotional Gifting",
+      "pillar_key": "customer-motivations-gifting",
+      "mission": "Perceber como as pessoas escolhem presentes para demonstrar cuidado, proximidade, gratidão ou reconhecimento.",
+      "focus": [
+        "presente com significado",
+        "ansiedade de escolha",
+        "ocasiões de oferta",
+        "conjuntos e personalização"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "experience-design",
+        "visual-sensory-design",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "customer-journey"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "identity-self-expression",
+      "display_name": "Identity & Self-Expression",
+      "pillar_key": "customer-motivations-gifting",
+      "mission": "Investigar como produtos e experiências ajudam as pessoas a expressar gosto, identidade e pertença.",
+      "focus": [
+        "identidade e expressão",
+        "estética pessoal",
+        "autoimagem",
+        "escolha simbólica"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "experience-design",
+        "visual-sensory-design",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "customer-journey"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "sensory-pleasure",
+      "display_name": "Sensory Pleasure",
+      "pillar_key": "wellbeing-human-needs",
+      "mission": "Estudar a procura de aromas, texturas, atmosferas e experiências sensoriais agradáveis.",
+      "focus": [
+        "prazer sensorial",
+        "aromas e texturas",
+        "ambiente",
+        "combinações sensoriais"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "massage-body-rituals",
+        "scent-layering",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "emotional-gifting",
+        "identity-self-expression",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "connection-intimacy",
+      "display_name": "Connection & Intimacy",
+      "pillar_key": "relationships-social-connection",
+      "mission": "Investigar necessidades de proximidade, compreensão e experiências partilhadas em diferentes relações.",
+      "focus": [
+        "proximidade",
+        "conversa e escuta",
+        "experiências partilhadas",
+        "limites e respeito"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "two-player-games",
+        "group-party-games",
+        "retention-loyalty",
+        "book-game-communities",
+        "founder-personal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "discovery-novelty",
+      "display_name": "Discovery & Novelty",
+      "pillar_key": "customer-motivations-gifting",
+      "mission": "Descobrir porque as pessoas procuram novidade, surpresa, exploração e experiências diferentes.",
+      "focus": [
+        "novidade",
+        "curiosidade",
+        "descoberta",
+        "colecções e experiências"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "experience-design",
+        "visual-sensory-design",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "customer-journey"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "affordable-luxury",
+      "display_name": "Affordable Luxury",
+      "pillar_key": "customer-motivations-gifting",
+      "mission": "Investigar a procura de qualidade, atenção e sensação de luxo a preços compatíveis com diferentes orçamentos.",
+      "focus": [
+        "luxo acessível",
+        "valor percebido",
+        "formatos pequenos",
+        "qualidade e preço"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "experience-design",
+        "visual-sensory-design",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "customer-journey"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "ritual-meaning",
+      "display_name": "Ritual & Meaning",
+      "pillar_key": "wellbeing-human-needs",
+      "mission": "Explorar como objectos e práticas podem marcar momentos e dar significado à rotina.",
+      "focus": [
+        "marcadores de transição",
+        "rituais pessoais",
+        "significado",
+        "objectos e momentos"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "massage-body-rituals",
+        "scent-layering",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "emotional-gifting",
+        "identity-self-expression",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "home-atmosphere",
+      "display_name": "Home Atmosphere",
+      "pillar_key": "wellbeing-human-needs",
+      "mission": "Investigar o que leva as pessoas a alterar a atmosfera de uma casa e como descrevem o resultado pretendido.",
+      "focus": [
+        "ambiente da casa",
+        "divisões e ocasiões",
+        "preferências sensoriais",
+        "produtos e decoração"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "massage-body-rituals",
+        "scent-layering",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "emotional-gifting",
+        "identity-self-expression",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "collecting-personal-curation",
+      "display_name": "Collecting & Personal Curation",
+      "pillar_key": "customer-motivations-gifting",
+      "mission": "Explorar pessoas que gostam de descobrir, comparar, combinar e coleccionar objectos ou experiências.",
+      "focus": [
+        "colecções",
+        "curadoria pessoal",
+        "edições e conjuntos",
+        "descoberta progressiva"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "experience-design",
+        "visual-sensory-design",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "customer-journey"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "stress-overload-digital-fatigue",
+      "display_name": "Stress, Overload & Digital Fatigue",
+      "pillar_key": "wellbeing-human-needs",
+      "mission": "Investigar procura por pausas, simplicidade e experiências menos dependentes do ecrã sem diagnosticar pessoas.",
+      "focus": [
+        "sobrecarga",
+        "fadiga digital",
+        "simplicidade",
+        "pausas offline"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "massage-body-rituals",
+        "scent-layering",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "emotional-gifting",
+        "identity-self-expression",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "personal-rewards",
+      "display_name": "Personal Rewards",
+      "pillar_key": "customer-motivations-gifting",
+      "mission": "Investigar compras e rituais de recompensa associados a conquistas, pequenos progressos ou necessidade de cuidado.",
+      "focus": [
+        "pequenas recompensas",
+        "conquistas",
+        "auto-oferta",
+        "ocasiões de compra"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "experience-design",
+        "visual-sensory-design",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "customer-journey"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "quiet-social-experiences",
+      "display_name": "Quiet Social Experiences",
+      "pillar_key": "relationships-social-connection",
+      "mission": "Descobrir actividades partilhadas que não exigem grandes eventos, energia elevada ou produção complexa.",
+      "focus": [
+        "convivência tranquila",
+        "jogos leves",
+        "rituais partilhados",
+        "momentos em casa"
+      ],
+      "connections": [
+        "fragrance-formulation-lab",
+        "digital-game-concepts",
+        "customer-search-language",
+        "copywriting-conversion",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "two-player-games",
+        "group-party-games",
+        "retention-loyalty",
+        "book-game-communities",
+        "founder-personal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "maison-philosophy",
+      "display_name": "Maison JF Philosophy",
+      "pillar_key": "maison-philosophy-conversion",
+      "mission": "Evoluir os princípios da Maison JF com coerência, aprendizagem e uma linguagem cada vez mais clara e própria.",
+      "focus": [
+        "filosofia e princípios",
+        "identidade e coerência",
+        "aprendizagem acumulada",
+        "distinção de marca"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-positioning",
+      "display_name": "Brand Positioning",
+      "pillar_key": "maison-identity-positioning",
+      "mission": "Clarificar o que a Maison representa, para quem é relevante e por que deve ser escolhida.",
+      "focus": [
+        "diferenciação",
+        "públicos e ocasiões",
+        "proposta de valor",
+        "alternativas reais"
+      ],
+      "connections": [
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "copywriting-conversion",
+        "customer-journey",
+        "brand-tom-ford",
+        "brand-dior",
+        "experiments-conversion-learning"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "copywriting-conversion",
+      "display_name": "Copywriting & Conversion",
+      "pillar_key": "conversion-growth-experiments",
+      "mission": "Melhorar títulos, páginas, descrições, chamadas à acção e propostas de valor através de hipóteses testáveis.",
+      "focus": [
+        "clareza de mensagem",
+        "páginas de produto",
+        "CTAs",
+        "testes de conversão"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "experiments-conversion-learning",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "emotional-gifting",
+        "identity-self-expression",
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "offer-architecture",
+      "display_name": "Offer Architecture",
+      "pillar_key": "bundles-revenue-ecosystems",
+      "mission": "Estruturar ofertas, conjuntos, complementos e caminhos de compra sem inflacionar artificialmente o valor.",
+      "focus": [
+        "ofertas e bundles",
+        "componentes reais",
+        "objeções",
+        "valor percebido"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "procurement-economics",
+        "pricing-value",
+        "emotional-gifting",
+        "identity-self-expression",
+        "copywriting-conversion",
+        "customer-journey",
+        "replayability-expansions",
+        "game-monetisation"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "pricing-value",
+      "display_name": "Pricing & Value",
+      "pillar_key": "procurement-economics",
+      "mission": "Analisar preço, margem, valor percebido, custos e acessibilidade antes de propor alterações.",
+      "focus": [
+        "preço e margem",
+        "custos reais",
+        "valor percebido",
+        "testes de preço"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "waxes-candle-materials",
+        "fragrance-suppliers",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "emotional-gifting",
+        "identity-self-expression",
+        "production-equipment"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "customer-journey",
+      "display_name": "Customer Journey",
+      "pillar_key": "conversion-growth-experiments",
+      "mission": "Identificar fricções entre descoberta, compreensão, compra, utilização, recomendação e recompra.",
+      "focus": [
+        "descoberta",
+        "navegação e confiança",
+        "checkout",
+        "recompra"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "experiments-conversion-learning",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "emotional-gifting",
+        "identity-self-expression",
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "mobile-commerce",
+      "display_name": "Mobile Commerce",
+      "pillar_key": "conversion-growth-experiments",
+      "mission": "Simplificar a experiência móvel da Maison, melhorando hierarquia, leitura, navegação e decisões de compra.",
+      "focus": [
+        "usabilidade móvel",
+        "hierarquia visual",
+        "desempenho",
+        "fricção de checkout"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "experiments-conversion-learning",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "emotional-gifting",
+        "identity-self-expression",
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "brand-voice-feral-frontality",
+      "display_name": "Yoichi Feral — frontalidade sem pedir autorização",
+      "pillar_key": "storytelling-brand-voice",
+      "mission": "Estudar a energia de frontalidade, irreverência, coragem verbal e ausência de necessidade de agradar; criar uma expressão Maison original, sem copiar diálogos ou cenas.",
+      "focus": [
+        "dizer o que é incómodo com intenção",
+        "humor e confronto",
+        "voz sem desculpas por existir",
+        "diferença entre pancada verbal e agressão vazia"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "transferable-excellence-atelier",
+        "interactive-fiction",
+        "interactive-book-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "experience-design",
+        "visual-sensory-design",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "storytelling",
+      "display_name": "Storytelling",
+      "pillar_key": "storytelling-brand-voice",
+      "mission": "Encontrar formas narrativas próprias para explicar produtos, colecções e ideias com clareza e significado.",
+      "focus": [
+        "narrativa de produto",
+        "estrutura e ritmo",
+        "origem e intenção",
+        "coerência da marca"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "transferable-excellence-atelier",
+        "interactive-fiction",
+        "interactive-book-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "experience-design",
+        "visual-sensory-design",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "retention-loyalty",
+      "display_name": "Retention & Loyalty",
+      "pillar_key": "community-audience-development",
+      "mission": "Descobrir motivos para as pessoas regressarem, recomendarem e voltarem a comprar.",
+      "focus": [
+        "recompra",
+        "pós-venda",
+        "comunidade",
+        "continuidade de experiência"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "connection-intimacy",
+        "quiet-social-experiences",
+        "two-player-games",
+        "group-party-games",
+        "interactive-fiction",
+        "interactive-book-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "experiments-conversion-learning",
+      "display_name": "Experiments & Conversion Learning",
+      "pillar_key": "research-evidence-analytics",
+      "mission": "Registar hipóteses, experiências comerciais e resultados para substituir intuição não testada por aprendizagem.",
+      "focus": [
+        "hipóteses testáveis",
+        "métricas e comparação",
+        "resultados negativos",
+        "aprendizagem reutilizável"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "copywriting-conversion",
+        "customer-journey",
+        "product-quality-customer-feedback",
+        "product-safety-regulatory",
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "psychology-decision",
+      "display_name": "Psychology of Decision",
+      "pillar_key": "customer-motivations-gifting",
+      "mission": "Estudar mecanismos de decisão com investigação e limites claros, sem os tratar como truques universais.",
+      "focus": [
+        "atenção e decisão",
+        "aversão à perda",
+        "prova e confiança",
+        "contra-evidência"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "calm-unwinding",
+        "homecoming-comfort",
+        "experience-design",
+        "visual-sensory-design",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "copywriting-conversion",
+        "customer-journey"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "choice-architecture",
+      "display_name": "Choice Architecture",
+      "pillar_key": "conversion-growth-experiments",
+      "mission": "Simplificar escolhas e orientar navegação sem ocultar alternativas, custos ou condições relevantes.",
+      "focus": [
+        "excesso de escolha",
+        "ordenação",
+        "clareza de opções",
+        "design ético"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "experiments-conversion-learning",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "emotional-gifting",
+        "identity-self-expression",
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "customer-research",
+      "display_name": "Customer Research",
+      "pillar_key": "research-evidence-analytics",
+      "mission": "Transformar linguagem pública e feedback real em conhecimento sobre necessidades, obstáculos e compreensão.",
+      "focus": [
+        "perguntas de clientes",
+        "feedback",
+        "entrevistas autorizadas",
+        "padrões sem PII"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "failed-ideas-negative-results",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "copywriting-conversion",
+        "customer-journey",
+        "product-quality-customer-feedback",
+        "product-safety-regulatory",
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "geo-synthetic-search-visibility",
+      "display_name": "GEO & Synthetic Search Visibility",
+      "pillar_key": "search-visibility-authority",
+      "mission": "Investigar como a Maison JF, as três portas Volta Para Casa, os livros-jogo e as consultas são descobertos em pesquisa tradicional e em sistemas de resposta por IA; traduzir evidência de pesquisa, desempenho e perguntas reais em melhorias claras e verificáveis.",
+      "focus": [
+        "SEO técnico: rastreio, indexação, URLs canónicas, títulos e ligações internas",
+        "GEO e pesquisa sintética: prompts de referência, citações, menções e proveniência",
+        "Dados estruturados Schema.org alinhados com conteúdo visível e verdadeiro",
+        "Intenção de pesquisa e palavras-chave de cauda longa em português europeu",
+        "E-E-A-T: autoria, experiência demonstrável, fontes e confiança",
+        "Medição de impressões, cliques, conversões e referências de pesquisa",
+        "Conteúdo citável e útil sobre Atenção, Apego, Afecto, livros-jogo e Tarot"
+      ],
+      "connections": [
+        "customer-search-language",
+        "copywriting-conversion",
+        "experiments-conversion-learning",
+        "brand-positioning",
+        "storytelling",
+        "reader-demand",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "tarot-oracles",
+        "archetypes-mythology",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "experience-design",
+      "display_name": "Experience Design",
+      "pillar_key": "visual-sensory-design",
+      "mission": "Melhorar a experiência completa entre descoberta, narrativa, compra, uso e memória do produto.",
+      "focus": [
+        "experiência digital e física",
+        "momentos de utilização",
+        "coerência sensorial",
+        "fricção"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "brand-tom-ford",
+        "brand-dior",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "sustainability-circular-design"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "ethical-persuasion",
+      "display_name": "Ethical Persuasion",
+      "pillar_key": "ethics-trust-human-impact",
+      "mission": "Melhorar a persuasão sem falsas provas, pressão manipuladora, promessas infundadas ou ocultação de limites.",
+      "focus": [
+        "transparência",
+        "promessas verificáveis",
+        "redução de fricção",
+        "respeito pela escolha"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "product-quality-customer-feedback",
+        "product-safety-regulatory",
+        "personal-reflection",
+        "personality-relationship-tests",
+        "western-astrology",
+        "sidereal-astrology",
+        "founder-personal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "transferable-excellence-atelier",
+      "display_name": "Atelier of Transferable Excellence",
+      "pillar_key": "maison-identity-positioning",
+      "mission": "Estudar mecanismos documentados de excelência em marcas, cultura, psicologia, design e entretenimento para os adaptar de forma original.",
+      "focus": [
+        "Barnum/Forer com contexto crítico",
+        "Hormozi e arquitectura de ofertas",
+        "Apple e experiência",
+        "KISS e simplicidade"
+      ],
+      "connections": [
+        "brand-positioning",
+        "human-needs-buying-motivations",
+        "customer-research",
+        "failed-ideas-negative-results",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "copywriting-conversion",
+        "customer-journey",
+        "brand-tom-ford",
+        "brand-dior",
+        "experiments-conversion-learning"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "creator-intelligence",
+      "display_name": "Creator Intelligence",
+      "pillar_key": "creators-partnerships-distribution",
+      "mission": "Descobrir criadores relevantes através de adequação temática, qualidade de comunidade, consistência e potencial comercial.",
+      "focus": [
+        "criadores e comunidades",
+        "qualidade de conteúdo",
+        "envolvimento genuíno",
+        "adequação à Maison"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "community-building",
+        "retail-distribution"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "fragrance-creators",
+      "display_name": "Fragrance Creators",
+      "pillar_key": "creator-influence-intelligence",
+      "mission": "Encontrar criadores de conteúdo de perfumaria, velas, aromas, design sensorial e experiências de produto.",
+      "focus": [
+        "perfumaria e aromas",
+        "velas e casa",
+        "comentários de produto",
+        "audiência e adequação"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "creator-intelligence",
+        "community-building",
+        "retail-distribution",
+        "retention-loyalty",
+        "book-game-communities",
+        "collaboration-opportunities",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "brand-voice-feral-frontality",
+        "storytelling"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "tarot-astrology-creators",
+      "display_name": "Tarot & Astrology Creators",
+      "pillar_key": "creator-influence-intelligence",
+      "mission": "Encontrar criadores relevantes em Tarot, astrologia, numerologia e sistemas simbólicos com avaliação de contexto e público.",
+      "focus": [
+        "Tarot e oráculos",
+        "astrologia e numerologia",
+        "qualidade da comunidade",
+        "parcerias possíveis"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "creator-intelligence",
+        "community-building",
+        "retail-distribution",
+        "retention-loyalty",
+        "book-game-communities",
+        "collaboration-opportunities",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "brand-voice-feral-frontality",
+        "storytelling"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "book-game-communities",
+      "display_name": "Book & Game Communities",
+      "pillar_key": "community-audience-development",
+      "mission": "Descobrir comunidades públicas de leitores, jogos narrativos, livros-jogo e experiências digitais.",
+      "focus": [
+        "comunidades de leitura",
+        "jogos narrativos",
+        "livros interactivos",
+        "feedback público"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "creator-intelligence",
+        "community-building",
+        "retail-distribution",
+        "connection-intimacy",
+        "quiet-social-experiences",
+        "two-player-games",
+        "group-party-games",
+        "interactive-fiction",
+        "interactive-book-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "portuguese-micro-influence",
+      "display_name": "Portuguese Micro-Influence",
+      "pillar_key": "creator-influence-intelligence",
+      "mission": "Encontrar criadores portugueses de menor dimensão cuja comunidade e conteúdo tenham verdadeira afinidade com a Maison.",
+      "focus": [
+        "criadores em Portugal",
+        "relevância local",
+        "envolvimento genuíno",
+        "custo e viabilidade"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "creator-intelligence",
+        "community-building",
+        "retail-distribution",
+        "retention-loyalty",
+        "book-game-communities",
+        "collaboration-opportunities",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "brand-voice-feral-frontality",
+        "storytelling"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "collaboration-opportunities",
+      "display_name": "Collaboration Opportunities",
+      "pillar_key": "partnerships-distribution-retail",
+      "mission": "Descobrir parcerias com artistas, ilustradores, artesãos, perfumistas, autores e marcas complementares.",
+      "focus": [
+        "colaborações criativas",
+        "artistas e artesãos",
+        "co-criação",
+        "adequação e termos"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "creator-intelligence",
+        "community-building",
+        "retail-distribution",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "production-equipment",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "retail-distribution",
+      "display_name": "Retail & Distribution",
+      "pillar_key": "partnerships-distribution-retail",
+      "mission": "Identificar lojas independentes, concept stores e espaços de venda adequados à escala e identidade da Maison.",
+      "focus": [
+        "lojas independentes",
+        "concept stores",
+        "margens e consignação",
+        "apresentação de produto"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "creator-intelligence",
+        "community-building",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "production-equipment",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "hospitality-experiences",
+      "display_name": "Hospitality & Experiences",
+      "pillar_key": "partnerships-distribution-retail",
+      "mission": "Investigar oportunidades com alojamentos, hotéis boutique, spas e espaços onde produtos ou experiências sensoriais possam ter valor.",
+      "focus": [
+        "hospitalidade",
+        "ofertas B2B",
+        "rituais e amenities",
+        "capacidade de fornecimento"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "creator-intelligence",
+        "community-building",
+        "retail-distribution",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "offer-architecture",
+        "bundles-product-ecosystems",
+        "production-equipment",
+        "maison-internal-growth"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "community-building",
+      "display_name": "Community Building",
+      "pillar_key": "community-audience-development",
+      "mission": "Descobrir formas de criar uma comunidade que acompanha a Maison, participa e recomenda de forma voluntária.",
+      "focus": [
+        "participação",
+        "conteúdo recorrente",
+        "recomendação",
+        "rituais de comunidade"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "creator-intelligence",
+        "retail-distribution",
+        "connection-intimacy",
+        "quiet-social-experiences",
+        "two-player-games",
+        "group-party-games",
+        "interactive-fiction",
+        "interactive-book-games",
+        "fragrance-creators",
+        "tarot-astrology-creators",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "global-luxury-design",
+      "display_name": "Global Luxury & Design",
+      "pillar_key": "luxury-brand-intelligence",
+      "mission": "Estudar marcas e projectos de luxo, moda, beleza, design, arte e hospitalidade por mecanismos transferíveis.",
+      "focus": [
+        "moda e beleza",
+        "design e arte",
+        "experiência de luxo",
+        "princípios não copiáveis"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "creator-intelligence",
+        "community-building",
+        "retail-distribution"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "portuguese-culture-sensory-identity",
+      "display_name": "Portuguese Culture & Sensory Identity",
+      "pillar_key": "culture-seasonality-expansion",
+      "mission": "Investigar referências culturais, paisagens, memórias, materiais e expressões portuguesas para criações originais.",
+      "focus": [
+        "memória olfativa portuguesa",
+        "lugares e paisagens",
+        "artesanato e materiais",
+        "referências culturais verificadas"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "product-safety-regulatory",
+        "failed-ideas-negative-results",
+        "unexplored-territories",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "western-astrology",
+        "sidereal-astrology",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "seasonal-gifting-opportunities",
+      "display_name": "Seasonal & Gifting Opportunities",
+      "pillar_key": "culture-seasonality-expansion",
+      "mission": "Descobrir ocasiões sazonais e momentos de compra que possam gerar colecções, conjuntos e campanhas viáveis.",
+      "focus": [
+        "estações e datas",
+        "presentes",
+        "ocasiões menos óbvias",
+        "planeamento de catálogo"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "product-safety-regulatory",
+        "failed-ideas-negative-results",
+        "unexplored-territories",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "western-astrology",
+        "sidereal-astrology",
+        "emotional-gifting",
+        "identity-self-expression"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "sustainability-circular-design",
+      "display_name": "Sustainability & Circular Design",
+      "pillar_key": "sustainability-circular-design",
+      "mission": "Explorar materiais, recargas, reutilização e redução de desperdício com alegações ambientais verificáveis.",
+      "focus": [
+        "recargas e reutilização",
+        "embalagem",
+        "desperdício de produção",
+        "provas de alegações ambientais"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "product-safety-regulatory",
+        "failed-ideas-negative-results",
+        "unexplored-territories",
+        "waxes-candle-materials",
+        "fragrance-suppliers",
+        "experience-design",
+        "visual-sensory-design",
+        "production-equipment"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "product-quality-customer-feedback",
+      "display_name": "Product Quality & Customer Feedback",
+      "pillar_key": "product-quality-safety-regulatory",
+      "mission": "Aprender com avaliações e feedback para melhorar produto, embalagem, instruções e pós-venda.",
+      "focus": [
+        "avaliações públicas",
+        "reclamações e elogios",
+        "qualidade e uso",
+        "acções correctivas"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "product-safety-regulatory",
+        "failed-ideas-negative-results",
+        "unexplored-territories",
+        "waxes-candle-materials",
+        "fragrance-suppliers",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "ethical-persuasion",
+        "experiments-conversion-learning",
+        "customer-research"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "bundles-product-ecosystems",
+      "display_name": "Bundles & Product Ecosystems",
+      "pillar_key": "bundles-revenue-ecosystems",
+      "mission": "Encontrar combinações coerentes entre velas, névoas, óleos, livros, jogos, testes e experiências, olhando a margem real.",
+      "focus": [
+        "conjuntos de produtos",
+        "ponte físico-digital",
+        "complementaridade",
+        "margem e experiência"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "product-safety-regulatory",
+        "failed-ideas-negative-results",
+        "unexplored-territories",
+        "procurement-economics",
+        "pricing-value",
+        "emotional-gifting",
+        "identity-self-expression",
+        "copywriting-conversion",
+        "customer-journey",
+        "replayability-expansions",
+        "game-monetisation"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "revenue-models-new-business",
+      "display_name": "Revenue Models & New Business",
+      "pillar_key": "bundles-revenue-ecosystems",
+      "mission": "Avaliar receitas recorrentes, edições, produtos digitais, serviços, licenciamento e oportunidades B2B adequadas à capacidade da Maison.",
+      "focus": [
+        "modelos de receita",
+        "recorrência e edições",
+        "B2B e licenciamento",
+        "capacidade e margem"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "product-safety-regulatory",
+        "failed-ideas-negative-results",
+        "unexplored-territories",
+        "procurement-economics",
+        "pricing-value",
+        "emotional-gifting",
+        "identity-self-expression",
+        "copywriting-conversion",
+        "customer-journey",
+        "replayability-expansions",
+        "game-monetisation"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "visual-sensory-design",
+      "display_name": "Visual & Sensory Design",
+      "pillar_key": "visual-sensory-design",
+      "mission": "Estudar cor, materiais, tipografia, embalagem, fotografia e coerência entre experiência física e digital.",
+      "focus": [
+        "direcção artística",
+        "materiais e cor",
+        "fotografia e embalagem",
+        "coerência sensorial"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "product-safety-regulatory",
+        "failed-ideas-negative-results",
+        "unexplored-territories",
+        "brand-voice-feral-frontality",
+        "storytelling",
+        "brand-tom-ford",
+        "brand-dior",
+        "home-fragrance",
+        "linen-textile-fragrance",
+        "sustainability-circular-design"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "emerging-creators-ideas",
+      "display_name": "Emerging Creators & New Ideas",
+      "pillar_key": "market-innovation-opportunities",
+      "mission": "Descobrir criadores, técnicas, tecnologias e ideias emergentes relevantes para o próximo ciclo da Maison.",
+      "focus": [
+        "novos criadores",
+        "técnicas e formatos",
+        "tecnologias relevantes",
+        "ideias com aplicação concreta"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "product-safety-regulatory",
+        "failed-ideas-negative-results",
+        "unexplored-territories",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "seasonal-rituals",
+        "portuguese-culture-sensory-identity",
+        "experiments-conversion-learning",
+        "customer-research"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "emerging-markets-languages",
+      "display_name": "Emerging Markets & Languages",
+      "pillar_key": "market-innovation-opportunities",
+      "mission": "Avaliar oportunidades internacionais, idiomas, adequação cultural, procura e custos antes de recomendar expansão.",
+      "focus": [
+        "mercados internacionais",
+        "idiomas",
+        "procura e concorrência",
+        "logística e cultura"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "product-safety-regulatory",
+        "failed-ideas-negative-results",
+        "unexplored-territories",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "seasonal-rituals",
+        "portuguese-culture-sensory-identity",
+        "experiments-conversion-learning",
+        "customer-research"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "failed-ideas-negative-results",
+      "display_name": "Failed Ideas & Negative Results",
+      "pillar_key": "research-evidence-analytics",
+      "mission": "Registar ideias tentadas, resultados negativos e aprendizagens para evitar repetição de erros e variantes cosméticas.",
+      "focus": [
+        "experiências falhadas",
+        "causas e limitações",
+        "reutilização de aprendizagem",
+        "deduplicação"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "product-safety-regulatory",
+        "unexplored-territories",
+        "market-gaps-competitor-weaknesses",
+        "customer-search-language",
+        "copywriting-conversion",
+        "customer-journey",
+        "product-quality-customer-feedback",
+        "maison-internal-growth",
+        "geo-synthetic-search-visibility"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "unexplored-territories",
+      "display_name": "Unexplored Territories",
+      "pillar_key": "growth-innovation-safety-learning",
+      "mission": "Procurar perguntas, necessidades e territórios que não encaixam nos Oceans existentes e propor novos Oceans quando merecido.",
+      "focus": [
+        "lacunas de cobertura",
+        "perguntas sem dono",
+        "novos territórios",
+        "propostas de Ocean com evidência"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "product-safety-regulatory",
+        "failed-ideas-negative-results"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "product-safety-regulatory",
+      "display_name": "Product Safety & Regulatory Intelligence",
+      "pillar_key": "product-quality-safety-regulatory",
+      "mission": "Identificar requisitos legais, documentação e lacunas de segurança por categoria de produto, encaminhando validações para responsáveis competentes.",
+      "focus": [
+        "cosméticos e produtos aromáticos",
+        "rotulagem e documentação",
+        "restrições de uso",
+        "validação por responsável competente"
+      ],
+      "connections": [
+        "portugal-market-white-space",
+        "supplier-intelligence",
+        "failed-ideas-negative-results",
+        "unexplored-territories",
+        "waxes-candle-materials",
+        "fragrance-suppliers",
+        "olfactory-universe",
+        "proven-aroma-formulas",
+        "ethical-persuasion",
+        "experiments-conversion-learning",
+        "customer-research"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "maison-internal-growth",
+      "display_name": "Maison Internal Growth",
+      "pillar_key": "maison-internal-growth",
+      "mission": "Integrar conhecimento útil para estratégia interna, operações, sistemas e capacidades da Maison através do quadro de crescimento canónico.",
+      "focus": [
+        "estratégia interna",
+        "operações e sistemas",
+        "capacidade organizacional",
+        "aprendizagem transversal"
+      ],
+      "connections": [
+        "experiments-conversion-learning",
+        "customer-research",
+        "production-equipment",
+        "copywriting-conversion",
+        "customer-journey",
+        "offer-architecture",
+        "bundles-product-ecosystems"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    },
+    {
+      "ocean_key": "founder-personal-growth",
+      "display_name": "Founder Personal Growth",
+      "pillar_key": "founder-personal-growth",
+      "mission": "Disponibilizar aprendizagem relevante para o crescimento pessoal do fundador apenas em contexto privado e opt-in, sem inferir traços ou expor dados pessoais.",
+      "focus": [
+        "aprendizagem opt-in",
+        "desenvolvimento de capacidades",
+        "decisão e reflexão",
+        "privacidade e agência"
+      ],
+      "connections": [
+        "maison-internal-growth",
+        "experiments-conversion-learning",
+        "customer-research",
+        "ethical-persuasion"
+      ],
+      "lifecycle_state": "open",
+      "origin": "foundational_catalog",
+      "visibility": "internal"
+    }
+  ]
+}

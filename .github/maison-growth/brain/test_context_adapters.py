@@ -23,6 +23,93 @@ class ContextAdapterTests(unittest.TestCase):
         self.assertEqual(hits[0].ref,"ocean:dinheiro-e-seguranca")
         self.assertNotIn("body",hits[0].label.lower())
 
+    def test_specialist_oceans_and_pillars_are_searchable_without_becoming_evidence(self):
+        ctx=OceanEditorialContext({
+            "candidates":[
+                {"id":"human-signal-one","preferredLabel":"descanso e pausa","painLanguage":"procurar tranquilidade em casa"}
+            ],
+            "specialistOceans":[{
+                "ocean_key":"brand-tom-ford",
+                "display_name":"Tom Ford",
+                "pillar_key":"designer-luxury-houses",
+                "mission":"Estudar catálogo, variantes, campanhas, posicionamento e princípios transferíveis de uma Maison.",
+                "focus":["perfumaria","campanhas","variantes"],
+                "connections":["brand-dior","brand-yves-saint-laurent"],
+                "visibility":"internal"
+            }],
+            "specialistPillars":[{
+                "key":"designer-luxury-houses",
+                "name":"Maisons de moda e luxo",
+                "mission":"Estudar casas de moda e luxo individualmente, incluindo linhas, variantes, códigos de marca e posicionamento.",
+                "connections":["storytelling-brand-voice","visual-sensory-design"],
+                "origin":"foundational_catalog"
+            }]
+        })
+        hits=ctx.search("Tom Ford campanhas variantes perfumaria",limit=12)
+        ocean=next(hit for hit in hits if hit.ref=="specialist-ocean:brand-tom-ford")
+        self.assertEqual(ocean.source_kind,"ocean_specialist_metadata")
+        self.assertEqual(ocean.evidence_refs,())
+        pillar_hits=ctx.search("Maisons luxo posicionamento códigos de marca",limit=12)
+        pillar=next(hit for hit in pillar_hits if hit.ref=="specialist-pillar:designer-luxury-houses")
+        self.assertEqual(pillar.source_kind,"ocean_pillar_metadata")
+        self.assertEqual(pillar.evidence_refs,())
+
+    def test_runtime_ocean_registry_overlays_snapshot_and_adds_approved_dynamic_records(self):
+        import json
+        import tempfile
+        from pathlib import Path
+
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            canonical=root/"candidates.json"
+            snapshot=root/"ocean-catalog.generated.json"
+            canonical.write_text(json.dumps({"candidates":[]}),encoding="utf-8")
+            snapshot.write_text(json.dumps({
+                "catalog_version":"JF-OCEANS-2026.10.2",
+                "oceans":[{
+                    "ocean_key":"brand-tom-ford","display_name":"Tom Ford",
+                    "pillar_key":"designer-luxury-houses",
+                    "mission":"Estudar a marca e as suas variantes.",
+                    "focus":["perfumaria"],"connections":["brand-dior"]
+                }],
+                "pillars":[{
+                    "key":"designer-luxury-houses","name":"Maisons de moda e luxo",
+                    "mission":"Estudar as casas de luxo.","connections":["visual-sensory-design"]
+                }]
+            }),encoding="utf-8")
+            runtime={
+                "kind":"ocean_specialist_catalog",
+                "version":"JF-OCEANS-2026.10.2",
+                "rows":[
+                    {"ocean_key":"brand-tom-ford","display_name":"Tom Ford",
+                     "pillar_key":"designer-luxury-houses","mission":"Tom Ford: catálogo, campanhas e variantes.",
+                     "focus":["perfumaria","campanhas"],"connections":["brand-dior"],"lifecycle_state":"open"},
+                    {"ocean_key":"approved-dynamic-ocean","display_name":"Ocean aprovado novo",
+                     "pillar_key":"designer-luxury-houses","mission":"Investigar uma área aprovada ainda sem cobertura especializada.",
+                     "focus":["área emergente","investigação"],"connections":["brand-tom-ford"],"lifecycle_state":"open"}
+                ],
+                "pillars":[
+                    {"key":"designer-luxury-houses","name":"Maisons de moda e luxo",
+                     "mission":"Estudar casas de luxo com contexto e evidência.",
+                     "connections":["visual-sensory-design"],"lifecycle_state":"open"},
+                    {"key":"approved-dynamic-pillar","name":"Pilar aprovado novo",
+                     "mission":"Organizar um novo território de conhecimento.",
+                     "focus":["nova área","investigação"],"connections":["designer-luxury-houses"],"lifecycle_state":"open"}
+                ]
+            }
+            ctx=OceanEditorialContext.from_files(canonical,snapshot,runtime_catalog=runtime)
+            self.assertTrue(ctx.payload["specialistRuntimeLoaded"])
+            self.assertEqual(ctx.payload["specialistCatalogSource"],"private_runtime_plus_snapshot")
+            oceans=ctx._specialist_oceans()
+            keys={row["ocean_key"] for row in oceans}
+            self.assertEqual(len(keys),2,"runtime rows overlay the same stable key instead of duplicating it")
+            self.assertIn("approved-dynamic-ocean",keys)
+            pillars={row["key"] for row in ctx._specialist_pillars()}
+            self.assertIn("approved-dynamic-pillar",pillars)
+            hits=ctx.search("Ocean aprovado novo área investigação",limit=10)
+            self.assertTrue(any(hit.ref=="specialist-ocean:approved-dynamic-ocean" for hit in hits))
+            self.assertTrue(all(not hit.evidence_refs for hit in hits if hit.ref.startswith("specialist-")))
+
     def test_ocean_commercial_hints_deduplicate_question_and_oracle_rows(self):
         ctx=OceanEditorialContext({
             "items":[

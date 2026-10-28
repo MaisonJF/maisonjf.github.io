@@ -20,6 +20,7 @@ on:
       - '.github/workflows/maison-ocean-memory-deploy.yml'
       - '.github/maison-growth/brain/migrations/0023_candidate_inbox.sql'
       - '.github/maison-growth/brain/migrations/0024_ocean_specialist_registry.sql'
+      - '.github/maison-growth/brain/migrations/0025_ocean_pillar_registry.sql'
 
 permissions:
   contents: read
@@ -125,6 +126,29 @@ jobs:
             END AS ocean_specialist_registry_status;
           " | tee /tmp/ocean-registry-schema-check.txt
           grep -q 'OCEAN.2_READY' /tmp/ocean-registry-schema-check.txt
+
+      # Pillar registry 0025 allows approved taxonomy growth without a Worker release.
+      - name: Ensure expandable Ocean pillar registry schema 0025
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp)"
+          trap 'rm -f "$tmp"' EXIT
+          sed -E '/^[[:space:]]*--/d; /^[[:space:]]*PRAGMA foreign_keys/d' \
+            ../../.github/maison-growth/brain/migrations/0025_ocean_pillar_registry.sql > "$tmp"
+          npx wrangler d1 execute maison-growth-engine --remote --file="$tmp"
+          npx wrangler d1 execute maison-growth-engine --remote --command="
+            SELECT CASE
+              WHEN EXISTS(SELECT 1 FROM sqlite_master WHERE type='table' AND name='ocean_pillar_registry')
+               AND EXISTS(SELECT 1 FROM schema_state WHERE schema_key='maison_ocean_pillar_registry_schema_version' AND schema_value='PILLAR.1')
+              THEN 'PILLAR.1_READY'
+              ELSE 'PILLAR.1_MISSING'
+            END AS ocean_pillar_registry_status;
+          " | tee /tmp/ocean-pillar-schema-check.txt
+          grep -q 'PILLAR.1_READY' /tmp/ocean-pillar-schema-check.txt
 
       - name: Seed Editorial Vault from existing Oceans
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.seed_editorial_vault == true }}

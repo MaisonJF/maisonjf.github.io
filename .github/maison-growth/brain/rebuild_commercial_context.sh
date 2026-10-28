@@ -7,6 +7,7 @@ PYTHON_BIN="${PYTHON:-python}"
 
 case "$MODE" in
   --write)
+    node "$ROOT/build_ocean_catalog_snapshot.mjs"
     node "$ROOT/build_vpc_ocean_signals.mjs"
     node "$ROOT/build_editorial_queue.mjs"
     node "$ROOT/build_pdi_expansion_queue.mjs"
@@ -21,6 +22,7 @@ case "$MODE" in
     "$PYTHON_BIN" "$ROOT/build_commercial_attention.py" --check
     ;;
   --check)
+    node "$ROOT/build_ocean_catalog_snapshot.mjs" --check
     node "$ROOT/build_vpc_ocean_signals.mjs" --check
     node "$ROOT/build_editorial_queue.mjs" --check
     node "$ROOT/build_pdi_expansion_queue.mjs" --check

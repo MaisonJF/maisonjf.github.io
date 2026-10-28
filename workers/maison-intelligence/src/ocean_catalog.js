@@ -1,15 +1,56 @@
+// Broad umbrella pillars are retained as stable identifiers for compatibility.
+// New specialist pillars make the catalogue navigable at scale. Runtime-approved
+// dynamic pillars can extend this list without a source-code release.
 const PILLARS = [
-  { key: 'scent-product-formulation', name: 'Aromas, essências e formulação', mission: 'Descobrir, formular e validar experiências olfativas para produtos distintos.' },
-  { key: 'suppliers-production', name: 'Fornecedores, materiais e produção', mission: 'Encontrar matérias-primas, fornecedores e processos viáveis, documentados e competitivos.' },
-  { key: 'portugal-market-opportunity', name: 'Mercado português e espaços por explorar', mission: 'Identificar oportunidades em Portugal com pesquisa explícita de concorrência e procura.' },
-  { key: 'luxury-brand-intelligence', name: 'Inteligência individual de Maisons e marcas', mission: 'Estudar cada marca e as suas variantes como um território independente, sem copiar a sua expressão.' },
-  { key: 'symbolic-systems-audience-entry', name: 'Sistemas simbólicos e novas portas de entrada', mission: 'Descobrir formas culturais e participativas de chegar a públicos relevantes, com contexto e rigor.' },
-  { key: 'ebooks-interactive-publishing', name: 'Ebooks, livros-jogo e publicação interactiva', mission: 'Encontrar temas, narrativas, mecânicas e futuros ciclos editoriais.' },
-  { key: 'digital-games-experiences', name: 'Jogos digitais e experiências interactivas', mission: 'Descobrir jogos, públicos, mecânicas e oportunidades comerciais para além dos produtos actuais.' },
-  { key: 'human-needs-buying-motives', name: 'Necessidades humanas e motivos de compra', mission: 'Investigar o que as pessoas procuram, valorizam, evitam e realmente compram.' },
-  { key: 'maison-philosophy-conversion', name: 'Filosofia Maison, voz, comunicação e conversão', mission: 'Evoluir a identidade e melhorar clareza, experiência e conversão sem perder autenticidade.' },
-  { key: 'creators-partnerships-distribution', name: 'Criadores, parcerias e distribuição', mission: 'Encontrar pessoas, comunidades, parceiros e canais com adequação real à Maison.' },
-  { key: 'growth-innovation-safety-learning', name: 'Inovação, segurança, aprendizagem e territórios novos', mission: 'Encontrar oportunidades, gerir riscos e aprender com resultados, incluindo falhas.' }
+  { key: 'scent-product-formulation', name: 'Aromas, essências e formulação — núcleo', mission: 'Núcleo de compatibilidade para a ciência olfactiva e a formulação de produtos.' },
+  { key: 'suppliers-production', name: 'Fornecedores e produção — núcleo', mission: 'Núcleo de compatibilidade para aquisição, matérias-primas e produção.' },
+  { key: 'portugal-market-opportunity', name: 'Mercado português — núcleo', mission: 'Núcleo de compatibilidade para mercado, concorrência e oportunidades em Portugal.' },
+  { key: 'luxury-brand-intelligence', name: 'Maisons e marcas — núcleo', mission: 'Núcleo de compatibilidade para inteligência individual de marcas e as suas variantes.' },
+  { key: 'symbolic-systems-audience-entry', name: 'Sistemas simbólicos — núcleo', mission: 'Núcleo de compatibilidade para sistemas simbólicos e novas portas de entrada.' },
+  { key: 'ebooks-interactive-publishing', name: 'Edição e publicação — núcleo', mission: 'Núcleo de compatibilidade para ebooks, livros e publicação interactiva.' },
+  { key: 'digital-games-experiences', name: 'Jogos digitais — núcleo', mission: 'Núcleo de compatibilidade para jogos digitais e experiências interactivas.' },
+  { key: 'human-needs-buying-motives', name: 'Necessidades humanas — núcleo', mission: 'Núcleo de compatibilidade para necessidades humanas e motivações de compra.' },
+  { key: 'maison-philosophy-conversion', name: 'Filosofia e conversão — núcleo', mission: 'Núcleo de compatibilidade para filosofia, comunicação e conversão da Maison.' },
+  { key: 'creators-partnerships-distribution', name: 'Criadores e distribuição — núcleo', mission: 'Núcleo de compatibilidade para criadores, parcerias e distribuição.' },
+  { key: 'growth-innovation-safety-learning', name: 'Crescimento e aprendizagem — núcleo', mission: 'Núcleo de compatibilidade para inovação, segurança, aprendizagem e novos territórios.' },
+
+  { key: 'scent-science-research', name: 'Ciência olfactiva e investigação', mission: 'Investigar famílias olfactivas, matérias aromáticas, percepção, desempenho e evidência sensorial.' },
+  { key: 'home-scent-products', name: 'Perfumação de espaços e têxteis', mission: 'Especializar conhecimento sobre névoas, águas perfumadas, águas de lençóis, velas e formatos para o lar.' },
+  { key: 'personal-perfumery-formats', name: 'Perfumaria pessoal', mission: 'Estudar perfumes pessoais, concentrações, evolução na pele, formatos, colecções e descoberta.' },
+  { key: 'sensory-ritual-experiences', name: 'Rituais sensoriais e experiências de cuidado', mission: 'Ligar aromas, materiais e ocasiões a experiências sensoriais para casa, corpo e presença.' },
+  { key: 'supplier-materials-packaging', name: 'Matérias-primas, fornecedores e embalagem', mission: 'Encontrar, avaliar e comparar ingredientes, ceras, recipientes, sais, embalagens, ferramentas e fornecedores.' },
+  { key: 'procurement-economics', name: 'Aquisição, custos e economia unitária', mission: 'Comparar custo entregue, portes, impostos aplicáveis, mínimos, desperdício, margens e capacidade de reposição.' },
+  { key: 'market-competition-discovery', name: 'Mercado, concorrência e descoberta', mission: 'Investigar procura, concorrência, linguagem do público e lacunas de mercado com fontes datadas.' },
+  { key: 'designer-luxury-houses', name: 'Maisons de moda e luxo', mission: 'Estudar casas de moda e luxo individualmente, incluindo linhas, variantes, códigos de marca, campanhas e posicionamento.' },
+  { key: 'heritage-sensory-houses', name: 'Casas históricas e património sensorial', mission: 'Investigar casas de perfumaria e design com património, artesanato, rituais e identidade sensorial distintivos.' },
+  { key: 'independent-niche-perfumery', name: 'Perfumaria independente e de nicho', mission: 'Estudar casas independentes e de nicho, perfumistas, composições, públicos e estratégias sem imitação.' },
+  { key: 'arabian-fragrance-houses', name: 'Casas de perfumaria árabe e mercados relacionados', mission: 'Investigar marcas, tradições, catálogos, ingredientes e públicos de perfumaria árabe com contexto cultural.' },
+  { key: 'symbolic-traditions', name: 'Tradições simbólicas e sistemas culturais', mission: 'Explorar Tarot, astrologias ocidental, sideral e védica, numerologias, tradições chinesas e vietnamitas e simbolismo.' },
+  { key: 'reflection-tests', name: 'Reflexão, personalidade e testes', mission: 'Investigar formatos de reflexão e testes sobre atenção, apego, afecto e relações sem os apresentar como diagnóstico clínico.' },
+  { key: 'editorial-narrative-publishing', name: 'Universos editoriais e narrativa interactiva', mission: 'Descobrir temas editoriais, livros-jogo, universos narrativos, séries e mecânicas de publicação.' },
+  { key: 'game-design-social-play', name: 'Design de jogos e experiência social', mission: 'Investigar jogos para duas pessoas, grupos, convívio, descoberta social, mistério, escolhas e repetição.' },
+  { key: 'game-growth-economics', name: 'Economia, crescimento e ecossistemas de jogos', mission: 'Estudar monetização, expansões, retenção, ligação entre jogos e livros e viabilidade de experiências digitais.' },
+  { key: 'wellbeing-human-needs', name: 'Bem-estar, descanso e necessidades humanas', mission: 'Investigar como as pessoas procuram calma, conforto, descanso, pausa, prazer sensorial e regresso a casa.' },
+  { key: 'relationships-social-connection', name: 'Relações, intimidade e conexão social', mission: 'Compreender necessidades de proximidade, amizade, intimidade, presença e experiências sociais seguras.' },
+  { key: 'customer-motivations-gifting', name: 'Motivações de compra, presentes e identidade', mission: 'Investigar descoberta, recompensa, luxo acessível, colecção, expressão pessoal, oferta e razões reais de compra.' },
+  { key: 'maison-identity-positioning', name: 'Identidade, filosofia e posicionamento Maison', mission: 'Evoluir a filosofia, os princípios, a proposta de valor e o posicionamento da Maison JF sem perder identidade.' },
+  { key: 'storytelling-brand-voice', name: 'Voz da marca, storytelling e referências criativas', mission: 'Melhorar voz, narrativa e referências transferíveis, sem copiar obras protegidas nem perder autenticidade.' },
+  { key: 'conversion-growth-experiments', name: 'Conversão, experiência comercial e experimentação', mission: 'Melhorar descoberta, páginas, navegação, ofertas, conversão, retenção e aprendizagem através de testes.' },
+  { key: 'search-visibility-authority', name: 'SEO, GEO, autoridade e descoberta sintética', mission: 'Tornar a Maison mais compreensível e encontrável em motores de pesquisa e sistemas de resposta por IA através de informação útil, evidência, entidades consistentes e experiência real — sem prometer citações nem manipular sistemas.' },
+  { key: 'creator-influence-intelligence', name: 'Criadores e influência', mission: 'Descobrir criadores e comunidades influentes pela adequação, qualidade do público, afinidade e potencial real.' },
+  { key: 'partnerships-distribution-retail', name: 'Parcerias, distribuição e canais físicos', mission: 'Encontrar lojas, concept stores, retalho, hotelaria, spas, colaborações e canais de distribuição relevantes.' },
+  { key: 'community-audience-development', name: 'Comunidade e desenvolvimento de públicos', mission: 'Construir relações duradouras com comunidades, públicos, leitores, jogadores e pessoas que acompanham a Maison.' },
+  { key: 'product-quality-safety-regulatory', name: 'Qualidade, segurança e conformidade', mission: 'Acompanhar qualidade, documentação, segurança de produto e requisitos legais, assinalando lacunas para validação competente.' },
+  { key: 'sustainability-circular-design', name: 'Sustentabilidade e desenho circular', mission: 'Investigar reutilização, recargas, materiais, desperdício e escolhas sustentáveis apenas quando apoiadas por evidência.' },
+  { key: 'bundles-revenue-ecosystems', name: 'Conjuntos, ecossistemas e novos modelos de receita', mission: 'Encontrar combinações de activos, ofertas, receitas e ecossistemas viáveis considerando custos, margens e capacidade.' },
+  { key: 'visual-sensory-design', name: 'Design visual e experiência sensorial', mission: 'Estudar cor, materiais, embalagem, fotografia, tipografia, objectos e coerência entre experiência física e digital.' },
+  { key: 'culture-seasonality-expansion', name: 'Cultura portuguesa, sazonalidade e ocasiões', mission: 'Transformar cultura, estações, datas e ocasiões em oportunidades relevantes, respeitando contexto e originalidade.' },
+  { key: 'market-innovation-opportunities', name: 'Inovação, espaços por explorar e novos mercados', mission: 'Identificar necessidades não servidas, conceitos emergentes e oportunidades pioneiras com verificação de mercado explícita.' },
+  { key: 'research-evidence-analytics', name: 'Investigação, evidência, dados e análise', mission: 'Avaliar fontes, confiança, novidade, resultados, métricas e hipóteses, distinguindo correlação, inferência e evidência.' },
+  { key: 'operations-production-scale', name: 'Operações, produção e capacidade de escala', mission: 'Melhorar processos, equipamentos, repetibilidade, capacidade, dependências e eficiência operacional.' },
+  { key: 'maison-internal-growth', name: 'Crescimento interno da Maison', mission: 'Apoiar estratégia interna, sistemas, operações, capacidades e decisões da Maison através do quadro canónico de crescimento.' },
+  { key: 'founder-personal-growth', name: 'Desenvolvimento pessoal do fundador', mission: 'Disponibilizar aprendizagem relevante e opt-in ao fundador, protegendo privacidade, autonomia e contexto pessoal.' },
+  { key: 'ethics-trust-human-impact', name: 'Ética, confiança e impacto humano', mission: 'Avaliar limites éticos, privacidade, persuasão responsável, impacto humano e confiança nas decisões do sistema.' }
 ];
 
 const CORE_LINKS = {
@@ -195,6 +236,7 @@ const OCEANS = [
   makeOcean('psychology-decision', 'Psychology of Decision', 'maison-philosophy-conversion', 'Estudar mecanismos de decisão com investigação e limites claros, sem os tratar como truques universais.', ['atenção e decisão', 'aversão à perda', 'prova e confiança', 'contra-evidência']),
   makeOcean('choice-architecture', 'Choice Architecture', 'maison-philosophy-conversion', 'Simplificar escolhas e orientar navegação sem ocultar alternativas, custos ou condições relevantes.', ['excesso de escolha', 'ordenação', 'clareza de opções', 'design ético']),
   makeOcean('customer-research', 'Customer Research', 'maison-philosophy-conversion', 'Transformar linguagem pública e feedback real em conhecimento sobre necessidades, obstáculos e compreensão.', ['perguntas de clientes', 'feedback', 'entrevistas autorizadas', 'padrões sem PII']),
+  makeOcean('geo-synthetic-search-visibility', 'GEO & Synthetic Search Visibility', 'maison-philosophy-conversion', 'Investigar como a Maison JF, as três portas Volta Para Casa, os livros-jogo e as consultas são descobertos em pesquisa tradicional e em sistemas de resposta por IA; traduzir evidência de pesquisa, desempenho e perguntas reais em melhorias claras e verificáveis.', ['SEO técnico: rastreio, indexação, URLs canónicas, títulos e ligações internas', 'GEO e pesquisa sintética: prompts de referência, citações, menções e proveniência', 'Dados estruturados Schema.org alinhados com conteúdo visível e verdadeiro', 'Intenção de pesquisa e palavras-chave de cauda longa em português europeu', 'E-E-A-T: autoria, experiência demonstrável, fontes e confiança', 'Medição de impressões, cliques, conversões e referências de pesquisa', 'Conteúdo citável e útil sobre Atenção, Apego, Afecto, livros-jogo e Tarot'], ['customer-search-language','copywriting-conversion','experiments-conversion-learning','brand-positioning','storytelling','reader-demand','personal-reflection','personality-relationship-tests','tarot-oracles','archetypes-mythology']),
   makeOcean('experience-design', 'Experience Design', 'maison-philosophy-conversion', 'Melhorar a experiência completa entre descoberta, narrativa, compra, uso e memória do produto.', ['experiência digital e física', 'momentos de utilização', 'coerência sensorial', 'fricção']),
   makeOcean('ethical-persuasion', 'Ethical Persuasion', 'maison-philosophy-conversion', 'Melhorar a persuasão sem falsas provas, pressão manipuladora, promessas infundadas ou ocultação de limites.', ['transparência', 'promessas verificáveis', 'redução de fricção', 'respeito pela escolha']),
   makeOcean('transferable-excellence-atelier', 'Atelier of Transferable Excellence', 'maison-philosophy-conversion', 'Estudar mecanismos documentados de excelência em marcas, cultura, psicologia, design e entretenimento para os adaptar de forma original.', ['Barnum/Forer com contexto crítico', 'Hormozi e arquitectura de ofertas', 'Apple e experiência', 'KISS e simplicidade']),
@@ -221,8 +263,236 @@ const OCEANS = [
   makeOcean('emerging-markets-languages', 'Emerging Markets & Languages', 'growth-innovation-safety-learning', 'Avaliar oportunidades internacionais, idiomas, adequação cultural, procura e custos antes de recomendar expansão.', ['mercados internacionais', 'idiomas', 'procura e concorrência', 'logística e cultura']),
   makeOcean('failed-ideas-negative-results', 'Failed Ideas & Negative Results', 'growth-innovation-safety-learning', 'Registar ideias tentadas, resultados negativos e aprendizagens para evitar repetição de erros e variantes cosméticas.', ['experiências falhadas', 'causas e limitações', 'reutilização de aprendizagem', 'deduplicação']),
   makeOcean('unexplored-territories', 'Unexplored Territories', 'growth-innovation-safety-learning', 'Procurar perguntas, necessidades e territórios que não encaixam nos Oceans existentes e propor novos Oceans quando merecido.', ['lacunas de cobertura', 'perguntas sem dono', 'novos territórios', 'propostas de Ocean com evidência']),
-  makeOcean('product-safety-regulatory', 'Product Safety & Regulatory Intelligence', 'growth-innovation-safety-learning', 'Identificar requisitos legais, documentação e lacunas de segurança por categoria de produto, encaminhando validações para responsáveis competentes.', ['cosméticos e produtos aromáticos', 'rotulagem e documentação', 'restrições de uso', 'validação por responsável competente'])
+  makeOcean('product-safety-regulatory', 'Product Safety & Regulatory Intelligence', 'growth-innovation-safety-learning', 'Identificar requisitos legais, documentação e lacunas de segurança por categoria de produto, encaminhando validações para responsáveis competentes.', ['cosméticos e produtos aromáticos', 'rotulagem e documentação', 'restrições de uso', 'validação por responsável competente']),
+  makeOcean('maison-internal-growth', 'Maison Internal Growth', 'maison-internal-growth', 'Integrar conhecimento útil para estratégia interna, operações, sistemas e capacidades da Maison através do quadro de crescimento canónico.', ['estratégia interna', 'operações e sistemas', 'capacidade organizacional', 'aprendizagem transversal'], ['research-evidence-analytics','operations-production-scale','conversion-growth-experiments']),
+  makeOcean('founder-personal-growth', 'Founder Personal Growth', 'founder-personal-growth', 'Disponibilizar aprendizagem relevante para o crescimento pessoal do fundador apenas em contexto privado e opt-in, sem inferir traços ou expor dados pessoais.', ['aprendizagem opt-in', 'desenvolvimento de capacidades', 'decisão e reflexão', 'privacidade e agência'], ['maison-internal-growth','research-evidence-analytics','ethics-trust-human-impact'])
 ];
+
+// Keep legacy pillars addressable while routing specialist Oceans into smaller,
+// more meaningful territories. The brand clusters are first-class Oceans per brand.
+const OCEAN_PILLAR_OVERRIDES = {
+  'olfactory-universe':'scent-science-research',
+  'fragrance-formulation-lab':'scent-product-formulation',
+  'home-fragrance':'home-scent-products',
+  'linen-textile-fragrance':'home-scent-products',
+  'scented-candles':'home-scent-products',
+  'personal-perfumery':'personal-perfumery-formats',
+  'massage-body-rituals':'sensory-ritual-experiences',
+  'scent-layering':'sensory-ritual-experiences',
+  'aroma-by-occasion':'sensory-ritual-experiences',
+  'sensory-innovation':'sensory-ritual-experiences',
+  'proven-aroma-formulas':'scent-science-research',
+  'supplier-intelligence':'suppliers-production',
+  'waxes-candle-materials':'supplier-materials-packaging',
+  'fragrance-suppliers':'supplier-materials-packaging',
+  'containers-vessels':'supplier-materials-packaging',
+  'salts-botanical-materials':'supplier-materials-packaging',
+  'packaging-printing':'supplier-materials-packaging',
+  'production-equipment':'operations-production-scale',
+  'procurement-economics':'procurement-economics',
+  'supplier-reliability':'suppliers-production',
+  'european-sourcing':'supplier-materials-packaging',
+  'portugal-market-white-space':'portugal-market-opportunity',
+  'market-gaps-competitor-weaknesses':'market-competition-discovery',
+  'customer-search-language':'market-competition-discovery',
+  'competitor-price-intelligence':'market-competition-discovery',
+  'tarot-oracles':'symbolic-systems-audience-entry',
+  'western-astrology':'symbolic-traditions',
+  'sidereal-astrology':'symbolic-traditions',
+  'vedic-astrology-jyotisha':'symbolic-traditions',
+  'chinese-metaphysics':'symbolic-traditions',
+  'vietnamese-zodiac-traditions':'symbolic-traditions',
+  'numerology':'symbolic-traditions',
+  'dreams-symbolism':'symbolic-traditions',
+  'archetypes-mythology':'symbolic-traditions',
+  'seasonal-rituals':'culture-seasonality-expansion',
+  'personal-reflection':'reflection-tests',
+  'personality-relationship-tests':'reflection-tests',
+  'ebooks-themes':'ebooks-interactive-publishing',
+  'interactive-fiction':'editorial-narrative-publishing',
+  'interactive-book-games':'editorial-narrative-publishing',
+  'editorial-series-development':'editorial-narrative-publishing',
+  'first-thirteen-book-cycle':'editorial-narrative-publishing',
+  'future-book-universes':'editorial-narrative-publishing',
+  'interactive-narrative-mechanics':'editorial-narrative-publishing',
+  'reader-demand':'editorial-narrative-publishing',
+  'book-packaging-positioning':'editorial-narrative-publishing',
+  'publishing-opportunities':'editorial-narrative-publishing',
+  'story-worlds-spin-offs':'editorial-narrative-publishing',
+  'digital-game-concepts':'digital-games-experiences',
+  'two-player-games':'game-design-social-play',
+  'group-party-games':'game-design-social-play',
+  'couples-connection-games':'game-design-social-play',
+  'social-discovery-games':'game-design-social-play',
+  'mystery-investigation-games':'game-design-social-play',
+  'choice-based-games':'game-design-social-play',
+  'replayability-expansions':'game-growth-economics',
+  'game-monetisation':'game-growth-economics',
+  'game-book-ecosystems':'game-growth-economics',
+  'human-needs-buying-motivations':'human-needs-buying-motives',
+  'calm-unwinding':'wellbeing-human-needs',
+  'homecoming-comfort':'wellbeing-human-needs',
+  'sleep-evening-rituals':'wellbeing-human-needs',
+  'emotional-gifting':'customer-motivations-gifting',
+  'identity-self-expression':'customer-motivations-gifting',
+  'sensory-pleasure':'wellbeing-human-needs',
+  'connection-intimacy':'relationships-social-connection',
+  'discovery-novelty':'customer-motivations-gifting',
+  'affordable-luxury':'customer-motivations-gifting',
+  'ritual-meaning':'wellbeing-human-needs',
+  'home-atmosphere':'wellbeing-human-needs',
+  'collecting-personal-curation':'customer-motivations-gifting',
+  'stress-overload-digital-fatigue':'wellbeing-human-needs',
+  'personal-rewards':'customer-motivations-gifting',
+  'quiet-social-experiences':'relationships-social-connection',
+  'maison-philosophy':'maison-philosophy-conversion',
+  'brand-positioning':'maison-identity-positioning',
+  'copywriting-conversion':'conversion-growth-experiments',
+  'offer-architecture':'bundles-revenue-ecosystems',
+  'pricing-value':'procurement-economics',
+  'customer-journey':'conversion-growth-experiments',
+  'mobile-commerce':'conversion-growth-experiments',
+  'brand-voice-feral-frontality':'storytelling-brand-voice',
+  'storytelling':'storytelling-brand-voice',
+  'retention-loyalty':'community-audience-development',
+  'experiments-conversion-learning':'research-evidence-analytics',
+  'psychology-decision':'customer-motivations-gifting',
+  'choice-architecture':'conversion-growth-experiments',
+  'customer-research':'research-evidence-analytics',
+  'experience-design':'visual-sensory-design',
+  'ethical-persuasion':'ethics-trust-human-impact',
+  'transferable-excellence-atelier':'maison-identity-positioning',
+  'creator-intelligence':'creators-partnerships-distribution',
+  'fragrance-creators':'creator-influence-intelligence',
+  'tarot-astrology-creators':'creator-influence-intelligence',
+  'book-game-communities':'community-audience-development',
+  'portuguese-micro-influence':'creator-influence-intelligence',
+  'collaboration-opportunities':'partnerships-distribution-retail',
+  'retail-distribution':'partnerships-distribution-retail',
+  'hospitality-experiences':'partnerships-distribution-retail',
+  'community-building':'community-audience-development',
+  'global-luxury-design':'luxury-brand-intelligence',
+  'portuguese-culture-sensory-identity':'culture-seasonality-expansion',
+  'seasonal-gifting-opportunities':'culture-seasonality-expansion',
+  'sustainability-circular-design':'sustainability-circular-design',
+  'product-quality-customer-feedback':'product-quality-safety-regulatory',
+  'bundles-product-ecosystems':'bundles-revenue-ecosystems',
+  'revenue-models-new-business':'bundles-revenue-ecosystems',
+  'visual-sensory-design':'visual-sensory-design',
+  'emerging-creators-ideas':'market-innovation-opportunities',
+  'emerging-markets-languages':'market-innovation-opportunities',
+  'failed-ideas-negative-results':'research-evidence-analytics',
+  'unexplored-territories':'growth-innovation-safety-learning',
+  'product-safety-regulatory':'product-quality-safety-regulatory',
+  'maison-internal-growth':'maison-internal-growth',
+  'founder-personal-growth':'founder-personal-growth',
+  'geo-synthetic-search-visibility':'search-visibility-authority'
+};
+const BRAND_PILLAR = {
+  'brand-tom-ford':'designer-luxury-houses',
+  'brand-dior':'designer-luxury-houses',
+  'brand-yves-saint-laurent':'designer-luxury-houses',
+  'brand-chanel':'luxury-brand-intelligence',
+  'brand-hermes':'designer-luxury-houses',
+  'brand-guerlain':'heritage-sensory-houses',
+  'brand-jo-malone-london':'heritage-sensory-houses',
+  'brand-diptyque':'heritage-sensory-houses',
+  'brand-byredo':'independent-niche-perfumery',
+  'brand-le-labo':'independent-niche-perfumery',
+  'brand-maison-margiela-fragrances':'designer-luxury-houses',
+  'brand-loewe':'designer-luxury-houses',
+  'brand-prada':'designer-luxury-houses',
+  'brand-giorgio-armani-prive':'designer-luxury-houses',
+  'brand-gucci-beauty':'designer-luxury-houses',
+  'brand-valentino-beauty':'designer-luxury-houses',
+  'brand-narciso-rodriguez':'designer-luxury-houses',
+  'brand-maison-francis-kurkdjian':'independent-niche-perfumery',
+  'brand-kilian-paris':'independent-niche-perfumery',
+  'brand-amouage':'arabian-fragrance-houses',
+  'brand-creed':'independent-niche-perfumery',
+  'brand-parfums-de-marly':'independent-niche-perfumery',
+  'brand-xerjoff':'independent-niche-perfumery',
+  'brand-initio-parfums-prives':'independent-niche-perfumery',
+  'brand-serge-lutens':'independent-niche-perfumery',
+  'brand-frederic-malle':'independent-niche-perfumery',
+  'brand-bdk-parfums':'independent-niche-perfumery',
+  'brand-essential-parfums':'independent-niche-perfumery',
+  'brand-juliette-has-a-gun':'independent-niche-perfumery',
+  'brand-escentric-molecules':'independent-niche-perfumery',
+  'brand-acqua-di-parma':'heritage-sensory-houses',
+  'brand-floris-london':'heritage-sensory-houses',
+  'brand-aesop':'heritage-sensory-houses',
+  'brand-santa-maria-novella':'heritage-sensory-houses',
+  'brand-orto-parisi':'independent-niche-perfumery',
+  'brand-tiziana-terenzi':'independent-niche-perfumery',
+  'brand-montale':'arabian-fragrance-houses',
+  'brand-mancera':'arabian-fragrance-houses',
+  'brand-lattafa':'arabian-fragrance-houses',
+  'brand-swiss-arabian':'arabian-fragrance-houses',
+  'brand-arabian-oud':'arabian-fragrance-houses',
+  'brand-ajmal':'arabian-fragrance-houses',
+  'brand-maison-crivelli':'independent-niche-perfumery',
+  'brand-nishane':'independent-niche-perfumery',
+  'brand-goldfield-and-banks':'independent-niche-perfumery',
+  'brand-ds-and-durga':'independent-niche-perfumery',
+  'brand-commodity':'independent-niche-perfumery',
+  'brand-imaginary-authors':'independent-niche-perfumery',
+  'brand-zoologist-perfumes':'independent-niche-perfumery'
+};
+const PILLAR_LINKS = {
+  'scent-science-research':['home-scent-products','personal-perfumery-formats','supplier-materials-packaging','wellbeing-human-needs','product-quality-safety-regulatory','research-evidence-analytics'],
+  'home-scent-products':['scent-science-research','sensory-ritual-experiences','supplier-materials-packaging','wellbeing-human-needs','customer-motivations-gifting','portugal-market-opportunity'],
+  'personal-perfumery-formats':['scent-science-research','designer-luxury-houses','heritage-sensory-houses','independent-niche-perfumery','arabian-fragrance-houses','customer-motivations-gifting'],
+  'supplier-materials-packaging':['procurement-economics','operations-production-scale','product-quality-safety-regulatory','sustainability-circular-design','scent-science-research'],
+  'procurement-economics':['supplier-materials-packaging','bundles-revenue-ecosystems','customer-motivations-gifting','operations-production-scale'],
+  'market-competition-discovery':['market-innovation-opportunities','customer-motivations-gifting','conversion-growth-experiments','creator-influence-intelligence','research-evidence-analytics','search-visibility-authority'],
+  'designer-luxury-houses':['heritage-sensory-houses','independent-niche-perfumery','storytelling-brand-voice','visual-sensory-design','maison-identity-positioning'],
+  'heritage-sensory-houses':['designer-luxury-houses','independent-niche-perfumery','visual-sensory-design','scent-science-research'],
+  'independent-niche-perfumery':['arabian-fragrance-houses','scent-science-research','designer-luxury-houses','customer-motivations-gifting'],
+  'arabian-fragrance-houses':['independent-niche-perfumery','scent-science-research','symbolic-traditions','customer-motivations-gifting'],
+  'symbolic-traditions':['reflection-tests','editorial-narrative-publishing','game-design-social-play','creator-influence-intelligence','ethics-trust-human-impact','search-visibility-authority'],
+  'reflection-tests':['wellbeing-human-needs','relationships-social-connection','symbolic-traditions','ethics-trust-human-impact','game-design-social-play','search-visibility-authority'],
+  'editorial-narrative-publishing':['game-design-social-play','symbolic-traditions','community-audience-development','customer-motivations-gifting','search-visibility-authority'],
+  'game-design-social-play':['relationships-social-connection','reflection-tests','editorial-narrative-publishing','game-growth-economics','community-audience-development'],
+  'game-growth-economics':['bundles-revenue-ecosystems','editorial-narrative-publishing','conversion-growth-experiments','community-audience-development'],
+  'wellbeing-human-needs':['sensory-ritual-experiences','home-scent-products','customer-motivations-gifting','maison-internal-growth'],
+  'relationships-social-connection':['reflection-tests','game-design-social-play','community-audience-development','founder-personal-growth'],
+  'customer-motivations-gifting':['wellbeing-human-needs','visual-sensory-design','bundles-revenue-ecosystems','conversion-growth-experiments'],
+  'maison-identity-positioning':['storytelling-brand-voice','conversion-growth-experiments','designer-luxury-houses','research-evidence-analytics'],
+  'storytelling-brand-voice':['maison-identity-positioning','editorial-narrative-publishing','creator-influence-intelligence','visual-sensory-design','search-visibility-authority'],
+  'conversion-growth-experiments':['research-evidence-analytics','market-competition-discovery','customer-motivations-gifting','maison-internal-growth','search-visibility-authority'],
+  'creator-influence-intelligence':['community-audience-development','partnerships-distribution-retail','market-competition-discovery','storytelling-brand-voice'],
+  'partnerships-distribution-retail':['creator-influence-intelligence','bundles-revenue-ecosystems','operations-production-scale','maison-internal-growth'],
+  'community-audience-development':['relationships-social-connection','game-design-social-play','editorial-narrative-publishing','creator-influence-intelligence','search-visibility-authority'],
+  'product-quality-safety-regulatory':['supplier-materials-packaging','scent-science-research','ethics-trust-human-impact','research-evidence-analytics'],
+  'sustainability-circular-design':['supplier-materials-packaging','visual-sensory-design','operations-production-scale'],
+  'bundles-revenue-ecosystems':['procurement-economics','customer-motivations-gifting','conversion-growth-experiments','game-growth-economics'],
+  'visual-sensory-design':['storytelling-brand-voice','designer-luxury-houses','home-scent-products','sustainability-circular-design'],
+  'culture-seasonality-expansion':['home-scent-products','symbolic-traditions','customer-motivations-gifting','portugal-market-opportunity'],
+  'market-innovation-opportunities':['market-competition-discovery','scent-science-research','culture-seasonality-expansion','research-evidence-analytics'],
+  'research-evidence-analytics':['market-competition-discovery','conversion-growth-experiments','product-quality-safety-regulatory','maison-internal-growth','search-visibility-authority'],
+  'search-visibility-authority':['conversion-growth-experiments','market-competition-discovery','research-evidence-analytics','storytelling-brand-voice','community-audience-development','symbolic-traditions','reflection-tests','editorial-narrative-publishing'],
+  'operations-production-scale':['supplier-materials-packaging','procurement-economics','product-quality-safety-regulatory','sustainability-circular-design'],
+  'maison-internal-growth':['research-evidence-analytics','operations-production-scale','conversion-growth-experiments','bundles-revenue-ecosystems'],
+  'founder-personal-growth':['maison-internal-growth','research-evidence-analytics','ethics-trust-human-impact'],
+  'ethics-trust-human-impact':['product-quality-safety-regulatory','reflection-tests','symbolic-traditions','founder-personal-growth']
+};
+for (const ocean of OCEANS) {
+  const target = OCEAN_PILLAR_OVERRIDES[ocean.ocean_key] || BRAND_PILLAR[ocean.ocean_key];
+  if (target) ocean.pillar_key = target;
+}
+for (const ocean of OCEANS) {
+  const related = [...new Set((PILLAR_LINKS[ocean.pillar_key] || []).flatMap(pillarKey =>
+    OCEANS.filter(candidate => candidate.pillar_key === pillarKey && candidate.ocean_key !== ocean.ocean_key)
+      .slice(0, 2)
+      .map(candidate => candidate.ocean_key)
+  ))];
+  ocean.connections = [...new Set([...(ocean.connections || []), ...related])];
+}
+// Materialize typed cross-links on each pillar for downstream graph consumers.
+for (const pillar of PILLARS) {
+  pillar.connections = [...new Set(PILLAR_LINKS[pillar.key] || [])];
+}
 
 const FOUNDATIONAL_KEYS = new Set(OCEANS.map(ocean => ocean.ocean_key));
 for (const ocean of OCEANS) {
@@ -235,7 +505,9 @@ const OCEAN_BY_KEY = new Map(OCEANS.map(o => [o.ocean_key, o]));
 const BRAND_OCEANS = OCEANS.filter(o => o.ocean_key.startsWith('brand-'));
 const NON_BRAND_PILLARS = PILLARS.filter(p => p.key !== 'luxury-brand-intelligence');
 
-export const OCEAN_CATALOG_VERSION = 'JF-OCEANS-2026.10.1';
+export const OCEAN_CATALOG_VERSION = 'JF-OCEANS-2026.10.3';
+const PILLAR_KEY_RE = /^[a-z0-9][a-z0-9._:-]{1,159}$/;
+const normaliseKey = value => String(value ?? '').trim().toLowerCase();
 export const OCEAN_PILLARS = PILLARS;
 export const OCEAN_CATALOG = OCEANS;
 
@@ -279,19 +551,62 @@ function normalizedDynamicRow(row) {
   };
 }
 
+function normalisedDynamicPillar(row) {
+  return {
+    key: String(row.pillar_key),
+    name: String(row.display_name),
+    mission: String(row.mission),
+    focus: parseJsonArray(row.focus_json),
+    connections: parseJsonArray(row.connections_json),
+    parent_pillars: parseJsonArray(row.parent_pillars_json),
+    lifecycle_state: String(row.lifecycle_state || 'open'),
+    origin: 'human_approved_dynamic',
+    source_candidate_id: row.source_candidate_id || null
+  };
+}
+
+export async function loadActivePillarRegistry(env) {
+  const registry = [...PILLARS.map(p => ({ ...p }))];
+  if (!env?.GROWTH_DB) return registry;
+  const result = await env.GROWTH_DB.prepare(`
+    SELECT pillar_key,display_name,mission,focus_json,connections_json,parent_pillars_json,lifecycle_state,source_candidate_id
+      FROM ocean_pillar_registry
+     WHERE lifecycle_state='open'
+     ORDER BY created_at,pillar_key
+  `).all();
+  const known = new Set(registry.map(p => p.key));
+  for (const row of result?.results || []) {
+    const item = normalisedDynamicPillar(row);
+    if (!known.has(item.key)) {
+      registry.push(item);
+      known.add(item.key);
+    }
+  }
+  const allKeys = new Set(registry.map(p => p.key));
+  for (const pillar of registry) {
+    pillar.connections = [...new Set((pillar.connections || []).filter(key => key !== pillar.key && allKeys.has(key)))];
+    pillar.parent_pillars = [...new Set((pillar.parent_pillars || []).filter(key => key !== pillar.key && allKeys.has(key)))];
+  }
+  return registry;
+}
+
 export async function loadActiveOceanRegistry(env) {
   const registry = [...OCEANS];
   if (!env?.GROWTH_DB) return registry;
-  const result = await env.GROWTH_DB.prepare(`
-    SELECT ocean_key,display_name,pillar_key,mission,focus_json,connections_json,lifecycle_state,source_candidate_id
-      FROM ocean_specialist_registry
-     WHERE lifecycle_state='open'
-     ORDER BY created_at,ocean_key
-  `).all();
+  const [result, pillars] = await Promise.all([
+    env.GROWTH_DB.prepare(`
+      SELECT ocean_key,display_name,pillar_key,mission,focus_json,connections_json,lifecycle_state,source_candidate_id
+        FROM ocean_specialist_registry
+       WHERE lifecycle_state='open'
+       ORDER BY created_at,ocean_key
+    `).all(),
+    loadActivePillarRegistry(env)
+  ]);
   const known = new Set(registry.map(o => o.ocean_key));
+  const knownPillars = new Set(pillars.map(p => p.key));
   for (const row of result?.results || []) {
     const item = normalizedDynamicRow(row);
-    if (!known.has(item.ocean_key)) {
+    if (!known.has(item.ocean_key) && knownPillars.has(item.pillar_key)) {
       registry.push(item);
       known.add(item.ocean_key);
     }
@@ -299,47 +614,50 @@ export async function loadActiveOceanRegistry(env) {
   return registry;
 }
 
-export function selectOceanFocus({catalog = OCEANS, runKey = '', limit = 16} = {}) {
-  const max = Math.max(1, Math.min(24, Number.parseInt(limit, 10) || 16));
-  const byPillar = new Map(PILLARS.map(p => [p.key, []]));
-  const dynamic = [];
+export function selectOceanFocus({catalog = OCEANS, pillars = PILLARS, runKey = '', limit = 16} = {}) {
+  const max = Math.max(1, Math.min(128, Number.parseInt(limit, 10) || 16));
+  const activePillars = [...(pillars || PILLARS)].filter(p => p && p.lifecycle_state !== 'paused' && p.lifecycle_state !== 'archived');
+  const byPillar = new Map(activePillars.map(p => [p.key, []]));
+  const unclassified = [];
   for (const ocean of catalog || []) {
     if (!ocean || ocean.lifecycle_state === 'paused' || ocean.lifecycle_state === 'archived') continue;
     if (byPillar.has(ocean.pillar_key)) byPillar.get(ocean.pillar_key).push(ocean);
-    else dynamic.push(ocean);
+    else unclassified.push(ocean);
   }
   for (const group of byPillar.values()) group.sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
-  dynamic.sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
+  unclassified.sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
   const seed = [...String(runKey || new Date().toISOString().slice(0, 10))]
     .reduce((n, char) => (n * 31 + char.charCodeAt(0)) >>> 0, 7);
+  const activeWithOceans = activePillars.filter(p => (byPillar.get(p.key) || []).length > 0);
+  const rotation = activeWithOceans.length ? seed % activeWithOceans.length : 0;
+  const orderedPillars = [...activeWithOceans.slice(rotation), ...activeWithOceans.slice(0, rotation)];
   const selected = [];
-  for (const pillar of PILLARS) {
+  for (const pillar of orderedPillars) {
+    if (selected.length >= max) break;
     const group = byPillar.get(pillar.key) || [];
     if (!group.length) continue;
-    if (pillar.key === 'luxury-brand-intelligence') {
-      selected.push(group[seed % group.length]);
-    } else {
-      const offset = Math.floor(seed / 11) % group.length;
-      selected.push(group[offset]);
-    }
+    const offset = Math.floor(seed / 11) % group.length;
+    selected.push((pillar.key.includes('brand') || pillar.key.includes('perfumery') || pillar.key.includes('maison'))
+      ? group[(seed + selected.length * 7) % group.length]
+      : group[offset]);
   }
-  const brandPool = [...BRAND_OCEANS].sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
+  const brandPool = [...(catalog || [])].filter(o => o?.ocean_key?.startsWith('brand-'))
+    .sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
+  if (max >= 8 && brandPool.length && !selected.some(o => o.ocean_key.startsWith('brand-'))) {
+    const brand = brandPool[seed % brandPool.length];
+    if (!selected.some(o => o.ocean_key === brand.ocean_key) && selected.length) selected[selected.length - 1] = brand;
+  }
+  const all = [...(catalog || [])].filter(o => o && o.lifecycle_state !== 'paused' && o.lifecycle_state !== 'archived')
+    .sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
   const used = new Set(selected.map(o => o.ocean_key));
-  for (let i = 0; selected.length < max && i < max * 4; i++) {
-    let next;
-    if (brandPool.length && i < Math.max(0, max - PILLARS.length)) {
-      next = brandPool[(seed + i * 7) % brandPool.length];
-    } else {
-      const all = [...catalog].sort((a, b) => a.ocean_key.localeCompare(b.ocean_key));
-      if (!all.length) break;
-      next = all[(seed + i * 13) % all.length];
-    }
+  for (let i = 0; selected.length < max && i < max * 6; i++) {
+    const next = all.length ? all[(seed + i * 13) % all.length] : null;
     if (next && !used.has(next.ocean_key)) {
       selected.push(next);
       used.add(next.ocean_key);
     }
   }
-  for (const ocean of dynamic) {
+  for (const ocean of unclassified) {
     if (selected.length >= max) break;
     if (!used.has(ocean.ocean_key)) {
       selected.push(ocean);
@@ -347,26 +665,94 @@ export function selectOceanFocus({catalog = OCEANS, runKey = '', limit = 16} = {
     }
   }
   const knownKeys = new Set((catalog || []).map(ocean => ocean?.ocean_key).filter(Boolean));
-  return selected.slice(0, max).map(ocean => {
-    const links = [...new Set((ocean.connections || []).filter(key => key !== ocean.ocean_key && knownKeys.has(key)))].slice(0, 8);
-    const focus = Array.isArray(ocean.focus) ? ocean.focus : [];
-    return {
-      ocean_key: ocean.ocean_key,
-      display_name: ocean.display_name,
-      pillar_key: ocean.pillar_key,
-      mission: ocean.mission,
-      focus,
-      connections: links
-    };
-  });
+  const knownPillarKeys = new Set(activePillars.map(p => p.key));
+  return selected.slice(0, max).map(ocean => ({
+    ocean_key: ocean.ocean_key,
+    display_name: ocean.display_name,
+    pillar_key: ocean.pillar_key,
+    mission: ocean.mission,
+    focus: Array.isArray(ocean.focus) ? ocean.focus : [],
+    connections: [...new Set((ocean.connections || []).filter(key => key !== ocean.ocean_key && knownKeys.has(key)))].slice(0, 12),
+    connected_pillars: [...new Set((activePillars.find(p => p.key === ocean.pillar_key)?.connections || []).filter(key => key !== ocean.pillar_key && knownPillarKeys.has(key)))].slice(0, 12)
+  }));
 }
 
-export function validateOceanProposal(raw, catalog = OCEANS) {
-  const key = String(raw?.proposed_ocean_key ?? '').trim().toLowerCase();
+export function selectPillarFocus({pillars = PILLARS, focusOceans = [], runKey = '', limit = 48} = {}) {
+  const max=Math.max(1,Math.min(128,Number.parseInt(limit,10)||48));
+  const active=[...(pillars||PILLARS)].filter(p=>p&&p.lifecycle_state!=='paused'&&p.lifecycle_state!=='archived');
+  const byKey=new Map(active.map(p=>[p.key,p]));
+  const selected=[];
+  const selectedKeys=new Set();
+  const add=key=>{
+    const item=byKey.get(key);
+    if(item&&!selectedKeys.has(item.key)&&selected.length<max){
+      selected.push(item);
+      selectedKeys.add(item.key);
+      return true;
+    }
+    return false;
+  };
+  // Local graph neighbourhood first: the current Ocean focuses and their linked pillars.
+  const seeds=[];
+  for(const ocean of focusOceans||[]){
+    if(ocean?.pillar_key&&!seeds.includes(ocean.pillar_key))seeds.push(ocean.pillar_key);
+  }
+  for(const key of seeds)add(key);
+  let frontier=[...selected];
+  for(let depth=0;depth<2&&selected.length<max;depth++){
+    const next=[];
+    for(const pillar of frontier){
+      for(const linked of [...(pillar.connections||[]),...(pillar.parent_pillars||[])]){
+        if(add(linked))next.push(byKey.get(linked));
+      }
+    }
+    frontier=next;
+  }
+  // Cap local-neighbour dominance so the graph cannot starve its long tail.
+  // Dynamic approved pillars get a reserved rotating share when the registry grows.
+  const localBudget=Math.max(1,Math.floor(max*0.55));
+  if(selected.length>localBudget){
+    selected.splice(localBudget);
+    selectedKeys.clear();
+    for(const pillar of selected)selectedKeys.add(pillar.key);
+  }
+
+  const seed=[...String(runKey||new Date().toISOString().slice(0,10))]
+    .reduce((n,char)=>(n*31+char.charCodeAt(0))>>>0,7);
+  const dynamic=active.filter(p=>p.origin==='human_approved_dynamic'||p.source_candidate_id);
+  if(dynamic.length&&selected.length<max){
+    const dynamicStart=seed%dynamic.length;
+    const dynamicBudget=Math.min(
+      max-selected.length,
+      Math.max(1,Math.floor(max*0.25))
+    );
+    const before=selected.length;
+    for(let i=0;selected.length-before<dynamicBudget&&i<dynamic.length;i++){
+      add(dynamic[(dynamicStart+i)%dynamic.length].key);
+    }
+  }
+
+  // Fill the remaining slots from a deterministic rotating window over the full
+  // registry. No fixed first-page subset can permanently dominate model context.
+  if(active.length){
+    const start=seed%active.length;
+    for(let i=0;selected.length<max&&i<active.length;i++){
+      add(active[(start+i)%active.length].key);
+    }
+  }
+  return selected.slice(0,max).map(p=>({
+    ...p,
+    connections:[...(p.connections||[])],
+    parent_pillars:[...(p.parent_pillars||[])]
+  }));
+}
+
+export function validateOceanProposal(raw, catalog = OCEANS, pillars = PILLARS) {
+  const key = normaliseKey(raw?.proposed_ocean_key);
   if (!KEY_RE.test(key)) throw new Error('invalid_ocean_proposal_key');
   if (catalog.some(o => o.ocean_key === key)) throw new Error('ocean_proposal_key_exists');
-  const pillar = String(raw?.pillar_key ?? '').trim().toLowerCase();
-  if (!PILLAR_BY_KEY.has(pillar)) throw new Error('invalid_ocean_proposal_pillar');
+  const pillar = normaliseKey(raw?.pillar_key);
+  if (!(pillars || PILLARS).some(p => p.key === pillar)) throw new Error('invalid_ocean_proposal_pillar');
   const displayName = String(raw?.display_name ?? '').trim().replace(/\s+/g, ' ').slice(0, 120);
   const mission = String(raw?.mission ?? '').trim().replace(/\s+/g, ' ').slice(0, 1200);
   if (displayName.length < 3) throw new Error('invalid_ocean_proposal_name');
@@ -374,8 +760,25 @@ export function validateOceanProposal(raw, catalog = OCEANS) {
   const focus = parseJsonArray(raw?.focus).map(x => String(x).trim().replace(/\s+/g, ' ').slice(0, 200)).filter(Boolean).slice(0, 12);
   if (focus.length < 2) throw new Error('invalid_ocean_proposal_focus');
   const known = new Set(catalog.map(o => o.ocean_key));
-  const connections = parseJsonArray(raw?.connections).map(x => String(x).trim().toLowerCase()).filter(x => known.has(x) && x !== key).slice(0, 12);
+  const connections = [...new Set(parseJsonArray(raw?.connections).map(normaliseKey).filter(connectionKey => known.has(connectionKey) && connectionKey !== key))].slice(0, 12);
   return { ocean_key: key, display_name: displayName, pillar_key: pillar, mission, focus, connections };
+}
+
+export function validatePillarProposal(raw, pillars = PILLARS) {
+  const key = normaliseKey(raw?.proposed_pillar_key);
+  if (!PILLAR_KEY_RE.test(key)) throw new Error('invalid_pillar_proposal_key');
+  if ((pillars || PILLARS).some(p => p.key === key)) throw new Error('pillar_proposal_key_exists');
+  const displayName = String(raw?.display_name ?? '').trim().replace(/\s+/g, ' ').slice(0, 120);
+  const mission = String(raw?.mission ?? '').trim().replace(/\s+/g, ' ').slice(0, 1200);
+  if (displayName.length < 3) throw new Error('invalid_pillar_proposal_name');
+  if (mission.length < 30) throw new Error('invalid_pillar_proposal_mission');
+  const known = new Set((pillars || PILLARS).map(p => p.key));
+  const connections = [...new Set(parseJsonArray(raw?.connections).map(normaliseKey).filter(connected => known.has(connected) && connected !== key))].slice(0, 12);
+  const parents = [...new Set(parseJsonArray(raw?.parent_pillars).map(normaliseKey).filter(parent => known.has(parent) && parent !== key))].slice(0, 8);
+  if (!connections.length && !parents.length) throw new Error('pillar_proposal_requires_links');
+  const focus = parseJsonArray(raw?.focus).map(x => String(x).trim().replace(/\s+/g, ' ').slice(0, 200)).filter(Boolean).slice(0, 12);
+  if (focus.length < 2) throw new Error('invalid_pillar_proposal_focus');
+  return { key, display_name: displayName, mission, connections, parent_pillars: parents, focus };
 }
 
 export async function handleOceanCatalogRequest(request, env) {
@@ -393,7 +796,10 @@ export async function handleOceanCatalogRequest(request, env) {
   if (diff !== 0) return new Response(JSON.stringify({ error: 'unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' } });
   if (request.method !== 'GET') return new Response(JSON.stringify({ error: 'method_not_allowed' }), { status: 405, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' } });
   try {
-    const registry = await loadActiveOceanRegistry(env);
+    const [registry,pillarRegistry] = await Promise.all([
+      loadActiveOceanRegistry(env),
+      loadActivePillarRegistry(env)
+    ]);
     return new Response(JSON.stringify({
       kind: 'ocean_specialist_catalog',
       version: OCEAN_CATALOG_VERSION,
@@ -401,7 +807,10 @@ export async function handleOceanCatalogRequest(request, env) {
       foundational_count: OCEANS.length,
       dynamic_count: registry.length - OCEANS.length,
       total_open: registry.length,
-      pillars: PILLARS,
+      foundational_pillar_count: PILLARS.length,
+      dynamic_pillar_count: pillarRegistry.length - PILLARS.length,
+      total_open_pillars: pillarRegistry.length,
+      pillars: pillarRegistry,
       rows: registry
     }), { status: 200, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store, max-age=0', 'Pragma': 'no-cache', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' } });
   } catch (error) {

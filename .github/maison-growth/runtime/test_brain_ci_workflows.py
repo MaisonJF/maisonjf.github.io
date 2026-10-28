@@ -38,6 +38,15 @@ class BrainCiWorkflowTests(unittest.TestCase):
         self.assertNotIn("  pull_request:\n",self.preview)
         self.assertNotIn("  push:\n",self.preview)
 
+    def test_private_commercial_preview_gates_steps_without_job_level_secret_condition(self):
+        self.assertIn("id: config",self.preview)
+        self.assertIn("steps.config.outputs.configured == 'true'",self.preview)
+        self.assertIn("steps.config.outputs.configured == 'false'",self.preview)
+        self.assertNotIn("secrets.MAISON_BRAIN_PRIVATE_URL != ''",self.preview)
+        self.assertNotIn("secrets.MAISON_BRAIN_CONTROL_TOKEN != ''",self.preview)
+        self.assertNotIn("secrets.MAISON_CF_ACCESS_CLIENT_ID != ''",self.preview)
+        self.assertNotIn("secrets.MAISON_CF_ACCESS_CLIENT_SECRET != ''",self.preview)
+
     def test_private_commercial_preview_cannot_materialize(self):
         self.assertIn("MAISON_A14_MATERIALIZE_ENABLED: 'false'",self.preview)
         self.assertNotIn("MAISON_BRAIN_PROPOSAL_TOKEN",self.preview)

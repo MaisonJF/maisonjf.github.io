@@ -33,6 +33,29 @@ class BrainControlClientTests(unittest.TestCase):
         self.assertEqual(captured["token"],"top-secret")
         self.assertIn("limit=20",captured["url"])
 
+    def test_specialist_ocean_catalog_route_is_read_only_and_validated(self):
+        captured={}
+        def transport(url,**kwargs):
+            captured["url"]=url
+            return {
+                "kind":"ocean_specialist_catalog",
+                "version":"JF-OCEANS-2026.10.2",
+                "pillars":[{"key":"designer-luxury-houses"}],
+                "rows":[{"ocean_key":"brand-tom-ford","pillar_key":"designer-luxury-houses"}],
+            }
+        client=BrainControlClient("https://brain.example","secret",transport=transport)
+        payload=client.ocean_catalog()
+        self.assertIn("/internal/oceans/catalog",captured["url"])
+        self.assertEqual(payload["rows"][0]["ocean_key"],"brand-tom-ford")
+        self.assertEqual(payload["pillars"][0]["key"],"designer-luxury-houses")
+
+    def test_specialist_ocean_catalog_rejects_wrong_payload_shape(self):
+        def transport(url,**kwargs):
+            return {"kind":"ocean_specialist_catalog","rows":{},"pillars":[]}
+        client=BrainControlClient("https://brain.example","secret",transport=transport)
+        with self.assertRaises(BrainControlError):
+            client.ocean_catalog()
+
     def test_learning_route_is_read_only_client_call(self):
         captured={}
         def transport(url,**kwargs):

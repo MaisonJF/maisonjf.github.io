@@ -43,12 +43,18 @@ export async function onRequestPost({ request, env }) {
       return json({ error: 'Faltam dados para preparar o recibo.' }, 422);
     }
 
-    // A compra confirmada entra no Brain de forma idempotente, sem depender do GA,
-    // do consentimento de analytics ou de uma segunda visita do cliente.
-    try {
-      if (env?.MAISON_BRAIN_DB) await recordStripePurchase(env.MAISON_BRAIN_DB, session);
-    } catch (_) {
-      // O recibo não deve falhar só porque a camada de aprendizagem está indisponível.
+    // A compra confirmada entra de forma idempotente no armazenamento de comércio
+    // e, quando disponível, no mesmo fluxo de eventos usado pelo Growth Brain.
+    // Não dependemos do GA nem do consentimento de analytics para registar a transação.
+    const eventDatabases = [...new Set([env?.GROWTH_DB, env?.MAISON_BRAIN_DB].filter(
+      db => db && typeof db.prepare === 'function'
+    ))];
+    for (const db of eventDatabases) {
+      try {
+        await recordStripePurchase(db, session);
+      } catch (_) {
+        // A emissão do recibo não falha se um destino de eventos estiver indisponível.
+      }
     }
 
     const paymentResponse = await stripeGet(

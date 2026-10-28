@@ -7,6 +7,7 @@ on:
       - main
       - feat/pdi-exponential-growth
       - feat/maison-exponential-editorial-expansion
+      - feat/oceans-candidate-potential-true-20261028
     paths:
       - '.github/maison-growth/brain/**'
       - '.github/maison-growth/oceans/**'
@@ -15,6 +16,8 @@ on:
       - 'functions/_lib/offer-brain.js'
       - 'functions/_lib/oracle-territories.js'
       - 'functions/_lib/pdi-theme-sources.js'
+      - 'workers/maison-intelligence/src/ocean_catalog.js'
+      - 'workers/maison-intelligence/src/candidate_inbox.js'
       - '.github/workflows/refresh-maison-derived-context.yml'
 
 permissions:

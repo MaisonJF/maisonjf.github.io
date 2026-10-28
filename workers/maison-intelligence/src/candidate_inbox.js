@@ -1,5 +1,5 @@
 import { sha256Hex, uniqueCanonicalUrls } from './core.js';
-import { loadActiveOceanRegistry, validateOceanProposal } from './ocean_catalog.js';
+import { loadActiveOceanRegistry, loadActivePillarRegistry, validateOceanProposal, validatePillarProposal } from './ocean_catalog.js';
 
 const CANDIDATE_DECISIONS=new Set(['approve','reject','archive','defer','develop']);
 
@@ -179,18 +179,32 @@ export async function decideCandidateInbox(env,raw){
   ).bind(candidateId).first();
   if(!exists)throw new Error('candidate_not_found');
   let proposedOcean=null;
+  let proposedPillar=null;
   if(decision==='approve'&&exists.candidate_type==='ocean_proposal'){
     let payload;
     try{payload=JSON.parse(exists.payload_json||'{}');}catch{throw new Error('invalid_ocean_proposal_payload');}
-    {
+    if(payload.proposal_kind==='pillar_proposal'){
+      const prior=await env.GROWTH_DB.prepare(
+        'SELECT pillar_key FROM ocean_pillar_registry WHERE source_candidate_id=?1 LIMIT 1'
+      ).bind(candidateId).first();
+      if(prior){
+        proposedPillar={key:String(prior.pillar_key),already_registered:true};
+      }else{
+        const activePillars=await loadActivePillarRegistry(env);
+        proposedPillar={...validatePillarProposal(payload,activePillars),already_registered:false};
+      }
+    }else{
       const prior=await env.GROWTH_DB.prepare(
         'SELECT ocean_key FROM ocean_specialist_registry WHERE source_candidate_id=?1 LIMIT 1'
       ).bind(candidateId).first();
       if(prior){
         proposedOcean={ocean_key:String(prior.ocean_key),already_registered:true};
       }else{
-        const activeRegistry=await loadActiveOceanRegistry(env);
-        proposedOcean={...validateOceanProposal(payload,activeRegistry),already_registered:false};
+        const [activeRegistry,activePillars]=await Promise.all([
+          loadActiveOceanRegistry(env),
+          loadActivePillarRegistry(env)
+        ]);
+        proposedOcean={...validateOceanProposal(payload,activeRegistry,activePillars),already_registered:false};
       }
     }
   }
@@ -211,11 +225,26 @@ export async function decideCandidateInbox(env,raw){
       JSON.stringify(proposedOcean.focus),JSON.stringify(proposedOcean.connections),candidateId,now,now
     ));
   }
+  if(proposedPillar&&!proposedPillar.already_registered){
+    const now=new Date().toISOString();
+    statements.push(env.GROWTH_DB.prepare(`
+      INSERT INTO ocean_pillar_registry(
+        pillar_key,display_name,mission,focus_json,connections_json,parent_pillars_json,
+        lifecycle_state,source_candidate_id,created_at,updated_at
+      ) VALUES(?,?,?,?,?,?,'open',?,?,?)
+    `).bind(
+      proposedPillar.key,proposedPillar.display_name,proposedPillar.mission,
+      JSON.stringify(proposedPillar.focus),JSON.stringify(proposedPillar.connections),
+      JSON.stringify(proposedPillar.parent_pillars),candidateId,now,now
+    ));
+  }
   await env.GROWTH_DB.batch(statements);
   return {
     ok:true,decision_id:decisionId,candidate_id:candidateId,decision,
     ocean_registered:proposedOcean?.ocean_key||null,
     ocean_lifecycle_state:proposedOcean?'open':null,
+    pillar_registered:proposedPillar?.key||null,
+    pillar_lifecycle_state:proposedPillar?'open':null,
     live:false,automatic_activation:false,public_side_effects:false
   };
 }

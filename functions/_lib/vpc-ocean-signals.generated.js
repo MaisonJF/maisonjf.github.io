@@ -413,6 +413,96 @@ export const VPC_OCEAN_SIGNALS=[
     "themes": [
       "social comparison"
     ]
+  },
+  {
+    "id": "fadiga-de-decidir-em-escolhas-pequenas",
+    "painLanguage": "Depois de um dia cheio de decisões, até escolher o que comer, vestir ou ver pode parecer mais uma tarefa. A pessoa adia escolhas pequenas, procura alguém que decida por ela ou sente irritação com opções que normalmente seriam simples.",
+    "intent": "explorar a fadiga associada à acumulação de decisões quotidianas e a sobrecarga de escolha, distinguindo excesso de opções, incerteza sobre preferências e cansaço geral sem transformar o tema em diagnóstico",
+    "themes": [
+      "decidir até cansa",
+      "demasiadas opções",
+      "adiar pequenas escolhas",
+      "procurar que alguém decida",
+      "medo de escolher mal",
+      "preferência pouco clara",
+      "choice overload",
+      "decision fatigue"
+    ]
+  },
+  {
+    "id": "trabalho-emocional-de-regular-o-clima-da-relacao",
+    "painLanguage": "Numa relação, uma pessoa pode sentir que lhe cabe perceber o ambiente, iniciar conversas difíceis, suavizar tensões e garantir que ninguém fica magoado. O esforço passa despercebido porque, quando resulta, parece que não aconteceu nada.",
+    "intent": "investigar a distribuição do trabalho emocional nas relações e o esforço de regular o clima relacional, distinguindo cuidado recíproco de responsabilidade unilateral e sem presumir que todos os casais funcionam da mesma forma",
+    "themes": [
+      "ser quem mantém a paz",
+      "antecipar a tensão",
+      "regular o ambiente emocional",
+      "iniciar sempre a reparação",
+      "cuidado recíproco",
+      "esforço que ninguém vê",
+      "emotion work",
+      "relational emotional labour"
+    ]
+  },
+  {
+    "id": "identidade-apos-mudanca-de-papel-profissional",
+    "painLanguage": "Quando muda o trabalho, termina uma função ou deixa de ser a pessoa a quem todos recorrem, pode surgir um vazio inesperado: a rotina mudou, mas também mudou a forma como a pessoa se reconhece e percebe o seu lugar.",
+    "intent": "explorar mudanças de identidade e pertença associadas a transições profissionais ou à perda de um papel, distinguindo adaptação prática, luto por uma versão anterior de si e descoberta de novas referências",
+    "themes": [
+      "quem sou fora da função",
+      "perder o papel de referência",
+      "mudança de trabalho",
+      "a versão antiga já não serve",
+      "pertença depois da mudança",
+      "rotina sem identidade",
+      "career transition",
+      "role identity"
+    ]
+  },
+  {
+    "id": "dificuldade-em-receber-sem-sentir-divida",
+    "painLanguage": "Receber ajuda, atenção ou um presente pode trazer alegria e, ao mesmo tempo, uma obrigação imediata de retribuir. Em vez de simplesmente aceitar, a pessoa começa a calcular o que deve, como compensar ou se ficou em falta.",
+    "intent": "explorar a dificuldade em receber cuidado, ajuda ou generosidade sem sentir uma dívida imediata, distinguindo reciprocidade escolhida de obrigação percebida e evitando generalizações sobre personalidade ou história pessoal",
+    "themes": [
+      "aceitar sem compensar",
+      "sentir que fiquei a dever",
+      "receber cuidado",
+      "retribuir imediatamente",
+      "reciprocidade ou obrigação",
+      "dizer obrigado e ficar",
+      "receiving support",
+      "reciprocity"
+    ]
+  },
+  {
+    "id": "ressaca-emocional-depois-de-um-conflito",
+    "painLanguage": "A conversa terminou e, à superfície, ficou tudo resolvido. Ainda assim, a pessoa continua a rever frases, a antecipar uma nova discussão ou a sentir-se distante, como se o corpo e a confiança não tivessem acompanhado o fim do conflito.",
+    "intent": "explorar o intervalo entre resolução verbal e recuperação de segurança ou proximidade depois de um conflito, distinguindo desacordo pontual, reparação incompleta e padrões recorrentes sem presumir abuso ou diagnóstico",
+    "themes": [
+      "a conversa acabou mas não passou",
+      "rever o que foi dito",
+      "voltar a confiar depois da tensão",
+      "reparação incompleta",
+      "distância depois de resolver",
+      "proximidade depois do conflito",
+      "conflict recovery",
+      "relational repair"
+    ]
+  },
+  {
+    "id": "paralisia-entre-compromissos-que-ja-nao-fazem-sentido",
+    "painLanguage": "A pessoa continua a cumprir um compromisso porque já investiu tempo, dinheiro, reputação ou expectativas alheias. Mesmo quando percebe que deixou de fazer sentido, sair parece significar admitir desperdício ou desiludir alguém.",
+    "intent": "explorar a tensão entre persistir num compromisso e rever uma escolha à luz de novas informações, distinguindo perseverança útil, custo afundado e receio de desapontar sem prescrever decisões individuais",
+    "themes": [
+      "continuar porque já investi",
+      "medo de admitir que mudou",
+      "desiludir alguém ao sair",
+      "persistir ou rever",
+      "compromisso sem sentido atual",
+      "custo do que já passou",
+      "sunk cost",
+      "commitment reconsideration"
+    ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-10-27";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-10-28";

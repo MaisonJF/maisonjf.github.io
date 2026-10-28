@@ -22,6 +22,8 @@ ORGANS={
     "site_conversion":{"contract":"knowledge_graph","mode":"relevance"},
     "bundles_offers":{"contract":"commercial_context","mode":"relevance"},
     "future_products":{"contract":"knowledge_graph","mode":"relevance"},
+    "maison_internal_growth":{"contract":"knowledge_graph","mode":"internal_relevance"},
+    "founder_personal_growth":{"contract":"knowledge_graph","mode":"private_opt_in_context"},
 }
 
 def _rows(payload: Any) -> list[Mapping[str,Any]]:
@@ -40,6 +42,37 @@ def build_contract() -> dict[str,Any]:
     canonical=[_id(x) for x in candidates if _id(x)]
     graph_ids=[str(x.get("id") or "").strip() for x in graph.get("oceans",[]) if isinstance(x,Mapping)]
     graph_ids=[x for x in graph_ids if x]
+    network=graph.get("specialistOceanNetwork",{})
+    specialist_oceans=[x for x in network.get("oceans",[]) if isinstance(x,Mapping)] if isinstance(network,Mapping) else []
+    specialist_pillars=[x for x in network.get("pillars",[]) if isinstance(x,Mapping)] if isinstance(network,Mapping) else []
+    specialist_ocean_ids=[str(x.get("ocean_key") or "").strip() for x in specialist_oceans]
+    specialist_pillar_ids=[str(x.get("key") or x.get("pillar_key") or "").strip() for x in specialist_pillars]
+    specialist_ocean_ids=[x for x in specialist_ocean_ids if x]
+    specialist_pillar_ids=[x for x in specialist_pillar_ids if x]
+    specialist_ocean_set=set(specialist_ocean_ids)
+    specialist_pillar_set=set(specialist_pillar_ids)
+    broken_ocean_links=sorted(
+        f"{ocean.get('ocean_key')} -> {link}"
+        for ocean in specialist_oceans
+        for link in ocean.get("connections",[])
+        if link not in specialist_ocean_set
+    )
+    broken_pillar_links=sorted(
+        f"{pillar.get('key') or pillar.get('pillar_key')} -> {link}"
+        for pillar in specialist_pillars
+        for link in pillar.get("connections",[])
+        if link not in specialist_pillar_set
+    )
+    oceans_without_pillar=sorted(
+        str(ocean.get("ocean_key"))
+        for ocean in specialist_oceans
+        if str(ocean.get("pillar_key") or "") not in specialist_pillar_set
+    )
+    empty_pillars=sorted(
+        str(pillar.get("key") or pillar.get("pillar_key"))
+        for pillar in specialist_pillars
+        if not any(str(ocean.get("pillar_key") or "")==str(pillar.get("key") or pillar.get("pillar_key")) for ocean in specialist_oceans)
+    )
     canonical_set=set(canonical)
     graph_set=set(graph_ids)
     missing=sorted(canonical_set-graph_set)
@@ -48,7 +81,7 @@ def build_contract() -> dict[str,Any]:
     duplicate_graph=len(graph_ids)!=len(graph_set)
 
     return {
-        "schema_version":"ocean_universal_coverage_v1",
+        "schema_version":"ocean_universal_coverage_v2",
         "kind":"maison_ocean_capability_contract",
         "mode":"derived_at_read_time",
         "principle":"Every canonical Ocean is addressable by every MAISON organ through shared contracts; relevance is decided downstream and is never forced.",
@@ -62,6 +95,46 @@ def build_contract() -> dict[str,Any]:
             "no_private_or_paid_bodies":True,
         },
         "organs":ORGANS,
+        "specialist_network":{
+            "foundational_pillars":len(specialist_pillar_set),
+            "foundational_oceans":len(specialist_ocean_set),
+            "brand_oceans":sum(1 for ocean in specialist_oceans if str(ocean.get("ocean_key","")).startswith("brand-")),
+            "ocean_to_ocean_edges":sum(len(ocean.get("connections",[])) for ocean in specialist_oceans),
+            "pillar_to_pillar_edges":sum(len(pillar.get("connections",[])) for pillar in specialist_pillars),
+            "duplicate_ocean_keys":len(specialist_ocean_ids)!=len(specialist_ocean_set),
+            "duplicate_pillar_keys":len(specialist_pillar_ids)!=len(specialist_pillar_set),
+            "broken_ocean_links":broken_ocean_links,
+            "broken_pillar_links":broken_pillar_links,
+            "oceans_without_known_pillar":oceans_without_pillar,
+            "pillars_without_ocean":empty_pillars,
+            "all_links_resolve":not (broken_ocean_links or broken_pillar_links or oceans_without_pillar or empty_pillars),
+        },
+        "specialist_ocean_ids":sorted(specialist_ocean_set),
+        "specialist_pillar_ids":sorted(specialist_pillar_set),
+        "all_ocean_ids":sorted(canonical_set|specialist_ocean_set),
+        "all_addressable_ocean_count":len(canonical_set|specialist_ocean_set),
+        "growth_layers":{
+            "maison_internal":{
+                "route":"maison_internal_growth",
+                "purpose":"Use relevant Ocean evidence to improve the Maison's internal strategy, operations, systems, capability and decisions.",
+                "source_of_truth":"existing Maison Brain and its canonical growth framework",
+                "subpoint_matching":"Resolve against the existing canonical subpoints; do not create a parallel taxonomy from an Ocean alone.",
+                "human_review_required":True,
+                "automatic_execution":False,
+            },
+            "founder_personal":{
+                "route":"founder_personal_growth",
+                "purpose":"Offer relevant reflection, learning and decision-support to the founder when explicitly useful.",
+                "source_of_truth":"existing private founder-growth context and its canonical subpoints",
+                "subpoint_matching":"Match only to the existing framework; preserve unmatched signals as internal context candidates.",
+                "opt_in_context_only":True,
+                "human_confirmation_required":True,
+                "infer_founder_traits_from_generic_ocean":False,
+                "public_personalisation":False,
+                "personal_data_in_public_ocean_snapshot":False,
+                "automatic_execution":False,
+            },
+        },
         "ocean_ids":sorted(canonical_set),
         "summary":{
             "canonical_oceans":len(canonical),
@@ -71,6 +144,9 @@ def build_contract() -> dict[str,Any]:
             "orphaned_in_graph":len(orphaned),
             "duplicate_canonical_ids":duplicate_canonical,
             "duplicate_graph_ids":duplicate_graph,
+            "specialist_pillars":len(specialist_pillar_set),
+            "specialist_oceans":len(specialist_ocean_set),
+            "all_addressable_oceans":len(canonical_set|specialist_ocean_set),
         },
         "gaps":{
             "missing_from_graph":missing,
@@ -79,6 +155,17 @@ def build_contract() -> dict[str,Any]:
     }
 
 def validate(payload: Mapping[str,Any]) -> None:
+    network=payload["specialist_network"]
+    if network["duplicate_ocean_keys"] or network["duplicate_pillar_keys"]:
+        raise SystemExit("ocean_specialist_network_duplicate_id")
+    if network["broken_ocean_links"] or network["broken_pillar_links"] or network["oceans_without_known_pillar"] or network["pillars_without_ocean"]:
+        details={
+            "broken_ocean_links":network["broken_ocean_links"][:20],
+            "broken_pillar_links":network["broken_pillar_links"][:20],
+            "oceans_without_known_pillar":network["oceans_without_known_pillar"][:20],
+            "pillars_without_ocean":network["pillars_without_ocean"][:20],
+        }
+        raise SystemExit("ocean_specialist_network_link_gap:"+json.dumps(details,ensure_ascii=False))
     s=payload["summary"]
     if s["missing_from_graph"] or s["orphaned_in_graph"]:
         raise SystemExit("ocean_universal_coverage_graph_gap")

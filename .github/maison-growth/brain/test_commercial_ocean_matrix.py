@@ -28,6 +28,39 @@ class CommercialOceanMatrixTests(unittest.TestCase):
             sum(row["digital_feeds"]["oracle_eligible"] for row in rows),
         )
 
+    def test_universal_oceans_feed_internal_maison_and_private_founder_growth(self):
+        universal=build_universal_coverage()
+        self.assertEqual(universal["schema_version"],"ocean_universal_coverage_v2")
+        self.assertIn("maison_internal_growth",universal["organs"])
+        self.assertIn("founder_personal_growth",universal["organs"])
+        growth=universal["growth_layers"]
+        self.assertEqual(growth["maison_internal"]["route"],"maison_internal_growth")
+        self.assertEqual(growth["founder_personal"]["route"],"founder_personal_growth")
+        founder=growth["founder_personal"]
+        self.assertTrue(founder["opt_in_context_only"])
+        self.assertTrue(founder["human_confirmation_required"])
+        self.assertFalse(founder["infer_founder_traits_from_generic_ocean"])
+        self.assertFalse(founder["public_personalisation"])
+        self.assertFalse(founder["personal_data_in_public_ocean_snapshot"])
+        self.assertFalse(founder["automatic_execution"])
+        for route in universal["organs"].values():
+            self.assertIn("contract",route)
+            self.assertIn("mode",route)
+
+    def test_expanded_specialist_network_is_large_connected_and_open_cardinality(self):
+        universal=build_universal_coverage()
+        network=universal["specialist_network"]
+        self.assertGreaterEqual(network["foundational_pillars"],40)
+        self.assertGreaterEqual(network["foundational_oceans"],100)
+        self.assertGreaterEqual(network["brand_oceans"],45)
+        self.assertGreater(network["ocean_to_ocean_edges"],network["foundational_oceans"])
+        self.assertGreater(network["pillar_to_pillar_edges"],0)
+        self.assertTrue(network["all_links_resolve"])
+        self.assertEqual(network["broken_ocean_links"],[])
+        self.assertEqual(network["broken_pillar_links"],[])
+        self.assertEqual(network["oceans_without_known_pillar"],[])
+        self.assertEqual(network["pillars_without_ocean"],[])
+
     def test_commercial_matches_are_context_only_and_non_executing(self):
         contract=self.payload["contract"]
         self.assertTrue(contract["ocean_metadata_is_context_not_external_evidence"])

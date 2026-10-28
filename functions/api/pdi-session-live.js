@@ -3,6 +3,7 @@ import { getPdiTheme, getPdiPriceForLocale } from '../_lib/pdi-theme-registry.js
 import { normalizeMaisonLocale } from '../_lib/maison-locales.js';
 import { pdiThemeAvailability } from '../_lib/pdi-theme-catalogue.js';
 import { brazilSessionEligibilityResponse } from '../_lib/brazil-market.js';
+import { recordStripePurchase } from '../_lib/commerce-events.js';
 
 export async function onRequestGet({request,env}){
   try{
@@ -61,6 +62,10 @@ export async function onRequestGet({request,env}){
       return json({error:'Esta compra não dá acesso a esta sessão.'},403);
     }
 
+    // Regista a compra paga no Growth Brain e no armazenamento de comércio,
+    // sem depender de Google Analytics nem de uma chamada secundária do browser.
+    await recordPaidPdiPurchase(env,stripeSession);
+
     const localizedProduct=await pdiThemeAvailability(env,theme,locale);
     const frozen=await getOrCreateQuestionSession({env,stripeSession,theme,locale});
     if(!frozen||frozen.packA?.length!==14||frozen.packB?.length!==14){
@@ -87,6 +92,19 @@ export async function onRequestGet({request,env}){
       message:String(error?.message||'unknown').slice(0,180)
     });
     return json({error:'Não foi possível abrir esta sessão.'},500);
+  }
+}
+
+async function recordPaidPdiPurchase(env,session){
+  const databases=[...new Set([env?.GROWTH_DB,env?.MAISON_BRAIN_DB].filter(
+    db=>db&&typeof db.prepare==='function'
+  ))];
+  for(const db of databases){
+    try{
+      await recordStripePurchase(db,session);
+    }catch{
+      // A verified paid game remains accessible if an analytics database is unavailable.
+    }
   }
 }
 
