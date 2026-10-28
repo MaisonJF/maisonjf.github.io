@@ -126,8 +126,8 @@ function routeMode(){const ranked=Object.entries(routeScores).sort((a,b)=>b[1]-a
 const FALLBACK_OFFERS=[
  {id:'oracle-fallback',slot:'oracle',slotLabel:'Outra perspectiva',title:'Oráculo MAISON JF®',description:'Uma abertura simbólica para olhares para isto de outro ângulo.',href:'../../oraculo/',priceLabel:'2 €'},
  {id:'pdi-fallback',slot:'game',slotLabel:'Para abrir conversa',title:'PÁRA DE IGNORAR!',description:'28 perguntas para duas pessoas abrirem uma conversa que nem sempre sabe começar sozinha.',href:'../../para-de-ignorar/',priceLabel:'5 €'},
- {id:'physical-fallback',slot:'physical',slotLabel:'Um gesto concreto',title:'Produtos físicos',description:'Pausa, toque e aroma para transformar o que sentiste num gesto simples.',href:'../../produtos/',priceLabel:''},
- {id:'consultation-fallback',slot:'consultation',slotLabel:'Quero ir mais fundo',title:'Consultas',description:'Quando queres contexto, leitura e uma conversa mais funda sobre o que apareceu.',href:'../../servicos/',priceLabel:''}
+ {id:'physical-fallback',slot:'physical',slotLabel:'Um gesto concreto',title:'Produtos físicos',description:'Pausa, toque e aroma para transformar o que sentiste num gesto simples.',href:'../../produtos/',priceLabel:'Desde 7 €'},
+ {id:'consultation-fallback',slot:'consultation',slotLabel:'Quero ir mais fundo',title:'Consulta de Tarot',description:'Uma leitura individual para explorar a situação por outro ângulo.',href:'../../servicos/',priceLabel:'35 €'}
 ];
 function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
 function attributedHref(raw,offerId,result,route,brainVersion){
@@ -142,7 +142,7 @@ function attributedHref(raw,offerId,result,route,brainVersion){
 function offerMarkup(o,index,result,route,brainVersion){
  const label=o.slotLabel||'';
  const href=attributedHref(o.href,o.id,result,route,brainVersion);
- return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brainVersion||'fallback')+'" href="'+esc(href)+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
+ return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brainVersion||'fallback')+'" href="'+esc(href)+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><b class="vpc-offer__price'+(o.priceLabel?'':' vpc-offer__price--browse')+'">'+esc(o.priceLabel||'Ver opções e preços')+'</b><span>'+esc(o.description||'')+'</span></a>';
 }
 async function renderBrainOffers(result,ranked,route){
  const host=$('nextLinks');
