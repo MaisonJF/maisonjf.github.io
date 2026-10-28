@@ -565,7 +565,7 @@ export async function loadActivePillarRegistry(env) {
   const registry = [...PILLARS.map(p => ({ ...p }))];
   if (!env?.GROWTH_DB) return registry;
   const result = await env.GROWTH_DB.prepare(`
-    SELECT pillar_key,display_name,mission,connections_json,parent_pillars_json,lifecycle_state,source_candidate_id
+    SELECT pillar_key,display_name,mission,focus_json,connections_json,parent_pillars_json,lifecycle_state,source_candidate_id
       FROM ocean_pillar_registry
      WHERE lifecycle_state='open'
      ORDER BY created_at,pillar_key
