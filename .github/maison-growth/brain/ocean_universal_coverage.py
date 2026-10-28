@@ -42,6 +42,37 @@ def build_contract() -> dict[str,Any]:
     canonical=[_id(x) for x in candidates if _id(x)]
     graph_ids=[str(x.get("id") or "").strip() for x in graph.get("oceans",[]) if isinstance(x,Mapping)]
     graph_ids=[x for x in graph_ids if x]
+    network=graph.get("specialistOceanNetwork",{})
+    specialist_oceans=[x for x in network.get("oceans",[]) if isinstance(x,Mapping)] if isinstance(network,Mapping) else []
+    specialist_pillars=[x for x in network.get("pillars",[]) if isinstance(x,Mapping)] if isinstance(network,Mapping) else []
+    specialist_ocean_ids=[str(x.get("ocean_key") or "").strip() for x in specialist_oceans]
+    specialist_pillar_ids=[str(x.get("key") or x.get("pillar_key") or "").strip() for x in specialist_pillars]
+    specialist_ocean_ids=[x for x in specialist_ocean_ids if x]
+    specialist_pillar_ids=[x for x in specialist_pillar_ids if x]
+    specialist_ocean_set=set(specialist_ocean_ids)
+    specialist_pillar_set=set(specialist_pillar_ids)
+    broken_ocean_links=sorted(
+        f"{ocean.get('ocean_key')} -> {link}"
+        for ocean in specialist_oceans
+        for link in ocean.get("connections",[])
+        if link not in specialist_ocean_set
+    )
+    broken_pillar_links=sorted(
+        f"{pillar.get('key') or pillar.get('pillar_key')} -> {link}"
+        for pillar in specialist_pillars
+        for link in pillar.get("connections",[])
+        if link not in specialist_pillar_set
+    )
+    oceans_without_pillar=sorted(
+        str(ocean.get("ocean_key"))
+        for ocean in specialist_oceans
+        if str(ocean.get("pillar_key") or "") not in specialist_pillar_set
+    )
+    empty_pillars=sorted(
+        str(pillar.get("key") or pillar.get("pillar_key"))
+        for pillar in specialist_pillars
+        if not any(str(ocean.get("pillar_key") or "")==str(pillar.get("key") or pillar.get("pillar_key")) for ocean in specialist_oceans)
+    )
     canonical_set=set(canonical)
     graph_set=set(graph_ids)
     missing=sorted(canonical_set-graph_set)
@@ -64,6 +95,22 @@ def build_contract() -> dict[str,Any]:
             "no_private_or_paid_bodies":True,
         },
         "organs":ORGANS,
+        "specialist_network":{
+            "foundational_pillars":len(specialist_pillar_set),
+            "foundational_oceans":len(specialist_ocean_set),
+            "brand_oceans":sum(1 for ocean in specialist_oceans if str(ocean.get("ocean_key","")).startswith("brand-")),
+            "ocean_to_ocean_edges":sum(len(ocean.get("connections",[])) for ocean in specialist_oceans),
+            "pillar_to_pillar_edges":sum(len(pillar.get("connections",[])) for pillar in specialist_pillars),
+            "duplicate_ocean_keys":len(specialist_ocean_ids)!=len(specialist_ocean_set),
+            "duplicate_pillar_keys":len(specialist_pillar_ids)!=len(specialist_pillar_set),
+            "broken_ocean_links":broken_ocean_links,
+            "broken_pillar_links":broken_pillar_links,
+            "oceans_without_known_pillar":oceans_without_pillar,
+            "pillars_without_ocean":empty_pillars,
+            "all_links_resolve":not (broken_ocean_links or broken_pillar_links or oceans_without_pillar or empty_pillars),
+        },
+        "specialist_ocean_ids":sorted(specialist_ocean_set),
+        "specialist_pillar_ids":sorted(specialist_pillar_set),
         "growth_layers":{
             "maison_internal":{
                 "route":"maison_internal_growth",
@@ -103,6 +150,11 @@ def build_contract() -> dict[str,Any]:
     }
 
 def validate(payload: Mapping[str,Any]) -> None:
+    network=payload["specialist_network"]
+    if network["duplicate_ocean_keys"] or network["duplicate_pillar_keys"]:
+        raise SystemExit("ocean_specialist_network_duplicate_id")
+    if network["broken_ocean_links"] or network["broken_pillar_links"] or network["oceans_without_known_pillar"] or network["pillars_without_ocean"]:
+        raise SystemExit("ocean_specialist_network_link_gap")
     s=payload["summary"]
     if s["missing_from_graph"] or s["orphaned_in_graph"]:
         raise SystemExit("ocean_universal_coverage_graph_gap")
