@@ -675,7 +675,7 @@ export function validateOceanProposal(raw, catalog = OCEANS, pillars = PILLARS) 
   const focus = parseJsonArray(raw?.focus).map(x => String(x).trim().replace(/\s+/g, ' ').slice(0, 200)).filter(Boolean).slice(0, 12);
   if (focus.length < 2) throw new Error('invalid_ocean_proposal_focus');
   const known = new Set(catalog.map(o => o.ocean_key));
-  const connections = [...new Set(parseJsonArray(raw?.connections).map(normaliseKey).filter(key => known.has(key) && key !== key))].slice(0, 12);
+  const connections = [...new Set(parseJsonArray(raw?.connections).map(normaliseKey).filter(connectionKey => known.has(connectionKey) && connectionKey !== key))].slice(0, 12);
   return { ocean_key: key, display_name: displayName, pillar_key: pillar, mission, focus, connections };
 }
 
