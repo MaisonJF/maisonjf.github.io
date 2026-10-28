@@ -1,4 +1,4 @@
-import { pdiThemeAvailability } from '../_lib/pdi-theme-catalogue.js';
+import { listAvailablePdiThemes } from '../_lib/pdi-theme-catalogue.js';
 import { normalizeMaisonLocale, stripeLocaleForMaison } from '../_lib/maison-locales.js';
 import { brazilMarketAccessResponse } from '../_lib/brazil-market.js';
 
@@ -25,7 +25,7 @@ export async function onRequestPost({request,env}){
     }
 
     const body=await request.json().catch(()=>({}));
-    const theme=String(body?.theme||'relacoes');
+    const requestedTheme=String(body?.theme||'');
     const mode=String(body?.mode||'duo');
     if(!['duo','group'].includes(mode)){
       return json({error:'Modo de jogo inválido.'},400);
@@ -35,9 +35,13 @@ export async function onRequestPost({request,env}){
     if(!locale)return json({error:'Idioma inválido.'},400);
     const marketError = brazilMarketAccessResponse(request, locale);
     if (marketError) return marketError;
-    const product=await pdiThemeAvailability(env,theme,locale);
-    if(!product)return json({error:'Produto inválido.'},400);
-    if(!product.available)return json({error:'Este tema ainda não está disponível neste idioma.'},409);
+    const availableThemes=(await listAvailablePdiThemes(env,locale)).filter(item=>
+      mode==='group' ? item.family==='Amigos, Grupos & Festas' : item.family!=='Amigos, Grupos & Festas'
+    );
+    const product=requestedTheme
+      ? availableThemes.find(item=>item.slug===requestedTheme)
+      : availableThemes[Math.floor(Math.random()*availableThemes.length)];
+    if(!product)return json({error:'O jogo está temporariamente indisponível neste modo. Tenta novamente mais tarde.'},409);
 
     const params=new URLSearchParams();
     params.set('mode','payment');
