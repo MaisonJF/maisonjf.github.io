@@ -30,18 +30,20 @@ export async function pseudonymousBuyerKey({env,email,stripeSessionId}={}){
   return 'byr_'+hex(new Uint8Array(sig));
 }
 
-export async function listActivePaidQuestions(db,theme){
+export async function listActivePaidQuestions(db,theme,themeAliases=[]){
+  const themes=[...new Set([theme,...(Array.isArray(themeAliases)?themeAliases:[])].map(value=>String(value||'').trim()).filter(Boolean))];
+  const placeholders=themes.map((_,index)=>'?'+(index+1)).join(',');
   const result=await db.prepare(
     `SELECT question_id AS id, theme, text, subthemes_json, class, stage, intensity,
             direction, time_scope, exposure, status, scores_json, viral_json,
             conflicts_json, pairs_json, similarity_group
        FROM vault_questions
-      WHERE theme=?1 AND status='active' AND exposure='paid'
+      WHERE theme IN (${placeholders}) AND status='active' AND exposure='paid'
       ORDER BY question_id`
-  ).bind(theme).all();
+  ).bind(...themes).all();
   return (result.results||[]).map(row=>({
     id:row.id,
-    theme:row.theme,
+    theme,
     text:row.text,
     subthemes:parseJson(row.subthemes_json,[]),
     class:row.class,
