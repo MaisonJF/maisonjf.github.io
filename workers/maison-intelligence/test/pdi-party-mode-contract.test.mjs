@@ -59,6 +59,35 @@ test('group and party themes enter the editorial backlog but are not exposed bef
   ]) assert.ok(groupSeedBlock.includes("label:'"+label+"'"),'missing deck theme: '+label);
 });
 
+test('compatible couple question pools are reusable in group packs without copying their bodies',()=>{
+  const sources=read('functions/_lib/pdi-theme-sources.js');
+  const registry=read('functions/_lib/pdi-theme-registry.js');
+  const expansion=read('.github/maison-growth/brain/build_pdi_expansion_queue.mjs');
+  const start=sources.indexOf('export const PDI_GROUP_QUESTION_REUSE=Object.freeze({');
+  const end=sources.indexOf('});',start);
+  assert.ok(start>=0&&end>start,'canonical couple-to-group reuse map exists');
+  const crosswalk=sources.slice(start,end);
+  for(const key of [
+    'primeira-impressao-do-grupo','deck-i-espelho-grupo','amigos-sem-filtro',
+    'o-que-nos-une','conversas-de-mesa','a-proxima-aventura',
+    'deck-b-relacoes-fantasmas','deck-c-dinheiro-status-ego','deck-g-futuro-apatia'
+  ]) assert.ok(crosswalk.includes("'"+key+"'"),'missing group crosswalk: '+key);
+  for(const key of [
+    'primeiras-impressoes','pequenas-manias','o-que-admiro-em-ti',
+    'humor-e-brincadeira','sonhos-e-planos-absurdos','futuro-imaginado',
+    'dinheiro-a-dois','perguntas-que-nunca-fiz'
+  ]) assert.ok(crosswalk.includes("'"+key+"'"),'missing reusable couple theme: '+key);
+  for(const sensitive of [
+    'desejo-e-iniciativa','toque-e-proximidade','sexo-sem-roteiro',
+    'segredos-e-silencios','medos-que-nao-mostro','o-passado-que-ainda-aparece'
+  ]) assert.doesNotMatch(crosswalk,new RegExp(sensitive),'sensitive couple themes must not be auto-routed to group packs');
+  assert.match(registry,/PDI_GROUP_QUESTION_REUSE\[groupEvidence\.sourceId\]/);
+  assert.match(registry,/questionReuseSourceKeys:reusedQuestionThemeKeys/);
+  assert.match(expansion,/reuseExistingQuestionThemeKeys:mode==='group'\?reusableQuestionThemeKeys:\[\]/);
+  assert.match(expansion,/sourceQuestionBodiesCopiedToRepository:false/);
+  assert.match(expansion,/groupQuestionReuseSourceLinks:/);
+});
+
 test('group play rotates numbered participants and adds optional party challenges without collecting names or answers',()=>{
   const html=read('para-de-ignorar/jogar.html');
   const start=html.lastIndexOf('<script>');
