@@ -127,6 +127,30 @@ const PDI_GROUP_SEEDS=[
   {slug:'deck-j-verdade-nua-crua',label:'A Verdade Nua e Crua',focus:'arrependimento, honestidade, solidão, sentido e reflexão final com autonomia para passar'}
 ];
 
+
+// Reuse existing approved couple/conversation question pools in selected group
+// themes. This is a semantic crosswalk, not a copy of question bodies. Sensitive
+// intimacy/confession themes are intentionally excluded from automatic reuse.
+export const PDI_GROUP_QUESTION_REUSE=Object.freeze({
+  'primeira-impressao-do-grupo':['primeiras-impressoes'],
+  'quem-conhece-quem':['pequenas-manias'],
+  'deck-i-espelho-grupo':['primeiras-impressoes','pequenas-manias','o-que-admiro-em-ti','humor-e-brincadeira'],
+  'amigos-sem-filtro':['pedir-e-receber','como-gosto-de-ser-cuidado','liberdade-dentro-da-relacao','perguntas-que-nunca-fiz'],
+  'o-que-nos-une':['amigos-e-vida-social','rituais-de-dois','coisas-que-quero-viver-contigo','rotina-e-tedio'],
+  'conversas-de-mesa':['perguntas-que-nunca-fiz','humor-e-brincadeira'],
+  'a-proxima-aventura':['sonhos-e-planos-absurdos','futuro-imaginado'],
+  'noticias-do-futuro':['futuro-imaginado'],
+  'deck-b-relacoes-fantasmas':['pedir-e-receber','distancia-e-presenca','liberdade-dentro-da-relacao'],
+  'deck-c-dinheiro-status-ego':['dinheiro-a-dois'],
+  'deck-g-futuro-apatia':['futuro-imaginado','sonhos-e-planos-absurdos','rotina-e-tedio'],
+  'manual-de-sobrevivencia-social':['telemovel-e-privacidade','quando-preciso-de-espaco'],
+  'inventar-tradicoes':['rituais-de-dois'],
+  'energia-de-festa':['humor-e-brincadeira'],
+  'historias-em-30-segundos':['pequenas-manias','primeiras-impressoes'],
+  'mapa-de-aventuras-locais':['coisas-que-quero-viver-contigo'],
+  'o-nosso-grupo-em-filme':['sonhos-e-planos-absurdos']
+});
+
 const MAISON_NATIVE_SEEDS=[
   {
     slug:'o-que-nunca-te-perguntei',
