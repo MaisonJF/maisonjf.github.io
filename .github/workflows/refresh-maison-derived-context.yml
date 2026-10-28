@@ -7,6 +7,7 @@ on:
       - main
       - feat/pdi-exponential-growth
       - feat/maison-exponential-editorial-expansion
+      - feat/oceans-candidate-potential-true-20261028
     paths:
       - '.github/maison-growth/brain/**'
       - '.github/maison-growth/oceans/**'
