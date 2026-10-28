@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildPdiThemeSourceSignals, groupExactThemeSignals } from '../../../functions/_lib/pdi-theme-sources.js';
+import { buildPdiThemeSourceSignals, groupExactThemeSignals, PDI_GROUP_QUESTION_REUSE } from '../../../functions/_lib/pdi-theme-sources.js';
 import { ORACLE_TERRITORIES } from '../../../functions/_lib/oracle-territories.js';
 
 const HERE=path.dirname(fileURLToPath(import.meta.url));
@@ -49,6 +49,9 @@ const questions=[];
 const seenText=new Set();
 for(const group of themes){
   const sourceKinds=new Set(group.sources||[]);
+  const groupEvidence=(group.evidence||[]).find(item=>item.source==='pdi-group')||null;
+  const groupThemeKey=groupEvidence?.sourceId||'';
+  const reusableQuestionThemeKeys=PDI_GROUP_QUESTION_REUSE[groupThemeKey]||[];
   const wantsGroup=sourceKinds.has('pdi-group');
   const wantsDuo=sourceKinds.has('pdi-conversation')||sourceKinds.has('oracle')||sourceKinds.has('maison-native')||sourceKinds.has('farol')||sourceKinds.has('volta-para-casa')||sourceKinds.has('ocean');
   const modes=[];
@@ -72,6 +75,11 @@ for(const group of themes){
         text,
         sourceKinds:[...(group.sources||[])].sort(),
         sourceSignalRefs:(group.evidence||[]).map(x=>x.source+':'+x.sourceId).sort(),
+        groupThemeKey:mode==='group'?groupThemeKey:null,
+        reuseExistingQuestionThemeKeys:mode==='group'?reusableQuestionThemeKeys:[],
+        reuseExistingLiveVaultQuestions:mode==='group'&&reusableQuestionThemeKeys.length>0,
+        sourceQuestionBodiesCopiedToRepository:false,
+        existingQuestionsRemainAvailableToDuo:true,
         sourceBasis:'internal_theme_catalogue',
         independentlyVerifiedDemand:false,
         status:'needs_editorial',
@@ -161,6 +169,9 @@ const out={
     exactThemeGroups:themes.length,
     duoQuestionDrafts:questions.filter(x=>x.mode==='duo').length,
     groupQuestionDrafts:questions.filter(x=>x.mode==='group').length,
+    groupThemesWithExistingQuestionReuse:Object.keys(PDI_GROUP_QUESTION_REUSE).length,
+    groupQuestionReuseSourceLinks:Object.values(PDI_GROUP_QUESTION_REUSE).reduce((total,keys)=>total+keys.length,0),
+    groupQuestionDraftsLinkedToExistingThemes:questions.filter(x=>x.mode==='group'&&x.reuseExistingLiveVaultQuestions).length,
     questionDrafts:questions.length,
     oracleTerritories:ORACLE_TERRITORIES.length,
     oracleRoleBriefs:oracleRoleBriefs.length,
