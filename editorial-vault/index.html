@@ -14,6 +14,7 @@ body{background:#080808}.admin{width:min(1120px,calc(100% - 28px));margin:0 auto
 .top{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end}
 .field{display:grid;gap:7px}.field label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9b948a}
 .field input,.field select{width:100%;padding:12px;border:1px solid var(--line);background:#090909;color:#eee}
+#plan-file{display:none}
 button{padding:12px 15px;border:1px solid #d8d0c2;background:transparent;color:#eee;cursor:pointer;font:600 10px var(--sans);letter-spacing:.1em;text-transform:uppercase}
 button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.muted{color:#827b72;font-size:12px}
 .list{display:grid;gap:10px}.card{border:1px solid #282522;background:#0b0b0a;padding:16px;display:grid;grid-template-columns:auto 1fr;gap:14px}
@@ -50,6 +51,14 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
   <button id="next-page" disabled>Seguinte</button>
   <button id="export-audit" disabled>Exportar auditoria JSON</button>
   <button id="retire-selected" disabled>Retirar selecionados</button>
+  <button id="quarantine-selected" disabled>Suspender para revisão</button>
+  </div>
+
+  <div class="toolbar" aria-label="Aplicar plano de triagem">
+    <button id="choose-plan">Carregar plano JSON</button>
+    <input id="plan-file" type="file" accept=".json,application/json">
+    <button id="apply-plan" disabled>Aplicar plano carregado</button>
+    <span class="muted" id="plan-summary">Nenhum plano carregado.</span>
   </div>
 
   <div class="muted" id="vault-summary">Vault: a verificar…</div>
@@ -63,7 +72,7 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
  const $=id=>document.getElementById(id);
  const secret=$('secret'),type=$('type'),state=$('state'),list=$('list'),status=$('status'),count=$('count'),vaultSummary=$('vault-summary');
  let rows=[];
- let auditMode=false,auditOffset=0,auditTotal=0;
+ let auditMode=false,auditOffset=0,auditTotal=0,loadedPlan=null;
  const AUDIT_PAGE_SIZE=100,AUDIT_EXPORT_MAX=5000;
  secret.value=sessionStorage.getItem('maisonVaultAdminSecret')||'';
 
@@ -98,6 +107,7 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
    $('approve-all').disabled=true;
    $('export-audit').disabled=!auditMode;
    $('retire-selected').disabled=!auditMode||selected().length===0;
+   $('quarantine-selected').disabled=!auditMode||selected().length===0;
    $('prev-page').disabled=!auditMode||auditOffset===0;
    $('next-page').disabled=!auditMode||(auditOffset+rows.length)>=auditTotal;
  }
@@ -193,6 +203,79 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
      const result=await call('retire',{items,reason:reason.trim()});
      note(result,'ok');
      auditOffset=0;await load();
+   }catch(e){note(e.message,'warning')}
+ });
+ $('choose-plan').addEventListener('click',()=>$('plan-file').click());
+ $('plan-file').addEventListener('change',async()=>{
+   const file=$('plan-file').files&&$('plan-file').files[0];
+   loadedPlan=null;$('apply-plan').disabled=true;
+   $('plan-summary').textContent='Nenhum plano carregado.';
+   if(!file)return;
+   try{
+     const raw=JSON.parse(await file.text());
+     const schemas={
+       'maison-vault-proposed-retirement-v1':{action:'retire',label:'retirada da seleção live',sourceKind:'ocean_seed_candidate',qualityVersion:''},
+       'maison-vault-proposed-quarantine-v1':{action:'quarantine',label:'suspensão temporária para revisão',sourceKind:'ocean_mcp_candidate',qualityVersion:''},
+       'maison-vault-proposed-quarantine-import-batch-v1':{action:'quarantine',label:'suspensão do lote amor-001 para revisão',sourceKind:'maison_private_import',qualityVersion:'private-import:amor-001:v1'}
+     };
+     const selectedSchema=schemas[raw.schema];
+     if(!selectedSchema)throw new Error('Esquema do plano não reconhecido.');
+     if(raw.status!=='PROPOSTA_NAO_APLICADA')throw new Error('O ficheiro não está identificado como proposta pendente.');
+     if(!Array.isArray(raw.items)||!raw.items.length)throw new Error('O plano não contém registos.');
+     if(raw.items.length>1000)throw new Error('O plano excede o limite seguro de 1000 registos.');
+     if(Number(raw.total)!==raw.items.length)throw new Error('A contagem do plano não coincide com os registos.');
+     const expectedSource=selectedSchema.sourceKind;
+     const expectedQualityVersion=selectedSchema.qualityVersion||'';
+     const seen=new Set(),normalized=[];
+     for(const item of raw.items){
+       if(item?.source_kind!==expectedSource||item?.status!=='active'||item?.lifecycle_state!=='live'||
+          (expectedQualityVersion&&item?.quality_version!==expectedQualityVersion)){
+         throw new Error('O plano contém um registo fora do âmbito previsto ('+expectedSource+
+           (expectedQualityVersion?' / '+expectedQualityVersion:'')+', active/live).');
+       }
+       const type=String(item?.content_type||'');
+       const id=String(item?.content_id||'').trim();
+       const valid=type==='question'?/^q_[A-Za-z0-9_-]{4,180}$/.test(id):type==='oracle_block'?/^ob_[A-Za-z0-9_-]{4,180}$/.test(id):false;
+       if(!valid)throw new Error('ID ou tipo inválido no plano.');
+       const key=type+':'+id;
+       if(!seen.has(key)){seen.add(key);normalized.push({content_type:type,content_id:id});}
+     }
+     loadedPlan={action:selectedSchema.action,label:selectedSchema.label,items:normalized,
+       sourceKind:selectedSchema.sourceKind,qualityVersion:selectedSchema.qualityVersion||'',
+       reason:String(raw.reason||'Plano de triagem MAISON JF').slice(0,1000),schema:raw.schema};
+     $('apply-plan').disabled=false;
+     $('plan-summary').textContent=normalized.length+' registos · '+selectedSchema.label+' · '+file.name;
+     note('Plano carregado para pré-visualização. Nada foi alterado; clica em Aplicar plano carregado para confirmar a operação.','ok');
+   }catch(e){
+     loadedPlan=null;$('apply-plan').disabled=true;
+     $('plan-summary').textContent='Plano inválido.';
+     note(e.message,'warning');
+   }
+ });
+ $('apply-plan').addEventListener('click',async()=>{
+   if(!loadedPlan)return;
+   const verb=loadedPlan.action==='retire'?'RETIRAR DA SELEÇÃO LIVE':'MOVER PARA REVISÃO TEMPORÁRIA';
+   const confirmText=verb+' '+loadedPlan.items.length+' registos?\n\nO texto e o histórico não serão apagados.\nMotivo: '+loadedPlan.reason+'\n\nEsta operação altera o estado no Vault privado.';
+   if(!confirm(confirmText))return;
+   try{
+     note('A aplicar plano: '+loadedPlan.items.length+' registos…');
+     const result=await call(loadedPlan.action,{items:loadedPlan.items,reason:loadedPlan.reason,sourceKind:loadedPlan.sourceKind,qualityVersion:loadedPlan.qualityVersion});
+     loadedPlan=null;$('apply-plan').disabled=true;$('plan-file').value='';
+     $('plan-summary').textContent='Plano aplicado; carrega o próximo ficheiro se necessário.';
+     note(result,'ok');
+     auditOffset=0;await load();
+   }catch(e){note(e.message,'warning')}
+ });
+ $('quarantine-selected').addEventListener('click',async()=>{
+   const items=selected();
+   if(!auditMode||!items.length)return;
+   const reason=prompt('Motivo para suspender os candidatos Ocean selecionados até revisão editorial.','Geração automática Ocean; validar PT-PT, qualidade e destino editorial.');
+   if(reason===null)return;
+   if(!confirm('Suspender '+items.length+' registos elegíveis de origem ocean_mcp_candidate? Outros tipos de origem serão ignorados. O texto e o histórico serão preservados.'))return;
+   try{
+     note('A mover candidatos Ocean para revisão…');
+     const result=await call('quarantine',{items,reason:reason.trim()});
+     note(result,'ok');auditOffset=0;await load();
    }catch(e){note(e.message,'warning')}
  });
  $('seed').addEventListener('click',async()=>{

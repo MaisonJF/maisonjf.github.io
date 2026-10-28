@@ -16,12 +16,23 @@ test('Vault audit lists old, candidate, live and retired content without exposin
   assert.match(lib,/FROM vault_questions/);
   assert.match(lib,/FROM vault_oracle_blocks/);
   assert.match(lib,/quality_version/);
+  assert.match(lib,/invalid_quarantine_scope/);
+  assert.match(lib,/allowedAmor001/);
   assert.match(api,/action==='audit-list'/);
   assert.match(api,/action==='retire'/);
+  assert.match(api,/action==='quarantine'/);
   assert.match(api,/MAISON_VAULT_ADMIN_SECRET/);
   assert.match(html,/id="audit-mode"/);
   assert.match(html,/id="export-audit"/);
   assert.match(html,/id="retire-selected"/);
+  assert.match(html,/id="quarantine-selected"/);
+  assert.match(html,/id="apply-plan"/);
+  assert.match(html,/maison-vault-proposed-retirement-v1/);
+  assert.match(html,/maison-vault-proposed-quarantine-v1/);
+  assert.match(html,/maison-vault-proposed-quarantine-import-batch-v1/);
+  assert.match(html,/private-import:amor-001:v1/);
+  assert.match(html,/expectedSource/);
+  assert.match(html,/A contagem do plano não coincide/);
   assert.match(html,/noindex,nofollow,noarchive/);
 });
 
@@ -30,6 +41,11 @@ test('retirement preserves bodies and decisions instead of deleting content',()=
   assert.match(lib,/SET status='retired',lifecycle_state='retired',rotation_state='retired'/);
   assert.match(lib,/INSERT INTO vault_editorial_decisions/);
   assert.match(lib,/physicalDeletion:false/);
+  assert.match(lib,/export async function quarantineOceanEditorialContent/);
+  assert.match(lib,/allowedOcean=requestedSource==='ocean_mcp_candidate'/);
+  assert.match(lib,/allowedAmor001=requestedSource==='maison_private_import'/);
+  assert.match(lib,/source_kind=\?2/);
+  assert.match(lib,/ocean_candidate_quarantine/);
   assert.doesNotMatch(lib,/DELETE\s+FROM\s+vault_questions/i);
   assert.doesNotMatch(lib,/DELETE\s+FROM\s+vault_oracle_blocks/i);
 });

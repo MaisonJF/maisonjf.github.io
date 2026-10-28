@@ -6,7 +6,8 @@ import {
   reviewOceanVaultCandidates,
   seedOceanVaultCandidates,
   listEditorialAuditContent,
-  retireEditorialContent
+  retireEditorialContent,
+  quarantineOceanEditorialContent
 } from '../_lib/vault-candidate-admin.js';
 
 export async function onRequestPost({request,env}){
@@ -46,6 +47,9 @@ export async function onRequestPost({request,env}){
     }
     if(action==='retire'){
       return json(await retireEditorialContent(db,{items:body.items,reason:body.reason}));
+    }
+    if(action==='quarantine'){
+      return json(await quarantineOceanEditorialContent(db,{items:body.items,reason:body.reason,sourceKind:body.sourceKind,qualityVersion:body.qualityVersion}));
     }
     if(action==='activate'){
       return json(await activateOceanVaultCandidates(db,{
