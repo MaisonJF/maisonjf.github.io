@@ -49,7 +49,7 @@ export async function onRequestPost({request,env}){
       return json(await retireEditorialContent(db,{items:body.items,reason:body.reason}));
     }
     if(action==='quarantine'){
-      return json(await quarantineOceanEditorialContent(db,{items:body.items,reason:body.reason}));
+      return json(await quarantineOceanEditorialContent(db,{items:body.items,reason:body.reason,sourceKind:body.sourceKind,qualityVersion:body.qualityVersion}));
     }
     if(action==='activate'){
       return json(await activateOceanVaultCandidates(db,{
