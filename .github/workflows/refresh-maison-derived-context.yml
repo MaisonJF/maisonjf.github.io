@@ -16,6 +16,8 @@ on:
       - 'functions/_lib/offer-brain.js'
       - 'functions/_lib/oracle-territories.js'
       - 'functions/_lib/pdi-theme-sources.js'
+      - 'workers/maison-intelligence/src/ocean_catalog.js'
+      - 'workers/maison-intelligence/src/candidate_inbox.js'
       - '.github/workflows/refresh-maison-derived-context.yml'
 
 permissions:
