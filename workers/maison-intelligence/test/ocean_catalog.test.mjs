@@ -7,6 +7,7 @@ import {
   isFoundationalOceanKey,
   isValidOceanKey,
   selectOceanFocus,
+  selectPillarFocus,
   validateOceanProposal,
   validatePillarProposal
 } from '../src/ocean_catalog.js';
@@ -69,6 +70,33 @@ test('focus selection covers all pillars, returns only valid Ocean cross-links, 
   assert.ok(brandsA.length>=1);
   assert.ok(brandsB.length>=1);
   assert.notDeepEqual(brandsA,brandsB,'brand research should rotate with the run key');
+});
+
+test('pillar focus follows graph neighbours and rotates through long-tail dynamic pillars',()=>{
+  const dynamicPillars=Array.from({length:300},(_,index)=>({
+    key:'dynamic-area-'+String(index).padStart(3,'0'),
+    name:'Dynamic area '+index,
+    mission:'Investigate an approved specialist territory and its cross-domain relationships.',
+    focus:['emerging topic','research direction'],
+    connections:index%2===0?['research-evidence-analytics']:['market-innovation-opportunities'],
+    parent_pillars:[],
+    lifecycle_state:'open',
+    origin:'human_approved_dynamic'
+  }));
+  const pillars=[...OCEAN_PILLARS,...dynamicPillars];
+  const focusOceans=[{ocean_key:'olfactory-universe',pillar_key:'scent-science-research'}];
+  const first=selectPillarFocus({pillars,focusOceans,runKey:'rotating-network-run-A',limit:32});
+  const second=selectPillarFocus({pillars,focusOceans,runKey:'rotating-network-run-B',limit:32});
+  const seedPillar=OCEAN_PILLARS.find(p=>p.key==='scent-science-research');
+  assert.ok(first.some(p=>p.key==='scent-science-research'));
+  assert.ok(seedPillar.connections.some(key=>first.some(p=>p.key===key)));
+  assert.ok(first.some(p=>p.key.startsWith('dynamic-area-')));
+  assert.ok(second.some(p=>p.key.startsWith('dynamic-area-')));
+  assert.notDeepEqual(
+    first.filter(p=>p.key.startsWith('dynamic-area-')).map(p=>p.key),
+    second.filter(p=>p.key.startsWith('dynamic-area-')).map(p=>p.key),
+    'long-tail pillar discovery must rotate between runs'
+  );
 });
 
 test('pillar proposals are connected, distinct, and human-governed before registry insertion',()=>{
