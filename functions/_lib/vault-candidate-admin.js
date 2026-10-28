@@ -130,17 +130,28 @@ export async function retireEditorialContent(db,{items,reason='Retirado após au
     note:'Conteúdo retirado da selecção futura; o registo e a decisão editorial foram preservados.'
   };
 }
-export async function quarantineOceanEditorialContent(db,{items,reason='Conteúdo Ocean suspenso até revisão editorial'}={}){
+export async function quarantineOceanEditorialContent(db,{
+  items,
+  reason='Conteúdo suspenso até revisão editorial',
+  sourceKind='ocean_mcp_candidate',
+  qualityVersion=''
+}={}){
   const normalized=normalizeItems(items);
-  const editorialReason=String(reason||'Conteúdo Ocean suspenso até revisão editorial').replace(/\s+/g,' ').trim().slice(0,1000)||'Conteúdo Ocean suspenso até revisão editorial';
+  const requestedSource=String(sourceKind||'ocean_mcp_candidate').trim();
+  const requestedVersion=String(qualityVersion||'').trim();
+  const allowedOcean=requestedSource==='ocean_mcp_candidate'&&!requestedVersion;
+  const allowedAmor001=requestedSource==='maison_private_import'&&requestedVersion==='private-import:amor-001:v1';
+  if(!allowedOcean&&!allowedAmor001)throw new Error('invalid_quarantine_scope');
+  const editorialReason=String(reason||'Conteúdo suspenso até revisão editorial').replace(/\s+/g,' ').trim().slice(0,1000)||'Conteúdo suspenso até revisão editorial';
   const eligible=[];
   for(const item of normalized){
     const table=item.content_type==='question'?'vault_questions':'vault_oracle_blocks';
     const idCol=item.content_type==='question'?'question_id':'block_id';
-    const row=await db.prepare(`SELECT ${idCol} AS id,source_kind,status,lifecycle_state
+    const row=await db.prepare(`SELECT ${idCol} AS id,source_kind,quality_version,status,lifecycle_state
       FROM ${table} WHERE ${idCol}=?1 LIMIT 1`).bind(item.content_id).first();
     if(!row)continue;
-    if(String(row.source_kind)!=='ocean_mcp_candidate')continue;
+    if(String(row.source_kind)!==requestedSource)continue;
+    if(requestedVersion&&String(row.quality_version)!==requestedVersion)continue;
     if(String(row.status)!=='active'||String(row.lifecycle_state)!=='live')continue;
     eligible.push(item);
   }
@@ -149,23 +160,27 @@ export async function quarantineOceanEditorialContent(db,{items,reason='Conteúd
     for(const item of eligible.slice(i,i+50)){
       const table=item.content_type==='question'?'vault_questions':'vault_oracle_blocks';
       const idCol=item.content_type==='question'?'question_id':'block_id';
+      const versionClause=requestedVersion?'AND quality_version=?3':'';
+      const bindings=requestedVersion?[item.content_id,requestedSource,requestedVersion]:[item.content_id,requestedSource];
       statements.push(db.prepare(`UPDATE ${table}
         SET status='review',lifecycle_state='review',rotation_state='review'
-        WHERE ${idCol}=?1 AND source_kind='ocean_mcp_candidate'
-          AND status='active' AND lifecycle_state='live'`).bind(item.content_id));
+        WHERE ${idCol}=?1 AND source_kind=?2 ${versionClause}
+          AND status='active' AND lifecycle_state='live'`).bind(...bindings));
       statements.push(db.prepare(`INSERT INTO vault_editorial_decisions
         (decision_id,content_type,content_id,decision,reason_code,details_json,engine_version)
-        VALUES(?1,?2,?3,'review','ocean_candidate_quarantine',?4,'vault-content-audit-v1')`).bind(
+        VALUES(?1,?2,?3,'review',?4,?5,'vault-content-audit-v1')`).bind(
           'dec_'+crypto.randomUUID(),item.content_type,item.content_id,
-          JSON.stringify({source:'editorial_vault_audit',action:'quarantine_until_human_review',reason:editorialReason})
+          allowedAmor001?'import_batch_quarantine':'ocean_candidate_quarantine',
+          JSON.stringify({source:'editorial_vault_audit',action:'quarantine_until_human_review',reason:editorialReason,source_kind:requestedSource,quality_version:requestedVersion||null})
         ));
     }
     if(statements.length)await db.batch(statements);
   }
   return {
     ok:true,requested:normalized.length,quarantined:eligible.length,reason:editorialReason,
+    sourceKind:requestedSource,qualityVersion:requestedVersion||null,
     quarantinedItems:eligible,physicalDeletion:false,
-    note:'Candidatos Ocean movidos para revisão; texto e histórico preservados. Podem ser reativados apenas após aprovação editorial.'
+    note:'Registos movidos para revisão; texto e histórico preservados. Só podem ser reativados após aprovação editorial.'
   };
 }
 
