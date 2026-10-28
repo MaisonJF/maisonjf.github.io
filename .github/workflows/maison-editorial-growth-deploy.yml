@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - 'workers/maison-editorial-growth/**'
+      - 'workers/maison-intelligence/src/content_suitability.js'
       - 'workers/maison-intelligence/src/editorial_candidate_generation.js'
       - 'workers/maison-intelligence/src/expansion_foundry.js'
       - 'workers/maison-intelligence/src/vault_candidates.js'
@@ -47,7 +48,13 @@ jobs:
 
       - name: Validate shared candidate engines
         run: |
-          node --test             workers/maison-intelligence/test/editorial_candidate_generation.test.mjs             workers/maison-intelligence/test/expansion_foundry.test.mjs             workers/maison-intelligence/test/vault_candidates.test.mjs             workers/maison-intelligence/test/candidate_inbox.test.mjs
+          node --test \
+            workers/maison-intelligence/test/content_suitability.test.mjs \
+            workers/maison-intelligence/test/editorial_candidate_generation.test.mjs \
+            workers/maison-intelligence/test/expansion_foundry.test.mjs \
+            workers/maison-intelligence/test/vault-content-audit-contract.test.mjs \
+            workers/maison-intelligence/test/vault_candidates.test.mjs \
+            workers/maison-intelligence/test/candidate_inbox.test.mjs
 
       - name: Deploy autonomous editorial growth
         working-directory: workers/maison-editorial-growth
