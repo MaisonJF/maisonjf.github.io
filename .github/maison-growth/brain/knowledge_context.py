@@ -64,6 +64,34 @@ class OceanEditorialContext:
     def from_file(cls, path: Path) -> "OceanEditorialContext":
         return cls(json.loads(path.read_text(encoding="utf-8")))
 
+    @classmethod
+    def from_files(cls, canonical_path: Path, specialist_path: Path | None = None) -> "OceanEditorialContext":
+        """Join the existing canonical signal set with the specialist Ocean graph.
+
+        The two catalogues have different purposes and identities; this adapter joins
+        them for retrieval without merging their evidence or lifecycle authority.
+        """
+        payload=json.loads(canonical_path.read_text(encoding="utf-8"))
+        if not isinstance(payload,dict):
+            payload={"candidates":payload if isinstance(payload,list) else []}
+        if specialist_path is not None and specialist_path.exists():
+            specialist=json.loads(specialist_path.read_text(encoding="utf-8"))
+            if isinstance(specialist,Mapping):
+                payload={**payload,
+                    "specialistOceans":specialist.get("oceans",[]),
+                    "specialistPillars":specialist.get("pillars",[]),
+                    "specialistCatalogVersion":specialist.get("catalog_version"),
+                }
+        return cls(payload)
+
+    def _specialist_oceans(self) -> list[Mapping[str,object]]:
+        raw=self.payload.get("specialistOceans",[]) if isinstance(self.payload,Mapping) else []
+        return [x for x in raw if isinstance(x,Mapping)] if isinstance(raw,list) else []
+
+    def _specialist_pillars(self) -> list[Mapping[str,object]]:
+        raw=self.payload.get("specialistPillars",[]) if isinstance(self.payload,Mapping) else []
+        return [x for x in raw if isinstance(x,Mapping)] if isinstance(raw,list) else []
+
     def _canonical_candidates(self) -> list[Mapping[str,object]]:
         raw=self.payload.get("candidates",[]) if isinstance(self.payload,Mapping) else []
         return [x for x in raw if isinstance(x,Mapping)] if isinstance(raw,list) else []
@@ -71,25 +99,24 @@ class OceanEditorialContext:
     def search(self, query: str, *, limit: int=8) -> tuple[KnowledgeRef,...]:
         rows=[]
         candidates=self._canonical_candidates()
-        if candidates:
-            for item in candidates:
-                territory=str(item.get("territory") or item.get("id") or item.get("slug") or "").strip()
-                if not territory:
-                    continue
-                label=str(item.get("preferredLabel") or item.get("painLanguage") or territory)
-                evidence=item.get("evidence",[])
-                evidence_refs=tuple(str(x) for x in evidence if str(x).strip()) if isinstance(evidence,list) else ()
-                haystack=" ".join((
-                    territory,
-                    str(item.get("painLanguage") or ""),
-                    str(item.get("intent") or ""),
-                    str(item.get("commercialAdjacency") or ""),
-                    " ".join(str(x) for x in item.get("questionThemeCandidates",[]) if str(x).strip())
-                        if isinstance(item.get("questionThemeCandidates"),list) else "",
-                ))
-                score=_overlap(query,haystack)
-                if score<=0:
-                    continue
+        for item in candidates:
+            territory=str(item.get("territory") or item.get("id") or item.get("slug") or "").strip()
+            if not territory:
+                continue
+            label=str(item.get("preferredLabel") or item.get("painLanguage") or territory)
+            evidence=item.get("evidence",[])
+            evidence_refs=tuple(str(x) for x in evidence if str(x).strip()) if isinstance(evidence,list) else ()
+            themes=item.get("questionThemeCandidates",[])
+            haystack=" ".join((
+                territory,
+                label,
+                str(item.get("painLanguage") or ""),
+                str(item.get("intent") or ""),
+                str(item.get("commercialAdjacency") or ""),
+                " ".join(str(x) for x in themes if str(x).strip()) if isinstance(themes,list) else "",
+            ))
+            score=_overlap(query,haystack)
+            if score>0:
                 rows.append(KnowledgeRef(
                     ref=f"ocean:{territory}",
                     source_kind="ocean_canonical_candidate",
@@ -97,7 +124,52 @@ class OceanEditorialContext:
                     score=score,
                     evidence_refs=evidence_refs,
                 ))
-            return tuple(sorted(rows,key=lambda x:(-x.score,x.ref))[:limit])
+
+        # Specialist Oceans are searchable by their own identity, mission, focus and
+        # graph neighbours. Graph edges are context, never independent evidence roots.
+        for item in self._specialist_oceans():
+            key=str(item.get("ocean_key") or item.get("id") or "").strip()
+            if not key:
+                continue
+            label=str(item.get("display_name") or item.get("name") or key)
+            focus=item.get("focus",[])
+            connections=item.get("connections",[])
+            haystack=" ".join((
+                key,label,str(item.get("pillar_key") or ""),str(item.get("mission") or ""),
+                " ".join(str(x) for x in focus if str(x).strip()) if isinstance(focus,list) else "",
+                " ".join(str(x) for x in connections if str(x).strip()) if isinstance(connections,list) else "",
+            ))
+            score=_overlap(query,haystack)
+            if score>0:
+                rows.append(KnowledgeRef(
+                    ref=f"specialist-ocean:{key}",
+                    source_kind="ocean_specialist_metadata",
+                    label=label,
+                    score=score,
+                    evidence_refs=(),
+                ))
+
+        for item in self._specialist_pillars():
+            key=str(item.get("key") or item.get("pillar_key") or "").strip()
+            if not key:
+                continue
+            label=str(item.get("name") or item.get("display_name") or key)
+            connections=item.get("connections",[])
+            focus=item.get("focus",[])
+            haystack=" ".join((
+                key,label,str(item.get("mission") or ""),
+                " ".join(str(x) for x in focus if str(x).strip()) if isinstance(focus,list) else "",
+                " ".join(str(x) for x in connections if str(x).strip()) if isinstance(connections,list) else "",
+            ))
+            score=_overlap(query,haystack)
+            if score>0:
+                rows.append(KnowledgeRef(
+                    ref=f"specialist-pillar:{key}",
+                    source_kind="ocean_pillar_metadata",
+                    label=label,
+                    score=score,
+                    evidence_refs=(),
+                ))
 
         growth=self.payload.get("pdiGrowth",{}) if isinstance(self.payload,Mapping) else {}
         themes=growth.get("themes",[]) if isinstance(growth,Mapping) else []
@@ -118,15 +190,15 @@ class OceanEditorialContext:
                 if src and sid:
                     evrefs.append(f"{src}:{sid}")
             score=_overlap(query," ".join(chunks))
-            if score <= 0:
-                continue
-            rows.append(KnowledgeRef(
-                ref=f"ocean:{key}",
-                source_kind="ocean_editorial_metadata",
-                label=label or key,
-                score=score,
-                evidence_refs=tuple(sorted(set(evrefs))),
-            ))
+            if score > 0:
+                rows.append(KnowledgeRef(
+                    ref=f"ocean:{key}",
+                    source_kind="ocean_editorial_metadata",
+                    label=label or key,
+                    score=score,
+                    evidence_refs=tuple(sorted(set(evrefs))),
+                ))
+        # A pillar and its linked Ocean may both match; deduplicate by reference only.
         return tuple(sorted(rows,key=lambda x:(-x.score,x.ref))[:limit])
 
     def commercial_hints(
