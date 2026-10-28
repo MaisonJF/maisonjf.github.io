@@ -134,7 +134,11 @@ test('sales page sends the selected mode into checkout while keeping answer priv
   assert.match(page,/data-mode="group"/);
   assert.match(page,/theme.family==='Amigos, Grupos & Festas'/);
   assert.match(page,/t.groupEmpty/);
-  assert.match(page,/JSON\.stringify\(\{theme,locale,mode\}\)/);
+  assert.ok(page.includes('body:JSON.stringify({theme,locale,mode,attribution:window.maisonAnalytics?.getAttribution?.()||{}})'));
+  const checkout=read('functions/api/create-pdi-checkout-live.js');
+  assert.match(checkout,/appendAttribution\(params,body\?\.attribution\)/);
+  assert.match(checkout,/recommendation_offer:'rec_offer'/);
+  assert.doesNotMatch(checkout,/answers|answer_text|raw_query/);
   assert.match(page,/os novos packs de Amigos & Festas/i);
   assert.match(page,/nunca as tuas respostas/i);
 });
