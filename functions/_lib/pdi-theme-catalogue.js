@@ -87,8 +87,14 @@ export function isPublicPdiTheme(slug){
   return !HIDDEN_PUBLIC_THEMES.has(String(slug||'').trim());
 }
 
+function themeKeys(item){
+  return [...new Set([item?.slug,...(item?.aliases||[])].map(value=>String(value||'').trim()).filter(Boolean))];
+}
+
 export async function countLivePdiQuestions(db,theme,locale='pt-PT'){
-  return await countLiveQuestionsForLocale(db,theme,normalizeMaisonLocale(locale));
+  const item=theme&&typeof theme==='object'?theme:getPdiTheme(theme);
+  const keys=item?themeKeys(item):[String(theme||'').trim()];
+  return await countLiveQuestionsForLocale(db,keys,normalizeMaisonLocale(locale));
 }
 
 export async function pdiThemeAvailability(env,theme,locale='pt-PT'){
@@ -111,7 +117,7 @@ export async function pdiThemeAvailability(env,theme,locale='pt-PT'){
   const cacheKey='availability:'+selectedLocale+':'+item.slug;
   const cached=cachedCatalogue(cacheKey);
   if(cached)return cached;
-  const liveQuestions=await countLivePdiQuestions(db,item.slug,selectedLocale);
+  const liveQuestions=await countLivePdiQuestions(db,item,selectedLocale);
   return storeCatalogue(cacheKey,{
     ...localizePdiTheme(item,selectedLocale),
     locale:selectedLocale,
@@ -154,14 +160,18 @@ export async function listAvailablePdiThemes(env,locale='pt-PT'){
     ).bind(selectedLocale).all();
   }
   const counts=new Map((rows.results||[]).map(row=>[String(row.theme),Number(row.count||0)]));
-  const registered=listPdiThemes()
-    .filter(item=>isPublicPdiTheme(item.slug))
-    .map(item=>({
+  const registeredSource=listPdiThemes().filter(item=>isPublicPdiTheme(item.slug));
+  const known=new Set();
+  const registered=registeredSource.map(item=>{
+    const keys=themeKeys(item);
+    for(const key of keys)known.add(key);
+    const liveQuestions=keys.reduce((total,key)=>total+(counts.get(key)||0),0);
+    return {
       ...localizePdiTheme(item,selectedLocale),
       locale:selectedLocale,
-      liveQuestions:counts.get(item.slug)||0
-    }));
-  const known=new Set(registered.map(item=>item.slug));
+      liveQuestions
+    };
+  });
   const discovered=[];
   for(const [slug,count] of counts){
     if(known.has(slug)||!isPublicPdiTheme(slug)||!validDynamicThemeSlug(slug))continue;
