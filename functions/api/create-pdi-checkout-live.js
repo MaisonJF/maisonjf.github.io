@@ -25,7 +25,6 @@ export async function onRequestPost({request,env}){
     }
 
     const body=await request.json().catch(()=>({}));
-    const requestedTheme=String(body?.theme||'');
     const mode=String(body?.mode||'duo');
     if(!['duo','group'].includes(mode)){
       return json({error:'Modo de jogo inválido.'},400);
@@ -38,9 +37,7 @@ export async function onRequestPost({request,env}){
     const availableThemes=(await listAvailablePdiThemes(env,locale)).filter(item=>
       mode==='group' ? item.family==='Amigos, Grupos & Festas' : item.family!=='Amigos, Grupos & Festas'
     );
-    const product=requestedTheme
-      ? availableThemes.find(item=>item.slug===requestedTheme)
-      : availableThemes[Math.floor(Math.random()*availableThemes.length)];
+    const product=availableThemes[Math.floor(Math.random()*availableThemes.length)];
     if(!product)return json({error:'O jogo está temporariamente indisponível neste modo. Tenta novamente mais tarde.'},409);
 
     const params=new URLSearchParams();
@@ -50,9 +47,9 @@ export async function onRequestPost({request,env}){
     params.set('line_items[0][quantity]','1');
     params.set('line_items[0][price_data][currency]',String(product.currency||'eur'));
     params.set('line_items[0][price_data][unit_amount]',String(product.amount));
-    params.set('line_items[0][price_data][product_data][name]',(PDI_PRODUCT_NAME[locale]||PDI_PRODUCT_NAME['pt-PT'])+' · '+product.label+(mode==='group'?' · Grupo & Festa':' · A Dois'));
+    params.set('line_items[0][price_data][product_data][name]',(PDI_PRODUCT_NAME[locale]||PDI_PRODUCT_NAME['pt-PT'])+(mode==='group'?' · Grupo & Festa':' · A Dois'));
     params.set('success_url',url.origin+'/para-de-ignorar/jogar.html?session_id={CHECKOUT_SESSION_ID}&theme='+encodeURIComponent(product.slug)+'&locale='+encodeURIComponent(locale)+'&mode='+encodeURIComponent(mode));
-    params.set('cancel_url',url.origin+publicPrefix(locale)+'/para-de-ignorar/?theme='+encodeURIComponent(product.slug)+'&mode='+encodeURIComponent(mode));
+    params.set('cancel_url',url.origin+publicPrefix(locale)+'/para-de-ignorar/?mode='+encodeURIComponent(mode));
     params.set('metadata[environment]','maison-jf-live');
     params.set('metadata[source]','para-de-ignorar-live');
     params.set('metadata[pdi_access]','single-session');
