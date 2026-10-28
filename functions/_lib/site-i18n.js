@@ -2072,7 +2072,7 @@ const MANIFESTO={
     "Quem está por trás disto?": "¿Quién está detrás de esto?",
     "Não sei por onde começar": "No sé por dónde empezar",
     "Volta Para Casa.": "Vuelve a Casa.",
-    "Sobre mim": "Sobre mí"
+    "Sobre mim": "Sobre mí",
     "Outras vezes tens uma hipótese. Só ainda não sabes o que fazer com ela.": "Otras veces tienes una hipótesis. Solo que aún no sabes qué hacer con ella.",
     "Um teste que começa por brincadeira e te deixa uma pergunta melhor para levares contigo.": "Un test que empieza como un juego y te deja una pregunta mejor para llevar contigo.",
     "Espera. Nunca tinha visto isto assim.": "Espera. Nunca lo había visto así.",
