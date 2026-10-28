@@ -40,7 +40,7 @@ test('group themes retain canonical and legacy Vault keys, and existing live que
   assert.match(session,/registeredTheme\?\.aliases/);
 });
 
-test('group and party themes enter the editorial backlog but are not exposed before 28 live questions',()=>{
+test('group mode focuses on 12 packs and requires 28 live questions before exposure',()=>{
   const sources=read('functions/_lib/pdi-theme-sources.js');
   const catalogue=read('functions/_lib/pdi-theme-catalogue.js');
   const policy=read('functions/_lib/para-de-ignorar-policy.js');
@@ -49,13 +49,15 @@ test('group and party themes enter the editorial backlog but are not exposed bef
   assert.match(sources,/source:'pdi-group'/);
   assert.match(catalogue,/liveQuestions>=PDI_MINIMUM_LIVE_QUESTIONS/);
   assert.match(policy,/minimum_28_active_approved_questions_per_theme/);
+  const builder=read('.github/maison-growth/brain/build_pdi_expansion_queue.mjs');
+  const groupTemplateBlock=builder.slice(builder.indexOf('const groupTemplates=['),builder.indexOf('const questions=[];'));
+  assert.equal((groupTemplateBlock.match(/\(t\)=>/g)||[]).length,28,'each group pack gets 28 question drafts');
   const groupSeedBlock=sources.slice(sources.indexOf('const PDI_GROUP_SEEDS=['),sources.indexOf('const MAISON_NATIVE_SEEDS='));
-  assert.equal((groupSeedBlock.match(/\{slug:/g)||[]).length,66);
+  assert.equal((groupSeedBlock.match(/\{slug:/g)||[]).length,12);
   for(const label of [
-    'O Ponto Cego','As Relações & Os Fantasmas','O Dinheiro, o Status & o Ego',
-    'O Corpo & a Intimidade','A Moral & o Julgamento','A Trapaça & a Manipulação',
-    'O Futuro & a Apatia','As Feridas da Infância e da Família',
-    'O Espelho do Grupo','A Verdade Nua e Crua'
+    'Quem Conhece Quem?','Histórias de Festa','Confissões Leves','Quem Faria Isso?',
+    'Memórias & Nostalgia','Gostos Impopulares','Dilemas Absurdos','Música, Cinema & Séries',
+    'Talentos Inúteis','Amigos sem Filtro','O Nosso Grupo em Filme','Desafio do Minuto'
   ]) assert.ok(groupSeedBlock.includes("label:'"+label+"'"),'missing deck theme: '+label);
 });
 
