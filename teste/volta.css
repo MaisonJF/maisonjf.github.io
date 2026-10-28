@@ -226,3 +226,20 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   .vpc-page a,.vpc-page button{-webkit-tap-highlight-color:rgba(210,179,111,.18)}
   .vpc-card:hover,.vpc-choice:hover,.vpc-offer:hover,.vpc-part:hover{transform:none!important}
 }
+
+
+/* Volta Para Casa · visibly priced offer cards · 2026-10-28 */
+.vpc-offer__price{
+  display:block;
+  margin:0 0 12px;
+  color:#e0c48b;
+  font:600 13px/1.25 var(--sans);
+  letter-spacing:.04em;
+}
+.vpc-offer__price--browse{
+  color:#b1a38a;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
