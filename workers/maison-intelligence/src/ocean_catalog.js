@@ -770,7 +770,10 @@ export async function handleOceanCatalogRequest(request, env) {
   if (diff !== 0) return new Response(JSON.stringify({ error: 'unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' } });
   if (request.method !== 'GET') return new Response(JSON.stringify({ error: 'method_not_allowed' }), { status: 405, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' } });
   try {
-    const registry = await loadActiveOceanRegistry(env);
+    const [registry,pillarRegistry] = await Promise.all([
+      loadActiveOceanRegistry(env),
+      loadActivePillarRegistry(env)
+    ]);
     return new Response(JSON.stringify({
       kind: 'ocean_specialist_catalog',
       version: OCEAN_CATALOG_VERSION,
@@ -778,7 +781,10 @@ export async function handleOceanCatalogRequest(request, env) {
       foundational_count: OCEANS.length,
       dynamic_count: registry.length - OCEANS.length,
       total_open: registry.length,
-      pillars: PILLARS,
+      foundational_pillar_count: PILLARS.length,
+      dynamic_pillar_count: pillarRegistry.length - PILLARS.length,
+      total_open_pillars: pillarRegistry.length,
+      pillars: pillarRegistry,
       rows: registry
     }), { status: 200, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store, max-age=0', 'Pragma': 'no-cache', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' } });
   } catch (error) {
