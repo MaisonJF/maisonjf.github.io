@@ -63,7 +63,7 @@ export async function onRequestGet({request,env}){
 
     const localizedProduct=await pdiThemeAvailability(env,theme,locale);
     const frozen=await getOrCreateQuestionSession({env,stripeSession,theme,locale});
-    if(!frozen||frozen.packA?.length!==14||frozen.packB?.length!==14){
+    if(!frozen||frozen.packA?.length!==8||frozen.packB?.length!==8){
       return json({error:'Não foi possível preparar esta sessão.'},503);
     }
 
