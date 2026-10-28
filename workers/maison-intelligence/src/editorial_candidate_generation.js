@@ -95,7 +95,15 @@ export async function generateEditorialCandidates(env,{caller,oceanContext,brain
     return {called:true,skipped:true,reason_code:'editorial_classification_missing_or_invalid',stored:0,duplicates:0,rejected:0,results:[],usage:generated?.usage||null};
   }
   const destinations=new Set(destination.destinations);
-  const questions=destinations.size?rows(payload.questions,MAX_QUESTIONS):[];
+  if(destinations.size===0){
+    return {
+      called:true,skipped:true,
+      reason_code:clean(payload.classification?.reason_code||'no_suitable_destination',120),
+      reason:clean(payload.classification?.reason||'',400),
+      stored:0,duplicates:0,rejected:0,results:[],usage:generated?.usage||null
+    };
+  }
+  const questions=rows(payload.questions,MAX_QUESTIONS);
   const oracleBlocks=destinations.has('oracle')?rows(payload.oracle_blocks,MAX_ORACLE_BLOCKS):[];
   const results=[];
   let rejected=0;
