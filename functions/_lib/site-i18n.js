@@ -988,6 +988,11 @@ const PRODUCTS={
     "Para te conheceres melhor, abrires conversas ou simplesmente te divertires.": "Para se conhecer melhor, abrir conversas ou simplesmente se divertir.",
     "Explora a atenção, o apego e o afeto para perceberes melhor o que sentes.": "Explore a atenção, o apego e o afeto para entender melhor o que sente.",
     "Três combinações de produtos para oferecer ou criar o teu próprio momento, desde 10 €.": "Três combinações de produtos para presentear ou criar seu próprio momento, a partir de 10 €.",
+    "Velas, aromas e rituais de cuidado, jogos, testes, Oráculo, Tarot e livros na MAISON JF®. Descobre o que faz sentido para a tua casa, o teu corpo e a tua cabeça.": "Velas, aromas e rituais de cuidado, jogos, testes, Oráculo, Tarot e livros na MAISON JF®. Descubra o que faz sentido para sua casa, seu corpo e sua mente.",
+    "O que queres ter por perto?": "O que você quer ter por perto?",
+    "Velas, aromas, rituais de cuidado, jogos, testes, Oráculo, Tarot e livros. Escolhe o que faz sentido para ti agora.": "Velas, aromas, rituais de cuidado, jogos, testes, Oráculo, Tarot e livros. Escolha o que faz sentido para você agora.",
+    "Velas e aromas para criar um ambiente que reconheces como teu. Escolhe pela fragrância e pelo espaço onde os vais usar.": "Velas e aromas para criar um ambiente que você reconheça como seu. Escolha pela fragrância e pelo espaço onde vai usar.",
+    "Rituais de cuidado para abrandar o ritmo e prestar atenção ao corpo. Escolhe o formato que se adapta ao tempo que tens.": "Rituais de cuidado para desacelerar e prestar atenção ao corpo. Escolha o formato que se adapta ao tempo que você tem.",
   },
   en:{
     'Produtos | MAISON JF®':'Products | MAISON JF®',
@@ -1040,6 +1045,11 @@ const PRODUCTS={
     "Para te conheceres melhor, abrires conversas ou simplesmente te divertires.": "To get to know yourself better, open conversations or simply have fun.",
     "Explora a atenção, o apego e o afeto para perceberes melhor o que sentes.": "Explore attention, attachment and affection to better understand what you feel.",
     "Três combinações de produtos para oferecer ou criar o teu próprio momento, desde 10 €.": "Three product combinations to give as a gift or create your own moment, from €10.",
+    "Velas, aromas e rituais de cuidado, jogos, testes, Oráculo, Tarot e livros na MAISON JF®. Descobre o que faz sentido para a tua casa, o teu corpo e a tua cabeça.": "Candles, scents and care rituals, games, tests, an Oracle, Tarot and books at MAISON JF®. Find what makes sense for your home, body and mind.",
+    "O que queres ter por perto?": "What do you want around you?",
+    "Velas, aromas, rituais de cuidado, jogos, testes, Oráculo, Tarot e livros. Escolhe o que faz sentido para ti agora.": "Candles, scents, care rituals, games, tests, an Oracle, Tarot and books. Choose what makes sense for you right now.",
+    "Velas e aromas para criar um ambiente que reconheces como teu. Escolhe pela fragrância e pelo espaço onde os vais usar.": "Candles and scents to create an atmosphere that feels like yours. Choose by fragrance and by where you plan to use them.",
+    "Rituais de cuidado para abrandar o ritmo e prestar atenção ao corpo. Escolhe o formato que se adapta ao tempo que tens.": "Care rituals to slow down and pay attention to your body. Choose the format that fits the time you have.",
   },
   es:{
     'Produtos | MAISON JF®':'Productos | MAISON JF®',
@@ -1092,6 +1102,11 @@ const PRODUCTS={
     "Para te conheceres melhor, abrires conversas ou simplesmente te divertires.": "Para conocerte mejor, abrir conversaciones o simplemente divertirte.",
     "Explora a atenção, o apego e o afeto para perceberes melhor o que sentes.": "Explora la atención, el apego y el afecto para comprender mejor lo que sientes.",
     "Três combinações de produtos para oferecer ou criar o teu próprio momento, desde 10 €.": "Tres combinaciones de productos para regalar o crear tu propio momento, desde 10 €.",
+    "Velas, aromas e rituais de cuidado, jogos, testes, Oráculo, Tarot e livros na MAISON JF®. Descobre o que faz sentido para a tua casa, o teu corpo e a tua cabeça.": "Velas, aromas y rituales de cuidado, juegos, tests, Oráculo, Tarot y libros en MAISON JF®. Descubre lo que tiene sentido para tu casa, tu cuerpo y tu mente.",
+    "O que queres ter por perto?": "¿Qué quieres tener cerca?",
+    "Velas, aromas, rituais de cuidado, jogos, testes, Oráculo, Tarot e livros. Escolhe o que faz sentido para ti agora.": "Velas, aromas, rituales de cuidado, juegos, tests, Oráculo, Tarot y libros. Elige lo que tiene sentido para ti ahora.",
+    "Velas e aromas para criar um ambiente que reconheces como teu. Escolhe pela fragrância e pelo espaço onde os vais usar.": "Velas y aromas para crear un ambiente que sientas como propio. Elige según la fragancia y el espacio donde vayas a usarlos.",
+    "Rituais de cuidado para abrandar o ritmo e prestar atenção ao corpo. Escolhe o formato que se adapta ao tempo que tens.": "Rituales de cuidado para bajar el ritmo y prestar atención al cuerpo. Elige el formato que se adapte al tiempo que tienes.",
   }
 };
 
@@ -1130,6 +1145,7 @@ const SERVICES={
     'Explicar o pedido →':'Explicar o pedido →',
     "Consulta de Tarot MAISON JF® por 35 €. Para mentorias, acompanhamento e pedidos personalizados, contacta a Maison.": "Consulta de Tarot MAISON JF® por 35 €. Para mentorias, acompanhamento e pedidos personalizados, entre em contato com a Maison.",
     "Uma pergunta central. Uma leitura para examinar a situação por outro ângulo, sem promessas nem certezas fabricadas.": "Uma pergunta central. Uma leitura para examinar a situação por outro ângulo, sem promessas nem certezas fabricadas.",
+    "Traz a tua pergunta. A consulta ajuda-te a examinar a situação por outro ângulo e a considerar as possibilidades à tua frente, sem promessas nem certezas fabricadas.": "Traga sua pergunta. A consulta ajuda você a examinar a situação por outro ângulo e a considerar as possibilidades à sua frente, sem promessas nem certezas inventadas.",
 
   },
   en:{
@@ -1169,6 +1185,7 @@ const SERVICES={
     'Explicar o pedido →':'Explain the request →',
     "Consulta de Tarot MAISON JF® por 35 €. Para mentorias, acompanhamento e pedidos personalizados, contacta a Maison.": "MAISON JF® Tarot consultation for €35. For mentoring, ongoing support and custom requests, contact the Maison.",
     "Uma pergunta central. Uma leitura para examinar a situação por outro ângulo, sem promessas nem certezas fabricadas.": "One central question. A reading to examine the situation from another angle, without promises or manufactured certainties.",
+    "Traz a tua pergunta. A consulta ajuda-te a examinar a situação por outro ângulo e a considerar as possibilidades à tua frente, sem promessas nem certezas fabricadas.": "Bring your question. The consultation helps you examine the situation from another angle and consider the possibilities in front of you, without promises or manufactured certainty.",
 
   },
   es:{
@@ -1207,6 +1224,7 @@ const SERVICES={
     'Explicar o pedido →':'Explicar el pedido →',
     "Consulta de Tarot MAISON JF® por 35 €. Para mentorias, acompanhamento e pedidos personalizados, contacta a Maison.": "Consulta de Tarot MAISON JF® por 35 €. Para mentorías, acompañamiento y pedidos personalizados, contacta con la Maison.",
     "Uma pergunta central. Uma leitura para examinar a situação por outro ângulo, sem promessas nem certezas fabricadas.": "Una pregunta central. Una lectura para examinar la situación desde otro ángulo, sin promesas ni certezas fabricadas.",
+    "Traz a tua pergunta. A consulta ajuda-te a examinar a situação por outro ângulo e a considerar as possibilidades à tua frente, sem promessas nem certezas fabricadas.": "Trae tu pregunta. La consulta te ayuda a examinar la situación desde otro ángulo y a considerar las posibilidades que tienes delante, sin promesas ni certezas fabricadas.",
 
   }
 };
@@ -1229,6 +1247,12 @@ const FAROL={
     'O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.':'O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.',
     'Volta Para Casa.':'Volte Para Casa.',
     "Já sei o que procuro? Ver produtos →": "Já sei o que procuro? Ver produtos →",
+    "O Farol MAISON JF® ajuda-te a explorar o que te trouxe até aqui e a encontrar um próximo passo possível, sem decidir por ti.": "O Farol MAISON JF® ajuda você a explorar o que trouxe você até aqui e a encontrar um próximo passo possível, sem decidir por você.",
+    "Começa pelo que te trouxe até aqui.": "Comece pelo que trouxe você até aqui.",
+    "Não precisas de ter tudo claro. Escolhe a situação que mais se aproxima daquilo que procuras e encontra um próximo passo possível.": "Você não precisa ter tudo claro. Escolha a situação que mais se aproxima do que procura e encontre um próximo passo possível.",
+    "Escolhe o que mais se aproxima da tua situação.": "Escolha o que mais se aproxima da sua situação.",
+    "O Farol aponta possibilidades. A decisão continua a ser tua.": "O Farol aponta possibilidades. A decisão continua sendo sua.",
+    "Isto já dura mais do que esperava. O que posso olhar de outra maneira?": "Isso já dura mais do que eu esperava. O que posso olhar de outra maneira?",
 
   },
   en:{
@@ -1248,6 +1272,12 @@ const FAROL={
     'O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.':'The Lighthouse offers orientation. It does not diagnose or replace professional support when needed.',
     'Volta Para Casa.':'Come Back Home.',
     "Já sei o que procuro? Ver produtos →": "Already know what you need? Browse products →",
+    "O Farol MAISON JF® ajuda-te a explorar o que te trouxe até aqui e a encontrar um próximo passo possível, sem decidir por ti.": "The Maison JF Lighthouse helps you explore what brought you here and find a possible next step, without making the decision for you.",
+    "Começa pelo que te trouxe até aqui.": "Start with what brought you here.",
+    "Não precisas de ter tudo claro. Escolhe a situação que mais se aproxima daquilo que procuras e encontra um próximo passo possível.": "You don't need to have everything figured out. Choose the situation closest to yours and find a possible next step.",
+    "Escolhe o que mais se aproxima da tua situação.": "Choose what comes closest to your situation.",
+    "O Farol aponta possibilidades. A decisão continua a ser tua.": "The Lighthouse points to possibilities. The decision remains yours.",
+    "Isto já dura mais do que esperava. O que posso olhar de outra maneira?": "This has gone on longer than I expected. What could I look at differently?",
 
   },
   es:{
@@ -1267,6 +1297,12 @@ const FAROL={
     'O Farol orienta. Não diagnostica nem substitui apoio profissional quando necessário.':'El Faro orienta. No diagnostica ni sustituye el apoyo profesional cuando sea necesario.',
     'Volta Para Casa.':'Vuelve a Casa.',
     "Já sei o que procuro? Ver produtos →": "¿Ya sabes lo que buscas? Ver productos →",
+    "O Farol MAISON JF® ajuda-te a explorar o que te trouxe até aqui e a encontrar um próximo passo possível, sem decidir por ti.": "El Faro MAISON JF® te ayuda a explorar qué te ha traído hasta aquí y a encontrar un posible siguiente paso, sin decidir por ti.",
+    "Começa pelo que te trouxe até aqui.": "Empieza por lo que te ha traído hasta aquí.",
+    "Não precisas de ter tudo claro. Escolhe a situação que mais se aproxima daquilo que procuras e encontra um próximo passo possível.": "No necesitas tenerlo todo claro. Elige la situación que más se acerque a la tuya y encuentra un posible siguiente paso.",
+    "Escolhe o que mais se aproxima da tua situação.": "Elige lo que más se acerque a tu situación.",
+    "O Farol aponta possibilidades. A decisão continua a ser tua.": "El Faro señala posibilidades. La decisión sigue siendo tuya.",
+    "Isto já dura mais do que esperava. O que posso olhar de outra maneira?": "Esto lleva más tiempo del que esperaba. ¿Qué podría mirar de otra manera?",
 
   }
 };
@@ -1410,6 +1446,10 @@ const EBOOKS={
     'Ampliar 100%':'Ampliar 100%',
     'Fechar poster ampliado':'Fechar pôster ampliado',
     'Imagem ampliada; use as setas para percorrer':'Imagem ampliada; use as setas para percorrer'
+    "Éditions Maison JF®: novelas, ficção literária, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis.": "Éditions Maison JF®: novelas, ficção literária, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis.",
+    "Histórias que ficam depois da última página.": "Histórias que ficam depois da última página.",
+    "Ficção literária, novelas, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis. Escolhe uma leitura. Vê onde te leva.": "Ficção literária, novelas, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis. Escolha uma leitura. Veja aonde ela leva você.",
+    "Sem moralismos nem finais adoçados. Histórias para ler sem receber lições.": "Sem moralismos nem finais açucarados. Histórias para ler sem receber lições.",
   },
   en:{
     'Universos | MAISON JF®':'Universes | MAISON JF®',
@@ -1439,6 +1479,10 @@ const EBOOKS={
     'Ampliar 100%':'Zoom 100%',
     'Fechar poster ampliado':'Close enlarged poster',
     'Imagem ampliada; use as setas para percorrer':'Enlarged image; use the arrow keys to move around'
+    "Éditions Maison JF®: novelas, ficção literária, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis.": "Éditions Maison JF®: novellas, literary fiction, spirituality and practical books. Stories and ideas without moralising or easy formulas.",
+    "Histórias que ficam depois da última página.": "Stories that stay with you after the last page.",
+    "Ficção literária, novelas, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis. Escolhe uma leitura. Vê onde te leva.": "Literary fiction, novellas, spirituality and practical books. Stories and ideas without moralising or easy formulas. Choose a read. See where it takes you.",
+    "Sem moralismos nem finais adoçados. Histórias para ler sem receber lições.": "No moralising, no softened endings. Stories to read without being lectured.",
   },
   es:{
     'Universos | MAISON JF®':'Universos | MAISON JF®',
@@ -1468,6 +1512,10 @@ const EBOOKS={
     'Ampliar 100%':'Ampliar 100%',
     'Fechar poster ampliado':'Cerrar póster ampliado',
     'Imagem ampliada; use as setas para percorrer':'Imagen ampliada; usa las flechas para desplazarte'
+    "Éditions Maison JF®: novelas, ficção literária, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis.": "Éditions Maison JF®: novelas, ficción literaria, espiritualidad y libros de pragmatismo. Historias e ideas sin moralismos ni fórmulas fáciles.",
+    "Histórias que ficam depois da última página.": "Historias que permanecen después de la última página.",
+    "Ficção literária, novelas, espiritualidade e livros de pragmatismo. Histórias e ideias sem moralismos nem fórmulas fáceis. Escolhe uma leitura. Vê onde te leva.": "Ficción literaria, novelas, espiritualidad y libros de pragmatismo. Historias e ideas sin moralismos ni fórmulas fáciles. Elige una lectura. Descubre adónde te lleva.",
+    "Sem moralismos nem finais adoçados. Histórias para ler sem receber lições.": "Sin moralismos ni finales edulcorados. Historias para leer sin sermones.",
   }
 };
 
@@ -2019,6 +2067,15 @@ const MANIFESTO={
     "Não sei por onde começar": "No sé por dónde empezar",
     "Volta Para Casa.": "Vuelve a Casa.",
     "Sobre mim": "Sobre mí"
+    "Outras vezes tens uma hipótese. Só ainda não sabes o que fazer com ela.": "Otras veces tienes una hipótesis. Solo que aún no sabes qué hacer con ella.",
+    "Um teste que começa por brincadeira e te deixa uma pergunta melhor para levares contigo.": "Un test que empieza como un juego y te deja una pregunta mejor para llevar contigo.",
+    "Espera. Nunca tinha visto isto assim.": "Espera. Nunca lo había visto así.",
+    "Não sei o que se passa contigo.": "No sé qué está pasando dentro de ti.",
+    "E não preciso de fingir que sei.": "Y no necesito fingir que lo sé.",
+    "Uma boa pergunta não te define. Dá-te outra perspetiva.": "Una buena pregunta no te define. Te ofrece otra perspectiva.",
+    "O que fazes com aquilo que encontraste?": "¿Qué haces con lo que has encontrado?",
+    "Essa parte continua a ser tua.": "Esa parte sigue siendo tuya.",
+    "Ou pode ser uma pergunta que merece ficar contigo mais um bocado.": "O puede ser una pregunta que merezca acompañarte un poco más.",
   }
 };
 
@@ -2143,6 +2200,15 @@ const CONTACT={
     'Abrir WhatsApp':'Abrir WhatsApp',
     'Ainda não sei o que procuro':'Ainda não sei o que procuro',
     'Falar comigo não te obriga a comprar. Se houver preço ou condições a confirmar, digo-te antes de avançarmos.':'Falar comigo não obriga você a comprar. Se houver preço ou condições a confirmar, eu digo antes de avançarmos.'
+    "Outras vezes tens uma hipótese. Só ainda não sabes o que fazer com ela.": "Em outros momentos, você tem uma hipótese. Só ainda não sabe o que fazer com ela.",
+    "Um teste que começa por brincadeira e te deixa uma pergunta melhor para levares contigo.": "Um teste que começa como brincadeira e deixa uma pergunta melhor para levar com você.",
+    "Espera. Nunca tinha visto isto assim.": "Espere. Nunca tinha visto isso por esse ângulo.",
+    "Não sei o que se passa contigo.": "Não sei o que está acontecendo com você.",
+    "E não preciso de fingir que sei.": "E não preciso fingir que sei.",
+    "Uma boa pergunta não te define. Dá-te outra perspetiva.": "Uma boa pergunta não define você. Ela oferece outra perspectiva.",
+    "O que fazes com aquilo que encontraste?": "O que você faz com aquilo que encontrou?",
+    "Essa parte continua a ser tua.": "Essa parte continua sendo sua.",
+    "Ou pode ser uma pergunta que merece ficar contigo mais um bocado.": "Ou pode ser uma pergunta que merece ficar com você por mais um tempo.",
   },
   en:{
     'Falar comigo | MAISON JF®':'Talk to me | MAISON JF®',
@@ -2518,6 +2584,11 @@ const TAROT_SERVICE={
     'Uso o Tarot como ferramenta de reflexão e orientação. Não decide por ti, não garante acontecimentos futuros e não substitui cuidados de saúde mental ou acompanhamento clínico quando necessários.':'Uso o Tarot como ferramenta de reflexão e orientação. Não decide por você, não garante acontecimentos futuros e não substitui cuidados de saúde mental ou acompanhamento clínico quando necessários.',
     'Todos os Serviços →':'Todos os Serviços →',
     "Consulta de Tarot MAISON JF® · 35 €. Perguntas. Recebes as respostas. O que fazes com elas? É contigo.": "Consulta de Tarot MAISON JF® · 35 €. Perguntas. Você recebe as respostas. O que você faz com elas? É com você.",
+    "A pergunta é tua. A escolha também.": "A pergunta é sua. A escolha também.",
+    "Traz a pergunta que queres examinar. Uma consulta de Tarot permite olhar para a situação por outro ângulo, explorar possibilidades e distinguir aquilo que está nas tuas mãos. Sem previsões garantidas. A decisão continua a ser tua.": "Traga a pergunta que você quer examinar. Uma consulta de Tarot permite olhar para a situação por outro ângulo, explorar possibilidades e distinguir o que está ao seu alcance. Sem previsões garantidas. A decisão continua sendo sua.",
+    "Uma leitura centrada na tua pergunta.": "Uma leitura centrada na sua pergunta.",
+    "Outra perspetiva sobre a situação.": "Outra perspectiva sobre a situação.",
+    "Sem certezas fabricadas nem decisões tomadas por ti.": "Sem certezas inventadas nem decisões tomadas por você.",
 
   },
   en:{
@@ -2531,6 +2602,11 @@ const TAROT_SERVICE={
     'Uso o Tarot como ferramenta de reflexão e orientação. Não decide por ti, não garante acontecimentos futuros e não substitui cuidados de saúde mental ou acompanhamento clínico quando necessários.':'I use Tarot as a tool for reflection and orientation. It does not decide for you, guarantee future events or replace mental health care or clinical support when needed.',
     'Todos os Serviços →':'All Services →',
     "Consulta de Tarot MAISON JF® · 35 €. Perguntas. Recebes as respostas. O que fazes com elas? É contigo.": "MAISON JF® Tarot consultation · €35. Questions. You get the answers. What you do with them is up to you.",
+    "A pergunta é tua. A escolha também.": "The question is yours. So is the choice.",
+    "Traz a pergunta que queres examinar. Uma consulta de Tarot permite olhar para a situação por outro ângulo, explorar possibilidades e distinguir aquilo que está nas tuas mãos. Sem previsões garantidas. A decisão continua a ser tua.": "Bring the question you want to explore. A Tarot consultation offers another angle on the situation, helping you consider possibilities and what is within your control. No guaranteed predictions. The decision remains yours.",
+    "Uma leitura centrada na tua pergunta.": "A reading centred on your question.",
+    "Outra perspetiva sobre a situação.": "Another perspective on the situation.",
+    "Sem certezas fabricadas nem decisões tomadas por ti.": "No manufactured certainty. No decisions made for you.",
 
   },
   es:{
@@ -2544,6 +2620,11 @@ const TAROT_SERVICE={
     'Uso o Tarot como ferramenta de reflexão e orientação. Não decide por ti, não garante acontecimentos futuros e não substitui cuidados de saúde mental ou acompanhamento clínico quando necessários.':'Uso el Tarot como herramienta de reflexión y orientación. No decide por ti, no garantiza acontecimientos futuros y no sustituye cuidados de salud mental o acompañamiento clínico cuando sean necesarios.',
     'Todos os Serviços →':'Todos los Servicios →',
     "Consulta de Tarot MAISON JF® · 35 €. Perguntas. Recebes as respostas. O que fazes com elas? É contigo.": "Consulta de Tarot MAISON JF® · 35 €. Preguntas. Recibes las respuestas. Lo que haces con ellas es cosa tuya.",
+    "A pergunta é tua. A escolha também.": "La pregunta es tuya. La elección también.",
+    "Traz a pergunta que queres examinar. Uma consulta de Tarot permite olhar para a situação por outro ângulo, explorar possibilidades e distinguir aquilo que está nas tuas mãos. Sem previsões garantidas. A decisão continua a ser tua.": "Trae la pregunta que quieres examinar. Una consulta de Tarot permite mirar la situación desde otro ángulo, explorar posibilidades y distinguir lo que está en tus manos. Sin predicciones garantizadas. La decisión sigue siendo tuya.",
+    "Uma leitura centrada na tua pergunta.": "Una lectura centrada en tu pregunta.",
+    "Outra perspetiva sobre a situação.": "Otra perspectiva sobre la situación.",
+    "Sem certezas fabricadas nem decisões tomadas por ti.": "Sin certezas fabricadas ni decisiones tomadas por ti.",
 
   }
 };
