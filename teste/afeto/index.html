@@ -114,7 +114,7 @@ function attributedHref(raw,offerId,result,brainVersion){
 function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
 function offerMarkup(o,index,result,brain){
  const label=o.slotLabel||'';
- return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-vpc-slot="'+esc(o.slot||'')+'" data-vpc-brain="'+esc(brain||'fallback')+'" href="'+esc(attributedHref(o.href,o.id,result,brain))+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
+ return '<a class="vpc-offer '+(index===0?'vpc-offer--primary':'')+'" data-vpc-offer="'+esc(o.id)+'" data-maison-offer-id="'+esc(o.id)+'" data-maison-surface="vpc-result" data-vpc-source="vpc" data-vpc-result="'+esc(result)+'" data-vpc-brain="'+esc(brain||'fallback')+'" data-vpc-slot="'+esc(o.slot||'')+'" href="'+esc(attributedHref(o.href,o.id,result,brain))+'"><small>'+esc(label)+'</small><strong>'+esc(o.title)+' →</strong><span>'+esc(o.description||'')+'</span></a>';
 }
 async function brainOffers(result){
  const host=$('nextLinks');host.innerHTML='<p class="vpc-note">A escolher o que faz mais sentido agora…</p>';
