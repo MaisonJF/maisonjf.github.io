@@ -16,6 +16,8 @@ test('Vault audit lists old, candidate, live and retired content without exposin
   assert.match(lib,/FROM vault_questions/);
   assert.match(lib,/FROM vault_oracle_blocks/);
   assert.match(lib,/quality_version/);
+  assert.match(lib,/invalid_quarantine_scope/);
+  assert.match(lib,/allowedAmor001/);
   assert.match(api,/action==='audit-list'/);
   assert.match(api,/action==='retire'/);
   assert.match(api,/action==='quarantine'/);
@@ -27,6 +29,8 @@ test('Vault audit lists old, candidate, live and retired content without exposin
   assert.match(html,/id="apply-plan"/);
   assert.match(html,/maison-vault-proposed-retirement-v1/);
   assert.match(html,/maison-vault-proposed-quarantine-v1/);
+  assert.match(html,/maison-vault-proposed-quarantine-import-batch-v1/);
+  assert.match(html,/private-import:amor-001:v1/);
   assert.match(html,/expectedSource/);
   assert.match(html,/A contagem do plano não coincide/);
   assert.match(html,/noindex,nofollow,noarchive/);
