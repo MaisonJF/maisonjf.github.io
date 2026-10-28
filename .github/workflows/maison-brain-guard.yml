@@ -8,6 +8,18 @@ on:
       - 'data/products.js'
       - 'data/services.js'
       - 'functions/_lib/commerce-events.js'
+      - 'functions/_lib/commerce-events.test.mjs'
+      - 'functions/_lib/offer-brain.js'
+      - 'functions/_lib/offer-telemetry-learning.js'
+      - 'functions/_lib/offer-telemetry-learning.test.mjs'
+      - 'functions/api/recommend-offers.js'
+      - 'functions/api/create-checkout-live.js'
+      - 'functions/api/create-pdi-checkout-live.js'
+      - 'functions/api/checkout-receipt-live.js'
+      - 'checkout-ebook-live.js'
+      - 'para-de-ignorar/index.html'
+      - 'teste/**'
+      - 'analytics.js'
       - 'functions/api/b2b-lead.js'
       - '.github/workflows/maison-brain-guard.yml'
   push:
@@ -18,6 +30,19 @@ on:
       - 'workers/maison-intelligence/**'
       - 'data/products.js'
       - 'data/services.js'
+      - 'functions/_lib/commerce-events.js'
+      - 'functions/_lib/commerce-events.test.mjs'
+      - 'functions/_lib/offer-brain.js'
+      - 'functions/_lib/offer-telemetry-learning.js'
+      - 'functions/_lib/offer-telemetry-learning.test.mjs'
+      - 'functions/api/recommend-offers.js'
+      - 'functions/api/create-checkout-live.js'
+      - 'functions/api/create-pdi-checkout-live.js'
+      - 'functions/api/checkout-receipt-live.js'
+      - 'checkout-ebook-live.js'
+      - 'para-de-ignorar/index.html'
+      - 'teste/**'
+      - 'analytics.js'
       - '.github/workflows/maison-brain-guard.yml'
   workflow_dispatch:
 
@@ -71,10 +96,17 @@ jobs:
           node --check functions/_lib/commerce-events.js
           node --check functions/api/b2b-lead.js
 
-      - name: Validate bounded offer learning
+      - name: Validate bounded offer learning and commerce feedback
         run: |
-          node functions/_lib/offer-brain.test.mjs
+          node --check analytics.js
+          node --check checkout-ebook-live.js
+          node --check functions/api/create-checkout-live.js
+          node --check functions/api/create-pdi-checkout-live.js
           node --check functions/api/recommend-offers.js
+          node --check functions/_lib/offer-telemetry-learning.js
+          node functions/_lib/offer-brain.test.mjs
+          node functions/_lib/offer-telemetry-learning.test.mjs
+          node functions/_lib/commerce-events.test.mjs
 
       - name: Validate global health gate
         run: python .github/maison-growth/brain/validate_global_health_gate.py
