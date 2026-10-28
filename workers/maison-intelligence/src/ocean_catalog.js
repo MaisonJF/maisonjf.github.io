@@ -708,10 +708,32 @@ export function selectPillarFocus({pillars = PILLARS, focusOceans = [], runKey =
     }
     frontier=next;
   }
-  // Then explore the broader network with a deterministic rotating window,
-  // avoiding a permanent bias toward the first alphabetic/database records.
+  // Cap local-neighbour dominance so the graph cannot starve its long tail.
+  // Dynamic approved pillars get a reserved rotating share when the registry grows.
+  const localBudget=Math.max(1,Math.floor(max*0.55));
+  if(selected.length>localBudget){
+    selected.splice(localBudget);
+    selectedKeys.clear();
+    for(const pillar of selected)selectedKeys.add(pillar.key);
+  }
+
   const seed=[...String(runKey||new Date().toISOString().slice(0,10))]
     .reduce((n,char)=>(n*31+char.charCodeAt(0))>>>0,7);
+  const dynamic=active.filter(p=>p.origin==='human_approved_dynamic'||p.source_candidate_id);
+  if(dynamic.length&&selected.length<max){
+    const dynamicStart=seed%dynamic.length;
+    const dynamicBudget=Math.min(
+      max-selected.length,
+      Math.max(1,Math.floor(max*0.25))
+    );
+    const before=selected.length;
+    for(let i=0;selected.length-before<dynamicBudget&&i<dynamic.length;i++){
+      add(dynamic[(dynamicStart+i)%dynamic.length].key);
+    }
+  }
+
+  // Fill the remaining slots from a deterministic rotating window over the full
+  // registry. No fixed first-page subset can permanently dominate model context.
   if(active.length){
     const start=seed%active.length;
     for(let i=0;selected.length<max&&i<active.length;i++){
