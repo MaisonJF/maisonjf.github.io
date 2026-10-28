@@ -42,7 +42,7 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
     <button id="select-all">Selecionar visíveis</button>
     <button id="clear">Limpar seleção</button>
     <button id="approve" class="primary">Aprovar selecionados</button>
-    <button id="approve-all">Aprovar TODOS</button>
+    <button id="approve-all" disabled title="A aprovação em massa fica suspensa até concluir a auditoria do conteúdo existente.">Aprovar TODOS (suspenso)</button>
     <button id="review">Guardar para rever</button>
   <button id="prev-page" disabled>Anterior</button>
   <button id="next-page" disabled>Seguinte</button>
@@ -93,7 +93,7 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
      : rows.length+' itens neste filtro · '+selected().length+' selecionados';
    $('approve').disabled=auditMode||selected().length===0;
    $('review').disabled=auditMode||selected().length===0;
-   $('approve-all').disabled=auditMode;
+   $('approve-all').disabled=true;
    $('export-audit').disabled=!auditMode;
    $('retire-selected').disabled=!auditMode||selected().length===0;
    $('prev-page').disabled=!auditMode||auditOffset===0;
@@ -183,10 +183,12 @@ button.primary{background:#eee8dd;color:#111}.toolbar{display:flex;gap:9px;flex-
  $('retire-selected').addEventListener('click',async()=>{
    const items=selected();
    if(!auditMode||!items.length)return;
+   const reason=prompt('Motivo editorial para retirar estes '+items.length+' registos. O texto e o histórico serão preservados.','Sem adequação ao produto; conteúdo a retirar após auditoria.');
+   if(reason===null)return;
    if(!confirm('Retirar '+items.length+' registos da selecção futura? O texto não será apagado; será preservado o histórico e a decisão editorial.'))return;
    try{
      note('A retirar registos selecionados…');
-     const result=await call('retire',{items});
+     const result=await call('retire',{items,reason:reason.trim()});
      note(result,'ok');
      auditOffset=0;await load();
    }catch(e){note(e.message,'warning')}
