@@ -14,14 +14,14 @@
     "publicPublication": false
   },
   "summary": {
-    "exactThemeGroups": 388,
-    "duoQuestionDrafts": 3008,
+    "exactThemeGroups": 389,
+    "duoQuestionDrafts": 3016,
     "groupQuestionDrafts": 336,
-    "questionDrafts": 3344,
+    "questionDrafts": 3352,
     "oracleTerritories": 100,
     "oracleRoleBriefs": 700,
     "ebookConceptSeeds": 12,
-    "questionsRequiringEditorialApproval": 3344,
+    "questionsRequiringEditorialApproval": 3352,
     "oracleBriefsRequiringEditorialApproval": 700,
     "ebookConceptsRequiringHumanReview": 12
   },
@@ -9616,6 +9616,206 @@
       ],
       "sourceSignalRefs": [
         "pdi-conversation:coisas-que-quero-viver-contigo"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_collaboration_opportunities_01",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Collaboration Opportunities",
+      "themeKey": "collaboration-opportunities",
+      "title": "Collaboration Opportunities · A dois · 01",
+      "stage": "open",
+      "editorialFunction": "abrir",
+      "text": "Quando surge o tema de collaboration opportunities, o que gostarias que eu percebesse sem teres de repetir?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:collaboration-opportunities:collaboration-opportunities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_collaboration_opportunities_02",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Collaboration Opportunities",
+      "themeKey": "collaboration-opportunities",
+      "title": "Collaboration Opportunities · A dois · 02",
+      "stage": "recognize",
+      "editorialFunction": "reconhecer",
+      "text": "Que gesto concreto poderia tornar o tema de collaboration opportunities mais leve entre nós?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:collaboration-opportunities:collaboration-opportunities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_collaboration_opportunities_03",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Collaboration Opportunities",
+      "themeKey": "collaboration-opportunities",
+      "title": "Collaboration Opportunities · A dois · 03",
+      "stage": "deepen",
+      "editorialFunction": "clarificar",
+      "text": "O que é fácil interpretar mal quando falamos sobre collaboration opportunities?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:collaboration-opportunities:collaboration-opportunities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_collaboration_opportunities_04",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Collaboration Opportunities",
+      "themeKey": "collaboration-opportunities",
+      "title": "Collaboration Opportunities · A dois · 04",
+      "stage": "touch",
+      "editorialFunction": "perguntar",
+      "text": "Que pergunta sobre collaboration opportunities nunca encontrámos o momento certo para fazer?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:collaboration-opportunities:collaboration-opportunities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_collaboration_opportunities_05",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Collaboration Opportunities",
+      "themeKey": "collaboration-opportunities",
+      "title": "Collaboration Opportunities · A dois · 05",
+      "stage": "close",
+      "editorialFunction": "concretizar",
+      "text": "Que exemplo concreto te ajudaria a explicar como vives collaboration opportunities?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:collaboration-opportunities:collaboration-opportunities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_collaboration_opportunities_06",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Collaboration Opportunities",
+      "themeKey": "collaboration-opportunities",
+      "title": "Collaboration Opportunities · A dois · 06",
+      "stage": "signature",
+      "editorialFunction": "reavaliar",
+      "text": "O que gostarias de preservar e o que já poderia mudar em relação a collaboration opportunities?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:collaboration-opportunities:collaboration-opportunities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_collaboration_opportunities_07",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Collaboration Opportunities",
+      "themeKey": "collaboration-opportunities",
+      "title": "Collaboration Opportunities · A dois · 07",
+      "stage": "open",
+      "editorialFunction": "aprofundar",
+      "text": "Que parte de collaboration opportunities preferes explorar devagar, sem pressão para responder já?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:collaboration-opportunities:collaboration-opportunities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_collaboration_opportunities_08",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Collaboration Opportunities",
+      "themeKey": "collaboration-opportunities",
+      "title": "Collaboration Opportunities · A dois · 08",
+      "stage": "recognize",
+      "editorialFunction": "mover",
+      "text": "Qual seria um próximo passo pequeno e realista para conversarmos melhor sobre collaboration opportunities?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:collaboration-opportunities:collaboration-opportunities"
       ],
       "sourceBasis": "internal_theme_catalogue",
       "independentlyVerifiedDemand": false,
