@@ -14,14 +14,14 @@
     "publicPublication": false
   },
   "summary": {
-    "exactThemeGroups": 387,
-    "duoQuestionDrafts": 3000,
+    "exactThemeGroups": 388,
+    "duoQuestionDrafts": 3008,
     "groupQuestionDrafts": 336,
-    "questionDrafts": 3336,
+    "questionDrafts": 3344,
     "oracleTerritories": 100,
     "oracleRoleBriefs": 700,
     "ebookConceptSeeds": 12,
-    "questionsRequiringEditorialApproval": 3336,
+    "questionsRequiringEditorialApproval": 3344,
     "oracleBriefsRequiringEditorialApproval": 700,
     "ebookConceptsRequiringHumanReview": 12
   },
@@ -6216,6 +6216,206 @@
       ],
       "sourceSignalRefs": [
         "ocean:adiar-o-sono-para-recuperar-autonomia:bedtime-procrastination"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_book_e_game_communities_01",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Book & Game Communities",
+      "themeKey": "book-e-game-communities",
+      "title": "Book & Game Communities · A dois · 01",
+      "stage": "open",
+      "editorialFunction": "abrir",
+      "text": "Quando surge o tema de book & game communities, o que gostarias que eu percebesse sem teres de repetir?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:book-game-communities:book-e-game-communities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_book_e_game_communities_02",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Book & Game Communities",
+      "themeKey": "book-e-game-communities",
+      "title": "Book & Game Communities · A dois · 02",
+      "stage": "recognize",
+      "editorialFunction": "reconhecer",
+      "text": "Que gesto concreto poderia tornar o tema de book & game communities mais leve entre nós?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:book-game-communities:book-e-game-communities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_book_e_game_communities_03",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Book & Game Communities",
+      "themeKey": "book-e-game-communities",
+      "title": "Book & Game Communities · A dois · 03",
+      "stage": "deepen",
+      "editorialFunction": "clarificar",
+      "text": "O que é fácil interpretar mal quando falamos sobre book & game communities?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:book-game-communities:book-e-game-communities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_book_e_game_communities_04",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Book & Game Communities",
+      "themeKey": "book-e-game-communities",
+      "title": "Book & Game Communities · A dois · 04",
+      "stage": "touch",
+      "editorialFunction": "perguntar",
+      "text": "Que pergunta sobre book & game communities nunca encontrámos o momento certo para fazer?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:book-game-communities:book-e-game-communities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_book_e_game_communities_05",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Book & Game Communities",
+      "themeKey": "book-e-game-communities",
+      "title": "Book & Game Communities · A dois · 05",
+      "stage": "close",
+      "editorialFunction": "concretizar",
+      "text": "Que exemplo concreto te ajudaria a explicar como vives book & game communities?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:book-game-communities:book-e-game-communities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_book_e_game_communities_06",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Book & Game Communities",
+      "themeKey": "book-e-game-communities",
+      "title": "Book & Game Communities · A dois · 06",
+      "stage": "signature",
+      "editorialFunction": "reavaliar",
+      "text": "O que gostarias de preservar e o que já poderia mudar em relação a book & game communities?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:book-game-communities:book-e-game-communities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_book_e_game_communities_07",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Book & Game Communities",
+      "themeKey": "book-e-game-communities",
+      "title": "Book & Game Communities · A dois · 07",
+      "stage": "open",
+      "editorialFunction": "aprofundar",
+      "text": "Que parte de book & game communities preferes explorar devagar, sem pressão para responder já?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:book-game-communities:book-e-game-communities"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_book_e_game_communities_08",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Book & Game Communities",
+      "themeKey": "book-e-game-communities",
+      "title": "Book & Game Communities · A dois · 08",
+      "stage": "recognize",
+      "editorialFunction": "mover",
+      "text": "Qual seria um próximo passo pequeno e realista para conversarmos melhor sobre book & game communities?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:book-game-communities:book-e-game-communities"
       ],
       "sourceBasis": "internal_theme_catalogue",
       "independentlyVerifiedDemand": false,
