@@ -6,14 +6,14 @@ export const PARA_DE_IGNORAR_POLICY={
   version:'2026-09-25-human-voice-v5',
   format:'digital-only',
   session:{
-    cards:28,
+    cards:16,
     modes:{
       duo:{players:2,turnStyle:'alternate_at_pack_boundary'},
       group:{minimumPlayers:3,maximumPlayers:12,turnStyle:'rotate_each_question',partyChallengesEvery:4,participantNamesStored:false}
     },
-    groupThemes:{family:'Amigos, Grupos & Festas',editorialSeedCount:28,publicAvailabilityGate:'minimum_28_active_approved_questions_per_theme'},
+    groupThemes:{family:'Amigos, Grupos & Festas',editorialSeedCount:16,publicAvailabilityGate:'minimum_16_active_approved_questions_per_theme'},
     packs:2,
-    cardsPerPack:14,
+    cardsPerPack:8,
     responseContentStored:false,
     stableOnReload:true,
     revealVariability:false,
@@ -31,7 +31,7 @@ export const PARA_DE_IGNORAR_POLICY={
   },
   publicPromise:{
     title:'PÁRA DE IGNORAR!',
-    line:'28 perguntas. A dois ou em grupo.',
+    line:'16 perguntas. A dois ou em grupo.',
     explanation:'A versão a dois alterna a vez. A versão de grupo roda a vez entre 3 e 12 pessoas e intercala desafios de festa. O resto acontece na conversa.'
   },
   privacy:{
@@ -74,10 +74,5 @@ export const PARA_DE_IGNORAR_PACK_TEMPLATE=[
   {position:6,stage:'recognize',minIntensity:2,maxIntensity:3},
   {position:7,stage:'deepen',minIntensity:2,maxIntensity:3},
   {position:8,stage:'deepen',minIntensity:2,maxIntensity:3},
-  {position:9,stage:'deepen',minIntensity:2,maxIntensity:3},
-  {position:10,stage:'touch',minIntensity:3,maxIntensity:4},
-  {position:11,stage:'touch',minIntensity:3,maxIntensity:4},
-  {position:12,stage:'touch',minIntensity:3,maxIntensity:4},
-  {position:13,stage:'close',minIntensity:2,maxIntensity:4},
-  {position:14,stage:'signature',minIntensity:3,maxIntensity:4}
+
 ];
