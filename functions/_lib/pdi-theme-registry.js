@@ -2,7 +2,7 @@ import { groupExactThemeSignals } from './pdi-theme-sources.js';
 import { normalizeMaisonLocale } from './maison-locales.js';
 
 const DEFAULT_AMOUNT=500;
-const MINIMUM_LIVE_QUESTIONS=28;
+const MINIMUM_LIVE_QUESTIONS=16;
 
 function stableThemeSlug(value){
   return String(value||'')
