@@ -14,14 +14,14 @@
     "publicPublication": false
   },
   "summary": {
-    "exactThemeGroups": 389,
-    "duoQuestionDrafts": 3016,
+    "exactThemeGroups": 391,
+    "duoQuestionDrafts": 3032,
     "groupQuestionDrafts": 336,
-    "questionDrafts": 3352,
+    "questionDrafts": 3368,
     "oracleTerritories": 100,
     "oracleRoleBriefs": 700,
     "ebookConceptSeeds": 12,
-    "questionsRequiringEditorialApproval": 3352,
+    "questionsRequiringEditorialApproval": 3368,
     "oracleBriefsRequiringEditorialApproval": 700,
     "ebookConceptsRequiringHumanReview": 12
   },
@@ -24235,6 +24235,206 @@
       "publiclyAvailable": false
     },
     {
+      "id": "pdi_qdraft_duo_emerging_markets_e_languages_01",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Emerging Markets & Languages",
+      "themeKey": "emerging-markets-e-languages",
+      "title": "Emerging Markets & Languages · A dois · 01",
+      "stage": "open",
+      "editorialFunction": "abrir",
+      "text": "Quando surge o tema de emerging markets & languages, o que gostarias que eu percebesse sem teres de repetir?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:emerging-markets-languages:emerging-markets-e-languages"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_emerging_markets_e_languages_02",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Emerging Markets & Languages",
+      "themeKey": "emerging-markets-e-languages",
+      "title": "Emerging Markets & Languages · A dois · 02",
+      "stage": "recognize",
+      "editorialFunction": "reconhecer",
+      "text": "Que gesto concreto poderia tornar o tema de emerging markets & languages mais leve entre nós?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:emerging-markets-languages:emerging-markets-e-languages"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_emerging_markets_e_languages_03",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Emerging Markets & Languages",
+      "themeKey": "emerging-markets-e-languages",
+      "title": "Emerging Markets & Languages · A dois · 03",
+      "stage": "deepen",
+      "editorialFunction": "clarificar",
+      "text": "O que é fácil interpretar mal quando falamos sobre emerging markets & languages?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:emerging-markets-languages:emerging-markets-e-languages"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_emerging_markets_e_languages_04",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Emerging Markets & Languages",
+      "themeKey": "emerging-markets-e-languages",
+      "title": "Emerging Markets & Languages · A dois · 04",
+      "stage": "touch",
+      "editorialFunction": "perguntar",
+      "text": "Que pergunta sobre emerging markets & languages nunca encontrámos o momento certo para fazer?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:emerging-markets-languages:emerging-markets-e-languages"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_emerging_markets_e_languages_05",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Emerging Markets & Languages",
+      "themeKey": "emerging-markets-e-languages",
+      "title": "Emerging Markets & Languages · A dois · 05",
+      "stage": "close",
+      "editorialFunction": "concretizar",
+      "text": "Que exemplo concreto te ajudaria a explicar como vives emerging markets & languages?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:emerging-markets-languages:emerging-markets-e-languages"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_emerging_markets_e_languages_06",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Emerging Markets & Languages",
+      "themeKey": "emerging-markets-e-languages",
+      "title": "Emerging Markets & Languages · A dois · 06",
+      "stage": "signature",
+      "editorialFunction": "reavaliar",
+      "text": "O que gostarias de preservar e o que já poderia mudar em relação a emerging markets & languages?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:emerging-markets-languages:emerging-markets-e-languages"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_emerging_markets_e_languages_07",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Emerging Markets & Languages",
+      "themeKey": "emerging-markets-e-languages",
+      "title": "Emerging Markets & Languages · A dois · 07",
+      "stage": "open",
+      "editorialFunction": "aprofundar",
+      "text": "Que parte de emerging markets & languages preferes explorar devagar, sem pressão para responder já?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:emerging-markets-languages:emerging-markets-e-languages"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_emerging_markets_e_languages_08",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Emerging Markets & Languages",
+      "themeKey": "emerging-markets-e-languages",
+      "title": "Emerging Markets & Languages · A dois · 08",
+      "stage": "recognize",
+      "editorialFunction": "mover",
+      "text": "Qual seria um próximo passo pequeno e realista para conversarmos melhor sobre emerging markets & languages?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:emerging-markets-languages:emerging-markets-e-languages"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
       "id": "pdi_qdraft_duo_emigracao_e_saudade_01",
       "type": "pdi_question_draft",
       "mode": "duo",
@@ -29224,6 +29424,206 @@
       ],
       "sourceSignalRefs": [
         "ocean:precisar-de-solidao-para-recuperar-energia-social:explicar-que-preciso-de-espaco-sem-desaparecer"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_failed_ideas_e_negative_results_01",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Failed Ideas & Negative Results",
+      "themeKey": "failed-ideas-e-negative-results",
+      "title": "Failed Ideas & Negative Results · A dois · 01",
+      "stage": "open",
+      "editorialFunction": "abrir",
+      "text": "Quando surge o tema de failed ideas & negative results, o que gostarias que eu percebesse sem teres de repetir?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:failed-ideas-negative-results:failed-ideas-e-negative-results"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_failed_ideas_e_negative_results_02",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Failed Ideas & Negative Results",
+      "themeKey": "failed-ideas-e-negative-results",
+      "title": "Failed Ideas & Negative Results · A dois · 02",
+      "stage": "recognize",
+      "editorialFunction": "reconhecer",
+      "text": "Que gesto concreto poderia tornar o tema de failed ideas & negative results mais leve entre nós?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:failed-ideas-negative-results:failed-ideas-e-negative-results"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_failed_ideas_e_negative_results_03",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Failed Ideas & Negative Results",
+      "themeKey": "failed-ideas-e-negative-results",
+      "title": "Failed Ideas & Negative Results · A dois · 03",
+      "stage": "deepen",
+      "editorialFunction": "clarificar",
+      "text": "O que é fácil interpretar mal quando falamos sobre failed ideas & negative results?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:failed-ideas-negative-results:failed-ideas-e-negative-results"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_failed_ideas_e_negative_results_04",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Failed Ideas & Negative Results",
+      "themeKey": "failed-ideas-e-negative-results",
+      "title": "Failed Ideas & Negative Results · A dois · 04",
+      "stage": "touch",
+      "editorialFunction": "perguntar",
+      "text": "Que pergunta sobre failed ideas & negative results nunca encontrámos o momento certo para fazer?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:failed-ideas-negative-results:failed-ideas-e-negative-results"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_failed_ideas_e_negative_results_05",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Failed Ideas & Negative Results",
+      "themeKey": "failed-ideas-e-negative-results",
+      "title": "Failed Ideas & Negative Results · A dois · 05",
+      "stage": "close",
+      "editorialFunction": "concretizar",
+      "text": "Que exemplo concreto te ajudaria a explicar como vives failed ideas & negative results?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:failed-ideas-negative-results:failed-ideas-e-negative-results"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_failed_ideas_e_negative_results_06",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Failed Ideas & Negative Results",
+      "themeKey": "failed-ideas-e-negative-results",
+      "title": "Failed Ideas & Negative Results · A dois · 06",
+      "stage": "signature",
+      "editorialFunction": "reavaliar",
+      "text": "O que gostarias de preservar e o que já poderia mudar em relação a failed ideas & negative results?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:failed-ideas-negative-results:failed-ideas-e-negative-results"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_failed_ideas_e_negative_results_07",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Failed Ideas & Negative Results",
+      "themeKey": "failed-ideas-e-negative-results",
+      "title": "Failed Ideas & Negative Results · A dois · 07",
+      "stage": "open",
+      "editorialFunction": "aprofundar",
+      "text": "Que parte de failed ideas & negative results preferes explorar devagar, sem pressão para responder já?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:failed-ideas-negative-results:failed-ideas-e-negative-results"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_failed_ideas_e_negative_results_08",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Failed Ideas & Negative Results",
+      "themeKey": "failed-ideas-e-negative-results",
+      "title": "Failed Ideas & Negative Results · A dois · 08",
+      "stage": "recognize",
+      "editorialFunction": "mover",
+      "text": "Qual seria um próximo passo pequeno e realista para conversarmos melhor sobre failed ideas & negative results?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:failed-ideas-negative-results:failed-ideas-e-negative-results"
       ],
       "sourceBasis": "internal_theme_catalogue",
       "independentlyVerifiedDemand": false,
