@@ -39,7 +39,7 @@ export function qualityCheckOracle({blocks,plan}={}){
 export function qualityCheckQuestionPacks({packA,packB}={}){
   const issues=[],warnings=[];
   const cards=[...(packA||[]),...(packB||[])];
-  if(cards.length!==28)issues.push('question_count_not_28');
+  if(cards.length!==16)issues.push('question_count_not_16');
   const ids=cards.map(x=>x.id);
   if(new Set(ids).size!==ids.length)issues.push('duplicate_question_id');
 
