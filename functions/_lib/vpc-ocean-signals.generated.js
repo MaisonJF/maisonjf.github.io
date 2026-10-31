@@ -69,7 +69,8 @@ export const VPC_OCEAN_SIGNALS=[
       "pedir menos para não parecer exigente",
       "normalizar atenção ou carinho insuficientes",
       "self silencing",
-      "people pleasing"
+      "people pleasing",
+      "fear of conflict"
     ]
   },
   {
@@ -463,4 +464,4 @@ export const VPC_OCEAN_SIGNALS=[
     ]
   }
 ];
-export const VPC_OCEAN_SIGNAL_VERSION="2026-10-30";
+export const VPC_OCEAN_SIGNAL_VERSION="2026-10-31";

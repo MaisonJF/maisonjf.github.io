@@ -1,14 +1,14 @@
 {
-  "version": "2026-10-30",
+  "version": "2026-10-31",
   "visibility": "internal-site",
   "note": "Not a public Maison surface. Contains abstract, non-personal Ocean candidates only.",
-  "last_enriched_at": "2026-10-30T01:06:21.216Z",
+  "last_enriched_at": "2026-10-31T05:52:39.657Z",
   "candidates": [
     {
       "painLanguage": "Depois de um dia dominado por trabalho, cuidados, tarefas ou obrigações, a noite pode parecer o primeiro momento realmente próprio. Mesmo cansada, a pessoa prolonga esse espaço porque ir dormir pode soar a entregar o pouco tempo pessoal que ainda lhe resta.",
       "territory": "adiar-o-sono-para-recuperar-autonomia",
       "intent": "reconhecer quando adiar o sono funciona como tentativa de recuperar autonomia, lazer ou tempo próprio depois de um dia vivido sobretudo em função de obrigações, distinguindo descanso, escolha e necessidade de espaço pessoal sem transformar o tema em diagnóstico",
-      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre transição entre obrigação, tempo próprio e descanso, sem claims médicos ou promessas sobre sono; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}",
+      "commercialAdjacency": "Ritual Volta Para Casa; Aromas por necessidade/momento humano; experiências digitais intermédias sobre transição entre obrigação, tempo próprio e descanso, sem claims médicos ou promessas sobre sono; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"adiar-o-sono-para-recuperar-autonomia\"}",
       "evidence": [
         "International Journal of Behavioral Medicine (daily diary study, 2024): higher daily stress was associated with more bedtime procrastination, which in turn was associated with shorter sleep duration and poorer sleep quality — https://doi.org/10.1007/s12529-023-10206-3",
         "Current Psychology / academic literature on revenge bedtime procrastination (2026): examines intentional delay of bedtime to reclaim leisure or personal time not available during the day, reinforcing autonomy/time-recovery as a distinct behavioural framing — https://link.springer.com/",
@@ -31,7 +31,7 @@
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-23T21:07:00+01:00",
-      "lastSeenAt": "2026-10-19T00:05:21.339Z"
+      "lastSeenAt": "2026-10-31T00:11:17.142Z"
     },
     {
       "painLanguage": "O domingo ainda não acabou, mas a cabeça já começou a viver a segunda-feira: tarefas, mensagens, reuniões e obrigações entram mentalmente antes de o tempo de descanso terminar, roubando presença ao fim do fim-de-semana.",
@@ -93,7 +93,7 @@
       "painLanguage": "Às vezes, manter a paz parece exigir engolir opiniões, necessidades ou desconforto. A relação continua, mas a pessoa começa a dividir-se entre aquilo que sente por dentro e aquilo que se permite mostrar para não arriscar conflito, rejeição ou perda.",
       "territory": "auto-silenciamento-para-preservar-o-vinculo",
       "intent": "reconhecer quando acomodação escolhida se transforma em supressão recorrente da própria voz para proteger uma relação, distinguindo cuidado mútuo de paz comprada com autoapagamento",
-      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; experiências reflexivas sobre voz, segurança relacional, necessidades e reciprocidade, sem substituir apoio clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}",
+      "commercialAdjacency": "Oráculo Comunicação & Conflito, Limites & Respeito, Intimidade & Vulnerabilidade e Eu & Padrões; experiências reflexivas sobre voz, segurança relacional, necessidades e reciprocidade, sem substituir apoio clínico; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"auto-silenciamento-para-preservar-o-vinculo\"}",
       "evidence": [
         "Behavioral Sciences (2026; PMID 42352796): estudo qualitativo encontrou auto-silenciamento específico de cada relação, associado sobretudo à segurança percebida; a supressão repetida da expressão para preservar vínculos apresentou custos psicológicos cumulativos — https://pubmed.ncbi.nlm.nih.gov/42352796/",
         "International Journal of Social Psychiatry (2023; PMID 35102764): em adultos em relações, o auto-silenciamento mediou a associação entre dimensões de apego inseguro e sintomas depressivos — https://pubmed.ncbi.nlm.nih.gov/35102764/",
@@ -111,12 +111,13 @@
         "pedir menos para não parecer exigente",
         "normalizar atenção ou carinho insuficientes",
         "self silencing",
-        "people pleasing"
+        "people pleasing",
+        "fear of conflict"
       ],
       "oraclePotential": true,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-20T08:14:28+01:00",
-      "lastSeenAt": "2026-10-17T03:02:32.776Z"
+      "lastSeenAt": "2026-10-31T00:01:18.487Z"
     },
     {
       "painLanguage": "Às vezes ninguém diz “não podes”. Mas a escolha deixa de parecer livre quando a pessoa já sabe que, se sair, disser não, pedir espaço ou escolher por si, pode encontrar silêncio, frieza, culpa, tensão ou outra reacção que funciona como preço a pagar.",
@@ -606,7 +607,7 @@
       "painLanguage": "A Maison pode ter respostas, produtos, experiências e linguagem relevantes e, ainda assim, permanecer invisível para pessoas que já procuram exactamente esses temas. O problema não é apenas converter quem entra: é ser descoberta, reconhecida e lembrada antes da intenção de compra.",
       "territory": "descoberta-organica-e-reconhecimento-da-maison",
       "intent": "identificar onde existem pessoas, pesquisas, conversas e superfícies públicas compatíveis com dores, desejos e curiosidades que a Maison JF já consegue responder, e descobrir formas gratuitas, orgânicas, úteis e não-intrusivas de aumentar visualização, reconhecimento e tráfego qualificado para maison-jf.com antes da intenção de compra",
-      "commercialAdjacency": "Toda a oferta Maison JF já existente — ebooks, jogo, testes gratuitos, Oráculo/Tarot, mentorias, rituais, aromas, produtos físicos e experiências — priorizando primeiro a correspondência entre procura real e activos existentes, sem inventar novos produtos nem depender de publicidade paga.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}",
+      "commercialAdjacency": "Toda a oferta Maison JF já existente — ebooks, jogo, testes gratuitos, Oráculo/Tarot, mentorias, rituais, aromas, produtos físicos e experiências — priorizando primeiro a correspondência entre procura real e activos existentes, sem inventar novos produtos nem depender de publicidade paga.; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"organic_discovery\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}; {\"source\":\"live_intelligence\",\"provider_id\":\"openrouter\",\"source_territory\":\"search_visibility\"}",
       "evidence": [
         "Hipótese estratégica autorizada por João Fadario em 2026-09-26: o gargalo prioritário a investigar é descoberta/reconhecimento — trazer mais pessoas adequadas à Maison antes de optimizar conversão.",
         "Public discovery graph interno Maison: sitemap, canonical/effective metadata, JSON-LD e internal-link projection já convergem para o Knowledge Graph e Brain; usar esta base para relacionar superfícies públicas com activos existentes.",
@@ -628,7 +629,7 @@
       "oraclePotential": false,
       "status": "internal_candidate",
       "firstSeenAt": "2026-09-26T22:00:00+01:00",
-      "lastSeenAt": "2026-10-28T03:00:20.862Z"
+      "lastSeenAt": "2026-10-31T03:00:30.171Z"
     },
     {
       "painLanguage": "A Maison não precisa de inventar do zero todos os mecanismos de atenção, desejo, identificação, memória, participação e propagação. Séculos de psicologia, cultura, publicidade, entretenimento, luxo, design, retalho e construção de marcas contêm mecanismos observáveis que podem ser estudados, testados e reinterpretados sem copiar a expressão de quem os dominou.",

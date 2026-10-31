@@ -14,14 +14,14 @@
     "publicPublication": false
   },
   "summary": {
-    "exactThemeGroups": 391,
-    "duoQuestionDrafts": 3032,
+    "exactThemeGroups": 392,
+    "duoQuestionDrafts": 3040,
     "groupQuestionDrafts": 336,
-    "questionDrafts": 3368,
+    "questionDrafts": 3376,
     "oracleTerritories": 100,
     "oracleRoleBriefs": 700,
     "ebookConceptSeeds": 12,
-    "questionsRequiringEditorialApproval": 3368,
+    "questionsRequiringEditorialApproval": 3376,
     "oracleBriefsRequiringEditorialApproval": 700,
     "ebookConceptsRequiringHumanReview": 12
   },
@@ -30824,6 +30824,206 @@
       ],
       "sourceSignalRefs": [
         "oracle:fe-duvida"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_fear_of_conflict_01",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Fear of conflict",
+      "themeKey": "fear-of-conflict",
+      "title": "Fear of conflict · A dois · 01",
+      "stage": "open",
+      "editorialFunction": "abrir",
+      "text": "Quando surge o tema de fear of conflict, o que gostarias que eu percebesse sem teres de repetir?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:auto-silenciamento-para-preservar-o-vinculo:fear-of-conflict"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_fear_of_conflict_02",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Fear of conflict",
+      "themeKey": "fear-of-conflict",
+      "title": "Fear of conflict · A dois · 02",
+      "stage": "recognize",
+      "editorialFunction": "reconhecer",
+      "text": "Que gesto concreto poderia tornar o tema de fear of conflict mais leve entre nós?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:auto-silenciamento-para-preservar-o-vinculo:fear-of-conflict"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_fear_of_conflict_03",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Fear of conflict",
+      "themeKey": "fear-of-conflict",
+      "title": "Fear of conflict · A dois · 03",
+      "stage": "deepen",
+      "editorialFunction": "clarificar",
+      "text": "O que é fácil interpretar mal quando falamos sobre fear of conflict?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:auto-silenciamento-para-preservar-o-vinculo:fear-of-conflict"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_fear_of_conflict_04",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Fear of conflict",
+      "themeKey": "fear-of-conflict",
+      "title": "Fear of conflict · A dois · 04",
+      "stage": "touch",
+      "editorialFunction": "perguntar",
+      "text": "Que pergunta sobre fear of conflict nunca encontrámos o momento certo para fazer?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:auto-silenciamento-para-preservar-o-vinculo:fear-of-conflict"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_fear_of_conflict_05",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Fear of conflict",
+      "themeKey": "fear-of-conflict",
+      "title": "Fear of conflict · A dois · 05",
+      "stage": "close",
+      "editorialFunction": "concretizar",
+      "text": "Que exemplo concreto te ajudaria a explicar como vives fear of conflict?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:auto-silenciamento-para-preservar-o-vinculo:fear-of-conflict"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_fear_of_conflict_06",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Fear of conflict",
+      "themeKey": "fear-of-conflict",
+      "title": "Fear of conflict · A dois · 06",
+      "stage": "signature",
+      "editorialFunction": "reavaliar",
+      "text": "O que gostarias de preservar e o que já poderia mudar em relação a fear of conflict?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:auto-silenciamento-para-preservar-o-vinculo:fear-of-conflict"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_fear_of_conflict_07",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Fear of conflict",
+      "themeKey": "fear-of-conflict",
+      "title": "Fear of conflict · A dois · 07",
+      "stage": "open",
+      "editorialFunction": "aprofundar",
+      "text": "Que parte de fear of conflict preferes explorar devagar, sem pressão para responder já?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:auto-silenciamento-para-preservar-o-vinculo:fear-of-conflict"
+      ],
+      "sourceBasis": "internal_theme_catalogue",
+      "independentlyVerifiedDemand": false,
+      "status": "needs_editorial",
+      "active": false,
+      "bodyStored": true,
+      "approvalRequired": true,
+      "automaticActivation": false,
+      "publiclyAvailable": false
+    },
+    {
+      "id": "pdi_qdraft_duo_fear_of_conflict_08",
+      "type": "pdi_question_draft",
+      "mode": "duo",
+      "theme": "Fear of conflict",
+      "themeKey": "fear-of-conflict",
+      "title": "Fear of conflict · A dois · 08",
+      "stage": "recognize",
+      "editorialFunction": "mover",
+      "text": "Qual seria um próximo passo pequeno e realista para conversarmos melhor sobre fear of conflict?",
+      "sourceKinds": [
+        "ocean"
+      ],
+      "sourceSignalRefs": [
+        "ocean:auto-silenciamento-para-preservar-o-vinculo:fear-of-conflict"
       ],
       "sourceBasis": "internal_theme_catalogue",
       "independentlyVerifiedDemand": false,
