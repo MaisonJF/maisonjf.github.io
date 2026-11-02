@@ -20,6 +20,10 @@ export async function onRequestGet({env}){
     const pdi=await checkPdi(db);
     const oracleAmor=await checkOracleAmor(db);
     const catalogue=await summarizeExperienceCatalogue(db);
+    const gameLocaleCoverage=await Promise.all(['pt-PT','pt-BR','en','es'].map(async locale=>{
+      try{const pool=await listActivePaidQuestionsV2(db,'*',locale);return {locale,active_questions:pool.length,minimum_16:pool.length>=16};}
+      catch{return {locale,active_questions:null,minimum_16:false};}
+    }));
 
     return json({
       ok:pdi.ok&&oracleAmor.ok,
@@ -33,6 +37,7 @@ export async function onRequestGet({env}){
         content_coverage:'validated_per_checkout'
       },
       pdi,
+      game_locale_coverage:gameLocaleCoverage,
       oracle:{
         amor:oracleAmor,
         incomplete_territories_use_legacy_fallback:true
