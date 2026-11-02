@@ -14,3 +14,9 @@ jobs:
           node-version: '22'
       - name: Check internal links and supported locales
         run: node scripts/maison-3-smoke.cjs
+      - name: Validate Vault v3 payload contract
+        run: node .github/maison-growth/vault/validate_v3_payload_contract.mjs
+      - name: Validate PDI registry
+        run: node .github/maison-growth/vault/validate_pdi_registry.mjs
+      - name: Validate luxury public surface
+        run: node .github/maison-growth/validate_luxury_surface.mjs
