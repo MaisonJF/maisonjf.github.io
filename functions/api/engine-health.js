@@ -9,17 +9,24 @@ const ORACLE_ROLES=['opening','recognition','tension','counterpoint','reframe','
 
 export async function onRequestGet({env}){
   const started=Date.now();
+  let stage='binding';
   try{
     const db=requireMaisonVault(env);
+    stage='schema';
     const schemaReady=await vaultExperienceEngineReady(db);
     if(!schemaReady){
       return json({ok:false,schema:'not_vault_v2_or_v3',latency_ms:Date.now()-started},503);
     }
+    stage='localization';
     const localized=await vaultLocalizationReady(db);
 
+    stage='game';
     const pdi=await checkPdi(db);
+    stage='oracle';
     const oracleAmor=await checkOracleAmor(db);
+    stage='catalogue';
     const catalogue=await summarizeExperienceCatalogue(db);
+    stage='locale_coverage';
     const gameLocaleCoverage=await Promise.all(['pt-PT','pt-BR','en','es'].map(async locale=>{
       try{const pool=await listActivePaidQuestionsV2(db,'*',locale);return {locale,active_questions:pool.length,minimum_16:pool.length>=16};}
       catch{return {locale,active_questions:null,minimum_16:false};}
@@ -49,8 +56,10 @@ export async function onRequestGet({env}){
       },
       latency_ms:Date.now()-started
     },pdi.ok&&oracleAmor.ok?200:503);
-  }catch{
-    return json({ok:false,error:'health_check_failed',latency_ms:Date.now()-started},503);
+  }catch(error){
+    const code=error?.code==='MAISON_VAULT_UNAVAILABLE'?'binding_unavailable':'health_check_failed';
+    console.error('[engine-health] failure',{stage,code,name:String(error?.name||'Error')});
+    return json({ok:false,error:code,stage,latency_ms:Date.now()-started},503);
   }
 }
 
