@@ -38,7 +38,7 @@ export async function listActivePaidQuestions(db,theme,themeAliases=[]){
             direction, time_scope, exposure, status, lifecycle_state, rotation_state,
             scores_json, viral_json, conflicts_json, pairs_json, similarity_group
        FROM vault_questions
-      WHERE theme IN (${placeholders})
+      WHERE (?1='*' OR theme IN (${placeholders}))
         AND status='active'
         AND exposure='paid'
         AND lifecycle_state='live'
@@ -47,7 +47,7 @@ export async function listActivePaidQuestions(db,theme,themeAliases=[]){
   ).bind(...themes).all();
   return (result.results||[]).map(row=>({
     id:row.id,
-    theme,
+    theme:row.theme,
     text:row.text,
     subthemes:parseJson(row.subthemes_json,[]),
     class:row.class,
