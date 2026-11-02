@@ -51,9 +51,9 @@ export async function onRequestGet({env}){
 
 async function checkPdi(db){
   try{
-    const questions=await listActivePaidQuestionsV2(db,'relacoes');
+    const questions=await listActivePaidQuestionsV2(db,'*');
     const composed=composeQuestionSession({
-      theme:'relacoes',
+      theme:'*',
       seed:'maison-health-pdi-v2',
       questions,
       seenIds:[]
