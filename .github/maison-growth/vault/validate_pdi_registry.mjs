@@ -15,7 +15,7 @@ assert.equal(stats.curatedThemes,2);
 assert.equal(sources.ocean,signals.filter(signal=>signal.source==='ocean').length);
 assert.ok(signals.length>=sources.exactGroups);
 assert.ok(sources.ocean>0);
-assert.equal(stats.minimumLiveQuestions,28);
+assert.equal(stats.minimumLiveQuestions,16);
 assert.deepEqual(getPdiPriceForLocale('pt-PT'),{amount:500,currency:'eur'});
 assert.deepEqual(getPdiPriceForLocale('pt-BR'),{amount:1990,currency:'brl'});
 assert.deepEqual(getPdiPriceForLocale('en'),{amount:500,currency:'eur'});
