@@ -1,6 +1,5 @@
 /* MAISON JF 3.0: choose 16 distinct approved questions from the entire Vault.
    Editorial stages are preferences, never reasons to reject an otherwise playable session. */
-import { validateQuestionCard } from './maison-content-ontology.js';
 
 export function composeQuestionSession({theme='*',seed,questions,seenIds=[]}={}){
   if(!seed)throw new Error('seed_required');
