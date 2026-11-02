@@ -20,11 +20,11 @@ console.log('PASS: 16 unique questions, 8+8 packs, 30 seeds; no stage quotas');
 
 import {readFileSync} from 'node:fs';
 const source=readFileSync(new URL('../../../functions/api/oracle-reading-live.js',import.meta.url),'utf8');
-const publicResponses=[...source.matchAll(/return json\\(\\{([\\s\\S]*?)\\}\\);/g)].map(m=>m[1]);
+const publicResponses=[...source.matchAll(/return json\(\{([\s\S]*?)\}\);/g)].map(m=>m[1]);
 assert.ok(publicResponses.length>=2,'Expected oracle success response objects');
 for(const response of publicResponses){
   if(!response.includes('reading:'))continue;
-  assert.doesNotMatch(response,/\\btheme\\s*[:,]/,'Oracle success payload leaks theme');
-  assert.doesNotMatch(response,/\\binternal_theme\\s*[:,]/,'Oracle success payload leaks internal_theme');
+  assert.doesNotMatch(response,/\btheme\s*[:,]/,'Oracle success payload leaks theme');
+  assert.doesNotMatch(response,/\binternal_theme\s*[:,]/,'Oracle success payload leaks internal_theme');
 }
 console.log('PASS: oracle route success payload source omits internal theme fields (static check)');
