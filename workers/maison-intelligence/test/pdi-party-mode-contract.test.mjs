@@ -79,7 +79,7 @@ test('sales page sends the selected mode into checkout while keeping answer priv
   const page=read('para-de-ignorar/index.html');
   assert.match(page,/data-mode="duo"/);
   assert.match(page,/data-mode="group"/);
-  assert.match(page,/JSON\\.stringify\\(\\{mode,locale\\}\\)/);
+  assert.match(page,/JSON\.stringify\(\{mode,locale\}\)/);
   assert.match(page,/16 perguntas para 3 a 12 pessoas/);
-  assert.doesNotMatch(page,/JSON\\.stringify\\(\\{theme,locale,mode\\}\\)/);
+  assert.doesNotMatch(page,/JSON\.stringify\(\{theme,locale,mode\}\)/);
 });
