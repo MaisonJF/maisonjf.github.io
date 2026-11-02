@@ -24,5 +24,14 @@ for(const page of pages){
 }
 const i18n=fs.readFileSync(path.join(root,'functions/_lib/site-i18n.js'),'utf8');
 for(const locale of ['pt-PT','pt-BR','en','es'])if(!i18n.includes(locale))errors.push('i18n missing '+locale);
+
+const middleware=fs.readFileSync(path.join(root,'functions/_middleware.js'),'utf8');
+const documentLine=middleware.split('\n').find(line=>line.includes('const isDocument='));
+if(!documentLine||!documentLine.includes('=/\\.'))errors.push('maintenance document detection must use literal dot regex');
+if(documentLine&&documentLine.includes('=/\\\\.'))errors.push('maintenance document regex has double-escaped dot');
+for(const required of ["'/api/stripe-webhook-live'","'/api/engine-health'"]){
+ if(!middleware.includes(required))errors.push('maintenance middleware missing allowed endpoint '+required);
+}
+
 if(errors.length){console.error('3.0 smoke check FAILED\n'+errors.join('\n'));process.exitCode=1;}
 else console.log('3.0 smoke check passed: local navigation + 4 locales');
