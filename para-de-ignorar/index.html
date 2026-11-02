@@ -70,7 +70,7 @@
       <p class="eyebrow" id="pdi-promise">16 perguntas · duas pessoas</p>
       <h1>PÁRA DE<br>IGNORAR!</h1>
       <p class="pdi-sale__lead">Aquilo que sempre quiseste saber.<br>Sem saber como perguntar.</p>
-      <a class="pdi-buy" id="pdi-choose" href="#temas">Explorar o jogo</a>
+      <a class="pdi-buy" id="pdi-choose" href="#temas">Escolher modo</a>
       <div class="pdi-mode-choice" role="group" aria-label="Modo de jogo">
         <button class="pdi-mode-option" type="button" data-mode="duo" aria-pressed="true" id="pdi-mode-duo">A dois</button>
         <button class="pdi-mode-option" type="button" data-mode="group" aria-pressed="false" id="pdi-mode-group">Grupo &amp; festa</button>
@@ -87,28 +87,13 @@
   </section>
   <p class="pdi-sale__micro" style="text-align:center;margin-top:22px">16 perguntas por sessão · pagamento único</p>
 
-  <section class="pdi-themes" id="temas">
-    <p class="eyebrow">Escolhe por onde entrar</p>
-    <h2>Escolhe onde dói.<br>Ou onde tens curiosidade.</h2>
-    <p id="pdi-theme-intro">Uma conversa de cada vez.</p>
-    <div class="pdi-theme-filters" role="search" aria-label="Procurar temas">
-      <label class="pdi-visually-hidden" for="pdi-theme-search">Procurar tema</label>
-      <input class="pdi-theme-search" id="pdi-theme-search" type="search" placeholder="Procurar tema..." autocomplete="off">
-      <label class="pdi-visually-hidden" for="pdi-theme-family">Filtrar por categoria</label>
-      <select class="pdi-theme-family" id="pdi-theme-family"><option value="">Todas as categorias</option></select>
-    </div>
-    <p class="pdi-no-results" id="pdi-no-results" hidden>Não encontrámos temas com estes critérios. Experimenta outra pesquisa.</p>
-    <div class="pdi-theme-grid" id="pdi-theme-grid" aria-live="polite">
-      <article class="pdi-theme"><small>A carregar</small><h3>Relações</h3><p>Só um instante…</p></article>
-    </div>
-  </section>
-
+  <section class="pdi-themes" id="temas"><p class="eyebrow">Uma sessão. 16 perguntas.</p><h2>Escolhe com quem jogas.</h2><p>Os temas são surpresa. Cada sessão combina perguntas aprovadas, com diferentes graus de profundidade.</p><p class="pdi-sale__price" id="pdi-price">5 €</p><button class="pdi-buy" id="pdi-buy" type="button">JOGAR A DOIS</button><p class="pdi-status" id="pdi-buy-status" role="status"></p></section>
   <section class="pdi-sale__promise">
     <div>
       <p class="eyebrow">A promessa do jogo</p>
       <h2>Outra vez. Outra conversa.</h2>
-      <p>Na próxima compra, usa o mesmo e-mail. Quando escolheres novamente este tema, damos prioridade às perguntas que ainda não viste.</p>
-      <p>Se ainda não existirem 16 perguntas inéditas suficientes neste tema, algumas poderão repetir-se. O repertório cresce continuamente para tornar cada regresso diferente.</p>
+      <p>Na próxima compra, usa o mesmo e-mail. Damos prioridade às perguntas que ainda não viste.</p>
+      <p>Se ainda não existirem 16 perguntas inéditas suficientes, algumas poderão repetir-se. O repertório cresce continuamente para tornar cada regresso diferente.</p>
       <p><strong>Guardamos o caminho das perguntas, nunca as tuas respostas.</strong></p>
     </div>
     <div>
@@ -121,202 +106,5 @@
 </main>
 
 <script>
-(async()=>{
-  const locale=String(window.MAISON_LOCALE||document.documentElement.lang||'pt-PT');
-  const copy={
-    'pt-PT':{
-      newThemes:'Novos temas estão a ser preparados.',unavailable:'Indisponível',
-      later:'Volta dentro de momentos.',loadFail:'Os temas não carregaram agora.',
-      confirmFail:'Não foi possível confirmar a disponibilidade agora.',
-      preparing:'Em preparação',more:'Há mais perguntas a caminho.',soon:'Volta em breve.',
-      questions:'16 perguntas',play:'Jogar',playDuo:'Jogar a dois',playGroup:'Jogar em grupo',opening:'A abrir pagamento…',
-      modeDuo:'16 perguntas para uma conversa a dois. Uma pergunta de cada vez.',
-      modeGroup:'16 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',groupEmpty:'Os packs de Amigos & Festas só aparecem quando houver 16 perguntas aprovadas num tema.',
-      searchTheme:'Procurar tema...',allThemes:'Todas as categorias',familyLabel:'Filtrar por categoria',
-      promiseDuo:'16 perguntas · duas pessoas',promiseGroup:'16 perguntas · 3 a 12 pessoas',
-      themeDuo:'Descobre o que a conversa revela.',themeGroup:'Uma conversa de cada vez.',
-      payFail:'Não foi possível abrir o pagamento. Tenta novamente.'
-    },
-    'pt-BR':{
-      newThemes:'Novos temas estão sendo preparados.',unavailable:'Indisponível',
-      later:'Volte em alguns instantes.',loadFail:'Os temas não carregaram agora.',
-      confirmFail:'Não foi possível confirmar a disponibilidade agora.',
-      preparing:'Em preparação',more:'Há mais perguntas a caminho.',soon:'Volte em breve.',
-      questions:'16 perguntas',play:'Jogar',playDuo:'Jogar a dois',playGroup:'Jogar em grupo',opening:'Abrindo pagamento…',
-      modeDuo:'16 perguntas para uma conversa a dois. Uma pergunta de cada vez.',
-      modeGroup:'16 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',groupEmpty:'Os packs de Amigos & Festas só aparecem quando houver 16 perguntas aprovadas num tema.',
-      searchTheme:'Procurar tema...',allThemes:'Todas as categorias',familyLabel:'Filtrar por categoria',
-      promiseDuo:'16 perguntas · duas pessoas',promiseGroup:'16 perguntas · 3 a 12 pessoas',
-      themeDuo:'Escolha onde dói. Ou onde há curiosidade.',themeGroup:'Escolha o tema da mesa. Os novos packs de Amigos & Festas entram quando tiverem 16 perguntas aprovadas.',
-      payFail:'Não foi possível abrir o pagamento. Tente novamente.'
-    },
-    en:{
-      newThemes:'New themes are being prepared.',unavailable:'Unavailable',
-      later:'Come back in a moment.',loadFail:'The themes could not be loaded right now.',
-      confirmFail:'Availability could not be confirmed right now.',
-      preparing:'In preparation',more:'More questions are on the way.',soon:'Come back soon.',
-      questions:'16 questions',play:'Play',playDuo:'Play as two',playGroup:'Play in a group',opening:'Opening payment…',
-      modeDuo:'16 questions for a conversation between two people. One question at a time.',
-      modeGroup:'16 questions for 3 to 12 people. Turns rotate, party challenges appear, and anyone can pass.',groupEmpty:'Friends & Party packs appear once a theme has 16 approved live questions.',
-      searchTheme:'Search themes...',allThemes:'All categories',familyLabel:'Filter by category',
-      promiseDuo:'16 questions · two people',promiseGroup:'16 questions · 3 to 12 people',
-      themeDuo:'Choose what hurts. Or what you are curious about.',themeGroup:'Choose a table-friendly theme. New Friends & Party packs appear when 16 questions have passed review.',
-      payFail:'Could not open payment. Please try again.'
-    },
-    es:{
-      newThemes:'Se están preparando nuevos temas.',unavailable:'No disponible',
-      later:'Vuelve en unos momentos.',loadFail:'Los temas no se han podido cargar ahora.',
-      confirmFail:'No se pudo confirmar la disponibilidad ahora.',
-      preparing:'En preparación',more:'Hay más preguntas en camino.',soon:'Vuelve pronto.',
-      questions:'16 preguntas',play:'Jugar',playDuo:'Jugar en pareja',playGroup:'Jugar en grupo',opening:'Abriendo pago…',
-      modeDuo:'16 preguntas para una conversación entre dos personas. Una pregunta cada vez.',
-      modeGroup:'16 preguntas para 3 a 12 personas. Los turnos rotan, hay retos de fiesta y cualquiera puede pasar.',groupEmpty:'Los packs de Amigos y Fiesta aparecerán cuando un tema tenga 16 preguntas activas y aprobadas.',
-      searchTheme:'Buscar tema...',allThemes:'Todas las categorías',familyLabel:'Filtrar por categoría',
-      promiseDuo:'16 preguntas · dos personas',promiseGroup:'16 preguntas · 3 a 12 personas',
-      themeDuo:'Elige lo que duele. O lo que te da curiosidad.',themeGroup:'Elige un tema apropiado para la mesa. Los nuevos packs de Amigos y Fiesta estarán disponibles cuando tengan 16 preguntas aprobadas.',
-      payFail:'No se pudo abrir el pago. Inténtalo de nuevo.'
-    }
-  }[locale]||null;
-  const t=copy||{
-    newThemes:'Novos temas estão a ser preparados.',unavailable:'Indisponível',
-    later:'Volta dentro de momentos.',loadFail:'Os temas não carregaram agora.',
-    confirmFail:'Não foi possível confirmar a disponibilidade agora.',
-    preparing:'Em preparação',more:'Há mais perguntas a caminho.',soon:'Volta em breve.',
-    questions:'16 perguntas',play:'Jogar',playDuo:'Jogar a dois',playGroup:'Jogar em grupo',opening:'A abrir pagamento…',
-    modeDuo:'16 perguntas para uma conversa a dois. Uma pergunta de cada vez.',
-    modeGroup:'16 perguntas para 3 a 12 pessoas. A vez roda, há desafios de festa e toda a gente pode passar.',
-    groupEmpty:'Os packs de Amigos & Festas só aparecem quando houver 16 perguntas aprovadas num tema.',
-      searchTheme:'Procurar tema...',allThemes:'Todas as categorias',familyLabel:'Filtrar por categoria',
-    promiseDuo:'16 perguntas · duas pessoas',promiseGroup:'16 perguntas · 3 a 12 pessoas',
-    themeDuo:'Descobre o que a conversa revela.',themeGroup:'Uma conversa de cada vez.',
-    payFail:'Não foi possível abrir o pagamento. Tenta novamente.'
-  };
-  const status=document.getElementById('pdi-status');
-  const grid=document.getElementById('pdi-theme-grid');
-  const modeButtons=[...document.querySelectorAll('[data-mode]')];
-  const modeCopy=document.getElementById('pdi-mode-copy');
-  const promise=document.getElementById('pdi-promise');
-  const themeIntro=document.getElementById('pdi-theme-intro');
-  const themeSearch=document.getElementById('pdi-theme-search');
-  const themeFamily=document.getElementById('pdi-theme-family');
-  const noResults=document.getElementById('pdi-no-results');
-  let mode=new URLSearchParams(location.search).get('mode')==='group'?'group':'duo';
-  let available=new Map();
-  let themeInventory=[];
-
-  function setMode(next){
-    if(!['duo','group'].includes(next))return;
-    mode=next;
-    modeButtons.forEach(button=>{
-      const active=button.dataset.mode===mode;
-      button.setAttribute('aria-pressed',String(active));
-    });
-    modeCopy.textContent=mode==='group'?t.modeGroup:t.modeDuo;
-    promise.textContent=mode==='group'?t.promiseGroup:t.promiseDuo;
-    themeIntro.textContent=mode==='group'?t.themeGroup:t.themeDuo;
-    for(const button of grid.querySelectorAll('.pdi-buy')){
-      button.textContent=mode==='group'?t.playGroup:t.playDuo;
-    }
-    if(themeInventory.length){syncFamilyOptions(themeInventory);render(themeInventory);}
-  }
-  modeButtons.forEach(button=>button.addEventListener('click',()=>setMode(button.dataset.mode)));
-  themeSearch.addEventListener('input',()=>render(themeInventory));
-  themeFamily.addEventListener('change',()=>render(themeInventory));
-  setMode(mode);
-
-  try{
-    const response=await fetch('/api/pdi-themes-live?locale='+encodeURIComponent(locale),{cache:'no-store'});
-    const data=await response.json().catch(()=>({themes:[]}));
-    if(!response.ok||!Array.isArray(data.themes))throw new Error();
-    themeInventory=data.themes;
-    syncFamilyOptions(themeInventory);
-    render(themeInventory);
-    if(!themeInventory.length)status.textContent=t.newThemes;
-  }catch{
-    grid.innerHTML='<article class="pdi-theme"><small>'+t.unavailable+'</small><h3>'+t.later+'</h3><p>'+t.loadFail+'</p></article>';
-    status.textContent=t.confirmFail;
-  }
-
-  function syncFamilyOptions(themes){
-    const inMode=mode==='group'
-      ?themes.filter(theme=>theme.family==='Amigos, Grupos & Festas')
-      :themes.filter(theme=>theme.family!=='Amigos, Grupos & Festas');
-    const current=themeFamily.value;
-    const families=[...new Set(inMode.map(theme=>theme.family).filter(Boolean))].sort((a,b)=>a.localeCompare(b,locale));
-    themeFamily.replaceChildren(new Option(t.allThemes,''),...families.map(family=>new Option(family,family)));
-    themeFamily.value=families.includes(current)?current:'';
-    themeSearch.placeholder=t.searchTheme;
-    themeFamily.setAttribute('aria-label',t.familyLabel);
-  }
-
-  function render(themes){
-    const inMode=mode==='group'
-      ?themes.filter(theme=>theme.family==='Amigos, Grupos & Festas')
-      :themes.filter(theme=>theme.family!=='Amigos, Grupos & Festas');
-    if(!inMode.length){
-      available=new Map();
-      if(noResults)noResults.hidden=true;
-      const message=mode==='group'?t.groupEmpty:t.soon;
-      grid.innerHTML='<article class="pdi-theme"><small>'+t.preparing+'</small><h3>'+t.more+'</h3><p>'+message+'</p></article>';
-      if(mode==='group')status.textContent=t.groupEmpty;
-      return;
-    }
-    const query=String(themeSearch.value||'').trim().toLocaleLowerCase(locale);
-    const family=String(themeFamily.value||'');
-    const visibleThemes=inMode.filter(theme=>{
-      const matchesFamily=!family||theme.family===family;
-      const haystack=(String(theme.label||'')+' '+String(theme.family||'')).toLocaleLowerCase(locale);
-      return matchesFamily&&(!query||haystack.includes(query));
-    });
-    available=new Map(visibleThemes.map(theme=>[theme.slug,theme]));
-    if(!visibleThemes.length){
-      grid.innerHTML='';
-      if(noResults)noResults.hidden=false;
-      return;
-    }
-    if(noResults)noResults.hidden=true;
-    grid.innerHTML='';
-    for(const theme of visibleThemes){
-      const card=document.createElement('article');
-      card.className='pdi-theme';
-      const small=document.createElement('small');small.textContent=theme.family||'PÁRA DE IGNORAR!';
-      const h=document.createElement('h3');h.textContent=theme.label;
-      const p=document.createElement('p');p.textContent=t.questions;
-      const price=document.createElement('p');price.className='pdi-theme__price';price.textContent=theme.display_price||'';
-      const button=document.createElement('button');
-      button.className='pdi-buy';button.type='button';button.dataset.theme=theme.slug;
-      button.textContent=mode==='group'?t.playGroup:t.playDuo;
-      card.append(small,h,p,price,button);grid.append(card);
-    }
-  }
-
-  async function buy(button){
-    const theme=String(button.dataset.theme||'relacoes');
-    if(!available.has(theme))return;
-    const all=[...grid.querySelectorAll('.pdi-buy')];
-    all.forEach(b=>b.disabled=true);
-    button.setAttribute('aria-busy','true');
-    const original=button.textContent;
-    button.textContent=t.opening;
-    window.maisonAnalytics?.track?.('pdi_purchase_intent',{theme,locale,mode,page_path:location.pathname});
-    try{
-      const response=await fetch('/api/create-pdi-checkout-live',{
-        method:'POST',
-        headers:{'content-type':'application/json'},
-        body:JSON.stringify({theme,locale,mode})
-      });
-      const payload=await response.json().catch(()=>({}));
-      if(!response.ok||!payload.url)throw new Error();
-      location.href=payload.url;
-    }catch{
-      status.textContent=t.payFail;
-      all.forEach(b=>b.disabled=false);
-      button.removeAttribute('aria-busy');button.textContent=original;
-    }
-  }
-
-  grid.addEventListener('click',e=>{const button=e.target.closest('.pdi-buy');if(button)buy(button)});
-})();
-</script>
-</body>
-</html>
+(()=>{'use strict';const locale=window.MAISON_LOCALE||document.documentElement.lang||'pt-PT';let mode=new URLSearchParams(location.search).get('mode')==='group'?'group':'duo';const buttons=[...document.querySelectorAll('[data-mode]')],buy=document.getElementById('pdi-buy'),status=document.getElementById('pdi-buy-status');const copy={'pt-PT':['JOGAR A DOIS','JOGAR EM GRUPO','A abrir pagamento…','Não foi possível iniciar o pagamento.'],'pt-BR':['JOGAR EM DUPLA','JOGAR EM GRUPO','Abrindo pagamento…','Não foi possível iniciar o pagamento.'],en:['PLAY AS TWO','PLAY AS A GROUP','Opening checkout…','Could not start checkout.'],es:['JUGAR EN PAREJA','JUGAR EN GRUPO','Abriendo pago…','No se pudo iniciar el pago.']}[locale]||['JOGAR A DOIS','JOGAR EM GRUPO','A abrir pagamento…','Não foi possível iniciar o pagamento.'];function update(){buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));buy.textContent=copy[mode==='group'?1:0];document.getElementById('pdi-mode-copy').textContent=mode==='group'?'16 perguntas para 3 a 12 pessoas. Cada pessoa pode passar.':'16 perguntas para duas pessoas. Uma pergunta de cada vez.';document.getElementById('pdi-promise').textContent=mode==='group'?'16 perguntas · grupo':'16 perguntas · duas pessoas';}buttons.forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;update()}));update();buy.addEventListener('click',async()=>{buy.disabled=true;buy.textContent=copy[2];status.textContent='';try{const response=await fetch('/api/create-pdi-checkout-live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({mode,locale})});const data=await response.json();if(!response.ok||!data.url)throw Error('checkout');location.assign(data.url)}catch{status.textContent=copy[3];buy.disabled=false;update()}})})();
+</script></body></html>
