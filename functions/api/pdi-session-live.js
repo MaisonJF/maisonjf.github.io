@@ -69,7 +69,6 @@ export async function onRequestGet({request,env}){
 
     return json({
       paid:true,
-      theme,
       locale,
       mode,
       label:localizedProduct?.label||product.label,
