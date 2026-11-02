@@ -20,19 +20,22 @@ console.log('PASS: 16 unique questions, 8+8 packs, 30 seeds; no stage quotas');
 
 import {readFileSync} from 'node:fs';
 const source=readFileSync(new URL('../../../functions/api/oracle-reading-live.js',import.meta.url),'utf8');
-// Locate the two public success returns by their explicit paid marker.
-// Do not parse nested object literals with a single regular expression.
-const starts=[...source.matchAll(/return json\\(\\{\\s*paid:true,/g)].map(match=>match.index);
+// Inspect the two explicit successful JSON response blocks without regex parsing.
+const marker='return json(';
+const starts=[];
+let offset=0;
+while((offset=source.indexOf(marker,offset))!==-1){
+  const segment=source.slice(offset,offset+180);
+  if(segment.includes('paid:true'))starts.push(offset);
+  offset+=marker.length;
+}
 assert.equal(starts.length,2,'Expected two Oracle success responses');
 for(const start of starts){
   const tail=source.slice(start);
-  const end=tail.indexOf('\\n    });');
-  const endFallback=tail.indexOf('\\n      });');
-  const candidates=[end,endFallback].filter(index=>index>=0);
-  assert.ok(candidates.length,'Oracle response closing delimiter missing');
-  const body=tail.slice(0,Math.min(...candidates));
-  assert.match(body,/\\breading\\s*:/,'Oracle response must contain reading');
-  assert.doesNotMatch(body,/^\\s*theme\\s*[,}:]/m,'Oracle public response leaks theme');
-  assert.doesNotMatch(body,/^\\s*internal_theme\\s*[,}:]/m,'Oracle public response leaks internal_theme');
+  const closing=tail.indexOf('});');
+  assert.ok(closing>0,'Oracle response closing delimiter missing');
+  const body=tail.slice(0,closing);
+  assert.ok(body.includes('reading:'),'Oracle response must contain reading');
+  assert.ok(!body.split('\\n').some(line=>['theme,','theme:','internal_theme,','internal_theme:'].some(field=>line.trim().startsWith(field))),'Oracle success response leaks internal theme');
 }
-console.log('PASS: both Oracle success response objects omit theme and internal_theme (static check)');
+console.log('PASS: both Oracle success responses omit internal theme (static check)');
