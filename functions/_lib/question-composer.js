@@ -21,12 +21,8 @@ export function composeQuestionSession({theme='*',seed,questions,seenIds=[]}={})
   const order=items=>items.map(card=>({card,sort:rng()})).sort((a,b)=>a.sort-b.sort).map(x=>x.card);
   const unseen=order(valid.filter(card=>!seen.has(card.id)));
   const previouslySeen=order(valid.filter(card=>seen.has(card.id)));
-  const levels=['recognize','deepen','confront','integrate'];
-  const priority=[...unseen,...previouslySeen];
-  const buckets=levels.map(stage=>priority.filter(card=>card.stage===stage));
-  if(buckets.some(group=>group.length<4))throw new Error('insufficient_questions_per_stage');
-  const cards=[];
-  for(let i=0;i<4;i++)for(const group of buckets)cards.push(group[i]);
+  // Any 16 distinct approved questions may form a session; stages are not required.
+  const cards=[...unseen,...previouslySeen].slice(0,16);
   const packA=cards.filter((_,i)=>i%2===0);
   const packB=cards.filter((_,i)=>i%2===1);
   return {engineVersion:'question-composer-v4',qualityVersion:'approved-pool',qualityScore:1,mode:'balanced',theme,seed:String(seed),packA,packB,ids:cards.map(card=>card.id)};
