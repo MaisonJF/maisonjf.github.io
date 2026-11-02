@@ -1,0 +1,21 @@
+name: Maison V3 game and oracle contract tests
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  v3-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout Maison V3 branch
+        uses: actions/checkout@v4
+        with:
+          ref: maison-3.0
+          persist-credentials: false
+      - name: Configure Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run isolated V3 contract suite
+        run: node .github/maison-growth/vault/validate_v3_payload_contract.mjs
