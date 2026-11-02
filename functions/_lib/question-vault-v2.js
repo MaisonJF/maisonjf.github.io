@@ -28,7 +28,7 @@ export async function listActivePaidQuestionsV2(db,theme,locale='pt-PT',themeAli
          JOIN vault_question_translations t
            ON t.question_id=q.question_id AND t.locale=${localePlaceholder} AND t.status='active'
          LEFT JOIN vault_question_metrics m ON m.question_id=q.question_id
-        WHERE q.theme IN (${placeholders})
+        WHERE (?1='*' OR q.theme IN (${placeholders}))
           AND q.status='active'
           AND q.exposure='paid'
           AND q.lifecycle_state='live'
@@ -50,7 +50,7 @@ export async function listActivePaidQuestionsV2(db,theme,locale='pt-PT',themeAli
               coalesce(m.completed_session_count,0) AS completed_session_count
          FROM vault_questions q
          LEFT JOIN vault_question_metrics m ON m.question_id=q.question_id
-        WHERE q.theme IN (${placeholders})
+        WHERE (?1='*' OR q.theme IN (${placeholders}))
           AND q.status='active'
           AND q.exposure='paid'
           AND q.lifecycle_state='live'
