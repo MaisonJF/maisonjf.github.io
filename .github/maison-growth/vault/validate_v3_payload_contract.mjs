@@ -20,11 +20,13 @@ console.log('PASS: 16 unique questions, 8+8 packs, 30 seeds; no stage quotas');
 
 import {readFileSync} from 'node:fs';
 const source=readFileSync(new URL('../../../functions/api/oracle-reading-live.js',import.meta.url),'utf8');
-const publicResponses=[...source.matchAll(/return json\(\{([\s\S]*?)\}\);/g)].map(m=>m[1]);
-assert.ok(publicResponses.length>=2,'Expected oracle success response objects');
-for(const response of publicResponses){
-  if(!response.includes('reading:'))continue;
-  assert.doesNotMatch(response,/\btheme\s*[:,]/,'Oracle success payload leaks theme');
-  assert.doesNotMatch(response,/\binternal_theme\s*[:,]/,'Oracle success payload leaks internal_theme');
+// Inspect only the two successful JSON return objects, not the whole handler.
+const publicResponses=[...source.matchAll(/return json\\(\\{([\\s\\S]*?)\\}\\);/g)]
+  .map(match=>match[1])
+  .filter(body=>/\\bpaid\\s*:\\s*true/.test(body)&&/\\breading\\s*:/.test(body));
+assert.equal(publicResponses.length,2,'Expected composed and fallback Oracle success payloads');
+for(const body of publicResponses){
+  assert.doesNotMatch(body,/\\btheme\\s*[:,]/,'Oracle success payload leaks theme');
+  assert.doesNotMatch(body,/\\binternal_theme\\s*[:,]/,'Oracle success payload leaks internal_theme');
 }
-console.log('PASS: oracle route success payload source omits internal theme fields (static check)');
+console.log('PASS: both Oracle success response objects omit theme and internal_theme (static check)');
