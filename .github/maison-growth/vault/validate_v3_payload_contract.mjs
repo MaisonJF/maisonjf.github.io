@@ -20,13 +20,19 @@ console.log('PASS: 16 unique questions, 8+8 packs, 30 seeds; no stage quotas');
 
 import {readFileSync} from 'node:fs';
 const source=readFileSync(new URL('../../../functions/api/oracle-reading-live.js',import.meta.url),'utf8');
-// Inspect only the two successful JSON return objects, not the whole handler.
-const publicResponses=[...source.matchAll(/return json\\(\\{([\\s\\S]*?)\\}\\);/g)]
-  .map(match=>match[1])
-  .filter(body=>/\\bpaid\\s*:\\s*true/.test(body)&&/\\breading\\s*:/.test(body));
-assert.equal(publicResponses.length,2,'Expected composed and fallback Oracle success payloads');
-for(const body of publicResponses){
-  assert.doesNotMatch(body,/\\btheme\\s*[:,]/,'Oracle success payload leaks theme');
-  assert.doesNotMatch(body,/\\binternal_theme\\s*[:,]/,'Oracle success payload leaks internal_theme');
+// Locate the two public success returns by their explicit paid marker.
+// Do not parse nested object literals with a single regular expression.
+const starts=[...source.matchAll(/return json\\(\\{\\s*paid:true,/g)].map(match=>match.index);
+assert.equal(starts.length,2,'Expected two Oracle success responses');
+for(const start of starts){
+  const tail=source.slice(start);
+  const end=tail.indexOf('\\n    });');
+  const endFallback=tail.indexOf('\\n      });');
+  const candidates=[end,endFallback].filter(index=>index>=0);
+  assert.ok(candidates.length,'Oracle response closing delimiter missing');
+  const body=tail.slice(0,Math.min(...candidates));
+  assert.match(body,/\\breading\\s*:/,'Oracle response must contain reading');
+  assert.doesNotMatch(body,/^\\s*theme\\s*[,}:]/m,'Oracle public response leaks theme');
+  assert.doesNotMatch(body,/^\\s*internal_theme\\s*[,}:]/m,'Oracle public response leaks internal_theme');
 }
 console.log('PASS: both Oracle success response objects omit theme and internal_theme (static check)');
