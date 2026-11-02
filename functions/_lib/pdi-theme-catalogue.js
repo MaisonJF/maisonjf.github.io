@@ -100,6 +100,11 @@ export async function countLivePdiQuestions(db,theme,locale='pt-PT'){
 export async function pdiThemeAvailability(env,theme,locale='pt-PT'){
   const selectedLocale=normalizeMaisonLocale(locale);
   const db=requireMaisonVault(env);
+  if(theme==='*'){
+    const db=requireMaisonVault(env);
+    const count=await countLiveQuestionsForLocale(db,'*',selectedLocale);
+    return {...getPdiPriceForLocale(selectedLocale),slug:'*',label:'PÁRA DE IGNORAR!',family:'',locale:selectedLocale,available:count>=16,liveQuestions:count};
+  }
   let item=getPdiTheme(theme);
   if(!item){
     const candidate=dynamicTheme(theme);
