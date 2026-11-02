@@ -12,10 +12,11 @@ for(let run=0;run<30;run++){
   assert.equal(result.packA.length,8);
   assert.equal(result.packB.length,8);
   assert.equal(new Set(cards.map(q=>q.id)).size,16);
-  for(const stage of stages)assert.equal(cards.filter(q=>q.stage===stage).length,4);
+
 }
-assert.throws(()=>composeQuestionSession({seed:'missing-stage',questions:questions.filter(q=>q.stage!=='integrate')}),/insufficient_questions_per_stage/);
-console.log('PASS: 16 unique questions, 8+8 packs, 4 per stage (30 seeds); incomplete stage rejected');
+const oneStage=composeQuestionSession({seed:'single-stage',questions:questions.concat(Array.from({length:16},(_,i)=>({id:`extra_${i}`,theme:'*',stage:'recognize',status:'active',exposure:'paid',text:`Extra ${i}`}))).filter(q=>q.stage==='recognize')});
+assert.equal(oneStage.packA.length+oneStage.packB.length,16);
+console.log('PASS: 16 unique questions, 8+8 packs, 30 seeds; no stage quotas');
 
 import {readFileSync} from 'node:fs';
 const source=readFileSync(new URL('../../../functions/api/oracle-reading-live.js',import.meta.url),'utf8');
