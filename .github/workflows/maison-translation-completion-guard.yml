@@ -67,6 +67,6 @@ jobs:
             "pdi_session_question_identity_integrity_failed",
             "pdi_session_localized_text_missing"
           ]) if(!pdi.includes(invariant)) throw new Error('pdi_integrity_guard_missing:'+invariant);
-          if(!pdi.includes("packA.length!==14||packB.length!==14")) throw new Error('pdi_14_plus_14_gate_missing');
+          if(!pdi.includes("packA.length!==8||packB.length!==8")) throw new Error('pdi_8_plus_8_gate_missing');
           console.log('PDI localized end-to-end invariants: OK');
           NODE
