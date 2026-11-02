@@ -21,13 +21,25 @@ export function composeQuestionSession({theme='*',seed,questions,seenIds=[]}={})
   const order=items=>items.map(card=>({card,sort:rng()})).sort((a,b)=>a.sort-b.sort).map(x=>x.card);
   const unseen=order(valid.filter(card=>!seen.has(card.id)));
   const previouslySeen=order(valid.filter(card=>seen.has(card.id)));
-  const chosen=[...unseen,...previouslySeen].slice(0,16);
-  // Prefer four levels of depth when the approved pool supports them.
+  // Prefer exactly four cards per stage when the approved pool allows it.
+  // An incomplete stage never blocks a valid 16-question session.
   const levels=['recognize','deepen','confront','integrate'];
-  const groups=levels.map(stage=>chosen.filter(card=>card.stage===stage));
+  const priority=[...unseen,...previouslySeen];
+  const buckets=levels.map(stage=>priority.filter(card=>card.stage===stage));
+  const balanced=buckets.every(group=>group.length>=4);
+  const chosen=balanced
+    ?buckets.flatMap(group=>group.slice(0,4))
+    :priority.slice(0,16);
   const arranged=[];
-  for(let i=0;i<4;i++)for(const group of groups){if(group[i])arranged.push(group[i]);}
-  for(const card of chosen)if(!arranged.some(x=>x.id===card.id))arranged.push(card);
+  if(balanced){
+    for(let i=0;i<4;i++)for(const stage of levels){
+      arranged.push(chosen.find(card=>card.id===buckets[levels.indexOf(stage)][i].id));
+    }
+  }else{
+    const groups=levels.map(stage=>chosen.filter(card=>card.stage===stage));
+    for(let i=0;i<4;i++)for(const group of groups){if(group[i])arranged.push(group[i]);}
+    for(const card of chosen)if(!arranged.some(x=>x.id===card.id))arranged.push(card);
+  }
   const cards=arranged.slice(0,16);
   const packA=cards.filter((_,i)=>i%2===0);
   const packB=cards.filter((_,i)=>i%2===1);
