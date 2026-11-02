@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Serviços | MAISON JF®</title>
-<meta name="description" content="Consulta de Tarot MAISON JF® por 35 €. Para mentorias, acompanhamento e pedidos personalizados, contacta a Maison.">
+<meta name="description" content="Consulta de Tarot MAISON JF® por 35 €. Uma leitura para olhar para a tua questão por outra perspectiva. Conhece o serviço e os pedidos personalizados.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://maison-jf.com/servicos/"><link rel="icon" href="../maison-jf-mark.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../maison.css?v=20261027-r1">
@@ -22,7 +22,7 @@
 .services-hero__media picture{display:block;width:100%;height:100%}.services-hero__media img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(1.06)}
 .primary-service{display:block;padding:clamp(92px,9vw,132px) 0;border-top:1px solid var(--line)}
 .primary-service__head small{display:block;margin-bottom:18px;color:#9e8b67;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
-.primary-service__head h2{max-width:none;margin:0;font:500 clamp(46px,4.8vw,72px)/.92 var(--serif);letter-spacing:-.035em;white-space:nowrap}
+.primary-service__head h2{max-width:none;margin:0;font:500 clamp(46px,4.8vw,72px)/.92 var(--serif);letter-spacing:-.035em;white-space:normal;overflow-wrap:anywhere}
 .primary-service__body{display:grid;grid-template-columns:auto minmax(220px,.72fr) minmax(260px,1fr) minmax(280px,1fr);gap:clamp(28px,4vw,64px);align-items:start;margin-top:52px;max-width:none;padding-top:30px;border-top:1px solid var(--line)}
 .primary-service__body>p{margin:0;color:#aaa299;font-size:15px;line-height:1.7}.primary-service__description{max-width:360px}.primary-service__price{margin:0;font:400 clamp(44px,5vw,66px)/1 var(--serif);white-space:nowrap}
 .primary-service__actions{display:flex;align-items:flex-start;gap:18px;flex-direction:column}
@@ -30,10 +30,10 @@
 .primary-buy:disabled{opacity:.55;cursor:wait}
 .whatsapp-question{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#c8b58d;text-decoration:none}
 .whatsapp-question:hover{text-decoration:underline}
-.checkout-status{display:none}.primary-service__note{padding-left:clamp(22px,2.2vw,36px);border-left:1px solid var(--line);color:#918a81!important;font-size:12px!important;line-height:1.75!important}
+.checkout-status{display:block;grid-column:1/-1;margin:0;color:#e4c8a6;font-size:14px;line-height:1.5}.checkout-status:empty{display:none}.primary-service__note{padding-left:clamp(22px,2.2vw,36px);border-left:1px solid var(--line);color:#918a81!important;font-size:12px!important;line-height:1.75!important}
 .quiet-paths{padding:clamp(82px,9vw,130px) 0;border-top:1px solid var(--line)}
 .quiet-paths__head{max-width:none;margin-bottom:44px}
-.quiet-paths__head h2{max-width:none;margin:.14em 0 .25em;font:500 clamp(34px,4.6vw,62px)/.96 var(--serif);letter-spacing:-.03em;white-space:nowrap}
+.quiet-paths__head h2{max-width:none;margin:.14em 0 .25em;font:500 clamp(34px,4.6vw,62px)/.96 var(--serif);letter-spacing:-.03em;white-space:normal;overflow-wrap:anywhere}
 .quiet-paths__head p{max-width:600px;margin:0;color:#8f887e;line-height:1.7}
 .quiet-link{display:grid;grid-template-columns:170px minmax(0,1fr) minmax(190px,.28fr);gap:clamp(18px,2.2vw,34px);align-items:center;padding:28px 0;border-top:1px solid var(--line);color:inherit;text-decoration:none}
 .quiet-link:last-child{border-bottom:1px solid var(--line)}
@@ -48,7 +48,7 @@
 .services-footer p{margin:0;color:#827b72}
 @media(max-width:820px){
   .services{padding-top:120px}
-  .primary-service__head h2{white-space:nowrap;font-size:clamp(25px,6vw,46px)}
+  .primary-service__head h2{white-space:normal;font-size:clamp(25px,6vw,46px)}
   .services-hero{grid-template-columns:1fr}
   .primary-service__body{grid-template-columns:1fr 1fr;gap:30px 42px}
   .primary-service__note{padding-left:0;border-left:0}
@@ -89,8 +89,8 @@
   <section class="services-hero">
     <div class="services-hero__copy">
       <p class="eyebrow">Serviços · MAISON JF®</p>
-      <h1>Perguntas.<br>Recebes as respostas.</h1>
-      <p class="services__lead">O que fazes com elas? É contigo. Consulta de Tarot · 35 €.</p>
+      <h1>Há perguntas que merecem outro olhar.</h1>
+      <p class="services__lead">Uma leitura de Tarot para examinares o que te inquieta, reconheceres possibilidades e decidires por ti. Consulta · 35 €.</p>
     </div>
     <div class="services-hero__media">
       <picture>
@@ -104,16 +104,16 @@
     <span id="consultas" class="anchor-alias" aria-hidden="true"></span>
     <div class="primary-service__head">
       <small>Consulta de Tarot</small>
-      <h2>Cabeça.</h2>
+      <h2>Consulta de Tarot.</h2>
     </div>
     <div class="primary-service__body">
       <div class="primary-service__price" data-service-price="tarot" aria-label="Preço">35 €</div>
       <div class="primary-service__actions">
-        <button class="primary-buy" type="button" data-buy-service="tarot">Marcar consulta →</button>
+        <button class="primary-buy" type="button" data-buy-service="tarot">Adquirir consulta →</button>
         <a class="whatsapp-question" target="_blank" rel="noopener noreferrer" href="https://wa.me/351923318289?text=Ol%C3%A1%2C%20Jo%C3%A3o.%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Consulta%20de%20Tarot.">Tenho uma dúvida</a>
       </div>
       <p id="checkout-status" class="checkout-status" aria-live="polite"></p>
-      <p class="primary-service__description">Uma pergunta central. Uma leitura para examinar a situação por outro ângulo, sem promessas nem certezas fabricadas.</p>
+      <p class="primary-service__description">Traz a questão que não te sai da cabeça. Exploramos a situação por outra perspectiva, sem respostas fabricadas nem promessas sobre o futuro.</p>
       <p class="primary-service__note">Uso o Tarot como ferramenta de reflexão e orientação. Não decide por ti, não garante acontecimentos futuros e não substitui acompanhamento clínico quando necessário.</p>
     </div>
   </section>
@@ -122,7 +122,7 @@
     <div class="quiet-paths__head">
       <p class="eyebrow">OUTRAS POSSIBILIDADES</p>
       <h2>Precisas de algo mais específico?</h2>
-      <p>Mentorias, acompanhamento e pedidos personalizados ficam numa única porta de contacto.</p>
+      <p>Tens um pedido que não cabe numa consulta de Tarot? Explica o que procuras. Avaliamos a possibilidade antes de assumir qualquer compromisso.</p>
     </div>
     <a class="quiet-link" href="../contacto/?interesse=outras-opcoes">
       <small>Contacto</small><strong>Fala comigo.</strong><div class="quiet-link__meta"><span>Explica o que procuras</span><span>Contactar →</span></div>
@@ -203,7 +203,7 @@
       location.href=data.url;
     }catch(error){
       b.disabled=false;b.textContent=old;
-      if(status)status.textContent=error.message||t.error;
+      if(status){status.textContent=t.error;status.setAttribute("role","alert");}
     }
   });
 })();
