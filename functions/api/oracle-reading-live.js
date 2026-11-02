@@ -91,7 +91,6 @@ export async function onRequestGet({ request, env }) {
     if(composed?.reading?.text){
       return json({
         paid:true,
-        theme,
         locale,
         session_id:session.id,
         reading:composed.reading,
@@ -107,7 +106,6 @@ export async function onRequestGet({ request, env }) {
 
     return json({
       paid:true,
-      theme,
       locale,
       session_id:session.id,
       reading:{ id:selected.id, title:selected.title, text:selected.text },
