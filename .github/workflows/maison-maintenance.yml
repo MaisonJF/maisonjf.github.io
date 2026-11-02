@@ -15,6 +15,7 @@ on:
           - apply_vault_localizer_telemetry_0004
           - rebuild_commercial_context
           - validate_global_health
+          - diagnose_d1_readonly
       confirm_write:
         description: Confirm write operation when applicable
         required: true
@@ -22,7 +23,7 @@ on:
         type: boolean
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   maintenance:
@@ -124,6 +125,24 @@ jobs:
           set -euo pipefail
           bash .github/maison-growth/brain/rebuild_commercial_context.sh --write
           bash .github/maison-growth/brain/rebuild_commercial_context.sh --check
+          git add -u -- .github/maison-growth/brain
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'chore: regenerate tracked Maison derived artifacts'
+            git push origin HEAD:main
+          fi
+          python .github/maison-growth/brain/validate_global_health_gate.py
+
+      - name: Diagnose D1 remotely (read-only)
+        if: ${{ inputs.operation == 'diagnose_d1_readonly' }}
+        working-directory: workers/maison-intelligence
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          npm install --ignore-scripts
+          npx wrangler d1 execute maison-growth-engine --remote --command="SELECT name FROM sqlite_master WHERE type='table' ORDER BY name LIMIT 100;"
+          npx wrangler d1 execute maison-growth-engine --remote --command="PRAGMA quick_check;"
 
       - name: Validate global health
         if: ${{ inputs.operation == 'validate_global_health' }}
