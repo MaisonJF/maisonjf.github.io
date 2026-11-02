@@ -29,7 +29,7 @@ export function composeQuestionSession({
   const valid=questions.filter(card=>{
     const check=validateQuestionCard(card);
     return check.ok &&
-      card.theme===theme &&
+      (theme==='*'||card.theme===theme) &&
       card.status==='active' &&
       card.exposure==='paid' &&
       !['review','retired'].includes(card.rotationState||'normal') &&
