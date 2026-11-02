@@ -1,0 +1,359 @@
+{
+  "schema": "maison-pdi-editorial-proposals-v1",
+  "status": "draft_requires_editorial_approval_and_d1_import",
+  "notes": "32 original questions; four cultural-language versions each. Not live. Do not import without quality and duplicate review.",
+  "questions": [
+    {
+      "id": "pdi-new-001",
+      "mode": "duo",
+      "level": 1,
+      "translations": {
+        "pt-PT": "Que pequeno gesto te faz sentir bem comigo?",
+        "pt-BR": "Que pequeno gesto faz você se sentir bem comigo?",
+        "en": "What small gesture makes you feel good around me?",
+        "es": "¿Qué pequeño gesto te hace sentir bien conmigo?"
+      }
+    },
+    {
+      "id": "pdi-new-002",
+      "mode": "duo",
+      "level": 1,
+      "translations": {
+        "pt-PT": "Quando é que te sentes mais à vontade comigo?",
+        "pt-BR": "Quando você se sente mais à vontade comigo?",
+        "en": "When do you feel most at ease with me?",
+        "es": "¿Cuándo te sientes más a gusto conmigo?"
+      }
+    },
+    {
+      "id": "pdi-new-003",
+      "mode": "duo",
+      "level": 1,
+      "translations": {
+        "pt-PT": "Que hábito nosso gostavas de repetir mais vezes?",
+        "pt-BR": "Que hábito nosso você gostaria de repetir mais vezes?",
+        "en": "What do we do together that you'd like more of?",
+        "es": "¿Qué costumbre nuestra te gustaría repetir más?"
+      }
+    },
+    {
+      "id": "pdi-new-004",
+      "mode": "duo",
+      "level": 1,
+      "translations": {
+        "pt-PT": "Qual foi a última coisa que te fez rir comigo?",
+        "pt-BR": "Qual foi a última coisa que fez você rir comigo?",
+        "en": "What's the last thing we laughed about together?",
+        "es": "¿Qué fue lo último que te hizo reír conmigo?"
+      }
+    },
+    {
+      "id": "pdi-new-005",
+      "mode": "duo",
+      "level": 2,
+      "translations": {
+        "pt-PT": "O que gostavas que eu percebesse sem teres de explicar?",
+        "pt-BR": "O que você gostaria que eu entendesse sem precisar explicar?",
+        "en": "What do you wish I understood without you having to spell it out?",
+        "es": "¿Qué te gustaría que entendiera sin tener que explicarlo?"
+      }
+    },
+    {
+      "id": "pdi-new-006",
+      "mode": "duo",
+      "level": 2,
+      "translations": {
+        "pt-PT": "Quando precisas de espaço, como queres que eu reaja?",
+        "pt-BR": "Quando você precisa de espaço, como quer que eu reaja?",
+        "en": "When you need space, how would you like me to respond?",
+        "es": "Cuando necesitas espacio, ¿cómo quieres que reaccione?"
+      }
+    },
+    {
+      "id": "pdi-new-007",
+      "mode": "duo",
+      "level": 2,
+      "translations": {
+        "pt-PT": "Que conversa nossa ficou por acabar?",
+        "pt-BR": "Que conversa nossa ficou pela metade?",
+        "en": "Which conversation between us still feels unfinished?",
+        "es": "¿Qué conversación nuestra quedó pendiente?"
+      }
+    },
+    {
+      "id": "pdi-new-008",
+      "mode": "duo",
+      "level": 2,
+      "translations": {
+        "pt-PT": "Em que situação sentes que te escuto mesmo?",
+        "pt-BR": "Em que situação você sente que eu realmente escuto?",
+        "en": "When do you feel I'm really listening to you?",
+        "es": "¿En qué momento sientes que de verdad te escucho?"
+      }
+    },
+    {
+      "id": "pdi-new-009",
+      "mode": "duo",
+      "level": 3,
+      "translations": {
+        "pt-PT": "Que medo teu muda a forma como te aproximas de mim?",
+        "pt-BR": "Que medo seu muda a forma como você se aproxima de mim?",
+        "en": "What fear changes how close you let yourself get to me?",
+        "es": "¿Qué miedo cambia la forma en que te acercas a mí?"
+      }
+    },
+    {
+      "id": "pdi-new-010",
+      "mode": "duo",
+      "level": 3,
+      "translations": {
+        "pt-PT": "O que tens evitado pedir-me?",
+        "pt-BR": "O que você tem evitado me pedir?",
+        "en": "What have you been holding back from asking me?",
+        "es": "¿Qué has evitado pedirme?"
+      }
+    },
+    {
+      "id": "pdi-new-011",
+      "mode": "duo",
+      "level": 3,
+      "translations": {
+        "pt-PT": "Quando é que te sentiste sozinho mesmo estando comigo?",
+        "pt-BR": "Quando você se sentiu só mesmo estando comigo?",
+        "en": "When have you felt lonely even with me there?",
+        "es": "¿Cuándo te has sentido a solas incluso estando conmigo?"
+      }
+    },
+    {
+      "id": "pdi-new-012",
+      "mode": "duo",
+      "level": 3,
+      "translations": {
+        "pt-PT": "Que parte de ti receias que eu julgue?",
+        "pt-BR": "Que parte de você tem medo que eu julgue?",
+        "en": "What part of yourself are you afraid I'll judge?",
+        "es": "¿Qué parte de ti temes que yo juzgue?"
+      }
+    },
+    {
+      "id": "pdi-new-013",
+      "mode": "duo",
+      "level": 4,
+      "translations": {
+        "pt-PT": "Que verdade sobre nós estás a adiar?",
+        "pt-BR": "Que verdade sobre nós você está adiando?",
+        "en": "What truth about us have you been putting off?",
+        "es": "¿Qué verdad sobre nosotros estás posponiendo?"
+      }
+    },
+    {
+      "id": "pdi-new-014",
+      "mode": "duo",
+      "level": 4,
+      "translations": {
+        "pt-PT": "O que teria de mudar para confiares mais em mim?",
+        "pt-BR": "O que precisaria mudar para você confiar mais em mim?",
+        "en": "What would need to change for you to trust me more?",
+        "es": "¿Qué tendría que cambiar para que confiaras más en mí?"
+      }
+    },
+    {
+      "id": "pdi-new-015",
+      "mode": "duo",
+      "level": 4,
+      "translations": {
+        "pt-PT": "Que limite teu ainda não respeitei como devia?",
+        "pt-BR": "Que limite seu eu ainda não respeitei como deveria?",
+        "en": "Which of your boundaries haven't I respected enough?",
+        "es": "¿Qué límite tuyo no he respetado como debería?"
+      }
+    },
+    {
+      "id": "pdi-new-016",
+      "mode": "duo",
+      "level": 4,
+      "translations": {
+        "pt-PT": "Se deixasses de tentar agradar-me, o que dirias agora?",
+        "pt-BR": "Se você parasse de tentar me agradar, o que diria agora?",
+        "en": "If you stopped trying to please me, what would you say right now?",
+        "es": "Si dejaras de intentar complacerme, ¿qué dirías ahora?"
+      }
+    },
+    {
+      "id": "pdi-new-017",
+      "mode": "group",
+      "level": 1,
+      "translations": {
+        "pt-PT": "Qual é o teu talento mais inútil numa festa?",
+        "pt-BR": "Qual é o seu talento mais inútil numa festa?",
+        "en": "What's your most useless party trick?",
+        "es": "¿Cuál es tu talento más inútil en una fiesta?"
+      }
+    },
+    {
+      "id": "pdi-new-018",
+      "mode": "group",
+      "level": 1,
+      "translations": {
+        "pt-PT": "Quem aqui escolherias para uma viagem sem plano?",
+        "pt-BR": "Quem daqui você escolheria para uma viagem sem roteiro?",
+        "en": "Who here would you take on a trip with no itinerary?",
+        "es": "¿A quién de aquí elegirías para un viaje sin planes?"
+      }
+    },
+    {
+      "id": "pdi-new-019",
+      "mode": "group",
+      "level": 1,
+      "translations": {
+        "pt-PT": "Que música te põe a dançar sem vergonha?",
+        "pt-BR": "Que música faz você dançar sem vergonha?",
+        "en": "What song gets you dancing without a second thought?",
+        "es": "¿Qué canción te hace bailar sin vergüenza?"
+      }
+    },
+    {
+      "id": "pdi-new-020",
+      "mode": "group",
+      "level": 1,
+      "translations": {
+        "pt-PT": "Qual foi a tua desculpa mais criativa para faltar a um encontro?",
+        "pt-BR": "Qual foi sua desculpa mais criativa para faltar a um encontro?",
+        "en": "What's your most creative excuse for skipping a get-together?",
+        "es": "¿Cuál fue tu excusa más creativa para no ir a una quedada?"
+      }
+    },
+    {
+      "id": "pdi-new-021",
+      "mode": "group",
+      "level": 2,
+      "translations": {
+        "pt-PT": "Quem aqui te surpreendeu pela positiva?",
+        "pt-BR": "Quem aqui surpreendeu você de um jeito bom?",
+        "en": "Who here has pleasantly surprised you?",
+        "es": "¿Quién de aquí te ha sorprendido para bien?"
+      }
+    },
+    {
+      "id": "pdi-new-022",
+      "mode": "group",
+      "level": 2,
+      "translations": {
+        "pt-PT": "Que primeira impressão tua costuma estar errada?",
+        "pt-BR": "Que primeira impressão sobre você costuma estar errada?",
+        "en": "What's a first impression people often get wrong about you?",
+        "es": "¿Qué primera impresión sobre ti suele ser equivocada?"
+      }
+    },
+    {
+      "id": "pdi-new-023",
+      "mode": "group",
+      "level": 2,
+      "translations": {
+        "pt-PT": "Que coisa gostavas de fazer com este grupo e ainda não fizeste?",
+        "pt-BR": "O que você gostaria de fazer com essa turma e ainda não fez?",
+        "en": "What would you love to do with this group that you haven't done yet?",
+        "es": "¿Qué te gustaría hacer con este grupo que aún no habéis hecho?"
+      }
+    },
+    {
+      "id": "pdi-new-024",
+      "mode": "group",
+      "level": 2,
+      "translations": {
+        "pt-PT": "Quem aqui te ajudou sem saber?",
+        "pt-BR": "Quem aqui já ajudou você sem perceber?",
+        "en": "Who here has helped you without realising it?",
+        "es": "¿Quién de aquí te ha ayudado sin darse cuenta?"
+      }
+    },
+    {
+      "id": "pdi-new-025",
+      "mode": "group",
+      "level": 3,
+      "translations": {
+        "pt-PT": "Quando é que fingiste estar bem para não estragar o ambiente?",
+        "pt-BR": "Quando você fingiu estar bem para não estragar o clima?",
+        "en": "When have you pretended to be fine so you wouldn't spoil the mood?",
+        "es": "¿Cuándo fingiste estar bien para no estropear el ambiente?"
+      }
+    },
+    {
+      "id": "pdi-new-026",
+      "mode": "group",
+      "level": 3,
+      "translations": {
+        "pt-PT": "Que amizade gostavas de recuperar?",
+        "pt-BR": "Que amizade você gostaria de retomar?",
+        "en": "Which friendship would you like to rebuild?",
+        "es": "¿Qué amistad te gustaría recuperar?"
+      }
+    },
+    {
+      "id": "pdi-new-027",
+      "mode": "group",
+      "level": 3,
+      "translations": {
+        "pt-PT": "Que opinião escondes por receio da reacção dos outros?",
+        "pt-BR": "Que opinião você guarda por medo da reação dos outros?",
+        "en": "What opinion do you keep quiet about because of how people might react?",
+        "es": "¿Qué opinión te guardas por miedo a cómo reaccionen los demás?"
+      }
+    },
+    {
+      "id": "pdi-new-028",
+      "mode": "group",
+      "level": 3,
+      "translations": {
+        "pt-PT": "Quando te sentiste de fora num grupo?",
+        "pt-BR": "Quando você se sentiu excluído de uma turma?",
+        "en": "When have you felt left out of a group?",
+        "es": "¿Cuándo te has sentido fuera de lugar en un grupo?"
+      }
+    },
+    {
+      "id": "pdi-new-029",
+      "mode": "group",
+      "level": 4,
+      "translations": {
+        "pt-PT": "Que pedido de desculpa ainda deves a alguém?",
+        "pt-BR": "Que pedido de desculpas você ainda deve a alguém?",
+        "en": "Who do you still owe an apology to?",
+        "es": "¿A quién le debes todavía una disculpa?"
+      }
+    },
+    {
+      "id": "pdi-new-030",
+      "mode": "group",
+      "level": 4,
+      "translations": {
+        "pt-PT": "Que comportamento teu afasta pessoas sem dares conta?",
+        "pt-BR": "Que atitude sua afasta pessoas sem você perceber?",
+        "en": "What do you do that might push people away without you noticing?",
+        "es": "¿Qué haces que podría alejar a otros sin que te des cuenta?"
+      }
+    },
+    {
+      "id": "pdi-new-031",
+      "mode": "group",
+      "level": 4,
+      "translations": {
+        "pt-PT": "Que verdade evitarias dizer se toda a gente tivesse de responder?",
+        "pt-BR": "Que verdade você evitaria dizer se todo mundo tivesse que responder?",
+        "en": "What truth would you avoid sharing if everyone had to answer?",
+        "es": "¿Qué verdad evitarías decir si todo el mundo tuviera que responder?"
+      }
+    },
+    {
+      "id": "pdi-new-032",
+      "mode": "group",
+      "level": 4,
+      "translations": {
+        "pt-PT": "Que limite gostavas que este grupo respeitasse melhor?",
+        "pt-BR": "Que limite você gostaria que essa turma respeitasse mais?",
+        "en": "What boundary would you like this group to respect better?",
+        "es": "¿Qué límite te gustaría que este grupo respetara mejor?"
+      }
+    }
+  ]
+}
