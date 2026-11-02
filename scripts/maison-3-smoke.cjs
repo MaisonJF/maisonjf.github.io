@@ -7,7 +7,7 @@ let errors=[];
 for(const page of pages){
  const html=fs.readFileSync(path.join(root,page),'utf8');
  const links=[...html.matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map(m=>m[1]);
- const ids=new Set([...html.matchAll(/\\bid=["']([^"']+)["']/gi)].map(m=>m[1]));
+ const ids=new Set([...html.matchAll(/\bid=["']([^"']+)["']/gi)].map(m=>m[1]));
  for(const href of links){if(href.startsWith('#')&&href.length>1&&!ids.has(href.slice(1)))errors.push(page+': missing anchor '+href);}
 
  for(const href of links){
