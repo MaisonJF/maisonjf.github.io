@@ -25,6 +25,11 @@ for(const p of ['produtos/index.html','presentes/index.html','ebooks/index.html'
     const approvedBundlePrice='Três combinações de produtos para oferecer ou criar o teu próprio momento, desde 10 €.';
     if(!html.includes(approvedBundlePrice))fail('bundle_offer_price_contract_missing');
     if(html.replace(approvedBundlePrice,'').includes('€'))fail('discovery_price_returned:'+p);
+  }else if(p==='oraculo/index.html'){
+    // V3 sells the single Oracle reading directly; allow only its approved CTA price.
+    const approvedOracleCta='FAZ A TUA PERGUNTA. OBTÉM A TUA RESPOSTA · 2 €';
+    if(!html.includes(approvedOracleCta))fail('oracle_v3_checkout_cta_missing');
+    if(html.replace(approvedOracleCta,'').includes('€'))fail('discovery_price_returned:'+p);
   }else if(html.includes('€')){
     fail('discovery_price_returned:'+p);
   }
