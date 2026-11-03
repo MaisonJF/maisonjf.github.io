@@ -1,10 +1,3 @@
-import { ORACLE_AMOR_READINGS } from '../_lib/oracle-amor.js';
-import { ORACLE_TRABALHO_READINGS } from '../_lib/oracle-trabalho.js';
-import { ORACLE_DINHEIRO_READINGS } from '../_lib/oracle-dinheiro.js';
-import { ORACLE_FAMILIA_READINGS } from '../_lib/oracle-familia.js';
-import { ORACLE_ESCOLHAS_READINGS } from '../_lib/oracle-escolhas.js';
-import { ORACLE_PADROES_READINGS } from '../_lib/oracle-padroes.js';
-import { ORACLE_TERRITORIES, buildTerritoryReadings } from '../_lib/oracle-territories.js';
 import { composeOracleReading } from '../_lib/oracle-composer.js';
 import { requireMaisonVault, pseudonymousBuyerKey } from '../_lib/maison-vault.js';
 import {
@@ -22,24 +15,7 @@ import { detectOracleContentNeeds } from '../_lib/content-gap-detector.js';
 import { normalizeMaisonLocale } from '../_lib/maison-locales.js';
 import { brazilSessionEligibilityResponse } from '../_lib/brazil-market.js';
 
-const AUTHORED_READINGS={
-  amor:ORACLE_AMOR_READINGS,
-  trabalho:ORACLE_TRABALHO_READINGS,
-  dinheiro:ORACLE_DINHEIRO_READINGS,
-  familia:ORACLE_FAMILIA_READINGS,
-  escolhas:ORACLE_ESCOLHAS_READINGS,
-  padroes:ORACLE_PADROES_READINGS
-};
 const TERRITORIES=Object.fromEntries(ORACLE_TERRITORIES.map(t=>[t.slug,t]));
-
-function readingsFor(theme){
-  const territory=TERRITORIES[theme];
-  if(!territory)return null;
-  const readings=buildTerritoryReadings(territory);
-  const authored=AUTHORED_READINGS[theme];
-  if(!authored)return readings;
-  return authored.concat(readings.slice(authored.length,28));
-}
 
 export async function onRequestGet({ request, env }) {
   try {
@@ -66,7 +42,6 @@ export async function onRequestGet({ request, env }) {
     if(rawRequestedLocale!=null&&!requestedLocale)return json({error:'Idioma inválido.'},400);
     const theme=requestedTheme||sessionTheme;
     const locale=requestedLocale||sessionLocale;
-    const readings=locale==='pt-PT'?readingsFor(theme):null;
     const expectedAmount=sessionLocale==='pt-BR'?990:200;
     const expectedCurrency=sessionLocale==='pt-BR'?'brl':'eur';
     const marketError=brazilSessionEligibilityResponse(session,sessionLocale,expectedAmount);
@@ -99,19 +74,7 @@ export async function onRequestGet({ request, env }) {
       });
     }
 
-    if(locale!=='pt-PT')return json({error:'Esta abertura ainda não está disponível neste idioma.'},503);
-    if (!readings?.length) return json({ error:'O Oráculo ficou temporariamente em silêncio.' },503);
-    const index = await readingIndex(theme, sessionId, readings.length);
-    const selected = readings[index];
-
-    return json({
-      paid:true,
-      locale,
-      session_id:session.id,
-      reading:{ id:selected.id, title:selected.title, text:selected.text },
-      amount_total:expectedAmount,
-      currency:expectedCurrency
-    });
+    return json({error:'Esta leitura ainda não está disponível. O pagamento foi confirmado, mas o conteúdo não está pronto.',code:'oracle_content_unavailable'},503);
   } catch {
     return json({ error:'Não foi possível abrir esta leitura.' },500);
   }
@@ -145,7 +108,7 @@ async function tryComposedReading({env,session,theme,locale='pt-PT'}){
     for(const need of needs)await upsertContentNeed(db,need);
   }catch{}
 
-  if(blocks.length<5)return null;
+  if(blocks.length<7)return null;
 
   // A global backbone may support an already-developed territory, but it must
   // never switch an untouched territory away from its authored legacy reading.
@@ -182,10 +145,4 @@ async function stableSeed(input){
   return [...digest].map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 
-async function readingIndex(theme,sessionId,length) {
-  const input = new TextEncoder().encode('maison-jf-oracle-' + theme + '-v2|' + sessionId);
-  const digest = new Uint8Array(await crypto.subtle.digest('SHA-256',input));
-  const value = ((((digest[0] << 24) >>> 0) | (digest[1] << 16) | (digest[2] << 8) | digest[3]) >>> 0);
-  return value % length;
-}
 function json(payload,status=200){return new Response(JSON.stringify(payload),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'}})}
