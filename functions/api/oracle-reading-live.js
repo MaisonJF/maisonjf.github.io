@@ -1,3 +1,4 @@
+import { ORACLE_TERRITORIES } from '../_lib/oracle-territories.js';
 import { composeOracleReading } from '../_lib/oracle-composer.js';
 import { requireMaisonVault, pseudonymousBuyerKey } from '../_lib/maison-vault.js';
 import {
@@ -108,13 +109,7 @@ async function tryComposedReading({env,session,theme,locale='pt-PT'}){
     for(const need of needs)await upsertContentNeed(db,need);
   }catch{}
 
-  if(blocks.length<7)return null;
-
-  // A global backbone may support an already-developed territory, but it must
-  // never switch an untouched territory away from its authored legacy reading.
-  const requiredRoles=['opening','recognition','tension','counterpoint','reframe','movement','close'];
-  const specificRoles=new Set(blocks.filter(block=>block.territory===theme).map(block=>block.role));
-  if(!requiredRoles.every(role=>specificRoles.has(role)))return null;
+  if(!blocks.length)return null;
 
   const seed=await stableSeed('maison-jf-oracle-v3|'+theme+'|'+session.id);
   const composed=composeOracleReading({territory:theme,seed,blocks,seenIds,locale});
