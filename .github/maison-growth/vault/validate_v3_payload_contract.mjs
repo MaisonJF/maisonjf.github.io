@@ -20,22 +20,10 @@ console.log('PASS: 16 unique questions, 8+8 packs, 30 seeds; no stage quotas');
 
 import {readFileSync} from 'node:fs';
 const source=readFileSync(new URL('../../../functions/api/oracle-reading-live.js',import.meta.url),'utf8');
-// Inspect the two explicit successful JSON response blocks without regex parsing.
-const marker='return json(';
-const starts=[];
-let offset=0;
-while((offset=source.indexOf(marker,offset))!==-1){
-  const segment=source.slice(offset,offset+180);
-  if(segment.includes('paid:true'))starts.push(offset);
-  offset+=marker.length;
-}
-assert.equal(starts.length,2,'Expected two Oracle success responses');
-for(const start of starts){
-  const tail=source.slice(start);
-  const closing=tail.indexOf('});');
-  assert.ok(closing>0,'Oracle response closing delimiter missing');
-  const body=tail.slice(0,closing);
-  assert.ok(body.includes('reading:'),'Oracle response must contain reading');
-  assert.ok(!body.split('\\n').some(line=>['theme,','theme:','internal_theme,','internal_theme:'].some(field=>line.trim().startsWith(field))),'Oracle success response leaks internal theme');
-}
-console.log('PASS: both Oracle success responses omit internal theme (static check)');
+// Both new and reopened readings go through the same public response.
+const responses=[...source.matchAll(/return json\(\{\s*paid\s*:\s*true,([\s\S]*?)\}\);/g)];
+assert.equal(responses.length,1,'Expected one shared Oracle success response');
+const fields=responses[0][1].trim().split(/,\s*\n/).map(line=>line.trim().match(/^(\w+)(?:\s*:|$)/)?.[1]);
+assert.deepEqual(fields,['locale','session_id','reading','amount_total','currency']);
+assert.match(responses[0][1],/reading:\s*composed\.reading\s*,/);
+console.log('PASS: shared Oracle success response omits internal theme');
