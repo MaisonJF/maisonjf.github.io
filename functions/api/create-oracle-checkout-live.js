@@ -21,7 +21,7 @@ export async function onRequestPost({ request, env }) {
     if (originHeader && new URL(originHeader).origin !== requestOrigin) return json({ error: 'Origem inválida.' }, 403);
     let body = {};
     try { body = await request.json(); } catch { return json({ error: 'Pedido inválido.' }, 400); }
-    const theme=String(body?.theme||'');
+    const theme='amor'; // Internal editorial pool; visitors never select a territory.
     const territory=TERRITORIES[theme];
     if (!territory) return json({ error: 'Este território ainda não está disponível.' }, 400);
     const rawLocale=body?.locale??body?.lang??'pt-PT';
@@ -36,12 +36,12 @@ export async function onRequestPost({ request, env }) {
     }
 
     const origin = new URL(request.url).origin;
-    const successUrl = origin + '/oraculo/leitura.html?theme=' + encodeURIComponent(theme) + '&session_id={CHECKOUT_SESSION_ID}&locale=' + encodeURIComponent(locale);
+    const successUrl = origin + '/oraculo/leitura/?session_id={CHECKOUT_SESSION_ID}&locale=' + encodeURIComponent(locale);
 
     const params = new URLSearchParams();
     params.set('mode', 'payment');
     params.set('success_url', successUrl);
-    params.set('cancel_url', origin + publicPrefix(locale) + '/oraculo/' + theme + '?checkout_cancelado=1');
+    params.set('cancel_url', origin + publicPrefix(locale) + '/oraculo/?checkout_cancelado=1');
     params.set('locale', stripeLocaleForMaison(locale));
     params.set('customer_creation', 'always');
     params.set('billing_address_collection', locale === 'pt-BR' ? 'required' : 'auto');
@@ -49,7 +49,7 @@ export async function onRequestPost({ request, env }) {
     const currency = locale==='pt-BR' ? 'brl' : 'eur';
     params.set('line_items[0][price_data][currency]', currency);
     params.set('line_items[0][price_data][unit_amount]', String(amount));
-    params.set('line_items[0][price_data][product_data][name]', 'Oráculo MAISON JF® | ' + localizeOracleLabel(territory.label,locale));
+    params.set('line_items[0][price_data][product_data][name]', 'Oráculo MAISON JF®');
     const copy={
       'pt-PT':{description:'Uma abertura simbólica. Uma leitura.',legal:'Ao pagar, confirmas uma abertura do Oráculo MAISON JF® e aceitas as condições em maison-jf.com/informacao-legal.html.'},
       'pt-BR':{description:'Uma abertura simbólica. Uma leitura.',legal:'Ao pagar, você confirma uma abertura do Oráculo MAISON JF® e aceita as condições em maison-jf.com/informacao-legal.html.'},

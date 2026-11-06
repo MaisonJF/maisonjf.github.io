@@ -60,7 +60,7 @@ export async function listActivePaidQuestionsV2(db,theme,locale='pt-PT',themeAli
 
   return (result.results||[]).map(row=>({
     id:row.id,
-    theme,
+    theme:row.theme,
     text:row.text,
     subthemes:parseJson(row.subthemes_json,[]),
     class:row.class,

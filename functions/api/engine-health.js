@@ -5,25 +5,34 @@ import { composeQuestionSession } from '../_lib/question-composer.js';
 import { composeOracleReading } from '../_lib/oracle-composer.js';
 import { vaultLocalizationReady } from '../_lib/maison-localized-content.js';
 
-const ORACLE_ROLES=['opening','recognition','tension','counterpoint','reframe','movement','close'];
+const LOCALES=['pt-PT','pt-BR','en','es'];
 
 export async function onRequestGet({env}){
   const started=Date.now();
+  let stage='binding';
   try{
     const db=requireMaisonVault(env);
+    stage='schema';
     const schemaReady=await vaultExperienceEngineReady(db);
     if(!schemaReady){
       return json({ok:false,schema:'not_vault_v2_or_v3',latency_ms:Date.now()-started},503);
     }
+    stage='localization';
     const localized=await vaultLocalizationReady(db);
 
-    const pdi=await checkPdi(db);
-    const oracleAmor=await checkOracleAmor(db);
+    if(!localized)return json({ok:false,schema:'not_vault_v3',error:'localization_schema_unavailable',latency_ms:Date.now()-started},503);
+
+    stage='game';
+    const pdi=await checkLocales(locale=>checkPdi(db,locale));
+    stage='oracle';
+    const oracleAmor=await checkLocales(locale=>checkOracleAmor(db,locale));
+    stage='catalogue';
     const catalogue=await summarizeExperienceCatalogue(db);
+    const ok=LOCALES.every(locale=>pdi[locale].ok&&oracleAmor[locale].ok);
 
     return json({
-      ok:pdi.ok&&oracleAmor.ok,
-      schema:localized?'vault_v3':'vault_v2',
+      ok,
+      schema:'vault_v3',
       localization:{
         ready:localized,
         schema_ready:localized,
@@ -32,29 +41,33 @@ export async function onRequestGet({env}){
         target_locales:['pt-BR','en','es'],
         content_coverage:'validated_per_checkout'
       },
-      pdi,
-      oracle:{
-        amor:oracleAmor,
-        incomplete_territories_use_legacy_fallback:true
-      },
+      pdi:pdi['pt-PT'],
+      game_locale_coverage:LOCALES.map(locale=>({locale,...pdi[locale],minimum_16:pdi[locale].active_questions>=16})),
+      oracle:{amor:oracleAmor['pt-PT'],locale_coverage:oracleAmor},
       catalogue,
       privacy:{
         answer_text_stored:false,
         private_conversation_stored:false
       },
       latency_ms:Date.now()-started
-    },pdi.ok&&oracleAmor.ok?200:503);
-  }catch{
-    return json({ok:false,error:'health_check_failed',latency_ms:Date.now()-started},503);
+    },ok?200:503);
+  }catch(error){
+    const code=error?.code==='MAISON_VAULT_UNAVAILABLE'?'binding_unavailable':'health_check_failed';
+    console.error('[engine-health] failure',{stage,code,name:String(error?.name||'Error')});
+    return json({ok:false,error:code,stage,latency_ms:Date.now()-started},503);
   }
 }
 
-async function checkPdi(db){
+async function checkLocales(check){
+  return Object.fromEntries(await Promise.all(LOCALES.map(async locale=>[locale,await check(locale)])));
+}
+
+async function checkPdi(db,locale){
   try{
-    const questions=await listActivePaidQuestionsV2(db,'*');
+    const questions=await listActivePaidQuestionsV2(db,'*',locale);
     const composed=composeQuestionSession({
       theme:'*',
-      seed:'maison-health-pdi-v2',
+      seed:'maison-health-pdi-v3',
       questions,
       seenIds:[]
     });
@@ -70,24 +83,19 @@ async function checkPdi(db){
   }
 }
 
-async function checkOracleAmor(db){
+async function checkOracleAmor(db,locale){
   try{
-    const blocks=await listActiveOracleBlocks(db,'amor');
-    const specificRoles=new Set(blocks.filter(b=>b.territory==='amor').map(b=>b.role));
-    const roleCoverage=ORACLE_ROLES.every(role=>specificRoles.has(role));
-    if(!roleCoverage){
-      return {ok:false,error:'incomplete_role_coverage',active_blocks:blocks.length};
-    }
+    const blocks=await listActiveOracleBlocks(db,'amor',locale);
     const composed=composeOracleReading({
       territory:'amor',
-      seed:'maison-health-oracle-amor-v2',
+      seed:'maison-health-oracle-amor-v3',
+      locale,
       blocks,
       seenIds:[]
     });
     return {
-      ok:!!composed?.text&&composed?.quality?.ok!==false,
+      ok:!!composed?.text&&composed.blocks.length===1&&composed.quality?.ok===true,
       active_blocks:blocks.length,
-      role_coverage:ORACLE_ROLES.length,
       engine_version:composed?.engineVersion||null,
       quality_score:composed?.quality?.score??null
     };

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://maison-jf.com/</loc><lastmod>2026-10-11</lastmod><priority>1.0</priority></url>
   <url><loc>https://maison-jf.com/farol</loc><lastmod>2026-10-11</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/teste/</loc><lastmod>2026-10-11</lastmod><priority>0.9</priority></url>
   <url><loc>https://maison-jf.com/teste/atencao/</loc><lastmod>2026-10-11</lastmod><priority>0.9</priority></url>
@@ -19,9 +18,6 @@
   <url><loc>https://maison-jf.com/portas/corpo</loc><lastmod>2026-10-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://maison-jf.com/portas/cabeca</loc><lastmod>2026-10-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://maison-jf.com/oraculo/</loc><lastmod>2026-10-11</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maison-jf.com/oraculo/amor</loc><lastmod>2026-10-11</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maison-jf.com/oraculo/trabalho</loc><lastmod>2026-10-11</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maison-jf.com/oraculo/dinheiro</loc><lastmod>2026-10-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://maison-jf.com/oraculo/familia</loc><lastmod>2026-10-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://maison-jf.com/oraculo/escolhas</loc><lastmod>2026-10-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://maison-jf.com/oraculo/padroes</loc><lastmod>2026-10-11</lastmod><priority>0.8</priority></url>
@@ -100,7 +96,6 @@
   <url><loc>https://maison-jf.com/oraculo/dividas-pressao</loc><lastmod>2026-10-11</lastmod><priority>0.7</priority></url>
   <url><loc>https://maison-jf.com/oraculo/gastos-impulso</loc><lastmod>2026-10-11</lastmod><priority>0.7</priority></url>
   <url><loc>https://maison-jf.com/oraculo/poupanca-seguranca</loc><lastmod>2026-10-11</lastmod><priority>0.7</priority></url>
-  <url><loc>https://maison-jf.com/oraculo/dinheiro-e-ajuda</loc><lastmod>2026-10-11</lastmod><priority>0.7</priority></url>
   <url><loc>https://maison-jf.com/oraculo/rendimento-instavel</loc><lastmod>2026-10-11</lastmod><priority>0.7</priority></url>
   <url><loc>https://maison-jf.com/oraculo/escassez-medo</loc><lastmod>2026-10-11</lastmod><priority>0.7</priority></url>
   <url><loc>https://maison-jf.com/oraculo/consumo-status</loc><lastmod>2026-10-11</lastmod><priority>0.7</priority></url>

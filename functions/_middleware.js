@@ -43,8 +43,10 @@ export async function onRequest(context){
   const maintenancePath=maintenanceUrl.pathname;
   // Stripe notifications must remain receivable even during maintenance.
   if(maintenancePath==='/api/stripe-webhook-live')return context.next();
+  // Read-only health diagnostics remain available while the public site is closed.
+  if(maintenancePath==='/api/engine-health' && (context.request.method==='GET' || context.request.method==='HEAD'))return context.next();
   const isApi=maintenancePath.startsWith('/api/');
-  const isDocument=/\\.(?:html?)$/i.test(maintenancePath)||!(/\\.[a-z0-9]{1,8}$/i.test(maintenancePath));
+  const isDocument=/\.(?:html?)$/i.test(maintenancePath)||!(/\.[a-z0-9]{1,8}$/i.test(maintenancePath));
   if(isApi || (context.request.method!=='GET' && context.request.method!=='HEAD')){
     return new Response(JSON.stringify({ok:false,error:'MAISON JF® em manutenção.'}),{status:503,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','retry-after':'3600'}});
   }

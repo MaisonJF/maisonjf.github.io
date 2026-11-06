@@ -22,7 +22,7 @@ Stripe payment validation belongs in the API route that calls this module.
 */
 export async function getOrCreateQuestionSession({env,stripeSession,theme,locale='pt-PT'}={}){
   if(!stripeSession?.id)throw new Error('stripe_session_required');
-  if(!theme)throw new Error('theme_required');
+  if(!theme)throw new Error('game_pool_required');
 
   const db=requireMaisonVault(env);
   const selectedLocale=normalizeMaisonLocale(locale);

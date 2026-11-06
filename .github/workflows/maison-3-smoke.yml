@@ -1,0 +1,22 @@
+name: Maison 3.0 smoke checks
+on:
+  push:
+    branches: [maison-3.0]
+  pull_request:
+    branches: [main]
+jobs:
+  navigation-and-locales:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check internal links and supported locales
+        run: node scripts/maison-3-smoke.cjs
+      - name: Validate Vault v3 payload contract
+        run: node .github/maison-growth/vault/validate_v3_payload_contract.mjs
+      - name: Validate PDI registry
+        run: node .github/maison-growth/vault/validate_pdi_registry.mjs
+      - name: Validate luxury public surface
+        run: node .github/maison-growth/validate_luxury_surface.mjs

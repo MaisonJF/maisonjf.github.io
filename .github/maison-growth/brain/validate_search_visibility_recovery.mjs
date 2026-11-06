@@ -39,6 +39,16 @@ for(const row of snapshot.pages){
   if(publicUrls.has(row.url))continue;
   legacy.push(row);
   const pathname=pathOf(row.url);
+  // The V3 homepage remains a real URL, intentionally excluded from the
+  // public sitemap while maintenance applies. Redirecting '/' would break it.
+  if(pathname==='/'){
+    const home=read('index.html');
+    assert.match(home,/<meta\s+name="robots"\s+content="noindex,nofollow"\s*>/i,
+      'Maintenance homepage must remain noindex while excluded from sitemap');
+    assert.match(home,/<link\s+rel="canonical"\s+href="https:\/\/maison-jf\.com\/"\s*>/i,
+      'Maintenance homepage canonical must remain intact');
+    continue;
+  }
   assert(
     redirects.has(pathname),
     'Search Console legacy URL lacks explicit 301 recovery: '+pathname

@@ -25,7 +25,7 @@ export async function onRequestPost({request,env}){
     }
 
     const body=await request.json().catch(()=>({}));
-    const theme=String(body?.theme||'relacoes');
+    const theme='*';
     const mode=String(body?.mode||'duo');
     if(!['duo','group'].includes(mode)){
       return json({error:'Modo de jogo inválido.'},400);
@@ -37,7 +37,7 @@ export async function onRequestPost({request,env}){
     if (marketError) return marketError;
     const product=await pdiThemeAvailability(env,theme,locale);
     if(!product)return json({error:'Produto inválido.'},400);
-    if(!product.available)return json({error:'Este tema ainda não está disponível neste idioma.'},409);
+    if(!product.available)return json({error:'Ainda não existem 16 perguntas aprovadas neste idioma.'},409);
 
     const params=new URLSearchParams();
     params.set('mode','payment');
@@ -46,7 +46,7 @@ export async function onRequestPost({request,env}){
     params.set('line_items[0][quantity]','1');
     params.set('line_items[0][price_data][currency]',String(product.currency||'eur'));
     params.set('line_items[0][price_data][unit_amount]',String(product.amount));
-    params.set('line_items[0][price_data][product_data][name]',(PDI_PRODUCT_NAME[locale]||PDI_PRODUCT_NAME['pt-PT'])+' · '+product.label+(mode==='group'?' · Grupo & Festa':' · A Dois'));
+    params.set('line_items[0][price_data][product_data][name]',(PDI_PRODUCT_NAME[locale]||PDI_PRODUCT_NAME['pt-PT'])+(mode==='group'?' · Grupo & Festa':' · A Dois'));
     params.set('success_url',url.origin+'/para-de-ignorar/jogar.html?session_id={CHECKOUT_SESSION_ID}&theme='+encodeURIComponent(product.slug)+'&locale='+encodeURIComponent(locale)+'&mode='+encodeURIComponent(mode));
     params.set('cancel_url',url.origin+publicPrefix(locale)+'/para-de-ignorar/?theme='+encodeURIComponent(product.slug)+'&mode='+encodeURIComponent(mode));
     params.set('metadata[environment]','maison-jf-live');
