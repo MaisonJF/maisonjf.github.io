@@ -1,0 +1,143 @@
+/* MAISON JF® — Ivory Couture system.
+   Applied only to opted-in public-facing pages.
+   A light, coherent brand; preserve full-screen image viewers and checkout overlays. */
+:root{
+  --maison-couture-ivory:#f1eadf;
+  --maison-couture-paper:#f8f3ea;
+  --maison-couture-ink:#211e1b;
+  --maison-couture-muted:#554c42;
+  --maison-couture-gold:#94713c;
+  --maison-couture-emerald:#164b3f;
+  --maison-couture-bordeaux:#602437;
+  --maison-couture-line:#d7c7b2;
+}
+body.maison-ivory{
+  --ak-bg:#f1eadf;
+  --ak-text:#211e1b;
+  --ak-muted:#554c42;
+  --ak-accent:#94713c;
+  --ak-line:#d7c7b2;
+  --ak-line-strong:#b8a17c;
+  --ink:#211e1b;
+  --paper:#f8f3ea;
+  --line:#d7c7b2;
+  --maison-ivory:#f1eadf;
+  --maison-noir:#211e1b;
+  --maison-gold:#94713c;
+  --texto-primario:#211e1b;
+  --texto-secundario:#554c42;
+  --texto-terciario:#554c42;
+  --fundo-primario:#f1eadf;
+  --fundo-secundario:#f8f3ea;
+  --fundo-terciario:#f8f3ea;
+  --fundo-elevado:#f8f3ea;
+  --marfim:#211e1b;
+  --marfim-suave:#554c42;
+  --marfim-escuro:#554c42;
+  --marfim-dim:#665b4f;
+  --borda-subtil:#d7c7b2;
+  --borda-media:#b8a17c;
+  background:#f1eadf!important;
+  color:#211e1b!important;
+  color-scheme:light;
+}
+body.maison-ivory .site-header,
+body.maison-ivory .header{
+  background:rgba(241,234,223,.98)!important;
+  border-bottom:1px solid #d7c7b2!important;
+  color:#211e1b!important;
+}
+body.maison-ivory .brand,
+body.maison-ivory .header__logo,
+body.maison-ivory .site-header nav a,
+body.maison-ivory .header__nav-link{
+  color:#211e1b!important;
+}
+body.maison-ivory .site-header nav a:hover,
+body.maison-ivory .header__nav-link:hover{color:#164b3f!important}
+body.maison-ivory .header__menu-toggle span,
+body.maison-ivory .header__menu-toggle span::before,
+body.maison-ivory .header__menu-toggle span::after{background:#211e1b!important}
+body.maison-ivory h1,
+body.maison-ivory h2,
+body.maison-ivory h3,
+body.maison-ivory h4,
+body.maison-ivory .detail-title,
+body.maison-ivory .farol__question,
+body.maison-ivory .farol__title,
+body.maison-ivory .farol__result-title{
+  color:#211e1b!important;
+}
+body.maison-ivory :is(.eyebrow,.detail-eyebrow,.farol__label,.meta,.number,.vpc-kicker){
+  color:#94713c!important;
+}
+body.maison-ivory :is(.lead,.lede,.catalogue__intro,.library-intro,.library-note,.poster-library__lead,.detail-lead,.farol__subtitle,.farol__result-text,.curadoria__maker-copy,.catalogue-intro__path p,.product p,.ebook-card .meta,.vpc-service-hero p,.vpc-part span){
+  color:#554c42!important;
+}
+body.maison-ivory .catalogue,
+body.maison-ivory .ebooks,
+body.maison-ivory .farol,
+body.maison-ivory .detail-hero,
+body.maison-ivory .vpc-shell,
+body.maison-ivory .catalogue-physical,
+body.maison-ivory .curadoria{
+  background:#f1eadf!important;
+  color:#211e1b!important;
+}
+body.maison-ivory :is(.product,.catalogue-intro__path,.product-digital__card,.bundle-feature,.curadoria__maker,.vpc-part,.vpc-card,.vpc-convert,.farol__option,.farol__result,.reflection-card){
+  background:#f8f3ea!important;
+  border-color:#d7c7b2!important;
+  color:#211e1b!important;
+  box-shadow:none!important;
+}
+body.maison-ivory .product__media,
+body.maison-ivory .cover,
+body.maison-ivory .cover--placeholder{background:#e6ddcf!important}
+body.maison-ivory :is(.product__body small,.filters button:not(.on),.catalogue-section-head .eyebrow,.library-category__head strong){
+  color:#94713c!important;
+}
+body.maison-ivory :is(.product h2,.product .price,.product__body,.product__actions,.farol__option-text,.vpc-choice,.vpc-part strong){
+  color:#211e1b!important;
+}
+body.maison-ivory :is(.filters button,.library-sections a,.farol__option,.vpc-choice){
+  background:#f8f3ea!important;
+  color:#211e1b!important;
+  border-color:#b8a17c!important;
+}
+body.maison-ivory :is(.filters button.on,.btn--primary,.button--light,.vpc-choice.is-selected){
+  background:#164b3f!important;
+  border-color:#164b3f!important;
+  color:#fff!important;
+}
+body.maison-ivory :is(.filters button:hover,.library-sections a:hover,.farol__option:hover,.vpc-part:hover){
+  border-color:#602437!important;
+  background:#fffaf3!important;
+  color:#211e1b!important;
+}
+body.maison-ivory :is(.farol__result,.vpc-result__signal,.vpc-convert){
+  border-left:3px solid #602437!important;
+}
+body.maison-ivory :is(.farol__option-arrow,.farol__back){stroke:#94713c;color:#554c42}
+body.maison-ivory :is(.detail-back,.detail-note,.farol__disclaimer){color:#554c42!important}
+body.maison-ivory .detail-hero__inner{color:#211e1b!important}
+body.maison-ivory .footer.footer--modern,
+body.maison-ivory footer:not(.poster-viewer){
+  background:#f8f3ea!important;
+  color:#211e1b!important;
+  border-color:#d7c7b2!important;
+}
+body.maison-ivory .footer--modern :is(.footer__logo,.footer__tagline,.footer__link,.footer__copyright){
+  color:#554c42!important;
+}
+body.maison-ivory :is(.vpc-progress__bar,.vpc-affinity__row>div){background:#d7c7b2!important}
+body.maison-ivory :is(.vpc-progress__bar span,.vpc-affinity__row i){background:#164b3f!important}
+body.maison-ivory :is(.vpc-result,.vpc-part,.vpc-service-hero){color:#211e1b!important}
+body.maison-ivory :is(input,textarea,select){color-scheme:light}
+/* Light cards do not interfere with dark photographic lightboxes or PDF previews. */
+@media(max-width:700px){
+  body.maison-ivory .site-header nav,
+  body.maison-ivory .header__nav-list{
+    background:rgba(241,234,223,.99)!important;
+    color:#211e1b!important;
+  }
+}
