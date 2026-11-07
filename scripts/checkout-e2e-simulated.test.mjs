@@ -4,6 +4,7 @@ import {onRequestPost as stripeWebhook} from '../functions/api/stripe-webhook-li
 import {onRequestPost as receiptLive} from '../functions/api/checkout-receipt-live.js';
 if(!globalThis.crypto)globalThis.crypto=webcrypto;
 import assert from 'node:assert/strict';
+import {onRequest as maintenanceGateway} from '../functions/_middleware.js';
 import {onRequestPost as checkoutTest} from '../functions/api/create-checkout-test.js';
 import {onRequestGet as confirmTest} from '../functions/api/checkout-session-test.js';
 import {onRequestPost as checkoutEbook} from '../functions/api/create-checkout-live.js';
@@ -69,6 +70,9 @@ test('test mode: cart → Stripe checkout → paid session confirmation, no exte
  const payload=new URLSearchParams(calls[0].body);
  assert.equal(payload.get('metadata[environment]'),'maison-jf-sandbox');
  assert.equal(payload.get('metadata[ebook_ids]'),'turista');
+ assert.equal(payload.get('line_items[0][price_data][currency]'),'eur');
+ assert.equal(payload.get('line_items[0][price_data][unit_amount]'),'299');
+ assert.equal(payload.get('line_items[0][price]'),null);
  assert.equal(payload.get('success_url'),BASE+'/checkout-sucesso.html?session_id={CHECKOUT_SESSION_ID}');
 });
 test('test mode: rejects live keys and unpaid ebook entitlement',async()=>{
@@ -193,4 +197,32 @@ test('live signed webhook records paid purchases once and rejects invalid signat
  const repeated=await stripeWebhook({request:req(signed),env});
  assert.equal(repeated.status,200);
  assert.equal(recorded,1);
+});
+
+
+test('maintenance allows Stripe sandbox only on explicit Cloudflare preview with test key',async()=>{
+ const fixtureEnv={STRIPE_SECRET_KEY:'sk_test_mock_only',MAISON_SANDBOX_ENABLED:'1'};
+ const context=(host,path,method,env)=>({
+   request:new Request('https://'+host+path,{method}),
+   env,
+   next:async()=>new Response('sandbox fixture: allowed',{status:200,headers:{'content-type':'text/plain'}})
+ });
+ const preview='maison-3-0.maisonjf-github-io.pages.dev';
+ for(const [host,path,method,env,status] of [
+   [preview,'/checkout-teste.html','GET',fixtureEnv,200],
+   [preview,'/checkout-sucesso.html','GET',fixtureEnv,200],
+   [preview,'/api/create-checkout-test','POST',fixtureEnv,200],
+   [preview,'/api/checkout-session-test','GET',fixtureEnv,200],
+   ['maison-jf.com','/api/create-checkout-test','POST',fixtureEnv,503],
+   ['maison-jf.com','/checkout-teste.html','GET',fixtureEnv,503],
+   [preview,'/api/create-product-checkout-live','POST',fixtureEnv,503],
+   [preview,'/api/create-checkout-test','GET',fixtureEnv,503],
+   [preview,'/api/create-checkout-test','POST',{...fixtureEnv,MAISON_SANDBOX_ENABLED:'0'},503],
+   [preview,'/api/create-checkout-test','POST',{...fixtureEnv,STRIPE_SECRET_KEY:'sk_live_wrong'},503],
+   ['evil.pages.dev','/api/create-checkout-test','POST',fixtureEnv,503]
+ ]){
+   const response=await maintenanceGateway(context(host,path,method,env));
+   assert.equal(response.status,status,host+path+' '+method);
+   if(status===200)assert.equal(response.headers.get('x-robots-tag'),'noindex, nofollow');
+ }
 });
