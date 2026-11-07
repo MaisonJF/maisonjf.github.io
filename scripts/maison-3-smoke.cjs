@@ -25,6 +25,12 @@ for(const page of pages){
 const i18n=fs.readFileSync(path.join(root,'functions/_lib/site-i18n.js'),'utf8');
 for(const locale of ['pt-PT','pt-BR','en','es'])if(!i18n.includes(locale))errors.push('i18n missing '+locale);
 
+// Check that both paid experiences reject non-live Stripe sessions.
+for(const checkout of ['create-pdi-checkout-live.js','create-oracle-checkout-live.js']){
+ const source=fs.readFileSync(path.join(root,'functions/api',checkout),'utf8');
+ if(!source.includes('session?.livemode'))errors.push(checkout+': live Stripe session validation missing');
+}
+
 const middleware=fs.readFileSync(path.join(root,'functions/_middleware.js'),'utf8');
 const documentLine=middleware.split('\n').find(line=>line.includes('const isDocument='));
 if(!documentLine||!documentLine.includes('=/\\.'))errors.push('maintenance document detection must use literal dot regex');
