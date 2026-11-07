@@ -13,6 +13,13 @@ Documento vinculativo para homepage, catálogo, serviços, testes, ebooks, capas
 - Manter posição e escala subordinadas à legibilidade; variar o tratamento visual por saga, mas conservar os códigos reconhecíveis.
 - Evitar recriações arbitrárias da silhueta do Farol ou da espiral. Quando a direção exigir reprodução exata, trabalhar a partir do ficheiro de referência original autorizado.
 
+### Direção editorial concreta já aprovada: *Vírgulas do Destino: A Vingança!*
+- **Título exato:** `Vírgulas do Destino: A Vingança!`; autor creditado `João Fadario`.
+- **Composição:** Hong Kong à noite, atmosfera de artes marciais, **espiral de Fibonacci luminosa** e identidade dourada MAISON JF®.
+- **Frase de impacto:** “Há combates que não terminam quando o adversário cai.”
+- Usar **o monograma/Farol original**, não um farol criado do zero. Não inserir subtítulo “Sem Tréguas”.
+- Esta direção é específica do Livro III; nos restantes livros e posters, preservar a assinatura visual do Farol e da espiral e desenvolver tratamentos próprios, sujeitos a revisão editorial e visual.
+
 ## Paleta aprovada pelo proprietário
 - **Marfim** `#F1EADF`: fundo predominante do site, inclusive catálogo, biblioteca, experiências e Farol.
 - **Preto carvão** `#211E1B`: texto principal, títulos e contraste editorial. Não usar páginas inteiras com fundo preto.
