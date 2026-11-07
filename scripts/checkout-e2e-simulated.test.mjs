@@ -1,4 +1,8 @@
 import test from 'node:test';
+import {webcrypto} from 'node:crypto';
+import {onRequestPost as stripeWebhook} from '../functions/api/stripe-webhook-live.js';
+import {onRequestPost as receiptLive} from '../functions/api/checkout-receipt-live.js';
+if(!globalThis.crypto)globalThis.crypto=webcrypto;
 import assert from 'node:assert/strict';
 import {onRequestPost as checkoutTest} from '../functions/api/create-checkout-test.js';
 import {onRequestGet as confirmTest} from '../functions/api/checkout-session-test.js';
@@ -128,4 +132,65 @@ test('live physical: invalid shipping region rejected before contacting Stripe',
 test('paid game endpoint refuses missing live key; no charges in test suite',async()=>{
  const r=await checkoutPdi({request:request('/api/create-pdi-checkout-live','POST',{mode:'duo'}),env:{}});
  assert.equal(r.status,503);
+});
+
+test('Stripe mock with wrong mode must not redirect buyer',async()=>{
+ await withStripeMock({...testSession,livemode:true},async()=>{
+   const r=await checkoutTest({request:request('/api/create-checkout-test','POST',{items:[{id:'turista',quantity:1}]}),env:{STRIPE_SECRET_KEY:'sk_test_fixture'}});
+   assert.equal(r.status,502);
+ });
+ await withStripeMock({...physicalSession,livemode:false},async()=>{
+   const r=await checkoutProduct({request:request('/api/create-product-checkout-live','POST',{items:[{slug:'vela-vidro',quantity:1}],shipping_zone:'mainland',shipping_postal_code:'4000-123'}),env:{STRIPE_LIVE_SECRET_KEY:'sk_live_mock_only'}});
+   assert.equal(r.status,502);
+ });
+});
+test('live receipt: paid session records receipt email via mocked Stripe only',async()=>{
+ const previous=globalThis.fetch;
+ let receiptWrites=0;
+ try{
+   globalThis.fetch=async(url,options={})=>{
+     const u=String(url);
+     if(u.endsWith('/v1/checkout/sessions/cs_live_fixture123'))return jsonResponse({...ebookSession,payment_intent:'pi_mock123'});
+     if(u.endsWith('/v1/payment_intents/pi_mock123')&&options.method==='POST'){
+       const payload=new URLSearchParams(String(options.body));
+       assert.equal(payload.get('receipt_email'),'test@example.invalid');
+       receiptWrites++;
+       return jsonResponse({receipt_email:'test@example.invalid'});
+     }
+     if(u.endsWith('/v1/payment_intents/pi_mock123'))return jsonResponse({receipt_email:null});
+     throw Error('Unexpected outgoing URL '+u);
+   };
+   const response=await receiptLive({request:request('/api/checkout-receipt-live','POST',{session_id:'cs_live_fixture123'}),env:{STRIPE_LIVE_SECRET_KEY:'sk_live_mock_only'}});
+   assert.equal(response.status,200);
+   assert.equal((await response.json()).status,'receipt_email_set');
+   assert.equal(receiptWrites,1);
+ }finally{globalThis.fetch=previous}
+});
+test('live signed webhook records paid purchases once and rejects invalid signature',async()=>{
+ let recorded=0;
+ let wasRecorded=false;
+ const db={prepare(sql){
+   return {bind(){return {
+     first:async()=>wasRecorded?{event_id:'evt_mock'}:null,
+     run:async()=>{recorded++;wasRecorded=true;return {success:true}}
+   }}};
+ }};
+ const timestamp=String(Math.floor(Date.now()/1000));
+ const event={id:'evt_stripe_mock',type:'checkout.session.completed',data:{object:ebookSession}};
+ const payload=JSON.stringify(event);
+ const secret='whsec_mock_only';
+ const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);
+ const digest=await crypto.subtle.sign('HMAC',key,new TextEncoder().encode(timestamp+'.'+payload));
+ const signature=[...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,'0')).join('');
+ const req=(sig)=>new Request(BASE+'/api/stripe-webhook-live',{method:'POST',headers:{'content-type':'application/json','stripe-signature':sig},body:payload});
+ const env={STRIPE_LIVE_WEBHOOK_SECRET:secret,MAISON_BRAIN_DB:db};
+ const rejected=await stripeWebhook({request:req('t='+timestamp+',v1=invalid'),env});
+ assert.equal(rejected.status,400);
+ assert.equal(recorded,0);
+ const signed='t='+timestamp+',v1='+signature;
+ const accepted=await stripeWebhook({request:req(signed),env});
+ assert.equal(accepted.status,200);
+ const repeated=await stripeWebhook({request:req(signed),env});
+ assert.equal(repeated.status,200);
+ assert.equal(recorded,1);
 });
