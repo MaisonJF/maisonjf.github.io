@@ -18,21 +18,21 @@ const SURFACES=[
   [
     "https://maison-jf.com/portas/casa",
     [
-      "/images/maison-jf-casa-amigos-hq.jpg",
+      "/images/perf/home/casa-1080.webp",
       "/images/cinematic/casa.avif"
     ]
   ],
   [
     "https://maison-jf.com/portas/corpo",
     [
-      "/images/maison-jf-corpo-homem-hq.jpg",
+      "/images/perf/home/corpo-1080.webp",
       "/images/cinematic/corpo.avif"
     ]
   ],
   [
     "https://maison-jf.com/portas/cabeca",
     [
-      "/images/cabeca-mulher-q94.jpg",
+      "/images/perf/home/cabeca-1080.webp",
       "/images/cabeca-perspectiva-final.jpg"
     ]
   ],
