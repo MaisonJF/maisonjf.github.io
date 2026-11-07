@@ -65,6 +65,10 @@ jobs:
             http://127.0.0.1:4173/
             http://127.0.0.1:4173/produtos/
             http://127.0.0.1:4173/ebooks/
+            http://127.0.0.1:4173/farol/
+            http://127.0.0.1:4173/teste/
+            http://127.0.0.1:4173/servicos/
+            http://127.0.0.1:4173/oraculo/
           configPath: .lighthouserc.json
           uploadArtifacts: true
           temporaryPublicStorage: false
