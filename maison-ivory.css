@@ -158,6 +158,30 @@ body.maison-ivory .ebooks>h1{
     line-height:1.12!important;
   }
 }
+/* Farol: the legacy one-line heading clipped beyond narrow screens. */
+body.maison-ivory.farol-page .detail-title{
+  white-space:normal!important;
+  text-wrap:balance!important;
+  overflow-wrap:break-word!important;
+  max-width:100%!important;
+  font-size:clamp(36px,5vw,60px)!important;
+  line-height:1.12!important;
+  letter-spacing:-.03em!important;
+}
+@media(max-width:760px){
+  body.maison-ivory.farol-page .detail-title{
+    font-size:clamp(30px,7vw,43px)!important;
+    line-height:1.14!important;
+  }
+}
+/* Oráculo: remove inherited charcoal radial hero before changing the text to dark. */
+body.maison-ivory .oracle{
+  background:#f1eadf!important;
+  color:#211e1b!important;
+}
+body.maison-ivory .oracle__lead,
+body.maison-ivory .oracle__note{color:#554c42!important}
+body.maison-ivory .oracle__actions #oracle-status{color:#602437}
 /* Light cards do not interfere with dark photographic lightboxes or PDF previews. */
 @media(max-width:700px){
   body.maison-ivory .site-header nav,
