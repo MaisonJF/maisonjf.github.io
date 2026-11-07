@@ -374,14 +374,16 @@ jobs:
                   print(' -',p,why)
               raise SystemExit(1)
 
-          # Respostas stay under the hood: the public hub must not expose a catalogue.
+          # Public 3.0 editorial reading hub: actual articles, not commercial Oracle themes.
           hub=(root/'respostas/index.html').read_text(encoding='utf-8')
-          if 'noindex' not in hub.lower():
-              raise SystemExit('Respostas hub must remain noindex')
-          if '/farol' not in hub:
-              raise SystemExit('Respostas hub must route visitors back to the Farol')
-          if 'answer-grid' in hub or 'answer-card' in hub:
-              raise SystemExit('Respostas hub must not expose a public catalogue')
+          if '<link rel="canonical" href="https://maison-jf.com/respostas/">' not in hub:
+              raise SystemExit('Reading hub must be self-canonical')
+          if 'index,follow' not in hub.lower() or 'noindex' in hub.lower():
+              raise SystemExit('Reading hub must be indexable')
+          if '/farol' not in hub or hub.count('class="reading"') < 10:
+              raise SystemExit('Reading hub must link to verified editorial articles and the Farol')
+          if '/oraculo/' in hub and 'tema' in hub.lower():
+              raise SystemExit('Reading hub must not revive commercial Oracle themes')
 
           print('Oceans:',len(oceans))
           print('Public pillars:',len(pillar_paths))
