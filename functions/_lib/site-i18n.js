@@ -2778,6 +2778,50 @@ const HOME_YOICHI={
     "Óleos, sais de banho e cuidado sensorial": "Aceites, sales de baño y cuidado sensorial"
   }
 };
+const HOME_FREE_TESTS={
+  "pt-BR": {
+    "Testes gratuitos": "Testes gratuitos",
+    "O FAROL · O TEU PONTO DE PARTIDA": "O FAROL · SEU PONTO DE PARTIDA",
+    "Nem sempre sabes o que procuras. Sabes o que te falta.": "Nem sempre você sabe o que procura. Mas sabe o que está faltando.",
+    "O Farol ajuda-te a encontrar um caminho entre objetos, leituras e experiências. A escolha continua a ser tua.": "O Farol ajuda você a encontrar um caminho entre objetos, leituras e experiências. A decisão continua sendo sua.",
+    "TESTES GRATUITOS · VOLTA PARA CASA": "TESTES GRATUITOS · VOLTA PARA CASA",
+    "Três portas. Sem pagar para começar.": "Três portas. Sem pagar para começar.",
+    "O que pede atenção? O que te prende? Como reconheces o afeto? Experimenta uma das nossas experiências gratuitas de reflexão.": "O que pede atenção? O que prende você? Como reconhece o afeto? Experimente uma de nossas experiências gratuitas de reflexão.",
+    "VER TODOS OS TESTES GRATUITOS": "VER TODOS OS TESTES GRATUITOS",
+    "Logótipo oficial MAISON JF® com Farol e monograma JF dourado": "Logotipo oficial MAISON JF® com Farol e monograma JF dourado",
+    "Abrir O Farol, guia da MAISON JF®": "Abrir o Farol, guia da MAISON JF®"
+  },
+  "en": {
+    "Testes gratuitos": "Free tests",
+    "O FAROL · O TEU PONTO DE PARTIDA": "THE LIGHTHOUSE · YOUR STARTING POINT",
+    "Nem sempre sabes o que procuras. Sabes o que te falta.": "You may not know what you're looking for. But you know what's missing.",
+    "O Farol ajuda-te a encontrar um caminho entre objetos, leituras e experiências. A escolha continua a ser tua.": "The Lighthouse helps you find a path through objects, books and experiences. The choice remains yours.",
+    "TESTES GRATUITOS · VOLTA PARA CASA": "FREE REFLECTION TESTS · COME HOME",
+    "Três portas. Sem pagar para começar.": "Three doors. Free to begin.",
+    "O que pede atenção? O que te prende? Como reconheces o afeto? Experimenta uma das nossas experiências gratuitas de reflexão.": "What needs your attention? What keeps you attached? How do you recognise affection? Explore one of our free experiences for reflection.",
+    "ATENÇÃO": "ATTENTION",
+    "APEGO": "ATTACHMENT",
+    "AFETO": "AFFECTION",
+    "VER TODOS OS TESTES GRATUITOS": "EXPLORE ALL FREE TESTS",
+    "Logótipo oficial MAISON JF® com Farol e monograma JF dourado": "Official MAISON JF® lighthouse and gold JF monogram",
+    "Abrir O Farol, guia da MAISON JF®": "Open the Lighthouse, MAISON JF® guide"
+  },
+  "es": {
+    "Testes gratuitos": "Tests gratuitos",
+    "O FAROL · O TEU PONTO DE PARTIDA": "EL FARO · TU PUNTO DE PARTIDA",
+    "Nem sempre sabes o que procuras. Sabes o que te falta.": "No siempre sabes lo que buscas. Pero sabes lo que te falta.",
+    "O Farol ajuda-te a encontrar um caminho entre objetos, leituras e experiências. A escolha continua a ser tua.": "El Faro te ayuda a encontrar un camino entre objetos, lecturas y experiencias. La elección sigue siendo tuya.",
+    "TESTES GRATUITOS · VOLTA PARA CASA": "TESTS GRATUITOS · VUELVE A CASA",
+    "Três portas. Sem pagar para começar.": "Tres puertas. Sin pagar para empezar.",
+    "O que pede atenção? O que te prende? Como reconheces o afeto? Experimenta uma das nossas experiências gratuitas de reflexão.": "¿Qué requiere atención? ¿Qué te ata? ¿Cómo reconoces el afecto? Prueba una de nuestras experiencias gratuitas de reflexión.",
+    "ATENÇÃO": "ATENCIÓN",
+    "APEGO": "APEGO",
+    "AFETO": "AFECTO",
+    "VER TODOS OS TESTES GRATUITOS": "VER TODOS LOS TESTS GRATUITOS",
+    "Logótipo oficial MAISON JF® com Farol e monograma JF dourado": "Logotipo oficial MAISON JF® con Faro y monograma JF dorado",
+    "Abrir O Farol, guia da MAISON JF®": "Abrir el Faro, guía de MAISON JF®"
+  }
+};
 const PRODUCTS_V3={
  'pt-BR':{'Há aromas que não esqueces. E rituais que vais querer repetir.':'Há aromas inesquecíveis. E rituais que você vai querer repetir.','Descobre a colecção.':'Conheça a coleção.','Encontra o teu próximo prazer.':'Conheça a coleção.','Encontra o teu próximo prazer':'Conheça a coleção','Descobre velas, aromas e rituais que transformam pequenos momentos em prazeres teus. Escolhe o que te apetece levar para casa.':'Descubra velas, aromas e rituais que transformam pequenos momentos em experiências especiais. Escolha o que quer levar para casa.','Encontra o teu próximo prazer.':'Conheça a coleção.','Rituais para oferecer. Ou ficar contigo.':'Rituais para presentear. Ou guardar para você.'},
  en:{'Há aromas que não esqueces. E rituais que vais querer repetir.':'Scents that stay with you. Rituals worth repeating.','Descobre a colecção.':'Explore the collection.','Descobre velas, aromas e rituais que transformam pequenos momentos em prazeres teus. Escolhe o que te apetece levar para casa.':'Discover candles, scents and rituals that make everyday moments exceptional. Find something worth bringing home.','Rituais para oferecer. Ou ficar contigo.':'Rituals to give. Or keep.'},
@@ -2786,7 +2830,7 @@ const PRODUCTS_V3={
 const mergeV3=(base,extra)=>Object.fromEntries(['pt-BR','en','es'].map(locale=>[locale,{...(base[locale]||{}),...(extra[locale]||{})}]));
 
 const PAGE_MAP={
-  '/':mergeV3(mergeV3(HOME,HOME_V3),HOME_YOICHI),
+  '/':mergeV3(mergeV3(mergeV3(HOME,HOME_V3),HOME_YOICHI),HOME_FREE_TESTS),
   '/farol':FAROL,
   '/farol/':FAROL,
   '/teste/':TESTE,
