@@ -114,7 +114,7 @@ export async function onRequestPost({request,env}){
       body:params.toString()
     });
     const session=await stripeResponse.json().catch(()=>({}));
-    if(!stripeResponse.ok||!session?.url){
+    if(!stripeResponse.ok||!session?.livemode||!session?.url){
       return json({error:session?.error?.message||'Não foi possível abrir o checkout.'},stripeResponse.status||502);
     }
     return json({
