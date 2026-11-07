@@ -166,8 +166,8 @@
     "inspection_targets": 6,
     "google_readonly_sensor_tasks": 10,
     "baseline_sitemap_submitted": 151,
-    "baseline_public_pages": 153,
-    "baseline_sitemap_page_delta": -2,
+    "baseline_public_pages": 53,
+    "baseline_sitemap_page_delta": 98,
     "ai_visibility_probes": 6
   },
   "priority_recovery": [
@@ -318,7 +318,7 @@
     {
       "url": "https://maison-jf.com/relacoes/acabou-uma-situationship-e-nao-consigo-ultrapassar",
       "state": "legacy_observed",
-      "redirect_to": "/oraculo/separacao-fim",
+      "redirect_to": "/oraculo/",
       "clicks": 0,
       "impressions": 1,
       "ctr": 0,
@@ -554,7 +554,7 @@
     {
       "url": "https://maison-jf.com/relacoes/acabou-uma-situationship-e-nao-consigo-ultrapassar",
       "state": "legacy_observed",
-      "redirect_to": "/oraculo/separacao-fim",
+      "redirect_to": "/oraculo/",
       "clicks": 0,
       "impressions": 1,
       "ctr": 0,
