@@ -28,7 +28,7 @@ const hero=home.match(/<picture class="hero__media">([\s\S]*?)<\/picture>/i)?.[1
 if(!hero.includes('srcset=')||!hero.includes('fetchpriority="high"')||!hero.includes('loading="eager"'))failures.push('homepage hero responsive/high priority invariant');
 for(const name of ['casa','corpo','cabeca']){
  const page=read('portas/'+name+'.html');
- const match=[...page.matchAll(/<img\\b[^>]*>/gi)].map(x=>x[0]).find(tag=>tag.includes('/images/perf/home/'+name+'-1080.webp'));
+ const match=[...page.matchAll(/<img\b[^>]*>/gi)].map(x=>x[0]).find(tag=>tag.includes('/images/perf/home/'+name+'-1080.webp'));
  if(!match||!match.includes('srcset=')||!match.includes('sizes='))failures.push(name+' hero missing responsive WebP');
 }
 const homeLazy=[...home.matchAll(/<img\b[^>]+>/gi)].filter(m=>m[0].includes('loading="lazy"'));
