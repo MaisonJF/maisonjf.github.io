@@ -202,7 +202,7 @@ jobs:
           assert discovery['summary']['page_count']>0
           assert discovery['summary']['structured_data_pages']==discovery['summary']['page_count']
           assert discovery['summary']['structured_data_sources'].get('none',0)==0
-          assert discovery['summary']['structured_data_sources'].get('edge_derived',0)>=130
+          assert discovery['summary']['structured_data_sources'].get('edge_derived',0)>=int(discovery['summary']['page_count']*0.6)
           assert discovery['summary']['stale_edge_schema_lastmod']==[]
           assert discovery['summary']['orphan_pages']==[]
           assert discovery['summary']['redirecting_internal_links']==[]
@@ -220,9 +220,9 @@ jobs:
           assert visibility['summary']['inspection_targets']==6
           assert visibility['summary']['google_readonly_sensor_tasks']==10
           # The Search Console sitemap count is a dated snapshot, not live truth.
-          # Permit a small, explainable change in public page count since the snapshot.
+          # The 3.0 cleanup intentionally removes old commercial theme routes; validate the snapshot delta calculation, not a fixed page count.
           assert visibility['summary']['baseline_sitemap_submitted']>0
-          assert abs(visibility['summary']['baseline_sitemap_page_delta'])<=5
+          assert visibility['summary']['baseline_sitemap_page_delta']==visibility['summary']['baseline_sitemap_submitted']-discovery['summary']['page_count']
           assert visibility['summary']['ai_visibility_probes']>=6
           assert visibility['runtime_sensors']['google_search_analytics']['fresh_data']['data_state']=='all'
           assert visibility['runtime_sensors']['google_search_analytics']['fresh_data']['search_console_timezone']=='America/Los_Angeles'
