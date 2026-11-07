@@ -9,12 +9,10 @@ const SURFACES=[
   [
     "https://maison-jf.com/",
     [
-      "/images/maison-jf-hero-hq.jpg",
-      "/images/maison-jf-casa-amigos-hq.jpg",
-      "/images/maison-jf-corpo-homem-hq.jpg",
-      "/images/cabeca-mulher-q94.jpg",
-      "/images/maison-jf-companhia-hq.jpg",
-      "/images/maison-jf-b2b-office-hq.jpg"
+      "/images/perf/home/hero-1672.webp",
+      "/images/perf/home/casa-1080.webp",
+      "/images/perf/home/corpo-1080.webp",
+      "/images/perf/home/cabeca-1080.webp"
     ]
   ],
   [
