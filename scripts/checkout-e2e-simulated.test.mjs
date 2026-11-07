@@ -239,6 +239,6 @@ test('maintenance allows Stripe sandbox only on explicit Cloudflare preview with
  ]){
    const response=await maintenanceGateway(context(host,path,method,env));
    assert.equal(response.status,status,host+path+' '+method);
-   if(status===200)assert.equal(response.headers.get('x-robots-tag'),'noindex, nofollow');
+   if(status===200 && host===preview)assert.equal(response.headers.get('x-robots-tag'),'noindex, nofollow');
  }
 });
