@@ -1,0 +1,31 @@
+<!doctype html><html lang="pt-PT"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Confirmação de teste | MAISON JF®</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f3ec;color:#211e1b;font:17px/1.65 system-ui,sans-serif}
+main{max-width:680px;margin:9vh auto;padding:35px;background:#fffdf9;border:1px solid #ded4c6}
+h1{font:400 clamp(34px,6vw,58px)/1.1 Georgia,serif}#details{white-space:pre-wrap}
+a{color:inherit}small{color:#615b54}
+</style></head><body><main>
+<small>MAISON JF® · SANDBOX STRIPE · APENAS TESTES</small>
+<h1 id="title">A confirmar o pagamento de teste…</h1>
+<p id="message" role="status" aria-live="polite"></p>
+<p id="details"></p>
+<p><strong>Não há acesso a ebooks de produção através deste checkout.</strong> Os dados são exclusivamente de teste.</p>
+<p><a href="/checkout-teste.html">Voltar ao checkout de teste</a></p>
+</main><script>
+(async()=>{
+ const title=document.querySelector('#title'),message=document.querySelector('#message'),details=document.querySelector('#details');
+ const sessionId=new URL(location.href).searchParams.get('session_id');
+ if(!/^cs_test_[A-Za-z0-9]+$/.test(sessionId||'')){title.textContent='Sessão de teste inválida.';return;}
+ try{
+  const response=await fetch('/api/checkout-session-test?session_id='+encodeURIComponent(sessionId),{cache:'no-store'});
+  const data=await response.json();
+  if(!response.ok)throw Error(data.error||'Confirmação indisponível.');
+  if(data.environment!=='test')throw Error('A sessão não é de teste.');
+  title.textContent=data.payment_status==='paid'?'Pagamento de teste confirmado.':'Pagamento de teste ainda não confirmado.';
+  message.textContent=data.payment_status==='paid'?'Fluxo de confirmação sandbox concluído.':'A Stripe ainda não confirmou o pagamento de teste.';
+  details.textContent='Sessão: '+data.id+' · Moeda: '+(data.currency||'eur').toUpperCase();
+ }catch(error){title.textContent='Não foi possível confirmar.';message.textContent=error.message;}
+})();
+</script></body></html>
