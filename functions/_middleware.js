@@ -41,6 +41,26 @@ export async function onRequest(context){
   // Maintenance switch: keep the site reachable while preventing new sales.
   const maintenanceUrl=new URL(context.request.url);
   const maintenancePath=maintenanceUrl.pathname;
+  // Isolated sandbox: preview only, explicitly enabled, test key only.
+  // Never opens the production site or production payment endpoints.
+  const sandboxMethods={
+    '/checkout-teste.html':['GET','HEAD'],
+    '/checkout-sucesso.html':['GET','HEAD'],
+    '/api/create-checkout-test':['POST'],
+    '/api/checkout-session-test':['GET','HEAD'],
+    '/api/checkout-receipt-test':['POST']
+  };
+  const previewHost=maintenanceUrl.hostname==='maisonjf-github-io.pages.dev'||
+    maintenanceUrl.hostname.endsWith('.maisonjf-github-io.pages.dev');
+  const sandboxConfigured=context.env?.MAISON_SANDBOX_ENABLED==='1'&&
+    /^(?:sk|rk)_test_/.test(String(context.env?.STRIPE_SECRET_KEY||''));
+  if(previewHost&&sandboxConfigured&&sandboxMethods[maintenancePath]?.includes(context.request.method)){
+    const response=await context.next();
+    const headers=new Headers(response.headers);
+    headers.set('x-robots-tag','noindex, nofollow');
+    headers.set('cache-control','private, no-store');
+    return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
+  }
   // Stripe notifications must remain receivable even during maintenance.
   if(maintenancePath==='/api/stripe-webhook-live')return context.next();
   // Read-only health diagnostics remain available while the public site is closed.
