@@ -1,0 +1,86 @@
+name: Maison 3.0 smoke checks
+on:
+  push:
+    branches: [maison-3.0]
+  pull_request:
+    branches: [main]
+jobs:
+  navigation-and-locales:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check internal links and supported locales
+        run: node scripts/maison-3-smoke.cjs
+      - name: Check homepage, editorial and catalogue image performance budgets
+        run: node scripts/maison-performance-budget.cjs
+      - name: Validate Vault v3 payload contract
+        run: node .github/maison-growth/vault/validate_v3_payload_contract.mjs
+      - name: Validate PDI registry
+        run: node .github/maison-growth/vault/validate_pdi_registry.mjs
+      - name: Validate luxury public surface
+        run: node .github/maison-growth/validate_luxury_surface.mjs
+
+  lighthouse-static:
+    name: Lighthouse static UX performance
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [mobile, desktop]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Serve local branch without production access
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/maison-lh-server.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl --fail --silent --output /dev/null http://127.0.0.1:4173/; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/maison-lh-server.log
+          exit 1
+      - name: Select Lighthouse profile
+        shell: bash
+        run: |
+          if [ "${{ matrix.profile }}" = "desktop" ]; then
+            cat > .lighthouserc.json <<'EOF'
+          {"ci":{"collect":{"numberOfRuns":1,"settings":{"preset":"desktop"}}}}
+          EOF
+          else
+            cat > .lighthouserc.json <<'EOF'
+          {"ci":{"collect":{"numberOfRuns":1,"settings":{"formFactor":"mobile","throttlingMethod":"simulate"}}}}
+          EOF
+          fi
+      - name: Audit homepage, catalogue and ebooks
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://127.0.0.1:4173/
+            http://127.0.0.1:4173/produtos/
+            http://127.0.0.1:4173/ebooks/
+          configPath: .lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: false
+      - name: Display lab measurements
+        if: always()
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs'),path=require('node:path');
+          const dir='lhci_reports';
+          if(!fs.existsSync(dir)){console.log('No Lighthouse reports generated');process.exit(0)}
+          for(const file of fs.readdirSync(dir).filter(f=>f.endsWith('.json'))){
+            try{
+              const d=JSON.parse(fs.readFileSync(path.join(dir,file),'utf8'));
+              const a=d.audits||{},metrics={};
+              for(const [label,key] of Object.entries({LCP:'largest-contentful-paint',CLS:'cumulative-layout-shift',TBT:'total-blocking-time',FCP:'first-contentful-paint'}))
+                metrics[label]=a[key]?.displayValue||'unavailable';
+              console.log(JSON.stringify({url:d.finalUrl||d.requestedUrl,score:Math.round((d.categories?.performance?.score||0)*100),metrics}));
+            }catch(e){console.log('Could not parse '+file)}
+          }
+          NODE

@@ -47,6 +47,7 @@ export async function countLiveQuestionsForLocale(db,theme,locale='pt-PT'){
   const selected=normalizeMaisonLocale(locale);
   const themes=[...new Set((Array.isArray(theme)?theme:[theme]).map(value=>String(value||'').trim()).filter(Boolean))].sort();
   if(!themes.length)return 0;
+  const globalPool=themes.includes('*');
   const cacheKey='question-count:'+selected+':'+themes.join('|');
   return await cachedContentStatus(db,cacheKey,async()=>{
     const placeholders=themes.map((_,index)=>'?'+(index+1)).join(',');
@@ -54,7 +55,7 @@ export async function countLiveQuestionsForLocale(db,theme,locale='pt-PT'){
       const row=await db.prepare(
         `SELECT COUNT(*) AS count
            FROM vault_questions
-          WHERE theme IN (${placeholders})
+          WHERE (?1='*' OR theme IN (${placeholders}))
             AND status='active'
             AND exposure='paid'
             AND lifecycle_state='live'
@@ -71,7 +72,7 @@ export async function countLiveQuestionsForLocale(db,theme,locale='pt-PT'){
            ON t.question_id=q.question_id
           AND t.locale=${localePlaceholder}
           AND t.status='active'
-        WHERE q.theme IN (${placeholders})
+        WHERE (?1='*' OR q.theme IN (${placeholders}))
           AND q.status='active'
           AND q.exposure='paid'
           AND q.lifecycle_state='live'

@@ -1,0 +1,14 @@
+# Never commit local secrets or Cloudflare preview credentials
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+!.env.example
+
+# Local dependencies, browsers and Lighthouse reports
+node_modules/
+.lighthouseci/
+lhci_reports/
+.lighthouserc.json
+playwright-report/
+test-results/

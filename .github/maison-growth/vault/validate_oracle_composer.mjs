@@ -48,6 +48,7 @@ for(let i=0;i<20;i++){
     seed:'territory-priority-'+i,
     blocks:[...specific,...global]
   });
+  if(out.blocks.length!==1)throw new Error('expected a single Oracle message');
   if(out.blocks.some(b=>b.territory!=='amor')){
     throw new Error('global block selected despite complete territory-specific coverage');
   }
@@ -63,21 +64,13 @@ if(brazilianPortuguese.title!=='Uma leitura'){
   throw new Error('PT-BR Oracle title must use a Brazilian Portuguese fallback');
 }
 
-const noMovement=specific.filter(b=>b.role!=='movement');
-let sawGlobalMovement=false;
-for(let i=0;i<30;i++){
-  const out=composeOracleReading({
-    territory:'amor',
-    seed:'global-fallback-'+i,
-    blocks:[...noMovement,...global]
-  });
-  const movement=out.blocks.find(b=>b.role==='movement');
-  if(movement){
-    if(movement.territory!=='global')throw new Error('expected global movement fallback');
-    sawGlobalMovement=true;
-    break;
-  }
+const fallback=composeOracleReading({
+  territory:'amor',
+  seed:'global-fallback',
+  blocks:[...specific.map(b=>({...b,status:'retired'})),...global]
+});
+if(fallback.blocks.length!==1||fallback.blocks[0].territory!=='global'){
+  throw new Error('expected one global message when no territory-specific message is eligible');
 }
-if(!sawGlobalMovement)throw new Error('did not exercise global movement fallback');
 
-console.log('Oracle composer territory priority + global fallback + PT-BR title fallback: OK');
+console.log('Oracle single message, territory priority, global fallback and PT-BR title: OK');

@@ -3,9 +3,11 @@ name: Optimize homepage images
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, maison-3.0]
     paths:
       - '.github/workflows/optimize-home-images.yml'
+      - 'images/maison-jf-*-hq.jpg'
+      - 'images/cabeca-mulher-q94.jpg'
 
 permissions:
   contents: write

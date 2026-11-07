@@ -2,12 +2,12 @@
 import { calculateShipping } from '../_lib/shipping-test.js';
 
 const PRODUCTS = {
-  bruma: { price: 'price_1UECuk5O4m7iPegSqgyaIVvN', kind: 'physical', max: 10, unitCents: 650 },
-  oleo: { price: 'price_1UECv65O4m7iPegSVGK8qedO', kind: 'physical', max: 10, unitCents: 1200 },
-  escalda: { price: 'price_1UEQLo5O4m7iPegS8BOzlT0P', kind: 'physical', max: 10, unitCents: 950 },
-  vela: { price: 'price_1UEQLr5O4m7iPegSWWLhiNWP', kind: 'physical', max: 10, unitCents: 1400 },
-  turista: { price: 'price_1UERKm5O4m7iPegSn9DuUULs', kind: 'digital', max: 1, unitCents: 299 },
-  meandros: { price: 'price_1UERKp5O4m7iPegSCC05H2Kq', kind: 'digital', max: 1, unitCents: 499 }
+  bruma: { name: 'Névoa de Ambiente · Sandbox', kind: 'physical', max: 10, unitCents: 650 },
+  oleo: { name: 'Óleo de Massagem · Sandbox', kind: 'physical', max: 10, unitCents: 1200 },
+  escalda: { name: 'Escalda-pés · Sandbox', kind: 'physical', max: 10, unitCents: 950 },
+  vela: { name: 'Vela Aromática · Sandbox', kind: 'physical', max: 10, unitCents: 1400 },
+  turista: { name: 'Vírgulas do Destino: O Turista · Sandbox', kind: 'digital', max: 1, unitCents: 299 },
+  meandros: { name: 'Vírgulas do Destino: Meandros da Vida · Sandbox', kind: 'digital', max: 1, unitCents: 499 }
 };
 
 const DELIVERY = {
@@ -83,7 +83,7 @@ export async function onRequestPost({ request, env }) {
     params.set('custom_fields[0][numeric][maximum_length]', '9');
     params.set('custom_text[submit][message]', 'Ao pagar, confirmas a compra e aceitas as [condições da MAISON JF®](https://maison-jf.com/informacao-legal.html), a [política de envios](https://maison-jf.com/envios.html) e a [política de devoluções](https://maison-jf.com/devolucoes.html). A fatura fiscal é emitida pela MAISON JF® separadamente.');
     params.set('payment_method_types[0]', 'card');
-    params.set('payment_method_types[1]', 'mb_way');
+    // Sandbox uses the card method; optional regional methods have separate tests.
     params.set('submit_type', 'pay');
     params.set('metadata[environment]', 'maison-jf-sandbox');
     params.set('metadata[source]', 'site-cart-test');
@@ -120,7 +120,9 @@ export async function onRequestPost({ request, env }) {
 
     items.forEach((item, index) => {
       const product = PRODUCTS[item.id];
-      params.set(`line_items[${index}][price]`, product.price);
+      params.set(`line_items[${index}][price_data][currency]`, 'eur');
+      params.set(`line_items[${index}][price_data][unit_amount]`, String(product.unitCents));
+      params.set(`line_items[${index}][price_data][product_data][name]`, product.name);
       params.set(`line_items[${index}][quantity]`, String(item.quantity));
     });
 
@@ -138,7 +140,7 @@ export async function onRequestPost({ request, env }) {
       return json({ error: session?.error?.message || 'A Stripe recusou a criação do checkout.' }, stripeResponse.status);
     }
 
-    if (!session?.url) {
+    if (session?.livemode !== false || !session?.url) {
       return json({ error: 'A Stripe criou a sessão sem devolver um endereço de checkout.' }, 502);
     }
 

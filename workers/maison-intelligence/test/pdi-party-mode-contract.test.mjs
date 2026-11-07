@@ -20,45 +20,19 @@ test('PÁRA DE IGNORAR exposes a separately signed two-player or group mode',()=
   assert.match(session,/mode,/);
 });
 
-test('group themes retain canonical and legacy Vault keys, and existing live questions remain discoverable',()=>{
-  const sources=read('functions/_lib/pdi-theme-sources.js');
-  const registry=read('functions/_lib/pdi-theme-registry.js');
-  const catalogue=read('functions/_lib/pdi-theme-catalogue.js');
-  const localized=read('functions/_lib/maison-localized-content.js');
-  const vaultV1=read('functions/_lib/maison-vault.js');
-  const vaultV2=read('functions/_lib/question-vault-v2.js');
+test('V3 uses global 8+8 question sessions without public theme quotas',()=>{
   const session=read('functions/_lib/para-de-ignorar-session.js');
-  assert.match(sources,/label:signal\.label\|\|''/);
-  assert.match(registry,/find\(item=>item\.source==='pdi-group'\)/);
-  assert.match(registry,/groupEvidence\?\.sourceId\|\|stableThemeSlug\(label\)/);
-  assert.match(registry,/family:String\(groupEvidence\?\.family\|\|evidence\.family\|\|'Maison'\)/);
-  assert.match(registry,/item\.slug===key\|\|item\.aliases\.includes\(key\)/);
-  assert.match(catalogue,/keys\.reduce\(\(total,key\)=>total\+\(counts\.get\(key\)\|\|0\),0\)/);
-  assert.match(localized,/WHERE theme IN \(\$\{placeholders\}\)/);
-  assert.match(vaultV1,/WHERE theme IN \(\$\{placeholders\}\)/);
-  assert.match(vaultV2,/WHERE q\.theme IN \(\$\{placeholders\}\)/);
-  assert.match(session,/registeredTheme\?\.aliases/);
-});
-
-test('group mode focuses on 12 packs and requires 28 live questions before exposure',()=>{
-  const sources=read('functions/_lib/pdi-theme-sources.js');
-  const catalogue=read('functions/_lib/pdi-theme-catalogue.js');
-  const policy=read('functions/_lib/para-de-ignorar-policy.js');
-  assert.match(sources,/const PDI_GROUP_SEEDS=\[/);
-  assert.match(sources,/family:'Amigos, Grupos & Festas'/);
-  assert.match(sources,/source:'pdi-group'/);
-  assert.match(catalogue,/liveQuestions>=PDI_MINIMUM_LIVE_QUESTIONS/);
-  assert.match(policy,/minimum_28_active_approved_questions_per_theme/);
-  const builder=read('.github/maison-growth/brain/build_pdi_expansion_queue.mjs');
-  const groupTemplateBlock=builder.slice(builder.indexOf('const groupTemplates=['),builder.indexOf('const questions=[];'));
-  assert.equal((groupTemplateBlock.match(/\(t\)=>/g)||[]).length,28,'each group pack gets 28 question drafts');
-  const groupSeedBlock=sources.slice(sources.indexOf('const PDI_GROUP_SEEDS=['),sources.indexOf('const MAISON_NATIVE_SEEDS='));
-  assert.equal((groupSeedBlock.match(/\{slug:/g)||[]).length,12);
-  for(const label of [
-    'Quem Conhece Quem?','Histórias de Festa','Confissões Leves','Quem Faria Isso?',
-    'Memórias & Nostalgia','Gostos Impopulares','Dilemas Absurdos','Música, Cinema & Séries',
-    'Talentos Inúteis','Amigos sem Filtro','O Nosso Grupo em Filme','Desafio do Minuto'
-  ]) assert.ok(groupSeedBlock.includes("label:'"+label+"'"),'missing deck theme: '+label);
+  const api=read('functions/api/pdi-session-live.js');
+  const checkout=read('functions/api/create-pdi-checkout-live.js');
+  const sales=read('para-de-ignorar/index.html');
+  assert.match(session,/packA\.length!==8\|\|packB\.length!==8/);
+  assert.match(session,/new Set\(ids\)\.size!==16/);
+  assert.match(session,/pdi_session_localized_text_missing/);
+  assert.match(api,/packA\.map\(card=>\(\{id:card\.id,position:card\.position,text:card\.text\}\)\)/);
+  assert.match(api,/packB\.map\(card=>\(\{id:card\.id,position:card\.position,text:card\.text\}\)\)/);
+  assert.doesNotMatch(sales,/JSON\.stringify\(\{theme,locale,mode\}\)/);
+  assert.match(sales,/JSON\.stringify\(\{mode,locale\}\)/);
+  assert.match(checkout,/metadata\[pdi_mode\]/);
 });
 
 test('group play rotates numbered participants and adds optional party challenges without collecting names or answers',()=>{
@@ -105,9 +79,7 @@ test('sales page sends the selected mode into checkout while keeping answer priv
   const page=read('para-de-ignorar/index.html');
   assert.match(page,/data-mode="duo"/);
   assert.match(page,/data-mode="group"/);
-  assert.match(page,/theme.family==='Amigos, Grupos & Festas'/);
-  assert.match(page,/t.groupEmpty/);
-  assert.match(page,/JSON\.stringify\(\{theme,locale,mode\}\)/);
-  assert.match(page,/os novos packs de Amigos & Festas/i);
-  assert.match(page,/nunca as tuas respostas/i);
+  assert.match(page,/JSON\.stringify\(\{mode,locale\}\)/);
+  assert.match(page,/16 perguntas para 3 a 12 pessoas/);
+  assert.doesNotMatch(page,/JSON\.stringify\(\{theme,locale,mode\}\)/);
 });

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-PT"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Checkout sandbox · Testes internos | MAISON JF®</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f7f3ec;color:#211e1b;font:17px/1.6 system-ui,sans-serif}
+main{width:min(680px,calc(100% - 36px));margin:8vh auto;padding:38px;background:#fffdf9;border:1px solid #ded4c6}
+h1{font:400 clamp(35px,6vw,58px)/1.1 Georgia,serif;margin:16px 0}label{display:block;margin:18px 0;font-weight:600}
+select,button{min-height:48px;font:inherit}select{display:block;margin-top:8px;width:100%;padding:10px}
+button{background:#211e1b;color:white;border:0;padding:12px 22px;cursor:pointer}button:disabled{opacity:.5;cursor:wait}
+small{color:#615b54}#status{min-height:25px}
+</style></head><body>
+<main>
+<small>MAISON JF® · AMBIENTE SANDBOX · NÃO É UMA COMPRA REAL</small>
+<h1>Checkout de teste.</h1>
+<p>Esta página destina-se exclusivamente à validação interna do modo de teste Stripe. Nunca introduzas dados de um cartão real aqui.</p>
+<label for="item">Ebook de teste
+<select id="item"><option value="turista">O Turista · Teste</option><option value="meandros">Meandros da Vida · Teste</option></select></label>
+<button id="buy" type="button">Criar sessão Stripe de teste</button>
+<p id="status" role="status" aria-live="polite"></p>
+<p><a href="/ebooks/">Voltar à biblioteca</a></p>
+</main>
+<script>
+const button=document.querySelector('#buy'),status=document.querySelector('#status');
+button.addEventListener('click',async()=>{
+ button.disabled=true;status.textContent='A preparar o checkout de teste…';
+ try{
+  const response=await fetch('/api/create-checkout-test',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({items:[{id:document.querySelector('#item').value,quantity:1}]})});
+  const result=await response.json();if(!response.ok||!result.url)throw Error(result.error||'Sessão indisponível.');
+  const url=new URL(result.url);if(url.hostname!=='checkout.stripe.com')throw Error('Destino de pagamento inesperado.');
+  location.assign(url.href);
+ }catch(error){status.textContent=error.message;button.disabled=false;}
+});
+</script></body></html>

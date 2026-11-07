@@ -697,7 +697,16 @@
   }
 
   function fitMaisonDisplayTitle(element) {
-    if (!(element instanceof HTMLElement) || maisonTitleHasIntentionalBreak(element)) return;
+    if (!(element instanceof HTMLElement)) return;
+    // CSS must own mobile typography. JS resizing after font load caused layout shifts.
+    if (window.innerWidth <= 760) {
+      if (element.dataset.maisonTitleFit === '1') {
+        for (const name of ['max-width','white-space','text-wrap','overflow-wrap','line-height','font-size']) element.style.removeProperty(name);
+        delete element.dataset.maisonTitleFit;
+      }
+      return;
+    }
+    if (maisonTitleHasIntentionalBreak(element)) return;
     if (!element.textContent || !element.textContent.trim()) return;
 
     const { min, max } = maisonTitleLimits(element);
@@ -741,6 +750,19 @@
       maisonTitleResizeFrame = requestAnimationFrame(() => fitMaisonDisplayTitles());
     }, { passive: true });
   }
+
+  let consentUiInitialized = false;
+  function initConsentUI() {
+    if(consentUiInitialized || !document.body) return;
+    consentUiInitialized = true;
+    const consent = localStorage.getItem(CONSENT_KEY);
+    if (consent === 'granted') { loadGoogle(); loadClarity(); startGrowthTelemetry(); }
+    else if (consent !== 'denied') showConsent();
+    if (consent === 'granted' || consent === 'denied') showPreferencesControl();
+  }
+  // Deferred scripts can render the fixed cookie banner before DOMContentLoaded;
+  // synchronous legacy scripts fall back to the DOMContentLoaded handler.
+  initConsentUI();
 
   document.addEventListener('DOMContentLoaded', () => {
     initMaisonTitleFit();
@@ -827,10 +849,7 @@
     });
     observer.observe(document.documentElement, { childList: true, subtree: true });
 
-    const consent = localStorage.getItem(CONSENT_KEY);
-    if (consent === 'granted') { loadGoogle(); loadClarity(); startGrowthTelemetry(); }
-    else if (consent !== 'denied') showConsent();
-    if (consent === 'granted' || consent === 'denied') showPreferencesControl();
+    initConsentUI();
 
     document.addEventListener('click', event => {
       const link = event.target.closest('a[href]');

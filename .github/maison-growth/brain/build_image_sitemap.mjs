@@ -9,32 +9,30 @@ const SURFACES=[
   [
     "https://maison-jf.com/",
     [
-      "/images/maison-jf-hero-hq.jpg",
-      "/images/maison-jf-casa-amigos-hq.jpg",
-      "/images/maison-jf-corpo-homem-hq.jpg",
-      "/images/cabeca-mulher-q94.jpg",
-      "/images/maison-jf-companhia-hq.jpg",
-      "/images/maison-jf-b2b-office-hq.jpg"
+      "/images/perf/home/hero-1672.webp",
+      "/images/perf/home/casa-1080.webp",
+      "/images/perf/home/corpo-1080.webp",
+      "/images/perf/home/cabeca-1080.webp"
     ]
   ],
   [
     "https://maison-jf.com/portas/casa",
     [
-      "/images/maison-jf-casa-amigos-hq.jpg",
+      "/images/perf/home/casa-1080.webp",
       "/images/cinematic/casa.avif"
     ]
   ],
   [
     "https://maison-jf.com/portas/corpo",
     [
-      "/images/maison-jf-corpo-homem-hq.jpg",
+      "/images/perf/home/corpo-1080.webp",
       "/images/cinematic/corpo.avif"
     ]
   ],
   [
     "https://maison-jf.com/portas/cabeca",
     [
-      "/images/cabeca-mulher-q94.jpg",
+      "/images/perf/home/cabeca-1080.webp",
       "/images/cabeca-perspectiva-final.jpg"
     ]
   ],
@@ -120,12 +118,17 @@ function esc(value){
 export function buildImageSitemap(){
   const publicUrls=new Set(buildPublicDiscovery().pages.map(page=>page.url));
   const seenImages=new Set();
+  let pages=0;
   const lines=[
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'
   ];
   for(const [url,images] of SURFACES){
+    // During maintenance the homepage remains accessible with noindex.
+    if(url==='https://maison-jf.com/'&&!publicUrls.has(url)&&
+      /<meta\s+name="robots"\s+content="[^"]*\bnoindex\b/i.test(fs.readFileSync(path.join(ROOT,'index.html'),'utf8')))continue;
     if(!publicUrls.has(url))throw new Error('image_sitemap_page_not_public:'+url);
+    pages++;
     lines.push('  <url>','    <loc>'+esc(url)+'</loc>');
     for(const rel of images){
       const clean=String(rel).split('?')[0];
@@ -139,7 +142,7 @@ export function buildImageSitemap(){
     lines.push('  </url>');
   }
   lines.push('</urlset>','');
-  return {xml:lines.join('\n'),pages:SURFACES.length,unique_images:seenImages.size};
+  return {xml:lines.join('\n'),pages,unique_images:seenImages.size};
 }
 
 export function writeImageSitemap({check=false}={}){

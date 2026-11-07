@@ -3,6 +3,9 @@
 /portas/companhia /servicos/ 301
 /portas/companhia.html /servicos/ 301
 
+# MAISON 3.0 HISTORICAL COLLECTION
+/clair-obscur/ /coleccoes/ 301
+
 # SEARCH-CONSOLE-LEGACY-RECOVERY — observed 2026-09-25
 /cart /produtos/carrinho/ 301
 /collections/all /produtos/ 301
@@ -22,7 +25,7 @@
 /products/mentoria-espiritual /contacto/?interesse=mentoria 301
 /products/tarot-expresso /servicos/tarot/ 301
 /products/virgulas-do-destino-meandros-da-vida /ebooks/virgulas-do-destino-meandros-da-vida/ 301
-/relacoes/acabou-uma-situationship-e-nao-consigo-ultrapassar /oraculo/separacao-fim 301
+/relacoes/acabou-uma-situationship-e-nao-consigo-ultrapassar /oraculo/ 301
 
 /produtos.html /produtos/ 301
 /produtos /produtos/ 301

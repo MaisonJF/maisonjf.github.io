@@ -1,0 +1,48 @@
+name: Maison 3.0 static UX performance audit
+on:
+  pull_request:
+    branches: [main]
+    paths: ['index.html','maison.css','styles.css','images/perf/**','produtos/index.html','ebooks/index.html','.github/workflows/preview-static-lighthouse.yml']
+  push:
+    branches: [maison-3.0]
+    paths: ['index.html','maison.css','styles.css','images/perf/**','produtos/index.html','ebooks/index.html','.github/workflows/preview-static-lighthouse.yml']
+permissions:
+  contents: read
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Serve static pages without bypassing production maintenance
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/maison-static.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl --fail --silent --output /dev/null http://127.0.0.1:4173/; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/maison-static.log
+          exit 1
+      - name: Mobile Lighthouse: homepage, catalogue, ebooks
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://127.0.0.1:4173/
+            http://127.0.0.1:4173/produtos/
+            http://127.0.0.1:4173/ebooks/
+          uploadArtifacts: true
+          temporaryPublicStorage: false
+      - name: Desktop Lighthouse config
+        run: |
+          cat > .lighthouserc.json <<'JSON'
+          {"ci":{"collect":{"settings":{"preset":"desktop"}}}}
+          JSON
+      - name: Desktop Lighthouse: homepage, catalogue, ebooks
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://127.0.0.1:4173/
+            http://127.0.0.1:4173/produtos/
+            http://127.0.0.1:4173/ebooks/
+          configPath: .lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: false

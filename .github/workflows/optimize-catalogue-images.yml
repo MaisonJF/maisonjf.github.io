@@ -3,9 +3,11 @@ name: Optimize catalogue images
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, maison-3.0]
     paths:
       - '.github/workflows/optimize-catalogue-images.yml'
+      - 'images/products/**'
+      - 'images/cinematic/editorial.avif'
 
 permissions:
   contents: write

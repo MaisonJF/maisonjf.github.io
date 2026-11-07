@@ -40,7 +40,7 @@ export async function onRequestGet({request,env}){
     const locale=normalizeMaisonLocale(stripeSession.metadata?.pdi_locale||'pt-PT');
     const storedMode=String(stripeSession.metadata?.pdi_mode||'duo');
     const mode=['duo','group'].includes(storedMode)?storedMode:'invalid';
-    const product=getPdiTheme(theme);
+    const product=theme==='*'?{slug:'*',label:'PÁRA DE IGNORAR!'}:getPdiTheme(theme);
     const expectedPrice=getPdiPriceForLocale(locale);
     const marketError=brazilSessionEligibilityResponse(stripeSession,locale,expectedPrice.amount);
     if(marketError)return marketError;
@@ -69,7 +69,6 @@ export async function onRequestGet({request,env}){
 
     return json({
       paid:true,
-      theme,
       locale,
       mode,
       label:localizedProduct?.label||product.label,
