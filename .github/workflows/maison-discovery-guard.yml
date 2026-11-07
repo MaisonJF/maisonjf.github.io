@@ -244,9 +244,11 @@ jobs:
           assert indexnow['keyLocation'].startswith('https://maison-jf.com/')
           assert all(url.startswith('https://maison-jf.com/') for url in indexnow['urlList'])
 
-          oracle=[p for p in discovery['pages'] if p['group']=='oraculo' and p['url']!='https://maison-jf.com/oraculo/']
+          oracle=[p for p in discovery['pages'] if p['group']=='oraculo']
           answers=[p for p in discovery['pages'] if p['group']=='respostas']
-          assert oracle and all(p['structured_data']['blocks'] for p in oracle)
+          # V3 exposes one indexable Oracle entry and no former topic-specific checkouts.
+          assert len(oracle)==1 and oracle[0]['url']=='https://maison-jf.com/oraculo/'
+          assert oracle[0]['structured_data']['blocks']
           assert answers and all(p['structured_data']['blocks'] for p in answers)
           for group in ('teste','ebooks','profissionais','press','envios','trabalho','presentes','espiritualidade'):
               rows=[p for p in discovery['pages'] if p['group']==group]
