@@ -138,7 +138,7 @@ export async function onRequestPost({ request, env }) {
       return json({ error: session?.error?.message || 'A Stripe recusou a criação do checkout.' }, stripeResponse.status);
     }
 
-    if (!session?.url) {
+    if (session?.livemode !== false || !session?.url) {
       return json({ error: 'A Stripe criou a sessão sem devolver um endereço de checkout.' }, 502);
     }
 
