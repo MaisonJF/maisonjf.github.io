@@ -209,12 +209,18 @@ test('maintenance allows Stripe sandbox only on explicit Cloudflare preview with
  });
  const preview='maison-3-0.maisonjf-github-io.pages.dev';
  for(const [host,path,method,env,status] of [
+   [preview,'/checkout-teste','GET',fixtureEnv,200],
+   [preview,'/checkout-teste/','GET',fixtureEnv,200],
    [preview,'/checkout-teste.html','GET',fixtureEnv,200],
+   [preview,'/checkout-sucesso','GET',fixtureEnv,200],
+   [preview,'/checkout-sucesso/','GET',fixtureEnv,200],
    [preview,'/checkout-sucesso.html','GET',fixtureEnv,200],
    [preview,'/api/create-checkout-test','POST',fixtureEnv,200],
    [preview,'/api/checkout-session-test','GET',fixtureEnv,200],
    ['maison-jf.com','/api/create-checkout-test','POST',fixtureEnv,503],
    ['maison-jf.com','/checkout-teste.html','GET',fixtureEnv,503],
+   ['maison-jf.com','/checkout-teste','GET',fixtureEnv,503],
+   ['maison-jf.com','/checkout-sucesso','GET',fixtureEnv,503],
    [preview,'/api/create-product-checkout-live','POST',fixtureEnv,503],
    [preview,'/api/create-checkout-test','GET',fixtureEnv,503],
    [preview,'/api/create-checkout-test','POST',{...fixtureEnv,MAISON_SANDBOX_ENABLED:'0'},503],
