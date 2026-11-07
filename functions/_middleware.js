@@ -43,8 +43,13 @@ export async function onRequest(context){
   const maintenancePath=maintenanceUrl.pathname;
   // Isolated sandbox: preview only, explicitly enabled, test key only.
   // Never opens the production site or production payment endpoints.
+  // Pages serves *.html at pretty URLs without the suffix; allow both forms.
   const sandboxMethods={
+    '/checkout-teste':['GET','HEAD'],
+    '/checkout-teste/':['GET','HEAD'],
     '/checkout-teste.html':['GET','HEAD'],
+    '/checkout-sucesso':['GET','HEAD'],
+    '/checkout-sucesso/':['GET','HEAD'],
     '/checkout-sucesso.html':['GET','HEAD'],
     '/api/create-checkout-test':['POST'],
     '/api/checkout-session-test':['GET','HEAD'],
