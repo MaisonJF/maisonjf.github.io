@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
+    <loc>https://maison-jf.com/</loc>
+    <image:image><image:loc>https://maison-jf.com/images/perf/home/hero-1672.webp</image:loc></image:image>
+    <image:image><image:loc>https://maison-jf.com/images/perf/home/casa-1080.webp</image:loc></image:image>
+    <image:image><image:loc>https://maison-jf.com/images/perf/home/corpo-1080.webp</image:loc></image:image>
+    <image:image><image:loc>https://maison-jf.com/images/perf/home/cabeca-1080.webp</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://maison-jf.com/portas/casa</loc>
     <image:image><image:loc>https://maison-jf.com/images/maison-jf-casa-amigos-hq.jpg</image:loc></image:image>
     <image:image><image:loc>https://maison-jf.com/images/cinematic/casa.avif</image:loc></image:image>
