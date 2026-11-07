@@ -133,6 +133,31 @@ body.maison-ivory :is(.vpc-progress__bar,.vpc-affinity__row>div){background:#d7c
 body.maison-ivory :is(.vpc-progress__bar span,.vpc-affinity__row i){background:#164b3f!important}
 body.maison-ivory :is(.vpc-result,.vpc-part,.vpc-service-hero){color:#211e1b!important}
 body.maison-ivory :is(input,textarea,select){color-scheme:light}
+/* Elegant editorial headlines must not collide on narrow viewports. */
+body.maison-ivory.catalogue-page .catalogue h1{
+  font-size:clamp(38px,6.7vw,82px)!important;
+  line-height:1.08!important;
+  letter-spacing:-.035em!important;
+  text-wrap:balance;
+  overflow-wrap:normal;
+}
+body.maison-ivory .ebooks>h1{
+  font-size:clamp(37px,5.6vw,66px)!important;
+  line-height:1.1!important;
+  letter-spacing:-.035em!important;
+  text-wrap:balance;
+}
+@media(max-width:600px){
+  body.maison-ivory.catalogue-page .catalogue h1{
+    font-size:clamp(34px,8.5vw,44px)!important;
+    line-height:1.15!important;
+    letter-spacing:-.025em!important;
+  }
+  body.maison-ivory .ebooks>h1{
+    font-size:clamp(33px,7.7vw,40px)!important;
+    line-height:1.12!important;
+  }
+}
 /* Light cards do not interfere with dark photographic lightboxes or PDF previews. */
 @media(max-width:700px){
   body.maison-ivory .site-header nav,
