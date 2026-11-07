@@ -67,7 +67,7 @@ export async function onRequestPost({request,env}){
     });
     const session=await stripeResponse.json().catch(()=>({}));
     if(!stripeResponse.ok||!session?.livemode||!session?.url){
-      return json({error:'Não foi possível iniciar o checkout.'},stripeResponse.status||502);
+      return json({error:'Não foi possível iniciar o checkout.'},stripeResponse.ok?502:stripeResponse.status);
     }
     return json({url:session.url});
   }catch(error){
