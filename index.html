@@ -71,6 +71,27 @@ footer{border-top:1px solid var(--line);padding:26px 24px;text-align:center;font
 @media(max-width:800px){.hero{grid-template-columns:1fr;min-height:0;gap:34px;padding:55px 0}.hero__media{max-height:390px;aspect-ratio:16/10}.hero__media img{object-position:center}.hero h1{font-size:clamp(40px,8vw,64px)}}
 @media(max-width:700px){.actions .button{width:100%;text-align:center}.actions{flex-direction:column}.lead{font-size:18px}nav{flex-direction:column;align-items:flex-start;gap:6px;padding:12px 18px}.links{width:100%;overflow-x:auto;flex-wrap:nowrap;gap:15px;white-space:nowrap;scrollbar-width:thin}.links a{min-height:44px;display:inline-flex;align-items:center}.hero{padding:48px 0}.grid{grid-template-columns:1fr}.card{min-height:0}.farol{grid-template-columns:1fr;text-align:center}.farol svg{margin:auto}.farol p{margin:auto}}
 @media(max-width:440px){.hero h1{font-size:clamp(38px,10.2vw,49px)}.hero__media{aspect-ratio:4/3}.card{padding:26px 20px}}
+
+/* MAISON JF® palette: a continuous ivory experience, not alternating dark pages. */
+:root{--bg:#f1eadf;--paper:#f8f3ea;--ink:#211e1b;--muted:#554c42;--gold:#94713c;--line:#d7c7b2;--emerald:#164b3f;--bordeaux:#602437}
+header{background:rgba(241,234,223,.98)}
+.button:hover,.button:focus-visible{background:var(--bordeaux);color:#fff}
+.eyebrow,.number{color:var(--gold)}
+.collection .card{border-color:var(--line);background:var(--paper)}
+.collection .card:focus-within{border-color:var(--emerald)}
+.signature__practice{border-left:3px solid var(--bordeaux)}
+.signature__statement .eyebrow{color:var(--bordeaux)}
+.closing .button:not(.secondary){background:var(--emerald);color:#fff}
+.closing .button:not(.secondary):hover{background:var(--bordeaux)}
+.orientation{background:var(--paper);color:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.orientation__brand{background:transparent}
+.orientation .eyebrow{color:var(--gold)}
+.orientation__copy>p,.orientation__tests p{color:var(--muted)}
+.orientation__primary{background:var(--bordeaux);color:#fff}
+.orientation__tests{border-top:1px solid var(--line)}
+.orientation__test-links a{border-color:var(--gold);color:var(--emerald)}
+.orientation__test-links a:hover,.orientation__test-links a:focus-visible{background:var(--emerald);border-color:var(--emerald);color:#fff;outline-color:var(--emerald)}
+.orientation__all-tests{color:var(--bordeaux)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style></head>
 <body><header><nav aria-label="Navegação principal"><a class="logo" href="#inicio">MAISON JF®</a><div class="links"><a href="./produtos/">Produtos</a><a href="./servicos/">Consultas</a><a href="./oraculo/">Oráculo</a><a href="./teste/">Testes gratuitos</a><a href="./ebooks/">Ebooks</a><a href="./farol/">O Farol</a></div></nav></header>
