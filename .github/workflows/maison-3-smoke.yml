@@ -14,6 +14,8 @@ jobs:
           node-version: '22'
       - name: Check internal links and supported locales
         run: node scripts/maison-3-smoke.cjs
+      - name: Check homepage, editorial and catalogue image performance budgets
+        run: node scripts/maison-performance-budget.cjs
       - name: Validate Vault v3 payload contract
         run: node .github/maison-growth/vault/validate_v3_payload_contract.mjs
       - name: Validate PDI registry
