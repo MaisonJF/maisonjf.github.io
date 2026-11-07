@@ -1,0 +1,131 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {onRequestPost as checkoutTest} from '../functions/api/create-checkout-test.js';
+import {onRequestGet as confirmTest} from '../functions/api/checkout-session-test.js';
+import {onRequestPost as checkoutEbook} from '../functions/api/create-checkout-live.js';
+import {onRequestGet as confirmEbook} from '../functions/api/checkout-session-live.js';
+import {onRequestGet as downloadEbook} from '../functions/api/ebook-download-live.js';
+import {onRequestPost as checkoutProduct} from '../functions/api/create-product-checkout-live.js';
+import {onRequestGet as confirmProduct} from '../functions/api/product-checkout-session-live.js';
+import {onRequestPost as checkoutPdi} from '../functions/api/create-pdi-checkout-live.js';
+
+const BASE='https://maison-jf.com';
+const request=(path,method='GET',body)=>new Request(BASE+path,{
+  method,headers:body===undefined?{}:{'content-type':'application/json'},
+  ...(body===undefined?{}:{body:JSON.stringify(body)})
+});
+const jsonResponse=(data,status=200)=>new Response(JSON.stringify(data),{
+  status,headers:{'content-type':'application/json'}
+});
+const testSession={
+ id:'cs_test_fixture123',livemode:false,status:'complete',payment_status:'paid',
+ amount_total:299,currency:'eur',created:Math.floor(Date.now()/1000),
+ customer_details:{email:'test@example.invalid',name:'Test Buyer'},
+ metadata:{environment:'maison-jf-sandbox',source:'site-cart-test',ebook_ids:'turista',has_physical:'0'}
+};
+const ebookSession={
+ id:'cs_live_fixture123',livemode:true,status:'complete',payment_status:'paid',
+ amount_total:299,currency:'eur',created:Math.floor(Date.now()/1000),
+ customer_details:{email:'test@example.invalid',name:'Test Buyer'},
+ metadata:{environment:'maison-jf-live',source:'ebooks-live',ebook_ids:'turista',ebook_locale:'pt-PT',expected_amount_total:'299',has_physical:'0'}
+};
+const physicalSession={
+ id:'cs_live_product123',livemode:true,status:'complete',payment_status:'paid',
+ amount_total:1990,currency:'eur',created:Math.floor(Date.now()/1000),
+ metadata:{environment:'maison-jf-live',source:'physical-product-live',product_items:'vela-vidro:1',
+ shipping_zone:'mainland',shipping_cents:'590'}
+};
+async function withStripeMock(session,callback,{capture=null}={}){
+ const previous=globalThis.fetch;
+ globalThis.fetch=async(url,options={})=>{
+   const target=String(url);
+   if(!target.startsWith('https://api.stripe.com/'))throw Error('Unexpected outgoing request: '+target);
+   if(capture)capture.push({url:target,method:options.method||'GET',body:String(options.body||'')});
+   if(target.endsWith('/v1/checkout/sessions')&&options.method==='POST'){
+     return jsonResponse({id:session.id,livemode:session.livemode,url:'https://checkout.stripe.com/c/pay/'+session.id});
+   }
+   if(target.includes('/v1/checkout/sessions/')&&(!options.method||options.method==='GET'))return jsonResponse(session);
+   throw Error('Unexpected Stripe API call: '+target);
+ };
+ try{return await callback()}finally{globalThis.fetch=previous}
+}
+test('test mode: cart → Stripe checkout → paid session confirmation, no external calls',async()=>{
+ const calls=[];
+ await withStripeMock(testSession,async()=>{
+   const created=await checkoutTest({request:request('/api/create-checkout-test','POST',{items:[{id:'turista',quantity:1}]}),env:{STRIPE_SECRET_KEY:'sk_test_fixture'}});
+   assert.equal(created.status,200);
+   assert.match((await created.json()).url,/^https:\/\/checkout\.stripe\.com/);
+   const verified=await confirmTest({request:request('/api/checkout-session-test?session_id=cs_test_fixture123'),env:{STRIPE_SECRET_KEY:'sk_test_fixture'}});
+   assert.equal(verified.status,200);
+   const result=await verified.json();
+   assert.equal(result.payment_status,'paid');
+   assert.deepEqual(result.ebook_ids,['turista']);
+   assert.equal(result.environment,'test');
+ },{capture:calls});
+ const payload=new URLSearchParams(calls[0].body);
+ assert.equal(payload.get('metadata[environment]'),'maison-jf-sandbox');
+ assert.equal(payload.get('metadata[ebook_ids]'),'turista');
+ assert.equal(payload.get('success_url'),BASE+'/checkout-sucesso.html?session_id={CHECKOUT_SESSION_ID}');
+});
+test('test mode: rejects live keys and unpaid ebook entitlement',async()=>{
+ let response=await checkoutTest({request:request('/api/create-checkout-test','POST',{items:[{id:'turista',quantity:1}]}),env:{STRIPE_SECRET_KEY:'sk_live_do_not_use'}});
+ assert.equal(response.status,503);
+ await withStripeMock({...testSession,payment_status:'unpaid'},async()=>{
+   response=await confirmTest({request:request('/api/checkout-session-test?session_id=cs_test_fixture123'),env:{STRIPE_SECRET_KEY:'sk_test_fixture'}});
+   assert.equal(response.status,200);
+   assert.deepEqual((await response.json()).ebook_ids,[]);
+ });
+});
+test('live ebook handlers (offline mock only): checkout → confirmed purchase → private PDF',async()=>{
+ const calls=[];
+ await withStripeMock(ebookSession,async()=>{
+   const created=await checkoutEbook({request:request('/api/create-checkout-live','POST',{items:[{id:'turista',quantity:1}],locale:'pt-PT'}),env:{STRIPE_LIVE_SECRET_KEY:'sk_live_mock_only'}});
+   assert.equal(created.status,200);
+   assert.ok((await created.json()).url);
+   const confirmed=await confirmEbook({request:request('/api/checkout-session-live?session_id=cs_live_fixture123'),env:{STRIPE_LIVE_SECRET_KEY:'sk_live_mock_only'}});
+   assert.equal(confirmed.status,200);
+   assert.deepEqual((await confirmed.json()).ebook_ids,['turista']);
+   const storage={get:async key=>({body:new Uint8Array([37,80,68,70]),writeHttpMetadata(){}})};
+   const download=await downloadEbook({request:request('/api/ebook-download-live?session_id=cs_live_fixture123&ebook=turista&format=pdf'),env:{STRIPE_LIVE_SECRET_KEY:'sk_live_mock_only',EBOOKS:storage}});
+   assert.equal(download.status,200);
+   assert.match(download.headers.get('content-disposition'),/O-Turista\.pdf/);
+ },{capture:calls});
+ assert.equal(new URLSearchParams(calls[0].body).get('metadata[source]'),'ebooks-live');
+});
+test('live ebook handlers deny unpaid, forged item and expired access',async()=>{
+ const storage={get:async()=>{throw Error('Storage must not be reached')}};
+ for(const [session,query,status] of [
+   [{...ebookSession,payment_status:'unpaid'},'ebook=turista',403],
+   [ebookSession,'ebook=meandros',403],
+   [{...ebookSession,created:Math.floor(Date.now()/1000)-8*86400},'ebook=turista',410],
+   [{...ebookSession,livemode:false},'ebook=turista',403]
+ ]){
+   await withStripeMock(session,async()=>{
+     const r=await downloadEbook({request:request('/api/ebook-download-live?session_id=cs_live_fixture123&format=pdf&'+query),env:{STRIPE_LIVE_SECRET_KEY:'sk_live_mock_only',EBOOKS:storage}});
+     assert.equal(r.status,status);
+   });
+ }
+});
+test('live physical flow (offline mock only): cart → Stripe → purchase confirmation',async()=>{
+ const captured=[];
+ await withStripeMock(physicalSession,async()=>{
+   const created=await checkoutProduct({request:request('/api/create-product-checkout-live','POST',{items:[{slug:'vela-vidro',quantity:1}],shipping_zone:'mainland',shipping_postal_code:'4000-123'}),env:{STRIPE_LIVE_SECRET_KEY:'sk_live_mock_only'}});
+   assert.equal(created.status,200);
+   const data=await created.json();
+   assert.equal(data.shipping_cents,590);
+   const confirmed=await confirmProduct({request:request('/api/product-checkout-session-live?session_id=cs_live_product123'),env:{STRIPE_LIVE_SECRET_KEY:'sk_live_mock_only'}});
+   assert.equal(confirmed.status,200);
+   assert.equal((await confirmed.json()).payment_status,'paid');
+ },{capture:captured});
+ const payload=new URLSearchParams(captured[0].body);
+ assert.equal(payload.get('metadata[product_items]'),'vela-vidro:1');
+ assert.equal(payload.get('shipping_options[0][shipping_rate_data][fixed_amount][amount]'),'590');
+});
+test('live physical: invalid shipping region rejected before contacting Stripe',async()=>{
+ const created=await checkoutProduct({request:request('/api/create-product-checkout-live','POST',{items:[{slug:'vela-vidro',quantity:1}],shipping_zone:'islands',shipping_postal_code:'4000-123'}),env:{STRIPE_LIVE_SECRET_KEY:'sk_live_mock_only'}});
+ assert.equal(created.status,400);
+});
+test('paid game endpoint refuses missing live key; no charges in test suite',async()=>{
+ const r=await checkoutPdi({request:request('/api/create-pdi-checkout-live','POST',{mode:'duo'}),env:{}});
+ assert.equal(r.status,503);
+});
