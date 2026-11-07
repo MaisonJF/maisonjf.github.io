@@ -1,0 +1,43 @@
+name: Checkout end-to-end simulation (no payments)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'functions/api/create-checkout-test.js'
+      - 'functions/api/checkout-session-test.js'
+      - 'functions/api/create-checkout-live.js'
+      - 'functions/api/checkout-session-live.js'
+      - 'functions/api/ebook-download-live.js'
+      - 'functions/api/create-product-checkout-live.js'
+      - 'functions/api/product-checkout-session-live.js'
+      - 'functions/api/create-pdi-checkout-live.js'
+      - 'functions/_lib/ebooks-live.js'
+      - 'scripts/checkout-e2e-simulated.test.mjs'
+      - '.github/workflows/checkout-e2e-simulated.yml'
+  push:
+    branches: [maison-3.0]
+    paths:
+      - 'functions/api/create-checkout-test.js'
+      - 'functions/api/checkout-session-test.js'
+      - 'functions/api/create-checkout-live.js'
+      - 'functions/api/checkout-session-live.js'
+      - 'functions/api/ebook-download-live.js'
+      - 'functions/api/create-product-checkout-live.js'
+      - 'functions/api/product-checkout-session-live.js'
+      - 'functions/api/create-pdi-checkout-live.js'
+      - 'functions/_lib/ebooks-live.js'
+      - 'scripts/checkout-e2e-simulated.test.mjs'
+      - '.github/workflows/checkout-e2e-simulated.yml'
+permissions:
+  contents: read
+jobs:
+  offline-checkout:
+    name: Simulate payment and delivery contracts without charges
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify checkout, session and private ebook access using local Stripe mocks
+        run: node --experimental-default-type=module --test scripts/checkout-e2e-simulated.test.mjs
