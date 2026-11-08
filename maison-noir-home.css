@@ -1,70 +1,42 @@
-/* MAISON JF® — Noir Couture homepage, 2026-11-08.
-   Scoped to homepage; preserves the approved Farol asset untouched.
-   High contrast, restrained turquoise conversion accents. */
-body.maison-noir{
- --bg:#080808;--paper:#151515;--ink:#F2E9DA;--muted:#DDD1BE;
- --gold:#C6A667;--line:#514638;--emerald:#064D3B;--bordeaux:#651C30;
- --maison-couture-ivory:#F2E9DA;--maison-couture-ink:#F2E9DA;
- --maison-couture-gold:#C6A667;--maison-couture-emerald:#064D3B;
- --maison-couture-bordeaux:#651C30;
- background:#080808!important;color:#F2E9DA!important;color-scheme:dark;
-}
-body.maison-noir main{background:#080808;color:#F2E9DA}
-body.maison-noir main :is(h1,h2,h3,h4){color:#F2E9DA!important}
-body.maison-noir main :is(p,li,blockquote){color:#DDD1BE}
-body.maison-noir main :is(.lead,.story p,.closing>p,.orientation__copy>p,.orientation__tests p,.signature__practice p,.card p,.home-offer p){color:#DDD1BE!important}
+/* MAISON JF® — Noir Couture | single-source homepage theme.
+   The image artwork is intentionally untouched. */
+:root{--bg:#080808;--paper:#080808;--ink:#F2E9DA;--muted:#F2E9DA;--gold:#C6A667;--line:#C6A667;--emerald:#064D3B;--bordeaux:#651C30}
+html{background:#080808}
+body.maison-noir{--bg:#080808;--paper:#080808;--ink:#F2E9DA;--muted:#F2E9DA;--gold:#C6A667;--line:#C6A667;background:#080808!important;color:#F2E9DA!important;color-scheme:dark}
+body.maison-noir :is(main,header,footer,section,article,.card,.home-offer,.signature__practice,.orientation__brand,.hero__media,.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.maison-commerce__books,.home-b2b){background-color:#080808!important;color:#F2E9DA!important;box-shadow:none!important}
+body.maison-noir main :is(h1,h2,h3,h4,h5,h6,p,li,blockquote,small,figcaption,strong,span:not(.eyebrow),.lead,.lede,.meta,.number,.story__copy p,.signature__practice p,.closing>p,.home-offer p,.home-products>p,.home-b2b>p,.orientation__copy>p,.orientation__tests p,.maison-commerce p,.maison-commerce__book-copy a){color:#F2E9DA!important;opacity:1!important;text-shadow:none!important}
 body.maison-noir main :is(.eyebrow,.number){color:#C6A667!important}
-body.maison-noir main :is(.hero,.story,.collection,.signature,.closing,.maison-commerce,.orientation,.home-products){background:#080808!important;border-color:#514638!important;color:#F2E9DA!important}
-body.maison-noir main :is(.card,.signature__practice,.home-offer,.maison-commerce article){background:#151515!important;border-color:#514638!important;color:#F2E9DA!important;box-shadow:none!important}
-body.maison-noir main .hero__media{background:#151515}
-body.maison-noir main :is(.card a,.signature a,.orientation__all-tests,.orientation__test-links a){color:#F2E9DA!important}
-body.maison-noir main :is(.orientation__test-links a,.button.secondary){border-color:#C6A667!important}
-body.maison-noir main .button,body.maison-noir main a.button:not(.secondary){background:#00A8B5!important;color:#080808!important;border:1px solid #00A8B5!important}
-body.maison-noir main .button.secondary,body.maison-noir main a.button.secondary{background:transparent!important;color:#F2E9DA!important;border:1px solid #C6A667!important}
-body.maison-noir main .button:hover,body.maison-noir main .button:focus-visible{background:#0A6B78!important;color:#fff!important;border-color:#0A6B78!important}
-body.maison-noir main :is(.orientation__brand,.orientation__brand a){background:#080808!important}
-body.maison-noir main .orientation__brand img{filter:none!important;box-shadow:none!important;transform:none!important}
-body.maison-noir main .signature__practice{border-left:3px solid #651C30!important}
-body.maison-noir main .home-products,body.maison-noir main .home-b2b{border-top:1px solid #514638!important}
-body.maison-noir main .home-products>p:not(.eyebrow){color:#DDD1BE!important}
-body.maison-noir main .home-b2b{background:#101c1a!important;border:1px solid #064D3B!important;color:#F2E9DA!important}
-body.maison-noir main .home-b2b :is(h2,p:not(.eyebrow)){color:#F2E9DA!important}
-body.maison-noir main .home-b2b .button.secondary{color:#F2E9DA!important}
-body.maison-noir .maison-global-header,body.maison-noir header.maison-global-header{background:rgba(8,8,8,.98)!important;border-color:#514638!important;color:#F2E9DA!important}
-body.maison-noir .maison-global-header .maison-global-header__brand,body.maison-noir .maison-global-header .maison-global-header__nav a{color:#F2E9DA!important}
-body.maison-noir .maison-global-header .maison-global-header__nav a:hover,body.maison-noir .maison-global-header .maison-global-header__nav a:focus-visible{color:#00A8B5!important}
+body.maison-noir main :is(section,.card,.home-offer,.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.signature__practice,.orientation__tests,.home-b2b){border-color:rgba(198,166,103,.65)!important}
+body.maison-noir main .home-offer{border:1px solid #C6A667!important;padding:28px 24px}
+body.maison-noir main .home-b2b{border:1px solid #C6A667!important;padding:clamp(36px,5vw,64px)!important}
+body.maison-noir main .maison-commerce__editions,body.maison-noir main .maison-commerce__tarot{border:1px solid #C6A667!important}
+body.maison-noir main .maison-commerce__book{border:1px solid rgba(198,166,103,.55)!important}
+body.maison-noir main .signature__practice{border-left:2px solid #C6A667!important}
+body.maison-noir main :is(.button,a.button,button[data-buy-ebook]){background:#00A8B5!important;color:#080808!important;border:1px solid #00A8B5!important;transition:background-color .2s ease,border-color .2s ease,color .2s ease}
+body.maison-noir main :is(.button,a.button,button[data-buy-ebook]):hover,body.maison-noir main :is(.button,a.button,button[data-buy-ebook]):focus-visible{background:#0A6B78!important;color:#fff!important;border-color:#0A6B78!important}
+body.maison-noir main :is(.button.secondary,a.button.secondary){background:#080808!important;color:#F2E9DA!important;border:1px solid #C6A667!important}
+body.maison-noir main :is(.button.secondary,a.button.secondary):hover{background:#0A6B78!important;color:#fff!important;border-color:#0A6B78!important}
+body.maison-noir main a:not(.button){color:#F2E9DA!important;text-underline-offset:4px}
+body.maison-noir main a:not(.button):hover{color:#00A8B5!important}
+body.maison-noir main .maison-commerce__book-copy a{display:inline-block;min-height:28px}
+body.maison-noir main .maison-commerce__tarot strong{color:#F2E9DA!important}
+body.maison-noir main .orientation__brand{align-self:center!important;min-height:0!important;overflow:hidden!important}
+body.maison-noir main .orientation__brand a{display:block!important;max-width:210px!important;width:100%!important;margin:auto!important}
+body.maison-noir main .orientation__brand img{display:block!important;width:100%!important;height:auto!important;max-height:290px!important;object-fit:contain!important;aspect-ratio:auto!important;filter:none!important;transform:none!important;box-shadow:none!important}
+body.maison-noir .maison-global-header,body.maison-noir header.maison-global-header{position:sticky!important;top:0;z-index:1100;display:flex!important;align-items:center!important;flex-wrap:nowrap!important;background:#080808!important;color:#F2E9DA!important;border-bottom:1px solid #C6A667!important;padding:0 clamp(12px,2vw,24px)!important}
+body.maison-noir .maison-global-header__inner{flex:1 1 auto!important;min-width:0!important;max-width:none!important;width:auto!important;margin:0!important;padding:12px 0!important;gap:clamp(10px,1.3vw,18px)!important}
+body.maison-noir .maison-global-header .maison-global-header__brand,body.maison-noir .maison-global-header .maison-global-header__brand span{color:#F2E9DA!important;opacity:1!important;letter-spacing:.12em!important}
+body.maison-noir .maison-global-header .maison-global-header__icon{display:block!important;width:38px!important;height:auto!important;max-height:48px!important;object-fit:contain!important;filter:none!important;transform:none!important;box-shadow:none!important}
+body.maison-noir .maison-global-header .maison-global-header__nav a{color:#F2E9DA!important}
 body.maison-noir .maison-global-header .maison-global-header__nav a[href^="/profissionais"]{color:#C6A667!important}
-body.maison-noir .maison-global-header__trigger{background:#151515!important;border-color:#C6A667!important;color:#F2E9DA!important}
-body.maison-noir .maison-global-header__trigger span{color:#C6A667!important}
-body.maison-noir .maison-global-header .maison-global-header__icon{filter:none!important;box-shadow:none!important}
-body.maison-noir footer{background:#080808!important;color:#F2E9DA!important;border-color:#514638!important}
-body.maison-noir footer a{color:#F2E9DA!important}
-body.maison-noir .maison-language-switcher{background:#080808!important;color:#F2E9DA!important}
-body.maison-noir .maison-language-switcher button{color:#F2E9DA!important;background:#151515!important;border-color:#514638!important}
-@media(max-width:980px){body.maison-noir .maison-global-header .maison-global-header__nav{background:#080808!important;border:1px solid #514638!important}}
-@media(prefers-reduced-motion:reduce){body.maison-noir *{scroll-behavior:auto!important}}
-
-/* Production contrast repair: override the earlier ivory declarations and inline rules. */
-html body.maison-ivory.maison-noir{background:#080808!important;color:#F2E9DA!important}
-html body.maison-ivory.maison-noir main :is(section,article,div){border-color:#514638}
-html body.maison-ivory.maison-noir main :is(.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.home-offer,.card,.signature__practice){background:#151515!important;color:#F2E9DA!important;border-color:#514638!important}
-html body.maison-ivory.maison-noir main :is(.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.home-offer,.card,.signature__practice) :is(h2,h3,h4,a:not(.button),p,span:not(.eyebrow)){color:#F2E9DA!important}
-html body.maison-ivory.maison-noir main :is(.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.home-offer,.card,.signature__practice) :is(p,small){color:#DDD1BE!important}
-html body.maison-ivory.maison-noir main :is(.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.home-offer,.card,.signature__practice) .eyebrow{color:#C6A667!important}
-html body.maison-ivory.maison-noir main :is(.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.home-offer,.card,.signature__practice) a:not(.button){text-decoration-color:#C6A667;text-underline-offset:4px}
-html body.maison-ivory.maison-noir main .maison-commerce__book button{background:#0A6B78!important;color:#fff!important;border:1px solid #00A8B5!important;min-height:44px}
-html body.maison-ivory.maison-noir main .maison-commerce__tarot strong{color:#F2E9DA!important}
-html body.maison-ivory.maison-noir main :is(.story p,.story__copy p,.closing>p,.home-offer p,.home-products>p,.signature__practice p,.orientation__copy>p,.orientation__tests p){color:#DDD1BE!important;opacity:1!important}
-html body.maison-ivory.maison-noir main .collection .card :is(h3,p,a){color:#F2E9DA!important}
-html body.maison-ivory.maison-noir main .collection .card p{color:#DDD1BE!important}
-html body.maison-ivory.maison-noir main .collection .card a{color:#F2E9DA!important}
-html body.maison-ivory.maison-noir main .orientation__brand{align-self:center!important;min-height:0!important;overflow:visible!important;background:#080808!important}
-html body.maison-ivory.maison-noir main .orientation__brand a{width:100%!important;max-width:210px!important;margin:auto!important;display:flex!important;align-items:center;justify-content:center}
-html body.maison-ivory.maison-noir main .orientation__brand img{display:block!important;width:100%!important;height:auto!important;max-height:280px!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;filter:none!important;box-shadow:none!important}
-html body.maison-ivory.maison-noir .maison-global-header .maison-global-header__brand,html body.maison-ivory.maison-noir .maison-global-header .maison-global-header__brand span{color:#F2E9DA!important;opacity:1!important}
-html body.maison-ivory.maison-noir footer,html body.maison-ivory.maison-noir footer :is(nav,a){background:#080808!important;color:#F2E9DA!important;opacity:1!important}
-html body.maison-ivory.maison-noir footer a:hover{color:#00A8B5!important}
-html body.maison-ivory.maison-noir .maison-language-switcher{background:#080808!important;color:#F2E9DA!important;border-color:#514638!important}
-html body.maison-ivory.maison-noir .maison-language-switcher :is(a,button){color:#F2E9DA!important}
-html body.maison-ivory.maison-noir .maison-language-switcher :is(a,button)[aria-current="true"]{color:#080808!important;background:#00A8B5!important}
-@media(max-width:800px){html body.maison-ivory.maison-noir main .orientation__brand img{max-height:220px!important}}
+body.maison-noir .maison-global-header__trigger{background:#080808!important;color:#F2E9DA!important;border-color:#C6A667!important}
+body.maison-noir .maison-global-header .maison-language-switcher{position:static!important;display:flex!important;flex:0 0 auto!important;align-items:center!important;justify-content:flex-end!important;gap:3px!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important;background:#080808!important;border:0!important;box-shadow:none!important}
+body.maison-noir .maison-global-header .maison-language-switcher a{min-width:33px!important;min-height:38px!important;padding:6px!important;border:1px solid transparent!important;background:#080808!important;color:#F2E9DA!important;font-size:11px!important}
+body.maison-noir .maison-global-header .maison-language-switcher a[aria-current="page"]{color:#080808!important;background:#00A8B5!important;border-color:#00A8B5!important}
+body.maison-noir footer,body.maison-noir footer :is(nav,a){background:#080808!important;color:#F2E9DA!important;opacity:1!important}
+body.maison-noir footer{border-top:1px solid #C6A667!important}
+body.maison-noir footer a:hover{color:#00A8B5!important}
+@media(max-width:1100px){body.maison-noir .maison-global-header__inner{gap:8px!important}body.maison-noir .maison-global-header .maison-global-header__brand{font-size:12px!important;letter-spacing:.07em!important}body.maison-noir .maison-global-header .maison-global-header__nav{gap:2px 8px!important}}
+@media(max-width:980px){body.maison-noir .maison-global-header__inner{flex:1!important}body.maison-noir .maison-global-header .maison-global-header__nav{position:absolute!important;top:100%!important;right:12px!important;width:min(540px,calc(100vw - 24px))!important;background:#080808!important;border:1px solid #C6A667!important}body.maison-noir .maison-global-header .maison-language-switcher a{min-width:30px!important}}
+@media(max-width:540px){body.maison-noir .maison-global-header{padding:0 8px!important}body.maison-noir .maison-global-header__inner{padding:9px 0!important}body.maison-noir .maison-global-header .maison-global-header__brand span{font-size:11px!important}body.maison-noir .maison-global-header .maison-global-header__icon{width:29px!important}body.maison-noir .maison-global-header__trigger{min-width:65px!important;padding:8px!important;font-size:11px!important}body.maison-noir .maison-global-header .maison-language-switcher{gap:0!important}body.maison-noir .maison-global-header .maison-language-switcher a{min-width:26px!important;padding:4px!important;font-size:10px!important}body.maison-noir main .orientation__brand img{max-height:210px!important}}
+@media(prefers-reduced-motion:reduce){body.maison-noir *{transition:none!important;scroll-behavior:auto!important}}
