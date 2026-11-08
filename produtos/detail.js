@@ -79,6 +79,7 @@
     </section>`: '';
 
   page.innerHTML=`
+    ${pt?'<aside class="maison-photo-notice" role="status"><strong>Estamos a renovar a nossa montra.</strong><p>O site está a ser actualizado. As fotografias dos produtos da nova colecção serão disponibilizadas brevemente.</p></aside>':''}
     <section class="product-hero ${hero?'':'product-hero--no-media'}">
       ${hero?`<div class="media-slot media-slot--${hero.aspect||'portrait'} product-hero__media ${hero.editorial?'product-hero__media--editorial':''}">
         <img src="${mediaSrc(hero.src)}" alt="${hero.alt||p.name}">
