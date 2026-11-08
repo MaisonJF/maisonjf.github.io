@@ -3003,6 +3003,32 @@ const MAISON_B2B_FORM={
     "Preparar mensagem para maisonjf@proton.me": "Preparar email para maisonjf@proton.me"
   }
 };
+const MAISON_B2B_APPLICATION={
+  "pt-BR": {
+    "Email profissional": "Email profissional",
+    "nome@empresa.pt": "nome@empresa.com",
+    "Autorizo a MAISON JF® a guardar os dados desta candidatura para me contactar sobre o pedido. O acesso é reservado, os dados não entram na telemetria e são conservados até 90 dias.": "Autorizo a MAISON JF® a guardar os dados desta candidatura para entrar em contato sobre o pedido. O acesso é restrito, os dados não são enviados à telemetria e são mantidos por até 90 dias.",
+    "ENVIAR CANDIDATURA PROFISSIONAL": "ENVIAR CANDIDATURA PROFISSIONAL",
+    "O pedido é guardado separadamente dos eventos analíticos, num registo de acesso restrito. Podes solicitar acesso, correção ou apagamento através do contacto da Maison. Não partilhamos os teus dados com revendedores.": "O pedido é guardado separadamente dos eventos analíticos, em um registro de acesso restrito. Você pode solicitar acesso, correção ou exclusão pelo contato da Maison. Não compartilhamos seus dados com revendedores.",
+    "Preferes escrever-nos diretamente?": "Prefere nos escrever diretamente?"
+  },
+  "en": {
+    "Email profissional": "Business email",
+    "nome@empresa.pt": "name@company.com",
+    "Autorizo a MAISON JF® a guardar os dados desta candidatura para me contactar sobre o pedido. O acesso é reservado, os dados não entram na telemetria e são conservados até 90 dias.": "I authorise MAISON JF® to store the details of this enquiry to contact me about my request. Access is restricted, the details do not enter analytics and are retained for up to 90 days.",
+    "ENVIAR CANDIDATURA PROFISSIONAL": "SEND BUSINESS ENQUIRY",
+    "O pedido é guardado separadamente dos eventos analíticos, num registo de acesso restrito. Podes solicitar acesso, correção ou apagamento através do contacto da Maison. Não partilhamos os teus dados com revendedores.": "The enquiry is stored separately from analytics events in a restricted-access record. You may request access, correction or erasure by contacting the Maison. We do not share your details with resellers.",
+    "Preferes escrever-nos diretamente?": "Prefer to email us directly?"
+  },
+  "es": {
+    "Email profissional": "Email profesional",
+    "nome@empresa.pt": "nombre@empresa.com",
+    "Autorizo a MAISON JF® a guardar os dados desta candidatura para me contactar sobre o pedido. O acesso é reservado, os dados não entram na telemetria e são conservados até 90 dias.": "Autorizo a MAISON JF® a guardar los datos de esta solicitud para contactar conmigo. El acceso es restringido, los datos no se incorporan a la telemetría y se conservan hasta 90 días.",
+    "ENVIAR CANDIDATURA PROFISSIONAL": "ENVIAR SOLICITUD PROFESIONAL",
+    "O pedido é guardado separadamente dos eventos analíticos, num registo de acesso restrito. Podes solicitar acesso, correção ou apagamento através do contacto da Maison. Não partilhamos os teus dados com revendedores.": "La solicitud se guarda aparte de los eventos analíticos, en un registro de acceso restringido. Puedes solicitar acceso, rectificación o eliminación contactando con la Maison. No compartimos tus datos con revendedores.",
+    "Preferes escrever-nos diretamente?": "¿Prefieres escribirnos directamente?"
+  }
+};
 const PAGE_MAP={
   '/':mergeV3(mergeV3(mergeV3(mergeV3(HOME,HOME_V3),HOME_YOICHI),HOME_FREE_TESTS),MAISON_HOME_CONVERSION),
   '/farol':FAROL,
@@ -3035,7 +3061,7 @@ const PAGE_MAP={
   '/contacto/':CONTACT,
   '/presentes/':SIMPLE_PUBLIC,
   '/press/':SIMPLE_PUBLIC,
-  '/profissionais/':mergeV3(PROFESSIONALS,MAISON_B2B_FORM),
+  '/profissionais/':mergeV3(mergeV3(PROFESSIONALS,MAISON_B2B_FORM),MAISON_B2B_APPLICATION),
   '/profissionais/teste/':PROFESSIONALS,
   '/respostas/':FAROL,
   '/sos/':SOS_COPY,
