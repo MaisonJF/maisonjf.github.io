@@ -16,8 +16,8 @@ test('Eight principal pages use identical semantic canonical navigation, desktop
     const part=s.match(/<header\b[\s\S]*?<\/header>/i)?.[0];
     assert.ok(part,page+' missing header');
     assert.match(part,/class="site-header maison-global-header"/);
-    assert.match(part,/<details class="maison-global-header__menu">/);
-    assert.match(part,/<summary aria-label="Abrir navegação principal">Menu<\/summary>/);
+    assert.match(part,/<input class="maison-global-header__checkbox" id="maison-mobile-menu" type="checkbox" aria-label="Mostrar navegação">/);
+    assert.match(part,/<label class="maison-global-header__trigger" for="maison-mobile-menu">Menu/);
     assert.match(part,/<nav class="maison-global-header__nav" id="main-navigation" aria-label="Navegação principal">/);
     for(const route of routes)assert.ok(part.includes('href="'+route+'"'),page+' missing '+route);
     const normalized=part.replace(/\s+/g,' ').trim();
@@ -33,6 +33,15 @@ test('Legacy analytics must not rewrite canonical menu or append duplicate hambu
   const source=read('analytics.js');
   assert.match(source,/if \(header\.classList\.contains\('maison-global-header'\)\) return;/);
   assert.match(source,/if \(header && !header\.classList\.contains\('maison-global-header'\)\) \{/);
+});
+
+test('Canonical navigation displays on desktop, and collapses only via explicit mobile CSS',()=>{
+  const css=read('maison-canonical.css');
+  assert.match(css,/\.maison-global-header \.maison-global-header__nav\{/);
+  assert.match(css,/display:flex!important/);
+  assert.match(css,/@media\(max-width:980px\)/);
+  assert.match(css,/\.maison-global-header__checkbox:checked ~ \.maison-global-header__nav\{/);
+  assert.ok(!read('index.html').includes('<details class="maison-global-header__menu">'));
 });
 
 test('B2B form uses existing telemetry endpoint without leaking personal data',()=>{
