@@ -50,3 +50,30 @@ body .maison-global-header__nav a[href^="/profissionais"]{color:#F2E9DA!importan
 body footer,body footer :is(nav,a){background-color:#080808!important;color:#F2E9DA!important}
 @media(max-width:700px){body .maison-global-header__icon{width:30px!important}body :is(p,li,figcaption){font-size:max(16px,1em)}}
 @media(prefers-reduced-motion:reduce){body *{transition:none!important}}
+
+
+/* Product couture decision template: noir, readable, compact mobile. */
+body .product-page .product-hero{background:#080808!important;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(24px,4vw,70px);padding-block:clamp(36px,6vw,80px)}
+body .product-page .product-hero__copy{min-width:0;color:#F2E9DA!important}
+body .product-page .product-hero__copy h1{color:#F2E9DA!important}
+body .product-page .couture-tag{display:inline-flex;padding:7px 11px;border:1px solid #651C30;color:#F2E9DA!important;font-size:11px;letter-spacing:.12em}
+body .product-page .couture-tag--emerald{border-color:#064D3B}
+body .product-page .couture-hook{font-family:var(--serif,Georgia,serif);font-size:clamp(22px,2.6vw,36px);line-height:1.16;color:#F2E9DA!important;margin:18px 0}
+body .product-page .couture-description{color:#F2E9DA!important;line-height:1.55}
+body .product-page .couture-delivery{border-top:1px solid #064D3B;border-bottom:1px solid #064D3B;padding:16px 0;margin:22px 0;color:#F2E9DA}
+body .product-page .couture-delivery strong{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#C6A667}
+body .product-page .couture-delivery ul{margin:10px 0 0;padding-left:20px}
+body .product-page .couture-delivery li{margin:6px 0;line-height:1.45}
+body .product-page .product-price{color:#F2E9DA!important;font-size:clamp(27px,3vw,42px);margin:14px 0}
+body .product-page .product-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+body .product-page .couture-buy{background:#00A8B5!important;color:#080808!important;border-color:#00A8B5!important;font-weight:700;min-height:50px;white-space:normal;text-align:center}
+body .product-page .product-hero__media img{display:block;width:100%;height:100%;object-fit:cover;filter:none!important}
+body .product-page :is(.couture-notes,.couture-faq){background:#080808!important;color:#F2E9DA!important;border-top:1px solid #651C30;padding:clamp(28px,4vw,52px) 0}
+body .product-page .couture-kicker{color:#C6A667!important;letter-spacing:.15em;text-transform:uppercase;font-size:12px}
+body .product-page .couture-notes dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+body .product-page .couture-notes dt{color:#C6A667!important;font-size:12px;text-transform:uppercase}
+body .product-page .couture-notes dd{margin:8px 0 0;color:#F2E9DA!important}
+body .product-page .couture-faq details{border-bottom:1px solid #064D3B;padding:15px 0}
+body .product-page .couture-faq summary{cursor:pointer;color:#F2E9DA!important}
+body .product-page .couture-faq a{color:#00A8B5!important}
+@media(max-width:760px){body .product-page .product-hero{grid-template-columns:1fr;padding-top:18px;gap:18px}body .product-page .product-hero__media{max-height:52svh}body .product-page .product-hero__copy h1{font-size:clamp(35px,9vw,54px)}body .product-page .couture-hook{font-size:24px}body .product-page .couture-buy{width:100%}body .product-page .couture-notes dl{grid-template-columns:1fr}}
