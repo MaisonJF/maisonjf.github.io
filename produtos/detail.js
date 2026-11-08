@@ -83,6 +83,7 @@
       ${hero?`<div class="media-slot media-slot--${hero.aspect||'portrait'} product-hero__media ${hero.editorial?'product-hero__media--editorial':''}">
         <img src="${mediaSrc(hero.src)}" alt="${hero.alt||p.name}">
       </div>`:''}
+      ${!hero?'<div class="maison-photo-pending maison-photo-pending--detail" role="note"><span>Estamos a actualizar o site com as fotografias dos produtos da nova colecção.</span></div>':''}
       <div class="product-hero__copy">
         <p class="eyebrow couture-tag couture-tag--${categoryTone}">${escapeHtml(p.category)} · CURADORIA MAISON JF®</p>
         <h1>${p.name}${p.size?` <span style="font-size:.35em">${p.size}</span>`:''}</h1>
