@@ -190,3 +190,10 @@ body.maison-ivory .pro-lead-form__status[data-state="error"]{color:#602437!impor
  .maison-global-header__checkbox:checked ~ .maison-global-header__nav{display:grid!important}
 }
 @media(max-width:480px){.maison-global-header__inner{width:calc(100% - 28px)}}
+
+/* Production header repair: preserve official SVG proportions and avoid clipped language bar. */
+.maison-global-header{overflow:visible!important}
+.maison-global-header .maison-global-header__icon{width:38px!important;height:40px!important;max-width:none!important;object-fit:contain!important;object-position:center!important;aspect-ratio:38/40;filter:none!important;transform:none!important;image-rendering:auto!important}
+.maison-global-header .maison-global-header__brand{flex-shrink:0}
+.maison-global-header .maison-language-switcher{box-sizing:border-box}
+@media(max-width:480px){.maison-global-header .maison-global-header__icon{width:30px!important;height:32px!important;aspect-ratio:30/32}}
