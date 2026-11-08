@@ -75,6 +75,47 @@
  .maison-global-header__checkbox:checked ~ .maison-global-header__nav{grid-template-columns:1fr!important}
  .maison-global-header__brand{font-size:13px!important}
 }
+/* Original, owner-supplied Farol monogram. Do not generate substitutes. */
+.maison-global-header .maison-global-header__brand::before{
+ content:"";display:inline-block!important;flex:0 0 38px;
+ width:38px;height:40px;margin-right:10px;
+ background:url('/assets/brand/maison-jf-farol-monograma-oficial.svg') center / contain no-repeat!important;
+}
+@media(max-width:480px){.maison-global-header .maison-global-header__brand::before{width:30px;height:32px;flex-basis:30px;margin-right:7px}}
+/* Two commercial paths on the first screen, without burying all other universes. */
+.maison-commerce{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.85fr);gap:18px;margin:0;padding:24px 0 32px;border-top:1px solid #d7c7b2}
+.maison-commerce__editions,.maison-commerce__tarot{min-width:0;padding:24px;background:#f8f3ea;border:1px solid #d7c7b2}
+.maison-commerce__editions{border-left:3px solid #94713c}
+.maison-commerce__tarot{border-left:3px solid #602437;display:flex;flex-direction:column;align-items:flex-start}
+.maison-commerce h2{color:#211e1b;font-size:clamp(27px,2.4vw,37px);line-height:1.1;margin:8px 0 10px;text-wrap:balance}
+.maison-commerce p{color:#554c42;line-height:1.45;margin:0 0 14px}
+.maison-commerce__books{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+.maison-commerce__book{display:flex;align-items:center;gap:11px;min-width:0;min-height:112px;padding:9px;border:1px solid #d7c7b2;background:#fffdf8}
+.maison-commerce__book img{display:block;width:64px;height:94px;flex:0 0 64px;object-fit:contain;background:#f4eee5}
+.maison-commerce__book-copy{min-width:0;display:grid;gap:6px;align-items:start}
+.maison-commerce__book h3{font:600 14px/1.3 Georgia,serif;margin:0;color:#211e1b}
+.maison-commerce__book a{font-size:13px;color:#211e1b;text-underline-offset:3px}
+.maison-commerce__book button{
+ display:inline-flex;align-items:center;justify-content:center;min-height:36px;
+ width:max-content;max-width:100%;padding:8px 11px;background:#164b3f;border:1px solid #164b3f;
+ color:#fff;font:700 12px/1.1 Arial,sans-serif;cursor:pointer
+}
+.maison-commerce__book button:hover,.maison-commerce__book button:focus-visible{background:#602437;border-color:#602437}
+.maison-commerce__tarot strong{display:block;font-size:30px;color:#602437;margin:8px 0}
+.maison-commerce__tarot .button{margin-top:auto;background:#602437;color:#fff;min-height:48px}
+.maison-commerce__tarot .button:hover{background:#164b3f;color:#fff}
+.maison-commerce__viewall{display:inline-flex;align-items:center;min-height:44px;margin-top:5px;color:#164b3f;font-weight:700;font-size:13px;text-underline-offset:5px}
+.maison-commerce__status{display:block;min-height:1.2em;font-size:13px;color:#602437;line-height:1.3}
+@media(max-width:980px){.maison-commerce{grid-template-columns:1fr}.maison-commerce__tarot{min-height:220px}}
+@media(max-width:520px){
+ .maison-commerce{padding:16px 0 22px;gap:12px}
+ .maison-commerce__editions,.maison-commerce__tarot{padding:16px}
+ .maison-commerce__books{grid-template-columns:1fr}
+ .maison-commerce__book{min-height:100px}
+ .maison-commerce__book img{width:56px;height:82px;flex-basis:56px}
+ .maison-commerce__book button{min-height:44px}
+ .maison-commerce__tarot .button{width:100%;min-height:50px}
+}
 /* B2B: preserve authored visuals, lift entire page onto Maison ivory palette. */
 body.maison-ivory .pro{padding-top:clamp(34px,5vw,75px);padding-bottom:70px;}
 body.maison-ivory .pro-hero{gap:clamp(24px,4vw,58px);align-items:center;}
