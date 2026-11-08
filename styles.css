@@ -3032,3 +3032,9 @@ body{background:var(--maison-noir);color:var(--maison-ivory)}
 .maison-consent button[data-consent="granted"]{background:var(--maison-gold);color:var(--maison-noir)}
 .maison-consent-settings{color:var(--maison-gold)}
 a:focus-visible,button:focus-visible{outline:1px solid var(--maison-gold)!important;outline-offset:4px!important}
+
+/* Dark design-system text: remove faint secondary copy without recoloring surfaces. */
+:root{--marfim-escuro:#f5f5f5;--marfim-dim:#f5f5f5;--texto-secundario:#f5f5f5;--texto-terciario:#f5f5f5}
+body:not(.maison-ivory){line-height:1.6}
+body:not(.maison-ivory) :is(p,li,figcaption){line-height:1.6}
+@media(max-width:700px){body:not(.maison-ivory) :is(p,li,figcaption){font-size:max(16px,1em)}}
