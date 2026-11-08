@@ -91,3 +91,5 @@ html body.maison-ivory .product-page .product-actions .text-link{color:#F2E9DA!i
 html body.maison-ivory .product-page .product-hero__media{max-height:min(72vh,740px);overflow:hidden}
 html body.maison-ivory .product-page .product-hero__media img{object-fit:contain!important;max-height:min(72vh,740px)}
 @media(max-width:760px){html body.maison-ivory .product-page .product-hero__media{max-height:48svh}html body.maison-ivory .product-page .product-hero__media img{max-height:48svh}html body.maison-ivory .product-page .product-hero__copy h1{font-size:clamp(36px,9vw,54px)!important}}
+
+body .maison-photo-pending--detail{min-height:clamp(260px,45vw,560px);display:grid;place-items:center;background:#080808!important;border:1px solid rgba(198,166,103,.45);padding:30px;text-align:center}body .maison-photo-pending--detail span{color:#F2E9DA!important;max-width:300px;font-size:clamp(16px,2vw,21px);line-height:1.55}
