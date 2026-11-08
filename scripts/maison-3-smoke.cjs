@@ -15,7 +15,10 @@ for(const page of pages){
   if(href.includes('${'))continue; // template expressions are runtime paths
   const clean=href.split(/[?#]/)[0];
   if(!clean||/\.(?:css|js|png|jpe?g|webp|svg|ico|woff2?)$/i.test(clean))continue;
-  const resolved=path.resolve(path.dirname(path.join(root,page)),decodeURIComponent(clean));
+  // Canonical navigation uses valid same-origin absolute paths (root-relative).
+  const resolved=clean.startsWith('/')
+    ? path.resolve(root,'.'+decodeURIComponent(clean))
+    : path.resolve(path.dirname(path.join(root,page)),decodeURIComponent(clean));
   if(!resolved.startsWith(root+path.sep)&&resolved!==root){errors.push(page+': path escapes root: '+href);continue;}
   if(!fs.existsSync(resolved)&&!fs.existsSync(resolved+'.html')&&!fs.existsSync(path.join(resolved,'index.html'))){
    errors.push(page+': missing local destination '+href);
