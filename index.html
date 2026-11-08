@@ -135,6 +135,13 @@ main p,main li,main figcaption{line-height:1.6}
 main :is(.button,button,[role=button]){min-height:48px;min-width:48px}
 main :is(.hero,.grid,.story,.signature,.collection,.card){min-width:0}
 @media(max-width:700px){main{padding-inline:clamp(16px,5vw,24px)}main :is(p,li,figcaption){font-size:max(16px,1em)}main img{height:auto}}
+/* Homepage repair: readable text, visible hero and responsive header. */
+body.maison-ivory main :is(.maison-commerce p,.maison-commerce .eyebrow,.maison-commerce__book-copy,.lead,.story p,.card p){color:#111111!important}
+body.maison-ivory main .maison-commerce .eyebrow{color:#715020!important}
+body.maison-ivory main .hero{display:grid!important;visibility:visible!important;opacity:1!important;min-height:clamp(440px,64svh,720px)!important;align-items:center!important;grid-template-columns:minmax(0,1fr) minmax(0,.86fr)!important}
+body.maison-ivory main .hero__copy,body.maison-ivory main .hero__media{display:block!important;visibility:visible!important;opacity:1!important;min-width:0!important}
+body.maison-ivory main .hero__media img{display:block!important;width:100%!important;height:auto!important;object-fit:contain!important}
+@media(max-width:800px){body.maison-ivory main .hero{grid-template-columns:1fr!important;min-height:0!important;padding:48px 0!important}}
 </style><link rel="stylesheet" href="/maison-ivory.css?v=20261107" /><link rel="stylesheet" href="/maison-canonical.css?v=20261108" /></head>
 <body class="maison-ivory"><header class="site-header maison-global-header" id="header">
   <div class="maison-global-header__inner">
@@ -163,11 +170,11 @@ main :is(.hero,.grid,.story,.signature,.collection,.card){min-width:0}
   </div>
   <picture class="hero__media"><source type="image/webp" srcset="./images/perf/home/hero-640.webp 640w, ./images/perf/home/hero-960.webp 960w, ./images/perf/home/hero-1280.webp 1280w, ./images/perf/home/hero-1672.webp 1672w" sizes="(max-width:800px) 100vw, 44vw"><img src="./images/maison-jf-hero-hq.jpg" width="1672" height="1254" loading="eager" decoding="async" fetchpriority="high" alt="Atmosfera intimista e sensorial MAISON JF®"></picture>
 </section>
-<section class="maison-commerce" id="comprar" aria-label="Ebooks e consulta de Tarot">
+<section class="maison-commerce" id="comprar" aria-label="Edições digitais e consulta de Tarot">
   <div class="maison-commerce__editions">
     <span class="eyebrow">ÉDITIONS · LIVROS DIGITAIS</span>
     <h2>Histórias para quem não vira a página à primeira.</h2>
-    <p>Quatro edições de autor. Vê o preço, escolhe o livro e compra sem percursos desnecessários. Acesso privado após confirmação do pagamento.</p>
+    <p>Descobre as edições de autor disponíveis. Escolhe a tua próxima leitura e compra diretamente, sem percursos desnecessários. Acesso privado após confirmação do pagamento.</p>
     <div class="maison-commerce__books">
       <article class="maison-commerce__book">
         <img src="/images/ebooks/o-turista.webp" width="64" height="94" loading="lazy" decoding="async" alt="Capa de O Turista">
