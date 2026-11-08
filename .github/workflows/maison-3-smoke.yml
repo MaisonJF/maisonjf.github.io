@@ -18,6 +18,8 @@ jobs:
         run: node scripts/maison-performance-budget.cjs
       - name: Guard Maison official Farol, free tests, visual system and all languages
         run: node --experimental-default-type=module --test scripts/home-editorial-localization.test.mjs
+      - name: Guard canonical navigation, B2B flow, privacy and responsive imagery
+        run: node --experimental-default-type=module --test scripts/canonical-navigation-b2b.test.mjs
       - name: Validate Vault v3 payload contract
         run: node .github/maison-growth/vault/validate_v3_payload_contract.mjs
       - name: Validate PDI registry
