@@ -92,6 +92,41 @@ header{background:rgba(241,234,223,.98)}
 .orientation__test-links a{border-color:var(--gold);color:var(--emerald)}
 .orientation__test-links a:hover,.orientation__test-links a:focus-visible{background:var(--emerald);border-color:var(--emerald);color:#fff;outline-color:var(--emerald)}
 .orientation__all-tests{color:var(--bordeaux)}
+/* Desktop editorial compression: preserve original photography, remove empty vertical space. */
+.hero__media{aspect-ratio:auto!important;max-height:none!important;overflow:visible!important;background:transparent!important}
+.hero__media img{width:100%;height:auto!important;max-height:470px;object-fit:contain!important}
+.collection .card__image{width:100%;height:auto!important;max-height:280px;aspect-ratio:auto!important;object-fit:contain!important;background:transparent}
+.collection .card--editions .card__image{height:auto!important;object-fit:contain!important;max-height:280px;background:transparent!important}
+@media(min-width:981px){
+ .hero{min-height:0!important;padding:clamp(24px,3vw,48px) 0 42px!important;gap:clamp(22px,3vw,45px)!important}
+ .hero h1{font-size:clamp(43px,4.7vw,69px)!important;line-height:1.06!important}
+ .hero__media img{max-height:390px}
+ .story{grid-template-columns:minmax(135px,.4fr) minmax(0,1.65fr);gap:24px;padding:45px 0!important}
+ .story h2{font-size:clamp(34px,4vw,54px);margin-bottom:18px}
+ .story p{font-size:17px!important;line-height:1.55!important;margin-bottom:12px!important}
+ .orientation{grid-template-columns:minmax(130px,.3fr) minmax(0,1fr);gap:30px!important;padding:32px 38px!important}
+ .orientation__brand a{max-width:160px!important}
+ .orientation__copy h2{font-size:clamp(30px,3.3vw,46px);margin:10px 0 12px!important}
+ .orientation__copy>p{font-size:17px;margin-bottom:16px!important;line-height:1.5!important}
+ .orientation__tests{margin-top:20px!important;padding-top:16px!important}
+ .orientation__tests h3{font-size:25px!important;margin:8px 0!important}
+ .orientation__tests p{margin-bottom:12px!important}
+ .collection{padding:45px 0!important}
+ .collection .grid{margin-top:18px!important;gap:15px!important}
+ .collection .card{padding:18px 18px 22px!important}
+ .collection .card h3{min-height:0!important;margin:10px 0!important;font-size:26px!important}
+ .collection .card p{line-height:1.48!important;margin-bottom:12px!important}
+ .signature{padding:45px 0!important;gap:30px!important}
+ .signature h2{font-size:clamp(35px,4vw,55px)!important;margin:17px 0!important}
+ .signature__practice{padding:24px!important}
+ .closing{padding:50px 0 70px!important}
+ .closing h2{font-size:clamp(37px,4vw,55px)!important}
+}
+@media(max-width:800px){
+ .hero__media{aspect-ratio:auto!important;max-height:none!important}
+ .hero__media img{max-height:390px}
+ .collection .card__image{max-height:320px}
+}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style><link rel="stylesheet" href="/maison-ivory.css?v=20261107" /><link rel="stylesheet" href="/maison-canonical.css?v=20261108" /></head>
 <body class="maison-ivory"><header class="site-header maison-global-header" id="header">
@@ -117,17 +152,17 @@ header{background:rgba(241,234,223,.98)}
   <div class="hero__copy">
     <div class="eyebrow">MAISON JF® · CASA / CORPO / MENTE</div>
     <h1 id="home-title">NÃO PRECISAS DE MAIS COISAS.<br>PRECISAS DAS CERTAS.</h1>
-    <p class="lead">Uma curadoria intencional de perfumaria de autor, literatura autoral e rituais sensoriais. Para quem compreende que o verdadeiro luxo é a ausência de excesso.</p>
-    <div class="actions"><a class="button" href="./produtos/">DESCOBRIR A COLEÇÃO</a></div>
+    <p class="lead">Aromas de autor, rituais sensoriais e literatura original de João Fädário. Não para acumular. Para escolher com intenção.</p>
+    <div class="actions"><a class="button" href="./produtos/">DESCOBRIR A COLEÇÃO</a><a class="button secondary" href="./teste/">FAZER UM TESTE GRATUITO</a></div>
   </div>
   <picture class="hero__media"><source type="image/webp" srcset="./images/perf/home/hero-640.webp 640w, ./images/perf/home/hero-960.webp 960w, ./images/perf/home/hero-1280.webp 1280w, ./images/perf/home/hero-1672.webp 1672w" sizes="(max-width:800px) 100vw, 44vw"><img src="./images/maison-jf-hero-hq.jpg" width="1672" height="1254" loading="eager" decoding="async" fetchpriority="high" alt="Atmosfera intimista e sensorial MAISON JF®"></picture>
 </section>
 <section class="story" id="maison" aria-labelledby="story-heading">
   <div class="eyebrow">A EXPERIÊNCIA</div>
   <div class="story__copy">
-    <h2 id="story-heading">Uma experiência não se explica.<br>Sente-se.</h2>
-    <p>Sabes perfeitamente o momento em que um espaço perde a sua alma. Quando os aromas são indistintos, as histórias se tornam previsíveis e a rotina consome o mistério.</p>
-    <p>A MAISON JF® existe no limiar entre a memória e a provocação. Formulamos fragrâncias, desenvolvemos objetos e publicamos histórias de autor para devolver densidade aos teus dias. Não procuramos agradar a todos. Apenas a quem reconhece o detalhe.</p>
+    <h2 id="story-heading">Há dias em que tens tudo.<br>E falta qualquer coisa.</h2>
+    <p>Há momentos em que tudo parece estar no sítio, mas qualquer coisa não encaixa. Talvez não te faltem objetos. Talvez te falte uma escolha que faça sentido.</p>
+    <p>Uma vela não resolve a tua vida. Pode mudar a atmosfera de uma divisão. Um livro não apaga o passado. Pode fazer-te olhar para ele de outra maneira. É esse o critério da Maison: peças e experiências escolhidas pelo que acrescentam, não pelo espaço que ocupam.</p>
   </div>
 </section>
 <section class="orientation" id="farol" aria-labelledby="orientation-title">
@@ -138,13 +173,13 @@ header{background:rgba(241,234,223,.98)}
   </div>
   <div class="orientation__copy">
     <div class="eyebrow">O FAROL · O TEU PONTO DE PARTIDA</div>
-    <h2 id="orientation-title">Nem sempre sabes o que procuras. Sabes o que te falta.</h2>
-    <p>O Farol ajuda-te a encontrar um caminho entre objetos, leituras e experiências. A escolha continua a ser tua.</p>
+    <h2 id="orientation-title">Não sabes o que escolher? Começa pelo que te inquieta.</h2>
+    <p>O Farol organiza a tua procura em poucos passos e mostra-te caminhos para produtos, leituras e experiências. A decisão continua a ser tua.</p>
     <a class="button orientation__primary" href="./farol/">SEGUIR O FAROL</a>
     <div class="orientation__tests">
       <div class="eyebrow">TESTES GRATUITOS · VOLTA PARA CASA</div>
       <h3>Três portas. Sem pagar para começar.</h3>
-      <p>O que pede atenção? O que te prende? Como reconheces o afeto? Experimenta uma das nossas experiências gratuitas de reflexão.</p>
+      <p>Atenção, Apego e Afeto. Três testes de reflexão gratuitos. Sem diagnóstico e sem promessas sobre o futuro.</p>
       <div class="orientation__test-links" aria-label="Testes gratuitos Volta Para Casa">
         <a href="./teste/atencao/">ATENÇÃO</a>
         <a href="./teste/apego/">APEGO</a>
