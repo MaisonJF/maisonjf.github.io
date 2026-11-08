@@ -190,3 +190,44 @@ body.maison-ivory .oracle__actions #oracle-status{color:#602437}
     color:#211e1b!important;
   }
 }
+
+
+/* Accessibility pass — readable editorial copy on ivory surfaces.
+   Scoped to opt-in pages: do not recolor photographic viewers, modals or checkout. */
+:root{
+  --maison-couture-ink:#111111;
+  --maison-couture-muted:#292621;
+  --maison-couture-gold:#715020;
+}
+body.maison-ivory{
+  --ak-text:#111111;
+  --ak-muted:#292621;
+  --ak-accent:#715020;
+  --ink:#111111;
+  --texto-primario:#111111;
+  --texto-secundario:#292621;
+  --texto-terciario:#292621;
+  --marfim-suave:#292621;
+  --marfim-escuro:#292621;
+  --marfim-dim:#292621;
+  color:#111111!important;
+  font-size:max(16px,1rem);
+  line-height:1.6;
+}
+body.maison-ivory :is(p,li,dd,blockquote,figcaption){
+  line-height:1.6;
+}
+body.maison-ivory :is(.lead,.lede,.catalogue__intro,.library-intro,.library-note,.poster-library__lead,.detail-lead,.farol__subtitle,.farol__result-text,.curadoria__maker-copy,.catalogue-intro__path p,.product p,.ebook-card .meta,.vpc-service-hero p,.vpc-part span,.detail-note,.farol__disclaimer,.footer__tagline,.footer__copyright){
+  color:#292621!important;
+}
+body.maison-ivory :is(.eyebrow,.detail-eyebrow,.farol__label,.meta,.number,.vpc-kicker,.product__body small,.catalogue-section-head .eyebrow){
+  color:#715020!important;
+}
+body.maison-ivory :is(.product,.catalogue-intro__path,.product-digital__card,.bundle-feature,.curadoria__maker,.vpc-part,.vpc-card,.vpc-convert,.farol__option,.farol__result,.reflection-card) :is(p,li,small,figcaption){
+  color:#292621;
+}
+@media(max-width:700px){
+  body.maison-ivory :is(p,li,dd,blockquote,figcaption){
+    font-size:max(16px,1em);
+  }
+}

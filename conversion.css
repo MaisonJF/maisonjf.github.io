@@ -252,3 +252,8 @@
 .conversion-trust__item::before{
   color:#c7aa73;
 }
+
+/* Contrast: this strip is always dark, including on ivory pages. */
+.conversion-trust__inner{color:#ffffff;font-size:max(.875rem,14px);line-height:1.5}
+.conversion-float,.conversion-bar__link{color:#ffffff;min-height:48px}
+.conversion-bar__link--primary{color:#111111}

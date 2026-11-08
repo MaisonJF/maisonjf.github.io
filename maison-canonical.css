@@ -177,3 +177,16 @@ body.maison-ivory .pro-lead-form__trap{
 }
 body.maison-ivory .pro-lead-form__status[data-state="success"]{color:#164b3f!important}
 body.maison-ivory .pro-lead-form__status[data-state="error"]{color:#602437!important}
+
+/* A11y: stable viewport menu, generous targets, and fluid media. */
+.maison-global-header .maison-global-header__brand{min-height:48px!important}
+.maison-global-header .maison-global-header__nav a{min-height:48px!important}
+.maison-commerce p{color:#292621;line-height:1.6}
+.maison-commerce__book button{min-height:48px;min-width:48px}
+.maison-commerce :is(img,svg,video){max-width:100%;height:auto}
+@media(max-width:980px){
+ .maison-global-header__trigger{min-height:48px;min-width:112px}
+ .maison-global-header .maison-global-header__nav{left:0!important;right:0!important;top:100%!important;width:100%!important;max-height:calc(100dvh - 72px)!important;overscroll-behavior:contain;box-shadow:0 12px 28px #0002}
+ .maison-global-header__checkbox:checked ~ .maison-global-header__nav{display:grid!important}
+}
+@media(max-width:480px){.maison-global-header__inner{width:calc(100% - 28px)}}

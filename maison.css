@@ -3857,3 +3857,11 @@ main,section,article,nav,header,footer,.shell{min-width:0}
     gap:12px;
   }
 }
+
+/* 2026-11 accessibility: dark theme reading, fluid media and mobile targets. */
+:root{--maison-muted:#f5f5f5;--soft:#f5f5f5}
+body:not(.maison-ivory){line-height:1.6}
+body:not(.maison-ivory) :is(p,li,figcaption){line-height:1.6}
+:is(.btn,.button,.maison-menu-toggle,.site-header nav a){min-height:48px}
+:is(img,video,svg){max-width:100%}
+@media(max-width:700px){body:not(.maison-ivory) :is(p,li,figcaption){font-size:max(16px,1em)}.shell{width:min(calc(100% - 32px),var(--max))}}
