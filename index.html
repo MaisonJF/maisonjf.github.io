@@ -142,6 +142,8 @@ body.maison-ivory main .hero{display:grid!important;visibility:visible!important
 body.maison-ivory main .hero__copy,body.maison-ivory main .hero__media{display:block!important;visibility:visible!important;opacity:1!important;min-width:0!important}
 body.maison-ivory main .hero__media img{display:block!important;width:100%!important;height:auto!important;object-fit:contain!important}
 @media(max-width:800px){body.maison-ivory main .hero{grid-template-columns:1fr!important;min-height:0!important;padding:48px 0!important}}
+/* Editions: make the complete catalogue visible from the homepage. */
+.maison-commerce__editions .editions-home-link{display:inline-flex;min-height:48px;align-items:center;margin-top:14px;color:#164b3f!important;font-weight:700;text-decoration:underline;text-underline-offset:4px}
 </style><link rel="stylesheet" href="/maison-ivory.css?v=20261107" /><link rel="stylesheet" href="/maison-canonical.css?v=20261108" /></head>
 <body class="maison-ivory"><header class="site-header maison-global-header" id="header">
   <div class="maison-global-header__inner">
@@ -171,10 +173,10 @@ body.maison-ivory main .hero__media img{display:block!important;width:100%!impor
   <picture class="hero__media"><source type="image/webp" srcset="./images/perf/home/hero-640.webp 640w, ./images/perf/home/hero-960.webp 960w, ./images/perf/home/hero-1280.webp 1280w, ./images/perf/home/hero-1672.webp 1672w" sizes="(max-width:800px) 100vw, 44vw"><img src="./images/maison-jf-hero-hq.jpg" width="1672" height="1254" loading="eager" decoding="async" fetchpriority="high" alt="Atmosfera intimista e sensorial MAISON JF®"></picture>
 </section>
 <section class="maison-commerce" id="comprar" aria-label="Edições digitais e consulta de Tarot">
-  <div class="maison-commerce__editions">
+  <div class="maison-commerce__editions"><a class="editions-home-link" href="/ebooks/#colecoes-completas">VER TODAS AS SAGAS E COLECÇÕES →</a>
     <span class="eyebrow">ÉDITIONS · LIVROS DIGITAIS</span>
     <h2>Histórias para quem não vira a página à primeira.</h2>
-    <p>Descobre as edições de autor disponíveis. Escolhe a tua próxima leitura e compra diretamente, sem percursos desnecessários. Acesso privado após confirmação do pagamento.</p>
+    <p>Descobre as edições disponíveis para compra e explora todas as sagas, colecções e próximos lançamentos na Biblioteca. Acesso privado após confirmação do pagamento.</p>
     <div class="maison-commerce__books">
       <article class="maison-commerce__book">
         <img src="/images/ebooks/o-turista.webp" width="64" height="94" loading="lazy" decoding="async" alt="Capa de O Turista">
@@ -210,7 +212,7 @@ body.maison-ivory main .hero__media img{display:block!important;width:100%!impor
       </article>
     </div>
     <span id="edition-checkout-status" class="maison-commerce__status" role="status" aria-live="polite"></span>
-    <a class="maison-commerce__viewall" href="/ebooks/">EXPLORAR TODAS AS EDIÇÕES</a>
+    <a class="maison-commerce__viewall" href="/ebooks/">EXPLORAR TODA A BIBLIOTECA</a>
   </div>
   <div class="maison-commerce__tarot">
     <span class="eyebrow">CONSULTA DE TAROT</span>

@@ -49,6 +49,28 @@
 .ebooks .library-intro__action .text-link{display:inline-flex;align-items:center;min-height:46px}
 #catalogo-publicado{scroll-margin-top:90px}
 @media(max-width:600px){.ebooks>h1{font-size:clamp(32px,8vw,42px);max-width:17ch}.ebooks .library-principles{display:block;margin:18px 0}.ebooks .library-principles li+li{margin-top:7px}.ebooks .library-intro__action{margin:20px 0 38px}}
+/* Éditions architecture: all collections visible, no invented pre-order checkout. */
+body.maison-ivory .ebooks :is(.lead,.library-intro,.library-note,.poster-library__lead,.library-category__head p,.meta,.status,.editions-architecture__intro){color:#292621!important;line-height:1.6}
+body.maison-ivory .ebooks :is(.eyebrow,.library-category__head strong){color:#715020!important}
+.editions-architecture{margin:40px 0 64px;padding:38px 0;border-top:1px solid #d7c7b2}
+.editions-architecture h2{font:400 clamp(32px,4vw,52px)/1.1 Georgia,serif;color:#111111;margin:12px 0}
+.editions-architecture__intro{max-width:760px}
+.editions-architecture__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.editions-series{display:flex;flex-direction:column;align-items:flex-start;min-width:0;background:#f8f3ea;border:1px solid #d7c7b2;padding:26px}
+.editions-series__category{color:#715020;font:700 12px/1.5 Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.editions-series h3{color:#111111;font:400 clamp(26px,2.8vw,35px)/1.15 Georgia,serif;margin:12px 0}
+.editions-series p,.editions-series__state{color:#292621!important;line-height:1.6}
+.editions-series__state{display:block;margin:10px 0;font-size:14px}
+.editions-series__price{font-weight:700;color:#111111;font-size:20px;margin:8px 0}
+.editions-series>a,.editions-series__titles a{display:inline-flex;align-items:center;min-height:48px;margin-top:auto;padding:10px 14px;background:#164b3f;color:#fff!important;text-decoration:none;font:700 14px/1.3 Arial,sans-serif}
+.editions-series__titles{display:grid;gap:8px;width:100%;margin-top:12px}
+.editions-series__titles a,.editions-series__titles span{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0}
+.editions-series__titles span{color:#292621;padding:8px 0;border-bottom:1px solid #d7c7b2}
+.editions-series__titles em{font-style:normal;font-size:12px}
+.editions-series__titles strong{font-size:12px}
+body.maison-ivory .ebooks .ebook-card .meta{color:#292621!important}
+body.maison-ivory .ebooks .ebook-card .buy{min-height:48px;color:#164b3f!important;font-weight:700}
+@media(max-width:700px){.editions-architecture__grid{grid-template-columns:1fr}.editions-series{padding:20px}.editions-architecture{padding-top:24px}}
 </style>
 <link rel="stylesheet" href="/maison-ivory.css?v=20261107" /><link rel="stylesheet" href="/maison-canonical.css?v=20261108" /></head>
 <body class="maison-ivory">
@@ -77,13 +99,27 @@
   <li>Ficção literária e novelas de autor.</li>
   <li>Sem moralismos, sem finais edulcorados. Apenas boa literatura e confronto direto.</li>
 </ul>
-<nav class="library-sections" aria-label="Explorar a biblioteca"><a href="#catalogo-publicado">Já publicados</a><a href="#biblioteca-ficcao">Ficção</a><a href="#biblioteca-interactivos">Livros interactivos</a><a href="#biblioteca-sem-filtros">Sem Filtros</a><a href="#biblioteca-espiritualidade">Espiritualidade</a></nav><p class="library-intro__action"><a class="text-link" href="#catalogo-publicado">EXPLORAR A BIBLIOTECA COMPLETA →</a></p>
+<nav class="library-sections" aria-label="Explorar a biblioteca"><a href="#colecoes-completas">Todas as colecções</a><a href="#catalogo-publicado">Já publicados</a><a href="#biblioteca-ficcao">Ficção</a><a href="#biblioteca-interactivos">Livros interactivos</a><a href="#biblioteca-sem-filtros">Sem Filtros</a><a href="#biblioteca-espiritualidade">Espiritualidade</a></nav><p class="library-intro__action"><a class="text-link" href="#catalogo-publicado">VER OS EBOOKS JÁ PUBLICADOS →</a></p>
+<section class="editions-architecture" id="colecoes-completas" aria-labelledby="editions-architecture-title">
+<p class="eyebrow">O UNIVERSO LITERÁRIO · ÉDITIONS MAISON JF®</p>
+<h2 id="editions-architecture-title">Uma biblioteca. Muitos universos.</h2>
+<p class="editions-architecture__intro">Explora as sagas, colecções e projectos de autor. As obras já publicadas têm preço e acesso à compra; os projectos futuros estão identificados sem simular vendas ou reservas ainda indisponíveis.</p>
+<div class="editions-architecture__grid">
+<article class="editions-series" id="serie-virgulas"><span class="editions-series__category">Ficção · Saga</span><h3>Vírgulas do Destino</h3><p>Desejo, mistério, encontros e consequências. Uma história que continua de livro para livro.</p><div class="editions-series__titles"><a href="./virgulas-do-destino-o-turista/">O Turista <strong>2,99 € · Comprar</strong></a><a href="./virgulas-do-destino-meandros-da-vida/">Meandros da Vida <strong>3,50 € · Comprar</strong></a><span>A Vingança! <em>Em preparação</em></span><span>Prisioneiros do Amor <em>Em preparação</em></span></div></article>
+<article class="editions-series"><span class="editions-series__category">Ficção · Saga</span><h3>Sombras da Luz</h3><p>Uma das sagas de ficção do universo Éditions Maison JF®.</p><span class="editions-series__state">Catálogo em preparação</span><a href="/contacto/?interesse=editions-sombras-da-luz">Pedir novidades sobre a saga</a></article>
+<article class="editions-series"><span class="editions-series__category">Ficção · Saga</span><h3>Escrito nas Entrelinhas</h3><p>Uma saga de autor para descobrir à medida que as edições forem anunciadas.</p><span class="editions-series__state">Catálogo em preparação</span><a href="/contacto/?interesse=editions-escrito-nas-entrelinhas">Pedir novidades sobre a saga</a></article>
+<article class="editions-series"><span class="editions-series__category">Ficção · Saga</span><h3>Sombras da Alma</h3><p>Um universo de ficção integrado na biblioteca de autor.</p><span class="editions-series__state">Catálogo em preparação</span><a href="/contacto/?interesse=editions-sombras-da-alma">Pedir novidades sobre a saga</a></article>
+<article class="editions-series"><span class="editions-series__category">Livros interactivos · Colecção</span><h3>Casos Cinzentos</h3><p>Histórias de mistério, escolhas e caminhos possíveis. A colecção está em desenvolvimento.</p><span class="editions-series__state">Próximas edições</span><a href="/contacto/?interesse=editions-casos-cinzentos">Pedir novidades da colecção</a></article>
+<article class="editions-series"><span class="editions-series__category">Sem Filtros · Livro</span><h3>Pára de Ignorar!</h3><p>Uma leitura directa sobre aquilo que continuas a adiar.</p><span class="editions-series__price">5,99 €</span><a href="./para-de-ignorar/">Comprar o ebook</a><span class="editions-series__state">A seguir: Desculpa, Mas Tu Também Fizeste Merda! · Em preparação</span></article>
+<article class="editions-series"><span class="editions-series__category">Espiritualidade · Os Sete Raios</span><h3>Raio Azul</h3><p>O primeiro volume da colecção Os Sete Raios.</p><span class="editions-series__price">3,50 €</span><a href="./raio-azul/">Comprar o ebook</a><span class="editions-series__state">Outros volumes: por anunciar</span></article>
+<article class="editions-series"><span class="editions-series__category">Ficção · Próximas obras</span><h3>Outras histórias de autor</h3><p>Chocolate com Pimenta e O Raposinho Faísca 3: O Mistério das Ovelhas Desaparecidas.</p><span class="editions-series__state">Projectos futuros · Sem pré-reserva activa</span><a href="/contacto/?interesse=editions-proximas-obras">Pedir novidades</a></article>
+</div></section>
 <section id="catalogo-publicado" aria-labelledby="published-title"><h2 class="section-title" id="published-title">Já publicados</h2><nav class="published-links" aria-label="Livros publicados"><a class="text-link" href="./para-de-ignorar/">Pára de Ignorar! · Livro →</a><a class="text-link" href="./raio-azul/">Raio Azul →</a><a class="text-link" href="./virgulas-do-destino-o-turista/">O Turista →</a><a class="text-link" href="./virgulas-do-destino-meandros-da-vida/">Meandros da Vida →</a></nav><div class="ebook-grid" id="publishedGrid"></div><p class="status" id="edition-checkout-status" aria-live="polite"></p></section>
 <section class="poster-library" aria-labelledby="posters-title">
   <div class="poster-library__head"><p class="eyebrow">Éditions Maison JF</p><h2 id="posters-title">Ainda não viste tudo.</h2><p class="poster-library__lead">Há histórias, experiências e livros que ainda estou a construir.</p></div>
 
   <div class="library-category">
-    <div class="library-category__head"><h3 id="biblioteca-ficcao">Ficção</h3><p><strong>Quatro sagas de ficção.</strong> Clica nos posters. Eu conto-te o resto.</p></div>
+    <div class="library-category__head"><h3 id="biblioteca-ficcao">Ficção</h3><p><strong>Sagas de ficção.</strong> Clica nos posters. Eu conto-te o resto.</p></div>
     <div class="poster-grid">
       <figure class="poster-card"><a class="poster-open" href="../images/ebooks/posters/virgulas-do-destino.webp?v=20260922-lossless-final" aria-haspopup="dialog" aria-label="Ampliar Vírgulas do Destino"><img src="../images/perf/editorial/virgulas-do-destino-520.webp" srcset="../images/perf/editorial/virgulas-do-destino-320.webp 320w, ../images/perf/editorial/virgulas-do-destino-520.webp 520w, ../images/perf/editorial/virgulas-do-destino-760.webp 760w" sizes="(max-width:440px) 100vw, (max-width:900px) 50vw, 25vw" width="520" height="780" alt="Poster Vírgulas do Destino" loading="lazy" decoding="async" fetchpriority="low"></a><figcaption>Vírgulas do Destino</figcaption></figure>
       <figure class="poster-card"><a class="poster-open" href="../images/ebooks/posters/sombras-da-luz.webp?v=20260922-lossless-final" aria-haspopup="dialog" aria-label="Ampliar Sombras da Luz"><img src="../images/perf/editorial/sombras-da-luz-520.webp" srcset="../images/perf/editorial/sombras-da-luz-320.webp 320w, ../images/perf/editorial/sombras-da-luz-520.webp 520w, ../images/perf/editorial/sombras-da-luz-760.webp 760w" sizes="(max-width:440px) 100vw, (max-width:900px) 50vw, 25vw" width="520" height="780" alt="Poster Sombras da Luz" loading="lazy" decoding="async" fetchpriority="low"></a><figcaption>Sombras da Luz</figcaption></figure>
