@@ -2,10 +2,10 @@
 <html lang="pt-PT"><head>
 <link rel="canonical" href="https://maison-jf.com/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#f7f3ec">
-<title>Rituais sensoriais, aromas de autor e Tarot | MAISON JF®</title><meta name="description" content="Descobre velas e aromas de autor, rituais de pausa, Tarot, Oráculo e ebooks. Experiências para a casa, o corpo e a mente. MAISON JF®.">
+<title>Perfumaria de autor, rituais e literatura | MAISON JF®</title><meta name="description" content="Velas artesanais, perfumaria de autor, rituais sensoriais e literatura de João Fädário. Descobre a curadoria MAISON JF® para casa, corpo e mente.">
 <meta property="og:type" content="website"><meta property="og:site_name" content="MAISON JF®"><meta property="og:locale" content="pt_PT">
-<meta property="og:title" content="Rituais sensoriais e aromas de autor | MAISON JF®">
-<meta property="og:description" content="Pequenos luxos para a casa e o corpo. Perguntas, leituras e histórias para a mente.">
+<meta property="og:title" content="Perfumaria de autor, rituais e literatura | MAISON JF®">
+<meta property="og:description" content="Uma curadoria de aromas, rituais e literatura autoral. Não precisas de mais coisas. Precisas das certas.">
 <meta property="og:url" content="https://maison-jf.com/"><meta property="og:image" content="https://maison-jf.com/images/maison-jf-hero-hq.jpg">
 <meta property="og:image:alt" content="Atmosfera sensorial MAISON JF®">
 <meta name="twitter:card" content="summary_large_image">
@@ -26,24 +26,160 @@ section{scroll-margin-top:95px}.intro{padding:72px 0;border-top:1px solid var(--
 .farol{padding:80px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:120px 1fr;gap:35px;align-items:center}.farol svg{width:100px;max-width:100%}.farol p{max-width:650px;color:var(--muted);font-size:18px}
 .status{border-top:1px solid var(--line);padding:55px 0 85px;text-align:center}.status p{max-width:600px;margin:0 auto;color:var(--muted)}
 footer{border-top:1px solid var(--line);padding:26px 24px;text-align:center;font-size:12px;letter-spacing:.06em}footer .footer-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:0 0 14px}footer a{text-underline-offset:4px}
+/* Black, ivory and gold are one brand system: light editorial content, black immersive Farol. */
+.orientation{background:#0b0b0c;color:#f5f1e9;margin:0 -24px;padding:clamp(35px,5vw,70px);display:grid;grid-template-columns:minmax(180px,.72fr) minmax(0,1.65fr);gap:clamp(28px,5vw,78px);align-items:center;scroll-margin-top:110px}
+.orientation__brand{align-self:start;display:flex;align-items:center;justify-content:center;background:#050505;min-height:310px}
+.orientation__brand a{display:block;width:min(100%,270px);margin:0 auto}
+.orientation__brand img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:contain}
+.orientation .eyebrow{color:#d2b36f}
+.orientation h2{font-size:clamp(35px,4.6vw,62px);letter-spacing:-.027em;margin:17px 0 24px}
+.orientation__copy>p{font-size:clamp(17px,1.8vw,20px);color:#d1c8bc;line-height:1.65;max-width:700px;margin:0 0 26px}
+.orientation__primary{background:#f5f1e9;color:#17130f}
+.orientation__tests{margin-top:47px;padding-top:32px;border-top:1px solid rgba(235,221,192,.3)}
+.orientation__tests h3{font-size:clamp(26px,3vw,36px);margin:13px 0}
+.orientation__tests p{color:#c8c0b6;max-width:670px;margin:0 0 20px}
+.orientation__test-links{display:flex;flex-wrap:wrap;gap:10px}
+.orientation__test-links a{min-height:46px;display:flex;align-items:center;justify-content:center;padding:8px 16px;border:1px solid rgba(226,202,153,.54);color:#f5f1e9;font-size:12px;letter-spacing:.09em;font-weight:700;text-decoration:none}
+.orientation__test-links a:hover,.orientation__test-links a:focus-visible{background:#d2b36f;color:#0b0b0c;outline:2px solid #d2b36f;outline-offset:2px}
+.orientation__all-tests{display:inline-flex;align-items:center;min-height:48px;margin-top:16px;font-size:12px;font-weight:700;letter-spacing:.05em;text-underline-offset:5px;color:#f5f1e9}
+@media(max-width:800px){.orientation{grid-template-columns:1fr;padding:38px 28px;gap:20px}.orientation__brand{min-height:0}.orientation__brand a{max-width:180px}}
+@media(max-width:440px){.orientation{margin:0 -24px;padding:30px 24px}.orientation__test-links a{flex:1 1 30%}}
+/* Homepage editorial: five acts, with a clear decision at each stage. */
+.story{display:grid;grid-template-columns:minmax(150px,.52fr) minmax(0,1.65fr);gap:clamp(32px,5vw,82px);padding:clamp(76px,9vw,122px) 0;border-top:1px solid var(--line)}
+.story>.eyebrow{padding-top:18px}.story__copy{max-width:800px}.story h2{font-size:clamp(36px,4.9vw,64px);letter-spacing:-.025em;margin:0 0 28px}
+.story p{font-size:clamp(18px,1.75vw,21px);line-height:1.7;color:var(--muted);max-width:740px;margin:0 0 23px}
+.story p:last-child{margin-bottom:0}
+.collection{padding:clamp(65px,8vw,112px) 0;border-top:1px solid var(--line)}
+.collection h2{margin:15px 0 22px}.collection .grid{margin-top:38px}
+.collection .card{display:flex;flex-direction:column;min-width:0;padding:28px 25px 30px}
+.collection .card__image{margin-bottom:24px;aspect-ratio:4/3}
+.collection .card--editions .card__image{background:#211e1b;object-fit:contain;padding:14px}
+.collection .card h3{font-size:clamp(26px,2.55vw,32px);line-height:1.13;min-height:2.28em;margin:14px 0}
+.collection .card>p{line-height:1.6;margin:0 0 20px}
+.collection .card>p:last-child{margin-top:auto;margin-bottom:0;padding-top:10px}
+.signature{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.83fr);gap:clamp(32px,5vw,85px);align-items:start;padding:clamp(70px,8vw,120px) 0;border-top:1px solid var(--line)}
+.signature h2{font-size:clamp(39px,5vw,68px);letter-spacing:-.03em;margin:26px 0 30px;text-wrap:balance}
+.signature__link,.signature__practice a{display:inline-flex;min-height:48px;align-items:center;text-underline-offset:5px;font-size:13px;font-weight:700;letter-spacing:.04em}
+.signature__practice{padding:38px 36px;background:var(--paper);border:1px solid var(--line)}
+.signature__practice h3{font-size:clamp(28px,3vw,38px);margin:20px 0 18px}
+.signature__practice p{font-size:17px;line-height:1.7;color:var(--muted);margin:0}
+.closing{padding:clamp(75px,9vw,120px) 0 clamp(90px,10vw,135px);border-top:1px solid var(--line)}
+.closing h2{max-width:760px;font-size:clamp(41px,5vw,70px);letter-spacing:-.032em;text-wrap:balance;margin:18px 0 25px}
+.closing>p{max-width:680px;font-size:clamp(18px,1.8vw,21px);line-height:1.65;color:var(--muted);margin:0 0 30px}
+@media(max-width:800px){.story{grid-template-columns:1fr;gap:25px}.signature{grid-template-columns:1fr;gap:25px}.signature__practice{padding:30px 26px}.collection .card h3{min-height:0}}
+@media(max-width:700px){.story,.collection,.signature,.closing{padding-top:64px;padding-bottom:72px}.story h2 br{display:none}.collection .card{padding:26px 20px}.signature__practice{padding:28px 22px}.collection .card--editions .card__image{padding:9px}}
 @media(max-width:800px){.hero{grid-template-columns:1fr;min-height:0;gap:34px;padding:55px 0}.hero__media{max-height:390px;aspect-ratio:16/10}.hero__media img{object-position:center}.hero h1{font-size:clamp(40px,8vw,64px)}}
 @media(max-width:700px){.actions .button{width:100%;text-align:center}.actions{flex-direction:column}.lead{font-size:18px}nav{flex-direction:column;align-items:flex-start;gap:6px;padding:12px 18px}.links{width:100%;overflow-x:auto;flex-wrap:nowrap;gap:15px;white-space:nowrap;scrollbar-width:thin}.links a{min-height:44px;display:inline-flex;align-items:center}.hero{padding:48px 0}.grid{grid-template-columns:1fr}.card{min-height:0}.farol{grid-template-columns:1fr;text-align:center}.farol svg{margin:auto}.farol p{margin:auto}}
 @media(max-width:440px){.hero h1{font-size:clamp(38px,10.2vw,49px)}.hero__media{aspect-ratio:4/3}.card{padding:26px 20px}}
+
+/* MAISON JF® palette: a continuous ivory experience, not alternating dark pages. */
+:root{--bg:#f1eadf;--paper:#f8f3ea;--ink:#211e1b;--muted:#554c42;--gold:#94713c;--line:#d7c7b2;--emerald:#164b3f;--bordeaux:#602437}
+header{background:rgba(241,234,223,.98)}
+.button:hover,.button:focus-visible{background:var(--bordeaux);color:#fff}
+.eyebrow,.number{color:var(--gold)}
+.collection .card{border-color:var(--line);background:var(--paper)}
+.collection .card:focus-within{border-color:var(--emerald)}
+.signature__practice{border-left:3px solid var(--bordeaux)}
+.signature__statement .eyebrow{color:var(--bordeaux)}
+.closing .button:not(.secondary){background:var(--emerald);color:#fff}
+.closing .button:not(.secondary):hover{background:var(--bordeaux)}
+.orientation{background:var(--paper);color:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.orientation__brand{background:transparent}
+.orientation .eyebrow{color:var(--gold)}
+.orientation__copy>p,.orientation__tests p{color:var(--muted)}
+.orientation__primary{background:var(--bordeaux);color:#fff}
+.orientation__tests{border-top:1px solid var(--line)}
+.orientation__test-links a{border-color:var(--gold);color:var(--emerald)}
+.orientation__test-links a:hover,.orientation__test-links a:focus-visible{background:var(--emerald);border-color:var(--emerald);color:#fff;outline-color:var(--emerald)}
+.orientation__all-tests{color:var(--bordeaux)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style></head>
-<body><header><nav aria-label="Navegação principal"><a class="logo" href="#inicio">MAISON JF®</a><div class="links"><a href="./produtos/">Produtos</a><a href="./servicos/">Consultas</a><a href="./oraculo/">Oráculo</a><a href="./ebooks/">Ebooks</a><a href="#farol">O Farol</a></div></nav></header>
-<main id="inicio"><div class="hero"><div class="hero__copy"><div class="eyebrow">MAISON JF® · CASA / CORPO / MENTE</div><h1>NÃO PRECISAS DE MAIS COISAS.<br>PRECISAS DAS CERTAS.</h1><p class="lead">Há aromas que não esqueces. Texturas que apetece tocar. Pequenos luxos que vais querer repetir.</p><div class="actions"><a class="button" href="./produtos/">DESCOBRIR PRODUTOS</a><a class="button secondary" href="#farol">SEGUE O FAROL</a></div></div><picture class="hero__media"><source type="image/webp" srcset="./images/perf/home/hero-640.webp 640w, ./images/perf/home/hero-960.webp 960w, ./images/perf/home/hero-1280.webp 1280w, ./images/perf/home/hero-1672.webp 1672w" sizes="(max-width:800px) 100vw, 44vw"><img src="./images/maison-jf-hero-hq.jpg" width="1672" height="1254" loading="eager" decoding="async" fetchpriority="high" alt="Atmosfera intimista e sensorial MAISON JF®"></picture></div>
-<section class="intro" id="maison"><div class="eyebrow">A NOSSA FILOSOFIA</div><h2>O que escolhes muda a experiência.</h2><p>Um aroma desperta uma memória. Um ritual ganha significado quando é teu. Uma pergunta encontra respostas diferentes em cada pessoa. Não decidimos o que deves sentir. Criamos experiências que te deixam descobrir.</p></section>
-<section class="intro" id="universos"><div class="eyebrow">Os nossos universos</div><h2>Por onde começas?</h2><div class="grid">
-<article class="card"><img class="card__image" src="./images/perf/home/casa-640.webp" srcset="./images/perf/home/casa-480.webp 480w, ./images/perf/home/casa-640.webp 640w, ./images/perf/home/casa-768.webp 768w, ./images/perf/home/casa-1080.webp 1080w" sizes="(max-width:700px) 90vw, 30vw" width="1080" height="810" alt="Ambiente acolhedor para rituais em casa" loading="lazy" decoding="async"><span class="number">01 / CASA</span><h3>O prazer começa em casa.</h3><p>Velas, aromas e pequenos luxos que vais querer repetir.</p><p><a href="./produtos/">DESCOBRIR PRODUTOS</a></p></article>
-<article class="card"><img class="card__image" src="./images/perf/home/corpo-640.webp" srcset="./images/perf/home/corpo-480.webp 480w, ./images/perf/home/corpo-640.webp 640w, ./images/perf/home/corpo-768.webp 768w, ./images/perf/home/corpo-1080.webp 1080w" sizes="(max-width:700px) 90vw, 30vw" width="1080" height="810" alt="Ritual sensorial de cuidado e desaceleração" loading="lazy" decoding="async"><span class="number">02 / CORPO</span><h3>O teu corpo merece este prazer.</h3><p>Transforma cinco minutos num ritual que apetece repetir.</p><p><a href="./produtos/">EXPLORAR RITUAIS</a></p></article>
-<article class="card"><img class="card__image" src="./images/perf/home/cabeca-640.webp" srcset="./images/perf/home/cabeca-480.webp 480w, ./images/perf/home/cabeca-640.webp 640w, ./images/perf/home/cabeca-768.webp 768w, ./images/perf/home/cabeca-1080.webp 1080w" sizes="(max-width:700px) 90vw, 30vw" width="1080" height="810" alt="Pausa de reflexão junto ao oceano" loading="lazy" decoding="async"><span class="number">03 / MENTE</span><h3>Uma pergunta pode mudar tudo.</h3><p>Jogos e Oráculo para conversas que não ficam pela superfície. Sem catálogos de temas.</p><p><a href="./farol/">EXPLORAR O FAROL</a></p></article>
-</div></section>
-<section class="intro" id="experiencias"><div class="eyebrow">Serviços e histórias</div><h2>Há pausas que pedem outras palavras.</h2><p>Para quando procuras uma conversa, uma leitura simbólica ou um livro que te acompanhe.</p><div class="grid">
-<article class="card"><span class="number">CONSULTAS</span><h3>Uma pergunta merece atenção.</h3><p>Consulta de Tarot para reflexão e novas perspectivas, sem respostas feitas.</p><p><a href="./servicos/tarot/">CONHECER A CONSULTA · 35 €</a></p></article>
-<article class="card"><span class="number">ORÁCULO</span><h3>Pensa na pergunta. Guarda-a contigo.</h3><p>Uma leitura simbólica e pessoal, para te ajudar a olhar de outro ângulo.</p><p><a href="./oraculo/">ABRIR O ORÁCULO</a></p></article>
-<article class="card"><span class="number">ÉDITIONS MAISON JF®</span><h3>Histórias que ficam.</h3><p>Novelas, ebooks e reflexões para ler ao teu ritmo.</p><p><a href="./ebooks/">EXPLORAR EBOOKS</a></p></article>
-</div></section>
-<section class="farol" id="farol"><svg viewBox="0 0 80 80" role="img" aria-label="Símbolo do Farol" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25 67H55M30 62L35 27H45L50 62M34 27V18H46V27M31 18H49M40 9V3M18 23L8 19M62 23L72 19M16 35H5M64 35H75M33 40H47M31 53H49" stroke="#9a7d56" stroke-width="2.2" stroke-linecap="round"/></svg><div><div class="eyebrow">O Farol</div><h2>Não sabes por onde começar?</h2><p>O Farol ajuda-te a encontrar o caminho certo para ti.</p><p><a class="button secondary" href="./farol/">SEGUIR O FAROL</a></p></div></section>
-<section class="intro" id="manifesto"><div class="eyebrow">A nossa posição</div><h2>Não pensamos por ti.</h2><p>Não te damos respostas feitas. Criamos objectos, experiências e perguntas para que escolhas o que faz sentido para ti.</p><p><a class="button secondary" href="./manifesto/">LER O MANIFESTO</a></p></section></main>
+</style><link rel="stylesheet" href="/maison-ivory.css?v=20261107" /></head>
+<body class="maison-ivory"><header><nav aria-label="Navegação principal"><a class="logo" href="#inicio">MAISON JF®</a><div class="links"><a href="./produtos/">Produtos</a><a href="./servicos/">Consultas</a><a href="./oraculo/">Oráculo</a><a href="./teste/">Testes gratuitos</a><a href="./ebooks/">Ebooks</a><a href="./farol/">O Farol</a></div></nav></header>
+<main id="inicio">
+<section class="hero" aria-labelledby="home-title">
+  <div class="hero__copy">
+    <div class="eyebrow">MAISON JF® · CASA / CORPO / MENTE</div>
+    <h1 id="home-title">NÃO PRECISAS DE MAIS COISAS.<br>PRECISAS DAS CERTAS.</h1>
+    <p class="lead">Uma curadoria intencional de perfumaria de autor, literatura autoral e rituais sensoriais. Para quem compreende que o verdadeiro luxo é a ausência de excesso.</p>
+    <div class="actions"><a class="button" href="./produtos/">DESCOBRIR A COLEÇÃO</a></div>
+  </div>
+  <picture class="hero__media"><source type="image/webp" srcset="./images/perf/home/hero-640.webp 640w, ./images/perf/home/hero-960.webp 960w, ./images/perf/home/hero-1280.webp 1280w, ./images/perf/home/hero-1672.webp 1672w" sizes="(max-width:800px) 100vw, 44vw"><img src="./images/maison-jf-hero-hq.jpg" width="1672" height="1254" loading="eager" decoding="async" fetchpriority="high" alt="Atmosfera intimista e sensorial MAISON JF®"></picture>
+</section>
+<section class="story" id="maison" aria-labelledby="story-heading">
+  <div class="eyebrow">A EXPERIÊNCIA</div>
+  <div class="story__copy">
+    <h2 id="story-heading">Uma experiência não se explica.<br>Sente-se.</h2>
+    <p>Sabes perfeitamente o momento em que um espaço perde a sua alma. Quando os aromas são indistintos, as histórias se tornam previsíveis e a rotina consome o mistério.</p>
+    <p>A MAISON JF® existe no limiar entre a memória e a provocação. Formulamos fragrâncias, desenvolvemos objetos e publicamos histórias de autor para devolver densidade aos teus dias. Não procuramos agradar a todos. Apenas a quem reconhece o detalhe.</p>
+  </div>
+</section>
+<section class="orientation" id="farol" aria-labelledby="orientation-title">
+  <div class="orientation__brand">
+    <a href="./farol/" aria-label="Abrir O Farol, guia da MAISON JF®">
+      <img src="./maison-jf-mark.svg" width="600" height="750" decoding="async" loading="lazy" alt="Logótipo oficial MAISON JF® com Farol e monograma JF dourado">
+    </a>
+  </div>
+  <div class="orientation__copy">
+    <div class="eyebrow">O FAROL · O TEU PONTO DE PARTIDA</div>
+    <h2 id="orientation-title">Nem sempre sabes o que procuras. Sabes o que te falta.</h2>
+    <p>O Farol ajuda-te a encontrar um caminho entre objetos, leituras e experiências. A escolha continua a ser tua.</p>
+    <a class="button orientation__primary" href="./farol/">SEGUIR O FAROL</a>
+    <div class="orientation__tests">
+      <div class="eyebrow">TESTES GRATUITOS · VOLTA PARA CASA</div>
+      <h3>Três portas. Sem pagar para começar.</h3>
+      <p>O que pede atenção? O que te prende? Como reconheces o afeto? Experimenta uma das nossas experiências gratuitas de reflexão.</p>
+      <div class="orientation__test-links" aria-label="Testes gratuitos Volta Para Casa">
+        <a href="./teste/atencao/">ATENÇÃO</a>
+        <a href="./teste/apego/">APEGO</a>
+        <a href="./teste/afeto/">AFETO</a>
+      </div>
+      <a class="orientation__all-tests" href="./teste/">VER TODOS OS TESTES GRATUITOS</a>
+    </div>
+  </div>
+</section>
+<section class="collection" id="universos" aria-labelledby="collection-heading">
+  <div class="eyebrow">A CURADORIA</div>
+  <h2 id="collection-heading">Escolhe aquilo que fica.</h2>
+  <div class="grid">
+    <article class="card">
+      <img class="card__image" src="./images/perf/home/casa-640.webp" srcset="./images/perf/home/casa-480.webp 480w, ./images/perf/home/casa-640.webp 640w, ./images/perf/home/casa-768.webp 768w, ./images/perf/home/casa-1080.webp 1080w" sizes="(max-width:700px) 90vw, 30vw" width="1080" height="810" alt="Ambiente com velas e aromas para a casa" loading="lazy" decoding="async">
+      <span class="number">01 / CASA</span>
+      <h3>A atmosfera também é uma escolha.</h3>
+      <p>Velas artesanais, névoas e aromas de autor. Matérias-primas escolhidas para transformar a presença de um espaço.</p>
+      <p><a href="./portas/casa">EXPLORAR CASA</a></p>
+    </article>
+    <article class="card card--editions">
+      <img class="card__image" src="./images/perf/editorial/virgulas-do-destino-520.webp" srcset="./images/perf/editorial/virgulas-do-destino-320.webp 320w, ./images/perf/editorial/virgulas-do-destino-520.webp 520w, ./images/perf/editorial/virgulas-do-destino-760.webp 760w" sizes="(max-width:700px) 90vw, 30vw" width="520" height="780" alt="Éditions MAISON JF®, coleção literária Vírgulas do Destino" loading="lazy" decoding="async">
+      <span class="number">02 / ÉDITIONS</span>
+      <h3>Literatura sem fórmulas.</h3>
+      <p>Literatura autoral de João Fädário. Histórias de desejo, escolhas e consequências, escritas para quem não se contenta com o previsível.</p>
+      <p><a href="./ebooks/">LER AS EDIÇÕES</a></p>
+    </article>
+    <article class="card">
+      <img class="card__image" src="./images/perf/home/corpo-640.webp" srcset="./images/perf/home/corpo-480.webp 480w, ./images/perf/home/corpo-640.webp 640w, ./images/perf/home/corpo-768.webp 768w, ./images/perf/home/corpo-1080.webp 1080w" sizes="(max-width:700px) 90vw, 30vw" width="1080" height="810" alt="Óleos, sais de banho e cuidado sensorial" loading="lazy" decoding="async">
+      <span class="number">03 / CORPO &amp; RITUAIS</span>
+      <h3>O teu ritual. As tuas regras.</h3>
+      <p>Óleos de massagem, sais de banho, rituais para os pés e experiências de reflexão simbólica. Uma pausa com intenção.</p>
+      <p><a href="./portas/corpo">VER RITUAIS</a></p>
+    </article>
+  </div>
+</section>
+<section class="signature" id="assinatura" aria-labelledby="signature-heading">
+  <div class="signature__statement">
+    <div class="eyebrow">O NOSSO MANIFESTO</div>
+    <h2 id="signature-heading">Uma Maison não precisa de gritar para influenciar.</h2>
+    <a class="signature__link" href="./manifesto/">CONHECER O MANIFESTO</a>
+  </div>
+  <div class="signature__practice">
+    <div class="eyebrow">PRODUÇÃO EM PEQUENAS SÉRIES</div>
+    <h3>O detalhe não é um extra.</h3>
+    <p>Produção artesanal em Portugal, em pequenos lotes, com atenção às matérias-primas, à apresentação e a cada pormenor. Nas edições digitais, o mesmo cuidado começa na escrita.</p>
+  </div>
+</section>
+<section class="closing" id="escolher" aria-labelledby="closing-heading">
+  <div class="eyebrow">O PRIMEIRO PASSO</div>
+  <h2 id="closing-heading">Começa pela tua peça de assinatura.</h2>
+  <p>Seleciona o teu primeiro ritual ou edição digital. Acesso aos ebooks após confirmação do pagamento e expedição cuidada para os objetos físicos.</p>
+  <div class="actions"><a class="button" href="./ebooks/">COMPRAR EBOOKS</a><a class="button secondary" href="./produtos/">EXPLORAR PERFUMARIA</a></div>
+</section></main>
 <footer><nav class="footer-links" aria-label="Informações e apoio"><a href="./envios.html">Envios e portes</a><a href="./informacao-legal.html">Informação legal e privacidade</a><a href="./contacto/">Contacto</a><a href="./manifesto/">Manifesto</a><a href="./sobre/">Sobre</a><a href="./press/">Imprensa</a><a href="./servicos/">Serviços</a><a href="./ebooks/">Biblioteca</a><a href="./respostas/">Leituras</a><a href="./oraculo/">Oráculo</a><a href="./servicos/tarot/">Tarot</a></nav>MAISON JF® · PÁRA DE IGNORAR! VOLTA PARA CASA.</footer></body></html>
