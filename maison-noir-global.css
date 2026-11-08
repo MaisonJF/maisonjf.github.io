@@ -1,0 +1,52 @@
+/* MAISON JF® | Noir Couture global system | 2026-11-08
+   Shared across legacy maison.css, maison-canonical.css and maison-ivory.css.
+   Protects image assets and checkout overlays; never recolours imagery. */
+:root{
+ --maison-noir:#080808;--maison-ivory:#F2E9DA;--maison-gold:#C6A667;
+ --maison-couture-ivory:#F2E9DA;--maison-couture-paper:#080808;
+ --maison-couture-ink:#F2E9DA;--maison-couture-muted:#F2E9DA;
+ --maison-couture-gold:#C6A667;--maison-couture-emerald:#064D3B;
+ --maison-couture-bordeaux:#651C30;--maison-couture-line:#C6A667;
+ --bg:#080808;--paper:#080808;--ink:#F2E9DA;--muted:#F2E9DA;
+ --gold:#C6A667;--line:#C6A667;--soft:#F2E9DA;
+ --ak-bg:#080808;--ak-text:#F2E9DA;--ak-muted:#F2E9DA;
+ --ak-accent:#00A8B5;--ak-line:#C6A667;
+ color-scheme:dark;
+}
+html{background:#080808!important}
+body,body.maison-ivory,body.maison-noir,body.services-page,body.vpc-page{
+ --bg:#080808;--paper:#080808;--ink:#F2E9DA;--muted:#F2E9DA;
+ --maison-ivory:#F2E9DA;--maison-noir:#080808;
+ --maison-couture-ink:#F2E9DA;--maison-couture-paper:#080808;
+ --texto-primario:#F2E9DA;--texto-secundario:#F2E9DA;
+ --ak-bg:#080808;--ak-text:#F2E9DA;--ak-muted:#F2E9DA;
+ background-color:#080808!important;color:#F2E9DA!important;color-scheme:dark;
+}
+body :is(header,footer,main,section,article,aside,nav,.shell,.container,.wrap,.card,.panel,.product,.product-card,.catalogue-card,.catalogue-section,.catalogue-intro,.bundle-feature,.product-digital__card,.curadoria__maker,.vpc-card,.vpc-part,.vpc-convert,.farol__option,.farol__result,.reflection-card,.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.home-offer,.home-b2b,.signature__practice,.orientation,.orientation__brand,.modal-content,.content-card,.reading-card){
+ background-color:#080808!important;color:#F2E9DA!important;
+}
+body :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,summary,small,legend,label,th,td,.lead,.meta,.description,.subtitle,.price,.product__body,.footer__tagline,.footer__copyright){
+ color:#F2E9DA!important;opacity:1!important;text-shadow:none!important;
+}
+body :is(.eyebrow,.kicker,.detail-eyebrow,.vpc-kicker,.farol__label){color:#F2E9DA!important}
+body :is(.brand,.maison-global-header__brand,.maison-global-header__brand span,.site-header a,.maison-global-header__nav a,footer a){color:#F2E9DA!important;opacity:1!important}
+body :is(a,button,[role="button"]){transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+body :is(.button,.btn,.cta,.button-primary,.btn-primary,button[data-buy-ebook]){background-color:#00A8B5!important;color:#080808!important;border-color:#00A8B5!important}
+body :is(.button,.btn,.cta,.button-primary,.btn-primary,button[data-buy-ebook]):is(:hover,:focus-visible){background-color:#0A6B78!important;color:#fff!important;border-color:#0A6B78!important}
+body :is(.button.secondary,.btn.secondary,.button-outline,.btn-outline){background-color:#080808!important;color:#F2E9DA!important;border:1px solid #C6A667!important}
+body :is(.card,.product,.product-card,.catalogue-card,.bundle-feature,.home-offer,.home-b2b,.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.vpc-card,.farol__option,.reflection-card){border-color:rgba(198,166,103,.75)!important;box-shadow:none!important}
+body :is(.product,.product-card,.catalogue-card,.ritual-card,.vpc-card,.home-offer){border-left-color:#064D3B!important}
+body :is(.editions,.editions-card,.ebook-card,.book-card,.literature-card,.maison-commerce__editions,.maison-commerce__book){border-left-color:#651C30!important}
+body :is(.editions,.editions-card,.ebook-card,.book-card,.literature-card,.maison-commerce__editions) :is(h2,h3){color:#F2E9DA!important;text-decoration-color:#651C30!important}
+body :is(.maison-global-header,.site-header){background:#080808!important;border-color:#C6A667!important}
+body .maison-global-header__icon{width:38px!important;height:auto!important;max-height:48px!important;object-fit:contain!important;filter:none!important;box-shadow:none!important;transform:none!important}
+body .maison-global-header .maison-language-switcher{position:static!important;flex:0 0 auto!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important;background:#080808!important}
+body .maison-global-header .maison-language-switcher a{background:#080808!important;color:#F2E9DA!important;border-color:transparent!important}
+body .maison-global-header .maison-language-switcher a[aria-current="page"]{background:#00A8B5!important;color:#080808!important}
+body :is(input,select,textarea){background-color:#080808!important;color:#F2E9DA!important;border-color:#C6A667!important}
+body :is(input,textarea)::placeholder{color:#F2E9DA!important;opacity:.8}
+body :is(img,video,svg){filter:none!important}
+body .maison-global-header__nav a[href^="/profissionais"]{color:#F2E9DA!important;border-bottom:1px solid #C6A667}
+body footer,body footer :is(nav,a){background-color:#080808!important;color:#F2E9DA!important}
+@media(max-width:700px){body .maison-global-header__icon{width:30px!important}body :is(p,li,figcaption){font-size:max(16px,1em)}}
+@media(prefers-reduced-motion:reduce){body *{transition:none!important}}
