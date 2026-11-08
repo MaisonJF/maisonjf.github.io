@@ -103,3 +103,6 @@ window.MAISON_PRODUCT_FUTURE=[
 {slug:'sais-de-banho',name:'Sais de Banho',status:'future'}
 ];
 window.MAISON_PRODUCT_BY_SLUG=Object.fromEntries(window.MAISON_PRODUCTS.map(product=>[product.slug,product]));
+
+/* MAISON JF®: fotografias de produtos ocultadas a pedido. Mantêm-se os ficheiros de origem no repositório. */
+window.MAISON_PRODUCTS.forEach(product=>{product.productImage=null;product.media=[];});
