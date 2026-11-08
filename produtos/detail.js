@@ -56,6 +56,23 @@
   const complementary={Corpo:['vela-vidro','nevoa'],Casa:['escalda-pes','oleo-massagem']}[p.category]||[];
   const related=(p.related||complementary).map(s=>all.find(x=>x.slug===s)).filter(Boolean).slice(0,2);
 
+  const pt=locale==='pt-PT';
+  const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const hooks={
+    'vela-vidro':'Não é apenas a luz que muda uma divisão. É aquilo que sentes quando finalmente paras.',
+    'nevoa':'Há ambientes que te recebem. E outros que ainda não aprenderam a fazê-lo.',
+    'escalda-pes':'O mundo pede-te atenção. Este momento pertence-te.',
+    'oleo-massagem':'Nem tudo o que merece cuidado precisa de esperar por uma ocasião especial.'
+  };
+  const hook=pt?(p.hook||hooks[p.slug]||ritual.title):p.description;
+  const delivery=[p.size&&`Formato: ${p.size}`,p.material&&`Material: ${p.material}`,p.wicks&&`Pavios: ${p.wicks}`,p.ingredients&&`Composição: ${p.ingredients}`].filter(Boolean);
+  if(!delivery.length)delivery.push(p.description);
+  const deliveryMarkup=delivery.map(item=>`<li>${escapeHtml(item)}</li>`).join('');
+  const notes=p.olfactoryNotes;
+  const notesMarkup=notes&&typeof notes==='object'? `<section class="couture-notes"><p class="couture-kicker">Assinatura olfactiva</p><h2>O carácter está nos detalhes.</h2><dl>${['topo','coracao','fundo'].filter(key=>notes[key]).map(key=>`<div><dt>${{topo:'Topo',coracao:'Coração',fundo:'Fundo'}[key]}</dt><dd>${escapeHtml(notes[key])}</dd></div>`).join('')}</dl></section>`: '';
+  const faqMarkup=pt?`<section class="couture-faq"><p class="couture-kicker">Antes de escolheres</p><h2>Sem dúvidas desnecessárias.</h2><details><summary>Como são calculados os portes e os prazos?</summary><p>Consulta as condições de envio antes de concluir a encomenda. O prazo depende do destino e da disponibilidade.</p><a href="${root}envios">Consultar envios</a></details><details><summary>O que vou receber?</summary><p>Recebes a referência seleccionada, com o formato e características indicados nesta página.</p></details><details><summary>Posso esclarecer uma dúvida antes de comprar?</summary><p>Sim. Contacta a Maison antes de finalizar a encomenda.</p><a href="${whatsapp}" target="_blank" rel="noopener noreferrer">Falar com a Maison</a></details></section>`: '';
+  const categoryTone=p.category==='Corpo'||p.category==='Casa'?'emerald':'bordeaux';
+
   const mediaMarkup=rest.length?`
     <section class="product-gallery" aria-label="${t.gallery} ${p.name}">
       ${rest.map((m,i)=>`<figure class="product-gallery__item product-gallery__item--${m.aspect||'portrait'}" data-role="${m.role||'editorial'}"><img src="${mediaSrc(m.src)}" alt="${m.alt||p.name}" loading="lazy"></figure>`).join('')}
@@ -67,12 +84,12 @@
         <img src="${mediaSrc(hero.src)}" alt="${hero.alt||p.name}">
       </div>`:''}
       <div class="product-hero__copy">
-        <p class="eyebrow">${p.category} · MAISON JF®</p>
+        <p class="eyebrow couture-tag couture-tag--${categoryTone}">${escapeHtml(p.category)} · CURADORIA MAISON JF®</p>
         <h1>${p.name}${p.size?` <span style="font-size:.35em">${p.size}</span>`:''}</h1>
-        <p>${p.description}</p>
+        <p class="couture-hook">${escapeHtml(hook)}</p><p class="couture-description">${escapeHtml(p.description)}</p><div class="couture-delivery"><strong>O que levas contigo</strong><ul>${deliveryMarkup}</ul></div>
         <div class="product-price">${p.priceNote||money(p.price)}</div>
         <div class="product-actions">
-          <button class="button button--light" data-buy type="button">${t.order}</button>
+          <button class="button button--light couture-buy" data-buy type="button">${pt?`COMPRAR AGORA · ${p.priceNote||money(p.price)}`:t.order}</button>
           <button class="text-link" data-cart-add type="button" style="background:none;border:0;padding:0;cursor:pointer">${t.add}</button>
           <a class="text-link" data-cart-link href="${root}produtos/carrinho/">${t.cart}</a>
           <a class="text-link" data-whatsapp href="${whatsapp}" target="_blank" rel="noopener noreferrer">${t.doubt}</a>
@@ -86,6 +103,8 @@
     </section>
 
     ${mediaMarkup}
+    ${notesMarkup}
+    ${faqMarkup}
 
     <section class="ritual product-ritual">
       <div>
