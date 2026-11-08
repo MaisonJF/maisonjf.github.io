@@ -43,3 +43,28 @@ body.maison-noir .maison-language-switcher{background:#080808!important;color:#F
 body.maison-noir .maison-language-switcher button{color:#F2E9DA!important;background:#151515!important;border-color:#514638!important}
 @media(max-width:980px){body.maison-noir .maison-global-header .maison-global-header__nav{background:#080808!important;border:1px solid #514638!important}}
 @media(prefers-reduced-motion:reduce){body.maison-noir *{scroll-behavior:auto!important}}
+
+/* Production contrast repair: override the earlier ivory declarations and inline rules. */
+html body.maison-ivory.maison-noir{background:#080808!important;color:#F2E9DA!important}
+html body.maison-ivory.maison-noir main :is(section,article,div){border-color:#514638}
+html body.maison-ivory.maison-noir main :is(.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.home-offer,.card,.signature__practice){background:#151515!important;color:#F2E9DA!important;border-color:#514638!important}
+html body.maison-ivory.maison-noir main :is(.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.home-offer,.card,.signature__practice) :is(h2,h3,h4,a:not(.button),p,span:not(.eyebrow)){color:#F2E9DA!important}
+html body.maison-ivory.maison-noir main :is(.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.home-offer,.card,.signature__practice) :is(p,small){color:#DDD1BE!important}
+html body.maison-ivory.maison-noir main :is(.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.home-offer,.card,.signature__practice) .eyebrow{color:#C6A667!important}
+html body.maison-ivory.maison-noir main :is(.maison-commerce__editions,.maison-commerce__tarot,.maison-commerce__book,.home-offer,.card,.signature__practice) a:not(.button){text-decoration-color:#C6A667;text-underline-offset:4px}
+html body.maison-ivory.maison-noir main .maison-commerce__book button{background:#0A6B78!important;color:#fff!important;border:1px solid #00A8B5!important;min-height:44px}
+html body.maison-ivory.maison-noir main .maison-commerce__tarot strong{color:#F2E9DA!important}
+html body.maison-ivory.maison-noir main :is(.story p,.story__copy p,.closing>p,.home-offer p,.home-products>p,.signature__practice p,.orientation__copy>p,.orientation__tests p){color:#DDD1BE!important;opacity:1!important}
+html body.maison-ivory.maison-noir main .collection .card :is(h3,p,a){color:#F2E9DA!important}
+html body.maison-ivory.maison-noir main .collection .card p{color:#DDD1BE!important}
+html body.maison-ivory.maison-noir main .collection .card a{color:#F2E9DA!important}
+html body.maison-ivory.maison-noir main .orientation__brand{align-self:center!important;min-height:0!important;overflow:visible!important;background:#080808!important}
+html body.maison-ivory.maison-noir main .orientation__brand a{width:100%!important;max-width:210px!important;margin:auto!important;display:flex!important;align-items:center;justify-content:center}
+html body.maison-ivory.maison-noir main .orientation__brand img{display:block!important;width:100%!important;height:auto!important;max-height:280px!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;filter:none!important;box-shadow:none!important}
+html body.maison-ivory.maison-noir .maison-global-header .maison-global-header__brand,html body.maison-ivory.maison-noir .maison-global-header .maison-global-header__brand span{color:#F2E9DA!important;opacity:1!important}
+html body.maison-ivory.maison-noir footer,html body.maison-ivory.maison-noir footer :is(nav,a){background:#080808!important;color:#F2E9DA!important;opacity:1!important}
+html body.maison-ivory.maison-noir footer a:hover{color:#00A8B5!important}
+html body.maison-ivory.maison-noir .maison-language-switcher{background:#080808!important;color:#F2E9DA!important;border-color:#514638!important}
+html body.maison-ivory.maison-noir .maison-language-switcher :is(a,button){color:#F2E9DA!important}
+html body.maison-ivory.maison-noir .maison-language-switcher :is(a,button)[aria-current="true"]{color:#080808!important;background:#00A8B5!important}
+@media(max-width:800px){html body.maison-ivory.maison-noir main .orientation__brand img{max-height:220px!important}}
