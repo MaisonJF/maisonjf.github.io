@@ -28,9 +28,26 @@
 .restart{border:0;background:none;color:var(--maison-gold);text-decoration:underline;cursor:pointer;margin-top:32px}
 @media(max-width:700px){.b2b-test{padding:124px 18px 60px;align-items:start}.title{font-size:clamp(38px,11vw,48px);line-height:.95;max-width:15ch}.q{font-size:31px}.choices,.offer-options{grid-template-columns:1fr}.choices button{min-height:86px}.offer{padding:24px}}
 </style>
-</head>
+<link rel="stylesheet" href="/maison-canonical.css?v=20261108" /></head>
 <body>
-<header class="site-header"><a class="brand" href="../">MAISON JF® · PROFISSIONAIS</a><nav><a href="../">Profissionais</a><a href="../../contacto/?interesse=b2b">Falar comigo</a></nav></header>
+<header class="site-header maison-global-header" id="header">
+  <div class="maison-global-header__inner">
+    <a class="brand maison-global-header__brand" href="/" aria-label="MAISON JF® — início">MAISON JF®</a>
+    <details class="maison-global-header__menu">
+      <summary aria-label="Abrir navegação principal">Menu</summary>
+      <nav class="maison-global-header__nav" id="main-navigation" aria-label="Navegação principal">
+        <a href="/farol/">O Farol</a>
+        <a href="/produtos/">Produtos</a>
+        <a href="/servicos/">Serviços</a>
+        <a href="/oraculo/">Oráculo</a>
+        <a href="/para-de-ignorar/">Jogos</a>
+        <a href="/teste/">Testes gratuitos</a>
+        <a href="/ebooks/">Ebooks</a>
+        <a href="/profissionais/">Profissionais / B2B</a>
+      </nav>
+    </details>
+  </div>
+</header>
 <main class="b2b-test"><div class="box">
 <section id="intro" class="step on"><p class="eyebrow">≈ 2 minutos · 8 perguntas · gratuito</p><h1 class="title">O QUE O TEU NEGÓCIO ESTÁ A IGNORAR?</h1><p>Talvez haja dinheiro escondido numa parte da experiência que hoje parece apenas rotina. Em oito perguntas, ajudo-te a perceber onde pode estar uma oportunidade que vale a pena explorar. Sem receitas mágicas.</p><button class="button button--light" id="start">Começar</button></section>
 <section id="questions" class="step"><div class="progress" id="progress"></div><div class="progressbar"><span id="bar"></span></div><div class="q" id="question" tabindex="-1"></div><div class="choices" id="choices"></div></section>
