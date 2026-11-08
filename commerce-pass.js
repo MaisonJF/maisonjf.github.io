@@ -5,7 +5,7 @@
   const page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
   const products = {
     'brumas': { href: '/produtos/nevoa/', label: 'Ver Névoa de Ambiente', name: 'Névoa de Ambiente MAISON JF®' },
-    'escalda-pes': { href: '/produtos/escalda-pes/', label: 'Ver Escalda-Pés', name: 'Escalda-Pés MAISON JF®' },
+    'escalda-pes': { href: '/produtos/escalda-pes/', label: 'Ver Sais de Banho', name: 'Sais de Banho MAISON JF®' },
     'oleo': { href: '/produtos/oleo-massagem/', label: 'Ver Óleo de Massagem', name: 'Óleo de Massagem MAISON JF®' },
     'velas-aromaticas': { href: '/produtos/', label: 'Ver Velas Aromáticas', name: 'Velas Aromáticas MAISON JF®' }
   };
@@ -29,7 +29,7 @@
     const map = {
       'Névoa de Ambiente': '/produtos/nevoa/',
       'Velas Aromáticas': '/produtos/',
-      'Escalda-Pés': '/produtos/escalda-pes/',
+      'Sais de Banho': '/produtos/escalda-pes/',
       'Óleo de Massagem': '/produtos/oleo-massagem/'
     };
     document.querySelectorAll('#explorar .catalogue-card').forEach(card => {
