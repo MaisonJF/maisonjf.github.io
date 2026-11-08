@@ -10,6 +10,8 @@
  const allowedBusiness=new Set(['loja','spa','terapeuta','alojamento','servico','organizacao','outro']);
  const allowedGoal=new Set(['ticket','recompra','diferenciar','continuar','boasvindas','testar','presentear','equipa','formacao']);
  const read=key=>String(new FormData(form).get(key)||'').trim();
+ let pendingId=null;
+ form.addEventListener('input',()=>{pendingId=null});
  function feedback(text,ok){
    status.textContent=text;
    status.dataset.state=ok?'success':'error';
@@ -29,7 +31,7 @@
    };
    if(!data.consent){feedback('Confirma o consentimento.',false);return}
    if(!globalThis.crypto?.randomUUID){feedback('Atualiza o navegador para enviar o pedido com segurança.',false);return}
-   const idempotency='b2b:application:'+crypto.randomUUID();
+   const idempotency=pendingId||(pendingId='b2b:application:'+crypto.randomUUID());
    button.disabled=true;
    feedback('A registar o pedido…',false);
    try{
@@ -43,6 +45,7 @@
        throw new Error(result.error||'Não foi possível confirmar o registo.');
      }
      feedback('Candidatura guardada com sucesso. Entraremos em contacto pelo email indicado.',true);
+     pendingId=null;
      form.reset();
    }catch(error){
      feedback(error.message||'Não foi possível guardar o pedido. Podes contactar-nos por email.',false);
