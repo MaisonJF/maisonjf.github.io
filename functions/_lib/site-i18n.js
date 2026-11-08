@@ -2829,8 +2829,69 @@ const PRODUCTS_V3={
 };
 const mergeV3=(base,extra)=>Object.fromEntries(['pt-BR','en','es'].map(locale=>[locale,{...(base[locale]||{}),...(extra[locale]||{})}]));
 
+const MAISON_COUTURE_NAV={
+  "pt-BR": {
+    "Profissionais / B2B": "Profissionais / B2B",
+    "Jogos": "Jogos",
+    "Testes gratuitos": "Testes gratuitos",
+    "Ebooks": "Ebooks",
+    "Oráculo": "Oráculo",
+    "Menu": "Menu"
+  },
+  "en": {
+    "Profissionais / B2B": "Professionals / B2B",
+    "Jogos": "Games",
+    "Testes gratuitos": "Free tests",
+    "Ebooks": "Ebooks",
+    "Oráculo": "Oracle",
+    "Menu": "Menu"
+  },
+  "es": {
+    "Profissionais / B2B": "Profesionales / B2B",
+    "Jogos": "Juegos",
+    "Testes gratuitos": "Tests gratuitos",
+    "Ebooks": "Ebooks",
+    "Oráculo": "Oráculo",
+    "Menu": "Menú"
+  }
+};
+const MAISON_HOME_CONVERSION={
+  "pt-BR": {
+    "Aromas de autor, rituais sensoriais e literatura original de João Fädário. Não para acumular. Para escolher com intenção.": "Aromas autorais, rituais sensoriais e literatura original de João Fädário. Não para acumular. Para escolher com intenção.",
+    "FAZER UM TESTE GRATUITO": "FAZER UM TESTE GRATUITO",
+    "Há dias em que tens tudo.": "Há dias em que você tem tudo.",
+    "E falta qualquer coisa.": "E ainda sente que falta alguma coisa.",
+    "Há momentos em que tudo parece estar no sítio, mas qualquer coisa não encaixa. Talvez não te faltem objetos. Talvez te falte uma escolha que faça sentido.": "Há momentos em que tudo parece estar no lugar, mas alguma coisa não encaixa. Talvez não faltem objetos. Talvez falte uma escolha que faça sentido.",
+    "Uma vela não resolve a tua vida. Pode mudar a atmosfera de uma divisão. Um livro não apaga o passado. Pode fazer-te olhar para ele de outra maneira. É esse o critério da Maison: peças e experiências escolhidas pelo que acrescentam, não pelo espaço que ocupam.": "Uma vela não resolve sua vida. Pode mudar a atmosfera de um ambiente. Um livro não apaga o passado. Pode fazer você olhar para ele de outra maneira. Esse é o critério da Maison: peças e experiências escolhidas pelo que acrescentam, não pelo espaço que ocupam.",
+    "Não sabes o que escolher? Começa pelo que te inquieta.": "Não sabe o que escolher? Comece pelo que incomoda você.",
+    "O Farol organiza a tua procura em poucos passos e mostra-te caminhos para produtos, leituras e experiências. A decisão continua a ser tua.": "O Farol organiza sua busca em poucos passos e mostra caminhos para produtos, leituras e experiências. A escolha continua sendo sua.",
+    "Atenção, Apego e Afeto. Três testes de reflexão gratuitos. Sem diagnóstico e sem promessas sobre o futuro.": "Atenção, Apego e Afeto. Três testes gratuitos de reflexão. Sem diagnóstico nem promessas sobre o futuro."
+  },
+  "en": {
+    "Aromas de autor, rituais sensoriais e literatura original de João Fädário. Não para acumular. Para escolher com intenção.": "Signature scents, sensory rituals and original literature by João Fädário. Not to accumulate. To choose with intention.",
+    "FAZER UM TESTE GRATUITO": "TAKE A FREE TEST",
+    "Há dias em que tens tudo.": "Some days you have everything.",
+    "E falta qualquer coisa.": "And something still feels missing.",
+    "Há momentos em que tudo parece estar no sítio, mas qualquer coisa não encaixa. Talvez não te faltem objetos. Talvez te falte uma escolha que faça sentido.": "Sometimes everything seems to be in place, yet something doesn't quite fit. Perhaps you don't need more objects. Perhaps you need a choice that actually means something.",
+    "Uma vela não resolve a tua vida. Pode mudar a atmosfera de uma divisão. Um livro não apaga o passado. Pode fazer-te olhar para ele de outra maneira. É esse o critério da Maison: peças e experiências escolhidas pelo que acrescentam, não pelo espaço que ocupam.": "A candle won't solve your life. It can change the atmosphere of a room. A book won't erase the past. It may help you see it differently. That is the Maison's standard: pieces and experiences chosen for what they add, not the space they occupy.",
+    "Não sabes o que escolher? Começa pelo que te inquieta.": "Not sure what to choose? Start with what is on your mind.",
+    "O Farol organiza a tua procura em poucos passos e mostra-te caminhos para produtos, leituras e experiências. A decisão continua a ser tua.": "The Lighthouse helps you navigate products, reading and experiences in a few steps. The decision is always yours.",
+    "Atenção, Apego e Afeto. Três testes de reflexão gratuitos. Sem diagnóstico e sem promessas sobre o futuro.": "Attention, Attachment and Affection. Three free reflection tests. No diagnosis and no promises about the future."
+  },
+  "es": {
+    "Aromas de autor, rituais sensoriais e literatura original de João Fädário. Não para acumular. Para escolher com intenção.": "Aromas de autor, rituales sensoriales y literatura original de João Fädário. No para acumular. Para elegir con intención.",
+    "FAZER UM TESTE GRATUITO": "HACER UN TEST GRATUITO",
+    "Há dias em que tens tudo.": "Hay días en los que lo tienes todo.",
+    "E falta qualquer coisa.": "Y aun así sientes que falta algo.",
+    "Há momentos em que tudo parece estar no sítio, mas qualquer coisa não encaixa. Talvez não te faltem objetos. Talvez te falte uma escolha que faça sentido.": "A veces todo parece estar en su sitio, pero algo no encaja. Tal vez no te falten objetos. Tal vez te falte una elección que tenga sentido.",
+    "Uma vela não resolve a tua vida. Pode mudar a atmosfera de uma divisão. Um livro não apaga o passado. Pode fazer-te olhar para ele de outra maneira. É esse o critério da Maison: peças e experiências escolhidas pelo que acrescentam, não pelo espaço que ocupam.": "Una vela no resuelve tu vida. Puede cambiar la atmósfera de una habitación. Un libro no borra el pasado. Puede ayudarte a verlo de otra manera. Ese es el criterio de la Maison: piezas y experiencias elegidas por lo que aportan, no por el espacio que ocupan.",
+    "Não sabes o que escolher? Começa pelo que te inquieta.": "¿No sabes qué elegir? Empieza por lo que te inquieta.",
+    "O Farol organiza a tua procura em poucos passos e mostra-te caminhos para produtos, leituras e experiências. A decisão continua a ser tua.": "El Faro orienta tu búsqueda en pocos pasos y te muestra caminos hacia productos, lecturas y experiencias. La decisión sigue siendo tuya.",
+    "Atenção, Apego e Afeto. Três testes de reflexão gratuitos. Sem diagnóstico e sem promessas sobre o futuro.": "Atención, Apego y Afecto. Tres tests gratuitos de reflexión. Sin diagnósticos ni promesas sobre el futuro."
+  }
+};
 const PAGE_MAP={
-  '/':mergeV3(mergeV3(mergeV3(HOME,HOME_V3),HOME_YOICHI),HOME_FREE_TESTS),
+  '/':mergeV3(mergeV3(mergeV3(mergeV3(HOME,HOME_V3),HOME_YOICHI),HOME_FREE_TESTS),MAISON_HOME_CONVERSION),
   '/farol':FAROL,
   '/farol/':FAROL,
   '/teste/':TESTE,
@@ -2923,6 +2984,7 @@ export function translationMapFor(locale,sourcePath){
     : {};
   return {
     ...(COMMON[locale]||{}),
+    ...(MAISON_COUTURE_NAV[locale]||{}),
     ...oracleMap,
     ...((PAGE_MAP[path]||{})[locale]||{})
   };
