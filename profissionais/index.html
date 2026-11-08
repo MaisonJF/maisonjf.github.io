@@ -39,7 +39,7 @@
     <div class="pro-lead-form__grid">
       <label>O teu nome <input name="nome" type="text" required autocomplete="name" maxlength="100" placeholder="Como te chamas?"></label>
       <label>Empresa / espaço <input name="empresa" type="text" required autocomplete="organization" maxlength="120" placeholder="O nome do teu negócio"></label>
-      <label>Contacto (email ou telefone) <input name="contacto" type="text" required maxlength="150" placeholder="Para te responder"></label>
+      <label>Email profissional <input name="contacto" type="email" required autocomplete="email" maxlength="180" placeholder="nome@empresa.pt"></label>
       <label>O teu negócio
         <select name="business" required>
           <option value="">Seleciona uma opção</option>
@@ -70,14 +70,15 @@
         <textarea name="mensagem" required maxlength="1200" placeholder="Uma ou duas frases chegam para começar."></textarea>
       </label>
     </div>
+<label class="pro-lead-form__trap" aria-hidden="true" tabindex="-1">Website <input type="text" name="website" autocomplete="off" tabindex="-1"></label>
     <label class="pro-lead-form__consent">
       <input type="checkbox" name="consentimento" required>
-      <span>Concordo em partilhar os dados deste pedido através do WhatsApp para receber uma resposta comercial. A abertura da conversa não envia automaticamente a mensagem.</span>
+      <span>Autorizo a MAISON JF® a guardar os dados desta candidatura para me contactar sobre o pedido. O acesso é reservado, os dados não entram na telemetria e são conservados até 90 dias.</span>
     </label>
-    <button type="submit">ABRIR O MEU PEDIDO NO WHATSAPP</button>
+    <button type="submit">ENVIAR CANDIDATURA PROFISSIONAL</button>
     <p id="maison-b2b-status" class="pro-lead-form__status" role="status" aria-live="polite"></p>
-    <p class="pro-lead-form__note">Os dados de contacto não são guardados no motor de eventos B2B. Só as categorias não identificáveis podem ser registadas, conforme consentimento. Para concluir o pedido, confirma o envio no WhatsApp.</p>
-    <p class="pro-lead-form__note">Preferes email? <a id="maison-b2b-email" href="mailto:maisonjf@proton.me">Preparar mensagem para maisonjf@proton.me</a>.</p>
+    <p class="pro-lead-form__note">O pedido é guardado separadamente dos eventos analíticos, num registo de acesso restrito. Podes solicitar acesso, correção ou apagamento através do contacto da Maison. Não partilhamos os teus dados com revendedores.</p>
+    <p class="pro-lead-form__note">Preferes escrever-nos diretamente? <a href="mailto:maisonjf@proton.me?subject=MAISON%20JF%20-%20Parceria%20B2B">maisonjf@proton.me</a>.</p>
   </form>
 </section>
 <section class="conversation"><div><p class="eyebrow">Começar é simples</p><h2>Não precisas de um briefing perfeito.</h2><p>Diz-me que espaço tens e o que queres melhorar.</p><div class="press-actions"><a class="button button--light" href="#maison-b2b-request">PEDIR PROPOSTA →</a></div></div></section><section class="links"><p class="eyebrow">Explorar</p><h2>Vai directo ao que te interessa.</h2><div class="links-grid"><a href="../profissionais/produtos-para-revenda-em-spa"><strong>Revenda em spa ou gabinete</strong><span>Produtos e pequenas séries para espaços de bem-estar.</span></a><a href="../profissionais/produtos-para-revenda-em-loja"><strong>Revenda em loja</strong><span>Selecção para lojas e espaços independentes.</span></a><a href="../profissionais/velas-aromaticas-para-revenda"><strong>Velas Aromáticas</strong><span>Uma entrada directa para esta categoria.</span></a><a href="../profissionais/produtos-de-boas-vindas-para-alojamento-local"><strong>Alojamento local</strong><span>Pequenos gestos de boas-vindas para hóspedes.</span></a><a href="../profissionais/aromas-para-espacos-de-bem-estar"><strong>Aromas para espaços</strong><span>Atmosfera coerente com a experiência do lugar.</span></a><a href="../profissionais/o-que-posso-oferecer-de-diferente-aos-meus-clientes"><strong>Quero diferenciar a experiência</strong><span>Quando sabes o resultado, mas ainda não o produto.</span></a><a href="../profissionais/como-escolher-produtos-para-um-spa-ou-gabinete"><strong>Escolher produtos para spa ou gabinete</strong><span>Começar pela função dentro da experiência.</span></a><a href="../profissionais/como-escolher-aromas-para-um-gabinete-de-massagem"><strong>Escolher aromas para massagem</strong><span>Intensidade, espaço e conforto antes da preferência.</span></a><a href="../profissionais/como-criar-um-ritual-de-boas-vindas-para-clientes"><strong>Criar um ritual de boas-vindas</strong><span>Um gesto simples que a equipa consegue repetir.</span></a></div></section></main><footer><div class="shell"><strong>MAISON JF®</strong><p>Se fizer sentido para os dois, avançamos.</p><nav><a href="../press/">Imprensa</a><a href="../contacto/">Contacto</a><a href="../informacao-legal">Informação Legal</a></nav></div></footer><script src="./b2b-lead-form.js?v=20261108" defer></script></body></html>
