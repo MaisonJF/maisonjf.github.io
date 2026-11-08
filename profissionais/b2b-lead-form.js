@@ -1,77 +1,51 @@
-/* MAISON JF® B2B — real contact hand-off + non-identifying lead event.
-   /api/b2b-lead is telemetry only; never send personal data there.
-   A commercial enquiry is completed when the visitor actually sends WhatsApp/email. */
+/* MAISON JF® — direct, confirmed B2B application.
+   Name, company, email and message are sent ONLY to the dedicated B2B application
+   branch of /api/b2b-lead. Never label a telemetry-only 200 as "lead stored". */
 (function(){
-  'use strict';
-  const form=document.getElementById('maison-b2b-request');
-  if(!form)return;
-  const status=document.getElementById('maison-b2b-status');
-  const button=form.querySelector('button[type="submit"]');
-  const allowedBusiness=new Set(['loja','spa','terapeuta','alojamento','servico','organizacao','outro']);
-  const allowedGoal=new Set(['ticket','recompra','diferenciar','continuar','boasvindas','testar','presentear','equipa','formacao']);
-  function read(name){return String(new FormData(form).get(name)||'').trim().slice(0,1200)}
-  async function signalNonPersonalContext(business,goal){
-    const metadata={
-      interest:'b2b',origin:'profissionais',business,goal
-    };
-    const event={
-      event_type:'b2b.lead',
-      idempotency_key:'b2b:lead:'+(globalThis.crypto?.randomUUID?.()||String(Date.now())+'-'+Math.random().toString(16).slice(2)),
-      metadata
-    };
-    const controller=new AbortController();
-    const timeout=setTimeout(()=>controller.abort(),950);
-    try{
-      const response=await fetch('/api/b2b-lead',{
-        method:'POST',
-        headers:{'content-type':'application/json'},
-        body:JSON.stringify(event),
-        credentials:'same-origin',
-        keepalive:true,
-        signal:controller.signal
-      });
-      const result=await response.json().catch(()=>({}));
-      // A 200 response with ignored:true is NOT a stored business lead.
-      return Boolean(response.ok&&result.ok&&!result.ignored);
-    }catch{return false}
-    finally{clearTimeout(timeout)}
-  }
-  form.addEventListener('submit',async event=>{
-    event.preventDefault();
-    if(!form.reportValidity())return;
-    const name=read('nome'),company=read('empresa'),contact=read('contacto');
-    const business=read('business'),goal=read('goal'),message=read('mensagem');
-    if(!allowedBusiness.has(business)||!allowedGoal.has(goal)){
-      status.textContent='Seleciona o teu tipo de negócio e o objetivo.';
-      return;
-    }
-    const label=(selectName)=>form.elements[selectName].selectedOptions[0].textContent.trim();
-    const text=[
-      'Olá, João. Quero falar com a MAISON JF® sobre uma proposta profissional.',
-      'Nome: '+name,'Empresa: '+company,
-      'Contacto: '+contact,
-      'Negócio: '+label('business'),
-      'Objetivo: '+label('goal'),
-      'Pedido: '+message
-    ].join('\n');
-    button.disabled=true;
-    status.textContent='A preparar a conversa no WhatsApp…';
-    // PII is sent ONLY through the visitor's chosen WhatsApp action.
-    // The telemetry endpoint receives validated non-identifying categories.
-    await signalNonPersonalContext(business,goal);
-    const href='https://wa.me/351923318289?text='+encodeURIComponent(text);
-    status.textContent='O WhatsApp vai abrir. Confirma o envio da mensagem para concluir o pedido.';
-    window.location.assign(href);
-    button.disabled=false;
-  });
-  const email=document.getElementById('maison-b2b-email');
-  if(email)email.addEventListener('click',()=>{
-    const name=read('nome'),company=read('empresa'),business=read('business'),goal=read('goal'),message=read('mensagem');
-    const subject='MAISON JF® | Proposta profissional | '+company.slice(0,60);
-    const body=[
-      'Nome: '+name,'Empresa: '+company,'Contacto: '+read('contacto'),
-      'Negócio: '+business,'Objetivo: '+goal,'Pedido: '+message
-    ].join('\n');
-    email.href='mailto:maisonjf@proton.me?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-  });
+ 'use strict';
+ const form=document.getElementById('maison-b2b-request');
+ if(!form)return;
+ const status=document.getElementById('maison-b2b-status');
+ const button=form.querySelector('button[type="submit"]');
+ const allowedBusiness=new Set(['loja','spa','terapeuta','alojamento','servico','organizacao','outro']);
+ const allowedGoal=new Set(['ticket','recompra','diferenciar','continuar','boasvindas','testar','presentear','equipa','formacao']);
+ const read=key=>String(new FormData(form).get(key)||'').trim();
+ function feedback(text,ok){
+   status.textContent=text;
+   status.dataset.state=ok?'success':'error';
+ }
+ form.addEventListener('submit',async event=>{
+   event.preventDefault();
+   if(!form.reportValidity())return;
+   const activity=read('business'),goal=read('goal');
+   if(!allowedBusiness.has(activity)||!allowedGoal.has(goal)){
+     feedback('Seleciona o tipo de negócio e o objetivo.',false);return;
+   }
+   const data={
+     name:read('nome'),company:read('empresa'),email:read('contacto'),
+     activity,goal,message:read('mensagem'),
+     consent:form.elements.consentimento.checked,
+     website:read('website')
+   };
+   if(!data.consent){feedback('Confirma o consentimento.',false);return}
+   if(!globalThis.crypto?.randomUUID){feedback('Atualiza o navegador para enviar o pedido com segurança.',false);return}
+   const idempotency='b2b:application:'+crypto.randomUUID();
+   button.disabled=true;
+   feedback('A registar o pedido…',false);
+   try{
+     const response=await fetch('/api/b2b-lead',{
+       method:'POST',credentials:'same-origin',
+       headers:{'Content-Type':'application/json'},
+       body:JSON.stringify({type:'b2b_application',idempotency_key:idempotency,data})
+     });
+     const result=await response.json().catch(()=>({}));
+     if(!response.ok||result.ok!==true||result.stored!==true||!result.reference){
+       throw new Error(result.error||'Não foi possível confirmar o registo.');
+     }
+     feedback('Candidatura guardada com sucesso. Entraremos em contacto pelo email indicado.',true);
+     form.reset();
+   }catch(error){
+     feedback(error.message||'Não foi possível guardar o pedido. Podes contactar-nos por email.',false);
+   }finally{button.disabled=false}
+ });
 })();
