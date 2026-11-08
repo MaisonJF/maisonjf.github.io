@@ -1,0 +1,37 @@
+name: Maison B2B inquiry privacy retention (90 days)
+
+on:
+  schedule:
+    - cron: '17 03 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  expire-b2b-inquiries:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_D1_WRITE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Require authorized, dedicated D1 write token
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "D1 write token missing"; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "Cloudflare account missing"; exit 1; }
+      - name: Remove only expired B2B inquiries
+        shell: bash
+        working-directory: workers/maison-intelligence
+        run: |
+          set -euo pipefail
+          npx --yes wrangler@4 d1 execute maison-growth-engine --remote --command="DELETE FROM b2b_inquiries WHERE expires_at < strftime('%Y-%m-%dT%H:%M:%fZ', 'now');"
+          echo "Expired B2B inquiry cleanup completed; no personal data exported."
