@@ -76,6 +76,9 @@
     const header = document.querySelector('.site-header');
     const nav = header?.querySelector('nav');
     if (!header || !nav) return;
+    // The canonical Maison header has its own accessible native Details menu.
+    // Never inject a second hamburger or rewrite its link set.
+    if (header.classList.contains('maison-global-header')) return;
 
     const normalizePath = value => {
       try {
@@ -770,7 +773,7 @@
 
     // MAISON JF® global navigation: locale-aware and consistent on desktop/mobile.
     const header = document.querySelector('.site-header');
-    if (header) {
+    if (header && !header.classList.contains('maison-global-header')) {
       const nav = header.querySelector('nav');
       const path = window.location.pathname || '/';
       const prefix = path === '/en' || path.startsWith('/en/') ? '/en'
