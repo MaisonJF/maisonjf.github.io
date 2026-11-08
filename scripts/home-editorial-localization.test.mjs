@@ -20,7 +20,7 @@ test('public homepage uses the exact official Farol asset and free-test entry po
 test('home has clean public positioning, editorial voice and no legacy labels',()=>{
   for(const str of [
     'NÃO PRECISAS DE MAIS COISAS.','PRECISAS DAS CERTAS.',
-    'Uma experiência não se explica.','A atmosfera também é uma escolha.',
+    'Há dias em que tens tudo.','A atmosfera também é uma escolha.',
     'Uma Maison não precisa de gritar para influenciar.',
     'Começa pela tua peça de assinatura.'
   ])assert.ok(home.includes(str),str);
@@ -30,10 +30,10 @@ test('home has clean public positioning, editorial voice and no legacy labels',(
 
 test('all four locales preserve brand, primary links and publish localized copy',()=>{
   const cases=[
-    {locale:'pt-PT',phrase:'Três portas. Sem pagar para começar.',cta:'VER TODOS OS TESTES GRATUITOS'},
-    {locale:'pt-BR',phrase:'Nem sempre você sabe o que procura.',cta:'VER TODOS OS TESTES GRATUITOS'},
-    {locale:'en',phrase:"You may not know what you're looking for.",cta:'EXPLORE ALL FREE TESTS'},
-    {locale:'es',phrase:'No siempre sabes lo que buscas.',cta:'VER TODOS LOS TESTS GRATUITOS'}
+    {locale:'pt-PT',phrase:'Não sabes o que escolher? Começa pelo que te inquieta.',cta:'VER TODOS OS TESTES GRATUITOS'},
+    {locale:'pt-BR',phrase:'Não sabe o que escolher? Comece pelo que incomoda você.',cta:'VER TODOS OS TESTES GRATUITOS'},
+    {locale:'en',phrase:'Not sure what to choose? Start with what is on your mind.',cta:'EXPLORE ALL FREE TESTS'},
+    {locale:'es',phrase:'¿No sabes qué elegir? Empieza por lo que te inquieta.',cta:'VER TODOS LOS TESTS GRATUITOS'}
   ];
   for(const {locale,phrase,cta} of cases){
     const out=translateMaisonHtml(home,locale,'/');
