@@ -33,8 +33,8 @@ DELETE FROM b2b_inquiries WHERE inquiry_id = 'REFERENCIA_CONFIRMADA';
 ## Proteção e retenção
 - A tabela contém dados pessoais de contacto e exige acesso restrito ao D1 e finalidade comercial limitada; não publicar exports ou logs.
 - A submissão inclui consentimento obrigatório, limites de caracteres e campo anti-spam invisível. Não equivale a um CAPTCHA ou WAF; ativar políticas anti-abuso na Cloudflare se necessário.
-- Cada candidatura executa uma eliminação automática de registos com mais de 90 dias. **Esta limpeza por escrita não substitui um processo programado diário** se o objetivo for garantir eliminação no prazo mesmo em períodos sem novos pedidos.
-- Para garantir o limite máximo de 90 dias, executar diariamente a instrução abaixo por um mecanismo administrativo autorizado (agendamento de D1 ainda não foi configurado):
+- Cada candidatura elimina registos vencidos e existe um workflow diário para os períodos sem novos pedidos. Se o workflow falhar, o responsável deve executar a eliminação manualmente e corrigir as credenciais.
+- A PR inclui o workflow diário `.github/workflows/maison-b2b-inquiry-retention.yml` (03:17 UTC), usando o token restrito de escrita D1. **A retenção automática só deve ser considerada verificada após o primeiro run bem-sucedido na `main` e a confirmação de que o token dedicado está disponível.** A instrução SQL executada é:
 
 ```sql
 DELETE FROM b2b_inquiries WHERE expires_at < strftime('%Y-%m-%dT%H:%M:%fZ', 'now');
