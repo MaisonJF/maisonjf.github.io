@@ -59,6 +59,10 @@
   .tarot-hero .btn{font-size:10px;padding-inline:12px}
 }
 
+/* Improve reading contrast without changing dark surfaces. */
+.tarot-page :is(p,li,figcaption){line-height:1.6}
+.tarot-page :is(.btn,button,[role=button]){min-height:48px}
+@media(max-width:700px){.tarot-page :is(p,li,figcaption){font-size:max(16px,1em)}}
 </style>
 
 <style>
