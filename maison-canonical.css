@@ -1,3 +1,4 @@
+@import url('/maison-noir-global.css?v=20261108-global');
 /* MAISON JF® canonical responsive navigation, HTML/CSS only.
    Checkbox is keyboard accessible; no separate menu JS or duplicate mobile button. */
 .maison-global-header,.site-header.maison-global-header,body.maison-ivory .maison-global-header {
