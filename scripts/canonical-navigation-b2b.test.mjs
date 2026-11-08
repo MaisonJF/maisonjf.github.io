@@ -29,6 +29,12 @@ test('Eight principal pages use identical semantic canonical navigation, desktop
   assert.match(home,/<footer>[\s\S]*href="\.\/profissionais\/"[\s\S]*<\/footer>/);
 });
 
+test('Legacy analytics must not rewrite canonical menu or append duplicate hamburger',()=>{
+  const source=read('analytics.js');
+  assert.match(source,/if \(header\.classList\.contains\('maison-global-header'\)\) return;/);
+  assert.match(source,/if \(header && !header\.classList\.contains\('maison-global-header'\)\) \{/);
+});
+
 test('B2B form uses existing telemetry endpoint without leaking personal data',()=>{
   const html=read('profissionais/index.html');
   const script=read('profissionais/b2b-lead-form.js');
