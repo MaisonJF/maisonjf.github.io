@@ -10,9 +10,9 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const home=read('index.html');
 
 test('public homepage uses the exact official Farol asset and free-test entry points',()=>{
-  assert.match(home,/src="\.\/maison-jf-mark\.svg"/);
+  assert.match(home,/src="\.\/assets\/brand\/maison-jf-farol-monograma-oficial\.svg"/);
   assert.doesNotMatch(home,/<svg[^>]*viewBox="0 0 80 80"/);
-  assert.match(read('maison-jf-mark.svg'),/Logótipo MAISON JF® com monograma JF dourado e farol/i);
+  assert.match(read('assets/brand/maison-jf-farol-monograma-oficial.svg'),/Monograma Farol Maison JF/i);
   for(const route of ['./farol/','./teste/','./teste/atencao/','./teste/apego/','./teste/afeto/'])
     assert.ok(home.includes('href="'+route+'"'),route);
 });
@@ -39,7 +39,7 @@ test('all four locales preserve brand, primary links and publish localized copy'
     const out=translateMaisonHtml(home,locale,'/');
     assert.ok(out.includes(phrase),locale+' missing translated headline');
     assert.ok(out.includes(cta),locale+' missing translated CTA');
-    for(const path of ['maison-jf-mark.svg','teste/atencao/','teste/apego/','teste/afeto/','perf/home/hero-640.webp'])
+    for(const path of ['assets/brand/maison-jf-farol-monograma-oficial.svg','teste/atencao/','teste/apego/','teste/afeto/','perf/home/hero-640.webp'])
       assert.ok(out.includes(path),locale+' lost asset or route '+path);
   }
 });
@@ -57,6 +57,6 @@ test('Ivory couture theme is available and opted-in by commerce and free experie
 
 test('The protected brand specification documents Farol and Fibonacci without inventing cover assets',()=>{
   const doc=read('docs/MAISON-JF-IDENTIDADE-VISUAL-E-EDITORIAL.md');
-  for(const phrase of ['maison-jf-mark.svg','Fibonacci','Marfim','esmeralda','bordeaux'])
+  for(const phrase of ['assets/brand/maison-jf-farol-monograma-oficial.svg','Fibonacci','Marfim','esmeralda','bordeaux'])
     assert.ok(doc.includes(phrase),phrase);
 });
