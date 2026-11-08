@@ -39,7 +39,7 @@
     if(document.querySelector('.maison-language-switcher'))return;
     const style=document.createElement('style');
     style.id='maison-language-switcher-style-client';
-    style.textContent='.maison-language-switcher{position:fixed;z-index:2147483000;top:82px;right:max(20px,calc((100vw - 1180px)/2));display:flex;gap:2px;padding:3px;border:1px solid rgba(199,170,115,.26);background:rgba(7,7,7,.76);backdrop-filter:blur(14px);border-radius:999px}.maison-language-switcher a{display:grid;place-items:center;min-width:31px;height:27px;padding:0 7px;border-radius:999px;color:rgba(245,241,233,.68);font:600 9px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.08em;text-decoration:none}.maison-language-switcher a:hover,.maison-language-switcher a:focus-visible,.maison-language-switcher a[aria-current="page"]{background:rgba(199,170,115,.16);color:#f5f1e9;outline:none}@media(max-width:700px){.maison-language-switcher{top:70px;right:12px}.maison-language-switcher a{min-width:29px;height:25px;padding:0 6px}}';
+    style.textContent='.maison-language-switcher{position:relative;z-index:1;display:flex;justify-content:flex-end;align-items:center;gap:3px;max-width:1280px;width:calc(100% - 36px);margin:0 auto;padding:0 0 10px;background:transparent;border:0;box-shadow:none;backdrop-filter:none}.maison-language-switcher a{display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:48px;padding:8px 10px;border-radius:999px;color:#111111;background:#f8f3ea;border:1px solid #b8a17c;font:700 12px/1.2 Arial,sans-serif;text-decoration:none}.maison-language-switcher a:hover,.maison-language-switcher a:focus-visible,.maison-language-switcher a[aria-current="page"]{background:#164b3f;color:#ffffff;outline:2px solid #164b3f;outline-offset:1px}@media(max-width:700px){.maison-language-switcher{width:calc(100% - 28px);justify-content:center;padding-bottom:8px}.maison-language-switcher a{min-height:44px;min-width:44px}}';
     document.head.appendChild(style);
     const nav=document.createElement('nav');
     nav.className='maison-language-switcher';
@@ -55,7 +55,7 @@
       if(locale===active)link.setAttribute('aria-current','page');
       nav.appendChild(link);
     });
-    document.body.appendChild(nav);
+    const header=document.querySelector('.maison-global-header');(header||document.body).appendChild(nav);
   }
 
   const MAP = new Map(Object.entries({
