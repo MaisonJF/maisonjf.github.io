@@ -20,6 +20,8 @@ jobs:
         run: node --experimental-default-type=module --test scripts/home-editorial-localization.test.mjs
       - name: Guard canonical navigation, B2B flow, privacy and responsive imagery
         run: node --experimental-default-type=module --test scripts/canonical-navigation-b2b.test.mjs
+      - name: Confirm real B2B inquiry persistence contract, rejection and privacy
+        run: node --experimental-default-type=module --test scripts/b2b-inquiry-contract.test.mjs
       - name: Validate Vault v3 payload contract
         run: node .github/maison-growth/vault/validate_v3_payload_contract.mjs
       - name: Validate PDI registry
