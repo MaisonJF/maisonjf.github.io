@@ -19,7 +19,7 @@ html body .maison-global-header__nav a{color:#F2E9DA!important}
 html body .product__media{background:#121212!important}
 html body .catalogue .filters button.on{background:#00A8B5!important;color:#080808!important}
 html body .catalogue :is(.text-link,.curadoria__more){color:#C6A667!important}
-</style></head><body class="catalogue-page maison-ivory"><header class="site-header maison-global-header" id="header">
+</style><style>.maison-photo-pending{display:grid;place-items:center;min-height:190px;background:#080808!important;border:1px solid rgba(198,166,103,.4);padding:22px;text-align:center}.maison-photo-pending span{color:#F2E9DA!important;font-size:13px;letter-spacing:.08em;line-height:1.5}.maison-photo-notice{color:#F2E9DA!important;background:#080808!important;border-left:2px solid #C6A667;padding:14px 18px;margin:18px 0;font-size:15px}</style></head><body class="catalogue-page maison-ivory"><header class="site-header maison-global-header" id="header">
   <div class="maison-global-header__inner">
     <a class="brand maison-global-header__brand" href="/" aria-label="MAISON JF® — início"><img class="maison-global-header__icon" src="/assets/brand/maison-jf-farol-monograma-oficial.svg" alt="Farol oficial MAISON JF®" width="38" height="40" decoding="async"><span>MAISON JF®</span></a>
     <input class="maison-global-header__checkbox" id="maison-mobile-menu" type="checkbox" aria-label="Mostrar navegação">
@@ -143,7 +143,7 @@ html body .catalogue :is(.text-link,.curadoria__more){color:#C6A667!important}
       el.className='product'+(catalogue?'':' product--no-media');
       const thumb=CATALOGUE_THUMBS[product.slug];
       const thumbSrcset=thumb?.srcset||'';
-      const media=catalogue?`<div class="product__media"><img src="${thumb?.src||catalogue.src}"${thumbSrcset?` srcset="${thumbSrcset}" sizes="(max-width:520px) 100vw, (max-width:800px) 50vw, 33vw"`:''} alt="${catalogue.alt||product.name}" loading="lazy" decoding="async" fetchpriority="low"></div>`:'';
+      const media=catalogue?`<div class="product__media"><img src="${thumb?.src||catalogue.src}"${thumbSrcset?` srcset="${thumbSrcset}" sizes="(max-width:520px) 100vw, (max-width:800px) 50vw, 33vw"`:''} alt="${catalogue.alt||product.name}" loading="lazy" decoding="async" fetchpriority="low"></div>`:`<div class="product__media maison-photo-pending" role="note"><span>Fotografias da nova colecção em preparação</span></div>`;
       const price=product.priceNote||formatPrice(product);
       el.innerHTML=`${media}<div class="product__body"><small>${product.categoryLabel||product.category}</small><h2>${product.name}${product.size?` <span style="font-size:.45em">${product.size}</span>`:''}</h2>${price?`<div class="price">${price}</div>`:''}<p>${product.description}</p><div class="product__actions"><a class="text-link" data-product="${product.slug}" href="./${encodeURIComponent(product.slug)}/">${product.cta||({en:'Discover',es:'Descubrir','pt-BR':'Descobrir'}[document.documentElement.lang]||'Descobrir')}</a></div></div>`;
       root.append(el);
