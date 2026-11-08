@@ -44,21 +44,26 @@ test('Canonical navigation displays on desktop, and collapses only via explicit 
   assert.ok(!read('index.html').includes('<details class="maison-global-header__menu">'));
 });
 
-test('B2B form uses existing telemetry endpoint without leaking personal data',()=>{
-  const html=read('profissionais/index.html');
-  const script=read('profissionais/b2b-lead-form.js');
-  const endpoint=read('functions/api/b2b-lead.js');
-  assert.match(html,/<form id="maison-b2b-request">/);
-  for(const name of ['nome','empresa','contacto','business','goal','mensagem','consentimento'])
-    assert.ok(html.includes('name="'+name+'"'),name);
-  assert.match(script,/fetch\('\/api\/b2b-lead'/);
-  assert.match(script,/event_type:'b2b\.lead'/);
-  assert.match(script,/wa\.me\/351923318289/);
-  assert.match(script,/window\.location\.assign\(href\)/);
-  assert.ok(!script.includes("metadata:{name"));
-  assert.ok(!script.includes("metadata:{email"));
-  assert.match(endpoint,/recordB2BEvent/);
-  assert.match(html,/maison-ivory\.css/);
+test('B2B inquiry is only confirmed after D1 storage, with no WhatsApp detour',()=>{
+ const html=read('profissionais/index.html');
+ const script=read('profissionais/b2b-lead-form.js');
+ const endpoint=read('functions/api/b2b-lead.js');
+ assert.match(html,/<form id="maison-b2b-request">/);
+ for(const name of ['nome','empresa','contacto','business','goal','mensagem','consentimento'])
+   assert.ok(html.includes('name="'+name+'"'),name);
+ assert.match(html,/name="contacto" type="email"/);
+ assert.match(script,/fetch\('\/api\/b2b-lead'/);
+ assert.match(script,/type:'b2b_application'/);
+ assert.match(script,/result\.stored!==true/);
+ assert.ok(!script.includes('window.location.assign'));
+ assert.match(endpoint,/MAISON_BRAIN_DB/);
+ assert.match(endpoint,/INSERT OR IGNORE INTO b2b_inquiries/);
+ assert.match(endpoint,/recordB2BEvent/);
+ assert.match(html,/maison-ivory\.css/);
+});
+test('Original Farol image has a correct absolute path in every main header',()=>{
+ assert.ok(read('assets/brand/maison-jf-farol-monograma-oficial.svg').length>200000);
+ for(const p of pages)assert.match(read(p),/src="\/assets\/brand\/maison-jf-farol-monograma-oficial\.svg"/);
 });
 
 test('Desktop composition never crops authored homepage/B2B imagery',()=>{
