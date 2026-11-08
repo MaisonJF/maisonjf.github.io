@@ -9,7 +9,7 @@ window.MAISON_PRODUCTS=[
  slug:'maison-jf-bundles',sku:'MJ-BUNDLES',name:'Maison JF Bundles',category:'Casa',price:10,priceNote:'Desde 10 €',currency:'EUR',availability:'in_stock',condition:'new',productImage:'/images/maison-jf-bundles.webp.webp',
  description:'Diferentes gestos da Maison reunidos num só ritual, para oferecer ou para seres tu a aproveitar.',
  media:[{role:'hero',src:'/images/maison-jf-bundles.webp.webp',alt:'Maison JF Bundles — Essencial, Corpo & Alma e Completo',aspect:'portrait',editorial:true}],
- ritual:{title:'Porque cuidas de tanta coisa. Também mereces cuidar de ti.',text:'Escalda-Pés, aroma, toque e luz combinam-se de formas diferentes em cada seleção. Escolhe o teu pelo momento, não pela quantidade.'},
+ ritual:{title:'Porque cuidas de tanta coisa. Também mereces cuidar de ti.',text:'Sais de Banho, aroma, toque e luz combinam-se de formas diferentes em cada seleção. Escolhe o teu pelo momento, não pela quantidade.'},
  cta:'Descobrir os Bundles'
 },
 {
@@ -41,9 +41,9 @@ window.MAISON_PRODUCTS=[
  cta:'Quero escolher'
 },
 {
- slug:'escalda-pes',sku:'MJ-ESCALDA-280',name:'Escalda-Pés',size:'280 g',category:'Corpo',price:9.5,currency:'EUR',availability:'in_stock',condition:'new',productImage:'/images/products/escalda-pes/01-hero-packshot-editorial.webp',
+ slug:'escalda-pes',sku:'MJ-ESCALDA-280',name:'Sais de Banho',size:'280 g',category:'Corpo',price:9.5,currency:'EUR',availability:'in_stock',condition:'new',productImage:'/images/products/escalda-pes/01-hero-packshot-editorial.webp',
  description:'Água morna. Dez minutos. Hoje já fizeste o suficiente.',
- media:[{role:'hero',src:'/images/products/escalda-pes/01-hero-packshot-editorial.webp',alt:'Escalda-Pés MAISON JF, fotografia editorial de produto',aspect:'portrait',editorial:true},{role:'texture',src:'/images/products/escalda-pes/02-macro-materia.webp',alt:'Textura do Escalda-Pés MAISON JF com sal grosso e pétalas secas',aspect:'portrait',editorial:true},{role:'detail',src:'/images/products/escalda-pes/03-abertura-saco.webp',alt:'Saco aberto do Escalda-Pés MAISON JF com mistura visível',aspect:'portrait',editorial:true},{role:'ritual',src:'/images/products/escalda-pes/06-pour-top.webp',alt:'Escalda-Pés MAISON JF a ser vertido pela abertura superior do saco para a água',aspect:'portrait',editorial:true},{role:'ambience',src:'/images/products/escalda-pes/05-experiencia-desejo.webp',alt:'Experiência de Escalda-Pés MAISON JF em bacia com água',aspect:'portrait',editorial:true}],
+ media:[{role:'hero',src:'/images/products/escalda-pes/01-hero-packshot-editorial.webp',alt:'Sais de Banho MAISON JF, fotografia editorial de produto',aspect:'portrait',editorial:true},{role:'texture',src:'/images/products/escalda-pes/02-macro-materia.webp',alt:'Textura do Sais de Banho MAISON JF com sal grosso e pétalas secas',aspect:'portrait',editorial:true},{role:'detail',src:'/images/products/escalda-pes/03-abertura-saco.webp',alt:'Saco aberto do Sais de Banho MAISON JF com mistura visível',aspect:'portrait',editorial:true},{role:'ritual',src:'/images/products/escalda-pes/06-pour-top.webp',alt:'Sais de Banho MAISON JF a ser vertido pela abertura superior do saco para a água',aspect:'portrait',editorial:true},{role:'ambience',src:'/images/products/escalda-pes/05-experiencia-desejo.webp',alt:'Experiência de Sais de Banho MAISON JF em bacia com água',aspect:'portrait',editorial:true}],
  ritual:{title:'Não compliques a pausa.',text:'Água morna, aroma e alguns minutos em que ninguém te pede nada.'},
  cta:'Quero criar este momento'
 }
@@ -55,7 +55,7 @@ const MAISON_PRODUCT_LOCALES={
     'vela-pequena':{name:'Vela Aromática',category:'Casa',description:'Luz e aroma em um formato menor.',ritual:{title:'Um gesto pequeno também conta.',text:'Um ponto de luz pode bastar para marcar alguns minutos que não precisam servir para mais nada.'},cta:'Quero levar para casa'},
     'oleo-massagem':{name:'Óleo de Massagem',category:'Corpo',description:'Toque e pausa em um ritual simples de massagem.',ritual:{title:'O corpo percebe o toque antes da explicação.',text:'Alguns minutos de massagem podem ser uma forma simples de devolver presença ao corpo.'},cta:'Quero saber mais'},
     nevoa:{name:'Névoa de Ambiente',category:'Casa',description:'Uma forma rápida de mudar o ambiente através do aroma.',ritual:{title:'Mude o ar antes de mudar tudo.',text:'Um gesto no espaço pode bastar para marcar a passagem entre o que veio de fora e o tempo que agora é seu.'},cta:'Quero escolher'},
-    'escalda-pes':{name:'Escalda-Pés',category:'Corpo',description:'Sais para escalda-pés com notas de bourbon, âmbar oriental, rose marine e um toque de limão, com pétalas secas de rosa e jasmim e um saponificante para uma experiência sensorial mais envolvente.',ritual:{title:'Não complique a pausa.',text:'Água morna, aroma e alguns minutos em que ninguém pede nada a você.'},cta:'Quero criar este momento'}
+    'escalda-pes':{name:'Sais de Banho',category:'Corpo',description:'Sais para sais de banho com notas de bourbon, âmbar oriental, rose marine e um toque de limão, com pétalas secas de rosa e jasmim e um saponificante para uma experiência sensorial mais envolvente.',ritual:{title:'Não complique a pausa.',text:'Água morna, aroma e alguns minutos em que ninguém pede nada a você.'},cta:'Quero criar este momento'}
   },
   en:{
     'vela-vidro':{name:'Scented Candle',categoryLabel:'Home',description:'Light and scent to change the rhythm of a space.',ritual:{title:'Light it to change the rhythm.',text:'The light drops. The scent remains. And home understands that the day has shifted.'},cta:'Take it home'},
