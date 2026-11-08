@@ -3029,8 +3029,70 @@ const MAISON_B2B_APPLICATION={
     "Preferes escrever-nos diretamente?": "¿Prefieres escribirnos directamente?"
   }
 };
+const MAISON_HOME_CHECKOUT={
+  "pt-BR": {
+    "ÉDITIONS · LIVROS DIGITAIS": "ÉDITIONS · LIVROS DIGITAIS",
+    "Histórias para quem não vira a página à primeira.": "Histórias para quem não vira a página na primeira tentativa.",
+    "Quatro edições de autor. Vê o preço, escolhe o livro e compra sem percursos desnecessários. Acesso privado após confirmação do pagamento.": "Quatro edições autorais. Confira o preço, escolha o livro e compre sem etapas desnecessárias. Acesso privado após a confirmação do pagamento.",
+    "Conhecer o livro": "Conhecer o livro",
+    " · COMPRAR": " · COMPRAR",
+    "EXPLORAR TODAS AS EDIÇÕES": "EXPLORAR TODAS AS EDIÇÕES",
+    "CONSULTA DE TAROT": "CONSULTA DE TAROT",
+    "Já tens a pergunta. Falta olhares para ela.": "Você já tem a pergunta. Falta encará-la.",
+    "Uma leitura individual, direta e sem promessas de futuro. O Tarot ajuda-te a explorar padrões, dúvidas e escolhas. A decisão continua a ser tua.": "Uma leitura individual, direta, sem promessas sobre o futuro. O Tarot ajuda você a explorar padrões, dúvidas e escolhas. A decisão continua sendo sua.",
+    "CONHECER E AGENDAR A CONSULTA": "CONHECER E AGENDAR A CONSULTA",
+    "Comprar O Turista por 2,99 euros": "Comprar O Turista por 2,99 euros",
+    "Comprar Meandros da Vida por 3,50 euros": "Comprar Meandros da Vida por 3,50 euros",
+    "Comprar Pára de Ignorar! por 5,99 euros": "Comprar Pára de Ignorar! por 5,99 euros",
+    "Comprar Raio Azul por 3,50 euros": "Comprar Raio Azul por 3,50 euros",
+    "Capa de O Turista": "Capa de O Turista",
+    "Capa de Meandros da Vida": "Capa de Meandros da Vida",
+    "Capa de Pára de Ignorar!": "Capa de Pára de Ignorar!",
+    "Capa de Raio Azul": "Capa de Raio Azul"
+  },
+  "en": {
+    "ÉDITIONS · LIVROS DIGITAIS": "ÉDITIONS · DIGITAL BOOKS",
+    "Histórias para quem não vira a página à primeira.": "Stories for readers who don't turn the page so easily.",
+    "Quatro edições de autor. Vê o preço, escolhe o livro e compra sem percursos desnecessários. Acesso privado após confirmação do pagamento.": "Four original editions. See the price, choose your book and buy without unnecessary steps. Private access after payment confirmation.",
+    "Conhecer o livro": "Explore the book",
+    " · COMPRAR": " · BUY",
+    "EXPLORAR TODAS AS EDIÇÕES": "EXPLORE ALL EDITIONS",
+    "CONSULTA DE TAROT": "TAROT CONSULTATION",
+    "Já tens a pergunta. Falta olhares para ela.": "You already have the question. It's time to face it.",
+    "Uma leitura individual, direta e sem promessas de futuro. O Tarot ajuda-te a explorar padrões, dúvidas e escolhas. A decisão continua a ser tua.": "A direct, individual reading with no promises about the future. Tarot helps you examine patterns, doubts and choices. The decision stays with you.",
+    "CONHECER E AGENDAR A CONSULTA": "EXPLORE AND BOOK YOUR READING",
+    "Comprar O Turista por 2,99 euros": "Buy O Turista for 2.99 euros",
+    "Comprar Meandros da Vida por 3,50 euros": "Buy Meandros da Vida for 3.50 euros",
+    "Comprar Pára de Ignorar! por 5,99 euros": "Buy Pára de Ignorar! for 5.99 euros",
+    "Comprar Raio Azul por 3,50 euros": "Buy Raio Azul for 3.50 euros",
+    "Capa de O Turista": "Cover of O Turista",
+    "Capa de Meandros da Vida": "Cover of Meandros da Vida",
+    "Capa de Pára de Ignorar!": "Cover of Pára de Ignorar!",
+    "Capa de Raio Azul": "Cover of Raio Azul"
+  },
+  "es": {
+    "ÉDITIONS · LIVROS DIGITAIS": "ÉDITIONS · LIBROS DIGITALES",
+    "Histórias para quem não vira a página à primeira.": "Historias para quienes no pasan página a la primera.",
+    "Quatro edições de autor. Vê o preço, escolhe o livro e compra sem percursos desnecessários. Acesso privado após confirmação do pagamento.": "Cuatro ediciones de autor. Consulta el precio, elige tu libro y compra sin pasos innecesarios. Acceso privado tras la confirmación del pago.",
+    "Conhecer o livro": "Conocer el libro",
+    " · COMPRAR": " · COMPRAR",
+    "EXPLORAR TODAS AS EDIÇÕES": "EXPLORAR TODAS LAS EDICIONES",
+    "CONSULTA DE TAROT": "CONSULTA DE TAROT",
+    "Já tens a pergunta. Falta olhares para ela.": "Ya tienes la pregunta. Te falta mirarla de frente.",
+    "Uma leitura individual, direta e sem promessas de futuro. O Tarot ajuda-te a explorar padrões, dúvidas e escolhas. A decisão continua a ser tua.": "Una lectura individual, directa y sin promesas sobre el futuro. El Tarot te ayuda a explorar patrones, dudas y decisiones. La elección sigue siendo tuya.",
+    "CONHECER E AGENDAR A CONSULTA": "CONOCER Y RESERVAR LA CONSULTA",
+    "Comprar O Turista por 2,99 euros": "Comprar O Turista por 2,99 euros",
+    "Comprar Meandros da Vida por 3,50 euros": "Comprar Meandros da Vida por 3,50 euros",
+    "Comprar Pára de Ignorar! por 5,99 euros": "Comprar Pára de Ignorar! por 5,99 euros",
+    "Comprar Raio Azul por 3,50 euros": "Comprar Raio Azul por 3,50 euros",
+    "Capa de O Turista": "Portada de O Turista",
+    "Capa de Meandros da Vida": "Portada de Meandros da Vida",
+    "Capa de Pára de Ignorar!": "Portada de Pára de Ignorar!",
+    "Capa de Raio Azul": "Portada de Raio Azul"
+  }
+};
 const PAGE_MAP={
-  '/':mergeV3(mergeV3(mergeV3(mergeV3(HOME,HOME_V3),HOME_YOICHI),HOME_FREE_TESTS),MAISON_HOME_CONVERSION),
+  '/':mergeV3(mergeV3(mergeV3(mergeV3(mergeV3(HOME,HOME_V3),HOME_YOICHI),HOME_FREE_TESTS),MAISON_HOME_CONVERSION),MAISON_HOME_CHECKOUT),
   '/farol':FAROL,
   '/farol/':FAROL,
   '/teste/':TESTE,
