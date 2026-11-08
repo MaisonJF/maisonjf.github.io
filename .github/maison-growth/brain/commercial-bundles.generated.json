@@ -84,7 +84,7 @@
       "assets": [
         {
           "asset_ref": "catalog:product:escalda-pes",
-          "name": "Escalda-Pés",
+          "name": "Sais de Banho",
           "sku": "MJ-ESCALDA-280",
           "price_minor": 950,
           "currency": "EUR"
@@ -153,7 +153,7 @@
         },
         {
           "asset_ref": "catalog:product:escalda-pes",
-          "name": "Escalda-Pés",
+          "name": "Sais de Banho",
           "sku": "MJ-ESCALDA-280",
           "price_minor": 950,
           "currency": "EUR"
@@ -216,7 +216,7 @@
         },
         {
           "asset_ref": "catalog:product:escalda-pes",
-          "name": "Escalda-Pés",
+          "name": "Sais de Banho",
           "sku": "MJ-ESCALDA-280",
           "price_minor": 950,
           "currency": "EUR"

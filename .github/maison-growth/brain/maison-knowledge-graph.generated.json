@@ -829,15 +829,11 @@
       "page_count": 53,
       "structured_data_pages": 53,
       "structured_data_coverage": 1,
-      "internal_link_edges": 309,
+      "internal_link_edges": 393,
       "orphan_pages": [],
       "low_in_degree_pages": [
-        "https://maison-jf.com/ebooks/virgulas-do-destino-meandros-da-vida/",
-        "https://maison-jf.com/ebooks/virgulas-do-destino-o-turista/",
         "https://maison-jf.com/espiritualidade/protecao-energetica",
         "https://maison-jf.com/portas/cabeca",
-        "https://maison-jf.com/portas/casa",
-        "https://maison-jf.com/portas/corpo",
         "https://maison-jf.com/produtos/maison-jf-bundles/",
         "https://maison-jf.com/produtos/oleo-massagem/",
         "https://maison-jf.com/produtos/vela-pequena/",
@@ -859,7 +855,6 @@
         "https://maison-jf.com/respostas/sinto-me-culpado-por-sair-do-trabalho-a-horas",
         "https://maison-jf.com/respostas/tenho-medo-de-precisar-demasiado-de-alguem",
         "https://maison-jf.com/respostas/tenho-vergonha-de-pedir-reafirmacao-na-relacao",
-        "https://maison-jf.com/teste/atencao/",
         "https://maison-jf.com/teste/nunca-chega/",
         "https://maison-jf.com/trabalho/estou-desempregado-e-sinto-que-a-minha-vida-parou",
         "https://maison-jf.com/trabalho/estou-farto-de-enviar-candidaturas-e-nao-ter-resposta",
@@ -880,67 +875,67 @@
         "home": {
           "pages": 1,
           "incoming_edges": 43,
-          "outgoing_edges": 8,
+          "outgoing_edges": 21,
           "orphans": 0
         },
         "farol": {
           "pages": 1,
-          "incoming_edges": 42,
-          "outgoing_edges": 14,
+          "incoming_edges": 29,
+          "outgoing_edges": 17,
           "orphans": 0
         },
         "teste": {
           "pages": 5,
-          "incoming_edges": 44,
-          "outgoing_edges": 36,
+          "incoming_edges": 51,
+          "outgoing_edges": 45,
           "orphans": 0
         },
         "para-de-ignorar": {
           "pages": 1,
-          "incoming_edges": 3,
-          "outgoing_edges": 5,
+          "incoming_edges": 23,
+          "outgoing_edges": 8,
           "orphans": 0
         },
         "produtos": {
           "pages": 7,
-          "incoming_edges": 51,
-          "outgoing_edges": 46,
+          "incoming_edges": 54,
+          "outgoing_edges": 71,
           "orphans": 0
         },
         "servicos": {
           "pages": 2,
           "incoming_edges": 48,
-          "outgoing_edges": 10,
+          "outgoing_edges": 17,
           "orphans": 0
         },
         "portas": {
           "pages": 3,
-          "incoming_edges": 3,
+          "incoming_edges": 5,
           "outgoing_edges": 25,
           "orphans": 0
         },
         "oraculo": {
           "pages": 1,
-          "incoming_edges": 7,
-          "outgoing_edges": 4,
+          "incoming_edges": 27,
+          "outgoing_edges": 8,
           "orphans": 0
         },
         "ebooks": {
           "pages": 3,
-          "incoming_edges": 10,
-          "outgoing_edges": 19,
+          "incoming_edges": 30,
+          "outgoing_edges": 26,
           "orphans": 0
         },
         "profissionais": {
           "pages": 10,
-          "incoming_edges": 22,
-          "outgoing_edges": 24,
+          "incoming_edges": 42,
+          "outgoing_edges": 27,
           "orphans": 0
         },
         "press": {
           "pages": 1,
           "incoming_edges": 4,
-          "outgoing_edges": 6,
+          "outgoing_edges": 8,
           "orphans": 0
         },
         "envios": {
@@ -958,7 +953,7 @@
         "presentes": {
           "pages": 1,
           "incoming_edges": 2,
-          "outgoing_edges": 9,
+          "outgoing_edges": 13,
           "orphans": 0
         },
         "espiritualidade": {
@@ -970,7 +965,7 @@
         "manifesto": {
           "pages": 1,
           "incoming_edges": 2,
-          "outgoing_edges": 6,
+          "outgoing_edges": 10,
           "orphans": 0
         }
       },
@@ -1058,24 +1053,37 @@
         "url": "https://maison-jf.com/",
         "source_file": "index.html",
         "group": "home",
-        "title": "Rituais sensoriais, aromas de autor e Tarot | MAISON JF®",
+        "title": "Perfumaria de autor, rituais e literatura | MAISON JF®",
         "structured_data_types": [
           "BreadcrumbList",
           "ListItem",
           "WebPage"
         ],
         "internal_links": [
+          "https://maison-jf.com/",
           "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/ebooks/virgulas-do-destino-meandros-da-vida/",
+          "https://maison-jf.com/ebooks/virgulas-do-destino-o-turista/",
           "https://maison-jf.com/manifesto/",
           "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
+          "https://maison-jf.com/portas/casa",
+          "https://maison-jf.com/portas/corpo",
           "https://maison-jf.com/press/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/produtos/escalda-pes/",
+          "https://maison-jf.com/produtos/vela-vidro/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/respostas/",
           "https://maison-jf.com/servicos/",
-          "https://maison-jf.com/servicos/tarot/"
+          "https://maison-jf.com/servicos/tarot/",
+          "https://maison-jf.com/teste/",
+          "https://maison-jf.com/teste/afeto/",
+          "https://maison-jf.com/teste/apego/",
+          "https://maison-jf.com/teste/atencao/"
         ],
         "internal_link_in_degree": 43,
-        "internal_link_out_degree": 8
+        "internal_link_out_degree": 21
       },
       {
         "url": "https://maison-jf.com/farol",
@@ -1093,9 +1101,12 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/envios",
           "https://maison-jf.com/farol",
           "https://maison-jf.com/manifesto/",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/portas/cabeca",
           "https://maison-jf.com/portas/casa",
           "https://maison-jf.com/portas/corpo",
@@ -1107,8 +1118,8 @@
           "https://maison-jf.com/servicos/tarot/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 42,
-        "internal_link_out_degree": 14
+        "internal_link_in_degree": 29,
+        "internal_link_out_degree": 17
       },
       {
         "url": "https://maison-jf.com/teste/",
@@ -1122,16 +1133,19 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/",
           "https://maison-jf.com/teste/afeto/",
           "https://maison-jf.com/teste/apego/",
           "https://maison-jf.com/teste/atencao/"
         ],
-        "internal_link_in_degree": 38,
-        "internal_link_out_degree": 8
+        "internal_link_in_degree": 42,
+        "internal_link_out_degree": 11
       },
       {
         "url": "https://maison-jf.com/teste/atencao/",
@@ -1145,14 +1159,17 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/",
           "https://maison-jf.com/teste/apego/"
         ],
-        "internal_link_in_degree": 1,
-        "internal_link_out_degree": 6
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 9
       },
       {
         "url": "https://maison-jf.com/teste/apego/",
@@ -1167,15 +1184,17 @@
         "internal_links": [
           "https://maison-jf.com/",
           "https://maison-jf.com/ebooks/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
           "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/presentes/",
+          "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/",
           "https://maison-jf.com/teste/afeto/"
         ],
-        "internal_link_in_degree": 2,
-        "internal_link_out_degree": 8
+        "internal_link_in_degree": 3,
+        "internal_link_out_degree": 10
       },
       {
         "url": "https://maison-jf.com/teste/afeto/",
@@ -1189,16 +1208,17 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/oraculo/",
           "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/presentes/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 2,
-        "internal_link_out_degree": 8
+        "internal_link_in_degree": 3,
+        "internal_link_out_degree": 9
       },
       {
         "url": "https://maison-jf.com/teste/nunca-chega/",
@@ -1233,13 +1253,16 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 3,
-        "internal_link_out_degree": 5
+        "internal_link_in_degree": 23,
+        "internal_link_out_degree": 8
       },
       {
         "url": "https://maison-jf.com/produtos/",
@@ -1259,11 +1282,13 @@
           "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
           "https://maison-jf.com/produtos/maison-jf-bundles/",
+          "https://maison-jf.com/profissionais/",
+          "https://maison-jf.com/servicos/",
           "https://maison-jf.com/servicos/tarot/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 42,
-        "internal_link_out_degree": 10
+        "internal_link_in_degree": 43,
+        "internal_link_out_degree": 12
       },
       {
         "url": "https://maison-jf.com/produtos/vela-vidro/",
@@ -1277,14 +1302,18 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/envios",
           "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 2,
-        "internal_link_out_degree": 6
+        "internal_link_in_degree": 3,
+        "internal_link_out_degree": 10
       },
       {
         "url": "https://maison-jf.com/produtos/vela-pequena/",
@@ -1298,14 +1327,18 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/envios",
           "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
         "internal_link_in_degree": 1,
-        "internal_link_out_degree": 6
+        "internal_link_out_degree": 10
       },
       {
         "url": "https://maison-jf.com/produtos/oleo-massagem/",
@@ -1319,14 +1352,18 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/envios",
           "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
         "internal_link_in_degree": 1,
-        "internal_link_out_degree": 6
+        "internal_link_out_degree": 10
       },
       {
         "url": "https://maison-jf.com/produtos/nevoa/",
@@ -1340,20 +1377,24 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/envios",
           "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
         "internal_link_in_degree": 2,
-        "internal_link_out_degree": 6
+        "internal_link_out_degree": 10
       },
       {
         "url": "https://maison-jf.com/produtos/escalda-pes/",
         "source_file": "produtos/escalda-pes/index.html",
         "group": "produtos",
-        "title": "Escalda-Pés 280 g | MAISON JF®",
+        "title": "Sais de Banho 280 g | MAISON JF®",
         "structured_data_types": [
           "Brand",
           "Offer",
@@ -1361,14 +1402,18 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/envios",
           "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 2,
-        "internal_link_out_degree": 6
+        "internal_link_in_degree": 3,
+        "internal_link_out_degree": 10
       },
       {
         "url": "https://maison-jf.com/servicos/",
@@ -1382,13 +1427,17 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
           "https://maison-jf.com/profissionais/",
-          "https://maison-jf.com/servicos/tarot/"
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 42,
-        "internal_link_out_degree": 5
+        "internal_link_in_degree": 43,
+        "internal_link_out_degree": 9
       },
       {
         "url": "https://maison-jf.com/portas/casa",
@@ -1409,7 +1458,7 @@
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 1,
+        "internal_link_in_degree": 2,
         "internal_link_out_degree": 8
       },
       {
@@ -1431,7 +1480,7 @@
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 1,
+        "internal_link_in_degree": 2,
         "internal_link_out_degree": 8
       },
       {
@@ -1469,12 +1518,16 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
-          "https://maison-jf.com/servicos/"
+          "https://maison-jf.com/profissionais/",
+          "https://maison-jf.com/servicos/",
+          "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 7,
-        "internal_link_out_degree": 4
+        "internal_link_in_degree": 27,
+        "internal_link_out_degree": 8
       },
       {
         "url": "https://maison-jf.com/ebooks/",
@@ -1487,15 +1540,18 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/ebooks/virgulas-do-destino-meandros-da-vida/",
           "https://maison-jf.com/ebooks/virgulas-do-destino-o-turista/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 8,
-        "internal_link_out_degree": 7
+        "internal_link_in_degree": 26,
+        "internal_link_out_degree": 10
       },
       {
         "url": "https://maison-jf.com/ebooks/virgulas-do-destino-o-turista/",
@@ -1512,13 +1568,15 @@
         "internal_links": [
           "https://maison-jf.com/",
           "https://maison-jf.com/ebooks/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 1,
-        "internal_link_out_degree": 6
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 8
       },
       {
         "url": "https://maison-jf.com/ebooks/virgulas-do-destino-meandros-da-vida/",
@@ -1535,13 +1593,15 @@
         "internal_links": [
           "https://maison-jf.com/",
           "https://maison-jf.com/ebooks/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 1,
-        "internal_link_out_degree": 6
+        "internal_link_in_degree": 2,
+        "internal_link_out_degree": 8
       },
       {
         "url": "https://maison-jf.com/profissionais/",
@@ -1555,9 +1615,12 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/press/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/profissionais/aromas-para-espacos-de-bem-estar",
           "https://maison-jf.com/profissionais/como-criar-um-ritual-de-boas-vindas-para-clientes",
           "https://maison-jf.com/profissionais/como-escolher-aromas-para-um-gabinete-de-massagem",
@@ -1570,8 +1633,8 @@
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 13,
-        "internal_link_out_degree": 15
+        "internal_link_in_degree": 33,
+        "internal_link_out_degree": 18
       },
       {
         "url": "https://maison-jf.com/press/",
@@ -1585,14 +1648,16 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
           "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
         "internal_link_in_degree": 4,
-        "internal_link_out_degree": 6
+        "internal_link_out_degree": 8
       },
       {
         "url": "https://maison-jf.com/envios",
@@ -1711,17 +1776,21 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
           "https://maison-jf.com/produtos/escalda-pes/",
           "https://maison-jf.com/produtos/nevoa/",
           "https://maison-jf.com/produtos/vela-pequena/",
           "https://maison-jf.com/produtos/vela-vidro/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
         "internal_link_in_degree": 2,
-        "internal_link_out_degree": 9
+        "internal_link_out_degree": 13
       },
       {
         "url": "https://maison-jf.com/profissionais/produtos-para-revenda-em-spa",
@@ -1887,13 +1956,16 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/ebooks/",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
-          "https://maison-jf.com/servicos/tarot/"
+          "https://maison-jf.com/teste/"
         ],
-        "internal_link_in_degree": 6,
-        "internal_link_out_degree": 5
+        "internal_link_in_degree": 5,
+        "internal_link_out_degree": 8
       },
       {
         "url": "https://maison-jf.com/espiritualidade/protecao-energetica",
@@ -1928,14 +2000,18 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/press/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
         "internal_link_in_degree": 2,
-        "internal_link_out_degree": 6
+        "internal_link_out_degree": 10
       },
       {
         "url": "https://maison-jf.com/produtos/maison-jf-bundles/",
@@ -1949,14 +2025,17 @@
         ],
         "internal_links": [
           "https://maison-jf.com/",
+          "https://maison-jf.com/ebooks/",
           "https://maison-jf.com/envios",
-          "https://maison-jf.com/farol",
+          "https://maison-jf.com/oraculo/",
+          "https://maison-jf.com/para-de-ignorar/",
           "https://maison-jf.com/produtos/",
+          "https://maison-jf.com/profissionais/",
           "https://maison-jf.com/servicos/",
           "https://maison-jf.com/teste/"
         ],
         "internal_link_in_degree": 1,
-        "internal_link_out_degree": 6
+        "internal_link_out_degree": 9
       },
       {
         "url": "https://maison-jf.com/respostas/o-meu-parceiro-goza-comigo-a-frente-dos-outros",
