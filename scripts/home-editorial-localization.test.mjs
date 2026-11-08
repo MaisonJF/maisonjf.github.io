@@ -10,9 +10,9 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const home=read('index.html');
 
 test('public homepage uses the exact official Farol asset and free-test entry points',()=>{
-  assert.match(home,/src="\.\/maison-jf-mark\.svg"/);
+  assert.match(home,/src="\.\/assets\/brand\/maison-jf-farol-monograma-oficial\.svg"/);
   assert.doesNotMatch(home,/<svg[^>]*viewBox="0 0 80 80"/);
-  assert.match(read('maison-jf-mark.svg'),/Logótipo MAISON JF® com monograma JF dourado e farol/i);
+  assert.match(read('assets/brand/maison-jf-farol-monograma-oficial.svg'),/Monograma Farol Maison JF/i);
   for(const route of ['./farol/','./teste/','./teste/atencao/','./teste/apego/','./teste/afeto/'])
     assert.ok(home.includes('href="'+route+'"'),route);
 });
@@ -20,7 +20,7 @@ test('public homepage uses the exact official Farol asset and free-test entry po
 test('home has clean public positioning, editorial voice and no legacy labels',()=>{
   for(const str of [
     'NÃO PRECISAS DE MAIS COISAS.','PRECISAS DAS CERTAS.',
-    'Uma experiência não se explica.','A atmosfera também é uma escolha.',
+    'Há dias em que tens tudo.','A atmosfera também é uma escolha.',
     'Uma Maison não precisa de gritar para influenciar.',
     'Começa pela tua peça de assinatura.'
   ])assert.ok(home.includes(str),str);
@@ -30,16 +30,16 @@ test('home has clean public positioning, editorial voice and no legacy labels',(
 
 test('all four locales preserve brand, primary links and publish localized copy',()=>{
   const cases=[
-    {locale:'pt-PT',phrase:'Três portas. Sem pagar para começar.',cta:'VER TODOS OS TESTES GRATUITOS'},
-    {locale:'pt-BR',phrase:'Nem sempre você sabe o que procura.',cta:'VER TODOS OS TESTES GRATUITOS'},
-    {locale:'en',phrase:"You may not know what you're looking for.",cta:'EXPLORE ALL FREE TESTS'},
-    {locale:'es',phrase:'No siempre sabes lo que buscas.',cta:'VER TODOS LOS TESTS GRATUITOS'}
+    {locale:'pt-PT',phrase:'Não sabes o que escolher? Começa pelo que te inquieta.',cta:'VER TODOS OS TESTES GRATUITOS'},
+    {locale:'pt-BR',phrase:'Não sabe o que escolher? Comece pelo que incomoda você.',cta:'VER TODOS OS TESTES GRATUITOS'},
+    {locale:'en',phrase:'Not sure what to choose? Start with what is on your mind.',cta:'EXPLORE ALL FREE TESTS'},
+    {locale:'es',phrase:'¿No sabes qué elegir? Empieza por lo que te inquieta.',cta:'VER TODOS LOS TESTS GRATUITOS'}
   ];
   for(const {locale,phrase,cta} of cases){
     const out=translateMaisonHtml(home,locale,'/');
     assert.ok(out.includes(phrase),locale+' missing translated headline');
     assert.ok(out.includes(cta),locale+' missing translated CTA');
-    for(const path of ['maison-jf-mark.svg','teste/atencao/','teste/apego/','teste/afeto/','perf/home/hero-640.webp'])
+    for(const path of ['assets/brand/maison-jf-farol-monograma-oficial.svg','teste/atencao/','teste/apego/','teste/afeto/','perf/home/hero-640.webp'])
       assert.ok(out.includes(path),locale+' lost asset or route '+path);
   }
 });
@@ -57,6 +57,6 @@ test('Ivory couture theme is available and opted-in by commerce and free experie
 
 test('The protected brand specification documents Farol and Fibonacci without inventing cover assets',()=>{
   const doc=read('docs/MAISON-JF-IDENTIDADE-VISUAL-E-EDITORIAL.md');
-  for(const phrase of ['maison-jf-mark.svg','Fibonacci','Marfim','esmeralda','bordeaux'])
+  for(const phrase of ['assets/brand/maison-jf-farol-monograma-oficial.svg','Fibonacci','Marfim','esmeralda','bordeaux'])
     assert.ok(doc.includes(phrase),phrase);
 });

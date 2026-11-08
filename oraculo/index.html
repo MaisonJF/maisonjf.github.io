@@ -2,8 +2,24 @@
 <html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Oráculo online e leitura simbólica | MAISON JF®</title><meta name="description" content="Guarda a tua pergunta em silêncio e abre uma leitura simbólica do Oráculo MAISON JF®. Uma experiência de reflexão, sem promessas sobre o futuro."><meta name="robots" content="index,follow"><link rel="canonical" href="https://maison-jf.com/oraculo/">
 <link rel="stylesheet" href="../maison.css"><script src="../analytics.js" defer></script>
-<style>.oracle{min-height:100svh;display:grid;place-items:center;padding:120px 20px 80px;background:radial-gradient(circle at 50% 18%,#33251c,#12100f 40%,#080808 75%)}.oracle__inner{width:min(720px,100%);text-align:center}.oracle h1{font:italic 400 clamp(52px,9vw,104px)/1 var(--serif);margin:24px 0}.oracle__lead{font:20px/1.6 var(--serif);color:#c1b9ad}.oracle__actions{margin:30px auto}.oracle__note{font:12px/1.7 var(--sans);color:#91897f;max-width:600px;margin:35px auto}</style><link rel="stylesheet" href="/maison-ivory.css?v=20261107" /></head>
-<body class="maison-ivory"><header class="site-header"><a class="brand" href="../">MAISON JF®</a><nav><a href="../farol">O Farol</a><a href="../produtos/">Produtos</a><a href="../servicos/">Serviços</a></nav></header>
+<style>.oracle{min-height:100svh;display:grid;place-items:center;padding:120px 20px 80px;background:radial-gradient(circle at 50% 18%,#33251c,#12100f 40%,#080808 75%)}.oracle__inner{width:min(720px,100%);text-align:center}.oracle h1{font:italic 400 clamp(52px,9vw,104px)/1 var(--serif);margin:24px 0}.oracle__lead{font:20px/1.6 var(--serif);color:#c1b9ad}.oracle__actions{margin:30px auto}.oracle__note{font:12px/1.7 var(--sans);color:#91897f;max-width:600px;margin:35px auto}</style><link rel="stylesheet" href="/maison-ivory.css?v=20261107" /><link rel="stylesheet" href="/maison-canonical.css?v=20261108" /></head>
+<body class="maison-ivory"><header class="site-header maison-global-header" id="header">
+  <div class="maison-global-header__inner">
+    <a class="brand maison-global-header__brand" href="/" aria-label="MAISON JF® — início"><img class="maison-global-header__icon" src="/assets/brand/maison-jf-farol-monograma-oficial.svg" alt="Farol oficial MAISON JF®" width="38" height="40" decoding="async"><span>MAISON JF®</span></a>
+    <input class="maison-global-header__checkbox" id="maison-mobile-menu" type="checkbox" aria-label="Mostrar navegação">
+    <label class="maison-global-header__trigger" for="maison-mobile-menu">Menu <span aria-hidden="true">☰</span></label>
+    <nav class="maison-global-header__nav" id="main-navigation" aria-label="Navegação principal">
+      <a href="/farol/">O Farol</a>
+      <a href="/produtos/">Produtos</a>
+      <a href="/servicos/">Serviços</a>
+      <a href="/oraculo/">Oráculo</a>
+      <a href="/para-de-ignorar/">Jogos</a>
+      <a href="/teste/">Testes gratuitos</a>
+      <a href="/ebooks/">Ebooks</a>
+      <a href="/profissionais/">Profissionais / B2B</a>
+    </nav>
+  </div>
+</header>
 <main class="oracle"><div class="oracle__inner"><p class="eyebrow">ORÁCULO MAISON JF®</p><h1>Não digas a pergunta. Pensa nela.</h1><p class="oracle__lead">Há perguntas que não precisam de ser explicadas. Guarda a tua em silêncio e abre uma leitura simbólica.</p><div class="oracle__actions"><button class="button button--light" type="button" id="oracle-buy">FAZ A TUA PERGUNTA. OBTÉM A TUA RESPOSTA · 2 €</button><p id="oracle-status" role="status" aria-live="polite"></p></div><p class="oracle__note">Leitura simbólica. Não determina o futuro, não garante acontecimentos nem substitui cuidados profissionais.</p></div></main><script>
 (()=>{'use strict';const btn=document.getElementById('oracle-buy'),status=document.getElementById('oracle-status'),locale=window.MAISON_LOCALE||document.documentElement.lang||'pt-PT';btn.addEventListener('click',async()=>{btn.disabled=true;status.textContent='A abrir pagamento…';try{const response=await fetch('/api/create-oracle-checkout-live',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({locale})});const data=await response.json();if(!response.ok||!data.url)throw Error(data.error||'Não foi possível iniciar o pagamento.');location.assign(data.url);}catch(error){status.textContent=error.message;btn.disabled=false;}});if(new URLSearchParams(location.search).has('checkout_cancelado'))status.textContent='Pagamento cancelado.';})();
 </script></body></html>
