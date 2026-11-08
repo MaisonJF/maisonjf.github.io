@@ -2,6 +2,11 @@
 
 Documento vinculativo para homepage, catálogo, serviços, testes, ebooks, capas e cartazes de sagas. **Não substituir a identidade por ilustrações genéricas.**
 
+## Referências originais fornecidas pelo proprietário (08/11/2026)
+- **Farol exato:** `/assets/brand/maison-jf-farol-monograma-oficial.svg`. É o ficheiro SVG original fornecido pelo proprietário, não um desenho inventado. A partir desta revisão, utilizar este ativo no cabeçalho através de `<img src="/assets/brand/maison-jf-farol-monograma-oficial.svg" ...>`, com caminho absoluto.
+- **Espiral de Fibonacci original:** `/assets/brand/maison-jf-espiral-fibonacci-oficial.svg`. Reservada a capas literárias e posters; nunca substituir o Farol nem introduzir como símbolo público genérico.
+- `/maison-jf-mark.svg` representa a marca histórica do repositório, mas **não substitui** o SVG oficial original entregue nesta revisão.
+
 ## Ativos oficiais existentes no repositório
 - `/maison-jf-mark.svg`: **marca oficial**. O próprio SVG descreve “Logótipo MAISON JF® com monograma JF dourado e farol sobre fundo preto”. Usar como referência oficial da marca, com proporções originais, sem redesenhar o Farol. Preferir sobre `/farol-icon.svg` ou qualquer SVG de farol improvisado.
 - `/maison-jf-farol.jpg` e `/images/maison-jf-farol-nocturno-hq.jpg`: imagens do Farol que já existem. Não alterar sem revisão da direção criativa.
