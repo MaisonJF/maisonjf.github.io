@@ -89,10 +89,10 @@
         <p class="eyebrow couture-tag couture-tag--${categoryTone}">${escapeHtml(p.category)} · CURADORIA MAISON JF®</p>
         <h1>${p.name}${p.size?` <span style="font-size:.35em">${p.size}</span>`:''}</h1>
         <p class="couture-hook">${escapeHtml(hook)}</p><p class="couture-description">${escapeHtml(p.description)}</p><div class="couture-delivery"><strong>O que levas contigo</strong><ul>${deliveryMarkup}</ul></div>
-        <div class="product-price">${p.priceNote||money(p.price)}</div>
+        <div class="product-price">${p.price==null?'Preço em definição':(p.priceNote||money(p.price))}</div>
         <div class="product-actions">
-          <button class="button button--light couture-buy" data-buy type="button">${pt?`COMPRAR AGORA · ${p.priceNote||money(p.price)}`:t.order}</button>
-          <button class="text-link" data-cart-add type="button" style="background:none;border:0;padding:0;cursor:pointer">${t.add}</button>
+          ${p.price==null?'':'<button class="button button--light couture-buy" data-buy type="button">'}${p.price==null?'':(pt?`COMPRAR AGORA · ${p.priceNote||money(p.price)}`:t.order)+'</button>'}
+          ${p.price==null?'':`<button class="text-link" data-cart-add type="button" style="background:none;border:0;padding:0;cursor:pointer">${t.add}</button>`}
           <a class="text-link" data-cart-link href="${root}produtos/carrinho/">${t.cart}</a>
           <a class="text-link" data-whatsapp href="${whatsapp}" target="_blank" rel="noopener noreferrer">${t.doubt}</a>
         </div>
@@ -122,7 +122,7 @@
       </div>
     </section>
 
-    ${related.length?`<section class="related"><p class="eyebrow">${t.continue}</p><h2>${t.related}</h2><div class="related-grid">${related.map(r=>`<a class="related-card" data-related="${r.slug}" href="${root}produtos/${r.slug}/"><small>${r.category}</small><strong>${r.name}${r.size?` · ${r.size}`:''}</strong><span>${r.priceNote||money(r.price)} · ${t.view}</span></a>`).join('')}</div></section>`:''}
+    ${related.length?`<section class="related"><p class="eyebrow">${t.continue}</p><h2>${t.related}</h2><div class="related-grid">${related.map(r=>`<a class="related-card" data-related="${r.slug}" href="${root}produtos/${r.slug}/"><small>${r.category}</small><strong>${r.name}${r.size?` · ${r.size}`:''}</strong><span>${r.price==null?'Preço em definição':(r.priceNote||money(r.price))} · ${t.view}</span></a>`).join('')}</div></section>`:''}
   `;
 
   track('maison_product_view',{product:p.slug,price:p.price,page_path:location.pathname});
