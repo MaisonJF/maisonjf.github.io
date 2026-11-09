@@ -41,7 +41,7 @@ window.MAISON_PRODUCTS=[
  cta:'Quero escolher'
 },
 {
- slug:'escalda-pes',sku:'MJ-ESCALDA-280',name:'Sais de Banho',size:'280 g',category:'Corpo',price:9.5,currency:'EUR',availability:'in_stock',condition:'new',productImage:null,
+ slug:'escalda-pes',sku:'MJ-ESCALDA-280',name:'Sais de Banho',size:'280 g',category:'Corpo',price:null,priceNote:'Preço em definição',currency:'EUR',availability:'out_of_stock',condition:'new',productImage:null,
  description:'Água morna. Dez minutos. Hoje já fizeste o suficiente.',
  media:[],
  ritual:{title:'Não compliques a pausa.',text:'Água morna, aroma e alguns minutos em que ninguém te pede nada.'},
