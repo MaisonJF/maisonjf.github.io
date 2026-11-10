@@ -37,11 +37,23 @@ jobs:
             echo "sent=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+
           TODAY="$(TZ=Europe/Lisbon date +%F)"
           YESTERDAY="$(TZ=Europe/Lisbon date -d 'yesterday' +%F)"
+
+          # Resolve the workflow by repository path rather than relying on a fragile
+          # filename-only lookup. If the workflow is temporarily absent or not visible
+          # to the token, the watchdog should skip cleanly instead of failing the job.
+          WORKFLOW_ID="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows" --jq '.workflows[] | select(.path == ".github/workflows/oceans-daily-brief.yml") | .id' | head -n 1 || true)"
+          if [ -z "$WORKFLOW_ID" ]; then
+            echo "Workflow .github/workflows/oceans-daily-brief.yml is not discoverable; skipping watchdog recovery."
+            echo "sent=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
           # Include the previous local date because a delayed GitHub run can start
           # after midnight even when its scheduled event was created the day before.
-          RUN_IDS="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/oceans-daily-brief.yml/runs" -f per_page=100 -f created=">=$YESTERDAY" --jq '.workflow_runs[] | select(.conclusion == "success") | .id')"
+          RUN_IDS="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WORKFLOW_ID/runs" -f per_page=100 -f created=">=$YESTERDAY" --jq '.workflow_runs[] | select(.conclusion == "success") | .id' || true)"
           SENT=false
           while IFS= read -r RUN_ID; do
             [ -n "$RUN_ID" ] || continue
@@ -64,5 +76,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          WORKFLOW_ID="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows" --jq '.workflows[] | select(.path == ".github/workflows/oceans-daily-brief.yml") | .id' | head -n 1 || true)"
+          if [ -z "$WORKFLOW_ID" ]; then
+            echo "Workflow .github/workflows/oceans-daily-brief.yml is not discoverable; skipping recovery dispatch."
+            exit 0
+          fi
           gh workflow run oceans-daily-brief.yml --repo "$GITHUB_REPOSITORY" --ref main -f dry_run=false
           echo "Recovery run dispatched. Check the Oceans Daily Brief workflow logs for the Resend result."
